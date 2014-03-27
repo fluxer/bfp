@@ -5,8 +5,8 @@ powerd.conf - Power Daemon configuration file
 =head1 DESCRIPTION
 
 powerd.conf is the configuration file used by Power Daemon. It is divided into
-sections - reboot, shutdown, suspend, mount, unmount, battery and power. These
-sections represent options taken into account the system is going to be put into.
+sections - reboot, shutdown, suspend battery and power. These sections
+represent options taken into account the system is going to be put into.
 
 =head1 OPTIONS
 
@@ -56,34 +56,6 @@ Programs to be executed after the actuall suspend.
 
 Default:
 
-=head2 MOUNT
-
-=head3 pre
-
-Programs to be executed before the actuall mount.
-
-Default:
-
-=head3 post
-
-Programs to be executed after the actuall mount.
-
-Default:
-
-=head2 UNMOUNT
-
-=head3 pre
-
-Programs to be executed before the actuall unmount.
-
-Default:
-
-=head3 post
-
-Programs to be executed after the actuall unmount.
-
-Default:
-
 =head2 BATTERY
 
 =head3 lid
@@ -127,11 +99,9 @@ Default: performance
 
 =head1 EXAMPLES
 
-[mount]
+[reboot]
 
 pre =
-
-post =
 
 =head1 FILES
 

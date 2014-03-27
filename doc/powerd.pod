@@ -5,9 +5,9 @@ powerd - Power Daemon
 =head1 DESCRIPTION
 
 Power Daemon manages system power state and filesystems. This including rebooting,
-shutting down, suspending the system, mounting filesystems when they appear,
-controlling cpu and other devices power saving features. Is uses dbus for Inter
-Processes Communcation (IPC) to secure the actions taken via dbus policies.
+shutting down, suspending the system, controlling cpu and other devices power
+saving features. Is uses dbus for Inter Processes Communcation (IPC) to secure
+the actions taken via dbus policies.
 
 The Power Daemon configuration is done via one single configuration file -
 /etc/powerd.conf. For more information see powerd.conf(5).
