@@ -4,10 +4,8 @@ import subprocess, os
 
 import libmisc
 import libmessage
-import libservice
 message = libmessage.Message()
 misc = libmisc.Misc()
-service = libservice.Init()
 
 
 class Device(object):
