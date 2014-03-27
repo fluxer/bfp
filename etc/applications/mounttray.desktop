@@ -1,0 +1,10 @@
+[Desktop Entry]
+Name=Mount controller
+GenericName=Mount controller
+Comment=Tray controller for Mount Daemon
+Categories=System;Settings;
+Exec=mounttray
+Terminal=false
+Type=Application
+Icon=preferences-system
+StartupNotify=true

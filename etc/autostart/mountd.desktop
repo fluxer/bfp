@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Mount Daemon
+Icon=preferences-system-power-manager
+Exec=mountctl -p
+Terminal=false
+Type=Application
+StartupNotify=true
