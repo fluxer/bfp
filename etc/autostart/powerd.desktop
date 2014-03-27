@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Power Daemon
+Icon=preferences-system-power-manager
+Exec=powerctl -p
+Terminal=false
+Type=Application
+StartupNotify=true

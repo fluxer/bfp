@@ -1,0 +1,16 @@
+*.pyc
+*.pyo
+
+*.8
+*.5
+
+pod2htmd.tmp
+build
+
+*.bak
+*~
+
+*.xz
+*.bz2
+*.gz
+*.tar

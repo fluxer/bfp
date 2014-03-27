@@ -1,0 +1,91 @@
+=head1 NAME
+
+powerctl - Power Controller
+
+=head1 SYNOPSIS
+
+powerctl [-h] [-r] [-s] [-S] [-m MOUNT] [-u UNMOUNT] [-p] [-e] [-v]
+
+=head1 DESCRIPTION
+
+Power Controller is a command-line utillity for controlling `powerd`. It can
+tell the running `powerd` process to execute actions on user demands instead of
+doing them on own consideration.
+
+=head1 OPTIONS
+
+optional arguments:
+  -r, --reboot          Reboot system
+  -s, --shutdown        Halt system
+  -S, --suspend         Suspend system
+  -m/--mount MOUNT      Mount device
+  -u/--unmount UNMOUNT  Unmount device
+  -p, --ping            Wakeup power daemon
+  -e, --exit            Kill power daemon
+  -v, --version         Show Power Control version and exit
+  -h, --help            Show this help message and exit
+
+=head1 EXIT STATUS
+
+SPM returns 0 on success and other on failure.
+	
+=head2 Unexpected error (1)
+
+This is a general error. Triggered, most likely, by something that SPM is
+not able to handle.
+
+=head2 Internal error (2)
+
+This error raises when a dependency, library, or other important thing
+is missing or failed.
+
+=head2 CONFIGPARSER (3)
+
+This error raises when, at runtime, the module responsible for parsing
+the config files fails badly. Its job usually is to parse the main,
+repositories and mirrors configuration files.
+
+=head2 SUBPROCESS (4)
+
+This error raises when a subprocess, such as Git or Bash, failed to
+execute a sub-command.
+
+=head2 OS (5)
+
+This error raises when the module responsible for system files and
+directories information gathering fails badly. Its job usually is to
+check if X is file, symlink or directory.
+
+=head2 IO (6)
+
+This error raises when there is something wrong with the file/directory
+permissions.
+
+=head2 REGEXP (7)
+
+This error raises when the module responsible for regular expressions
+matching fails badly. If in doubt you should check the Python Re module
+reference at http://docs.python.org/2/library/re.html.
+
+=head2 DBUS (8)
+
+This error raises when there is something wrong with the dbus calls.
+
+=head2 Interupt signal received (9)
+
+This error raises when the user triggers keyboard interrupt via Ctrl+C key
+combination.
+
+=head1 BUGS
+
+None known.
+
+=head1 AUTHORS
+
+Ivailo Monev (a.k.a. SmiL3y) <xakepa10@gmail.com>
+
+Copyright (c) 2013 Ivailo Monev licensed through the GNU General Public License
+
+=head1 SEE ALSO
+
+dbus-daemon(1) powerd(8) powerd.conf(5)

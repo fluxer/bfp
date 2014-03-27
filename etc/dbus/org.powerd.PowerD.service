@@ -1,0 +1,4 @@
+[D-BUS Service]
+Name=org.powerd.PowerD
+Exec=/usr/sbin/powerd
+User=root

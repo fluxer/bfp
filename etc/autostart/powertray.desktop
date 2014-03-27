@@ -1,0 +1,7 @@
+[Desktop Entry]
+Name=Power controller
+Icon=preferences-system-power-manager
+Exec=powertray
+Terminal=false
+Type=Application
+StartupNotify=true
