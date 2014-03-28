@@ -16,7 +16,7 @@ power = libpower.Power()
 
 try:
     if not os.path.exists(power.ipc):
-        message.critical('Mount daemon is not running')
+        message.critical('Power daemon is not running')
         sys.exit(2)
 
     parser = argparse.ArgumentParser(prog='powerctl', description='Power Control')

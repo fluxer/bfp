@@ -2,16 +2,20 @@
 
 ''' System initializer '''
 
-import sys, subprocess, ConfigParser, argparse
+import os, sys, subprocess, ConfigParser, argparse
 
 import libmessage
-message = libmessage.Message()
 import libmisc
-misc = libmisc.Misc()
 import libservice
+message = libmessage.Message()
+misc = libmisc.Misc()
+init = libservice.Service()
 
 try:
-    init = libservice.Service()
+    if not os.path.exists(init.ipc):
+        message.critical('Init daemon is not running')
+        sys.exit(2)
+
     parser = argparse.ArgumentParser(prog='initctl', description='Init Control')
     parser.add_argument('-a', '--start', action='store',
         help='Start service')

@@ -14,8 +14,6 @@ misc = libmisc.Misc()
 device = libdevice.Device()
 
 
-app_version = "0.0.8 (90d7e1e)"
-
 if not os.path.isfile('/etc/mountd.conf'):
     message.warning('Configuration file does not exist', '/etc/mountd.comf')
     MOUNT_PRE = None
@@ -37,9 +35,11 @@ class MyMount(libdevice.Device):
     ''' Custom initializer '''
     def loop(self):
         ''' Main loop '''
-        # ensure only one instance
-        if os.path.exists(self.ipc):
-            message.critical('Devices monitor already running')
+        if not os.geteuid() == 0:
+            message.critical('You are not root')
+            sys.exit(2)
+        elif os.path.exists(self.ipc):
+            message.critical('Mount daemon already running')
             sys.exit(2)
 
         message.info('Monitoring devices...')

@@ -15,9 +15,8 @@ class MyService(libservice.Service):
     ''' Custom initializer '''
     def loop(self):
         ''' Main loop '''
-        # ensure only one instance
         if os.path.exists(self.ipc):
-            message.critical('System initializer already running')
+            message.critical('Init daemon already running')
             sys.exit(2)
 
         message.info('Initializing system...')
