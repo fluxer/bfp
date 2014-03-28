@@ -48,6 +48,23 @@ class MyMount(libdevice.Device):
         # possible second instance variable is asigned
         self.initialized = True
 
+        for line in misc.file_readlines('/etc/fstab'):
+            line = line.strip()
+            if not line or line.startswith('#'):
+                continue
+            device, directory, type, options, fsck, fsck2 = line.split()
+            if device.startswith('/'):
+                self.do_mount(device)
+            # FIXME: check if mounts is bogus
+            #elif device.startswith('UUID='):
+            #    self.do_mount(os.path.join('/dev/disk/by-uuid',
+            #        device.replace('UUID=', '')))
+        # FIXME: mounts partitions without filesystem
+        #for device in os.listdir('/sys/class/block'):
+        #    if not len(device) > 3:
+        #        continue
+        #    self.do_mount(os.path.join('/dev', device))
+
         while True:
             content = misc.ipc_read(self.ipc)
             device = None
