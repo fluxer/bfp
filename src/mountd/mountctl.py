@@ -1,5 +1,6 @@
 #!/usr/bin/python2
 
+import os
 import sys
 import argparse
 import ConfigParser
@@ -15,6 +16,10 @@ device = libdevice.Device()
 
 
 try:
+    if not os.path.exists(device.ipc):
+        message.critical('Mount daemon is not running')
+        sys.exit(2)
+
     parser = argparse.ArgumentParser(prog='mountctl', description='Mount Control')
     parser.add_argument('-m', '--mount', action='store',
         help='Mount device')
@@ -29,7 +34,7 @@ try:
     elif ARGS.unmount:
         misc.ipc_write(device.ipc, ARGS.unmount + '#UNMOUNT')
     elif ARGS.exit:
-        misc.ipc_write(device.ipc, ARGS.unmount + '#EXIT')
+        misc.ipc_write(device.ipc, '#EXIT')
 
 except ConfigParser.Error as detail:
     message.critical('CONFIGPARSER', detail)

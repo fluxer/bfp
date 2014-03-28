@@ -1,5 +1,6 @@
 #!/usr/bin/python2
 
+import os
 import sys
 import argparse
 import ConfigParser
@@ -14,6 +15,10 @@ misc = libmisc.Misc()
 power = libpower.Power()
 
 try:
+    if not os.path.exists(power.ipc):
+        message.critical('Mount daemon is not running')
+        sys.exit(2)
+
     parser = argparse.ArgumentParser(prog='powerctl', description='Power Control')
     parser.add_argument('-r', '--reboot', action='store_true',
         help='Reboot system')
