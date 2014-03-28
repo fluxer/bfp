@@ -5,18 +5,15 @@ import argparse
 import ConfigParser
 import subprocess
 import re
-from dbus import SystemBus, Interface, DBusException
 
-app_version = "0.0.8 (90d7e1e)"
+import libmisc
+import libmessage
+import libpower
+message = libmessage.Message()
+misc = libmisc.Misc()
+power = libpower.Power()
 
 try:
-    import libmessage
-    message = libmessage.Message()
-
-    bus = SystemBus()
-    remote_object = bus.get_object('org.powerd.PowerD', '/org/powerd/PowerD')
-    iface = Interface(remote_object, 'org.powerd.Interface')
-
     parser = argparse.ArgumentParser(prog='powerctl', description='Power Control')
     parser.add_argument('-r', '--reboot', action='store_true',
         help='Reboot system')
@@ -24,33 +21,18 @@ try:
         help='Halt system')
     parser.add_argument('-S', '--suspend', action='store_true',
         help='Suspend system')
-    parser.add_argument('-m', '--mount', action='store',
-        help='Mount device')
-    parser.add_argument('-u', '--unmount', action='store',
-        help='Unmount device')
-    parser.add_argument('-p', '--ping', action='store_true',
-        help='Wakeup power daemon')
     parser.add_argument('-e', '--exit', action='store_true',
         help='Kill power daemon')
-    parser.add_argument('-v', '--version', action='version',
-        version='Power Control v' + app_version,
-        help='Show Power Control version and exit')
 
     ARGS = parser.parse_args()
     if ARGS.reboot:
-        iface.Reboot()
+        misc.ipc_write(power.ipc, ARGS.mount + 'REBOOT')
     elif ARGS.shutdown:
-        iface.Shutdown()
+        misc.ipc_write(power.ipc, ARGS.mount + 'SHUTDOWN')
     elif ARGS.suspend:
-        iface.Suspend()
-    elif ARGS.mount:
-        iface.Mount(ARGS.mount)
-    elif ARGS.unmount:
-        iface.Unmount(ARGS.unmount)
-    elif ARGS.ping:
-        iface.Ping()
+        misc.ipc_write(power.ipc, ARGS.mount + 'SUSPEND')
     elif ARGS.exit:
-        iface.Exit()
+        misc.ipc_write(power.ipc, ARGS.mount + 'EXIT')
 
 except ConfigParser.Error as detail:
     message.critical('CONFIGPARSER', detail)
@@ -67,9 +49,6 @@ except IOError as detail:
 except re.error as detail:
     message.critical('REGEXP', detail)
     sys.exit(7)
-except DBusException as detail:
-    message.critical('DBUS', detail)
-    sys.exit(8)
 except KeyboardInterrupt:
     message.critical('Interrupt signal received')
     sys.exit(9)

@@ -10,48 +10,16 @@ import libmisc
 misc = libmisc.Misc()
 
 
-class Init(object):
-    ''' System initializer '''
+class Service(object):
+    ''' Service initializer '''
     def __init__(self):
         ''' Initializer '''
         self.initialized = False
-        self.ipc = '/run/init.fifo'
+        self.ipc = '/run/service.fifo'
         # set custom log file
-        message.LOG_FILE = '/var/log/init.log'
+        message.LOG_FILE = '/var/log/service.log'
         # FIXME: bad reference
         self.shell = False
-
-    def ipc_create(self):
-        ''' Create fifo for communication '''
-        if not os.path.exists(self.ipc):
-            misc.file_write(self.ipc, '')
-            # os.mkfifo(self.ipc)
-        # set owner of IPC to root:power
-        os.chown(self.ipc, 0, 20)
-        # sadly, something is wrong with mkfifo permissions set
-        os.chmod(self.ipc, 0664)
-        os.setsid()
-        # to ensure fifo cleanup only from the running daemon not
-        # possible second instance variable is asigned
-        self.initialized = True
-
-    def ipc_read(self):
-        ''' Read IPC and return a tuple of service and action '''
-        if not os.path.exists(self.ipc):
-            self.ipc_create()
-            return None, None
-        content = misc.file_read_nonblock(self.ipc).strip().split('#')
-        service = content[0]
-        # in some cases no service is written, use service for action
-        if len(content) == 2:
-            action = content[1]
-        else:
-            action = None
-        return service, action
-
-    def ipc_write(self, service, action):
-        ''' Write service and action to IPC '''
-        misc.file_write(self.ipc, service + '#' + action)
 
     def service_check(self, service):
         ''' Check if service is valid '''
@@ -138,4 +106,4 @@ class Init(object):
             self.service_stop(service)
         message.info('Shutting down system...')
         # FIXME: do some ctype magic
-        self.exec_command('shutdown -n -h now')
+        self.exec_command('shutdown -h now')

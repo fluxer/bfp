@@ -11,7 +11,7 @@ misc = libmisc.Misc()
 import libservice
 
 
-class MyInit(libservice.Init):
+class MyService(libservice.Service):
     ''' Custom initializer '''
     def loop(self):
         ''' Main loop '''
@@ -21,11 +21,19 @@ class MyInit(libservice.Init):
             sys.exit(2)
 
         message.info('Initializing system...')
-        self.ipc_create()
+        misc.ipc_create(self.ipc, 20)
+        os.setsid()
+        # to ensure fifo cleanup only from the running daemon not
+        # possible second instance variable is asigned
+        self.initialized = True
         self.system_boot()
         while True:
-            # read fifo every 0.5 seconds and do stuff
-            service, action = self.ipc_read()
+            content = misc.ipc_read(self.ipc)
+            service = None
+            action = None
+            if content:
+                service, action = content.split('#')
+
             if action == 'REBOOT':
                 self.system_reboot()
             elif action == 'SHUTDOWN':
@@ -37,11 +45,11 @@ class MyInit(libservice.Init):
             elif self.service_check(service) and action == 'RESTART':
                 self.service_start(service)
                 self.service_stop(service)
-            time.sleep(1)
+            time.sleep(2)
 
 # here we go
 try:
-    init = MyInit()
+    init = MyService()
     init.loop()
 except ConfigParser.Error as detail:
     message.critical('CONFIGPARSER', detail)

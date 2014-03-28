@@ -7,11 +7,18 @@ import libmessage
 import libservice
 message = libmessage.Message()
 misc = libmisc.Misc()
-service = libservice.Init()
+service = libservice.Service()
 
 
 class Power(object):
+    ''' Power manager '''
     def __init__(self):
+        ''' Initializer '''
+        self.initialized = False
+        self.ipc = '/run/power.fifo'
+        # set custom log file
+        message.LOG_FILE = '/var/log/power.log'
+
         self.REBOOT_PRE = None
         self.SHUTDOWN_PRE = None
         self.SUSPEND_PRE = None

@@ -18,9 +18,11 @@ all: clean
 	$(CC) $(CFLAGS) -shared build/libservice.c -o build/libservice.so
 	$(CYTHON) -2 libdevice.py -o build/libdevice.c
 	$(CC) $(CFLAGS) -shared build/libdevice.c -o build/libdevice.so
+	$(CYTHON) -2 libsh.py -o build/libsh.c
+	$(CC) $(CFLAGS) -shared build/libsh.c -o build/libsh.so
 	$(STRIP) build/libmagic.so build/libmisc.so build/libpackage.so \
 		build/libpower.so build/libnetwork.so build/libservice.so \
-		build/libdevice.so
+		build/libdevice.so build/libsh.so
 
 check:
 	python test.py
@@ -35,6 +37,7 @@ install:
 	$(INSTALL) -vm644 build/libnetwork.so $(DESTDIR)$(SITEDIR)/libnetwork.so
 	$(INSTALL) -vm644 build/libservice.so $(DESTDIR)$(SITEDIR)/libservice.so
 	$(INSTALL) -vm644 build/libdevice.so $(DESTDIR)$(SITEDIR)/libdevice.so
+	$(INSTALL) -vm644 build/libsh.so $(DESTDIR)$(SITEDIR)/libsh.so
 
 uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libmagic.so
@@ -45,6 +48,7 @@ uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libnetwork.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libservice.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libdevice.so
+	$(RM) $(DESTDIR)$(SITEDIR)/libsh.so
 
 clean:
 	$(RM) -r build/

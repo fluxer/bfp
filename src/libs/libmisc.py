@@ -257,6 +257,29 @@ class Misc(object):
         tar.close()
         return size
 
+
+    def ipc_create(self, fifo, group=0, mode=0664):
+        ''' Create fifo for communication '''
+        if not os.path.exists(fifo):
+            os.mkfifo(fifo, mode)
+        # set owner of IPC to root:<group>
+        os.chown(fifo, 0, group)
+        # sadly, something is wrong with mkfifo permissions set
+        os.chmod(fifo, mode)
+
+    def ipc_read(self, fifo):
+        ''' Read IPC and return a tuple of service and action '''
+        if not os.path.exists(fifo):
+            # FIXME: needs proper permissions set
+            # ipc_create(fifo)
+            return None
+        return self.file_read_nonblock(fifo).strip()
+
+    def ipc_write(self, fifo, content):
+        ''' Write service and action to IPC '''
+        self.file_write(fifo, content)
+
+
     def system_output(self, command):
         ''' Get output of external utility '''
         pipe = subprocess.Popen(command, stdout=subprocess.PIPE, env={'LC_ALL': 'C'})

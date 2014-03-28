@@ -11,7 +11,7 @@ misc = libmisc.Misc()
 import libservice
 
 try:
-    init = libservice.Init()
+    init = libservice.Service()
     parser = argparse.ArgumentParser(prog='initctl', description='Init Control')
     parser.add_argument('-a', '--start', action='store',
         help='Start service')
@@ -26,15 +26,15 @@ try:
 
     ARGS = parser.parse_args()
     if ARGS.start:
-        init.ipc_write(ARGS.start, 'START')
+        misc.ipc_write(init.ipc, ARGS.start + '#START')
     elif ARGS.stop:
-        init.ipc_write(ARGS.stop, 'STOP')
+        misc.ipc_write(init.ipc, ARGS.stop + '#STOP')
     elif ARGS.restart:
-        init.ipc_write(ARGS.restart, 'RESTART')
+        init.ipc_write(init.ipc, ARGS.restart + '#RESTART')
     elif ARGS.reboot:
-        init.ipc_write('', 'REBOOT')
+        misc.ipc_write(init.ipc, '#REBOOT')
     elif ARGS.shutdown:
-        init.ipc_write('', 'SHUTDOWN')
+        misc.ipc_write(init.ipc, '#SHUTDOWN')
 
 except ConfigParser.Error as detail:
     message.critical('CONFIGPARSER', detail)

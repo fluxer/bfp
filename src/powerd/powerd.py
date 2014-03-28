@@ -13,7 +13,6 @@ message = libmessage.Message()
 misc = libmisc.Misc()
 power = libpower.Power()
 
-
 app_version = "0.0.8 (90d7e1e)"
 
 if not os.path.isfile('/etc/powerd.conf'):
@@ -55,12 +54,6 @@ else:
     SUSPEND_STATE = conf.get('suspend', 'state')
     SUSPEND_POST = conf.get('suspend', 'post')
 
-    MOUNT_PRE = conf.get('mount', 'pre')
-    MOUNT_POST = conf.get('mount', 'post')
-
-    UNMOUNT_PRE = conf.get('unmount', 'pre')
-    UNMOUNT_POST = conf.get('unmount', 'post')
-
     BATTERY_LID = conf.get('battery', 'lid')
     BATTERY_LOW = conf.get('battery', 'low')
     BATTERY_CPU = conf.get('battery', 'cpu')
@@ -70,61 +63,16 @@ else:
     POWER_CPU = conf.get('power', 'cpu')
     POWER_BACKLIGHT = conf.get('power', 'backlight')
 
+pool = False
 try:
     if not os.geteuid() == 0:
         message.critical('You are not root')
     else:
         # FIXME: lock
         message.info('Initializing power daemon...')
-        import glib
-        import dbus, dbus.service, dbus.mainloop.glib
-
-        class PowerdObject(dbus.service.Object):
-            def __init__(self, conn, object_path):
-                dbus.service.Object.__init__(self, conn, object_path)
-
-            @dbus.service.signal('org.powerd.Interface')
-            def NotifyPower(self, state):
-                return str(state)
-
-            @dbus.service.signal('org.powerd.Interface')
-            def NotifyLid(self, state):
-                return str(state)
-
-            @dbus.service.signal('org.powerd.Interface')
-            def NotifyLow(self, capacity):
-                return int(capacity)
-
-            @dbus.service.method('org.powerd.Interface', in_signature='', out_signature='')
-            def Reboot(self):
-                power.do_reboot()
-
-            @dbus.service.method('org.powerd.Interface', in_signature='', out_signature='')
-            def Shutdown(self):
-                power.do_shutdown()
-
-            @dbus.service.method('org.powerd.Interface', in_signature='', out_signature='')
-            def Suspend(self):
-                power.do_suspend()
-
-            @dbus.service.method('org.powerd.Interface', in_signature='', out_signature='')
-            def Ping(self):
-                message.sub_info('Ping')
-
-            @dbus.service.method('org.powerd.Interface', in_signature='', out_signature='')
-            def Exit(self):
-                message.info('Exiting daemon...')
-                global pool
-                mainloop.quit()
-                pool.close()
-                pool.terminate()
-
-        dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
-        system_bus = dbus.SystemBus()
-        power_name = dbus.service.BusName('org.powerd.PowerD', system_bus)
-        power_obj = PowerdObject(system_bus, '/org/powerd/PowerD')
 
         def monitor_lid():
+            ''' Monitor LID state '''
             message.sub_info('Monitoring LID state')
             if not os.path.exists('/proc/acpi/button/lid/LID/state'):
                 message.sub_warning('No LID support')
@@ -135,7 +83,6 @@ try:
                 after = power.check_lid_status()
                 if not before == after:
                     message.sub_debug('LID status changed', after)
-                    power_obj.NotifyLid(after)
                     if after == 'closed' and power.LID_VALUE == 'suspend':
                         power.do_suspend()
                     elif after == 'closed' and power.LID_VALUE == 'shutdown':
@@ -145,13 +92,14 @@ try:
                         power.do_suspend()
 
         def monitor_power():
+            ''' Monitor power state '''
             message.sub_info('Monitoring power state')
             while True:
                 before = power.check_power_supply()
                 time.sleep(2)
                 after = power.check_power_supply()
                 if not before == after:
-                    power_obj.NotifyPower(after)
+                    message.sub_debug('Power state changed', after)
                     if after == 'DC':
                         power.LID_VALUE = BATTERY_LID
                         power.CPU_VALUE = BATTERY_CPU
@@ -159,7 +107,6 @@ try:
                         capacity = int(power.check_battery_capacity())
                         if capacity < 15:
                             message.sub_warning('Low battery', capacity)
-                            power_obj.NotifyLow(capacity)
                             if BATTERY_LOW == 'suspend':
                                 power.do_suspend()
                             elif BATTERY_LOW == 'shutdown':
@@ -172,19 +119,36 @@ try:
                         power.LID_VALUE = POWER_LID
                         power.CPU_VALUE = POWER_CPU
                         power.BACKLIGHT_VALUE = POWER_BACKLIGHT
-                power.do_cpu_governor()
-                power.do_backlight()
+                    power.do_cpu_governor()
+                    power.do_backlight()
                 time.sleep(2)
 
-        glib.threads_init()
-        mainloop = glib.MainLoop()
+        def read_ipc():
+            ''' Read IPC and do action on demand '''
+            while True:
+                content = misc.ipc_read(power.ipc)
+                action = None
+                if content:
+                    action = content.split('#')
+
+                if action == 'REBOOT':
+                    power.do_reboot()
+                elif action == 'SHUTDOWN':
+                    power.do_shutdown()
+                elif action == 'SUSPEND':
+                    power.do_suspend()
+                elif action == 'EXIT':
+                    break
+                time.sleep(2)
 
         from multiprocessing import Pool
-        pool = Pool(2)
+        pool = Pool(3)
+
         pool.apply_async(monitor_lid)
         pool.apply_async(monitor_power)
-        mainloop.run()
-
+        pool.apply_async(read_ipc)
+        pool.close()
+        pool.join()
 except ConfigParser.Error as detail:
     message.critical('CONFIGPARSER', detail)
     sys.exit(3)
@@ -208,5 +172,7 @@ except SystemExit:
 except Exception as detail:
     message.critical('Unexpected error', detail)
     sys.exit(1)
-#finally:
-#    raise
+finally:
+    if pool:
+        pool.close()
+        pool.terminate()
