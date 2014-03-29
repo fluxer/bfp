@@ -6,10 +6,10 @@ import os, sys, subprocess, ConfigParser, argparse
 
 import libmessage
 import libmisc
-import libservice
+import libsystem
 message = libmessage.Message()
 misc = libmisc.Misc()
-init = libservice.Service()
+init = libsystem.System()
 
 try:
     if not os.path.exists(init.ipc):
@@ -23,10 +23,16 @@ try:
         help='Stop service')
     parser.add_argument('-R', '--restart', action='store',
         help='Restart service')
+    parser.add_argument('-m', '--mount', action='store',
+        help='Mount device')
+    parser.add_argument('-u', '--unmount', action='store',
+        help='Unmount device')
     parser.add_argument('-r', '--reboot', action='store_true',
         help='Reboot system')
     parser.add_argument('-s', '--shutdown', action='store_true',
         help='Halt system')
+    parser.add_argument('-S', '--suspend', action='store_true',
+        help='Suspend system')
 
     ARGS = parser.parse_args()
     if ARGS.start:
@@ -35,10 +41,16 @@ try:
         misc.ipc_write(init.ipc, ARGS.stop + '#STOP')
     elif ARGS.restart:
         init.ipc_write(init.ipc, ARGS.restart + '#RESTART')
+    elif ARGS.mount:
+        misc.ipc_write(init.ipc, ARGS.mount + '#MOUNT')
+    elif ARGS.unmount:
+        misc.ipc_write(init.ipc, ARGS.unmount + '#UNMOUNT')
     elif ARGS.reboot:
         misc.ipc_write(init.ipc, '#REBOOT')
     elif ARGS.shutdown:
         misc.ipc_write(init.ipc, '#SHUTDOWN')
+    elif ARGS.suspend:
+        misc.ipc_write(init.ipc, '#SUSPEND')
 
 except ConfigParser.Error as detail:
     message.critical('CONFIGPARSER', detail)

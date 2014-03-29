@@ -10,8 +10,7 @@ install:
 	sed 's|#MACHINE#|$(MACHINE)|g' -i $(DESTDIR)/etc/spm.conf
 	sed 's|#ARCH#|$(ARCH)|g' -i $(DESTDIR)/etc/spm.conf
 	sed 's|#JOBS#|$(JOBS)|g' -i $(DESTDIR)/etc/spm.conf
-	$(INSTALL) -vm644 powerd.conf $(DESTDIR)/etc/
-	$(INSTALL) -vm644 mountd.conf $(DESTDIR)/etc/
+	$(INSTALL) -vm644 system.conf $(DESTDIR)/etc/
 	$(INSTALL) -vm644 autostart/*.desktop $(DESTDIR)$(AUTOSTARTDIR)
 	$(INSTALL) -vm644 applications/*.desktop $(DESTDIR)$(APPLICATIONSDIR)
 	$(INSTALL) -vm644 services/*.conf $(DESTDIR)/etc/services.d
@@ -19,8 +18,7 @@ install:
 uninstall:
 	$(RM) -r $(DESTDIR)/etc/spm/ $(DESTDIR)/etc/services.d
 	$(RM) $(DESTDIR)/etc/spm.conf
-	$(RM) $(DESTDIR)/etc/powerd.conf
-	$(RM) $(DESTDIR)/etc/mountd.conf
-	$(RM) $(DESTDIR)$(AUTOSTARTDIR)/powerd.desktop
+	$(RM) $(DESTDIR)/etc/system.conf
 	$(RM) $(DESTDIR)$(AUTOSTARTDIR)/powertray.desktop
 	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/powertray.desktop
+	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/mounttray.desktop

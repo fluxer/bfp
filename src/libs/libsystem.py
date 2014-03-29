@@ -1,24 +1,25 @@
 #!/usr/bin/python
 
-import subprocess, os
+import subprocess, os, shlex, ConfigParser
 
 import libmisc
 import libmessage
-import libservice
 message = libmessage.Message()
 misc = libmisc.Misc()
-service = libservice.Service()
 
-
-class Power(object):
+class System(object):
     ''' Power manager '''
     def __init__(self):
         ''' Initializer '''
         self.initialized = False
-        self.ipc = '/run/power.fifo'
+        self.ipc = '/run/system.fifo'
         # set custom log file
-        message.LOG_FILE = '/var/log/power.log'
+        message.LOG_FILE = '/var/log/system.log'
 
+        self.MOUNT_PRE = None
+        self.MOUNT_POST = None
+        self.UNMOUNT_PRE = None
+        self.UNMOUNT_POST = None
         self.REBOOT_PRE = None
         self.SHUTDOWN_PRE = None
         self.SUSPEND_PRE = None
@@ -98,6 +99,14 @@ class Power(object):
                 status = misc.file_read(fstatus).strip()
         return status
 
+    def check_mounted(self, string):
+        for line in misc.file_readlines('/proc/mounts'):
+            device, directory, type, options, fsck, fsck2 = line.split()
+            if device == string or directory == string:
+                return True
+        return False
+
+
     def pre_actions(self, actions):
         if not actions:
             return
@@ -112,15 +121,26 @@ class Power(object):
             message.sub_info('Executing post-action', action)
             subprocess.check_call((action))
 
+    def do_boot(self):
+        ''' Start all services during system boot '''
+        for service in sorted(misc.list_files('/etc/services.d')):
+            self.service_start(service)
+
     def do_reboot(self):
-        message.sub_info('Rebooting system...')
-        self.pre_actions(self.REBOOT_PRE)
-        service.system_reboot()
+        ''' Stop all services and reboot the system '''
+        for service in sorted(misc.list_files('/etc/services.d')):
+            self.service_stop(service)
+        message.info('Rebooting system...')
+        # FIXME: do some ctype magic
+        self.exec_command('reboot -f')
 
     def do_shutdown(self):
-        message.sub_info('Shutting system down...')
-        self.pre_actions(self.SHUTDOWN_PRE)
-        service.system_shutdown()
+        ''' Stop all services and shutdown the system '''
+        for service in sorted(misc.list_files('/etc/services.d')):
+            self.service_stop(service)
+        message.info('Shutting down system...')
+        # FIXME: do some ctype magic
+        self.exec_command('shutdown -c -P -h now')
 
     def do_suspend(self):
         message.sub_info('Suspending system...')
@@ -135,6 +155,32 @@ class Power(object):
         misc.file_write('/sys/power/disk', self.SUSPEND_DISK)
         misc.file_write('/sys/power/state', self.SUSPEND_STATE)
         self.post_actions(self.SUSPEND_POST)
+
+    def do_mount(self, device):
+        message.sub_info('Mounting device', device)
+        self.pre_actions(self.MOUNT_PRE)
+        directory = '/media/' + os.path.basename(device)
+        if not os.path.isdir(directory):
+            os.makedirs(directory)
+        if not self.check_mounted(device):
+            subprocess.check_call((misc.whereis('mount'), device, directory))
+        else:
+            return
+        self.post_actions(self.MOUNT_POST)
+
+    def do_unmount(self, device):
+        message.sub_info('Unmounting device', device)
+        self.pre_actions(self.UNMOUNT_PRE)
+        directory = '/media/' + os.path.basename(device)
+        if self.check_mounted(device):
+            subprocess.check_call((misc.whereis('umount'), device))
+        elif os.path.ismount(directory):
+            subprocess.check_call((misc.whereis('umount'), directory))
+        else:
+            return
+        if os.path.isdir(directory):
+            os.rmdir(directory)
+        self.post_actions(self.UNMOUNT_POST)
 
     def do_cpu_governor(self):
         # /sys/devices/cpu/power/control
@@ -158,3 +204,69 @@ class Power(object):
                     misc.file_write(sfile, self.CPU_VALUE)
                 else:
                     message.sub_debug('Brightness preserved', self.BACKLIGHT_VALUE)
+
+    def service_check(self, service):
+        ''' Check if service is valid '''
+        spath = os.path.join('/etc/services.d', service)
+        if os.path.isfile(spath) or os.path.isfile(service):
+            return True
+        return False
+
+    def service_read(self, service):
+        ''' Read service file '''
+        config = ConfigParser.SafeConfigParser()
+        config.read(service)
+
+        # asign variables to the object
+        self.service_name = os.path.basename(service.replace('.conf', ''))
+        self.start_command = config.get('Exec', 'Start')
+        self.stop_command = config.get('Exec', 'Stop')
+        self.start_message = config.get('Options', 'StartMsg')
+        self.stop_message = config.get('Options', 'StopMsg')
+        self.wait = config.getboolean('Options', 'Wait')
+        self.shell = config.getboolean('Options', 'Shell')
+        self.restart = config.getboolean('Options', 'Restart')
+        self.delay = config.getboolean('Options', 'Delay')
+
+    def exec_command(self, command):
+        ''' Exec command in sane manner '''
+        # split command the smart way preserving brackets
+        if not self.shell:
+            command = shlex.split(command)
+        pipe = subprocess.Popen(command, shell=self.shell,
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+            env={'PATH': '/usr/sbin:/usr/bin:/sbin:/bin'})
+        if self.wait:
+            pipe.wait()
+        if pipe.returncode > 0:
+            stdout, stderr = pipe.communicate()
+            if stderr:
+                message.sub_warning(stderr)
+            elif stdout:
+                message.sub_warning(stdout)
+            else:
+                message.sub_warning('Command failed with status',
+                    pipe.returncode)
+            return pipe.returncode
+
+    def service_start(self, service):
+        ''' Start a service '''
+        self.service_check(service)
+        self.service_read(service)
+        if self.start_command:
+            if self.start_message:
+                message.sub_info(self.start_message)
+            else:
+                message.sub_info('Starting service', self.service_name)
+            self.exec_command(self.start_command)
+
+    def service_stop(self, service):
+        ''' Stop a service '''
+        self.service_check(service)
+        self.service_read(service)
+        if self.stop_command:
+            if self.stop_message:
+                message.sub_info(self.stop_message)
+            else:
+                message.sub_info('Stopping service', self.service_name)
+            self.exec_command(self.stop_command)

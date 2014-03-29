@@ -3,8 +3,7 @@ include Makefile.inc
 all:
 	make -C doc
 	make -C src/libs
-	make -C src/mountd
-	make -C src/powerd
+	make -C src/mounttray
 	make -C src/powertray
 	make -C src/shell
 	make -C src/spm
@@ -12,10 +11,6 @@ all:
 
 check:
 	make -C src/libs check
-	make -C src/mountd check
-	make -C src/powerd check
-	make -C src/powertray check
-	make -C src/shell check
 	make -C src/spm check
 	make -C src/spm-qt check	
 
@@ -25,8 +20,7 @@ install:
 	make -C misc install
 	make -C scripts install
 	make -C src/libs install
-	make -C src/mountd install
-	make -C src/powerd install
+	make -C src/mounttray install
 	make -C src/powertray install
 	make -C src/shell install
 	make -C src/spm install
@@ -38,8 +32,7 @@ uninstall:
 	make -C misc uninstall
 	make -C scripts uninstall
 	make -C src/libs uninstall
-	make -C src/mountd uninstall
-	make -C src/powerd uninstall
+	make -C src/mounttray uninstall
 	make -C src/powertray uninstall
 	make -C src/shell uninstall
 	make -C src/spm uninstall
@@ -48,8 +41,7 @@ uninstall:
 clean:
 	make -C doc clean
 	make -C src/libs clean
-	make -C src/mountd clean
-	make -C src/powerd clean
+	make -C src/mounttray clean
 	make -C src/powertray clean
 	make -C src/shell clean
 	make -C src/spm clean
