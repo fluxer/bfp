@@ -13,7 +13,7 @@ import os
 import re
 
 
-app_version = "0.0.1 (932de2a)"
+app_version = "0.0.1 (61914bd)"
 
 try:
     import libmessage
@@ -170,6 +170,7 @@ try:
         ''' Override printing of debug messages '''
         def __call__(self, parser, namespace, values, option_string=None):
             message.DEBUG = True
+            reload(libmessage)
             setattr(namespace, self.dest, values)
 
     parser = argparse.ArgumentParser(prog='spm', description='Source Package Manager')
@@ -437,5 +438,5 @@ except SystemExit:
 except Exception as detail:
     message.critical('Unexpected error', detail)
     sys.exit(1)
-#finally:
-#    raise
+finally:
+    raise

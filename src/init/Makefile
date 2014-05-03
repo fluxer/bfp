@@ -9,13 +9,13 @@ all: clean
 	$(STRIP) build/init build/initctl
 
 install:
-	$(INSTALL) -vdm755 $(DESTDIR)$(BINDIR)
-	$(INSTALL) -vm755 build/init $(DESTDIR)$(BINDIR)/init
+	$(INSTALL) -vdm755 $(DESTDIR)$(BINDIR) $(DESTDIR)$(SBINDIR)
+	$(INSTALL) -vm755 build/init $(DESTDIR)$(SBINDIR)/init
 	$(INSTALL) -vm755 build/initctl $(DESTDIR)$(BINDIR)/initctl
 
 uninstall:
-	$(RM) $(DESTDIR)$(BINDIR)/init
-	$(RM) $(DESTDIR)$(BINDIR)/init
+	$(RM) $(DESTDIR)$(SBINDIR)/init
+	$(RM) $(DESTDIR)$(BINDIR)/initctl
 
 clean:
 	$(RM) -r build/

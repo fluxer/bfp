@@ -3,6 +3,7 @@ include Makefile.inc
 all:
 	make -C doc
 	make -C src/libs
+	make -C src/initfs
 	make -C src/mounttray
 	make -C src/powertray
 	make -C src/shell
@@ -17,6 +18,7 @@ check:
 install:
 	make -C doc install
 	make -C etc install
+	make -C src/initfs install
 	make -C misc install
 	make -C scripts install
 	make -C src/libs install
@@ -29,6 +31,7 @@ install:
 uninstall:
 	make -C doc uninstall
 	make -C etc uninstall
+	make -C src/initfs uninstall
 	make -C misc uninstall
 	make -C scripts uninstall
 	make -C src/libs uninstall
@@ -40,7 +43,9 @@ uninstall:
 
 clean:
 	make -C doc clean
+	make -C src/init clean
 	make -C src/libs clean
+	make -C src/initfs clean
 	make -C src/mounttray clean
 	make -C src/powertray clean
 	make -C src/shell clean

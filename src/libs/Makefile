@@ -14,10 +14,8 @@ all: clean
 	$(CC) $(CFLAGS) -shared build/libnetwork.c -o build/libnetwork.so
 	$(CYTHON) -2 libsystem.py -o build/libsystem.c
 	$(CC) $(CFLAGS) -shared build/libsystem.c -o build/libsystem.so
-	$(CYTHON) -2 libsh.py -o build/libsh.c
-	$(CC) $(CFLAGS) -shared build/libsh.c -o build/libsh.so
-	$(STRIP) build/libmagic.so build/libmisc.so build/libpackage.so \
-		build/libnetwork.so build/libsystem.so build/libsh.so
+	$(STRIP) build/libmagic.so build/libmessage.so build/libmisc.so \
+		build/libpackage.so build/libnetwork.so build/libsystem.so
 
 check:
 	python test.py
@@ -30,7 +28,6 @@ install:
 	$(INSTALL) -vm644 build/libpackage.so $(DESTDIR)$(SITEDIR)/libpackage.so
 	$(INSTALL) -vm644 build/libnetwork.so $(DESTDIR)$(SITEDIR)/libnetwork.so
 	$(INSTALL) -vm644 build/libsystem.so $(DESTDIR)$(SITEDIR)/libsystem.so
-	$(INSTALL) -vm644 build/libsh.so $(DESTDIR)$(SITEDIR)/libsh.so
 
 uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libmagic.so
@@ -39,8 +36,6 @@ uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libpackage.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libnetwork.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libsystem.so
-	$(RM) $(DESTDIR)$(SITEDIR)/libdevice.so
-	$(RM) $(DESTDIR)$(SITEDIR)/libsh.so
 
 clean:
 	$(RM) -r build/

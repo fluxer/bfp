@@ -101,7 +101,7 @@ class MySystem(libsystem.System):
                     self.LID_VALUE = BATTERY_LID
                     self.CPU_VALUE = BATTERY_CPU
                     self.BACKLIGHT_VALUE = BATTERY_BACKLIGHT
-                    capacity = int(self.check_battery_capacity())
+                    capacity = self.check_battery_capacity()
                     if capacity < 15:
                         message.sub_warning('Low battery', capacity)
                         if BATTERY_LOW == 'suspend':
@@ -109,9 +109,7 @@ class MySystem(libsystem.System):
                         elif BATTERY_LOW == 'shutdown':
                             self.do_shutdown()
                         else:
-                            message.sub_warning('Invalid action for low battery',
-                                BATTERY_LOW)
-                            self.do_suspend()
+                            message.sub_warning('Low battery', BATTERY_LOW)
                 else:
                     self.LID_VALUE = POWER_LID
                     self.CPU_VALUE = POWER_CPU
@@ -153,6 +151,11 @@ class MySystem(libsystem.System):
                 self.do_shutdown()
             elif action == 'SUSPEND':
                 self.do_suspend()
+            elif action == 'RELOAD':
+                reload(libmessage)
+                reload(libmisc)
+                reload(libsystem)
+                self.__init__()
             elif string and self.service_check(string) and action == 'START':
                 self.service_start(string)
             elif string and self.service_check(string) and action == 'STOP':
@@ -178,12 +181,12 @@ try:
 
     init.system_initialize()
 
-    t1 = threading.Thread(target=init.monitor_lid)
+    #t1 = threading.Thread(target=init.monitor_lid)
     t2 = threading.Thread(target=init.monitor_power)
     t3 = threading.Thread(target=init.monitor_devices)
     t4 = threading.Thread(target=init.loop)
 
-    t1.start()
+    #t1.start()
     t2.start()
     t3.start()
     t4.start()

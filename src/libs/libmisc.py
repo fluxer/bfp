@@ -84,8 +84,7 @@ class Misc(object):
     def file_write(self, sfile, content):
         ''' Write data to file (overwrites) '''
         dirname = os.path.dirname(sfile)
-        if not os.path.isdir(dirname):
-            os.makedirs(dirname)
+        self.dir_create(dirname)
 
         wfile = open(sfile, 'w')
         wfile.write(content)
@@ -102,6 +101,11 @@ class Misc(object):
         if os.path.islink(sfile):
             return 'inode/symlink'
         return libmagic.from_file(sfile, mime=True)
+
+    def dir_create(self, sdir):
+        ''' Create directory if it does not exist, including leading paths '''
+        if not os.path.isdir(sdir):
+            os.makedirs(sdir)
 
     def dir_remove(self, sdir):
         ''' Remove directory recursively '''
@@ -164,9 +168,7 @@ class Misc(object):
         ''' Download file using internal library '''
         rfile = urllib2.urlopen(url, timeout=self.TIMEOUT)
         dest_dir = os.path.dirname(destination)
-
-        if not os.path.isdir(dest_dir):
-            os.makedirs(dest_dir)
+        self.dir_create(dest_dir)
 
         output = open(destination, 'wb')
         output.write(rfile.read())
@@ -176,8 +178,7 @@ class Misc(object):
     def fetch(self, url, destination):
         ''' Download file using external utilities, fallback to internal '''
         dest_dir = os.path.dirname(destination)
-        if not os.path.isdir(dest_dir):
-            os.makedirs(dest_dir)
+        self.dir_create(dest_dir)
 
         curl = self.whereis('curl', fallback=False)
         wget = self.whereis('wget', fallback=False)
@@ -194,9 +195,7 @@ class Misc(object):
     def archive_compress(self, variant, sfile, method='bz2'):
         ''' Create archive from directory '''
         dirname = os.path.dirname(sfile)
-        if not os.path.isdir(dirname):
-            os.makedirs(dirname)
-
+        self.dir_create(dirname)
         tar = tarfile.open(sfile, 'w:' + method)
         if isinstance(variant, list) or isinstance(variant, tuple):
             for item in variant:
@@ -207,8 +206,7 @@ class Misc(object):
 
     def archive_decompress(self, sfile, sdir):
         ''' Extract archive to directory '''
-        if not os.path.isdir(sdir):
-            os.makedirs(sdir)
+        self.dir_create(sdir)
 
         # WARNING!!! the -P option is not supported by the
         # Busybox version of `tar`.
@@ -301,8 +299,7 @@ class Misc(object):
             for s in ('/proc', '/dev', '/sys'):
                 sdir = self.ROOT_DIR + s
                 if not os.path.ismount(sdir):
-                    if not os.path.isdir(sdir):
-                        os.makedirs(sdir)
+                    self.dir_create(sdir)
                     subprocess.check_call((mount, '--rbind', s, sdir))
             os.chroot(self.ROOT_DIR)
             os.chdir('/')

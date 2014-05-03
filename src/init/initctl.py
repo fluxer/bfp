@@ -33,6 +33,8 @@ try:
         help='Halt system')
     parser.add_argument('-S', '--suspend', action='store_true',
         help='Suspend system')
+    parser.add_argument('-n', '--reload', action='store_true',
+        help='Reload init')
 
     ARGS = parser.parse_args()
     if ARGS.start:
@@ -51,6 +53,8 @@ try:
         misc.ipc_write(init.ipc, '#SHUTDOWN')
     elif ARGS.suspend:
         misc.ipc_write(init.ipc, '#SUSPEND')
+    elif ARGS.reload:
+        misc.ipc_write(init.ipc, '#RELOAD')
 
 except ConfigParser.Error as detail:
     message.critical('CONFIGPARSER', detail)

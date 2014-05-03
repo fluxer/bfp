@@ -1,0 +1,101 @@
+#!/usr/bin/python2
+
+import sys
+import argparse
+import tempfile
+import subprocess
+import tarfile
+import zipfile
+import shutil
+import os
+
+
+app_version = "0.0.1 (61914bd)"
+
+try:
+    import libmessage
+    message = libmessage.Message()
+    import libmisc
+    misc = libmisc.Misc()
+
+    parser = argparse.ArgumentParser(prog='lsinitfs', description='LsInitfs')
+
+    tmpdir = tempfile.mkdtemp()
+    kernel = os.uname()[2]
+    image = '/boot/' + kernel + '.gz'
+
+    parser.add_argument('-t', '--tmp', type=str, default=tmpdir,
+        help='Change temporary directory')
+    parser.add_argument('-k', '--kernel', type=str, default=kernel,
+        help='Change kernel version')
+    parser.add_argument('-i', '--image', type=str, default=image,
+        help='Change output image')
+    parser.add_argument('--keep', action='store_true',
+        help='Keep temporary directory')
+    parser.add_argument('--debug', action='store_true',
+        help='Enable debug messages')
+    parser.add_argument('--version', action='version',
+        version='MkInitfs v' + app_version,
+        help='Show MkInitfs version and exit')
+
+    ARGS = parser.parse_args()
+
+    if ARGS.debug:
+        message.DEBUG = True
+
+    message.info('Runtime information')
+    message.sub_info('TMP', ARGS.tmp)
+    message.sub_info('KERNEL', ARGS.kernel)
+    message.sub_info('IMAGE', ARGS.image)
+
+    if not os.path.isfile(ARGS.image):
+        message.crtical('Image does not exist', ARGS.image)
+        sys.exit(2)
+
+    message.info('Listing initial RAM image...')
+    base = os.path.basename(image)
+    new_image = os.path.join(ARGS.tmp, base)
+    message.sub_info('Copying image')
+    misc.dir_create(ARGS.tmp)
+    shutil.copyfile(image, new_image)
+
+    message.sub_info('Decompressing image')
+    gunzip = misc.whereis('gunzip')
+    os.system(gunzip + ' ' + new_image)
+
+    message.sub_info('Listing image')
+    cpio = misc.whereis('cpio')
+    print os.system(cpio + ' -tF ' + new_image.replace('.gz', ''))
+
+    if os.path.isdir(tmpdir) and not ARGS.keep:
+        message.info('Cleaning up...')
+        misc.dir_remove(tmpdir)
+
+except subprocess.CalledProcessError as detail:
+    message.critical('SUBPROCESS', detail)
+    sys.exit(4)
+except tarfile.TarError as detail:
+    message.critical('TARFILE', detail)
+    sys.exit(6)
+except zipfile.BadZipfile as detail:
+    message.critical('ZIPFILE', detail)
+    sys.exit(7)
+except shutil.Error as detail:
+    message.critical('SHUTIL', detail)
+    sys.exit(8)
+except OSError as detail:
+    message.critical('OS', detail)
+    sys.exit(9)
+except IOError as detail:
+    message.critical('IO', detail)
+    sys.exit(10)
+except KeyboardInterrupt:
+    message.critical('Interrupt signal received')
+    sys.exit(12)
+except SystemExit:
+    sys.exit(2)
+except Exception as detail:
+    message.critical('Unexpected error', detail)
+    sys.exit(1)
+#finally:
+#    raise
