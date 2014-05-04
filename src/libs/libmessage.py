@@ -92,15 +92,15 @@ class Message(object):
             self.log_message('[CRITICAL] %s' % msg)
 
     def debug(self, msg, marker=None):
-        ''' Print message with self.DEBUG status '''
+        ''' Print message with DEBUG status '''
         if self.DEBUG:
             if not marker is None:
                 print('%s* %s%s: %s%s%s' %
                     (self.cdebug, self.cnormal, msg, self.cdebug, marker, self.cnormal))
-                self.log_message('[self.DEBUG] %s: %s' % (msg, marker))
+                self.log_message('[DEBUG] %s: %s' % (msg, marker))
             else:
                 print('%s* %s%s' % (self.cdebug, self.cnormal, msg))
-                self.log_message('[self.DEBUG] %s' % msg)
+                self.log_message('[DEBUG] %s' % msg)
 
     def sub_info(self, msg, marker=None):
         ''' Print sub-message with INFO status '''
@@ -133,12 +133,12 @@ class Message(object):
             self.log_message('[CRITICAL] %s' % msg)
 
     def sub_debug(self, msg, marker=None):
-        ''' Print sub-message with self.DEBUG status '''
+        ''' Print sub-message with DEBUG status '''
         if self.DEBUG:
             if not marker is None:
                 print('%s  => %s%s: %s%s%s' %
                     (self.cdebug, self.cnormal, msg, self.cdebug, marker, self.cnormal))
-                self.log_message('[self.DEBUG] %s: %s' % (msg, marker))
+                self.log_message('[DEBUG] %s: %s' % (msg, marker))
             else:
                 print('%s  => %s%s' % (self.cdebug, self.cnormal, msg))
-                self.log_message('[self.DEBUG] %s' % msg)
+                self.log_message('[DEBUG] %s' % msg)

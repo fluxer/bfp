@@ -13,7 +13,7 @@ import os
 import re
 
 
-app_version = "0.0.1 (61914bd)"
+app_version = "2.2.1 (61914bd)"
 
 try:
     import libmessage
@@ -23,6 +23,7 @@ try:
     import libpackage
     database = libpackage.Database()
     import libconfig
+    import libmode
 
     EUID = os.geteuid()
 
@@ -169,8 +170,9 @@ try:
     class OverrideDebug(argparse.Action):
         ''' Override printing of debug messages '''
         def __call__(self, parser, namespace, values, option_string=None):
-            message.DEBUG = True
-            reload(libmessage)
+            print('DEBUG enabled')
+            libmessage.DEBUG = True
+            libmode.message.DEBUG = True
             setattr(namespace, self.dest, values)
 
     parser = argparse.ArgumentParser(prog='spm', description='Source Package Manager')
@@ -315,8 +317,6 @@ try:
         help='Show SPM version and exit')
 
     ARGS = parser.parse_args()
-
-    import libmode
 
     if ARGS.mode == 'repo':
         message.info('Runtime information')
