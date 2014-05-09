@@ -87,10 +87,10 @@ for src in "${@:-.}";do
 	fi
 
 	msg "Checking $srcbuild.."
-	if [[ -z $(grep -e 'version=' "$srcbuild") ]];then
+	if [[ -z $(grep -e '^version=' "$srcbuild") ]];then
 		warn "version not defined in $srcbuild"
 		continue
-	elif [[ -z $(grep -e 'description=' "$srcbuild") ]];then
+	elif [[ -z $(grep -e '^description=' "$srcbuild") ]];then
 		warn "description not defined in $srcbuild"
 		continue
 	elif [[ -z $(grep -e '^src_install()' "$srcbuild") ]];then
@@ -109,7 +109,7 @@ for src in "${@:-.}";do
 	missing_depends=""
 	for depend in "${depends[@]}" "${makedepends[@]}";do
 		if [ ! -d "/var/local/spm/$depend" ];then
-			missing_depends+="$depend "
+			missing_depends="$missing_depends $depend "
 		fi
 	done
 	if [ -n "$missing_depends" ];then
@@ -125,7 +125,11 @@ for src in "${@:-.}";do
 			msg2 "Linking: ${BLUE}${src_base}${ALL_OFF}"
 			ln -sf "$src_real/$src_base" "$SOURCE_DIR/$src_base"
 		elif [[ $source =~ git:// || $source =~ .git ]];then
+			msg2 "Cloning: ${BLUE}${source}${ALL_OFF}"
 			git clone --depth=1 "$source" "$SOURCE_DIR/$src_base"
+		elif [ -f "/var/cache/spm/sources/$src_name/$src_base" ];then
+			msg2 "Linking: ${BLUE}${src_base}${ALL_OFF}"
+			ln -sf "/var/cache/spm/sources/$src_name/$src_base" "$SOURCE_DIR/$src_base"
 		elif [ ! -f "$SOURCE_DIR/$src_base" ];then
 			msg2 "Fetching: ${BLUE}${source}${ALL_OFF}"
 			if [ -n "$(which curl)" ];then
@@ -141,29 +145,24 @@ for src in "${@:-.}";do
 				if [ -n "$(which bsdtar)" ];then
 					bsdtar -xpf "$SOURCE_DIR/$src_base" -C "$SOURCE_DIR"
 				elif [ -n "$(which tar)" ];then
-					tar -xapf "$SOURCE_DIR/$src_base" -C "$SOURCE_DIR"
+					tar -xpf "$SOURCE_DIR/$src_base" -C "$SOURCE_DIR"
 				fi ;;
 		esac		
 	done
 	
 	cd "$SOURCE_DIR"
-	if [ "$(declare -f -F src_compile)" ];then
+	if [[ -n $(grep -e '^src_compile()' "$srcbuild") ]];then
 		msg "Compiling sources.."
 		src_compile
 	fi
 	
 	
 	
-	if [ ! "$(declare -f -F src_install)" ];then
-		error "src_install() not defined in $srcbuild"
-		exit 1
-	else
-		msg "Installing sources.."
-		rm -rf --one-file-system "$INSTALL_DIR"
-		mkdir -p "$INSTALL_DIR"
-		cd "$INSTALL_DIR"
-		src_install
-	fi
+	msg "Installing sources.."
+	rm -rf --one-file-system "$INSTALL_DIR"
+	mkdir -p "$INSTALL_DIR"
+	cd "$INSTALL_DIR"
+	src_install
 	
 	msg "Creating footprint and metadata.."
 	mkdir -p "$INSTALL_DIR/var/local/spm/$src_name"
