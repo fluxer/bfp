@@ -49,7 +49,7 @@ try:
     message.sub_info('IMAGE', ARGS.image)
 
     if not os.path.isfile(ARGS.image):
-        message.crtical('Image does not exist', ARGS.image)
+        message.critical('Image does not exist', ARGS.image)
         sys.exit(2)
 
     message.info('Listing initial RAM image...')

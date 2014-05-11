@@ -72,7 +72,6 @@ try:
     message.sub_info('Copying root overlay')
     if os.path.isdir('/etc/mkinitfs/root'):
         for sdir in misc.list_dirs('/etc/mkinitfs/root'):
-            # FIXME: permissions are gonna be different
             fixed_sdir = sdir.replace('/etc/mkinitfs/root', '')
             message.sub_debug('Creating', fixed_sdir)
             misc.dir_create(ARGS.tmp + fixed_sdir)
