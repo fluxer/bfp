@@ -27,8 +27,10 @@ try:
     tmpdir = tempfile.mkdtemp()
     kernel = os.uname()[2]
     busybox = misc.whereis('busybox')
-    image = '/boot/' + kernel + '.gz'
-    modules = misc.system_output((misc.whereis('lsmod'))).split('\n')
+    image = '/boot/initramfs-' + kernel + '.gz'
+    modules = []
+    for mod in misc.system_output((misc.whereis('lsmod'))).split('\n')[1:]:
+        modules.append(mod.split()[0])
 
     parser.add_argument('-t', '--tmp', type=str, default=tmpdir,
         help='Change temporary directory')
@@ -36,6 +38,8 @@ try:
         help='Change busybox binary')
     parser.add_argument('-k', '--kernel', type=str, default=kernel,
         help='Change kernel version')
+    parser.add_argument('-m', '--modules', type=str, default=modules,
+        help='Change modules')
     parser.add_argument('-i', '--image', type=str, default=image,
         help='Change output image')
     parser.add_argument('--keep', action='store_true',
@@ -55,11 +59,8 @@ try:
     message.sub_info('TMP', ARGS.tmp)
     message.sub_info('BUSYBOX', ARGS.busybox)
     message.sub_info('KERNEL', ARGS.kernel)
+    message.sub_info('MODULES', ARGS.modules)
     message.sub_info('IMAGE', ARGS.image)
-
-    message.info('Generating initial RAM image...')
-    message.sub_info('Detecting modules')
-    #modules = misc.system_output(('lsmod', '|', 'tail', '-n+2', '|', 'cut -f1 -d" "'))
 
     message.sub_info('Installing Busybox')
     bin_dir = os.path.join(ARGS.tmp, 'bin')
@@ -105,7 +106,6 @@ try:
 
     message.sub_info('Copying modules')
     for module in modules:
-        module = module.split()[0]
         depends = misc.system_output((misc.whereis('modprobe'), '-b', '-D', module))
         if depends:
             for depend in depends.split('\n'):
@@ -115,20 +115,16 @@ try:
                     misc.dir_create(ARGS.tmp + os.path.dirname(depend))
                     shutil.copy2(depend, ARGS.tmp + depend)
 
-    if os.path.isdir('/etc/modprobe.d'):
-        misc.dir_create(os.path.join(ARGS.tmp, 'etc/modprobe.d'))
-        for sfile in os.listdir('/etc/modprobe.d'):
-            sfile = '/etc/modprobe.d/' + sfile
+    message.sub_info('Copying module files')
+    for sfile in os.listdir('/lib/modules/' + kernel):
+        if sfile.startswith('modules.'):
+            sfile = '/lib/modules/' + kernel + '/' + sfile
             message.sub_debug('Copying', sfile)
             misc.dir_create(ARGS.tmp + os.path.dirname(sfile))
             shutil.copy2(sfile, ARGS.tmp + sfile)
-        for sfile in os.listdir('/lib/modules/' + kernel):
-            if sfile.startswith('modules.'):
-                sfile = '/lib/modules/' + kernel + '/' + sfile
-                message.sub_debug('Copying', sfile)
-                misc.dir_create(ARGS.tmp + os.path.dirname(sfile))
-                shutil.copy2(sfile, ARGS.tmp + sfile)
-        subprocess.check_call((misc.whereis('depmod'), ARGS.kernel, '-b', ARGS.tmp))
+
+    message.sub_info('Updating module dependencies')
+    subprocess.check_call((misc.whereis('depmod'), ARGS.kernel, '-b', ARGS.tmp))
 
     message.sub_info('Creating shared libraries cache')
     etc_dir = os.path.join(ARGS.tmp, 'etc')

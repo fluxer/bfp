@@ -104,7 +104,7 @@ class Misc(object):
 
     def dir_create(self, sdir):
         ''' Create directory if it does not exist, including leading paths '''
-        if not os.path.isdir(sdir):
+        if not os.path.isdir(sdir) and not os.path.islink(sdir):
             os.makedirs(sdir)
 
     def dir_remove(self, sdir):
