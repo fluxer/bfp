@@ -13,7 +13,7 @@ import os
 import re
 
 
-app_version = "0.0.1 (13ecbdf)"
+app_version = "0.0.1 (6523cf7)"
 
 try:
     import libmessage
@@ -438,5 +438,5 @@ except SystemExit:
 except Exception as detail:
     message.critical('Unexpected error', detail)
     sys.exit(1)
-finally:
-    raise
+#finally:
+#    raise

@@ -223,7 +223,7 @@ class Misc(object):
             if bsdtar:
                 subprocess.check_call((bsdtar, '-xpPf', sfile, '-C', sdir))
             else:
-                subprocess.check_call((tar, '-xpPhf', sfile, '-C', sdir))
+                subprocess.check_call((tar, '-xphf', sfile, '-C', sdir))
         elif zipfile.is_zipfile(sfile):
             zfile = zipfile.ZipFile(sfile, 'r')
             zfile.extractall(path=sdir)
