@@ -17,6 +17,7 @@ model = QtGui.QFileSystemModel()
 cut_dirs = None
 copy_dirs = []
 delete_dirs = []
+p = None
 
 
 def disable_actions():
@@ -30,8 +31,7 @@ def change_directory(path=ui.ViewWidget.currentIndex()):
     if not isinstance(path, QtCore.QString):
         path = model.filePath(path)
     if not os.path.isdir(path):
-        # FIXME: meta function with file and dir handlers
-        os.system('qedit ' + str(path))
+        QtGui.QDesktopServices.openUrl(QtCore.QUrl(path))
         return
     root = model.setRootPath(path)
     ui.ViewWidget.setRootIndex(root)
@@ -50,7 +50,9 @@ model.setIconProvider(q)
 #ui.setLayout(Layout)
 
 def run_terminal():
-    os.system('xterm')
+    global p
+    p = QtCore.QProcess()
+    p.start('xterm')
 
 def run_about():
     QtGui.QMessageBox.about(MainWindow, "About", '<b>QFile v1.0.0</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
@@ -192,3 +194,6 @@ for device in misc.file_readlines('/proc/mounts'):
 # run!
 MainWindow.show()
 sys.exit(app.exec_())
+
+if p:
+    p.kill()

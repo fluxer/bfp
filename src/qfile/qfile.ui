@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>664</width>
-    <height>462</height>
+    <width>663</width>
+    <height>470</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -131,6 +131,9 @@
       <height>23</height>
      </rect>
     </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -138,7 +141,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>664</width>
+     <width>663</width>
      <height>21</height>
     </rect>
    </property>

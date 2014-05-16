@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'qfile.ui'
 #
-# Created: Fri May 16 19:48:22 2014
+# Created: Fri May 16 21:09:09 2014
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -26,7 +26,7 @@ except AttributeError:
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(664, 462)
+        MainWindow.resize(663, 470)
         icon = QtGui.QIcon()
         icon.addPixmap(QtGui.QPixmap(_fromUtf8(":/usr/share/pfm/resources/computer.svg")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         MainWindow.setWindowIcon(icon)
@@ -72,10 +72,11 @@ class Ui_MainWindow(object):
         self.HomeButton.setObjectName(_fromUtf8("HomeButton"))
         self.AddressBar = QtGui.QLineEdit(self.centralwidget)
         self.AddressBar.setGeometry(QtCore.QRect(170, 20, 481, 23))
+        self.AddressBar.setReadOnly(True)
         self.AddressBar.setObjectName(_fromUtf8("AddressBar"))
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 664, 21))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 663, 21))
         self.menubar.setObjectName(_fromUtf8("menubar"))
         self.menuMain = QtGui.QMenu(self.menubar)
         self.menuMain.setObjectName(_fromUtf8("menuMain"))
