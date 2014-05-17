@@ -88,7 +88,7 @@
       <normaloff>:/usr/share/pfm/resources/back.svg</normaloff>:/usr/share/pfm/resources/back.svg</iconset>
     </property>
    </widget>
-   <widget class="QCommandLinkButton" name="ForwardButton">
+   <widget class="QCommandLinkButton" name="TerminalButton">
     <property name="geometry">
      <rect>
       <x>110</x>
@@ -102,7 +102,7 @@
     </property>
     <property name="icon">
      <iconset resource="qfile.qrc">
-      <normaloff>:/usr/share/pfm/resources/forward.svg</normaloff>:/usr/share/pfm/resources/forward.svg</iconset>
+      <normaloff>:/usr/share/pfm/resources/utilities-terminal.svg</normaloff>:/usr/share/pfm/resources/utilities-terminal.svg</iconset>
     </property>
    </widget>
    <widget class="QCommandLinkButton" name="HomeButton">
@@ -155,16 +155,41 @@
     <property name="title">
      <string>Actions</string>
     </property>
-    <addaction name="actionRename"/>
+    <widget class="QMenu" name="menuNew">
+     <property name="title">
+      <string>New</string>
+     </property>
+     <property name="icon">
+      <iconset resource="qfile.qrc">
+       <normaloff>:/usr/share/pfm/resources/add.svg</normaloff>:/usr/share/pfm/resources/add.svg</iconset>
+     </property>
+     <addaction name="actionFile"/>
+     <addaction name="actionFolder"/>
+    </widget>
+    <widget class="QMenu" name="menuArchive">
+     <property name="title">
+      <string>Archive</string>
+     </property>
+     <property name="icon">
+      <iconset resource="qfile.qrc">
+       <normaloff>:/usr/share/pfm/resources/application-x-compress.svg</normaloff>:/usr/share/pfm/resources/application-x-compress.svg</iconset>
+     </property>
+     <addaction name="actionDecompress"/>
+     <addaction name="actionCompress"/>
+     <addaction name="actionCompress_bzip2"/>
+     <addaction name="actionCompress_xz"/>
+    </widget>
+    <addaction name="actionOpen"/>
+    <addaction name="separator"/>
     <addaction name="actionCut"/>
     <addaction name="actionCopy"/>
     <addaction name="actionPaste"/>
+    <addaction name="actionRename"/>
     <addaction name="actionDelete"/>
     <addaction name="actionProperties"/>
     <addaction name="separator"/>
-    <addaction name="actionTerminal"/>
-    <addaction name="actionCompress"/>
-    <addaction name="actionDecompress"/>
+    <addaction name="menuNew"/>
+    <addaction name="menuArchive"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -317,10 +342,10 @@
    </property>
    <property name="icon">
     <iconset resource="qfile.qrc">
-     <normaloff>:/usr/share/pfm/resources/archive-extract.svg</normaloff>:/usr/share/pfm/resources/archive-extract.svg</iconset>
+     <normaloff>:/usr/share/pfm/resources/application-x-gzip.svg</normaloff>:/usr/share/pfm/resources/application-x-gzip.svg</iconset>
    </property>
    <property name="text">
-    <string>Compress</string>
+    <string>Compress (gzip)</string>
    </property>
    <property name="toolTip">
     <string>Compress dirs/files</string>
@@ -384,6 +409,67 @@
    </property>
    <property name="text">
     <string>Rename</string>
+   </property>
+  </action>
+  <action name="actionMimes">
+   <property name="text">
+    <string>Mimes</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="icon">
+    <iconset resource="qfile.qrc">
+     <normaloff>:/usr/share/pfm/resources/fileopen.svg</normaloff>:/usr/share/pfm/resources/fileopen.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="actionFolder">
+   <property name="icon">
+    <iconset resource="qfile.qrc">
+     <normaloff>:/usr/share/pfm/resources/folder_new.svg</normaloff>:/usr/share/pfm/resources/folder_new.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Folder</string>
+   </property>
+  </action>
+  <action name="actionFile">
+   <property name="icon">
+    <iconset resource="qfile.qrc">
+     <normaloff>:/usr/share/pfm/resources/filenew.svg</normaloff>:/usr/share/pfm/resources/filenew.svg</iconset>
+   </property>
+   <property name="text">
+    <string>File</string>
+   </property>
+  </action>
+  <action name="actionAsd">
+   <property name="text">
+    <string>asd</string>
+   </property>
+  </action>
+  <action name="actionCompress_xz">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="qfile.qrc">
+     <normaloff>:/usr/share/pfm/resources/application-x-compress.svg</normaloff>:/usr/share/pfm/resources/application-x-compress.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Compress (xz)</string>
+   </property>
+  </action>
+  <action name="actionCompress_bzip2">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="qfile.qrc">
+     <normaloff>:/usr/share/pfm/resources/application-x-bzip.svg</normaloff>:/usr/share/pfm/resources/application-x-bzip.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Compress (bzip2)</string>
    </property>
   </action>
  </widget>

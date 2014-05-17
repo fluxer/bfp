@@ -13,14 +13,13 @@ ui = qfile.Ui_MainWindow()
 ui.setupUi(MainWindow)
 
 model = QtGui.QFileSystemModel()
-# model.setSorted(True)
 cut_dirs = None
 copy_dirs = []
 delete_dirs = []
 p = None
 
-
 def disable_actions():
+    ui.actionOpen.setEnabled(False)
     ui.actionRename.setEnabled(False)
     ui.actionCut.setEnabled(False)
     ui.actionCopy.setEnabled(False)
@@ -28,7 +27,8 @@ def disable_actions():
     ui.actionProperties.setEnabled(False)
 
 def change_directory(path=ui.ViewWidget.currentIndex()):
-    if not isinstance(path, QtCore.QString):
+    print path
+    if not isinstance(path, QtCore.QString) and not isinstance(path, str):
         path = model.filePath(path)
     if not os.path.isdir(path):
         QtGui.QDesktopServices.openUrl(QtCore.QUrl(path))
@@ -36,7 +36,7 @@ def change_directory(path=ui.ViewWidget.currentIndex()):
     root = model.setRootPath(path)
     ui.ViewWidget.setRootIndex(root)
     # ui.ViewWidget.sortItems()
-    ui.AddressBar.setText(os.path.normpath(str(path)))
+    ui.AddressBar.setText(str(path))
     disable_actions()
 
 ui.ViewWidget.setModel(model)
@@ -44,10 +44,6 @@ change_directory(QtCore.QDir.currentPath())
 
 q = QtGui.QFileIconProvider()
 model.setIconProvider(q)
-
-#Layout = QtGui.QVBoxLayout(ui.ViewWidget)
-#Layout.addWidget(ui.ViewWidget)
-#ui.setLayout(Layout)
 
 def run_terminal():
     global p
@@ -67,12 +63,12 @@ def change_home():
     change_directory(QtCore.QDir.homePath())
 
 def change_back_directory():
-    change_directory(model.rootPath() + '/..')
+    change_directory(QtCore.QDir.absoluteFilePath(model.rootPath() + '/..'))
 
 def change_mount_drectory():
-    change_directory(ui.MountsWidget.indexFromItem()) 
-    change_directory(ui.MountsWidget.currentIndex()) 
-    change_directory(ui.MountsWidget.currentItem())
+    #change_directory(ui.MountsWidget.indexFromItem()) 
+    print isinstance(ui.MountsWidget.currentIndex())
+    #change_directory(ui.MountsWidget.currentItem())
 
 def rename_directory():
     for svar in ui.ViewWidget.selectedIndexes():
@@ -150,6 +146,7 @@ def enable_actions():
     for sdir in ui.ViewWidget.selectedIndexes():
         selected_items.append(model.filePath(sdir))
     if selected_items:
+        ui.actionOpen.setEnabled(True)
         ui.actionRename.setEnabled(True)
         ui.actionCut.setEnabled(True)
         ui.actionCopy.setEnabled(True)
@@ -159,10 +156,10 @@ def enable_actions():
         disable_actions()
 
 ui.actionQuit.triggered.connect(sys.exit)
-ui.actionTerminal.triggered.connect(run_terminal)
 ui.actionAbout.triggered.connect(run_about)
 ui.actionIcons.triggered.connect(change_view_icons)
 ui.actionList.triggered.connect(change_view_list)
+ui.actionOpen.triggered.connect(change_directory)
 ui.actionRename.triggered.connect(rename_directory)
 ui.actionCut.triggered.connect(cut_directory)
 ui.actionCopy.triggered.connect(copy_directory)
@@ -172,6 +169,7 @@ ui.ViewWidget.doubleClicked.connect(change_directory)
 ui.ViewWidget.clicked.connect(enable_actions)
 ui.BackButton.clicked.connect(change_back_directory)
 ui.HomeButton.clicked.connect(change_home)
+ui.TerminalButton.clicked.connect(run_terminal)
 
 ui.MountsWidget.clicked.connect(change_mount_drectory)
 
@@ -187,7 +185,7 @@ ui.ViewWidget.customContextMenuRequested.connect(show_popup)
 s = QtGui.QStandardItemModel()
 for device in misc.file_readlines('/proc/mounts'):
     if device.startswith('/'):
-        s.appendRow(QtGui.QStandardItem(QtGui.QIcon('/usr/share/icons/elementary_usu/apps/48/ax-applet.svg'), device.split()[1]))
+        s.appendRow(QtGui.QStandardItem(QtGui.QIcon.fromTheme('drive-harddisk.svg'), device.split()[1]))
         ui.MountsWidget.setModel(s)
 #ui.MountsWidget.sortItems()
 

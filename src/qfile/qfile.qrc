@@ -1,5 +1,15 @@
 <RCC>
   <qresource prefix="/usr/share/pfm">
+    <file>resources/application-x-compress.svg</file>
+    <file>resources/application-x-gzip.svg</file>
+    <file>resources/application-x-bzip.svg</file>
+    <file>resources/add.svg</file>
+    <file>resources/system-run.svg</file>
+    <file>resources/filenew.svg</file>
+    <file>resources/fileopen.svg</file>
+    <file>resources/folder_new.svg</file>
+    <file>resources/drive-harddisk.svg</file>
+    <file>resources/drive-optical.svg</file>
     <file>resources/edit-rename.svg</file>
     <file>resources/plugin-scale.svg</file>
     <file>resources/gnome-settings-ui-behavior.svg</file>
