@@ -48,6 +48,7 @@ model.setIconProvider(q)
 def run_terminal():
     global p
     p = QtCore.QProcess()
+    p.setWorkingDirectory(model.rootPath())
     p.start('xterm')
 
 def run_about():
