@@ -9,11 +9,14 @@ all:
 	make -C src/shell
 	make -C src/spm
 	make -C src/spm-qt
+	make -C src/qfile
+	make -C src/qdesktop
+	make -C src/qresources
 
 check:
 	make -C src/libs check
 	make -C src/spm check
-	make -C src/spm-qt check	
+	make -C src/spm-qt check
 
 install:
 	make -C doc install
@@ -27,6 +30,9 @@ install:
 	make -C src/shell install
 	make -C src/spm install
 	make -C src/spm-qt install
+	make -C src/qfile install
+	make -C src/qdesktop install
+	make -C src/qresources install
 
 uninstall:
 	make -C doc uninstall
@@ -40,6 +46,9 @@ uninstall:
 	make -C src/shell uninstall
 	make -C src/spm uninstall
 	make -C src/spm-qt uninstall
+	make -C src/qfile uninstall
+	make -C src/qdesktop uninstall
+	make -C src/qresources uninstall
 
 clean:
 	make -C doc clean
@@ -51,6 +60,9 @@ clean:
 	make -C src/shell clean
 	make -C src/spm clean
 	make -C src/spm-qt clean
+	make -C src/qfile clean
+	make -C src/qdesktop clean
+	make -C src/qresources clean
 
 dist:
 	git archive HEAD --prefix=alive-$(VERSION)/ | xz > alive-$(VERSION).tar.xz

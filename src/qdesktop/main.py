@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import qdesktop
+import libqdesktop
 from PyQt4 import QtCore, QtGui
 import sys, os, shutil
 import libmisc
@@ -9,7 +9,7 @@ misc = libmisc.Misc()
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
-ui = qdesktop.Ui_MainWindow()
+ui = libqdesktop.Ui_MainWindow()
 ui.setupUi(MainWindow)
 
 # some variables

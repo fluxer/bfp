@@ -64,8 +64,8 @@
       <string>New</string>
      </property>
      <property name="icon">
-      <iconset resource="qdesktop.qrc">
-       <normaloff>:/usr/share/pfm/resources/add.svg</normaloff>:/usr/share/pfm/resources/add.svg</iconset>
+      <iconset resource="../qresources/libqresources.qrc">
+       <normaloff>:/usr/share/qresources/resources/add.svg</normaloff>:/usr/share/qresources/resources/add.svg</iconset>
      </property>
      <addaction name="actionFile"/>
      <addaction name="actionFolder"/>
@@ -75,8 +75,8 @@
       <string>Archvie</string>
      </property>
      <property name="icon">
-      <iconset resource="qdesktop.qrc">
-       <normaloff>:/usr/share/pfm/resources/application-x-compress.svg</normaloff>:/usr/share/pfm/resources/application-x-compress.svg</iconset>
+      <iconset resource="../qresources/libqresources.qrc">
+       <normaloff>:/usr/share/qresources/resources/application-x-compress.svg</normaloff>:/usr/share/qresources/resources/application-x-compress.svg</iconset>
      </property>
      <addaction name="actionDecompress"/>
      <addaction name="actionCompress_gzip"/>
@@ -96,6 +96,10 @@
     <addaction name="menuArchvie"/>
     <addaction name="separator"/>
     <addaction name="actionPreferences"/>
+    <addaction name="separator"/>
+    <addaction name="actionShutdown"/>
+    <addaction name="actionReboot"/>
+    <addaction name="actionLogout"/>
    </widget>
    <addaction name="menuActions"/>
   </widget>
@@ -106,8 +110,8 @@
   </action>
   <action name="actionOpen">
    <property name="icon">
-    <iconset resource="qdesktop.qrc">
-     <normaloff>:/usr/share/pfm/resources/fileopen.svg</normaloff>:/usr/share/pfm/resources/fileopen.svg</iconset>
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/fileopen.svg</normaloff>:/usr/share/qresources/resources/fileopen.svg</iconset>
    </property>
    <property name="text">
     <string>Open</string>
@@ -118,8 +122,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="qdesktop.qrc">
-     <normaloff>:/usr/share/pfm/resources/editcut.svg</normaloff>:/usr/share/pfm/resources/editcut.svg</iconset>
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/editcut.svg</normaloff>:/usr/share/qresources/resources/editcut.svg</iconset>
    </property>
    <property name="text">
     <string>Cut</string>
@@ -130,8 +134,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="qdesktop.qrc">
-     <normaloff>:/usr/share/pfm/resources/edit-copy.svg</normaloff>:/usr/share/pfm/resources/edit-copy.svg</iconset>
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/edit-copy.svg</normaloff>:/usr/share/qresources/resources/edit-copy.svg</iconset>
    </property>
    <property name="text">
     <string>Copy</string>
@@ -142,8 +146,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="qdesktop.qrc">
-     <normaloff>:/usr/share/pfm/resources/gtk-paste.svg</normaloff>:/usr/share/pfm/resources/gtk-paste.svg</iconset>
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/gtk-paste.svg</normaloff>:/usr/share/qresources/resources/gtk-paste.svg</iconset>
    </property>
    <property name="text">
     <string>Paste</string>
@@ -154,8 +158,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="qdesktop.qrc">
-     <normaloff>:/usr/share/pfm/resources/edit-rename.svg</normaloff>:/usr/share/pfm/resources/edit-rename.svg</iconset>
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/edit-rename.svg</normaloff>:/usr/share/qresources/resources/edit-rename.svg</iconset>
    </property>
    <property name="text">
     <string>Rename</string>
@@ -166,8 +170,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="qdesktop.qrc">
-     <normaloff>:/usr/share/pfm/resources/editdelete.svg</normaloff>:/usr/share/pfm/resources/editdelete.svg</iconset>
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/editdelete.svg</normaloff>:/usr/share/qresources/resources/editdelete.svg</iconset>
    </property>
    <property name="text">
     <string>Delete</string>
@@ -177,14 +181,18 @@
    <property name="enabled">
     <bool>false</bool>
    </property>
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/stock_properties.svg</normaloff>:/usr/share/qresources/resources/stock_properties.svg</iconset>
+   </property>
    <property name="text">
     <string>Properties</string>
    </property>
   </action>
   <action name="actionFile">
    <property name="icon">
-    <iconset resource="qdesktop.qrc">
-     <normaloff>:/usr/share/pfm/resources/filenew.svg</normaloff>:/usr/share/pfm/resources/filenew.svg</iconset>
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/filenew.svg</normaloff>:/usr/share/qresources/resources/filenew.svg</iconset>
    </property>
    <property name="text">
     <string>File</string>
@@ -192,8 +200,8 @@
   </action>
   <action name="actionFolder">
    <property name="icon">
-    <iconset resource="qdesktop.qrc">
-     <normaloff>:/usr/share/pfm/resources/folder_new.svg</normaloff>:/usr/share/pfm/resources/folder_new.svg</iconset>
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/folder_new.svg</normaloff>:/usr/share/qresources/resources/folder_new.svg</iconset>
    </property>
    <property name="text">
     <string>Folder</string>
@@ -204,8 +212,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="qdesktop.qrc">
-     <normaloff>:/usr/share/pfm/resources/cab_extract.svg</normaloff>:/usr/share/pfm/resources/cab_extract.svg</iconset>
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/application-x-compress.svg</normaloff>:/usr/share/qresources/resources/application-x-compress.svg</iconset>
    </property>
    <property name="text">
     <string>Decompress</string>
@@ -216,8 +224,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="qdesktop.qrc">
-     <normaloff>:/usr/share/pfm/resources/application-x-gzip.svg</normaloff>:/usr/share/pfm/resources/application-x-gzip.svg</iconset>
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/application-x-gzip.svg</normaloff>:/usr/share/qresources/resources/application-x-gzip.svg</iconset>
    </property>
    <property name="text">
     <string>Compress (gzip)</string>
@@ -228,8 +236,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="qdesktop.qrc">
-     <normaloff>:/usr/share/pfm/resources/application-x-bzip.svg</normaloff>:/usr/share/pfm/resources/application-x-bzip.svg</iconset>
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/application-x-bzip.svg</normaloff>:/usr/share/qresources/resources/application-x-bzip.svg</iconset>
    </property>
    <property name="text">
     <string>Compress (bzip2)</string>
@@ -240,8 +248,8 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="qdesktop.qrc">
-     <normaloff>:/usr/share/pfm/resources/application-x-compress.svg</normaloff>:/usr/share/pfm/resources/application-x-compress.svg</iconset>
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/application-x-compress.svg</normaloff>:/usr/share/qresources/resources/application-x-compress.svg</iconset>
    </property>
    <property name="text">
     <string>Compress (xz)</string>
@@ -249,16 +257,31 @@
   </action>
   <action name="actionPreferences">
    <property name="icon">
-    <iconset resource="qdesktop.qrc">
-     <normaloff>:/usr/share/pfm/resources/redhat-tools.svg</normaloff>:/usr/share/pfm/resources/redhat-tools.svg</iconset>
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/redhat-tools.svg</normaloff>:/usr/share/qresources/resources/redhat-tools.svg</iconset>
    </property>
    <property name="text">
     <string>Preferences</string>
    </property>
   </action>
+  <action name="actionLogout">
+   <property name="text">
+    <string>Logout</string>
+   </property>
+  </action>
+  <action name="actionShutdown">
+   <property name="text">
+    <string>Shutdown</string>
+   </property>
+  </action>
+  <action name="actionReboot">
+   <property name="text">
+    <string>Reboot</string>
+   </property>
+  </action>
  </widget>
  <resources>
-  <include location="qdesktop.qrc"/>
+  <include location="../qresources/libqresources.qrc"/>
  </resources>
  <connections/>
 </ui>

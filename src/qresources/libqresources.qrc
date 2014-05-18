@@ -1,5 +1,5 @@
 <RCC>
-  <qresource prefix="/usr/share/pfm">
+  <qresource prefix="/usr/share/qresources">
     <file>resources/application-x-compress.svg</file>
     <file>resources/application-x-gzip.svg</file>
     <file>resources/application-x-bzip.svg</file>

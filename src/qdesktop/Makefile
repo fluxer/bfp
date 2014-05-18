@@ -2,30 +2,24 @@ include ../../Makefile.inc
 
 all: clean
 	mkdir -p build
-	pyuic4 qdesktop.ui -o qdesktop.py
-	pyrcc4 qdesktop.qrc -o qdesktop_rc.py
-	$(CYTHON) -2 -D -t qdesktop.py -o build/qdesktop.c
-	$(CC) $(CFLAGS) -shared build/qdesktop.c -o build/qdesktop.so
-	$(CYTHON) -2 -D -t qdesktop_rc.py -o build/qdesktop_rc.c
-	$(CC) $(CFLAGS) -shared build/qdesktop_rc.c -o build/qdesktop_rc.so
+	pyuic4 qdesktop.ui -o libqdesktop.py
+	$(CYTHON) -2 -D -t libqdesktop.py -o build/libqdesktop.c
+	$(CC) $(CFLAGS) -shared build/libqdesktop.c -o build/libqdesktop.so
 	$(CYTHON) --embed -2 -D -t main.py -o build/main.c
 	$(CC) $(CFLAGS) build/main.c -o build/main
-	$(STRIP) build/qdesktop.so build/qdesktop_rc.so build/main
+	$(STRIP) build/libqdesktop.so build/main
 
 install:
-	$(INSTALL) -vdm755 $(DESTDIR)$(BINDIR) $(DESTDIR)$(SBINDIR) $(DESTDIR)$(ETCDIR)
-	$(INSTALL) -vm755 build/mkinitfs $(DESTDIR)$(SBINDIR)/mkinitfs
-	$(INSTALL) -vm755 build/lsinitfs $(DESTDIR)$(BINDIR)/lsinitfs
-	cp -a root $(DESTDIR)$(ETCDIR)/mkinitfs
-	cp -a files $(DESTDIR)$(ETCDIR)/mkinitfs
+	$(INSTALL) -vdm755 $(DESTDIR)$(BINDIR) $(DESTDIR)$(SITEDIR)
+	$(INSTALL) -vm644 build/libqdesktop.so $(DESTDIR)$(SITEDIR)/libqdesktop.so
+	$(INSTALL) -vm755 build/main $(DESTDIR)$(BINDIR)/qdesktop
 
 uninstall:
-	$(RM) $(DESTDIR)$(SBINDIR)/mkinitfs
-	$(RM) $(DESTDIR)$(BINDIR)/lsinitfs
-	$(RM) -r $(DESTDIR)$(ETCDIR)/mkinitfs
+	$(RM) $(DESTDIR)$(SITEDIR)/libqdesktop.so
+	$(RM) $(DESTDIR)$(BINDIR)/qdesktop
 
 clean:
 	$(RM) -r build/
-	$(RM) $(shell find . -name '*.pyc' -o -name '*.pyo')
+	$(RM) $(shell find . -name '*.pyc' -o -name '*.pyo') libqdesktop.py
 
 .PHONY: all install uninstall clean

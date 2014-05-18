@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import qfile
+import libqfile
 from PyQt4 import QtCore, QtGui
 import sys, os, shutil
 import libmisc
@@ -9,7 +9,7 @@ misc = libmisc.Misc()
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
-ui = qfile.Ui_MainWindow()
+ui = libqfile.Ui_MainWindow()
 ui.setupUi(MainWindow)
 
 model = QtGui.QFileSystemModel()
