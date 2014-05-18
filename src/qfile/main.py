@@ -134,12 +134,9 @@ def paste_directory():
                 svar_basename = check_exists(cur_dir + '/' + svar_basename)
                 if not svar_basename:
                     continue
-            print('Moving: ', svar, ' To: ', cur_dir)
-            shutil.copy2(svar, cur_dir + '/' + svar_basename)
-            if os.path.isdir(svar):
-                misc.dir_remove(svar)
-            else:
-                os.unlink(svar)
+            svar_copy = cur_dir + '/' + svar_basename
+            print('Moving: ', svar, ' To: ', svar_copy)
+            os.rename(svar, svar_copy)
     elif copy_dirs:
         for svar in copy_dirs:
             svar = str(svar)
@@ -148,8 +145,12 @@ def paste_directory():
                 svar_basename = check_exists(cur_dir + '/' + svar_basename)
                 if not svar_basename:
                     continue
-            print('Copying: ', svar, ' To: ', cur_dir + '/' + svar_basename)
-            shutil.copy2(svar, cur_dir + '/' + svar_basename)
+            svar_copy = cur_dir + '/' + svar_basename
+            print('Copying: ', svar, ' To: ', svar_copy)
+            if os.path.isdir(svar):
+                shutil.copytree(svar, svar_copy)
+            else:
+                shutil.copy2(svar, svar_copy)
     ui.actionPaste.setEnabled(False)
 
 def delete_directory():
