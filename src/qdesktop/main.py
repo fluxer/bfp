@@ -222,7 +222,7 @@ def file_properties():
     for sdir in ui.DesktopView.selectedIndexes():
         sfile = str(model.filePath(sdir))
         p = QtCore.QProcess()
-        p.start('qproperties ' + sfile)
+        p.startDetached('qproperties ' + sfile)
 
 # setup desktop view
 ui.DesktopView.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
@@ -271,7 +271,7 @@ def execute_program(sfile):
     program = x.DesktopEntry.getExec()
     print('Executing: ', program)
     p = QtCore.QProcess()
-    p.start(program)
+    p.startDetached(program)
 
 def show_menu(menu, depth=0, widget=ui.menuApplications):
     print(depth*"-" + "\x1b[01m" + menu.getName() + "\x1b[0m")

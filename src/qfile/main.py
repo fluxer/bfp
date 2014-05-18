@@ -56,7 +56,7 @@ def run_terminal():
     global p
     p = QtCore.QProcess()
     p.setWorkingDirectory(model.rootPath())
-    p.start('xterm')
+    p.startDetached('xterm')
 
 def run_about():
     QtGui.QMessageBox.about(MainWindow, "About", '<b>QFile v1.0.0</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
@@ -238,7 +238,7 @@ def file_properties():
     for sdir in ui.ViewWidget.selectedIndexes():
         sfile = str(model.filePath(sdir))
         p = QtCore.QProcess()
-        p.start('qproperties ' + sfile)
+        p.startDetached('qproperties ' + sfile)
 
 def enable_actions():
     selected_items = []
