@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'qfile.ui'
 #
-# Created: Sat May 17 16:30:50 2014
+# Created: Sun May 18 00:40:55 2014
 #      by: PyQt4 UI code generator 4.10.3
 #
 # WARNING! All changes made in this file will be lost!
@@ -201,8 +201,11 @@ class Ui_MainWindow(object):
         self.actionAsd = QtGui.QAction(MainWindow)
         self.actionAsd.setObjectName(_fromUtf8("actionAsd"))
         self.actionCompress_xz = QtGui.QAction(MainWindow)
+        self.actionCompress_xz.setEnabled(False)
+        self.actionCompress_xz.setIcon(icon5)
         self.actionCompress_xz.setObjectName(_fromUtf8("actionCompress_xz"))
         self.actionCompress_bzip2 = QtGui.QAction(MainWindow)
+        self.actionCompress_bzip2.setEnabled(False)
         icon23 = QtGui.QIcon()
         icon23.addPixmap(QtGui.QPixmap(_fromUtf8(":/usr/share/pfm/resources/application-x-bzip.svg")), QtGui.QIcon.Normal, QtGui.QIcon.Off)
         self.actionCompress_bzip2.setIcon(icon23)

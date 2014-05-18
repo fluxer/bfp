@@ -67,8 +67,9 @@ def change_back_directory():
 
 def change_mount_drectory():
     #change_directory(ui.MountsWidget.indexFromItem()) 
-    print isinstance(ui.MountsWidget.currentIndex())
+    #change_directory(ui.MountsWidget.currentIndex())
     #change_directory(ui.MountsWidget.currentItem())
+    pass
 
 def rename_directory():
     for svar in ui.ViewWidget.selectedIndexes():
@@ -77,12 +78,17 @@ def rename_directory():
         svar_dirname = os.path.dirname(svar)
 
         svar_new, ok = QtGui.QInputDialog.getText(MainWindow, "File Manager",
-                "New name:", QtGui.QLineEdit.Normal, svar_basename)
-        if ok and svar_new != '':
+            "New name:", QtGui.QLineEdit.Normal, svar_basename)
+        if ok and svar_new:
             pass
         else:
             return
 
+        svar_new = str(svar_new)
+        if os.path.exists(svar_dirname + '/' + svar_new):
+            svar_new = check_exists(svar_dirname + '/' + svar_new)
+            if not svar_new:
+                continue
         new_name = os.path.join(svar_dirname,str(svar_new))
         print('Renaming: ', svar, ' To: ', new_name)
         os.rename(svar, new_name)
@@ -105,13 +111,31 @@ def copy_directory():
         copy_dirs.append(model.filePath(sdir))
     ui.actionPaste.setEnabled(True)
 
+def check_exists(svar):
+    svar_basename = os.path.basename(svar)
+    svar_dirname = os.path.dirname(svar)
+    svar_basename, ok = QtGui.QInputDialog.getText(MainWindow, "File Manager",
+            "File/directory exists, new name:", QtGui.QLineEdit.Normal, svar_basename)
+    if ok and svar_basename:
+        if not os.path.exists(svar_dirname + '/' + svar_basename):
+            return svar_basename
+        else:
+            return check_exists(svar)
+    elif not ok:
+        return None
+
 def paste_directory():
     cur_dir = str(model.filePath(ui.ViewWidget.rootIndex()))
     if cut_dirs:
         for svar in cut_dirs:
             svar = str(svar)
+            svar_basename = os.path.basename(svar)
+            if os.path.exists(cur_dir + '/' + svar_basename):
+                svar_basename = check_exists(cur_dir + '/' + svar_basename)
+                if not svar_basename:
+                    continue
             print('Moving: ', svar, ' To: ', cur_dir)
-            shutil.copy2(svar, cur_dir)
+            shutil.copy2(svar, cur_dir + '/' + svar_basename)
             if os.path.isdir(svar):
                 misc.dir_remove(svar)
             else:
@@ -119,8 +143,13 @@ def paste_directory():
     elif copy_dirs:
         for svar in copy_dirs:
             svar = str(svar)
-            print('Copying: ', svar, ' To: ', cur_dir)
-            shutil.copy2(svar, cur_dir)
+            svar_basename = os.path.basename(svar)
+            if os.path.exists(cur_dir + '/' + svar_basename):
+                svar_basename = check_exists(cur_dir + '/' + svar_basename)
+                if not svar_basename:
+                    continue
+            print('Copying: ', svar, ' To: ', cur_dir + '/' + svar_basename)
+            shutil.copy2(svar, cur_dir + '/' + svar_basename)
     ui.actionPaste.setEnabled(False)
 
 def delete_directory():
