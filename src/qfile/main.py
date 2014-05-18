@@ -27,7 +27,6 @@ def disable_actions():
     ui.actionProperties.setEnabled(False)
 
 def change_directory(path=ui.ViewWidget.currentIndex()):
-    print path
     if not isinstance(path, QtCore.QString) and not isinstance(path, str):
         path = model.filePath(path)
     if not os.path.isdir(path):
@@ -63,7 +62,7 @@ def change_home():
     change_directory(QtCore.QDir.homePath())
 
 def change_back_directory():
-    change_directory(QtCore.QDir.absoluteFilePath(model.rootPath() + '/..'))
+    change_directory(os.path.realpath(str(model.rootPath()) + '/..'))
 
 def change_mount_drectory():
     #change_directory(ui.MountsWidget.indexFromItem()) 
