@@ -2,7 +2,7 @@
 
 import qfile
 from PyQt4 import QtCore, QtGui
-import sys, os, shutil, tarfile
+import sys, os, shutil
 import libmisc
 misc = libmisc.Misc()
 
@@ -46,6 +46,7 @@ q = QtGui.QFileIconProvider()
 model.setIconProvider(q)
 
 def run_terminal():
+    # FIXME: what about multiple processes???
     global p
     p = QtCore.QProcess()
     p.setWorkingDirectory(model.rootPath())
@@ -67,7 +68,7 @@ def change_back_directory():
     change_directory(os.path.realpath(str(model.rootPath()) + '/..'))
 
 def change_mount_drectory():
-    #change_directory(ui.MountsWidget.indexFromItem()) 
+    #change_directory(ui.MountsWidget.indexFromItem())
     #change_directory(ui.MountsWidget.currentIndex())
     #change_directory(ui.MountsWidget.currentItem())
     pass
@@ -90,7 +91,7 @@ def rename_directory():
             svar_new = check_exists(svar_dirname + '/' + svar_new)
             if not svar_new:
                 continue
-        new_name = os.path.join(svar_dirname,str(svar_new))
+        new_name = os.path.join(svar_dirname, str(svar_new))
         print('Renaming: ', svar, ' To: ', new_name)
         os.rename(svar, new_name)
 
@@ -155,22 +156,22 @@ def paste_directory():
     ui.actionPaste.setEnabled(False)
 
 def delete_directory():
-        for svar in ui.ViewWidget.selectedIndexes():
-            svar = str(model.filePath(svar))
-            reply = QtGui.QMessageBox.question(MainWindow, "File Manager ",
-                "Are you sure you want to delete <b>" + svar + "</b>? ", QtGui.QMessageBox.Yes | QtGui.QMessageBox.No | QtGui.QMessageBox.Cancel)
-            if reply == QtGui.QMessageBox.Yes:
-                pass
-            elif reply == QtGui.QMessageBox.No:
-                continue
-            else:
-                return
+    for svar in ui.ViewWidget.selectedIndexes():
+        svar = str(model.filePath(svar))
+        reply = QtGui.QMessageBox.question(MainWindow, "File Manager ",
+            "Are you sure you want to delete <b>" + svar + "</b>? ", QtGui.QMessageBox.Yes | QtGui.QMessageBox.No | QtGui.QMessageBox.Cancel)
+        if reply == QtGui.QMessageBox.Yes:
+            pass
+        elif reply == QtGui.QMessageBox.No:
+            continue
+        else:
+            return
 
-            print('Removing: ', svar)
-            if os.path.isdir(svar):
-                misc.dir_remove(svar)
-            else:
-                os.unlink(svar)
+        print('Removing: ', svar)
+        if os.path.isdir(svar):
+            misc.dir_remove(svar)
+        else:
+            os.unlink(svar)
 
 def extract_archives():
     selected_items = []
