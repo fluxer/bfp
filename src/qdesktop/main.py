@@ -68,7 +68,7 @@ def rename_directory():
         svar_basename = os.path.basename(svar)
         svar_dirname = os.path.dirname(svar)
 
-        svar_new, ok = QtGui.QInputDialog.getText(MainWindow, "File Manager",
+        svar_new, ok = QtGui.QInputDialog.getText(MainWindow, "Desktop Manager",
             "New name:", QtGui.QLineEdit.Normal, svar_basename)
         if ok and svar_new:
             pass
@@ -105,7 +105,7 @@ def copy_directory():
 def check_exists(svar):
     svar_basename = os.path.basename(svar)
     svar_dirname = os.path.dirname(svar)
-    svar_basename, ok = QtGui.QInputDialog.getText(MainWindow, "File Manager",
+    svar_basename, ok = QtGui.QInputDialog.getText(MainWindow, "Desktop Manager",
             "File/directory exists, new name:", QtGui.QLineEdit.Normal, svar_basename)
     if ok and svar_basename:
         if not os.path.exists(svar_dirname + '/' + svar_basename):
@@ -147,7 +147,7 @@ def paste_directory():
 def delete_directory():
     for svar in ui.DesktopView.selectedIndexes():
         svar = str(model.filePath(svar))
-        reply = QtGui.QMessageBox.question(MainWindow, "File Manager ",
+        reply = QtGui.QMessageBox.question(MainWindow, "Desktop Manager ",
             "Are you sure you want to delete <b>" + svar + "</b>? ", QtGui.QMessageBox.Yes | QtGui.QMessageBox.No | QtGui.QMessageBox.Cancel)
         if reply == QtGui.QMessageBox.Yes:
             pass
@@ -189,7 +189,7 @@ def compress_bzip2():
     misc.archive_compress(selected_items, sfile_archive, 'bz2', True)
 
 def new_file():
-    svar, ok = QtGui.QInputDialog.getText(MainWindow, "File Manager",
+    svar, ok = QtGui.QInputDialog.getText(MainWindow, "Desktop Manager",
         "Name:", QtGui.QLineEdit.Normal)
     svar = os.path.realpath(str(svar))
     if ok and svar:
@@ -202,7 +202,7 @@ def new_file():
         misc.file_write(os.path.realpath(svar), '')
 
 def new_directory():
-    svar, ok = QtGui.QInputDialog.getText(MainWindow, "File Manager",
+    svar, ok = QtGui.QInputDialog.getText(MainWindow, "Desktop Manager",
         "Name:", QtGui.QLineEdit.Normal)
     svar = os.path.realpath(str(svar))
     if ok and svar:
@@ -225,7 +225,7 @@ ui.menubar.hide()
 
 # setup background
 #ui.DesktopView.setStyleSheet("background-image: url(:/resources/image.jpg)")
-ui.DesktopView.setStyleSheet("background-image: url(/home/smil3y/Wallpapers/1515-11.jpg)  0 0 0 0 stretch stretch")
+ui.DesktopView.setStyleSheet("background-image: url(/home/smil3y/Wallpapers/1515-11.jpg)" 0 0 0 0 stretch stretch)
 #ui.DesktopView.update()
 
 # setup signals

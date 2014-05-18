@@ -41,8 +41,12 @@ def change_directory(path=ui.ViewWidget.currentIndex()):
     ui.AddressBar.setText(str(path))
     disable_actions()
 
+start_dir = QtCore.QDir.currentPath()
 ui.ViewWidget.setModel(model)
-change_directory(QtCore.QDir.currentPath())
+for arg in sys.argv:
+    if os.path.isdir(arg):
+         start_dir = arg
+change_directory(start_dir)
 
 q = QtGui.QFileIconProvider()
 model.setIconProvider(q)
