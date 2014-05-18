@@ -2,7 +2,7 @@
 
 import qfile
 from PyQt4 import QtCore, QtGui
-import sys, os, shutil
+import sys, os, shutil, tarfile
 import libmisc
 misc = libmisc.Misc()
 
@@ -25,6 +25,7 @@ def disable_actions():
     ui.actionCopy.setEnabled(False)
     ui.actionDelete.setEnabled(False)
     ui.actionProperties.setEnabled(False)
+    ui.actionDecompress.setEnabled(False)
 
 def change_directory(path=ui.ViewWidget.currentIndex()):
     if not isinstance(path, QtCore.QString) and not isinstance(path, str):
@@ -169,10 +170,22 @@ def delete_directory():
             else:
                 os.unlink(svar)
 
+def extract_archives():
+    selected_items = []
+    for sdir in ui.ViewWidget.selectedIndexes():
+        sfile = str(model.filePath(sdir))
+        if misc.archive_supported(sfile):
+            sfile_dirname = os.path.dirname(sfile)
+            print('Extracting: ', sfile, 'To: ', sfile_dirname)
+            misc.archive_decompress(sfile, sfile_dirname)
+
 def enable_actions():
     selected_items = []
     for sdir in ui.ViewWidget.selectedIndexes():
         selected_items.append(model.filePath(sdir))
+        if misc.archive_supported(str(model.filePath(sdir))):
+            ui.actionDecompress.setEnabled(True)
+
     if selected_items:
         ui.actionOpen.setEnabled(True)
         ui.actionRename.setEnabled(True)
@@ -193,6 +206,7 @@ ui.actionCut.triggered.connect(cut_directory)
 ui.actionCopy.triggered.connect(copy_directory)
 ui.actionPaste.triggered.connect(paste_directory)
 ui.actionDelete.triggered.connect(delete_directory)
+ui.actionDecompress.triggered.connect(extract_archives)
 ui.ViewWidget.doubleClicked.connect(change_directory)
 ui.ViewWidget.clicked.connect(enable_actions)
 ui.BackButton.clicked.connect(change_back_directory)

@@ -192,6 +192,14 @@ class Misc(object):
         else:
             self.fetch_internal(url, destination)
 
+    def archive_supported(self, sfile):
+        ''' Test if file is archive that can be handled properly '''
+        if os.path.isdir(sfile):
+            return False
+        if sfile.endswith('.xz') or sfile.endswith('.lzma') or tarfile.is_tarfile(sfile) or zipfile.is_zipfile(sfile):
+            return True
+        return False
+
     def archive_compress(self, variant, sfile, method='bz2'):
         ''' Create archive from directory '''
         dirname = os.path.dirname(sfile)
