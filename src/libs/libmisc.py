@@ -117,8 +117,15 @@ class Misc(object):
                     os.unlink(os.path.join(root, d))
         for root, dirs, files in os.walk(sdir, topdown=False):
             for d in dirs:
-                os.rmdir(os.path.join(root, d))
-        os.rmdir(sdir)
+                s = os.path.join(root, d)
+                if os.path.islink(s):
+                    os.unlink(s)
+                else:
+                    os.rmdir(s)
+        if os.path.islink(sdir):
+            os.unlink(sdir)
+        else:
+            os.rmdir(sdir)
 
     def dir_size(self, sdir):
         ''' Get size of directory '''
