@@ -265,11 +265,19 @@
    </property>
   </action>
   <action name="actionLogout">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/xfsm-logout.svg</normaloff>:/usr/share/qresources/resources/xfsm-logout.svg</iconset>
+   </property>
    <property name="text">
     <string>Logout</string>
    </property>
   </action>
   <action name="actionShutdown">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/exit.svg</normaloff>:/usr/share/qresources/resources/exit.svg</iconset>
+   </property>
    <property name="text">
     <string>Shutdown</string>
    </property>

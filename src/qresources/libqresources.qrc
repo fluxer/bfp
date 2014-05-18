@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="/usr/share/qresources">
+    <file>libqresources.qrc</file>
+    <file>resources/xfsm-logout.svg</file>
     <file>resources/application-x-compress.svg</file>
     <file>resources/application-x-gzip.svg</file>
     <file>resources/application-x-bzip.svg</file>

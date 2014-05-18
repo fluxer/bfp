@@ -187,10 +187,12 @@ ui.actionCopy.triggered.connect(copy_directory)
 ui.actionPaste.triggered.connect(paste_directory)
 ui.actionDelete.triggered.connect(delete_directory)
 ui.actionDecompress.triggered.connect(extract_archives)
+# FIXME: send signal to session leader
+ui.actionLogout.triggered.connect(sys.exit)
 ui.DesktopView.clicked.connect(enable_actions)
 
 # setup window
-MainWindow.setWindowFlags(QtCore.Qt.FramelessWindowHint)
+MainWindow.setWindowFlags(QtCore.Qt.FramelessWindowHint | QtCore.Qt.SplashScreen)
 MainWindow.setCentralWidget(ui.DesktopView)
 
 # run!
