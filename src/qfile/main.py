@@ -122,7 +122,9 @@ def copy_directory():
 def check_exists(svar):
     svar_basename = os.path.basename(svar)
     svar_dirname = os.path.dirname(svar)
-    svar_basename, ok = QtGui.QInputDialog.getText(MainWindow, "File Manager",
+    dialog = QtGui.QInputDialog()
+    # dialog.ComboBoxItems('das', 'asd')
+    svar_basename, ok = dialog.getText(MainWindow, "File Manager",
             "File/directory exists, new name:", QtGui.QLineEdit.Normal, svar_basename)
     if ok and svar_basename:
         if not os.path.exists(svar_dirname + '/' + svar_basename):
@@ -153,7 +155,7 @@ def paste_directory():
                 svar_basename = check_exists(cur_dir + '/' + svar_basename)
                 if not svar_basename:
                     continue
-            svar_copy = cur_dir + '/' + svar_basename
+            svar_copy = cur_dir + '/' + str(svar_basename)
             print('Copying: ', svar, ' To: ', svar_copy)
             if os.path.isdir(svar):
                 shutil.copytree(svar, svar_copy)
@@ -231,6 +233,13 @@ def new_directory():
         print('New directory: ', svar)
         misc.dir_create(svar)
 
+def file_properties():
+    global p
+    for sdir in ui.ViewWidget.selectedIndexes():
+        sfile = str(model.filePath(sdir))
+        p = QtCore.QProcess()
+        p.start('qproperties ' + sfile)
+
 def enable_actions():
     selected_items = []
     for sdir in ui.ViewWidget.selectedIndexes():
@@ -261,6 +270,7 @@ ui.actionCut.triggered.connect(cut_directory)
 ui.actionCopy.triggered.connect(copy_directory)
 ui.actionPaste.triggered.connect(paste_directory)
 ui.actionDelete.triggered.connect(delete_directory)
+ui.actionProperties.triggered.connect(file_properties)
 ui.actionFile.triggered.connect(new_file)
 ui.actionFolder.triggered.connect(new_directory)
 ui.actionDecompress.triggered.connect(extract_archives)

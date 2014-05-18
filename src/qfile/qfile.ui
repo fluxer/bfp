@@ -389,6 +389,9 @@
    </property>
   </action>
   <action name="actionPreferences">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
      <normaloff>:/usr/share/qresources/resources/redhat-tools.svg</normaloff>:/usr/share/qresources/resources/redhat-tools.svg</iconset>

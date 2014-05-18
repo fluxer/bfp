@@ -217,6 +217,13 @@ def new_directory():
 def change_directory():
     QtGui.QDesktopServices.openUrl(QtCore.QUrl(model.filePath(ui.DesktopView.currentIndex())))
 
+def file_properties():
+    global p
+    for sdir in ui.DesktopView.selectedIndexes():
+        sfile = str(model.filePath(sdir))
+        p = QtCore.QProcess()
+        p.start('qproperties ' + sfile)
+
 # setup desktop view
 ui.DesktopView.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
 ui.DesktopView.customContextMenuRequested.connect(enable_actions)
@@ -225,8 +232,7 @@ ui.menubar.hide()
 
 # setup background
 #ui.DesktopView.setStyleSheet("background-image: url(:/resources/image.jpg)")
-ui.DesktopView.setStyleSheet("background-image: url(/home/smil3y/Wallpapers/1515-11.jpg)" 0 0 0 0 stretch stretch)
-#ui.DesktopView.update()
+ui.DesktopView.setStyleSheet("background-image: url(/home/smil3y/Wallpapers/linux_splash_screen) 0 0 0 0 stretch stretch")
 
 # setup signals
 ui.DesktopView.doubleClicked.connect(change_directory)
@@ -236,6 +242,7 @@ ui.actionCut.triggered.connect(cut_directory)
 ui.actionCopy.triggered.connect(copy_directory)
 ui.actionPaste.triggered.connect(paste_directory)
 ui.actionDelete.triggered.connect(delete_directory)
+ui.actionProperties.triggered.connect(file_properties)
 ui.actionFile.triggered.connect(new_file)
 ui.actionFolder.triggered.connect(new_directory)
 ui.actionDecompress.triggered.connect(extract_archives)
@@ -256,8 +263,15 @@ import xdg.DesktopEntry
 
 smenu = xdg.Menu.parse('/etc/xdg/menus/kde-applications.menu')
 
-def execute(item='test'):
-    print item
+p = None
+def execute_program(sfile):
+    # FIXME: TryExec
+    global p
+    x = xdg.Menu.MenuEntry(sfile)
+    program = x.DesktopEntry.getExec()
+    print('Executing: ', program)
+    p = QtCore.QProcess()
+    p.start(program)
 
 def show_menu(menu, depth=0, widget=ui.menuApplications):
     print(depth*"-" + "\x1b[01m" + menu.getName() + "\x1b[0m")
@@ -266,14 +280,18 @@ def show_menu(menu, depth=0, widget=ui.menuApplications):
         if isinstance(entry, xdg.Menu.Menu):
             show_menu(entry, depth, ui.menuApplications.addMenu(str(entry)))
         elif isinstance(entry, xdg.Menu.MenuEntry):
-            print entry.DesktopEntry.getIcon()
             icon = QtGui.QIcon.fromTheme(entry.DesktopEntry.getIcon())
             name = entry.DesktopEntry.getName()
-            action = QtGui.QAction(icon, name, widget)
-            widget.addAction(action)
-            widget.connect(action, QtCore.SIGNAL("triggered(name)"), widget, QtCore.SLOT(execute(name)))
-            #print(depth*"-" + entry.DesktopEntry.getName())
-            #print(depth*" " + menu.getPath(), entry.DesktopFileID, entry.DesktopEntry.getFileName())
+            print entry.DesktopEntry.getFileName()
+            e = widget.addAction(icon, name)
+            MainWindow.connect(e, QtCore.SIGNAL('triggered()'),
+                    lambda sfile=entry.DesktopEntry.getFileName(): execute_program(sfile))
+            #action.triggered.connect(lambda: execute_program(entry.DesktopEntry.getFileName()))
+            #widget.addAction(action)
+            # entry.DesktopEntry.getName())
+            # menu.getPath()
+            # entry.DesktopFileID
+            # entry.DesktopEntry.getFileName())
         elif isinstance(entry, xdg.Menu.Separator):
             widget.addSeparator()
         elif isinstance(entry, xdg.Menu.Header):
@@ -281,10 +299,6 @@ def show_menu(menu, depth=0, widget=ui.menuApplications):
     depth -= 1
 
 show_menu(smenu)
-
-#menu = xdg.Menu.parse('/etc/xdg/menus/kde-applications.menu')
-#for entry in menu.getEntries():
-#    ui.menuApplications.addAction(str(entry)) # QIcon, QString
 
 # run!
 MainWindow.showMaximized()
