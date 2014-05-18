@@ -16,7 +16,6 @@ ui.setupUi(MainWindow)
 cut_dirs = None
 copy_dirs = []
 delete_dirs = []
-p = None
 
 # setup desktop widget
 model = QtGui.QFileSystemModel()
@@ -218,7 +217,6 @@ def change_directory():
     QtGui.QDesktopServices.openUrl(QtCore.QUrl(model.filePath(ui.DesktopView.currentIndex())))
 
 def file_properties():
-    global p
     for sdir in ui.DesktopView.selectedIndexes():
         sfile = str(model.filePath(sdir))
         p = QtCore.QProcess()
@@ -266,7 +264,6 @@ smenu = xdg.Menu.parse('/etc/xdg/menus/kde-applications.menu')
 p = None
 def execute_program(sfile):
     # FIXME: TryExec
-    global p
     x = xdg.Menu.MenuEntry(sfile)
     program = x.DesktopEntry.getExec()
     print('Executing: ', program)

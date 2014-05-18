@@ -16,7 +16,6 @@ model = QtGui.QFileSystemModel()
 cut_dirs = None
 copy_dirs = []
 delete_dirs = []
-p = None
 
 def disable_actions():
     ui.actionOpen.setEnabled(False)
@@ -52,8 +51,6 @@ q = QtGui.QFileIconProvider()
 model.setIconProvider(q)
 
 def run_terminal():
-    # FIXME: what about multiple processes???
-    global p
     p = QtCore.QProcess()
     p.setWorkingDirectory(model.rootPath())
     p.startDetached('xterm')
@@ -234,7 +231,6 @@ def new_directory():
         misc.dir_create(svar)
 
 def file_properties():
-    global p
     for sdir in ui.ViewWidget.selectedIndexes():
         sfile = str(model.filePath(sdir))
         p = QtCore.QProcess()
@@ -303,6 +299,3 @@ for device in misc.file_readlines('/proc/mounts'):
 # run!
 MainWindow.show()
 sys.exit(app.exec_())
-
-if p:
-    p.kill()
