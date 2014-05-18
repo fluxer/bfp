@@ -200,17 +200,31 @@ class Misc(object):
             return True
         return False
 
-    def archive_compress(self, variant, sfile, method='bz2'):
+    def archive_compress(self, variant, sfile, method='bz2', chdir=False):
         ''' Create archive from directory '''
         dirname = os.path.dirname(sfile)
         self.dir_create(dirname)
-        tar = tarfile.open(sfile, 'w:' + method)
-        if isinstance(variant, list) or isinstance(variant, tuple):
-            for item in variant:
-                tar.add(item)
-        else:
-            tar.add(variant, '')
-        tar.close()
+
+        # alotught bsdtar can (or should) handle Zip files we do not use it for them.
+        if method == 'xz' or method == 'lzma' or method == 'gz' or method == 'bz2':
+            bsdtar = self.whereis('bsdtar', fallback=False)
+            tar = self.whereis('tar')
+            if bsdtar:
+                command = [bsdtar, '-cpPf', sfile]
+                if chdir:
+                    command.extend(('-C', dirname))
+                for s in variant:
+                    command.append(os.path.basename(s))
+                subprocess.check_call(command)
+            else:
+                command = [tar, '-cphf', sfile]
+                if chdir:
+                    command.extend(('-C', dirname))
+                for s in variant:
+                    command.append(os.path.basename(s))
+                subprocess.check_call(command)
+        elif method == 'zip':
+            raise(Exception('Not supported yet'))
 
     def archive_decompress(self, sfile, sdir):
         ''' Extract archive to directory '''
