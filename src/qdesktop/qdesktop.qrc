@@ -1,0 +1,40 @@
+<RCC>
+  <qresource prefix="/usr/share/pfm">
+    <file>resources/application-x-compress.svg</file>
+    <file>resources/application-x-gzip.svg</file>
+    <file>resources/application-x-bzip.svg</file>
+    <file>resources/add.svg</file>
+    <file>resources/system-run.svg</file>
+    <file>resources/filenew.svg</file>
+    <file>resources/fileopen.svg</file>
+    <file>resources/folder_new.svg</file>
+    <file>resources/drive-harddisk.svg</file>
+    <file>resources/drive-optical.svg</file>
+    <file>resources/edit-rename.svg</file>
+    <file>resources/plugin-scale.svg</file>
+    <file>resources/gnome-settings-ui-behavior.svg</file>
+    <file>resources/go-home.svg</file>
+    <file>resources/redhat-tools.svg</file>
+    <file>resources/edit-select-all.svg</file>
+    <file>resources/back.svg</file>
+    <file>resources/editcut.svg</file>
+    <file>resources/editdelete.svg</file>
+    <file>resources/forward.svg</file>
+    <file>resources/find.svg</file>
+    <file>resources/go-home.svg</file>
+    <file>resources/gtk-edit.svg</file>
+    <file>resources/reload.svg</file>
+    <file>resources/stock_properties.svg</file>
+    <file>resources/computer.svg</file>
+    <file>resources/edit-copy.svg</file>
+    <file>resources/exit.svg</file>
+    <file>resources/stock_view-details.svg</file>
+    <file>resources/stock_help.svg</file>
+    <file>resources/utilities-terminal.svg</file>
+    <file>resources/desktop.svg</file>
+    <file>resources/gnome-home.svg</file>
+    <file>resources/archive-extract.svg</file>
+    <file>resources/cab_extract.svg</file>
+    <file>resources/gtk-paste.svg</file>
+  </qresource>
+</RCC>
