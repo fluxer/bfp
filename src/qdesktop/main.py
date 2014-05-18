@@ -21,9 +21,10 @@ p = None
 # setup desktop widget
 model = QtGui.QFileSystemModel()
 ui.DesktopView.setModel(model)
-root = model.setRootPath(str(QtGui.QDesktopServices.DesktopLocation))
-root = model.setRootPath(str(QtCore.QDir.homePath())+ '/Desktop')
+desktop = str(QtCore.QDir.homePath())+ '/Desktop'
+root = model.setRootPath(desktop)
 ui.DesktopView.setRootIndex(root)
+os.chdir(desktop)
 ui.DesktopView.setViewMode(ui.DesktopView.IconMode)
 
 # setup desktop menu
@@ -187,6 +188,32 @@ def compress_bzip2():
     print('Compressing: ', selected_items, 'To: ', sfile_archive)
     misc.archive_compress(selected_items, sfile_archive, 'bz2', True)
 
+def new_file():
+    svar, ok = QtGui.QInputDialog.getText(MainWindow, "File Manager",
+        "Name:", QtGui.QLineEdit.Normal)
+    svar = os.path.realpath(str(svar))
+    if ok and svar:
+        if os.path.exists(svar):
+            svar = check_exists(svar)
+            if not svar:
+                return
+        svar = str(svar)
+        print('New file: ', svar)
+        misc.file_write(os.path.realpath(svar), '')
+
+def new_directory():
+    svar, ok = QtGui.QInputDialog.getText(MainWindow, "File Manager",
+        "Name:", QtGui.QLineEdit.Normal)
+    svar = os.path.realpath(str(svar))
+    if ok and svar:
+        if os.path.isdir(svar):
+            svar = check_exists(svar)
+            if not svar:
+                return
+        svar = str(svar)
+        print('New directory: ', svar)
+        misc.dir_create(svar)
+
 def change_directory():
     QtGui.QDesktopServices.openUrl(QtCore.QUrl(model.filePath(ui.DesktopView.currentIndex())))
 
@@ -209,6 +236,8 @@ ui.actionCut.triggered.connect(cut_directory)
 ui.actionCopy.triggered.connect(copy_directory)
 ui.actionPaste.triggered.connect(paste_directory)
 ui.actionDelete.triggered.connect(delete_directory)
+ui.actionFile.triggered.connect(new_file)
+ui.actionFolder.triggered.connect(new_directory)
 ui.actionDecompress.triggered.connect(extract_archives)
 ui.actionCompressGzip.triggered.connect(compress_gzip)
 ui.actionCompressBzip2.triggered.connect(compress_bzip2)

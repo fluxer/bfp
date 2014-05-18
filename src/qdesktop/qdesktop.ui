@@ -22,6 +22,10 @@
   <property name="windowTitle">
    <string>QDesktop</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../qresources/libqresources.qrc">
+    <normaloff>:/usr/share/qresources/resources/plugin-scale.svg</normaloff>:/usr/share/qresources/resources/plugin-scale.svg</iconset>
+  </property>
   <property name="autoFillBackground">
    <bool>false</bool>
   </property>
