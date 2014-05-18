@@ -38,6 +38,8 @@ def disable_actions():
     ui.actionDelete.setEnabled(False)
     ui.actionProperties.setEnabled(False)
     ui.actionDecompress.setEnabled(False)
+    ui.actionCompressGzip.setEnabled(False)
+    ui.actionCompressBzip2.setEnabled(False)
 
 def enable_actions():
     selected_items = []
@@ -45,6 +47,9 @@ def enable_actions():
         selected_items.append(model.filePath(sdir))
         if misc.archive_supported(str(model.filePath(sdir))):
             ui.actionDecompress.setEnabled(True)
+        else:
+            ui.actionCompressGzip.setEnabled(True)
+            ui.actionCompressBzip2.setEnabled(True)
 
     if selected_items:
         ui.actionOpen.setEnabled(True)
@@ -164,6 +169,24 @@ def extract_archives():
             print('Extracting: ', sfile, 'To: ', sfile_dirname)
             misc.archive_decompress(sfile, sfile_dirname)
 
+def compress_gzip():
+    selected_items = []
+    for sdir in ui.DesktopView.selectedIndexes():
+        sfile = str(model.filePath(sdir))
+        selected_items.append(sfile)
+    sfile_archive = sfile + '.tar.gz'
+    print('Compressing: ', selected_items, 'To: ', sfile_archive)
+    misc.archive_compress(selected_items, sfile_archive, 'gz', True)
+
+def compress_bzip2():
+    selected_items = []
+    for sdir in ui.DesktopView.selectedIndexes():
+        sfile = str(model.filePath(sdir))
+        selected_items.append(sfile)
+    sfile_archive = sfile + '.tar.bz2'
+    print('Compressing: ', selected_items, 'To: ', sfile_archive)
+    misc.archive_compress(selected_items, sfile_archive, 'bz2', True)
+
 def change_directory():
     QtGui.QDesktopServices.openUrl(QtCore.QUrl(model.filePath(ui.DesktopView.currentIndex())))
 
@@ -187,6 +210,8 @@ ui.actionCopy.triggered.connect(copy_directory)
 ui.actionPaste.triggered.connect(paste_directory)
 ui.actionDelete.triggered.connect(delete_directory)
 ui.actionDecompress.triggered.connect(extract_archives)
+ui.actionCompressGzip.triggered.connect(compress_gzip)
+ui.actionCompressBzip2.triggered.connect(compress_bzip2)
 # FIXME: send signal to session leader
 ui.actionLogout.triggered.connect(sys.exit)
 ui.DesktopView.clicked.connect(enable_actions)
@@ -195,7 +220,43 @@ ui.DesktopView.clicked.connect(enable_actions)
 MainWindow.setWindowFlags(QtCore.Qt.FramelessWindowHint | QtCore.Qt.SplashScreen)
 MainWindow.setCentralWidget(ui.DesktopView)
 
+# create dynamic menu
+#from __future__ import print_function
+import xdg.Menu
+import xdg.DesktopEntry
+
+smenu = xdg.Menu.parse('/etc/xdg/menus/kde-applications.menu')
+
+def execute(item='test'):
+    print item
+
+def show_menu(menu, depth=0, widget=ui.menuApplications):
+    print(depth*"-" + "\x1b[01m" + menu.getName() + "\x1b[0m")
+    depth += 1
+    for entry in menu.getEntries():
+        if isinstance(entry, xdg.Menu.Menu):
+            show_menu(entry, depth, ui.menuApplications.addMenu(str(entry)))
+        elif isinstance(entry, xdg.Menu.MenuEntry):
+            print entry.DesktopEntry.getIcon()
+            icon = QtGui.QIcon.fromTheme(entry.DesktopEntry.getIcon())
+            name = entry.DesktopEntry.getName()
+            action = QtGui.QAction(icon, name, widget)
+            widget.addAction(action)
+            widget.connect(action, QtCore.SIGNAL("triggered(name)"), widget, QtCore.SLOT(execute(name)))
+            #print(depth*"-" + entry.DesktopEntry.getName())
+            #print(depth*" " + menu.getPath(), entry.DesktopFileID, entry.DesktopEntry.getFileName())
+        elif isinstance(entry, xdg.Menu.Separator):
+            widget.addSeparator()
+        elif isinstance(entry, xdg.Menu.Header):
+            print(depth*"-" + "\x1b[01m" + entry.Name + "\x1b[0m")
+    depth -= 1
+
+show_menu(smenu)
+
+#menu = xdg.Menu.parse('/etc/xdg/menus/kde-applications.menu')
+#for entry in menu.getEntries():
+#    ui.menuApplications.addAction(str(entry)) # QIcon, QString
+
 # run!
 MainWindow.showMaximized()
 sys.exit(app.exec_())
-

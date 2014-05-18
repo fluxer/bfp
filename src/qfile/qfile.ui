@@ -14,8 +14,8 @@
    <string>File Manager</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>:/usr/share/pfm/resources/computer.svg</normaloff>:/usr/share/pfm/resources/computer.svg</iconset>
+   <iconset resource="../qresources/libqresources.qrc">
+    <normaloff>:/usr/share/qresources/resources/computer.svg</normaloff>:/usr/share/qresources/resources/computer.svg</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QListView" name="MountsWidget">
@@ -175,9 +175,8 @@
        <normaloff>:/usr/share/qresources/resources/application-x-compress.svg</normaloff>:/usr/share/qresources/resources/application-x-compress.svg</iconset>
      </property>
      <addaction name="actionDecompress"/>
-     <addaction name="actionCompress"/>
-     <addaction name="actionCompress_bzip2"/>
-     <addaction name="actionCompress_xz"/>
+     <addaction name="actionCompressGzip"/>
+     <addaction name="actionCompressBzip2"/>
     </widget>
     <addaction name="actionOpen"/>
     <addaction name="separator"/>
@@ -335,7 +334,7 @@
     <string>Ctrl+P</string>
    </property>
   </action>
-  <action name="actionCompress">
+  <action name="actionCompressGzip">
    <property name="enabled">
     <bool>false</bool>
    </property>
@@ -459,7 +458,7 @@
     <string>Compress (xz)</string>
    </property>
   </action>
-  <action name="actionCompress_bzip2">
+  <action name="actionCompressBzip2">
    <property name="enabled">
     <bool>false</bool>
    </property>

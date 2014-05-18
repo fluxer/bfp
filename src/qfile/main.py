@@ -26,6 +26,8 @@ def disable_actions():
     ui.actionDelete.setEnabled(False)
     ui.actionProperties.setEnabled(False)
     ui.actionDecompress.setEnabled(False)
+    ui.actionCompressGzip.setEnabled(False)
+    ui.actionCompressBzip2.setEnabled(False)
 
 def change_directory(path=ui.ViewWidget.currentIndex()):
     if not isinstance(path, QtCore.QString) and not isinstance(path, str):
@@ -174,7 +176,6 @@ def delete_directory():
             os.unlink(svar)
 
 def extract_archives():
-    selected_items = []
     for sdir in ui.ViewWidget.selectedIndexes():
         sfile = str(model.filePath(sdir))
         if misc.archive_supported(sfile):
@@ -182,12 +183,33 @@ def extract_archives():
             print('Extracting: ', sfile, 'To: ', sfile_dirname)
             misc.archive_decompress(sfile, sfile_dirname)
 
+def compress_gzip():
+    selected_items = []
+    for sdir in ui.ViewWidget.selectedIndexes():
+        sfile = str(model.filePath(sdir))
+        selected_items.append(sfile)
+    sfile_archive = sfile + '.tar.gz'
+    print('Compressing: ', selected_items, 'To: ', sfile_archive)
+    misc.archive_compress(selected_items, sfile_archive, 'gz', True)
+
+def compress_bzip2():
+    selected_items = []
+    for sdir in ui.ViewWidget.selectedIndexes():
+        sfile = str(model.filePath(sdir))
+        selected_items.append(sfile)
+    sfile_archive = sfile + '.tar.bz2'
+    print('Compressing: ', selected_items, 'To: ', sfile_archive)
+    misc.archive_compress(selected_items, sfile_archive, 'bz2', True)
+
 def enable_actions():
     selected_items = []
     for sdir in ui.ViewWidget.selectedIndexes():
         selected_items.append(model.filePath(sdir))
         if misc.archive_supported(str(model.filePath(sdir))):
             ui.actionDecompress.setEnabled(True)
+        else:
+            ui.actionCompressGzip.setEnabled(True)
+            ui.actionCompressBzip2.setEnabled(True)
 
     if selected_items:
         ui.actionOpen.setEnabled(True)
@@ -210,6 +232,8 @@ ui.actionCopy.triggered.connect(copy_directory)
 ui.actionPaste.triggered.connect(paste_directory)
 ui.actionDelete.triggered.connect(delete_directory)
 ui.actionDecompress.triggered.connect(extract_archives)
+ui.actionCompressGzip.triggered.connect(compress_gzip)
+ui.actionCompressBzip2.triggered.connect(compress_bzip2)
 ui.ViewWidget.doubleClicked.connect(change_directory)
 ui.ViewWidget.clicked.connect(enable_actions)
 ui.BackButton.clicked.connect(change_back_directory)

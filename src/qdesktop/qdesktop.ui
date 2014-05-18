@@ -79,20 +79,39 @@
        <normaloff>:/usr/share/qresources/resources/application-x-compress.svg</normaloff>:/usr/share/qresources/resources/application-x-compress.svg</iconset>
      </property>
      <addaction name="actionDecompress"/>
-     <addaction name="actionCompress_gzip"/>
-     <addaction name="actionCompress_bzip2"/>
-     <addaction name="actionCompress_xz"/>
+     <addaction name="actionCompressGzip"/>
+     <addaction name="actionCompressBzip2"/>
     </widget>
-    <addaction name="actionOpen"/>
-    <addaction name="separator"/>
-    <addaction name="actionCut"/>
-    <addaction name="actionCopy"/>
-    <addaction name="actionPaste"/>
-    <addaction name="actionRename"/>
-    <addaction name="actionDelete"/>
-    <addaction name="actionProperties"/>
+    <widget class="QMenu" name="menuSelection">
+     <property name="title">
+      <string>Selection</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../qresources/libqresources.qrc">
+       <normaloff>:/usr/share/qresources/resources/gtk-edit.svg</normaloff>:/usr/share/qresources/resources/gtk-edit.svg</iconset>
+     </property>
+     <addaction name="actionOpen"/>
+     <addaction name="separator"/>
+     <addaction name="actionCut"/>
+     <addaction name="actionCopy"/>
+     <addaction name="actionPaste"/>
+     <addaction name="actionRename"/>
+     <addaction name="actionDelete"/>
+     <addaction name="actionProperties"/>
+    </widget>
+    <widget class="QMenu" name="menuApplications">
+     <property name="title">
+      <string>Applications</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../qresources/libqresources.qrc">
+       <normaloff>:/usr/share/qresources/resources/system-run.svg</normaloff>:/usr/share/qresources/resources/system-run.svg</iconset>
+     </property>
+    </widget>
+    <addaction name="menuApplications"/>
     <addaction name="separator"/>
     <addaction name="menuNew"/>
+    <addaction name="menuSelection"/>
     <addaction name="menuArchvie"/>
     <addaction name="separator"/>
     <addaction name="actionPreferences"/>
@@ -219,7 +238,7 @@
     <string>Decompress</string>
    </property>
   </action>
-  <action name="actionCompress_gzip">
+  <action name="actionCompressGzip">
    <property name="enabled">
     <bool>false</bool>
    </property>
@@ -231,7 +250,7 @@
     <string>Compress (gzip)</string>
    </property>
   </action>
-  <action name="actionCompress_bzip2">
+  <action name="actionCompressBzip2">
    <property name="enabled">
     <bool>false</bool>
    </property>
@@ -283,8 +302,17 @@
    </property>
   </action>
   <action name="actionReboot">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/system-reboot.svg</normaloff>:/usr/share/qresources/resources/system-reboot.svg</iconset>
+   </property>
    <property name="text">
     <string>Reboot</string>
+   </property>
+  </action>
+  <action name="actionDummy_2">
+   <property name="text">
+    <string>dummy</string>
    </property>
   </action>
  </widget>
