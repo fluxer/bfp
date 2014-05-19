@@ -1,13 +1,13 @@
 #!/usr/bin/python
 
-import libqproperties
+import qproperties_ui
 from PyQt4 import QtCore, QtGui
 import sys, os, pwd, grp
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
 Dialog = QtGui.QDialog()
-ui = libqproperties.Ui_Dialog()
+ui = qproperties_ui.Ui_Dialog()
 ui.setupUi(Dialog)
 
 sfile = QtCore.QDir.currentPath()
@@ -36,6 +36,14 @@ ui.executableBox.setCurrentIndex(index)
 ui.lastModifiedLabel.setText(QtCore.QDateTime.toString(info.lastModified()))
 ui.lastReadLabel.setText(QtCore.QDateTime.toString(info.lastRead()))
 ui.filePathLabel.setText(sfile)
+
+def save_permissions():
+    # FIXME: implement; possible failures
+    print('Saving permissions')
+    sys.exit()
+
+ui.okButton.clicked.connect(save_permissions)
+ui.cancelButton.clicked.connect(sys.exit)
 
 # run!
 Dialog.show()
