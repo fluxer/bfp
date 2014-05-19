@@ -1,21 +1,23 @@
 #!/usr/bin/python
 
-import libqfile
+import qfile_ui
 from PyQt4 import QtCore, QtGui
 import sys, os, shutil
 import libmisc
 misc = libmisc.Misc()
+import libqdesktop
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
-ui = libqfile.Ui_MainWindow()
+ui = qfile_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 
 model = QtGui.QFileSystemModel()
 cut_dirs = None
 copy_dirs = []
 delete_dirs = []
+actions = libqdesktop.Actions(MainWindow)
 
 def disable_actions():
     ui.actionOpen.setEnabled(False)
@@ -74,166 +76,68 @@ def change_home():
 def change_back_directory():
     change_directory(os.path.realpath(str(model.rootPath()) + '/..'))
 
-def rename_directory():
-    for svar in ui.ViewWidget.selectedIndexes():
-        svar = str(model.filePath(svar))
-        svar_basename = os.path.basename(svar)
-        svar_dirname = os.path.dirname(svar)
-
-        svar_new, ok = QtGui.QInputDialog.getText(MainWindow, "File Manager",
-            "New name:", QtGui.QLineEdit.Normal, svar_basename)
-        if ok and svar_new:
-            pass
-        else:
-            return
-
-        svar_new = str(svar_new)
-        if os.path.exists(svar_dirname + '/' + svar_new):
-            svar_new = check_exists(svar_dirname + '/' + svar_new)
-            if not svar_new:
-                continue
-        new_name = os.path.join(svar_dirname, str(svar_new))
-        print('Renaming: ', svar, ' To: ', new_name)
-        os.rename(svar, new_name)
-
 def cut_directory():
-    global cut_dirs
-    global copy_dirs
-    cut_dirs = []
-    for sdir in ui.ViewWidget.selectedIndexes():
-        cut_dirs.append(model.filePath(sdir))
-    copy_dirs = []
+    selected_items = []
+    for svar in ui.ViewWidget.selectedIndexes():
+        selected_items.append(str(model.filePath(svar)))
+    actions.cut_items(selected_items)
     ui.actionPaste.setEnabled(True)
 
 def copy_directory():
-    global cut_dirs
-    global copy_dirs
-    cut_dirs = []
-    copy_dirs = []
-    for sdir in ui.ViewWidget.selectedIndexes():
-        copy_dirs.append(model.filePath(sdir))
+    selected_items = []
+    for svar in ui.ViewWidget.selectedIndexes():
+        selected_items.append(str(model.filePath(svar)))
+    actions.copy_items(selected_items)
     ui.actionPaste.setEnabled(True)
 
-def check_exists(svar):
-    svar_basename = os.path.basename(svar)
-    svar_dirname = os.path.dirname(svar)
-    dialog = QtGui.QInputDialog()
-    # dialog.ComboBoxItems('das', 'asd')
-    svar_basename, ok = dialog.getText(MainWindow, "File Manager",
-            "File/directory exists, new name:", QtGui.QLineEdit.Normal, svar_basename)
-    if ok and svar_basename:
-        if not os.path.exists(svar_dirname + '/' + svar_basename):
-            return svar_basename
-        else:
-            return check_exists(svar)
-    elif not ok:
-        return None
-
 def paste_directory():
-    cur_dir = str(model.filePath(ui.ViewWidget.rootIndex()))
-    if cut_dirs:
-        for svar in cut_dirs:
-            svar = str(svar)
-            svar_basename = os.path.basename(svar)
-            if os.path.exists(cur_dir + '/' + svar_basename):
-                svar_basename = check_exists(cur_dir + '/' + svar_basename)
-                if not svar_basename:
-                    continue
-            svar_copy = cur_dir + '/' + svar_basename
-            print('Moving: ', svar, ' To: ', svar_copy)
-            os.rename(svar, svar_copy)
-    elif copy_dirs:
-        for svar in copy_dirs:
-            svar = str(svar)
-            svar_basename = os.path.basename(svar)
-            if os.path.exists(cur_dir + '/' + svar_basename):
-                svar_basename = check_exists(cur_dir + '/' + svar_basename)
-                if not svar_basename:
-                    continue
-            svar_copy = cur_dir + '/' + str(svar_basename)
-            print('Copying: ', svar, ' To: ', svar_copy)
-            if os.path.isdir(svar):
-                shutil.copytree(svar, svar_copy)
-            else:
-                shutil.copy2(svar, svar_copy)
+    selected_items = []
+    for svar in ui.ViewWidget.selectedIndexes():
+        selected_items.append(str(model.filePath(svar)))
+    actions.paste_items(selected_items)
     ui.actionPaste.setEnabled(False)
 
-def delete_directory():
+def rename_directory():
+    selected_items = []
     for svar in ui.ViewWidget.selectedIndexes():
-        svar = str(model.filePath(svar))
-        reply = QtGui.QMessageBox.question(MainWindow, "File Manager ",
-            "Are you sure you want to delete <b>" + svar + "</b>? ", QtGui.QMessageBox.Yes | QtGui.QMessageBox.No | QtGui.QMessageBox.Cancel)
-        if reply == QtGui.QMessageBox.Yes:
-            pass
-        elif reply == QtGui.QMessageBox.No:
-            continue
-        else:
-            return
+        selected_items.append(str(model.filePath(svar)))
+    actions.rename_items(selected_items)
 
-        print('Removing: ', svar)
-        if os.path.isdir(svar):
-            misc.dir_remove(svar)
-        else:
-            os.unlink(svar)
+def delete_directory():
+    selected_items = []
+    for svar in ui.ViewWidget.selectedIndexes():
+        selected_items.append(str(model.filePath(svar)))
+    actions.delete_items(selected_items)
+
+def file_properties():
+    selected_items = []
+    for svar in ui.ViewWidget.selectedIndexes():
+        selected_items.append(str(model.filePath(svar)))
+    actions.properties_items(selected_items)
+
+def new_file():
+    actions.new_file()
+
+def new_directory():
+    actions.new_directory()
 
 def extract_archives():
-    for sdir in ui.ViewWidget.selectedIndexes():
-        sfile = str(model.filePath(sdir))
-        if misc.archive_supported(sfile):
-            sfile_dirname = os.path.dirname(sfile)
-            print('Extracting: ', sfile, 'To: ', sfile_dirname)
-            misc.archive_decompress(sfile, sfile_dirname)
+    selected_items = []
+    for svar in ui.ViewWidget.selectedIndexes():
+        selected_items.append(str(model.filePath(svar)))
+    actions.extract_items(selected_items)
 
 def compress_gzip():
     selected_items = []
-    for sdir in ui.ViewWidget.selectedIndexes():
-        sfile = str(model.filePath(sdir))
-        selected_items.append(sfile)
-    sfile_archive = sfile + '.tar.gz'
-    print('Compressing: ', selected_items, 'To: ', sfile_archive)
-    misc.archive_compress(selected_items, sfile_archive, 'gz', True)
+    for svar in ui.ViewWidget.selectedIndexes():
+        selected_items.append(str(model.filePath(svar)))
+    actions.gzip_items(selected_items)
 
 def compress_bzip2():
     selected_items = []
-    for sdir in ui.ViewWidget.selectedIndexes():
-        sfile = str(model.filePath(sdir))
-        selected_items.append(sfile)
-    sfile_archive = sfile + '.tar.bz2'
-    print('Compressing: ', selected_items, 'To: ', sfile_archive)
-    misc.archive_compress(selected_items, sfile_archive, 'bz2', True)
-
-def new_file():
-    svar, ok = QtGui.QInputDialog.getText(MainWindow, "File Manager",
-        "Name:", QtGui.QLineEdit.Normal)
-    svar = os.path.realpath(str(svar))
-    if ok and svar:
-        if os.path.exists(svar):
-            svar = check_exists(svar)
-            if not svar:
-                return
-        svar = str(svar)
-        print('New file: ', svar)
-        misc.file_write(os.path.realpath(svar), '')
-
-def new_directory():
-    svar, ok = QtGui.QInputDialog.getText(MainWindow, "File Manager",
-        "Name:", QtGui.QLineEdit.Normal)
-    svar = os.path.realpath(str(svar))
-    if ok and svar:
-        if os.path.isdir(svar):
-            svar = check_exists(svar)
-            if not svar:
-                return
-        svar = str(svar)
-        print('New directory: ', svar)
-        misc.dir_create(svar)
-
-def file_properties():
-    for sdir in ui.ViewWidget.selectedIndexes():
-        sfile = str(model.filePath(sdir))
-        p = QtCore.QProcess()
-        p.startDetached('qproperties ' + sfile)
-        p.close()
+    for svar in ui.ViewWidget.selectedIndexes():
+        selected_items.append(str(model.filePath(svar)))
+    actions.bzip2_items(selected_items)
 
 def enable_actions():
     for sdir in ui.ViewWidget.selectedIndexes():

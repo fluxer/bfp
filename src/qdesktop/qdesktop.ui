@@ -42,6 +42,9 @@
       <height>279</height>
      </rect>
     </property>
+    <property name="styleSheet">
+     <string notr="true">color: rgb(179, 179, 179);</string>
+    </property>
     <property name="frameShape">
      <enum>QFrame::NoFrame</enum>
     </property>
