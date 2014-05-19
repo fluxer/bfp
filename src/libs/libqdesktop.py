@@ -38,7 +38,7 @@ class Menu(object):
         Exec = x.DesktopEntry.getExec()
 
         # if TryExec is set in .desktop execute it first
-        if tryExec:
+        if tryExec and not tryExec == Exec:
            general.execute_program(tryExec)
         # if it gets here fire up the program
         general.execute_program(Exec)
