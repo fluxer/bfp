@@ -18,7 +18,7 @@
     <normaloff>:/usr/share/qresources/resources/computer.svg</normaloff>:/usr/share/qresources/resources/computer.svg</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QListView" name="MountsWidget">
+   <widget class="QListWidget" name="MountsWidget">
     <property name="geometry">
      <rect>
       <x>10</x>
@@ -214,8 +214,14 @@
     <addaction name="menuView"/>
     <addaction name="actionPreferences"/>
    </widget>
+   <widget class="QMenu" name="menuDevices">
+    <property name="title">
+     <string>Devices</string>
+    </property>
+   </widget>
    <addaction name="menuMain"/>
    <addaction name="menuActions"/>
+   <addaction name="menuDevices"/>
    <addaction name="menuOptions"/>
    <addaction name="menuHelp"/>
   </widget>

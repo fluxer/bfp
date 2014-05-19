@@ -28,7 +28,12 @@ def disable_actions():
     ui.actionCompressGzip.setEnabled(False)
     ui.actionCompressBzip2.setEnabled(False)
 
-def change_directory(path=ui.ViewWidget.currentIndex()):
+def open_file():
+    for sfile in ui.ViewWidget.selectedIndexes():
+        sfile = str(model.filePath(sfile))
+        QtGui.QDesktopServices.openUrl(QtCore.QUrl(sfile))
+
+def change_directory(path=ui.ViewWidget.selectedIndexes()):
     if not isinstance(path, QtCore.QString) and not isinstance(path, str):
         path = model.filePath(path)
     if not os.path.isdir(path):
@@ -36,7 +41,7 @@ def change_directory(path=ui.ViewWidget.currentIndex()):
         return
     root = model.setRootPath(path)
     ui.ViewWidget.setRootIndex(root)
-    # ui.ViewWidget.sortItems()
+    # model.sortItems()
     ui.AddressBar.setText(str(path))
     disable_actions()
 
@@ -46,9 +51,6 @@ for arg in sys.argv:
     if os.path.isdir(arg):
          start_dir = arg
 change_directory(start_dir)
-
-q = QtGui.QFileIconProvider()
-model.setIconProvider(q)
 
 def run_terminal():
     p = QtCore.QProcess()
@@ -69,12 +71,6 @@ def change_home():
 
 def change_back_directory():
     change_directory(os.path.realpath(str(model.rootPath()) + '/..'))
-
-def change_mount_drectory():
-    #change_directory(ui.MountsWidget.indexFromItem())
-    #change_directory(ui.MountsWidget.currentIndex())
-    #change_directory(ui.MountsWidget.currentItem())
-    pass
 
 def rename_directory():
     for svar in ui.ViewWidget.selectedIndexes():
@@ -237,16 +233,14 @@ def file_properties():
         p.startDetached('qproperties ' + sfile)
 
 def enable_actions():
-    selected_items = []
     for sdir in ui.ViewWidget.selectedIndexes():
-        selected_items.append(model.filePath(sdir))
         if misc.archive_supported(str(model.filePath(sdir))):
             ui.actionDecompress.setEnabled(True)
         else:
             ui.actionCompressGzip.setEnabled(True)
             ui.actionCompressBzip2.setEnabled(True)
 
-    if selected_items:
+    if ui.ViewWidget.selectedIndexes():
         ui.actionOpen.setEnabled(True)
         ui.actionRename.setEnabled(True)
         ui.actionCut.setEnabled(True)
@@ -260,7 +254,7 @@ ui.actionQuit.triggered.connect(sys.exit)
 ui.actionAbout.triggered.connect(run_about)
 ui.actionIcons.triggered.connect(change_view_icons)
 ui.actionList.triggered.connect(change_view_list)
-ui.actionOpen.triggered.connect(change_directory)
+ui.actionOpen.triggered.connect(open_file)
 ui.actionRename.triggered.connect(rename_directory)
 ui.actionCut.triggered.connect(cut_directory)
 ui.actionCopy.triggered.connect(copy_directory)
@@ -272,14 +266,12 @@ ui.actionFolder.triggered.connect(new_directory)
 ui.actionDecompress.triggered.connect(extract_archives)
 ui.actionCompressGzip.triggered.connect(compress_gzip)
 ui.actionCompressBzip2.triggered.connect(compress_bzip2)
+# FIXME: open directory on enter
 ui.ViewWidget.doubleClicked.connect(change_directory)
 ui.ViewWidget.clicked.connect(enable_actions)
 ui.BackButton.clicked.connect(change_back_directory)
 ui.HomeButton.clicked.connect(change_home)
 ui.TerminalButton.clicked.connect(run_terminal)
-
-ui.MountsWidget.clicked.connect(change_mount_drectory)
-
 
 def show_popup():
     ui.menuActions.popup(QtGui.QCursor.pos())
@@ -288,12 +280,17 @@ ui.ViewWidget.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
 ui.ViewWidget.customContextMenuRequested.connect(enable_actions)
 ui.ViewWidget.customContextMenuRequested.connect(show_popup)
 
+def mount_device(device):
+    print device
 # show mounted filesystems
-s = QtGui.QStandardItemModel()
-for device in misc.file_readlines('/proc/mounts'):
-    if device.startswith('/'):
-        s.appendRow(QtGui.QStandardItem(QtGui.QIcon.fromTheme('drive-harddisk.svg'), device.split()[1]))
-        ui.MountsWidget.setModel(s)
+for device in os.listdir('/sys/class/block'):
+    if device.startswith('s') or device.startswith('h') or device.startswith('v'):
+        if os.path.exists('/sys/class/block/' + device + '/removable'):
+            continue
+        device = '/dev/' + device
+        icon = QtGui.QIcon('/home/smil3y/projects/bfp/src/qresources/resources/drive-harddisk.svg') # fromTheme
+        e = ui.menuDevices.addAction(icon, device)
+        MainWindow.connect(e, QtCore.SIGNAL('triggered()'), lambda device=device: mount_device(device))
 #ui.MountsWidget.sortItems()
 
 # run!

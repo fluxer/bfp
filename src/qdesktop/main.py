@@ -30,6 +30,11 @@ ui.DesktopView.setViewMode(ui.DesktopView.IconMode)
 def show_popup():
     ui.menuActions.popup(QtGui.QCursor.pos())
 
+def open_file():
+    for sfile in ui.ViewWidget.selectedIndexes():
+        sfile = str(model.filePath(sfile))
+        QtGui.QDesktopServices.openUrl(QtCore.QUrl(sfile))
+
 def disable_actions():
     ui.actionOpen.setEnabled(False)
     ui.actionRename.setEnabled(False)
@@ -42,16 +47,14 @@ def disable_actions():
     ui.actionCompressBzip2.setEnabled(False)
 
 def enable_actions():
-    selected_items = []
     for sdir in ui.DesktopView.selectedIndexes():
-        selected_items.append(model.filePath(sdir))
         if misc.archive_supported(str(model.filePath(sdir))):
             ui.actionDecompress.setEnabled(True)
         else:
             ui.actionCompressGzip.setEnabled(True)
             ui.actionCompressBzip2.setEnabled(True)
 
-    if selected_items:
+    if ui.DesktopView.selectedIndexes():
         ui.actionOpen.setEnabled(True)
         ui.actionRename.setEnabled(True)
         ui.actionCut.setEnabled(True)
@@ -233,8 +236,9 @@ ui.menubar.hide()
 ui.DesktopView.setStyleSheet("background-image: url(/home/smil3y/Wallpapers/linux_splash_screen) 0 0 0 0 stretch stretch")
 
 # setup signals
+# FIXME: open directory on enter
 ui.DesktopView.doubleClicked.connect(change_directory)
-ui.actionOpen.triggered.connect(change_directory)
+ui.actionOpen.triggered.connect(open_file)
 ui.actionRename.triggered.connect(rename_directory)
 ui.actionCut.triggered.connect(cut_directory)
 ui.actionCopy.triggered.connect(copy_directory)
@@ -279,7 +283,6 @@ def show_menu(menu, depth=0, widget=ui.menuApplications):
         elif isinstance(entry, xdg.Menu.MenuEntry):
             icon = QtGui.QIcon.fromTheme(entry.DesktopEntry.getIcon())
             name = entry.DesktopEntry.getName()
-            print entry.DesktopEntry.getFileName()
             e = widget.addAction(icon, name)
             MainWindow.connect(e, QtCore.SIGNAL('triggered()'),
                     lambda sfile=entry.DesktopEntry.getFileName(): execute_program(sfile))
