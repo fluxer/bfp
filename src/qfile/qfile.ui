@@ -1,147 +1,155 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
+ <author>SmiL3y</author>
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>663</width>
-    <height>470</height>
+    <width>586</width>
+    <height>401</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>File Manager</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../qresources/libqresources.qrc">
-    <normaloff>:/usr/share/qresources/resources/computer.svg</normaloff>:/usr/share/qresources/resources/computer.svg</iconset>
+    <normaloff>:/usr/share/qresources/resources/file-manager.svg</normaloff>:/usr/share/qresources/resources/file-manager.svg</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QListWidget" name="MountsWidget">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>60</y>
-      <width>141</width>
-      <height>361</height>
-     </rect>
-    </property>
-    <property name="editTriggers">
-     <set>QAbstractItemView::NoEditTriggers</set>
-    </property>
-   </widget>
-   <widget class="QListView" name="ViewWidget">
-    <property name="geometry">
-     <rect>
-      <x>170</x>
-      <y>60</y>
-      <width>481</width>
-      <height>361</height>
-     </rect>
-    </property>
-    <property name="contextMenuPolicy">
-     <enum>Qt::CustomContextMenu</enum>
-    </property>
-    <property name="acceptDrops">
-     <bool>true</bool>
-    </property>
-    <property name="dragEnabled">
-     <bool>true</bool>
-    </property>
-    <property name="dragDropMode">
-     <enum>QAbstractItemView::DragDrop</enum>
-    </property>
-    <property name="defaultDropAction">
-     <enum>Qt::CopyAction</enum>
-    </property>
-    <property name="selectionMode">
-     <enum>QAbstractItemView::ExtendedSelection</enum>
-    </property>
-    <property name="selectionBehavior">
-     <enum>QAbstractItemView::SelectItems</enum>
-    </property>
-    <property name="movement">
-     <enum>QListView::Snap</enum>
-    </property>
-    <property name="resizeMode">
-     <enum>QListView::Adjust</enum>
-    </property>
-    <property name="viewMode">
-     <enum>QListView::IconMode</enum>
-    </property>
-   </widget>
-   <widget class="QCommandLinkButton" name="BackButton">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>10</y>
-      <width>41</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="icon">
-     <iconset resource="../qresources/libqresources.qrc">
-      <normaloff>:/usr/share/qresources/resources/back.svg</normaloff>:/usr/share/qresources/resources/back.svg</iconset>
-    </property>
-   </widget>
-   <widget class="QCommandLinkButton" name="TerminalButton">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>10</y>
-      <width>41</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="icon">
-     <iconset resource="../qresources/libqresources.qrc">
-      <normaloff>:/usr/share/qresources/resources/utilities-terminal.svg</normaloff>:/usr/share/qresources/resources/utilities-terminal.svg</iconset>
-    </property>
-   </widget>
-   <widget class="QCommandLinkButton" name="HomeButton">
-    <property name="geometry">
-     <rect>
-      <x>60</x>
-      <y>10</y>
-      <width>41</width>
-      <height>41</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-    <property name="icon">
-     <iconset resource="../qresources/libqresources.qrc">
-      <normaloff>:/usr/share/qresources/resources/go-home.svg</normaloff>:/usr/share/qresources/resources/go-home.svg</iconset>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="AddressBar">
-    <property name="geometry">
-     <rect>
-      <x>170</x>
-      <y>20</y>
-      <width>481</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="readOnly">
-     <bool>true</bool>
-    </property>
-   </widget>
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QCommandLinkButton" name="BackButton">
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>10</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="../qresources/libqresources.qrc">
+        <normaloff>:/usr/share/qresources/resources/back.svg</normaloff>:/usr/share/qresources/resources/back.svg</iconset>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="1">
+     <widget class="QCommandLinkButton" name="HomeButton">
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>10</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="../qresources/libqresources.qrc">
+        <normaloff>:/usr/share/qresources/resources/go-home.svg</normaloff>:/usr/share/qresources/resources/go-home.svg</iconset>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="2">
+     <widget class="QCommandLinkButton" name="TerminalButton">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="minimumSize">
+       <size>
+        <width>40</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>10</width>
+        <height>16777215</height>
+       </size>
+      </property>
+      <property name="text">
+       <string/>
+      </property>
+      <property name="icon">
+       <iconset resource="../qresources/libqresources.qrc">
+        <normaloff>:/usr/share/qresources/resources/utilities-terminal.svg</normaloff>:/usr/share/qresources/resources/utilities-terminal.svg</iconset>
+      </property>
+     </widget>
+    </item>
+    <item row="0" column="3">
+     <widget class="QLineEdit" name="AddressBar">
+      <property name="readOnly">
+       <bool>true</bool>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0" colspan="4">
+     <widget class="QListView" name="ViewWidget">
+      <property name="contextMenuPolicy">
+       <enum>Qt::CustomContextMenu</enum>
+      </property>
+      <property name="acceptDrops">
+       <bool>true</bool>
+      </property>
+      <property name="dragEnabled">
+       <bool>true</bool>
+      </property>
+      <property name="dragDropMode">
+       <enum>QAbstractItemView::DragDrop</enum>
+      </property>
+      <property name="defaultDropAction">
+       <enum>Qt::CopyAction</enum>
+      </property>
+      <property name="selectionMode">
+       <enum>QAbstractItemView::ExtendedSelection</enum>
+      </property>
+      <property name="selectionBehavior">
+       <enum>QAbstractItemView::SelectItems</enum>
+      </property>
+      <property name="movement">
+       <enum>QListView::Snap</enum>
+      </property>
+      <property name="resizeMode">
+       <enum>QListView::Adjust</enum>
+      </property>
+      <property name="viewMode">
+       <enum>QListView::IconMode</enum>
+      </property>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>663</width>
+     <width>586</width>
      <height>21</height>
     </rect>
    </property>
@@ -484,4 +492,21 @@
   <include location="../qresources/libqresources.qrc"/>
  </resources>
  <connections/>
+ <designerdata>
+  <property name="gridDeltaX">
+   <number>5</number>
+  </property>
+  <property name="gridDeltaY">
+   <number>5</number>
+  </property>
+  <property name="gridSnapX">
+   <bool>true</bool>
+  </property>
+  <property name="gridSnapY">
+   <bool>true</bool>
+  </property>
+  <property name="gridVisible">
+   <bool>true</bool>
+  </property>
+ </designerdata>
 </ui>

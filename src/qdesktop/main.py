@@ -224,6 +224,25 @@ def file_properties():
         sfile = str(model.filePath(sdir))
         p = QtCore.QProcess()
         p.startDetached('qproperties ' + sfile)
+        p.close()
+
+def run_terminal():
+    p = QtCore.QProcess()
+    p.setWorkingDirectory(QtCore.QDir.homePath())
+    p.startDetached('xterm')
+    p.close()
+
+def run_filemanager():
+    p = QtCore.QProcess()
+    p.setWorkingDirectory(QtCore.QDir.homePath())
+    p.startDetached('qfile')
+    p.close()
+
+def run_webbrowser():
+    p = QtCore.QProcess()
+    p.setWorkingDirectory(QtCore.QDir.homePath())
+    p.startDetached('qupzilla')
+    p.close()
 
 # setup desktop view
 ui.DesktopView.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
@@ -250,6 +269,9 @@ ui.actionFolder.triggered.connect(new_directory)
 ui.actionDecompress.triggered.connect(extract_archives)
 ui.actionCompressGzip.triggered.connect(compress_gzip)
 ui.actionCompressBzip2.triggered.connect(compress_bzip2)
+ui.actionTerminal.triggered.connect(run_terminal)
+ui.actionFileManager.triggered.connect(run_filemanager)
+ui.actionWebBrowser.triggered.connect(run_webbrowser)
 # FIXME: send signal to session leader
 ui.actionLogout.triggered.connect(sys.exit)
 ui.DesktopView.clicked.connect(enable_actions)
@@ -273,6 +295,7 @@ def execute_program(sfile):
     print('Executing: ', program)
     p = QtCore.QProcess()
     p.startDetached(program)
+    p.close()
 
 def show_menu(menu, depth=0, widget=ui.menuApplications):
     print(depth*"-" + "\x1b[01m" + menu.getName() + "\x1b[0m")
@@ -295,7 +318,7 @@ def show_menu(menu, depth=0, widget=ui.menuApplications):
         elif isinstance(entry, xdg.Menu.Separator):
             widget.addSeparator()
         elif isinstance(entry, xdg.Menu.Header):
-            print(depth*"-" + "\x1b[01m" + entry.Name + "\x1b[0m")
+            pass
     depth -= 1
 
 show_menu(smenu)

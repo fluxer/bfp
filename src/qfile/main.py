@@ -41,6 +41,7 @@ def change_directory(path=ui.ViewWidget.selectedIndexes()):
         return
     root = model.setRootPath(path)
     ui.ViewWidget.setRootIndex(root)
+    os.chdir(path)
     # model.sortItems()
     ui.AddressBar.setText(str(path))
     disable_actions()
@@ -56,6 +57,7 @@ def run_terminal():
     p = QtCore.QProcess()
     p.setWorkingDirectory(model.rootPath())
     p.startDetached('xterm')
+    p.close()
 
 def run_about():
     QtGui.QMessageBox.about(MainWindow, "About", '<b>QFile v1.0.0</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
@@ -231,6 +233,7 @@ def file_properties():
         sfile = str(model.filePath(sdir))
         p = QtCore.QProcess()
         p.startDetached('qproperties ' + sfile)
+        p.close()
 
 def enable_actions():
     for sdir in ui.ViewWidget.selectedIndexes():
