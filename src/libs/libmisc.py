@@ -152,6 +152,16 @@ class Misc(object):
                 slist.append(os.path.join(root, sdir))
         return slist
 
+    def list_all(self, directory):
+        ''' Get list of directories in directory recursively '''
+        slist = []
+        for root, subdirs, files in os.walk(directory):
+            for sdir in subdirs:
+                slist.append(os.path.join(root, sdir))
+            for sfile in files:
+                slist.append(os.path.join(root, sfile))
+        return slist
+
     def fetch_check(self, url, destination):
         ''' Check if remote file and file sizes are equal '''
         # not all requests can get content-lenght , this means that there is no way

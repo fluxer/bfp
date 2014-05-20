@@ -152,6 +152,12 @@ def run_webbrowser():
     p.startDetached('qupzilla')
     p.close()
 
+def run_preferences():
+    p = QtCore.QProcess()
+    p.setWorkingDirectory(QtCore.QDir.homePath())
+    p.startDetached('qsettings')
+    p.close()
+
 # setup desktop view
 ui.DesktopView.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
 ui.DesktopView.customContextMenuRequested.connect(enable_actions)
@@ -179,6 +185,7 @@ ui.actionCompressBzip2.triggered.connect(compress_bzip2)
 ui.actionTerminal.triggered.connect(run_terminal)
 ui.actionFileManager.triggered.connect(run_filemanager)
 ui.actionWebBrowser.triggered.connect(run_webbrowser)
+ui.actionPreferences.triggered.connect(run_preferences)
 # FIXME: send signal to session leader
 ui.actionLogout.triggered.connect(sys.exit)
 ui.DesktopView.clicked.connect(enable_actions)
