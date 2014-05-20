@@ -222,24 +222,25 @@ class Misc(object):
         dirname = os.path.dirname(sfile)
         self.dir_create(dirname)
 
+        if isinstance(variant, str):
+            variant = [variant]
+
         # alotught bsdtar can (or should) handle Zip files we do not use it for them.
         if method == 'xz' or method == 'lzma' or method == 'gz' or method == 'bz2':
             bsdtar = self.whereis('bsdtar', fallback=False)
             tar = self.whereis('tar')
             if bsdtar:
                 command = [bsdtar, '-cpPf', sfile]
-                if chdir:
-                    command.extend(('-C', dirname))
-                for s in variant:
-                    command.append(os.path.basename(s))
-                subprocess.check_call(command)
             else:
                 command = [tar, '-cphf', sfile]
+            if chdir:
+                command.extend(('-C', dirname))
+            for s in variant:
                 if chdir:
-                    command.extend(('-C', dirname))
-                for s in variant:
                     command.append(os.path.basename(s))
-                subprocess.check_call(command)
+                else:
+                    command.append(s)
+            subprocess.check_call(command)
         elif method == 'zip':
             raise(Exception('Not supported yet'))
 
