@@ -2,7 +2,7 @@
 
 import qdesktop_ui
 from PyQt4 import QtCore, QtGui
-import sys, os, shutil
+import sys, os
 import libmisc
 misc = libmisc.Misc()
 import libqdesktop
@@ -132,7 +132,6 @@ def compress_bzip2():
 
 def change_directory():
     QtGui.QDesktopServices.openUrl(QtCore.QUrl(model.filePath(ui.DesktopView.currentIndex())))
-        
 
 def run_terminal():
     p = QtCore.QProcess()
