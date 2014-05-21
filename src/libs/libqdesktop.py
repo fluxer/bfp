@@ -24,52 +24,19 @@ general = General()
 
 class Config(object):
     def __init__(self):
-        self.conf_dir = str(QtCore.QDir.homePath()) + '/.qdesktop'
-        self.conf_file = self.conf_dir + '/desktop.conf'
-        if not os.path.isdir(self.conf_dir):
-            misc.dir_create(self.conf_dir)
-
-        self.GENERAL_STYLESHEET = ''
-        self.GENERAL_ICONTHEME = ''
-        self.MENU_FILE = '/etc/xdg/menus/kde-applications.menu'
-        self.WALLPAPER_IMAGE = ''
-        self.WALLPAPER_STYLE = 'stretch'
-        self.WALLPAPER_COLOR = '#b4b4b4'
-
-        self.config = ConfigParser.SafeConfigParser()
+        self.settings = QtCore.QSettings('qdesktop')
         self.read()
 
     def read(self):
-        # FIXME: check for sectons and options, re-write config or correct if requred to avoid exceptions
-        if os.path.isfile(self.conf_file):
-            self.conf_fd = open(self.conf_file, 'r')
-            self.config.readfp(self.conf_fd)
-            self.GENERAL_STYLESHEET = self.config.get('general', 'STYLESHEET')
-            self.GENERAL_ICONTHEME = self.config.get('general', 'ICONTHEME')
-            self.MENU_FILE = self.config.get('general', 'MENU')
-            self.WALLPAPER_IMAGE = self.config.get('wallpaper', 'IMAGE')
-            self.WALLPAPER_STYLE = self.config.get('wallpaper', 'STYLE')
-            self.WALLPAPER_COLOR = self.config.get('wallpaper', 'COLOR')
-        else:
-            self.conf_fd = open(self.conf_file, 'a')
-            self.config.add_section('general')
-            self.config.set('general', 'STYLESHEET', self.GENERAL_STYLESHEET)
-            self.config.set('general', 'ICONTHEME', self.GENERAL_ICONTHEME)
-            self.config.set('general', 'MENU', self.MENU_FILE)
-            self.config.add_section('wallpaper')
-            self.config.set('wallpaper', 'IMAGE', self.WALLPAPER_IMAGE)
-            self.config.set('wallpaper', 'STYLE', self.WALLPAPER_STYLE)
-            self.config.set('wallpaper', 'COLOR', self.WALLPAPER_COLOR)
-            self.write()
+        self.GENERAL_STYLESHEET = str(self.settings.value('general/stylesheet', '').toString())
+        self.GENERAL_ICONTHEME = str(self.settings.value('general/icontheme', '').toString())
+        self.MENU_FILE = str(self.settings.value('general/menu', '/etc/xdg/menus/kde-applications.menu').toString())
+        self.WALLPAPER_IMAGE = str(self.settings.value('wallpaper/image', '').toString())
+        self.WALLPAPER_STYLE = str(self.settings.value('wallpaper/style', 'stretch').toString())
+        self.WALLPAPER_COLOR = str(self.settings.value('wallpaper/color', '#b4b4b4').toString())
 
-    def write(self):
-        self.conf_fd = open(self.conf_file, 'w')
-        self.config.write(self.conf_fd)
-
-    def change(self, section, option, value):
-        self.read()
-        self.config.set(section, option, value)
-        self.write()
+    def write(self, variable, value):
+        self.settings.setValue(variable, value)
 
 config = Config()
 

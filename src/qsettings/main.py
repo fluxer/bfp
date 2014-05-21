@@ -14,6 +14,9 @@ MainWindow = QtGui.QMainWindow()
 ui = qsettings_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 
+fifo = '/tmp/qdesktop.fifo'
+misc.ipc_create(fifo, 100)
+
 index = ui.WallpaperModeBox.findText(config.WALLPAPER_STYLE)
 ui.WallpaperModeBox.setCurrentIndex(index)
 
@@ -26,17 +29,17 @@ def setWallpaperStyle():
 def setImageWallpaper(simage):
     path = ''
     style = str(ui.WallpaperModeBox.currentText())
-    print style
     if not simage:
         simage = QtGui.QFileDialog.getOpenFileName(MainWindow,
                 "Choose",
                 QtCore.QDir.homePath(),
-                "Image Files (*.jpg;*.png;*.jpeg);;All Files (*);;")
+                "Image Files (*.jpg *.png *.jpeg);;All Files (*);;")
         simage = str(simage)
     path = os.path.dirname(simage)
     ui.WallpaperView.setStyleSheet("border-image: url(" + simage + ") 0 0 0 0 " + style + " " + style + ";")
-    config.change('wallpaper', 'IMAGE', simage)
-    config.change('wallpaper', 'STYLE', style)
+    config.write('wallpaper/image', simage)
+    config.write('wallpaper/style', style)
+    misc.ipc_write(fifo, 'update')
 
 def setColorWallpaper(scolor):
     if not scolor:
@@ -44,8 +47,8 @@ def setColorWallpaper(scolor):
         if scolor.isValid():
             scolor = str(scolor.name())
     ui.WallpaperView.setStyleSheet("background-color: " + scolor + ";")
-    config.change('wallpaper', 'IMAGE', '')
-    config.change('wallpaper', 'COLOR', str(scolor))
+    config.write('wallpaper/image', '')
+    config.write('wallpaper/color', str(scolor))
 
 if config.WALLPAPER_IMAGE:
     setImageWallpaper(config.WALLPAPER_IMAGE)

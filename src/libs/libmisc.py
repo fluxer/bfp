@@ -300,10 +300,10 @@ class Misc(object):
         ''' Create fifo for communication '''
         if not os.path.exists(fifo):
             os.mkfifo(fifo, mode)
-        # set owner of IPC to root:<group>
-        os.chown(fifo, 0, group)
+        # set owner of IPC to <group>:<group>
+        # os.chown(fifo, group, group)
         # sadly, something is wrong with mkfifo permissions set
-        os.chmod(fifo, mode)
+        # os.chmod(fifo, mode)
 
     def ipc_read(self, fifo):
         ''' Read IPC and return a tuple of service and action '''

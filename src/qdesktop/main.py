@@ -2,7 +2,7 @@
 
 import qdesktop_ui
 from PyQt4 import QtCore, QtGui
-import sys, os
+import sys, os, time
 import libmisc
 misc = libmisc.Misc()
 import libqdesktop
@@ -28,6 +28,28 @@ root = model.setRootPath(desktop)
 ui.DesktopView.setRootIndex(root)
 os.chdir(desktop)
 ui.DesktopView.setViewMode(ui.DesktopView.IconMode)
+
+def setWallpaper():
+    global config
+    config = libqdesktop.Config()
+    if config.WALLPAPER_IMAGE:
+        ui.DesktopView.setStyleSheet("border-image: url(" + config.WALLPAPER_IMAGE + ") 0 0 0 0 " + config.WALLPAPER_STYLE + " " + config.WALLPAPER_STYLE + "; color: rgb(179, 179, 179);")
+    else:
+        ui.DesktopView.setStyleSheet("background-color: " + config.WALLPAPER_COLOR + ";")
+
+fifo = '/tmp/qdesktop.fifo'
+misc.ipc_create(fifo)
+class AThread(QtCore.QThread):
+    def run(self):
+        while True:
+            print "Reading IPC"
+            if misc.ipc_read(fifo) == 'update':
+                print 'Updating GUI...'
+                self.emit(QtCore.SIGNAL('set_wallpaper'))
+            time.sleep(2)
+t = AThread()
+t.start()
+MainWindow.connect(t, QtCore.SIGNAL('set_wallpaper'), setWallpaper)
 
 # setup desktop menu
 def show_popup():
@@ -164,10 +186,7 @@ ui.DesktopView.customContextMenuRequested.connect(show_popup)
 ui.menubar.hide()
 
 # setup background
-if config.WALLPAPER_IMAGE:
-    ui.DesktopView.setStyleSheet("border-image: url(" + config.WALLPAPER_IMAGE + ") 0 0 0 0 " + config.WALLPAPER_STYLE + " " + config.WALLPAPER_STYLE + "; color: rgb(179, 179, 179);")
-else:
-    ui.DesktopView.setStyleSheet("background-color: " + config.WALLPAPER_COLOR + ";")
+setWallpaper()
 
 
 # setup signals
