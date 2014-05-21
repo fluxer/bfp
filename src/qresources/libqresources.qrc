@@ -1,5 +1,7 @@
 <RCC>
   <qresource prefix="/usr/share/qresources">
+    <file>resources/color-picker.svg</file>
+    <file>resources/gnome-mime-image.svg</file>
     <file>resources/file-manager.svg</file>
     <file>resources/web-browser.svg</file>
     <file>resources/system-reboot.svg</file>
