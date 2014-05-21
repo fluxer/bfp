@@ -165,7 +165,7 @@ ui.menubar.hide()
 
 # setup background
 if config.WALLPAPER_IMAGE:
-    ui.DesktopView.setStyleSheet("background-image: url(" + config.WALLPAPER_IMAGE + ") 0 0 0 0 " + config.WALLPAPER_STYLE + " " + config.WALLPAPER_STYLE + "; color: rgb(179, 179, 179);")
+    ui.DesktopView.setStyleSheet("border-image: url(" + config.WALLPAPER_IMAGE + ") 0 0 0 0 " + config.WALLPAPER_STYLE + " " + config.WALLPAPER_STYLE + "; color: rgb(179, 179, 179);")
 else:
     ui.DesktopView.setStyleSheet("background-color: " + config.WALLPAPER_COLOR + ";")
 

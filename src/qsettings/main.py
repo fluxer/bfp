@@ -21,11 +21,12 @@ def run_about():
     QtGui.QMessageBox.about(MainWindow, "About", '<b>QSettings v1.0.0</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
 
 def setWallpaperStyle():
-    config.change('wallpaper', 'STYLE', str(ui.WallpaperModeBox.currentText()))
+    setImageWallpaper(config.WALLPAPER_IMAGE)
 
 def setImageWallpaper(simage):
     path = ''
     style = str(ui.WallpaperModeBox.currentText())
+    print style
     if not simage:
         simage = QtGui.QFileDialog.getOpenFileName(MainWindow,
                 "Choose",
@@ -33,7 +34,7 @@ def setImageWallpaper(simage):
                 "Image Files (*.jpg;*.png;*.jpeg);;All Files (*);;")
         simage = str(simage)
     path = os.path.dirname(simage)
-    ui.WallpaperView.setStyleSheet("background-image: url(" + simage + ") 0 0 0 0 " + style + " " + style + ";")
+    ui.WallpaperView.setStyleSheet("border-image: url(" + simage + ") 0 0 0 0 " + style + " " + style + ";")
     config.change('wallpaper', 'IMAGE', simage)
     config.change('wallpaper', 'STYLE', style)
 

@@ -114,7 +114,17 @@
       </property>
       <item>
        <property name="text">
+        <string>origin</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
         <string>stretch</string>
+       </property>
+      </item>
+      <item>
+       <property name="text">
+        <string>repeat</string>
        </property>
       </item>
       <item>
