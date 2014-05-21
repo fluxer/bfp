@@ -20,6 +20,9 @@ ui.WallpaperModeBox.setCurrentIndex(index)
 def run_about():
     QtGui.QMessageBox.about(MainWindow, "About", '<b>QSettings v1.0.0</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
 
+def setWallpaperStyle():
+    config.change('wallpaper', 'STYLE', str(ui.WallpaperModeBox.currentText()))
+
 def setImageWallpaper(simage):
     path = ''
     style = str(ui.WallpaperModeBox.currentText())
@@ -51,6 +54,7 @@ else:
 ui.actionQuit.triggered.connect(sys.exit)
 ui.actionAbout.triggered.connect(run_about)
 ui.ImageWallpaperButton.clicked.connect(setImageWallpaper)
+ui.WallpaperModeBox.currentIndexChanged.connect(setWallpaperStyle)
 ui.ColorWallpaperButton.clicked.connect(setColorWallpaper)
 
 # run!
