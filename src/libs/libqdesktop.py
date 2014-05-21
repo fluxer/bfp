@@ -1,17 +1,16 @@
 #!/usr/bin/python
 
-import os, sys, shutil
+import os, shutil, ConfigParser
 import xdg.Menu, xdg.DesktopEntry
 from PyQt4 import QtCore, QtGui
 import libmisc
 misc = libmisc.Misc()
-import libqconfig
 
 class General(object):
     def set_style(self):
         # FIXME: set stylesheet and icon theme
         pass
-    
+
     def execute_program(self, sprogram):
         ''' Execute program from PATH '''
         p = QtCore.QProcess()
@@ -23,23 +22,62 @@ class General(object):
 
 general = General()
 
+class Config(object):
+    def __init__(self):
+        self.conf_dir = str(QtCore.QDir.homePath()) + '/.qdesktop'
+        self.conf_file = self.conf_dir + '/desktop.conf'
+        misc.dir_create(self.conf_dir)
+        self.conf_fd = open(self.conf_file, 'rw')
+
+        self.GENERAL_STYLESHEET = None
+        self.GENERAL_ICONTHEME = None
+        self.MENU_FILE = '/etc/xdg/menus/kde-applications.menu'
+        self.WALLPAPER_FILE = '/home/smil3y/Wallpapers/wallpaper-250964.jpg'
+        self.WALLPAPER_STYLE = "stretch"
+
+        self.config = ConfigParser.SafeConfigParser()
+        self.config.readfp(self.conf_fd)
+
+    def read(self):
+        if os.path.isfile(self.conf_file):
+            self.GENERAL_STYLESHEET = self.config.get('general', 'STYLESHEET')
+            self.GENERAL_ICONTHEME = self.config.get('general', 'ICONTHEME')
+            self.MENU_FILE = self.config.get('general', 'MENU')
+            self.WALLPAPER_FILE = self.config.get('wallpaper', 'FILE')
+            self.WALLPAPER_STYLE = self.config.get('wallpaper', 'STYLE')
+        else:
+            self.config.set('general', 'STYLESHEET', self.GENERAL_STYLESHEET)
+            self.config.set('general', 'ICONTHEME', self.GENERAL_ICONTHEME)
+            self.config.set('general', 'MENU', self.MENU_FILE)
+            self.config.set('wallpaper', 'FILE', self.WALLPAPER_FILE)
+            self.config.set('wallpaper', 'STYLE', self.WALLPAPER_STYLE)
+
+    def change(self, section, option, value):
+        self.read()
+        self.config.set(section, option, value)
+        self.write()
+
+    def write(self):
+        self.config.write(self.conf_fd)
+
+config = Config()
+
 class Menu(object):
     def __init__(self, app, widget):
         self.app = app
         self.widget = widget
         self.xdg = xdg.Menu
-        self.menu = libqconfig.MENU_FILE
+        self.menu = config.MENU_FILE
 
     def execute_desktop(self, sfile):
         ''' Execute program from .desktop file '''
-        p = QtCore.QProcess()
         x = self.xdg.MenuEntry(sfile)
         tryExec = x.DesktopEntry.getTryExec()
         Exec = x.DesktopEntry.getExec()
 
         # if TryExec is set in .desktop execute it first
         if tryExec and not tryExec == Exec:
-           general.execute_program(tryExec)
+            general.execute_program(tryExec)
         # if it gets here fire up the program
         general.execute_program(Exec)
 
@@ -98,14 +136,14 @@ class Actions(object):
             else:
                 return
 
-        svar_new = str(svar_new)
-        if os.path.exists(svar_dirname + '/' + svar_new):
-            svar_new = self.check_exists(svar_dirname + '/' + svar_new)
-            if not svar_new:
-                return
-        new_name = os.path.join(svar_dirname, str(svar_new))
-        print('Renaming: ', svar, ' To: ', new_name)
-        os.rename(svar, new_name)
+            svar_new = str(svar_new)
+            if os.path.exists(svar_dirname + '/' + svar_new):
+                svar_new = self.check_exists(svar_dirname + '/' + svar_new)
+                if not svar_new:
+                    return
+            new_name = os.path.join(svar_dirname, str(svar_new))
+            print('Renaming: ', svar, ' To: ', new_name)
+            os.rename(svar, new_name)
 
     def cut_directory(self, variant):
         for svar in variant:
@@ -176,7 +214,7 @@ class Actions(object):
 
     def gzip_items(self, variant, soutput=None):
         # FIXME: implement please wait???
-        if not soutput:        
+        if not soutput:
             for svar in variant:
                 soutput = svar + '.tar.gz'
         print('Compressing: ', variant, 'To: ', soutput)
@@ -184,7 +222,7 @@ class Actions(object):
 
     def bzip2_items(self, variant, soutput=None):
         # FIXME: implement please wait???
-        if not soutput:        
+        if not soutput:
             for svar in variant:
                 soutput = svar + '.tar.bz2'
         print('Compressing: ', variant, 'To: ', soutput)

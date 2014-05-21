@@ -14,13 +14,11 @@ all: clean
 	$(CC) $(CFLAGS) -shared build/libnetwork.c -o build/libnetwork.so
 	$(CYTHON) -2 libsystem.py -o build/libsystem.c
 	$(CC) $(CFLAGS) -shared build/libsystem.c -o build/libsystem.so
-	$(CYTHON) -2 libsystem.py -o build/libqconfig.c
-	$(CC) $(CFLAGS) -shared build/libqconfig.c -o build/libqconfig.so
 	$(CYTHON) -2 libqdesktop.py -o build/libqdesktop.c
 	$(CC) $(CFLAGS) -shared build/libqdesktop.c -o build/libqdesktop.so
 	$(STRIP) build/libmagic.so build/libmessage.so build/libmisc.so \
 		build/libpackage.so build/libnetwork.so build/libsystem.so \
-		build/libqconfig.so build/libqdesktop.so
+		build/libqdesktop.so
 
 check:
 	python test.py
@@ -33,7 +31,6 @@ install:
 	$(INSTALL) -vm644 build/libpackage.so $(DESTDIR)$(SITEDIR)/libpackage.so
 	$(INSTALL) -vm644 build/libnetwork.so $(DESTDIR)$(SITEDIR)/libnetwork.so
 	$(INSTALL) -vm644 build/libsystem.so $(DESTDIR)$(SITEDIR)/libsystem.so
-	$(INSTALL) -vm644 build/libqconfig.so $(DESTDIR)$(SITEDIR)/libqconfig.so
 	$(INSTALL) -vm644 build/libqdesktop.so $(DESTDIR)$(SITEDIR)/libqdesktop.so
 
 uninstall:
@@ -43,7 +40,6 @@ uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libpackage.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libnetwork.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libsystem.so
-	$(RM) $(DESTDIR)$(SITEDIR)/libqconfig.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libqdesktop.so
 
 clean:

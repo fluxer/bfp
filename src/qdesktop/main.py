@@ -6,7 +6,6 @@ import sys, os, shutil
 import libmisc
 misc = libmisc.Misc()
 import libqdesktop
-import libqconfig
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
@@ -18,6 +17,7 @@ ui.setupUi(MainWindow)
 cut_dirs = None
 copy_dirs = []
 delete_dirs = []
+config = libqdesktop.Config()
 actions = libqdesktop.Actions(MainWindow)
 
 # setup desktop widget
@@ -165,7 +165,7 @@ ui.DesktopView.customContextMenuRequested.connect(show_popup)
 ui.menubar.hide()
 
 # setup background
-ui.DesktopView.setStyleSheet("background-image: url(" + libqconfig.WALLPAPER_FILE + ") 0 0 0 0 " + libqconfig.WALLPAPER_STYLE + " " + libqconfig.WALLPAPER_STYLE + "; color: rgb(179, 179, 179);")
+ui.DesktopView.setStyleSheet("background-image: url(" + config.WALLPAPER_FILE + ") 0 0 0 0 " + config.WALLPAPER_STYLE + " " + config.WALLPAPER_STYLE + "; color: rgb(179, 179, 179);")
 
 # setup signals
 # FIXME: open directory on enter
