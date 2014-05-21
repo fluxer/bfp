@@ -56,7 +56,7 @@ def show_popup():
     ui.menuActions.popup(QtGui.QCursor.pos())
 
 def open_file():
-    for sfile in ui.ViewWidget.selectedIndexes():
+    for sfile in ui.DesktopView.selectedIndexes():
         sfile = str(model.filePath(sfile))
         QtGui.QDesktopServices.openUrl(QtCore.QUrl(sfile))
 

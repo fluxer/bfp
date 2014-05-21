@@ -2,7 +2,7 @@
 
 import qsettings_ui
 from PyQt4 import QtCore, QtGui
-import sys, os, shutil
+import sys
 import libmisc
 misc = libmisc.Misc()
 import libqdesktop
@@ -27,7 +27,6 @@ def setWallpaperStyle():
     setImageWallpaper(config.WALLPAPER_IMAGE)
 
 def setImageWallpaper(simage):
-    path = ''
     style = str(ui.WallpaperModeBox.currentText())
     if not simage:
         simage = QtGui.QFileDialog.getOpenFileName(MainWindow,
@@ -35,7 +34,6 @@ def setImageWallpaper(simage):
                 QtCore.QDir.homePath(),
                 "Image Files (*.jpg *.png *.jpeg);;All Files (*);;")
         simage = str(simage)
-    path = os.path.dirname(simage)
     ui.WallpaperView.setStyleSheet("border-image: url(" + simage + ") 0 0 0 0 " + style + " " + style + ";")
     config.write('wallpaper/image', simage)
     config.write('wallpaper/style', style)

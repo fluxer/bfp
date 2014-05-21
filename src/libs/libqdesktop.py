@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import os, shutil, ConfigParser
+import os, shutil
 import xdg.Menu, xdg.DesktopEntry
 from PyQt4 import QtCore, QtGui
 import libmisc
