@@ -39,9 +39,7 @@ misc.ipc_create(fifo)
 class AThread(QtCore.QThread):
     def run(self):
         while True:
-            print "Reading IPC"
             if misc.ipc_read(fifo) == 'update':
-                print 'Updating GUI...'
                 self.emit(QtCore.SIGNAL('set_wallpaper'))
             time.sleep(2)
 t = AThread()
@@ -152,19 +150,19 @@ def change_directory():
 def run_terminal():
     p = QtCore.QProcess()
     p.setWorkingDirectory(QtCore.QDir.homePath())
-    p.startDetached('xterm')
+    p.startDetached(config.DEFAULT_TERMINAL)
     p.close()
 
 def run_filemanager():
     p = QtCore.QProcess()
     p.setWorkingDirectory(QtCore.QDir.homePath())
-    p.startDetached('qfile')
+    p.startDetached(config.DEFAULT_FILEMANAGER)
     p.close()
 
 def run_webbrowser():
     p = QtCore.QProcess()
     p.setWorkingDirectory(QtCore.QDir.homePath())
-    p.startDetached('qupzilla')
+    p.startDetached(config.DEFAULT_WEBBROWSER)
     p.close()
 
 def run_preferences():

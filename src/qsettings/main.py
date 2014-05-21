@@ -47,6 +47,7 @@ def setColorWallpaper(scolor):
     ui.WallpaperView.setStyleSheet("background-color: " + scolor + ";")
     config.write('wallpaper/image', '')
     config.write('wallpaper/color', str(scolor))
+    misc.ipc_write(fifo, 'update')
 
 if config.WALLPAPER_IMAGE:
     setImageWallpaper(config.WALLPAPER_IMAGE)

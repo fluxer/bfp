@@ -34,6 +34,9 @@ class Config(object):
         self.WALLPAPER_IMAGE = str(self.settings.value('wallpaper/image', '').toString())
         self.WALLPAPER_STYLE = str(self.settings.value('wallpaper/style', 'stretch').toString())
         self.WALLPAPER_COLOR = str(self.settings.value('wallpaper/color', '#b4b4b4').toString())
+        self.DEFAULT_TERMINAL = str(self.settings.value('default/terminal', 'xterm').toString())
+        self.DEFAULT_FILEMANAGER = str(self.settings.value('default/filemanager', 'qfile').toString())
+        self.DEFAULT_WEBBROWSER = str(self.settings.value('default/webbrowser', 'qupzilla').toString())
 
     def write(self, variable, value):
         self.settings.setValue(variable, value)

@@ -16,6 +16,7 @@ ui.setupUi(MainWindow)
 # some variables
 model = QtGui.QFileSystemModel()
 actions = libqdesktop.Actions(MainWindow, app)
+config = libqdesktop.Config()
 
 def disable_actions():
     ui.actionOpen.setEnabled(False)
@@ -55,8 +56,8 @@ change_directory(start_dir)
 
 def run_terminal():
     p = QtCore.QProcess()
-    p.setWorkingDirectory(model.rootPath())
-    p.startDetached('xterm')
+    p.setWorkingDirectory(QtCore.QDir.homePath())
+    p.startDetached(config.DEFAULT_TERMINAL)
     p.close()
 
 def run_about():

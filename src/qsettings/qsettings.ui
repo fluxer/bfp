@@ -28,7 +28,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -192,6 +192,19 @@
       </property>
       <property name="text">
        <string>set stylesheet</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_4">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>140</y>
+        <width>321</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>default applications (t/f/w)</string>
       </property>
      </widget>
     </widget>
