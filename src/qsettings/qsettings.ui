@@ -1,0 +1,472 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>542</width>
+    <height>470</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Settings Manager</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../qresources/libqresources.qrc">
+    <normaloff>:/usr/share/qresources/resources/redhat-tools.svg</normaloff>:/usr/share/qresources/resources/redhat-tools.svg</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>10</y>
+      <width>521</width>
+      <height>411</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>1</number>
+    </property>
+    <widget class="QWidget" name="tab">
+     <attribute name="title">
+      <string>File associations</string>
+     </attribute>
+     <widget class="QListView" name="MimesView">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>251</width>
+        <height>371</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QListView" name="ProgramsView">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>10</y>
+        <width>221</width>
+        <height>331</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="AssociateButton">
+      <property name="geometry">
+       <rect>
+        <x>280</x>
+        <y>350</y>
+        <width>221</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Associate</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../qresources/libqresources.qrc">
+        <normaloff>:/usr/share/qresources/resources/add.svg</normaloff>:/usr/share/qresources/resources/add.svg</iconset>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_3">
+     <attribute name="title">
+      <string>Desktop</string>
+     </attribute>
+     <widget class="QGraphicsView" name="WallpaperView">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>491</width>
+        <height>321</height>
+       </rect>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="ImageWallpaperButton">
+      <property name="geometry">
+       <rect>
+        <x>40</x>
+        <y>345</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Image</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../qresources/libqresources.qrc">
+        <normaloff>:/usr/share/qresources/resources/gnome-mime-image.svg</normaloff>:/usr/share/qresources/resources/gnome-mime-image.svg</iconset>
+      </property>
+     </widget>
+     <widget class="QComboBox" name="WallpaperModeBox">
+      <property name="geometry">
+       <rect>
+        <x>370</x>
+        <y>350</y>
+        <width>75</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <item>
+       <property name="text">
+        <string>stretch</string>
+       </property>
+      </item>
+     </widget>
+     <widget class="QLabel" name="label">
+      <property name="geometry">
+       <rect>
+        <x>290</x>
+        <y>350</y>
+        <width>71</width>
+        <height>26</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Mode</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="ColorWallpaperButton">
+      <property name="geometry">
+       <rect>
+        <x>155</x>
+        <y>345</y>
+        <width>101</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Color</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../qresources/libqresources.qrc">
+        <normaloff>:/usr/share/qresources/resources/color-picker.svg</normaloff>:/usr/share/qresources/resources/color-picker.svg</iconset>
+      </property>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_2">
+     <attribute name="title">
+      <string>Misc</string>
+     </attribute>
+     <widget class="QPushButton" name="pushButton">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>40</y>
+        <width>321</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>maybe add search path prefernece for mime programs</string>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="pushButton_3">
+      <property name="geometry">
+       <rect>
+        <x>20</x>
+        <y>85</y>
+        <width>321</width>
+        <height>24</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>set stylesheet</string>
+      </property>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>542</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuMain">
+    <property name="title">
+     <string>Main</string>
+    </property>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <addaction name="menuMain"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionQuit">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/exit.svg</normaloff>:/usr/share/qresources/resources/exit.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Quit</string>
+   </property>
+   <property name="toolTip">
+    <string>Quit application</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
+  </action>
+  <action name="actionTerminal">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/usr/share/pfm/resources/utilities-terminal.svg</normaloff>:/usr/share/pfm/resources/utilities-terminal.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Terminal</string>
+   </property>
+   <property name="toolTip">
+    <string>Run Terminal</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+T</string>
+   </property>
+  </action>
+  <action name="actionCopy">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>:/usr/share/pfm/resources/edit-copy.svg</normaloff>:/usr/share/pfm/resources/edit-copy.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Copy</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
+   </property>
+  </action>
+  <action name="actionPaste">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>:/usr/share/pfm/resources/gtk-paste.svg</normaloff>:/usr/share/pfm/resources/gtk-paste.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Paste</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+V</string>
+   </property>
+  </action>
+  <action name="actionCut">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>:/usr/share/pfm/resources/editcut.svg</normaloff>:/usr/share/pfm/resources/editcut.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Cut</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+X</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/stock_view-details.svg</normaloff>:/usr/share/qresources/resources/stock_view-details.svg</iconset>
+   </property>
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionDelete">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>:/usr/share/pfm/resources/editdelete.svg</normaloff>:/usr/share/pfm/resources/editdelete.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Delete</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+D</string>
+   </property>
+  </action>
+  <action name="actionProperties">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>:/usr/share/pfm/resources/stock_properties.svg</normaloff>:/usr/share/pfm/resources/stock_properties.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Properties</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="actionCompress">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>:/usr/share/pfm/resources/application-x-gzip.svg</normaloff>:/usr/share/pfm/resources/application-x-gzip.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Compress (gzip)</string>
+   </property>
+   <property name="toolTip">
+    <string>Compress dirs/files</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+C</string>
+   </property>
+  </action>
+  <action name="actionDecompress">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>:/usr/share/pfm/resources/cab_extract.svg</normaloff>:/usr/share/pfm/resources/cab_extract.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Decompress</string>
+   </property>
+   <property name="toolTip">
+    <string>Decompress archive</string>
+   </property>
+   <property name="shortcut">
+    <string>Alt+D</string>
+   </property>
+  </action>
+  <action name="actionIcons">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/usr/share/pfm/resources/plugin-scale.svg</normaloff>:/usr/share/pfm/resources/plugin-scale.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Icons</string>
+   </property>
+  </action>
+  <action name="actionList">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/usr/share/pfm/resources/edit-select-all.svg</normaloff>:/usr/share/pfm/resources/edit-select-all.svg</iconset>
+   </property>
+   <property name="text">
+    <string>List</string>
+   </property>
+  </action>
+  <action name="actionPreferences">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/usr/share/pfm/resources/redhat-tools.svg</normaloff>:/usr/share/pfm/resources/redhat-tools.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Preferences</string>
+   </property>
+  </action>
+  <action name="actionRename">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset>
+     <normaloff>:/usr/share/pfm/resources/edit-rename.svg</normaloff>:/usr/share/pfm/resources/edit-rename.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Rename</string>
+   </property>
+  </action>
+  <action name="actionMimes">
+   <property name="text">
+    <string>Mimes</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/usr/share/pfm/resources/fileopen.svg</normaloff>:/usr/share/pfm/resources/fileopen.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="actionFolder">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/usr/share/pfm/resources/folder_new.svg</normaloff>:/usr/share/pfm/resources/folder_new.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Folder</string>
+   </property>
+  </action>
+  <action name="actionFile">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/usr/share/pfm/resources/filenew.svg</normaloff>:/usr/share/pfm/resources/filenew.svg</iconset>
+   </property>
+   <property name="text">
+    <string>File</string>
+   </property>
+  </action>
+  <action name="actionAsd">
+   <property name="text">
+    <string>asd</string>
+   </property>
+  </action>
+  <action name="actionCompress_xz">
+   <property name="text">
+    <string>Compress (xz)</string>
+   </property>
+  </action>
+  <action name="actionCompress_bzip2">
+   <property name="icon">
+    <iconset>
+     <normaloff>:/usr/share/pfm/resources/application-x-bzip.svg</normaloff>:/usr/share/pfm/resources/application-x-bzip.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Compress (bzip2)</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="../qresources/libqresources.qrc"/>
+ </resources>
+ <connections/>
+ <designerdata>
+  <property name="gridDeltaX">
+   <number>5</number>
+  </property>
+  <property name="gridDeltaY">
+   <number>5</number>
+  </property>
+  <property name="gridSnapX">
+   <bool>true</bool>
+  </property>
+  <property name="gridSnapY">
+   <bool>true</bool>
+  </property>
+  <property name="gridVisible">
+   <bool>true</bool>
+  </property>
+ </designerdata>
+</ui>

@@ -13,6 +13,7 @@ all:
 	make -C src/qdesktop
 	make -C src/qresources
 	make -C src/qproperties
+	make -C src/qsettings
 
 check:
 	make -C src/libs check
@@ -35,6 +36,7 @@ install:
 	make -C src/qdesktop install
 	make -C src/qresources install
 	make -C src/qproperties install
+	make -C src/qsettings install
 
 uninstall:
 	make -C doc uninstall
@@ -52,6 +54,7 @@ uninstall:
 	make -C src/qdesktop uninstall
 	make -C src/qresources uninstall
 	make -C src/qproperties uninstall
+	make -C src/qsettings uninstall
 
 clean:
 	make -C doc clean
@@ -67,6 +70,7 @@ clean:
 	make -C src/qdesktop clean
 	make -C src/qresources clean
 	make -C src/qproperties clean
+	make -C src/qsettings clean
 
 dist:
 	git archive HEAD --prefix=alive-$(VERSION)/ | xz > alive-$(VERSION).tar.xz
