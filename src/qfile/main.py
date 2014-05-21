@@ -2,7 +2,7 @@
 
 import qfile_ui
 from PyQt4 import QtCore, QtGui
-import sys, os, shutil
+import sys, os
 import libmisc
 misc = libmisc.Misc()
 import libqdesktop
@@ -13,11 +13,9 @@ MainWindow = QtGui.QMainWindow()
 ui = qfile_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 
+# some variables
 model = QtGui.QFileSystemModel()
-cut_dirs = None
-copy_dirs = []
-delete_dirs = []
-actions = libqdesktop.Actions(MainWindow)
+actions = libqdesktop.Actions(MainWindow, app)
 
 def disable_actions():
     ui.actionOpen.setEnabled(False)
@@ -52,7 +50,7 @@ start_dir = QtCore.QDir.currentPath()
 ui.ViewWidget.setModel(model)
 for arg in sys.argv:
     if os.path.isdir(arg):
-         start_dir = arg
+        start_dir = arg
 change_directory(start_dir)
 
 def run_terminal():
@@ -91,10 +89,7 @@ def copy_directory():
     ui.actionPaste.setEnabled(True)
 
 def paste_directory():
-    selected_items = []
-    for svar in ui.ViewWidget.selectedIndexes():
-        selected_items.append(str(model.filePath(svar)))
-    actions.paste_items(selected_items)
+    actions.paste_items()
     ui.actionPaste.setEnabled(False)
 
 def rename_directory():

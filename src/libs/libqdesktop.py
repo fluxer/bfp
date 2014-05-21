@@ -84,15 +84,19 @@ class Menu(object):
         return self.dynamic_menu(self.xdg.parse(self.menu))
 
 class Actions(object):
-    def __init__(self, window):
-        # FIXME: get content of clipboard
+    def __init__(self, window, app):
         self.window = window
+        self.app = app
+        self.clipboard = self.app.clipboard()
+        self.cut = None
+        self.copy = None
 
     def check_exists(self, sfile):
         sfile_basename = os.path.basename(sfile)
         sfile_dirname = os.path.dirname(sfile)
         sfile_basename, ok = QtGui.QInputDialog.getText(self.window, "File/directory exists",
                 "File/directory exists, new name:", QtGui.QLineEdit.Normal, sfile_basename)
+        sfile_basename = str(sfile_basename)
         if ok and sfile_basename:
             if not os.path.exists(sfile_dirname + '/' + sfile_basename):
                 return sfile_basename
@@ -102,7 +106,7 @@ class Actions(object):
             return
 
     def rename_items(self, variant):
-        # FIXME: implement
+        # FIXME: implement properly
         for svar in variant:
             svar_basename = os.path.basename(svar)
             svar_dirname = os.path.dirname(svar)
@@ -123,21 +127,23 @@ class Actions(object):
             print('Renaming: ', svar, ' To: ', new_name)
             os.rename(svar, new_name)
 
-    def cut_directory(self, variant):
-        for svar in variant:
-            print('Cut to clipboard', svar)
+    def cut_items(self, slist):
+        sitems = misc.string_convert(slist)
+        self.clipboard.setText(sitems)
+        self.cut = slist
+        self.copy = None
 
-    def copy_directory(self, variant):
-        for svar in variant:
-            print('Copy to clipboard', svar)
+    def copy_items(self, slist):
+        sitems = misc.string_convert(slist)
+        self.clipboard.setText(sitems)
+        self.cut = None
+        self.copy = slist
 
-    def paste_items(self, saction):
-        # FIXME: implement move/copy
+    def paste_items(self):
+        # FIXME: implement properly
         cur_dir = os.path.realpath(os.curdir)
-        cut_dirs = []
-        copy_dirs = []
-        if cut_dirs:
-            for svar in cut_dirs:
+        if self.cut:
+            for svar in self.cut:
                 svar = str(svar)
                 svar_basename = os.path.basename(svar)
                 if os.path.exists(cur_dir + '/' + svar_basename):
@@ -147,8 +153,8 @@ class Actions(object):
                 svar_copy = cur_dir + '/' + svar_basename
                 print('Moving: ', svar, ' To: ', svar_copy)
                 os.rename(svar, svar_copy)
-        elif copy_dirs:
-            for svar in copy_dirs:
+        elif self.copy:
+            for svar in self.copy:
                 svar = str(svar)
                 svar_basename = os.path.basename(svar)
                 if os.path.exists(cur_dir + '/' + svar_basename):

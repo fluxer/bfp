@@ -14,11 +14,8 @@ ui = qdesktop_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 
 # some variables
-cut_dirs = None
-copy_dirs = []
-delete_dirs = []
 config = libqdesktop.Config()
-actions = libqdesktop.Actions(MainWindow)
+actions = libqdesktop.Actions(MainWindow, app)
 
 # setup desktop widget
 model = QtGui.QFileSystemModel()
@@ -104,10 +101,7 @@ def copy_directory():
     ui.actionPaste.setEnabled(True)
 
 def paste_directory():
-    selected_items = []
-    for svar in ui.DesktopView.selectedIndexes():
-        selected_items.append(str(model.filePath(svar)))
-    actions.paste_items(selected_items)
+    actions.paste_items()
     ui.actionPaste.setEnabled(False)
 
 def rename_directory():
