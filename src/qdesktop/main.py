@@ -1,8 +1,8 @@
 #!/usr/bin/python
 
 import qdesktop_ui
-from PyQt4 import QtCore, QtGui
-import sys, os, time
+from PyQt4 import QtCore, QtGui, QtDBus
+import sys, os
 import libmisc
 misc = libmisc.Misc()
 import libqdesktop
@@ -26,25 +26,31 @@ ui.DesktopView.setRootIndex(root)
 os.chdir(desktop)
 ui.DesktopView.setViewMode(ui.DesktopView.IconMode)
 
-def setWallpaper():
-    global config
-    config = libqdesktop.Config()
-    if config.WALLPAPER_IMAGE:
-        ui.DesktopView.setStyleSheet("border-image: url(" + config.WALLPAPER_IMAGE + ") 0 0 0 0 " + config.WALLPAPER_STYLE + " " + config.WALLPAPER_STYLE + "; color: rgb(179, 179, 179);")
+def setWallpaper(arg= config.WALLPAPER_IMAGE, arg2=config.WALLPAPER_STYLE):
+    if arg and os.path.isfile(arg):
+        ui.DesktopView.setStyleSheet("border-image: url(" + arg + ") 0 0 0 0 " + arg2 + " " + arg2 + "; color: rgb(179, 179, 179);")
     else:
-        ui.DesktopView.setStyleSheet("background-color: " + config.WALLPAPER_COLOR + ";")
+        ui.DesktopView.setStyleSheet("background-color: " + arg + ";")
 
-fifo = '/tmp/qdesktop.fifo'
-misc.ipc_create(fifo)
-class AThread(QtCore.QThread):
-    def run(self):
-        while True:
-            if misc.ipc_read(fifo) == 'update':
-                self.emit(QtCore.SIGNAL('set_wallpaper'))
-            time.sleep(2)
-t = AThread()
-t.start()
-MainWindow.connect(t, QtCore.SIGNAL('set_wallpaper'), setWallpaper)
+# dbus setup
+class Pong(QtCore.QObject):
+    @QtCore.pyqtSlot(str, str)
+    def ping(self, arg, arg2):
+        setWallpaper(arg, arg2)
+
+if not QtDBus.QDBusConnection.sessionBus().isConnected():
+    sys.stderr.write("Cannot connect to the D-Bus session bus.\n"
+        "To start it, run:\n"
+        "\teval `dbus-launch --auto-syntax`\n")
+    sys.exit(1)
+
+if not QtDBus.QDBusConnection.sessionBus().registerService('com.trolltech.QtDBus.PingExample'):
+    sys.stderr.write("%s\n" % QtDBus.QDBusConnection.sessionBus().lastError().message())
+    sys.exit(1)
+
+pong = Pong()
+QtDBus.QDBusConnection.sessionBus().registerObject('/', pong,
+    QtDBus.QDBusConnection.ExportAllSlots)
 
 # setup desktop menu
 def show_popup():
@@ -98,9 +104,16 @@ def copy_directory():
     actions.copy_items(selected_items)
     ui.actionPaste.setEnabled(True)
 
+thread = None
 def paste_directory():
-    actions.paste_items()
-    ui.actionPaste.setEnabled(False)
+    global thread
+    class AThread(QtCore.QThread):
+        def run(self):
+            actions.paste_items(MainWindow)
+            #self.emit(QtCore.SIGNAL('paste_finished'))
+    thread = AThread()
+    thread.start()
+    #ui.actionPaste.setEnabled(False)
 
 def rename_directory():
     selected_items = []

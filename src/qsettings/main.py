@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import qsettings_ui
-from PyQt4 import QtCore, QtGui
+from PyQt4 import QtCore, QtGui, QtDBus
 import sys
 import libmisc
 misc = libmisc.Misc()
@@ -14,11 +14,26 @@ MainWindow = QtGui.QMainWindow()
 ui = qsettings_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 
-fifo = '/tmp/qdesktop.fifo'
-misc.ipc_create(fifo, 100)
-
 index = ui.WallpaperModeBox.findText(config.WALLPAPER_STYLE)
 ui.WallpaperModeBox.setCurrentIndex(index)
+
+# dbus setup
+if not QtDBus.QDBusConnection.sessionBus().isConnected():
+    sys.stderr.write("Cannot connect to the D-Bus session bus.\n"
+        "To start it, run:\n"
+        "\teval `dbus-launch --auto-syntax`\n")
+    sys.exit(1)
+
+iface = QtDBus.QDBusInterface('com.trolltech.QtDBus.PingExample', '/', '',
+    QtDBus.QDBusConnection.sessionBus())
+
+def emit_update(arg, arg2):
+    if iface.isValid():
+        reply = QtDBus.QDBusReply(iface.call('ping', arg, arg2))
+        if reply.isValid():
+            sys.stdout.write("Reply was: %s\n" % reply.value())
+            return
+        sys.stderr.write("Call failed: %s\n" % reply.error().message())
 
 def run_about():
     QtGui.QMessageBox.about(MainWindow, "About", '<b>QSettings v1.0.0</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
@@ -37,7 +52,7 @@ def setImageWallpaper(simage):
     ui.WallpaperView.setStyleSheet("border-image: url(" + simage + ") 0 0 0 0 " + style + " " + style + ";")
     config.write('wallpaper/image', simage)
     config.write('wallpaper/style', style)
-    misc.ipc_write(fifo, 'update')
+    emit_update(simage, style)
 
 def setColorWallpaper(scolor):
     if not scolor:
@@ -47,7 +62,7 @@ def setColorWallpaper(scolor):
     ui.WallpaperView.setStyleSheet("background-color: " + scolor + ";")
     config.write('wallpaper/image', '')
     config.write('wallpaper/color', str(scolor))
-    misc.ipc_write(fifo, 'update')
+    emit_update(scolor, '')
 
 if config.WALLPAPER_IMAGE:
     setImageWallpaper(config.WALLPAPER_IMAGE)

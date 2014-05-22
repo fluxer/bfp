@@ -72,6 +72,7 @@ class Misc(object):
     def file_read_nonblock(self, sfile, sbuffer=1024):
         fd = os.open(sfile, os.O_NONBLOCK)
         content = os.read(fd, sbuffer)
+        os.close(fd)
         return content
 
     def file_readlines(self, sfile):
