@@ -28,7 +28,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>1</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -180,7 +180,7 @@
       <property name="title">
        <string> Applications </string>
       </property>
-      <widget class="QPushButton" name="pushButton_2">
+      <widget class="QPushButton" name="TerminalButton">
        <property name="geometry">
         <rect>
          <x>15</x>
@@ -197,7 +197,7 @@
          <normaloff>:/usr/share/qresources/resources/utilities-terminal.svg</normaloff>:/usr/share/qresources/resources/utilities-terminal.svg</iconset>
        </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_5">
+      <widget class="QPushButton" name="FileManagerButton">
        <property name="geometry">
         <rect>
          <x>15</x>
@@ -214,7 +214,7 @@
          <normaloff>:/usr/share/qresources/resources/file-manager.svg</normaloff>:/usr/share/qresources/resources/file-manager.svg</iconset>
        </property>
       </widget>
-      <widget class="QLineEdit" name="lineEdit_2">
+      <widget class="QLineEdit" name="FileManagerEdit">
        <property name="geometry">
         <rect>
          <x>165</x>
@@ -223,8 +223,11 @@
          <height>31</height>
         </rect>
        </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
       </widget>
-      <widget class="QPushButton" name="pushButton_6">
+      <widget class="QPushButton" name="WebBrowserButton">
        <property name="geometry">
         <rect>
          <x>15</x>
@@ -241,7 +244,7 @@
          <normaloff>:/usr/share/qresources/resources/web-browser.svg</normaloff>:/usr/share/qresources/resources/web-browser.svg</iconset>
        </property>
       </widget>
-      <widget class="QLineEdit" name="lineEdit">
+      <widget class="QLineEdit" name="TerminalEdit">
        <property name="geometry">
         <rect>
          <x>165</x>
@@ -250,8 +253,11 @@
          <height>31</height>
         </rect>
        </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
       </widget>
-      <widget class="QLineEdit" name="lineEdit_3">
+      <widget class="QLineEdit" name="WebBrowserEdit">
        <property name="geometry">
         <rect>
          <x>165</x>
@@ -259,6 +265,9 @@
          <width>321</width>
          <height>31</height>
         </rect>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
       </widget>
      </widget>
@@ -274,7 +283,7 @@
       <property name="title">
        <string> Appearance</string>
       </property>
-      <widget class="QPushButton" name="pushButton_4">
+      <widget class="QPushButton" name="StyleSheetButton">
        <property name="geometry">
         <rect>
          <x>15</x>
@@ -301,14 +310,14 @@
         </rect>
        </property>
        <property name="text">
-        <string>Icons set</string>
+        <string>Icon Theme</string>
        </property>
        <property name="icon">
         <iconset resource="../qresources/libqresources.qrc">
          <normaloff>:/usr/share/qresources/resources/preferences-desktop-splash.svg</normaloff>:/usr/share/qresources/resources/preferences-desktop-splash.svg</iconset>
        </property>
       </widget>
-      <widget class="QLineEdit" name="lineEdit_4">
+      <widget class="QLineEdit" name="IconThemeEdit">
        <property name="geometry">
         <rect>
          <x>165</x>
@@ -317,8 +326,11 @@
          <height>31</height>
         </rect>
        </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
       </widget>
-      <widget class="QLineEdit" name="lineEdit_5">
+      <widget class="QLineEdit" name="StyleSheetEdit">
        <property name="geometry">
         <rect>
          <x>165</x>
@@ -326,6 +338,9 @@
          <width>321</width>
          <height>31</height>
         </rect>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
        </property>
       </widget>
      </widget>

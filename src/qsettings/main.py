@@ -14,8 +14,14 @@ MainWindow = QtGui.QMainWindow()
 ui = qsettings_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 
+# setup values ofwidgets
 index = ui.WallpaperModeBox.findText(config.WALLPAPER_STYLE)
 ui.WallpaperModeBox.setCurrentIndex(index)
+ui.StyleSheetEdit.setText(config.GENERAL_STYLESHEET)
+ui.IconThemeEdit.setText(config.GENERAL_ICONTHEME)
+ui.TerminalEdit.setText(config.DEFAULT_TERMINAL)
+ui.FileManagerEdit.setText(config.DEFAULT_FILEMANAGER)
+ui.WebBrowserEdit.setText(config.DEFAULT_WEBBROWSER)
 
 # dbus setup
 if not QtDBus.QDBusConnection.sessionBus().isConnected():
@@ -30,10 +36,8 @@ iface = QtDBus.QDBusInterface('com.trolltech.QtDBus.PingExample', '/', '',
 def emit_update(arg, arg2):
     if iface.isValid():
         reply = QtDBus.QDBusReply(iface.call('ping', arg, arg2))
-        if reply.isValid():
-            sys.stdout.write("Reply was: %s\n" % reply.value())
-            return
-        sys.stderr.write("Call failed: %s\n" % reply.error().message())
+        if not reply.isValid():
+            sys.stderr.write("DBus call failed: %s\n" % reply.error().message())
 
 def run_about():
     QtGui.QMessageBox.about(MainWindow, "About", '<b>QSettings v1.0.0</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
