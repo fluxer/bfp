@@ -9,6 +9,7 @@
  * Implement bookmarks
  * Delete, rename, compress and decompress pulse progress
  * Display size and maybe permissions in status bar
+ * Disable cut/rename/delete if not enough permissions
 
 ## QPROPERTIES ##
  * Display size (recursively)
@@ -17,3 +18,4 @@
  * Implement default applicatons
  * Implement file associations
  * Implement stylesheet and icon theme
+ * Maybe implement fonts outside of stylesheet

@@ -28,7 +28,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>1</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -74,7 +74,7 @@
     </widget>
     <widget class="QWidget" name="tab_3">
      <attribute name="title">
-      <string>Desktop</string>
+      <string>Wallpaper</string>
      </attribute>
      <widget class="QGraphicsView" name="WallpaperView">
       <property name="geometry">
@@ -168,43 +168,178 @@
      <attribute name="title">
       <string>Misc</string>
      </attribute>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>130</y>
+        <width>501</width>
+        <height>146</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string> Applications </string>
+      </property>
+      <widget class="QPushButton" name="pushButton_2">
+       <property name="geometry">
+        <rect>
+         <x>15</x>
+         <y>20</y>
+         <width>136</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Terminal</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../qresources/libqresources.qrc">
+         <normaloff>:/usr/share/qresources/resources/utilities-terminal.svg</normaloff>:/usr/share/qresources/resources/utilities-terminal.svg</iconset>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_5">
+       <property name="geometry">
+        <rect>
+         <x>15</x>
+         <y>60</y>
+         <width>136</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>File Manager</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../qresources/libqresources.qrc">
+         <normaloff>:/usr/share/qresources/resources/file-manager.svg</normaloff>:/usr/share/qresources/resources/file-manager.svg</iconset>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_2">
+       <property name="geometry">
+        <rect>
+         <x>165</x>
+         <y>60</y>
+         <width>321</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_6">
+       <property name="geometry">
+        <rect>
+         <x>15</x>
+         <y>100</y>
+         <width>136</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Web Browser</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../qresources/libqresources.qrc">
+         <normaloff>:/usr/share/qresources/resources/web-browser.svg</normaloff>:/usr/share/qresources/resources/web-browser.svg</iconset>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit">
+       <property name="geometry">
+        <rect>
+         <x>165</x>
+         <y>20</y>
+         <width>321</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_3">
+       <property name="geometry">
+        <rect>
+         <x>165</x>
+         <y>100</y>
+         <width>321</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_2">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>501</width>
+        <height>106</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string> Appearance</string>
+      </property>
+      <widget class="QPushButton" name="pushButton_4">
+       <property name="geometry">
+        <rect>
+         <x>15</x>
+         <y>20</y>
+         <width>136</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Style sheet</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../qresources/libqresources.qrc">
+         <normaloff>:/usr/share/qresources/resources/preferences-desktop-theme.svg</normaloff>:/usr/share/qresources/resources/preferences-desktop-theme.svg</iconset>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="pushButton_7">
+       <property name="geometry">
+        <rect>
+         <x>15</x>
+         <y>60</y>
+         <width>136</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Icons set</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../qresources/libqresources.qrc">
+         <normaloff>:/usr/share/qresources/resources/preferences-desktop-splash.svg</normaloff>:/usr/share/qresources/resources/preferences-desktop-splash.svg</iconset>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_4">
+       <property name="geometry">
+        <rect>
+         <x>165</x>
+         <y>60</y>
+         <width>321</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="lineEdit_5">
+       <property name="geometry">
+        <rect>
+         <x>165</x>
+         <y>20</y>
+         <width>321</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+     </widget>
      <widget class="QPushButton" name="pushButton">
       <property name="geometry">
        <rect>
-        <x>20</x>
-        <y>40</y>
+        <x>105</x>
+        <y>330</y>
         <width>321</width>
         <height>24</height>
        </rect>
       </property>
       <property name="text">
        <string>maybe add search path prefernece for mime programs</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_3">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>85</y>
-        <width>321</width>
-        <height>24</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>set stylesheet</string>
-      </property>
-     </widget>
-     <widget class="QPushButton" name="pushButton_4">
-      <property name="geometry">
-       <rect>
-        <x>20</x>
-        <y>140</y>
-        <width>321</width>
-        <height>24</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>default applications (t/f/w)</string>
       </property>
      </widget>
     </widget>
@@ -216,7 +351,7 @@
      <x>0</x>
      <y>0</y>
      <width>542</width>
-     <height>21</height>
+     <height>23</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMain">
