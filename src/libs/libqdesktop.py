@@ -93,6 +93,7 @@ class Actions(object):
         self.clipboard = self.app.clipboard()
         self.cut = None
         self.copy = None
+        self.thread = None
 
     def check_exists(self, sfile):
         sfile_basename = os.path.basename(sfile)
@@ -142,10 +143,14 @@ class Actions(object):
         self.cut = None
         self.copy = slist
 
-    def paste_items(self):
-        # FIXME: implement properly
+    def paste_items(self, window):
+        # FIXME: implement cancel
+        progress = QtGui.QProgressDialog(window)
+        progress.setMinimum(0)
+        progress.setMaximum(0)
         cur_dir = os.path.realpath(os.curdir)
         if self.cut:
+            progress.show()
             for svar in self.cut:
                 svar = str(svar)
                 svar_basename = os.path.basename(svar)
@@ -154,9 +159,10 @@ class Actions(object):
                     if not svar_basename:
                         continue
                 svar_copy = cur_dir + '/' + svar_basename
-                print('Moving: ', svar, ' To: ', svar_copy)
+                progress.setLabelText('Moving: <b>' + svar + '</b> To: <b>' + svar_copy + '</b>')
                 os.rename(svar, svar_copy)
         elif self.copy:
+            progress.show()
             for svar in self.copy:
                 svar = str(svar)
                 svar_basename = os.path.basename(svar)
@@ -165,11 +171,12 @@ class Actions(object):
                     if not svar_basename:
                         continue
                 svar_copy = cur_dir + '/' + svar_basename
-                print('Copying: ', svar, ' To: ', svar_copy)
+                progress.setLabelText('Copying: <b>' + svar + '</b> To: <b>' + svar_copy + '</b>')
                 if os.path.isdir(svar):
                     shutil.copytree(svar, svar_copy)
                 else:
                     shutil.copy2(svar, svar_copy)
+        progress.close()
 
     def delete_items(self, variant, ask=True):
         for svar in variant:
