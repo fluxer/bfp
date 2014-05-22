@@ -1,0 +1,19 @@
+## SPM ##
+ * Fix all bugs noted with FIXME in the code (1)
+ * Tools for the following:
+   * purge repositories that are not in repositories.conf
+   * detect false-positives in explicit runtime dependencies
+ * Fixup tarball compression
+
+## QFILE ##
+ * Implement bookmarks
+ * Delete, rename, compress and decompress pulse progress
+ * Display size and maybe permissions in status bar
+
+## QPROPERTIES ##
+ * Display size (recursively)
+
+## QSETTINGS ##
+ * Implement default applicatons
+ * Implement file associations
+ * Implement stylesheet and icon theme
