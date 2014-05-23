@@ -51,7 +51,7 @@ def setImageWallpaper(simage):
         simage = QtGui.QFileDialog.getOpenFileName(MainWindow,
                 "Choose",
                 QtCore.QDir.homePath(),
-                "Image Files (*.jpg *.png *.jpeg);;All Files (*);;")
+                "Image Files (*.jpg *.png *.jpeg);;All Files (*)")
         simage = str(simage)
     ui.WallpaperView.setStyleSheet("border-image: url(" + simage + ") 0 0 0 0 " + style + " " + style + ";")
     config.write('wallpaper/image', simage)
@@ -68,6 +68,17 @@ def setColorWallpaper(scolor):
     config.write('wallpaper/color', str(scolor))
     emit_update(scolor, '')
 
+def setStyleSheet():
+    ssheet = QtGui.QFileDialog.getOpenFileName(MainWindow,
+        "Choose",
+        QtCore.QDir.homePath(),
+        "Stylesheets (*.css);;All Files (*)")
+    ssheet = str(ssheet)
+    # FIXME: set stylesheet
+    config.write('general/stylesheet', ssheet)
+    # FIXME: emit stylesheet update signal
+    # emit_update(ssheet)
+
 if config.WALLPAPER_IMAGE:
     setImageWallpaper(config.WALLPAPER_IMAGE)
 else:
@@ -78,6 +89,7 @@ ui.actionAbout.triggered.connect(run_about)
 ui.ImageWallpaperButton.clicked.connect(setImageWallpaper)
 ui.WallpaperModeBox.currentIndexChanged.connect(setWallpaperStyle)
 ui.ColorWallpaperButton.clicked.connect(setColorWallpaper)
+ui.StyleSheetButton.clicked.connect(setStyleSheet)
 
 # run!
 MainWindow.show()
