@@ -7,6 +7,7 @@ import tarfile
 import zipfile
 import subprocess
 import httplib
+import shutil
 
 import libmagic
 
@@ -353,3 +354,13 @@ class Misc(object):
                 sdir = self.ROOT_DIR + s
                 if os.path.ismount(sdir):
                     subprocess.check_call((mount, '--force', '--lazy', sdir))
+
+    def system_script(self, srcbuild, function):
+        ''' Execute pre/post actions '''
+        if self.ROOT_DIR == '/':
+            subprocess.check_call((self.whereis('bash'), '-e', '-c', 'source ' + srcbuild + ' && ' + function),
+                cwd=self.ROOT_DIR)
+        else:
+            shutil.copy(srcbuild, os.path.join(self.ROOT_DIR, 'SRCBUILD'))
+            self.system_chroot(('bash', '-e', '-c', 'source /SRCBUILD && ' + function))
+            os.remove(os.path.join(self.ROOT_DIR, 'SRCBUILD'))
