@@ -83,6 +83,8 @@ class Menu(object):
         depth -= 1
 
     def build(self):
+        if not os.path.isfile(self.menu):
+            return
         self.widget.clear()
         return self.dynamic_menu(self.xdg.parse(self.menu))
 
