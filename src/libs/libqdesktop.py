@@ -211,16 +211,22 @@ class Actions(object):
         if not soutput:
             for svar in variant:
                 soutput = svar + '.tar.gz'
+                # ensure that directory is passed to archive_compress() as chir argument
+                if not os.path.isdir(svar):
+                    svar = os.path.dirname(svar)
         print('Compressing: ', variant, 'To: ', soutput)
-        misc.archive_compress(variant, soutput, 'gz', True)
+        misc.archive_compress(variant, soutput, 'gz', svar)
 
     def bzip2_items(self, variant, soutput=None):
         # FIXME: implement please wait???
         if not soutput:
             for svar in variant:
                 soutput = svar + '.tar.bz2'
+                # ensure that directory is passed to archive_compress() as chir argument
+                if not os.path.isdir(svar):
+                    svar = os.path.dirname(svar)
         print('Compressing: ', variant, 'To: ', soutput)
-        misc.archive_compress(variant, soutput, 'bz2', True)
+        misc.archive_compress(variant, soutput, 'bz2', svar)
 
     def new_file(self):
         svar, ok = QtGui.QInputDialog.getText(self.window, "New file",

@@ -219,32 +219,29 @@ class Misc(object):
             return True
         return False
 
-    def archive_compress(self, variant, sfile, method='bz2', chdir=False):
+    def archive_compress(self, variant, sfile, method='bz2', chdir=None):
         ''' Create archive from directory '''
-        dirname = os.path.dirname(sfile)
-        self.dir_create(dirname)
+        self.dir_create(os.path.dirname(sfile))
 
         if isinstance(variant, str):
             variant = [variant]
 
-        # alotught bsdtar can (or should) handle Zip files we do not use it for them.
-        if method == 'xz' or method == 'lzma' or method == 'gz' or method == 'bz2':
-            bsdtar = self.whereis('bsdtar', fallback=False)
-            tar = self.whereis('tar')
-            if bsdtar:
-                command = [bsdtar, '-cpPf', sfile]
-            else:
-                command = [tar, '-cphf', sfile]
+        if sfile.endswith('.bz2') or sfile.endswith('.gz'):
+            tar = tarfile.open(sfile, 'w:' + method)
             if chdir:
-                command.extend(('-C', dirname))
-            for s in variant:
+                os.chdir(chdir)
+            for item in variant:
                 if chdir:
-                    command.append(os.path.basename(s))
+                    tar.add(item.replace(chdir, './'))
                 else:
-                    command.append(s)
-            subprocess.check_call(command)
-        elif method == 'zip':
-            raise(Exception('Not supported yet'))
+                    tar.add(item, '')
+            tar.close()
+        elif sfile.endswith('.zip'):
+            # FIXME: implement zip decompression
+            raise(Exception('Not implemented yet'))
+        elif sfile.endswith('.xz') or sfile.endswith('.lzma'):
+            # FIXME: implement lzma/xz decompression
+            raise(Exception('Not implemented yet'))
 
     def archive_decompress(self, sfile, sdir):
         ''' Extract archive to directory '''
