@@ -30,7 +30,7 @@ class Config(object):
     def read(self):
         self.GENERAL_STYLESHEET = str(self.settings.value('general/stylesheet', '').toString())
         self.GENERAL_ICONTHEME = str(self.settings.value('general/icontheme', '').toString())
-        self.MENU_FILE = str(self.settings.value('general/menu', '/etc/xdg/menus/kde-applications.menu').toString())
+        self.GENERAL_MENU = str(self.settings.value('general/menu', '/etc/xdg/menus/applications.menu').toString())
         self.WALLPAPER_IMAGE = str(self.settings.value('wallpaper/image', '').toString())
         self.WALLPAPER_STYLE = str(self.settings.value('wallpaper/style', 'stretch').toString())
         self.WALLPAPER_COLOR = str(self.settings.value('wallpaper/color', '#b4b4b4').toString())
@@ -48,7 +48,7 @@ class Menu(object):
         self.app = app
         self.widget = widget
         self.xdg = xdg.Menu
-        self.menu = config.MENU_FILE
+        self.menu = config.GENERAL_MENU
 
     def execute_desktop(self, sfile):
         ''' Execute program from .desktop file '''

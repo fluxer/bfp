@@ -19,6 +19,7 @@ index = ui.WallpaperModeBox.findText(config.WALLPAPER_STYLE)
 ui.WallpaperModeBox.setCurrentIndex(index)
 ui.StyleSheetEdit.setText(config.GENERAL_STYLESHEET)
 ui.IconThemeEdit.setText(config.GENERAL_ICONTHEME)
+ui.MenuEdit.setText(config.GENERAL_MENU)
 ui.TerminalEdit.setText(config.DEFAULT_TERMINAL)
 ui.FileManagerEdit.setText(config.DEFAULT_FILEMANAGER)
 ui.WebBrowserEdit.setText(config.DEFAULT_WEBBROWSER)
@@ -74,10 +75,22 @@ def setStyleSheet():
         QtCore.QDir.homePath(),
         "Stylesheets (*.css);;All Files (*)")
     ssheet = str(ssheet)
-    # FIXME: set stylesheet
+    ui.StyleSheetEdit.setText(ssheet)
+    # FIXME: apply stylesheet
     config.write('general/stylesheet', ssheet)
     # FIXME: emit stylesheet update signal
     # emit_update(ssheet)
+
+def setMenu():
+    smenu = QtGui.QFileDialog.getOpenFileName(MainWindow,
+        "Choose",
+        QtCore.QDir.homePath(),
+        "Menus (*.menu);;All Files (*)")
+    smenu = str(smenu)
+    ui.MenuEdit.setText(smenu)
+    config.write('general/menu', smenu)
+    # FIXME: emit menu update signal
+    # emit_update(smenu)
 
 if config.WALLPAPER_IMAGE:
     setImageWallpaper(config.WALLPAPER_IMAGE)
@@ -90,6 +103,7 @@ ui.ImageWallpaperButton.clicked.connect(setImageWallpaper)
 ui.WallpaperModeBox.currentIndexChanged.connect(setWallpaperStyle)
 ui.ColorWallpaperButton.clicked.connect(setColorWallpaper)
 ui.StyleSheetButton.clicked.connect(setStyleSheet)
+ui.MenuButton.clicked.connect(setMenu)
 
 # run!
 MainWindow.show()
