@@ -226,10 +226,11 @@ class Misc(object):
         if isinstance(variant, str):
             variant = [variant]
 
+        if chdir:
+            os.chdir(chdir)
+
         if sfile.endswith('.bz2') or sfile.endswith('.gz'):
             tar = tarfile.open(sfile, 'w:' + method)
-            if chdir:
-                os.chdir(chdir)
             for item in variant:
                 if chdir:
                     tar.add(item.replace(chdir, './'))
@@ -237,10 +238,15 @@ class Misc(object):
                     tar.add(item, '')
             tar.close()
         elif sfile.endswith('.zip'):
-            # FIXME: implement zip decompression
-            raise(Exception('Not implemented yet'))
+            zip = zipfile.ZipFile(sfile, mode='w')
+            for item in variant:
+                if chdir:
+                    zip.write(item.replace(chdir, './'))
+                else:
+                    zip.write(item)
+            zip.close()
         elif sfile.endswith('.xz') or sfile.endswith('.lzma'):
-            # FIXME: implement lzma/xz decompression
+            # FIXME: implement lzma/xz compression
             raise(Exception('Not implemented yet'))
 
     def archive_decompress(self, sfile, sdir):
