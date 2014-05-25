@@ -32,7 +32,6 @@ def setImageWallpaper(simage):
     ui.WallpaperView.setStyleSheet("border-image: url(" + simage + ") 0 0 0 0 " + style + " " + style + ";")
     config.write('wallpaper/image', simage)
     config.write('wallpaper/style', style)
-    emit_update()
 
 def setColorWallpaper(scolor):
     if not scolor:
@@ -42,7 +41,6 @@ def setColorWallpaper(scolor):
     ui.WallpaperView.setStyleSheet("background-color: " + scolor + ";")
     config.write('wallpaper/image', '')
     config.write('wallpaper/color', str(scolor))
-    emit_update()
 
 def setStyleSheet():
     ssheet = QtGui.QFileDialog.getOpenFileName(MainWindow,
@@ -53,7 +51,6 @@ def setStyleSheet():
     ui.StyleSheetEdit.setText(ssheet)
     # FIXME: apply stylesheet
     config.write('general/stylesheet', ssheet)
-    emit_update()
 
 def setMenu():
     smenu = QtGui.QFileDialog.getOpenFileName(MainWindow,
@@ -63,7 +60,6 @@ def setMenu():
     smenu = str(smenu)
     ui.MenuEdit.setText(smenu)
     config.write('general/menu', smenu)
-    emit_update()
 
 def setTerminal():
     sterminal = QtGui.QFileDialog.getOpenFileName(MainWindow,
@@ -73,7 +69,6 @@ def setTerminal():
     sterminal = str(sterminal)
     ui.TerminalEdit.setText(sterminal)
     config.write('default/terminal', sterminal)
-    emit_update()
 
 def setFileManager():
     sfmanager = QtGui.QFileDialog.getOpenFileName(MainWindow,
@@ -83,7 +78,6 @@ def setFileManager():
     sfmanager = str(sfmanager)
     ui.FileManagerEdit.setText(sfmanager)
     config.write('default/filemanager', sfmanager)
-    emit_update()
 
 def setWebBrowser():
     swbrowser = QtGui.QFileDialog.getOpenFileName(MainWindow,
@@ -93,7 +87,6 @@ def setWebBrowser():
     swbrowser = str(swbrowser)
     ui.WebBrowserEdit.setText(swbrowser)
     config.write('default/webbrowser', swbrowser)
-    emit_update()
 
 # connect widgets to actions
 ui.actionQuit.triggered.connect(sys.exit)
