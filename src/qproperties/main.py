@@ -48,6 +48,29 @@ ui.executableBox.setCurrentIndex(executable)
 
 ui.lastModifiedLabel.setText(QtCore.QDateTime.toString(info.lastModified()))
 ui.lastReadLabel.setText(QtCore.QDateTime.toString(info.lastRead()))
+# FIXME: change units depending on length of size
+if os.path.isdir(sfile):
+    import libmisc
+    misc = libmisc.Misc()
+    size = str(misc.dir_size(sfile))
+else:
+    size = str(os.path.getsize(sfile))
+units = 'b'
+lenght = len(size)
+if lenght > 12:
+    units = 'Tb'
+    size = size[:(lenght-12)]
+elif lenght > 9:
+    units = 'Gb'
+    size = size[:(lenght-9)]
+elif lenght > 6:
+    units = 'Mb'
+    size = size[:(lenght-6)]
+elif lenght > 3:
+    units = 'Kb'
+    size = size[:(lenght-3)]
+
+ui.totalSizeLabel.setText(size + ' ' + units)
 ui.filePathLabel.setText(sfile)
 
 def set_permissions(slist):
