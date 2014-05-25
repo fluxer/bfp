@@ -7,6 +7,7 @@
 pod2htmd.tmp
 build
 *_ui.py
+*_rc.py
 
 *.bak
 *~
