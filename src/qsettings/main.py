@@ -14,16 +14,6 @@ MainWindow = QtGui.QMainWindow()
 ui = qsettings_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 
-# setup values ofwidgets
-index = ui.WallpaperModeBox.findText(config.WALLPAPER_STYLE)
-ui.WallpaperModeBox.setCurrentIndex(index)
-ui.StyleSheetEdit.setText(config.GENERAL_STYLESHEET)
-ui.IconThemeEdit.setText(config.GENERAL_ICONTHEME)
-ui.MenuEdit.setText(config.GENERAL_MENU)
-ui.TerminalEdit.setText(config.DEFAULT_TERMINAL)
-ui.FileManagerEdit.setText(config.DEFAULT_FILEMANAGER)
-ui.WebBrowserEdit.setText(config.DEFAULT_WEBBROWSER)
-
 # dbus setup
 if not QtDBus.QDBusConnection.sessionBus().isConnected():
     sys.stderr.write("Cannot connect to the D-Bus session bus.\n"
@@ -92,11 +82,40 @@ def setMenu():
     # FIXME: emit menu update signal
     # emit_update(smenu)
 
-if config.WALLPAPER_IMAGE:
-    setImageWallpaper(config.WALLPAPER_IMAGE)
-else:
-    setColorWallpaper(config.WALLPAPER_COLOR)
+def setTerminal():
+    sterminal = QtGui.QFileDialog.getOpenFileName(MainWindow,
+        "Choose",
+        QtCore.QDir.homePath(),
+        "All Files (*)")
+    sterminal = str(sterminal)
+    ui.TerminalEdit.setText(sterminal)
+    config.write('default/terminal', sterminal)
+    # FIXME: emit terminal update signal
+    # emit_update(sterminal)
 
+def setFileManager():
+    sfmanager = QtGui.QFileDialog.getOpenFileName(MainWindow,
+        "Choose",
+        QtCore.QDir.homePath(),
+        "All Files (*)")
+    sfmanager = str(sfmanager)
+    ui.FileManagerEdit.setText(sfmanager)
+    config.write('default/filemanager', sfmanager)
+    # FIXME: emit file manager update signal
+    # emit_update(sfmanager)
+
+def setWebBrowser():
+    swbrowser = QtGui.QFileDialog.getOpenFileName(MainWindow,
+        "Choose",
+        QtCore.QDir.homePath(),
+        "All Files (*)")
+    swbrowser = str(swbrowser)
+    ui.WebBrowserEdit.setText(swbrowser)
+    config.write('default/webbrowser', swbrowser)
+    # FIXME: emit browser update signal
+    # emit_update(swbrowser)
+
+# connect widgets to actions
 ui.actionQuit.triggered.connect(sys.exit)
 ui.actionAbout.triggered.connect(run_about)
 ui.ImageWallpaperButton.clicked.connect(setImageWallpaper)
@@ -104,6 +123,24 @@ ui.WallpaperModeBox.currentIndexChanged.connect(setWallpaperStyle)
 ui.ColorWallpaperButton.clicked.connect(setColorWallpaper)
 ui.StyleSheetButton.clicked.connect(setStyleSheet)
 ui.MenuButton.clicked.connect(setMenu)
+ui.TerminalButton.clicked.connect(setTerminal)
+ui.FileManagerButton.clicked.connect(setFileManager)
+ui.WebBrowserButton.clicked.connect(setWebBrowser)
+
+# setup values of widgets
+index = ui.WallpaperModeBox.findText(config.WALLPAPER_STYLE)
+ui.WallpaperModeBox.setCurrentIndex(index)
+ui.StyleSheetEdit.setText(config.GENERAL_STYLESHEET)
+ui.IconThemeEdit.setText(config.GENERAL_ICONTHEME)
+ui.MenuEdit.setText(config.GENERAL_MENU)
+ui.TerminalEdit.setText(config.DEFAULT_TERMINAL)
+ui.FileManagerEdit.setText(config.DEFAULT_FILEMANAGER)
+ui.WebBrowserEdit.setText(config.DEFAULT_WEBBROWSER)
+
+if config.WALLPAPER_IMAGE:
+    setImageWallpaper(config.WALLPAPER_IMAGE)
+else:
+    setColorWallpaper(config.WALLPAPER_COLOR)
 
 # run!
 MainWindow.show()

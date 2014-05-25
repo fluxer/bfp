@@ -40,6 +40,7 @@ class Config(object):
 
     def write(self, variable, value):
         self.settings.setValue(variable, value)
+        self.read()
 
 config = Config()
 

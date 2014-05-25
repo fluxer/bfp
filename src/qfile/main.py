@@ -198,7 +198,8 @@ for device in os.listdir('/sys/class/block'):
         if os.path.exists('/sys/class/block/' + device + '/removable'):
             continue
         device = '/dev/' + device
-        icon = QtGui.QIcon('/home/smil3y/projects/bfp/src/qresources/resources/drive-harddisk.svg') # fromTheme
+        # FIXME: fromTheme
+        icon = QtGui.QIcon('/home/smil3y/projects/bfp/src/qresources/resources/drive-harddisk.svg')
         e = ui.menuDevices.addAction(icon, device)
         MainWindow.connect(e, QtCore.SIGNAL('triggered()'), lambda device=device: mount_device(device))
 #ui.MountsWidget.sortItems()
