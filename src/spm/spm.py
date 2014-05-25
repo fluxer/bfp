@@ -13,7 +13,7 @@ import os
 import re
 
 
-app_version = "0.0.1 (6206dcb)"
+app_version = "0.0.1 (479e5cc)"
 
 try:
     import libmessage
@@ -170,7 +170,6 @@ try:
     class OverrideDebug(argparse.Action):
         ''' Override printing of debug messages '''
         def __call__(self, parser, namespace, values, option_string=None):
-            print('DEBUG enabled')
             libmessage.DEBUG = True
             libmode.message.DEBUG = True
             setattr(namespace, self.dest, values)
