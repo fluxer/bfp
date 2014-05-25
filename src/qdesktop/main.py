@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import qdesktop_ui
-from PyQt4 import QtCore, QtGui, QtDBus
+from PyQt4 import QtCore, QtGui
 import sys, os
 import libmisc
 misc = libmisc.Misc()
@@ -41,26 +41,6 @@ def setLook():
         MainWindow.setStyleSheet('')
     icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
-
-# dbus setup
-class Pong(QtCore.QObject):
-    @QtCore.pyqtSlot()
-    def ping(self):
-        setLook()
-
-if not QtDBus.QDBusConnection.sessionBus().isConnected():
-    sys.stderr.write("Cannot connect to the D-Bus session bus.\n"
-        "To start it, run:\n"
-        "\teval `dbus-launch --auto-syntax`\n")
-    sys.exit(1)
-
-if not QtDBus.QDBusConnection.sessionBus().registerService('com.trolltech.QtDBus.PingExample'):
-    sys.stderr.write("%s\n" % QtDBus.QDBusConnection.sessionBus().lastError().message())
-    sys.exit(1)
-
-pong = Pong()
-QtDBus.QDBusConnection.sessionBus().registerObject('/', pong,
-    QtDBus.QDBusConnection.ExportAllSlots)
 
 # setup desktop menu
 def show_popup():
@@ -179,7 +159,7 @@ def run_terminal():
 def run_filemanager():
     p = QtCore.QProcess()
     p.setWorkingDirectory(QtCore.QDir.homePath())
-    p.startDetached(config.DEFAULT_FILEMANAGER)
+    p.startDetached(config.DEFAULT_FILEMANAGER, QtCore.QDir.homePath())
     p.close()
 
 def run_webbrowser():

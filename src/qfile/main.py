@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import qfile_ui
-from PyQt4 import QtCore, QtGui, QtDBus
+from PyQt4 import QtCore, QtGui
 import sys, os
 import libmisc
 misc = libmisc.Misc()

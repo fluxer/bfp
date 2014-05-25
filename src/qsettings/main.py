@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import qsettings_ui
-from PyQt4 import QtCore, QtGui, QtDBus
+from PyQt4 import QtCore, QtGui
 import sys
 import libmisc
 misc = libmisc.Misc()
@@ -14,22 +14,6 @@ MainWindow = QtGui.QMainWindow()
 ui = qsettings_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 icon = QtGui.QIcon()
-
-# dbus setup
-if not QtDBus.QDBusConnection.sessionBus().isConnected():
-    sys.stderr.write("Cannot connect to the D-Bus session bus.\n"
-        "To start it, run:\n"
-        "\teval `dbus-launch --auto-syntax`\n")
-    sys.exit(1)
-
-iface = QtDBus.QDBusInterface('com.trolltech.QtDBus.PingExample', '/', '',
-    QtDBus.QDBusConnection.sessionBus())
-
-def emit_update():
-    if iface.isValid():
-        reply = QtDBus.QDBusReply(iface.call('ping'))
-        if not reply.isValid():
-            sys.stderr.write("DBus call failed: %s\n" % reply.error().message())
 
 def run_about():
     QtGui.QMessageBox.about(MainWindow, "About", '<b>QSettings v1.0.0</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
