@@ -16,6 +16,7 @@ ui.setupUi(MainWindow)
 # some variables
 config = libqdesktop.Config()
 actions = libqdesktop.Actions(MainWindow, app)
+icon = QtGui.QIcon()
 
 # setup desktop widget
 model = QtGui.QFileSystemModel()
@@ -26,17 +27,26 @@ ui.DesktopView.setRootIndex(root)
 os.chdir(desktop)
 ui.DesktopView.setViewMode(ui.DesktopView.IconMode)
 
-def setWallpaper(arg= config.WALLPAPER_IMAGE, arg2=config.WALLPAPER_STYLE):
-    if arg and os.path.isfile(arg):
-        ui.DesktopView.setStyleSheet("border-image: url(" + arg + ") 0 0 0 0 " + arg2 + " " + arg2 + "; color: rgb(179, 179, 179);")
+def setLook():
+    config.read()
+    if config.WALLPAPER_IMAGE:
+        ui.DesktopView.setStyleSheet("border-image: url(" + \
+            config.WALLPAPER_IMAGE + ") 0 0 0 0 " + config.WALLPAPER_STYLE + \
+            " " + config.WALLPAPER_STYLE + "; color: rgb(179, 179, 179);")
     else:
-        ui.DesktopView.setStyleSheet("background-color: " + arg + ";")
+        ui.DesktopView.setStyleSheet("background-color: " + config.WALLPAPER_COLOR + ";")
+    if config.GENERAL_STYLESHEET:
+        MainWindow.setStyle(config.GENERAL_STYLESHEET)
+    else:
+        MainWindow.setStyleSheet('')
+    icon.setThemeName(config.GENERAL_ICONTHEME)
+setLook()
 
 # dbus setup
 class Pong(QtCore.QObject):
-    @QtCore.pyqtSlot(str, str)
-    def ping(self, arg, arg2):
-        setWallpaper(arg, arg2)
+    @QtCore.pyqtSlot()
+    def ping(self):
+        setLook()
 
 if not QtDBus.QDBusConnection.sessionBus().isConnected():
     sys.stderr.write("Cannot connect to the D-Bus session bus.\n"
@@ -189,10 +199,6 @@ ui.DesktopView.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
 ui.DesktopView.customContextMenuRequested.connect(enable_actions)
 ui.DesktopView.customContextMenuRequested.connect(show_popup)
 ui.menubar.hide()
-
-# setup background
-setWallpaper()
-
 
 # setup signals
 # FIXME: open directory on enter

@@ -13,6 +13,7 @@ app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qsettings_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
+icon = QtGui.QIcon()
 
 # dbus setup
 if not QtDBus.QDBusConnection.sessionBus().isConnected():
@@ -24,9 +25,9 @@ if not QtDBus.QDBusConnection.sessionBus().isConnected():
 iface = QtDBus.QDBusInterface('com.trolltech.QtDBus.PingExample', '/', '',
     QtDBus.QDBusConnection.sessionBus())
 
-def emit_update(arg, arg2):
+def emit_update():
     if iface.isValid():
-        reply = QtDBus.QDBusReply(iface.call('ping', arg, arg2))
+        reply = QtDBus.QDBusReply(iface.call('ping'))
         if not reply.isValid():
             sys.stderr.write("DBus call failed: %s\n" % reply.error().message())
 
@@ -47,7 +48,7 @@ def setImageWallpaper(simage):
     ui.WallpaperView.setStyleSheet("border-image: url(" + simage + ") 0 0 0 0 " + style + " " + style + ";")
     config.write('wallpaper/image', simage)
     config.write('wallpaper/style', style)
-    emit_update(simage, style)
+    emit_update()
 
 def setColorWallpaper(scolor):
     if not scolor:
@@ -57,7 +58,7 @@ def setColorWallpaper(scolor):
     ui.WallpaperView.setStyleSheet("background-color: " + scolor + ";")
     config.write('wallpaper/image', '')
     config.write('wallpaper/color', str(scolor))
-    emit_update(scolor, '')
+    emit_update()
 
 def setStyleSheet():
     ssheet = QtGui.QFileDialog.getOpenFileName(MainWindow,
@@ -68,8 +69,7 @@ def setStyleSheet():
     ui.StyleSheetEdit.setText(ssheet)
     # FIXME: apply stylesheet
     config.write('general/stylesheet', ssheet)
-    # FIXME: emit stylesheet update signal
-    # emit_update(ssheet)
+    emit_update()
 
 def setMenu():
     smenu = QtGui.QFileDialog.getOpenFileName(MainWindow,
@@ -79,8 +79,7 @@ def setMenu():
     smenu = str(smenu)
     ui.MenuEdit.setText(smenu)
     config.write('general/menu', smenu)
-    # FIXME: emit menu update signal
-    # emit_update(smenu)
+    emit_update()
 
 def setTerminal():
     sterminal = QtGui.QFileDialog.getOpenFileName(MainWindow,
@@ -90,8 +89,7 @@ def setTerminal():
     sterminal = str(sterminal)
     ui.TerminalEdit.setText(sterminal)
     config.write('default/terminal', sterminal)
-    # FIXME: emit terminal update signal
-    # emit_update(sterminal)
+    emit_update()
 
 def setFileManager():
     sfmanager = QtGui.QFileDialog.getOpenFileName(MainWindow,
@@ -101,8 +99,7 @@ def setFileManager():
     sfmanager = str(sfmanager)
     ui.FileManagerEdit.setText(sfmanager)
     config.write('default/filemanager', sfmanager)
-    # FIXME: emit file manager update signal
-    # emit_update(sfmanager)
+    emit_update()
 
 def setWebBrowser():
     swbrowser = QtGui.QFileDialog.getOpenFileName(MainWindow,
@@ -112,8 +109,7 @@ def setWebBrowser():
     swbrowser = str(swbrowser)
     ui.WebBrowserEdit.setText(swbrowser)
     config.write('default/webbrowser', swbrowser)
-    # FIXME: emit browser update signal
-    # emit_update(swbrowser)
+    emit_update()
 
 # connect widgets to actions
 ui.actionQuit.triggered.connect(sys.exit)

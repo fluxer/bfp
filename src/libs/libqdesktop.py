@@ -49,7 +49,6 @@ class Menu(object):
         self.app = app
         self.widget = widget
         self.xdg = xdg.Menu
-        self.menu = config.GENERAL_MENU
 
     def execute_desktop(self, sfile):
         ''' Execute program from .desktop file '''
@@ -84,10 +83,10 @@ class Menu(object):
         depth -= 1
 
     def build(self):
-        if not os.path.isfile(self.menu):
+        if not os.path.isfile(config.GENERAL_MENU):
             return
         self.widget.clear()
-        return self.dynamic_menu(self.xdg.parse(self.menu))
+        return self.dynamic_menu(self.xdg.parse(config.GENERAL_MENU))
 
 class Actions(object):
     def __init__(self, window, app):

@@ -3,6 +3,7 @@
 import qproperties_ui
 from PyQt4 import QtCore, QtGui
 import sys, os, pwd, grp, stat
+import libqdesktop
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
@@ -15,8 +16,19 @@ for arg in sys.argv:
     if os.path.exists(arg):
          sfile = arg
 
+config = libqdesktop.Config()
 info = QtCore.QFileInfo(sfile)
 date = QtCore.QDateTime()
+icon = QtGui.QIcon()
+
+def setLook():
+    config.read()
+    if config.GENERAL_STYLESHEET:
+        Dialog.setStyle(config.GENERAL_STYLESHEET)
+    else:
+        Dialog.setStyleSheet('')
+    icon.setThemeName(config.GENERAL_ICONTHEME)
+setLook()
 
 # FIXME: disable those who can not be set
 for group in grp.getgrall():
@@ -56,9 +68,9 @@ def set_permissions(slist):
                 os.chmod(sfile, st.st_mode | -stat.S_IEXEC)
             sys.exit()
     except OSError as detail:
-        QtGui.QMessageBox.critical(Dialog, 'Properties',str(detail))
+        QtGui.QMessageBox.critical(Dialog, 'Properties', str(detail))
 
-def save_permissions(): 
+def save_permissions():
     if ui.recursiveBox.currentText() == 'True':
         import libmisc
         slist = [sfile]

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 
 import qfile_ui
-from PyQt4 import QtCore, QtGui
+from PyQt4 import QtCore, QtGui, QtDBus
 import sys, os
 import libmisc
 misc = libmisc.Misc()
@@ -17,6 +17,16 @@ ui.setupUi(MainWindow)
 model = QtGui.QFileSystemModel()
 actions = libqdesktop.Actions(MainWindow, app)
 config = libqdesktop.Config()
+icon = QtGui.QIcon()
+
+def setLook():
+    config.read()
+    if config.GENERAL_STYLESHEET:
+        MainWindow.setStyle(config.GENERAL_STYLESHEET)
+    else:
+        MainWindow.setStyleSheet('')
+    icon.setThemeName(config.GENERAL_ICONTHEME)
+setLook()
 
 def disable_actions():
     ui.actionOpen.setEnabled(False)
@@ -199,8 +209,7 @@ for device in os.listdir('/sys/class/block'):
             continue
         device = '/dev/' + device
         # FIXME: fromTheme
-        icon = QtGui.QIcon('/home/smil3y/projects/bfp/src/qresources/resources/drive-harddisk.svg')
-        e = ui.menuDevices.addAction(icon, device)
+        e = ui.menuDevices.addAction(icon.fromTheme('drive-harddisk'), device)
         MainWindow.connect(e, QtCore.SIGNAL('triggered()'), lambda device=device: mount_device(device))
 #ui.MountsWidget.sortItems()
 
