@@ -26,6 +26,8 @@ def setLook():
     else:
         MainWindow.setStyleSheet('')
     icon.setThemeName(config.GENERAL_ICONTHEME)
+    import qdarkstyle
+    MainWindow.setStyleSheet(qdarkstyle.load_stylesheet(pyside=False))
 setLook()
 
 def disable_actions():
@@ -40,6 +42,7 @@ def disable_actions():
     ui.actionCompressBzip2.setEnabled(False)
 
 def open_file():
+    print ui.ViewWidget.selectedIndexes()
     for sfile in ui.ViewWidget.selectedIndexes():
         sfile = str(model.filePath(sfile))
         QtGui.QDesktopServices.openUrl(QtCore.QUrl(sfile))

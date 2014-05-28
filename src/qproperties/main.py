@@ -28,6 +28,8 @@ def setLook():
     else:
         Dialog.setStyleSheet('')
     icon.setThemeName(config.GENERAL_ICONTHEME)
+    import qdarkstyle
+    Dialog.setStyleSheet(qdarkstyle.load_stylesheet(pyside=False))
 setLook()
 
 # FIXME: disable those who can not be set

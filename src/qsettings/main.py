@@ -15,6 +15,17 @@ ui = qsettings_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 icon = QtGui.QIcon()
 
+def setLook():
+    config.read()
+    if config.GENERAL_STYLESHEET:
+        MainWindow.setStyle(config.GENERAL_STYLESHEET)
+    else:
+        MainWindow.setStyleSheet('')
+    icon.setThemeName(config.GENERAL_ICONTHEME)
+    import qdarkstyle
+    MainWindow.setStyleSheet(qdarkstyle.load_stylesheet(pyside=False))
+setLook()
+
 def run_about():
     QtGui.QMessageBox.about(MainWindow, "About", '<b>QSettings v1.0.0</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
 
@@ -46,7 +57,7 @@ def setStyleSheet():
     ssheet = QtGui.QFileDialog.getOpenFileName(MainWindow,
         "Choose",
         QtCore.QDir.homePath(),
-        "Stylesheets (*.css);;All Files (*)")
+        "Cascading Style Sheets (*.css);;All Files (*)")
     ssheet = str(ssheet)
     ui.StyleSheetEdit.setText(ssheet)
     # FIXME: apply stylesheet

@@ -1,6 +1,6 @@
 #!/usr/bin/python
 
-import os, shutil
+import os
 import xdg.Menu, xdg.DesktopEntry
 from PyQt4 import QtCore, QtGui
 import libmisc
@@ -112,26 +112,7 @@ class Actions(object):
             return
 
     def rename_items(self, variant):
-        # FIXME: implement properly
-        for svar in variant:
-            svar_basename = os.path.basename(svar)
-            svar_dirname = os.path.dirname(svar)
-
-            svar_new, ok = QtGui.QInputDialog.getText(self.window, "Move",
-                "New name:", QtGui.QLineEdit.Normal, svar_basename)
-            if ok and svar_new:
-                pass
-            else:
-                return
-
-            svar_new = str(svar_new)
-            if os.path.exists(svar_dirname + '/' + svar_new):
-                svar_new = self.check_exists(svar_dirname + '/' + svar_new)
-                if not svar_new:
-                    return
-            new_name = os.path.join(svar_dirname, str(svar_new))
-            print('Renaming: ', svar, ' To: ', new_name)
-            os.rename(svar, new_name)
+        general.execute_program('qpaste --rename ' + misc.string_convert(variant))
 
     def cut_items(self, slist):
         sitems = misc.string_convert(slist)
@@ -146,59 +127,13 @@ class Actions(object):
         self.copy = slist
 
     def paste_items(self, window):
-        # FIXME: implement cancel
-        progress = QtGui.QProgressDialog(window)
-        progress.setMinimum(0)
-        progress.setMaximum(0)
-        cur_dir = os.path.realpath(os.curdir)
         if self.cut:
-            progress.show()
-            for svar in self.cut:
-                svar = str(svar)
-                svar_basename = os.path.basename(svar)
-                if os.path.exists(cur_dir + '/' + svar_basename):
-                    svar_basename = self.check_exists(cur_dir + '/' + svar_basename)
-                    if not svar_basename:
-                        continue
-                svar_copy = cur_dir + '/' + svar_basename
-                progress.setLabelText('Moving: <b>' + svar + '</b> To: <b>' + svar_copy + '</b>')
-                os.rename(svar, svar_copy)
+            general.execute_program('qpaste --cut ' + misc.string_convert(self.cut))
         elif self.copy:
-            progress.show()
-            for svar in self.copy:
-                svar = str(svar)
-                svar_basename = os.path.basename(svar)
-                if os.path.exists(cur_dir + '/' + svar_basename):
-                    svar_basename = self.check_exists(cur_dir + '/' + svar_basename)
-                    if not svar_basename:
-                        continue
-                svar_copy = cur_dir + '/' + svar_basename
-                progress.setLabelText('Copying: <b>' + svar + '</b> To: <b>' + svar_copy + '</b>')
-                if os.path.isdir(svar):
-                    shutil.copytree(svar, svar_copy)
-                else:
-                    shutil.copy2(svar, svar_copy)
-        progress.close()
+            general.execute_program('qpaste --copy ' + misc.string_convert(self.copy))
 
-    def delete_items(self, variant, ask=True):
-        for svar in variant:
-            if ask:
-                reply = QtGui.QMessageBox.question(self.window, "Delete",
-                    "Are you sure you want to delete <b>" + svar + "</b>? ", QtGui.QMessageBox.Yes | QtGui.QMessageBox.YesToAll | QtGui.QMessageBox.No | QtGui.QMessageBox.Cancel)
-                if reply == QtGui.QMessageBox.Yes:
-                    pass
-                elif reply == QtGui.QMessageBox.No:
-                    continue
-                elif reply == QtGui.QMessageBox.YesToAll:
-                    ask = False
-                else:
-                    return
-
-            print('Removing: ', svar)
-            if os.path.isdir(svar):
-                misc.dir_remove(svar)
-            else:
-                os.unlink(svar)
+    def delete_items(self, variant):
+        general.execute_program('qpaste --delete ' + misc.string_convert(variant))
 
     def extract_items(self, variant):
         # FIXME: implement please wait???
