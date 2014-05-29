@@ -24,13 +24,12 @@ icon = QtGui.QIcon()
 
 def setLook():
     config.read()
-    if config.GENERAL_STYLESHEET:
-        Dialog.setStyle(config.GENERAL_STYLESHEET)
+    ssheet = '/etc/qdesktop/styles/' + config.GENERAL_STYLESHEET + '/style.qss'
+    if config.GENERAL_STYLESHEET and os.path.isfile(ssheet):
+        app.setStyleSheet(misc.file_read(ssheet))
     else:
-        Dialog.setStyleSheet('')
+        app.setStyleSheet('')
     icon.setThemeName(config.GENERAL_ICONTHEME)
-    import qdarkstyle
-    Dialog.setStyleSheet(qdarkstyle.load_stylesheet(pyside=False))
 setLook()
 
 Dialog.show()
@@ -66,6 +65,7 @@ if action == '--copy':
 elif action == '--cut':
     try:
         items = sys.argv[2:]
+        cur_dir = os.path.realpath(os.curdir)
         step = 100/len(items)
         for svar in items:
             svar = str(svar)
@@ -113,7 +113,7 @@ elif action == '--delete':
         sys.exit(0)
 elif action == '--rename':
     try:
-        items = sys.argv[1:]
+        items = sys.argv[2:]
         step = 100/len(items)
         for svar in items:
             svar_basename = os.path.basename(svar)

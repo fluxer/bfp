@@ -29,20 +29,22 @@ ui.DesktopView.setViewMode(ui.DesktopView.IconMode)
 
 def setLook():
     config.read()
+    ssheet = '/etc/qdesktop/styles/' + config.GENERAL_STYLESHEET + '/style.qss'
+    if config.GENERAL_STYLESHEET and os.path.isfile(ssheet):
+        app.setStyleSheet(misc.file_read(ssheet))
+    else:
+        app.setStyleSheet('')
+    icon.setThemeName(config.GENERAL_ICONTHEME)
+setLook()
+
+def setWallpaper():
     if config.WALLPAPER_IMAGE:
         ui.DesktopView.setStyleSheet("border-image: url(" + \
             config.WALLPAPER_IMAGE + ") 0 0 0 0 " + config.WALLPAPER_STYLE + \
             " " + config.WALLPAPER_STYLE + "; color: rgb(179, 179, 179);")
     else:
         ui.DesktopView.setStyleSheet("background-color: " + config.WALLPAPER_COLOR + ";")
-    if config.GENERAL_STYLESHEET:
-        app.setStyle(config.GENERAL_STYLESHEET)
-    else:
-        app.setStyleSheet('')
-    icon.setThemeName(config.GENERAL_ICONTHEME)
-    import qdarkstyle
-    MainWindow.setStyleSheet(qdarkstyle.load_stylesheet(pyside=False))
-setLook()
+setWallpaper()
 
 # setup desktop menu
 def show_popup():
@@ -65,19 +67,22 @@ def disable_actions():
     ui.actionCompressBzip2.setEnabled(False)
 
 def enable_actions():
-    for sdir in ui.DesktopView.selectedIndexes():
-        if misc.archive_supported(str(model.filePath(sdir))):
+    for svar in ui.DesktopView.selectedIndexes():
+        sfile = str(model.filePath(svar))
+        if misc.archive_supported(sfile):
             ui.actionDecompress.setEnabled(True)
         else:
             ui.actionCompressGzip.setEnabled(True)
             ui.actionCompressBzip2.setEnabled(True)
 
     if ui.DesktopView.selectedIndexes():
-        ui.actionOpen.setEnabled(True)
-        ui.actionRename.setEnabled(True)
-        ui.actionCut.setEnabled(True)
-        ui.actionCopy.setEnabled(True)
-        ui.actionDelete.setEnabled(True)
+        if os.access(sfile, os.W_OK):
+            ui.actionRename.setEnabled(True)
+            ui.actionCut.setEnabled(True)
+            ui.actionDelete.setEnabled(True)
+        if os.access(sfile, os.R_OK):
+            ui.actionOpen.setEnabled(True)
+            ui.actionCopy.setEnabled(True)
         ui.actionProperties.setEnabled(True)
     else:
         disable_actions()

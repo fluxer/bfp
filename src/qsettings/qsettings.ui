@@ -172,7 +172,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>155</y>
+        <y>165</y>
         <width>501</width>
         <height>146</height>
        </rect>
@@ -277,78 +277,12 @@
         <x>10</x>
         <y>10</y>
         <width>501</width>
-        <height>141</height>
+        <height>146</height>
        </rect>
       </property>
       <property name="title">
        <string> Appearance</string>
       </property>
-      <widget class="QPushButton" name="StyleSheetButton">
-       <property name="enabled">
-        <bool>true</bool>
-       </property>
-       <property name="geometry">
-        <rect>
-         <x>15</x>
-         <y>20</y>
-         <width>136</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Style sheet</string>
-       </property>
-       <property name="icon">
-        <iconset resource="../qresources/libqresources.qrc">
-         <normaloff>:/usr/share/qresources/resources/preferences-desktop-theme.svg</normaloff>:/usr/share/qresources/resources/preferences-desktop-theme.svg</iconset>
-       </property>
-       <property name="flat">
-        <bool>false</bool>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="IconThemeButton">
-       <property name="geometry">
-        <rect>
-         <x>15</x>
-         <y>60</y>
-         <width>136</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Icon Theme</string>
-       </property>
-       <property name="icon">
-        <iconset resource="../qresources/libqresources.qrc">
-         <normaloff>:/usr/share/qresources/resources/preferences-desktop-splash.svg</normaloff>:/usr/share/qresources/resources/preferences-desktop-splash.svg</iconset>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="IconThemeEdit">
-       <property name="geometry">
-        <rect>
-         <x>165</x>
-         <y>60</y>
-         <width>321</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="StyleSheetEdit">
-       <property name="geometry">
-        <rect>
-         <x>165</x>
-         <y>20</y>
-         <width>321</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
       <widget class="QLineEdit" name="MenuEdit">
        <property name="geometry">
         <rect>
@@ -377,6 +311,61 @@
        <property name="icon">
         <iconset resource="../qresources/libqresources.qrc">
          <normaloff>:/usr/share/qresources/resources/system-run.svg</normaloff>:/usr/share/qresources/resources/system-run.svg</iconset>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="StyleBox">
+       <property name="geometry">
+        <rect>
+         <x>165</x>
+         <y>20</y>
+         <width>321</width>
+         <height>26</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="IconThemeBox">
+       <property name="geometry">
+        <rect>
+         <x>165</x>
+         <y>60</y>
+         <width>321</width>
+         <height>26</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_2">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>25</y>
+         <width>126</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Style</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_3">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>60</y>
+         <width>126</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="text">
+        <string>Icon Theme</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </widget>

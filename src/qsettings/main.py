@@ -2,7 +2,7 @@
 
 import qsettings_ui
 from PyQt4 import QtCore, QtGui
-import sys
+import sys, os
 import libmisc
 misc = libmisc.Misc()
 import libqdesktop
@@ -17,13 +17,12 @@ icon = QtGui.QIcon()
 
 def setLook():
     config.read()
-    if config.GENERAL_STYLESHEET:
-        MainWindow.setStyle(config.GENERAL_STYLESHEET)
+    ssheet = '/etc/qdesktop/styles/' + config.GENERAL_STYLESHEET + '/style.qss'
+    if config.GENERAL_STYLESHEET and os.path.isfile(ssheet):
+        app.setStyleSheet(misc.file_read(ssheet))
     else:
-        MainWindow.setStyleSheet('')
+        app.setStyleSheet('')
     icon.setThemeName(config.GENERAL_ICONTHEME)
-    import qdarkstyle
-    MainWindow.setStyleSheet(qdarkstyle.load_stylesheet(pyside=False))
 setLook()
 
 def run_about():
@@ -54,14 +53,14 @@ def setColorWallpaper(scolor):
     config.write('wallpaper/color', str(scolor))
 
 def setStyleSheet():
-    ssheet = QtGui.QFileDialog.getOpenFileName(MainWindow,
-        "Choose",
-        QtCore.QDir.homePath(),
-        "Cascading Style Sheets (*.css);;All Files (*)")
-    ssheet = str(ssheet)
-    ui.StyleSheetEdit.setText(ssheet)
+    ssheet = str(ui.StyleBox.currentText())
     # FIXME: apply stylesheet
     config.write('general/stylesheet', ssheet)
+
+def setIconTheme():
+    stheme = str(ui.IconThemeBox.currentText())
+    # FIXME: apply icon theme
+    config.write('general/icontheme', stheme)
 
 def setMenu():
     smenu = QtGui.QFileDialog.getOpenFileName(MainWindow,
@@ -105,17 +104,29 @@ ui.actionAbout.triggered.connect(run_about)
 ui.ImageWallpaperButton.clicked.connect(setImageWallpaper)
 ui.WallpaperModeBox.currentIndexChanged.connect(setWallpaperStyle)
 ui.ColorWallpaperButton.clicked.connect(setColorWallpaper)
-ui.StyleSheetButton.clicked.connect(setStyleSheet)
+ui.StyleBox.currentIndexChanged.connect(setStyleSheet)
+ui.IconThemeBox.currentIndexChanged.connect(setIconTheme)
 ui.MenuButton.clicked.connect(setMenu)
 ui.TerminalButton.clicked.connect(setTerminal)
 ui.FileManagerButton.clicked.connect(setFileManager)
 ui.WebBrowserButton.clicked.connect(setWebBrowser)
 
 # setup values of widgets
+for svar in misc.list_dirs('/etc/qdesktop/styles'):
+    print svar
+    if os.path.isfile(svar + '/style.qss'):
+        ui.StyleBox.addItem(os.path.basename(svar))
+
+for svar in misc.list_dirs('/usr/share/icons'):
+    if os.path.isfile(svar + '/index.theme'):
+        ui.IconThemeBox.addItem(os.path.basename(svar))
+
 index = ui.WallpaperModeBox.findText(config.WALLPAPER_STYLE)
 ui.WallpaperModeBox.setCurrentIndex(index)
-ui.StyleSheetEdit.setText(config.GENERAL_STYLESHEET)
-ui.IconThemeEdit.setText(config.GENERAL_ICONTHEME)
+index = ui.StyleBox.findText(config.GENERAL_STYLESHEET)
+ui.StyleBox.setCurrentIndex(index)
+index = ui.IconThemeBox.findText(config.GENERAL_ICONTHEME)
+ui.IconThemeBox.setCurrentIndex(index)
 ui.MenuEdit.setText(config.GENERAL_MENU)
 ui.TerminalEdit.setText(config.DEFAULT_TERMINAL)
 ui.FileManagerEdit.setText(config.DEFAULT_FILEMANAGER)

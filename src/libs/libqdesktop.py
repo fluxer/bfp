@@ -28,7 +28,7 @@ class Config(object):
         self.read()
 
     def read(self):
-        self.GENERAL_STYLESHEET = str(self.settings.value('general/stylesheet', '').toString())
+        self.GENERAL_STYLESHEET = str(self.settings.value('general/stylesheet', 'qdarkstyle').toString())
         self.GENERAL_ICONTHEME = str(self.settings.value('general/icontheme', '').toString())
         self.GENERAL_MENU = str(self.settings.value('general/menu', '/etc/xdg/menus/applications.menu').toString())
         self.WALLPAPER_IMAGE = str(self.settings.value('wallpaper/image', '').toString())

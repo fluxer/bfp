@@ -4,6 +4,8 @@ import qproperties_ui
 from PyQt4 import QtCore, QtGui
 import sys, os, pwd, grp, stat
 import libqdesktop
+import libmisc
+misc = libmisc.Misc()
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
@@ -23,13 +25,12 @@ icon = QtGui.QIcon()
 
 def setLook():
     config.read()
-    if config.GENERAL_STYLESHEET:
-        Dialog.setStyle(config.GENERAL_STYLESHEET)
+    ssheet = '/etc/qdesktop/styles/' + config.GENERAL_STYLESHEET + '/style.qss'
+    if config.GENERAL_STYLESHEET and os.path.isfile(ssheet):
+        app.setStyleSheet(misc.file_read(ssheet))
     else:
-        Dialog.setStyleSheet('')
+        app.setStyleSheet('')
     icon.setThemeName(config.GENERAL_ICONTHEME)
-    import qdarkstyle
-    Dialog.setStyleSheet(qdarkstyle.load_stylesheet(pyside=False))
 setLook()
 
 # FIXME: disable those who can not be set
@@ -84,7 +85,6 @@ def set_permissions(slist):
         for sfile in slist:
             if not owner == new_owner or not group == new_group:
                 os.chown(sfile, pwd.getpwnam(new_owner).pw_uid, grp.getgrnam(new_group).gr_gid)
-            print executable, new_executable
             if executable == 0 and new_executable:
                 st = os.stat(sfile)
                 os.chmod(sfile, st.st_mode | stat.S_IEXEC)

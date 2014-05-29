@@ -21,13 +21,12 @@ icon = QtGui.QIcon()
 
 def setLook():
     config.read()
-    if config.GENERAL_STYLESHEET:
-        MainWindow.setStyle(config.GENERAL_STYLESHEET)
+    ssheet = '/etc/qdesktop/styles/' + config.GENERAL_STYLESHEET + '/style.qss'
+    if config.GENERAL_STYLESHEET and os.path.isfile(ssheet):
+        app.setStyleSheet(misc.file_read(ssheet))
     else:
-        MainWindow.setStyleSheet('')
+        app.setStyleSheet('')
     icon.setThemeName(config.GENERAL_ICONTHEME)
-    import qdarkstyle
-    MainWindow.setStyleSheet(qdarkstyle.load_stylesheet(pyside=False))
 setLook()
 
 def disable_actions():
@@ -156,19 +155,22 @@ def compress_bzip2():
     actions.bzip2_items(selected_items)
 
 def enable_actions():
-    for sdir in ui.ViewWidget.selectedIndexes():
-        if misc.archive_supported(str(model.filePath(sdir))):
+    for svar in ui.ViewWidget.selectedIndexes():
+        sfile = str(model.filePath(svar))
+        if misc.archive_supported(sfile):
             ui.actionDecompress.setEnabled(True)
         else:
             ui.actionCompressGzip.setEnabled(True)
             ui.actionCompressBzip2.setEnabled(True)
 
     if ui.ViewWidget.selectedIndexes():
-        ui.actionOpen.setEnabled(True)
-        ui.actionRename.setEnabled(True)
-        ui.actionCut.setEnabled(True)
-        ui.actionCopy.setEnabled(True)
-        ui.actionDelete.setEnabled(True)
+        if os.access(sfile, os.W_OK):
+            ui.actionRename.setEnabled(True)
+            ui.actionCut.setEnabled(True)
+            ui.actionDelete.setEnabled(True)
+        if os.access(sfile, os.R_OK):
+            ui.actionOpen.setEnabled(True)
+            ui.actionCopy.setEnabled(True)
         ui.actionProperties.setEnabled(True)
     else:
         disable_actions()
