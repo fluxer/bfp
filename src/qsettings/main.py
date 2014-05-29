@@ -54,13 +54,13 @@ def setColorWallpaper(scolor):
 
 def setStyleSheet():
     ssheet = str(ui.StyleBox.currentText())
-    # FIXME: apply stylesheet
     config.write('general/stylesheet', ssheet)
+    setLook()
 
 def setIconTheme():
     stheme = str(ui.IconThemeBox.currentText())
-    # FIXME: apply icon theme
     config.write('general/icontheme', stheme)
+    setLook()
 
 def setMenu():
     smenu = QtGui.QFileDialog.getOpenFileName(MainWindow,
@@ -113,7 +113,6 @@ ui.WebBrowserButton.clicked.connect(setWebBrowser)
 
 # setup values of widgets
 for svar in misc.list_dirs('/etc/qdesktop/styles'):
-    print svar
     if os.path.isfile(svar + '/style.qss'):
         ui.StyleBox.addItem(os.path.basename(svar))
 

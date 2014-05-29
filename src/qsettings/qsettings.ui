@@ -322,6 +322,11 @@
          <height>26</height>
         </rect>
        </property>
+       <item>
+        <property name="text">
+         <string/>
+        </property>
+       </item>
       </widget>
       <widget class="QComboBox" name="IconThemeBox">
        <property name="geometry">
