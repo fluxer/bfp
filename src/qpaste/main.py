@@ -40,7 +40,6 @@ if action == '--copy':
     try:
         items = sys.argv[2:]
         step = 100/len(items)
-        print ('Initial', step, len(items))
         cur_dir = os.path.realpath(os.curdir)
         for svar in items:
             svar = str(svar)
@@ -55,7 +54,6 @@ if action == '--copy':
                 shutil.copytree(svar, svar_copy)
             else:
                 shutil.copy2(svar, svar_copy)
-            print ('Copy', step)
             ui.ProgressBar.setValue(step)
             step = step + step
     except Exception as detail:
