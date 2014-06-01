@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/usr/share/qresources">
+    <file>resources/object-hidden.svg</file>
     <file>resources/preferences-desktop-splash.svg</file>
     <file>resources/preferences-desktop-theme.svg</file>
     <file>resources/color-picker.svg</file>

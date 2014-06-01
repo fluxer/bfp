@@ -150,7 +150,7 @@
      <x>0</x>
      <y>0</y>
      <width>586</width>
-     <height>21</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMain">
@@ -220,6 +220,7 @@
      <addaction name="actionList"/>
     </widget>
     <addaction name="menuView"/>
+    <addaction name="actionViewHidden"/>
     <addaction name="actionPreferences"/>
    </widget>
    <widget class="QMenu" name="menuDevices">
@@ -485,6 +486,18 @@
    </property>
    <property name="text">
     <string>Compress (bzip2)</string>
+   </property>
+  </action>
+  <action name="actionViewHidden">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/object-hidden.svg</normaloff>:/usr/share/qresources/resources/object-hidden.svg</iconset>
+   </property>
+   <property name="text">
+    <string>View hidden</string>
    </property>
   </action>
  </widget>

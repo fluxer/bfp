@@ -81,6 +81,12 @@ def change_view_icons():
 def change_view_list():
     ui.ViewWidget.setViewMode(ui.ViewWidget.ListMode)
 
+def change_view_hidden():
+    if ui.actionViewHidden.isChecked():
+        model.setFilter(QtCore.QDir.Files | QtCore.QDir.Dirs | QtCore.QDir.NoDotAndDotDot | QtCore.QDir.Hidden)
+    else:
+        model.setFilter(QtCore.QDir.Files | QtCore.QDir.Dirs | QtCore.QDir.NoDotAndDotDot)
+
 def change_home():
     change_directory(QtCore.QDir.homePath())
 
@@ -179,6 +185,7 @@ ui.actionQuit.triggered.connect(sys.exit)
 ui.actionAbout.triggered.connect(run_about)
 ui.actionIcons.triggered.connect(change_view_icons)
 ui.actionList.triggered.connect(change_view_list)
+ui.actionViewHidden.triggered.connect(change_view_hidden)
 ui.actionOpen.triggered.connect(open_file)
 ui.actionRename.triggered.connect(rename_directory)
 ui.actionCut.triggered.connect(cut_directory)
