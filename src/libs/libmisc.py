@@ -202,11 +202,11 @@ class Misc(object):
         curl = self.whereis('curl', fallback=False)
         wget = self.whereis('wget', fallback=False)
         if self.EXTERNAL and curl:
-            subprocess.check_call((curl, '--connect-timeout', str(self.TIMEOUT),
-                '--fail', '--retry', '10', '--location', '--continue-at', '-',
+            subprocess.check_call((curl, '--connect-timeout', str(self.TIMEOUT), \
+                '--fail', '--retry', '10', '--location', '--continue-at', '-', \
                 url, '--output', destination))
         elif self.EXTERNAL and wget:
-            subprocess.check_call((wget, '--timeout', str(self.TIMEOUT),
+            subprocess.check_call((wget, '--timeout', str(self.TIMEOUT), \
                 '--continue', url, '--output-document', destination))
         else:
             self.fetch_internal(url, destination)
@@ -361,7 +361,7 @@ class Misc(object):
     def system_script(self, srcbuild, function):
         ''' Execute pre/post actions '''
         if self.ROOT_DIR == '/':
-            subprocess.check_call((self.whereis('bash'), '-e', '-c', 'source ' + srcbuild + ' && ' + function),
+            subprocess.check_call((self.whereis('bash'), '-e', '-c', 'source ' + srcbuild + ' && ' + function), \
                 cwd=self.ROOT_DIR)
         else:
             shutil.copy(srcbuild, os.path.join(self.ROOT_DIR, 'SRCBUILD'))

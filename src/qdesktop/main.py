@@ -106,7 +106,7 @@ def paste_directory():
     global thread
     class AThread(QtCore.QThread):
         def run(self):
-            actions.paste_items(MainWindow)
+            actions.paste_items()
             #self.emit(QtCore.SIGNAL('paste_finished'))
     thread = AThread()
     thread.start()

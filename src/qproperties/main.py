@@ -16,7 +16,7 @@ ui.setupUi(Dialog)
 sfile = QtCore.QDir.currentPath()
 for arg in sys.argv:
     if os.path.exists(arg):
-         sfile = arg
+        sfile = arg
 
 config = libqdesktop.Config()
 info = QtCore.QFileInfo(sfile)
@@ -53,8 +53,6 @@ ui.lastModifiedLabel.setText(QtCore.QDateTime.toString(info.lastModified()))
 ui.lastReadLabel.setText(QtCore.QDateTime.toString(info.lastRead()))
 # FIXME: change units depending on length of size
 if os.path.isdir(sfile):
-    import libmisc
-    misc = libmisc.Misc()
     size = str(misc.dir_size(sfile))
 else:
     size = str(os.path.getsize(sfile))
@@ -97,9 +95,8 @@ def set_permissions(slist):
 
 def save_permissions():
     if ui.recursiveBox.currentText() == 'True':
-        import libmisc
         slist = [sfile]
-        slist.extend(libmisc.Misc().list_all(sfile))
+        slist.extend(misc.list_all(sfile))
         print('Recursive permssions change of', slist)
         set_permissions(slist)
     else:

@@ -74,7 +74,7 @@ class Menu(object):
                 icon = QtGui.QIcon.fromTheme(entry.DesktopEntry.getIcon())
                 name = entry.DesktopEntry.getName()
                 e = widget.addAction(icon, name)
-                widget.connect(e, QtCore.SIGNAL('triggered()'),
+                widget.connect(e, QtCore.SIGNAL('triggered()'), \
                     lambda sfile=entry.DesktopEntry.getFileName(): self.execute_desktop(sfile))
             #elif isinstance(entry, self.xdg.Separator):
             #    self.widget.addSeparator()
@@ -100,7 +100,7 @@ class Actions(object):
     def check_exists(self, sfile):
         sfile_basename = os.path.basename(sfile)
         sfile_dirname = os.path.dirname(sfile)
-        sfile_basename, ok = QtGui.QInputDialog.getText(self.window, "File/directory exists",
+        sfile_basename, ok = QtGui.QInputDialog.getText(self.window, "File/directory exists", \
                 "File/directory exists, new name:", QtGui.QLineEdit.Normal, sfile_basename)
         sfile_basename = str(sfile_basename)
         if ok and sfile_basename:
@@ -126,7 +126,7 @@ class Actions(object):
         self.cut = None
         self.copy = slist
 
-    def paste_items(self, window):
+    def paste_items(self):
         if self.cut:
             general.execute_program('qpaste --cut ' + misc.string_convert(self.cut))
         elif self.copy:
@@ -166,7 +166,7 @@ class Actions(object):
         misc.archive_compress(variant, soutput, 'bz2', svar)
 
     def new_file(self):
-        svar, ok = QtGui.QInputDialog.getText(self.window, "New file",
+        svar, ok = QtGui.QInputDialog.getText(self.window, "New file", \
             "Name:", QtGui.QLineEdit.Normal)
         svar = os.path.realpath(str(svar))
         if ok and svar:
@@ -179,7 +179,7 @@ class Actions(object):
             misc.file_write(os.path.realpath(svar), '')
 
     def new_directory(self):
-        svar, ok = QtGui.QInputDialog.getText(self.window, "New directory",
+        svar, ok = QtGui.QInputDialog.getText(self.window, "New directory", \
             "Name:", QtGui.QLineEdit.Normal)
         svar = os.path.realpath(str(svar))
         if ok and svar:

@@ -26,7 +26,8 @@ def setLook():
 setLook()
 
 def run_about():
-    QtGui.QMessageBox.about(MainWindow, "About", '<b>QSettings v1.0.0</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
+    QtGui.QMessageBox.about(MainWindow, "About", \
+        '<b>QSettings v1.0.0</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
 
 def setWallpaperStyle():
     setImageWallpaper(config.WALLPAPER_IMAGE)
@@ -34,10 +35,8 @@ def setWallpaperStyle():
 def setImageWallpaper(simage):
     style = str(ui.WallpaperModeBox.currentText())
     if not simage:
-        simage = QtGui.QFileDialog.getOpenFileName(MainWindow,
-                "Choose",
-                QtCore.QDir.homePath(),
-                "Image Files (*.jpg *.png *.jpeg);;All Files (*)")
+        simage = QtGui.QFileDialog.getOpenFileName(MainWindow, \
+            "Choose", QtCore.QDir.homePath(), "Image Files (*.jpg *.png *.jpeg);;All Files (*)")
         simage = str(simage)
     ui.WallpaperView.setStyleSheet("border-image: url(" + simage + ") 0 0 0 0 " + style + " " + style + ";")
     config.write('wallpaper/image', simage)
@@ -63,37 +62,29 @@ def setIconTheme():
     setLook()
 
 def setMenu():
-    smenu = QtGui.QFileDialog.getOpenFileName(MainWindow,
-        "Choose",
-        QtCore.QDir.homePath(),
-        "Menus (*.menu);;All Files (*)")
+    smenu = QtGui.QFileDialog.getOpenFileName(MainWindow, \
+        "Choose", QtCore.QDir.homePath(), "Menus (*.menu);;All Files (*)")
     smenu = str(smenu)
     ui.MenuEdit.setText(smenu)
     config.write('general/menu', smenu)
 
 def setTerminal():
-    sterminal = QtGui.QFileDialog.getOpenFileName(MainWindow,
-        "Choose",
-        QtCore.QDir.homePath(),
-        "All Files (*)")
+    sterminal = QtGui.QFileDialog.getOpenFileName(MainWindow, \
+        "Choose", QtCore.QDir.homePath(), "All Files (*)")
     sterminal = str(sterminal)
     ui.TerminalEdit.setText(sterminal)
     config.write('default/terminal', sterminal)
 
 def setFileManager():
-    sfmanager = QtGui.QFileDialog.getOpenFileName(MainWindow,
-        "Choose",
-        QtCore.QDir.homePath(),
-        "All Files (*)")
+    sfmanager = QtGui.QFileDialog.getOpenFileName(MainWindow, \
+        "Choose", QtCore.QDir.homePath(), "All Files (*)")
     sfmanager = str(sfmanager)
     ui.FileManagerEdit.setText(sfmanager)
     config.write('default/filemanager', sfmanager)
 
 def setWebBrowser():
-    swbrowser = QtGui.QFileDialog.getOpenFileName(MainWindow,
-        "Choose",
-        QtCore.QDir.homePath(),
-        "All Files (*)")
+    swbrowser = QtGui.QFileDialog.getOpenFileName(MainWindow, \
+        "Choose", QtCore.QDir.homePath(), "All Files (*)")
     swbrowser = str(swbrowser)
     ui.WebBrowserEdit.setText(swbrowser)
     config.write('default/webbrowser', swbrowser)

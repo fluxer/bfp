@@ -92,7 +92,7 @@ elif action == '--delete':
             qbuttons = QtGui.QMessageBox.Yes | QtGui.QMessageBox.No | QtGui.QMessageBox.Cancel
         for svar in items:
             if ask:
-                reply = QtGui.QMessageBox.question(Dialog, "Delete",
+                reply = QtGui.QMessageBox.question(Dialog, "Delete", \
                     "Are you sure you want to delete <b>" + svar + "</b>? ", qbuttons)
                 if reply == QtGui.QMessageBox.Yes:
                     pass
@@ -121,7 +121,7 @@ elif action == '--rename':
             svar_basename = os.path.basename(svar)
             svar_dirname = os.path.dirname(svar)
 
-            svar_new, ok = QtGui.QInputDialog.getText(Dialog, "Move",
+            svar_new, ok = QtGui.QInputDialog.getText(Dialog, "Move", \
                 "New name:", QtGui.QLineEdit.Normal, svar_basename)
             if ok and svar_new:
                 pass
