@@ -127,13 +127,21 @@ class Actions(object):
         self.copy = slist
 
     def paste_items(self):
+        sitems = ''
         if self.cut:
-            general.execute_program('qpaste --cut ' + misc.string_convert(self.cut))
+            for svar in self.cut:
+                sitems += '"' + svar + '" '
+            general.execute_program('qpaste --cut ' + sitems)
         elif self.copy:
-            general.execute_program('qpaste --copy ' + misc.string_convert(self.copy))
+            for svar in self.copy:
+                sitems += '"' + svar + '" '
+            general.execute_program('qpaste --copy ' + sitems)
 
     def delete_items(self, variant):
-        general.execute_program('qpaste --delete ' + misc.string_convert(variant))
+        sitems = ''
+        for svar in variant:
+            sitems += '"' + svar + '" '
+        general.execute_program('qpaste --delete ' + sitems)
 
     def extract_items(self, variant):
         # FIXME: implement please wait???
@@ -193,4 +201,4 @@ class Actions(object):
 
     def properties_items(self, variant):
         for svar in variant:
-            general.execute_program('qproperties ' + svar)
+            general.execute_program('qproperties "' + svar + '"')
