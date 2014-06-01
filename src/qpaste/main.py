@@ -86,10 +86,14 @@ elif action == '--delete':
         items = sys.argv[2:]
         ask = True
         step = 100/len(items)
+        if step < 100:
+            qbuttons = QtGui.QMessageBox.Yes | QtGui.QMessageBox.YesToAll | QtGui.QMessageBox.No | QtGui.QMessageBox.Cancel
+        else:
+            qbuttons = QtGui.QMessageBox.Yes | QtGui.QMessageBox.No | QtGui.QMessageBox.Cancel
         for svar in items:
             if ask:
                 reply = QtGui.QMessageBox.question(Dialog, "Delete",
-                    "Are you sure you want to delete <b>" + svar + "</b>? ", QtGui.QMessageBox.Yes | QtGui.QMessageBox.YesToAll | QtGui.QMessageBox.No | QtGui.QMessageBox.Cancel)
+                    "Are you sure you want to delete <b>" + svar + "</b>? ", qbuttons)
                 if reply == QtGui.QMessageBox.Yes:
                     pass
                 elif reply == QtGui.QMessageBox.No:
