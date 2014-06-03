@@ -104,6 +104,13 @@ try:
                 else:
                     message.warning('File or directory does not exist', line)
 
+    message.sub_info('Copying hooks')
+    if os.path.isdir('/etc/mkinitfs/hooks'):
+        for sfile in misc.list_files('/etc/mkinitfs/hooks'):
+            message.sub_debug('Copying', sfile)
+            misc.dir_create(ARGS.tmp + '/hooks')
+            shutil.copy2(sfile, ARGS.tmp + '/hooks/' + os.path.basename(sfile))
+
     message.sub_info('Copying modules')
     for module in modules:
         depends = misc.system_output((misc.whereis('modprobe'), '-b', '-D', module))
