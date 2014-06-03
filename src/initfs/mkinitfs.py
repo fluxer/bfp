@@ -9,7 +9,6 @@ import zipfile
 import shutil
 import os
 
-
 app_version = "0.0.1 (61914bd)"
 
 try:
@@ -32,28 +31,46 @@ try:
     for mod in misc.system_output((misc.whereis('lsmod'))).split('\n')[1:]:
         modules.append(mod.split()[0])
 
-    parser.add_argument('-t', '--tmp', type=str, default=tmpdir,
+    parser.add_argument('-t', '--tmp', type=str, default=tmpdir, \
         help='Change temporary directory')
-    parser.add_argument('-b', '--busybox', type=str, default=busybox,
+    parser.add_argument('-b', '--busybox', type=str, default=busybox, \
         help='Change busybox binary')
-    parser.add_argument('-k', '--kernel', type=str, default=kernel,
+    parser.add_argument('-k', '--kernel', type=str, default=kernel, \
         help='Change kernel version')
-    parser.add_argument('-m', '--modules', type=str, default=modules,
+    parser.add_argument('-m', '--modules', type=str, default=modules, \
         help='Change modules')
-    parser.add_argument('-i', '--image', type=str, default=image,
+    parser.add_argument('-i', '--image', type=str, default=image, \
         help='Change output image')
-    parser.add_argument('--keep', action='store_true',
+    parser.add_argument('--keep', action='store_true', \
         help='Keep temporary directory')
-    parser.add_argument('--debug', action='store_true',
+    parser.add_argument('--debug', action='store_true', \
         help='Enable debug messages')
-    parser.add_argument('--version', action='version',
-        version='MkInitfs v' + app_version,
+    parser.add_argument('--version', action='version', \
+        version='MkInitfs v' + app_version, \
         help='Show MkInitfs version and exit')
 
     ARGS = parser.parse_args()
 
     if ARGS.debug:
         message.DEBUG = True
+
+    def copy_item(src, dst):
+        # FIXME: symlinks, force
+        if os.path.isdir(src):
+            for f in misc.list_files(src):
+                message.sub_debug('Copying', f)
+                misc.dir_create(ARGS.tmp + os.path.dirname(f))
+                shutil.copy2(f, ARGS.tmp + f)
+        elif os.path.isfile(src):
+            message.sub_debug('Copying', src)
+            misc.dir_create(os.path.dirname(dst))
+            shutil.copy2(src, dst)
+            smime = misc.file_mime(src)
+            if smime == 'application/x-executable' or smime == 'application/x-sharedlib':
+                for dep in misc.system_scanelf(src, flags='-L').split(','):
+                    copy_item(dep, ARGS.tmp + '/' + dep)
+        else:
+            message.warning('File or directory does not exist', src)
 
     message.info('Runtime information')
     message.sub_info('TMP', ARGS.tmp)
@@ -66,7 +83,7 @@ try:
     bin_dir = os.path.join(ARGS.tmp, 'bin')
     misc.dir_create(bin_dir)
     message.sub_debug('Installing binary')
-    shutil.copy2(ARGS.busybox, os.path.join(bin_dir, 'busybox'))
+    copy_item(ARGS.busybox, os.path.join(bin_dir, 'busybox'))
     message.sub_debug('Creating symlinks')
     subprocess.check_call((ARGS.busybox, '--install', '-s', bin_dir))
 
@@ -79,9 +96,7 @@ try:
         for sfile in misc.list_files('/etc/mkinitfs/root'):
             fixed_sfile = sfile.replace('/etc/mkinitfs/root', '')
             message.sub_debug('Copying', fixed_sfile)
-            misc.dir_create(ARGS.tmp + os.path.dirname(fixed_sfile))
-            shutil.copy2(sfile, ARGS.tmp + fixed_sfile)
-
+            copy_item(sfile, ARGS.tmp + fixed_sfile)
 
     message.sub_info('Copying files')
     if os.path.isdir('/etc/mkinitfs/files'):
@@ -91,25 +106,12 @@ try:
                 continue
             message.sub_debug('Reading', sfile)
             for line in misc.file_readlines(sfile):
-                if os.path.exists(line):
-                    if os.path.isdir(line):
-                        for f in misc.list_files(line):
-                            message.sub_debug('Copying', f)
-                            misc.dir_create(ARGS.tmp + os.path.dirname(f))
-                            shutil.copy2(f, ARGS.tmp + f)
-                    else:
-                        message.sub_debug('Copying', line)
-                        misc.dir_create(ARGS.tmp + os.path.dirname(line))
-                        shutil.copy2(line, ARGS.tmp + line)
-                else:
-                    message.warning('File or directory does not exist', line)
+                copy_item(line, ARGS.tmp + line)
 
     message.sub_info('Copying hooks')
     if os.path.isdir('/etc/mkinitfs/hooks'):
         for sfile in misc.list_files('/etc/mkinitfs/hooks'):
-            message.sub_debug('Copying', sfile)
-            misc.dir_create(ARGS.tmp + '/hooks')
-            shutil.copy2(sfile, ARGS.tmp + '/hooks/' + os.path.basename(sfile))
+            copy_item(sfile, ARGS.tmp + '/hooks/' + os.path.basename(sfile))
 
     message.sub_info('Copying modules')
     for module in modules:
@@ -118,17 +120,13 @@ try:
             for depend in depends.split('\n'):
                 depend = depend.split(' ')[1]
                 if not os.path.isfile(ARGS.tmp + depend):
-                    message.sub_debug('Copying', depend)
-                    misc.dir_create(ARGS.tmp + os.path.dirname(depend))
-                    shutil.copy2(depend, ARGS.tmp + depend)
+                    copy_item(depend, ARGS.tmp + depend)
 
     message.sub_info('Copying module files')
     for sfile in os.listdir('/lib/modules/' + kernel):
         if sfile.startswith('modules.'):
             sfile = '/lib/modules/' + kernel + '/' + sfile
-            message.sub_debug('Copying', sfile)
-            misc.dir_create(ARGS.tmp + os.path.dirname(sfile))
-            shutil.copy2(sfile, ARGS.tmp + sfile)
+            copy_item(sfile, ARGS.tmp + sfile)
 
     message.sub_info('Updating module dependencies')
     subprocess.check_call((misc.whereis('depmod'), ARGS.kernel, '-b', ARGS.tmp))
