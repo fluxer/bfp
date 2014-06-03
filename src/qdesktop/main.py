@@ -101,16 +101,9 @@ def copy_directory():
     actions.copy_items(selected_items)
     ui.actionPaste.setEnabled(True)
 
-thread = None
 def paste_directory():
-    global thread
-    class AThread(QtCore.QThread):
-        def run(self):
-            actions.paste_items()
-            #self.emit(QtCore.SIGNAL('paste_finished'))
-    thread = AThread()
-    thread.start()
-    #ui.actionPaste.setEnabled(False)
+    actions.paste_items()
+    ui.actionPaste.setEnabled(False)
 
 def rename_directory():
     selected_items = []
