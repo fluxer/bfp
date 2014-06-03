@@ -14,5 +14,8 @@
  * Implement file associations
  * Maybe implement fonts outside of stylesheet
 
+## QDESKTOP ##
+ * Create ~/Desktop if it doesn't exist
+
 ## ALL QT ##
  * Use icons from theme
