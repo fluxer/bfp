@@ -3,7 +3,7 @@ GIT_VERSION = $(shell git rev-parse --short HEAD || echo stable)
 
 DESTDIR = 
 ETCDIR = /etc
-PREFIX = /usr
+PREFIX = 
 BINDIR = $(PREFIX)/bin
 SBINDIR = $(PREFIX)/sbin
 SHAREDIR = $(PREFIX)/share
