@@ -1,0 +1,173 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>614</width>
+    <height>454</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>QEdit</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../qresources/libqresources.qrc">
+    <normaloff>:/usr/share/qresources/resources/gtk-edit.svg</normaloff>:/usr/share/qresources/resources/gtk-edit.svg</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QTextEdit" name="textEdit"/>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>614</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuMain">
+    <property name="title">
+     <string>Main</string>
+    </property>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuAction">
+    <property name="title">
+     <string>Actions</string>
+    </property>
+    <addaction name="actionNew"/>
+    <addaction name="actionOpen"/>
+    <addaction name="actionSave"/>
+    <addaction name="actionSaveAs"/>
+    <addaction name="separator"/>
+    <addaction name="actionRevert"/>
+    <addaction name="actionUndo"/>
+    <addaction name="actionRedo"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <widget class="QMenu" name="menuOptions">
+    <property name="title">
+     <string>Options</string>
+    </property>
+    <addaction name="actionFont"/>
+   </widget>
+   <addaction name="menuMain"/>
+   <addaction name="menuAction"/>
+   <addaction name="menuOptions"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="actionQuit">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/exit.svg</normaloff>:/usr/share/qresources/resources/exit.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Quit</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/fileopen.svg</normaloff>:/usr/share/qresources/resources/fileopen.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/document-save.svg</normaloff>:/usr/share/qresources/resources/document-save.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionSaveAs">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/document-save-as.svg</normaloff>:/usr/share/qresources/resources/document-save-as.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Save as</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionFont">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/color-picker.svg</normaloff>:/usr/share/qresources/resources/color-picker.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Font</string>
+   </property>
+  </action>
+  <action name="actionNew">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/document-new.svg</normaloff>:/usr/share/qresources/resources/document-new.svg</iconset>
+   </property>
+   <property name="text">
+    <string>New</string>
+   </property>
+  </action>
+  <action name="actionRevert">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/document-revert.svg</normaloff>:/usr/share/qresources/resources/document-revert.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Revert</string>
+   </property>
+  </action>
+  <action name="actionUndo">
+   <property name="text">
+    <string>Undo</string>
+   </property>
+  </action>
+  <action name="actionRedo">
+   <property name="text">
+    <string>Redo</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="../qresources/libqresources.qrc"/>
+ </resources>
+ <connections/>
+ <designerdata>
+  <property name="gridDeltaX">
+   <number>5</number>
+  </property>
+  <property name="gridDeltaY">
+   <number>5</number>
+  </property>
+  <property name="gridSnapX">
+   <bool>true</bool>
+  </property>
+  <property name="gridSnapY">
+   <bool>true</bool>
+  </property>
+  <property name="gridVisible">
+   <bool>true</bool>
+  </property>
+ </designerdata>
+</ui>
