@@ -185,6 +185,7 @@ class Actions(object):
             svar = str(svar)
             print('New file: ', svar)
             misc.file_write(os.path.realpath(svar), '')
+            return svar
 
     def new_directory(self):
         svar, ok = QtGui.QInputDialog.getText(self.window, "New directory", \
@@ -198,6 +199,7 @@ class Actions(object):
             svar = str(svar)
             print('New directory: ', svar)
             misc.dir_create(svar)
+            return svar
 
     def properties_items(self, variant):
         for svar in variant:

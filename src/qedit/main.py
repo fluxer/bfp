@@ -41,8 +41,9 @@ def run_about():
     QtGui.QMessageBox.about(MainWindow, "About", '<b>QEdit v1.0.0</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
 
 def new_file():
-    actions.new_file()
-    # FIXME: open_file()
+    sfile = actions.new_file()
+    if sfile:
+        open_file(sfile)
 
 def open_file(sfile):
     global sedit
@@ -59,7 +60,7 @@ def open_file(sfile):
 
 def save_file():
     if sedit:
-        misc.file_write(sedit, ui.textEdit.toPlainText())
+        misc.file_write(os.path.realpath(sedit), ui.textEdit.toPlainText())
 
 def save_as_file():
     global sedit
