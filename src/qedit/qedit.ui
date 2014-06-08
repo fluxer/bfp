@@ -14,8 +14,8 @@
    <string>QEdit</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>:/usr/share/qresources/resources/gtk-edit.svg</normaloff>:/usr/share/qresources/resources/gtk-edit.svg</iconset>
+   <iconset resource="../qresources/libqresources.qrc">
+    <normaloff>:/share/qresources/resources/gtk-edit.svg</normaloff>:/share/qresources/resources/gtk-edit.svg</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">

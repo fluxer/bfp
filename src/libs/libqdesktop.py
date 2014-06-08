@@ -248,7 +248,7 @@ class Mime(object):
         smime = misc.file_mime(svar)
         sprogram = self.get_program(smime)
         if sprogram:
-            general.execute_program(sprogram + ' ' + svar)
+            general.execute_program(sprogram + ' "' + svar + '"')
         else:
             raise(Exception('Unregistered mime', smime))
 
