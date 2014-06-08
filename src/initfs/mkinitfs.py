@@ -37,7 +37,7 @@ try:
         help='Change busybox binary')
     parser.add_argument('-k', '--kernel', type=str, default=kernel, \
         help='Change kernel version')
-    parser.add_argument('-m', '--modules', type=str, default=modules, \
+    parser.add_argument('-m', '--modules', type=str, nargs='+', default=modules, \
         help='Change modules')
     parser.add_argument('-i', '--image', type=str, default=image, \
         help='Change output image')
@@ -54,21 +54,24 @@ try:
     if ARGS.debug:
         message.DEBUG = True
 
-    def copy_item(src, dst):
+    def copy_item(src):
         # FIXME: symlinks, force
+        sfixed = src.replace('etc/mkinitfs/root', '')
+        sfixed = src.replace('etc/mkinitfs/hooks', 'hooks')
         if os.path.isdir(src):
             for f in misc.list_files(src):
                 message.sub_debug('Copying', f)
-                misc.dir_create(ARGS.tmp + os.path.dirname(f))
-                shutil.copy2(f, ARGS.tmp + f)
+                misc.dir_create(ARGS.tmp + '/' + os.path.dirname(f))
+                shutil.copy2(f, ARGS.tmp + '/'+ f)
         elif os.path.isfile(src):
-            message.sub_debug('Copying', src)
-            misc.dir_create(os.path.dirname(dst))
-            shutil.copy2(src, dst)
-            smime = misc.file_mime(src)
-            if smime == 'application/x-executable' or smime == 'application/x-sharedlib':
-                for dep in misc.system_scanelf(src, flags='-L').split(','):
-                    copy_item(dep, ARGS.tmp + '/' + dep)
+            for dep in misc.system_output((misc.whereis('lddtree'), '-l', src)).split('\n'):
+                message.sub_debug('Copying', dep)
+                sdir = os.path.dirname(sfixed)
+                misc.dir_create(ARGS.tmp + sdir)
+                shutil.copy2(dep, ARGS.tmp + '/' + sfixed)
+                if os.path.islink(dep):
+                    slink = os.readlink(dep)
+                    copy_item(os.path.dirname(dep) + '/' + slink)
         else:
             message.warning('File or directory does not exist', src)
 
@@ -83,7 +86,7 @@ try:
     bin_dir = os.path.join(ARGS.tmp, 'bin')
     misc.dir_create(bin_dir)
     message.sub_debug('Installing binary')
-    copy_item(ARGS.busybox, os.path.join(bin_dir, 'busybox'))
+    copy_item(ARGS.busybox)
     message.sub_debug('Creating symlinks')
     subprocess.check_call((ARGS.busybox, '--install', '-s', bin_dir))
 
@@ -94,9 +97,8 @@ try:
             message.sub_debug('Creating', fixed_sdir)
             misc.dir_create(ARGS.tmp + fixed_sdir)
         for sfile in misc.list_files('/etc/mkinitfs/root'):
-            fixed_sfile = sfile.replace('/etc/mkinitfs/root', '')
-            message.sub_debug('Copying', fixed_sfile)
-            copy_item(sfile, ARGS.tmp + fixed_sfile)
+            message.sub_debug('Copying', sfile)
+            copy_item(sfile)
 
     message.sub_info('Copying files')
     if os.path.isdir('/etc/mkinitfs/files'):
@@ -106,12 +108,12 @@ try:
                 continue
             message.sub_debug('Reading', sfile)
             for line in misc.file_readlines(sfile):
-                copy_item(line, ARGS.tmp + line)
+                copy_item(line)
 
     message.sub_info('Copying hooks')
     if os.path.isdir('/etc/mkinitfs/hooks'):
         for sfile in misc.list_files('/etc/mkinitfs/hooks'):
-            copy_item(sfile, ARGS.tmp + '/hooks/' + os.path.basename(sfile))
+            copy_item(sfile)
 
     message.sub_info('Copying modules')
     for module in modules:
@@ -120,13 +122,13 @@ try:
             for depend in depends.split('\n'):
                 depend = depend.split(' ')[1]
                 if not os.path.isfile(ARGS.tmp + depend):
-                    copy_item(depend, ARGS.tmp + depend)
+                    copy_item(depend)
 
     message.sub_info('Copying module files')
     for sfile in os.listdir('/lib/modules/' + kernel):
         if sfile.startswith('modules.'):
             sfile = '/lib/modules/' + kernel + '/' + sfile
-            copy_item(sfile, ARGS.tmp + sfile)
+            copy_item(sfile)
 
     message.sub_info('Updating module dependencies')
     subprocess.check_call((misc.whereis('depmod'), ARGS.kernel, '-b', ARGS.tmp))
