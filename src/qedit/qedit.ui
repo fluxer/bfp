@@ -182,6 +182,9 @@
    <property name="text">
     <string>Find</string>
    </property>
+   <property name="shortcut">
+    <string/>
+   </property>
   </action>
  </widget>
  <resources>

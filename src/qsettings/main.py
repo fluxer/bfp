@@ -5,10 +5,7 @@ from PyQt4 import QtCore, QtGui
 import sys, os
 import libmisc
 misc = libmisc.Misc()
-import libmime
-mime = libmime.Mime()
 import libqdesktop
-config = libqdesktop.Config()
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
@@ -16,6 +13,9 @@ MainWindow = QtGui.QMainWindow()
 ui = qsettings_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 icon = QtGui.QIcon()
+
+config = libqdesktop.Config()
+mime = libqdesktop.Mime()
 
 def setLook():
     config.read()
@@ -96,6 +96,7 @@ def setMime():
     mime.register(ui.MimesView.selectedItems(), ui.ProgramsView.selectedItems())
 
 def registerMime():
+    # FIXME: register mime
     pass
 
 # connect widgets to actions

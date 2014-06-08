@@ -5,8 +5,6 @@ from PyQt4 import QtCore, QtGui
 import sys, os
 import libmisc
 misc = libmisc.Misc()
-import libmime
-mime = libmime.Mime()
 import libqdesktop
 
 # prepare for lift-off
@@ -17,6 +15,7 @@ ui.setupUi(MainWindow)
 
 # some variables
 config = libqdesktop.Config()
+mime = libqdesktop.Mime()
 actions = libqdesktop.Actions(MainWindow, app)
 icon = QtGui.QIcon()
 

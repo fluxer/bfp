@@ -425,6 +425,9 @@
    <property name="text">
     <string>Rename</string>
    </property>
+   <property name="shortcut">
+    <string/>
+   </property>
   </action>
   <action name="actionMimes">
    <property name="text">
