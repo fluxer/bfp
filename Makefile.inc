@@ -23,4 +23,5 @@ CC = gcc
 INSTALL = install
 STRIP = strip
 RM = rm -f
+CP = cp -f
 PYUIC = pyuic4

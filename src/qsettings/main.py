@@ -142,5 +142,5 @@ else:
     setColorWallpaper(config.WALLPAPER_COLOR)
 
 # run!
-#MainWindow.show()
-#sys.exit(app.exec_())
+MainWindow.show()
+sys.exit(app.exec_())

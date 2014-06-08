@@ -12,8 +12,8 @@ install:
 	$(INSTALL) -vdm755 $(DESTDIR)$(BINDIR) $(DESTDIR)$(SBINDIR) $(DESTDIR)$(ETCDIR)
 	$(INSTALL) -vm755 build/mkinitfs $(DESTDIR)$(SBINDIR)/mkinitfs
 	$(INSTALL) -vm755 build/lsinitfs $(DESTDIR)$(BINDIR)/lsinitfs
-	cp -a root $(DESTDIR)$(ETCDIR)/mkinitfs
-	cp -a files $(DESTDIR)$(ETCDIR)/mkinitfs
+	$(CP) -a root $(DESTDIR)$(ETCDIR)/mkinitfs
+	$(CP) -a files $(DESTDIR)$(ETCDIR)/mkinitfs
 
 uninstall:
 	$(RM) $(DESTDIR)$(SBINDIR)/mkinitfs
