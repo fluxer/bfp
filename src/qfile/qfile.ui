@@ -22,7 +22,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="../qresources/libqresources.qrc">
-    <normaloff>:/usr/share/qresources/resources/file-manager.svg</normaloff>:/usr/share/qresources/resources/file-manager.svg</iconset>
+    <normaloff>:/share/qresources/resources/file-manager.svg</normaloff>:/share/qresources/resources/file-manager.svg</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
@@ -45,7 +45,7 @@
       </property>
       <property name="icon">
        <iconset resource="../qresources/libqresources.qrc">
-        <normaloff>:/usr/share/qresources/resources/back.svg</normaloff>:/usr/share/qresources/resources/back.svg</iconset>
+        <normaloff>:/share/qresources/resources/back.svg</normaloff>:/share/qresources/resources/back.svg</iconset>
       </property>
      </widget>
     </item>
@@ -68,7 +68,7 @@
       </property>
       <property name="icon">
        <iconset resource="../qresources/libqresources.qrc">
-        <normaloff>:/usr/share/qresources/resources/go-home.svg</normaloff>:/usr/share/qresources/resources/go-home.svg</iconset>
+        <normaloff>:/share/qresources/resources/go-home.svg</normaloff>:/share/qresources/resources/go-home.svg</iconset>
       </property>
      </widget>
     </item>
@@ -97,7 +97,7 @@
       </property>
       <property name="icon">
        <iconset resource="../qresources/libqresources.qrc">
-        <normaloff>:/usr/share/qresources/resources/utilities-terminal.svg</normaloff>:/usr/share/qresources/resources/utilities-terminal.svg</iconset>
+        <normaloff>:/share/qresources/resources/utilities-terminal.svg</normaloff>:/share/qresources/resources/utilities-terminal.svg</iconset>
       </property>
      </widget>
     </item>
@@ -150,7 +150,7 @@
      <x>0</x>
      <y>0</y>
      <width>586</width>
-     <height>23</height>
+     <height>18</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMain">
@@ -169,7 +169,7 @@
      </property>
      <property name="icon">
       <iconset resource="../qresources/libqresources.qrc">
-       <normaloff>:/usr/share/qresources/resources/add.svg</normaloff>:/usr/share/qresources/resources/add.svg</iconset>
+       <normaloff>:/share/qresources/resources/add.svg</normaloff>:/share/qresources/resources/add.svg</iconset>
      </property>
      <addaction name="actionFile"/>
      <addaction name="actionFolder"/>
@@ -180,7 +180,7 @@
      </property>
      <property name="icon">
       <iconset resource="../qresources/libqresources.qrc">
-       <normaloff>:/usr/share/qresources/resources/application-x-compress.svg</normaloff>:/usr/share/qresources/resources/application-x-compress.svg</iconset>
+       <normaloff>:/share/qresources/resources/application-x-compress.svg</normaloff>:/share/qresources/resources/application-x-compress.svg</iconset>
      </property>
      <addaction name="actionDecompress"/>
      <addaction name="actionCompressGzip"/>
@@ -214,7 +214,7 @@
      </property>
      <property name="icon">
       <iconset resource="../qresources/libqresources.qrc">
-       <normaloff>:/usr/share/qresources/resources/gnome-settings-ui-behavior.svg</normaloff>:/usr/share/qresources/resources/gnome-settings-ui-behavior.svg</iconset>
+       <normaloff>:/share/qresources/resources/gnome-settings-ui-behavior.svg</normaloff>:/share/qresources/resources/gnome-settings-ui-behavior.svg</iconset>
      </property>
      <addaction name="actionIcons"/>
      <addaction name="actionList"/>
@@ -237,7 +237,7 @@
   <action name="actionQuit">
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
-     <normaloff>:/usr/share/qresources/resources/exit.svg</normaloff>:/usr/share/qresources/resources/exit.svg</iconset>
+     <normaloff>:/share/qresources/resources/exit.svg</normaloff>:/share/qresources/resources/exit.svg</iconset>
    </property>
    <property name="text">
     <string>Quit</string>
@@ -270,7 +270,7 @@
    </property>
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
-     <normaloff>:/usr/share/qresources/resources/edit-copy.svg</normaloff>:/usr/share/qresources/resources/edit-copy.svg</iconset>
+     <normaloff>:/share/qresources/resources/edit-copy.svg</normaloff>:/share/qresources/resources/edit-copy.svg</iconset>
    </property>
    <property name="text">
     <string>Copy</string>
@@ -285,7 +285,7 @@
    </property>
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
-     <normaloff>:/usr/share/qresources/resources/gtk-paste.svg</normaloff>:/usr/share/qresources/resources/gtk-paste.svg</iconset>
+     <normaloff>:/share/qresources/resources/gtk-paste.svg</normaloff>:/share/qresources/resources/gtk-paste.svg</iconset>
    </property>
    <property name="text">
     <string>Paste</string>
@@ -300,7 +300,7 @@
    </property>
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
-     <normaloff>:/usr/share/qresources/resources/editcut.svg</normaloff>:/usr/share/qresources/resources/editcut.svg</iconset>
+     <normaloff>:/share/qresources/resources/editcut.svg</normaloff>:/share/qresources/resources/editcut.svg</iconset>
    </property>
    <property name="text">
     <string>Cut</string>
@@ -312,7 +312,7 @@
   <action name="actionAbout">
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
-     <normaloff>:/usr/share/qresources/resources/stock_view-details.svg</normaloff>:/usr/share/qresources/resources/stock_view-details.svg</iconset>
+     <normaloff>:/share/qresources/resources/stock_view-details.svg</normaloff>:/share/qresources/resources/stock_view-details.svg</iconset>
    </property>
    <property name="text">
     <string>About</string>
@@ -324,7 +324,7 @@
    </property>
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
-     <normaloff>:/usr/share/qresources/resources/editdelete.svg</normaloff>:/usr/share/qresources/resources/editdelete.svg</iconset>
+     <normaloff>:/share/qresources/resources/editdelete.svg</normaloff>:/share/qresources/resources/editdelete.svg</iconset>
    </property>
    <property name="text">
     <string>Delete</string>
@@ -339,7 +339,7 @@
    </property>
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
-     <normaloff>:/usr/share/qresources/resources/stock_properties.svg</normaloff>:/usr/share/qresources/resources/stock_properties.svg</iconset>
+     <normaloff>:/share/qresources/resources/stock_properties.svg</normaloff>:/share/qresources/resources/stock_properties.svg</iconset>
    </property>
    <property name="text">
     <string>Properties</string>
@@ -354,7 +354,7 @@
    </property>
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
-     <normaloff>:/usr/share/qresources/resources/application-x-gzip.svg</normaloff>:/usr/share/qresources/resources/application-x-gzip.svg</iconset>
+     <normaloff>:/share/qresources/resources/application-x-gzip.svg</normaloff>:/share/qresources/resources/application-x-gzip.svg</iconset>
    </property>
    <property name="text">
     <string>Compress (gzip)</string>
@@ -372,7 +372,7 @@
    </property>
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
-     <normaloff>:/usr/share/qresources/resources/cab_extract.svg</normaloff>:/usr/share/qresources/resources/cab_extract.svg</iconset>
+     <normaloff>:/share/qresources/resources/cab_extract.svg</normaloff>:/share/qresources/resources/cab_extract.svg</iconset>
    </property>
    <property name="text">
     <string>Decompress</string>
@@ -387,7 +387,7 @@
   <action name="actionIcons">
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
-     <normaloff>:/usr/share/qresources/resources/plugin-scale.svg</normaloff>:/usr/share/qresources/resources/plugin-scale.svg</iconset>
+     <normaloff>:/share/qresources/resources/plugin-scale.svg</normaloff>:/share/qresources/resources/plugin-scale.svg</iconset>
    </property>
    <property name="text">
     <string>Icons</string>
@@ -396,7 +396,7 @@
   <action name="actionList">
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
-     <normaloff>:/usr/share/qresources/resources/edit-select-all.svg</normaloff>:/usr/share/qresources/resources/edit-select-all.svg</iconset>
+     <normaloff>:/share/qresources/resources/edit-select-all.svg</normaloff>:/share/qresources/resources/edit-select-all.svg</iconset>
    </property>
    <property name="text">
     <string>List</string>
@@ -407,7 +407,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../qresources/libqresources.qrc">
+    <iconset>
      <normaloff>:/usr/share/qresources/resources/redhat-tools.svg</normaloff>:/usr/share/qresources/resources/redhat-tools.svg</iconset>
    </property>
    <property name="text">
@@ -420,7 +420,7 @@
    </property>
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
-     <normaloff>:/usr/share/qresources/resources/edit-rename.svg</normaloff>:/usr/share/qresources/resources/edit-rename.svg</iconset>
+     <normaloff>:/share/qresources/resources/edit-rename.svg</normaloff>:/share/qresources/resources/edit-rename.svg</iconset>
    </property>
    <property name="text">
     <string>Rename</string>
@@ -434,7 +434,7 @@
   <action name="actionOpen">
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
-     <normaloff>:/usr/share/qresources/resources/fileopen.svg</normaloff>:/usr/share/qresources/resources/fileopen.svg</iconset>
+     <normaloff>:/share/qresources/resources/fileopen.svg</normaloff>:/share/qresources/resources/fileopen.svg</iconset>
    </property>
    <property name="text">
     <string>Open</string>
@@ -443,7 +443,7 @@
   <action name="actionFolder">
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
-     <normaloff>:/usr/share/qresources/resources/folder_new.svg</normaloff>:/usr/share/qresources/resources/folder_new.svg</iconset>
+     <normaloff>:/share/qresources/resources/folder_new.svg</normaloff>:/share/qresources/resources/folder_new.svg</iconset>
    </property>
    <property name="text">
     <string>Folder</string>
@@ -452,7 +452,7 @@
   <action name="actionFile">
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
-     <normaloff>:/usr/share/qresources/resources/filenew.svg</normaloff>:/usr/share/qresources/resources/filenew.svg</iconset>
+     <normaloff>:/share/qresources/resources/filenew.svg</normaloff>:/share/qresources/resources/filenew.svg</iconset>
    </property>
    <property name="text">
     <string>File</string>
@@ -468,7 +468,7 @@
     <bool>false</bool>
    </property>
    <property name="icon">
-    <iconset resource="../qresources/libqresources.qrc">
+    <iconset>
      <normaloff>:/usr/share/qresources/resources/application-x-compress.svg</normaloff>:/usr/share/qresources/resources/application-x-compress.svg</iconset>
    </property>
    <property name="text">
@@ -481,7 +481,7 @@
    </property>
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
-     <normaloff>:/usr/share/qresources/resources/application-x-bzip.svg</normaloff>:/usr/share/qresources/resources/application-x-bzip.svg</iconset>
+     <normaloff>:/share/qresources/resources/application-x-bzip.svg</normaloff>:/share/qresources/resources/application-x-bzip.svg</iconset>
    </property>
    <property name="text">
     <string>Compress (bzip2)</string>
@@ -493,7 +493,7 @@
    </property>
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
-     <normaloff>:/usr/share/qresources/resources/object-hidden.svg</normaloff>:/usr/share/qresources/resources/object-hidden.svg</iconset>
+     <normaloff>:/share/qresources/resources/object-hidden.svg</normaloff>:/share/qresources/resources/object-hidden.svg</iconset>
    </property>
    <property name="text">
     <string>View hidden</string>

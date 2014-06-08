@@ -5,6 +5,8 @@ from PyQt4 import QtCore, QtGui
 import sys, os
 import libmisc
 misc = libmisc.Misc()
+import libmime
+mime = libmime.Mime()
 import libqdesktop
 
 # prepare for lift-off
@@ -44,13 +46,13 @@ def open_file():
     print ui.ViewWidget.selectedIndexes()
     for sfile in ui.ViewWidget.selectedIndexes():
         sfile = str(model.filePath(sfile))
-        QtGui.QDesktopServices.openUrl(QtCore.QUrl(sfile))
+        mime.open(sfile)
 
 def change_directory(path=ui.ViewWidget.selectedIndexes()):
     if not isinstance(path, QtCore.QString) and not isinstance(path, str):
         path = model.filePath(path)
     if not os.path.isdir(path):
-        QtGui.QDesktopServices.openUrl(QtCore.QUrl(path))
+        mime.open(str(path))
         return
     root = model.setRootPath(path)
     ui.ViewWidget.setRootIndex(root)

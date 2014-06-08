@@ -5,6 +5,8 @@ from PyQt4 import QtCore, QtGui
 import sys, os
 import libmisc
 misc = libmisc.Misc()
+import libmime
+mime = libmime.Mime()
 import libqdesktop
 config = libqdesktop.Config()
 
@@ -89,6 +91,13 @@ def setWebBrowser():
     ui.WebBrowserEdit.setText(swbrowser)
     config.write('default/webbrowser', swbrowser)
 
+def setMime():
+    print ui.MimesView.selectedItems(), ui.ProgramsView.selectedItems()
+    mime.register(ui.MimesView.selectedItems(), ui.ProgramsView.selectedItems())
+
+def registerMime():
+    pass
+
 # connect widgets to actions
 ui.actionQuit.triggered.connect(sys.exit)
 ui.actionAbout.triggered.connect(run_about)
@@ -101,6 +110,8 @@ ui.MenuButton.clicked.connect(setMenu)
 ui.TerminalButton.clicked.connect(setTerminal)
 ui.FileManagerButton.clicked.connect(setFileManager)
 ui.WebBrowserButton.clicked.connect(setWebBrowser)
+ui.AssociateButton.clicked.connect(setMime)
+ui.RegisterButton.clicked.connect(registerMime)
 
 # setup values of widgets
 for svar in misc.list_dirs('/etc/qdesktop/styles'):
@@ -110,6 +121,9 @@ for svar in misc.list_dirs('/etc/qdesktop/styles'):
 for svar in misc.list_dirs('/share/icons'):
     if os.path.isfile(svar + '/index.theme'):
         ui.IconThemeBox.addItem(os.path.basename(svar))
+
+ui.MimesView.addItems(mime.get_mimes())
+ui.ProgramsView.addItems(mime.get_programs())
 
 index = ui.WallpaperModeBox.findText(config.WALLPAPER_STYLE)
 ui.WallpaperModeBox.setCurrentIndex(index)
@@ -128,5 +142,5 @@ else:
     setColorWallpaper(config.WALLPAPER_COLOR)
 
 # run!
-MainWindow.show()
-sys.exit(app.exec_())
+#MainWindow.show()
+#sys.exit(app.exec_())

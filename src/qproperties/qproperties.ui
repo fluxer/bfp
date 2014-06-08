@@ -33,7 +33,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="../qresources/libqresources.qrc">
-    <normaloff>:/usr/share/qresources/resources/stock_properties.svg</normaloff>:/usr/share/qresources/resources/stock_properties.svg</iconset>
+    <normaloff>:/share/qresources/resources/stock_properties.svg</normaloff>:/share/qresources/resources/stock_properties.svg</iconset>
   </property>
   <widget class="QComboBox" name="groupBox">
    <property name="geometry">
@@ -199,7 +199,7 @@
    </property>
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
-     <normaloff>:/usr/share/qresources/resources/gtk-edit.svg</normaloff>:/usr/share/qresources/resources/gtk-edit.svg</iconset>
+     <normaloff>:/share/qresources/resources/gtk-edit.svg</normaloff>:/share/qresources/resources/gtk-edit.svg</iconset>
    </property>
   </widget>
   <widget class="QPushButton" name="cancelButton">
@@ -216,7 +216,7 @@
    </property>
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
-     <normaloff>:/usr/share/qresources/resources/editdelete.svg</normaloff>:/usr/share/qresources/resources/editdelete.svg</iconset>
+     <normaloff>:/share/qresources/resources/editdelete.svg</normaloff>:/share/qresources/resources/editdelete.svg</iconset>
    </property>
   </widget>
   <widget class="QLabel" name="label_8">

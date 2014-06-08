@@ -16,9 +16,11 @@ all: clean
 	$(CC) $(CFLAGS) -shared build/libsystem.c -o build/libsystem.so
 	$(CYTHON) -2 libqdesktop.py -o build/libqdesktop.c
 	$(CC) $(CFLAGS) -shared build/libqdesktop.c -o build/libqdesktop.so
+	$(CYTHON) -2 libmime.py -o build/libmime.c
+	$(CC) $(CFLAGS) -shared build/libmime.c -o build/libmime.so
 	$(STRIP) build/libmagic.so build/libmessage.so build/libmisc.so \
 		build/libpackage.so build/libnetwork.so build/libsystem.so \
-		build/libqdesktop.so
+		build/libqdesktop.so build/libmime.so
 
 check:
 	python test.py
@@ -32,6 +34,7 @@ install:
 	$(INSTALL) -vm644 build/libnetwork.so $(DESTDIR)$(SITEDIR)/libnetwork.so
 	$(INSTALL) -vm644 build/libsystem.so $(DESTDIR)$(SITEDIR)/libsystem.so
 	$(INSTALL) -vm644 build/libqdesktop.so $(DESTDIR)$(SITEDIR)/libqdesktop.so
+	$(INSTALL) -vm644 build/libmime.so $(DESTDIR)$(SITEDIR)/libmime.so
 
 uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libmagic.so
@@ -41,6 +44,7 @@ uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libnetwork.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libsystem.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libqdesktop.so
+	$(RM) $(DESTDIR)$(SITEDIR)/libmime.so
 
 clean:
 	$(RM) -r build/

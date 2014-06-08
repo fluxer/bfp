@@ -139,7 +139,7 @@ class MySystem(libsystem.System):
     def loop(self):
         ''' Main loop '''
         while not self.stop:
-            content = misc.ipc_read(self.ipc)
+            content = misc.ipc_read()
             string = None
             action = None
             if content:
@@ -215,6 +215,5 @@ except Exception as detail:
         os.system('/bin/shell')
     sys.exit(1)
 finally:
-    if init.initialized and os.path.exists(init.ipc):
-        os.remove(init.ipc)
+    misc.ipc_close()
     init.stop = True

@@ -17,6 +17,7 @@ class Misc(object):
         self.TIMEOUT = 30
         self.EXTERNAL = False
         self.ROOT_DIR = '/'
+        self.ipc = None
 
     def whereis(self, program, fallback=True):
         ''' Find full path to executable '''
@@ -85,8 +86,7 @@ class Misc(object):
 
     def file_write(self, sfile, content):
         ''' Write data to file (overwrites) '''
-        dirname = os.path.dirname(sfile)
-        self.dir_create(dirname)
+        self.dir_create(os.path.dirname(sfile))
 
         wfile = open(sfile, 'w')
         wfile.write(content)
@@ -304,33 +304,39 @@ class Misc(object):
     def ipc_create(self, fifo, group=0, mode=0664):
         ''' Create fifo for communication '''
         if not os.path.exists(fifo):
-            os.mkfifo(fifo, mode)
+            self.file_write(fifo, '')
         # set owner of IPC to <group>:<group>
         # os.chown(fifo, group, group)
         # sadly, something is wrong with mkfifo permissions set
         # os.chmod(fifo, mode)
+        self.ipc = os.open(fifo, os.O_RDWR | os.O_NONBLOCK)
 
-    def ipc_read(self, fifo):
+    def ipc_read(self):
         ''' Read IPC and return a tuple of service and action '''
-        if not os.path.exists(fifo):
+        if not self.ipc:
             # FIXME: needs proper permissions set
-            # ipc_create(fifo)
+            # ipc_create(self.ipc)
             return None
-        return self.file_read_nonblock(fifo).strip()
+        return os.read(self.ipc, 1024).strip()
 
-    def ipc_write(self, fifo, content):
+    def ipc_write(self, content):
         ''' Write service and action to IPC '''
-        self.file_write(fifo, content)
+        if self.ipc:
+            os.write(self.ipc, content)
 
+    def ipc_close(self):
+        if self.ipc:
+            os.close(self.ipc)
+            self.ipc = None
 
     def system_output(self, command):
         ''' Get output of external utility '''
         pipe = subprocess.Popen(command, stdout=subprocess.PIPE, env={'LC_ALL': 'C'})
         return pipe.communicate()[0].strip()
 
-    def system_scanelf(self, sfile, format='#F%n'):
+    def system_scanelf(self, sfile, format='#F%n', flags=''):
         ''' Get information about ELF files '''
-        return self.system_output((self.whereis('scanelf'), '-CBF', format, sfile))
+        return self.system_output((self.whereis('scanelf'), '-CBF', format, flags, sfile))
 
     def system_chroot(self, command):
         ''' Execute command in chroot environment '''

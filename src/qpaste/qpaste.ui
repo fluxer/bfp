@@ -27,7 +27,7 @@
   </property>
   <property name="windowIcon">
    <iconset resource="../qresources/libqresources.qrc">
-    <normaloff>:/usr/share/qresources/resources/gtk-paste.svg</normaloff>:/usr/share/qresources/resources/gtk-paste.svg</iconset>
+    <normaloff>:/share/qresources/resources/gtk-paste.svg</normaloff>:/share/qresources/resources/gtk-paste.svg</iconset>
   </property>
   <widget class="QPushButton" name="cancelButton">
    <property name="geometry">
@@ -43,7 +43,7 @@
    </property>
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
-     <normaloff>:/usr/share/qresources/resources/editdelete.svg</normaloff>:/usr/share/qresources/resources/editdelete.svg</iconset>
+     <normaloff>:/share/qresources/resources/editdelete.svg</normaloff>:/share/qresources/resources/editdelete.svg</iconset>
    </property>
   </widget>
   <widget class="QProgressBar" name="ProgressBar">

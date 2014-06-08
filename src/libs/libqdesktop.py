@@ -156,7 +156,7 @@ class Actions(object):
         if not soutput:
             for svar in variant:
                 soutput = svar + '.tar.gz'
-                # ensure that directory is passed to archive_compress() as chir argument
+                # ensure that directory is passed to archive_compress() as chdir argument
                 if not os.path.isdir(svar):
                     svar = os.path.dirname(svar)
         print('Compressing: ', variant, 'To: ', soutput)

@@ -13,7 +13,7 @@ Dialog = QtGui.QDialog()
 ui = qproperties_ui.Ui_Dialog()
 ui.setupUi(Dialog)
 
-sfile = QtCore.QDir.currentPath()
+sfile = str(QtCore.QDir.currentPath())
 for arg in sys.argv:
     if os.path.exists(arg):
         sfile = arg

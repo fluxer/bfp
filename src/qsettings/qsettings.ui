@@ -14,7 +14,7 @@
    <string>Settings Manager</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../qresources/libqresources.qrc">
+   <iconset>
     <normaloff>:/usr/share/qresources/resources/redhat-tools.svg</normaloff>:/usr/share/qresources/resources/redhat-tools.svg</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -28,28 +28,28 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
       <string>File associations</string>
      </attribute>
-     <widget class="QListView" name="MimesView">
+     <widget class="QListWidget" name="MimesView">
       <property name="geometry">
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>251</width>
-        <height>371</height>
+        <width>241</width>
+        <height>331</height>
        </rect>
       </property>
      </widget>
-     <widget class="QListView" name="ProgramsView">
+     <widget class="QListWidget" name="ProgramsView">
       <property name="geometry">
        <rect>
-        <x>280</x>
+        <x>265</x>
         <y>10</y>
-        <width>221</width>
+        <width>236</width>
         <height>331</height>
        </rect>
       </property>
@@ -68,7 +68,24 @@
       </property>
       <property name="icon">
        <iconset resource="../qresources/libqresources.qrc">
-        <normaloff>:/usr/share/qresources/resources/add.svg</normaloff>:/usr/share/qresources/resources/add.svg</iconset>
+        <normaloff>:/share/qresources/resources/gtk-edit.svg</normaloff>:/share/qresources/resources/gtk-edit.svg</iconset>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="RegisterButton">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>350</y>
+        <width>221</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Register</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../qresources/libqresources.qrc">
+        <normaloff>:/share/qresources/resources/add.svg</normaloff>:/share/qresources/resources/add.svg</iconset>
       </property>
      </widget>
     </widget>
@@ -100,7 +117,7 @@
       </property>
       <property name="icon">
        <iconset resource="../qresources/libqresources.qrc">
-        <normaloff>:/usr/share/qresources/resources/gnome-mime-image.svg</normaloff>:/usr/share/qresources/resources/gnome-mime-image.svg</iconset>
+        <normaloff>:/share/qresources/resources/gnome-mime-image.svg</normaloff>:/share/qresources/resources/gnome-mime-image.svg</iconset>
       </property>
      </widget>
      <widget class="QComboBox" name="WallpaperModeBox">
@@ -160,7 +177,7 @@
       </property>
       <property name="icon">
        <iconset resource="../qresources/libqresources.qrc">
-        <normaloff>:/usr/share/qresources/resources/color-picker.svg</normaloff>:/usr/share/qresources/resources/color-picker.svg</iconset>
+        <normaloff>:/share/qresources/resources/color-picker.svg</normaloff>:/share/qresources/resources/color-picker.svg</iconset>
       </property>
      </widget>
     </widget>
@@ -194,7 +211,7 @@
        </property>
        <property name="icon">
         <iconset resource="../qresources/libqresources.qrc">
-         <normaloff>:/usr/share/qresources/resources/utilities-terminal.svg</normaloff>:/usr/share/qresources/resources/utilities-terminal.svg</iconset>
+         <normaloff>:/share/qresources/resources/utilities-terminal.svg</normaloff>:/share/qresources/resources/utilities-terminal.svg</iconset>
        </property>
       </widget>
       <widget class="QPushButton" name="FileManagerButton">
@@ -211,7 +228,7 @@
        </property>
        <property name="icon">
         <iconset resource="../qresources/libqresources.qrc">
-         <normaloff>:/usr/share/qresources/resources/file-manager.svg</normaloff>:/usr/share/qresources/resources/file-manager.svg</iconset>
+         <normaloff>:/share/qresources/resources/file-manager.svg</normaloff>:/share/qresources/resources/file-manager.svg</iconset>
        </property>
       </widget>
       <widget class="QLineEdit" name="FileManagerEdit">
@@ -241,7 +258,7 @@
        </property>
        <property name="icon">
         <iconset resource="../qresources/libqresources.qrc">
-         <normaloff>:/usr/share/qresources/resources/web-browser.svg</normaloff>:/usr/share/qresources/resources/web-browser.svg</iconset>
+         <normaloff>:/share/qresources/resources/web-browser.svg</normaloff>:/share/qresources/resources/web-browser.svg</iconset>
        </property>
       </widget>
       <widget class="QLineEdit" name="TerminalEdit">
@@ -310,7 +327,7 @@
        </property>
        <property name="icon">
         <iconset resource="../qresources/libqresources.qrc">
-         <normaloff>:/usr/share/qresources/resources/system-run.svg</normaloff>:/usr/share/qresources/resources/system-run.svg</iconset>
+         <normaloff>:/share/qresources/resources/system-run.svg</normaloff>:/share/qresources/resources/system-run.svg</iconset>
        </property>
       </widget>
       <widget class="QComboBox" name="StyleBox">
@@ -396,7 +413,7 @@
      <x>0</x>
      <y>0</y>
      <width>542</width>
-     <height>20</height>
+     <height>18</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMain">
@@ -418,7 +435,7 @@
   <action name="actionQuit">
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
-     <normaloff>:/usr/share/qresources/resources/exit.svg</normaloff>:/usr/share/qresources/resources/exit.svg</iconset>
+     <normaloff>:/share/qresources/resources/exit.svg</normaloff>:/share/qresources/resources/exit.svg</iconset>
    </property>
    <property name="text">
     <string>Quit</string>
@@ -493,7 +510,7 @@
   <action name="actionAbout">
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
-     <normaloff>:/usr/share/qresources/resources/stock_view-details.svg</normaloff>:/usr/share/qresources/resources/stock_view-details.svg</iconset>
+     <normaloff>:/share/qresources/resources/stock_view-details.svg</normaloff>:/share/qresources/resources/stock_view-details.svg</iconset>
    </property>
    <property name="text">
     <string>About</string>

@@ -84,6 +84,8 @@ ui.actionNew.triggered.connect(new_file)
 ui.actionSave.triggered.connect(save_file)
 ui.actionSaveAs.triggered.connect(save_as_file)
 ui.actionReload.triggered.connect(reload_file)
+ui.actionUndo.triggered.connect(ui.textEdit.undo)
+ui.actionRedo.triggered.connect(ui.textEdit.redo)
 ui.actionFont.triggered.connect(set_font)
 
 if sedit:

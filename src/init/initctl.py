@@ -38,23 +38,23 @@ try:
 
     ARGS = parser.parse_args()
     if ARGS.start:
-        misc.ipc_write(init.ipc, ARGS.start + '#START')
+        misc.ipc_write(ARGS.start + '#START')
     elif ARGS.stop:
-        misc.ipc_write(init.ipc, ARGS.stop + '#STOP')
+        misc.ipc_write(ARGS.stop + '#STOP')
     elif ARGS.restart:
-        init.ipc_write(init.ipc, ARGS.restart + '#RESTART')
+        init.ipc_write(ARGS.restart + '#RESTART')
     elif ARGS.mount:
-        misc.ipc_write(init.ipc, ARGS.mount + '#MOUNT')
+        misc.ipc_write(ARGS.mount + '#MOUNT')
     elif ARGS.unmount:
-        misc.ipc_write(init.ipc, ARGS.unmount + '#UNMOUNT')
+        misc.ipc_write(ARGS.unmount + '#UNMOUNT')
     elif ARGS.reboot:
-        misc.ipc_write(init.ipc, '#REBOOT')
+        misc.ipc_write('#REBOOT')
     elif ARGS.shutdown:
-        misc.ipc_write(init.ipc, '#SHUTDOWN')
+        misc.ipc_write('#SHUTDOWN')
     elif ARGS.suspend:
-        misc.ipc_write(init.ipc, '#SUSPEND')
+        misc.ipc_write('#SUSPEND')
     elif ARGS.reload:
-        misc.ipc_write(init.ipc, '#RELOAD')
+        misc.ipc_write('#RELOAD')
 
 except ConfigParser.Error as detail:
     message.critical('CONFIGPARSER', detail)

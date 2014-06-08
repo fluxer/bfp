@@ -5,6 +5,8 @@ from PyQt4 import QtCore, QtGui
 import sys, os
 import libmisc
 misc = libmisc.Misc()
+import libmime
+mime = libmime.Mime()
 import libqdesktop
 
 # prepare for lift-off
@@ -54,7 +56,7 @@ def show_popup():
 def open_file():
     for sfile in ui.DesktopView.selectedIndexes():
         sfile = str(model.filePath(sfile))
-        QtGui.QDesktopServices.openUrl(QtCore.QUrl(sfile))
+        mime.open(sfile)
 
 def disable_actions():
     ui.actionOpen.setEnabled(False)
@@ -149,7 +151,7 @@ def compress_bzip2():
     actions.bzip2_items(selected_items)
 
 def change_directory():
-    QtGui.QDesktopServices.openUrl(QtCore.QUrl(model.filePath(ui.DesktopView.currentIndex())))
+    mime.open(str(model.filePath(ui.DesktopView.currentIndex())))
 
 def run_terminal():
     p = QtCore.QProcess()
