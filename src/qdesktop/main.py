@@ -21,7 +21,8 @@ icon = QtGui.QIcon()
 # setup desktop widget
 model = QtGui.QFileSystemModel()
 ui.DesktopView.setModel(model)
-desktop = str(QtCore.QDir.homePath())+ '/Desktop'
+desktop = str(QtCore.QDir.homePath())
+misc.dir_create(desktop)
 root = model.setRootPath(desktop)
 ui.DesktopView.setRootIndex(root)
 os.chdir(desktop)
