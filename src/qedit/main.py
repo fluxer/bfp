@@ -29,9 +29,6 @@ def setLook():
     icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
 
-def disable_actions():
-    ui.actionRevert.setEnabled(False)
-
 sedit = None
 for arg in sys.argv:
     if os.path.isfile(arg):
@@ -57,6 +54,7 @@ def open_file(sfile):
     elif os.path.isfile(sfile):
         ui.textEdit.setText(misc.file_read(sfile))
     sedit = sfile
+    ui.actionReload.setEnabled(True)
 
 def save_file():
     if sedit:
@@ -71,16 +69,13 @@ def save_as_file():
         sedit = str(sfile)
         save_file()
 
+def reload_file():
+    open_file(sedit)
+
 def set_font():
     font, ok = QtGui.QFontDialog.getFont(QtGui.QFont(ui.textEdit.font))
     if ok:
        ui.textEdit.setFont(font)
-
-def enable_actions():
-    if True:
-        pass
-    else:
-        disable_actions()
 
 ui.actionQuit.triggered.connect(sys.exit)
 ui.actionAbout.triggered.connect(run_about)
@@ -88,9 +83,11 @@ ui.actionOpen.triggered.connect(open_file)
 ui.actionNew.triggered.connect(new_file)
 ui.actionSave.triggered.connect(save_file)
 ui.actionSaveAs.triggered.connect(save_as_file)
+ui.actionReload.triggered.connect(reload_file)
 ui.actionFont.triggered.connect(set_font)
 
-open_file(sedit)
+if sedit:
+    open_file(sedit)
 
 # run!
 MainWindow.show()

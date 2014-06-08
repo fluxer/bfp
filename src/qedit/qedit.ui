@@ -52,7 +52,7 @@
     <addaction name="actionSave"/>
     <addaction name="actionSaveAs"/>
     <addaction name="separator"/>
-    <addaction name="actionRevert"/>
+    <addaction name="actionReload"/>
     <addaction name="actionUndo"/>
     <addaction name="actionRedo"/>
    </widget>
@@ -111,6 +111,10 @@
    </property>
   </action>
   <action name="actionAbout">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/usr/share/qresources/resources/stock_view-details.svg</normaloff>:/usr/share/qresources/resources/stock_view-details.svg</iconset>
+   </property>
    <property name="text">
     <string>About</string>
    </property>
@@ -133,21 +137,30 @@
     <string>New</string>
    </property>
   </action>
-  <action name="actionRevert">
+  <action name="actionReload">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
      <normaloff>:/usr/share/qresources/resources/document-revert.svg</normaloff>:/usr/share/qresources/resources/document-revert.svg</iconset>
    </property>
    <property name="text">
-    <string>Revert</string>
+    <string>Reload</string>
    </property>
   </action>
   <action name="actionUndo">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Undo</string>
    </property>
   </action>
   <action name="actionRedo">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
    <property name="text">
     <string>Redo</string>
    </property>
