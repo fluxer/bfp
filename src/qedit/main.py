@@ -45,9 +45,8 @@ def new_file():
 def open_file(sfile):
     global sedit
     if not sfile:
-        sfile = QtGui.QFileDialog.getOpenFileName(MainWindow, "Open",
-            os.curdir,
-            "All Files (*);;Text Files (*.txt)")
+        sfile = QtGui.QFileDialog.getOpenFileName(MainWindow, "Open", \
+            os.curdir, "All Files (*);;Text Files (*.txt)")
         if sfile:
             sfile = str(sfile)
             ui.textEdit.setText(misc.file_read(sfile))
@@ -62,12 +61,16 @@ def save_file():
 
 def save_as_file():
     global sedit
-    sfile = QtGui.QFileDialog.getSaveFileName(MainWindow, "Save as",
-                os.curdir,
-                "All Files (*);;Text Files (*.txt)")
+    sfile = QtGui.QFileDialog.getSaveFileName(MainWindow, "Save as", \
+                os.curdir, "All Files (*);;Text Files (*.txt)")
     if sfile:
         sedit = str(sfile)
         save_file()
+
+def find():
+    svar, ok = QtGui.QInputDialog.getText(MainWindow, 'Find', '')
+    if ok and svar:
+        ui.textEdit.find(svar)
 
 def reload_file():
     open_file(sedit)
@@ -84,6 +87,7 @@ ui.actionNew.triggered.connect(new_file)
 ui.actionSave.triggered.connect(save_file)
 ui.actionSaveAs.triggered.connect(save_as_file)
 ui.actionReload.triggered.connect(reload_file)
+ui.actionFind.triggered.connect(find)
 ui.actionUndo.triggered.connect(ui.textEdit.undo)
 ui.actionRedo.triggered.connect(ui.textEdit.redo)
 ui.actionFont.triggered.connect(set_font)

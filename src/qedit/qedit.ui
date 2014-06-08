@@ -52,6 +52,7 @@
     <addaction name="actionSave"/>
     <addaction name="actionSaveAs"/>
     <addaction name="separator"/>
+    <addaction name="actionFind"/>
     <addaction name="actionReload"/>
     <addaction name="actionUndo"/>
     <addaction name="actionRedo"/>
@@ -171,6 +172,15 @@
    </property>
    <property name="text">
     <string>Redo</string>
+   </property>
+  </action>
+  <action name="actionFind">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/find.svg</normaloff>:/share/qresources/resources/find.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Find</string>
    </property>
   </action>
  </widget>
