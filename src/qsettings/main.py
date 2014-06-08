@@ -107,7 +107,7 @@ for svar in misc.list_dirs('/etc/qdesktop/styles'):
     if os.path.isfile(svar + '/style.qss'):
         ui.StyleBox.addItem(os.path.basename(svar))
 
-for svar in misc.list_dirs('/usr/share/icons'):
+for svar in misc.list_dirs('/share/icons'):
     if os.path.isfile(svar + '/index.theme'):
         ui.IconThemeBox.addItem(os.path.basename(svar))
 
