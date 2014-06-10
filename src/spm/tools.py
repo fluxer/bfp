@@ -21,7 +21,7 @@ database = libpackage.Database()
 import libconfig
 
 
-app_version = "0.0.1 (fcfffb6)"
+app_version = "0.0.1 (39269af)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''

@@ -7,6 +7,7 @@ all:
 	make -C src/shell
 	make -C src/spm
 	make -C src/spm-qt
+	make -C src/qedit
 	make -C src/qfile
 	make -C src/qdesktop
 	make -C src/qresources
@@ -28,6 +29,7 @@ install:
 	make -C src/shell install
 	make -C src/spm install
 	make -C src/spm-qt install
+	make -C src/qedit install
 	make -C src/qfile install
 	make -C src/qdesktop install
 	make -C src/qresources install
@@ -44,6 +46,7 @@ uninstall:
 	make -C src/shell uninstall
 	make -C src/spm uninstall
 	make -C src/spm-qt uninstall
+	make -C src/qedit uninstall
 	make -C src/qfile uninstall
 	make -C src/qdesktop uninstall
 	make -C src/qresources uninstall
@@ -58,6 +61,7 @@ clean:
 	make -C src/shell clean
 	make -C src/spm clean
 	make -C src/spm-qt clean
+	make -C src/qedit clean
 	make -C src/qfile clean
 	make -C src/qdesktop clean
 	make -C src/qresources clean
