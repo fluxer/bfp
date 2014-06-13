@@ -11,6 +11,7 @@ all:
 	make -C src/qfile
 	make -C src/qdesktop
 	make -C src/qresources
+	make -C src/qpaste
 	make -C src/qproperties
 	make -C src/qsettings
 
@@ -33,6 +34,7 @@ install:
 	make -C src/qfile install
 	make -C src/qdesktop install
 	make -C src/qresources install
+	make -C src/qpaste install
 	make -C src/qproperties install
 	make -C src/qsettings install
 
@@ -50,6 +52,7 @@ uninstall:
 	make -C src/qfile uninstall
 	make -C src/qdesktop uninstall
 	make -C src/qresources uninstall
+	make -C src/qpaste uninstall
 	make -C src/qproperties uninstall
 	make -C src/qsettings uninstall
 
@@ -65,6 +68,7 @@ clean:
 	make -C src/qfile clean
 	make -C src/qdesktop clean
 	make -C src/qresources clean
+	make -C src/qpaste clean
 	make -C src/qproperties clean
 	make -C src/qsettings clean
 
