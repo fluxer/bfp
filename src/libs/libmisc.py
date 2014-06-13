@@ -329,9 +329,9 @@ class Misc(object):
             os.close(self.ipc)
             self.ipc = None
 
-    def system_output(self, command):
+    def system_output(self, command, shell=False):
         ''' Get output of external utility '''
-        pipe = subprocess.Popen(command, stdout=subprocess.PIPE, env={'LC_ALL': 'C'})
+        pipe = subprocess.Popen(command, stdout=subprocess.PIPE, env={'LC_ALL': 'C'}, shell=shell)
         return pipe.communicate()[0].strip()
 
     def system_scanelf(self, sfile, format='#F%n', flags=''):
