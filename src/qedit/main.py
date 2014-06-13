@@ -45,7 +45,7 @@ def open_file(sfile):
     global sedit
     if not sfile:
         sfile = QtGui.QFileDialog.getOpenFileName(MainWindow, "Open", \
-            os.curdir, "All Files (*);;Text Files (*.txt)")
+            QtCore.QDir.currentPath(), "All Files (*);;Text Files (*.txt)")
         if sfile:
             sfile = str(sfile)
             ui.textEdit.setText(misc.file_read(sfile))
@@ -61,7 +61,7 @@ def save_file():
 def save_as_file():
     global sedit
     sfile = QtGui.QFileDialog.getSaveFileName(MainWindow, "Save as", \
-                os.curdir, "All Files (*);;Text Files (*.txt)")
+        QtCore.QDir.currentPath(), "All Files (*);;Text Files (*.txt)")
     if sfile:
         sedit = str(sfile)
         save_file()
@@ -77,7 +77,7 @@ def reload_file():
 def set_font():
     font, ok = QtGui.QFontDialog.getFont(QtGui.QFont(ui.textEdit.font))
     if ok:
-       ui.textEdit.setFont(font)
+        ui.textEdit.setFont(font)
 
 ui.actionQuit.triggered.connect(sys.exit)
 ui.actionAbout.triggered.connect(run_about)

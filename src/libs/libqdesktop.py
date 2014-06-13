@@ -230,7 +230,7 @@ class Mime(object):
     def get_mimes(self):
         # return self.conf.sections()
         mimes = []
-        for line in misc.system_output((misc.whereis('file'), '-r', '-l')).splitlines(): 
+        for line in misc.system_output((misc.whereis('file'), '-r', '-l')).splitlines():
             a = line.split(' : ')
             if len(a) == 2:
                 mime = a[1].split('[')[1].rstrip(']')
@@ -252,7 +252,7 @@ class Mime(object):
         else:
             raise(Exception('Unregistered mime', smime))
 
-    def register(self, smime, sprogram, sicon=''): 
+    def register(self, smime, sprogram, sicon=''):
         if self.conf.has_section(smime):
             return
         self.read()
