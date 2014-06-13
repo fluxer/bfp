@@ -14,7 +14,6 @@ ui = qedit_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 
 # some variables
-model = QtGui.QFileSystemModel()
 actions = libqdesktop.Actions(MainWindow, app)
 config = libqdesktop.Config()
 icon = QtGui.QIcon()
@@ -30,7 +29,7 @@ def setLook():
 setLook()
 
 sedit = None
-for arg in sys.argv:
+for arg in sys.argv[1:]:
     if os.path.isfile(arg):
         sedit = arg
 
