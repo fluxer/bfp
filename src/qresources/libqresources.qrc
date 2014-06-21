@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/share/qresources">
+    <file>resources/preferences-system-network.svg</file>
     <file>resources/applications-fonts.svg</file>
     <file>resources/edit-redo.svg</file>
     <file>resources/edit-undo.svg</file>

@@ -1,0 +1,476 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>526</width>
+    <height>268</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>QNetwork</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../qresources/libqresources.qrc">
+    <normaloff>:/share/qresources/resources/preferences-system-network.svg</normaloff>:/share/qresources/resources/preferences-system-network.svg</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="enabled">
+       <bool>true</bool>
+      </property>
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Ethernet</string>
+       </attribute>
+       <widget class="QTableWidget" name="EthernetList">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>10</y>
+          <width>321</width>
+          <height>186</height>
+         </rect>
+        </property>
+        <property name="sortingEnabled">
+         <bool>true</bool>
+        </property>
+        <column>
+         <property name="text">
+          <string>Name</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Status</string>
+         </property>
+        </column>
+       </widget>
+       <widget class="QPushButton" name="EthernetConnect">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>160</y>
+          <width>141</width>
+          <height>36</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Connect</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../qresources/libqresources.qrc">
+          <normaloff>:/share/qresources/resources/edit-redo.svg</normaloff>:/share/qresources/resources/edit-redo.svg</iconset>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="EthernetDisconnect">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>110</y>
+          <width>141</width>
+          <height>36</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Disconnect</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../qresources/libqresources.qrc">
+          <normaloff>:/share/qresources/resources/edit-undo.svg</normaloff>:/share/qresources/resources/edit-undo.svg</iconset>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="EthernetScan">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>10</y>
+          <width>141</width>
+          <height>36</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Scan</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../qresources/libqresources.qrc">
+          <normaloff>:/share/qresources/resources/find.svg</normaloff>:/share/qresources/resources/find.svg</iconset>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="EthernetDetails">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>60</y>
+          <width>141</width>
+          <height>36</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Details</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../qresources/libqresources.qrc">
+          <normaloff>:/share/qresources/resources/stock_view-details.svg</normaloff>:/share/qresources/resources/stock_view-details.svg</iconset>
+        </property>
+       </widget>
+      </widget>
+      <widget class="QWidget" name="tab_2">
+       <attribute name="title">
+        <string>WiFi</string>
+       </attribute>
+       <widget class="QPushButton" name="WiFiDisconnect">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>110</y>
+          <width>141</width>
+          <height>36</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Disconnect</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../qresources/libqresources.qrc">
+          <normaloff>:/share/qresources/resources/edit-undo.svg</normaloff>:/share/qresources/resources/edit-undo.svg</iconset>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="WiFiConnect">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>160</y>
+          <width>141</width>
+          <height>36</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Connect</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../qresources/libqresources.qrc">
+          <normaloff>:/share/qresources/resources/edit-redo.svg</normaloff>:/share/qresources/resources/edit-redo.svg</iconset>
+        </property>
+       </widget>
+       <widget class="QTableWidget" name="WiFiList">
+        <property name="geometry">
+         <rect>
+          <x>15</x>
+          <y>10</y>
+          <width>321</width>
+          <height>186</height>
+         </rect>
+        </property>
+        <property name="selectionMode">
+         <enum>QAbstractItemView::SingleSelection</enum>
+        </property>
+        <property name="sortingEnabled">
+         <bool>true</bool>
+        </property>
+        <column>
+         <property name="text">
+          <string>Name</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Strength</string>
+         </property>
+        </column>
+        <column>
+         <property name="text">
+          <string>Security</string>
+         </property>
+        </column>
+       </widget>
+       <widget class="QPushButton" name="WiFiDetails">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>60</y>
+          <width>141</width>
+          <height>36</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Details</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../qresources/libqresources.qrc">
+          <normaloff>:/share/qresources/resources/stock_view-details.svg</normaloff>:/share/qresources/resources/stock_view-details.svg</iconset>
+        </property>
+       </widget>
+       <widget class="QPushButton" name="WiFiScan">
+        <property name="geometry">
+         <rect>
+          <x>350</x>
+          <y>10</y>
+          <width>141</width>
+          <height>36</height>
+         </rect>
+        </property>
+        <property name="text">
+         <string>Scan</string>
+        </property>
+        <property name="icon">
+         <iconset resource="../qresources/libqresources.qrc">
+          <normaloff>:/share/qresources/resources/find.svg</normaloff>:/share/qresources/resources/find.svg</iconset>
+        </property>
+       </widget>
+      </widget>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>526</width>
+     <height>18</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuMain">
+    <property name="title">
+     <string>Main</string>
+    </property>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuAction">
+    <property name="title">
+     <string>Actions</string>
+    </property>
+    <addaction name="actionScan"/>
+    <addaction name="actionDetails"/>
+    <addaction name="actionDisconnect"/>
+    <addaction name="actionConnect"/>
+   </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionAbout"/>
+   </widget>
+   <widget class="QMenu" name="menuOptions">
+    <property name="title">
+     <string>Options</string>
+    </property>
+    <addaction name="actionDummy"/>
+   </widget>
+   <addaction name="menuMain"/>
+   <addaction name="menuAction"/>
+   <addaction name="menuOptions"/>
+   <addaction name="menuHelp"/>
+  </widget>
+  <action name="actionQuit">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/exit.svg</normaloff>:/share/qresources/resources/exit.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Quit</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/fileopen.svg</normaloff>:/share/qresources/resources/fileopen.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
+  <action name="actionSave">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/document-save.svg</normaloff>:/share/qresources/resources/document-save.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionSaveAs">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/document-save-as.svg</normaloff>:/share/qresources/resources/document-save-as.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Save as</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/stock_view-details.svg</normaloff>:/share/qresources/resources/stock_view-details.svg</iconset>
+   </property>
+   <property name="text">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionFont">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/applications-fonts.svg</normaloff>:/share/qresources/resources/applications-fonts.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Font</string>
+   </property>
+  </action>
+  <action name="actionNew">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/document-new.svg</normaloff>:/share/qresources/resources/document-new.svg</iconset>
+   </property>
+   <property name="text">
+    <string>New</string>
+   </property>
+  </action>
+  <action name="actionReload">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/document-revert.svg</normaloff>:/share/qresources/resources/document-revert.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Reload</string>
+   </property>
+  </action>
+  <action name="actionUndo">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/edit-undo.svg</normaloff>:/share/qresources/resources/edit-undo.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Undo</string>
+   </property>
+  </action>
+  <action name="actionRedo">
+   <property name="enabled">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/edit-redo.svg</normaloff>:/share/qresources/resources/edit-redo.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Redo</string>
+   </property>
+  </action>
+  <action name="actionFind">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/find.svg</normaloff>:/share/qresources/resources/find.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Find</string>
+   </property>
+   <property name="shortcut">
+    <string/>
+   </property>
+  </action>
+  <action name="actionScan">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/find.svg</normaloff>:/share/qresources/resources/find.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Scan</string>
+   </property>
+  </action>
+  <action name="actionDetails">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/stock_view-details.svg</normaloff>:/share/qresources/resources/stock_view-details.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Details</string>
+   </property>
+  </action>
+  <action name="actionDisconnect">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/edit-undo.svg</normaloff>:/share/qresources/resources/edit-undo.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Disconnect</string>
+   </property>
+  </action>
+  <action name="actionConnect">
+   <property name="enabled">
+    <bool>false</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/edit-redo.svg</normaloff>:/share/qresources/resources/edit-redo.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Connect</string>
+   </property>
+  </action>
+  <action name="actionDummy">
+   <property name="text">
+    <string>dummy</string>
+   </property>
+  </action>
+ </widget>
+ <resources>
+  <include location="../qresources/libqresources.qrc"/>
+ </resources>
+ <connections/>
+ <designerdata>
+  <property name="gridDeltaX">
+   <number>5</number>
+  </property>
+  <property name="gridDeltaY">
+   <number>5</number>
+  </property>
+  <property name="gridSnapX">
+   <bool>true</bool>
+  </property>
+  <property name="gridSnapY">
+   <bool>true</bool>
+  </property>
+  <property name="gridVisible">
+   <bool>true</bool>
+  </property>
+ </designerdata>
+</ui>
