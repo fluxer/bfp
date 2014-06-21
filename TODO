@@ -3,6 +3,7 @@
  * Tools for the following:
    * purge repositories that are not in repositories.conf
    * detect false-positives in explicit runtime dependencies
+ * Use Makefiles for build scripts
 
 ## QFILE ##
  * Implement bookmarks
@@ -13,9 +14,6 @@
 ## QSETTINGS ##
  * Implement file associations
  * Maybe implement fonts outside of stylesheet
-
-## QDESKTOP ##
- * Create ~/Desktop if it doesn't exist
 
 ## ALL QT ##
  * Use icons from theme
