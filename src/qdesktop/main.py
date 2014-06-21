@@ -161,7 +161,7 @@ def run_terminal():
 def run_filemanager():
     p = QtCore.QProcess()
     p.setWorkingDirectory(QtCore.QDir.homePath())
-    p.startDetached(config.DEFAULT_FILEMANAGER + ' ' + QtCore.QDir.homePath())
+    p.startDetached(config.DEFAULT_FILEMANAGER)
     p.close()
 
 def run_webbrowser():
