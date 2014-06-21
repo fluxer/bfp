@@ -207,10 +207,10 @@ class Actions(object):
 
 class Mime(object):
     def __init__(self):
-        self.conf = ConfigParser.ConfigParser()
         self.read()
 
     def read(self):
+        self.conf = ConfigParser.ConfigParser()
         self.conf.read('/etc/mime.conf')
 
     def write(self):

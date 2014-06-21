@@ -14,6 +14,7 @@ import libmagic
 
 class Misc(object):
     def __init__(self):
+        self.OFFLINE = False
         self.TIMEOUT = 30
         self.EXTERNAL = False
         self.ROOT_DIR = '/'
@@ -33,6 +34,9 @@ class Misc(object):
 
     def ping(self, url='http://www.google.com'):
         ''' Ping URL '''
+        if self.OFFLINE:
+            return
+
         try:
             p = urllib2.urlopen(url, timeout=self.TIMEOUT)
             p.close()
@@ -170,7 +174,9 @@ class Misc(object):
         # to tell if the archive is corrupted (checking if size == 0 is not enough)
         # so the source is re-feteched
 
-        if os.path.isfile(destination):
+        if self.OFFLINE:
+            return True
+        elif os.path.isfile(destination):
             local_size = os.path.getsize(destination)
             rfile = urllib2.urlopen(url, timeout=self.TIMEOUT)
             remote_size = rfile.headers.get('content-length')
@@ -185,6 +191,9 @@ class Misc(object):
 
     def fetch_internal(self, url, destination):
         ''' Download file using internal library '''
+        if self.OFFLINE:
+            return
+
         rfile = urllib2.urlopen(url, timeout=self.TIMEOUT)
         dest_dir = os.path.dirname(destination)
         self.dir_create(dest_dir)
@@ -196,6 +205,9 @@ class Misc(object):
 
     def fetch(self, url, destination):
         ''' Download file using external utilities, fallback to internal '''
+        if self.OFFLINE:
+            return
+
         dest_dir = os.path.dirname(destination)
         self.dir_create(dest_dir)
 
