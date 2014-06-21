@@ -62,8 +62,6 @@ def connect_ethernet():
         reply = QtDBus.QDBusReply(msg)
 
         if reply.isValid():
-            srow = 1
-            ui.EthernetList.clear()
             for r in reply.value():
                 data = r[1]
                 if data.get('Name') == sconnect:
@@ -83,8 +81,6 @@ def connect_wifi():
         reply = QtDBus.QDBusReply(msg)
 
         if reply.isValid():
-            srow = 1
-            ui.EthernetList.clear()
             for r in reply.value():
                 data = r[1]
                 if data.get('Name') == sconnect:
@@ -118,8 +114,7 @@ def ethernet_scan():
             ui.EthernetList.clearContents()
             for r in reply.value():
                 data = r[1]
-                type = data.get('Type')
-                if type == 'ethernet':
+                if data.get('Type') == 'ethernet':
                     name = data.get('Name')
                     status = data.get('Status')
                     ui.EthernetList.setRowCount(srow)
@@ -158,8 +153,7 @@ def wifi_scan():
             ui.WiFiList.clearContents()
             for r in reply.value():
                 data = r[1]
-                type = data.get('Type')
-                if type == 'wifi':
+                if data.get('Type') == 'wifi':
                     name = data.get('Name')
                     strength = misc.string_convert(data.get('Strength'))
                     security = misc.string_convert(data.get('Security'))
@@ -170,7 +164,7 @@ def wifi_scan():
                     ui.WiFiList.setItem(srow-1, 2, QtGui.QTableWidgetItem(security))
                     srow += 1
         else:
-            QtGui.QMessageBox.critical(Dialog, 'Error', str(bus.lastError().message()))
+            QtGui.QMessageBox.critical(MainWindow, 'Error', str(bus.lastError().message()))
             ui.tabWidget.setTabEnabled(1, False)
 
 def enable_buttons():
