@@ -37,11 +37,60 @@ setLook()
 def run_about():
     QtGui.QMessageBox.about(MainWindow, "About", '<b>QNetwork v1.0.0</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
 
+def connect(name):
+    service = QtDBus.QDBusInterface('net.connman', name, 'net.connman.Service', bus)
+    if service.isValid():
+        msg = service.call('Connect')
+        reply = QtDBus.QDBusReply(msg)
+
+        if reply.isValid():
+            print('Reply', reply.value())
+        else:
+            QtGui.QMessageBox.critical(MainWindow, 'Error', str(reply.error().message()))
+    else:
+        QtGui.QMessageBox.critical(MainWindow, 'Error', str(bus.lastError().message()))
+
 def connect_ethernet():
-    pass
+    selection = ui.EthernetList.selectedIndexes()
+    if not selection:
+        return
+    sconnect = QtCore.QModelIndex(selection[0]).data()
+    manager = QtDBus.QDBusInterface('net.connman', '/', 'net.connman.Manager', bus)
+
+    if manager.isValid():
+        msg = manager.call('GetServices')
+        reply = QtDBus.QDBusReply(msg)
+
+        if reply.isValid():
+            srow = 1
+            ui.EthernetList.clear()
+            for r in reply.value():
+                data = r[1]
+                if data.get('Name') == sconnect:
+                    connect(r[0])
+    else:
+        QtGui.QMessageBox.critical(MainWindow, 'Error', str(bus.lastError().message()))
 
 def connect_wifi():
-    pass
+    selection = ui.WiFiList.selectedIndexes()
+    if not selection:
+        return
+    sconnect = QtCore.QModelIndex(selection[0]).data()
+    manager = QtDBus.QDBusInterface('net.connman', '/', 'net.connman.Manager', bus)
+
+    if manager.isValid():
+        msg = manager.call('GetServices')
+        reply = QtDBus.QDBusReply(msg)
+
+        if reply.isValid():
+            srow = 1
+            ui.EthernetList.clear()
+            for r in reply.value():
+                data = r[1]
+                if data.get('Name') == sconnect:
+                    connect(r[0])
+    else:
+        QtGui.QMessageBox.critical(MainWindow, 'Error', str(bus.lastError().message()))
 
 def ethernet_scan():
     ethernet = QtDBus.QDBusInterface('net.connman', '/net/connman/technology/ethernet', 'net.connman.Technology', bus)
@@ -53,10 +102,10 @@ def ethernet_scan():
         if reply.isValid():
             print('Ethernet scan complete')
         else:
-            print('Call failed:', reply.error().message())
+            QtGui.QMessageBox.critical(MainWindow, 'Error', str(reply.error().message()))
             ui.tabWidget.setTabEnabled(0, False)
     else:
-        print(bus.lastError().message())
+        QtGui.QMessageBox.critical(MainWindow, 'Error', str(bus.lastError().message()))
         ui.tabWidget.setTabEnabled(0, False)
 
     # get managed services
@@ -65,18 +114,23 @@ def ethernet_scan():
         reply = QtDBus.QDBusReply(msg)
 
         if reply.isValid():
-            ui.EthernetList.clear()
+            srow = 1
+            ui.EthernetList.clearContents()
             for r in reply.value():
                 data = r[1]
                 type = data.get('Type')
                 if type == 'ethernet':
                     name = data.get('Name')
                     status = data.get('Status')
-                    print(name, status)
-                    ui.EthernetList.insertRow(name, status)
+                    ui.EthernetList.setRowCount(srow)
+                    ui.EthernetList.setItem(srow-1, 0, name)
+                    ui.EthernetList.setItem(srow-1, 1, status)
+                    srow += 1
         else:
-            print('Call failed:', reply.error().message())
+            QtGui.QMessageBox.critical(MainWindow, 'Error', str(bus.lastError().message()))
             ui.tabWidget.setTabEnabled(0, False)
+    else:
+        print(bus.lastError().message())
 
 def wifi_scan():
     wifi = QtDBus.QDBusInterface('net.connman', '/net/connman/technology/wifi', 'net.connman.Technology', bus)
@@ -88,10 +142,10 @@ def wifi_scan():
         if reply.isValid():
             print('WiFi scan complete')
         else:
-            print('Call failed:', reply.error().message())
+            QtGui.QMessageBox.critical(MainWindow, 'Error', str(reply.error().message()))
             ui.tabWidget.setTabEnabled(1, False)
     else:
-        print(bus.lastError().message())
+        QtGui.QMessageBox.critical(MainWindow, 'Error', str(bus.lastError().message()))
         ui.tabWidget.setTabEnabled(1, False)
 
     # get managed services
@@ -100,31 +154,57 @@ def wifi_scan():
         reply = QtDBus.QDBusReply(msg)
 
         if reply.isValid():
-            ui.WiFiList.clear()
+            srow = 1
+            ui.WiFiList.clearContents()
             for r in reply.value():
                 data = r[1]
                 type = data.get('Type')
                 if type == 'wifi':
                     name = data.get('Name')
-                    strength = data.get('Strength')
-                    security = data.get('Security')
+                    strength = misc.string_convert(data.get('Strength'))
+                    security = misc.string_convert(data.get('Security'))
                     print(name, strength, security)
-                    # ui.WiFiList.insertRow(name, strength, security)
+                    ui.WiFiList.setRowCount(srow)
+                    ui.WiFiList.setItem(srow-1, 0, QtGui.QTableWidgetItem(name))
+                    ui.WiFiList.setItem(srow-1, 1, QtGui.QTableWidgetItem(strength))
+                    ui.WiFiList.setItem(srow-1, 2, QtGui.QTableWidgetItem(security))
+                    srow += 1
         else:
-            print('Call failed:', reply.error().message())
+            QtGui.QMessageBox.critical(Dialog, 'Error', str(bus.lastError().message()))
             ui.tabWidget.setTabEnabled(1, False)
 
-def enable_widgets():
-    ethernet_scan()
-    wifi_scan()
-    pass
+def enable_buttons():
+    sethernet = QtCore.QModelIndex(ui.EthernetList.currentIndex()).data()
+    swifi = QtCore.QModelIndex(ui.WiFiList.currentIndex()).data()
+    if sethernet:
+        ui.EthernetDetails.setEnabled(True)
+        ui.EthernetDisconnect.setEnabled(True)
+        ui.EthernetConnect.setEnabled(True)
+    else:
+        ui.EthernetDetails.setEnabled(False)
+        ui.EthernetDisconnect.setEnabled(False)
+        ui.EthernetConnect.setEnabled(False)
 
-enable_widgets()
+    if swifi:
+        ui.WiFiDetails.setEnabled(True)
+        ui.WiFiDisconnect.setEnabled(True)
+        ui.WiFiConnect.setEnabled(True)
+    else:
+        ui.WiFiDetails.setEnabled(False)
+        ui.WiFiDisconnect.setEnabled(False)
+        ui.WiFiConnect.setEnabled(False)
 
 ui.actionQuit.triggered.connect(sys.exit)
 ui.actionAbout.triggered.connect(run_about)
 ui.EthernetScan.clicked.connect(ethernet_scan)
 ui.WiFiScan.clicked.connect(wifi_scan)
+ui.WiFiList.currentItemChanged.connect(enable_buttons)
+ui.EthernetList.currentItemChanged.connect(enable_buttons)
+ui.WiFiConnect.clicked.connect(connect_wifi)
+ui.EthernetConnect.clicked.connect(connect_ethernet)
+
+ethernet_scan()
+wifi_scan()
 
 # run!
 MainWindow.show()
