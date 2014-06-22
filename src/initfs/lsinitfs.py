@@ -54,7 +54,7 @@ try:
 
     message.info('Listing initial RAM image...')
     base = os.path.basename(image)
-    new_image = os.path.join(ARGS.tmp, base)
+    new_image = os.path.join(ARGS.tmp, base.replace('.img', '.gz'))
     message.sub_info('Copying image')
     misc.dir_create(ARGS.tmp)
     shutil.copyfile(image, new_image)
