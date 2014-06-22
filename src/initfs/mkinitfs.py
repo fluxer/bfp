@@ -118,6 +118,16 @@ try:
             copy_item(sfile)
 
     message.sub_info('Copying modules')
+    if os.path.isdir('/etc/mkinitfs/modules'):
+        for sfile in misc.list_files('/etc/mkinitfs/modules'):
+            if not sfile.endswith('.conf'):
+                message.sub_debug('Skipping', sfile)
+                continue
+            message.sub_debug('Reading', sfile)
+            for line in misc.file_readlines(sfile):
+                if not line in modules:
+                    modules.append(line)
+
     for module in modules:
         for line in misc.file_read('/lib/modules/' + ARGS.kernel + '/modules.dep').splitlines():
             base = line.split(':')[0]
