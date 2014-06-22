@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=QSettings
+Exec=qsettings
+Icon=preferences-system
+Terminal=false
+StartupNotify=true
+Type=Application
+Categories=Qt;System;Settings;
