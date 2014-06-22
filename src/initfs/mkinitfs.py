@@ -27,7 +27,11 @@ try:
     kernel = os.uname()[2]
     busybox = misc.whereis('busybox')
     image = '/boot/initramfs-' + kernel + '.img'
-    modules = os.listdir('/sys/module')
+    modules = []
+    # FIXME: some modules are virtual???
+    for m in os.listdir('/sys/module'):
+        if os.path.isdir('/sys/module/' + m + '/sections'):
+            modules.append(m)
 
     parser.add_argument('-t', '--tmp', type=str, default=tmpdir, \
         help='Change temporary directory')
@@ -128,15 +132,26 @@ try:
                 if not line in modules:
                     modules.append(line)
 
+    # FIXME: aliases are not supported, `modprobe -bD <module>` can be used but it is
+    #              required to be able to specify the kernel version which it does not support
+    #              otherwise it bails when kernel version requested is different from `uname -r`.
     for module in modules:
         found = False
-        for line in misc.file_read('/lib/modules/' + ARGS.kernel + '/modules.dep').splitlines():
-            base = line.split(':')[0]
-            depends = line.split(':')[1]
-            if '/' + module + '.ko' in base:
-                copy_item('/lib/modules/' + ARGS.kernel + '/' + base)
-                for dep in depends.split():
-                    copy_item('/lib/modules/' + ARGS.kernel + '/' + dep)
+        if ARGS.kernel != kernel:
+            for line in misc.file_read('/lib/modules/' + ARGS.kernel + '/modules.dep').splitlines():
+                base = line.split(':')[0]
+                depends = line.split(':')[1]
+                if '/' + module + '.ko' in base:
+                    found = True
+                    copy_item('/lib/modules/' + ARGS.kernel + '/' + base)
+                    for dep in depends.split():
+                        copy_item('/lib/modules/' + ARGS.kernel + '/' + dep)
+        else:
+            depends = misc.system_output((misc.whereis('modprobe'), '-bD', module))
+            if depends:
+                found = True
+                for line in depends.splitlines():
+                    copy_item(line.split()[1])
         if not found:
             message.sub_warning('Module not found', module)
 
