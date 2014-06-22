@@ -13,7 +13,7 @@ import os
 import re
 
 
-app_version = "0.0.1 (f4e1180)"
+app_version = "0.0.1 (5f38e05)"
 
 try:
     import libmessage
@@ -167,6 +167,15 @@ try:
             libconfig.TRIGGERS = values
             setattr(namespace, self.dest, values)
 
+    class OverrideOffline(argparse.Action):
+        ''' Override offline mode '''
+        def __call__(self, parser, namespace, values, option_string=None):
+            libmisc.OFFLINE = True
+            libmode.libmisc.OFFLINE = True
+            libpackage.libmisc.OFFLINE = True
+            libmode.libpackage.libmisc.OFFLINE = True
+            setattr(namespace, self.dest, values)
+
     class OverrideDebug(argparse.Action):
         ''' Override printing of debug messages '''
         def __call__(self, parser, namespace, values, option_string=None):
@@ -309,6 +318,8 @@ try:
         help='Set whether to execute pre/post script')
     parser.add_argument('--triggers', type=ast.literal_eval, action=OverrideTriggers,
         help='Set whether to execute triggers')
+    parser.add_argument('--offline', nargs=0, action=OverrideOffline,
+        help='Enable offline mode')
     parser.add_argument('--debug', nargs=0, action=OverrideDebug,
         help='Enable debug messages')
     parser.add_argument('--version', action='version',

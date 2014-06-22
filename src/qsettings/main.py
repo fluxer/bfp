@@ -93,7 +93,11 @@ def setWebBrowser():
 
 def setMime():
     print ui.MimesView.selectedItems(), ui.ProgramsView.selectedItems()
-    mime.register(ui.MimesView.selectedItems(), ui.ProgramsView.selectedItems())
+    for m in ui.MimesView.selectedItems():
+        print('MIME', m)
+    for m in ui.ProgramsView.selectedItems():
+        print('PROGRAM', m)
+    # mime.register(str(ui.MimesView.selectedItems()), ui.ProgramsView.selectedItems())
 
 def registerMime():
     # FIXME: register mime
