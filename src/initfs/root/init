@@ -53,10 +53,6 @@ for arg in $(cat /proc/cmdline);do
     esac
 done
 
-msg "Popuating /dev..."
-cmd echo /bin/mdev > /proc/sys/kernel/hotplug
-cmd mdev -s
-
 for hook in $hooks;do
     if [ -f "/hooks/$hook" ];then
         msg "Sourcing hook: $hook"

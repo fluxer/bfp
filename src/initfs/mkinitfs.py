@@ -26,10 +26,8 @@ try:
     tmpdir = tempfile.mkdtemp()
     kernel = os.uname()[2]
     busybox = misc.whereis('busybox')
-    image = '/boot/initramfs-' + kernel + '.gz'
-    modules = []
-    for mod in misc.system_output((misc.whereis('lsmod'))).split('\n')[1:]:
-        modules.append(mod.split()[0])
+    image = '/boot/initramfs-' + kernel + '.img'
+    modules = os.listdir('/sys/module')
 
     parser.add_argument('-t', '--tmp', type=str, default=tmpdir, \
         help='Change temporary directory')
@@ -56,16 +54,20 @@ try:
 
     def copy_item(src):
         # FIXME: symlinks, force
-        sfixed = src.replace('etc/mkinitfs/root', '')
-        sfixed = src.replace('etc/mkinitfs/hooks', 'hooks')
         if os.path.isdir(src):
             for f in misc.list_files(src):
+                sfixed = f.replace('/etc/mkinitfs/root', '')
+                sfixed = sfixed.replace('/etc/mkinitfs/hooks', 'hooks')
                 message.sub_debug('Copying', f)
+                message.sub_debug('To', ARGS.tmp + '/' + f)
                 misc.dir_create(ARGS.tmp + '/' + os.path.dirname(f))
                 shutil.copy2(f, ARGS.tmp + '/'+ f)
         elif os.path.isfile(src):
             for dep in misc.system_output((misc.whereis('lddtree'), '-l', src)).split('\n'):
+                sfixed = dep.replace('/etc/mkinitfs/root', '')
+                sfixed = sfixed.replace('/etc/mkinitfs/hooks', 'hooks')
                 message.sub_debug('Copying', dep)
+                message.sub_debug('To', ARGS.tmp + '/' + sfixed)
                 sdir = os.path.dirname(sfixed)
                 misc.dir_create(ARGS.tmp + sdir)
                 shutil.copy2(dep, ARGS.tmp + '/' + sfixed)
@@ -117,17 +119,18 @@ try:
 
     message.sub_info('Copying modules')
     for module in modules:
-        depends = misc.system_output((misc.whereis('modprobe'), '-b', '-D', module))
-        if depends:
-            for depend in depends.split('\n'):
-                depend = depend.split(' ')[1]
-                if not os.path.isfile(ARGS.tmp + depend):
-                    copy_item(depend)
+        for line in misc.file_read('/lib/modules/' + ARGS.kernel + '/modules.dep').splitlines():
+            base = line.split(':')[0]
+            depends = line.split(':')[1]
+            if '/' + module + '.ko' in base:
+                copy_item('/lib/modules/' + ARGS.kernel + '/' + base)
+                for dep in depends.split():
+                    copy_item('/lib/modules/' + ARGS.kernel + '/' + dep)
 
     message.sub_info('Copying module files')
-    for sfile in os.listdir('/lib/modules/' + kernel):
+    for sfile in os.listdir('/lib/modules/' + ARGS.kernel):
         if sfile.startswith('modules.'):
-            sfile = '/lib/modules/' + kernel + '/' + sfile
+            sfile = '/lib/modules/' + ARGS.kernel + '/' + sfile
             copy_item(sfile)
 
     message.sub_info('Updating module dependencies')

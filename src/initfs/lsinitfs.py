@@ -22,7 +22,7 @@ try:
 
     tmpdir = tempfile.mkdtemp()
     kernel = os.uname()[2]
-    image = '/boot/initramfs-' + kernel + '.gz'
+    image = '/boot/initramfs-' + kernel + '.img'
 
     parser.add_argument('-t', '--tmp', type=str, default=tmpdir,
         help='Change temporary directory')
