@@ -1,5 +1,10 @@
 #!/usr/bin/python
 
+# This is only needed for Python v2 but is harmless for Python v3.
+import sip
+sip.setapi('QString', 2)
+sip.setapi('QVariant', 2)
+
 import qsettings_ui
 from PyQt4 import QtCore, QtGui
 import sys, os
@@ -91,17 +96,32 @@ def setWebBrowser():
     ui.WebBrowserEdit.setText(swbrowser)
     config.write('default/webbrowser', swbrowser)
 
-def setMime():
-    print ui.MimesView.selectedItems(), ui.ProgramsView.selectedItems()
-    for m in ui.MimesView.selectedItems():
-        print('MIME', m)
-    for m in ui.ProgramsView.selectedItems():
-        print('PROGRAM', m)
-    # mime.register(str(ui.MimesView.selectedItems()), ui.ProgramsView.selectedItems())
-
 def registerMime():
-    # FIXME: register mime
-    pass
+    smime, ok = QtGui.QInputDialog.getText(MainWindow, "Mime", \
+        "Mime:", QtGui.QLineEdit.Normal, '')
+    smime = str(smime)
+    if not smime or not ok:
+        return
+    sprogram = ui.ProgramsView.selectedIndexes()
+    if not sprogram:
+        return
+
+    print('MIME', smime)
+    print('PROGRAM', QtCore.QModelIndex(sprogram[0]).data())
+    mime.register(smime, QtCore.QModelIndex(sprogram[0]).data())
+    ui.MimesView.addItem(smime)
+
+def setMime():
+    smime = ui.MimesView.selectedIndexes()
+    if not smime:
+        return
+    sprogram = ui.ProgramsView.selectedIndexes()
+    if not sprogram:
+        return
+
+    print('MIME', QtCore.QModelIndex(smime[0]).data())
+    print('PROGRAM', QtCore.QModelIndex(sprogram[0]).data())
+    mime.register(QtCore.QModelIndex(smime[0]).data(), QtCore.QModelIndex(sprogram[0]).data())
 
 # connect widgets to actions
 ui.actionQuit.triggered.connect(sys.exit)

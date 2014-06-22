@@ -214,7 +214,9 @@ class Mime(object):
         self.conf.read('/etc/mime.conf')
 
     def write(self):
-        with open('/etc/mime.conf', 'a+') as fd:
+        if not os.path.isfile('/etc/mime.conf'):
+            misc.file_write('/etc/mime.conf', '')
+        with open('/etc/mime.conf', 'w') as fd:
             self.conf.write(fd)
 
     def get_icon(self, smime):
@@ -228,7 +230,7 @@ class Mime(object):
         return None
 
     def get_mimes(self):
-        # return self.conf.sections()
+        return self.conf.sections()
         mimes = []
         for line in misc.system_output((misc.whereis('file'), '-r', '-l')).splitlines():
             a = line.split(' : ')
