@@ -129,6 +129,7 @@ try:
                     modules.append(line)
 
     for module in modules:
+        found = False
         for line in misc.file_read('/lib/modules/' + ARGS.kernel + '/modules.dep').splitlines():
             base = line.split(':')[0]
             depends = line.split(':')[1]
@@ -136,6 +137,8 @@ try:
                 copy_item('/lib/modules/' + ARGS.kernel + '/' + base)
                 for dep in depends.split():
                     copy_item('/lib/modules/' + ARGS.kernel + '/' + dep)
+        if not found:
+            message.sub_warning('Module not found', module)
 
     message.sub_info('Copying module files')
     for sfile in os.listdir('/lib/modules/' + ARGS.kernel):
