@@ -128,6 +128,26 @@ def setMime():
 
     mime.register(QtCore.QModelIndex(smime[0]).data(), QtCore.QModelIndex(sprogram[0]).data())
 
+def selectMime():
+    sprogram = ui.ProgramsView.selectedIndexes()
+    if not sprogram:
+        return
+
+    smime = mime.get_mime(QtCore.QModelIndex(sprogram[0]).data())
+    print smime
+    index = ui.MimesView.findText(smime)
+    ui.MimesView.setCurrentIndex(index)
+
+def selectProgram():
+    smime = ui.MimesView.selectedIndexes()
+    if not smime:
+        return
+
+    sprogram = mime.get_program(QtCore.QModelIndex(smime[0]).data())
+    print sprogram
+    index = ui.MimesView.findText(sprogram)
+    ui.MimesView.setCurrentIndex(index)
+
 # connect widgets to actions
 ui.actionQuit.triggered.connect(sys.exit)
 ui.actionAbout.triggered.connect(run_about)
@@ -143,6 +163,8 @@ ui.WebBrowserButton.clicked.connect(setWebBrowser)
 ui.UnregisterButton.clicked.connect(unregisterMime)
 ui.RegisterButton.clicked.connect(registerMime)
 ui.AssociateButton.clicked.connect(setMime)
+ui.MimesView.currentItemChanged.connect(selectProgram)
+ui.ProgramsView.currentItemChanged.connect(selectMime)
 
 # setup values of widgets
 for svar in misc.list_dirs('/etc/qdesktop/styles'):

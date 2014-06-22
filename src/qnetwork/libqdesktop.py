@@ -224,6 +224,12 @@ class Mime(object):
         with open('/etc/mime.conf', 'w') as fd:
             self.conf.write(fd)
 
+    def get_mime(self, sprogram):
+        for mime in self.get_mimes():
+            if self.get_program(mime) == sprogram:
+                return mime
+        return None
+
     def get_icon(self, smime):
         if self.conf.has_section(smime):
             return self.conf.get(smime, 'icon')
@@ -249,7 +255,7 @@ class Mime(object):
         programs = misc.list_files('/bin')
         if os.geteuid() == 0:
             programs.extend(misc.list_files('/sbin'))
-        return programs
+        return sorted(programs)
 
     def open(self, svar):
         smime = misc.file_mime(svar)
