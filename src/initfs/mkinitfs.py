@@ -59,27 +59,34 @@ try:
     def copy_item(src):
         # FIXME: symlinks, force
         if os.path.isdir(src):
-            for f in misc.list_files(src):
-                sfixed = f.replace('/etc/mkinitfs/root', '')
+            for sfile in misc.list_files(src):
+                sfixed = sfile.replace('/etc/mkinitfs/root', '')
                 sfixed = sfixed.replace('/etc/mkinitfs/hooks', 'hooks')
-                message.sub_debug('Copying', f)
-                message.sub_debug('To', ARGS.tmp + '/' + f)
-                misc.dir_create(ARGS.tmp + '/' + os.path.dirname(f))
-                shutil.copy2(f, ARGS.tmp + '/'+ f)
+                message.sub_debug('Copying', sfile)
+                message.sub_debug('To', ARGS.tmp + '/' + sfile)
+                misc.dir_create(ARGS.tmp + '/' + os.path.dirname(sfile))
+                shutil.copy2(sfile, ARGS.tmp + '/'+ sfile)
         elif os.path.isfile(src):
-            for dep in misc.system_output((misc.whereis('lddtree'), '-l', src)).split('\n'):
-                sfixed = dep.replace('/etc/mkinitfs/root', '')
+            for sfile in misc.system_output((misc.whereis('lddtree'), '-l', src)).split('\n'):
+                sfixed = sfile.replace('/etc/mkinitfs/root', '')
                 sfixed = sfixed.replace('/etc/mkinitfs/hooks', 'hooks')
-                message.sub_debug('Copying', dep)
+                message.sub_debug('Copying', sfile)
                 message.sub_debug('To', ARGS.tmp + '/' + sfixed)
-                sdir = os.path.dirname(sfixed)
-                misc.dir_create(ARGS.tmp + sdir)
-                shutil.copy2(dep, ARGS.tmp + '/' + sfixed)
-                if os.path.islink(dep):
-                    slink = os.readlink(dep)
-                    copy_item(os.path.dirname(dep) + '/' + slink)
+                misc.dir_create(ARGS.tmp + os.path.dirname(sfixed))
+                shutil.copy2(sfile, ARGS.tmp + '/' + sfixed)
+                if os.path.islink(sfile):
+                    slink = os.readlink(sfile)
+                    copy_item(os.path.dirname(sfile) + '/' + slink)
         else:
             message.warning('File or directory does not exist', src)
+
+    # FIXME: support both /lib and /usr/lib ???
+    if os.path.isdir('/lib/modules/' + ARGS.kernel):
+        modsdir = '/lib/modules/' + ARGS.kernel
+    elif os.path.isdir('/usr/lib/modules/' + ARGS.kernel):
+        modsdir = '/usr/lib/modules/' + ARGS.kernel
+    else:
+        message.critical('Unable to find modules directory')
 
     message.info('Runtime information')
     message.sub_info('TMP', ARGS.tmp)
@@ -138,14 +145,14 @@ try:
     for module in modules:
         found = False
         if ARGS.kernel != kernel:
-            for line in misc.file_read('/lib/modules/' + ARGS.kernel + '/modules.dep').splitlines():
+            for line in misc.file_read(modsdir + '/modules.dep').splitlines():
                 base = line.split(':')[0]
                 depends = line.split(':')[1]
                 if '/' + module + '.ko' in base:
                     found = True
-                    copy_item('/lib/modules/' + ARGS.kernel + '/' + base)
+                    copy_item(modsdir + '/' + base)
                     for dep in depends.split():
-                        copy_item('/lib/modules/' + ARGS.kernel + '/' + dep)
+                        copy_item(modsdir+ '/' + dep)
         else:
             depends = misc.system_output((misc.whereis('modprobe'), '-bD', module))
             if depends:
@@ -156,9 +163,9 @@ try:
             message.sub_warning('Module not found', module)
 
     message.sub_info('Copying module files')
-    for sfile in os.listdir('/lib/modules/' + ARGS.kernel):
+    for sfile in os.listdir(modsdir):
         if sfile.startswith('modules.'):
-            sfile = '/lib/modules/' + ARGS.kernel + '/' + sfile
+            sfile = modsdir + '/' + sfile
             copy_item(sfile)
 
     message.sub_info('Updating module dependencies')
