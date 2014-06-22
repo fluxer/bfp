@@ -241,15 +241,7 @@ class Mime(object):
         return None
 
     def get_mimes(self):
-        return self.conf.sections()
-        mimes = []
-        for line in misc.system_output((misc.whereis('file'), '-r', '-l')).splitlines():
-            a = line.split(' : ')
-            if len(a) == 2:
-                mime = a[1].split('[')[1].rstrip(']')
-                if mime and not mime in mimes:
-                    mimes.append(mime)
-        return sorted(mimes)
+        return sorted(self.conf.sections())
 
     def get_programs(self):
         programs = misc.list_files('/bin')
