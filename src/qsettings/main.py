@@ -96,6 +96,15 @@ def setWebBrowser():
     ui.WebBrowserEdit.setText(swbrowser)
     config.write('default/webbrowser', swbrowser)
 
+def unregisterMime():
+    smime = ui.MimesView.selectedIndexes()
+    if not smime:
+        return
+
+    mime.unregister(QtCore.QModelIndex(smime[0]).data())
+    ui.MimesView.clear()
+    ui.MimesView.addItems(mime.get_mimes())
+
 def registerMime():
     smime, ok = QtGui.QInputDialog.getText(MainWindow, "Mime", \
         "Mime:", QtGui.QLineEdit.Normal, '')
@@ -106,8 +115,6 @@ def registerMime():
     if not sprogram:
         return
 
-    print('MIME', smime)
-    print('PROGRAM', QtCore.QModelIndex(sprogram[0]).data())
     mime.register(smime, QtCore.QModelIndex(sprogram[0]).data())
     ui.MimesView.addItem(smime)
 
@@ -119,8 +126,6 @@ def setMime():
     if not sprogram:
         return
 
-    print('MIME', QtCore.QModelIndex(smime[0]).data())
-    print('PROGRAM', QtCore.QModelIndex(sprogram[0]).data())
     mime.register(QtCore.QModelIndex(smime[0]).data(), QtCore.QModelIndex(sprogram[0]).data())
 
 # connect widgets to actions
@@ -135,8 +140,9 @@ ui.MenuButton.clicked.connect(setMenu)
 ui.TerminalButton.clicked.connect(setTerminal)
 ui.FileManagerButton.clicked.connect(setFileManager)
 ui.WebBrowserButton.clicked.connect(setWebBrowser)
-ui.AssociateButton.clicked.connect(setMime)
+ui.UnregisterButton.clicked.connect(unregisterMime)
 ui.RegisterButton.clicked.connect(registerMime)
+ui.AssociateButton.clicked.connect(setMime)
 
 # setup values of widgets
 for svar in misc.list_dirs('/etc/qdesktop/styles'):

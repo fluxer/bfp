@@ -39,7 +39,7 @@
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>241</width>
+        <width>236</width>
         <height>331</height>
        </rect>
       </property>
@@ -47,9 +47,9 @@
      <widget class="QListWidget" name="ProgramsView">
       <property name="geometry">
        <rect>
-        <x>265</x>
+        <x>260</x>
         <y>10</y>
-        <width>236</width>
+        <width>241</width>
         <height>331</height>
        </rect>
       </property>
@@ -57,9 +57,9 @@
      <widget class="QPushButton" name="AssociateButton">
       <property name="geometry">
        <rect>
-        <x>280</x>
+        <x>350</x>
         <y>350</y>
-        <width>221</width>
+        <width>151</width>
         <height>31</height>
        </rect>
       </property>
@@ -71,12 +71,29 @@
         <normaloff>:/share/qresources/resources/gtk-edit.svg</normaloff>:/share/qresources/resources/gtk-edit.svg</iconset>
       </property>
      </widget>
-     <widget class="QPushButton" name="RegisterButton">
+     <widget class="QPushButton" name="UnregisterButton">
       <property name="geometry">
        <rect>
         <x>10</x>
         <y>350</y>
-        <width>221</width>
+        <width>151</width>
+        <height>31</height>
+       </rect>
+      </property>
+      <property name="text">
+       <string>Unregister</string>
+      </property>
+      <property name="icon">
+       <iconset resource="../qresources/libqresources.qrc">
+        <normaloff>:/share/qresources/resources/editdelete.svg</normaloff>:/share/qresources/resources/editdelete.svg</iconset>
+      </property>
+     </widget>
+     <widget class="QPushButton" name="RegisterButton">
+      <property name="geometry">
+       <rect>
+        <x>180</x>
+        <y>350</y>
+        <width>151</width>
         <height>31</height>
        </rect>
       </property>
