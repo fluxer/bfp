@@ -28,7 +28,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -412,19 +412,6 @@
         <set>Qt::AlignCenter</set>
        </property>
       </widget>
-     </widget>
-     <widget class="QPushButton" name="pushButton">
-      <property name="geometry">
-       <rect>
-        <x>110</x>
-        <y>330</y>
-        <width>321</width>
-        <height>24</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>maybe add search path prefernece for mime programs</string>
-      </property>
      </widget>
     </widget>
    </widget>

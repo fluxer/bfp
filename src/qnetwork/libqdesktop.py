@@ -244,9 +244,9 @@ class Mime(object):
         return sorted(self.conf.sections())
 
     def get_programs(self):
-        programs = misc.list_files('/bin')
-        if os.geteuid() == 0:
-            programs.extend(misc.list_files('/sbin'))
+        programs = []
+        for path in os.environ.get('PATH', '/bin:/usr/bin').split(':'):
+            programs.extend(misc.list_files(path))
         return sorted(programs)
 
     def open(self, svar):
