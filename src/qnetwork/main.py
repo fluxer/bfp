@@ -118,8 +118,8 @@ def ethernet_scan():
                     name = data.get('Name')
                     status = data.get('Status')
                     ui.EthernetList.setRowCount(srow)
-                    ui.EthernetList.setItem(srow-1, 0, name)
-                    ui.EthernetList.setItem(srow-1, 1, status)
+                    ui.EthernetList.setItem(srow-1, 0, QtGui.QTableWidgetItem(name))
+                    ui.EthernetList.setItem(srow-1, 1, QtGui.QTableWidgetItem(status))
                     srow += 1
         else:
             QtGui.QMessageBox.critical(MainWindow, 'Error', str(bus.lastError().message()))
