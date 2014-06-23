@@ -110,7 +110,7 @@ def disconnect_wifi():
             if data.get('Name') == sconnect:
                 disconnect(r[0])
 
-def ethernet_scan():
+def scan_ethernet():
     # dbus_call('net.connman', '/net/connman/technology/ethernet', 'net.connman.Technology', 'Scan'):
 
     # get managed services
@@ -130,7 +130,7 @@ def ethernet_scan():
     else:
         ui.tabWidget.setTabEnabled(0, False)
 
-def wifi_scan():
+def scan_wifi():
     dbus_call('net.connman', '/net/connman/technology/wifi', 'net.connman.Technology', 'Scan')
 
     # get managed services
@@ -190,15 +190,44 @@ def details_wifi():
     else:
         ui.tabWidget.setTabEnabled(1, False)
 
+def scan_any():
+    if ui.tabWidget.currentIndex() == 0:
+        scan_ethernet()
+    elif ui.tabWidget.currentIndex() == 1:
+        scan_wifi()
+
+def disconnect_any():
+    if ui.EthernetList.selectedIndexes():
+        disconnect_ethernet()
+    elif ui.WiFiList.selectedIndexes():
+        disconnect_wifi()
+
+def connect_any():
+    if ui.EthernetList.selectedIndexes():
+        connect_ethernet()
+    elif ui.WiFiList.selectedIndexes():
+        connect_wifi()
+
+def details_any():
+    if ui.EthernetList.selectedIndexes():
+        details_ethernet()
+    elif ui.WiFiList.selectedIndexes():
+        details_wifi()
+
 def enable_buttons():
     sethernet = QtCore.QModelIndex(ui.EthernetList.currentIndex()).data()
     swifi = QtCore.QModelIndex(ui.WiFiList.currentIndex()).data()
+
+    ui.actionDetails.setEnabled(False)
+    ui.actionDisconnect.setEnabled(False)
+    ui.actionConnect.setEnabled(False)
 
     ui.EthernetDetails.setEnabled(False)
     ui.EthernetDisconnect.setEnabled(False)
     ui.EthernetConnect.setEnabled(False)
     if sethernet:
         ui.EthernetDetails.setEnabled(True)
+        ui.actionDetails.setEnabled(True)
         rdata = dbus_call('net.connman', '/', 'net.connman.Manager', 'GetServices')
         if rdata:
             for r in rdata:
@@ -206,14 +235,17 @@ def enable_buttons():
                 if data.get('Name') == sethernet:
                     if data.get('State') == 'online':
                         ui.EthernetDisconnect.setEnabled(True)
+                        ui.actionDisconnect.setEnabled(True)
                     else:
                         ui.EthernetConnect.setEnabled(True)
+                        ui.actionConnect.setEnabled(True)
 
     ui.WiFiDetails.setEnabled(False)
     ui.WiFiDisconnect.setEnabled(False)
     ui.WiFiConnect.setEnabled(False)
     if swifi:
         ui.WiFiDetails.setEnabled(True)
+        ui.actionDetails.setEnabled(True)
         rdata = dbus_call('net.connman', '/', 'net.connman.Manager', 'GetServices')
         if rdata:
             for r in rdata:
@@ -221,13 +253,15 @@ def enable_buttons():
                 if data.get('Name') == swifi:
                     if data.get('State') == 'online':
                         ui.WiFiDisconnect.setEnabled(True)
+                        ui.actionDisconnect.setEnabled(True)
                     else:
                         ui.WiFiConnect.setEnabled(True)
+                        ui.actionConnect.setEnabled(True)
 
 ui.actionQuit.triggered.connect(sys.exit)
 ui.actionAbout.triggered.connect(run_about)
-ui.EthernetScan.clicked.connect(ethernet_scan)
-ui.WiFiScan.clicked.connect(wifi_scan)
+ui.EthernetScan.clicked.connect(scan_ethernet)
+ui.WiFiScan.clicked.connect(scan_wifi)
 ui.WiFiList.currentItemChanged.connect(enable_buttons)
 ui.EthernetList.currentItemChanged.connect(enable_buttons)
 ui.WiFiDisconnect.clicked.connect(disconnect_wifi)
@@ -236,9 +270,13 @@ ui.WiFiConnect.clicked.connect(connect_wifi)
 ui.EthernetConnect.clicked.connect(connect_ethernet)
 ui.WiFiDetails.clicked.connect(details_wifi)
 ui.EthernetDetails.clicked.connect(details_ethernet)
+ui.actionScan.triggered.connect(scan_any)
+ui.actionDetails.triggered.connect(details_any)
+ui.actionDisconnect.triggered.connect(disconnect_any)
+ui.actionConnect.triggered.connect(connect_any)
 
-ethernet_scan()
-wifi_scan()
+scan_ethernet()
+scan_wifi()
 
 # run!
 MainWindow.show()
