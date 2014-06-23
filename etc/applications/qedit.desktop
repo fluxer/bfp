@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=QEdit
+Exec=qedit
+Icon=text-editor
+Terminal=false
+StartupNotify=true
+Type=Application
+Categories=Qt;Accessories;
