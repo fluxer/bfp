@@ -14,8 +14,8 @@
    <string>Settings Manager</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>:/usr/share/qresources/resources/redhat-tools.svg</normaloff>:/usr/share/qresources/resources/redhat-tools.svg</iconset>
+   <iconset resource="../qresources/libqresources.qrc">
+    <normaloff>:/share/qresources/resources/redhat-tools.svg</normaloff>:/share/qresources/resources/redhat-tools.svg</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QTabWidget" name="tabWidget">
