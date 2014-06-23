@@ -24,21 +24,25 @@ try:
     kernel = os.uname()[2]
     image = '/boot/initramfs-' + kernel + '.img'
 
-    parser.add_argument('-t', '--tmp', type=str, default=tmpdir,
+    parser.add_argument('-t', '--tmp', type=str, default=tmpdir, \
         help='Change temporary directory')
-    parser.add_argument('-k', '--kernel', type=str, default=kernel,
+    parser.add_argument('-k', '--kernel', type=str, default=kernel, \
         help='Change kernel version')
-    parser.add_argument('-i', '--image', type=str, default=image,
+    parser.add_argument('-i', '--image', type=str, default=image, \
         help='Change output image')
-    parser.add_argument('--keep', action='store_true',
+    parser.add_argument('--keep', action='store_true', \
         help='Keep temporary directory')
-    parser.add_argument('--debug', action='store_true',
+    parser.add_argument('--debug', action='store_true', \
         help='Enable debug messages')
-    parser.add_argument('--version', action='version',
-        version='MkInitfs v' + app_version,
+    parser.add_argument('--version', action='version', \
+        version='MkInitfs v' + app_version, \
         help='Show MkInitfs version and exit')
 
     ARGS = parser.parse_args()
+
+    # if cross-building and no custom image is set update ARGS.image
+    if ARGS.kernel != kernel and ARGS.image == image:
+        ARGS.image = '/boot/initramfs-' + ARGS.kernel + '.img'
 
     if ARGS.debug:
         message.DEBUG = True

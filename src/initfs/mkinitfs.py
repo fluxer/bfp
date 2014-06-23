@@ -53,6 +53,10 @@ try:
 
     ARGS = parser.parse_args()
 
+    # if cross-building and no custom image is set update ARGS.image
+    if ARGS.kernel != kernel and ARGS.image == image:
+        ARGS.image = '/boot/initramfs-' + ARGS.kernel + '.img'
+
     if ARGS.debug:
         message.DEBUG = True
 
@@ -80,7 +84,7 @@ try:
         else:
             message.warning('File or directory does not exist', src)
 
-    # FIXME: support both /lib and /usr/lib ???
+    # FIXME: support both /lib and /usr/lib at the same time???
     if os.path.isdir('/lib/modules/' + ARGS.kernel):
         modsdir = '/lib/modules/' + ARGS.kernel
     elif os.path.isdir('/usr/lib/modules/' + ARGS.kernel):
