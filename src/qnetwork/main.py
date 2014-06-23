@@ -37,178 +37,127 @@ setLook()
 def run_about():
     QtGui.QMessageBox.about(MainWindow, "About", '<b>QNetwork v1.0.0</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
 
-def connect(name):
-    service = QtDBus.QDBusInterface('net.connman', name, 'net.connman.Service', bus)
-    if service.isValid():
-        msg = service.call('Connect')
-        reply = QtDBus.QDBusReply(msg)
-
+def dbus_call(sobject, spath, smethod, scall):
+    interface = QtDBus.QDBusInterface(sobject, spath, smethod, bus)
+    if interface.isValid():
+        reply = QtDBus.QDBusReply(interface.call(scall))
         if reply.isValid():
-            print('Connected to', name)
+            data = reply.value()
+            # sometimes the call returns no data (None) but the call was sucessful
+            if data:
+                return data
+            return True
         else:
             QtGui.QMessageBox.critical(MainWindow, 'Error', str(reply.error().message()))
+            return False
     else:
         QtGui.QMessageBox.critical(MainWindow, 'Error', str(bus.lastError().message()))
+        return False
+
+def connect(name):
+    if dbus_call('net.connman', name, 'net.connman.Service', 'Connect'):
+        print('Connected to', name)
 
 def connect_ethernet():
     selection = ui.EthernetList.selectedIndexes()
     if not selection:
         return
     sconnect = QtCore.QModelIndex(selection[0]).data()
-    manager = QtDBus.QDBusInterface('net.connman', '/', 'net.connman.Manager', bus)
 
-    if manager.isValid():
-        msg = manager.call('GetServices')
-        reply = QtDBus.QDBusReply(msg)
-
-        if reply.isValid():
-            for r in reply.value():
-                data = r[1]
-                if data.get('Name') == sconnect:
-                    connect(r[0])
-    else:
-        QtGui.QMessageBox.critical(MainWindow, 'Error', str(bus.lastError().message()))
+    rdata = dbus_call('net.connman', '/', 'net.connman.Manager', 'GetServices')
+    if rdata:
+        for r in rdata:
+            data = r[1]
+            if data.get('Name') == sconnect:
+                connect(r[0])
 
 def connect_wifi():
     selection = ui.WiFiList.selectedIndexes()
     if not selection:
         return
     sconnect = QtCore.QModelIndex(selection[0]).data()
-    manager = QtDBus.QDBusInterface('net.connman', '/', 'net.connman.Manager', bus)
 
-    if manager.isValid():
-        msg = manager.call('GetServices')
-        reply = QtDBus.QDBusReply(msg)
-
-        if reply.isValid():
-            for r in reply.value():
-                data = r[1]
-                if data.get('Name') == sconnect:
-                    connect(r[0])
-    else:
-        QtGui.QMessageBox.critical(MainWindow, 'Error', str(bus.lastError().message()))
-
+    rdata = dbus_call('net.connman', '/', 'net.connman.Manager', 'GetServices')
+    if rdata:
+        for r in rdata:
+            data = r[1]
+            if data.get('Name') == sconnect:
+                connect(r[0])
 
 def disconnect(name):
-    service = QtDBus.QDBusInterface('net.connman', name, 'net.connman.Service', bus)
-    if service.isValid():
-        msg = service.call('Disconnect')
-        reply = QtDBus.QDBusReply(msg)
-
-        if reply.isValid():
-            print('Disconnected from', name)
-        else:
-            QtGui.QMessageBox.critical(MainWindow, 'Error', str(reply.error().message()))
-    else:
-        QtGui.QMessageBox.critical(MainWindow, 'Error', str(bus.lastError().message()))
+    if dbus_call('net.connman', name, 'net.connman.Service', 'Disconnect'):
+        print('Disconnected from', name)
 
 def disconnect_ethernet():
     selection = ui.EthernetList.selectedIndexes()
     if not selection:
         return
     sconnect = QtCore.QModelIndex(selection[0]).data()
-    manager = QtDBus.QDBusInterface('net.connman', '/', 'net.connman.Manager', bus)
 
-    if manager.isValid():
-        msg = manager.call('GetServices')
-        reply = QtDBus.QDBusReply(msg)
-
-        if reply.isValid():
-            for r in reply.value():
-                data = r[1]
-                if data.get('Name') == sconnect:
-                    disconnect(r[0])
-    else:
-        QtGui.QMessageBox.critical(MainWindow, 'Error', str(bus.lastError().message()))
+    rdata = dbus_call('net.connman', '/', 'net.connman.Manager', 'GetServices')
+    if rdata:
+        for r in rdata:
+            data = r[1]
+            if data.get('Name') == sconnect:
+                disconnect(r[0])
 
 def disconnect_wifi():
     selection = ui.WiFiList.selectedIndexes()
     if not selection:
         return
     sconnect = QtCore.QModelIndex(selection[0]).data()
-    manager = QtDBus.QDBusInterface('net.connman', '/', 'net.connman.Manager', bus)
 
-    if manager.isValid():
-        msg = manager.call('GetServices')
-        reply = QtDBus.QDBusReply(msg)
-
-        if reply.isValid():
-            for r in reply.value():
-                data = r[1]
-                if data.get('Name') == sconnect:
-                    disconnect(r[0])
-    else:
-        QtGui.QMessageBox.critical(MainWindow, 'Error', str(bus.lastError().message()))
-
-
-
+    rdata = dbus_call('net.connman', '/', 'net.connman.Manager', 'GetServices')
+    if rdata:
+        for r in rdata:
+            data = r[1]
+            if data.get('Name') == sconnect:
+                disconnect(r[0])
 
 def ethernet_scan():
-    ethernet = QtDBus.QDBusInterface('net.connman', '/net/connman/technology/ethernet', 'net.connman.Technology', bus)
-    manager = QtDBus.QDBusInterface('net.connman', '/', 'net.connman.Manager', bus)
+    # if not dbus_call('net.connman', '/net/connman/technology/ethernet', 'net.connman.Technology', 'Scan'):
+    #    return
+    # print('Ethernet scan complete')
 
     # get managed services
-    if manager.isValid():
-        msg = manager.call('GetServices')
-        reply = QtDBus.QDBusReply(msg)
-
-        if reply.isValid():
-            srow = 1
-            ui.EthernetList.clearContents()
-            for r in reply.value():
-                data = r[1]
-                if data.get('Type') == 'ethernet':
-                    name = data.get('Name')
-                    state = data.get('State')
-                    ui.EthernetList.setRowCount(srow)
-                    ui.EthernetList.setItem(srow-1, 0, QtGui.QTableWidgetItem(name))
-                    ui.EthernetList.setItem(srow-1, 1, QtGui.QTableWidgetItem(state))
-                    srow += 1
-        else:
-            QtGui.QMessageBox.critical(MainWindow, 'Error', str(bus.lastError().message()))
-            ui.tabWidget.setTabEnabled(0, False)
+    rdata = dbus_call('net.connman', '/', 'net.connman.Manager', 'GetServices')
+    if rdata:
+        srow = 1
+        ui.EthernetList.clearContents()
+        for r in rdata:
+            data = r[1]
+            if data.get('Type') == 'ethernet':
+                name = data.get('Name')
+                state = data.get('State')
+                ui.EthernetList.setRowCount(srow)
+                ui.EthernetList.setItem(srow-1, 0, QtGui.QTableWidgetItem(name))
+                ui.EthernetList.setItem(srow-1, 1, QtGui.QTableWidgetItem(state))
+                srow += 1
     else:
-        print(bus.lastError().message())
+        ui.tabWidget.setTabEnabled(0, False)
 
 def wifi_scan():
-    wifi = QtDBus.QDBusInterface('net.connman', '/net/connman/technology/wifi', 'net.connman.Technology', bus)
-    manager = QtDBus.QDBusInterface('net.connman', '/', 'net.connman.Manager', bus)
-    if wifi.isValid():
-        msg = wifi.call('Scan')
-        reply = QtDBus.QDBusReply(msg)
-
-        if reply.isValid():
-            print('WiFi scan complete')
-        else:
-            QtGui.QMessageBox.critical(MainWindow, 'Error', str(reply.error().message()))
-            ui.tabWidget.setTabEnabled(1, False)
-    else:
-        QtGui.QMessageBox.critical(MainWindow, 'Error', str(bus.lastError().message()))
-        ui.tabWidget.setTabEnabled(1, False)
+    dbus_call('net.connman', '/net/connman/technology/wifi', 'net.connman.Technology', 'Scan')
+    print('WiFi scan complete')
 
     # get managed services
-    if manager.isValid():
-        msg = manager.call('GetServices')
-        reply = QtDBus.QDBusReply(msg)
-
-        if reply.isValid():
-            srow = 1
-            ui.WiFiList.clearContents()
-            for r in reply.value():
-                data = r[1]
-                if data.get('Type') == 'wifi':
-                    name = data.get('Name')
-                    strength = misc.string_convert(data.get('Strength'))
-                    security = misc.string_convert(data.get('Security'))
-                    print(name, strength, security)
-                    ui.WiFiList.setRowCount(srow)
-                    ui.WiFiList.setItem(srow-1, 0, QtGui.QTableWidgetItem(name))
-                    ui.WiFiList.setItem(srow-1, 1, QtGui.QTableWidgetItem(strength))
-                    ui.WiFiList.setItem(srow-1, 2, QtGui.QTableWidgetItem(security))
-                    srow += 1
-        else:
-            QtGui.QMessageBox.critical(MainWindow, 'Error', str(bus.lastError().message()))
-            ui.tabWidget.setTabEnabled(1, False)
+    rdata = dbus_call('net.connman', '/', 'net.connman.Manager', 'GetServices')
+    if rdata:
+        srow = 1
+        ui.WiFiList.clearContents()
+        for r in rdata:
+            data = r[1]
+            if data.get('Type') == 'wifi':
+                name = data.get('Name')
+                strength = misc.string_convert(data.get('Strength'))
+                security = misc.string_convert(data.get('Security'))
+                ui.WiFiList.setRowCount(srow)
+                ui.WiFiList.setItem(srow-1, 0, QtGui.QTableWidgetItem(name))
+                ui.WiFiList.setItem(srow-1, 1, QtGui.QTableWidgetItem(strength))
+                ui.WiFiList.setItem(srow-1, 2, QtGui.QTableWidgetItem(security))
+                srow += 1
+    else:
+        ui.tabWidget.setTabEnabled(1, False)
 
 def enable_buttons():
     sethernet = QtCore.QModelIndex(ui.EthernetList.currentIndex()).data()
