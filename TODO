@@ -15,8 +15,6 @@
  * Maybe implement fonts outside of stylesheet
 
 ## QNETWORK ##
- * Enable connect/disconnect buttons depending on state
- * Implement details dialog
  * Make actions work
 
 ## ALL QT ##

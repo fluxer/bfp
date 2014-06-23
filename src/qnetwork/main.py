@@ -111,9 +111,7 @@ def disconnect_wifi():
                 disconnect(r[0])
 
 def ethernet_scan():
-    # if not dbus_call('net.connman', '/net/connman/technology/ethernet', 'net.connman.Technology', 'Scan'):
-    #    return
-    # print('Ethernet scan complete')
+    # dbus_call('net.connman', '/net/connman/technology/ethernet', 'net.connman.Technology', 'Scan'):
 
     # get managed services
     rdata = dbus_call('net.connman', '/', 'net.connman.Manager', 'GetServices')
@@ -134,7 +132,6 @@ def ethernet_scan():
 
 def wifi_scan():
     dbus_call('net.connman', '/net/connman/technology/wifi', 'net.connman.Technology', 'Scan')
-    print('WiFi scan complete')
 
     # get managed services
     rdata = dbus_call('net.connman', '/', 'net.connman.Manager', 'GetServices')
@@ -196,23 +193,36 @@ def details_wifi():
 def enable_buttons():
     sethernet = QtCore.QModelIndex(ui.EthernetList.currentIndex()).data()
     swifi = QtCore.QModelIndex(ui.WiFiList.currentIndex()).data()
+
+    ui.EthernetDetails.setEnabled(False)
+    ui.EthernetDisconnect.setEnabled(False)
+    ui.EthernetConnect.setEnabled(False)
     if sethernet:
         ui.EthernetDetails.setEnabled(True)
-        ui.EthernetDisconnect.setEnabled(True)
-        ui.EthernetConnect.setEnabled(True)
-    else:
-        ui.EthernetDetails.setEnabled(False)
-        ui.EthernetDisconnect.setEnabled(False)
-        ui.EthernetConnect.setEnabled(False)
+        rdata = dbus_call('net.connman', '/', 'net.connman.Manager', 'GetServices')
+        if rdata:
+            for r in rdata:
+                data = r[1]
+                if data.get('Name') == sethernet:
+                    if data.get('State') == 'online':
+                        ui.EthernetDisconnect.setEnabled(True)
+                    else:
+                        ui.EthernetConnect.setEnabled(True)
 
+    ui.WiFiDetails.setEnabled(False)
+    ui.WiFiDisconnect.setEnabled(False)
+    ui.WiFiConnect.setEnabled(False)
     if swifi:
         ui.WiFiDetails.setEnabled(True)
-        ui.WiFiDisconnect.setEnabled(True)
-        ui.WiFiConnect.setEnabled(True)
-    else:
-        ui.WiFiDetails.setEnabled(False)
-        ui.WiFiDisconnect.setEnabled(False)
-        ui.WiFiConnect.setEnabled(False)
+        rdata = dbus_call('net.connman', '/', 'net.connman.Manager', 'GetServices')
+        if rdata:
+            for r in rdata:
+                data = r[1]
+                if data.get('Name') == swifi:
+                    if data.get('State') == 'online':
+                        ui.WiFiDisconnect.setEnabled(True)
+                    else:
+                        ui.WiFiConnect.setEnabled(True)
 
 ui.actionQuit.triggered.connect(sys.exit)
 ui.actionAbout.triggered.connect(run_about)
