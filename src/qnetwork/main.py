@@ -158,7 +158,6 @@ def ethernet_scan():
             for r in reply.value():
                 data = r[1]
                 if data.get('Type') == 'ethernet':
-                    print data
                     name = data.get('Name')
                     state = data.get('State')
                     ui.EthernetList.setRowCount(srow)
