@@ -49,6 +49,9 @@ def open_file(sfile):
         if sfile:
             sfile = str(sfile)
             ui.textEdit.setText(misc.file_read(sfile))
+        else:
+            # prevent sedit being set to None
+            return
     elif os.path.isfile(sfile):
         ui.textEdit.setText(misc.file_read(sfile))
     sedit = sfile
