@@ -42,11 +42,7 @@ def dbus_call(sobject, spath, smethod, scall):
     if interface.isValid():
         reply = QtDBus.QDBusReply(interface.call(scall))
         if reply.isValid():
-            data = reply.value()
-            # sometimes the call returns no data (None) but the call was sucessful
-            if data:
-                return data
-            return True
+            return reply.value()
         else:
             QtGui.QMessageBox.critical(MainWindow, 'Error', str(reply.error().message()))
             return False
@@ -159,6 +155,44 @@ def wifi_scan():
     else:
         ui.tabWidget.setTabEnabled(1, False)
 
+def details_ethernet():
+    selection = ui.EthernetList.selectedIndexes()
+    if not selection:
+        return
+    sconnect = QtCore.QModelIndex(selection[0]).data()
+
+    rdata = dbus_call('net.connman', '/', 'net.connman.Manager', 'GetServices')
+    if rdata:
+        for r in rdata:
+            data = r[1]
+            name = data.get('Name')
+            if name == sconnect:
+                message = ''
+                for d in data:
+                    message += d + ': ' + str(data.get(d)) + '\n'
+                QtGui.QMessageBox.information(MainWindow, 'Details', message)
+    else:
+        ui.tabWidget.setTabEnabled(1, False)
+
+def details_wifi():
+    selection = ui.WiFiList.selectedIndexes()
+    if not selection:
+        return
+    sconnect = QtCore.QModelIndex(selection[0]).data()
+
+    rdata = dbus_call('net.connman', '/', 'net.connman.Manager', 'GetServices')
+    if rdata:
+        for r in rdata:
+            data = r[1]
+            name = data.get('Name')
+            if name == sconnect:
+                message = ''
+                for d in data:
+                    message += d + ': ' + str(data.get(d)) + '\n'
+                QtGui.QMessageBox.information(MainWindow, 'Details', message)
+    else:
+        ui.tabWidget.setTabEnabled(1, False)
+
 def enable_buttons():
     sethernet = QtCore.QModelIndex(ui.EthernetList.currentIndex()).data()
     swifi = QtCore.QModelIndex(ui.WiFiList.currentIndex()).data()
@@ -190,6 +224,8 @@ ui.WiFiDisconnect.clicked.connect(disconnect_wifi)
 ui.EthernetDisconnect.clicked.connect(disconnect_ethernet)
 ui.WiFiConnect.clicked.connect(connect_wifi)
 ui.EthernetConnect.clicked.connect(connect_ethernet)
+ui.WiFiDetails.clicked.connect(details_wifi)
+ui.EthernetDetails.clicked.connect(details_ethernet)
 
 ethernet_scan()
 wifi_scan()
