@@ -38,20 +38,20 @@ for arg in sys.argv[1:]:
 def run_about():
     QtGui.QMessageBox.about(MainWindow, "About", '<b>QImage v1.0.0</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
 
+def set_image(sfile):
+    image = QtGui.QImage(sfile)
+    scene.clear()
+    scene.addPixmap(QtGui.QPixmap.fromImage(image))
+
 def open_file(sfile):
     global simage
-    if not sfile:
+    if not sfile or not os.path.isfile(sfile):
         sfile = QtGui.QFileDialog.getOpenFileName(MainWindow, "Open", \
             QtCore.QDir.currentPath(), "Image Files (*.jpg *.png *.jpeg);;All Files (*)")
-        if sfile:
-            sfile = str(sfile)
-            image = QtGui.QImage(sfile)
-            scene.clear()
-            scene.addPixmap(QtGui.QPixmap.fromImage(image))
-    elif os.path.isfile(sfile):
-        image = QtGui.QImage(sfile)
-        scene.clear()
-        scene.addPixmap(QtGui.QPixmap.fromImage(image))
+        if not sfile:
+            return
+    sfile = str(sfile)
+    set_image(sfile)
     simage = sfile
     ui.actionReload.setEnabled(True)
 
