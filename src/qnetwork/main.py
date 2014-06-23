@@ -44,7 +44,7 @@ def connect(name):
         reply = QtDBus.QDBusReply(msg)
 
         if reply.isValid():
-            print('Reply', reply.value())
+            print('Connected to', name)
         else:
             QtGui.QMessageBox.critical(MainWindow, 'Error', str(reply.error().message()))
     else:
@@ -88,21 +88,64 @@ def connect_wifi():
     else:
         QtGui.QMessageBox.critical(MainWindow, 'Error', str(bus.lastError().message()))
 
-def ethernet_scan():
-    ethernet = QtDBus.QDBusInterface('net.connman', '/net/connman/technology/ethernet', 'net.connman.Technology', bus)
-    manager = QtDBus.QDBusInterface('net.connman', '/', 'net.connman.Manager', bus)
-    if ethernet.isValid():
-        msg = ethernet.call('Scan')
+
+def disconnect(name):
+    service = QtDBus.QDBusInterface('net.connman', name, 'net.connman.Service', bus)
+    if service.isValid():
+        msg = service.call('Disconnect')
         reply = QtDBus.QDBusReply(msg)
 
         if reply.isValid():
-            print('Ethernet scan complete')
+            print('Disconnected from', name)
         else:
             QtGui.QMessageBox.critical(MainWindow, 'Error', str(reply.error().message()))
-            ui.tabWidget.setTabEnabled(0, False)
     else:
         QtGui.QMessageBox.critical(MainWindow, 'Error', str(bus.lastError().message()))
-        ui.tabWidget.setTabEnabled(0, False)
+
+def disconnect_ethernet():
+    selection = ui.EthernetList.selectedIndexes()
+    if not selection:
+        return
+    sconnect = QtCore.QModelIndex(selection[0]).data()
+    manager = QtDBus.QDBusInterface('net.connman', '/', 'net.connman.Manager', bus)
+
+    if manager.isValid():
+        msg = manager.call('GetServices')
+        reply = QtDBus.QDBusReply(msg)
+
+        if reply.isValid():
+            for r in reply.value():
+                data = r[1]
+                if data.get('Name') == sconnect:
+                    disconnect(r[0])
+    else:
+        QtGui.QMessageBox.critical(MainWindow, 'Error', str(bus.lastError().message()))
+
+def disconnect_wifi():
+    selection = ui.WiFiList.selectedIndexes()
+    if not selection:
+        return
+    sconnect = QtCore.QModelIndex(selection[0]).data()
+    manager = QtDBus.QDBusInterface('net.connman', '/', 'net.connman.Manager', bus)
+
+    if manager.isValid():
+        msg = manager.call('GetServices')
+        reply = QtDBus.QDBusReply(msg)
+
+        if reply.isValid():
+            for r in reply.value():
+                data = r[1]
+                if data.get('Name') == sconnect:
+                    disconnect(r[0])
+    else:
+        QtGui.QMessageBox.critical(MainWindow, 'Error', str(bus.lastError().message()))
+
+
+
+
+def ethernet_scan():
+    ethernet = QtDBus.QDBusInterface('net.connman', '/net/connman/technology/ethernet', 'net.connman.Technology', bus)
+    manager = QtDBus.QDBusInterface('net.connman', '/', 'net.connman.Manager', bus)
 
     # get managed services
     if manager.isValid():
@@ -115,11 +158,12 @@ def ethernet_scan():
             for r in reply.value():
                 data = r[1]
                 if data.get('Type') == 'ethernet':
+                    print data
                     name = data.get('Name')
-                    status = data.get('Status')
+                    state = data.get('State')
                     ui.EthernetList.setRowCount(srow)
                     ui.EthernetList.setItem(srow-1, 0, QtGui.QTableWidgetItem(name))
-                    ui.EthernetList.setItem(srow-1, 1, QtGui.QTableWidgetItem(status))
+                    ui.EthernetList.setItem(srow-1, 1, QtGui.QTableWidgetItem(state))
                     srow += 1
         else:
             QtGui.QMessageBox.critical(MainWindow, 'Error', str(bus.lastError().message()))
@@ -194,6 +238,8 @@ ui.EthernetScan.clicked.connect(ethernet_scan)
 ui.WiFiScan.clicked.connect(wifi_scan)
 ui.WiFiList.currentItemChanged.connect(enable_buttons)
 ui.EthernetList.currentItemChanged.connect(enable_buttons)
+ui.WiFiDisconnect.clicked.connect(disconnect_wifi)
+ui.EthernetDisconnect.clicked.connect(disconnect_ethernet)
 ui.WiFiConnect.clicked.connect(connect_wifi)
 ui.EthernetConnect.clicked.connect(connect_ethernet)
 
