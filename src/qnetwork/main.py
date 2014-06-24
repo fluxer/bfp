@@ -275,6 +275,17 @@ ui.actionDetails.triggered.connect(details_any)
 ui.actionDisconnect.triggered.connect(disconnect_any)
 ui.actionConnect.triggered.connect(connect_any)
 
+class Connector(QtCore.QObject):
+    @QtCore.pyqtSlot(QtDBus.QDBusMessage)
+    def scan(self):
+        scan_wifi()
+        scan_ethernet()
+
+connector = Connector()
+bus.connect("net.connman", "/", "net.connman.Manager", "ServicesChanged", connector.scan)
+bus.connect("net.connman", "/", "net.connman.Manager", "TechnologyAdded", connector.scan)
+bus.connect("net.connman", "/", "net.connman.Manager", "TechnologyRemoved", connector.scan)
+
 scan_ethernet()
 scan_wifi()
 
