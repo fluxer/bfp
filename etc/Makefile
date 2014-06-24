@@ -13,7 +13,7 @@ install:
 	sed 's|#JOBS#|$(JOBS)|g' -i $(DESTDIR)/etc/spm.conf
 	$(INSTALL) -vm644 system.conf $(DESTDIR)/etc/
 	$(INSTALL) -vm644 autostart/*.desktop $(DESTDIR)$(AUTOSTARTDIR)
-	$(INSTALL) -vm644 menus/*.desktop $(DESTDIR)$(MENUSDIR)
+	$(INSTALL) -vm644 menus/*.menu $(DESTDIR)$(MENUDIR)
 	$(INSTALL) -vm644 applications/*.desktop $(DESTDIR)$(APPLICATIONSDIR)
 
 uninstall:
