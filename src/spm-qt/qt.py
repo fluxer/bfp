@@ -124,7 +124,7 @@ def RefreshWidgets():
 def Update():
     targets = database.local_all(basename=True)
     global m
-    m = libmode.Source(targets, do_clean=True, do_prepare=True,
+    m = libspm.Source(targets, do_clean=True, do_prepare=True,
         do_compile=True, do_check=False, do_install=True, do_merge=True,
         do_remove=False, do_depends=True, do_reverse=True, do_update=True)
     Worker()
@@ -132,7 +132,7 @@ def Update():
 def Build():
     targets = [str(ui.TargetsList.currentItem().text())]
     global m
-    m = libmode.Source(targets, do_clean=True, do_prepare=True,
+    m = libspm.Source(targets, do_clean=True, do_prepare=True,
         do_compile=True, do_check=False, do_install=True, do_merge=True,
         do_remove=False, do_depends=True, do_reverse=True, do_update=False)
     Worker()
@@ -141,7 +141,7 @@ def Build():
 def Remove():
     targets = [str(ui.TargetsList.currentItem().text())]
     global m
-    m = libmode.Source(targets, do_clean=False, do_prepare=False,
+    m = libspm.Source(targets, do_clean=False, do_prepare=False,
         do_compile=False, do_check=False, do_install=False, do_merge=False,
         do_remove=True, do_depends=False, do_reverse=True, do_update=False)
     Worker()
@@ -149,7 +149,7 @@ def Remove():
 
 def SyncRepos():
     global m
-    m = libmode.Repo(libspm.REPOSITORIES, do_clean=True, do_sync=True, do_update=False)
+    m = libspm.Repo(libspm.REPOSITORIES, do_clean=True, do_sync=True, do_update=False)
     Worker()
 
 

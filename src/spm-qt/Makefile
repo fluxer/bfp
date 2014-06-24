@@ -7,7 +7,7 @@ all: bump clean
 	$(CC) $(CFLAGS) -shared build/libqt4.c -o build/libqt4.so
 	$(CYTHON) -2 --embed -I. qt.py -o build/qt.c
 	$(CC) $(CFLAGS) build/qt.c -o build/spm-qt
-	$(STRIP) build/libqt4.so build/libconfig.so build/libmode.so build/spm-qt
+	$(STRIP) build/libqt4.so build/spm-qt
 
 check:
 	python2 test.py
