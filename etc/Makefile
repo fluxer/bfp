@@ -1,7 +1,7 @@
 include ../Makefile.inc
 
 install:
-	$(INSTALL) -vdm755 $(DESTDIR)/etc/spm $(DESTDIR)/etc/services.d
+	$(INSTALL) -vdm755 $(DESTDIR)/etc/spm
 	$(INSTALL) -vdm755 $(DESTDIR)$(AUTOSTARTDIR)
 	$(INSTALL) -vdm755 $(DESTDIR)$(APPLICATIONSDIR)
 	$(INSTALL) -vm644 spm.conf $(DESTDIR)/etc/
@@ -13,12 +13,9 @@ install:
 	$(INSTALL) -vm644 system.conf $(DESTDIR)/etc/
 	$(INSTALL) -vm644 autostart/*.desktop $(DESTDIR)$(AUTOSTARTDIR)
 	$(INSTALL) -vm644 applications/*.desktop $(DESTDIR)$(APPLICATIONSDIR)
-	$(INSTALL) -vm644 services/*.conf $(DESTDIR)/etc/services.d
 
 uninstall:
-	$(RM) -r $(DESTDIR)/etc/spm/ $(DESTDIR)/etc/services.d
-	$(RM) $(DESTDIR)/etc/spm.conf
-	$(RM) $(DESTDIR)/etc/system.conf
+	$(RM) -r $(DESTDIR)/etc/spm/ $(RM) $(DESTDIR)/etc/spm.conf
 	$(RM) $(DESTDIR)$(AUTOSTARTDIR)/powertray.desktop
 	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/powertray.desktop
 	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/mounttray.desktop

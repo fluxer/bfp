@@ -18,9 +18,10 @@ import libmisc
 misc = libmisc.Misc()
 import libpackage
 database = libpackage.Database()
+import libspm
 
 
-app_version = "0.0.1 (374676d)"
+app_version = "0.5.0 (437b4f8)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -44,13 +45,13 @@ class Check(object):
     def main(self):
         ''' Check if runtime dependencies of target are satisfied '''
         for target in self.check_targets:
-            target_metadata = os.path.join(libconfig.LOCAL_DIR, target, 'metadata')
+            target_metadata = os.path.join(libspm.LOCAL_DIR, target, 'metadata')
             target_footprint = database.local_footprint(target)
             target_depends = database.local_metadata(target, 'depends')
 
             missing_detected = False
             for sfile in target_footprint.splitlines():
-                sfile = os.path.join(libconfig.ROOT_DIR, sfile)
+                sfile = os.path.join(libspm.ROOT_DIR, sfile)
                 if os.path.islink(sfile):
                     continue
                 elif not os.path.isfile(sfile):
@@ -85,7 +86,7 @@ class Check(object):
                         elif match and not misc.string_search(match, target_depends, exact=True):
                             message.sub_debug('Library needed but in local', match)
                             target_depends = '%s %s' % (target_depends, match)
-                        elif libconfig.IGNORE_MISSING:
+                        elif libspm.IGNORE_MISSING:
                             message.sub_warning('Library needed, not in any local', lib)
                         else:
                             message.sub_critical('Library needed, not in any local', lib)
@@ -121,7 +122,7 @@ class Check(object):
                             elif match and not misc.string_search(match, target_depends, exact=True):
                                 message.sub_debug('Dependency needed but in local', match)
                                 target_depends = '%s %s' % (target_depends, match)
-                            elif libconfig.IGNORE_MISSING:
+                            elif libspm.IGNORE_MISSING:
                                 message.sub_warning('Dependency needed, not in any local', bang)
                             else:
                                 message.sub_critical('Dependency needed, not in any local', bang)
@@ -201,8 +202,8 @@ class Dist(object):
                         or src_url.startswith('ftp://') or src_url.startswith('ftps://'):
                         if not internet:
                             message.sub_warning('Internet connection is down')
-                        elif libconfig.MIRROR:
-                            for mirror in libconfig.MIRRORS:
+                        elif libspm.MIRROR:
+                            for mirror in libspm.MIRRORS:
                                 url = mirror + '/' + src_base
                                 message.sub_debug('Checking mirror', mirror)
                                 if misc.ping(url):
@@ -298,7 +299,7 @@ class Lint(object):
                         if not os.path.exists(sfile) or os.path.islink(sfile):
                             continue
 
-                        if misc.file_search(libconfig.BUILD_DIR, sfile):
+                        if misc.file_search(libspm.BUILD_DIR, sfile):
                             message.sub_warning('Build directory trace(s)', sfile)
 
 
@@ -396,10 +397,10 @@ class Merge(object):
                 backups = []
             for sfile in database.local_footprint(target).splitlines():
                 if sfile.endswith('.conf'):
-                    backups.append(os.path.join(libconfig.ROOT_DIR, sfile))
+                    backups.append(os.path.join(libspm.ROOT_DIR, sfile))
 
             for sfile in backups:
-                original_file = os.path.join(libconfig.ROOT_DIR, sfile)
+                original_file = os.path.join(libspm.ROOT_DIR, sfile)
 
                 if os.path.isfile(original_file + '.backup'):
                     self.merge(original_file)

@@ -4,7 +4,6 @@ all:
 	make -C doc
 	make -C src/libs
 	make -C src/initfs
-	make -C src/shell
 	make -C src/spm
 	make -C src/spm-qt
 	make -C src/qdesktop
@@ -28,7 +27,6 @@ install:
 	make -C misc install
 	make -C scripts install
 	make -C src/libs install
-	make -C src/shell install
 	make -C src/spm install
 	make -C src/spm-qt install
 	make -C src/qdesktop install
@@ -47,7 +45,6 @@ uninstall:
 	make -C misc uninstall
 	make -C scripts uninstall
 	make -C src/libs uninstall
-	make -C src/shell uninstall
 	make -C src/spm uninstall
 	make -C src/spm-qt uninstall
 	make -C src/qdesktop uninstall
@@ -61,10 +58,8 @@ uninstall:
 
 clean:
 	make -C doc clean
-	make -C src/init clean
 	make -C src/libs clean
 	make -C src/initfs clean
-	make -C src/shell clean
 	make -C src/spm clean
 	make -C src/spm-qt clean
 	make -C src/qdesktop clean

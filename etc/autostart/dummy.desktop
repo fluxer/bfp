@@ -1,7 +1,7 @@
 [Desktop Entry]
-Name=Power controller
+Name=Dummy
 Icon=preferences-system-power-manager
-Exec=powertray
+Exec=dummy
 Terminal=false
 Type=Application
 StartupNotify=true
