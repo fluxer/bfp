@@ -4,6 +4,7 @@ install:
 	$(INSTALL) -vdm755 $(DESTDIR)/etc/spm
 	$(INSTALL) -vdm755 $(DESTDIR)$(AUTOSTARTDIR)
 	$(INSTALL) -vdm755 $(DESTDIR)$(APPLICATIONSDIR)
+	$(INSTALL) -vdm755 $(DESTDIR)$(MENUSDIR)
 	$(INSTALL) -vm644 spm.conf $(DESTDIR)/etc/
 	$(INSTALL) -vm644 repositories.conf $(DESTDIR)/etc/spm/
 	$(INSTALL) -vm644 mirrors.conf $(DESTDIR)/etc/spm/
@@ -12,6 +13,7 @@ install:
 	sed 's|#JOBS#|$(JOBS)|g' -i $(DESTDIR)/etc/spm.conf
 	$(INSTALL) -vm644 system.conf $(DESTDIR)/etc/
 	$(INSTALL) -vm644 autostart/*.desktop $(DESTDIR)$(AUTOSTARTDIR)
+	$(INSTALL) -vm644 menus/*.desktop $(DESTDIR)$(MENUSDIR)
 	$(INSTALL) -vm644 applications/*.desktop $(DESTDIR)$(APPLICATIONSDIR)
 
 uninstall:
