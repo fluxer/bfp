@@ -125,6 +125,8 @@ try:
                 continue
             message.sub_debug('Reading', sfile)
             for line in misc.file_readlines(sfile):
+                if not line or line.startswith('#'):
+                    continue
                 copy_item(line)
 
     message.sub_info('Copying hooks')
@@ -140,6 +142,8 @@ try:
                 continue
             message.sub_debug('Reading', sfile)
             for line in misc.file_readlines(sfile):
+                if not line or line.startswith('#'):
+                    continue
                 if not line in modules:
                     modules.append(line)
 

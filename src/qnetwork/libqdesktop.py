@@ -60,6 +60,8 @@ class Menu(object):
         x = self.xdg.MenuEntry(sfile)
         tryExec = x.DesktopEntry.getTryExec()
         Exec = x.DesktopEntry.getExec()
+        if x.DesktopEntry.getTerminal():
+            Exec = config.DEFAULT_TERMINAL + ' -e ' + Exec
 
         # if TryExec is set in .desktop execute it first
         if tryExec and not tryExec == Exec:
