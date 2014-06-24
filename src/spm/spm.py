@@ -13,7 +13,7 @@ import os
 import re
 
 
-app_version = "0.0.1 (5f38e05)"
+app_version = "0.0.1 (374676d)"
 
 try:
     import libmessage
@@ -22,165 +22,164 @@ try:
     misc = libmisc.Misc()
     import libpackage
     database = libpackage.Database()
-    import libconfig
-    import libmode
+    import libspm
 
     EUID = os.geteuid()
 
     class OverrideCacheDir(argparse.Action):
         ''' Override cache directory '''
         def __call__(self, parser, namespace, values, option_string=None):
-            libconfig.CACHE_DIR = os.path.abspath(values)
+            libspm.CACHE_DIR = os.path.abspath(values)
             setattr(namespace, self.dest, values)
 
     class OverrideBuildDir(argparse.Action):
         ''' Override build directory '''
         def __call__(self, parser, namespace, values, option_string=None):
-            libconfig.BUILD_DIR = os.path.abspath(values)
+            libspm.BUILD_DIR = os.path.abspath(values)
             setattr(namespace, self.dest, values)
 
     class OverrideRootDir(argparse.Action):
         ''' Override system root directory '''
         def __call__(self, parser, namespace, values, option_string=None):
             full_path = os.path.abspath(values) + '/'
-            libconfig.ROOT_DIR = full_path
-            libconfig.LOCAL_DIR = full_path + 'var/local/spm'
+            libspm.ROOT_DIR = full_path
+            libspm.LOCAL_DIR = full_path + 'var/local/spm'
             setattr(namespace, self.dest, values)
 
     class OverrideIgnore(argparse.Action):
         ''' Override ignored targets '''
         def __call__(self, parser, namespace, values, option_string=None):
-            libconfig.IGNORE = values
+            libspm.IGNORE = values
             setattr(namespace, self.dest, values)
 
     class OverrideMirror(argparse.Action):
         ''' Override usage of mirrors '''
         def __call__(self, parser, namespace, values, option_string=None):
-            libconfig.MIRROR = values
+            libspm.MIRROR = values
             setattr(namespace, self.dest, values)
 
     class OverrideExternal(argparse.Action):
         ''' Override usage of external fetchers '''
         def __call__(self, parser, namespace, values, option_string=None):
-            libconfig.EXTERNAL = values
+            libspm.EXTERNAL = values
             setattr(namespace, self.dest, values)
 
     class OverrideTimeout(argparse.Action):
         ''' Override connection timeout '''
         def __call__(self, parser, namespace, values, option_string=None):
-            libconfig.TIMEOUT = values
+            libspm.TIMEOUT = values
             setattr(namespace, self.dest, values)
 
     class OverrideChost(argparse.Action):
         ''' override CHOST '''
         def __call__(self, parser, namespace, values, option_string=None):
-            libconfig.CHOST = values
+            libspm.CHOST = values
             setattr(namespace, self.dest, values)
 
     class OverrideCflags(argparse.Action):
         ''' Override CFLAGS '''
         def __call__(self, parser, namespace, values, option_string=None):
-            libconfig.CFLAGS = values
+            libspm.CFLAGS = values
             setattr(namespace, self.dest, values)
 
     class OverrideCxxflags(argparse.Action):
         ''' Override CXXFLAGS '''
         def __call__(self, parser, namespace, values, option_string=None):
-            libconfig.CXXFLAGS = values
+            libspm.CXXFLAGS = values
             setattr(namespace, self.dest, values)
 
     class OverrideCppflags(argparse.Action):
         ''' Override CPPFLAGS '''
         def __call__(self, parser, namespace, values, option_string=None):
-            libconfig.CPPFLAGS = values
+            libspm.CPPFLAGS = values
             setattr(namespace, self.dest, values)
 
     class OverrideLdflags(argparse.Action):
         ''' Override LDFLAGS '''
         def __call__(self, parser, namespace, values, option_string=None):
-            libconfig.LDFLAGS = values
+            libspm.LDFLAGS = values
             setattr(namespace, self.dest, values)
 
     class OverrideMakeflags(argparse.Action):
         ''' Override MAKEFLAGS '''
         def __call__(self, parser, namespace, values, option_string=None):
-            libconfig.MAKEFLAGS = values
+            libspm.MAKEFLAGS = values
             setattr(namespace, self.dest, values)
 
     class OverrideMan(argparse.Action):
         ''' Override compression of manual pages '''
         def __call__(self, parser, namespace, values, option_string=None):
-            libconfig.COMPRESS_MAN = values
+            libspm.COMPRESS_MAN = values
             setattr(namespace, self.dest, values)
 
     class OverrideBinaries(argparse.Action):
         ''' Override stripping of binaries '''
         def __call__(self, parser, namespace, values, option_string=None):
-            libconfig.STRIP_BINARIES = values
+            libspm.STRIP_BINARIES = values
             setattr(namespace, self.dest, values)
 
     class OverrideShared(argparse.Action):
         ''' Override stripping of shared libraries '''
         def __call__(self, parser, namespace, values, option_string=None):
-            libconfig.STRIP_SHARED = values
+            libspm.STRIP_SHARED = values
             setattr(namespace, self.dest, values)
 
     class OverrideStatic(argparse.Action):
         ''' Override stripping of static libraries '''
         def __call__(self, parser, namespace, values, option_string=None):
-            libconfig.STRIP_STATIC = values
+            libspm.STRIP_STATIC = values
             setattr(namespace, self.dest, values)
 
     class OverrideRpath(argparse.Action):
         ''' Override stripping of RPATH '''
         def __call__(self, parser, namespace, values, option_string=None):
-            libconfig.STRIP_RPATH = values
+            libspm.STRIP_RPATH = values
             setattr(namespace, self.dest, values)
 
     class OverrideMissing(argparse.Action):
         ''' Override missing runtime dependencies failure '''
         def __call__(self, parser, namespace, values, option_string=None):
-            libconfig.IGNORE_MISSING = values
+            libspm.IGNORE_MISSING = values
             setattr(namespace, self.dest, values)
 
     class OverrideConflicts(argparse.Action):
         ''' Override check for conflicts '''
         def __call__(self, parser, namespace, values, option_string=None):
-            libconfig.CONFLICTS = values
+            libspm.CONFLICTS = values
             setattr(namespace, self.dest, values)
 
     class OverrideBackup(argparse.Action):
         ''' Override backup of files '''
         def __call__(self, parser, namespace, values, option_string=None):
-            libconfig.BACKUP = values
+            libspm.BACKUP = values
             setattr(namespace, self.dest, values)
 
     class OverrideScripts(argparse.Action):
         ''' Override execution of pre/post scripts '''
         def __call__(self, parser, namespace, values, option_string=None):
-            libconfig.SCRIPTS = values
+            libspm.SCRIPTS = values
             setattr(namespace, self.dest, values)
 
     class OverrideTriggers(argparse.Action):
         ''' Override execution of triggers '''
         def __call__(self, parser, namespace, values, option_string=None):
-            libconfig.TRIGGERS = values
+            libspm.TRIGGERS = values
             setattr(namespace, self.dest, values)
 
     class OverrideOffline(argparse.Action):
         ''' Override offline mode '''
         def __call__(self, parser, namespace, values, option_string=None):
             libmisc.OFFLINE = True
-            libmode.libmisc.OFFLINE = True
+            libspm.libmisc.OFFLINE = True
             libpackage.libmisc.OFFLINE = True
-            libmode.libpackage.libmisc.OFFLINE = True
+            libspm.libpackage.libmisc.OFFLINE = True
             setattr(namespace, self.dest, values)
 
     class OverrideDebug(argparse.Action):
         ''' Override printing of debug messages '''
         def __call__(self, parser, namespace, values, option_string=None):
             libmessage.DEBUG = True
-            libmode.message.DEBUG = True
+            libspm.message.DEBUG = True
             setattr(namespace, self.dest, values)
 
     parser = argparse.ArgumentParser(prog='spm', description='Source Package Manager')
@@ -330,11 +329,11 @@ try:
 
     if ARGS.mode == 'repo':
         message.info('Runtime information')
-        message.sub_info('CACHE_DIR', libconfig.CACHE_DIR)
-        for repository in libconfig.REPOSITORIES:
+        message.sub_info('CACHE_DIR', libspm.CACHE_DIR)
+        for repository in libspm.REPOSITORIES:
             message.sub_info('REPOSITORY', repository)
         message.info('Poking repositories...')
-        m = libmode.Repo(libconfig.REPOSITORIES, ARGS.clean,
+        m = libspm.Repo(libspm.REPOSITORIES, ARGS.clean,
                 ARGS.sync, ARGS.update)
         m.main()
 
@@ -343,7 +342,7 @@ try:
             message.info('Runtime information')
             message.sub_info('PATTERN', ARGS.PATTERN)
             message.info('Poking remotes...')
-        m = libmode.Remote(ARGS.PATTERN, ARGS.name, ARGS.version,
+        m = libspm.Remote(ARGS.PATTERN, ARGS.name, ARGS.version,
                 ARGS.description, ARGS.depends, ARGS.makedepends,
                 ARGS.checkdepends, ARGS.sources, ARGS.options,
                 ARGS.backup, ARGS.plain)
@@ -360,28 +359,28 @@ try:
                 ARGS.TARGETS[position:position+1] = database.remote_alias(alias)
 
         message.info('Runtime information')
-        message.sub_info('CACHE_DIR', libconfig.CACHE_DIR)
-        message.sub_info('BUILD_DIR', libconfig.BUILD_DIR)
-        message.sub_info('ROOT_DIR', libconfig.ROOT_DIR)
-        message.sub_info('IGNORE', libconfig.IGNORE)
-        message.sub_info('MIRROR', libconfig.MIRROR)
-        message.sub_info('TIMEOUT', libconfig.TIMEOUT)
-        message.sub_info('EXTERNAL', libconfig.EXTERNAL)
-        message.sub_info('CHOST', libconfig.CHOST)
-        message.sub_info('CFLAGS', libconfig.CFLAGS)
-        message.sub_info('CXXFLAGS', libconfig.CXXFLAGS)
-        message.sub_info('CPPFLAGS', libconfig.CPPFLAGS)
-        message.sub_info('LDFLAGS', libconfig.LDFLAGS)
-        message.sub_info('MAKEFLAGS', libconfig.MAKEFLAGS)
-        message.sub_info('COMPRESS_MAN', libconfig.COMPRESS_MAN)
-        message.sub_info('STRIP_BINARIES', libconfig.STRIP_BINARIES)
-        message.sub_info('STRIP_SHARED', libconfig.STRIP_SHARED)
-        message.sub_info('STRIP_STATIC', libconfig.STRIP_STATIC)
-        message.sub_info('STRIP_RPATH', libconfig.STRIP_RPATH)
-        message.sub_info('IGNORE_MISSING', libconfig.IGNORE_MISSING)
-        message.sub_info('CONFLICTS', libconfig.CONFLICTS)
-        message.sub_info('BACKUP', libconfig.BACKUP)
-        message.sub_info('SCRIPTS', libconfig.SCRIPTS)
+        message.sub_info('CACHE_DIR', libspm.CACHE_DIR)
+        message.sub_info('BUILD_DIR', libspm.BUILD_DIR)
+        message.sub_info('ROOT_DIR', libspm.ROOT_DIR)
+        message.sub_info('IGNORE', libspm.IGNORE)
+        message.sub_info('MIRROR', libspm.MIRROR)
+        message.sub_info('TIMEOUT', libspm.TIMEOUT)
+        message.sub_info('EXTERNAL', libspm.EXTERNAL)
+        message.sub_info('CHOST', libspm.CHOST)
+        message.sub_info('CFLAGS', libspm.CFLAGS)
+        message.sub_info('CXXFLAGS', libspm.CXXFLAGS)
+        message.sub_info('CPPFLAGS', libspm.CPPFLAGS)
+        message.sub_info('LDFLAGS', libspm.LDFLAGS)
+        message.sub_info('MAKEFLAGS', libspm.MAKEFLAGS)
+        message.sub_info('COMPRESS_MAN', libspm.COMPRESS_MAN)
+        message.sub_info('STRIP_BINARIES', libspm.STRIP_BINARIES)
+        message.sub_info('STRIP_SHARED', libspm.STRIP_SHARED)
+        message.sub_info('STRIP_STATIC', libspm.STRIP_STATIC)
+        message.sub_info('STRIP_RPATH', libspm.STRIP_RPATH)
+        message.sub_info('IGNORE_MISSING', libspm.IGNORE_MISSING)
+        message.sub_info('CONFLICTS', libspm.CONFLICTS)
+        message.sub_info('BACKUP', libspm.BACKUP)
+        message.sub_info('SCRIPTS', libspm.SCRIPTS)
         message.sub_info('TARGETS', ARGS.TARGETS)
         message.info('Poking sources...')
         if ARGS.automake:
@@ -390,7 +389,7 @@ try:
             ARGS.compile = True
             ARGS.install = True
             ARGS.merge = True
-        m = libmode.Source(ARGS.TARGETS, ARGS.clean, ARGS.prepare,
+        m = libspm.Source(ARGS.TARGETS, ARGS.clean, ARGS.prepare,
                 ARGS.compile, ARGS.check, ARGS.install, ARGS.merge,
                 ARGS.remove, ARGS.depends, ARGS.reverse, ARGS.update)
         m.main()
@@ -400,7 +399,7 @@ try:
             message.info('Runtime information')
             message.sub_info('PATTERN', ARGS.PATTERN)
             message.info('Poking locals...')
-        m = libmode.Local(ARGS.PATTERN, ARGS.name, ARGS.version,
+        m = libspm.Local(ARGS.PATTERN, ARGS.name, ARGS.version,
                 ARGS.description, ARGS.depends, ARGS.reverse,
                 ARGS.size, ARGS.footprint, ARGS.plain)
         m.main()
@@ -410,7 +409,7 @@ try:
             message.info('Runtime information')
             message.sub_info('PATTERN', ARGS.PATTERN)
             message.info('Poking databases...')
-        m = libmode.Who(ARGS.PATTERN, ARGS.plain)
+        m = libspm.Who(ARGS.PATTERN, ARGS.plain)
         m.main()
 
 except ConfigParser.Error as detail:

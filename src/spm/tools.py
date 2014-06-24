@@ -18,10 +18,9 @@ import libmisc
 misc = libmisc.Misc()
 import libpackage
 database = libpackage.Database()
-import libconfig
 
 
-app_version = "0.0.1 (5f38e05)"
+app_version = "0.0.1 (374676d)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
