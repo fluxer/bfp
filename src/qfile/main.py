@@ -6,6 +6,7 @@ import sys, os
 import libmisc
 misc = libmisc.Misc()
 import libqdesktop
+import libsystem
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
@@ -18,6 +19,7 @@ model = QtGui.QFileSystemModel()
 actions = libqdesktop.Actions(MainWindow, app)
 config = libqdesktop.Config()
 mime = libqdesktop.Mime()
+system = libsystem.System()
 icon = QtGui.QIcon()
 
 def setLook():
@@ -207,7 +209,11 @@ ui.ViewWidget.customContextMenuRequested.connect(enable_actions)
 ui.ViewWidget.customContextMenuRequested.connect(show_popup)
 
 def mount_device(device):
-    print device
+    if system.check_mounted(device):
+        system.do_unmount(device)
+    else:
+        system.do_mount(device)
+
 # show mounted filesystems
 for device in os.listdir('/sys/class/block'):
     if device.startswith('s') or device.startswith('h') or device.startswith('v'):
