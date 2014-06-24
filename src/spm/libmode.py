@@ -17,7 +17,10 @@ misc = libmisc.Misc()
 import libpackage
 database = libpackage.Database()
 import libconfig
-
+misc.OFFLINE = libconfig.OFFLINE
+misc.TIMEOUT = libconfig.TIMEOUT
+misc.EXTERNAL = libconfig.EXTERNAL
+misc.ROOT_DIR = libconfig.ROOT_DIR
 
 class Local(object):
     ''' Class for printing local targets metadata '''

@@ -19,6 +19,7 @@ if not os.path.isfile(MAIN_CONF):
     BUILD_DIR = '/var/tmp/spm'
     ROOT_DIR = '/'
     LOCAL_DIR = ROOT_DIR + 'var/local/spm'
+    OFFLINE = False
     MIRROR = False
     TIMEOUT = 30
     EXTERNAL = False
@@ -48,6 +49,7 @@ else:
     ROOT_DIR = conf.get('spm', 'ROOT_DIR')
     LOCAL_DIR = ROOT_DIR + 'var/local/spm'
     IGNORE = conf.get('spm', 'IGNORE')
+    OFFLINE = conf.getboolean('prepare', 'OFFLINE')
     MIRROR = conf.getboolean('prepare', 'MIRROR')
     TIMEOUT = conf.getint('prepare', 'TIMEOUT')
     EXTERNAL = conf.getboolean('prepare', 'EXTERNAL')
