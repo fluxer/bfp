@@ -11,8 +11,7 @@ import libmisc
 misc = libmisc.Misc()
 import libpackage
 database = libpackage.Database()
-import libconfig
-import libmode
+import libspm
 
 
 def Worker():
@@ -80,20 +79,20 @@ def Refresh():
 
     ui.MirrorsEdit.setPlainText(misc.file_read('/etc/spm/mirrors.conf'))
 
-    ui.CacheDirEdit.setText(libconfig.CACHE_DIR)
-    ui.BuildDirEdit.setText(libconfig.BUILD_DIR)
-    ui.IgnoreTargetsEdit.setText(libconfig.IGNORE)
-    ui.ConnectionTimeoutBox.setValue(libconfig.TIMEOUT)
-    ui.UseMirrorsBox.setCheckState(libconfig.MIRROR)
-    ui.ExternalFetcherBox.setCheckState(libconfig.EXTERNAL)
-    ui.CompressManBox.setCheckState(libconfig.COMPRESS_MAN)
-    ui.StripBinariesBox.setCheckState(libconfig.STRIP_BINARIES)
-    ui.StripSharedBox.setCheckState(libconfig.STRIP_SHARED)
-    ui.StripStaticBox.setCheckState(libconfig.STRIP_STATIC)
-    ui.IgnoreMissingBox.setCheckState(libconfig.IGNORE_MISSING)
-    ui.ConflictsBox.setCheckState(libconfig.CONFLICTS)
-    ui.BackupBox.setCheckState(libconfig.BACKUP)
-    ui.ScriptsBox.setCheckState(libconfig.SCRIPTS)
+    ui.CacheDirEdit.setText(libspm.CACHE_DIR)
+    ui.BuildDirEdit.setText(libspm.BUILD_DIR)
+    ui.IgnoreTargetsEdit.setText(libspm.IGNORE)
+    ui.ConnectionTimeoutBox.setValue(libspm.TIMEOUT)
+    ui.UseMirrorsBox.setCheckState(libspm.MIRROR)
+    ui.ExternalFetcherBox.setCheckState(libspm.EXTERNAL)
+    ui.CompressManBox.setCheckState(libspm.COMPRESS_MAN)
+    ui.StripBinariesBox.setCheckState(libspm.STRIP_BINARIES)
+    ui.StripSharedBox.setCheckState(libspm.STRIP_SHARED)
+    ui.StripStaticBox.setCheckState(libspm.STRIP_STATIC)
+    ui.IgnoreMissingBox.setCheckState(libspm.IGNORE_MISSING)
+    ui.ConflictsBox.setCheckState(libspm.CONFLICTS)
+    ui.BackupBox.setCheckState(libspm.BACKUP)
+    ui.ScriptsBox.setCheckState(libspm.SCRIPTS)
 
 
 
@@ -150,7 +149,7 @@ def Remove():
 
 def SyncRepos():
     global m
-    m = libmode.Repo(libconfig.REPOSITORIES, do_clean=True, do_sync=True, do_update=False)
+    m = libmode.Repo(libspm.REPOSITORIES, do_clean=True, do_sync=True, do_update=False)
     Worker()
 
 
@@ -178,7 +177,7 @@ def ChangeSettings():
 
         with open('/etc/spm.conf', 'wb') as configfile:
             conf.write(configfile)
-        reload(libconfig)
+        reload(libspm)
     except SystemExit:
         pass
     except Exception as detail:
@@ -187,7 +186,7 @@ def ChangeSettings():
 def ChangeRepos():
     try:
         misc.file_write('/etc/spm/repositories.conf', str(ui.ReposEdit.toPlainText()))
-        reload(libconfig)
+        reload(libspm)
     except SystemExit:
         pass
     except Exception as detail:
@@ -196,7 +195,7 @@ def ChangeRepos():
 def ChangeMirrors():
     try:
         misc.file_write('/etc/spm/mirrors.conf', str(ui.MirrorsEdit.toPlainText()))
-        reload(libconfig)
+        reload(libspm)
     except SystemExit:
         pass
     except Exception as detail:
