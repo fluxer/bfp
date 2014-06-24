@@ -14,9 +14,6 @@
 ## QSETTINGS ##
  * Maybe implement fonts outside of stylesheet
 
-## QNETWORK ##
- * Make actions work
-
 ## ALL QT ##
  * Use icons from theme
  * Reduce code dublication where possible
