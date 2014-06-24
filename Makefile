@@ -10,6 +10,7 @@ all:
 	make -C src/qedit
 	make -C src/qfile
 	make -C src/qimage
+	make -C src/qnetwork
 	make -C src/qpaste
 	make -C src/qproperties
 	make -C src/qresources
@@ -33,6 +34,7 @@ install:
 	make -C src/qedit install
 	make -C src/qfile install
 	make -C src/qimage install
+	make -C src/qnetwork install
 	make -C src/qpaste install
 	make -C src/qproperties install
 	make -C src/qresources install
@@ -51,6 +53,7 @@ uninstall:
 	make -C src/qedit uninstall
 	make -C src/qfile uninstall
 	make -C src/qimage uninstall
+	make -C src/qnetwork uninstall
 	make -C src/qpaste uninstall
 	make -C src/qproperties uninstall
 	make -C src/qresources uninstall
@@ -66,6 +69,7 @@ clean:
 	make -C src/qedit clean
 	make -C src/qfile clean
 	make -C src/qimage clean
+	make -C src/qnetwork clean
 	make -C src/qpaste clean
 	make -C src/qproperties clean
 	make -C src/qresources clean
