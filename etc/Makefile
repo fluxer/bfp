@@ -17,7 +17,12 @@ install:
 	$(INSTALL) -vm644 applications/*.desktop $(DESTDIR)$(APPLICATIONSDIR)
 
 uninstall:
-	$(RM) -r $(DESTDIR)/etc/spm/ $(RM) $(DESTDIR)/etc/spm.conf
-	$(RM) $(DESTDIR)$(AUTOSTARTDIR)/powertray.desktop
-	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/powertray.desktop
-	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/mounttray.desktop
+	$(RM) -r $(DESTDIR)/etc/spm/ $(DESTDIR)/etc/spm.conf
+	$(RM) $(DESTDIR)/etc/system.conf
+	$(RM) $(DESTDIR)$(AUTOSTARTDIR)/dummy.desktop
+	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/qedt.desktop
+	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/qfile.desktop
+	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/qnetwork.desktop
+	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/qsettings.desktop
+	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/spm-qt.desktop
+	$(RM) $(DESTDIR)$(MENUSDIR)/applications.menu
