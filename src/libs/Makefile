@@ -1,33 +1,25 @@
 include ../../Makefile.inc
 
 all: clean
-	mkdir -p build/
-	$(CYTHON) -2 libmagic.py -o build/libmagic.c
-	$(CC) $(CFLAGS) -shared build/libmagic.c -o build/libmagic.so
-	$(CYTHON) -2 libmessage.py -o build/libmessage.c
-	$(CC) $(CFLAGS) -shared build/libmessage.c -o build/libmessage.so
-	$(CYTHON) -2 libmisc.py -o build/libmisc.c
-	$(CC) $(CFLAGS) -shared build/libmisc.c -o build/libmisc.so
-	$(CYTHON) -2 libpackage.py -o build/libpackage.c
-	$(CC) $(CFLAGS) -shared build/libpackage.c -o build/libpackage.so
-	$(CYTHON) -2 libsystem.py -o build/libsystem.c
-	$(CC) $(CFLAGS) -shared build/libsystem.c -o build/libsystem.so
-	$(CYTHON) -2 libqdesktop.py -o build/libqdesktop.c
-	$(CC) $(CFLAGS) -shared build/libqdesktop.c -o build/libqdesktop.so
-	$(STRIP) build/libmagic.so build/libmessage.so build/libmisc.so \
-		build/libpackage.so build/libsystem.so build/libqdesktop.so
+	$(NUITKA) --module libmagic.py
+	$(NUITKA) --module libmessage.py 
+	$(NUITKA) --module libmisc.py
+	$(NUITKA) --module libpackage.py
+	$(NUITKA) --module libsystem.py
+	$(NUITKA) --module libqdesktop.py
+	$(STRIP) libmagic.so libmessage.so libmisc.so libpackage.so libsystem.so libqdesktop.so
 
 check:
 	python test.py
 
 install:
 	$(INSTALL) -vdm755 $(DESTDIR)$(SITEDIR)
-	$(INSTALL) -vm644 build/libmagic.so $(DESTDIR)$(SITEDIR)/libmagic.so
-	$(INSTALL) -vm644 build/libmessage.so $(DESTDIR)$(SITEDIR)/libmessage.so
-	$(INSTALL) -vm644 build/libmisc.so $(DESTDIR)$(SITEDIR)/libmisc.so
-	$(INSTALL) -vm644 build/libpackage.so $(DESTDIR)$(SITEDIR)/libpackage.so
-	$(INSTALL) -vm644 build/libsystem.so $(DESTDIR)$(SITEDIR)/libsystem.so
-	$(INSTALL) -vm644 build/libqdesktop.so $(DESTDIR)$(SITEDIR)/libqdesktop.so
+	$(INSTALL) -vm644 libmagic.so $(DESTDIR)$(SITEDIR)/libmagic.so
+	$(INSTALL) -vm644 libmessage.so $(DESTDIR)$(SITEDIR)/libmessage.so
+	$(INSTALL) -vm644 libmisc.so $(DESTDIR)$(SITEDIR)/libmisc.so
+	$(INSTALL) -vm644 libpackage.so $(DESTDIR)$(SITEDIR)/libpackage.so
+	$(INSTALL) -vm644 libsystem.so $(DESTDIR)$(SITEDIR)/libsystem.so
+	$(INSTALL) -vm644 libqdesktop.so $(DESTDIR)$(SITEDIR)/libqdesktop.so
 
 uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libmagic.so
@@ -38,7 +30,7 @@ uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libqdesktop.so
 
 clean:
-	$(RM) -r build/
+	$(RM) -r *.build/ *.so
 	$(RM) $(shell find . -name '*.pyc' -o -name '*.pyo')
 
 .PHONY: all check install uninstall clean

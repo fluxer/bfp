@@ -6,6 +6,7 @@ import sys, os
 import libmisc
 misc = libmisc.Misc()
 import libqdesktop
+import libsystem
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
@@ -17,6 +18,7 @@ ui.setupUi(MainWindow)
 config = libqdesktop.Config()
 mime = libqdesktop.Mime()
 actions = libqdesktop.Actions(MainWindow, app)
+system = libsystem.System()
 icon = QtGui.QIcon()
 
 # setup desktop widget
@@ -201,7 +203,8 @@ ui.actionTerminal.triggered.connect(run_terminal)
 ui.actionFileManager.triggered.connect(run_filemanager)
 ui.actionWebBrowser.triggered.connect(run_webbrowser)
 ui.actionPreferences.triggered.connect(run_preferences)
-# FIXME: send signal to session leader
+ui.actionShutdown.triggered.connect(system.do_shutdown)
+ui.actionReboot.triggered.connect(system.do_reboot)
 ui.actionLogout.triggered.connect(sys.exit)
 ui.DesktopView.clicked.connect(enable_actions)
 

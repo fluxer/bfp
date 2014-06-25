@@ -142,7 +142,7 @@ def scan_wifi():
             data = r[1]
             if data.get('Type') == 'wifi':
                 name = data.get('Name')
-                strength = misc.string_convert(data.get('Strength'))
+                strength = str(ord(data.get('Strength')))
                 security = misc.string_convert(data.get('Security'))
                 ui.WiFiList.setRowCount(srow)
                 ui.WiFiList.setItem(srow-1, 0, QtGui.QTableWidgetItem(name))
@@ -185,7 +185,10 @@ def details_wifi():
             if name == sconnect:
                 message = ''
                 for d in data:
-                    message += d + ': ' + str(data.get(d)) + '\n'
+                    if d == 'Strength':
+                        message += d + ': ' + str(ord(data.get(d))) + '\n'
+                    else:
+                        message += d + ': ' + str(data.get(d)) + '\n'
                 QtGui.QMessageBox.information(MainWindow, 'Details', message)
     else:
         ui.tabWidget.setTabEnabled(1, False)

@@ -18,12 +18,10 @@ all:
 
 check:
 	make -C src/libs check
-	make -C src/spm check
-	make -C src/spm-qt check
 
 install:
 	make -C doc install
-	make -C etc install
+#	make -C etc install
 	make -C src/initfs install
 	make -C misc install
 	make -C scripts install

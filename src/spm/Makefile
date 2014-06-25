@@ -1,31 +1,27 @@
 include ../../Makefile.inc
 
 all: bump clean
-	mkdir -p build
-	$(CYTHON) -2 libspm.py -o build/libspm.c
-	$(CC) $(CFLAGS) -shared build/libspm.c -o build/libspm.so
-	$(CYTHON) -2 --embed -I. spm.py -o build/spm.c
-	$(CC) $(CFLAGS) build/spm.c -o build/spm
-	$(CYTHON) -2 --embed -I. tools.py -o build/tools.c
-	$(CC) $(CFLAGS) build/tools.c -o build/spm-tools
-	$(STRIP) build/libspm.so build/spm build/spm-tools
+	$(NUITKA) --module libspm.py
+	$(NUITKA) spm.py
+	$(NUITKA) tools.py
+	$(STRIP) libspm.so spm.exe tools.exe
 
 check:
-	python2 test.py
+	python test.py
 
 install:
-	$(INSTALL) -vdm755 $(DESTDIR)$(BINDIR)
-	$(INSTALL) -vm755 build/spm $(DESTDIR)$(BINDIR)/spm
-	$(INSTALL) -vm755 build/spm-tools $(DESTDIR)$(BINDIR)/spm-tools
-	$(INSTALL) -vm644 build/libspm.so $(DESTDIR)$(SITEDIR)/libspm.so
+	$(INSTALL) -vdm755 $(DESTDIR)$(SBINDIR)
+	$(INSTALL) -vm755 spm.exe $(DESTDIR)$(SBINDIR)/spm
+	$(INSTALL) -vm755 tools.exe $(DESTDIR)$(SBINDIR)/tools
+	$(INSTALL) -vm644 libspm.so $(DESTDIR)$(SITEDIR)/libspm.so
 
 uninstall:
-	$(RM) $(DESTDIR)$(BINDIR)/spm
-	$(RM) $(DESTDIR)$(BINDIR)/spm-tools
 	$(RM) $(DESTDIR)$(SITEDIR)/libspm.so
+	$(RM) $(DESTDIR)$(SBINDIR)/spm
+	$(RM) $(DESTDIR)$(SBINDIR)/tools
 
 clean:
-	$(RM) -r build
+	$(RM) -r *.build/ *.so *.exe
 	$(RM) $(shell find . -name '*.pyc' -o -name '*.pyo')
 
 bump:

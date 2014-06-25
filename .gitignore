@@ -5,7 +5,9 @@
 *.5
 
 pod2htmd.tmp
-build
+*.build
+*.so
+*.exe
 *_ui.py
 *_rc.py
 

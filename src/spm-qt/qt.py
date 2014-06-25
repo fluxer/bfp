@@ -4,7 +4,7 @@ from PyQt4 import QtGui
 import sys
 import ConfigParser
 
-import libqt4
+import spmqt_ui
 import libmessage
 message = libmessage.Message()
 import libmisc
@@ -237,7 +237,7 @@ message.sub_critical = critical
 
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
-ui = libqt4.Ui_MainWindow()
+ui = spmqt_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 
 Refresh()
