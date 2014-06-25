@@ -172,14 +172,14 @@ class System(object):
         for service in sorted(misc.list_files('/etc/services.d')):
             self.service_stop(service)
         message.info('Rebooting system...')
-        self.exec_command('reboot -f')
+        self.exec_command('reboot')
 
     def do_shutdown(self):
         ''' Stop all services and shutdown the system '''
         for service in sorted(misc.list_files('/etc/services.d')):
             self.service_stop(service)
         message.info('Shutting down system...')
-        self.exec_command('halt -f')
+        self.exec_command('halt')
 
     def do_suspend(self):
         ''' Put system in sleep state '''
