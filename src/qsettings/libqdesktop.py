@@ -76,11 +76,20 @@ class Menu(object):
         depth += 1
         for entry in menu.getEntries():
             if isinstance(entry, self.xdg.Menu):
-                self.dynamic_menu(entry, depth, widget.addMenu(str(entry)))
+                # FIXME: it seems that on elementary-usu category icons begin with "applications-",
+                #              is that by the specs??
+                dicon = xdg.IconTheme.getIconPath('applications-' + str(entry).lower())
+                if dicon:
+                    self.dynamic_menu(entry, depth, widget.addMenu(QtGui.QIcon(dicon), str(entry)))
+                else:
+                    self.dynamic_menu(entry, depth, widget.addMenu(str(entry)))
             elif isinstance(entry, self.xdg.MenuEntry):
-                icon = QtGui.QIcon.fromTheme(entry.DesktopEntry.getIcon())
+                dicon = xdg.IconTheme.getIconPath(entry.DesktopEntry.getIcon())
                 name = entry.DesktopEntry.getName()
-                e = widget.addAction(icon, name)
+                if dicon:
+                    e = widget.addAction(QtGui.QIcon(dicon), name)
+                else:
+                    e = widget.addAction(name)
                 widget.connect(e, QtCore.SIGNAL('triggered()'), \
                     lambda sfile=entry.DesktopEntry.getFileName(): self.execute_desktop(sfile))
             #elif isinstance(entry, self.xdg.Separator):
@@ -93,6 +102,7 @@ class Menu(object):
         if not os.path.isfile(config.GENERAL_MENU):
             return
         self.widget.clear()
+        xdg.Config.icon_theme = config.GENERAL_ICONTHEME
         return self.dynamic_menu(self.xdg.parse(config.GENERAL_MENU))
 
 class Actions(object):
