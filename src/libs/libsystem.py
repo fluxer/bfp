@@ -179,7 +179,7 @@ class System(object):
         for service in sorted(misc.list_files('/etc/services.d')):
             self.service_stop(service)
         message.info('Shutting down system...')
-        self.exec_command('halt')
+        self.exec_command('poweroff')
 
     def do_suspend(self):
         ''' Put system in sleep state '''
