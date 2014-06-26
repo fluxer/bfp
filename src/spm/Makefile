@@ -12,13 +12,13 @@ check:
 install:
 	$(INSTALL) -vdm755 $(DESTDIR)$(SBINDIR)
 	$(INSTALL) -vm755 spm.exe $(DESTDIR)$(SBINDIR)/spm
-	$(INSTALL) -vm755 tools.exe $(DESTDIR)$(SBINDIR)/tools
+	$(INSTALL) -vm755 tools.exe $(DESTDIR)$(SBINDIR)/spm-tools
 	$(INSTALL) -vm644 libspm.so $(DESTDIR)$(SITEDIR)/libspm.so
 
 uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libspm.so
 	$(RM) $(DESTDIR)$(SBINDIR)/spm
-	$(RM) $(DESTDIR)$(SBINDIR)/tools
+	$(RM) $(DESTDIR)$(SBINDIR)/spm-tools
 
 clean:
 	$(RM) -r *.build/ *.so *.exe
