@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/bin/python2
 
 import qedit_ui
 from PyQt4 import QtCore, QtGui

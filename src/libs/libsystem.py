@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/bin/python2
 
 import subprocess, os, shlex, ConfigParser, threading, time
 

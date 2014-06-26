@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/bin/python2
 
 """
 magic is a wrapper around the libmagic file identification library.

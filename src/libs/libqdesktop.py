@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/bin/python2
 
 import os, ConfigParser
 import xdg.Menu, xdg.DesktopEntry, xdg.IconTheme

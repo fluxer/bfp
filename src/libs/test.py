@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/bin/python2
 
 import unittest
 import tempfile

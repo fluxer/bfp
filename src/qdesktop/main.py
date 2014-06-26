@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/bin/python2
 
 import qdesktop_ui
 from PyQt4 import QtCore, QtGui
