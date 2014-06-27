@@ -36,6 +36,9 @@ setLook()
 def show_popup():
     ui.menuActions.popup(QtGui.QCursor.pos())
 
+def do_suspend():
+    general.system_suspend(MainWindow)
+
 def do_shutdown():
     general.system_shutdown(MainWindow)
 
@@ -43,6 +46,7 @@ def do_reboot():
     general.system_reboot(MainWindow)
 
 ui.actionPreferences.triggered.connect(run_preferences)
+ui.actionSuspend.triggered.connect(do_suspend)
 ui.actionShutdown.triggered.connect(do_shutdown)
 ui.actionReboot.triggered.connect(do_reboot)
 ui.actionLogout.triggered.connect(sys.exit)

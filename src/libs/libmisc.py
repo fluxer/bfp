@@ -317,7 +317,7 @@ class Misc(object):
         self.ipc = fifo + '.fifo'
 
     def ipc_read(self):
-        ''' Read IPC and return a tuple of service and action '''
+        ''' Read IPC and return data '''
         if not self.ipc:
             # FIXME: needs proper permissions set
             # ipc_create(self.ipc)
@@ -325,7 +325,7 @@ class Misc(object):
         return self.file_read(self.ipc).strip()
 
     def ipc_write(self, content):
-        ''' Write service and action to IPC '''
+        ''' Write data to IPC '''
         if self.ipc:
             self.file_write(self.ipc, content)
 

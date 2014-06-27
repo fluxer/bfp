@@ -177,6 +177,9 @@ def run_preferences():
     p.startDetached('qsettings')
     p.close()
 
+def do_suspend():
+    general.system_suspend(MainWindow)
+
 def do_shutdown():
     general.system_shutdown(MainWindow)
 
@@ -208,6 +211,7 @@ ui.actionTerminal.triggered.connect(run_terminal)
 ui.actionFileManager.triggered.connect(run_filemanager)
 ui.actionWebBrowser.triggered.connect(run_webbrowser)
 ui.actionPreferences.triggered.connect(run_preferences)
+ui.actionSuspend.triggered.connect(do_suspend)
 ui.actionShutdown.triggered.connect(do_shutdown)
 ui.actionReboot.triggered.connect(do_reboot)
 ui.actionLogout.triggered.connect(sys.exit)
