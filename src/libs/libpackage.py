@@ -1,12 +1,10 @@
 #!/bin/python2
 
-import os
-
-import re
-import shlex
+import os, re, shlex
 
 import libmisc
 misc = libmisc.Misc()
+
 
 class Database(object):
     def __init__(self):

@@ -1,8 +1,8 @@
 #!/bin/python2
 
-import sys
-import curses
+import sys, curses
 from datetime import datetime
+
 
 # http://stackoverflow.com/questions/107705/python-output-buffering
 class Unbuffered(object):

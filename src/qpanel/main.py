@@ -14,6 +14,7 @@ ui = qpanel_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 
 config = libqdesktop.Config()
+general = libqdesktop.General()
 icon = QtGui.QIcon()
 
 def run_preferences():
@@ -35,7 +36,15 @@ setLook()
 def show_popup():
     ui.menuActions.popup(QtGui.QCursor.pos())
 
+def do_shutdown():
+    general.system_shutdown(MainWindow)
+
+def do_reboot():
+    general.system_reboot(MainWindow)
+
 ui.actionPreferences.triggered.connect(run_preferences)
+ui.actionShutdown.triggered.connect(do_shutdown)
+ui.actionReboot.triggered.connect(do_reboot)
 ui.actionLogout.triggered.connect(sys.exit)
 
 ui.menubar.hide()

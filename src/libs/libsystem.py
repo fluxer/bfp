@@ -2,10 +2,10 @@
 
 import subprocess, os, shlex, ConfigParser, threading, time
 
-import libmisc
-import libmessage
+import libmisc, libmessage
 message = libmessage.Message()
 misc = libmisc.Misc()
+
 
 class System(object):
     ''' Power manager '''

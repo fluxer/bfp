@@ -3,8 +3,11 @@
 import os, ConfigParser
 import xdg.Menu, xdg.DesktopEntry, xdg.IconTheme
 from PyQt4 import QtCore, QtGui
-import libmisc
+
+import libmisc, libsystem
 misc = libmisc.Misc()
+system = libsystem.System()
+
 
 class General(object):
     def set_style(self):
@@ -20,7 +23,22 @@ class General(object):
         else:
             p.close()
 
+    def system_shutdown(self, window):
+        reply = QtGui.QMessageBox.question(window, 'Shutdown', \
+            'Are you sure you want to shutdown the system?', \
+            QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
+        if reply == QtGui.QMessageBox.Yes:
+            system.do_shutdown()
+
+    def system_reboot(self, window):
+        reply = QtGui.QMessageBox.question(window, 'Reboot', \
+            'Are you sure you want to reboot the system?', \
+            QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
+        if reply == QtGui.QMessageBox.Yes:
+            system.do_reboot()
+
 general = General()
+
 
 class Config(object):
     def __init__(self):
@@ -43,6 +61,7 @@ class Config(object):
         self.read()
 
 config = Config()
+
 
 class Menu(object):
     def __init__(self, app, widget):
@@ -99,6 +118,7 @@ class Menu(object):
         self.widget.clear()
         xdg.Config.icon_theme = config.GENERAL_ICONTHEME
         return self.dynamic_menu(self.xdg.parse(config.GENERAL_MENU))
+
 
 class Actions(object):
     def __init__(self, window, app):
@@ -217,6 +237,7 @@ class Actions(object):
         for svar in variant:
             general.execute_program('qproperties "' + svar + '"')
 
+
 class Mime(object):
     def __init__(self):
         self.read()
@@ -281,4 +302,3 @@ class Mime(object):
         self.conf.remove_option(smime, 'icon')
         self.conf.remove_section(smime)
         self.write()
-

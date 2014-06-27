@@ -1,13 +1,6 @@
 #!/bin/python2
 
-import os
-import re
-import urllib2
-import tarfile
-import zipfile
-import subprocess
-import httplib
-import shutil
+import os, re, urllib2, tarfile, zipfile, subprocess, httplib, shutil
 
 import libmagic
 

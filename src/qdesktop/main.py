@@ -6,7 +6,6 @@ import sys, os
 import libmisc
 misc = libmisc.Misc()
 import libqdesktop
-import libsystem
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
@@ -18,7 +17,7 @@ ui.setupUi(MainWindow)
 config = libqdesktop.Config()
 mime = libqdesktop.Mime()
 actions = libqdesktop.Actions(MainWindow, app)
-system = libsystem.System()
+general = libqdesktop.General()
 icon = QtGui.QIcon()
 
 # setup desktop widget
@@ -178,6 +177,12 @@ def run_preferences():
     p.startDetached('qsettings')
     p.close()
 
+def do_shutdown():
+    general.system_shutdown(MainWindow)
+
+def do_reboot():
+    general.system_reboot(MainWindow)
+
 # setup desktop view
 ui.DesktopView.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
 ui.DesktopView.customContextMenuRequested.connect(enable_actions)
@@ -203,8 +208,8 @@ ui.actionTerminal.triggered.connect(run_terminal)
 ui.actionFileManager.triggered.connect(run_filemanager)
 ui.actionWebBrowser.triggered.connect(run_webbrowser)
 ui.actionPreferences.triggered.connect(run_preferences)
-ui.actionShutdown.triggered.connect(system.do_shutdown)
-ui.actionReboot.triggered.connect(system.do_reboot)
+ui.actionShutdown.triggered.connect(do_shutdown)
+ui.actionReboot.triggered.connect(do_reboot)
 ui.actionLogout.triggered.connect(sys.exit)
 ui.DesktopView.clicked.connect(enable_actions)
 

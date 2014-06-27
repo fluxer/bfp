@@ -14,6 +14,16 @@
 ## QSETTINGS ##
  * Maybe implement fonts outside of stylesheet
 
+## QDESKTOP and QPANEL ##
+ * Implement suspend support
+
+## LIBQDESKTOP ##
+ * Rename to libdesktop?
+ * Signal to session leader (QSession) via dbus to shutdown/reboot/suspend?
+
 ## ALL QT ##
  * Use icons from theme
  * Reduce code dublication where possible
+
+## ALL ##
+ * Run PyLint and do some kung-foo on the code style
