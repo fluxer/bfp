@@ -23,6 +23,13 @@ class General(object):
         else:
             p.close()
 
+    def system_suspend(self, window):
+        reply = QtGui.QMessageBox.question(window, 'Suspend', \
+            'Are you sure you want to suspend the system?', \
+            QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
+        if reply == QtGui.QMessageBox.Yes:
+            system.do_suspend()
+
     def system_shutdown(self, window):
         reply = QtGui.QMessageBox.question(window, 'Shutdown', \
             'Are you sure you want to shutdown the system?', \
