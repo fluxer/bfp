@@ -89,6 +89,14 @@ class Misc(object):
         wfile.write(content)
         wfile.close()
 
+    def file_write_nonblock(self, sfile, content):
+        ''' Write data to file non-blocking (overwrites) '''
+        self.dir_create(os.path.dirname(sfile))
+
+        fd = os.open(sfile, os.O_NONBLOCK | os.O_WRONLY)
+        os.write(fd, content)
+        os.close(fd)
+
     def file_search(self, string, sfile, exact=False, escape=True):
         ''' Search for string in file '''
         return self.string_search(string, self.file_read(sfile), exact=exact, escape=escape)
@@ -330,8 +338,9 @@ class Misc(object):
             self.file_write(self.ipc, content)
 
     def ipc_close(self):
-        if self.ipc:
+        if not os.path.exists(self.ipc):
             os.remove(self.ipc)
+        if self.ipc:
             self.ipc = None
 
     def system_output(self, command, shell=False):
