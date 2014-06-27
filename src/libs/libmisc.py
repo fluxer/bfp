@@ -307,14 +307,14 @@ class Misc(object):
 
 
     def ipc_create(self, fifo, group=0, mode=0664):
-        ''' Create fifo for communication '''
-        if not os.path.exists(fifo):
-            self.file_write(fifo, '')
+        ''' Create fifos for communication '''
+        if not os.path.exists(fifo + '.fifo'):
+            os.mkfifo(self.ipc)
         # set owner of IPC to <group>:<group>
         # os.chown(fifo, group, group)
         # sadly, something is wrong with mkfifo permissions set
         # os.chmod(fifo, mode)
-        self.ipc = os.open(fifo, os.O_RDWR | os.O_NONBLOCK)
+        self.ipc = fifo + '.fifo'
 
     def ipc_read(self):
         ''' Read IPC and return a tuple of service and action '''
@@ -322,16 +322,16 @@ class Misc(object):
             # FIXME: needs proper permissions set
             # ipc_create(self.ipc)
             return None
-        return os.read(self.ipc, 1024).strip()
+        return self.file_read(self.ipc).strip()
 
     def ipc_write(self, content):
         ''' Write service and action to IPC '''
         if self.ipc:
-            os.write(self.ipc, content)
+            self.file_write(self.ipc, content)
 
     def ipc_close(self):
         if self.ipc:
-            os.close(self.ipc)
+            os.remove(self.ipc)
             self.ipc = None
 
     def system_output(self, command, shell=False):
