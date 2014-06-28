@@ -102,7 +102,7 @@ class System(object):
         return status
 
     def get_cpu_governor(self):
-        ''' Change CPU governor '''
+        ''' Get CPU governor '''
         # FIXME: support multiple CPUs, wrappers will get complex tough
         status = 'Unknown'
         for cpu in self.get_cpus():
