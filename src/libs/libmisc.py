@@ -6,6 +6,7 @@ import libmagic
 
 
 class Misc(object):
+    ''' Various methos for every-day usage '''
     def __init__(self):
         self.OFFLINE = False
         self.TIMEOUT = 30
@@ -69,6 +70,7 @@ class Misc(object):
         return content
 
     def file_read_nonblock(self, sfile, sbuffer=1024):
+        ''' Get file content non-blocking '''
         fd = os.open(sfile, os.O_NONBLOCK)
         content = os.read(fd, sbuffer)
         os.close(fd)
@@ -251,13 +253,13 @@ class Misc(object):
                     tar.add(item, '')
             tar.close()
         elif sfile.endswith('.zip'):
-            zip = zipfile.ZipFile(sfile, mode='w')
+            zipf = zipfile.ZipFile(sfile, mode='w')
             for item in variant:
                 if chdir:
-                    zip.write(item.replace(chdir, './'))
+                    zipf.write(item.replace(chdir, './'))
                 else:
-                    zip.write(item)
-            zip.close()
+                    zipf.write(item)
+            zipf.close()
         elif sfile.endswith('.xz') or sfile.endswith('.lzma'):
             # FIXME: implement lzma/xz compression
             raise(Exception('Not implemented yet'))
@@ -314,15 +316,14 @@ class Misc(object):
         return size
 
 
-    def ipc_create(self, fifo, group=0, mode=0664):
-        ''' Create fifos for communication '''
-        if not os.path.exists(fifo + '.fifo'):
-            os.mkfifo(fifo + '.fifo')
+    def ipc_create(self, fifo, group=os.getegid(), mode=0664):
+        ''' Create IPC for communication '''
+        rfifo = fifo + '.fifo'
+        if not os.path.exists(rfifo):
+            os.mkfifo(rfifo, mode)
         # set owner of IPC to <group>:<group>
-        # os.chown(fifo, group, group)
-        # sadly, something is wrong with mkfifo permissions set
-        # os.chmod(fifo, mode)
-        self.ipc = fifo + '.fifo'
+        os.chown(rfifo, group, group)
+        self.ipc = rfifo
 
     def ipc_read(self):
         ''' Read IPC and return data '''
@@ -338,6 +339,7 @@ class Misc(object):
             self.file_write(self.ipc, content)
 
     def ipc_close(self):
+        ''' Close IPC '''
         if not os.path.exists(self.ipc):
             os.remove(self.ipc)
         if self.ipc:
@@ -348,9 +350,9 @@ class Misc(object):
         pipe = subprocess.Popen(command, stdout=subprocess.PIPE, env={'LC_ALL': 'C'}, shell=shell)
         return pipe.communicate()[0].strip()
 
-    def system_scanelf(self, sfile, format='#F%n', flags=''):
+    def system_scanelf(self, sfile, sformat='#F%n', sflags=''):
         ''' Get information about ELF files '''
-        return self.system_output((self.whereis('scanelf'), '-CBF', format, flags, sfile))
+        return self.system_output((self.whereis('scanelf'), '-CBF', sformat, sflags, sfile))
 
     def system_chroot(self, command):
         ''' Execute command in chroot environment '''

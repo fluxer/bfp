@@ -20,6 +20,7 @@ class Unbuffered(object):
 
 
 class Message(object):
+    ''' Print fancy messages with logging '''
     def __init__(self):
         self.LOG = True
         self.LOG_FILE = '/var/log/syslog.log'
@@ -47,7 +48,7 @@ class Message(object):
             self.cnormal = ''
             sys.stdout = Unbuffered(sys.stdout)
 
-        self.log_message('--------------------- %s ---------------------' %
+        self.log_message('--------------------- %s ---------------------' % \
             datetime.today())
 
     def log_message(self, msg):
@@ -63,7 +64,7 @@ class Message(object):
     def info(self, msg, marker=None):
         ''' Print message with INFO status '''
         if not marker is None:
-            print('%s* %s%s: %s%s%s' %
+            print('%s* %s%s: %s%s%s' % \
                 (self.cmarker, self.cnormal, msg, self.cinfo, marker, self.cnormal))
             self.log_message('[INFO] %s: %s' % (msg, marker))
         else:
@@ -74,7 +75,7 @@ class Message(object):
     def warning(self, msg, marker=None):
         ''' Print message with WARNING status '''
         if not marker is None:
-            sys.stderr.write('%s* %s%s: %s%s%s\n' %
+            sys.stderr.write('%s* %s%s: %s%s%s\n' % \
                 (self.cwarning, self.cnormal, msg, self.cwarning, marker, self.cnormal))
             self.log_message('[WARNING] %s: %s' % (msg, marker))
         else:
@@ -84,7 +85,7 @@ class Message(object):
     def critical(self, msg, marker=None):
         ''' Print message with CRITICAL status '''
         if not marker is None:
-            sys.stderr.write('%s* %s%s: %s%s%s\n' %
+            sys.stderr.write('%s* %s%s: %s%s%s\n' % \
                 (self.ccritical, self.cnormal, msg, self.ccritical, marker, self.cnormal))
             self.log_message('[CRITICAL] %s: %s' % (msg, marker))
         else:
@@ -95,7 +96,7 @@ class Message(object):
         ''' Print message with DEBUG status '''
         if self.DEBUG:
             if not marker is None:
-                print('%s* %s%s: %s%s%s' %
+                print('%s* %s%s: %s%s%s' % \
                     (self.cdebug, self.cnormal, msg, self.cdebug, marker, self.cnormal))
                 self.log_message('[DEBUG] %s: %s' % (msg, marker))
             else:
@@ -105,7 +106,7 @@ class Message(object):
     def sub_info(self, msg, marker=None):
         ''' Print sub-message with INFO status '''
         if not marker is None:
-            print('%s  => %s%s: %s%s%s' %
+            print('%s  => %s%s: %s%s%s' % \
                 (self.cmarker, self.cnormal, msg, self.cinfo, marker, self.cnormal))
             self.log_message('[INFO] %s: %s' % (msg, marker))
         else:
@@ -115,7 +116,7 @@ class Message(object):
     def sub_warning(self, msg, marker=None):
         ''' Print sub-message with WARNING status '''
         if not marker is None:
-            sys.stderr.write('%s  => %s%s: %s%s%s\n' %
+            sys.stderr.write('%s  => %s%s: %s%s%s\n' % \
                 (self.cwarning, self.cnormal, msg, self.cwarning, marker, self.cnormal))
             self.log_message('[WARNING] %s: %s' % (msg, marker))
         else:
@@ -125,7 +126,7 @@ class Message(object):
     def sub_critical(self, msg, marker=None):
         ''' Print sub-message with CRITICAL status '''
         if not marker is None:
-            sys.stderr.write('%s  => %s%s: %s%s%s\n' %
+            sys.stderr.write('%s  => %s%s: %s%s%s\n' % \
                 (self.ccritical, self.cnormal, msg, self.ccritical, marker, self.cnormal))
             self.log_message('[CRITICAL] %s: %s' % (msg, marker))
         else:
@@ -136,7 +137,7 @@ class Message(object):
         ''' Print sub-message with DEBUG status '''
         if self.DEBUG:
             if not marker is None:
-                print('%s  => %s%s: %s%s%s' %
+                print('%s  => %s%s: %s%s%s' % \
                     (self.cdebug, self.cnormal, msg, self.cdebug, marker, self.cnormal))
                 self.log_message('[DEBUG] %s: %s' % (msg, marker))
             else:

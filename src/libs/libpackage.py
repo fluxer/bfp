@@ -7,6 +7,7 @@ misc = libmisc.Misc()
 
 
 class Database(object):
+    ''' Get information about packages '''
     def __init__(self):
         self.ROOT_DIR = '/'
         self.CACHE_DIR = '/var/cache/spm'
@@ -54,7 +55,7 @@ class Database(object):
         ''' Returns True or False wheather target is installed '''
         if not os.path.isdir(self.LOCAL_DIR):
             return False
-        elif misc.string_search(os.path.basename(target),
+        elif misc.string_search(os.path.basename(target), \
             self.local_all(basename=True), exact=True):
             return True
         elif misc.string_search(target, self.local_all(), exact=True):
@@ -73,7 +74,7 @@ class Database(object):
             if local == ignore:
                 continue
 
-            if misc.string_search(sfile, self.local_footprint(local),
+            if misc.string_search(sfile, self.local_footprint(local), \
                 exact=exact, escape=escape):
                 match.append(local)
         return match
@@ -121,7 +122,7 @@ class Database(object):
         ''' Returns reverse dependencies of target '''
         revdeps = []
         for installed in self.local_all(basename=True):
-            if misc.string_search(os.path.basename(target),
+            if misc.string_search(os.path.basename(target), \
                 self.local_metadata(installed, 'depends'), exact=True) \
                 and not misc.string_search(installed, self.IGNORE, exact=True):
                 revdeps.append(installed)
@@ -313,7 +314,7 @@ class SRCBUILD(object):
             if isinstance(value, str):
                 result = self._symbol_regex.sub(self._replace_symbol, value)
             else:
-                result = [self._symbol_regex.sub(self._replace_symbol, x)
+                result = [self._symbol_regex.sub(self._replace_symbol, x) \
                     for x in value]
             self._symbols[symbol] = result
 

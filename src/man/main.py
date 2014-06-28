@@ -1,9 +1,7 @@
 #!/bin/python2
 
 import sys, os
-import os
 
-app_version = "0.0.1 (61914bd)"
 
 try:
     import libmessage

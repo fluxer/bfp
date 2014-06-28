@@ -3,10 +3,8 @@
 import qsession_ui
 from PyQt4 import QtCore, QtGui
 import sys, os, pwd, crypt
-import libmisc
+import libmisc, libqdesktop
 misc = libmisc.Misc()
-import libqdesktop
-import libsystem
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)

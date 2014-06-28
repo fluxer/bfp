@@ -126,9 +126,9 @@ database.IGNORE = IGNORE
 
 class Local(object):
     ''' Class for printing local targets metadata '''
-    def __init__(self, pattern, do_name=False, do_version=False, do_description=False,
-        do_depends=False, do_reverse=False, do_size=False, do_footprint=False,
-        plain=False):
+    def __init__(self, pattern, do_name=False, do_version=False, \
+        do_description=False, do_depends=False, do_reverse=False, \
+        do_size=False, do_footprint=False, plain=False):
         self.pattern = pattern
         self.do_name = do_name
         self.do_version = do_version
@@ -188,9 +188,10 @@ class Local(object):
 
 class Remote(object):
     ''' Class for printing remote targets metadata '''
-    def __init__(self, pattern, do_name=False, do_version=False, do_description=False,
-        do_depends=False, do_makedepends=False, do_checkdepends=False, do_sources=False,
-        do_options=False, do_backup=False, plain=False):
+    def __init__(self, pattern, do_name=False, do_version=False, \
+        do_description=False, do_depends=False, do_makedepends=False, \
+        do_checkdepends=False, do_sources=False, do_options=False, \
+        do_backup=False, plain=False):
         self.pattern = pattern
         self.do_name = do_name
         self.do_version = do_version
@@ -291,12 +292,12 @@ class Repo(object):
 
         if os.path.isdir(self.repository_dir):
             message.sub_info('Updating repository', self.repository_name)
-            subprocess.check_call((misc.whereis('git'), 'pull', '--depth=1', self.repository_url),
-                cwd=self.repository_dir)
+            subprocess.check_call((misc.whereis('git'), 'pull', '--depth=1', \
+                self.repository_url), cwd=self.repository_dir)
         else:
             message.sub_info('Cloning initial copy', self.repository_name)
-            subprocess.check_call((misc.whereis('git'), 'clone', '--depth=1', self.repository_url,
-                self.repository_dir))
+            subprocess.check_call((misc.whereis('git'), 'clone', '--depth=1', \
+                self.repository_url, self.repository_dir))
 
     def update(self):
         ''' Check repositories for updates '''
@@ -336,8 +337,8 @@ class Repo(object):
 
 class Source(object):
     ''' Class for dealing with sources '''
-    def __init__(self, targets, do_clean=False, do_prepare=False,
-        do_compile=False, do_check=False, do_install=False, do_merge=False,
+    def __init__(self, targets, do_clean=False, do_prepare=False, \
+        do_compile=False, do_check=False, do_install=False, do_merge=False, \
         do_remove=False, do_depends=False, do_reverse=False, do_update=False):
         self.targets = targets
         self.do_clean = do_clean
@@ -388,7 +389,7 @@ class Source(object):
         self.target_metadata = os.path.join('var/local/spm', self.target_name, 'metadata')
 
         self.sources_dir = os.path.join(CACHE_DIR, 'sources', self.target_name)
-        self.target_tarball = os.path.join(CACHE_DIR, 'tarballs',
+        self.target_tarball = os.path.join(CACHE_DIR, 'tarballs', \
             self.target_name + '_' + self.target_version + '.tar.bz2')
 
     def update_databases(self, content):
@@ -552,7 +553,7 @@ class Source(object):
             message.sub_info('Building dependencies', missing_dependencies)
             self.original_target = self.target
             self.main(missing_dependencies, automake=True)
-            message.sub_info('Resuming %s preparations at' %
+            message.sub_info('Resuming %s preparations at' % \
                 os.path.basename(self.original_target), datetime.today())
             self.set_global(self.original_target)
         elif missing_dependencies:
@@ -577,12 +578,12 @@ class Source(object):
                     message.sub_warning('Internet connection is down')
                 elif os.path.isdir(link_file):
                     message.sub_debug('Updating repository', src_url)
-                    subprocess.check_call((misc.whereis('git'), 'pull', '--depth=1',
-                        src_url), cwd=link_file)
+                    subprocess.check_call((misc.whereis('git'), 'pull', \
+                        '--depth=1', src_url), cwd=link_file)
                 else:
                     message.sub_debug('Cloning initial copy', src_url)
-                    subprocess.check_call((misc.whereis('git'), 'clone', '--depth=1',
-                        src_url, link_file))
+                    subprocess.check_call((misc.whereis('git'), 'clone', \
+                        '--depth=1', src_url, link_file))
                 continue
 
             elif src_url.startswith('http://') or src_url.startswith('https://') \
@@ -633,14 +634,14 @@ class Source(object):
         ''' Compile target sources '''
         self.set_global(self.target)
 
-        subprocess.check_call((misc.whereis('bash'), '-e', '-c', 'source ' +
+        subprocess.check_call((misc.whereis('bash'), '-e', '-c', 'source ' + \
             self.srcbuild + ' && umask 0022 && src_compile'), cwd=self.source_dir)
 
     def check(self):
         ''' Check target sources '''
         self.set_global(self.target)
 
-        subprocess.check_call((misc.whereis('bash'), '-e', '-c', 'source ' +
+        subprocess.check_call((misc.whereis('bash'), '-e', '-c', 'source ' + \
             self.srcbuild + ' && umask 0022 && src_check'), cwd=self.source_dir)
 
     def install(self):
@@ -650,7 +651,7 @@ class Source(object):
         if not os.path.isdir(self.install_dir):
             os.makedirs(self.install_dir)
 
-        subprocess.check_call((misc.whereis('bash'), '-e', '-c', 'source ' +
+        subprocess.check_call((misc.whereis('bash'), '-e', '-c', 'source ' + \
             self.srcbuild + ' && umask 0022 && src_install'), cwd=self.source_dir)
 
         if COMPRESS_MAN:
@@ -758,8 +759,10 @@ class Source(object):
                 or smime == 'text/x-lua' or smime == 'text/x-tcl' \
                 or smime == 'text/x-awk' or smime == 'text/x-gawk':
                 # https://en.wikipedia.org/wiki/Comparison_of_command_shells
-                for bang in ('sh', 'bash', 'dash', 'ksh', 'csh', 'tcsh' 'tclsh', 'scsh', 'fish', 'zsh', 'ash',
-                    'python', 'python2', 'python3', 'perl', 'php', 'ruby', 'lua', 'wish' 'awk' 'gawk'):
+                for bang in ('sh', 'bash', 'dash', 'ksh', 'csh', 'tcsh', \
+                    'tclsh', 'scsh', 'fish', 'zsh', 'ash', 'python', \
+                    'python2', 'python3', 'perl', 'php', 'ruby', 'lua', \
+                    'wish', 'awk' 'gawk'):
                     bang_regexp = '^#!(/usr)?/(s)?bin/(env )?' + bang + '(\\s|$)'
                     file_regexp = '(/usr)?/(s)?bin/' + bang
                     self_file_regexp = self.install_dir + '(/usr)?/(s)?bin/' + bang
@@ -953,11 +956,11 @@ class Source(object):
             self.autoremove = True
             self.original_target = self.target
             self.main(depends_detected)
-            message.sub_info('Resuming %s removing at' %
+            message.sub_info('Resuming %s removing at' % \
                 os.path.basename(self.original_target), datetime.today())
             self.set_global(self.original_target)
         elif depends_detected:
-            message.sub_critical('Other targets depend on %s' %
+            message.sub_critical('Other targets depend on %s' % \
                 self.target_name, depends_detected)
             sys.exit(2)
 

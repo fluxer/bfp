@@ -8,7 +8,7 @@ misc = libmisc.Misc()
 
 
 class System(object):
-    ''' Power manager '''
+    ''' System state management and information gathering '''
     def __init__(self):
         ''' Initializer '''
         self.initialized = False
@@ -120,8 +120,8 @@ class System(object):
     def check_mounted(self, string):
         ''' Check if block device is mounted '''
         for line in misc.file_readlines('/proc/mounts'):
-            device, directory, type, options, fsck, fsck2 = line.split()
-            if device == string or directory == string:
+            sdevice, sdirectory, stype, soptions, sfsck, sfsck2 = line.split()
+            if sdevice == string or sdirectory == string:
                 return True
         return False
 
@@ -130,8 +130,8 @@ class System(object):
         # split command the smart way preserving brackets
         if not self.shell:
             command = shlex.split(command)
-        pipe = subprocess.Popen(command, shell=self.shell,
-            stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+        pipe = subprocess.Popen(command, shell=self.shell, \
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE, \
             env={'PATH': '/usr/sbin:/usr/bin:/sbin:/bin'})
         if self.wait:
             pipe.wait()
@@ -142,7 +142,7 @@ class System(object):
             elif stdout:
                 message.sub_warning(stdout)
             else:
-                message.sub_warning('Command failed with status',
+                message.sub_warning('Command failed with status', \
                     pipe.returncode)
             return pipe.returncode
 

@@ -98,6 +98,7 @@
     <addaction name="separator"/>
     <addaction name="actionPreferences"/>
     <addaction name="separator"/>
+    <addaction name="actionSuspend"/>
     <addaction name="actionShutdown"/>
     <addaction name="actionReboot"/>
     <addaction name="actionLogout"/>
@@ -295,6 +296,15 @@
   <action name="actionDummy_2">
    <property name="text">
     <string>dummy</string>
+   </property>
+  </action>
+  <action name="actionSuspend">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/object-hidden.svg</normaloff>:/share/qresources/resources/object-hidden.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Suspend</string>
    </property>
   </action>
  </widget>
