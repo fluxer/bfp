@@ -12,10 +12,13 @@
  * Disable new file/dir if not enough permissions
 
 ## QSETTINGS ##
- * Maybe implement fonts outside of stylesheet
+ * Allow applications to be selected from a preset of applications (ListBox)
 
 ## LIBDESKTOP ##
- * Signal to session leader (QSession) via dbus to shutdown/reboot/suspend/logout?
+ * Signal to systemd to shutdown/reboot/suspend/logout?
+
+## SYSTEMD ##
+ * Write it! A daemon that controls power state (and mounting?)
 
 ## ALL QT ##
  * Use icons from theme
