@@ -100,7 +100,7 @@ Default: -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2
 Set the environmental variable LDFLAGS when building software. The LDFLAGS
 flag specifies desired linker options.
 
-Default: -Wl,--hash-style=gnu -Wl,--as-needed -Wl,-z,relro -Wl,-z,now
+Default: -Wl,--hash-style=gnu -Wl,--as-needed
 
 =head2 MAKEFLAGS
 
