@@ -101,6 +101,16 @@ class System(object):
                 status = misc.file_read(fstatus).strip()
         return status
 
+    def get_cpu_governor(self):
+        ''' Change CPU governor '''
+        # FIXME: support multiple CPUs, wrappers will get complex tough
+        status = 'Unknown'
+        for cpu in self.get_cpus():
+            sfile = os.path.join(cpu, 'cpufreq/scaling_governor')
+            if os.path.isfile(sfile):
+                status = misc.file_read(sfile).strip()
+        return status
+
     def check_mounted(self, string):
         ''' Check if block device is mounted '''
         for line in misc.file_readlines('/proc/mounts'):
