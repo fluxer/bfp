@@ -5,7 +5,7 @@ import sip
 sip.setapi('QString', 2)
 sip.setapi('QVariant', 2)
 
-import os, ConfigParser
+import os
 import xdg.Menu, xdg.DesktopEntry, xdg.IconTheme
 from PyQt4 import QtCore, QtGui
 
@@ -259,19 +259,7 @@ class Actions(object):
 class Mime(object):
     ''' Simple MIME implementation '''
     def __init__(self):
-        self.read()
-
-    def read(self):
-        ''' Read MIME config '''
-        self.conf = ConfigParser.ConfigParser()
-        self.conf.read('/etc/mime.conf')
-
-    def write(self):
-        ''' Write MIME config '''
-        if not os.path.isfile('/etc/mime.conf'):
-            misc.file_write('/etc/mime.conf', '')
-        with open('/etc/mime.conf', 'w') as fd:
-            self.conf.write(fd)
+        self.settings = QtCore.QSettings('qmime')
 
     def get_mime(self, sprogram):
         ''' Get MIME associated with program '''
@@ -280,21 +268,14 @@ class Mime(object):
                 return mime
         return None
 
-    def get_icon(self, smime):
-        ''' Get Icon associated with MIME '''
-        if self.conf.has_section(smime):
-            return self.conf.get(smime, 'icon')
-        return None
-
     def get_program(self, smime):
         ''' Get program associated with MIME '''
-        if self.conf.has_section(smime):
-            return self.conf.get(smime, 'program')
-        return None
+        self.settings.sync()
+        return str(self.settings.value(smime, ''))
 
     def get_mimes(self):
         ''' Get all associated MIMEs '''
-        return sorted(self.conf.sections())
+        return sorted(self.settings.allKeys())
 
     def get_programs(self):
         ''' Get all programs '''
@@ -314,20 +295,10 @@ class Mime(object):
 
     def register(self, smime, sprogram, sicon=''):
         ''' Register MIME with program and icon '''
-        if self.conf.has_section(smime):
-            return
-        self.read()
-        self.conf.add_section(smime)
-        self.conf.set(smime, 'program', sprogram)
-        self.conf.set(smime, 'icon', sicon)
-        self.write()
+        self.settings.setValue(smime, sprogram)
+        self.settings.sync()
 
     def unregister(self, smime):
         ''' Unregister MIME '''
-        if not self.conf.has_section(smime):
-            return
-        self.read()
-        self.conf.remove_option(smime, 'program')
-        self.conf.remove_option(smime, 'icon')
-        self.conf.remove_section(smime)
-        self.write()
+        self.settings.remove(smime)
+        self.settings.sync()
