@@ -6,8 +6,8 @@ all: clean
 	$(STRIP) main.exe
 
 install:
-	$(INSTALL) -vdm755 $(DESTDIR)$(BINDIR)
-	$(INSTALL) -vm755 main.exe $(DESTDIR)$(BINDIR)/qsession
+	$(INSTALL) -vdm755 $(DESTDIR)$(SBINDIR)
+	$(INSTALL) -vm755 main.exe $(DESTDIR)$(SBINDIR)/qsession
 
 uninstall:
 	$(RM) $(DESTDIR)$(BINDIR)/qsession
