@@ -11,14 +11,12 @@ install:
 	sed 's|#MACHINE#|$(MACHINE)|g' -i $(DESTDIR)/etc/spm.conf
 	sed 's|#ARCH#|$(ARCH)|g' -i $(DESTDIR)/etc/spm.conf
 	sed 's|#JOBS#|$(JOBS)|g' -i $(DESTDIR)/etc/spm.conf
-	$(INSTALL) -vm644 system.conf $(DESTDIR)/etc/
 	$(INSTALL) -vm644 autostart/*.desktop $(DESTDIR)$(AUTOSTARTDIR)
 	$(INSTALL) -vm644 menus/*.menu $(DESTDIR)$(MENUSDIR)
 	$(INSTALL) -vm644 applications/*.desktop $(DESTDIR)$(APPLICATIONSDIR)
 
 uninstall:
 	$(RM) -r $(DESTDIR)/etc/spm/ $(DESTDIR)/etc/spm.conf
-	$(RM) $(DESTDIR)/etc/system.conf
 	$(RM) $(DESTDIR)$(AUTOSTARTDIR)/dummy.desktop
 	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/qedt.desktop
 	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/qfile.desktop

@@ -26,6 +26,3 @@
 
 ## ALL ##
  * Run PyLint and do some kung-foo on the code style
-
-## LIBMISC ##
- * Move system exec_command() to misc system_command()
