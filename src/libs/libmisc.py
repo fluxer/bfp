@@ -317,7 +317,7 @@ class Misc(object):
     def ipc_create(self, fifo, group=0, mode=0664):
         ''' Create fifos for communication '''
         if not os.path.exists(fifo + '.fifo'):
-            os.mkfifo(self.ipc)
+            os.mkfifo(fifo + '.fifo')
         # set owner of IPC to <group>:<group>
         # os.chown(fifo, group, group)
         # sadly, something is wrong with mkfifo permissions set
