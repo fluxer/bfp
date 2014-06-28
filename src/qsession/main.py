@@ -85,7 +85,8 @@ for p in pwd.getpwall():
     if p.pw_uid == 0 or p.pw_uid > 999:
         ui.UserNameBox.addItem(p.pw_name)
 
-for x in ('startfluxbox', 'startkde'):
+# FIXME: add many, many more
+for x in ('startfluxbox', 'startkde' 'startx'):
     b = misc.whereis(x, fallback=False)
     if b:
         ui.DesktopBox.addItem(b)
