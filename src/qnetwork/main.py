@@ -8,9 +8,7 @@ sip.setapi('QVariant', 2)
 import qnetwork_ui
 from PyQt4 import QtCore, QtGui, QtDBus
 import sys, os
-import libmisc
-misc = libmisc.Misc()
-import libdesktop
+import libmisc, libdesktop
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
@@ -19,6 +17,7 @@ ui = qnetwork_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 
 # some variables
+misc = libmisc.Misc()
 actions = libdesktop.Actions(MainWindow, app)
 config = libdesktop.Config()
 icon = QtGui.QIcon()

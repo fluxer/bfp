@@ -6,12 +6,16 @@ sip.setapi('QString', 2)
 sip.setapi('QVariant', 2)
 
 import os, ConfigParser
-import xdg.Menu, xdg.DesktopEntry
+import xdg.Menu, xdg.DesktopEntry, xdg.IconTheme
 from PyQt4 import QtCore, QtGui
-import libmisc
+
+import libmisc, libsystem
 misc = libmisc.Misc()
+system = libsystem.System()
+
 
 class General(object):
+    ''' Common methods '''
     def set_style(self):
         # FIXME: set stylesheet and icon theme
         pass
@@ -25,7 +29,29 @@ class General(object):
         else:
             p.close()
 
+    def system_suspend(self, window):
+        reply = QtGui.QMessageBox.question(window, 'Suspend', \
+            'Are you sure you want to suspend the system?', \
+            QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
+        if reply == QtGui.QMessageBox.Yes:
+            system.do_suspend()
+
+    def system_shutdown(self, window):
+        reply = QtGui.QMessageBox.question(window, 'Shutdown', \
+            'Are you sure you want to shutdown the system?', \
+            QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
+        if reply == QtGui.QMessageBox.Yes:
+            system.do_shutdown()
+
+    def system_reboot(self, window):
+        reply = QtGui.QMessageBox.question(window, 'Reboot', \
+            'Are you sure you want to reboot the system?', \
+            QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
+        if reply == QtGui.QMessageBox.Yes:
+            system.do_reboot()
+
 general = General()
+
 
 class Config(object):
     def __init__(self):
@@ -33,6 +59,7 @@ class Config(object):
         self.read()
 
     def read(self):
+        ''' Read config file '''
         self.GENERAL_STYLESHEET = str(self.settings.value('general/stylesheet', 'qdarkstyle'))
         self.GENERAL_ICONTHEME = str(self.settings.value('general/icontheme', ''))
         self.GENERAL_MENU = str(self.settings.value('general/menu', '/etc/xdg/menus/applications.menu'))
@@ -44,12 +71,15 @@ class Config(object):
         self.DEFAULT_WEBBROWSER = str(self.settings.value('default/webbrowser', 'qupzilla'))
 
     def write(self, variable, value):
+        ''' Write config file '''
         self.settings.setValue(variable, value)
         self.read()
 
 config = Config()
 
+
 class Menu(object):
+    ''' Menu related methods '''
     def __init__(self, app, widget):
         self.app = app
         self.widget = widget
@@ -99,13 +129,16 @@ class Menu(object):
         depth -= 1
 
     def build(self):
+        ''' Build applications menu '''
         if not os.path.isfile(config.GENERAL_MENU):
             return
         self.widget.clear()
         xdg.Config.icon_theme = config.GENERAL_ICONTHEME
         return self.dynamic_menu(self.xdg.parse(config.GENERAL_MENU))
 
+
 class Actions(object):
+    ''' Mostly menu action shortcuts '''
     def __init__(self, window, app):
         self.window = window
         self.app = app
@@ -222,46 +255,56 @@ class Actions(object):
         for svar in variant:
             general.execute_program('qproperties "' + svar + '"')
 
+
 class Mime(object):
+    ''' Simple MIME implementation '''
     def __init__(self):
         self.read()
 
     def read(self):
+        ''' Read MIME config '''
         self.conf = ConfigParser.ConfigParser()
         self.conf.read('/etc/mime.conf')
 
     def write(self):
+        ''' Write MIME config '''
         if not os.path.isfile('/etc/mime.conf'):
             misc.file_write('/etc/mime.conf', '')
         with open('/etc/mime.conf', 'w') as fd:
             self.conf.write(fd)
 
     def get_mime(self, sprogram):
+        ''' Get MIME associated with program '''
         for mime in self.get_mimes():
             if self.get_program(mime) == sprogram:
                 return mime
         return None
 
     def get_icon(self, smime):
+        ''' Get Icon associated with MIME '''
         if self.conf.has_section(smime):
             return self.conf.get(smime, 'icon')
         return None
 
     def get_program(self, smime):
+        ''' Get program associated with MIME '''
         if self.conf.has_section(smime):
             return self.conf.get(smime, 'program')
         return None
 
     def get_mimes(self):
+        ''' Get all associated MIMEs '''
         return sorted(self.conf.sections())
 
     def get_programs(self):
+        ''' Get all programs '''
         programs = []
         for path in os.environ.get('PATH', '/bin:/usr/bin').split(':'):
             programs.extend(misc.list_files(path))
         return sorted(programs)
 
     def open(self, svar):
+        ''' Open file/dir with associated program '''
         smime = misc.file_mime(svar)
         sprogram = self.get_program(smime)
         if sprogram:
@@ -270,6 +313,7 @@ class Mime(object):
             raise(Exception('Unregistered mime', smime))
 
     def register(self, smime, sprogram, sicon=''):
+        ''' Register MIME with program and icon '''
         if self.conf.has_section(smime):
             return
         self.read()
@@ -279,6 +323,7 @@ class Mime(object):
         self.write()
 
     def unregister(self, smime):
+        ''' Unregister MIME '''
         if not self.conf.has_section(smime):
             return
         self.read()
@@ -286,4 +331,3 @@ class Mime(object):
         self.conf.remove_option(smime, 'icon')
         self.conf.remove_section(smime)
         self.write()
-
