@@ -14,6 +14,7 @@ all:
 	make -C src/qpaste
 	make -C src/qproperties
 	make -C src/qresources
+	make -C src/qsession
 	make -C src/qsettings
 
 check:
@@ -36,6 +37,7 @@ install:
 	make -C src/qpaste install
 	make -C src/qproperties install
 	make -C src/qresources install
+	make -C src/qsession install
 	make -C src/qsettings install
 
 uninstall:
@@ -55,6 +57,7 @@ uninstall:
 	make -C src/qpaste uninstall
 	make -C src/qproperties uninstall
 	make -C src/qresources uninstall
+	make -C src/qsession uninstall
 	make -C src/qsettings uninstall
 
 clean:
@@ -71,6 +74,7 @@ clean:
 	make -C src/qpaste clean
 	make -C src/qproperties clean
 	make -C src/qresources clean
+	make -C src/qsession clean
 	make -C src/qsettings clean
 
 dist:
