@@ -14,9 +14,6 @@
 ## QSETTINGS ##
  * Maybe implement fonts outside of stylesheet
 
-## QSESSION ##
- * Implement auto-login
-
 ## LIBDESKTOP ##
  * Signal to session leader (QSession) via dbus to shutdown/reboot/suspend/logout?
 
