@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui
 import sys, os
 import libmisc
 misc = libmisc.Misc()
-import libqdesktop
+import libdesktop
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
@@ -13,8 +13,8 @@ MainWindow = QtGui.QMainWindow()
 ui = qpanel_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 
-config = libqdesktop.Config()
-general = libqdesktop.General()
+config = libdesktop.Config()
+general = libdesktop.General()
 icon = QtGui.QIcon()
 
 def run_preferences():
@@ -55,7 +55,7 @@ ui.menubar.hide()
 ui.MenuButton.clicked.connect(show_popup)
 
 # create dynamic menu
-menu = libqdesktop.Menu(app, ui.menuApplications)
+menu = libdesktop.Menu(app, ui.menuApplications)
 menu.build()
 
 # setup window

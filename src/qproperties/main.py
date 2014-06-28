@@ -3,7 +3,7 @@
 import qproperties_ui
 from PyQt4 import QtCore, QtGui
 import sys, os, pwd, grp, stat
-import libqdesktop
+import libdesktop
 import libmisc
 misc = libmisc.Misc()
 
@@ -18,7 +18,7 @@ for arg in sys.argv:
     if os.path.exists(arg):
         sfile = arg
 
-config = libqdesktop.Config()
+config = libdesktop.Config()
 info = QtCore.QFileInfo(sfile)
 date = QtCore.QDateTime()
 icon = QtGui.QIcon()

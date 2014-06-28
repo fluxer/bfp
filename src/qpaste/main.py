@@ -3,7 +3,7 @@
 import qpaste_ui
 from PyQt4 import QtGui
 import sys, os, shutil
-import libqdesktop
+import libdesktop
 import libmisc
 misc = libmisc.Misc()
 
@@ -18,8 +18,8 @@ if len(sys.argv) < 3:
     print('Not enough arguments')
     sys.exit(2)
 
-config = libqdesktop.Config()
-actions = libqdesktop.Actions(Dialog, app)
+config = libdesktop.Config()
+actions = libdesktop.Actions(Dialog, app)
 icon = QtGui.QIcon()
 
 def setLook():

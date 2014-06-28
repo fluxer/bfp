@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui
 import sys, os
 import libmisc
 misc = libmisc.Misc()
-import libqdesktop
+import libdesktop
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
@@ -14,8 +14,8 @@ ui = qedit_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 
 # some variables
-actions = libqdesktop.Actions(MainWindow, app)
-config = libqdesktop.Config()
+actions = libdesktop.Actions(MainWindow, app)
+config = libdesktop.Config()
 icon = QtGui.QIcon()
 
 def setLook():

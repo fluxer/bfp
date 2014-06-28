@@ -10,7 +10,7 @@ from PyQt4 import QtCore, QtGui
 import sys, os
 import libmisc
 misc = libmisc.Misc()
-import libqdesktop
+import libdesktop
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
@@ -19,8 +19,8 @@ ui = qsettings_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 icon = QtGui.QIcon()
 
-config = libqdesktop.Config()
-mime = libqdesktop.Mime()
+config = libdesktop.Config()
+mime = libdesktop.Mime()
 
 def setLook():
     config.read()

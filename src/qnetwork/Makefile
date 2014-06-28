@@ -2,7 +2,7 @@ include ../../Makefile.inc
 
 all: clean
 	$(PYUIC) qnetwork.ui -o qnetwork_ui.py
-	$(NUITKA) --recurse-to=libqdesktop --recurse-to=qnetwork_ui main.py
+	$(NUITKA) --recurse-to=libdesktop --recurse-to=qnetwork_ui main.py
 	$(STRIP) main.exe
 
 install:

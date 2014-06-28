@@ -6,8 +6,8 @@ all: clean
 	$(NUITKA) --module libmisc.py
 	$(NUITKA) --module libpackage.py
 	$(NUITKA) --module libsystem.py
-	$(NUITKA) --module libqdesktop.py
-	$(STRIP) libmagic.so libmessage.so libmisc.so libpackage.so libsystem.so libqdesktop.so
+	$(NUITKA) --module libdesktop.py
+	$(STRIP) libmagic.so libmessage.so libmisc.so libpackage.so libsystem.so libdesktop.so
 
 check:
 	python test.py
@@ -19,7 +19,7 @@ install:
 	$(INSTALL) -vm644 libmisc.so $(DESTDIR)$(SITEDIR)/libmisc.so
 	$(INSTALL) -vm644 libpackage.so $(DESTDIR)$(SITEDIR)/libpackage.so
 	$(INSTALL) -vm644 libsystem.so $(DESTDIR)$(SITEDIR)/libsystem.so
-	$(INSTALL) -vm644 libqdesktop.so $(DESTDIR)$(SITEDIR)/libqdesktop.so
+	$(INSTALL) -vm644 libdesktop.so $(DESTDIR)$(SITEDIR)/libdesktop.so
 
 uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libmagic.so
@@ -27,7 +27,7 @@ uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libmisc.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libpackage.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libsystem.so
-	$(RM) $(DESTDIR)$(SITEDIR)/libqdesktop.so
+	$(RM) $(DESTDIR)$(SITEDIR)/libdesktop.so
 
 clean:
 	$(RM) -r *.build/ *.so

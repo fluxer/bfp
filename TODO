@@ -17,8 +17,7 @@
 ## QSESSION ##
  * Implement auto-login
 
-## LIBQDESKTOP ##
- * Rename to libdesktop?
+## LIBDESKTOP ##
  * Signal to session leader (QSession) via dbus to shutdown/reboot/suspend/logout?
 
 ## ALL QT ##

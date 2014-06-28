@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui
 import sys, os
 import libmisc
 misc = libmisc.Misc()
-import libqdesktop
+import libdesktop
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
@@ -14,10 +14,10 @@ ui = qdesktop_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 
 # some variables
-config = libqdesktop.Config()
-mime = libqdesktop.Mime()
-actions = libqdesktop.Actions(MainWindow, app)
-general = libqdesktop.General()
+config = libdesktop.Config()
+mime = libdesktop.Mime()
+actions = libdesktop.Actions(MainWindow, app)
+general = libdesktop.General()
 icon = QtGui.QIcon()
 
 # setup desktop widget
@@ -222,7 +222,7 @@ MainWindow.setWindowFlags(QtCore.Qt.FramelessWindowHint | QtCore.Qt.SplashScreen
 MainWindow.setCentralWidget(ui.DesktopView)
 
 # create dynamic menu
-menu = libqdesktop.Menu(app, ui.menuApplications)
+menu = libdesktop.Menu(app, ui.menuApplications)
 menu.build()
 
 # run!

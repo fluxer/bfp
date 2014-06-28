@@ -3,7 +3,7 @@
 import qsession_ui
 from PyQt4 import QtCore, QtGui
 import sys, os, pwd, crypt
-import libmisc, libqdesktop
+import libmisc, libdesktop
 misc = libmisc.Misc()
 
 # prepare for lift-off
@@ -13,9 +13,9 @@ ui = qsession_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 
 # some variables
-config = libqdesktop.Config()
-menu = libqdesktop.Menu(app, ui.menuActions)
-general = libqdesktop.General()
+config = libdesktop.Config()
+menu = libdesktop.Menu(app, ui.menuActions)
+general = libdesktop.General()
 icon = QtGui.QIcon()
 
 def setLook():
