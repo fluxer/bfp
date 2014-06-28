@@ -1,4 +1,4 @@
-VERSION = 0.8.1
+VERSION = 0.8.2
 GIT_VERSION = $(shell git rev-parse --short HEAD || echo stable)
 
 DESTDIR = 
@@ -16,7 +16,7 @@ SITEDIR = $(PREFIX)/lib/python$(PYTHON_VERSION)/site-packages
 
 MACHINE = $(shell gcc -dumpmachine)
 ARCH = $(shell uname -m | sed 's|_|-|')
-JOBS = $(shell echo $$((`nproc`+1)))
+JOBS = $(shell echo $$((`nproc || echo 1`+1)))
 
 NUITKA = ../../nuitka/bin/nuitka --recurse-not-to=PyQt4
 INSTALL = install
