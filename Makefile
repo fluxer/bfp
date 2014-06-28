@@ -21,7 +21,7 @@ check:
 
 install:
 	make -C doc install
-#	make -C etc install
+	make -C etc install
 	make -C src/initfs install
 	make -C misc install
 	make -C scripts install
