@@ -22,7 +22,7 @@ class System(object):
         self.REBOOT_PRE = None
         self.SHUTDOWN_PRE = None
         self.SUSPEND_PRE = None
-        self.SUSPEND_DISK = 'platform'
+        self.SUSPEND_DISK = 'suspend'
         self.SUSPEND_STATE = 'mem'
         self.SUSPEND_POST = None
         self.BATTERY_LID = 'shutdown'
