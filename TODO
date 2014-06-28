@@ -14,11 +14,14 @@
 ## QSETTINGS ##
  * Allow applications to be selected from a preset of applications (ListBox)
 
+## QOPEN ##
+ * Write to support 'Open with...' action
+
 ## LIBDESKTOP ##
  * Signal to systemd to shutdown/reboot/suspend/logout?
 
 ## SYSTEMD ##
- * Write it! A daemon that controls power state (and mounting?)
+ * Write a daemon that controls power state (and mounting?)
 
 ## ALL QT ##
  * Use icons from theme
