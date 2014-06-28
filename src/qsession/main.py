@@ -18,9 +18,6 @@ menu = libqdesktop.Menu(app, ui.menuActions)
 general = libqdesktop.General()
 icon = QtGui.QIcon()
 
-# setup desktop widget
-os.chdir('/')
-
 def setLook():
     config.read()
     ssheet = '/etc/qdesktop/styles/' + config.GENERAL_STYLESHEET + '/style.qss'
@@ -54,10 +51,15 @@ def login():
 
     if crypt.crypt(password, cryptedpasswd) == cryptedpasswd:
         try:
+            home = pwd.getpwnam(username).pw_dir
             # os.setsid()
             os.setgid(pwd.getpwnam(username).pw_gid)
             os.setuid(pwd.getpwnam(username).pw_uid)
-            os.putenv('HOME', pwd.getpwnam(username).pw_dir)
+            os.putenv('HOME', home)
+            if os.path.isdir(home):
+                os.chdir(home)
+            else:
+                os.chdir('/')
             MainWindow.hide()
             os.system('xinit ' + desktop + ' -- :9')
         except Exception as detail:
@@ -79,7 +81,9 @@ def do_reboot():
 
 
 for p in pwd.getpwall():
-    ui.UserNameBox.addItem(p.pw_name)
+    # skip system users
+    if p.pw_uid == 0 or p.pw_uid > 999:
+        ui.UserNameBox.addItem(p.pw_name)
 
 for x in ('startfluxbox', 'startkde'):
     b = misc.whereis(x, fallback=False)
@@ -101,5 +105,6 @@ d = QtGui.QDesktopWidget().screenGeometry(MainWindow)
 ui.frame.move((d.width()/2)-165, (d.height()/2)-120)
 
 # run!
+os.chdir('/')
 MainWindow.showMaximized()
 sys.exit(app.exec_())
