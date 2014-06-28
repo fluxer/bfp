@@ -185,11 +185,9 @@ class System(object):
         ''' Put system in sleep state '''
         message.sub_info('Suspending system...')
         if not misc.file_search(self.SUSPEND_DISK, '/sys/power/disk'):
-            message.sub_critical('Unsupported disk mode', self.SUSPEND_DISK)
-            return
+            raise(Exception('Unsupported disk mode', self.SUSPEND_DISK))
         elif not misc.file_search(self.SUSPEND_STATE, '/sys/power/state'):
-            message.sub_critical('Unsupported state mode', self.SUSPEND_STATE)
-            return
+            raise(Exception('Unsupported state mode', self.SUSPEND_STATE))
 
         self.pre_actions(self.SUSPEND_PRE)
         misc.file_write('/sys/power/disk', self.SUSPEND_DISK)
