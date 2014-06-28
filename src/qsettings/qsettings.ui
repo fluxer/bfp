@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>542</width>
-    <height>470</height>
+    <height>453</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -28,9 +28,13 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="tab">
+     <attribute name="icon">
+      <iconset resource="../qresources/libqresources.qrc">
+       <normaloff>:/share/qresources/resources/file-manager.svg</normaloff>:/share/qresources/resources/file-manager.svg</iconset>
+     </attribute>
      <attribute name="title">
       <string>File associations</string>
      </attribute>
@@ -40,7 +44,7 @@
         <x>10</x>
         <y>10</y>
         <width>236</width>
-        <height>331</height>
+        <height>316</height>
        </rect>
       </property>
      </widget>
@@ -50,7 +54,7 @@
         <x>260</x>
         <y>10</y>
         <width>241</width>
-        <height>331</height>
+        <height>316</height>
        </rect>
       </property>
      </widget>
@@ -58,7 +62,7 @@
       <property name="geometry">
        <rect>
         <x>350</x>
-        <y>350</y>
+        <y>340</y>
         <width>151</width>
         <height>31</height>
        </rect>
@@ -75,7 +79,7 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>350</y>
+        <y>340</y>
         <width>151</width>
         <height>31</height>
        </rect>
@@ -92,7 +96,7 @@
       <property name="geometry">
        <rect>
         <x>180</x>
-        <y>350</y>
+        <y>340</y>
         <width>151</width>
         <height>31</height>
        </rect>
@@ -107,6 +111,10 @@
      </widget>
     </widget>
     <widget class="QWidget" name="tab_3">
+     <attribute name="icon">
+      <iconset resource="../qresources/libqresources.qrc">
+       <normaloff>:/share/qresources/resources/gnome-mime-image.svg</normaloff>:/share/qresources/resources/gnome-mime-image.svg</iconset>
+     </attribute>
      <attribute name="title">
       <string>Wallpaper</string>
      </attribute>
@@ -116,7 +124,7 @@
         <x>10</x>
         <y>10</y>
         <width>491</width>
-        <height>321</height>
+        <height>316</height>
        </rect>
       </property>
      </widget>
@@ -124,7 +132,7 @@
       <property name="geometry">
        <rect>
         <x>40</x>
-        <y>345</y>
+        <y>340</y>
         <width>101</width>
         <height>31</height>
        </rect>
@@ -141,8 +149,8 @@
       <property name="geometry">
        <rect>
         <x>370</x>
-        <y>350</y>
-        <width>75</width>
+        <y>345</y>
+        <width>96</width>
         <height>24</height>
        </rect>
       </property>
@@ -171,7 +179,7 @@
       <property name="geometry">
        <rect>
         <x>290</x>
-        <y>350</y>
+        <y>345</y>
         <width>71</width>
         <height>26</height>
        </rect>
@@ -184,7 +192,7 @@
       <property name="geometry">
        <rect>
         <x>155</x>
-        <y>345</y>
+        <y>340</y>
         <width>101</width>
         <height>31</height>
        </rect>
@@ -199,130 +207,31 @@
      </widget>
     </widget>
     <widget class="QWidget" name="tab_2">
-     <attribute name="title">
-      <string>Misc</string>
+     <attribute name="icon">
+      <iconset resource="../qresources/libqresources.qrc">
+       <normaloff>:/share/qresources/resources/preferences-desktop-theme.svg</normaloff>:/share/qresources/resources/preferences-desktop-theme.svg</iconset>
      </attribute>
-     <widget class="QGroupBox" name="groupBox">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>165</y>
-        <width>501</width>
-        <height>146</height>
-       </rect>
-      </property>
-      <property name="title">
-       <string> Applications </string>
-      </property>
-      <widget class="QPushButton" name="TerminalButton">
-       <property name="geometry">
-        <rect>
-         <x>15</x>
-         <y>20</y>
-         <width>136</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Terminal</string>
-       </property>
-       <property name="icon">
-        <iconset resource="../qresources/libqresources.qrc">
-         <normaloff>:/share/qresources/resources/utilities-terminal.svg</normaloff>:/share/qresources/resources/utilities-terminal.svg</iconset>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="FileManagerButton">
-       <property name="geometry">
-        <rect>
-         <x>15</x>
-         <y>60</y>
-         <width>136</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>File Manager</string>
-       </property>
-       <property name="icon">
-        <iconset resource="../qresources/libqresources.qrc">
-         <normaloff>:/share/qresources/resources/file-manager.svg</normaloff>:/share/qresources/resources/file-manager.svg</iconset>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="FileManagerEdit">
-       <property name="geometry">
-        <rect>
-         <x>165</x>
-         <y>60</y>
-         <width>321</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="WebBrowserButton">
-       <property name="geometry">
-        <rect>
-         <x>15</x>
-         <y>100</y>
-         <width>136</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Web Browser</string>
-       </property>
-       <property name="icon">
-        <iconset resource="../qresources/libqresources.qrc">
-         <normaloff>:/share/qresources/resources/web-browser.svg</normaloff>:/share/qresources/resources/web-browser.svg</iconset>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="TerminalEdit">
-       <property name="geometry">
-        <rect>
-         <x>165</x>
-         <y>20</y>
-         <width>321</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="WebBrowserEdit">
-       <property name="geometry">
-        <rect>
-         <x>165</x>
-         <y>100</y>
-         <width>321</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-     </widget>
+     <attribute name="title">
+      <string>Appearance</string>
+     </attribute>
      <widget class="QGroupBox" name="groupBox_2">
       <property name="geometry">
        <rect>
         <x>10</x>
         <y>10</y>
-        <width>501</width>
+        <width>496</width>
         <height>146</height>
        </rect>
       </property>
       <property name="title">
-       <string> Appearance</string>
+       <string> Style </string>
       </property>
       <widget class="QLineEdit" name="MenuEdit">
        <property name="geometry">
         <rect>
          <x>165</x>
          <y>100</y>
-         <width>321</width>
+         <width>316</width>
          <height>31</height>
         </rect>
        </property>
@@ -352,7 +261,7 @@
         <rect>
          <x>165</x>
          <y>20</y>
-         <width>321</width>
+         <width>316</width>
          <height>26</height>
         </rect>
        </property>
@@ -367,7 +276,7 @@
         <rect>
          <x>165</x>
          <y>60</y>
-         <width>321</width>
+         <width>316</width>
          <height>26</height>
         </rect>
        </property>
@@ -413,6 +322,417 @@
        </property>
       </widget>
      </widget>
+     <widget class="QGroupBox" name="groupBox">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>165</y>
+        <width>496</width>
+        <height>146</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string> Applications </string>
+      </property>
+      <widget class="QPushButton" name="TerminalButton">
+       <property name="geometry">
+        <rect>
+         <x>15</x>
+         <y>20</y>
+         <width>136</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Terminal</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../qresources/libqresources.qrc">
+         <normaloff>:/share/qresources/resources/utilities-terminal.svg</normaloff>:/share/qresources/resources/utilities-terminal.svg</iconset>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="FileManagerButton">
+       <property name="geometry">
+        <rect>
+         <x>15</x>
+         <y>60</y>
+         <width>136</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>File Manager</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../qresources/libqresources.qrc">
+         <normaloff>:/share/qresources/resources/file-manager.svg</normaloff>:/share/qresources/resources/file-manager.svg</iconset>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="FileManagerEdit">
+       <property name="geometry">
+        <rect>
+         <x>165</x>
+         <y>60</y>
+         <width>316</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QPushButton" name="WebBrowserButton">
+       <property name="geometry">
+        <rect>
+         <x>15</x>
+         <y>100</y>
+         <width>136</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Web Browser</string>
+       </property>
+       <property name="icon">
+        <iconset resource="../qresources/libqresources.qrc">
+         <normaloff>:/share/qresources/resources/web-browser.svg</normaloff>:/share/qresources/resources/web-browser.svg</iconset>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="TerminalEdit">
+       <property name="geometry">
+        <rect>
+         <x>165</x>
+         <y>20</y>
+         <width>316</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+      <widget class="QLineEdit" name="WebBrowserEdit">
+       <property name="geometry">
+        <rect>
+         <x>165</x>
+         <y>100</y>
+         <width>316</width>
+         <height>31</height>
+        </rect>
+       </property>
+       <property name="readOnly">
+        <bool>true</bool>
+       </property>
+      </widget>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="tab_4">
+     <attribute name="icon">
+      <iconset resource="../qresources/libqresources.qrc">
+       <normaloff>:/share/qresources/resources/exit.svg</normaloff>:/share/qresources/resources/exit.svg</iconset>
+     </attribute>
+     <attribute name="title">
+      <string>Power</string>
+     </attribute>
+     <widget class="QGroupBox" name="groupBox_3">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>10</y>
+        <width>496</width>
+        <height>101</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string> Suspend </string>
+      </property>
+      <widget class="QComboBox" name="StyleBox_2">
+       <property name="geometry">
+        <rect>
+         <x>165</x>
+         <y>20</y>
+         <width>316</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <item>
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+      </widget>
+      <widget class="QComboBox" name="IconThemeBox_2">
+       <property name="geometry">
+        <rect>
+         <x>165</x>
+         <y>60</y>
+         <width>316</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <item>
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+      </widget>
+      <widget class="QLabel" name="label_4">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>25</y>
+         <width>126</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Disk mode</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_5">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>60</y>
+         <width>126</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
+       <property name="text">
+        <string>System state</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_4">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>120</y>
+        <width>496</width>
+        <height>61</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string> CPUs </string>
+      </property>
+      <widget class="QComboBox" name="StyleBox_3">
+       <property name="geometry">
+        <rect>
+         <x>165</x>
+         <y>20</y>
+         <width>316</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <item>
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+      </widget>
+      <widget class="QLabel" name="label_6">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>25</y>
+         <width>126</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Governor</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </widget>
+     <widget class="QGroupBox" name="groupBox_5">
+      <property name="geometry">
+       <rect>
+        <x>10</x>
+        <y>190</y>
+        <width>496</width>
+        <height>181</height>
+       </rect>
+      </property>
+      <property name="title">
+       <string> Actions </string>
+      </property>
+      <widget class="QComboBox" name="StyleBox_4">
+       <property name="geometry">
+        <rect>
+         <x>165</x>
+         <y>20</y>
+         <width>316</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <item>
+        <property name="text">
+         <string>Nothing</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Suspend</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Shutdown</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QLabel" name="label_7">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>25</y>
+         <width>126</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Lid close (power)</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="StyleBox_5">
+       <property name="geometry">
+        <rect>
+         <x>165</x>
+         <y>60</y>
+         <width>316</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <item>
+        <property name="text">
+         <string>Nothing</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Suspend</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Shutdown</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QLabel" name="label_8">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>65</y>
+         <width>126</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Lid close (battery)</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="StyleBox_6">
+       <property name="geometry">
+        <rect>
+         <x>165</x>
+         <y>100</y>
+         <width>316</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <item>
+        <property name="text">
+         <string>Nothing</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Suspend</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Shutdown</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QLabel" name="label_9">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>105</y>
+         <width>126</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Low battery (power)</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="StyleBox_7">
+       <property name="geometry">
+        <rect>
+         <x>165</x>
+         <y>140</y>
+         <width>316</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <item>
+        <property name="text">
+         <string>Nothing</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Suspend</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>Shutdown</string>
+        </property>
+       </item>
+      </widget>
+      <widget class="QLabel" name="label_10">
+       <property name="geometry">
+        <rect>
+         <x>20</x>
+         <y>145</y>
+         <width>126</width>
+         <height>21</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Low battery (battry)</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+     </widget>
     </widget>
    </widget>
   </widget>
@@ -422,7 +742,7 @@
      <x>0</x>
      <y>0</y>
      <width>542</width>
-     <height>18</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMain">
@@ -440,7 +760,6 @@
    <addaction name="menuMain"/>
    <addaction name="menuHelp"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="actionQuit">
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
