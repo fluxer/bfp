@@ -29,21 +29,30 @@ class General(object):
             'Are you sure you want to suspend the system?', \
             QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
         if reply == QtGui.QMessageBox.Yes:
-            system.do_suspend()
+            try:
+                system.do_suspend()
+            except Exception as detail:
+                QtGui.QMessageBox.critical(window, 'Error', str(detail))
 
     def system_shutdown(self, window):
         reply = QtGui.QMessageBox.question(window, 'Shutdown', \
             'Are you sure you want to shutdown the system?', \
             QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
         if reply == QtGui.QMessageBox.Yes:
-            system.do_shutdown()
+            try:
+                system.do_shutdown()
+            except Exception as detail:
+                QtGui.QMessageBox.critical(window, 'Error', str(detail))
 
     def system_reboot(self, window):
         reply = QtGui.QMessageBox.question(window, 'Reboot', \
             'Are you sure you want to reboot the system?', \
             QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
         if reply == QtGui.QMessageBox.Yes:
-            system.do_reboot()
+            try:
+                system.do_reboot()
+            except Exception as detail:
+                QtGui.QMessageBox.critical(window, 'Error', str(detail))
 
 general = General()
 
