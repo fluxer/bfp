@@ -37,10 +37,14 @@ def setWallpaper():
         MainWindow.setStyleSheet("background-color: " + config.WALLPAPER_COLOR + ";")
 # setWallpaper()
 
-def login():
+def login(autologin=None):
     username = str(ui.UserNameBox.currentText())
     password = str(ui.PasswordEdit.text())
     desktop = str(ui.DesktopBox.currentText())
+    if autologin:
+        username = autologin
+        # asume that `startx` is present
+        desktop = misc.whereis('startx', fallback=False)
 
     cryptedpasswd = pwd.getpwnam(username).pw_passwd
     if cryptedpasswd == 'x' or cryptedpasswd == '*':
@@ -49,7 +53,7 @@ def login():
         ui.PasswordEdit.clear()
         return
 
-    if crypt.crypt(password, cryptedpasswd) == cryptedpasswd:
+    if autologin or crypt.crypt(password, cryptedpasswd) == cryptedpasswd:
         try:
             home = pwd.getpwnam(username).pw_dir
             # os.setsid()
@@ -79,14 +83,19 @@ def do_shutdown():
 def do_reboot():
     general.system_reboot(MainWindow)
 
-
+autologin = False
 for p in pwd.getpwall():
     # skip system users
     if p.pw_uid == 0 or p.pw_uid > 999:
         ui.UserNameBox.addItem(p.pw_name)
+        for arg in sys.argv[1:]:
+            if arg == p.pw_name:
+                autologin = p.pw_name
+if autologin:
+    login(p.pw_name)
 
 # FIXME: add many, many more
-for x in ('startfluxbox', 'startkde' 'startx'):
+for x in ('startfluxbox', 'startkde' 'startlxde' 'startlxqt' 'startx'):
     b = misc.whereis(x, fallback=False)
     if b:
         ui.DesktopBox.addItem(b)
