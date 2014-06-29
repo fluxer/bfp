@@ -225,8 +225,8 @@ MainWindow.setCentralWidget(ui.DesktopView)
 menu = libdesktop.Menu(app, ui.menuApplications)
 menu.build()
 
-# watch config for changes
-def reload_config():
+# watch configs for changes
+def reload_desktop():
     global config, mime
     reload(libdesktop)
     config = libdesktop.Config()
@@ -237,8 +237,8 @@ def reload_config():
     setWallpaper()
 
 watcher = QtCore.QFileSystemWatcher()
-watcher.addPath(config.settings.fileName())
-watcher.fileChanged.connect(reload_config)
+watcher.addPaths((config.settings.fileName(), mime.settings.fileName()))
+watcher.fileChanged.connect(reload_desktop)
 
 # run!
 MainWindow.showMaximized()

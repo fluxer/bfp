@@ -225,6 +225,18 @@ for device in os.listdir('/sys/class/block'):
         MainWindow.connect(e, QtCore.SIGNAL('triggered()'), lambda device=device: mount_device(device))
 #ui.MountsWidget.sortItems()
 
+# watch configs for changes
+def reload_desktop():
+    global config, mime
+    reload(libdesktop)
+    config = libdesktop.Config()
+    mime = libdesktop.Mime()
+    setLook()
+
+watcher = QtCore.QFileSystemWatcher()
+watcher.addPaths((config.settings.fileName(), mime.settings.fileName()))
+watcher.fileChanged.connect(reload_desktop)
+
 # run!
 MainWindow.show()
 sys.exit(app.exec_())
