@@ -2,7 +2,7 @@ include ../../Makefile.inc
 
 all: clean
 	$(PYUIC) qsettings.ui -o qsettings_ui.py
-	$(NUITKA) --recurse-to=libdesktop --recurse-to=qsettings_ui main.py
+	$(NUITKA) --recurse-to=qsettings_ui main.py
 	$(STRIP) main.exe
 
 install:

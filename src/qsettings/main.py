@@ -1,10 +1,5 @@
 #!/bin/python2
 
-# This is only needed for Python v2 but is harmless for Python v3.
-import sip
-sip.setapi('QString', 2)
-sip.setapi('QVariant', 2)
-
 import qsettings_ui
 from PyQt4 import QtCore, QtGui
 import sys, os
@@ -101,7 +96,7 @@ def unregisterMime():
     if not smime:
         return
 
-    mime.unregister(QtCore.QModelIndex(smime[0]).data())
+    mime.unregister(QtCore.QModelIndex(smime[0]).data().toString())
     ui.MimesView.clear()
     ui.MimesView.addItems(mime.get_mimes())
 
@@ -115,7 +110,7 @@ def registerMime():
     if not sprogram:
         return
 
-    mime.register(smime, QtCore.QModelIndex(sprogram[0]).data())
+    mime.register(smime, QtCore.QModelIndex(sprogram[0]).data().toString())
     ui.MimesView.addItem(smime)
 
 def setMime():
@@ -134,7 +129,6 @@ def selectMime():
         return
 
     smime = mime.get_mime(QtCore.QModelIndex(sprogram[0]).data())
-    print smime
     index = ui.MimesView.findText(smime)
     ui.MimesView.setCurrentIndex(index)
 
@@ -144,9 +138,24 @@ def selectProgram():
         return
 
     sprogram = mime.get_program(QtCore.QModelIndex(smime[0]).data())
-    print sprogram
     index = ui.MimesView.findText(sprogram)
     ui.MimesView.setCurrentIndex(index)
+
+def setDisk():
+    svalue = str(ui.DiskBox.currentText())
+    config.write('suspend/disk', svalue)
+
+def setState():
+    svalue = str(ui.StateBox.currentText())
+    config.write('suspend/state', svalue)
+
+def setGovernorPower():
+    svalue = str(ui.GovernorPowerBox.currentText())
+    config.write('cpu/power', svalue)
+
+def setGovernorBattery():
+    svalue = str(ui.GovernorBatteryBox.currentText())
+    config.write('cpu/battery', svalue)
 
 # connect widgets to actions
 ui.actionQuit.triggered.connect(sys.exit)
@@ -165,6 +174,10 @@ ui.RegisterButton.clicked.connect(registerMime)
 ui.AssociateButton.clicked.connect(setMime)
 ui.MimesView.currentItemChanged.connect(selectProgram)
 ui.ProgramsView.currentItemChanged.connect(selectMime)
+ui.DiskBox.currentIndexChanged.connect(setDisk)
+ui.StateBox.currentIndexChanged.connect(setState)
+ui.GovernorPowerBox.currentIndexChanged.connect(setGovernorPower)
+ui.GovernorBatteryBox.currentIndexChanged.connect(setGovernorBattery)
 
 # setup values of widgets
 for svar in misc.list_dirs('/etc/qdesktop/styles'):
