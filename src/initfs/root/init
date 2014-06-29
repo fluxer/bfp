@@ -46,7 +46,7 @@ init="/sbin/init"
 for arg in $(cat /proc/cmdline);do
     case "$arg" in
         hooks=*) hooks="${arg##*=}"
-                 hooks="${hooks//, /}" ;;
+                 hooks="${hooks//,/ }" ;;
         init=*) init="${arg##*=}" ;;
         root=*) root_device="${arg##*=}" ;;
         shell) rescue_shell ;;
