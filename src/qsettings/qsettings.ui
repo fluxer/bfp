@@ -28,7 +28,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="icon">
@@ -518,7 +518,7 @@
         <x>10</x>
         <y>120</y>
         <width>496</width>
-        <height>61</height>
+        <height>86</height>
        </rect>
       </property>
       <property name="title">
@@ -527,9 +527,9 @@
       <widget class="QComboBox" name="StyleBox_3">
        <property name="geometry">
         <rect>
-         <x>165</x>
-         <y>20</y>
-         <width>316</width>
+         <x>15</x>
+         <y>45</y>
+         <width>226</width>
          <height>26</height>
         </rect>
        </property>
@@ -543,13 +543,44 @@
        <property name="geometry">
         <rect>
          <x>20</x>
-         <y>25</y>
-         <width>126</width>
-         <height>21</height>
+         <y>20</y>
+         <width>216</width>
+         <height>26</height>
         </rect>
        </property>
        <property name="text">
-        <string>Governor</string>
+        <string>Governor (power)</string>
+       </property>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="StyleBox_8">
+       <property name="geometry">
+        <rect>
+         <x>255</x>
+         <y>45</y>
+         <width>226</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <item>
+        <property name="text">
+         <string/>
+        </property>
+       </item>
+      </widget>
+      <widget class="QLabel" name="label_11">
+       <property name="geometry">
+        <rect>
+         <x>255</x>
+         <y>20</y>
+         <width>221</width>
+         <height>26</height>
+        </rect>
+       </property>
+       <property name="text">
+        <string>Governor (battery)</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
@@ -560,9 +591,9 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>190</y>
+        <y>215</y>
         <width>496</width>
-        <height>181</height>
+        <height>156</height>
        </rect>
       </property>
       <property name="title">
@@ -571,9 +602,9 @@
       <widget class="QComboBox" name="StyleBox_4">
        <property name="geometry">
         <rect>
-         <x>165</x>
-         <y>20</y>
-         <width>316</width>
+         <x>15</x>
+         <y>45</y>
+         <width>226</width>
          <height>26</height>
         </rect>
        </property>
@@ -596,9 +627,9 @@
       <widget class="QLabel" name="label_7">
        <property name="geometry">
         <rect>
-         <x>20</x>
+         <x>15</x>
          <y>20</y>
-         <width>126</width>
+         <width>221</width>
          <height>26</height>
         </rect>
        </property>
@@ -612,9 +643,9 @@
       <widget class="QComboBox" name="StyleBox_5">
        <property name="geometry">
         <rect>
-         <x>165</x>
-         <y>60</y>
-         <width>316</width>
+         <x>255</x>
+         <y>45</y>
+         <width>226</width>
          <height>26</height>
         </rect>
        </property>
@@ -637,9 +668,9 @@
       <widget class="QLabel" name="label_8">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>60</y>
-         <width>126</width>
+         <x>255</x>
+         <y>20</y>
+         <width>221</width>
          <height>26</height>
         </rect>
        </property>
@@ -653,9 +684,9 @@
       <widget class="QComboBox" name="StyleBox_6">
        <property name="geometry">
         <rect>
-         <x>165</x>
-         <y>100</y>
-         <width>316</width>
+         <x>15</x>
+         <y>115</y>
+         <width>226</width>
          <height>26</height>
         </rect>
        </property>
@@ -678,9 +709,9 @@
       <widget class="QLabel" name="label_9">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>100</y>
-         <width>126</width>
+         <x>15</x>
+         <y>90</y>
+         <width>221</width>
          <height>26</height>
         </rect>
        </property>
@@ -694,9 +725,9 @@
       <widget class="QComboBox" name="StyleBox_7">
        <property name="geometry">
         <rect>
-         <x>165</x>
-         <y>140</y>
-         <width>316</width>
+         <x>255</x>
+         <y>115</y>
+         <width>226</width>
          <height>26</height>
         </rect>
        </property>
@@ -719,14 +750,14 @@
       <widget class="QLabel" name="label_10">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>140</y>
-         <width>126</width>
+         <x>255</x>
+         <y>90</y>
+         <width>221</width>
          <height>26</height>
         </rect>
        </property>
        <property name="text">
-        <string>Low battery (battry)</string>
+        <string>Low battery (battery)</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>
