@@ -3,10 +3,7 @@
 import qfile_ui
 from PyQt4 import QtCore, QtGui
 import sys, os
-import libmisc
-misc = libmisc.Misc()
-import libdesktop
-import libsystem
+import libmisc, libdesktop, libsystem
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
@@ -19,6 +16,7 @@ model = QtGui.QFileSystemModel()
 actions = libdesktop.Actions(MainWindow, app)
 config = libdesktop.Config()
 mime = libdesktop.Mime()
+misc = libmisc.Misc()
 system = libsystem.System()
 icon = QtGui.QIcon()
 
@@ -34,6 +32,7 @@ setLook()
 
 def disable_actions():
     ui.actionOpen.setEnabled(False)
+    ui.actionOpenWith.setEnabled(False)
     ui.actionRename.setEnabled(False)
     ui.actionCut.setEnabled(False)
     ui.actionCopy.setEnabled(False)
@@ -48,6 +47,12 @@ def open_file():
     for sfile in ui.ViewWidget.selectedIndexes():
         sfile = str(model.filePath(sfile))
         mime.open(sfile)
+
+def open_file_with():
+    selected_items = []
+    for svar in ui.ViewWidget.selectedIndexes():
+        selected_items.append(str(model.filePath(svar)))
+    actions.open_items(selected_items)
 
 def change_directory(path=ui.ViewWidget.selectedIndexes()):
     if not isinstance(path, QtCore.QString) and not isinstance(path, str):
@@ -172,6 +177,7 @@ def enable_actions():
             ui.actionDelete.setEnabled(True)
         if os.access(sfile, os.R_OK):
             ui.actionOpen.setEnabled(True)
+            ui.actionOpenWith.setEnabled(True)
             ui.actionCopy.setEnabled(True)
         ui.actionProperties.setEnabled(True)
     else:
@@ -183,6 +189,7 @@ ui.actionIcons.triggered.connect(change_view_icons)
 ui.actionList.triggered.connect(change_view_list)
 ui.actionViewHidden.triggered.connect(change_view_hidden)
 ui.actionOpen.triggered.connect(open_file)
+ui.actionOpenWith.triggered.connect(open_file_with)
 ui.actionRename.triggered.connect(rename_directory)
 ui.actionCut.triggered.connect(cut_directory)
 ui.actionCopy.triggered.connect(copy_directory)

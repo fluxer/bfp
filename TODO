@@ -33,3 +33,4 @@
 
 ## ALL ##
  * Run PyLint and do some kung-foo on the code style
+ * Make use of sys.prefix and use less hardcode paths

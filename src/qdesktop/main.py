@@ -58,8 +58,15 @@ def open_file():
         sfile = str(model.filePath(sfile))
         mime.open(sfile)
 
+def open_file_with():
+    selected_items = []
+    for svar in ui.DesktopView.selectedIndexes():
+        selected_items.append(str(model.filePath(svar)))
+    actions.open_items(selected_items)
+
 def disable_actions():
     ui.actionOpen.setEnabled(False)
+    ui.actionOpenWith.setEnabled(False)
     ui.actionRename.setEnabled(False)
     ui.actionCut.setEnabled(False)
     ui.actionCopy.setEnabled(False)
@@ -85,6 +92,7 @@ def enable_actions():
             ui.actionDelete.setEnabled(True)
         if os.access(sfile, os.R_OK):
             ui.actionOpen.setEnabled(True)
+            ui.actionOpenWith.setEnabled(True)
             ui.actionCopy.setEnabled(True)
         ui.actionProperties.setEnabled(True)
     else:
@@ -196,6 +204,7 @@ ui.menubar.hide()
 # FIXME: open directory on enter
 ui.DesktopView.doubleClicked.connect(change_directory)
 ui.actionOpen.triggered.connect(open_file)
+ui.actionOpenWith.triggered.connect(open_file_with)
 ui.actionRename.triggered.connect(rename_directory)
 ui.actionCut.triggered.connect(cut_directory)
 ui.actionCopy.triggered.connect(copy_directory)

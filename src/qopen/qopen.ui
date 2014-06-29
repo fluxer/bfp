@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Dialog</class>
+ <widget class="QDialog" name="Dialog">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>279</width>
+    <height>90</height>
+   </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>279</width>
+    <height>90</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>279</width>
+    <height>90</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>QOpen</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../qresources/libqresources.qrc">
+    <normaloff>:/share/qresources/resources/file-manager.svg</normaloff>:/share/qresources/resources/file-manager.svg</iconset>
+  </property>
+  <widget class="QComboBox" name="programBox">
+   <property name="geometry">
+    <rect>
+     <x>10</x>
+     <y>15</y>
+     <width>261</width>
+     <height>24</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="okButton">
+   <property name="geometry">
+    <rect>
+     <x>30</x>
+     <y>50</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>OK</string>
+   </property>
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/system-run.svg</normaloff>:/share/qresources/resources/system-run.svg</iconset>
+   </property>
+  </widget>
+  <widget class="QPushButton" name="cancelButton">
+   <property name="geometry">
+    <rect>
+     <x>160</x>
+     <y>50</y>
+     <width>91</width>
+     <height>31</height>
+    </rect>
+   </property>
+   <property name="text">
+    <string>Cancel</string>
+   </property>
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/editdelete.svg</normaloff>:/share/qresources/resources/editdelete.svg</iconset>
+   </property>
+  </widget>
+ </widget>
+ <resources>
+  <include location="../qresources/libqresources.qrc"/>
+ </resources>
+ <connections/>
+ <designerdata>
+  <property name="gridDeltaX">
+   <number>5</number>
+  </property>
+  <property name="gridDeltaY">
+   <number>5</number>
+  </property>
+  <property name="gridSnapX">
+   <bool>true</bool>
+  </property>
+  <property name="gridSnapY">
+   <bool>true</bool>
+  </property>
+  <property name="gridVisible">
+   <bool>true</bool>
+  </property>
+ </designerdata>
+</ui>

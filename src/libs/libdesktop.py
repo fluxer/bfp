@@ -98,7 +98,7 @@ class Menu(object):
         self.widget = widget
         self.xdg = xdg.Menu
 
-    def execute_desktop(self, sfile):
+    def execute_desktop(self, sfile, args=None):
         ''' Execute program from .desktop file '''
         x = self.xdg.MenuEntry(sfile)
         tryExec = x.DesktopEntry.getTryExec()
@@ -110,7 +110,8 @@ class Menu(object):
         if tryExec and not tryExec == Exec:
             general.execute_program(tryExec, False, True)
         # if it gets here fire up the program
-        general.execute_program(Exec)
+        print(Exec +' ' + args)
+        general.execute_program(Exec + ' ' + args)
 
     def dynamic_menu(self, menu, depth=0, widget=None):
         ''' Setup dynamic applications menu '''
@@ -121,6 +122,7 @@ class Menu(object):
             if isinstance(entry, self.xdg.Menu):
                 # FIXME: it seems that on elementary-usu category icons begin with "applications-",
                 #              is that by the specs??
+                # FIXME: support translated entries
                 dicon = xdg.IconTheme.getIconPath('applications-' + str(entry).lower())
                 if dicon:
                     self.dynamic_menu(entry, depth, widget.addMenu(QtGui.QIcon(dicon), str(entry)))
@@ -135,8 +137,8 @@ class Menu(object):
                     e = widget.addAction(name)
                 widget.connect(e, QtCore.SIGNAL('triggered()'), \
                     lambda sfile=entry.DesktopEntry.getFileName(): self.execute_desktop(sfile))
-            #elif isinstance(entry, self.xdg.Separator):
-            #    self.widget.addSeparator()
+            elif isinstance(entry, self.xdg.Separator):
+                self.widget.addSeparator()
             #elif isinstance(entry, self.xdg.Header):
             #    pass
         depth -= 1
@@ -173,6 +175,9 @@ class Actions(object):
                 return self.check_exists(sfile)
         elif not ok:
             return
+
+    def open_items(self, variant):
+        general.execute_program('qopen ' + misc.string_convert(variant))
 
     def rename_items(self, variant):
         general.execute_program('qpaste --rename ' + misc.string_convert(variant))

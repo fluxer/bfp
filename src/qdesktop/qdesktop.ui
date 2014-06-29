@@ -59,7 +59,7 @@
      <x>0</x>
      <y>0</y>
      <width>445</width>
-     <height>18</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuActions">
@@ -98,6 +98,7 @@
        <normaloff>:/share/qresources/resources/gtk-edit.svg</normaloff>:/share/qresources/resources/gtk-edit.svg</iconset>
      </property>
      <addaction name="actionOpen"/>
+     <addaction name="actionOpenWith"/>
      <addaction name="separator"/>
      <addaction name="actionCut"/>
      <addaction name="actionCopy"/>
@@ -361,6 +362,15 @@
    </property>
    <property name="text">
     <string>Suspend</string>
+   </property>
+  </action>
+  <action name="actionOpenWith">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/file-manager.svg</normaloff>:/share/qresources/resources/file-manager.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Open with</string>
    </property>
   </action>
  </widget>
