@@ -20,18 +20,11 @@ class System(object):
         self.SUSPEND_DISK = 'suspend'
         self.SUSPEND_STATE = 'mem'
         self.SUSPEND_POST = None
-        self.BATTERY_LID = 'shutdown'
-        self.BATTERY_CPU = 'ondemand'
-        self.BATTERY_BACKLIGHT = '15'
-        self.BATTERY_LOW = 'suspend'
-        self.POWER_LID = 'suspend'
-        self.POWER_CPU = 'performance'
-        self.POWER_BACKLIGHT = '15'
 
         # changed depending on power state
-        self.LID_VALUE = self.POWER_LID
-        self.CPU_VALUE = self.POWER_CPU
-        self.BACKLIGHT_VALUE = self.POWER_BACKLIGHT
+        self.LID_VALUE = 'suspend'
+        self.CPU_VALUE = 'performance'
+        self.BACKLIGHT_VALUE =  '15'
 
     def get_batteries(self):
         ''' Get battery devices '''
