@@ -15,13 +15,19 @@ class General(object):
         # FIXME: set stylesheet and icon theme
         pass
 
-    def execute_program(self, sprogram):
+    def execute_program(self, sprogram, sdetached=True, skill=False):
         ''' Execute program from PATH '''
         p = QtCore.QProcess()
-        if not p.startDetached(sprogram):
+        if sdetached:
+            p.startDetached(sprogram)
+        else:
+            p.start(sprogram)
+        if p.exitCode() > 0:
             p.close()
             raise(Exception(p.errorString()))
         else:
+            if skill:
+                p.kill()
             p.close()
 
     def system_suspend(self, window):
@@ -102,7 +108,7 @@ class Menu(object):
 
         # if TryExec is set in .desktop execute it first
         if tryExec and not tryExec == Exec:
-            general.execute_program(tryExec)
+            general.execute_program(tryExec, False, True)
         # if it gets here fire up the program
         general.execute_program(Exec)
 

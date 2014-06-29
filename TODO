@@ -20,6 +20,10 @@
 ## LIBDESKTOP ##
  * Signal to systemd to shutdown/reboot/suspend/logout?
 
+## LIBSYSTEM ##
+ * Add method to get supported suspend disk/state modes
+ * Add method to get supported CPU governors
+
 ## SYSTEMD ##
  * Write a daemon that controls power state (and mounting?)
 
