@@ -98,7 +98,7 @@ class Menu(object):
         self.widget = widget
         self.xdg = xdg.Menu
 
-    def execute_desktop(self, sfile, args=None):
+    def execute_desktop(self, sfile, args=''):
         ''' Execute program from .desktop file '''
         x = self.xdg.MenuEntry(sfile)
         tryExec = x.DesktopEntry.getTryExec()
@@ -177,10 +177,16 @@ class Actions(object):
             return
 
     def open_items(self, variant):
-        general.execute_program('qopen ' + misc.string_convert(variant))
+        sitems = ''
+        for svar in variant:
+            sitems += '"' + svar + '" '
+        general.execute_program('qopen ' + sitems)
 
     def rename_items(self, variant):
-        general.execute_program('qpaste --rename ' + misc.string_convert(variant))
+        sitems = ''
+        for svar in variant:
+            sitems += '"' + svar + '" '
+        general.execute_program('qpaste --rename ' + sitems)
 
     def cut_items(self, slist):
         sitems = misc.string_convert(slist)
