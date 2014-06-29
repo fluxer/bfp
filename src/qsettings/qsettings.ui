@@ -610,17 +610,17 @@
        </property>
        <item>
         <property name="text">
-         <string>Nothing</string>
+         <string>nothing</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Suspend</string>
+         <string>suspend</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Shutdown</string>
+         <string>shutdown</string>
         </property>
        </item>
       </widget>
@@ -651,17 +651,17 @@
        </property>
        <item>
         <property name="text">
-         <string>Nothing</string>
+         <string>nothing</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Suspend</string>
+         <string>suspend</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Shutdown</string>
+         <string>shutdown</string>
         </property>
        </item>
       </widget>
@@ -692,17 +692,17 @@
        </property>
        <item>
         <property name="text">
-         <string>Nothing</string>
+         <string>nothing</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Suspend</string>
+         <string>suspend</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Shutdown</string>
+         <string>shutdown</string>
         </property>
        </item>
       </widget>
@@ -733,17 +733,17 @@
        </property>
        <item>
         <property name="text">
-         <string>Nothing</string>
+         <string>nothing</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Suspend</string>
+         <string>suspend</string>
         </property>
        </item>
        <item>
         <property name="text">
-         <string>Shutdown</string>
+         <string>shutdown</string>
         </property>
        </item>
       </widget>

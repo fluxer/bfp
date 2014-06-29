@@ -83,6 +83,22 @@ def do_shutdown():
 def do_reboot():
     general.system_reboot(MainWindow)
 
+def handle_lid():
+    if system.get_lid_status() == 'closed'
+        if system.get_power_supply() == 'DC':
+            action = config.SUSPEND_POWER
+        else:
+             action = config.SUSPEND_BATTERY
+        if action == 'suspend':
+             system.do_suspend()
+        elif action == 'shutdown':
+             system.do_shutdown()
+
+# power management
+lwatcher = QtCore.QFileSystemWatcher()
+lwatcher.addPath('/proc/acpi/button/lid/LID/state')
+lwatcher.fileChanged.connect(handle_lid)
+
 autologin = False
 for p in pwd.getpwall():
     # skip system users
