@@ -96,6 +96,7 @@ class Config(object):
     def write(self, variable, value):
         ''' Write config file '''
         self.settings.setValue(variable, value)
+        self.settings.sync()
         self.read()
 
 config = Config()
