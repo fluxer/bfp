@@ -21,8 +21,9 @@ class System(object):
         self.SUSPEND_STATE = 'mem'
         self.SUSPEND_POST = None
         self.BATTERY_LID = 'shutdown'
-        self.BATTERY_LOW = 'suspend'
         self.BATTERY_CPU = 'ondemand'
+        self.BATTERY_BACKLIGHT = '15'
+        self.BATTERY_LOW = 'suspend'
         self.POWER_LID = 'suspend'
         self.POWER_CPU = 'performance'
         self.POWER_BACKLIGHT = '15'
@@ -192,4 +193,4 @@ class System(object):
             sfile = os.path.join(backlight, 'brightness')
             if os.path.isfile(sfile):
                 if not misc.file_read(sfile).strip() == self.BACKLIGHT_VALUE:
-                    misc.file_write(sfile, self.CPU_VALUE)
+                    misc.file_write(sfile, self.BACKLIGHT_VALUE)
