@@ -157,6 +157,18 @@ def setGovernorBattery():
     svalue = str(ui.GovernorBatteryBox.currentText())
     config.write('cpu/battery', svalue)
 
+def setLidPower():
+    svalue = str(ui.LidPowerBox.currentText())
+    config.write('lid/power', svalue)
+
+def setLidBattery():
+    svalue = str(ui.LidBatteryBox.currentText())
+    config.write('lid/battery', svalue)
+
+def setLowBattery():
+    svalue = str(ui.LowBatteryBox.currentText())
+    config.write('battery/low', svalue)
+
 # setup values of widgets
 for svar in misc.list_dirs('/etc/qdesktop/styles'):
     if os.path.isfile(svar + '/style.qss'):
@@ -224,6 +236,9 @@ ui.DiskBox.currentIndexChanged.connect(setDisk)
 ui.StateBox.currentIndexChanged.connect(setState)
 ui.GovernorPowerBox.currentIndexChanged.connect(setGovernorPower)
 ui.GovernorBatteryBox.currentIndexChanged.connect(setGovernorBattery)
+ui.LidPowerBox.currentIndexChanged.connect(setLidPower)
+ui.LidBatteryBox.currentIndexChanged.connect(setLidBattery)
+ui.LowBatteryBox.currentIndexChanged.connect(setLowBattery)
 
 if config.WALLPAPER_IMAGE:
     setImageWallpaper(config.WALLPAPER_IMAGE)
