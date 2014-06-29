@@ -42,6 +42,16 @@ Set targets to be ignored when building and removing.
 
 Default: filesystem
 
+=head2 OFFLINE
+
+Set whether to use internet or not. If set to true sources will be fetched
+from internet, otherwise local sources (if they exist) will be used. This
+Option is meaningfull only in cases when the internet connection is
+not good and it takes a lot of time to ping the servers and you know
+that this is not required.
+
+Default: False
+
 =head2 MIRROR
 
 Set whether to use mirrors or not. If set to true mirrors will be pinged
