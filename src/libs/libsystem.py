@@ -102,8 +102,36 @@ class System(object):
         for cpu in self.get_cpus():
             sfile = os.path.join(cpu, 'cpufreq/scaling_governor')
             if os.path.isfile(sfile):
-                status = misc.file_read(sfile).strip()
+                status = misc.file_read(sfile).strip().split()
         return status
+
+    def get_cpu_governors(self):
+        ''' Get supported CPU governors '''
+        # FIXME: support multiple CPUs, wrappers will get complex tough
+        governors = []
+        for cpu in self.get_cpus():
+            sfile = os.path.join(cpu, 'cpufreq/scaling_available_governors')
+            if os.path.isfile(sfile):
+                governors = misc.file_read(sfile).strip().split()
+        return governors
+
+    def get_power_disks(self):
+        ''' Get supported suspend disk modes '''
+        disks = []
+        sfile = '/sys/power/disk'
+        if os.path.isfile(sfile):
+            disks = misc.file_read(sfile).strip()
+            disks = disks.replace('[', '').replace(']', '')
+            disks = disks.split() 
+        return disks
+
+    def get_power_states(self):
+        ''' Get supported suspend disk modes '''
+        states = []
+        sfile = '/sys/power/state'
+        if os.path.isfile(sfile):
+            states = misc.file_read(sfile).strip().split()
+        return states
 
     def check_mounted(self, string):
         ''' Check if block device is mounted '''

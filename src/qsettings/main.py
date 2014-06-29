@@ -8,7 +8,7 @@ sip.setapi('QVariant', 2)
 import qsettings_ui
 from PyQt4 import QtCore, QtGui
 import sys, os
-import libmisc, libdesktop
+import libmisc, libdesktop, libsystem
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
@@ -20,6 +20,7 @@ icon = QtGui.QIcon()
 misc = libmisc.Misc()
 config = libdesktop.Config()
 mime = libdesktop.Mime()
+system = libsystem.System()
 
 def setLook():
     config.read()
@@ -174,6 +175,15 @@ for svar in misc.list_dirs(sys.prefix + '/share/icons'):
     if os.path.isfile(svar + '/index.theme'):
         ui.IconThemeBox.addItem(os.path.basename(svar))
 
+for svar in system.get_cpu_governors():
+    ui.GovernorPowerBox.addItem(svar)
+    ui.GovernorBatteryBox.addItem(svar)
+
+for svar in system.get_power_disks():
+    ui.DiskBox.addItem(svar)
+for svar in system.get_power_states():
+    ui.StateBox.addItem(svar)
+
 ui.MimesView.addItems(mime.get_mimes())
 ui.ProgramsView.addItems(mime.get_programs())
 
@@ -187,6 +197,22 @@ ui.MenuEdit.setText(config.GENERAL_MENU)
 ui.TerminalEdit.setText(config.DEFAULT_TERMINAL)
 ui.FileManagerEdit.setText(config.DEFAULT_FILEMANAGER)
 ui.WebBrowserEdit.setText(config.DEFAULT_WEBBROWSER)
+
+index = ui.DiskBox.findText(config.SUSPEND_DISK)
+ui.DiskBox.setCurrentIndex(index)
+index = ui.StateBox.findText(config.SUSPEND_STATE)
+ui.StateBox.setCurrentIndex(index)
+index = ui.GovernorPowerBox.findText(config.CPU_POWER)
+ui.GovernorPowerBox.setCurrentIndex(index)
+index = ui.GovernorBatteryBox.findText(config.CPU_BATTERY)
+ui.GovernorBatteryBox.setCurrentIndex(index)
+index = ui.LidPowerBox.findText(config.LID_POWER)
+ui.LidPowerBox.setCurrentIndex(index)
+index = ui.LidBatteryBox.findText(config.LID_BATTERY)
+ui.LidBatteryBox.setCurrentIndex(index)
+index = ui.LowBatteryBox.findText(config.LOW_BATTERY)
+ui.LowBatteryBox.setCurrentIndex(index)
+
 
 if config.WALLPAPER_IMAGE:
     setImageWallpaper(config.WALLPAPER_IMAGE)

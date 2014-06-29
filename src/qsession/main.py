@@ -84,7 +84,7 @@ def do_reboot():
     general.system_reboot(MainWindow)
 
 def handle_lid():
-    if system.get_lid_status() == 'closed'
+    if system.get_lid_status() == 'closed':
         if system.get_power_supply() == 'DC':
             action = config.SUSPEND_POWER
         else:

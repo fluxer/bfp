@@ -289,10 +289,10 @@
       <widget class="QLabel" name="label_2">
        <property name="geometry">
         <rect>
-         <x>20</x>
-         <y>25</y>
-         <width>126</width>
-         <height>21</height>
+         <x>15</x>
+         <y>20</y>
+         <width>136</width>
+         <height>26</height>
         </rect>
        </property>
        <property name="text">
@@ -305,9 +305,9 @@
       <widget class="QLabel" name="label_3">
        <property name="geometry">
         <rect>
-         <x>20</x>
+         <x>15</x>
          <y>60</y>
-         <width>126</width>
+         <width>136</width>
          <height>26</height>
         </rect>
        </property>
@@ -446,7 +446,7 @@
       <property name="title">
        <string> Suspend </string>
       </property>
-      <widget class="QComboBox" name="StyleBox_2">
+      <widget class="QComboBox" name="DiskBox">
        <property name="geometry">
         <rect>
          <x>165</x>
@@ -455,13 +455,8 @@
          <height>26</height>
         </rect>
        </property>
-       <item>
-        <property name="text">
-         <string/>
-        </property>
-       </item>
       </widget>
-      <widget class="QComboBox" name="IconThemeBox_2">
+      <widget class="QComboBox" name="StateBox">
        <property name="geometry">
         <rect>
          <x>165</x>
@@ -470,18 +465,13 @@
          <height>26</height>
         </rect>
        </property>
-       <item>
-        <property name="text">
-         <string/>
-        </property>
-       </item>
       </widget>
       <widget class="QLabel" name="label_4">
        <property name="geometry">
         <rect>
-         <x>20</x>
+         <x>15</x>
          <y>20</y>
-         <width>126</width>
+         <width>136</width>
          <height>26</height>
         </rect>
        </property>
@@ -495,9 +485,9 @@
       <widget class="QLabel" name="label_5">
        <property name="geometry">
         <rect>
-         <x>20</x>
+         <x>15</x>
          <y>60</y>
-         <width>126</width>
+         <width>136</width>
          <height>26</height>
         </rect>
        </property>
@@ -518,33 +508,28 @@
         <x>10</x>
         <y>120</y>
         <width>496</width>
-        <height>86</height>
+        <height>101</height>
        </rect>
       </property>
       <property name="title">
        <string> CPUs </string>
       </property>
-      <widget class="QComboBox" name="StyleBox_3">
+      <widget class="QComboBox" name="GovernorBatteryBox">
        <property name="geometry">
         <rect>
-         <x>15</x>
-         <y>45</y>
-         <width>226</width>
+         <x>165</x>
+         <y>60</y>
+         <width>316</width>
          <height>26</height>
         </rect>
        </property>
-       <item>
-        <property name="text">
-         <string/>
-        </property>
-       </item>
       </widget>
       <widget class="QLabel" name="label_6">
        <property name="geometry">
         <rect>
-         <x>20</x>
+         <x>15</x>
          <y>20</y>
-         <width>216</width>
+         <width>136</width>
          <height>26</height>
         </rect>
        </property>
@@ -555,27 +540,22 @@
         <set>Qt::AlignCenter</set>
        </property>
       </widget>
-      <widget class="QComboBox" name="StyleBox_8">
+      <widget class="QComboBox" name="GovernorPowerBox">
        <property name="geometry">
         <rect>
-         <x>255</x>
-         <y>45</y>
-         <width>226</width>
+         <x>165</x>
+         <y>20</y>
+         <width>316</width>
          <height>26</height>
         </rect>
        </property>
-       <item>
-        <property name="text">
-         <string/>
-        </property>
-       </item>
       </widget>
       <widget class="QLabel" name="label_11">
        <property name="geometry">
         <rect>
-         <x>255</x>
-         <y>20</y>
-         <width>221</width>
+         <x>15</x>
+         <y>60</y>
+         <width>136</width>
          <height>26</height>
         </rect>
        </property>
@@ -591,20 +571,20 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>215</y>
+        <y>230</y>
         <width>496</width>
-        <height>156</height>
+        <height>141</height>
        </rect>
       </property>
       <property name="title">
        <string> Actions </string>
       </property>
-      <widget class="QComboBox" name="StyleBox_4">
+      <widget class="QComboBox" name="LidPowerBox">
        <property name="geometry">
         <rect>
-         <x>15</x>
-         <y>45</y>
-         <width>226</width>
+         <x>165</x>
+         <y>20</y>
+         <width>316</width>
          <height>26</height>
         </rect>
        </property>
@@ -629,7 +609,7 @@
         <rect>
          <x>15</x>
          <y>20</y>
-         <width>221</width>
+         <width>136</width>
          <height>26</height>
         </rect>
        </property>
@@ -640,12 +620,12 @@
         <set>Qt::AlignCenter</set>
        </property>
       </widget>
-      <widget class="QComboBox" name="StyleBox_5">
+      <widget class="QComboBox" name="LidBatteryBox">
        <property name="geometry">
         <rect>
-         <x>255</x>
-         <y>45</y>
-         <width>226</width>
+         <x>165</x>
+         <y>60</y>
+         <width>316</width>
          <height>26</height>
         </rect>
        </property>
@@ -668,9 +648,9 @@
       <widget class="QLabel" name="label_8">
        <property name="geometry">
         <rect>
-         <x>255</x>
-         <y>20</y>
-         <width>221</width>
+         <x>15</x>
+         <y>60</y>
+         <width>136</width>
          <height>26</height>
         </rect>
        </property>
@@ -681,53 +661,12 @@
         <set>Qt::AlignCenter</set>
        </property>
       </widget>
-      <widget class="QComboBox" name="StyleBox_6">
+      <widget class="QComboBox" name="LowBatteryBox">
        <property name="geometry">
         <rect>
-         <x>15</x>
-         <y>115</y>
-         <width>226</width>
-         <height>26</height>
-        </rect>
-       </property>
-       <item>
-        <property name="text">
-         <string>nothing</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>suspend</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>shutdown</string>
-        </property>
-       </item>
-      </widget>
-      <widget class="QLabel" name="label_9">
-       <property name="geometry">
-        <rect>
-         <x>15</x>
-         <y>90</y>
-         <width>221</width>
-         <height>26</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Low battery (power)</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-      <widget class="QComboBox" name="StyleBox_7">
-       <property name="geometry">
-        <rect>
-         <x>255</x>
-         <y>115</y>
-         <width>226</width>
+         <x>165</x>
+         <y>100</y>
+         <width>316</width>
          <height>26</height>
         </rect>
        </property>
@@ -750,14 +689,14 @@
       <widget class="QLabel" name="label_10">
        <property name="geometry">
         <rect>
-         <x>255</x>
-         <y>90</y>
-         <width>221</width>
+         <x>15</x>
+         <y>100</y>
+         <width>136</width>
          <height>26</height>
         </rect>
        </property>
        <property name="text">
-        <string>Low battery (battery)</string>
+        <string>Low battery</string>
        </property>
        <property name="alignment">
         <set>Qt::AlignCenter</set>

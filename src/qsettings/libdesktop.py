@@ -70,6 +70,17 @@ class Config(object):
         self.DEFAULT_FILEMANAGER = str(self.settings.value('default/filemanager', 'qfile'))
         self.DEFAULT_WEBBROWSER = str(self.settings.value('default/webbrowser', 'qupzilla'))
 
+        self.SUSPEND_DISK = str(self.settings.value('suspend/disk', 'suspend'))
+        self.SUSPEND_STATE = str(self.settings.value('suspend/state', 'mem'))
+        self.CPU_POWER = str(self.settings.value('cpu/power', 'performance'))
+        self.CPU_BATTERY = str(self.settings.value('cpu/battery', 'ondemand'))
+        self.BACKLIGHT_POWER = str(self.settings.value('backlight/power', '15'))
+        self.BACKLIGHT_BATTERY = str(self.settings.value('backlight/battery', '10'))
+        self.LID_POWER = str(self.settings.value('lid/power', 'suspend'))
+        self.LID_BATTERY = str(self.settings.value('lid/battery', 'shutdown'))
+        self.LOW_BATTERY = str(self.settings.value('battery/low', 'suspend'))
+
+
     def write(self, variable, value):
         ''' Write config file '''
         self.settings.setValue(variable, value)
