@@ -2,6 +2,7 @@ include Makefile.inc
 
 all:
 	make -C doc
+	make -C src/cparted
 	make -C src/libs
 	make -C src/initfs
 	make -C src/spm
@@ -24,9 +25,10 @@ check:
 install:
 	make -C doc install
 	make -C etc install
-	make -C src/initfs install
 	make -C misc install
 	make -C scripts install
+	make -C src/cparted install
+	make -C src/initfs install
 	make -C src/libs install
 	make -C src/spm install
 	make -C src/spm-qt install
@@ -45,9 +47,10 @@ install:
 uninstall:
 	make -C doc uninstall
 	make -C etc uninstall
-	make -C src/initfs uninstall
 	make -C misc uninstall
 	make -C scripts uninstall
+	make -C src/cparted  uninstall
+	make -C src/initfs uninstall
 	make -C src/libs uninstall
 	make -C src/spm uninstall
 	make -C src/spm-qt uninstall
@@ -65,6 +68,7 @@ uninstall:
 
 clean:
 	make -C doc clean
+	make -C src/cparted clean
 	make -C src/libs clean
 	make -C src/initfs clean
 	make -C src/spm clean

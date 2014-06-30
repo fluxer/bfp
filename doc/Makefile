@@ -9,6 +9,8 @@ all:
 		--section='5' --utf8 SRCBUILD.pod SRCBUILD.5
 	pod2man --release="SPM $(VERSION)" --center="Source Package Manager Manual" \
 		--section='8' --utf8 spm-tools.pod > spm-tools.8
+	pod2man --release="CPARTED $(VERSION)" --center="Curses Parted Manual" \
+		--section='8' --utf8 cparted.pod > cparted.8
 	sed 's|#SHAREDIR#|$(SHAREDIR)|g' -i SRCBUILD.5
 	sed 's|#MACHINE#|$(MACHINE)|g' -i spm.conf.5
 	sed 's|#ARCH#|$(ARCH)|g' -i spm.conf.5
@@ -22,6 +24,7 @@ install:
 	$(INSTALL) -vm644 SRCBUILD.5 $(DESTDIR)$(MANDIR)/man5/SRCBUILD.5
 	$(INSTALL) -vm644 SRCBUILD.txt $(DESTDIR)$(SHAREDIR)/spm/SRCBUILD.txt
 	$(INSTALL) -vm644 spm-tools.8 $(DESTDIR)$(MANDIR)/man8/spm-tools.8
+	$(INSTALL) -vm644 cparted.8 $(DESTDIR)$(MANDIR)/man8/cparted.8
 
 uninstall:
 	$(RM) $(DESTDIR)$(MANDIR)/man8/spm-tools.8
