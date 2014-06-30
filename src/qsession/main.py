@@ -56,7 +56,10 @@ def login(autologin=None):
     if autologin or crypt.crypt(password, cryptedpasswd) == cryptedpasswd:
         try:
             home = pwd.getpwnam(username).pw_dir
-            # os.setsid()
+            try:
+                os.setsid()
+            except Exception as detail:
+                print(str(detail))
             os.setgid(pwd.getpwnam(username).pw_gid)
             os.setuid(pwd.getpwnam(username).pw_uid)
             os.putenv('HOME', home)
@@ -71,7 +74,7 @@ def login(autologin=None):
             ui.PasswordEdit.setFocus()
             ui.PasswordEdit.clear()
         finally:
-            MainWindow.showMaximized()
+            MainWindow.show()
     else:
         QtGui.QMessageBox.critical(MainWindow, 'Error', 'Incorrect password.')
         ui.PasswordEdit.setFocus()
