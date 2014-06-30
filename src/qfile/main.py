@@ -183,6 +183,13 @@ def enable_actions():
     else:
         disable_actions()
 
+    if os.access(model.rootPath(), os.W_OK):
+        ui.actionFile.setEnabled(True)
+        ui.actionFolder.setEnabled(True)
+    else:
+        ui.actionFile.setEnabled(False)
+        ui.actionFolder.setEnabled(False)
+
 ui.actionQuit.triggered.connect(sys.exit)
 ui.actionAbout.triggered.connect(run_about)
 ui.actionIcons.triggered.connect(change_view_icons)
