@@ -7,10 +7,7 @@ This program is licensed under the GPL. See COPYING for the full license.
 This program is a curses front end to pyparted that mimics cfdisk.
 
 """
-import curses
-import curses.textpad
-import sys
-
+import curses, curses.textpad, sys
 import parted
 
 __version__ = "0.2"

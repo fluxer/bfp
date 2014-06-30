@@ -44,4 +44,4 @@ parted(8)
 
 David Campbell <davekong@archlinux.us>
 
-Ivailo Monve <xakepa10@gmail.com>
+Ivailo Monev <xakepa10@gmail.com>

@@ -18,7 +18,7 @@ MACHINE = $(shell gcc -dumpmachine)
 ARCH = $(shell uname -m | sed 's|_|-|')
 JOBS = $(shell echo $$((`nproc || echo 1`+1)))
 
-NUITKA = ../../nuitka/bin/nuitka --recurse-not-to=PyQt4 --recurse-not-to=xdg
+NUITKA = ../../nuitka/bin/nuitka --recurse-not-to=PyQt4,xdg,parted
 INSTALL = install
 STRIP = strip
 RM = rm -f
