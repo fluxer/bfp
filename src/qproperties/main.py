@@ -91,7 +91,7 @@ def set_permissions(slist):
                 os.chmod(sfile, st.st_mode | -stat.S_IEXEC)
             sys.exit()
     except OSError as detail:
-        QtGui.QMessageBox.critical(Dialog, 'Properties', str(detail))
+        QtGui.QMessageBox.critical(Dialog, 'Error', str(detail))
 
 def save_permissions():
     if ui.recursiveBox.currentText() == 'True':

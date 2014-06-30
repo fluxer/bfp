@@ -3,9 +3,7 @@
 import qpaste_ui
 from PyQt4 import QtGui
 import sys, os, shutil
-import libdesktop
-import libmisc
-misc = libmisc.Misc()
+import libmisc, libdesktop
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
@@ -15,12 +13,13 @@ ui.setupUi(Dialog)
 
 # FIXME: need 4 on cut/paste
 if len(sys.argv) < 3:
-    print('Not enough arguments')
+    QtGui.QMessageBox.critical(Dialog, 'Error', 'Not enough arguments')
     sys.exit(2)
 
 config = libdesktop.Config()
 actions = libdesktop.Actions(Dialog, app)
 icon = QtGui.QIcon()
+misc = libmisc.Misc()
 
 def setLook():
     config.read()
@@ -57,7 +56,7 @@ if action == '--copy':
             ui.ProgressBar.setValue(step)
             step = step + step
     except Exception as detail:
-        QtGui.QMessageBox.critical(Dialog, 'Properties', str(detail))
+        QtGui.QMessageBox.critical(Dialog, 'Error', str(detail))
     finally:
         sys.exit(0)
 elif action == '--cut':
@@ -78,7 +77,7 @@ elif action == '--cut':
             ui.ProgressBar.setValue(step)
             step = step + step
     except Exception as detail:
-        QtGui.QMessageBox.critical(Dialog, 'Properties', str(detail))
+        QtGui.QMessageBox.critical(Dialog, 'Error', str(detail))
     finally:
         sys.exit(0)
 elif action == '--delete':
@@ -92,7 +91,7 @@ elif action == '--delete':
             qbuttons = QtGui.QMessageBox.Yes | QtGui.QMessageBox.No | QtGui.QMessageBox.Cancel
         for svar in items:
             if ask:
-                reply = QtGui.QMessageBox.question(Dialog, "Delete", \
+                reply = QtGui.QMessageBox.question(Dialog, "Question", \
                     "Are you sure you want to delete <b>" + svar + "</b>? ", qbuttons)
                 if reply == QtGui.QMessageBox.Yes:
                     pass
@@ -110,7 +109,7 @@ elif action == '--delete':
             ui.ProgressBar.setValue(step)
             step = step + step
     except Exception as detail:
-        QtGui.QMessageBox.critical(Dialog, 'Properties', str(detail))
+        QtGui.QMessageBox.critical(Dialog, 'Error', str(detail))
     finally:
         sys.exit(0)
 elif action == '--rename':
@@ -139,7 +138,7 @@ elif action == '--rename':
             ui.ProgressBar.setValue(step)
             step = step + step
     except Exception as detail:
-        QtGui.QMessageBox.critical(Dialog, 'Properties', str(detail))
+        QtGui.QMessageBox.critical(Dialog, 'Error', str(detail))
     finally:
         sys.exit(0)
 else:

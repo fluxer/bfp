@@ -12,6 +12,7 @@ system = libsystem.System()
 class General(object):
     ''' Common methods '''
     def set_style(self):
+        ''' Style and icon application setup '''
         # FIXME: set stylesheet and icon theme
         pass
 
@@ -69,6 +70,7 @@ general = General()
 
 
 class Config(object):
+    ''' Configuration handler '''
     def __init__(self):
         self.settings = QtCore.QSettings('qdesktop')
         self.read()
@@ -176,6 +178,7 @@ class Actions(object):
         self.thread = None
 
     def check_exists(self, sfile):
+        ''' Check if file/dir exists and offer to rename '''
         sfile_basename = os.path.basename(sfile)
         sfile_dirname = os.path.dirname(sfile)
         sfile_basename, ok = QtGui.QInputDialog.getText(self.window, "File/directory exists", \
@@ -190,30 +193,35 @@ class Actions(object):
             return
 
     def open_items(self, variant):
+        ''' Open files/directories with a software of choise '''
         sitems = ''
         for svar in variant:
             sitems += '"' + svar + '" '
         general.execute_program('qopen ' + sitems)
 
     def rename_items(self, variant):
+        ''' Rename files/directories '''
         sitems = ''
         for svar in variant:
             sitems += '"' + svar + '" '
         general.execute_program('qpaste --rename ' + sitems)
 
     def cut_items(self, slist):
+        ''' Cut files/directories for future paste '''
         sitems = misc.string_convert(slist)
         self.clipboard.setText(sitems)
         self.cut = slist
         self.copy = None
 
     def copy_items(self, slist):
+        ''' Copy files/directories for future paste '''
         sitems = misc.string_convert(slist)
         self.clipboard.setText(sitems)
         self.cut = None
         self.copy = slist
 
     def paste_items(self):
+        ''' Paste files/directories '''
         sitems = ''
         if self.cut:
             for svar in self.cut:
@@ -225,42 +233,57 @@ class Actions(object):
             general.execute_program('qpaste --copy ' + sitems)
 
     def delete_items(self, variant):
+        ''' Delete files/directories '''
         sitems = ''
         for svar in variant:
             sitems += '"' + svar + '" '
         general.execute_program('qpaste --delete ' + sitems)
 
     def extract_items(self, variant):
-        # FIXME: implement please wait???
+        ''' Extract archives '''
+        pbar = QtGui.QProgressDialog(self.window)
+        pbar.setMaximum(0)
+        # pbar.canceled.connect(return)
         for sfile in variant:
             if misc.archive_supported(sfile):
                 sfile_dirname = os.path.dirname(sfile)
-                print('Extracting: ', sfile, 'To: ', sfile_dirname)
+                pbar.show()
+                pbar.setLabelText('Extracting: <b>' + sfile + '</b> To: <b>' + sfile_dirname + '</b>')
                 misc.archive_decompress(sfile, sfile_dirname)
+                pbar.hide()
 
     def gzip_items(self, variant, soutput=None):
-        # FIXME: implement please wait???
+        ''' Gzip files/directories into archive '''
+        pbar = QtGui.QProgressDialog(self.window)
+        pbar.setMaximum(0)
         if not soutput:
             for svar in variant:
                 soutput = svar + '.tar.gz'
                 # ensure that directory is passed to archive_compress() as chdir argument
                 if not os.path.isdir(svar):
                     svar = os.path.dirname(svar)
-        print('Compressing: ', variant, 'To: ', soutput)
+        pbar.show()
+        pbar.setLabelText('Compressing: <b>' + variant + '</b> To: <b>' + soutput + '</b>')
         misc.archive_compress(variant, soutput, 'gz', svar)
+        pbar.hide()
 
     def bzip2_items(self, variant, soutput=None):
-        # FIXME: implement please wait???
+        ''' BZip2 files/directories into archive '''
+        pbar = QtGui.QProgressDialog(self.window)
+        pbar.setMaximum(0)
         if not soutput:
             for svar in variant:
                 soutput = svar + '.tar.bz2'
                 # ensure that directory is passed to archive_compress() as chir argument
                 if not os.path.isdir(svar):
                     svar = os.path.dirname(svar)
-        print('Compressing: ', variant, 'To: ', soutput)
+        pbar.show()
+        pbar.setLabelText('Compressing: <b>' + variant + '</b> To: <b>' + soutput + '</b>')
         misc.archive_compress(variant, soutput, 'bz2', svar)
+        pbar.hide()
 
     def new_file(self):
+        ''' Create a new file '''
         svar, ok = QtGui.QInputDialog.getText(self.window, "New file", \
             "Name:", QtGui.QLineEdit.Normal)
         svar = os.path.realpath(str(svar))
@@ -275,6 +298,7 @@ class Actions(object):
             return svar
 
     def new_directory(self):
+        ''' Create a new directory '''
         svar, ok = QtGui.QInputDialog.getText(self.window, "New directory", \
             "Name:", QtGui.QLineEdit.Normal)
         svar = os.path.realpath(str(svar))
@@ -289,6 +313,7 @@ class Actions(object):
             return svar
 
     def properties_items(self, variant):
+        ''' View properties of files/directories '''
         for svar in variant:
             general.execute_program('qproperties "' + svar + '"')
 
@@ -330,7 +355,7 @@ class Mime(object):
         else:
             raise(Exception('Unregistered mime', smime))
 
-    def register(self, smime, sprogram, sicon=''):
+    def register(self, smime, sprogram):
         ''' Register MIME with program and icon '''
         self.settings.setValue(smime, sprogram)
         self.settings.sync()
