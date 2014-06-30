@@ -135,11 +135,6 @@
    </widget>
    <addaction name="menuActions"/>
   </widget>
-  <action name="actionDummy">
-   <property name="text">
-    <string>dummy</string>
-   </property>
-  </action>
   <action name="actionOpen">
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
@@ -275,18 +270,6 @@
     <string>Compress (bzip2)</string>
    </property>
   </action>
-  <action name="actionCompress_xz">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>:/usr/share/qresources/resources/application-x-compress.svg</normaloff>:/usr/share/qresources/resources/application-x-compress.svg</iconset>
-   </property>
-   <property name="text">
-    <string>Compress (xz)</string>
-   </property>
-  </action>
   <action name="actionPreferences">
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
@@ -321,11 +304,6 @@
    </property>
    <property name="text">
     <string>Reboot</string>
-   </property>
-  </action>
-  <action name="actionDummy_2">
-   <property name="text">
-    <string>dummy</string>
    </property>
   </action>
   <action name="actionFileManager">

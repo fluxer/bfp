@@ -250,21 +250,6 @@
     <string>Ctrl+Q</string>
    </property>
   </action>
-  <action name="actionTerminal">
-   <property name="icon">
-    <iconset>
-     <normaloff>:/usr/share/pfm/resources/utilities-terminal.svg</normaloff>:/usr/share/pfm/resources/utilities-terminal.svg</iconset>
-   </property>
-   <property name="text">
-    <string>Terminal</string>
-   </property>
-   <property name="toolTip">
-    <string>Run Terminal</string>
-   </property>
-   <property name="shortcut">
-    <string>Ctrl+T</string>
-   </property>
-  </action>
   <action name="actionCopy">
    <property name="enabled">
     <bool>false</bool>
@@ -403,18 +388,6 @@
     <string>List</string>
    </property>
   </action>
-  <action name="actionPreferences">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>:/usr/share/qresources/resources/redhat-tools.svg</normaloff>:/usr/share/qresources/resources/redhat-tools.svg</iconset>
-   </property>
-   <property name="text">
-    <string>Preferences</string>
-   </property>
-  </action>
   <action name="actionRename">
    <property name="enabled">
     <bool>false</bool>
@@ -428,11 +401,6 @@
    </property>
    <property name="shortcut">
     <string/>
-   </property>
-  </action>
-  <action name="actionMimes">
-   <property name="text">
-    <string>Mimes</string>
    </property>
   </action>
   <action name="actionOpen">
@@ -462,23 +430,6 @@
     <string>File</string>
    </property>
   </action>
-  <action name="actionAsd">
-   <property name="text">
-    <string>asd</string>
-   </property>
-  </action>
-  <action name="actionCompress_xz">
-   <property name="enabled">
-    <bool>false</bool>
-   </property>
-   <property name="icon">
-    <iconset>
-     <normaloff>:/usr/share/qresources/resources/application-x-compress.svg</normaloff>:/usr/share/qresources/resources/application-x-compress.svg</iconset>
-   </property>
-   <property name="text">
-    <string>Compress (xz)</string>
-   </property>
-  </action>
   <action name="actionCompressBzip2">
    <property name="enabled">
     <bool>false</bool>
@@ -501,11 +452,6 @@
    </property>
    <property name="text">
     <string>View hidden</string>
-   </property>
-  </action>
-  <action name="actionAsd_2">
-   <property name="text">
-    <string>asd</string>
    </property>
   </action>
   <action name="actionOpenWith">
