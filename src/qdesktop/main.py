@@ -194,6 +194,9 @@ def do_shutdown():
 def do_reboot():
     general.system_reboot(MainWindow)
 
+def do_logout():
+    os.system('killall fluxbox')
+
 # setup desktop view
 ui.DesktopView.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
 ui.DesktopView.customContextMenuRequested.connect(enable_actions)
@@ -223,7 +226,7 @@ ui.actionPreferences.triggered.connect(run_preferences)
 ui.actionSuspend.triggered.connect(do_suspend)
 ui.actionShutdown.triggered.connect(do_shutdown)
 ui.actionReboot.triggered.connect(do_reboot)
-ui.actionLogout.triggered.connect(sys.exit)
+ui.actionLogout.triggered.connect(do_logout)
 ui.DesktopView.clicked.connect(enable_actions)
 
 # setup window
