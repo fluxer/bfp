@@ -37,6 +37,8 @@ class General(object):
             QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
         if reply == QtGui.QMessageBox.Yes:
             try:
+                system.SUSPEND_DISK = config.SUSPEND_DISK
+                system.SUSPEND_STATE = config.SUSPEND_STATE
                 system.do_suspend()
             except Exception as detail:
                 QtGui.QMessageBox.critical(window, 'Error', str(detail))
