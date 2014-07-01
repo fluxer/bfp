@@ -48,6 +48,7 @@ class Check(object):
             target_metadata = os.path.join(libspm.LOCAL_DIR, target, 'metadata')
             target_footprint = database.local_footprint(target)
             target_depends = database.local_metadata(target, 'depends')
+            target_adepends = []
 
             missing_detected = False
             for sfile in target_footprint.splitlines():
@@ -78,6 +79,8 @@ class Check(object):
                             else:
                                 match = match[0]
                         match = misc.string_convert(match)
+                        if not match in target_adepends and not match == target:
+                            target_adepends.append(match)
 
                         if match == target or misc.string_search(lib, target_footprint):
                             message.sub_debug('Library needed but in self', lib)
@@ -98,7 +101,7 @@ class Check(object):
                     or smime == 'text/x-lua' or smime == 'text/x-tcl' \
                     or smime == 'text/x-awk' or smime == 'text/x-gawk':
                     # https://en.wikipedia.org/wiki/Comparison_of_command_shells
-                    for bang in ('sh', 'bash', 'dash', 'ksh', 'csh', 'tcsh' 'tclsh', 'scsh', 'fish',
+                    for bang in ('sh', 'bash', 'dash', 'ksh', 'csh', 'tcsh', 'tclsh', 'scsh', 'fish',
                         'zsh', 'ash', 'python', 'python2', 'python3', 'perl', 'php', 'ruby', 'lua',
                         'wish' 'awk' 'gawk'):
                         bang_regexp = '^#!(/usr)?/(s)?bin/(env )?' + bang + '(\\s|$)'
@@ -113,6 +116,8 @@ class Check(object):
                                 else:
                                     match = match[0]
                             match = misc.string_convert(match)
+                            if not match in target_adepends and not match == target:
+                                target_adepends.append(match)
 
                             if match == target or misc.string_search(file_regexp,
                                 target_footprint, exact=True, escape=False):
@@ -129,6 +134,10 @@ class Check(object):
                                 missing_detected = True
             if missing_detected:
                 sys.exit(2)
+
+            for a in target_depends.split():
+                if not a in target_adepends:
+                    message.sub_warning('Unnecessary explicit dependencies', a)
 
             if self.do_adjust:
                 message.sub_debug('Adjusting target depends')

@@ -2,7 +2,6 @@
  * Fix all bugs noted with FIXME in the code (1)
  * Tools for the following:
    * purge repositories that are not in repositories.conf
-   * detect false-positives in explicit runtime dependencies
  * Use Makefiles for build scripts?
 
 ## QFILE ##
@@ -15,6 +14,7 @@
 ## LIBDESKTOP ##
  * Signal to qsession to shutdown/reboot/suspend/logout?
  * Implement "Update" into dynamic menu?
+ * Split decompress/compress actions into separate application to avoid locking QFile
 
 ## QSESSION ##
  * Controls power state and mounting?
