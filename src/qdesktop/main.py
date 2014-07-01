@@ -248,9 +248,13 @@ def reload_desktop():
     setLook()
     setWallpaper()
 
-watcher = QtCore.QFileSystemWatcher()
-watcher.addPaths((config.settings.fileName(), mime.settings.fileName()))
-watcher.fileChanged.connect(reload_desktop)
+watcher1 = QtCore.QFileSystemWatcher()
+watcher1.addPaths((config.settings.fileName(), mime.settings.fileName()))
+watcher1.fileChanged.connect(reload_desktop)
+
+watcher2 = QtCore.QFileSystemWatcher()
+watcher2.addPath(sys.prefix + '/share/applications')
+watcher2.directoryChanged.connect(menu.build)
 
 # run!
 MainWindow.showMaximized()
