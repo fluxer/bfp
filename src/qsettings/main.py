@@ -110,7 +110,7 @@ def selectMime():
         return
 
     smime = mime.get_mime(sprogram)
-    for s in ui.MimesView.findItems(sprogram, QtCore.Qt.MatchExactly):
+    for s in ui.MimesView.findItems(smime, QtCore.Qt.MatchExactly):
         ui.MimesView.setItemSelected(s, True)
 
 def selectProgram():
