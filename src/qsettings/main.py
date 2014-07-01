@@ -128,18 +128,18 @@ def selectMime():
     if not sprogram:
         return
 
-    smime = mime.get_mime(QtCore.QModelIndex(sprogram[0]).data())
-    index = ui.MimesView.findText(smime)
-    ui.MimesView.setCurrentIndex(index)
+    smime = mime.get_mime(QtCore.QModelIndex(sprogram[0]).data().toString())
+    for s in ui.MimesView.findItems(sprogram, QtCore.Qt.MatchExactly):
+        ui.MimesView.setItemSelected(s, True)
 
 def selectProgram():
     smime = ui.MimesView.selectedIndexes()
     if not smime:
         return
 
-    sprogram = mime.get_program(QtCore.QModelIndex(smime[0]).data())
-    index = ui.MimesView.findText(sprogram)
-    ui.MimesView.setCurrentIndex(index)
+    sprogram = mime.get_program(QtCore.QModelIndex(smime[0]).data().toString())
+    for s in ui.ProgramsView.findItems(sprogram, QtCore.Qt.MatchExactly):
+        ui.ProgramsView.setItemSelected(s, True)
 
 def setDisk():
     svalue = str(ui.DiskBox.currentText())
