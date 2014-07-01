@@ -17,7 +17,6 @@
 
 ## SPM-QT ##
  * Fixup the logging
- * Make use of the desktop style
  * Implement menu bar and drop "About" tab in favour of about dialog
 
 ## ALL QT ##
