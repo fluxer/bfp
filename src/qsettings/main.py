@@ -174,7 +174,8 @@ ui.ProgramsView.addItems(sprograms)
 
 for program in sprograms:
     sbase = os.path.basename(program)
-    if sbase == 'xterm' or sbase == 'uxterm' or sbase == 'urvxt':
+    if sbase == 'xterm' or sbase == 'uxterm' or sbase == 'rvxt' \
+        or sbase == 'urxvt' or sbase == 'urxvt-tabbed':
         ui.TerminalBox.addItem(program)
     elif sbase == 'qfile' or sbase == 'pcmanfm' or sbase == 'qtfm' \
         or sbase == 'thunar' or sbase == 'nautilus':
