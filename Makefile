@@ -7,6 +7,7 @@ all:
 	make -C src/initfs
 	make -C src/spm
 	make -C src/spm-qt
+	make -C src/qarchive
 	make -C src/qdesktop
 	make -C src/qedit
 	make -C src/qfile
@@ -32,6 +33,7 @@ install:
 	make -C src/libs install
 	make -C src/spm install
 	make -C src/spm-qt install
+	make -C src/qarchive install
 	make -C src/qdesktop install
 	make -C src/qedit install
 	make -C src/qfile install
@@ -54,6 +56,7 @@ uninstall:
 	make -C src/libs uninstall
 	make -C src/spm uninstall
 	make -C src/spm-qt uninstall
+	make -C src/qarchive uninstall
 	make -C src/qdesktop uninstall
 	make -C src/qedit uninstall
 	make -C src/qfile uninstall
@@ -73,6 +76,7 @@ clean:
 	make -C src/initfs clean
 	make -C src/spm clean
 	make -C src/spm-qt clean
+	make -C src/qarchive clean
 	make -C src/qdesktop clean
 	make -C src/qedit clean
 	make -C src/qfile clean
@@ -86,7 +90,7 @@ clean:
 	make -C src/qsettings clean
 
 dist:
-	git archive HEAD --prefix=alive-$(VERSION)/ | xz > alive-$(VERSION).tar.xz
+	git archive HEAD --prefix=bfp-$(VERSION)/ | xz > bfp-$(VERSION).tar.xz
 
 stat:
 	cloc $(shell find src/ -name '*.py') scripts/*.sh

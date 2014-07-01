@@ -63,33 +63,14 @@ def setIconTheme():
     config.write('general/icontheme', stheme)
     setLook()
 
-def setMenu():
-    smenu = QtGui.QFileDialog.getOpenFileName(MainWindow, \
-        "Choose", QtCore.QDir.homePath(), "Menus (*.menu);;All Files (*)")
-    smenu = str(smenu)
-    ui.MenuEdit.setText(smenu)
-    config.write('general/menu', smenu)
-
 def setTerminal():
-    sterminal = QtGui.QFileDialog.getOpenFileName(MainWindow, \
-        "Choose", QtCore.QDir.homePath(), "All Files (*)")
-    sterminal = str(sterminal)
-    ui.TerminalEdit.setText(sterminal)
-    config.write('default/terminal', sterminal)
+    config.write('default/terminal', str(ui.TerminalBox.currentText()))
 
 def setFileManager():
-    sfmanager = QtGui.QFileDialog.getOpenFileName(MainWindow, \
-        "Choose", QtCore.QDir.homePath(), "All Files (*)")
-    sfmanager = str(sfmanager)
-    ui.FileManagerEdit.setText(sfmanager)
-    config.write('default/filemanager', sfmanager)
+    config.write('default/filemanager', str(ui.FileManagerBox.currentText()))
 
 def setWebBrowser():
-    swbrowser = QtGui.QFileDialog.getOpenFileName(MainWindow, \
-        "Choose", QtCore.QDir.homePath(), "All Files (*)")
-    swbrowser = str(swbrowser)
-    ui.WebBrowserEdit.setText(swbrowser)
-    config.write('default/webbrowser', swbrowser)
+    config.write('default/webbrowser', str(ui.WebBrowserBox.currentText()))
 
 def unregisterMime():
     smime = ui.MimesView.selectedIndexes()
@@ -187,8 +168,21 @@ for svar in system.get_power_disks():
 for svar in system.get_power_states():
     ui.StateBox.addItem(svar)
 
+sprograms = mime.get_programs()
 ui.MimesView.addItems(mime.get_mimes())
-ui.ProgramsView.addItems(mime.get_programs())
+ui.ProgramsView.addItems(sprograms)
+
+for program in sprograms:
+    sbase = os.path.basename(program)
+    if sbase == 'xterm' or sbase == 'uxterm' or sbase == 'urvxt':
+        ui.TerminalBox.addItem(program)
+    elif sbase == 'qfile' or sbase == 'pcmanfm' or sbase == 'qtfm' \
+        or sbase == 'thunar' or sbase == 'nautilus':
+        ui.FileManagerBox.addItem(program)
+    elif sbase == 'qupzilla' or sbase == 'firefox' or sbase == 'chrome' \
+        or sbase == 'chromium' or sbase == 'chromium-browser' \
+        or sbase == 'midori' or sbase == 'opera':
+        ui.WebBrowserBox.addItem(program)
 
 index = ui.WallpaperModeBox.findText(config.WALLPAPER_STYLE)
 ui.WallpaperModeBox.setCurrentIndex(index)
@@ -196,10 +190,13 @@ index = ui.StyleBox.findText(config.GENERAL_STYLESHEET)
 ui.StyleBox.setCurrentIndex(index)
 index = ui.IconThemeBox.findText(config.GENERAL_ICONTHEME)
 ui.IconThemeBox.setCurrentIndex(index)
-ui.MenuEdit.setText(config.GENERAL_MENU)
-ui.TerminalEdit.setText(config.DEFAULT_TERMINAL)
-ui.FileManagerEdit.setText(config.DEFAULT_FILEMANAGER)
-ui.WebBrowserEdit.setText(config.DEFAULT_WEBBROWSER)
+index = ui.TerminalBox.findText(config.DEFAULT_TERMINAL)
+ui.TerminalBox.setCurrentIndex(index)
+index = ui.FileManagerBox.findText(config.DEFAULT_FILEMANAGER)
+ui.FileManagerBox.setCurrentIndex(index)
+index = ui.WebBrowserBox.findText(config.DEFAULT_WEBBROWSER)
+ui.WebBrowserBox.setCurrentIndex(index)
+
 index = ui.DiskBox.findText(config.SUSPEND_DISK)
 ui.DiskBox.setCurrentIndex(index)
 index = ui.StateBox.findText(config.SUSPEND_STATE)
@@ -223,10 +220,9 @@ ui.WallpaperModeBox.currentIndexChanged.connect(setWallpaperStyle)
 ui.ColorWallpaperButton.clicked.connect(setColorWallpaper)
 ui.StyleBox.currentIndexChanged.connect(setStyleSheet)
 ui.IconThemeBox.currentIndexChanged.connect(setIconTheme)
-ui.MenuButton.clicked.connect(setMenu)
-ui.TerminalButton.clicked.connect(setTerminal)
-ui.FileManagerButton.clicked.connect(setFileManager)
-ui.WebBrowserButton.clicked.connect(setWebBrowser)
+ui.TerminalBox.currentIndexChanged.connect(setTerminal)
+ui.FileManagerBox.currentIndexChanged.connect(setFileManager)
+ui.WebBrowserBox.currentIndexChanged.connect(setWebBrowser)
 ui.UnregisterButton.clicked.connect(unregisterMime)
 ui.RegisterButton.clicked.connect(registerMime)
 ui.AssociateButton.clicked.connect(setMime)

@@ -43,7 +43,6 @@ def disable_actions():
     ui.actionCompressBzip2.setEnabled(False)
 
 def open_file():
-    print ui.ViewWidget.selectedIndexes()
     for sfile in ui.ViewWidget.selectedIndexes():
         sfile = str(model.filePath(sfile))
         mime.open(sfile)

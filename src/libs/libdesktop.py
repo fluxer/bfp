@@ -241,46 +241,23 @@ class Actions(object):
 
     def extract_items(self, variant):
         ''' Extract archives '''
-        pbar = QtGui.QProgressDialog(self.window)
-        pbar.setMaximum(0)
-        # pbar.canceled.connect(return)
         for sfile in variant:
             if misc.archive_supported(sfile):
-                sfile_dirname = os.path.dirname(sfile)
-                pbar.show()
-                pbar.setLabelText('Extracting: <b>' + sfile + '</b> To: <b>' + sfile_dirname + '</b>')
-                misc.archive_decompress(sfile, sfile_dirname)
-                pbar.hide()
+                general.execute_program('qarchive --extract ' + '"' + sfile + '" ')
 
-    def gzip_items(self, variant, soutput=None):
+    def gzip_items(self, variant):
         ''' Gzip files/directories into archive '''
-        pbar = QtGui.QProgressDialog(self.window)
-        pbar.setMaximum(0)
-        if not soutput:
-            for svar in variant:
-                soutput = svar + '.tar.gz'
-                # ensure that directory is passed to archive_compress() as chdir argument
-                if not os.path.isdir(svar):
-                    svar = os.path.dirname(svar)
-        pbar.show()
-        pbar.setLabelText('Compressing: <b>' + misc.string_convert(variant) + '</b> To: <b>' + soutput + '</b>')
-        misc.archive_compress(variant, soutput, 'gz', svar)
-        pbar.hide()
+        sitems = ''
+        for svar in variant:
+            sitems += '"' + svar + '" '
+        general.execute_program('qarchive --gzip ' + sitems)
 
-    def bzip2_items(self, variant, soutput=None):
+    def bzip2_items(self, variant):
         ''' BZip2 files/directories into archive '''
-        pbar = QtGui.QProgressDialog(self.window)
-        pbar.setMaximum(0)
-        if not soutput:
-            for svar in variant:
-                soutput = svar + '.tar.bz2'
-                # ensure that directory is passed to archive_compress() as chir argument
-                if not os.path.isdir(svar):
-                    svar = os.path.dirname(svar)
-        pbar.show()
-        pbar.setLabelText('Compressing: <b>' + misc.string_convert(variant) + '</b> To: <b>' + soutput + '</b>')
-        misc.archive_compress(variant, soutput, 'bz2', svar)
-        pbar.hide()
+        sitems = ''
+        for svar in variant:
+            sitems += '"' + svar + '" '
+        general.execute_program('qarchive --bzip2 ' + sitems)
 
     def new_file(self):
         ''' Create a new file '''

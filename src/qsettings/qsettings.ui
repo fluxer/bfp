@@ -149,9 +149,9 @@
       <property name="geometry">
        <rect>
         <x>370</x>
-        <y>345</y>
+        <y>338</y>
         <width>96</width>
-        <height>24</height>
+        <height>31</height>
        </rect>
       </property>
       <item>
@@ -220,49 +220,19 @@
         <x>10</x>
         <y>10</y>
         <width>496</width>
-        <height>146</height>
+        <height>111</height>
        </rect>
       </property>
       <property name="title">
        <string> Style </string>
       </property>
-      <widget class="QLineEdit" name="MenuEdit">
-       <property name="geometry">
-        <rect>
-         <x>165</x>
-         <y>100</y>
-         <width>316</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="MenuButton">
-       <property name="geometry">
-        <rect>
-         <x>15</x>
-         <y>100</y>
-         <width>136</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="text">
-        <string>Menu</string>
-       </property>
-       <property name="icon">
-        <iconset resource="../qresources/libqresources.qrc">
-         <normaloff>:/share/qresources/resources/system-run.svg</normaloff>:/share/qresources/resources/system-run.svg</iconset>
-       </property>
-      </widget>
       <widget class="QComboBox" name="StyleBox">
        <property name="geometry">
         <rect>
          <x>165</x>
          <y>20</y>
          <width>316</width>
-         <height>26</height>
+         <height>31</height>
         </rect>
        </property>
        <item>
@@ -275,9 +245,9 @@
        <property name="geometry">
         <rect>
          <x>165</x>
-         <y>60</y>
+         <y>65</y>
          <width>316</width>
-         <height>26</height>
+         <height>31</height>
         </rect>
        </property>
        <item>
@@ -292,7 +262,7 @@
          <x>15</x>
          <y>20</y>
          <width>136</width>
-         <height>26</height>
+         <height>31</height>
         </rect>
        </property>
        <property name="text">
@@ -306,9 +276,9 @@
        <property name="geometry">
         <rect>
          <x>15</x>
-         <y>60</y>
+         <y>65</y>
          <width>136</width>
-         <height>26</height>
+         <height>31</height>
         </rect>
        </property>
        <property name="layoutDirection">
@@ -326,15 +296,45 @@
       <property name="geometry">
        <rect>
         <x>10</x>
-        <y>165</y>
+        <y>130</y>
         <width>496</width>
-        <height>146</height>
+        <height>156</height>
        </rect>
       </property>
       <property name="title">
        <string> Applications </string>
       </property>
-      <widget class="QPushButton" name="TerminalButton">
+      <widget class="QComboBox" name="TerminalBox">
+       <property name="geometry">
+        <rect>
+         <x>165</x>
+         <y>20</y>
+         <width>316</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="WebBrowserBox">
+       <property name="geometry">
+        <rect>
+         <x>165</x>
+         <y>110</y>
+         <width>316</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QComboBox" name="FileManagerBox">
+       <property name="geometry">
+        <rect>
+         <x>165</x>
+         <y>65</y>
+         <width>316</width>
+         <height>31</height>
+        </rect>
+       </property>
+      </widget>
+      <widget class="QLabel" name="label_9">
        <property name="geometry">
         <rect>
          <x>15</x>
@@ -346,82 +346,46 @@
        <property name="text">
         <string>Terminal</string>
        </property>
-       <property name="icon">
-        <iconset resource="../qresources/libqresources.qrc">
-         <normaloff>:/share/qresources/resources/utilities-terminal.svg</normaloff>:/share/qresources/resources/utilities-terminal.svg</iconset>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
-      <widget class="QPushButton" name="FileManagerButton">
+      <widget class="QLabel" name="label_12">
        <property name="geometry">
         <rect>
          <x>15</x>
-         <y>60</y>
+         <y>65</y>
          <width>136</width>
          <height>31</height>
         </rect>
+       </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
        </property>
        <property name="text">
         <string>File Manager</string>
        </property>
-       <property name="icon">
-        <iconset resource="../qresources/libqresources.qrc">
-         <normaloff>:/share/qresources/resources/file-manager.svg</normaloff>:/share/qresources/resources/file-manager.svg</iconset>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
-      <widget class="QLineEdit" name="FileManagerEdit">
-       <property name="geometry">
-        <rect>
-         <x>165</x>
-         <y>60</y>
-         <width>316</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QPushButton" name="WebBrowserButton">
+      <widget class="QLabel" name="label_13">
        <property name="geometry">
         <rect>
          <x>15</x>
-         <y>100</y>
+         <y>110</y>
          <width>136</width>
          <height>31</height>
         </rect>
        </property>
+       <property name="layoutDirection">
+        <enum>Qt::LeftToRight</enum>
+       </property>
        <property name="text">
         <string>Web Browser</string>
        </property>
-       <property name="icon">
-        <iconset resource="../qresources/libqresources.qrc">
-         <normaloff>:/share/qresources/resources/web-browser.svg</normaloff>:/share/qresources/resources/web-browser.svg</iconset>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="TerminalEdit">
-       <property name="geometry">
-        <rect>
-         <x>165</x>
-         <y>20</y>
-         <width>316</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
-       </property>
-      </widget>
-      <widget class="QLineEdit" name="WebBrowserEdit">
-       <property name="geometry">
-        <rect>
-         <x>165</x>
-         <y>100</y>
-         <width>316</width>
-         <height>31</height>
-        </rect>
-       </property>
-       <property name="readOnly">
-        <bool>true</bool>
+       <property name="alignment">
+        <set>Qt::AlignCenter</set>
        </property>
       </widget>
      </widget>

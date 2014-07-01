@@ -8,13 +8,9 @@
  * Implement bookmarks
  * Display size and maybe permissions in status bar
 
-## QSETTINGS ##
- * Allow applications to be selected from a preset of applications (ListBox)
-
 ## LIBDESKTOP ##
  * Signal to qsession to shutdown/reboot/suspend/logout?
  * Implement "Update" into dynamic menu?
- * Split decompress/compress actions into separate application to avoid locking QFile
 
 ## QSESSION ##
  * Controls power state and mounting?
