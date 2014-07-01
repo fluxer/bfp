@@ -3,9 +3,7 @@
 import qproperties_ui
 from PyQt4 import QtCore, QtGui
 import sys, os, pwd, grp, stat
-import libdesktop
-import libmisc
-misc = libmisc.Misc()
+import libmisc, libdesktop
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
@@ -19,6 +17,8 @@ for arg in sys.argv:
         sfile = arg
 
 config = libdesktop.Config()
+misc = libmisc.Misc()
+mime = libdesktop.Mime()
 info = QtCore.QFileInfo(sfile)
 date = QtCore.QDateTime()
 icon = QtGui.QIcon()
@@ -73,12 +73,16 @@ elif lenght > 3:
 
 ui.totalSizeLabel.setText(size + ' ' + units)
 ui.filePathLabel.setText(sfile)
+smime = misc.file_mime(sfile)
+ui.mimeLabel.setText(smime)
+ui.programBox.addItems(mime.get_programs())
+index = ui.programBox.findText(mime.get_program(smime))
+ui.programBox.setCurrentIndex(index)
 
 def set_permissions(slist):
     new_group = str(ui.groupBox.currentText())
     new_owner = str(ui.ownerBox.currentText())
     new_executable = bool(ui.executableBox.currentText())
-    print('Saving permissions', new_group, new_owner, new_executable)
     try:
         for sfile in slist:
             if not owner == new_owner or not group == new_group:
@@ -89,21 +93,35 @@ def set_permissions(slist):
             elif executable == 1 and not new_executable:
                 st = os.stat(sfile)
                 os.chmod(sfile, st.st_mode | -stat.S_IEXEC)
-            sys.exit()
     except OSError as detail:
         QtGui.QMessageBox.critical(Dialog, 'Error', str(detail))
 
-def save_permissions():
-    if ui.recursiveBox.currentText() == 'True':
+def save_properties():
+    recursive = False
+
+    # FIXME: directory symlink
+    if os.path.isdir(sfile):
+        reply = QtGui.QMessageBox.question(Dialog, "Question", \
+            'Do you want to set properties of <b>' + svar + '</b> recursively?', \
+            QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
+        if reply == QtGui.QMessageBox.Yes:
+            recursive = True
+
+    if recursive:
         slist = [sfile]
         slist.extend(misc.list_all(sfile))
-        print('Recursive permssions change of', slist)
         set_permissions(slist)
     else:
-        print('Permssions change of', sfile)
         set_permissions([sfile])
 
-ui.okButton.clicked.connect(save_permissions)
+    sprogram = str(ui.programBox.currentText())
+    if not sprogram:
+        mime.unregister(smime)
+    else:
+        mime.register(smime, sprogram)
+    sys.exit()
+
+ui.okButton.clicked.connect(save_properties)
 ui.cancelButton.clicked.connect(sys.exit)
 
 # run!
