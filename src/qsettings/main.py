@@ -73,11 +73,11 @@ def setWebBrowser():
     config.write('default/webbrowser', str(ui.WebBrowserBox.currentText()))
 
 def unregisterMime():
-    smime = ui.MimesView.selectedIndexes()
+    smime = ui.MimesView.currentIndex().data().toString()
     if not smime:
         return
 
-    mime.unregister(QtCore.QModelIndex(smime[0]).data().toString())
+    mime.unregister(smime)
     ui.MimesView.clear()
     ui.MimesView.addItems(mime.get_mimes())
 
@@ -87,38 +87,38 @@ def registerMime():
     smime = str(smime)
     if not smime or not ok:
         return
-    sprogram = ui.ProgramsView.selectedIndexes()
+    sprogram = ui.ProgramsView.currentIndex().data().toString()
     if not sprogram:
         return
 
-    mime.register(smime, QtCore.QModelIndex(sprogram[0]).data().toString())
+    mime.register(smime, sprogram)
     ui.MimesView.addItem(smime)
 
 def setMime():
-    smime = ui.MimesView.selectedIndexes()
+    smime = ui.MimesView.currentIndex().data().toString()
     if not smime:
         return
-    sprogram = ui.ProgramsView.selectedIndexes()
+    sprogram = ui.ProgramsView.currentIndex().data().toString()
     if not sprogram:
         return
 
-    mime.register(QtCore.QModelIndex(smime[0]).data(), QtCore.QModelIndex(sprogram[0]).data())
+    mime.register(smime, sprogram)
 
 def selectMime():
-    sprogram = ui.ProgramsView.selectedIndexes()
+    sprogram = ui.ProgramsView.currentIndex().data().toString()
     if not sprogram:
         return
 
-    smime = mime.get_mime(QtCore.QModelIndex(sprogram[0]).data().toString())
+    smime = mime.get_mime(sprogram)
     for s in ui.MimesView.findItems(sprogram, QtCore.Qt.MatchExactly):
         ui.MimesView.setItemSelected(s, True)
 
 def selectProgram():
-    smime = ui.MimesView.selectedIndexes()
+    smime = ui.MimesView.currentIndex().data().toString()
     if not smime:
         return
 
-    sprogram = mime.get_program(QtCore.QModelIndex(smime[0]).data().toString())
+    sprogram = mime.get_program(smime)
     for s in ui.ProgramsView.findItems(sprogram, QtCore.Qt.MatchExactly):
         ui.ProgramsView.setItemSelected(s, True)
 
