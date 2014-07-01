@@ -263,7 +263,7 @@ class Actions(object):
                 if not os.path.isdir(svar):
                     svar = os.path.dirname(svar)
         pbar.show()
-        pbar.setLabelText('Compressing: <b>' + mist.string_convert(variant) + '</b> To: <b>' + soutput + '</b>')
+        pbar.setLabelText('Compressing: <b>' + misc.string_convert(variant) + '</b> To: <b>' + soutput + '</b>')
         misc.archive_compress(variant, soutput, 'gz', svar)
         pbar.hide()
 
@@ -278,7 +278,7 @@ class Actions(object):
                 if not os.path.isdir(svar):
                     svar = os.path.dirname(svar)
         pbar.show()
-        pbar.setLabelText('Compressing: <b>' + mist.string_convert(variant) + '</b> To: <b>' + soutput + '</b>')
+        pbar.setLabelText('Compressing: <b>' + misc.string_convert(variant) + '</b> To: <b>' + soutput + '</b>')
         misc.archive_compress(variant, soutput, 'bz2', svar)
         pbar.hide()
 
