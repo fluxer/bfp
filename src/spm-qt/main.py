@@ -1,18 +1,15 @@
 #!/bin/python2
 
 from PyQt4 import QtGui
-import sys
-import ConfigParser
-
+import sys, os, ConfigParser
 import spmqt_ui
-import libmessage
-message = libmessage.Message()
-import libmisc
-misc = libmisc.Misc()
-import libpackage
-database = libpackage.Database()
-import libspm
+import libmessage, libmisc, libpackage, libspm, libdesktop
 
+message = libmessage.Message()
+misc = libmisc.Misc()
+database = libpackage.Database()
+config = libdesktop.Config()
+icon = QtGui.QIcon()
 
 def Worker():
     try:
@@ -239,6 +236,16 @@ app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = spmqt_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
+
+def setLook():
+    config.read()
+    ssheet = '/etc/qdesktop/styles/' + config.GENERAL_STYLESHEET + '/style.qss'
+    if config.GENERAL_STYLESHEET and os.path.isfile(ssheet):
+        app.setStyleSheet(misc.file_read(ssheet))
+    else:
+        app.setStyleSheet('')
+    icon.setThemeName(config.GENERAL_ICONTHEME)
+setLook()
 
 Refresh()
 

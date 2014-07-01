@@ -456,61 +456,6 @@
       </property>
      </widget>
     </widget>
-    <widget class="QWidget" name="tab_6">
-     <attribute name="title">
-      <string>About</string>
-     </attribute>
-     <widget class="QPlainTextEdit" name="AboutText">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>40</y>
-        <width>351</width>
-        <height>261</height>
-       </rect>
-      </property>
-      <property name="readOnly">
-       <bool>true</bool>
-      </property>
-      <property name="plainText">
-       <string>Source Package Manager Qt frontend
-Copyright (C) 2013-2014 Ivailo Monev &lt;xakepa10@gmail.com&gt;
-
-This program is free software; you can redistribute
-it and/or modify it under the terms of the GNU
-General Public License as published by the Free
-Software Foundation; either version 2 of the License,
-or (at your option) any later version.
-
-This program is distributed in the hope that it will
-be useful, but WITHOUT ANY WARRANTY; without even the
-implied warranty of MERCHANTABILITY or FITNESS FOR A
-PARTICULAR PURPOSE. See the GNU General Public
-License for more details.
-
-You should have received a copy of the GNU General
-Public License along with this program; if not, write
-to the Free Software Foundation, Inc., 59 Temple Place,
-Suite 330, Boston, MA 02111-1307 USA</string>
-      </property>
-     </widget>
-     <widget class="QLabel" name="AboutLabel">
-      <property name="geometry">
-       <rect>
-        <x>10</x>
-        <y>10</y>
-        <width>351</width>
-        <height>16</height>
-       </rect>
-      </property>
-      <property name="text">
-       <string>Source Package Manager Qt frontend v1.2</string>
-      </property>
-      <property name="alignment">
-       <set>Qt::AlignCenter</set>
-      </property>
-     </widget>
-    </widget>
    </widget>
   </widget>
  </widget>
