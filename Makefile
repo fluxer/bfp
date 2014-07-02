@@ -89,6 +89,9 @@ clean:
 	make -C src/qsession clean
 	make -C src/qsettings clean
 
+changelog:
+	git log > ChangeLog
+
 dist:
 	git archive HEAD --prefix=bfp-$(VERSION)/ | xz > bfp-$(VERSION).tar.xz
 
