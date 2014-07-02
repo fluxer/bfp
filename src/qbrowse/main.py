@@ -130,5 +130,5 @@ ui.actionAbout.triggered.connect(run_about)
 ui.webView.setUrl(QtCore.QUrl(url))
 
 app = QtGui.QApplication(sys.argv)
-MainWindow.show()
+MainWindow.showMaximized()
 sys.exit(app.exec_())
