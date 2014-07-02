@@ -20,6 +20,7 @@ install:
 uninstall:
 	$(RM) -r $(DESTDIR)/etc/spm/ $(DESTDIR)/etc/spm.conf
 	$(RM) $(DESTDIR)$(AUTOSTARTDIR)/dummy.desktop
+	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/qbrowse.desktop
 	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/qedt.desktop
 	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/qfile.desktop
 	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/qnetwork.desktop

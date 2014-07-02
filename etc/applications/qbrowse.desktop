@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=QBrowse
+Exec=qbrowse
+Icon=web-browser
+Terminal=false
+StartupNotify=true
+Type=Application
+Categories=Qt;Internet;
