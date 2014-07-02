@@ -2,6 +2,7 @@
 [Desktop Entry]
 Name=QImage
 Exec=qimage
+# Icon=image-x-generic
 Icon=image-viewer
 Terminal=false
 StartupNotify=true

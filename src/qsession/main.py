@@ -39,7 +39,7 @@ def login(autologin=None):
 
     cryptedpasswd = pwd.getpwnam(username).pw_passwd
     if cryptedpasswd == 'x' or cryptedpasswd == '*':
-        QtGui.QMessageBox.critical(MainWindow, 'Critical', Shadow passwords are hot supported')
+        QtGui.QMessageBox.critical(MainWindow, 'Critical', 'Shadow passwords are hot supported')
         ui.UserNameBox.setFocus()
         ui.PasswordEdit.clear()
         return

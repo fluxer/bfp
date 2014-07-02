@@ -1,4 +1,4 @@
-VERSION = 0.9.2
+VERSION = 0.9.3
 GIT_VERSION = $(shell git rev-parse --short HEAD || echo stable)
 
 DESTDIR = 
@@ -23,8 +23,8 @@ PYUIC = pyuic4
 PYRCC = pyrcc4
 NUITKA = ../../nuitka/bin/nuitka --recurse-not-to=PyQt4,xdg,parted
 # NUITKA = nuitka --clang --recurse-not-to=PyQt4,xdg,parted
-INSTALL = install
+SED = sed
 STRIP = strip
+INSTALL = install
 RM = rm -f
 CP = cp -f
-SED = sed

@@ -173,7 +173,7 @@ def do_reboot():
     general.system_reboot(MainWindow)
 
 def do_logout():
-    general.execute_program(('killall fluxbox')
+    general.execute_program('killall fluxbox')
 
 # setup desktop widget
 model = QtGui.QFileSystemModel()

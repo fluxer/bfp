@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui
 import sys, os, libmisc, libdesktop, libsystem
 
 # prepare for lift-off
-app_version = "0.9.2 (7c9d640)"
+app_version = "0.9.3 (4864e9c)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qsettings_ui.Ui_MainWindow()
@@ -33,7 +33,7 @@ def setImageWallpaper(simage):
     style = str(ui.WallpaperModeBox.currentText())
     if not simage:
         simage = QtGui.QFileDialog.getOpenFileName(MainWindow, \
-            'Open', QtCore.QDir.homePath(), 'Image Files (*.png *.jpg *.jpeg *.svg);;All Files (*)")
+            'Open', QtCore.QDir.homePath(), 'Image Files (*.png *.jpg *.jpeg *.svg);;All Files (*)')
         simage = str(simage)
     ui.WallpaperView.setStyleSheet("border-image: url(" + simage + ") 0 0 0 0 " + style + " " + style + ";")
     config.write('wallpaper/image', simage)
