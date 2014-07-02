@@ -1,4 +1,4 @@
-VERSION = 0.8.4
+VERSION = 0.9.0
 GIT_VERSION = $(shell git rev-parse --short HEAD || echo stable)
 
 DESTDIR = 
@@ -19,6 +19,7 @@ ARCH = $(shell uname -m | sed 's|_|-|')
 JOBS = $(shell echo $$((`nproc || echo 1`+1)))
 
 NUITKA = ../../nuitka/bin/nuitka --recurse-not-to=PyQt4,xdg,parted
+# NUITKA = nuitka --clang --recurse-not-to=PyQt4,xdg,parted
 INSTALL = install
 STRIP = strip
 RM = rm -f
