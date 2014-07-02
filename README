@@ -1,1 +1,14 @@
-Various projects that will not suite everyone
+Various projects that will not suite everyone. This includes libraries, tools,
+desktop applications, coresponding documentation and configuration files.
+
+They are written to suite my own needs but do not hesitate to join me and
+improve the software if you like it, find it useful or something else. Note
+that I do not follow code style much, but sanitising the code can be done on
+demand if that is required, tough I do it from time to time.
+
+The purpose of the projects is to have a package of software that tries to
+complete the GNU command line interface (CLI) and arsenal of tools offered
+with minimum dependencies, written in easy to code programming language,
+integrated into each other with only one thing in mind - KISS! If this does
+not suit you - fine. Priorities of the projects - 1) speed, 2) stability,
+3) security. If you don't like it - fine!
