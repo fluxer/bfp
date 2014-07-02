@@ -14,6 +14,7 @@ ui = qimage_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 
 # some variables
+app_version = "0.9.2"
 scene = QtGui.QGraphicsScene()
 ui.graphicsView.setScene(scene)
 actions = libdesktop.Actions(MainWindow, app)
@@ -36,7 +37,7 @@ for arg in sys.argv[1:]:
         simage = arg
 
 def run_about():
-    QtGui.QMessageBox.about(MainWindow, "About", '<b>QImage v1.0.0</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
+    QtGui.QMessageBox.about(MainWindow, "About", '<b>QImage v' + app_version + '</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
 
 def set_image(sfile):
     image = QtGui.QImage(sfile)

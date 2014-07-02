@@ -17,6 +17,7 @@ ui = qnetwork_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 
 # some variables
+app_version = "0.9.2"
 misc = libmisc.Misc()
 actions = libdesktop.Actions(MainWindow, app)
 config = libdesktop.Config()
@@ -34,7 +35,7 @@ def setLook():
 setLook()
 
 def run_about():
-    QtGui.QMessageBox.about(MainWindow, "About", '<b>QNetwork v1.0.0</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
+    QtGui.QMessageBox.about(MainWindow, "About", '<b>QNetwork v' + app_version + '<</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
 
 def dbus_call(sobject, spath, smethod, scall):
     interface = QtDBus.QDBusInterface(sobject, spath, smethod, bus)

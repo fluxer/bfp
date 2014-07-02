@@ -13,7 +13,7 @@ import os
 import re
 
 
-app_version = "0.8.4 (9953f09)"
+app_version = "0.9.2"
 
 try:
     import libmessage

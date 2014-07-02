@@ -1,6 +1,6 @@
 include ../../Makefile.inc
 
-all: clean
+all: bump clean
 	$(PYUIC) qedit.ui -o qedit_ui.py
 	$(NUITKA) --recurse-to=qedit_ui,libhighlighter main.py
 	$(STRIP) main.exe
@@ -16,4 +16,7 @@ clean:
 	$(RM) -r *.build/ *.exe qedit_ui.py
 	$(RM) $(shell find . -name '*.pyc' -o -name '*.pyo')
 
-.PHONY: all install uninstall clean
+bump:
+	$(SED) 's|^app_version.*|app_version = "$(VERSION) ($(GIT_VERSION))"|' -i main.py
+
+.PHONY: all install uninstall clean bump

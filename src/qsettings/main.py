@@ -6,12 +6,12 @@ import sys, os
 import libmisc, libdesktop, libsystem
 
 # prepare for lift-off
+app_version = "0.9.2"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qsettings_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 icon = QtGui.QIcon()
-
 misc = libmisc.Misc()
 config = libdesktop.Config()
 mime = libdesktop.Mime()
@@ -29,7 +29,7 @@ setLook()
 
 def run_about():
     QtGui.QMessageBox.about(MainWindow, "About", \
-        '<b>QSettings v1.0.0</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
+        '<b>QSettings v' + app_version + '</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
 
 def setWallpaperStyle():
     setImageWallpaper(config.WALLPAPER_IMAGE)

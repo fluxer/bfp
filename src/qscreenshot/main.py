@@ -11,7 +11,7 @@ MainWindow = QtGui.QMainWindow()
 ui = qscreenshot_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 icon = QtGui.QIcon()
-
+app_version = "0.9.2"
 misc = libmisc.Misc()
 config = libdesktop.Config()
 
@@ -26,7 +26,7 @@ def setLook():
 setLook()
 
 def run_about():
-    QtGui.QMessageBox.about(MainWindow, "About", '<b>QScreenshot v1.0.0</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
+    QtGui.QMessageBox.about(MainWindow, "About", '<b>QScreenshot v' + app_version + '</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
 
 def get_filename():
     sfile = QtGui.QFileDialog.getSaveFileName(MainWindow, 'Save as', \

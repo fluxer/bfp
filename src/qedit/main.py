@@ -12,6 +12,7 @@ ui = qedit_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 
 # some variables
+app_version = "0.9.2"
 actions = libdesktop.Actions(MainWindow, app)
 config = libdesktop.Config()
 misc = libmisc.Misc()
@@ -33,7 +34,7 @@ for arg in sys.argv[1:]:
         sedit = arg
 
 def run_about():
-    QtGui.QMessageBox.about(MainWindow, "About", '<b>QEdit v1.0.0</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
+    QtGui.QMessageBox.about(MainWindow, "About", '<b>QEdit v' + app_version + '</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
 
 def new_file():
     sfile = actions.new_file()

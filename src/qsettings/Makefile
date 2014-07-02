@@ -1,6 +1,6 @@
 include ../../Makefile.inc
 
-all: clean
+all: bump clean
 	$(PYUIC) qsettings.ui -o qsettings_ui.py
 	$(NUITKA) --recurse-to=qsettings_ui main.py
 	$(STRIP) main.exe
@@ -16,4 +16,7 @@ clean:
 	$(RM) -r *.build/ *.exe qsettings_ui.py
 	$(RM) $(shell find . -name '*.pyc' -o -name '*.pyo')
 
-.PHONY: all install uninstall clean
+bump:
+	$(SED) 's|^app_version.*|app_version = "$(VERSION) ($(GIT_VERSION))"|' -i main.py
+
+.PHONY: all install uninstall clean bump
