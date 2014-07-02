@@ -34,7 +34,7 @@
      <x>0</x>
      <y>0</y>
      <width>614</width>
-     <height>18</height>
+     <height>20</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMain">
@@ -67,7 +67,21 @@
     <property name="title">
      <string>Options</string>
     </property>
+    <widget class="QMenu" name="menuHighlighter">
+     <property name="title">
+      <string>Highlighter</string>
+     </property>
+     <property name="icon">
+      <iconset resource="../qresources/libqresources.qrc">
+       <normaloff>:/share/qresources/resources/edit-select-all.svg</normaloff>:/share/qresources/resources/edit-select-all.svg</iconset>
+     </property>
+     <addaction name="actionPlain"/>
+     <addaction name="actionPython"/>
+     <addaction name="actionShell"/>
+     <addaction name="actionC"/>
+    </widget>
     <addaction name="actionFont"/>
+    <addaction name="menuHighlighter"/>
    </widget>
    <addaction name="menuMain"/>
    <addaction name="menuAction"/>
@@ -184,6 +198,42 @@
    </property>
    <property name="shortcut">
     <string/>
+   </property>
+  </action>
+  <action name="actionPlain">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/text-plain.svg</normaloff>:/share/qresources/resources/text-plain.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Plain</string>
+   </property>
+  </action>
+  <action name="actionPython">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/text-x-python.svg</normaloff>:/share/qresources/resources/text-x-python.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Python</string>
+   </property>
+  </action>
+  <action name="actionShell">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/shellscript.svg</normaloff>:/share/qresources/resources/shellscript.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Shell</string>
+   </property>
+  </action>
+  <action name="actionC">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/text-x-c.svg</normaloff>:/share/qresources/resources/text-x-c.svg</iconset>
+   </property>
+   <property name="text">
+    <string>C</string>
    </property>
   </action>
  </widget>

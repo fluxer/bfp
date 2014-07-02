@@ -3,7 +3,7 @@
 import qedit_ui
 from PyQt4 import QtCore, QtGui
 import sys, os
-import libmisc, libdesktop
+import libmisc, libdesktop, libhighlighter
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
@@ -81,6 +81,22 @@ def set_font():
     if ok:
         ui.textEdit.setFont(font)
 
+def highlight_plain():
+    try:
+        ui.highlighter.setDocument(None)
+    except AttributeError:
+        pass
+
+def highlight_python():
+    ui.highlighter = libhighlighter.HighlighterPython(ui.textEdit.document())
+
+def highlight_shell():
+    ''' FIXME !!! '''
+    pass
+
+def highlight_c():
+    ui.highlighter = libhighlighter.HighlighterC(ui.textEdit.document())
+
 ui.actionQuit.triggered.connect(sys.exit)
 ui.actionAbout.triggered.connect(run_about)
 ui.actionOpen.triggered.connect(open_file)
@@ -92,6 +108,10 @@ ui.actionFind.triggered.connect(find)
 ui.actionUndo.triggered.connect(ui.textEdit.undo)
 ui.actionRedo.triggered.connect(ui.textEdit.redo)
 ui.actionFont.triggered.connect(set_font)
+ui.actionPlain.triggered.connect(highlight_plain)
+ui.actionPython.triggered.connect(highlight_python)
+ui.actionShell.triggered.connect(highlight_shell)
+ui.actionC.triggered.connect(highlight_c)
 
 if sedit:
     open_file(sedit)

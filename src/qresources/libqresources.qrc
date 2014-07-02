@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/share/qresources">
+    <file>resources/text-x-c.svg</file>
     <file>resources/shellscript.svg</file>
     <file>resources/text-plain.svg</file>
     <file>resources/text-x-python.svg</file>

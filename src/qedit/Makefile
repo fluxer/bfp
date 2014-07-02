@@ -2,7 +2,7 @@ include ../../Makefile.inc
 
 all: clean
 	$(PYUIC) qedit.ui -o qedit_ui.py
-	$(NUITKA) --recurse-to=qedit_ui main.py
+	$(NUITKA) --recurse-to=qedit_ui,libhighlighter main.py
 	$(STRIP) main.exe
 
 install:
