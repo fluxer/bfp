@@ -2,16 +2,14 @@
 
 import qfile_ui
 from PyQt4 import QtCore, QtGui
-import sys, os
-import libmisc, libdesktop, libsystem
+import sys, os, libmisc, libdesktop, libsystem
 
 # prepare for lift-off
+app_version = "0.9.2 (7c9d640)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qfile_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
-
-# some variables
 model = QtGui.QFileSystemModel()
 actions = libdesktop.Actions(MainWindow, app)
 config = libdesktop.Config()
@@ -21,12 +19,7 @@ system = libsystem.System()
 icon = QtGui.QIcon()
 
 def setLook():
-    config.read()
-    ssheet = '/etc/qdesktop/styles/' + config.GENERAL_STYLESHEET + '/style.qss'
-    if config.GENERAL_STYLESHEET and os.path.isfile(ssheet):
-        app.setStyleSheet(misc.file_read(ssheet))
-    else:
-        app.setStyleSheet('')
+    general.set_style(app)
     icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
 
@@ -74,14 +67,12 @@ for arg in sys.argv:
         start_dir = arg
 change_directory(start_dir)
 
-def run_terminal():
-    p = QtCore.QProcess()
-    p.setWorkingDirectory(QtCore.QDir.homePath())
-    p.startDetached(config.DEFAULT_TERMINAL)
-    p.close()
-
 def run_about():
-    QtGui.QMessageBox.about(MainWindow, "About", '<b>QFile v1.0.0</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
+    QtGui.QMessageBox.about(MainWindow, 'About', \
+        '<b>QFile v' + app_version + '</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
+
+def run_terminal():
+    general.execute_program(config.DEFAULT_TERMINAL)
 
 def change_view_icons():
     ui.ViewWidget.setViewMode(ui.ViewWidget.IconMode)
@@ -249,7 +240,7 @@ for device in os.listdir('/sys/class/block'):
 #ui.MountsWidget.sortItems()
 
 # watch configs for changes
-def reload_desktop():
+def reload_file():
     global config, mime
     reload(libdesktop)
     config = libdesktop.Config()
@@ -258,7 +249,7 @@ def reload_desktop():
 
 watcher = QtCore.QFileSystemWatcher()
 watcher.addPaths((config.settings.fileName(), mime.settings.fileName()))
-watcher.fileChanged.connect(reload_desktop)
+watcher.fileChanged.connect(reload_file)
 
 # run!
 MainWindow.show()

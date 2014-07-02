@@ -2,34 +2,21 @@
 
 import qopen_ui
 from PyQt4 import QtCore, QtGui
-import sys, os, pwd, grp, stat
-import libmisc, libdesktop
-
+import sys, os, pwd, grp, stat, libmisc, libdesktop
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
 Dialog = QtGui.QDialog()
 ui = qopen_ui.Ui_Dialog()
 ui.setupUi(Dialog)
-
-sfile = str(QtCore.QDir.currentPath())
-for arg in sys.argv[1:]:
-    if os.path.exists(arg):
-        sfile = arg
-
 config = libdesktop.Config()
 menu = libdesktop.Menu(app, None)
-mime = libdesktop.Mime()
+general = libdesktop.General()
 misc = libmisc.Misc()
 icon = QtGui.QIcon()
 
 def setLook():
-    config.read()
-    ssheet = '/etc/qdesktop/styles/' + config.GENERAL_STYLESHEET + '/style.qss'
-    if config.GENERAL_STYLESHEET and os.path.isfile(ssheet):
-        app.setStyleSheet(misc.file_read(ssheet))
-    else:
-        app.setStyleSheet('')
+    general.set_style(app)
     icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
 
@@ -44,6 +31,11 @@ for dfile in misc.list_files(sys.prefix + '/share/applications'):
 
 ui.okButton.clicked.connect(open_file)
 ui.cancelButton.clicked.connect(sys.exit)
+
+sfile = str(QtCore.QDir.currentPath())
+for arg in sys.argv[1:]:
+    if os.path.exists(arg):
+        sfile = arg
 
 # run!
 Dialog.show()

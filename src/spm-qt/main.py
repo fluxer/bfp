@@ -1,14 +1,19 @@
 #!/bin/python2
 
-from PyQt4 import QtGui
-import sys, os, ConfigParser
 import spmqt_ui
-import libmessage, libmisc, libpackage, libspm, libdesktop
+from PyQt4 import QtGui
+import sys, ConfigParser, libmessage, libmisc, libpackage, libspm, libdesktop
 
+# prepare for lift-off
+app = QtGui.QApplication(sys.argv)
+MainWindow = QtGui.QMainWindow()
+ui = spmqt_ui.Ui_MainWindow()
+ui.setupUi(MainWindow)
 message = libmessage.Message()
 misc = libmisc.Misc()
 database = libpackage.Database()
 config = libdesktop.Config()
+general = libdesktop.General()
 icon = QtGui.QIcon()
 
 def Worker():
@@ -91,10 +96,6 @@ def Refresh():
     ui.BackupBox.setCheckState(libspm.BACKUP)
     ui.ScriptsBox.setCheckState(libspm.SCRIPTS)
 
-
-
-
-
 def RefreshWidgets():
     target = str(ui.TargetsList.currentItem().text())
 
@@ -149,10 +150,6 @@ def SyncRepos():
     m = libspm.Repo(libspm.REPOSITORIES, do_clean=True, do_sync=True, do_update=False)
     Worker()
 
-
-
-
-
 def ChangeSettings():
     try:
         conf = ConfigParser.SafeConfigParser()
@@ -198,9 +195,6 @@ def ChangeMirrors():
     except Exception as detail:
         message.critical(detail)
 
-
-
-
 def info(msg, marker=None):
     if not marker is None:
         print('[INFO] %s: %s' %(msg, marker))
@@ -232,18 +226,8 @@ message.sub_warning = warning
 message.critical = critical
 message.sub_critical = critical
 
-app = QtGui.QApplication(sys.argv)
-MainWindow = QtGui.QMainWindow()
-ui = spmqt_ui.Ui_MainWindow()
-ui.setupUi(MainWindow)
-
 def setLook():
-    config.read()
-    ssheet = '/etc/qdesktop/styles/' + config.GENERAL_STYLESHEET + '/style.qss'
-    if config.GENERAL_STYLESHEET and os.path.isfile(ssheet):
-        app.setStyleSheet(misc.file_read(ssheet))
-    else:
-        app.setStyleSheet('')
+    general.set_style(app)
     icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
 

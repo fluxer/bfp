@@ -2,35 +2,31 @@
 
 import qscreenshot_ui
 from PyQt4 import QtCore, QtGui
-import sys, os, time
-import libmisc, libdesktop
+import sys, os, time, libmisc, libdesktop
 
 # prepare for lift-off
+app_version = "0.9.2"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qscreenshot_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 icon = QtGui.QIcon()
-app_version = "0.9.2"
 misc = libmisc.Misc()
 config = libdesktop.Config()
+general = libdesktop.General()
 
 def setLook():
-    config.read()
-    ssheet = '/etc/qdesktop/styles/' + config.GENERAL_STYLESHEET + '/style.qss'
-    if config.GENERAL_STYLESHEET and os.path.isfile(ssheet):
-        app.setStyleSheet(misc.file_read(ssheet))
-    else:
-        app.setStyleSheet('')
+    general.set_style(app)
     icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
 
 def run_about():
-    QtGui.QMessageBox.about(MainWindow, "About", '<b>QScreenshot v' + app_version + '</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
+    QtGui.QMessageBox.about(MainWindow, 'About', \
+        '<b>QScreenshot v' + app_version + '</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
 
 def get_filename():
-    sfile = QtGui.QFileDialog.getSaveFileName(MainWindow, 'Save as', \
-        'screenshot.png', "Image Files (*.jpg *.png *.jpeg);;All Files (*)")
+    sfile = QtGui.QFileDialog.getSaveFileName(MainWindow, 'Save', \
+        'screenshot.png',  'Image Files (*.png *.jpg *.jpeg *.svg);;All Files (*)')
     if sfile:
         return str(sfile)
     return None

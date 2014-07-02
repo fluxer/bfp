@@ -2,41 +2,22 @@
 
 import qdesktop_ui
 from PyQt4 import QtCore, QtGui
-import sys, os
-import libmisc
-misc = libmisc.Misc()
-import libdesktop
+import sys, os, libmisc, libdesktop
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qdesktop_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
-
-# some variables
 config = libdesktop.Config()
 mime = libdesktop.Mime()
 actions = libdesktop.Actions(MainWindow, app)
 general = libdesktop.General()
+misc = libmisc.Misc()
 icon = QtGui.QIcon()
 
-# setup desktop widget
-model = QtGui.QFileSystemModel()
-ui.DesktopView.setModel(model)
-desktop = str(QtCore.QDir.homePath())
-misc.dir_create(desktop)
-root = model.setRootPath(desktop)
-ui.DesktopView.setRootIndex(root)
-os.chdir(desktop)
-ui.DesktopView.setViewMode(ui.DesktopView.IconMode)
-
 def setLook():
-    config.read()
-    ssheet = '/etc/qdesktop/styles/' + config.GENERAL_STYLESHEET + '/style.qss'
-    if config.GENERAL_STYLESHEET and os.path.isfile(ssheet):
-        app.setStyleSheet(misc.file_read(ssheet))
-    else:
-        app.setStyleSheet('')
+    general.set_style(app)
     icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
 
@@ -171,28 +152,16 @@ def change_directory():
     mime.open(str(model.filePath(ui.DesktopView.currentIndex())))
 
 def run_terminal():
-    p = QtCore.QProcess()
-    p.setWorkingDirectory(QtCore.QDir.homePath())
-    p.startDetached(config.DEFAULT_TERMINAL)
-    p.close()
+    general.execute_program(config.DEFAULT_TERMINAL)
 
 def run_filemanager():
-    p = QtCore.QProcess()
-    p.setWorkingDirectory(QtCore.QDir.homePath())
-    p.startDetached(config.DEFAULT_FILEMANAGER)
-    p.close()
+    general.execute_program(config.DEFAULT_FILEMANAGER)
 
 def run_webbrowser():
-    p = QtCore.QProcess()
-    p.setWorkingDirectory(QtCore.QDir.homePath())
-    p.startDetached(config.DEFAULT_WEBBROWSER)
-    p.close()
+    general.execute_program(config.DEFAULT_WEBBROWSER)
 
 def run_preferences():
-    p = QtCore.QProcess()
-    p.setWorkingDirectory(QtCore.QDir.homePath())
-    p.startDetached('qsettings')
-    p.close()
+    general.execute_program('qsettings')
 
 def do_suspend():
     general.system_suspend(MainWindow)
@@ -204,9 +173,17 @@ def do_reboot():
     general.system_reboot(MainWindow)
 
 def do_logout():
-    os.system('killall fluxbox')
+    general.execute_program(('killall fluxbox')
 
-# setup desktop view
+# setup desktop widget
+model = QtGui.QFileSystemModel()
+ui.DesktopView.setModel(model)
+desktop = str(QtCore.QDir.homePath())
+misc.dir_create(desktop)
+root = model.setRootPath(desktop)
+ui.DesktopView.setRootIndex(root)
+os.chdir(desktop)
+ui.DesktopView.setViewMode(ui.DesktopView.IconMode)
 ui.DesktopView.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
 ui.DesktopView.customContextMenuRequested.connect(enable_actions)
 ui.DesktopView.customContextMenuRequested.connect(show_popup)
@@ -253,7 +230,6 @@ def reload_desktop():
     reload(libdesktop)
     config = libdesktop.Config()
     mime = libdesktop.Mime()
-    menu = libdesktop.Menu(app, ui.menuApplications)
     menu.build()
     setLook()
     setWallpaper()

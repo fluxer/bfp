@@ -2,39 +2,28 @@
 
 import qpanel_ui
 from PyQt4 import QtCore, QtGui
-import sys, os
-import libmisc
-misc = libmisc.Misc()
-import libdesktop
+import sys, os, libmisc, libdesktop
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qpanel_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
-
 config = libdesktop.Config()
 general = libdesktop.General()
+misc = libmisc.Misc()
 icon = QtGui.QIcon()
 
-def run_preferences():
-    p = QtCore.QProcess()
-    p.setWorkingDirectory(QtCore.QDir.homePath())
-    p.startDetached('qsettings')
-    p.close()
-
 def setLook():
-    config.read()
-    ssheet = '/etc/qdesktop/styles/' + config.GENERAL_STYLESHEET + '/style.qss'
-    if config.GENERAL_STYLESHEET and os.path.isfile(ssheet):
-        app.setStyleSheet(misc.file_read(ssheet))
-    else:
-        app.setStyleSheet('')
+    general.set_style(app)
     icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
 
 def show_popup():
     ui.menuActions.popup(QtGui.QCursor.pos())
+
+def run_preferences():
+   general.execute_program('qsettings')
 
 def do_suspend():
     general.system_suspend(MainWindow)
@@ -63,6 +52,23 @@ desktop = QtGui.QDesktopWidget()
 MainWindow.resize(desktop.width(), 50)
 MainWindow.move(0, desktop.rect().bottom() - 50)
 MainWindow.setWindowFlags(QtCore.Qt.FramelessWindowHint | QtCore.Qt.WindowStaysOnTopHint | QtCore.Qt.Tool)
+
+# watch configs for changes
+def reload_panel():
+    global config, general
+    reload(libdesktop)
+    config = libdesktop.Config()
+    general = libdesktop.General()
+    menu.build()
+    setLook()
+
+watcher1 = QtCore.QFileSystemWatcher()
+watcher1.addPath(config.settings.fileName())
+watcher1.fileChanged.connect(reload_panel)
+
+watcher2 = QtCore.QFileSystemWatcher()
+watcher2.addPath(sys.prefix + '/share/applications')
+watcher2.directoryChanged.connect(menu.build)
 
 # run!
 MainWindow.show()

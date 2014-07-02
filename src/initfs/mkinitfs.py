@@ -1,20 +1,13 @@
 #!/bin/python2
 
-import sys
-import argparse
-import tempfile
-import subprocess
-import tarfile
-import zipfile
-import shutil
-import os
+import sys, argparse, tempfile, subprocess
+import tarfile, zipfile, shutil, os
 
 app_version = "0.0.1 (61914bd)"
 
 try:
-    import libmessage
+    import libmessage, libmisc
     message = libmessage.Message()
-    import libmisc
     misc = libmisc.Misc()
 
     parser = argparse.ArgumentParser(prog='mkinitfs', description='MkInitfs')

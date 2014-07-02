@@ -2,29 +2,22 @@
 
 import qbrowse_ui
 from PyQt4 import QtCore, QtGui
-import sys, os
-import libmisc, libdesktop
+import sys, os, libmisc, libdesktop
 
 # prepare for lift-off
+app_version = "0.9.2 (7c9d640)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
-
-# some variables
-app_version = "0.9.2"
 actions = libdesktop.Actions(MainWindow, app)
 config = libdesktop.Config()
+general = libdesktop.General()
 misc = libmisc.Misc()
 icon = QtGui.QIcon()
 
 def setLook():
-    config.read()
-    ssheet = '/etc/qdesktop/styles/' + config.GENERAL_STYLESHEET + '/style.qss'
-    if config.GENERAL_STYLESHEET and os.path.isfile(ssheet):
-        app.setStyleSheet(misc.file_read(ssheet))
-    else:
-        app.setStyleSheet('')
+    general.set_style(app)
     icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
 
@@ -130,6 +123,16 @@ ui.actionAbout.triggered.connect(run_about)
 # load page
 ui.webView.setUrl(QtCore.QUrl(url))
 
-app = QtGui.QApplication(sys.argv)
+# watch configs for changes
+def reload_browser():
+    global config
+    reload(libdesktop)
+    config = libdesktop.Config()
+    setLook()
+
+watcher1 = QtCore.QFileSystemWatcher()
+watcher1.addPath(config.settings.fileName())
+watcher1.fileChanged.connect(reload_browser)
+
 MainWindow.showMaximized()
 sys.exit(app.exec_())

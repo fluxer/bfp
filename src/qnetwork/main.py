@@ -7,35 +7,29 @@ sip.setapi('QVariant', 2)
 
 import qnetwork_ui
 from PyQt4 import QtCore, QtGui, QtDBus
-import sys, os
-import libmisc, libdesktop
+import sys, os, libmisc, libdesktop
 
 # prepare for lift-off
+app_version = "0.9.2 (7c9d640)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qnetwork_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
-
-# some variables
-app_version = "0.9.2"
 misc = libmisc.Misc()
 actions = libdesktop.Actions(MainWindow, app)
+general = libdesktop.General()
 config = libdesktop.Config()
 icon = QtGui.QIcon()
 bus = QtDBus.QDBusConnection.systemBus()
 
 def setLook():
-    config.read()
-    ssheet = '/etc/qdesktop/styles/' + config.GENERAL_STYLESHEET + '/style.qss'
-    if config.GENERAL_STYLESHEET and os.path.isfile(ssheet):
-        app.setStyleSheet(misc.file_read(ssheet))
-    else:
-        app.setStyleSheet('')
+    general.set_style(app)
     icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
 
 def run_about():
-    QtGui.QMessageBox.about(MainWindow, "About", '<b>QNetwork v' + app_version + '<</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
+    QtGui.QMessageBox.about(MainWindow, 'About', \
+        '<b>QNetwork v' + app_version + '<</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
 
 def dbus_call(sobject, spath, smethod, scall):
     interface = QtDBus.QDBusInterface(sobject, spath, smethod, bus)
@@ -44,10 +38,10 @@ def dbus_call(sobject, spath, smethod, scall):
         if reply.isValid():
             return reply.value()
         else:
-            QtGui.QMessageBox.critical(MainWindow, 'Error', str(reply.error().message()))
+            QtGui.QMessageBox.critical(MainWindow, 'Critical', str(reply.error().message()))
             return False
     else:
-        QtGui.QMessageBox.critical(MainWindow, 'Error', str(bus.lastError().message()))
+        QtGui.QMessageBox.critical(MainWindow, 'Critical', str(bus.lastError().message()))
         return False
 
 def connect(name):
@@ -285,9 +279,9 @@ class Connector(QtCore.QObject):
         scan_ethernet()
 
 connector = Connector()
-bus.connect("net.connman", "/", "net.connman.Manager", "ServicesChanged", connector.scan)
-bus.connect("net.connman", "/", "net.connman.Manager", "TechnologyAdded", connector.scan)
-bus.connect("net.connman", "/", "net.connman.Manager", "TechnologyRemoved", connector.scan)
+bus.connect('net.connman', '/', 'net.connman.Manager', 'ServicesChanged', connector.scan)
+bus.connect('net.connman', '/', 'net.connman.Manager', 'TechnologyAdded', connector.scan)
+bus.connect('net.connman', '/', 'net.connman.Manager', 'TechnologyRemoved', connector.scan)
 
 scan_ethernet()
 scan_wifi()

@@ -2,29 +2,21 @@
 
 import qedit_ui
 from PyQt4 import QtCore, QtGui
-import sys, os
-import libmisc, libdesktop, libhighlighter
+import sys, os, libmisc, libdesktop, libhighlighter
 
 # prepare for lift-off
+app_version = "0.9.2 (7c9d640)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qedit_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
-
-# some variables
-app_version = "0.9.2"
 actions = libdesktop.Actions(MainWindow, app)
 config = libdesktop.Config()
 misc = libmisc.Misc()
 icon = QtGui.QIcon()
 
 def setLook():
-    config.read()
-    ssheet = '/etc/qdesktop/styles/' + config.GENERAL_STYLESHEET + '/style.qss'
-    if config.GENERAL_STYLESHEET and os.path.isfile(ssheet):
-        app.setStyleSheet(misc.file_read(ssheet))
-    else:
-        app.setStyleSheet('')
+    general.set_style(app)
     icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
 

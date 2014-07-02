@@ -18,16 +18,12 @@ if len(sys.argv) < 3:
 
 config = libdesktop.Config()
 actions = libdesktop.Actions(Dialog, app)
+general = libdesktop.General()
 icon = QtGui.QIcon()
 misc = libmisc.Misc()
 
 def setLook():
-    config.read()
-    ssheet = '/etc/qdesktop/styles/' + config.GENERAL_STYLESHEET + '/style.qss'
-    if config.GENERAL_STYLESHEET and os.path.isfile(ssheet):
-        app.setStyleSheet(misc.file_read(ssheet))
-    else:
-        app.setStyleSheet('')
+    general.set_style(app)
     icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
 
@@ -56,7 +52,8 @@ if action == '--copy':
             ui.ProgressBar.setValue(step)
             step = step + step
     except Exception as detail:
-        QtGui.QMessageBox.critical(Dialog, 'Error', str(detail))
+        QtGui.QMessageBox.critical(Dialog, 'Critical', str(detail))
+        sys.exit(2)
     finally:
         sys.exit(0)
 elif action == '--cut':
@@ -77,7 +74,8 @@ elif action == '--cut':
             ui.ProgressBar.setValue(step)
             step = step + step
     except Exception as detail:
-        QtGui.QMessageBox.critical(Dialog, 'Error', str(detail))
+        QtGui.QMessageBox.critical(Dialog, 'Critical', str(detail))
+        sys.exit(2)
     finally:
         sys.exit(0)
 elif action == '--delete':
@@ -91,8 +89,8 @@ elif action == '--delete':
             qbuttons = QtGui.QMessageBox.Yes | QtGui.QMessageBox.No | QtGui.QMessageBox.Cancel
         for svar in items:
             if ask:
-                reply = QtGui.QMessageBox.question(Dialog, "Question", \
-                    "Are you sure you want to delete <b>" + svar + "</b>? ", qbuttons)
+                reply = QtGui.QMessageBox.question(Dialog, 'Question', \
+                    'Are you sure you want to delete <b>' + svar + '</b>?', qbuttons)
                 if reply == QtGui.QMessageBox.Yes:
                     pass
                 elif reply == QtGui.QMessageBox.No:
@@ -109,7 +107,8 @@ elif action == '--delete':
             ui.ProgressBar.setValue(step)
             step = step + step
     except Exception as detail:
-        QtGui.QMessageBox.critical(Dialog, 'Error', str(detail))
+        QtGui.QMessageBox.critical(Dialog, 'Critical', str(detail))
+        sys.exit(2)
     finally:
         sys.exit(0)
 elif action == '--rename':
@@ -120,8 +119,8 @@ elif action == '--rename':
             svar_basename = os.path.basename(svar)
             svar_dirname = os.path.dirname(svar)
 
-            svar_new, ok = QtGui.QInputDialog.getText(Dialog, "Move", \
-                "New name:", QtGui.QLineEdit.Normal, svar_basename)
+            svar_new, ok = QtGui.QInputDialog.getText(Dialog, 'Move', \
+                'New name:', QtGui.QLineEdit.Normal, svar_basename)
             if ok and svar_new:
                 pass
             else:
@@ -138,10 +137,12 @@ elif action == '--rename':
             ui.ProgressBar.setValue(step)
             step = step + step
     except Exception as detail:
-        QtGui.QMessageBox.critical(Dialog, 'Error', str(detail))
+        QtGui.QMessageBox.critical(Dialog, 'Critical', str(detail))
+        sys.exit(2)
     finally:
         sys.exit(0)
 else:
-    print('Invalid action, choose from cut/copy/rename/delete.')
+    QtGui.QMessageBox.critical(Dialog, 'Critical', 'Invalid action, choose from cut/copy/rename/delete.')
+    sys.exit(3)
 
 sys.exit(app.exec_())

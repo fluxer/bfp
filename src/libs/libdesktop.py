@@ -1,7 +1,6 @@
 #!/bin/python2
 
-import os
-import xdg.Menu, xdg.DesktopEntry, xdg.IconTheme
+import os, xdg.Menu, xdg.DesktopEntry, xdg.IconTheme
 from PyQt4 import QtCore, QtGui
 
 import libmisc, libsystem
@@ -11,10 +10,15 @@ system = libsystem.System()
 
 class General(object):
     ''' Common methods '''
-    def set_style(self):
+    def set_style(self, app):
         ''' Style and icon application setup '''
-        # FIXME: set stylesheet and icon theme
-        pass
+        config.read()
+        ssheet = '/etc/qdesktop/styles/' + config.GENERAL_STYLESHEET + '/style.qss'
+        if config.GENERAL_STYLESHEET and os.path.isfile(ssheet):
+            app.setStyleSheet(misc.file_read(ssheet))
+        else:
+            app.setStyleSheet('')
+        # icon.setThemeName(config.GENERAL_ICONTHEME)
 
     def execute_program(self, sprogram, sdetached=True, skill=False):
         ''' Execute program from PATH '''
@@ -42,7 +46,7 @@ class General(object):
                 system.SUSPEND_STATE = config.SUSPEND_STATE
                 system.do_suspend()
             except Exception as detail:
-                QtGui.QMessageBox.critical(window, 'Error', str(detail))
+                QtGui.QMessageBox.critical(window, 'Critical', str(detail))
 
     def system_shutdown(self, window):
         ''' Ask if system should shutdown '''
@@ -53,7 +57,7 @@ class General(object):
             try:
                 system.do_shutdown()
             except Exception as detail:
-                QtGui.QMessageBox.critical(window, 'Error', str(detail))
+                QtGui.QMessageBox.critical(window, 'Critical', str(detail))
 
     def system_reboot(self, window):
         ''' Ask if system should rebooted '''
@@ -64,7 +68,7 @@ class General(object):
             try:
                 system.do_reboot()
             except Exception as detail:
-                QtGui.QMessageBox.critical(window, 'Error', str(detail))
+                QtGui.QMessageBox.critical(window, 'Critical', str(detail))
 
 general = General()
 
@@ -181,8 +185,8 @@ class Actions(object):
         ''' Check if file/dir exists and offer to rename '''
         sfile_basename = os.path.basename(sfile)
         sfile_dirname = os.path.dirname(sfile)
-        sfile_basename, ok = QtGui.QInputDialog.getText(self.window, "File/directory exists", \
-                "File/directory exists, new name:", QtGui.QLineEdit.Normal, sfile_basename)
+        sfile_basename, ok = QtGui.QInputDialog.getText(self.window, 'File/directory exists', \
+                'File/directory exists, new name:', QtGui.QLineEdit.Normal, sfile_basename)
         sfile_basename = str(sfile_basename)
         if ok and sfile_basename:
             if not os.path.exists(sfile_dirname + '/' + sfile_basename):
@@ -267,8 +271,8 @@ class Actions(object):
 
     def new_file(self):
         ''' Create a new file '''
-        svar, ok = QtGui.QInputDialog.getText(self.window, "New file", \
-            "Name:", QtGui.QLineEdit.Normal)
+        svar, ok = QtGui.QInputDialog.getText(self.window, 'New file', \
+            'Name:', QtGui.QLineEdit.Normal)
         svar = os.path.realpath(str(svar))
         if ok and svar:
             if os.path.exists(svar):
@@ -276,14 +280,13 @@ class Actions(object):
                 if not svar:
                     return
             svar = str(svar)
-            print('New file: ', svar)
             misc.file_write(os.path.realpath(svar), '')
             return svar
 
     def new_directory(self):
         ''' Create a new directory '''
-        svar, ok = QtGui.QInputDialog.getText(self.window, "New directory", \
-            "Name:", QtGui.QLineEdit.Normal)
+        svar, ok = QtGui.QInputDialog.getText(self.window, 'New directory', \
+            'Name:', QtGui.QLineEdit.Normal)
         svar = os.path.realpath(str(svar))
         if ok and svar:
             if os.path.isdir(svar):
@@ -291,7 +294,6 @@ class Actions(object):
                 if not svar:
                     return
             svar = str(svar)
-            print('New directory: ', svar)
             misc.dir_create(svar)
             return svar
 

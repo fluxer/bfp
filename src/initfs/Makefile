@@ -1,6 +1,6 @@
 include ../../Makefile.inc
 
-all: clean
+all: bump clean
 	$(NUITKA) mkinitfs.py
 	$(NUITKA) lsinitfs.py
 	$(STRIP) mkinitfs.exe lsinitfs.exe
@@ -22,4 +22,7 @@ clean:
 	$(RM) -r *.build/ *.exe
 	$(RM) $(shell find . -name '*.pyc' -o -name '*.pyo')
 
-.PHONY: all install uninstall clean
+bump:
+	$(SED) 's|^app_version.*|app_version = "$(VERSION) ($(GIT_VERSION))"|' -i lsinitfs.py mkinitfs.py
+
+.PHONY: all install uninstall clean bump

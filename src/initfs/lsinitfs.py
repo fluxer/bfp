@@ -1,21 +1,13 @@
 #!/bin/python2
 
-import sys
-import argparse
-import tempfile
-import subprocess
-import tarfile
-import zipfile
-import shutil
-import os
-
+import sys, argparse, tempfile, subprocess
+import tarfile, zipfile, shutil, os
 
 app_version = "0.0.1 (61914bd)"
 
 try:
-    import libmessage
+    import libmessage, libmisc
     message = libmessage.Message()
-    import libmisc
     misc = libmisc.Misc()
 
     parser = argparse.ArgumentParser(prog='lsinitfs', description='LsInitfs')
@@ -35,8 +27,8 @@ try:
     parser.add_argument('--debug', action='store_true', \
         help='Enable debug messages')
     parser.add_argument('--version', action='version', \
-        version='MkInitfs v' + app_version, \
-        help='Show MkInitfs version and exit')
+        version='LsInitfs v' + app_version, \
+        help='Show LsInitfs version and exit')
 
     ARGS = parser.parse_args()
 

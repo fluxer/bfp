@@ -2,36 +2,30 @@
 
 import qproperties_ui
 from PyQt4 import QtCore, QtGui
-import sys, os, pwd, grp, stat
-import libmisc, libdesktop
+import sys, os, pwd, grp, stat, libmisc, libdesktop
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
 Dialog = QtGui.QDialog()
 ui = qproperties_ui.Ui_Dialog()
 ui.setupUi(Dialog)
-
-sfile = str(QtCore.QDir.currentPath())
-for arg in sys.argv:
-    if os.path.exists(arg):
-        sfile = arg
-
 config = libdesktop.Config()
 misc = libmisc.Misc()
 mime = libdesktop.Mime()
+general = libdesktop.General()
 info = QtCore.QFileInfo(sfile)
 date = QtCore.QDateTime()
 icon = QtGui.QIcon()
 
 def setLook():
-    config.read()
-    ssheet = '/etc/qdesktop/styles/' + config.GENERAL_STYLESHEET + '/style.qss'
-    if config.GENERAL_STYLESHEET and os.path.isfile(ssheet):
-        app.setStyleSheet(misc.file_read(ssheet))
-    else:
-        app.setStyleSheet('')
+    general.set_style(app)
     icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
+
+sfile = str(QtCore.QDir.currentPath())
+for arg in sys.argv:
+    if os.path.exists(arg):
+        sfile = arg
 
 # FIXME: disable those who can not be set
 for group in grp.getgrall():
@@ -100,14 +94,14 @@ def set_permissions(slist):
                 st = os.stat(sfile)
                 os.chmod(sfile, st.st_mode | -stat.S_IEXEC)
     except OSError as detail:
-        QtGui.QMessageBox.critical(Dialog, 'Error', str(detail))
+        QtGui.QMessageBox.critical(Dialog, 'Critical', str(detail))
 
 def save_properties():
     recursive = False
 
     # FIXME: directory symlink
     if os.path.isdir(sfile):
-        reply = QtGui.QMessageBox.question(Dialog, "Question", \
+        reply = QtGui.QMessageBox.question(Dialog, 'Question', \
             'Do you want to set properties of <b>' + svar + '</b> recursively?', \
             QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
         if reply == QtGui.QMessageBox.Yes:

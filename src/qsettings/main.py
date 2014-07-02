@@ -2,11 +2,10 @@
 
 import qsettings_ui
 from PyQt4 import QtCore, QtGui
-import sys, os
-import libmisc, libdesktop, libsystem
+import sys, os, libmisc, libdesktop, libsystem
 
 # prepare for lift-off
-app_version = "0.9.2"
+app_version = "0.9.2 (7c9d640)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qsettings_ui.Ui_MainWindow()
@@ -15,20 +14,16 @@ icon = QtGui.QIcon()
 misc = libmisc.Misc()
 config = libdesktop.Config()
 mime = libdesktop.Mime()
+general = libdesktop.General()
 system = libsystem.System()
 
 def setLook():
-    config.read()
-    ssheet = '/etc/qdesktop/styles/' + config.GENERAL_STYLESHEET + '/style.qss'
-    if config.GENERAL_STYLESHEET and os.path.isfile(ssheet):
-        app.setStyleSheet(misc.file_read(ssheet))
-    else:
-        app.setStyleSheet('')
+    general.set_style(app)
     icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
 
 def run_about():
-    QtGui.QMessageBox.about(MainWindow, "About", \
+    QtGui.QMessageBox.about(MainWindow, 'About', \
         '<b>QSettings v' + app_version + '</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
 
 def setWallpaperStyle():
@@ -38,7 +33,7 @@ def setImageWallpaper(simage):
     style = str(ui.WallpaperModeBox.currentText())
     if not simage:
         simage = QtGui.QFileDialog.getOpenFileName(MainWindow, \
-            "Choose", QtCore.QDir.homePath(), "Image Files (*.jpg *.png *.jpeg);;All Files (*)")
+            'Open', QtCore.QDir.homePath(), 'Image Files (*.png *.jpg *.jpeg *.svg);;All Files (*)")
         simage = str(simage)
     ui.WallpaperView.setStyleSheet("border-image: url(" + simage + ") 0 0 0 0 " + style + " " + style + ";")
     config.write('wallpaper/image', simage)
@@ -82,8 +77,8 @@ def unregisterMime():
     ui.MimesView.addItems(mime.get_mimes())
 
 def registerMime():
-    smime, ok = QtGui.QInputDialog.getText(MainWindow, "Mime", \
-        "Mime:", QtGui.QLineEdit.Normal, '')
+    smime, ok = QtGui.QInputDialog.getText(MainWindow, 'Mime', \
+        'Mime:', QtGui.QLineEdit.Normal, '')
     smime = str(smime)
     if not smime or not ok:
         return
@@ -198,7 +193,6 @@ index = ui.FileManagerBox.findText(config.DEFAULT_FILEMANAGER)
 ui.FileManagerBox.setCurrentIndex(index)
 index = ui.WebBrowserBox.findText(config.DEFAULT_WEBBROWSER)
 ui.WebBrowserBox.setCurrentIndex(index)
-
 index = ui.DiskBox.findText(config.SUSPEND_DISK)
 ui.DiskBox.setCurrentIndex(index)
 index = ui.StateBox.findText(config.SUSPEND_STATE)

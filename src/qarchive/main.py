@@ -1,31 +1,25 @@
 #!/bin/python2
 
 from PyQt4 import QtGui
-import sys, os, shutil
-import libmisc, libdesktop
+import sys, os, libmisc, libdesktop
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
 Dialog = QtGui.QProgressDialog() # 'QArchive'
-
-if len(sys.argv) < 3:
-    QtGui.QMessageBox.critical(Dialog, 'Error', 'Not enough arguments')
-    sys.exit(2)
-
 config = libdesktop.Config()
 actions = libdesktop.Actions(Dialog, app)
+general = libdesktop.General()
 icon = QtGui.QIcon()
 misc = libmisc.Misc()
 
 def setLook():
-    config.read()
-    ssheet = '/etc/qdesktop/styles/' + config.GENERAL_STYLESHEET + '/style.qss'
-    if config.GENERAL_STYLESHEET and os.path.isfile(ssheet):
-        app.setStyleSheet(misc.file_read(ssheet))
-    else:
-        app.setStyleSheet('')
+    general.set_style(app)
     icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
+
+if len(sys.argv) < 3:
+    QtGui.QMessageBox.critical(Dialog, 'Critical', 'Not enough arguments')
+    sys.exit(2)
 
 Dialog.setMaximum(0)
 
@@ -43,7 +37,7 @@ if action == '--gzip':
         misc.archive_compress(variant, soutput, 'gz', svar)
         Dialog.hide()
     except Exception as detail:
-        QtGui.QMessageBox.critical(Dialog, 'Error', str(detail))
+        QtGui.QMessageBox.critical(Dialog, 'Critical', str(detail))
     finally:
         sys.exit(0)
 elif action == '--bzip2':
@@ -58,7 +52,7 @@ elif action == '--bzip2':
         misc.archive_compress(variant, soutput, 'bz2', svar)
         Dialog.hide()
     except Exception as detail:
-        QtGui.QMessageBox.critical(Dialog, 'Error', str(detail))
+        QtGui.QMessageBox.critical(Dialog, 'Critical', str(detail))
     finally:
         sys.exit(0)
 elif action == '--extract':
@@ -70,10 +64,11 @@ elif action == '--extract':
             misc.archive_decompress(svar, sdir)
             Dialog.hide()
     except Exception as detail:
-        QtGui.QMessageBox.critical(Dialog, 'Error', str(detail))
+        QtGui.QMessageBox.critical(Dialog, 'Critical', str(detail))
     finally:
         sys.exit(0)
 else:
-    print('Invalid action, choose from gzip/bzip/extract.')
+    QtGui.QMessageBox.critical(Dialog, 'Critical','Invalid action, choose from gzip/bzip/extract.')
+    sys.exit(3)
 
 sys.exit(app.exec_())

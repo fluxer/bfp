@@ -2,29 +2,20 @@
 
 import qsession_ui
 from PyQt4 import QtCore, QtGui
-import sys, os, pwd, crypt
-import libmisc, libdesktop
-misc = libmisc.Misc()
+import sys, os, pwd, crypt, libmisc, libdesktop
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qsession_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
-
-# some variables
 config = libdesktop.Config()
-menu = libdesktop.Menu(app, ui.menuActions)
 general = libdesktop.General()
+misc = libmisc.Misc()
 icon = QtGui.QIcon()
 
 def setLook():
-    config.read()
-    ssheet = '/etc/qdesktop/styles/' + config.GENERAL_STYLESHEET + '/style.qss'
-    if config.GENERAL_STYLESHEET and os.path.isfile(ssheet):
-        app.setStyleSheet(misc.file_read(ssheet))
-    else:
-        app.setStyleSheet('')
+    general.set_style(app)
     icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
 
@@ -48,7 +39,7 @@ def login(autologin=None):
 
     cryptedpasswd = pwd.getpwnam(username).pw_passwd
     if cryptedpasswd == 'x' or cryptedpasswd == '*':
-        QtGui.QMessageBox.critical(MainWindow, 'Error', 'Sorry, currently no support for shadow passwords')
+        QtGui.QMessageBox.critical(MainWindow, 'Critical', Shadow passwords are hot supported')
         ui.UserNameBox.setFocus()
         ui.PasswordEdit.clear()
         return
@@ -70,13 +61,13 @@ def login(autologin=None):
             MainWindow.hide()
             os.system('xinit ' + desktop + ' -- :9')
         except Exception as detail:
-            QtGui.QMessageBox.critical(MainWindow, 'Error', 'Login was not sucessful:\n\n' + str(detail))
+            QtGui.QMessageBox.critical(MainWindow, 'Critical', 'Login was not sucessful:\n\n' + str(detail))
             ui.PasswordEdit.setFocus()
             ui.PasswordEdit.clear()
         finally:
             MainWindow.show()
     else:
-        QtGui.QMessageBox.critical(MainWindow, 'Error', 'Incorrect password.')
+        QtGui.QMessageBox.critical(MainWindow, 'Critical', 'Incorrect password.')
         ui.PasswordEdit.setFocus()
         ui.PasswordEdit.clear()
 
@@ -119,7 +110,6 @@ for x in ('startfluxbox', 'startkde' 'startlxde' 'startlxqt' 'startx'):
     if b:
         ui.DesktopBox.addItem(b)
 
-# setup desktop menu
 def show_popup():
     ui.menuActions.popup(QtGui.QCursor.pos())
 
@@ -132,6 +122,18 @@ ui.actionReboot.triggered.connect(do_reboot)
 MainWindow.setWindowFlags(QtCore.Qt.FramelessWindowHint)
 d = QtGui.QDesktopWidget().screenGeometry(MainWindow)
 ui.frame.move((d.width()/2)-165, (d.height()/2)-120)
+
+# watch configs for changes
+def reload_session():
+    global config
+    reload(libdesktop)
+    config = libdesktop.Config()
+    setLook()
+    # setWallpaper()
+
+watcher1 = QtCore.QFileSystemWatcher()
+watcher1.addPath(config.settings.fileName())
+watcher1.fileChanged.connect(reload_session)
 
 # run!
 os.chdir('/')
