@@ -180,7 +180,8 @@ for program in sprograms:
     elif sbase == 'qfile' or sbase == 'pcmanfm' or sbase == 'qtfm' \
         or sbase == 'thunar' or sbase == 'nautilus':
         ui.FileManagerBox.addItem(program)
-    elif sbase == 'qupzilla' or sbase == 'firefox' or sbase == 'chrome' \
+    elif sbase == 'qbrowse' or sbase == 'qupzilla' \
+        or sbase == 'firefox' or sbase == 'chrome' \
         or sbase == 'chromium' or sbase == 'chromium-browser' \
         or sbase == 'midori' or sbase == 'opera':
         ui.WebBrowserBox.addItem(program)
