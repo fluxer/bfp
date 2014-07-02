@@ -10,7 +10,7 @@ install:
 	$(INSTALL) -vm755 main.exe $(DESTDIR)$(BINDIR)/qimage
 
 uninstall:
-	$(RM) $(DESTDIR)$(BINDIR)/image
+	$(RM) $(DESTDIR)$(BINDIR)/qimage
 
 clean:
 	$(RM) -r *.build/ *.exe qimage_ui.py
