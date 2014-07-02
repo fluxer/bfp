@@ -1,7 +1,7 @@
 include ../../Makefile.inc
 
 all: clean
-	pyrcc4 libqresources.qrc -o libqresources_rc.py
+	$(PYRCC) libqresources.qrc -o libqresources_rc.py
 	$(NUITKA) --module libqresources_rc.py
 	$(STRIP) libqresources_rc.so
 

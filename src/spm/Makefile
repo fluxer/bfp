@@ -7,7 +7,7 @@ all: bump clean
 	$(STRIP) libspm.so spm.exe tools.exe
 
 check:
-	python test.py
+	python2 test.py
 
 install:
 	$(INSTALL) -vdm755 $(DESTDIR)$(SBINDIR)
@@ -25,6 +25,6 @@ clean:
 	$(RM) $(shell find . -name '*.pyc' -o -name '*.pyo')
 
 bump:
-	sed 's|^app_version.*|app_version = "$(VERSION) ($(GIT_VERSION))"|' -i spm.py tools.py
+	$(SED) 's|^app_version.*|app_version = "$(VERSION) ($(GIT_VERSION))"|' -i spm.py tools.py
 
 .PHONY: all check install uninstall clean bump

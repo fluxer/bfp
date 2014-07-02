@@ -6,7 +6,8 @@ all: clean
 	$(STRIP) mkinitfs.exe lsinitfs.exe
 
 install:
-	$(INSTALL) -vdm755 $(DESTDIR)$(BINDIR) $(DESTDIR)$(SBINDIR) $(DESTDIR)$(ETCDIR)
+	$(INSTALL) -vdm755 $(DESTDIR)$(BINDIR) $(DESTDIR)$(SBINDIR)
+	$(INSTALL) -vdm755 $(DESTDIR)$(ETCDIR)
 	$(INSTALL) -vm755 mkinitfs.exe $(DESTDIR)$(SBINDIR)/mkinitfs
 	$(INSTALL) -vm755 lsinitfs.exe $(DESTDIR)$(BINDIR)/lsinitfs
 	$(CP) -a root $(DESTDIR)$(ETCDIR)/mkinitfs

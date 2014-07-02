@@ -1,20 +1,20 @@
 include ../Makefile.inc
 
 all:
-	pod2man --release="SPM $(VERSION)" --center="Source Package Manager Manual" \
+	$(POD2MAND) --release="SPM $(VERSION)" --center="Source Package Manager Manual" \
 		--section='8' --utf8 spm.pod spm.8
-	pod2man --release="SPM $(VERSION)" --center="Source Package Manager Manual" \
+	$(POD2MAND)  --release="SPM $(VERSION)" --center="Source Package Manager Manual" \
 		--section='5' --utf8 spm.conf.pod spm.conf.5
-	pod2man --release="SPM $(VERSION)" --center="Source Package Manager Manual" \
+	$(POD2MAND)  --release="SPM $(VERSION)" --center="Source Package Manager Manual" \
 		--section='5' --utf8 SRCBUILD.pod SRCBUILD.5
-	pod2man --release="SPM $(VERSION)" --center="Source Package Manager Manual" \
+	$(POD2MAND)  --release="SPM $(VERSION)" --center="Source Package Manager Manual" \
 		--section='8' --utf8 spm-tools.pod > spm-tools.8
-	pod2man --release="CPARTED $(VERSION)" --center="Curses Parted Manual" \
+	$(POD2MAND)  --release="CPARTED $(VERSION)" --center="Curses Parted Manual" \
 		--section='8' --utf8 cparted.pod > cparted.8
-	sed 's|#SHAREDIR#|$(SHAREDIR)|g' -i SRCBUILD.5
-	sed 's|#MACHINE#|$(MACHINE)|g' -i spm.conf.5
-	sed 's|#ARCH#|$(ARCH)|g' -i spm.conf.5
-	sed 's|#JOBS#|$(JOBS)|g' -i spm.conf.5
+	$(SED) 's|#SHAREDIR#|$(SHAREDIR)|g' -i SRCBUILD.5
+	$(SED) 's|#MACHINE#|$(MACHINE)|g' -i spm.conf.5
+	$(SED) 's|#ARCH#|$(ARCH)|g' -i spm.conf.5
+	$(SED) 's|#JOBS#|$(JOBS)|g' -i spm.conf.5
 
 install:
 	$(INSTALL) -vdm755 $(DESTDIR)$(MANDIR)/man8/ $(DESTDIR)$(MANDIR)/man5/

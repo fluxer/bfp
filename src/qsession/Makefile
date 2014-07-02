@@ -10,7 +10,7 @@ install:
 	$(INSTALL) -vm755 main.exe $(DESTDIR)$(SBINDIR)/qsession
 
 uninstall:
-	$(RM) $(DESTDIR)$(BINDIR)/qsession
+	$(RM) $(DESTDIR)$(SBINDIR)/qsession
 
 clean:
 	$(RM) -r *.build/ *.exe qsession_ui.py

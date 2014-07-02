@@ -9,7 +9,7 @@ install:
 	$(INSTALL) -vm755 main.exe $(DESTDIR)$(SBINDIR)/cparted
 
 uninstall:
-	$(RM) $(DESTDIR)$(BINDIR)/cparted
+	$(RM) $(DESTDIR)$(SBINDIR)/cparted
 
 clean:
 	$(RM) -r *.build/ *.exe

@@ -5,15 +5,17 @@ install:
 	$(INSTALL) -vdm755 $(DESTDIR)$(AUTOSTARTDIR)
 	$(INSTALL) -vdm755 $(DESTDIR)$(APPLICATIONSDIR)
 	$(INSTALL) -vdm755 $(DESTDIR)$(MENUSDIR)
+	$(INSTALL) -vdm755 $(DESTDIR)/etc/qdesktop
 	$(INSTALL) -vm644 spm.conf $(DESTDIR)/etc/
 	$(INSTALL) -vm644 repositories.conf $(DESTDIR)/etc/spm/
 	$(INSTALL) -vm644 mirrors.conf $(DESTDIR)/etc/spm/
-	sed 's|#MACHINE#|$(MACHINE)|g' -i $(DESTDIR)/etc/spm.conf
-	sed 's|#ARCH#|$(ARCH)|g' -i $(DESTDIR)/etc/spm.conf
-	sed 's|#JOBS#|$(JOBS)|g' -i $(DESTDIR)/etc/spm.conf
+	$(SED) 's|#MACHINE#|$(MACHINE)|g' -i $(DESTDIR)/etc/spm.conf
+	$(SED) 's|#ARCH#|$(ARCH)|g' -i $(DESTDIR)/etc/spm.conf
+	$(SED) 's|#JOBS#|$(JOBS)|g' -i $(DESTDIR)/etc/spm.conf
 	$(INSTALL) -vm644 autostart/*.desktop $(DESTDIR)$(AUTOSTARTDIR)
 	$(INSTALL) -vm644 menus/*.menu $(DESTDIR)$(MENUSDIR)
 	$(INSTALL) -vm644 applications/*.desktop $(DESTDIR)$(APPLICATIONSDIR)
+	$(CP) -vr styles $(DESTDIR)/etc/qdesktop/
 
 uninstall:
 	$(RM) -r $(DESTDIR)/etc/spm/ $(DESTDIR)/etc/spm.conf

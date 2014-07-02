@@ -18,10 +18,13 @@ MACHINE = $(shell gcc -dumpmachine)
 ARCH = $(shell uname -m | sed 's|_|-|')
 JOBS = $(shell echo $$((`nproc || echo 1`+1)))
 
+POD2MAN = pod2man
+PYUIC = pyuic4
+PYRCC = pyrcc4
 NUITKA = ../../nuitka/bin/nuitka --recurse-not-to=PyQt4,xdg,parted
 # NUITKA = nuitka --clang --recurse-not-to=PyQt4,xdg,parted
 INSTALL = install
 STRIP = strip
 RM = rm -f
 CP = cp -f
-PYUIC = pyuic4
+SED = sed
