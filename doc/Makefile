@@ -1,15 +1,15 @@
 include ../Makefile.inc
 
 all:
-	$(POD2MAND) --release="SPM $(VERSION)" --center="Source Package Manager Manual" \
+	$(POD2MAN) --release="SPM $(VERSION)" --center="Source Package Manager Manual" \
 		--section='8' --utf8 spm.pod spm.8
-	$(POD2MAND)  --release="SPM $(VERSION)" --center="Source Package Manager Manual" \
+	$(POD2MAN)  --release="SPM $(VERSION)" --center="Source Package Manager Manual" \
 		--section='5' --utf8 spm.conf.pod spm.conf.5
-	$(POD2MAND)  --release="SPM $(VERSION)" --center="Source Package Manager Manual" \
+	$(POD2MAN)  --release="SPM $(VERSION)" --center="Source Package Manager Manual" \
 		--section='5' --utf8 SRCBUILD.pod SRCBUILD.5
-	$(POD2MAND)  --release="SPM $(VERSION)" --center="Source Package Manager Manual" \
+	$(POD2MAN)  --release="SPM $(VERSION)" --center="Source Package Manager Manual" \
 		--section='8' --utf8 spm-tools.pod > spm-tools.8
-	$(POD2MAND)  --release="CPARTED $(VERSION)" --center="Curses Parted Manual" \
+	$(POD2MAN)  --release="CPARTED $(VERSION)" --center="Curses Parted Manual" \
 		--section='8' --utf8 cparted.pod > cparted.8
 	$(SED) 's|#SHAREDIR#|$(SHAREDIR)|g' -i SRCBUILD.5
 	$(SED) 's|#MACHINE#|$(MACHINE)|g' -i spm.conf.5
