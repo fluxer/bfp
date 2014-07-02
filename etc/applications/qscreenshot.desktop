@@ -1,0 +1,9 @@
+#!/usr/bin/env xdg-open
+[Desktop Entry]
+Name=QScreenshot
+Exec=qscreenshot
+Icon=desktop
+Terminal=false
+StartupNotify=true
+Type=Application
+Categories=Qt;Accessories;

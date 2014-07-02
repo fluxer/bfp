@@ -24,6 +24,7 @@ uninstall:
 	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/qedt.desktop
 	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/qfile.desktop
 	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/qnetwork.desktop
+	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/screenshot.desktop
 	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/qsettings.desktop
 	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/spm-qt.desktop
 	$(RM) $(DESTDIR)$(MENUSDIR)/applications.menu

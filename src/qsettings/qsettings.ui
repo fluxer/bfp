@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Settings Manager</string>
+   <string>QSettings</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../qresources/libqresources.qrc">
