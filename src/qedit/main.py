@@ -91,8 +91,7 @@ def highlight_python():
     ui.highlighter = libhighlighter.HighlighterPython(ui.textEdit.document())
 
 def highlight_shell():
-    ''' FIXME !!! '''
-    pass
+    ui.highlighter = libhighlighter.HighlighterShell(ui.textEdit.document())
 
 def highlight_c():
     ui.highlighter = libhighlighter.HighlighterC(ui.textEdit.document())

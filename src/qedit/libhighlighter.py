@@ -2,6 +2,107 @@
 
 from PyQt4 import QtCore, QtGui
 
+class HighlighterShell(QtGui.QSyntaxHighlighter):
+    def __init__(self, parent=None):
+        super(HighlighterShell, self).__init__(parent)
+
+        keywordFormat = QtGui.QTextCharFormat()
+        keywordFormat.setForeground(QtCore.Qt.darkGreen)
+        keywordFormat.setFontWeight(QtGui.QFont.Bold)
+
+        keywordPatterns = ''
+        for s in ('ArithmeticError',
+ 'alias',
+ 'bg',
+ 'cd',
+ 'command',
+ 'false',
+ 'fc',
+ 'fg',
+ 'getopts',
+ 'jobs',
+ 'kill',
+ 'newgrp',
+ 'pwd',
+ 'read',
+ 'true',
+ 'umask',
+ 'unalias',
+ 'wait',
+ 'break',
+ 'continue',
+ 'eval',
+ 'exit',
+ 'export',
+ 'readonly',
+ 'return',
+ 'set',
+ 'shift',
+ 'times',
+ 'trap',
+ 'unset',
+ 'echo',):
+            keywordPatterns = keywordPatterns + '\\b' + s # + '[\\(]'
+        self.highlightingRules = [(QtCore.QRegExp(pattern), keywordFormat)
+                for pattern in keywordPatterns]
+
+        singleLineCommentFormat = QtGui.QTextCharFormat()
+        singleLineCommentFormat.setForeground(QtCore.Qt.red)
+        self.highlightingRules.append((QtCore.QRegExp("#[^\n]*"),
+                singleLineCommentFormat))
+
+        urlFormat = QtGui.QTextCharFormat()
+        urlFormat.setForeground(QtCore.Qt.magenta)
+        self.highlightingRules.append((QtCore.QRegExp("(http|https|ftp)://[^\n]*"),
+                urlFormat))
+
+        quotationFormat = QtGui.QTextCharFormat()
+        quotationFormat.setForeground(QtCore.Qt.darkYellow)
+        self.highlightingRules.append((QtCore.QRegExp("\".*\""),
+                quotationFormat))
+        self.highlightingRules.append((QtCore.QRegExp("\'.*\'"),
+                quotationFormat))
+
+        functionFormat = QtGui.QTextCharFormat()
+        functionFormat.setFontItalic(True)
+        functionFormat.setForeground(QtCore.Qt.blue)
+        self.highlightingRules.append((QtCore.QRegExp("\\b\\w(?\\s)()"),
+                functionFormat))
+
+        self.commentStartExpression = QtCore.QRegExp("#\\*")
+        self.commentEndExpression = QtCore.QRegExp("\\*\n")
+
+    def highlightBlock(self, text):
+        for pattern, format in self.highlightingRules:
+            expression = QtCore.QRegExp(pattern)
+            index = expression.indexIn(text)
+            while index >= 0:
+                length = expression.matchedLength()
+                self.setFormat(index, length, format)
+                index = expression.indexIn(text, index + length)
+
+        self.setCurrentBlockState(0)
+
+        startIndex = 0
+        if self.previousBlockState() != 1:
+            startIndex = self.commentStartExpression.indexIn(text)
+
+        while startIndex >= 0:
+            endIndex = self.commentEndExpression.indexIn(text, startIndex)
+
+            if endIndex == -1:
+                self.setCurrentBlockState(1)
+                commentLength = len(text) - startIndex
+            else:
+                commentLength = endIndex - startIndex + self.commentEndExpression.matchedLength()
+
+            self.setFormat(startIndex, commentLength,
+                    self.multiLineCommentFormat)
+            startIndex = self.commentStartExpression.indexIn(text,
+                    startIndex + commentLength);
+
+
+
 class HighlighterC(QtGui.QSyntaxHighlighter):
     def __init__(self, parent=None):
         super(HighlighterC, self).__init__(parent)
@@ -83,9 +184,6 @@ class HighlighterC(QtGui.QSyntaxHighlighter):
                     self.multiLineCommentFormat)
             startIndex = self.commentStartExpression.indexIn(text,
                     startIndex + commentLength);
-
-
-
 
 
 class HighlighterPython(QtGui.QSyntaxHighlighter):
@@ -276,8 +374,8 @@ class HighlighterPython(QtGui.QSyntaxHighlighter):
         self.highlightingRules.append((QtCore.QRegExp("\\b[A-Za-z0-9_]+(?=\\()"),
                 functionFormat))
 
-        self.commentStartExpression = QtCore.QRegExp("/\\*")
-        self.commentEndExpression = QtCore.QRegExp("\\*/")
+        self.commentStartExpression = QtCore.QRegExp("'\\*")
+        self.commentEndExpression = QtCore.QRegExp("'\\*/")
 
     def highlightBlock(self, text):
         for pattern, format in self.highlightingRules:
