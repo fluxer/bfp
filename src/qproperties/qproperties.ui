@@ -281,7 +281,7 @@
      </rect>
     </property>
     <property name="text">
-     <string>fill_me_in</string>
+     <string>calculating...</string>
     </property>
    </widget>
    <widget class="QLabel" name="lastReadLabel">

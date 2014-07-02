@@ -51,33 +51,39 @@ ui.executableBox.setCurrentIndex(executable)
 
 ui.lastModifiedLabel.setText(QtCore.QDateTime.toString(info.lastModified()))
 ui.lastReadLabel.setText(QtCore.QDateTime.toString(info.lastRead()))
-# FIXME: change units depending on length of size
-if os.path.isdir(sfile):
-    size = str(misc.dir_size(sfile))
-else:
-    size = str(os.path.getsize(sfile))
-units = 'b'
-lenght = len(size)
-if lenght > 12:
-    units = 'Tb'
-    size = size[:(lenght-12)]
-elif lenght > 9:
-    units = 'Gb'
-    size = size[:(lenght-9)]
-elif lenght > 6:
-    units = 'Mb'
-    size = size[:(lenght-6)]
-elif lenght > 3:
-    units = 'Kb'
-    size = size[:(lenght-3)]
-
-ui.totalSizeLabel.setText(size + ' ' + units)
 ui.filePathLabel.setText(sfile)
 smime = misc.file_mime(sfile)
 ui.mimeLabel.setText(smime)
 ui.programBox.addItems(mime.get_programs())
 index = ui.programBox.findText(mime.get_program(smime))
 ui.programBox.setCurrentIndex(index)
+
+# avoid locking of the application on huge files/directories
+class SizeThread(QtCore.QThread):
+    ''' Size calculating thread '''
+    def run(self):
+        if os.path.isdir(sfile):
+            size = str(misc.dir_size(sfile))
+        else:
+            size = str(os.path.getsize(sfile))
+        units = 'b'
+        lenght = len(size)
+        if lenght > 12:
+            units = 'Tb'
+            size = size[:(lenght-12)]
+        elif lenght > 9:
+            units = 'Gb'
+            size = size[:(lenght-9)]
+        elif lenght > 6:
+            units = 'Mb'
+            size = size[:(lenght-6)]
+        elif lenght > 3:
+            units = 'Kb'
+            size = size[:(lenght-3)]
+        ui.totalSizeLabel.setText(size + ' ' + units)
+
+t = SizeThread()
+t.start()
 
 def set_permissions(slist):
     new_group = str(ui.groupBox.currentText())
