@@ -23,6 +23,7 @@ uninstall:
 	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/qbrowse.desktop
 	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/qedt.desktop
 	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/qfile.desktop
+	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/qimage.desktop
 	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/qnetwork.desktop
 	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/screenshot.desktop
 	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/qsettings.desktop
