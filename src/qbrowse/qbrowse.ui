@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>564</width>
+    <height>437</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>QBrowse</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../qresources/libqresources.qrc">
+    <normaloff>:/share/qresources/resources/web-browser.svg</normaloff>:/share/qresources/resources/web-browser.svg</iconset>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <layout class="QGridLayout" name="gridLayout">
+    <item row="0" column="0">
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="back">
+        <property name="toolTip">
+         <string>Back</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../qresources/libqresources.qrc">
+          <normaloff>:/share/qresources/resources/back.svg</normaloff>:/share/qresources/resources/back.svg</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="next">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+        <property name="toolTip">
+         <string>Next</string>
+        </property>
+        <property name="layoutDirection">
+         <enum>Qt::RightToLeft</enum>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../qresources/libqresources.qrc">
+          <normaloff>:/share/qresources/resources/forward.svg</normaloff>:/share/qresources/resources/forward.svg</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="stop">
+        <property name="toolTip">
+         <string>Stop</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../qresources/libqresources.qrc">
+          <normaloff>:/share/qresources/resources/editdelete.svg</normaloff>:/share/qresources/resources/editdelete.svg</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="reload">
+        <property name="toolTip">
+         <string>Reload</string>
+        </property>
+        <property name="text">
+         <string/>
+        </property>
+        <property name="icon">
+         <iconset resource="../qresources/libqresources.qrc">
+          <normaloff>:/share/qresources/resources/reload.svg</normaloff>:/share/qresources/resources/reload.svg</iconset>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="url"/>
+      </item>
+     </layout>
+    </item>
+    <item row="1" column="0">
+     <widget class="QWebView" name="webView">
+      <property name="layoutDirection">
+       <enum>Qt::LeftToRight</enum>
+      </property>
+      <property name="url">
+       <url>
+        <string>about:blank</string>
+       </url>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+  <widget class="QMenuBar" name="menuBar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>564</width>
+     <height>20</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuMain">
+    <property name="title">
+     <string>Main</string>
+    </property>
+    <addaction name="actionQuit"/>
+   </widget>
+   <widget class="QMenu" name="menuOptions">
+    <property name="title">
+     <string>Options</string>
+    </property>
+   </widget>
+   <addaction name="menuMain"/>
+   <addaction name="menuOptions"/>
+  </widget>
+  <action name="actionQuit">
+   <property name="text">
+    <string>Quit</string>
+   </property>
+  </action>
+ </widget>
+ <customwidgets>
+  <customwidget>
+   <class>QWebView</class>
+   <extends>QWidget</extends>
+   <header>QtWebKit/QWebView</header>
+  </customwidget>
+ </customwidgets>
+ <resources>
+  <include location="../qresources/libqresources.qrc"/>
+ </resources>
+ <connections/>
+</ui>

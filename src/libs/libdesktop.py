@@ -85,7 +85,7 @@ class Config(object):
         self.WALLPAPER_COLOR = str(self.settings.value('wallpaper/color', '#b4b4b4').toString())
         self.DEFAULT_TERMINAL = str(self.settings.value('default/terminal', 'xterm').toString())
         self.DEFAULT_FILEMANAGER = str(self.settings.value('default/filemanager', 'qfile').toString())
-        self.DEFAULT_WEBBROWSER = str(self.settings.value('default/webbrowser', 'qupzilla').toString())
+        self.DEFAULT_WEBBROWSER = str(self.settings.value('default/webbrowser', 'qbrowse').toString())
 
         self.SUSPEND_DISK = str(self.settings.value('suspend/disk', 'suspend').toString())
         self.SUSPEND_STATE = str(self.settings.value('suspend/state', 'mem').toString())
