@@ -65,6 +65,7 @@ def open_file_with():
     actions.open_items(selected_items)
 
 def disable_actions():
+    ui.actionExecute.setEnabled(False)
     ui.actionOpen.setEnabled(False)
     ui.actionOpenWith.setEnabled(False)
     ui.actionRename.setEnabled(False)
@@ -90,6 +91,8 @@ def enable_actions():
             ui.actionRename.setEnabled(True)
             ui.actionCut.setEnabled(True)
             ui.actionDelete.setEnabled(True)
+        if os.access(sfile, os.X_OK) and os.path.isfile(sfile):
+            ui.actionExecute.setEnabled(True)
         if os.access(sfile, os.R_OK):
             ui.actionOpen.setEnabled(True)
             ui.actionOpenWith.setEnabled(True)
@@ -97,6 +100,12 @@ def enable_actions():
         ui.actionProperties.setEnabled(True)
     else:
         disable_actions()
+
+def execute_file():
+    selected_items = []
+    for svar in ui.DesktopView.selectedIndexes():
+        selected_items.append(str(model.filePath(svar)))
+    actions.execute_items(selected_items)
 
 def cut_directory():
     selected_items = []
@@ -206,6 +215,7 @@ ui.menubar.hide()
 # setup signals
 # FIXME: open directory on enter
 ui.DesktopView.doubleClicked.connect(change_directory)
+ui.actionExecute.triggered.connect(execute_file)
 ui.actionOpen.triggered.connect(open_file)
 ui.actionOpenWith.triggered.connect(open_file_with)
 ui.actionRename.triggered.connect(rename_directory)

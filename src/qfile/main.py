@@ -31,6 +31,7 @@ def setLook():
 setLook()
 
 def disable_actions():
+    ui.actionExecute.setEnabled(False)
     ui.actionOpen.setEnabled(False)
     ui.actionOpenWith.setEnabled(False)
     ui.actionRename.setEnabled(False)
@@ -99,6 +100,12 @@ def change_home():
 
 def change_back_directory():
     change_directory(os.path.realpath(str(model.rootPath()) + '/..'))
+
+def execute_file():
+    selected_items = []
+    for svar in ui.ViewWidget.selectedIndexes():
+        selected_items.append(str(model.filePath(svar)))
+    actions.execute_items(selected_items)
 
 def cut_directory():
     selected_items = []
@@ -174,6 +181,8 @@ def enable_actions():
             ui.actionRename.setEnabled(True)
             ui.actionCut.setEnabled(True)
             ui.actionDelete.setEnabled(True)
+        if os.access(sfile, os.X_OK) and os.path.isfile(sfile):
+            ui.actionExecute.setEnabled(True)
         if os.access(sfile, os.R_OK):
             ui.actionOpen.setEnabled(True)
             ui.actionOpenWith.setEnabled(True)
@@ -194,6 +203,7 @@ ui.actionAbout.triggered.connect(run_about)
 ui.actionIcons.triggered.connect(change_view_icons)
 ui.actionList.triggered.connect(change_view_list)
 ui.actionViewHidden.triggered.connect(change_view_hidden)
+ui.actionExecute.triggered.connect(execute_file)
 ui.actionOpen.triggered.connect(open_file)
 ui.actionOpenWith.triggered.connect(open_file_with)
 ui.actionRename.triggered.connect(rename_directory)

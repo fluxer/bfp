@@ -26,3 +26,4 @@ uninstall:
 	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/qsettings.desktop
 	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/spm-qt.desktop
 	$(RM) $(DESTDIR)$(MENUSDIR)/applications.menu
+	$(RM) -r $(DESTDIR)/etc/qdesktop/

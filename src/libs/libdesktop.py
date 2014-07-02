@@ -192,6 +192,12 @@ class Actions(object):
         elif not ok:
             return
 
+    def execute_items(self, variant):
+        ''' Execute files with default software '''
+        for svar in variant:
+            if os.path.isfile(svar):
+                general.execute_program(svar)
+
     def open_items(self, variant):
         ''' Open files/directories with a software of choise '''
         sitems = ''

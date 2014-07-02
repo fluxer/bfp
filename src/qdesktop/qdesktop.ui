@@ -97,6 +97,7 @@
       <iconset resource="../qresources/libqresources.qrc">
        <normaloff>:/share/qresources/resources/gtk-edit.svg</normaloff>:/share/qresources/resources/gtk-edit.svg</iconset>
      </property>
+     <addaction name="actionExecute"/>
      <addaction name="actionOpen"/>
      <addaction name="actionOpenWith"/>
      <addaction name="separator"/>
@@ -349,6 +350,15 @@
    </property>
    <property name="text">
     <string>Open with</string>
+   </property>
+  </action>
+  <action name="actionExecute">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/system-run.svg</normaloff>:/share/qresources/resources/system-run.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Execute</string>
    </property>
   </action>
  </widget>

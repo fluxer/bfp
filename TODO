@@ -10,7 +10,6 @@
 
 ## LIBDESKTOP ##
  * Signal to qsession to shutdown/reboot/suspend/logout?
- * Add execute action (qfile, qdesktop)
 
 ## QSESSION ##
  * Controls power state and mounting?
