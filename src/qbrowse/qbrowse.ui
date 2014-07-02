@@ -126,6 +126,10 @@
    <addaction name="menuOptions"/>
   </widget>
   <action name="actionQuit">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/exit.svg</normaloff>:/share/qresources/resources/exit.svg</iconset>
+   </property>
    <property name="text">
     <string>Quit</string>
    </property>

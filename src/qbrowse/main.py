@@ -119,6 +119,7 @@ ui.webView.loadProgress.connect(load_progress)
 ui.webView.titleChanged.connect(title_changed)
 ui.reload.clicked.connect(reload_page)
 ui.stop.clicked.connect(stop_page)
+ui.actionQuit.triggered.connect(sys.exit)
 
 # load page
 ui.webView.setUrl(QtCore.QUrl(url))
