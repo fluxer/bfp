@@ -27,6 +27,10 @@ def setLook():
     icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
 
+def run_about():
+    QtGui.QMessageBox.about(MainWindow, "About", '<b>QBrowse v1.0.0</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
+
+
 def url_changed():
     ''' Url have been changed by user '''
     page = ui.webView.page()
@@ -120,6 +124,7 @@ ui.webView.titleChanged.connect(title_changed)
 ui.reload.clicked.connect(reload_page)
 ui.stop.clicked.connect(stop_page)
 ui.actionQuit.triggered.connect(sys.exit)
+ui.actionAbout.triggered.connect(run_about)
 
 # load page
 ui.webView.setUrl(QtCore.QUrl(url))
