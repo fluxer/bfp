@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui, QtWebKit
 import sys, os, libmisc, libdesktop
 
 # prepare for lift-off
-app_version = "0.9.5 (25e9801)"
+app_version = "0.9.5 (830df35)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
@@ -27,7 +27,7 @@ def run_about():
 
 class NewTab(QtGui.QWidget):
     ''' Tab constructor '''
-    def __init__(self, url='http://google.co.uk', parent=None):
+    def __init__(self, url='http://google.com', parent=None):
         ''' Tab initialiser '''
         super(NewTab, self).__init__(parent)
         # set variables
@@ -67,6 +67,7 @@ class NewTab(QtGui.QWidget):
         self.newButton.setIcon(general.get_icon('add'))
         self.icon_reload = general.get_icon('reload')
         self.icon_stop = general.get_icon('exit')
+        self.webView.settings().setAttribute(QtWebKit.QWebSettings.PluginsEnabled, True)
 
         # connect widgets
         self.backButton.clicked.connect(self.back)
