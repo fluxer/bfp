@@ -59,6 +59,7 @@ class NewTab(QtGui.QWidget):
         self.urlBox.setEditText(self.url)
         policy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Fixed)
         self.urlBox.setSizePolicy(policy)
+        self.urlBox.setInsertPolicy(1)
         self.backButton.setEnabled(False)
         self.backButton.setIcon(general.get_icon('back'))
         self.nextButton.setEnabled(False)
