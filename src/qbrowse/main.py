@@ -67,8 +67,6 @@ class NewTab(QtGui.QWidget):
         self.newButton.setIcon(general.get_icon('add'))
         self.icon_reload = general.get_icon('reload')
         self.icon_stop = general.get_icon('exit')
-
-
         self.webView.settings().setAttribute(QtWebKit.QWebSettings.PluginsEnabled, \
             ui.actionPlugins.isChecked())
         self.webView.settings().setAttribute(QtWebKit.QWebSettings.JavascriptEnabled, \
