@@ -1,7 +1,7 @@
 #!/bin/python2
 
 import spmqt_ui
-from PyQt4 import QtGui
+from PyQt4 import QtCore, QtGui
 import sys, ConfigParser, libmessage, libmisc, libpackage, libspm, libdesktop
 
 # prepare for lift-off
@@ -15,6 +15,11 @@ database = libpackage.Database()
 config = libdesktop.Config()
 general = libdesktop.General()
 icon = QtGui.QIcon()
+
+def setLook():
+    general.set_style(app)
+    icon.setThemeName(config.GENERAL_ICONTHEME)
+setLook()
 
 def Worker():
     try:
@@ -226,11 +231,6 @@ message.sub_warning = warning
 message.critical = critical
 message.sub_critical = critical
 
-def setLook():
-    general.set_style(app)
-    icon.setThemeName(config.GENERAL_ICONTHEME)
-setLook()
-
 Refresh()
 
 ui.UpdateButton.clicked.connect(Update)
@@ -260,6 +260,17 @@ ui.TargetsList.currentItemChanged.connect(RefreshWidgets)
 ui.AliasesList.currentItemChanged.connect(RefreshTargets)
 
 ui.TargetsList.setCurrentRow(0)
+
+# watch configs for changes
+def reload_spm():
+    global config
+    reload(libdesktop)
+    config = libdesktop.Config()
+    setLook()
+
+watcher1 = QtCore.QFileSystemWatcher()
+watcher1.addPath(config.settings.fileName())
+watcher1.fileChanged.connect(reload_spm)
 
 MainWindow.show()
 sys.exit(app.exec_())

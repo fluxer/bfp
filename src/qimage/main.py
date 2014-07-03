@@ -57,6 +57,18 @@ for arg in sys.argv[1:]:
         simage = arg
 open_file(simage)
 
+# watch configs for changes
+def reload_image():
+    global config
+    reload(libdesktop)
+    config = libdesktop.Config()
+    setLook()
+
+watcher1 = QtCore.QFileSystemWatcher()
+watcher1.addPath(config.settings.fileName())
+watcher1.fileChanged.connect(reload_image)
+
+
 # run!
 MainWindow.show()
 sys.exit(app.exec_())

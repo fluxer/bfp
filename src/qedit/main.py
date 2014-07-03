@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui
 import sys, os, libmisc, libdesktop, libhighlighter
 
 # prepare for lift-off
-app_version = "0.9.3 (4864e9c)"
+app_version = "0.9.3 (1868f33)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qedit_ui.Ui_MainWindow()
@@ -108,6 +108,17 @@ ui.actionC.triggered.connect(highlight_c)
 
 if sedit:
     open_file(sedit)
+
+# watch configs for changes
+def reload_edit():
+    global config
+    reload(libdesktop)
+    config = libdesktop.Config()
+    setLook()
+
+watcher1 = QtCore.QFileSystemWatcher()
+watcher1.addPath(config.settings.fileName())
+watcher1.fileChanged.connect(reload_edit)
 
 # run!
 MainWindow.show()
