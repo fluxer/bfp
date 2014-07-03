@@ -152,7 +152,7 @@
     <string>Font</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+T, Ctrl+S</string>
+    <string>Ctrl+T</string>
    </property>
   </action>
   <action name="actionNew">

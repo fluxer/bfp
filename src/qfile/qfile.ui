@@ -469,6 +469,9 @@
    <property name="text">
     <string>Open with</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+W, Ctrl+S</string>
+   </property>
   </action>
   <action name="actionExecute">
    <property name="icon">

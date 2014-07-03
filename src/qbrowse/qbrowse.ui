@@ -33,6 +33,9 @@
          <iconset resource="../qresources/libqresources.qrc">
           <normaloff>:/share/qresources/resources/back.svg</normaloff>:/share/qresources/resources/back.svg</iconset>
         </property>
+        <property name="shortcut">
+         <string>Ctrl+B</string>
+        </property>
        </widget>
       </item>
       <item>
@@ -53,6 +56,9 @@
          <iconset resource="../qresources/libqresources.qrc">
           <normaloff>:/share/qresources/resources/forward.svg</normaloff>:/share/qresources/resources/forward.svg</iconset>
         </property>
+        <property name="shortcut">
+         <string>Ctrl+N</string>
+        </property>
        </widget>
       </item>
       <item>
@@ -67,6 +73,9 @@
          <iconset resource="../qresources/libqresources.qrc">
           <normaloff>:/share/qresources/resources/editdelete.svg</normaloff>:/share/qresources/resources/editdelete.svg</iconset>
         </property>
+        <property name="shortcut">
+         <string>Ctrl+S</string>
+        </property>
        </widget>
       </item>
       <item>
@@ -80,6 +89,9 @@
         <property name="icon">
          <iconset resource="../qresources/libqresources.qrc">
           <normaloff>:/share/qresources/resources/reload.svg</normaloff>:/share/qresources/resources/reload.svg</iconset>
+        </property>
+        <property name="shortcut">
+         <string>Ctrl+R</string>
         </property>
        </widget>
       </item>
@@ -139,6 +151,9 @@
    </property>
    <property name="text">
     <string>Quit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
    </property>
   </action>
   <action name="actionAbout">
