@@ -20,6 +20,13 @@ class General(object):
             app.setStyleSheet('')
         # icon.setThemeName(config.GENERAL_ICONTHEME)
 
+    def get_icon(self, sicon):
+        xdg.Config.icon_theme = config.GENERAL_ICONTHEME
+        dicon = xdg.IconTheme.getIconPath(sicon)
+        if dicon:
+            return QtGui.QIcon(dicon)
+        return None
+
     def execute_program(self, sprogram, sdetached=True, skill=False):
         ''' Execute program from PATH '''
         p = QtCore.QProcess()
@@ -142,16 +149,16 @@ class Menu(object):
                 # FIXME: it seems that on elementary-usu category icons begin with "applications-",
                 #              is that by the specs??
                 # FIXME: support translated entries
-                dicon = xdg.IconTheme.getIconPath('applications-' + str(entry).lower())
+                dicon = general.get_icon('applications-' + str(entry).lower())
                 if dicon:
                     self.dynamic_menu(entry, depth, widget.addMenu(QtGui.QIcon(dicon), str(entry)))
                 else:
                     self.dynamic_menu(entry, depth, widget.addMenu(str(entry)))
             elif isinstance(entry, self.xdg.MenuEntry):
-                dicon = xdg.IconTheme.getIconPath(entry.DesktopEntry.getIcon())
+                dicon = general.get_icon(entry.DesktopEntry.getIcon())
                 name = entry.DesktopEntry.getName()
                 if dicon:
-                    e = widget.addAction(QtGui.QIcon(dicon), name)
+                    e = widget.addAction(dicon, name)
                 else:
                     e = widget.addAction(name)
                 widget.connect(e, QtCore.SIGNAL('triggered()'), \
@@ -167,7 +174,6 @@ class Menu(object):
         if not os.path.isfile(config.GENERAL_MENU):
             return
         self.widget.clear()
-        xdg.Config.icon_theme = config.GENERAL_ICONTHEME
         return self.dynamic_menu(self.xdg.parse(config.GENERAL_MENU))
 
 
