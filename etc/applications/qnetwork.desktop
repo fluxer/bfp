@@ -6,4 +6,4 @@ Icon=preferences-system-network
 Terminal=false
 StartupNotify=true
 Type=Application
-Categories=Qt;System;Settings;
+Categories=Qt;System;Settings;Network;

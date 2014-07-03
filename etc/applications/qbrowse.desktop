@@ -6,4 +6,4 @@ Icon=web-browser
 Terminal=false
 StartupNotify=true
 Type=Application
-Categories=Qt;Internet;
+Categories=Qt;Internet;Network;WebBrowser;

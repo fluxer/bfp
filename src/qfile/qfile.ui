@@ -445,6 +445,9 @@
    <property name="text">
     <string>Compress (bzip2)</string>
    </property>
+   <property name="shortcut">
+    <string>Alt+B</string>
+   </property>
   </action>
   <action name="actionViewHidden">
    <property name="checkable">
@@ -470,7 +473,7 @@
     <string>Open with</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+W, Ctrl+S</string>
+    <string>Ctrl+W</string>
    </property>
   </action>
   <action name="actionExecute">

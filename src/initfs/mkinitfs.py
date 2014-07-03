@@ -3,7 +3,7 @@
 import sys, argparse, tempfile, subprocess
 import tarfile, zipfile, shutil, os
 
-app_version = "0.9.3 (9bf058a)"
+app_version = "0.9.4 (1d13283)"
 
 try:
     import libmessage, libmisc

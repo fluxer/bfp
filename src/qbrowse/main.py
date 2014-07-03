@@ -1,11 +1,11 @@
 #!/bin/python2
 
 import qbrowse_ui
-from PyQt4 import QtCore, QtGui
-import sys, libmisc, libdesktop
+from PyQt4 import QtCore, QtGui, QtWebKit
+import sys, os, libmisc, libdesktop
 
 # prepare for lift-off
-app_version = "0.9.4 (733a716)"
+app_version = "0.9.4 (af84c69)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
@@ -22,106 +22,163 @@ def setLook():
 setLook()
 
 def run_about():
-    QtGui.QMessageBox.about(MainWindow, "About", '<b>QBrowse v' + app_version + '</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
+    QtGui.QMessageBox.about(MainWindow, 'About', \
+        '<b>QBrowse v' + app_version + '</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
 
+class NewTab(QtGui.QWidget):
+    ''' Tab constructor '''
+    def __init__(self, url='http://google.co.uk', parent=None):
+        ''' Tab initialiser '''
+        super(NewTab, self).__init__(parent)
+        # set variables
+        self.url = url
 
-def url_changed():
-    ''' Url have been changed by user '''
-    page = ui.webView.page()
-    history = page.history()
-    if history.canGoBack():
-        ui.back.setEnabled(True)
-    else:
-        ui.back.setEnabled(False)
-    if history.canGoForward():
-        ui.next.setEnabled(True)
-    else:
-        ui.next.setEnabled(False)
+        # add widgets
+        mainLayout = QtGui.QVBoxLayout()
+        secondLayout = QtGui.QHBoxLayout()
+        self.backButton = QtGui.QPushButton()
+        self.nextButton = QtGui.QPushButton()
+        self.reloadStopButton = QtGui.QPushButton()
+        self.newButton = QtGui.QPushButton()
+        self.urlBox = QtGui.QComboBox()
+        self.webView = QtWebKit.QWebView()
+        self.progressBar = QtGui.QProgressBar()
+        secondLayout.addWidget(self.backButton)
+        secondLayout.addWidget(self.nextButton)
+        secondLayout.addWidget(self.reloadStopButton)
+        secondLayout.addWidget(self.newButton)
+        secondLayout.addWidget(self.urlBox)
+        mainLayout.addLayout(secondLayout)
+        mainLayout.addWidget(self.webView)
+        mainLayout.addWidget(self.progressBar)
+        mainLayout.addStretch(1)
+        self.setLayout(mainLayout)
 
-    url = str(ui.url.text())
-    if not url.startswith('http://') and not url.startswith('https://') \
-        and not url.startswith('ftp://') and not url.startswith('ftps://'):
-        url = 'http://' + url
-    ui.webView.setUrl(QtCore.QUrl(url))
+        # setup widgets
+        self.urlBox.setEditable(True)
+        self.urlBox.setEditText(self.url)
+        policy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Fixed)
+        self.urlBox.setSizePolicy(policy)
+        self.backButton.setEnabled(False)
+        self.backButton.setIcon(general.get_icon('back'))
+        self.nextButton.setEnabled(False)
+        self.nextButton.setIcon(general.get_icon('forward'))
+        self.newButton.setIcon(general.get_icon('add'))
+        self.icon_reload = general.get_icon('reload')
+        self.icon_stop = general.get_icon('exit')
 
-def stop_page():
-    ''' Stop loading the page '''
-    ui.webView.stop()
+        # connect widgets
+        self.backButton.clicked.connect(self.back)
+        self.nextButton.clicked.connect(self.next)
+        self.urlBox.currentIndexChanged.connect(self.url_changed)
+        self.reloadStopButton.clicked.connect(self.reload_stop_page)
+        self.newButton.clicked.connect(self.new_tab)
+        self.webView.linkClicked.connect(self.link_clicked)
+        self.webView.urlChanged.connect(self.link_clicked)
+        self.webView.loadProgress.connect(self.load_progress)
+        self.webView.titleChanged.connect(self.title_changed)
 
-def title_changed(title):
-    '''  Web page title changed - change the tab name '''
-    MainWindow.setWindowTitle(title)
+        # load page
+        self.webView.setUrl(QtCore.QUrl(self.url))
 
-def reload_page():
-    ''' Reload the web page '''
-    ui.webView.setUrl(QtCore.QUrl(ui.url.text()))
+    # basic functionality methods
+    def url_changed(self):
+        ''' Url have been changed by user '''
+        page = self.webView.page()
+        history = page.history()
+        if history.canGoBack():
+            self.backButton.setEnabled(True)
+        else:
+            self.backButton.setEnabled(False)
+        if history.canGoForward():
+            self.nextButton.setEnabled(True)
+        else:
+            self.nextButton.setEnabled(False)
 
-def link_clicked(url):
-    ''' Update the URL if a link on a web page is clicked '''
-    page = ui.webView.page()
-    history = page.history()
-    if history.canGoBack():
-        ui.back.setEnabled(True)
-    else:
-        ui.back.setEnabled(False)
-    if history.canGoForward():
-        ui.next.setEnabled(True)
-    else:
-        ui.next.setEnabled(False)
+        self.url = str(self.urlBox.currentText())
+        if not os.path.isfile(self.url) and not self.url.startswith('http://') \
+            and not self.url.startswith('https://') and not self.url.startswith('ftp://') \
+            and not self.url.startswith('ftps://'):
+            self.url = 'http://' + self.url
+        self.webView.setUrl(QtCore.QUrl(self.url))
 
-    ui.url.setText(url.toString())
+    def title_changed(self, title):
+        '''  Web page title changed - change the tab name '''
+        MainWindow.setWindowTitle(title)
+        ui.tabWidget.setTabText(ui.tabWidget.currentIndex(), title)
 
-def load_progress(load):
-    ''' Page load progress '''
-    if load == 100:
-        ui.stop.setEnabled(False)
-    else:
-        ui.stop.setEnabled(True)
+    def reload_stop_page(self):
+        ''' Reload/stop loading the web page '''
+        if self.progressBar.isHidden():
+            self.reloadStopButton.setIcon(self.icon_stop)
+            self.webView.setUrl(QtCore.QUrl(self.url))
+        else:
+            ui.reloadStopButton.setIcon(self.icon_reload)
+            self.webView.stop()
 
-def back():
-    ''' Back button clicked, go one page back '''
-    page = ui.webView.page()
-    history = page.history()
-    history.back()
-    if history.canGoBack():
-        ui.back.setEnabled(True)
-    else:
-        ui.back.setEnabled(False)
+    def link_clicked(self, url):
+        ''' Update the URL if a link on a web page is clicked '''
+        page = self.webView.page()
+        history = page.history()
+        if history.canGoBack():
+            self.backButton.setEnabled(True)
+        else:
+            self.backButton.setEnabled(False)
+        if history.canGoForward():
+            ui.nextButton.setEnabled(True)
+        else:
+            self.nextButton.setEnabled(False)
 
-def next():
-    ''' Next button clicked, go to next page '''
-    page = ui.webView.page()
-    history = page.history()
-    history.forward()
-    if history.canGoForward():
-        ui.next.setEnabled(True)
-    else:
-        ui.next.setEnabled(False)
+        self.urlBox.setEditText(url.toString())
 
-# set the default
-url = 'http://google.co.uk'
-ui.url.setText(url)
+    def load_progress(self, load):
+        ''' Page load progress '''
+        if load == 100:
+            self.reloadStopButton.setIcon(self.icon_reload)
+            self.progressBar.hide()
+            self.progressBar.setValue(0)
+        else:
+            self.progressBar.show()
+            self.progressBar.setValue(load)
+            self.reloadStopButton.setIcon(self.icon_stop)
 
-# history buttons:
-ui.back.setEnabled(False)
-ui.next.setEnabled(False)
+    def back(self):
+        ''' Back button clicked, go one page back '''
+        page = self.webView.page()
+        history = page.history()
+        history.back()
+        if history.canGoBack():
+            self.backButton.setEnabled(True)
+        else:
+            self.backButton.setEnabled(False)
 
-# ui.webView.settings()
+    def next(self):
+        ''' Next button clicked, go to next page '''
+        page = self.webView.page()
+        history = page.history()
+        history.forward()
+        if history.canGoForward():
+            self.nextButton.setEnabled(True)
+        else:
+            self.nextButton.setEnabled(False)
 
-ui.back.clicked.connect(back)
-ui.next.clicked.connect(next)
-ui.url.returnPressed.connect(url_changed)
-ui.webView.linkClicked.connect(link_clicked)
-ui.webView.urlChanged.connect(link_clicked)
-ui.webView.loadProgress.connect(load_progress)
-ui.webView.titleChanged.connect(title_changed)
-ui.reload.clicked.connect(reload_page)
-ui.stop.clicked.connect(stop_page)
+    def new_tab(self):
+        ''' Create a new tab '''
+        index = ui.tabWidget.currentIndex()+1
+        ui.tabWidget.insertTab(index, NewTab(), 'New tab')
+        ui.tabWidget.setCurrentIndex(index)
+
+def remove_tab():
+    ''' Remove tab from UI '''
+    ui.tabWidget.removeTab(ui.tabWidget.currentIndex())
+
+ui.tabWidget.tabCloseRequested.connect(remove_tab)
 ui.actionQuit.triggered.connect(sys.exit)
 ui.actionAbout.triggered.connect(run_about)
 
-# load page
-ui.webView.setUrl(QtCore.QUrl(url))
+# initialise
+ui.tabWidget.removeTab(0)
+NewTab().new_tab()
 
 # watch configs for changes
 def reload_browser():

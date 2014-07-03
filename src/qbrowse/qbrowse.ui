@@ -19,97 +19,143 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
-    <item row="0" column="0">
-     <layout class="QHBoxLayout" name="horizontalLayout">
-      <item>
-       <widget class="QPushButton" name="back">
-        <property name="toolTip">
-         <string>Back</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../qresources/libqresources.qrc">
-          <normaloff>:/share/qresources/resources/back.svg</normaloff>:/share/qresources/resources/back.svg</iconset>
-        </property>
-        <property name="shortcut">
-         <string>Ctrl+B</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="next">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-        <property name="toolTip">
-         <string>Next</string>
-        </property>
-        <property name="layoutDirection">
-         <enum>Qt::RightToLeft</enum>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../qresources/libqresources.qrc">
-          <normaloff>:/share/qresources/resources/forward.svg</normaloff>:/share/qresources/resources/forward.svg</iconset>
-        </property>
-        <property name="shortcut">
-         <string>Ctrl+N</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="stop">
-        <property name="toolTip">
-         <string>Stop</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../qresources/libqresources.qrc">
-          <normaloff>:/share/qresources/resources/editdelete.svg</normaloff>:/share/qresources/resources/editdelete.svg</iconset>
-        </property>
-        <property name="shortcut">
-         <string>Ctrl+S</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="reload">
-        <property name="toolTip">
-         <string>Reload</string>
-        </property>
-        <property name="text">
-         <string/>
-        </property>
-        <property name="icon">
-         <iconset resource="../qresources/libqresources.qrc">
-          <normaloff>:/share/qresources/resources/reload.svg</normaloff>:/share/qresources/resources/reload.svg</iconset>
-        </property>
-        <property name="shortcut">
-         <string>Ctrl+R</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QLineEdit" name="url"/>
-      </item>
-     </layout>
-    </item>
-    <item row="1" column="0">
-     <widget class="QWebView" name="webView">
-      <property name="layoutDirection">
-       <enum>Qt::LeftToRight</enum>
+    <item row="2" column="0">
+     <widget class="QTabWidget" name="tabWidget">
+      <property name="tabPosition">
+       <enum>QTabWidget::North</enum>
       </property>
-      <property name="url">
-       <url>
-        <string>about:blank</string>
-       </url>
+      <property name="tabShape">
+       <enum>QTabWidget::Rounded</enum>
       </property>
+      <property name="currentIndex">
+       <number>0</number>
+      </property>
+      <property name="tabsClosable">
+       <bool>true</bool>
+      </property>
+      <property name="movable">
+       <bool>true</bool>
+      </property>
+      <widget class="QWidget" name="tab">
+       <attribute name="title">
+        <string>Tab 1</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_2">
+        <item row="1" column="0">
+         <widget class="QWebView" name="webView">
+          <property name="layoutDirection">
+           <enum>Qt::LeftToRight</enum>
+          </property>
+          <property name="url">
+           <url>
+            <string>about:blank</string>
+           </url>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <layout class="QHBoxLayout" name="horizontalLayout">
+          <item>
+           <widget class="QPushButton" name="back">
+            <property name="toolTip">
+             <string>Back</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="../qresources/libqresources.qrc">
+              <normaloff>:/share/qresources/resources/back.svg</normaloff>:/share/qresources/resources/back.svg</iconset>
+            </property>
+            <property name="shortcut">
+             <string>Ctrl+B</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="next">
+            <property name="enabled">
+             <bool>true</bool>
+            </property>
+            <property name="toolTip">
+             <string>Next</string>
+            </property>
+            <property name="layoutDirection">
+             <enum>Qt::RightToLeft</enum>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="../qresources/libqresources.qrc">
+              <normaloff>:/share/qresources/resources/forward.svg</normaloff>:/share/qresources/resources/forward.svg</iconset>
+            </property>
+            <property name="shortcut">
+             <string>Ctrl+N</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="reload_stop">
+            <property name="toolTip">
+             <string>Reload/Stop</string>
+            </property>
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="../qresources/libqresources.qrc">
+              <normaloff>:/share/qresources/resources/editdelete.svg</normaloff>:/share/qresources/resources/editdelete.svg</iconset>
+            </property>
+            <property name="shortcut">
+             <string>Ctrl+S</string>
+            </property>
+            <property name="flat">
+             <bool>false</bool>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="newTab">
+            <property name="text">
+             <string/>
+            </property>
+            <property name="icon">
+             <iconset resource="../qresources/libqresources.qrc">
+              <normaloff>:/share/qresources/resources/add.svg</normaloff>:/share/qresources/resources/add.svg</iconset>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QComboBox" name="url">
+            <property name="sizePolicy">
+             <sizepolicy hsizetype="Expanding" vsizetype="Fixed">
+              <horstretch>0</horstretch>
+              <verstretch>0</verstretch>
+             </sizepolicy>
+            </property>
+            <property name="inputMethodHints">
+             <set>Qt::ImhUrlCharactersOnly</set>
+            </property>
+            <property name="editable">
+             <bool>true</bool>
+            </property>
+            <property name="insertPolicy">
+             <enum>QComboBox::InsertAtTop</enum>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item row="2" column="0">
+         <widget class="QProgressBar" name="progressBar">
+          <property name="value">
+           <number>24</number>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
      </widget>
     </item>
    </layout>
