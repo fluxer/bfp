@@ -41,6 +41,9 @@
        <iconset resource="../qresources/libqresources.qrc">
         <normaloff>:/share/qresources/resources/gnome-mime-image.svg</normaloff>:/share/qresources/resources/gnome-mime-image.svg</iconset>
       </property>
+      <property name="shortcut">
+       <string>Ctrl+T</string>
+      </property>
      </widget>
     </item>
    </layout>
@@ -76,6 +79,9 @@
    </property>
    <property name="text">
     <string>Quit</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
    </property>
   </action>
   <action name="actionAbout">
