@@ -10,7 +10,7 @@ from PyQt4 import QtCore, QtGui, QtDBus
 import sys, os, libmisc, libdesktop
 
 # prepare for lift-off
-app_version = "0.9.4 (9bf058a)"
+app_version = "0.9.4 (58feacc)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qnetwork_ui.Ui_MainWindow()
