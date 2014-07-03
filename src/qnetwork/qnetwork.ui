@@ -310,6 +310,9 @@
    <property name="text">
     <string>Quit</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+Q</string>
+   </property>
   </action>
   <action name="actionAbout">
    <property name="icon">
@@ -328,6 +331,9 @@
    <property name="text">
     <string>Scan</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
+   </property>
   </action>
   <action name="actionDetails">
    <property name="enabled">
@@ -339,6 +345,9 @@
    </property>
    <property name="text">
     <string>Details</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+E</string>
    </property>
   </action>
   <action name="actionDisconnect">
@@ -352,6 +361,9 @@
    <property name="text">
     <string>Disconnect</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+D</string>
+   </property>
   </action>
   <action name="actionConnect">
    <property name="enabled">
@@ -363,6 +375,9 @@
    </property>
    <property name="text">
     <string>Connect</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+C</string>
    </property>
   </action>
   <action name="actionDummy">
