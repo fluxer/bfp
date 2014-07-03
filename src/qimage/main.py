@@ -5,13 +5,11 @@ from PyQt4 import QtCore, QtGui
 import sys, os, libmisc, libdesktop
 
 # prepare for lift-off
-app_version = "0.9.4 (1d13283)"
+app_version = "0.9.5 (b645b2c)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qimage_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
-scene = QtGui.QGraphicsScene()
-ui.graphicsView.setScene(scene)
 general = libdesktop.General()
 config = libdesktop.Config()
 misc = libmisc.Misc()
@@ -28,8 +26,7 @@ def run_about():
 
 def set_image(sfile):
     image = QtGui.QImage(sfile)
-    scene.clear()
-    scene.addPixmap(QtGui.QPixmap.fromImage(image))
+    ui.imageView.setPixmap(QtGui.QPixmap.fromImage(image))
 
 def open_file(sfile):
     global simage
