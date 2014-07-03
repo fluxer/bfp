@@ -412,6 +412,9 @@
    <property name="text">
     <string>Open</string>
    </property>
+   <property name="shortcut">
+    <string>Ctrl+O</string>
+   </property>
   </action>
   <action name="actionFolder">
    <property name="icon">
@@ -453,6 +456,9 @@
    </property>
    <property name="text">
     <string>View hidden</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+H</string>
    </property>
   </action>
   <action name="actionOpenWith">

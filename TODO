@@ -21,6 +21,7 @@
 ## ALL QT ##
  * Use icons from theme
  * Reduce code dublication where possible
+ * Asign keyboard shortcuts
 
 ## ALL ##
  * Run PyLint and do some kung-foo on the code style
