@@ -32,6 +32,7 @@ class NewTab(QtGui.QWidget):
         super(NewTab, self).__init__(parent)
         # set variables
         self.url = url
+        self.bookmarks = ('google.com', 'bitbucket.org', 'youtube.com')
 
         # add widgets
         mainLayout = QtGui.QVBoxLayout()
@@ -83,6 +84,14 @@ class NewTab(QtGui.QWidget):
         self.webView.loadProgress.connect(self.load_progress)
         self.webView.titleChanged.connect(self.title_changed)
         ui.actionFind.triggered.connect(self.action_find)
+
+        widget = ui.menuBookmarks
+        widget.clear()
+        for mark in (self.bookmarks):
+            e = widget.addAction(general.get_icon('stock_bookmark'), mark)
+            widget.connect(e, QtCore.SIGNAL('triggered()'), \
+                lambda url=mark: self.action_bookmark(url))
+
 
         # load page
         self.webView.setUrl(QtCore.QUrl(self.url))
@@ -178,6 +187,10 @@ class NewTab(QtGui.QWidget):
         svar, ok = QtGui.QInputDialog.getText(MainWindow, 'Find', '')
         if ok and svar:
             self.webView.findText(svar)
+
+    def action_bookmark(self, url):
+        self.urlBox.setEditText(url)
+        self.url_changed()
 
 def remove_tab():
     ''' Remove tab from UI '''

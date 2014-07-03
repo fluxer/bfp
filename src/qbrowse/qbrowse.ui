@@ -194,9 +194,15 @@
     </property>
     <addaction name="actionFind"/>
    </widget>
+   <widget class="QMenu" name="menuBookmarks">
+    <property name="title">
+     <string>Bookmarks</string>
+    </property>
+   </widget>
    <addaction name="menuMain"/>
    <addaction name="menuActions"/>
    <addaction name="menuOptions"/>
+   <addaction name="menuBookmarks"/>
    <addaction name="menuHelp"/>
   </widget>
   <action name="actionQuit">
