@@ -21,7 +21,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "0.9.3 (4864e9c)"
+app_version = "0.9.3 (9bf058a)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -101,8 +101,8 @@ class Check(object):
                     or smime == 'text/x-lua' or smime == 'text/x-tcl' \
                     or smime == 'text/x-awk' or smime == 'text/x-gawk':
                     # https://en.wikipedia.org/wiki/Comparison_of_command_shells
-                    for bang in ('sh', 'bash', 'dash', 'ksh', 'csh', 'tcsh', 'tclsh', 'scsh', 'fish',
-                        'zsh', 'ash', 'python', 'python2', 'python3', 'perl', 'php', 'ruby', 'lua',
+                    for bang in ('sh', 'bash', 'dash', 'ksh', 'csh', 'tcsh', 'tclsh', 'scsh', 'fish', \
+                        'zsh', 'ash', 'python', 'python2', 'python3', 'perl', 'php', 'ruby', 'lua', \
                         'wish' 'awk' 'gawk'):
                         bang_regexp = '^#!(/usr)?/(s)?bin/(env )?' + bang + '(\\s|$)'
                         file_regexp = '(/usr)?/(s)?bin/' + bang
@@ -450,7 +450,7 @@ class Pack(object):
         for target in self.targets:
             if database.local_installed(target):
                 target_version = database.remote_metadata(target, 'version')
-                target_packfile = os.path.join(self.directory,
+                target_packfile = os.path.join(self.directory, \
                     os.path.basename(target) + '_' + target_version + '.tar.bz2')
 
                 message.sub_info('Compressing', target_packfile)
@@ -470,65 +470,65 @@ try:
 
     if EUID == 0:
         dist_parser = subparsers.add_parser('dist')
-        dist_parser.add_argument('-s', '--sources', action='store_true',
+        dist_parser.add_argument('-s', '--sources', action='store_true', \
             help='Include all sources in the archive')
-        dist_parser.add_argument('-c', '--clean', action='store_true',
+        dist_parser.add_argument('-c', '--clean', action='store_true', \
             help='Clean all sources after creating archive')
-        dist_parser.add_argument('-d', '--directory', type=str, default=os.getcwd(),
+        dist_parser.add_argument('-d', '--directory', type=str, default=os.getcwd(), \
             help='Set output directory')
-        dist_parser.add_argument('TARGETS', nargs='+', type=str,
+        dist_parser.add_argument('TARGETS', nargs='+', type=str, \
             help='Targets to apply actions on')
 
     check_parser = subparsers.add_parser('check')
-    check_parser.add_argument('-f', '--fast', action='store_true',
+    check_parser.add_argument('-f', '--fast', action='store_true', \
         help='Skip some files/links')
-    check_parser.add_argument('-a', '--adjust', action='store_true',
+    check_parser.add_argument('-a', '--adjust', action='store_true', \
         help='Adjust target depends')
-    check_parser.add_argument('-D', '--depends', action='store_true',
+    check_parser.add_argument('-D', '--depends', action='store_true', \
         help='Check dependencies of target')
-    check_parser.add_argument('-R', '--reverse', action='store_true',
+    check_parser.add_argument('-R', '--reverse', action='store_true', \
         help='Check reverse dependencies of target')
-    check_parser.add_argument('TARGETS', nargs='+', type=str,
+    check_parser.add_argument('TARGETS', nargs='+', type=str, \
         help='Targets to apply actions on')
 
     clean_parser = subparsers.add_parser('clean')
 
     lint_parser = subparsers.add_parser('lint')
-    lint_parser.add_argument('-m', '--man', action='store_true',
+    lint_parser.add_argument('-m', '--man', action='store_true', \
         help='Check for missing manual page(s)')
-    lint_parser.add_argument('-u', '--udev', action='store_true',
+    lint_parser.add_argument('-u', '--udev', action='store_true', \
         help='Check for cross-filesystem udev rule(s)')
-    lint_parser.add_argument('-s', '--symlink', action='store_true',
+    lint_parser.add_argument('-s', '--symlink', action='store_true', \
         help='Check for cross-filesystem symlink(s)')
-    lint_parser.add_argument('-d', '--doc', action='store_true',
+    lint_parser.add_argument('-d', '--doc', action='store_true', \
         help='Check for documentation')
-    lint_parser.add_argument('-M', '--module', action='store_true',
+    lint_parser.add_argument('-M', '--module', action='store_true', \
         help='Check for module(s) in non-standard directory')
-    lint_parser.add_argument('-f', '--footprint', action='store_true',
+    lint_parser.add_argument('-f', '--footprint', action='store_true', \
         help='Check for empty footprint')
-    lint_parser.add_argument('-b', '--builddir', action='store_true',
+    lint_parser.add_argument('-b', '--builddir', action='store_true', \
         help='Check for build directory trace(s)')
-    lint_parser.add_argument('-a', '--all', action='store_true',
+    lint_parser.add_argument('-a', '--all', action='store_true', \
         help='Perform all checks')
-    lint_parser.add_argument('TARGETS', nargs='+', type=str,
+    lint_parser.add_argument('TARGETS', nargs='+', type=str, \
         help='Targets to apply actions on')
 
     sane_parser = subparsers.add_parser('sane')
-    sane_parser.add_argument('-e', '--enable', action='store_true',
+    sane_parser.add_argument('-e', '--enable', action='store_true', \
         help='Check for explicit --enable argument(s)')
-    sane_parser.add_argument('-d', '--disable', action='store_true',
+    sane_parser.add_argument('-d', '--disable', action='store_true', \
         help='Check for explicit --disable argument(s)')
-    sane_parser.add_argument('-n', '--null', action='store_true',
+    sane_parser.add_argument('-n', '--null', action='store_true', \
         help='Check for /dev/null output redirection(s)')
-    sane_parser.add_argument('-m', '--maintainer', action='store_true',
+    sane_parser.add_argument('-m', '--maintainer', action='store_true', \
         help='Check for missing maintainer')
-    sane_parser.add_argument('-N', '--note', action='store_true',
+    sane_parser.add_argument('-N', '--note', action='store_true', \
         help='Check for FIXME/TODO note(s)')
-    sane_parser.add_argument('-v', '--variables', action='store_true',
+    sane_parser.add_argument('-v', '--variables', action='store_true', \
         help='Check for essential variables')
-    sane_parser.add_argument('-a', '--all', action='store_true',
+    sane_parser.add_argument('-a', '--all', action='store_true', \
         help='Perform all checks')
-    sane_parser.add_argument('TARGETS', nargs='+', type=str,
+    sane_parser.add_argument('TARGETS', nargs='+', type=str, \
         help='Targets to apply actions on')
 
     if EUID == 0:
@@ -536,25 +536,25 @@ try:
 
     if EUID == 0:
         edit_parser = subparsers.add_parser('edit')
-        edit_parser.add_argument('TARGETS', nargs='+', type=str,
+        edit_parser.add_argument('TARGETS', nargs='+', type=str, \
             help='Targets to apply actions on')
 
     which_parser = subparsers.add_parser('which')
-    which_parser.add_argument('-p', '--plain', action='store_true',
+    which_parser.add_argument('-p', '--plain', action='store_true', \
         help='Print in plain format')
-    which_parser.add_argument('PATTERN', type=str,
+    which_parser.add_argument('PATTERN', type=str, \
         help='Pattern to search for in remote targets')
 
     pack_parser = subparsers.add_parser('pack')
-    pack_parser.add_argument('-d', '--directory', type=str, default=os.getcwd(),
+    pack_parser.add_argument('-d', '--directory', type=str, default=os.getcwd(), \
         help='Set output directory')
-    pack_parser.add_argument('TARGETS', nargs='+', type=str,
+    pack_parser.add_argument('TARGETS', nargs='+', type=str, \
         help='Targets to apply actions on')
 
-    parser.add_argument('--debug', nargs=0, action=OverrideDebug,
+    parser.add_argument('--debug', nargs=0, action=OverrideDebug, \
         help='Enable debug messages')
-    parser.add_argument('--version', action='version',
-        version='Source Package Manager v' + app_version,
+    parser.add_argument('--version', action='version', \
+        version='Source Package Manager v' + app_version, \
         help='Show SPM Tools version and exit')
 
     ARGS = parser.parse_args()
@@ -600,7 +600,7 @@ try:
             ARGS.footprint = True
             ARGS.builddir = True
 
-        m = Lint(ARGS.TARGETS, ARGS.man, ARGS.udev, ARGS.symlink, ARGS.doc,
+        m = Lint(ARGS.TARGETS, ARGS.man, ARGS.udev, ARGS.symlink, ARGS.doc, \
             ARGS.module, ARGS.footprint, ARGS.builddir)
         m.main()
 
@@ -616,7 +616,7 @@ try:
             ARGS.note = True
             ARGS.variables = True
 
-        m = Sane(ARGS.TARGETS, ARGS.enable, ARGS.disable, ARGS.null,
+        m = Sane(ARGS.TARGETS, ARGS.enable, ARGS.disable, ARGS.null, \
             ARGS.maintainer, ARGS.note, ARGS.variables)
         m.main()
 

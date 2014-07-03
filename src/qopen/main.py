@@ -2,7 +2,7 @@
 
 import qopen_ui
 from PyQt4 import QtCore, QtGui
-import sys, os, pwd, grp, stat, libmisc, libdesktop
+import sys, os, libmisc, libdesktop
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)

@@ -777,7 +777,7 @@ class Source(object):
                                 match = match[0]
                         match = misc.string_convert(match)
 
-                        if match == self.target_name or misc.string_search(self_file_regexp,
+                        if match == self.target_name or misc.string_search(self_file_regexp, \
                             target_content.keys(), exact=True, escape=False):
                             message.sub_debug('Dependency needed but in self', match)
                         elif match and misc.string_search(match, self.target_depends, exact=True):
@@ -804,7 +804,7 @@ class Source(object):
         metadata.close()
 
         message.sub_info('Assembling footprint')
-        misc.file_write(os.path.join(self.install_dir, self.target_footprint),
+        misc.file_write(os.path.join(self.install_dir, self.target_footprint), \
             '\n'.join(sorted(target_content.keys())).replace(self.install_dir, ''))
 
         message.sub_info('Compressing tarball')

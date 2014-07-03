@@ -24,7 +24,7 @@ class System(object):
         # changed depending on power state
         self.LID_VALUE = 'suspend'
         self.CPU_VALUE = 'performance'
-        self.BACKLIGHT_VALUE =  '15'
+        self.BACKLIGHT_VALUE = '15'
 
     def get_batteries(self):
         ''' Get battery devices '''
@@ -122,7 +122,7 @@ class System(object):
         if os.path.isfile(sfile):
             disks = misc.file_read(sfile).strip()
             disks = disks.replace('[', '').replace(']', '')
-            disks = disks.split() 
+            disks = disks.split()
         return disks
 
     def get_power_states(self):

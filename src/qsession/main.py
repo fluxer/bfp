@@ -2,7 +2,7 @@
 
 import qsession_ui
 from PyQt4 import QtCore, QtGui
-import sys, os, pwd, crypt, libmisc, libdesktop
+import sys, os, pwd, crypt, libmisc, libdesktop, libsystem
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
@@ -12,6 +12,7 @@ ui.setupUi(MainWindow)
 config = libdesktop.Config()
 general = libdesktop.General()
 misc = libmisc.Misc()
+system = libsystem.System()
 icon = QtGui.QIcon()
 
 def setLook():
@@ -82,11 +83,11 @@ def handle_lid():
         if system.get_power_supply() == 'DC':
             action = config.SUSPEND_POWER
         else:
-             action = config.SUSPEND_BATTERY
+            action = config.SUSPEND_BATTERY
         if action == 'suspend':
-             system.do_suspend()
+            system.do_suspend()
         elif action == 'shutdown':
-             system.do_shutdown()
+            system.do_shutdown()
 
 # power management
 lwatcher = QtCore.QFileSystemWatcher()

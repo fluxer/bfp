@@ -2,7 +2,7 @@
 
 import qpanel_ui
 from PyQt4 import QtCore, QtGui
-import sys, os, libmisc, libdesktop
+import sys, libmisc, libdesktop
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
@@ -23,7 +23,7 @@ def show_popup():
     ui.menuActions.popup(QtGui.QCursor.pos())
 
 def run_preferences():
-   general.execute_program('qsettings')
+    general.execute_program('qsettings')
 
 def do_suspend():
     general.system_suspend(MainWindow)

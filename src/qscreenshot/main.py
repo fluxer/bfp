@@ -1,11 +1,11 @@
 #!/bin/python2
 
 import qscreenshot_ui
-from PyQt4 import QtCore, QtGui
-import sys, os, time, libmisc, libdesktop
+from PyQt4 import QtGui
+import sys, time, libmisc, libdesktop
 
 # prepare for lift-off
-app_version = "0.9.3 (4864e9c)"
+app_version = "0.9.4 (9bf058a)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qscreenshot_ui.Ui_MainWindow()
@@ -26,7 +26,7 @@ def run_about():
 
 def get_filename():
     sfile = QtGui.QFileDialog.getSaveFileName(MainWindow, 'Save', \
-        'screenshot.png',  'Image Files (*.png *.jpg *.jpeg *.svg);;All Files (*)')
+        'screenshot.png', 'Image Files (*.png *.jpg *.jpeg *.svg);;All Files (*)')
     if sfile:
         return str(sfile)
     return None

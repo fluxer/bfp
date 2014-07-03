@@ -198,14 +198,14 @@ class Database(object):
         return target
 
     def remote_groups(self, basename=True):
-         groups = []
-         for sdir in misc.list_dirs(os.path.join(self.CACHE_DIR, 'repositories')):
-             if not os.path.isfile(os.path.join(sdir, 'SRCBUILD')) and not '.git' in sdir:
-                 if basename:
-                     groups.append(os.path.basename(sdir))
-                 else:
-                     groups.append(sdir)
-         return sorted(groups)
+        groups = []
+        for sdir in misc.list_dirs(os.path.join(self.CACHE_DIR, 'repositories')):
+            if not os.path.isfile(os.path.join(sdir, 'SRCBUILD')) and not '.git' in sdir:
+                if basename:
+                    groups.append(os.path.basename(sdir))
+                else:
+                    groups.append(sdir)
+        return sorted(groups)
 
 
 class SRCBUILD(object):

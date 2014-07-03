@@ -10,7 +10,7 @@ This program is a curses front end to pyparted that mimics cfdisk.
 import curses, curses.textpad, sys
 import parted
 
-__version__ = "0.2"
+app_version = "0.9.3 (9bf058a)"
 
 DEBUG = None
 PART_TABLE = 10 # Where to start listing partitions from.
@@ -53,7 +53,7 @@ class Menu(object):
 
     @property
     def header(self):
-        text=\
+        text = \
         """\
         cparted {:}
 
@@ -62,7 +62,7 @@ class Menu(object):
         Size: {:} sectors, {:.1f} GB
         Sector Size (logical/physical): {:}B/{:}B
         Partition Table: {:}
-        """.format(__version__, self.device.path, self.device.model,
+        """.format(app_version, self.device.path, self.device.model,
                    DEVICE_TYPES[self.device.type], self.device.length,
                    self.device.getLength("GB"),
                    self.device.sectorSize, self.device.physicalSectorSize,
@@ -116,8 +116,8 @@ class Menu(object):
 
         def format_fields(cols):
             return "{:<{a}}  {:<{b}}  {:<{c}}  {:<{d}}  {:>{e}}".\
-                    format(*cols, a = widths[0], b = widths[1], c = widths[2],
-                           d = widths[3], e = widths[4])
+                    format(*cols, a=widths[0], b=widths[1], c=widths[2], \
+                           d=widths[3], e=widths[4])
 
         table = ""
         table += format_fields(self.table_fields) + "\n"
@@ -225,7 +225,7 @@ class Menu(object):
 
     def format_fields(self, cols):
         fields = ("{:{a}} {:{a}} {:{a}} {:{a}} {:>{a}}").\
-                  format(*cols, a = int(self.window_width / 5.5))
+                  format(*cols, a=int(self.window_width / 5.5))
         return "{:^{:}}".format(fields, self.window_width - 1)
 
     def draw_partitions(self):
@@ -516,15 +516,15 @@ Note: All of the commands can be entered with either upper or lower
             if not alignment.isAligned(free, end):
                 end = alignment.alignUp(free, end)
 
-            free = parted.Geometry(self.device, start, end = end)
+            free = parted.Geometry(self.device, start, end=end)
             max_length = self.disk.maxPartitionLength
 
             if max_length and max_length < free.length:
                 self.draw_info("ERROR: partition size too large")
                 return
 
-            part = parted.Partition(self.disk, part_type, geometry = free)
-            constraint = parted.Constraint(exactGeom = free)
+            part = parted.Partition(self.disk, part_type, geometry=free)
+            constraint = parted.Constraint(exactGeom=free)
             self.disk.addPartition(part, constraint)
 
         except Exception as e:
@@ -551,7 +551,7 @@ Note: All of the commands can be entered with either upper or lower
 def make_fn(ret, doc=""):
     def fn():
         return ret
-    fn.__doc__  = doc
+    fn.__doc__ = doc
     return fn
 
 
@@ -590,11 +590,11 @@ def grow_ext(part):
     """Grow, or create and grow, an extended partition to max size."""
     ext = part.disk.getExtendedPartition()
     if ext:
-        c = parted.Constraint(device = part.disk.device)
+        c = parted.Constraint(device=part.disk.device)
         part.disk.maximizePartition(ext, c)
     else:
-        c = parted.Constraint(exactGeom = part.geometry)
-        p = parted.Partition(part.disk, parted.PARTITION_EXTENDED, geometry = part.geometry)
+        c = parted.Constraint(exactGeom=part.geometry)
+        p = parted.Partition(part.disk, parted.PARTITION_EXTENDED, geometry=part.geometry)
         part.disk.addPartition(p, c)
 
 
@@ -604,7 +604,7 @@ def check_free_space(part):
     if len(disk.partitions) == disk.maxSupportedPartitionCount:
         return "Unusable" # Too many partitions
     if disk.primaryPartitionCount >= disk.maxPrimaryPartitionCount:
-        if (len(disk.getLogicalPartitions()) == disk.getMaxLogicalPartitions):
+        if len(disk.getLogicalPartitions()) == disk.getMaxLogicalPartitions:
             return "Unusable" # Too many logical partitions or no extended.
         elif next_to_extended(part):
             return "Logical"
@@ -667,9 +667,9 @@ def start_curses(stdscr, device):
             menu.left_right(key)
         if key == ord("\n"):
             menu.call("Selected")
-        if key == ord("b") or key ==  ord("B"):
+        if key == ord("b") or key == ord("B"):
             menu.call("Bootable")
-        if key == ord("d") or key ==  ord("D"):
+        if key == ord("d") or key == ord("D"):
             menu.call("Delete")
         if key == ord("h") or key == ord("H") or key == ord("?"):
             menu.call("Help")

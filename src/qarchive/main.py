@@ -68,7 +68,7 @@ elif action == '--extract':
     finally:
         sys.exit(0)
 else:
-    QtGui.QMessageBox.critical(Dialog, 'Critical','Invalid action, choose from gzip/bzip/extract.')
+    QtGui.QMessageBox.critical(Dialog, 'Critical', 'Invalid action, choose from gzip/bzip/extract.')
     sys.exit(3)
 
 sys.exit(app.exec_())
