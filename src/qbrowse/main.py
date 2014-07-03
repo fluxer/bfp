@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui, QtWebKit
 import sys, os, libmisc, libdesktop
 
 # prepare for lift-off
-app_version = "0.9.4 (17642aa)"
+app_version = "0.9.5 (25e9801)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
@@ -114,7 +114,7 @@ class NewTab(QtGui.QWidget):
             self.reloadStopButton.setIcon(self.icon_stop)
             self.webView.setUrl(QtCore.QUrl(self.url))
         else:
-            ui.reloadStopButton.setIcon(self.icon_reload)
+            self.reloadStopButton.setIcon(self.icon_reload)
             self.webView.stop()
 
     def link_clicked(self, url):
@@ -126,7 +126,7 @@ class NewTab(QtGui.QWidget):
         else:
             self.backButton.setEnabled(False)
         if history.canGoForward():
-            ui.nextButton.setEnabled(True)
+            self.nextButton.setEnabled(True)
         else:
             self.nextButton.setEnabled(False)
 
