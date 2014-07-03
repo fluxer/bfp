@@ -5,6 +5,11 @@ from PyQt4 import QtCore, QtGui
 import sys, os, pwd, grp, stat, libmisc, libdesktop
 
 # prepare for lift-off
+sfile = str(QtCore.QDir.currentPath())
+for arg in sys.argv:
+    if os.path.exists(arg):
+        sfile = arg
+
 app = QtGui.QApplication(sys.argv)
 Dialog = QtGui.QDialog()
 ui = qproperties_ui.Ui_Dialog()
@@ -21,11 +26,6 @@ def setLook():
     general.set_style(app)
     icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
-
-sfile = str(QtCore.QDir.currentPath())
-for arg in sys.argv:
-    if os.path.exists(arg):
-        sfile = arg
 
 # FIXME: disable those who can not be set
 for group in grp.getgrall():
