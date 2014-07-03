@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui, QtWebKit
 import sys, os, libmisc, libdesktop
 
 # prepare for lift-off
-app_version = "0.9.5 (6c284d3)"
+app_version = "0.9.5 (273c887)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
@@ -33,6 +33,11 @@ class NewTab(QtGui.QWidget):
         # set variables
         self.url = url
         self.bookmarks = ('google.com', 'bitbucket.org', 'youtube.com')
+        self.icon_back = general.get_icon('back')
+        self.icon_next = general.get_icon('forward')
+        self.icon_reload = general.get_icon('reload')
+        self.icon_stop = general.get_icon('exit')
+        self.icon_new = general.get_icon('add')
 
         # add widgets
         mainLayout = QtGui.QVBoxLayout()
@@ -62,12 +67,10 @@ class NewTab(QtGui.QWidget):
         self.urlBox.setSizePolicy(policy)
         self.urlBox.setInsertPolicy(1)
         self.backButton.setEnabled(False)
-        self.backButton.setIcon(general.get_icon('back'))
+        self.backButton.setIcon(self.icon_back)
         self.nextButton.setEnabled(False)
-        self.nextButton.setIcon(general.get_icon('forward'))
-        self.newButton.setIcon(general.get_icon('add'))
-        self.icon_reload = general.get_icon('reload')
-        self.icon_stop = general.get_icon('exit')
+        self.nextButton.setIcon(self.icon_next)
+        self.newButton.setIcon(self.icon_new)
         self.webView.settings().setAttribute(QtWebKit.QWebSettings.PluginsEnabled, \
             ui.actionPlugins.isChecked())
         self.webView.settings().setAttribute(QtWebKit.QWebSettings.JavascriptEnabled, \
@@ -98,8 +101,7 @@ class NewTab(QtGui.QWidget):
     # basic functionality methods
     def url_changed(self):
         ''' Url have been changed by user '''
-        page = self.webView.page()
-        history = page.history()
+        history = self.webView.page().history()
         if history.canGoBack():
             self.backButton.setEnabled(True)
         else:
@@ -119,7 +121,7 @@ class NewTab(QtGui.QWidget):
     def title_changed(self, title):
         '''  Web page title changed - change the tab name '''
         MainWindow.setWindowTitle(title)
-        ui.tabWidget.setTabText(ui.tabWidget.currentIndex(), title)
+        ui.tabWidget.setTabText(ui.tabWidget.currentIndex(), title[:20])
 
     def reload_stop_page(self):
         ''' Reload/stop loading the web page '''
@@ -132,8 +134,7 @@ class NewTab(QtGui.QWidget):
 
     def link_clicked(self, url):
         ''' Update the URL if a link on a web page is clicked '''
-        page = self.webView.page()
-        history = page.history()
+        history = self.webView.page().history()
         if history.canGoBack():
             self.backButton.setEnabled(True)
         else:
@@ -181,6 +182,7 @@ class NewTab(QtGui.QWidget):
     def new_tab(self):
         ''' Create a new tab '''
         index = ui.tabWidget.currentIndex()+1
+        MainWindow.setWindowTitle('New tab')
         ui.tabWidget.insertTab(index, NewTab(), 'New tab')
         ui.tabWidget.setCurrentIndex(index)
 
