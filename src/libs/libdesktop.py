@@ -25,7 +25,9 @@ class General(object):
         dicon = xdg.IconTheme.getIconPath(sicon)
         if dicon:
             return QtGui.QIcon(dicon)
-        return None
+        icon = QtGui.QIcon()
+        icon.setThemeName(config.GENERAL_ICONTHEME)
+        return icon.fromTheme(sicon)
 
     def execute_program(self, sprogram, sdetached=True, skill=False):
         ''' Execute program from PATH '''
