@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui, QtWebKit
 import sys, os, libmisc, libdesktop
 
 # prepare for lift-off
-app_version = "0.9.5 (830df35)"
+app_version = "0.9.5 (a72622a)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
@@ -67,7 +67,12 @@ class NewTab(QtGui.QWidget):
         self.newButton.setIcon(general.get_icon('add'))
         self.icon_reload = general.get_icon('reload')
         self.icon_stop = general.get_icon('exit')
-        self.webView.settings().setAttribute(QtWebKit.QWebSettings.PluginsEnabled, True)
+
+
+        self.webView.settings().setAttribute(QtWebKit.QWebSettings.PluginsEnabled, \
+            ui.actionPlugins.isChecked())
+        self.webView.settings().setAttribute(QtWebKit.QWebSettings.JavascriptEnabled, \
+            ui.actionJavascript.isChecked())
 
         # connect widgets
         self.backButton.clicked.connect(self.back)
@@ -79,6 +84,7 @@ class NewTab(QtGui.QWidget):
         self.webView.urlChanged.connect(self.link_clicked)
         self.webView.loadProgress.connect(self.load_progress)
         self.webView.titleChanged.connect(self.title_changed)
+        ui.actionFind.triggered.connect(self.action_find)
 
         # load page
         self.webView.setUrl(QtCore.QUrl(self.url))
@@ -169,6 +175,11 @@ class NewTab(QtGui.QWidget):
         index = ui.tabWidget.currentIndex()+1
         ui.tabWidget.insertTab(index, NewTab(), 'New tab')
         ui.tabWidget.setCurrentIndex(index)
+
+    def action_find(self):
+        svar, ok = QtGui.QInputDialog.getText(MainWindow, 'Find', '')
+        if ok and svar:
+            self.webView.findText(svar)
 
 def remove_tab():
     ''' Remove tab from UI '''

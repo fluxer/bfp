@@ -179,6 +179,8 @@
     <property name="title">
      <string>Options</string>
     </property>
+    <addaction name="actionPlugins"/>
+    <addaction name="actionJavascript"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -186,7 +188,14 @@
     </property>
     <addaction name="actionAbout"/>
    </widget>
+   <widget class="QMenu" name="menuActions">
+    <property name="title">
+     <string>Actions</string>
+    </property>
+    <addaction name="actionFind"/>
+   </widget>
    <addaction name="menuMain"/>
+   <addaction name="menuActions"/>
    <addaction name="menuOptions"/>
    <addaction name="menuHelp"/>
   </widget>
@@ -209,6 +218,54 @@
    </property>
    <property name="text">
     <string>About</string>
+   </property>
+  </action>
+  <action name="actionPlugins">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/archive-extract.svg</normaloff>:/share/qresources/resources/archive-extract.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Plugins</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+P</string>
+   </property>
+  </action>
+  <action name="actionJavascript">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/system-run.svg</normaloff>:/share/qresources/resources/system-run.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Javascript</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+J</string>
+   </property>
+  </action>
+  <action name="actionFind">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/find.svg</normaloff>:/share/qresources/resources/find.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Find</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+F</string>
    </property>
   </action>
  </widget>
