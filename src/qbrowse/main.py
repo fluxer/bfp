@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui, QtWebKit
 import sys, os, libmisc, libdesktop
 
 # prepare for lift-off
-app_version = "0.9.5 (a72622a)"
+app_version = "0.9.5 (6c284d3)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
@@ -92,7 +92,6 @@ class NewTab(QtGui.QWidget):
             widget.connect(e, QtCore.SIGNAL('triggered()'), \
                 lambda url=mark: self.action_bookmark(url))
 
-
         # load page
         self.webView.setUrl(QtCore.QUrl(self.url))
 
@@ -152,9 +151,11 @@ class NewTab(QtGui.QWidget):
             self.reloadStopButton.setIcon(self.icon_reload)
             self.progressBar.hide()
             self.progressBar.setValue(0)
+            ui.tabWidget.setTabIcon(ui.tabWidget.currentIndex(), self.webView.icon())
         else:
             self.progressBar.show()
             self.progressBar.setValue(load)
+            self.progressBar.setStatusTip(self.webView.statusTip())
             self.reloadStopButton.setIcon(self.icon_stop)
 
     def back(self):
