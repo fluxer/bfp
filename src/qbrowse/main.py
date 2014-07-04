@@ -2,10 +2,10 @@
 
 import qbrowse_ui
 from PyQt4 import QtCore, QtGui, QtWebKit
-import sys, os, libdesktop
+import sys, os, gc, libdesktop
 
 # prepare for lift-off
-app_version = "0.9.7 (defc18e)"
+app_version = "0.9.7 (74d29fc)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
@@ -13,6 +13,7 @@ ui.setupUi(MainWindow)
 config = libdesktop.Config()
 general = libdesktop.General()
 icon = QtGui.QIcon()
+home_page = 'http://google.com'
 
 def setLook():
     general.set_style(app)
@@ -25,12 +26,12 @@ def run_about():
 
 class NewTab(QtGui.QWidget):
     ''' Tab constructor '''
-    def __init__(self, url='http://google.com', parent=None):
+    def __init__(self, url='', parent=None):
         ''' Tab initialiser '''
         super(NewTab, self).__init__(parent)
         # set variables
         self.url = url
-        self.bookmarks = ('google.com', 'bitbucket.org', 'youtube.com')
+        self.bookmarks = ('google.com', 'bitbucket.org', 'youtube.com', 'phoronix.com')
         self.icon_back = general.get_icon('back')
         self.icon_next = general.get_icon('forward')
         self.icon_reload = general.get_icon('reload')
@@ -87,16 +88,26 @@ class NewTab(QtGui.QWidget):
         self.webView.titleChanged.connect(self.title_changed)
         ui.actionFind.triggered.disconnect()
         ui.actionFind.triggered.connect(self.action_find)
+        ui.actionSearch.triggered.disconnect()
+        ui.actionSearch.triggered.connect(self.action_search)
 
         widget = ui.menuBookmarks
         widget.clear()
         for mark in self.bookmarks:
             e = widget.addAction(general.get_icon('stock_bookmark'), mark)
             widget.connect(e, QtCore.SIGNAL('triggered()'), \
-                lambda url=mark: self.action_bookmark(url))
+                lambda url=mark: self.new_tab(url))
 
         # load page
+        self.check_url()
         self.webView.setUrl(QtCore.QUrl(self.url))
+
+    def check_url(self):
+        self.url = str(self.url)
+        if not os.path.isfile(self.url) and not self.url.startswith('http://') \
+            and not self.url.startswith('https://') and not self.url.startswith('ftp://') \
+            and not self.url.startswith('ftps://'):
+            self.url = 'http://' + self.url
 
     # basic functionality methods
     def url_changed(self):
@@ -112,10 +123,7 @@ class NewTab(QtGui.QWidget):
             self.nextButton.setEnabled(False)
 
         self.url = str(self.urlBox.currentText())
-        if not os.path.isfile(self.url) and not self.url.startswith('http://') \
-            and not self.url.startswith('https://') and not self.url.startswith('ftp://') \
-            and not self.url.startswith('ftps://'):
-            self.url = 'http://' + self.url
+        self.check_url()
         self.webView.setUrl(QtCore.QUrl(self.url))
 
     def title_changed(self, title):
@@ -177,11 +185,13 @@ class NewTab(QtGui.QWidget):
         else:
             self.nextButton.setEnabled(False)
 
-    def new_tab(self):
+    def new_tab(self, url):
         ''' Create a new tab '''
+        if not url:
+            url = home_page
         index = self.tab_index + 1
         MainWindow.setWindowTitle('New tab')
-        ui.tabWidget.insertTab(index, NewTab(), 'New tab')
+        ui.tabWidget.insertTab(index, NewTab(url), 'New tab')
         ui.tabWidget.setCurrentIndex(index)
 
     def action_find(self):
@@ -190,14 +200,16 @@ class NewTab(QtGui.QWidget):
         if ok and svar:
             self.webView.findText(svar)
 
-    def action_bookmark(self, url):
-        ''' Go to bookmark URL '''
-        self.urlBox.setEditText(url)
-        self.url_changed()
+    def action_search(self):
+        ''' Search the internet '''
+        svar, ok = QtGui.QInputDialog.getText(MainWindow, 'Search', '')
+        if ok and svar:
+            self.new_tab('https://duckduckgo.com/?q=' + svar)
 
 def remove_tab():
     ''' Remove tab from UI '''
     ui.tabWidget.removeTab(ui.tabWidget.currentIndex())
+    gc.collect()
 
 ui.tabWidget.tabCloseRequested.connect(remove_tab)
 ui.actionQuit.triggered.connect(sys.exit)
@@ -205,7 +217,7 @@ ui.actionAbout.triggered.connect(run_about)
 
 # initialise
 ui.tabWidget.removeTab(0)
-NewTab().new_tab()
+NewTab().new_tab(home_page)
 
 # watch configs for changes
 def reload_browser():

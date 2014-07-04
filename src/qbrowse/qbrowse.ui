@@ -193,6 +193,7 @@
      <string>Actions</string>
     </property>
     <addaction name="actionFind"/>
+    <addaction name="actionSearch"/>
    </widget>
    <widget class="QMenu" name="menuBookmarks">
     <property name="title">
@@ -272,6 +273,18 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+F</string>
+   </property>
+  </action>
+  <action name="actionSearch">
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/web-browser.svg</normaloff>:/share/qresources/resources/web-browser.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Search</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+S</string>
    </property>
   </action>
  </widget>
