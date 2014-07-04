@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui
 import sys, os, libmisc, libdesktop, libhighlighter
 
 # prepare for lift-off
-app_version = "0.9.6 (e082da9)"
+app_version = "0.9.6 (0e037e1)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qedit_ui.Ui_MainWindow()
@@ -49,6 +49,15 @@ def open_file(sfile):
         ui.textEdit.setText(misc.file_read(sfile))
     sedit = sfile
     ui.actionReload.setEnabled(True)
+    smime = misc.file_mime(sfile)
+    if smime == 'text/x-python':
+        highlight_python()
+    elif smime == 'text/x-shellscript':
+        highlight_shell()
+    elif smime == 'text/x-c':
+        highlight_c()
+    else:
+        highlight_plain()
 
 def save_file():
     if sedit:

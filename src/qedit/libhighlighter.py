@@ -10,7 +10,7 @@ class HighlighterShell(QtGui.QSyntaxHighlighter):
         keywordFormat.setForeground(QtCore.Qt.darkGreen)
         keywordFormat.setFontWeight(QtGui.QFont.Bold)
 
-        keywordPatterns = ''
+        keywordPatterns = []
         for s in ('ArithmeticError',
  'alias',
  'bg',
@@ -42,7 +42,7 @@ class HighlighterShell(QtGui.QSyntaxHighlighter):
  'trap',
  'unset',
  'echo',):
-            keywordPatterns = keywordPatterns + '\\b' + s # + '[\\(]'
+            keywordPatterns.append('\\b' + s + '\\b')
         self.highlightingRules = [(QtCore.QRegExp(pattern), keywordFormat)
                 for pattern in keywordPatterns]
 
@@ -194,7 +194,7 @@ class HighlighterPython(QtGui.QSyntaxHighlighter):
         keywordFormat.setForeground(QtCore.Qt.darkGreen)
         keywordFormat.setFontWeight(QtGui.QFont.Bold)
 
-        keywordPatterns = ''
+        keywordPatterns = []
         for s in ('ArithmeticError',
  'AssertionError',
  'AttributeError',
@@ -286,15 +286,18 @@ class HighlighterPython(QtGui.QSyntaxHighlighter):
  'filter',
  'float',
  'format',
+ 'from',
  'frozenset',
  'get_ipython',
  'getattr',
+ 'global',
  'globals',
  'hasattr',
  'hash',
  'help',
  'hex',
  'id',
+ 'import',
  'input',
  'int',
  'intern',
@@ -323,6 +326,7 @@ class HighlighterPython(QtGui.QSyntaxHighlighter):
  'reduce',
  'reload',
  'repr',
+ 'return',
  'reversed',
  'round',
  'set',
@@ -340,7 +344,7 @@ class HighlighterPython(QtGui.QSyntaxHighlighter):
  'vars',
  'xrange',
  'zip'):
-            keywordPatterns = keywordPatterns + '\\b' + s # + '[\\(]'
+            keywordPatterns.append('\\b' + s+ '\\b')
         self.highlightingRules = [(QtCore.QRegExp(pattern), keywordFormat)
                 for pattern in keywordPatterns]
         
@@ -374,8 +378,8 @@ class HighlighterPython(QtGui.QSyntaxHighlighter):
         self.highlightingRules.append((QtCore.QRegExp("\\b[A-Za-z0-9_]+(?=\\()"),
                 functionFormat))
 
-        self.commentStartExpression = QtCore.QRegExp("'\\*")
-        self.commentEndExpression = QtCore.QRegExp("'\\*/")
+        self.commentStartExpression = QtCore.QRegExp("'\\*#")
+        self.commentEndExpression = QtCore.QRegExp("'\\*\n")
 
     def highlightBlock(self, text):
         for pattern, format in self.highlightingRules:
