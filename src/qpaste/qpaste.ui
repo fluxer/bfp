@@ -23,7 +23,7 @@
    </size>
   </property>
   <property name="windowTitle">
-   <string>Paste</string>
+   <string>QPaste</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../qresources/libqresources.qrc">
