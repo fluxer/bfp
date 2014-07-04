@@ -6,7 +6,6 @@
 
 ## QFILE ##
  * Implement bookmarks
- * Display size and maybe permissions in status bar
 
 ## LIBDESKTOP ##
  * Signal to qsession to shutdown/reboot/suspend/logout?
