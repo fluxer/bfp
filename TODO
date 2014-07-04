@@ -11,7 +11,7 @@
  * Signal to qsession to shutdown/reboot/suspend/logout?
 
 ## QSESSION ##
- * Controls power state and mounting?
+ * Controls power state?
 
 ## SPM-QT ##
  * Fixup the logging

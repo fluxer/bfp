@@ -136,6 +136,21 @@ watcher1 = QtCore.QFileSystemWatcher()
 watcher1.addPath(config.settings.fileName())
 watcher1.fileChanged.connect(reload_session)
 
+# watch block devices for changes
+def monitor_devices():
+    for device in os.listdir('/sys/class/block'):
+        # FIXME: mount only those with filesystemts
+        if device.startswith('s') or device.startswith('h') or device.startswith('v'):
+            device = '/dev/' + device
+            if system.check_mounted(device):
+                system.do_unmount(device)
+            else:
+                system.do_mount(device)
+
+watcher2 = QtCore.QFileSystemWatcher()
+watcher2.addPath('/dev')
+watcher2.directoryChanged.connect(monitor_devices)
+
 # run!
 os.chdir('/')
 MainWindow.showMaximized()

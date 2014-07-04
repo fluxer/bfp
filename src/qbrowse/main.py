@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui, QtWebKit
 import sys, os, gc, libdesktop
 
 # prepare for lift-off
-app_version = "0.9.7 (74d29fc)"
+app_version = "0.9.7 (4bb5248)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
@@ -204,7 +204,7 @@ class NewTab(QtGui.QWidget):
         ''' Search the internet '''
         svar, ok = QtGui.QInputDialog.getText(MainWindow, 'Search', '')
         if ok and svar:
-            self.new_tab('https://duckduckgo.com/?q=' + svar)
+            self.new_tab('duckduckgo.com/?q=' + svar)
 
 def remove_tab():
     ''' Remove tab from UI '''
