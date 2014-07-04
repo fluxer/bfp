@@ -76,6 +76,9 @@ def do_shutdown():
 def do_reboot():
     general.system_reboot(MainWindow)
 
+def show_popup():
+    ui.menuActions.popup(QtGui.QCursor.pos())
+
 def handle_lid():
     if system.get_lid_status() == 'closed':
         if system.get_power_supply() == 'DC':
@@ -87,25 +90,6 @@ def handle_lid():
         elif action == 'shutdown':
             system.do_shutdown()
 
-# power management
-lwatcher = QtCore.QFileSystemWatcher()
-lwatcher.addPath('/proc/acpi/button/lid/LID/state')
-lwatcher.fileChanged.connect(handle_lid)
-
-autologin = False
-for p in pwd.getpwall():
-    # skip system users
-    if p.pw_uid == 0 or p.pw_uid > 999:
-        ui.UserNameBox.addItem(p.pw_name)
-        for arg in sys.argv[1:]:
-            if arg == p.pw_name:
-                autologin = p.pw_name
-if autologin:
-    login(autologin)
-
-def show_popup():
-    ui.menuActions.popup(QtGui.QCursor.pos())
-
 # setup signals
 ui.LoginButton.clicked.connect(login)
 ui.actionShutdown.triggered.connect(do_shutdown)
@@ -115,6 +99,11 @@ ui.actionReboot.triggered.connect(do_reboot)
 MainWindow.setWindowFlags(QtCore.Qt.FramelessWindowHint)
 d = QtGui.QDesktopWidget().screenGeometry(MainWindow)
 ui.frame.move((d.width()/2)-165, (d.height()/2)-120)
+
+# power management
+lwatcher = QtCore.QFileSystemWatcher()
+lwatcher.addPath('/proc/acpi/button/lid/LID/state')
+lwatcher.fileChanged.connect(handle_lid)
 
 # watch configs for changes
 def reload_session():
@@ -128,7 +117,7 @@ watcher1 = QtCore.QFileSystemWatcher()
 watcher1.addPath(config.settings.fileName())
 watcher1.fileChanged.connect(reload_session)
 
-# watch block devices for changes
+# block devices management
 def monitor_devices():
     for device in os.listdir('/sys/class/block'):
         # FIXME: mount only those with filesystemts
@@ -142,6 +131,17 @@ def monitor_devices():
 watcher2 = QtCore.QFileSystemWatcher()
 watcher2.addPath('/dev')
 watcher2.directoryChanged.connect(monitor_devices)
+
+autologin = False
+for p in pwd.getpwall():
+    # skip system users
+    if p.pw_uid == 0 or p.pw_uid > 999:
+        ui.UserNameBox.addItem(p.pw_name)
+        for arg in sys.argv[1:]:
+            if arg == p.pw_name:
+                autologin = p.pw_name
+if autologin:
+    login(p.pw_name)
 
 # run!
 os.chdir('/')

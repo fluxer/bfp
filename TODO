@@ -17,6 +17,9 @@
  * Fixup the logging
  * Implement menu bar and drop "About" tab in favour of about dialog
 
+## QPROPERTIES ##
+ * Expect failures during calculation
+
 ## ALL QT ##
  * Use icons from theme
  * Reduce code dublication where possible

@@ -349,7 +349,7 @@
     <string>Compress dirs/files</string>
    </property>
    <property name="shortcut">
-    <string>Alt+C</string>
+    <string>Alt+G</string>
    </property>
   </action>
   <action name="actionDecompress">
@@ -400,7 +400,7 @@
     <string>Rename</string>
    </property>
    <property name="shortcut">
-    <string/>
+    <string>Ctrl+R</string>
    </property>
   </action>
   <action name="actionOpen">

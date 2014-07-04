@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui
 import sys, os, subprocess, libmisc, libdesktop, libsystem
 
 # prepare for lift-off
-app_version = "0.9.7 (ab9e277)"
+app_version = "0.9.7 (f5653bd)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qfile_ui.Ui_MainWindow()
