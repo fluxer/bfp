@@ -32,11 +32,9 @@ def setWallpaper():
 def login(autologin=None):
     username = str(ui.UserNameBox.currentText())
     password = str(ui.PasswordEdit.text())
-    desktop = str(ui.DesktopBox.currentText())
+    desktop = misc.whereis('startfluxbox')
     if autologin:
         username = autologin
-        # asume that `startx` is present
-        desktop = misc.whereis('startx', fallback=False)
 
     cryptedpasswd = pwd.getpwnam(username).pw_passwd
     if cryptedpasswd == 'x' or cryptedpasswd == '*':
@@ -103,13 +101,7 @@ for p in pwd.getpwall():
             if arg == p.pw_name:
                 autologin = p.pw_name
 if autologin:
-    login(p.pw_name)
-
-# FIXME: add many, many more
-for x in ('startfluxbox', 'startkde' 'startlxde' 'startlxqt' 'startx'):
-    b = misc.whereis(x, fallback=False)
-    if b:
-        ui.DesktopBox.addItem(b)
+    login(autologin)
 
 def show_popup():
     ui.menuActions.popup(QtGui.QCursor.pos())
