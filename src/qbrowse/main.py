@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui, QtWebKit
 import sys, os, libmisc, libdesktop
 
 # prepare for lift-off
-app_version = "0.9.6 (b7cf979)"
+app_version = "0.9.7 (9a4aba9)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
@@ -162,8 +162,7 @@ class NewTab(QtGui.QWidget):
 
     def back(self):
         ''' Back button clicked, go one page back '''
-        page = self.webView.page()
-        history = page.history()
+        history = self.webView.page().history()
         history.back()
         if history.canGoBack():
             self.backButton.setEnabled(True)
@@ -172,8 +171,7 @@ class NewTab(QtGui.QWidget):
 
     def next(self):
         ''' Next button clicked, go to next page '''
-        page = self.webView.page()
-        history = page.history()
+        history = self.webView.page().history()
         history.forward()
         if history.canGoForward():
             self.nextButton.setEnabled(True)

@@ -138,7 +138,6 @@ class Menu(object):
         if tryExec and not tryExec == Exec:
             general.execute_program(tryExec, False, True)
         # if it gets here fire up the program
-        print(Exec +' ' + args)
         general.execute_program(Exec + ' ' + args)
 
     def dynamic_menu(self, menu, depth=0, widget=None):
