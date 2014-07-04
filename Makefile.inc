@@ -1,4 +1,4 @@
-VERSION = 0.9.6
+VERSION = 0.9.7
 GIT_VERSION = $(shell git rev-parse --short HEAD || echo stable)
 
 DESTDIR = 
