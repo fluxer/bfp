@@ -2,18 +2,16 @@
 
 import qbrowse_ui
 from PyQt4 import QtCore, QtGui, QtWebKit
-import sys, os, libmisc, libdesktop
+import sys, os, libdesktop
 
 # prepare for lift-off
-app_version = "0.9.7 (9a4aba9)"
+app_version = "0.9.7 (defc18e)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
-actions = libdesktop.Actions(MainWindow, app)
 config = libdesktop.Config()
 general = libdesktop.General()
-misc = libmisc.Misc()
 icon = QtGui.QIcon()
 
 def setLook():
@@ -38,6 +36,7 @@ class NewTab(QtGui.QWidget):
         self.icon_reload = general.get_icon('reload')
         self.icon_stop = general.get_icon('exit')
         self.icon_new = general.get_icon('add')
+        self.tab_index = ui.tabWidget.currentIndex()+1
 
         # add widgets
         mainLayout = QtGui.QVBoxLayout()
@@ -91,7 +90,7 @@ class NewTab(QtGui.QWidget):
 
         widget = ui.menuBookmarks
         widget.clear()
-        for mark in (self.bookmarks):
+        for mark in self.bookmarks:
             e = widget.addAction(general.get_icon('stock_bookmark'), mark)
             widget.connect(e, QtCore.SIGNAL('triggered()'), \
                 lambda url=mark: self.action_bookmark(url))
@@ -122,7 +121,7 @@ class NewTab(QtGui.QWidget):
     def title_changed(self, title):
         '''  Web page title changed - change the tab name '''
         MainWindow.setWindowTitle(title)
-        ui.tabWidget.setTabText(ui.tabWidget.currentIndex(), title[:20])
+        ui.tabWidget.setTabText(self.tab_index, title[:20])
 
     def reload_stop_page(self):
         ''' Reload/stop loading the web page '''
@@ -153,7 +152,7 @@ class NewTab(QtGui.QWidget):
             self.reloadStopButton.setIcon(self.icon_reload)
             self.progressBar.hide()
             self.progressBar.setValue(0)
-            ui.tabWidget.setTabIcon(ui.tabWidget.currentIndex(), self.webView.icon())
+            ui.tabWidget.setTabIcon(self.tab_index, self.webView.icon())
         else:
             self.progressBar.show()
             self.progressBar.setValue(load)
@@ -180,17 +179,19 @@ class NewTab(QtGui.QWidget):
 
     def new_tab(self):
         ''' Create a new tab '''
-        index = ui.tabWidget.currentIndex()+1
+        index = self.tab_index + 1
         MainWindow.setWindowTitle('New tab')
         ui.tabWidget.insertTab(index, NewTab(), 'New tab')
         ui.tabWidget.setCurrentIndex(index)
 
     def action_find(self):
+        ''' Find text in current page '''
         svar, ok = QtGui.QInputDialog.getText(MainWindow, 'Find', '')
         if ok and svar:
             self.webView.findText(svar)
 
     def action_bookmark(self, url):
+        ''' Go to bookmark URL '''
         self.urlBox.setEditText(url)
         self.url_changed()
 
