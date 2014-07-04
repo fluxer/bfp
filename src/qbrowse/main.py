@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui, QtWebKit
 import sys, os, libmisc, libdesktop
 
 # prepare for lift-off
-app_version = "0.9.5 (273c887)"
+app_version = "0.9.6 (b7cf979)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
@@ -86,6 +86,7 @@ class NewTab(QtGui.QWidget):
         self.webView.urlChanged.connect(self.link_clicked)
         self.webView.loadProgress.connect(self.load_progress)
         self.webView.titleChanged.connect(self.title_changed)
+        ui.actionFind.triggered.disconnect()
         ui.actionFind.triggered.connect(self.action_find)
 
         widget = ui.menuBookmarks
