@@ -88,7 +88,6 @@
    <addaction name="menuOptions"/>
    <addaction name="menuHelp"/>
   </widget>
-  <widget class="QStatusBar" name="statusbar"/>
   <action name="actionQuit">
    <property name="icon">
     <iconset resource="../qresources/libqresources.qrc">
