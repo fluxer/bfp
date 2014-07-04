@@ -3,7 +3,7 @@
 import sys, argparse, tempfile, subprocess
 import tarfile, zipfile, shutil, os
 
-app_version = "0.9.4 (1d13283)"
+app_version = "0.9.7 (6cbad6f)"
 
 try:
     import libmessage, libmisc
@@ -182,6 +182,7 @@ try:
         misc.file_write(os.path.join(etc_dir, 'ld.so.conf'), '')
     subprocess.check_call((misc.whereis('ldconfig'), '-r', ARGS.tmp))
 
+    message.sub_info('Creating image')
     find = misc.whereis('find')
     cpio = misc.whereis('cpio')
     gzip = misc.whereis('gzip')

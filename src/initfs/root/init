@@ -63,8 +63,8 @@ for hook in $hooks;do
 done
 
 if [ -e "$root_device" ];then
-    # msg "Checking the root device..."
-    # cmd fsck "$root_device"
+    msg "Checking the root device..."
+    cmd fsck -M -T "$root_device"
     msg "Mounting the root filesystem..."
     cmd mount -o ro "$root_device" /newroot
 fi
