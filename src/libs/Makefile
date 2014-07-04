@@ -10,7 +10,7 @@ all: clean
 	$(STRIP) libmagic.so libmessage.so libmisc.so libpackage.so libsystem.so libdesktop.so
 
 check:
-	python test.py
+	$(PYTHON) test.py
 
 install:
 	$(INSTALL) -vdm755 $(DESTDIR)$(SITEDIR)

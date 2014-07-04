@@ -11,7 +11,8 @@ MANDIR = $(SHAREDIR)/man
 AUTOSTARTDIR = $(ETCDIR)/xdg/autostart
 MENUSDIR = $(ETCDIR)/xdg/menus
 APPLICATIONSDIR = $(PREFIX)/share/applications
-PYTHON_VERSION = $(shell python2 -c "import sys; print sys.version[:3]")
+PYTHON = python2
+PYTHON_VERSION = $(shell $(PYTHON) -c "import sys; print sys.version[:3]")
 SITEDIR = $(PREFIX)/lib/python$(PYTHON_VERSION)/site-packages
 
 MACHINE = $(shell gcc -dumpmachine)

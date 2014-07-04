@@ -6,9 +6,6 @@ all: bump clean
 	$(NUITKA) tools.py
 	$(STRIP) libspm.so spm.exe tools.exe
 
-check:
-	python2 test.py
-
 install:
 	$(INSTALL) -vdm755 $(DESTDIR)$(SBINDIR)
 	$(INSTALL) -vm755 spm.exe $(DESTDIR)$(SBINDIR)/spm
