@@ -2,16 +2,17 @@
 
 import qbrowse_ui
 from PyQt4 import QtCore, QtGui, QtWebKit
-import sys, os, gc, libdesktop
+import sys, os, gc, libdesktop, libmisc
 
 # prepare for lift-off
-app_version = "0.9.7 (ef4c247)"
+app_version = "0.9.7 (4cfc66a)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 config = libdesktop.Config()
 general = libdesktop.General()
+misc = libmisc.Misc()
 icon = QtGui.QIcon()
 home_page = 'http://google.com'
 
@@ -99,11 +100,15 @@ class NewTab(QtGui.QWidget):
             ui.menuBookmarks.connect(e, QtCore.SIGNAL('triggered()'), \
                 lambda url=mark: self.new_tab(url))
 
+        self.webView.page().setForwardUnsupportedContent(True)
+        self.webView.page().unsupportedContent.connect(self.download)
+
         # load page
         self.check_url()
         self.webView.setUrl(QtCore.QUrl(self.url))
 
     def check_url(self):
+        ''' Change if URL is sane '''
         self.url = str(self.url)
         if not os.path.isfile(self.url) and not self.url.startswith('http://') \
             and not self.url.startswith('https://') and not self.url.startswith('ftp://') \
@@ -206,6 +211,18 @@ class NewTab(QtGui.QWidget):
         svar, ok = QtGui.QInputDialog.getText(MainWindow, 'Search', '')
         if ok and svar:
             self.new_tab('duckduckgo.com/?q=' + svar)
+
+    def download(self, reply):
+        ''' Download a URL '''
+        sfile = str(reply.url().toString())
+        sdir = str(QtGui.QFileDialog.getSaveFileName(MainWindow, 'Save', os.path.basename(sfile)))
+        if sdir:
+            try:
+                misc.fetch(sfile, sdir)
+                QtGui.QMessageBox.information(MainWindow, 'Info', \
+                    'Dowload of <b>' + sfile + '</b> complete.')
+            except Exception as detail:
+                QtGui.QMessageBox.critical(MainWindow, 'Critical', str(detail))
 
 def remove_tab():
     ''' Remove tab from UI '''
