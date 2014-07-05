@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui, QtWebKit
 import sys, os, gc, libdesktop
 
 # prepare for lift-off
-app_version = "0.9.7 (c0aa7e7)"
+app_version = "0.9.7 (ef4c247)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
@@ -66,22 +66,24 @@ class NewTab(QtGui.QWidget):
         policy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Fixed)
         self.urlBox.setSizePolicy(policy)
         self.urlBox.setInsertPolicy(1)
+        self.urlBox.currentIndexChanged.connect(self.url_changed)
         self.backButton.setEnabled(False)
         self.backButton.setIcon(self.icon_back)
+        self.backButton.clicked.connect(self.back)
+        self.backButton.setShortcut(QtGui.QKeySequence('CTRL+B'))
         self.nextButton.setEnabled(False)
         self.nextButton.setIcon(self.icon_next)
+        self.nextButton.clicked.connect(self.next)
+        self.nextButton.setShortcut(QtGui.QKeySequence('CTRL+N'))
+        self.reloadStopButton.clicked.connect(self.reload_stop_page)
+        self.reloadStopButton.setShortcut(QtGui.QKeySequence('CTRL+R'))
         self.newButton.setIcon(self.icon_new)
+        self.newButton.clicked.connect(self.new_tab)
+        self.newButton.setShortcut(QtGui.QKeySequence('CTRL+T'))
         self.webView.settings().setAttribute(QtWebKit.QWebSettings.PluginsEnabled, \
             ui.actionPlugins.isChecked())
         self.webView.settings().setAttribute(QtWebKit.QWebSettings.JavascriptEnabled, \
             ui.actionJavascript.isChecked())
-
-        # connect widgets
-        self.backButton.clicked.connect(self.back)
-        self.nextButton.clicked.connect(self.next)
-        self.urlBox.currentIndexChanged.connect(self.url_changed)
-        self.reloadStopButton.clicked.connect(self.reload_stop_page)
-        self.newButton.clicked.connect(self.new_tab)
         self.webView.linkClicked.connect(self.link_clicked)
         self.webView.urlChanged.connect(self.link_clicked)
         self.webView.loadProgress.connect(self.load_progress)
@@ -91,11 +93,10 @@ class NewTab(QtGui.QWidget):
         ui.actionSearch.triggered.disconnect()
         ui.actionSearch.triggered.connect(self.action_search)
 
-        widget = ui.menuBookmarks
-        widget.clear()
+        ui.menuBookmarks.clear()
         for mark in self.bookmarks:
-            e = widget.addAction(general.get_icon('stock_bookmark'), mark)
-            widget.connect(e, QtCore.SIGNAL('triggered()'), \
+            e = ui.menuBookmarks.addAction(general.get_icon('stock_bookmark'), mark)
+            ui.menuBookmarks.connect(e, QtCore.SIGNAL('triggered()'), \
                 lambda url=mark: self.new_tab(url))
 
         # load page
@@ -185,7 +186,7 @@ class NewTab(QtGui.QWidget):
         else:
             self.nextButton.setEnabled(False)
 
-    def new_tab(self, url):
+    def new_tab(self, url=None):
         ''' Create a new tab '''
         if not url:
             url = home_page
