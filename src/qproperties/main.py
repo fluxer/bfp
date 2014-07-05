@@ -102,7 +102,7 @@ def save_properties():
     # FIXME: directory symlink
     if os.path.isdir(sfile):
         reply = QtGui.QMessageBox.question(Dialog, 'Question', \
-            'Do you want to set properties of <b>' + svar + '</b> recursively?', \
+            'Do you want to set properties of <b>' + sfile + '</b> recursively?', \
             QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
         if reply == QtGui.QMessageBox.Yes:
             recursive = True
