@@ -122,7 +122,7 @@
             </property>
             <property name="icon">
              <iconset resource="../qresources/libqresources.qrc">
-              <normaloff>:/share/qresources/resources/add.svg</normaloff>:/share/qresources/resources/add.svg</iconset>
+              <normaloff>:/share/qresources/resources/stock_new-tab.svg</normaloff>:/share/qresources/resources/stock_new-tab.svg</iconset>
             </property>
            </widget>
           </item>
@@ -166,7 +166,7 @@
      <x>0</x>
      <y>0</y>
      <width>564</width>
-     <height>20</height>
+     <height>18</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMain">
@@ -181,6 +181,7 @@
     </property>
     <addaction name="actionPlugins"/>
     <addaction name="actionJavascript"/>
+    <addaction name="actionAccessManager"/>
    </widget>
    <widget class="QMenu" name="menuHelp">
     <property name="title">
@@ -285,6 +286,29 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+S</string>
+   </property>
+  </action>
+  <action name="actionAccessManager">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="checked">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="../qresources/libqresources.qrc">
+     <normaloff>:/share/qresources/resources/redhat-tools.svg</normaloff>:/share/qresources/resources/redhat-tools.svg</iconset>
+   </property>
+   <property name="text">
+    <string>Access Manager</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+M</string>
+   </property>
+  </action>
+  <action name="actionCookies">
+   <property name="text">
+    <string>Cookies</string>
    </property>
   </action>
  </widget>
