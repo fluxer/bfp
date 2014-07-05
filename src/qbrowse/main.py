@@ -1,7 +1,7 @@
 #!/bin/python2
 
 import qbrowse_ui
-from PyQt4 import QtCore, QtGui, QtWebKit
+from PyQt4 import QtCore, QtGui, QtWebKit, QtNetwork
 import sys, os, gc, libdesktop, libmisc
 
 # prepare for lift-off
@@ -27,12 +27,13 @@ def run_about():
 
 class NewTab(QtGui.QWidget):
     ''' Tab constructor '''
-    def __init__(self, url='', parent=None):
+    def __init__(self, url='', parent=None, nam=QtNetwork.QNetworkAccessManager()):
         ''' Tab initialiser '''
         super(NewTab, self).__init__(parent)
         # set variables
         self.url = url
         self.tab_index = ui.tabWidget.currentIndex()+1
+        self.nam = nam
         self.bookmarks = ('google.com', 'bitbucket.org', 'youtube.com', 'phoronix.com')
         self.icon_back = general.get_icon('back')
         self.icon_next = general.get_icon('forward')
@@ -49,6 +50,7 @@ class NewTab(QtGui.QWidget):
         self.newButton = QtGui.QPushButton()
         self.urlBox = QtGui.QComboBox()
         self.webView = QtWebKit.QWebView()
+        self.webView.page().setNetworkAccessManager(self.nam)
         self.progressBar = QtGui.QProgressBar()
         secondLayout.addWidget(self.backButton)
         secondLayout.addWidget(self.nextButton)
@@ -108,7 +110,7 @@ class NewTab(QtGui.QWidget):
         self.webView.setUrl(QtCore.QUrl(self.url))
 
     def check_url(self):
-        ''' Change if URL is sane '''
+        ''' Check if URL is sane '''
         self.url = str(self.url)
         if not os.path.isfile(self.url) and not self.url.startswith('http://') \
             and not self.url.startswith('https://') and not self.url.startswith('ftp://') \
@@ -197,7 +199,7 @@ class NewTab(QtGui.QWidget):
             url = home_page
         index = self.tab_index + 1
         MainWindow.setWindowTitle('New tab')
-        ui.tabWidget.insertTab(index, NewTab(url), 'New tab')
+        ui.tabWidget.insertTab(index, NewTab(url, nam=self.nam), 'New tab')
         ui.tabWidget.setCurrentIndex(index)
 
     def action_find(self):
