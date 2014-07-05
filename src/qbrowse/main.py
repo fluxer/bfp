@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui, QtWebKit
 import sys, os, gc, libdesktop
 
 # prepare for lift-off
-app_version = "0.9.7 (ab9e277)"
+app_version = "0.9.7 (c0aa7e7)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
@@ -31,13 +31,13 @@ class NewTab(QtGui.QWidget):
         super(NewTab, self).__init__(parent)
         # set variables
         self.url = url
+        self.tab_index = ui.tabWidget.currentIndex()+1
         self.bookmarks = ('google.com', 'bitbucket.org', 'youtube.com', 'phoronix.com')
         self.icon_back = general.get_icon('back')
         self.icon_next = general.get_icon('forward')
         self.icon_reload = general.get_icon('reload')
         self.icon_stop = general.get_icon('exit')
         self.icon_new = general.get_icon('add')
-        self.tab_index = ui.tabWidget.currentIndex()+1
 
         # add widgets
         mainLayout = QtGui.QVBoxLayout()
