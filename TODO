@@ -10,20 +10,14 @@
 ## LIBDESKTOP ##
  * Signal to qsession to shutdown/reboot/suspend/logout?
 
-## QSESSION ##
- * Controls power state?
-
 ## SPM-QT ##
  * Fixup the logging
  * Implement menu bar and drop "About" tab in favour of about dialog
 
-## QPROPERTIES ##
- * Expect failures during calculation
-
 ## ALL QT ##
  * Use icons from theme
  * Reduce code dublication where possible
- * Asign keyboard shortcuts
+ * Expect failures everywhere
 
 ## ALL ##
  * Run PyLint and do some kung-foo on the code style
