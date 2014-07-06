@@ -41,13 +41,13 @@ watcher1.fileChanged.connect(reload_manager)
 class LidThread(QtCore.QThread):
     def run(self):
         ''' Monitor LID state '''
-        message.sub_info('Monitoring LID state')
         if not os.path.exists('/proc/acpi/button/lid/LID/state'):
             message.sub_warning('No LID support')
             return
+        message.sub_info('Monitoring LID state')
         while True:
             before = system.get_lid_status()
-            time.sleep(2)
+            time.sleep(3)
             after = system.get_lid_status()
             if not before == after:
                 message.sub_debug('LID status changed', after)
@@ -93,6 +93,9 @@ class PowerThread(QtCore.QThread):
 class BlockThread(QtCore.QThread):
     def run(self):
         ''' Monitor block devices state '''
+        if not os.path.exists('/sys/class/block'):
+            message.sub_warning('No sysfs support')
+            return
         message.sub_info('Monitoring block devices state')
         while True:
             before = os.listdir('/sys/class/block')
