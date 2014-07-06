@@ -70,15 +70,9 @@
     <addaction name="actionFind"/>
     <addaction name="actionSearch"/>
    </widget>
-   <widget class="QMenu" name="menuBookmarks">
-    <property name="title">
-     <string>Bookmarks</string>
-    </property>
-   </widget>
    <addaction name="menuMain"/>
    <addaction name="menuActions"/>
    <addaction name="menuOptions"/>
-   <addaction name="menuBookmarks"/>
    <addaction name="menuHelp"/>
   </widget>
   <action name="actionQuit">
@@ -178,11 +172,6 @@
    </property>
    <property name="shortcut">
     <string>Ctrl+M</string>
-   </property>
-  </action>
-  <action name="actionCookies">
-   <property name="text">
-    <string>Cookies</string>
    </property>
   </action>
  </widget>
