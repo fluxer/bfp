@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui, QtWebKit, QtNetwork
 import sys, os, gc, libdesktop, libmisc
 
 # prepare for lift-off
-app_version = "0.9.8 (4d4fab5)"
+app_version = "0.9.8 (fa33387)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
@@ -280,7 +280,7 @@ class NewTab(QtGui.QWidget):
         menu.addAction(self.icon_back, 'Back', self.page_back)
         menu.addAction(self.icon_next, 'Next', self.page_next)
         menu.addAction(self.icon_reload, 'Reload', self.page_reload_stop)
-        menu.addAction(self.icon_new, 'Open in new tab',
+        menu.addAction(self.icon_new, 'Open in new tab', \
             lambda url=self.webView.page().selectedText(): self.tab_new(url))
         menu.popup(QtGui.QCursor.pos())
 
