@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui
 import sys, os, subprocess, libmisc, libdesktop, libsystem
 
 # prepare for lift-off
-app_version = "0.9.7 (f5653bd)"
+app_version = "0.9.8 (6bdec31)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qfile_ui.Ui_MainWindow()
@@ -17,11 +17,9 @@ general = libdesktop.General()
 mime = libdesktop.Mime()
 misc = libmisc.Misc()
 system = libsystem.System()
-icon = QtGui.QIcon()
 
 def setLook():
     general.set_style(app)
-    icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
 
 def disable_actions():
@@ -219,7 +217,6 @@ ui.TerminalButton.clicked.connect(run_terminal)
 def show_popup():
     ui.menuActions.popup(QtGui.QCursor.pos())
 
-ui.ViewWidget.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
 ui.ViewWidget.customContextMenuRequested.connect(enable_actions)
 ui.ViewWidget.customContextMenuRequested.connect(show_popup)
 

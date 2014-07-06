@@ -14,11 +14,9 @@ mime = libdesktop.Mime()
 actions = libdesktop.Actions(MainWindow, app)
 general = libdesktop.General()
 misc = libmisc.Misc()
-icon = QtGui.QIcon()
 
 def setLook():
     general.set_style(app)
-    icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
 
 def setWallpaper():
@@ -183,8 +181,6 @@ misc.dir_create(desktop)
 root = model.setRootPath(desktop)
 ui.DesktopView.setRootIndex(root)
 os.chdir(desktop)
-ui.DesktopView.setViewMode(ui.DesktopView.IconMode)
-ui.DesktopView.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
 ui.DesktopView.customContextMenuRequested.connect(enable_actions)
 ui.DesktopView.customContextMenuRequested.connect(show_popup)
 ui.menubar.hide()

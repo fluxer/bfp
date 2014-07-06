@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui
 import sys, os, libmisc, libdesktop
 
 # prepare for lift-off
-app_version = "0.9.7 (ab9e277)"
+app_version = "0.9.8 (6bdec31)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qimage_ui.Ui_MainWindow()
@@ -13,11 +13,9 @@ ui.setupUi(MainWindow)
 general = libdesktop.General()
 config = libdesktop.Config()
 misc = libmisc.Misc()
-icon = QtGui.QIcon()
 
 def setLook():
     general.set_style(app)
-    icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
 
 def run_about():

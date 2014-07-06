@@ -13,11 +13,9 @@ config = libdesktop.Config()
 menu = libdesktop.Menu(app, None)
 general = libdesktop.General()
 misc = libmisc.Misc()
-icon = QtGui.QIcon()
 
 def setLook():
     general.set_style(app)
-    icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
 
 def open_file():

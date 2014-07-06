@@ -19,12 +19,9 @@ misc = libmisc.Misc()
 mime = libdesktop.Mime()
 general = libdesktop.General()
 info = QtCore.QFileInfo(sfile)
-date = QtCore.QDateTime()
-icon = QtGui.QIcon()
 
 def setLook():
     general.set_style(app)
-    icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
 
 # FIXME: disable those who can not be set

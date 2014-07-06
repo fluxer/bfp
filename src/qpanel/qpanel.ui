@@ -2,9 +2,6 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
-  <property name="windowModality">
-   <enum>Qt::NonModal</enum>
-  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -23,14 +20,8 @@
    <string>QPanel</string>
   </property>
   <property name="windowIcon">
-   <iconset>
-    <normaloff>:/usr/share/qresources/resources/desktop.svg</normaloff>:/usr/share/qresources/resources/desktop.svg</iconset>
-  </property>
-  <property name="autoFillBackground">
-   <bool>false</bool>
-  </property>
-  <property name="dockNestingEnabled">
-   <bool>false</bool>
+   <iconset resource="../qresources/libqresources.qrc">
+    <normaloff>:/share/qresources/resources/desktop.svg</normaloff>:/share/qresources/resources/desktop.svg</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="horizontalLayoutWidget">

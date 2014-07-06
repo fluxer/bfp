@@ -67,9 +67,6 @@
        <height>21</height>
       </rect>
      </property>
-     <property name="layoutDirection">
-      <enum>Qt::LeftToRight</enum>
-     </property>
      <property name="text">
       <string>Password:</string>
      </property>
@@ -112,9 +109,6 @@
        <width>131</width>
        <height>21</height>
       </rect>
-     </property>
-     <property name="layoutDirection">
-      <enum>Qt::LeftToRight</enum>
      </property>
      <property name="text">
       <string>Username:</string>

@@ -9,12 +9,10 @@ Dialog = QtGui.QProgressDialog() # 'QArchive'
 config = libdesktop.Config()
 actions = libdesktop.Actions(Dialog, app)
 general = libdesktop.General()
-icon = QtGui.QIcon()
 misc = libmisc.Misc()
 
 def setLook():
     general.set_style(app)
-    icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
 
 if len(sys.argv) < 3:

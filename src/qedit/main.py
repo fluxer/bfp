@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui
 import sys, os, libmisc, libdesktop, libhighlighter
 
 # prepare for lift-off
-app_version = "0.9.7 (ab9e277)"
+app_version = "0.9.8 (6bdec31)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qedit_ui.Ui_MainWindow()
@@ -14,11 +14,9 @@ actions = libdesktop.Actions(MainWindow, app)
 config = libdesktop.Config()
 general = libdesktop.General()
 misc = libmisc.Misc()
-icon = QtGui.QIcon()
 
 def setLook():
     general.set_style(app)
-    icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
 
 sedit = None

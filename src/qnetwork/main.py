@@ -10,7 +10,7 @@ from PyQt4 import QtCore, QtGui, QtDBus
 import sys, os, libmisc, libdesktop
 
 # prepare for lift-off
-app_version = "0.9.4 (1d13283)"
+app_version = "0.9.8 (6bdec31)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qnetwork_ui.Ui_MainWindow()
@@ -19,12 +19,10 @@ misc = libmisc.Misc()
 actions = libdesktop.Actions(MainWindow, app)
 general = libdesktop.General()
 config = libdesktop.Config()
-icon = QtGui.QIcon()
 bus = QtDBus.QDBusConnection.systemBus()
 
 def setLook():
     general.set_style(app)
-    icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
 
 def run_about():

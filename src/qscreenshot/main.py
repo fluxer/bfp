@@ -5,19 +5,17 @@ from PyQt4 import QtGui
 import sys, time, libmisc, libdesktop
 
 # prepare for lift-off
-app_version = "0.9.4 (1d13283)"
+app_version = "0.9.8 (6bdec31)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qscreenshot_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
-icon = QtGui.QIcon()
 misc = libmisc.Misc()
 config = libdesktop.Config()
 general = libdesktop.General()
 
 def setLook():
     general.set_style(app)
-    icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
 
 def run_about():

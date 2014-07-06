@@ -13,18 +13,16 @@ ui.setupUi(Dialog)
 
 # FIXME: need 4 on cut/paste
 if len(sys.argv) < 3:
-    QtGui.QMessageBox.critical(Dialog, 'Error', 'Not enough arguments')
+    QtGui.QMessageBox.critical(Dialog, 'Critical', 'Not enough arguments')
     sys.exit(2)
 
 config = libdesktop.Config()
 actions = libdesktop.Actions(Dialog, app)
 general = libdesktop.General()
-icon = QtGui.QIcon()
 misc = libmisc.Misc()
 
 def setLook():
     general.set_style(app)
-    icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
 
 Dialog.show()
