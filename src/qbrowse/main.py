@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui, QtWebKit, QtNetwork
 import sys, os, gc, libdesktop, libmisc
 
 # prepare for lift-off
-app_version = "0.9.8 (fa33387)"
+app_version = "0.9.8 (8cb2d58)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
@@ -67,7 +67,6 @@ class NewTab(QtGui.QWidget):
         super(NewTab, self).__init__(parent)
         # set variables
         self.tab_index = ui.tabWidget.currentIndex()+1
-        self.url = url
         self.nam = nam
         self.bookmarks = ('google.com', 'bitbucket.org', 'youtube.com', 'phoronix.com')
         self.icon_back = general.get_icon('back')
@@ -99,11 +98,11 @@ class NewTab(QtGui.QWidget):
 
         # setup widgets
         self.urlBox.setEditable(True)
-        self.urlBox.setEditText(self.url)
+        self.urlBox.setEditText(url)
         policy = QtGui.QSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Fixed)
         self.urlBox.setSizePolicy(policy)
         self.urlBox.setInsertPolicy(1)
-        self.urlBox.currentIndexChanged.connect(self.url_changed)
+        self.urlBox.currentIndexChanged.connect(self.path_changed)
         self.backButton.setEnabled(False)
         self.backButton.setIcon(self.icon_back)
         self.backButton.clicked.connect(self.page_back)
@@ -118,7 +117,7 @@ class NewTab(QtGui.QWidget):
         self.newButton.clicked.connect(self.tab_new)
         self.newButton.setShortcut(QtGui.QKeySequence('CTRL+T'))
         self.webView.linkClicked.connect(self.link_clicked)
-        self.webView.urlChanged.connect(self.link_clicked)
+        self.webView.urlChanged.connect(self.url_changed)
         self.webView.loadProgress.connect(self.load_progress)
         self.webView.titleChanged.connect(self.title_changed)
         ui.actionFind.triggered.disconnect()
@@ -153,19 +152,19 @@ class NewTab(QtGui.QWidget):
         self.webView.customContextMenuRequested.connect(self.context_menu)
 
         # load page
-        self.check_url()
-        self.webView.setUrl(QtCore.QUrl(self.url))
+        self.webView.setUrl(QtCore.QUrl(url))
 
-    def check_url(self):
+    def path_changed(self):
         ''' Check if URL is sane '''
-        self.url = str(self.url)
-        if not os.path.isfile(self.url) and not self.url.startswith('http://') \
-            and not self.url.startswith('https://') and not self.url.startswith('ftp://') \
-            and not self.url.startswith('ftps://'):
-            self.url = 'http://' + self.url
+        url = str(self.urlBox.currentText())
+        if not os.path.isfile(url) and not url.startswith('http://') \
+            and not url.startswith('https://') and not url.startswith('ftp://') \
+            and not url.startswith('ftps://'):
+            url = 'http://' + url
+        self.webView.setUrl(QtCore.QUrl(url))
 
     # basic functionality methods
-    def url_changed(self):
+    def url_changed(self, url):
         ''' Url have been changed by user '''
         history = self.webView.page().history()
         if history.canGoBack():
@@ -176,10 +175,8 @@ class NewTab(QtGui.QWidget):
             self.nextButton.setEnabled(True)
         else:
             self.nextButton.setEnabled(False)
+        self.urlBox.setEditText(url.toString())
 
-        self.url = QtCore.QString(self.urlBox.currentText())
-        self.check_url()
-        self.webView.setUrl(QtCore.QUrl(self.url))
 
     def title_changed(self, title):
         '''  Web page title changed - change the tab name '''
@@ -190,7 +187,7 @@ class NewTab(QtGui.QWidget):
         ''' Reload/stop loading the web page '''
         if self.progressBar.isHidden():
             self.reloadStopButton.setIcon(self.icon_stop)
-            self.webView.setUrl(QtCore.QUrl(self.url))
+            self.webView.setUrl(QtCore.QUrl(self.urlBox.currentText()))
         else:
             self.reloadStopButton.setIcon(self.icon_reload)
             self.webView.stop()
@@ -206,8 +203,6 @@ class NewTab(QtGui.QWidget):
             self.nextButton.setEnabled(True)
         else:
             self.nextButton.setEnabled(False)
-
-        self.urlBox.setEditText(url.toString())
 
     def load_progress(self, load):
         ''' Page load progress '''
