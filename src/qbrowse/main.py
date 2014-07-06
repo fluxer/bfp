@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui, QtWebKit, QtNetwork
 import sys, os, gc, libdesktop, libmisc
 
 # prepare for lift-off
-app_version = "0.9.8 (77fbb86)"
+app_version = "0.9.8 (4d4fab5)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
@@ -13,28 +13,15 @@ ui.setupUi(MainWindow)
 config = libdesktop.Config()
 general = libdesktop.General()
 misc = libmisc.Misc()
-icon = QtGui.QIcon()
 home_page = 'http://google.com'
 
 def setLook():
     general.set_style(app)
-    icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
 
 def run_about():
     QtGui.QMessageBox.about(MainWindow, 'About', \
         '<b>QBrowse v' + app_version + '</b> by SmiL3y - xakepa10@gmail.com - under GPLv2')
-
-## @brief The CookieJar class inherits QNetworkCookieJar to make a couple of functions public.
-class CookieJar(QtNetwork.QNetworkCookieJar):
-    def __init__(self, parent=None):
-        QtNetwork.QNetworkCookieJar.__init__(self, parent)
-
-    def allCookies(self):
-        return QtNetwork.QNetworkCookieJar.allCookies(self)
-
-    def setAllCookies(self, cookieList):
-        QtNetwork.QNetworkCookieJar.setAllCookies(self, cookieList)
 
 disk_cache = QtNetwork.QNetworkDiskCache()
 home_path = str(QtCore.QDir.homePath())
@@ -42,14 +29,45 @@ misc.dir_create(home_path + '/.cache/qbrowse/cache')
 disk_cache.setCacheDirectory(home_path + '/.cache/qbrowse/cache')
 disk_cache.setMaximumCacheSize(50000000)
 
+
+class CookieJar(QtNetwork.QNetworkCookieJar):
+    ''' Cookie jar to save cookies to disk if desired '''
+    def __init__(self, parent=None):
+        super(CookieJar, self).__init__(parent)
+        cookies = []
+        for line in misc.file_readlines(home_path + '/.cache/qbrowse/cookies.txt'):
+            cookies += QtNetwork.QNetworkCookie.parseCookies(line.encode('utf-8'))
+        self.setAllCookies(cookies)
+
+    def purge_old_cookies(self):
+        ''' Purge expired cookies from the cookie jar '''
+        now = QtCore.QDateTime.currentDateTime()
+        cookies = [c for c in self.allCookies()
+                   if c.isSessionCookie() or c.expirationDate() >= now]
+        self.setAllCookies(cookies)
+
+    def setCookiesFromUrl(self, cookies, url):
+        ''' Add the cookies in the cookies list to this cookie jar '''
+        return super(CookieJar,self).setCookiesFromUrl(cookies, url)
+
+    def save(self):
+        ''' Save cookies to disk '''
+        self.purge_old_cookies()
+        lines = ''
+        for cookie in self.allCookies():
+            if not cookie.isSessionCookie():
+                lines += (bytes(cookie.toRawForm()).decode('utf-8')) + '\n'
+        misc.file_write(home_path + '/.cache/qbrowse/cookies.txt', lines)
+
+
 class NewTab(QtGui.QWidget):
     ''' Tab constructor '''
     def __init__(self, url='', parent=None, nam=QtNetwork.QNetworkAccessManager()):
         ''' Tab initialiser '''
         super(NewTab, self).__init__(parent)
         # set variables
-        self.url = url
         self.tab_index = ui.tabWidget.currentIndex()+1
+        self.url = url
         self.nam = nam
         self.bookmarks = ('google.com', 'bitbucket.org', 'youtube.com', 'phoronix.com')
         self.icon_back = general.get_icon('back')
@@ -88,16 +106,16 @@ class NewTab(QtGui.QWidget):
         self.urlBox.currentIndexChanged.connect(self.url_changed)
         self.backButton.setEnabled(False)
         self.backButton.setIcon(self.icon_back)
-        self.backButton.clicked.connect(self.back)
+        self.backButton.clicked.connect(self.page_back)
         self.backButton.setShortcut(QtGui.QKeySequence('CTRL+B'))
         self.nextButton.setEnabled(False)
         self.nextButton.setIcon(self.icon_next)
-        self.nextButton.clicked.connect(self.next)
+        self.nextButton.clicked.connect(self.page_next)
         self.nextButton.setShortcut(QtGui.QKeySequence('CTRL+N'))
-        self.reloadStopButton.clicked.connect(self.reload_stop_page)
+        self.reloadStopButton.clicked.connect(self.page_reload_stop)
         self.reloadStopButton.setShortcut(QtGui.QKeySequence('CTRL+R'))
         self.newButton.setIcon(self.icon_new)
-        self.newButton.clicked.connect(self.new_tab)
+        self.newButton.clicked.connect(self.tab_new)
         self.newButton.setShortcut(QtGui.QKeySequence('CTRL+T'))
         self.webView.linkClicked.connect(self.link_clicked)
         self.webView.urlChanged.connect(self.link_clicked)
@@ -112,7 +130,7 @@ class NewTab(QtGui.QWidget):
         for mark in self.bookmarks:
             e = ui.menuBookmarks.addAction(general.get_icon('stock_bookmark'), mark)
             ui.menuBookmarks.connect(e, QtCore.SIGNAL('triggered()'), \
-                lambda url=mark: self.new_tab(url))
+                lambda url=mark: self.tab_new(url))
 
         # advanced funcitonality
         self.webView.page().setForwardUnsupportedContent(True)
@@ -124,12 +142,15 @@ class NewTab(QtGui.QWidget):
         self.webView.settings().setAttribute(QtWebKit.QWebSettings.JavascriptEnabled, \
             ui.actionJavascript.isChecked())
         if ui.actionAccessManager.isChecked():
+            self.cookie_jar = CookieJar()
+            self.nam.setCookieJar(self.cookie_jar)
             self.webView.page().setNetworkAccessManager(self.nam)
-            self.cookieJar = CookieJar()
-            self.nam.setCookieJar(self.cookieJar)
+            self.webView.loadFinished.connect(self.cookie_jar.save)
 
         #self.webView.settings().setMaximumPagesInCache(0)
         #self.webView.settings().setObjectCacheCapacities(0, 0, 0)
+        self.webView.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
+        self.webView.customContextMenuRequested.connect(self.context_menu)
 
         # load page
         self.check_url()
@@ -156,7 +177,7 @@ class NewTab(QtGui.QWidget):
         else:
             self.nextButton.setEnabled(False)
 
-        self.url = str(self.urlBox.currentText())
+        self.url = QtCore.QString(self.urlBox.currentText())
         self.check_url()
         self.webView.setUrl(QtCore.QUrl(self.url))
 
@@ -165,7 +186,7 @@ class NewTab(QtGui.QWidget):
         MainWindow.setWindowTitle(title)
         ui.tabWidget.setTabText(self.tab_index, title[:20])
 
-    def reload_stop_page(self):
+    def page_reload_stop(self):
         ''' Reload/stop loading the web page '''
         if self.progressBar.isHidden():
             self.reloadStopButton.setIcon(self.icon_stop)
@@ -201,7 +222,7 @@ class NewTab(QtGui.QWidget):
             self.progressBar.setStatusTip(self.webView.statusTip())
             self.reloadStopButton.setIcon(self.icon_stop)
 
-    def back(self):
+    def page_back(self):
         ''' Back button clicked, go one page back '''
         history = self.webView.page().history()
         history.back()
@@ -210,7 +231,7 @@ class NewTab(QtGui.QWidget):
         else:
             self.backButton.setEnabled(False)
 
-    def next(self):
+    def page_next(self):
         ''' Next button clicked, go to next page '''
         history = self.webView.page().history()
         history.forward()
@@ -219,26 +240,27 @@ class NewTab(QtGui.QWidget):
         else:
             self.nextButton.setEnabled(False)
 
-    def new_tab(self, url=None):
+    def tab_new(self, url=None):
         ''' Create a new tab '''
         if not url:
             url = home_page
-        index = self.tab_index + 1
+        index = self.tab_index+1
         MainWindow.setWindowTitle('New tab')
         ui.tabWidget.insertTab(index, NewTab(url, nam=self.nam), 'New tab')
         ui.tabWidget.setCurrentIndex(index)
+        check_closable()
 
     def action_find(self):
         ''' Find text in current page '''
         svar, ok = QtGui.QInputDialog.getText(MainWindow, 'Find', '')
         if ok and svar:
-            self.webView.findText(svar)
+            self.webView.findText(svar, self.webView.page().HighlightAllOccurrences)
 
     def action_search(self):
         ''' Search the internet '''
         svar, ok = QtGui.QInputDialog.getText(MainWindow, 'Search', '')
         if ok and svar:
-            self.new_tab('duckduckgo.com/?q=' + svar)
+            self.tab_new('duckduckgo.com/?q=' + svar)
 
     def download(self, reply):
         ''' Download a URL '''
@@ -252,18 +274,35 @@ class NewTab(QtGui.QWidget):
             except Exception as detail:
                 QtGui.QMessageBox.critical(MainWindow, 'Critical', str(detail))
 
-def remove_tab():
+    def context_menu(self):
+        # FIXME: enable actions depending on what is possible
+        menu = QtGui.QMenu()
+        menu.addAction(self.icon_back, 'Back', self.page_back)
+        menu.addAction(self.icon_next, 'Next', self.page_next)
+        menu.addAction(self.icon_reload, 'Reload', self.page_reload_stop)
+        menu.addAction(self.icon_new, 'Open in new tab',
+            lambda url=self.webView.page().selectedText(): self.tab_new(url))
+        menu.popup(QtGui.QCursor.pos())
+
+def check_closable():
+    if ui.tabWidget.count() == 1:
+        ui.tabWidget.setTabsClosable(False)
+    else:
+        ui.tabWidget.setTabsClosable(True)
+
+def tab_remove(index=ui.tabWidget.currentIndex()):
     ''' Remove tab from UI '''
-    ui.tabWidget.removeTab(ui.tabWidget.currentIndex())
+    ui.tabWidget.removeTab(index)
+    check_closable()
     gc.collect()
 
-ui.tabWidget.tabCloseRequested.connect(remove_tab)
+ui.tabWidget.tabCloseRequested.connect(tab_remove)
 ui.actionQuit.triggered.connect(sys.exit)
 ui.actionAbout.triggered.connect(run_about)
 
 # initialise
-ui.tabWidget.removeTab(0)
-NewTab().new_tab(home_page)
+MainWindow.settings = QtCore.QSettings()
+NewTab().tab_new(home_page)
 
 # watch configs for changes
 def reload_browser():
