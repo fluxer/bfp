@@ -36,25 +36,29 @@ def login(autologin=None):
     if autologin:
         username = autologin
 
-    cryptedpasswd = pwd.getpwnam(username).pw_passwd
-    if cryptedpasswd == 'x' or cryptedpasswd == '*':
+    pw_passwd = pwd.getpwnam(username).pw_passwd
+    pw_uid= pwd.getpwnam(username).pw_uid
+    pw_gid= pwd.getpwnam(username).pw_gid
+    pw_dir = pwd.getpwnam(username).pw_dir
+    pw_shell = pwd.getpwnam(username).pw_shell
+
+    if pw_passwd == 'x' or pw_passwd == '*':
         QtGui.QMessageBox.critical(MainWindow, 'Critical', 'Shadow passwords are hot supported')
         ui.UserNameBox.setFocus()
         ui.PasswordEdit.clear()
         return
 
-    if autologin or crypt.crypt(password, cryptedpasswd) == cryptedpasswd:
+    if autologin or crypt.crypt(password, pw_passwd) == pw_passwd:
         try:
-            home = pwd.getpwnam(username).pw_dir
             try:
                 os.setsid()
             except Exception as detail:
                 print(str(detail))
-            os.setgid(pwd.getpwnam(username).pw_gid)
-            os.setuid(pwd.getpwnam(username).pw_uid)
-            os.putenv('HOME', home)
-            if os.path.isdir(home):
-                os.chdir(home)
+            os.setgid(pw_gid)
+            os.setuid(pw_uid)
+            os.putenv('HOME', pw_dir)
+            if os.path.isdir(pw_dir):
+                os.chdir(pw_dir)
             else:
                 os.chdir('/')
             MainWindow.hide()
@@ -75,9 +79,6 @@ def do_shutdown():
 
 def do_reboot():
     general.system_reboot(MainWindow)
-
-def show_popup():
-    ui.menuActions.popup(QtGui.QCursor.pos())
 
 def handle_lid():
     if system.get_lid_status() == 'closed':

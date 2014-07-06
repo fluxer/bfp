@@ -2,9 +2,6 @@
 <ui version="4.0">
  <class>MainWindow</class>
  <widget class="QMainWindow" name="MainWindow">
-  <property name="windowModality">
-   <enum>Qt::NonModal</enum>
-  </property>
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -19,21 +16,12 @@
     <verstretch>0</verstretch>
    </sizepolicy>
   </property>
-  <property name="focusPolicy">
-   <enum>Qt::NoFocus</enum>
-  </property>
   <property name="windowTitle">
    <string>QSession</string>
   </property>
   <property name="windowIcon">
    <iconset resource="../qresources/libqresources.qrc">
     <normaloff>:/share/qresources/resources/preferences-desktop-splash.svg</normaloff>:/share/qresources/resources/preferences-desktop-splash.svg</iconset>
-  </property>
-  <property name="autoFillBackground">
-   <bool>false</bool>
-  </property>
-  <property name="dockNestingEnabled">
-   <bool>false</bool>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QFrame" name="frame">
