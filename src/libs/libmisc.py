@@ -65,7 +65,7 @@ class Misc(object):
     def file_touch(self, sfile):
         ''' Touch a file, making sure it exists '''
         if not os.path.isfile(sfile):
-            misc.file_write(sfile, '')
+            self.file_write(sfile, '')
 
     def file_read(self, sfile):
         ''' Get file content '''
