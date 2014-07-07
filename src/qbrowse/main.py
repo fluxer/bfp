@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui, QtWebKit, QtNetwork
 import sys, os, gc, libdesktop, libmisc
 
 # prepare for lift-off
-app_version = "0.9.8 (666119f)"
+app_version = "0.9.9 (8bf1690)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
@@ -28,7 +28,7 @@ class CookieJar(QtNetwork.QNetworkCookieJar):
     def __init__(self, parent=None):
         super(CookieJar, self).__init__(parent)
         cookies = []
-        for line in misc.file_readlines(home_path + '/.cache/qbrowse/cookies.txt'):
+        for line in misc.file_readlines(cookies_path):
             cookies += QtNetwork.QNetworkCookie.parseCookies(line.encode('utf-8'))
         self.setAllCookies(cookies)
 
@@ -50,7 +50,7 @@ class CookieJar(QtNetwork.QNetworkCookieJar):
         for cookie in self.allCookies():
             if not cookie.isSessionCookie():
                 lines += (bytes(cookie.toRawForm()).decode('utf-8')) + '\n'
-        misc.file_write(home_path + '/.cache/qbrowse/cookies.txt', lines)
+        misc.file_write(cookies_path, lines)
 
 
 class NewTab(QtGui.QWidget):
@@ -270,7 +270,7 @@ def check_closable():
     else:
         ui.tabWidget.setTabsClosable(True)
 
-def tab_remove(index=ui.tabWidget.currentIndex()):
+def tab_remove(index):
     ''' Remove tab from UI '''
     ui.tabWidget.removeTab(index)
     check_closable()
@@ -283,8 +283,11 @@ ui.actionAbout.triggered.connect(run_about)
 # initialise
 disk_cache = QtNetwork.QNetworkDiskCache()
 home_path = str(QtCore.QDir.homePath())
-misc.dir_create(home_path + '/.cache/qbrowse/cache')
-disk_cache.setCacheDirectory(home_path + '/.cache/qbrowse/cache')
+cache_path = home_path + '/.cache/qbrowse/cache'
+cookies_path = home_path + '/.cache/qbrowse/cookies.txt'
+misc.dir_create(cache_path)
+misc.file_touch(cookies_path)
+disk_cache.setCacheDirectory(cache_path)
 disk_cache.setMaximumCacheSize(50000000)
 manager = QtNetwork.QNetworkAccessManager()
 manager.setCache(disk_cache)

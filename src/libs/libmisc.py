@@ -62,6 +62,11 @@ class Misc(object):
         else:
             return re.findall(string, self.string_convert(string2))
 
+    def file_touch(self, sfile):
+        ''' Touch a file, making sure it exists '''
+        if not os.path.isfile(sfile):
+            misc.file_write(sfile, '')
+
     def file_read(self, sfile):
         ''' Get file content '''
         rfile = open(sfile, 'r')

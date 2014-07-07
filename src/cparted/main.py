@@ -10,7 +10,7 @@ This program is a curses front end to pyparted that mimics cfdisk.
 import curses, curses.textpad, sys
 import parted
 
-app_version = "0.9.7 (6515f29)"
+app_version = "0.9.9 (8bf1690)"
 
 DEBUG = None
 PART_TABLE = 10 # Where to start listing partitions from.

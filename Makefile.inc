@@ -30,5 +30,5 @@ JOBS = $(shell echo $$((`nproc || echo 1`+1)))
 POD2MAN = pod2man
 PYUIC = pyuic4
 PYRCC = pyrcc4
-NUITKA = ../../nuitka/bin/nuitka --recurse-not-to=PyQt4,xdg,parted \
+NUITKA = $(PYTHON) ../../nuitka/bin/nuitka --recurse-not-to=PyQt4,xdg,parted \
 	--python-version=$(PYTHON_VERSION)
