@@ -113,6 +113,7 @@ class NewTab(QtGui.QWidget):
         self.webView.urlChanged.connect(self.url_changed)
         self.webView.loadProgress.connect(self.load_progress)
         self.webView.titleChanged.connect(self.title_changed)
+        self.webView.iconChanged.connect(self.icon_changed)
         ui.actionFind.triggered.disconnect()
         ui.actionFind.triggered.connect(self.action_find)
         ui.actionSearch.triggered.disconnect()
@@ -167,6 +168,9 @@ class NewTab(QtGui.QWidget):
         MainWindow.setWindowTitle(title)
         ui.tabWidget.setTabText(self.tab_index, title[:20])
 
+    def icon_changed(self):
+        ui.tabWidget.setTabIcon(self.tab_index, self.webView.icon())
+
     def link_clicked(self, url):
         ''' Update the URL if a link on a web page is clicked '''
         history = self.webView.page().history()
@@ -186,7 +190,6 @@ class NewTab(QtGui.QWidget):
             self.reloadStopButton.setIcon(self.icon_reload)
             self.progressBar.hide()
             self.progressBar.setValue(0)
-            ui.tabWidget.setTabIcon(self.tab_index, self.webView.icon())
         else:
             self.progressBar.show()
             self.progressBar.setValue(load)
@@ -221,6 +224,7 @@ class NewTab(QtGui.QWidget):
             self.webView.stop()
 
     def tab_check_closable(self):
+        ''' Check if tabs should be closable '''
         if ui.tabWidget.count() == 1:
             ui.tabWidget.setTabsClosable(False)
         else:
