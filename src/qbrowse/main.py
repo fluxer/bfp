@@ -168,8 +168,8 @@ class NewTab(QtGui.QWidget):
         MainWindow.setWindowTitle(title)
         ui.tabWidget.setTabText(self.tab_index, title[:20])
 
-    def icon_changed(self):
-        ui.tabWidget.setTabIcon(self.tab_index, self.webView.icon())
+    def icon_changed(self, icon):
+        ui.tabWidget.setTabIcon(self.tab_index, icon)
 
     def link_clicked(self, url):
         ''' Update the URL if a link on a web page is clicked '''
@@ -190,6 +190,7 @@ class NewTab(QtGui.QWidget):
             self.reloadStopButton.setIcon(self.icon_reload)
             self.progressBar.hide()
             self.progressBar.setValue(0)
+            self.icon_changed(self.webView.icon())
         else:
             self.progressBar.show()
             self.progressBar.setValue(load)
