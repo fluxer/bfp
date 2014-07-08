@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui, QtWebKit, QtNetwork
 import sys, os, gc, libdesktop, libmisc
 
 # prepare for lift-off
-app_version = "0.9.9 (e3463c2)"
+app_version = "0.9.9 (ff02686)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
@@ -43,7 +43,7 @@ class CookieJar(QtNetwork.QNetworkCookieJar):
         ''' Add the cookies in the cookies list to this cookie jar '''
         return super(CookieJar, self).setCookiesFromUrl(cookies, url)
 
-    def save(self):
+    def saveCookies(self):
         ''' Save cookies to disk '''
         self.purge_old_cookies()
         lines = ''
@@ -128,7 +128,7 @@ class NewTab(QtGui.QWidget):
             ui.actionJavascript.isChecked())
         if ui.actionAccessManager.isChecked():
             self.webView.page().setNetworkAccessManager(self.nam)
-            self.webView.loadFinished.connect(cookie_jar.save)
+            self.webView.loadFinished.connect(cookie_jar.saveCookies)
 
         #self.webView.settings().setMaximumPagesInCache(0)
         #self.webView.settings().setObjectCacheCapacities(0, 0, 0)
@@ -166,15 +166,6 @@ class NewTab(QtGui.QWidget):
         '''  Web page title changed - change the tab name '''
         MainWindow.setWindowTitle(title)
         ui.tabWidget.setTabText(self.tab_index, title[:20])
-
-    def page_reload_stop(self):
-        ''' Reload/stop loading the web page '''
-        if self.progressBar.isHidden():
-            self.reloadStopButton.setIcon(self.icon_stop)
-            self.webView.setUrl(QtCore.QUrl(self.urlBox.currentText()))
-        else:
-            self.reloadStopButton.setIcon(self.icon_reload)
-            self.webView.stop()
 
     def link_clicked(self, url):
         ''' Update the URL if a link on a web page is clicked '''
@@ -220,6 +211,21 @@ class NewTab(QtGui.QWidget):
         else:
             self.nextButton.setEnabled(False)
 
+    def page_reload_stop(self):
+        ''' Reload/stop loading the web page '''
+        if self.progressBar.isHidden():
+            self.reloadStopButton.setIcon(self.icon_stop)
+            self.webView.setUrl(QtCore.QUrl(self.urlBox.currentText()))
+        else:
+            self.reloadStopButton.setIcon(self.icon_reload)
+            self.webView.stop()
+
+    def tab_check_closable(self):
+        if ui.tabWidget.count() == 1:
+            ui.tabWidget.setTabsClosable(False)
+        else:
+            ui.tabWidget.setTabsClosable(True)
+
     def tab_new(self, url):
         ''' Create a new tab '''
         if not url:
@@ -228,7 +234,15 @@ class NewTab(QtGui.QWidget):
         MainWindow.setWindowTitle('New tab')
         ui.tabWidget.insertTab(index, NewTab(url), 'New tab')
         ui.tabWidget.setCurrentIndex(index)
-        check_closable()
+        self.tab_check_closable()
+
+    def tab_close(self, index):
+        ''' Destroy this tab '''
+        self.deleteLater()
+        self.progressBar.close()
+        ui.tabWidget.removeTab(index)
+        self.tab_check_closable()
+        gc.collect()
 
     def action_find(self):
         ''' Find text in current page '''
@@ -264,17 +278,9 @@ class NewTab(QtGui.QWidget):
             lambda url=self.webView.page().selectedText(): self.tab_new(url))
         menu.popup(QtGui.QCursor.pos())
 
-def check_closable():
-    if ui.tabWidget.count() == 1:
-        ui.tabWidget.setTabsClosable(False)
-    else:
-        ui.tabWidget.setTabsClosable(True)
-
 def tab_remove(index):
     ''' Remove tab from UI '''
-    ui.tabWidget.removeTab(index)
-    check_closable()
-    gc.collect()
+    ui.tabWidget.widget(index).tab_close(index)
 
 ui.tabWidget.tabCloseRequested.connect(tab_remove)
 ui.actionQuit.triggered.connect(sys.exit)
