@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui
 import sys, os, libmisc, libdesktop
 
 # prepare for lift-off
-app_version = "0.9.9 (e3463c2)"
+app_version = "0.9.9 (a23b9cd)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qimage_ui.Ui_MainWindow()
@@ -24,22 +24,27 @@ def run_about():
 
 def set_image(sfile):
     image = QtGui.QImage(sfile)
+    desktop = QtGui.QDesktopWidget().screenGeometry(MainWindow)
     ui.imageView.setPixmap(QtGui.QPixmap.fromImage(image))
+    wscale = image.width()
+    hscale = image.height()
+    if image.width() > desktop.width():
+        wscale = desktop.width() / (image.width()/desktop.width())
+    if image.height() > desktop.height():
+        hscale = desktop.heigth() / (image.height()/desktop.height())
+    MainWindow.resize(wscale, hscale)
 
 def open_file(sfile):
-    global simage
     if not sfile or not os.path.isfile(sfile):
         sfile = QtGui.QFileDialog.getOpenFileName(MainWindow, 'Open', \
             QtCore.QDir.currentPath(), 'Image Files (*.png *.jpg *.jpeg *.svg);;All Files (*)')
         if not sfile:
             return
-    sfile = str(sfile)
-    set_image(sfile)
-    simage = sfile
+    set_image(str(sfile))
     ui.actionReload.setEnabled(True)
 
 def reload_file():
-    set_image(simage)
+    set_image(ui.imageView.pixmap())
 
 ui.actionQuit.triggered.connect(sys.exit)
 ui.actionAbout.triggered.connect(run_about)
@@ -62,7 +67,6 @@ def reload_image():
 watcher1 = QtCore.QFileSystemWatcher()
 watcher1.addPath(config.settings.fileName())
 watcher1.fileChanged.connect(reload_image)
-
 
 # run!
 MainWindow.show()
