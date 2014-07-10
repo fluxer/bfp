@@ -60,7 +60,7 @@ def login(autologin=None):
             else:
                 os.chdir('/')
             MainWindow.hide()
-            os.system('xinit ' + desktop + ' -- :9')
+            os.system(misc.whereis('xinit')  + ' ' + desktop + ' -- :9')
         except Exception as detail:
             QtGui.QMessageBox.critical(MainWindow, 'Critical', 'Login was not sucessful:\n\n' + str(detail))
             ui.PasswordEdit.setFocus()

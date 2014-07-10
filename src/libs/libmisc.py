@@ -355,6 +355,15 @@ class Misc(object):
         pipe = subprocess.Popen(command, stdout=subprocess.PIPE, env={'LC_ALL': 'C'}, shell=shell)
         return pipe.communicate()[0].strip()
 
+    def system_input(self, command, input, shell=False):
+        ''' Get output of external utility '''
+        pipe = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, \
+            stderr=subprocess.PIPE, env={'LC_ALL': 'C'}, shell=shell)
+        out, err = pipe.communicate(input=input)
+        if pipe.returncode != 0:
+            print pipe.returncode
+            raise(Exception('%s %s' % (out, err)))
+
     def system_scanelf(self, sfile, sformat='#F%n', sflags=''):
         ''' Get information about ELF files '''
         return self.system_output((self.whereis('scanelf'), '-CBF', sformat, sflags, sfile))
