@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui, QtWebKit, QtNetwork
 import sys, os, gc, libdesktop, libmisc
 
 # prepare for lift-off
-app_version = "0.9.9 (c103494)"
+app_version = "0.9.9 (0135afb)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
@@ -68,7 +68,7 @@ class NewTab(QtGui.QWidget):
         self.icon_new = general.get_icon('stock_new-tab')
 
         # add widgets
-        mainLayout = QtGui.QVBoxLayout()
+        mainLayout = QtGui.QGridLayout()
         secondLayout = QtGui.QHBoxLayout()
         self.backButton = QtGui.QPushButton()
         self.nextButton = QtGui.QPushButton()
@@ -82,10 +82,9 @@ class NewTab(QtGui.QWidget):
         secondLayout.addWidget(self.reloadStopButton)
         secondLayout.addWidget(self.newButton)
         secondLayout.addWidget(self.urlBox)
-        mainLayout.addLayout(secondLayout)
+        mainLayout.addLayout(secondLayout, 0, 0)
         mainLayout.addWidget(self.webView)
         mainLayout.addWidget(self.progressBar)
-        mainLayout.addStretch(1)
         self.setLayout(mainLayout)
 
         # setup widgets
