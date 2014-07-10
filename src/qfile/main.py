@@ -2,10 +2,10 @@
 
 import qfile_ui
 from PyQt4 import QtCore, QtGui
-import sys, os, subprocess, libmisc, libdesktop, libsystem
+import sys, os, libmisc, libdesktop
 
 # prepare for lift-off
-app_version = "0.9.9 (e3463c2)"
+app_version = "0.9.9 (782a1d2)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qfile_ui.Ui_MainWindow()
@@ -16,7 +16,6 @@ config = libdesktop.Config()
 general = libdesktop.General()
 mime = libdesktop.Mime()
 misc = libmisc.Misc()
-system = libsystem.System()
 
 def setLook():
     general.set_style(app)
@@ -220,25 +219,6 @@ def show_popup():
 ui.ViewWidget.customContextMenuRequested.connect(enable_actions)
 ui.ViewWidget.customContextMenuRequested.connect(show_popup)
 
-def mount_device(device):
-    try:
-        if system.check_mounted(device):
-            system.do_unmount(device)
-        else:
-            system.do_mount(device)
-    except subprocess.CalledProcessError as detail:
-        QtGui.QMessageBox.critical(MainWindow, 'Critical', str(detail))
-
-def add_devices():
-    ui.menuDevices.clear()
-    for device in os.listdir('/sys/class/block'):
-        if device.startswith('s') or device.startswith('h') or device.startswith('v'):
-            device = '/dev/' + device
-            e = ui.menuDevices.addAction(general.get_icon('drive-harddisk'), device)
-            MainWindow.connect(e, QtCore.SIGNAL('triggered()'), \
-                lambda device=device: mount_device(device))
-add_devices()
-
 # watch configs for changes
 def reload_file():
     global config, mime
@@ -250,10 +230,6 @@ def reload_file():
 watcher1 = QtCore.QFileSystemWatcher()
 watcher1.addPaths((config.settings.fileName(), mime.settings.fileName()))
 watcher1.fileChanged.connect(reload_file)
-
-watcher2 = QtCore.QFileSystemWatcher()
-watcher2.addPath('/dev')
-watcher2.directoryChanged.connect(add_devices)
 
 # run!
 MainWindow.show()

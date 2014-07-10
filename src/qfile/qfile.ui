@@ -156,7 +156,7 @@
      <x>0</x>
      <y>0</y>
      <width>586</width>
-     <height>20</height>
+     <height>22</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMain">
@@ -230,14 +230,8 @@
     <addaction name="menuView"/>
     <addaction name="actionViewHidden"/>
    </widget>
-   <widget class="QMenu" name="menuDevices">
-    <property name="title">
-     <string>Devices</string>
-    </property>
-   </widget>
    <addaction name="menuMain"/>
    <addaction name="menuActions"/>
-   <addaction name="menuDevices"/>
    <addaction name="menuOptions"/>
    <addaction name="menuHelp"/>
   </widget>

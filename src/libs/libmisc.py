@@ -167,7 +167,7 @@ class Misc(object):
         return slist
 
     def list_all(self, directory):
-        ''' Get list of directories in directory recursively '''
+        ''' Get list of files and directories in directory recursively '''
         slist = []
         for root, subdirs, files in os.walk(directory):
             for sdir in subdirs:

@@ -2,7 +2,7 @@
 
 import qsession_ui
 from PyQt4 import QtCore, QtGui
-import sys, os, pwd, crypt, libmisc, libdesktop, libsystem
+import sys, os, pwd, crypt, libmisc, libdesktop
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
@@ -12,7 +12,6 @@ ui.setupUi(MainWindow)
 config = libdesktop.Config()
 general = libdesktop.General()
 misc = libmisc.Misc()
-system = libsystem.System()
 
 def setLook():
     general.set_style(app)
@@ -35,8 +34,8 @@ def login(autologin=None):
         username = autologin
 
     pw_passwd = pwd.getpwnam(username).pw_passwd
-    pw_uid= pwd.getpwnam(username).pw_uid
-    pw_gid= pwd.getpwnam(username).pw_gid
+    pw_uid = pwd.getpwnam(username).pw_uid
+    pw_gid = pwd.getpwnam(username).pw_gid
     pw_dir = pwd.getpwnam(username).pw_dir
     pw_shell = pwd.getpwnam(username).pw_shell
 
@@ -55,6 +54,7 @@ def login(autologin=None):
             os.setgid(pw_gid)
             os.setuid(pw_uid)
             os.putenv('HOME', pw_dir)
+            os.putenv('SHELL', pw_shell)
             if os.path.isdir(pw_dir):
                 os.chdir(pw_dir)
             else:
@@ -78,17 +78,6 @@ def do_shutdown():
 def do_reboot():
     general.system_reboot(MainWindow)
 
-def handle_lid():
-    if system.get_lid_status() == 'closed':
-        if system.get_power_supply() == 'DC':
-            action = config.SUSPEND_POWER
-        else:
-            action = config.SUSPEND_BATTERY
-        if action == 'suspend':
-            system.do_suspend()
-        elif action == 'shutdown':
-            system.do_shutdown()
-
 # setup signals
 ui.LoginButton.clicked.connect(login)
 ui.actionShutdown.triggered.connect(do_shutdown)
@@ -98,11 +87,6 @@ ui.actionReboot.triggered.connect(do_reboot)
 MainWindow.setWindowFlags(QtCore.Qt.FramelessWindowHint)
 d = QtGui.QDesktopWidget().screenGeometry(MainWindow)
 ui.frame.move((d.width()/2)-165, (d.height()/2)-120)
-
-# power management
-lwatcher = QtCore.QFileSystemWatcher()
-lwatcher.addPath('/proc/acpi/button/lid/LID/state')
-lwatcher.fileChanged.connect(handle_lid)
 
 # watch configs for changes
 def reload_session():
@@ -115,21 +99,6 @@ def reload_session():
 watcher1 = QtCore.QFileSystemWatcher()
 watcher1.addPath(config.settings.fileName())
 watcher1.fileChanged.connect(reload_session)
-
-# block devices management
-def monitor_devices():
-    for device in os.listdir('/sys/class/block'):
-        # FIXME: mount only those with filesystemts
-        if device.startswith('s') or device.startswith('h') or device.startswith('v'):
-            device = '/dev/' + device
-            if system.check_mounted(device):
-                system.do_unmount(device)
-            else:
-                system.do_mount(device)
-
-watcher2 = QtCore.QFileSystemWatcher()
-watcher2.addPath('/dev')
-watcher2.directoryChanged.connect(monitor_devices)
 
 autologin = False
 for p in pwd.getpwall():
