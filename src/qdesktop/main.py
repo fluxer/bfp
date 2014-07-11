@@ -65,6 +65,9 @@ def enable_actions():
             ui.actionCompressGzip.setEnabled(True)
             ui.actionCompressBzip2.setEnabled(True)
 
+    if app.clipboard().text():
+        ui.actionPaste.setEnabled(True)
+
     if ui.DesktopView.selectedIndexes():
         if os.access(sfile, os.W_OK):
             ui.actionRename.setEnabled(True)

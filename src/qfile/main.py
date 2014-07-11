@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui
 import sys, os, libmisc, libdesktop
 
 # prepare for lift-off
-app_version = "0.9.10 (1612195)"
+app_version = "0.9.10 (df2acda)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qfile_ui.Ui_MainWindow()
@@ -164,6 +164,9 @@ def enable_actions():
         else:
             ui.actionCompressGzip.setEnabled(True)
             ui.actionCompressBzip2.setEnabled(True)
+
+    if app.clipboard().text():
+        ui.actionPaste.setEnabled(True)
 
     if ui.ViewWidget.selectedIndexes():
         if os.access(sfile, os.W_OK):
