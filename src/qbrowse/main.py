@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui, QtWebKit, QtNetwork
 import sys, os, gc, libdesktop, libmisc
 
 # prepare for lift-off
-app_version = "0.9.10 (1612195)"
+app_version = "0.9.10 (bb7db0d)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
@@ -70,6 +70,7 @@ class NewTab(QtGui.QWidget):
         # add widgets
         mainLayout = QtGui.QGridLayout()
         secondLayout = QtGui.QHBoxLayout()
+        self.thirdLayout = QtGui.QHBoxLayout()
         self.backButton = QtGui.QPushButton()
         self.nextButton = QtGui.QPushButton()
         self.reloadStopButton = QtGui.QPushButton()
@@ -82,7 +83,10 @@ class NewTab(QtGui.QWidget):
         secondLayout.addWidget(self.reloadStopButton)
         secondLayout.addWidget(self.newButton)
         secondLayout.addWidget(self.urlBox)
+        for b in ('bitbucket.org', 'gmail.com', 'youtube.com', 'archlinux.org'):
+            self.thirdLayout.addWidget(self.bookmark(b))
         mainLayout.addLayout(secondLayout, 0, 0)
+        mainLayout.addLayout(self.thirdLayout, 30, 0)
         mainLayout.addWidget(self.webView)
         mainLayout.addWidget(self.progressBar)
         self.setLayout(mainLayout)
@@ -136,7 +140,7 @@ class NewTab(QtGui.QWidget):
         #self.webView.customContextMenuRequested.connect(self.context_menu)
 
         # load page
-        self.webView.setUrl(QtCore.QUrl(url))
+        self.path_changed()
 
     def path_changed(self):
         ''' Check if URL is sane '''
@@ -270,6 +274,11 @@ class NewTab(QtGui.QWidget):
                     'Dowload of <b>' + sfile + '</b> complete.')
             except Exception as detail:
                 QtGui.QMessageBox.critical(MainWindow, 'Critical', str(detail))
+
+    def bookmark(self, url):
+        button = QtGui.QPushButton(url)
+        button.clicked.connect(lambda: self.tab_new(url))
+        return button
 
     def context_menu(self):
         # FIXME: enable actions depending on what is possible
