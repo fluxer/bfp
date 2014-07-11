@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui, QtWebKit, QtNetwork
 import sys, os, gc, libdesktop, libmisc
 
 # prepare for lift-off
-app_version = "0.9.9 (ff02686)"
+app_version = "0.9.9 (c103494)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
@@ -244,7 +244,6 @@ class NewTab(QtGui.QWidget):
     def tab_close(self, index):
         ''' Destroy this tab '''
         self.deleteLater()
-        self.progressBar.close()
         ui.tabWidget.removeTab(index)
         self.tab_check_closable()
         gc.collect()
