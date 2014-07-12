@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui, QtWebKit, QtNetwork
 import sys, os, gc, libdesktop, libmisc
 
 # prepare for lift-off
-app_version = "0.9.10 (82cc390)"
+app_version = "0.9.10 (377f5bb)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
@@ -52,7 +52,6 @@ class CookieJar(QtNetwork.QNetworkCookieJar):
                 lines += (bytes(cookie.toRawForm()).decode('utf-8')) + '\n'
         misc.file_write(cookies_path, lines)
 
-
 class NewTab(QtGui.QWidget):
     ''' Tab constructor '''
     def __init__(self, url='', parent=None):
@@ -83,7 +82,7 @@ class NewTab(QtGui.QWidget):
         secondLayout.addWidget(self.reloadStopButton)
         secondLayout.addWidget(self.newButton)
         secondLayout.addWidget(self.urlBox)
-        for b in ('bitbucket.org', 'gmail.com', 'youtube.com', 'zamunda.net', 'archlinux.org'):
+        for b in ('bitbucket.org', 'gmail.com', 'youtube.com', 'zamunda.net', 'archlinux.org', 'phoronix.com'):
             self.thirdLayout.addWidget(self.bookmark(b))
         mainLayout.addLayout(secondLayout, 0, 0)
         mainLayout.addLayout(self.thirdLayout, 30, 0)
@@ -134,6 +133,7 @@ class NewTab(QtGui.QWidget):
         if ui.actionAccessManager.isChecked():
             self.webView.page().setNetworkAccessManager(self.nam)
             self.webView.loadFinished.connect(cookie_jar.saveCookies)
+            self.nam.finished.connect(self.page_error)
 
         #self.webView.settings().setMaximumPagesInCache(0)
         #self.webView.settings().setObjectCacheCapacities(0, 0, 0)
@@ -166,9 +166,11 @@ class NewTab(QtGui.QWidget):
             self.nextButton.setEnabled(False)
         self.urlBox.setEditText(url.toString())
 
-
     def title_changed(self, title):
         '''  Web page title changed - change the tab name '''
+        # for some reaons some web-pages do not set or have title
+        if not title:
+            title = 'Untitled'
         MainWindow.setWindowTitle(title)
         ui.tabWidget.setTabText(self.tab_index, title[:20])
 
@@ -195,6 +197,10 @@ class NewTab(QtGui.QWidget):
             self.progressBar.hide()
             self.progressBar.setValue(0)
             self.icon_changed(self.webView.icon())
+
+            # load JavaScript user script
+            # if ui.actionJavascript.isChecked():
+            #     self.webView.page().mainFrame().evaluateJavaScript(misc.file_read('jquery.js'))
         else:
             self.progressBar.show()
             self.progressBar.setValue(load)
@@ -227,6 +233,44 @@ class NewTab(QtGui.QWidget):
         else:
             self.reloadStopButton.setIcon(self.icon_reload)
             self.webView.stop()
+
+    def page_error(self, reply):
+        '''Interpret the HTTP error ID received '''
+        eid = reply.error()
+        # http://pyqt.sourceforge.net/Docs/PyQt4/qnetworkreply.html#error
+        errors = {
+            1 : 'the remote server refused the connection (the server is not accepting requests)',
+            2 : 'the remote server closed the connection prematurely, before the entire reply was received and processed',
+            3 : 'the remote host name was not found (invalid hostname)',
+            4 : 'the connection to the remote server timed out',
+            6 : 'the SSL/TLS handshake failed and the encrypted channel could not be established. The sslErrors() signal should have been emitted.',
+            7 : 'the connection was broken due to disconnection from the network, however the system has initiated roaming to another access point. The request should be resubmitted and will be processed as soon as the connection is re-established.',
+            101 : 'the connection to the proxy server was refused (the proxy server is not accepting requests)',
+            102 : 'the proxy server closed the connection prematurely, before the entire reply was received and processed',
+            103 : 'the proxy host name was not found (invalid proxy hostname)',
+            104 : 'the connection to the proxy timed out or the proxy did not reply in time to the request sent',
+            105 : 'the proxy requires authentication in order to honour the request but did not accept any credentials offered (if any)',
+            201 : 'the access to the remote content was denied (similar to HTTP error 401)',
+            202 : 'the operation requested on the remote content is not permitted',
+
+            204 : 'the remote server requires authentication to serve the content but the credentials provided were not accepted (if any)',
+            205 : 'the request needed to be sent again, but this failed for example because the upload data could not be read a second time.',
+            301 : 'the Network Access API cannot honor the request because the protocol is not known',
+            302 : 'the requested operation is invalid for this protocol',
+            99 : 'an unknown network-related error was detected',
+            199 : 'an unknown proxy-related error was detected',
+            299 : 'an unknown error related to the remote content was detected',
+            399 : 'a breakdown in protocol was detected (parsing error, invalid or unexpected responses, etc.)',
+        }
+        warnings = {
+            5 : 'the operation was canceled via calls to abort() or close() before it was finished.',
+            203 : 'the remote content was not found at the server (similar to HTTP error 404)',
+        }
+        if eid in errors:
+            self.webView.setUrl(QtCore.QUrl(''))
+            self.webView.setHtml('<center><h2>' + errors.get(eid, 'unknown error') + '</h2></center>')
+        if eid in warnings:
+            print('WARNING: ' + warnings.get(eid, 'unknown warning'))
 
     def tab_check_closable(self):
         ''' Check if tabs should be closable '''
@@ -312,17 +356,17 @@ ui.actionQuit.triggered.connect(sys.exit)
 ui.actionAbout.triggered.connect(run_about)
 
 # initialise
-disk_cache = QtNetwork.QNetworkDiskCache()
 home_path = str(QtCore.QDir.homePath())
 cache_path = home_path + '/.cache/qbrowse/cache'
 cookies_path = home_path + '/.cache/qbrowse/cookies.txt'
 misc.dir_create(cache_path)
 misc.file_touch(cookies_path)
+disk_cache = QtNetwork.QNetworkDiskCache()
 disk_cache.setCacheDirectory(cache_path)
 disk_cache.setMaximumCacheSize(50000000)
+cookie_jar = CookieJar()
 manager = QtNetwork.QNetworkAccessManager()
 manager.setCache(disk_cache)
-cookie_jar = CookieJar()
 manager.setCookieJar(cookie_jar)
 NewTab().tab_new(home_page)
 
