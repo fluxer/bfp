@@ -88,11 +88,11 @@ class Misc(object):
         rfile.close()
         return content
 
-    def file_write(self, sfile, content):
-        ''' Write data to file (overwrites) '''
+    def file_write(self, sfile, content, mode='w'):
+        ''' Write data to file '''
         self.dir_create(os.path.dirname(sfile))
 
-        wfile = open(sfile, 'w')
+        wfile = open(sfile, mode)
         wfile.write(content)
         wfile.close()
 

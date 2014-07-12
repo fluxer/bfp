@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui, QtWebKit, QtNetwork
 import sys, os, gc, libdesktop, libmisc
 
 # prepare for lift-off
-app_version = "0.9.10 (bb7db0d)"
+app_version = "0.9.10 (82cc390)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
@@ -83,7 +83,7 @@ class NewTab(QtGui.QWidget):
         secondLayout.addWidget(self.reloadStopButton)
         secondLayout.addWidget(self.newButton)
         secondLayout.addWidget(self.urlBox)
-        for b in ('bitbucket.org', 'gmail.com', 'youtube.com', 'archlinux.org'):
+        for b in ('bitbucket.org', 'gmail.com', 'youtube.com', 'zamunda.net', 'archlinux.org'):
             self.thirdLayout.addWidget(self.bookmark(b))
         mainLayout.addLayout(secondLayout, 0, 0)
         mainLayout.addLayout(self.thirdLayout, 30, 0)
@@ -124,7 +124,8 @@ class NewTab(QtGui.QWidget):
 
         # advanced funcitonality
         self.webView.page().setForwardUnsupportedContent(True)
-        self.webView.page().unsupportedContent.connect(self.download)
+        self.webView.page().downloadRequested.connect(self.download)
+        self.webView.page().unsupportedContent.connect(self.unsupported)
 
         self.webView.settings().setAttribute(QtWebKit.QWebSettings.PluginsEnabled, \
             ui.actionPlugins.isChecked())
@@ -263,17 +264,29 @@ class NewTab(QtGui.QWidget):
         if ok and svar:
             self.tab_new('duckduckgo.com/?q=' + svar)
 
-    def download(self, reply):
+    def download(self, request):
         ''' Download a URL '''
-        sfile = str(reply.url().toString())
-        sdir = str(QtGui.QFileDialog.getSaveFileName(MainWindow, 'Save', os.path.basename(sfile)))
-        if sdir:
-            try:
-                misc.fetch(sfile, sdir)
-                QtGui.QMessageBox.information(MainWindow, 'Info', \
-                    'Dowload of <b>' + sfile + '</b> complete.')
-            except Exception as detail:
-                QtGui.QMessageBox.critical(MainWindow, 'Critical', str(detail))
+        self.unsupported(self.nam.get(request))
+
+    def unsupported(self, reply):
+        ''' Download a unsupported URL '''
+        # sfile = str(QtGui.QFileDialog.getSaveFileName(MainWindow, 'Save', os.path.basename(surl)))
+        reply.readyRead.connect(lambda reply=reply: self.download_start(reply))
+        reply.finished.connect(lambda reply=reply: self.download_finished(reply))
+
+    def download_start(self, reply):
+        surl = str(reply.url().toString())
+        sfile = home_path + '/' + os.path.basename(surl)
+        misc.file_write(sfile, reply.readAll(), 'a')
+
+    def download_finished(self, reply):
+        surl = str(reply.url().toString())
+        if reply.error():
+            QtGui.QMessageBox.critical(MainWindow, 'Critical', \
+                'Dowload of <b>' + surl + '</b> failed.')
+        else:
+            QtGui.QMessageBox.information(MainWindow, 'Info', \
+                'Dowload of <b>' + surl + '</b> complete.')
 
     def bookmark(self, url):
         button = QtGui.QPushButton(url)
