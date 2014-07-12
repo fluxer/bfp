@@ -3,8 +3,10 @@
 import sys, argparse, tempfile, subprocess
 import tarfile, zipfile, shutil, os
 
-app_version = "0.9.10 (34fe0ae)"
+app_version = "0.9.10 (58286c7)"
 
+tmpdor = None
+keep = False
 try:
     import libmessage, libmisc
     message = libmessage.Message()
@@ -50,6 +52,9 @@ try:
     if ARGS.kernel != kernel and ARGS.image == image:
         ARGS.image = '/boot/initramfs-' + ARGS.kernel + '.img'
 
+    if ARGS.keep:
+        keep = True
+
     if ARGS.debug:
         message.DEBUG = True
 
@@ -84,6 +89,7 @@ try:
         modsdir = '/usr/lib/modules/' + ARGS.kernel
     else:
         message.critical('Unable to find modules directory')
+        sys.exit(2)
 
     message.info('Runtime information')
     message.sub_info('TMP', ARGS.tmp)
@@ -220,5 +226,7 @@ except SystemExit:
 except Exception as detail:
     message.critical('Unexpected error', detail)
     sys.exit(1)
-#finally:
-#    raise
+finally:
+    if os.path.isdir(tmpdir) and not keep:
+        message.info('Cleaning up...')
+        misc.dir_remove(tmpdir)

@@ -3,8 +3,10 @@
 import sys, argparse, tempfile, subprocess
 import tarfile, zipfile, shutil, os
 
-app_version = "0.9.10 (34fe0ae)"
+app_version = "0.9.10 (58286c7)"
 
+tmpdor = None
+keep = False
 try:
     import libmessage, libmisc
     message = libmessage.Message()
@@ -36,6 +38,9 @@ try:
     if ARGS.kernel != kernel and ARGS.image == image:
         ARGS.image = '/boot/initramfs-' + ARGS.kernel + '.img'
 
+    if ARGS.keep:
+        keep = True
+
     if ARGS.debug:
         message.DEBUG = True
 
@@ -63,10 +68,6 @@ try:
     cpio = misc.whereis('cpio')
     print os.system(cpio + ' -tF ' + new_image.replace('.gz', ''))
 
-    if os.path.isdir(tmpdir) and not ARGS.keep:
-        message.info('Cleaning up...')
-        misc.dir_remove(tmpdir)
-
 except subprocess.CalledProcessError as detail:
     message.critical('SUBPROCESS', detail)
     sys.exit(4)
@@ -93,5 +94,8 @@ except SystemExit:
 except Exception as detail:
     message.critical('Unexpected error', detail)
     sys.exit(1)
-#finally:
-#    raise
+finally:
+    if os.path.isdir(tmpdir) and not ARGS.keep:
+        message.info('Cleaning up...')
+        misc.dir_remove(tmpdir)
+
