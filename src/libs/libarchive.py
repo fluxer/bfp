@@ -130,11 +130,11 @@ class Libarchive(object):
                 return '%.02fGB' % (((float(size) / 1024.00) / 1024.00) / 1024.00)
 
     ### Public methods
-    def listContents(self):
+    def listArchive(self):
         ''' List the contents of the archive (returns a list of path/filenames) '''
-        retv = []                             # Return value
-        archive = self._readNew()    # Archive struct
-        entry = self._entryNew() # Entry struct
+        retv = []                 # Return value
+        archive = self._readNew() # Archive struct
+        entry = self._entryNew()  # Entry struct
 
         # detect compression and archive type
         self._readSupportFilterAll(archive)
@@ -215,6 +215,26 @@ class Libarchive(object):
     def createArchive(self, files, output):
         raise(Exception('Unsupported action'))
 
+    def supportedArchive(self):
+        ''' Check if the archive is supported '''
+        retv = False              # Return value
+        archive = self._readNew() # Archive struct
+
+        # detect compression and archive type
+        self._readSupportFilterAll(archive)
+        self._readSupportFormatAll(archive)
+
+        # Open, analyse, and close our archive
+        if self._readOpenFilename(archive, self.__fname, 10240) == self.ARCH_OK:
+            retv = True
+
+        if self._readFree(archive) != self.ARCH_OK:
+            print(self._errorString(archive))
+            sys.exit(1)
+
+        # Return value
+        return retv
+
 ### Main argument handling / operations
 if __name__ == '__main__':
     amode = '-x'
@@ -238,7 +258,7 @@ if __name__ == '__main__':
                 obj.extractArchive()
             elif amode == '-t':
                 print('Listing %s...' % afile)
-                print '\n'.join(obj.listContents())
+                print '\n'.join(obj.listArchive())
     except Exception as msg:
         print(msg)
         sys.exit(1)
