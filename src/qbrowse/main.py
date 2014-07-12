@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui, QtWebKit, QtNetwork
 import sys, os, gc, libdesktop, libmisc
 
 # prepare for lift-off
-app_version = "0.9.10 (377f5bb)"
+app_version = "0.9.10 (34fe0ae)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
@@ -198,7 +198,7 @@ class NewTab(QtGui.QWidget):
             self.progressBar.setValue(0)
             self.icon_changed(self.webView.icon())
 
-            # load JavaScript user script
+            # load JavaScript user script (http://jquery.com/)
             # if ui.actionJavascript.isChecked():
             #     self.webView.page().mainFrame().evaluateJavaScript(misc.file_read('jquery.js'))
         else:
