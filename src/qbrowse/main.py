@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui, QtWebKit, QtNetwork
 import sys, os, gc, libdesktop, libmisc
 
 # prepare for lift-off
-app_version = "0.9.10 (34fe0ae)"
+app_version = "0.9.10 (aaf52a7)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
@@ -76,7 +76,6 @@ class NewTab(QtGui.QWidget):
         self.newButton = QtGui.QPushButton()
         self.urlBox = QtGui.QComboBox()
         self.webView = QtWebKit.QWebView()
-        self.progressBar = QtGui.QProgressBar()
         secondLayout.addWidget(self.backButton)
         secondLayout.addWidget(self.nextButton)
         secondLayout.addWidget(self.reloadStopButton)
@@ -87,7 +86,7 @@ class NewTab(QtGui.QWidget):
         mainLayout.addLayout(secondLayout, 0, 0)
         mainLayout.addLayout(self.thirdLayout, 30, 0)
         mainLayout.addWidget(self.webView)
-        mainLayout.addWidget(self.progressBar)
+        ui.statusBar.addPermanentWidget(progressBar, 0)
         self.setLayout(mainLayout)
 
         # setup widgets
@@ -194,17 +193,17 @@ class NewTab(QtGui.QWidget):
         ''' Page load progress '''
         if load == 100:
             self.reloadStopButton.setIcon(self.icon_reload)
-            self.progressBar.hide()
-            self.progressBar.setValue(0)
+            progressBar.hide()
+            progressBar.setValue(0)
             self.icon_changed(self.webView.icon())
 
             # load JavaScript user script (http://jquery.com/)
             # if ui.actionJavascript.isChecked():
             #     self.webView.page().mainFrame().evaluateJavaScript(misc.file_read('jquery.js'))
         else:
-            self.progressBar.show()
-            self.progressBar.setValue(load)
-            self.progressBar.setStatusTip(self.webView.statusTip())
+            progressBar.show()
+            progressBar.setValue(load)
+            progressBar.setStatusTip(self.webView.statusTip())
             self.reloadStopButton.setIcon(self.icon_stop)
 
     def page_back(self):
@@ -227,7 +226,7 @@ class NewTab(QtGui.QWidget):
 
     def page_reload_stop(self):
         ''' Reload/stop loading the web page '''
-        if self.progressBar.isHidden():
+        if progressBar.isHidden():
             self.reloadStopButton.setIcon(self.icon_stop)
             self.webView.setUrl(QtCore.QUrl(self.urlBox.currentText()))
         else:
@@ -239,38 +238,35 @@ class NewTab(QtGui.QWidget):
         eid = reply.error()
         # http://pyqt.sourceforge.net/Docs/PyQt4/qnetworkreply.html#error
         errors = {
-            1 : 'the remote server refused the connection (the server is not accepting requests)',
-            2 : 'the remote server closed the connection prematurely, before the entire reply was received and processed',
-            3 : 'the remote host name was not found (invalid hostname)',
-            4 : 'the connection to the remote server timed out',
-            6 : 'the SSL/TLS handshake failed and the encrypted channel could not be established. The sslErrors() signal should have been emitted.',
-            7 : 'the connection was broken due to disconnection from the network, however the system has initiated roaming to another access point. The request should be resubmitted and will be processed as soon as the connection is re-established.',
-            101 : 'the connection to the proxy server was refused (the proxy server is not accepting requests)',
-            102 : 'the proxy server closed the connection prematurely, before the entire reply was received and processed',
-            103 : 'the proxy host name was not found (invalid proxy hostname)',
-            104 : 'the connection to the proxy timed out or the proxy did not reply in time to the request sent',
-            105 : 'the proxy requires authentication in order to honour the request but did not accept any credentials offered (if any)',
-            201 : 'the access to the remote content was denied (similar to HTTP error 401)',
-            202 : 'the operation requested on the remote content is not permitted',
-
-            204 : 'the remote server requires authentication to serve the content but the credentials provided were not accepted (if any)',
-            205 : 'the request needed to be sent again, but this failed for example because the upload data could not be read a second time.',
-            301 : 'the Network Access API cannot honor the request because the protocol is not known',
-            302 : 'the requested operation is invalid for this protocol',
-            99 : 'an unknown network-related error was detected',
-            199 : 'an unknown proxy-related error was detected',
-            299 : 'an unknown error related to the remote content was detected',
-            399 : 'a breakdown in protocol was detected (parsing error, invalid or unexpected responses, etc.)',
-        }
-        warnings = {
-            5 : 'the operation was canceled via calls to abort() or close() before it was finished.',
-            203 : 'the remote content was not found at the server (similar to HTTP error 404)',
+            1: 'the remote server refused the connection (the server is not accepting requests)',
+            2: 'the remote server closed the connection prematurely, before the entire reply was received and processed',
+            3: 'the remote host name was not found (invalid hostname)',
+            4: 'the connection to the remote server timed out',
+            5: 'the operation was canceled via calls to abort() or close() before it was finished.',
+            6: 'the SSL/TLS handshake failed and the encrypted channel could not be established. The sslErrors() signal should have been emitted.',
+            7: 'the connection was broken due to disconnection from the network, however the system has initiated roaming to another acess point. The request should be resubmitted and will be processed as soon as the connection is re-established.',
+            101: 'the connection to the proxy server was refused (the proxy server is not accepting requests)',
+            102: 'the proxy server closed the connection prematurely, before the entire reply was received and processed',
+            103: 'the proxy host name was not found (invalid proxy hostname)',
+            104: 'the connection to the proxy timed out or the proxy did not reply in time to the request sent',
+            105: 'the proxy requires authentication in order to honour the request but did not accept any credentials offered (if any)',
+            201: 'the access to the remote content was denied (similar to HTTP error 401)',
+            202: 'the operation requested on the remote content is not permitted',
+            203: 'the remote content was not found at the server (similar to HTTP error 404)',
+            204: 'the remote server requires authentication to serve the content but the credentials provided were not accepted (if any)',
+            205: 'the request needed to be sent again, but this failed for example because the upload data could not be read a second time.',
+            301: 'the Network Access API cannot honor the request because the protocol is not known',
+            302: 'the requested operation is invalid for this protocol',
+            99: 'an unknown network-related error was detected',
+            199: 'an unknown proxy-related error was detected',
+            299: 'an unknown error related to the remote content was detected',
+            399: 'a breakdown in protocol was detected (parsing error, invalid or unexpected responses, etc.)',
         }
         if eid in errors:
-            self.webView.setUrl(QtCore.QUrl(''))
-            self.webView.setHtml('<center><h2>' + errors.get(eid, 'unknown error') + '</h2></center>')
-        if eid in warnings:
-            print('WARNING: ' + warnings.get(eid, 'unknown warning'))
+            ui.statusBar.showMessage(errors.get(eid, 'unknown error'))
+            if eid == 5:
+                progressBar.hide()
+                progressBar.setValue(0)
 
     def tab_check_closable(self):
         ''' Check if tabs should be closable '''
@@ -368,6 +364,7 @@ cookie_jar = CookieJar()
 manager = QtNetwork.QNetworkAccessManager()
 manager.setCache(disk_cache)
 manager.setCookieJar(cookie_jar)
+progressBar = QtGui.QProgressBar()
 NewTab().tab_new(home_page)
 
 # watch configs for changes
