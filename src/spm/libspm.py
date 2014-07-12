@@ -430,12 +430,12 @@ class Source(object):
                 and run_desktop_database:
                 message.sub_info('Updating desktop database')
                 message.sub_debug(sfile)
-                subprocess.check_call(('update-desktop-database'))
+                subprocess.check_call(('update-desktop-database', os.path.dirname(sfile)))
                 run_desktop_database = False
             elif '/share/mime/' in sfile and misc.whereis('update-mime-database', fallback=False) and run_mime_database:
                 message.sub_info('Updating mime database')
                 message.sub_debug(sfile)
-                subprocess.check_call(('update-mime-database', '/usr/share/mime'))
+                subprocess.check_call(('update-mime-database', sys.prefix + 'share/mime'))
                 run_mime_database = False
             elif '/share/icons/' in sfile and misc.whereis('xdg-icon-resource', fallback=False) and run_icon_resource:
                 message.sub_info('Updating icon resources')
