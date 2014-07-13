@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui
 import sys, os, libmisc, libdesktop
 
 # prepare for lift-off
-app_version = "0.9.10 (9a80322)"
+app_version = "0.9.10 (7843382)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qimage_ui.Ui_MainWindow()
@@ -39,15 +39,18 @@ def set_image(sfile):
     for simage in slist:
         if simage == sfile:
             sindex = slist.index(sfile)
-            if sindex == 0:
-                ui.previousButton.setEnabled(False)
-                ui.nextButton.setEnabled(True)
+            if len(slist) == 1:
+                ui.actionPrevious.setEnabled(False)
+                ui.actionNext.setEnabled(False)
+            elif sindex == 0:
+                ui.actionPrevious.setEnabled(False)
+                ui.actionNext.setEnabled(True)
             elif sindex+1 == len(slist):
-                ui.previousButton.setEnabled(True)
-                ui.nextButton.setEnabled(False)
+                ui.actionPrevious.setEnabled(True)
+                ui.actionNext.setEnabled(False)
             else:
-                ui.previousButton.setEnabled(True)
-                ui.nextButton.setEnabled(True)
+                ui.actionPrevious.setEnabled(True)
+                ui.actionNext.setEnabled(True)
             break
 
 def open_file(sfile):
@@ -66,8 +69,8 @@ def images_list():
     scurrent = ui.imageView.fileName
     sdir = os.path.dirname(scurrent)
     if not os.path.isdir(sdir):
-        ui.previousButton.setEnabaled(False)
-        ui.nextButton.setEnabled(False)
+        ui.actionPrevious.setEnabaled(False)
+        ui.actionNext.setEnabled(False)
         return
 
     slist = []
@@ -95,8 +98,8 @@ ui.actionQuit.triggered.connect(sys.exit)
 ui.actionAbout.triggered.connect(run_about)
 ui.actionOpen.triggered.connect(open_file)
 ui.actionReload.triggered.connect(reload_file)
-ui.previousButton.clicked.connect(previous_image)
-ui.nextButton.clicked.connect(next_image)
+ui.actionPrevious.triggered.connect(previous_image)
+ui.actionNext.triggered.connect(next_image)
 
 simage = None
 for arg in sys.argv[1:]:

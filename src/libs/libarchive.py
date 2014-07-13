@@ -66,6 +66,8 @@ class Libarchive(object):
 
         # Info
         self._entrySize = self.lib.archive_entry_size
+        self._entryType = self.lib.archive_entry_filetype
+        self._entrySymlink = self.lib.archive_entry_symlink
 
         # This is due to a problem where libarchive version below v3.x do not have
         # the archive_read_free symbol. And archive_read_finish will only be kept
