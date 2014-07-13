@@ -248,6 +248,12 @@ class Actions(object):
             for svar in self.copy:
                 sitems += '"' + svar + '" '
             general.execute_program('qpaste --copy ' + sitems)
+        else:
+            # FIXME: it will break on paths with spaces,
+            #        is it OK to use \n in the clipboard content to solve this?
+            for svar in self.clipboard.text().split(' '):
+                sitems += '"' + str(svar) + '" '
+            general.execute_program('qpaste --copy ' + sitems)
 
     def delete_items(self, variant):
         ''' Delete files/directories '''
