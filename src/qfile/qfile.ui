@@ -156,7 +156,7 @@
      <x>0</x>
      <y>0</y>
      <width>586</width>
-     <height>22</height>
+     <height>25</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuMain">
@@ -316,7 +316,7 @@
     <string>Delete</string>
    </property>
    <property name="shortcut">
-    <string>Ctrl+D</string>
+    <string>Ctrl+D, Del</string>
    </property>
   </action>
   <action name="actionProperties">

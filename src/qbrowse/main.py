@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui, QtWebKit, QtNetwork
 import sys, os, gc, libdesktop, libmisc
 
 # prepare for lift-off
-app_version = "0.9.10 (aaf52a7)"
+app_version = "0.9.10 (048d0a1)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
@@ -81,7 +81,7 @@ class NewTab(QtGui.QWidget):
         secondLayout.addWidget(self.reloadStopButton)
         secondLayout.addWidget(self.newButton)
         secondLayout.addWidget(self.urlBox)
-        for b in ('bitbucket.org', 'gmail.com', 'youtube.com', 'zamunda.net', 'archlinux.org', 'phoronix.com'):
+        for b in ('github.com', 'bitbucket.org', 'gmail.com', 'youtube.com', 'zamunda.net', 'archlinux.org', 'phoronix.com'):
             self.thirdLayout.addWidget(self.bookmark(b))
         mainLayout.addLayout(secondLayout, 0, 0)
         mainLayout.addLayout(self.thirdLayout, 30, 0)

@@ -3,7 +3,7 @@
 import sys, argparse, tempfile, subprocess
 import tarfile, zipfile, shutil, os
 
-app_version = "0.9.10 (58286c7)"
+app_version = "0.9.10 (048d0a1)"
 
 tmpdor = None
 keep = False

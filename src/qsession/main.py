@@ -26,18 +26,38 @@ def setWallpaper():
         MainWindow.setStyleSheet("background-color: " + config.WALLPAPER_COLOR + ";")
 # setWallpaper()
 
+class LoginThread(QtCore.QThread):
+    def __init__(self, parent=None, username='root'):
+        super(LoginThread, self).__init__(parent)
+        self.username = username
+
+    def run(self):
+        pw_uid = pwd.getpwnam(self.username).pw_uid
+        pw_gid = pwd.getpwnam(self.username).pw_gid
+        pw_dir = pwd.getpwnam(self.username).pw_dir
+        pw_shell = pwd.getpwnam(self.username).pw_shell
+
+        try:
+            os.setsid()
+        except Exception as detail:
+            print(str(detail))
+        os.setgid(pw_gid)
+        os.setuid(pw_uid)
+        os.putenv('HOME', pw_dir)
+        os.putenv('SHELL', pw_shell)
+        if os.path.isdir(pw_dir):
+            os.chdir(pw_dir)
+        else:
+            os.chdir('/')
+        general.execute_program(misc.whereis('xinit')  + ' ' + misc.whereis('startfluxbox') + ' -- :9', False)
+
 def login(autologin=None):
     username = str(ui.UserNameBox.currentText())
     password = str(ui.PasswordEdit.text())
-    desktop = misc.whereis('startfluxbox')
     if autologin:
         username = autologin
 
     pw_passwd = pwd.getpwnam(username).pw_passwd
-    pw_uid = pwd.getpwnam(username).pw_uid
-    pw_gid = pwd.getpwnam(username).pw_gid
-    pw_dir = pwd.getpwnam(username).pw_dir
-    pw_shell = pwd.getpwnam(username).pw_shell
 
     if pw_passwd == 'x' or pw_passwd == '*':
         QtGui.QMessageBox.critical(MainWindow, 'Critical', 'Shadow passwords are hot supported')
@@ -47,20 +67,10 @@ def login(autologin=None):
 
     if autologin or crypt.crypt(password, pw_passwd) == pw_passwd:
         try:
-            try:
-                os.setsid()
-            except Exception as detail:
-                print(str(detail))
-            os.setgid(pw_gid)
-            os.setuid(pw_uid)
-            os.putenv('HOME', pw_dir)
-            os.putenv('SHELL', pw_shell)
-            if os.path.isdir(pw_dir):
-                os.chdir(pw_dir)
-            else:
-                os.chdir('/')
             MainWindow.hide()
-            os.system(misc.whereis('xinit')  + ' ' + desktop + ' -- :9')
+            thread = LoginThread(username=username)
+            thread.start()
+            thread.wait()
         except Exception as detail:
             QtGui.QMessageBox.critical(MainWindow, 'Critical', 'Login was not sucessful:\n\n' + str(detail))
             ui.PasswordEdit.setFocus()
