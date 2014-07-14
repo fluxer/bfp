@@ -16,6 +16,7 @@ all:
 	make -C src/qmanager
 	make -C src/qnetwork
 	make -C src/qopen
+	make -C src/qpanel
 	make -C src/qpaste
 	make -C src/qproperties
 	make -C src/qresources
@@ -45,6 +46,7 @@ install:
 	make -C src/qmanager install
 	make -C src/qnetwork install
 	make -C src/qopen install
+	make -C src/qpanel install
 	make -C src/qpaste install
 	make -C src/qproperties install
 	make -C src/qresources install
@@ -71,6 +73,7 @@ uninstall:
 	make -C src/qmanager uninstall
 	make -C src/qnetwork uninstall
 	make -C src/qopen uninstall
+	make -C src/qpanel uninstall
 	make -C src/qpaste uninstall
 	make -C src/qproperties uninstall
 	make -C src/qresources uninstall
@@ -94,6 +97,7 @@ clean:
 	make -C src/qmanager clean
 	make -C src/qnetwork clean
 	make -C src/qopen clean
+	make -C src/qpanel clean
 	make -C src/qpaste clean
 	make -C src/qproperties clean
 	make -C src/qresources clean
