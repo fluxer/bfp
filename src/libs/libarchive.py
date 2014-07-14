@@ -22,13 +22,9 @@ class Libarchive(object):
         pass
 
     ### Initialization
-    def __init__(self, fname=None):
+    def __init__(self):
         self.lib = lib
-
-        ## Argument handling/setting
-        self.__fname = fname
-
-        ## Constants
+        # constants
         self.ARCH_EOF = 1
         self.ARCH_OK = 0
         self.ARCH_RETRY = -10
@@ -37,7 +33,7 @@ class Libarchive(object):
         self.ARCH_FATAL = -30
         self.ExtractFlags = 4 | 2 | 32 | 64 # TIME,PERM,ACL,FFLAGS
 
-        ## Now we declare our function symbols and their return types
+        # function symbols and their return types
         self.versionNumber = self.lib.archive_version_number
         self._entryNew = self.lib.archive_entry_new
         self._entryNew.restype = ctypes.POINTER(self.ArchiveEntry)
@@ -46,8 +42,7 @@ class Libarchive(object):
         self._writeDiskNew = self.lib.archive_write_disk_new
         self._writeDiskNew.restype = ctypes.POINTER(self.Archive)
 
-        ## Integer return types
-        # Reading
+        # reading
         self._readClose = self.lib.archive_read_close
         self._readDataBlock = self.lib.archive_read_data_block
         self._readDataSkip = self.lib.archive_read_data_skip
@@ -56,7 +51,7 @@ class Libarchive(object):
         self._readSupportFilterAll = self.lib.archive_read_support_compression_all
         self._readSupportFormatAll = self.lib.archive_read_support_format_all
 
-        # Writing
+        # writing
         self._writeClose = self.lib.archive_write_close
         self._writeDataBlock = self.lib.archive_write_data_block
         self._writeDiskSetOptions = self.lib.archive_write_disk_set_options
@@ -64,12 +59,12 @@ class Libarchive(object):
         self._writeFinishEntry = self.lib.archive_write_finish_entry
         self._writeHeader = self.lib.archive_write_header
 
-        # Info
+        # info
         self._entrySize = self.lib.archive_entry_size
         self._entryType = self.lib.archive_entry_filetype
         self._entrySymlink = self.lib.archive_entry_symlink
 
-        # This is due to a problem where libarchive version below v3.x do not have
+        # this is due to a problem where libarchive version below v3.x do not have
         # the archive_read_free symbol. And archive_read_finish will only be kept
         # about until version 4 of the library, so no sense in not being forward
         # compatible about it.
@@ -80,39 +75,46 @@ class Libarchive(object):
             self._readFree = self.lib.archive_read_free
             self._writeFree = self.lib.archive_write_free
 
-        ## String return types
+        # string return types
         self._entryPathname = self.lib.archive_entry_pathname
         self._entryPathname.restype = ctypes.c_char_p
         self._errorString = self.lib.archive_error_string
         self._errorString.restype = ctypes.c_char_p
 
     ### Private methods
-    def _copyData(self, archiveR, archiveW):
+    def _copyData(self, archiveR, archiveW, chdir):
         r = ctypes.c_int()
         buff = ctypes.c_void_p()
         size = ctypes.c_int()
         offs = ctypes.c_longlong()
 
+        if chdir:
+            curdir = os.curdir
+            os.chdir(chdir)
+
         while True:
-            # Read in a block
+            # read in a block
             r = self._readDataBlock(
-                archiveR,                     # Archive (reading)
+                archiveR,           # Archive (reading)
                 ctypes.byref(buff), # Buffer pointer
                 ctypes.byref(size), # Size pointer
                 ctypes.byref(offs)) # Offset pointer
 
-            # Check ourselves
+            # check ourselves
             if r == self.ARCH_EOF:
                 return self.ARCH_OK
             if r != self.ARCH_OK:
                 return r
 
-            # Write out a block
+            # write out a block
             r = self._writeDataBlock(
-                archiveW, # Archive (writing)
+                archiveW,     # Archive (writing)
                 buff,         # Buffer data
                 size,         # Size data
                 offs)         # Offset data
+
+            if chdir:
+                os.chdir(curdir)
 
             # And check ourselves again
             if r != self.ARCH_OK:
@@ -132,8 +134,8 @@ class Libarchive(object):
                 return '%.02fGB' % (((float(size) / 1024.00) / 1024.00) / 1024.00)
 
     ### Public methods
-    def listArchive(self):
-        ''' List the contents of the archive (returns a list of path/filenames) '''
+    def listArchive(self, fname):
+        ''' List the contents of archive (returns a list of path/filenames) '''
         retv = []                 # Return value
         archive = self._readNew() # Archive struct
         entry = self._entryNew()  # Entry struct
@@ -142,8 +144,8 @@ class Libarchive(object):
         self._readSupportFilterAll(archive)
         self._readSupportFormatAll(archive)
 
-        # Open, analyse, and close our archive
-        if self._readOpenFilename(archive, self.__fname, 10240) != self.ARCH_OK:
+        # open, analyse, and close our archive
+        if self._readOpenFilename(archive, fname, 10240) != self.ARCH_OK:
             print(self._errorString(archive))
             sys.exit(1)
 
@@ -155,11 +157,17 @@ class Libarchive(object):
             print(self._errorString(archive))
             sys.exit(1)
 
-        # Return our list of archive entries
+        # return our list of archive entries
         return retv
 
-    def extractArchive(self):
-        # Setup our structs
+    def extractArchive(self, fname, chdir=None, preserve=False):
+        ''' Extract the contents of archive '''
+
+        # preserve permissions
+        if  preserve:
+            self.ExtractFlags = self.ExtractFlags | 80 | 200 # XATTR, MAC_METADATA
+
+        # setup our structs
         arch = self._readNew()
         ext = self._writeDiskNew()
         entry = self._entryNew()
@@ -173,7 +181,7 @@ class Libarchive(object):
         self._writeDiskSetLookup(ext)
 
         # open the archive
-        self._readOpenFilename(arch, self.__fname, 10240)
+        self._readOpenFilename(arch, fname, 10240)
 
         # get our first header
         ret = self._readNextHeader(arch, ctypes.byref(entry))
@@ -189,7 +197,7 @@ class Libarchive(object):
             elif self._entrySize(entry) > 0:
 
                 # copy the contents into their new home
-                self._copyData(arch, ext)
+                self._copyData(arch, ext, chdir)
                 if ret != self.ARCH_OK:
                     print(self._errorString(ext))
                 if ret < self.ARCH_WARN:
@@ -205,7 +213,7 @@ class Libarchive(object):
             # And get ready to head back to the top
             ret = self._readNextHeader(arch, ctypes.byref(entry))
 
-        # Cleanup
+        # cleanup
         self._readClose(arch)
         self._readFree(arch)
         self._writeClose(ext)
@@ -215,9 +223,10 @@ class Libarchive(object):
         return self.ARCH_OK
 
     def createArchive(self, files, output):
+        ''' Create archive '''
         raise(Exception('Unsupported action'))
 
-    def supportedArchive(self):
+    def supportedArchive(self, fname):
         ''' Check if the archive is supported '''
         retv = False              # Return value
         archive = self._readNew() # Archive struct
@@ -226,15 +235,15 @@ class Libarchive(object):
         self._readSupportFilterAll(archive)
         self._readSupportFormatAll(archive)
 
-        # Open, analyse, and close our archive
-        if self._readOpenFilename(archive, self.__fname, 10240) == self.ARCH_OK:
+        # open, analyse, and close our archive
+        if self._readOpenFilename(archive, fname, 10240) == self.ARCH_OK:
             retv = True
 
         if self._readFree(archive) != self.ARCH_OK:
             print(self._errorString(archive))
             sys.exit(1)
 
-        # Return value
+        # return value
         return retv
 
 ### Main argument handling / operations
@@ -254,13 +263,13 @@ if __name__ == '__main__':
                 raise(Exception('usage [-x|-t|-c] <files>'))
 
         for afile in afiles:
-            obj = Libarchive(afile)
+            obj = Libarchive()
             if amode == '-x':
                 print('Extracting %s...' % afile)
-                obj.extractArchive()
+                obj.extractArchive(afile)
             elif amode == '-t':
                 print('Listing %s...' % afile)
-                print '\n'.join(obj.listArchive())
+                print '\n'.join(obj.listArchive(afile))
     except Exception as msg:
         print(msg)
         sys.exit(1)

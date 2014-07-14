@@ -36,6 +36,7 @@ class General(object):
             p.startDetached(sprogram)
         else:
             p.start(sprogram)
+            p.waitForFinished()
         if p.exitCode() > 0:
             p.close()
             raise(Exception(p.errorString()))
