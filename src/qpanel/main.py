@@ -3,6 +3,8 @@
 import qpanel_ui
 from PyQt4 import QtCore, QtGui
 import sys, libmisc, libdesktop
+from Xlib.display import Display
+from Xlib import X, protocol
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
@@ -32,6 +34,50 @@ def do_shutdown():
 def do_reboot():
     general.system_reboot(MainWindow)
 
+display = Display()
+root = display.screen().root
+def window_activate_deactivate(sid):
+    window = display.create_resource_object('window', wid)
+    print window.get_wm_state()
+    if window.get_wm_state() == 1:
+        # FIXME: deactivate
+        window.set_wm_state()
+    else:
+        # FIXME: activate
+        general.execute_command('wmctrl -i -a ' + sid)
+
+def window_close(sid):
+    general.execute_command('wmctrl -i -c ' + sid)
+
+def window_state(sid, state):
+    general.execute_command('wmctrl -i ' + sid + ' -b toggle,' + state)
+
+def window_button(sid, sicon, sname):
+    button = QtGui.QToolButton()
+    button.setText(sname)
+    if sicon:
+        button.setIcon(general.get_icon(sicon))
+    #action = QtGui.QAction(general.get_icon('exit'), 'close', button)
+    #action.triggered.connect(lambda: window_close(sid))
+    #button.addAction(action)
+    button.triggered.connect(lambda: window_activate_deactivate(sid))
+    return button
+
+windowIDs = root.get_full_property(display.intern_atom('_NET_CLIENT_LIST'), X.AnyPropertyType).value
+for wid in windowIDs:
+    window = display.create_resource_object('window', wid)
+    wicon = window.get_wm_icon_name()
+    wname = window.get_wm_name()
+    # pid = window.get_full_property(display.intern_atom('_NET_WM_PID'), X.AnyPropertyType)
+    ui.horizontalLayout.addWidget(window_button(wid, wicon, wname))
+
+def update_time():
+    ui.clockLCDNumber.display(QtCore.QTime.currentTime().toString('hh:mm'))
+timer = QtCore.QTimer()
+timer.timeout.connect(update_time)
+timer.start(60000)
+update_time()
+
 ui.actionPreferences.triggered.connect(run_preferences)
 ui.actionSuspend.triggered.connect(do_suspend)
 ui.actionShutdown.triggered.connect(do_shutdown)
@@ -39,7 +85,7 @@ ui.actionReboot.triggered.connect(do_reboot)
 ui.actionLogout.triggered.connect(sys.exit)
 
 ui.menubar.hide()
-ui.MenuButton.clicked.connect(show_popup)
+ui.menuButton.clicked.connect(show_popup)
 
 # create dynamic menu
 menu = libdesktop.Menu(app, ui.menuApplications)
