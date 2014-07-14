@@ -95,7 +95,7 @@ except Exception as detail:
     message.critical('Unexpected error', detail)
     sys.exit(1)
 finally:
-    if os.path.isdir(tmpdir) and not ARGS.keep:
+    if os.path.isdir(tmpdir) and not keep:
         message.info('Cleaning up...')
         misc.dir_remove(tmpdir)
 
