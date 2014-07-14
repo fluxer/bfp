@@ -10,6 +10,9 @@
 ## LIBDESKTOP ##
  * Signal to qsession to shutdown/reboot/suspend/logout?
 
+## QMANAGER ##
+ * Implement caches update?
+
 ## SPM-QT ##
  * Fixup the logging
  * Implement menu bar and drop "About" tab in favour of about dialog
