@@ -9,6 +9,7 @@
 
 ## LIBDESKTOP ##
  * Signal to qsession to shutdown/reboot/suspend/logout?
+ * Support program arguments (requires qsettings changes too)
 
 ## QMANAGER ##
  * Implement caches update?
