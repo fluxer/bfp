@@ -87,6 +87,6 @@ elif action == '--browse':
             sys.exit(0)
 else:
     QtGui.QMessageBox.critical(Dialog, 'Critical', 'Invalid action, choose from gzip/bzip/extract/browse.')
-    sys.exit(3
+    sys.exit(3)
 
 sys.exit(app.exec_())
