@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui, QtWebKit, QtNetwork
 import sys, os, gc, libdesktop, libmisc
 
 # prepare for lift-off
-app_version = "0.9.10 (048d0a1)"
+app_version = "0.9.11 (ee60b54)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qbrowse_ui.Ui_MainWindow()
@@ -133,6 +133,7 @@ class NewTab(QtGui.QWidget):
             self.webView.page().setNetworkAccessManager(self.nam)
             self.webView.loadFinished.connect(cookie_jar.saveCookies)
             self.nam.finished.connect(self.page_error)
+            self.nam.sslErrors.connect(self.page_ssl_errors)
 
         #self.webView.settings().setMaximumPagesInCache(0)
         #self.webView.settings().setObjectCacheCapacities(0, 0, 0)
@@ -267,6 +268,10 @@ class NewTab(QtGui.QWidget):
             if eid == 5:
                 progressBar.hide()
                 progressBar.setValue(0)
+
+    def page_ssl_errors(self, reply, errors):
+        reply.ignoreSslErrors()
+        ui.statusBar.showMessage('SSL certificate error ignored: ' + str(reply.url().toString()))
 
     def tab_check_closable(self):
         ''' Check if tabs should be closable '''
