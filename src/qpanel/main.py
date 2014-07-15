@@ -2,9 +2,7 @@
 
 import qpanel_ui
 from PyQt4 import QtCore, QtGui
-import sys, libmisc, libdesktop
-from Xlib.display import Display
-from Xlib import X, protocol
+import sys, libmisc, libdesktop, libxlib
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
@@ -14,6 +12,7 @@ ui.setupUi(MainWindow)
 config = libdesktop.Config()
 general = libdesktop.General()
 misc = libmisc.Misc()
+wm = libxlib.WM()
 
 def setLook():
     general.set_style(app)
@@ -34,41 +33,42 @@ def do_shutdown():
 def do_reboot():
     general.system_reboot(MainWindow)
 
-display = Display()
-root = display.screen().root
 def window_activate_deactivate(sid):
-    window = display.create_resource_object('window', wid)
-    print window.get_wm_state()
-    if window.get_wm_state() == 1:
-        # FIXME: deactivate
-        window.set_wm_state()
+    state = wm.get_window_state(sid)
+    print state, state.hidden
+    if state.hidden == None:
+        print('Activating window')
+        wm.focus_and_raise(sid)
     else:
-        # FIXME: activate
-        general.execute_command('wmctrl -i -a ' + sid)
+        print('Deactivating window')
+        wm.deactivate_window(sid)
 
 def window_close(sid):
-    general.execute_command('wmctrl -i -c ' + sid)
+    wm.close_window(sid)
 
-def window_state(sid, state):
-    general.execute_command('wmctrl -i ' + sid + ' -b toggle,' + state)
+def context_menu(sid):
+    menu = QtGui.QMenu()
+    # FIXME: sticky
+    menu.addAction(general.get_icon('window'), 'Activate/Deactivate', lambda: window_activate_deactivate(sid))
+    menu.addAction(general.get_icon('exit'), 'Close', lambda: window_close(sid))
+    menu.popup(QtGui.QCursor.pos())
 
 def window_button(sid, sicon, sname):
-    button = QtGui.QToolButton()
+    button = QtGui.QPushButton()
+    button.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
+    button.customContextMenuRequested.connect(lambda: context_menu(sid))
     button.setText(sname)
     if sicon:
         button.setIcon(general.get_icon(sicon))
-    #action = QtGui.QAction(general.get_icon('exit'), 'close', button)
-    #action.triggered.connect(lambda: window_close(sid))
-    #button.addAction(action)
-    button.triggered.connect(lambda: window_activate_deactivate(sid))
+    button.clicked.connect(lambda: window_activate_deactivate(sid))
     return button
 
-windowIDs = root.get_full_property(display.intern_atom('_NET_CLIENT_LIST'), X.AnyPropertyType).value
-for wid in windowIDs:
-    window = display.create_resource_object('window', wid)
-    wicon = window.get_wm_icon_name()
-    wname = window.get_wm_name()
-    # pid = window.get_full_property(display.intern_atom('_NET_WM_PID'), X.AnyPropertyType)
+for wid in wm.get_clients():
+    wicon = wm.get_window_icon(wid)
+    wname = wm.get_window_title(wid)
+    wstate = wm.get_window_state(wid)
+    if wstate == wstate.skip_taskbar or wstate == wstate.hidden or not wname:
+        continue
     ui.horizontalLayout.addWidget(window_button(wid, wicon, wname))
 
 def update_time():
@@ -96,6 +96,7 @@ desktop = QtGui.QDesktopWidget()
 MainWindow.resize(desktop.width(), 50)
 MainWindow.move(0, desktop.rect().bottom() - 50)
 MainWindow.setWindowFlags(QtCore.Qt.FramelessWindowHint | QtCore.Qt.WindowStaysOnTopHint | QtCore.Qt.Tool)
+wm.reserve_space(MainWindow.winId(), 0, MainWindow.width(), 50, 0)
 
 # watch configs for changes
 def reload_panel():

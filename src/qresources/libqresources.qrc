@@ -1,5 +1,6 @@
 <RCC>
   <qresource prefix="/share/qresources">
+    <file>resources/document-open-recent.svg</file>
     <file>resources/zoom-best-fit.svg</file>
     <file>resources/zoom-in.svg</file>
     <file>resources/zoom-out.svg</file>

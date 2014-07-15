@@ -65,7 +65,7 @@
      <x>0</x>
      <y>0</y>
      <width>445</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuActions">
@@ -85,7 +85,7 @@
     </widget>
     <widget class="QMenu" name="menuArchvie">
      <property name="title">
-      <string>Archvie</string>
+      <string>Archive</string>
      </property>
      <property name="icon">
       <iconset resource="../qresources/libqresources.qrc">

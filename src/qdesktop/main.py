@@ -216,8 +216,8 @@ ui.actionLogout.triggered.connect(do_logout)
 ui.DesktopView.clicked.connect(enable_actions)
 
 # setup window
-MainWindow.setWindowFlags(QtCore.Qt.FramelessWindowHint | QtCore.Qt.SplashScreen)
 MainWindow.setCentralWidget(ui.DesktopView)
+MainWindow.setWindowFlags(QtCore.Qt.FramelessWindowHint | QtCore.Qt.SplashScreen)
 
 # create dynamic menu
 menu = libdesktop.Menu(app, ui.menuApplications)

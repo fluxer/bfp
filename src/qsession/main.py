@@ -37,10 +37,6 @@ class LoginThread(QtCore.QThread):
         pw_dir = pwd.getpwnam(self.username).pw_dir
         pw_shell = pwd.getpwnam(self.username).pw_shell
 
-        try:
-            os.setsid()
-        except Exception as detail:
-            print(str(detail))
         os.setgid(pw_gid)
         os.setuid(pw_uid)
         os.putenv('HOME', pw_dir)
@@ -109,6 +105,11 @@ def reload_session():
 watcher1 = QtCore.QFileSystemWatcher()
 watcher1.addPath(config.settings.fileName())
 watcher1.fileChanged.connect(reload_session)
+
+try:
+    os.setsid()
+except Exception as detail:
+    print(str(detail))
 
 autologin = False
 for p in pwd.getpwall():

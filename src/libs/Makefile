@@ -8,8 +8,9 @@ all: clean
 	$(NUITKA) --module libpackage.py
 	$(NUITKA) --module libsystem.py
 	$(NUITKA) --module libdesktop.py
+	$(NUITKA) --module libxlib.py
 	$(STRIP) libarchive.so libmagic.so libmessage.so libmisc.so libpackage.so \
-		libsystem.so libdesktop.so
+		libsystem.so libdesktop.so libxlib.so
 
 check:
 	$(PYTHON) test.py
@@ -23,6 +24,7 @@ install:
 	$(INSTALL) -vm644 libpackage.so $(DESTDIR)$(SITEDIR)/libpackage.so
 	$(INSTALL) -vm644 libsystem.so $(DESTDIR)$(SITEDIR)/libsystem.so
 	$(INSTALL) -vm644 libdesktop.so $(DESTDIR)$(SITEDIR)/libdesktop.so
+	$(INSTALL) -vm644 libxlib.so $(DESTDIR)$(SITEDIR)/libxlib.so
 
 uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libarchive.so
@@ -32,6 +34,7 @@ uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libpackage.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libsystem.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libdesktop.so
+	$(RM) $(DESTDIR)$(SITEDIR)/libxlib.so
 
 clean:
 	$(RM) -r *.build/ *.so

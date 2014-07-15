@@ -3,6 +3,7 @@
  * Tools for the following:
    * purge repositories that are not in repositories.conf
  * Use Makefiles for build scripts?
+ * Lint - check if groups/users are removed
 
 ## QFILE ##
  * Implement bookmarks
