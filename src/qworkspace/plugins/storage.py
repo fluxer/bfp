@@ -8,11 +8,12 @@ mime = libworkspace.Mimes()
 
 class Widget(QtGui.QWidget):
     ''' Tab widget '''
-    def __init__(self, spath=os.curdir, parent=None):
-        super(Widget, self).__init__(parent)
+    def __init__(self, parent, spath=None):
+        super(Widget, self).__init__()
+        self.name = 'storage'
         self.secondLayout = QtGui.QHBoxLayout()
         self.homeButton = QtGui.QPushButton(general.get_icon('home'), '')
-        self.homeButton.clicked.connect(lambda: self.change_directory(str(QtCore.QDir.homePath())))
+        self.homeButton.clicked.connect(lambda: self.change_directory(spath))
         self.addressBar = QtGui.QLineEdit()
         self.secondLayout.addWidget(self.homeButton)
         self.secondLayout.addWidget(self.addressBar)
@@ -24,14 +25,20 @@ class Widget(QtGui.QWidget):
 
         self.model = QtGui.QFileSystemModel()
         self.model.setFilter(QtCore.QDir.AllEntries | QtCore.QDir.NoDot)
+        self.storageView.setSelectionMode(QtGui.QAbstractItemView.ExtendedSelection)
+        self.storageView.setSelectionBehavior(QtGui.QAbstractItemView.SelectItems)
         self.storageView.setModel(self.model)
         self.storageView.setViewMode(self.storageView.IconMode)
         self.storageView.doubleClicked.connect(self.change_directory)
         self.change_directory(spath)
 
     def change_directory(self, path):
+        print self.storageView.selectedIndexes()
         if not path:
             path = self.storageView.selectedIndexes()
+        if not path:
+            path = str(QtCore.QDir.homePath())
+
         if not isinstance(path, QtCore.QString) and not isinstance(path, str):
             path = self.model.filePath(path)
         if not os.path.isdir(path):
@@ -45,28 +52,34 @@ class Widget(QtGui.QWidget):
 
 
 class Plugin(object):
-    def __init__(self, parent=None):
+    ''' Plugin handler '''
+    def __init__(self, parent):
         self.parent = parent
         self.name = 'storage'
         self.version = '0.0.1'
         self.description = 'Storage management plugin'
         self.icon = general.get_icon('delete')
+        self.widget = None
 
-    def load(self, spath=os.curdir):
+        self.storageButton = QtGui.QPushButton(general.get_icon('file-manager'), '')
+        self.storageButton.clicked.connect(lambda: self.open(None))
+        self.applicationsLayout = self.parent.toolBox.widget(1).layout()
+        self.applicationsLayout.addWidget(self.storageButton)
+
+    def open(self, spath):
+        ''' Open path in new tab '''
         self.index = self.parent.tabWidget.currentIndex()+1
-        self.parent.tabWidget.insertTab(self.index, Widget(spath), 'Storage')
+        self.parent.tabWidget.insertTab(self.index, Widget(self.parent, spath), 'Storage')
         self.parent.tabWidget.setCurrentIndex(self.index)
         self.widget = self.parent.tabWidget.widget(self.index)
 
-        watcher1 = QtCore.QFileSystemWatcher()
-        watcher1.addPath(settings.settings.fileName())
-        watcher1.fileChanged.connect(self.reload_storage)
+    def close(self):
+        ''' Close tab '''
+        if self.widget:
+            self.widget.deleteLater()
+            self.parent.tabWidget.removeTab(self.index)
 
     def unload(self):
-        self.widget.deleteLater()
-        self.parent.tabWidget.removeTab(self.index)
-
-    def reload_storage(self):
-        reload(libworkspace)
-        self.settings = libworkspace.Settings()
-        self.mime = libworkspace.Mimes()
+        ''' Unload plugin '''
+        self.applicationsLayout.removeWidget(self.storageButton)
+        self.close()

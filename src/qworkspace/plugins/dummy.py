@@ -11,7 +11,10 @@ class Plugin(object):
         self.description = 'Dummy plugin'
         self.icon = general.get_icon('delete')
 
-    def load(self, spath=None):
+    def open(self, spath):
+        pass
+
+    def close(self):
         pass
 
     def unload(self):

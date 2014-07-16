@@ -10,8 +10,9 @@ actions = libdesktop.Actions(None, app)
 
 class Widget(QtGui.QWidget):
     ''' Tab widget '''
-    def __init__(self, spath=None, parent=None):
+    def __init__(self, parent, spath=None):
         super(Widget, self).__init__(parent)
+        self.name = 'editor'
         self.sedit = spath
         self.secondLayout = QtGui.QHBoxLayout()
         self.openButton = QtGui.QPushButton(general.get_icon('text-editor'), 'Open')
@@ -108,19 +109,28 @@ class Widget(QtGui.QWidget):
 
 
 class Plugin(object):
+    ''' Plugin handler '''
     def __init__(self, parent=None):
         self.parent = parent
         self.name = 'editor'
         self.version = '0.0.1'
         self.description = 'Text editor plugin'
         self.icon = general.get_icon('text-editor')
+        self.widget = None
 
-    def load(self, spath=None):
+    def open(self, spath):
+        ''' Open path in new tab '''
         self.index = self.parent.tabWidget.currentIndex()+1
-        self.parent.tabWidget.insertTab(self.index, Widget(spath), 'Editor')
+        self.parent.tabWidget.insertTab(self.index, Widget(self.parent, spath), 'Editor')
         self.parent.tabWidget.setCurrentIndex(self.index)
         self.widget = self.parent.tabWidget.widget(self.index)
 
+    def close(self):
+        ''' Close tab '''
+        if self.widget:
+            self.widget.deleteLater()
+            self.parent.tabWidget.removeTab(self.index)
+
     def unload(self):
-        self.widget.deleteLater()
-        self.parent.tabWidget.removeTab(self.index)
+        ''' Unload plugin '''
+        self.close()

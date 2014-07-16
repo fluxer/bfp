@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui
 import sys, os, gc, libworkspace, libmisc
 
 # prepare for lift-off
-app_version = "0.9.11 (601e0c2)"
+app_version = "0.9.12 (c0a87e1)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qworkspace_ui.Ui_MainWindow()
@@ -19,20 +19,26 @@ def setLook():
     general.set_style(app)
 setLook()
 
-
 try:
     for plugin in plugins.plugins_all:
         plugins.load(plugin)
 finally:
     pass
 
-# watch configs for changes
+def tab_close(index):
+    widget = ui.tabWidget.widget(index)
+    if ui.tabWidget.tabText(index) == 'Welcome':
+        widget.deleteLater()
+        ui.tabWidget.removeTab(index)
+        return
+    plugins.close(widget.name)
+ui.tabWidget.tabCloseRequested.connect(tab_close)
+
 def reload_browser():
     global settings
     reload(libworkspace)
     settings = libworkspace.Settings()
     setLook()
-
 watcher1 = QtCore.QFileSystemWatcher()
 watcher1.addPath(settings.settings.fileName())
 watcher1.fileChanged.connect(reload_browser)

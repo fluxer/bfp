@@ -27,9 +27,11 @@ class General(object):
 
     def get_icon(self, sicon):
         ''' Get icon '''
-        icon = QtGui.QIcon()
-        icon.setThemeName(self.settings.get('general/icontheme'))
-        return icon.fromTheme(sicon)
+        for spath in misc.list_files(sys.prefix + 'share/icons/' + self.settings.get('general/icontheme')):
+            if spath.startswith(sicon):
+                sicon = spath
+                break
+        return QtGui.QIcon(sicon)
 
     def execute_program(self, sprogram, sdetached=True, skill=False):
         ''' Execute program from PATH '''
@@ -94,7 +96,7 @@ class Plugins(object):
             if plugin.name == splugin:
                 return plugin
 
-    def load(self, splugin, **args):
+    def load(self, splugin):
         ''' Load plugin '''
         if not self.check_valid(splugin):
             message.critical('Plugin is not valid', splugin)
@@ -110,13 +112,59 @@ class Plugins(object):
 
             if not hasattr(plugin, 'name') or not hasattr(plugin, 'version') \
                 or not hasattr(plugin, 'description')  or not hasattr(plugin, 'icon') \
-                or not hasattr(plugin, 'load') or not hasattr(plugin, 'unload'):
+                or not hasattr(plugin, '__init__') or not hasattr(plugin, 'unload'):
                 message.critical('Plugin is not sane', detail)
                 raise(PluginException('Plugin is not sane', detail))
 
-            plugin.load(*args)
             self.plugins_loaded.append(plugin)
             message.debug('Loading of plugin was successfull', splugin)
+        except Exception as detail:
+            message.critical('Plugin error', detail)
+            raise(PluginException('Plugin error', detail))
+
+    def open(self, splugin, spath):
+        ''' Open plugin '''
+        if not self.check_valid(splugin):
+            message.critical('Plugin is not valid', splugin)
+            raise(PluginException('Plugin is not valid', splugin))
+        elif not self.check_loaded(splugin):
+            message.critical('Plugin not is already loaded', splugin)
+            raise(PluginException('Plugin not is already loaded', splugin))
+
+        try:
+            message.info('Opening plugin', splugin)
+            plugin = self.get_object(splugin)
+
+            if not hasattr(plugin, 'open'):
+                message.critical('Plugin does not support open', detail)
+                raise(PluginException('Plugin does not support open', detail))
+
+            plugin.open(spath)
+            message.debug('Opening of plugin was successfull', splugin)
+        except Exception as detail:
+            message.critical('Plugin error', detail)
+            raise(PluginException('Plugin error', detail))
+
+
+    def close(self, splugin):
+        ''' Close plugin '''
+        if not self.check_valid(splugin):
+            message.critical('Plugin is not valid', splugin)
+            raise(PluginException('Plugin is not valid', splugin))
+        elif not self.check_loaded(splugin):
+            message.critical('Plugin not is already loaded', splugin)
+            raise(PluginException('Plugin not is already loaded', splugin))
+
+        try:
+            message.info('Closing plugin', splugin)
+            plugin = self.get_object(splugin)
+
+            if not hasattr(plugin, 'close'):
+                message.critical('Plugin does not support close', detail)
+                raise(PluginException('Plugin does not support close', detail))
+
+            plugin.close()
+            message.debug('Closing of plugin was successfull', splugin)
         except Exception as detail:
             message.critical('Plugin error', detail)
             raise(PluginException('Plugin error', detail))
@@ -220,7 +268,7 @@ class Mimes(object):
         smime = misc.file_mime(spath)
         sprogram = self.get_program(smime)
         if sprogram:
-            Plugins(self.parent).load(sprogram)
+            Plugins(self.parent).open(sprogram, spath)
         else:
             raise(Exception('Unregistered mime', smime))
 
