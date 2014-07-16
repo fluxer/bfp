@@ -1,7 +1,7 @@
 #!/bin/python2
 
 from PyQt4 import QtCore, QtGui
-import sys, os, libmisc, libworkspace
+import os, libworkspace
 general = libworkspace.General()
 settings = libworkspace.Settings()
 mime = libworkspace.Mimes()

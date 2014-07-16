@@ -1,7 +1,7 @@
 #!/bin/pyhton2
 
 from PyQt4 import QtCore, QtGui
-import sys, os, libmisc, libdesktop, libworkspace, libhighlighter
+import os, libmisc, libdesktop, libworkspace, libhighlighter
 
 general = libworkspace.General()
 misc = libmisc.Misc()
@@ -68,8 +68,8 @@ class Widget(QtGui.QWidget):
             self.highlight_plain()
 
     def save_file(self):
-        if sedit:
-            misc.file_write(os.path.realpath(sedit), self.textEdit.toPlainText())
+        if self.sedit:
+            misc.file_write(os.path.realpath(self.sedit), self.textEdit.toPlainText())
 
     def save_as_file(self):
         sfile = QtGui.QFileDialog.getSaveFileName(None, "Save as", \
@@ -84,7 +84,7 @@ class Widget(QtGui.QWidget):
             self.textEdit.find(svar)
 
     def reload_file(self):
-        self.open_file(sedit)
+        self.open_file(self.sedit)
 
     def set_font(self):
         font, ok = QtGui.QFontDialog.getFont(QtGui.QFont(self.textEdit.font))
@@ -104,7 +104,7 @@ class Widget(QtGui.QWidget):
         self.highlighter = libhighlighter.HighlighterShell(self.textEdit.document())
 
     def highlight_c(self):
-        ui.highlighter = libhighlighter.HighlighterC(self.textEdit.document())
+        self.highlighter = libhighlighter.HighlighterC(self.textEdit.document())
 
 
 class Plugin(object):

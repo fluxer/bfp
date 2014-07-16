@@ -1,6 +1,6 @@
 #!/bin/python2
 
-from PyQt4 import QtCore, QtGui
+from PyQt4 import QtGui
 import os, libmisc, libworkspace
 misc = libmisc.Misc()
 general = libworkspace.General()
