@@ -10,7 +10,6 @@
 
 ## LIBDESKTOP ##
  * Signal to qsession to shutdown/reboot/suspend/logout?
- * Support program arguments (requires qsettings changes too)
 
 ## QMANAGER ##
  * Implement caches update?
@@ -24,7 +23,7 @@
  * Reduce code dublication where possible
  * Expect failures everywhere
 
-## ALL ##
+## ALL (on regular basis) ##
  * Run PyLint and do some kung-foo on the code style
  * Make use of sys.prefix and use less hardcode paths
- * Sanitize everything and prepare for v1.0.0
+ * Sanitize the code
