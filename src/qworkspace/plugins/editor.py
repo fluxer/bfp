@@ -121,7 +121,7 @@ class Plugin(object):
     def open(self, spath):
         ''' Open path in new tab '''
         self.index = self.parent.tabWidget.currentIndex()+1
-        self.parent.tabWidget.insertTab(self.index, Widget(self.parent, spath), 'Editor')
+        self.parent.tabWidget.insertTab(self.index, Widget(self.parent, spath), self.icon, 'Editor')
         self.parent.tabWidget.setCurrentIndex(self.index)
         self.widget = self.parent.tabWidget.widget(self.index)
 
