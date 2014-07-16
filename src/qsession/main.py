@@ -45,7 +45,7 @@ class LoginThread(QtCore.QThread):
             os.chdir(pw_dir)
         else:
             os.chdir('/')
-        general.execute_program(misc.whereis('xinit')  + ' ' + misc.whereis('startfluxbox') + ' -- :9', False)
+        general.execute_program(misc.whereis('qworkspace'), False)
 
 def login(autologin=None):
     username = str(ui.UserNameBox.currentText())

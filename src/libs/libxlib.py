@@ -7,7 +7,7 @@ import libmessage
 message = libmessage.Message()
 
 
-from Xlib import X, Xatom
+from Xlib import X, Xatom, Xutil
 from Xlib.error import BadWindow
 import Xlib.display
 from Xlib.XK import string_to_keysym, load_keysym_group
@@ -621,12 +621,24 @@ class WM(object):
 
     def deactivate_window(self, window):
         """ Deactivate window"""
-        self._send_event(window, self.get_atom("_NET_WM_STATE_HIDDEN"), [1, X.CurrentTime])
+        window.set_wm_state(state = Xlib.Xutil.IconicState, icon = 0) 
         self.dpy.flush()
+
+    def maximize_window(self, window):
+        self._send_event(window, self.get_atom("_NET_WM_CHANGE_STATE"),
+            [self.get_atom("_NET_WM_STATE_MAXIMIZED_VERT"),
+            self.get_atom("_NET_WM_STATE_MAXIMIZED_HORZ"),
+            0, 0, X.CurrentTime])
+        self.dpy.flush()
+
+    def unmaximize_window(self, window):
+        # FIXME: implement
+        pass
+
 
     def focus_window(self, window):
         """Activate window"""
-        self._send_event(window, self.get_atom("_NET_ACTIVE_WINDOW"), [2, X.CurrentTime])
+        self._send_event(window, self.get_atom("_NET_ACTIVE_WINDOW"), [Xutil.NormalState, X.CurrentTime])
         self.dpy.flush()
 
     def focus_and_raise(self, window):
@@ -796,7 +808,7 @@ class WM(object):
             return None
 
     def reserve_space(self, window, left=0, right=0, top=0, bottom=0):
-        self._send_event(window, self.get_atom('_NET_WM_STRUT_CARDINAL'),
+        self._send_event(window, self.get_atom('_NET_WM_STRUT'),
                                 [left, right, top, bottom])
         self.dpy.flush()
 

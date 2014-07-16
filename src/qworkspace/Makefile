@@ -1,19 +1,19 @@
 include ../../Makefile.inc
 
 all: bump clean
-	$(PYUIC) qnetwork.ui -o qnetwork_ui.py
-	$(NUITKA) --recurse-to=libdesktop --recurse-to=qnetwork_ui main.py
+	$(PYUIC) qworkspace.ui -o qworkspace_ui.py
+	$(NUITKA) --recurse-to=qworkspace_ui main.py
 	$(STRIP) main.exe
 
 install:
 	$(INSTALL) -vdm755 $(DESTDIR)$(BINDIR)
-	$(INSTALL) -vm755 main.exe $(DESTDIR)$(BINDIR)/qnetwork
+	$(INSTALL) -vm755 main.exe $(DESTDIR)$(BINDIR)/qworkspace
 
 uninstall:
-	$(RM) $(DESTDIR)$(BINDIR)/qnetwork
+	$(RM) $(DESTDIR)$(BINDIR)/qworkspace
 
 clean:
-	$(RM) -r *.build/ *.exe qnetwork_ui.py
+	$(RM) -r *.build/ *.exe qworkspace_ui.py
 	$(RM) $(shell find . -name '*.pyc' -o -name '*.pyo')
 
 bump:

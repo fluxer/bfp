@@ -1,6 +1,9 @@
 #!/bin/python2
 
 from PyQt4 import QtCore, QtGui
+import libworkspace
+general = libworkspace.General()
+
 
 class HighlighterShell(QtGui.QSyntaxHighlighter):
     def __init__(self, parent=None):
@@ -409,3 +412,17 @@ class HighlighterPython(QtGui.QSyntaxHighlighter):
                     self.multiLineCommentFormat)
             startIndex = self.commentStartExpression.indexIn(text,
                     startIndex + commentLength);
+
+
+class Plugin(object):
+    def __init__(self, parent=None):
+        self.name = 'libhighlighter'
+        self.version = '0.0.1'
+        self.description = 'Text highlightening plugin'
+        self.icon = general.get_icon('delete')
+
+    def load(self, spath=None):
+        pass
+
+    def unload(self):
+        pass
