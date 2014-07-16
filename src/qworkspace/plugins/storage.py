@@ -33,7 +33,6 @@ class Widget(QtGui.QWidget):
         self.change_directory(spath)
 
     def change_directory(self, path):
-        print self.storageView.selectedIndexes()
         if not path:
             path = self.storageView.selectedIndexes()
         if not path:
@@ -42,7 +41,7 @@ class Widget(QtGui.QWidget):
         if not isinstance(path, QtCore.QString) and not isinstance(path, str):
             path = self.model.filePath(path)
         if not os.path.isdir(path):
-            self.mime.open(str(path))
+            mime.open(str(path))
             return
         root = self.model.setRootPath(path)
         self.storageView.setRootIndex(root)

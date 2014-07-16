@@ -128,8 +128,8 @@ class Plugins(object):
             message.critical('Plugin is not valid', splugin)
             raise(PluginException('Plugin is not valid', splugin))
         elif not self.check_loaded(splugin):
-            message.critical('Plugin not is already loaded', splugin)
-            raise(PluginException('Plugin not is already loaded', splugin))
+            message.critical('Plugin is not loaded', splugin)
+            raise(PluginException('Plugin is not loaded', splugin))
 
         try:
             message.info('Opening plugin', splugin)
@@ -152,8 +152,8 @@ class Plugins(object):
             message.critical('Plugin is not valid', splugin)
             raise(PluginException('Plugin is not valid', splugin))
         elif not self.check_loaded(splugin):
-            message.critical('Plugin not is already loaded', splugin)
-            raise(PluginException('Plugin not is already loaded', splugin))
+            message.critical('Plugin is not loaded', splugin)
+            raise(PluginException('Plugin is not loaded', splugin))
 
         try:
             message.info('Closing plugin', splugin)
