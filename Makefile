@@ -9,7 +9,7 @@ all:
 	make -C src/spm-qt
 	make -C src/qresources clean
 	make -C src/qsession clean
-	make -C src/qworkpsace clean
+	make -C src/qworkspace clean
 
 check:
 	make -C src/libs check
@@ -26,7 +26,7 @@ install:
 	make -C src/spm-qt install
 	make -C src/qresources clean
 	make -C src/qsession clean
-	make -C src/qworkpsace clean
+	make -C src/qworkspace clean
 
 uninstall:
 	make -C doc uninstall
@@ -40,7 +40,7 @@ uninstall:
 	make -C src/spm-qt uninstall
 	make -C src/qresources clean
 	make -C src/qsession clean
-	make -C src/qworkpsace clean
+	make -C src/qworkspace clean
 
 clean:
 	make -C doc clean
@@ -51,7 +51,7 @@ clean:
 	make -C src/spm-qt clean
 	make -C src/qresources clean
 	make -C src/qsession clean
-	make -C src/qworkpsace clean
+	make -C src/qworkspace clean
 
 changelog:
 	git log > ChangeLog
