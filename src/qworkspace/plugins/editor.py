@@ -11,7 +11,7 @@ actions = libdesktop.Actions(None, app)
 class Widget(QtGui.QWidget):
     ''' Tab widget '''
     def __init__(self, parent, spath=None):
-        super(Widget, self).__init__(parent)
+        super(Widget, self).__init__()
         self.name = 'editor'
         self.sedit = spath
         self.secondLayout = QtGui.QHBoxLayout()
@@ -23,6 +23,7 @@ class Widget(QtGui.QWidget):
         self.textEdit = QtGui.QTextEdit()
         self.mainLayout.addLayout(self.secondLayout, 0, 0)
         self.mainLayout.addWidget(self.textEdit)
+        self.setLayout(self.mainLayout)
 
         self.openButton.clicked.connect(self.open_file)
         #self.actionNew.triggered.connect(new_file)
@@ -118,6 +119,11 @@ class Plugin(object):
         self.icon = general.get_icon('text-editor')
         self.widget = None
 
+        self.editorButton = QtGui.QPushButton(general.get_icon('text-editor'), '')
+        self.editorButton.clicked.connect(lambda: self.open(None))
+        self.applicationsLayout = self.parent.toolBox.widget(1).layout()
+        self.applicationsLayout.addWidget(self.editorButton)
+
     def open(self, spath):
         ''' Open path in new tab '''
         self.index = self.parent.tabWidget.currentIndex()+1
@@ -133,4 +139,5 @@ class Plugin(object):
 
     def unload(self):
         ''' Unload plugin '''
+        self.applicationsLayout.removeWidget(self.editorButton)
         self.close()
