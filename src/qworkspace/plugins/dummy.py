@@ -1,8 +1,15 @@
 #!/bin/pyhton2
 
 import libworkspace
-
 general = libworkspace.General()
+
+
+class Widget(QtGui.QWidget):
+    ''' Tab widget '''
+    def __init__(self, parent, spath=None):
+        super(Widget, self).__init__(parent)
+        self.name = 'editor'
+
 
 class Plugin(object):
     def __init__(self, parent=None):
