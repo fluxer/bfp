@@ -5,22 +5,20 @@
  * Use Makefiles for build scripts?
  * Lint - check if groups/users are removed
 
-## QFILE ##
- * Implement bookmarks
-
 ## LIBDESKTOP ##
  * Signal to qsession to shutdown/reboot/suspend/logout?
-
-## QMANAGER ##
- * Implement caches update?
+ * Merge with libworkspace
 
 ## SPM-QT ##
  * Fixup the logging
  * Implement menu bar and drop "About" tab in favour of about dialog
 
+## QWORKSPACE ##
+ * Use unique IDs for plugin objects to properly support multiple instances of plugins 
+ * Implement Recent, Applications amd Notifiaction API
+ * Implement caches update plugin?
+
 ## ALL QT ##
- * Use icons from theme
- * Reduce code dublication where possible
  * Expect failures everywhere
 
 ## ALL (on regular basis) ##
