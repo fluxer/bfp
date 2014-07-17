@@ -43,7 +43,7 @@ class Widget(QtGui.QWidget):
         self.name = 'www'
         self.parent = parent
         # set variables
-        self.tab_index = self.parent.tabWidget.currentIndex()
+        self.tab_index = self.parent.tabWidget.currentIndex()+1
         self.nam = manager
         self.icon_back = general.get_icon('back')
         self.icon_next = general.get_icon('forward')
@@ -152,27 +152,14 @@ class Widget(QtGui.QWidget):
         # for some reaons some web-pages do not set or have title
         if not title:
             title = 'Untitled'
-        MainWindow.setWindowTitle(title)
+        #MainWindow.setWindowTitle(title)
         self.parent.tabWidget.setTabText(self.tab_index, title[:20])
 
     def icon_changed(self, icon):
         self.parent.tabWidget.setTabIcon(self.tab_index, icon)
 
-
-    def _runjs_on_jquery(self, name, code):
-        if self.webView.page().mainFrame().evaluateJavaScript("result = %s; result.length" % code).isValid() < 1:
-            print("error on %s: %s" % (name, code))
-
-
-
-
-
-
     def link_clicked(self, url):
         ''' Update the URL if a link on a web page is clicked '''
-        jscode = "%s('%s').simulate('click')" % ('_jQuery', url)
-        self._runjs_on_jquery("click", jscode)
-
         history = self.webView.page().history()
         if history.canGoBack():
             self.backButton.setEnabled(True)
@@ -193,8 +180,8 @@ class Widget(QtGui.QWidget):
             self.icon_changed(self.webView.icon())
 
             # load JavaScript user script (http://jquery.com/)
-            if True: #ui.actionJavascript.isChecked():
-                self.webView.page().mainFrame().evaluateJavaScript(misc.file_read('jquery.js'))
+            #if ui.actionJavascript.isChecked():
+            #    self.webView.page().mainFrame().evaluateJavaScript(misc.file_read('jquery.js'))
         else:
             progressBar.show()
             progressBar.setValue(load)
@@ -269,13 +256,13 @@ class Widget(QtGui.QWidget):
 
     def action_find(self):
         ''' Find text in current page '''
-        svar, ok = QtGui.QInputDialog.getText(MainWindow, 'Find', '')
+        svar, ok = QtGui.QInputDialog.getText(None, 'Find', '')
         if ok and svar:
             self.webView.findText(svar, self.webView.page().HighlightAllOccurrences)
 
     def action_search(self):
         ''' Search the internet '''
-        svar, ok = QtGui.QInputDialog.getText(MainWindow, 'Search', '')
+        svar, ok = QtGui.QInputDialog.getText(None, 'Search', '')
         if ok and svar:
             self.webView.setUrl(QtCore.QUrl('duckduckgo.com/?q=' + svar))
 
@@ -297,10 +284,10 @@ class Widget(QtGui.QWidget):
     def download_finished(self, reply):
         surl = str(reply.url().toString())
         if reply.error():
-            QtGui.QMessageBox.critical(MainWindow, 'Critical', \
+            QtGui.QMessageBox.critical(None, 'Critical', \
                 'Dowload of <b>' + surl + '</b> failed.')
         else:
-            QtGui.QMessageBox.information(MainWindow, 'Info', \
+            QtGui.QMessageBox.information(None, 'Info', \
                 'Dowload of <b>' + surl + '</b> complete.')
 
     def bookmark(self, url):
