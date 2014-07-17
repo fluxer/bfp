@@ -31,7 +31,7 @@ class Plugin(object):
     def close(self):
         ''' Close tab '''
         if self.widget:
-            self.widget.layout().deleteLater()
+            self.widget.layout().deleteLayer()
             self.parent.tabWidget.removeTab(self.index)
 
     def unload(self):

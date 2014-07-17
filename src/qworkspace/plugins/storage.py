@@ -71,15 +71,15 @@ class Plugin(object):
 
     def open(self, spath):
         ''' Open path in new tab '''
+        self.widget = Widget(self.parent, spath)
         self.index = self.parent.tabWidget.currentIndex()+1
-        self.parent.tabWidget.insertTab(self.index, Widget(self.parent, spath), 'Storage')
+        self.parent.tabWidget.insertTab(self.index, self.widget, 'Storage')
         self.parent.tabWidget.setCurrentIndex(self.index)
-        self.widget = self.parent.tabWidget.widget(self.index)
 
     def close(self):
         ''' Close tab '''
         if self.widget:
-            self.widget.layout().deleteLater()
+            self.widget.destroy()
             self.parent.tabWidget.removeTab(self.index)
 
     def unload(self):
