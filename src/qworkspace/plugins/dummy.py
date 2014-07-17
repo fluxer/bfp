@@ -29,7 +29,6 @@ class Plugin(object):
         self.widget = Widget(self.parent, spath)
         self.parent.tabWidget.insertTab(self.index, self.widget, self.icon, 'Storage')
         self.parent.tabWidget.setCurrentIndex(self.index)
-        self.widget = self.parent.tabWidget.widget(self.index)
 
     def close(self):
         ''' Close tab '''
