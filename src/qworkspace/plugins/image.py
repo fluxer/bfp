@@ -5,6 +5,7 @@ import os, libmisc, libworkspace
 general = libworkspace.General()
 misc = libmisc.Misc()
 
+
 class Widget(QtGui.QWidget):
     ''' Tab widget '''
     def __init__(self, parent, spath=None):
@@ -102,11 +103,6 @@ class Widget(QtGui.QWidget):
         slist = self.images_list()
         if self.imageView.fileName in slist:
             self.set_image(slist[slist.index(self.imageView.fileName) + 1])
-
-#ui.actionOpen.triggered.connect(open_file)
-#self.reloadButton.triggered.connect(reload_file)
-#self.previousButton.triggered.connect(previous_image)
-#self.nextButton.triggered.connect(next_image)
 
 
 class Plugin(object):
