@@ -37,6 +37,8 @@ class Widget(QtGui.QWidget):
         #self.actionPython.triggered.connect(highlight_python)
         #self.actionShell.triggered.connect(highlight_shell)
         #self.actionC.triggered.connect(highlight_c)
+        if self.sedit:
+            self.open_file(self.sedit)
 
     def new_file(self):
         sfile = actions.new_file()

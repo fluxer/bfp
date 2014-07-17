@@ -46,7 +46,7 @@ class Widget(QtGui.QWidget):
             return
         root = self.model.setRootPath(path)
         self.storageView.setRootIndex(root)
-        os.chdir(path)
+        #os.chdir(path)
         self.addressBar.setText(str(path))
         #disable_actions()
 
