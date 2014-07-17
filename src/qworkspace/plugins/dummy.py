@@ -9,12 +9,14 @@ class Widget(QtGui.QWidget):
     ''' Tab widget '''
     def __init__(self, parent, spath=None):
         super(Widget, self).__init__(parent)
+        self.parent = parent
         self.name = 'dummy'
 
 
 class Plugin(object):
     ''' Plugin handler '''
-    def __init__(self, parent=None):
+    def __init__(self, parent):
+        self.parent = parent
         self.name = 'dummy'
         self.version = '0.0.1'
         self.description = 'Dummy plugin'

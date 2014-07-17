@@ -58,10 +58,10 @@ class Plugin(object):
         self.name = 'storage'
         self.version = '0.0.1'
         self.description = 'Storage management plugin'
-        self.icon = general.get_icon('delete')
+        self.icon = general.get_icon('file-manager')
         self.widget = None
 
-        self.storageButton = QtGui.QPushButton(general.get_icon('file-manager'), '')
+        self.storageButton = QtGui.QPushButton(self.icon, '')
         self.storageButton.clicked.connect(lambda: self.open(None))
         self.applicationsLayout = self.parent.toolBox.widget(1).layout()
         self.applicationsLayout.addWidget(self.storageButton)
@@ -73,7 +73,7 @@ class Plugin(object):
         ''' Open path in new tab '''
         self.widget = Widget(self.parent, spath)
         self.index = self.parent.tabWidget.currentIndex()+1
-        self.parent.tabWidget.insertTab(self.index, self.widget, 'Storage')
+        self.parent.tabWidget.insertTab(self.index, self.widget, self.icon, 'Storage')
         self.parent.tabWidget.setCurrentIndex(self.index)
 
     def close(self):

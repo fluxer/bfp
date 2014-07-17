@@ -46,7 +46,6 @@ class Widget(QtGui.QWidget):
             self.open_file(sfile)
 
     def open_file(self, sfile):
-        print sfile
         if not sfile:
             sfile = QtGui.QFileDialog.getOpenFileName(None, "Open", \
                 QtCore.QDir.currentPath(), "All Files (*);;Text Files (*.txt)")
@@ -120,7 +119,7 @@ class Plugin(object):
         self.icon = general.get_icon('text-editor')
         self.widget = None
 
-        self.editorButton = QtGui.QPushButton(general.get_icon('text-editor'), '')
+        self.editorButton = QtGui.QPushButton(self.icon, '')
         self.editorButton.clicked.connect(lambda: self.open(None))
         self.applicationsLayout = self.parent.toolBox.widget(1).layout()
         self.applicationsLayout.addWidget(self.editorButton)
