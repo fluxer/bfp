@@ -28,7 +28,7 @@ class General(object):
     def get_icon(self, sicon):
         ''' Get icon '''
         for spath in misc.list_files(sys.prefix + 'share/icons/' + self.settings.get('general/icontheme')):
-            if spath.startswith(sicon):
+            if misc.file_name(spath)  == sicon:
                 sicon = spath
                 break
         return QtGui.QIcon(sicon)
@@ -237,7 +237,7 @@ class Recent(object):
 
 class Mimes(object):
     ''' Simple MIME implementation '''
-    def __init__(self, parent=None):
+    def __init__(self, parent):
         self.settings = Settings('qmime')
         self.parent = parent
 

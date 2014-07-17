@@ -142,17 +142,3 @@ class Actions(object):
         ''' View properties of files/directories '''
         for svar in variant:
             general.execute_program('qproperties "' + svar + '"')
-
-
-class Plugin(object):
-    def __init__(self, parent=None):
-        self.name = 'libdesktop'
-        self.version = '0.0.1'
-        self.description = 'Desktop plugin'
-        self.icon = general.get_icon('delete')
-
-    def load(self, spath=None):
-        pass
-
-    def unload(self):
-        pass

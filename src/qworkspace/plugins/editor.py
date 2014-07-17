@@ -5,8 +5,8 @@ import os, libmisc, libdesktop, libworkspace, libhighlighter
 
 general = libworkspace.General()
 misc = libmisc.Misc()
-app = QtGui.QApplication([])
-actions = libdesktop.Actions(None, app)
+# app = QtGui.QApplication([])
+# actions = libdesktop.Actions(None, app)
 
 class Widget(QtGui.QWidget):
     ''' Tab widget '''
@@ -15,7 +15,7 @@ class Widget(QtGui.QWidget):
         self.name = 'editor'
         self.sedit = spath
         self.secondLayout = QtGui.QHBoxLayout()
-        self.openButton = QtGui.QPushButton(general.get_icon('text-editor'), 'Open')
+        self.openButton = QtGui.QPushButton(general.get_icon('text-editor'), '')
         self.openButton.clicked.connect(self.open_file)
         self.openButton.setShortcut(QtGui.QKeySequence('CTRL+O'))
         self.secondLayout.addWidget(self.openButton)
@@ -25,7 +25,6 @@ class Widget(QtGui.QWidget):
         self.mainLayout.addWidget(self.textEdit)
         self.setLayout(self.mainLayout)
 
-        self.openButton.clicked.connect(self.open_file)
         #self.actionNew.triggered.connect(new_file)
         #self.actionSave.triggered.connect(save_file)
         #self.actionSaveAs.triggered.connect(save_as_file)
@@ -38,7 +37,6 @@ class Widget(QtGui.QWidget):
         #self.actionPython.triggered.connect(highlight_python)
         #self.actionShell.triggered.connect(highlight_shell)
         #self.actionC.triggered.connect(highlight_c)
-        # self.open_file(spath)
 
     def new_file(self):
         sfile = actions.new_file()
@@ -46,6 +44,7 @@ class Widget(QtGui.QWidget):
             self.open_file(sfile)
 
     def open_file(self, sfile):
+        print sfile
         if not sfile:
             sfile = QtGui.QFileDialog.getOpenFileName(None, "Open", \
                 QtCore.QDir.currentPath(), "All Files (*);;Text Files (*.txt)")
@@ -80,7 +79,7 @@ class Widget(QtGui.QWidget):
             self.sedit = str(sfile)
             self.save_file()
 
-    def find(self):
+    def find_text(self):
         svar, ok = QtGui.QInputDialog.getText(None, 'Find', '')
         if ok and svar:
             self.textEdit.find(svar)

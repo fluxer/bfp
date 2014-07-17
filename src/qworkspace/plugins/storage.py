@@ -4,13 +4,14 @@ from PyQt4 import QtCore, QtGui
 import os, libworkspace
 general = libworkspace.General()
 settings = libworkspace.Settings()
-mime = libworkspace.Mimes()
 
 class Widget(QtGui.QWidget):
     ''' Tab widget '''
     def __init__(self, parent, spath=None):
         super(Widget, self).__init__()
         self.name = 'storage'
+        self.parent = parent
+        self.mime = libworkspace.Mimes(self.parent)
         self.secondLayout = QtGui.QHBoxLayout()
         self.homeButton = QtGui.QPushButton(general.get_icon('home'), '')
         self.homeButton.clicked.connect(lambda: self.change_directory(spath))
@@ -41,7 +42,7 @@ class Widget(QtGui.QWidget):
         if not isinstance(path, QtCore.QString) and not isinstance(path, str):
             path = self.model.filePath(path)
         if not os.path.isdir(path):
-            mime.open(str(path))
+            self.mime.open(str(path))
             return
         root = self.model.setRootPath(path)
         self.storageView.setRootIndex(root)
@@ -65,6 +66,9 @@ class Plugin(object):
         self.applicationsLayout = self.parent.toolBox.widget(1).layout()
         self.applicationsLayout.addWidget(self.storageButton)
 
+        # FIXME: register MIMEs
+        # FIXME: add item to toolbox for media storage
+
     def open(self, spath):
         ''' Open path in new tab '''
         self.index = self.parent.tabWidget.currentIndex()+1
@@ -75,7 +79,7 @@ class Plugin(object):
     def close(self):
         ''' Close tab '''
         if self.widget:
-            self.widget.deleteLater()
+            self.widget.layout().deleteLater()
             self.parent.tabWidget.removeTab(self.index)
 
     def unload(self):

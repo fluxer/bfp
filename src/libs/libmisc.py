@@ -62,6 +62,10 @@ class Misc(object):
         else:
             return re.findall(string, self.string_convert(string2))
 
+    def file_name(self, sfile):
+        ''' Get name of file without the extension '''
+        return os.path.splitext(os.path.basename(sfile))[0]
+
     def file_touch(self, sfile):
         ''' Touch a file, making sure it exists '''
         if not os.path.isfile(sfile):
