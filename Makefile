@@ -7,7 +7,6 @@ all:
 	make -C src/initfs
 	make -C src/spm
 	make -C src/spm-qt
-	make -C src/qresources clean
 	make -C src/qsession clean
 	make -C src/qworkspace clean
 
@@ -24,7 +23,6 @@ install:
 	make -C src/libs install
 	make -C src/spm install
 	make -C src/spm-qt install
-	make -C src/qresources clean
 	make -C src/qsession clean
 	make -C src/qworkspace clean
 
@@ -38,7 +36,6 @@ uninstall:
 	make -C src/libs uninstall
 	make -C src/spm uninstall
 	make -C src/spm-qt uninstall
-	make -C src/qresources clean
 	make -C src/qsession clean
 	make -C src/qworkspace clean
 
@@ -49,7 +46,6 @@ clean:
 	make -C src/initfs clean
 	make -C src/spm clean
 	make -C src/spm-qt clean
-	make -C src/qresources clean
 	make -C src/qsession clean
 	make -C src/qworkspace clean
 

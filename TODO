@@ -12,6 +12,7 @@
 ## SPM-QT ##
  * Fixup the logging
  * Implement menu bar and drop "About" tab in favour of about dialog
+ * Turn into workspace plugin
 
 ## QWORKSPACE ##
  * Use unique IDs for plugin objects to properly support multiple instances of plugins 
