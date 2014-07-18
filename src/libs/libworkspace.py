@@ -7,7 +7,8 @@ import libmisc, libmessage
 misc = libmisc.Misc()
 message = libmessage.Message()
 
-class PluginException(Exception): pass
+class PluginException(Exception):
+    pass
 
 
 class General(object):
@@ -28,7 +29,7 @@ class General(object):
     def get_icon(self, sicon):
         ''' Get icon '''
         for spath in misc.list_files(sys.prefix + 'share/icons/' + self.settings.get('general/icontheme')):
-            if misc.file_name(spath)  == sicon:
+            if misc.file_name(spath) == sicon:
                 sicon = spath
                 break
         return QtGui.QIcon(sicon)
@@ -50,6 +51,26 @@ class General(object):
             p.close()
 
 
+class Settings(object):
+    ''' Settings handler '''
+    def __init__(self, sfile='qworkspace'):
+        self.settings = QtCore.QSettings(sfile)
+
+    def get(self, svalue, sfallback=''):
+        ''' Get settings value '''
+        return str(self.settings.value(svalue, sfallback).toString())
+
+    def set(self, svariable, svalue):
+        ''' Write settings value '''
+        self.settings.setValue(svariable, svalue)
+        self.settings.sync()
+
+    def delete(self, svariable):
+        ''' Deelete settings '''
+        self.settings.remove(svariable)
+        self.settings.sync()
+
+
 class Plugins(object):
     ''' Plugins handler '''
     def __init__(self, parent):
@@ -62,10 +83,10 @@ class Plugins(object):
             if os.path.isdir(spath):
                 sys.path.insert(0, spath)
                 for splugin in os.listdir(spath):
-                    sbase = os.path.basename(os.path.splitext(splugin)[0])
-                    if not sbase.startswith('_') \
+                    sname = misc.file_name(splugin)
+                    if not sname in self.plugins_all and not sname.startswith('_') \
                         and (splugin.endswith('.py') or splugin.endswith('.so')):
-                        self.plugins_all.append(sbase)
+                        self.plugins_all.append(sname)
             else:
                 message.warning('Plugins path does not exist', spath)
 
@@ -107,8 +128,8 @@ class Plugins(object):
 
         try:
             message.info('Loading plugin', splugin)
-            sbase = os.path.basename(os.path.splitext(splugin)[0])
-            plugin = __import__(sbase).Plugin(self.parent)
+            sname = misc.file_name(splugin)
+            plugin = __import__(sname).Plugin(self.parent)
 
             if not hasattr(plugin, 'name') or not hasattr(plugin, 'version') \
                 or not hasattr(plugin, 'description')  or not hasattr(plugin, 'icon') \
@@ -122,8 +143,8 @@ class Plugins(object):
             message.critical('Plugin error', detail)
             raise(PluginException('Plugin error', detail))
 
-    def open(self, splugin, spath):
-        ''' Open plugin '''
+    def open_with(self, splugin, spath):
+        ''' Open path with plugin '''
         if not self.check_valid(splugin):
             message.critical('Plugin is not valid', splugin)
             raise(PluginException('Plugin is not valid', splugin))
@@ -145,6 +166,36 @@ class Plugins(object):
             message.critical('Plugin error', detail)
             raise(PluginException('Plugin error', detail))
 
+
+    def open(self, spath):
+        ''' Open path with associated plugin '''
+        smime = misc.file_mime(spath)
+        splugin = API(self.parent).mime_plugin(smime)
+
+        if not splugin:
+            # FIXME: automatically associate?
+            message.critical('No plugin associated with mime', smime)
+            raise(PluginException('No plugin associated with mime', smime))
+        elif not self.check_valid(splugin):
+            message.critical('Plugin is not valid', splugin)
+            raise(PluginException('Plugin is not valid', splugin))
+        elif not self.check_loaded(splugin):
+            message.critical('Plugin is not loaded', splugin)
+            raise(PluginException('Plugin is not loaded', splugin))
+
+        try:
+            message.info('Opening path with ' + splugin, spath)
+            plugin = self.get_object(splugin)
+
+            if not hasattr(plugin, 'open'):
+                message.critical('Plugin does not support open', detail)
+                raise(PluginException('Plugin does not support open', detail))
+
+            plugin.open(spath)
+            message.debug('Opening of plugin was successfull', splugin)
+        except Exception as detail:
+            message.critical('Plugin error', detail)
+            raise(PluginException('Plugin error', detail))
 
     def close(self, splugin):
         ''' Close plugin '''
@@ -188,94 +239,54 @@ class Plugins(object):
             raise(PluginException('Plugin error', detail))
 
 
-class Settings(object):
-    ''' Settings handler '''
-    def __init__(self, sfile='qworkspace'):
-        self.settings = QtCore.QSettings(sfile)
-
-    def get(self, svalue, sfallback=''):
-        ''' Get settings value '''
-        return str(self.settings.value(svalue, sfallback).toString())
-
-    def set(self, svariable, svalue):
-        ''' Write settings value '''
-        self.settings.setValue(svariable, svalue)
-        self.settings.sync()
-
-    def delete(self, svariable):
-        ''' Deelete settings '''
-        self.settings.remove(svariable)
-        self.settings.sync()
-
-
-class Recent(object):
-    ''' Recent files/directories handler '''
-    def __init__(self):
-        self.settings = Settings('qrecent')
-        # FIXME: load recent files into UI
-
-    def ui_add(self, spath):
-        ''' Add recent file/directory to UI '''
-        pass
-
-    def ui_remove(self, spath):
-        ''' Remove recent file/directory from UI '''
-        pass
-
-    def open(self, spath):
-        ''' Open file/dir with associated program '''
-        Mimes().open(spath)
-
-    def register(self, spath):
-        ''' Register file/directory with program '''
-        # FIXME: make registration with plugin possible
-        self.settings.set('recent', spath)
-
-    def unregister(self, spath):
-        ''' Unregister recent file/directory '''
-        self.settings.delete('recent/' + spath)
-
-class Mimes(object):
-    ''' Simple MIME implementation '''
+class API(object):
+    ''' Recent, Application, Notifiaction and MIME implementation '''
     def __init__(self, parent):
-        self.settings = Settings('qmime')
         self.parent = parent
+        self.mime_settings = Settings('qmime')
+        self.recent_settings = Settings('recent')
+        self.plugins = Plugins(self.parent)
 
-    def get_mime(self, sprogram):
+    def recent_restore(self):
+        message.info('Restoring recent files')
+        for recent in self.recent_settings.allKeys():
+            self.recent_register(recent.value())
+
+    def recent_register(self, spath):
+        ''' Register recent path '''
+        # FIXME: limit to 30?
+        button = QtGui.QPushButton(general.get_icon('documetn-open-recent'), misc.file_name(spath))
+        button.clicked.connect(lambda: self.plugins.open(spath))
+        self.parent.toolBox.widget(0).addWidget(button)
+        self.recent_settings.set('recent', spath)
+
+    def recent_unregister(self, spath):
+        ''' Unregister recent path '''
+        self.recent_settings.delete('recent/' + spath)
+
+    def mime_mime(self, splugin):
         ''' Get MIME associated with program '''
-        for mime in self.get_mimes():
-            if self.get_program(mime) == sprogram:
+        for mime in self.mime_mimes():
+            if self.mime_plugin(mime) == splugin:
                 return mime
-        return None
+        return
 
-    def get_program(self, smime):
-        ''' Get program associated with MIME '''
-        return self.settings.get(smime, '')
+    def mime_plugin(self, smime):
+        ''' Get plugin associated with MIME '''
+        return self.mime_settings.get(smime, '')
 
-    def get_mimes(self):
+    def mime_mimes(self):
         ''' Get all associated MIMEs '''
-        return sorted(self.settings.settings.allKeys())
+        return sorted(self.mime_settings.allKeys())
 
-    def get_programs(self):
+    def mime_plugins(self):
         ''' Get all programs '''
-        programs = []
-        for path in os.environ.get('PATH', '/bin:/usr/bin').split(':'):
-            programs.extend(misc.list_files(path))
-        return sorted(programs)
+        return sorted(Plugins().plugins_all)
 
-    def open(self, spath):
-        ''' Open file/dir with associated program '''
-        smime = misc.file_mime(spath)
-        sprogram = self.get_program(smime)
-        if sprogram:
-            Plugins(self.parent).open(sprogram, spath)
-        else:
-            raise(Exception('Unregistered mime', smime))
+    def mime_register(self, smime, splugin):
+        ''' Register MIME with plugin '''
+        self.mime_settings.set(smime, splugin)
 
-    def register(self, smime, sprogram):
-        ''' Register MIME with program '''
-        self.settings.set(smime, sprogram)
-
-    def unregister(self, smime):
+    def mime_unregister(self, smime):
         ''' Unregister MIME '''
-        self.settings.delete(smime)
+        self.mime_settings.delete(smime)

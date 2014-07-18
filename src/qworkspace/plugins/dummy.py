@@ -10,6 +10,7 @@ class Widget(QtGui.QWidget):
     def __init__(self, parent, spath=None):
         super(Widget, self).__init__(parent)
         self.parent = parent
+        self.spath = spath
         self.name = 'dummy'
 
 
@@ -27,7 +28,7 @@ class Plugin(object):
         ''' Open path in new tab '''
         self.index = self.parent.tabWidget.currentIndex()+1
         self.widget = Widget(self.parent, spath)
-        self.parent.tabWidget.insertTab(self.index, self.widget, self.icon, 'Storage')
+        self.parent.tabWidget.insertTab(self.index, self.widget, self.icon, 'Dummy')
         self.parent.tabWidget.setCurrentIndex(self.index)
 
     def close(self):

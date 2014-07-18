@@ -1,7 +1,7 @@
 #!/bin/pyhton2
 
 from PyQt4 import QtCore, QtGui
-import os, libmisc, libdesktop, libworkspace, libhighlighter
+import os, libmisc, libworkspace, libhighlighter
 
 general = libworkspace.General()
 misc = libmisc.Misc()
@@ -12,13 +12,18 @@ class Widget(QtGui.QWidget):
     ''' Tab widget '''
     def __init__(self, parent, spath=None):
         super(Widget, self).__init__()
+        self.parent = parent
         self.name = 'editor'
         self.sedit = spath
         self.secondLayout = QtGui.QHBoxLayout()
-        self.openButton = QtGui.QPushButton(general.get_icon('text-editor'), '')
+        self.openButton = QtGui.QPushButton(general.get_icon('fileopen'), '')
         self.openButton.clicked.connect(self.open_file)
         self.openButton.setShortcut(QtGui.QKeySequence('CTRL+O'))
+        self.saveButton = QtGui.QPushButton(general.get_icon('filesave'), '')
+        self.saveButton.clicked.connect(self.save_file)
+        self.saveButton.setShortcut(QtGui.QKeySequence('CTRL+S'))
         self.secondLayout.addWidget(self.openButton)
+        self.secondLayout.addWidget(self.saveButton)
         self.mainLayout = QtGui.QGridLayout()
         self.textEdit = QtGui.QTextEdit()
         self.mainLayout.addLayout(self.secondLayout, 0, 0)
@@ -47,7 +52,7 @@ class Widget(QtGui.QWidget):
 
     def open_file(self, sfile):
         if not sfile:
-            sfile = QtGui.QFileDialog.getOpenFileName(None, "Open", \
+            sfile = QtGui.QFileDialog.getOpenFileName(self, "Open", \
                 QtCore.QDir.currentPath(), "All Files (*);;Text Files (*.txt)")
             if sfile:
                 sfile = str(sfile)
@@ -74,14 +79,14 @@ class Widget(QtGui.QWidget):
             misc.file_write(os.path.realpath(self.sedit), self.textEdit.toPlainText())
 
     def save_as_file(self):
-        sfile = QtGui.QFileDialog.getSaveFileName(None, "Save as", \
+        sfile = QtGui.QFileDialog.getSaveFileName(self, "Save as", \
             QtCore.QDir.currentPath(), "All Files (*);;Text Files (*.txt)")
         if sfile:
             self.sedit = str(sfile)
             self.save_file()
 
     def find_text(self):
-        svar, ok = QtGui.QInputDialog.getText(None, 'Find', '')
+        svar, ok = QtGui.QInputDialog.getText(self, 'Find', '')
         if ok and svar:
             self.textEdit.find(svar)
 

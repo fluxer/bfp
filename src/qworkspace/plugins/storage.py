@@ -9,9 +9,11 @@ class Widget(QtGui.QWidget):
     ''' Tab widget '''
     def __init__(self, parent, spath=None):
         super(Widget, self).__init__()
-        self.name = 'storage'
         self.parent = parent
-        self.mime = libworkspace.Mimes(self.parent)
+        self.spath = spath
+        self.name = 'storage'
+
+        self.api = libworkspace.API(self.parent)
         self.secondLayout = QtGui.QHBoxLayout()
         self.homeButton = QtGui.QPushButton(general.get_icon('home'), '')
         self.homeButton.clicked.connect(lambda: self.change_directory(spath))
@@ -31,7 +33,7 @@ class Widget(QtGui.QWidget):
         self.storageView.setModel(self.model)
         self.storageView.setViewMode(self.storageView.IconMode)
         self.storageView.doubleClicked.connect(self.change_directory)
-        self.change_directory(spath)
+        self.change_directory(self.spath)
 
     def change_directory(self, path):
         if not path:

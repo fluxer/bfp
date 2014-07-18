@@ -28,7 +28,7 @@ uninstall:
 	$(RM) -r $(DESTDIR)$(ETCDIR)/qworkspace
 
 clean:
-	$(RM) -r *.build/ *.exe qworkspace_ui.py
+	$(RM) -r *.build/ *.so *.exe qworkspace_ui.py
 	$(RM) $(shell find . -name '*.pyc' -o -name '*.pyo')
 
 bump:

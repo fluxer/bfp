@@ -12,8 +12,8 @@ class Widget(QtGui.QWidget):
     def __init__(self, parent, spath=None):
         super(Widget, self).__init__()
         self.parent = parent
+        self.spath = spath # FIXME: use for taking screenshot immidiatly
         self.name = 'screenshot'
-
         self.delayBox = QtGui.QSpinBox()
         self.takeButton = QtGui.QPushButton(general.get_icon('gnome-mime-image'), '')
         self.takeButton.clicked.connect(self.take_screenshot)
@@ -23,7 +23,7 @@ class Widget(QtGui.QWidget):
         self.setLayout(self.mainLayout)
 
     def get_filename(self):
-        sfile = QtGui.QFileDialog.getSaveFileName(None, 'Save', \
+        sfile = QtGui.QFileDialog.getSaveFileName(self, 'Save', \
             'screenshot.png', 'Image Files (*.png *.jpg *.jpeg *.svg);;All Files (*)')
         if sfile:
             return str(sfile)
@@ -84,6 +84,6 @@ class Plugin(object):
 
     def unload(self):
         ''' Unload plugin '''
-        self.applicationsLayout.removeWidget(self.screenshotButton) 
+        self.applicationsLayout.removeWidget(self.screenshotButton)
         self.close()
 

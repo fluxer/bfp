@@ -12,7 +12,6 @@ class Widget(QtGui.QWidget):
         super(Widget, self).__init__()
         self.parent = parent
         self.name = 'image'
-
         self.imageView = QtGui.QLabel()
         self.imageView.setText('')
         self.imageView.setScaledContents(True)
@@ -25,7 +24,7 @@ class Widget(QtGui.QWidget):
         self.reloadButton = QtGui.QPushButton(general.get_icon('reload'), '')
         self.reloadButton.clicked.connect(self.reload_file)
         self.reloadButton.setEnabled(False)
-        self.openButton = QtGui.QPushButton(general.get_icon('openfile'), '')
+        self.openButton = QtGui.QPushButton(general.get_icon('fileopen'), '')
         self.openButton.clicked.connect(self.open_file)
         self.secondLayout = QtGui.QHBoxLayout()
         self.secondLayout.addWidget(self.previousButton)
@@ -65,7 +64,7 @@ class Widget(QtGui.QWidget):
 
     def open_file(self, sfile):
         if not sfile or not os.path.isfile(sfile):
-            sfile = QtGui.QFileDialog.getOpenFileName(None, 'Open', \
+            sfile = QtGui.QFileDialog.getOpenFileName(self, 'Open', \
                 QtCore.QDir.currentPath(), 'Image Files (*.png *.jpg *.jpeg *.svg);;All Files (*)')
             if not sfile:
                 return
@@ -126,7 +125,7 @@ class Plugin(object):
         self.widget = Widget(self.parent, spath)
         self.parent.tabWidget.insertTab(self.index, self.widget, self.icon, 'Image')
         self.parent.tabWidget.setCurrentIndex(self.index)
-        
+
     def close(self):
         ''' Close tab '''
         if self.widget:

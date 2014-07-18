@@ -40,9 +40,8 @@ class Widget(QtGui.QWidget):
     def __init__(self, parent, url=''):
         ''' Tab initialiser '''
         super(Widget, self).__init__()
-        self.name = 'www'
         self.parent = parent
-        # set variables
+        self.name = 'www'
         self.tab_index = self.parent.tabWidget.currentIndex()+1
         self.nam = manager
         self.icon_back = general.get_icon('back')
@@ -253,17 +252,17 @@ class Widget(QtGui.QWidget):
 
     def page_ssl_errors(self, reply, errors):
         reply.ignoreSslErrors()
-        self.parent.statusBar.showMessage('SSL certificate error ignored: ' + str(reply.url().toString()))
+        self.parent.statusBar.showMessage('SSL errors ignored: ' + str(reply.url().toString()) + ', ' + str(errors))
 
     def action_find(self):
         ''' Find text in current page '''
-        svar, ok = QtGui.QInputDialog.getText(None, 'Find', '')
+        svar, ok = QtGui.QInputDialog.getText(self, 'Find', '')
         if ok and svar:
             self.webView.findText(svar, self.webView.page().HighlightAllOccurrences)
 
     def action_search(self):
         ''' Search the internet '''
-        svar, ok = QtGui.QInputDialog.getText(None, 'Search', '')
+        svar, ok = QtGui.QInputDialog.getText(self, 'Search', '')
         if ok and svar:
             self.webView.setUrl(QtCore.QUrl('duckduckgo.com/?q=' + svar))
 
@@ -273,7 +272,7 @@ class Widget(QtGui.QWidget):
 
     def unsupported(self, reply):
         ''' Download a unsupported URL '''
-        # sfile = str(QtGui.QFileDialog.getSaveFileName(MainWindow, 'Save', os.path.basename(surl)))
+        # sfile = str(QtGui.QFileDialog.getSaveFileName(self, 'Save', os.path.basename(surl)))
         reply.readyRead.connect(lambda reply=reply: self.download_start(reply))
         reply.finished.connect(lambda reply=reply: self.download_finished(reply))
 
@@ -285,10 +284,10 @@ class Widget(QtGui.QWidget):
     def download_finished(self, reply):
         surl = str(reply.url().toString())
         if reply.error():
-            QtGui.QMessageBox.critical(None, 'Critical', \
+            QtGui.QMessageBox.critical(self, 'Critical', \
                 'Dowload of <b>' + surl + '</b> failed.')
         else:
-            QtGui.QMessageBox.information(None, 'Info', \
+            QtGui.QMessageBox.information(self, 'Info', \
                 'Dowload of <b>' + surl + '</b> complete.')
 
     def bookmark(self, url):

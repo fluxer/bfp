@@ -10,13 +10,14 @@ class Widget(QtGui.QWidget):
     def __init__(self, parent, spath=None):
         super(Widget, self).__init__()
         self.parent = parent
+        self.spath = spath
         self.name = 'embed'
         self.mainLayout = QtGui.QGridLayout()
         self.container = QtGui.QX11EmbedContainer()
         self.mainLayout.addWidget(self.container)
         self.setLayout(self.mainLayout)
-        self.process = QtCore.QProcess()
-        self.process.start('xterm')
+        self.process = QtCore.QProcess(self.container)
+        self.process.start(self.spath)
 
 class Plugin(object):
     ''' Plugin handler '''
@@ -29,7 +30,7 @@ class Plugin(object):
         self.widget = None
 
         self.embedButton = QtGui.QPushButton(self.icon, '')
-        self.embedButton.clicked.connect(lambda: self.open(None))
+        self.embedButton.clicked.connect(lambda: self.open('xterm'))
         self.applicationsLayout = self.parent.toolBox.widget(1).layout()
         self.applicationsLayout.addWidget(self.embedButton)
 

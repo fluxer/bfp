@@ -2,10 +2,9 @@
 
 import qworkspace_ui
 from PyQt4 import QtCore, QtGui
-import sys, os, gc, libworkspace, libmisc
+import sys, gc, libworkspace, libmisc
 
-# prepare for lift-off
-app_version = "0.9.13 (bd19e21)"
+app_version = "0.9.13 (8e03db6)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qworkspace_ui.Ui_MainWindow()
@@ -19,11 +18,8 @@ def setLook():
     general.set_style(app)
 setLook()
 
-try:
-    for plugin in plugins.plugins_all:
-        plugins.load(plugin)
-finally:
-    pass
+for plugin in plugins.plugins_all:
+    plugins.load(plugin)
 
 def tab_close(index):
     widget = ui.tabWidget.widget(index)
@@ -47,10 +43,7 @@ watcher1.fileChanged.connect(reload_browser)
 MainWindow.showMaximized()
 r = app.exec_()
 
-try:
-    for plugin in reversed(plugins.plugins_all):
-        plugins.unload(plugin)
-finally:
-    pass
+for plugin in reversed(plugins.plugins_all):
+    plugins.unload(plugin)
 
 sys.exit(r)
