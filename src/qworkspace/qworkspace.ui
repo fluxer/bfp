@@ -20,7 +20,7 @@
    <string>QWorkspace</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../qresources/libqresources.qrc">
+   <iconset>
     <normaloff>:/share/qresources/resources/desktop.svg</normaloff>:/share/qresources/resources/desktop.svg</iconset>
   </property>
   <widget class="QWidget" name="centralwidget">
@@ -33,6 +33,18 @@
         <verstretch>0</verstretch>
        </sizepolicy>
       </property>
+      <property name="minimumSize">
+       <size>
+        <width>100</width>
+        <height>0</height>
+       </size>
+      </property>
+      <property name="maximumSize">
+       <size>
+        <width>200</width>
+        <height>16777215</height>
+       </size>
+      </property>
       <property name="currentIndex">
        <number>0</number>
       </property>
@@ -41,14 +53,10 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>90</width>
-         <height>266</height>
+         <width>100</width>
+         <height>286</height>
         </rect>
        </property>
-       <attribute name="icon">
-        <iconset resource="../qresources/libqresources.qrc">
-         <normaloff>:/share/qresources/resources/document-open-recent.svg</normaloff>:/share/qresources/resources/document-open-recent.svg</iconset>
-       </attribute>
        <attribute name="label">
         <string>Recent</string>
        </attribute>
@@ -73,14 +81,10 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>96</width>
-         <height>26</height>
+         <width>90</width>
+         <height>286</height>
         </rect>
        </property>
-       <attribute name="icon">
-        <iconset resource="../qresources/libqresources.qrc">
-         <normaloff>:/share/qresources/resources/system-run.svg</normaloff>:/share/qresources/resources/system-run.svg</iconset>
-       </attribute>
        <attribute name="label">
         <string>Applications</string>
        </attribute>
@@ -105,14 +109,10 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>96</width>
-         <height>26</height>
+         <width>90</width>
+         <height>286</height>
         </rect>
        </property>
-       <attribute name="icon">
-        <iconset resource="../qresources/libqresources.qrc">
-         <normaloff>:/share/qresources/resources/stock_view-details.svg</normaloff>:/share/qresources/resources/stock_view-details.svg</iconset>
-       </attribute>
        <attribute name="label">
         <string>Notification</string>
        </attribute>
@@ -137,14 +137,10 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>96</width>
-         <height>26</height>
+         <width>90</width>
+         <height>286</height>
         </rect>
        </property>
-       <attribute name="icon">
-        <iconset resource="../qresources/libqresources.qrc">
-         <normaloff>:/share/qresources/resources/redhat-tools.svg</normaloff>:/share/qresources/resources/redhat-tools.svg</iconset>
-       </attribute>
        <attribute name="label">
         <string>Settings</string>
        </attribute>
@@ -206,8 +202,6 @@
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
- <resources>
-  <include location="../qresources/libqresources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
