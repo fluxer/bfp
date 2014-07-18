@@ -13,7 +13,7 @@ class Widget(QtGui.QWidget):
         self.spath = spath
         self.name = 'embed'
         self.mainLayout = QtGui.QGridLayout()
-        self.container = QtGui.QX11EmbedContainer()
+        self.container = QtGui.QX11EmbedContainer(self)
         self.mainLayout.addWidget(self.container)
         self.setLayout(self.mainLayout)
         self.process = QtCore.QProcess(self.container)

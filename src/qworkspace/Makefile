@@ -6,11 +6,12 @@ all: bump clean
 	$(NUITKA) --module plugins/editor.py
 	$(NUITKA) --module plugins/embed.py
 	$(NUITKA) --module plugins/image.py
+	$(NUITKA) --module plugins/quit.py
 	$(NUITKA) --module plugins/screenshot.py
 	$(NUITKA) --module plugins/storage.py
 	$(NUITKA) --module plugins/www.py
-	$(STRIP) main.exe editor.so embed.so image.so screenshot.so storage.so \
-		 www.so
+	$(STRIP) main.exe editor.so embed.so image.so quit.so \
+		screenshot.so storage.so www.so
 
 install:
 	$(INSTALL) -vdm755 $(DESTDIR)$(BINDIR)
@@ -19,6 +20,7 @@ install:
 	$(INSTALL) -vm644 editor.so $(DESTDIR)$(ETCDIR)/qworkspace/plugins
 	$(INSTALL) -vm644 embed.so $(DESTDIR)$(ETCDIR)/qworkspace/plugins
 	$(INSTALL) -vm644 image.so $(DESTDIR)$(ETCDIR)/qworkspace/plugins
+	$(INSTALL) -vm644 quit.so $(DESTDIR)$(ETCDIR)/qworkspace/plugins
 	$(INSTALL) -vm644 screenshot.so $(DESTDIR)$(ETCDIR)/qworkspace/plugins
 	$(INSTALL) -vm644 storage.so $(DESTDIR)$(ETCDIR)/qworkspace/plugins
 	$(INSTALL) -vm644 www.so $(DESTDIR)$(ETCDIR)/qworkspace/plugins
