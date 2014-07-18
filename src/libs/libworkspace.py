@@ -11,6 +11,26 @@ class PluginException(Exception):
     pass
 
 
+class Settings(object):
+    ''' Settings handler '''
+    def __init__(self, sfile='qworkspace'):
+        self.settings = QtCore.QSettings(sfile)
+
+    def get(self, svalue, sfallback=''):
+        ''' Get settings value '''
+        return str(self.settings.value(svalue, sfallback).toString())
+
+    def set(self, svariable, svalue):
+        ''' Write settings value '''
+        self.settings.setValue(svariable, svalue)
+        self.settings.sync()
+
+    def delete(self, svariable):
+        ''' Deelete settings '''
+        self.settings.remove(svariable)
+        self.settings.sync()
+
+
 class General(object):
     ''' Common methods '''
     def __init__(self):
@@ -28,7 +48,9 @@ class General(object):
 
     def get_icon(self, sicon):
         ''' Get icon '''
-        for spath in misc.list_files(sys.prefix + 'share/icons/' + self.settings.get('general/icontheme')):
+        lpaths = misc.list_files(sys.prefix + 'share/icons/' + self.settings.get('general/icontheme'))
+        lpaths.extend(misc.list_files(sys.prefix + 'share/pixmaps'))
+        for spath in lpaths:
             if misc.file_name(spath) == sicon:
                 sicon = spath
                 break
@@ -49,27 +71,7 @@ class General(object):
             if skill:
                 p.terminate()
             p.close()
-
-
-class Settings(object):
-    ''' Settings handler '''
-    def __init__(self, sfile='qworkspace'):
-        self.settings = QtCore.QSettings(sfile)
-
-    def get(self, svalue, sfallback=''):
-        ''' Get settings value '''
-        return str(self.settings.value(svalue, sfallback).toString())
-
-    def set(self, svariable, svalue):
-        ''' Write settings value '''
-        self.settings.setValue(svariable, svalue)
-        self.settings.sync()
-
-    def delete(self, svariable):
-        ''' Deelete settings '''
-        self.settings.remove(svariable)
-        self.settings.sync()
-
+general = General()
 
 class Plugins(object):
     ''' Plugins handler '''
@@ -281,7 +283,7 @@ class API(object):
 
     def mime_plugins(self):
         ''' Get all programs '''
-        return sorted(Plugins().plugins_all)
+        return sorted(Plugins(None).plugins_all)
 
     def mime_register(self, smime, splugin):
         ''' Register MIME with plugin '''

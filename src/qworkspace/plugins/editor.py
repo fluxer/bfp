@@ -22,8 +22,14 @@ class Widget(QtGui.QWidget):
         self.saveButton = QtGui.QPushButton(general.get_icon('filesave'), '')
         self.saveButton.clicked.connect(self.save_file)
         self.saveButton.setShortcut(QtGui.QKeySequence('CTRL+S'))
+        self.saveButton.setEnabled(False)
+        self.reloadButton = QtGui.QPushButton(general.get_icon('reload'), '')
+        self.reloadButton.clicked.connect(self.reload_file)
+        self.reloadButton.setShortcut(QtGui.QKeySequence('CTRL+R'))
+        self.reloadButton.setEnabled(False)
         self.secondLayout.addWidget(self.openButton)
         self.secondLayout.addWidget(self.saveButton)
+        self.secondLayout.addWidget(self.reloadButton)
         self.mainLayout = QtGui.QGridLayout()
         self.textEdit = QtGui.QTextEdit()
         self.mainLayout.addLayout(self.secondLayout, 0, 0)
@@ -31,9 +37,7 @@ class Widget(QtGui.QWidget):
         self.setLayout(self.mainLayout)
 
         #self.actionNew.triggered.connect(new_file)
-        #self.actionSave.triggered.connect(save_file)
         #self.actionSaveAs.triggered.connect(save_as_file)
-        #self.actionReload.triggered.connect(reload_file)
         #self.actionFind.triggered.connect(find)
         #self.actionUndo.triggered.connect(ui.textEdit.undo)
         #self.actionRedo.triggered.connect(ui.textEdit.redo)
@@ -63,7 +67,8 @@ class Widget(QtGui.QWidget):
         elif os.path.isfile(sfile):
             self.textEdit.setText(misc.file_read(sfile))
         self.sedit = sfile
-        # self.actionReload.setEnabled(True)
+        self.reloadButton.setEnabled(True)
+        self.saveButton.setEnabled(True)
         smime = misc.file_mime(sfile)
         if smime == 'text/x-python':
             self.highlight_python()
