@@ -44,7 +44,7 @@ class Widget(QtGui.QWidget):
         if not isinstance(path, QtCore.QString) and not isinstance(path, str):
             path = self.model.filePath(path)
         if not os.path.isdir(path):
-            self.mime.open(str(path))
+            libworkspace.Plugins(self.parent).open(str(path))
             return
         root = self.model.setRootPath(path)
         self.storageView.setRootIndex(root)

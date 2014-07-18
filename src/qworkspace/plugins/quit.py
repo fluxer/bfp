@@ -21,4 +21,4 @@ class Plugin(object):
 
     def unload(self):
         ''' Unload plugin '''
-        self.parent.toolBox.removeItem(4)
+        self.parent.toolBox.widget(1).removeWidget(self.quitButton)
