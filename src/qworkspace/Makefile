@@ -9,7 +9,8 @@ all: bump clean
 	$(NUITKA) --module plugins/screenshot.py
 	$(NUITKA) --module plugins/storage.py
 	$(NUITKA) --module plugins/www.py
-	$(STRIP) main.exe editor.so embed.so image.so screenshot.so storage.so \		www.so
+	$(STRIP) main.exe editor.so embed.so image.so screenshot.so storage.so \
+		 www.so
 
 install:
 	$(INSTALL) -vdm755 $(DESTDIR)$(BINDIR)

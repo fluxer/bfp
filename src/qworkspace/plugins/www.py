@@ -49,6 +49,7 @@ class Widget(QtGui.QWidget):
         self.icon_next = general.get_icon('forward')
         self.icon_reload = general.get_icon('reload')
         self.icon_stop = general.get_icon('exit')
+        self.icon_bookmark = general.get_icon('user-bookmarks')
 
         # add widgets
         mainLayout = QtGui.QGridLayout()
@@ -291,7 +292,7 @@ class Widget(QtGui.QWidget):
                 'Dowload of <b>' + surl + '</b> complete.')
 
     def bookmark(self, url):
-        button = QtGui.QPushButton(url)
+        button = QtGui.QPushButton(self.icon_bookmark, url)
         button.clicked.connect(lambda: self.webView.setUrl(QtCore.QUrl(url)))
         return button
 
