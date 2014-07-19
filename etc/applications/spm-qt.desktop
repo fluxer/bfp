@@ -1,9 +1,0 @@
-#!/usr/bin/env xdg-open
-[Desktop Entry]
-Name=SPM Qt GUI
-Exec=spm-qt
-Icon=system-software-update
-Terminal=false
-StartupNotify=true
-Type=Application
-Categories=Qt;System;PackageManager;

@@ -1,9 +1,0 @@
-#!/usr/bin/env xdg-open
-[Desktop Entry]
-Name=QFIle
-Exec=qfile
-Icon=file-manager
-Terminal=false
-StartupNotify=true
-Type=Application
-Categories=Qt;System;FileManager;

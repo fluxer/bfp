@@ -1,7 +1,0 @@
-[Desktop Entry]
-Name=Dummy
-Icon=preferences-system-power-manager
-Exec=dummy
-Terminal=false
-Type=Application
-StartupNotify=true

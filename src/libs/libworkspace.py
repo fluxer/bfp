@@ -39,7 +39,7 @@ class General(object):
     def set_style(self, app):
         ''' Style and icon application setup '''
         sstyle = self.settings.get('general/stylesheet', 'qdarkstyle')
-        ssheet = '/etc/qdesktop/styles/' + sstyle + '/style.qss'
+        ssheet = '/etc/qworkspace/styles/' + sstyle + '/style.qss'
         if sstyle and os.path.isfile(ssheet):
             app.setStyleSheet(misc.file_read(ssheet))
         else:
