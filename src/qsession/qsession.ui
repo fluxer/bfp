@@ -19,10 +19,6 @@
   <property name="windowTitle">
    <string>QSession</string>
   </property>
-  <property name="windowIcon">
-   <iconset resource="../qresources/libqresources.qrc">
-    <normaloff>:/share/qresources/resources/preferences-desktop-splash.svg</normaloff>:/share/qresources/resources/preferences-desktop-splash.svg</iconset>
-  </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QFrame" name="frame">
     <property name="geometry">
@@ -86,10 +82,6 @@
      <property name="text">
       <string>Login</string>
      </property>
-     <property name="icon">
-      <iconset resource="../qresources/libqresources.qrc">
-       <normaloff>:/share/qresources/resources/edit-redo.svg</normaloff>:/share/qresources/resources/edit-redo.svg</iconset>
-     </property>
     </widget>
     <widget class="QComboBox" name="UserNameBox">
      <property name="geometry">
@@ -125,7 +117,7 @@
      <x>0</x>
      <y>0</y>
      <width>400</width>
-     <height>20</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuActions">
@@ -138,26 +130,16 @@
    <addaction name="menuActions"/>
   </widget>
   <action name="actionShutdown">
-   <property name="icon">
-    <iconset resource="../qresources/libqresources.qrc">
-     <normaloff>:/share/qresources/resources/exit.svg</normaloff>:/share/qresources/resources/exit.svg</iconset>
-   </property>
    <property name="text">
     <string>Shutdown</string>
    </property>
   </action>
   <action name="actionReboot">
-   <property name="icon">
-    <iconset resource="../qresources/libqresources.qrc">
-     <normaloff>:/share/qresources/resources/system-reboot.svg</normaloff>:/share/qresources/resources/system-reboot.svg</iconset>
-   </property>
    <property name="text">
     <string>Reboot</string>
    </property>
   </action>
  </widget>
- <resources>
-  <include location="../qresources/libqresources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

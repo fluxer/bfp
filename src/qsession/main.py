@@ -2,15 +2,15 @@
 
 import qsession_ui
 from PyQt4 import QtCore, QtGui
-import sys, os, pwd, crypt, libmisc, libdesktop
+import sys, os, pwd, crypt, libmisc, libworkspace
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qsession_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
-config = libdesktop.Config()
-general = libdesktop.General()
+settings = libworkspace.Settings()
+general = libworkspace.General()
 misc = libmisc.Misc()
 
 def setLook():
@@ -18,12 +18,13 @@ def setLook():
 setLook()
 
 def setWallpaper():
-    if config.WALLPAPER_IMAGE:
+    if settings.WALLPAPER_IMAGE:
         MainWindow.setStyleSheet("border-image: url(" + \
-            config.WALLPAPER_IMAGE + ") 0 0 0 0 " + config.WALLPAPER_STYLE + \
-            " " + config.WALLPAPER_STYLE + ";")
+            settings.WALLPAPER_IMAGE + ") 0 0 0 0 " + \
+            settings.WALLPAPER_STYLE + " " + settings.WALLPAPER_STYLE + ";")
     else:
-        MainWindow.setStyleSheet("background-color: " + config.WALLPAPER_COLOR + ";")
+        MainWindow.setStyleSheet("background-color: " + \
+            settings.WALLPAPER_COLOR + ";")
 # setWallpaper()
 
 class LoginThread(QtCore.QThread):
@@ -96,14 +97,14 @@ ui.frame.move((d.width()/2)-165, (d.height()/2)-120)
 
 # watch configs for changes
 def reload_session():
-    global config
-    reload(libdesktop)
-    config = libdesktop.Config()
+    global settings
+    reload(libsettings)
+    settings = libworkspace.Settings()
     setLook()
     # setWallpaper()
 
 watcher1 = QtCore.QFileSystemWatcher()
-watcher1.addPath(config.settings.fileName())
+watcher1.addPath(settings.settings.fileName())
 watcher1.fileChanged.connect(reload_session)
 
 try:
