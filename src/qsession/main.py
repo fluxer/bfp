@@ -17,16 +17,6 @@ def setLook():
     general.set_style(app)
 setLook()
 
-def setWallpaper():
-    if settings.WALLPAPER_IMAGE:
-        MainWindow.setStyleSheet("border-image: url(" + \
-            settings.WALLPAPER_IMAGE + ") 0 0 0 0 " + \
-            settings.WALLPAPER_STYLE + " " + settings.WALLPAPER_STYLE + ";")
-    else:
-        MainWindow.setStyleSheet("background-color: " + \
-            settings.WALLPAPER_COLOR + ";")
-# setWallpaper()
-
 class LoginThread(QtCore.QThread):
     def __init__(self, parent=None, username='root'):
         super(LoginThread, self).__init__(parent)
@@ -46,7 +36,8 @@ class LoginThread(QtCore.QThread):
             os.chdir(pw_dir)
         else:
             os.chdir('/')
-        general.execute_program(misc.whereis('qworkspace'), False)
+        # general.execute_program(misc.whereis('qworkspace'), False)
+        os.system(misc.whereis('qworkspace'))
 
 def login(autologin=None):
     username = str(ui.UserNameBox.currentText())
