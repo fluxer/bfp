@@ -21,6 +21,15 @@
  * Implement download manager plugin (including torrents support)
  * Implement media player plugin (audio and video)
  * Implement audio mixer plugin
+ * Implement more info into recent paths and display it with tooltip:
+  - full path (done)
+  - time accessed
+  - associated with plugin?
+ * Implement translations support
+ * UI polishment:
+  - tooltips
+  - size policies
+  - etc.
 
 ## ALL QT ##
  * Expect failures everywhere
