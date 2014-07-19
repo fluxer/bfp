@@ -48,20 +48,26 @@ class Widget(QtGui.QWidget):
         self.icon_next = general.get_icon('forward')
         self.icon_reload = general.get_icon('reload')
         self.icon_stop = general.get_icon('exit')
+        self.icon_find = general.get_icon('object-hidden')
+        self.icon_search = general.get_icon('search')
         self.icon_bookmark = general.get_icon('user-bookmarks')
 
         # add widgets
         mainLayout = QtGui.QGridLayout()
         secondLayout = QtGui.QHBoxLayout()
         self.thirdLayout = QtGui.QHBoxLayout()
-        self.backButton = QtGui.QPushButton()
-        self.nextButton = QtGui.QPushButton()
-        self.reloadStopButton = QtGui.QPushButton()
+        self.backButton = QtGui.QPushButton(self.icon_back, '')
+        self.nextButton = QtGui.QPushButton(self.icon_next, '')
+        self.reloadStopButton = QtGui.QPushButton(self.icon_reload, '')
+        self.findButton = QtGui.QPushButton(self.icon_find, '')
+        self.searchButton = QtGui.QPushButton(self.icon_search, '')
         self.urlBox = QtGui.QComboBox()
         self.webView = QtWebKit.QWebView()
         secondLayout.addWidget(self.backButton)
         secondLayout.addWidget(self.nextButton)
         secondLayout.addWidget(self.reloadStopButton)
+        secondLayout.addWidget(self.findButton)
+        secondLayout.addWidget(self.searchButton)
         secondLayout.addWidget(self.urlBox)
         for b in ('http://github.com', 'http://bitbucket.org', \
             'http://gmail.com', 'http://youtube.com', 'http://zamunda.net',
@@ -81,25 +87,23 @@ class Widget(QtGui.QWidget):
         self.urlBox.setInsertPolicy(1)
         self.urlBox.currentIndexChanged.connect(self.path_changed)
         self.backButton.setEnabled(False)
-        self.backButton.setIcon(self.icon_back)
         self.backButton.clicked.connect(self.page_back)
         self.backButton.setShortcut(QtGui.QKeySequence('CTRL+B'))
         self.nextButton.setEnabled(False)
-        self.nextButton.setIcon(self.icon_next)
         self.nextButton.clicked.connect(self.page_next)
         self.nextButton.setShortcut(QtGui.QKeySequence('CTRL+N'))
         self.reloadStopButton.clicked.connect(self.page_reload_stop)
         self.reloadStopButton.setShortcut(QtGui.QKeySequence('CTRL+R'))
+        self.findButton.clicked.connect(self.action_find)
+        self.findButton.setShortcut(QtGui.QKeySequence('CTRL+F'))
+        self.searchButton.clicked.connect(self.action_search)
+        self.searchButton.setShortcut(QtGui.QKeySequence('CTRL+S'))
         self.webView.page().setLinkDelegationPolicy(QtWebKit.QWebPage.DelegateAllLinks)
         self.webView.linkClicked.connect(self.link_clicked)
         self.webView.urlChanged.connect(self.url_changed)
         self.webView.loadProgress.connect(self.load_progress)
         self.webView.titleChanged.connect(self.title_changed)
         self.webView.iconChanged.connect(self.icon_changed)
-        #ui.actionFind.triggered.disconnect()
-        #ui.actionFind.triggered.connect(self.action_find)
-        #ui.actionSearch.triggered.disconnect()
-        #ui.actionSearch.triggered.connect(self.action_search)
 
         # advanced funcitonality
         self.webView.page().setForwardUnsupportedContent(True)
@@ -264,7 +268,7 @@ class Widget(QtGui.QWidget):
         ''' Search the internet '''
         svar, ok = QtGui.QInputDialog.getText(self, 'Search', '')
         if ok and svar:
-            self.webView.setUrl(QtCore.QUrl('duckduckgo.com/?q=' + svar))
+            self.webView.setUrl(QtCore.QUrl('https://duckduckgo.com/?q=' + svar))
 
     def download(self, request):
         ''' Download a URL '''
