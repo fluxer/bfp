@@ -58,24 +58,33 @@ try:
     if ARGS.debug:
         message.DEBUG = True
 
+    lcopied = []
     def copy_item(src):
         # FIXME: symlinks, force
         if os.path.isdir(src):
             for sfile in misc.list_files(src):
+                if sfile in lcopied:
+                    message.sub_debug('Already copied', sfile)
+                    continue
                 sfixed = sfile.replace('/etc/mkinitfs/root', '')
-                sfixed = sfixed.replace('/etc/mkinitfs/hooks', 'hooks')
+                sfixed = sfixed.replace('/etc/mkinitfs/hooks', '/hooks')
                 message.sub_debug('Copying', sfile)
                 message.sub_debug('To', ARGS.tmp + '/' + sfile)
                 misc.dir_create(ARGS.tmp + '/' + os.path.dirname(sfile))
                 shutil.copy2(sfile, ARGS.tmp + '/'+ sfile)
+                lcopied.append(sfile)
         elif os.path.isfile(src):
             for sfile in misc.system_output((misc.whereis('lddtree'), '-l', src)).split('\n'):
+                if sfile in lcopied:
+                    message.sub_debug('Already copied', sfile)
+                    continue
                 sfixed = sfile.replace('/etc/mkinitfs/root', '')
-                sfixed = sfixed.replace('/etc/mkinitfs/hooks', 'hooks')
+                sfixed = sfixed.replace('/etc/mkinitfs/hooks', '/hooks')
                 message.sub_debug('Copying', sfile)
                 message.sub_debug('To', ARGS.tmp + '/' + sfixed)
                 misc.dir_create(ARGS.tmp + os.path.dirname(sfixed))
                 shutil.copy2(sfile, ARGS.tmp + '/' + sfixed)
+                lcopied.append(sfile)
                 if os.path.islink(sfile):
                     slink = os.readlink(sfile)
                     copy_item(os.path.dirname(sfile) + '/' + slink)
