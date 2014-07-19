@@ -4,22 +4,22 @@ import qworkspace_ui
 from PyQt4 import QtCore, QtGui
 import sys, gc, libworkspace, libmisc
 
-app_version = "0.9.14 (c5d9980)"
+app_version = "0.9.15 (b07b3a2)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qworkspace_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 settings = libworkspace.Settings()
 general = libworkspace.General()
-plugins = libworkspace.Plugins(ui)
 misc = libmisc.Misc()
+ui.plugins = libworkspace.Plugins(ui)
 
 def setLook():
     general.set_style(app)
 setLook()
 
-for plugin in plugins.plugins_all:
-    plugins.load(plugin)
+for plugin in ui.plugins.plugins_all:
+    ui.plugins.load(plugin)
 
 def tab_close(index):
     widget = ui.tabWidget.widget(index)
@@ -27,7 +27,7 @@ def tab_close(index):
         widget.layout().deleteLater()
         ui.tabWidget.removeTab(index)
         return
-    plugins.close(widget.name)
+    ui.plugins.close(widget.name)
     gc.collect()
 ui.tabWidget.tabCloseRequested.connect(tab_close)
 
@@ -43,7 +43,7 @@ watcher1.fileChanged.connect(reload_browser)
 MainWindow.showMaximized()
 r = app.exec_()
 
-for plugin in reversed(plugins.plugins_all):
-    plugins.unload(plugin)
+for plugin in reversed(ui.plugins.plugins_all):
+    ui.plugins.unload(plugin)
 
 sys.exit(r)
