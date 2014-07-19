@@ -22,6 +22,7 @@ class Widget(QtGui.QWidget):
 class Plugin(QtCore.QObject):
     ''' Plugin handler '''
     def __init__(self, parent=None):
+        super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'embed'
         self.version = '0.0.1'

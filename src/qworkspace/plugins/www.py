@@ -308,8 +308,9 @@ class Widget(QtGui.QWidget):
         menu.popup(QtGui.QCursor.pos())
 
 
-class Plugin(object):
-    def __init__(self, parent=None):
+class Plugin(QtCore.QObject):
+    def __init__(self, parent):
+        super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'www'
         self.version = '0.0.1'

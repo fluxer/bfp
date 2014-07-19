@@ -17,6 +17,7 @@ class Widget(QtGui.QWidget):
 class Plugin(QtCore.QObject):
     ''' Plugin handler '''
     def __init__(self, parent):
+        super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'dummy'
         self.version = '0.0.1'
