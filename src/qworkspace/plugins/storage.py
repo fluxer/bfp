@@ -13,7 +13,6 @@ class Widget(QtGui.QWidget):
         self.spath = spath
         self.name = 'storage'
 
-        self.api = libworkspace.API(self.parent)
         self.secondLayout = QtGui.QHBoxLayout()
         self.homeButton = QtGui.QPushButton(general.get_icon('home'), '')
         self.homeButton.clicked.connect(lambda: self.change_directory(spath))
@@ -44,7 +43,7 @@ class Widget(QtGui.QWidget):
         if not isinstance(path, QtCore.QString) and not isinstance(path, str):
             path = self.model.filePath(path)
         if not os.path.isdir(path):
-            self.parent.plugins.open(str(path))
+            self.parent.plugins.plugin_open(str(path))
             return
         root = self.model.setRootPath(path)
         self.storageView.setRootIndex(root)

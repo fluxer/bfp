@@ -8,6 +8,7 @@ misc = libmisc.Misc()
 message = libmessage.Message()
 
 class PluginException(Exception):
+    ''' Custom exceptions '''
     pass
 
 
@@ -26,7 +27,7 @@ class Settings(object):
         self.settings.sync()
 
     def delete(self, svariable):
-        ''' Deelete settings '''
+        ''' Delete settings '''
         self.settings.remove(svariable)
         self.settings.sync()
 
@@ -44,7 +45,6 @@ class General(object):
             app.setStyleSheet(misc.file_read(ssheet))
         else:
             app.setStyleSheet('')
-        # icon.setThemeName(self.settings.get('general/icontheme'))
 
     def get_icon(self, sicon):
         ''' Get icon '''
@@ -73,6 +73,7 @@ class General(object):
             p.close()
 general = General()
 
+
 class Plugins(object):
     ''' Plugins handler '''
     def __init__(self, parent):
@@ -91,27 +92,29 @@ class Plugins(object):
                         self.plugins_all.append(sname)
             else:
                 message.warning('Plugins path does not exist', spath)
+        self.mime_settings = Settings('qmime')
+        self.recent_settings = Settings('qrecent')
 
-    def check_valid(self, splugin):
+    def plugin_valid(self, splugin):
         ''' Check if plugin is valid '''
         for plugin in self.plugins_all:
             if plugin == splugin:
                 return True
         return False
 
-    def check_loaded(self, splugin):
+    def plugin_loaded(self, splugin):
         ''' Check if plugin is loaded '''
         for plugin in self.plugins_loaded:
             if plugin.name == splugin:
                 return True
         return False
 
-    def get_object(self, splugin):
+    def plugin_object(self, splugin):
         ''' Get object of plugin '''
-        if not self.check_valid(splugin):
+        if not self.plugin_valid(splugin):
             message.critical('Plugin is not valid', splugin)
             raise(PluginException('Plugin is not valid', splugin))
-        elif not self.check_loaded(splugin):
+        elif not self.plugin_loaded(splugin):
             message.critical('Plugin is not loaded', splugin)
             raise(PluginException('Plugin is not loaded', splugin))
 
@@ -119,12 +122,12 @@ class Plugins(object):
             if plugin.name == splugin:
                 return plugin
 
-    def load(self, splugin):
+    def plugin_load(self, splugin):
         ''' Load plugin '''
-        if not self.check_valid(splugin):
+        if not self.plugin_valid(splugin):
             message.critical('Plugin is not valid', splugin)
             raise(PluginException('Plugin is not valid', splugin))
-        elif self.check_loaded(splugin):
+        elif self.plugin_loaded(splugin):
             message.warning('Plugin is already loaded', splugin)
             return
 
@@ -145,74 +148,75 @@ class Plugins(object):
             message.critical('Plugin error', detail)
             raise(PluginException('Plugin error', detail))
 
-    def open_with(self, splugin, spath):
+    def plugin_open_with(self, splugin, spath, bregister=True):
         ''' Open path with plugin '''
-        if not self.check_valid(splugin):
+        if not self.plugin_valid(splugin):
             message.critical('Plugin is not valid', splugin)
             raise(PluginException('Plugin is not valid', splugin))
-        elif not self.check_loaded(splugin):
+        elif not self.plugin_loaded(splugin):
             message.critical('Plugin is not loaded', splugin)
             raise(PluginException('Plugin is not loaded', splugin))
 
         try:
             message.info('Opening plugin', splugin)
-            plugin = self.get_object(splugin)
+            plugin = self.plugin_object(splugin)
 
             if not hasattr(plugin, 'open'):
                 message.critical('Plugin does not support open', detail)
                 raise(PluginException('Plugin does not support open', detail))
 
             plugin.open(spath)
-            API(self.parent).recent_register(spath)
+            if bregister:
+                self.recent_register(spath)
             message.debug('Opening of plugin was successfull', splugin)
         except Exception as detail:
             message.critical('Plugin error', detail)
             raise(PluginException('Plugin error', detail))
 
-
-    def open(self, spath):
+    def plugin_open(self, spath, bregister=True):
         ''' Open path with associated plugin '''
         smime = misc.file_mime(spath)
-        splugin = API(self.parent).mime_plugin(smime)
+        splugin = self.mime_plugin(smime)
 
         if not splugin:
             # FIXME: automatically associate?
             message.critical('No plugin associated with mime', smime)
             raise(PluginException('No plugin associated with mime', smime))
-        elif not self.check_valid(splugin):
+        elif not self.plugin_valid(splugin):
             message.critical('Plugin is not valid', splugin)
             raise(PluginException('Plugin is not valid', splugin))
-        elif not self.check_loaded(splugin):
+        elif not self.plugin_loaded(splugin):
             message.critical('Plugin is not loaded', splugin)
             raise(PluginException('Plugin is not loaded', splugin))
 
         try:
             message.info('Opening path with ' + splugin, spath)
-            plugin = self.get_object(splugin)
+            plugin = self.plugin_object(splugin)
 
             if not hasattr(plugin, 'open'):
                 message.critical('Plugin does not support open', detail)
                 raise(PluginException('Plugin does not support open', detail))
 
             plugin.open(spath)
-            API(self.parent).recent_register(spath)
+            if bregister:
+                self.recent_register(spath)
             message.debug('Opening of plugin was successfull', splugin)
         except Exception as detail:
             message.critical('Plugin error', detail)
             raise(PluginException('Plugin error', detail))
 
-    def close(self, splugin):
+    def plugin_close(self, splugin):
         ''' Close plugin '''
-        if not self.check_valid(splugin):
+        if not self.plugin_valid(splugin):
             message.critical('Plugin is not valid', splugin)
             raise(PluginException('Plugin is not valid', splugin))
-        elif not self.check_loaded(splugin):
+        elif not self.plugin_loaded(splugin):
             message.critical('Plugin is not loaded', splugin)
             raise(PluginException('Plugin is not loaded', splugin))
 
         try:
             message.info('Closing plugin', splugin)
-            plugin = self.get_object(splugin)
+            plugin = self.plugin_object(splugin)
 
             if not hasattr(plugin, 'close'):
                 message.critical('Plugin does not support close', detail)
@@ -224,44 +228,35 @@ class Plugins(object):
             message.critical('Plugin error', detail)
             raise(PluginException('Plugin error', detail))
 
-    def unload(self, splugin):
+    def plugin_unload(self, splugin):
         ''' Unload plugin '''
-        if not self.check_valid(splugin):
+        if not self.plugin_valid(splugin):
             message.critical('Plugin is not valid', splugin)
             raise(PluginException('Plugin is not valid', splugin))
-        elif not self.check_loaded(splugin):
+        elif not self.plugin_loaded(splugin):
             message.warning('Plugin is not loaded', splugin)
             return
 
         try:
             message.info('Unloading plugin', splugin)
-            plugin = self.get_object(splugin)
+            plugin = self.plugin_object(splugin)
             plugin.unload()
             message.debug('Unloading of plugin was successfull', splugin)
         except Exception as detail:
             message.critical('Plugin error', detail)
             raise(PluginException('Plugin error', detail))
 
-
-class API(object):
-    ''' Recent, Application, Notifiaction and MIME implementation '''
-    def __init__(self, parent):
-        self.parent = parent
-        self.mime_settings = Settings('qmime')
-        self.recent_settings = Settings('recent')
-        self.plugins = Plugins(self.parent)
-
     def recent_restore(self):
         message.info('Restoring recent files')
-        for recent in self.recent_settings.allKeys():
-            self.recent_register(recent.value())
+        for recent in self.recent_settings.settings.allKeys():
+            self.recent_register(self.recent_settings.get(recent))
 
     def recent_register(self, spath):
         ''' Register recent path '''
         # FIXME: limit to 30?
         message.info('Registering recent path', spath)
-        button = QtGui.QPushButton(general.get_icon('documetn-open-recent'), misc.file_name(spath))
-        button.clicked.connect(lambda: self.plugins.open(spath))
+        button = QtGui.QPushButton(general.get_icon('document-open-recent'), os.path.basename(spath))
+        button.clicked.connect(lambda: self.plugin_open(spath, False))
         self.parent.toolBox.widget(0).layout().addWidget(button)
         self.recent_settings.set('recent', spath)
 
@@ -283,7 +278,7 @@ class API(object):
 
     def mime_mimes(self):
         ''' Get all associated MIMEs '''
-        return sorted(self.mime_settings.allKeys())
+        return sorted(self.mime_settings.settings.allKeys())
 
     def mime_plugins(self):
         ''' Get all programs '''

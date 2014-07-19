@@ -16,7 +16,7 @@
 
 ## QWORKSPACE ##
  * Use unique IDs for plugin objects to properly support multiple instances of plugins 
- * Implement Recent, Applications amd Notifiaction API
+ * Implement Applications amd Notifiaction API
  * Implement caches update plugin?
  * Implement download manager plugin (including torrents support)
  * Implement media player plugin (audio and video)

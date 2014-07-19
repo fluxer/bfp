@@ -4,7 +4,7 @@ import qworkspace_ui
 from PyQt4 import QtCore, QtGui
 import sys, gc, libworkspace, libmisc
 
-app_version = "0.9.15 (9d9dbee)"
+app_version = "0.9.15 (c732557)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qworkspace_ui.Ui_MainWindow()
@@ -19,7 +19,8 @@ def setLook():
 setLook()
 
 for plugin in ui.plugins.plugins_all:
-    ui.plugins.load(plugin)
+    ui.plugins.plugin_load(plugin)
+ui.plugins.recent_restore()
 
 def tab_close(index):
     widget = ui.tabWidget.widget(index)
@@ -27,7 +28,7 @@ def tab_close(index):
         widget.layout().deleteLater()
         ui.tabWidget.removeTab(index)
         return
-    ui.plugins.close(widget.name)
+    ui.plugins.plugin_close(widget.name)
     gc.collect()
 ui.tabWidget.tabCloseRequested.connect(tab_close)
 
@@ -44,6 +45,6 @@ MainWindow.showMaximized()
 r = app.exec_()
 
 for plugin in reversed(ui.plugins.plugins_all):
-    ui.plugins.unload(plugin)
+    ui.plugins.plugin_unload(plugin)
 
 sys.exit(r)

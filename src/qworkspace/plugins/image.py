@@ -70,6 +70,7 @@ class Widget(QtGui.QWidget):
                 return
         self.set_image(str(sfile))
         self.reloadButton.setEnabled(True)
+        self.parent.plugins.recent_register(str(sfile))
 
     def reload_file(self):
         self.set_image(self.imageView.fileName)
