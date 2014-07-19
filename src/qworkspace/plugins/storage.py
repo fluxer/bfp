@@ -17,6 +17,7 @@ class Widget(QtGui.QWidget):
         self.homeButton = QtGui.QPushButton(general.get_icon('user-home'), '')
         self.homeButton.clicked.connect(lambda: self.change_directory(spath))
         self.addressBar = QtGui.QLineEdit()
+        self.addressBar.setReadOnly(True)
         self.secondLayout.addWidget(self.homeButton)
         self.secondLayout.addWidget(self.addressBar)
         self.mainLayout = QtGui.QGridLayout()
@@ -48,7 +49,7 @@ class Widget(QtGui.QWidget):
         root = self.model.setRootPath(path)
         self.storageView.setRootIndex(root)
         #os.chdir(path)
-        self.addressBar.setText(str(path))
+        self.addressBar.setText(os.path.normpath(str(path)))
         #disable_actions()
 
 
