@@ -2,7 +2,7 @@
 
 import spmqt_ui
 from PyQt4 import QtCore, QtGui
-import sys, ConfigParser, libmessage, libmisc, libpackage, libspm, libdesktop
+import sys, ConfigParser, libmessage, libmisc, libpackage, libspm, libworkspace
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
@@ -12,8 +12,8 @@ ui.setupUi(MainWindow)
 message = libmessage.Message()
 misc = libmisc.Misc()
 database = libpackage.Database()
-config = libdesktop.Config()
-general = libdesktop.General()
+config = libworkspace.Settings()
+general = libworkspace.General()
 icon = QtGui.QIcon()
 
 def setLook():
@@ -264,8 +264,8 @@ ui.TargetsList.setCurrentRow(0)
 # watch configs for changes
 def reload_spm():
     global config
-    reload(libdesktop)
-    config = libdesktop.Config()
+    reload(libworkspace)
+    config = libworkspace.Settings()
     setLook()
 
 watcher1 = QtCore.QFileSystemWatcher()

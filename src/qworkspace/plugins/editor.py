@@ -2,11 +2,9 @@
 
 from PyQt4 import QtCore, QtGui
 import os, libmisc, libworkspace, libhighlighter
-
 general = libworkspace.General()
 misc = libmisc.Misc()
-# app = QtGui.QApplication([])
-# actions = libdesktop.Actions(None, app)
+
 
 class Widget(QtGui.QWidget):
     ''' Tab widget '''
@@ -23,6 +21,9 @@ class Widget(QtGui.QWidget):
         self.saveButton.clicked.connect(self.save_file)
         self.saveButton.setShortcut(QtGui.QKeySequence('CTRL+S'))
         self.saveButton.setEnabled(False)
+        self.saveAsButton = QtGui.QPushButton(general.get_icon('filesave-as'), '')
+        self.saveAsButton.clicked.connect(self.save_as_file)
+        self.saveAsButton.setEnabled(False)
         self.reloadButton = QtGui.QPushButton(general.get_icon('reload'), '')
         self.reloadButton.clicked.connect(self.reload_file)
         self.reloadButton.setShortcut(QtGui.QKeySequence('CTRL+R'))
@@ -36,8 +37,6 @@ class Widget(QtGui.QWidget):
         self.mainLayout.addWidget(self.textEdit)
         self.setLayout(self.mainLayout)
 
-        #self.actionNew.triggered.connect(new_file)
-        #self.actionSaveAs.triggered.connect(save_as_file)
         #self.actionFind.triggered.connect(find)
         #self.actionUndo.triggered.connect(ui.textEdit.undo)
         #self.actionRedo.triggered.connect(ui.textEdit.redo)
@@ -48,11 +47,6 @@ class Widget(QtGui.QWidget):
         #self.actionC.triggered.connect(highlight_c)
         if self.sedit:
             self.open_file(self.sedit)
-
-    def new_file(self):
-        sfile = actions.new_file()
-        if sfile:
-            self.open_file(sfile)
 
     def open_file(self, sfile):
         if not sfile:
@@ -84,8 +78,8 @@ class Widget(QtGui.QWidget):
             misc.file_write(os.path.realpath(self.sedit), self.textEdit.toPlainText())
 
     def save_as_file(self):
-        sfile = QtGui.QFileDialog.getSaveFileName(self, "Save as", \
-            QtCore.QDir.currentPath(), "All Files (*);;Text Files (*.txt)")
+        sfile = QtGui.QFileDialog.getSaveFileName(self, 'Save as', \
+            QtCore.QDir.currentPath(), 'All Files (*);;Text Files (*.txt)')
         if sfile:
             self.sedit = str(sfile)
             self.save_file()

@@ -5,10 +5,6 @@
  * Use Makefiles for build scripts?
  * Lint - check if groups/users are removed
 
-## LIBDESKTOP ##
- * Signal to qsession to shutdown/reboot/suspend/logout?
- * Merge with libworkspace
-
 ## SPM-QT ##
  * Fixup the logging
  * Implement menu bar and drop "About" tab in favour of about dialog
