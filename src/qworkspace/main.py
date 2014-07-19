@@ -4,7 +4,7 @@ import qworkspace_ui
 from PyQt4 import QtCore, QtGui
 import sys, gc, libworkspace, libmisc
 
-app_version = "0.9.16 (c1a0a7b)"
+app_version = "0.9.16 (918b20a)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qworkspace_ui.Ui_MainWindow()

@@ -76,7 +76,7 @@ general = General()
 
 class Actions(object):
     ''' Mostly menu action shortcuts '''
-    def __init__(self, parent=None:)
+    def __init__(self, parent=None):
         self.parent = parent
         self.window = QtGui.QMainWindow(self.parent)
         self.app = QtGui.QApplication(sys.argv)
@@ -106,13 +106,6 @@ class Actions(object):
             if os.path.isfile(svar):
                 general.execute_program(svar)
 
-    def rename_items(self, variant):
-        ''' Rename files/directories '''
-        sitems = ''
-        for svar in variant:
-            sitems += '"' + svar + '" '
-        general.execute_program('qpaste --rename ' + sitems)
-
     def cut_items(self, slist):
         ''' Cut files/directories for future paste '''
         self.clipboard.setText(misc.string_convert(slist))
@@ -125,30 +118,39 @@ class Actions(object):
         self.cut = None
         self.copy = slist
 
-    def paste_items(self):
+    def paste_items(self, sdest=os.curdir):
         ''' Paste files/directories '''
         sitems = ''
         if self.cut:
             for svar in self.cut:
-                sitems += '"' + svar + '" '
-            general.execute_program('qpaste --cut ' + sitems)
+                if os.path.isdir(svar):
+                    shutil.copytree(svar, sdest)
+                    misc.dir_remove(svar)
+                else:
+                    shutil.copy2(svar, sdest)
+                    os.unlink(svar)
         elif self.copy:
             for svar in self.copy:
-                sitems += '"' + svar + '" '
-            general.execute_program('qpaste --copy ' + sitems)
+                if os.path.isdir(svar):
+                    shutil.copytree(svar, sdest)
+                else:
+                    shutil.copy2(svar, sdest)
         else:
             # FIXME: it will break on paths with spaces,
             #        is it OK to use \n in the clipboard content to solve this?
             for svar in self.clipboard.text().split(' '):
-                sitems += '"' + str(svar) + '" '
-            general.execute_program('qpaste --copy ' + sitems)
+                if os.path.isdir(svar):
+                    shutil.copytree(svar, sdest)
+                else:
+                    shutil.copy2(svar, sdest)
 
     def delete_items(self, variant):
         ''' Delete files/directories '''
-        sitems = ''
         for svar in variant:
-            sitems += '"' + svar + '" '
-        general.execute_program('qpaste --delete ' + sitems)
+            if os.path.isdir(svar):
+                misc.dir_remove(svar)
+            else:
+                os.unlink(svar)
 
     def new_file(self):
         ''' Create a new file '''
@@ -177,6 +179,10 @@ class Actions(object):
             svar = str(svar)
             misc.dir_create(svar)
             return svar
+
+    def rename_items(self, variant):
+        ''' Rename files/directories '''
+        pass
 
     def properties_items(self, variant):
         ''' View properties of files/directories '''
