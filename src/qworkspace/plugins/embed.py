@@ -19,14 +19,14 @@ class Widget(QtGui.QWidget):
         self.process = QtCore.QProcess(self.container)
         self.process.start(self.spath)
 
-class Plugin(object):
+class Plugin(QtCore.QObject):
     ''' Plugin handler '''
     def __init__(self, parent=None):
         self.parent = parent
         self.name = 'embed'
         self.version = '0.0.1'
-        self.description = 'Embed test plugin'
-        self.icon = general.get_icon('xterm')
+        self.description = self.tr('Embed test plugin')
+        self.icon = general.get_icon('xterm_32x32')
         self.widget = None
 
         self.embedButton = QtGui.QPushButton(self.icon, '')
@@ -38,7 +38,7 @@ class Plugin(object):
         ''' Open path in new tab '''
         self.index = self.parent.tabWidget.currentIndex()+1
         self.widget = Widget(self.parent, spath)
-        self.parent.tabWidget.insertTab(self.index, self.widget, self.icon, 'Xterm')
+        self.parent.tabWidget.insertTab(self.index, self.widget, self.icon, self.tr('Xterm'))
         self.parent.tabWidget.setCurrentIndex(self.index)
         self.widget = self.parent.tabWidget.widget(self.index)
         self.widget.process.finished.connect(self.close)

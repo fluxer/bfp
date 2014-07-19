@@ -1,6 +1,6 @@
 #!/bin/pyhton2
 
-from PyQt4 import QtGui
+from PyQt4 import QtCore, QtGui
 import libworkspace
 general = libworkspace.General()
 
@@ -14,13 +14,13 @@ class Widget(QtGui.QWidget):
         self.name = 'dummy'
 
 
-class Plugin(object):
+class Plugin(QtCore.QObject):
     ''' Plugin handler '''
     def __init__(self, parent):
         self.parent = parent
         self.name = 'dummy'
         self.version = '0.0.1'
-        self.description = 'Dummy plugin'
+        self.description = self.tr('Dummy plugin')
         self.icon = general.get_icon('delete')
         self.widget = None
 
@@ -28,7 +28,7 @@ class Plugin(object):
         ''' Open path in new tab '''
         self.index = self.parent.tabWidget.currentIndex()+1
         self.widget = Widget(self.parent, spath)
-        self.parent.tabWidget.insertTab(self.index, self.widget, self.icon, 'Dummy')
+        self.parent.tabWidget.insertTab(self.index, self.widget, self.icon, self.tr('Dummy'))
         self.parent.tabWidget.setCurrentIndex(self.index)
 
     def close(self):

@@ -88,16 +88,16 @@ class Widget(QtGui.QWidget):
         self.urlBox.currentIndexChanged.connect(self.path_changed)
         self.backButton.setEnabled(False)
         self.backButton.clicked.connect(self.page_back)
-        self.backButton.setShortcut(QtGui.QKeySequence('CTRL+B'))
+        self.backButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+B')))
         self.nextButton.setEnabled(False)
         self.nextButton.clicked.connect(self.page_next)
-        self.nextButton.setShortcut(QtGui.QKeySequence('CTRL+N'))
+        self.nextButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+N')))
         self.reloadStopButton.clicked.connect(self.page_reload_stop)
-        self.reloadStopButton.setShortcut(QtGui.QKeySequence('CTRL+R'))
+        self.reloadStopButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+R')))
         self.findButton.clicked.connect(self.action_find)
-        self.findButton.setShortcut(QtGui.QKeySequence('CTRL+F'))
+        self.findButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+F')))
         self.searchButton.clicked.connect(self.action_search)
-        self.searchButton.setShortcut(QtGui.QKeySequence('CTRL+S'))
+        self.searchButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+S')))
         self.webView.page().setLinkDelegationPolicy(QtWebKit.QWebPage.DelegateAllLinks)
         self.webView.linkClicked.connect(self.link_clicked)
         self.webView.urlChanged.connect(self.url_changed)
@@ -224,49 +224,49 @@ class Widget(QtGui.QWidget):
         eid = reply.error()
         # http://pyqt.sourceforge.net/Docs/PyQt4/qnetworkreply.html#error
         errors = {
-            1: 'the remote server refused the connection (the server is not accepting requests)',
-            2: 'the remote server closed the connection prematurely, before the entire reply was received and processed',
-            3: 'the remote host name was not found (invalid hostname)',
-            4: 'the connection to the remote server timed out',
-            5: 'the operation was canceled via calls to abort() or close() before it was finished.',
-            6: 'the SSL/TLS handshake failed and the encrypted channel could not be established. The sslErrors() signal should have been emitted.',
-            7: 'the connection was broken due to disconnection from the network, however the system has initiated roaming to another acess point. The request should be resubmitted and will be processed as soon as the connection is re-established.',
-            101: 'the connection to the proxy server was refused (the proxy server is not accepting requests)',
-            102: 'the proxy server closed the connection prematurely, before the entire reply was received and processed',
-            103: 'the proxy host name was not found (invalid proxy hostname)',
-            104: 'the connection to the proxy timed out or the proxy did not reply in time to the request sent',
-            105: 'the proxy requires authentication in order to honour the request but did not accept any credentials offered (if any)',
-            201: 'the access to the remote content was denied (similar to HTTP error 401)',
-            202: 'the operation requested on the remote content is not permitted',
-            203: 'the remote content was not found at the server (similar to HTTP error 404)',
-            204: 'the remote server requires authentication to serve the content but the credentials provided were not accepted (if any)',
-            205: 'the request needed to be sent again, but this failed for example because the upload data could not be read a second time.',
-            301: 'the Network Access API cannot honor the request because the protocol is not known',
-            302: 'the requested operation is invalid for this protocol',
-            99: 'an unknown network-related error was detected',
-            199: 'an unknown proxy-related error was detected',
-            299: 'an unknown error related to the remote content was detected',
-            399: 'a breakdown in protocol was detected (parsing error, invalid or unexpected responses, etc.)',
+            1: self.tr('the remote server refused the connection (the server is not accepting requests)'),
+            2: self.tr('the remote server closed the connection prematurely, before the entire reply was received and processed'),
+            3: self.tr('the remote host name was not found (invalid hostname)'),
+            4: self.tr('the connection to the remote server timed out'),
+            5: self.tr('the operation was canceled via calls to abort() or close() before it was finished.'),
+            6: self.tr('the SSL/TLS handshake failed and the encrypted channel could not be established. The sslErrors() signal should have been emitted.'),
+            7: self.tr('the connection was broken due to disconnection from the network, however the system has initiated roaming to another acess point. The request should be resubmitted and will be processed as soon as the connection is re-established.'),
+            101: self.tr('the connection to the proxy server was refused (the proxy server is not accepting requests)'),
+            102: self.tr('the proxy server closed the connection prematurely, before the entire reply was received and processed'),
+            103: self.tr('the proxy host name was not found (invalid proxy hostname)'),
+            104: self.tr('the connection to the proxy timed out or the proxy did not reply in time to the request sent'),
+            105: self.tr('the proxy requires authentication in order to honour the request but did not accept any credentials offered (if any)'),
+            201: self.tr('the access to the remote content was denied (similar to HTTP error 401)'),
+            202: self.tr('the operation requested on the remote content is not permitted'),
+            203: self.tr('the remote content was not found at the server (similar to HTTP error 404)'),
+            204: self.tr('the remote server requires authentication to serve the content but the credentials provided were not accepted (if any)'),
+            205: self.tr('the request needed to be sent again, but this failed for example because the upload data could not be read a second time.'),
+            301: self.tr('the Network Access API cannot honor the request because the protocol is not known'),
+            302: self.tr('the requested operation is invalid for this protocol'),
+            99: self.tr('an unknown network-related error was detected'),
+            199: self.tr('an unknown proxy-related error was detected'),
+            299: self.tr('an unknown error related to the remote content was detected'),
+            399: self.tr('a breakdown in protocol was detected (parsing error, invalid or unexpected responses, etc.)'),
         }
         if eid in errors:
-            self.parent.statusBar.showMessage(errors.get(eid, 'unknown error'))
+            self.parent.statusBar.showMessage(errors.get(eid, self.tr('unknown error')))
             if eid == 5:
                 progressBar.hide()
                 progressBar.setValue(0)
 
     def page_ssl_errors(self, reply, errors):
         reply.ignoreSslErrors()
-        self.parent.statusBar.showMessage('SSL errors ignored: ' + str(reply.url().toString()) + ', ' + str(errors))
+        self.parent.statusBar.showMessage(self.tr('SSL errors ignored: ') + str(reply.url().toString()) + ', ' + str(errors))
 
     def action_find(self):
         ''' Find text in current page '''
-        svar, ok = QtGui.QInputDialog.getText(self, 'Find', '')
+        svar, ok = QtGui.QInputDialog.getText(self, self.tr('Find'), '')
         if ok and svar:
             self.webView.findText(svar, self.webView.page().HighlightAllOccurrences)
 
     def action_search(self):
         ''' Search the internet '''
-        svar, ok = QtGui.QInputDialog.getText(self, 'Search', '')
+        svar, ok = QtGui.QInputDialog.getText(self, self.tr('Search'), '')
         if ok and svar:
             self.webView.setUrl(QtCore.QUrl('https://duckduckgo.com/?q=' + svar))
 
@@ -288,11 +288,11 @@ class Widget(QtGui.QWidget):
     def download_finished(self, reply):
         surl = str(reply.url().toString())
         if reply.error():
-            QtGui.QMessageBox.critical(self, 'Critical', \
-                'Dowload of <b>' + surl + '</b> failed.')
+            QtGui.QMessageBox.critical(self, self.tr('Critical'), \
+                self.tr('Dowload of <b>%s</b> failed.') % url)
         else:
-            QtGui.QMessageBox.information(self, 'Info', \
-                'Dowload of <b>' + surl + '</b> complete.')
+            QtGui.QMessageBox.information(self, self.tr('Info'), \
+                self.tr('Dowload of <b>%s</b> complete.') % url)
 
     def bookmark(self, url):
         button = QtGui.QPushButton(self.icon_bookmark, url)
@@ -313,7 +313,7 @@ class Plugin(object):
         self.parent = parent
         self.name = 'www'
         self.version = '0.0.1'
-        self.description = 'World Wide Web browser'
+        self.description = self.tr('World Wide Web browser')
         self.icon = general.get_icon('web-browser')
         self.widget = None
 
@@ -326,7 +326,7 @@ class Plugin(object):
         ''' Open path in new tab '''
         self.widget = Widget(self.parent, spath)
         self.index = self.parent.tabWidget.currentIndex()+1
-        self.parent.tabWidget.insertTab(self.index, self.widget, self.icon, 'WWW')
+        self.parent.tabWidget.insertTab(self.index, self.widget, self.icon, self.tr('WWW'))
         self.parent.tabWidget.setCurrentIndex(self.index)
 
     def close(self):

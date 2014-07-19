@@ -65,7 +65,7 @@ class Widget(QtGui.QWidget):
     def open_file(self, sfile):
         if not sfile or not os.path.isfile(sfile):
             sfile = QtGui.QFileDialog.getOpenFileName(self, 'Open', \
-                QtCore.QDir.currentPath(), 'Image Files (*.png *.jpg *.jpeg *.svg);;All Files (*)')
+                QtCore.QDir.currentPath(), self.tr('Image Files (*.png *.jpg *.jpeg *.svg);;All Files (*)'))
             if not sfile:
                 return
         self.set_image(str(sfile))
@@ -105,13 +105,13 @@ class Widget(QtGui.QWidget):
             self.set_image(slist[slist.index(self.imageView.fileName) + 1])
 
 
-class Plugin(object):
+class Plugin(QtCore.QObject):
     ''' Plugin handler '''
     def __init__(self, parent):
         self.parent = parent
         self.name = 'image'
         self.version = '0.0.1'
-        self.description = 'Image viewer plugin'
+        self.description = self.tr('Image viewer plugin')
         self.icon = general.get_icon('image-viewer')
         self.widget = None
 
@@ -124,7 +124,7 @@ class Plugin(object):
         ''' Open path in new tab '''
         self.index = self.parent.tabWidget.currentIndex()+1
         self.widget = Widget(self.parent, spath)
-        self.parent.tabWidget.insertTab(self.index, self.widget, self.icon, 'Image')
+        self.parent.tabWidget.insertTab(self.index, self.widget, self.icon, self.tr('Image'))
         self.parent.tabWidget.setCurrentIndex(self.index)
 
     def close(self):
@@ -137,9 +137,4 @@ class Plugin(object):
         ''' Unload plugin '''
         self.applicationsLayout.removeWidget(self.imageButton)
         self.close()
-
-
-
-
-
 

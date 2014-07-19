@@ -4,7 +4,7 @@ import qworkspace_ui
 from PyQt4 import QtCore, QtGui
 import sys, gc, libworkspace, libmisc
 
-app_version = "0.9.16 (918b20a)"
+app_version = "0.9.16 (6c42f32)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qworkspace_ui.Ui_MainWindow()
@@ -17,6 +17,13 @@ ui.plugins = libworkspace.Plugins(ui)
 def setLook():
     general.set_style(app)
 setLook()
+
+def setTranslator():
+    locale = QtCore.QLocale.system().name()
+    translator = QtCore.QTranslator()
+    if translator.load('qt_' + locale, QtCore.QLibraryInfo.location(QtCore.QLibraryInfo.TranslationsPath)):
+        app.installTranslator(translator)
+setTranslator()
 
 for plugin in ui.plugins.plugins_all:
     ui.plugins.plugin_load(plugin)

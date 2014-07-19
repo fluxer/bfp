@@ -53,13 +53,13 @@ class Widget(QtGui.QWidget):
         #disable_actions()
 
 
-class Plugin(object):
+class Plugin(QtCore.QObject):
     ''' Plugin handler '''
     def __init__(self, parent):
         self.parent = parent
         self.name = 'storage'
         self.version = '0.0.1'
-        self.description = 'Storage management plugin'
+        self.description = self.tr('Storage management plugin')
         self.icon = general.get_icon('file-manager')
         self.widget = None
 
@@ -75,7 +75,7 @@ class Plugin(object):
         ''' Open path in new tab '''
         self.widget = Widget(self.parent, spath)
         self.index = self.parent.tabWidget.currentIndex()+1
-        self.parent.tabWidget.insertTab(self.index, self.widget, self.icon, 'Storage')
+        self.parent.tabWidget.insertTab(self.index, self.widget, self.icon, self.tr('Storage'))
         self.parent.tabWidget.setCurrentIndex(self.index)
 
     def close(self):

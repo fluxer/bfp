@@ -1,6 +1,6 @@
 #!/bin/python2
 
-from PyQt4 import QtGui
+from PyQt4 import QtCore, QtGui
 import sys, time, libmisc, libworkspace
 app = QtGui.QApplication(sys.argv)
 misc = libmisc.Misc()
@@ -23,8 +23,8 @@ class Widget(QtGui.QWidget):
         self.setLayout(self.mainLayout)
 
     def get_filename(self):
-        sfile = QtGui.QFileDialog.getSaveFileName(self, 'Save', \
-            'screenshot.png', 'Image Files (*.png *.jpg *.jpeg *.svg);;All Files (*)')
+        sfile = QtGui.QFileDialog.getSaveFileName(self, self.tr('Save'), \
+            'screenshot.png', self.tr('Image Files (*.png *.jpg *.jpeg *.svg);;All Files (*)'))
         if sfile:
             return str(sfile)
         return None
@@ -54,13 +54,13 @@ class Widget(QtGui.QWidget):
             # sys.exit()
 
 
-class Plugin(object):
+class Plugin(QtCore.QObject):
     ''' Plugin handler '''
     def __init__(self, parent):
         self.parent = parent
         self.name = 'screenshot'
         self.version = '0.0.1'
-        self.description = 'Screenshot taking plugin'
+        self.description = self.tr('Screenshot taking plugin')
         self.icon = general.get_icon('desktop')
         self.widget = None
 
@@ -73,7 +73,7 @@ class Plugin(object):
         ''' Open path in new tab '''
         self.index = self.parent.tabWidget.currentIndex()+1
         self.widget = Widget(self.parent, spath)
-        self.parent.tabWidget.insertTab(self.index, self.widget, self.icon, 'Screenshot')
+        self.parent.tabWidget.insertTab(self.index, self.widget, self.icon, self.tr('Screenshot'))
         self.parent.tabWidget.setCurrentIndex(self.index)
 
     def close(self):

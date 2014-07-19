@@ -16,17 +16,17 @@ class Widget(QtGui.QWidget):
         self.secondLayout = QtGui.QHBoxLayout()
         self.openButton = QtGui.QPushButton(general.get_icon('fileopen'), '')
         self.openButton.clicked.connect(self.open_file)
-        self.openButton.setShortcut(QtGui.QKeySequence('CTRL+O'))
+        self.openButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+O')))
         self.saveButton = QtGui.QPushButton(general.get_icon('filesave'), '')
         self.saveButton.clicked.connect(self.save_file)
-        self.saveButton.setShortcut(QtGui.QKeySequence('CTRL+S'))
+        self.saveButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+S')))
         self.saveButton.setEnabled(False)
         self.saveAsButton = QtGui.QPushButton(general.get_icon('filesaveas'), '')
         self.saveAsButton.clicked.connect(self.save_as_file)
         self.saveAsButton.setEnabled(False)
         self.reloadButton = QtGui.QPushButton(general.get_icon('reload'), '')
         self.reloadButton.clicked.connect(self.reload_file)
-        self.reloadButton.setShortcut(QtGui.QKeySequence('CTRL+R'))
+        self.reloadButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+R')))
         self.reloadButton.setEnabled(False)
         self.secondLayout.addWidget(self.openButton)
         self.secondLayout.addWidget(self.saveButton)
@@ -51,8 +51,8 @@ class Widget(QtGui.QWidget):
 
     def open_file(self, sfile):
         if not sfile:
-            sfile = QtGui.QFileDialog.getOpenFileName(self, "Open", \
-                QtCore.QDir.currentPath(), "All Files (*);;Text Files (*.txt)")
+            sfile = QtGui.QFileDialog.getOpenFileName(self, self.tr('Open'), \
+                QtCore.QDir.currentPath(), self.tr('All Files (*);;Text Files (*.txt)'))
             if sfile:
                 sfile = str(sfile)
                 self.textEdit.setText(misc.file_read(sfile))
@@ -80,14 +80,14 @@ class Widget(QtGui.QWidget):
             misc.file_write(os.path.realpath(self.sedit), self.textEdit.toPlainText())
 
     def save_as_file(self):
-        sfile = QtGui.QFileDialog.getSaveFileName(self, 'Save as', \
-            QtCore.QDir.currentPath(), 'All Files (*);;Text Files (*.txt)')
+        sfile = QtGui.QFileDialog.getSaveFileName(self, self.tr('Save as'), \
+            QtCore.QDir.currentPath(), self.tr('All Files (*);;Text Files (*.txt)'))
         if sfile:
             self.sedit = str(sfile)
             self.save_file()
 
     def find_text(self):
-        svar, ok = QtGui.QInputDialog.getText(self, 'Find', '')
+        svar, ok = QtGui.QInputDialog.getText(self, self.tr('Find'), '')
         if ok and svar:
             self.textEdit.find(svar)
 
@@ -115,13 +115,13 @@ class Widget(QtGui.QWidget):
         self.highlighter = libhighlighter.HighlighterC(self.textEdit.document())
 
 
-class Plugin(object):
+class Plugin(QtCore.QObject):
     ''' Plugin handler '''
     def __init__(self, parent=None):
         self.parent = parent
         self.name = 'editor'
         self.version = '0.0.1'
-        self.description = 'Text editor plugin'
+        self.description = self.tr('Text editor plugin')
         self.icon = general.get_icon('text-editor')
         self.widget = None
 
@@ -136,7 +136,7 @@ class Plugin(object):
         ''' Open path in new tab '''
         self.widget = Widget(self.parent, spath)
         self.index = self.parent.tabWidget.currentIndex()+1
-        self.parent.tabWidget.insertTab(self.index, self.widget, self.icon, 'Editor')
+        self.parent.tabWidget.insertTab(self.index, self.widget, self.icon, self.tr('Editor'))
         self.parent.tabWidget.setCurrentIndex(self.index)
 
     def close(self):
