@@ -3,7 +3,7 @@
 import sys, argparse, tempfile, subprocess
 import tarfile, zipfile, shutil, os
 
-app_version = "0.9.12 (38d79e7)"
+app_version = "0.9.16 (c3591a7)"
 
 tmpdir = None
 keep = False
@@ -62,17 +62,15 @@ try:
     def copy_item(src):
         # FIXME: symlinks, force
         if os.path.isdir(src):
-            for sfile in misc.list_files(src):
-                if sfile in lcopied:
-                    message.sub_debug('Already copied', sfile)
-                    continue
-                sfixed = sfile.replace('/etc/mkinitfs/root', '')
-                sfixed = sfixed.replace('/etc/mkinitfs/hooks', '/hooks')
-                message.sub_debug('Copying', sfile)
-                message.sub_debug('To', ARGS.tmp + '/' + sfile)
-                misc.dir_create(ARGS.tmp + '/' + os.path.dirname(sfile))
-                shutil.copy2(sfile, ARGS.tmp + '/'+ sfile)
-                lcopied.append(sfile)
+            if src in lcopied:
+                message.sub_debug('Already copied', src)
+                return
+            sfixed = src.replace('/etc/mkinitfs/root', '')
+            sfixed = sfixed.replace('/etc/mkinitfs/hooks', '/hooks')
+            message.sub_debug('Copying', src)
+            message.sub_debug('To', ARGS.tmp + '/' + sfixed)
+            shutil.copytree(src, ARGS.tmp + '/'+ sfixed)
+            lcopied.append(src)
         elif os.path.isfile(src):
             for sfile in misc.system_output((misc.whereis('lddtree'), '-l', src)).split('\n'):
                 if sfile in lcopied:
