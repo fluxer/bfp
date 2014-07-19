@@ -1,10 +1,16 @@
 #!/bin/python2
 
 from PyQt4 import QtCore, QtGui, QtWebKit, QtNetwork
-import sys, os, libworkspace, libmisc
+import os, libworkspace, libmisc
 
 general = libworkspace.General()
 misc = libmisc.Misc()
+
+home_path = str(QtCore.QDir.homePath())
+cache_path = home_path + '/.cache/qbrowse/cache'
+cookies_path = home_path + '/.cache/qbrowse/cookies.txt'
+misc.dir_create(cache_path)
+misc.file_touch(cookies_path)
 
 class CookieJar(QtNetwork.QNetworkCookieJar):
     ''' Cookie jar to save cookies to disk if desired '''
@@ -35,6 +41,7 @@ class CookieJar(QtNetwork.QNetworkCookieJar):
                 lines += (bytes(cookie.toRawForm()).decode('utf-8')) + '\n'
         misc.file_write(cookies_path, lines)
 
+
 class Widget(QtGui.QWidget):
     ''' Tab constructor '''
     def __init__(self, parent, url=''):
@@ -43,7 +50,6 @@ class Widget(QtGui.QWidget):
         self.parent = parent
         self.name = 'www'
         self.tab_index = self.parent.tabWidget.currentIndex()+1
-        self.nam = manager
         self.icon_back = general.get_icon('back')
         self.icon_next = general.get_icon('forward')
         self.icon_reload = general.get_icon('reload')
@@ -51,6 +57,15 @@ class Widget(QtGui.QWidget):
         self.icon_find = general.get_icon('object-hidden')
         self.icon_search = general.get_icon('search')
         self.icon_bookmark = general.get_icon('user-bookmarks')
+        self.disk_cache = QtNetwork.QNetworkDiskCache()
+        self.disk_cache.setCacheDirectory(cache_path)
+        self.disk_cache.setMaximumCacheSize(50000000)
+        self.cookie_jar = CookieJar()
+        self.nam = QtNetwork.QNetworkAccessManager()
+        self.nam.setCache(self.disk_cache)
+        self.nam.setCookieJar(self.cookie_jar)
+        self.progressBar = QtGui.QProgressBar()
+
 
         # add widgets
         mainLayout = QtGui.QGridLayout()
@@ -70,13 +85,13 @@ class Widget(QtGui.QWidget):
         secondLayout.addWidget(self.searchButton)
         secondLayout.addWidget(self.urlBox)
         for b in ('http://github.com', 'http://bitbucket.org', \
-            'http://gmail.com', 'http://youtube.com', 'http://zamunda.net',
+            'http://gmail.com', 'http://youtube.com', 'http://zamunda.net', \
             'http://archlinux.org', 'http://phoronix.com'):
             self.thirdLayout.addWidget(self.bookmark(b))
         mainLayout.addLayout(secondLayout, 0, 0)
         mainLayout.addLayout(self.thirdLayout, 30, 0)
         mainLayout.addWidget(self.webView)
-        self.parent.statusBar.addPermanentWidget(progressBar, 0)
+        self.parent.statusBar.addPermanentWidget(self.progressBar, 0)
         self.setLayout(mainLayout)
 
         # setup widgets
@@ -116,7 +131,7 @@ class Widget(QtGui.QWidget):
             True) #ui.actionJavascript.isChecked())
         if True: #ui.actionAccessManager.isChecked():
             self.webView.page().setNetworkAccessManager(self.nam)
-            self.webView.loadFinished.connect(cookie_jar.saveCookies)
+            self.webView.loadFinished.connect(self.cookie_jar.saveCookies)
             self.nam.finished.connect(self.page_error)
             self.nam.sslErrors.connect(self.page_ssl_errors)
 
@@ -156,7 +171,6 @@ class Widget(QtGui.QWidget):
         # for some reaons some web-pages do not set or have title
         if not title:
             title = 'Untitled'
-        #MainWindow.setWindowTitle(title)
         self.parent.tabWidget.setTabText(self.tab_index, title[:20])
 
     def icon_changed(self, icon):
@@ -179,17 +193,17 @@ class Widget(QtGui.QWidget):
         ''' Page load progress '''
         if load == 100:
             self.reloadStopButton.setIcon(self.icon_reload)
-            progressBar.hide()
-            progressBar.setValue(0)
+            self.progressBar.hide()
+            self.progressBar.setValue(0)
             self.icon_changed(self.webView.icon())
 
             # load JavaScript user script (http://jquery.com/)
             #if ui.actionJavascript.isChecked():
             #    self.webView.page().mainFrame().evaluateJavaScript(misc.file_read('jquery.js'))
         else:
-            progressBar.show()
-            progressBar.setValue(load)
-            progressBar.setStatusTip(self.webView.statusTip())
+            self.progressBar.show()
+            self.progressBar.setValue(load)
+            self.progressBar.setStatusTip(self.webView.statusTip())
             self.reloadStopButton.setIcon(self.icon_stop)
 
     def page_back(self):
@@ -212,7 +226,7 @@ class Widget(QtGui.QWidget):
 
     def page_reload_stop(self):
         ''' Reload/stop loading the web page '''
-        if progressBar.isHidden():
+        if self.progressBar.isHidden():
             self.reloadStopButton.setIcon(self.icon_stop)
             self.webView.setUrl(QtCore.QUrl(self.urlBox.currentText()))
         else:
@@ -251,10 +265,11 @@ class Widget(QtGui.QWidget):
         if eid in errors:
             self.parent.statusBar.showMessage(errors.get(eid, self.tr('unknown error')))
             if eid == 5:
-                progressBar.hide()
-                progressBar.setValue(0)
+                self.progressBar.hide()
+                self.progressBar.setValue(0)
 
     def page_ssl_errors(self, reply, errors):
+        ''' SSL error handler '''
         reply.ignoreSslErrors()
         self.parent.statusBar.showMessage(self.tr('SSL errors ignored: ') + str(reply.url().toString()) + ', ' + str(errors))
 
@@ -289,12 +304,13 @@ class Widget(QtGui.QWidget):
         surl = str(reply.url().toString())
         if reply.error():
             QtGui.QMessageBox.critical(self, self.tr('Critical'), \
-                self.tr('Dowload of <b>%s</b> failed.') % url)
+                self.tr('Dowload of <b>%s</b> failed.') % surl)
         else:
             QtGui.QMessageBox.information(self, self.tr('Info'), \
-                self.tr('Dowload of <b>%s</b> complete.') % url)
+                self.tr('Dowload of <b>%s</b> complete.') % surl)
 
     def bookmark(self, url):
+        ''' Bookmark button creator, separate to preserve url connection '''
         button = QtGui.QPushButton(self.icon_bookmark, url)
         button.clicked.connect(lambda: self.webView.setUrl(QtCore.QUrl(url)))
         return button
@@ -308,7 +324,9 @@ class Widget(QtGui.QWidget):
         menu.popup(QtGui.QCursor.pos())
 
 
+
 class Plugin(QtCore.QObject):
+    ''' Plugin handler '''
     def __init__(self, parent):
         super(Plugin, self).__init__()
         self.parent = parent
@@ -340,19 +358,4 @@ class Plugin(QtCore.QObject):
         ''' Unload plugin '''
         self.applicationsLayout.removeWidget(self.wwwButton)
         self.close()
-
-# initialise
-home_path = str(QtCore.QDir.homePath())
-cache_path = home_path + '/.cache/qbrowse/cache'
-cookies_path = home_path + '/.cache/qbrowse/cookies.txt'
-misc.dir_create(cache_path)
-misc.file_touch(cookies_path)
-disk_cache = QtNetwork.QNetworkDiskCache()
-disk_cache.setCacheDirectory(cache_path)
-disk_cache.setMaximumCacheSize(50000000)
-cookie_jar = CookieJar()
-manager = QtNetwork.QNetworkAccessManager()
-manager.setCache(disk_cache)
-manager.setCookieJar(cookie_jar)
-progressBar = QtGui.QProgressBar()
 
