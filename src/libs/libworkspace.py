@@ -163,6 +163,7 @@ class Plugins(object):
                 raise(PluginException('Plugin does not support open', detail))
 
             plugin.open(spath)
+            API(self.parent).recent_register(spath)
             message.debug('Opening of plugin was successfull', splugin)
         except Exception as detail:
             message.critical('Plugin error', detail)
@@ -194,6 +195,7 @@ class Plugins(object):
                 raise(PluginException('Plugin does not support open', detail))
 
             plugin.open(spath)
+            API(self.parent).recent_register(spath)
             message.debug('Opening of plugin was successfull', splugin)
         except Exception as detail:
             message.critical('Plugin error', detail)
@@ -257,13 +259,15 @@ class API(object):
     def recent_register(self, spath):
         ''' Register recent path '''
         # FIXME: limit to 30?
+        message.info('Registering recent path', spath)
         button = QtGui.QPushButton(general.get_icon('documetn-open-recent'), misc.file_name(spath))
         button.clicked.connect(lambda: self.plugins.open(spath))
-        self.parent.toolBox.widget(0).addWidget(button)
+        self.parent.toolBox.widget(0).layout().addWidget(button)
         self.recent_settings.set('recent', spath)
 
     def recent_unregister(self, spath):
         ''' Unregister recent path '''
+        message.info('Unregistering recent path', spath)
         self.recent_settings.delete('recent/' + spath)
 
     def mime_mime(self, splugin):
