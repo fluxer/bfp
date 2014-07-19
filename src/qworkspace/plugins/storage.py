@@ -14,7 +14,7 @@ class Widget(QtGui.QWidget):
         self.name = 'storage'
 
         self.secondLayout = QtGui.QHBoxLayout()
-        self.homeButton = QtGui.QPushButton(general.get_icon('home'), '')
+        self.homeButton = QtGui.QPushButton(general.get_icon('user-home'), '')
         self.homeButton.clicked.connect(lambda: self.change_directory(spath))
         self.addressBar = QtGui.QLineEdit()
         self.secondLayout.addWidget(self.homeButton)
