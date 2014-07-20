@@ -64,7 +64,7 @@ class Widget(QtGui.QWidget):
 
     def open_file(self, sfile):
         if not sfile or not os.path.isfile(sfile):
-            sfile = QtGui.QFileDialog.getOpenFileName(self, 'Open', \
+            sfile = QtGui.QFileDialog.getOpenFileName(self, self.tr('Open'), \
                 QtCore.QDir.currentPath(), self.tr('Image Files (*.png *.jpg *.jpeg *.svg);;All Files (*)'))
             if not sfile:
                 return
