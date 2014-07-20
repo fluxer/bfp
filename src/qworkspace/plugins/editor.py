@@ -23,7 +23,6 @@ class Widget(QtGui.QWidget):
         self.saveButton.setEnabled(False)
         self.saveAsButton = QtGui.QPushButton(general.get_icon('filesaveas'), '')
         self.saveAsButton.clicked.connect(self.save_as_file)
-        self.saveAsButton.setEnabled(False)
         self.reloadButton = QtGui.QPushButton(general.get_icon('reload'), '')
         self.reloadButton.clicked.connect(self.reload_file)
         self.reloadButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+R')))
@@ -64,7 +63,6 @@ class Widget(QtGui.QWidget):
         self.sedit = sfile
         self.reloadButton.setEnabled(True)
         self.saveButton.setEnabled(True)
-        self.saveAsButton.setEnabled(True)
         smime = misc.file_mime(sfile)
         if smime == 'text/x-python':
             self.highlight_python()

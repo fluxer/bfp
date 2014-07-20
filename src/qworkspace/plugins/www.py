@@ -271,7 +271,7 @@ class Widget(QtGui.QWidget):
     def page_ssl_errors(self, reply, errors):
         ''' SSL error handler '''
         reply.ignoreSslErrors()
-        self.parent.statusBar.showMessage(self.tr('SSL errors ignored: %s, %s') % (str(reply.url().toString(), str(errors)))
+        self.parent.statusBar.showMessage(self.tr('SSL errors ignored: %s, %s') % (reply.url().toString(), errors))
 
     def action_find(self):
         ''' Find text in current page '''
