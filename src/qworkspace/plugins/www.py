@@ -170,7 +170,7 @@ class Widget(QtGui.QWidget):
         '''  Web page title changed - change the tab name '''
         # for some reaons some web-pages do not set or have title
         if not title:
-            title = 'Untitled'
+            title = self.tr('Untitled')
         self.parent.tabWidget.setTabText(self.tab_index, title[:20])
 
     def icon_changed(self, icon):
@@ -271,7 +271,7 @@ class Widget(QtGui.QWidget):
     def page_ssl_errors(self, reply, errors):
         ''' SSL error handler '''
         reply.ignoreSslErrors()
-        self.parent.statusBar.showMessage(self.tr('SSL errors ignored: ') + str(reply.url().toString()) + ', ' + str(errors))
+        self.parent.statusBar.showMessage(self.tr('SSL errors ignored: %s, %s') % (str(reply.url().toString(), str(errors)))
 
     def action_find(self):
         ''' Find text in current page '''
@@ -318,9 +318,9 @@ class Widget(QtGui.QWidget):
     def context_menu(self):
         # FIXME: enable actions depending on what is possible
         menu = QtGui.QMenu()
-        menu.addAction(self.icon_back, 'Back', self.page_back)
-        menu.addAction(self.icon_next, 'Next', self.page_next)
-        menu.addAction(self.icon_reload, 'Reload', self.page_reload_stop)
+        menu.addAction(self.icon_back, self.tr('Back'), self.page_back)
+        menu.addAction(self.icon_next, self.tr('Next'), self.page_next)
+        menu.addAction(self.icon_reload, self.tr('Reload'), self.page_reload_stop)
         menu.popup(QtGui.QCursor.pos())
 
 
