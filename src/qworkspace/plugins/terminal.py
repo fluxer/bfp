@@ -11,7 +11,7 @@ class Widget(QtGui.QWidget):
         super(Widget, self).__init__()
         self.parent = parent
         self.spath = spath
-        self.name = 'embed'
+        self.name = 'terminal'
         self.mainLayout = QtGui.QGridLayout()
         self.container = QtGui.QX11EmbedContainer(self)
         self.mainLayout.addWidget(self.container)
@@ -24,10 +24,10 @@ class Plugin(QtCore.QObject):
     def __init__(self, parent=None):
         super(Plugin, self).__init__()
         self.parent = parent
-        self.name = 'embed'
+        self.name = 'terminal'
         self.version = '0.0.1'
-        self.description = self.tr('Embed test plugin')
-        self.icon = general.get_icon('xterm_32x32')
+        self.description = self.tr('Embed terminal plugin')
+        self.icon = general.get_icon('terminal')
         self.widget = None
 
         self.embedButton = QtGui.QPushButton(self.icon, '')
@@ -39,7 +39,7 @@ class Plugin(QtCore.QObject):
         ''' Open path in new tab '''
         self.index = self.parent.tabWidget.currentIndex()+1
         self.widget = Widget(self.parent, spath)
-        self.parent.tabWidget.insertTab(self.index, self.widget, self.icon, self.tr('Xterm'))
+        self.parent.tabWidget.insertTab(self.index, self.widget, self.icon, self.tr('Terminal'))
         self.parent.tabWidget.setCurrentIndex(self.index)
         self.widget = self.parent.tabWidget.widget(self.index)
         self.widget.process.finished.connect(self.close)
