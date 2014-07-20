@@ -135,6 +135,15 @@ class Widget(QtGui.QWidget):
             self.nam.finished.connect(self.page_error)
             self.nam.sslErrors.connect(self.page_ssl_errors)
 
+        # http://qt-project.org/doc/qt-4.8/qwebsettings.html#WebAttribute-enum
+        self.webView.settings().setAttribute(QtWebKit.QWebSettings.DnsPrefetchEnabled, True)
+        self.webView.settings().setAttribute(QtWebKit.QWebSettings.DeveloperExtrasEnabled, True)
+        self.webView.settings().setAttribute(QtWebKit.QWebSettings.LocalStorageEnabled, True)
+        self.webView.settings().setAttribute(QtWebKit.QWebSettings.LocalStorageDatabaseEnabled, True)
+        self.webView.settings().setAttribute(QtWebKit.QWebSettings.LocalContentCanAccessRemoteUrls, True)
+        self.webView.settings().setAttribute(QtWebKit.QWebSettings.LocalContentCanAccessFileUrls, True)
+
+
         #self.webView.settings().setMaximumPagesInCache(0)
         #self.webView.settings().setObjectCacheCapacities(0, 0, 0)
         #self.webView.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
