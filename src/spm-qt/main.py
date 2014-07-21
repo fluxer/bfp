@@ -14,11 +14,9 @@ misc = libmisc.Misc()
 database = libpackage.Database()
 config = libworkspace.Settings()
 general = libworkspace.General()
-icon = QtGui.QIcon()
 
 def setLook():
     general.set_style(app)
-    icon.setThemeName(config.GENERAL_ICONTHEME)
 setLook()
 
 def Worker():
