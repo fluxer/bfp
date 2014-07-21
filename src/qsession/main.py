@@ -71,10 +71,10 @@ def login(autologin=None):
         ui.PasswordEdit.clear()
 
 def do_shutdown():
-    general.system_shutdown(MainWindow)
+    general.execute_program('poweroff')
 
 def do_reboot():
-    general.system_reboot(MainWindow)
+    general.execute_program('reboot')
 
 # setup signals
 ui.LoginButton.clicked.connect(login)
