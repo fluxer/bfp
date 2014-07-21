@@ -6,17 +6,16 @@
  * Lint - check if groups/users are removed
 
 ## SPM-QT ##
- * Fixup the logging
- * Implement menu bar and drop "About" tab in favour of about dialog
- * Turn into workspace plugin
+ * Rewrite as workspace plugin
 
 ## QWORKSPACE ##
  * Use unique IDs for plugin objects to properly support multiple instances of plugins 
- * Implement Applications amd Notifiaction API
+ * Implement Applications and Notifiaction API
  * Implement caches update plugin?
  * Implement download manager plugin (including torrents support)
  * Implement media player plugin (audio and video)
  * Implement audio mixer plugin
+ * Implement archive manager plugin (make use of the storage plugin?)
  * Implement more info into recent paths and display it with tooltip:
   - full path (done)
   - time accessed
