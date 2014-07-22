@@ -7,8 +7,8 @@ general = libworkspace.General()
 misc = libmisc.Misc()
 
 home_path = str(QtCore.QDir.homePath())
-cache_path = home_path + '/.cache/qbrowse/cache'
-cookies_path = home_path + '/.cache/qbrowse/cookies.txt'
+cache_path = home_path + '/.cache/www/cache'
+cookies_path = home_path + '/.cache/www/cookies.txt'
 misc.dir_create(cache_path)
 misc.file_touch(cookies_path)
 
@@ -310,7 +310,7 @@ class Widget(QtGui.QWidget):
         misc.file_write(sfile, reply.readAll(), 'a')
 
     def download_finished(self, reply):
-        surl = str(reply.url().toString())
+        surl = reply.url().toString()
         if reply.error():
             QtGui.QMessageBox.critical(self, self.tr('Critical'), \
                 self.tr('Dowload of <b>%s</b> failed.') % surl)
