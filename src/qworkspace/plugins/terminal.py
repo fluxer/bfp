@@ -1,9 +1,9 @@
 #!/bin/pyhton2
 
 from PyQt4 import QtCore, QtGui
-import libworkspace
+import libworkspace, libxlib, time
 general = libworkspace.General()
-
+xlib = libxlib.WM()
 
 class Widget(QtGui.QWidget):
     ''' Tab widget '''
@@ -18,6 +18,9 @@ class Widget(QtGui.QWidget):
         self.setLayout(self.mainLayout)
         self.process = QtCore.QProcess(self.container)
         self.process.start(self.spath)
+        self.process.waitForStarted()
+        time.sleep(3) # give xorg time to sync, sorry
+        self.container.embedClient(xlib.get_window_id(self.process.pid()))
 
 class Plugin(QtCore.QObject):
     ''' Plugin handler '''

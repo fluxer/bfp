@@ -812,6 +812,28 @@ class WM(object):
                                 [left, right, top, bottom])
         self.dpy.flush()
 
+    def resize_window(self, window, x=0, y=0, width=0, height=0):
+        window.configure(x=x, y=y, width=width, height=height)
+        window.change_attributes(win_gravity=X.NorthWestGravity, bit_gravity=X.StaticGravity)
+        self.dpy.flush()
+
+    def resize_pid(self, pid, x=0, y=0, width=0, height=0):
+        for window in self.get_clients():
+            wpid = self.get_window_property_safe(window, '_NET_WM_PID', X.AnyPropertyType).value[0]
+            print wpid, pid
+            if wpid == pid:
+                self.resize_window(window, x=x, y=y, width=width, height=height)
+
+    def get_window_id(self, pid):
+        self.dpy.sync()
+        for window in self.get_clients():
+            wpid = self.get_window_property_safe(window, '_NET_WM_PID', X.AnyPropertyType)
+            if wpid:
+                wpid = wpid.value[0]
+            if wpid == pid:
+                print window.id
+                return window.id
+        return False
 
 
 class TestWM(object):
