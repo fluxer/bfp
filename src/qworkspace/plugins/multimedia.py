@@ -14,9 +14,9 @@ class Widget(QtGui.QWidget):
         self.name = 'multimedia'
 
         self.pauseButton = QtGui.QPushButton(general.get_icon('player_pause'), '')
-        #self.pauseButton.clicked.connect(self.player_pause)
-        self.resumeButton = QtGui.QPushButton(general.get_icon('player_resume'), '')
-        #self.resumeButton.clicked.connect(self.player_resume)
+        self.pauseButton.clicked.connect(self.player_pause)
+        self.resumeButton = QtGui.QPushButton(general.get_icon('player_play'), '')
+        self.resumeButton.clicked.connect(self.player_resume)
         self.mainLayout = QtGui.QGridLayout()
         self.mainLayout.addWidget(self.pauseButton)
         self.mainLayout.addWidget(self.resumeButton)
@@ -29,25 +29,31 @@ class Widget(QtGui.QWidget):
         self.player.initialize()
 
         if self.spath:
-            self.player.command('loadfile', self.spath)
+            self.open_file(self.spath)
 
-#        while True:
-#            event = self.player.wait_event(.01)
-#            if event.id  == mpv.Events.none:
-#                continue
-#            print('EVENT: ' + event.name)
-#            if event.id in [mpv.Events.end_file, mpv.Events.shutdown]:
-#                print('EOF/SHUTDOWN')
-#                break
+    def event_handler(self):
+        while True:
+            event = self.player.wait_event(.01)
+            if event.id  == mpv.Events.none:
+                continue
+            print('EVENT: ' + event.name)
+            if event.id in [mpv.Events.end_file, mpv.Events.shutdown]:
+                print('EOF/SHUTDOWN')
+                break
 
-        def update_gui(self):
-            print(self.player.get_property('time_remaining'))
+    def update_gui(self):
+        print(self.player.get_property('time_remaining'))
 
-        def player_pause(self):
-            self.player.request_event(0, 'pause')
+    def open_file(self, spath):
+        self.player.command('loadfile', spath)
 
-        def player_resume(self):
-            self.player.request_event(0, 'resume')
+    def player_pause(self):
+        self.player.request_event(0, 'suspend')
+        # self.player.command('suspend')
+
+    def player_resume(self):
+        self.player.request_event(0, 'resume')
+        # self.player.command('resume')
 
 
 class Plugin(QtCore.QObject):
