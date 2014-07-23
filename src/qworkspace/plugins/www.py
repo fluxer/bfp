@@ -86,7 +86,7 @@ class Widget(QtGui.QWidget):
         secondLayout.addWidget(self.urlBox)
         for b in ('http://github.com', 'http://bitbucket.org', \
             'http://gmail.com', 'http://youtube.com', 'http://zamunda.net', \
-            'http://archlinux.org', 'http://phoronix.com'):
+            'http://archlinux.org', 'http://phoronix.com', 'http://html5test.com'):
             self.thirdLayout.addWidget(self.bookmark(b))
         mainLayout.addLayout(secondLayout, 0, 0)
         mainLayout.addLayout(self.thirdLayout, 30, 0)
