@@ -125,15 +125,12 @@ class Widget(QtGui.QWidget):
         self.webView.page().downloadRequested.connect(self.download)
         self.webView.page().unsupportedContent.connect(self.unsupported)
 
-        self.webView.settings().setAttribute(QtWebKit.QWebSettings.PluginsEnabled, \
-            True) #ui.actionPlugins.isChecked())
-        self.webView.settings().setAttribute(QtWebKit.QWebSettings.JavascriptEnabled, \
-            True) #ui.actionJavascript.isChecked())
-        if True: #ui.actionAccessManager.isChecked():
-            self.webView.page().setNetworkAccessManager(self.nam)
-            self.webView.loadFinished.connect(self.cookie_jar.saveCookies)
-            self.nam.finished.connect(self.page_error)
-            self.nam.sslErrors.connect(self.page_ssl_errors)
+        self.webView.settings().setAttribute(QtWebKit.QWebSettings.PluginsEnabled, True)
+        self.webView.settings().setAttribute(QtWebKit.QWebSettings.JavascriptEnabled, True)
+        self.webView.page().setNetworkAccessManager(self.nam)
+        self.webView.loadFinished.connect(self.cookie_jar.saveCookies)
+        self.nam.finished.connect(self.page_error)
+        self.nam.sslErrors.connect(self.page_ssl_errors)
 
         # http://qt-project.org/doc/qt-4.8/qwebsettings.html#WebAttribute-enum
         self.webView.settings().setAttribute(QtWebKit.QWebSettings.DnsPrefetchEnabled, True)
