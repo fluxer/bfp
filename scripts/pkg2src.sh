@@ -106,7 +106,7 @@ for pkg in "${@:-.}";do
 		-e 's|build()|src_compile()|g' -e 's|check()|src_check()|g' -e 's|package()|src_install()|g' \
 		-e 's|msg |echo |g' -e 's|msg2 |echo -e |g' \
 		-e 's|$CARCH|$(uname -m)|g' -e 's|${CARCH}|$(uname -m)|g' \
-		-e 's| \|\| return 1||g' \
+		-e 's/ || return 1//g' \
 		-e 's|$startdir/src|$SOURCE_DIR|g' -e 's|${startdir}/src|$SOURCE_DIR|g' \
 		-e 's|$startdir/pkg|$INSTALL_DIR|g' -e 's|${startdir}/pkg|$INSTALL_DIR|g' \
 		-e "s|\$pkgbase|$pkgname|g" -e "s|\${pkgbase}|$pkgname|g" \
