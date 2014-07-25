@@ -24,6 +24,8 @@
   - tooltips
   - size policies
   - etc.
+ * Figure out a way to make the main window fixed but resizable on
+   dusplay resolution change
 
 ## ALL QT ##
  * Expect failures everywhere
