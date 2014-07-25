@@ -164,7 +164,7 @@ class Actions(object):
                 if not svar:
                     return
             svar = str(svar)
-            misc.file_write(os.path.realpath(svar), '')
+            misc.file_touch(os.path.realpath(svar))
             return svar
 
     def new_directory(self):
