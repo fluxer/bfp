@@ -29,6 +29,7 @@
 
 ## ALL QT ##
  * Expect failures everywhere
+ * Day/night style mode
 
 ## ALL (on regular basis) ##
  * Run PyLint and do some kung-foo on the code style
