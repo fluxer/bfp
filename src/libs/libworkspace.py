@@ -16,6 +16,7 @@ class Settings(object):
     ''' Settings handler '''
     def __init__(self, sfile='qworkspace'):
         self.settings = QtCore.QSettings(sfile)
+        self.settings.setPath(QtCore.QSettings.IniFormat, QtCore.QSettings.SystemScope, '/etc/qworkspace')
 
     def get(self, svalue, sfallback=''):
         ''' Get settings value '''
