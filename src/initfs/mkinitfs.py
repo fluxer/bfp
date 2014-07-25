@@ -166,10 +166,11 @@ try:
                     modules.append(line)
 
     # FIXME: aliases are not supported, `modprobe -bD <module>` can be used but it is
-    #              required to be able to specify the kernel version which it does not support
-    #              otherwise it bails when kernel version requested is different from `uname -r`.
+    #        required to be able to specify the kernel version which it does not support
+    #        otherwise it bails when kernel version requested is different from `uname -r`.
     for module in modules:
         found = False
+        # cross-build, do some kung-fu
         if ARGS.kernel != kernel:
             for line in misc.file_read(modsdir + '/modules.dep').splitlines():
                 base = line.split(':')[0]
@@ -180,6 +181,7 @@ try:
                     for dep in depends.split():
                         copy_item(modsdir+ '/' + dep)
         else:
+            # native build, make use of `modprobe`
             depends = misc.system_output((misc.whereis('modprobe'), '-bD', module))
             if depends:
                 found = True
@@ -201,10 +203,7 @@ try:
     etc_dir = os.path.join(ARGS.tmp, 'etc')
     misc.dir_create(etc_dir)
     # to surpress a warning
-    if os.path.isfile('/etc/ld.so.conf'):
-        shutil.copy2('/etc/ld.so.conf', os.path.join(etc_dir, 'ld.so.conf'))
-    else:
-        misc.file_write(os.path.join(etc_dir, 'ld.so.conf'), '')
+    misc.file_touch(os.path.join(etc_dir, 'ld.so.conf'))
     subprocess.check_call((misc.whereis('ldconfig'), '-r', ARGS.tmp))
 
     message.sub_info('Creating image')
