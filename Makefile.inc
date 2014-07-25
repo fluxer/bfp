@@ -6,7 +6,6 @@ BINDIR = $(PREFIX)/bin
 SBINDIR = $(PREFIX)/sbin
 SHAREDIR = $(PREFIX)/share
 MANDIR = $(SHAREDIR)/man
-XDGDIR = /etc/xdg
 PYTHON = python2
 PYTHON_VERSION = $(shell $(PYTHON) -c "import sys; print(sys.version[:3])")
 SITEDIR = $(PREFIX)/lib/python$(PYTHON_VERSION)/site-packages

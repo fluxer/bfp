@@ -10,7 +10,6 @@ install:
 	$(SED) 's|#ARCH#|$(ARCH)|g' -i $(DESTDIR)/etc/spm.conf
 	$(SED) 's|#JOBS#|$(JOBS)|g' -i $(DESTDIR)/etc/spm.conf
 	$(CP) -vr styles $(DESTDIR)/etc/qworkspace/
-	$(INSTALL) -vm644 qmime.conf $(XDGDIR)/
 
 uninstall:
 	$(RM) -r $(DESTDIR)/etc/spm/ $(DESTDIR)/etc/spm.conf

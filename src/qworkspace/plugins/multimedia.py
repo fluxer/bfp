@@ -73,7 +73,15 @@ class Plugin(QtCore.QObject):
         self.applicationsLayout = self.parent.toolBox.widget(1).layout()
         self.applicationsLayout.addWidget(self.mediaButton)
 
-        # FIXME: register MIMEs
+        self.parent.plugins.mime_register('audio/x-wav', self.name)
+        self.parent.plugins.mime_register('audio/mpeg', self.name)
+        self.parent.plugins.mime_register('video/x-matroska', self.name)
+        self.parent.plugins.mime_register('video/x-msvideo', self.name)
+        self.parent.plugins.mime_register('video/x-flv', self.name)
+        self.parent.plugins.mime_register('video/x-ms-asf', self.name)
+        self.parent.plugins.mime_register('video/3gp', self.name)
+        self.parent.plugins.mime_register('video/mpeg', self.name)
+        self.parent.plugins.mime_register('video/mp4', self.name)
 
     def open(self, spath):
         ''' Open path in new tab '''
