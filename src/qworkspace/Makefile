@@ -16,16 +16,16 @@ all: bump clean
 
 install:
 	$(INSTALL) -vdm755 $(DESTDIR)$(BINDIR)
-	$(INSTALL) -vdm755 $(DESTDIR)/etc/workspace/plugins
+	$(INSTALL) -vdm755 $(DESTDIR)/etc/qworkspace/plugins
 	$(INSTALL) -vm755 main.exe $(DESTDIR)$(BINDIR)/qworkspace
-	$(INSTALL) -vm644 editor.so $(DESTDIR)/etc/qworkspace/plugins
-	$(INSTALL) -vm644 image.so $(DESTDIR)/etc/qworkspace/plugins
-	$(INSTALL) -vm644 multimedia.so $(DESTDIR)/etc/qworkspace/plugins
-	$(INSTALL) -vm644 quit.so $(DESTDIR)/etc/qworkspace/plugins
-	$(INSTALL) -vm644 screenshot.so $(DESTDIR)/etc/qworkspace/plugins
-	$(INSTALL) -vm644 storage.so $(DESTDIR)/etc/qworkspace/plugins
-	$(INSTALL) -vm644 terminal.so $(DESTDIR)/etc/qworkspace/plugins
-	$(INSTALL) -vm644 www.so $(DESTDIR)/etc/qworkspace/plugins
+	$(INSTALL) -vm644 editor.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(INSTALL) -vm644 image.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(INSTALL) -vm644 multimedia.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(INSTALL) -vm644 quit.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(INSTALL) -vm644 screenshot.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(INSTALL) -vm644 storage.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(INSTALL) -vm644 terminal.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(INSTALL) -vm644 www.so $(DESTDIR)/etc/qworkspace/plugins/
 
 uninstall:
 	$(RM) $(DESTDIR)$(BINDIR)/qworkspace
