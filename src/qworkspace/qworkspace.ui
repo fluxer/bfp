@@ -19,10 +19,6 @@
   <property name="windowTitle">
    <string>QWorkspace</string>
   </property>
-  <property name="windowIcon">
-   <iconset>
-    <normaloff>:/share/qresources/resources/desktop.svg</normaloff>:/share/qresources/resources/desktop.svg</iconset>
-  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QGridLayout" name="gridLayout">
     <item row="2" column="0">
@@ -81,8 +77,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>90</width>
-         <height>286</height>
+         <width>96</width>
+         <height>26</height>
         </rect>
        </property>
        <attribute name="label">
@@ -109,8 +105,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>90</width>
-         <height>286</height>
+         <width>96</width>
+         <height>26</height>
         </rect>
        </property>
        <attribute name="label">
@@ -137,8 +133,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>90</width>
-         <height>286</height>
+         <width>96</width>
+         <height>26</height>
         </rect>
        </property>
        <attribute name="label">
