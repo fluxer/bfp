@@ -84,9 +84,9 @@ class Widget(QtGui.QWidget):
         secondLayout.addWidget(self.findButton)
         secondLayout.addWidget(self.searchButton)
         secondLayout.addWidget(self.urlBox)
-        for b in ('http://github.com', 'http://bitbucket.org', \
-            'http://gmail.com', 'http://youtube.com', 'http://zamunda.net', \
-            'http://archlinux.org', 'http://phoronix.com', 'http://html5test.com'):
+        for b in ('github.com', 'bitbucket.org', \
+            'gmail.com', 'youtube.com', 'zamunda.net', \
+            'archlinux.org', 'phoronix.com', 'html5test.com'):
             self.thirdLayout.addWidget(self.bookmark(b))
         mainLayout.addLayout(secondLayout, 0, 0)
         mainLayout.addLayout(self.thirdLayout, 30, 0)
@@ -315,10 +315,14 @@ class Widget(QtGui.QWidget):
             QtGui.QMessageBox.information(self, self.tr('Info'), \
                 self.tr('Dowload of <b>%s</b> complete.') % surl)
 
+    def bookmark_open(self, url):
+        self.urlBox.setEditText(url)
+        self.path_changed()
+
     def bookmark(self, url):
         ''' Bookmark button creator, separate to preserve url connection '''
         button = QtGui.QPushButton(self.icon_bookmark, url)
-        button.clicked.connect(lambda: self.webView.setUrl(QtCore.QUrl(url)))
+        button.clicked.connect(lambda: self.bookmark_open(url))
         return button
 
     def context_menu(self):
