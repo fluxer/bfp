@@ -2,7 +2,7 @@ include ../../Makefile.inc
 
 all: clean
 	$(NUITKA) --module libarchive.py
-	$(NUITKA) --module libhighlighter.py
+	$(NUITKA) --module --recurse-not-to=libworkspace libhighlighter.py
 	$(NUITKA) --module libmagic.py
 	$(NUITKA) --module libmessage.py 
 	$(NUITKA) --module libmisc.py
