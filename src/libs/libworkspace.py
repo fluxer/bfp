@@ -425,8 +425,10 @@ class Plugins(object):
 
     def mime_register(self, smime, splugin):
         ''' Register MIME with plugin '''
+        message.info('Registering MIME ' + smime, splugin)
         self.mime_settings.set(smime, splugin)
 
     def mime_unregister(self, smime):
         ''' Unregister MIME '''
+        message.info('Unregistering MIME', smime)
         self.mime_settings.delete(smime)

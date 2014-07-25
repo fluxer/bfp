@@ -69,7 +69,7 @@ class Plugin(QtCore.QObject):
         self.applicationsLayout = self.parent.toolBox.widget(1).layout()
         self.applicationsLayout.addWidget(self.storageButton)
 
-        # FIXME: register MIMEs
+        self.parent.plugins.mime_register('inode/directory', self.name)
         # FIXME: add item to toolbox for media storage
 
     def open(self, spath):

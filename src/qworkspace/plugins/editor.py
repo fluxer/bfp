@@ -129,7 +129,18 @@ class Plugin(QtCore.QObject):
         self.applicationsLayout = self.parent.toolBox.widget(1).layout()
         self.applicationsLayout.addWidget(self.editorButton)
 
-        # FIXME: register MIMEs
+        self.parent.plugins.mime_register('text/plain', self.name)
+        self.parent.plugins.mime_register('text/x-shellscript', self.name)
+        self.parent.plugins.mime_register('text/x-perl', self.name)
+        self.parent.plugins.mime_register('text/x-diff', self.name)
+        self.parent.plugins.mime_register('text/x-makefile', self.name)
+        self.parent.plugins.mime_register('text/x-awk', self.name)
+        self.parent.plugins.mime_register('text/x-pascal', self.name)
+        self.parent.plugins.mime_register('text/x-python', self.name)
+        self.parent.plugins.mime_register('text/x-c', self.name)
+        self.parent.plugins.mime_register('text/x-c++', self.name)
+        self.parent.plugins.mime_register('text/html', self.name)
+        self.parent.plugins.mime_register('inode/x-empty', self.name)
 
     def open(self, spath):
         ''' Open path in new tab '''

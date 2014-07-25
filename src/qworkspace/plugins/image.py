@@ -121,6 +121,12 @@ class Plugin(QtCore.QObject):
         self.applicationsLayout = self.parent.toolBox.widget(1).layout()
         self.applicationsLayout.addWidget(self.imageButton)
 
+        self.parent.plugins.mime_register('image/x-ms-bmp', self.name)
+        self.parent.plugins.mime_register('image/bmp', self.name)
+        self.parent.plugins.mime_register('image/png', self.name)
+        self.parent.plugins.mime_register('image/jpeg', self.name)
+        self.parent.plugins.mime_register('image/svg+html', self.name)
+
     def open(self, spath):
         ''' Open path in new tab '''
         index = self.parent.tabWidget.currentIndex()+1
