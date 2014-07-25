@@ -64,13 +64,12 @@ class Widget(QtGui.QWidget):
         self.nam = QtNetwork.QNetworkAccessManager()
         self.nam.setCache(self.disk_cache)
         self.nam.setCookieJar(self.cookie_jar)
-        self.progressBar = QtGui.QProgressBar()
-
 
         # add widgets
         mainLayout = QtGui.QGridLayout()
         secondLayout = QtGui.QHBoxLayout()
-        self.thirdLayout = QtGui.QHBoxLayout()
+        thirdLayout = QtGui.QHBoxLayout()
+        fourthLayout = QtGui.QHBoxLayout()
         self.backButton = QtGui.QPushButton(self.icon_back, '')
         self.nextButton = QtGui.QPushButton(self.icon_next, '')
         self.reloadStopButton = QtGui.QPushButton(self.icon_reload, '')
@@ -78,6 +77,10 @@ class Widget(QtGui.QWidget):
         self.searchButton = QtGui.QPushButton(self.icon_search, '')
         self.urlBox = QtGui.QComboBox()
         self.webView = QtWebKit.QWebView()
+        self.statusLabel = QtGui.QLabel()
+        self.statusLabel.setSizePolicy(QtGui.QSizePolicy.MinimumExpanding, QtGui.QSizePolicy.Expanding)
+        self.progressBar = QtGui.QProgressBar()
+        #self.progressBar.setSize(200, 30)
         secondLayout.addWidget(self.backButton)
         secondLayout.addWidget(self.nextButton)
         secondLayout.addWidget(self.reloadStopButton)
@@ -87,11 +90,13 @@ class Widget(QtGui.QWidget):
         for b in ('github.com', 'bitbucket.org', \
             'gmail.com', 'youtube.com', 'zamunda.net', \
             'archlinux.org', 'phoronix.com', 'html5test.com'):
-            self.thirdLayout.addWidget(self.bookmark(b))
+            thirdLayout.addWidget(self.bookmark(b))
+        fourthLayout.addWidget(self.statusLabel)
+        fourthLayout.addWidget(self.progressBar)
         mainLayout.addLayout(secondLayout, 0, 0)
-        mainLayout.addLayout(self.thirdLayout, 30, 0)
+        mainLayout.addLayout(thirdLayout, 60, 0)
         mainLayout.addWidget(self.webView)
-        self.parent.statusBar.addPermanentWidget(self.progressBar, 0)
+        mainLayout.addLayout(fourthLayout, QtCore.Qt.AlignBottom, 0)
         self.setLayout(mainLayout)
 
         # setup widgets
@@ -269,7 +274,7 @@ class Widget(QtGui.QWidget):
             399: self.tr('a breakdown in protocol was detected (parsing error, invalid or unexpected responses, etc.)'),
         }
         if eid in errors:
-            self.parent.statusBar.showMessage(errors.get(eid, self.tr('unknown error')))
+            self.statusLabel.setText(errors.get(eid, self.tr('unknown error')))
             if eid == 5:
                 self.progressBar.hide()
                 self.progressBar.setValue(0)
@@ -277,7 +282,7 @@ class Widget(QtGui.QWidget):
     def page_ssl_errors(self, reply, errors):
         ''' SSL error handler '''
         reply.ignoreSslErrors()
-        self.parent.statusBar.showMessage(self.tr('SSL errors ignored: %s, %s') % (reply.url().toString(), errors))
+        self.statusLabel.setText(self.tr('SSL errors ignored: %s, %s') % (reply.url().toString(), errors))
 
     def action_find(self):
         ''' Find text in current page '''
