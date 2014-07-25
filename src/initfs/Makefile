@@ -7,16 +7,16 @@ all: bump clean
 
 install:
 	$(INSTALL) -vdm755 $(DESTDIR)$(BINDIR) $(DESTDIR)$(SBINDIR)
-	$(INSTALL) -vdm755 $(DESTDIR)$(ETCDIR)
+	$(INSTALL) -vdm755 $(DESTDIR)/etc/
 	$(INSTALL) -vm755 mkinitfs.exe $(DESTDIR)$(SBINDIR)/mkinitfs
 	$(INSTALL) -vm755 lsinitfs.exe $(DESTDIR)$(BINDIR)/lsinitfs
-	$(CP) -a root $(DESTDIR)$(ETCDIR)/mkinitfs
-	$(CP) -a files $(DESTDIR)$(ETCDIR)/mkinitfs
+	$(CP) -a root $(DESTDIR)/etc/mkinitfs
+	$(CP) -a files $(DESTDIR)/etc/mkinitfs
 
 uninstall:
 	$(RM) $(DESTDIR)$(SBINDIR)/mkinitfs
 	$(RM) $(DESTDIR)$(BINDIR)/lsinitfs
-	$(RM) -r $(DESTDIR)$(ETCDIR)/mkinitfs
+	$(RM) -r $(DESTDIR)/etc/mkinitfs
 
 clean:
 	$(RM) -r *.build/ *.exe
