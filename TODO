@@ -9,7 +9,6 @@
  * Rewrite as workspace plugin
 
 ## QWORKSPACE ##
- * Use unique IDs for plugin objects to properly support multiple instances of plugins 
  * Implement Applications and Notifiaction API
  * Implement caches update plugin?
  * Implement download manager plugin (including torrents support)

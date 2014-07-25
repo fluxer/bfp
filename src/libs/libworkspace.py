@@ -19,17 +19,18 @@ class Settings(object):
 
     def get(self, svalue, sfallback=''):
         ''' Get settings value '''
+        self.settings.sync()
         return str(self.settings.value(svalue, sfallback).toString())
 
     def set(self, svariable, svalue):
         ''' Write settings value '''
-        self.settings.setValue(svariable, svalue)
         self.settings.sync()
+        self.settings.setValue(svariable, svalue)
 
     def delete(self, svariable):
         ''' Delete settings '''
-        self.settings.remove(svariable)
         self.settings.sync()
+        self.settings.remove(svariable)
 
 
 class General(object):
@@ -333,7 +334,7 @@ class Plugins(object):
             message.critical('Plugin error', detail)
             raise(PluginException('Plugin error', detail))
 
-    def plugin_close(self, splugin):
+    def plugin_close(self, splugin, sindex=None):
         ''' Close plugin '''
         if not self.plugin_valid(splugin):
             message.critical('Plugin is not valid', splugin)
@@ -350,7 +351,7 @@ class Plugins(object):
                 message.critical('Plugin does not support close', detail)
                 raise(PluginException('Plugin does not support close', detail))
 
-            plugin.close()
+            plugin.close(sindex)
             message.debug('Closing of plugin was successfull', splugin)
         except Exception as detail:
             message.critical('Plugin error', detail)
@@ -376,22 +377,32 @@ class Plugins(object):
 
     def recent_restore(self):
         message.info('Restoring recent files')
-        for recent in self.recent_settings.settings.allKeys():
-            self.recent_register(self.recent_settings.get(recent))
+        for key in self.recent_settings.settings.allKeys():
+            self.recent_register(str(key))
 
     def recent_register(self, spath):
         ''' Register recent path '''
-        # FIXME: limit to 30?
+        # limit to 30
+        keys = self.recent_settings.settings.allKeys()
+        if len(keys) > 29:
+            pass
+            # self.recent_unregister('recent/30')
+
+        for key in keys:
+            if self.recent_settings.get(key) == spath:
+                message.sub_warning('Recent already registered', key)
+                self.recent_unregister(key)
+
         message.info('Registering recent path', spath)
         button = QtGui.QPushButton(general.get_icon('document-open-recent'), os.path.basename(spath))
-        button.clicked.connect(lambda: self.plugin_open(spath, False))
+        button.clicked.connect(lambda: self.plugin_open('/' + spath, False))
         self.parent.toolBox.widget(0).layout().addWidget(button)
-        self.recent_settings.set('recent', spath)
+        self.recent_settings.set(spath, '')
 
     def recent_unregister(self, spath):
         ''' Unregister recent path '''
         message.info('Unregistering recent path', spath)
-        self.recent_settings.delete('recent/' + spath)
+        self.recent_settings.delete(spath)
 
     def mime_mime(self, splugin):
         ''' Get MIME associated with program '''

@@ -4,7 +4,7 @@ import qworkspace_ui
 from PyQt4 import QtCore, QtGui
 import sys, gc, libworkspace, libmisc
 
-app_version = "0.9.17 (b1710fa)"
+app_version = "0.9.17 (996881c)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qworkspace_ui.Ui_MainWindow()
@@ -35,7 +35,7 @@ def tab_close(index):
         widget.layout().deleteLater()
         ui.tabWidget.removeTab(index)
         return
-    ui.plugins.plugin_close(widget.name)
+    ui.plugins.plugin_close(widget.name, index)
     gc.collect()
 ui.tabWidget.tabCloseRequested.connect(tab_close)
 

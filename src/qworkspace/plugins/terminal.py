@@ -40,19 +40,20 @@ class Plugin(QtCore.QObject):
 
     def open(self, spath):
         ''' Open path in new tab '''
-        self.index = self.parent.tabWidget.currentIndex()+1
+        index = self.parent.tabWidget.currentIndex()+1
         self.widget = Widget(self.parent, spath)
-        self.parent.tabWidget.insertTab(self.index, self.widget, self.icon, self.tr('Terminal'))
-        self.parent.tabWidget.setCurrentIndex(self.index)
-        self.widget = self.parent.tabWidget.widget(self.index)
+        self.parent.tabWidget.insertTab(index, self.widget, self.icon, self.tr('Terminal'))
+        self.parent.tabWidget.setCurrentIndex(index)
         self.widget.process.finished.connect(self.close)
 
-    def close(self):
+    def close(self, index=None):
         ''' Close tab '''
+        if not index:
+            index = self.parent.tabWidget.currentIndex()
         if self.widget:
-            self.widget.destroy()
             self.widget.process.terminate()
             self.widget.process.close()
+            self.widget.destroy()
             self.parent.tabWidget.removeTab(self.index)
 
     def unload(self):
