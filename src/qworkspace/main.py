@@ -4,7 +4,7 @@ import qworkspace_ui
 from PyQt4 import QtCore, QtGui
 import sys, gc, libworkspace, libmisc
 
-app_version = "0.9.18 (020981a)"
+app_version = "0.9.18 (1762c2e)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qworkspace_ui.Ui_MainWindow()
@@ -39,14 +39,15 @@ def tab_close(index):
     gc.collect()
 ui.tabWidget.tabCloseRequested.connect(tab_close)
 
-def reload_browser():
-    global settings
-    reload(libworkspace)
-    settings = libworkspace.Settings()
-    setLook()
-watcher1 = QtCore.QFileSystemWatcher()
-watcher1.addPath(settings.settings.fileName())
-watcher1.fileChanged.connect(reload_browser)
+if os.path.isfile(settings.settings.fileName()):
+    def reload_workspace():
+        global settings
+        reload(libworkspace)
+        settings = libworkspace.Settings()
+        setLook()
+    watcher1 = QtCore.QFileSystemWatcher()
+    watcher1.addPath(settings.settings.fileName())
+    watcher1.fileChanged.connect(reload_workspace)
 
 MainWindow.showMaximized()
 MainWindow.setFixedSize(MainWindow.size())
