@@ -13,6 +13,7 @@ settings = libworkspace.Settings()
 general = libworkspace.General()
 misc = libmisc.Misc()
 
+# setup look of application
 def setLook():
     general.set_style(app)
 setLook()
@@ -87,22 +88,22 @@ d = QtGui.QDesktopWidget().screenGeometry(MainWindow)
 ui.frame.move((d.width()/2)-165, (d.height()/2)-120)
 
 # watch configs for changes
-def reload_session():
-    global settings
-    reload(libsettings)
-    settings = libworkspace.Settings()
-    setLook()
-    # setWallpaper()
-
-watcher1 = QtCore.QFileSystemWatcher()
-watcher1.addPath(settings.settings.fileName())
-watcher1.fileChanged.connect(reload_session)
+if os.path.isfile(settings.settings.fileName()):
+    def reload_session():
+        global general
+        reload(libworkspace)
+        general = libworkspace.General()
+        setLook()
+    watcher1 = QtCore.QFileSystemWatcher()
+    watcher1.addPath(settings.settings.fileName())
+    watcher1.fileChanged.connect(reload_session)
 
 try:
     os.setsid()
 except Exception as detail:
     print(str(detail))
 
+# autologin if told to
 autologin = False
 for p in pwd.getpwall():
     # skip system users
@@ -114,7 +115,7 @@ for p in pwd.getpwall():
 if autologin:
     login(p.pw_name)
 
-# run!
+# show window and run application
 os.chdir('/')
 MainWindow.showMaximized()
 sys.exit(app.exec_())
