@@ -18,16 +18,13 @@ def setLook():
     general.set_style(app)
 setLook()
 
-class LoginThread(QtCore.QThread):
-    def __init__(self, parent=None, username='root'):
-        super(LoginThread, self).__init__(parent)
-        self.username = username
-
-    def run(self):
-        pw_uid = pwd.getpwnam(self.username).pw_uid
-        pw_gid = pwd.getpwnam(self.username).pw_gid
-        pw_dir = pwd.getpwnam(self.username).pw_dir
-        pw_shell = pwd.getpwnam(self.username).pw_shell
+class SandboxProcess(QtCore.QProcess):
+    def setupChildProcess(self, username):
+        # Drop all privileges in the child process
+        pw_uid = pwd.getpwnam(username).pw_uid
+        pw_gid = pwd.getpwnam(username).pw_gid
+        pw_dir = pwd.getpwnam(username).pw_dir
+        pw_shell = pwd.getpwnam(username).pw_shell
 
         os.setgid(pw_gid)
         os.setuid(pw_uid)
@@ -37,8 +34,6 @@ class LoginThread(QtCore.QThread):
             os.chdir(pw_dir)
         else:
             os.chdir('/')
-        # general.execute_program(misc.whereis('qworkspace'), False)
-        os.system(misc.whereis('qworkspace'))
 
 def login(autologin=None):
     username = str(ui.UserNameBox.currentText())
@@ -57,15 +52,16 @@ def login(autologin=None):
     if autologin or crypt.crypt(password, pw_passwd) == pw_passwd:
         try:
             MainWindow.hide()
-            thread = LoginThread(username=username)
-            thread.start()
-            thread.wait()
+            proc = SandboxProcess()
+            proc.setupChildProcess(username)
+            proc.execute(misc.whereis('qworkspace'))
         except Exception as detail:
             QtGui.QMessageBox.critical(MainWindow, 'Critical', 'Login was not sucessful:\n\n' + str(detail))
             ui.PasswordEdit.setFocus()
             ui.PasswordEdit.clear()
         finally:
             MainWindow.show()
+            proc.close()
     else:
         QtGui.QMessageBox.critical(MainWindow, 'Critical', 'Incorrect password.')
         ui.PasswordEdit.setFocus()
