@@ -84,14 +84,9 @@ ui.frame.move((d.width()/2)-165, (d.height()/2)-120)
 
 # watch configs for changes
 if os.path.isfile(settings.settings.fileName()):
-    def reload_session():
-        global general
-        reload(libworkspace)
-        general = libworkspace.General()
-        setLook()
-    watcher1 = QtCore.QFileSystemWatcher()
-    watcher1.addPath(settings.settings.fileName())
-    watcher1.fileChanged.connect(reload_session)
+    watcher = QtCore.QFileSystemWatcher()
+    watcher.addPath(settings.settings.fileName())
+    watcher.fileChanged.connect(setLook)
 
 try:
     os.setsid()

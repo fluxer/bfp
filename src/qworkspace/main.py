@@ -45,14 +45,9 @@ ui.tabWidget.tabCloseRequested.connect(tab_close)
 
 # watch configs for changes
 if os.path.isfile(settings.settings.fileName()):
-    def reload_workspace():
-        global general
-        reload(libworkspace)
-        general = libworkspace.General()
-        setLook()
-    watcher1 = QtCore.QFileSystemWatcher()
-    watcher1.addPath(settings.settings.fileName())
-    watcher1.fileChanged.connect(reload_workspace)
+    watcher = QtCore.QFileSystemWatcher()
+    watcher.addPath(settings.settings.fileName())
+    watcher.fileChanged.connect(setLook)
 
 # show window and run application
 MainWindow.showMaximized()
