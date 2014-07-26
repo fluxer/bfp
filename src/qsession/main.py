@@ -18,9 +18,8 @@ def setLook():
     general.set_style(app)
 setLook()
 
-class SandboxProcess(QtCore.QProcess):
+class LoginProcess(QtCore.QProcess):
     def setupChildProcess(self, username):
-        # Drop all privileges in the child process
         pw_uid = pwd.getpwnam(username).pw_uid
         pw_gid = pwd.getpwnam(username).pw_gid
         pw_dir = pwd.getpwnam(username).pw_dir
@@ -52,7 +51,7 @@ def login(autologin=None):
     if autologin or crypt.crypt(password, pw_passwd) == pw_passwd:
         try:
             MainWindow.hide()
-            proc = SandboxProcess()
+            proc = LoginProcess()
             proc.setupChildProcess(username)
             proc.execute(misc.whereis('qworkspace'))
         except Exception as detail:

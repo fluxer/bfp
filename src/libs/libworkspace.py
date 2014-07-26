@@ -1,6 +1,6 @@
 #!/bin/python2
 
-import os, sys
+import os, sys, shutil
 from PyQt4 import QtCore, QtGui
 
 import libmisc, libmessage
@@ -81,10 +81,10 @@ general = General()
 class Actions(object):
     ''' Mostly menu action shortcuts '''
     def __init__(self, parent=None):
+        super(Actions, self).__init__()
         self.parent = parent
-        self.window = QtGui.QMainWindow(self.parent)
-        self.app = QtGui.QApplication(sys.argv)
-        self.clipboard = self.app.clipboard()
+        #self.app = QtGui.QApplication([])
+        #self.clipboard = self.app.clipboard()
         self.cut = None
         self.copy = None
         self.thread = None
@@ -93,7 +93,7 @@ class Actions(object):
         ''' Check if file/dir exists and offer to rename '''
         sfile_basename = os.path.basename(sfile)
         sfile_dirname = os.path.dirname(sfile)
-        sfile_basename, ok = QtGui.QInputDialog.getText(self.window, 'File/directory exists', \
+        sfile_basename, ok = QtGui.QInputDialog.getText(self, 'File/directory exists', \
                 'File/directory exists, new name:', QtGui.QLineEdit.Normal, sfile_basename)
         sfile_basename = str(sfile_basename)
         if ok and sfile_basename:
@@ -158,7 +158,7 @@ class Actions(object):
 
     def new_file(self):
         ''' Create a new file '''
-        svar, ok = QtGui.QInputDialog.getText(self.window, 'New file', \
+        svar, ok = QtGui.QInputDialog.getText(self, 'New file', \
             'Name:', QtGui.QLineEdit.Normal)
         svar = os.path.realpath(str(svar))
         if ok and svar:
@@ -172,7 +172,7 @@ class Actions(object):
 
     def new_directory(self):
         ''' Create a new directory '''
-        svar, ok = QtGui.QInputDialog.getText(self.window, 'New directory', \
+        svar, ok = QtGui.QInputDialog.getText(self, 'New directory', \
             'Name:', QtGui.QLineEdit.Normal)
         svar = os.path.realpath(str(svar))
         if ok and svar:
