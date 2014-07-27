@@ -4,7 +4,6 @@ from PyQt4 import QtCore, QtGui
 import sys, libworkspace
 general = libworkspace.General()
 
-
 class Plugin(QtCore.QObject):
     ''' Plugin handler '''
     def __init__(self, parent):
@@ -15,9 +14,8 @@ class Plugin(QtCore.QObject):
         self.description = self.tr('Quit plugin')
         self.icon = general.get_icon('exit')
 
-        self.app = QtGui.QApplication(sys.argv)
         self.quitButton = QtGui.QPushButton(self.icon, '')
-        self.quitButton.clicked.connect(self.app.quit)
+        self.quitButton.clicked.connect(self.parent.app.quit)
         #self.parent.toolBox.addItem('System')
         self.parent.toolBox.widget(1).layout().addWidget(self.quitButton)
 

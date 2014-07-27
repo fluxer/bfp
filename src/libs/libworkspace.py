@@ -80,11 +80,10 @@ general = General()
 
 class Actions(object):
     ''' Mostly menu action shortcuts '''
-    def __init__(self, parent=None):
+    def __init__(self, parent):
         super(Actions, self).__init__()
         self.parent = parent
-        #self.app = QtGui.QApplication([])
-        #self.clipboard = self.app.clipboard()
+        self.clipboard = self.parent.app.clipboard()
         self.cut = None
         self.copy = None
         self.thread = None

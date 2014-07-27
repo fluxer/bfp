@@ -102,7 +102,6 @@ class Widget(QtGui.QWidget):
 
     def menu_paste(self):
         self.actions.paste_items()
-        ui.actionPaste.setEnabled(False)
 
     def menu_rename(self):
         selected_items = []

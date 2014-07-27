@@ -2,7 +2,7 @@
 
 import qsession_ui
 from PyQt4 import QtCore, QtGui
-import sys, os, pwd, crypt, libmisc, libworkspace
+import sys, os, pwd, crypt, subprocess, libmisc, libworkspace
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
@@ -18,21 +18,30 @@ def setLook():
     general.set_style(app)
 setLook()
 
-class LoginProcess(QtCore.QProcess):
-    def setupChildProcess(self, username):
-        pw_uid = pwd.getpwnam(username).pw_uid
-        pw_gid = pwd.getpwnam(username).pw_gid
-        pw_dir = pwd.getpwnam(username).pw_dir
-        pw_shell = pwd.getpwnam(username).pw_shell
+def LoginProcess(username):
+    pw_uid = pwd.getpwnam(username).pw_uid
+    pw_gid = pwd.getpwnam(username).pw_gid
+    pw_dir = pwd.getpwnam(username).pw_dir
+    pw_shell = pwd.getpwnam(username).pw_shell
 
-        os.setgid(pw_gid)
-        os.setuid(pw_uid)
-        os.putenv('HOME', pw_dir)
-        os.putenv('SHELL', pw_shell)
-        if os.path.isdir(pw_dir):
-            os.chdir(pw_dir)
-        else:
-            os.chdir('/')
+    os.initgroups(username, pw_gid)
+    os.setgid(pw_gid)
+    os.setuid(pw_uid)
+    os.putenv('USER', username)
+    os.putenv('LOGNAME', username)
+    os.putenv('HOME', pw_dir)
+    os.putenv('PWD', pw_dir)
+    os.putenv('SHELL', pw_shell)
+
+    if pw_uid == 0:
+        os.putenv('SHELL', '/sbin:/bin:/usr/sbin:/usr/bin')
+    else:
+        os.putenv('SHELL', '/bin:/usr/bin')
+    if os.path.isdir(pw_dir):
+        os.chdir(pw_dir)
+    else:
+        os.chdir('/')
+    subprocess.check_call(misc.whereis('qworkspace'))
 
 def login(autologin=None):
     username = str(ui.UserNameBox.currentText())
@@ -42,8 +51,15 @@ def login(autologin=None):
 
     pw_passwd = pwd.getpwnam(username).pw_passwd
 
+    if os.path.isfile('/etc/nologin'):
+        QtGui.QMessageBox.critical(MainWindow, 'Critical', 'Login is not permited at the moment:\n\n' + \
+            misc.file_read('/etc/nologin'))
+        return
+
+    # FIXME: /etc/usertty and /etc/securetty support, see http://linux.die.net/man/1/login
+
     if pw_passwd == 'x' or pw_passwd == '*':
-        QtGui.QMessageBox.critical(MainWindow, 'Critical', 'Shadow passwords are hot supported')
+        QtGui.QMessageBox.critical(MainWindow, 'Critical', 'Shadow passwords are hot supported.')
         ui.UserNameBox.setFocus()
         ui.PasswordEdit.clear()
         return
@@ -51,16 +67,15 @@ def login(autologin=None):
     if autologin or crypt.crypt(password, pw_passwd) == pw_passwd:
         try:
             MainWindow.hide()
-            proc = LoginProcess()
-            proc.setupChildProcess(username)
-            proc.execute(misc.whereis('qworkspace'))
+            LoginProcess(username)
         except Exception as detail:
             QtGui.QMessageBox.critical(MainWindow, 'Critical', 'Login was not sucessful:\n\n' + str(detail))
             ui.PasswordEdit.setFocus()
             ui.PasswordEdit.clear()
         finally:
             MainWindow.show()
-            proc.close()
+            # since priviledges are dropped let init restart the program to regain root
+            sys.exit(0)
     else:
         QtGui.QMessageBox.critical(MainWindow, 'Critical', 'Incorrect password.')
         ui.PasswordEdit.setFocus()

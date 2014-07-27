@@ -25,7 +25,8 @@
   - size policies
   - etc.
  * Figure out a way to make the main window fixed but resizable on
-   dusplay resolution change
+   display resolution change
+ * Session manager (save/restore state), see http://qt-project.org/doc/qt-4.8/session.html
 
 ## ALL QT ##
  * Expect failures everywhere
