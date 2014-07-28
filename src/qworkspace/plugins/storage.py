@@ -1,9 +1,12 @@
 #!/bin/python2
 
 from PyQt4 import QtCore, QtGui
-import os, libworkspace
+import os, shutil, time, libmisc, libmessage, libsystem, libworkspace
 general = libworkspace.General()
 settings = libworkspace.Settings()
+misc = libmisc.Misc()
+system = libsystem.System()
+message = libmessage.Message()
 
 class Widget(QtGui.QWidget):
     ''' Tab widget '''
@@ -14,7 +17,10 @@ class Widget(QtGui.QWidget):
         self.name = 'storage'
 
         self.shome = QtCore.QDir.homePath()
-        self.actions = libworkspace.Actions(self.parent)
+        self.clipboard = self.parent.app.clipboard()
+        self.cut = []
+        self.copy = []
+
         self.secondLayout = QtGui.QHBoxLayout()
         self.homeButton = QtGui.QPushButton(general.get_icon('user-home'), '')
         self.homeButton.clicked.connect(lambda: self.path_open(self.shome))
@@ -53,6 +59,21 @@ class Widget(QtGui.QWidget):
 
         self.path_open(self.spath or self.shome)
 
+    def _check_exists(self, sfile):
+        ''' Check if file/dir exists and offer to rename '''
+        sfile_basename = os.path.basename(sfile)
+        sfile_dirname = os.path.dirname(sfile)
+        sfile_basename, ok = QtGui.QInputDialog.getText(self, 'File/directory exists', \
+                'File/directory exists, new name:', QtGui.QLineEdit.Normal, sfile_basename)
+        sfile_basename = str(sfile_basename)
+        if ok and sfile_basename:
+            if not os.path.exists(sfile_dirname + '/' + sfile_basename):
+                return sfile_basename
+            else:
+                return self.check_exists(sfile)
+        elif not ok:
+            return
+
     def path_open(self, spath):
         if not spath:
             spath = self.storageView.currentIndex()
@@ -71,61 +92,108 @@ class Widget(QtGui.QWidget):
         #disable_actions()
 
     def menu_execute(self):
-        selected_items = []
+        ''' Execute files with default software '''
         for svar in self.storageView.selectedIndexes():
-            selected_items.append(str(self.model.filePath(svar)))
-        self.actions.execute_items(selected_items)
+            spath = str(self.model.filePath(svar))
+            if os.path.isfile(spath):
+                general.execute_program(spath)
 
     def menu_open(self):
         for svar in self.storageView.selectedIndexes():
             self.path_open(str(self.model.filePath(svar)))
 
     def menu_open_with(self):
-        selected_items = []
         for svar in self.storageView.selectedIndexes():
-            selected_items.append(str(self.model.filePath(svar)))
-        self.actions.open_items(selected_items)
+            self.parent.plugins.open_with(str(self.model.filePath(svar)))
 
     def menu_cut(self):
-        selected_items = []
+        ''' Cut files/directories for future paste '''
+        self.cut = []
+        self.copy = []
         for svar in self.storageView.selectedIndexes():
-            selected_items.append(str(self.model.filePath(svar)))
-        self.actions.cut_items(selected_items)
-        ui.actionPaste.setEnabled(True)
+            self.cut.append(str(self.model.filePath(svar)))
+        self.clipboard.setText(misc.string_convert(self.cut))
 
     def menu_copy(self):
-        selected_items = []
+        ''' Copy files/directories for future paste '''
+        self.cut = []
+        self.copy = []
         for svar in self.storageView.selectedIndexes():
-            selected_items.append(str(self.model.filePath(svar)))
-        self.actions.copy_items(selected_items)
-        ui.actionPaste.setEnabled(True)
+            self.copy.append(str(self.model.filePath(svar)))
+        self.clipboard.setText(misc.string_convert(self.copy))
 
     def menu_paste(self):
-        self.actions.paste_items()
+        ''' Paste files/directories '''
+        # FIXME: _check_exists()
+        sdest = str(self.model.rootPath())
+        if self.cut:
+            for svar in self.cut:
+                if os.path.isdir(svar):
+                    shutil.copytree(svar, sdest)
+                    misc.dir_remove(svar)
+                else:
+                    shutil.copy2(svar, sdest)
+                    os.unlink(svar)
+        elif self.copy:
+            for svar in self.copy:
+                if os.path.isdir(svar):
+                    shutil.copytree(svar, sdest)
+                else:
+                    shutil.copy2(svar, sdest)
+        else:
+            # FIXME: it will break on paths with spaces,
+            #        is it OK to use \n in the clipboard content to solve this?
+            # FIXME: download URLs
+            for svar in self.clipboard.text().split(' '):
+                if os.path.isdir(svar):
+                    shutil.copytree(svar, sdest)
+                else:
+                    shutil.copy2(svar, sdest)
 
     def menu_rename(self):
         selected_items = []
         for svar in self.storageView.selectedIndexes():
             selected_items.append(str(self.model.filePath(svar)))
-        self.actions.rename_items(selected_items)
+        # FIXME: implement
 
     def menu_delete(self):
-        selected_items = []
+        ''' Delete files/directories '''
         for svar in self.storageView.selectedIndexes():
-            selected_items.append(str(self.model.filePath(svar)))
-        self.actions.delete_items(selected_items)
+            spath = str(self.model.filePath(svar))
+            if os.path.isdir(spath):
+                misc.dir_remove(spath)
+            else:
+                os.unlink(spath)
 
     def menu_properties(self):
         selected_items = []
         for svar in self.storageView.selectedIndexes():
             selected_items.append(str(self.model.filePath(svar)))
-        self.actions.properties_items(selected_items)
+        # FIXME: implement
 
     def menu_new_file(self):
-        actions.new_file()
+        ''' Create a new file '''
+        svar, ok = QtGui.QInputDialog.getText(self, 'New file', \
+            'Name:', QtGui.QLineEdit.Normal)
+        svar = os.path.realpath(str(self.model.rootPath() + '/' + svar))
+        if ok and svar:
+            if os.path.exists(svar):
+                svar = self._check_exists(svar)
+                if not svar:
+                    return
+            misc.file_touch(os.path.realpath(str(svar)))
 
     def menu_new_directory(self):
-        self.actions.new_directory()
+        ''' Create a new directory '''
+        svar, ok = QtGui.QInputDialog.getText(self, 'New directory', \
+            'Name:', QtGui.QLineEdit.Normal)
+        svar = os.path.realpath(str(self.model.rootPath() + '/' + svar))
+        if ok and svar:
+            if os.path.isdir(svar):
+                svar = self._check_exists(svar)
+                if not svar:
+                    return
+            misc.dir_create(str(svar))
 
     def menu_show(self):
         # FIXME: enable actions depending on permissions and such
@@ -145,6 +213,56 @@ class Widget(QtGui.QWidget):
         self.storageMenu.addAction(self.icon_new_file, self.tr('New file'), self.menu_new_file)
         self.storageMenu.addAction(self.icon_new_dir, self.tr('New directory'), self.menu_new_directory)
         self.storageMenu.popup(QtGui.QCursor.pos())
+
+    def menu_extract(self):
+        ''' Extract archives '''
+        # FIXME: implement
+        pass
+
+    def menu_gzip(self):
+        ''' Gzip files/directories into archive '''
+        # FIXME: implement
+        pass
+
+    def menu_bzip2(self):
+        ''' BZip2 files/directories into archive '''
+        # FIXME: implement
+        pass
+
+class Daemon(QtCore.QThread):
+    def run(self):
+        ''' Monitor block devices state '''
+        # FIXME: use notification
+        if not os.path.exists('/sys/class/block'):
+            message.sub_warning('No sysfs support')
+            return
+
+        message.sub_info('Monitoring block devices state')
+        while True:
+            before = os.listdir('/sys/class/block')
+            time.sleep(2)
+            after = os.listdir('/sys/class/block')
+            for f in after:
+                if '.tmp' in f:
+                    continue
+                if not f in before:
+                    try:
+                        system.do_mount('/dev/' + f)
+                        message.sub_info('Device mounted', f)
+                    except Exception as detail:
+                        pass
+            for f in before:
+                if '.tmp' in f:
+                    continue
+                if not f in after:
+                    try:
+                        system.do_unmount('/dev/' + f)
+                        message.sub_info('Device unmounted', f)
+                    except Exception as detail:
+                        pass
+            time.sleep(2)
+
+
 
 class ToolWidget(QtGui.QWidget):
     ''' Tool widget '''
@@ -176,6 +294,9 @@ class Plugin(QtCore.QObject):
         self.parent.plugins.mime_register('inode/directory', self.name)
         # FIXME: add item to toolbox for media storage
 
+        self.daemon = Daemon()
+        self.daemon.start()
+
     def open(self, spath):
         ''' Open path in new tab '''
         index = self.parent.tabWidget.currentIndex()+1
@@ -195,4 +316,5 @@ class Plugin(QtCore.QObject):
         ''' Unload plugin '''
         self.applicationsLayout.removeWidget(self.storageButton)
         #self.tool.destroy()
+        self.daemon.quit()
         self.close()

@@ -179,6 +179,10 @@ class System(object):
         ''' Mount a block device '''
         self.pre_actions(self.MOUNT_PRE)
         directory = '/media/' + os.path.basename(device)
+        stype = misc.system_output((misc.whereis('blkid'), '-o', 'value', '-s', 'TYPE', device))
+        if not stype:
+            return
+        subprocess.check_call((misc.whereis('modprobe'), '-b', stype))
         if not os.path.isdir(directory):
             os.makedirs(directory)
         if not self.check_mounted(device):

@@ -41,7 +41,7 @@ def LoginProcess(username):
         os.chdir(pw_dir)
     else:
         os.chdir('/')
-    subprocess.check_call(misc.whereis('qworkspace'))
+    subprocess.check_call(misc.whereis('startx'))
 
 def login(autologin=None):
     username = str(ui.UserNameBox.currentText())
