@@ -2,7 +2,7 @@
 
 import qsession_ui
 from PyQt4 import QtCore, QtGui
-import sys, os, pwd, crypt, subprocess, libmisc, libworkspace
+import sys, os, pwd, crypt, subprocess, uuid, libmisc, libworkspace
 
 # prepare for lift-off
 app = QtGui.QApplication(sys.argv)
@@ -23,6 +23,9 @@ def LoginProcess(username):
     pw_gid = pwd.getpwnam(username).pw_gid
     pw_dir = pwd.getpwnam(username).pw_dir
     pw_shell = pwd.getpwnam(username).pw_shell
+    pw_xauth = pw_dir + '/.Xauthority'
+    pw_hostname = os.environ.get('HOSTNAME', '')
+    pw_display = os.environ.get('DISPLAY', ':0')
 
     os.initgroups(username, pw_gid)
     os.setgid(pw_gid)
@@ -32,11 +35,15 @@ def LoginProcess(username):
     os.putenv('HOME', pw_dir)
     os.putenv('PWD', pw_dir)
     os.putenv('SHELL', pw_shell)
-
     if pw_uid == 0:
-        os.putenv('SHELL', '/sbin:/bin:/usr/sbin:/usr/bin')
+        os.putenv('PATH', '/sbin:/bin:/usr/sbin:/usr/bin')
     else:
-        os.putenv('SHELL', '/bin:/usr/bin')
+        os.putenv('PATH', '/bin:/usr/bin')
+    os.putenv('XAUTHORITY', pw_xauth)
+    if not os.path.isfile(pw_xauth):
+        pw_randomkey = uuid.uuid4().hex
+        subprocess.check_call((misc.whereis('xauth'), 'add', pw_hostname + pw_display, '.', pw_randomkey))
+
     if os.path.isdir(pw_dir):
         os.chdir(pw_dir)
     else:
