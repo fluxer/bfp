@@ -52,9 +52,11 @@ class General(object):
 
     def get_icon(self, sicon):
         ''' Get icon '''
-        lpaths = misc.list_files(sys.prefix + 'share/icons/' + self.settings.get('general/icontheme'))
-        lpaths.extend(misc.list_files(sys.prefix + 'share/pixmaps'))
-        for spath in lpaths:
+        sicontheme = sys.prefix + 'share/icons/' + self.settings.get('general/icontheme')
+        scache = sicontheme + '/cache.txt'
+        if not os.path.isfile(scache):
+            misc.file_write(scache, '\n'.join(misc.list_files(sicontheme)))
+        for spath in misc.file_readlines(scache):
             if misc.file_name(spath) == sicon:
                 sicon = spath
                 break
