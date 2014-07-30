@@ -31,6 +31,9 @@ class Widget(QtGui.QWidget):
         self.findButton.clicked.connect(self.find_text)
         self.findButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+F')))
         self.findButton.setEnabled(False)
+        self.fontButton = QtGui.QPushButton(general.get_icon('font'), '')
+        self.fontButton.clicked.connect(self.set_font)
+        self.fontButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+N')))
         self.highlighterBox = QtGui.QComboBox()
         self.highlighterBox.addItems(('None', 'Python', 'Shell', 'C'))
         self.highlighterBox.currentIndexChanged.connect(self.set_highlighter)
@@ -39,6 +42,7 @@ class Widget(QtGui.QWidget):
         self.secondLayout.addWidget(self.saveAsButton)
         self.secondLayout.addWidget(self.reloadButton)
         self.secondLayout.addWidget(self.findButton)
+        self.secondLayout.addWidget(self.fontButton)
         self.secondLayout.addWidget(self.highlighterBox)
         self.mainLayout = QtGui.QGridLayout()
         self.textEdit = QtGui.QTextEdit()
@@ -46,13 +50,6 @@ class Widget(QtGui.QWidget):
         self.mainLayout.addWidget(self.textEdit)
         self.setLayout(self.mainLayout)
 
-        #self.actionUndo.triggered.connect(ui.textEdit.undo)
-        #self.actionRedo.triggered.connect(ui.textEdit.redo)
-        #self.actionFont.triggered.connect(set_font)
-        #self.actionPlain.triggered.connect(highlight_plain)
-        #self.actionPython.triggered.connect(highlight_python)
-        #self.actionShell.triggered.connect(highlight_shell)
-        #self.actionC.triggered.connect(highlight_c)
         if self.sedit:
             self.open_file(self.sedit)
 
@@ -98,16 +95,16 @@ class Widget(QtGui.QWidget):
             self.reloadButton.setEnabled(True)
             self.findButton.setEnabled(True)
 
+    def reload_file(self):
+        self.open_file(self.sedit)
+
     def find_text(self):
         svar, ok = QtGui.QInputDialog.getText(self, self.tr('Find'), '')
         if ok and svar:
             self.textEdit.find(svar)
 
-    def reload_file(self):
-        self.open_file(self.sedit)
-
     def set_font(self):
-        font, ok = QtGui.QFontDialog.getFont(QtGui.QFont(self.textEdit.font))
+        font, ok = QtGui.QFontDialog.getFont(QtGui.QFont(self.textEdit.font), self)
         if ok:
             self.textEdit.setFont(font)
 
