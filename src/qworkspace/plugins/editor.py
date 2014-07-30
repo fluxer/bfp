@@ -31,11 +31,15 @@ class Widget(QtGui.QWidget):
         self.findButton.clicked.connect(self.find_text)
         self.findButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+F')))
         self.findButton.setEnabled(False)
+        self.highlighterBox = QtGui.QComboBox()
+        self.highlighterBox.addItems(('None', 'Python', 'Shell', 'C'))
+        self.highlighterBox.currentIndexChanged.connect(self.set_highlighter)
         self.secondLayout.addWidget(self.openButton)
         self.secondLayout.addWidget(self.saveButton)
         self.secondLayout.addWidget(self.saveAsButton)
         self.secondLayout.addWidget(self.reloadButton)
         self.secondLayout.addWidget(self.findButton)
+        self.secondLayout.addWidget(self.highlighterBox)
         self.mainLayout = QtGui.QGridLayout()
         self.textEdit = QtGui.QTextEdit()
         self.mainLayout.addLayout(self.secondLayout, 0, 0)
@@ -70,13 +74,15 @@ class Widget(QtGui.QWidget):
         self.findButton.setEnabled(True)
         smime = misc.file_mime(sfile)
         if smime == 'text/x-python':
-            self.highlight_python()
+            shighlither = 'Python'
         elif smime == 'text/x-shellscript':
-            self.highlight_shell()
+            shighlither = 'Shell'
         elif smime == 'text/x-c':
-            self.highlight_c()
+            shighlither = 'C'
         else:
-            self.highlight_plain()
+            shighlither = 'None'
+        index = self.highlighterBox.findText(shighlither)
+        self.highlighterBox.setCurrentIndex(index)
 
     def save_file(self):
         if self.sedit:
@@ -105,21 +111,19 @@ class Widget(QtGui.QWidget):
         if ok:
             self.textEdit.setFont(font)
 
-    def highlight_plain(self):
-        try:
-            self.highlighter.setDocument(None)
-        except AttributeError:
-            pass
-
-    def highlight_python(self):
-        self.highlighter = libhighlighter.HighlighterPython(self.textEdit.document())
-
-    def highlight_shell(self):
-        self.highlighter = libhighlighter.HighlighterShell(self.textEdit.document())
-
-    def highlight_c(self):
-        self.highlighter = libhighlighter.HighlighterC(self.textEdit.document())
-
+    def set_highlighter(self):
+        shighlither = str(self.highlighterBox.currentText())
+        if shighlither == 'None':
+            try:
+                self.highlighter.setDocument(None)
+            except AttributeError:
+                pass
+        elif shighlither== 'Python':
+            self.highlighter = libhighlighter.HighlighterPython(self.textEdit.document())
+        elif shighlither== 'Shell':
+            self.highlighter = libhighlighter.HighlighterShell(self.textEdit.document())
+        elif shighlither== 'C':
+            self.highlighter = libhighlighter.HighlighterC(self.textEdit.document())
 
 class Plugin(QtCore.QObject):
     ''' Plugin handler '''
