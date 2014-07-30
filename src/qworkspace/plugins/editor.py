@@ -27,17 +27,21 @@ class Widget(QtGui.QWidget):
         self.reloadButton.clicked.connect(self.reload_file)
         self.reloadButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+R')))
         self.reloadButton.setEnabled(False)
+        self.findButton = QtGui.QPushButton(general.get_icon('find'), '')
+        self.findButton.clicked.connect(self.find_text)
+        self.findButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+F')))
+        self.findButton.setEnabled(False)
         self.secondLayout.addWidget(self.openButton)
         self.secondLayout.addWidget(self.saveButton)
         self.secondLayout.addWidget(self.saveAsButton)
         self.secondLayout.addWidget(self.reloadButton)
+        self.secondLayout.addWidget(self.findButton)
         self.mainLayout = QtGui.QGridLayout()
         self.textEdit = QtGui.QTextEdit()
         self.mainLayout.addLayout(self.secondLayout, 0, 0)
         self.mainLayout.addWidget(self.textEdit)
         self.setLayout(self.mainLayout)
 
-        #self.actionFind.triggered.connect(find)
         #self.actionUndo.triggered.connect(ui.textEdit.undo)
         #self.actionRedo.triggered.connect(ui.textEdit.redo)
         #self.actionFont.triggered.connect(set_font)
@@ -61,8 +65,9 @@ class Widget(QtGui.QWidget):
         elif os.path.isfile(sfile):
             self.textEdit.setText(misc.file_read(sfile))
         self.sedit = sfile
-        self.reloadButton.setEnabled(True)
         self.saveButton.setEnabled(True)
+        self.reloadButton.setEnabled(True)
+        self.findButton.setEnabled(True)
         smime = misc.file_mime(sfile)
         if smime == 'text/x-python':
             self.highlight_python()
@@ -83,6 +88,9 @@ class Widget(QtGui.QWidget):
         if sfile:
             self.sedit = str(sfile)
             self.save_file()
+            self.saveButton.setEnabled(True)
+            self.reloadButton.setEnabled(True)
+            self.findButton.setEnabled(True)
 
     def find_text(self):
         svar, ok = QtGui.QInputDialog.getText(self, self.tr('Find'), '')
