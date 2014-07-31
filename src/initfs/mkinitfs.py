@@ -214,10 +214,6 @@ try:
     # subprocess.check_call((find, '.', '|', cpio, '-o', '-H', 'newc', '|', gzip ,'>' , image))
     os.system(find + ' . | ' + cpio + ' -o -H newc | ' + gzip + ' > ' + image)
 
-    if os.path.isdir(tmpdir) and not ARGS.keep:
-        message.info('Cleaning up...')
-        misc.dir_remove(tmpdir)
-
 except subprocess.CalledProcessError as detail:
     message.critical('SUBPROCESS', detail)
     sys.exit(4)
