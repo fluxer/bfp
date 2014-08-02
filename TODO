@@ -1,3 +1,6 @@
+## INITFS ##
+ * Handle systems with lib64 directories
+
 ## SPM ##
  * Fix all bugs noted with FIXME in the code (1)
  * Tools for the following:
