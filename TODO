@@ -1,5 +1,8 @@
 ## INITFS ##
  * Handle systems with lib64 directories
+ * Handle UUID and LABEL kernel arguments for root filesystem
+
+http://www.linuxfromscratch.org/blfs/view/systemd/postlfs/initramfs.html
 
 ## SPM ##
  * Fix all bugs noted with FIXME in the code (1)
