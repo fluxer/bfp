@@ -10,7 +10,7 @@ try:
     misc = libmisc.Misc()
 
     if not len(sys.argv) > 1:
-        sys.stderr.write('usage: man <page>\n')
+        message.critical('usage: pman <page>')
         sys.exit(1)
 
     search_exact = True
