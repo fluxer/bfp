@@ -54,11 +54,11 @@ try:
         sys.exit(2)
 
     message.info('Listing initial RAM image...')
-    base = os.path.basename(image)
+    base = os.path.basename(ARGS.image)
     new_image = os.path.join(ARGS.tmp, base.replace('.img', '.gz'))
     message.sub_info('Copying image')
     misc.dir_create(ARGS.tmp)
-    shutil.copyfile(image, new_image)
+    shutil.copyfile(ARGS.image, new_image)
 
     message.sub_info('Decompressing image')
     gunzip = misc.whereis('gunzip')

@@ -211,8 +211,8 @@ try:
     cpio = misc.whereis('cpio')
     gzip = misc.whereis('gzip')
     os.chdir(ARGS.tmp)
-    # subprocess.check_call((find, '.', '|', cpio, '-o', '-H', 'newc', '|', gzip ,'>' , image))
-    os.system(find + ' . | ' + cpio + ' -o -H newc | ' + gzip + ' > ' + image)
+    # subprocess.check_call((find, '.', '|', cpio, '-o', '-H', 'newc', '|', gzip ,'>' , ARGS.image))
+    os.system(find + ' . | ' + cpio + ' -o -H newc | ' + gzip + ' > ' + ARGS.image)
 
 except subprocess.CalledProcessError as detail:
     message.critical('SUBPROCESS', detail)
