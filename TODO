@@ -25,7 +25,6 @@ http://www.linuxfromscratch.org/blfs/view/systemd/postlfs/initramfs.html
   - full path (done)
   - time accessed
   - associated with plugin?
- * Implement translations support
  * UI polishment:
   - tooltips
   - size policies
@@ -37,6 +36,7 @@ http://www.linuxfromscratch.org/blfs/view/systemd/postlfs/initramfs.html
 ## ALL QT ##
  * Expect failures everywhere
  * Day/night style mode
+ * Translations
 
 ## ALL (on regular basis) ##
  * Run PyLint and do some kung-foo on the code style

@@ -2,6 +2,9 @@ include ../../Makefile.inc
 
 all: bump clean
 	$(PYUIC) qworkspace.ui -o qworkspace_ui.py
+	mkdir -vp tr
+	$(PYLUPDATE) main.py plugins/editor.py -ts tr/qworkspace_bg.ts
+	$(LRELEASE) tr/qworkspace_bg.ts
 	$(NUITKA) --recurse-to=qworkspace_ui main.py
 	$(NUITKA) --module plugins/editor.py
 	$(NUITKA) --module plugins/image.py
@@ -17,6 +20,7 @@ all: bump clean
 install:
 	$(INSTALL) -vdm755 $(DESTDIR)$(BINDIR)
 	$(INSTALL) -vdm755 $(DESTDIR)/etc/qworkspace/plugins
+	$(INSTALL) -vdm755 $(DESTDIR)$(TRDIR)/
 	$(INSTALL) -vm755 main.exe $(DESTDIR)$(BINDIR)/qworkspace
 	$(INSTALL) -vm644 editor.so $(DESTDIR)/etc/qworkspace/plugins/
 	$(INSTALL) -vm644 image.so $(DESTDIR)/etc/qworkspace/plugins/
@@ -26,13 +30,15 @@ install:
 	$(INSTALL) -vm644 storage.so $(DESTDIR)/etc/qworkspace/plugins/
 	$(INSTALL) -vm644 terminal.so $(DESTDIR)/etc/qworkspace/plugins/
 	$(INSTALL) -vm644 www.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(INSTALL) -vm644 tr/*.qm $(DESTDIR)$(TRDIR)/
 
 uninstall:
 	$(RM) $(DESTDIR)$(BINDIR)/qworkspace
 	$(RM) -r $(DESTDIR)/etc/qworkspace
+	$(RM) $(DESTDIR)$(TRDIR)/qworkspace_*.qm
 
 clean:
-	$(RM) -r *.build/ *.so *.exe qworkspace_ui.py
+	$(RM) -r *.build/ *.so *.exe qworkspace_ui.py tr/*.qm
 	$(RM) $(shell find . -name '*.pyc' -o -name '*.pyo')
 
 bump:

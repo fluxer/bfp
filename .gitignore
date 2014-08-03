@@ -10,6 +10,7 @@ pod2htmd.tmp
 *.exe
 *_ui.py
 *_rc.py
+*.qm
 
 *.bak
 *~
