@@ -3,7 +3,7 @@ include ../../Makefile.inc
 all: bump clean
 	$(PYUIC) qworkspace.ui -o qworkspace_ui.py
 	mkdir -vp tr
-	$(PYLUPDATE) main.py plugins/editor.py -ts tr/qworkspace_bg.ts
+	$(PYLUPDATE) main.py plugins/*.py -ts tr/qworkspace_bg.ts
 	$(LRELEASE) tr/qworkspace_bg.ts
 	$(NUITKA) --recurse-to=qworkspace_ui main.py
 	$(NUITKA) --module plugins/editor.py
