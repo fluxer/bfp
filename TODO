@@ -32,6 +32,7 @@ http://www.linuxfromscratch.org/blfs/view/systemd/postlfs/initramfs.html
  * Figure out a way to make the main window fixed but resizable on
    display resolution change
  * Session manager (save/restore state), see http://qt-project.org/doc/qt-4.8/session.html
+ * Notify on low disk space
 
 ## ALL QT ##
  * Expect failures everywhere
