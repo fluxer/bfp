@@ -1,9 +1,8 @@
 #!/bin/python2
 
-import sys, argparse, tempfile, subprocess
-import tarfile, zipfile, shutil, os
+import sys, argparse, tempfile, subprocess, shutil, os
 
-app_version = "0.9.20 (6cc8d3e)"
+app_version = "0.9.21 (033b90e)"
 
 tmpdir = None
 keep = False
@@ -71,12 +70,6 @@ try:
 except subprocess.CalledProcessError as detail:
     message.critical('SUBPROCESS', detail)
     sys.exit(4)
-except tarfile.TarError as detail:
-    message.critical('TARFILE', detail)
-    sys.exit(6)
-except zipfile.BadZipfile as detail:
-    message.critical('ZIPFILE', detail)
-    sys.exit(7)
 except shutil.Error as detail:
     message.critical('SHUTIL', detail)
     sys.exit(8)
