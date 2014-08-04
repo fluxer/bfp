@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os
 
-app_version = "0.9.21 (033b90e)"
+app_version = "0.9.21 (abf1e4d)"
 
 tmpdir = None
 keep = False
@@ -218,16 +218,16 @@ except subprocess.CalledProcessError as detail:
     sys.exit(3)
 except shutil.Error as detail:
     message.critical('SHUTIL', detail)
-    sys.exit(8)
+    sys.exit(4)
 except OSError as detail:
     message.critical('OS', detail)
-    sys.exit(9)
+    sys.exit(5)
 except IOError as detail:
     message.critical('IO', detail)
-    sys.exit(10)
+    sys.exit(6)
 except KeyboardInterrupt:
     message.critical('Interrupt signal received')
-    sys.exit(12)
+    sys.exit(7)
 except SystemExit:
     sys.exit(2)
 except Exception as detail:
