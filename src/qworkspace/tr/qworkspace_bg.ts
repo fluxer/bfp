@@ -3,12 +3,12 @@
 <context>
     <name>Plugin</name>
     <message>
-        <location filename="editor.py" line="132"/>
+        <location filename="editor.py" line="138"/>
         <source>Text editor plugin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor.py" line="158"/>
+        <location filename="editor.py" line="164"/>
         <source>Editor</source>
         <translation type="unfinished"></translation>
     </message>
@@ -121,12 +121,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor.py" line="89"/>
+        <location filename="editor.py" line="95"/>
         <source>All Files (*);;Text Files (*.txt)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="editor.py" line="89"/>
+        <location filename="editor.py" line="95"/>
         <source>Save as</source>
         <translation type="unfinished"></translation>
     </message>

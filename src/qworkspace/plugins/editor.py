@@ -54,9 +54,15 @@ class Widget(QtGui.QWidget):
             self.open_file(self.sedit)
 
     def open_file(self, sfile):
+        sdir = QtCore.QDir.currentPath()
+        if self.sedit and os.path.exists(self.sedit):
+            sdirname = os.path.dirname(self.sedit)
+            if os.path.isdir(sdirname):
+                sdir = sdirname
+
         if not sfile:
             sfile = QtGui.QFileDialog.getOpenFileName(self, self.tr('Open'), \
-                QtCore.QDir.currentPath(), self.tr('All Files (*);;Text Files (*.txt)'))
+                sdir, self.tr('All Files (*);;Text Files (*.txt)'))
             if sfile:
                 sfile = str(sfile)
                 self.textEdit.setText(misc.file_read(sfile))

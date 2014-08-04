@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os
 
-app_version = "0.9.21 (42a834a)"
+app_version = "0.9.21 (e1fc1c3)"
 
 tmpdir = None
 keep = False
@@ -105,7 +105,6 @@ try:
     for sdir in ('/lib', '/lib32', '/lib64', '/usr/lib', '/usr/lib32', '/usr/lib64'):
         if os.path.isdir(sdir + '/modules/' + ARGS.kernel):
             modsdir = sdir + '/modules/' + ARGS.kernel
-
     if not modsdir:
         message.critical('Unable to find modules directory')
         sys.exit(2)
