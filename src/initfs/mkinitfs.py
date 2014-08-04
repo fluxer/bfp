@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os
 
-app_version = "0.9.21 (abf1e4d)"
+app_version = "0.9.21 (42a834a)"
 
 tmpdir = None
 keep = False
@@ -101,11 +101,12 @@ try:
             message.warning('File or directory does not exist', src)
 
     # FIXME: support both /lib and /usr/lib at the same time???
-    if os.path.isdir('/lib/modules/' + ARGS.kernel):
-        modsdir = '/lib/modules/' + ARGS.kernel
-    elif os.path.isdir('/usr/lib/modules/' + ARGS.kernel):
-        modsdir = '/usr/lib/modules/' + ARGS.kernel
-    else:
+    modsdir = None
+    for sdir in ('/lib', '/lib32', '/lib64', '/usr/lib', '/usr/lib32', '/usr/lib64'):
+        if os.path.isdir(sdir + '/modules/' + ARGS.kernel):
+            modsdir = sdir + '/modules/' + ARGS.kernel
+
+    if not modsdir:
         message.critical('Unable to find modules directory')
         sys.exit(2)
 
