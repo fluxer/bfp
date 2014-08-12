@@ -52,7 +52,7 @@ class General(object):
 
     def get_icon(self, sicon):
         ''' Get icon '''
-        sicontheme = os.path.join(sys.prefix, 'share/icons', self.settings.get('general/icontheme'))
+        sicontheme = os.path.join(sys.prefix, 'share/icons', self.settings.get('general/icontheme', 'hicolor'))
         scache = sicontheme + '/cache.txt'
         if not os.path.isfile(scache):
             misc.file_write(scache, '\n'.join(misc.list_files(sicontheme)))
