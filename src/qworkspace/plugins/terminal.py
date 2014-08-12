@@ -12,7 +12,7 @@ class Widget(QtGui.QWidget):
         self.spath = spath
         self.name = 'terminal'
         self.mainLayout = QtGui.QGridLayout()
-        self.container = QtGui.QWidget(self)
+        self.container = QtGui.QX11EmbedContainer(self)
         self.mainLayout.addWidget(self.container)
         self.setLayout(self.mainLayout)
         # FIXME: change to spath
