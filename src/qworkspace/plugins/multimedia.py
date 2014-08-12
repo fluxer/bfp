@@ -1,7 +1,7 @@
 #!/bin/pyhton2
 
 from PyQt4 import QtCore, QtGui
-import libworkspace, mpv
+import libworkspace
 general = libworkspace.General()
 
 
@@ -22,38 +22,20 @@ class Widget(QtGui.QWidget):
         self.mainLayout.addWidget(self.resumeButton)
         self.setLayout(self.mainLayout)
 
-        self.player = mpv.Context()
-        # self.player.set_option('input-default-bindings')
-        # self.player.set_option('osc')
-        # self.player.set_option('vo', 'opengl')
-        self.player.initialize()
-
         if self.spath:
             self.open_file(self.spath)
 
-    def event_handler(self):
-        while True:
-            event = self.player.wait_event(.01)
-            if event.id  == mpv.Events.none:
-                continue
-            print('EVENT: ' + event.name)
-            if event.id in [mpv.Events.end_file, mpv.Events.shutdown]:
-                print('EOF/SHUTDOWN')
-                break
-
     def update_gui(self):
-        print(self.player.get_property('time_remaining'))
+        pass
 
     def open_file(self, spath):
-        self.player.command('loadfile', spath)
+        pass
 
     def player_pause(self):
-        self.player.request_event(0, 'suspend')
-        # self.player.command('suspend')
+        pass
 
     def player_resume(self):
-        self.player.request_event(0, 'resume')
-        # self.player.command('resume')
+        pass
 
 
 class Plugin(QtCore.QObject):
