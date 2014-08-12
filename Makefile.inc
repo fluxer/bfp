@@ -1,4 +1,4 @@
-VERSION = 0.9.21
+VERSION = 0.9.22
 
 DESTDIR = 
 PREFIX = $(shell $(PYTHON) -c "import sys; print(sys.prefix)")
