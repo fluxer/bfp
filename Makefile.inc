@@ -1,7 +1,7 @@
 VERSION = 0.9.21
 
 DESTDIR = 
-PREFIX = 
+PREFIX = $(shell $(PYTHON) -c "import sys; print(sys.prefix)")
 BINDIR = $(PREFIX)/bin
 SBINDIR = $(PREFIX)/sbin
 SHAREDIR = $(PREFIX)/share
