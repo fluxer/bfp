@@ -1,9 +1,8 @@
 #!/bin/pyhton2
 
 from PyQt4 import QtCore, QtGui
-import libworkspace, libxlib, time
+import libworkspace
 general = libworkspace.General()
-xlib = libxlib.WM()
 
 class Widget(QtGui.QWidget):
     ''' Tab widget '''
@@ -13,14 +12,13 @@ class Widget(QtGui.QWidget):
         self.spath = spath
         self.name = 'terminal'
         self.mainLayout = QtGui.QGridLayout()
-        self.container = QtGui.QX11EmbedContainer(self)
+        self.container = QtGui.QWidget(self)
         self.mainLayout.addWidget(self.container)
         self.setLayout(self.mainLayout)
+        # FIXME: change to spath
         self.process = QtCore.QProcess(self.container)
-        self.process.start(self.spath)
+        self.process.start('xterm', ('-into', str(self.container.winId())))
         self.process.waitForStarted()
-        time.sleep(3) # give xorg time to sync, sorry
-        self.container.embedClient(xlib.get_window_id(self.process.pid()))
 
 class Plugin(QtCore.QObject):
     ''' Plugin handler '''
@@ -34,7 +32,7 @@ class Plugin(QtCore.QObject):
         self.widget = None
 
         self.embedButton = QtGui.QPushButton(self.icon, '')
-        self.embedButton.clicked.connect(lambda: self.open('xterm'))
+        self.embedButton.clicked.connect(self.open)
         self.applicationsLayout = self.parent.toolBox.widget(1).layout()
         self.applicationsLayout.addWidget(self.embedButton)
 

@@ -33,12 +33,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multimedia.py" line="66"/>
+        <location filename="multimedia.py" line="48"/>
         <source>Media plugin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="multimedia.py" line="90"/>
+        <location filename="multimedia.py" line="72"/>
         <source>Multimedia</source>
         <translation type="unfinished"></translation>
     </message>
@@ -48,12 +48,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="screenshot.py" line="64"/>
+        <location filename="screenshot.py" line="63"/>
         <source>Screenshot taking plugin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="screenshot.py" line="77"/>
+        <location filename="screenshot.py" line="76"/>
         <source>Screenshot</source>
         <translation type="unfinished"></translation>
     </message>
@@ -68,12 +68,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="terminal.py" line="32"/>
+        <location filename="terminal.py" line="62"/>
         <source>Embed terminal plugin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="terminal.py" line="45"/>
+        <location filename="terminal.py" line="75"/>
         <source>Terminal</source>
         <translation type="unfinished"></translation>
     </message>
@@ -136,12 +136,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="screenshot.py" line="26"/>
+        <location filename="screenshot.py" line="25"/>
         <source>Image Files (*.png *.jpg *.jpeg *.svg);;All Files (*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="screenshot.py" line="26"/>
+        <location filename="screenshot.py" line="25"/>
         <source>Save</source>
         <translation type="unfinished"></translation>
     </message>
@@ -368,6 +368,11 @@
     <message>
         <location filename="www.py" line="337"/>
         <source>Reload</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="terminal.py" line="25"/>
+        <source>CTRL+E</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
