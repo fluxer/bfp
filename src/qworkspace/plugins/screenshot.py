@@ -2,7 +2,6 @@
 
 from PyQt4 import QtCore, QtGui
 import sys, time, libmisc, libworkspace
-app = QtGui.QApplication(sys.argv)
 misc = libmisc.Misc()
 general = libworkspace.General()
 
@@ -49,7 +48,7 @@ class Widget(QtGui.QWidget):
                 sfile = sfile + '.' + extension
             # to avoid the save dialog being captured
             time.sleep(1)
-            p = QtGui.QPixmap.grabWindow(app.desktop().winId())
+            p = QtGui.QPixmap.grabWindow(self.parent.app.desktop().winId())
             p.save(sfile, extension)
             # sys.exit()
 
