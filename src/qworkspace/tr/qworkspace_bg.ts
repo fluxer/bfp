@@ -87,6 +87,16 @@
         <source>WWW</source>
         <translation type="unfinished"></translation>
     </message>
+    <message>
+        <location filename="package.py" line="154"/>
+        <source>Package manager plugin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="package.py" line="167"/>
+        <source>Package</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Widget</name>
