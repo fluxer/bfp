@@ -78,12 +78,12 @@
         <translation>Хранилище</translation>
     </message>
     <message>
-        <location filename="terminal.py" line="30"/>
+        <location filename="terminal.py" line="34"/>
         <source>Embed terminal plugin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="terminal.py" line="43"/>
+        <location filename="terminal.py" line="47"/>
         <source>Terminal</source>
         <translation>Терминал</translation>
     </message>

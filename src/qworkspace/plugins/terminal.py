@@ -15,10 +15,14 @@ class Widget(QtGui.QWidget):
         self.container = QtGui.QX11EmbedContainer(self)
         self.mainLayout.addWidget(self.container)
         self.setLayout(self.mainLayout)
-        # FIXME: change to spath
         self.process = QtCore.QProcess(self.container)
-        self.process.start('xterm', ('-into', str(self.container.winId())))
+        args = ['-into', str(self.container.winId())]
+        if spath:
+            args.extend(('-e', spath))
+        self.process.start('xterm', args)
         self.process.waitForStarted()
+        self.container.setFocus()
+
 
 class Plugin(QtCore.QObject):
     ''' Plugin handler '''
