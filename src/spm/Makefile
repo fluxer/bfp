@@ -7,7 +7,7 @@ all: bump clean
 	$(STRIP) libspm.so spm.exe tools.exe
 
 install:
-	$(INSTALL) -vdm755 $(DESTDIR)$(SBINDIR)
+	$(INSTALL) -vdm755 $(DESTDIR)$(SBINDIR) $(DESTDIR)$(SITEDIR)
 	$(INSTALL) -vm755 spm.exe $(DESTDIR)$(SBINDIR)/spm
 	$(INSTALL) -vm755 tools.exe $(DESTDIR)$(SBINDIR)/spm-tools
 	$(INSTALL) -vm644 libspm.so $(DESTDIR)$(SITEDIR)/libspm.so

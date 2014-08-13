@@ -43,12 +43,12 @@
         <translation>Мултимедиа</translation>
     </message>
     <message>
-        <location filename="package.py" line="159"/>
+        <location filename="package.py" line="162"/>
         <source>Package manager plugin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="package.py" line="172"/>
+        <location filename="package.py" line="175"/>
         <source>Package</source>
         <translation>Пакет</translation>
     </message>
