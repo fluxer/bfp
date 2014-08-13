@@ -1,7 +1,7 @@
 #!/bin/pyhton2
 
 from PyQt4 import QtCore, QtGui
-import sys, libworkspace
+import libworkspace
 general = libworkspace.General()
 
 class Plugin(QtCore.QObject):

@@ -250,7 +250,7 @@ class Daemon(QtCore.QThread):
                         system.do_mount('/dev/' + f)
                         message.sub_info('Device mounted', f)
                     except Exception as detail:
-                        pass
+                        message.sub_critical(str(detail))
             for f in before:
                 if '.tmp' in f:
                     continue
@@ -259,7 +259,7 @@ class Daemon(QtCore.QThread):
                         system.do_unmount('/dev/' + f)
                         message.sub_info('Device unmounted', f)
                     except Exception as detail:
-                        pass
+                        message.sub_critical(str(detail))
             time.sleep(2)
 
 

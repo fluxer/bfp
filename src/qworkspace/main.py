@@ -24,7 +24,6 @@ setLook()
 # setup translator
 def setTranslator():
     locale = QtCore.QLocale.system().name()
-    print locale
     translator = QtCore.QTranslator()
     if translator.load('qworkspace_' + locale, QtCore.QLibraryInfo.location(QtCore.QLibraryInfo.TranslationsPath)):
         app.installTranslator(translator)

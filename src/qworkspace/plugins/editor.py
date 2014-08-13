@@ -121,11 +121,11 @@ class Widget(QtGui.QWidget):
                 self.highlighter.setDocument(None)
             except AttributeError:
                 pass
-        elif shighlither== 'Python':
+        elif shighlither == 'Python':
             self.highlighter = libhighlighter.HighlighterPython(self.textEdit.document())
-        elif shighlither== 'Shell':
+        elif shighlither == 'Shell':
             self.highlighter = libhighlighter.HighlighterShell(self.textEdit.document())
-        elif shighlither== 'C':
+        elif shighlither == 'C':
             self.highlighter = libhighlighter.HighlighterC(self.textEdit.document())
 
 class Plugin(QtCore.QObject):

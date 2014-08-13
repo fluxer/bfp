@@ -1,7 +1,7 @@
 #!/bin/python2
 
 from PyQt4 import QtCore, QtGui
-import sys, time, libmisc, libworkspace
+import time, libmisc, libworkspace
 misc = libmisc.Misc()
 general = libworkspace.General()
 
