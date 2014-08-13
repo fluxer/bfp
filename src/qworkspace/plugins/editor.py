@@ -62,7 +62,7 @@ class Widget(QtGui.QWidget):
 
         if not sfile:
             sfile = QtGui.QFileDialog.getOpenFileName(self, self.tr('Open'), \
-                sdir, self.tr('All Files (*);;Text Files (*.txt)'))
+                sdir, self.tr('Text Files (*.txt);;All Files (*)'))
             if sfile:
                 sfile = str(sfile)
                 self.textEdit.setText(misc.file_read(sfile))
@@ -93,7 +93,7 @@ class Widget(QtGui.QWidget):
 
     def save_as_file(self):
         sfile = QtGui.QFileDialog.getSaveFileName(self, self.tr('Save as'), \
-            QtCore.QDir.currentPath(), self.tr('All Files (*);;Text Files (*.txt)'))
+            QtCore.QDir.currentPath(), self.tr('Text Files (*.txt);;All Files (*)'))
         if sfile:
             self.sedit = str(sfile)
             self.save_file()

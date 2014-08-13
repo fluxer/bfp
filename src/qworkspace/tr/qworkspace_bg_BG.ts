@@ -1,17 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0">
+<!DOCTYPE TS><TS version="2.0" language="bg_BG" sourcelanguage="">
 <context>
     <name>Plugin</name>
-    <message>
-        <location filename="editor.py" line="138"/>
-        <source>Text editor plugin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="editor.py" line="164"/>
-        <source>Editor</source>
-        <translation type="unfinished"></translation>
-    </message>
     <message>
         <location filename="dummy.py" line="24"/>
         <source>Dummy plugin</source>
@@ -20,6 +10,16 @@
     <message>
         <location filename="dummy.py" line="32"/>
         <source>Dummy</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor.py" line="138"/>
+        <source>Text editor plugin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="editor.py" line="164"/>
+        <source>Editor</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -40,7 +40,17 @@
     <message>
         <location filename="multimedia.py" line="72"/>
         <source>Multimedia</source>
+        <translation>Мултимедиа</translation>
+    </message>
+    <message>
+        <location filename="package.py" line="159"/>
+        <source>Package manager plugin</source>
         <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="package.py" line="172"/>
+        <source>Package</source>
+        <translation>Пакет</translation>
     </message>
     <message>
         <location filename="quit.py" line="14"/>
@@ -55,7 +65,7 @@
     <message>
         <location filename="screenshot.py" line="76"/>
         <source>Screenshot</source>
-        <translation type="unfinished"></translation>
+        <translation>Снимка на екрана</translation>
     </message>
     <message>
         <location filename="storage.py" line="282"/>
@@ -65,7 +75,7 @@
     <message>
         <location filename="storage.py" line="304"/>
         <source>Storage</source>
-        <translation type="unfinished"></translation>
+        <translation>Хранилище</translation>
     </message>
     <message>
         <location filename="terminal.py" line="30"/>
@@ -75,27 +85,17 @@
     <message>
         <location filename="terminal.py" line="43"/>
         <source>Terminal</source>
-        <translation type="unfinished"></translation>
+        <translation>Терминал</translation>
     </message>
     <message>
         <location filename="www.py" line="349"/>
         <source>World Wide Web browser</source>
-        <translation type="unfinished"></translation>
+        <translation>Уърлд Уайд Уеб броузър</translation>
     </message>
     <message>
         <location filename="www.py" line="362"/>
         <source>WWW</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="package.py" line="154"/>
-        <source>Package manager plugin</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="package.py" line="167"/>
-        <source>Package</source>
-        <translation type="unfinished"></translation>
+        <translation>УУУ</translation>
     </message>
 </context>
 <context>
@@ -128,11 +128,11 @@
     <message>
         <location filename="storage.py" line="202"/>
         <source>Open</source>
-        <translation type="unfinished"></translation>
+        <translation>Отвори</translation>
     </message>
     <message>
         <location filename="editor.py" line="95"/>
-        <source>All Files (*);;Text Files (*.txt)</source>
+        <source>Text Files (*.txt);;All Files (*)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
@@ -143,7 +143,7 @@
     <message>
         <location filename="www.py" line="288"/>
         <source>Find</source>
-        <translation type="unfinished"></translation>
+        <translation>Намери</translation>
     </message>
     <message>
         <location filename="screenshot.py" line="25"/>
@@ -151,44 +151,49 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
+        <location filename="www.py" line="316"/>
+        <source>Critical</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
         <location filename="screenshot.py" line="25"/>
         <source>Save</source>
-        <translation type="unfinished"></translation>
+        <translation>Запази</translation>
     </message>
     <message>
         <location filename="storage.py" line="201"/>
         <source>Execute</source>
-        <translation type="unfinished"></translation>
+        <translation>Изпулни</translation>
     </message>
     <message>
         <location filename="storage.py" line="203"/>
         <source>Open with</source>
-        <translation type="unfinished"></translation>
+        <translation>Отвори с</translation>
     </message>
     <message>
         <location filename="storage.py" line="205"/>
         <source>Cut</source>
-        <translation type="unfinished"></translation>
+        <translation>Изрежи</translation>
     </message>
     <message>
         <location filename="storage.py" line="206"/>
         <source>Copy</source>
-        <translation type="unfinished"></translation>
+        <translation>Копирай</translation>
     </message>
     <message>
         <location filename="storage.py" line="207"/>
         <source>Paste</source>
-        <translation type="unfinished"></translation>
+        <translation>Постави</translation>
     </message>
     <message>
         <location filename="storage.py" line="209"/>
         <source>Rename</source>
-        <translation type="unfinished"></translation>
+        <translation>Преименувай</translation>
     </message>
     <message>
         <location filename="storage.py" line="210"/>
         <source>Delete</source>
-        <translation type="unfinished"></translation>
+        <translation>Изтрии</translation>
     </message>
     <message>
         <location filename="storage.py" line="211"/>
@@ -198,12 +203,12 @@
     <message>
         <location filename="storage.py" line="213"/>
         <source>New file</source>
-        <translation type="unfinished"></translation>
+        <translation>Нов файл</translation>
     </message>
     <message>
         <location filename="storage.py" line="214"/>
         <source>New directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Нова директория</translation>
     </message>
     <message>
         <location filename="www.py" line="110"/>
@@ -213,7 +218,7 @@
     <message>
         <location filename="www.py" line="183"/>
         <source>Untitled</source>
-        <translation type="unfinished"></translation>
+        <translation>Неименуван</translation>
     </message>
     <message>
         <location filename="www.py" line="251"/>
@@ -343,12 +348,7 @@
     <message>
         <location filename="www.py" line="294"/>
         <source>Search</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="www.py" line="316"/>
-        <source>Critical</source>
-        <translation type="unfinished"></translation>
+        <translation>Търси</translation>
     </message>
     <message>
         <location filename="www.py" line="316"/>
@@ -358,7 +358,7 @@
     <message>
         <location filename="www.py" line="319"/>
         <source>Info</source>
-        <translation type="unfinished"></translation>
+        <translation>Инфо</translation>
     </message>
     <message>
         <location filename="www.py" line="319"/>
@@ -368,17 +368,17 @@
     <message>
         <location filename="www.py" line="335"/>
         <source>Back</source>
-        <translation type="unfinished"></translation>
+        <translation>Назад</translation>
     </message>
     <message>
         <location filename="www.py" line="336"/>
         <source>Next</source>
-        <translation type="unfinished"></translation>
+        <translation>Следващ</translation>
     </message>
     <message>
         <location filename="www.py" line="337"/>
         <source>Reload</source>
-        <translation type="unfinished"></translation>
+        <translation>Презареди</translation>
     </message>
 </context>
 </TS>
