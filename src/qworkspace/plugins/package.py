@@ -83,7 +83,7 @@ class Widget(QtGui.QWidget):
         self.metadataEdit.setText('')
         self.footprintEdit.setText('')
         if database.local_installed(current):
-            self.removeButton.setEnabled(False)
+            self.removeButton.setEnabled(True)
             self.metadataEdit.append('Version: ' + database.local_metadata(current, 'version'))
             self.metadataEdit.append('Description: ' + database.local_metadata(current, 'description'))
             self.metadataEdit.append('Depends: ' + database.local_metadata(current, 'depends'))
