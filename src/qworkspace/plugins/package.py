@@ -110,6 +110,8 @@ class Widget(QtGui.QWidget):
             m.main()
         except Exception as detail:
             QtGui.QMessageBox.critical(self, self.tr('Critical'), str(detail))
+        finally:
+            self.refresh_all()
 
     def targets_update(self):
         try:
@@ -121,7 +123,7 @@ class Widget(QtGui.QWidget):
         except Exception as detail:
             QtGui.QMessageBox.critical(self, self.tr('Critical'), str(detail))
         finally:
-            self.refresh_targets()
+            self.refresh_all()
 
     def targets_build(self):
         try:
@@ -133,7 +135,7 @@ class Widget(QtGui.QWidget):
         except Exception as detail:
             QtGui.QMessageBox.critical(self, self.tr('Critical'), str(detail))
         finally:
-            self.refresh_targets()
+            self.refresh_all()
 
     def targets_remove(self):
         try:
@@ -145,7 +147,7 @@ class Widget(QtGui.QWidget):
         except Exception as detail:
             QtGui.QMessageBox.critical(self, self.tr('Critical'), str(detail))
         finally:
-            self.refresh_targets()
+            self.refresh_all()
 
 class Plugin(QtCore.QObject):
     ''' Plugin handler '''
