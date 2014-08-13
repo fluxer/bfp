@@ -68,12 +68,12 @@
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="terminal.py" line="62"/>
+        <location filename="terminal.py" line="30"/>
         <source>Embed terminal plugin</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="terminal.py" line="75"/>
+        <location filename="terminal.py" line="43"/>
         <source>Terminal</source>
         <translation type="unfinished"></translation>
     </message>
@@ -368,11 +368,6 @@
     <message>
         <location filename="www.py" line="337"/>
         <source>Reload</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="terminal.py" line="25"/>
-        <source>CTRL+E</source>
         <translation type="unfinished"></translation>
     </message>
 </context>
