@@ -48,7 +48,7 @@ class Widget(QtGui.QWidget):
         mainLayout.addLayout(secondLayout, QtCore.Qt.AlignBottom, 0)
         self.setLayout(mainLayout)
 
-        self.refresh_targets()
+        self.refresh_all()
 
     def refresh_targets(self):
         self.targetsList.clear()
@@ -76,7 +76,10 @@ class Widget(QtGui.QWidget):
         self.targetsList.setCurrentRow(0)
 
     def refresh_buttons(self):
-        current = str(self.targetsList.currentItem().text())
+        item = self.targetsList.currentItem()
+        if not item:
+            return
+        current = str(item.text())
         self.metadataEdit.setText('')
         self.footprintEdit.setText('')
         if database.local_installed(current):
