@@ -36,10 +36,8 @@ class Widget(QtGui.QWidget):
         self.updateButton.clicked.connect(self.targets_update)
         self.buildButton = QtGui.QPushButton(general.get_icon('system-run'), '')
         self.buildButton.clicked.connect(self.targets_build)
-        self.buildButton.setEnabled(False)
         self.removeButton = QtGui.QPushButton(general.get_icon('remove'), '')
         self.removeButton.clicked.connect(self.targets_remove)
-        self.removeButton.setEnabled(False)
         secondLayout.addWidget(self.syncButton)
         secondLayout.addWidget(self.updateButton)
         secondLayout.addWidget(self.buildButton)
@@ -78,6 +76,8 @@ class Widget(QtGui.QWidget):
         self.targetsList.setCurrentRow(0)
 
     def refresh_buttons(self):
+        self.buildButton.setEnabled(False)
+        self.removeButton.setEnabled(False)
         item = self.targetsList.currentItem()
         if not item:
             return
@@ -101,6 +101,7 @@ class Widget(QtGui.QWidget):
             self.metadataEdit.append('Sources: ' + str(database.remote_metadata(current, 'sources')))
             self.metadataEdit.append('Options: ' + str(database.remote_metadata(current, 'options')))
             self.metadataEdit.append('Backup: ' + str(database.remote_metadata(current, 'backup')))
+        self.buildButton.setEnabled(True)
 
     def refresh_all(self):
         self.refresh_targets()
