@@ -10,3 +10,5 @@ uninstall:
 	$(RM) $(DESTDIR)$(BINDIR)/pkg2src
 	$(RM) $(DESTDIR)$(BINDIR)/snail
 	$(RM) $(DESTDIR)$(BINDIR)/srcmake
+
+.PHONY: install uninstall

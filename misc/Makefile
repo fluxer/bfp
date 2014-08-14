@@ -10,3 +10,5 @@ uninstall:
 	$(RM) $(DESTDIR)/etc/bash_completion.d/spm
 	$(RM) $(DESTDIR)/etc/bash_completion.d/spm-tools
 	$(RM) $(DESTDIR)/etc/logrotate.d/spm
+
+.PHONY: install uninstall

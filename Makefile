@@ -57,3 +57,5 @@ stat:
 
 lint:
 	$(PYLINT) $(shell $(FIND) src/ -name '*.py') | $(GREP) -v -e 'Line too long'
+
+.PHONY: all check install uninstall clean changelog dist stat lint

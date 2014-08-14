@@ -26,7 +26,7 @@ install:
 	$(INSTALL) -m644 libpackage.so $(DESTDIR)$(SITEDIR)/libpackage.so
 	$(INSTALL) -m644 libsystem.so $(DESTDIR)$(SITEDIR)/libsystem.so
 	$(INSTALL) -m644 libworkspace.so $(DESTDIR)$(SITEDIR)/libworkspace.so
-	# $(INSTALL) -vm644 libxlib.so $(DESTDIR)$(SITEDIR)/libxlib.so
+	# $(INSTALL) -m644 libxlib.so $(DESTDIR)$(SITEDIR)/libxlib.so
 
 uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libarchive.so

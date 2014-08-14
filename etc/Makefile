@@ -14,3 +14,5 @@ install:
 uninstall:
 	$(RM) -r $(DESTDIR)/etc/spm/ $(DESTDIR)/etc/spm.conf
 	$(RM) -r $(DESTDIR)/etc/qworkspace/
+
+.PHONY: install uninstall

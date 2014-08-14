@@ -44,3 +44,5 @@ uninstall:
 
 clean:
 	$(RM) *.8 *.5
+
+.PHONY: all install uninstall clean
