@@ -5,6 +5,16 @@ import libworkspace, libpackage, libspm
 general = libworkspace.General()
 database = libpackage.Database()
 
+class Thread(QtCore.QThread):
+    ''' Worker thread '''
+    def __init__(self, parent, func):
+        super(Thread, self).__init__()
+        self.parent = parent
+        self.func = func
+
+    def run(self):
+        self.func()
+
 class Widget(QtGui.QWidget):
     ''' Tab widget '''
     def __init__(self, parent, spath=None):
@@ -46,6 +56,10 @@ class Widget(QtGui.QWidget):
         mainLayout.addWidget(self.targetsFilter)
         mainLayout.addWidget(self.infoTab)
         mainLayout.addLayout(secondLayout, QtCore.Qt.AlignBottom, 0)
+        self.progressBar = QtGui.QProgressBar()
+        self.progressBar.setRange(0,1)
+        self.progressBar.hide()
+        mainLayout.addWidget(self.progressBar)
         self.setLayout(mainLayout)
 
         self.refresh_all()
@@ -107,14 +121,33 @@ class Widget(QtGui.QWidget):
         self.refresh_targets()
         self.refresh_buttons()
 
+    def worker_started(self):
+        self.progressBar.setRange(0,0)
+        self.progressBar.show()
+        self.syncButton.setEnabled(False)
+        self.updateButton.setEnabled(False)
+        self.buildButton.setEnabled(False)
+        self.removeButton.setEnabled(False)
+
+    def worker_stopped(self):
+        self.progressBar.setRange(0,1)
+        self.progressBar.hide()
+        self.syncButton.setEnabled(True)
+        self.updateButton.setEnabled(True)
+        self.refresh_all()
+
+    def worker(self, func):
+        self.thread = Thread(self, func)
+        self.thread.finished.connect(self.worker_stopped)
+        self.worker_started()
+        self.thread.start()
+
     def targets_sync(self):
         try:
             m = libspm.Repo(libspm.REPOSITORIES, True, True, False)
-            m.main()
+            self.worker(m.main)
         except Exception as detail:
             QtGui.QMessageBox.critical(self, self.tr('Critical'), str(detail))
-        finally:
-            self.refresh_all()
 
     def targets_update(self):
         try:
@@ -122,11 +155,9 @@ class Widget(QtGui.QWidget):
             m = libspm.Source(targets, do_clean=True, do_prepare=True,
                 do_compile=True, do_check=False, do_install=True, do_merge=True,
                 do_remove=False, do_depends=True, do_reverse=True, do_update=True)
-            m.main()
+            self.worker(m.main)
         except Exception as detail:
             QtGui.QMessageBox.critical(self, self.tr('Critical'), str(detail))
-        finally:
-            self.refresh_all()
 
     def targets_build(self):
         try:
@@ -134,11 +165,9 @@ class Widget(QtGui.QWidget):
             m = libspm.Source(targets, do_clean=True, do_prepare=True,
                 do_compile=True, do_check=False, do_install=True, do_merge=True,
                 do_remove=False, do_depends=True, do_reverse=True, do_update=False)
-            m.main()
+            self.worker(m.main)
         except Exception as detail:
             QtGui.QMessageBox.critical(self, self.tr('Critical'), str(detail))
-        finally:
-            self.refresh_all()
 
     def targets_remove(self):
         try:
@@ -146,11 +175,10 @@ class Widget(QtGui.QWidget):
             m = libspm.Source(targets, do_clean=False, do_prepare=False,
                 do_compile=False, do_check=False, do_install=False, do_merge=False,
                 do_remove=True, do_depends=False, do_reverse=True, do_update=False)
-            m.main()
+            self.worker(m.main)
         except Exception as detail:
             QtGui.QMessageBox.critical(self, self.tr('Critical'), str(detail))
-        finally:
-            self.refresh_all()
+
 
 class Plugin(QtCore.QObject):
     ''' Plugin handler '''
