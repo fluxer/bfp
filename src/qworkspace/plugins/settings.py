@@ -21,7 +21,7 @@ class Plugin(QtCore.QObject):
         self.parent = parent
         self.name = 'settings'
         self.version = '0.0.1'
-        self.description = self.tr('Settings plugin')
+        self.description = self.tr('Settings manager plugin')
         self.icon = general.get_icon('delete')
         self.widget = None
 

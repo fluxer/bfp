@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="bg_BG" sourcelanguage="">
+<!DOCTYPE TS>
+<TS version="2.0" language="bg_BG">
 <context>
     <name>Plugin</name>
     <message>
@@ -15,27 +16,22 @@
     <message>
         <location filename="editor.py" line="138"/>
         <source>Text editor plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Плъгин за редактиране на текст</translation>
     </message>
     <message>
         <location filename="editor.py" line="164"/>
         <source>Editor</source>
-        <translation type="unfinished"></translation>
+        <translation>Редактор</translation>
     </message>
     <message>
-        <location filename="image.py" line="115"/>
+        <location filename="image.py" line="116"/>
         <source>Image viewer plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Плъгин за преглед на изображения</translation>
     </message>
     <message>
-        <location filename="image.py" line="134"/>
+        <location filename="image.py" line="135"/>
         <source>Image</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="multimedia.py" line="48"/>
-        <source>Media plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Изображение</translation>
     </message>
     <message>
         <location filename="multimedia.py" line="72"/>
@@ -45,7 +41,7 @@
     <message>
         <location filename="package.py" line="162"/>
         <source>Package manager plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Плъгин за управление на пакетите </translation>
     </message>
     <message>
         <location filename="package.py" line="175"/>
@@ -55,12 +51,12 @@
     <message>
         <location filename="quit.py" line="14"/>
         <source>Quit plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Плъгин за приключване</translation>
     </message>
     <message>
         <location filename="screenshot.py" line="63"/>
         <source>Screenshot taking plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Плъгин за правене на снимка на екрана</translation>
     </message>
     <message>
         <location filename="screenshot.py" line="76"/>
@@ -70,7 +66,7 @@
     <message>
         <location filename="storage.py" line="282"/>
         <source>Storage management plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Плъгин за управление на хранилищата</translation>
     </message>
     <message>
         <location filename="storage.py" line="304"/>
@@ -80,7 +76,7 @@
     <message>
         <location filename="terminal.py" line="34"/>
         <source>Embed terminal plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Плъгин за вграден терминал</translation>
     </message>
     <message>
         <location filename="terminal.py" line="47"/>
@@ -90,7 +86,7 @@
     <message>
         <location filename="www.py" line="349"/>
         <source>World Wide Web browser</source>
-        <translation>Уърлд Уайд Уеб броузър</translation>
+        <translation type="obsolete">Уърлд Уайд Уеб броузър</translation>
     </message>
     <message>
         <location filename="www.py" line="362"/>
@@ -100,32 +96,42 @@
     <message>
         <location filename="archive.py" line="24"/>
         <source>Archive manager plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Плъгин за управление на архиви</translation>
     </message>
     <message>
         <location filename="archive.py" line="43"/>
         <source>Archive</source>
-        <translation type="unfinished"></translation>
+        <translation>Архив</translation>
     </message>
     <message>
         <location filename="network.py" line="24"/>
         <source>Network manager plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Плъгин за управление на мрежата</translation>
     </message>
     <message>
         <location filename="network.py" line="32"/>
         <source>Network</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="settings.py" line="24"/>
-        <source>Settings plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Мрежа</translation>
     </message>
     <message>
         <location filename="settings.py" line="32"/>
         <source>Settings</source>
-        <translation type="unfinished"></translation>
+        <translation>Настройки</translation>
+    </message>
+    <message>
+        <location filename="multimedia.py" line="48"/>
+        <source>Multimedia plugin</source>
+        <translation>Мултимедиа плъгин</translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="24"/>
+        <source>Settings manager plugin</source>
+        <translation>Плъгин за управление на настройките</translation>
+    </message>
+    <message>
+        <location filename="www.py" line="349"/>
+        <source>World Wide Web browser plugin</source>
+        <translation>Плъгин за разглеждане на World Wide Web</translation>
     </message>
 </context>
 <context>
@@ -162,13 +168,8 @@
     </message>
     <message>
         <location filename="editor.py" line="95"/>
-        <source>Text Files (*.txt);;All Files (*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="editor.py" line="95"/>
         <source>Save as</source>
-        <translation type="unfinished"></translation>
+        <translation>Запази като</translation>
     </message>
     <message>
         <location filename="www.py" line="288"/>
@@ -176,14 +177,9 @@
         <translation>Намери</translation>
     </message>
     <message>
-        <location filename="screenshot.py" line="25"/>
-        <source>Image Files (*.png *.jpg *.jpeg *.svg);;All Files (*)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="www.py" line="316"/>
         <source>Critical</source>
-        <translation type="unfinished"></translation>
+        <translation>Критично</translation>
     </message>
     <message>
         <location filename="screenshot.py" line="25"/>
@@ -228,7 +224,7 @@
     <message>
         <location filename="storage.py" line="211"/>
         <source>Properties</source>
-        <translation type="unfinished"></translation>
+        <translation>Свойства</translation>
     </message>
     <message>
         <location filename="storage.py" line="213"/>
@@ -409,6 +405,16 @@
         <location filename="www.py" line="337"/>
         <source>Reload</source>
         <translation>Презареди</translation>
+    </message>
+    <message>
+        <location filename="editor.py" line="95"/>
+        <source>Text (*.txt);;All (*)</source>
+        <translation>Текст (*.txt);;Всички (*)</translation>
+    </message>
+    <message>
+        <location filename="screenshot.py" line="25"/>
+        <source>Image (*.png *.jpg *.jpeg *.svg);;All (*)</source>
+        <translation>Изобрайжение (*.png *.jpg *.jpeg *.svg);;Всички (*)</translation>
     </message>
 </context>
 </TS>

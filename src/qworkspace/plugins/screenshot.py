@@ -23,7 +23,7 @@ class Widget(QtGui.QWidget):
 
     def get_filename(self):
         sfile = QtGui.QFileDialog.getSaveFileName(self, self.tr('Save'), \
-            'screenshot.png', self.tr('Image Files (*.png *.jpg *.jpeg *.svg);;All Files (*)'))
+            'screenshot.png', self.tr('Image (*.png *.jpg *.jpeg *.svg);;All (*)'))
         if sfile:
             return str(sfile)
         return None
