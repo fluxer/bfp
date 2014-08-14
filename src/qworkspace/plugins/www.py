@@ -313,10 +313,10 @@ class Widget(QtGui.QWidget):
         surl = reply.url().toString()
         if reply.error():
             QtGui.QMessageBox.critical(self, self.tr('Critical'), \
-                self.tr('Dowload of <b>%s</b> failed.') % surl)
+                self.tr('Download of <b>%s</b> failed.') % surl)
         else:
             QtGui.QMessageBox.information(self, self.tr('Info'), \
-                self.tr('Dowload of <b>%s</b> complete.') % surl)
+                self.tr('Download of <b>%s</b> complete.') % surl)
 
     def bookmark_open(self, url):
         self.urlBox.setEditText(url)

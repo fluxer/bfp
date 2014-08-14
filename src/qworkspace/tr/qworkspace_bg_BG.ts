@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="bg_BG" sourcelanguage="">
+<!DOCTYPE TS>
+<TS version="2.0" language="bg_BG">
 <context>
     <name>Plugin</name>
     <message>
@@ -133,27 +134,27 @@
     <message>
         <location filename="editor.py" line="19"/>
         <source>CTRL+O</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="www.py" line="119"/>
         <source>CTRL+S</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="www.py" line="115"/>
         <source>CTRL+R</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="www.py" line="117"/>
         <source>CTRL+F</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="www.py" line="113"/>
         <source>CTRL+N</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="storage.py" line="202"/>
@@ -233,7 +234,7 @@
     <message>
         <location filename="www.py" line="110"/>
         <source>CTRL+B</source>
-        <translation type="unfinished"></translation>
+        <translation></translation>
     </message>
     <message>
         <location filename="www.py" line="183"/>
@@ -358,12 +359,12 @@
     <message>
         <location filename="www.py" line="276"/>
         <source>unknown error</source>
-        <translation type="unfinished"></translation>
+        <translation>неизвестна грешка</translation>
     </message>
     <message>
         <location filename="www.py" line="284"/>
         <source>SSL errors ignored: %s, %s</source>
-        <translation type="unfinished"></translation>
+        <translation>SSL грешка игнорирана: %s, %s</translation>
     </message>
     <message>
         <location filename="www.py" line="294"/>
@@ -371,19 +372,9 @@
         <translation>Търси</translation>
     </message>
     <message>
-        <location filename="www.py" line="316"/>
-        <source>Dowload of &lt;b&gt;%s&lt;/b&gt; failed.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="www.py" line="319"/>
         <source>Info</source>
         <translation>Инфо</translation>
-    </message>
-    <message>
-        <location filename="www.py" line="319"/>
-        <source>Dowload of &lt;b&gt;%s&lt;/b&gt; complete.</source>
-        <translation type="unfinished"></translation>
     </message>
     <message>
         <location filename="www.py" line="335"/>
@@ -409,6 +400,16 @@
         <location filename="screenshot.py" line="25"/>
         <source>Image (*.png *.jpg *.jpeg *.svg);;All (*)</source>
         <translation>Изобрайжение (*.png *.jpg *.jpeg *.svg);;Всички (*)</translation>
+    </message>
+    <message>
+        <location filename="www.py" line="316"/>
+        <source>Download of &lt;b&gt;%s&lt;/b&gt; failed.</source>
+        <translation>Свалянето на &lt;b&gt;%s&lt;/b&gt; се провали.</translation>
+    </message>
+    <message>
+        <location filename="www.py" line="319"/>
+        <source>Download of &lt;b&gt;%s&lt;/b&gt; complete.</source>
+        <translation>Свалянето на &lt;b&gt;%s&lt;/b&gt; завърши.</translation>
     </message>
 </context>
 </TS>
