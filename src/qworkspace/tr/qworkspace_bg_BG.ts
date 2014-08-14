@@ -5,12 +5,12 @@
     <message>
         <location filename="dummy.py" line="24"/>
         <source>Dummy plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Фалшив плъгин</translation>
     </message>
     <message>
         <location filename="dummy.py" line="32"/>
         <source>Dummy</source>
-        <translation type="unfinished"></translation>
+        <translation>Фалшив</translation>
     </message>
     <message>
         <location filename="editor.py" line="138"/>
