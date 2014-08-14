@@ -21,16 +21,16 @@ all:
 	$(SED) 's|#JOBS#|$(JOBS)|g' -i spm.conf.5
 
 install:
-	$(INSTALL) -vdm755 $(DESTDIR)$(MANDIR)/man8/ $(DESTDIR)$(MANDIR)/man5/
-	$(INSTALL) -vdm755 $(DESTDIR)$(SHAREDIR)/spm/
-	$(INSTALL) -vm644 spm.8 $(DESTDIR)$(MANDIR)/man8/spm.8
-	$(INSTALL) -vm644 spm.conf.5 $(DESTDIR)$(MANDIR)/man5/spm.conf.5
-	$(INSTALL) -vm644 SRCBUILD.5 $(DESTDIR)$(MANDIR)/man5/SRCBUILD.5
-	$(INSTALL) -vm644 SRCBUILD.txt $(DESTDIR)$(SHAREDIR)/spm/SRCBUILD.txt
-	$(INSTALL) -vm644 spm-tools.8 $(DESTDIR)$(MANDIR)/man8/spm-tools.8
-	$(INSTALL) -vm644 cparted.8 $(DESTDIR)$(MANDIR)/man8/cparted.8
-	$(INSTALL) -vm644 mkinitfs.8 $(DESTDIR)$(MANDIR)/man8/mkinitfs.8
-	$(INSTALL) -vm644 lsinitfs.8 $(DESTDIR)$(MANDIR)/man8/lsinitfs.8
+	$(INSTALL) -dm755 $(DESTDIR)$(MANDIR)/man8/ $(DESTDIR)$(MANDIR)/man5/
+	$(INSTALL) -dm755 $(DESTDIR)$(SHAREDIR)/spm/
+	$(INSTALL) -m644 spm.8 $(DESTDIR)$(MANDIR)/man8/spm.8
+	$(INSTALL) -m644 spm.conf.5 $(DESTDIR)$(MANDIR)/man5/spm.conf.5
+	$(INSTALL) -m644 SRCBUILD.5 $(DESTDIR)$(MANDIR)/man5/SRCBUILD.5
+	$(INSTALL) -m644 SRCBUILD.txt $(DESTDIR)$(SHAREDIR)/spm/SRCBUILD.txt
+	$(INSTALL) -m644 spm-tools.8 $(DESTDIR)$(MANDIR)/man8/spm-tools.8
+	$(INSTALL) -m644 cparted.8 $(DESTDIR)$(MANDIR)/man8/cparted.8
+	$(INSTALL) -m644 mkinitfs.8 $(DESTDIR)$(MANDIR)/man8/mkinitfs.8
+	$(INSTALL) -m644 lsinitfs.8 $(DESTDIR)$(MANDIR)/man8/lsinitfs.8
 
 uninstall:
 	$(RM) $(DESTDIR)$(MANDIR)/man8/spm-tools.8

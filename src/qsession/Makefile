@@ -6,14 +6,14 @@ all: clean
 	$(STRIP) main.exe
 
 install:
-	$(INSTALL) -vdm755 $(DESTDIR)$(SBINDIR)
-	$(INSTALL) -vm755 main.exe $(DESTDIR)$(SBINDIR)/qsession
+	$(INSTALL) -dm755 $(DESTDIR)$(SBINDIR)
+	$(INSTALL) -m755 main.exe $(DESTDIR)$(SBINDIR)/qsession
 
 uninstall:
 	$(RM) $(DESTDIR)$(SBINDIR)/qsession
 
 clean:
 	$(RM) -r *.build/ *.exe qsession_ui.py
-	$(RM) $(shell find . -name '*.pyc' -o -name '*.pyo')
+	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
 .PHONY: all install uninstall clean

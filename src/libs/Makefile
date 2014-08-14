@@ -17,15 +17,15 @@ check:
 	$(PYTHON) test.py
 
 install:
-	$(INSTALL) -vdm755 $(DESTDIR)$(SITEDIR)
-	$(INSTALL) -vm644 libarchive.so $(DESTDIR)$(SITEDIR)/libarchive.so
-	$(INSTALL) -vm644 libhighlighter.so $(DESTDIR)$(SITEDIR)/libhighlighter.so
-	$(INSTALL) -vm644 libmagic.so $(DESTDIR)$(SITEDIR)/libmagic.so
-	$(INSTALL) -vm644 libmessage.so $(DESTDIR)$(SITEDIR)/libmessage.so
-	$(INSTALL) -vm644 libmisc.so $(DESTDIR)$(SITEDIR)/libmisc.so
-	$(INSTALL) -vm644 libpackage.so $(DESTDIR)$(SITEDIR)/libpackage.so
-	$(INSTALL) -vm644 libsystem.so $(DESTDIR)$(SITEDIR)/libsystem.so
-	$(INSTALL) -vm644 libworkspace.so $(DESTDIR)$(SITEDIR)/libworkspace.so
+	$(INSTALL) -dm755 $(DESTDIR)$(SITEDIR)
+	$(INSTALL) -m644 libarchive.so $(DESTDIR)$(SITEDIR)/libarchive.so
+	$(INSTALL) -m644 libhighlighter.so $(DESTDIR)$(SITEDIR)/libhighlighter.so
+	$(INSTALL) -m644 libmagic.so $(DESTDIR)$(SITEDIR)/libmagic.so
+	$(INSTALL) -m644 libmessage.so $(DESTDIR)$(SITEDIR)/libmessage.so
+	$(INSTALL) -m644 libmisc.so $(DESTDIR)$(SITEDIR)/libmisc.so
+	$(INSTALL) -m644 libpackage.so $(DESTDIR)$(SITEDIR)/libpackage.so
+	$(INSTALL) -m644 libsystem.so $(DESTDIR)$(SITEDIR)/libsystem.so
+	$(INSTALL) -m644 libworkspace.so $(DESTDIR)$(SITEDIR)/libworkspace.so
 	# $(INSTALL) -vm644 libxlib.so $(DESTDIR)$(SITEDIR)/libxlib.so
 
 uninstall:
@@ -41,6 +41,6 @@ uninstall:
 
 clean:
 	$(RM) -r *.build/ *.so
-	$(RM) $(shell find . -name '*.pyc' -o -name '*.pyo')
+	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
 .PHONY: all check install uninstall clean

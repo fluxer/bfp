@@ -23,23 +23,23 @@ all: bump clean
 		storage.so terminal.so www.so
 
 install:
-	$(INSTALL) -vdm755 $(DESTDIR)$(BINDIR)
-	$(INSTALL) -vdm755 $(DESTDIR)/etc/qworkspace/plugins
-	$(INSTALL) -vdm755 $(DESTDIR)$(TRDIR)/
-	$(INSTALL) -vm755 main.exe $(DESTDIR)$(BINDIR)/qworkspace
-	$(INSTALL) -vm644 archive.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -vm644 editor.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -vm644 image.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -vm644 multimedia.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -vm644 network.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -vm644 package.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -vm644 quit.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -vm644 screenshot.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -vm644 settings.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -vm644 storage.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -vm644 terminal.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -vm644 www.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -vm644 tr/*.qm $(DESTDIR)$(TRDIR)/
+	$(INSTALL) -dm755 $(DESTDIR)$(BINDIR)
+	$(INSTALL) -dm755 $(DESTDIR)/etc/qworkspace/plugins
+	$(INSTALL) -dm755 $(DESTDIR)$(TRDIR)/
+	$(INSTALL) -m755 main.exe $(DESTDIR)$(BINDIR)/qworkspace
+	$(INSTALL) -m644 archive.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(INSTALL) -m644 editor.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(INSTALL) -m644 image.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(INSTALL) -m644 multimedia.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(INSTALL) -m644 network.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(INSTALL) -m644 package.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(INSTALL) -m644 quit.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(INSTALL) -m644 screenshot.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(INSTALL) -m644 settings.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(INSTALL) -m644 storage.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(INSTALL) -m644 terminal.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(INSTALL) -m644 www.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(INSTALL) -m644 tr/*.qm $(DESTDIR)$(TRDIR)/
 
 uninstall:
 	$(RM) $(DESTDIR)$(BINDIR)/qworkspace
@@ -48,7 +48,7 @@ uninstall:
 
 clean:
 	$(RM) -r *.build/ *.so *.exe qworkspace_ui.py tr/*.qm
-	$(RM) $(shell find . -name '*.pyc' -o -name '*.pyo')
+	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
 bump:
 	$(SED) 's|^app_version.*|app_version = "$(VERSION) ($(GIT_VERSION))"|' -i main.py

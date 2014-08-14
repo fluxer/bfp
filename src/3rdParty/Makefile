@@ -7,10 +7,10 @@ all: clean
 	$(STRIP) puzzle.exe tetrix.exe analogclock.exe
 
 install:
-	$(INSTALL) -vdm755 $(DESTDIR)$(BINDIR)
-	$(INSTALL) -vm755 puzzle.exe $(DESTDIR)$(BINDIR)/qpuzzle
-	$(INSTALL) -vm755 tetrix.exe $(DESTDIR)$(BINDIR)/qtetrix
-	$(INSTALL) -vm755 analogclock.exe $(DESTDIR)$(BINDIR)/qanalogclock
+	$(INSTALL) -dm755 $(DESTDIR)$(BINDIR)
+	$(INSTALL) -m755 puzzle.exe $(DESTDIR)$(BINDIR)/qpuzzle
+	$(INSTALL) -m755 tetrix.exe $(DESTDIR)$(BINDIR)/qtetrix
+	$(INSTALL) -m755 analogclock.exe $(DESTDIR)$(BINDIR)/qanalogclock
 
 uninstall:
 	$(RM) $(DESTDIR)$(BINDIR)/qpuzzle
@@ -19,6 +19,6 @@ uninstall:
 
 clean:
 	$(RM) -r *.build/ *.exe
-	$(RM) $(shell find . -name '*.pyc' -o -name '*.pyo')
+	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
 .PHONY: all install uninstall clean

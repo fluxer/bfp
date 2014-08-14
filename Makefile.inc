@@ -14,16 +14,19 @@ TRDIR =$(shell $(PYTHON) -c "from PyQt4.QtCore import QLibraryInfo; print(QLibra
 GIT = git
 GIT_VERSION = $(shell $(GIT) rev-parse --short HEAD || echo stable)
 
-SED = sed
-GCC= gcc
-STRIP = strip
-INSTALL = install
-RM = rm -f
-CP = cp -f
-
 MACHINE = $(shell $(GCC) -dumpmachine)
 ARCH = $(shell uname -m | $(SED) 's|_|-|')
 JOBS = $(shell echo $$((`nproc || echo 1`+1)))
+
+GREP = grep
+FIND = find
+SED = sed
+GCC= gcc
+STRIP = strip
+INSTALL = install -v
+RM = rm -vf
+CP = cp -vf
+XZ = xz -v
 
 POD2MAN = pod2man
 PYUIC = pyuic4
@@ -32,3 +35,4 @@ PYLUPDATE = pylupdate4
 LRELEASE = lrelease
 NUITKA = $(PYTHON) ../../nuitka/bin/nuitka --recurse-not-to=PyQt4,parted,Xlib \
 	--python-version=$(PYTHON_VERSION)
+PYLINT = pylint

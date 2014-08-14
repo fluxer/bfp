@@ -7,10 +7,10 @@ all: bump clean
 	$(STRIP) libspm.so spm.exe tools.exe
 
 install:
-	$(INSTALL) -vdm755 $(DESTDIR)$(SBINDIR) $(DESTDIR)$(SITEDIR)
-	$(INSTALL) -vm755 spm.exe $(DESTDIR)$(SBINDIR)/spm
-	$(INSTALL) -vm755 tools.exe $(DESTDIR)$(SBINDIR)/spm-tools
-	$(INSTALL) -vm644 libspm.so $(DESTDIR)$(SITEDIR)/libspm.so
+	$(INSTALL) -dm755 $(DESTDIR)$(SBINDIR) $(DESTDIR)$(SITEDIR)
+	$(INSTALL) -m755 spm.exe $(DESTDIR)$(SBINDIR)/spm
+	$(INSTALL) -m755 tools.exe $(DESTDIR)$(SBINDIR)/spm-tools
+	$(INSTALL) -m644 libspm.so $(DESTDIR)$(SITEDIR)/libspm.so
 
 uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libspm.so
@@ -19,7 +19,7 @@ uninstall:
 
 clean:
 	$(RM) -r *.build/ *.so *.exe
-	$(RM) $(shell find . -name '*.pyc' -o -name '*.pyo')
+	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
 bump:
 	$(SED) 's|^app_version.*|app_version = "$(VERSION) ($(GIT_VERSION))"|' -i spm.py tools.py

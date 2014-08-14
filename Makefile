@@ -46,13 +46,14 @@ clean:
 	make -C src/qworkspace clean
 
 changelog:
-	git log > ChangeLog
+	$(GIT) log HEAD -n 1 --pretty='%cd %an <%ae> %n%H%d'
+	$(GIT) log 3.2.2..HEAD --no-merges --pretty='    * %s'
 
 dist:
-	git archive HEAD --prefix=bfp-$(VERSION)/ | xz > bfp-$(VERSION).tar.xz
+	$(GIT) archive HEAD --prefix=bfp-$(VERSION)/ | $(XZ) > bfp-$(VERSION).tar.xz
 
 stat:
-	cloc $(shell find src/ -name '*.py') scripts/*.sh
+	cloc $(shell $(FIND) src/ -name '*.py') scripts/*.sh
 
 lint:
-	pylint $(shell find src/ -name '*.py') | grep -v -e 'Line too long'
+	$(PYLINT) $(shell $(FIND) src/ -name '*.py') | $(GREP) -v -e 'Line too long'
