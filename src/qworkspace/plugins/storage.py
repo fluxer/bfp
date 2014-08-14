@@ -63,8 +63,10 @@ class Widget(QtGui.QWidget):
         ''' Check if file/dir exists and offer to rename '''
         sfile_basename = os.path.basename(sfile)
         sfile_dirname = os.path.dirname(sfile)
-        sfile_basename, ok = QtGui.QInputDialog.getText(self, 'File/directory exists', \
-                'File/directory exists, new name:', QtGui.QLineEdit.Normal, sfile_basename)
+        sfile_basename, ok = QtGui.QInputDialog.getText(self, \
+            self.tr('File/directory exists'), \
+            self.tr('File/directory exists, new name:'), \
+            QtGui.QLineEdit.Normal, sfile_basename)
         sfile_basename = str(sfile_basename)
         if ok and sfile_basename:
             if not os.path.exists(sfile_dirname + '/' + sfile_basename):
@@ -173,8 +175,8 @@ class Widget(QtGui.QWidget):
 
     def menu_new_file(self):
         ''' Create a new file '''
-        svar, ok = QtGui.QInputDialog.getText(self, 'New file', \
-            'Name:', QtGui.QLineEdit.Normal)
+        svar, ok = QtGui.QInputDialog.getText(self, self.tr('New file'), \
+            self.tr('Name:'), QtGui.QLineEdit.Normal)
         svar = os.path.realpath(str(self.model.rootPath() + '/' + svar))
         if ok and svar:
             if os.path.exists(svar):
@@ -185,8 +187,8 @@ class Widget(QtGui.QWidget):
 
     def menu_new_directory(self):
         ''' Create a new directory '''
-        svar, ok = QtGui.QInputDialog.getText(self, 'New directory', \
-            'Name:', QtGui.QLineEdit.Normal)
+        svar, ok = QtGui.QInputDialog.getText(self, self.tr('New directory'), \
+            self.tr('Name:'), QtGui.QLineEdit.Normal)
         svar = os.path.realpath(str(self.model.rootPath() + '/' + svar))
         if ok and svar:
             if os.path.isdir(svar):

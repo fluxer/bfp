@@ -300,7 +300,6 @@ class Widget(QtGui.QWidget):
 
     def unsupported(self, reply):
         ''' Download a unsupported URL '''
-        # sfile = str(QtGui.QFileDialog.getSaveFileName(self, 'Save', os.path.basename(surl)))
         reply.readyRead.connect(lambda reply=reply: self.download_start(reply))
         reply.finished.connect(lambda reply=reply: self.download_finished(reply))
 

@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="bg_BG">
+<!DOCTYPE TS><TS version="2.0" language="bg_BG" sourcelanguage="">
 <context>
     <name>Plugin</name>
     <message>
@@ -64,12 +63,12 @@
         <translation>Снимка на екрана</translation>
     </message>
     <message>
-        <location filename="storage.py" line="283"/>
+        <location filename="storage.py" line="285"/>
         <source>Storage management plugin</source>
         <translation>Плъгин за управление на хранилищата</translation>
     </message>
     <message>
-        <location filename="storage.py" line="305"/>
+        <location filename="storage.py" line="307"/>
         <source>Storage</source>
         <translation>Хранилище</translation>
     </message>
@@ -84,7 +83,7 @@
         <translation>Терминал</translation>
     </message>
     <message>
-        <location filename="www.py" line="362"/>
+        <location filename="www.py" line="361"/>
         <source>WWW</source>
         <translation>УУУ</translation>
     </message>
@@ -124,7 +123,7 @@
         <translation>Плъгин за управление на настройките</translation>
     </message>
     <message>
-        <location filename="www.py" line="349"/>
+        <location filename="www.py" line="348"/>
         <source>World Wide Web browser plugin</source>
         <translation>Плъгин за разглеждане на World Wide Web</translation>
     </message>
@@ -157,7 +156,7 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="storage.py" line="202"/>
+        <location filename="storage.py" line="204"/>
         <source>Open</source>
         <translation>Отвори</translation>
     </message>
@@ -172,7 +171,7 @@
         <translation>Намери</translation>
     </message>
     <message>
-        <location filename="www.py" line="316"/>
+        <location filename="www.py" line="315"/>
         <source>Critical</source>
         <translation>Критично</translation>
     </message>
@@ -182,52 +181,52 @@
         <translation>Запази</translation>
     </message>
     <message>
-        <location filename="storage.py" line="201"/>
+        <location filename="storage.py" line="203"/>
         <source>Execute</source>
         <translation>Изпулни</translation>
     </message>
     <message>
-        <location filename="storage.py" line="203"/>
+        <location filename="storage.py" line="205"/>
         <source>Open with</source>
         <translation>Отвори с</translation>
     </message>
     <message>
-        <location filename="storage.py" line="205"/>
+        <location filename="storage.py" line="207"/>
         <source>Cut</source>
         <translation>Изрежи</translation>
     </message>
     <message>
-        <location filename="storage.py" line="206"/>
+        <location filename="storage.py" line="208"/>
         <source>Copy</source>
         <translation>Копирай</translation>
     </message>
     <message>
-        <location filename="storage.py" line="207"/>
+        <location filename="storage.py" line="209"/>
         <source>Paste</source>
         <translation>Постави</translation>
     </message>
     <message>
-        <location filename="storage.py" line="209"/>
+        <location filename="storage.py" line="211"/>
         <source>Rename</source>
         <translation>Преименувай</translation>
     </message>
     <message>
-        <location filename="storage.py" line="210"/>
+        <location filename="storage.py" line="212"/>
         <source>Delete</source>
         <translation>Изтрии</translation>
     </message>
     <message>
-        <location filename="storage.py" line="211"/>
+        <location filename="storage.py" line="213"/>
         <source>Properties</source>
         <translation>Свойства</translation>
     </message>
     <message>
-        <location filename="storage.py" line="213"/>
+        <location filename="storage.py" line="215"/>
         <source>New file</source>
         <translation>Нов файл</translation>
     </message>
     <message>
-        <location filename="storage.py" line="214"/>
+        <location filename="storage.py" line="216"/>
         <source>New directory</source>
         <translation>Нова директория</translation>
     </message>
@@ -372,22 +371,22 @@
         <translation>Търси</translation>
     </message>
     <message>
-        <location filename="www.py" line="319"/>
+        <location filename="www.py" line="318"/>
         <source>Info</source>
         <translation>Инфо</translation>
     </message>
     <message>
-        <location filename="www.py" line="335"/>
+        <location filename="www.py" line="334"/>
         <source>Back</source>
         <translation>Назад</translation>
     </message>
     <message>
-        <location filename="www.py" line="336"/>
+        <location filename="www.py" line="335"/>
         <source>Next</source>
         <translation>Следващ</translation>
     </message>
     <message>
-        <location filename="www.py" line="337"/>
+        <location filename="www.py" line="336"/>
         <source>Reload</source>
         <translation>Презареди</translation>
     </message>
@@ -402,14 +401,29 @@
         <translation>Изобрайжение (*.png *.jpg *.jpeg *.svg);;Всички (*)</translation>
     </message>
     <message>
-        <location filename="www.py" line="316"/>
+        <location filename="www.py" line="315"/>
         <source>Download of &lt;b&gt;%s&lt;/b&gt; failed.</source>
         <translation>Свалянето на &lt;b&gt;%s&lt;/b&gt; се провали.</translation>
     </message>
     <message>
-        <location filename="www.py" line="319"/>
+        <location filename="www.py" line="318"/>
         <source>Download of &lt;b&gt;%s&lt;/b&gt; complete.</source>
         <translation>Свалянето на &lt;b&gt;%s&lt;/b&gt; завърши.</translation>
+    </message>
+    <message>
+        <location filename="storage.py" line="66"/>
+        <source>File/directory exists</source>
+        <translation>Файлът/директорията съществува</translation>
+    </message>
+    <message>
+        <location filename="storage.py" line="66"/>
+        <source>File/directory exists, new name:</source>
+        <translation>Файлът/директорията съществува, ново име:</translation>
+    </message>
+    <message>
+        <location filename="storage.py" line="190"/>
+        <source>Name:</source>
+        <translation>Име:</translation>
     </message>
 </context>
 </TS>
