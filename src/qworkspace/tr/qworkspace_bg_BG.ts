@@ -97,6 +97,36 @@
         <source>WWW</source>
         <translation>УУУ</translation>
     </message>
+    <message>
+        <location filename="archive.py" line="24"/>
+        <source>Archive manager plugin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="archive.py" line="43"/>
+        <source>Archive</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="network.py" line="24"/>
+        <source>Network manager plugin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="network.py" line="32"/>
+        <source>Network</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="24"/>
+        <source>Settings plugin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="settings.py" line="32"/>
+        <source>Settings</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>Widget</name>
