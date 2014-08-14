@@ -6,29 +6,36 @@ all: bump clean
 	$(PYLUPDATE) main.py plugins/*.py -ts tr/qworkspace_bg_BG.ts
 	$(LRELEASE) tr/qworkspace_bg_BG.ts
 	$(NUITKA) --recurse-to=qworkspace_ui main.py
+	$(NUITKA) --module plugins/archive.py
 	$(NUITKA) --module plugins/editor.py
 	$(NUITKA) --module plugins/image.py
 	$(NUITKA) --module plugins/multimedia.py
+	$(NUITKA) --module plugins/network.py
 	$(NUITKA) --module plugins/package.py
 	$(NUITKA) --module plugins/quit.py
 	$(NUITKA) --module plugins/screenshot.py
+	$(NUITKA) --module plugins/settings.py
 	$(NUITKA) --module plugins/storage.py
 	$(NUITKA) --module plugins/terminal.py
 	$(NUITKA) --module plugins/www.py
-	$(STRIP) main.exe editor.so image.so multimedia.so package.so quit.so \
-		screenshot.so storage.so terminal.so www.so
+	$(STRIP) main.exe archive.so editor.so image.so multimedia.so \
+		network.so package.so quit.so screenshot.so settings.so \
+		storage.so terminal.so www.so
 
 install:
 	$(INSTALL) -vdm755 $(DESTDIR)$(BINDIR)
 	$(INSTALL) -vdm755 $(DESTDIR)/etc/qworkspace/plugins
 	$(INSTALL) -vdm755 $(DESTDIR)$(TRDIR)/
 	$(INSTALL) -vm755 main.exe $(DESTDIR)$(BINDIR)/qworkspace
+	$(INSTALL) -vm644 archive.so $(DESTDIR)/etc/qworkspace/plugins/
 	$(INSTALL) -vm644 editor.so $(DESTDIR)/etc/qworkspace/plugins/
 	$(INSTALL) -vm644 image.so $(DESTDIR)/etc/qworkspace/plugins/
 	$(INSTALL) -vm644 multimedia.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(INSTALL) -vm644 network.so $(DESTDIR)/etc/qworkspace/plugins/
 	$(INSTALL) -vm644 package.so $(DESTDIR)/etc/qworkspace/plugins/
 	$(INSTALL) -vm644 quit.so $(DESTDIR)/etc/qworkspace/plugins/
 	$(INSTALL) -vm644 screenshot.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(INSTALL) -vm644 settings.so $(DESTDIR)/etc/qworkspace/plugins/
 	$(INSTALL) -vm644 storage.so $(DESTDIR)/etc/qworkspace/plugins/
 	$(INSTALL) -vm644 terminal.so $(DESTDIR)/etc/qworkspace/plugins/
 	$(INSTALL) -vm644 www.so $(DESTDIR)/etc/qworkspace/plugins/
