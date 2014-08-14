@@ -10,7 +10,8 @@ PYTHON = python2
 PYTHON_VERSION = $(shell $(PYTHON) -c "import sys; print(sys.version[:3])")
 # Debian and derivatives use dist-packages - how glorious!
 SITEDIR = $(PREFIX)/lib/python$(PYTHON_VERSION)/site-packages
-TRDIR =$(shell $(PYTHON) -c "from PyQt4.QtCore import QLibraryInfo; print(QLibraryInfo.location(QLibraryInfo.TranslationsPath))")
+TRDIR =$(shell $(PYTHON) -c "from PyQt4.QtCore import QLibraryInfo; \
+	print(QLibraryInfo.location(QLibraryInfo.TranslationsPath))")
 GIT = git
 GIT_VERSION = $(shell $(GIT) rev-parse --short HEAD || echo stable)
 
@@ -31,7 +32,7 @@ XZ = xz -v
 POD2MAN = pod2man
 PYUIC = pyuic4
 PYRCC = pyrcc4
-PYLUPDATE = pylupdate4
+PYLUPDATE = pylupdate4 -noobsolete
 LRELEASE = lrelease
 NUITKA = $(PYTHON) ../../nuitka/bin/nuitka --recurse-not-to=PyQt4,parted,Xlib \
 	--python-version=$(PYTHON_VERSION)

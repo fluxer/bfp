@@ -38,12 +38,12 @@
         <translation>Мултимедиа</translation>
     </message>
     <message>
-        <location filename="package.py" line="189"/>
+        <location filename="package.py" line="190"/>
         <source>Package manager plugin</source>
         <translation>Плъгин за управление на пакетите </translation>
     </message>
     <message>
-        <location filename="package.py" line="202"/>
+        <location filename="package.py" line="203"/>
         <source>Package</source>
         <translation>Пакет</translation>
     </message>
@@ -63,12 +63,12 @@
         <translation>Снимка на екрана</translation>
     </message>
     <message>
-        <location filename="storage.py" line="282"/>
+        <location filename="storage.py" line="283"/>
         <source>Storage management plugin</source>
         <translation>Плъгин за управление на хранилищата</translation>
     </message>
     <message>
-        <location filename="storage.py" line="304"/>
+        <location filename="storage.py" line="305"/>
         <source>Storage</source>
         <translation>Хранилище</translation>
     </message>
@@ -81,11 +81,6 @@
         <location filename="terminal.py" line="47"/>
         <source>Terminal</source>
         <translation>Терминал</translation>
-    </message>
-    <message>
-        <location filename="www.py" line="349"/>
-        <source>World Wide Web browser</source>
-        <translation type="obsolete">Уърлд Уайд Уеб броузър</translation>
     </message>
     <message>
         <location filename="www.py" line="362"/>

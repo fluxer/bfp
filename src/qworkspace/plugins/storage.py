@@ -229,6 +229,7 @@ class Widget(QtGui.QWidget):
         # FIXME: implement
         pass
 
+
 class Daemon(QtCore.QThread):
     def run(self):
         ''' Monitor block devices state '''
@@ -263,7 +264,6 @@ class Daemon(QtCore.QThread):
             time.sleep(2)
 
 
-
 class ToolWidget(QtGui.QWidget):
     ''' Tool widget '''
     def __init__(self, parent=None):
@@ -271,6 +271,7 @@ class ToolWidget(QtGui.QWidget):
         self.parent = parent
         self.testButton = QtGui.QPushButton(general.get_icon('file-manager'), 'TEST')
         self.addWidget(self.testButton)
+
 
 class Plugin(QtCore.QObject):
     ''' Plugin handler '''

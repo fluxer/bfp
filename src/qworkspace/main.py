@@ -5,7 +5,7 @@ from PyQt4 import QtCore, QtGui
 import sys, os, gc, libworkspace, libmisc
 
 # prepare for lift-off
-app_version = "0.9.23 (2a52b44)"
+app_version = "0.9.23 (c31300e)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qworkspace_ui.Ui_MainWindow()
@@ -15,6 +15,7 @@ general = libworkspace.General()
 misc = libmisc.Misc()
 ui.app = app
 ui.plugins = libworkspace.Plugins(ui)
+# ui.window = MainWindow
 
 # setup look of application
 def setLook():
@@ -25,7 +26,8 @@ setLook()
 def setTranslator():
     locale = QtCore.QLocale.system().name()
     translator = QtCore.QTranslator()
-    if translator.load('qworkspace_' + locale, QtCore.QLibraryInfo.location(QtCore.QLibraryInfo.TranslationsPath)):
+    tr_path = QtCore.QLibraryInfo.location(QtCore.QLibraryInfo.TranslationsPath)
+    if translator.load('qworkspace_' + locale, tr_paths):
         app.installTranslator(translator)
 setTranslator()
 
