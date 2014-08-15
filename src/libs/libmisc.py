@@ -16,6 +16,7 @@ class Misc(object):
 
     def whereis(self, program, fallback=True):
         ''' Find full path to executable '''
+        program = os.path.basename(program)
         for path in os.environ.get('PATH', '/bin:/usr/bin').split(':'):
             exe = os.path.join(path, program)
             if os.path.isfile(exe):
