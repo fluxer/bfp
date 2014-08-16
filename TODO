@@ -21,6 +21,7 @@ http://www.linuxfromscratch.org/blfs/view/systemd/postlfs/initramfs.html
  * Implement media player plugin (audio and video)
  * Implement audio mixer plugin
  * Implement archive manager plugin (make use of the storage plugin?)
+ * Implement XKB plugin
  * Implement more info into recent paths and display it with tooltip:
   - full path (done)
   - time accessed
@@ -33,7 +34,6 @@ http://www.linuxfromscratch.org/blfs/view/systemd/postlfs/initramfs.html
    display resolution change
  * Session manager (save/restore state), see http://qt-project.org/doc/qt-4.8/session.html
  * Notify on low disk space
- * XKB plugin
 
 ## ALL QT (on regular basis) ##
  * Expect failures everywhere
