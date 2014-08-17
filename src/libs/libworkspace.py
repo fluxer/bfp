@@ -1,6 +1,6 @@
 #!/bin/python2
 
-import os, sys, shutil
+import os, sys
 from PyQt4 import QtCore, QtGui
 
 import libmisc, libmessage
@@ -16,7 +16,8 @@ class Settings(object):
     ''' Settings handler '''
     def __init__(self, sfile='qworkspace'):
         self.settings = QtCore.QSettings(sfile)
-        self.settings.setPath(QtCore.QSettings.IniFormat, QtCore.QSettings.SystemScope, '/etc/qworkspace')
+        self.settings.setPath(QtCore.QSettings.IniFormat, \
+            QtCore.QSettings.SystemScope, '/etc/qworkspace')
 
     def get(self, svalue, sfallback=''):
         ''' Get settings value '''
@@ -52,8 +53,10 @@ class General(object):
 
     def get_icon(self, sicon):
         ''' Get icon '''
-        sicontheme = os.path.join(sys.prefix, 'share/icons', self.settings.get('general/icontheme'))
-        scache = str(QtCore.QDir.homePath()) + '/.cache/icons_' + self.settings.get('general/icontheme') + '.txt'
+        sicontheme = os.path.join(sys.prefix, 'share/icons', \
+            self.settings.get('general/icontheme'))
+        scache = str(QtCore.QDir.homePath()) + '/.cache/icons_' + \
+            self.settings.get('general/icontheme') + '.txt'
         if not os.path.isfile(scache):
             misc.file_write(scache, '\n'.join(misc.list_files(sicontheme)))
         for spath in misc.file_readlines(scache):
@@ -143,7 +146,7 @@ class Plugins(object):
             plugin = __import__(sname).Plugin(self.parent)
 
             if not hasattr(plugin, 'name') or not hasattr(plugin, 'version') \
-                or not hasattr(plugin, 'description')  or not hasattr(plugin, 'icon') \
+                or not hasattr(plugin, 'description') or not hasattr(plugin, 'icon') \
                 or not hasattr(plugin, '__init__') or not hasattr(plugin, 'unload'):
                 message.critical('Plugin is not sane', detail)
                 raise(PluginException('Plugin is not sane', detail))
@@ -271,7 +274,8 @@ class Plugins(object):
                 self.recent_unregister(key)
 
         message.info('Registering recent path', spath)
-        button = QtGui.QPushButton(general.get_icon('document-open-recent'), os.path.basename(spath))
+        button = QtGui.QPushButton(general.get_icon('document-open-recent'), \
+            os.path.basename(spath))
         button.clicked.connect(lambda: self.plugin_open('/' + spath, False))
         self.parent.toolBox.widget(0).layout().addWidget(button)
         self.recent_settings.set(spath, '')
