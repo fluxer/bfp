@@ -1,8 +1,6 @@
 #!/bin/python2
 
 from PyQt4 import QtCore, QtGui
-import libworkspace
-general = libworkspace.General()
 
 
 class HighlighterShell(QtGui.QSyntaxHighlighter):
@@ -54,6 +52,9 @@ class HighlighterShell(QtGui.QSyntaxHighlighter):
         singleLineCommentFormat.setForeground(QtCore.Qt.red)
         self.highlightingRules.append((QtCore.QRegExp("#[^\n]*"),
                 singleLineCommentFormat))
+
+        self.multiLineCommentFormat = QtGui.QTextCharFormat()
+        self.multiLineCommentFormat.setForeground(QtCore.Qt.red)
 
         urlFormat = QtGui.QTextCharFormat()
         urlFormat.setForeground(QtCore.Qt.magenta)
@@ -139,6 +140,9 @@ class HighlighterC(QtGui.QSyntaxHighlighter):
         singleLineCommentFormat.setForeground(QtCore.Qt.red)
         self.highlightingRules.append((QtCore.QRegExp("//[^\n]*"),
                 singleLineCommentFormat))
+
+        self.multiLineCommentFormat = QtGui.QTextCharFormat()
+        self.multiLineCommentFormat.setForeground(QtCore.Qt.red)
 
         urlFormat = QtGui.QTextCharFormat()
         urlFormat.setForeground(QtCore.Qt.magenta)
@@ -365,6 +369,9 @@ class HighlighterPython(QtGui.QSyntaxHighlighter):
         singleLineCommentFormat.setForeground(QtCore.Qt.red)
         self.highlightingRules.append((QtCore.QRegExp("#[^\n]*"),
                 singleLineCommentFormat))
+
+        self.multiLineCommentFormat = QtGui.QTextCharFormat()
+        self.multiLineCommentFormat.setForeground(QtCore.Qt.red)
 
         urlFormat = QtGui.QTextCharFormat()
         urlFormat.setForeground(QtCore.Qt.magenta)
