@@ -33,7 +33,7 @@
         <translation>Изображение</translation>
     </message>
     <message>
-        <location filename="multimedia.py" line="72"/>
+        <location filename="multimedia.py" line="76"/>
         <source>Multimedia</source>
         <translation>Мултимедиа</translation>
     </message>
@@ -113,7 +113,7 @@
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="multimedia.py" line="48"/>
+        <location filename="multimedia.py" line="52"/>
         <source>Multimedia plugin</source>
         <translation>Мултимедиа плъгин</translation>
     </message>
