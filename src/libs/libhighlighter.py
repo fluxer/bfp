@@ -6,6 +6,7 @@ general = libworkspace.General()
 
 
 class HighlighterShell(QtGui.QSyntaxHighlighter):
+    ''' Shell syntax highlightening '''
     def __init__(self, parent=None):
         super(HighlighterShell, self).__init__(parent)
 
@@ -97,16 +98,17 @@ class HighlighterShell(QtGui.QSyntaxHighlighter):
                 self.setCurrentBlockState(1)
                 commentLength = len(text) - startIndex
             else:
-                commentLength = endIndex - startIndex + self.commentEndExpression.matchedLength()
+                commentLength = endIndex - startIndex + \
+                    self.commentEndExpression.matchedLength()
 
             self.setFormat(startIndex, commentLength,
                     self.multiLineCommentFormat)
-            startIndex = self.commentStartExpression.indexIn(text,
-                    startIndex + commentLength);
-
+            startIndex = self.commentStartExpression.indexIn(text, \
+                    startIndex + commentLength)
 
 
 class HighlighterC(QtGui.QSyntaxHighlighter):
+    ''' C syntax highlightening '''
     def __init__(self, parent=None):
         super(HighlighterC, self).__init__(parent)
 
@@ -181,15 +183,17 @@ class HighlighterC(QtGui.QSyntaxHighlighter):
                 self.setCurrentBlockState(1)
                 commentLength = len(text) - startIndex
             else:
-                commentLength = endIndex - startIndex + self.commentEndExpression.matchedLength()
+                commentLength = endIndex - startIndex + \
+                    self.commentEndExpression.matchedLength()
 
             self.setFormat(startIndex, commentLength,
                     self.multiLineCommentFormat)
-            startIndex = self.commentStartExpression.indexIn(text,
-                    startIndex + commentLength);
+            startIndex = self.commentStartExpression.indexIn(text, \
+                    startIndex + commentLength)
 
 
 class HighlighterPython(QtGui.QSyntaxHighlighter):
+    ''' Python syntax highlightening '''
     def __init__(self, parent=None):
         super(HighlighterPython, self).__init__(parent)
 
@@ -350,7 +354,6 @@ class HighlighterPython(QtGui.QSyntaxHighlighter):
             keywordPatterns.append('\\b' + s+ '\\b')
         self.highlightingRules = [(QtCore.QRegExp(pattern), keywordFormat)
                 for pattern in keywordPatterns]
-        
 
         classFormat = QtGui.QTextCharFormat()
         classFormat.setFontWeight(QtGui.QFont.Bold)
@@ -406,12 +409,10 @@ class HighlighterPython(QtGui.QSyntaxHighlighter):
                 self.setCurrentBlockState(1)
                 commentLength = len(text) - startIndex
             else:
-                commentLength = endIndex - startIndex + self.commentEndExpression.matchedLength()
+                commentLength = endIndex - startIndex + \
+                    self.commentEndExpression.matchedLength()
 
             self.setFormat(startIndex, commentLength,
                     self.multiLineCommentFormat)
-            startIndex = self.commentStartExpression.indexIn(text,
-                    startIndex + commentLength);
-
-
-
+            startIndex = self.commentStartExpression.indexIn(text, \
+                    startIndex + commentLength)
