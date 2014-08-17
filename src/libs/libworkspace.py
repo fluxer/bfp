@@ -87,8 +87,8 @@ class Plugins(object):
     ''' Plugins handler '''
     def __init__(self, parent):
         self.parent = parent
-        self.plugins_paths = [str(QtCore.QDir.homePath()) + '/.qworkspace/plugins', \
-            '/etc/qworkspace/plugins', str(QtCore.QDir.currentPath()) + '/plugins']
+        self.plugins_paths = ['/etc/qworkspace/plugins', \
+            str(QtCore.QDir.currentPath()) + '/plugins']
         self.plugins_loaded = []
         self.plugins_all = []
         for spath in self.plugins_paths:
