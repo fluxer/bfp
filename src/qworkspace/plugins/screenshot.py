@@ -1,7 +1,7 @@
 #!/bin/python2
 
 from PyQt4 import QtCore, QtGui
-import time, libmisc, libworkspace
+import libmisc, libworkspace
 misc = libmisc.Misc()
 general = libworkspace.General()
 
@@ -36,21 +36,19 @@ class Widget(QtGui.QWidget):
 
     def take_screenshot(self):
         delay = self.delayBox.value()
-        # MainWindow.hide()
-
         if delay > 0:
-            time.sleep(delay)
+            QtCore.QTimer.singleShot(delay * 1000, self.capture_screen)
+        else:
+            self.capture_screen()
 
+    def capture_screen(self):
+        p = QtGui.QPixmap.grabWindow(self.parent.app.desktop().winId())
         sfile = self.get_filename()
         if sfile:
             extension = self.get_extension(sfile)
             if not sfile.endswith(extension):
                 sfile = sfile + '.' + extension
-            # to avoid the save dialog being captured
-            time.sleep(1)
-            p = QtGui.QPixmap.grabWindow(self.parent.app.desktop().winId())
             p.save(sfile, extension)
-            # sys.exit()
 
 
 class Plugin(QtCore.QObject):

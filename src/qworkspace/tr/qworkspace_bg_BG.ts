@@ -53,12 +53,12 @@
         <translation>Плъгин за приключване</translation>
     </message>
     <message>
-        <location filename="screenshot.py" line="63"/>
+        <location filename="screenshot.py" line="61"/>
         <source>Screenshot taking plugin</source>
         <translation>Плъгин за правене на снимка на екрана</translation>
     </message>
     <message>
-        <location filename="screenshot.py" line="76"/>
+        <location filename="screenshot.py" line="74"/>
         <source>Screenshot</source>
         <translation>Снимка на екрана</translation>
     </message>
@@ -128,12 +128,12 @@
         <translation>Плъгин за разглеждане на World Wide Web</translation>
     </message>
     <message>
-        <location filename="mixer.py" line="63"/>
+        <location filename="mixer.py" line="62"/>
         <source>Mixer</source>
         <translation>Миксер</translation>
     </message>
     <message>
-        <location filename="mixer.py" line="50"/>
+        <location filename="mixer.py" line="49"/>
         <source>Sound mixer manager plugin</source>
         <translation>Плъгин за управление на звуковият миксер</translation>
     </message>
