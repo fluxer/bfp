@@ -67,7 +67,8 @@ class Plugin(QtCore.QObject):
             # self.widget.container.discardClient()
             self.widget.process.terminate()
             self.widget.process.close()
-            self.widget.destroy()
+            self.widget.deleteLater()
+            self.widget = None
             self.parent.tabWidget.removeTab(index)
 
     def unload(self):
