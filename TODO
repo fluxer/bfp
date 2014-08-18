@@ -18,7 +18,6 @@ http://www.linuxfromscratch.org/blfs/view/systemd/postlfs/initramfs.html
  * Implement Applications and Notifiaction API
  * Implement caches update plugin?
  * Implement download manager plugin (including torrents support)
- * Implement media player plugin (audio and video)
  * Implement audio mixer plugin
  * Implement archive manager plugin (make use of the storage plugin?)
  * Implement XKB plugin
