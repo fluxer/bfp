@@ -29,10 +29,10 @@ class Plugin(QtCore.QObject):
         self.icon = general.get_icon('calendar')
         self.widget = None
 
-        self.mixerButton = QtGui.QPushButton(self.icon, '')
-        self.mixerButton.clicked.connect(lambda: self.open(None))
+        self.calendarButton = QtGui.QPushButton(self.icon, '')
+        self.calendarButton.clicked.connect(lambda: self.open(None))
         self.applicationsLayout = self.parent.toolBox.widget(1).layout()
-        self.applicationsLayout.addWidget(self.mixerButton)
+        self.applicationsLayout.addWidget(self.calendarButton)
 
     def open(self, spath):
         ''' Open path in new tab '''
@@ -51,5 +51,5 @@ class Plugin(QtCore.QObject):
 
     def unload(self):
         ''' Unload plugin '''
-        self.applicationsLayout.removeWidget(self.mixerButton)
+        self.applicationsLayout.removeWidget(self.calendarButton)
         self.close()
