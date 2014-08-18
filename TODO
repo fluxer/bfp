@@ -11,9 +11,6 @@ http://www.linuxfromscratch.org/blfs/view/systemd/postlfs/initramfs.html
  * Use Makefiles for build scripts?
  * Lint - check if groups/users are removed
 
-## SPM-QT ##
- * Rewrite as workspace plugin
-
 ## QWORKSPACE ##
  * Complete archive manager plugins
  * Improve audio mixer plugin
