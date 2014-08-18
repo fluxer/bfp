@@ -64,12 +64,12 @@
         <translation>Снимка на екрана</translation>
     </message>
     <message>
-        <location filename="storage.py" line="285"/>
+        <location filename="storage.py" line="296"/>
         <source>Storage management plugin</source>
         <translation>Плъгин за управление на хранилищата</translation>
     </message>
     <message>
-        <location filename="storage.py" line="307"/>
+        <location filename="storage.py" line="318"/>
         <source>Storage</source>
         <translation>Хранилище</translation>
     </message>
@@ -177,7 +177,7 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="storage.py" line="204"/>
+        <location filename="storage.py" line="215"/>
         <source>Open</source>
         <translation>Отвори</translation>
     </message>
@@ -202,52 +202,52 @@
         <translation>Запази</translation>
     </message>
     <message>
-        <location filename="storage.py" line="203"/>
+        <location filename="storage.py" line="214"/>
         <source>Execute</source>
         <translation>Изпулни</translation>
     </message>
     <message>
-        <location filename="storage.py" line="205"/>
+        <location filename="storage.py" line="216"/>
         <source>Open with</source>
         <translation>Отвори с</translation>
     </message>
     <message>
-        <location filename="storage.py" line="207"/>
+        <location filename="storage.py" line="218"/>
         <source>Cut</source>
         <translation>Изрежи</translation>
     </message>
     <message>
-        <location filename="storage.py" line="208"/>
+        <location filename="storage.py" line="219"/>
         <source>Copy</source>
         <translation>Копирай</translation>
     </message>
     <message>
-        <location filename="storage.py" line="209"/>
+        <location filename="storage.py" line="220"/>
         <source>Paste</source>
         <translation>Постави</translation>
     </message>
     <message>
-        <location filename="storage.py" line="211"/>
+        <location filename="storage.py" line="222"/>
         <source>Rename</source>
         <translation>Преименувай</translation>
     </message>
     <message>
-        <location filename="storage.py" line="212"/>
+        <location filename="storage.py" line="223"/>
         <source>Delete</source>
         <translation>Изтрии</translation>
     </message>
     <message>
-        <location filename="storage.py" line="213"/>
+        <location filename="storage.py" line="224"/>
         <source>Properties</source>
         <translation>Свойства</translation>
     </message>
     <message>
-        <location filename="storage.py" line="215"/>
+        <location filename="storage.py" line="226"/>
         <source>New file</source>
         <translation>Нов файл</translation>
     </message>
     <message>
-        <location filename="storage.py" line="216"/>
+        <location filename="storage.py" line="227"/>
         <source>New directory</source>
         <translation>Нова директория</translation>
     </message>
@@ -432,17 +432,17 @@
         <translation>Свалянето на &lt;b&gt;%s&lt;/b&gt; завърши.</translation>
     </message>
     <message>
-        <location filename="storage.py" line="66"/>
+        <location filename="storage.py" line="71"/>
         <source>File/directory exists</source>
         <translation>Файлът/директорията съществува</translation>
     </message>
     <message>
-        <location filename="storage.py" line="66"/>
+        <location filename="storage.py" line="71"/>
         <source>File/directory exists, new name:</source>
         <translation>Файлът/директорията съществува, ново име:</translation>
     </message>
     <message>
-        <location filename="storage.py" line="190"/>
+        <location filename="storage.py" line="201"/>
         <source>Name:</source>
         <translation>Име:</translation>
     </message>
@@ -450,6 +450,16 @@
         <location filename="archive.py" line="35"/>
         <source>Unsupported format</source>
         <translation>Неподдържан формат</translation>
+    </message>
+    <message>
+        <location filename="storage.py" line="85"/>
+        <source>Icons view</source>
+        <translation>Преглед като икони</translation>
+    </message>
+    <message>
+        <location filename="storage.py" line="29"/>
+        <source>List view</source>
+        <translation>Преглед като лист</translation>
     </message>
 </context>
 </TS>

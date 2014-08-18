@@ -24,9 +24,14 @@ class Widget(QtGui.QWidget):
         self.secondLayout = QtGui.QHBoxLayout()
         self.homeButton = QtGui.QPushButton(general.get_icon('user-home'), '')
         self.homeButton.clicked.connect(lambda: self.path_open(self.shome))
+        self.viewBox = QtGui.QComboBox()
+        self.viewBox.addItem(self.tr('Icons view'))
+        self.viewBox.addItem(self.tr('List view'))
+        self.viewBox.currentIndexChanged.connect(self.change_view)
         self.addressBar = QtGui.QLineEdit()
         self.addressBar.setReadOnly(True)
         self.secondLayout.addWidget(self.homeButton)
+        self.secondLayout.addWidget(self.viewBox)
         self.secondLayout.addWidget(self.addressBar)
         self.mainLayout = QtGui.QGridLayout()
         self.mainLayout.addLayout(self.secondLayout, 0, 0)
@@ -75,6 +80,12 @@ class Widget(QtGui.QWidget):
                 return self.check_exists(sfile)
         elif not ok:
             return
+
+    def change_view(self):
+        if str(self.viewBox.currentText()) == self.tr('Icons view'):
+            self.storageView.setViewMode(self.storageView.IconMode)
+        else:
+            self.storageView.setViewMode(self.storageView.ListMode)
 
     def path_open(self, spath):
         if not spath:
