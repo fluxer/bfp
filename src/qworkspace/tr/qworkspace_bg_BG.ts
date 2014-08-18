@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="bg_BG" sourcelanguage="">
+<!DOCTYPE TS>
+<TS version="2.0" language="bg_BG">
 <context>
     <name>Plugin</name>
     <message>
@@ -136,6 +137,16 @@
         <location filename="mixer.py" line="49"/>
         <source>Sound mixer manager plugin</source>
         <translation>Плъгин за управление на звуковият миксер</translation>
+    </message>
+    <message>
+        <location filename="calendar.py" line="28"/>
+        <source>Calendar plugin</source>
+        <translation>Календар плъгин</translation>
+    </message>
+    <message>
+        <location filename="calendar.py" line="41"/>
+        <source>Calendar</source>
+        <translation>Календар</translation>
     </message>
 </context>
 <context>

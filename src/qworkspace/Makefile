@@ -7,6 +7,7 @@ all: bump clean
 	$(LRELEASE) tr/qworkspace_bg_BG.ts
 	$(NUITKA) --recurse-to=qworkspace_ui main.py
 	$(NUITKA) --module plugins/archive.py
+	$(NUITKA) --module plugins/calendar.py
 	$(NUITKA) --module plugins/editor.py
 	$(NUITKA) --module plugins/image.py
 	$(NUITKA) --module plugins/mixer.py
@@ -29,6 +30,7 @@ install:
 	$(INSTALL) -dm755 $(DESTDIR)$(TRDIR)/
 	$(INSTALL) -m755 main.exe $(DESTDIR)$(BINDIR)/qworkspace
 	$(INSTALL) -m644 archive.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(INSTALL) -m644 calendar.so $(DESTDIR)/etc/qworkspace/plugins/
 	$(INSTALL) -m644 editor.so $(DESTDIR)/etc/qworkspace/plugins/
 	$(INSTALL) -m644 image.so $(DESTDIR)/etc/qworkspace/plugins/
 	$(INSTALL) -m644 mixer.so $(DESTDIR)/etc/qworkspace/plugins/
