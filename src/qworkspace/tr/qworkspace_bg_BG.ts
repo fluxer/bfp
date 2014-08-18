@@ -73,12 +73,12 @@
         <translation>Хранилище</translation>
     </message>
     <message>
-        <location filename="terminal.py" line="36"/>
+        <location filename="terminal.py" line="37"/>
         <source>Embed terminal plugin</source>
         <translation>Плъгин за вграден терминал</translation>
     </message>
     <message>
-        <location filename="terminal.py" line="49"/>
+        <location filename="terminal.py" line="50"/>
         <source>Terminal</source>
         <translation>Терминал</translation>
     </message>
