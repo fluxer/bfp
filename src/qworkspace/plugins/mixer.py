@@ -30,7 +30,6 @@ class Widget(QtGui.QWidget):
             self.set_volume(self.spath)
 
     def set_volume(self, ivalue):
-        print self.element.get_volume(), self.element.get_volume_range()
         # self.element.set_volume_array([value, value])
         # self.element.set_volume_tuple([value, value])
         self.element.set_volume_all(ivalue)
