@@ -18,6 +18,7 @@ http://www.linuxfromscratch.org/blfs/view/systemd/postlfs/initramfs.html
  * Implement caches update plugin?
  * Implement download manager plugin (including torrents support)
  * Implement XKB plugin
+ * Implement chat plugin
  * Implement more info into recent paths and display it with tooltip:
   - full path (done)
   - time accessed
