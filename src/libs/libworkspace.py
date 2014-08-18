@@ -2,7 +2,6 @@
 
 import os, sys
 from PyQt4 import QtCore, QtGui
-
 import libmisc, libmessage
 misc = libmisc.Misc()
 message = libmessage.Message()

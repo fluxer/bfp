@@ -1,9 +1,9 @@
 #!/bin/pyhton2
 
 from PyQt4 import QtCore, QtGui
-import libworkspace
+import libworkspace, libmisc
 general = libworkspace.General()
-
+misc = libmisc.Misc()
 
 class Widget(QtGui.QWidget):
     ''' Tab widget '''
@@ -14,32 +14,16 @@ class Widget(QtGui.QWidget):
         self.name = 'multimedia'
 
         self.container = QtGui.QX11EmbedContainer(self)
-        self.pauseButton = QtGui.QPushButton(general.get_icon('player_pause'), '')
-        self.pauseButton.clicked.connect(self.player_pause)
-        self.resumeButton = QtGui.QPushButton(general.get_icon('player_play'), '')
-        self.resumeButton.clicked.connect(self.player_resume)
-        self.secondLayout = QtGui.QHBoxLayout()
-        self.secondLayout.addWidget(self.pauseButton)
-        self.secondLayout.addWidget(self.resumeButton)
         self.mainLayout = QtGui.QGridLayout()
         self.mainLayout.addWidget(self.container)
-        self.mainLayout.addLayout(self.secondLayout, QtCore.Qt.AlignBottom, 0)
         self.setLayout(self.mainLayout)
 
-        if self.spath:
-            self.open_file(self.spath)
-
-    def update_gui(self):
-        pass
-
-    def open_file(self, spath):
-        pass
-
-    def player_pause(self):
-        pass
-
-    def player_resume(self):
-        pass
+        self.process = QtCore.QProcess(self.container)
+        args = ['--wid', str(self.container.winId())]
+        if spath:
+            args.append(spath)
+        self.process.start(misc.whereis('mpv'), args)
+        self.process.waitForStarted()
 
 
 class Plugin(QtCore.QObject):

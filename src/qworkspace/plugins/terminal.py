@@ -1,8 +1,9 @@
 #!/bin/pyhton2
 
 from PyQt4 import QtCore, QtGui
-import libworkspace
+import libworkspace, libmisc
 general = libworkspace.General()
+misc = libmisc.Misc()
 
 class Widget(QtGui.QWidget):
     ''' Tab widget '''
@@ -11,15 +12,17 @@ class Widget(QtGui.QWidget):
         self.parent = parent
         self.spath = spath
         self.name = 'terminal'
+
         self.mainLayout = QtGui.QGridLayout()
         self.container = QtGui.QX11EmbedContainer(self)
         self.mainLayout.addWidget(self.container)
         self.setLayout(self.mainLayout)
+
         self.process = QtCore.QProcess(self.container)
         args = ['-into', str(self.container.winId())]
         if spath:
             args.extend(('-e', spath))
-        self.process.start('xterm', args)
+        self.process.start(misc.whereis('xterm'), args)
         self.process.waitForStarted()
         self.container.setFocus()
 

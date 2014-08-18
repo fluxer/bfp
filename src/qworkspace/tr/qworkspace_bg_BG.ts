@@ -33,7 +33,7 @@
         <translation>Изображение</translation>
     </message>
     <message>
-        <location filename="multimedia.py" line="76"/>
+        <location filename="multimedia.py" line="61"/>
         <source>Multimedia</source>
         <translation>Мултимедиа</translation>
     </message>
@@ -73,12 +73,12 @@
         <translation>Хранилище</translation>
     </message>
     <message>
-        <location filename="terminal.py" line="34"/>
+        <location filename="terminal.py" line="36"/>
         <source>Embed terminal plugin</source>
         <translation>Плъгин за вграден терминал</translation>
     </message>
     <message>
-        <location filename="terminal.py" line="47"/>
+        <location filename="terminal.py" line="49"/>
         <source>Terminal</source>
         <translation>Терминал</translation>
     </message>
@@ -113,7 +113,7 @@
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="multimedia.py" line="52"/>
+        <location filename="multimedia.py" line="37"/>
         <source>Multimedia plugin</source>
         <translation>Мултимедиа плъгин</translation>
     </message>
