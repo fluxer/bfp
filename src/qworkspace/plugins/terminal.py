@@ -14,18 +14,17 @@ class Widget(QtGui.QWidget):
         self.name = 'terminal'
 
         self.mainLayout = QtGui.QGridLayout()
-        self.container = QtGui.QX11EmbedContainer(self)
+        self.container = QtGui.QX11EmbedWidget(self)
         self.mainLayout.addWidget(self.container)
         self.setLayout(self.mainLayout)
 
         self.process = QtCore.QProcess(self.container)
-        args = ['-into', str(self.container.winId())]
+        args = ['-into', str(self.container.winId()), \
+            '-geometry', str(self.width()) + 'x' + str(self.height())]
         if spath:
             args.extend(('-e', spath))
         self.process.start(misc.whereis('xterm'), args)
         self.process.waitForStarted()
-        # self.container.embedClient(self.container.clientWinId())
-        # self.container.setFocus()
 
 
 class Plugin(QtCore.QObject):

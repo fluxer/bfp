@@ -13,7 +13,7 @@ class Widget(QtGui.QWidget):
         self.spath = spath
         self.name = 'multimedia'
 
-        self.container = QtGui.QX11EmbedContainer(self)
+        self.container = QtGui.QX11EmbedWidget(self)
         self.mainLayout = QtGui.QGridLayout()
         self.mainLayout.addWidget(self.container)
         self.setLayout(self.mainLayout)
@@ -24,8 +24,6 @@ class Widget(QtGui.QWidget):
             args.append(spath)
         self.process.start(misc.whereis('mpv'), args)
         self.process.waitForStarted()
-        # self.container.embedClient(self.container.clientWinId())
-        # self.container.setFocus()
 
 
 class Plugin(QtCore.QObject):
