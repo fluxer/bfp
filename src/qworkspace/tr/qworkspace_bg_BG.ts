@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="bg_BG" sourcelanguage="">
+<!DOCTYPE TS>
+<TS version="2.0" language="bg_BG">
 <context>
     <name>Plugin</name>
     <message>
@@ -88,12 +89,12 @@
         <translation>УУУ</translation>
     </message>
     <message>
-        <location filename="archive.py" line="24"/>
+        <location filename="archive.py" line="49"/>
         <source>Archive manager plugin</source>
         <translation>Плъгин за управление на архиви</translation>
     </message>
     <message>
-        <location filename="archive.py" line="43"/>
+        <location filename="archive.py" line="68"/>
         <source>Archive</source>
         <translation>Архив</translation>
     </message>
@@ -424,6 +425,11 @@
         <location filename="storage.py" line="190"/>
         <source>Name:</source>
         <translation>Име:</translation>
+    </message>
+    <message>
+        <location filename="archive.py" line="35"/>
+        <source>Unsupported format</source>
+        <translation>Неподдържан формат</translation>
     </message>
 </context>
 </TS>

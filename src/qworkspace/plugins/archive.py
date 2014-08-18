@@ -1,9 +1,10 @@
 #!/bin/pyhton2
 
 from PyQt4 import QtCore, QtGui
-import libworkspace
+import os, tempfile, libworkspace, libmisc, libarchive
 general = libworkspace.General()
-
+misc = libmisc.Misc()
+archive = libarchive.Libarchive()
 
 class Widget(QtGui.QWidget):
     ''' Tab widget '''
@@ -13,6 +14,30 @@ class Widget(QtGui.QWidget):
         self.spath = spath
         self.name = 'archive'
 
+        if os.path.exists(spath):
+            self.archive_open(spath)
+
+    def archive_open(self, spath):
+        stmp = None
+        try:
+            if archive.supportedArchive(spath):
+                stmp = tempfile.mkdtemp()
+                #Dialog.show()
+                #Dialog.setLabelText('Reading: <b>' + spath + '</b>')
+                archive.extractArchive(spath, stmp)
+                #Dialog.hide()
+                self.parent.plugins.plugin_open(stmp)
+                #Dialog.show()
+                #Dialog.setLabelText('Saving: <b>' + spath + '</b>')
+                archive.createArchive(stmp, spath)
+                #Dialog.hide()
+            else:
+                QtGui.QMessageBox.critical(self, self.tr('Critical'), self.tr('Unsupported format'))
+        except Exception as detail:
+            QtGui.QMessageBox.critical(self, self.tr('Critical'), str(detail))
+        finally:
+            if stmp and os.path.isdir(stmp):
+                misc.dir_remove(stmp)
 
 class Plugin(QtCore.QObject):
     ''' Plugin handler '''
@@ -22,10 +47,11 @@ class Plugin(QtCore.QObject):
         self.name = 'archive'
         self.version = '0.0.1'
         self.description = self.tr('Archive manager plugin')
-        self.icon = general.get_icon('delete')
+        self.icon = general.get_icon('archive')
         self.widget = None
 
         self.parent.plugins.mime_register('application/x-gzip', self.name)
+        self.parent.plugins.mime_register('application/gzip', self.name)
         self.parent.plugins.mime_register('application/x-bzip2', self.name)
         self.parent.plugins.mime_register('application/x-lzma', self.name)
         self.parent.plugins.mime_register('application/x-xz', self.name)
