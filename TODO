@@ -15,11 +15,11 @@ http://www.linuxfromscratch.org/blfs/view/systemd/postlfs/initramfs.html
  * Rewrite as workspace plugin
 
 ## QWORKSPACE ##
+ * Complete archive manager plugins
+ * Improve audio mixer plugin
  * Implement Applications and Notifiaction API
  * Implement caches update plugin?
  * Implement download manager plugin (including torrents support)
- * Implement audio mixer plugin
- * Implement archive manager plugin (make use of the storage plugin?)
  * Implement XKB plugin
  * Implement more info into recent paths and display it with tooltip:
   - full path (done)

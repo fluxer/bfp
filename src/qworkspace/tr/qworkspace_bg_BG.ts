@@ -34,7 +34,7 @@
         <translation>Изображение</translation>
     </message>
     <message>
-        <location filename="multimedia.py" line="62"/>
+        <location filename="multimedia.py" line="61"/>
         <source>Multimedia</source>
         <translation>Мултимедиа</translation>
     </message>
@@ -94,7 +94,7 @@
         <translation>Плъгин за управление на архиви</translation>
     </message>
     <message>
-        <location filename="archive.py" line="68"/>
+        <location filename="archive.py" line="69"/>
         <source>Archive</source>
         <translation>Архив</translation>
     </message>
@@ -127,6 +127,16 @@
         <location filename="www.py" line="348"/>
         <source>World Wide Web browser plugin</source>
         <translation>Плъгин за разглеждане на World Wide Web</translation>
+    </message>
+    <message>
+        <location filename="mixer.py" line="63"/>
+        <source>Mixer</source>
+        <translation>Миксер</translation>
+    </message>
+    <message>
+        <location filename="mixer.py" line="50"/>
+        <source>Sound mixer manager plugin</source>
+        <translation>Плъгин за управление на звуковият миксер</translation>
     </message>
 </context>
 <context>

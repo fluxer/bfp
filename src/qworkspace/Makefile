@@ -9,6 +9,7 @@ all: bump clean
 	$(NUITKA) --module plugins/archive.py
 	$(NUITKA) --module plugins/editor.py
 	$(NUITKA) --module plugins/image.py
+	$(NUITKA) --module plugins/mixer.py
 	$(NUITKA) --module plugins/multimedia.py
 	$(NUITKA) --module plugins/network.py
 	$(NUITKA) --module plugins/package.py
@@ -30,6 +31,7 @@ install:
 	$(INSTALL) -m644 archive.so $(DESTDIR)/etc/qworkspace/plugins/
 	$(INSTALL) -m644 editor.so $(DESTDIR)/etc/qworkspace/plugins/
 	$(INSTALL) -m644 image.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(INSTALL) -m644 mixer.so $(DESTDIR)/etc/qworkspace/plugins/
 	$(INSTALL) -m644 multimedia.so $(DESTDIR)/etc/qworkspace/plugins/
 	$(INSTALL) -m644 network.so $(DESTDIR)/etc/qworkspace/plugins/
 	$(INSTALL) -m644 package.so $(DESTDIR)/etc/qworkspace/plugins/

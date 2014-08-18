@@ -39,7 +39,6 @@ class Plugin(QtCore.QObject):
         self.icon = general.get_icon('multimedia-player')
         self.widget = None
 
-
         self.mediaButton = QtGui.QPushButton(self.icon, '')
         self.mediaButton.clicked.connect(lambda: self.open(None))
         self.applicationsLayout = self.parent.toolBox.widget(1).layout()
