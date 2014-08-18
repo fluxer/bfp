@@ -24,6 +24,7 @@ class Widget(QtGui.QWidget):
             args.append(spath)
         self.process.start(misc.whereis('mpv'), args)
         self.process.waitForStarted()
+        # self.container.embedClient(self.container.clientWinId())
 
 
 class Plugin(QtCore.QObject):
@@ -65,6 +66,9 @@ class Plugin(QtCore.QObject):
         if not index:
             index = self.parent.tabWidget.currentIndex()
         if self.widget:
+            self.widget.container.discardClient()
+            self.widget.process.terminate()
+            self.widget.process.close()
             self.widget.destroy()
             self.parent.tabWidget.removeTab(index)
 
