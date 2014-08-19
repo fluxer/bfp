@@ -98,12 +98,12 @@
         <translation>Архив</translation>
     </message>
     <message>
-        <location filename="network.py" line="280"/>
+        <location filename="network.py" line="279"/>
         <source>Network manager plugin</source>
         <translation>Плъгин за управление на мрежата</translation>
     </message>
     <message>
-        <location filename="network.py" line="293"/>
+        <location filename="network.py" line="292"/>
         <source>Network</source>
         <translation>Мрежа</translation>
     </message>
@@ -461,7 +461,7 @@
         <translation>Преглед като лист</translation>
     </message>
     <message>
-        <location filename="network.py" line="206"/>
+        <location filename="network.py" line="205"/>
         <source>Details</source>
         <translation>Детайли</translation>
     </message>

@@ -52,12 +52,10 @@ class General(object):
 
     def get_icon(self, sicon):
         ''' Get icon '''
-        sicontheme = os.path.join(sys.prefix, 'share/icons', \
-            self.settings.get('general/icontheme'))
-        scache = str(QtCore.QDir.homePath()) + '/.cache/icons_' + \
-            self.settings.get('general/icontheme') + '.txt'
+        sicons = os.path.join(sys.prefix, 'share/icons')
+        scache = str(QtCore.QDir.homePath()) + '/.cache/icons.txt'
         if not os.path.isfile(scache):
-            misc.file_write(scache, '\n'.join(misc.list_files(sicontheme)))
+            misc.file_write(scache, '\n'.join(misc.list_files(sicons)))
         for spath in misc.file_readlines(scache):
             if misc.file_name(spath) == sicon:
                 sicon = spath
