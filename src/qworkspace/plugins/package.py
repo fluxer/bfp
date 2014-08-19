@@ -191,7 +191,7 @@ class Plugin(QtCore.QObject):
         self.icon = general.get_icon('package')
         self.widget = None
 
-        self.packageButton = QtGui.QPushButton(general.get_icon('package'), '')
+        self.packageButton = QtGui.QPushButton(self.icon, '')
         self.packageButton.clicked.connect(self.open)
         self.applicationsLayout = self.parent.toolBox.widget(1).layout()
         self.applicationsLayout.addWidget(self.packageButton)

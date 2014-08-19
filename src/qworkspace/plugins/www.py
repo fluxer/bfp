@@ -348,7 +348,7 @@ class Plugin(QtCore.QObject):
         self.icon = general.get_icon('web-browser')
         self.widget = None
 
-        self.wwwButton = QtGui.QPushButton(general.get_icon('web-browser'), '')
+        self.wwwButton = QtGui.QPushButton(self.icon, '')
         self.wwwButton.clicked.connect(lambda: self.open('http://www.google.com'))
         self.applicationsLayout = self.parent.toolBox.widget(1).layout()
         self.applicationsLayout.addWidget(self.wwwButton)
