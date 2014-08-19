@@ -49,17 +49,17 @@ class Widget(QtGui.QWidget):
         self.storageView.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.storageView.customContextMenuRequested.connect(self.menu_show)
 
-        self.icon_execute = general.get_icon('gtk-execute')
-        self.icon_open = general.get_icon('fileopen')
-        self.icon_open_with = general.get_icon('fileopen_with')
+        self.icon_execute = general.get_icon('system-run')
+        self.icon_open = general.get_icon('document-open')
+        self.icon_open_with = general.get_icon('dcument-import')
         self.icon_cut = general.get_icon('edit-cut')
         self.icon_copy = general.get_icon('edit-copy')
         self.icon_paste = general.get_icon('edit-paste')
         self.icon_rename = general.get_icon('edit-rename')
         self.icon_delete = general.get_icon('edit-delete')
-        self.icon_properties = general.get_icon('stock_properties')
-        self.icon_new_file = general.get_icon('filenew')
-        self.icon_new_dir = general.get_icon('stock_new-dir')
+        self.icon_properties = general.get_icon('document-properties')
+        self.icon_new_file = general.get_icon('document-new')
+        self.icon_new_dir = general.get_icon('folder-new')
 
 
         self.path_open(self.spath or self.shome)
@@ -305,7 +305,7 @@ class Plugin(QtCore.QObject):
         self.name = 'storage'
         self.version = '0.0.1'
         self.description = self.tr('Storage management plugin')
-        self.icon = general.get_icon('file-manager')
+        self.icon = general.get_icon('system-file-manager')
         self.widget = None
 
         self.storageButton = QtGui.QPushButton(self.icon, '')

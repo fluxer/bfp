@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:export-ydpi="90.000000"
+   inkscape:export-xdpi="90.000000"
+   inkscape:export-filename="/home/jonieno/Desktop/icon.png"
+   width="48"
+   height="48"
+   id="svg11300"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   sodipodi:docname="emblem-photos.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   version="1.0"
+   style="display:inline;enable-background:new">
+  <title
+     id="title4119">Human-Palette Icon Theme</title>
+  <defs
+     id="defs3">
+    <linearGradient
+       id="linearGradient4299">
+      <stop
+         id="stop4301"
+         offset="0"
+         style="stop-color:#ffffff;stop-opacity:1;" />
+      <stop
+         id="stop4303"
+         offset="1"
+         style="stop-color:#b4b4b4;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4299"
+       id="linearGradient6117"
+       gradientUnits="userSpaceOnUse"
+       x1="106.28699"
+       y1="31.517946"
+       x2="106.28699"
+       y2="52.662243" />
+    <filter
+       inkscape:collect="always"
+       id="filter6982">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.55"
+         id="feGaussianBlur6984" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4299"
+       id="linearGradient7037"
+       gradientUnits="userSpaceOnUse"
+       x1="29"
+       y1="16"
+       x2="29"
+       y2="43"
+       gradientTransform="translate(-5,-5)" />
+  </defs>
+  <sodipodi:namedview
+     stroke="#ef2929"
+     fill="#f57900"
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="0.25490196"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="44.373644"
+     inkscape:cy="22.074785"
+     inkscape:current-layer="svg11300"
+     showgrid="false"
+     inkscape:grid-bbox="true"
+     inkscape:document-units="px"
+     inkscape:showpageshadow="false"
+     inkscape:window-width="1280"
+     inkscape:window-height="950"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     width="400px"
+     height="300px"
+     inkscape:snap-nodes="false"
+     inkscape:snap-bbox="true"
+     objecttolerance="7"
+     gridtolerance="12"
+     guidetolerance="13"
+     showguides="true"
+     inkscape:guide-bbox="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid5883"
+       spacingx="1px"
+       spacingy="1px"
+       enabled="true"
+       visible="true"
+       empspacing="5" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata4">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Jonian Guveli</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:source />
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/by-nc/3.0/" />
+        <dc:title>Folder</dc:title>
+        <dc:subject>
+          <rdf:Bag />
+        </dc:subject>
+        <dc:date />
+        <dc:rights>
+          <cc:Agent>
+            <dc:title />
+          </cc:Agent>
+        </dc:rights>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>Jonian Guveli</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:identifier />
+        <dc:relation />
+        <dc:language />
+        <dc:coverage />
+        <dc:description />
+        <dc:contributor>
+          <cc:Agent>
+            <dc:title>Olibia Tsati</dc:title>
+          </cc:Agent>
+        </dc:contributor>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/by-nc/3.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Notice" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Attribution" />
+        <cc:prohibits
+           rdf:resource="http://creativecommons.org/ns#CommercialUse" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="g6092">
+    <path
+       transform="matrix(2.3019215,0,0,2.3528485,-220.6643,-75.031615)"
+       d="M 116.49584,42.090096 A 10.208854,9.9878836 0 1 1 96.078134,42.090096 A 10.208854,9.9878836 0 1 1 116.49584,42.090096 z"
+       sodipodi:ry="9.9878836"
+       sodipodi:rx="10.208854"
+       sodipodi:cy="42.090096"
+       sodipodi:cx="106.28699"
+       id="path6267"
+       style="opacity:0.8;fill:#464646;fill-opacity:1;stroke:#333333;stroke-width:0.42970949;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       sodipodi:type="arc" />
+    <path
+       transform="matrix(2.2037686,0,0,2.2525242,-210.23193,-70.808959)"
+       d="M 116.49584,42.090096 A 10.208854,9.9878836 0 1 1 96.078134,42.090096 A 10.208854,9.9878836 0 1 1 116.49584,42.090096 z"
+       sodipodi:ry="9.9878836"
+       sodipodi:rx="10.208854"
+       sodipodi:cy="42.090096"
+       sodipodi:cx="106.28699"
+       id="path10234"
+       style="opacity:0.4;fill:none;fill-opacity:1;stroke:url(#linearGradient6117);stroke-width:0.4488304;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;display:inline;enable-background:new"
+       sodipodi:type="arc" />
+    <path
+       id="path6966"
+       d="M 12.125,11 C 10.943194,11 10,11.974378 10,13.1875 L 10,35.8125 C 10,37.025621 10.943194,38 12.125,38 L 35.875,38 C 37.056806,38 38,37.025622 38,35.8125 L 38,13.1875 C 38,11.974379 37.056806,11 35.875,11 L 12.125,11 z M 12,13 L 36,13 L 36,30 L 29.875,30 C 30.023626,29.333333 30.020996,28.666667 29.875,28 C 29.674108,27.383697 28.117647,26.801994 25.875,25.5 C 25.477318,25.113528 25.532143,24.580311 25.6875,24.1875 C 25.690996,24.178659 25.683896,24.164957 25.6875,24.15625 C 26.40578,23.425223 26.875,22.296956 26.875,21 C 26.874999,18.792 25.531,16.999999 23.875,17 C 22.218999,17 20.875,18.792001 20.875,21 C 20.874999,22.223681 21.287569,23.297332 21.9375,24.03125 C 22.185823,24.537894 22.160435,25.119775 21.875,25.5 C 20.239925,26.495631 18.582237,27.004609 17.875,28 C 17.76038,28.666667 17.697891,29.333333 17.875,30 L 12,30 L 12,13 z"
+       style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;display:inline;filter:url(#filter6982);enable-background:new" />
+    <path
+       id="rect6099"
+       d="M 12.125,11 C 10.943194,11 10,11.974378 10,13.1875 L 10,35.8125 C 10,37.025621 10.943194,38 12.125,38 L 35.875,38 C 37.056806,38 38,37.025622 38,35.8125 L 38,13.1875 C 38,11.974379 37.056806,11 35.875,11 L 12.125,11 z M 12,13 L 36,13 L 36,30 L 29.875,30 C 30.023626,29.333333 30.020996,28.666667 29.875,28 C 29.674108,27.383697 28.117647,26.801994 25.875,25.5 C 25.477318,25.113528 25.532143,24.580311 25.6875,24.1875 C 25.690996,24.178659 25.683896,24.164957 25.6875,24.15625 C 26.40578,23.425223 26.875,22.296956 26.875,21 C 26.874999,18.792 25.531,16.999999 23.875,17 C 22.218999,17 20.875,18.792001 20.875,21 C 20.874999,22.223681 21.287569,23.297332 21.9375,24.03125 C 22.185823,24.537894 22.160435,25.119775 21.875,25.5 C 20.239925,26.495631 18.582237,27.004609 17.875,28 C 17.76038,28.666667 17.697891,29.333333 17.875,30 L 12,30 L 12,13 z"
+       style="opacity:1;fill:url(#linearGradient7037);fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+  </g>
+</svg>

@@ -35,7 +35,7 @@ class Plugin(QtCore.QObject):
         self.name = 'terminal'
         self.version = '0.0.1'
         self.description = self.tr('Embed terminal plugin')
-        self.icon = general.get_icon('terminal')
+        self.icon = general.get_icon('utilities-terminal')
         self.widget = None
 
         self.embedButton = QtGui.QPushButton(self.icon, '')

@@ -40,13 +40,13 @@ class Widget(QtGui.QWidget):
         self.footprintEdit.setReadOnly(True)
         self.infoTab.insertTab(0, self.metadataEdit, 'Metadata')
         secondLayout = QtGui.QHBoxLayout()
-        self.syncButton = QtGui.QPushButton(general.get_icon('reload'), '')
+        self.syncButton = QtGui.QPushButton(general.get_icon('view-refresh'), '')
         self.syncButton.clicked.connect(self.targets_sync)
         self.updateButton = QtGui.QPushButton(general.get_icon('system-software-update'), '')
         self.updateButton.clicked.connect(self.targets_update)
         self.buildButton = QtGui.QPushButton(general.get_icon('system-run'), '')
         self.buildButton.clicked.connect(self.targets_build)
-        self.removeButton = QtGui.QPushButton(general.get_icon('remove'), '')
+        self.removeButton = QtGui.QPushButton(general.get_icon('edit-delete'), '')
         self.removeButton.clicked.connect(self.targets_remove)
         secondLayout.addWidget(self.syncButton)
         secondLayout.addWidget(self.updateButton)
@@ -188,7 +188,7 @@ class Plugin(QtCore.QObject):
         self.name = 'package'
         self.version = '0.0.1'
         self.description = self.tr('Package manager plugin')
-        self.icon = general.get_icon('package')
+        self.icon = general.get_icon('package-x-generic')
         self.widget = None
 
         self.packageButton = QtGui.QPushButton(self.icon, '')

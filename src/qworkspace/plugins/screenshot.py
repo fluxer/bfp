@@ -59,7 +59,7 @@ class Plugin(QtCore.QObject):
         self.name = 'screenshot'
         self.version = '0.0.1'
         self.description = self.tr('Screenshot taking plugin')
-        self.icon = general.get_icon('desktop')
+        self.icon = general.get_icon('user-desktop')
         self.widget = None
 
         self.screenshotButton = QtGui.QPushButton(self.icon, '')

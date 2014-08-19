@@ -21,10 +21,10 @@ class Widget(QtGui.QWidget):
         self.tabWidget.insertTab(0, self.EthernetList, 'Ethernet')
         self.tabWidget.insertTab(1, self.WiFiList, 'WiFi')
         self.secondLayout = QtGui.QHBoxLayout()
-        self.scanButton = QtGui.QPushButton(general.get_icon('find'), '')
-        self.connectButton = QtGui.QPushButton(general.get_icon('connect'), '')
-        self.disconnectButton = QtGui.QPushButton(general.get_icon('diconnect'), '')
-        self.detailsButton = QtGui.QPushButton(general.get_icon('details'), '')
+        self.scanButton = QtGui.QPushButton(general.get_icon('edit-find'), '')
+        self.connectButton = QtGui.QPushButton(general.get_icon('notification-network-ethernet-connected'), '')
+        self.disconnectButton = QtGui.QPushButton(general.get_icon('notification-network-ethernet-disconnected'), '')
+        self.detailsButton = QtGui.QPushButton(general.get_icon('document-properties'), '')
         self.secondLayout.addWidget(self.scanButton)
         self.secondLayout.addWidget(self.connectButton)
         self.secondLayout.addWidget(self.disconnectButton)
@@ -121,7 +121,7 @@ class Widget(QtGui.QWidget):
                     self.disconnect(r[0])
 
     def scan_ethernet(self):
-        # self.dbus_call('net.connman', '/net/connman/technology/ethernet', 'net.connman.Technology', 'Scan'):
+        # self.dbus_call('net.connman', '/net/connman/technology/ethernet', 'net.connman.Technology', 'Scan')
 
         # get managed services
         rdata = self.dbus_call('net.connman', '/', 'net.connman.Manager', 'GetServices')
@@ -274,7 +274,7 @@ class Plugin(QtCore.QObject):
         self.name = 'network'
         self.version = '0.0.1'
         self.description = self.tr('Network manager plugin')
-        self.icon = general.get_icon('network')
+        self.icon = general.get_icon('preferences-system-network-proxy')
         self.widget = None
 
         self.networkButton = QtGui.QPushButton(self.icon, '')

@@ -19,6 +19,7 @@ install:
 	make -C scripts install
 	make -C src/cparted install
 	make -C src/initfs install
+	make -C src/icons install
 	make -C src/libs install
 	make -C src/spm install
 	make -C src/qsession install
@@ -31,6 +32,7 @@ uninstall:
 	make -C scripts uninstall
 	make -C src/cparted  uninstall
 	make -C src/initfs uninstall
+	make -C src/icons uninstall
 	make -C src/libs uninstall
 	make -C src/spm uninstall
 	make -C src/qsession uninstall

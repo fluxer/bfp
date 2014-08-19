@@ -50,13 +50,13 @@ class Widget(QtGui.QWidget):
         self.parent = parent
         self.name = 'www'
         self.tab_index = self.parent.tabWidget.currentIndex()+1
-        self.icon_back = general.get_icon('back')
-        self.icon_next = general.get_icon('forward')
-        self.icon_reload = general.get_icon('reload')
+        self.icon_back = general.get_icon('go-previous')
+        self.icon_next = general.get_icon('go-next')
+        self.icon_reload = general.get_icon('view-refresh')
         self.icon_stop = general.get_icon('exit')
-        self.icon_find = general.get_icon('object-hidden')
-        self.icon_search = general.get_icon('search')
-        self.icon_bookmark = general.get_icon('user-bookmarks')
+        self.icon_find = general.get_icon('folder-visiting')
+        self.icon_search = general.get_icon('system-search')
+        self.icon_bookmark = general.get_icon('emblem-favorite')
         self.disk_cache = QtNetwork.QNetworkDiskCache()
         self.disk_cache.setCacheDirectory(cache_path)
         self.disk_cache.setMaximumCacheSize(50000000)
@@ -345,7 +345,7 @@ class Plugin(QtCore.QObject):
         self.name = 'www'
         self.version = '0.0.1'
         self.description = self.tr('World Wide Web browser plugin')
-        self.icon = general.get_icon('web-browser')
+        self.icon = general.get_icon('internet-web-browser')
         self.widget = None
 
         self.wwwButton = QtGui.QPushButton(self.icon, '')

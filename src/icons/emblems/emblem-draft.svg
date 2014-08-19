@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:export-ydpi="90.000000"
+   inkscape:export-xdpi="90.000000"
+   inkscape:export-filename="/home/jonieno/Desktop/icon.png"
+   width="48"
+   height="48"
+   id="svg11300"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   sodipodi:docname="emblem-draft.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   version="1.0"
+   style="display:inline;enable-background:new">
+  <title
+     id="title4119">Human-Palette Icon Theme</title>
+  <defs
+     id="defs3">
+    <linearGradient
+       id="linearGradient4299">
+      <stop
+         id="stop4301"
+         offset="0"
+         style="stop-color:#ffffff;stop-opacity:1;" />
+      <stop
+         id="stop4303"
+         offset="1"
+         style="stop-color:#b4b4b4;stop-opacity:1;" />
+    </linearGradient>
+    <filter
+       inkscape:collect="always"
+       id="filter7070">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.57008094"
+         id="feGaussianBlur7072" />
+    </filter>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4299"
+       id="linearGradient7139"
+       gradientUnits="userSpaceOnUse"
+       x1="106.28699"
+       y1="31.517946"
+       x2="106.28699"
+       y2="52.662243" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4299"
+       id="linearGradient7141"
+       gradientUnits="userSpaceOnUse"
+       x1="29.760855"
+       y1="13.991905"
+       x2="29.918524"
+       y2="43" />
+  </defs>
+  <sodipodi:namedview
+     stroke="#ef2929"
+     fill="#f57900"
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="0.25490196"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="139.4277"
+     inkscape:cy="12.387901"
+     inkscape:current-layer="svg11300"
+     showgrid="false"
+     inkscape:grid-bbox="true"
+     inkscape:document-units="px"
+     inkscape:showpageshadow="false"
+     inkscape:window-width="1280"
+     inkscape:window-height="947"
+     inkscape:window-x="0"
+     inkscape:window-y="25"
+     width="400px"
+     height="300px"
+     inkscape:snap-nodes="false"
+     inkscape:snap-bbox="true"
+     objecttolerance="7"
+     gridtolerance="12"
+     guidetolerance="13"
+     showguides="true"
+     inkscape:guide-bbox="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid5883"
+       spacingx="1px"
+       spacingy="1px"
+       enabled="true"
+       visible="true"
+       empspacing="5" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata4">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Jonian Guveli</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:source />
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/by-nc/3.0/" />
+        <dc:title>Folder</dc:title>
+        <dc:subject>
+          <rdf:Bag />
+        </dc:subject>
+        <dc:date />
+        <dc:rights>
+          <cc:Agent>
+            <dc:title />
+          </cc:Agent>
+        </dc:rights>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>Jonian Guveli</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:identifier />
+        <dc:relation />
+        <dc:language />
+        <dc:coverage />
+        <dc:description />
+        <dc:contributor>
+          <cc:Agent>
+            <dc:title>Olibia Tsati</dc:title>
+          </cc:Agent>
+        </dc:contributor>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/by-nc/3.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Notice" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Attribution" />
+        <cc:prohibits
+           rdf:resource="http://creativecommons.org/ns#CommercialUse" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="g7074"
+     transform="translate(-5,-5)">
+    <path
+       transform="matrix(2.3019215,0,0,2.3528485,-215.6643,-70.031615)"
+       d="M 116.49584,42.090096 A 10.208854,9.9878836 0 1 1 96.078134,42.090096 A 10.208854,9.9878836 0 1 1 116.49584,42.090096 z"
+       sodipodi:ry="9.9878836"
+       sodipodi:rx="10.208854"
+       sodipodi:cy="42.090096"
+       sodipodi:cx="106.28699"
+       id="path6267"
+       style="opacity:0.8;fill:#464646;fill-opacity:1;stroke:#333333;stroke-width:0.42970949;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       sodipodi:type="arc" />
+    <path
+       transform="matrix(2.2037686,0,0,2.2525242,-205.23193,-65.808959)"
+       d="M 116.49584,42.090096 A 10.208854,9.9878836 0 1 1 96.078134,42.090096 A 10.208854,9.9878836 0 1 1 116.49584,42.090096 z"
+       sodipodi:ry="9.9878836"
+       sodipodi:rx="10.208854"
+       sodipodi:cy="42.090096"
+       sodipodi:cx="106.28699"
+       id="path10234"
+       style="opacity:0.4;fill:none;fill-opacity:1;stroke:url(#linearGradient7139);stroke-width:0.4488304;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;display:inline;enable-background:new"
+       sodipodi:type="arc" />
+    <path
+       id="path7066"
+       d="M 24.6875,14.008094 C 24.550768,14.024659 24.408468,14.062073 24.28125,14.133094 L 21.53125,15.695594 C 21.022376,15.979679 20.862451,16.578545 21.15625,17.070594 L 32.28125,35.726844 C 32.480546,36.060621 32.848004,36.231423 33.21875,36.226844 L 36.6875,38.008094 L 36.84375,34.195594 C 37.033226,33.887421 37.074296,33.498123 36.875,33.164344 L 25.75,14.508094 C 25.529651,14.139058 25.097695,13.958398 24.6875,14.008094 z M 15,41.008094 L 15,43.008094 L 43,43.008094 L 43,41.008094 L 15,41.008094 z"
+       style="opacity:1;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;display:inline;filter:url(#filter7070);enable-background:new" />
+    <path
+       id="rect6279"
+       d="M 24.6875,14 C 24.550768,14.016565 24.408468,14.053979 24.28125,14.125 L 21.53125,15.6875 C 21.022376,15.971585 20.862451,16.570451 21.15625,17.0625 L 32.28125,35.71875 C 32.480546,36.052527 32.848004,36.223329 33.21875,36.21875 L 36.6875,38 L 36.84375,34.1875 C 37.033226,33.879327 37.074296,33.490029 36.875,33.15625 L 25.75,14.5 C 25.529651,14.130964 25.097695,13.950304 24.6875,14 z M 15,41 L 15,43 L 43,43 L 43,41 L 15,41 z"
+       style="opacity:1;fill:url(#linearGradient7141);fill-opacity:1;fill-rule:evenodd;stroke:none;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+  </g>
+</svg>

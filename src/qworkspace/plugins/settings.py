@@ -22,7 +22,7 @@ class Plugin(QtCore.QObject):
         self.name = 'settings'
         self.version = '0.0.1'
         self.description = self.tr('Settings manager plugin')
-        self.icon = general.get_icon('delete')
+        self.icon = general.get_icon('preferences-system')
         self.widget = None
 
     def open(self, spath):

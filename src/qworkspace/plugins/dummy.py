@@ -22,7 +22,7 @@ class Plugin(QtCore.QObject):
         self.name = 'dummy'
         self.version = '0.0.1'
         self.description = self.tr('Dummy plugin')
-        self.icon = general.get_icon('delete')
+        self.icon = general.get_icon('edit-delete')
         self.widget = None
 
     def open(self, spath):

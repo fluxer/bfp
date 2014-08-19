@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:xlink="http://www.w3.org/1999/xlink"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   inkscape:export-ydpi="90.000000"
+   inkscape:export-xdpi="90.000000"
+   inkscape:export-filename="/home/jonieno/Desktop/icon.png"
+   width="48"
+   height="48"
+   id="svg11300"
+   sodipodi:version="0.32"
+   inkscape:version="0.46"
+   sodipodi:docname="emblem-pictures.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   version="1.0"
+   style="display:inline;enable-background:new">
+  <title
+     id="title4119">Human-Palette Icon Theme</title>
+  <defs
+     id="defs3">
+    <linearGradient
+       id="linearGradient4299">
+      <stop
+         id="stop4301"
+         offset="0"
+         style="stop-color:#ffffff;stop-opacity:1;" />
+      <stop
+         id="stop4303"
+         offset="1"
+         style="stop-color:#b4b4b4;stop-opacity:1;" />
+    </linearGradient>
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4299"
+       id="linearGradient6117"
+       gradientUnits="userSpaceOnUse"
+       x1="106.28699"
+       y1="31.517946"
+       x2="106.28699"
+       y2="52.662243" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4299"
+       id="linearGradient7005"
+       x1="29.975924"
+       y1="18"
+       x2="29.992287"
+       y2="41"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-5,-5)" />
+    <filter
+       inkscape:collect="always"
+       id="filter7047">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.5496875"
+         id="feGaussianBlur7049" />
+    </filter>
+  </defs>
+  <sodipodi:namedview
+     stroke="#ef2929"
+     fill="#f57900"
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="0.25490196"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1"
+     inkscape:cx="310.35624"
+     inkscape:cy="16.317914"
+     inkscape:current-layer="svg11300"
+     showgrid="false"
+     inkscape:grid-bbox="true"
+     inkscape:document-units="px"
+     inkscape:showpageshadow="false"
+     inkscape:window-width="1280"
+     inkscape:window-height="950"
+     inkscape:window-x="0"
+     inkscape:window-y="24"
+     width="400px"
+     height="300px"
+     inkscape:snap-nodes="false"
+     inkscape:snap-bbox="true"
+     objecttolerance="7"
+     gridtolerance="12"
+     guidetolerance="13"
+     showguides="true"
+     inkscape:guide-bbox="true">
+    <inkscape:grid
+       type="xygrid"
+       id="grid5883"
+       spacingx="1px"
+       spacingy="1px"
+       enabled="true"
+       visible="true"
+       empspacing="5" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata4">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:creator>
+          <cc:Agent>
+            <dc:title>Jonian Guveli</dc:title>
+          </cc:Agent>
+        </dc:creator>
+        <dc:source />
+        <cc:license
+           rdf:resource="http://creativecommons.org/licenses/by-nc/3.0/" />
+        <dc:title>Folder</dc:title>
+        <dc:subject>
+          <rdf:Bag />
+        </dc:subject>
+        <dc:date />
+        <dc:rights>
+          <cc:Agent>
+            <dc:title />
+          </cc:Agent>
+        </dc:rights>
+        <dc:publisher>
+          <cc:Agent>
+            <dc:title>Jonian Guveli</dc:title>
+          </cc:Agent>
+        </dc:publisher>
+        <dc:identifier />
+        <dc:relation />
+        <dc:language />
+        <dc:coverage />
+        <dc:description />
+        <dc:contributor>
+          <cc:Agent>
+            <dc:title>Olibia Tsati</dc:title>
+          </cc:Agent>
+        </dc:contributor>
+      </cc:Work>
+      <cc:License
+         rdf:about="http://creativecommons.org/licenses/by-nc/3.0/">
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Reproduction" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#Distribution" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Notice" />
+        <cc:requires
+           rdf:resource="http://creativecommons.org/ns#Attribution" />
+        <cc:prohibits
+           rdf:resource="http://creativecommons.org/ns#CommercialUse" />
+        <cc:permits
+           rdf:resource="http://creativecommons.org/ns#DerivativeWorks" />
+      </cc:License>
+    </rdf:RDF>
+  </metadata>
+  <g
+     id="g7303">
+    <path
+       transform="matrix(2.3019215,0,0,2.3528485,-220.6643,-75.031615)"
+       d="M 116.49584,42.090096 A 10.208854,9.9878836 0 1 1 96.078134,42.090096 A 10.208854,9.9878836 0 1 1 116.49584,42.090096 z"
+       sodipodi:ry="9.9878836"
+       sodipodi:rx="10.208854"
+       sodipodi:cy="42.090096"
+       sodipodi:cx="106.28699"
+       id="path6267"
+       style="opacity:0.8;fill:#464646;fill-opacity:1;stroke:#333333;stroke-width:0.42970949;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       sodipodi:type="arc" />
+    <path
+       transform="matrix(2.2037686,0,0,2.2525242,-210.23193,-70.808959)"
+       d="M 116.49584,42.090096 A 10.208854,9.9878836 0 1 1 96.078134,42.090096 A 10.208854,9.9878836 0 1 1 116.49584,42.090096 z"
+       sodipodi:ry="9.9878836"
+       sodipodi:rx="10.208854"
+       sodipodi:cy="42.090096"
+       sodipodi:cx="106.28699"
+       id="path10234"
+       style="opacity:0.4;fill:none;fill-opacity:1;stroke:url(#linearGradient6117);stroke-width:0.4488304;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;display:inline;enable-background:new"
+       sodipodi:type="arc" />
+    <path
+       id="path7007"
+       d="M 9.1,13 C 8.546,13 8.1,13.446 8.1,14 L 8.1,35 C 8.1,35.554 8.546,36 9.1,36 L 39.06875,36 C 39.62275,36 40.068751,35.554 40.06875,35 L 40.06875,14 C 40.06875,13.446 39.622751,13 39.06875,13 L 9.1,13 z M 10.00625,15 L 38.00625,15 L 38.00625,34 L 36.69375,34 C 38.195934,32.360452 32.339435,24.528721 28.975,24.65625 C 25.215768,24.798743 22.109693,29.761302 20.975,29.8125 C 19.840307,29.863699 19.639851,27.311529 17.0375,27.375 C 14.738853,27.431065 10.919403,32.752801 11.85,34 L 10.00625,34 L 10.00625,15 z M 19.00625,17 C 17.35025,17 16.00625,18.344 16.00625,20 C 16.00625,21.656 17.35025,23.000001 19.00625,23 C 20.66225,23 22.006251,21.656001 22.00625,20 C 22.00625,18.344 20.66225,17 19.00625,17 z"
+       style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;display:inline;filter:url(#filter7047);enable-background:new" />
+    <path
+       id="rect6219"
+       d="M 9.09375,13 C 8.53975,13 8.09375,13.446 8.09375,14 L 8.09375,35 C 8.09375,35.554 8.53975,36 9.09375,36 L 39.0625,36 C 39.6165,36 40.062501,35.554 40.0625,35 L 40.0625,14 C 40.0625,13.446 39.616501,13 39.0625,13 L 9.09375,13 z M 10,15 L 38,15 L 38,34 L 36.6875,34 C 38.189684,32.360452 32.333185,24.528721 28.96875,24.65625 C 25.209518,24.798743 22.103443,29.761302 20.96875,29.8125 C 19.834057,29.863699 19.633601,27.311529 17.03125,27.375 C 14.732603,27.431065 10.913153,32.752801 11.84375,34 L 10,34 L 10,15 z M 19,17 C 17.344,17 16,18.344 16,20 C 16,21.656 17.344,23.000001 19,23 C 20.656,23 22.000001,21.656001 22,20 C 22,18.344 20.656,17 19,17 z"
+       style="opacity:1;fill:url(#linearGradient7005);fill-opacity:1;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+  </g>
+</svg>

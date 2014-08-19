@@ -14,24 +14,24 @@ class Widget(QtGui.QWidget):
         self.name = 'editor'
         self.sedit = spath
         self.secondLayout = QtGui.QHBoxLayout()
-        self.openButton = QtGui.QPushButton(general.get_icon('fileopen'), '')
+        self.openButton = QtGui.QPushButton(general.get_icon('document-open'), '')
         self.openButton.clicked.connect(self.open_file)
         self.openButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+O')))
-        self.saveButton = QtGui.QPushButton(general.get_icon('filesave'), '')
+        self.saveButton = QtGui.QPushButton(general.get_icon('document-save'), '')
         self.saveButton.clicked.connect(self.save_file)
         self.saveButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+S')))
         self.saveButton.setEnabled(False)
-        self.saveAsButton = QtGui.QPushButton(general.get_icon('filesaveas'), '')
+        self.saveAsButton = QtGui.QPushButton(general.get_icon('document-save-as'), '')
         self.saveAsButton.clicked.connect(self.save_as_file)
-        self.reloadButton = QtGui.QPushButton(general.get_icon('reload'), '')
+        self.reloadButton = QtGui.QPushButton(general.get_icon('view-refresh'), '')
         self.reloadButton.clicked.connect(self.reload_file)
         self.reloadButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+R')))
         self.reloadButton.setEnabled(False)
-        self.findButton = QtGui.QPushButton(general.get_icon('find'), '')
+        self.findButton = QtGui.QPushButton(general.get_icon('edit-find'), '')
         self.findButton.clicked.connect(self.find_text)
         self.findButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+F')))
         self.findButton.setEnabled(False)
-        self.fontButton = QtGui.QPushButton(general.get_icon('font'), '')
+        self.fontButton = QtGui.QPushButton(general.get_icon('preferences-desktop-font'), '')
         self.fontButton.clicked.connect(self.set_font)
         self.fontButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+N')))
         self.highlighterBox = QtGui.QComboBox()
@@ -136,7 +136,7 @@ class Plugin(QtCore.QObject):
         self.name = 'editor'
         self.version = '0.0.1'
         self.description = self.tr('Text editor plugin')
-        self.icon = general.get_icon('text-editor')
+        self.icon = general.get_icon('accessories-text-editor')
         self.widget = None
 
         self.editorButton = QtGui.QPushButton(self.icon, '')
