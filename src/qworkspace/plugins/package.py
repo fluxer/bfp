@@ -214,4 +214,5 @@ class Plugin(QtCore.QObject):
 
     def unload(self):
         ''' Unload plugin '''
+        self.applicationsLayout.removeWidget(self.packageButton)
         self.close()
