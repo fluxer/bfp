@@ -40,9 +40,10 @@ class Widget(QtGui.QWidget):
         self.WiFiList.currentItemChanged.connect(self.enable_buttons)
         self.EthernetList.currentItemChanged.connect(self.enable_buttons)
 
-        self.bus.connect('net.connman', '/', 'net.connman.Manager', 'ServicesChanged', self.scan)
-        self.bus.connect('net.connman', '/', 'net.connman.Manager', 'TechnologyAdded', self.scan)
-        self.bus.connect('net.connman', '/', 'net.connman.Manager', 'TechnologyRemoved', self.scan)
+        # FIXME: Nuitka can't deal with method decorators
+        # self.bus.connect('net.connman', '/', 'net.connman.Manager', 'ServicesChanged', self.scan)
+        # self.bus.connect('net.connman', '/', 'net.connman.Manager', 'TechnologyAdded', self.scan)
+        # self.bus.connect('net.connman', '/', 'net.connman.Manager', 'TechnologyRemoved', self.scan)
 
         self.scan_ethernet()
         self.scan_wifi()

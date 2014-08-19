@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="bg_BG">
+<!DOCTYPE TS><TS version="2.0" language="bg_BG" sourcelanguage="">
 <context>
     <name>Plugin</name>
     <message>
@@ -99,12 +98,12 @@
         <translation>Архив</translation>
     </message>
     <message>
-        <location filename="network.py" line="273"/>
+        <location filename="network.py" line="280"/>
         <source>Network manager plugin</source>
         <translation>Плъгин за управление на мрежата</translation>
     </message>
     <message>
-        <location filename="network.py" line="286"/>
+        <location filename="network.py" line="293"/>
         <source>Network</source>
         <translation>Мрежа</translation>
     </message>
@@ -462,7 +461,7 @@
         <translation>Преглед като лист</translation>
     </message>
     <message>
-        <location filename="network.py" line="198"/>
+        <location filename="network.py" line="206"/>
         <source>Details</source>
         <translation>Детайли</translation>
     </message>
