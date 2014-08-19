@@ -53,7 +53,7 @@ class Widget(QtGui.QWidget):
         self.icon_back = general.get_icon('go-previous')
         self.icon_next = general.get_icon('go-next')
         self.icon_reload = general.get_icon('view-refresh')
-        self.icon_stop = general.get_icon('exit')
+        self.icon_stop = general.get_icon('process-stop')
         self.icon_find = general.get_icon('folder-visiting')
         self.icon_search = general.get_icon('system-search')
         self.icon_bookmark = general.get_icon('emblem-favorite')

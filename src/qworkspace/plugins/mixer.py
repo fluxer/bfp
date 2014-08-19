@@ -47,7 +47,7 @@ class Plugin(QtCore.QObject):
         self.name = 'mixer'
         self.version = '0.0.1'
         self.description = self.tr('Sound mixer manager plugin')
-        self.icon = general.get_icon('audio-volume-high-panel')
+        self.icon = general.get_icon('audio-volume-high')
         self.widget = None
 
         self.mixerButton = QtGui.QPushButton(self.icon, '')
