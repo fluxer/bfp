@@ -254,7 +254,7 @@ class Daemon(QtCore.QThread):
         message.sub_info('Monitoring block devices state')
         while True:
             before = os.listdir('/sys/class/block')
-            time.sleep(2)
+            time.sleep(1)
             after = os.listdir('/sys/class/block')
             for f in after:
                 if '.tmp' in f:
@@ -262,7 +262,7 @@ class Daemon(QtCore.QThread):
                 if not f in before:
                     try:
                         system.do_mount('/dev/' + f)
-                        message.sub_info('Device mounted', f)
+                        self.emit(QtCore.SIGNAL('mounted'), '/media/' + f)
                     except Exception as detail:
                         message.sub_critical(str(detail))
             for f in before:
@@ -271,10 +271,10 @@ class Daemon(QtCore.QThread):
                 if not f in after:
                     try:
                         system.do_unmount('/dev/' + f)
-                        message.sub_info('Device unmounted', f)
+                        self.emit(QtCore.SIGNAL('unmounted'), '/media/' + f)
                     except Exception as detail:
                         message.sub_critical(str(detail))
-            time.sleep(2)
+            time.sleep(1)
 
 
 class ToolWidget(QtGui.QWidget):
@@ -282,9 +282,20 @@ class ToolWidget(QtGui.QWidget):
     def __init__(self, parent=None):
         super(ToolWidget, self).__init__()
         self.parent = parent
-        self.testButton = QtGui.QPushButton(general.get_icon('file-manager'), 'TEST')
-        self.addWidget(self.testButton)
+        self.mainLayout = QtGui.QGridLayout()
+        self.setLayout(self.mainLayout)
 
+    def add_button(self, sname):
+        self.testButton = QtGui.QPushButton(general.get_icon('drive-harddisk'), sname)
+        self.testButton.clicked.connect(lambda: self.parent.plugins.plugin_open(sname))
+        self.mainLayout.addWidget(self.testButton)
+
+        message.sub_info('Device mounted to', sname)
+        # FIXME: notify about it
+
+    def remove_button(self, sname):
+        message.sub_info('Device unmounted from', sname)
+        # FIXME: notify about it
 
 class Plugin(QtCore.QObject):
     ''' Plugin handler '''
@@ -302,13 +313,15 @@ class Plugin(QtCore.QObject):
         self.applicationsLayout = self.parent.toolBox.widget(1).layout()
         self.applicationsLayout.addWidget(self.storageButton)
 
-        #self.tool = ToolWidget(self.parent.toolBox)
-        #self.parent.toolBox.addItem(self.tool, 'Storage')
+        self.parent.toolBox.plugins = self.parent.plugins
+        self.tool = ToolWidget(self.parent.toolBox)
+        self.parent.toolBox.addItem(self.tool, 'Storage')
 
         self.parent.plugins.mime_register('inode/directory', self.name)
-        # FIXME: add item to toolbox for media storage
 
         self.daemon = Daemon()
+        self.connect(self.daemon, QtCore.SIGNAL('mounted'), self.tool.add_button)
+        self.connect(self.daemon, QtCore.SIGNAL('unmounted'), self.tool.remove_button)
         self.daemon.start()
 
     def open(self, spath):
