@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="bg_BG" sourcelanguage="">
+<!DOCTYPE TS>
+<TS version="2.0" language="bg_BG">
 <context>
     <name>Plugin</name>
     <message>
@@ -63,12 +64,12 @@
         <translation>Снимка на екрана</translation>
     </message>
     <message>
-        <location filename="storage.py" line="296"/>
+        <location filename="storage.py" line="307"/>
         <source>Storage management plugin</source>
         <translation>Плъгин за управление на хранилищата</translation>
     </message>
     <message>
-        <location filename="storage.py" line="318"/>
+        <location filename="storage.py" line="331"/>
         <source>Storage</source>
         <translation>Хранилище</translation>
     </message>
@@ -98,12 +99,12 @@
         <translation>Архив</translation>
     </message>
     <message>
-        <location filename="network.py" line="24"/>
+        <location filename="network.py" line="273"/>
         <source>Network manager plugin</source>
         <translation>Плъгин за управление на мрежата</translation>
     </message>
     <message>
-        <location filename="network.py" line="32"/>
+        <location filename="network.py" line="286"/>
         <source>Network</source>
         <translation>Мрежа</translation>
     </message>
@@ -459,6 +460,11 @@
         <location filename="storage.py" line="29"/>
         <source>List view</source>
         <translation>Преглед като лист</translation>
+    </message>
+    <message>
+        <location filename="network.py" line="198"/>
+        <source>Details</source>
+        <translation>Детайли</translation>
     </message>
 </context>
 </TS>
