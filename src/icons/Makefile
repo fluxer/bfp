@@ -13,7 +13,8 @@ install:
 	$(CP) -r panel $(DESTDIR)$(SHAREDIR)/icons/tiny/
 	$(CP) -r places $(DESTDIR)$(SHAREDIR)/icons/tiny/
 	$(CP) -r status $(DESTDIR)$(SHAREDIR)/icons/tiny/
-	$(CP) -r status $(DESTDIR)$(SHAREDIR)/icons/tiny/
+	$(CP) -r symbolic $(DESTDIR)$(SHAREDIR)/icons/tiny/
+	$(CP) -r tools $(DESTDIR)$(SHAREDIR)/icons/tiny/
 
 uninstall:
 	$(RM) -r $(DESTDIR)$(SHAREDIR)/icons/tiny
