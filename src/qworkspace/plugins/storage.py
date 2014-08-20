@@ -91,7 +91,7 @@ class Widget(QtGui.QWidget):
         if not spath:
             spath = self.storageView.currentIndex()
 
-        if not isinstance(spath, QtCore.QString) and not isinstance(spath, str):
+        if not isinstance(spath, unicode) and not isinstance(spath, str):
             spath = self.model.filePath(spath)
 
         if not os.path.isdir(spath):
