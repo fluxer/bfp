@@ -42,7 +42,7 @@ Create image of kernel other than the one running:
 =head1 EXIT STATUS
 
 MkInitfs returns 0 on success and other on failure.
-	
+
 =head2 Unexpected error (1)
 
 This is a general error. Triggered, most likely, by something that MkInitfs is

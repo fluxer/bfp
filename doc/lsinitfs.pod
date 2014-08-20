@@ -37,7 +37,7 @@ List image of kernel other than the one running:
 =head1 EXIT STATUS
 
 LsInitfs returns 0 on success and other on failure.
-	
+
 =head2 Unexpected error (1)
 
 This is a general error. Triggered, most likely, by something that LsInitfs is

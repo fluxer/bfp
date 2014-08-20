@@ -39,7 +39,7 @@ and according to SPM:
 	atk pango xorg-libraries cairo gdk-pixbuf bash python2 glib glibc
 	fontconfig pixman libpng libxcb libxau libxdmcp harfbuzz libffi pcre
 	icu gcc freetype2 zlib bzip2 expat
-	
+
 This ensures that dependencies are utilized at their best for consistency.
 Of course this can be achieved with other package managers too but it's
 much more work, SPM makes your life easier and keeps your system safe.
@@ -96,7 +96,7 @@ SPM to know that a target is installed (metadata and footprint). This way if,
 for whatever the reason, SPM chokes you can decompress the tarball with:
 
 	tar -xapPhf /var/cache/spm/tarballs/<tarball>
- 
+
 and it will be picked up by SPM as present on the system, no magic tricks needed.
 Keep in mind that you may have to execute the following to update the shared
 libraries cache:
@@ -169,7 +169,7 @@ optional arguments:
   -c, --clean           Purge repositories
   -s, --sync            Sync repositories
   -u, --update          Check repositories for updates
-  
+
 =head2 REMOTE MODE
 
 positional arguments:
@@ -237,7 +237,7 @@ optional arguments:
 Clean, sync repositories and check for updates:
 
 	sudo spm repo -csu
-	
+
 Print all remote targets names:
 
 	spm remote -n ^
@@ -261,7 +261,7 @@ Print bash, glibc and ncurses targets name and version in
 plain list format:
 
 	spm local -nvp 'bash$|glibc|ncurses'
-	
+
 Print the owner of 'bin/bash':
 
 	spm who 'bin/bash\b'
@@ -273,7 +273,7 @@ http://docs.python.org/2/library/re.html.
 =head1 EXIT STATUS
 
 SPM returns 0 on success and other on failure.
-	
+
 =head2 Unexpected error (1)
 
 This is a general error. Triggered, most likely, by something that SPM is

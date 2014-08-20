@@ -54,7 +54,7 @@ optional arguments:
   -c, --clean           Clean all sources after creating archive
   -d DIRECTORY,
   --directory DIRECTORY Set output directory
-  
+
 =head2 CHECK MODE
 
 positional arguments:
@@ -101,6 +101,7 @@ optional arguments:
   -m, --miantainer      Check for missing maintainer
   -N, --note            Check for FIXME/TODO note(s)
   -v, --variables       Check for essential variables
+  -t, --triggers        Check for unnecessary triggers invocation(s)
   -a, --all             Perform all checks
 
 =head2 MERGE MODE
@@ -183,7 +184,7 @@ Backup gcc filese into tarball:
 =head1 EXIT STATUS
 
 SPM returns 0 on success and other on failure.
-	
+
 =head2 Unexpected error (1)
 
 This is a general error. Triggered, most likely, by something that SPM is

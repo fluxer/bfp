@@ -315,7 +315,7 @@ class Lint(object):
 class Sane(object):
     ''' Check sanity of SRCBUILDs '''
     def __init__(self, targets, enable=False, disable=False, null=False,
-        maintainer=False, note=False, variables=False):
+        maintainer=False, note=False, variables=False, triggers=False):
         self.targets = targets
         self.enable = enable
         self.disable = disable
@@ -323,6 +323,7 @@ class Sane(object):
         self.maintainer = maintainer
         self.note = note
         self.variables = variables
+        self.triggers = triggers
 
     def main(self):
         ''' Looks for target match and then execute action for every target '''
@@ -363,6 +364,14 @@ class Sane(object):
                     if 'version=(' in content or 'description=(' in content:
                         message.sub_warning('String variable(s) defined as array')
                     # TODO: check for arrays defined as strings
+
+                if self.triggers:
+                    triggers = 'ldconfig|mandb|update-desktop-database|update-mime-database'
+                    triggers += '|xdg-icon-resource|gio-querymodules|pango-querymodules'
+                    triggers += '|gtk-query-immodules-2.0|gtk-query-immodules-3.0|gdk-pixbuf-query-loaders'
+                    triggers += '|glib-compile-schemas|depmod|install-info|gtk-update-icon-cache'
+                    if misc.file_search(triggers, target_srcbuild, escape=False):
+                        message.sub_warning('Possible unnecessary triggers invocation(s)')
 
 
 class Merge(object):
@@ -526,6 +535,8 @@ try:
         help='Check for FIXME/TODO note(s)')
     sane_parser.add_argument('-v', '--variables', action='store_true', \
         help='Check for essential variables')
+    sane_parser.add_argument('-t', '--triggers', action='store_true', \
+        help='Check for unnecessary triggers invocation(s)')
     sane_parser.add_argument('-a', '--all', action='store_true', \
         help='Perform all checks')
     sane_parser.add_argument('TARGETS', nargs='+', type=str, \
@@ -615,9 +626,10 @@ try:
             ARGS.maintainer = True
             ARGS.note = True
             ARGS.variables = True
+            ARGS.triggers = True
 
         m = Sane(ARGS.TARGETS, ARGS.enable, ARGS.disable, ARGS.null, \
-            ARGS.maintainer, ARGS.note, ARGS.variables)
+            ARGS.maintainer, ARGS.note, ARGS.variables, ARGS.triggers)
         m.main()
 
     elif ARGS.mode == 'merge':
