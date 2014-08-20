@@ -1,51 +1,51 @@
 include Makefile.inc
 
 all:
-	make -C doc
-	make -C src/cparted
-	make -C src/libs
-	make -C src/initfs
-	make -C src/spm
-	make -C src/qsession
-	make -C src/qworkspace
+	$(MAKE) -C doc
+	$(MAKE) -C src/cparted
+	$(MAKE) -C src/libs
+	$(MAKE) -C src/initfs
+	$(MAKE) -C src/spm
+	$(MAKE) -C src/qsession
+	$(MAKE) -C src/qworkspace
 
 check:
-	make -C src/libs check
+	$(MAKE) -C src/libs check
 
 install:
-	make -C doc install
-	make -C etc install
-	make -C misc install
-	make -C scripts install
-	make -C src/cparted install
-	make -C src/initfs install
-	make -C src/icons install
-	make -C src/libs install
-	make -C src/spm install
-	make -C src/qsession install
-	make -C src/qworkspace install
+	$(MAKE) -C doc install
+	$(MAKE) -C etc install
+	$(MAKE) -C misc install
+	$(MAKE) -C scripts install
+	$(MAKE) -C src/cparted install
+	$(MAKE) -C src/initfs install
+	$(MAKE) -C src/icons install
+	$(MAKE) -C src/libs install
+	$(MAKE) -C src/spm install
+	$(MAKE) -C src/qsession install
+	$(MAKE) -C src/qworkspace install
 
 uninstall:
-	make -C doc uninstall
-	make -C etc uninstall
-	make -C misc uninstall
-	make -C scripts uninstall
-	make -C src/cparted  uninstall
-	make -C src/initfs uninstall
-	make -C src/icons uninstall
-	make -C src/libs uninstall
-	make -C src/spm uninstall
-	make -C src/qsession uninstall
-	make -C src/qworkspace uninstall
+	$(MAKE) -C doc uninstall
+	$(MAKE) -C etc uninstall
+	$(MAKE) -C misc uninstall
+	$(MAKE) -C scripts uninstall
+	$(MAKE) -C src/cparted  uninstall
+	$(MAKE) -C src/initfs uninstall
+	$(MAKE) -C src/icons uninstall
+	$(MAKE) -C src/libs uninstall
+	$(MAKE) -C src/spm uninstall
+	$(MAKE) -C src/qsession uninstall
+	$(MAKE) -C src/qworkspace uninstall
 
 clean:
-	make -C doc clean
-	make -C src/cparted clean
-	make -C src/libs clean
-	make -C src/initfs clean
-	make -C src/spm clean
-	make -C src/qsession clean
-	make -C src/qworkspace clean
+	$(MAKE) -C doc clean
+	$(MAKE) -C src/cparted clean
+	$(MAKE) -C src/libs clean
+	$(MAKE) -C src/initfs clean
+	$(MAKE) -C src/spm clean
+	$(MAKE) -C src/qsession clean
+	$(MAKE) -C src/qworkspace clean
 
 changelog:
 	$(GIT) log HEAD -n 1 --pretty='%cd %an <%ae> %n%H%d'
