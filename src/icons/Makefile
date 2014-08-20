@@ -10,7 +10,6 @@ install:
 	$(CP) -r emotes $(DESTDIR)$(SHAREDIR)/icons/tiny/
 	$(CP) -r extra $(DESTDIR)$(SHAREDIR)/icons/tiny/
 	$(CP) -r mimes $(DESTDIR)$(SHAREDIR)/icons/tiny/
-	$(CP) -r panel $(DESTDIR)$(SHAREDIR)/icons/tiny/
 	$(CP) -r places $(DESTDIR)$(SHAREDIR)/icons/tiny/
 	$(CP) -r status $(DESTDIR)$(SHAREDIR)/icons/tiny/
 	$(CP) -r symbolic $(DESTDIR)$(SHAREDIR)/icons/tiny/
