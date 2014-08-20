@@ -17,7 +17,11 @@ class Widget(QtGui.QWidget):
         self.mainLayout = QtGui.QGridLayout()
         self.tabWidget = QtGui.QTabWidget()
         self.EthernetList = QtGui.QTableWidget()
+        self.EthernetList.setColumnCount(2)
+        self.EthernetList.setHorizontalHeaderLabels(('Name', 'State'))
         self.WiFiList = QtGui.QTableWidget()
+        self.WiFiList.setColumnCount(3)
+        self.WiFiList.setHorizontalHeaderLabels(('Name', 'Strength', 'Security'))
         self.tabWidget.insertTab(0, self.EthernetList, 'Ethernet')
         self.tabWidget.insertTab(1, self.WiFiList, 'WiFi')
         self.secondLayout = QtGui.QHBoxLayout()
@@ -48,10 +52,11 @@ class Widget(QtGui.QWidget):
         self.scan_ethernet()
         self.scan_wifi()
 
-    def dbus_call(self, sobject, spath, smethod, scall):
-        interface = QtDBus.QDBusInterface(sobject, spath, smethod, self.bus)
+    def dbus_call(self, spath, smethod, scall):
+        interface = QtDBus.QDBusInterface('net.connman', spath, smethod, self.bus)
         if interface.isValid():
-            reply = QtDBus.QDBusReply(interface.call(scall))
+            result = interface.call(scall)
+            reply = QtDBus.QDBusReply(result)
             if reply.isValid():
                 return reply.value()
             else:
@@ -62,7 +67,7 @@ class Widget(QtGui.QWidget):
             return False
 
     def connect(self, name):
-        if self.dbus_call('net.connman', name, 'net.connman.Service', 'Connect'):
+        if self.dbus_call(name, 'net.connman.Service', 'Connect'):
             print('Connected to', name)
 
     def connect_ethernet(self):
@@ -71,7 +76,7 @@ class Widget(QtGui.QWidget):
             return
         sconnect = QtCore.QModelIndex(selection[0]).data()
 
-        rdata = self.dbus_call('net.connman', '/', 'net.connman.Manager', 'GetServices')
+        rdata = self.dbus_call('/', 'net.connman.Manager', 'GetServices')
         if rdata:
             for r in rdata:
                 data = r[1]
@@ -84,7 +89,7 @@ class Widget(QtGui.QWidget):
             return
         sconnect = QtCore.QModelIndex(selection[0]).data()
 
-        rdata = self.dbus_call('net.connman', '/', 'net.connman.Manager', 'GetServices')
+        rdata = self.dbus_call('/', 'net.connman.Manager', 'GetServices')
         if rdata:
             for r in rdata:
                 data = r[1]
@@ -92,7 +97,7 @@ class Widget(QtGui.QWidget):
                     self.connect(r[0])
 
     def disconnect(self, name):
-        if self.dbus_call('net.connman', name, 'net.connman.Service', 'Disconnect'):
+        if self.dbus_call(name, 'net.connman.Service', 'Disconnect'):
             print('Disconnected from', name)
 
     def disconnect_ethernet(self):
@@ -101,7 +106,7 @@ class Widget(QtGui.QWidget):
             return
         sconnect = QtCore.QModelIndex(selection[0]).data()
 
-        rdata = self.dbus_call('net.connman', '/', 'net.connman.Manager', 'GetServices')
+        rdata = self.dbus_call('/', 'net.connman.Manager', 'GetServices')
         if rdata:
             for r in rdata:
                 data = r[1]
@@ -114,9 +119,9 @@ class Widget(QtGui.QWidget):
             return
         sconnect = QtCore.QModelIndex(selection[0]).data()
 
-        rdata = self.dbus_call('net.connman', '/', 'net.connman.Manager', 'GetServices')
+        rdata = self.dbus_call('/', 'net.connman.Manager', 'GetServices')
         if rdata:
-            for r in rdata.toStringList():
+            for r in rdata:
                 data = r[1]
                 if data.get('Name') == sconnect:
                     self.disconnect(r[0])
@@ -125,11 +130,11 @@ class Widget(QtGui.QWidget):
         # self.dbus_call('net.connman', '/net/connman/technology/ethernet', 'net.connman.Technology', 'Scan')
 
         # get managed services
-        rdata = self.dbus_call('net.connman', '/', 'net.connman.Manager', 'GetServices')
+        rdata = self.dbus_call('/', 'net.connman.Manager', 'GetServices')
         if rdata:
             srow = 1
             self.EthernetList.clearContents()
-            for r in rdata.toStringList():
+            for r in rdata:
                 data = r[1]
                 if data.get('Type') == 'ethernet':
                     name = data.get('Name')
@@ -142,14 +147,14 @@ class Widget(QtGui.QWidget):
             self.tabWidget.setTabEnabled(0, False)
 
     def scan_wifi(self):
-        self.dbus_call('net.connman', '/net/connman/technology/wifi', 'net.connman.Technology', 'Scan')
+        self.dbus_call('/net/connman/technology/wifi', 'net.connman.Technology', 'Scan')
 
         # get managed services
-        rdata = self.dbus_call('net.connman', '/', 'net.connman.Manager', 'GetServices')
+        rdata = self.dbus_call('/', 'net.connman.Manager', 'GetServices')
         if rdata:
             srow = 1
             self.WiFiList.clearContents()
-            for r in rdata.toStringList():
+            for r in rdata:
                 data = r[1]
                 if data.get('Type') == 'wifi':
                     name = data.get('Name')
@@ -169,9 +174,9 @@ class Widget(QtGui.QWidget):
             return
         sconnect = QtCore.QModelIndex(selection[0]).data()
 
-        rdata = self.dbus_call('net.connman', '/', 'net.connman.Manager', 'GetServices')
+        rdata = self.dbus_call('/', 'net.connman.Manager', 'GetServices')
         if rdata:
-            for r in rdata.toStringList():
+            for r in rdata:
                 data = r[1]
                 name = data.get('Name')
                 if name == sconnect:
@@ -188,9 +193,9 @@ class Widget(QtGui.QWidget):
             return
         sconnect = QtCore.QModelIndex(selection[0]).data()
 
-        rdata = self.dbus_call('net.connman', '/', 'net.connman.Manager', 'GetServices')
+        rdata = self.dbus_call('/', 'net.connman.Manager', 'GetServices')
         if rdata:
-            for r in rdata.toStringList():
+            for r in rdata:
                 data = r[1]
                 name = data.get('Name')
                 if name == sconnect:
@@ -229,8 +234,8 @@ class Widget(QtGui.QWidget):
             self.details_wifi()
 
     def enable_buttons(self):
-        sethernet = QtCore.QModelIndex(ui.EthernetList.currentIndex()).data()
-        swifi = QtCore.QModelIndex(ui.WiFiList.currentIndex()).data()
+        sethernet = QtCore.QModelIndex(self.EthernetList.currentIndex()).data()
+        swifi = QtCore.QModelIndex(self.WiFiList.currentIndex()).data()
 
         self.detailsButton.setEnabled(False)
         self.disconnectButton.setEnabled(False)
@@ -238,9 +243,9 @@ class Widget(QtGui.QWidget):
 
         if sethernet:
             self.detailsButton.setEnabled(True)
-            rdata = self.dbus_call('net.connman', '/', 'net.connman.Manager', 'GetServices')
+            rdata = self.dbus_call('/', 'net.connman.Manager', 'GetServices')
             if rdata:
-                for r in rdata.toStringList():
+                for r in rdata:
                     data = r[1]
                     if data.get('Name') == sethernet:
                         if data.get('State') == 'online':
@@ -251,9 +256,9 @@ class Widget(QtGui.QWidget):
 
         if swifi:
             self.detailsButton.setEnabled(True)
-            rdata = self.dbus_call('net.connman', '/', 'net.connman.Manager', 'GetServices')
+            rdata = self.dbus_call('/', 'net.connman.Manager', 'GetServices')
             if rdata:
-                for r in rdata.toStringList():
+                for r in rdata:
                     data = r[1]
                     if data.get('Name') == swifi:
                         if data.get('State') == 'online':

@@ -38,12 +38,12 @@
         <translation>Мултимедиа</translation>
     </message>
     <message>
-        <location filename="package.py" line="190"/>
+        <location filename="package.py" line="191"/>
         <source>Package manager plugin</source>
         <translation>Плъгин за управление на пакетите </translation>
     </message>
     <message>
-        <location filename="package.py" line="203"/>
+        <location filename="package.py" line="204"/>
         <source>Package</source>
         <translation>Пакет</translation>
     </message>
@@ -98,12 +98,12 @@
         <translation>Архив</translation>
     </message>
     <message>
-        <location filename="network.py" line="279"/>
+        <location filename="network.py" line="284"/>
         <source>Network manager plugin</source>
         <translation>Плъгин за управление на мрежата</translation>
     </message>
     <message>
-        <location filename="network.py" line="292"/>
+        <location filename="network.py" line="297"/>
         <source>Network</source>
         <translation>Мрежа</translation>
     </message>
@@ -461,7 +461,7 @@
         <translation>Преглед като лист</translation>
     </message>
     <message>
-        <location filename="network.py" line="205"/>
+        <location filename="network.py" line="210"/>
         <source>Details</source>
         <translation>Детайли</translation>
     </message>

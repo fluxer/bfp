@@ -21,7 +21,7 @@ class Settings(object):
     def get(self, svalue, sfallback=''):
         ''' Get settings value '''
         self.settings.sync()
-        return str(self.settings.value(svalue, sfallback).toString())
+        return str(self.settings.value(svalue, sfallback))
 
     def set(self, svariable, svalue):
         ''' Write settings value '''
