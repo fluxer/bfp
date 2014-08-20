@@ -12,7 +12,7 @@ class Plugin(QtCore.QObject):
         self.name = 'quit'
         self.version = '0.0.1'
         self.description = self.tr('Quit plugin')
-        self.icon = general.get_icon('exit')
+        self.icon = general.get_icon('system-log-out')
 
         self.quitButton = QtGui.QPushButton(self.icon, '')
         self.quitButton.clicked.connect(self.parent.app.quit)

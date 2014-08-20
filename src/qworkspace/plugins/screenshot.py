@@ -14,7 +14,7 @@ class Widget(QtGui.QWidget):
         self.spath = spath # FIXME: use for taking screenshot immidiatly
         self.name = 'screenshot'
         self.delayBox = QtGui.QSpinBox()
-        self.takeButton = QtGui.QPushButton(general.get_icon('gnome-mime-image'), '')
+        self.takeButton = QtGui.QPushButton(general.get_icon('image-x-generic'), '')
         self.takeButton.clicked.connect(self.take_screenshot)
         self.mainLayout = QtGui.QGridLayout()
         self.mainLayout.addWidget(self.delayBox)
@@ -59,7 +59,7 @@ class Plugin(QtCore.QObject):
         self.name = 'screenshot'
         self.version = '0.0.1'
         self.description = self.tr('Screenshot taking plugin')
-        self.icon = general.get_icon('user-desktop')
+        self.icon = general.get_icon('application-x-desktop')
         self.widget = None
 
         self.screenshotButton = QtGui.QPushButton(self.icon, '')

@@ -26,7 +26,7 @@ class Plugin(QtCore.QObject):
         self.name = 'calendar'
         self.version = '0.0.1'
         self.description = self.tr('Calendar plugin')
-        self.icon = general.get_icon('x-office-calendar')
+        self.icon = general.get_icon('office-calendar')
         self.widget = None
 
         self.calendarButton = QtGui.QPushButton(self.icon, '')

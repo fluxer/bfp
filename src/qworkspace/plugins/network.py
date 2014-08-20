@@ -275,7 +275,7 @@ class Plugin(QtCore.QObject):
         self.name = 'network'
         self.version = '0.0.1'
         self.description = self.tr('Network manager plugin')
-        self.icon = general.get_icon('preferences-system-network-proxy')
+        self.icon = general.get_icon('preferences-system-network')
         self.widget = None
 
         self.networkButton = QtGui.QPushButton(self.icon, '')
