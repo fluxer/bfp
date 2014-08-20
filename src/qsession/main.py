@@ -1,5 +1,9 @@
 #!/bin/python2
 
+import sip
+sip.setapi('QString', 2)
+sip.setapi('QVariant', 2)
+
 import qsession_ui
 from PyQt4 import QtCore, QtGui
 import sys, os, pwd, crypt, subprocess, uuid, libmisc, libworkspace

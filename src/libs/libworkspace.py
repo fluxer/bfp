@@ -1,5 +1,9 @@
 #!/bin/python2
 
+import sip
+sip.setapi('QString', 2)
+sip.setapi('QVariant', 2)
+
 import os, sys
 from PyQt4 import QtCore, QtGui
 import libmisc, libmessage
