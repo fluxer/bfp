@@ -31,7 +31,7 @@ class Widget(QtGui.QWidget):
         self.findButton.clicked.connect(self.find_text)
         self.findButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+F')))
         self.findButton.setEnabled(False)
-        self.fontButton = QtGui.QPushButton(general.get_icon('preferences-desktop-font'), '')
+        self.fontButton = QtGui.QPushButton(general.get_icon('applications-fonts'), '')
         self.fontButton.clicked.connect(self.set_font)
         self.fontButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+N')))
         self.highlighterBox = QtGui.QComboBox()

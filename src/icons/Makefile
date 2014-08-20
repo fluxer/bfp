@@ -8,6 +8,7 @@ install:
 	$(CP) -r devices $(DESTDIR)$(SHAREDIR)/icons/tiny/
 	$(CP) -r emblems $(DESTDIR)$(SHAREDIR)/icons/tiny/
 	$(CP) -r emotes $(DESTDIR)$(SHAREDIR)/icons/tiny/
+	$(CP) -r extra $(DESTDIR)$(SHAREDIR)/icons/tiny/
 	$(CP) -r mimes $(DESTDIR)$(SHAREDIR)/icons/tiny/
 	$(CP) -r panel $(DESTDIR)$(SHAREDIR)/icons/tiny/
 	$(CP) -r places $(DESTDIR)$(SHAREDIR)/icons/tiny/

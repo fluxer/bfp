@@ -56,7 +56,7 @@ class Widget(QtGui.QWidget):
         self.icon_stop = general.get_icon('process-stop')
         self.icon_find = general.get_icon('edit-find')
         self.icon_search = general.get_icon('system-search')
-        self.icon_bookmark = general.get_icon('emblem-favorite')
+        self.icon_bookmark = general.get_icon('bookmark')
         self.disk_cache = QtNetwork.QNetworkDiskCache()
         self.disk_cache.setCacheDirectory(cache_path)
         self.disk_cache.setMaximumCacheSize(50000000)
