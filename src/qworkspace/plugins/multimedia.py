@@ -19,7 +19,7 @@ class Widget(QtGui.QWidget):
         self.setLayout(self.mainLayout)
 
         self.process = QtCore.QProcess(self.container)
-        args = ['--wid', str(self.container.winId())]
+        args = ['--wid', str(self.container.winId()), '-vo', 'x11']
         if spath:
             args.append(spath)
         self.process.start(misc.whereis('mpv'), args)
