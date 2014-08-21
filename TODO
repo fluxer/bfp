@@ -12,11 +12,10 @@ http://www.linuxfromscratch.org/blfs/view/systemd/postlfs/initramfs.html
  * Lint - check if groups/users are removed
 
 ## QWORKSPACE ##
- * Complete archive manager plugins
+ * Complete archive manager plugin
  * Improve audio mixer plugin
  * Improve download manager plugin (torrents support)
  * Implement Applications and Notifiaction API
- * Implement caches update plugin?
  * Implement XKB plugin
  * Implement chat plugin
  * Implement Steam plugin (https://developer.valvesoftware.com/wiki/SteamCMD)
