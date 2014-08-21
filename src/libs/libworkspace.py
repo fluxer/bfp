@@ -274,6 +274,11 @@ class Plugins(object):
                 message.sub_warning('Recent already registered', key)
                 self.recent_unregister(key)
 
+        if not os.path.exists('/' + spath):
+            message.warning('Recent path does not exist', '/' + spath)
+            self.recent_unregister(spath)
+            return
+
         message.info('Registering recent path', spath)
         button = QtGui.QPushButton(general.get_icon('document-open-recent'), \
             os.path.basename(spath))
