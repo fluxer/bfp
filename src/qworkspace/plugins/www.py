@@ -49,7 +49,6 @@ class Widget(QtGui.QWidget):
         super(Widget, self).__init__()
         self.parent = parent
         self.name = 'www'
-        self.tab_index = self.parent.tabWidget.currentIndex()+1
         self.icon_back = general.get_icon('go-previous')
         self.icon_next = general.get_icon('go-next')
         self.icon_reload = general.get_icon('view-refresh')
@@ -66,10 +65,10 @@ class Widget(QtGui.QWidget):
         self.nam.setCookieJar(self.cookie_jar)
 
         # add widgets
-        mainLayout = QtGui.QGridLayout()
-        secondLayout = QtGui.QHBoxLayout()
-        thirdLayout = QtGui.QHBoxLayout()
-        fourthLayout = QtGui.QHBoxLayout()
+        self.mainLayout = QtGui.QGridLayout()
+        self.secondLayout = QtGui.QHBoxLayout()
+        self.thirdLayout = QtGui.QHBoxLayout()
+        self.fourthLayout = QtGui.QHBoxLayout()
         self.backButton = QtGui.QPushButton(self.icon_back, '')
         self.nextButton = QtGui.QPushButton(self.icon_next, '')
         self.reloadStopButton = QtGui.QPushButton(self.icon_reload, '')
@@ -80,23 +79,23 @@ class Widget(QtGui.QWidget):
         self.statusLabel = QtGui.QLabel()
         self.statusLabel.setSizePolicy(QtGui.QSizePolicy.MinimumExpanding, QtGui.QSizePolicy.Fixed)
         self.progressBar = QtGui.QProgressBar()
-        secondLayout.addWidget(self.backButton)
-        secondLayout.addWidget(self.nextButton)
-        secondLayout.addWidget(self.reloadStopButton)
-        secondLayout.addWidget(self.findButton)
-        secondLayout.addWidget(self.searchButton)
-        secondLayout.addWidget(self.urlBox)
+        self.secondLayout.addWidget(self.backButton)
+        self.secondLayout.addWidget(self.nextButton)
+        self.secondLayout.addWidget(self.reloadStopButton)
+        self.secondLayout.addWidget(self.findButton)
+        self.secondLayout.addWidget(self.searchButton)
+        self.secondLayout.addWidget(self.urlBox)
         for b in ('github.com', 'bitbucket.org', \
             'gmail.com', 'youtube.com', 'zamunda.net', \
             'archlinux.org', 'phoronix.com', 'html5test.com'):
-            thirdLayout.addWidget(self.bookmark(b))
-        fourthLayout.addWidget(self.statusLabel)
-        fourthLayout.addWidget(self.progressBar)
-        mainLayout.addLayout(secondLayout, 0, 0)
-        mainLayout.addLayout(thirdLayout, 60, 0)
-        mainLayout.addWidget(self.webView)
-        mainLayout.addLayout(fourthLayout, QtCore.Qt.AlignBottom, 0)
-        self.setLayout(mainLayout)
+            self.thirdLayout.addWidget(self.bookmark(b))
+        self.fourthLayout.addWidget(self.statusLabel)
+        self.fourthLayout.addWidget(self.progressBar)
+        self.mainLayout.addLayout(self.secondLayout, 0, 0)
+        self.mainLayout.addLayout(self.thirdLayout, 60, 0)
+        self.mainLayout.addWidget(self.webView)
+        self.mainLayout.addLayout(self.fourthLayout, QtCore.Qt.AlignBottom, 0)
+        self.setLayout(self.mainLayout)
 
         # setup widgets
         self.urlBox.setEditable(True)
@@ -120,8 +119,6 @@ class Widget(QtGui.QWidget):
         self.webView.linkClicked.connect(self.link_clicked)
         self.webView.urlChanged.connect(self.url_changed)
         self.webView.loadProgress.connect(self.load_progress)
-        self.webView.titleChanged.connect(self.title_changed)
-        self.webView.iconChanged.connect(self.icon_changed)
 
         # advanced funcitonality
         self.webView.page().setForwardUnsupportedContent(True)
@@ -175,16 +172,6 @@ class Widget(QtGui.QWidget):
             self.nextButton.setEnabled(False)
         self.urlBox.setEditText(url.toString())
 
-    def title_changed(self, title):
-        '''  Web page title changed - change the tab name '''
-        # for some reaons some web-pages do not set or have title
-        if not title:
-            title = self.tr('Untitled')
-        self.parent.tabWidget.setTabText(self.tab_index, title[:20])
-
-    def icon_changed(self, icon):
-        self.parent.tabWidget.setTabIcon(self.tab_index, icon)
-
     def link_clicked(self, url):
         ''' Update the URL if a link on a web page is clicked '''
         history = self.webView.page().history()
@@ -204,7 +191,6 @@ class Widget(QtGui.QWidget):
             self.reloadStopButton.setIcon(self.icon_reload)
             self.progressBar.hide()
             self.progressBar.setValue(0)
-            self.icon_changed(self.webView.icon())
 
             # load JavaScript user script (http://jquery.com/)
             #if ui.actionJavascript.isChecked():
