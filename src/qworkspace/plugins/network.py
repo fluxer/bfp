@@ -1,7 +1,9 @@
 #!/bin/pyhton2
 
+# http://git.kernel.org/cgit/network/connman/connman.git/tree/doc
+
 from PyQt4 import QtCore, QtGui, QtDBus
-import libworkspace
+import os, libworkspace
 general = libworkspace.General()
 
 
@@ -29,6 +31,7 @@ class Widget(QtGui.QWidget):
         self.connectButton = QtGui.QPushButton(general.get_icon('edit-redo'), '')
         self.disconnectButton = QtGui.QPushButton(general.get_icon('edit-undo'), '')
         self.detailsButton = QtGui.QPushButton(general.get_icon('document-properties'), '')
+        self.tabWidget.currentChanged.connect(self.enable_buttons)
         self.secondLayout.addWidget(self.scanButton)
         self.secondLayout.addWidget(self.connectButton)
         self.secondLayout.addWidget(self.disconnectButton)
@@ -44,13 +47,18 @@ class Widget(QtGui.QWidget):
         self.WiFiList.currentItemChanged.connect(self.enable_buttons)
         self.EthernetList.currentItemChanged.connect(self.enable_buttons)
 
+        self.scan_any()
+
         # FIXME: Nuitka can't deal with method decorators
         # self.bus.connect('net.connman', '/', 'net.connman.Manager', 'ServicesChanged', self.scan)
         # self.bus.connect('net.connman', '/', 'net.connman.Manager', 'TechnologyAdded', self.scan)
         # self.bus.connect('net.connman', '/', 'net.connman.Manager', 'TechnologyRemoved', self.scan)
 
-        self.scan_ethernet()
-        self.scan_wifi()
+        # because of the above, timer is installed to deal with state changes
+        self.timer = QtCore.QTimer()
+        self.timer.setInterval(5000)
+        self.timer.timeout.connect(self.scan_any)
+        self.timer.start()
 
     def dbus_call(self, spath, smethod, scall):
         interface = QtDBus.QDBusInterface('net.connman', spath, smethod, self.bus)
@@ -60,15 +68,32 @@ class Widget(QtGui.QWidget):
             if reply.isValid():
                 return reply.value()
             else:
-                QtGui.QMessageBox.critical(self, self.tr('Critical'), str(reply.error().message()))
+                QtGui.QMessageBox.critical(self, self.tr('Critical'), \
+                    str(reply.error().message()))
                 return False
         else:
-            QtGui.QMessageBox.critical(self, self.tr('Critical'), str(self.bus.lastError().message()))
+            QtGui.QMessageBox.critical(self, self.tr('Critical'), \
+                str(self.bus.lastError().message()))
             return False
 
+    def technology_enabled(self, stech):
+        result = self.dbus_call('/', 'net.connman.Manager', 'GetTechnologies')
+        for tech in result:
+            if tech[0] == ('/net/connman/technology/' + stech):
+                return tech[1].get('Powered')
+        return False
+
     def connect(self, name):
-        if self.dbus_call(name, 'net.connman.Service', 'Connect'):
-            print('Connected to', name)
+        self.dbus_call(name, 'net.connman.Service', 'Connect')
+        # FIXME: use notification
+        QtGui.QMessageBox.information(self, self.tr('Information'), \
+            self.tr('Connected to: %s' % os.path.basename(name)))
+
+    def disconnect(self, name):
+        self.dbus_call(name, 'net.connman.Service', 'Disconnect')
+        # FIXME: use notification
+        QtGui.QMessageBox.information(self, self.tr('Information'), \
+            self.tr('Disconnected from: %s' % os.path.basename(name)))
 
     def connect_ethernet(self):
         selection = self.EthernetList.selectedIndexes()
@@ -95,10 +120,6 @@ class Widget(QtGui.QWidget):
                 data = r[1]
                 if data.get('Name') == sconnect:
                     self.connect(r[0])
-
-    def disconnect(self, name):
-        if self.dbus_call(name, 'net.connman.Service', 'Disconnect'):
-            print('Disconnected from', name)
 
     def disconnect_ethernet(self):
         selection = self.EthernetList.selectedIndexes()
@@ -210,10 +231,18 @@ class Widget(QtGui.QWidget):
             self.tabWidget.setTabEnabled(1, False)
 
     def scan_any(self):
-        if self.tabWidget.currentIndex() == 0:
+        if self.technology_enabled('ethernet'):
+            self.tabWidget.setTabEnabled(0, True)
             self.scan_ethernet()
-        elif self.tabWidget.currentIndex() == 1:
+        else:
+            self.tabWidget.setTabEnabled(0, False)
+
+        if self.technology_enabled('wifi'):
+            self.tabWidget.setTabEnabled(1, True)
             self.scan_wifi()
+        else:
+            self.tabWidget.setTabEnabled(1, False)
+        self.enable_buttons()
 
     def disconnect_any(self):
         if self.EthernetList.selectedIndexes():
@@ -234,37 +263,37 @@ class Widget(QtGui.QWidget):
             self.details_wifi()
 
     def enable_buttons(self):
-        sethernet = QtCore.QModelIndex(self.EthernetList.currentIndex()).data()
-        swifi = QtCore.QModelIndex(self.WiFiList.currentIndex()).data()
-
         self.detailsButton.setEnabled(False)
         self.disconnectButton.setEnabled(False)
         self.connectButton.setEnabled(False)
 
-        if sethernet:
-            self.detailsButton.setEnabled(True)
-            rdata = self.dbus_call('/', 'net.connman.Manager', 'GetServices')
-            if rdata:
-                for r in rdata:
-                    data = r[1]
-                    if data.get('Name') == sethernet:
-                        if data.get('State') == 'online':
-                            self.disconnectButton.setEnabled(True)
-                        else:
-                            self.connectButton.setEnabled(True)
+        if self.tabWidget.currentIndex() == 0:
+            sethernet = QtCore.QModelIndex(self.EthernetList.currentIndex()).data()
+            if sethernet:
+                self.detailsButton.setEnabled(True)
+                rdata = self.dbus_call('/', 'net.connman.Manager', 'GetServices')
+                if rdata:
+                    for r in rdata:
+                        data = r[1]
+                        if data.get('Name') == sethernet:
+                            if data.get('State') == 'online':
+                                self.disconnectButton.setEnabled(True)
+                            else:
+                                self.connectButton.setEnabled(True)
 
-
-        if swifi:
-            self.detailsButton.setEnabled(True)
-            rdata = self.dbus_call('/', 'net.connman.Manager', 'GetServices')
-            if rdata:
-                for r in rdata:
-                    data = r[1]
-                    if data.get('Name') == swifi:
-                        if data.get('State') == 'online':
-                            self.disconnectButton.setEnabled(True)
-                        else:
-                            self.connectButton.setEnabled(True)
+        if self.tabWidget.currentIndex() == 1:
+            swifi = QtCore.QModelIndex(self.WiFiList.currentIndex()).data()
+            if swifi:
+                self.detailsButton.setEnabled(True)
+                rdata = self.dbus_call('/', 'net.connman.Manager', 'GetServices')
+                if rdata:
+                    for r in rdata:
+                        data = r[1]
+                        if data.get('Name') == swifi:
+                            if data.get('State') == 'online':
+                                self.disconnectButton.setEnabled(True)
+                            else:
+                                self.connectButton.setEnabled(True)
 
     @QtCore.pyqtSlot(QtDBus.QDBusMessage)
     def scan(self):
