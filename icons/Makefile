@@ -1,4 +1,4 @@
-include ../../Makefile.inc
+include ../Makefile.inc
 
 install:
 	$(INSTALL) -dm755 $(DESTDIR)$(SHAREDIR)/icons/tiny
