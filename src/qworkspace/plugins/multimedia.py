@@ -22,10 +22,12 @@ class Widget(QtGui.QWidget):
         self.outputBox.currentIndexChanged.connect(self.mpv_restart)
         self.secondLayout.addWidget(self.openButton)
         self.secondLayout.addWidget(self.outputBox)
+        # HACK!!! QX11EmbedWidget breaks the layout horribly
+        self.dummy = QtGui.QWidget(self)
         self.mainLayout = QtGui.QGridLayout()
-        self.container = QtGui.QX11EmbedWidget()
+        self.container = QtGui.QX11EmbedWidget(self.dummy)
         self.mainLayout.addLayout(self.secondLayout, 0, 0)
-        self.mainLayout.addWidget(self.container)
+        self.mainLayout.addWidget(self.dummy)
         self.setLayout(self.mainLayout)
 
         self.process = None
@@ -42,7 +44,7 @@ class Widget(QtGui.QWidget):
             self.mpv_restart()
 
     def mpv_start(self, spath=None):
-        arguments = ['--wid', str(self.container.winId()), \
+        arguments = ['--wid', str(self.dummy.winId()), \
             '-vo', str(self.outputBox.currentText())]
         if self.spath:
             arguments.append(self.spath)
