@@ -156,6 +156,7 @@ class Widget(QtGui.QWidget):
             and not url.startswith('https://') and not url.startswith('ftp://') \
             and not url.startswith('ftps://'):
             url = 'http://' + url
+        self.statusLabel.setText('')
         self.webView.setUrl(QtCore.QUrl(url))
 
     # basic functionality methods
@@ -336,6 +337,7 @@ class Plugin(QtCore.QObject):
         if not index:
             index = self.parent.tabWidget.currentIndex()
         if self.widget:
+            self.widget.webView.stop()
             self.widget.deleteLater()
             self.widget = None
             self.parent.tabWidget.removeTab(index)
