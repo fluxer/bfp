@@ -116,8 +116,10 @@ class Widget(QtGui.QWidget):
             self.path_open(str(self.model.filePath(svar)))
 
     def menu_open_with(self):
+        # FIXME: implement
+        # self.parent.plugins.plugins_open_with(str(self.model.filePath(svar)))
         for svar in self.storageView.selectedIndexes():
-            self.parent.plugins.open_with(str(self.model.filePath(svar)))
+            pass
 
     def menu_cut(self):
         ''' Cut files/directories for future paste '''
@@ -164,10 +166,13 @@ class Widget(QtGui.QWidget):
                     shutil.copy2(svar, sdest)
 
     def menu_rename(self):
-        selected_items = []
+        ''' Rename files/directories '''
+        # FIXME: _check_exists()
+        sdest = str(self.model.rootPath())
         for svar in self.storageView.selectedIndexes():
-            selected_items.append(str(self.model.filePath(svar)))
-        # FIXME: implement
+            snvar, ok = QtGui.QInputDialog.getText(self, self.tr('Rename'), \
+                self.tr('New name:'), QtGui.QLineEdit.Normal)
+            os.rename(str(self.model.filePath(svar)), sdest + '/' + str(snvar))
 
     def menu_delete(self):
         ''' Delete files/directories '''
