@@ -11,6 +11,7 @@ pod2htmd.tmp
 *_ui.py
 *_rc.py
 *.qm
+*.html
 
 *.bak
 *~
