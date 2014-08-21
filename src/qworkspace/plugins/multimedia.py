@@ -17,7 +17,7 @@ class Widget(QtGui.QWidget):
         self.openButton = QtGui.QPushButton(general.get_icon('document-open'), '')
         self.openButton.clicked.connect(self.open_file)
         self.outputBox = QtGui.QComboBox()
-        self.outputBox.addItems(('opengl', 'vdpau', 'x11'))
+        self.outputBox.addItems(('x11', 'vdpau', 'vaapi', 'opengl'))
         self.outputBox.currentIndexChanged.connect(self.mpv_restart)
         self.secondLayout.addWidget(self.openButton)
         self.secondLayout.addWidget(self.outputBox)
