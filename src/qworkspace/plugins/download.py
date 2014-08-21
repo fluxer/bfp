@@ -18,9 +18,13 @@ class Widget(QtGui.QWidget):
         self.abortButton = QtGui.QPushButton(general.get_icon('edit-delete'), '')
         self.abortButton.clicked.connect(self.download_abort)
         self.abortButton.setEnabled(False)
+        self.openButton = QtGui.QPushButton(general.get_icon('document-open'), '')
+        self.openButton.clicked.connect(self.download_open)
+        self.openButton.setEnabled(False)
         self.secondLayout = QtGui.QHBoxLayout()
         self.secondLayout.addWidget(self.addButton)
         self.secondLayout.addWidget(self.abortButton)
+        self.secondLayout.addWidget(self.openButton)
         self.mainLayout = QtGui.QGridLayout()
         self.downloadLabel = QtGui.QLabel()
         self.progressBar = QtGui.QProgressBar()
@@ -56,6 +60,11 @@ class Widget(QtGui.QWidget):
         self.progressBar.setValue(0)
         self.addButton.setEnabled(True)
         self.abortButton.setEnabled(False)
+        self.openButton.setEnabled(False)
+
+    def download_open(self):
+        self.parent.plugins.plugin_open(self.download_path + '/' + \
+            os.path.basename(self.downloadLabel.text()))
 
     def download(self, surl):
         self.request = QtNetwork.QNetworkRequest(QtCore.QUrl(surl))
@@ -67,6 +76,7 @@ class Widget(QtGui.QWidget):
         self.progressBar.setValue(0)
         self.addButton.setEnabled(False)
         self.abortButton.setEnabled(True)
+        self.openButton.setEnabled(False)
 
     def download_progress(self, ireceived, itotal):
         self.progressBar.setMaximum(itotal)
@@ -86,6 +96,7 @@ class Widget(QtGui.QWidget):
         else:
             QtGui.QMessageBox.information(self, self.tr('Info'), \
                 self.tr('Download of <b>%s</b> complete.') % surl)
+            self.openButton.setEnabled(True)
         self.request = None
         self.reply = None
 
