@@ -2,6 +2,7 @@ include Makefile.inc
 
 all:
 	$(MAKE) -C doc
+	$(MAKE) -C help
 	$(MAKE) -C src/cparted
 	$(MAKE) -C src/libs
 	$(MAKE) -C src/initfs
@@ -15,6 +16,7 @@ check:
 install:
 	$(MAKE) -C doc install
 	$(MAKE) -C etc install
+	$(MAKE) -C help install
 	$(MAKE) -C misc install
 	$(MAKE) -C scripts install
 	$(MAKE) -C src/cparted install
@@ -28,6 +30,7 @@ install:
 uninstall:
 	$(MAKE) -C doc uninstall
 	$(MAKE) -C etc uninstall
+	$(MAKE) -C help uninstall
 	$(MAKE) -C misc uninstall
 	$(MAKE) -C scripts uninstall
 	$(MAKE) -C src/cparted  uninstall

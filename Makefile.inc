@@ -29,6 +29,7 @@ RM = rm -vf
 CP = cp -vf
 XZ = xz -v
 
+MARKDOWN = markdown_py -v
 POD2MAN = pod2man
 PYUIC = pyuic4
 PYRCC = pyrcc4

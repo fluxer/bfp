@@ -158,6 +158,16 @@
         <source>Download</source>
         <translation>Изтегляне</translation>
     </message>
+    <message>
+        <location filename="help.py" line="71"/>
+        <source>Help reader plugin</source>
+        <translation>Четец на помощ</translation>
+    </message>
+    <message>
+        <location filename="help.py" line="84"/>
+        <source>Help</source>
+        <translation>Помощ</translation>
+    </message>
 </context>
 <context>
     <name>Widget</name>
@@ -510,6 +520,11 @@
         <location filename="storage.py" line="173"/>
         <source>New name:</source>
         <translation>Ново име:</translation>
+    </message>
+    <message>
+        <location filename="help.py" line="51"/>
+        <source>Help page not found: %s</source>
+        <translation>Страница за помощ не е намерена: %s</translation>
     </message>
 </context>
 </TS>
