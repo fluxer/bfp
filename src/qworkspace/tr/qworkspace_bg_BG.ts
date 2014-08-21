@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="bg_BG" sourcelanguage="">
+<!DOCTYPE TS>
+<TS version="2.0" language="bg_BG">
 <context>
     <name>Plugin</name>
     <message>
@@ -98,12 +99,12 @@
         <translation>Архив</translation>
     </message>
     <message>
-        <location filename="network.py" line="284"/>
+        <location filename="network.py" line="313"/>
         <source>Network manager plugin</source>
         <translation>Плъгин за управление на мрежата</translation>
     </message>
     <message>
-        <location filename="network.py" line="297"/>
+        <location filename="network.py" line="326"/>
         <source>Network</source>
         <translation>Мрежа</translation>
     </message>
@@ -146,6 +147,16 @@
         <location filename="calendar.py" line="41"/>
         <source>Calendar</source>
         <translation>Календар</translation>
+    </message>
+    <message>
+        <location filename="download.py" line="39"/>
+        <source>Download manager plugin</source>
+        <translation>Плъгин за управление на изтеглянията</translation>
+    </message>
+    <message>
+        <location filename="download.py" line="52"/>
+        <source>Download</source>
+        <translation>Изтегляне</translation>
     </message>
 </context>
 <context>
@@ -461,9 +472,24 @@
         <translation>Преглед като лист</translation>
     </message>
     <message>
-        <location filename="network.py" line="210"/>
+        <location filename="network.py" line="231"/>
         <source>Details</source>
         <translation>Детайли</translation>
+    </message>
+    <message>
+        <location filename="network.py" line="95"/>
+        <source>Information</source>
+        <translation>Информация</translation>
+    </message>
+    <message>
+        <location filename="network.py" line="89"/>
+        <source>Connected to: %s</source>
+        <translation>Свързан към: %s</translation>
+    </message>
+    <message>
+        <location filename="network.py" line="95"/>
+        <source>Disconnected from: %s</source>
+        <translation>Изключен от: %s</translation>
     </message>
 </context>
 </TS>

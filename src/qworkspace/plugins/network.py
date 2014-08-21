@@ -148,7 +148,7 @@ class Widget(QtGui.QWidget):
                     self.disconnect(r[0])
 
     def scan_ethernet(self):
-        # self.dbus_call('net.connman', '/net/connman/technology/ethernet', 'net.connman.Technology', 'Scan')
+        # self.dbus_call('/net/connman/technology/ethernet', 'net.connman.Technology', 'Scan')
 
         # get managed services
         rdata = self.dbus_call('/', 'net.connman.Manager', 'GetServices')
