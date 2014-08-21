@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="bg_BG" sourcelanguage="">
+<!DOCTYPE TS>
+<TS version="2.0" language="bg_BG">
 <context>
     <name>Plugin</name>
     <message>
@@ -148,12 +149,12 @@
         <translation>Календар</translation>
     </message>
     <message>
-        <location filename="download.py" line="78"/>
+        <location filename="download.py" line="85"/>
         <source>Download manager plugin</source>
         <translation>Плъгин за управление на изтеглянията</translation>
     </message>
     <message>
-        <location filename="download.py" line="93"/>
+        <location filename="download.py" line="100"/>
         <source>Download</source>
         <translation>Изтегляне</translation>
     </message>
@@ -401,7 +402,7 @@
         <translation>Търси</translation>
     </message>
     <message>
-        <location filename="download.py" line="67"/>
+        <location filename="download.py" line="74"/>
         <source>Info</source>
         <translation>Инфо</translation>
     </message>
@@ -431,12 +432,12 @@
         <translation>Изобрайжение (*.png *.jpg *.jpeg *.svg);;Всички (*)</translation>
     </message>
     <message>
-        <location filename="download.py" line="64"/>
+        <location filename="download.py" line="71"/>
         <source>Download of &lt;b&gt;%s&lt;/b&gt; failed.</source>
         <translation>Свалянето на &lt;b&gt;%s&lt;/b&gt; се провали.</translation>
     </message>
     <message>
-        <location filename="download.py" line="67"/>
+        <location filename="download.py" line="74"/>
         <source>Download of &lt;b&gt;%s&lt;/b&gt; complete.</source>
         <translation>Свалянето на &lt;b&gt;%s&lt;/b&gt; завърши.</translation>
     </message>
@@ -491,14 +492,14 @@
         <translation>Изключен от: %s</translation>
     </message>
     <message>
-        <location filename="download.py" line="42"/>
+        <location filename="download.py" line="38"/>
         <source>URL</source>
-        <translation type="unfinished"></translation>
+        <translation>УРЛ</translation>
     </message>
     <message>
-        <location filename="download.py" line="42"/>
+        <location filename="download.py" line="38"/>
         <source>URL:</source>
-        <translation type="unfinished"></translation>
+        <translation>УРЛ:</translation>
     </message>
 </context>
 </TS>

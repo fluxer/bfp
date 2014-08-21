@@ -15,18 +15,17 @@ class Widget(QtGui.QWidget):
 
         self.addButton = QtGui.QPushButton(general.get_icon('list-add'), '')
         self.addButton.clicked.connect(self.download_add)
-        self.startButton = QtGui.QPushButton(general.get_icon('media-playback-start'), '')
-        self.stopButton = QtGui.QPushButton(general.get_icon('process-stop'), '')
+        self.abortButton = QtGui.QPushButton(general.get_icon('edit-delete'), '')
+        self.abortButton.clicked.connect(self.download_abort)
+        self.abortButton.setEnabled(False)
         self.secondLayout = QtGui.QHBoxLayout()
         self.secondLayout.addWidget(self.addButton)
-        self.secondLayout.addWidget(self.removeButton)
-        self.secondLayout.addWidget(self.startButton)
-        self.secondLayout.addWidget(self.stopButton)
+        self.secondLayout.addWidget(self.abortButton)
         self.mainLayout = QtGui.QGridLayout()
         self.downloadLabel = QtGui.QLabel()
         self.progressBar = QtGui.QProgressBar()
         self.mainLayout.addLayout(self.secondLayout, 0, 0)
-        self.mainLayout.addWidget(self.downloadView)
+        self.mainLayout.addWidget(self.downloadLabel)
         self.mainLayout.addWidget(self.progressBar)
         self.setLayout(self.mainLayout)
 
@@ -41,26 +40,34 @@ class Widget(QtGui.QWidget):
         if surl:
             self.download(surl)
 
+    def download_abort(self):
+        self.reply.abort()
+        self.downloadLabel.setText('')
+        self.progressBar.setValue(0)
+        self.abortButton.setEnabled(False)
+
     def download(self, surl):
-        self.download_counts+=1
-        number = self.download_counts
-        request = QtNetwork.QNetworkRequest(QtCore.QUrl(surl))
-        reply = self.nam.get(request)
-        reply.downloadProgress.connect(self.download_progress)
-        reply.readyRead.connect(lambda: self.download_read(reply))
-        reply.finished.connect(lambda: self.download_finished(reply))
+        self.request = QtNetwork.QNetworkRequest(QtCore.QUrl(surl))
+        self.reply = self.nam.get(self.request)
+        self.reply.downloadProgress.connect(self.download_progress)
+        self.reply.readyRead.connect(self.download_read)
+        self.reply.finished.connect(self.download_finished)
+        self.downloadLabel.setText(surl)
+        self.progressBar.setValue(0)
+        self.abortButton.setEnabled(True)
 
     def download_progress(self, ireceived, itotal):
-        print(ireceived, itotal)
+        self.progressBar.setMaximum(itotal)
+        self.progressBar.setValue(ireceived)
 
-    def download_read(self, reply):
-        surl = str(reply.url().toString())
+    def download_read(self):
+        surl = str(self.reply.url().toString())
         sfile = self.download_path + '/' + os.path.basename(surl)
-        misc.file_write(sfile, reply.readAll(), 'a')
+        misc.file_write(sfile, self.reply.readAll(), 'a')
 
-    def download_finished(self, reply):
-        surl = reply.url().toString()
-        if reply.error():
+    def download_finished(self):
+        surl = self.reply.url().toString()
+        if self.reply.error():
             QtGui.QMessageBox.critical(self, self.tr('Critical'), \
                 self.tr('Download of <b>%s</b> failed.') % surl)
         else:
