@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="bg_BG" sourcelanguage="">
+<!DOCTYPE TS>
+<TS version="2.0" language="bg_BG">
 <context>
     <name>Plugin</name>
     <message>
@@ -148,12 +149,12 @@
         <translation>Календар</translation>
     </message>
     <message>
-        <location filename="download.py" line="85"/>
+        <location filename="download.py" line="100"/>
         <source>Download manager plugin</source>
         <translation>Плъгин за управление на изтеглянията</translation>
     </message>
     <message>
-        <location filename="download.py" line="100"/>
+        <location filename="download.py" line="115"/>
         <source>Download</source>
         <translation>Изтегляне</translation>
     </message>
@@ -406,7 +407,7 @@
         <translation>Търси</translation>
     </message>
     <message>
-        <location filename="download.py" line="74"/>
+        <location filename="download.py" line="87"/>
         <source>Info</source>
         <translation>Инфо</translation>
     </message>
@@ -436,12 +437,12 @@
         <translation>Изобрайжение (*.png *.jpg *.jpeg *.svg);;Всички (*)</translation>
     </message>
     <message>
-        <location filename="download.py" line="71"/>
+        <location filename="download.py" line="84"/>
         <source>Download of &lt;b&gt;%s&lt;/b&gt; failed.</source>
         <translation>Свалянето на &lt;b&gt;%s&lt;/b&gt; се провали.</translation>
     </message>
     <message>
-        <location filename="download.py" line="74"/>
+        <location filename="download.py" line="87"/>
         <source>Download of &lt;b&gt;%s&lt;/b&gt; complete.</source>
         <translation>Свалянето на &lt;b&gt;%s&lt;/b&gt; завърши.</translation>
     </message>
@@ -496,12 +497,12 @@
         <translation>Изключен от: %s</translation>
     </message>
     <message>
-        <location filename="download.py" line="38"/>
+        <location filename="download.py" line="41"/>
         <source>URL</source>
         <translation>УРЛ</translation>
     </message>
     <message>
-        <location filename="download.py" line="38"/>
+        <location filename="download.py" line="41"/>
         <source>URL:</source>
         <translation>УРЛ:</translation>
     </message>
@@ -519,6 +520,16 @@
         <location filename="help.py" line="51"/>
         <source>Help page not found: %s</source>
         <translation>Страница за помощ не е намерена: %s</translation>
+    </message>
+    <message>
+        <location filename="download.py" line="48"/>
+        <source>Question</source>
+        <translation>Въпрос</translation>
+    </message>
+    <message>
+        <location filename="download.py" line="48"/>
+        <source>Download is in progress, do you want to abort it?</source>
+        <translation>Извършва се изтегляне, сигурнили сте че искате да го прекратите?</translation>
     </message>
 </context>
 </TS>

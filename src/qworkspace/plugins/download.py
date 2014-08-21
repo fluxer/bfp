@@ -31,6 +31,9 @@ class Widget(QtGui.QWidget):
 
         self.nam = QtNetwork.QNetworkAccessManager()
         self.download_path = QtCore.QDir.homePath()
+        self.request = None
+        self.reply = None
+
         if self.spath:
             self.download(spath)
 
@@ -41,9 +44,17 @@ class Widget(QtGui.QWidget):
             self.download(surl)
 
     def download_abort(self):
+        if self.reply:
+            reply = QtGui.QMessageBox.question(self, self.tr('Question'), \
+                self.tr('Download is in progress, do you want to abort it?'),
+                QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
+            if not reply == QtGui.QMessageBox.Yes:
+                return
+
         self.reply.abort()
         self.downloadLabel.setText('')
         self.progressBar.setValue(0)
+        self.addButton.setEnabled(True)
         self.abortButton.setEnabled(False)
 
     def download(self, surl):
@@ -54,6 +65,7 @@ class Widget(QtGui.QWidget):
         self.reply.finished.connect(self.download_finished)
         self.downloadLabel.setText(surl)
         self.progressBar.setValue(0)
+        self.addButton.setEnabled(False)
         self.abortButton.setEnabled(True)
 
     def download_progress(self, ireceived, itotal):
@@ -67,12 +79,15 @@ class Widget(QtGui.QWidget):
 
     def download_finished(self):
         surl = self.reply.url().toString()
+        # FIXME: use notification
         if self.reply.error():
             QtGui.QMessageBox.critical(self, self.tr('Critical'), \
                 self.tr('Download of <b>%s</b> failed.') % surl)
         else:
             QtGui.QMessageBox.information(self, self.tr('Info'), \
                 self.tr('Download of <b>%s</b> complete.') % surl)
+        self.request = None
+        self.reply = None
 
 
 class Plugin(QtCore.QObject):
