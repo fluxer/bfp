@@ -19,6 +19,7 @@ http://www.linuxfromscratch.org/blfs/view/systemd/postlfs/initramfs.html
  * Implement caches update plugin?
  * Implement XKB plugin
  * Implement chat plugin
+ * Implement Steam plugin (https://developer.valvesoftware.com/wiki/SteamCMD)
  * Implement more info into recent paths and display it with tooltip:
   - full path (done)
   - time accessed
