@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="bg_BG">
+<!DOCTYPE TS><TS version="2.0" language="bg_BG" sourcelanguage="">
 <context>
     <name>Plugin</name>
     <message>
@@ -84,7 +83,7 @@
         <translation>Терминал</translation>
     </message>
     <message>
-        <location filename="www.py" line="361"/>
+        <location filename="www.py" line="346"/>
         <source>WWW</source>
         <translation>УУУ</translation>
     </message>
@@ -124,7 +123,7 @@
         <translation>Плъгин за управление на настройките</translation>
     </message>
     <message>
-        <location filename="www.py" line="348"/>
+        <location filename="www.py" line="333"/>
         <source>World Wide Web browser plugin</source>
         <translation>Плъгин за разглеждане на World Wide Web</translation>
     </message>
@@ -149,12 +148,12 @@
         <translation>Календар</translation>
     </message>
     <message>
-        <location filename="download.py" line="39"/>
+        <location filename="download.py" line="78"/>
         <source>Download manager plugin</source>
         <translation>Плъгин за управление на изтеглянията</translation>
     </message>
     <message>
-        <location filename="download.py" line="52"/>
+        <location filename="download.py" line="93"/>
         <source>Download</source>
         <translation>Изтегляне</translation>
     </message>
@@ -202,7 +201,7 @@
         <translation>Намери</translation>
     </message>
     <message>
-        <location filename="www.py" line="315"/>
+        <location filename="package.py" line="181"/>
         <source>Critical</source>
         <translation>Критично</translation>
     </message>
@@ -402,22 +401,22 @@
         <translation>Търси</translation>
     </message>
     <message>
-        <location filename="www.py" line="318"/>
+        <location filename="download.py" line="67"/>
         <source>Info</source>
         <translation>Инфо</translation>
     </message>
     <message>
-        <location filename="www.py" line="334"/>
+        <location filename="www.py" line="319"/>
         <source>Back</source>
         <translation>Назад</translation>
     </message>
     <message>
-        <location filename="www.py" line="335"/>
+        <location filename="www.py" line="320"/>
         <source>Next</source>
         <translation>Следващ</translation>
     </message>
     <message>
-        <location filename="www.py" line="336"/>
+        <location filename="www.py" line="321"/>
         <source>Reload</source>
         <translation>Презареди</translation>
     </message>
@@ -432,12 +431,12 @@
         <translation>Изобрайжение (*.png *.jpg *.jpeg *.svg);;Всички (*)</translation>
     </message>
     <message>
-        <location filename="www.py" line="315"/>
+        <location filename="download.py" line="64"/>
         <source>Download of &lt;b&gt;%s&lt;/b&gt; failed.</source>
         <translation>Свалянето на &lt;b&gt;%s&lt;/b&gt; се провали.</translation>
     </message>
     <message>
-        <location filename="www.py" line="318"/>
+        <location filename="download.py" line="67"/>
         <source>Download of &lt;b&gt;%s&lt;/b&gt; complete.</source>
         <translation>Свалянето на &lt;b&gt;%s&lt;/b&gt; завърши.</translation>
     </message>
@@ -490,6 +489,16 @@
         <location filename="network.py" line="95"/>
         <source>Disconnected from: %s</source>
         <translation>Изключен от: %s</translation>
+    </message>
+    <message>
+        <location filename="download.py" line="42"/>
+        <source>URL</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="download.py" line="42"/>
+        <source>URL:</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

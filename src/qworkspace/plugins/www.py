@@ -300,22 +300,7 @@ class Widget(QtGui.QWidget):
 
     def unsupported(self, reply):
         ''' Download a unsupported URL '''
-        reply.readyRead.connect(lambda reply=reply: self.download_start(reply))
-        reply.finished.connect(lambda reply=reply: self.download_finished(reply))
-
-    def download_start(self, reply):
-        surl = str(reply.url().toString())
-        sfile = home_path + '/' + os.path.basename(surl)
-        misc.file_write(sfile, reply.readAll(), 'a')
-
-    def download_finished(self, reply):
-        surl = reply.url().toString()
-        if reply.error():
-            QtGui.QMessageBox.critical(self, self.tr('Critical'), \
-                self.tr('Download of <b>%s</b> failed.') % surl)
-        else:
-            QtGui.QMessageBox.information(self, self.tr('Info'), \
-                self.tr('Download of <b>%s</b> complete.') % surl)
+        self.parent.plugins.plugin_open_with('download', reply.url().toString())
 
     def bookmark_open(self, url):
         self.urlBox.setEditText(url)
