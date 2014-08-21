@@ -16,12 +16,12 @@ check:
 install:
 	$(MAKE) -C doc install
 	$(MAKE) -C etc install
+	$(MAKE) -C icons install
 	$(MAKE) -C help install
 	$(MAKE) -C misc install
 	$(MAKE) -C scripts install
 	$(MAKE) -C src/cparted install
 	$(MAKE) -C src/initfs install
-	$(MAKE) -C src/icons install
 	$(MAKE) -C src/libs install
 	$(MAKE) -C src/spm install
 	$(MAKE) -C src/qsession install
@@ -30,12 +30,12 @@ install:
 uninstall:
 	$(MAKE) -C doc uninstall
 	$(MAKE) -C etc uninstall
+	$(MAKE) -C icons uninstall
 	$(MAKE) -C help uninstall
 	$(MAKE) -C misc uninstall
 	$(MAKE) -C scripts uninstall
 	$(MAKE) -C src/cparted  uninstall
 	$(MAKE) -C src/initfs uninstall
-	$(MAKE) -C src/icons uninstall
 	$(MAKE) -C src/libs uninstall
 	$(MAKE) -C src/spm uninstall
 	$(MAKE) -C src/qsession uninstall
@@ -43,6 +43,7 @@ uninstall:
 
 clean:
 	$(MAKE) -C doc clean
+	$(MAKE) -C help clean
 	$(MAKE) -C src/cparted clean
 	$(MAKE) -C src/libs clean
 	$(MAKE) -C src/initfs clean
