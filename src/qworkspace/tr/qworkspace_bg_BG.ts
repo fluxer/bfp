@@ -34,7 +34,7 @@
         <translation>Изображение</translation>
     </message>
     <message>
-        <location filename="multimedia.py" line="59"/>
+        <location filename="multimedia.py" line="94"/>
         <source>Multimedia</source>
         <translation>Мултимедиа</translation>
     </message>
@@ -114,7 +114,7 @@
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="multimedia.py" line="36"/>
+        <location filename="multimedia.py" line="71"/>
         <source>Multimedia plugin</source>
         <translation>Мултимедиа плъгин</translation>
     </message>
@@ -500,6 +500,11 @@
         <location filename="download.py" line="38"/>
         <source>URL:</source>
         <translation>УРЛ:</translation>
+    </message>
+    <message>
+        <location filename="multimedia.py" line="37"/>
+        <source>Media (*.wav *.mpeg *.mkv *.avi *.flv *.3gp *.mp4);;All (*)</source>
+        <translation>Медиа (*.wav *.mpeg *.mkv *.avi *.flv *.3gp *.mp4);;Всички (*)</translation>
     </message>
 </context>
 </TS>

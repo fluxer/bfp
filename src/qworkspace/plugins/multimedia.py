@@ -13,18 +13,53 @@ class Widget(QtGui.QWidget):
         self.spath = spath
         self.name = 'multimedia'
 
-        self.container = QtGui.QX11EmbedWidget(self)
+        self.secondLayout = QtGui.QHBoxLayout()
+        self.openButton = QtGui.QPushButton(general.get_icon('document-open'), '')
+        self.openButton.clicked.connect(self.open_file)
+        self.outputBox = QtGui.QComboBox()
+        self.outputBox.addItems(('opengl', 'vdpau', 'x11'))
+        self.outputBox.currentIndexChanged.connect(self.mpv_restart)
+        self.secondLayout.addWidget(self.openButton)
+        self.secondLayout.addWidget(self.outputBox)
         self.mainLayout = QtGui.QGridLayout()
+        self.container = QtGui.QX11EmbedWidget()
+        self.mainLayout.addLayout(self.secondLayout, 0, 0)
         self.mainLayout.addWidget(self.container)
         self.setLayout(self.mainLayout)
 
+        self.process = None
+        self.mpv = misc.whereis('mpv')
+
+        if self.spath:
+            self.mpv_start(self.spath)
+
+    def open_file(self):
+        sfile = QtGui.QFileDialog.getOpenFileName(self, self.tr('Open'), \
+            self.spath, self.tr('Media (*.wav *.mpeg *.mkv *.avi *.flv *.3gp *.mp4);;All (*)'))
+        if sfile:
+            self.spath = sfile
+            self.mpv_restart()
+
+    def mpv_start(self, spath=None):
+        arguments = ['--wid', str(self.container.winId()), \
+            '-vo', str(self.outputBox.currentText())]
+        if self.spath:
+            arguments.append(self.spath)
+        elif spath:
+            arguments.append(spath)
+
         self.process = QtCore.QProcess(self.container)
-        args = ['--wid', str(self.container.winId()), '-vo', 'x11']
-        if spath:
-            args.append(spath)
-        self.process.start(misc.whereis('mpv'), args)
+        self.process.start(self.mpv, arguments)
         self.process.waitForStarted()
 
+    def mpv_restart(self):
+        self.mpv_stop()
+        self.mpv_start()
+
+    def mpv_stop(self):
+        if self.process:
+            self.process.terminate()
+            self.process.close()
 
 class Plugin(QtCore.QObject):
     ''' Plugin handler '''
@@ -65,8 +100,8 @@ class Plugin(QtCore.QObject):
             index = self.parent.tabWidget.currentIndex()
         if self.widget:
             # self.widget.container.discardClient()
-            self.widget.process.terminate()
-            self.widget.process.close()
+            if self.widget.process:
+                self.widget.mpv_stop()
             self.widget.deleteLater()
             self.widget = None
             self.parent.tabWidget.removeTab(index)
