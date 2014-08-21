@@ -1,5 +1,14 @@
-Various projects that will not suite everyone. This includes libraries, tools,
-desktop applications, coresponding documentation and configuration files.
+## WARNING ##
+
+This software is not complete and as such it does not represent the final
+product. During the state of its development and stabilization major changes
+may be done without warning. It has known and unknown issues and should be
+used with caution. You have been warned!
+
+## INFO ##
+
+This collection of software includes libraries, tools, desktop applications,
+coresponding documentation and configuration files.
 
 They are written to suite my own needs but do not hesitate to join me and
 improve the software if you like it, find it useful or something else. Note that
@@ -13,3 +22,6 @@ into each other with only one thing in mind - KISS! If this does not suit you -
 fine. Priorities of the projects - 1) speed, 2) stability, 3) security. If you
 don't like it - fine!
 
+## CONTACT ##
+
+E-Mail: `xakepa10@gmail.com`
