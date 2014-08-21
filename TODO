@@ -14,9 +14,9 @@ http://www.linuxfromscratch.org/blfs/view/systemd/postlfs/initramfs.html
 ## QWORKSPACE ##
  * Complete archive manager plugins
  * Improve audio mixer plugin
+ * Improve download manager plugin (torrents support)
  * Implement Applications and Notifiaction API
  * Implement caches update plugin?
- * Implement download manager plugin (including torrents support)
  * Implement XKB plugin
  * Implement chat plugin
  * Implement more info into recent paths and display it with tooltip:
