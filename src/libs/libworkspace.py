@@ -102,6 +102,7 @@ class Plugins(object):
                         self.plugins_all.append(sname)
             else:
                 message.warning('Plugins path does not exist', spath)
+        self.plugins_all.sort()
         self.mime_settings = Settings('qmime')
         self.recent_settings = Settings('qrecent')
 
@@ -308,7 +309,7 @@ class Plugins(object):
 
     def mime_plugins(self):
         ''' Get all programs '''
-        return sorted(Plugins(None).plugins_all)
+        return Plugins(None).plugins_all
 
     def mime_register(self, smime, splugin):
         ''' Register MIME with plugin '''

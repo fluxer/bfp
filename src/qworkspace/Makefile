@@ -25,7 +25,7 @@ all: bump clean
 	$(NUITKA) --module plugins/www.py
 	$(STRIP) main.exe archive.so calendar.so download.so editor.so \
 		help.so image.so mixer.so multimedia.so network.so package.so \
-		plugins quit.so screenshot.so settings.so storage.so \
+		plugins.so quit.so screenshot.so settings.so storage.so \
 		terminal.so www.so
 
 install:

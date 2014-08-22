@@ -20,7 +20,7 @@ class Widget(QtGui.QWidget):
         self.pluginsTable.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         irow = 0
         # FIXME: this works only when all plugins are loaded
-        for plugin in sorted(self.parent.plugins.plugins_all):
+        for plugin in self.parent.plugins.plugins_all:
             pobject = self.parent.plugins.plugin_object(plugin)
             self.pluginsTable.setRowCount(irow+1)
             self.pluginsTable.setItem(irow, 0, QtGui.QTableWidgetItem(pobject.name))
