@@ -23,12 +23,12 @@
         <translation>Редактор</translation>
     </message>
     <message>
-        <location filename="image.py" line="122"/>
+        <location filename="image.py" line="124"/>
         <source>Image viewer plugin</source>
         <translation>Плъгин за преглед на изображения</translation>
     </message>
     <message>
-        <location filename="image.py" line="141"/>
+        <location filename="image.py" line="143"/>
         <source>Image</source>
         <translation>Изображение</translation>
     </message>
@@ -98,12 +98,12 @@
         <translation>Архив</translation>
     </message>
     <message>
-        <location filename="network.py" line="314"/>
+        <location filename="network.py" line="316"/>
         <source>Network manager plugin</source>
         <translation>Плъгин за управление на мрежата</translation>
     </message>
     <message>
-        <location filename="network.py" line="327"/>
+        <location filename="network.py" line="329"/>
         <source>Network</source>
         <translation>Мрежа</translation>
     </message>
@@ -166,6 +166,16 @@
         <location filename="help.py" line="86"/>
         <source>Help</source>
         <translation>Помощ</translation>
+    </message>
+    <message>
+        <location filename="plugins.py" line="42"/>
+        <source>Plugins manager plugin</source>
+        <translation>Плъгин за управление на плъгините</translation>
+    </message>
+    <message>
+        <location filename="plugins.py" line="55"/>
+        <source>Plugins</source>
+        <translation>Плъгини</translation>
     </message>
 </context>
 <context>
@@ -471,22 +481,22 @@
         <translation>Преглед като лист</translation>
     </message>
     <message>
-        <location filename="network.py" line="232"/>
+        <location filename="network.py" line="234"/>
         <source>Details</source>
         <translation>Детайли</translation>
     </message>
     <message>
-        <location filename="network.py" line="96"/>
+        <location filename="network.py" line="98"/>
         <source>Information</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="network.py" line="90"/>
+        <location filename="network.py" line="92"/>
         <source>Connected to: %s</source>
         <translation>Свързан към: %s</translation>
     </message>
     <message>
-        <location filename="network.py" line="96"/>
+        <location filename="network.py" line="98"/>
         <source>Disconnected from: %s</source>
         <translation>Изключен от: %s</translation>
     </message>

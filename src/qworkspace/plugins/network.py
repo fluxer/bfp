@@ -22,9 +22,11 @@ class Widget(QtGui.QWidget):
         self.EthernetList = QtGui.QTableWidget()
         self.EthernetList.setColumnCount(2)
         self.EthernetList.setHorizontalHeaderLabels(('Name', 'State'))
+        self.EthernetList.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.WiFiList = QtGui.QTableWidget()
         self.WiFiList.setColumnCount(3)
         self.WiFiList.setHorizontalHeaderLabels(('Name', 'Strength', 'Security'))
+        self.WiFiList.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         self.tabWidget.insertTab(0, self.EthernetList, 'Ethernet')
         self.tabWidget.insertTab(1, self.WiFiList, 'WiFi')
         self.secondLayout = QtGui.QHBoxLayout()
@@ -154,17 +156,17 @@ class Widget(QtGui.QWidget):
         # get managed services
         rdata = self.dbus_call('/', 'net.connman.Manager', 'GetServices')
         if rdata:
-            srow = 1
+            irow = 0
             self.EthernetList.clearContents()
             for r in rdata:
                 data = r[1]
                 if data.get('Type') == 'ethernet':
                     name = data.get('Name')
                     state = data.get('State')
-                    self.EthernetList.setRowCount(srow)
-                    self.EthernetList.setItem(srow-1, 0, QtGui.QTableWidgetItem(name))
-                    self.EthernetList.setItem(srow-1, 1, QtGui.QTableWidgetItem(state))
-                    srow += 1
+                    self.EthernetList.setRowCount(irow+1)
+                    self.EthernetList.setItem(irow, 0, QtGui.QTableWidgetItem(name))
+                    self.EthernetList.setItem(irow, 1, QtGui.QTableWidgetItem(state))
+                    irow += 1
         else:
             self.tabWidget.setTabEnabled(0, False)
 

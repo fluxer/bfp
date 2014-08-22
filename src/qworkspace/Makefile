@@ -16,6 +16,7 @@ all: bump clean
 	$(NUITKA) --module plugins/multimedia.py
 	$(NUITKA) --module plugins/network.py
 	$(NUITKA) --module plugins/package.py
+	$(NUITKA) --module plugins/plugins.py
 	$(NUITKA) --module plugins/quit.py
 	$(NUITKA) --module plugins/screenshot.py
 	$(NUITKA) --module plugins/settings.py
@@ -24,7 +25,8 @@ all: bump clean
 	$(NUITKA) --module plugins/www.py
 	$(STRIP) main.exe archive.so calendar.so download.so editor.so \
 		help.so image.so mixer.so multimedia.so network.so package.so \
-		quit.so screenshot.so settings.so storage.so terminal.so www.so
+		plugins quit.so screenshot.so settings.so storage.so \
+		terminal.so www.so
 
 install:
 	$(INSTALL) -dm755 $(DESTDIR)$(BINDIR)
@@ -41,6 +43,7 @@ install:
 	$(INSTALL) -m644 multimedia.so $(DESTDIR)/etc/qworkspace/plugins/
 	$(INSTALL) -m644 network.so $(DESTDIR)/etc/qworkspace/plugins/
 	$(INSTALL) -m644 package.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(INSTALL) -m644 plugins.so $(DESTDIR)/etc/qworkspace/plugins/
 	$(INSTALL) -m644 quit.so $(DESTDIR)/etc/qworkspace/plugins/
 	$(INSTALL) -m644 screenshot.so $(DESTDIR)/etc/qworkspace/plugins/
 	$(INSTALL) -m644 settings.so $(DESTDIR)/etc/qworkspace/plugins/
