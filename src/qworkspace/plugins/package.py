@@ -46,6 +46,7 @@ class Widget(QtGui.QWidget):
         self.targetsFilter = QtGui.QComboBox()
         self.targetsFilter.addItems((self.tr('all'), self.tr('local'), \
             self.tr('unneeded'), self.tr('candidates')))
+        self.targetsFilter.addItems(database.remote_aliases())
         self.targetsFilter.currentIndexChanged.connect(self.refresh_targets)
         self.mainLayout.addLayout(self.secondLayout, 0, 0)
         self.secondLayout.addWidget(self.syncButton)
