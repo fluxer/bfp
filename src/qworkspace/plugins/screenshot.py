@@ -11,8 +11,9 @@ class Widget(QtGui.QWidget):
     def __init__(self, parent, spath=None):
         super(Widget, self).__init__()
         self.parent = parent
-        self.spath = spath # FIXME: use for taking screenshot immidiatly
+        self.spath = spath
         self.name = 'screenshot'
+
         self.delayBox = QtGui.QSpinBox()
         self.takeButton = QtGui.QPushButton(general.get_icon('image-x-generic'), '')
         self.takeButton.clicked.connect(self.take_screenshot)
@@ -21,20 +22,18 @@ class Widget(QtGui.QWidget):
         self.mainLayout.addWidget(self.takeButton)
         self.setLayout(self.mainLayout)
 
-    def get_filename(self):
-        sfile = QtGui.QFileDialog.getSaveFileName(self, self.tr('Save'), \
-            'screenshot.png', self.tr('Image (*.png *.jpg *.jpeg *.svg);;All (*)'))
-        if sfile:
-            return str(sfile)
-        return None
+        if self.spath:
+            self.take_screenshot()
 
     def get_extension(self, sfile):
+        ''' Get extension of file, fallback to png '''
         ext = sfile.split('.')[-1]
         if ext == sfile:
             return 'png'
         return ext
 
     def take_screenshot(self):
+        ''' Smart screenshot taking method respecting delay '''
         delay = self.delayBox.value()
         if delay > 0:
             QtCore.QTimer.singleShot(delay * 1000, self.capture_screen)
@@ -42,9 +41,16 @@ class Widget(QtGui.QWidget):
             self.capture_screen()
 
     def capture_screen(self):
+        ''' Actual screen capture '''
         p = QtGui.QPixmap.grabWindow(self.parent.app.desktop().winId())
-        sfile = self.get_filename()
+        if self.spath:
+            sfile = self.spath
+        else:
+            sfile = QtGui.QFileDialog.getSaveFileName(self, self.tr('Save'), \
+                'screenshot.png', \
+                self.tr('Image (*.png *.jpg *.jpeg *.svg);;All (*)'))
         if sfile:
+            sfile = str(sfile)
             extension = self.get_extension(sfile)
             if not sfile.endswith(extension):
                 sfile = sfile + '.' + extension

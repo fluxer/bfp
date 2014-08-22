@@ -58,10 +58,4 @@ changelog:
 dist:
 	$(GIT) archive HEAD --prefix=bfp-$(VERSION)/ | $(XZ) > bfp-$(VERSION).tar.xz
 
-stat:
-	cloc $(shell $(FIND) src/ -name '*.py') scripts/*.sh
-
-lint:
-	$(PYLINT) $(shell $(FIND) src/ -name '*.py') | $(GREP) -v -e 'Line too long'
-
-.PHONY: all check install uninstall clean changelog dist stat lint
+.PHONY: all check install uninstall clean changelog dist

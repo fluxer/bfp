@@ -58,7 +58,7 @@ class Widget(QtGui.QWidget):
         self.mainLayout.addWidget(self.targetsList)
         self.mainLayout.addWidget(self.infoTab)
         self.progressBar = QtGui.QProgressBar()
-        self.progressBar.setRange(0,1)
+        self.progressBar.setRange(0, 1)
         self.progressBar.hide()
         self.mainLayout.addWidget(self.progressBar)
         self.setLayout(self.mainLayout)
@@ -66,6 +66,7 @@ class Widget(QtGui.QWidget):
         self.refresh_all()
 
     def refresh_targets(self):
+        ''' Refresh targets list view '''
         self.targetsList.clear()
         current = str(self.targetsFilter.currentText())
         if current == 'all':
@@ -91,6 +92,7 @@ class Widget(QtGui.QWidget):
         self.targetsList.setCurrentRow(0)
 
     def refresh_buttons(self):
+        ''' Refresh buttons depending on selected target, also metadata and footprint '''
         self.buildButton.setEnabled(False)
         self.removeButton.setEnabled(False)
         item = self.targetsList.currentItem()
@@ -119,11 +121,13 @@ class Widget(QtGui.QWidget):
         self.buildButton.setEnabled(True)
 
     def refresh_all(self):
+        ''' Refresh both targets view and buttons '''
         self.refresh_targets()
         self.refresh_buttons()
 
     def worker_started(self):
-        self.progressBar.setRange(0,0)
+        ''' Worker started slot '''
+        self.progressBar.setRange(0, 0)
         self.progressBar.show()
         self.syncButton.setEnabled(False)
         self.updateButton.setEnabled(False)
@@ -131,19 +135,22 @@ class Widget(QtGui.QWidget):
         self.removeButton.setEnabled(False)
 
     def worker_stopped(self):
-        self.progressBar.setRange(0,1)
+        ''' Worker stopped slot '''
+        self.progressBar.setRange(0, 1)
         self.progressBar.hide()
         self.syncButton.setEnabled(True)
         self.updateButton.setEnabled(True)
         self.refresh_all()
 
     def worker(self, func):
+        ''' Main worker wrapper '''
         self.thread = Thread(self, func)
         self.thread.finished.connect(self.worker_stopped)
         self.worker_started()
         self.thread.start()
 
     def targets_sync(self):
+        ''' Sync repositories '''
         try:
             m = libspm.Repo(libspm.REPOSITORIES, True, True, False)
             self.worker(m.main)
@@ -151,6 +158,7 @@ class Widget(QtGui.QWidget):
             QtGui.QMessageBox.critical(self, self.tr('Critical'), str(detail))
 
     def targets_update(self):
+        ''' Update all installed targets '''
         try:
             targets = database.local_all(basename=True)
             m = libspm.Source(targets, do_clean=True, do_prepare=True,
@@ -161,6 +169,7 @@ class Widget(QtGui.QWidget):
             QtGui.QMessageBox.critical(self, self.tr('Critical'), str(detail))
 
     def targets_build(self):
+        ''' Build a target '''
         try:
             targets = [str(self.targetsList.currentItem().text())]
             m = libspm.Source(targets, do_clean=True, do_prepare=True,
@@ -171,6 +180,7 @@ class Widget(QtGui.QWidget):
             QtGui.QMessageBox.critical(self, self.tr('Critical'), str(detail))
 
     def targets_remove(self):
+        ''' Remove a target '''
         try:
             targets = [str(self.targetsList.currentItem().text())]
             m = libspm.Source(targets, do_clean=False, do_prepare=False,

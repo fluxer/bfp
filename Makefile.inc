@@ -39,3 +39,12 @@ LRELEASE = lrelease
 NUITKA = $(PYTHON) ../../nuitka/bin/nuitka --recurse-not-to=PyQt4,parted,Xlib \
 	--python-version=$(PYTHON_VERSION)
 PYLINT = pylint
+
+
+stat:
+	cloc $(shell $(FIND) src/ -name '*.py' -name '*.sh')
+
+lint:
+	$(PYLINT) $(shell $(FIND) -name '*.py') | $(GREP) -v -e 'Line too long'
+
+.PHONY: stat lint

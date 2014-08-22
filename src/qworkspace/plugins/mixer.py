@@ -1,9 +1,9 @@
 #!/bin/pyhton2
 
 from PyQt4 import QtCore, QtGui
+import pyalsa.alsamixer as alsamixer
 import libworkspace
 general = libworkspace.General()
-import pyalsa.alsamixer as alsamixer
 
 class Widget(QtGui.QWidget):
     ''' Tab widget '''
@@ -30,11 +30,13 @@ class Widget(QtGui.QWidget):
             self.set_volume(self.spath)
 
     def set_volume(self, ivalue):
+        ''' Actually set the volume '''
         # self.element.set_volume_array([value, value])
         # self.element.set_volume_tuple([value, value])
         self.element.set_volume_all(ivalue)
 
     def change_volume(self):
+        ''' Change volume upon slider event '''
         ivalue = self.volumeSlider.value()
         self.set_volume(ivalue)
 

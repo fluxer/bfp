@@ -18,19 +18,14 @@ class Widget(QtGui.QWidget):
             self.archive_open(spath)
 
     def archive_open(self, spath):
+        ''' Open and show archive content '''
         stmp = None
         try:
             if archive.supportedArchive(spath):
                 stmp = tempfile.mkdtemp()
-                #Dialog.show()
-                #Dialog.setLabelText('Reading: <b>' + spath + '</b>')
                 archive.extractArchive(spath, stmp)
-                #Dialog.hide()
                 self.parent.plugins.plugin_open(stmp)
-                #Dialog.show()
-                #Dialog.setLabelText('Saving: <b>' + spath + '</b>')
                 archive.createArchive(stmp, spath)
-                #Dialog.hide()
             else:
                 QtGui.QMessageBox.critical(self, self.tr('Critical'), self.tr('Unsupported format'))
         except Exception as detail:
@@ -38,6 +33,7 @@ class Widget(QtGui.QWidget):
         finally:
             if stmp and os.path.isdir(stmp):
                 misc.dir_remove(stmp)
+
 
 class Plugin(QtCore.QObject):
     ''' Plugin handler '''

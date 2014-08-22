@@ -36,10 +36,11 @@ class Widget(QtGui.QWidget):
         self.mainLayout.addWidget(self.imageView)
         self.setLayout(self.mainLayout)
 
-        if spath:
+        if self.spath:
             self.open_file(spath)
 
     def set_image(self, sfile):
+        ''' Set image view and setup previous/next buttons '''
         image = QtGui.QImage(sfile)
         self.imageView.setPixmap(QtGui.QPixmap.fromImage(image))
         self.imageView.fileName = sfile
@@ -63,6 +64,7 @@ class Widget(QtGui.QWidget):
                 break
 
     def open_file(self, sfile):
+        ''' Open image file '''
         if not sfile or not os.path.isfile(sfile):
             sfile = QtGui.QFileDialog.getOpenFileName(self, self.tr('Open'), \
                 QtCore.QDir.currentPath(), \
@@ -74,9 +76,11 @@ class Widget(QtGui.QWidget):
         self.parent.plugins.recent_register(str(sfile))
 
     def reload_file(self):
+        ''' Reload currently displayed image '''
         self.set_image(self.imageView.fileName)
 
     def images_list(self):
+        ''' Get list of images in directory '''
         scurrent = self.imageView.fileName
         sdir = os.path.dirname(scurrent)
         if not os.path.isdir(sdir):
@@ -96,11 +100,13 @@ class Widget(QtGui.QWidget):
         return slist
 
     def previous_image(self):
+        ''' Display previous image from the list '''
         slist = self.images_list()
         if self.imageView.fileName in slist:
             self.set_image(slist[slist.index(self.imageView.fileName) - 1])
 
     def next_image(self):
+        ''' Display Next image from the list '''
         slist = self.images_list()
         if self.imageView.fileName in slist:
             self.set_image(slist[slist.index(self.imageView.fileName) + 1])

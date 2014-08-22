@@ -621,7 +621,7 @@ class WM(object):
 
     def deactivate_window(self, window):
         """ Deactivate window"""
-        window.set_wm_state(state = Xlib.Xutil.IconicState, icon = 0) 
+        window.set_wm_state(state=Xlib.Xutil.IconicState, icon=0)
         self.dpy.flush()
 
     def maximize_window(self, window):

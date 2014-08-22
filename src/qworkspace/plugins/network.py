@@ -3,8 +3,9 @@
 # http://git.kernel.org/cgit/network/connman/connman.git/tree/doc
 
 from PyQt4 import QtCore, QtGui, QtDBus
-import os, libworkspace
+import os, libworkspace, libmisc
 general = libworkspace.General()
+misc = libmisc.Misc()
 
 
 class Widget(QtGui.QWidget):

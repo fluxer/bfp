@@ -1,6 +1,6 @@
 #!/bin/python2
 
-from PyQt4 import QtCore, QtGui, QtWebKit, QtNetwork
+from PyQt4 import QtCore, QtGui, QtWebKit
 import sys, os, libworkspace, libmisc
 general = libworkspace.General()
 misc = libmisc.Misc()
@@ -8,47 +8,48 @@ misc = libmisc.Misc()
 
 class Widget(QtGui.QWidget):
     ''' Tab constructor '''
-    def __init__(self, parent, url=''):
+    def __init__(self, parent, spage=None):
         ''' Tab initialiser '''
         super(Widget, self).__init__()
         self.parent = parent
+        self.spage = spage
         self.name = 'help'
         self.icon_find = general.get_icon('edit-find')
 
-        # add widgets
         self.help_path = os.path.join(sys.prefix, 'share/help')
         self.mainLayout = QtGui.QGridLayout()
         self.secondLayout = QtGui.QHBoxLayout()
         self.findButton = QtGui.QPushButton(self.icon_find, '')
+        self.findButton.clicked.connect(self.action_find)
+        self.findButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+F')))
         self.helpBox = QtGui.QComboBox()
         for spath in misc.list_files(self.help_path):
             self.helpBox.addItem(os.path.basename(spath))
         self.helpBox.currentIndexChanged.connect(self.help_change)
         self.webView = QtWebKit.QWebView()
+        self.webView.page().setLinkDelegationPolicy(QtWebKit.QWebPage.DelegateAllLinks)
+        self.webView.linkClicked.connect(self.link_clicked)
         self.secondLayout.addWidget(self.findButton)
         self.secondLayout.addWidget(self.helpBox)
         self.mainLayout.addLayout(self.secondLayout, 0, 0)
         self.mainLayout.addWidget(self.webView)
         self.setLayout(self.mainLayout)
 
-        # setup widgets
-        self.findButton.clicked.connect(self.action_find)
-        self.findButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+F')))
-        self.webView.page().setLinkDelegationPolicy(QtWebKit.QWebPage.DelegateAllLinks)
-        self.webView.linkClicked.connect(self.link_clicked)
-
-        # load page
-        self.help_change('copying.html')
+        self.help_change(self.spage)
 
     def help_open(self, url):
+        ''' Open local URL '''
         self.webView.setUrl(QtCore.QUrl.fromLocalFile(url))
 
-    def help_change(self, index):
-        help = self.helpBox.currentText()
+    def help_change(self, spage):
+        ''' Change currently displayed help page '''
+        if not spage:
+            spage = self.helpBox.currentText()
         for spath in misc.list_files(self.help_path):
-            if spath.endswith('/' + help):
+            if spath.endswith('/' + spage):
                 return self.help_open(spath)
-        QtGui.QMessageBox.critical(self, self.tr('Critical'), self.tr('Help page not found: %s' % help))
+        QtGui.QMessageBox.critical(self, self.tr('Critical'), \
+            self.tr('Help page not found: %s' % spage))
 
     def link_clicked(self, url):
         ''' Update the URL if a link on a web page is clicked '''
@@ -58,7 +59,8 @@ class Widget(QtGui.QWidget):
         ''' Find text in current page '''
         svar, ok = QtGui.QInputDialog.getText(self, self.tr('Find'), '')
         if ok and svar:
-            self.webView.findText(svar, self.webView.page().HighlightAllOccurrences)
+            self.webView.findText(svar, \
+                self.webView.page().HighlightAllOccurrences)
 
 
 class Plugin(QtCore.QObject):
