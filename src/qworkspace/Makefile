@@ -2,6 +2,7 @@ include ../../Makefile.inc
 
 all: clean
 	$(SED) 's|^app_version.*|app_version = "$(VERSION) ($(GIT_VERSION))"|' -i main.py
+	$(SED) 's|self.version = .*|self.version = "$(VERSION) ($(GIT_VERSION))"|' -i plugins/*.py
 	$(PYUIC) qworkspace.ui -o qworkspace_ui.py
 	$(PYLUPDATE) main.py plugins/*.py -ts tr/qworkspace_bg_BG.ts
 	$(LRELEASE) tr/qworkspace_bg_BG.ts

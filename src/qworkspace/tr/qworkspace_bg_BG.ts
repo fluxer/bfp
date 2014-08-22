@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="bg_BG">
+<!DOCTYPE TS><TS version="2.0" language="bg_BG" sourcelanguage="">
 <context>
     <name>Plugin</name>
     <message>
@@ -39,12 +38,12 @@
         <translation>Мултимедиа</translation>
     </message>
     <message>
-        <location filename="package.py" line="199"/>
+        <location filename="package.py" line="200"/>
         <source>Package manager plugin</source>
         <translation>Плъгин за управление на пакетите </translation>
     </message>
     <message>
-        <location filename="package.py" line="212"/>
+        <location filename="package.py" line="213"/>
         <source>Package</source>
         <translation>Пакет</translation>
     </message>
@@ -222,7 +221,7 @@
         <translation>Намери</translation>
     </message>
     <message>
-        <location filename="package.py" line="189"/>
+        <location filename="package.py" line="190"/>
         <source>Critical</source>
         <translation>Критично</translation>
     </message>
@@ -542,22 +541,22 @@
         <translation>Текст (*.txt *.sh *.bash *.diff *.patch *.py *c *.h *.cpp *.hpp *.html *.pl);;Всички (*)</translation>
     </message>
     <message>
-        <location filename="package.py" line="70"/>
+        <location filename="package.py" line="71"/>
         <source>all</source>
         <translation>всички</translation>
     </message>
     <message>
-        <location filename="package.py" line="72"/>
+        <location filename="package.py" line="73"/>
         <source>local</source>
         <translation>локални</translation>
     </message>
     <message>
-        <location filename="package.py" line="74"/>
+        <location filename="package.py" line="75"/>
         <source>unneeded</source>
         <translation>ненужни</translation>
     </message>
     <message>
-        <location filename="package.py" line="79"/>
+        <location filename="package.py" line="80"/>
         <source>candidates</source>
         <translation>кандидати</translation>
     </message>
