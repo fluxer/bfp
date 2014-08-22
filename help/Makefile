@@ -7,6 +7,11 @@ all:
 	$(MARKDOWN) copying.md -f copying.html
 	$(MARKDOWN) license.magic.md -f license.magic.html
 	$(MARKDOWN) todo.md -f todo.html
+	$(PYDOC) -w libmagic
+	$(PYDOC) -w libmisc
+	$(PYDOC) -w libpackage
+	$(PYDOC) -w libmessage
+	$(PYDOC) -w libworkspace
 
 install:
 	$(INSTALL) -dm755 $(DESTDIR)$(SHAREDIR)/help/
@@ -16,6 +21,11 @@ install:
 	$(INSTALL) -m644 copying.html $(DESTDIR)$(SHAREDIR)/help/
 	$(INSTALL) -m644 license.magic.html $(DESTDIR)$(SHAREDIR)/help/
 	$(INSTALL) -m644 todo.html $(DESTDIR)$(SHAREDIR)/help/
+	$(INSTALL) -m644 libmagic.html $(DESTDIR)$(SHAREDIR)/help/
+	$(INSTALL) -m644 libmisc.html $(DESTDIR)$(SHAREDIR)/help/
+	$(INSTALL) -m644 libpackage.html $(DESTDIR)$(SHAREDIR)/help/
+	$(INSTALL) -m644 libmessage.html $(DESTDIR)$(SHAREDIR)/help/
+	$(INSTALL) -m644 libworkspace.html $(DESTDIR)$(SHAREDIR)/help/
 
 uninstall:
 	$(RM) -r $(DESTDIR)$(SHAREDIR)/help/
