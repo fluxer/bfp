@@ -36,6 +36,13 @@ install:
 	$(INSTALL) -m644 libpackage.html $(DESTDIR)$(SHAREDIR)/help/
 	$(INSTALL) -m644 libmessage.html $(DESTDIR)$(SHAREDIR)/help/
 	$(INSTALL) -m644 libworkspace.html $(DESTDIR)$(SHAREDIR)/help/
+	$(INSTALL) -m644 cparted.html $(DESTDIR)$(SHAREDIR)/help/
+	$(INSTALL) -m644 lsinitfs.html $(DESTDIR)$(SHAREDIR)/help/
+	$(INSTALL) -m644 mkinitfs.html $(DESTDIR)$(SHAREDIR)/help/
+	$(INSTALL) -m644 srcbuild.html $(DESTDIR)$(SHAREDIR)/help/
+	$(INSTALL) -m644 spm.conf.html $(DESTDIR)$(SHAREDIR)/help/
+	$(INSTALL) -m644 spm.html $(DESTDIR)$(SHAREDIR)/help/
+	$(INSTALL) -m644 spm-tools.html $(DESTDIR)$(SHAREDIR)/help/
 
 uninstall:
 	$(RM) -r $(DESTDIR)$(SHAREDIR)/help/
