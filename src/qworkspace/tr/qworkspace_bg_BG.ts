@@ -13,12 +13,12 @@
         <translation>Фалшив</translation>
     </message>
     <message>
-        <location filename="editor.py" line="138"/>
+        <location filename="editor.py" line="140"/>
         <source>Text editor plugin</source>
         <translation>Плъгин за редактиране на текст</translation>
     </message>
     <message>
-        <location filename="editor.py" line="164"/>
+        <location filename="editor.py" line="166"/>
         <source>Editor</source>
         <translation>Редактор</translation>
     </message>
@@ -148,12 +148,12 @@
         <translation>Календар</translation>
     </message>
     <message>
-        <location filename="download.py" line="110"/>
+        <location filename="download.py" line="111"/>
         <source>Download manager plugin</source>
         <translation>Плъгин за управление на изтеглянията</translation>
     </message>
     <message>
-        <location filename="download.py" line="125"/>
+        <location filename="download.py" line="126"/>
         <source>Download</source>
         <translation>Изтегляне</translation>
     </message>
@@ -201,7 +201,7 @@
         <translation>Отвори</translation>
     </message>
     <message>
-        <location filename="editor.py" line="95"/>
+        <location filename="editor.py" line="96"/>
         <source>Save as</source>
         <translation>Запази като</translation>
     </message>
@@ -406,7 +406,7 @@
         <translation>Търси</translation>
     </message>
     <message>
-        <location filename="download.py" line="96"/>
+        <location filename="download.py" line="97"/>
         <source>Info</source>
         <translation>Инфо</translation>
     </message>
@@ -426,22 +426,17 @@
         <translation>Презареди</translation>
     </message>
     <message>
-        <location filename="editor.py" line="95"/>
-        <source>Text (*.txt);;All (*)</source>
-        <translation>Текст (*.txt);;Всички (*)</translation>
-    </message>
-    <message>
         <location filename="screenshot.py" line="25"/>
         <source>Image (*.png *.jpg *.jpeg *.svg);;All (*)</source>
         <translation>Изобрайжение (*.png *.jpg *.jpeg *.svg);;Всички (*)</translation>
     </message>
     <message>
-        <location filename="download.py" line="93"/>
+        <location filename="download.py" line="94"/>
         <source>Download of &lt;b&gt;%s&lt;/b&gt; failed.</source>
         <translation>Свалянето на &lt;b&gt;%s&lt;/b&gt; се провали.</translation>
     </message>
     <message>
-        <location filename="download.py" line="96"/>
+        <location filename="download.py" line="97"/>
         <source>Download of &lt;b&gt;%s&lt;/b&gt; complete.</source>
         <translation>Свалянето на &lt;b&gt;%s&lt;/b&gt; завърши.</translation>
     </message>
@@ -529,6 +524,11 @@
         <location filename="download.py" line="52"/>
         <source>Download is in progress, do you want to abort it?</source>
         <translation>Извършва се изтегляне, сигурнили сте че искате да го прекратите?</translation>
+    </message>
+    <message>
+        <location filename="editor.py" line="96"/>
+        <source>Text (*.txt *.sh *.bash *.diff *.patch *.py *c *.h *.cpp *.hpp *.html *.pl);;All (*)</source>
+        <translation>Текст (*.txt *.sh *.bash *.diff *.patch *.py *c *.h *.cpp *.hpp *.html *.pl);;Всички (*)</translation>
     </message>
 </context>
 </TS>

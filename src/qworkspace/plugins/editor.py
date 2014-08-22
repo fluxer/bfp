@@ -62,7 +62,8 @@ class Widget(QtGui.QWidget):
 
         if not sfile:
             sfile = QtGui.QFileDialog.getOpenFileName(self, self.tr('Open'), \
-                sdir, self.tr('Text (*.txt);;All (*)'))
+                sdir, \
+                self.tr('Text (*.txt *.sh *.bash *.diff *.patch *.py *c *.h *.cpp *.hpp *.html *.pl);;All (*)'))
             if sfile:
                 sfile = str(sfile)
                 self.textEdit.setText(misc.file_read(sfile))
@@ -93,7 +94,8 @@ class Widget(QtGui.QWidget):
 
     def save_as_file(self):
         sfile = QtGui.QFileDialog.getSaveFileName(self, self.tr('Save as'), \
-            QtCore.QDir.currentPath(), self.tr('Text (*.txt);;All (*)'))
+            QtCore.QDir.currentPath(), \
+            self.tr('Text (*.txt *.sh *.bash *.diff *.patch *.py *c *.h *.cpp *.hpp *.html *.pl);;All (*)'))
         if sfile:
             self.sedit = str(sfile)
             self.save_file()
@@ -161,7 +163,8 @@ class Plugin(QtCore.QObject):
         ''' Open path in new tab '''
         index = self.parent.tabWidget.currentIndex()+1
         self.widget = Widget(self.parent, spath)
-        self.parent.tabWidget.insertTab(index, self.widget, self.icon, self.tr('Editor'))
+        self.parent.tabWidget.insertTab(index, self.widget, self.icon, \
+            self.tr('Editor'))
         self.parent.tabWidget.setCurrentIndex(index)
 
     def close(self, index=None):
