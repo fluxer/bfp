@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="bg_BG" sourcelanguage="">
+<!DOCTYPE TS>
+<TS version="2.0" language="bg_BG">
 <context>
     <name>Plugin</name>
     <message>
@@ -38,12 +39,12 @@
         <translation>Мултимедиа</translation>
     </message>
     <message>
-        <location filename="package.py" line="201"/>
+        <location filename="package.py" line="199"/>
         <source>Package manager plugin</source>
         <translation>Плъгин за управление на пакетите </translation>
     </message>
     <message>
-        <location filename="package.py" line="214"/>
+        <location filename="package.py" line="212"/>
         <source>Package</source>
         <translation>Пакет</translation>
     </message>
@@ -98,12 +99,12 @@
         <translation>Архив</translation>
     </message>
     <message>
-        <location filename="network.py" line="316"/>
+        <location filename="network.py" line="318"/>
         <source>Network manager plugin</source>
         <translation>Плъгин за управление на мрежата</translation>
     </message>
     <message>
-        <location filename="network.py" line="329"/>
+        <location filename="network.py" line="331"/>
         <source>Network</source>
         <translation>Мрежа</translation>
     </message>
@@ -168,12 +169,12 @@
         <translation>Помощ</translation>
     </message>
     <message>
-        <location filename="plugins.py" line="42"/>
+        <location filename="plugins.py" line="43"/>
         <source>Plugins manager plugin</source>
         <translation>Плъгин за управление на плъгините</translation>
     </message>
     <message>
-        <location filename="plugins.py" line="55"/>
+        <location filename="plugins.py" line="56"/>
         <source>Plugins</source>
         <translation>Плъгини</translation>
     </message>
@@ -221,7 +222,7 @@
         <translation>Намери</translation>
     </message>
     <message>
-        <location filename="package.py" line="191"/>
+        <location filename="package.py" line="189"/>
         <source>Critical</source>
         <translation>Критично</translation>
     </message>
@@ -481,22 +482,22 @@
         <translation>Преглед като лист</translation>
     </message>
     <message>
-        <location filename="network.py" line="234"/>
+        <location filename="network.py" line="236"/>
         <source>Details</source>
         <translation>Детайли</translation>
     </message>
     <message>
-        <location filename="network.py" line="98"/>
+        <location filename="network.py" line="100"/>
         <source>Information</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="network.py" line="92"/>
+        <location filename="network.py" line="94"/>
         <source>Connected to: %s</source>
         <translation>Свързан към: %s</translation>
     </message>
     <message>
-        <location filename="network.py" line="98"/>
+        <location filename="network.py" line="100"/>
         <source>Disconnected from: %s</source>
         <translation>Изключен от: %s</translation>
     </message>
@@ -539,6 +540,26 @@
         <location filename="editor.py" line="96"/>
         <source>Text (*.txt *.sh *.bash *.diff *.patch *.py *c *.h *.cpp *.hpp *.html *.pl);;All (*)</source>
         <translation>Текст (*.txt *.sh *.bash *.diff *.patch *.py *c *.h *.cpp *.hpp *.html *.pl);;Всички (*)</translation>
+    </message>
+    <message>
+        <location filename="package.py" line="70"/>
+        <source>all</source>
+        <translation>всички</translation>
+    </message>
+    <message>
+        <location filename="package.py" line="72"/>
+        <source>local</source>
+        <translation>локални</translation>
+    </message>
+    <message>
+        <location filename="package.py" line="74"/>
+        <source>unneeded</source>
+        <translation>ненужни</translation>
+    </message>
+    <message>
+        <location filename="package.py" line="79"/>
+        <source>candidates</source>
+        <translation>кандидати</translation>
     </message>
 </context>
 </TS>

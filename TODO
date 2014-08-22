@@ -31,6 +31,8 @@ http://www.linuxfromscratch.org/blfs/view/systemd/postlfs/initramfs.html
    display resolution change
  * Session manager (save/restore state), see http://qt-project.org/doc/qt-4.8/session.html
  * Notify on low disk space
+ * WWW plugin bookmarks cleanup and possibly configurable:
+  - http://linux.die.net/
 
 ## ALL QT (on regular basis) ##
  * Expect failures everywhere

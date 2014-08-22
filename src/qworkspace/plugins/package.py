@@ -44,10 +44,8 @@ class Widget(QtGui.QWidget):
         self.removeButton = QtGui.QPushButton(general.get_icon('edit-delete'), '')
         self.removeButton.clicked.connect(self.targets_remove)
         self.targetsFilter = QtGui.QComboBox()
-        self.targetsFilter.addItem('all')
-        self.targetsFilter.addItem('local')
-        self.targetsFilter.addItem('unneeded')
-        self.targetsFilter.addItem('candidates')
+        self.targetsFilter.addItems((self.tr('all'), self.tr('local'), \
+            self.tr('unneeded'), self.tr('candidates')))
         self.targetsFilter.currentIndexChanged.connect(self.refresh_targets)
         self.mainLayout.addLayout(self.secondLayout, 0, 0)
         self.secondLayout.addWidget(self.syncButton)
@@ -69,16 +67,16 @@ class Widget(QtGui.QWidget):
         ''' Refresh targets list view '''
         self.targetsList.clear()
         current = str(self.targetsFilter.currentText())
-        if current == 'all':
+        if current == self.tr('all'):
             targets = database.remote_all(basename=True)
-        elif current == 'local':
+        elif current == self.tr('local'):
             targets = database.local_all(basename=True)
-        elif current == 'unneeded':
+        elif current == self.tr('unneeded'):
             targets = []
             for target in database.local_all(basename=True):
                 if not database.local_rdepends(target):
                     targets.append(target)
-        elif current == 'candidates':
+        elif current == self.tr('candidates'):
             targets = []
             for target in database.remote_all(basename=True):
                 if not database.local_installed(target):
