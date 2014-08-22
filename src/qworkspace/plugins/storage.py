@@ -249,14 +249,16 @@ class Widget(QtGui.QWidget):
 
 
 class Daemon(QtCore.QThread):
+    def __init__(self, parent):
+        super(Daemon, self).__init__()
+        self.parent = parent
+
     def run(self):
         ''' Monitor block devices state '''
-        # FIXME: use notification
         if not os.path.exists('/sys/class/block'):
-            message.sub_warning('No sysfs support')
+            self.parent.plugins.notify_information(self.tr('No sysfs support'))
             return
 
-        message.sub_info('Monitoring block devices state')
         while True:
             before = os.listdir('/sys/class/block')
             time.sleep(1)
@@ -294,13 +296,11 @@ class ToolWidget(QtGui.QWidget):
         self.testButton = QtGui.QPushButton(general.get_icon('drive-harddisk'), sname)
         self.testButton.clicked.connect(lambda: self.parent.plugins.plugin_open(sname))
         self.mainLayout.addWidget(self.testButton)
-
-        message.sub_info('Device mounted to', sname)
-        # FIXME: notify about it
+        self.parent.plugins.notify_information(self.tr('Device mounted to: %s' % sname))
 
     def remove_button(self, sname):
-        message.sub_info('Device unmounted from', sname)
-        # FIXME: notify about it
+        # FIXME: actually remove button
+        self.parent.plugins.notify_information(self.tr('Device unmounted from: %s' % sname))
 
 class Plugin(QtCore.QObject):
     ''' Plugin handler '''
@@ -308,7 +308,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'storage'
-        self.version = "0.9.31 (278fd1e)"
+        self.version = "0.9.31 (37a0285)"
         self.description = self.tr('Storage management plugin')
         self.icon = general.get_icon('system-file-manager')
         self.widget = None
@@ -324,7 +324,7 @@ class Plugin(QtCore.QObject):
 
         self.parent.plugins.mime_register('inode/directory', self.name)
 
-        self.daemon = Daemon()
+        self.daemon = Daemon(self.parent)
         self.connect(self.daemon, QtCore.SIGNAL('mounted'), self.tool.add_button)
         self.connect(self.daemon, QtCore.SIGNAL('unmounted'), self.tool.remove_button)
         self.daemon.start()

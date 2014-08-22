@@ -89,13 +89,10 @@ class Widget(QtGui.QWidget):
 
     def download_finished(self):
         surl = self.reply.url().toString()
-        # FIXME: use notification
         if self.reply.error():
-            QtGui.QMessageBox.critical(self, self.tr('Critical'), \
-                self.tr('Download of <b>%s</b> failed.') % surl)
+            self.parent.plugins.notify_critical(self.tr('Download of <b>%s</b> failed.') % surl)
         else:
-            QtGui.QMessageBox.information(self, self.tr('Info'), \
-                self.tr('Download of <b>%s</b> complete.') % surl)
+            self.parent.plugins.notify_information(self.tr('Download of <b>%s</b> complete.') % surl)
             self.openButton.setEnabled(True)
         self.request = None
         self.reply = None
@@ -107,7 +104,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'download'
-        self.version = "0.9.31 (278fd1e)"
+        self.version = "0.9.31 (37a0285)"
         self.description = self.tr('Download manager plugin')
         self.icon = general.get_icon('document-save-as')
         self.widget = None

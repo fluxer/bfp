@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="bg_BG" sourcelanguage="">
+<!DOCTYPE TS>
+<TS version="2.0" language="bg_BG">
+<context>
+    <name>Daemon</name>
+    <message>
+        <location filename="storage.py" line="259"/>
+        <source>No sysfs support</source>
+        <translation>sysfs не се поддържа</translation>
+    </message>
+</context>
 <context>
     <name>Plugin</name>
     <message>
@@ -98,12 +107,12 @@
         <translation>Архив</translation>
     </message>
     <message>
-        <location filename="network.py" line="318"/>
+        <location filename="network.py" line="314"/>
         <source>Network manager plugin</source>
         <translation>Плъгин за управление на мрежата</translation>
     </message>
     <message>
-        <location filename="network.py" line="331"/>
+        <location filename="network.py" line="327"/>
         <source>Network</source>
         <translation>Мрежа</translation>
     </message>
@@ -148,12 +157,12 @@
         <translation>Календар</translation>
     </message>
     <message>
-        <location filename="download.py" line="111"/>
+        <location filename="download.py" line="108"/>
         <source>Download manager plugin</source>
         <translation>Плъгин за управление на изтеглянията</translation>
     </message>
     <message>
-        <location filename="download.py" line="126"/>
+        <location filename="download.py" line="123"/>
         <source>Download</source>
         <translation>Изтегляне</translation>
     </message>
@@ -176,6 +185,19 @@
         <location filename="plugins.py" line="56"/>
         <source>Plugins</source>
         <translation>Плъгини</translation>
+    </message>
+</context>
+<context>
+    <name>ToolWidget</name>
+    <message>
+        <location filename="storage.py" line="299"/>
+        <source>Device mounted to: %s</source>
+        <translation>Монтирано устройство на: %s</translation>
+    </message>
+    <message>
+        <location filename="storage.py" line="303"/>
+        <source>Device unmounted from: %s</source>
+        <translation>Демонтирано устройство от: %s</translation>
     </message>
 </context>
 <context>
@@ -416,11 +438,6 @@
         <translation>Търси</translation>
     </message>
     <message>
-        <location filename="download.py" line="97"/>
-        <source>Info</source>
-        <translation>Инфо</translation>
-    </message>
-    <message>
         <location filename="www.py" line="306"/>
         <source>Back</source>
         <translation>Назад</translation>
@@ -441,12 +458,12 @@
         <translation>Изобрайжение (*.png *.jpg *.jpeg *.svg);;Всички (*)</translation>
     </message>
     <message>
-        <location filename="download.py" line="94"/>
+        <location filename="download.py" line="93"/>
         <source>Download of &lt;b&gt;%s&lt;/b&gt; failed.</source>
         <translation>Свалянето на &lt;b&gt;%s&lt;/b&gt; се провали.</translation>
     </message>
     <message>
-        <location filename="download.py" line="97"/>
+        <location filename="download.py" line="95"/>
         <source>Download of &lt;b&gt;%s&lt;/b&gt; complete.</source>
         <translation>Свалянето на &lt;b&gt;%s&lt;/b&gt; завърши.</translation>
     </message>
@@ -481,22 +498,17 @@
         <translation>Преглед като лист</translation>
     </message>
     <message>
-        <location filename="network.py" line="236"/>
+        <location filename="network.py" line="232"/>
         <source>Details</source>
         <translation>Детайли</translation>
     </message>
     <message>
-        <location filename="network.py" line="100"/>
-        <source>Information</source>
-        <translation>Информация</translation>
-    </message>
-    <message>
-        <location filename="network.py" line="94"/>
+        <location filename="network.py" line="93"/>
         <source>Connected to: %s</source>
         <translation>Свързан към: %s</translation>
     </message>
     <message>
-        <location filename="network.py" line="100"/>
+        <location filename="network.py" line="97"/>
         <source>Disconnected from: %s</source>
         <translation>Изключен от: %s</translation>
     </message>

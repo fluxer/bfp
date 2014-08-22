@@ -90,15 +90,11 @@ class Widget(QtGui.QWidget):
 
     def connect(self, name):
         self.dbus_call(name, 'net.connman.Service', 'Connect')
-        # FIXME: use notification
-        QtGui.QMessageBox.information(self, self.tr('Information'), \
-            self.tr('Connected to: %s' % os.path.basename(name)))
+        self.parent.plugins.notify_information(self.tr('Connected to: %s' % os.path.basename(name)))
 
     def disconnect(self, name):
         self.dbus_call(name, 'net.connman.Service', 'Disconnect')
-        # FIXME: use notification
-        QtGui.QMessageBox.information(self, self.tr('Information'), \
-            self.tr('Disconnected from: %s' % os.path.basename(name)))
+        self.parent.plugins.notify_information(self.tr('Disconnected from: %s' % os.path.basename(name)))
 
     def connect_ethernet(self):
         selection = self.EthernetList.selectedIndexes()
@@ -312,7 +308,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'network'
-        self.version = "0.9.31 (278fd1e)"
+        self.version = "0.9.31 (37a0285)"
         self.description = self.tr('Network manager plugin')
         self.icon = general.get_icon('preferences-system-network')
         self.widget = None

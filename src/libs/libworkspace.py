@@ -320,3 +320,15 @@ class Plugins(object):
         ''' Unregister MIME '''
         message.info('Unregistering MIME', smime)
         self.mime_settings.delete(smime)
+
+    def notify_information(self, msg, timeout=False):
+        ''' Notify with information status '''
+        QtGui.QMessageBox.information(self, 'Information', msg)
+
+    def notify_warning(self, msg, timeout=False):
+        ''' Notify with warning status '''
+        QtGui.QMessageBox.warning(self, 'Warning', msg)
+
+    def notify_critical(self, msg, timeout=False):
+        ''' Notify with critical status '''
+        QtGui.QMessageBox.warning(self, 'Critical', msg)
