@@ -17,6 +17,7 @@ class Widget(QtGui.QWidget):
         self.pluginsTable = QtGui.QTableWidget()
         self.pluginsTable.setColumnCount(4)
         self.pluginsTable.setHorizontalHeaderLabels(('Name', 'Version', 'Description', 'Loaded'))
+        self.pluginsTable.horizontalHeader().setResizeMode(QtGui.QHeaderView.ResizeToContents)
         self.pluginsTable.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
         irow = 0
         # FIXME: this works only when all plugins are loaded
