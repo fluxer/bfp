@@ -1,8 +1,8 @@
 include ../../Makefile.inc
 
-all: bump clean
+all: clean
+	$(SED) 's|^app_version.*|app_version = "$(VERSION) ($(GIT_VERSION))"|' -i main.py
 	$(PYUIC) qworkspace.ui -o qworkspace_ui.py
-	mkdir -vp tr
 	$(PYLUPDATE) main.py plugins/*.py -ts tr/qworkspace_bg_BG.ts
 	$(LRELEASE) tr/qworkspace_bg_BG.ts
 	$(NUITKA) --recurse-to=qworkspace_ui main.py
@@ -61,7 +61,4 @@ clean:
 	$(RM) -r *.build/ *.so *.exe qworkspace_ui.py tr/*.qm
 	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
-bump:
-	$(SED) 's|^app_version.*|app_version = "$(VERSION) ($(GIT_VERSION))"|' -i main.py
-
-.PHONY: all install uninstall clean bump
+.PHONY: all install uninstall clean
