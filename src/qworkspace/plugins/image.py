@@ -11,7 +11,9 @@ class Widget(QtGui.QWidget):
     def __init__(self, parent, spath=None):
         super(Widget, self).__init__()
         self.parent = parent
+        self.spath = spath
         self.name = 'image'
+
         self.imageView = QtGui.QLabel()
         self.imageView.setText('')
         self.imageView.setScaledContents(True)
