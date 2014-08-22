@@ -23,12 +23,12 @@
         <translation>Редактор</translation>
     </message>
     <message>
-        <location filename="image.py" line="116"/>
+        <location filename="image.py" line="122"/>
         <source>Image viewer plugin</source>
         <translation>Плъгин за преглед на изображения</translation>
     </message>
     <message>
-        <location filename="image.py" line="135"/>
+        <location filename="image.py" line="141"/>
         <source>Image</source>
         <translation>Изображение</translation>
     </message>
@@ -38,12 +38,12 @@
         <translation>Мултимедиа</translation>
     </message>
     <message>
-        <location filename="package.py" line="191"/>
+        <location filename="package.py" line="201"/>
         <source>Package manager plugin</source>
         <translation>Плъгин за управление на пакетите </translation>
     </message>
     <message>
-        <location filename="package.py" line="204"/>
+        <location filename="package.py" line="214"/>
         <source>Package</source>
         <translation>Пакет</translation>
     </message>
@@ -53,12 +53,12 @@
         <translation>Плъгин за приключване</translation>
     </message>
     <message>
-        <location filename="screenshot.py" line="61"/>
+        <location filename="screenshot.py" line="67"/>
         <source>Screenshot taking plugin</source>
         <translation>Плъгин за правене на снимка на екрана</translation>
     </message>
     <message>
-        <location filename="screenshot.py" line="74"/>
+        <location filename="screenshot.py" line="80"/>
         <source>Screenshot</source>
         <translation>Снимка на екрана</translation>
     </message>
@@ -88,22 +88,22 @@
         <translation>УУУ</translation>
     </message>
     <message>
-        <location filename="archive.py" line="49"/>
+        <location filename="archive.py" line="45"/>
         <source>Archive manager plugin</source>
         <translation>Плъгин за управление на архиви</translation>
     </message>
     <message>
-        <location filename="archive.py" line="69"/>
+        <location filename="archive.py" line="65"/>
         <source>Archive</source>
         <translation>Архив</translation>
     </message>
     <message>
-        <location filename="network.py" line="313"/>
+        <location filename="network.py" line="314"/>
         <source>Network manager plugin</source>
         <translation>Плъгин за управление на мрежата</translation>
     </message>
     <message>
-        <location filename="network.py" line="326"/>
+        <location filename="network.py" line="327"/>
         <source>Network</source>
         <translation>Мрежа</translation>
     </message>
@@ -128,12 +128,12 @@
         <translation>Плъгин за разглеждане на World Wide Web</translation>
     </message>
     <message>
-        <location filename="mixer.py" line="62"/>
+        <location filename="mixer.py" line="64"/>
         <source>Mixer</source>
         <translation>Миксер</translation>
     </message>
     <message>
-        <location filename="mixer.py" line="49"/>
+        <location filename="mixer.py" line="51"/>
         <source>Sound mixer manager plugin</source>
         <translation>Плъгин за управление на звуковият миксер</translation>
     </message>
@@ -158,12 +158,12 @@
         <translation>Изтегляне</translation>
     </message>
     <message>
-        <location filename="help.py" line="71"/>
+        <location filename="help.py" line="73"/>
         <source>Help reader plugin</source>
         <translation>Четец на помощ</translation>
     </message>
     <message>
-        <location filename="help.py" line="84"/>
+        <location filename="help.py" line="86"/>
         <source>Help</source>
         <translation>Помощ</translation>
     </message>
@@ -211,12 +211,12 @@
         <translation>Намери</translation>
     </message>
     <message>
-        <location filename="package.py" line="181"/>
+        <location filename="package.py" line="191"/>
         <source>Critical</source>
         <translation>Критично</translation>
     </message>
     <message>
-        <location filename="screenshot.py" line="25"/>
+        <location filename="screenshot.py" line="49"/>
         <source>Save</source>
         <translation>Запази</translation>
     </message>
@@ -426,7 +426,7 @@
         <translation>Презареди</translation>
     </message>
     <message>
-        <location filename="screenshot.py" line="25"/>
+        <location filename="screenshot.py" line="49"/>
         <source>Image (*.png *.jpg *.jpeg *.svg);;All (*)</source>
         <translation>Изобрайжение (*.png *.jpg *.jpeg *.svg);;Всички (*)</translation>
     </message>
@@ -456,7 +456,7 @@
         <translation>Име:</translation>
     </message>
     <message>
-        <location filename="archive.py" line="35"/>
+        <location filename="archive.py" line="30"/>
         <source>Unsupported format</source>
         <translation>Неподдържан формат</translation>
     </message>
@@ -471,22 +471,22 @@
         <translation>Преглед като лист</translation>
     </message>
     <message>
-        <location filename="network.py" line="231"/>
+        <location filename="network.py" line="232"/>
         <source>Details</source>
         <translation>Детайли</translation>
     </message>
     <message>
-        <location filename="network.py" line="95"/>
+        <location filename="network.py" line="96"/>
         <source>Information</source>
         <translation>Информация</translation>
     </message>
     <message>
-        <location filename="network.py" line="89"/>
+        <location filename="network.py" line="90"/>
         <source>Connected to: %s</source>
         <translation>Свързан към: %s</translation>
     </message>
     <message>
-        <location filename="network.py" line="95"/>
+        <location filename="network.py" line="96"/>
         <source>Disconnected from: %s</source>
         <translation>Изключен от: %s</translation>
     </message>

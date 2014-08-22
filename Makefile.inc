@@ -40,6 +40,7 @@ NUITKA = $(PYTHON) ../../nuitka/bin/nuitka --recurse-not-to=PyQt4,parted,Xlib \
 	--python-version=$(PYTHON_VERSION)
 PYLINT = pylint
 
+all:
 
 stat:
 	cloc $(shell $(FIND) src/ -name '*.py' -name '*.sh')
@@ -47,4 +48,4 @@ stat:
 lint:
 	$(PYLINT) $(shell $(FIND) -name '*.py') | $(GREP) -v -e 'Line too long'
 
-.PHONY: stat lint
+.PHONY: all stat lint
