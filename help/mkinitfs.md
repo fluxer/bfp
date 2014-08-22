@@ -1,96 +1,101 @@
-=head1 NAME
+## NAME
 
-lsinitfs - LsInitfs
+mkinitfs - MkInitfs
 
-=head1 SYNOPSIS
+## SYNOPSIS
 
-lsinitfs [-h] [-t TMP] [-k KERNEL] [-i IMAGE] [--keep] [--debug]
+mkinitfs [-h] [-t TMP] [-b BUSYBOX] [-k KERNEL]
+    [-m MODULES [MODULES ...]] [-i IMAGE] [--keep] [--debug]
     [--version]
 
-=head1 DESCRIPTION
+## DESCRIPTION
 
-LsInitfs is a initial RAM filesystem image content lister.
+MkInitfs is a initial RAM filesystem image maker.
 
-=head1 OPTIONS
+## OPTIONS
 
 optional arguments:
   -h, --help            show this help message and exit
   -t TMP, --tmp TMP     Change temporary directory
+  -b BUSYBOX, --busybox BUSYBOX
+                        Change busybox binary
   -k KERNEL, --kernel KERNEL
                         Change kernel version
+  -m MODULES [MODULES ...], --modules MODULES [MODULES ...]
+                        Change modules
   -i IMAGE, --image IMAGE
                         Change output image
   --keep                Keep temporary directory
   --debug               Enable debug messages
-  --version             Show LsInitfs version and exit
+  --version             Show MkInitfs version and exit
 
-=head1 EXAMPLES
+## EXAMPLES
 
-List image of currently running kernel:
+Create image of currently running kernel:
 
-    lsinitfs
+    mkinitfs
 
-List image of kernel other than the one running:
+Create image of kernel other than the one running:
 
-    lsinitfs -k=3.12.24
+    mkinitfs -k=3.12.24
 
-=head1 EXIT STATUS
+## EXIT STATUS
 
-LsInitfs returns 0 on success and other on failure.
+MkInitfs returns 0 on success and other on failure.
 
-=head2 Unexpected error (1)
+### Unexpected error (1)
 
-This is a general error. Triggered, most likely, by something that LsInitfs is
+This is a general error. Triggered, most likely, by something that MkInitfs is
 not able to handle.
 
-=head2 Internal error (2)
+### Internal error (2)
 
 This error raises when a dependency, library, or other important thing
 is missing or failed.
 
-=head2 SUBPROCESS (3)
+### SUBPROCESS (3)
 
 This error raises when a subprocess, such as cpio, failed to
 execute a sub-command.
 
-=head2 SHUTIL (4)
+### SHUTIL (4)
 
 This error raises when the module responsible for shell or system
 operations fails badly. Its job usually is to copy or remove files and
 directories.
 
-=head2 OS (5)
+### OS (5)
 
 This error raises when the module responsible for system files and
 directories information gathering fails badly. Its job usually is to
 check if X is file, symbolic link or directory.
 
-=head2 IO (6)
+### IO (6)
 
 This error raises when there is something wrong with the file/directory
 permissions.
 
-=head2 Interupt signal received (7)
+### Interupt signal received (7)
 
 This error raises when the user triggers keyboard interrupt via Ctrl+C key
 combination.
 
-=head1 BUGS
+## BUGS
 
-=head2 PYTHON MODULES
-
-None
-
-=head2 MKINITFS
+### PYTHON MODULES
 
 None
 
-=head1 AUTHORS
+### MKINITFS
+
+None
+
+## AUTHORS
 
 Ivailo Monev (a.k.a. SmiL3y) <xakepa10@gmail.com>
 
 Copyright (c) 2014 Ivailo Monev licensed through the GNU General Public License
 
-=head1 SEE ALSO
+## SEE ALSO
 
-mkinitfs(8) gunzip(1) cpio(1)
+lsinitfs lddtree gzip cpio modprobe

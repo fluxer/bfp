@@ -1,13 +1,13 @@
-=head1 NAME
+## NAME
 
 spm-tools - Source Package Manager Tools
 
-=head1 SYNOPSIS
+## SYNOPSIS
 
 	spm-tools [-h] [--debug] [--version]
-                 {dist,edit,lint,merge,sane,clean,check,which,pack} ...
+            {dist,edit,lint,merge,sane,clean,check,which,pack} ...
 
-=head1 DESCRIPTION
+## DESCRIPTION
 
 Source Package Manager Tools (SPMT) packs additional utilities to assist in the
 system maintenance.
@@ -31,112 +31,130 @@ Editing SRCBUILD files can easily be done without knowing the exact path in the
 repositories directory, the editor is picked for the EDITOR environmental
 variable with fallback to Vim.
 
-=head1 OPTIONS
+## OPTIONS
 
-=head2 MAIN
+### MAIN
 
-positional arguments:
-  {dist,edit,lint,merge,sane,clean,check}
+#### positional arguments
 
-optional arguments:
-  -h, --help            Show this help message and exit
-  --debug               Enable debug messages
-  --version             Show SPM Tools version and exits
+    {dist,edit,lint,merge,sane,clean,check}
 
-=head2 DIST MODE
+#### optional arguments
 
-positional arguments:
-  TARGETS               Targets to apply actions on
+    -h, --help            Show this help message and exit
+    --debug               Enable debug messages
+    --version             Show SPM Tools version and exits
 
-optional arguments:
-  -h, --help            Show this help message and exit
-  -s, --sources         Include all sources in the archive
-  -c, --clean           Clean all sources after creating archive
-  -d DIRECTORY,
-  --directory DIRECTORY Set output directory
+### DIST MODE
 
-=head2 CHECK MODE
+#### positional arguments
 
-positional arguments:
-  TARGETS               Targets to apply actions on
+    TARGETS               Targets to apply actions on
 
-optional arguments:
-  -h, --help            Show this help message and exit
-  -f, --fast            Skip some files/links
-  -a, --adjust          Adjust target depends
-  -D, --depends         Check dependencies of target
-  -R, --reverse         Check reverse dependencies of target
+#### optional arguments
 
-=head2 CLEAN MODE
+    -h, --help            Show this help message and exit
+    -s, --sources         Include all sources in the archive
+    -c, --clean           Clean all sources after creating archive
+    -d DIRECTORY,
+    --directory DIRECTORY Set output directory
 
-optional arguments:
-  -h, --help            Show this help message and exit
+### CHECK MODE
 
-=head2 LINT MODE
+#### positional arguments
 
-positional arguments:
-  TARGETS               Targets to apply actions on
+    TARGETS               Targets to apply actions on
 
-optional arguments:
-  -h, --help            Show this help message and exit
-  -m, --man             Check for missing manual page(s)
-  -u, --udev            Check for cross-filesystem udev rule(s)
-  -s, --symlink         Check for cross-filesystem symlink(s)
-  -d, --doc             Check for documentation
-  -M, --module          Check for module(s) in non-standard directory
-  -f, --footprint       Check for empty footprint
-  -b, --builddir        Check for build directory trace(s)
-  -a, --all             Perform all checks
+#### optional arguments
 
-=head2 SANE MODE
+    -h, --help            Show this help message and exit
+    -f, --fast            Skip some files/links
+    -a, --adjust          Adjust target depends
+    -D, --depends         Check dependencies of target
+    -R, --reverse         Check reverse dependencies of target
 
-positional arguments:
-  TARGETS               Targets to apply actions on
+### CLEAN MODE
 
-optional arguments:
-  -h, --help            Show this help message and exit
-  -e, --enable          Check for explicit --enable and --with argument(s)
-  -d, --disable         Check for explicit --disable and --without argument(s)
-  -n, --null            Check for /dev/null output redirection(s)
-  -m, --miantainer      Check for missing maintainer
-  -N, --note            Check for FIXME/TODO note(s)
-  -v, --variables       Check for essential variables
-  -t, --triggers        Check for unnecessary triggers invocation(s)
-  -a, --all             Perform all checks
+#### optional arguments
 
-=head2 MERGE MODE
+    -h, --help            Show this help message and exit
 
-optional arguments:
-  -h, --help            Show this help message and exit
+### LINT MODE
 
-=head2 EDIT MODE
+#### positional arguments
 
-positional arguments:
-  TARGETS               Targets to apply actions on
+    TARGETS               Targets to apply actions on
 
-optional arguments:
-  -h, --help            Show this help message and exit
+#### optional arguments
 
-=head2 WHICH MODE
+    -h, --help            Show this help message and exit
+    -m, --man             Check for missing manual page(s)
+    -u, --udev            Check for cross-filesystem udev rule(s)
+    -s, --symlink         Check for cross-filesystem symlink(s)
+    -d, --doc             Check for documentation
+    -M, --module          Check for module(s) in non-standard directory
+    -f, --footprint       Check for empty footprint
+    -b, --builddir        Check for build directory trace(s)
+    -a, --all             Perform all checks
 
-positional arguments:
-  PATTERN               Pattern to search for in remote targets
+### SANE MODE
 
-optional arguments:
-  -h, --help            Show this help message and exit
-  -p, --plain           Print in plain format
+#### positional arguments
 
-=head2 PACK MODE
+    TARGETS               Targets to apply actions on
 
-positional arguments:
-  TARGETS               Targets to apply actions on
+#### optional arguments
 
-optional arguments:
-  -h, --help            Show this help message and exit
-  -d DIRECTORY,
-  --directory DIRECTORY Set output directory
+    -h, --help            Show this help message and exit
+    -e, --enable          Check for explicit --enable and --with argument(s)
+    -d, --disable         Check for explicit --disable and --without argument(s)
+    -n, --null            Check for /dev/null output redirection(s)
+    -m, --miantainer      Check for missing maintainer
+    -N, --note            Check for FIXME/TODO note(s)
+    -v, --variables       Check for essential variables
+    -t, --triggers        Check for unnecessary triggers invocation(s)
+    -a, --all             Perform all checks
 
-=head1 EXAMPLES
+### MERGE MODE
+
+#### optional arguments
+
+    -h, --help            Show this help message and exit
+
+### EDIT MODE
+
+#### positional arguments
+
+    TARGETS               Targets to apply actions on
+
+#### optional arguments
+
+    -h, --help            Show this help message and exit
+
+### WHICH MODE
+
+#### positional arguments
+
+    PATTERN               Pattern to search for in remote targets
+
+#### optional arguments
+
+    -h, --help            Show this help message and exit
+    -p, --plain           Print in plain format
+
+### PACK MODE
+
+#### positional arguments
+
+    TARGETS               Targets to apply actions on
+
+#### optional arguments
+
+    -h, --help            Show this help message and exit
+    -d DIRECTORY,
+    --directory DIRECTORY Set output directory
+
+## EXAMPLES
 
 Create a tarball of all sources, SRCBUILD, patches, etc. of grub and put the
 tarball in the current directory:
@@ -181,79 +199,79 @@ Backup gcc filese into tarball:
 
     spm-tools pack gcc
 
-=head1 EXIT STATUS
+## EXIT STATUS
 
 SPM returns 0 on success and other on failure.
 
-=head2 Unexpected error (1)
+### Unexpected error (1)
 
 This is a general error. Triggered, most likely, by something that SPM is
 not able to handle.
 
-=head2 Internal error (2)
+### Internal error (2)
 
 This error raises when a dependency, library, or other important thing
 is missing or failed.
 
-=head2 CONFIGPARSER (3)
+### CONFIGPARSER (3)
 
 This error raises when, at runtime, the module responsible for parsing the
 configuration files fails badly. Its job usually is to parse the main,
 repositories and mirrors configuration files.
 
-=head2 SUBPROCESS (4)
+### SUBPROCESS (4)
 
 This error raises when a subprocess, such as Git or Bash, failed to
 execute a sub-command.
 
-=head2 URLLIB (5)
+### URLLIB (5)
 
 This error raises when, at the prepare stage, the module responsible for
 fetching files hits a wall. This can be '404 Not Found' or
 '500 Internal Server Error'. For more info visit
 http://en.wikipedia.org/wiki/List_of_HTTP_status_codes.
 
-=head2 TARFILE (6)
+### TARFILE (6)
 
 This error raises when, at the prepare or merge stage, the module
 responsible for compressing and decompressing Tar archives fails badly.
 
-=head2 ZIPFILE (7)
+### ZIPFILE (7)
 
 This error raises when, at the prepare stage, the module responsible
 for compressing and decompressing Zip archives fails badly.
 
-=head2 SHUTIL (8)
+### SHUTIL (8)
 
 This error raises when the module responsible for shell or system
 operations fails badly. Its job usually is to copy or remove files and
 directories.
 
-=head2 OS (9)
+### OS (9)
 
 This error raises when the module responsible for system files and
 directories information gathering fails badly. Its job usually is to
 check if X is file, symbolic link or directory.
 
-=head2 IO (10)
+### IO (10)
 
 This error raises when there is something wrong with the file/directory
 permissions.
 
-=head2 REGEXP (11)
+### REGEXP (11)
 
 This error raises when the module responsible for regular expressions
 matching fails badly. If in doubt you should check the Python Re module
 reference at http://docs.python.org/2/library/re.html.
 
-=head2 Interupt signal received (12)
+### Interupt signal received (12)
 
 This error raises when the user triggers keyboard interrupt via Ctrl+C key
 combination.
 
-=head1 BUGS
+## BUGS
 
-=head2 PYTHON MODULES
+### PYTHON MODULES
 
 HTTPS requests do not do any verification of the server's certificate.
 For more info visit http://docs.python.org/2/library/urllib2.html. Note that
@@ -265,17 +283,17 @@ info visit http://docs.python.org/2/library/tarfile.html#supported-tar-formats.
 Note that the Zip and XZ formats are supported by SPM, the later via subprocess
 calling `tar` or `bsdtar` directly.
 
-=head2 SPM
+### SPM
 
 Single quote inside double quoted text (and vice-versa) in the SRCBUILD variables
 break the parser.
 
-=head1 AUTHORS
+## AUTHORS
 
 Ivailo Monev (a.k.a. SmiL3y) <xakepa10@gmail.com>
 
 Copyright (c) 2013-2014 Ivailo Monev licensed through the GNU General Public License
 
-=head1 SEE ALSO
+## SEE ALSO
 
-spm(8) SRCBUILD(5) scanelf(1) tar(1) bsdtar(1) xz(1) vim(1)
+spm srcbuild scanelf tar bsdtar xz vim

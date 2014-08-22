@@ -12,6 +12,16 @@ all:
 	$(PYDOC) -w libpackage
 	$(PYDOC) -w libmessage
 	$(PYDOC) -w libworkspace
+	$(MARKDOWN) cparted.md -f cparted.html
+	$(MARKDOWN) lsinitfs.md -f lsinitfs.html
+	$(MARKDOWN) mkinitfs.md -f mkinitfs.html
+	$(MARKDOWN) srcbuild.md -f srcbuild.html
+	$(MARKDOWN) spm.conf.md -f spm.conf.html
+	$(MARKDOWN) spm.md -f spm.html
+	$(MARKDOWN) spm-tools.md -f spm-tools.html
+	$(SED) 's|#SHAREDIR#|$(SHAREDIR)|g' -i srcbuild.html
+	$(SED) -e 's|#MACHINE#|$(MACHINE)|g' -e 's|#ARCH#|$(ARCH)|g' \
+		-e 's|#JOBS#|$(JOBS)|g' -i spm.conf.html
 
 install:
 	$(INSTALL) -dm755 $(DESTDIR)$(SHAREDIR)/help/

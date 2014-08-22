@@ -1,7 +1,6 @@
 include Makefile.inc
 
 all:
-	$(MAKE) -C doc
 	$(MAKE) -C help
 	$(MAKE) -C src/cparted
 	$(MAKE) -C src/libs
@@ -14,7 +13,6 @@ check:
 	$(MAKE) -C src/libs check
 
 install:
-	$(MAKE) -C doc install
 	$(MAKE) -C etc install
 	$(MAKE) -C icons install
 	$(MAKE) -C help install
@@ -28,7 +26,6 @@ install:
 	$(MAKE) -C src/qworkspace install
 
 uninstall:
-	$(MAKE) -C doc uninstall
 	$(MAKE) -C etc uninstall
 	$(MAKE) -C icons uninstall
 	$(MAKE) -C help uninstall
@@ -42,7 +39,6 @@ uninstall:
 	$(MAKE) -C src/qworkspace uninstall
 
 clean:
-	$(MAKE) -C doc clean
 	$(MAKE) -C help clean
 	$(MAKE) -C src/cparted clean
 	$(MAKE) -C src/libs clean

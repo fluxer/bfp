@@ -1,8 +1,8 @@
-=head1 NAME
+## NAME
 
 spm - Source Package Manager
 
-=head1 SYNOPSIS
+## SYNOPSIS
 
 	spm [-h] [--cache CACHE] [--build BUILD] [--root ROOT]
             [--ignore IGNORE] [--mirror MIRROR] [--timeout TIMEOUT]
@@ -14,7 +14,7 @@ spm - Source Package Manager
             [--triggers TRIGGERS] [--debug] [--version]
             {repo,remote,source,local,who} ...
 
-=head1 DESCRIPTION
+## DESCRIPTION
 
 Source Package Manager (SPM) manages targets, or packages, only build from
 source code. It fetches, extracts, builds and installs the compiled files
@@ -127,112 +127,122 @@ SPM doesn't implement many features known from other Package Managers such as
 target release, home page URL and other common features but some of those may
 be implemented later on. 
 
-=head1 OPTIONS
+## OPTIONS
 
-=head2 MAIN
+### MAIN
 
-positional arguments:
-  {repo,remote,source,local,who}
+#### positional arguments
 
-optional arguments:
-  -h, --help            Show this help message and exit
-  --cache CACHE         Change cache directory
-  --build BUILD         Change build directory
-  --root ROOT           Change system root directory
-  --ignore IGNORE       Change ignored targets
-  --mirror MIRROR       Set whether to use mirrors
-  --timeout TIMEOUT     Set the connection timeout
-  --external EXTERNAL   Set whether to use external fetcher
-  --chost CHOST         Change CHOST
-  --cflags CFLAGS       Change CFLAGS
-  --cxxflags CXXFLAGS   Change CXXFLAGS
-  --cppflags CPPFLAGS   Change CPPFLAGS
-  --ldflags LDFLAGS     Change LDFLAGS
-  --makeflags MAKEFLAGS Change MAKEFLAGS
-  --man MAN             Set whether to compress man pages
-  --binaries BINARIES   Set whether to strip binaries
-  --shared SHARED       Set whether to strip shared libraries
-  --static STATIC       Set whether to strip static libraries
-  --rpath RPATH         Set whether to strip RPATH
-  --missing MISSING     Set whether to ignore missing runtime dependencies
-  --conflicts CONFLICTS Set whether to check for conflicts
-  --backup BACKUP       Set whether to backup files
-  --scripts SCRIPTS     Set whether to execute pre/post script
-  --triggers TRIGGERS   Set whether to execute triggers
-  --debug               Enable debug messages
-  --version             Show SPM version and exit
+    {repo,remote,source,local,who}
 
-=head2 REPO MODE
+#### optional arguments
 
-optional arguments:
-  -h, --help            Show this help message and exit
-  -c, --clean           Purge repositories
-  -s, --sync            Sync repositories
-  -u, --update          Check repositories for updates
+    -h, --help            Show this help message and exit
+    --cache CACHE         Change cache directory
+    --build BUILD         Change build directory
+    --root ROOT           Change system root directory
+    --ignore IGNORE       Change ignored targets
+    --mirror MIRROR       Set whether to use mirrors
+    --timeout TIMEOUT     Set the connection timeout
+    --external EXTERNAL   Set whether to use external fetcher
+    --chost CHOST         Change CHOST
+    --cflags CFLAGS       Change CFLAGS
+    --cxxflags CXXFLAGS   Change CXXFLAGS
+    --cppflags CPPFLAGS   Change CPPFLAGS
+    --ldflags LDFLAGS     Change LDFLAGS
+    --makeflags MAKEFLAGS Change MAKEFLAGS
+    --man MAN             Set whether to compress man pages
+    --binaries BINARIES   Set whether to strip binaries
+    --shared SHARED       Set whether to strip shared libraries
+    --static STATIC       Set whether to strip static libraries
+    --rpath RPATH         Set whether to strip RPATH
+    --missing MISSING     Set whether to ignore missing runtime dependencies
+    --conflicts CONFLICTS Set whether to check for conflicts
+    --backup BACKUP       Set whether to backup files
+    --scripts SCRIPTS     Set whether to execute pre/post script
+    --triggers TRIGGERS   Set whether to execute triggers
+    --debug               Enable debug messages
+    --version             Show SPM version and exit
 
-=head2 REMOTE MODE
+### REPO MODE
 
-positional arguments:
-  PATTERN               Pattern to search for in remote targets
+#### optional arguments
 
-optional arguments:
-  -h, --help            Show this help message and exit
-  -n, --name            Show target name
-  -v, --version         Show target version
-  -d, --description     Show target description
-  -D, --depends         Show target depends
-  -m, --makedepends     Show target makedepends
-  -c, --checkdepends    Show target checkdepends
-  -s, --sources         Show target sources
-  -o, --options         Show target options
-  -b, --backup          Show target backups
-  -p, --plain           Print in plain format
+    -h, --help            Show this help message and exit
+    -c, --clean           Purge repositories
+    -s, --sync            Sync repositories
+    -u, --update          Check repositories for updates
 
-=head2 SOURCE MODE
+### REMOTE MODE
 
-positional arguments:
-  TARGETS               Targets to apply actions on
+#### positional arguments
 
-optional arguments:
-  -h, --help            Show this help message and exit
-  -C, --clean           Purge sources and compiled files of target
-  -p, --prepare         Prepare sources of target
-  -c, --compile         Compile sources of target
-  -k, --check           Check sources of target
-  -i, --install         Install compiled files of target
-  -m, --merge           Merge compiled files of target to system
-  -r, --remove          Remove compiled files of target from system
-  -D, --depepnds        Consider dependency targets
-  -R, --reverse         Consider reverse dependency targets
-  -u, --update          Apply actions only if update is available
-  -a, --automake        Short for clean, prepare, compile, install and merge
+    PATTERN               Pattern to search for in remote targets
 
-=head2 LOCAL MODE
+#### optional arguments
 
-positional arguments:
-  PATTERN               Pattern to search for in local targets
+    -h, --help            Show this help message and exit
+    -n, --name            Show target name
+    -v, --version         Show target version
+    -d, --description     Show target description
+    -D, --depends         Show target depends
+    -m, --makedepends     Show target makedepends
+    -c, --checkdepends    Show target checkdepends
+    -s, --sources         Show target sources
+    -o, --options         Show target options
+    -b, --backup          Show target backups
+    -p, --plain           Print in plain format
 
-optional arguments:
-  -h, --help            Show this help message and exit
-  -n, --name            Show target name
-  -v, --version         Show target version
-  -d, --description     Show target description
-  -D, --depends         Show target depends
-  -r, --reverse         Show target reverse depends
-  -s, --size            Show target size
-  -f, --footprint       Show target footprint
-  -p, --plain           Print in plain format
+### SOURCE MODE
 
-=head2 WHO MODE
+#### positional arguments
 
-positional arguments:
-  PATTERN               Pattern to search for in local targets
+    TARGETS               Targets to apply actions on
 
-optional arguments:
-  -h, --help            Show this help message and exit
-  -p, --plain           Print in plain format
+#### optional arguments
 
-=head1 EXAMPLES
+    -h, --help            Show this help message and exit
+    -C, --clean           Purge sources and compiled files of target
+    -p, --prepare         Prepare sources of target
+    -c, --compile         Compile sources of target
+    -k, --check           Check sources of target
+    -i, --install         Install compiled files of target
+    -m, --merge           Merge compiled files of target to system
+    -r, --remove          Remove compiled files of target from system
+    -D, --depepnds        Consider dependency targets
+    -R, --reverse         Consider reverse dependency targets
+    -u, --update          Apply actions only if update is available
+    -a, --automake        Short for clean, prepare, compile, install and merge
+
+### LOCAL MODE
+
+#### positional arguments
+
+    PATTERN               Pattern to search for in local targets
+
+#### optional arguments
+
+    -h, --help            Show this help message and exit
+    -n, --name            Show target name
+    -v, --version         Show target version
+    -d, --description     Show target description
+    -D, --depends         Show target depends
+    -r, --reverse         Show target reverse depends
+    -s, --size            Show target size
+    -f, --footprint       Show target footprint
+    -p, --plain           Print in plain format
+
+### WHO MODE
+
+#### positional arguments
+    PATTERN               Pattern to search for in local targets
+
+#### optional arguments
+
+    -h, --help            Show this help message and exit
+    -p, --plain           Print in plain format
+
+## EXAMPLES
 
 Clean, sync repositories and check for updates:
 
@@ -270,79 +280,79 @@ Note that all modes, except source which accepts basename and paths, accept
 regexp similar to those found in Perl. For more information visit
 http://docs.python.org/2/library/re.html.
 
-=head1 EXIT STATUS
+## EXIT STATUS
 
 SPM returns 0 on success and other on failure.
 
-=head2 Unexpected error (1)
+### Unexpected error (1)
 
 This is a general error. Triggered, most likely, by something that SPM is
 not able to handle.
 
-=head2 Internal error (2)
+### Internal error (2)
 
 This error raises when a dependency, library, or other important thing
 is missing or failed.
 
-=head2 CONFIGPARSER (3)
+### CONFIGPARSER (3)
 
 This error raises when, at runtime, the module responsible for parsing the
 configuration files fails badly. Its job usually is to parse the main,
 repositories and mirrors configuration files.
 
-=head2 SUBPROCESS (4)
+### SUBPROCESS (4)
 
 This error raises when a subprocess, such as Git or Bash, failed to
 execute a sub-command.
 
-=head2 URLLIB (5)
+### URLLIB (5)
 
 This error raises when, at the prepare stage, the module responsible for
 fetching files hits a wall. This can be '404 Not Found' or
 '500 Internal Server Error'. For more info visit
 http://en.wikipedia.org/wiki/List_of_HTTP_status_codes.
 
-=head2 TARFILE (6)
+### TARFILE (6)
 
 This error raises when, at the prepare or merge stage, the module
 responsible for compressing and decompressing Tar archives fails badly.
 
-=head2 ZIPFILE (7)
+### ZIPFILE (7)
 
 This error raises when, at the prepare stage, the module responsible
 for compressing and decompressing Zip archives fails badly.
 
-=head2 SHUTIL (8)
+### SHUTIL (8)
 
 This error raises when the module responsible for shell or system
 operations fails badly. Its job usually is to copy or remove files and
 directories.
 
-=head2 OS (9)
+### OS (9)
 
 This error raises when the module responsible for system files and
 directories information gathering fails badly. Its job usually is to
 check if X is file, symbolic link or directory.
 
-=head2 IO (10)
+### IO (10)
 
 This error raises when there is something wrong with the file/directory
 permissions.
 
-=head2 REGEXP (11)
+### REGEXP (11)
 
 This error raises when the module responsible for regular expressions
 matching fails badly. If in doubt you should check the Python Re module
 reference at http://docs.python.org/2/library/re.html.
 
-=head2 Interupt signal received (12)
+### Interupt signal received (12)
 
 This error raises when the user triggers keyboard interrupt via Ctrl+C key
 combination.
 
-=head1 BUGS
+## BUGS
 
-=head2 PYTHON MODULES
+### PYTHON MODULES
 
 HTTPS requests do not do any verification of the server's certificate.
 For more info visit http://docs.python.org/2/library/urllib2.html. Note that
@@ -354,19 +364,18 @@ info visit http://docs.python.org/2/library/tarfile.html#supported-tar-formats.
 Note that the Zip and XZ formats are supported by SPM, the later via subprocess
 calling `tar` or `bsdtar` directly.
 
-=head2 SPM
+### SPM
 
 Single quote inside double quoted text (and vice-versa) in the SRCBUILD variables
 break the parser.
 
-=head1 AUTHORS
+## AUTHORS
 
 Ivailo Monev (a.k.a. SmiL3y) <xakepa10@gmail.com>
 
 Copyright (c) 2013-2014 Ivailo Monev licensed through the GNU General Public License
 
-=head1 SEE ALSO
+## SEE ALSO
 
-spm.conf(5) SRCBUILD(5) spm-tools(8) scanelf(1) tar(1) bsdtar(1) xz(1)
-ldconfig(8) file(1) man-db(1) git(1)
+spm.conf srcbuild spm-tools scanelf tar bsdtar xz ldconfig file man-db git
 

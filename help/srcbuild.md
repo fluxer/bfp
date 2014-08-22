@@ -1,8 +1,8 @@
-=head1 NAME
+## NAME
 
 SRCBUILD - Source Package Manager build recipe
 
-=head1 DESCRIPTION
+## DESCRIPTION
 
 SRCBUILD is used as a script, a set of instructions, how to build software
 using Source Package Manager. Its syntax is Shell (Bash), similar to those
@@ -28,124 +28,124 @@ actual install/upgrade/remove is done.
 For easy of use SOURCE_DIR and INSTALL_DIR are exported and can be used
 inside the SRCBUILD.
 
-=head1 OPTIONS
+## OPTIONS
 
-=head2 version
+### version
 
 Variable defining version of software.
 
-=head2 description
+### description
 
 Variable defining description of software.
 
-=head2 depends
+### depends
 
 Variable defining runtime dependencies of software.
 
-=head2 makedepends
+### makedepends
 
 Variable defining build dependencies of software.
 
-=head2 checkdepends
+### checkdepends
 
 Variable defining check dependencies of software.
 
-=head2 sources
+### sources
 
 Variable defining sources of software. This includes remote files, such as
 tarballs or patches, that should be fetched. Note that local files can be
 shipped along the SRCBUILD when needed.
 
-=head2 backup
+### backup
 
 Variable defining additional files to be backed up when merging software.
 Note that all files with .conf extension are automatically backed up.
 
-=head2 options
+### options
 
 Variable defining options to be used when building software. It is used
 to override the install options specified in the SPM configuration file.
 Valid options are:
 
-=head3 binaries
+#### binaries
 
 Strip binary files.
 
-=head3 shared
+#### shared
 
 Strip shared library files.
 
-=head3 static
+#### static
 
 Strip static library files.
 
-=head3 man
+#### man
 
 Compress manual page files.
 
-=head3 mirror
+#### mirror
 
 Use mirrors.
 
-=head3 missing
+#### missing
 
 Ignore missing runtime dependencies.
 
 Note that preceding an option with exclamation mark (!) has the opposite
 affect.
 
-=head3 rpath
+#### rpath
 
 Fix RPATH in binaries and libraries
 
-=head2 src_compile
+### src_compile
 
 Function defining the instructions to compile the software.
 
-=head2 src_check
+### src_check
 
 Function defining the instructions to check (test) the software.
 
-=head2 src_install
+### src_install
 
 Function defining the instructions to install the software. Note that the
 software should be installed in the temporary directory INSTALL_DIR using
 DESTDIR or other method depending on the software.
 
-=head2 pre_install
+### pre_install
 
 Function defining instructions what to do before installing the target.
 
-=head2 post_install
+### post_install
 
 Function defining instructions what to do after installing the target.
 
-=head2 pre_upgrade
+### pre_upgrade
 
 Function defining instructions what to do before upgrading the target.
 
-=head2 post_upgrade
+### post_upgrade
 
 Function defining instructions what to do after upgrading the target.
 
-=head2 pre_remove
+### pre_remove
 
 Function defining instructions what to do before removing the target.
 
-=head2 post_remove
+### post_remove
 
 Function defining instructions what to do after removing the target.
 
-=head1 EXAMPLES
+## EXAMPLES
 
 A prototype SRCBUILD should be installed in #SHAREDIR#/spm.
 
-=head1 AUTHORS
+## AUTHORS
 
 Ivailo Monev (a.k.a. SmiL3y) <xakepa10@gmail.com>
 
 Copyright (c) 2013-2014 Ivailo Monev licensed through the GNU General Public License
 
-=head1 SEE ALSO
+## SEE ALSO
 
-spm(8) spm.conf(5) bash(1)
+spm spm.conf bash
