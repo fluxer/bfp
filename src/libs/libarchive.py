@@ -1,7 +1,7 @@
 #!/bin/python2
 
-import os, sys
-import types, ctypes
+import os, sys, types, ctypes
+
 
 try:
     lib = ctypes.cdll.LoadLibrary('libarchive.so')

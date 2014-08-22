@@ -1,7 +1,6 @@
 #!/bin/python2
 
 import os, re, urllib2, tarfile, zipfile, subprocess, httplib, shutil
-
 import libmagic
 
 
@@ -22,8 +21,9 @@ class Misc(object):
             if os.path.isfile(exe):
                 return exe
         if fallback:
-            # if only the OSError exception was a bit more robust. in the future,
-            # fallback will return program and let OSError be raised at higher level
+            # if only the OSError exception was a bit more robust. in the
+            # future, fallback will return program and let OSError be raised
+            # at higher level
             raise OSError('Program not found in PATH', program)
         return None
 
@@ -55,9 +55,11 @@ class Misc(object):
     def string_search(self, string, string2, exact=False, escape=True):
         ''' Search for string in other string or list '''
         if exact and escape:
-            return re.findall('(\\s|^)' + re.escape(string) + '(\\s|$)', self.string_convert(string2))
+            return re.findall('(\\s|^)' + re.escape(string) + '(\\s|$)', \
+                self.string_convert(string2))
         elif exact:
-            return re.findall('(\\s|^)' + string + '(\\s|$)', self.string_convert(string2))
+            return re.findall('(\\s|^)' + string + '(\\s|$)', \
+                self.string_convert(string2))
         elif escape:
             return re.findall(re.escape(string), self.string_convert(string2))
         else:
@@ -111,7 +113,8 @@ class Misc(object):
 
     def file_search(self, string, sfile, exact=False, escape=True):
         ''' Search for string in file '''
-        return self.string_search(string, self.file_read(sfile), exact=exact, escape=escape)
+        return self.string_search(string, self.file_read(sfile), exact=exact, \
+            escape=escape)
 
     def file_mime(self, sfile):
         ''' Get file type '''
@@ -183,9 +186,9 @@ class Misc(object):
 
     def fetch_check(self, url, destination):
         ''' Check if remote file and file sizes are equal '''
-        # not all requests can get content-lenght , this means that there is no way
-        # to tell if the archive is corrupted (checking if size == 0 is not enough)
-        # so the source is re-feteched
+        # not all requests can get content-lenght , this means that there is
+        # no way to tell if the archive is corrupted (checking if size == 0 is
+        # not enough) so the source is re-feteched
 
         if self.OFFLINE:
             return True
@@ -240,7 +243,8 @@ class Misc(object):
         ''' Test if file is archive that can be handled properly '''
         if os.path.isdir(sfile):
             return False
-        if sfile.endswith('.xz') or sfile.endswith('.lzma') or tarfile.is_tarfile(sfile) or zipfile.is_zipfile(sfile):
+        if sfile.endswith('.xz') or sfile.endswith('.lzma') \
+            or tarfile.is_tarfile(sfile) or zipfile.is_zipfile(sfile):
             return True
         return False
 
@@ -282,12 +286,13 @@ class Misc(object):
         # Busybox version of `tar`.
 
         # standard tarfile library locks the filesystem and upon interrupt the
-        # filesystem stays locked which is bad. on top of that the tarfile library
-        # can not replace files while they are being used thus the external
-        # utilities are used for extracting archives.
+        # filesystem stays locked which is bad. on top of that the tarfile
+        # library can not replace files while they are being used thus the
+        # external utilities are used for extracting archives.
 
         # alotught bsdtar can (or should) handle Zip files we do not use it for them.
-        if sfile.endswith('.xz') or sfile.endswith('.lzma') or tarfile.is_tarfile(sfile):
+        if sfile.endswith('.xz') or sfile.endswith('.lzma') \
+            or tarfile.is_tarfile(sfile):
             bsdtar = self.whereis('bsdtar', fallback=False)
             tar = self.whereis('tar')
             if bsdtar:
@@ -311,7 +316,8 @@ class Misc(object):
             content = zfile.namelist()
             zfile.close()
         elif sfile.endswith('.xz') or sfile.endswith('.lzma'):
-            content = self.system_output((self.whereis('tar'), '-tf', sfile)).split('\n')
+            content = self.system_output((self.whereis('tar'), \
+                '-tf', sfile)).split('\n')
         return content
 
     def archive_size(self, star, sfile):
@@ -357,13 +363,15 @@ class Misc(object):
 
     def system_output(self, command, shell=False):
         ''' Get output of external utility '''
-        pipe = subprocess.Popen(command, stdout=subprocess.PIPE, env={'LC_ALL': 'C'}, shell=shell)
+        pipe = subprocess.Popen(command, stdout=subprocess.PIPE, \
+            env={'LC_ALL': 'C'}, shell=shell)
         return pipe.communicate()[0].strip()
 
     def system_input(self, command, input, shell=False):
-        ''' Get output of external utility '''
-        pipe = subprocess.Popen(command, stdin=subprocess.PIPE, stdout=subprocess.PIPE, \
-            stderr=subprocess.PIPE, env={'LC_ALL': 'C'}, shell=shell)
+        ''' Send input to external utility '''
+        pipe = subprocess.Popen(command, stdin=subprocess.PIPE, \
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE, \
+            env={'LC_ALL': 'C'}, shell=shell)
         out, err = pipe.communicate(input=input)
         if pipe.returncode != 0:
             print pipe.returncode
@@ -371,7 +379,8 @@ class Misc(object):
 
     def system_scanelf(self, sfile, sformat='#F%n', sflags=''):
         ''' Get information about ELF files '''
-        return self.system_output((self.whereis('scanelf'), '-CBF', sformat, sflags, sfile))
+        return self.system_output((self.whereis('scanelf'), '-CBF', \
+            sformat, sflags, sfile))
 
     def system_chroot(self, command):
         ''' Execute command in chroot environment '''
@@ -402,8 +411,8 @@ class Misc(object):
     def system_script(self, srcbuild, function):
         ''' Execute pre/post actions '''
         if self.ROOT_DIR == '/':
-            subprocess.check_call((self.whereis('bash'), '-e', '-c', 'source ' + srcbuild + ' && ' + function), \
-                cwd=self.ROOT_DIR)
+            subprocess.check_call((self.whereis('bash'), '-e', '-c', \
+                'source ' + srcbuild + ' && ' + function), cwd=self.ROOT_DIR)
         else:
             shutil.copy(srcbuild, os.path.join(self.ROOT_DIR, 'SRCBUILD'))
             self.system_chroot(('bash', '-e', '-c', 'source /SRCBUILD && ' + function))
