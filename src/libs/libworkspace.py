@@ -358,13 +358,16 @@ class Plugins(object):
         ''' Notify with information status '''
         nwidget = self.notify_widget('Information', msg, timeout)
         self.parent.toolBox.widget(2).layout().addWidget(nwidget)
+        self.parent.toolBox.setCurrentIndex(2)
 
     def notify_warning(self, msg, timeout=False):
         ''' Notify with warning status '''
         nwidget = self.notify_widget('Warning', msg, timeout)
         self.parent.toolBox.widget(2).layout().addWidget(nwidget)
+        self.parent.toolBox.setCurrentIndex(2)
 
     def notify_critical(self, msg, timeout=False):
         ''' Notify with critical status '''
         nwidget = self.notify_widget('Critical', msg, timeout)
         self.parent.toolBox.widget(2).layout().addWidget(nwidget)
+        self.parent.toolBox.setCurrentIndex(2)
