@@ -157,12 +157,12 @@
         <translation>Календар</translation>
     </message>
     <message>
-        <location filename="download.py" line="110"/>
+        <location filename="download.py" line="118"/>
         <source>Download manager plugin</source>
         <translation>Плъгин за управление на изтеглянията</translation>
     </message>
     <message>
-        <location filename="download.py" line="125"/>
+        <location filename="download.py" line="133"/>
         <source>Download</source>
         <translation>Изтегляне</translation>
     </message>
@@ -458,12 +458,12 @@
         <translation>Изобрайжение (*.png *.jpg *.jpeg *.svg);;Всички (*)</translation>
     </message>
     <message>
-        <location filename="download.py" line="93"/>
+        <location filename="download.py" line="97"/>
         <source>Download of &lt;b&gt;%s&lt;/b&gt; failed.</source>
         <translation>Свалянето на &lt;b&gt;%s&lt;/b&gt; се провали.</translation>
     </message>
     <message>
-        <location filename="download.py" line="95"/>
+        <location filename="download.py" line="99"/>
         <source>Download of &lt;b&gt;%s&lt;/b&gt; complete.</source>
         <translation>Свалянето на &lt;b&gt;%s&lt;/b&gt; завърши.</translation>
     </message>
@@ -513,12 +513,12 @@
         <translation>Изключен от: %s</translation>
     </message>
     <message>
-        <location filename="download.py" line="45"/>
+        <location filename="download.py" line="49"/>
         <source>URL</source>
         <translation>УРЛ</translation>
     </message>
     <message>
-        <location filename="download.py" line="45"/>
+        <location filename="download.py" line="49"/>
         <source>URL:</source>
         <translation>УРЛ:</translation>
     </message>
@@ -538,12 +538,12 @@
         <translation>Страница за помощ не е намерена: %s</translation>
     </message>
     <message>
-        <location filename="download.py" line="52"/>
+        <location filename="download.py" line="56"/>
         <source>Question</source>
         <translation>Въпрос</translation>
     </message>
     <message>
-        <location filename="download.py" line="52"/>
+        <location filename="download.py" line="56"/>
         <source>Download is in progress, do you want to abort it?</source>
         <translation>Извършва се изтегляне, сигурнили сте че искате да го прекратите?</translation>
     </message>
@@ -576,6 +576,16 @@
         <location filename="multimedia.py" line="23"/>
         <source>Save/resume position</source>
         <translation>Запази/преостанови позиция</translation>
+    </message>
+    <message>
+        <location filename="download.py" line="24"/>
+        <source>Open file on finished</source>
+        <translation>Отвори файл при завъряване</translation>
+    </message>
+    <message>
+        <location filename="download.py" line="25"/>
+        <source>Close plugin on finished</source>
+        <translation>Затвори плъгин при завъряване</translation>
     </message>
 </context>
 </TS>

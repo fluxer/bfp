@@ -136,7 +136,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'editor'
-        self.version = "0.9.31 (bfb2425)"
+        self.version = "0.9.31 (f1ea41c)"
         self.description = self.tr('Text editor plugin')
         self.icon = general.get_icon('accessories-text-editor')
         self.widget = None

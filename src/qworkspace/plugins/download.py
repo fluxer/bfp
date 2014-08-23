@@ -21,10 +21,14 @@ class Widget(QtGui.QWidget):
         self.openButton = QtGui.QPushButton(general.get_icon('document-open'), '')
         self.openButton.clicked.connect(self.download_open)
         self.openButton.setEnabled(False)
+        self.openBox = QtGui.QCheckBox(self.tr('Open file on finished'))
+        self.closeBox = QtGui.QCheckBox(self.tr('Close plugin on finished'))
         self.secondLayout = QtGui.QHBoxLayout()
         self.secondLayout.addWidget(self.addButton)
         self.secondLayout.addWidget(self.abortButton)
         self.secondLayout.addWidget(self.openButton)
+        self.secondLayout.addWidget(self.openBox)
+        self.secondLayout.addWidget(self.closeBox)
         self.mainLayout = QtGui.QGridLayout()
         self.downloadLabel = QtGui.QLabel()
         self.progressBar = QtGui.QProgressBar()
@@ -94,6 +98,10 @@ class Widget(QtGui.QWidget):
         else:
             self.parent.plugins.notify_information(self.tr('Download of <b>%s</b> complete.') % surl)
             self.openButton.setEnabled(True)
+            if self.openBox.isChecked():
+                self.download_open()
+        if self.closeBox.isChecked():
+            self.parent.plugins.plugin_close(self.name)
         self.addButton.setEnabled(True)
         self.abortButton.setEnabled(False)
         self.request = None
@@ -106,7 +114,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'download'
-        self.version = "0.9.31 (bfb2425)"
+        self.version = "0.9.31 (f1ea41c)"
         self.description = self.tr('Download manager plugin')
         self.icon = general.get_icon('document-save-as')
         self.widget = None
