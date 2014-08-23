@@ -66,6 +66,18 @@ class General(object):
                 break
         return QtGui.QIcon(sicon)
 
+    def get_pixmap(self, spixmap):
+        ''' Get icon '''
+        spixmaps = os.path.join(sys.prefix, 'share/icons')
+        scache = str(QtCore.QDir.homePath()) + '/.cache/icons.txt'
+        if not os.path.isfile(scache):
+            misc.file_write(scache, '\n'.join(misc.list_files(sicons)))
+        for spath in misc.file_readlines(scache):
+            if misc.file_name(spath) == spixmap:
+                spixmap = spath
+                break
+        return QtGui.QPixmap(spixmap)
+
     def execute_program(self, sprogram, sdetached=True, skill=False):
         ''' Execute program from PATH '''
         p = QtCore.QProcess()
@@ -321,14 +333,38 @@ class Plugins(object):
         message.info('Unregistering MIME', smime)
         self.mime_settings.delete(smime)
 
+    def notify_widget(self, stype, msg, timeout):
+        nframe = QtGui.QGroupBox(stype)
+        nicon = QtGui.QLabel()
+        if stype == 'Information':
+            nicon.setPixmap(general.get_pixmap('help-info'))
+        elif stype == 'Warning':
+            nicon.setPixmap(general.get_pixmap('dialog-warning'))
+        elif stype == 'Critical':
+            nicon.setPixmap(general.get_pixmap('dialog-critical'))
+        nlabel = QtGui.QLabel(msg)
+        nbutton = QtGui.QPushButton(general.get_icon('window-close'), 'OK')
+        nbutton.clicked.connect(nframe.deleteLater)
+        nlayout = QtGui.QGridLayout()
+        nlayout.addWidget(nicon)
+        nlayout.addWidget(nlabel)
+        nlayout.addWidget(nbutton)
+        nframe.setLayout(nlayout)
+        if timeout:
+            QtCore.QTimer.singleShot(timeout * 1000, nframe.deleteLater)
+        return nframe
+
     def notify_information(self, msg, timeout=False):
         ''' Notify with information status '''
-        QtGui.QMessageBox.information(self.parent.window, 'Information', msg)
+        nwidget = self.notify_widget('Information', msg, timeout)
+        self.parent.toolBox.widget(2).layout().addWidget(nwidget)
 
     def notify_warning(self, msg, timeout=False):
         ''' Notify with warning status '''
-        QtGui.QMessageBox.warning(self.parent.window, 'Warning', msg)
+        nwidget = self.notify_widget('Warning', msg, timeout)
+        self.parent.toolBox.widget(2).layout().addWidget(nwidget)
 
     def notify_critical(self, msg, timeout=False):
         ''' Notify with critical status '''
-        QtGui.QMessageBox.warning(self.parent.window, 'Critical', msg)
+        nwidget = self.notify_widget('Critical', msg, timeout)
+        self.parent.toolBox.widget(2).layout().addWidget(nwidget)

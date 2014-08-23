@@ -15,7 +15,7 @@ http://www.linuxfromscratch.org/blfs/view/systemd/postlfs/initramfs.html
  * Complete archive manager plugin
  * Improve audio mixer plugin
  * Improve download manager plugin (torrents support)
- * Implement Applications and Notifiaction API
+ * Implement Applications API
  * Implement XKB plugin
  * Implement chat plugin
  * Implement Steam plugin (https://developer.valvesoftware.com/wiki/SteamCMD)
