@@ -94,6 +94,8 @@ class Widget(QtGui.QWidget):
         else:
             self.parent.plugins.notify_information(self.tr('Download of <b>%s</b> complete.') % surl)
             self.openButton.setEnabled(True)
+        self.addButton.setEnabled(True)
+        self.abortButton.setEnabled(False)
         self.request = None
         self.reply = None
 
@@ -104,7 +106,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'download'
-        self.version = "0.9.31 (64b2f0e)"
+        self.version = "0.9.31 (0b75a13)"
         self.description = self.tr('Download manager plugin')
         self.icon = general.get_icon('document-save-as')
         self.widget = None
