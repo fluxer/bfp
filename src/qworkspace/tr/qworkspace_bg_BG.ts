@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="bg_BG" sourcelanguage="">
+<!DOCTYPE TS>
+<TS version="2.0" language="bg_BG">
 <context>
     <name>Daemon</name>
     <message>
@@ -41,7 +42,7 @@
         <translation>Изображение</translation>
     </message>
     <message>
-        <location filename="multimedia.py" line="97"/>
+        <location filename="multimedia.py" line="102"/>
         <source>Multimedia</source>
         <translation>Мултимедиа</translation>
     </message>
@@ -121,7 +122,7 @@
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="multimedia.py" line="74"/>
+        <location filename="multimedia.py" line="79"/>
         <source>Multimedia plugin</source>
         <translation>Мултимедиа плъгин</translation>
     </message>
@@ -156,12 +157,12 @@
         <translation>Календар</translation>
     </message>
     <message>
-        <location filename="download.py" line="108"/>
+        <location filename="download.py" line="110"/>
         <source>Download manager plugin</source>
         <translation>Плъгин за управление на изтеглянията</translation>
     </message>
     <message>
-        <location filename="download.py" line="123"/>
+        <location filename="download.py" line="125"/>
         <source>Download</source>
         <translation>Изтегляне</translation>
     </message>
@@ -522,7 +523,7 @@
         <translation>УРЛ:</translation>
     </message>
     <message>
-        <location filename="multimedia.py" line="40"/>
+        <location filename="multimedia.py" line="43"/>
         <source>Media (*.wav *.mpeg *.mkv *.avi *.flv *.3gp *.mp4);;All (*)</source>
         <translation>Медиа (*.wav *.mpeg *.mkv *.avi *.flv *.3gp *.mp4);;Всички (*)</translation>
     </message>
@@ -570,6 +571,11 @@
         <location filename="package.py" line="80"/>
         <source>candidates</source>
         <translation>кандидати</translation>
+    </message>
+    <message>
+        <location filename="multimedia.py" line="23"/>
+        <source>Save/resume position</source>
+        <translation>Запази/преостанови позиция</translation>
     </message>
 </context>
 </TS>

@@ -20,8 +20,11 @@ class Widget(QtGui.QWidget):
         # https://github.com/mpv-player/mpv/blob/master/DOCS/man/vo.rst
         self.outputBox.addItems(('x11', 'vdpau', 'vaapi', 'opengl'))
         self.outputBox.currentIndexChanged.connect(self.mpv_restart)
+        self.resumeBox = QtGui.QCheckBox(self.tr('Save/resume position'))
+        self.resumeBox.setChecked(True)
         self.secondLayout.addWidget(self.openButton)
         self.secondLayout.addWidget(self.outputBox)
+        self.secondLayout.addWidget(self.resumeBox)
         # HACK!!! QX11EmbedWidget breaks the layout horribly
         self.dummy = QtGui.QWidget(self)
         self.mainLayout = QtGui.QGridLayout()
@@ -46,6 +49,8 @@ class Widget(QtGui.QWidget):
     def mpv_start(self, spath=None):
         arguments = ['--wid', str(self.dummy.winId()), \
             '-vo', str(self.outputBox.currentText())]
+        if self.resumeBox.isChecked():
+            arguments.extend(('--resume-playback', '--save-position-on-quit'))
         if self.spath:
             arguments.append(self.spath)
         elif spath:
@@ -70,7 +75,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'multimedia'
-        self.version = "0.9.31 (0b75a13)"
+        self.version = "0.9.31 (bfb2425)"
         self.description = self.tr('Multimedia plugin')
         self.icon = general.get_icon('multimedia-player')
         self.widget = None
