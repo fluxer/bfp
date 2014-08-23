@@ -47,7 +47,7 @@ class Widget(QtGui.QWidget):
             self.mpv_restart()
 
     def mpv_start(self, spath=None):
-        arguments = ['--wid', str(self.dummy.winId()), \
+        arguments = ['--force-window', '--wid', str(self.dummy.winId()), \
             '-vo', str(self.outputBox.currentText())]
         if self.resumeBox.isChecked():
             arguments.extend(('--resume-playback', '--save-position-on-quit'))
