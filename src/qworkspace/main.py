@@ -21,8 +21,6 @@ ui.app = app
 ui.plugins = libworkspace.Plugins(ui)
 ui.window = MainWindow
 
-print misc.url_normalize('http://www.stephaniequinn.com/Music/Allegro%20from%20Duet%20in%20C%20Major.mp3', True)
-
 # setup look of application
 def setLook():
     general.set_style(app)

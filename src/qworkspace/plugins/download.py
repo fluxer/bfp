@@ -71,6 +71,7 @@ class Widget(QtGui.QWidget):
             misc.url_normalize(self.downloadLabel.text(), True))
 
     def download(self, surl):
+        # FIXME: check if file exists
         self.request = QtNetwork.QNetworkRequest(QtCore.QUrl(surl))
         self.reply = self.nam.get(self.request)
         self.reply.downloadProgress.connect(self.download_progress)
