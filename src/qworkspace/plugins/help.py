@@ -35,21 +35,22 @@ class Widget(QtGui.QWidget):
         self.mainLayout.addWidget(self.webView)
         self.setLayout(self.mainLayout)
 
-        self.help_change(self.spage)
+        if self.spage:
+            self.help_open(self.spage)
+        else:
+            self.help_open(self.helpBox.currentText())
 
-    def help_open(self, url):
+    def help_open(self, spage):
         ''' Open local URL '''
-        self.webView.setUrl(QtCore.QUrl.fromLocalFile(url))
-
-    def help_change(self, spage):
-        ''' Change currently displayed help page '''
-        if not spage:
-            spage = self.helpBox.currentText()
         for spath in misc.list_files(self.help_path):
             if spath.endswith('/' + spage):
-                return self.help_open(spath)
+                return self.webView.setUrl(QtCore.QUrl.fromLocalFile(spath))
         QtGui.QMessageBox.critical(self, self.tr('Critical'), \
             self.tr('Help page not found: %s' % spage))
+
+    def help_change(self):
+        ''' Change currently displayed help page '''
+        self.help_open(self.helpBox.currentText())
 
     def link_clicked(self, url):
         ''' Update the URL if a link on a web page is clicked '''
@@ -69,7 +70,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'help'
-        self.version = "0.9.31 (37a0285)"
+        self.version = "0.9.31 (ee00476)"
         self.description = self.tr('Help reader plugin')
         self.icon = general.get_icon('help-contents')
         self.widget = None

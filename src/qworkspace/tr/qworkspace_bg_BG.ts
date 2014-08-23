@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="bg_BG">
+<!DOCTYPE TS><TS version="2.0" language="bg_BG" sourcelanguage="">
 <context>
     <name>Daemon</name>
     <message>
@@ -167,12 +166,12 @@
         <translation>Изтегляне</translation>
     </message>
     <message>
-        <location filename="help.py" line="73"/>
+        <location filename="help.py" line="74"/>
         <source>Help reader plugin</source>
         <translation>Четец на помощ</translation>
     </message>
     <message>
-        <location filename="help.py" line="86"/>
+        <location filename="help.py" line="87"/>
         <source>Help</source>
         <translation>Помощ</translation>
     </message>
@@ -533,7 +532,7 @@
         <translation>Ново име:</translation>
     </message>
     <message>
-        <location filename="help.py" line="51"/>
+        <location filename="help.py" line="48"/>
         <source>Help page not found: %s</source>
         <translation>Страница за помощ не е намерена: %s</translation>
     </message>
