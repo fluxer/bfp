@@ -1,7 +1,7 @@
 #!/bin/pyhton2
 
 from PyQt4 import QtCore, QtGui, QtNetwork
-import os, libworkspace, libmisc
+import libworkspace, libmisc
 general = libworkspace.General()
 misc = libmisc.Misc()
 
@@ -46,12 +46,14 @@ class Widget(QtGui.QWidget):
             self.download(spath)
 
     def download_add(self):
+        ''' Start download '''
         surl, ok = QtGui.QInputDialog.getText(self, \
             self.tr('URL'), self.tr('URL:'), QtGui.QLineEdit.Normal)
         if surl:
             self.download(surl)
 
     def download_abort(self):
+        ''' Download abort '''
         if self.reply:
             reply = QtGui.QMessageBox.question(self, self.tr('Question'), \
                 self.tr('Download is in progress, do you want to abort it?'),
@@ -67,10 +69,12 @@ class Widget(QtGui.QWidget):
         self.openButton.setEnabled(False)
 
     def download_open(self):
+        ''' Download opener '''
         self.parent.plugins.plugin_open(self.download_path + '/' + \
             misc.url_normalize(self.downloadLabel.text(), True))
 
     def download(self, surl):
+        ''' Main download method '''
         # FIXME: check if file exists
         self.request = QtNetwork.QNetworkRequest(QtCore.QUrl(surl))
         self.reply = self.nam.get(self.request)
@@ -88,11 +92,13 @@ class Widget(QtGui.QWidget):
         self.progressBar.setValue(ireceived)
 
     def download_read(self):
+        ''' Download data read slot '''
         surl = str(self.reply.url().toString())
         sfile = self.download_path + '/' + misc.url_normalize(surl, True)
         misc.file_write(sfile, self.reply.readAll(), 'a')
 
     def download_finished(self):
+        ''' Download finished slot '''
         surl = self.reply.url().toString()
         if self.reply.error():
             self.parent.plugins.notify_critical(self.tr('Download of <b>%s</b> failed.') % surl)

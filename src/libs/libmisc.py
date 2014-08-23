@@ -66,6 +66,7 @@ class Misc(object):
             return re.findall(string, self.string_convert(string2))
 
     def url_normalize(self, surl, basename=False):
+        ''' Normalize URL, optionally get basename '''
         # http://www.w3schools.com/tags/ref_urlencode.asp
         dspecials = {'%20': ' '}
         sresult = urlparse.urlparse(surl).path

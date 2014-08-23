@@ -290,6 +290,7 @@ class Widget(QtGui.QWidget):
         self.parent.plugins.plugin_open_with('download', reply.url().toString())
 
     def bookmark_open(self, url):
+        ''' Open a bookmark '''
         self.urlBox.setEditText(url)
         self.path_changed()
 
@@ -300,6 +301,7 @@ class Widget(QtGui.QWidget):
         return button
 
     def context_menu(self):
+        ''' Custom context menu '''
         # FIXME: enable actions depending on what is possible
         menu = QtGui.QMenu()
         menu.addAction(self.icon_back, self.tr('Back'), self.page_back)
