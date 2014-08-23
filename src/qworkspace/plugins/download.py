@@ -68,7 +68,7 @@ class Widget(QtGui.QWidget):
 
     def download_open(self):
         self.parent.plugins.plugin_open(self.download_path + '/' + \
-            os.path.basename(self.downloadLabel.text()))
+            misc.url_normalize(self.downloadLabel.text(), True))
 
     def download(self, surl):
         self.request = QtNetwork.QNetworkRequest(QtCore.QUrl(surl))
@@ -88,7 +88,7 @@ class Widget(QtGui.QWidget):
 
     def download_read(self):
         surl = str(self.reply.url().toString())
-        sfile = self.download_path + '/' + os.path.basename(surl)
+        sfile = self.download_path + '/' + misc.url_normalize(surl, True)
         misc.file_write(sfile, self.reply.readAll(), 'a')
 
     def download_finished(self):
@@ -114,7 +114,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'download'
-        self.version = "0.9.31 (f1ea41c)"
+        self.version = "0.9.31 (062c8aa)"
         self.description = self.tr('Download manager plugin')
         self.icon = general.get_icon('document-save-as')
         self.widget = None

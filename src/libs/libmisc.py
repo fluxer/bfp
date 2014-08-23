@@ -1,6 +1,6 @@
 #!/bin/python2
 
-import os, re, urllib2, tarfile, zipfile, subprocess, httplib, shutil
+import os, re, urlparse, urllib2, tarfile, zipfile, subprocess, httplib, shutil
 import libmagic
 
 
@@ -64,6 +64,16 @@ class Misc(object):
             return re.findall(re.escape(string), self.string_convert(string2))
         else:
             return re.findall(string, self.string_convert(string2))
+
+    def url_normalize(self, surl, basename=False):
+        # http://www.w3schools.com/tags/ref_urlencode.asp
+        dspecials = {'%20': ' '}
+        sresult = urlparse.urlparse(surl).path
+        for schar in dspecials:
+            sresult = sresult.replace(schar, dspecials[schar])
+        if basename:
+            return os.path.basename(sresult)
+        return sresult
 
     def file_name(self, sfile):
         ''' Get name of file without the extension '''

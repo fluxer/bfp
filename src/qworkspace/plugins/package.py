@@ -196,7 +196,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'package'
-        self.version = "0.9.31 (f1ea41c)"
+        self.version = "0.9.31 (062c8aa)"
         self.description = self.tr('Package manager plugin')
         self.icon = general.get_icon('package-x-generic')
         self.widget = None

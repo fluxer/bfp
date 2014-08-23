@@ -9,7 +9,7 @@ from PyQt4 import QtCore, QtGui
 import sys, os, gc, libworkspace, libmisc
 
 # prepare for lift-off
-app_version = "0.9.31 (f1ea41c)"
+app_version = "0.9.31 (062c8aa)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qworkspace_ui.Ui_MainWindow()
@@ -20,6 +20,8 @@ misc = libmisc.Misc()
 ui.app = app
 ui.plugins = libworkspace.Plugins(ui)
 ui.window = MainWindow
+
+print misc.url_normalize('http://www.stephaniequinn.com/Music/Allegro%20from%20Duet%20in%20C%20Major.mp3', True)
 
 # setup look of application
 def setLook():
