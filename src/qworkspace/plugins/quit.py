@@ -10,7 +10,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'quit'
-        self.version = "0.9.31 (ee00476)"
+        self.version = "0.9.31 (c43dd85)"
         self.description = self.tr('Quit plugin')
         self.icon = general.get_icon('system-log-out')
 

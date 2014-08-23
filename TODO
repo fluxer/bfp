@@ -19,6 +19,7 @@ http://www.linuxfromscratch.org/blfs/view/systemd/postlfs/initramfs.html
  * Implement XKB plugin
  * Implement chat plugin
  * Implement Steam plugin (https://developer.valvesoftware.com/wiki/SteamCMD)
+ * Implement Bluetooth (BlueZ) plugin (http://git.kernel.org/cgit/bluetooth/bluez.git/tree/doc)
  * Implement more info into recent paths and display it with tooltip:
   - full path (done)
   - time accessed
