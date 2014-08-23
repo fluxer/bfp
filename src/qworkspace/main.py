@@ -9,7 +9,7 @@ from PyQt4 import QtCore, QtGui
 import sys, os, gc, libworkspace, libmisc
 
 # prepare for lift-off
-app_version = "0.9.31 (c43dd85)"
+app_version = "0.9.31 (64b2f0e)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qworkspace_ui.Ui_MainWindow()
@@ -19,7 +19,7 @@ general = libworkspace.General()
 misc = libmisc.Misc()
 ui.app = app
 ui.plugins = libworkspace.Plugins(ui)
-# ui.window = MainWindow
+ui.window = MainWindow
 
 # setup look of application
 def setLook():

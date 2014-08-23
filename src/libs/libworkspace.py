@@ -323,12 +323,12 @@ class Plugins(object):
 
     def notify_information(self, msg, timeout=False):
         ''' Notify with information status '''
-        QtGui.QMessageBox.information(self, 'Information', msg)
+        QtGui.QMessageBox.information(self.parent.window, 'Information', msg)
 
     def notify_warning(self, msg, timeout=False):
         ''' Notify with warning status '''
-        QtGui.QMessageBox.warning(self, 'Warning', msg)
+        QtGui.QMessageBox.warning(self.parent.window, 'Warning', msg)
 
     def notify_critical(self, msg, timeout=False):
         ''' Notify with critical status '''
-        QtGui.QMessageBox.warning(self, 'Critical', msg)
+        QtGui.QMessageBox.warning(self.parent.window, 'Critical', msg)
