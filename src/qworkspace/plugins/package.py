@@ -13,7 +13,13 @@ class Thread(QtCore.QThread):
         self.func = func
 
     def run(self):
-        self.func()
+        try:
+            self.func()
+        except SystemExit:
+            # HACK!!! ignore system exit calls
+            pass
+        except Exception as detail:
+            self.emit(QtCore.SIGNAL('failed'), str(detail))
 
 class Widget(QtGui.QWidget):
     ''' Tab widget '''
@@ -145,6 +151,7 @@ class Widget(QtGui.QWidget):
         ''' Main worker wrapper '''
         self.thread = Thread(self, func)
         self.thread.finished.connect(self.worker_stopped)
+        self.connect(self.thread, QtCore.SIGNAL('failed'), self.parent.plugins.notify_critical)
         self.worker_started()
         self.thread.start()
 
@@ -154,7 +161,7 @@ class Widget(QtGui.QWidget):
             m = libspm.Repo(libspm.REPOSITORIES, True, True, False)
             self.worker(m.main)
         except Exception as detail:
-            QtGui.QMessageBox.critical(self, self.tr('Critical'), str(detail))
+            self.parent.plugins.notify_critical(str(detail))
 
     def targets_update(self):
         ''' Update all installed targets '''
@@ -165,7 +172,7 @@ class Widget(QtGui.QWidget):
                 do_remove=False, do_depends=True, do_reverse=True, do_update=True)
             self.worker(m.main)
         except Exception as detail:
-            QtGui.QMessageBox.critical(self, self.tr('Critical'), str(detail))
+            self.parent.plugins.notify_critical(str(detail))
 
     def targets_build(self):
         ''' Build a target '''
@@ -176,7 +183,7 @@ class Widget(QtGui.QWidget):
                 do_remove=False, do_depends=True, do_reverse=True, do_update=False)
             self.worker(m.main)
         except Exception as detail:
-            QtGui.QMessageBox.critical(self, self.tr('Critical'), str(detail))
+            self.parent.plugins.notify_critical(str(detail))
 
     def targets_remove(self):
         ''' Remove a target '''
@@ -187,7 +194,7 @@ class Widget(QtGui.QWidget):
                 do_remove=True, do_depends=False, do_reverse=True, do_update=False)
             self.worker(m.main)
         except Exception as detail:
-            QtGui.QMessageBox.critical(self, self.tr('Critical'), str(detail))
+            self.parent.plugins.notify_critical(str(detail))
 
 
 class Plugin(QtCore.QObject):
