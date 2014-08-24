@@ -27,8 +27,11 @@ class Settings(object):
         self.settings.sync()
         return str(self.settings.value(svalue, sfallback))
 
-    def get_bool(self, svalue, sfallback=''):
-        if self.get(svalue, sfallback) == 'false':
+    def get_bool(self, svalue, bfallback=False):
+        sresult = self.get(svalue)
+        if not sresult:
+            return bfallback
+        elif sresult == 'false':
             return False
         return True
 
