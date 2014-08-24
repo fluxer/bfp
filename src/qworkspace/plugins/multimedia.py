@@ -3,6 +3,7 @@
 from PyQt4 import QtCore, QtGui
 import libworkspace, libmisc
 general = libworkspace.General()
+settings = libworkspace.Settings()
 misc = libmisc.Misc()
 
 class Widget(QtGui.QWidget):
@@ -21,7 +22,7 @@ class Widget(QtGui.QWidget):
         self.outputBox.addItems(('x11', 'vdpau', 'vaapi', 'opengl'))
         self.outputBox.currentIndexChanged.connect(self.mpv_restart)
         self.resumeBox = QtGui.QCheckBox(self.tr('Save/resume position'))
-        self.resumeBox.setChecked(True)
+        self.resumeBox.setChecked(bool(settings.get_bool('multimedia/save_resume', True)))
         self.secondLayout.addWidget(self.openButton)
         self.secondLayout.addWidget(self.outputBox)
         self.secondLayout.addWidget(self.resumeBox)
@@ -75,7 +76,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'multimedia'
-        self.version = "0.9.32 (4c791d7)"
+        self.version = "0.9.32 (c86f8f3)"
         self.description = self.tr('Multimedia plugin')
         self.icon = general.get_icon('multimedia-player')
         self.widget = None
@@ -108,8 +109,8 @@ class Plugin(QtCore.QObject):
             index = self.parent.tabWidget.currentIndex()
         if self.widget:
             # self.widget.container.discardClient()
-            if self.widget.process:
-                self.widget.mpv_stop()
+            settings.set('multimedia/save_resume', self.widget.resumeBox.isChecked())
+            self.widget.mpv_stop()
             self.widget.deleteLater()
             self.widget = None
             self.parent.tabWidget.removeTab(index)

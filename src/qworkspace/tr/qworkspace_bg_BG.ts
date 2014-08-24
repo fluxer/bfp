@@ -41,7 +41,7 @@
         <translation>Изображение</translation>
     </message>
     <message>
-        <location filename="multimedia.py" line="102"/>
+        <location filename="multimedia.py" line="103"/>
         <source>Multimedia</source>
         <translation>Мултимедиа</translation>
     </message>
@@ -91,7 +91,7 @@
         <translation>Терминал</translation>
     </message>
     <message>
-        <location filename="www.py" line="335"/>
+        <location filename="www.py" line="330"/>
         <source>WWW</source>
         <translation>УУУ</translation>
     </message>
@@ -121,7 +121,7 @@
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="multimedia.py" line="79"/>
+        <location filename="multimedia.py" line="80"/>
         <source>Multimedia plugin</source>
         <translation>Мултимедиа плъгин</translation>
     </message>
@@ -131,7 +131,7 @@
         <translation>Плъгин за управление на настройките</translation>
     </message>
     <message>
-        <location filename="www.py" line="322"/>
+        <location filename="www.py" line="317"/>
         <source>World Wide Web browser plugin</source>
         <translation>Плъгин за разглеждане на World Wide Web</translation>
     </message>
@@ -237,7 +237,7 @@
         <translation>Запази като</translation>
     </message>
     <message>
-        <location filename="www.py" line="275"/>
+        <location filename="www.py" line="270"/>
         <source>Find</source>
         <translation>Намери</translation>
     </message>
@@ -307,147 +307,147 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="www.py" line="238"/>
+        <location filename="www.py" line="233"/>
         <source>the remote server refused the connection (the server is not accepting requests)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="www.py" line="239"/>
+        <location filename="www.py" line="234"/>
         <source>the remote server closed the connection prematurely, before the entire reply was received and processed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="www.py" line="240"/>
+        <location filename="www.py" line="235"/>
         <source>the remote host name was not found (invalid hostname)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="www.py" line="241"/>
+        <location filename="www.py" line="236"/>
         <source>the connection to the remote server timed out</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="www.py" line="242"/>
+        <location filename="www.py" line="237"/>
         <source>the operation was canceled via calls to abort() or close() before it was finished.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="www.py" line="243"/>
+        <location filename="www.py" line="238"/>
         <source>the SSL/TLS handshake failed and the encrypted channel could not be established. The sslErrors() signal should have been emitted.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="www.py" line="244"/>
+        <location filename="www.py" line="239"/>
         <source>the connection was broken due to disconnection from the network, however the system has initiated roaming to another acess point. The request should be resubmitted and will be processed as soon as the connection is re-established.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="www.py" line="245"/>
+        <location filename="www.py" line="240"/>
         <source>the connection to the proxy server was refused (the proxy server is not accepting requests)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="www.py" line="246"/>
+        <location filename="www.py" line="241"/>
         <source>the proxy server closed the connection prematurely, before the entire reply was received and processed</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="www.py" line="247"/>
+        <location filename="www.py" line="242"/>
         <source>the proxy host name was not found (invalid proxy hostname)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="www.py" line="248"/>
+        <location filename="www.py" line="243"/>
         <source>the connection to the proxy timed out or the proxy did not reply in time to the request sent</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="www.py" line="249"/>
+        <location filename="www.py" line="244"/>
         <source>the proxy requires authentication in order to honour the request but did not accept any credentials offered (if any)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="www.py" line="250"/>
+        <location filename="www.py" line="245"/>
         <source>the access to the remote content was denied (similar to HTTP error 401)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="www.py" line="251"/>
+        <location filename="www.py" line="246"/>
         <source>the operation requested on the remote content is not permitted</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="www.py" line="252"/>
+        <location filename="www.py" line="247"/>
         <source>the remote content was not found at the server (similar to HTTP error 404)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="www.py" line="253"/>
+        <location filename="www.py" line="248"/>
         <source>the remote server requires authentication to serve the content but the credentials provided were not accepted (if any)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="www.py" line="254"/>
+        <location filename="www.py" line="249"/>
         <source>the request needed to be sent again, but this failed for example because the upload data could not be read a second time.</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="www.py" line="255"/>
+        <location filename="www.py" line="250"/>
         <source>the Network Access API cannot honor the request because the protocol is not known</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="www.py" line="256"/>
+        <location filename="www.py" line="251"/>
         <source>the requested operation is invalid for this protocol</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="www.py" line="257"/>
+        <location filename="www.py" line="252"/>
         <source>an unknown network-related error was detected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="www.py" line="258"/>
+        <location filename="www.py" line="253"/>
         <source>an unknown proxy-related error was detected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="www.py" line="259"/>
+        <location filename="www.py" line="254"/>
         <source>an unknown error related to the remote content was detected</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="www.py" line="260"/>
+        <location filename="www.py" line="255"/>
         <source>a breakdown in protocol was detected (parsing error, invalid or unexpected responses, etc.)</source>
         <translation type="unfinished"></translation>
     </message>
     <message>
-        <location filename="www.py" line="263"/>
+        <location filename="www.py" line="258"/>
         <source>unknown error</source>
         <translation>неизвестна грешка</translation>
     </message>
     <message>
-        <location filename="www.py" line="271"/>
+        <location filename="www.py" line="266"/>
         <source>SSL errors ignored: %s, %s</source>
         <translation>SSL грешка игнорирана: %s, %s</translation>
     </message>
     <message>
-        <location filename="www.py" line="281"/>
+        <location filename="www.py" line="276"/>
         <source>Search</source>
         <translation>Търси</translation>
     </message>
     <message>
-        <location filename="www.py" line="308"/>
+        <location filename="www.py" line="303"/>
         <source>Back</source>
         <translation>Назад</translation>
     </message>
     <message>
-        <location filename="www.py" line="309"/>
+        <location filename="www.py" line="304"/>
         <source>Next</source>
         <translation>Следващ</translation>
     </message>
     <message>
-        <location filename="www.py" line="310"/>
+        <location filename="www.py" line="305"/>
         <source>Reload</source>
         <translation>Презареди</translation>
     </message>
@@ -522,7 +522,7 @@
         <translation>УРЛ:</translation>
     </message>
     <message>
-        <location filename="multimedia.py" line="43"/>
+        <location filename="multimedia.py" line="44"/>
         <source>Media (*.wav *.mpeg *.mkv *.avi *.flv *.3gp *.mp4);;All (*)</source>
         <translation>Медиа (*.wav *.mpeg *.mkv *.avi *.flv *.3gp *.mp4);;Всички (*)</translation>
     </message>
@@ -572,7 +572,7 @@
         <translation>кандидати</translation>
     </message>
     <message>
-        <location filename="multimedia.py" line="23"/>
+        <location filename="multimedia.py" line="24"/>
         <source>Save/resume position</source>
         <translation>Запази/преостанови позиция</translation>
     </message>

@@ -27,6 +27,11 @@ class Settings(object):
         self.settings.sync()
         return str(self.settings.value(svalue, sfallback))
 
+    def get_bool(self, svalue, sfallback=''):
+        if self.get(svalue, sfallback) == 'false':
+            return False
+        return True
+
     def set(self, svariable, svalue):
         ''' Write settings value '''
         self.settings.sync()

@@ -20,7 +20,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'settings'
-        self.version = "0.9.32 (4c791d7)"
+        self.version = "0.9.32 (c86f8f3)"
         self.description = self.tr('Settings manager plugin')
         self.icon = general.get_icon('preferences-system')
         self.widget = None
