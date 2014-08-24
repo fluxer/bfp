@@ -41,7 +41,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'archive'
-        self.version = "0.9.32 (c86f8f3)"
+        self.version = "0.9.32 (02d7b0c)"
         self.description = self.tr('Archive manager plugin')
         self.icon = general.get_icon('archive')
         self.widget = None

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="bg_BG" sourcelanguage="">
+<!DOCTYPE TS>
+<TS version="2.0" language="bg_BG">
 <context>
     <name>Daemon</name>
     <message>
-        <location filename="storage.py" line="259"/>
+        <location filename="storage.py" line="271"/>
         <source>No sysfs support</source>
         <translation>sysfs не се поддържа</translation>
     </message>
@@ -71,12 +72,12 @@
         <translation>Снимка на екрана</translation>
     </message>
     <message>
-        <location filename="storage.py" line="312"/>
+        <location filename="storage.py" line="324"/>
         <source>Storage management plugin</source>
         <translation>Плъгин за управление на хранилищата</translation>
     </message>
     <message>
-        <location filename="storage.py" line="336"/>
+        <location filename="storage.py" line="348"/>
         <source>Storage</source>
         <translation>Хранилище</translation>
     </message>
@@ -189,12 +190,12 @@
 <context>
     <name>ToolWidget</name>
     <message>
-        <location filename="storage.py" line="299"/>
+        <location filename="storage.py" line="311"/>
         <source>Device mounted to: %s</source>
         <translation>Монтирано устройство на: %s</translation>
     </message>
     <message>
-        <location filename="storage.py" line="303"/>
+        <location filename="storage.py" line="315"/>
         <source>Device unmounted from: %s</source>
         <translation>Демонтирано устройство от: %s</translation>
     </message>
@@ -227,7 +228,7 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="storage.py" line="220"/>
+        <location filename="storage.py" line="232"/>
         <source>Open</source>
         <translation>Отвори</translation>
     </message>
@@ -252,52 +253,52 @@
         <translation>Запази</translation>
     </message>
     <message>
-        <location filename="storage.py" line="219"/>
+        <location filename="storage.py" line="231"/>
         <source>Execute</source>
         <translation>Изпулни</translation>
     </message>
     <message>
-        <location filename="storage.py" line="221"/>
+        <location filename="storage.py" line="233"/>
         <source>Open with</source>
         <translation>Отвори с</translation>
     </message>
     <message>
-        <location filename="storage.py" line="223"/>
+        <location filename="storage.py" line="235"/>
         <source>Cut</source>
         <translation>Изрежи</translation>
     </message>
     <message>
-        <location filename="storage.py" line="224"/>
+        <location filename="storage.py" line="236"/>
         <source>Copy</source>
         <translation>Копирай</translation>
     </message>
     <message>
-        <location filename="storage.py" line="225"/>
+        <location filename="storage.py" line="237"/>
         <source>Paste</source>
         <translation>Постави</translation>
     </message>
     <message>
-        <location filename="storage.py" line="227"/>
+        <location filename="storage.py" line="239"/>
         <source>Rename</source>
         <translation>Преименувай</translation>
     </message>
     <message>
-        <location filename="storage.py" line="228"/>
+        <location filename="storage.py" line="240"/>
         <source>Delete</source>
         <translation>Изтрии</translation>
     </message>
     <message>
-        <location filename="storage.py" line="229"/>
+        <location filename="storage.py" line="241"/>
         <source>Properties</source>
         <translation>Свойства</translation>
     </message>
     <message>
-        <location filename="storage.py" line="231"/>
+        <location filename="storage.py" line="243"/>
         <source>New file</source>
         <translation>Нов файл</translation>
     </message>
     <message>
-        <location filename="storage.py" line="232"/>
+        <location filename="storage.py" line="244"/>
         <source>New directory</source>
         <translation>Нова директория</translation>
     </message>
@@ -467,17 +468,17 @@
         <translation>Свалянето на &lt;b&gt;%s&lt;/b&gt; завърши.</translation>
     </message>
     <message>
-        <location filename="storage.py" line="71"/>
+        <location filename="storage.py" line="76"/>
         <source>File/directory exists</source>
         <translation>Файлът/директорията съществува</translation>
     </message>
     <message>
-        <location filename="storage.py" line="71"/>
+        <location filename="storage.py" line="76"/>
         <source>File/directory exists, new name:</source>
         <translation>Файлът/директорията съществува, ново име:</translation>
     </message>
     <message>
-        <location filename="storage.py" line="206"/>
+        <location filename="storage.py" line="218"/>
         <source>Name:</source>
         <translation>Име:</translation>
     </message>
@@ -487,7 +488,7 @@
         <translation>Неподдържан формат</translation>
     </message>
     <message>
-        <location filename="storage.py" line="85"/>
+        <location filename="storage.py" line="91"/>
         <source>Icons view</source>
         <translation>Преглед като икони</translation>
     </message>
@@ -527,7 +528,7 @@
         <translation>Медиа (*.wav *.mpeg *.mkv *.avi *.flv *.3gp *.mp4);;Всички (*)</translation>
     </message>
     <message>
-        <location filename="storage.py" line="173"/>
+        <location filename="storage.py" line="185"/>
         <source>New name:</source>
         <translation>Ново име:</translation>
     </message>
@@ -585,6 +586,16 @@
         <location filename="download.py" line="25"/>
         <source>Close plugin on finished</source>
         <translation>Затвори плъгин при завъряване</translation>
+    </message>
+    <message>
+        <location filename="storage.py" line="31"/>
+        <source>Show hidden</source>
+        <translation>Покажи скрити</translation>
+    </message>
+    <message>
+        <location filename="storage.py" line="32"/>
+        <source>Set wheather to show or hide hidden (dot) files and directories</source>
+        <translation>Задайте дали да се показват скрити (точкови) файлове и директории</translation>
     </message>
 </context>
 </TS>

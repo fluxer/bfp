@@ -28,10 +28,14 @@ class Widget(QtGui.QWidget):
         self.viewBox.addItem(self.tr('Icons view'))
         self.viewBox.addItem(self.tr('List view'))
         self.viewBox.currentIndexChanged.connect(self.change_view)
+        self.hiddenBox = QtGui.QCheckBox(self.tr('Show hidden'))
+        self.hiddenBox.setToolTip(self.tr('Set wheather to show or hide hidden (dot) files and directories'))
+        self.hiddenBox.stateChanged.connect(self.change_hidden)
         self.addressBar = QtGui.QLineEdit()
         self.addressBar.setReadOnly(True)
         self.secondLayout.addWidget(self.homeButton)
         self.secondLayout.addWidget(self.viewBox)
+        self.secondLayout.addWidget(self.hiddenBox)
         self.secondLayout.addWidget(self.addressBar)
         self.mainLayout = QtGui.QGridLayout()
         self.mainLayout.addLayout(self.secondLayout, 0, 0)
@@ -40,9 +44,9 @@ class Widget(QtGui.QWidget):
         self.setLayout(self.mainLayout)
 
         self.model = QtGui.QFileSystemModel()
-        self.model.setFilter(QtCore.QDir.AllEntries | QtCore.QDir.NoDot)
         index = self.viewBox.findText(settings.get('storage/view', self.tr('Icons view')))
         self.viewBox.setCurrentIndex(index)
+        self.hiddenBox.setChecked(settings.get_bool('storage/show_hidden', False))
         self.storageView.setSelectionMode(QtGui.QAbstractItemView.ExtendedSelection)
         self.storageView.setSelectionBehavior(QtGui.QAbstractItemView.SelectItems)
         self.storageView.setModel(self.model)
@@ -83,10 +87,17 @@ class Widget(QtGui.QWidget):
             return
 
     def change_view(self):
+        print str(self.viewBox.currentText())
         if str(self.viewBox.currentText()) == self.tr('Icons view'):
             self.storageView.setViewMode(self.storageView.IconMode)
         else:
             self.storageView.setViewMode(self.storageView.ListMode)
+
+    def change_hidden(self):
+        if self.hiddenBox.isChecked():
+            self.model.setFilter(QtCore.QDir.AllEntries | QtCore.QDir.NoDot | QtCore.QDir.Hidden)
+        else:
+            self.model.setFilter(QtCore.QDir.AllEntries | QtCore.QDir.NoDot)
 
     def path_open(self, spath):
         if not spath:
@@ -309,7 +320,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'storage'
-        self.version = "0.9.32 (c86f8f3)"
+        self.version = "0.9.32 (02d7b0c)"
         self.description = self.tr('Storage management plugin')
         self.icon = general.get_icon('system-file-manager')
         self.widget = None
@@ -342,7 +353,8 @@ class Plugin(QtCore.QObject):
         if not index:
             index = self.parent.tabWidget.currentIndex()
         if self.widget:
-            settings.set('storage/view', self.widget.viewBox.currentText())
+            settings.set('storage/view', str(self.widget.viewBox.currentText()))
+            settings.set('storage/show_hidden', self.widget.hiddenBox.isChecked())
             self.widget.deleteLater()
             self.widget = None
             self.parent.tabWidget.removeTab(index)
