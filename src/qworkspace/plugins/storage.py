@@ -44,8 +44,11 @@ class Widget(QtGui.QWidget):
         self.setLayout(self.mainLayout)
 
         self.model = QtGui.QFileSystemModel()
-        index = self.viewBox.findText(settings.get('storage/view', self.tr('Icons view')))
+        index = self.viewBox.findText(settings.get('storage/view', \
+            self.tr('Icons view')))
         self.viewBox.setCurrentIndex(index)
+        # the index does not change if settings point to first
+        self.change_view()
         self.hiddenBox.setChecked(settings.get_bool('storage/show_hidden', False))
         self.storageView.setSelectionMode(QtGui.QAbstractItemView.ExtendedSelection)
         self.storageView.setSelectionBehavior(QtGui.QAbstractItemView.SelectItems)
@@ -87,7 +90,6 @@ class Widget(QtGui.QWidget):
             return
 
     def change_view(self):
-        print str(self.viewBox.currentText())
         if str(self.viewBox.currentText()) == self.tr('Icons view'):
             self.storageView.setViewMode(self.storageView.IconMode)
         else:
@@ -95,7 +97,8 @@ class Widget(QtGui.QWidget):
 
     def change_hidden(self):
         if self.hiddenBox.isChecked():
-            self.model.setFilter(QtCore.QDir.AllEntries | QtCore.QDir.NoDot | QtCore.QDir.Hidden)
+            self.model.setFilter(QtCore.QDir.AllEntries | QtCore.QDir.NoDot \
+                | QtCore.QDir.Hidden)
         else:
             self.model.setFilter(QtCore.QDir.AllEntries | QtCore.QDir.NoDot)
 
@@ -231,20 +234,31 @@ class Widget(QtGui.QWidget):
     def menu_show(self):
         # FIXME: enable actions depending on permissions and such
         self.storageMenu = QtGui.QMenu()
-        self.storageMenu.addAction(self.icon_execute, self.tr('Execute'), self.menu_execute)
-        self.storageMenu.addAction(self.icon_open, self.tr('Open'), self.menu_open)
-        self.storageMenu.addAction(self.icon_open_with, self.tr('Open with'), self.menu_open_with)
+        self.storageMenu.addAction(self.icon_execute, \
+            self.tr('Execute'), self.menu_execute)
+        self.storageMenu.addAction(self.icon_open, \
+            self.tr('Open'), self.menu_open)
+        self.storageMenu.addAction(self.icon_open_with, \
+            self.tr('Open with'), self.menu_open_with)
         self.storageMenu.addSeparator()
-        self.storageMenu.addAction(self.icon_cut, self.tr('Cut'), self.menu_cut)
-        self.storageMenu.addAction(self.icon_copy, self.tr('Copy'), self.menu_copy)
-        self.storageMenu.addAction(self.icon_paste, self.tr('Paste'), self.menu_paste)
+        self.storageMenu.addAction(self.icon_cut, \
+            self.tr('Cut'), self.menu_cut)
+        self.storageMenu.addAction(self.icon_copy, \
+            self.tr('Copy'), self.menu_copy)
+        self.storageMenu.addAction(self.icon_paste, \
+            self.tr('Paste'), self.menu_paste)
         self.storageMenu.addSeparator()
-        self.storageMenu.addAction(self.icon_rename, self.tr('Rename'), self.menu_rename)
-        self.storageMenu.addAction(self.icon_delete, self.tr('Delete'), self.menu_delete)
-        self.storageMenu.addAction(self.icon_properties, self.tr('Properties'), self.menu_properties)
+        self.storageMenu.addAction(self.icon_rename, \
+            self.tr('Rename'), self.menu_rename)
+        self.storageMenu.addAction(self.icon_delete, \
+            self.tr('Delete'), self.menu_delete)
+        self.storageMenu.addAction(self.icon_properties, \
+            self.tr('Properties'), self.menu_properties)
         self.storageMenu.addSeparator()
-        self.storageMenu.addAction(self.icon_new_file, self.tr('New file'), self.menu_new_file)
-        self.storageMenu.addAction(self.icon_new_dir, self.tr('New directory'), self.menu_new_directory)
+        self.storageMenu.addAction(self.icon_new_file, \
+            self.tr('New file'), self.menu_new_file)
+        self.storageMenu.addAction(self.icon_new_dir, \
+            self.tr('New directory'), self.menu_new_directory)
         self.storageMenu.popup(QtGui.QCursor.pos())
 
     def menu_extract(self):
@@ -357,7 +371,7 @@ class Plugin(QtCore.QObject):
         if not index:
             index = self.parent.tabWidget.currentIndex()
         if self.widget:
-            settings.set('storage/view', str(self.widget.viewBox.currentText()))
+            settings.set('storage/view', self.widget.viewBox.currentText())
             settings.set('storage/show_hidden', self.widget.hiddenBox.isChecked())
             self.widget.deleteLater()
             self.widget = None

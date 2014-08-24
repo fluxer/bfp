@@ -23,11 +23,12 @@ class Settings(object):
             QtCore.QSettings.SystemScope, '/etc/qworkspace')
 
     def get(self, svalue, sfallback=''):
-        ''' Get settings value '''
+        ''' Get settings value as string '''
         self.settings.sync()
         return str(self.settings.value(svalue, sfallback))
 
     def get_bool(self, svalue, bfallback=False):
+        ''' Get settings value as boolean '''
         sresult = self.get(svalue)
         if not sresult:
             return bfallback
