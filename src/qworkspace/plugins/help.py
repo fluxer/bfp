@@ -70,7 +70,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'help'
-        self.version = "0.9.32 (02d7b0c)"
+        self.version = "0.9.32 (f2bc7e6)"
         self.description = self.tr('Help reader plugin')
         self.icon = general.get_icon('help-contents')
         self.widget = None

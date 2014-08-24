@@ -128,10 +128,13 @@ class Widget(QtGui.QWidget):
             self.path_open(str(self.model.filePath(svar)))
 
     def menu_open_with(self):
-        # FIXME: implement
-        # self.parent.plugins.plugins_open_with(str(self.model.filePath(svar)))
         for svar in self.storageView.selectedIndexes():
-            pass
+            splugin, bok = QtGui.QInputDialog.getItem(self, \
+                self.tr('Open with'), '', self.parent.plugins.plugins_all, \
+                editable=False)
+            if splugin:
+                self.parent.plugins.plugin_open_with(splugin, \
+                    str(self.model.filePath(svar)))
 
     def menu_cut(self):
         ''' Cut files/directories for future paste '''
@@ -320,7 +323,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'storage'
-        self.version = "0.9.32 (02d7b0c)"
+        self.version = "0.9.32 (f2bc7e6)"
         self.description = self.tr('Storage management plugin')
         self.icon = general.get_icon('system-file-manager')
         self.widget = None

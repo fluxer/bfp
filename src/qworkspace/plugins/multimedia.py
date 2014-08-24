@@ -76,7 +76,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'multimedia'
-        self.version = "0.9.32 (02d7b0c)"
+        self.version = "0.9.32 (f2bc7e6)"
         self.description = self.tr('Multimedia plugin')
         self.icon = general.get_icon('multimedia-player')
         self.widget = None
