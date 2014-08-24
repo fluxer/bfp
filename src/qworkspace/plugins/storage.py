@@ -286,7 +286,7 @@ class Daemon(QtCore.QThread):
                         system.do_mount('/dev/' + f)
                         self.emit(QtCore.SIGNAL('mounted'), '/media/' + f)
                     except Exception as detail:
-                        message.sub_critical(str(detail))
+                        self.emit(QtCore.SIGNAL('failed'), str(detail))
             for f in before:
                 if '.tmp' in f:
                     continue
@@ -295,7 +295,7 @@ class Daemon(QtCore.QThread):
                         system.do_unmount('/dev/' + f)
                         self.emit(QtCore.SIGNAL('unmounted'), '/media/' + f)
                     except Exception as detail:
-                        message.sub_critical(str(detail))
+                        self.emit(QtCore.SIGNAL('failed'), str(detail))
             time.sleep(1)
 
 
@@ -342,6 +342,7 @@ class Plugin(QtCore.QObject):
         self.daemon = Daemon(self.parent)
         self.connect(self.daemon, QtCore.SIGNAL('mounted'), self.tool.add_button)
         self.connect(self.daemon, QtCore.SIGNAL('unmounted'), self.tool.remove_button)
+        self.connect(self.daemon, QtCore.SIGNAL('failed'), self.parent.plugins.notify_critical)
         self.daemon.start()
 
     def open(self, spath):
