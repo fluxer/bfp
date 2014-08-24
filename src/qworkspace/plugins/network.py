@@ -24,18 +24,28 @@ class Widget(QtGui.QWidget):
         self.EthernetList.setHorizontalHeaderLabels(('Name', 'State'))
         self.EthernetList.horizontalHeader().setResizeMode(QtGui.QHeaderView.ResizeToContents)
         self.EthernetList.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
+        self.EthernetList.currentItemChanged.connect(self.enable_buttons)
         self.WiFiList = QtGui.QTableWidget()
         self.WiFiList.setColumnCount(3)
         self.WiFiList.setHorizontalHeaderLabels(('Name', 'Strength', 'Security'))
         self.WiFiList.horizontalHeader().setResizeMode(QtGui.QHeaderView.ResizeToContents)
         self.WiFiList.setEditTriggers(QtGui.QAbstractItemView.NoEditTriggers)
+        self.WiFiList.currentItemChanged.connect(self.enable_buttons)
         self.tabWidget.insertTab(0, self.EthernetList, 'Ethernet')
         self.tabWidget.insertTab(1, self.WiFiList, 'WiFi')
         self.secondLayout = QtGui.QHBoxLayout()
         self.scanButton = QtGui.QPushButton(general.get_icon('edit-find'), '')
+        self.scanButton.setToolTip(self.tr('Scan for services'))
+        self.scanButton.clicked.connect(self.scan_any)
         self.connectButton = QtGui.QPushButton(general.get_icon('edit-redo'), '')
+        self.connectButton.setToolTip(self.tr('Connect to selected service'))
+        self.connectButton.clicked.connect(self.connect_any)
         self.disconnectButton = QtGui.QPushButton(general.get_icon('edit-undo'), '')
+        self.disconnectButton.setToolTip(self.tr('Disconnect from selected service'))
+        self.disconnectButton.clicked.connect(self.disconnect_any)
         self.detailsButton = QtGui.QPushButton(general.get_icon('document-properties'), '')
+        self.detailsButton.setToolTip(self.tr('Get details about selected service'))
+        self.detailsButton.clicked.connect(self.details_any)
         self.tabWidget.currentChanged.connect(self.enable_buttons)
         self.secondLayout.addWidget(self.scanButton)
         self.secondLayout.addWidget(self.connectButton)
@@ -44,13 +54,6 @@ class Widget(QtGui.QWidget):
         self.mainLayout.addWidget(self.tabWidget)
         self.mainLayout.addLayout(self.secondLayout, QtCore.Qt.AlignBottom, 0)
         self.setLayout(self.mainLayout)
-
-        self.scanButton.clicked.connect(self.scan_any)
-        self.connectButton.clicked.connect(self.connect_any)
-        self.disconnectButton.clicked.connect(self.disconnect_any)
-        self.detailsButton.clicked.connect(self.details_any)
-        self.WiFiList.currentItemChanged.connect(self.enable_buttons)
-        self.EthernetList.currentItemChanged.connect(self.enable_buttons)
 
         self.scan_any()
 
@@ -308,7 +311,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'network'
-        self.version = "0.9.32 (f2bc7e6)"
+        self.version = "0.9.32 (33d6fa6)"
         self.description = self.tr('Network manager plugin')
         self.icon = general.get_icon('preferences-system-network')
         self.widget = None

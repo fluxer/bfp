@@ -42,17 +42,22 @@ class Widget(QtGui.QWidget):
         self.infoTab.setCurrentIndex(0)
         self.secondLayout = QtGui.QHBoxLayout()
         self.syncButton = QtGui.QPushButton(general.get_icon('view-refresh'), '')
+        self.syncButton.setToolTip(self.tr('Sync package repositories'))
         self.syncButton.clicked.connect(self.targets_sync)
         self.updateButton = QtGui.QPushButton(general.get_icon('system-software-update'), '')
+        self.updateButton.setToolTip(self.tr('Update system packages'))
         self.updateButton.clicked.connect(self.targets_update)
         self.buildButton = QtGui.QPushButton(general.get_icon('system-run'), '')
+        self.buildButton.setToolTip(self.tr('Build selected package(s)'))
         self.buildButton.clicked.connect(self.targets_build)
         self.removeButton = QtGui.QPushButton(general.get_icon('edit-delete'), '')
+        self.removeButton.setToolTip(self.tr('Remove selected package(s)'))
         self.removeButton.clicked.connect(self.targets_remove)
         self.targetsFilter = QtGui.QComboBox()
         self.targetsFilter.addItems((self.tr('all'), self.tr('local'), \
             self.tr('unneeded'), self.tr('candidates')))
         self.targetsFilter.addItems(database.remote_aliases())
+        self.targetsFilter.setToolTip(self.tr('Set packages filter'))
         self.targetsFilter.currentIndexChanged.connect(self.refresh_targets)
         self.mainLayout.addLayout(self.secondLayout, 0, 0)
         self.secondLayout.addWidget(self.syncButton)
@@ -203,7 +208,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'package'
-        self.version = "0.9.32 (f2bc7e6)"
+        self.version = "0.9.32 (33d6fa6)"
         self.description = self.tr('Package manager plugin')
         self.icon = general.get_icon('package-x-generic')
         self.widget = None

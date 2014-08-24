@@ -15,7 +15,9 @@ class Widget(QtGui.QWidget):
         self.name = 'screenshot'
 
         self.delayBox = QtGui.QSpinBox()
+        self.delayBox.setToolTip(self.tr('Set time to wait before taking screenshot'))
         self.takeButton = QtGui.QPushButton(general.get_icon('image-x-generic'), '')
+        self.takeButton.setToolTip(self.tr('Take screenshot'))
         self.takeButton.clicked.connect(self.take_screenshot)
         self.mainLayout = QtGui.QGridLayout()
         self.mainLayout.addWidget(self.delayBox)
@@ -63,7 +65,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'screenshot'
-        self.version = "0.9.32 (f2bc7e6)"
+        self.version = "0.9.32 (33d6fa6)"
         self.description = self.tr('Screenshot taking plugin')
         self.icon = general.get_icon('application-x-desktop')
         self.widget = None

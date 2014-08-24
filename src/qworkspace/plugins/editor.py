@@ -15,27 +15,34 @@ class Widget(QtGui.QWidget):
         self.sedit = spath
         self.secondLayout = QtGui.QHBoxLayout()
         self.openButton = QtGui.QPushButton(general.get_icon('document-open'), '')
+        self.openButton.setToolTip(self.tr('Open file'))
         self.openButton.clicked.connect(self.open_file)
         self.openButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+O')))
         self.saveButton = QtGui.QPushButton(general.get_icon('document-save'), '')
+        self.saveButton.setToolTip(self.tr('Save file'))
         self.saveButton.clicked.connect(self.save_file)
         self.saveButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+S')))
         self.saveButton.setEnabled(False)
         self.saveAsButton = QtGui.QPushButton(general.get_icon('document-save-as'), '')
+        self.saveAsButton.setToolTip(self.tr('Save file as'))
         self.saveAsButton.clicked.connect(self.save_as_file)
         self.reloadButton = QtGui.QPushButton(general.get_icon('view-refresh'), '')
+        self.reloadButton.setToolTip(self.tr('Reload currently loaded file'))
         self.reloadButton.clicked.connect(self.reload_file)
         self.reloadButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+R')))
         self.reloadButton.setEnabled(False)
         self.findButton = QtGui.QPushButton(general.get_icon('edit-find'), '')
+        self.findButton.setToolTip(self.tr('Find text in currently loaded file'))
         self.findButton.clicked.connect(self.find_text)
         self.findButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+F')))
         self.findButton.setEnabled(False)
         self.fontButton = QtGui.QPushButton(general.get_icon('applications-fonts'), '')
+        self.fontButton.setToolTip(self.tr('Change font in use'))
         self.fontButton.clicked.connect(self.set_font)
         self.fontButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+N')))
         self.highlighterBox = QtGui.QComboBox()
         self.highlighterBox.addItems(('None', 'Python', 'Shell', 'C'))
+        self.highlighterBox.setToolTip(self.tr('Set syntax highlighter'))
         self.highlighterBox.currentIndexChanged.connect(self.set_highlighter)
         self.secondLayout.addWidget(self.openButton)
         self.secondLayout.addWidget(self.saveButton)
@@ -136,7 +143,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'editor'
-        self.version = "0.9.32 (f2bc7e6)"
+        self.version = "0.9.32 (33d6fa6)"
         self.description = self.tr('Text editor plugin')
         self.icon = general.get_icon('accessories-text-editor')
         self.widget = None

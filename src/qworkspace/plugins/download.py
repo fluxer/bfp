@@ -14,11 +14,14 @@ class Widget(QtGui.QWidget):
         self.name = 'download'
 
         self.addButton = QtGui.QPushButton(general.get_icon('list-add'), '')
+        self.addButton.setToolTip(self.tr('Add URL to the download queue'))
         self.addButton.clicked.connect(self.download_add)
         self.abortButton = QtGui.QPushButton(general.get_icon('edit-delete'), '')
+        self.abortButton.setToolTip(self.tr('Abort current download'))
         self.abortButton.clicked.connect(self.download_abort)
         self.abortButton.setEnabled(False)
         self.openButton = QtGui.QPushButton(general.get_icon('document-open'), '')
+        self.openButton.setToolTip(self.tr('Open downloaded file'))
         self.openButton.clicked.connect(self.download_open)
         self.openButton.setEnabled(False)
         self.openBox = QtGui.QCheckBox(self.tr('Open file on finished'))
@@ -121,7 +124,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'download'
-        self.version = "0.9.32 (f2bc7e6)"
+        self.version = "0.9.32 (33d6fa6)"
         self.description = self.tr('Download manager plugin')
         self.icon = general.get_icon('document-save-as')
         self.widget = None

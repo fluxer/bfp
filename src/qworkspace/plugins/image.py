@@ -18,14 +18,18 @@ class Widget(QtGui.QWidget):
         self.imageView.setText('')
         self.imageView.setScaledContents(True)
         self.openButton = QtGui.QPushButton(general.get_icon('document-open'), '')
+        self.openButton.setToolTip(self.tr('Open file'))
         self.openButton.clicked.connect(self.open_file)
         self.nextButton = QtGui.QPushButton(general.get_icon('go-next'), '')
+        self.nextButton.setToolTip(self.tr('Next file'))
         self.nextButton.clicked.connect(self.next_image)
         self.nextButton.setEnabled(False)
         self.previousButton = QtGui.QPushButton(general.get_icon('go-previous'), '')
+        self.previousButton.setToolTip(self.tr('Previous file'))
         self.previousButton.clicked.connect(self.previous_image)
         self.previousButton.setEnabled(False)
         self.reloadButton = QtGui.QPushButton(general.get_icon('view-refresh'), '')
+        self.reloadButton.setToolTip(self.tr('Reload currently loaded file'))
         self.reloadButton.clicked.connect(self.reload_file)
         self.reloadButton.setEnabled(False)
         self.secondLayout = QtGui.QHBoxLayout()
@@ -120,7 +124,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'image'
-        self.version = "0.9.32 (f2bc7e6)"
+        self.version = "0.9.32 (33d6fa6)"
         self.description = self.tr('Image viewer plugin')
         self.icon = general.get_icon('image-x-generic')
         self.widget = None

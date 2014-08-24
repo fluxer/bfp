@@ -23,16 +23,19 @@ class Widget(QtGui.QWidget):
 
         self.secondLayout = QtGui.QHBoxLayout()
         self.homeButton = QtGui.QPushButton(general.get_icon('user-home'), '')
+        self.homeButton.setToolTip(self.tr('Go to Home directory'))
         self.homeButton.clicked.connect(lambda: self.path_open(self.shome))
         self.viewBox = QtGui.QComboBox()
         self.viewBox.addItem(self.tr('Icons view'))
         self.viewBox.addItem(self.tr('List view'))
+        self.viewBox.setToolTip(self.tr('Set view mode of files and directories'))
         self.viewBox.currentIndexChanged.connect(self.change_view)
         self.hiddenBox = QtGui.QCheckBox(self.tr('Show hidden'))
         self.hiddenBox.setToolTip(self.tr('Set wheather to show or hide hidden (dot) files and directories'))
         self.hiddenBox.stateChanged.connect(self.change_hidden)
         self.addressBar = QtGui.QLineEdit()
         self.addressBar.setReadOnly(True)
+        self.addressBar.setToolTip(self.tr('Path to current directory'))
         self.secondLayout.addWidget(self.homeButton)
         self.secondLayout.addWidget(self.viewBox)
         self.secondLayout.addWidget(self.hiddenBox)
@@ -339,7 +342,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'storage'
-        self.version = "0.9.32 (f2bc7e6)"
+        self.version = "0.9.32 (33d6fa6)"
         self.description = self.tr('Storage management plugin')
         self.icon = general.get_icon('system-file-manager')
         self.widget = None

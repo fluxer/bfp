@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="bg_BG" sourcelanguage="">
+<!DOCTYPE TS>
+<TS version="2.0" language="bg_BG">
 <context>
     <name>Daemon</name>
     <message>
-        <location filename="storage.py" line="274"/>
+        <location filename="storage.py" line="293"/>
         <source>No sysfs support</source>
         <translation>sysfs не се поддържа</translation>
     </message>
@@ -21,37 +22,37 @@
         <translation>Фалшив</translation>
     </message>
     <message>
-        <location filename="editor.py" line="140"/>
+        <location filename="editor.py" line="147"/>
         <source>Text editor plugin</source>
         <translation>Плъгин за редактиране на текст</translation>
     </message>
     <message>
-        <location filename="editor.py" line="166"/>
+        <location filename="editor.py" line="173"/>
         <source>Editor</source>
         <translation>Редактор</translation>
     </message>
     <message>
-        <location filename="image.py" line="124"/>
+        <location filename="image.py" line="128"/>
         <source>Image viewer plugin</source>
         <translation>Плъгин за преглед на изображения</translation>
     </message>
     <message>
-        <location filename="image.py" line="143"/>
+        <location filename="image.py" line="147"/>
         <source>Image</source>
         <translation>Изображение</translation>
     </message>
     <message>
-        <location filename="multimedia.py" line="103"/>
+        <location filename="multimedia.py" line="106"/>
         <source>Multimedia</source>
         <translation>Мултимедиа</translation>
     </message>
     <message>
-        <location filename="package.py" line="207"/>
+        <location filename="package.py" line="212"/>
         <source>Package manager plugin</source>
         <translation>Плъгин за управление на пакетите </translation>
     </message>
     <message>
-        <location filename="package.py" line="220"/>
+        <location filename="package.py" line="225"/>
         <source>Package</source>
         <translation>Пакет</translation>
     </message>
@@ -61,22 +62,22 @@
         <translation>Плъгин за приключване</translation>
     </message>
     <message>
-        <location filename="screenshot.py" line="67"/>
+        <location filename="screenshot.py" line="69"/>
         <source>Screenshot taking plugin</source>
         <translation>Плъгин за правене на снимка на екрана</translation>
     </message>
     <message>
-        <location filename="screenshot.py" line="80"/>
+        <location filename="screenshot.py" line="82"/>
         <source>Screenshot</source>
         <translation>Снимка на екрана</translation>
     </message>
     <message>
-        <location filename="storage.py" line="327"/>
+        <location filename="storage.py" line="346"/>
         <source>Storage management plugin</source>
         <translation>Плъгин за управление на хранилищата</translation>
     </message>
     <message>
-        <location filename="storage.py" line="351"/>
+        <location filename="storage.py" line="371"/>
         <source>Storage</source>
         <translation>Хранилище</translation>
     </message>
@@ -91,7 +92,7 @@
         <translation>Терминал</translation>
     </message>
     <message>
-        <location filename="www.py" line="330"/>
+        <location filename="www.py" line="337"/>
         <source>WWW</source>
         <translation>УУУ</translation>
     </message>
@@ -106,12 +107,12 @@
         <translation>Архив</translation>
     </message>
     <message>
-        <location filename="network.py" line="314"/>
+        <location filename="network.py" line="317"/>
         <source>Network manager plugin</source>
         <translation>Плъгин за управление на мрежата</translation>
     </message>
     <message>
-        <location filename="network.py" line="327"/>
+        <location filename="network.py" line="330"/>
         <source>Network</source>
         <translation>Мрежа</translation>
     </message>
@@ -121,7 +122,7 @@
         <translation>Настройки</translation>
     </message>
     <message>
-        <location filename="multimedia.py" line="80"/>
+        <location filename="multimedia.py" line="83"/>
         <source>Multimedia plugin</source>
         <translation>Мултимедиа плъгин</translation>
     </message>
@@ -131,7 +132,7 @@
         <translation>Плъгин за управление на настройките</translation>
     </message>
     <message>
-        <location filename="www.py" line="317"/>
+        <location filename="www.py" line="324"/>
         <source>World Wide Web browser plugin</source>
         <translation>Плъгин за разглеждане на World Wide Web</translation>
     </message>
@@ -156,22 +157,22 @@
         <translation>Календар</translation>
     </message>
     <message>
-        <location filename="download.py" line="125"/>
+        <location filename="download.py" line="128"/>
         <source>Download manager plugin</source>
         <translation>Плъгин за управление на изтеглянията</translation>
     </message>
     <message>
-        <location filename="download.py" line="140"/>
+        <location filename="download.py" line="143"/>
         <source>Download</source>
         <translation>Изтегляне</translation>
     </message>
     <message>
-        <location filename="help.py" line="74"/>
+        <location filename="help.py" line="76"/>
         <source>Help reader plugin</source>
         <translation>Четец на помощ</translation>
     </message>
     <message>
-        <location filename="help.py" line="87"/>
+        <location filename="help.py" line="89"/>
         <source>Help</source>
         <translation>Помощ</translation>
     </message>
@@ -189,12 +190,12 @@
 <context>
     <name>ToolWidget</name>
     <message>
-        <location filename="storage.py" line="314"/>
+        <location filename="storage.py" line="333"/>
         <source>Device mounted to: %s</source>
         <translation>Монтирано устройство на: %s</translation>
     </message>
     <message>
-        <location filename="storage.py" line="318"/>
+        <location filename="storage.py" line="337"/>
         <source>Device unmounted from: %s</source>
         <translation>Демонтирано устройство от: %s</translation>
     </message>
@@ -202,282 +203,282 @@
 <context>
     <name>Widget</name>
     <message>
-        <location filename="editor.py" line="19"/>
+        <location filename="editor.py" line="20"/>
         <source>CTRL+O</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="www.py" line="118"/>
+        <location filename="www.py" line="123"/>
         <source>CTRL+S</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="www.py" line="114"/>
+        <location filename="www.py" line="117"/>
         <source>CTRL+R</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="www.py" line="116"/>
+        <location filename="www.py" line="120"/>
         <source>CTRL+F</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="www.py" line="112"/>
+        <location filename="www.py" line="115"/>
         <source>CTRL+N</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="storage.py" line="235"/>
+        <location filename="storage.py" line="244"/>
         <source>Open</source>
         <translation>Отвори</translation>
     </message>
     <message>
-        <location filename="editor.py" line="96"/>
+        <location filename="editor.py" line="103"/>
         <source>Save as</source>
         <translation>Запази като</translation>
     </message>
     <message>
-        <location filename="www.py" line="270"/>
+        <location filename="www.py" line="277"/>
         <source>Find</source>
         <translation>Намери</translation>
     </message>
     <message>
-        <location filename="network.py" line="80"/>
+        <location filename="network.py" line="83"/>
         <source>Critical</source>
         <translation>Критично</translation>
     </message>
     <message>
-        <location filename="screenshot.py" line="49"/>
+        <location filename="screenshot.py" line="51"/>
         <source>Save</source>
         <translation>Запази</translation>
     </message>
     <message>
-        <location filename="storage.py" line="234"/>
+        <location filename="storage.py" line="242"/>
         <source>Execute</source>
         <translation>Изпулни</translation>
     </message>
     <message>
-        <location filename="storage.py" line="236"/>
+        <location filename="storage.py" line="246"/>
         <source>Open with</source>
         <translation>Отвори с</translation>
     </message>
     <message>
-        <location filename="storage.py" line="238"/>
+        <location filename="storage.py" line="249"/>
         <source>Cut</source>
         <translation>Изрежи</translation>
     </message>
     <message>
-        <location filename="storage.py" line="239"/>
+        <location filename="storage.py" line="251"/>
         <source>Copy</source>
         <translation>Копирай</translation>
     </message>
     <message>
-        <location filename="storage.py" line="240"/>
+        <location filename="storage.py" line="253"/>
         <source>Paste</source>
         <translation>Постави</translation>
     </message>
     <message>
-        <location filename="storage.py" line="242"/>
+        <location filename="storage.py" line="256"/>
         <source>Rename</source>
         <translation>Преименувай</translation>
     </message>
     <message>
-        <location filename="storage.py" line="243"/>
+        <location filename="storage.py" line="258"/>
         <source>Delete</source>
         <translation>Изтрии</translation>
     </message>
     <message>
-        <location filename="storage.py" line="244"/>
+        <location filename="storage.py" line="260"/>
         <source>Properties</source>
         <translation>Свойства</translation>
     </message>
     <message>
-        <location filename="storage.py" line="246"/>
+        <location filename="storage.py" line="263"/>
         <source>New file</source>
         <translation>Нов файл</translation>
     </message>
     <message>
-        <location filename="storage.py" line="247"/>
+        <location filename="storage.py" line="265"/>
         <source>New directory</source>
         <translation>Нова директория</translation>
     </message>
     <message>
-        <location filename="www.py" line="109"/>
+        <location filename="www.py" line="111"/>
         <source>CTRL+B</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="www.py" line="233"/>
-        <source>the remote server refused the connection (the server is not accepting requests)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="www.py" line="234"/>
-        <source>the remote server closed the connection prematurely, before the entire reply was received and processed</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="www.py" line="235"/>
-        <source>the remote host name was not found (invalid hostname)</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="www.py" line="236"/>
-        <source>the connection to the remote server timed out</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="www.py" line="237"/>
-        <source>the operation was canceled via calls to abort() or close() before it was finished.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="www.py" line="238"/>
-        <source>the SSL/TLS handshake failed and the encrypted channel could not be established. The sslErrors() signal should have been emitted.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
-        <location filename="www.py" line="239"/>
-        <source>the connection was broken due to disconnection from the network, however the system has initiated roaming to another acess point. The request should be resubmitted and will be processed as soon as the connection is re-established.</source>
-        <translation type="unfinished"></translation>
-    </message>
-    <message>
         <location filename="www.py" line="240"/>
-        <source>the connection to the proxy server was refused (the proxy server is not accepting requests)</source>
-        <translation type="unfinished"></translation>
+        <source>the remote server refused the connection (the server is not accepting requests)</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="www.py" line="241"/>
-        <source>the proxy server closed the connection prematurely, before the entire reply was received and processed</source>
-        <translation type="unfinished"></translation>
+        <source>the remote server closed the connection prematurely, before the entire reply was received and processed</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="www.py" line="242"/>
-        <source>the proxy host name was not found (invalid proxy hostname)</source>
-        <translation type="unfinished"></translation>
+        <source>the remote host name was not found (invalid hostname)</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="www.py" line="243"/>
-        <source>the connection to the proxy timed out or the proxy did not reply in time to the request sent</source>
-        <translation type="unfinished"></translation>
+        <source>the connection to the remote server timed out</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="www.py" line="244"/>
-        <source>the proxy requires authentication in order to honour the request but did not accept any credentials offered (if any)</source>
-        <translation type="unfinished"></translation>
+        <source>the operation was canceled via calls to abort() or close() before it was finished.</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="www.py" line="245"/>
-        <source>the access to the remote content was denied (similar to HTTP error 401)</source>
-        <translation type="unfinished"></translation>
+        <source>the SSL/TLS handshake failed and the encrypted channel could not be established. The sslErrors() signal should have been emitted.</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="www.py" line="246"/>
-        <source>the operation requested on the remote content is not permitted</source>
-        <translation type="unfinished"></translation>
+        <source>the connection was broken due to disconnection from the network, however the system has initiated roaming to another acess point. The request should be resubmitted and will be processed as soon as the connection is re-established.</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="www.py" line="247"/>
-        <source>the remote content was not found at the server (similar to HTTP error 404)</source>
-        <translation type="unfinished"></translation>
+        <source>the connection to the proxy server was refused (the proxy server is not accepting requests)</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="www.py" line="248"/>
-        <source>the remote server requires authentication to serve the content but the credentials provided were not accepted (if any)</source>
-        <translation type="unfinished"></translation>
+        <source>the proxy server closed the connection prematurely, before the entire reply was received and processed</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="www.py" line="249"/>
-        <source>the request needed to be sent again, but this failed for example because the upload data could not be read a second time.</source>
-        <translation type="unfinished"></translation>
+        <source>the proxy host name was not found (invalid proxy hostname)</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="www.py" line="250"/>
-        <source>the Network Access API cannot honor the request because the protocol is not known</source>
-        <translation type="unfinished"></translation>
+        <source>the connection to the proxy timed out or the proxy did not reply in time to the request sent</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="www.py" line="251"/>
-        <source>the requested operation is invalid for this protocol</source>
-        <translation type="unfinished"></translation>
+        <source>the proxy requires authentication in order to honour the request but did not accept any credentials offered (if any)</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="www.py" line="252"/>
-        <source>an unknown network-related error was detected</source>
-        <translation type="unfinished"></translation>
+        <source>the access to the remote content was denied (similar to HTTP error 401)</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="www.py" line="253"/>
-        <source>an unknown proxy-related error was detected</source>
-        <translation type="unfinished"></translation>
+        <source>the operation requested on the remote content is not permitted</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="www.py" line="254"/>
-        <source>an unknown error related to the remote content was detected</source>
-        <translation type="unfinished"></translation>
+        <source>the remote content was not found at the server (similar to HTTP error 404)</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="www.py" line="255"/>
-        <source>a breakdown in protocol was detected (parsing error, invalid or unexpected responses, etc.)</source>
-        <translation type="unfinished"></translation>
+        <source>the remote server requires authentication to serve the content but the credentials provided were not accepted (if any)</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="www.py" line="256"/>
+        <source>the request needed to be sent again, but this failed for example because the upload data could not be read a second time.</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="www.py" line="257"/>
+        <source>the Network Access API cannot honor the request because the protocol is not known</source>
+        <translation></translation>
     </message>
     <message>
         <location filename="www.py" line="258"/>
+        <source>the requested operation is invalid for this protocol</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="www.py" line="259"/>
+        <source>an unknown network-related error was detected</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="www.py" line="260"/>
+        <source>an unknown proxy-related error was detected</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="www.py" line="261"/>
+        <source>an unknown error related to the remote content was detected</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="www.py" line="262"/>
+        <source>a breakdown in protocol was detected (parsing error, invalid or unexpected responses, etc.)</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="www.py" line="265"/>
         <source>unknown error</source>
         <translation>неизвестна грешка</translation>
     </message>
     <message>
-        <location filename="www.py" line="266"/>
+        <location filename="www.py" line="273"/>
         <source>SSL errors ignored: %s, %s</source>
         <translation>SSL грешка игнорирана: %s, %s</translation>
     </message>
     <message>
-        <location filename="www.py" line="276"/>
+        <location filename="www.py" line="283"/>
         <source>Search</source>
         <translation>Търси</translation>
     </message>
     <message>
-        <location filename="www.py" line="303"/>
+        <location filename="www.py" line="310"/>
         <source>Back</source>
         <translation>Назад</translation>
     </message>
     <message>
-        <location filename="www.py" line="304"/>
+        <location filename="www.py" line="311"/>
         <source>Next</source>
         <translation>Следващ</translation>
     </message>
     <message>
-        <location filename="www.py" line="305"/>
+        <location filename="www.py" line="312"/>
         <source>Reload</source>
         <translation>Презареди</translation>
     </message>
     <message>
-        <location filename="screenshot.py" line="49"/>
+        <location filename="screenshot.py" line="51"/>
         <source>Image (*.png *.jpg *.jpeg *.svg);;All (*)</source>
         <translation>Изобрайжение (*.png *.jpg *.jpeg *.svg);;Всички (*)</translation>
     </message>
     <message>
-        <location filename="download.py" line="104"/>
+        <location filename="download.py" line="107"/>
         <source>Download of &lt;b&gt;%s&lt;/b&gt; failed.</source>
         <translation>Свалянето на &lt;b&gt;%s&lt;/b&gt; се провали.</translation>
     </message>
     <message>
-        <location filename="download.py" line="106"/>
+        <location filename="download.py" line="109"/>
         <source>Download of &lt;b&gt;%s&lt;/b&gt; complete.</source>
         <translation>Свалянето на &lt;b&gt;%s&lt;/b&gt; завърши.</translation>
     </message>
     <message>
-        <location filename="storage.py" line="76"/>
+        <location filename="storage.py" line="84"/>
         <source>File/directory exists</source>
         <translation>Файлът/директорията съществува</translation>
     </message>
     <message>
-        <location filename="storage.py" line="76"/>
+        <location filename="storage.py" line="84"/>
         <source>File/directory exists, new name:</source>
         <translation>Файлът/директорията съществува, ново име:</translation>
     </message>
     <message>
-        <location filename="storage.py" line="221"/>
+        <location filename="storage.py" line="229"/>
         <source>Name:</source>
         <translation>Име:</translation>
     </message>
@@ -487,114 +488,294 @@
         <translation>Неподдържан формат</translation>
     </message>
     <message>
-        <location filename="storage.py" line="91"/>
+        <location filename="storage.py" line="98"/>
         <source>Icons view</source>
         <translation>Преглед като икони</translation>
     </message>
     <message>
-        <location filename="storage.py" line="29"/>
+        <location filename="storage.py" line="30"/>
         <source>List view</source>
         <translation>Преглед като лист</translation>
     </message>
     <message>
-        <location filename="network.py" line="232"/>
+        <location filename="network.py" line="235"/>
         <source>Details</source>
         <translation>Детайли</translation>
     </message>
     <message>
-        <location filename="network.py" line="93"/>
+        <location filename="network.py" line="96"/>
         <source>Connected to: %s</source>
         <translation>Свързан към: %s</translation>
     </message>
     <message>
-        <location filename="network.py" line="97"/>
+        <location filename="network.py" line="100"/>
         <source>Disconnected from: %s</source>
         <translation>Изключен от: %s</translation>
     </message>
     <message>
-        <location filename="download.py" line="50"/>
+        <location filename="download.py" line="53"/>
         <source>URL</source>
         <translation>УРЛ</translation>
     </message>
     <message>
-        <location filename="download.py" line="50"/>
+        <location filename="download.py" line="53"/>
         <source>URL:</source>
         <translation>УРЛ:</translation>
     </message>
     <message>
-        <location filename="multimedia.py" line="44"/>
+        <location filename="multimedia.py" line="47"/>
         <source>Media (*.wav *.mpeg *.mkv *.avi *.flv *.3gp *.mp4);;All (*)</source>
         <translation>Медиа (*.wav *.mpeg *.mkv *.avi *.flv *.3gp *.mp4);;Всички (*)</translation>
     </message>
     <message>
-        <location filename="storage.py" line="188"/>
+        <location filename="storage.py" line="196"/>
         <source>New name:</source>
         <translation>Ново име:</translation>
     </message>
     <message>
-        <location filename="help.py" line="48"/>
+        <location filename="help.py" line="50"/>
         <source>Help page not found: %s</source>
         <translation>Страница за помощ не е намерена: %s</translation>
     </message>
     <message>
-        <location filename="download.py" line="58"/>
+        <location filename="download.py" line="61"/>
         <source>Question</source>
         <translation>Въпрос</translation>
     </message>
     <message>
-        <location filename="download.py" line="58"/>
+        <location filename="download.py" line="61"/>
         <source>Download is in progress, do you want to abort it?</source>
         <translation>Извършва се изтегляне, сигурнили сте че искате да го прекратите?</translation>
     </message>
     <message>
-        <location filename="editor.py" line="96"/>
+        <location filename="editor.py" line="103"/>
         <source>Text (*.txt *.sh *.bash *.diff *.patch *.py *c *.h *.cpp *.hpp *.html *.pl);;All (*)</source>
         <translation>Текст (*.txt *.sh *.bash *.diff *.patch *.py *c *.h *.cpp *.hpp *.html *.pl);;Всички (*)</translation>
     </message>
     <message>
-        <location filename="package.py" line="77"/>
+        <location filename="package.py" line="82"/>
         <source>all</source>
         <translation>всички</translation>
     </message>
     <message>
-        <location filename="package.py" line="79"/>
+        <location filename="package.py" line="84"/>
         <source>local</source>
         <translation>локални</translation>
     </message>
     <message>
-        <location filename="package.py" line="81"/>
+        <location filename="package.py" line="86"/>
         <source>unneeded</source>
         <translation>ненужни</translation>
     </message>
     <message>
-        <location filename="package.py" line="86"/>
+        <location filename="package.py" line="91"/>
         <source>candidates</source>
         <translation>кандидати</translation>
     </message>
     <message>
-        <location filename="multimedia.py" line="24"/>
-        <source>Save/resume position</source>
-        <translation>Запази/преостанови позиция</translation>
-    </message>
-    <message>
-        <location filename="download.py" line="24"/>
+        <location filename="download.py" line="27"/>
         <source>Open file on finished</source>
         <translation>Отвори файл при завъряване</translation>
     </message>
     <message>
-        <location filename="download.py" line="25"/>
+        <location filename="download.py" line="28"/>
         <source>Close plugin on finished</source>
         <translation>Затвори плъгин при завъряване</translation>
     </message>
     <message>
-        <location filename="storage.py" line="31"/>
+        <location filename="storage.py" line="33"/>
         <source>Show hidden</source>
         <translation>Покажи скрити</translation>
     </message>
     <message>
-        <location filename="storage.py" line="32"/>
+        <location filename="storage.py" line="34"/>
         <source>Set wheather to show or hide hidden (dot) files and directories</source>
         <translation>Задайте дали да се показват скрити (точкови) файлове и директории</translation>
+    </message>
+    <message>
+        <location filename="download.py" line="17"/>
+        <source>Add URL to the download queue</source>
+        <translation>Добави УРЛ кум чакащите сваляния</translation>
+    </message>
+    <message>
+        <location filename="download.py" line="20"/>
+        <source>Abort current download</source>
+        <translation>Прекрати текущотото изтегляне</translation>
+    </message>
+    <message>
+        <location filename="download.py" line="24"/>
+        <source>Open downloaded file</source>
+        <translation>Отвори изтегленият файл</translation>
+    </message>
+    <message>
+        <location filename="multimedia.py" line="19"/>
+        <source>Open file</source>
+        <translation>Отвори файл</translation>
+    </message>
+    <message>
+        <location filename="editor.py" line="22"/>
+        <source>Save file</source>
+        <translation>Запази файл</translation>
+    </message>
+    <message>
+        <location filename="editor.py" line="27"/>
+        <source>Save file as</source>
+        <translation>Запази файл като</translation>
+    </message>
+    <message>
+        <location filename="image.py" line="32"/>
+        <source>Reload currently loaded file</source>
+        <translation>Презареди текущият зареден файл</translation>
+    </message>
+    <message>
+        <location filename="editor.py" line="35"/>
+        <source>Find text in currently loaded file</source>
+        <translation>Намери текст в текущият зареден файл</translation>
+    </message>
+    <message>
+        <location filename="editor.py" line="40"/>
+        <source>Change font in use</source>
+        <translation>Смени шрифта в ползуване</translation>
+    </message>
+    <message>
+        <location filename="editor.py" line="45"/>
+        <source>Set syntax highlighter</source>
+        <translation>Задай маркер на синтаксиса</translation>
+    </message>
+    <message>
+        <location filename="www.py" line="118"/>
+        <source>Find text in currently loaded page</source>
+        <translation>Намери текст в текущито заредената страница</translation>
+    </message>
+    <message>
+        <location filename="help.py" line="29"/>
+        <source>Set page to be displayed</source>
+        <translation>Задай страница, която дасе показва</translation>
+    </message>
+    <message>
+        <location filename="image.py" line="24"/>
+        <source>Next file</source>
+        <translation>Следващ файл</translation>
+    </message>
+    <message>
+        <location filename="image.py" line="28"/>
+        <source>Previous file</source>
+        <translation>Предишен файл</translation>
+    </message>
+    <message>
+        <location filename="multimedia.py" line="24"/>
+        <source>Set video output to be used</source>
+        <translation>Задай видео изход</translation>
+    </message>
+    <message>
+        <location filename="multimedia.py" line="26"/>
+        <source>Save and resume playback</source>
+        <translation>Запази и възтанови възпроизвеждане</translation>
+    </message>
+    <message>
+        <location filename="network.py" line="38"/>
+        <source>Scan for services</source>
+        <translation>Сканирай за услуги</translation>
+    </message>
+    <message>
+        <location filename="network.py" line="41"/>
+        <source>Connect to selected service</source>
+        <translation>Свържи се към избраната услуга</translation>
+    </message>
+    <message>
+        <location filename="network.py" line="44"/>
+        <source>Disconnect from selected service</source>
+        <translation>Изключи се от избраната услуга</translation>
+    </message>
+    <message>
+        <location filename="network.py" line="47"/>
+        <source>Get details about selected service</source>
+        <translation>Покажи информация отностно избраната услуга</translation>
+    </message>
+    <message>
+        <location filename="package.py" line="45"/>
+        <source>Sync package repositories</source>
+        <translation>Съкнхронизирай хранилищата с пакети</translation>
+    </message>
+    <message>
+        <location filename="package.py" line="48"/>
+        <source>Update system packages</source>
+        <translation>Обнови системните пакети</translation>
+    </message>
+    <message>
+        <location filename="package.py" line="51"/>
+        <source>Build selected package(s)</source>
+        <translation>Компилирай избраните пакети</translation>
+    </message>
+    <message>
+        <location filename="package.py" line="54"/>
+        <source>Remove selected package(s)</source>
+        <translation>Премахни избраните пакети</translation>
+    </message>
+    <message>
+        <location filename="package.py" line="60"/>
+        <source>Set packages filter</source>
+        <translation>Задай филтър за пакетите</translation>
+    </message>
+    <message>
+        <location filename="screenshot.py" line="18"/>
+        <source>Set time to wait before taking screenshot</source>
+        <translation>Задай време за изчакване преди да се вземе снимка на екрана</translation>
+    </message>
+    <message>
+        <location filename="screenshot.py" line="20"/>
+        <source>Take screenshot</source>
+        <translation>Вземи снимка на екрана</translation>
+    </message>
+    <message>
+        <location filename="storage.py" line="26"/>
+        <source>Go to Home directory</source>
+        <translation>Отиди в Домашната директория</translation>
+    </message>
+    <message>
+        <location filename="storage.py" line="31"/>
+        <source>Set view mode of files and directories</source>
+        <translation>Задай режим на преглед за файлове и директории</translation>
+    </message>
+    <message>
+        <location filename="storage.py" line="38"/>
+        <source>Path to current directory</source>
+        <translation>Пътека до сегашната директория</translation>
+    </message>
+    <message>
+        <location filename="www.py" line="106"/>
+        <source>Current page URL</source>
+        <translation>УРЛ на сегашната страница</translation>
+    </message>
+    <message>
+        <location filename="www.py" line="109"/>
+        <source>Go to previous page</source>
+        <translation>Отиди на предишна страница</translation>
+    </message>
+    <message>
+        <location filename="www.py" line="113"/>
+        <source>Go to next page</source>
+        <translation>Отиди на следваща страница</translation>
+    </message>
+    <message>
+        <location filename="www.py" line="121"/>
+        <source>Search the internet for keyword</source>
+        <translation>Търси интернет за ключова дума</translation>
+    </message>
+    <message>
+        <location filename="www.py" line="184"/>
+        <source>Reload currently loaded page</source>
+        <translation>Презареди сегашната страница</translation>
+    </message>
+    <message>
+        <location filename="multimedia.py" line="28"/>
+        <source>Set wheather to save and resume the playback</source>
+        <translation>Задай дали да се запазва и възтановява възпроизвеждането</translation>
+    </message>
+    <message>
+        <location filename="www.py" line="206"/>
+        <source>Stop loading the page</source>
+        <translation>Спри зареждането на страницата</translation>
     </message>
 </context>
 </TS>

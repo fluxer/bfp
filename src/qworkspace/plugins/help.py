@@ -20,11 +20,13 @@ class Widget(QtGui.QWidget):
         self.mainLayout = QtGui.QGridLayout()
         self.secondLayout = QtGui.QHBoxLayout()
         self.findButton = QtGui.QPushButton(self.icon_find, '')
+        self.findButton.setToolTip(self.tr('Find text in currently loaded page'))
         self.findButton.clicked.connect(self.action_find)
         self.findButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+F')))
         self.helpBox = QtGui.QComboBox()
         for spath in misc.list_files(self.help_path):
             self.helpBox.addItem(os.path.basename(spath))
+        self.helpBox.setToolTip(self.tr('Set page to be displayed'))
         self.helpBox.currentIndexChanged.connect(self.help_change)
         self.webView = QtWebKit.QWebView()
         self.webView.page().setLinkDelegationPolicy(QtWebKit.QWebPage.DelegateAllLinks)
@@ -70,7 +72,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'help'
-        self.version = "0.9.32 (f2bc7e6)"
+        self.version = "0.9.32 (33d6fa6)"
         self.description = self.tr('Help reader plugin')
         self.icon = general.get_icon('help-contents')
         self.widget = None

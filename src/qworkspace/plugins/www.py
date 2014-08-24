@@ -102,17 +102,22 @@ class Widget(QtGui.QWidget):
         self.urlBox.setEditText(url)
         self.urlBox.setSizePolicy(QtGui.QSizePolicy.Expanding, QtGui.QSizePolicy.Fixed)
         self.urlBox.setInsertPolicy(1)
+        self.urlBox.setToolTip(self.tr('Current page URL'))
         self.urlBox.currentIndexChanged.connect(self.path_changed)
         self.backButton.setEnabled(False)
+        self.backButton.setToolTip(self.tr('Go to previous page'))
         self.backButton.clicked.connect(self.page_back)
         self.backButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+B')))
         self.nextButton.setEnabled(False)
+        self.nextButton.setToolTip(self.tr('Go to next page'))
         self.nextButton.clicked.connect(self.page_next)
         self.nextButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+N')))
         self.reloadStopButton.clicked.connect(self.page_reload_stop)
         self.reloadStopButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+R')))
+        self.findButton.setToolTip(self.tr('Find text in currently loaded page'))
         self.findButton.clicked.connect(self.action_find)
         self.findButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+F')))
+        self.searchButton.setToolTip(self.tr('Search the internet for keyword'))
         self.searchButton.clicked.connect(self.action_search)
         self.searchButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+S')))
         self.webView.page().setLinkDelegationPolicy(QtWebKit.QWebPage.DelegateAllLinks)
@@ -175,6 +180,7 @@ class Widget(QtGui.QWidget):
         ''' Page load progress '''
         if load == 100:
             self.reloadStopButton.setIcon(self.icon_reload)
+            self.reloadStopButton.setToolTip(self.tr('Reload currently loaded page'))
             self.progressBar.hide()
             self.progressBar.setValue(0)
 
@@ -196,6 +202,7 @@ class Widget(QtGui.QWidget):
             self.progressBar.setValue(load)
             self.progressBar.setStatusTip(self.webView.statusTip())
             self.reloadStopButton.setIcon(self.icon_stop)
+            self.reloadStopButton.setToolTip(self.tr('Stop loading the page'))
 
     def page_back(self):
         ''' Back button clicked, go one page back '''
@@ -312,7 +319,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'www'
-        self.version = "0.9.32 (f2bc7e6)"
+        self.version = "0.9.32 (33d6fa6)"
         self.description = self.tr('World Wide Web browser plugin')
         self.icon = general.get_icon('internet-web-browser')
         self.widget = None

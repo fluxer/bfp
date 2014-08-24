@@ -16,13 +16,16 @@ class Widget(QtGui.QWidget):
 
         self.secondLayout = QtGui.QHBoxLayout()
         self.openButton = QtGui.QPushButton(general.get_icon('document-open'), '')
+        self.openButton.setToolTip(self.tr('Open file'))
         self.openButton.clicked.connect(self.open_file)
         self.outputBox = QtGui.QComboBox()
         # https://github.com/mpv-player/mpv/blob/master/DOCS/man/vo.rst
         self.outputBox.addItems(('x11', 'vdpau', 'vaapi', 'opengl'))
+        self.outputBox.setToolTip(self.tr('Set video output to be used'))
         self.outputBox.currentIndexChanged.connect(self.mpv_restart)
-        self.resumeBox = QtGui.QCheckBox(self.tr('Save/resume position'))
+        self.resumeBox = QtGui.QCheckBox(self.tr('Save and resume playback'))
         self.resumeBox.setChecked(settings.get_bool('multimedia/save_resume', True))
+        self.resumeBox.setToolTip(self.tr('Set wheather to save and resume the playback'))
         self.secondLayout.addWidget(self.openButton)
         self.secondLayout.addWidget(self.outputBox)
         self.secondLayout.addWidget(self.resumeBox)
@@ -76,7 +79,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'multimedia'
-        self.version = "0.9.32 (f2bc7e6)"
+        self.version = "0.9.32 (33d6fa6)"
         self.description = self.tr('Multimedia plugin')
         self.icon = general.get_icon('multimedia-player')
         self.widget = None
