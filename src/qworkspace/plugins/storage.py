@@ -140,7 +140,7 @@ class Widget(QtGui.QWidget):
             splugin, bok = QtGui.QInputDialog.getItem(self, \
                 self.tr('Open with'), '', self.parent.plugins.plugins_all, \
                 editable=False)
-            if splugin:
+            if bok:
                 self.parent.plugins.plugin_open_with(splugin, \
                     str(self.model.filePath(svar)))
 
