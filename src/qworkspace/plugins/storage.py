@@ -50,6 +50,8 @@ class Widget(QtGui.QWidget):
         # the index does not change if settings point to first
         self.change_view()
         self.hiddenBox.setChecked(settings.get_bool('storage/show_hidden', False))
+        # set the initial model filter
+        self.change_hidden()
         self.storageView.setSelectionMode(QtGui.QAbstractItemView.ExtendedSelection)
         self.storageView.setSelectionBehavior(QtGui.QAbstractItemView.SelectItems)
         self.storageView.setModel(self.model)
