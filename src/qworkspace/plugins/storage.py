@@ -41,10 +41,11 @@ class Widget(QtGui.QWidget):
 
         self.model = QtGui.QFileSystemModel()
         self.model.setFilter(QtCore.QDir.AllEntries | QtCore.QDir.NoDot)
+        index = self.viewBox.findText(settings.get('storage/view', self.tr('Icons view')))
+        self.viewBox.setCurrentIndex(index)
         self.storageView.setSelectionMode(QtGui.QAbstractItemView.ExtendedSelection)
         self.storageView.setSelectionBehavior(QtGui.QAbstractItemView.SelectItems)
         self.storageView.setModel(self.model)
-        self.storageView.setViewMode(self.storageView.IconMode)
         self.storageView.doubleClicked.connect(self.path_open)
         self.storageView.setContextMenuPolicy(QtCore.Qt.CustomContextMenu)
         self.storageView.customContextMenuRequested.connect(self.menu_show)
@@ -341,6 +342,7 @@ class Plugin(QtCore.QObject):
         if not index:
             index = self.parent.tabWidget.currentIndex()
         if self.widget:
+            settings.set('storage/view', self.widget.viewBox.currentText())
             self.widget.deleteLater()
             self.widget = None
             self.parent.tabWidget.removeTab(index)
