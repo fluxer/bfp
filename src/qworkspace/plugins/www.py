@@ -123,7 +123,9 @@ class Widget(QtGui.QWidget):
         self.webView.page().setLinkDelegationPolicy(QtWebKit.QWebPage.DelegateAllLinks)
         self.webView.linkClicked.connect(self.link_clicked)
         self.webView.urlChanged.connect(self.url_changed)
+        self.webView.loadStarted.connect(self.load_started)
         self.webView.loadProgress.connect(self.load_progress)
+        self.webView.loadFinished.connect(self.load_finished)
 
         # advanced funcitonality
         self.webView.page().setForwardUnsupportedContent(True)
@@ -177,33 +179,35 @@ class Widget(QtGui.QWidget):
             return
         self.webView.setUrl(QtCore.QUrl(url))
 
+    def load_started(self):
+        ''' Page load started '''
+        self.reloadStopButton.setIcon(self.icon_stop)
+        self.reloadStopButton.setToolTip(self.tr('Stop loading the page'))
+        self.progressBar.show()
+
     def load_progress(self, load):
         ''' Page load progress '''
-        if load == 100:
-            self.reloadStopButton.setIcon(self.icon_reload)
-            self.reloadStopButton.setToolTip(self.tr('Reload currently loaded page'))
-            self.progressBar.hide()
-            self.progressBar.setValue(0)
+        self.progressBar.setValue(load)
 
-            history = self.webView.page().history()
-            if history.canGoBack():
-                self.backButton.setEnabled(True)
-            else:
-                self.backButton.setEnabled(False)
-            if history.canGoForward():
-                self.nextButton.setEnabled(True)
-            else:
-                self.nextButton.setEnabled(False)
-
-            # load JavaScript user script (http://jquery.com/)
-            #if ui.actionJavascript.isChecked():
-            #    self.webView.page().mainFrame().evaluateJavaScript(misc.file_read('jquery.js'))
+    def load_finished(self):
+        ''' Page load finished '''
+        self.reloadStopButton.setIcon(self.icon_reload)
+        self.reloadStopButton.setToolTip(self.tr('Reload currently loaded page'))
+        self.progressBar.hide()
+        self.progressBar.setValue(0)
+        history = self.webView.page().history()
+        if history.canGoBack():
+            self.backButton.setEnabled(True)
         else:
-            self.progressBar.show()
-            self.progressBar.setValue(load)
-            self.progressBar.setStatusTip(self.webView.statusTip())
-            self.reloadStopButton.setIcon(self.icon_stop)
-            self.reloadStopButton.setToolTip(self.tr('Stop loading the page'))
+            self.backButton.setEnabled(False)
+        if history.canGoForward():
+            self.nextButton.setEnabled(True)
+        else:
+            self.nextButton.setEnabled(False)
+
+        # load JavaScript user script (http://jquery.com/)
+        #if ui.actionJavascript.isChecked():
+        #    self.webView.page().mainFrame().evaluateJavaScript(misc.file_read('jquery.js'))
 
     def page_back(self):
         ''' Back button clicked, go one page back '''
