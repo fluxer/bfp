@@ -366,6 +366,6 @@ class Plugin(QtCore.QObject):
     def unload(self):
         ''' Unload plugin '''
         self.applicationsLayout.removeWidget(self.storageButton)
-        #self.tool.destroy()
         self.daemon.quit()
+        self.tool.deleteLater()
         self.close()
