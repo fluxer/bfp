@@ -167,26 +167,26 @@ class Widget(QtGui.QWidget):
         if self.cut:
             for svar in self.cut:
                 if os.path.isdir(svar):
-                    shutil.copytree(svar, sdest)
+                    shutil.copytree(svar, os.path.join(sdest, os.path.basename(svar)))
                     misc.dir_remove(svar)
                 else:
-                    shutil.copy2(svar, sdest)
+                    shutil.copy2(svar, os.path.join(sdest, os.path.basename(svar)))
                     os.unlink(svar)
         elif self.copy:
             for svar in self.copy:
                 if os.path.isdir(svar):
-                    shutil.copytree(svar, sdest)
+                    shutil.copytree(svar, os.path.join(sdest, os.path.basename(svar)))
                 else:
-                    shutil.copy2(svar, sdest)
+                    shutil.copy2(svar, os.path.join(sdest, os.path.basename(svar)))
         else:
             # FIXME: it will break on paths with spaces,
             #        is it OK to use \n in the clipboard content to solve this?
             # FIXME: download URLs
             for svar in self.clipboard.text().split(' '):
                 if os.path.isdir(svar):
-                    shutil.copytree(svar, sdest)
+                    shutil.copytree(svar, os.path.join(sdest, os.path.basename(svar)))
                 else:
-                    shutil.copy2(svar, sdest)
+                    shutil.copy2(svar, os.path.join(sdest, os.path.basename(svar)))
 
     def menu_rename(self):
         ''' Rename files/directories '''
