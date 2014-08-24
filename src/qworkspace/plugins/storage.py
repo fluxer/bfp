@@ -64,7 +64,7 @@ class Widget(QtGui.QWidget):
 
         self.icon_execute = general.get_icon('system-run')
         self.icon_open = general.get_icon('document-open')
-        self.icon_open_with = general.get_icon('dcument-import')
+        self.icon_open_with = general.get_icon('application-default-icon')
         self.icon_cut = general.get_icon('edit-cut')
         self.icon_copy = general.get_icon('edit-copy')
         self.icon_paste = general.get_icon('edit-paste')
@@ -342,7 +342,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'storage'
-        self.version = "0.9.32 (33d6fa6)"
+        self.version = "0.9.32 (a83b233)"
         self.description = self.tr('Storage management plugin')
         self.icon = general.get_icon('system-file-manager')
         self.widget = None
