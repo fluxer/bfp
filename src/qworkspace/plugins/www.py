@@ -162,15 +162,6 @@ class Widget(QtGui.QWidget):
     # basic functionality methods
     def url_changed(self, url):
         ''' Url have been changed by user '''
-        history = self.webView.page().history()
-        if history.canGoBack():
-            self.backButton.setEnabled(True)
-        else:
-            self.backButton.setEnabled(False)
-        if history.canGoForward():
-            self.nextButton.setEnabled(True)
-        else:
-            self.nextButton.setEnabled(False)
         self.urlBox.setEditText(url.toString())
 
     def link_clicked(self, url):
@@ -178,15 +169,6 @@ class Widget(QtGui.QWidget):
         if url.toString().startswith('mailto:'):
             # FIXME: open with mail manager plugin
             print 'MAILTO: ' + url.toString()
-        history = self.webView.page().history()
-        if history.canGoBack():
-            self.backButton.setEnabled(True)
-        else:
-            self.backButton.setEnabled(False)
-        if history.canGoForward():
-            self.nextButton.setEnabled(True)
-        else:
-            self.nextButton.setEnabled(False)
         self.webView.setUrl(QtCore.QUrl(url))
 
     def load_progress(self, load):
@@ -195,6 +177,16 @@ class Widget(QtGui.QWidget):
             self.reloadStopButton.setIcon(self.icon_reload)
             self.progressBar.hide()
             self.progressBar.setValue(0)
+
+            history = self.webView.page().history()
+            if history.canGoBack():
+                self.backButton.setEnabled(True)
+            else:
+                self.backButton.setEnabled(False)
+            if history.canGoForward():
+                self.nextButton.setEnabled(True)
+            else:
+                self.nextButton.setEnabled(False)
 
             # load JavaScript user script (http://jquery.com/)
             #if ui.actionJavascript.isChecked():
