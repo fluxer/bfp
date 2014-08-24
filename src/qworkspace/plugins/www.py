@@ -177,6 +177,8 @@ class Widget(QtGui.QWidget):
             self.parent.plugins.plugin_open_with('mail', \
                 url.toString().replace('mailto:', ''))
             return
+        if '#' in url.toString():
+            print('Warning, possible hashtag URL: ' + url.toString())
         self.webView.setUrl(QtCore.QUrl(url))
 
     def load_started(self):
@@ -206,8 +208,7 @@ class Widget(QtGui.QWidget):
             self.nextButton.setEnabled(False)
 
         # load JavaScript user script (http://jquery.com/)
-        #if ui.actionJavascript.isChecked():
-        #    self.webView.page().mainFrame().evaluateJavaScript(misc.file_read('jquery.js'))
+        # self.webView.page().mainFrame().evaluateJavaScript(misc.file_read('jquery.js'))
 
     def page_back(self):
         ''' Back button clicked, go one page back '''
