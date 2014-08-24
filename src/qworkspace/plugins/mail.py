@@ -20,9 +20,12 @@ class Widget(QtGui.QWidget):
         self.loginEdit = QtGui.QLineEdit()
         self.loginEdit.setToolTip('Login')
         self.passwordEdit = QtGui.QLineEdit()
+        self.passwordEdit.setEchoMode(QtGui.QLineEdit.Password)
         self.passwordEdit.setToolTip('Password')
         self.receiverEdit = QtGui.QLineEdit()
         self.receiverEdit.setToolTip('Receiver')
+        self.subjectEdit = QtGui.QLineEdit()
+        self.subjectEdit.setToolTip('Subject')
         self.sendButton = QtGui.QPushButton(general.get_icon('mail-reply-sender'), '')
         self.sendButton.setToolTip('Send mail')
         self.sendButton.clicked.connect(self.mail_send)
@@ -33,6 +36,7 @@ class Widget(QtGui.QWidget):
         self.mainLayout.addWidget(self.loginEdit)
         self.mainLayout.addWidget(self.passwordEdit)
         self.mainLayout.addWidget(self.receiverEdit)
+        self.mainLayout.addWidget(self.subjectEdit)
         self.mainLayout.addWidget(self.sendButton)
         self.mainLayout.addWidget(self.messageEdit)
         self.setLayout(self.mainLayout)
@@ -41,14 +45,37 @@ class Widget(QtGui.QWidget):
             self.receiverEdit.setText(self.spath)
 
     def mail_send(self):
-        # FIXME: fields sanity check
+        if not self.serverEdit.text():
+            QtGui.QMessageBox.critical(self, self.tr('Critical'), \
+                self.tr('No server entered'))
+            return
+        elif not self.loginEdit.text():
+            QtGui.QMessageBox.critical(self, self.tr('Critical'), \
+                self.tr('No login entered'))
+            return
+        elif not self.passwordEdit.text():
+            QtGui.QMessageBox.critical(self, self.tr('Critical'), \
+                self.tr('No password entered'))
+            return
+        elif not self.subjectEdit.text():
+            QtGui.QMessageBox.critical(self, self.tr('Critical'), \
+                self.tr('No subject entered'))
+            return
+        elif not self.receiverEdit.text():
+            QtGui.QMessageBox.critical(self, self.tr('Critical'), \
+                self.tr('No receiver entered'))
+            return
+        elif not self.messageEdit.toPlainText():
+            QtGui.QMessageBox.critical(self, self.tr('Critical'), \
+                self.tr('No message entered'))
+            return
         try:
-            handle = smtplib.SMTP(self.serverEdit, self.portBox) 
-            handle.login(self.loginEdit, self.passwordEdit) 
-            msg = 'To:' + self.receiverEdit + '\r\nFrom:' + self.loginEdit + \
-                '\r\nSubject:' + self.subjectEdit + '\r\n' + self.messageEdit
-            handle.sendmail(self.loginEdit, self.receiverEdit, msg)
-            handle.close() 
+            handle = smtplib.SMTP(self.serverEdit.text(), self.portBox.value())
+            handle.login(self.loginEdit.text(), self.passwordEdit.text())
+            msg = 'To:' + self.receiverEdit.text() + '\r\nFrom:' + self.loginEdit.text() + \
+                '\r\nSubject:' + self.subjectEdit.text() + '\r\n' + self.messageEdit.toPlainText()
+            handle.sendmail(self.loginEdit.text(), self.receiverEdit.text(), msg)
+            handle.close()
         except Exception as detail:
             self.parent.plugins.notify_critical(str(detail))
 
@@ -58,7 +85,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'mail'
-        self.version = "0.9.32 (a83b233)"
+        self.version = "0.9.33 (a8dfd3c)"
         self.description = self.tr('Mail manager plugin')
         self.icon = general.get_icon('internet-mail')
         self.widget = None

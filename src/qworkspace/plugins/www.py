@@ -320,7 +320,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'www'
-        self.version = "0.9.32 (a83b233)"
+        self.version = "0.9.33 (a8dfd3c)"
         self.description = self.tr('World Wide Web browser plugin')
         self.icon = general.get_icon('internet-web-browser')
         self.widget = None
