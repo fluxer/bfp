@@ -95,4 +95,4 @@ Copyright (c) 2014 Ivailo Monev licensed through the GPLv2 License
 
 ## SEE ALSO
 
-lsinitfs lddtree gzip cpio modprobe
+[lsinitfs](lsinitfs.html) lddtree gzip cpio modprobe

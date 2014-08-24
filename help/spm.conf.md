@@ -215,4 +215,4 @@ Copyright (c) 2013-2014 Ivailo Monev licensed through the GPLv2 License
 
 ## SEE ALSO
 
-spm srcbuild curl wget gcc ld make strip
+[spm](spm.html) [srcbuild](srcbuild.html) curl wget gcc ld make strip

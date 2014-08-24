@@ -90,4 +90,4 @@ Copyright (c) 2014 Ivailo Monev licensed through the GPLv2 License
 
 ## SEE ALSO
 
-mkinitfs gunzip cpio
+[mkinitfs](mkinitfs.html) gunzip cpio

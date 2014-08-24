@@ -379,4 +379,4 @@ Copyright (c) 2013-2014 Ivailo Monev licensed through the GPLv2 License
 
 ## SEE ALSO
 
-spm.conf srcbuild spm-tools scanelf tar bsdtar xz ldconfig file man-db git
+[spm.conf](spm.conf.html) [srcbuild](srcbuild.html) [spm-tools](spm-tools.html) scanelf tar bsdtar xz ldconfig file man-db git

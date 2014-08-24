@@ -298,4 +298,4 @@ Copyright (c) 2013-2014 Ivailo Monev licensed through the GPLv2 License
 
 ## SEE ALSO
 
-spm srcbuild scanelf tar bsdtar xz vim
+[spm](spm.html) [srcbuild](srcbuild.html) scanelf tar bsdtar xz vim

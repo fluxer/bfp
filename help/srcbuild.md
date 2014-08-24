@@ -150,4 +150,4 @@ Copyright (c) 2013-2014 Ivailo Monev licensed through the GPLv2 License
 
 ## SEE ALSO
 
-spm spm.conf bash
+[spm](spm.html) [spm.conf](spm.conf.html) bash

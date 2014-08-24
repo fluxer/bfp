@@ -17,6 +17,8 @@ class Widget(QtGui.QWidget):
         self.icon_find = general.get_icon('edit-find')
 
         self.help_path = os.path.join(sys.prefix, 'share/help')
+        # for testing purpose only!
+        # self.help_path = os.path.realpath('../../help')
         self.mainLayout = QtGui.QGridLayout()
         self.secondLayout = QtGui.QHBoxLayout()
         self.findButton = QtGui.QPushButton(self.icon_find, '')
@@ -25,7 +27,8 @@ class Widget(QtGui.QWidget):
         self.findButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+F')))
         self.helpBox = QtGui.QComboBox()
         for spath in misc.list_files(self.help_path):
-            self.helpBox.addItem(os.path.basename(spath))
+            if spath.endswith('.html'):
+                self.helpBox.addItem(os.path.basename(spath))
         self.helpBox.setToolTip(self.tr('Set page to be displayed'))
         self.helpBox.currentIndexChanged.connect(self.help_change)
         self.webView = QtWebKit.QWebView()
@@ -56,6 +59,14 @@ class Widget(QtGui.QWidget):
 
     def link_clicked(self, url):
         ''' Update the URL if a link on a web page is clicked '''
+        if url.toString().startswith('mailto:'):
+            # FIXME: open with mail manager plugin
+            print 'MAILTO: ' + url.toString()
+
+        # on link to local help page change the current index of the chooser
+        index = self.helpBox.findText(os.path.basename(url.toString()))
+        if not index == -1:
+            self.helpBox.setCurrentIndex(index)
         self.webView.setUrl(url)
 
     def action_find(self):
