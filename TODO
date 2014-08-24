@@ -23,6 +23,7 @@ http://www.linuxfromscratch.org/blfs/view/systemd/postlfs/initramfs.html
  * Implement bug reports plugin (send, query, etc.)
  * Implement system search/indexing plugin (strigi)
  * Implement system backup plugin
+ * Implement mail management plugin (make use of it in www pluign on `mailto` links)
  * Implement more info into recent paths and display it with tooltip:
   - full path (done)
   - time accessed

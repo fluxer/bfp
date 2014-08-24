@@ -175,6 +175,9 @@ class Widget(QtGui.QWidget):
 
     def link_clicked(self, url):
         ''' Update the URL if a link on a web page is clicked '''
+        if url.toString().startswith('mailto:'):
+            # FIXME: open with mail manager plugin
+            print 'MAILTO: ' + url.toString()
         history = self.webView.page().history()
         if history.canGoBack():
             self.backButton.setEnabled(True)
