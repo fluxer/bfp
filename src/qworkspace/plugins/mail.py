@@ -23,7 +23,7 @@ class Widget(QtGui.QWidget):
         self.passwordEdit.setToolTip('Password')
         self.receiverEdit = QtGui.QLineEdit()
         self.receiverEdit.setToolTip('Receiver')
-        self.sendButton = QtGui.QPushButton(general.get_icon('mail-send'), '')
+        self.sendButton = QtGui.QPushButton(general.get_icon('mail-reply-sender'), '')
         self.sendButton.setToolTip('Send mail')
         self.sendButton.clicked.connect(self.mail_send)
         self.messageEdit = QtGui.QTextEdit()
@@ -59,7 +59,7 @@ class Plugin(QtCore.QObject):
         self.parent = parent
         self.name = 'mail'
         self.version = "0.9.32 (a83b233)"
-        self.description = self.tr('Calendar plugin')
+        self.description = self.tr('Mail manager plugin')
         self.icon = general.get_icon('internet-mail')
         self.widget = None
 
