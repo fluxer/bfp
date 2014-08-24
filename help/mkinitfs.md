@@ -16,19 +16,19 @@ MkInitfs is a initial RAM filesystem image maker.
 
 ### optional arguments
 
-  -h, --help            Show this help message and exit
-  -t TMP, --tmp TMP     Change temporary directory
-  -b BUSYBOX, --busybox BUSYBOX
-                        Change busybox binary
-  -k KERNEL, --kernel KERNEL
-                        Change kernel version
-  -m MODULES [MODULES ...], --modules MODULES [MODULES ...]
-                        Change modules
-  -i IMAGE, --image IMAGE
-                        Change output image
-  --keep                Keep temporary directory
-  --debug               Enable debug messages
-  --version             Show MkInitfs version and exit
+    -h, --help            Show this help message and exit
+    -t TMP, --tmp TMP     Change temporary directory
+    -b BUSYBOX, --busybox BUSYBOX
+                          Change busybox binary
+    -k KERNEL, --kernel KERNEL
+                          Change kernel version
+    -m MODULES [MODULES ...], --modules MODULES [MODULES ...]
+                          Change modules
+    -i IMAGE, --image IMAGE
+                          Change output image
+    --keep                Keep temporary directory
+    --debug               Enable debug messages
+    --version             Show MkInitfs version and exit
 
 ## EXAMPLES
 

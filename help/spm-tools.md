@@ -4,7 +4,7 @@ spm-tools - Source Package Manager Tools
 
 ## SYNOPSIS
 
-	spm-tools [-h] [--debug] [--version]
+    spm-tools [-h] [--debug] [--version]
         {dist,edit,lint,merge,sane,clean,check,which,pack} ...
 
 ## DESCRIPTION

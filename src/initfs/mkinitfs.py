@@ -11,12 +11,6 @@ try:
     message = libmessage.Message()
     misc = libmisc.Misc()
 
-    parser = argparse.ArgumentParser(prog='mkinitfs', description='MkInitfs')
-
-    if not os.geteuid() == 0:
-        message.critical('You are not root')
-        sys.exit(2)
-
     tmpdir = tempfile.mkdtemp()
     kernel = os.uname()[2]
     busybox = misc.whereis('busybox')
@@ -27,6 +21,7 @@ try:
         if os.path.isdir('/sys/module/' + m + '/sections'):
             modules.append(m)
 
+    parser = argparse.ArgumentParser(prog='mkinitfs', description='MkInitfs')
     parser.add_argument('-t', '--tmp', type=str, default=tmpdir, \
         help='Change temporary directory')
     parser.add_argument('-b', '--busybox', type=str, default=busybox, \
@@ -44,7 +39,6 @@ try:
     parser.add_argument('--version', action='version', \
         version='MkInitfs v' + app_version, \
         help='Show MkInitfs version and exit')
-
     ARGS = parser.parse_args()
 
     # if cross-building and no custom image is set update ARGS.image
@@ -234,6 +228,6 @@ except Exception as detail:
     message.critical('Unexpected error', detail)
     sys.exit(1)
 finally:
-    if os.path.isdir(tmpdir) and not keep:
+    if tmpdir and os.path.isdir(tmpdir) and not keep:
         message.info('Cleaning up...')
         misc.dir_remove(tmpdir)

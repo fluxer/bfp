@@ -15,15 +15,15 @@ LsInitfs is a initial RAM filesystem image content lister.
 
 ### optional arguments
 
-  -h, --help            Show this help message and exit
-  -t TMP, --tmp TMP     Change temporary directory
-  -k KERNEL, --kernel KERNEL
-                        Change kernel version
-  -i IMAGE, --image IMAGE
-                        Change output image
-  --keep                Keep temporary directory
-  --debug               Enable debug messages
-  --version             Show LsInitfs version and exit
+    -h, --help            Show this help message and exit
+    -t TMP, --tmp TMP     Change temporary directory
+    -k KERNEL, --kernel KERNEL
+                          Change kernel version
+    -i IMAGE, --image IMAGE
+                          Change output image
+    --keep                Keep temporary directory
+    --debug               Enable debug messages
+    --version             Show LsInitfs version and exit
 
 ## EXAMPLES
 

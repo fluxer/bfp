@@ -4,15 +4,15 @@ spm - Source Package Manager
 
 ## SYNOPSIS
 
-	spm [-h] [--cache CACHE] [--build BUILD] [--root ROOT]
-            [--ignore IGNORE] [--mirror MIRROR] [--timeout TIMEOUT]
-            [--external EXTERNAL] [--chost CHOST] [--cflags CFLAGS]
-            [--cxxflags CXXFLAGS] [--cppflags CPPFLAGS] [--ldflags LDFLAGS]
-            [--makeflags MAKEFLAGS] [--man MAN] [--binaries BINARIES]
-            [--shared SHARED] [--static STATIC] [--missing MISSING]
-            [--conflicts CONFLICTS] [--backup BACKUP] [--scripts SCRIPTS]
-            [--triggers TRIGGERS] [--debug] [--version]
-            {repo,remote,source,local,who} ...
+    spm [-h] [--cache CACHE] [--build BUILD] [--root ROOT]
+        [--ignore IGNORE] [--mirror MIRROR] [--timeout TIMEOUT]
+        [--external EXTERNAL] [--chost CHOST] [--cflags CFLAGS]
+        [--cxxflags CXXFLAGS] [--cppflags CPPFLAGS] [--ldflags LDFLAGS]
+        [--makeflags MAKEFLAGS] [--man MAN] [--binaries BINARIES]
+        [--shared SHARED] [--static STATIC] [--missing MISSING]
+        [--conflicts CONFLICTS] [--backup BACKUP] [--scripts SCRIPTS]
+        [--triggers TRIGGERS] [--debug] [--version]
+        {repo,remote,source,local,who} ...
 
 ## DESCRIPTION
 

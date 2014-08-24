@@ -11,12 +11,11 @@ try:
     message = libmessage.Message()
     misc = libmisc.Misc()
 
-    parser = argparse.ArgumentParser(prog='lsinitfs', description='LsInitfs')
-
     tmpdir = tempfile.mkdtemp()
     kernel = os.uname()[2]
     image = '/boot/initramfs-' + kernel + '.img'
 
+    parser = argparse.ArgumentParser(prog='lsinitfs', description='LsInitfs')
     parser.add_argument('-t', '--tmp', type=str, default=tmpdir, \
         help='Change temporary directory')
     parser.add_argument('-k', '--kernel', type=str, default=kernel, \
@@ -30,8 +29,11 @@ try:
     parser.add_argument('--version', action='version', \
         version='LsInitfs v' + app_version, \
         help='Show LsInitfs version and exit')
-
     ARGS = parser.parse_args()
+
+    if not os.geteuid() == 0:
+        message.critical('You are not root')
+        sys.exit(2)
 
     # if cross-building and no custom image is set update ARGS.image
     if ARGS.kernel != kernel and ARGS.image == image:
@@ -88,7 +90,7 @@ except Exception as detail:
     message.critical('Unexpected error', detail)
     sys.exit(1)
 finally:
-    if os.path.isdir(tmpdir) and not keep:
+    if tmpdir and os.path.isdir(tmpdir) and not keep:
         message.info('Cleaning up...')
         misc.dir_remove(tmpdir)
 
