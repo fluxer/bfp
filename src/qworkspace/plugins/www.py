@@ -172,8 +172,9 @@ class Widget(QtGui.QWidget):
     def link_clicked(self, url):
         ''' Update the URL if a link on a web page is clicked '''
         if url.toString().startswith('mailto:'):
-            # FIXME: open with mail manager plugin
-            print 'MAILTO: ' + url.toString()
+            self.parent.plugins.plugin_open_with('mail', \
+                url.toString().replace('mailto:', ''))
+            return
         self.webView.setUrl(QtCore.QUrl(url))
 
     def load_progress(self, load):
