@@ -46,12 +46,12 @@
         <translation>Мултимедиа</translation>
     </message>
     <message>
-        <location filename="package.py" line="200"/>
+        <location filename="package.py" line="207"/>
         <source>Package manager plugin</source>
         <translation>Плъгин за управление на пакетите </translation>
     </message>
     <message>
-        <location filename="package.py" line="213"/>
+        <location filename="package.py" line="220"/>
         <source>Package</source>
         <translation>Пакет</translation>
     </message>
@@ -91,7 +91,7 @@
         <translation>Терминал</translation>
     </message>
     <message>
-        <location filename="www.py" line="333"/>
+        <location filename="www.py" line="335"/>
         <source>WWW</source>
         <translation>УУУ</translation>
     </message>
@@ -131,7 +131,7 @@
         <translation>Плъгин за управление на настройките</translation>
     </message>
     <message>
-        <location filename="www.py" line="320"/>
+        <location filename="www.py" line="322"/>
         <source>World Wide Web browser plugin</source>
         <translation>Плъгин за разглеждане на World Wide Web</translation>
     </message>
@@ -156,12 +156,12 @@
         <translation>Календар</translation>
     </message>
     <message>
-        <location filename="download.py" line="118"/>
+        <location filename="download.py" line="125"/>
         <source>Download manager plugin</source>
         <translation>Плъгин за управление на изтеглянията</translation>
     </message>
     <message>
-        <location filename="download.py" line="133"/>
+        <location filename="download.py" line="140"/>
         <source>Download</source>
         <translation>Изтегляне</translation>
     </message>
@@ -242,7 +242,7 @@
         <translation>Намери</translation>
     </message>
     <message>
-        <location filename="package.py" line="190"/>
+        <location filename="network.py" line="80"/>
         <source>Critical</source>
         <translation>Критично</translation>
     </message>
@@ -437,17 +437,17 @@
         <translation>Търси</translation>
     </message>
     <message>
-        <location filename="www.py" line="306"/>
+        <location filename="www.py" line="308"/>
         <source>Back</source>
         <translation>Назад</translation>
     </message>
     <message>
-        <location filename="www.py" line="307"/>
+        <location filename="www.py" line="309"/>
         <source>Next</source>
         <translation>Следващ</translation>
     </message>
     <message>
-        <location filename="www.py" line="308"/>
+        <location filename="www.py" line="310"/>
         <source>Reload</source>
         <translation>Презареди</translation>
     </message>
@@ -457,12 +457,12 @@
         <translation>Изобрайжение (*.png *.jpg *.jpeg *.svg);;Всички (*)</translation>
     </message>
     <message>
-        <location filename="download.py" line="97"/>
+        <location filename="download.py" line="104"/>
         <source>Download of &lt;b&gt;%s&lt;/b&gt; failed.</source>
         <translation>Свалянето на &lt;b&gt;%s&lt;/b&gt; се провали.</translation>
     </message>
     <message>
-        <location filename="download.py" line="99"/>
+        <location filename="download.py" line="106"/>
         <source>Download of &lt;b&gt;%s&lt;/b&gt; complete.</source>
         <translation>Свалянето на &lt;b&gt;%s&lt;/b&gt; завърши.</translation>
     </message>
@@ -512,12 +512,12 @@
         <translation>Изключен от: %s</translation>
     </message>
     <message>
-        <location filename="download.py" line="49"/>
+        <location filename="download.py" line="50"/>
         <source>URL</source>
         <translation>УРЛ</translation>
     </message>
     <message>
-        <location filename="download.py" line="49"/>
+        <location filename="download.py" line="50"/>
         <source>URL:</source>
         <translation>УРЛ:</translation>
     </message>
@@ -537,12 +537,12 @@
         <translation>Страница за помощ не е намерена: %s</translation>
     </message>
     <message>
-        <location filename="download.py" line="56"/>
+        <location filename="download.py" line="58"/>
         <source>Question</source>
         <translation>Въпрос</translation>
     </message>
     <message>
-        <location filename="download.py" line="56"/>
+        <location filename="download.py" line="58"/>
         <source>Download is in progress, do you want to abort it?</source>
         <translation>Извършва се изтегляне, сигурнили сте че искате да го прекратите?</translation>
     </message>
@@ -552,22 +552,22 @@
         <translation>Текст (*.txt *.sh *.bash *.diff *.patch *.py *c *.h *.cpp *.hpp *.html *.pl);;Всички (*)</translation>
     </message>
     <message>
-        <location filename="package.py" line="71"/>
+        <location filename="package.py" line="77"/>
         <source>all</source>
         <translation>всички</translation>
     </message>
     <message>
-        <location filename="package.py" line="73"/>
+        <location filename="package.py" line="79"/>
         <source>local</source>
         <translation>локални</translation>
     </message>
     <message>
-        <location filename="package.py" line="75"/>
+        <location filename="package.py" line="81"/>
         <source>unneeded</source>
         <translation>ненужни</translation>
     </message>
     <message>
-        <location filename="package.py" line="80"/>
+        <location filename="package.py" line="86"/>
         <source>candidates</source>
         <translation>кандидати</translation>
     </message>

@@ -369,13 +369,14 @@ calling `tar` or `bsdtar` directly.
 Single quote inside double quoted text (and vice-versa) in the SRCBUILD variables
 break the parser.
 
-## AUTHORS
+## AUTHOR
 
-Ivailo Monev (a.k.a. SmiL3y) <xakepa10@gmail.com>
+Ivailo Monev <xakepa10@gmail.com>
 
-Copyright (c) 2013-2014 Ivailo Monev licensed through the GNU General Public License
+## COPYRIGHT
+
+Copyright (c) 2013-2014 Ivailo Monev licensed through the GPLv2 License
 
 ## SEE ALSO
 
 spm.conf srcbuild spm-tools scanelf tar bsdtar xz ldconfig file man-db git
-

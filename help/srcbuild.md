@@ -140,11 +140,13 @@ Function defining instructions what to do after removing the target.
 
 A prototype SRCBUILD should be installed in #SHAREDIR#/spm.
 
-## AUTHORS
+## AUTHOR
 
-Ivailo Monev (a.k.a. SmiL3y) <xakepa10@gmail.com>
+Ivailo Monev <xakepa10@gmail.com>
 
-Copyright (c) 2013-2014 Ivailo Monev licensed through the GNU General Public License
+## COPYRIGHT
+
+Copyright (c) 2013-2014 Ivailo Monev licensed through the GPLv2 License
 
 ## SEE ALSO
 

@@ -4,8 +4,8 @@ lsinitfs - LsInitfs
 
 ## SYNOPSIS
 
-lsinitfs [-h] [-t TMP] [-k KERNEL] [-i IMAGE] [--keep] [--debug]
-    [--version]
+    lsinitfs [-h] [-t TMP] [-k KERNEL] [-i IMAGE] [--keep] [--debug]
+        [--version]
 
 ## DESCRIPTION
 
@@ -13,8 +13,9 @@ LsInitfs is a initial RAM filesystem image content lister.
 
 ## OPTIONS
 
-optional arguments:
-  -h, --help            show this help message and exit
+### optional arguments
+
+  -h, --help            Show this help message and exit
   -t TMP, --tmp TMP     Change temporary directory
   -k KERNEL, --kernel KERNEL
                         Change kernel version
@@ -77,19 +78,15 @@ combination.
 
 ## BUGS
 
-### PYTHON MODULES
-
 None
 
-### MKINITFS
+## AUTHOR
 
-None
+Ivailo Monev <xakepa10@gmail.com>
 
-### AUTHORS
+## COPYRIGHT
 
-Ivailo Monev (a.k.a. SmiL3y) <xakepa10@gmail.com>
-
-Copyright (c) 2014 Ivailo Monev licensed through the GNU General Public License
+Copyright (c) 2014 Ivailo Monev licensed through the GPLv2 License
 
 ## SEE ALSO
 
