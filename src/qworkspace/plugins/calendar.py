@@ -24,7 +24,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'calendar'
-        self.version = "0.9.33 (a8dfd3c)"
+        self.version = "0.9.33 (0125d01)"
         self.description = self.tr('Calendar plugin')
         self.icon = general.get_icon('office-calendar')
         self.widget = None

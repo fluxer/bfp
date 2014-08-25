@@ -54,8 +54,8 @@ class Widget(QtGui.QWidget):
         self.removeButton.setToolTip(self.tr('Remove selected package(s)'))
         self.removeButton.clicked.connect(self.targets_remove)
         self.targetsFilter = QtGui.QComboBox()
-        self.targetsFilter.addItems((self.tr('all'), self.tr('local'), \
-            self.tr('unneeded'), self.tr('candidates')))
+        self.targetsFilter.addItems((self.tr('all'), self.tr('updates'), \
+            self.tr('local'), self.tr('candidates'), self.tr('unneeded')))
         self.targetsFilter.addItems(database.remote_aliases())
         self.targetsFilter.setToolTip(self.tr('Set packages filter'))
         self.targetsFilter.currentIndexChanged.connect(self.refresh_targets)
@@ -81,17 +81,22 @@ class Widget(QtGui.QWidget):
         current = str(self.targetsFilter.currentText())
         if current == self.tr('all'):
             targets = database.remote_all(basename=True)
-        elif current == self.tr('local'):
-            targets = database.local_all(basename=True)
-        elif current == self.tr('unneeded'):
+        elif current == self.tr('updates'):
             targets = []
             for target in database.local_all(basename=True):
-                if not database.local_rdepends(target):
+                if not database.local_uptodate(target):
                     targets.append(target)
+        elif current == self.tr('local'):
+            targets = database.local_all(basename=True)
         elif current == self.tr('candidates'):
             targets = []
             for target in database.remote_all(basename=True):
                 if not database.local_installed(target):
+                    targets.append(target)
+        elif current == self.tr('unneeded'):
+            targets = []
+            for target in database.local_all(basename=True):
+                if not database.local_rdepends(target):
                     targets.append(target)
         else:
             targets = database.remote_alias(current)
@@ -208,7 +213,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'package'
-        self.version = "0.9.33 (a8dfd3c)"
+        self.version = "0.9.33 (0125d01)"
         self.description = self.tr('Package manager plugin')
         self.icon = general.get_icon('package-x-generic')
         self.widget = None
