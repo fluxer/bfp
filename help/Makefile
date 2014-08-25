@@ -22,6 +22,12 @@ all:
 	$(SED) 's|#SHAREDIR#|$(SHAREDIR)|g' -i srcbuild.html
 	$(SED) -e 's|#MACHINE#|$(MACHINE)|g' -e 's|#ARCH#|$(ARCH)|g' \
 		-e 's|#JOBS#|$(JOBS)|g' -i spm.conf.html
+	$(MARKDOWN) initscripts.md -f initscripts.html
+	$(MARKDOWN) inittab.md -f inittab.html
+	$(MARKDOWN) rc.d.md -f rc.d.html
+	$(MARKDOWN) rc.conf.md -f rc.conf.html
+	$(MARKDOWN) tmpfiles.md -f tmpfiles.html
+	$(MARKDOWN) tmpfiles.d.md -f tmpfiles.d.html
 
 install:
 	$(INSTALL) -dm755 $(DESTDIR)$(SHAREDIR)/help/
@@ -43,6 +49,12 @@ install:
 	$(INSTALL) -m644 spm.conf.html $(DESTDIR)$(SHAREDIR)/help/
 	$(INSTALL) -m644 spm.html $(DESTDIR)$(SHAREDIR)/help/
 	$(INSTALL) -m644 spm-tools.html $(DESTDIR)$(SHAREDIR)/help/
+	$(INSTALL) -m644 initscripts.html $(DESTDIR)$(SHAREDIR)/help/
+	$(INSTALL) -m644 inittab.html $(DESTDIR)$(SHAREDIR)/help/
+	$(INSTALL) -m644 rc.d.html $(DESTDIR)$(SHAREDIR)/help/
+	$(INSTALL) -m644 rc.conf.html $(DESTDIR)$(SHAREDIR)/help/
+	$(INSTALL) -m644 tmpfiles.html $(DESTDIR)$(SHAREDIR)/help/
+	$(INSTALL) -m644 tmpfiles.d.html $(DESTDIR)$(SHAREDIR)/help/
 
 uninstall:
 	$(RM) -r $(DESTDIR)$(SHAREDIR)/help/
