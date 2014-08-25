@@ -85,12 +85,13 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'mail'
-        self.version = "0.9.33 (0125d01)"
+        self.version = "0.9.33 (f765d0a)"
         self.description = self.tr('Mail manager plugin')
         self.icon = general.get_icon('internet-mail')
         self.widget = None
 
         self.mailButton = QtGui.QPushButton(self.icon, '')
+        self.mailButton.setToolTip(self.description)
         self.mailButton.clicked.connect(lambda: self.open(None))
         self.applicationsLayout = self.parent.toolBox.widget(1).layout()
         self.applicationsLayout.addWidget(self.mailButton)

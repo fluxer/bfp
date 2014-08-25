@@ -10,11 +10,12 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'quit'
-        self.version = "0.9.33 (0125d01)"
+        self.version = "0.9.33 (f765d0a)"
         self.description = self.tr('Quit plugin')
         self.icon = general.get_icon('system-log-out')
 
         self.quitButton = QtGui.QPushButton(self.icon, '')
+        self.quitButton.setToolTip(self.description)
         self.quitButton.clicked.connect(self.parent.app.quit)
         #self.parent.toolBox.addItem('System')
         self.parent.toolBox.widget(1).layout().addWidget(self.quitButton)

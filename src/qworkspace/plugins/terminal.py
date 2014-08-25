@@ -33,12 +33,13 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'terminal'
-        self.version = "0.9.33 (0125d01)"
+        self.version = "0.9.33 (f765d0a)"
         self.description = self.tr('Embed terminal plugin')
         self.icon = general.get_icon('utilities-terminal')
         self.widget = None
 
         self.embedButton = QtGui.QPushButton(self.icon, '')
+        self.embedButton.setToolTip(self.description)
         self.embedButton.clicked.connect(self.open)
         self.applicationsLayout = self.parent.toolBox.widget(1).layout()
         self.applicationsLayout.addWidget(self.embedButton)

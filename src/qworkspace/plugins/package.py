@@ -213,12 +213,13 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'package'
-        self.version = "0.9.33 (0125d01)"
+        self.version = "0.9.33 (f765d0a)"
         self.description = self.tr('Package manager plugin')
         self.icon = general.get_icon('package-x-generic')
         self.widget = None
 
         self.packageButton = QtGui.QPushButton(self.icon, '')
+        self.packageButton.setToolTip(self.description)
         self.packageButton.clicked.connect(self.open)
         self.applicationsLayout = self.parent.toolBox.widget(1).layout()
         self.applicationsLayout.addWidget(self.packageButton)

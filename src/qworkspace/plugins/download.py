@@ -124,12 +124,13 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'download'
-        self.version = "0.9.33 (0125d01)"
+        self.version = "0.9.33 (f765d0a)"
         self.description = self.tr('Download manager plugin')
         self.icon = general.get_icon('document-save-as')
         self.widget = None
 
         self.downloadButton = QtGui.QPushButton(self.icon, '')
+        self.downloadButton.setToolTip(self.description)
         self.downloadButton.clicked.connect(lambda: self.open(None))
         self.applicationsLayout = self.parent.toolBox.widget(1).layout()
         self.applicationsLayout.addWidget(self.downloadButton)

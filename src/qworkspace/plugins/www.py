@@ -325,12 +325,13 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'www'
-        self.version = "0.9.33 (0125d01)"
+        self.version = "0.9.33 (f765d0a)"
         self.description = self.tr('World Wide Web browser plugin')
         self.icon = general.get_icon('internet-web-browser')
         self.widget = None
 
         self.wwwButton = QtGui.QPushButton(self.icon, '')
+        self.wwwButton.setToolTip(self.description)
         self.wwwButton.clicked.connect(lambda: self.open('http://www.google.com'))
         self.applicationsLayout = self.parent.toolBox.widget(1).layout()
         self.applicationsLayout.addWidget(self.wwwButton)

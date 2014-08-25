@@ -39,12 +39,13 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'plugins'
-        self.version = "0.9.33 (0125d01)"
+        self.version = "0.9.33 (f765d0a)"
         self.description = self.tr('Plugins manager plugin')
         self.icon = general.get_icon('extension')
         self.widget = None
 
         self.pluginsButton = QtGui.QPushButton(self.icon, '')
+        self.pluginsButton.setToolTip(self.description)
         self.pluginsButton.clicked.connect(lambda: self.open(None))
         self.applicationsLayout = self.parent.toolBox.widget(1).layout()
         self.applicationsLayout.addWidget(self.pluginsButton)

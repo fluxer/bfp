@@ -124,12 +124,13 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'image'
-        self.version = "0.9.33 (0125d01)"
+        self.version = "0.9.33 (f765d0a)"
         self.description = self.tr('Image viewer plugin')
         self.icon = general.get_icon('image-x-generic')
         self.widget = None
 
         self.imageButton = QtGui.QPushButton(self.icon, '')
+        self.imageButton.setToolTip(self.description)
         self.imageButton.clicked.connect(lambda: self.open(None))
         self.applicationsLayout = self.parent.toolBox.widget(1).layout()
         self.applicationsLayout.addWidget(self.imageButton)
