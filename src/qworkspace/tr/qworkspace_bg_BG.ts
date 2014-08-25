@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="bg_BG" sourcelanguage="">
+<!DOCTYPE TS>
+<TS version="2.0" language="bg_BG">
 <context>
     <name>Daemon</name>
     <message>
-        <location filename="storage.py" line="293"/>
+        <location filename="storage.py" line="321"/>
         <source>No sysfs support</source>
         <translation>sysfs не се поддържа</translation>
     </message>
@@ -26,7 +27,7 @@
         <translation>Плъгин за редактиране на текст</translation>
     </message>
     <message>
-        <location filename="editor.py" line="173"/>
+        <location filename="editor.py" line="174"/>
         <source>Editor</source>
         <translation>Редактор</translation>
     </message>
@@ -36,12 +37,12 @@
         <translation>Плъгин за преглед на изображения</translation>
     </message>
     <message>
-        <location filename="image.py" line="147"/>
+        <location filename="image.py" line="148"/>
         <source>Image</source>
         <translation>Изображение</translation>
     </message>
     <message>
-        <location filename="multimedia.py" line="106"/>
+        <location filename="multimedia.py" line="107"/>
         <source>Multimedia</source>
         <translation>Мултимедиа</translation>
     </message>
@@ -51,7 +52,7 @@
         <translation>Плъгин за управление на пакетите </translation>
     </message>
     <message>
-        <location filename="package.py" line="230"/>
+        <location filename="package.py" line="231"/>
         <source>Package</source>
         <translation>Пакет</translation>
     </message>
@@ -66,17 +67,17 @@
         <translation>Плъгин за правене на снимка на екрана</translation>
     </message>
     <message>
-        <location filename="screenshot.py" line="82"/>
+        <location filename="screenshot.py" line="83"/>
         <source>Screenshot</source>
         <translation>Снимка на екрана</translation>
     </message>
     <message>
-        <location filename="storage.py" line="346"/>
+        <location filename="storage.py" line="374"/>
         <source>Storage management plugin</source>
         <translation>Плъгин за управление на хранилищата</translation>
     </message>
     <message>
-        <location filename="storage.py" line="371"/>
+        <location filename="storage.py" line="400"/>
         <source>Storage</source>
         <translation>Хранилище</translation>
     </message>
@@ -86,12 +87,12 @@
         <translation>Плъгин за вграден терминал</translation>
     </message>
     <message>
-        <location filename="terminal.py" line="50"/>
+        <location filename="terminal.py" line="51"/>
         <source>Terminal</source>
         <translation>Терминал</translation>
     </message>
     <message>
-        <location filename="www.py" line="343"/>
+        <location filename="www.py" line="344"/>
         <source>WWW</source>
         <translation>УУУ</translation>
     </message>
@@ -111,7 +112,7 @@
         <translation>Плъгин за управление на мрежата</translation>
     </message>
     <message>
-        <location filename="network.py" line="330"/>
+        <location filename="network.py" line="331"/>
         <source>Network</source>
         <translation>Мрежа</translation>
     </message>
@@ -136,7 +137,7 @@
         <translation>Плъгин за разглеждане на World Wide Web</translation>
     </message>
     <message>
-        <location filename="mixer.py" line="64"/>
+        <location filename="mixer.py" line="65"/>
         <source>Mixer</source>
         <translation>Миксер</translation>
     </message>
@@ -151,7 +152,7 @@
         <translation>Календар плъгин</translation>
     </message>
     <message>
-        <location filename="calendar.py" line="41"/>
+        <location filename="calendar.py" line="42"/>
         <source>Calendar</source>
         <translation>Календар</translation>
     </message>
@@ -161,7 +162,7 @@
         <translation>Плъгин за управление на изтеглянията</translation>
     </message>
     <message>
-        <location filename="download.py" line="143"/>
+        <location filename="download.py" line="144"/>
         <source>Download</source>
         <translation>Изтегляне</translation>
     </message>
@@ -171,7 +172,7 @@
         <translation>Четец на помощ</translation>
     </message>
     <message>
-        <location filename="help.py" line="101"/>
+        <location filename="help.py" line="102"/>
         <source>Help</source>
         <translation>Помощ</translation>
     </message>
@@ -181,7 +182,7 @@
         <translation>Плъгин за управление на плъгините</translation>
     </message>
     <message>
-        <location filename="plugins.py" line="56"/>
+        <location filename="plugins.py" line="57"/>
         <source>Plugins</source>
         <translation>Плъгини</translation>
     </message>
@@ -191,7 +192,7 @@
         <translation>Плъгин за управление на поща</translation>
     </message>
     <message>
-        <location filename="mail.py" line="102"/>
+        <location filename="mail.py" line="103"/>
         <source>Mail</source>
         <translation>Поща</translation>
     </message>
@@ -199,12 +200,12 @@
 <context>
     <name>ToolWidget</name>
     <message>
-        <location filename="storage.py" line="333"/>
+        <location filename="storage.py" line="361"/>
         <source>Device mounted to: %s</source>
         <translation>Монтирано устройство на: %s</translation>
     </message>
     <message>
-        <location filename="storage.py" line="337"/>
+        <location filename="storage.py" line="365"/>
         <source>Device unmounted from: %s</source>
         <translation>Демонтирано устройство от: %s</translation>
     </message>
@@ -237,7 +238,7 @@
         <translation></translation>
     </message>
     <message>
-        <location filename="storage.py" line="244"/>
+        <location filename="storage.py" line="258"/>
         <source>Open</source>
         <translation>Отвори</translation>
     </message>
@@ -262,52 +263,52 @@
         <translation>Запази</translation>
     </message>
     <message>
-        <location filename="storage.py" line="242"/>
+        <location filename="storage.py" line="256"/>
         <source>Execute</source>
         <translation>Изпулни</translation>
     </message>
     <message>
-        <location filename="storage.py" line="246"/>
+        <location filename="storage.py" line="260"/>
         <source>Open with</source>
         <translation>Отвори с</translation>
     </message>
     <message>
-        <location filename="storage.py" line="249"/>
+        <location filename="storage.py" line="265"/>
         <source>Cut</source>
         <translation>Изрежи</translation>
     </message>
     <message>
-        <location filename="storage.py" line="251"/>
+        <location filename="storage.py" line="268"/>
         <source>Copy</source>
         <translation>Копирай</translation>
     </message>
     <message>
-        <location filename="storage.py" line="253"/>
+        <location filename="storage.py" line="271"/>
         <source>Paste</source>
         <translation>Постави</translation>
     </message>
     <message>
-        <location filename="storage.py" line="256"/>
+        <location filename="storage.py" line="274"/>
         <source>Rename</source>
         <translation>Преименувай</translation>
     </message>
     <message>
-        <location filename="storage.py" line="258"/>
+        <location filename="storage.py" line="276"/>
         <source>Delete</source>
         <translation>Изтрии</translation>
     </message>
     <message>
-        <location filename="storage.py" line="260"/>
+        <location filename="storage.py" line="279"/>
         <source>Properties</source>
         <translation>Свойства</translation>
     </message>
     <message>
-        <location filename="storage.py" line="263"/>
+        <location filename="storage.py" line="285"/>
         <source>New file</source>
         <translation>Нов файл</translation>
     </message>
     <message>
-        <location filename="storage.py" line="265"/>
+        <location filename="storage.py" line="287"/>
         <source>New directory</source>
         <translation>Нова директория</translation>
     </message>
@@ -487,7 +488,7 @@
         <translation>Файлът/директорията съществува, ново име:</translation>
     </message>
     <message>
-        <location filename="storage.py" line="229"/>
+        <location filename="storage.py" line="238"/>
         <source>Name:</source>
         <translation>Име:</translation>
     </message>
@@ -820,6 +821,11 @@
         <location filename="package.py" line="84"/>
         <source>updates</source>
         <translation>обновления</translation>
+    </message>
+    <message>
+        <location filename="storage.py" line="220"/>
+        <source>Information</source>
+        <translation>Информация</translation>
     </message>
 </context>
 </TS>

@@ -20,7 +20,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'dummy'
-        self.version = "0.9.33 (f765d0a)"
+        self.version = "0.9.33 (2cc2496)"
         self.description = self.tr('Dummy plugin')
         self.icon = general.get_icon('edit-delete')
         self.widget = None

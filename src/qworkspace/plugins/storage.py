@@ -195,7 +195,8 @@ class Widget(QtGui.QWidget):
         for svar in self.storageView.selectedIndexes():
             snvar, ok = QtGui.QInputDialog.getText(self, self.tr('Rename'), \
                 self.tr('New name:'), QtGui.QLineEdit.Normal)
-            os.rename(str(self.model.filePath(svar)), sdest + '/' + str(snvar))
+            if ok:
+                os.rename(str(self.model.filePath(svar)), sdest + '/' + str(snvar))
 
     def menu_delete(self):
         ''' Delete files/directories '''
@@ -209,8 +210,16 @@ class Widget(QtGui.QWidget):
     def menu_properties(self):
         selected_items = []
         for svar in self.storageView.selectedIndexes():
-            selected_items.append(str(self.model.filePath(svar)))
-        # FIXME: implement
+            sfile = str(self.model.filePath(svar))
+            info = QtCore.QFileInfo(sfile)
+            executable = str(info.isExecutable())
+            modified = QtCore.QDateTime.toString(info.lastModified())
+            read = QtCore.QDateTime.toString(info.lastRead())
+            mime = misc.file_mime(sfile)
+            plugin = self.parent.plugins.mime_plugin(mime)
+            QtGui.QMessageBox.information(self, self.tr('Information'), \
+                'Executable: %s\nModified: %s\nRead: %s\nMime: %s\nPlugin: %s' % \
+                (executable, modified, read, mime, plugin))
 
     def menu_new_file(self):
         ''' Create a new file '''
@@ -237,34 +246,53 @@ class Widget(QtGui.QWidget):
             misc.dir_create(str(svar))
 
     def menu_show(self):
-        # FIXME: enable actions depending on permissions and such
         self.storageMenu = QtGui.QMenu()
-        self.storageMenu.addAction(self.icon_execute, \
-            self.tr('Execute'), self.menu_execute)
-        self.storageMenu.addAction(self.icon_open, \
-            self.tr('Open'), self.menu_open)
-        self.storageMenu.addAction(self.icon_open_with, \
-            self.tr('Open with'), self.menu_open_with)
-        self.storageMenu.addSeparator()
-        self.storageMenu.addAction(self.icon_cut, \
-            self.tr('Cut'), self.menu_cut)
-        self.storageMenu.addAction(self.icon_copy, \
-            self.tr('Copy'), self.menu_copy)
-        self.storageMenu.addAction(self.icon_paste, \
-            self.tr('Paste'), self.menu_paste)
-        self.storageMenu.addSeparator()
-        self.storageMenu.addAction(self.icon_rename, \
-            self.tr('Rename'), self.menu_rename)
-        self.storageMenu.addAction(self.icon_delete, \
-            self.tr('Delete'), self.menu_delete)
-        self.storageMenu.addAction(self.icon_properties, \
-            self.tr('Properties'), self.menu_properties)
-        self.storageMenu.addSeparator()
-        self.storageMenu.addAction(self.icon_new_file, \
-            self.tr('New file'), self.menu_new_file)
-        self.storageMenu.addAction(self.icon_new_dir, \
-            self.tr('New directory'), self.menu_new_directory)
+        sfile = None
+        for svar in self.storageView.selectedIndexes():
+            sfile = str(self.model.filePath(svar))
+
+        if sfile:
+            if os.access(sfile, os.X_OK) and os.path.isfile(sfile):
+                self.storageMenu.addAction(self.icon_execute, \
+                    self.tr('Execute'), self.menu_execute)
+            self.storageMenu.addAction(self.icon_open, \
+                self.tr('Open'), self.menu_open)
+            self.storageMenu.addAction(self.icon_open_with, \
+                self.tr('Open with'), self.menu_open_with)
+            self.storageMenu.addSeparator()
+
+            if os.access(sfile, os.W_OK):
+                self.storageMenu.addAction(self.icon_cut, \
+                    self.tr('Cut'), self.menu_cut)
+            if os.access(sfile, os.R_OK):
+                self.storageMenu.addAction(self.icon_copy, \
+                    self.tr('Copy'), self.menu_copy)
+            if (self.cut or self.copy or self.clipboard.text()) and os.access(self.model.rootPath(), os.W_OK):
+                self.storageMenu.addAction(self.icon_paste, \
+                    self.tr('Paste'), self.menu_paste)
+            if os.access(sfile, os.R_OK) and os.access(self.model.rootPath(), os.W_OK):
+                self.storageMenu.addAction(self.icon_rename, \
+                    self.tr('Rename'), self.menu_rename)
+                self.storageMenu.addAction(self.icon_delete, \
+                    self.tr('Delete'), self.menu_delete)
+            if os.access(sfile, os.R_OK):
+                self.storageMenu.addAction(self.icon_properties, \
+                    self.tr('Properties'), self.menu_properties)
+            self.storageMenu.addSeparator()
+
+        if os.access(self.model.rootPath(), os.W_OK):
+            self.storageMenu.addSeparator()
+            self.storageMenu.addAction(self.icon_new_file, \
+                self.tr('New file'), self.menu_new_file)
+            self.storageMenu.addAction(self.icon_new_dir, \
+                self.tr('New directory'), self.menu_new_directory)
+
+        if sfile and misc.archive_supported(sfile):
+            # FIXME: implement
+            pass
+
         self.storageMenu.popup(QtGui.QCursor.pos())
+
 
     def menu_extract(self):
         ''' Extract archives '''
@@ -342,7 +370,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'storage'
-        self.version = "0.9.33 (f765d0a)"
+        self.version = "0.9.33 (2cc2496)"
         self.description = self.tr('Storage management plugin')
         self.icon = general.get_icon('system-file-manager')
         self.widget = None
