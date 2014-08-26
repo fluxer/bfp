@@ -820,7 +820,6 @@ class WM(object):
     def resize_pid(self, pid, x=0, y=0, width=0, height=0):
         for window in self.get_clients():
             wpid = self.get_window_property_safe(window, '_NET_WM_PID', X.AnyPropertyType).value[0]
-            print wpid, pid
             if wpid == pid:
                 self.resize_window(window, x=x, y=y, width=width, height=height)
 
@@ -831,7 +830,6 @@ class WM(object):
             if wpid:
                 wpid = wpid.value[0]
             if wpid == pid:
-                print window.id
                 return window.id
         return False
 

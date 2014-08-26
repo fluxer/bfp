@@ -87,14 +87,14 @@ class Widget(QtGui.QWidget):
 
     def images_list(self):
         ''' Get list of images in directory '''
+        slist = []
         scurrent = self.imageView.fileName
         sdir = os.path.dirname(scurrent)
         if not os.path.isdir(sdir):
-            self.previousButton.setEnabaled(False)
+            self.previousButton.setEnabled(False)
             self.nextButton.setEnabled(False)
-            return
+            return slist
 
-        slist = []
         for sfile in os.listdir(sdir):
             sfull = sdir + '/' + sfile
             if os.path.isfile(sfull):
