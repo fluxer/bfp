@@ -182,7 +182,8 @@ try:
             libspm.message.DEBUG = True
             setattr(namespace, self.dest, values)
 
-    parser = argparse.ArgumentParser(prog='spm', description='Source Package Manager')
+    parser = argparse.ArgumentParser(prog='spm', \
+        description='Source Package Manager')
     subparsers = parser.add_subparsers(dest='mode')
 
     if EUID == 0:
@@ -279,12 +280,12 @@ try:
         help='Change system root directory')
     parser.add_argument('--ignore', type=str, action=OverrideIgnore, \
         help='Change ignored targets')
-    parser.add_argument('--mirror', type=ast.literal_eval, action=OverrideMirror, \
-        help='Set whether to use mirrors')
+    parser.add_argument('--mirror', type=ast.literal_eval, \
+        action=OverrideMirror, help='Set whether to use mirrors')
     parser.add_argument('--timeout', type=int, action=OverrideTimeout, \
         help='Set the connection timeout')
-    parser.add_argument('--external', type=ast.literal_eval, action=OverrideExternal, \
-        help='Set whether to use external fetcher')
+    parser.add_argument('--external', type=ast.literal_eval, \
+        action=OverrideExternal, help='Set whether to use external fetcher')
     parser.add_argument('--chost', type=str, action=OverrideChost, \
         help='Change CHOST')
     parser.add_argument('--cflags', type=str, action=OverrideCflags, \
@@ -299,24 +300,25 @@ try:
         help='Change MAKEFLAGS')
     parser.add_argument('--man', type=ast.literal_eval, action=OverrideMan, \
         help='Set whether to compress man pages')
-    parser.add_argument('--binaries', type=ast.literal_eval, action=OverrideBinaries, \
-        help='Set whether to strip binaries')
-    parser.add_argument('--shared', type=ast.literal_eval, action=OverrideShared, \
-        help='Set whether to strip shared libraries')
-    parser.add_argument('--static', type=ast.literal_eval, action=OverrideStatic, \
-        help='Set whether to strip static libraries')
-    parser.add_argument('--rpath', type=ast.literal_eval, action=OverrideRpath, \
-        help='Set whether to strip RPATH')
-    parser.add_argument('--missing', type=ast.literal_eval, action=OverrideMissing, \
+    parser.add_argument('--binaries', type=ast.literal_eval, \
+        action=OverrideBinaries, help='Set whether to strip binaries')
+    parser.add_argument('--shared', type=ast.literal_eval, \
+        action=OverrideShared, help='Set whether to strip shared libraries')
+    parser.add_argument('--static', type=ast.literal_eval, \
+        action=OverrideStatic, help='Set whether to strip static libraries')
+    parser.add_argument('--rpath', type=ast.literal_eval, \
+        action=OverrideRpath, help='Set whether to strip RPATH')
+    parser.add_argument('--missing', type=ast.literal_eval, \
+        action=OverrideMissing, \
         help='Set whether to ignore missing runtime dependencies')
-    parser.add_argument('--conflicts', type=ast.literal_eval, action=OverrideConflicts, \
-        help='Set whether to check for conflicts')
-    parser.add_argument('--backup', type=ast.literal_eval, action=OverrideBackup, \
-        help='Set whether to backup files')
-    parser.add_argument('--scripts', type=ast.literal_eval, action=OverrideScripts, \
-        help='Set whether to execute pre/post script')
-    parser.add_argument('--triggers', type=ast.literal_eval, action=OverrideTriggers, \
-        help='Set whether to execute triggers')
+    parser.add_argument('--conflicts', type=ast.literal_eval, \
+        action=OverrideConflicts, help='Set whether to check for conflicts')
+    parser.add_argument('--backup', type=ast.literal_eval, \
+        action=OverrideBackup, help='Set whether to backup files')
+    parser.add_argument('--scripts', type=ast.literal_eval, \
+        action=OverrideScripts, help='Set whether to execute pre/post script')
+    parser.add_argument('--triggers', type=ast.literal_eval, \
+        action=OverrideTriggers, help='Set whether to execute triggers')
     parser.add_argument('--offline', nargs=0, action=OverrideOffline, \
         help='Enable offline mode')
     parser.add_argument('--debug', nargs=0, action=OverrideDebug, \
@@ -351,7 +353,8 @@ try:
     elif ARGS.mode == 'source':
         if misc.string_search('world', ARGS.TARGETS, exact=True):
             position = ARGS.TARGETS.index('world')
-            ARGS.TARGETS[position:position+1] = database.local_all(basename=True)
+            ARGS.TARGETS[position:position+1] = \
+                database.local_all(basename=True)
 
         for alias in database.remote_aliases():
             if misc.string_search(alias, ARGS.TARGETS, exact=True):
