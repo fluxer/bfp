@@ -359,7 +359,8 @@ try:
         for alias in database.remote_aliases():
             if misc.string_search(alias, ARGS.TARGETS, exact=True):
                 position = ARGS.TARGETS.index(alias)
-                ARGS.TARGETS[position:position+1] = database.remote_alias(alias)
+                ARGS.TARGETS[position:position+1] = \
+                    database.remote_alias(alias)
 
         message.info('Runtime information')
         message.sub_info('CACHE_DIR', libspm.CACHE_DIR)

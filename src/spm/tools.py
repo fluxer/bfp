@@ -144,7 +144,8 @@ class Check(object):
                 content = misc.file_read(target_metadata)
                 for line in misc.file_readlines(target_metadata):
                     if line.startswith('depends='):
-                        content = content.replace(line, 'depends=%s' % target_depends)
+                        content = content.replace(line, \
+                            'depends=%s' % target_depends)
                 misc.file_write(target_metadata, content)
 
 
@@ -199,8 +200,8 @@ class Dist(object):
                             message.sub_warning('Internet connection is down')
                         elif os.path.isdir(src_file):
                             message.sub_debug('Updating repository', src_url)
-                            subprocess.check_call((misc.whereis('git'), 'pull', '--depth=1',
-                                src_url), cwd=src_file)
+                            subprocess.check_call((misc.whereis('git'), \
+                                'pull', '--depth=1', src_url), cwd=src_file)
                         else:
                             message.sub_debug('Cloning initial copy', src_url)
                             subprocess.check_call((misc.whereis('git'), 'clone', '--depth=1',
@@ -239,8 +240,10 @@ class Dist(object):
                     src_base = os.path.basename(src_url)
 
                     src_file = os.path.join(target, src_base)
-                    if src_url.startswith('http://') or src_url.startswith('https://') \
-                        or src_url.startswith('ftp://') or src_url.startswith('ftps://'):
+                    if src_url.startswith('http://') \
+                        or src_url.startswith('https://') \
+                        or src_url.startswith('ftp://') \
+                        or src_url.startswith('ftps://'):
                         if os.path.isfile(src_file):
                             message.sub_debug('Removing', src_file)
                             os.unlink(src_file)
@@ -275,18 +278,23 @@ class Lint(object):
                         message.sub_warning('No manual page(s)')
 
                 if self.udev:
-                    if misc.string_search('(\\s|^)/lib/udev/rules.d/', target_footprint, escape=False) \
-                        and misc.string_search('(\\s|^)/usr/(s)?bin/', target_footprint, escape=False):
+                    if misc.string_search('(\\s|^)/lib/udev/rules.d/', \
+                        target_footprint, escape=False) \
+                        and misc.string_search('(\\s|^)/usr/(s)?bin/', \
+                        target_footprint, escape=False):
                         message.sub_warning('Cross-filesystem udev rule(s)')
 
                 if self.symlink:
                     for sfile in target_footprint.splitlines():
                         if os.path.exists(sfile) and os.path.islink(sfile):
-                            if not sfile.startswith('/usr/') and os.path.realpath(sfile).startswith('/usr/'):
+                            if not sfile.startswith('/usr/') \
+                                and os.path.realpath(sfile).startswith('/usr/'):
                                 message.sub_warning('Cross-filesystem symlink', sfile)
-                            elif not sfile.startswith('/var/') and os.path.realpath(sfile).startswith('/var/'):
+                            elif not sfile.startswith('/var/') \
+                                and os.path.realpath(sfile).startswith('/var/'):
                                 message.sub_warning('Cross-filesystem symlink', sfile)
-                            elif not sfile.startswith('/boot/') and os.path.realpath(sfile).startswith('/boot/'):
+                            elif not sfile.startswith('/boot/') \
+                                and os.path.realpath(sfile).startswith('/boot/'):
                                 message.sub_warning('Cross-filesystem symlink', sfile)
 
                 if self.doc:
@@ -304,7 +312,8 @@ class Lint(object):
 
                 if self.builddir:
                     for sfile in target_footprint.splitlines():
-                        # there is no point in checking symlinks, may lead to directory
+                        # there is no point in checking symlinks,
+                        # may lead to directory
                         if not os.path.exists(sfile) or os.path.islink(sfile):
                             continue
 
@@ -474,7 +483,8 @@ try:
             message.DEBUG = True
             setattr(namespace, self.dest, values)
 
-    parser = argparse.ArgumentParser(prog='spm-tools', description='Source Package Manager Tools')
+    parser = argparse.ArgumentParser(prog='spm-tools', \
+        description='Source Package Manager Tools')
     subparsers = parser.add_subparsers(dest='mode')
 
     if EUID == 0:
@@ -483,8 +493,8 @@ try:
             help='Include all sources in the archive')
         dist_parser.add_argument('-c', '--clean', action='store_true', \
             help='Clean all sources after creating archive')
-        dist_parser.add_argument('-d', '--directory', type=str, default=os.getcwd(), \
-            help='Set output directory')
+        dist_parser.add_argument('-d', '--directory', type=str, \
+            default=os.getcwd(), help='Set output directory')
         dist_parser.add_argument('TARGETS', nargs='+', type=str, \
             help='Targets to apply actions on')
 
@@ -557,8 +567,8 @@ try:
         help='Pattern to search for in remote targets')
 
     pack_parser = subparsers.add_parser('pack')
-    pack_parser.add_argument('-d', '--directory', type=str, default=os.getcwd(), \
-        help='Set output directory')
+    pack_parser.add_argument('-d', '--directory', type=str, \
+        default=os.getcwd(), help='Set output directory')
     pack_parser.add_argument('TARGETS', nargs='+', type=str, \
         help='Targets to apply actions on')
 
@@ -573,12 +583,14 @@ try:
     if ARGS.mode == 'dist':
         if misc.string_search('world', ARGS.TARGETS, exact=True):
             position = ARGS.TARGETS.index('world')
-            ARGS.TARGETS[position:position+1] = database.local_all(basename=True)
+            ARGS.TARGETS[position:position+1] = \
+                database.local_all(basename=True)
 
         for alias in database.remote_aliases():
             if misc.string_search(alias, ARGS.TARGETS, exact=True):
                 position = ARGS.TARGETS.index(alias)
-                ARGS.TARGETS[position:position+1] = database.remote_alias(alias)
+                ARGS.TARGETS[position:position+1] = \
+                    database.remote_alias(alias)
 
         message.info('Runtime information')
         message.sub_info('TARGETS', ARGS.TARGETS)
@@ -590,7 +602,8 @@ try:
         message.info('Runtime information')
         message.sub_info('TARGETS', ARGS.TARGETS)
         message.info('Poking locals...')
-        m = Check(ARGS.TARGETS, ARGS.fast, ARGS.depends, ARGS.reverse, ARGS.adjust)
+        m = Check(ARGS.TARGETS, ARGS.fast, ARGS.depends, ARGS.reverse, \
+            ARGS.adjust)
         m.main()
 
     elif ARGS.mode == 'clean':
