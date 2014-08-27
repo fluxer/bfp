@@ -65,7 +65,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'screenshot'
-        self.version = "0.9.34 (987cd95)"
+        self.version = "0.9.34 (dc8f6d5)"
         self.description = self.tr('Screenshot taking plugin')
         self.icon = general.get_icon('application-x-desktop')
         self.widget = None

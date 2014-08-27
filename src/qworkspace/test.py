@@ -9,22 +9,16 @@ from PyQt4 import QtCore, QtGui
 import sys, os, gc, libworkspace, libmisc
 
 # prepare for lift-off
-app_version = "0.9.34 (dc8f6d5)"
+app_version = "0.9.34 (987cd95)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qworkspace_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
-settings = libworkspace.Settings()
 general = libworkspace.General()
 misc = libmisc.Misc()
 ui.app = app
 ui.plugins = libworkspace.Plugins(ui)
 ui.window = MainWindow
-
-# setup look of application
-def setLook():
-    general.set_style(app)
-setLook()
 
 # setup translator
 def setTranslator():
@@ -50,19 +44,6 @@ def tab_close(index):
     gc.collect()
 ui.tabWidget.tabCloseRequested.connect(tab_close)
 
-# watch configs for changes
-if os.path.isfile(settings.settings.fileName()):
-    watcher = QtCore.QFileSystemWatcher()
-    watcher.addPath(settings.settings.fileName())
-    watcher.fileChanged.connect(setLook)
-
-# show window and run application
-MainWindow.showMaximized()
-MainWindow.setFixedSize(MainWindow.size())
-r = app.exec_()
-
 # unload all plugins
 for plugin in reversed(ui.plugins.plugins_all):
     ui.plugins.plugin_unload(plugin)
-
-sys.exit(r)

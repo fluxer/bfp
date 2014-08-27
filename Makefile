@@ -11,6 +11,7 @@ all:
 
 check:
 	$(MAKE) -C src/libs check
+	$(MAKE) -C src/qworkspace check
 
 install:
 	$(MAKE) -C etc install

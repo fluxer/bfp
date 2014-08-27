@@ -31,6 +31,10 @@ all: clean
 		package.so plugins.so quit.so screenshot.so settings.so \
 		storage.so terminal.so www.so
 
+check:
+	$(PYUIC) qworkspace.ui -o qworkspace_ui.py
+	$(PYTHON) test.py
+
 install:
 	$(INSTALL) -dm755 $(DESTDIR)$(BINDIR)
 	$(INSTALL) -dm755 $(DESTDIR)/etc/qworkspace/plugins
