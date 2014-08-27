@@ -6,8 +6,8 @@ porting:
 - some ports are bundled in a multi-port, xorg-libraries is a good example
 - don't build documentation except man pages and in some cases example files
 - if software offers check via test suite use it
-- don't put packages from the base group in the makedepend array
-- install packages from base to / not /usr
+- don't put ports from the base group in the makedepend array
+- install software to / not /usr
 - glibc supports Linux Kernel version greater or equal to 3.2.0 only
 
 ## Toolchain build order
@@ -118,6 +118,7 @@ way to override the behavior of the main conf file except editing it, i.e.
 there is no /etc/<package>.d.
 
 ### Checking for manual pages
+
 Shipping manual pages is important but sometimes they are not generated because
 libxml2, docbook-xml, docbook-xsl, asciidoc or other software is missing. To
 make sure that manual pages are installed you can use this:
