@@ -36,24 +36,7 @@ install:
 	$(INSTALL) -dm755 $(DESTDIR)/etc/qworkspace/plugins
 	$(INSTALL) -dm755 $(DESTDIR)$(TRDIR)/
 	$(INSTALL) -m755 main.exe $(DESTDIR)$(BINDIR)/qworkspace
-	$(INSTALL) -m644 archive.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -m644 download.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -m644 calendar.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -m644 editor.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -m644 help.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -m644 image.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -m644 mail.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -m644 mixer.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -m644 multimedia.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -m644 network.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -m644 package.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -m644 plugins.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -m644 quit.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -m644 screenshot.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -m644 settings.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -m644 storage.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -m644 terminal.so $(DESTDIR)/etc/qworkspace/plugins/
-	$(INSTALL) -m644 www.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(INSTALL) -m644 *.so $(DESTDIR)/etc/qworkspace/plugins/
 	$(INSTALL) -m644 tr/*.qm $(DESTDIR)$(TRDIR)/
 
 uninstall:

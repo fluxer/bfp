@@ -18,15 +18,7 @@ check:
 
 install:
 	$(INSTALL) -dm755 $(DESTDIR)$(SITEDIR)
-	$(INSTALL) -m644 libarchive.so $(DESTDIR)$(SITEDIR)/libarchive.so
-	$(INSTALL) -m644 libhighlighter.so $(DESTDIR)$(SITEDIR)/libhighlighter.so
-	$(INSTALL) -m644 libmagic.so $(DESTDIR)$(SITEDIR)/libmagic.so
-	$(INSTALL) -m644 libmessage.so $(DESTDIR)$(SITEDIR)/libmessage.so
-	$(INSTALL) -m644 libmisc.so $(DESTDIR)$(SITEDIR)/libmisc.so
-	$(INSTALL) -m644 libpackage.so $(DESTDIR)$(SITEDIR)/libpackage.so
-	$(INSTALL) -m644 libsystem.so $(DESTDIR)$(SITEDIR)/libsystem.so
-	$(INSTALL) -m644 libworkspace.so $(DESTDIR)$(SITEDIR)/libworkspace.so
-	# $(INSTALL) -m644 libxlib.so $(DESTDIR)$(SITEDIR)/libxlib.so
+	$(INSTALL) -m644 *.so $(DESTDIR)$(SITEDIR)/
 
 uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libarchive.so
