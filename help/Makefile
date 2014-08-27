@@ -2,13 +2,17 @@ include ../Makefile.inc
 
 all:
 	$(MARKDOWN) about.md -f about.html
+	$(MARKDOWN) bootloader.md -f bootloader.html
+	$(MARKDOWN) building_livecd.md -f building_livecd.html
 	$(MARKDOWN) contributors.md -f contributors.html
 	$(MARKDOWN) copying.cparted.md -f copying.cparted.html
 	$(MARKDOWN) copying.icons.md -f copying.icons.html
 	$(MARKDOWN) copying.md -f copying.html
+	$(MARKDOWN) dns_caching.md -f dns_caching.html
 	$(MARKDOWN) initscripts.md -f initscripts.html
 	$(MARKDOWN) inittab.md -f inittab.html
 	$(MARKDOWN) license.magic.md -f license.magic.html
+	$(MARKDOWN) locales.md -f locales.html
 	$(MARKDOWN) lsinitfs.md -f lsinitfs.html
 	$(MARKDOWN) mkinitfs.md -f mkinitfs.html
 	$(MARKDOWN) porting_software.md -f porting_software.html

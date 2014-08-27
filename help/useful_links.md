@@ -38,6 +38,16 @@ https://github.com/CMB/aur2
 
 https://github.com/sebnow/parched/blob/master/parched.py
 
+## Power saving
+
+https://github.com/Bumblebee-Project/bbswitch
+
+https://code.google.com/p/spindown/
+
+https://github.com/vodik/powersave
+
+https://github.com/taylorchu/powerdown
+
 ## Misc
 
 https://www.kernel.org/doc/Documentation/kernel-parameters.txt
