@@ -46,7 +46,8 @@ def LoginProcess(username):
     os.putenv('XAUTHORITY', pw_xauth)
     if not os.path.isfile(pw_xauth):
         pw_randomkey = uuid.uuid4().hex
-        subprocess.check_call((misc.whereis('xauth'), 'add', pw_hostname + pw_display, '.', pw_randomkey))
+        subprocess.check_call((misc.whereis('xauth'), 'add', \
+            pw_hostname + pw_display, '.', pw_randomkey))
 
     if os.path.isdir(pw_dir):
         os.chdir(pw_dir)
@@ -63,14 +64,17 @@ def login(autologin=None):
     pw_passwd = pwd.getpwnam(username).pw_passwd
 
     if os.path.isfile('/etc/nologin'):
-        QtGui.QMessageBox.critical(MainWindow, 'Critical', 'Login is not permited at the moment:\n\n' + \
+        QtGui.QMessageBox.critical(MainWindow, 'Critical', \
+            'Login is not permited at the moment:\n\n' + \
             misc.file_read('/etc/nologin'))
         return
 
-    # FIXME: /etc/usertty and /etc/securetty support, see http://linux.die.net/man/1/login
+    # FIXME: /etc/usertty and /etc/securetty support,
+    # see http://linux.die.net/man/1/login
 
     if pw_passwd == 'x' or pw_passwd == '*':
-        QtGui.QMessageBox.critical(MainWindow, 'Critical', 'Shadow passwords are hot supported.')
+        QtGui.QMessageBox.critical(MainWindow, 'Critical', \
+            'Shadow passwords are hot supported.')
         ui.UserNameBox.setFocus()
         ui.PasswordEdit.clear()
         return
@@ -80,15 +84,18 @@ def login(autologin=None):
             MainWindow.hide()
             LoginProcess(username)
         except Exception as detail:
-            QtGui.QMessageBox.critical(MainWindow, 'Critical', 'Login was not sucessful:\n\n' + str(detail))
+            QtGui.QMessageBox.critical(MainWindow, 'Critical', \
+                'Login was not sucessful:\n\n' + str(detail))
             ui.PasswordEdit.setFocus()
             ui.PasswordEdit.clear()
         finally:
             MainWindow.show()
-            # since priviledges are dropped let init restart the program to regain root
+            # since priviledges are dropped let init restart the program to
+            # regain root
             sys.exit(0)
     else:
-        QtGui.QMessageBox.critical(MainWindow, 'Critical', 'Incorrect password.')
+        QtGui.QMessageBox.critical(MainWindow, 'Critical', \
+            'Incorrect password.')
         ui.PasswordEdit.setFocus()
         ui.PasswordEdit.clear()
 
