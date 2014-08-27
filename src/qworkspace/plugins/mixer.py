@@ -47,7 +47,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'mixer'
-        self.version = "0.9.34 (7ec842b)"
+        self.version = "0.9.34 (987cd95)"
         self.description = self.tr('Sound mixer manager plugin')
         self.icon = general.get_icon('audio-volume-high')
         self.widget = None
