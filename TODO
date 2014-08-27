@@ -21,6 +21,7 @@ http://www.linuxfromscratch.org/blfs/view/systemd/postlfs/initramfs.html
  * Implement chat plugin
  * Implement Steam plugin (https://developer.valvesoftware.com/wiki/SteamCMD)
  * Implement Bluetooth (BlueZ) plugin (http://git.kernel.org/cgit/bluetooth/bluez.git/tree/doc)
+ * Implement print manager plugin (CUPS)
  * Implement bug reports plugin (send, query, etc.)
  * Implement system search/indexing plugin (strigi)
  * Implement system backup plugin
