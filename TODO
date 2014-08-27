@@ -12,6 +12,7 @@ http://www.linuxfromscratch.org/blfs/view/systemd/postlfs/initramfs.html
  * Lint - check if groups/users are removed
 
 ## QWORKSPACE ##
+ * Implement elevator for executing root commands as root (via D-Bus?)
  * Complete archive manager plugin
  * Complete mail manager plugin
  * Improve audio mixer plugin
