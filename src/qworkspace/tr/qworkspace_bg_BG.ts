@@ -10,6 +10,39 @@
     </message>
 </context>
 <context>
+    <name>MainWindow</name>
+    <message>
+        <location filename="qworkspace_ui.py" line="100"/>
+        <source>QWorkspace</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="qworkspace_ui.py" line="101"/>
+        <source>Recent</source>
+        <translation>Скорошни</translation>
+    </message>
+    <message>
+        <location filename="qworkspace_ui.py" line="102"/>
+        <source>Applications</source>
+        <translation>Приложения</translation>
+    </message>
+    <message>
+        <location filename="qworkspace_ui.py" line="103"/>
+        <source>Notification</source>
+        <translation>Съобщения</translation>
+    </message>
+    <message>
+        <location filename="qworkspace_ui.py" line="104"/>
+        <source>Greetings and salutations!</source>
+        <translation>Поздрави!</translation>
+    </message>
+    <message>
+        <location filename="qworkspace_ui.py" line="105"/>
+        <source>Welcome</source>
+        <translation>Добре дошъл</translation>
+    </message>
+</context>
+<context>
     <name>Plugin</name>
     <message>
         <location filename="dummy.py" line="24"/>
@@ -187,12 +220,12 @@
         <translation>Плъгини</translation>
     </message>
     <message>
-        <location filename="mail.py" line="89"/>
+        <location filename="mail.py" line="94"/>
         <source>Mail manager plugin</source>
         <translation>Плъгин за управление на поща</translation>
     </message>
     <message>
-        <location filename="mail.py" line="103"/>
+        <location filename="mail.py" line="108"/>
         <source>Mail</source>
         <translation>Поща</translation>
     </message>
@@ -788,32 +821,32 @@
         <translation>Спри зареждането на страницата</translation>
     </message>
     <message>
-        <location filename="mail.py" line="49"/>
+        <location filename="mail.py" line="54"/>
         <source>No server entered</source>
         <translation>Не е зададен сървър</translation>
     </message>
     <message>
-        <location filename="mail.py" line="53"/>
+        <location filename="mail.py" line="58"/>
         <source>No login entered</source>
         <translation>Не е зададено влизане</translation>
     </message>
     <message>
-        <location filename="mail.py" line="57"/>
+        <location filename="mail.py" line="62"/>
         <source>No password entered</source>
         <translation>Не е зададена парола</translation>
     </message>
     <message>
-        <location filename="mail.py" line="61"/>
+        <location filename="mail.py" line="66"/>
         <source>No subject entered</source>
         <translation>Не е зададен обект</translation>
     </message>
     <message>
-        <location filename="mail.py" line="65"/>
+        <location filename="mail.py" line="70"/>
         <source>No receiver entered</source>
         <translation>Не е зададен получател</translation>
     </message>
     <message>
-        <location filename="mail.py" line="69"/>
+        <location filename="mail.py" line="74"/>
         <source>No message entered</source>
         <translation>Не е зададено съобщение</translation>
     </message>

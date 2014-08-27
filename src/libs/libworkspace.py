@@ -285,7 +285,7 @@ class Plugins(object):
 
     def recent_register(self, spath):
         ''' Register recent path '''
-        # limit to 30
+        # FIXME: limit to 30
         keys = self.recent_settings.settings.allKeys()
         if len(keys) > 29:
             pass
