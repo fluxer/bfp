@@ -403,6 +403,12 @@ class Misc(object):
         return self.system_output((self.whereis('scanelf'), '-CBF', \
             sformat, sflags, sfile))
 
+    def system_command(self, command, shell=False, cwd=os.getcwd()):
+        ''' Execute system command safely '''
+        if not os.path.isdir(cwd):
+            cwd = '/'
+        return subprocess.check_call(command, shell=shell, cwd=cwd)
+
     def system_chroot(self, command):
         ''' Execute command in chroot environment '''
         # prevent stupidity

@@ -2,7 +2,6 @@
 
 import sys
 import os
-import subprocess
 import tarfile
 import zipfile
 import gzip
@@ -292,11 +291,11 @@ class Repo(object):
 
         if os.path.isdir(self.repository_dir):
             message.sub_info('Updating repository', self.repository_name)
-            subprocess.check_call((misc.whereis('git'), 'pull', '--depth=1', \
+            misc.system_command((misc.whereis('git'), 'pull', '--depth=1', \
                 self.repository_url), cwd=self.repository_dir)
         else:
             message.sub_info('Cloning initial copy', self.repository_name)
-            subprocess.check_call((misc.whereis('git'), 'clone', '--depth=1', \
+            misc.system_command((misc.whereis('git'), 'clone', '--depth=1', \
                 self.repository_url, self.repository_dir))
 
     def update(self):
@@ -417,42 +416,42 @@ class Source(object):
                 and run_ldconfig:
                 message.sub_info('Updating shared libraries cache')
                 message.sub_debug(sfile)
-                subprocess.check_call((misc.whereis('ldconfig'), '-r', ROOT_DIR))
+                misc.system_command((misc.whereis('ldconfig'), '-r', ROOT_DIR))
                 run_ldconfig = False
             elif '/share/man' in sfile and misc.whereis('mandb', fallback=False) and run_mandb:
                 if os.path.isdir(sfile):
                     continue
                 message.sub_info('Updating manual pages database')
                 message.sub_debug(sfile)
-                subprocess.check_call(('mandb', '--quiet'))
+                misc.system_command(('mandb', '--quiet'))
                 run_mandb = False
             elif '/share/applications/' in sfile and misc.whereis('update-desktop-database', fallback=False) \
                 and run_desktop_database:
                 message.sub_info('Updating desktop database')
                 message.sub_debug(sfile)
-                subprocess.check_call(('update-desktop-database', os.path.dirname(sfile)))
+                misc.system_command(('update-desktop-database', os.path.dirname(sfile)))
                 run_desktop_database = False
             elif '/share/mime/' in sfile and misc.whereis('update-mime-database', fallback=False) and run_mime_database:
                 message.sub_info('Updating mime database')
                 message.sub_debug(sfile)
-                subprocess.check_call(('update-mime-database', sys.prefix + 'share/mime'))
+                misc.system_command(('update-mime-database', sys.prefix + 'share/mime'))
                 run_mime_database = False
             elif '/share/icons/' in sfile and misc.whereis('xdg-icon-resource', fallback=False) and run_icon_resource:
                 message.sub_info('Updating icon resources')
                 message.sub_debug(sfile)
-                subprocess.check_call(('xdg-icon-resource', 'forceupdate', '--theme', 'hicolor'))
+                misc.system_command(('xdg-icon-resource', 'forceupdate', '--theme', 'hicolor'))
                 run_icon_resource = False
             elif '/gio/modules/' in sfile and misc.whereis('gio-querymodules', fallback=False) and run_gio_querymodules:
                 message.sub_info('Updating GIO modules cache')
                 sdir = os.path.dirname(sfile)
                 message.sub_debug(sdir)
-                subprocess.check_call(('gio-querymodules', sdir))
+                misc.system_command(('gio-querymodules', sdir))
                 run_gio_querymodules = False
             elif '/pango/' in sfile and '/modules/' in sfile and misc.whereis('pango-querymodules', fallback=False) \
                 and run_pango_querymodules:
                 message.sub_info('Updating pango modules cache')
                 message.sub_debug(sfile)
-                subprocess.check_call(('pango-querymodules', '--update-cache'))
+                misc.system_command(('pango-querymodules', '--update-cache'))
                 run_pango_querymodules = False
             elif '/gtk-2.0/' in sfile and '/immodules/' in sfile and misc.whereis('gtk-query-immodules-2.0', fallback=False) \
                 and run_gtk2_immodules:
@@ -476,12 +475,12 @@ class Source(object):
                 message.sub_info('Updating GSettings schemas')
                 # gconfpkg --uninstall network-manager-applet
                 message.sub_debug(sfile)
-                subprocess.check_call(('glib-compile-schemas', os.path.dirname(sfile)))
+                misc.system_command(('glib-compile-schemas', os.path.dirname(sfile)))
                 run_compile_schemas = False
             elif sfile.endswith('.ko') and misc.whereis('depmod', fallback=False) and run_depmod:
                 message.sub_info('Updating module dependencies')
                 message.sub_debug(sfile)
-                subprocess.check_call(('depmod'))
+                misc.system_command(('depmod'))
                 run_depmod = False
             # upon target remove sfile may not exist thus some triggers fail
             elif not os.path.isfile(sfile):
@@ -492,7 +491,7 @@ class Source(object):
                 sdir = os.path.dirname(sfile)
                 message.sub_debug(sdir)
                 for sfile in misc.list_files(sdir):
-                    subprocess.check_call(('install-info', sfile, os.path.join(sdir, 'dir')))
+                    misc.system_command(('install-info', sfile, os.path.join(sdir, 'dir')))
                 run_install_info = False
             elif '/share/icons/' in sfile and misc.whereis('gtk-update-icon-cache', fallback=False) and run_icon_cache:
                 # extract the proper directory from sfile, e.g. /usr/share/icons/hicolor
@@ -502,7 +501,7 @@ class Source(object):
                     continue
                 message.sub_info('Updating icons cache')
                 message.sub_debug(sdir)
-                subprocess.check_call(('gtk-update-icon-cache', '-q', '-t', '-f', sdir))
+                misc.system_command(('gtk-update-icon-cache', '-q', '-t', '-f', sdir))
                 run_icon_cache = False
 
     def remove_target_file(self, sfile):
@@ -578,11 +577,11 @@ class Source(object):
                     message.sub_warning('Internet connection is down')
                 elif os.path.isdir(link_file):
                     message.sub_debug('Updating repository', src_url)
-                    subprocess.check_call((misc.whereis('git'), 'pull', \
+                    misc.system_command((misc.whereis('git'), 'pull', \
                         '--depth=1', src_url), cwd=link_file)
                 else:
                     message.sub_debug('Cloning initial copy', src_url)
-                    subprocess.check_call((misc.whereis('git'), 'clone', \
+                    misc.system_command((misc.whereis('git'), 'clone', \
                         '--depth=1', src_url, link_file))
                 continue
 
@@ -634,14 +633,14 @@ class Source(object):
         ''' Compile target sources '''
         self.set_global(self.target)
 
-        subprocess.check_call((misc.whereis('bash'), '-e', '-c', 'source ' + \
+        misc.system_command((misc.whereis('bash'), '-e', '-c', 'source ' + \
             self.srcbuild + ' && umask 0022 && src_compile'), cwd=self.source_dir)
 
     def check(self):
         ''' Check target sources '''
         self.set_global(self.target)
 
-        subprocess.check_call((misc.whereis('bash'), '-e', '-c', 'source ' + \
+        misc.system_command((misc.whereis('bash'), '-e', '-c', 'source ' + \
             self.srcbuild + ' && umask 0022 && src_check'), cwd=self.source_dir)
 
     def install(self):
@@ -651,7 +650,7 @@ class Source(object):
         if not os.path.isdir(self.install_dir):
             os.makedirs(self.install_dir)
 
-        subprocess.check_call((misc.whereis('bash'), '-e', '-c', 'source ' + \
+        misc.system_command((misc.whereis('bash'), '-e', '-c', 'source ' + \
             self.srcbuild + ' && umask 0022 && src_install'), cwd=self.source_dir)
 
         if COMPRESS_MAN:
@@ -706,19 +705,19 @@ class Source(object):
 
                 if smime == 'application/x-executable' and self.strip_binaries:
                     message.sub_debug('Stripping executable', sfile)
-                    subprocess.check_call((strip, '--strip-all', sfile))
+                    misc.system_command((strip, '--strip-all', sfile))
                 elif smime == 'application/x-sharedlib' and self.strip_shared:
                     message.sub_debug('Stripping shared library', sfile)
-                    subprocess.check_call((strip, '--strip-unneeded', sfile))
+                    misc.system_command((strip, '--strip-unneeded', sfile))
                 elif smime == 'application/x-archive' and self.strip_static:
                     message.sub_debug('Stripping static library', sfile)
-                    subprocess.check_call((strip, '--strip-debug', sfile))
+                    misc.system_command((strip, '--strip-debug', sfile))
 
                 if (smime == 'application/x-executable' or smime == 'application/x-sharedlib' \
                     or smime == 'application/x-archive') and self.strip_rpath:
                     # we do not check if RPATH is present at all to reduce spawning scanelf twice
                     message.sub_debug('Stripping RPATH', sfile)
-                    subprocess.check_call((scanelf, '-CBXrq', sfile))
+                    misc.system_command((scanelf, '-CBXrq', sfile))
 
         message.sub_info('Checking runtime dependencies')
         missing_detected = False
