@@ -67,7 +67,7 @@ try:
 
     message.sub_info('Listing image')
     cpio = misc.whereis('cpio')
-    print os.system(cpio + ' -tF ' + new_image.replace('.gz', ''))
+    print(os.system(cpio + ' -tF ' + new_image.replace('.gz', '')))
 
 except subprocess.CalledProcessError as detail:
     message.critical('SUBPROCESS', detail)
