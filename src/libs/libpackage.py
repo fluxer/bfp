@@ -150,7 +150,7 @@ class Database(object):
             elif key == 'description':
                 return metadata_content.split('\n')[1].replace('description=', '').strip()
             elif key == 'depends':
-                return metadata_content.split('\n')[2].replace('depends=', '').strip()
+                return metadata_content.split('\n')[2].replace('depends=', '').strip().split(' ')
             elif key == 'size':
                 return metadata_content.split('\n')[3].replace('size=', '').strip()
 

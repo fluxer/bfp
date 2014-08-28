@@ -25,7 +25,8 @@ app_version = "0.9.34 (d654eec)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
-    def __init__(self, targets, do_fast=False, do_depends=False, do_reverse=False, do_adjust=False):
+    def __init__(self, targets, do_fast=False, do_depends=False, \
+        do_reverse=False, do_adjust=False):
         self.targets = targets
         self.do_fast = do_fast
         self.do_depends = do_depends
@@ -38,7 +39,7 @@ class Check(object):
                 if self.do_reverse:
                     self.check_targets.extend(database.local_rdepends(target))
                 elif self.do_depends:
-                    self.check_targets.extend(database.local_metadata(target, 'depends').split())
+                    self.check_targets.extend(database.local_metadata(target, 'depends'))
                 else:
                     self.check_targets.append(target)
 
@@ -135,7 +136,7 @@ class Check(object):
             if missing_detected:
                 sys.exit(2)
 
-            for a in target_depends.split():
+            for a in target_depends:
                 if not a in target_adepends:
                     message.sub_warning('Unnecessary explicit dependencies', a)
 
@@ -145,7 +146,7 @@ class Check(object):
                 for line in misc.file_readlines(target_metadata):
                     if line.startswith('depends='):
                         content = content.replace(line, \
-                            'depends=%s' % target_depends)
+                            'depends=%s' % misc.string_convert(target_depends))
                 misc.file_write(target_metadata, content)
 
 
