@@ -26,6 +26,7 @@ all:
 	$(MARKDOWN) tmpfiles.md -f tmpfiles.html
 	$(MARKDOWN) tmpfiles.d.md -f tmpfiles.d.html
 	$(MARKDOWN) todo.md -f todo.html
+	$(MARKDOWN) troubleshoot.md -f troubleshoot.html
 	$(MARKDOWN) useful_links.md -f useful_links.html
 	$(MARKDOWN) users_and_groups.md -f users_and_groups.html
 	$(SED) 's|#SHAREDIR#|$(SHAREDIR)|g' -i srcbuild.html
