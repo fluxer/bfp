@@ -58,7 +58,7 @@ else:
     BUILD_DIR = conf.get('spm', 'BUILD_DIR')
     ROOT_DIR = conf.get('spm', 'ROOT_DIR')
     LOCAL_DIR = ROOT_DIR + 'var/local/spm'
-    IGNORE = conf.get('spm', 'IGNORE').split()
+    IGNORE = conf.get('spm', 'IGNORE').split(' ')
     OFFLINE = conf.getboolean('prepare', 'OFFLINE')
     MIRROR = conf.getboolean('prepare', 'MIRROR')
     TIMEOUT = conf.getint('prepare', 'TIMEOUT')

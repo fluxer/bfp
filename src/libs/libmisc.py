@@ -57,7 +57,7 @@ class Misc(object):
         # optimization - do not use "re" as "in" statement on list or tuple
         # checks for exact matches
         if (isinstance(string2, list) or isinstance(string2, tuple)) and exact:
-            print traceback.print_stack()
+            print(traceback.print_stack())
             if string in string2:
                 return string
             return []
