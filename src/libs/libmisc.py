@@ -1,6 +1,6 @@
 #!/bin/python2
 
-import os, re, urlparse, traceback, urllib2, tarfile, zipfile, subprocess, httplib, shutil
+import os, re, urlparse, urllib2, tarfile, zipfile, subprocess, httplib, shutil
 import libmagic
 
 
@@ -54,14 +54,6 @@ class Misc(object):
 
     def string_search(self, string, string2, exact=False, escape=True):
         ''' Search for string in other string or list '''
-        # optimization - do not use "re" as "in" statement on list or tuple
-        # checks for exact matches
-        if (isinstance(string2, list) or isinstance(string2, tuple)) and exact:
-            print(traceback.print_stack())
-            if string in string2:
-                return string
-            return []
-
         if exact and escape:
             return re.findall('(\\s|^)' + re.escape(string) + '(\\s|$)', \
                 self.string_convert(string2))
