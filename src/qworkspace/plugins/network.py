@@ -334,6 +334,7 @@ class Plugin(QtCore.QObject):
         if not index:
             index = self.parent.tabWidget.currentIndex()
         if self.widget:
+            self.widget.timer.stop()
             self.widget.deleteLater()
             self.widget = None
             self.parent.tabWidget.removeTab(index)
