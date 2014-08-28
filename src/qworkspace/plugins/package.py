@@ -120,7 +120,7 @@ class Widget(QtGui.QWidget):
             self.removeButton.setEnabled(True)
             self.metadataEdit.append('Version: ' + database.local_metadata(current, 'version'))
             self.metadataEdit.append('Description: ' + database.local_metadata(current, 'description'))
-            self.metadataEdit.append('Depends: ' + database.local_metadata(current, 'depends'))
+            self.metadataEdit.append('Depends: ' + str(database.local_metadata(current, 'depends')))
             self.metadataEdit.append('Reverse: ' + str(database.local_rdepends(current)))
             self.metadataEdit.append('Size: ' + database.local_metadata(current, 'size'))
             self.footprintEdit.setText(database.local_footprint(current))
