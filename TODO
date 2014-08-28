@@ -10,6 +10,8 @@ http://www.linuxfromscratch.org/blfs/view/systemd/postlfs/initramfs.html
    * purge repositories that are not in repositories.conf
  * Use Makefiles for build scripts?
  * Lint - check if groups/users are removed
+ * Optionally remove build depends that are not required by local target
+ * Optimize backing up of files
 
 ## QWORKSPACE ##
  * Implement elevator for executing root commands (http://www.sudo.ws/sudo_plugin.man.html)
