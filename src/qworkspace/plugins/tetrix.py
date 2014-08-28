@@ -8,9 +8,8 @@
 ## Copyright (C) 2014 Ivailo Monev.
 ## All rights reserved.
 ##
-## This file is part of the examples of PyQt.
+## This file was part of the examples of PyQt.
 ##
-## $QT_BEGIN_LICENSE:BSD$
 ## You may use this file under the terms of the BSD license as follows:
 ##
 ## "Redistribution and use in source and binary forms, with or without
@@ -38,23 +37,24 @@
 ## THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 ## (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 ## OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE."
-## $QT_END_LICENSE$
 ##
 #############################################################################
 
 
-import random
-
 from PyQt4 import QtCore, QtGui
-
+import random, libworkspace
+general = libworkspace.General()
 
 NoShape, ZShape, SShape, LineShape, TShape, SquareShape, LShape, \
     MirroredLShape = range(8)
 
 
-class TetrixWindow(QtGui.QWidget):
-    def __init__(self):
-        super(TetrixWindow, self).__init__()
+class Widget(QtGui.QWidget):
+    def __init__(self, parent=None, spath=None):
+        super(Widget, self).__init__()
+        self.parent = parent
+        self.spath = spath
+        self.name = 'tetrix'
 
         self.board = TetrixBoard()
 
@@ -70,36 +70,31 @@ class TetrixWindow(QtGui.QWidget):
         linesLcd = QtGui.QLCDNumber(5)
         linesLcd.setSegmentStyle(QtGui.QLCDNumber.Filled)
 
-        startButton = QtGui.QPushButton("&Start")
+        startButton = QtGui.QPushButton(self.tr('Start'))
         startButton.setFocusPolicy(QtCore.Qt.NoFocus)
-        quitButton = QtGui.QPushButton("&Quit")
-        quitButton.setFocusPolicy(QtCore.Qt.NoFocus)
-        pauseButton = QtGui.QPushButton("&Pause")
+        pauseButton = QtGui.QPushButton(self.tr('Pause'))
         pauseButton.setFocusPolicy(QtCore.Qt.NoFocus)
 
         startButton.clicked.connect(self.board.start)
         pauseButton.clicked.connect(self.board.pause)
-        quitButton.clicked.connect(QtGui.qApp.quit)
         self.board.scoreChanged.connect(scoreLcd.display)
         self.board.levelChanged.connect(levelLcd.display)
         self.board.linesRemovedChanged.connect(linesLcd.display)
 
         layout = QtGui.QGridLayout()
-        layout.addWidget(self.createLabel("NEXT"), 0, 0)
+        layout.addWidget(self.createLabel(self.tr('Next')), 0, 0)
         layout.addWidget(nextPieceLabel, 1, 0)
-        layout.addWidget(self.createLabel("LEVEL"), 2, 0)
+        layout.addWidget(self.createLabel(self.tr('Level')), 2, 0)
         layout.addWidget(levelLcd, 3, 0)
         layout.addWidget(startButton, 4, 0)
         layout.addWidget(self.board, 0, 1, 6, 1)
-        layout.addWidget(self.createLabel("SCORE"), 0, 2)
+        layout.addWidget(self.createLabel(self.tr('Score')), 0, 2)
         layout.addWidget(scoreLcd, 1, 2)
-        layout.addWidget(self.createLabel("LINES REMOVED"), 2, 2)
+        layout.addWidget(self.createLabel(self.tr('Lines removed')), 2, 2)
         layout.addWidget(linesLcd, 3, 2)
-        layout.addWidget(quitButton, 4, 2)
-        layout.addWidget(pauseButton, 5, 2)
+        layout.addWidget(pauseButton, 4, 2)
         self.setLayout(layout)
 
-        self.setWindowTitle("Tetrix")
         self.resize(550, 370)
 
     def createLabel(self, text):
@@ -208,7 +203,7 @@ class TetrixBoard(QtGui.QFrame):
         rect = self.contentsRect()
 
         if self.isPaused:
-            painter.drawText(rect, QtCore.Qt.AlignCenter, "Pause")
+            painter.drawText(rect, QtCore.Qt.AlignCenter, self.tr('Pause'))
             return
 
         boardTop = rect.bottom() - TetrixBoard.BoardHeight * self.squareHeight()
@@ -496,12 +491,40 @@ class TetrixPiece(object):
         return result
 
 
-if __name__ == '__main__':
+class Plugin(QtCore.QObject):
+    ''' Plugin handler '''
+    def __init__(self, parent=None):
+        super(Plugin, self).__init__()
+        self.parent = parent
+        self.name = 'tetrix'
+        self.version = "0.9.34 (5f8499a)"
+        self.description = self.tr('Tetrix game plugin')
+        self.icon = general.get_icon('applications-games')
+        self.widget = None
 
-    import sys
+        self.tetrixButton = QtGui.QPushButton(self.icon, '')
+        self.tetrixButton.setToolTip(self.description)
+        self.tetrixButton.clicked.connect(self.open)
+        self.applicationsLayout = self.parent.toolBox.widget(1).layout()
+        self.applicationsLayout.addWidget(self.tetrixButton)
 
-    app = QtGui.QApplication(sys.argv)
-    window = TetrixWindow()
-    window.show()
-    random.seed(None)
-    sys.exit(app.exec_())
+    def open(self, spath):
+        ''' Open path in new tab '''
+        index = self.parent.tabWidget.currentIndex()+1
+        self.widget = Widget(self.parent, spath)
+        self.parent.tabWidget.insertTab(index, self.widget, self.icon, self.tr('Tetrix'))
+        self.parent.tabWidget.setCurrentIndex(index)
+
+    def close(self, index=None):
+        ''' Close tab '''
+        if not index:
+            index = self.parent.tabWidget.currentIndex()
+        if self.widget:
+            self.widget.deleteLater()
+            self.widget = None
+            self.parent.tabWidget.removeTab(index)
+
+    def unload(self):
+        ''' Unload plugin '''
+        self.applicationsLayout.removeWidget(self.tetrixButton)
+        self.close()

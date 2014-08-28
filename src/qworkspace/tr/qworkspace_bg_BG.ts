@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="bg_BG" sourcelanguage="">
+<!DOCTYPE TS>
+<TS version="2.0" language="bg_BG">
 <context>
     <name>Daemon</name>
     <message>
@@ -227,6 +228,24 @@
         <location filename="mail.py" line="108"/>
         <source>Mail</source>
         <translation>Поща</translation>
+    </message>
+    <message>
+        <location filename="tetrix.py" line="501"/>
+        <source>Tetrix game plugin</source>
+        <translation>Игра на тетрикс плъгин</translation>
+    </message>
+    <message>
+        <location filename="tetrix.py" line="515"/>
+        <source>Tetrix</source>
+        <translation>Тетрикс</translation>
+    </message>
+</context>
+<context>
+    <name>TetrixBoard</name>
+    <message>
+        <location filename="tetrix.py" line="206"/>
+        <source>Pause</source>
+        <translation>Пауза</translation>
     </message>
 </context>
 <context>
@@ -858,6 +877,31 @@
         <location filename="storage.py" line="220"/>
         <source>Information</source>
         <translation>Информация</translation>
+    </message>
+    <message>
+        <location filename="tetrix.py" line="73"/>
+        <source>Start</source>
+        <translation>Започни</translation>
+    </message>
+    <message>
+        <location filename="tetrix.py" line="75"/>
+        <source>Pause</source>
+        <translation>Пауза</translation>
+    </message>
+    <message>
+        <location filename="tetrix.py" line="87"/>
+        <source>Level</source>
+        <translation>Ниво</translation>
+    </message>
+    <message>
+        <location filename="tetrix.py" line="91"/>
+        <source>Score</source>
+        <translation>Точки</translation>
+    </message>
+    <message>
+        <location filename="tetrix.py" line="93"/>
+        <source>Lines removed</source>
+        <translation>Линии премахнати</translation>
     </message>
 </context>
 </TS>

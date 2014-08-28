@@ -17,7 +17,7 @@ two causes:
 - the input drivers (xorg-input-drivers) are not build against the current X
 server (xorg-server)
 
-For the first issue you verify that udev daemon is actually running:
+For the first issue you can verify that udev daemon is actually running:
 
     pgrep udevd
 
