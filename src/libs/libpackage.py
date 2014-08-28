@@ -12,7 +12,7 @@ class Database(object):
         self.ROOT_DIR = '/'
         self.CACHE_DIR = '/var/cache/spm'
         self.LOCAL_DIR = self.ROOT_DIR + 'var/local/spm'
-        self.IGNORE = ''
+        self.IGNORE = []
 
     def remote_all(self, basename=False):
         ''' Returns directories of all remote (repository) targets '''
@@ -55,10 +55,9 @@ class Database(object):
         ''' Returns True or False wheather target is installed '''
         if not os.path.isdir(self.LOCAL_DIR):
             return False
-        elif misc.string_search(os.path.basename(target), \
-            self.local_all(basename=True), exact=True):
+        elif os.path.basename(target) in self.local_all(basename=True):
             return True
-        elif misc.string_search(target, self.local_all(), exact=True):
+        elif target in self.local_all():
             return True
         return False
 
@@ -96,7 +95,7 @@ class Database(object):
 
         # respect ignored targets to avoid building
         # dependencies when not needed
-        if misc.string_search(target, self.IGNORE, exact=True):
+        if target in self.IGNORE:
             return missing
 
         if depends:
@@ -107,10 +106,10 @@ class Database(object):
             build_depends.extend(checkdepends)
 
         for dependency in build_depends:
-            if checked and misc.string_search(dependency, checked, exact=True):
+            if checked and dependency in checked:
                 continue
 
-            if not misc.string_search(dependency, missing, exact=True) \
+            if not dependency in missing \
                 and not self.local_installed(dependency) \
                 or not self.local_uptodate(dependency):
                 missing.extend(self.remote_mdepends(dependency, checked))
@@ -122,9 +121,8 @@ class Database(object):
         ''' Returns reverse dependencies of target '''
         revdeps = []
         for installed in self.local_all(basename=True):
-            if misc.string_search(os.path.basename(target), \
-                self.local_metadata(installed, 'depends'), exact=True) \
-                and not misc.string_search(installed, self.IGNORE, exact=True):
+            if os.path.basename(target) in self.local_metadata(installed, 'depends') \
+                and not installed in self.IGNORE:
                 revdeps.append(installed)
         return revdeps
 

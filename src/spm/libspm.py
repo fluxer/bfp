@@ -33,7 +33,7 @@ if not os.path.isfile(MAIN_CONF):
     MIRROR = False
     TIMEOUT = 30
     EXTERNAL = False
-    IGNORE = ''
+    IGNORE = []
     CHOST = ''
     CFLAGS = ''
     CXXFLAGS = ''
@@ -58,7 +58,7 @@ else:
     BUILD_DIR = conf.get('spm', 'BUILD_DIR')
     ROOT_DIR = conf.get('spm', 'ROOT_DIR')
     LOCAL_DIR = ROOT_DIR + 'var/local/spm'
-    IGNORE = conf.get('spm', 'IGNORE')
+    IGNORE = conf.get('spm', 'IGNORE').split()
     OFFLINE = conf.getboolean('prepare', 'OFFLINE')
     MIRROR = conf.getboolean('prepare', 'MIRROR')
     TIMEOUT = conf.getint('prepare', 'TIMEOUT')
@@ -734,7 +734,7 @@ class Source(object):
                     match = database.local_belongs(lib)
                     if match and len(match) > 1:
                         message.sub_warning('Multiple providers for %s' % lib, match)
-                        if misc.string_search(self.target_name, match, exact=True):
+                        if self.target_name in match:
                             match = self.target_name
                         else:
                             match = match[0]
@@ -1004,7 +1004,7 @@ class Source(object):
                 target = os.path.abspath(target)
 
             target_name = os.path.basename(target)
-            if misc.string_search(target_name, IGNORE, exact=True):
+            if target_name in IGNORE:
                 message.sub_warning('Ignoring target', target_name)
                 continue
 

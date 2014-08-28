@@ -49,7 +49,7 @@ try:
     class OverrideIgnore(argparse.Action):
         ''' Override ignored targets '''
         def __call__(self, parser, namespace, values, option_string=None):
-            libspm.IGNORE = values
+            libspm.IGNORE = values.split(' ')
             setattr(namespace, self.dest, values)
 
     class OverrideMirror(argparse.Action):
@@ -351,13 +351,13 @@ try:
         m.main()
 
     elif ARGS.mode == 'source':
-        if misc.string_search('world', ARGS.TARGETS, exact=True):
+        if 'world' in ARGS.TARGETS:
             position = ARGS.TARGETS.index('world')
             ARGS.TARGETS[position:position+1] = \
                 database.local_all(basename=True)
 
         for alias in database.remote_aliases():
-            if misc.string_search(alias, ARGS.TARGETS, exact=True):
+            if alias in ARGS.TARGETS:
                 position = ARGS.TARGETS.index(alias)
                 ARGS.TARGETS[position:position+1] = \
                     database.remote_alias(alias)
