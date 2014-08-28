@@ -25,7 +25,7 @@ files you need to worry about when creating your own profile.
 
 ## Getting your hands dirty
 
-First you will need the sources of LSDB. To obtain a fresh copy issue the
+First you will need the sources of builder. To obtain a fresh copy issue the
 following in [Terminal](http://en.wikipedia.org/wiki/Computer_terminal#Text_terminals):
 
     git clone --depth=1 https://bitbucket.org/smil3y/builder.git
@@ -72,7 +72,7 @@ Quick notes:
 After you are fine with the changes you've made build an ISO image:
     sudo ./build.sh custom -d -b
 
-The final ISO image you can find in the main LSDB directory.
+The final ISO image you can find in the main builder directory.
 
 ### Remastering
 
