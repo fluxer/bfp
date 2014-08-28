@@ -124,7 +124,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'image'
-        self.version = "0.9.34 (dc8f6d5)"
+        self.version = "0.9.34 (378a018)"
         self.description = self.tr('Image viewer plugin')
         self.icon = general.get_icon('image-x-generic')
         self.widget = None
