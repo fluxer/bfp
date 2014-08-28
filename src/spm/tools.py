@@ -201,11 +201,11 @@ class Dist(object):
                             message.sub_warning('Internet connection is down')
                         elif os.path.isdir(src_file):
                             message.sub_debug('Updating repository', src_url)
-                            subprocess.check_call((misc.whereis('git'), \
+                            misc.system_command((misc.whereis('git'), \
                                 'pull', '--depth=1', src_url), cwd=src_file)
                         else:
                             message.sub_debug('Cloning initial copy', src_url)
-                            subprocess.check_call((misc.whereis('git'), 'clone', '--depth=1',
+                            misc.system_command((misc.whereis('git'), 'clone', '--depth=1',
                                 src_url, src_file))
                         continue
 
@@ -409,10 +409,10 @@ class Merge(object):
             print('*' * 80 + '\n')
             self.merge(sfile)
         elif action == '2':
-            subprocess.check_call((editor, sfile))
+            misc.system_command((editor, sfile))
             self.merge(sfile)
         elif action == '3':
-            subprocess.check_call((editor, sfile + '.backup'))
+            misc.system_command((editor, sfile + '.backup'))
             self.merge(sfile)
         elif action == '4':
             shutil.copy2(sfile + '.backup', sfile)
@@ -443,7 +443,7 @@ class Edit(object):
         for target in self.targets:
             match = database.remote_search(target)
             if match:
-                subprocess.check_call((editor, os.path.join(match, 'SRCBUILD')))
+                misc.system_command((editor, os.path.join(match, 'SRCBUILD')))
 
 
 class Which(object):
