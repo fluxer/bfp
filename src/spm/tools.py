@@ -34,7 +34,7 @@ class Check(object):
         self.check_targets = []
 
         for target in database.local_all(basename=True):
-            if misc.string_search(target, self.targets, exact=True):
+            if target in self.targets:
                 if self.do_reverse:
                     self.check_targets.extend(database.local_rdepends(target))
                 elif self.do_depends:
@@ -74,7 +74,7 @@ class Check(object):
                         match = database.local_belongs(lib)
                         if match and len(match) > 1:
                             message.sub_warning('Multiple providers for %s' % lib, match)
-                            if misc.string_search(target, match, exact=True):
+                            if target in match:
                                 match = target
                             else:
                                 match = match[0]
@@ -84,9 +84,9 @@ class Check(object):
 
                         if match == target or misc.string_search(lib, target_footprint):
                             message.sub_debug('Library needed but in self', lib)
-                        elif match and misc.string_search(match, target_depends, exact=True):
+                        elif match and match in target_depends:
                             message.sub_debug('Library needed but in depends', match)
-                        elif match and not misc.string_search(match, target_depends, exact=True):
+                        elif match and not match in target_depends:
                             message.sub_debug('Library needed but in local', match)
                             target_depends = '%s %s' % (target_depends, match)
                         elif libspm.IGNORE_MISSING:
@@ -111,7 +111,7 @@ class Check(object):
                             match = database.local_belongs(file_regexp, exact=True, escape=False)
                             if match and len(match) > 1:
                                 message.sub_warning('Multiple providers for %s' % bang, match)
-                                if misc.string_search(target, match, exact=True):
+                                if target in match:
                                     match = target
                                 else:
                                     match = match[0]
@@ -122,9 +122,9 @@ class Check(object):
                             if match == target or misc.string_search(file_regexp,
                                 target_footprint, exact=True, escape=False):
                                 message.sub_debug('Dependency needed but in self', match)
-                            elif match and misc.string_search(match, target_depends, exact=True):
+                            elif match and match in target_depends:
                                 message.sub_debug('Dependency needed but in depends', match)
-                            elif match and not misc.string_search(match, target_depends, exact=True):
+                            elif match and not match in target_depends:
                                 message.sub_debug('Dependency needed but in local', match)
                                 target_depends = '%s %s' % (target_depends, match)
                             elif libspm.IGNORE_MISSING:
@@ -158,7 +158,7 @@ class Clean(object):
     def main(self):
         ''' Looks for target match and then execute action for every target '''
         for target in database.local_all(basename=True):
-            if misc.string_search(target, self.base_targets, exact=True):
+            if target in self.base_targets:
                 continue
 
             if not database.local_rdepends(target):
@@ -269,7 +269,7 @@ class Lint(object):
     def main(self):
         ''' Looks for target match and then execute action for every target '''
         for target in database.local_all(basename=True):
-            if misc.string_search(target, self.targets, exact=True):
+            if target in self.targets:
                 message.sub_info('Checking', target)
                 target_footprint = database.local_footprint(target)
 
@@ -581,13 +581,13 @@ try:
     ARGS = parser.parse_args()
 
     if ARGS.mode == 'dist':
-        if misc.string_search('world', ARGS.TARGETS, exact=True):
+        if 'world' in ARGS.TARGETS:
             position = ARGS.TARGETS.index('world')
             ARGS.TARGETS[position:position+1] = \
                 database.local_all(basename=True)
 
         for alias in database.remote_aliases():
-            if misc.string_search(alias, ARGS.TARGETS, exact=True):
+            if alias in ARGS.TARGETS:
                 position = ARGS.TARGETS.index(alias)
                 ARGS.TARGETS[position:position+1] = \
                     database.remote_alias(alias)

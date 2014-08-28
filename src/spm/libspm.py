@@ -742,9 +742,9 @@ class Source(object):
 
                     if match == self.target_name or misc.string_search(lib, target_content.keys()):
                         message.sub_debug('Library needed but in self', lib)
-                    elif match and misc.string_search(match, self.target_depends, exact=True):
+                    elif match and match in self.target_depends:
                         message.sub_debug('Library needed but in depends', match)
-                    elif match and not misc.string_search(match, self.target_depends, exact=True):
+                    elif match and not match in self.target_depends:
                         message.sub_debug('Library needed but in local', match)
                         self.target_depends.append(match)
                     elif self.ignore_missing:
@@ -771,7 +771,7 @@ class Source(object):
                         match = database.local_belongs(file_regexp, exact=True, escape=False)
                         if match and len(match) > 1:
                             message.sub_warning('Multiple providers for %s' % bang, match)
-                            if misc.string_search(self.target_name, match, exact=True):
+                            if self.target_name in match:
                                 match = self.target_name
                             else:
                                 match = match[0]
@@ -780,9 +780,9 @@ class Source(object):
                         if match == self.target_name or misc.string_search(self_file_regexp, \
                             target_content.keys(), exact=True, escape=False):
                             message.sub_debug('Dependency needed but in self', match)
-                        elif match and misc.string_search(match, self.target_depends, exact=True):
+                        elif match and match in self.target_depends:
                             message.sub_debug('Dependency needed but in depends', match)
-                        elif match and not misc.string_search(match, self.target_depends, exact=True):
+                        elif match and not match in self.target_depends:
                             message.sub_debug('Dependency needed but in local', match)
                             self.target_depends.append(match)
                         elif self.ignore_missing:
@@ -864,7 +864,7 @@ class Source(object):
                 full_file = os.path.join(ROOT_DIR, sfile)
                 if not os.path.isfile(full_file):
                     continue
-                if sfile.endswith('.conf') or misc.string_search(sfile, self.target_backup, exact=True):
+                if sfile.endswith('.conf') or sfile in self.target_backup:
                     if os.path.getsize(full_file) == misc.archive_size(self.target_tarball, sfile):
                         continue
 
@@ -920,7 +920,7 @@ class Source(object):
             if needs_rebuild and self.do_reverse:
                 for target in needs_rebuild:
                     break_free = False
-                    if misc.string_search(target, self.rebuild, exact=True):
+                    if target in self.rebuild:
                         continue
                     message.sub_debug('Checking', target)
                     footprint = database.local_footprint(target)
