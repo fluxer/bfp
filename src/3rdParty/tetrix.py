@@ -5,6 +5,7 @@
 ##
 ## Copyright (C) 2010 Riverbank Computing Limited.
 ## Copyright (C) 2010 Nokia Corporation and/or its subsidiary(-ies).
+## Copyright (C) 2014 Ivailo Monev.
 ## All rights reserved.
 ##
 ## This file is part of the examples of PyQt.
@@ -47,7 +48,8 @@ import random
 from PyQt4 import QtCore, QtGui
 
 
-NoShape, ZShape, SShape, LineShape, TShape, SquareShape, LShape, MirroredLShape = range(8)
+NoShape, ZShape, SShape, LineShape, TShape, SquareShape, LShape, \
+    MirroredLShape = range(8)
 
 
 class TetrixWindow(QtGui.QWidget):
@@ -144,7 +146,7 @@ class TetrixBoard(QtGui.QFrame):
         return self.board[(y * TetrixBoard.BoardWidth) + x]
 
     def setShapeAt(self, x, y, shape):
-        self.board[(y * TetrixBoard.BoardWidth) + x] = shape   
+        self.board[(y * TetrixBoard.BoardWidth) + x] = shape
 
     def timeoutTime(self):
         return 1000 / (1 + self.level)
@@ -159,12 +161,14 @@ class TetrixBoard(QtGui.QFrame):
         self.nextPieceLabel = label
 
     def sizeHint(self):
-        return QtCore.QSize(TetrixBoard.BoardWidth * 15 + self.frameWidth() * 2,
-                TetrixBoard.BoardHeight * 15 + self.frameWidth() * 2)
+        return QtCore.QSize(TetrixBoard.BoardWidth * 15 \
+            + self.frameWidth() * 2, TetrixBoard.BoardHeight * 15 \
+            + self.frameWidth() * 2)
 
     def minimumSizeHint(self):
-        return QtCore.QSize(TetrixBoard.BoardWidth * 5 + self.frameWidth() * 2,
-                TetrixBoard.BoardHeight * 5 + self.frameWidth() * 2)
+        return QtCore.QSize(TetrixBoard.BoardWidth * 5 \
+            + self.frameWidth() * 2, TetrixBoard.BoardHeight * 5 \
+            + self.frameWidth() * 2)
 
     def start(self):
         if self.isPaused:
@@ -222,11 +226,12 @@ class TetrixBoard(QtGui.QFrame):
                 x = self.curX + self.curPiece.x(i)
                 y = self.curY - self.curPiece.y(i)
                 self.drawSquare(painter, rect.left() + x * self.squareWidth(),
-                        boardTop + (TetrixBoard.BoardHeight - y - 1) * self.squareHeight(),
-                        self.curPiece.shape())
+                        boardTop + (TetrixBoard.BoardHeight - y - 1) \
+                        * self.squareHeight(), self.curPiece.shape())
 
     def keyPressEvent(self, event):
-        if not self.isStarted or self.isPaused or self.curPiece.shape() == NoShape:
+        if not self.isStarted or self.isPaused \
+            or self.curPiece.shape() == NoShape:
             super(TetrixBoard, self).keyPressEvent(event)
             return
 
@@ -258,7 +263,8 @@ class TetrixBoard(QtGui.QFrame):
             super(TetrixBoard, self).timerEvent(event)
 
     def clearBoard(self):
-        self.board = [NoShape for i in range(TetrixBoard.BoardHeight * TetrixBoard.BoardWidth)]
+        self.board = [NoShape \
+            for i in range(TetrixBoard.BoardHeight * TetrixBoard.BoardWidth)]
 
     def dropDown(self):
         dropHeight = 0
@@ -344,9 +350,11 @@ class TetrixBoard(QtGui.QFrame):
         dx = self.nextPiece.maxX() - self.nextPiece.minX() + 1
         dy = self.nextPiece.maxY() - self.nextPiece.minY() + 1
 
-        pixmap = QtGui.QPixmap(dx * self.squareWidth(), dy * self.squareHeight())
+        pixmap = QtGui.QPixmap(dx * self.squareWidth(), dy \
+            * self.squareHeight())
         painter = QtGui.QPainter(pixmap)
-        painter.fillRect(pixmap.rect(), self.nextPieceLabel.palette().background())
+        painter.fillRect(pixmap.rect(), \
+            self.nextPieceLabel.palette().background())
 
         for int in range(4):
             x = self.nextPiece.x(i) - self.nextPiece.minX()
@@ -360,7 +368,8 @@ class TetrixBoard(QtGui.QFrame):
         for i in range(4):
             x = newX + newPiece.x(i)
             y = newY - newPiece.y(i)
-            if x < 0 or x >= TetrixBoard.BoardWidth or y < 0 or y >= TetrixBoard.BoardHeight:
+            if x < 0 or x >= TetrixBoard.BoardWidth \
+                or y < 0 or y >= TetrixBoard.BoardHeight:
                 return False
             if self.shapeAt(x, y) != NoShape:
                 return False
@@ -392,18 +401,18 @@ class TetrixBoard(QtGui.QFrame):
 
 class TetrixPiece(object):
     coordsTable = (
-        ((0, 0),     (0, 0),     (0, 0),     (0, 0)),
-        ((0, -1),    (0, 0),     (-1, 0),    (-1, 1)),
-        ((0, -1),    (0, 0),     (1, 0),     (1, 1)),
-        ((0, -1),    (0, 0),     (0, 1),     (0, 2)),
-        ((-1, 0),    (0, 0),     (1, 0),     (0, 1)),
-        ((0, 0),     (1, 0),     (0, 1),     (1, 1)),
-        ((-1, -1),   (0, -1),    (0, 0),     (0, 1)),
-        ((1, -1),    (0, -1),    (0, 0),     (0, 1))
+        ((0, 0), (0, 0), (0, 0), (0, 0)),
+        ((0, -1), (0, 0), (-1, 0), (-1, 1)),
+        ((0, -1), (0, 0), (1, 0), (1, 1)),
+        ((0, -1), (0, 0), (0, 1), (0, 2)),
+        ((-1, 0), (0, 0), (1, 0), (0, 1)),
+        ((0, 0), (1, 0), (0, 1), (1, 1)),
+        ((-1, -1), (0, -1), (0, 0), (0, 1)),
+        ((1, -1), (0, -1), (0, 0), (0, 1))
     )
 
     def __init__(self):
-        self.coords = [[0,0] for _ in range(4)]
+        self.coords = [[0, 0] for _ in range(4)]
         self.pieceShape = NoShape
 
         self.setShape(NoShape)
