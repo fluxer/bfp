@@ -39,6 +39,7 @@ http://www.linuxfromscratch.org/blfs/view/systemd/postlfs/initramfs.html
  * WWW plugin bookmarks cleanup and possibly configurable:
   - http://linux.die.net/
   - http://html5test.com/
+ * Support translated help pages?
 
 ## ALL QT (on regular basis) ##
  * Expect failures everywhere
