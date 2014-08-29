@@ -209,8 +209,8 @@ class Dist(object):
                                 src_url, src_file))
                         continue
 
-                    elif src_url.startswith('http://') or src_url.startswith('https://') \
-                        or src_url.startswith('ftp://') or src_url.startswith('ftps://'):
+                    elif src_url.startswith(('http://', 'https://', 'ftp://', \
+                        'ftps://')):
                         if not internet:
                             message.sub_warning('Internet connection is down')
                         elif libspm.MIRROR:
@@ -241,10 +241,8 @@ class Dist(object):
                     src_base = os.path.basename(src_url)
 
                     src_file = os.path.join(target, src_base)
-                    if src_url.startswith('http://') \
-                        or src_url.startswith('https://') \
-                        or src_url.startswith('ftp://') \
-                        or src_url.startswith('ftps://'):
+                    if src_url.startswith(('http://', 'https://', 'ftp://', \
+                        'ftps://')):
                         if os.path.isfile(src_file):
                             message.sub_debug('Removing', src_file)
                             os.unlink(src_file)

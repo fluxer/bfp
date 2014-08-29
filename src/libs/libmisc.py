@@ -254,8 +254,8 @@ class Misc(object):
         ''' Test if file is archive that can be handled properly '''
         if os.path.isdir(sfile):
             return False
-        if sfile.endswith('.xz') or sfile.endswith('.lzma') \
-            or sfile.endswith('.gz') or tarfile.is_tarfile(sfile) \
+        if sfile.endswith(('.xz', '.lzma', '.gz')) \
+            or tarfile.is_tarfile(sfile) \
             or zipfile.is_zipfile(sfile):
             return True
         return False
@@ -270,7 +270,7 @@ class Misc(object):
         if chdir:
             os.chdir(chdir)
 
-        if sfile.endswith('.bz2') or sfile.endswith('.gz'):
+        if sfile.endswith(('.bz2', '.gz')):
             tar = tarfile.open(sfile, 'w:' + method)
             for item in variant:
                 if chdir:
@@ -286,12 +286,9 @@ class Misc(object):
                 else:
                     zipf.write(item)
             zipf.close()
-        elif sfile.endswith('.xz') or sfile.endswith('.lzma'):
+        elif sfile.endswith(('.xz', '.lzma')):
             # FIXME: implement lzma/xz compression
             raise(Exception('LZMA/XZ compression not implemented yet'))
-        elif sfile.endswith('.gz'):
-            # FIXME: implement gzip compression
-            raise(Exception('Gzip compression not implemented yet'))
 
     def archive_decompress(self, sfile, sdir):
         ''' Extract archive to directory '''
@@ -306,7 +303,7 @@ class Misc(object):
         # external utilities are used for extracting archives.
 
         # altought bsdtar can (or should) handle Zip files we do not use it for them.
-        if sfile.endswith('.xz') or sfile.endswith('.lzma') \
+        if sfile.endswith(('.xz', '.lzma')) \
             or tarfile.is_tarfile(sfile):
             bsdtar = self.whereis('bsdtar', fallback=False)
             tar = self.whereis('tar')
@@ -319,7 +316,7 @@ class Misc(object):
             zfile.extractall(path=sdir)
             zfile.close()
         elif sfile.endswith('.gz'):
-            # FIXME: implement gzip compression
+            # FIXME: implement gzip decompression
             raise(Exception('Gzip decompression not implemented yet'))
 
     def archive_list(self, sfile):
@@ -333,11 +330,11 @@ class Misc(object):
             zfile = zipfile.ZipFile(sfile)
             content = zfile.namelist()
             zfile.close()
-        elif sfile.endswith('.xz') or sfile.endswith('.lzma'):
+        elif sfile.endswith(('.xz', '.lzma')):
             content = self.system_output((self.whereis('tar'), \
                 '-tf', sfile)).split('\n')
         elif sfile.endswith('.gz'):
-            # FIXME: implement gzip compression
+            # FIXME: implement gzip listing
             raise(Exception('Gzip listing not implemented yet'))
         return content
 

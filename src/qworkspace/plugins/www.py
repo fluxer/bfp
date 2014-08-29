@@ -159,9 +159,8 @@ class Widget(QtGui.QWidget):
     def path_changed(self):
         ''' Check if URL is sane '''
         url = str(self.urlBox.currentText())
-        if not os.path.isfile(url) and not url.startswith('http://') \
-            and not url.startswith('https://') and not url.startswith('ftp://') \
-            and not url.startswith('ftps://'):
+        if not os.path.isfile(url) and not url.startswith(('http://', \
+            'https://', 'ftp://', 'ftps://')):
             url = 'http://' + url
         self.statusLabel.setText('')
         self.webView.setUrl(QtCore.QUrl(url))

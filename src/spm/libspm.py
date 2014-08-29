@@ -87,10 +87,8 @@ else:
     repositories_conf = open(REPOSITORIES_CONF, 'r')
     for line in repositories_conf.readlines():
         line = line.strip()
-        if line.startswith('http://') or line.startswith('https://') \
-            or line.startswith('ftp://') or line.startswith('ftps://') \
-            or line.startswith('git://') or line.startswith('ssh://') \
-            or line.startswith('rsync://'):
+        if line.startswith(('http://', 'https://', 'ftp://', 'ftps://', \
+            'git://', 'ssh://', 'rsync://')):
             REPOSITORIES.append(line)
     repositories_conf.close()
 
@@ -106,8 +104,7 @@ else:
     mirrors_conf = open(MIRRORS_CONF, 'r')
     for line in mirrors_conf.readlines():
         line = line.strip()
-        if line.startswith('http://') or line.startswith('https://') \
-            or line.startswith('ftp://') or line.startswith('ftps://'):
+        if line.startswith(('http://', 'https://', 'ftp://', 'ftps://')):
             MIRRORS.append(line)
     mirrors_conf.close()
 
@@ -585,8 +582,8 @@ class Source(object):
                         '--depth=1', src_url, link_file))
                 continue
 
-            elif src_url.startswith('http://') or src_url.startswith('https://') \
-                or src_url.startswith('ftp://') or src_url.startswith('ftps://'):
+            elif src_url.startswith(('http://', 'https://', 'ftp://', \
+                'ftps://')):
                 if not internet:
                     message.sub_warning('Internet connection is down')
                 elif self.mirror:
@@ -617,7 +614,7 @@ class Source(object):
                 message.sub_debug('Linking', local_file)
                 os.symlink(local_file, link_file)
 
-            if src_base.endswith('.xz') or src_base.endswith('.lzma') \
+            if src_base.endswith(('.xz', '.lzma')) \
                 or tarfile.is_tarfile(link_file) or zipfile.is_zipfile(link_file):
                 decompressed = False
                 for sfile in misc.archive_list(link_file):
@@ -885,7 +882,7 @@ class Source(object):
                 if LOCAL_DIR in sfile:
                     continue
                 # never delete files in the pseudo filesystems
-                elif sfile.startswith('/dev/') or sfile.startswith('/sys/') or sfile.startswith('/proc/'):
+                elif sfile.startswith(('/dev/', '/sys/', '/proc/')):
                     continue
 
                 # files moved from symlink directory to the real directory
