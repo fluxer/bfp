@@ -1,4 +1,5 @@
-==Things you should know before getting started==
+## Things you should know before getting started
+
 The following [environment variables](https://en.wikipedia.org/wiki/Environment_variable)
 can be used to setup the locales:
 
