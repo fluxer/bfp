@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="bg_BG">
+<!DOCTYPE TS><TS version="2.0" language="bg_BG" sourcelanguage="">
 <context>
     <name>Daemon</name>
     <message>
@@ -55,22 +54,22 @@
         <translation>Фалшив</translation>
     </message>
     <message>
-        <location filename="editor.py" line="174"/>
+        <location filename="editor.py" line="175"/>
         <source>Text editor plugin</source>
         <translation>Плъгин за редактиране на текст</translation>
     </message>
     <message>
-        <location filename="editor.py" line="201"/>
+        <location filename="editor.py" line="202"/>
         <source>Editor</source>
         <translation>Редактор</translation>
     </message>
     <message>
-        <location filename="image.py" line="128"/>
+        <location filename="image.py" line="147"/>
         <source>Image viewer plugin</source>
         <translation>Плъгин за преглед на изображения</translation>
     </message>
     <message>
-        <location filename="image.py" line="148"/>
+        <location filename="image.py" line="167"/>
         <source>Image</source>
         <translation>Изображение</translation>
     </message>
@@ -264,7 +263,7 @@
 <context>
     <name>Widget</name>
     <message>
-        <location filename="editor.py" line="20"/>
+        <location filename="editor.py" line="22"/>
         <source>CTRL+O</source>
         <translation></translation>
     </message>
@@ -294,7 +293,7 @@
         <translation>Отвори</translation>
     </message>
     <message>
-        <location filename="editor.py" line="119"/>
+        <location filename="editor.py" line="120"/>
         <source>Save as</source>
         <translation>Запази като</translation>
     </message>
@@ -609,7 +608,7 @@
         <translation>Извършва се изтегляне, сигурнили сте че искате да го прекратите?</translation>
     </message>
     <message>
-        <location filename="editor.py" line="119"/>
+        <location filename="editor.py" line="120"/>
         <source>Text (*.txt *.sh *.bash *.diff *.patch *.py *c *.h *.cpp *.hpp *.html *.pl);;All (*)</source>
         <translation>Текст (*.txt *.sh *.bash *.diff *.patch *.py *c *.h *.cpp *.hpp *.html *.pl);;Всички (*)</translation>
     </message>
@@ -674,27 +673,27 @@
         <translation>Отвори файл</translation>
     </message>
     <message>
-        <location filename="editor.py" line="22"/>
+        <location filename="editor.py" line="24"/>
         <source>Save file</source>
         <translation>Запази файл</translation>
     </message>
     <message>
-        <location filename="editor.py" line="27"/>
+        <location filename="editor.py" line="29"/>
         <source>Save file as</source>
         <translation>Запази файл като</translation>
     </message>
     <message>
-        <location filename="image.py" line="32"/>
+        <location filename="image.py" line="33"/>
         <source>Reload currently loaded file</source>
         <translation>Презареди текущият зареден файл</translation>
     </message>
     <message>
-        <location filename="editor.py" line="35"/>
+        <location filename="editor.py" line="37"/>
         <source>Find text in currently loaded file</source>
         <translation>Намери текст в текущият зареден файл</translation>
     </message>
     <message>
-        <location filename="editor.py" line="40"/>
+        <location filename="editor.py" line="42"/>
         <source>Change font in use</source>
         <translation>Смени шрифта в ползуване</translation>
     </message>
@@ -714,12 +713,12 @@
         <translation>Задай страница, която дасе показва</translation>
     </message>
     <message>
-        <location filename="image.py" line="24"/>
+        <location filename="image.py" line="25"/>
         <source>Next file</source>
         <translation>Следващ файл</translation>
     </message>
     <message>
-        <location filename="image.py" line="28"/>
+        <location filename="image.py" line="29"/>
         <source>Previous file</source>
         <translation>Предишен файл</translation>
     </message>
@@ -904,22 +903,22 @@
         <translation>Линии премахнати</translation>
     </message>
     <message>
-        <location filename="editor.py" line="45"/>
+        <location filename="image.py" line="37"/>
         <source>Print text</source>
         <translation>Принтирай тежт</translation>
     </message>
     <message>
-        <location filename="editor.py" line="47"/>
+        <location filename="image.py" line="39"/>
         <source>CTRL+P</source>
         <translation></translation>
     </message>
     <message>
-        <location filename="editor.py" line="50"/>
+        <location filename="editor.py" line="51"/>
         <source>Preview print</source>
         <translation>Преглед на принтирането</translation>
     </message>
     <message>
-        <location filename="editor.py" line="52"/>
+        <location filename="editor.py" line="53"/>
         <source>CTRL+H</source>
         <translation></translation>
     </message>
