@@ -5,9 +5,7 @@
 http://www.linuxfromscratch.org/blfs/view/systemd/postlfs/initramfs.html
 
 ## SPM ##
- * Fix all bugs noted with FIXME in the code (1)
- * Tools for the following:
-   * purge repositories that are not in repositories.conf
+ * Fix all bugs noted with FIXME in the code
  * Use Makefiles for build scripts?
  * Lint - check if groups/users are removed
  * Optionally remove build depends that are not required by local target
