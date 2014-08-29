@@ -259,10 +259,12 @@ class Remote(object):
 
 class Repo(object):
     ''' Class for dealing with repositories '''
-    def __init__(self, repositories_urls, do_clean=False, do_sync=False, do_update=False):
+    def __init__(self, repositories_urls, do_clean=False, do_sync=False, \
+        do_update=False, do_prune=False):
         self.repositories_urls = repositories_urls
         self.do_clean = do_clean
         self.do_sync = do_sync
+        self.do_prune = do_prune
         self.do_update = do_update
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
@@ -300,6 +302,25 @@ class Repo(object):
             misc.system_command((misc.whereis('git'), 'clone', '--depth=1', \
                 self.repository_url, self.repository_dir))
 
+    def prune(self):
+        ''' Remove repositories that are no longer in the config '''
+        rdir = os.path.join(CACHE_DIR, 'repositories')
+        if not os.path.exists(rdir):
+            return
+
+        for sdir in os.listdir(rdir):
+            valid = False
+            for line in misc.file_readlines('/etc/spm/repositories.conf'):
+                if not line or line.startswith('#'):
+                    continue
+
+                if os.path.basename(line) == sdir:
+                    valid = True
+
+            if not valid:
+                message.sub_warning('Removing', sdir)
+                misc.dir_remove(os.path.join(rdir, sdir))
+
     def update(self):
         ''' Check repositories for updates '''
         message.sub_info('Checking for updates')
@@ -323,7 +344,7 @@ class Repo(object):
             # clean and sync is done this is more optimal but triggers
             # http://pylint-messages.wikidot.com/messages:w0201
             self.repository_url = repository
-            self.repository_name = os.path.basename(self.repository_url).replace('.git', '')
+            self.repository_name = os.path.basename(self.repository_url)
             self.repository_dir = os.path.join(CACHE_DIR, 'repositories', self.repository_name)
 
             if self.do_clean:
@@ -333,6 +354,10 @@ class Repo(object):
             if self.do_sync:
                 message.sub_info('Starting sync at', datetime.today())
                 self.sync()
+
+        if self.do_prune:
+            message.sub_info('Starting prune at', datetime.today())
+            self.prune()
 
         if self.do_update:
             message.sub_info('Starting update at', datetime.today())

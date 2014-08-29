@@ -171,6 +171,7 @@ be implemented later on.
     -h, --help            Show this help message and exit
     -c, --clean           Purge repositories
     -s, --sync            Sync repositories
+    -p, --prune           Prune old repositories
     -u, --update          Check repositories for updates
 
 ### REMOTE MODE

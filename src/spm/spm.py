@@ -192,6 +192,8 @@ try:
             help='Purge repositories')
         repo_parser.add_argument('-s', '--sync', action='store_true', \
             help='Sync repositories')
+        repo_parser.add_argument('-p', '--prune', action='store_true', \
+            help='Prune old repositories')
         repo_parser.add_argument('-u', '--update', action='store_true', \
             help='Check repositories for updates')
 
@@ -336,7 +338,7 @@ try:
             message.sub_info('REPOSITORY', repository)
         message.info('Poking repositories...')
         m = libspm.Repo(libspm.REPOSITORIES, ARGS.clean, \
-                ARGS.sync, ARGS.update)
+                ARGS.sync, ARGS.update, ARGS.prune)
         m.main()
 
     elif ARGS.mode == 'remote':
