@@ -108,7 +108,7 @@ make a difference if the B<hwclock> program has been calibrated correctly.
 
 If you use a network filesystem, you should enable **netfs**.
 
-Default: *sysklogd dcron dhcpcd*
+Default: *sysklogd alsa dbus connmand bluetooth cupsd*
 
 ## FILES
 
