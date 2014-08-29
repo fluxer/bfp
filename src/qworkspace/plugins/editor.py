@@ -13,6 +13,8 @@ class Widget(QtGui.QWidget):
         self.parent = parent
         self.name = 'editor'
         self.sedit = spath
+
+        self.printer = QtGui.QPrinter()
         self.secondLayout = QtGui.QHBoxLayout()
         self.openButton = QtGui.QPushButton(general.get_icon('document-open'), '')
         self.openButton.setToolTip(self.tr('Open file'))
@@ -40,7 +42,6 @@ class Widget(QtGui.QWidget):
         self.fontButton.setToolTip(self.tr('Change font in use'))
         self.fontButton.clicked.connect(self.set_font)
         self.fontButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+N')))
-
         self.printButton = QtGui.QPushButton(general.get_icon('document-print'), '')
         self.printButton.setToolTip(self.tr('Print text'))
         self.printButton.clicked.connect(self.print_text)
@@ -51,7 +52,6 @@ class Widget(QtGui.QWidget):
         self.previewButton.clicked.connect(self.print_preview)
         self.previewButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+H')))
         self.previewButton.setEnabled(False)
-
         self.highlighterBox = QtGui.QComboBox()
         self.highlighterBox.addItems(('None', 'Python', 'Shell', 'C'))
         self.highlighterBox.setToolTip(self.tr('Set syntax highlighter'))
@@ -110,6 +110,7 @@ class Widget(QtGui.QWidget):
             shighlither = 'None'
         index = self.highlighterBox.findText(shighlither)
         self.highlighterBox.setCurrentIndex(index)
+        self.parent.plugins.recent_register(sfile)
 
     def save_file(self):
         if self.sedit:
@@ -154,12 +155,12 @@ class Widget(QtGui.QWidget):
             self.highlighter = libhighlighter.HighlighterC(self.textEdit.document())
 
     def print_text(self):
-        dialog = QtGui.QPrintDialog()
+        dialog = QtGui.QPrintDialog(self.printer, self)
         if dialog.exec_() == QtGui.QDialog.Accepted:
             self.textEdit.document().print_(dialog.printer())
 
     def print_preview(self):
-        dialog = QtGui.QPrintPreviewDialog()
+        dialog = QtGui.QPrintPreviewDialog(self.printer, self)
         dialog.paintRequested.connect(self.textEdit.print_)
         dialog.exec_()
 

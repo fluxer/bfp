@@ -14,6 +14,7 @@ class Widget(QtGui.QWidget):
         self.spath = spath
         self.name = 'image'
 
+        self.printer = QtGui.QPrinter()
         self.imageView = QtGui.QLabel()
         self.imageView.setText('')
         self.imageView.setScaledContents(True)
@@ -32,11 +33,17 @@ class Widget(QtGui.QWidget):
         self.reloadButton.setToolTip(self.tr('Reload currently loaded file'))
         self.reloadButton.clicked.connect(self.reload_file)
         self.reloadButton.setEnabled(False)
+        self.printButton = QtGui.QPushButton(general.get_icon('document-print'), '')
+        self.printButton.setToolTip(self.tr('Print text'))
+        self.printButton.clicked.connect(self.print_image)
+        self.printButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+P')))
+        self.printButton.setEnabled(False)
         self.secondLayout = QtGui.QHBoxLayout()
         self.secondLayout.addWidget(self.openButton)
         self.secondLayout.addWidget(self.previousButton)
         self.secondLayout.addWidget(self.nextButton)
         self.secondLayout.addWidget(self.reloadButton)
+        self.secondLayout.addWidget(self.printButton)
         self.mainLayout = QtGui.QGridLayout()
         self.mainLayout.addLayout(self.secondLayout, 0, 0)
         self.mainLayout.addWidget(self.imageView)
@@ -79,6 +86,7 @@ class Widget(QtGui.QWidget):
                 return
         self.set_image(str(sfile))
         self.reloadButton.setEnabled(True)
+        self.printButton.setEnabled(True)
         self.parent.plugins.recent_register(str(sfile))
 
     def reload_file(self):
@@ -116,6 +124,17 @@ class Widget(QtGui.QWidget):
         slist = self.images_list()
         if self.imageView.fileName in slist:
             self.set_image(slist[slist.index(self.imageView.fileName) + 1])
+
+    def print_image(self):
+        dialog = QtGui.QPrintDialog(self.printer, self)
+        if dialog.exec_():
+            painter = QtGui.QPainter(self.printer)
+            rect = painter.viewport()
+            size = self.imageView.pixmap().size()
+            size.scale(rect.size(), QtCore.Qt.KeepAspectRatio)
+            painter.setViewport(rect.x(), rect.y(), size.width(), size.height())
+            painter.setWindow(self.imageView.pixmap().rect())
+            painter.drawPixmap(0, 0, self.imageView.pixmap())
 
 
 class Plugin(QtCore.QObject):
