@@ -88,7 +88,7 @@ else:
     for line in repositories_conf.readlines():
         line = line.strip()
         if line.startswith(('http://', 'https://', 'ftp://', 'ftps://', \
-            'git://', 'ssh://', 'rsync://')):
+            'git://', 'ssh://', 'rsync://')) or os.path.exists(line):
             REPOSITORIES.append(line)
     repositories_conf.close()
 
@@ -283,15 +283,20 @@ class Repo(object):
     def sync(self):
         ''' Sync repository '''
         rdir = os.path.join(CACHE_DIR, 'repositories')
-        if not os.path.isdir(rdir):
-            os.makedirs(rdir)
+        misc.dir_create(rdir)
 
-        if os.path.isdir(self.repository_dir):
+        if os.path.exists(self.repository_url):
+            # repository is local path, create a copy of it
+            message.sub_info('Cloning local', self.repository_name)
+            shutil.copytree(self.repository_url, self.repository_dir)
+        elif os.path.isdir(self.repository_dir):
+            # existing Git repository
             message.sub_info('Updating repository', self.repository_name)
             misc.system_command((misc.whereis('git'), 'pull', '--depth=1', \
                 self.repository_url), cwd=self.repository_dir)
         else:
-            message.sub_info('Cloning initial copy', self.repository_name)
+            # non-existing Git repository, fetch
+            message.sub_info('Cloning remote', self.repository_name)
             misc.system_command((misc.whereis('git'), 'clone', '--depth=1', \
                 self.repository_url, self.repository_dir))
 
@@ -314,6 +319,9 @@ class Repo(object):
     def main(self):
         ''' Execute action for every repository '''
         for repository in self.repositories_urls:
+            # compute only once by asigning class variables, in cases when
+            # clean and sync is done this is more optimal but triggers
+            # http://pylint-messages.wikidot.com/messages:w0201
             self.repository_url = repository
             self.repository_name = os.path.basename(self.repository_url).replace('.git', '')
             self.repository_dir = os.path.join(CACHE_DIR, 'repositories', self.repository_name)
