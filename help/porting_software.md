@@ -8,11 +8,11 @@ porting:
 - if software offers check via test suite use it
 - don't put ports from the base group in the makedepend array
 - install software to / not /usr
-- glibc supports Linux Kernel version greater or equal to 3.2.0 only
+- glibc supports Linux Kernel version greater or equal to 3.12.0
 
 ## Toolchain build order
 
-- linux-api-headers
+- linux
 
 - glibc
 
