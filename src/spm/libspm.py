@@ -318,8 +318,9 @@ class Repo(object):
                     valid = True
 
             if not valid:
-                message.sub_warning('Removing', sdir)
-                misc.dir_remove(os.path.join(rdir, sdir))
+                repo_dir = os.path.join(rdir, sdir)
+                message.sub_warning('Removing', repo_dir)
+                misc.dir_remove(repo_dir)
 
     def update(self):
         ''' Check repositories for updates '''
@@ -448,66 +449,80 @@ class Source(object):
                 message.sub_debug(sfile)
                 misc.system_command((misc.whereis('ldconfig'), '-r', ROOT_DIR))
                 run_ldconfig = False
-            elif '/share/man' in sfile and misc.whereis('mandb', fallback=False) and run_mandb:
+            elif '/share/man' in sfile and misc.whereis('mandb', fallback=False) \
+                and run_mandb:
                 if os.path.isdir(sfile):
                     continue
                 message.sub_info('Updating manual pages database')
                 message.sub_debug(sfile)
                 misc.system_command(('mandb', '--quiet'))
                 run_mandb = False
-            elif '/share/applications/' in sfile and misc.whereis('update-desktop-database', fallback=False) \
+            elif '/share/applications/' in sfile \
+                and misc.whereis('update-desktop-database', fallback=False) \
                 and run_desktop_database:
                 message.sub_info('Updating desktop database')
                 message.sub_debug(sfile)
                 misc.system_command(('update-desktop-database', os.path.dirname(sfile)))
                 run_desktop_database = False
-            elif '/share/mime/' in sfile and misc.whereis('update-mime-database', fallback=False) and run_mime_database:
+            elif '/share/mime/' in sfile and misc.whereis('update-mime-database', \
+                fallback=False) and run_mime_database:
                 message.sub_info('Updating mime database')
                 message.sub_debug(sfile)
                 misc.system_command(('update-mime-database', sys.prefix + 'share/mime'))
                 run_mime_database = False
-            elif '/share/icons/' in sfile and misc.whereis('xdg-icon-resource', fallback=False) and run_icon_resource:
+            elif '/share/icons/' in sfile and misc.whereis('xdg-icon-resource', \
+                fallback=False) and run_icon_resource:
                 message.sub_info('Updating icon resources')
                 message.sub_debug(sfile)
                 misc.system_command(('xdg-icon-resource', 'forceupdate', '--theme', 'hicolor'))
                 run_icon_resource = False
-            elif '/gio/modules/' in sfile and misc.whereis('gio-querymodules', fallback=False) and run_gio_querymodules:
+            elif '/gio/modules/' in sfile and misc.whereis('gio-querymodules', \
+                fallback=False) and run_gio_querymodules:
                 message.sub_info('Updating GIO modules cache')
                 sdir = os.path.dirname(sfile)
                 message.sub_debug(sdir)
                 misc.system_command(('gio-querymodules', sdir))
                 run_gio_querymodules = False
-            elif '/pango/' in sfile and '/modules/' in sfile and misc.whereis('pango-querymodules', fallback=False) \
+            elif '/pango/' in sfile and '/modules/' in sfile \
+                and misc.whereis('pango-querymodules', fallback=False) \
                 and run_pango_querymodules:
                 message.sub_info('Updating pango modules cache')
                 message.sub_debug(sfile)
                 misc.system_command(('pango-querymodules', '--update-cache'))
                 run_pango_querymodules = False
-            elif '/gtk-2.0/' in sfile and '/immodules/' in sfile and misc.whereis('gtk-query-immodules-2.0', fallback=False) \
+            elif '/gtk-2.0/' in sfile and '/immodules/' in sfile \
+                and misc.whereis('gtk-query-immodules-2.0', fallback=False) \
                 and run_gtk2_immodules:
                 message.sub_info('Updating GTK-2.0 imodules cache')
                 message.sub_debug(sfile)
-                misc.file_write('/etc/gtk-2.0/gtk.immodules', misc.system_output('gtk-query-immodules-2.0'))
+                misc.file_write('/etc/gtk-2.0/gtk.immodules', \
+                    misc.system_output('gtk-query-immodules-2.0'))
                 run_gtk2_immodules = False
-            elif '/gtk-3.0/' in sfile and '/immodules/' in sfile and misc.whereis('gtk-query-immodules-3.0', fallback=False) \
+            elif '/gtk-3.0/' in sfile and '/immodules/' in sfile \
+                and misc.whereis('gtk-query-immodules-3.0', fallback=False) \
                 and run_gtk3_immodules:
                 message.sub_info('Updating GTK-3.0 imodules cache')
                 message.sub_debug(sfile)
-                misc.file_write('/etc/gtk-3.0/gtk.immodules', misc.system_output('gtk-query-immodules-3.0'))
+                misc.file_write('/etc/gtk-3.0/gtk.immodules', \
+                    misc.system_output('gtk-query-immodules-3.0'))
                 run_gtk3_immodules = False
-            elif '/gdk-pixbuf' in sfile and '/loaders/' in sfile and misc.whereis('gdk-pixbuf-query-loaders', fallback=False) \
+            elif '/gdk-pixbuf' in sfile and '/loaders/' in sfile \
+                and misc.whereis('gdk-pixbuf-query-loaders', fallback=False) \
                 and run_pixbuf_query:
                 message.sub_info('Updating gdk pixbuffer loaders')
                 message.sub_debug(sfile)
-                misc.file_write('/etc/gtk-2.0/gdk-pixbuf.loaders', misc.system_output('gdk-pixbuf-query-loaders'))
+                misc.file_write('/etc/gtk-2.0/gdk-pixbuf.loaders', \
+                    misc.system_output('gdk-pixbuf-query-loaders'))
                 run_pixbuf_query = False
-            elif '/schemas/' in sfile and misc.whereis('glib-compile-schemas', fallback=False) and run_compile_schemas:
+            elif '/schemas/' in sfile and misc.whereis('glib-compile-schemas', \
+                fallback=False) and run_compile_schemas:
                 message.sub_info('Updating GSettings schemas')
                 # gconfpkg --uninstall network-manager-applet
                 message.sub_debug(sfile)
                 misc.system_command(('glib-compile-schemas', os.path.dirname(sfile)))
                 run_compile_schemas = False
-            elif sfile.endswith('.ko') and misc.whereis('depmod', fallback=False) and run_depmod:
+            elif sfile.endswith('.ko') and misc.whereis('depmod', \
+                fallback=False) and run_depmod:
                 message.sub_info('Updating module dependencies')
                 message.sub_debug(sfile)
                 misc.system_command(('depmod'))
@@ -515,7 +530,8 @@ class Source(object):
             # upon target remove sfile may not exist thus some triggers fail
             elif not os.path.isfile(sfile):
                 continue
-            elif '/share/info' in sfile and misc.whereis('install-info', fallback=False) and run_install_info:
+            elif '/share/info' in sfile and misc.whereis('install-info', \
+                fallback=False) and run_install_info:
                 # install-info --delete $infodir/$file.gz $infodir/dir
                 message.sub_info('Updating info pages')
                 sdir = os.path.dirname(sfile)
@@ -523,7 +539,8 @@ class Source(object):
                 for sfile in misc.list_files(sdir):
                     misc.system_command(('install-info', sfile, os.path.join(sdir, 'dir')))
                 run_install_info = False
-            elif '/share/icons/' in sfile and misc.whereis('gtk-update-icon-cache', fallback=False) and run_icon_cache:
+            elif '/share/icons/' in sfile and misc.whereis('gtk-update-icon-cache', \
+                fallback=False) and run_icon_cache:
                 # extract the proper directory from sfile, e.g. /usr/share/icons/hicolor
                 sdir = misc.string_search('(/(?:.*?)?/share/icons/(?:.*?))', sfile, escape=False)
                 sdir = misc.string_convert(sdir)
@@ -576,7 +593,8 @@ class Source(object):
     def prepare(self):
         ''' Prepare target sources '''
         message.sub_info('Checking dependencies')
-        missing_dependencies = database.remote_mdepends(self.target, cdepends=self.do_check)
+        missing_dependencies = database.remote_mdepends(self.target, \
+            cdepends=self.do_check)
 
         if missing_dependencies and self.do_depends:
             message.sub_info('Building dependencies', missing_dependencies)
