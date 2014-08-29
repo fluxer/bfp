@@ -97,7 +97,7 @@ for src in "${@:-.}";do
 		warn "src_install() not defined in $srcbuild"
 		continue
 	fi
-        
+
 	set -e
 	msg "Preparing sources.."
 	. "$srcbuild"
@@ -105,7 +105,7 @@ for src in "${@:-.}";do
 	src_name="${src_real##*/}"
 	SOURCE_DIR="$src_real/source"
 	INSTALL_DIR="$src_real/install"
-	
+
 	missing_depends=""
 	for depend in "${depends[@]}" "${makedepends[@]}";do
 		if [ ! -d "/var/local/spm/$depend" ];then
@@ -116,7 +116,7 @@ for src in "${@:-.}";do
 		warn2 "Missing dependencies: ${YELLOW}${missing_depends}${ALL_OFF}"
 	fi
 
-	rm -rf --one-file-system "$SOURCE_DIR"
+	rm -rf "$SOURCE_DIR"
 	mkdir -p "$SOURCE_DIR"
 	for source in "${sources[@]}";do
 		src_base="${source##*/}"
@@ -147,23 +147,21 @@ for src in "${@:-.}";do
 				elif [ -n "$(which tar)" ];then
 					tar -xpf "$SOURCE_DIR/$src_base" -C "$SOURCE_DIR"
 				fi ;;
-		esac		
+		esac
 	done
-	
+
 	cd "$SOURCE_DIR"
 	if [[ -n $(grep -e '^src_compile()' "$srcbuild") ]];then
 		msg "Compiling sources.."
 		src_compile
 	fi
-	
-	
-	
+
 	msg "Installing sources.."
-	rm -rf --one-file-system "$INSTALL_DIR"
+	rm -rf "$INSTALL_DIR"
 	mkdir -p "$INSTALL_DIR"
 	cd "$INSTALL_DIR"
 	src_install
-	
+
 	msg "Creating footprint and metadata.."
 	mkdir -p "$INSTALL_DIR/var/local/spm/$src_name"
 	find "$INSTALL_DIR" ! -type d -printf '%P\n' > "$INSTALL_DIR/var/local/spm/$src_name/footprint"
@@ -178,7 +176,7 @@ for src in "${@:-.}";do
 	tar -caf "$src_real/$tarball" *
 
 	msg "Cleaning up.."
-	rm -rf --one-file-system "$SOURCE_DIR" "$INSTALL_DIR"
+	rm -rf "$SOURCE_DIR" "$INSTALL_DIR"
 
 	msg "To merge it: ${GREEN}tar -vxapPhf ${src}/${tarball} -C /${ALL_OFF}"
 	set +e

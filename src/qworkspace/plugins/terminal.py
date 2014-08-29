@@ -33,7 +33,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'terminal'
-        self.version = "0.9.35 (e77e7e4)"
+        self.version = "0.9.35 (f7385d6)"
         self.description = self.tr('Embed terminal plugin')
         self.icon = general.get_icon('utilities-terminal')
         self.widget = None
