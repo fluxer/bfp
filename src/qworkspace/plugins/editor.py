@@ -40,6 +40,18 @@ class Widget(QtGui.QWidget):
         self.fontButton.setToolTip(self.tr('Change font in use'))
         self.fontButton.clicked.connect(self.set_font)
         self.fontButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+N')))
+
+        self.printButton = QtGui.QPushButton(general.get_icon('document-print'), '')
+        self.printButton.setToolTip(self.tr('Print text'))
+        self.printButton.clicked.connect(self.print_text)
+        self.printButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+P')))
+        self.printButton.setEnabled(False)
+        self.previewButton = QtGui.QPushButton(general.get_icon('document-print-preview'), '')
+        self.previewButton.setToolTip(self.tr('Preview print'))
+        self.previewButton.clicked.connect(self.print_preview)
+        self.previewButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+H')))
+        self.previewButton.setEnabled(False)
+
         self.highlighterBox = QtGui.QComboBox()
         self.highlighterBox.addItems(('None', 'Python', 'Shell', 'C'))
         self.highlighterBox.setToolTip(self.tr('Set syntax highlighter'))
@@ -51,6 +63,8 @@ class Widget(QtGui.QWidget):
         self.secondLayout.addWidget(self.findButton)
         self.secondLayout.addWidget(self.fontButton)
         self.secondLayout.addWidget(self.highlighterBox)
+        self.secondLayout.addWidget(self.printButton)
+        self.secondLayout.addWidget(self.previewButton)
         self.mainLayout = QtGui.QGridLayout()
         self.textEdit = QtGui.QTextEdit()
         self.mainLayout.addLayout(self.secondLayout, 0, 0)
@@ -83,6 +97,8 @@ class Widget(QtGui.QWidget):
         self.saveButton.setEnabled(True)
         self.reloadButton.setEnabled(True)
         self.findButton.setEnabled(True)
+        self.printButton.setEnabled(True)
+        self.previewButton.setEnabled(True)
         smime = misc.file_mime(sfile)
         if smime == 'text/x-python':
             shighlither = 'Python'
@@ -137,13 +153,24 @@ class Widget(QtGui.QWidget):
         elif shighlither == 'C':
             self.highlighter = libhighlighter.HighlighterC(self.textEdit.document())
 
+    def print_text(self):
+        dialog = QtGui.QPrintDialog()
+        if dialog.exec_() == QtGui.QDialog.Accepted:
+            self.textEdit.document().print_(dialog.printer())
+
+    def print_preview(self):
+        dialog = QtGui.QPrintPreviewDialog()
+        dialog.paintRequested.connect(self.textEdit.print_)
+        dialog.exec_()
+
+
 class Plugin(QtCore.QObject):
     ''' Plugin handler '''
     def __init__(self, parent=None):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'editor'
-        self.version = "0.9.34 (5f8499a)"
+        self.version = "0.9.34 (9183675)"
         self.description = self.tr('Text editor plugin')
         self.icon = general.get_icon('accessories-text-editor')
         self.widget = None

@@ -9,7 +9,7 @@ from PyQt4 import QtCore, QtGui
 import sys, os, gc, libworkspace, libmisc
 
 # prepare for lift-off
-app_version = "0.9.34 (5f8499a)"
+app_version = "0.9.34 (9183675)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qworkspace_ui.Ui_MainWindow()

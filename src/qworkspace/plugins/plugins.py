@@ -39,7 +39,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'plugins'
-        self.version = "0.9.34 (5f8499a)"
+        self.version = "0.9.34 (9183675)"
         self.description = self.tr('Plugins manager plugin')
         self.icon = general.get_icon('extension')
         self.widget = None

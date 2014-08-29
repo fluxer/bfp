@@ -55,12 +55,12 @@
         <translation>Фалшив</translation>
     </message>
     <message>
-        <location filename="editor.py" line="147"/>
+        <location filename="editor.py" line="174"/>
         <source>Text editor plugin</source>
         <translation>Плъгин за редактиране на текст</translation>
     </message>
     <message>
-        <location filename="editor.py" line="174"/>
+        <location filename="editor.py" line="201"/>
         <source>Editor</source>
         <translation>Редактор</translation>
     </message>
@@ -294,7 +294,7 @@
         <translation>Отвори</translation>
     </message>
     <message>
-        <location filename="editor.py" line="103"/>
+        <location filename="editor.py" line="119"/>
         <source>Save as</source>
         <translation>Запази като</translation>
     </message>
@@ -609,7 +609,7 @@
         <translation>Извършва се изтегляне, сигурнили сте че искате да го прекратите?</translation>
     </message>
     <message>
-        <location filename="editor.py" line="103"/>
+        <location filename="editor.py" line="119"/>
         <source>Text (*.txt *.sh *.bash *.diff *.patch *.py *c *.h *.cpp *.hpp *.html *.pl);;All (*)</source>
         <translation>Текст (*.txt *.sh *.bash *.diff *.patch *.py *c *.h *.cpp *.hpp *.html *.pl);;Всички (*)</translation>
     </message>
@@ -699,7 +699,7 @@
         <translation>Смени шрифта в ползуване</translation>
     </message>
     <message>
-        <location filename="editor.py" line="45"/>
+        <location filename="editor.py" line="57"/>
         <source>Set syntax highlighter</source>
         <translation>Задай маркер на синтаксиса</translation>
     </message>
@@ -902,6 +902,26 @@
         <location filename="tetrix.py" line="93"/>
         <source>Lines removed</source>
         <translation>Линии премахнати</translation>
+    </message>
+    <message>
+        <location filename="editor.py" line="45"/>
+        <source>Print text</source>
+        <translation>Принтирай тежт</translation>
+    </message>
+    <message>
+        <location filename="editor.py" line="47"/>
+        <source>CTRL+P</source>
+        <translation></translation>
+    </message>
+    <message>
+        <location filename="editor.py" line="50"/>
+        <source>Preview print</source>
+        <translation>Преглед на принтирането</translation>
+    </message>
+    <message>
+        <location filename="editor.py" line="52"/>
+        <source>CTRL+H</source>
+        <translation></translation>
     </message>
 </context>
 </TS>
