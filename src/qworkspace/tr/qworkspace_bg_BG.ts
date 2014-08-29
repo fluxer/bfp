@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="bg_BG" sourcelanguage="">
+<!DOCTYPE TS>
+<TS version="2.0" language="bg_BG">
 <context>
     <name>Daemon</name>
     <message>
@@ -237,6 +238,16 @@
         <location filename="tetrix.py" line="515"/>
         <source>Tetrix</source>
         <translation>Тетрикс</translation>
+    </message>
+    <message>
+        <location filename="pdf.py" line="94"/>
+        <source>PDF viewer plugin</source>
+        <translation>Плъгин за преглед на ПДФ</translation>
+    </message>
+    <message>
+        <location filename="pdf.py" line="111"/>
+        <source>PDF</source>
+        <translation>ПДФ</translation>
     </message>
 </context>
 <context>
@@ -668,7 +679,7 @@
         <translation>Отвори изтегленият файл</translation>
     </message>
     <message>
-        <location filename="multimedia.py" line="19"/>
+        <location filename="pdf.py" line="23"/>
         <source>Open file</source>
         <translation>Отвори файл</translation>
     </message>
@@ -683,7 +694,7 @@
         <translation>Запази файл като</translation>
     </message>
     <message>
-        <location filename="image.py" line="33"/>
+        <location filename="pdf.py" line="26"/>
         <source>Reload currently loaded file</source>
         <translation>Презареди текущият зареден файл</translation>
     </message>
@@ -903,12 +914,12 @@
         <translation>Линии премахнати</translation>
     </message>
     <message>
-        <location filename="image.py" line="37"/>
+        <location filename="pdf.py" line="30"/>
         <source>Print text</source>
         <translation>Принтирай тежт</translation>
     </message>
     <message>
-        <location filename="image.py" line="39"/>
+        <location filename="pdf.py" line="32"/>
         <source>CTRL+P</source>
         <translation></translation>
     </message>
@@ -921,6 +932,16 @@
         <location filename="editor.py" line="53"/>
         <source>CTRL+H</source>
         <translation></translation>
+    </message>
+    <message>
+        <location filename="image.py" line="37"/>
+        <source>Print image</source>
+        <translation>Принтирай изображение</translation>
+    </message>
+    <message>
+        <location filename="pdf.py" line="61"/>
+        <source>PDF (*.pdf);;All (*)</source>
+        <translation>ПДФ (*.pdf);;Всички (*)</translation>
     </message>
 </context>
 </TS>
