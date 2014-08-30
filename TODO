@@ -50,3 +50,4 @@ http://www.linuxfromscratch.org/blfs/view/systemd/postlfs/initramfs.html
  * Make use of sys.prefix and use less hardcode paths
  * Sanitize the code
  * Value checks to ensure proper behavior
+ * Document methods the right way (https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt)

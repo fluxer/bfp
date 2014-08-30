@@ -29,9 +29,7 @@ RM = rm -vf
 CP = cp -vf
 XZ = xz -v
 
-MARKDOWN = markdown_py -v
-PYDOC = pydoc
-POD2MAN = pod2man
+POOLE = $(PYTHON) ../poole/poole.py
 PYUIC = pyuic4
 PYRCC = pyrcc4
 PYLUPDATE = pylupdate4 -noobsolete

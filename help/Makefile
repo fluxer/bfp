@@ -1,50 +1,22 @@
 include ../Makefile.inc
 
 all:
-	$(MARKDOWN) about.md -f about.html
-	$(MARKDOWN) bootloader.md -f bootloader.html
-	$(MARKDOWN) building_livecd.md -f building_livecd.html
-	$(MARKDOWN) contributors.md -f contributors.html
-	$(MARKDOWN) copying.cparted.md -f copying.cparted.html
-	$(MARKDOWN) copying.icons.md -f copying.icons.html
-	$(MARKDOWN) copying.md -f copying.html
-	$(MARKDOWN) dns_caching.md -f dns_caching.html
-	$(MARKDOWN) initscripts.md -f initscripts.html
-	$(MARKDOWN) inittab.md -f inittab.html
-	$(MARKDOWN) license.magic.md -f license.magic.html
-	$(MARKDOWN) locales.md -f locales.html
-	$(MARKDOWN) lsinitfs.md -f lsinitfs.html
-	$(MARKDOWN) mkinitfs.md -f mkinitfs.html
-	$(MARKDOWN) porting_software.md -f porting_software.html
-	$(MARKDOWN) rc.d.md -f rc.d.html
-	$(MARKDOWN) rc.conf.md -f rc.conf.html
-	$(MARKDOWN) spm-tools.md -f spm-tools.html
-	$(MARKDOWN) spm.conf.md -f spm.conf.html
-	$(MARKDOWN) spm.md -f spm.html
-	$(MARKDOWN) srcbuild.md -f srcbuild.html
-	$(MARKDOWN) system_maintenance.md -f system_maintenance.html
-	$(MARKDOWN) tmpfiles.md -f tmpfiles.html
-	$(MARKDOWN) tmpfiles.d.md -f tmpfiles.d.html
-	$(MARKDOWN) todo.md -f todo.html
-	$(MARKDOWN) troubleshoot.md -f troubleshoot.html
-	$(MARKDOWN) useful_links.md -f useful_links.html
-	$(MARKDOWN) users_and_groups.md -f users_and_groups.html
-	$(SED) 's|#SHAREDIR#|$(SHAREDIR)|g' -i srcbuild.html
+	$(POOLE) --build
+	$(SED) 's|#SHAREDIR#|$(SHAREDIR)|g' -i output/srcbuild.html
 	$(SED) -e 's|#MACHINE#|$(MACHINE)|g' -e 's|#ARCH#|$(ARCH)|g' \
-		-e 's|#JOBS#|$(JOBS)|g' -i spm.conf.html
-	$(PYDOC) -w libmagic
-	$(PYDOC) -w libmisc
-	$(PYDOC) -w libpackage
-	$(PYDOC) -w libmessage
+		-e 's|#JOBS#|$(JOBS)|g' -i output/spm.conf.html
 
 install:
 	$(INSTALL) -dm755 $(DESTDIR)$(SHAREDIR)/help/
-	$(INSTALL) -m644 *.html $(DESTDIR)$(SHAREDIR)/help/
+	$(INSTALL) -m644 output/*.html $(DESTDIR)$(SHAREDIR)/help/
+
+check:
+	$(POOLE) --serve
 
 uninstall:
 	$(RM) -r $(DESTDIR)$(SHAREDIR)/help/
 
 clean:
-	$(RM) *.html
+	$(RM) output/*.html
 
-.PHONY: all install uninstall clean
+.PHONY: all install check uninstall clean
