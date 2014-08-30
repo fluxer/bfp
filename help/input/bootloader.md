@@ -12,15 +12,22 @@ bootloader.
 ## Getting your hands dirty
 
 ### Editing GRUB configuration file
-The GRUB configuration file is located in /boot/grub/grub.conf. You can edit it via text-editor of choice as ''root'':
+The GRUB configuration file is located in /boot/grub/grub.conf. You can edit it
+via text-editor of choice as **root**:
+
     vim /boot/grub/grub.conf
 
 Other GRUB related files are:
-    /etc/default/grub
-    /etc/grub.d/*
+
+> /etc/default/grub
+>
+> /etc/grub.d/*
 
 ### Detecting other Operating Systems
 
-os-prober is piece of software that will help GRUB to detect other Operating Systems installed, such as Windows. It is part of the base, to make use of it run the following:
- os-prober
- update-grub
+os-prober is piece of software that will help GRUB to detect other Operating
+Systems installed, such as Windows. It is part of the base, to make use of it
+run the following:
+
+    os-prober
+    update-grub
