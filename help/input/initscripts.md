@@ -13,7 +13,7 @@ which brings the system up to state in which the user can operate, **init** is o
 of them and is Linux specifiec. But it can not handle the process on itself alone thus
 the **initscripts** assist it to do its job.
 
-**sysvinit** executes different programs in different stages (runlevels) which breaks down
+**init** executes different programs in different stages (runlevels) which breaks down
 the whole process so it fits different use cases (such as administration and repairs),
 there are four (4) scripts in that matter:
 
@@ -49,15 +49,15 @@ functionality.
 ## CONFIGURATION
 
 Configring the **initscripts** behavior is done via a single file - */etc/rc.conf*. More about
-that in its manual page [rc.conf](rc.conf.html). If you want to go deeper into this you will have to take
-a look at **boot**(7), **init**(8) and/or [inittab](inittab.html).
+that in its help page [rc.conf](rc.conf.html). If you want to go deeper into this you will have
+to take a look at **boot**(7), **init**(8) and/or [inittab](inittab.html).
 
 ## FUNCTIONS
 
 The */etc/rc.d/functions* file is used by all initialization scripts (see overview) to be source
 of all code that is shared among them, provides extra functions for the daemons and other
 third-party scripts and tools. The functions which are defind in */etc/rc.d/functions* are grouped
-in the format *<group_program_action>*, all of those do not contain special characters to avoid
+in the format *group_program_action*, all of those do not contain special characters to avoid
 confusion and to be easy to pick up.
 
 ### group
@@ -281,9 +281,9 @@ The following is example daemon script, use it as a reference when writing daemo
 
 ## RESOURCES
 
-Arch Linux initscripts: http://projects.archlinux.org/initscripts.git
+Arch Linux initscripts: <http://projects.archlinux.org/initscripts.git>
 
-Initscripts fork: https://bitbucket.org/smil3y/initscripts
+Initscripts fork: <https://bitbucket.org/smil3y/initscripts>
 
 ## SEE ALSO
 

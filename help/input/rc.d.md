@@ -75,9 +75,9 @@ Restarts all daemons which are not runned at startup and **sshd**:
 
 ## RESOURCES
 
-Arch Linux initscripts: http://projects.archlinux.org/initscripts.git
+Arch Linux initscripts: <http://projects.archlinux.org/initscripts.git>
 
-Initscripts fork: https://bitbucket.org/smil3y/initscripts
+Initscripts fork: <https://bitbucket.org/smil3y/initscripts>
 
 ## SEE ALSO
 

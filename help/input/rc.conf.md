@@ -117,9 +117,9 @@ Default: *sysklogd alsa dbus connmand bluetooth cupsd*
 
 ## RESOURCES
 
-Arch Linux initscripts: http://projects.archlinux.org/initscripts.git
+Arch Linux initscripts: <http://projects.archlinux.org/initscripts.git>
 
-Initscripts fork: https://bitbucket.org/smil3y/initscripts
+Initscripts fork: <https://bitbucket.org/smil3y/initscripts>
 
 ## SEE ALSO
 

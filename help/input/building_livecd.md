@@ -17,7 +17,7 @@ setup or remaster a LiveCD snapshot and build the software in chroot.
 ## Tools of the trade
 
 The tool you are going to use is builder. Its sources are located at
-https://bitbucket.org/smil3y/builder.it is a set of scripts to assist in
+<https://bitbucket.org/smil3y/builder>.it is a set of scripts to assist in
 building LiveCDs using profiles. The base profile is used as shared, meaning
 that files from it are used only if files in the profile you choosed at runtime
 don't exists in the profile directory. This is to minimize the impact on the
