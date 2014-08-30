@@ -54,9 +54,6 @@ class Widget(QtGui.QWidget):
         self.removeButton.setToolTip(self.tr('Remove selected package(s)'))
         self.removeButton.clicked.connect(self.targets_remove)
         self.targetsFilter = QtGui.QComboBox()
-        self.targetsFilter.addItems((self.tr('all'), self.tr('updates'), \
-            self.tr('local'), self.tr('candidates'), self.tr('unneeded')))
-        self.targetsFilter.addItems(database.remote_aliases())
         self.targetsFilter.setToolTip(self.tr('Set packages filter'))
         self.targetsFilter.currentIndexChanged.connect(self.refresh_targets)
         self.mainLayout.addLayout(self.secondLayout, 0, 0)
@@ -74,6 +71,12 @@ class Widget(QtGui.QWidget):
         self.setLayout(self.mainLayout)
 
         self.refresh_all()
+
+    def refresh_filters(self):
+        self.targetsFilter.clear()
+        self.targetsFilter.addItems((self.tr('all'), self.tr('updates'), \
+            self.tr('local'), self.tr('candidates'), self.tr('unneeded')))
+        self.targetsFilter.addItems(database.remote_aliases())
 
     def refresh_targets(self):
         ''' Refresh targets list view '''
@@ -138,6 +141,7 @@ class Widget(QtGui.QWidget):
     def refresh_all(self):
         ''' Refresh both targets view and buttons '''
         self.refresh_targets()
+        self.refresh_filters()
         self.refresh_buttons()
 
     def worker_started(self):
