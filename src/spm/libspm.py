@@ -873,8 +873,7 @@ class Source(object):
             regex = '(?:\\s|^)('
             # first item is null ('') because root ('/') is stripped
             for sfile in new_content[1:]:
-                full_file = os.path.join(ROOT_DIR, sfile)
-                if os.path.isdir(full_file):
+                if os.path.isdir(os.path.join(ROOT_DIR, sfile)):
                     continue
                 regex += '/' + re.escape(sfile) + '|'
             regex = regex.rstrip('|') + ')(?:\\s|$)'

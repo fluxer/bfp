@@ -79,12 +79,12 @@
         <translation>Мултимедиа</translation>
     </message>
     <message>
-        <location filename="package.py" line="217"/>
+        <location filename="package.py" line="221"/>
         <source>Package manager plugin</source>
         <translation>Плъгин за управление на пакетите </translation>
     </message>
     <message>
-        <location filename="package.py" line="231"/>
+        <location filename="package.py" line="235"/>
         <source>Package</source>
         <translation>Пакет</translation>
     </message>
@@ -623,22 +623,22 @@
         <translation>Текст (*.txt *.sh *.bash *.diff *.patch *.py *c *.h *.cpp *.hpp *.html *.pl);;Всички (*)</translation>
     </message>
     <message>
-        <location filename="package.py" line="82"/>
+        <location filename="package.py" line="85"/>
         <source>all</source>
         <translation>всички</translation>
     </message>
     <message>
-        <location filename="package.py" line="89"/>
+        <location filename="package.py" line="92"/>
         <source>local</source>
         <translation>локални</translation>
     </message>
     <message>
-        <location filename="package.py" line="96"/>
+        <location filename="package.py" line="99"/>
         <source>unneeded</source>
         <translation>ненужни</translation>
     </message>
     <message>
-        <location filename="package.py" line="91"/>
+        <location filename="package.py" line="94"/>
         <source>candidates</source>
         <translation>кандидати</translation>
     </message>
@@ -783,7 +783,7 @@
         <translation>Премахни избраните пакети</translation>
     </message>
     <message>
-        <location filename="package.py" line="60"/>
+        <location filename="package.py" line="57"/>
         <source>Set packages filter</source>
         <translation>Задай филтър за пакетите</translation>
     </message>
@@ -878,7 +878,7 @@
         <translation>Не е зададено съобщение</translation>
     </message>
     <message>
-        <location filename="package.py" line="84"/>
+        <location filename="package.py" line="87"/>
         <source>updates</source>
         <translation>обновления</translation>
     </message>

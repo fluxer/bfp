@@ -22,7 +22,7 @@ partitions.
 
 #### positional arguments
 
-    DEVICE               Pattern to search for in remote targets
+    DEVICE               Disk device to modify
 
 ### optional arguments
 
