@@ -18,7 +18,7 @@ class Widget(QtGui.QWidget):
 
         self.help_path = os.path.join(sys.prefix, 'share/help')
         # for testing purpose only!
-        # self.help_path = os.path.realpath('../../help')
+        self.help_path = os.path.realpath('../../help/output')
         self.mainLayout = QtGui.QGridLayout()
         self.secondLayout = QtGui.QHBoxLayout()
         self.findButton = QtGui.QPushButton(self.icon_find, '')
@@ -26,7 +26,7 @@ class Widget(QtGui.QWidget):
         self.findButton.clicked.connect(self.action_find)
         self.findButton.setShortcut(QtGui.QKeySequence(self.tr('CTRL+F')))
         self.helpBox = QtGui.QComboBox()
-        for spath in misc.list_files(self.help_path):
+        for spath in sorted(misc.list_files(self.help_path)):
             if spath.endswith('.html'):
                 self.helpBox.addItem(os.path.basename(spath))
         self.helpBox.setToolTip(self.tr('Set page to be displayed'))
@@ -49,6 +49,8 @@ class Widget(QtGui.QWidget):
         ''' Open local URL '''
         for spath in misc.list_files(self.help_path):
             if spath.endswith('/' + spage):
+                index = self.helpBox.findText(spage)
+                self.helpBox.setCurrentIndex(index)
                 return self.webView.setUrl(QtCore.QUrl.fromLocalFile(spath))
         QtGui.QMessageBox.critical(self, self.tr('Critical'), \
             self.tr('Help page not found: %s' % spage))
@@ -59,15 +61,15 @@ class Widget(QtGui.QWidget):
 
     def link_clicked(self, url):
         ''' Update the URL if a link on a web page is clicked '''
-        if url.toString().startswith('mailto:'):
+        surl = url.toString()
+        if surl.startswith('mailto:'):
             self.parent.plugins.plugin_open_with('mail', \
-                url.toString().replace('mailto:', ''))
+                surl.replace('mailto:', ''))
+            return
+        elif surl.startswith('file:///'):
+            self.help_open(surl.replace('file:///', ''))
             return
 
-        # on link to local help page change the current index of the chooser
-        index = self.helpBox.findText(os.path.basename(url.toString()))
-        if not index == -1:
-            self.helpBox.setCurrentIndex(index)
         self.webView.setUrl(url)
 
     def action_find(self):
@@ -84,7 +86,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'help'
-        self.version = "0.9.35 (f7385d6)"
+        self.version = "0.9.35 (2acb3b8)"
         self.description = self.tr('Help reader plugin')
         self.icon = general.get_icon('help-contents')
         self.widget = None

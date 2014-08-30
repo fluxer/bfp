@@ -90,7 +90,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'pdf'
-        self.version = "0.9.35 (f7385d6)"
+        self.version = "0.9.35 (2acb3b8)"
         self.description = self.tr('PDF viewer plugin')
         self.icon = general.get_icon('application-pdf')
         self.widget = None

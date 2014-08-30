@@ -1,1 +1,1 @@
-Ivailo Monev `xakepa10@gmail.com`
+Ivailo Monev <xakepa10@gmail.com>
