@@ -18,7 +18,7 @@ class Widget(QtGui.QWidget):
 
         self.help_path = os.path.join(sys.prefix, 'share/help')
         # for testing purpose only!
-        self.help_path = os.path.realpath('../../help/output')
+        # self.help_path = os.path.realpath('../../help/output')
         self.mainLayout = QtGui.QGridLayout()
         self.secondLayout = QtGui.QHBoxLayout()
         self.findButton = QtGui.QPushButton(self.icon_find, '')
@@ -63,12 +63,10 @@ class Widget(QtGui.QWidget):
         ''' Update the URL if a link on a web page is clicked '''
         surl = url.toString()
         if surl.startswith('mailto:'):
-            self.parent.plugins.plugin_open_with('mail', \
+            return self.parent.plugins.plugin_open_with('mail', \
                 surl.replace('mailto:', ''))
-            return
         elif surl.startswith('file:///'):
-            self.help_open(surl.replace('file:///', ''))
-            return
+            return self.help_open(surl.replace('file:///', ''))
 
         self.webView.setUrl(url)
 
