@@ -43,12 +43,13 @@ cmd mount -t devtmpfs dev /dev -o mode=0755,nosuid
 msg "Parsing cmdline options..."
 hooks="$(ls /hooks)"
 init="/sbin/init"
+root=""
 for arg in $(cat /proc/cmdline);do
     case "$arg" in
-        hooks=*) hooks="${arg##*=}"
+        hooks=*) hooks="${arg#*=}"
                  hooks="${hooks//,/ }" ;;
-        init=*) init="${arg##*=}" ;;
-        root=*) root_device="${arg##*=}" ;;
+        init=*) init="${arg#*=}" ;;
+        root=*) root="${arg#*=}" ;;
         shell) rescue_shell ;;
     esac
 done
@@ -62,11 +63,17 @@ for hook in $hooks;do
     fi
 done
 
-if [ -e "$root_device" ];then
+case "$root" in
+      /dev/*) device="$root" ;;
+      UUID=*) device="/dev/disk/by-uuid/${root#*=}"  ;;
+      LABEL=*) device="/dev/disk/by-label/${root#*=}" ;;
+esac
+
+if [ -e "$device" ];then
     msg "Checking the root device..."
-    cmd fsck -M -T "$root_device"
+    cmd fsck -M -T "$device"
     msg "Mounting the root filesystem..."
-    cmd mount -o ro "$root_device" /newroot
+    cmd mount -o ro "$device" /newroot
 fi
 
 # a hook could have mounted root
