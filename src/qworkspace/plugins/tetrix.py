@@ -497,7 +497,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'tetrix'
-        self.version = "0.9.35 (2acb3b8)"
+        self.version = "0.9.35 (9efc4b1)"
         self.description = self.tr('Tetrix game plugin')
         self.icon = general.get_icon('applications-games')
         self.widget = None

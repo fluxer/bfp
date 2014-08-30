@@ -603,7 +603,7 @@
         <translation>Ново име:</translation>
     </message>
     <message>
-        <location filename="help.py" line="53"/>
+        <location filename="help.py" line="55"/>
         <source>Help page not found: %s</source>
         <translation>Страница за помощ не е намерена: %s</translation>
     </message>

@@ -9,7 +9,7 @@ from PyQt4 import QtCore, QtGui
 import sys, os, gc, libworkspace, libmisc
 
 # prepare for lift-off
-app_version = "0.9.35 (2acb3b8)"
+app_version = "0.9.35 (9efc4b1)"
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
 ui = qworkspace_ui.Ui_MainWindow()
@@ -25,6 +25,13 @@ ui.window = MainWindow
 def setLook():
     general.set_style(app)
 setLook()
+
+# setup fixed window size
+desktop = app.desktop()
+def setSize():
+    MainWindow.setFixedSize(desktop.screenGeometry().size())
+setSize()
+desktop.resized.connect(setSize)
 
 # setup translator
 def setTranslator():
@@ -58,7 +65,6 @@ if os.path.isfile(settings.settings.fileName()):
 
 # show window and run application
 MainWindow.showMaximized()
-MainWindow.setFixedSize(app.desktop().screenGeometry().size())
 r = app.exec_()
 
 # unload all plugins

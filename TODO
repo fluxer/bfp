@@ -32,8 +32,6 @@ http://www.linuxfromscratch.org/blfs/view/systemd/postlfs/initramfs.html
   - time accessed
   - associated with plugin?
  * UI size policies polishment
- * Figure out a way to make the main window fixed but resizable on
-   display resolution change
  * Session manager (save/restore state), see http://qt-project.org/doc/qt-4.8/session.html
  * Notify on low disk space
  * WWW plugin bookmarks cleanup and possibly configurable:
