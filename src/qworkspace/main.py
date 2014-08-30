@@ -58,7 +58,7 @@ if os.path.isfile(settings.settings.fileName()):
 
 # show window and run application
 MainWindow.showMaximized()
-MainWindow.setFixedSize(MainWindow.size())
+MainWindow.setFixedSize(app.desktop().screenGeometry().size())
 r = app.exec_()
 
 # unload all plugins
