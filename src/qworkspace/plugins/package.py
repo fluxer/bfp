@@ -172,7 +172,7 @@ class Widget(QtGui.QWidget):
     def targets_sync(self):
         ''' Sync repositories '''
         try:
-            m = libspm.Repo(libspm.REPOSITORIES, True, True, False)
+            m = libspm.Repo(libspm.REPOSITORIES, True, True, False, True)
             self.worker(m.main)
         except Exception as detail:
             self.parent.plugins.notify_critical(str(detail))
