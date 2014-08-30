@@ -113,6 +113,8 @@ variable with fallback to Vim.
     -N, --note            Check for FIXME/TODO note(s)
     -v, --variables       Check for essential variables
     -t, --triggers        Check for unnecessary triggers invocation(s)
+    -u, --users           Check for user(s) being added but not deleted
+    -g, --groups          Check for group(s) being added but not deleted
     -a, --all             Perform all checks
 
 ### MERGE MODE

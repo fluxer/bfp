@@ -168,7 +168,8 @@ class Clean(object):
 
 class Dist(object):
     ''' Distribute ports '''
-    def __init__(self, targets, do_sources=False, do_clean=False, directory=os.getcwd()):
+    def __init__(self, targets, do_sources=False, do_clean=False, \
+        directory=os.getcwd()):
         self.targets = targets
         self.do_sources = do_sources
         self.do_clean = do_clean
@@ -254,8 +255,8 @@ class Dist(object):
 
 class Lint(object):
     ''' Check sanity of local targets '''
-    def __init__(self, targets, man=False, udev=False, symlink=False, doc=False,
-        module=False, footprint=False, builddir=False):
+    def __init__(self, targets, man=False, udev=False, symlink=False, \
+        doc=False, module=False, footprint=False, builddir=False):
         self.targets = targets
         self.man = man
         self.udev = udev
@@ -322,8 +323,9 @@ class Lint(object):
 
 class Sane(object):
     ''' Check sanity of SRCBUILDs '''
-    def __init__(self, targets, enable=False, disable=False, null=False,
-        maintainer=False, note=False, variables=False, triggers=False):
+    def __init__(self, targets, enable=False, disable=False, null=False, \
+        maintainer=False, note=False, variables=False, triggers=False, \
+        users=False, groups=False):
         self.targets = targets
         self.enable = enable
         self.disable = disable
@@ -332,6 +334,8 @@ class Sane(object):
         self.note = note
         self.variables = variables
         self.triggers = triggers
+        self.users = users
+        self.groups = groups
 
     def main(self):
         ''' Looks for target match and then execute action for every target '''
@@ -380,6 +384,16 @@ class Sane(object):
                     triggers += '|glib-compile-schemas|depmod|install-info|gtk-update-icon-cache'
                     if misc.file_search(triggers, target_srcbuild, escape=False):
                         message.sub_warning('Possible unnecessary triggers invocation(s)')
+
+                if self.users:
+                    if misc.file_search('useradd|adduser', target_srcbuild, escape=False) \
+                        and not misc.file_search('userdel|deluser', target_srcbuild, escape=False):
+                        message.sub_warning('User(s) added but not deleted')
+
+                if self.groups:
+                    if misc.file_search('groupadd|addgroup', target_srcbuild, escape=False) \
+                        and not misc.file_search('groupdel|delgroup', target_srcbuild, escape=False):
+                        message.sub_warning('Group(s) added but not deleted')
 
 
 class Merge(object):
@@ -546,6 +560,10 @@ try:
         help='Check for essential variables')
     sane_parser.add_argument('-t', '--triggers', action='store_true', \
         help='Check for unnecessary triggers invocation(s)')
+    sane_parser.add_argument('-u', '--users', action='store_true', \
+        help='Check for user(s) being added but not deleted')
+    sane_parser.add_argument('-g', '--groups', action='store_true', \
+        help='Check for group(s) being added but not deleted')
     sane_parser.add_argument('-a', '--all', action='store_true', \
         help='Perform all checks')
     sane_parser.add_argument('TARGETS', nargs='+', type=str, \
@@ -639,9 +657,12 @@ try:
             ARGS.note = True
             ARGS.variables = True
             ARGS.triggers = True
+            ARGS.users = True
+            ARGS.groups = True
 
         m = Sane(ARGS.TARGETS, ARGS.enable, ARGS.disable, ARGS.null, \
-            ARGS.maintainer, ARGS.note, ARGS.variables, ARGS.triggers)
+            ARGS.maintainer, ARGS.note, ARGS.variables, ARGS.triggers, \
+            ARGS.users, ARGS.groups)
         m.main()
 
     elif ARGS.mode == 'merge':
