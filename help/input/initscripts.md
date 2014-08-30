@@ -261,23 +261,29 @@ The following is example daemon script, use it as a reference when writing daemo
 
 ## FILES
 
-*/etc/rc.sysinit*
-    System initialization script
+### /etc/rc.sysinit
 
-*/etc/rc.wait*
-    Wait script
+System initialization script
 
-*/etc/rc.shutdown*
-    System shutdown (halt or reboot) script
+### /etc/rc.wait
 
-*/etc/rc.d/functions*
-    Common functions and share-code script
+Wait script
 
-*/etc/rc.d/functions.d*
-    Directory containing available functions on the system
+### /etc/rc.shutdown
 
-*/etc/rc.d*
-    Directory containing available daemons on the system
+System shutdown (halt or reboot) script
+
+### /etc/rc.d/functions
+
+Common functions and share-code script
+
+### /etc/rc.d/functions.d
+
+Directory containing available functions on the system
+
+### /etc/rc.d
+
+Directory containing available daemons on the system
 
 ## RESOURCES
 
@@ -285,13 +291,18 @@ Arch Linux initscripts: <http://projects.archlinux.org/initscripts.git>
 
 Initscripts fork: <https://bitbucket.org/smil3y/initscripts>
 
+## AUTHOR
+
+Written by Sebastien Luttringer and Dave Reisner. Forked by Ivailo Monev.
+
+## COPYRIGHT
+
+Copyright (c) 2012-2014 Ivailo Monev licensed through the GPLv2 License
+
+
 ## SEE ALSO
 
 **boot**(7), **init**(8), [inittab](inittab.html), **mount**(8), **sysctl**(8), **udev**(7),
 **modprobe**(8), **hwclock**(8), **fsck**(8), **urandom**(8), **swapon**(8),
 **loadkeys**(1), **setfont**(8), **hostname**(1), **ip**(8), **killall5**(8),
 [rc.conf](rc.conf.html), [rc.d](rc.d.html), [tmpfiles](tmpfiles.html), [tmpfiles.d](tmpfiles.d.html)
-
-## AUTHOR
-
-Written by Sebastien Luttringer and Dave Reisner. Forked by Ivailo Monev.

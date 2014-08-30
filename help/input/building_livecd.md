@@ -70,6 +70,7 @@ Quick notes:
 ### Building
 
 After you are fine with the changes you've made build an ISO image:
+
     sudo ./build.sh custom -d -b
 
 The final ISO image you can find in the main builder directory.
@@ -92,4 +93,5 @@ Then, you can chroot into the extracted filesystem:
     sudo ./build.sh base -c
 
 Once you are done with the customization rebuild the ISO image:
+
     sudo ./build.sh base -b

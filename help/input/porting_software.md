@@ -134,10 +134,13 @@ make sure that the dependencies are satisfied and optionally check for
 
 Short URLs for Sourceforge.net downloads as follows:
 
-http://prdownloads.sourceforge.net/project/file
-http://downloads.sourceforge.net/project/file
+> http://prdownloads.sourceforge.net/project/file
+>
+> http://downloads.sourceforge.net/project/file
 
-Example: http://prdownloads.sourceforge.net/lxde/gpicview-0.2.3.tar.gz
+Example:
+
+> http://prdownloads.sourceforge.net/lxde/gpicview-0.2.3.tar.gz
 
 Prefering XZ and Bzip2 tarballs over gzip is recommended to reduce the
 bandwidth required for fetching sources.

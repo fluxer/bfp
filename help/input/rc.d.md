@@ -67,11 +67,13 @@ Restarts all daemons which are not runned at startup and **sshd**:
 
 ## FILES
 
-*/etc/rc.d*
-    Directory containing available daemons on the system
+### /etc/rc.d
 
-*/run/daemons*
-    Directory containing state of running daemons
+Directory containing available daemons on the system
+
+### /run/daemons
+
+Directory containing state of running daemons
 
 ## RESOURCES
 
@@ -79,10 +81,14 @@ Arch Linux initscripts: <http://projects.archlinux.org/initscripts.git>
 
 Initscripts fork: <https://bitbucket.org/smil3y/initscripts>
 
-## SEE ALSO
-
-[initscripts](initscripts.html), [rc.conf](rc.conf.html)
-
 ## AUTHOR
 
 Written by Sebastien Luttringer and Dave Reisner. Forked by Ivailo Monev.
+
+## COPYRIGHT
+
+Copyright (c) 2012-2014 Ivailo Monev licensed through the GPLv2 License
+
+## SEE ALSO
+
+[initscripts](initscripts.html), [rc.conf](rc.conf.html)

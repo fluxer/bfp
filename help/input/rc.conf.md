@@ -112,8 +112,9 @@ Default: *sysklogd alsa dbus connmand bluetooth cupsd*
 
 ## FILES
 
-*/etc/rc.conf*
-    System configuration file for Initscripts.
+### /etc/rc.conf
+
+System configuration file for Initscripts.
 
 ## RESOURCES
 
@@ -121,10 +122,15 @@ Arch Linux initscripts: <http://projects.archlinux.org/initscripts.git>
 
 Initscripts fork: <https://bitbucket.org/smil3y/initscripts>
 
-## SEE ALSO
-
-**hwclock**(8), **loadkeys**(1), **setfont**(8), **modprobe.d**(5), **hostname**(1), [initscripts](initscripts.html), [rc.d](rc.d.html)
-
 ## AUTHOR
 
 Written by Dieter Plaetinck, Tom Gundersen and others. Forked by Ivailo Monev.
+
+## COPYRIGHT
+
+Copyright (c) 2012-2014 Ivailo Monev licensed through the GPLv2 License
+
+## SEE ALSO
+
+**hwclock**(8), **loadkeys**(1), **setfont**(8), **modprobe.d**(5),
+**hostname**(1), [initscripts](initscripts.html), [rc.d](rc.d.html)

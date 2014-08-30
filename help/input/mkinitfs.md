@@ -30,6 +30,8 @@ MkInitfs is a initial RAM filesystem image maker.
     --debug               Enable debug messages
     --version             Show MkInitfs version and exit
 
+
+
 ## EXAMPLES
 
 Create image of currently running kernel:
@@ -39,6 +41,25 @@ Create image of currently running kernel:
 Create image of kernel other than the one running:
 
     mkinitfs -k=3.12.24
+
+## FILES
+
+### /etc/mkinitfs/files/*.conf
+
+Files specifying what to be included in the image, best suited for including
+binaries
+
+### /etc/mkinitfs/hooks/*
+
+Scripts that are included and executed in the initramfs
+
+### /etc/mkinitfs/root/*
+
+Base overlay for the initramfs image structure
+
+### /etc/mkinitfs/files/*.conf
+
+Files cpecifying what modules should be included in the image
 
 ## EXIT STATUS
 
