@@ -99,6 +99,7 @@ class Plugin(QtCore.QObject):
         self.parent.plugins.mime_register('video/3gp', self.name)
         self.parent.plugins.mime_register('video/mpeg', self.name)
         self.parent.plugins.mime_register('video/mp4', self.name)
+        self.parent.plugins.mime_register('application/x-ogg', self.name)
         self.parent.plugins.mime_register('application/ogg', self.name)
 
     def open(self, spath):
