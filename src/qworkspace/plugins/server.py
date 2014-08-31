@@ -18,8 +18,8 @@ class Daemon(QtCore.QThread):
         ''' Monitor block devices state '''
         try:
             os.chdir(self.path)
-            Handler = SimpleHTTPServer.SimpleHTTPRequestHandler
-            self.httpd = SocketServer.TCPServer((self.address, self.port), Handler)
+            handler = SimpleHTTPServer.SimpleHTTPRequestHandler
+            self.httpd = SocketServer.TCPServer((self.address, self.port), handler)
             self.httpd.serve_forever()
         except Exception as detail:
             self.emit(QtCore.SIGNAL('failed'), str(detail))
@@ -34,22 +34,22 @@ class Widget(QtGui.QWidget):
         self.name = 'server'
 
         self.mainLayout = QtGui.QGridLayout()
-        self.addressEdit = QtGui.QLineEdit()
-        self.addressEdit.setToolTip('Address')
-        self.addressEdit.setPlaceholderText('Address')
+        self.addressEdit = QtGui.QLineEdit() # FIXME: store in settings
+        self.addressEdit.setToolTip(self.tr('Address'))
+        self.addressEdit.setPlaceholderText(self.tr('Address'))
         self.portBox = QtGui.QSpinBox()
         self.portBox.setMaximum(99999)
         self.portBox.setValue(8000) # FIXME: store in settings
-        self.portBox.setToolTip('Port')
+        self.portBox.setToolTip(self.tr('Port'))
         self.directoryEdit = QtGui.QLineEdit()
-        self.directoryEdit.setToolTip('Directory')
-        self.directoryEdit.setPlaceholderText('Directory')
+        self.directoryEdit.setToolTip(self.tr('Directory to serve'))
+        self.directoryEdit.setPlaceholderText(self.tr('Directory to serve'))
         self.startButton = QtGui.QPushButton(general.get_icon('system-run'), '')
-        self.startButton.setToolTip('Start')
+        self.startButton.setToolTip(self.tr('Start server'))
         self.startButton.clicked.connect(self.server_start)
         self.stopButton = QtGui.QPushButton(general.get_icon('process-stop'), '')
         self.stopButton.setEnabled(False)
-        self.stopButton.setToolTip('Stop')
+        self.stopButton.setToolTip(self.tr('Stop server'))
         self.stopButton.clicked.connect(self.server_stop)
         self.mainLayout.addWidget(self.addressEdit)
         self.mainLayout.addWidget(self.portBox)
@@ -75,9 +75,12 @@ class Widget(QtGui.QWidget):
         if not spath:
             spath = self.directoryEdit.text()
         try:
-            self.daemon = Daemon(self.parent, self.addressEdit.text(), self.portBox.value(), spath)
-            self.connect(self.daemon, QtCore.SIGNAL('failed'), self.parent.plugins.notify_critical)
-            self.connect(self.daemon, QtCore.SIGNAL('failed'), self.server_stop)
+            self.daemon = Daemon(self.parent, self.addressEdit.text(), \
+                self.portBox.value(), spath)
+            self.connect(self.daemon, QtCore.SIGNAL('failed'), \
+                self.parent.plugins.notify_critical)
+            self.connect(self.daemon, QtCore.SIGNAL('failed'), \
+                self.server_stop)
             self.daemon.start()
             self.startButton.setEnabled(False)
             self.stopButton.setEnabled(True)
@@ -98,7 +101,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'server'
-        self.version = "0.9.35 (abe5fdc)"
+        self.version = "0.9.36 (c166360)"
         self.description = self.tr('Server plugin')
         self.icon = general.get_icon('applications-geography')
         self.widget = None
