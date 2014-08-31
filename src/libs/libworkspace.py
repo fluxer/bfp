@@ -36,6 +36,13 @@ class Settings(object):
             return False
         return True
 
+    def get_int(self, svalue, bfallback=0):
+        ''' Get settings value as integer '''
+        sresult = self.get(svalue)
+        if not sresult:
+            return int(bfallback)
+        return int(sresult)
+
     def set(self, svariable, svalue):
         ''' Write settings value '''
         self.settings.sync()

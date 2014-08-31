@@ -3,6 +3,7 @@
 from PyQt4 import QtCore, QtGui
 import os, SimpleHTTPServer, SocketServer, libworkspace
 general = libworkspace.General()
+settings = libworkspace.Settings()
 
 
 class Daemon(QtCore.QThread):
@@ -34,14 +35,16 @@ class Widget(QtGui.QWidget):
         self.name = 'server'
 
         self.mainLayout = QtGui.QGridLayout()
-        self.addressEdit = QtGui.QLineEdit() # FIXME: store in settings
+        self.addressEdit = QtGui.QLineEdit()
+        self.addressEdit.setText(settings.get('server/address', ''))
         self.addressEdit.setToolTip(self.tr('Address'))
         self.addressEdit.setPlaceholderText(self.tr('Address'))
         self.portBox = QtGui.QSpinBox()
         self.portBox.setMaximum(99999)
-        self.portBox.setValue(8000) # FIXME: store in settings
+        self.portBox.setValue(settings.get_int('server/port', 8000))
         self.portBox.setToolTip(self.tr('Port'))
         self.directoryEdit = QtGui.QLineEdit()
+        self.directoryEdit.setText(settings.get('server/directory', ''))
         self.directoryEdit.setToolTip(self.tr('Directory to serve'))
         self.directoryEdit.setPlaceholderText(self.tr('Directory to serve'))
         self.startButton = QtGui.QPushButton(general.get_icon('system-run'), '')
@@ -124,6 +127,9 @@ class Plugin(QtCore.QObject):
         if not index:
             index = self.parent.tabWidget.currentIndex()
         if self.widget:
+            settings.set('server/address', self.widget.addressEdit.text())
+            settings.set('server/port', self.widget.portBox.value())
+            settings.set('server/directory', self.widget.directoryEdit.text())
             self.widget.deleteLater()
             self.widget = None
             self.parent.tabWidget.removeTab(index)
