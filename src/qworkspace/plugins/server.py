@@ -12,14 +12,15 @@ class Daemon(QtCore.QThread):
         self.address = address
         self.port = port
         self.path = path
+        self.httpd = None
 
     def run(self):
         ''' Monitor block devices state '''
         try:
             os.chdir(self.path)
             Handler = SimpleHTTPServer.SimpleHTTPRequestHandler
-            httpd = SocketServer.TCPServer((self.address, self.port), Handler)
-            httpd.serve_forever()
+            self.httpd = SocketServer.TCPServer((self.address, self.port), Handler)
+            self.httpd.serve_forever()
         except Exception as detail:
             self.emit(QtCore.SIGNAL('failed'), str(detail))
 
@@ -47,6 +48,7 @@ class Widget(QtGui.QWidget):
         self.startButton.setToolTip('Start')
         self.startButton.clicked.connect(self.server_start)
         self.stopButton = QtGui.QPushButton(general.get_icon('process-stop'), '')
+        self.stopButton.setEnabled(False)
         self.stopButton.setToolTip('Stop')
         self.stopButton.clicked.connect(self.server_stop)
         self.mainLayout.addWidget(self.addressEdit)
@@ -83,6 +85,8 @@ class Widget(QtGui.QWidget):
             self.parent.plugins.notify_critical(str(detail))
 
     def server_stop(self):
+        if self.daemon.httpd:
+            self.daemon.httpd.shutdown()
         self.daemon.quit()
         self.daemon = None
         self.startButton.setEnabled(True)
