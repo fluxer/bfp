@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="bg_BG" sourcelanguage="">
+<!DOCTYPE TS>
+<TS version="2.0" language="bg_BG">
 <context>
     <name>Daemon</name>
     <message>
@@ -251,12 +252,12 @@
     <message>
         <location filename="server.py" line="98"/>
         <source>Server plugin</source>
-        <translation type="unfinished"></translation>
+        <translation>Сървър плъгин</translation>
     </message>
     <message>
         <location filename="server.py" line="112"/>
         <source>Server</source>
-        <translation type="unfinished"></translation>
+        <translation>Сървър</translation>
     </message>
 </context>
 <context>
@@ -955,12 +956,12 @@
     <message>
         <location filename="server.py" line="66"/>
         <source>No directory entered</source>
-        <translation type="unfinished"></translation>
+        <translation>Не е зададена директория</translation>
     </message>
     <message>
         <location filename="server.py" line="70"/>
         <source>The path entered is not directory</source>
-        <translation type="unfinished"></translation>
+        <translation>Зададеният път не е директория</translation>
     </message>
 </context>
 </TS>
