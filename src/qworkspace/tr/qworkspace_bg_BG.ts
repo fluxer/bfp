@@ -74,7 +74,7 @@
         <translation>Изображение</translation>
     </message>
     <message>
-        <location filename="multimedia.py" line="107"/>
+        <location filename="multimedia.py" line="108"/>
         <source>Multimedia</source>
         <translation>Мултимедиа</translation>
     </message>
@@ -248,6 +248,16 @@
         <source>PDF</source>
         <translation>ПДФ</translation>
     </message>
+    <message>
+        <location filename="server.py" line="98"/>
+        <source>Server plugin</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="server.py" line="112"/>
+        <source>Server</source>
+        <translation type="unfinished"></translation>
+    </message>
 </context>
 <context>
     <name>TetrixBoard</name>
@@ -313,7 +323,7 @@
         <translation>Намери</translation>
     </message>
     <message>
-        <location filename="network.py" line="83"/>
+        <location filename="server.py" line="70"/>
         <source>Critical</source>
         <translation>Критично</translation>
     </message>
@@ -941,6 +951,16 @@
         <location filename="pdf.py" line="61"/>
         <source>PDF (*.pdf);;All (*)</source>
         <translation>ПДФ (*.pdf);;Всички (*)</translation>
+    </message>
+    <message>
+        <location filename="server.py" line="66"/>
+        <source>No directory entered</source>
+        <translation type="unfinished"></translation>
+    </message>
+    <message>
+        <location filename="server.py" line="70"/>
+        <source>The path entered is not directory</source>
+        <translation type="unfinished"></translation>
     </message>
 </context>
 </TS>

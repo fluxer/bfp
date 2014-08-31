@@ -23,6 +23,7 @@ all: clean
 	$(NUITKA) --module plugins/plugins.py
 	$(NUITKA) --module plugins/quit.py
 	$(NUITKA) --module plugins/screenshot.py
+	$(NUITKA) --module plugins/server.py
 	$(NUITKA) --module plugins/settings.py
 	$(NUITKA) --module plugins/storage.py
 	$(NUITKA) --module plugins/terminal.py
@@ -30,7 +31,7 @@ all: clean
 	$(NUITKA) --module plugins/www.py
 	$(STRIP) main.exe archive.so calendar.so download.so editor.so \
 		help.so image.so mail.so mixer.so multimedia.so network.so \
-		package.so pdf.so plugins.so quit.so screenshot.so \
+		package.so pdf.so plugins.so quit.so screenshot.so server.so \
 		settings.so storage.so terminal.so tetrix.so www.so
 
 check:

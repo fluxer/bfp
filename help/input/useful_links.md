@@ -60,6 +60,8 @@ http://www.linuxfromscratch.org/blfs/view/svn/longindex.html
 
 http://www.linuxfromscratch.org/blfs/view/svn/introduction/beyond.html
 
+http://www.linuxfromscratch.org/blfs/view/systemd/postlfs/initramfs.html
+
 http://cblfs.cross-lfs.org/index.php/Main_Page
 
 http://wiki.gentoo.org/wiki/Clang
