@@ -378,11 +378,16 @@ class Sane(object):
                     # TODO: check for arrays defined as strings
 
                 if self.triggers:
-                    triggers = 'ldconfig|mandb|update-desktop-database|update-mime-database'
-                    triggers += '|xdg-icon-resource|gio-querymodules|pango-querymodules'
-                    triggers += '|gtk-query-immodules-2.0|gtk-query-immodules-3.0|gdk-pixbuf-query-loaders'
-                    triggers += '|glib-compile-schemas|depmod|install-info|gtk-update-icon-cache'
-                    if misc.file_search(triggers, target_srcbuild, escape=False):
+                    regex = '(?:\\s|^)('
+                    for trigger in ('ldconfig', 'mandb', 'update-desktop-database', \
+                        'update-mime-database', 'xdg-icon-resource', 'depmod', \
+                        'gio-querymodules', 'pango-querymodules', \
+                        'install-info', 'gtk-query-immodules-2.0', \
+                        'gtk-query-immodules-3.0', 'gdk-pixbuf-query-loaders', \
+                        'glib-compile-schemas', 'gtk-update-icon-cache'):
+                        regex += trigger + '|'
+                    regex = regex[:-1] + ')(?:\\s|$)'
+                    if misc.file_search(regex, target_srcbuild, escape=False):
                         message.sub_warning('Possible unnecessary triggers invocation(s)')
 
                 if self.users:
