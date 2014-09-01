@@ -5,7 +5,7 @@ spm-tools - Source Package Manager Tools
 ## SYNOPSIS
 
     spm-tools [-h] [--debug] [--version]
-        {dist,edit,lint,merge,sane,clean,check,which,pack} ...
+        {dist,edit,lint,merge,sane,clean,check,which,pack,pkg} ...
 
 ## DESCRIPTION
 
@@ -149,6 +149,24 @@ variable with fallback to Vim.
 #### positional arguments
 
     TARGETS               Targets to apply actions on
+
+#### optional arguments
+
+    -h, --help            Show this help message and exit
+    -d DIRECTORY,
+    --directory DIRECTORY Set output directory
+
+### PKG MODE
+
+#### positional arguments
+
+    TARGETS               Targets to apply actions on
+
+#### optional arguments
+
+    -h, --help            Show this help message and exit
+    -d DIRECTORY,
+    --directory DIRECTORY Set output directory
 
 #### optional arguments
 

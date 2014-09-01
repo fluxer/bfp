@@ -487,6 +487,56 @@ class Pack(object):
                 message.sub_info('Compressing', target_packfile)
                 misc.archive_compress(database.local_footprint(target).splitlines(), target_packfile)
 
+class Pkg(object):
+    def __init__(self, targets, directory=os.getcwd()):
+        self.targets = targets
+        self.directory = directory
+        self.GIT_DIRS = (
+            '/svntogit/packages.git/plain/%s/trunk',
+            '/svntogit/community.git/plain/%s/trunk'
+        )
+        self.GIT_URL = 'http://projects.archlinux.org'
+
+
+    def get_git_links(self, pkgname):
+        """Search the Git interface on archlinux.org."""
+        for d in self.GIT_DIRS:
+            url = self.GIT_URL + d % pkgname
+            try:
+                f = urllib2.urlopen(url)
+                for line in f:
+                    m = re.search(r"href='(.+?)'>(.+?)<".encode('utf-8'), line)
+                    if m:
+                        href = m.group(1).decode()
+                        name = m.group(2).decode()
+                        if name[:2] != '..':
+                            yield self.GIT_URL + href, name
+                f.close()
+                return
+            except urllib2.HTTPError as e:
+                if e.code != 404:
+                    sys.stderr.write('HTTP error: %s %s (%s)' % \
+                        (e.code, e.msg, e.url))
+                    sys.exit(1)
+
+    def main(self):
+        for target in self.targets:
+            urls = list(self.get_git_links(target))
+            if urls:
+                message.sub_info('Fetching package files', target)
+                message.sub_debug('Web webpage', os.path.dirname(urls[0][0]))
+                pkgdir = os.path.join(self.directory, target)
+                if not os.path.isdir(pkgdir):
+                    os.makedirs(pkgdir)
+                for href, name in urls:
+                    message.sub_debug('Retrieving', href)
+                    misc.fetch(href, os.path.join(pkgdir, name))
+                self.targets.remove(target)
+
+        if self.targets:
+            for target in self.targets:
+                message.sub_critical('Target not found', target)
+
 try:
     EUID = os.geteuid()
 
@@ -589,6 +639,12 @@ try:
     pack_parser.add_argument('TARGETS', nargs='+', type=str, \
         help='Targets to apply actions on')
 
+    pkg_parser = subparsers.add_parser('pkg')
+    pkg_parser.add_argument('-d', '--directory', type=str, \
+        default=os.getcwd(), help='Set output directory')
+    pkg_parser.add_argument('TARGETS', nargs='+', type=str, \
+        help='Targets to apply actions on')
+
     parser.add_argument('--debug', nargs=0, action=OverrideDebug, \
         help='Enable debug messages')
     parser.add_argument('--version', action='version', \
@@ -688,6 +744,12 @@ try:
         message.info('Runtime information')
         message.sub_info('TARGETS', ARGS.TARGETS)
         m = Pack(ARGS.TARGETS, ARGS.directory)
+        m.main()
+
+    elif ARGS.mode == 'pkg':
+        message.info('Runtime information')
+        message.sub_info('TARGETS', ARGS.TARGETS)
+        m = Pkg(ARGS.TARGETS, ARGS.arch, ARGS.directory)
         m.main()
 
 except ConfigParser.Error as detail:
