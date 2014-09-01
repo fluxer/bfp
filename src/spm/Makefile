@@ -7,15 +7,15 @@ all: bump clean
 	$(STRIP) libspm.so spm.exe tools.exe
 
 install:
-	$(INSTALL) -dm755 $(DESTDIR)$(SBINDIR) $(DESTDIR)$(SITEDIR)
-	$(INSTALL) -m755 spm.exe $(DESTDIR)$(SBINDIR)/spm
-	$(INSTALL) -m755 tools.exe $(DESTDIR)$(SBINDIR)/spm-tools
+	$(INSTALL) -dm755 $(DESTDIR)$(BINDIR) $(DESTDIR)$(SITEDIR)
+	$(INSTALL) -m755 spm.exe $(DESTDIR)$(BINDIR)/spm
+	$(INSTALL) -m755 tools.exe $(DESTDIR)$(BINDIR)/spm-tools
 	$(INSTALL) -m644 libspm.so $(DESTDIR)$(SITEDIR)/libspm.so
 
 uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libspm.so
-	$(RM) $(DESTDIR)$(SBINDIR)/spm
-	$(RM) $(DESTDIR)$(SBINDIR)/spm-tools
+	$(RM) $(DESTDIR)$(BINDIR)/spm
+	$(RM) $(DESTDIR)$(BINDIR)/spm-tools
 
 clean:
 	$(RM) -r *.build/ *.so *.exe
