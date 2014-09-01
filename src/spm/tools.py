@@ -515,27 +515,27 @@ class Pkg(object):
                 return
             except urllib2.HTTPError as e:
                 if e.code != 404:
-                    sys.stderr.write('HTTP error: %s %s (%s)' % \
-                        (e.code, e.msg, e.url))
-                    sys.exit(1)
+                    raise
 
     def main(self):
+        not_found = []
         for target in self.targets:
             urls = list(self.get_git_links(target))
             if urls:
                 message.sub_info('Fetching package files', target)
                 message.sub_debug('Web webpage', os.path.dirname(urls[0][0]))
                 pkgdir = os.path.join(self.directory, target)
-                if not os.path.isdir(pkgdir):
-                    os.makedirs(pkgdir)
+                misc.dir_create(pkgdir)
                 for href, name in urls:
                     message.sub_debug('Retrieving', href)
                     misc.fetch(href, os.path.join(pkgdir, name))
-                self.targets.remove(target)
+            else:
+                not_found.append(target)
 
-        if self.targets:
-            for target in self.targets:
+        if not_found:
+            for target in not_found:
                 message.sub_critical('Target not found', target)
+            sys.exit(2)
 
 try:
     EUID = os.geteuid()
@@ -687,6 +687,7 @@ try:
     elif ARGS.mode == 'lint':
         message.info('Runtime information')
         message.sub_info('TARGETS', ARGS.TARGETS)
+        message.sub_info('TARGETS', ARGS.TARGETS)
         message.info('Poking locals...')
         if ARGS.all:
             ARGS.man = True
@@ -742,14 +743,16 @@ try:
 
     elif ARGS.mode == 'pack':
         message.info('Runtime information')
+        message.sub_info('DIRECTORY', ARGS.directory)
         message.sub_info('TARGETS', ARGS.TARGETS)
         m = Pack(ARGS.TARGETS, ARGS.directory)
         m.main()
 
     elif ARGS.mode == 'pkg':
         message.info('Runtime information')
+        message.sub_info('DIRECTORY', ARGS.directory)
         message.sub_info('TARGETS', ARGS.TARGETS)
-        m = Pkg(ARGS.TARGETS, ARGS.arch, ARGS.directory)
+        m = Pkg(ARGS.TARGETS, ARGS.directory)
         m.main()
 
 except ConfigParser.Error as detail:
