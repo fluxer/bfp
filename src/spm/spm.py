@@ -333,7 +333,12 @@ try:
 
     if ARGS.mode == 'repo':
         message.info('Runtime information')
+        message.sub_info('CLEAN', ARGS.clean)
+        message.sub_info('SYNC', ARGS.sync)
+        message.sub_info('UPDATE', ARGS.update)
+        message.sub_info('PRUNE', ARGS.prune)
         message.sub_info('CACHE_DIR', libspm.CACHE_DIR)
+        message.sub_info('REPOSITORIES', libspm.REPOSITORIES)
         for repository in libspm.REPOSITORIES:
             message.sub_info('REPOSITORY', repository)
         message.info('Poking repositories...')
@@ -344,6 +349,15 @@ try:
     elif ARGS.mode == 'remote':
         if not ARGS.plain:
             message.info('Runtime information')
+            message.sub_info('NAME', ARGS.name)
+            message.sub_info('VERSION', ARGS.version)
+            message.sub_info('DESCRIPTION', ARGS.description)
+            message.sub_info('DEPENDS', ARGS.depends)
+            message.sub_info('MAKEDEPENDS', ARGS.makedepends)
+            message.sub_info('CHECKDEPENDS', ARGS.checkdepends)
+            message.sub_info('SOURCES', ARGS.sources)
+            message.sub_info('OPTIONS', ARGS.options)
+            message.sub_info('BACKUP', ARGS.backup)
             message.sub_info('PATTERN', ARGS.PATTERN)
             message.info('Poking remotes...')
         m = libspm.Remote(ARGS.PATTERN, ARGS.name, ARGS.version, \
@@ -403,6 +417,13 @@ try:
     elif ARGS.mode == 'local':
         if not ARGS.plain:
             message.info('Runtime information')
+            message.sub_info('NAME', ARGS.name)
+            message.sub_info('VERSION', ARGS.version)
+            message.sub_info('DESCRIPTION', ARGS.description)
+            message.sub_info('DEPENDS', ARGS.depends)
+            message.sub_info('REVERSE', ARGS.reverse)
+            message.sub_info('SIZE', ARGS.size)
+            message.sub_info('FOOTPRINT', ARGS.footprint)
             message.sub_info('PATTERN', ARGS.PATTERN)
             message.info('Poking locals...')
         m = libspm.Local(ARGS.PATTERN, ARGS.name, ARGS.version, \
