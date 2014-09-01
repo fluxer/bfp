@@ -1,7 +1,7 @@
 ## SPM ##
  * Fix all bugs noted with FIXME in the code
  * Use Makefiles for build scripts?
- * Optionally remove build depends that are not required by local target
+ * Optionally remove build depends that are not required by local target after build
  * Optimize backing up of files
 
 ## QWORKSPACE ##

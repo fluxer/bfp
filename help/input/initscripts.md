@@ -210,7 +210,7 @@ at the end of *rc.shutdown*
 ## DAEMONS
 
 Daemons are **Bash** scripts which run processes in the background to do their thing, waiting for
-input, specifiec even to accure or something else. Those daemons can be started, stopped and/or
+input, specifiec event to accure or something else. Those daemons can be started, stopped and/or
 restarted when needed using the [rc.d](rc.d.html) tool which is also provided by **initscripts** and are 
 located in separate directory */etc/rc.d*. More information about it in [rc.d](rc.d.html) help page.
 
