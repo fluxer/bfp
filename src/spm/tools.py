@@ -666,6 +666,9 @@ try:
                     database.remote_alias(alias)
 
         message.info('Runtime information')
+        message.sub_info('SOURCES', ARGS.sources)
+        message.sub_info('CLEAN', ARGS.clean)
+        message.sub_info('DIRECTORY', ARGS.directory)
         message.sub_info('TARGETS', ARGS.TARGETS)
         message.info('Poking remotes...')
         m = Dist(ARGS.TARGETS, ARGS.sources, ARGS.clean, ARGS.directory)
@@ -673,6 +676,10 @@ try:
 
     elif ARGS.mode == 'check':
         message.info('Runtime information')
+        message.sub_info('FAST', ARGS.fast)
+        message.sub_info('DEPENDS', ARGS.depends)
+        message.sub_info('REVERSE', ARGS.reverse)
+        message.sub_info('ADJUST', ARGS.adjust)
         message.sub_info('TARGETS', ARGS.TARGETS)
         message.info('Poking locals...')
         m = Check(ARGS.TARGETS, ARGS.fast, ARGS.depends, ARGS.reverse, \
@@ -685,10 +692,6 @@ try:
         m.main()
 
     elif ARGS.mode == 'lint':
-        message.info('Runtime information')
-        message.sub_info('TARGETS', ARGS.TARGETS)
-        message.sub_info('TARGETS', ARGS.TARGETS)
-        message.info('Poking locals...')
         if ARGS.all:
             ARGS.man = True
             ARGS.udev = True
@@ -698,14 +701,21 @@ try:
             ARGS.footprint = True
             ARGS.builddir = True
 
+        message.info('Runtime information')
+        message.sub_info('MAN', ARGS.man)
+        message.sub_info('UDEV', ARGS.udev)
+        message.sub_info('SYMLINK', ARGS.symlink)
+        message.sub_info('DOC', ARGS.doc)
+        message.sub_info('MODULE', ARGS.module)
+        message.sub_info('FOOTPRINT', ARGS.footprint)
+        message.sub_info('TARGETS', ARGS.TARGETS)
+        message.info('Poking locals...')
+
         m = Lint(ARGS.TARGETS, ARGS.man, ARGS.udev, ARGS.symlink, ARGS.doc, \
             ARGS.module, ARGS.footprint, ARGS.builddir)
         m.main()
 
     elif ARGS.mode == 'sane':
-        message.info('Runtime information')
-        message.sub_info('TARGETS', ARGS.TARGETS)
-        message.info('Poking remotes...')
         if ARGS.all:
             ARGS.enable = True
             ARGS.disable = True
@@ -716,6 +726,19 @@ try:
             ARGS.triggers = True
             ARGS.users = True
             ARGS.groups = True
+
+        message.info('Runtime information')
+        message.sub_info('ENABLE', ARGS.enable)
+        message.sub_info('DISABLE', ARGS.disable)
+        message.sub_info('NULL', ARGS.null)
+        message.sub_info('MAINTAINER', ARGS.maintainer)
+        message.sub_info('NOTE', ARGS.note)
+        message.sub_info('VARIABLES', ARGS.variables)
+        message.sub_info('TRIGGERS', ARGS.triggers)
+        message.sub_info('USERS', ARGS.users)
+        message.sub_info('GROUPS', ARGS.groups)
+        message.sub_info('TARGETS', ARGS.TARGETS)
+        message.info('Poking remotes...')
 
         m = Sane(ARGS.TARGETS, ARGS.enable, ARGS.disable, ARGS.null, \
             ARGS.maintainer, ARGS.note, ARGS.variables, ARGS.triggers, \
