@@ -2,16 +2,14 @@ include ../../Makefile.inc
 
 all: clean
 	$(NUITKA) --module libarchive.py
-	$(NUITKA) --module --recurse-not-to=libworkspace libhighlighter.py
 	$(NUITKA) --module libmagic.py
 	$(NUITKA) --module libmessage.py 
 	$(NUITKA) --module libmisc.py
 	$(NUITKA) --module libpackage.py
 	$(NUITKA) --module libsystem.py
-	$(NUITKA) --module libworkspace.py
 	# $(NUITKA) --module libxlib.py
-	$(STRIP) libarchive.so libhighlighter.so libmagic.so libmessage.so \
-		libmisc.so libpackage.so libsystem.so libworkspace.so # libxlib.so
+	$(STRIP) libarchive.so libmagic.so libmessage.so libmisc.so \
+		libpackage.so libsystem.so # libxlib.so
 
 check:
 	$(PYTHON) test.py
@@ -22,13 +20,11 @@ install:
 
 uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libarchive.so
-	$(RM) $(DESTDIR)$(SITEDIR)/libhighlighter.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libmagic.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libmessage.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libmisc.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libpackage.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libsystem.so
-	$(RM) $(DESTDIR)$(SITEDIR)/libworkspace.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libxlib.so
 
 clean:

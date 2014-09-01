@@ -7,6 +7,8 @@ all: clean
 	$(PYLUPDATE) main.py plugins/*.py qworkspace_ui.py \
 		-ts tr/qworkspace_bg_BG.ts
 	$(LRELEASE) tr/qworkspace_bg_BG.ts
+	$(NUITKA) --module libworkspace.py
+	$(NUITKA) --module --recurse-not-to=libworkspace libhighlighter.py
 	$(NUITKA) --recurse-to=qworkspace_ui main.py
 	$(NUITKA) --module plugins/archive.py
 	$(NUITKA) --module plugins/calendar.py
@@ -32,23 +34,30 @@ all: clean
 	$(STRIP) main.exe archive.so calendar.so download.so editor.so \
 		help.so image.so mail.so mixer.so multimedia.so network.so \
 		package.so pdf.so plugins.so quit.so screenshot.so server.so \
-		settings.so storage.so terminal.so tetrix.so www.so
+		settings.so storage.so terminal.so tetrix.so www.so \
+		libworkspace.so libhighlighter.so
 
 check:
 	$(PYUIC) qworkspace.ui -o qworkspace_ui.py
 	$(PYTHON) test.py
 
 install:
-	$(INSTALL) -dm755 $(DESTDIR)$(BINDIR)
+	$(INSTALL) -dm755 $(DESTDIR)$(BINDIR) $(DESTDIR)$(SITEDIR)
 	$(INSTALL) -dm755 $(DESTDIR)/etc/qworkspace/plugins
 	$(INSTALL) -dm755 $(DESTDIR)$(TRDIR)/
 	$(INSTALL) -m755 main.exe $(DESTDIR)$(BINDIR)/qworkspace
+	$(INSTALL) -m644 libworkspace.so $(DESTDIR)$(SITEDIR)/libworkspace.so
+	$(INSTALL) -m644 libhighlighter.so $(DESTDIR)$(SITEDIR)/libhighlighter.so
 	$(INSTALL) -m644 *.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(RM) $(DESTDIR)/etc/qworkspace/plugins/libworkspace.so
+	$(RM) $(DESTDIR)/etc/qworkspace/plugins/libhighlighter.so
 	$(INSTALL) -m644 tr/*.qm $(DESTDIR)$(TRDIR)/
 
 uninstall:
 	$(RM) $(DESTDIR)$(BINDIR)/qworkspace
 	$(RM) -r $(DESTDIR)/etc/qworkspace
+	$(RM) $(DESTDIR)$(SITEDIR)/libworkspace.so
+	$(RM) $(DESTDIR)$(SITEDIR)/libhighlighter.so
 	$(RM) $(DESTDIR)$(TRDIR)/qworkspace_*.qm
 
 clean:

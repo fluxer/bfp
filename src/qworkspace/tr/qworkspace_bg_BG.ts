@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="bg_BG">
+<!DOCTYPE TS><TS version="2.0" language="bg_BG" sourcelanguage="">
 <context>
     <name>Daemon</name>
     <message>
@@ -250,12 +249,12 @@
         <translation>ПДФ</translation>
     </message>
     <message>
-        <location filename="server.py" line="105"/>
+        <location filename="server.py" line="108"/>
         <source>Server plugin</source>
         <translation>Сървър плъгин</translation>
     </message>
     <message>
-        <location filename="server.py" line="119"/>
+        <location filename="server.py" line="122"/>
         <source>Server</source>
         <translation>Сървър</translation>
     </message>
@@ -324,7 +323,7 @@
         <translation>Намери</translation>
     </message>
     <message>
-        <location filename="server.py" line="72"/>
+        <location filename="server.py" line="75"/>
         <source>Critical</source>
         <translation>Критично</translation>
     </message>
@@ -954,37 +953,37 @@
         <translation>ПДФ (*.pdf);;Всички (*)</translation>
     </message>
     <message>
-        <location filename="server.py" line="68"/>
+        <location filename="server.py" line="71"/>
         <source>No directory entered</source>
         <translation>Не е зададена директория</translation>
     </message>
     <message>
-        <location filename="server.py" line="72"/>
+        <location filename="server.py" line="75"/>
         <source>The path entered is not directory</source>
         <translation>Зададеният път не е директория</translation>
     </message>
     <message>
-        <location filename="server.py" line="39"/>
+        <location filename="server.py" line="41"/>
         <source>Address</source>
         <translation>Адрес</translation>
     </message>
     <message>
-        <location filename="server.py" line="43"/>
+        <location filename="server.py" line="45"/>
         <source>Port</source>
         <translation>Порт</translation>
     </message>
     <message>
-        <location filename="server.py" line="46"/>
+        <location filename="server.py" line="49"/>
         <source>Directory to serve</source>
         <translation>Директория, която да се поднася</translation>
     </message>
     <message>
-        <location filename="server.py" line="48"/>
+        <location filename="server.py" line="51"/>
         <source>Start server</source>
         <translation>Стартирай сървъра</translation>
     </message>
     <message>
-        <location filename="server.py" line="52"/>
+        <location filename="server.py" line="55"/>
         <source>Stop server</source>
         <translation>Спри сървъра</translation>
     </message>
