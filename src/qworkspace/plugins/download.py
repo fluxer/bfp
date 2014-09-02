@@ -32,9 +32,9 @@ class Widget(QtGui.QWidget):
         self.secondLayout.addWidget(self.openButton)
         self.secondLayout.addWidget(self.openBox)
         self.secondLayout.addWidget(self.closeBox)
-        self.mainLayout = QtGui.QGridLayout()
         self.downloadLabel = QtGui.QLabel()
         self.progressBar = QtGui.QProgressBar()
+        self.mainLayout = QtGui.QGridLayout()
         self.mainLayout.addLayout(self.secondLayout, 0, 0)
         self.mainLayout.addWidget(self.downloadLabel)
         self.mainLayout.addWidget(self.progressBar)
@@ -124,7 +124,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'download'
-        self.version = "0.9.36 (3fb8834)"
+        self.version = "0.9.36 (1c351eb)"
         self.description = self.tr('Download manager plugin')
         self.icon = general.get_icon('document-save-as')
         self.widget = None

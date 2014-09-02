@@ -180,12 +180,12 @@
         <translation>Плъгин за управление на звуковият миксер</translation>
     </message>
     <message>
-        <location filename="calendar.py" line="41"/>
+        <location filename="calendar.py" line="42"/>
         <source>Calendar plugin</source>
         <translation>Календар плъгин</translation>
     </message>
     <message>
-        <location filename="calendar.py" line="55"/>
+        <location filename="calendar.py" line="56"/>
         <source>Calendar</source>
         <translation>Календар</translation>
     </message>
@@ -1022,6 +1022,11 @@
         <location filename="calendar.py" line="22"/>
         <source>Saturday</source>
         <translation>Събота</translation>
+    </message>
+    <message>
+        <location filename="calendar.py" line="24"/>
+        <source>Set first day of the week</source>
+        <translation>Задай първият ден за седмицата</translation>
     </message>
 </context>
 </TS>
