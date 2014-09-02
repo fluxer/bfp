@@ -21,7 +21,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "0.9.36 (e534c7a)"
+app_version = "0.9.36 (3fb8834)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -378,15 +378,12 @@ class Sane(object):
                     # TODO: check for arrays defined as strings
 
                 if self.triggers:
-                    regex = '(?:\\s|^)('
-                    for trigger in ('ldconfig', 'mandb', 'update-desktop-database', \
-                        'update-mime-database', 'xdg-icon-resource', 'depmod', \
-                        'gio-querymodules', 'pango-querymodules', \
-                        'install-info', 'gtk-query-immodules-2.0', \
-                        'gtk-query-immodules-3.0', 'gdk-pixbuf-query-loaders', \
-                        'glib-compile-schemas', 'gtk-update-icon-cache'):
-                        regex += trigger + '|'
-                    regex = regex[:-1] + ')(?:\\s|$)'
+                    regex = '(?:\\s|^)(ldconfig|mandb|update-desktop-database'
+                    regex += '|update-mime-database|xdg-icon-resource|depmod'
+                    regex += '|gio-querymodules|pango-querymodules|install-info'
+                    regex += '|gtk-query-immodules-2.0|gtk-query-immodules-3.0'
+                    regex += '|gdk-pixbuf-query-loaders|glib-compile-schemas'
+                    regex += '|gtk-update-icon-cache)(?:\\s|$)'
                     if misc.file_search(regex, target_srcbuild, escape=False):
                         message.sub_warning('Possible unnecessary triggers invocation(s)')
 

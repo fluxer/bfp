@@ -90,7 +90,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'mail'
-        self.version = "0.9.36 (9197ba8)"
+        self.version = "0.9.36 (3fb8834)"
         self.description = self.tr('Mail manager plugin')
         self.icon = general.get_icon('internet-mail')
         self.widget = None

@@ -31,8 +31,8 @@ class Widget(QtGui.QWidget):
         self.secondLayout.addWidget(self.resumeBox)
         # HACK!!! QX11EmbedWidget breaks the layout horribly
         self.dummy = QtGui.QWidget(self)
-        self.mainLayout = QtGui.QGridLayout()
         self.container = QtGui.QX11EmbedWidget(self.dummy)
+        self.mainLayout = QtGui.QGridLayout()
         self.mainLayout.addLayout(self.secondLayout, 0, 0)
         self.mainLayout.addWidget(self.dummy)
         self.setLayout(self.mainLayout)
@@ -79,7 +79,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'multimedia'
-        self.version = "0.9.36 (9197ba8)"
+        self.version = "0.9.36 (3fb8834)"
         self.description = self.tr('Multimedia plugin')
         self.icon = general.get_icon('multimedia-player')
         self.widget = None

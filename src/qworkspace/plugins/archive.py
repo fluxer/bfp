@@ -24,10 +24,11 @@ class Widget(QtGui.QWidget):
             if archive.supportedArchive(spath):
                 stmp = tempfile.mkdtemp()
                 archive.extractArchive(spath, stmp)
-                self.parent.plugins.plugin_open(stmp)
+                self.parent.plugins.plugin_open(stmp) # FIXME: this is non-blocking
                 archive.createArchive(stmp, spath)
             else:
-                QtGui.QMessageBox.critical(self, self.tr('Critical'), self.tr('Unsupported format'))
+                QtGui.QMessageBox.critical(self, self.tr('Critical'), \
+                    self.tr('Unsupported format'))
         except Exception as detail:
             QtGui.QMessageBox.critical(self, self.tr('Critical'), str(detail))
         finally:
@@ -41,7 +42,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'archive'
-        self.version = "0.9.36 (9197ba8)"
+        self.version = "0.9.36 (3fb8834)"
         self.description = self.tr('Archive manager plugin')
         self.icon = general.get_icon('archive')
         self.widget = None

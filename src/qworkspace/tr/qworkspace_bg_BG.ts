@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS><TS version="2.0" language="bg_BG" sourcelanguage="">
+<!DOCTYPE TS>
+<TS version="2.0" language="bg_BG">
 <context>
     <name>Daemon</name>
     <message>
@@ -129,12 +130,12 @@
         <translation>УУУ</translation>
     </message>
     <message>
-        <location filename="archive.py" line="45"/>
+        <location filename="archive.py" line="46"/>
         <source>Archive manager plugin</source>
         <translation>Плъгин за управление на архиви</translation>
     </message>
     <message>
-        <location filename="archive.py" line="65"/>
+        <location filename="archive.py" line="66"/>
         <source>Archive</source>
         <translation>Архив</translation>
     </message>
@@ -179,12 +180,12 @@
         <translation>Плъгин за управление на звуковият миксер</translation>
     </message>
     <message>
-        <location filename="calendar.py" line="28"/>
+        <location filename="calendar.py" line="41"/>
         <source>Calendar plugin</source>
         <translation>Календар плъгин</translation>
     </message>
     <message>
-        <location filename="calendar.py" line="42"/>
+        <location filename="calendar.py" line="55"/>
         <source>Calendar</source>
         <translation>Календар</translation>
     </message>
@@ -986,6 +987,41 @@
         <location filename="server.py" line="55"/>
         <source>Stop server</source>
         <translation>Спри сървъра</translation>
+    </message>
+    <message>
+        <location filename="calendar.py" line="16"/>
+        <source>Sunday</source>
+        <translation>Неделя</translation>
+    </message>
+    <message>
+        <location filename="calendar.py" line="17"/>
+        <source>Monday</source>
+        <translation>Понеделник</translation>
+    </message>
+    <message>
+        <location filename="calendar.py" line="18"/>
+        <source>Tuesday</source>
+        <translation>Вторник</translation>
+    </message>
+    <message>
+        <location filename="calendar.py" line="19"/>
+        <source>Wednesday</source>
+        <translation>Сряда</translation>
+    </message>
+    <message>
+        <location filename="calendar.py" line="20"/>
+        <source>Thursday</source>
+        <translation>Четвъртък</translation>
+    </message>
+    <message>
+        <location filename="calendar.py" line="21"/>
+        <source>Friday</source>
+        <translation>Петък</translation>
+    </message>
+    <message>
+        <location filename="calendar.py" line="22"/>
+        <source>Saturday</source>
+        <translation>Събота</translation>
     </message>
 </context>
 </TS>

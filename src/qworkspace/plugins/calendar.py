@@ -12,10 +12,23 @@ class Widget(QtGui.QWidget):
         self.spath = spath
         self.name = 'calendar'
 
-        self.mainLayout = QtGui.QGridLayout()
+        self.firstDay = QtGui.QComboBox()
+        self.firstDay.addItem(self.tr('Sunday'), QtCore.Qt.Sunday)
+        self.firstDay.addItem(self.tr('Monday'), QtCore.Qt.Monday)
+        self.firstDay.addItem(self.tr('Tuesday'), QtCore.Qt.Tuesday)
+        self.firstDay.addItem(self.tr('Wednesday'), QtCore.Qt.Wednesday)
+        self.firstDay.addItem(self.tr('Thursday'), QtCore.Qt.Thursday)
+        self.firstDay.addItem(self.tr('Friday'), QtCore.Qt.Friday)
+        self.firstDay.addItem(self.tr('Saturday'), QtCore.Qt.Saturday)
+        self.firstDay.currentIndexChanged.connect(self.change_first_day)
         self.calendar = QtGui.QCalendarWidget()
+        self.mainLayout = QtGui.QGridLayout()
+        self.mainLayout.addWidget(self.firstDay)
         self.mainLayout.addWidget(self.calendar)
         self.setLayout(self.mainLayout)
+
+    def change_first_day(self, index):
+        self.calendar.setFirstDayOfWeek(self.firstDay.currentIndex())
 
 
 class Plugin(QtCore.QObject):
@@ -24,7 +37,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'calendar'
-        self.version = "0.9.36 (9197ba8)"
+        self.version = "0.9.36 (3fb8834)"
         self.description = self.tr('Calendar plugin')
         self.icon = general.get_icon('office-calendar')
         self.widget = None
