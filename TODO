@@ -1,5 +1,5 @@
 ## SPM ##
- * Fix all bugs noted with FIXME in the code
+ * Fix all bugs noted with FIXME
  * Use Makefiles for build scripts?
  * Optionally remove build depends that are not required by local target after build
  * Optimize backing up of files
@@ -15,7 +15,7 @@
  * Implement chat plugin
  * Implement Steam plugin (https://developer.valvesoftware.com/wiki/SteamCMD)
  * Implement Bluetooth (BlueZ) plugin (http://git.kernel.org/cgit/bluetooth/bluez.git/tree/doc)
- * Implement print manager plugin (CUPS)
+ * Implement print manager plugin (CUPS, it has web interface)?
  * Implement bug reports plugin (send, query, etc.)
  * Implement system search/indexing plugin (strigi)
  * Implement system backup plugin
