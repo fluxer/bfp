@@ -44,10 +44,10 @@ for it all.
 
 First of all, the core of the distribution - Source Package Manager or SPM for
 short. It was designed with easy of use in mind so that building software and
-having it "packaged" takes as less time as possible while having preserving
-the soul of the GNU/Linux ecosystem and that is software being easy to change
-to your liking, that is something binary packages fail to fullfil by design
-because of hard-versioned runtime dependencies and they not being met to
+having it "packaged" takes as less time as possible while preserving the soul
+of the GNU/Linux ecosystem and that is software being easy to change to your
+liking, something binary packages fail to fullfil by design
+because of hard-versioned runtime dependencies and they not being ment to
 actually build software (usually) for which you require extra tools. A good
 example of situation where binary package managers are not good is when you
 need something that has not been pre-package for the distribution you are
@@ -64,7 +64,7 @@ you need to put into this by a lot. And back to the point about of easy to
 change - imagine you need to patch or update something imidiatly because of
 security or other reasons. You have to either wait for the binary package
 maintainer to do this for you or do it yourself which, in most cases means
-learning a new Programming Language (sorta, dpkg rules or ebuilds anyone?).
+learning a new Programming Language (dpkg/make rules or ebuilds anyone?).
 With SPM most system administrators are already familiar with the Bourne
 Again SHell (Bash) which SPM uses for it's build recipes - SRCBUILDs -
 similar to the Arch Linux PKGBUILDs format.
