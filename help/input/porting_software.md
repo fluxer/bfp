@@ -57,7 +57,7 @@ src_check() function if not present.
 
 Finally build the software and test how it works, if all goes well you can send
 your port to the ports and repository maintainers, just take a look at the
-[contributors](contributors.html).
+contributors at the bottom of [this](about.html) page.
 
 ### Tracking dependencies
 

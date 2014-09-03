@@ -1,1 +1,0 @@
-Ivailo Monev <xakepa10@gmail.com>

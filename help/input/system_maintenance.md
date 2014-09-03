@@ -1,17 +1,19 @@
 ## Things you should know before getting started
+
 Since Tiny GNU/Linux is targeted at advanced users there is some maintenance
 involved in using it. Bellow are noted some things you should be aware of and
 the how you can handle them.
 
 ## Configuration files
+
 (Source Package Manager](spm.html) will backup all files with .conf extension
 as well as those explicitly specified in the backup array of the SRCBUILD with
 a .backup extension on merge if the content of the file has changed, usually
 when you (the user) has done so.
 
 For an example, if you upgrade initscripts and you've changed the content of
-/etc/rc.conf the file will be replaced but backed up before that as
-/etc/rc.conf.backup. You can find all backup files using the `find` command
+*/etc/rc.conf* the file will be replaced but backed up before that as
+*/etc/rc.conf.backup*. You can find all backup files using the `find` command
 like so:
 
     sudo find / -xdev -type f -name '*.backup'
@@ -25,16 +27,16 @@ Then, you can use `diff` to compare the files content:
     sudo diff -u /etc/rc.conf.backup /etc/rc.conf
 
 In this case the lines prefixed with plus sign (+) are not present in
-/etc/rc.conf.backup but are in /etc/rc.conf and the opposite for the lines
+/etc/rc.conf.backup but are in */etc/rc.conf* and the opposite for the lines
 prefixed with minus sigh (-). You can merge the files manually with your 
 ext-editor of choice or just replace the new file with the backup file but
 beware for new variables and options in the new configuration file.
 
-**Tip:** Source Package Manager Tools can help you with this task but they are
-not yet released and under development. To install them you will have to pull
-the latest spm from [Git](https://bitbucket.org/smil3y/bfp/).
+**Tip:** [Source Package Manager Tools](spm-toosl.html) can help you with this
+task.
 
 ## Kernel modules
+
 Third-party kernel modules must be rebuild when you recompile the kernel
 (linux port). For an example, with nvidia all you have to do is rebuild nvidia:
 
