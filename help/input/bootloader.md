@@ -25,9 +25,10 @@ Other GRUB related files are:
 
 ### Detecting other Operating Systems
 
-os-prober is piece of software that will help GRUB to detect other Operating
-Systems installed, such as Windows. It is part of the base, to make use of it
-run the following:
+os-prober is piece of software that will help GRUB to detect other [Operating
+Systems](http://en.wikipedia.org/wiki/Operating_system) installed, such as
+[Microsoft Windows](http://en.wikipedia.org/wiki/Microsoft_Windows). It is part
+of the base, to make use of it run the following:
 
     os-prober
     update-grub

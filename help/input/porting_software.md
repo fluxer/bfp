@@ -7,7 +7,7 @@ porting:
 - don't build documentation except man pages and in some cases example files
 - if software offers check via test suite use it
 - don't put ports from the base group in the makedepend array
-- install software to / not /usr
+- install software to */* not */usr*
 - glibc supports Linux Kernel version greater or equal to 3.12.0
 
 ## Toolchain build order
@@ -37,24 +37,22 @@ are not familiar with it read [this](spm.html) and [this](srcbuild.html) page.
 
 Porting software that is not maintained in the official repositories can be
 hard for new-commers but essentially you should just know the dependencies
-needed for the software to build, you can search the LFS or BLFS books for
-instructions. Also see how the Tiny GNU/Linux ports are named and what they
-provide as the multi-ports ship different software all-together such as
-xorg-fonts.
+needed for the software to build, you can search the
+[LFS](http://www.linuxfromscratch.org/lfs/view/development/) or
+[BLFS](http://www.linuxfromscratch.org/blfs/view/svn/) books for instructions.
+Also see how the Tiny GNU/Linux ports are named and what they provide as the
+multi-ports ship different software all-together such as xorg-fonts.
 
-The easiest way to port software is to download package files from Arch Linux
-and adjust them properly. First step is fetch the packages files,
-[this](https://bitbucket.org/smil3y/misc/raw/master/python/pkget.py) script
-can help you with the task. For converting them a script is provided with
-SPM - pkg2src - which you should point to the directory with the downloaded
-files. It does most of the dirty work but you may want to review the resulting
-SRCBUILD.
+The easiest way to port software is to download package files from
+[Arch Linux](https://www.archlinux.org/) and adjust them properly. First step
+is fetch the packages files, [spm-tools](spm-tools.html) can help you with the
+task. For converting them a script is provided with SPM - pkg2src - which you
+should point to the directory with the downloaded files. It does most of the
+dirty work but you may want to review the resulting [SRCBUILD](srcbuild.html).
 
 Next satisfy the dependencies by searching what is available in the
 repositories and what the software needs, porting more packages to satisfy them
-may be needed too. Check if the software offers test suite, usually a good
-place for this are the [LFS](http://www.linuxfromscratch.org/lfs/view/development/)
-and [BLFS](http://www.linuxfromscratch.org/blfs/view/svn/) books, if yes add
+may be needed too. Check if the software offers test suite, if yes add
 src_check() function if not present.
 
 Finally build the software and test how it works, if all goes well you can send
@@ -115,13 +113,14 @@ or:
 
 But keep in mind that conf files should be backed up **only** if there is no
 way to override the behavior of the main conf file except editing it, i.e.
-there is no /etc/<package>.d.
+there is no */etc/foo.d*.
 
 ### Checking for manual pages
 
-Shipping manual pages is important but sometimes they are not generated because
-libxml2, docbook-xml, docbook-xsl, asciidoc or other software is missing. To
-make sure that manual pages are installed you can use this:
+Shipping [manual pages](http://en.wikipedia.org/wiki/Man_page) is important but
+sometimes they are not generated because libxml2, docbook-xml, docbook-xsl,
+asciidoc or other software is missing. To make sure that manual pages are
+installed you can use this:
 
     spm local -fp package_name | grep share/man
 
@@ -142,5 +141,6 @@ Example:
 
 > http://prdownloads.sourceforge.net/lxde/gpicview-0.2.3.tar.gz
 
-Prefering XZ and Bzip2 tarballs over gzip is recommended to reduce the
+Prefering [XZ](http://tukaani.org/xz/) and [Bzip2](http://www.bzip.org/)
+tarballs over [gzip](http://www.gzip.org/) is recommended to reduce the
 bandwidth required for fetching sources.

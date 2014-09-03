@@ -3,16 +3,19 @@
 The build tool requires the following packages to be present in the host OS
 environment:
 
-- git
-- spm>=2.1.1
-- squashfs-tools>=4.2
-- grub>=2.00
-- xorriso
+- [git](http://git-scm.com/)
+- [spm](https://bitbucket.org/smil3y/bfp.git) >=2.1.1
+- [squashfs-tools](http://squashfs.sourceforge.net/) >=4.2
+- [grub](http://www.gnu.org/software/grub/) >=2.00
+- [xorriso](http://www.gnu.org/software/xorriso/)
+- [bsdtar](http://www.libarchive.org/) (optional)
+- [sudo](http://www.sudo.ws/) (optional)
 
 **Important:** The software will be build on the host system and then installed
 to separate root directory, this means that the software may link to unwanted
 libraries such as X11, acl or libxml2. You will have to either build on minimal
-setup or remaster a LiveCD snapshot and build the software in chroot.
+setup or remaster a LiveCD snapshot and build the software in
+[chroot](http://en.wikipedia.org/wiki/Chroot).
 
 ## Tools of the trade
 
@@ -83,9 +86,10 @@ a lot of time. You will make use of the LiveCD build system for that so make
 sure you have a local copy of it.
 
 To remaster a snapshot all you have to do is extract the *root.sfs* file from
-the ISO image and unsquash it as follows:
+the [ISO image](http://en.wikipedia.org/wiki/ISO_image) and unsquash it as
+follows:
 
-    bsdtar -xf BASE-x86_64-20131006.iso live/root.sfs
+    bsdtar -xf BASE-x86_64-20140902.iso live/root.sfs
     sudo unsquashfs -d base_root_$(uname -m) live/root.sfs
 
 Then, you can chroot into the extracted filesystem:

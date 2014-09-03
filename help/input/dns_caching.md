@@ -1,7 +1,8 @@
 ## Things you should know before getting started
 
-DNS caching is supposed to boost your internet experience, however it may not
-get you the results you are expecting.
+[DNS recored caching](http://en.wikipedia.org/wiki/Domain_Name_System#Record_caching)
+is supposed to boost your internet experience, however it may not get you the
+results you are expecting.
 
 ## Tools of the trade
 
@@ -20,12 +21,13 @@ Set the addres and cache size to be used by dnsmasq:
         -e 's|.*cache-size=.*|cache-size=500|g' \
         -i /etc/dnsmasq.conf
 
-Tell dhcpcd to append the address to resolv.conf every time it dumps it, for
-an example during system initialization:
+Tell the [DHCP](http://en.wikipedia.org/wiki/DHCPD) daemon to append the
+address to */etc/resolv.conf* every time it dumps it, for an example during
+system initialization:
 
     echo 'new_domain_name_servers="127.0.0.1 ${new_domain_name_servers}"' > /lib/dhcpcd/dhcpcd-hooks/19-dnsmasq
 
-Edit /etc/rc.conf and add ''dnsmasq'' in the DAEMONS array. Then start the
-dnsmasq daemon:
+Edit */etc/rc.conf* and add **dnsmasq** in the DAEMONS array. Then start the
+**dnsmasq** daemon:
 
     rc.d start dnsmasq

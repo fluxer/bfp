@@ -9,7 +9,8 @@ lsinitfs - LsInitfs
 
 ## DESCRIPTION
 
-LsInitfs is a initial RAM filesystem image content lister.
+LsInitfs is a [initial RAM filesystem](http://en.wikipedia.org/wiki/Initrd)
+image content lister.
 
 ## OPTIONS
 

@@ -10,7 +10,8 @@ mkinitfs - MkInitfs
 
 ## DESCRIPTION
 
-MkInitfs is a initial RAM filesystem image maker.
+MkInitfs is a [initial RAM filesystem](http://en.wikipedia.org/wiki/Initrd)
+image maker.
 
 ## OPTIONS
 

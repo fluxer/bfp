@@ -25,7 +25,7 @@ export is LANG and LC_ALL unless you want to mix different locales.
 
 ### Generate locales
 
-First you must edit as **root** the /etc/locale.conf file and uncomment the
+First you must edit as **root** the */etc/locale.conf* file and uncomment the
 desired locales. After this you must generate them, to do so execute the
 following as **root**:
 
