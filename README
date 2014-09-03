@@ -93,6 +93,57 @@ are usually not standard or highly unlikely used features. In any case, static
 Busybox is a life saver and most distributions are using it in their initramfs
 implementations anyway.
 
+Rolling release model has been chosen to reduce to complexity and improve the
+end-users experience by avoiding a lot of major upgrades at the same time which
+is more suitable for a source based distribution. But there are things that the
+other rolling release distribution are missing and that is avoiding constant
+shape-shifting software. This project uses the old-stable, bugfix or LTS (Long
+Term Support) releases provided by upstream and using it until the next one is
+out. An example is Git, currently there are 2.0.4 and 2.0.1 versions available,
+this project ships 2.0.4 to make sure that no show-stopper and security bugs
+are present and give upstream time to fix them, if any, in the new major
+release. This includes the kernel which is updated every few months or so.
+Also, the software ports do not provide bell and whistles by default. systemd,
+PAM, ConsoleKit (which is pretty much dead), and other not very well
+implemented tools that can cause troubles with halting, hibernating or even
+login into to your setup are avoided where possible.
+
+Multilib is a architecture mixup, disaster and something every distribution
+handles on its own, in different way. With binary packages there are always
+headaches, while this may not be such a problem for this project it is not
+considered a good thing to support as the upstream software should have long
+ago started to realize that i386 is not the only architecture out there and,
+for their own good, support it. It can cause a lot of end-users to give up on
+a producet if it does not deliver what it is supposed to - a good experience.
+
+There are a few more extreme things in the hearth of the project - the drop of
+the /usr directory support and Native Languages Support (NLS) for the Command
+Line Interface (CLI). Having separate /usr causes major confusion and
+non-portability issue of software. While some upstream projects are going the
+other way placing everything in /usr leaving only /var and /etc on the root
+we think it should be other way around because in most situations where
+separate /usr is a good thing a separate /var also is, maybe /etc too. As such
+different partition and more suitable filesystem type is chosen. And most
+imprtantly you do not have to scale trough /bin, /sbin, /lib, /usr/lib to find
+the binaries or libraries you are looking for which goes the same way for your
+hard-drive. NLS support for the CLI is another feature that has been drift off
+because in most cases it does does not bring any good to the Graphical User
+Interface and is/should be rarely access. In addition it can cause issues with
+resolving problems with upstream because logs and outputs for an example are in
+language that is not know by developers, contributors and the like. Altought
+people from all around the work are involved in open-source projects they are
+not always avaialble and it takes much more time and effort to get things
+sorted when it comes to key components such as software failing to build and
+having to grasp trrough hundreds of lines of output in different language is
+"awesome!". This may not suite administrators and users but, hopefully, it will
+increase the rate of which upstream software resolves their issues quicker
+making the GNU/Linux userland far more pleasant to deal with without the bugs
+interfiering.
+
+The following text does not cover all pros and cons of the picture as a whole,
+for more details on some of the components there is a separate help page that
+you should read.
+
 ## WHO
 
 Here is a incomplete list of people who are or were involved in the project in
