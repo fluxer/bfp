@@ -23,7 +23,7 @@ fine. Priorities of the projects - 1) speed, 2) stability, 3) security. If you
 don't like it - fine!
 
 In addition to the software a separate distribution had to be made to fulfill
-the points mentioned above. It combines ideas and software in way the makes it
+the points mentioned above. It combines ideas and software in way that makes it
 good base for what this project is aiming to achieve.
 
 ## WHY
@@ -46,28 +46,27 @@ First of all, the core of the distribution - Source Package Manager or SPM for
 short. It was designed with easy of use in mind so that building software and
 having it "packaged" takes as less time as possible while preserving the soul
 of the GNU/Linux ecosystem and that is software being easy to change to your
-liking, something binary packages fail to fullfil by design
-because of hard-versioned runtime dependencies and they not being ment to
-actually build software (usually) for which you require extra tools. A good
-example of situation where binary package managers are not good is when you
-need something that has not been pre-package for the distribution you are
-using, then you have to either package it yourself (the smart and harder
-aproach) or just install it by hand and the distiribution package not knowing
-about it (the bad aproach, what if you want to update the software?). Either
-way you will have to spend quite some time in the begining and learn a lot of
-things, of course you will with SPM too but once users get to know it they
-say it is "amazing!". You can package/port any software you want, usually, in
-a few minutes on system which uses SPM. Why? Because when it builds the
-software it automatically detects all or most of the runtime dependencies that
-are required by the software being build and installed reducing the effort
-you need to put into this by a lot. And back to the point about of easy to
-change - imagine you need to patch or update something imidiatly because of
-security or other reasons. You have to either wait for the binary package
-maintainer to do this for you or do it yourself which, in most cases means
-learning a new Programming Language (dpkg/make rules or ebuilds anyone?).
-With SPM most system administrators are already familiar with the Bourne
-Again SHell (Bash) which SPM uses for it's build recipes - SRCBUILDs -
-similar to the Arch Linux PKGBUILDs format.
+liking, something binary packages fail to fulfil by design because of
+hard-versioned runtime dependencies and they not being ment to actually build
+software (usually) for which you require extra tools. A good example of
+situation where binary package managers are not good is when you need something
+that has not been pre-package for the distribution you are using, then you have
+to either package it yourself (the smart and harder aproach) or just install it
+by hand and the distiribution package not knowing about it (the bad aproach,
+what if you want to update the software?). Either way you will have to spend
+quite some time in the begining and learn a lot of things, of course you will
+with SPM too but once users get to know it they say it is "amazing!". You can
+package/port any software you want, usually, in a few minutes on system which
+uses SPM. Why? Because when it builds the software it automatically detects all
+or most of the runtime dependencies that are required by the software being
+build and installed reducing the effort you need to put into this by a lot. And
+back to the point about of easy to change - imagine you need to patch or update
+something imidiatly because of security or other reasons. You have to either
+wait for the binary package maintainer to do this for you or do it yourself
+which, in most cases means learning a new Programming Language (dpkg/make rules
+or ebuilds anyone?). With SPM most system administrators are already familiar
+with the Bourne Again SHell (Bash) which SPM uses for it's build recipes -
+SRCBUILDs - similar to the Arch Linux PKGBUILDs format.
 
 Init, PID 1, services, keyboard mash, hair on the ground. That's the havoc
 you have to deal with when you go for something that starts a process in
