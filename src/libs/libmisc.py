@@ -400,7 +400,6 @@ class Misc(object):
             env={'LC_ALL': 'C'}, shell=shell)
         out, err = pipe.communicate(input=input)
         if pipe.returncode != 0:
-            print pipe.returncode
             raise(Exception('%s %s' % (out, err)))
 
     def system_scanelf(self, sfile, sformat='#F%n', sflags=''):
