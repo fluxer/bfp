@@ -169,7 +169,7 @@ class Clean(object):
 class Dist(object):
     ''' Distribute ports '''
     def __init__(self, targets, do_sources=False, do_clean=False, \
-        directory=os.getcwd()):
+        directory=misc.dir_current()):
         self.targets = targets
         self.do_sources = do_sources
         self.do_clean = do_clean
@@ -475,7 +475,7 @@ class Which(object):
 
 
 class Pack(object):
-    def __init__(self, targets, directory=os.getcwd()):
+    def __init__(self, targets, directory=misc.dir_current()):
         self.targets = targets
         self.directory = directory
 
@@ -490,7 +490,7 @@ class Pack(object):
                 misc.archive_compress(database.local_footprint(target).splitlines(), target_packfile)
 
 class Pkg(object):
-    def __init__(self, targets, directory=os.getcwd()):
+    def __init__(self, targets, directory=misc.dir_current()):
         self.targets = targets
         self.directory = directory
         self.GIT_DIRS = (
@@ -559,7 +559,7 @@ try:
         dist_parser.add_argument('-c', '--clean', action='store_true', \
             help='Clean all sources after creating archive')
         dist_parser.add_argument('-d', '--directory', type=str, \
-            default=os.getcwd(), help='Set output directory')
+            default=misc.dir_current(), help='Set output directory')
         dist_parser.add_argument('TARGETS', nargs='+', type=str, \
             help='Targets to apply actions on')
 
@@ -637,13 +637,13 @@ try:
 
     pack_parser = subparsers.add_parser('pack')
     pack_parser.add_argument('-d', '--directory', type=str, \
-        default=os.getcwd(), help='Set output directory')
+        default=misc.dir_current(), help='Set output directory')
     pack_parser.add_argument('TARGETS', nargs='+', type=str, \
         help='Targets to apply actions on')
 
     pkg_parser = subparsers.add_parser('pkg')
     pkg_parser.add_argument('-d', '--directory', type=str, \
-        default=os.getcwd(), help='Set output directory')
+        default=misc.dir_current(), help='Set output directory')
     pkg_parser.add_argument('TARGETS', nargs='+', type=str, \
         help='Targets to apply actions on')
 

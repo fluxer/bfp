@@ -169,6 +169,14 @@ class Misc(object):
             size += os.path.getsize(sfile)
         return size
 
+    def dir_current(self):
+        ''' Get current directory with fallback '''
+        try:
+            cwd = os.getcwd()
+        except OSError:
+            cwd = '/'
+        return cwd
+
     def list_files(self, directory):
         ''' Get list of files in directory recursively '''
         slist = []
@@ -403,11 +411,7 @@ class Misc(object):
     def system_command(self, command, shell=False, cwd=None):
         ''' Execute system command safely '''
         if not cwd:
-            try:
-                # event this can fail, but it is ment for argument fallback
-                cwd = os.getcwd()
-            except OSError:
-                cwd = '/'
+            self.dir_current()
         elif not os.path.isdir(cwd):
             cwd = '/'
         return subprocess.check_call(command, shell=shell, cwd=cwd)
