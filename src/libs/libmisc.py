@@ -400,9 +400,15 @@ class Misc(object):
         return self.system_output((self.whereis('scanelf'), '-CBF', \
             sformat, sflags, sfile))
 
-    def system_command(self, command, shell=False, cwd=os.getcwd()):
+    def system_command(self, command, shell=False, cwd=None):
         ''' Execute system command safely '''
-        if not os.path.isdir(cwd):
+        if not cwd:
+            try:
+                # event this can fail, but it is ment for argument fallback
+                cwd = os.getcwd()
+            except OSError:
+                cwd = '/'
+        elif not os.path.isdir(cwd):
             cwd = '/'
         return subprocess.check_call(command, shell=shell, cwd=cwd)
 
