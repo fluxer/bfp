@@ -411,7 +411,7 @@ class Misc(object):
     def system_command(self, command, shell=False, cwd=None):
         ''' Execute system command safely '''
         if not cwd:
-            self.dir_current()
+            cwd = self.dir_current()
         elif not os.path.isdir(cwd):
             cwd = '/'
         return subprocess.check_call(command, shell=shell, cwd=cwd)
