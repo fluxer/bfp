@@ -69,10 +69,10 @@ with the Bourne Again SHell (Bash) which SPM uses for it's build recipes -
 SRCBUILDs - similar to the Arch Linux PKGBUILDs format.
 
 Init, PID 1, services, keyboard mash, hair on the ground. That's the havoc
-you have to deal with when you go for something that starts a process in
-the background thinking it is safe to do so relying on a dependency and
-when a service(s) dependency chain has been broken because of power failure
-or simple mistake you have to boot the damn thing by hand typing commands
+you have to deal with when you go for something that starts a important for the
+the boot sequence process in the background thinking it is safe to do so
+relying on dependency chain can been broken from power failure due to garbaged
+file or simple mistake you have to boot the damn thing by hand typing commands
 in a TTY or get a rescue CD and start figuring it out in chroot by trying to
 narrow down the problem in a runlevels and services dependcy chain hell?
 Heck, no! A system boot sequence should not be done in parallel! Instead,

@@ -214,8 +214,8 @@ try:
         help='Show target sources')
     remote_parser.add_argument('-o', '--options', action='store_true', \
         help='Show target options')
-    remote_parser.add_argument('-b', '--backup', action='store_true', \
-        help='Show target backups')
+    remote_parser.add_argument('-b', '--backup', dest='remote_backup', \
+        action='store_true', help='Show target backups')
     remote_parser.add_argument('-p', '--plain', action='store_true', \
         help='Print in plain format')
     remote_parser.add_argument('PATTERN', type=str, \
@@ -357,13 +357,13 @@ try:
             message.sub_info('CHECKDEPENDS', ARGS.checkdepends)
             message.sub_info('SOURCES', ARGS.sources)
             message.sub_info('OPTIONS', ARGS.options)
-            message.sub_info('BACKUP', ARGS.backup)
+            message.sub_info('BACKUP', ARGS.remote_backup)
             message.sub_info('PATTERN', ARGS.PATTERN)
             message.info('Poking remotes...')
         m = libspm.Remote(ARGS.PATTERN, ARGS.name, ARGS.version, \
                 ARGS.description, ARGS.depends, ARGS.makedepends, \
                 ARGS.checkdepends, ARGS.sources, ARGS.options, \
-                ARGS.backup, ARGS.plain)
+                ARGS.remote_backup, ARGS.plain)
         m.main()
 
     elif ARGS.mode == 'source':
