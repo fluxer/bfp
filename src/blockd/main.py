@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/bin/python2
 
 import libudev, time, os, libsystem, threading
 import gobject, dbus, dbus.service, dbus.mainloop.glib
