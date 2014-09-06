@@ -27,7 +27,7 @@ all: clean
 	$(NUITKA) --module plugins/screenshot.py
 	$(NUITKA) --module plugins/server.py
 	$(NUITKA) --module plugins/settings.py
-	$(NUITKA) --module plugins/storage.py
+	# $(NUITKA) --module plugins/storage.py
 	$(NUITKA) --module plugins/terminal.py
 	$(NUITKA) --module plugins/tetrix.py
 	$(NUITKA) --module plugins/www.py
@@ -49,6 +49,7 @@ install:
 	$(INSTALL) -m644 libworkspace.so $(DESTDIR)$(SITEDIR)/libworkspace.so
 	$(INSTALL) -m644 libhighlighter.so $(DESTDIR)$(SITEDIR)/libhighlighter.so
 	$(INSTALL) -m644 *.so $(DESTDIR)/etc/qworkspace/plugins/
+	$(INSTALL) -m644 plugins/storage.py $(DESTDIR)/etc/qworkspace/plugins/
 	$(RM) $(DESTDIR)/etc/qworkspace/plugins/libworkspace.so
 	$(RM) $(DESTDIR)/etc/qworkspace/plugins/libhighlighter.so
 	$(INSTALL) -m644 tr/*.qm $(DESTDIR)$(TRDIR)/
