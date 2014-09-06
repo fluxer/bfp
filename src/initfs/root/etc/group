@@ -19,6 +19,6 @@ mail:x:17:
 uucp:x:18:
 network:x:19:
 power:x:20:
-kvm:x:21:
+input:x:21:
 nogroup:x:99:
 users:x:100:
