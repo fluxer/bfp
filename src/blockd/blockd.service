@@ -1,0 +1,3 @@
+[D-Bus Service]
+Name=com.tiny.QMount
+Exec=/usr/sbin/qmountd
