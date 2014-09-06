@@ -104,7 +104,7 @@ class Plugin(QtCore.QObject):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'server'
-        self.version = "0.9.36 (1c351eb)"
+        self.version = "0.9.37 (1db7d9d)"
         self.description = self.tr('Server plugin')
         self.icon = general.get_icon('applications-geography')
         self.widget = None

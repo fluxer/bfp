@@ -1,6 +1,6 @@
 #!/bin/python2
 
-from PyQt4 import QtCore, QtGui
+from PyQt4 import QtCore, QtGui, QtDBus
 import os, shutil, time, libmisc, libmessage, libsystem, libworkspace
 general = libworkspace.General()
 settings = libworkspace.Settings()
@@ -310,42 +310,6 @@ class Widget(QtGui.QWidget):
         pass
 
 
-class Daemon(QtCore.QThread):
-    def __init__(self, parent):
-        super(Daemon, self).__init__()
-        self.parent = parent
-
-    def run(self):
-        ''' Monitor block devices state '''
-        if not os.path.exists('/sys/class/block'):
-            self.parent.plugins.notify_information(self.tr('No sysfs support'))
-            return
-
-        while True:
-            before = os.listdir('/sys/class/block')
-            time.sleep(1)
-            after = os.listdir('/sys/class/block')
-            for f in after:
-                if '.tmp' in f:
-                    continue
-                if not f in before:
-                    try:
-                        system.do_mount('/dev/' + f)
-                        self.emit(QtCore.SIGNAL('mounted'), '/media/' + f)
-                    except Exception as detail:
-                        self.emit(QtCore.SIGNAL('failed'), str(detail))
-            for f in before:
-                if '.tmp' in f:
-                    continue
-                if not f in after:
-                    try:
-                        system.do_unmount('/dev/' + f)
-                        self.emit(QtCore.SIGNAL('unmounted'), '/media/' + f)
-                    except Exception as detail:
-                        self.emit(QtCore.SIGNAL('failed'), str(detail))
-            time.sleep(1)
-
-
 class ToolWidget(QtGui.QWidget):
     ''' Tool widget '''
     def __init__(self, parent=None):
@@ -364,13 +328,50 @@ class ToolWidget(QtGui.QWidget):
         # FIXME: actually remove button
         self.parent.plugins.notify_information(self.tr('Device unmounted from: %s' % sname))
 
+
+class Interface(QtCore.QObject):
+    def __init__(self, parent, bus):
+        super(Interface, self).__init__()
+        self.parent = parent
+        self.bus = bus
+        self.iface = QtDBus.QDBusInterface('com.blockd.Block', \
+            '/com/blockd/Block', 'com.blockd.Block', self.bus)
+
+    @QtCore.pyqtSlot(str)
+    def add_device(msg):
+        print(msg)
+        name, action, label, fstype, fsusage, fsuuid, tabletype, tablename, \
+            entrytype, dmname, dmlevel = msg.splitlines()
+        if fstype:
+            self.call('Mount', name)
+
+    @QtCore.pyqtSlot(str)
+    def remove_device(msg):
+        print(msg)
+        name, action, label, fstype, fsusage, fsuuid, tabletype, tablename, \
+            entrytype, dmname, dmlevel = msg.splitlines()
+        if fstype:
+            self.call('Unmount', name)
+
+    def call(self, method, args):
+        if self.iface.isValid():
+            result = self.iface.call(method, args)
+            reply = QtDBus.QDBusReply(result)
+            if reply.isValid():
+                self.parent.plugins.notify_information(reply.value())
+            else:
+                self.parent.plugins.notify_critical(reply.error().message())
+        else:
+            self.parent.plugins.notify_critical(self.bus.lastError().message())
+
+
 class Plugin(QtCore.QObject):
     ''' Plugin handler '''
     def __init__(self, parent):
         super(Plugin, self).__init__()
         self.parent = parent
         self.name = 'storage'
-        self.version = "0.9.36 (1c351eb)"
+        self.version = "0.9.37 (1db7d9d)"
         self.description = self.tr('Storage management plugin')
         self.icon = general.get_icon('system-file-manager')
         self.widget = None
@@ -387,11 +388,13 @@ class Plugin(QtCore.QObject):
 
         self.parent.plugins.mime_register('inode/directory', self.name)
 
-        self.daemon = Daemon(self.parent)
-        self.connect(self.daemon, QtCore.SIGNAL('mounted'), self.tool.add_button)
-        self.connect(self.daemon, QtCore.SIGNAL('unmounted'), self.tool.remove_button)
-        self.connect(self.daemon, QtCore.SIGNAL('failed'), self.parent.plugins.notify_critical)
-        self.daemon.start()
+        bus = QtDBus.QDBusConnection.sessionBus()
+        if not bus.isConnected():
+            sys.stderr.write("Cannot connect to the D-Bus session bus.\n")
+        else:
+            con = Interface(self.parent, bus)
+            bus.connect('com.blockd.Block', '/com/blockd/Block', 'com.blockd.Block', 'Add', con.add_device)
+            bus.connect('com.blockd.Block', '/com/blockd/Block', 'com.blockd.Block', 'Remove', con.remove_device)
 
     def open(self, spath):
         ''' Open path in new tab '''
@@ -414,6 +417,5 @@ class Plugin(QtCore.QObject):
     def unload(self):
         ''' Unload plugin '''
         self.applicationsLayout.removeWidget(self.storageButton)
-        self.daemon.quit()
         self.tool.deleteLater()
         self.close()

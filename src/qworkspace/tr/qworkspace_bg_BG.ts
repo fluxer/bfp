@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!DOCTYPE TS>
-<TS version="2.0" language="bg_BG">
-<context>
-    <name>Daemon</name>
-    <message>
-        <location filename="storage.py" line="321"/>
-        <source>No sysfs support</source>
-        <translation>sysfs не се поддържа</translation>
-    </message>
-</context>
+<!DOCTYPE TS><TS version="2.0" language="bg_BG" sourcelanguage="">
 <context>
     <name>MainWindow</name>
     <message>
@@ -105,12 +96,12 @@
         <translation>Снимка на екрана</translation>
     </message>
     <message>
-        <location filename="storage.py" line="374"/>
+        <location filename="storage.py" line="375"/>
         <source>Storage management plugin</source>
         <translation>Плъгин за управление на хранилищата</translation>
     </message>
     <message>
-        <location filename="storage.py" line="400"/>
+        <location filename="storage.py" line="403"/>
         <source>Storage</source>
         <translation>Хранилище</translation>
     </message>
@@ -271,12 +262,12 @@
 <context>
     <name>ToolWidget</name>
     <message>
-        <location filename="storage.py" line="361"/>
+        <location filename="storage.py" line="325"/>
         <source>Device mounted to: %s</source>
         <translation>Монтирано устройство на: %s</translation>
     </message>
     <message>
-        <location filename="storage.py" line="365"/>
+        <location filename="storage.py" line="329"/>
         <source>Device unmounted from: %s</source>
         <translation>Демонтирано устройство от: %s</translation>
     </message>

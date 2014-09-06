@@ -1,9 +1,9 @@
 include ../../Makefile.inc
 
 all: bump clean
-	gcc -shared libudev.c \
-		$(shell pkg-config --cflags --libs python) \
-		$(shell pkg-config --cflags --libs libudev) \
+	$(GCC) -shared libudev.c \
+		$(shell $(PKGCONFIG) --cflags --libs python) \
+		$(shell $(PKGCONFIG) --cflags --libs libudev) \
 		-o _libudev.so
 	$(NUITKA) --module libudev.py
 	# $(NUITKA) main.py
@@ -19,15 +19,15 @@ install:
 	$(INSTALL) -m755 client.py $(DESTDIR)$(SBINDIR)/blockctl
 	$(INSTALL) -m644 libudev.so $(DESTDIR)$(SITEDIR)/libudev.so
 	$(INSTALL) -m644 _libudev.so $(DESTDIR)$(SITEDIR)/_libudev.so
-	$(INSTALL) -m644 blockd.conf $(DESTDIR)/etc/dbus-1/system.d/
-	$(INSTALL) -m644 blockd.service $(DESTDIR)/usr/share/dbus-1/services/
+	$(INSTALL) -m644 blockd.conf $(DESTDIR)$(DBSYSTEMDIR)/blockd.conf
+	$(INSTALL) -m644 blockd.service $(DESTDIR)$(DBSERVICEDIR)/blockd.service
 
 uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libudev.so
 	$(RM) $(DESTDIR)$(SITEDIR)/_libudev.so
 	$(RM) $(DESTDIR)$(SBINDIR)/blockd
-	$(RM) $(DESTDIR)/etc/dbus-1/system.d/blockd.conf
-	$(RM) $(DESTDIR)/usr/share/dbus-1/services/blockd.service
+	$(RM) $(DESTDIR)$(DBSYSTEMDIR)/blockd.conf
+	$(RM) $(DESTDIR)$(DBSERVICEDIR)/blockd.service
 
 clean:
 	$(RM) -r *.build/ *.so *.exe

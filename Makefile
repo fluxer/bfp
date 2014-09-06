@@ -1,6 +1,7 @@
 include Makefile.inc
 
 all:
+	$(MAKE) -C blockd
 	$(MAKE) -C help
 	$(MAKE) -C src/cparted
 	$(MAKE) -C src/libs
@@ -14,6 +15,7 @@ check:
 	$(MAKE) -C src/qworkspace check
 
 install:
+	$(MAKE) -C blockd install
 	$(MAKE) -C etc install
 	$(MAKE) -C icons install
 	$(MAKE) -C help install
@@ -27,6 +29,7 @@ install:
 	$(MAKE) -C src/qworkspace install
 
 uninstall:
+	$(MAKE) -C blockd uninstall
 	$(MAKE) -C etc uninstall
 	$(MAKE) -C icons uninstall
 	$(MAKE) -C help uninstall
@@ -40,6 +43,7 @@ uninstall:
 	$(MAKE) -C src/qworkspace uninstall
 
 clean:
+	$(MAKE) -C blockd clean
 	$(MAKE) -C help clean
 	$(MAKE) -C src/cparted clean
 	$(MAKE) -C src/libs clean

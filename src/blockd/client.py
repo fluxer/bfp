@@ -33,11 +33,11 @@ class connector(QtCore.QObject):
 
     @QtCore.pyqtSlot(str)
     def add_connect(msg):
-        print(dir(msg))
+        print(msg)
 
     @QtCore.pyqtSlot(str)
     def remove_connect(msg):
-        print(dir(msg))
+        print(msg)
 
 dbus_call('Info', '/dev/sdb4')
 con = connector()
