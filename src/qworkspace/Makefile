@@ -31,11 +31,7 @@ all: clean
 	$(NUITKA) --module plugins/terminal.py
 	$(NUITKA) --module plugins/tetrix.py
 	$(NUITKA) --module plugins/www.py
-	$(STRIP) main.exe archive.so calendar.so download.so editor.so \
-		help.so image.so mail.so mixer.so multimedia.so network.so \
-		package.so pdf.so plugins.so quit.so screenshot.so server.so \
-		settings.so storage.so terminal.so tetrix.so www.so \
-		libworkspace.so libhighlighter.so
+	$(STRIP) *.exe *.so
 
 check:
 	$(PYUIC) qworkspace.ui -o qworkspace_ui.py

@@ -3,7 +3,7 @@ include ../../Makefile.inc
 all: bump clean
 	$(NUITKA) mkinitfs.py
 	$(NUITKA) lsinitfs.py
-	$(STRIP) mkinitfs.exe lsinitfs.exe
+	$(STRIP) *.exe
 
 install:
 	$(INSTALL) -dm755 $(DESTDIR)$(BINDIR) $(DESTDIR)$(SBINDIR)

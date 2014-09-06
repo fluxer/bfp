@@ -8,8 +8,7 @@ all: clean
 	$(NUITKA) --module libpackage.py
 	$(NUITKA) --module libsystem.py
 	# $(NUITKA) --module libxlib.py
-	$(STRIP) libarchive.so libmagic.so libmessage.so libmisc.so \
-		libpackage.so libsystem.so # libxlib.so
+	$(STRIP) *.so
 
 check:
 	$(PYTHON) test.py

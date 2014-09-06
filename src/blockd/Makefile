@@ -8,7 +8,7 @@ all: bump clean
 	$(NUITKA) --module libudev.py
 	# $(NUITKA) main.py
 	# $(NUITKA) client.py
-	# $(STRIP) main.exe client.exe
+	# $(STRIP) *.exe *.so
 
 install:
 	$(INSTALL) -dm755 $(DESTDIR)$(SBINDIR) $(DESTDIR)$(SITEDIR) \
@@ -17,8 +17,7 @@ install:
 	# $(INSTALL) -m755 client.exe $(DESTDIR)$(SBINDIR)/blockctl
 	$(INSTALL) -m755 main.py $(DESTDIR)$(SBINDIR)/blockd
 	$(INSTALL) -m755 client.py $(DESTDIR)$(SBINDIR)/blockctl
-	$(INSTALL) -m644 libudev.so $(DESTDIR)$(SITEDIR)/libudev.so
-	$(INSTALL) -m644 _libudev.so $(DESTDIR)$(SITEDIR)/_libudev.so
+	$(INSTALL) -m644 *.so $(DESTDIR)$(SITEDIR)/
 	$(INSTALL) -m644 blockd.conf $(DESTDIR)$(DBSYSTEMDIR)/
 	$(INSTALL) -m644 blockd.service $(DESTDIR)$(DBSERVICEDIR)/
 

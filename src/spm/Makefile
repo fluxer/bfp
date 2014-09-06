@@ -4,7 +4,7 @@ all: bump clean
 	$(NUITKA) --module libspm.py
 	$(NUITKA) spm.py
 	$(NUITKA) tools.py
-	$(STRIP) libspm.so spm.exe tools.exe
+	$(STRIP) *.exe *.so
 
 install:
 	$(INSTALL) -dm755 $(DESTDIR)$(BINDIR) $(DESTDIR)$(SITEDIR)

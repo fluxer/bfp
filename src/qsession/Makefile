@@ -3,7 +3,7 @@ include ../../Makefile.inc
 all: clean
 	$(PYUIC) qsession.ui -o qsession_ui.py
 	$(NUITKA) --recurse-to=qsession_ui main.py
-	$(STRIP) main.exe
+	$(STRIP) *.exe
 
 install:
 	$(INSTALL) -dm755 $(DESTDIR)$(SBINDIR)
