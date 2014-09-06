@@ -12,7 +12,7 @@ PYTHON_VERSION = $(shell $(PYTHON) -c "import sys; print(sys.version[:3])")
 SITEDIR = $(PREFIX)/lib/python$(PYTHON_VERSION)/site-packages
 TRDIR =$(shell $(PYTHON) -c "from PyQt4.QtCore import QLibraryInfo; \
 	print(QLibraryInfo.location(QLibraryInfo.TranslationsPath))")
-DBSYSTEMDIR = $(PREFIX)/etc/dbus-1/system.d/
+DBSYSTEMDIR = /etc/dbus-1/system.d/
 DBSERVICEDIR = $(PREFIX)/share/dbus-1/services/
 GIT = git
 GIT_VERSION = $(shell $(GIT) rev-parse --short HEAD || echo stable)
