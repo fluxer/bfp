@@ -1,10 +1,12 @@
 #!/bin/python2
 
-import libudev, time, os, libsystem, threading
-import gobject, dbus, dbus.service, dbus.mainloop.glib
+import sys, libudev, time, os, libsystem, threading
+import dbus, dbus.service, dbus.mainloop.qt
+from PyQt4 import QtCore
 
+app = QtCore.QCoreApplication(sys.argv)
 system = libsystem.System()
-dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
+dbus.mainloop.qt.DBusQtMainLoop(set_as_default=True)
 session_bus = dbus.SessionBus()
 
 class QMount(dbus.service.Object):
@@ -16,26 +18,26 @@ class QMount(dbus.service.Object):
 
     @dbus.service.signal('com.blockd.Block')
     def Add(self, info):
+        ''' Emit that device add action happend '''
         print("Added", info.splitlines())
         return info
 
     @dbus.service.signal('com.blockd.Block')
     def Remove(self, info):
+        ''' Emit that device remove action happend '''
         print("Removed", info.splitlines())
         return info
 
     @dbus.service.signal('com.blockd.Block')
     def Change(self, info):
+        ''' Emit that device change action happend '''
         print("Changed", info.splitlines())
         return info
 
-    @dbus.service.signal('com.blockd.Block')
-    def Unknown(self, info):
-        print("Unknown", info.splitlines())
-        return info
-
-    @dbus.service.method("com.blockd.Block", in_signature='s', out_signature='s')
+    @dbus.service.method("com.blockd.Block", in_signature='s', \
+        out_signature='s')
     def Info(self, devname):
+        ''' Get information about device '''
         devname = str(devname)
         val = ''
         print('Info about %s requested' % devname)
@@ -46,11 +48,15 @@ class QMount(dbus.service.Object):
             action = libudev.udev_device_get_action(dev)
             label = libudev.udev_device_get_property_value(dev, "ID_FS_LABEL")
             fstype = libudev.udev_device_get_property_value(dev, "ID_FS_TYPE")
-            fsusage = libudev.udev_device_get_property_value(dev, "ID_FS_USAGE")
+            fsusage = libudev.udev_device_get_property_value(dev, \
+                "ID_FS_USAGE")
             fsuuid = libudev.udev_device_get_property_value(dev, "ID_FS_UUID")
-            tabletype = libudev.udev_device_get_property_value(dev, "ID_PART_TABLE_TYPE")
-            tablename = libudev.udev_device_get_property_value(dev, "ID_PART_TABLE_NAME")
-            entrytype = libudev.udev_device_get_property_value(dev, "ID_PART_ENTRY_TYPE")
+            tabletype = libudev.udev_device_get_property_value(dev, \
+                "ID_PART_TABLE_TYPE")
+            tablename = libudev.udev_device_get_property_value(dev, \
+                "ID_PART_TABLE_NAME")
+            entrytype = libudev.udev_device_get_property_value(dev, \
+                "ID_PART_ENTRY_TYPE")
             dmname = libudev.udev_device_get_property_value(dev, "DM_NAME")
             dmlevel = libudev.udev_device_get_property_value(dev, "DM_LEVEL")
             val = '%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s\n%s' % \
@@ -60,8 +66,10 @@ class QMount(dbus.service.Object):
             libudev.udev_device_unref(dev)
         return val
 
-    @dbus.service.method("com.blockd.Block", in_signature='ss', out_signature='s')
+    @dbus.service.method("com.blockd.Block", in_signature='ss', \
+        out_signature='s')
     def Property(self, devname, prop):
+        ''' Get property of block device '''
         devname = str(devname)
         prop = str(prop)
         print('Property of %s requested: %s' % (devname, prop))
@@ -74,16 +82,20 @@ class QMount(dbus.service.Object):
             libudev.udev_device_unref(dev)
         return val
 
-    @dbus.service.method("com.blockd.Block", in_signature='s', out_signature='b')
+    @dbus.service.method("com.blockd.Block", in_signature='s', \
+        out_signature='b')
     def CheckMounted(self, devname):
+        ''' Check if block device is mounted '''
         if not system.check_mounted(devname):
             print("%s is not mounted" % devname)
             return False
         print("%s is mounted" % devname)
         return True
 
-    @dbus.service.method("com.blockd.Block", in_signature='s', out_signature='s')
+    @dbus.service.method("com.blockd.Block", in_signature='s', \
+        out_signature='s')
     def Mount(self, devname):
+        ''' Mount a block device '''
         if not self.Property(devname, "ID_FS_TYPE"):
             print("No filesystem on %s" % devname)
             return("No filesystem on %s" % devname)
@@ -91,8 +103,10 @@ class QMount(dbus.service.Object):
         print("Mounting", devname)
         return str(system.do_mount(devname))
 
-    @dbus.service.method("com.blockd.Block", in_signature='s', out_signature='s')
+    @dbus.service.method("com.blockd.Block", in_signature='s', \
+        out_signature='s')
     def Unmount(self, devname):
+        ''' Unmount a block device '''
         if not system.check_mounted(devname):
             print("%s is not mounted" % devname)
             return("%s is not mounted" % devname)
@@ -100,14 +114,12 @@ class QMount(dbus.service.Object):
         print("Unmounting %s" % devname)
         return str(system.do_unmount(devname))
 
-    @dbus.service.method("com.blockd.Block", in_signature='', out_signature='')
-    def Exit(self):
-        loop.quit()
-
     def Daemon(self):
+        ''' Daemon that monitors events '''
         try:
-            monitor = libudev.udev_monitor_new_from_netlink(self.udev, "udev");
-            libudev.udev_monitor_filter_add_match_subsystem_devtype(monitor, "block", None)
+            monitor = libudev.udev_monitor_new_from_netlink(self.udev, "udev")
+            libudev.udev_monitor_filter_add_match_subsystem_devtype(monitor, \
+                "block", None)
             libudev.udev_monitor_enable_receiving(monitor)
 
             while True:
@@ -117,7 +129,8 @@ class QMount(dbus.service.Object):
                 if monitor and fd:
                     dev = libudev.udev_monitor_receive_device(monitor)
                     if dev:
-                        name = libudev.udev_device_get_property_value(dev, "DEVNAME")
+                        name = libudev.udev_device_get_property_value(dev, \
+                            "DEVNAME")
                         action = libudev.udev_device_get_action(dev)
                         libudev.udev_device_unref(dev)
                         if action == 'add':
@@ -126,8 +139,6 @@ class QMount(dbus.service.Object):
                             self.Remove(self.Info(name))
                         elif action == 'change':
                             self.Change(self.Info(name))
-                        else:
-                            self.Unknown(self.Info(name))
                     time.sleep(1)
         except Exception as detail:
             print(str(detail))
@@ -139,9 +150,7 @@ try:
     thread = threading.Thread(target=object.Daemon)
     thread.start()
     name = dbus.service.BusName('com.blockd.Block', session_bus)
-    loop = gobject.MainLoop()
-    gobject.threads_init()
-    loop.run()
+    sys.exit(app.exec_())
 except KeyboardInterrupt:
     print('Keyboard interrupt')
 finally:
