@@ -1,3 +1,4 @@
 [D-Bus Service]
 Name=com.blockd.Block
 Exec=/sbin/blockd
+User=root
