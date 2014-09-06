@@ -1,9 +1,9 @@
 include Makefile.inc
 
 all:
-	$(MAKE) -C blockd
 	$(MAKE) -C help
 	$(MAKE) -C src/cparted
+	$(MAKE) -C src/blockd
 	$(MAKE) -C src/libs
 	$(MAKE) -C src/initfs
 	$(MAKE) -C src/spm
@@ -15,12 +15,12 @@ check:
 	$(MAKE) -C src/qworkspace check
 
 install:
-	$(MAKE) -C blockd install
 	$(MAKE) -C etc install
 	$(MAKE) -C icons install
 	$(MAKE) -C help install
 	$(MAKE) -C misc install
 	$(MAKE) -C scripts install
+	$(MAKE) -C src/blockd install
 	$(MAKE) -C src/cparted install
 	$(MAKE) -C src/initfs install
 	$(MAKE) -C src/libs install
@@ -29,13 +29,13 @@ install:
 	$(MAKE) -C src/qworkspace install
 
 uninstall:
-	$(MAKE) -C blockd uninstall
 	$(MAKE) -C etc uninstall
 	$(MAKE) -C icons uninstall
 	$(MAKE) -C help uninstall
 	$(MAKE) -C misc uninstall
 	$(MAKE) -C scripts uninstall
-	$(MAKE) -C src/cparted  uninstall
+	$(MAKE) -C src/blockd uninstall
+	$(MAKE) -C src/cparted uninstall
 	$(MAKE) -C src/initfs uninstall
 	$(MAKE) -C src/libs uninstall
 	$(MAKE) -C src/spm uninstall
@@ -43,8 +43,8 @@ uninstall:
 	$(MAKE) -C src/qworkspace uninstall
 
 clean:
-	$(MAKE) -C blockd clean
 	$(MAKE) -C help clean
+	$(MAKE) -C src/blockd clean
 	$(MAKE) -C src/cparted clean
 	$(MAKE) -C src/libs clean
 	$(MAKE) -C src/initfs clean
