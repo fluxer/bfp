@@ -18,8 +18,8 @@ install:
 	$(INSTALL) -m755 main.py $(DESTDIR)$(SBINDIR)/blockd
 	$(INSTALL) -m755 client.py $(DESTDIR)$(SBINDIR)/blockctl
 	$(INSTALL) -m644 *.so $(DESTDIR)$(SITEDIR)/
-	$(INSTALL) -m644 blockd.conf $(DESTDIR)$(DBSYSTEMDIR)/
-	$(INSTALL) -m644 blockd.service $(DESTDIR)$(DBSERVICEDIR)/
+	$(INSTALL) -m644 *.conf $(DESTDIR)$(DBSYSTEMDIR)/
+	$(INSTALL) -m644 *.service $(DESTDIR)$(DBSERVICEDIR)/
 
 uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libudev.so
