@@ -60,11 +60,15 @@ try:
                 return
             sreal = os.readlink(src)
             sfixed = src.replace('/etc/mkinitfs/root', '')
-            sfixed = src.replace('/etc/mkinitfs/hooks', '/hooks')
+            sfixed = sfixed.replace('/etc/mkinitfs/hooks', '/hooks')
+            sdest = ARGS.tmp + sfixed
+            if os.path.islink(sdest):
+                message.sub_debug('Already exists', src)
+                return
             message.sub_debug('Linking', sreal)
-            message.sub_debug('To', ARGS.tmp + sfixed)
-            misc.dir_create(ARGS.tmp + os.path.dirname(sfixed))
-            os.symlink(sreal, ARGS.tmp + sfixed)
+            message.sub_debug('To', sdest)
+            misc.dir_create(os.path.dirname(sdest))
+            os.symlink(sreal, sdest)
             lcopied.append(src)
         elif os.path.isdir(src):
             if src in lcopied:
@@ -72,9 +76,13 @@ try:
                 return
             sfixed = src.replace('/etc/mkinitfs/root', '')
             sfixed = sfixed.replace('/etc/mkinitfs/hooks', '/hooks')
+            sdest = ARGS.tmp + '/' + sfixed
+            if os.path.isdir(sdest):
+                message.sub_debug('Already exists', src)
+                return
             message.sub_debug('Copying', src)
-            message.sub_debug('To', ARGS.tmp + '/' + sfixed)
-            shutil.copytree(src, ARGS.tmp + '/'+ sfixed)
+            message.sub_debug('To', sdest)
+            shutil.copytree(src, sdest)
             lcopied.append(src)
         elif os.path.isfile(src):
             for sfile in misc.system_output((misc.whereis('lddtree'), '-l', src)).split('\n'):
@@ -86,10 +94,14 @@ try:
                 if os.path.islink(sfile):
                     copy_item(sfile)
                     sfile = os.path.dirname(sfile) + '/' + os.readlink(sfile)
+                sdest = ARGS.tmp + '/' + sfixed
+                if os.path.isfile(sdest):
+                    message.sub_debug('Already exists', src)
+                    return
                 message.sub_debug('Copying', sfile)
-                message.sub_debug('To', ARGS.tmp + '/' + sfixed)
-                misc.dir_create(ARGS.tmp + os.path.dirname(sfixed))
-                shutil.copy2(sfile, ARGS.tmp + '/' + sfixed)
+                message.sub_debug('To', sdest)
+                misc.dir_create(os.path.dirname(sdest))
+                shutil.copy2(sfile, sdest)
                 lcopied.append(sfile)
         else:
             message.warning('File or directory does not exist', src)
