@@ -37,7 +37,7 @@ PYUIC = pyuic4
 PYRCC = pyrcc4
 PYLUPDATE = pylupdate4 -noobsolete
 LRELEASE = lrelease
-NUITKA = $(PYTHON) ../../nuitka/bin/nuitka --recurse-not-to=PyQt4,parted,Xlib \
+NUITKA = $(PYTHON) ../../nuitka/bin/nuitka --recurse-not-to=PyQt4,parted \
 	--python-version=$(PYTHON_VERSION)
 PYLINT = pylint
 
