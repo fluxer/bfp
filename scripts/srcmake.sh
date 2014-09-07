@@ -71,7 +71,7 @@ die() {
 }
 
 for src in "${@:-.}";do
-	srcbuild="$src/SRCBUILD"
+	srcbuild="$(realpath $src)/SRCBUILD"
 
 	if [[ -z $(which curl) && -z $(which wget) ]];then
 		error "Neither curl or wget is installed"
@@ -87,13 +87,13 @@ for src in "${@:-.}";do
 	fi
 
 	msg "Checking $srcbuild.."
-	if [[ -z $(grep -e '^version=' "$srcbuild") ]];then
+	if ! grep -q -e '^version=' "$srcbuild";then
 		warn "version not defined in $srcbuild"
 		continue
-	elif [[ -z $(grep -e '^description=' "$srcbuild") ]];then
+	elif ! grep -q -e '^description=' "$srcbuild";then
 		warn "description not defined in $srcbuild"
 		continue
-	elif [[ -z $(grep -e '^src_install()' "$srcbuild") ]];then
+	elif ! grep -q -e '^src_install()' "$srcbuild";then
 		warn "src_install() not defined in $srcbuild"
 		continue
 	fi
@@ -151,7 +151,7 @@ for src in "${@:-.}";do
 	done
 
 	cd "$SOURCE_DIR"
-	if [[ -n $(grep -e '^src_compile()' "$srcbuild") ]];then
+	if grep -q -e '^src_compile()' "$srcbuild";then
 		msg "Compiling sources.."
 		src_compile
 	fi
@@ -167,13 +167,13 @@ for src in "${@:-.}";do
 	find "$INSTALL_DIR" ! -type d -printf '%P\n' > "$INSTALL_DIR/var/local/spm/$src_name/footprint"
 	echo "version=$version" > "$INSTALL_DIR/var/local/spm/$src_name/metadata"
 	echo "description=$description" >> "$INSTALL_DIR/var/local/spm/$src_name/metadata"
-	echo "depends=${depends[@]}" >> "$INSTALL_DIR/var/local/spm/$src_name/metadata"
+	echo "depends=${depends[*]}" >> "$INSTALL_DIR/var/local/spm/$src_name/metadata"
 	echo "size=$(du -s $INSTALL_DIR | awk '{print $1}')" >> "$INSTALL_DIR/var/local/spm/$src_name/metadata"
 
 	msg "Compressing tarball.."
 	tarball="${src_name}_${version}.tar.bz2"
 	cd "$INSTALL_DIR"
-	tar -caf "$src_real/$tarball" *
+	tar -caf "$src_real/$tarball" ./*
 
 	msg "Cleaning up.."
 	rm -rf "$SOURCE_DIR" "$INSTALL_DIR"
