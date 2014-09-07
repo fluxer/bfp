@@ -63,7 +63,7 @@ cleanup those on regular basis or create a cron job for that (FIXME).
 In addition, altought documentation is usually not installed there still may be
 some files in /share/docs that you may get rid of.
 
-# X.Org
+## X.Org
 
 Upon X.Org stack upgrade we highly recommend that you rebuild it in the proper
 order via the alias:
