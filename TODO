@@ -4,39 +4,6 @@
  * Optionally remove build depends that are not required by local target after build
  * Optimize backing up of files
 
-## QWORKSPACE ##
- * Implement elevator for executing root commands (http://www.sudo.ws/sudo_plugin.man.html)
- * Complete archive manager plugin
- * Complete mail manager plugin
- * Improve audio mixer plugin
- * Improve download manager plugin (torrents support)
- * Implement Applications API
- * Implement XKB plugin
- * Implement chat plugin
- * Implement Steam plugin (https://developer.valvesoftware.com/wiki/SteamCMD)
- * Implement Bluetooth (BlueZ) plugin (http://git.kernel.org/cgit/bluetooth/bluez.git/tree/doc)
- * Implement print manager plugin (CUPS, it has web interface)?
- * Implement bug reports plugin (send, query, etc.)
- * Implement system search/indexing plugin (strigi)
- * Implement system backup plugin
- * Implement image convertor plugin
- * Implement more info into recent paths and display it with tooltip:
-  - full path (done)
-  - time accessed
-  - associated with plugin?
- * UI size policies polishment
- * Session manager (save/restore state), see http://qt-project.org/doc/qt-4.8/session.html
- * Notify on low disk space
- * WWW plugin bookmarks cleanup and possibly configurable:
-  - http://linux.die.net/
-  - http://html5test.com/
-  - http://xcolors.net/
- * Support translated help pages?
-
-## ALL QT (on regular basis) ##
- * Expect failures everywhere
- * Translations
-
 ## ALL (on regular basis) ##
  * Run PyLint and do some kung-foo on the code style
  * Make use of sys.prefix and use less hardcode paths
