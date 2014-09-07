@@ -7,7 +7,6 @@ all: clean
 	$(NUITKA) --module libmisc.py
 	$(NUITKA) --module libpackage.py
 	$(NUITKA) --module libsystem.py
-	# $(NUITKA) --module libxlib.py
 	$(STRIP) *.so
 
 check:
@@ -24,7 +23,6 @@ uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libmisc.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libpackage.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libsystem.so
-	$(RM) $(DESTDIR)$(SITEDIR)/libxlib.so
 
 clean:
 	$(RM) -r *.build/ *.so
