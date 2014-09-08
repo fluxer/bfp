@@ -548,7 +548,7 @@ class Source(object):
                     continue
                 message.sub_info('Updating icons cache')
                 message.sub_debug(sdir)
-                misc.system_command(('gtk-update-icon-cache', '-q', '-t', '-f', sdir))
+                misc.system_command(('gtk-update-icon-cache', '-q', '-t', '-i', '-f', sdir))
                 run_icon_cache = False
 
     def remove_target_file(self, sfile):
