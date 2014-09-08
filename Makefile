@@ -13,7 +13,6 @@ check:
 
 install:
 	$(MAKE) -C etc install
-	$(MAKE) -C icons install
 	$(MAKE) -C help install
 	$(MAKE) -C misc install
 	$(MAKE) -C scripts install
@@ -25,7 +24,6 @@ install:
 
 uninstall:
 	$(MAKE) -C etc uninstall
-	$(MAKE) -C icons uninstall
 	$(MAKE) -C help uninstall
 	$(MAKE) -C misc uninstall
 	$(MAKE) -C scripts uninstall
