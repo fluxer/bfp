@@ -3,6 +3,7 @@
  * Use Makefiles for build scripts?
  * Optionally remove build depends that are not required by local target after build
  * Optimize backing up of files
+ * Check for unnecessary backup of files
 
 ## ALL (on regular basis) ##
  * Run PyLint and do some kung-foo on the code style
