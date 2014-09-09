@@ -5,7 +5,7 @@ import sip
 sip.setapi('QString', 2)
 sip.setapi('QVariant', 2)
 
-import sys, os
+import sys, os, argparse
 from PyQt4 import QtCore, QtDBus
 
 app = QtCore.QCoreApplication(sys.argv)
@@ -27,22 +27,44 @@ def dbus_call(method, args):
     else:
         print(str(bus.lastError().message()))
 
-class connector(QtCore.QObject):
-    def __init__(self, parent=None):
-        super(connector, self).__init__(parent)
+app_version = "0.9.36 (e9ed0c7)"
 
-    @QtCore.pyqtSlot(str)
-    def add_connect(msg):
-        print(msg)
+try:
+    parser = argparse.ArgumentParser(prog='blockdctl', \
+        description='Block daemon controller')
 
-    @QtCore.pyqtSlot(str)
-    def remove_connect(msg):
-        print(msg)
+    parser.add_argument('-m', '--mount', type=str, \
+        help='Mount a block device')
+    parser.add_argument('-u', '--unmount', type=str, \
+        help='Unmount a block device')
+    parser.add_argument('--debug', action='store_true', \
+        help='Enable debug messages')
+    parser.add_argument('--version', action='version', \
+        version='blockdctl v' + app_version, \
+        help='Show blockdctl version and exit')
 
-dbus_call('Info', '/dev/sdb4')
-con = connector()
-bus.connect('com.blockd.Block', '/com/blockd/Block', 'com.blockd.Block', 'Add', con.add_connect)
-bus.connect('com.blockd.Block', '/com/blockd/Block', 'com.blockd.Block', 'Remove', con.remove_connect)
+    ARGS = parser.parse_args()
 
+    if ARGS.mount:
+        dbus_call('Mount', ARGS.mount)
+    elif ARGS.unmount:
+        dbus_call('Unmount', ARGS.unmount)
+    else:
+        parser.print_help()
 
-sys.exit(app.exec_())
+except OSError as detail:
+    print('OS', detail)
+    sys.exit(3)
+except IOError as detail:
+    print('IO', detail)
+    sys.exit(4)
+except KeyboardInterrupt:
+    print('Interrupt signal received')
+    sys.exit(5)
+except SystemExit:
+    sys.exit(2)
+except Exception as detail:
+    print('Unexpected error', detail)
+    sys.exit(1)
+#finally:
+#    raise

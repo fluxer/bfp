@@ -101,7 +101,11 @@ class QMount(dbus.service.Object):
             return("No filesystem on %s" % devname)
 
         print("Mounting", devname)
-        return str(system.do_mount(devname))
+        try:
+            system.do_mount(devname)
+        except Exception as detail:
+            return str(detail)
+        return ''
 
     @dbus.service.method("com.blockd.Block", in_signature='s', \
         out_signature='s')
@@ -112,7 +116,11 @@ class QMount(dbus.service.Object):
             return("%s is not mounted" % devname)
 
         print("Unmounting %s" % devname)
-        return str(system.do_unmount(devname))
+        try:
+            system.do_unmount(devname)
+        except Exception as detail:
+            return str(detail)
+        return ''
 
     def Daemon(self):
         ''' Daemon that monitors events '''
