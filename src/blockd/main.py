@@ -1,11 +1,11 @@
 #!/bin/python2
 
-import sys, libudev, time, os, libsystem, threading
+import sys, libudev, time, os, libmisc, threading
 import dbus, dbus.service, dbus.mainloop.qt
 from PyQt4 import QtCore
 
+misc = libmisc.Misc()
 app = QtCore.QCoreApplication(sys.argv)
-system = libsystem.System()
 dbus.mainloop.qt.DBusQtMainLoop(set_as_default=True)
 session_bus = dbus.SessionBus()
 
@@ -86,11 +86,13 @@ class QMount(dbus.service.Object):
         out_signature='b')
     def CheckMounted(self, devname):
         ''' Check if block device is mounted '''
-        if not system.check_mounted(devname):
-            print("%s is not mounted" % devname)
-            return False
-        print("%s is mounted" % devname)
-        return True
+        for line in misc.file_readlines('/proc/mounts'):
+            sdevice, sdirectory, stype, soptions, sfsck, sfsck2 = line.split()
+            if sdevice == string or sdirectory == string:
+                print("%s is mounted" % devname)
+                return True
+        print("%s is not mounted" % devname)
+        return False
 
     @dbus.service.method("com.blockd.Block", in_signature='s', \
         out_signature='s')
@@ -102,7 +104,15 @@ class QMount(dbus.service.Object):
 
         print("Mounting", devname)
         try:
-            system.do_mount(devname)
+            directory = '/media/' + os.path.basename(devname)
+            fstype = self.Property(devname, 'ID_FS_TYPE')
+            if not fstype:
+                return
+            misc.system_command((misc.whereis('modprobe'), '-b', fstype))
+            if not os.path.isdir(directory):
+                os.makedirs(directory)
+            if not self.check_mounted(devname):
+                misc.system_command((misc.whereis('mount'), devname, directory))
         except Exception as detail:
             return str(detail)
         return ''
@@ -117,7 +127,15 @@ class QMount(dbus.service.Object):
 
         print("Unmounting %s" % devname)
         try:
-            system.do_unmount(devname)
+            directory = os.path.join('/media', os.path.basename(devname))
+            if self.check_mounted(devname):
+                misc.system_command((misc.whereis('umount'), devname))
+            elif os.path.ismount(directory):
+                misc.system_command((misc.whereis('umount'), directory))
+            else:
+                return
+            if os.path.isdir(directory):
+                os.rmdir(directory)
         except Exception as detail:
             return str(detail)
         return ''

@@ -21,7 +21,7 @@ def dbus_call(method, args):
         result = iface.call(method, args)
         reply = QtDBus.QDBusReply(result)
         if reply.isValid():
-            print(reply.value(), result)
+            print(reply.value())
         else:
             print(str(reply.error().message()))
     else:
@@ -32,7 +32,8 @@ app_version = "0.9.36 (e9ed0c7)"
 try:
     parser = argparse.ArgumentParser(prog='blockdctl', \
         description='Block daemon controller')
-
+    parser.add_argument('-i', '--info', type=str, \
+        help='Get information about block device')
     parser.add_argument('-m', '--mount', type=str, \
         help='Mount a block device')
     parser.add_argument('-u', '--unmount', type=str, \
@@ -45,7 +46,9 @@ try:
 
     ARGS = parser.parse_args()
 
-    if ARGS.mount:
+    if ARGS.info:
+        dbus_call('Info', ARGS.info)
+    elif ARGS.mount:
         dbus_call('Mount', ARGS.mount)
     elif ARGS.unmount:
         dbus_call('Unmount', ARGS.unmount)
