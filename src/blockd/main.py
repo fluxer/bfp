@@ -7,7 +7,7 @@ from PyQt4 import QtCore
 misc = libmisc.Misc()
 app = QtCore.QCoreApplication(sys.argv)
 dbus.mainloop.qt.DBusQtMainLoop(set_as_default=True)
-session_bus = dbus.SessionBus()
+session_bus = dbus.SystemBus()
 
 class QMount(dbus.service.Object):
     def __init__(self, conn, object_path='/com/blockd/Block'):

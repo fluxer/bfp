@@ -9,7 +9,7 @@ import sys, os, argparse
 from PyQt4 import QtCore, QtDBus
 
 app = QtCore.QCoreApplication(sys.argv)
-bus = QtDBus.QDBusConnection.sessionBus()
+bus = QtDBus.QDBusConnection.systemBus()
 if not bus.isConnected():
     sys.stderr.write("Cannot connect to the D-Bus session bus.\n")
     sys.exit(1)
