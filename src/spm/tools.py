@@ -89,7 +89,7 @@ class Check(object):
                             message.sub_debug('Library needed but in depends', match)
                         elif match and not match in target_depends:
                             message.sub_debug('Library needed but in local', match)
-                            target_depends = '%s %s' % (target_depends, match)
+                            target_depends.append(match)
                         elif libspm.IGNORE_MISSING:
                             message.sub_warning('Library needed, not in any local', lib)
                         else:
@@ -127,7 +127,7 @@ class Check(object):
                                 message.sub_debug('Dependency needed but in depends', match)
                             elif match and not match in target_depends:
                                 message.sub_debug('Dependency needed but in local', match)
-                                target_depends = '%s %s' % (target_depends, match)
+                                target_depends.append(match)
                             elif libspm.IGNORE_MISSING:
                                 message.sub_warning('Dependency needed, not in any local', bang)
                             else:

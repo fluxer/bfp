@@ -207,7 +207,7 @@ class TestSuite(unittest.TestCase):
 
     def test_local_target_depends(self):
         self.assertEqual(database.local_metadata(self.local_name, 'depends'),
-            self.local_depends)
+            [self.local_depends])
 
     def test_local_target_size(self):
         self.assertEqual(database.local_metadata(self.local_name, 'size'),
