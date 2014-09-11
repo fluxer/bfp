@@ -87,7 +87,7 @@ Written by Sebastien Luttringer and Dave Reisner. Forked by Ivailo Monev.
 
 ## COPYRIGHT
 
-Copyright (c) 2012-2014 Ivailo Monev licensed through the GPLv2 License
+Copyright (c) 2012-2014 Ivailo Monev licensed through custom License
 
 ## SEE ALSO
 

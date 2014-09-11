@@ -87,7 +87,7 @@ Ivailo Monev <xakepa10@gmail.com>
 
 ## COPYRIGHT
 
-Copyright (c) 2014 Ivailo Monev licensed through the GPLv2 License
+Copyright (c) 2014 Ivailo Monev licensed through custom License
 
 ## SEE ALSO
 
