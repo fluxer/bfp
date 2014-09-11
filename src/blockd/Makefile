@@ -26,7 +26,7 @@ uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libudev.so
 	$(RM) $(DESTDIR)$(SITEDIR)/_libudev.so
 	$(RM) $(DESTDIR)$(SBINDIR)/blockd
-	$(RM) $(DESTDIR)$(SBINDIR)/blockctl
+	$(RM) $(DESTDIR)$(BINDIR)/blockctl
 	$(RM) $(DESTDIR)$(DBSYSTEMDIR)/blockd.conf
 	$(RM) $(DESTDIR)$(DBSERVICEDIR)/blockd.service
 
