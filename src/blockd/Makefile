@@ -35,6 +35,6 @@ clean:
 	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
 bump:
-	# $(SED) 's|^app_version.*|app_version = "$(VERSION) ($(GIT_VERSION))"|' -i main.py
+	$(SED) 's|^app_version.*|app_version = "$(VERSION) ($(GIT_VERSION))"|' -i client.py
 
 .PHONY: all check install uninstall clean bump

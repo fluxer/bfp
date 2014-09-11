@@ -5,7 +5,7 @@ import sip
 sip.setapi('QString', 2)
 sip.setapi('QVariant', 2)
 
-import sys, os, argparse
+import sys, argparse
 from PyQt4 import QtCore, QtDBus
 
 app = QtCore.QCoreApplication(sys.argv)
@@ -14,7 +14,8 @@ if not bus.isConnected():
     sys.stderr.write("Cannot connect to the D-Bus session bus.\n")
     sys.exit(1)
 
-iface = QtDBus.QDBusInterface('com.blockd.Block', '/com/blockd/Block', 'com.blockd.Block', bus)
+iface = QtDBus.QDBusInterface('com.blockd.Block', '/com/blockd/Block', \
+    'com.blockd.Block', bus)
 
 def dbus_call(method, args):
     if iface.isValid():
@@ -27,7 +28,7 @@ def dbus_call(method, args):
     else:
         print(str(bus.lastError().message()))
 
-app_version = "0.9.36 (e9ed0c7)"
+app_version = "0.9.38 (d6b9bbd)"
 
 try:
     parser = argparse.ArgumentParser(prog='blockdctl', \

@@ -88,7 +88,8 @@ class QMount(dbus.service.Object):
         ''' Check if block device is mounted '''
         for line in misc.file_readlines('/proc/mounts'):
             sdevice, sdirectory, stype, soptions, sfsck, sfsck2 = line.split()
-            if sdevice == string or sdirectory == string:
+            if sdevice == devname \
+                or sdirectory == '/media/' + os.path.basename(devname):
                 print("%s is mounted" % devname)
                 return True
         print("%s is not mounted" % devname)
@@ -104,14 +105,14 @@ class QMount(dbus.service.Object):
 
         print("Mounting", devname)
         try:
-            directory = '/media/' + os.path.basename(devname)
+            directory = os.path.join('/media', os.path.basename(devname))
             fstype = self.Property(devname, 'ID_FS_TYPE')
             if not fstype:
                 return
             misc.system_command((misc.whereis('modprobe'), '-b', fstype))
             if not os.path.isdir(directory):
                 os.makedirs(directory)
-            if not self.check_mounted(devname):
+            if not self.CheckMounted(devname):
                 misc.system_command((misc.whereis('mount'), devname, directory))
         except Exception as detail:
             return str(detail)
@@ -121,14 +122,14 @@ class QMount(dbus.service.Object):
         out_signature='s')
     def Unmount(self, devname):
         ''' Unmount a block device '''
-        if not system.check_mounted(devname):
+        if not self.CheckMounted(devname):
             print("%s is not mounted" % devname)
             return("%s is not mounted" % devname)
 
         print("Unmounting %s" % devname)
         try:
             directory = os.path.join('/media', os.path.basename(devname))
-            if self.check_mounted(devname):
+            if self.CheckMounted(devname):
                 misc.system_command((misc.whereis('umount'), devname))
             elif os.path.ismount(directory):
                 misc.system_command((misc.whereis('umount'), directory))
