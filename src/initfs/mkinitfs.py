@@ -60,7 +60,6 @@ try:
                 return
             sreal = os.readlink(src)
             sfixed = src.replace('/etc/mkinitfs/root', '')
-            sfixed = sfixed.replace('/etc/mkinitfs/hooks', '/hooks')
             sdest = ARGS.tmp + sfixed
             if os.path.islink(sdest):
                 message.sub_debug('Already exists', src)
@@ -75,7 +74,6 @@ try:
                 message.sub_debug('Already copied', src)
                 return
             sfixed = src.replace('/etc/mkinitfs/root', '')
-            sfixed = sfixed.replace('/etc/mkinitfs/hooks', '/hooks')
             sdest = ARGS.tmp + '/' + sfixed
             if os.path.isdir(sdest):
                 message.sub_debug('Already exists', src)
@@ -90,7 +88,6 @@ try:
                     message.sub_debug('Already copied', sfile)
                     continue
                 sfixed = sfile.replace('/etc/mkinitfs/root', '')
-                sfixed = sfixed.replace('/etc/mkinitfs/hooks', '/hooks')
                 if os.path.islink(sfile):
                     copy_item(sfile)
                     sfile = os.path.dirname(sfile) + '/' + os.readlink(sfile)
@@ -151,11 +148,6 @@ try:
                 if not line or line.startswith('#'):
                     continue
                 copy_item(line)
-
-    message.sub_info('Copying hooks')
-    if os.path.isdir('/etc/mkinitfs/hooks'):
-        for sfile in misc.list_files('/etc/mkinitfs/hooks'):
-            copy_item(sfile)
 
     message.sub_info('Copying modules')
     if os.path.isdir('/etc/mkinitfs/modules'):
