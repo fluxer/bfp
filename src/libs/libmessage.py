@@ -1,7 +1,6 @@
 #!/bin/python2
 
 import sys, curses, syslog
-from datetime import datetime
 
 
 # http://stackoverflow.com/questions/107705/python-output-buffering
@@ -70,7 +69,7 @@ class Message(object):
             self.log_message('info', '%s: %s' % (msg, marker))
         else:
             print('%s* %s%s' % (self.cmarker, self.cnormal, msg))
-            self.log_message('info',  msg)
+            self.log_message('info', msg)
 
 
     def warning(self, msg, marker=None):
@@ -121,7 +120,8 @@ class Message(object):
                 self.cnormal, msg, self.cwarning, marker, self.cnormal))
             self.log_message('warning', '%s: %s' % (msg, marker))
         else:
-            sys.stderr.write('%s  => %s%s\n' % (self.cwarning, self.cnormal, msg))
+            sys.stderr.write('%s  => %s%s\n' % (self.cwarning, \
+                self.cnormal, msg))
             self.log_message('warning', msg)
 
     def sub_critical(self, msg, marker=None):
@@ -131,15 +131,16 @@ class Message(object):
                 self.cnormal, msg, self.ccritical, marker, self.cnormal))
             self.log_message('critical', '%s: %s' % (msg, marker))
         else:
-            sys.stderr.write('%s  => %s%s\n' % (self.ccritical, self.cnormal, msg))
+            sys.stderr.write('%s  => %s%s\n' % (self.ccritical, \
+                self.cnormal, msg))
             self.log_message('critical', msg)
 
     def sub_debug(self, msg, marker=None):
         ''' Print sub-message with DEBUG status '''
         if self.DEBUG:
             if not marker is None:
-                print('%s  => %s%s: %s%s%s' % (self.cdebug, self.cnormal, msg, \
-                    self.cdebug, marker, self.cnormal))
+                print('%s  => %s%s: %s%s%s' % (self.cdebug, self.cnormal, \
+                    msg, self.cdebug, marker, self.cnormal))
                 self.log_message('debug', '%s: %s' % (msg, marker))
             else:
                 print('%s  => %s%s' % (self.cdebug, self.cnormal, msg))
