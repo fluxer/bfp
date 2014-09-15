@@ -19,7 +19,7 @@ GIT_VERSION = $(shell $(GIT) rev-parse --short HEAD || echo stable)
 
 MACHINE = $(shell $(GCC) -dumpmachine)
 ARCH = $(shell uname -m | $(SED) 's|_|-|')
-JOBS = $(shell echo $$((`nproc || echo 1`+1)))
+JOBS = $(shell echo $$((`$(GREP) -c ^processor /proc/cpuinfo || echo 1`+1)))
 
 GREP = grep
 FIND = find
