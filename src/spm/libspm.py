@@ -8,7 +8,7 @@ import gzip
 import shutil
 import re
 import ConfigParser
-import compileall
+import compileall, site
 from datetime import datetime
 
 import libmessage
@@ -772,12 +772,15 @@ class Source(object):
                     misc.system_command((scanelf, '-CBXrq', sfile))
 
         if self.python_compile:
-            # FIXME: this blindly assumes that .py files are not placed in /bin, /sbin, etc.
             message.sub_info('Byte-compiling Python files')
             for sfile in target_content.keys():
-                if not sfile.endswith('.py'):
-                    continue
+                for spath in site.getsitepackages():
+                    if not spath in sfile:
+                        continue
                 message.sub_debug('Compiling Python file', sfile)
+                # force build the caches to prevent access time issues with .pyc files
+                # being older that .py files because .py files where modified after
+                # the usual installation procedure
                 compileall.compile_file(sfile, force=True, quiet=True)
 
         message.sub_info('Checking runtime dependencies')
