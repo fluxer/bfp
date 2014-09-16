@@ -9,9 +9,9 @@ spm - Source Package Manager
         [--external EXTERNAL] [--chost CHOST] [--cflags CFLAGS]
         [--cxxflags CXXFLAGS] [--cppflags CPPFLAGS] [--ldflags LDFLAGS]
         [--makeflags MAKEFLAGS] [--man MAN] [--binaries BINARIES]
-        [--shared SHARED] [--static STATIC] [--missing MISSING]
-        [--conflicts CONFLICTS] [--backup BACKUP] [--scripts SCRIPTS]
-        [--triggers TRIGGERS] [--debug] [--version]
+        [--shared SHARED] [--static STATIC] [--pycompile PYCOMPILE]
+        [--missing MISSING] [--conflicts CONFLICTS] [--backup BACKUP]
+        [--scripts SCRIPTS] [--triggers TRIGGERS] [--debug] [--version]
         {repo,remote,source,local,who} ...
 
 ## DESCRIPTION
