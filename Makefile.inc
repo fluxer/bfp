@@ -8,8 +8,7 @@ SHAREDIR = $(PREFIX)/share
 MANDIR = $(SHAREDIR)/man
 PYTHON = python2
 PYTHON_VERSION = $(shell $(PYTHON) -c "import sys; print(sys.version[:3])")
-# Debian and derivatives use dist-packages - how glorious!
-SITEDIR = $(PREFIX)/lib/python$(PYTHON_VERSION)/site-packages
+SITEDIR = $(shell $(PYTHON) -c "import site; print(site.getsitepackages()[0])")
 TRDIR =$(shell $(PYTHON) -c "from PyQt4.QtCore import QLibraryInfo; \
 	print(QLibraryInfo.location(QLibraryInfo.TranslationsPath))")
 DBSYSTEMDIR = /etc/dbus-1/system.d/
