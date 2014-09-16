@@ -146,7 +146,7 @@ Function defining instructions what to do after removing the target.
     _base="file-$version"
     sources=("ftp://ftp.astron.com/pub/file/$_base.tar.gz"
         "dummy.patch")
-    options=('!binaries' '!shared' '!static' 'man' 'mirror' 'missing' '!rpath')
+    options=('binaries' 'shared' 'static' 'man' 'mirror' '!missing' 'rpath' 'pycompile')
     backup=('etc/bar/baz.conf')
     
     src_compile() {

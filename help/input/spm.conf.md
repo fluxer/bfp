@@ -150,7 +150,16 @@ Default: True
 ### STRIP_RPATH
 
 Set whether to strip insecure RPATH from binaries and libraries. This reduces
-reduces the chance for exploiting them but it may corrupt some of them.
+the chance for exploiting them but it may corrupt some of them.
+
+Default: True
+
+### PYTHON_COMPILE
+
+Set whether to compile Python files into cached byte-code. This ensures
+consistency that SPM keeps track of .pyc/.pyo files and removes then when
+the target they are owned by is removed from the system as well as speeds up
+initial usage of Python modules.
 
 Default: True
 

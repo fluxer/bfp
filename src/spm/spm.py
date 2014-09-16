@@ -13,7 +13,7 @@ import os
 import re
 
 
-app_version = "0.9.38 (d6b9bbd)"
+app_version = "0.9.39 (3de1047)"
 
 try:
     import libmessage
@@ -134,6 +134,12 @@ try:
         ''' Override stripping of RPATH '''
         def __call__(self, parser, namespace, values, option_string=None):
             libspm.STRIP_RPATH = values
+            setattr(namespace, self.dest, values)
+
+    class OverridePyCompile(argparse.Action):
+        ''' Override compiling of Python files '''
+        def __call__(self, parser, namespace, values, option_string=None):
+            libspm.PYTHON_COMPILE = values
             setattr(namespace, self.dest, values)
 
     class OverrideMissing(argparse.Action):
@@ -310,6 +316,8 @@ try:
         action=OverrideStatic, help='Set whether to strip static libraries')
     parser.add_argument('--rpath', type=ast.literal_eval, \
         action=OverrideRpath, help='Set whether to strip RPATH')
+    parser.add_argument('--pycompile', type=ast.literal_eval, \
+        action=OverridePyCompile, help='Set whether to compile Python files')
     parser.add_argument('--missing', type=ast.literal_eval, \
         action=OverrideMissing, \
         help='Set whether to ignore missing runtime dependencies')

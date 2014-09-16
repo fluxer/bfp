@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os
 
-app_version = "0.9.31 (63c68ab)"
+app_version = "0.9.39 (3de1047)"
 
 tmpdir = None
 keep = False

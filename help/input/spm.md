@@ -156,6 +156,7 @@ be implemented later on.
     --shared SHARED       Set whether to strip shared libraries
     --static STATIC       Set whether to strip static libraries
     --rpath RPATH         Set whether to strip RPATH
+    --pycompile PYCOMPILE Set whether to compile Python files
     --missing MISSING     Set whether to ignore missing runtime dependencies
     --conflicts CONFLICTS Set whether to check for conflicts
     --backup BACKUP       Set whether to backup files

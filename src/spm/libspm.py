@@ -8,6 +8,7 @@ import gzip
 import shutil
 import re
 import ConfigParser
+import compileall
 from datetime import datetime
 
 import libmessage
@@ -44,6 +45,7 @@ if not os.path.isfile(MAIN_CONF):
     STRIP_SHARED = False
     STRIP_STATIC = False
     STRIP_RPATH = False
+    PYTHON_COMPILE = False
     IGNORE_MISSING = True
     CONFLICTS = False
     BACKUP = False
@@ -73,6 +75,7 @@ else:
     STRIP_SHARED = conf.getboolean('install', 'STRIP_SHARED')
     STRIP_STATIC = conf.getboolean('install', 'STRIP_STATIC')
     STRIP_RPATH = conf.getboolean('install', 'STRIP_RPATH')
+    PYTHON_COMPILE = conf.getboolean('install', 'PYTHON_COMPILE')
     IGNORE_MISSING = conf.getboolean('install', 'IGNORE_MISSING')
     CONFLICTS = conf.getboolean('merge', 'CONFLICTS')
     BACKUP = conf.getboolean('merge', 'BACKUP')
@@ -389,6 +392,7 @@ class Source(object):
         self.strip_rpath = STRIP_RPATH
         self.compress_man = COMPRESS_MAN
         self.ignore_missing = IGNORE_MISSING
+        self.python_compile = PYTHON_COMPILE
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
         misc.EXTERNAL = EXTERNAL
@@ -767,6 +771,15 @@ class Source(object):
                     message.sub_debug('Stripping RPATH', sfile)
                     misc.system_command((scanelf, '-CBXrq', sfile))
 
+        if self.python_compile:
+            # FIXME: this blindly assumes that .py files are not placed in /bin, /sbin, etc.
+            message.sub_info('Byte-compiling Python files')
+            for sfile in target_content.keys():
+                if not sfile.endswith('.py'):
+                    continue
+                message.sub_debug('Compiling Python file', sfile)
+                compileall.compile_file(sfile, force=True, quiet=True)
+
         message.sub_info('Checking runtime dependencies')
         missing_detected = False
         for sfile, smime in target_content.iteritems():
@@ -1114,6 +1127,13 @@ class Source(object):
                     message.sub_warning('Overriding IGNORE_MISSING to', 'False')
                     self.ignore_missing = False
 
+                if option == 'pycompile' and not self.python_compile:
+                    message.sub_warning('Overriding PYTHON_COMPILE to', 'True')
+                    self.python_compile = True
+                elif option == '!pycompile' and self.python_compile:
+                    message.sub_warning('Overriding PYTHON_COMPILE to', 'False')
+                    self.python_compile = False
+
             if self.do_clean or automake:
                 message.sub_info('Starting %s cleanup at' % self.target_name, datetime.today())
                 self.clean()
@@ -1182,6 +1202,7 @@ class Source(object):
             self.strip_shared = STRIP_SHARED
             self.strip_static = STRIP_STATIC
             self.strip_rpath = STRIP_RPATH
+            self.python_compile = PYTHON_COMPILE
             self.compress_man = COMPRESS_MAN
             self.ignore_missing = IGNORE_MISSING
 
