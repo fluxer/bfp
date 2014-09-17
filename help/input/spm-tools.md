@@ -5,7 +5,7 @@ spm-tools - Source Package Manager Tools
 ## SYNOPSIS
 
     spm-tools [-h] [--debug] [--version]
-        {dist,edit,lint,merge,sane,clean,check,which,pack,pkg} ...
+        {dist,edit,lint,merge,sane,clean,check,which,pack,pkg,serve} ...
 
 ## DESCRIPTION
 
@@ -168,11 +168,14 @@ variable with fallback to Vim.
     -d DIRECTORY,
     --directory DIRECTORY Set output directory
 
+### SERVE MODE
+
 #### optional arguments
 
     -h, --help            Show this help message and exit
-    -d DIRECTORY,
-    --directory DIRECTORY Set output directory
+    -p PORT, --port PORT  Use port for the server
+    -a ADDRESS, --address ADDRESS
+                        Use address for the server
 
 ## EXAMPLES
 

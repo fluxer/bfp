@@ -11,6 +11,7 @@ import shutil
 import os
 import re
 import difflib
+import SimpleHTTPServer, SocketServer
 
 import libmessage
 message = libmessage.Message()
@@ -183,7 +184,7 @@ class Dist(object):
                 message.sub_critical('Invalid target', target)
                 sys.exit(2)
             # in case target is a directory ending with a slash basename gets
-            # confused so normalize the path before that
+            # confused so normalize the path before first
             target_basename = os.path.basename(os.path.normpath(target))
 
             target_version = database.remote_metadata(target, 'version')
@@ -540,6 +541,25 @@ class Pkg(object):
                 message.sub_critical('Target not found', target)
             sys.exit(2)
 
+
+class Serve(object):
+    def __init__(self, port, address):
+        self.port = port
+        self.address = address
+
+    def main(self):
+        httpd = None
+        try:
+            message.sub_info('Serving caches directory')
+            os.chdir(libspm.CACHE_DIR)
+            handler = SimpleHTTPServer.SimpleHTTPRequestHandler
+            httpd = SocketServer.TCPServer((self.address, self.port), handler)
+            httpd.serve_forever()
+        finally:
+            if httpd:
+                httpd.shutdown()
+
+
 try:
     EUID = os.geteuid()
 
@@ -647,6 +667,12 @@ try:
         default=misc.dir_current(), help='Set output directory')
     pkg_parser.add_argument('TARGETS', nargs='+', type=str, \
         help='Targets to apply actions on')
+
+    serve_parser = subparsers.add_parser('serve')
+    serve_parser.add_argument('-p', '--port', action='store', \
+        type=int, default=8000, help='Use port for the server')
+    serve_parser.add_argument('-a', '--address', action='store', \
+        type=str, default='', help='Use address for the server')
 
     parser.add_argument('--debug', nargs=0, action=OverrideDebug, \
         help='Enable debug messages')
@@ -779,6 +805,14 @@ try:
         message.sub_info('DIRECTORY', ARGS.directory)
         message.sub_info('TARGETS', ARGS.TARGETS)
         m = Pkg(ARGS.TARGETS, ARGS.directory)
+        m.main()
+
+    elif ARGS.mode == 'serve':
+        message.info('Runtime information')
+        message.sub_info('CACHE_DIR', libspm.CACHE_DIR)
+        message.sub_info('PORT', ARGS.port)
+        message.sub_info('ADDRESS', ARGS.address)
+        m = Serve(ARGS.port, ARGS.address)
         m.main()
 
 except ConfigParser.Error as detail:
