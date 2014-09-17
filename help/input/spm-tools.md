@@ -37,7 +37,7 @@ variable with fallback to Vim.
 
 #### positional arguments
 
-    {dist,edit,lint,merge,sane,clean,check}
+    {dist,edit,lint,merge,sane,clean,check,which,pack,pkg,serve}
 
 #### optional arguments
 
