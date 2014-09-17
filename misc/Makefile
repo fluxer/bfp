@@ -1,7 +1,9 @@
 include ../Makefile.inc
 
 install:
-	$(INSTALL) -dm755 $(DESTDIR)$(BASHCOMPLETIONDIR) $(DESTDIR)/etc/logrotate.d
+	$(INSTALL) -dm755 $(DESTDIR)$(BASHCOMPLETIONDIR) \
+		$(DESTDIR)$(LOGROTATEDIR) $(DESTDIR)$(APPLICATIONSDIR) \
+		$(DESTDIR)$(PIXMAPSDIR)
 	$(INSTALL) -m644 spm.bash $(DESTDIR)$(BASHCOMPLETIONDIR)/spm
 	$(INSTALL) -m644 spm-tools.bash $(DESTDIR)$(BASHCOMPLETIONDIR)/spm-tools
 	$(INSTALL) -m644 spm.logrotate $(DESTDIR)$(LOGROTATEDIR)spm
@@ -11,7 +13,7 @@ install:
 uninstall:
 	$(RM) $(DESTDIR)$(BASHCOMPLETIONDIR)/spm
 	$(RM) $(DESTDIR)$(BASHCOMPLETIONDIR)/spm-tools
-	$(RM) $(DESTDIR)$(LOGROTATEDIR)spm
+	$(RM) $(DESTDIR)$(LOGROTATEDIR)/spm
 	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/spm-gui.desktop
 	$(RM) $(DESTDIR)$(PIXMAPSDIR)/spm-gui.desktop
 
