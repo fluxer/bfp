@@ -6,4 +6,4 @@ GenericName=SPM GUI
 Icon=spm-gui
 Name=Source Package Manager GUI
 Type=Application
-Categories=Qt;
+Categories=Qt;System;PackageManager;
