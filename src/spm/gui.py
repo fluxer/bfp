@@ -124,7 +124,6 @@ def Refresh():
     #ui.ScriptsBox.setCheckState(libspm.SCRIPTS)
 
 def SearchMetadata():
-    current = str(ui.filtersBox.currentText())
     field = str(ui.searchBox.currentText())
     regexp = str(ui.searchEdit.text())
     targets = []
@@ -138,10 +137,14 @@ def SearchMetadata():
             if misc.string_search(regexp, target, escape=False, exact=False):
                 targets.append(target)
         elif database.local_installed(target):
-            if misc.string_search(regexp, database.local_metadata(target, field), escape=False, exact=False):
-                    targets.append(target)
+            if misc.string_search(regexp, \
+                database.local_metadata(target, field), \
+                escape=False, exact=False):
+                targets.append(target)
         else:
-            if misc.string_search(regexp, database.remote_metadata(target, field), escape=False, exact=False):
+            if misc.string_search(regexp, \
+                database.remote_metadata(target, field), \
+                escape=False, exact=False):
                 targets.append(target)
 
     ui.targetsView.clear()
@@ -178,8 +181,8 @@ def RefreshWidgets():
 
 def Update():
     targets = database.local_all(basename=True)
-    m = libspm.Source(targets, do_clean=True, do_prepare=True,
-        do_compile=True, do_check=False, do_install=True, do_merge=True,
+    m = libspm.Source(targets, do_clean=True, do_prepare=True, \
+        do_compile=True, do_check=False, do_install=True, do_merge=True, \
         do_remove=False, do_depends=True, do_reverse=True, do_update=True)
     worker = Worker(app, m.main)
     worker.finished.connect(EnableWidgets)
@@ -189,8 +192,8 @@ def Update():
 
 def Build():
     targets = [str(ui.targetsView.currentItem().text())]
-    m = libspm.Source(targets, do_clean=True, do_prepare=True,
-        do_compile=True, do_check=False, do_install=True, do_merge=True,
+    m = libspm.Source(targets, do_clean=True, do_prepare=True, \
+        do_compile=True, do_check=False, do_install=True, do_merge=True, \
         do_remove=False, do_depends=True, do_reverse=True, do_update=False)
     worker = Worker(app, m.main)
     worker.finished.connect(EnableWidgets)
@@ -201,8 +204,8 @@ def Build():
 
 def Remove():
     targets = [str(ui.targetsView.currentItem().text())]
-    m = libspm.Source(targets, do_clean=False, do_prepare=False,
-        do_compile=False, do_check=False, do_install=False, do_merge=False,
+    m = libspm.Source(targets, do_clean=False, do_prepare=False, \
+        do_compile=False, do_check=False, do_install=False, do_merge=False, \
         do_remove=True, do_depends=False, do_reverse=True, do_update=False)
     worker = Worker(app, m.main)
     worker.finished.connect(EnableWidgets)
@@ -212,7 +215,8 @@ def Remove():
     worker.start()
 
 def SyncRepos():
-    m = libspm.Repo(libspm.REPOSITORIES, do_clean=True, do_sync=True, do_update=False)
+    m = libspm.Repo(libspm.REPOSITORIES, do_clean=True, do_sync=True, \
+        do_update=False)
     worker = Worker(app, m.main)
     worker.finished.connect(EnableWidgets)
     worker.finished.connect(RefreshWidgets)
@@ -246,7 +250,7 @@ def ChangeSettings():
     except SystemExit:
         pass
     except Exception as detail:
-        message.critical(str(detail))
+        MessageCritical(str(detail))
 
 def ChangeRepos():
     try:
@@ -255,7 +259,7 @@ def ChangeRepos():
     except SystemExit:
         pass
     except Exception as detail:
-        message.critical(str(detail))
+        MessageCritical(str(detail))
 
 def ChangeMirrors():
     try:
@@ -264,7 +268,7 @@ def ChangeMirrors():
     except SystemExit:
         pass
     except Exception as detail:
-        message.critical(str(detail))
+        MessageCritical(str(detail))
 
 Refresh()
 
