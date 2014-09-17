@@ -32,10 +32,6 @@ pushFrameStack( %(frame_identifier)s );
 Py_INCREF( %(frame_identifier)s );
 assert( Py_REFCNT( %(frame_identifier)s ) == 2 ); // Frame stack
 
-#if PYTHON_VERSION >= 340
-%(frame_identifier)s->f_executing += 1;
-#endif
-
 // Framed code:
 %(codes)s
 
@@ -44,10 +40,8 @@ RESTORE_FRAME_EXCEPTION( %(frame_identifier)s );
 #endif
 // Put the previous frame back on top.
 popFrameStack();
-#if PYTHON_VERSION >= 340
-%(frame_identifier)s->f_executing -= 1;
-#endif
 Py_DECREF( %(frame_identifier)s );
+
 goto %(no_exception_exit)s;
 """
 
@@ -57,9 +51,6 @@ template_frame_guard_full_return_handler = """\
 RESTORE_FRAME_EXCEPTION( %(frame_identifier)s );
 #endif
 popFrameStack();
-#if PYTHON_VERSION >= 340
-%(frame_identifier)s->f_executing -= 1;
-#endif
 Py_DECREF( %(frame_identifier)s );
 goto %(return_exit)s;
 """
@@ -84,10 +75,6 @@ else if ( exception_tb->tb_frame != %(frame_identifier)s )
 %(store_frame_locals)s
 
 popFrameStack();
-
-#if PYTHON_VERSION >= 340
-%(frame_identifier)s->f_executing -= 1;
-#endif
 Py_DECREF( %(frame_identifier)s );
 
 // Return the error.
@@ -104,10 +91,6 @@ PyFrameObject *%(frame_identifier)s = MAKE_FRAME( %(code_identifier)s, %(module_
 // owning it.
 pushFrameStack( %(frame_identifier)s );
 assert( Py_REFCNT( %(frame_identifier)s ) == 1 );
-
-#if PYTHON_VERSION >= 340
-%(frame_identifier)s->f_executing += 1;
-#endif
 
 // Framed code:
 %(codes)s
@@ -140,10 +123,6 @@ else if ( exception_tb->tb_frame != %(frame_identifier)s )
 
 // Put the previous frame back on top.
 popFrameStack();
-
-#if PYTHON_VERSION >= 340
-%(frame_identifier)s->f_executing -= 1;
-#endif
 Py_DECREF( %(frame_identifier)s );
 
 // Return the error.
@@ -192,16 +171,8 @@ Py_INCREF( generator->m_frame->f_back );
 
 PyThreadState_GET()->frame = generator->m_frame;
 
-#if PYTHON_VERSION >= 340
-%(frame_identifier)s->f_executing += 1;
-#endif
-
 // Framed code:
 %(codes)s
-
-#if PYTHON_VERSION >= 340
-%(frame_identifier)s->f_executing -= 1;
-#endif
 
 Py_DECREF( %(frame_identifier)s );
 goto %(no_exception_exit)s;
