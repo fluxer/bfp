@@ -1,6 +1,6 @@
 #!/usr/bin/python2
 
-from PyQt4 import QtGui
+from PyQt4 import QtCore, QtGui
 import sys
 import ConfigParser
 
@@ -11,23 +11,42 @@ database = libpackage.Database()
 message = libmessage.Message()
 misc = libmisc.Misc()
 
-def Worker():
-    try:
-        #ui.UpdateButton.setEnabled(False)
-        #ui.BuildButton.setEnabled(False)
-        #ui.removeButton.setEnabled(False)
-        #ui.SyncRepoButton.setEnabled(False)
-        m.main()
-    except SystemExit:
-        pass
-    except Exception as detail:
-        message.critical(str(detail))
-    finally:
-        #ui.UpdateButton.setEnabled(True)
-        #ui.BuildButton.setEnabled(True)
-        #ui.removeButton.setEnabled(True)
-        #ui.SyncRepoButton.setEnabled(True)
-        ui.tabWidget.setCurrentIndex(1)
+app = QtGui.QApplication(sys.argv)
+MainWindow = QtGui.QMainWindow()
+ui = gui_ui.Ui_MainWindow()
+ui.setupUi(MainWindow)
+
+class Worker(QtCore.QThread):
+    def __init__(self, parent=None, func=None):
+        super(Worker, self).__init__(parent)
+        self.func = func
+
+    def run(self):
+        try:
+            self.func()
+        except SystemExit:
+            pass
+        except Exception as detail:
+            self.emit(QtCore.SIGNAL('failed'), str(detail))
+
+def MessageCritical(msg):
+    QtGui.QMessageBox.critical(MainWindow, 'Critical', msg)
+
+def DisableWidgets():
+    ui.updateButton.setEnabled(False)
+    ui.buildButton.setEnabled(False)
+    ui.removeButton.setEnabled(False)
+    ui.syncButton.setEnabled(False)
+    ui.progressBar.setRange(0, 0)
+    ui.progressBar.show()
+
+def EnableWidgets():
+    ui.updateButton.setEnabled(True)
+    ui.buildButton.setEnabled(True)
+    ui.removeButton.setEnabled(True)
+    ui.syncButton.setEnabled(True)
+    ui.progressBar.setRange(0, 1)
+    ui.progressBar.hide()
 
 def RefreshSearch():
     ui.searchBox.clear()
@@ -159,34 +178,47 @@ def RefreshWidgets():
 
 def Update():
     targets = database.local_all(basename=True)
-    global m
     m = libspm.Source(targets, do_clean=True, do_prepare=True,
         do_compile=True, do_check=False, do_install=True, do_merge=True,
         do_remove=False, do_depends=True, do_reverse=True, do_update=True)
-    Worker()
+    worker = Worker(app, m.main)
+    worker.finished.connect(EnableWidgets)
+    app.connect(worker, QtCore.SIGNAL('failed'), MessageCritical)
+    DisableWidgets()
+    worker.start()
 
 def Build():
     targets = [str(ui.targetsView.currentItem().text())]
-    global m
     m = libspm.Source(targets, do_clean=True, do_prepare=True,
         do_compile=True, do_check=False, do_install=True, do_merge=True,
         do_remove=False, do_depends=True, do_reverse=True, do_update=False)
-    Worker()
-    RefreshWidgets()
+    worker = Worker(app, m.main)
+    worker.finished.connect(EnableWidgets)
+    worker.finished.connect(RefreshWidgets)
+    app.connect(worker, QtCore.SIGNAL('failed'), MessageCritical)
+    DisableWidgets()
+    worker.start()
 
 def Remove():
     targets = [str(ui.targetsView.currentItem().text())]
-    global m
     m = libspm.Source(targets, do_clean=False, do_prepare=False,
         do_compile=False, do_check=False, do_install=False, do_merge=False,
         do_remove=True, do_depends=False, do_reverse=True, do_update=False)
-    Worker()
-    RefreshWidgets()
+    worker = Worker(app, m.main)
+    worker.finished.connect(EnableWidgets)
+    worker.finished.connect(RefreshWidgets)
+    app.connect(worker, QtCore.SIGNAL('failed'), MessageCritical)
+    DisableWidgets()
+    worker.start()
 
 def SyncRepos():
-    global m
     m = libspm.Repo(libspm.REPOSITORIES, do_clean=True, do_sync=True, do_update=False)
-    Worker()
+    worker = Worker(app, m.main)
+    worker.finished.connect(EnableWidgets)
+    worker.finished.connect(RefreshWidgets)
+    app.connect(worker, QtCore.SIGNAL('failed'), MessageCritical)
+    DisableWidgets()
+    worker.start()
 
 
 def ChangeSettings():
@@ -234,11 +266,6 @@ def ChangeMirrors():
     except Exception as detail:
         message.critical(str(detail))
 
-app = QtGui.QApplication(sys.argv)
-MainWindow = QtGui.QMainWindow()
-ui = gui_ui.Ui_MainWindow()
-ui.setupUi(MainWindow)
-
 Refresh()
 
 ui.updateButton.clicked.connect(Update)
@@ -270,6 +297,8 @@ ui.filtersBox.currentIndexChanged.connect(RefreshTargets)
 
 RefreshSearch()
 ui.targetsView.setCurrentRow(0)
+ui.progressBar.setRange(0, 1)
+ui.progressBar.hide()
 
 MainWindow.show()
 sys.exit(app.exec_())
