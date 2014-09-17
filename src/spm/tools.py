@@ -178,23 +178,24 @@ class Dist(object):
     def main(self):
         ''' Looks for target match and then execute action for every target '''
         for target in self.targets:
-            # make sure target is absolute path
-            if os.path.isdir(target):
-                target = os.path.abspath(target)
-
-            if not database.remote_search(target):
-                continue
+            target_directory = database.remote_search(target)
+            if not target_directory:
+                message.sub_critical('Invalid target', target)
+                sys.exit(2)
+            # in case target is a directory ending with a slash basename gets
+            # confused so normalize the path before that
+            target_basename = os.path.basename(os.path.normpath(target))
 
             target_version = database.remote_metadata(target, 'version')
             target_distfile = os.path.join(self.directory,
-                os.path.basename(target) + '_' + target_version + '.tar.bz2')
+                target_basename + '_' + target_version + '.tar.bz2')
             target_sources = database.remote_metadata(target, 'sources')
 
             if self.do_sources:
                 message.sub_info('Preparing sources')
                 for src_url in target_sources:
                     src_base = os.path.basename(src_url)
-                    src_file = os.path.join(target, src_base)
+                    src_file = os.path.join(target_directory, src_base)
                     internet = misc.ping()
 
                     if src_url.startswith('git://') or src_url.endswith('.git'):
@@ -234,14 +235,14 @@ class Dist(object):
                             misc.fetch(src_url, src_file)
 
             message.sub_info('Compressing', target_distfile)
-            misc.archive_compress(target, target_distfile)
+            misc.archive_compress(target_directory, target_distfile)
 
             if self.do_clean:
                 message.sub_info('Purging sources')
                 for src_url in target_sources:
                     src_base = os.path.basename(src_url)
 
-                    src_file = os.path.join(target, src_base)
+                    src_file = os.path.join(target_directory, src_base)
                     if src_url.startswith(('http://', 'https://', 'ftp://', \
                         'ftps://')):
                         if os.path.isfile(src_file):
