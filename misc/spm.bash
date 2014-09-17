@@ -9,8 +9,8 @@ _spm()
     
     main_options='-h --help --cache --build --root --ignore --mirror --timeout --external
         --chost --cflags --cxxflags --cppflags --ldflags --makeflags --man --binaries
-        --shared --static --rpath --missing --conflicts --backup --scripts --debug
-        --version'
+        --shared --static --rpath --pycompile --missing --conflicts --backup --scripts
+        --debug --version'
     
     repo_options='-h --help -c --clean -s --sync -u --update'
     

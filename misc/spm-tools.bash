@@ -6,7 +6,7 @@ _spm_tools()
     local main_options merge_options clean_options edit_options sane_options
     local lint_options check_options dist_options
     
-    actions='merge clean edit sane lint check dist'
+    actions='merge clean edit sane lint check dist which pack pkg serve'
     
     main_options='-h --help --debug --version'
     
@@ -17,7 +17,7 @@ _spm_tools()
     edit_options='-h --help'
     
     sane_options='-h --help -e --enable -d --disable -n --null -m --maintainer
-        -N --note -v --variables -a --all'
+        -N --note -v --variables -t --triggers -u --users -g --groups -a --all'
     
     lint_options='-h --help -m --man -u --udev -s --symlink -d --doc -M --module
         -f --footprint -b --builddir -a --all'
@@ -29,10 +29,14 @@ _spm_tools()
     which_options='-h --help -p --plain'
     
     pack_options='-h --help -d --directory'
-    
+
+    pkg_options='-h --help -d --directory'
+
+    serve_options='-h --help -p --port -a --address'
+
     _get_comp_words_by_ref cur prev
     _get_first_arg
-    
+
     if [[ -z ${arg} ]];then
         COMPREPLY=($(compgen -W "${actions}" -- "${cur}"))
         elif [[ ${arg} = merge ]]; then
@@ -53,6 +57,10 @@ _spm_tools()
         COMPREPLY=($(compgen -W "${which_options}" -- "${cur}"))
     elif [[ ${arg} = pack ]];then
         COMPREPLY=($(compgen -W "${pack_options}" -- "${cur}"))
+    elif [[ ${arg} = pkg ]];then
+        COMPREPLY=($(compgen -W "${pkg_options}" -- "${cur}"))
+    elif [[ ${arg} = serve ]];then
+        COMPREPLY=($(compgen -W "${serve_options}" -- "${cur}"))
     fi
 }
 
