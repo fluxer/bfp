@@ -68,7 +68,10 @@ def RefreshTargets():
     current = str(ui.filtersBox.currentText())
     targets = []
     if current == 'all':
-        targets = database.remote_all(basename=True)
+        targets = database.local_all(basename=True)
+        for target in database.remote_all(basename=True):
+            if not target in targets:
+                targets.append(target)
     elif current == 'updates':
         for target in database.local_all(basename=True):
             if not database.local_uptodate(target):
@@ -86,26 +89,15 @@ def RefreshTargets():
     else:
         targets = database.remote_alias(current)
 
-    for target in targets:
-        ui.targetsView.addItem(target)
+    ui.targetsView.addItems(targets)
     RefreshSearch()
     ui.targetsView.setCurrentRow(0)
 
-def Refresh():
+def RefreshFilters():
     ui.filtersBox.clear()
-    ui.targetsView.clear()
-
-    ui.filtersBox.addItem('all')
-    ui.filtersBox.addItem('updates')
-    ui.filtersBox.addItem('local')
-    ui.filtersBox.addItem('unneeded')
-    ui.filtersBox.addItem('candidates')
+    ui.filtersBox.addItems(('all', 'updates', 'local', 'unneeded', 'candidates'))
     ui.filtersBox.setCurrentIndex(0)
-    for alias in database.remote_aliases():
-        ui.filtersBox.addItem(alias)
-
-    for target in database.remote_all(basename=True):
-        ui.targetsView.addItem(target)
+    ui.filtersBox.addItems(database.remote_aliases())
 
 def RefreshSettings():
     ui.repositoriesText.clear()
@@ -160,8 +152,7 @@ def SearchMetadata():
                     targets.append(target)
 
         ui.targetsView.clear()
-        for target in targets:
-            ui.targetsView.addItem(target)
+        ui.targetsView.addItems(sorted(targets))
         ui.targetsView.setCurrentRow(0)
     except Exception as detail:
         MessageCritical(str(detail))
@@ -179,19 +170,24 @@ def RefreshWidgets():
         ui.metadataText.append('Version: ' + database.local_metadata(target, 'version'))
         ui.metadataText.append('Description: ' + database.local_metadata(target, 'description'))
         ui.metadataText.append('Depends: ' + str(database.local_metadata(target, 'depends')))
-        ui.metadataText.append('Reverse: ' + misc.string_convert(database.local_rdepends(target)))
+        ui.metadataText.append('Reverse: ' + str(database.local_rdepends(target)))
         ui.metadataText.append('Size: ' + database.local_metadata(target, 'size'))
         ui.footprintText.setPlainText(database.local_footprint(target))
+        ui.metadataText.append('Make depends: ' + str(database.remote_metadata(target, 'makedepends')))
+        ui.metadataText.append('Check depends: ' + str(database.remote_metadata(target, 'checkdepends')))
+        ui.metadataText.append('Sources: ' + str(database.remote_metadata(target, 'sources')))
+        ui.metadataText.append('Options: ' + str(database.remote_metadata(target, 'options')))
+        ui.metadataText.append('Backup: ' + str(database.remote_metadata(target, 'backup')))
     else:
         ui.removeButton.setEnabled(False)
         ui.metadataText.append('Version: ' + database.remote_metadata(target, 'version'))
         ui.metadataText.append('Description: ' + database.remote_metadata(target, 'description'))
-        ui.metadataText.append('Depends: ' + misc.string_convert(database.remote_metadata(target, 'depends')))
-        ui.metadataText.append('Make depends: ' + misc.string_convert(database.remote_metadata(target, 'makedepends')))
-        ui.metadataText.append('Check depends: ' + misc.string_convert(database.remote_metadata(target, 'checkdepends')))
-        ui.metadataText.append('Sources: ' + misc.string_convert(database.remote_metadata(target, 'sources')))
-        ui.metadataText.append('Options: ' + misc.string_convert(database.remote_metadata(target, 'options')))
-        ui.metadataText.append('Backup: ' + misc.string_convert(database.remote_metadata(target, 'backup')))
+        ui.metadataText.append('Depends: ' + str(database.remote_metadata(target, 'depends')))
+        ui.metadataText.append('Make depends: ' + str(database.remote_metadata(target, 'makedepends')))
+        ui.metadataText.append('Check depends: ' + str(database.remote_metadata(target, 'checkdepends')))
+        ui.metadataText.append('Sources: ' + str(database.remote_metadata(target, 'sources')))
+        ui.metadataText.append('Options: ' + str(database.remote_metadata(target, 'options')))
+        ui.metadataText.append('Backup: ' + str(database.remote_metadata(target, 'backup')))
 
 def Update():
     targets = database.local_all(basename=True)
@@ -322,14 +318,14 @@ def ChangeMirrors():
     except Exception as detail:
         MessageCritical(str(detail))
 
-Refresh()
+RefreshFilters()
 RefreshSettings()
+RefreshSearch()
 
 ui.updateButton.clicked.connect(Update)
 ui.buildButton.clicked.connect(Build)
 ui.removeButton.clicked.connect(Remove)
 ui.syncButton.clicked.connect(SyncRepos)
-
 ui.CacheDirEdit.textChanged.connect(ChangeSettings)
 ui.CacheDirButton.clicked.connect(ChangeCacheDir)
 ui.BuildDirEdit.textChanged.connect(ChangeSettings)
@@ -349,16 +345,13 @@ ui.ConflictsBox.clicked.connect(ChangeSettings)
 ui.BackupBox.clicked.connect(ChangeSettings)
 ui.ScriptsBox.clicked.connect(ChangeSettings)
 ui.TriggersBox.clicked.connect(ChangeSettings)
-
 ui.searchEdit.returnPressed.connect(SearchMetadata)
 ui.repositoriesText.textChanged.connect(ChangeRepos)
 ui.mirrorsText.textChanged.connect(ChangeMirrors)
-
 ui.targetsView.currentItemChanged.connect(RefreshWidgets)
 ui.filtersBox.currentIndexChanged.connect(RefreshTargets)
-
-RefreshSearch()
 ui.targetsView.setCurrentRow(0)
+RefreshTargets()
 ui.progressBar.setRange(0, 1)
 ui.progressBar.hide()
 
