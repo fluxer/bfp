@@ -132,6 +132,7 @@ def RefreshSettings():
     ui.TriggersBox.setCheckState(libspm.TRIGGERS)
 
 def SearchMetadata():
+    current = str(ui.filtersBox.currentText())
     field = str(ui.searchBox.currentText())
     regexp = str(ui.searchEdit.text())
     targets = []
@@ -139,26 +140,31 @@ def SearchMetadata():
         RefreshTargets()
         return
 
-    for index in xrange(ui.targetsView.count()):
-        target = str(ui.targetsView.item(index).text())
-        if field == 'name':
-            if misc.string_search(regexp, target, escape=False, exact=False):
-                targets.append(target)
-        elif database.local_installed(target):
-            if misc.string_search(regexp, \
-                database.local_metadata(target, field), \
-                escape=False, exact=False):
-                targets.append(target)
-        else:
-            if misc.string_search(regexp, \
-                database.remote_metadata(target, field), \
-                escape=False, exact=False):
-                targets.append(target)
+    try:
+        for index in xrange(ui.targetsView.count()):
+            target = str(ui.targetsView.item(index).text())
+            if field == 'name':
+                if misc.string_search(regexp, target, escape=False, exact=False):
+                    targets.append(target)
+            elif current == 'local' or current == 'unneeded':
+                data = database.local_metadata(target, field)
+                if not data:
+                    continue
+                if misc.string_search(regexp, data, escape=False, exact=False):
+                    targets.append(target)
+            else:
+                data = database.remote_metadata(target, field)
+                if not data:
+                    continue
+                if misc.string_search(regexp, data, escape=False, exact=False):
+                    targets.append(target)
 
-    ui.targetsView.clear()
-    for target in targets:
-        ui.targetsView.addItem(target)
-    ui.targetsView.setCurrentRow(0)
+        ui.targetsView.clear()
+        for target in targets:
+            ui.targetsView.addItem(target)
+        ui.targetsView.setCurrentRow(0)
+    except Exception as detail:
+        MessageCritical(str(detail))
 
 def RefreshWidgets():
     current = ui.targetsView.currentItem()
