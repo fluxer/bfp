@@ -94,8 +94,6 @@ def RefreshTargets():
 def Refresh():
     ui.filtersBox.clear()
     ui.targetsView.clear()
-    ui.repositoriesText.clear()
-    ui.mirrorsText.clear()
 
     ui.filtersBox.addItem('all')
     ui.filtersBox.addItem('updates')
@@ -109,23 +107,29 @@ def Refresh():
     for target in database.remote_all(basename=True):
         ui.targetsView.addItem(target)
 
+def RefreshSettings():
+    ui.repositoriesText.clear()
+    ui.mirrorsText.clear()
     ui.repositoriesText.setPlainText(misc.file_read('/etc/spm/repositories.conf'))
     ui.mirrorsText.setPlainText(misc.file_read('/etc/spm/mirrors.conf'))
 
-    #ui.CacheDirEdit.setText(libspm.CACHE_DIR)
-    #ui.BuildDirEdit.setText(libspm.BUILD_DIR)
-    #ui.IgnoreTargetsEdit.setText(libspm.IGNORE)
-    #ui.ConnectionTimeoutBox.setValue(libspm.TIMEOUT)
-    #ui.UseMirrorsBox.setCheckState(libspm.MIRROR)
-    #ui.ExternalFetcherBox.setCheckState(libspm.EXTERNAL)
-    #ui.CompressManBox.setCheckState(libspm.COMPRESS_MAN)
-    #ui.StripBinariesBox.setCheckState(libspm.STRIP_BINARIES)
-    #ui.StripSharedBox.setCheckState(libspm.STRIP_SHARED)
-    #ui.StripStaticBox.setCheckState(libspm.STRIP_STATIC)
-    #ui.IgnoreMissingBox.setCheckState(libspm.IGNORE_MISSING)
-    #ui.ConflictsBox.setCheckState(libspm.CONFLICTS)
-    #ui.BackupBox.setCheckState(libspm.BACKUP)
-    #ui.ScriptsBox.setCheckState(libspm.SCRIPTS)
+    ui.CacheDirEdit.setText(libspm.CACHE_DIR)
+    ui.BuildDirEdit.setText(libspm.BUILD_DIR)
+    ui.IgnoreTargetsEdit.setText(misc.string_convert(libspm.IGNORE))
+    ui.ConnectionTimeoutBox.setValue(libspm.TIMEOUT)
+    ui.UseMirrorsBox.setCheckState(libspm.MIRROR)
+    ui.ExternalFetcherBox.setCheckState(libspm.EXTERNAL)
+    ui.CompressManBox.setCheckState(libspm.COMPRESS_MAN)
+    ui.StripBinariesBox.setCheckState(libspm.STRIP_BINARIES)
+    ui.StripSharedBox.setCheckState(libspm.STRIP_SHARED)
+    ui.StripStaticBox.setCheckState(libspm.STRIP_STATIC)
+    ui.StripRPATHBox.setCheckState(libspm.STRIP_RPATH)
+    ui.PythonCompileBox.setCheckState(libspm.PYTHON_COMPILE)
+    ui.IgnoreMissingBox.setCheckState(libspm.IGNORE_MISSING)
+    ui.ConflictsBox.setCheckState(libspm.CONFLICTS)
+    ui.BackupBox.setCheckState(libspm.BACKUP)
+    ui.ScriptsBox.setCheckState(libspm.SCRIPTS)
+    ui.TriggersBox.setCheckState(libspm.TRIGGERS)
 
 def SearchMetadata():
     field = str(ui.searchBox.currentText())
@@ -249,6 +253,20 @@ def SyncRepos():
     worker.start()
 
 
+def ChangeCacheDir():
+    spath = QtGui.QFileDialog.getExistingDirectory(MainWindow, 'Open', \
+        libspm.CACHE_DIR)
+    if not spath:
+        return
+    ui.CacheDirEdit.setText(spath)
+
+def ChangeBuildDir():
+    spath = QtGui.QFileDialog.getExistingDirectory(MainWindow, 'Open', \
+        libspm.BUILD_DIR)
+    if not spath:
+        return
+    ui.BuildDirEdit.setText(spath)
+
 def ChangeSettings():
     try:
         conf = ConfigParser.SafeConfigParser()
@@ -263,10 +281,13 @@ def ChangeSettings():
         conf.set('install', 'STRIP_BINARIES', str(ui.StripBinariesBox.isChecked()))
         conf.set('install', 'STRIP_SHARED', str(ui.StripSharedBox.isChecked()))
         conf.set('install', 'STRIP_STATIC', str(ui.StripStaticBox.isChecked()))
+        conf.set('install', 'STRIP_RPATH', str(ui.StripRPATHBox.isChecked()))
+        conf.set('install', 'PYTHON_COMPILE', str(ui.PythonCompileBox.isChecked()))
         conf.set('install', 'IGNORE_MISSING', str(ui.IgnoreMissingBox.isChecked()))
         conf.set('merge', 'CONFLICTS', str(ui.ConflictsBox.isChecked()))
         conf.set('merge', 'BACKUP', str(ui.BackupBox.isChecked()))
         conf.set('merge', 'SCRIPTS', str(ui.ScriptsBox.isChecked()))
+        conf.set('merge', 'TRIGGERS', str(ui.TriggersBox.isChecked()))
 
         with open('/etc/spm.conf', 'wb') as libspmfile:
             conf.write(libspmfile)
@@ -275,6 +296,7 @@ def ChangeSettings():
         pass
     except Exception as detail:
         MessageCritical(str(detail))
+        # FIXME: RefreshSettings()
 
 def ChangeRepos():
     try:
@@ -295,26 +317,32 @@ def ChangeMirrors():
         MessageCritical(str(detail))
 
 Refresh()
+RefreshSettings()
 
 ui.updateButton.clicked.connect(Update)
 ui.buildButton.clicked.connect(Build)
 ui.removeButton.clicked.connect(Remove)
 ui.syncButton.clicked.connect(SyncRepos)
 
-#ui.CacheDirEdit.textChanged.connect(ChangeSettings)
-#ui.BuildDirEdit.textChanged.connect(ChangeSettings)
-#ui.IgnoreTargetsEdit.textChanged.connect(ChangeSettings)
-#ui.ConnectionTimeoutBox.valueChanged.connect(ChangeSettings)
-#ui.UseMirrorsBox.clicked.connect(ChangeSettings)
-#ui.ExternalFetcherBox.clicked.connect(ChangeSettings)
-#ui.CompressManBox.clicked.connect(ChangeSettings)
-#ui.StripBinariesBox.clicked.connect(ChangeSettings)
-#ui.StripSharedBox.clicked.connect(ChangeSettings)
-#ui.StripStaticBox.clicked.connect(ChangeSettings)
-#ui.IgnoreMissingBox.clicked.connect(ChangeSettings)
-#ui.ConflictsBox.clicked.connect(ChangeSettings)
-#ui.BackupBox.clicked.connect(ChangeSettings)
-#ui.ScriptsBox.clicked.connect(ChangeSettings)
+ui.CacheDirEdit.textChanged.connect(ChangeSettings)
+ui.CacheDirButton.clicked.connect(ChangeCacheDir)
+ui.BuildDirEdit.textChanged.connect(ChangeSettings)
+ui.BuildDirButton.clicked.connect(ChangeBuildDir)
+ui.IgnoreTargetsEdit.textChanged.connect(ChangeSettings)
+ui.ConnectionTimeoutBox.valueChanged.connect(ChangeSettings)
+ui.UseMirrorsBox.clicked.connect(ChangeSettings)
+ui.ExternalFetcherBox.clicked.connect(ChangeSettings)
+ui.CompressManBox.clicked.connect(ChangeSettings)
+ui.StripBinariesBox.clicked.connect(ChangeSettings)
+ui.StripSharedBox.clicked.connect(ChangeSettings)
+ui.StripStaticBox.clicked.connect(ChangeSettings)
+ui.StripRPATHBox.clicked.connect(ChangeSettings)
+ui.PythonCompileBox.clicked.connect(ChangeSettings)
+ui.IgnoreMissingBox.clicked.connect(ChangeSettings)
+ui.ConflictsBox.clicked.connect(ChangeSettings)
+ui.BackupBox.clicked.connect(ChangeSettings)
+ui.ScriptsBox.clicked.connect(ChangeSettings)
+ui.TriggersBox.clicked.connect(ChangeSettings)
 
 ui.searchEdit.returnPressed.connect(SearchMetadata)
 ui.repositoriesText.textChanged.connect(ChangeRepos)
