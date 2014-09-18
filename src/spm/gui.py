@@ -1,4 +1,4 @@
-#!/usr/bin/python2
+#!/bin/python2
 
 from PyQt4 import QtCore, QtGui
 import sys
@@ -29,8 +29,12 @@ class Worker(QtCore.QThread):
         except Exception as detail:
             self.emit(QtCore.SIGNAL('failed'), str(detail))
 
+def MessageQuestion(*msg):
+    return QtGui.QMessageBox.question(MainWindow, 'Question', \
+        misc.string_convert(msg), QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
+
 def MessageCritical(msg):
-    QtGui.QMessageBox.critical(MainWindow, 'Critical', msg)
+    return QtGui.QMessageBox.critical(MainWindow, 'Critical', msg)
 
 def DisableWidgets():
     ui.updateButton.setEnabled(False)
@@ -192,8 +196,16 @@ def Update():
     worker.start()
 
 def Build():
-    targets = [str(ui.targetsView.currentItem().text())]
-    m = libspm.Source(targets, do_clean=True, do_prepare=True, \
+    targets = str(ui.targetsView.currentItem().text())
+    build = database.remote_mdepends(targets)
+    build.append(targets)
+    answer = MessageQuestion('The following targets will be build:\n\n',
+        misc.string_convert(build), \
+        '\n\nAre you sure you want to continue?')
+    if not answer == QtGui.QMessageBox.Yes:
+        return
+
+    m = libspm.Source([targets], do_clean=True, do_prepare=True, \
         do_compile=True, do_check=False, do_install=True, do_merge=True, \
         do_remove=False, do_depends=True, do_reverse=True, do_update=False)
     worker = Worker(app, m.main)
@@ -205,8 +217,16 @@ def Build():
     worker.start()
 
 def Remove():
-    targets = [str(ui.targetsView.currentItem().text())]
-    m = libspm.Source(targets, do_clean=False, do_prepare=False, \
+    targets = str(ui.targetsView.currentItem().text())
+    remove = database.local_rdepends(targets)
+    remove.append(targets)
+    answer = MessageQuestion('The following targets will be removed:\n\n',
+        misc.string_convert(remove), \
+        '\n\nAre you sure you want to continue?')
+    if not answer == QtGui.QMessageBox.Yes:
+        return
+
+    m = libspm.Source([targets], do_clean=False, do_prepare=False, \
         do_compile=False, do_check=False, do_install=False, do_merge=False, \
         do_remove=True, do_depends=False, do_reverse=True, do_update=False)
     worker = Worker(app, m.main)
