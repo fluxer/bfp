@@ -2,8 +2,8 @@
 TryExec=kdesu
 Exec=kdesu spm-gui
 Comment=Manager software via Graphical User Interfacee
-GenericName=SPM GUI
+GenericName=Source Package Manager GUI
 Icon=spm-gui
-Name=Source Package Manager GUI
+Name=SPM GUI
 Type=Application
 Categories=Qt;System;PackageManager;
