@@ -416,7 +416,7 @@ class Misc(object):
             cwd = '/'
         if catch or self.CATCH:
             pipe = subprocess.Popen(command, stderr = subprocess.PIPE, shell=shell, cwd=cwd)
-            pipe.poll()
+            pipe.wait()
             if pipe.returncode != 0:
                 raise(Exception(pipe.communicate()[1].strip()))
             return pipe.returncode
