@@ -11,6 +11,7 @@ class Misc(object):
         self.TIMEOUT = 30
         self.EXTERNAL = False
         self.ROOT_DIR = '/'
+        self.CATCH = False
         self.ipc = None
 
     def whereis(self, program, fallback=True):
@@ -407,13 +408,20 @@ class Misc(object):
         return self.system_output((self.whereis('scanelf'), '-CBF', \
             sformat, sflags, sfile))
 
-    def system_command(self, command, shell=False, cwd=None):
+    def system_command(self, command, shell=False, cwd=None, catch=False):
         ''' Execute system command safely '''
         if not cwd:
             cwd = self.dir_current()
         elif not os.path.isdir(cwd):
             cwd = '/'
-        return subprocess.check_call(command, shell=shell, cwd=cwd)
+        if catch or self.CATCH:
+            pipe = subprocess.Popen(command, stderr = subprocess.PIPE, shell=shell, cwd=cwd)
+            pipe.poll()
+            if pipe.returncode != 0:
+                raise(Exception(pipe.communicate()[1].strip()))
+            return pipe.returncode
+        else:
+            return subprocess.check_call(command, shell=shell, cwd=cwd)
 
     def system_chroot(self, command):
         ''' Execute command in chroot environment '''

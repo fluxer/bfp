@@ -10,6 +10,8 @@ import libmisc, libmessage, libpackage
 database = libpackage.Database()
 message = libmessage.Message()
 misc = libmisc.Misc()
+misc.CATCH = True
+libspm.misc.CATCH = True
 
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
