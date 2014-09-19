@@ -36,7 +36,22 @@ def MessageQuestion(*msg):
         misc.string_convert(msg), QtGui.QMessageBox.Yes | QtGui.QMessageBox.No)
 
 def MessageCritical(msg):
-    return QtGui.QMessageBox.critical(MainWindow, 'Critical', msg)
+    if len(msg) < 400:
+        return QtGui.QMessageBox.critical(MainWindow, 'Critical', msg)
+    else:
+        # FIXME: can not close with WM
+        msgBox = QtGui.QMessageBox(MainWindow)
+        msgBox.setWindowTitle('Critical')
+        msgBox.setText('An error occured.')
+        msgBox.setDetailedText(msg)
+        # HACK!!! the size of the dialog is too small and setFixedHeight()
+        # does not seem to work as it should, add a dummy space to force
+        # the dialog to resize to a lenght of 400
+        spacer = QtGui.QSpacerItem(400, 0, QtGui.QSizePolicy.Minimum, \
+            QtGui.QSizePolicy.Expanding)
+        layout = msgBox.layout()
+        layout.addItem(spacer, layout.rowCount(), 0, 1, layout.columnCount())
+        return msgBox.exec_()
 
 def DisableWidgets():
     ui.updateButton.setEnabled(False)
