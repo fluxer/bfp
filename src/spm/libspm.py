@@ -445,6 +445,7 @@ class Source(object):
         run_compile_schemas = True
         run_depmod = True
         run_icon_cache = True
+        run_udevadm_reload = True
         for sfile in sorted(content):
             sfile = '/' + sfile
             if sfile.endswith('.so') and os.path.isfile(os.path.join(ROOT_DIR, 'etc/ld.so.conf')) \
@@ -531,6 +532,11 @@ class Source(object):
                 message.sub_debug(sfile)
                 misc.system_command(('depmod'))
                 run_depmod = False
+            elif '/udev/rules.d/' in sfile and misc.whereis('udevadm', \
+                fallback=False) and run_udevadm_reload:
+                message.sub_info('Reloading udev rules')
+                message.sub_debug(sfile)
+                misc.system_command(('udevadm', 'control', '--reload'))
             # upon target remove sfile may not exist thus some triggers fail
             elif not os.path.isfile(sfile):
                 continue
