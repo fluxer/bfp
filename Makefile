@@ -1,7 +1,6 @@
 include Makefile.inc
 
 all:
-	$(MAKE) -C help
 	$(MAKE) -C src/cparted
 	$(MAKE) -C src/blockd
 	$(MAKE) -C src/libs
@@ -13,7 +12,6 @@ check:
 
 install:
 	$(MAKE) -C etc install
-	$(MAKE) -C help install
 	$(MAKE) -C misc install
 	$(MAKE) -C scripts install
 	$(MAKE) -C src/blockd install
@@ -24,7 +22,6 @@ install:
 
 uninstall:
 	$(MAKE) -C etc uninstall
-	$(MAKE) -C help uninstall
 	$(MAKE) -C misc uninstall
 	$(MAKE) -C scripts uninstall
 	$(MAKE) -C src/blockd uninstall
@@ -34,7 +31,6 @@ uninstall:
 	$(MAKE) -C src/spm uninstall
 
 clean:
-	$(MAKE) -C help clean
 	$(MAKE) -C src/blockd clean
 	$(MAKE) -C src/cparted clean
 	$(MAKE) -C src/libs clean
