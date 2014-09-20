@@ -1,6 +1,6 @@
 #!/bin/python2
 
-import os, re, shlex, gdbm
+import os, re, shlex
 
 import libmisc
 misc = libmisc.Misc()
@@ -13,38 +13,51 @@ class Database(object):
         self.CACHE_DIR = '/var/cache/spm'
         self.LOCAL_DIR = self.ROOT_DIR + 'var/local/spm'
         self.IGNORE = []
-        self.footprintdb = gdbm.open(self.LOCAL_DIR + '/footprint.db', 'c')
-        self.localdb = gdbm.open(self.LOCAL_DIR + '/local.db', 'c')
-        self.remotedb = gdbm.open(self.LOCAL_DIR + '/remote.db', 'c')
-
-    def remote_sync(self):
-        for sdir in misc.list_dirs(os.path.join(self.CACHE_DIR, 'repositories')):
-            if os.path.isfile(os.path.join(sdir, 'SRCBUILD')) and basename:
-                remote_list.append(os.path.basename(sdir))
-            self.remotedb[os.path.dirname(sdir)] = sdir 
 
     def remote_all(self, basename=False):
         ''' Returns directories of all remote (repository) targets '''
-        return sorted(self.remotedb.keys())
+        remote_list = []
+
+        for sdir in misc.list_dirs(os.path.join(self.CACHE_DIR, 'repositories')):
+            if os.path.isfile(os.path.join(sdir, 'SRCBUILD')) and basename:
+                remote_list.append(os.path.basename(sdir))
+            elif os.path.isfile(os.path.join(sdir, 'SRCBUILD')):
+                remote_list.append(sdir)
+        return sorted(remote_list)
 
     def local_all(self, basename=False):
         ''' Returns directories of all local (installed) targets '''
-        return sorted(self.localdb.keys())
+        local_list = []
+
+        # it may not exists if bootstrapping
+        if not os.path.isdir(self.LOCAL_DIR):
+            return local_list
+
+        for sdir in misc.list_dirs(self.LOCAL_DIR):
+            if os.path.isfile(os.path.join(sdir, 'metadata')) and basename:
+                local_list.append(os.path.basename(sdir))
+            elif os.path.isfile(os.path.join(sdir, 'metadata')):
+                local_list.append(sdir)
+        return sorted(local_list)
 
     def remote_search(self, target):
         ''' Returns full path to directory matching target '''
         if os.path.isfile(os.path.join(target, 'SRCBUILD')):
             return target
 
-        for rtarget in self.remotedb.keys():
+        for rtarget in self.remote_all():
             if rtarget == target \
-                or os.path.basename(rtarget) == self.remotedb[rtaget]:
+                or os.path.basename(rtarget) == os.path.basename(target):
                 return rtarget
         return None
 
     def local_installed(self, target):
         ''' Returns True or False wheather target is installed '''
-        if target in self.localdb.keys():
+        if not os.path.isdir(self.LOCAL_DIR):
+            return False
+        elif os.path.basename(target) in self.local_all(basename=True):
+            return True
+        elif target in self.local_all():
             return True
         return False
 
@@ -115,20 +128,31 @@ class Database(object):
 
     def local_footprint(self, target):
         ''' Returns files of target '''
-        for ltarget in self.footprintdb.keys():
-            if ltarget == target:
-                return self.footprintdb[target]
+        relative_path = os.path.join(self.LOCAL_DIR, target, 'footprint')
+        full_path = os.path.join(target, 'footprint')
+        if os.path.isfile(relative_path):
+            return misc.file_read(relative_path)
+        elif os.path.isfile(full_path):
+            return misc.file_read(full_path)
 
     def local_metadata(self, target, key):
         ''' Returns metadata of local target '''
-        if key == 'version':
-            return self.localdb[target].split('\n')[0].replace('version=', '').strip()
-        elif key == 'description':
-            return self.localdb[target].split('\n')[1].replace('description=', '').strip()
-        elif key == 'depends':
-            return self.localdb[target].split('\n')[2].replace('depends=', '').strip().split(' ')
-        elif key == 'size':
-            return self.localdb[target].split('\n')[3].replace('size=', '').strip()
+        target_metadata = os.path.join(self.LOCAL_DIR, target, 'metadata')
+        if os.path.isfile(target_metadata):
+            # this is not optimal, but cleaner
+            # for line in misc.file_readlines(target_metadata):
+            #     if line.startswith(key + '='):
+            #         return line.split('=')[1].strip()
+
+            metadata_content = misc.file_read(target_metadata)
+            if key == 'version':
+                return metadata_content.split('\n')[0].replace('version=', '').strip()
+            elif key == 'description':
+                return metadata_content.split('\n')[1].replace('description=', '').strip()
+            elif key == 'depends':
+                return metadata_content.split('\n')[2].replace('depends=', '').strip().split(' ')
+            elif key == 'size':
+                return metadata_content.split('\n')[3].replace('size=', '').strip()
 
     def local_uptodate(self, target):
         ''' Returns True if target is up-to-date and False otherwise '''
