@@ -117,13 +117,15 @@ class Database(object):
                 checked.extend((target, dependency))
         return missing
 
-    def local_rdepends(self, target):
+    def local_rdepends(self, target, indirect=False):
         ''' Returns reverse dependencies of target '''
         revdeps = []
         for installed in self.local_all(basename=True):
             if os.path.basename(target) in self.local_metadata(installed, 'depends') \
-                and not installed in self.IGNORE:
+                and not installed in self.IGNORE and not installed in revdeps:
                 revdeps.append(installed)
+                if oneshot:
+                    revdeps.extend(self.local_rdepends(installed))
         return revdeps
 
     def local_footprint(self, target):

@@ -405,7 +405,7 @@ class Source(object):
 
     def autosource(self, targets, automake=False, autoremove=False):
         ''' Handle targets build/remove without affecting current object '''
-        obj = Source(targets, automake=automake, autoremove=autoremove)
+        obj = Source(targets, do_reverse=self.do_reverse, automake=automake, autoremove=autoremove)
         obj.main()
 
     def update_databases(self, content):
@@ -983,13 +983,16 @@ class Source(object):
             sys.exit(2)
 
         message.sub_info('Checking dependencies')
-        depends_detected = database.local_rdepends(self.target_name)
-        if depends_detected and self.do_reverse:
+        depends_detected = database.local_rdepends(self.target_name, indirect=True)
+        # on autoremove ignore reverse dependencies asuming they have been
+        # processed already and passed to the class initializer in proper order
+        # by the initial checker with indirect reverse dependencies on
+        if depends_detected and self.do_reverse and not self.autoremove:
             message.sub_info('Removing reverse dependencies', depends_detected)
             self.autosource(depends_detected, autoremove=True)
             message.sub_info('Resuming %s removing at' % \
                 os.path.basename(self.target), datetime.today())
-        elif depends_detected:
+        elif depends_detected and not self.autoremove:
             message.sub_critical('Other targets depend on %s' % \
                 self.target_name, depends_detected)
             sys.exit(2)
