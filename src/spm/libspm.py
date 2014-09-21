@@ -372,7 +372,8 @@ class Source(object):
     ''' Class for dealing with sources '''
     def __init__(self, targets, do_clean=False, do_prepare=False, \
         do_compile=False, do_check=False, do_install=False, do_merge=False, \
-        do_remove=False, do_depends=False, do_reverse=False, do_update=False):
+        do_remove=False, do_depends=False, do_reverse=False, do_update=False, \
+        automake=False, autoremove=False):
         self.targets = targets
         self.do_clean = do_clean
         self.do_prepare = do_prepare
@@ -384,7 +385,8 @@ class Source(object):
         self.do_depends = do_depends
         self.do_reverse = do_reverse
         self.do_update = do_update
-        self.autoremove = False
+        self.automake = automake
+        self.autoremove = autoremove
         self.mirror = MIRROR
         self.strip_binaries = STRIP_BINARIES
         self.strip_shared = STRIP_SHARED
@@ -401,30 +403,10 @@ class Source(object):
         database.LOCAL_DIR = LOCAL_DIR
         database.IGNORE = IGNORE
 
-    def set_global(self, target):
-        ''' Set target properties, used to reset all of them '''
-        self.target = target
-        self.target_name = os.path.basename(target)
-        self.target_dir = database.remote_search(target)
-
-        self.srcbuild = os.path.join(self.target_dir, 'SRCBUILD')
-        self.source_dir = os.path.join(BUILD_DIR, self.target_name, 'source')
-        self.install_dir = os.path.join(BUILD_DIR, self.target_name, 'install')
-
-        self.target_version = database.remote_metadata(self.target_dir, 'version')
-        self.target_description = database.remote_metadata(self.target_dir, 'description')
-        self.target_depends = database.remote_metadata(self.target_dir, 'depends')
-        self.target_makedepends = database.remote_metadata(self.target_dir, 'makedepends')
-        self.target_sources = database.remote_metadata(self.target_dir, 'sources')
-        self.target_options = database.remote_metadata(self.target_dir, 'options')
-        self.target_backup = database.remote_metadata(self.target_dir, 'backup')
-
-        self.target_footprint = os.path.join('var/local/spm', self.target_name, 'footprint')
-        self.target_metadata = os.path.join('var/local/spm', self.target_name, 'metadata')
-
-        self.sources_dir = os.path.join(CACHE_DIR, 'sources', self.target_name)
-        self.target_tarball = os.path.join(CACHE_DIR, 'tarballs', \
-            self.target_name + '_' + self.target_version + '.tar.bz2')
+    def autosource(self, targets, automake=False, autoremove=False):
+        ''' Handle targets build/remove without affecting current object '''
+        obj = Source(targets, automake=automake, autoremove=autoremove)
+        obj.main()
 
     def update_databases(self, content):
         ''' Update common databases '''
@@ -580,8 +562,6 @@ class Source(object):
 
     def clean(self):
         ''' Clean target files '''
-        self.set_global(self.target)
-
         if os.path.isdir(self.install_dir) and self.do_install:
             message.sub_info('Removing', self.install_dir)
             misc.dir_remove(self.install_dir)
@@ -608,18 +588,14 @@ class Source(object):
 
         if missing_dependencies and self.do_depends:
             message.sub_info('Building dependencies', missing_dependencies)
-            self.original_target = self.target
-            self.main(missing_dependencies, automake=True)
+            self.autosource(missing_dependencies, automake=True)
             message.sub_info('Resuming %s preparations at' % \
-                os.path.basename(self.original_target), datetime.today())
-            self.set_global(self.original_target)
+                os.path.basename(self.target), datetime.today())
         elif missing_dependencies:
             message.sub_warning('Dependencies missing', missing_dependencies)
 
-        if not os.path.isdir(self.source_dir):
-            os.makedirs(self.source_dir)
-        if not os.path.isdir(self.sources_dir):
-            os.makedirs(self.sources_dir)
+        misc.dir_create(self.source_dir)
+        misc.dir_create(self.sources_dir)
 
         message.sub_info('Preparing sources')
         for src_url in self.target_sources:
@@ -689,24 +665,17 @@ class Source(object):
 
     def compile(self):
         ''' Compile target sources '''
-        self.set_global(self.target)
-
         misc.system_command((misc.whereis('bash'), '-e', '-c', 'source ' + \
             self.srcbuild + ' && umask 0022 && src_compile'), cwd=self.source_dir)
 
     def check(self):
         ''' Check target sources '''
-        self.set_global(self.target)
-
         misc.system_command((misc.whereis('bash'), '-e', '-c', 'source ' + \
             self.srcbuild + ' && umask 0022 && src_check'), cwd=self.source_dir)
 
     def install(self):
         ''' Install targets files '''
-        self.set_global(self.target)
-
-        if not os.path.isdir(self.install_dir):
-            os.makedirs(self.install_dir)
+        misc.dir_create(self.install_dir)
 
         misc.system_command((misc.whereis('bash'), '-e', '-c', 'source ' + \
             self.srcbuild + ' && umask 0022 && src_install'), cwd=self.source_dir)
@@ -863,8 +832,7 @@ class Source(object):
             sys.exit(2)
 
         message.sub_info('Assembling metadata')
-        if not os.path.isdir(os.path.join(self.install_dir, 'var/local/spm', self.target_name)):
-            os.makedirs(os.path.join(self.install_dir, 'var/local/spm', self.target_name))
+        misc.dir_create(os.path.join(self.install_dir, 'var/local/spm', self.target_name))
         metadata = open(os.path.join(self.install_dir, self.target_metadata), 'w')
         metadata.write('version=' + self.target_version + '\n')
         metadata.write('description=' + self.target_description + '\n')
@@ -877,14 +845,11 @@ class Source(object):
             '\n'.join(sorted(target_content.keys())).replace(self.install_dir, ''))
 
         message.sub_info('Compressing tarball')
-        if not os.path.isdir(os.path.join(CACHE_DIR, 'tarballs')):
-            os.makedirs(os.path.join(CACHE_DIR, 'tarballs'))
+        misc.dir_create(os.path.join(CACHE_DIR, 'tarballs'))
         misc.archive_compress(self.install_dir, self.target_tarball)
 
     def merge(self):
         ''' Merget target to system '''
-        self.set_global(self.target)
-
         message.sub_info('Indexing content')
         new_content = misc.archive_list(self.target_tarball)
         old_content = database.local_footprint(self.target_name)
@@ -1005,7 +970,7 @@ class Source(object):
                                 continue # static binary
                             for lib in libraries.split(','):
                                 if not database.local_belongs(lib):
-                                    self.main(target.split(), automake=True)
+                                    self.autosource([target], automake=True)
                                     break_free = True
                                     break
             elif needs_rebuild:
@@ -1021,12 +986,9 @@ class Source(object):
         depends_detected = database.local_rdepends(self.target_name)
         if depends_detected and self.do_reverse:
             message.sub_info('Removing reverse dependencies', depends_detected)
-            self.autoremove = True
-            self.original_target = self.target
-            self.main(depends_detected)
+            self.autosource(depends_detected, autoremove=True)
             message.sub_info('Resuming %s removing at' % \
-                os.path.basename(self.original_target), datetime.today())
-            self.set_global(self.original_target)
+                os.path.basename(self.target), datetime.today())
         elif depends_detected:
             message.sub_critical('Other targets depend on %s' % \
                 self.target_name, depends_detected)
@@ -1061,12 +1023,9 @@ class Source(object):
         if os.path.isfile(footprint):
             self.update_databases(target_content)
 
-    def main(self, targets=None, automake=False):
+    def main(self):
         ''' Execute action for every target '''
-        if not targets:
-            targets = self.targets
-
-        for target in targets:
+        for target in self.targets:
             # make sure target is absolute path
             if os.path.isdir(target):
                 target = os.path.abspath(target)
@@ -1080,9 +1039,27 @@ class Source(object):
                 message.sub_critical('Invalid target', target)
                 sys.exit(2)
 
-            self.set_global(target)
+            # set target properties'
+            self.target = target
+            self.target_name = os.path.basename(target)
+            self.target_dir = database.remote_search(target)
+            self.srcbuild = os.path.join(self.target_dir, 'SRCBUILD')
+            self.source_dir = os.path.join(BUILD_DIR, self.target_name, 'source')
+            self.install_dir = os.path.join(BUILD_DIR, self.target_name, 'install')
+            self.target_version = database.remote_metadata(self.target_dir, 'version')
+            self.target_description = database.remote_metadata(self.target_dir, 'description')
+            self.target_depends = database.remote_metadata(self.target_dir, 'depends')
+            self.target_makedepends = database.remote_metadata(self.target_dir, 'makedepends')
+            self.target_sources = database.remote_metadata(self.target_dir, 'sources')
+            self.target_options = database.remote_metadata(self.target_dir, 'options')
+            self.target_backup = database.remote_metadata(self.target_dir, 'backup')
+            self.target_footprint = os.path.join('var/local/spm', self.target_name, 'footprint')
+            self.target_metadata = os.path.join('var/local/spm', self.target_name, 'metadata')
+            self.sources_dir = os.path.join(CACHE_DIR, 'sources', self.target_name)
+            self.target_tarball = os.path.join(CACHE_DIR, 'tarballs', \
+            self.target_name + '_' + self.target_version + '.tar.bz2')
 
-            if database.local_uptodate(self.target) and self.do_update and not automake:
+            if database.local_uptodate(self.target) and self.do_update and not self.automake:
                 message.sub_warning('Target is up-to-date', self.target)
                 continue
 
@@ -1143,15 +1120,15 @@ class Source(object):
                     message.sub_warning('Overriding PYTHON_COMPILE to', 'False')
                     self.python_compile = False
 
-            if self.do_clean or automake:
+            if self.do_clean or self.automake:
                 message.sub_info('Starting %s cleanup at' % self.target_name, datetime.today())
                 self.clean()
 
-            if self.do_prepare or automake:
+            if self.do_prepare or self.automake:
                 message.sub_info('Starting %s preparations at' % self.target_name, datetime.today())
                 self.prepare()
 
-            if self.do_compile or automake:
+            if self.do_compile or self.automake:
                 if not misc.file_search('\nsrc_compile()', self.srcbuild, escape=False):
                     message.sub_warning('src_compile() not defined')
                 else:
@@ -1181,7 +1158,7 @@ class Source(object):
                     os.putenv('MAKEFLAGS', MAKEFLAGS)
                     self.check()
 
-            if self.do_install or automake:
+            if self.do_install or self.automake:
                 if not misc.file_search('\nsrc_install()', self.srcbuild, escape=False):
                     message.sub_critical('src_install() not defined')
                     sys.exit(2)
@@ -1197,7 +1174,7 @@ class Source(object):
                 os.putenv('MAKEFLAGS', MAKEFLAGS)
                 self.install()
 
-            if self.do_merge or automake:
+            if self.do_merge or self.automake:
                 message.sub_info('Starting %s merge at' % self.target_name, datetime.today())
                 self.merge()
 
