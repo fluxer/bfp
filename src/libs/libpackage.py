@@ -124,7 +124,7 @@ class Database(object):
             if os.path.basename(target) in self.local_metadata(installed, 'depends') \
                 and not installed in self.IGNORE and not installed in revdeps:
                 revdeps.append(installed)
-                if oneshot:
+                if indirect:
                     revdeps.extend(self.local_rdepends(installed))
         return revdeps
 
