@@ -13,7 +13,7 @@ import os
 import re
 
 
-app_version = "0.9.40 (d71119b)"
+app_version = "0.9.40 (635b55e)"
 
 try:
     import libmessage
@@ -50,6 +50,12 @@ try:
         ''' Override ignored targets '''
         def __call__(self, parser, namespace, values, option_string=None):
             libspm.IGNORE = values.split(' ')
+            setattr(namespace, self.dest, values)
+
+    class OverrideOffline(argparse.Action):
+        ''' Override offline mode '''
+        def __call__(self, parser, namespace, values, option_string=None):
+            libspm.OFFLINE = values
             setattr(namespace, self.dest, values)
 
     class OverrideMirror(argparse.Action):
@@ -172,15 +178,6 @@ try:
             libspm.TRIGGERS = values
             setattr(namespace, self.dest, values)
 
-    class OverrideOffline(argparse.Action):
-        ''' Override offline mode '''
-        def __call__(self, parser, namespace, values, option_string=None):
-            libmisc.OFFLINE = True
-            libspm.libmisc.OFFLINE = True
-            libpackage.libmisc.OFFLINE = True
-            libspm.libpackage.libmisc.OFFLINE = True
-            setattr(namespace, self.dest, values)
-
     class OverrideDebug(argparse.Action):
         ''' Override printing of debug messages '''
         def __call__(self, parser, namespace, values, option_string=None):
@@ -288,6 +285,8 @@ try:
         help='Change system root directory')
     parser.add_argument('--ignore', type=str, action=OverrideIgnore, \
         help='Change ignored targets')
+    parser.add_argument('--offline', type=ast.literal_eval, \
+        action=OverrideOffline, help='Set whether to use offline mode')
     parser.add_argument('--mirror', type=ast.literal_eval, \
         action=OverrideMirror, help='Set whether to use mirrors')
     parser.add_argument('--timeout', type=int, action=OverrideTimeout, \
@@ -329,8 +328,6 @@ try:
         action=OverrideScripts, help='Set whether to execute pre/post script')
     parser.add_argument('--triggers', type=ast.literal_eval, \
         action=OverrideTriggers, help='Set whether to execute triggers')
-    parser.add_argument('--offline', nargs=0, action=OverrideOffline, \
-        help='Enable offline mode')
     parser.add_argument('--debug', nargs=0, action=OverrideDebug, \
         help='Enable debug messages')
     parser.add_argument('--version', action='version', \
@@ -391,6 +388,7 @@ try:
         message.sub_info('BUILD_DIR', libspm.BUILD_DIR)
         message.sub_info('ROOT_DIR', libspm.ROOT_DIR)
         message.sub_info('IGNORE', libspm.IGNORE)
+        message.sub_info('OFFLINE', libspm.OFFLINE)
         message.sub_info('MIRROR', libspm.MIRROR)
         message.sub_info('TIMEOUT', libspm.TIMEOUT)
         message.sub_info('EXTERNAL', libspm.EXTERNAL)
