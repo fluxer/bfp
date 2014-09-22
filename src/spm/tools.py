@@ -11,6 +11,7 @@ import shutil
 import os
 import re
 import difflib
+import pwd, grp
 import SimpleHTTPServer, SocketServer
 
 import libmessage
@@ -258,7 +259,8 @@ class Dist(object):
 class Lint(object):
     ''' Check sanity of local targets '''
     def __init__(self, targets, man=False, udev=False, symlink=False, \
-        doc=False, module=False, footprint=False, builddir=False):
+        doc=False, module=False, footprint=False, builddir=False, \
+        ownership=False, executable=False):
         self.targets = targets
         self.man = man
         self.udev = udev
@@ -267,6 +269,8 @@ class Lint(object):
         self.module = module
         self.footprint = footprint
         self.builddir = builddir
+        self.ownership = ownership
+        self.executable = executable
 
     def main(self):
         ''' Looks for target match and then execute action for every target '''
@@ -321,6 +325,34 @@ class Lint(object):
 
                         if misc.file_search(libspm.BUILD_DIR, sfile):
                             message.sub_warning('Build directory trace(s)', sfile)
+
+                if self.ownership:
+                    for sfile in target_footprint.splitlines():
+                        if not os.path.exists(sfile) or os.path.islink(sfile):
+                            continue
+
+                        stat = os.stat(sfile)
+                        unkown = False
+                        try:
+                            pwd.getpwuid(stat.st_uid)
+                        except KeyError:
+                            unkown = True
+                        try:
+                            grp.getgrgid(stat.st_gid)
+                        except KeyError:
+                            unkown = True
+                        if unkown:
+                            message.sub_warning('Unknown owner of', sfile)
+
+                if self.executable:
+                    # FIXME: false positives
+                    for sfile in target_footprint.splitlines():
+                        if not os.path.exists(sfile) or os.path.islink(sfile):
+                            continue
+
+                        if sfile.startswith(('/bin', '/sbin', '/usr/bin', '/usr/sbin')) \
+                            and not os.access(sfile, os.X_OK):
+                            message.sub_warning('File in PATH is not executable', sfile)
 
 
 class Sane(object):
@@ -613,6 +645,10 @@ try:
         help='Check for empty footprint')
     lint_parser.add_argument('-b', '--builddir', action='store_true', \
         help='Check for build directory trace(s)')
+    lint_parser.add_argument('-o', '--ownership', action='store_true', \
+        help='Check ownership')
+    lint_parser.add_argument('-e', '--executable', action='store_true', \
+        help='Check for non-executable(s) in PATH')
     lint_parser.add_argument('-a', '--all', action='store_true', \
         help='Perform all checks')
     lint_parser.add_argument('TARGETS', nargs='+', type=str, \
@@ -737,11 +773,14 @@ try:
         message.sub_info('DOC', ARGS.doc)
         message.sub_info('MODULE', ARGS.module)
         message.sub_info('FOOTPRINT', ARGS.footprint)
+        message.sub_info('OWNERSHIP', ARGS.ownership)
+        message.sub_info('EXECUTABLE', ARGS.executable)
         message.sub_info('TARGETS', ARGS.TARGETS)
         message.info('Poking locals...')
 
         m = Lint(ARGS.TARGETS, ARGS.man, ARGS.udev, ARGS.symlink, ARGS.doc, \
-            ARGS.module, ARGS.footprint, ARGS.builddir)
+            ARGS.module, ARGS.footprint, ARGS.builddir, ARGS.ownership, \
+            ARGS.executable)
         m.main()
 
     elif ARGS.mode == 'sane':
