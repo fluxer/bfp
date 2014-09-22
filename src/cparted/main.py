@@ -7,7 +7,7 @@ This program is licensed under the GPL. See COPYING for the full license.
 This program is a curses front end to pyparted that mimics cfdisk.
 
 """
-import curses, curses.textpad, sys
+import curses, curses.textpad, sys, subprocess
 import parted
 
 app_version = "0.9.39 (3f59874)"
@@ -694,7 +694,12 @@ def main():
             global DEBUG
             DEBUG = True
         device = parted.getDevice(sys.argv[1])
-        parted.Disk(device).minimizeExtendedPartition()
+        # FIXME: there has to be a better way to handle fresh disks without label
+        try:
+            parted.Disk(device).minimizeExtendedPartition()
+        except DiskLabelException:
+            subprocess.check_call(('parted', '-s', sys.argv[1], 'mklabel', 'msdos'))
+            parted.Disk(device).minimizeExtendedPartition()
     except IndexError:
         sys.stderr.write("ERROR: you must enter a device path\n")
         sys.exit(1)
