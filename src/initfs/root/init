@@ -40,6 +40,11 @@ cmd mount -t proc proc /proc -o nosuid,noexec,nodev
 cmd mount -t sysfs sys /sys -o nosuid,noexec,nodev
 cmd mount -t devtmpfs dev /dev -o mode=0755,nosuid
 
+if [ ! -e "/etc/mtab" ];then
+    msg "Creating mtab symlink..."
+    ln -s /proc/mounts /etc/mtab
+fi
+
 msg "Parsing cmdline options..."
 hooks="$(ls /hooks)"
 init="/sbin/init"
