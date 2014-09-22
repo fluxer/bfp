@@ -110,8 +110,7 @@ class QMount(dbus.service.Object):
             if not fstype:
                 return
             misc.system_command((misc.whereis('modprobe'), '-b', fstype))
-            if not os.path.isdir(directory):
-                os.makedirs(directory)
+            misc.dir_create(directory)
             if not self.CheckMounted(devname):
                 misc.system_command((misc.whereis('mount'), devname, directory))
         except Exception as detail:

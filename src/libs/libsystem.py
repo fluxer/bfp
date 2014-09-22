@@ -184,8 +184,7 @@ class System(object):
         if not stype:
             return
         subprocess.check_call((misc.whereis('modprobe'), '-b', stype))
-        if not os.path.isdir(directory):
-            os.makedirs(directory)
+        misc.dir_create(directory)
         if not self.check_mounted(device):
             subprocess.check_call((misc.whereis('mount'), device, directory))
             self.post_actions(self.MOUNT_POST)
