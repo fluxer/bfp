@@ -697,7 +697,7 @@ def main():
         # FIXME: there has to be a better way to handle fresh disks without label
         try:
             parted.Disk(device).minimizeExtendedPartition()
-        except DiskLabelException:
+        except parted.DiskLabelException:
             subprocess.check_call(('parted', '-s', sys.argv[1], 'mklabel', 'msdos'))
             parted.Disk(device).minimizeExtendedPartition()
     except IndexError:
