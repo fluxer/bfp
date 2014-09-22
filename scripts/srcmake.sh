@@ -164,7 +164,11 @@ for src in "${@:-.}";do
 
 	msg "Creating footprint and metadata.."
 	mkdir -p "$INSTALL_DIR/var/local/spm/$src_name"
-	find "$INSTALL_DIR" ! -type d -printf '%P\n' > "$INSTALL_DIR/var/local/spm/$src_name/footprint"
+	# FIXME: it breaks on spaces
+	touch "$INSTALL_DIR/var/local/spm/$src_name/footprint"
+	for f in $(find "$INSTALL_DIR" ! -type d);do
+        echo -n "$f\n" >> "$INSTALL_DIR/var/local/spm/$src_name/footprint"
+    done
 	echo "version=$version" > "$INSTALL_DIR/var/local/spm/$src_name/metadata"
 	echo "description=$description" >> "$INSTALL_DIR/var/local/spm/$src_name/metadata"
 	echo "depends=${depends[*]}" >> "$INSTALL_DIR/var/local/spm/$src_name/metadata"
