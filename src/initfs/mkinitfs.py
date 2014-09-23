@@ -162,15 +162,15 @@ try:
                 if not line in ARGS.modules:
                     ARGS.modules.append(line)
 
-    # FIXME: aliases are not supported, `modprobe -bD <module>` can be used but it is
-    #        required to be able to specify the kernel version which it does not support
-    #        otherwise it bails when kernel version requested is different from `uname -r`.
     for module in ARGS.modules:
         # in case ARGS.modules equals ''
         if not module:
             continue
         found = False
         # cross-build, do some kung-fu
+        # FIXME: aliases are not supported, `modprobe -bD <module>` can be used but it is
+        #        required to be able to specify the kernel version which it does not support
+        #        otherwise it bails when kernel version requested is different from `uname -r`.
         if ARGS.kernel != kernel:
             for line in misc.file_read(modsdir + '/modules.dep').splitlines():
                 base = line.split(':')[0]
