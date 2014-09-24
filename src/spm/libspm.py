@@ -21,6 +21,7 @@ database = libpackage.Database()
 MAIN_CONF = '/etc/spm.conf'
 REPOSITORIES_CONF = '/etc/spm/repositories.conf'
 MIRRORS_CONF = '/etc/spm/mirrors.conf'
+TRIGGERS_CONF = '/etc/spm/triggers.conf'
 
 if not os.path.isfile(MAIN_CONF):
     message.warning('Configuration file does not exist', MAIN_CONF)
@@ -82,6 +83,7 @@ else:
     SCRIPTS = conf.getboolean('merge', 'SCRIPTS')
     TRIGGERS = conf.getboolean('merge', 'TRIGGERS')
 
+# parse repositories configuration file
 if not os.path.isfile(REPOSITORIES_CONF):
     message.warning('Repositories file does not exist', REPOSITORIES_CONF)
     REPOSITORIES = ['https://bitbucket.org/smil3y/mini.git']
@@ -99,6 +101,7 @@ else:
         message.critical('Repositories configuration file is empty')
         sys.exit(2)
 
+# parse mirrors configuration file
 if not os.path.isfile(MIRRORS_CONF):
     message.warning('Mirrors file does not exist', MIRRORS_CONF)
     MIRRORS = ['http://distfiles.gentoo.org/distfiles']
@@ -115,6 +118,27 @@ else:
         message.critical('Mirrors configuration file is empty')
         sys.exit(2)
 
+# parse triggers configuration file
+if not os.path.isfile(TRIGGERS_CONF):
+    message.warning('Triggers file does not exist', TRIGGERS_CONF)
+    TRIGGERS = {}
+else:
+    TRIGGERS = {}
+    conf = ConfigParser.SafeConfigParser()
+    conf.read(TRIGGERS_CONF)
+    for section in conf.sections():
+        TRIGGERS[section] = {
+            'pattern': conf.get(section, 'pattern'),
+            'message': conf.get(section, 'message'),
+            'command': conf.get(section, 'command'),
+            'shell': conf.getboolean(section, 'shell')
+            }
+
+    if not TRIGGERS:
+        message.critical('Triggers configuration file is empty')
+        sys.exit(2)
+
+# override module variables from own configuration
 misc.OFFLINE = OFFLINE
 misc.TIMEOUT = TIMEOUT
 misc.EXTERNAL = EXTERNAL
@@ -410,138 +434,22 @@ class Source(object):
 
     def update_databases(self, content):
         ''' Update common databases '''
-        if not TRIGGERS:
-            return
-
-        run_ldconfig = True
-        run_mandb = True
-        run_desktop_database = True
-        run_mime_database = True
-        run_icon_resource = True
-        run_gio_querymodules = True
-        run_pango_querymodules = True
-        run_gtk2_immodules = True
-        run_gtk3_immodules = True
-        run_pixbuf_query = True
-        run_install_info = True
-        run_compile_schemas = True
-        run_depmod = True
-        run_icon_cache = True
-        run_udevadm_reload = True
-        for sfile in sorted(content):
-            sfile = '/' + sfile
-            if sfile.endswith('.so') and os.path.isfile(os.path.join(ROOT_DIR, 'etc/ld.so.conf')) \
-                and run_ldconfig:
-                message.sub_info('Updating shared libraries cache')
-                message.sub_debug(sfile)
-                misc.system_command((misc.whereis('ldconfig'), '-r', ROOT_DIR))
-                run_ldconfig = False
-            elif '/share/man' in sfile and misc.whereis('mandb', fallback=False) \
-                and run_mandb:
-                if os.path.isdir(sfile):
+        for trigger in TRIGGERS:
+            pattern = TRIGGERS[trigger]['pattern']
+            msg = TRIGGERS[trigger]['message']
+            command = TRIGGERS[trigger]['command']
+            shell = TRIGGERS[trigger]['shell']
+            match = re.search(pattern, '\n/'.join(sorted(content)))
+            if match:
+                if not misc.whereis(trigger, False):
+                    message.sub_warning('Trigger requirement not met', trigger)
                     continue
-                message.sub_info('Updating manual pages database')
-                message.sub_debug(sfile)
-                misc.system_command(('mandb', '--quiet'))
-                run_mandb = False
-            elif '/share/applications/' in sfile \
-                and misc.whereis('update-desktop-database', fallback=False) \
-                and run_desktop_database:
-                message.sub_info('Updating desktop database')
-                message.sub_debug(sfile)
-                misc.system_command(('update-desktop-database', os.path.dirname(sfile)))
-                run_desktop_database = False
-            elif '/share/mime/' in sfile and misc.whereis('update-mime-database', \
-                fallback=False) and run_mime_database:
-                message.sub_info('Updating mime database')
-                message.sub_debug(sfile)
-                misc.system_command(('update-mime-database', sys.prefix + 'share/mime'))
-                run_mime_database = False
-            elif '/share/icons/' in sfile and misc.whereis('xdg-icon-resource', \
-                fallback=False) and run_icon_resource:
-                message.sub_info('Updating icon resources')
-                message.sub_debug(sfile)
-                misc.system_command(('xdg-icon-resource', 'forceupdate', '--theme', 'hicolor'))
-                run_icon_resource = False
-            elif '/gio/modules/' in sfile and misc.whereis('gio-querymodules', \
-                fallback=False) and run_gio_querymodules:
-                message.sub_info('Updating GIO modules cache')
-                sdir = os.path.dirname(sfile)
-                message.sub_debug(sdir)
-                misc.system_command(('gio-querymodules', sdir))
-                run_gio_querymodules = False
-            elif '/pango/' in sfile and '/modules/' in sfile \
-                and misc.whereis('pango-querymodules', fallback=False) \
-                and run_pango_querymodules:
-                message.sub_info('Updating pango modules cache')
-                message.sub_debug(sfile)
-                misc.system_command(('pango-querymodules', '--update-cache'))
-                run_pango_querymodules = False
-            elif '/gtk-2.0/' in sfile and '/immodules/' in sfile \
-                and misc.whereis('gtk-query-immodules-2.0', fallback=False) \
-                and run_gtk2_immodules:
-                message.sub_info('Updating GTK-2.0 imodules cache')
-                message.sub_debug(sfile)
-                misc.file_write('/etc/gtk-2.0/gtk.immodules', \
-                    misc.system_output('gtk-query-immodules-2.0'))
-                run_gtk2_immodules = False
-            elif '/gtk-3.0/' in sfile and '/immodules/' in sfile \
-                and misc.whereis('gtk-query-immodules-3.0', fallback=False) \
-                and run_gtk3_immodules:
-                message.sub_info('Updating GTK-3.0 imodules cache')
-                message.sub_debug(sfile)
-                misc.file_write('/etc/gtk-3.0/gtk.immodules', \
-                    misc.system_output('gtk-query-immodules-3.0'))
-                run_gtk3_immodules = False
-            elif '/gdk-pixbuf' in sfile and '/loaders/' in sfile \
-                and misc.whereis('gdk-pixbuf-query-loaders', fallback=False) \
-                and run_pixbuf_query:
-                message.sub_info('Updating gdk pixbuffer loaders')
-                message.sub_debug(sfile)
-                misc.file_write('/etc/gtk-2.0/gdk-pixbuf.loaders', \
-                    misc.system_output('gdk-pixbuf-query-loaders'))
-                run_pixbuf_query = False
-            elif '/schemas/' in sfile and misc.whereis('glib-compile-schemas', \
-                fallback=False) and run_compile_schemas:
-                message.sub_info('Updating GSettings schemas')
-                # gconfpkg --uninstall network-manager-applet
-                message.sub_debug(sfile)
-                misc.system_command(('glib-compile-schemas', os.path.dirname(sfile)))
-                run_compile_schemas = False
-            elif sfile.endswith('.ko') and misc.whereis('depmod', \
-                fallback=False) and run_depmod:
-                message.sub_info('Updating module dependencies')
-                message.sub_debug(sfile)
-                misc.system_command(('depmod'))
-                run_depmod = False
-            elif '/udev/rules.d/' in sfile and misc.whereis('udevadm', \
-                fallback=False) and run_udevadm_reload:
-                message.sub_info('Reloading udev rules')
-                message.sub_debug(sfile)
-                misc.system_command(('udevadm', 'control', '--reload'))
-            # upon target remove sfile may not exist thus some triggers fail
-            elif not os.path.isfile(sfile):
-                continue
-            elif '/share/info' in sfile and misc.whereis('install-info', \
-                fallback=False) and run_install_info:
-                # install-info --delete $infodir/$file.gz $infodir/dir
-                message.sub_info('Updating info pages')
-                sdir = os.path.dirname(sfile)
-                message.sub_debug(sdir)
-                for sfile in misc.list_files(sdir):
-                    misc.system_command(('install-info', sfile, os.path.join(sdir, 'dir')))
-                run_install_info = False
-            elif '/share/icons/' in sfile and misc.whereis('gtk-update-icon-cache', \
-                fallback=False) and run_icon_cache:
-                # extract the proper directory from sfile, e.g. /usr/share/icons/hicolor
-                sdir = misc.string_search('(/(?:.*?)?/share/icons/(?:.*?))', sfile, escape=False)
-                sdir = misc.string_convert(sdir)
-                if not os.path.isfile(os.path.join(sdir, 'index.theme')):
-                    continue
-                message.sub_info('Updating icons cache')
-                message.sub_debug(sdir)
-                misc.system_command(('gtk-update-icon-cache', '-q', '-t', '-i', '-f', sdir))
-                run_icon_cache = False
+                message.sub_info(msg)
+                message.sub_debug(match.group())
+                command = command.replace('$(ROOT)', ROOT_DIR)
+                command = command.replace('$(PREFIX)', sys.prefix)
+                command = command.replace('$(DIRNAME)', os.path.dirname(match.group()))
+                misc.system_command(command, shell=shell)
 
     def remove_target_file(self, sfile):
         ''' Remove target file '''
@@ -685,7 +593,8 @@ class Source(object):
             manpath = misc.whereis('manpath', fallback=False)
             # if manpath (provided by man-db) is not present fallback to something sane
             if not manpath:
-                mpaths = ('/usr/local/share/man', '/usr/share/man', '/usr/man')
+                mpaths = ('/usr/local/share/man', '/local/share/man', \
+                    '/usr/share/man', '/share/man', '/usr/man', '/man')
             else:
                 mpaths = misc.system_output((manpath, '--global')).split(':')
 
@@ -716,6 +625,7 @@ class Source(object):
             if sfile == os.path.join(self.install_dir, self.target_footprint) \
                 or sfile == os.path.join(self.install_dir, self.target_metadata):
                 continue
+            # remove common conflict files/directories
             elif sfile.endswith('/.packlist') or sfile.endswith('/perllocal.pod') \
                 or sfile.endswith('/share/info/dir'):
                 os.unlink(sfile)
@@ -752,11 +662,11 @@ class Source(object):
                 for spath in site.getsitepackages():
                     if not spath in sfile:
                         continue
-                message.sub_debug('Compiling Python file', sfile)
-                # force build the caches to prevent access time issues with .pyc files
-                # being older that .py files because .py files where modified after
-                # the usual installation procedure
-                compileall.compile_file(sfile, force=True, quiet=True)
+                    message.sub_debug('Compiling Python file', sfile)
+                    # force build the caches to prevent access time issues with .pyc files
+                    # being older that .py files because .py files where modified after
+                    # the usual installation procedure
+                    compileall.compile_file(sfile, force=True, quiet=True)
 
         message.sub_info('Checking runtime dependencies')
         missing_detected = False

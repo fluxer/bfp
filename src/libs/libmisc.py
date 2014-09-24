@@ -1,7 +1,7 @@
 #!/bin/python2
 
 import os, re, urlparse, urllib2, tarfile, zipfile, subprocess, httplib, shutil
-import libmagic
+import shlex, libmagic
 
 
 class Misc(object):
@@ -414,6 +414,8 @@ class Misc(object):
             cwd = self.dir_current()
         elif not os.path.isdir(cwd):
             cwd = '/'
+        if isinstance(command, str) and not shell:
+            command = shlex.split(command)
         if catch or self.CATCH:
             pipe = subprocess.Popen(command, stderr = subprocess.PIPE, shell=shell, cwd=cwd)
             pipe.wait()
@@ -436,10 +438,10 @@ class Misc(object):
                 sdir = self.ROOT_DIR + s
                 if not os.path.ismount(sdir):
                     self.dir_create(sdir)
-                    subprocess.check_call((mount, '--rbind', s, sdir))
+                    self.system_command((mount, '--rbind', s, sdir))
             os.chroot(self.ROOT_DIR)
             os.chdir('/')
-            subprocess.check_call(command)
+            self.system_command(command)
         finally:
             os.fchdir(real_root)
             os.chroot('.')
@@ -447,7 +449,7 @@ class Misc(object):
             for s in ('/proc', '/dev', '/sys'):
                 sdir = self.ROOT_DIR + s
                 if os.path.ismount(sdir):
-                    subprocess.check_call((mount, '--force', '--lazy', sdir))
+                    self.system_command((mount, '-f', '-l', sdir))
 
     def system_script(self, srcbuild, function):
         ''' Execute pre/post actions '''

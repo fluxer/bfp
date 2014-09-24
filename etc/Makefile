@@ -5,6 +5,7 @@ install:
 	$(INSTALL) -m644 spm.conf $(DESTDIR)/etc/
 	$(INSTALL) -m644 repositories.conf $(DESTDIR)/etc/spm/
 	$(INSTALL) -m644 mirrors.conf $(DESTDIR)/etc/spm/
+	$(INSTALL) -m644 triggers.conf $(DESTDIR)/etc/spm/
 	$(SED) 's|#MACHINE#|$(MACHINE)|g' -i $(DESTDIR)/etc/spm.conf
 	$(SED) 's|#ARCH#|$(ARCH)|g' -i $(DESTDIR)/etc/spm.conf
 	$(SED) 's|#JOBS#|$(JOBS)|g' -i $(DESTDIR)/etc/spm.conf

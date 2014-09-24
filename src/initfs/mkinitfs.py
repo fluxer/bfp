@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os
 
-app_version = "0.9.40 (ed17cfa)"
+app_version = "1.0.0 (fd7f07d)"
 
 tmpdir = None
 keep = False
@@ -168,9 +168,8 @@ try:
             continue
         found = False
         # cross-build, do some kung-fu
-        # FIXME: aliases are not supported, `modprobe -bD <module>` can be used but it is
-        #        required to be able to specify the kernel version which it does not support
-        #        otherwise it bails when kernel version requested is different from `uname -r`.
+        # FIXME: aliases are not supported, `modprobe` does not allow to specify
+        #        the kernel version
         if ARGS.kernel != kernel:
             for line in misc.file_read(modsdir + '/modules.dep').splitlines():
                 base = line.split(':')[0]
