@@ -121,20 +121,20 @@ else:
 # parse triggers configuration file
 if not os.path.isfile(TRIGGERS_CONF):
     message.warning('Triggers file does not exist', TRIGGERS_CONF)
-    TRIGGERS = {}
+    TRIGGER = {}
 else:
-    TRIGGERS = {}
+    TRIGGER = {}
     conf = ConfigParser.SafeConfigParser()
     conf.read(TRIGGERS_CONF)
     for section in conf.sections():
-        TRIGGERS[section] = {
+        TRIGGER[section] = {
             'pattern': conf.get(section, 'pattern'),
             'message': conf.get(section, 'message'),
             'command': conf.get(section, 'command'),
             'shell': conf.getboolean(section, 'shell')
             }
 
-    if not TRIGGERS:
+    if not TRIGGER and TRIGGERS:
         message.critical('Triggers configuration file is empty')
         sys.exit(2)
 
@@ -434,11 +434,14 @@ class Source(object):
 
     def update_databases(self, content):
         ''' Update common databases '''
-        for trigger in TRIGGERS:
-            pattern = TRIGGERS[trigger]['pattern']
-            msg = TRIGGERS[trigger]['message']
-            command = TRIGGERS[trigger]['command']
-            shell = TRIGGERS[trigger]['shell']
+        if not TRIGGERS:
+            return
+
+        for trigger in TRIGGER:
+            pattern = TRIGGER[trigger]['pattern']
+            msg = TRIGGER[trigger]['message']
+            command = TRIGGER[trigger]['command']
+            shell = TRIGGER[trigger]['shell']
             match = re.search(pattern, '\n/'.join(sorted(content)))
             if match:
                 if not misc.whereis(trigger, False):
@@ -508,7 +511,6 @@ class Source(object):
         message.sub_info('Preparing sources')
         for src_url in self.target_sources:
             src_base = os.path.basename(src_url)
-
             local_file = os.path.join(self.sources_dir, src_base)
             src_file = os.path.join(self.target_dir, src_base)
             link_file = os.path.join(self.source_dir, src_base)
