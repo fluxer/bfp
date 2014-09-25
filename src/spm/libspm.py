@@ -452,7 +452,7 @@ class Source(object):
                 command = command.replace('$(ROOT)', ROOT_DIR)
                 command = command.replace('$(PREFIX)', sys.prefix)
                 command = command.replace('$(DIRNAME)', os.path.dirname(match.group()))
-                misc.system_command(command, shell=shell)
+                misc.system_trigger(command, shell=shell)
 
     def remove_target_file(self, sfile):
         ''' Remove target file '''

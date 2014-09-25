@@ -250,11 +250,11 @@ class Misc(object):
         curl = self.whereis('curl', fallback=False)
         wget = self.whereis('wget', fallback=False)
         if self.EXTERNAL and curl:
-            subprocess.check_call((curl, '--connect-timeout', str(self.TIMEOUT), \
+            self.system_command((curl, '--connect-timeout', str(self.TIMEOUT), \
                 '--fail', '--retry', '10', '--location', '--continue-at', '-', \
                 url, '--output', destination))
         elif self.EXTERNAL and wget:
-            subprocess.check_call((wget, '--timeout', str(self.TIMEOUT), \
+            self.system_command((wget, '--timeout', str(self.TIMEOUT), \
                 '--continue', url, '--output-document', destination))
         else:
             self.fetch_internal(url, destination)
@@ -317,9 +317,9 @@ class Misc(object):
             bsdtar = self.whereis('bsdtar', fallback=False)
             tar = self.whereis('tar')
             if bsdtar:
-                subprocess.check_call((bsdtar, '-xpPf', sfile, '-C', sdir))
+                self.system_command((bsdtar, '-xpPf', sfile, '-C', sdir))
             else:
-                subprocess.check_call((tar, '-xphf', sfile, '-C', sdir))
+                self.system_command((tar, '-xphf', sfile, '-C', sdir))
         elif zipfile.is_zipfile(sfile):
             zfile = zipfile.ZipFile(sfile, 'r')
             zfile.extractall(path=sdir)
@@ -425,7 +425,7 @@ class Misc(object):
         else:
             return subprocess.check_call(command, shell=shell, cwd=cwd)
 
-    def system_chroot(self, command):
+    def system_chroot(self, command, shell=False):
         ''' Execute command in chroot environment '''
         # prevent stupidity
         if self.ROOT_DIR == '/':
@@ -454,9 +454,16 @@ class Misc(object):
     def system_script(self, srcbuild, function):
         ''' Execute pre/post actions '''
         if self.ROOT_DIR == '/':
-            subprocess.check_call((self.whereis('bash'), '-e', '-c', \
+            self.system_command((self.whereis('bash'), '-e', '-c', \
                 'source ' + srcbuild + ' && ' + function), cwd=self.ROOT_DIR)
         else:
             shutil.copy(srcbuild, os.path.join(self.ROOT_DIR, 'SRCBUILD'))
             self.system_chroot(('bash', '-e', '-c', 'source /SRCBUILD && ' + function))
             os.remove(os.path.join(self.ROOT_DIR, 'SRCBUILD'))
+
+    def system_trigger(self, command, shell=False):
+        ''' Execute trigger '''
+        if self.ROOT_DIR == '/':
+            self.system_command(command, shell=shell, cwd=self.ROOT_DIR)
+        else:
+            self.system_chroot(command, shell=shell)
