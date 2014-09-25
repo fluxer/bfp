@@ -449,7 +449,6 @@ class Source(object):
                     continue
                 message.sub_info(msg)
                 message.sub_debug(match.group())
-                command = command.replace('$(ROOT)', ROOT_DIR)
                 command = command.replace('$(PREFIX)', sys.prefix)
                 command = command.replace('$(DIRNAME)', os.path.dirname(match.group()))
                 misc.system_trigger(command, shell=shell)
