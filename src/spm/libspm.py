@@ -658,7 +658,7 @@ class Source(object):
                     misc.system_command((scanelf, '-CBXrq', sfile))
 
         if self.python_compile:
-            message.sub_info('Byte-compiling Python files')
+            message.sub_info('Byte-compiling Python modules')
             for sfile in target_content.keys():
                 for spath in site.getsitepackages():
                     if not spath in sfile:

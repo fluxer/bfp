@@ -315,7 +315,10 @@ class Misc(object):
         if sfile.endswith(('.xz', '.lzma')) \
             or tarfile.is_tarfile(sfile):
             bsdtar = self.whereis('bsdtar', fallback=False)
-            tar = self.whereis('tar')
+            # if bsdtar is present but tar is not do not fail and make tar
+            # requirement only if bsdtar is not available
+            if not bsdtar:
+                tar = self.whereis('tar')
             if bsdtar:
                 self.system_command((bsdtar, '-xpPf', sfile, '-C', sdir))
             else:
