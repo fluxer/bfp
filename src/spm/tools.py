@@ -495,8 +495,9 @@ class Edit(object):
 
 
 class Which(object):
-    def __init__(self, pattern, plain=False):
+    def __init__(self, pattern, cat=False, plain=False):
         self.pattern = pattern
+        self.cat = cat
         self.plain = plain
 
     def main(self):
@@ -506,6 +507,8 @@ class Which(object):
                     print(target)
                 else:
                     message.sub_info('Match', target)
+                if self.cat:
+                    print(misc.file_read(target + '/SRCBUILD'))
 
 
 class Pack(object):
@@ -687,6 +690,8 @@ try:
             help='Targets to apply actions on')
 
     which_parser = subparsers.add_parser('which')
+    which_parser.add_argument('-c', '--cat', action='store_true', \
+        help='Display content of SRCBUILD')
     which_parser.add_argument('-p', '--plain', action='store_true', \
         help='Print in plain format')
     which_parser.add_argument('PATTERN', type=str, \
@@ -829,7 +834,7 @@ try:
         if not ARGS.plain:
             message.info('Runtime information')
             message.sub_info('PATTERN', ARGS.PATTERN)
-        m = Which(ARGS.PATTERN, ARGS.plain)
+        m = Which(ARGS.PATTERN, ARGS.cat, ARGS.plain)
         m.main()
 
     elif ARGS.mode == 'pack':
