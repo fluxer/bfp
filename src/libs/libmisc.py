@@ -12,7 +12,6 @@ class Misc(object):
         self.EXTERNAL = False
         self.ROOT_DIR = '/'
         self.CATCH = False
-        self.ipc = None
 
     def whereis(self, program, fallback=True):
         ''' Find full path to executable '''
@@ -360,36 +359,6 @@ class Misc(object):
                 break
         tar.close()
         return size
-
-
-    def ipc_create(self, fifo, group=os.getegid(), mode=0664):
-        ''' Create IPC for communication '''
-        rfifo = fifo + '.fifo'
-        if not os.path.exists(rfifo):
-            os.mkfifo(rfifo, mode)
-        # set owner of IPC to <group>:<group>
-        os.chown(rfifo, group, group)
-        self.ipc = rfifo
-
-    def ipc_read(self):
-        ''' Read IPC and return data '''
-        if not self.ipc:
-            # FIXME: needs proper permissions set
-            # ipc_create(self.ipc)
-            return None
-        return self.file_read(self.ipc).strip()
-
-    def ipc_write(self, content):
-        ''' Write data to IPC '''
-        if self.ipc:
-            self.file_write(self.ipc, content)
-
-    def ipc_close(self):
-        ''' Close IPC '''
-        if os.path.exists(self.ipc):
-            os.remove(self.ipc)
-        if self.ipc:
-            self.ipc = None
 
     def system_output(self, command, shell=False):
         ''' Get output of external utility '''
