@@ -2,7 +2,7 @@ include ../../Makefile.inc
 
 all: bump clean
 	$(GCC) -shared libudev.c \
-		$(shell $(PKGCONFIG) --cflags --libs python) \
+		$(shell $(PKGCONFIG) --cflags --libs $(PYTHON)) \
 		$(shell $(PKGCONFIG) --cflags --libs libudev) \
 		-o _libudev.so
 	$(NUITKA) --module libudev.py
