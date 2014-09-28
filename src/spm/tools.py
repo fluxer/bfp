@@ -5,7 +5,6 @@ import argparse
 import subprocess
 import tarfile
 import zipfile
-import urllib2
 import shutil
 import os
 import re
@@ -14,8 +13,12 @@ import pwd, grp
 import SimpleHTTPServer, SocketServer
 if sys.version < '3':
     import ConfigParser as configparser
+    from urllib2 import HTTPError
+    from urllib2 import urlopen
 else:
     import configparser
+    from urllib.error import HTTPError
+    from urllib.request import urlopen
 
 import libmessage
 message = libmessage.Message()
@@ -26,7 +29,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.0.0 (972f34c)"
+app_version = "1.0.0 (dfbfc5b)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -545,7 +548,7 @@ class Pkg(object):
         for d in self.GIT_DIRS:
             url = self.GIT_URL + d % pkgname
             try:
-                f = urllib2.urlopen(url)
+                f = urlopen(url)
                 for line in f:
                     m = re.search(r"href='(.+?)'>(.+?)<".encode('utf-8'), line)
                     if m:
@@ -555,7 +558,7 @@ class Pkg(object):
                             yield self.GIT_URL + href, name
                 f.close()
                 return
-            except urllib2.HTTPError as e:
+            except HTTPError as e:
                 if e.code != 404:
                     raise
 
@@ -868,7 +871,7 @@ except configparser.Error as detail:
 except subprocess.CalledProcessError as detail:
     message.critical('SUBPROCESS', detail)
     sys.exit(4)
-except urllib2.HTTPError as detail:
+except HTTPError as detail:
     message.critical('URLLIB', detail)
     sys.exit(5)
 except tarfile.TarError as detail:

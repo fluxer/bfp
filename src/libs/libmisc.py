@@ -5,6 +5,7 @@ if sys.version < '3':
     import urlparse
     from urllib2 import urlopen
     from urllib2 import URLError
+    from urllib2 import urlopen
     from httplib import BadStatusLine
 else:
     import urllib.parse as urlparse
@@ -226,7 +227,7 @@ class Misc(object):
             return True
         elif os.path.isfile(destination):
             local_size = os.path.getsize(destination)
-            rfile = urllib2.urlopen(url, timeout=self.TIMEOUT)
+            rfile = urlopen(url, timeout=self.TIMEOUT)
             remote_size = rfile.headers.get('content-length')
             rfile.close()
 
@@ -242,7 +243,7 @@ class Misc(object):
         if self.OFFLINE:
             return
 
-        rfile = urllib2.urlopen(url, timeout=self.TIMEOUT)
+        rfile = urlopen(url, timeout=self.TIMEOUT)
         dest_dir = os.path.dirname(destination)
         self.dir_create(dest_dir)
 

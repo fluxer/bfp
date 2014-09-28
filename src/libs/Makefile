@@ -1,9 +1,9 @@
 include ../../Makefile.inc
 
 all: clean
-	$(NUITKA) --module libarchive.py
+	$(NUITKA) --recurse-not-to=libmisc --module libarchive.py
 	$(NUITKA) --module libmagic.py
-	$(NUITKA) --module libmessage.py 
+	$(NUITKA) --module libmessage.py
 	$(NUITKA) --module libmisc.py
 	$(NUITKA) --module libpackage.py
 	$(NUITKA) --module libsystem.py

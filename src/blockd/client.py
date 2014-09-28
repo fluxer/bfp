@@ -28,7 +28,7 @@ def dbus_call(method, args):
     else:
         print(str(bus.lastError().message()))
 
-app_version = "1.0.0 (972f34c)"
+app_version = "1.0.0 (dfbfc5b)"
 
 try:
     parser = argparse.ArgumentParser(prog='blockdctl', \
