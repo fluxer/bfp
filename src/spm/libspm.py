@@ -734,7 +734,7 @@ class Source(object):
                         match = misc.string_convert(match)
 
                         if match == self.target_name or misc.string_search(self_file_regexp, \
-                            target_content.keys(), exact=True, escape=False):
+                            list(target_content.keys()), exact=True, escape=False):
                             message.sub_debug('Dependency needed but in self', match)
                         elif match and match in self.target_depends:
                             message.sub_debug('Dependency needed but in depends', match)
@@ -760,7 +760,7 @@ class Source(object):
 
         message.sub_info('Assembling footprint')
         misc.file_write(os.path.join(self.install_dir, self.target_footprint), \
-            '\n'.join(sorted(target_content.keys())).replace(self.install_dir, ''))
+            '\n'.join(sorted(list(target_content.keys()))).replace(self.install_dir, ''))
 
         message.sub_info('Compressing tarball')
         misc.dir_create(os.path.join(CACHE_DIR, 'tarballs'))

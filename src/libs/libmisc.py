@@ -56,6 +56,13 @@ class Misc(object):
             return ()
         return tuple([int(x) for x in variant.split('.') if x.isdigit()])
 
+    def string_encode(self, string):
+        ''' String wrapper to ensure Python3 compat '''
+        if sys.version_info[0] >= 3 and isinstance(string, bytes):
+            return string.decode('utf-8')
+        else:
+            return string
+
     def string_convert(self, string):
         ''' Conver input to string but only if it really is list '''
         if isinstance(string, list) or isinstance(string, tuple):
@@ -104,7 +111,7 @@ class Misc(object):
         rfile = open(sfile, 'rb')
         content = rfile.read()
         rfile.close()
-        return content.decode('utf-8')
+        return self.string_encode(content)
 
     def file_read_nonblock(self, sfile, sbuffer=1024):
         ''' Get file content non-blocking '''
@@ -115,10 +122,10 @@ class Misc(object):
 
     def file_readlines(self, sfile):
         ''' Get file content, split by new line, as list '''
-        rfile = open(sfile, 'r')
+        rfile = open(sfile, 'rb')
         content = rfile.read().splitlines()
         rfile.close()
-        return content
+        return self.string_encode(content)
 
     def file_write(self, sfile, content, mode='w'):
         ''' Write data to file '''
@@ -147,7 +154,7 @@ class Misc(object):
         # https://github.com/ahupp/python-magic/pull/31
         if os.path.islink(sfile):
             return 'inode/symlink'
-        return libmagic.from_file(sfile, mime=True).decode('utf-8')
+        return self.string_encode(libmagic.from_file(sfile, mime=True))
 
     def dir_create(self, sdir):
         ''' Create directory if it does not exist, including leading paths '''
@@ -379,7 +386,7 @@ class Misc(object):
         pipe = subprocess.Popen(command, stdout=subprocess.PIPE, \
             env={'LC_ALL': 'C'}, shell=shell)
         output = pipe.communicate()[0].strip()
-        return output.decode('utf-8')
+        return self.string_encode(output)
 
     def system_input(self, command, input, shell=False):
         ''' Send input to external utility '''
