@@ -7,7 +7,7 @@ misc = libmisc.Misc()
 try:
     lib = ctypes.cdll.LoadLibrary('libarchive.so')
 except OSError as msg:
-    print('Could not find libarchive.so on your system.')
+    print('Could not find libarchive.so')
     sys.exit(1)
 
 
@@ -337,7 +337,7 @@ if __name__ == '__main__':
         elif amode == '-t':
             for afile in afiles:
                 print('Listing %s...' % afile)
-                print '\n'.join(obj.listArchive(afile))
+                print('\n'.join(obj.listArchive(afile)))
         elif amode == '-c':
             print('Creating %s...' % afiles[0])
             obj.createArchive(afiles[1:], afiles[0])

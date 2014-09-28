@@ -9,8 +9,8 @@ if sys.version < '3':
     from httplib import BadStatusLine
 else:
     import urllib.parse as urlparse
-    from urllib.request import urlopen
     from urllib.error import URLError
+    from urllib.request import urlopen
     from http.client import BadStatusLine
 
 
