@@ -80,6 +80,10 @@ class Misc(object):
         ''' Get name of file without the extension '''
         return os.path.splitext(os.path.basename(sfile))[0]
 
+    def file_extension(self, sfile):
+        ''' Get the extension of file '''
+        return os.path.splitext(os.path.basename(sfile))[1]
+
     def file_touch(self, sfile):
         ''' Touch a file, making sure it exists '''
         if not os.path.isfile(sfile):
@@ -268,7 +272,7 @@ class Misc(object):
             return True
         return False
 
-    def archive_compress(self, variant, sfile, method='bz2', chdir=None):
+    def archive_compress(self, variant, sfile, chdir=None):
         ''' Create archive from directory '''
         self.dir_create(os.path.dirname(sfile))
 
@@ -279,7 +283,7 @@ class Misc(object):
             os.chdir(chdir)
 
         if sfile.endswith(('.bz2', '.gz')):
-            tar = tarfile.open(sfile, 'w:' + method)
+            tar = tarfile.open(sfile, 'w:' + self.file_extension(sfile))
             for item in variant:
                 if chdir:
                     tar.add(item.replace(chdir, './'))

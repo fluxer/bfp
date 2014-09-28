@@ -1,7 +1,8 @@
 #!/bin/python2
 
 import os, sys, types, ctypes
-
+import libmisc
+misc = libmisc.Misc()
 
 try:
     lib = ctypes.cdll.LoadLibrary('libarchive.so')
@@ -39,6 +40,10 @@ class Libarchive(object):
         self._entryNew.restype = ctypes.POINTER(self.ArchiveEntry)
         self._readNew = self.lib.archive_read_new
         self._readNew.restype = ctypes.POINTER(self.Archive)
+        self._readDiskNew = self.lib.archive_read_disk_new
+        self._readDiskNew.restype = ctypes.POINTER(self.Archive)
+        self._writeNew = self.lib.archive_write_new
+        self._writeNew.restype = ctypes.POINTER(self.Archive)
         self._writeDiskNew = self.lib.archive_write_disk_new
         self._writeDiskNew.restype = ctypes.POINTER(self.Archive)
 
@@ -52,12 +57,29 @@ class Libarchive(object):
         self._readSupportFormatAll = self.lib.archive_read_support_format_all
 
         # writing
+        self._writeOpenFilename = self.lib.archive_write_open_filename
         self._writeClose = self.lib.archive_write_close
         self._writeDataBlock = self.lib.archive_write_data_block
         self._writeDiskSetOptions = self.lib.archive_write_disk_set_options
         self._writeDiskSetLookup = self.lib.archive_write_disk_set_standard_lookup
         self._writeFinishEntry = self.lib.archive_write_finish_entry
         self._writeHeader = self.lib.archive_write_header
+        self._filterBzip2 = self.lib.archive_write_add_filter_bzip2
+        self._filterBzip2.restype = ctypes.POINTER(self.Archive)
+        self._filterGzip = self.lib.archive_write_add_filter_gzip
+        self._filterGzip.restype = ctypes.POINTER(self.Archive)
+        self._filterLZMA = self.lib.archive_write_set_compression_lzma
+        self._filterLZMA.restype = ctypes.POINTER(self.Archive)
+        self._filterNone = self.lib.archive_write_add_filter_none
+        self._filterNone.restype = ctypes.POINTER(self.Archive)
+        self._formatGnuTar = self.lib.archive_write_set_format_gnutar
+        self._formatGnuTar.restype = ctypes.POINTER(self.Archive)
+        self._formatUsTar = self.lib.archive_write_set_format_ustar
+        self._formatUsTar.restype = ctypes.POINTER(self.Archive)
+        self._formatPax = self.lib.archive_write_set_format_pax
+        self._formatPax.restype = ctypes.POINTER(self.Archive)
+        self._formatPaxRestricted = self.lib.archive_write_set_format_pax_restricted
+        self._formatPaxRestricted.restype = ctypes.POINTER(self.Archive)
 
         # info
         self._entrySize = self.lib.archive_entry_size
@@ -82,7 +104,7 @@ class Libarchive(object):
         self._errorString.restype = ctypes.c_char_p
 
     ### Private methods
-    def _copyData(self, archiveR, archiveW, chdir):
+    def _copyData(self, archiveR, archiveW, chdir=None):
         r = ctypes.c_int()
         buff = ctypes.c_void_p()
         size = ctypes.c_int()
@@ -224,7 +246,55 @@ class Libarchive(object):
 
     def createArchive(self, files, output):
         ''' Create archive '''
-        raise(Exception('Unsupported action'))
+        retv = True              # Return value
+        archive = self._writeNew() # Archive struct
+
+        if output.endswith('.bz2'):
+            self._filterBzip2(archive)
+        elif output.endswith('.gz'):
+            self._filterBzip2(archive)
+        elif output.endswith(('.xz', '.lzma')):
+            self._filterLZMA(archive)
+        else:
+            self._filterNone(archive)
+
+        self._formatPaxRestricted(archive)
+
+        if os.path.isfile(output):
+            print('Removing %s...' % output)
+            os.remove(output)
+
+        # open, analyse, and close our archive
+        if self._writeOpenFilename(archive, output, 10240) != self.ARCH_OK:
+            print(self._errorString(archive))
+            sys.exit(1)
+
+        for sfile in files:
+            print('Adding %s...' % sfile)
+            entry = self._entryNew()
+            stat = os.stat(sfile)
+            content = misc.file_read(sfile)
+            # http://linux.die.net/man/2/stat
+            # self.lib.archive_entry_set_pathname(entry, types.StringType(sfile.lstrip('/')))
+            self.lib.archive_entry_set_pathname(entry, sfile)
+            self.lib.archive_entry_set_size(entry, stat.st_size)
+            # self.lib.archive_entry_set_filetype(entry)
+            self.lib.archive_entry_set_mode(entry, stat.st_mode)
+            # self.lib.archive_entry_set_perm(entry, stat.st_mode)
+            # self.lib.archive_entry_copy_stat(entry, stat)
+            if self._writeHeader(archive, entry) != self.ARCH_OK:
+                print(self._errorString(archive))
+                retv = False
+                self.lib.archive_entry_free(entry)
+                break
+            self.lib.archive_write_data(archive, content, stat.st_size)
+            self.lib.archive_entry_free(entry)
+
+        self._writeClose(archive)
+        self._writeFree(archive)
+
+        # return value
+        return retv
 
     def supportedArchive(self, fname):
         ''' Check if the archive is supported '''
@@ -256,20 +326,21 @@ if __name__ == '__main__':
             # Handle different modes
             if arg == '-x' or arg == '-t' or arg == '-c':
                 amode = arg
-            # Ensure that the argument is a valid file
-            elif os.path.isfile(arg):
-                afiles.append(arg)
             else:
-                raise(Exception('usage [-x|-t|-c] <files>'))
+                afiles.append(arg)
 
-        for afile in afiles:
-            obj = Libarchive()
-            if amode == '-x':
+        obj = Libarchive()
+        if amode == '-x':
+            for afile in afiles:
                 print('Extracting %s...' % afile)
                 obj.extractArchive(afile)
-            elif amode == '-t':
+        elif amode == '-t':
+            for afile in afiles:
                 print('Listing %s...' % afile)
                 print '\n'.join(obj.listArchive(afile))
+        elif amode == '-c':
+            print('Creating %s...' % afiles[0])
+            obj.createArchive(afiles[1:], afiles[0])
     except Exception as msg:
         print(msg)
         sys.exit(1)
