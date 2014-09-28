@@ -82,7 +82,7 @@ class Misc(object):
 
     def file_extension(self, sfile):
         ''' Get the extension of file '''
-        return os.path.splitext(os.path.basename(sfile))[1]
+        return os.path.splitext(sfile)[1].lstrip('.')
 
     def file_touch(self, sfile):
         ''' Touch a file, making sure it exists '''
