@@ -19,7 +19,7 @@ uninstall:
 	$(RM) -r $(DESTDIR)/etc/mkinitfs
 
 clean:
-	$(RM) -r *.build/ *.exe
+	$(RM) -r *.build/ *.exe __pycache__
 	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
 bump:

@@ -31,7 +31,7 @@ uninstall:
 	$(RM) $(DESTDIR)$(DBSERVICEDIR)/blockd.service
 
 clean:
-	$(RM) -r *.build/ *.so *.exe
+	$(RM) -r *.build/ *.so *.exe __pycache__
 	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
 bump:

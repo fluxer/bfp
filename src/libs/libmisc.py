@@ -1,7 +1,16 @@
 #!/bin/python2
 
-import os, re, urlparse, urllib2, tarfile, zipfile, subprocess, httplib, shutil
-import shlex, libmagic
+import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, libmagic
+if sys.version < '3':
+    import urlparse
+    from urllib2 import urlopen
+    from urllib2 import URLError
+    from httplib import BadStatusLine
+else:
+    import urllib.parse as urlparse
+    from urllib.request import urlopen
+    from urllib.error import URLError
+    from http.client import BadStatusLine
 
 
 class Misc(object):
@@ -33,10 +42,10 @@ class Misc(object):
             return
 
         try:
-            p = urllib2.urlopen(url, timeout=self.TIMEOUT)
+            p = urlopen(url, timeout=self.TIMEOUT)
             p.close()
             return True
-        except (urllib2.URLError, httplib.BadStatusLine):
+        except (URLError, BadStatusLine):
             return False
 
     def version(self, variant):
@@ -69,7 +78,7 @@ class Misc(object):
         ''' Normalize URL, optionally get basename '''
         # http://www.w3schools.com/tags/ref_urlencode.asp
         dspecials = {'%20': ' '}
-        sresult = urlparse.urlparse(surl).path
+        sresult = urlparse(surl).path
         for schar in dspecials:
             sresult = sresult.replace(schar, dspecials[schar])
         if basename:
@@ -91,10 +100,10 @@ class Misc(object):
 
     def file_read(self, sfile):
         ''' Get file content '''
-        rfile = open(sfile, 'r')
+        rfile = open(sfile, 'rb')
         content = rfile.read()
         rfile.close()
-        return content
+        return content.decode('utf-8')
 
     def file_read_nonblock(self, sfile, sbuffer=1024):
         ''' Get file content non-blocking '''
@@ -137,7 +146,7 @@ class Misc(object):
         # https://github.com/ahupp/python-magic/pull/31
         if os.path.islink(sfile):
             return 'inode/symlink'
-        return libmagic.from_file(sfile, mime=True)
+        return libmagic.from_file(sfile, mime=True).decode('utf-8')
 
     def dir_create(self, sdir):
         ''' Create directory if it does not exist, including leading paths '''
@@ -368,7 +377,8 @@ class Misc(object):
         ''' Get output of external utility '''
         pipe = subprocess.Popen(command, stdout=subprocess.PIPE, \
             env={'LC_ALL': 'C'}, shell=shell)
-        return pipe.communicate()[0].strip()
+        output = pipe.communicate()[0].strip()
+        return output.decode('utf-8')
 
     def system_input(self, command, input, shell=False):
         ''' Send input to external utility '''

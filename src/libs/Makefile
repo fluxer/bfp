@@ -25,7 +25,7 @@ uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libsystem.so
 
 clean:
-	$(RM) -r *.build/ *.so
+	$(RM) -r *.build/ *.so __pycache__
 	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
 .PHONY: all check install uninstall clean

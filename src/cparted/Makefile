@@ -12,7 +12,7 @@ uninstall:
 	$(RM) $(DESTDIR)$(SBINDIR)/cparted
 
 clean:
-	$(RM) -r *.build/ *.exe
+	$(RM) -r *.build/ *.exe __pycache__
 	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
 bump:

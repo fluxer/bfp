@@ -7,9 +7,12 @@ import zipfile
 import gzip
 import shutil
 import re
-import ConfigParser
 import compileall, site
 from datetime import datetime
+if sys.version < '3':
+    import ConfigParser as configparser
+else:
+    import configparser
 
 import libmessage
 message = libmessage.Message()
@@ -17,6 +20,7 @@ import libmisc
 misc = libmisc.Misc()
 import libpackage
 database = libpackage.Database()
+
 
 MAIN_CONF = '/etc/spm.conf'
 REPOSITORIES_CONF = '/etc/spm/repositories.conf'
@@ -53,7 +57,7 @@ if not os.path.isfile(MAIN_CONF):
     SCRIPTS = False
     TRIGGERS = False
 else:
-    conf = ConfigParser.SafeConfigParser()
+    conf = configparser.SafeConfigParser()
     conf.read(MAIN_CONF)
 
     CACHE_DIR = conf.get('spm', 'CACHE_DIR')
@@ -124,7 +128,7 @@ if not os.path.isfile(TRIGGERS_CONF):
     TRIGGER = {}
 else:
     TRIGGER = {}
-    conf = ConfigParser.SafeConfigParser()
+    conf = configparser.SafeConfigParser()
     conf.read(TRIGGERS_CONF)
     for section in conf.sections():
         TRIGGER[section] = {
@@ -637,7 +641,8 @@ class Source(object):
             message.sub_info('Stripping binaries and libraries')
             strip = misc.whereis('strip')
             scanelf = misc.whereis('scanelf')
-            for sfile, smime in target_content.iteritems():
+            for sfile in target_content:
+                smime = target_content[sfile]
                 if os.path.islink(sfile):
                     continue
 
@@ -671,7 +676,8 @@ class Source(object):
 
         message.sub_info('Checking runtime dependencies')
         missing_detected = False
-        for sfile, smime in target_content.iteritems():
+        for sfile in target_content:
+            smime = target_content[sfile]
             if os.path.islink(sfile):
                 continue
 
@@ -689,7 +695,8 @@ class Source(object):
                             match = match[0]
                     match = misc.string_convert(match)
 
-                    if match == self.target_name or misc.string_search(lib, target_content.keys()):
+                    # Python 3000 dictionary compat
+                    if match == self.target_name or misc.string_search(lib, list(target_content.keys())):
                         message.sub_debug('Library needed but in self', lib)
                     elif match and match in self.target_depends:
                         message.sub_debug('Library needed but in depends', match)

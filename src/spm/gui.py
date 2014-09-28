@@ -2,7 +2,10 @@
 
 from PyQt4 import QtCore, QtGui
 import sys
-import ConfigParser
+if sys.version < '3':
+    import ConfigParser as configparser
+else:
+    import configparser
 
 import gui_ui
 import libspm
@@ -288,7 +291,7 @@ def ChangeBuildDir():
 
 def ChangeSettings():
     try:
-        conf = ConfigParser.SafeConfigParser()
+        conf = configparser.SafeConfigParser()
         conf.read('/etc/spm.conf')
         conf.set('spm', 'CACHE_DIR', str(ui.CacheDirEdit.text()))
         conf.set('spm', 'BUILD_DIR', str(ui.BuildDirEdit.text()))

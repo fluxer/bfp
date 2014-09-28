@@ -22,7 +22,7 @@ uninstall:
 	$(RM) $(DESTDIR)$(BINDIR)/spm-gui
 
 clean:
-	$(RM) -r *.build/ *.so *.exe gui_ui.py
+	$(RM) -r *.build/ *.so *.exe gui_ui.py __pycache__
 	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
 bump:

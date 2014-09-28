@@ -3,15 +3,18 @@
 import sys
 import argparse
 import ast
-import ConfigParser
 import subprocess
 import tarfile
 import zipfile
-import urllib2
 import shutil
 import os
 import re
-
+if sys.version < '3':
+    import ConfigParser as configparser
+    from urllib2 import HTTPError
+else:
+    import configparser
+    from urllib.error import HTTPError
 
 app_version = "1.0.0 (0b7819a)"
 
@@ -445,13 +448,13 @@ try:
         m = libspm.Who(ARGS.PATTERN, ARGS.plain)
         m.main()
 
-except ConfigParser.Error as detail:
+except configparser.Error as detail:
     message.critical('CONFIGPARSER', detail)
     sys.exit(3)
 except subprocess.CalledProcessError as detail:
     message.critical('SUBPROCESS', detail)
     sys.exit(4)
-except urllib2.HTTPError as detail:
+except HTTPError as detail:
     message.critical('URLLIB', detail)
     sys.exit(5)
 except tarfile.TarError as detail:
@@ -479,6 +482,7 @@ except SystemExit:
     sys.exit(2)
 except Exception as detail:
     message.critical('Unexpected error', detail)
+    raise
     sys.exit(1)
 #finally:
 #    raise

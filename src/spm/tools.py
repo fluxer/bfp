@@ -2,7 +2,6 @@
 
 import sys
 import argparse
-import ConfigParser
 import subprocess
 import tarfile
 import zipfile
@@ -13,6 +12,10 @@ import re
 import difflib
 import pwd, grp
 import SimpleHTTPServer, SocketServer
+if sys.version < '3':
+    import ConfigParser as configparser
+else:
+    import configparser
 
 import libmessage
 message = libmessage.Message()
@@ -859,7 +862,7 @@ try:
         m = Serve(ARGS.port, ARGS.address)
         m.main()
 
-except ConfigParser.Error as detail:
+except configparser.Error as detail:
     message.critical('CONFIGPARSER', detail)
     sys.exit(3)
 except subprocess.CalledProcessError as detail:
