@@ -122,26 +122,6 @@ else:
         message.critical('Mirrors configuration file is empty')
         sys.exit(2)
 
-# parse triggers configuration file
-if not os.path.isfile(TRIGGERS_CONF):
-    message.warning('Triggers file does not exist', TRIGGERS_CONF)
-    TRIGGER = {}
-else:
-    TRIGGER = {}
-    conf = configparser.SafeConfigParser()
-    conf.read(TRIGGERS_CONF)
-    for section in conf.sections():
-        TRIGGER[section] = {
-            'pattern': conf.get(section, 'pattern'),
-            'message': conf.get(section, 'message'),
-            'command': conf.get(section, 'command'),
-            'shell': conf.getboolean(section, 'shell')
-            }
-
-    if not TRIGGER and TRIGGERS:
-        message.critical('Triggers configuration file is empty')
-        sys.exit(2)
-
 # override module variables from own configuration
 misc.OFFLINE = OFFLINE
 misc.TIMEOUT = TIMEOUT
@@ -433,29 +413,140 @@ class Source(object):
 
     def autosource(self, targets, automake=False, autoremove=False):
         ''' Handle targets build/remove without affecting current object '''
-        obj = Source(targets, do_reverse=self.do_reverse, automake=automake, autoremove=autoremove)
+        obj = Source(targets, do_reverse=self.do_reverse, automake=automake, \
+            autoremove=autoremove)
         obj.main()
 
-    def update_databases(self, content):
+    def update_databases(self, content, action):
         ''' Update common databases '''
         if not TRIGGERS:
             return
 
-        for trigger in TRIGGER:
-            pattern = TRIGGER[trigger]['pattern']
-            msg = TRIGGER[trigger]['message']
-            command = TRIGGER[trigger]['command']
-            shell = TRIGGER[trigger]['shell']
-            match = re.search(pattern, '\n/'.join(sorted(content)))
-            if match:
-                if not misc.whereis(trigger, False):
-                    message.sub_warning('Trigger requirement not met', trigger)
+        # FIXME: check in for them in ROOT_DIR
+        ldconfig = misc.whereis('ldconfig', False)
+        mandb = misc.whereis('mandb', False)
+        desktop_database = misc.whereis('update-desktop-database', False)
+        mime_database= misc.whereis('update-mime-database', False)
+        icon_resources = misc.whereis('xdg-icon-resource', False)
+        gio_querymodules = misc.whereis('gio-querymodules', False)
+        pango_querymodules = misc.whereis('pango-querymodules', False)
+        gtk2_immodules = misc.whereis('gtk-query-immodules-2.0', False)
+        gtk3_immodules = misc.whereis('gtk-query-immodules-3.0', False)
+        gdk_pixbuf = misc.whereis('gdk-pixbuf-query-loaders', False)
+        glib_schemas = misc.whereis('glib-compile-schemas', False)
+        depmod = misc.whereis('depmod', False)
+        udevadm = misc.whereis('udevadm', False)
+        mkinitfs = misc.whereis('mkinitfs', False)
+        grub_mkconfig = misc.whereis('grub-mkconfig', False)
+        install_info = misc.whereis('install-info', False)
+        icon_cache = misc.whereis('gtk-update-icon-cache', False)
+        for spath in content:
+            if spath.endswith('.so') and ldconfig:
+                message.sub_info('Updating shared libraries cache')
+                message.sub_debug(spath)
+                misc.system_trigger((ldconfig))
+                ldconfig = False
+            elif 'share/man' in spath and mandb:
+                message.sub_info('Updating manual pages database')
+                message.sub_debug(spath)
+                misc.system_trigger((mandb, '--quiet'))
+                mandb = False
+            elif 'share/applications/' in spath and desktop_database:
+                message.sub_info('Updating desktop database')
+                message.sub_debug(spath)
+                misc.system_trigger((desktop_database, sys.prefix + '/share/applications'))
+                desktop_database = False
+            elif 'share/mime/' in spath and mime_database:
+                message.sub_info('Updating MIME database')
+                message.sub_debug(spath)
+                misc.system_trigger((mime_database, sys.prefix + '/share/mime'))
+                mime_database = False
+            elif 'share/icons/' in spath and icon_resources:
+                message.sub_info('Updating icon resources')
+                message.sub_debug(spath)
+                misc.system_trigger((icon_resources, 'forceupdate', '--theme', 'hicolor'))
+                icon_resources = False
+            elif '/gio/modules/' in spath and gio_querymodules:
+                message.sub_info('Updating GIO modules cache')
+                message.sub_debug(spath)
+                misc.system_trigger((gio_querymodules, os.path.dirname(spath)))
+                gio_querymodules = False
+            elif '/pango/' in spath and '/modules/' in spath and pango_querymodules:
+                message.sub_info('Updating pango modules cache')
+                message.sub_debug(spath)
+                misc.system_trigger((pango_querymodules, '--update-cache'))
+                pango_querymodules = False
+            elif '/gtk-2.0/' in spath and '/immodules/' in spath and gtk2_immodules:
+                message.sub_info('Updating GTK-2.0 imodules cache')
+                message.sub_debug(spath)
+                # FIXME: respect ROOT_DIR
+                misc.file_write('/etc/gtk-2.0/gtk.immodules', \
+                    misc.system_output(gtk2_immodules))
+                gtk2_immodules = False
+            elif '/gtk-3.0/' in spath and '/immodules/' in spath and gtk3_immodules:
+                message.sub_info('Updating GTK-3.0 imodules cache')
+                message.sub_debug(spath)
+                # FIXME: respect ROOT_DIR
+                misc.file_write('/etc/gtk-3.0/gtk.immodules', \
+                    misc.system_output(gtk3_immodules))
+                gtk3_immodules = False
+            elif '/gdk-pixbuf' in spath and gio_querymodules:
+                message.sub_info('Updating gdk pixbuffer loaders')
+                message.sub_debug(spath)
+                # FIXME: respect ROOT_DIR
+                misc.file_write('/etc/gtk-2.0/gdk-pixbuf.loaders', \
+                    misc.system_output(gdk_pixbuf))
+                gdk_pixbuf = False
+            elif '/schemas/' in spath and glib_schemas:
+                message.sub_info('Updating GSettings schemas')
+                message.sub_debug(spath)
+                misc.system_trigger((glib_schemas, os.path.dirname(spath)))
+                glib_schemas = False
+            elif 'lib/modules/' in spath and '.ko' in spath and depmod:
+                # extract the kernel modules path, e.g. lib/modules/3.16.8
+                sdir = misc.string_search('((?:usr/?)?lib/modules/.*?/)', spath, escape=False)
+                message.sub_info('Updating module dependencies')
+                message.sub_debug(spath)
+                misc.system_trigger((depmod, misc.string_convert(sdir)))
+                depmod = False
+            elif '/udev/rules.d/' in spath and udevadm:
+                message.sub_info('Reloading udev rules and hwdb')
+                message.sub_debug(spath)
+                misc.system_trigger((udevadm, 'control', '--reload'))
+                udevadm = False
+            # Distribution specifiec
+            # FIXME: upon different version kernel: mkinitfs -k $(KERNEL)
+            elif spath.startswith(('boot/vmlinuz', 'etc/mkinitfs/')) and mkinitfs:
+                message.sub_info('Updating initramfs image')
+                message.sub_debug(spath)
+                misc.system_trigger((mkinitfs, '-o', '/boot/grub/grub.cfg'))
+                mkinitfs = False
+            # FIXME support legacy grub and syslinux
+            elif spath.startswith(('boot/', 'etc/grub.d/')) and grub_mkconfig:
+                message.sub_info('Updating GRUB configuration')
+                message.sub_debug(spath)
+                misc.system_trigger((grub_mkconfig, '-o', '/boot/grub/grub.cfg'))
+                grub_mkconfig = False
+            elif 'share/icons/' in spath and action == 'merge' and icon_cache:
+                # extract the proper directory from spath, e.g. /share/icons/hicolor
+                sdir = misc.string_search('((?:usr/?)?share/icons/(?:.*?))', spath, escape=False)
+                sdir = misc.string_convert(sdir)
+                if not os.path.isfile(ROOT_DIR + sdir + '/index.theme'):
                     continue
-                message.sub_info(msg)
-                message.sub_debug(match.group())
-                command = command.replace('$(PREFIX)', sys.prefix)
-                command = command.replace('$(DIRNAME)', os.path.dirname(match.group()))
-                misc.system_trigger(command, shell=shell)
+                message.sub_info('Updating icons cache')
+                message.sub_debug(spath)
+                misc.system_trigger((icon_cache, '-q', '-t', '-i', '-f', sdir))
+                icon_cache = False
+            elif 'share/info' in spath and action == 'merge' and install_info:
+                # allowed to run multiple times
+                message.sub_info('Installing info page', spath)
+                message.sub_debug(spath)
+                misc.system_trigger((install_info, spath, sys.prefix + '/share/dir'))
+            elif 'share/info' in spath and action == 'remove' and install_info:
+                # allowed to run multiple times
+                message.sub_info('Deleting info page', spath)
+                message.sub_debug(spath)
+                misc.system_trigger((install_info, '--delete', spath, sys.prefix + '/share/dir'))
 
     def remove_target_file(self, sfile):
         ''' Remove target file '''
@@ -861,7 +952,7 @@ class Source(object):
             message.sub_info('Executing post_install()')
             misc.system_script(self.srcbuild, 'post_install')
 
-        self.update_databases(new_content)
+        self.update_databases(new_content, 'merge')
 
         if target_upgrade:
             self.rebuild = []
@@ -942,7 +1033,7 @@ class Source(object):
             misc.system_script(self.srcbuild, 'post_remove')
 
         if os.path.isfile(footprint):
-            self.update_databases(target_content)
+            self.update_databases(target_content, 'remove')
 
     def main(self):
         ''' Execute action for every target '''
