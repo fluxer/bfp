@@ -502,7 +502,7 @@ class Source(object):
                 message.sub_debug(spath)
                 misc.system_trigger((glib_schemas, os.path.dirname(spath)))
                 glib_schemas = False
-            elif 'lib/modules/' in spath and '.ko' in spath and depmod:
+            elif spath.startswith('lib/modules/') and depmod:
                 # extract the kernel modules path, e.g. lib/modules/3.16.8
                 sdir = misc.string_search('((?:usr/?)?lib/modules/.*?/)', spath, escape=False)
                 message.sub_info('Updating module dependencies')
