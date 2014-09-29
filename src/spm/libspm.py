@@ -422,7 +422,7 @@ class Source(object):
         if not TRIGGERS:
             return
 
-        # FIXME: check in for them in ROOT_DIR
+        # FIXME: check for them in ROOT_DIR
         ldconfig = misc.whereis('ldconfig', False)
         mandb = misc.whereis('mandb', False)
         desktop_database = misc.whereis('update-desktop-database', False)
@@ -515,11 +515,16 @@ class Source(object):
                 misc.system_trigger((udevadm, 'control', '--reload'))
                 udevadm = False
             # Distribution specifiec
-            # FIXME: upon different version kernel: mkinitfs -k $(KERNEL)
             elif spath.startswith(('boot/vmlinuz', 'etc/mkinitfs/')) and mkinitfs:
+                version = misc.string_search('boot/vmlinuz-(.*)', spath, escape=False)
                 message.sub_info('Updating initramfs image')
                 message.sub_debug(spath)
-                misc.system_trigger((mkinitfs, '-o', '/boot/grub/grub.cfg'))
+                print version
+                if version:
+                    # new kernel being installed
+                    misc.system_trigger((mkinitfs, '-k', misc.string_convert(version)))
+                else:
+                    misc.system_trigger((mkinitfs))
                 mkinitfs = False
             # FIXME support legacy grub and syslinux
             elif spath.startswith(('boot/', 'etc/grub.d/')) and grub_mkconfig:
