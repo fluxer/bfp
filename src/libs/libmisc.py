@@ -289,31 +289,22 @@ class Misc(object):
             return True
         return False
 
-    def archive_compress(self, variant, sfile, chdir=None):
+    def archive_compress(self, variant, sfile, strip):
         ''' Create archive from directory '''
         self.dir_create(os.path.dirname(sfile))
 
         if isinstance(variant, str):
             variant = [variant]
 
-        if chdir:
-            os.chdir(chdir)
-
         if sfile.endswith(('.bz2', '.gz')):
             tar = tarfile.open(sfile, 'w:' + self.file_extension(sfile))
             for item in variant:
-                if chdir:
-                    tar.add(item.replace(chdir, './'))
-                else:
-                    tar.add(item, '')
+                tar.add(item, item.lstrip(strip))
             tar.close()
         elif sfile.endswith('.zip'):
             zipf = zipfile.ZipFile(sfile, mode='w')
             for item in variant:
-                if chdir:
-                    zipf.write(item.replace(chdir, './'))
-                else:
-                    zipf.write(item)
+                zipf.write(item, item.lstrip(strip))
             zipf.close()
         elif sfile.endswith(('.xz', '.lzma')):
             # FIXME: implement lzma/xz compression

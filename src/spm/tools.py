@@ -29,7 +29,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.0.0 (22cb91b)"
+app_version = "1.0.0 (2291d8e)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -243,7 +243,7 @@ class Dist(object):
                             misc.fetch(src_url, src_file)
 
             message.sub_info('Compressing', target_distfile)
-            misc.archive_compress(target_directory, target_distfile)
+            misc.archive_compress(target_directory, target_distfile, target_directory)
 
             if self.do_clean:
                 message.sub_info('Purging sources')
@@ -529,8 +529,12 @@ class Pack(object):
                 target_packfile = os.path.join(self.directory, \
                     os.path.basename(target) + '_' + target_version + '.tar.bz2')
 
+                content = database.local_footprint(target).splitlines()
+                # add metadata directory, it is not listed in the footprint
+                content.append(os.path.join(libspm.LOCAL_DIR, target))
+
                 message.sub_info('Compressing', target_packfile)
-                misc.archive_compress(database.local_footprint(target).splitlines(), target_packfile)
+                misc.archive_compress(content, target_packfile, '/')
 
 class Pkg(object):
     def __init__(self, targets, directory=misc.dir_current()):

@@ -859,7 +859,8 @@ class Source(object):
 
         message.sub_info('Compressing tarball')
         misc.dir_create(os.path.join(CACHE_DIR, 'tarballs'))
-        misc.archive_compress(self.install_dir, self.target_tarball)
+        misc.archive_compress(self.install_dir, self.target_tarball, \
+            self.install_dir)
 
     def merge(self):
         ''' Merget target to system '''
