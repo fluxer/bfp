@@ -526,7 +526,11 @@ class Source(object):
                     misc.system_trigger((mkinitfs))
                 mkinitfs = False
             # FIXME support legacy grub and syslinux
-            elif spath.startswith(('boot/', 'etc/grub.d/')) and grub_mkconfig:
+            elif spath.startswith(('boot/', 'etc/grub.d/')) \
+                and os.path.isfile(os.path.join(ROOT_DIR, 'boot/grub/grub.cfg')) \
+                and grub_mkconfig:
+                # the trigger executes only if grub.cfg is present asuming GRUB
+                # is installed, otherwise there is no point in updating it
                 message.sub_info('Updating GRUB configuration')
                 message.sub_debug(spath)
                 misc.system_trigger((grub_mkconfig, '-o', '/boot/grub/grub.cfg'))
