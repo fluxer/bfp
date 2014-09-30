@@ -426,7 +426,7 @@ class Source(object):
         ldconfig = misc.whereis('ldconfig', False)
         mandb = misc.whereis('mandb', False)
         desktop_database = misc.whereis('update-desktop-database', False)
-        mime_database= misc.whereis('update-mime-database', False)
+        mime_database = misc.whereis('update-mime-database', False)
         icon_resources = misc.whereis('xdg-icon-resource', False)
         gio_querymodules = misc.whereis('gio-querymodules', False)
         pango_querymodules = misc.whereis('pango-querymodules', False)
@@ -519,7 +519,6 @@ class Source(object):
                 version = misc.string_search('boot/vmlinuz-(.*)', spath, escape=False)
                 message.sub_info('Updating initramfs image')
                 message.sub_debug(spath)
-                print version
                 if version:
                     # new kernel being installed
                     misc.system_trigger((mkinitfs, '-k', misc.string_convert(version)))
