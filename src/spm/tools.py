@@ -452,14 +452,15 @@ class Merge(object):
         1. View difference
         2. Edit original
         3. Edit backup
-        4. Replace original
+        4. Replace original with backup
+        5. Remove backup
         *. Continue
 ''')
         if action == '1':
             print('\n' + '*' * 80)
             for line in list(difflib.Differ().compare(misc.file_readlines(sfile + '.backup'),
                 misc.file_readlines(sfile))):
-                print line
+                print(line)
             print('*' * 80 + '\n')
             self.merge(sfile)
         elif action == '2':
@@ -470,6 +471,8 @@ class Merge(object):
             self.merge(sfile)
         elif action == '4':
             shutil.copy2(sfile + '.backup', sfile)
+        elif action == '5':
+            os.unlink(sfile + '.backup')
 
     def main(self):
         for target in self.targets:
@@ -535,6 +538,7 @@ class Pack(object):
 
                 message.sub_info('Compressing', target_packfile)
                 misc.archive_compress(content, target_packfile, '/')
+
 
 class Pkg(object):
     def __init__(self, targets, directory=misc.dir_current()):
