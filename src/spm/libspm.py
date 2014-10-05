@@ -381,7 +381,7 @@ class Source(object):
     def __init__(self, targets, do_clean=False, do_prepare=False, \
         do_compile=False, do_check=False, do_install=False, do_merge=False, \
         do_remove=False, do_depends=False, do_reverse=False, do_update=False, \
-        automake=False, autoremove=False):
+        autoremove=False):
         self.targets = targets
         self.do_clean = do_clean
         self.do_prepare = do_prepare
@@ -393,7 +393,6 @@ class Source(object):
         self.do_depends = do_depends
         self.do_reverse = do_reverse
         self.do_update = do_update
-        self.automake = automake
         self.autoremove = autoremove
         self.mirror = MIRROR
         self.strip_binaries = STRIP_BINARIES
@@ -413,9 +412,9 @@ class Source(object):
 
     def autosource(self, targets, automake=False, autoremove=False):
         ''' Handle targets build/remove without affecting current object '''
-        obj = Source(targets, do_reverse=self.do_reverse, \
-            do_depends=True, automake=automake, \
-            autoremove=autoremove)
+        obj = Source(targets, do_clean=True, do_prepare=True, do_compile=True, \
+            do_check=False, do_install=True, do_merge=True, do_depends=True, \
+            do_reverse=self.do_reverse, do_update=False, autoremove=autoremove)
         obj.main()
 
     def update_databases(self, content, action):
@@ -1081,7 +1080,7 @@ class Source(object):
             self.target_tarball = os.path.join(CACHE_DIR, 'tarballs', \
             self.target_name + '_' + self.target_version + '.tar.bz2')
 
-            if database.local_uptodate(self.target) and self.do_update and not self.automake:
+            if database.local_uptodate(self.target) and self.do_update:
                 message.sub_warning('Target is up-to-date', self.target)
                 continue
 
@@ -1142,15 +1141,15 @@ class Source(object):
                     message.sub_warning('Overriding PYTHON_COMPILE to', 'False')
                     self.python_compile = False
 
-            if self.do_clean or self.automake:
+            if self.do_clean:
                 message.sub_info('Starting %s cleanup at' % self.target_name, datetime.today())
                 self.clean()
 
-            if self.do_prepare or self.automake:
+            if self.do_prepare:
                 message.sub_info('Starting %s preparations at' % self.target_name, datetime.today())
                 self.prepare()
 
-            if self.do_compile or self.automake:
+            if self.do_compile:
                 if not misc.file_search('\nsrc_compile()', self.srcbuild, escape=False):
                     message.sub_warning('src_compile() not defined')
                 else:
@@ -1180,7 +1179,7 @@ class Source(object):
                     os.putenv('MAKEFLAGS', MAKEFLAGS)
                     self.check()
 
-            if self.do_install or self.automake:
+            if self.do_install:
                 if not misc.file_search('\nsrc_install()', self.srcbuild, escape=False):
                     message.sub_critical('src_install() not defined')
                     sys.exit(2)
@@ -1196,7 +1195,7 @@ class Source(object):
                 os.putenv('MAKEFLAGS', MAKEFLAGS)
                 self.install()
 
-            if self.do_merge or self.automake:
+            if self.do_merge:
                 message.sub_info('Starting %s merge at' % self.target_name, datetime.today())
                 self.merge()
 
