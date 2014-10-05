@@ -413,7 +413,8 @@ class Source(object):
 
     def autosource(self, targets, automake=False, autoremove=False):
         ''' Handle targets build/remove without affecting current object '''
-        obj = Source(targets, do_reverse=self.do_reverse, automake=automake, \
+        obj = Source(targets, do_reverse=self.do_reverse, \
+            do_depends=True, automake=automake, \
             autoremove=autoremove)
         obj.main()
 
