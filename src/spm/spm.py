@@ -16,7 +16,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.0.0 (1968f24)"
+app_version = "1.0.0 (9b1a30f)"
 
 try:
     import libmessage
@@ -202,6 +202,8 @@ try:
             help='Prune old repositories')
         repo_parser.add_argument('-u', '--update', action='store_true', \
             help='Check repositories for updates')
+        repo_parser.add_argument('-a', '--all', action='store_true', \
+            help='short for clean, sync, prune and update')
 
     remote_parser = subparsers.add_parser('remote')
     remote_parser.add_argument('-n', '--name', action='store_true', \
@@ -350,6 +352,11 @@ try:
         for repository in libspm.REPOSITORIES:
             message.sub_info('REPOSITORY', repository)
         message.info('Poking repositories...')
+        if ARGS.all:
+            ARGS.clean = True
+            ARGS.sync = True
+            ARGS.update = True
+            ARGS.prune = True
         m = libspm.Repo(libspm.REPOSITORIES, ARGS.clean, \
                 ARGS.sync, ARGS.update, ARGS.prune)
         m.main()
