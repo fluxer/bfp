@@ -93,9 +93,11 @@ class Misc(object):
             return os.path.basename(sresult)
         return sresult
 
-    def file_name(self, sfile):
+    def file_name(self, sfile, basename=True):
         ''' Get name of file without the extension '''
-        return os.path.splitext(os.path.basename(sfile))[0]
+        if basename:
+            return os.path.splitext(os.path.basename(sfile))[0]
+        return os.path.splitext(sfile)[0]
 
     def file_extension(self, sfile):
         ''' Get the extension of file '''

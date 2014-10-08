@@ -18,7 +18,8 @@ class Database(object):
         ''' Returns directories of all remote (repository) targets '''
         remote_list = []
 
-        for sdir in misc.list_dirs(os.path.join(self.CACHE_DIR, 'repositories')):
+        for sdir in misc.list_dirs(os.path.join(self.CACHE_DIR, \
+            'repositories')):
             if os.path.isfile(os.path.join(sdir, 'SRCBUILD')) and basename:
                 remote_list.append(os.path.basename(sdir))
             elif os.path.isfile(os.path.join(sdir, 'SRCBUILD')):
@@ -119,7 +120,7 @@ class Database(object):
 
     def local_rdepends(self, target, indirect=False, checked=None):
         ''' Returns reverse dependencies of target '''
-        reverse= []
+        reverse = []
         if checked is None:
             checked = []
 
@@ -134,7 +135,8 @@ class Database(object):
 
             if basename in self.local_metadata(installed, 'depends'):
                 if indirect:
-                    reverse.extend(self.local_rdepends(installed, True, checked))
+                    reverse.extend(self.local_rdepends(installed, \
+                        True, checked))
                 reverse.append(installed)
                 checked.extend((basename, installed))
         return reverse
@@ -159,13 +161,21 @@ class Database(object):
 
             metadata_content = misc.file_read(target_metadata)
             if key == 'version':
-                return metadata_content.split('\n')[0].replace('version=', '').strip()
+                value = metadata_content.split('\n')[0]
+                value = value.replace('version=', '').strip()
+                return value
             elif key == 'description':
-                return metadata_content.split('\n')[1].replace('description=', '').strip()
+                value = metadata_content.split('\n')[1]
+                value = value.replace('description=', '').strip()
+                return value
             elif key == 'depends':
-                return metadata_content.split('\n')[2].replace('depends=', '').strip().split(' ')
+                value = metadata_content.split('\n')[2]
+                value = value.replace('depends=', '').strip().split(' ')
+                return value
             elif key == 'size':
-                return metadata_content.split('\n')[3].replace('size=', '').strip()
+                value = metadata_content.split('\n')[3]
+                value = value.replace('size=', '').strip()
+                return value
 
     def local_uptodate(self, target):
         ''' Returns True if target is up-to-date and False otherwise '''
@@ -193,12 +203,13 @@ class Database(object):
     def remote_aliases(self, basename=True):
         ''' Returns basename of all aliases '''
         aliases = []
-        for sfile in misc.list_files(os.path.join(self.CACHE_DIR, 'repositories')):
+        for sfile in misc.list_files(os.path.join(self.CACHE_DIR, \
+            'repositories')):
             if sfile.endswith('.alias'):
                 if basename:
-                    aliases.append(os.path.basename(sfile.replace('.alias', '')))
+                    aliases.append(misc.file_name(sfile))
                 else:
-                    aliases.append(sfile.replace('.alias', ''))
+                    aliases.append(misc.file_name(sfile, False))
         return sorted(aliases)
 
     def remote_alias(self, target):
@@ -209,9 +220,12 @@ class Database(object):
         return target
 
     def remote_groups(self, basename=True):
+        ''' Get a list of groups in the repositories '''
         groups = []
-        for sdir in misc.list_dirs(os.path.join(self.CACHE_DIR, 'repositories')):
-            if not os.path.isfile(os.path.join(sdir, 'SRCBUILD')) and not '.git' in sdir:
+        for sdir in misc.list_dirs(os.path.join(self.CACHE_DIR, \
+            'repositories')):
+            if not os.path.isfile(os.path.join(sdir, 'SRCBUILD')) \
+                and not '.git' in sdir:
                 if basename:
                     groups.append(os.path.basename(sdir))
                 else:
