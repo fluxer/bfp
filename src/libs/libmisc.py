@@ -320,9 +320,9 @@ class Misc(object):
         # standard tarfile library locks the filesystem and upon interrupt the
         # filesystem stays locked which is bad. on top of that the tarfile
         # library can not replace files while they are being used thus the
-        # external utilities are used for extracting archives.
+        # external utilities are used for extracting tar archives.
 
-        # altought bsdtar can (or should) handle Zip files we do not use it for them.
+        # altought bsdtar can (or should) handle Zip files it is not used for them.
         if sfile.endswith(('.xz', '.lzma')) \
             or tarfile.is_tarfile(sfile):
             bsdtar = self.whereis('bsdtar', fallback=False)
@@ -402,7 +402,8 @@ class Misc(object):
         if isinstance(command, str) and not shell:
             command = shlex.split(command)
         if catch or self.CATCH:
-            pipe = subprocess.Popen(command, stderr = subprocess.PIPE, shell=shell, cwd=cwd)
+            pipe = subprocess.Popen(command, stderr=subprocess.PIPE, \
+                shell=shell, cwd=cwd)
             pipe.wait()
             if pipe.returncode != 0:
                 raise(Exception(pipe.communicate()[1].strip()))
@@ -426,7 +427,7 @@ class Misc(object):
                     self.system_command((mount, '--rbind', s, sdir))
             os.chroot(self.ROOT_DIR)
             os.chdir('/')
-            self.system_command(command)
+            self.system_command(command, shell=shell)
         finally:
             os.fchdir(real_root)
             os.chroot('.')
@@ -443,7 +444,8 @@ class Misc(object):
                 'source ' + srcbuild + ' && ' + function), cwd=self.ROOT_DIR)
         else:
             shutil.copy(srcbuild, os.path.join(self.ROOT_DIR, 'SRCBUILD'))
-            self.system_chroot(('bash', '-e', '-c', 'source /SRCBUILD && ' + function))
+            self.system_chroot(('bash', '-e', '-c', \
+                'source /SRCBUILD && ' + function))
             os.remove(os.path.join(self.ROOT_DIR, 'SRCBUILD'))
 
     def system_trigger(self, command, shell=False):
