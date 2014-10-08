@@ -63,11 +63,11 @@ try:
 
     message.sub_info('Decompressing image')
     gunzip = misc.whereis('gunzip')
-    os.system(gunzip + ' ' + new_image)
+    misc.system_command((gunzip, new_image))
 
     message.sub_info('Listing image')
     cpio = misc.whereis('cpio')
-    print(os.system(cpio + ' -tF ' + new_image.replace('.gz', '')))
+    print(misc.system_output((cpio, '-tF', new_image.replace('.gz', ''))))
 
 except subprocess.CalledProcessError as detail:
     message.critical('SUBPROCESS', detail)

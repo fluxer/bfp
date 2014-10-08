@@ -136,7 +136,7 @@ try:
     message.sub_debug('Installing binary')
     copy_item(ARGS.busybox)
     message.sub_debug('Creating symlinks')
-    subprocess.check_call((ARGS.busybox, '--install', '-s', bin_dir))
+    misc.system_command((ARGS.busybox, '--install', '-s', bin_dir))
 
     message.sub_info('Copying root overlay')
     if os.path.isdir('/etc/mkinitfs/root'):
@@ -207,22 +207,22 @@ try:
             copy_item(sfile)
 
     message.sub_info('Updating module dependencies')
-    subprocess.check_call((misc.whereis('depmod'), ARGS.kernel, '-b', ARGS.tmp))
+    misc.system_command((misc.whereis('depmod'), ARGS.kernel, '-b', ARGS.tmp))
 
     message.sub_info('Creating shared libraries cache')
     etc_dir = os.path.join(ARGS.tmp, 'etc')
     misc.dir_create(etc_dir)
     # to surpress a warning
     misc.file_touch(os.path.join(etc_dir, 'ld.so.conf'))
-    subprocess.check_call((misc.whereis('ldconfig'), '-r', ARGS.tmp))
+    misc.system_command((misc.whereis('ldconfig'), '-r', ARGS.tmp))
 
     message.sub_info('Creating image')
     find = misc.whereis('find')
     cpio = misc.whereis('cpio')
     gzip = misc.whereis('gzip')
-    os.chdir(ARGS.tmp)
-    # subprocess.check_call((find, '.', '|', cpio, '-o', '-H', 'newc', '|', gzip ,'>' , ARGS.image))
-    os.system(find + ' . | ' + cpio + ' -o -H newc | ' + gzip + ' > ' + ARGS.image)
+    misc.system_command( \
+        find + ' . | ' + cpio + ' -o -H newc | ' + gzip + ' > ' + ARGS.image, \
+        shell=True, cwd=ARGS.tmp)
 
 except subprocess.CalledProcessError as detail:
     message.critical('SUBPROCESS', detail)
