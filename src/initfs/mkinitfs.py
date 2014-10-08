@@ -16,7 +16,7 @@ try:
     busybox = misc.whereis('busybox')
     image = '/boot/initramfs-' + kernel + '.img'
     modules = []
-    # FIXME: some modules are virtual???
+    # FIXME: resolve aliases from here to avoid issues with cross-build
     for m in os.listdir('/sys/module'):
         if os.path.isdir('/sys/module/' + m + '/sections'):
             modules.append(m)
@@ -53,7 +53,7 @@ try:
 
     lcopied = []
     def copy_item(src):
-        # FIXME: force
+        ''' Copy method that handles binaries, symlinks and whatnot '''
         if os.path.islink(src):
             if src in lcopied:
                 message.sub_debug('Already linked', src)
