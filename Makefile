@@ -2,7 +2,6 @@ include Makefile.inc
 
 all:
 	$(MAKE) -C src/cparted
-	$(MAKE) -C src/blockd
 	$(MAKE) -C src/libs
 	$(MAKE) -C src/initfs
 	$(MAKE) -C src/spm
@@ -14,7 +13,6 @@ install:
 	$(MAKE) -C etc install
 	$(MAKE) -C misc install
 	$(MAKE) -C scripts install
-	$(MAKE) -C src/blockd install
 	$(MAKE) -C src/cparted install
 	$(MAKE) -C src/initfs install
 	$(MAKE) -C src/libs install
@@ -24,14 +22,12 @@ uninstall:
 	$(MAKE) -C etc uninstall
 	$(MAKE) -C misc uninstall
 	$(MAKE) -C scripts uninstall
-	$(MAKE) -C src/blockd uninstall
 	$(MAKE) -C src/cparted uninstall
 	$(MAKE) -C src/initfs uninstall
 	$(MAKE) -C src/libs uninstall
 	$(MAKE) -C src/spm uninstall
 
 clean:
-	$(MAKE) -C src/blockd clean
 	$(MAKE) -C src/cparted clean
 	$(MAKE) -C src/libs clean
 	$(MAKE) -C src/initfs clean
