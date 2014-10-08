@@ -224,7 +224,6 @@ class Database(object):
         groups = []
         for sdir in misc.list_dirs(os.path.join(self.CACHE_DIR, \
             'repositories')):
-            print sdir
             if not os.path.isfile(os.path.join(sdir, 'SRCBUILD')) \
                 and not '/.git/' in sdir and not sdir.endswith('.git'):
                 if basename:
