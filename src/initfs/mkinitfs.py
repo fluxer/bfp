@@ -105,9 +105,20 @@ try:
 
     # FIXME: support both /lib and /usr/lib at the same time???
     modsdir = None
-    for sdir in ('/lib', '/lib32', '/lib64', '/usr/lib', '/usr/lib32', '/usr/lib64'):
+    moddirs = ('/lib', '/lib32', '/lib64', '/usr/lib', '/usr/lib32', '/usr/lib64')
+    for sdir in moddirs:
         if os.path.isdir(sdir + '/modules/' + ARGS.kernel):
             modsdir = sdir + '/modules/' + ARGS.kernel
+    # if the above fails, attempt to guess the kernel installed
+    if not modsdir:
+        for sdir in moddirs:
+            if os.path.isdir(sdir + '/modules'):
+                for k in os.listdir(sdir + '/modules'):
+                    if os.path.isfile(sdir + '/modules/' + k + '/modules.symbols'):
+                        message.sub_warning('Last resort kernel detected', k)
+                        modsdir = sdir + '/modules/' + k
+                        ARGS.kernel = k
+                        ARGS.image = '/boot/initramfs-' + k + '.img'
     if not modsdir:
         message.critical('Unable to find modules directory')
         sys.exit(2)
