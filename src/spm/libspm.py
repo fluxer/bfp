@@ -562,7 +562,8 @@ class Source(object):
                 message.sub_debug(spath)
                 misc.system_trigger((depmod, misc.string_convert(sdir)))
                 depmod = False
-            elif '/udev/rules.d/' in spath and udevadm:
+            elif '/udev/rules.d/' in spath and (os.path.exists('/run/udev/control') \
+                or os.path.exists('/var/run/udev/control')) and udevadm:
                 message.sub_info('Reloading udev rules and hwdb')
                 message.sub_debug(spath)
                 misc.system_trigger((udevadm, 'control', '--reload'))
