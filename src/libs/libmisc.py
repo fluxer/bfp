@@ -23,10 +23,12 @@ class Misc(object):
         self.ROOT_DIR = '/'
         self.CATCH = False
 
-    def whereis(self, program, fallback=True):
+    def whereis(self, program, fallback=True, chroot=False):
         ''' Find full path to executable '''
         program = os.path.basename(program)
         for path in os.environ.get('PATH', '/bin:/usr/bin').split(':'):
+            if chroot:
+                path = self.ROOT_DIR + path
             exe = os.path.join(path, program)
             if os.path.isfile(exe):
                 return exe
