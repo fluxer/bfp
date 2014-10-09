@@ -29,7 +29,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.0.0 (56cebbc)"
+app_version = "1.0.0 (099312d)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -447,7 +447,8 @@ class Sane(object):
                     regex += '|gio-querymodules|pango-querymodules|install-info'
                     regex += '|gtk-query-immodules-2.0|gtk-query-immodules-3.0'
                     regex += '|gdk-pixbuf-query-loaders|glib-compile-schemas'
-                    regex += '|gtk-update-icon-cache)(?:\\s|$)'
+                    regex += '|gtk-update-icon-cache|mkinitfs|grub-mkconfig)'
+                    regex += '(?:\\s|$)'
                     if misc.file_search(regex, target_srcbuild, escape=False):
                         message.sub_warning('Possible unnecessary triggers invocation(s)')
 
