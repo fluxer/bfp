@@ -162,35 +162,47 @@ class Local(object):
                 elif self.do_name:
                     message.sub_info('Name', target)
 
-                if self.do_version and self.plain:
-                    print(database.local_metadata(target, 'version'))
-                elif self.do_version:
-                    message.sub_info('Version', database.local_metadata(target, 'version'))
+                if self.do_version:
+                    data = database.local_metadata(target, 'version')
+                    if self.plain:
+                        print(data)
+                    else:
+                        message.sub_info('Version', data)
 
-                if self.do_description and self.plain:
-                    print(database.local_metadata(target, 'description'))
-                elif self.do_description:
-                    message.sub_info('Description', database.local_metadata(target, 'description'))
+                if self.do_description:
+                    data = database.local_metadata(target, 'description')
+                    if self.plain:
+                        print(data)
+                    else:
+                        message.sub_info('Description', data)
 
-                if self.do_depends and self.plain:
-                    print(misc.string_convert(database.local_metadata(target, 'depends')))
-                elif self.do_depends:
-                    message.sub_info('Depends', database.local_metadata(target, 'depends'))
+                if self.do_depends:
+                    data = database.local_metadata(target, 'depends')
+                    if self.plain:
+                        print(misc.string_convert(data))
+                    else:
+                        message.sub_info('Depends', data)
 
-                if self.do_reverse and self.plain:
-                    print(misc.string_convert(database.local_rdepends(target)))
-                elif self.do_reverse:
-                    message.sub_info('Reverse depends', database.local_rdepends(target))
+                if self.do_reverse:
+                    data = database.local_rdepends(target)
+                    if self.plain:
+                        print(misc.string_convert(data))
+                    else:
+                        message.sub_info('Reverse depends', data)
 
-                if self.do_size and self.plain:
-                    print(database.local_metadata(target, 'size'))
-                elif self.do_size:
-                    message.sub_info('Size', database.local_metadata(target, 'size'))
+                if self.do_size:
+                    data = database.local_metadata(target, 'size')
+                    if self.plain:
+                        print(data)
+                    else:
+                        message.sub_info('Size', data)
 
-                if self.do_footprint and self.plain:
-                    print(database.local_footprint(target))
-                elif self.do_footprint:
-                    message.sub_info('Footprint', database.local_footprint(target))
+                if self.do_footprint:
+                    data = database.local_footprint(target)
+                    if self.plain:
+                        print(data)
+                    else:
+                        message.sub_info('Footprint', data)
 
 
 class Remote(object):
@@ -227,45 +239,62 @@ class Remote(object):
                 elif self.do_name:
                     message.sub_info('Name', target)
 
-                if self.do_version and self.plain:
-                    print(database.remote_metadata(target, 'version'))
-                elif self.do_version:
-                    message.sub_info('Version', database.remote_metadata(target, 'version'))
+                # asigning data variable only for the sake of readability
+                if self.do_version:
+                    data = database.remote_metadata(target, 'version')
+                    if self.plain:
+                        print(data)
+                    else:
+                        message.sub_info('Version', data)
 
-                if self.do_description and self.plain:
-                    print(database.remote_metadata(target, 'description'))
-                elif self.do_description:
-                    message.sub_info('Description', database.remote_metadata(target, 'description'))
+                if self.do_description:
+                    data = database.remote_metadata(target, 'description')
+                    if self.plain:
+                        print(data)
+                    else:
+                        message.sub_info('Description', data)
 
-                if self.do_depends and self.plain:
-                    print(misc.string_convert(database.remote_metadata(target, 'depends')))
-                elif self.do_depends:
-                    message.sub_info('Depends', database.remote_metadata(target, 'depends'))
+                if self.do_depends:
+                    data = database.remote_metadata(target, 'depends')
+                    if self.plain:
+                        print(misc.string_convert(data))
+                    else:
+                        message.sub_info('Depends', data)
 
-                if self.do_makedepends and self.plain:
-                    print(misc.string_convert(database.remote_metadata(target, 'makedepends')))
-                elif self.do_makedepends:
-                    message.sub_info('Make depends', database.remote_metadata(target, 'makedepends'))
+                if self.do_makedepends:
+                    data = database.remote_metadata(target, 'makedepends')
+                    if self.plain:
+                        print(misc.string_convert(data))
+                    else:
+                        message.sub_info('Make depends', data)
 
-                if self.do_checkdepends and self.plain:
-                    print(misc.string_convert(database.remote_metadata(target, 'checkdepends')))
-                elif self.do_checkdepends:
-                    message.sub_info('Check depends', database.remote_metadata(target, 'checkdepends'))
+                if self.do_checkdepends:
+                    data = database.remote_metadata(target, 'checkdepends')
+                    if self.plain:
+                        print(misc.string_convert(data))
+                    else:
+                        message.sub_info('Check depends', data)
 
-                if self.do_sources and self.plain:
-                    print(misc.string_convert(database.remote_metadata(target, 'sources')))
-                elif self.do_sources:
-                    message.sub_info('Sources', database.remote_metadata(target, 'sources'))
+                if self.do_sources:
+                    data = database.remote_metadata(target, 'sources')
+                    if self.plain:
+                        print(misc.string_convert(data))
+                    else:
+                        message.sub_info('Sources', data)
 
-                if self.do_options and self.plain:
-                    print(misc.string_convert(database.remote_metadata(target, 'options')))
-                elif self.do_options:
-                    message.sub_info('Options', database.remote_metadata(target, 'options'))
+                if self.do_options:
+                    data = database.remote_metadata(target, 'options')
+                    if self.plain:
+                        print(misc.string_convert(data))
+                    else:
+                        message.sub_info('Options', data)
 
-                if self.do_backup and self.plain:
-                    print(misc.string_convert(database.remote_metadata(target, 'backup')))
-                elif self.do_backup:
-                    message.sub_info('Backup', database.remote_metadata(target, 'backup'))
+                if self.do_backup:
+                    data = database.remote_metadata(target, 'backup')
+                    if self.plain:
+                        print(misc.string_convert(data))
+                    else:
+                        message.sub_info('Backup', data)
 
 
 class Repo(object):
@@ -347,7 +376,8 @@ class Repo(object):
             remote_version = database.remote_metadata(target, 'version')
 
             if misc.version(local_version) < misc.version(remote_version):
-                message.sub_warning('New version of %s available' % target, remote_version)
+                message.sub_warning('New version of %s available' % target, \
+                    remote_version)
 
     def main(self):
         ''' Execute action for every repository '''
@@ -357,7 +387,8 @@ class Repo(object):
             # http://pylint-messages.wikidot.com/messages:w0201
             self.repository_url = repository
             self.repository_name = os.path.basename(self.repository_url)
-            self.repository_dir = os.path.join(CACHE_DIR, 'repositories', self.repository_name)
+            self.repository_dir = os.path.join(CACHE_DIR, 'repositories', \
+                self.repository_name)
 
             if self.do_clean:
                 message.sub_info('Starting cleanup at', datetime.today())
@@ -412,9 +443,14 @@ class Source(object):
 
     def autosource(self, targets, automake=False, autoremove=False):
         ''' Handle targets build/remove without affecting current object '''
-        obj = Source(targets, do_clean=True, do_prepare=True, do_compile=True, \
-            do_check=False, do_install=True, do_merge=True, do_depends=True, \
-            do_reverse=self.do_reverse, do_update=False, autoremove=autoremove)
+        if automake:
+            obj = Source(targets, do_clean=True, do_prepare=True, \
+                do_compile=True, do_check=False, do_install=True, \
+                do_merge=True, do_depends=True, do_reverse=self.do_reverse, \
+                do_update=False)
+        else:
+            obj = Source(targets, do_reverse=self.do_reverse, \
+                autoremove=autoremove)
         obj.main()
 
     def update_databases(self, content, action):
@@ -422,7 +458,7 @@ class Source(object):
         if not TRIGGERS:
             return
 
-        # FIXME: check for them in ROOT_DIR
+        # FIXME: check for triggers requirements in ROOT_DIR
         ldconfig = misc.whereis('ldconfig', False)
         message.sub_debug('ldconfig', ldconfig or '')
         mandb = misc.whereis('mandb', False)
@@ -471,7 +507,8 @@ class Source(object):
             elif 'share/applications/' in spath and desktop_database:
                 message.sub_info('Updating desktop database')
                 message.sub_debug(spath)
-                misc.system_trigger((desktop_database, sys.prefix + '/share/applications'))
+                misc.system_trigger((desktop_database, \
+                    sys.prefix + '/share/applications'))
                 desktop_database = False
             elif 'share/mime/' in spath and mime_database:
                 message.sub_info('Updating MIME database')
@@ -481,7 +518,8 @@ class Source(object):
             elif 'share/icons/' in spath and icon_resources:
                 message.sub_info('Updating icon resources')
                 message.sub_debug(spath)
-                misc.system_trigger((icon_resources, 'forceupdate', '--theme', 'hicolor'))
+                misc.system_trigger((icon_resources, 'forceupdate', \
+                    '--theme', 'hicolor'))
                 icon_resources = False
             elif '/gio/modules/' in spath and gio_querymodules:
                 message.sub_info('Updating GIO modules cache')
@@ -496,23 +534,20 @@ class Source(object):
             elif '/gtk-2.0/' in spath and '/immodules/' in spath and gtk2_immodules:
                 message.sub_info('Updating GTK-2.0 imodules cache')
                 message.sub_debug(spath)
-                # FIXME: respect ROOT_DIR
-                misc.file_write('/etc/gtk-2.0/gtk.immodules', \
-                    misc.system_output(gtk2_immodules))
+                misc.system_trigger(gtk2_immodules + \
+                    ' > /etc/gtk-2.0/gtk.immodules', shell=True)
                 gtk2_immodules = False
             elif '/gtk-3.0/' in spath and '/immodules/' in spath and gtk3_immodules:
                 message.sub_info('Updating GTK-3.0 imodules cache')
                 message.sub_debug(spath)
-                # FIXME: respect ROOT_DIR
-                misc.file_write('/etc/gtk-3.0/gtk.immodules', \
-                    misc.system_output(gtk3_immodules))
+                misc.system_trigger(gtk3_immodules + \
+                    ' > /etc/gtk-3.0/gtk.immodules', shell=True)
                 gtk3_immodules = False
             elif '/gdk-pixbuf' in spath and gio_querymodules:
                 message.sub_info('Updating gdk pixbuffer loaders')
                 message.sub_debug(spath)
-                # FIXME: respect ROOT_DIR
-                misc.file_write('/etc/gtk-2.0/gdk-pixbuf.loaders', \
-                    misc.system_output(gdk_pixbuf))
+                misc.system_trigger(gdk_pixbuf + \
+                    ' > /etc/gtk-2.0/gdk-pixbuf.loaders', shell=True)
                 gdk_pixbuf = False
             elif '/schemas/' in spath and glib_schemas:
                 message.sub_info('Updating GSettings schemas')
@@ -521,7 +556,8 @@ class Source(object):
                 glib_schemas = False
             elif spath.startswith('lib/modules/') and depmod:
                 # extract the kernel modules path, e.g. lib/modules/3.16.8
-                sdir = misc.string_search('((?:usr/?)?lib/modules/.*?/)', spath, escape=False)
+                sdir = misc.string_search('((?:usr/?)?lib/modules/.*?/)', \
+                    spath, escape=False)
                 message.sub_info('Updating module dependencies')
                 message.sub_debug(spath)
                 misc.system_trigger((depmod, misc.string_convert(sdir)))
@@ -554,7 +590,8 @@ class Source(object):
                 grub_mkconfig = False
             elif 'share/icons/' in spath and action == 'merge' and icon_cache:
                 # extract the proper directory from spath, e.g. /share/icons/hicolor
-                sdir = misc.string_search('((?:usr/?)?share/icons/(?:.*?))', spath, escape=False)
+                sdir = misc.string_search('((?:usr/?)?share/icons/(?:.*?))', \
+                    spath, escape=False)
                 sdir = misc.string_convert(sdir)
                 if not os.path.isfile(ROOT_DIR + sdir + '/index.theme'):
                     continue
@@ -571,7 +608,8 @@ class Source(object):
                 # allowed to run multiple times
                 message.sub_info('Deleting info page', spath)
                 message.sub_debug(spath)
-                misc.system_trigger((install_info, '--delete', spath, sys.prefix + '/share/dir'))
+                misc.system_trigger((install_info, '--delete', \
+                    spath, sys.prefix + '/share/dir'))
 
     def remove_target_file(self, sfile):
         ''' Remove target file '''
@@ -730,7 +768,8 @@ class Source(object):
                         f_out.close()
                         f_in.close()
                         os.unlink(sfile)
-                    elif os.path.islink(sfile) and not os.path.isfile(os.path.realpath(sfile)):
+                    elif os.path.islink(sfile) and \
+                        not os.path.isfile(os.path.realpath(sfile)):
                         message.sub_debug('Adjusting link', sfile)
                         link = os.readlink(sfile)
                         if not sfile.endswith('.gz'):
@@ -753,7 +792,8 @@ class Source(object):
                 continue
             target_content[sfile] = misc.file_mime(sfile)
 
-        if self.strip_binaries or self.strip_shared or self.strip_static or self.strip_rpath:
+        if self.strip_binaries or self.strip_shared or \
+            self.strip_static or self.strip_rpath:
             message.sub_info('Stripping binaries and libraries')
             strip = misc.whereis('strip')
             scanelf = misc.whereis('scanelf')
@@ -772,9 +812,11 @@ class Source(object):
                     message.sub_debug('Stripping static library', sfile)
                     misc.system_command((strip, '--strip-debug', sfile))
 
-                if (smime == 'application/x-executable' or smime == 'application/x-sharedlib' \
+                if (smime == 'application/x-executable' or \
+                    smime == 'application/x-sharedlib' \
                     or smime == 'application/x-archive') and self.strip_rpath:
-                    # we do not check if RPATH is present at all to reduce spawning scanelf twice
+                    # do not check if RPATH is present at all to reduce
+                    # spawning scanelf twice
                     message.sub_debug('Stripping RPATH', sfile)
                     misc.system_command((scanelf, '-CBXrq', sfile))
 
@@ -785,9 +827,9 @@ class Source(object):
                     if not spath in sfile:
                         continue
                     message.sub_debug('Compiling Python file', sfile)
-                    # force build the caches to prevent access time issues with .pyc files
-                    # being older that .py files because .py files where modified after
-                    # the usual installation procedure
+                    # force build the caches to prevent access time issues with
+                    # .pyc files being older that .py files because .py files
+                    # when modified after the usual installation procedure
                     compileall.compile_file(sfile, force=True, quiet=True)
 
         message.sub_info('Checking runtime dependencies')
@@ -797,7 +839,8 @@ class Source(object):
             if os.path.islink(sfile):
                 continue
 
-            if smime == 'application/x-executable' or smime == 'application/x-sharedlib':
+            if smime == 'application/x-executable' or \
+                smime == 'application/x-sharedlib':
                 libraries = misc.system_scanelf(sfile)
                 if not libraries:
                     continue # static binary
@@ -811,8 +854,9 @@ class Source(object):
                             match = match[0]
                     match = misc.string_convert(match)
 
-                    # Python 3000 dictionary compat
-                    if match == self.target_name or misc.string_search(lib, list(target_content.keys())):
+                    # list() - Python 3000 dictionary compat
+                    if match == self.target_name or \
+                        misc.string_search(lib, list(target_content.keys())):
                         message.sub_debug('Library needed but in self', lib)
                     elif match and match in self.target_depends:
                         message.sub_debug('Library needed but in depends', match)
@@ -999,7 +1043,8 @@ class Source(object):
                         elif not os.path.exists(sfile) or os.path.isdir(sfile):
                             continue
                         smime = misc.file_mime(sfile)
-                        if smime == 'application/x-executable' or smime == 'application/x-sharedlib':
+                        if smime == 'application/x-executable' or \
+                            smime == 'application/x-sharedlib':
                             libraries = misc.system_scanelf(sfile)
                             if not libraries:
                                 continue # static binary
@@ -1032,7 +1077,8 @@ class Source(object):
                 self.target_name, depends_detected)
             sys.exit(2)
 
-        if misc.file_search('\npre_remove()', self.srcbuild, escape=False) and SCRIPTS:
+        if misc.file_search('\npre_remove()', self.srcbuild, escape=False) \
+            and SCRIPTS:
             message.sub_info('Executing pre_remove()')
             misc.system_script(self.srcbuild, 'pre_remove')
 
@@ -1159,18 +1205,22 @@ class Source(object):
                     self.python_compile = False
 
             if self.do_clean:
-                message.sub_info('Starting %s cleanup at' % self.target_name, datetime.today())
+                message.sub_info('Starting %s cleanup at' % \
+                    self.target_name, datetime.today())
                 self.clean()
 
             if self.do_prepare:
-                message.sub_info('Starting %s preparations at' % self.target_name, datetime.today())
+                message.sub_info('Starting %s preparations at' % \
+                    self.target_name, datetime.today())
                 self.prepare()
 
             if self.do_compile:
-                if not misc.file_search('\nsrc_compile()', self.srcbuild, escape=False):
+                if not misc.file_search('\nsrc_compile()', \
+                    self.srcbuild, escape=False):
                     message.sub_warning('src_compile() not defined')
                 else:
-                    message.sub_info('Starting %s compile at' % self.target_name, datetime.today())
+                    message.sub_info('Starting %s compile at' % \
+                        self.target_name, datetime.today())
                     os.putenv('SOURCE_DIR', self.source_dir)
                     os.putenv('INSTALL_DIR', self.install_dir)
                     os.putenv('CHOST', CHOST)
@@ -1182,10 +1232,12 @@ class Source(object):
                     self.compile()
 
             if self.do_check:
-                if not misc.file_search('\nsrc_check()', self.srcbuild, escape=False):
+                if not misc.file_search('\nsrc_check()', \
+                    self.srcbuild, escape=False):
                     message.sub_warning('src_check() not defined')
                 else:
-                    message.sub_info('Starting %s check at' % self.target_name, datetime.today())
+                    message.sub_info('Starting %s check at' % \
+                        self.target_name, datetime.today())
                     os.putenv('SOURCE_DIR', self.source_dir)
                     os.putenv('INSTALL_DIR', self.install_dir)
                     os.putenv('CHOST', CHOST)
@@ -1197,11 +1249,13 @@ class Source(object):
                     self.check()
 
             if self.do_install:
-                if not misc.file_search('\nsrc_install()', self.srcbuild, escape=False):
+                if not misc.file_search('\nsrc_install()', \
+                    self.srcbuild, escape=False):
                     message.sub_critical('src_install() not defined')
                     sys.exit(2)
 
-                message.sub_info('Starting %s install at' % self.target_name, datetime.today())
+                message.sub_info('Starting %s install at' % \
+                    self.target_name, datetime.today())
                 os.putenv('SOURCE_DIR', self.source_dir)
                 os.putenv('INSTALL_DIR', self.install_dir)
                 os.putenv('CHOST', CHOST)
