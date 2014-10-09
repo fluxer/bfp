@@ -29,7 +29,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.0.0 (ae1d6f1)"
+app_version = "1.0.0 (56cebbc)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -266,7 +266,7 @@ class Lint(object):
     ''' Check sanity of local targets '''
     def __init__(self, targets, man=False, udev=False, symlink=False, \
         doc=False, module=False, footprint=False, builddir=False, \
-        ownership=False, executable=False):
+        ownership=False, executable=False, path=False):
         self.targets = targets
         self.man = man
         self.udev = udev
@@ -277,6 +277,7 @@ class Lint(object):
         self.builddir = builddir
         self.ownership = ownership
         self.executable = executable
+        self.path = path
 
     def main(self):
         ''' Looks for target match and then execute action for every target '''
@@ -321,6 +322,9 @@ class Lint(object):
                 if self.footprint:
                     if not target_footprint:
                         message.sub_warning('Empty footprint')
+                    for sfile in target_footprint.splitlines():
+                        if not os.path.exists(sfile):
+                            message.sub_warning('File does not exist', sfile)
 
                 if self.builddir:
                     for sfile in target_footprint.splitlines():
@@ -353,12 +357,32 @@ class Lint(object):
                 if self.executable:
                     # FIXME: false positives
                     for sfile in target_footprint.splitlines():
-                        if not os.path.exists(sfile) or os.path.islink(sfile):
+                        if not os.path.exists(sfile):
+                            message.sub_debug('File does not exist', sfile)
+                            continue
+                        if os.path.islink(sfile):
                             continue
 
                         if sfile.startswith(('/bin', '/sbin', '/usr/bin', '/usr/sbin')) \
                             and not os.access(sfile, os.X_OK):
                             message.sub_warning('File in PATH is not executable', sfile)
+
+                if self.path:
+                    for sfile in target_footprint.splitlines():
+                        if not os.path.exists(sfile):
+                            message.sub_debug('File does not exist', sfile)
+                            continue
+
+                        if sfile.startswith(('/bin', '/sbin', '/usr/bin', '/usr/sbin')):
+                            for spath in ('/bin', '/sbin', '/usr/bin', '/usr/sbin'):
+                                xfile = spath + '/' + os.path.basename(sfile)
+                                if sfile == xfile or not os.path.exists(xfile):
+                                    continue
+                                regex = '(/usr)?/(s)?bin/' + re.escape(os.path.basename(sfile)) + '(\\s|$)'
+                                match = database.local_belongs(regex, escape=False)
+                                if len(match) > 1:
+                                    message.sub_warning('File in PATH overlaps with', match)
+                                    print(sfile, xfile)
 
 
 class Sane(object):
@@ -659,13 +683,15 @@ try:
     lint_parser.add_argument('-M', '--module', action='store_true', \
         help='Check for module(s) in non-standard directory')
     lint_parser.add_argument('-f', '--footprint', action='store_true', \
-        help='Check for empty footprint')
+        help='Check for footprint consistency')
     lint_parser.add_argument('-b', '--builddir', action='store_true', \
         help='Check for build directory trace(s)')
     lint_parser.add_argument('-o', '--ownership', action='store_true', \
         help='Check ownership')
     lint_parser.add_argument('-e', '--executable', action='store_true', \
         help='Check for non-executable(s) in PATH')
+    lint_parser.add_argument('-p', '--path', action='store_true', \
+        help='Check for overlapping executable(s) in PATH')
     lint_parser.add_argument('-a', '--all', action='store_true', \
         help='Perform all checks')
     lint_parser.add_argument('TARGETS', nargs='+', type=str, \
@@ -784,6 +810,9 @@ try:
             ARGS.module = True
             ARGS.footprint = True
             ARGS.builddir = True
+            ARGS.ownership = True
+            ARGS.executable = True
+            ARGS.path = True
 
         message.info('Runtime information')
         message.sub_info('MAN', ARGS.man)
@@ -792,14 +821,16 @@ try:
         message.sub_info('DOC', ARGS.doc)
         message.sub_info('MODULE', ARGS.module)
         message.sub_info('FOOTPRINT', ARGS.footprint)
+        message.sub_info('BUILDDIR', ARGS.builddir)
         message.sub_info('OWNERSHIP', ARGS.ownership)
         message.sub_info('EXECUTABLE', ARGS.executable)
-        message.sub_info('TARGETS', ARGS.TARGETS)
+        message.sub_info('PATH', ARGS.executable)
+        message.sub_info('TARGETS', ARGS.path)
         message.info('Poking locals...')
 
         m = Lint(ARGS.TARGETS, ARGS.man, ARGS.udev, ARGS.symlink, ARGS.doc, \
             ARGS.module, ARGS.footprint, ARGS.builddir, ARGS.ownership, \
-            ARGS.executable)
+            ARGS.executable, ARGS.path)
         m.main()
 
     elif ARGS.mode == 'sane':

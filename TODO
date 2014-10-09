@@ -7,7 +7,6 @@
  * Check for unnecessary backup of files in SRCBUILDs
  * Check for makedepends of base ports in SRCBUILDs
  * Check for absolute path symlinks in SRCBUILDs
- * Check for binaries with same name in PATH
  * Implement services trigger (rc.d restart foo)
  * Implement trigger invocation only on file content change
 

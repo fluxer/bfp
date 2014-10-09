@@ -567,7 +567,7 @@ class Source(object):
                 message.sub_debug(spath)
                 misc.system_trigger((udevadm, 'control', '--reload'))
                 udevadm = False
-            # Distribution specifiec
+            # distribution specifiec
             elif spath.startswith(('boot/vmlinuz', 'etc/mkinitfs/')) and mkinitfs:
                 version = misc.string_search('boot/vmlinuz-(.*)', spath, escape=False)
                 message.sub_info('Updating initramfs image')
