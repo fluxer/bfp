@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>450</width>
+    <width>476</width>
     <height>536</height>
    </rect>
   </property>
@@ -283,7 +283,7 @@
           </property>
          </widget>
         </item>
-        <item row="8" column="0">
+        <item row="8" column="0" colspan="2">
          <widget class="QCheckBox" name="BackupBox">
           <property name="text">
            <string>Backup essential files</string>
