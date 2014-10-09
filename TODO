@@ -1,6 +1,5 @@
 ## SPM ##
  * Fix all bugs noted with FIXME
- * Everything that uses libpackage.local_*() is prone to fail with multiple instances
  * Use Makefiles for build scripts?
  * Optionally remove build depends that are not required by local target after build
  * Optimize backing up of files
