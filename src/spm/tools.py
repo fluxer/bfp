@@ -29,7 +29,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.1.0 (a8224e2)"
+app_version = "1.1.0 (7085b31)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -111,37 +111,37 @@ class Check(object):
                     or smime == 'text/x-lua' or smime == 'text/x-tcl' \
                     or smime == 'text/x-awk' or smime == 'text/x-gawk':
                     # https://en.wikipedia.org/wiki/Comparison_of_command_shells
-                    for bang in ('sh', 'bash', 'dash', 'ksh', 'csh', 'tcsh', 'tclsh', 'scsh', 'fish', \
-                        'zsh', 'ash', 'python', 'python2', 'python3', 'perl', 'php', 'ruby', 'lua', \
-                        'wish', 'awk', 'gawk'):
-                        bang_regexp = '^#!(?: )?(?:/usr)?/(?:s)?bin/(?:env )?' + bang + '(?:\\s|$)'
-                        fmatch = misc.file_search(bang_regexp, sfile, exact=False, escape=False)
-                        if fmatch:
-                            fmatch = fmatch[0].replace('#!', '').strip().split()[0]
-                            match = database.local_belongs(fmatch, exact=True, escape=False)
-                            if match and len(match) > 1:
-                                message.sub_warning('Multiple providers for %s' % fmatch, match)
-                                if target in match:
-                                    match = target
-                                else:
-                                    match = match[0]
-                            match = misc.string_convert(match)
-                            if not match in target_adepends and not match == target:
-                                target_adepends.append(match)
-
-                            if match == target or misc.string_search(fmatch,
-                                target_footprint, exact=True, escape=False):
-                                message.sub_debug('Dependency needed but in self', match)
-                            elif match and match in target_depends:
-                                message.sub_debug('Dependency needed but in depends', match)
-                            elif match and not match in target_depends:
-                                message.sub_debug('Dependency needed but in local', match)
-                                target_depends.append(match)
-                            elif libspm.IGNORE_MISSING:
-                                message.sub_warning('Dependency needed, not in any local', fmatch)
+                    bang_regexp = '^#!(?: )?(?:/usr)?/(?:s)?bin/(?:env )?'
+                    bang_regexp += '(:?sh|bash|dash|ksh|csh|tcsh|tclsh|scsh'
+                    bang_regexp += '|fish|zsh|ash|python|python2|python3|perl'
+                    bang_regexp += '|php|ruby|lua|wish|awk|gawk)(?:\\s|$)'
+                    fmatch = misc.file_search(bang_regexp, sfile, exact=False, escape=False)
+                    if fmatch:
+                        fmatch = fmatch[0].replace('#!', '').strip().split()[0]
+                        match = database.local_belongs(fmatch, exact=True, escape=False)
+                        if match and len(match) > 1:
+                            message.sub_warning('Multiple providers for %s' % fmatch, match)
+                            if target in match:
+                                match = target
                             else:
-                                message.sub_critical('Dependency needed, not in any local', fmatch)
-                                missing_detected = True
+                                match = match[0]
+                        match = misc.string_convert(match)
+                        if not match in target_adepends and not match == target:
+                            target_adepends.append(match)
+
+                        if match == target or misc.string_search(fmatch,
+                            target_footprint, exact=True, escape=False):
+                            message.sub_debug('Dependency needed but in self', match)
+                        elif match and match in target_depends:
+                            message.sub_debug('Dependency needed but in depends', match)
+                        elif match and not match in target_depends:
+                            message.sub_debug('Dependency needed but in local', match)
+                            target_depends.append(match)
+                        elif libspm.IGNORE_MISSING:
+                            message.sub_warning('Dependency needed, not in any local', fmatch)
+                        else:
+                            message.sub_critical('Dependency needed, not in any local', fmatch)
+                            missing_detected = True
             if missing_detected:
                 sys.exit(2)
 
@@ -404,16 +404,15 @@ class Lint(object):
                             or smime == 'text/x-lua' or smime == 'text/x-tcl' \
                             or smime == 'text/x-awk' or smime == 'text/x-gawk':
                             # https://en.wikipedia.org/wiki/Comparison_of_command_shells
-                            for bang in ('sh', 'bash', 'dash', 'ksh', 'csh', 'tcsh', \
-                                'tclsh', 'scsh', 'fish', 'zsh', 'ash', 'python', \
-                                'python2', 'python3', 'perl', 'php', 'ruby', 'lua', \
-                                'wish', 'awk', 'gawk'):
-                                bang_regexp = '^#!(?: )?(?:/usr)?/(?:s)?bin/(?:env )?' + bang + '(?:\\s|$)'
-                                match = misc.file_search(bang_regexp, sfile, exact=False, escape=False)
-                                if match:
-                                    match = match[0].replace('#!', '').strip().split()[0]
-                                    if not database.local_belongs(match, exact=True, escape=False):
-                                        message.sub_warning('Invalid shebang', sfile)
+                            bang_regexp = '^#!(?: )?(?:/usr)?/(?:s)?bin/(?:env )?'
+                            bang_regexp += '(:?sh|bash|dash|ksh|csh|tcsh|tclsh|scsh'
+                            bang_regexp += '|fish|zsh|ash|python|python2|python3|perl'
+                            bang_regexp += '|php|ruby|lua|wish|awk|gawk)(?:\\s|$)'
+                            match = misc.file_search(bang_regexp, sfile, exact=False, escape=False)
+                            if match:
+                                match = match[0].replace('#!', '').strip().split()[0]
+                                if not database.local_belongs(match, exact=True, escape=False):
+                                    message.sub_warning('Invalid shebang', sfile)
 
 
 class Sane(object):
