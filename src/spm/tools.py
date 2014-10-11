@@ -29,7 +29,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.1.0 (7085b31)"
+app_version = "1.1.0 (130b2bc)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -112,7 +112,7 @@ class Check(object):
                     or smime == 'text/x-awk' or smime == 'text/x-gawk':
                     # https://en.wikipedia.org/wiki/Comparison_of_command_shells
                     bang_regexp = '^#!(?: )?(?:/usr)?/(?:s)?bin/(?:env )?'
-                    bang_regexp += '(:?sh|bash|dash|ksh|csh|tcsh|tclsh|scsh'
+                    bang_regexp += '(?:sh|bash|dash|ksh|csh|tcsh|tclsh|scsh'
                     bang_regexp += '|fish|zsh|ash|python|python2|python3|perl'
                     bang_regexp += '|php|ruby|lua|wish|awk|gawk)(?:\\s|$)'
                     fmatch = misc.file_search(bang_regexp, sfile, exact=False, escape=False)
@@ -405,7 +405,7 @@ class Lint(object):
                             or smime == 'text/x-awk' or smime == 'text/x-gawk':
                             # https://en.wikipedia.org/wiki/Comparison_of_command_shells
                             bang_regexp = '^#!(?: )?(?:/usr)?/(?:s)?bin/(?:env )?'
-                            bang_regexp += '(:?sh|bash|dash|ksh|csh|tcsh|tclsh|scsh'
+                            bang_regexp += '(?:sh|bash|dash|ksh|csh|tcsh|tclsh|scsh'
                             bang_regexp += '|fish|zsh|ash|python|python2|python3|perl'
                             bang_regexp += '|php|ruby|lua|wish|awk|gawk)(?:\\s|$)'
                             match = misc.file_search(bang_regexp, sfile, exact=False, escape=False)
