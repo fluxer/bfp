@@ -29,7 +29,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.1.0 (130b2bc)"
+app_version = "1.1.0 (91be49e)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -859,7 +859,7 @@ try:
         message.sub_info('OWNERSHIP', ARGS.ownership)
         message.sub_info('EXECUTABLE', ARGS.executable)
         message.sub_info('PATH', ARGS.path)
-        message.sub_info('PATH', ARGS.shebang)
+        message.sub_info('SHEBANG', ARGS.shebang)
         message.sub_info('TARGETS', ARGS.path)
         message.info('Poking locals...')
 
