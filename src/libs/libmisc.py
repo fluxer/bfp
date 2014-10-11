@@ -160,6 +160,10 @@ class Misc(object):
             return 'inode/symlink'
         return self.string_encode(libmagic.from_file(sfile, mime=True))
 
+    def file_substitute(self, string, string2, sfile):
+        ''' Substitue a string with another in file '''
+        self.file_write(sfile, re.sub(string, string2, self.file_read(sfile)))
+
     def dir_create(self, sdir):
         ''' Create directory if it does not exist, including leading paths '''
         if not os.path.isdir(sdir) and not os.path.islink(sdir):

@@ -880,11 +880,21 @@ class Source(object):
                 bang_regexp += '(?:sh|bash|dash|ksh|csh|tcsh|tclsh|scsh'
                 bang_regexp += '|fish|zsh|ash|python|python2|python3|perl'
                 bang_regexp += '|php|ruby|lua|wish|awk|gawk)(?:\\s|$)'
-                fmatch = misc.file_search(bang_regexp, sfile, exact=False, escape=False)
-                if fmatch:
-                    fmatch = fmatch[0].replace('#!', '').strip().split()[0]
+                omatch = misc.file_search(bang_regexp, sfile, exact=False, escape=False)
+                if omatch:
+                    fmatch = omatch[0].replace('#!', '').strip().split()[0]
                     smatch = self.install_dir + fmatch
                     match = database.local_belongs(fmatch, exact=True, escape=False)
+                    # attempt shebang correction be probing PATH for basename matchers
+                    # first and altering the shebang next
+                    if not match:
+                        message.sub_debug('Attempting shebang correction on', sfile)
+                        hmatch = misc.whereis(os.path.basename(fmatch), False)
+                        if hmatch:
+                            match = database.local_belongs(hmatch, exact=True, escape=False)
+                            if match:
+                                misc.file_substitute('(?:\\s|^)#!(?:\\s)?(/usr(?:/local)?)?/bin/(\\S)+', '#!' + hmatch, sfile)
+                                message.sub_debug('Successfuly corrected', fmatch)
                     if match and len(match) > 1:
                         message.sub_warning('Multiple providers for %s' % fmatch, match)
                         if self.target_name in match:
