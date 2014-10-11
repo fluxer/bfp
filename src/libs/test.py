@@ -14,6 +14,34 @@ database = libpackage.Database()
 class TestSuite(unittest.TestCase):
     database.ROOT_DIR = tempfile.mkdtemp()
 
+    def create_remote(self, name, sdir, version, description, depends='', \
+        makedepends='', sources='', options='', backup=''):
+        sdir = database.CACHE_DIR + '/repositories/test/' + name
+        os.makedirs(sdir)
+        srcbuild = open(sdir + '/SRCBUILD', 'w')
+        srcbuild.write('version=' + version)
+        srcbuild.write('\ndescription="' + description + '"')
+        srcbuild.write('\ndepends=(' + misc.string_convert(depends) + ')')
+        srcbuild.write('\nmakedepends=(' + misc.string_convert(makedepends) + ')')
+        srcbuild.write('\ncheckdepends=(' + name + ')')
+        srcbuild.write('\nsources=(' + misc.string_convert(sources) + ')')
+        srcbuild.write('\noptions=(' + misc.string_convert(options) + ')')
+        srcbuild.write('\nbackup=(' + misc.string_convert(backup) + ')')
+        srcbuild.close()
+
+    def create_local(self, name, sdir, version, description, depends='', \
+            size='1', footprint='\n'):
+        os.makedirs(sdir)
+        metadata = open(sdir + '/metadata', 'w')
+        metadata.write('version=' + version)
+        metadata.write('\ndescription=' + description)
+        metadata.write('\ndepends=' + depends)
+        metadata.write('\nsize=' + size)
+        metadata.close()
+        fprint = open(sdir + '/footprint', 'w')
+        fprint.write(footprint)
+        fprint.close()
+
     def setUp(self):
         database.CACHE_DIR = database.ROOT_DIR + '/var/cache/spm'
         database.BUILD_DIR = database.ROOT_DIR + '/var/tmp/spm'
@@ -29,7 +57,8 @@ class TestSuite(unittest.TestCase):
 
         # dummy remote target
         self.remote_name = 'glibc'
-        self.remote_dir = database.CACHE_DIR + '/repositories/test/' + self.remote_name
+        self.remote_dir = database.CACHE_DIR + '/repositories/test/' + \
+            self.remote_name
         self.remote_version = '2.16.1'
         self.remote_description = 'SPM test target'
         self.remote_depends = ['filesystem', 'linux-api-headers', 'tzdata']
@@ -37,32 +66,32 @@ class TestSuite(unittest.TestCase):
         self.remote_source = ['\n', '', 'http://ftp.gnu.org/gnu/glibc/glibc-2.16.0.tar.xz']
         self.remote_options = ['!binaries', 'shared', '!static', 'man']
         self.remote_backup = ['etc/ld.so.conf', 'etc/nsswitch.conf']
-
-        os.makedirs(self.remote_dir)
-        srcbuild = open(self.remote_dir + '/SRCBUILD', 'w')
-        srcbuild.write('version=' + self.remote_version)
-        srcbuild.write('\ndescription="' + self.remote_description + '"')
-        srcbuild.write('\ndepends=(' + misc.string_convert(self.remote_depends) + ')')
-        srcbuild.write('\nmakedepends=(' + misc.string_convert(self.remote_makedepends) + ')')
-        srcbuild.write('\ncheckdepends=(' + self.remote_name + ')')
-        srcbuild.write('\nsources=(' + misc.string_convert(self.remote_source) + ')')
-        srcbuild.write('\noptions=(' + misc.string_convert(self.remote_options) + ')')
-        srcbuild.write('\nbackup=(' + misc.string_convert(self.remote_backup) + ')')
-        srcbuild.close()
+        self.create_remote(self.remote_name, self.remote_dir, \
+            self.remote_version, self.remote_description, self.remote_depends, \
+            self.remote_makedepends, self.remote_source, self.remote_options, \
+            self.remote_backup)
 
         # second dummy remote target
         self.remote2_name = 'dummy'
-        self.remote2_dir = database.CACHE_DIR + '/repositories/test/' + self.remote2_name
+        self.remote2_dir = database.CACHE_DIR + '/repositories/test/' + \
+            self.remote2_name
         self.remote2_version = '999'
         self.remote2_description = 'SPM circular test target'
         self.remote2_makedepends = [self.remote_name]
+        self.create_remote(self.remote2_name, self.remote2_dir, \
+            self.remote2_version, self.remote2_description, \
+            makedepends=self.remote2_makedepends)
 
-        os.makedirs(self.remote2_dir)
-        srcbuild = open(self.remote2_dir + '/SRCBUILD', 'w')
-        srcbuild.write('version=' + self.remote2_version)
-        srcbuild.write('\ndescription="' + self.remote2_description + '"')
-        srcbuild.write('\nmakedepends=(' + misc.string_convert(self.remote2_makedepends) + ')')
-        srcbuild.close()
+        # third dummy remote target
+        self.remote3_name = 'dummy2'
+        self.remote3_dir = database.CACHE_DIR + '/repositories/test/' + \
+            self.remote3_name
+        self.remote3_version = '1.0.1'
+        self.remote3_description = 'SPM up-to-date test target'
+        self.remote3_makedepends = [self.remote_name]
+        self.create_remote(self.remote3_name, self.remote3_dir, \
+            self.remote3_version, self.remote3_description, \
+            makedepends=self.remote3_makedepends)
 
         # dummy local target
         self.local_name = 'dummy'
@@ -72,39 +101,33 @@ class TestSuite(unittest.TestCase):
         self.local_depends = self.remote_name
         self.local_size = '12345'
         self.local_footprint = '/etc/dummy.conf\n/lib/libdummy.so'
-
-        os.makedirs(self.local_dir)
-        metadata = open(self.local_dir + '/metadata', 'w')
-        metadata.write('version=' + self.local_version)
-        metadata.write('\ndescription=' + self.local_description)
-        metadata.write('\ndepends=' + self.local_depends)
-        metadata.write('\nsize=' + self.local_size)
-        metadata.close()
-
-        footprint = open(self.local_dir + '/footprint', 'w')
-        footprint.write(self.local_footprint)
-        footprint.close()
+        self.create_local(self.local_name, self.local_dir, \
+            self.local_version, self.local_description, self.local_depends, \
+            self.local_size, self.local_footprint)
 
         # second dummy local target
         self.local2_name = 'dummy2'
         self.local2_dir = database.LOCAL_DIR + '/' + self.local2_name
-        self.local2_version = '9999'
+        self.local2_version = '1.0.0'
         self.local2_description = 'SPM dummy reverse test target'
         self.local2_depends = self.local_name
         self.local2_size = '12345'
         self.local2_footprint = '/etc/dummy2.conf\n/lib/libdummy2.so'
+        self.create_local(self.local2_name, self.local2_dir, \
+            self.local2_version, self.local2_description, \
+            self.local2_depends, self.local2_size, self.local2_footprint)
 
-        os.makedirs(self.local2_dir)
-        metadata = open(self.local2_dir + '/metadata', 'w')
-        metadata.write('version=' + self.local2_version)
-        metadata.write('\ndescription=' + self.local2_description)
-        metadata.write('\ndepends=' + self.local2_depends)
-        metadata.write('\nsize=' + self.local2_size)
-        metadata.close()
-
-        footprint = open(self.local2_dir + '/footprint', 'w')
-        footprint.write(self.local2_footprint)
-        footprint.close()
+        # second dummy local target
+        self.local3_name = 'dummy3'
+        self.local3_dir = database.LOCAL_DIR + '/' + self.local3_name
+        self.local3_version = '1.0.0'
+        self.local3_description = 'SPM dummy empty depends test target'
+        self.local3_depends = ''
+        self.local3_size = '12345'
+        self.local3_footprint = ''
+        self.create_local(self.local3_name, self.local3_dir, \
+            self.local3_version, self.local3_description, \
+            self.local3_depends, self.local3_size, self.local3_footprint)
 
     def tearDown(self):
         misc.dir_remove(database.ROOT_DIR)
@@ -117,7 +140,8 @@ class TestSuite(unittest.TestCase):
         self.assertEqual(misc.string_search('barz', 'foo_bar_baz'), [])
 
     def test_search_string_regexp(self):
-        self.assertTrue(misc.string_search('ab+', 'abcbdef', escape=False), True)
+        self.assertTrue(misc.string_search('ab+', 'abcbdef', escape=False), \
+            True)
 
     def test_search_string_exact_begining_true(self):
         self.assertTrue(misc.string_search('foo', 'foo bar', exact=True), True)
@@ -126,32 +150,40 @@ class TestSuite(unittest.TestCase):
         self.assertEqual(misc.string_search('foo', 'foobar', exact=True), [])
 
     def test_search_string_exact_middle_true(self):
-        self.assertTrue(misc.string_search('bar', 'foo\tbar\nbaz', exact=True), True)
+        self.assertTrue(misc.string_search('bar', 'foo\tbar\nbaz', \
+            exact=True), True)
 
     def test_search_string_exact_middle_false(self):
-        self.assertEqual(misc.string_search('bar', 'foobarbaz', exact=True), [])
+        self.assertEqual(misc.string_search('bar', 'foobarbaz', exact=True), \
+            [])
 
     def test_search_string_exact_middle_false2(self):
-        self.assertEqual(misc.string_search('.(bar).', 'foo bar baz', exact=True), [])
+        self.assertEqual(misc.string_search('.(bar).', 'foo bar baz', \
+            exact=True), [])
 
     def test_search_string_exact_end_true(self):
-        self.assertTrue(misc.string_search('bar', 'foo\tbar', exact=True), True)
+        self.assertTrue(misc.string_search('bar', 'foo\tbar', exact=True), \
+            True)
 
     def test_search_string_exact_end_false(self):
         self.assertEqual(misc.string_search('bar', 'foobar', exact=True), [])
 
     def test_search_string_exact_in_list_true(self):
-        self.assertTrue(misc.string_search('bar', ['foo', 'bar', 'baz'], exact=True), True)
+        self.assertTrue(misc.string_search('bar', ['foo', 'bar', 'baz'], \
+            exact=True), True)
 
     def test_search_string_exact_in_list_false(self):
-        self.assertEqual(misc.string_search('barz', ['foo', 'bar', 'baz'], exact=True), [])
+        self.assertEqual(misc.string_search('barz', ['foo', 'bar', 'baz'], \
+            exact=True), [])
 
     def test_search_string_exact_escape(self):
-        self.assertTrue(misc.string_search('bar\nbaz', 'bar\nbaz', exact=True, escape=True), True)
+        self.assertTrue(misc.string_search('bar\nbaz', 'bar\nbaz', \
+            exact=True, escape=True), True)
 
     # remote targets checks
     def test_remote_target_search_true(self):
-        self.assertEqual(database.remote_search(self.remote_name), self.remote_dir)
+        self.assertEqual(database.remote_search(self.remote_name), \
+            self.remote_dir)
 
     def test_remote_target_search_false(self):
         self.assertEqual(database.remote_search('foobar'), None)
@@ -161,20 +193,20 @@ class TestSuite(unittest.TestCase):
             self.remote_version)
 
     def test_remote_target_description(self):
-        self.assertEqual(database.remote_metadata(self.remote_name, 'description'),
-            self.remote_description)
+        self.assertEqual(database.remote_metadata(self.remote_name, \
+            'description'), self.remote_description)
 
     def test_remote_target_depends(self):
         self.assertEqual(database.remote_metadata(self.remote_name, 'depends'),
             self.remote_depends)
 
     def test_remote_target_makedepends(self):
-        self.assertEqual(database.remote_metadata(self.remote_name, 'makedepends'),
-            self.remote_makedepends)
+        self.assertEqual(database.remote_metadata(self.remote_name, \
+            'makedepends'), self.remote_makedepends)
 
     def test_remote_target_checkdepends(self):
-        self.assertEqual(database.remote_metadata(self.remote_name, 'checkdepends'),
-            [self.remote_name])
+        self.assertEqual(database.remote_metadata(self.remote_name, \
+            'checkdepends'), [self.remote_name])
 
     def test_remote_target_source(self):
         self.assertEqual(database.remote_metadata(self.remote_name, 'sources'),
@@ -202,12 +234,16 @@ class TestSuite(unittest.TestCase):
             self.local_version)
 
     def test_local_target_description(self):
-        self.assertEqual(database.local_metadata(self.local_name, 'description'),
-            self.local_description)
+        self.assertEqual(database.local_metadata(self.local_name, \
+            'description'), self.local_description)
 
     def test_local_target_depends(self):
         self.assertEqual(database.local_metadata(self.local_name, 'depends'),
             [self.local_depends])
+
+    def test_local_target_depends_empty(self):
+        self.assertEqual(database.local_metadata(self.local3_name, 'depends'),
+            [])
 
     def test_local_target_size(self):
         self.assertEqual(database.local_metadata(self.local_name, 'size'),
@@ -226,8 +262,11 @@ class TestSuite(unittest.TestCase):
     def test_local_belongs_false(self):
         self.assertEqual(database.local_belongs('/lib/foobar.so'), [])
 
-    def test_local_uptodate(self):
+    def test_local_uptodate_true(self):
         self.assertEqual(database.local_uptodate('dummy'), True)
+
+    def test_local_uptodate_false(self):
+        self.assertEqual(database.local_uptodate('dummy2'), False)
 
     def test_local_rdepends_true(self):
         self.assertEqual(database.local_rdepends(self.local_name),
@@ -235,12 +274,19 @@ class TestSuite(unittest.TestCase):
 
     # misc checks
     def test_misc_version_true(self):
-        self.assertGreater(misc.version(self.local_version),
-            misc.version(self.remote_version))
+        self.assertGreater(misc.version('0.1.1'),
+            misc.version('0.1.0'))
 
-    def test_file_mime(self):
+    def test_misc_version_true2(self):
+        self.assertGreater(misc.version('20141010'),
+            misc.version('0.1.0'))
+
+    def test_misc_version_false(self):
+        self.assertLess(misc.version('0.1.0'),
+            misc.version('0.1.1'))
+
+    def test_file_mime_python(self):
         self.assertEqual(misc.file_mime('libmagic.py'), 'text/x-python')
-
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestSuite)
 result = unittest.TextTestRunner(verbosity=2).run(suite)
