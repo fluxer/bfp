@@ -29,7 +29,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.1.0 (16e3ef1)"
+app_version = "1.1.0 (22ab6f6)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -114,7 +114,7 @@ class Check(object):
                     for bang in ('sh', 'bash', 'dash', 'ksh', 'csh', 'tcsh', 'tclsh', 'scsh', 'fish', \
                         'zsh', 'ash', 'python', 'python2', 'python3', 'perl', 'php', 'ruby', 'lua', \
                         'wish' 'awk' 'gawk'):
-                        bang_regexp = '^#!(/usr)?/(s)?bin/(env )?' + bang + '(\\s|$)'
+                        bang_regexp = '^#!( )?(/usr)?/(s)?bin/(env )?' + bang + '(\\s|$)'
                         file_regexp = '(/usr)?/(s)?bin/' + bang
 
                         if misc.file_search(bang_regexp, sfile, exact=False, escape=False):

@@ -880,7 +880,7 @@ class Source(object):
                     'tclsh', 'scsh', 'fish', 'zsh', 'ash', 'python', \
                     'python2', 'python3', 'perl', 'php', 'ruby', 'lua', \
                     'wish', 'awk' 'gawk'):
-                    bang_regexp = '^#!(/usr)?/(s)?bin/(env )?' + bang + '(\\s|$)'
+                    bang_regexp = '^#!( )?(/usr)?/(s)?bin/(env )?' + bang + '(\\s|$)'
                     file_regexp = '(/usr)?/(s)?bin/' + bang
                     self_file_regexp = self.install_dir + '(/usr)?/(s)?bin/' + bang
 
