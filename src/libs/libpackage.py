@@ -170,7 +170,7 @@ class Database(object):
                 return value
             elif key == 'depends':
                 value = metadata_content.split('\n')[2]
-                value = value.replace('depends=', '').strip().split(' ')
+                value = value.replace('depends=', '').strip().split()
                 return value
             elif key == 'size':
                 value = metadata_content.split('\n')[3]
