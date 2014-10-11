@@ -342,6 +342,12 @@ try:
     ARGS = parser.parse_args()
 
     if ARGS.mode == 'repo':
+        if ARGS.all:
+            ARGS.clean = True
+            ARGS.sync = True
+            ARGS.update = True
+            ARGS.prune = True
+
         message.info('Runtime information')
         message.sub_info('CLEAN', ARGS.clean)
         message.sub_info('SYNC', ARGS.sync)
@@ -352,11 +358,6 @@ try:
         for repository in libspm.REPOSITORIES:
             message.sub_info('REPOSITORY', repository)
         message.info('Poking repositories...')
-        if ARGS.all:
-            ARGS.clean = True
-            ARGS.sync = True
-            ARGS.update = True
-            ARGS.prune = True
         m = libspm.Repo(libspm.REPOSITORIES, ARGS.clean, \
                 ARGS.sync, ARGS.update, ARGS.prune)
         m.main()
