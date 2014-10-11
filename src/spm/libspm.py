@@ -879,22 +879,22 @@ class Source(object):
                 for bang in ('sh', 'bash', 'dash', 'ksh', 'csh', 'tcsh', \
                     'tclsh', 'scsh', 'fish', 'zsh', 'ash', 'python', \
                     'python2', 'python3', 'perl', 'php', 'ruby', 'lua', \
-                    'wish', 'awk' 'gawk'):
-                    bang_regexp = '^#!( )?(/usr)?/(s)?bin/(env )?' + bang + '(\\s|$)'
-                    file_regexp = '(/usr)?/(s)?bin/' + bang
-                    self_file_regexp = self.install_dir + '(/usr)?/(s)?bin/' + bang
-
-                    if misc.file_search(bang_regexp, sfile, exact=False, escape=False):
-                        match = database.local_belongs(file_regexp, exact=True, escape=False)
+                    'wish', 'awk', 'gawk'):
+                    bang_regexp = '^#!(?: )?(?:/usr)?/(?:s)?bin/(?:env )?' + bang + '(?:\\s|$)'
+                    fmatch = misc.file_search(bang_regexp, sfile, exact=False, escape=False)
+                    if fmatch:
+                        fmatch = fmatch[0].replace('#!', '').strip().split()[0]
+                        smatch = self.install_dir + fmatch
+                        match = database.local_belongs(fmatch, exact=True, escape=False)
                         if match and len(match) > 1:
-                            message.sub_warning('Multiple providers for %s' % bang, match)
+                            message.sub_warning('Multiple providers for %s' % fmatch, match)
                             if self.target_name in match:
                                 match = self.target_name
                             else:
                                 match = match[0]
                         match = misc.string_convert(match)
 
-                        if match == self.target_name or misc.string_search(self_file_regexp, \
+                        if match == self.target_name or misc.string_search(smatch, \
                             list(target_content.keys()), exact=True, escape=False):
                             message.sub_debug('Dependency needed but in self', match)
                         elif match and match in self.target_depends:
@@ -903,9 +903,9 @@ class Source(object):
                             message.sub_debug('Dependency needed but in local', match)
                             self.target_depends.append(match)
                         elif self.ignore_missing:
-                            message.sub_warning('Dependency needed, not in any local', bang)
+                            message.sub_warning('Dependency needed, not in any local', fmatch)
                         else:
-                            message.sub_critical('Dependency needed, not in any local', bang)
+                            message.sub_critical('Dependency needed, not in any local', fmatch)
                             missing_detected = True
         if missing_detected:
             sys.exit(2)

@@ -29,7 +29,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.1.0 (22ab6f6)"
+app_version = "1.1.0 (a8224e2)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -113,14 +113,14 @@ class Check(object):
                     # https://en.wikipedia.org/wiki/Comparison_of_command_shells
                     for bang in ('sh', 'bash', 'dash', 'ksh', 'csh', 'tcsh', 'tclsh', 'scsh', 'fish', \
                         'zsh', 'ash', 'python', 'python2', 'python3', 'perl', 'php', 'ruby', 'lua', \
-                        'wish' 'awk' 'gawk'):
-                        bang_regexp = '^#!( )?(/usr)?/(s)?bin/(env )?' + bang + '(\\s|$)'
-                        file_regexp = '(/usr)?/(s)?bin/' + bang
-
-                        if misc.file_search(bang_regexp, sfile, exact=False, escape=False):
-                            match = database.local_belongs(file_regexp, exact=True, escape=False)
+                        'wish', 'awk', 'gawk'):
+                        bang_regexp = '^#!(?: )?(?:/usr)?/(?:s)?bin/(?:env )?' + bang + '(?:\\s|$)'
+                        fmatch = misc.file_search(bang_regexp, sfile, exact=False, escape=False)
+                        if fmatch:
+                            fmatch = fmatch[0].replace('#!', '').strip().split()[0]
+                            match = database.local_belongs(fmatch, exact=True, escape=False)
                             if match and len(match) > 1:
-                                message.sub_warning('Multiple providers for %s' % bang, match)
+                                message.sub_warning('Multiple providers for %s' % fmatch, match)
                                 if target in match:
                                     match = target
                                 else:
@@ -129,7 +129,7 @@ class Check(object):
                             if not match in target_adepends and not match == target:
                                 target_adepends.append(match)
 
-                            if match == target or misc.string_search(file_regexp,
+                            if match == target or misc.string_search(fmatch,
                                 target_footprint, exact=True, escape=False):
                                 message.sub_debug('Dependency needed but in self', match)
                             elif match and match in target_depends:
@@ -138,9 +138,9 @@ class Check(object):
                                 message.sub_debug('Dependency needed but in local', match)
                                 target_depends.append(match)
                             elif libspm.IGNORE_MISSING:
-                                message.sub_warning('Dependency needed, not in any local', bang)
+                                message.sub_warning('Dependency needed, not in any local', fmatch)
                             else:
-                                message.sub_critical('Dependency needed, not in any local', bang)
+                                message.sub_critical('Dependency needed, not in any local', fmatch)
                                 missing_detected = True
             if missing_detected:
                 sys.exit(2)
@@ -267,7 +267,7 @@ class Lint(object):
     ''' Check sanity of local targets '''
     def __init__(self, targets, man=False, udev=False, symlink=False, \
         doc=False, module=False, footprint=False, builddir=False, \
-        ownership=False, executable=False, path=False):
+        ownership=False, executable=False, path=False, shebang=False):
         self.targets = targets
         self.man = man
         self.udev = udev
@@ -279,6 +279,7 @@ class Lint(object):
         self.ownership = ownership
         self.executable = executable
         self.path = path
+        self.shebang = shebang
 
     def main(self):
         ''' Looks for target match and then execute action for every target '''
@@ -317,6 +318,7 @@ class Lint(object):
 
                 if self.module:
                     for sfile in target_footprint.splitlines():
+                        # FIXME: compressed modules
                         if sfile.endswith('.ko') and not os.path.dirname(sfile).endswith('/misc'):
                             message.sub_warning('Extra module(s) in non-standard directory')
 
@@ -329,9 +331,10 @@ class Lint(object):
 
                 if self.builddir:
                     for sfile in target_footprint.splitlines():
-                        # there is no point in checking symlinks,
-                        # may lead to directory
-                        if not os.path.exists(sfile) or os.path.islink(sfile):
+                        if os.path.islink(sfile):
+                            continue
+                        elif not os.path.exists(sfile):
+                            message.sub_debug('File does not exist', sfile)
                             continue
 
                         if misc.file_search(libspm.BUILD_DIR, sfile):
@@ -339,7 +342,10 @@ class Lint(object):
 
                 if self.ownership:
                     for sfile in target_footprint.splitlines():
-                        if not os.path.exists(sfile) or os.path.islink(sfile):
+                        if os.path.islink(sfile):
+                            continue
+                        elif not os.path.exists(sfile):
+                            message.sub_debug('File does not exist', sfile)
                             continue
 
                         stat = os.stat(sfile)
@@ -383,7 +389,31 @@ class Lint(object):
                                 match = database.local_belongs(regex, escape=False)
                                 if len(match) > 1:
                                     message.sub_warning('File in PATH overlaps with', match)
-                                    print(sfile, xfile)
+
+                if self.shebang:
+                    for sfile in target_footprint.splitlines():
+                        if os.path.islink(sfile):
+                            continue
+                        elif not os.path.exists(sfile):
+                            message.sub_debug('File does not exist', sfile)
+                            continue
+                        smime = misc.file_mime(sfile)
+                        if smime == 'text/plain' or smime == 'text/x-shellscript' \
+                            or smime == 'text/x-python' or smime == 'text/x-perl' \
+                            or smime == 'text/x-php' or smime == 'text/x-ruby' \
+                            or smime == 'text/x-lua' or smime == 'text/x-tcl' \
+                            or smime == 'text/x-awk' or smime == 'text/x-gawk':
+                            # https://en.wikipedia.org/wiki/Comparison_of_command_shells
+                            for bang in ('sh', 'bash', 'dash', 'ksh', 'csh', 'tcsh', \
+                                'tclsh', 'scsh', 'fish', 'zsh', 'ash', 'python', \
+                                'python2', 'python3', 'perl', 'php', 'ruby', 'lua', \
+                                'wish', 'awk', 'gawk'):
+                                bang_regexp = '^#!(?: )?(?:/usr)?/(?:s)?bin/(?:env )?' + bang + '(?:\\s|$)'
+                                match = misc.file_search(bang_regexp, sfile, exact=False, escape=False)
+                                if match:
+                                    match = match[0].replace('#!', '').strip().split()[0]
+                                    if not database.local_belongs(match, exact=True, escape=False):
+                                        message.sub_warning('Invalid shebang', sfile)
 
 
 class Sane(object):
@@ -694,6 +724,8 @@ try:
         help='Check for non-executable(s) in PATH')
     lint_parser.add_argument('-p', '--path', action='store_true', \
         help='Check for overlapping executable(s) in PATH')
+    lint_parser.add_argument('-n', '--shebang', action='store_true', \
+        help='Check for incorrect shebang of scripts')
     lint_parser.add_argument('-a', '--all', action='store_true', \
         help='Perform all checks')
     lint_parser.add_argument('TARGETS', nargs='+', type=str, \
@@ -815,6 +847,7 @@ try:
             ARGS.ownership = True
             ARGS.executable = True
             ARGS.path = True
+            ARGS.shebang = True
 
         message.info('Runtime information')
         message.sub_info('MAN', ARGS.man)
@@ -826,13 +859,14 @@ try:
         message.sub_info('BUILDDIR', ARGS.builddir)
         message.sub_info('OWNERSHIP', ARGS.ownership)
         message.sub_info('EXECUTABLE', ARGS.executable)
-        message.sub_info('PATH', ARGS.executable)
+        message.sub_info('PATH', ARGS.path)
+        message.sub_info('PATH', ARGS.shebang)
         message.sub_info('TARGETS', ARGS.path)
         message.info('Poking locals...')
 
         m = Lint(ARGS.TARGETS, ARGS.man, ARGS.udev, ARGS.symlink, ARGS.doc, \
             ARGS.module, ARGS.footprint, ARGS.builddir, ARGS.ownership, \
-            ARGS.executable, ARGS.path)
+            ARGS.executable, ARGS.path, ARGS.shebang)
         m.main()
 
     elif ARGS.mode == 'sane':
