@@ -29,7 +29,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.1.0 (fd867c4)"
+app_version = "1.1.0 (16e3ef1)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -54,6 +54,7 @@ class Check(object):
     def main(self):
         ''' Check if runtime dependencies of target are satisfied '''
         for target in self.check_targets:
+            message.sub_info('Checking', target)
             target_metadata = os.path.join(libspm.LOCAL_DIR, target, 'metadata')
             target_footprint = database.local_footprint(target)
             target_depends = database.local_metadata(target, 'depends')
@@ -73,7 +74,7 @@ class Check(object):
                         message.sub_debug('Skipping', sfile)
                         continue
 
-                message.sub_info('Checking', sfile)
+                message.sub_debug('Path', sfile)
                 smime = misc.file_mime(sfile)
                 if smime == 'application/x-executable' or smime == 'application/x-sharedlib':
                     libraries = misc.system_scanelf(sfile)
