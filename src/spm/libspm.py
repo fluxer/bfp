@@ -876,13 +876,20 @@ class Source(object):
                 or smime == 'text/x-lua' or smime == 'text/x-tcl' \
                 or smime == 'text/x-awk' or smime == 'text/x-gawk':
                 # https://en.wikipedia.org/wiki/Comparison_of_command_shells
-                bang_regexp = '^#!(?: )?(?:/usr(?:/local)?)?/(?:s)?bin/(?:env )?'
+                bang_regexp = '(?:\\n|^)#!(?:(?: )+)?(?:/.*)+(?:(?: )+)?'
                 bang_regexp += '(?:sh|bash|dash|ksh|csh|tcsh|tclsh|scsh|fish'
-                bang_regexp += '|zsh|ash|python|perl|php|ruby|lua|wish|(?:g)?awk'
-                bang_regexp += '(?:(?:\\d(?:.)?)+)?)(?:\\s|$)'
+                bang_regexp += '|zsh|ash|python|perl|php|ruby|lua|wish|(?:g)?awk)'
+                bang_regexp += '(?:(?:\\d(?:.)?)+)?(?:\\s|$)'
                 omatch = misc.file_search(bang_regexp, sfile, exact=False, escape=False)
                 if omatch:
-                    fmatch = omatch[0].replace('#!', '').strip().split()[0]
+                    fmatch = omatch[0].replace('#!', '').strip()
+                    # in cases when the match has two entries (e,g, /usr/bin/env python)
+                    # substite /env with the basename of the follow up argument as it
+                    # may be full path (e.g. /usr/bin/env /usr/bin/python, as of the time
+                    # if writing this UFW is an example) preserving other arguments
+                    if '/env' in fmatch:
+                        fmatch = re.sub('/env(?:(?: )+)?' + fmatch.split()[1], \
+                            '/' + os.path.basename(fmatch.split()[1]), fmatch)
                     smatch = self.install_dir + fmatch
                     match = database.local_belongs(fmatch, exact=True, escape=False)
                     # attempt shebang correction be probing PATH for basename matchers
@@ -893,7 +900,7 @@ class Source(object):
                         if hmatch:
                             match = database.local_belongs(hmatch, exact=True, escape=False)
                             if match:
-                                misc.file_substitute('(?:\\s|^)#!(?:\\s)?(/usr(?:/local)?)?/bin/(\\S)+', '#!' + hmatch, sfile)
+                                misc.file_substitute('(?:\\n|^)' + omatch[0].strip(), '#!' + hmatch, sfile)
                                 message.sub_debug('Successfuly corrected', fmatch)
                     if match and len(match) > 1:
                         message.sub_warning('Multiple providers for %s' % fmatch, match)

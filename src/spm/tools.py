@@ -29,7 +29,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.1.0 (ac1b8c9)"
+app_version = "1.1.0 (2d5da7d)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -111,10 +111,10 @@ class Check(object):
                     or smime == 'text/x-lua' or smime == 'text/x-tcl' \
                     or smime == 'text/x-awk' or smime == 'text/x-gawk':
                     # https://en.wikipedia.org/wiki/Comparison_of_command_shells
-                    bang_regexp = '^#!(?: )?(?:/usr(?:/local)?)?/(?:s)?bin/(?:env )?'
+                    bang_regexp = '(?:\\n|^)#!(?:(?: )+)?(?:/.*)+(?:(?: )+)?'
                     bang_regexp += '(?:sh|bash|dash|ksh|csh|tcsh|tclsh|scsh|fish'
-                    bang_regexp += '|zsh|ash|python|perl|php|ruby|lua|wish|(?:g)?awk'
-                    bang_regexp += '(?:(?:\\d(?:.)?)+)?)(?:\\s|$)'
+                    bang_regexp += '|zsh|ash|python|perl|php|ruby|lua|wish|(?:g)?awk)'
+                    bang_regexp += '(?:(?:\\d(?:.)?)+)?(?:\\s|$)'
                     fmatch = misc.file_search(bang_regexp, sfile, exact=False, escape=False)
                     if fmatch:
                         fmatch = fmatch[0].replace('#!', '').strip().split()[0]
@@ -404,10 +404,10 @@ class Lint(object):
                             or smime == 'text/x-lua' or smime == 'text/x-tcl' \
                             or smime == 'text/x-awk' or smime == 'text/x-gawk':
                             # https://en.wikipedia.org/wiki/Comparison_of_command_shells
-                            bang_regexp = '^#!(?: )?(?:/usr(?:/local)?)?/(?:s)?bin/(?:env )?'
+                            bang_regexp = '(?:\\n|^)#!(?:(?: )+)?(?:/.*)+(?:(?: )+)?'
                             bang_regexp += '(?:sh|bash|dash|ksh|csh|tcsh|tclsh|scsh|fish'
-                            bang_regexp += '|zsh|ash|python|perl|php|ruby|lua|wish|(?:g)?awk'
-                            bang_regexp += '(?:(?:\\d(?:.)?)+)?)(?:\\s|$)'
+                            bang_regexp += '|zsh|ash|python|perl|php|ruby|lua|wish|(?:g)?awk)'
+                            bang_regexp += '(?:(?:\\d(?:.)?)+)?(?:\\s|$)'
                             match = misc.file_search(bang_regexp, sfile, exact=False, escape=False)
                             if match:
                                 match = match[0].replace('#!', '').strip().split()[0]
