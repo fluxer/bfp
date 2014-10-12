@@ -877,9 +877,9 @@ class Source(object):
                 or smime == 'text/x-awk' or smime == 'text/x-gawk':
                 # https://en.wikipedia.org/wiki/Comparison_of_command_shells
                 bang_regexp = '^#!(?: )?(?:/usr(?:/local)?)?/(?:s)?bin/(?:env )?'
-                bang_regexp += '(?:sh|bash|dash|ksh|csh|tcsh|tclsh|scsh'
-                bang_regexp += '|fish|zsh|ash|python|python2|python3|perl'
-                bang_regexp += '|php|ruby|lua|wish|awk|gawk)(?:\\s|$)'
+                bang_regexp += '(?:sh|bash|dash|ksh|csh|tcsh|tclsh|scsh|fish'
+                bang_regexp += '|zsh|ash|python|perl|php|ruby|lua|wish|(?:g)?awk)'
+                bang_regexp += '(?:\\d(?:.)?)+?(?:\\s|$)'
                 omatch = misc.file_search(bang_regexp, sfile, exact=False, escape=False)
                 if omatch:
                     fmatch = omatch[0].replace('#!', '').strip().split()[0]

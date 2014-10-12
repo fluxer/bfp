@@ -112,9 +112,9 @@ class Check(object):
                     or smime == 'text/x-awk' or smime == 'text/x-gawk':
                     # https://en.wikipedia.org/wiki/Comparison_of_command_shells
                     bang_regexp = '^#!(?: )?(?:/usr(?:/local)?)?/(?:s)?bin/(?:env )?'
-                    bang_regexp += '(?:sh|bash|dash|ksh|csh|tcsh|tclsh|scsh'
-                    bang_regexp += '|fish|zsh|ash|python|python2|python3|perl'
-                    bang_regexp += '|php|ruby|lua|wish|awk|gawk)(?:\\s|$)'
+                    bang_regexp += '(?:sh|bash|dash|ksh|csh|tcsh|tclsh|scsh|fish'
+                    bang_regexp += '|zsh|ash|python|perl|php|ruby|lua|wish|(?:g)?awk)'
+                    bang_regexp += '(?:\\d(?:.)?)+?(?:\\s|$)'
                     fmatch = misc.file_search(bang_regexp, sfile, exact=False, escape=False)
                     if fmatch:
                         fmatch = fmatch[0].replace('#!', '').strip().split()[0]
@@ -405,9 +405,9 @@ class Lint(object):
                             or smime == 'text/x-awk' or smime == 'text/x-gawk':
                             # https://en.wikipedia.org/wiki/Comparison_of_command_shells
                             bang_regexp = '^#!(?: )?(?:/usr(?:/local)?)?/(?:s)?bin/(?:env )?'
-                            bang_regexp += '(?:sh|bash|dash|ksh|csh|tcsh|tclsh|scsh'
-                            bang_regexp += '|fish|zsh|ash|python|python2|python3|perl'
-                            bang_regexp += '|php|ruby|lua|wish|awk|gawk)(?:\\s|$)'
+                            bang_regexp += '(?:sh|bash|dash|ksh|csh|tcsh|tclsh|scsh|fish'
+                            bang_regexp += '|zsh|ash|python|perl|php|ruby|lua|wish|(?:g)?awk)'
+                            bang_regexp += '(?:\\d(?:.)?)+?(?:\\s|$)'
                             match = misc.file_search(bang_regexp, sfile, exact=False, escape=False)
                             if match:
                                 match = match[0].replace('#!', '').strip().split()[0]
