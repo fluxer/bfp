@@ -876,7 +876,7 @@ class Source(object):
                 or smime == 'text/x-lua' or smime == 'text/x-tcl' \
                 or smime == 'text/x-awk' or smime == 'text/x-gawk':
                 # https://en.wikipedia.org/wiki/Comparison_of_command_shells
-                bang_regexp = '(?:\\n|^)#!(?:(?: )+)?(?:/.*)+(?:(?: )+)?'
+                bang_regexp = '^#!(?:(?: )+)?(?:/.*)+(?:(?: )+)?'
                 bang_regexp += '(?:sh|bash|dash|ksh|csh|tcsh|tclsh|scsh|fish'
                 bang_regexp += '|zsh|ash|python|perl|php|ruby|lua|wish|(?:g)?awk)'
                 bang_regexp += '(?:(?:\\d(?:.)?)+)?(?:\\s|$)'
@@ -900,8 +900,8 @@ class Source(object):
                         if hmatch:
                             match = database.local_belongs(hmatch, exact=True, escape=False)
                             if match:
-                                misc.file_substitute('(\\n|^)' + omatch[0].strip(), \
-                                    '\g<1>#!' + hmatch, sfile)
+                                misc.file_substitute('^' + omatch[0].strip(), \
+                                    '#!' + hmatch, sfile)
                                 message.sub_debug('Successfuly corrected', fmatch)
                     if match and len(match) > 1:
                         message.sub_warning('Multiple providers for %s' % fmatch, match)
