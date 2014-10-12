@@ -900,7 +900,8 @@ class Source(object):
                         if hmatch:
                             match = database.local_belongs(hmatch, exact=True, escape=False)
                             if match:
-                                misc.file_substitute('(?:\\n|^)' + omatch[0].strip(), '#!' + hmatch, sfile)
+                                misc.file_substitute('(\\n|^)' + omatch[0].strip(), \
+                                    '\g<1>#!' + hmatch, sfile)
                                 message.sub_debug('Successfuly corrected', fmatch)
                     if match and len(match) > 1:
                         message.sub_warning('Multiple providers for %s' % fmatch, match)
