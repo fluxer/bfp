@@ -674,7 +674,8 @@ try:
             setattr(namespace, self.dest, values)
 
     parser = argparse.ArgumentParser(prog='spm-tools', \
-        description='Source Package Manager Tools')
+        description='Source Package Manager Tools', \
+        epilog='NOTE: Some features are available only to the root user.')
     subparsers = parser.add_subparsers(dest='mode')
 
     if EUID == 0:
