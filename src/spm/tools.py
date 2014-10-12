@@ -29,7 +29,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.1.0 (91be49e)"
+app_version = "1.1.0 (fc0e891)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -111,7 +111,7 @@ class Check(object):
                     or smime == 'text/x-lua' or smime == 'text/x-tcl' \
                     or smime == 'text/x-awk' or smime == 'text/x-gawk':
                     # https://en.wikipedia.org/wiki/Comparison_of_command_shells
-                    bang_regexp = '^#!(?: )?(?:/usr)?/(?:s)?bin/(?:env )?'
+                    bang_regexp = '^#!(?: )?(?:/usr(?:/local)?)?/(?:s)?bin/(?:env )?'
                     bang_regexp += '(?:sh|bash|dash|ksh|csh|tcsh|tclsh|scsh'
                     bang_regexp += '|fish|zsh|ash|python|python2|python3|perl'
                     bang_regexp += '|php|ruby|lua|wish|awk|gawk)(?:\\s|$)'
@@ -404,7 +404,7 @@ class Lint(object):
                             or smime == 'text/x-lua' or smime == 'text/x-tcl' \
                             or smime == 'text/x-awk' or smime == 'text/x-gawk':
                             # https://en.wikipedia.org/wiki/Comparison_of_command_shells
-                            bang_regexp = '^#!(?: )?(?:/usr)?/(?:s)?bin/(?:env )?'
+                            bang_regexp = '^#!(?: )?(?:/usr(?:/local)?)?/(?:s)?bin/(?:env )?'
                             bang_regexp += '(?:sh|bash|dash|ksh|csh|tcsh|tclsh|scsh'
                             bang_regexp += '|fish|zsh|ash|python|python2|python3|perl'
                             bang_regexp += '|php|ruby|lua|wish|awk|gawk)(?:\\s|$)'

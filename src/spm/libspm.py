@@ -876,7 +876,7 @@ class Source(object):
                 or smime == 'text/x-lua' or smime == 'text/x-tcl' \
                 or smime == 'text/x-awk' or smime == 'text/x-gawk':
                 # https://en.wikipedia.org/wiki/Comparison_of_command_shells
-                bang_regexp = '^#!(?: )?(?:/usr)?/(?:s)?bin/(?:env )?'
+                bang_regexp = '^#!(?: )?(?:/usr(?:/local)?)?/(?:s)?bin/(?:env )?'
                 bang_regexp += '(?:sh|bash|dash|ksh|csh|tcsh|tclsh|scsh'
                 bang_regexp += '|fish|zsh|ash|python|python2|python3|perl'
                 bang_regexp += '|php|ruby|lua|wish|awk|gawk)(?:\\s|$)'
