@@ -29,7 +29,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.1.0 (fc0e891)"
+app_version = "1.1.0 (ac1b8c9)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -113,8 +113,8 @@ class Check(object):
                     # https://en.wikipedia.org/wiki/Comparison_of_command_shells
                     bang_regexp = '^#!(?: )?(?:/usr(?:/local)?)?/(?:s)?bin/(?:env )?'
                     bang_regexp += '(?:sh|bash|dash|ksh|csh|tcsh|tclsh|scsh|fish'
-                    bang_regexp += '|zsh|ash|python|perl|php|ruby|lua|wish|(?:g)?awk)'
-                    bang_regexp += '(?:\\d(?:.)?)+?(?:\\s|$)'
+                    bang_regexp += '|zsh|ash|python|perl|php|ruby|lua|wish|(?:g)?awk'
+                    bang_regexp += '(?:(?:\\d(?:.)?)+)?)(?:\\s|$)'
                     fmatch = misc.file_search(bang_regexp, sfile, exact=False, escape=False)
                     if fmatch:
                         fmatch = fmatch[0].replace('#!', '').strip().split()[0]
@@ -406,8 +406,8 @@ class Lint(object):
                             # https://en.wikipedia.org/wiki/Comparison_of_command_shells
                             bang_regexp = '^#!(?: )?(?:/usr(?:/local)?)?/(?:s)?bin/(?:env )?'
                             bang_regexp += '(?:sh|bash|dash|ksh|csh|tcsh|tclsh|scsh|fish'
-                            bang_regexp += '|zsh|ash|python|perl|php|ruby|lua|wish|(?:g)?awk)'
-                            bang_regexp += '(?:\\d(?:.)?)+?(?:\\s|$)'
+                            bang_regexp += '|zsh|ash|python|perl|php|ruby|lua|wish|(?:g)?awk'
+                            bang_regexp += '(?:(?:\\d(?:.)?)+)?)(?:\\s|$)'
                             match = misc.file_search(bang_regexp, sfile, exact=False, escape=False)
                             if match:
                                 match = match[0].replace('#!', '').strip().split()[0]
@@ -861,7 +861,7 @@ try:
         message.sub_info('EXECUTABLE', ARGS.executable)
         message.sub_info('PATH', ARGS.path)
         message.sub_info('SHEBANG', ARGS.shebang)
-        message.sub_info('TARGETS', ARGS.path)
+        message.sub_info('TARGETS', ARGS.TARGETS)
         message.info('Poking locals...')
 
         m = Lint(ARGS.TARGETS, ARGS.man, ARGS.udev, ARGS.symlink, ARGS.doc, \
