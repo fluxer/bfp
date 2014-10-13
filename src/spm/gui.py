@@ -255,7 +255,7 @@ def Install():
         return
 
     m = libspm.Binary([targets], do_merge=True, do_depends=True, \
-        do_reverse=True, do_update=False)
+        do_reverse=False, do_update=False)
     worker = Worker(app, m.main)
     worker.finished.connect(EnableWidgets)
     worker.finished.connect(RefreshWidgets)
