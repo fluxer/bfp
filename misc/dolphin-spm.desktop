@@ -4,7 +4,7 @@ Icon=spm-gui
 Type=Service
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin
 MimeType=text/plain;
-Actions=BuildSource;InstallBinary;
+Actions=BuildSource;MergeBinary;
 X-KDE-AuthorizeAction=shell_access
 
 [Desktop Action BuildSource]
@@ -14,8 +14,8 @@ TryExec=konsole
 Exec=kdesu konsole --hold -e spm source -a %d
 Icon=package-x-generic
 
-[Desktop Action InstallBinary]
-Name=Install binary
+[Desktop Action MergeBinary]
+Name=Merge binary
 MimeType=text/plain;
 TryExec=konsole
 Exec=kdesu konsole --hold -e spm binary -mD %d

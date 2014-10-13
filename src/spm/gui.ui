@@ -96,12 +96,12 @@
         </widget>
        </item>
        <item>
-        <widget class="QPushButton" name="installButton">
+        <widget class="QPushButton" name="mergeButton">
          <property name="toolTip">
-          <string>Install selected target from pre-build tarball</string>
+          <string>Merge selected target from pre-build tarball</string>
          </property>
          <property name="text">
-          <string>Install</string>
+          <string>Merge</string>
          </property>
         </widget>
        </item>

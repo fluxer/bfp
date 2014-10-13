@@ -59,7 +59,7 @@ def MessageCritical(msg):
 def DisableWidgets():
     ui.updateButton.setEnabled(False)
     ui.buildButton.setEnabled(False)
-    ui.installButton.setEnabled(False)
+    ui.mergeButton.setEnabled(False)
     ui.removeButton.setEnabled(False)
     ui.syncButton.setEnabled(False)
     ui.progressBar.setRange(0, 0)
@@ -68,7 +68,7 @@ def DisableWidgets():
 def EnableWidgets():
     ui.updateButton.setEnabled(True)
     ui.buildButton.setEnabled(True)
-    ui.installButton.setEnabled(True)
+    ui.mergeButton.setEnabled(True)
     ui.removeButton.setEnabled(True)
     ui.syncButton.setEnabled(True)
     ui.progressBar.setRange(0, 1)
@@ -366,7 +366,7 @@ RefreshSearch()
 
 ui.updateButton.clicked.connect(Update)
 ui.buildButton.clicked.connect(Build)
-ui.installButton.clicked.connect(Install)
+ui.mergeButton.clicked.connect(Install)
 ui.removeButton.clicked.connect(Remove)
 ui.syncButton.clicked.connect(SyncRepos)
 ui.CacheDirEdit.textChanged.connect(ChangeSettings)
