@@ -29,13 +29,25 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="searchEdit"/>
+        <widget class="QLineEdit" name="searchEdit">
+         <property name="toolTip">
+          <string>Search for match in targets. Searches only in the table list bellow</string>
+         </property>
+        </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="searchBox"/>
+        <widget class="QComboBox" name="searchBox">
+         <property name="toolTip">
+          <string>Filter search by metadata field</string>
+         </property>
+        </widget>
        </item>
        <item>
-        <widget class="QComboBox" name="filtersBox"/>
+        <widget class="QComboBox" name="filtersBox">
+         <property name="toolTip">
+          <string>Filter search by group or alias</string>
+         </property>
+        </widget>
        </item>
       </layout>
      </widget>
@@ -55,6 +67,9 @@
       <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <widget class="QPushButton" name="syncButton">
+         <property name="toolTip">
+          <string>Sync repositories</string>
+         </property>
          <property name="text">
           <string>Sync</string>
          </property>
@@ -62,6 +77,9 @@
        </item>
        <item>
         <widget class="QPushButton" name="updateButton">
+         <property name="toolTip">
+          <string>Update the system</string>
+         </property>
          <property name="text">
           <string>Update</string>
          </property>
@@ -69,13 +87,29 @@
        </item>
        <item>
         <widget class="QPushButton" name="buildButton">
+         <property name="toolTip">
+          <string>Build selected target from source</string>
+         </property>
          <property name="text">
           <string>Build</string>
          </property>
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="installButton">
+         <property name="toolTip">
+          <string>Install selected target from pre-build tarball</string>
+         </property>
+         <property name="text">
+          <string>Install</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <widget class="QPushButton" name="removeButton">
+         <property name="toolTip">
+          <string>Remove selected target</string>
+         </property>
          <property name="text">
           <string>Remove</string>
          </property>
@@ -89,6 +123,9 @@
     </item>
     <item row="2" column="0" colspan="2">
      <widget class="QTabWidget" name="tabWidget">
+      <property name="toolTip">
+       <string/>
+      </property>
       <property name="currentIndex">
        <number>0</number>
       </property>
@@ -99,6 +136,9 @@
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="0" column="0">
          <widget class="QTextEdit" name="metadataText">
+          <property name="toolTip">
+           <string>Selected target meta information</string>
+          </property>
           <property name="readOnly">
            <bool>true</bool>
           </property>
@@ -113,6 +153,9 @@
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="0" column="0">
          <widget class="QPlainTextEdit" name="footprintText">
+          <property name="toolTip">
+           <string>Selected target files, empty if target is not installed</string>
+          </property>
           <property name="readOnly">
            <bool>true</bool>
           </property>
@@ -127,6 +170,9 @@
        <layout class="QGridLayout" name="gridLayout_4">
         <item row="0" column="0">
          <widget class="QTextEdit" name="repositoriesText">
+          <property name="toolTip">
+           <string>Links to Git repositories that hold targets build recipes</string>
+          </property>
           <property name="readOnly">
            <bool>false</bool>
           </property>
@@ -141,6 +187,9 @@
        <layout class="QGridLayout" name="gridLayout_5">
         <item row="0" column="0">
          <widget class="QTextEdit" name="mirrorsText">
+          <property name="toolTip">
+           <string>Links to servers holding distribution files and tarballs</string>
+          </property>
           <property name="readOnly">
            <bool>false</bool>
           </property>
@@ -155,6 +204,9 @@
        <layout class="QGridLayout" name="gridLayout_6">
         <item row="2" column="0" colspan="2">
          <widget class="QCheckBox" name="UseMirrorsBox">
+          <property name="toolTip">
+           <string>Set whether to use mirrors for distfiles</string>
+          </property>
           <property name="text">
            <string>Use mirrors</string>
           </property>
@@ -162,13 +214,20 @@
         </item>
         <item row="2" column="2" colspan="2">
          <widget class="QCheckBox" name="ExternalFetcherBox">
+          <property name="toolTip">
+           <string>Set whether to use external utilities to fetch URLs</string>
+          </property>
           <property name="text">
            <string>Use external fetcher</string>
           </property>
          </widget>
         </item>
         <item row="1" column="0">
-         <widget class="QLineEdit" name="IgnoreTargetsEdit"/>
+         <widget class="QLineEdit" name="IgnoreTargetsEdit">
+          <property name="toolTip">
+           <string>Ignored targets, usefull to prevent target upgrades</string>
+          </property>
+         </widget>
         </item>
         <item row="1" column="1">
          <widget class="QLabel" name="label_2">
@@ -182,6 +241,10 @@
         </item>
         <item row="4" column="0" colspan="2">
          <widget class="QCheckBox" name="StripSharedBox">
+          <property name="toolTip">
+           <string>Set whether to strip shared libraries symbols, disable
+it if you need to debug applications via backtrace</string>
+          </property>
           <property name="text">
            <string>Strip shared libraries</string>
           </property>
@@ -189,6 +252,10 @@
         </item>
         <item row="7" column="0" colspan="2">
          <widget class="QCheckBox" name="ScriptsBox">
+          <property name="toolTip">
+           <string>Set whether to execute pre/post action scripts, do not
+disable it unless you know what you are doing!</string>
+          </property>
           <property name="text">
            <string>Execute pre/post scripts</string>
           </property>
@@ -205,10 +272,17 @@
          </widget>
         </item>
         <item row="1" column="2">
-         <widget class="QSpinBox" name="ConnectionTimeoutBox"/>
+         <widget class="QSpinBox" name="ConnectionTimeoutBox">
+          <property name="toolTip">
+           <string>Timeout in seconds used when fetching and pinging URLs</string>
+          </property>
+         </widget>
         </item>
         <item row="0" column="1">
          <widget class="QPushButton" name="CacheDirButton">
+          <property name="toolTip">
+           <string>Change caches directory</string>
+          </property>
           <property name="text">
            <string>Change</string>
           </property>
@@ -216,16 +290,27 @@
         </item>
         <item row="0" column="3">
          <widget class="QPushButton" name="BuildDirButton">
+          <property name="toolTip">
+           <string>Change build directory</string>
+          </property>
           <property name="text">
            <string>Change</string>
           </property>
          </widget>
         </item>
         <item row="0" column="2">
-         <widget class="QLineEdit" name="BuildDirEdit"/>
+         <widget class="QLineEdit" name="BuildDirEdit">
+          <property name="toolTip">
+           <string>Build directory</string>
+          </property>
+         </widget>
         </item>
         <item row="3" column="2" colspan="2">
          <widget class="QCheckBox" name="StripBinariesBox">
+          <property name="toolTip">
+           <string>Set whether to strip binaries symbols, disable it if you
+need to debug applications via backtrace</string>
+          </property>
           <property name="text">
            <string>Strip binaries</string>
           </property>
@@ -233,6 +318,11 @@
         </item>
         <item row="5" column="0" colspan="2">
          <widget class="QCheckBox" name="StripRPATHBox">
+          <property name="toolTip">
+           <string>Set whether to strip RPATH (runtime path) from binaries
+and libraries, it is recommended to keep it enabled but
+some applications may require it</string>
+          </property>
           <property name="text">
            <string>Strip insecure RPATH</string>
           </property>
@@ -240,6 +330,10 @@
         </item>
         <item row="6" column="0" colspan="2">
          <widget class="QCheckBox" name="PythonCompileBox">
+          <property name="toolTip">
+           <string>Set whether to byte-compile Python module files, do
+not disable it unless you know what you are doing!</string>
+          </property>
           <property name="text">
            <string>Byte-compile Python modules</string>
           </property>
@@ -247,6 +341,10 @@
         </item>
         <item row="4" column="2" colspan="2">
          <widget class="QCheckBox" name="StripStaticBox">
+          <property name="toolTip">
+           <string>Set whether to strip static libraries symbols, disable it
+if you need to debug applications via backtrace</string>
+          </property>
           <property name="text">
            <string>Strip static libraries</string>
           </property>
@@ -254,6 +352,11 @@
         </item>
         <item row="6" column="2" colspan="2">
          <widget class="QCheckBox" name="ConflictsBox">
+          <property name="toolTip">
+           <string>Set whether to check for conflicts in targets when
+merging them, do not disable unless it you know what
+you are doing!</string>
+          </property>
           <property name="text">
            <string>Check for conflicts</string>
           </property>
@@ -261,6 +364,11 @@
         </item>
         <item row="5" column="2" colspan="2">
          <widget class="QCheckBox" name="IgnoreMissingBox">
+          <property name="toolTip">
+           <string>Set whether to ignore missing runtime dependencies,
+usefull to disable if false positives are detected during
+the installation procedure</string>
+          </property>
           <property name="text">
            <string>Ignore missing dependencies</string>
           </property>
@@ -268,16 +376,28 @@
         </item>
         <item row="7" column="2" colspan="2">
          <widget class="QCheckBox" name="TriggersBox">
+          <property name="toolTip">
+           <string>Set whether to execute automatic triggers for common
+system maintenance actions, do not disable it unless
+you know what you are doing!</string>
+          </property>
           <property name="text">
            <string>Execute automatic triggers</string>
           </property>
          </widget>
         </item>
         <item row="0" column="0">
-         <widget class="QLineEdit" name="CacheDirEdit"/>
+         <widget class="QLineEdit" name="CacheDirEdit">
+          <property name="toolTip">
+           <string>Caches directory</string>
+          </property>
+         </widget>
         </item>
         <item row="3" column="0" colspan="2">
          <widget class="QCheckBox" name="CompressManBox">
+          <property name="toolTip">
+           <string>Set whether to compress manual pages</string>
+          </property>
           <property name="text">
            <string>Compress manual pages</string>
           </property>
@@ -285,6 +405,11 @@
         </item>
         <item row="8" column="0" colspan="2">
          <widget class="QCheckBox" name="BackupBox">
+          <property name="toolTip">
+           <string>Set whether to backup files whne merging targets, it
+is recommended to keep it enabled to preserve user
+changes as a backup of the original when needed</string>
+          </property>
           <property name="text">
            <string>Backup essential files</string>
           </property>

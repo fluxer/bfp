@@ -59,6 +59,7 @@ def MessageCritical(msg):
 def DisableWidgets():
     ui.updateButton.setEnabled(False)
     ui.buildButton.setEnabled(False)
+    ui.installButton.setEnabled(False)
     ui.removeButton.setEnabled(False)
     ui.syncButton.setEnabled(False)
     ui.progressBar.setRange(0, 0)
@@ -67,6 +68,7 @@ def DisableWidgets():
 def EnableWidgets():
     ui.updateButton.setEnabled(True)
     ui.buildButton.setEnabled(True)
+    ui.installButton.setEnabled(True)
     ui.removeButton.setEnabled(True)
     ui.syncButton.setEnabled(True)
     ui.progressBar.setRange(0, 1)
@@ -242,6 +244,26 @@ def Build():
     DisableWidgets()
     worker.start()
 
+def Install():
+    targets = str(ui.targetsView.currentItem().text())
+    install = database.remote_mdepends(targets)
+    install.append(targets)
+    answer = MessageQuestion('The following targets will be install:\n\n',
+        misc.string_convert(install), \
+        '\n\nAre you sure you want to continue?')
+    if not answer == QtGui.QMessageBox.Yes:
+        return
+
+    m = libspm.Binary([targets], do_merge=True, do_depends=True, \
+        do_reverse=True, do_update=False)
+    worker = Worker(app, m.main)
+    worker.finished.connect(EnableWidgets)
+    worker.finished.connect(RefreshWidgets)
+    worker.finished.connect(RefreshTargets)
+    app.connect(worker, QtCore.SIGNAL('failed'), MessageCritical)
+    DisableWidgets()
+    worker.start()
+
 def Remove():
     targets = str(ui.targetsView.currentItem().text())
     remove = database.local_rdepends(targets)
@@ -344,6 +366,7 @@ RefreshSearch()
 
 ui.updateButton.clicked.connect(Update)
 ui.buildButton.clicked.connect(Build)
+ui.installButton.clicked.connect(Install)
 ui.removeButton.clicked.connect(Remove)
 ui.syncButton.clicked.connect(SyncRepos)
 ui.CacheDirEdit.textChanged.connect(ChangeSettings)

@@ -1141,7 +1141,7 @@ class Source(object):
                 message.sub_critical('Invalid target', target)
                 sys.exit(2)
 
-            # set target properties'
+            # set target properties
             self.target = target
             self.target_name = os.path.basename(target)
             self.target_dir = database.remote_search(target)
@@ -1347,6 +1347,7 @@ class Binary(Source):
         if not internet:
             message.sub_warning('Internet connection is down')
         else:
+            src_url = None
             for mirror in MIRRORS:
                 url = mirror + '/tarballs/' + src_base
                 message.sub_debug('Checking mirror', mirror)
@@ -1354,14 +1355,14 @@ class Binary(Source):
                     src_url = url
                     break
 
-        if os.path.isfile(local_file) and internet:
+        if os.path.isfile(local_file) and internet and src_url:
             message.sub_debug('Checking', local_file)
             if misc.fetch_check(src_url, local_file):
                 message.sub_debug('Already fetched', src_url)
             else:
                 message.sub_warning('Re-fetching', src_url)
                 misc.fetch(src_url, local_file)
-        elif internet:
+        elif internet and src_url:
             message.sub_debug('Fetching', src_url)
             misc.fetch(src_url, local_file)
 
@@ -1381,7 +1382,7 @@ class Binary(Source):
                 message.sub_critical('Invalid target', target)
                 sys.exit(2)
 
-            # set target properties'
+            # set target properties
             self.target = target
             self.target_name = os.path.basename(target)
             self.target_dir = database.remote_search(target)
