@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>476</width>
-    <height>536</height>
+    <height>551</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -31,7 +31,7 @@
        <item>
         <widget class="QLineEdit" name="searchEdit">
          <property name="toolTip">
-          <string>Search for match in targets. Searches only in the table list bellow</string>
+          <string>Search for match in targets, searches only in the table list bellow</string>
          </property>
         </widget>
        </item>

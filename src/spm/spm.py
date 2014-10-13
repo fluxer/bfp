@@ -16,7 +16,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.1.0 (b423bc0)"
+app_version = "1.1.0 (d71dbe9)"
 
 try:
     import libmessage
@@ -461,7 +461,6 @@ try:
 
         message.info('Runtime information')
         message.sub_info('CACHE_DIR', libspm.CACHE_DIR)
-        message.sub_info('BUILD_DIR', libspm.BUILD_DIR)
         message.sub_info('ROOT_DIR', libspm.ROOT_DIR)
         message.sub_info('IGNORE', libspm.IGNORE)
         message.sub_info('OFFLINE', libspm.OFFLINE)
