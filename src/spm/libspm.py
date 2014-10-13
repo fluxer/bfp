@@ -126,6 +126,7 @@ else:
 misc.OFFLINE = OFFLINE
 misc.TIMEOUT = TIMEOUT
 misc.EXTERNAL = EXTERNAL
+misc.ROOT_DIR = ROOT_DIR
 database.ROOT_DIR = ROOT_DIR
 database.CACHE_DIR = CACHE_DIR
 database.LOCAL_DIR = LOCAL_DIR
@@ -148,6 +149,7 @@ class Local(object):
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
         misc.EXTERNAL = EXTERNAL
+        misc.ROOT_DIR = ROOT_DIR
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
@@ -225,6 +227,7 @@ class Remote(object):
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
         misc.EXTERNAL = EXTERNAL
+        misc.ROOT_DIR = ROOT_DIR
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
@@ -309,6 +312,7 @@ class Repo(object):
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
         misc.EXTERNAL = EXTERNAL
+        misc.ROOT_DIR = ROOT_DIR
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
@@ -436,6 +440,7 @@ class Source(object):
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
         misc.EXTERNAL = EXTERNAL
+        misc.ROOT_DIR = ROOT_DIR
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
@@ -1426,6 +1431,7 @@ class Who(object):
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
         misc.EXTERNAL = EXTERNAL
+        misc.ROOT_DIR = ROOT_DIR
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
