@@ -16,7 +16,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.1.0 (fcbe31f)"
+app_version = "1.1.0 (8ca5dac)"
 
 try:
     import libmessage
@@ -257,6 +257,21 @@ try:
         source_parser.add_argument('TARGETS', nargs='+', type=str, \
             help='Targets to apply actions on')
 
+    if EUID == 0:
+        binary_parser = subparsers.add_parser('binary')
+        binary_parser.add_argument('-m', '--merge', action='store_true', \
+            help='Merge compiled files of target to system')
+        binary_parser.add_argument('-r', '--remove', action='store_true', \
+            help='Remove compiled files of target from system')
+        binary_parser.add_argument('-D', '--depends', action='store_true', \
+            help='Consider dependency targets')
+        binary_parser.add_argument('-R', '--reverse', action='store_true', \
+            help='Consider reverse dependency targets')
+        binary_parser.add_argument('-u', '--update', action='store_true', \
+            help='Apply actions only if update is available')
+        binary_parser.add_argument('TARGETS', nargs='+', type=str, \
+            help='Targets to apply actions on')
+
     local_parser = subparsers.add_parser('local')
     local_parser.add_argument('-n', '--name', action='store_true', \
         help='Show target name')
@@ -432,6 +447,36 @@ try:
                 ARGS.remove, ARGS.depends, ARGS.reverse, ARGS.update)
         m.main()
 
+    elif ARGS.mode == 'binary':
+        if 'world' in ARGS.TARGETS:
+            position = ARGS.TARGETS.index('world')
+            ARGS.TARGETS[position:position+1] = \
+                database.local_all(basename=True)
+
+        for alias in database.remote_aliases():
+            if alias in ARGS.TARGETS:
+                position = ARGS.TARGETS.index(alias)
+                ARGS.TARGETS[position:position+1] = \
+                    database.remote_alias(alias)
+
+        message.info('Runtime information')
+        message.sub_info('CACHE_DIR', libspm.CACHE_DIR)
+        message.sub_info('BUILD_DIR', libspm.BUILD_DIR)
+        message.sub_info('ROOT_DIR', libspm.ROOT_DIR)
+        message.sub_info('IGNORE', libspm.IGNORE)
+        message.sub_info('OFFLINE', libspm.OFFLINE)
+        message.sub_info('MIRROR', libspm.MIRROR)
+        message.sub_info('TIMEOUT', libspm.TIMEOUT)
+        message.sub_info('EXTERNAL', libspm.EXTERNAL)
+        message.sub_info('CONFLICTS', libspm.CONFLICTS)
+        message.sub_info('BACKUP', libspm.BACKUP)
+        message.sub_info('SCRIPTS', libspm.SCRIPTS)
+        message.sub_info('TARGETS', ARGS.TARGETS)
+        message.info('Poking binaries...')
+        m = libspm.Binary(ARGS.TARGETS, ARGS.merge, \
+                ARGS.remove, ARGS.depends, ARGS.reverse, ARGS.update)
+        m.main()
+
     elif ARGS.mode == 'local':
         if not ARGS.plain:
             message.info('Runtime information')
@@ -491,7 +536,6 @@ except SystemExit:
     sys.exit(2)
 except Exception as detail:
     message.critical('Unexpected error', detail)
-    raise
     sys.exit(1)
 #finally:
 #    raise

@@ -693,7 +693,7 @@ class Source(object):
                     message.sub_warning('Internet connection is down')
                 elif self.mirror:
                     for mirror in MIRRORS:
-                        url = mirror + '/' + src_base
+                        url = mirror + '/distfiles/' + src_base
                         message.sub_debug('Checking mirror', mirror)
                         if misc.ping(url):
                             src_url = url
@@ -1301,6 +1301,120 @@ class Source(object):
             self.python_compile = PYTHON_COMPILE
             self.compress_man = COMPRESS_MAN
             self.ignore_missing = IGNORE_MISSING
+
+
+class Binary(Source):
+    ''' Class to handle binary tarballs '''
+    def __init__(self, targets, do_merge=False, do_remove=False, \
+        do_depends=False, do_reverse=False, do_update=False, autoremove=False):
+        super(Binary, self).__init__(Source)
+        self.targets = targets
+        self.do_merge = do_merge
+        self.do_remove = do_remove
+        self.do_depends = do_depends
+        self.do_reverse = do_reverse
+        self.do_update = do_update
+        self.autoremove = autoremove
+
+    def autobinary(self, targets, automake=False, autoremove=False):
+        ''' Handle targets build/remove without affecting current object '''
+        if automake:
+            obj = Binary(targets, do_merge=True, do_depends=True, \
+                do_reverse=self.do_reverse, do_update=False)
+        else:
+            obj = Binary(targets, do_reverse=self.do_reverse, \
+                autoremove=autoremove)
+        obj.main()
+
+    def prepare(self):
+        ''' Prepare target tarballs '''
+        message.sub_info('Checking dependencies')
+        missing_dependencies = database.remote_mdepends(self.target)
+
+        if missing_dependencies and self.do_depends:
+            message.sub_info('Fetching dependencies', missing_dependencies)
+            self.autobinary(missing_dependencies, automake=True)
+            message.sub_info('Resuming %s preparations at' % \
+                os.path.basename(self.target), datetime.today())
+        elif missing_dependencies:
+            message.sub_warning('Dependencies missing', missing_dependencies)
+
+        message.sub_info('Preparing tarballs')
+        src_base = self.target_name + '_' + self.target_version + '.tar.bz2'
+        local_file = self.target_tarball
+        internet = misc.ping()
+
+        if not internet:
+            message.sub_warning('Internet connection is down')
+        else:
+            for mirror in MIRRORS:
+                url = mirror + '/tarballs/' + src_base
+                message.sub_debug('Checking mirror', mirror)
+                if misc.ping(url):
+                    src_url = url
+                    break
+
+        if os.path.isfile(local_file) and internet:
+            message.sub_debug('Checking', local_file)
+            if misc.fetch_check(src_url, local_file):
+                message.sub_debug('Already fetched', src_url)
+            else:
+                message.sub_warning('Re-fetching', src_url)
+                misc.fetch(src_url, local_file)
+        elif internet:
+            message.sub_debug('Fetching', src_url)
+            misc.fetch(src_url, local_file)
+
+    def main(self):
+        ''' Execute action for every target '''
+        for target in self.targets:
+            # make sure target is absolute path
+            if os.path.isdir(target):
+                target = os.path.abspath(target)
+
+            target_name = os.path.basename(target)
+            if target_name in IGNORE:
+                message.sub_warning('Ignoring target', target_name)
+                continue
+
+            if not database.remote_search(target):
+                message.sub_critical('Invalid target', target)
+                sys.exit(2)
+
+            # set target properties'
+            self.target = target
+            self.target_name = os.path.basename(target)
+            self.target_dir = database.remote_search(target)
+            self.srcbuild = os.path.join(self.target_dir, 'SRCBUILD')
+            self.source_dir = os.path.join(BUILD_DIR, self.target_name, 'source')
+            self.install_dir = os.path.join(BUILD_DIR, self.target_name, 'install')
+            self.target_version = database.remote_metadata(self.target_dir, 'version')
+            self.target_description = database.remote_metadata(self.target_dir, 'description')
+            self.target_depends = database.remote_metadata(self.target_dir, 'depends')
+            self.target_makedepends = database.remote_metadata(self.target_dir, 'makedepends')
+            self.target_sources = database.remote_metadata(self.target_dir, 'sources')
+            self.target_options = database.remote_metadata(self.target_dir, 'options')
+            self.target_backup = database.remote_metadata(self.target_dir, 'backup')
+            self.target_footprint = os.path.join('var/local/spm', self.target_name, 'footprint')
+            self.target_metadata = os.path.join('var/local/spm', self.target_name, 'metadata')
+            self.sources_dir = os.path.join(CACHE_DIR, 'sources', self.target_name)
+            self.target_tarball = os.path.join(CACHE_DIR, 'tarballs', \
+            self.target_name + '_' + self.target_version + '.tar.bz2')
+
+            if database.local_uptodate(self.target) and self.do_update:
+                message.sub_warning('Target is up-to-date', self.target)
+                continue
+
+            if self.do_merge:
+                message.sub_info('Starting %s preparations at' % \
+                    self.target_name, datetime.today())
+                self.prepare()
+                message.sub_info('Starting %s merge at' % self.target_name, datetime.today())
+                self.merge()
+
+            if self.do_remove or self.autoremove:
+                message.sub_info('Starting %s remove at' % self.target_name, datetime.today())
+                self.remove()
 
 
 class Who(object):
