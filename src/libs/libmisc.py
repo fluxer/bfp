@@ -427,6 +427,7 @@ class Misc(object):
 
         real_root = os.open('/', os.O_RDONLY)
         mount = self.whereis('mount')
+        umount = self.whereis('umount')
         try:
             for s in ('/proc', '/dev', '/sys'):
                 sdir = self.ROOT_DIR + s
@@ -443,7 +444,7 @@ class Misc(object):
             for s in ('/proc', '/dev', '/sys'):
                 sdir = self.ROOT_DIR + s
                 if os.path.ismount(sdir):
-                    self.system_command((mount, '-f', '-l', sdir))
+                    self.system_command((umount, '-f', '-l', sdir))
 
     def system_script(self, srcbuild, function):
         ''' Execute pre/post actions '''
