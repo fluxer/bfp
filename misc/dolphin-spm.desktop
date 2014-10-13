@@ -1,0 +1,22 @@
+[Desktop Entry]
+Version=1.0
+Icon=spm-gui
+Type=Service
+X-KDE-ServiceTypes=KonqPopupMenu/Plugin
+MimeType=text/plain;
+Actions=BuildSource;InstallBinary;
+X-KDE-AuthorizeAction=shell_access
+
+[Desktop Action BuildSource]
+Name=Build source
+MimeType=text/plain;
+TryExec=konsole
+Exec=kdesu konsole --hold -e spm source -a %d
+Icon=package-x-generic
+
+[Desktop Action InstallBinary]
+Name=Install binary
+MimeType=text/plain;
+TryExec=konsole
+Exec=kdesu konsole --hold -e spm binary -mD %d
+Icon=package-x-generic
