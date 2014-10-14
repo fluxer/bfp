@@ -1354,7 +1354,7 @@ class Binary(Source):
         else:
             src_url = None
             for mirror in MIRRORS:
-                url = mirror + '/tarballs/' + src_base
+                url = mirror + '/tarballs/' + os.uname()[4] + '/' + src_base
                 message.sub_debug('Checking mirror', mirror)
                 if misc.ping(url):
                     src_url = url
