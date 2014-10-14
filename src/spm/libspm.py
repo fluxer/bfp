@@ -547,7 +547,7 @@ class Source(object):
                 misc.system_trigger(gtk3_immodules + \
                     ' > /etc/gtk-3.0/gtk.immodules', shell=True)
                 gtk3_immodules = False
-            elif '/gdk-pixbuf' in spath and gio_querymodules:
+            elif '/gdk-pixbuf' in spath and gdk_pixbuf:
                 message.sub_info('Updating gdk pixbuffer loaders')
                 message.sub_debug(spath)
                 misc.system_trigger(gdk_pixbuf + \
