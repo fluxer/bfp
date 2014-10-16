@@ -212,8 +212,18 @@ def RefreshWidgets():
         ui.metadataText.append('Backup: ' + str(database.remote_metadata(target, 'backup')))
 
 def Update():
+    build = []
     targets = database.local_all(basename=True)
-    m = libspm.Source(targets, do_clean=True, do_prepare=True, \
+    for target in targets:
+        if not database.local_uptodate(target):
+            build.append(target)
+    answer = MessageQuestion('The following targets will be updated:\n\n',
+        misc.string_convert(build), \
+        '\n\nAre you sure you want to continue?')
+    if not answer == QtGui.QMessageBox.Yes:
+        return
+
+    m = libspm.Source(build, do_clean=True, do_prepare=True, \
         do_compile=True, do_check=False, do_install=True, do_merge=True, \
         do_remove=False, do_depends=True, do_reverse=True, do_update=True)
     worker = Worker(app, m.main)
