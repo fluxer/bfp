@@ -179,6 +179,10 @@ class Database(object):
 
     def local_uptodate(self, target):
         ''' Returns True if target is up-to-date and False otherwise '''
+        # check if target is installed at all first
+        if not self.local_installed(target):
+            return False
+
         # if remote target is passed and it's a directory not a base name
         # then the local target will be invalid and local_version will equal
         # None, thus we use the base name to find the local target version
