@@ -610,13 +610,13 @@ class Source(object):
                 message.sub_info('Installing info page', spath)
                 message.sub_debug(spath)
                 misc.system_trigger((install_info, spath, \
-                    sys.prefix + '/share/dir'))
+                    sys.prefix + '/share/info/dir'))
             elif 'share/info/' in spath and action == 'remove' and install_info:
                 # allowed to run multiple times
                 message.sub_info('Deleting info page', spath)
                 message.sub_debug(spath)
                 misc.system_trigger((install_info, '--delete', spath, \
-                    sys.prefix + '/share/dir'))
+                    sys.prefix + '/share/info/dir'))
 
     def remove_target_file(self, sfile):
         ''' Remove target file '''
