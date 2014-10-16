@@ -217,7 +217,7 @@ def Update():
     for target in targets:
         if not database.local_uptodate(target):
             build.append(target)
-    answer = MessageQuestion('The following targets will be updated:\n\n',
+    answer = MessageQuestion('The following targets will be updated:\n\n', \
         misc.string_convert(build), \
         '\n\nAre you sure you want to continue?')
     if not answer == QtGui.QMessageBox.Yes:
@@ -234,16 +234,18 @@ def Update():
     worker.start()
 
 def Build():
-    targets = str(ui.targetsView.currentItem().text())
-    build = database.remote_mdepends(targets)
-    build.append(targets)
-    answer = MessageQuestion('The following targets will be build:\n\n',
-        misc.string_convert(build), \
+    targets = []
+    for s in ui.targetsView.selectedItems():
+        item = str(s.text())
+        targets.extend(database.remote_mdepends(item))
+        targets.append(item)
+    answer = MessageQuestion('The following targets will be build:\n\n', \
+        misc.string_convert(targets), \
         '\n\nAre you sure you want to continue?')
     if not answer == QtGui.QMessageBox.Yes:
         return
 
-    m = libspm.Source([targets], do_clean=True, do_prepare=True, \
+    m = libspm.Source(targets, do_clean=True, do_prepare=True, \
         do_compile=True, do_check=False, do_install=True, do_merge=True, \
         do_remove=False, do_depends=True, do_reverse=True, do_update=False)
     worker = Worker(app, m.main)
@@ -255,16 +257,18 @@ def Build():
     worker.start()
 
 def Install():
-    targets = str(ui.targetsView.currentItem().text())
-    install = database.remote_mdepends(targets)
-    install.append(targets)
-    answer = MessageQuestion('The following targets will be install:\n\n',
-        misc.string_convert(install), \
+    targets = []
+    for s in ui.targetsView.selectedItems():
+        item = str(s.text())
+        targets.extend(database.remote_mdepends(item))
+        targets.append(item)
+    answer = MessageQuestion('The following targets will be install:\n\n', \
+        misc.string_convert(targets), \
         '\n\nAre you sure you want to continue?')
     if not answer == QtGui.QMessageBox.Yes:
         return
 
-    m = libspm.Binary([targets], do_merge=True, do_depends=True, \
+    m = libspm.Binary(targets, do_merge=True, do_depends=True, \
         do_reverse=False, do_update=False)
     worker = Worker(app, m.main)
     worker.finished.connect(EnableWidgets)
@@ -275,16 +279,18 @@ def Install():
     worker.start()
 
 def Remove():
-    targets = str(ui.targetsView.currentItem().text())
-    remove = database.local_rdepends(targets)
-    remove.append(targets)
-    answer = MessageQuestion('The following targets will be removed:\n\n',
-        misc.string_convert(remove), \
+    targets = []
+    for s in ui.targetsView.selectedItems():
+        item = str(s.text())
+        targets.extend(database.local_rdepends(item))
+        targets.append(item)
+    answer = MessageQuestion('The following targets will be removed:\n\n', \
+        misc.string_convert(targets), \
         '\n\nAre you sure you want to continue?')
     if not answer == QtGui.QMessageBox.Yes:
         return
 
-    m = libspm.Source([targets], do_clean=False, do_prepare=False, \
+    m = libspm.Source(targets, do_clean=False, do_prepare=False, \
         do_compile=False, do_check=False, do_install=False, do_merge=False, \
         do_remove=True, do_depends=False, do_reverse=True, do_update=False)
     worker = Worker(app, m.main)
