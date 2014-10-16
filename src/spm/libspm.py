@@ -605,17 +605,18 @@ class Source(object):
                 message.sub_debug(spath)
                 misc.system_trigger((icon_cache, '-q', '-t', '-i', '-f', sdir))
                 icon_cache = False
-            elif 'share/info' in spath and action == 'merge' and install_info:
+            elif 'share/info/' in spath and action == 'merge' and install_info:
                 # allowed to run multiple times
                 message.sub_info('Installing info page', spath)
                 message.sub_debug(spath)
-                misc.system_trigger((install_info, spath, sys.prefix + '/share/dir'))
-            elif 'share/info' in spath and action == 'remove' and install_info:
+                misc.system_trigger((install_info, spath, \
+                    sys.prefix + '/share/dir'))
+            elif 'share/info/' in spath and action == 'remove' and install_info:
                 # allowed to run multiple times
                 message.sub_info('Deleting info page', spath)
                 message.sub_debug(spath)
-                misc.system_trigger((install_info, '--delete', \
-                    spath, sys.prefix + '/share/dir'))
+                misc.system_trigger((install_info, '--delete', spath, \
+                    sys.prefix + '/share/dir'))
 
     def remove_target_file(self, sfile):
         ''' Remove target file '''
