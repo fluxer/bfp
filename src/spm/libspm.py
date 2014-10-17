@@ -902,13 +902,28 @@ class Source(object):
                     # first and altering the shebang next
                     if not match:
                         message.sub_debug('Attempting shebang correction on', sfile)
+                        # search for match on the host
                         hmatch = misc.whereis(os.path.basename(fmatch), False)
                         if hmatch:
                             match = database.local_belongs(hmatch, exact=True, escape=False)
                             if match:
                                 misc.file_substitute('^' + omatch[0].strip(), \
                                     '#!' + hmatch, sfile)
-                                message.sub_debug('Successfuly corrected', fmatch)
+                                message.sub_debug('Successfuly corrected (host)', fmatch)
+                        # fallback to the content of the target (self provided)
+                        else:
+                            # FIXME: this only extends to binarues in <blah>/(s)bin,
+                            # if shebang uses some strange path (e.g. /opt/<exec>)
+                            # then this will not work
+                            for s in list(target_content.keys()):
+                                if s.endswith('bin/' + os.path.basename(fmatch)):
+                                    smatch = s.replace(self.install_dir, '')
+                                    break
+                            if smatch:
+                                misc.file_substitute('^' + omatch[0].strip(), \
+                                    '#!' + smatch, sfile)
+                                message.sub_debug('Successfuly corrected (self)', fmatch)
+                                match = [self.target_name] # database.local_belongs() returns list
                     if match and len(match) > 1:
                         message.sub_warning('Multiple providers for %s' % fmatch, match)
                         if self.target_name in match:
