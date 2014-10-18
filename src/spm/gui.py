@@ -7,6 +7,10 @@ if sys.version < '3':
 else:
     import configparser
 
+# handle keyboard interrupt
+import signal
+signal.signal(signal.SIGINT, signal.SIG_DFL)
+
 import gui_ui
 import libspm
 import libmisc, libmessage, libpackage
