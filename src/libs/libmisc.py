@@ -2,7 +2,7 @@
 
 import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, libmagic
 if sys.version < '3':
-    import urlparse
+    from urlparse import urlparse
     from urllib2 import urlopen
     from urllib2 import URLError
     from urllib2 import urlopen
