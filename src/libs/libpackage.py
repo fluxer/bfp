@@ -134,11 +134,12 @@ class Database(object):
                 continue
 
             if basename in self.local_metadata(installed, 'depends'):
+                checked.append(basename)
                 if indirect:
                     reverse.extend(self.local_rdepends(installed, \
                         True, checked))
                 reverse.append(installed)
-                checked.extend((basename, installed))
+                checked.append(installed)
         return reverse
 
     def local_footprint(self, target):

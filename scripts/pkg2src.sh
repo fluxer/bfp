@@ -80,7 +80,7 @@ for pkg in "${@:-.}";do
 	fi
 
 	msg "Checking $pkgbuild.."
-	if [[ -n $(grep -e 'pkgbase=' -e 'package_' "$pkgbuild") ]];then
+	if [[ -n $(grep -e 'pkgbase=' -e '^package_' "$pkgbuild") ]];then
 		warn "Multi-package, I can not handle that"
 		continue
 	fi
