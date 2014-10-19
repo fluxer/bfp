@@ -827,18 +827,6 @@ class Source(object):
                     message.sub_debug('Stripping RPATH', sfile)
                     misc.system_command((scanelf, '-CBXrq', sfile))
 
-        if self.python_compile:
-            message.sub_info('Byte-compiling Python modules')
-            for sfile in target_content.keys():
-                for spath in site.getsitepackages():
-                    if not spath in sfile:
-                        continue
-                    message.sub_debug('Compiling Python file', sfile)
-                    # force build the caches to prevent access time issues with
-                    # .pyc files being older that .py files because .py files
-                    # when modified after the usual installation procedure
-                    compileall.compile_file(sfile, force=True, quiet=True)
-
         message.sub_info('Checking runtime dependencies')
         missing_detected = False
         for sfile in target_content:
@@ -947,6 +935,18 @@ class Source(object):
                         missing_detected = True
         if missing_detected:
             sys.exit(2)
+
+        if self.python_compile:
+            message.sub_info('Byte-compiling Python modules')
+            for sfile in target_content.keys():
+                for spath in site.getsitepackages():
+                    if not spath in sfile:
+                        continue
+                    message.sub_debug('Compiling Python file', sfile)
+                    # force build the caches to prevent access time issues with
+                    # .pyc files being older that .py files because .py files
+                    # when modified after the usual installation procedure
+                    compileall.compile_file(sfile, force=True, quiet=True)
 
         message.sub_info('Assembling metadata')
         misc.dir_create(os.path.join(self.install_dir, 'var/local/spm', self.target_name))
