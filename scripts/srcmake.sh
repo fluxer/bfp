@@ -159,7 +159,7 @@ for src in "${@:-.}";do
 	msg "Installing sources.."
 	rm -rf "$INSTALL_DIR"
 	mkdir -p "$INSTALL_DIR"
-	cd "$INSTALL_DIR"
+	cd "$SOURCE_DIR"
 	src_install
 
 	msg "Creating footprint and metadata.."
