@@ -59,7 +59,7 @@ class Message(object):
                 status = syslog.LOG_DEBUG
             else:
                 raise(Exception('Invalid log status', status))
-            syslog.syslog(status, msg)
+            syslog.syslog(status, str(msg))
 
     def info(self, msg, marker=None):
         ''' Print message with INFO status '''
