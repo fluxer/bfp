@@ -631,14 +631,14 @@ class Source(object):
 
     def remove_target_file(self, sfile):
         ''' Remove target file '''
-        sfull = (os.path.join(ROOT_DIR + sfile))
+        sfull = ROOT_DIR + sfile
         if os.path.isfile(sfull):
             message.sub_debug('Removing', sfull)
             os.unlink(sfull)
 
     def remove_target_dir(self, sdir):
         ''' Remove target directory '''
-        sfull = (os.path.join(ROOT_DIR + sdir))
+        sfull = ROOT_DIR + sdir
         if os.path.isdir(sfull) and not os.listdir(sfull):
             message.sub_debug('Removing', sfull)
             if os.path.islink(sfull):
