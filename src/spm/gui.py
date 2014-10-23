@@ -89,7 +89,7 @@ def RefreshSearch():
         ui.searchBox.addItems(('name', 'version', 'description', 'depends', \
             'makedepends', 'checkdepends', 'sources', 'options', 'backup'))
 
-def RefreshTargets():
+def RefreshTargetsReal():
     ui.targetsView.clear()
     current = str(ui.filtersBox.currentText())
     targets = []
@@ -119,11 +119,26 @@ def RefreshTargets():
     RefreshSearch()
     ui.targetsView.setCurrentRow(0)
 
-def RefreshFilters():
+def RefreshTargets():
+    worker = Worker(app, RefreshTargetsReal)
+    worker.finished.connect(EnableWidgets)
+    app.connect(worker, QtCore.SIGNAL('failed'), MessageCritical)
+    DisableWidgets()
+    worker.start()
+
+def RefreshFiltersReal():
     ui.filtersBox.clear()
     ui.filtersBox.addItems(('all', 'updates', 'local', 'unneeded', 'candidates'))
     ui.filtersBox.setCurrentIndex(0)
     ui.filtersBox.addItems(database.remote_aliases())
+
+def RefreshFilters():
+    worker = Worker(app, RefreshFiltersReal)
+    worker.finished.connect(EnableWidgets)
+    worker.finished.connect(RefreshTargets)
+    app.connect(worker, QtCore.SIGNAL('failed'), MessageCritical)
+    DisableWidgets()
+    worker.start()
 
 def RefreshSettings():
     ui.repositoriesText.clear()
