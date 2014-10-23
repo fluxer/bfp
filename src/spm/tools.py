@@ -29,7 +29,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.2.0 (8ee6791)"
+app_version = "1.2.0 (017e1a0)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''

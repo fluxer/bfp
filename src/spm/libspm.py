@@ -485,18 +485,24 @@ class Source(object):
         message.sub_debug('gdk-pixbuf-query-loaders', gdk_pixbuf or '')
         glib_schemas = misc.whereis('glib-compile-schemas', False, True)
         message.sub_debug('glib-compile-schemas', glib_schemas or '')
-        depmod = misc.whereis('depmod', False, True)
-        message.sub_debug('depmod', depmod or '')
         udevadm = misc.whereis('udevadm', False, True)
         message.sub_debug('udevadm', udevadm or '')
-        mkinitfs = misc.whereis('mkinitfs', False, True)
-        message.sub_debug('mkinitfs', mkinitfs or '')
-        grub_mkconfig = misc.whereis('grub-mkconfig', False, True)
-        message.sub_debug('grub-mkconfig', grub_mkconfig or '')
         install_info = misc.whereis('install-info', False, True)
         message.sub_debug('install-info', install_info or '')
         icon_cache = misc.whereis('gtk-update-icon-cache', False, True)
         message.sub_debug('gtk-update-icon-cache', icon_cache or '')
+        depmod = misc.whereis('depmod', False, True)
+        message.sub_debug('depmod', depmod or '')
+        depmod_run = False
+        depmod_path = None
+        mkinitfs = misc.whereis('mkinitfs', False, True)
+        message.sub_debug('mkinitfs', mkinitfs or '')
+        mkinitfs_run = False
+        mkinitfs_path = None
+        grub_mkconfig = misc.whereis('grub-mkconfig', False, True)
+        message.sub_debug('grub-mkconfig', grub_mkconfig or '')
+        grub_mkconfig_run = False
+        grub_mkconfig_path = None
         for spath in content:
             if spath.endswith('.so') and ldconfig:
                 message.sub_info('Updating shared libraries cache')
@@ -560,12 +566,8 @@ class Source(object):
                 glib_schemas = False
             elif spath.startswith('lib/modules/') and depmod:
                 # extract the kernel modules path, e.g. lib/modules/3.16.8
-                sdir = misc.string_search('((?:usr/?)?lib/modules/.*?/)', \
+                depmod_path = misc.string_search('((?:usr/?)?lib/modules/.*?/)', \
                     spath, escape=False)
-                message.sub_info('Updating module dependencies')
-                message.sub_debug(spath)
-                misc.system_trigger((depmod, misc.string_convert(sdir)))
-                depmod = False
             elif '/udev/rules.d/' in spath and \
                 (os.path.exists(ROOT_DIR + 'run/udev/control') \
                 or os.path.exists(ROOT_DIR + 'var/run/udev/control')) and udevadm:
@@ -573,27 +575,15 @@ class Source(object):
                 message.sub_debug(spath)
                 misc.system_trigger((udevadm, 'control', '--reload'))
                 udevadm = False
-            # distribution specifiec
             elif spath.startswith(('boot/vmlinuz', 'etc/mkinitfs/')) and mkinitfs:
-                version = misc.string_search('boot/vmlinuz-(.*)', spath, escape=False)
-                message.sub_info('Updating initramfs image')
-                message.sub_debug(spath)
-                if version:
-                    # new kernel being installed
-                    misc.system_trigger((mkinitfs, '-k', misc.string_convert(version)))
-                else:
-                    misc.system_trigger((mkinitfs))
-                mkinitfs = False
-            # FIXME support legacy grub and syslinux
+                mkinitfs_path = misc.string_search('boot/vmlinuz-(.*)', spath, escape=False)
+                mkinitfs_run = True
             elif spath.startswith(('boot/', 'etc/grub.d/')) \
                 and os.path.isfile(os.path.join(ROOT_DIR, 'boot/grub/grub.cfg')) \
                 and grub_mkconfig:
                 # the trigger executes only if grub.cfg is present asuming GRUB
                 # is installed, otherwise there is no point in updating it
-                message.sub_info('Updating GRUB configuration')
-                message.sub_debug(spath)
-                misc.system_trigger((grub_mkconfig, '-o', '/boot/grub/grub.cfg'))
-                grub_mkconfig = False
+                grub_mkconfig_path = spath
             elif 'share/icons/' in spath and action == 'merge' and icon_cache:
                 # extract the proper directory from spath, e.g. /share/icons/hicolor
                 sdir = misc.string_search('((?:usr/?)?share/icons/(?:.*?))', \
@@ -617,6 +607,24 @@ class Source(object):
                 message.sub_debug(spath)
                 misc.system_trigger((install_info, '--delete', spath, \
                     sys.prefix + '/share/info/dir'))
+        # delayed triggers which need to run in specifiec order
+        if depmod_run:
+            message.sub_info('Updating module dependencies')
+            message.sub_debug(depmod_path)
+            misc.system_trigger((depmod, misc.string_convert(depmod_path)))
+        # distribution specifiec
+        if mkinitfs_run:
+            message.sub_info('Updating initramfs image')
+            message.sub_debug(mkinitfs_path)
+            if mkinitfs_path:
+                # new kernel being installed
+                misc.system_trigger((mkinitfs, '-k', misc.string_convert(mkinitfs_path)))
+            else:
+                misc.system_trigger((mkinitfs))
+        if grub_mkconfig_run:
+            message.sub_info('Updating GRUB configuration')
+            message.sub_debug(grub_mkconfig_path)
+            misc.system_trigger((grub_mkconfig, '-o', '/boot/grub/grub.cfg'))
 
     def remove_target_file(self, sfile):
         ''' Remove target file '''
