@@ -566,8 +566,9 @@ class Source(object):
                 glib_schemas = False
             elif spath.startswith('lib/modules/') and depmod:
                 # extract the kernel modules path, e.g. lib/modules/3.16.8
-                depmod_path = misc.string_search('((?:usr/?)?lib/modules/.*?/)', \
-                    spath, escape=False)
+                depmod_path = misc.string_convert(misc.string_search('(?:usr/?)?lib/modules/(.*?)/', \
+                    spath, escape=False))
+                depmod_run = True
             elif '/udev/rules.d/' in spath and \
                 (os.path.exists(ROOT_DIR + 'run/udev/control') \
                 or os.path.exists(ROOT_DIR + 'var/run/udev/control')) and udevadm:
@@ -576,7 +577,8 @@ class Source(object):
                 misc.system_trigger((udevadm, 'control', '--reload'))
                 udevadm = False
             elif spath.startswith(('boot/vmlinuz', 'etc/mkinitfs/')) and mkinitfs:
-                mkinitfs_path = misc.string_search('boot/vmlinuz-(.*)', spath, escape=False)
+                mkinitfs_path = misc.string_convert(misc.string_search('boot/vmlinuz-(.*)', \
+                    spath, escape=False))
                 mkinitfs_run = True
             elif spath.startswith(('boot/', 'etc/grub.d/')) \
                 and os.path.isfile(os.path.join(ROOT_DIR, 'boot/grub/grub.cfg')) \
@@ -584,6 +586,7 @@ class Source(object):
                 # the trigger executes only if grub.cfg is present asuming GRUB
                 # is installed, otherwise there is no point in updating it
                 grub_mkconfig_path = spath
+                grub_mkconfig_run = True
             elif 'share/icons/' in spath and action == 'merge' and icon_cache:
                 # extract the proper directory from spath, e.g. /share/icons/hicolor
                 sdir = misc.string_search('((?:usr/?)?share/icons/(?:.*?))', \
@@ -611,14 +614,14 @@ class Source(object):
         if depmod_run:
             message.sub_info('Updating module dependencies')
             message.sub_debug(depmod_path)
-            misc.system_trigger((depmod, misc.string_convert(depmod_path)))
+            misc.system_trigger((depmod, depmod_path))
         # distribution specifiec
         if mkinitfs_run:
             message.sub_info('Updating initramfs image')
             message.sub_debug(mkinitfs_path)
             if mkinitfs_path:
                 # new kernel being installed
-                misc.system_trigger((mkinitfs, '-k', misc.string_convert(mkinitfs_path)))
+                misc.system_trigger((mkinitfs, '-k', mkinitfs_path))
             else:
                 misc.system_trigger((mkinitfs))
         if grub_mkconfig_run:
