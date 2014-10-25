@@ -91,6 +91,7 @@ for pkg in "${@:-.}";do
 	fi
 
 	msg "Preparing.."
+	# FIXME: catch error on source (.)
 	pkgname="$(. $pkgbuild && echo $pkgname)"
 	url="$(. $pkgbuild && echo $url)"
 	script=$(find "$pkg" -name '*.install')
@@ -99,6 +100,7 @@ for pkg in "${@:-.}";do
 	msg "Adjusting.."
 	sed -e "s|\$pkgname|$pkgname|g" -e "s|\${pkgname}|$pkgname|g" \
 		-e 's|pkgver=|version=|g' -e 's|$pkgver|$version|g' -e 's|${pkgver}|$version|g' \
+		-e 's|$_pkgver|$_version|g' -e 's|${_pkgver}|$_version|g' \
 		-e 's|pkgdesc=|description=|g' \
 		-e 's|source=(|sources=(|g' \
 		-e 's|$srcdir|$SOURCE_DIR|g' -e 's|${srcdir}|$SOURCE_DIR|g' \
