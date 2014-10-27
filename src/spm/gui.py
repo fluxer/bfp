@@ -62,6 +62,7 @@ def MessageCritical(msg):
 
 def DisableWidgets():
     ui.searchEdit.setEnabled(False)
+    ui.filtersBox.setEnabled(False)
     ui.updateButton.setEnabled(False)
     ui.buildButton.setEnabled(False)
     ui.mergeButton.setEnabled(False)
@@ -72,6 +73,7 @@ def DisableWidgets():
 
 def EnableWidgets():
     ui.searchEdit.setEnabled(True)
+    ui.filtersBox.setEnabled(True)
     ui.updateButton.setEnabled(True)
     ui.buildButton.setEnabled(True)
     ui.mergeButton.setEnabled(True)
