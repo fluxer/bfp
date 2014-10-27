@@ -431,7 +431,6 @@ ui.mirrorsText.textChanged.connect(ChangeMirrors)
 ui.targetsView.currentItemChanged.connect(RefreshWidgets)
 ui.filtersBox.currentIndexChanged.connect(RefreshTargets)
 ui.targetsView.setCurrentRow(0)
-RefreshTargets()
 ui.progressBar.setRange(0, 1)
 ui.progressBar.hide()
 
