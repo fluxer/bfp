@@ -61,7 +61,7 @@ def MessageCritical(msg):
         return msgBox.exec_()
 
 def DisableWidgets():
-    ui.searchBox.setEnabled(False)
+    ui.searchEdit.setEnabled(False)
     ui.updateButton.setEnabled(False)
     ui.buildButton.setEnabled(False)
     ui.mergeButton.setEnabled(False)
@@ -71,7 +71,7 @@ def DisableWidgets():
     ui.progressBar.show()
 
 def EnableWidgets():
-    ui.searchBox.setEnabled(True)
+    ui.searchEdit.setEnabled(True)
     ui.updateButton.setEnabled(True)
     ui.buildButton.setEnabled(True)
     ui.mergeButton.setEnabled(True)
