@@ -222,7 +222,8 @@ class Database(object):
         for alias in self.remote_aliases(basename=False):
             if os.path.basename(target) == os.path.basename(alias):
                 return misc.file_readlines(alias + '.alias')
-        return target
+        # return consistent data
+        return [target]
 
     def remote_groups(self, basename=True):
         ''' Get a list of groups in the repositories '''
