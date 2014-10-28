@@ -477,8 +477,8 @@ class Sane(object):
                     regex += '|gio-querymodules|pango-querymodules|install-info'
                     regex += '|gtk-query-immodules-2.0|gtk-query-immodules-3.0'
                     regex += '|gdk-pixbuf-query-loaders|glib-compile-schemas'
-                    regex += '|gtk-update-icon-cache|mkinitfs|grub-mkconfig)'
-                    regex += '(?:\\s|$)'
+                    regex += '|gtk-update-icon-cache|mkinitfs|grub-mkconfig'
+                    regex += '|update-grub)(?:\\s|$)'
                     if misc.file_search(regex, target_srcbuild, escape=False):
                         message.sub_warning('Possible unnecessary triggers invocation(s)')
 
