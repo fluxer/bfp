@@ -1,5 +1,6 @@
 VERSION = 1.2.1
 
+TOPDIR = $(dir $(lastword $(MAKEFILE_LIST)))
 DESTDIR = 
 PREFIX = $(shell $(PYTHON) -c "import sys; print(sys.prefix)")
 BINDIR = $(PREFIX)/bin
@@ -35,14 +36,14 @@ RM = rm -vf
 CP = cp -vf
 XZ = xz -v
 
-POOLE = $(PYTHON) ../poole/poole.py
+POOLE = $(PYTHON) $(TOPDIR)/poole/poole.py
 PYUIC = pyuic4
 PYRCC = pyrcc4
 PYLUPDATE = pylupdate4 -noobsolete
 LRELEASE = lrelease
-NUITKA = $(PYTHON) ../../nuitka/bin/nuitka --recurse-not-to=PyQt4,parted \
+NUITKA = $(PYTHON) $(TOPDIR)/nuitka/bin/nuitka --recurse-not-to=PyQt4,parted \
 	--python-version=$(PYTHON_VERSION)
-PYLINT = pylint
+PYLINT = pylint --rcfile=$(TOPDIR)/pylint.conf
 
 all:
 
