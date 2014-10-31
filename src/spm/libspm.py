@@ -2,8 +2,6 @@
 
 import sys
 import os
-import tarfile
-import zipfile
 import gzip
 import shutil
 import re
@@ -736,8 +734,7 @@ class Source(object):
                 message.sub_debug('Linking', local_file)
                 os.symlink(local_file, link_file)
 
-            if src_base.endswith(('.xz', '.lzma')) \
-                or tarfile.is_tarfile(link_file) or zipfile.is_zipfile(link_file):
+            if misc.archive_supported(link_file):
                 decompressed = False
                 for sfile in misc.archive_list(link_file):
                     if not os.path.exists(os.path.join(self.source_dir, sfile)):
