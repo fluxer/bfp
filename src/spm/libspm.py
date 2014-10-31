@@ -765,7 +765,7 @@ class Source(object):
         misc.system_command((misc.whereis('bash'), '-e', '-c', 'source ' + \
             self.srcbuild + ' && umask 0022 && src_install'), cwd=self.source_dir)
 
-        if COMPRESS_MAN:
+        if self.compress_man:
             message.sub_info('Compressing manual pages')
             manpath = misc.whereis('manpath', fallback=False)
             # if manpath (provided by man-db) is not present fallback to something sane
@@ -897,7 +897,7 @@ class Source(object):
                             '/' + os.path.basename(fmatch.split()[1]), fmatch)
                     smatch = self.install_dir + fmatch
                     match = database.local_belongs(fmatch, exact=True, escape=False)
-                    # attempt shebang correction be probing PATH for basename matchers
+                    # attempt shebang correction by probing PATH for basename matchers
                     # first and altering the shebang next
                     if not match:
                         message.sub_debug('Attempting shebang correction on', sfile)
