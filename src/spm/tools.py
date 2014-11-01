@@ -129,7 +129,7 @@ class Check(object):
                         if not match in target_adepends and not match == target:
                             target_adepends.append(match)
 
-                        if match == target or misc.string_search(fmatch,
+                        if match == target or misc.string_search(fmatch, \
                             target_footprint, exact=True, escape=False):
                             message.sub_debug('Dependency needed but in self', match)
                         elif match and match in target_depends:
@@ -196,7 +196,7 @@ class Dist(object):
             target_basename = os.path.basename(os.path.normpath(target))
 
             target_version = database.remote_metadata(target, 'version')
-            target_distfile = os.path.join(self.directory,
+            target_distfile = os.path.join(self.directory, \
                 target_basename + '_' + target_version + '.tar.bz2')
             target_sources = database.remote_metadata(target, 'sources')
 
@@ -216,8 +216,8 @@ class Dist(object):
                                 'pull', '--depth=1', src_url), cwd=src_file)
                         else:
                             message.sub_debug('Cloning initial copy', src_url)
-                            misc.system_command((misc.whereis('git'), 'clone', '--depth=1',
-                                src_url, src_file))
+                            misc.system_command((misc.whereis('git'), \
+                                'clone', '--depth=1', src_url, src_file))
                         continue
 
                     elif src_url.startswith(('http://', 'https://', 'ftp://', \
