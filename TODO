@@ -10,6 +10,9 @@
  * Lint check for conflicts
  * Make the python byte-compile work for versions other than what SPM has been run from
 
+## ALL ##
+ * Strip binaries only when building from Git checkout
+
 ## ALL (on regular basis) ##
  * Run PyLint and do some kung-foo on the code style
  * Make use of sys.prefix and use less hardcode paths
