@@ -17,7 +17,6 @@ DBSERVICEDIR = $(PREFIX)/share/dbus-1/system-services/
 APPLICATIONSDIR = $(PREFIX)/share/applications
 PIXMAPSDIR = $(PREFIX)/share/pixmaps
 BASHCOMPLETIONDIR = /etc/bash_completion.d/
-LOGROTATEDIR = /etc/logrotate.d/
 GIT = git
 GIT_VERSION = $(shell $(GIT) rev-parse --short HEAD || echo stable)
 

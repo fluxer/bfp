@@ -1,6 +1,0 @@
-# Rotate the log created by Source Package Manager
-
-/var/log/spm.log {
-   missingok
-   nocreate
-}
