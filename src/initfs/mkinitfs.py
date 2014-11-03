@@ -65,7 +65,9 @@ try:
                 return
             message.sub_debug('Linking', sreal)
             message.sub_debug('To', sdest)
-            misc.dir_create(os.path.dirname(sdest))
+            copy_item(os.path.dirname(src))
+            if os.path.isdir(src):
+               misc.dir_create(ARGS.tmp + '/' + sreal)
             os.symlink(sreal, sdest)
             lcopied.append(src)
         elif os.path.isdir(src):
@@ -113,6 +115,8 @@ try:
     # if the above fails, attempt to guess the kernel installed
     if not modsdir:
         for sdir in moddirs:
+            if not os.path.exists(sdir):
+                continue
             for k in os.listdir(sdir + '/modules'):
                 if os.path.isfile(sdir + '/modules/' + k + '/modules.dep') and \
                     os.path.isfile(sdir + '/modules/' + k + '/modules.builtin'):
