@@ -9,11 +9,11 @@ all: bump clean
 	$(STRIP) *.exe *.so
 
 install:
-	$(INSTALL) -dm755 $(DESTDIR)$(BINDIR) $(DESTDIR)$(SITEDIR)
+	$(INSTALL) -dm755 $(DESTDIR)$(SITEDIR) $(DESTDIR)$(BINDIR)
+	$(INSTALL) -m644 libspm.so $(DESTDIR)$(SITEDIR)/libspm.so
 	$(INSTALL) -m755 spm.exe $(DESTDIR)$(BINDIR)/spm
 	$(INSTALL) -m755 tools.exe $(DESTDIR)$(BINDIR)/spm-tools
 	$(INSTALL) -m755 gui.exe $(DESTDIR)$(BINDIR)/spm-gui
-	$(INSTALL) -m644 libspm.so $(DESTDIR)$(SITEDIR)/libspm.so
 
 uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libspm.so

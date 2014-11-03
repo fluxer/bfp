@@ -10,10 +10,6 @@ MANDIR = $(SHAREDIR)/man
 PYTHON = python2
 PYTHON_VERSION = $(shell $(PYTHON) -c "import sys; print(sys.version[:3])")
 SITEDIR = $(shell $(PYTHON) -c "import site; print(site.getsitepackages()[0])")
-TRDIR =$(shell $(PYTHON) -c "from PyQt4.QtCore import QLibraryInfo; \
-	print(QLibraryInfo.location(QLibraryInfo.TranslationsPath))")
-DBSYSTEMDIR = /etc/dbus-1/system.d/
-DBSERVICEDIR = $(PREFIX)/share/dbus-1/system-services/
 APPLICATIONSDIR = $(PREFIX)/share/applications
 PIXMAPSDIR = $(PREFIX)/share/pixmaps
 BASHCOMPLETIONDIR = /etc/bash_completion.d/
@@ -28,18 +24,13 @@ GREP = grep
 FIND = find
 SED = sed
 GCC= gcc
-PKGCONFIG = pkg-config
 STRIP = strip
 INSTALL = install -v
 RM = rm -vf
 CP = cp -vf
 XZ = xz -v
 
-POOLE = $(PYTHON) $(TOPDIR)/poole/poole.py
 PYUIC = pyuic4
-PYRCC = pyrcc4
-PYLUPDATE = pylupdate4 -noobsolete
-LRELEASE = lrelease
 NUITKA = $(PYTHON) $(TOPDIR)/nuitka/bin/nuitka --recurse-not-to=PyQt4,parted \
 	--python-version=$(PYTHON_VERSION)
 PYLINT = pylint --rcfile=$(TOPDIR)/pylint.conf
