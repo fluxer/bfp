@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os
 
-app_version = "1.1.0 (16e3ef1)"
+app_version = "1.2.1 (252c83e)"
 
 tmpdir = None
 keep = False
@@ -16,7 +16,6 @@ try:
     busybox = misc.whereis('busybox')
     image = '/boot/initramfs-' + kernel + '.img'
     modules = []
-    # FIXME: resolve aliases from here to avoid issues with cross-build
     for m in os.listdir('/sys/module'):
         if os.path.isdir('/sys/module/' + m + '/sections'):
             modules.append(m)
@@ -28,8 +27,8 @@ try:
         help='Change busybox binary')
     parser.add_argument('-k', '--kernel', type=str, default=kernel, \
         help='Change kernel version')
-    parser.add_argument('-m', '--modules', type=str, nargs='+', default=modules, \
-        help='Change modules')
+    parser.add_argument('-m', '--modules', type=str, nargs='+', \
+        default=modules, help='Change modules')
     parser.add_argument('-i', '--image', type=str, default=image, \
         help='Change output image')
     parser.add_argument('--keep', action='store_true', \
@@ -83,7 +82,8 @@ try:
             shutil.copytree(src, sdest)
             lcopied.append(src)
         elif os.path.isfile(src):
-            for sfile in misc.system_output((misc.whereis('lddtree'), '-l', src)).split('\n'):
+            for sfile in misc.system_output((misc.whereis('lddtree'), \
+                '-l', src)).split('\n'):
                 if sfile in lcopied:
                     message.sub_debug('Already copied', sfile)
                     continue
@@ -105,7 +105,8 @@ try:
 
     # FIXME: support both /lib and /usr/lib at the same time???
     modsdir = None
-    moddirs = ('/lib', '/lib32', '/lib64', '/usr/lib', '/usr/lib32', '/usr/lib64')
+    moddirs = ('/lib', '/lib32', '/lib64', '/usr/lib', '/usr/lib32', \
+        '/usr/lib64')
     for sdir in moddirs:
         if os.path.isdir(sdir + '/modules/' + ARGS.kernel):
             modsdir = sdir + '/modules/' + ARGS.kernel
@@ -114,7 +115,8 @@ try:
         for sdir in moddirs:
             if os.path.isdir(sdir + '/modules'):
                 for k in os.listdir(sdir + '/modules'):
-                    if os.path.isfile(sdir + '/modules/' + k + '/modules.symbols'):
+                    if os.path.isfile(sdir + '/modules/' + k \
+                        + '/modules.symbols'):
                         message.sub_warning('Last resort kernel detected', k)
                         modsdir = sdir + '/modules/' + k
                         ARGS.kernel = k
@@ -178,25 +180,13 @@ try:
         if not module:
             continue
         found = False
-        # cross-build, do some kung-fu
-        # FIXME: aliases are not supported, `modprobe` does not allow to specify
-        #        the kernel version
-        if ARGS.kernel != kernel:
-            for line in misc.file_read(modsdir + '/modules.dep').splitlines():
-                base = line.split(':')[0]
-                depends = line.split(':')[1]
-                if '/' + module + '.ko' in base:
-                    found = True
-                    copy_item(modsdir + '/' + base)
-                    for dep in depends.split():
-                        copy_item(modsdir+ '/' + dep)
-        else:
-            # native build, make use of `modprobe`
-            depends = misc.system_output((misc.whereis('modprobe'), '-bD', module))
-            if depends:
+        for line in misc.file_readlines(modsdir + '/modules.dep'):
+            base = line.split(':')[0]
+            # depends = line.split(':')[1]
+            if '/' + module + '.ko' in base \
+                or '/' + module.replace('_', '-') + '.ko' in base:
                 found = True
-                for line in depends.splitlines():
-                    copy_item(line.split()[1])
+                copy_item(modsdir + '/' + base.strip())
         if not found:
             message.sub_warning('Module not found', module)
 
