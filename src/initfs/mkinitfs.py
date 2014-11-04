@@ -53,6 +53,13 @@ try:
     lcopied = []
     def copy_item(src):
         ''' Copy method that handles binaries, symlinks and whatnot '''
+        sdir = os.path.dirname(src)
+        if os.path.islink(sdir):
+            copy_item(sdir)
+            misc.dir_create(ARGS.tmp + '/' + \
+                os.path.dirname(os.path.realpath(src)))
+        else:
+            misc.dir_create(ARGS.tmp + '/' + sdir)
         if os.path.islink(src):
             if src in lcopied:
                 message.sub_debug('Already linked', src)
@@ -65,12 +72,6 @@ try:
                 return
             message.sub_debug('Linking', sreal)
             message.sub_debug('To', sdest)
-            if os.path.islink(os.path.dirname(src)):
-                copy_item(os.path.dirname(src))
-                if os.path.isdir(src):
-                    misc.dir_create(ARGS.tmp + '/' + sreal)
-            else:
-                misc.dir_create(ARGS.tmp + '/' + os.path.dirname(src))
             os.symlink(sreal, sdest)
             lcopied.append(src)
         elif os.path.isdir(src):
@@ -102,7 +103,6 @@ try:
                     return
                 message.sub_debug('Copying', sfile)
                 message.sub_debug('To', sdest)
-                misc.dir_create(os.path.dirname(sdest))
                 shutil.copy2(sfile, sdest)
                 lcopied.append(sfile)
         else:
@@ -155,7 +155,6 @@ try:
             message.sub_debug('Creating', fixed_sdir)
             misc.dir_create(ARGS.tmp + fixed_sdir)
         for sfile in misc.list_files('/etc/mkinitfs/root'):
-            message.sub_debug('Copying', sfile)
             copy_item(sfile)
 
     message.sub_info('Copying files')
