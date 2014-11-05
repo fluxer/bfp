@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os
 
-app_version = "1.2.1 (252c83e)"
+app_version = "1.2.1 (53d618c)"
 
 tmpdir = None
 keep = False
@@ -187,6 +187,11 @@ try:
                 or '/' + module.replace('_', '-') + '.ko' in base:
                 found = True
                 copy_item(modsdir + '/' + base.strip())
+        if not found:
+            for line in misc.file_readlines(modsdir + '/modules.builtin'):
+                if '/' + module + '.ko' in line \
+                    or '/' + module.replace('_', '-') + '.ko' in line:
+                    found = True
         if not found:
             message.sub_warning('Module not found', module)
 
