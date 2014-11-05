@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os
 
-app_version = "1.2.1 (53d618c)"
+app_version = "1.2.1 (b308d5d)"
 
 tmpdir = None
 keep = False
@@ -113,14 +113,13 @@ try:
     # if the above fails, attempt to guess the kernel installed
     if not modsdir:
         for sdir in moddirs:
-            if os.path.isdir(sdir + '/modules'):
-                for k in os.listdir(sdir + '/modules'):
-                    if os.path.isfile(sdir + '/modules/' + k \
-                        + '/modules.symbols'):
-                        message.sub_warning('Last resort kernel detected', k)
-                        modsdir = sdir + '/modules/' + k
-                        ARGS.kernel = k
-                        ARGS.image = '/boot/initramfs-' + k + '.img'
+            for k in os.listdir(sdir + '/modules'):
+                if os.path.isfile(sdir + '/modules/' + k + '/modules.dep') and \
+                    os.path.isfile(sdir + '/modules/' + k + '/modules.builtin'):
+                    message.sub_warning('Last resort kernel detected', k)
+                    modsdir = sdir + '/modules/' + k
+                    ARGS.kernel = k
+                    ARGS.image = '/boot/initramfs-' + k + '.img'
     if not modsdir:
         message.critical('Unable to find modules directory')
         sys.exit(2)
