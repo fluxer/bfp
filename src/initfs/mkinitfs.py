@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os
 
-app_version = "1.2.1 (b308d5d)"
+app_version = "1.2.1 (e554410)"
 
 tmpdir = None
 keep = False
@@ -190,6 +190,7 @@ try:
             for line in misc.file_readlines(modsdir + '/modules.builtin'):
                 if '/' + module + '.ko' in line \
                     or '/' + module.replace('_', '-') + '.ko' in line:
+                    message.sub_debug('Module is builtin', module)
                     found = True
         if not found:
             message.sub_warning('Module not found', module)

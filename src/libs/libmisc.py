@@ -233,7 +233,7 @@ class Misc(object):
         return slist
 
     def fetch_check(self, url, destination):
-        ''' Check if remote file and file sizes are equal '''
+        ''' Check if remote file and local file sizes are equal '''
         # not all requests can get content-lenght , this means that there is
         # no way to tell if the archive is corrupted (checking if size == 0 is
         # not enough) so the source is re-feteched
