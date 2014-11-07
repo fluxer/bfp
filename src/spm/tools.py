@@ -430,7 +430,7 @@ class Lint(object):
                         for local in database.local_all(basename=True):
                             if local == target:
                                 continue
-                            if sfile in database.local_footprint(local).splitlines():
+                            if sfile.lstrip('/') in database.local_footprint(local).splitlines():
                                 message.sub_warning('Possible conflicting file with ' + local, sfile)
 
 
