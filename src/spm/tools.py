@@ -29,7 +29,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.2.2 (5e2cc63)"
+app_version = "1.2.2 (ab8b984)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -419,9 +419,9 @@ class Lint(object):
                 if self.backup:
                     for sfile in target_footprint.splitlines():
                         backups = database.remote_metadata(target, 'backup')
-                        if not os.path.exists(sfile) and sfile in backups:
+                        if not os.path.exists(sfile) and sfile.lstrip('/') in backups:
                             message.sub_warning('Possibly unnecessary backup of file', sfile)
-                        elif sfile.endswith('.conf') and not sfile in backups:
+                        elif sfile.endswith('.conf') and not sfile.lstrip('/') in backups:
                             message.sub_warning('Possibly undefined backup of file', sfile)
 
 
