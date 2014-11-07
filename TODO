@@ -2,7 +2,6 @@
  * Fix all bugs noted with FIXME
  * Optionally remove build depends that are not required by local target after build
  * Optimize backing up of files
- * Check for unnecessary backup of files in SRCBUILDs
  * Check for absolute path symlinks in SRCBUILDs
  * Implement services trigger (rc.d restart foo)
  * Implement trigger invocation only on file content change

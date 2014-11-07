@@ -29,7 +29,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.2.2 (51cafa0)"
+app_version = "1.2.2 (5e2cc63)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -267,7 +267,8 @@ class Lint(object):
     ''' Check sanity of local targets '''
     def __init__(self, targets, man=False, udev=False, symlink=False, \
         doc=False, module=False, footprint=False, builddir=False, \
-        ownership=False, executable=False, path=False, shebang=False):
+        ownership=False, executable=False, path=False, shebang=False, \
+        backup=False):
         self.targets = targets
         self.man = man
         self.udev = udev
@@ -280,6 +281,7 @@ class Lint(object):
         self.executable = executable
         self.path = path
         self.shebang = shebang
+        self.backup = backup
 
     def main(self):
         ''' Looks for target match and then execute action for every target '''
@@ -413,6 +415,14 @@ class Lint(object):
                                 match = match[0].replace('#!', '').strip().split()[0]
                                 if not database.local_belongs(match, exact=True, escape=False):
                                     message.sub_warning('Invalid shebang', sfile)
+
+                if self.backup:
+                    for sfile in target_footprint.splitlines():
+                        backups = database.remote_metadata(target, 'backup')
+                        if not os.path.exists(sfile) and sfile in backups:
+                            message.sub_warning('Possibly unnecessary backup of file', sfile)
+                        elif sfile.endswith('.conf') and not sfile in backups:
+                            message.sub_warning('Possibly undefined backup of file', sfile)
 
 
 class Sane(object):
@@ -727,6 +737,8 @@ try:
         help='Check for overlapping executable(s) in PATH')
     lint_parser.add_argument('-n', '--shebang', action='store_true', \
         help='Check for incorrect shebang of scripts')
+    lint_parser.add_argument('-c', '--backup', action='store_true', \
+        help='Check for incorrect or incomplete backup of files')
     lint_parser.add_argument('-a', '--all', action='store_true', \
         help='Perform all checks')
     lint_parser.add_argument('TARGETS', nargs='+', type=str, \
@@ -849,6 +861,7 @@ try:
             ARGS.executable = True
             ARGS.path = True
             ARGS.shebang = True
+            ARGS.backup = True
 
         message.info('Runtime information')
         message.sub_info('MAN', ARGS.man)
@@ -862,12 +875,13 @@ try:
         message.sub_info('EXECUTABLE', ARGS.executable)
         message.sub_info('PATH', ARGS.path)
         message.sub_info('SHEBANG', ARGS.shebang)
+        message.sub_info('BACKUP', ARGS.backup)
         message.sub_info('TARGETS', ARGS.TARGETS)
         message.info('Poking locals...')
 
         m = Lint(ARGS.TARGETS, ARGS.man, ARGS.udev, ARGS.symlink, ARGS.doc, \
             ARGS.module, ARGS.footprint, ARGS.builddir, ARGS.ownership, \
-            ARGS.executable, ARGS.path, ARGS.shebang)
+            ARGS.executable, ARGS.path, ARGS.shebang, ARGS.backup)
         m.main()
 
     elif ARGS.mode == 'sane':
