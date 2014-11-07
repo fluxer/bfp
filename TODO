@@ -6,7 +6,6 @@
  * Implement services trigger (rc.d restart foo)
  * Implement trigger invocation only on file content change
  * Build target(s) from source when binary not available?
- * Lint check for conflicts
  * Make the python byte-compile work for versions other than what SPM has been run from
 
 ## ALL (on regular basis) ##
