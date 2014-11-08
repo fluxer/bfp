@@ -1,4 +1,5 @@
 VERSION = 1.2.1
+GIT_VERSION = $(shell $(GIT) rev-parse --short HEAD || echo stable)
 
 TOPDIR = $(dir $(lastword $(MAKEFILE_LIST)))
 DESTDIR = 
@@ -13,13 +14,12 @@ SITEDIR = $(shell $(PYTHON) -c "import site; print(site.getsitepackages()[0])")
 APPLICATIONSDIR = $(PREFIX)/share/applications
 PIXMAPSDIR = $(PREFIX)/share/pixmaps
 BASHCOMPLETIONDIR = /etc/bash_completion.d/
-GIT = git
-GIT_VERSION = $(shell $(GIT) rev-parse --short HEAD || echo stable)
 
 MACHINE = $(shell $(GCC) -dumpmachine)
 ARCH = $(shell uname -m | $(SED) 's|_|-|')
-JOBS = $(shell echo $$((`$(GREP) -c ^processor /proc/cpuinfo || echo 1`+1)))
+JOBS = $(shell echo $$((`getconf _NPROCESSORS_CONF || echo 1`+1)))
 
+GIT = git
 GREP = grep
 FIND = find
 SED = sed
