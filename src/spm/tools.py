@@ -513,7 +513,8 @@ class Merge(object):
 ''')
         if action == '1':
             print('\n' + '*' * 80)
-            for line in list(difflib.Differ().compare(misc.file_readlines(sfile + '.backup'),
+            for line in list(difflib.Differ().compare( \
+                misc.file_readlines(sfile + '.backup'), \
                 misc.file_readlines(sfile))):
                 print(line)
             print('*' * 80 + '\n')
