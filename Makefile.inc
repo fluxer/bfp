@@ -8,8 +8,6 @@ BINDIR = $(PREFIX)/bin
 SBINDIR = $(PREFIX)/sbin
 SHAREDIR = $(PREFIX)/share
 MANDIR = $(SHAREDIR)/man
-PYTHON = python2
-PYTHON_VERSION = $(shell $(PYTHON) -c "import sys; print(sys.version[:3])")
 SITEDIR = $(shell $(PYTHON) -c "import site; print(site.getsitepackages()[0])")
 APPLICATIONSDIR = $(PREFIX)/share/applications
 PIXMAPSDIR = $(PREFIX)/share/pixmaps
@@ -20,16 +18,21 @@ ARCH = $(shell uname -m | $(SED) 's|_|-|')
 JOBS = $(shell echo $$((`getconf _NPROCESSORS_CONF || echo 1`+1)))
 
 GIT = git
+PYTHON = python2
+PYTHON_VERSION = $(shell $(PYTHON) -c "import sys; print(sys.version[:3])")
 GREP = grep
 FIND = find
 SED = sed
 GCC= gcc
-STRIP = strip
+ifeq ($(GIT_VERSION),stable)
+    STRIP = echo "Strip ignored on stable build, "
+else
+    STRIP = strip
+endif
 INSTALL = install -v
 RM = rm -vf
 CP = cp -vf
 XZ = xz -v
-
 PYUIC = pyuic4
 NUITKA = $(PYTHON) $(TOPDIR)/nuitka/bin/nuitka --recurse-not-to=PyQt4,parted \
 	--python-version=$(PYTHON_VERSION)
