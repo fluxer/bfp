@@ -185,11 +185,13 @@ try:
         found = False
         for line in misc.file_readlines(modsdir + '/modules.dep'):
             base = line.split(':')[0]
-            # depends = line.split(':')[1]
+            depends = line.split(':')[1].split()
             if '/' + module + '.ko' in base \
                 or '/' + module.replace('_', '-') + '.ko' in base:
                 found = True
                 copy_item(modsdir + '/' + base.strip())
+                for dep in depends:
+                    copy_item(modsdir + '/' + dep.strip())
         if not found:
             for line in misc.file_readlines(modsdir + '/modules.builtin'):
                 if '/' + module + '.ko' in line \
