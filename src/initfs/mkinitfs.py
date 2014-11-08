@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os
 
-app_version = "1.2.1 (f027b75)"
+app_version = "1.2.1 (2713a8f)"
 
 tmpdir = None
 keep = False
@@ -65,9 +65,12 @@ try:
                 return
             message.sub_debug('Linking', sreal)
             message.sub_debug('To', sdest)
-            copy_item(os.path.dirname(src))
-            if os.path.isdir(src):
-               misc.dir_create(ARGS.tmp + '/' + sreal)
+            if os.path.islink(os.path.dirname(src)):
+                copy_item(os.path.dirname(src))
+                if os.path.isdir(src):
+                    misc.dir_create(ARGS.tmp + '/' + sreal)
+            else:
+                misc.dir_create(ARGS.tmp + '/' + os.path.dirname(src))
             os.symlink(sreal, sdest)
             lcopied.append(src)
         elif os.path.isdir(src):
