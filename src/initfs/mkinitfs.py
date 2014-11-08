@@ -110,12 +110,14 @@ try:
     moddirs = ('/lib', '/lib32', '/lib64', '/usr/lib', '/usr/lib32', \
         '/usr/lib64')
     for sdir in moddirs:
+        if os.path.islink(sdir):
+            continue
         if os.path.isdir(sdir + '/modules/' + ARGS.kernel):
             modsdir = sdir + '/modules/' + ARGS.kernel
     # if the above fails, attempt to guess the kernel installed
     if not modsdir:
         for sdir in moddirs:
-            if not os.path.exists(sdir):
+            if not os.path.exists(sdir) or os.path.islink(sdir):
                 continue
             for k in os.listdir(sdir + '/modules'):
                 if os.path.isfile(sdir + '/modules/' + k + '/modules.dep') and \
