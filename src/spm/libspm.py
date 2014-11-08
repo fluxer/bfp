@@ -542,18 +542,21 @@ class Source(object):
             elif '/gtk-2.0/' in spath and '/immodules/' in spath and gtk2_immodules:
                 message.sub_info('Updating GTK-2.0 imodules cache')
                 message.sub_debug(spath)
+                misc.dir_create(ROOT_DIR + '/etc/gtk-2.0')
                 misc.system_trigger(gtk2_immodules + \
                     ' > /etc/gtk-2.0/gtk.immodules', shell=True)
                 gtk2_immodules = False
             elif '/gtk-3.0/' in spath and '/immodules/' in spath and gtk3_immodules:
                 message.sub_info('Updating GTK-3.0 imodules cache')
                 message.sub_debug(spath)
+                misc.dir_create(ROOT_DIR + '/etc/gtk-3.0')
                 misc.system_trigger(gtk3_immodules + \
                     ' > /etc/gtk-3.0/gtk.immodules', shell=True)
                 gtk3_immodules = False
             elif '/gdk-pixbuf' in spath and gdk_pixbuf:
                 message.sub_info('Updating gdk pixbuffer loaders')
                 message.sub_debug(spath)
+                misc.dir_create(ROOT_DIR + '/etc/gtk-2.0')
                 misc.system_trigger(gdk_pixbuf + \
                     ' > /etc/gtk-2.0/gdk-pixbuf.loaders', shell=True)
                 gdk_pixbuf = False
@@ -625,6 +628,7 @@ class Source(object):
         if grub_mkconfig_run:
             message.sub_info('Updating GRUB configuration')
             message.sub_debug(grub_mkconfig_path)
+            misc.dir_create(ROOT_DIR + '/boot/grub')
             misc.system_trigger((grub_mkconfig, '-o', '/boot/grub/grub.cfg'))
 
     def remove_target_file(self, sfile):
