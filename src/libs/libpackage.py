@@ -127,7 +127,7 @@ class Database(object):
         for installed in self.local_all(basename=True):
             basename = os.path.basename(target)
             # respect ignored targets
-            if target in self.IGNORE:
+            if installed in self.IGNORE:
                 return reverse
 
             if checked and installed in checked:
