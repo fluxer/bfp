@@ -648,6 +648,14 @@ class Source(object):
             else:
                 os.rmdir(sfull)
 
+    def remove_target_link(self, slink):
+        ''' Remove target link (sym/hard) '''
+        sfull = ROOT_DIR + slink
+        if os.path.islink(sfull) and \
+            not os.path.exists(ROOT_DIR + '/' + os.realink(sfull)):
+            message.sub_debug('Removing', sfull)
+            os.unlink(sfull)
+
     def clean(self):
         ''' Clean target files '''
         if os.path.isdir(self.install_dir) and self.do_install:
@@ -1062,7 +1070,8 @@ class Source(object):
                 self.remove_target_file(sfile)
             for sfile in reversed(remove_content):
                 self.remove_target_dir(os.path.dirname(sfile))
-
+            for sfile in reversed(remove_content):
+                self.remove_target_link(sfile)
 
             if misc.file_search('\npost_upgrade()', self.srcbuild, escape=False) \
                 and SCRIPTS:
@@ -1145,6 +1154,10 @@ class Source(object):
             message.sub_info('Removing directories')
             for sfile in reversed(target_content):
                 self.remove_target_dir(os.path.dirname(sfile))
+
+            message.sub_info('Removing links')
+            for sfile in reversed(target_content):
+                self.remove_target_link(sfile)
 
         if database.local_installed(self.target_name):
             message.sub_info('Removing footprint and metadata')
