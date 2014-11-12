@@ -66,8 +66,8 @@ class Misc(object):
             return string
 
     def string_convert(self, string):
-        ''' Conver input to string but only if it really is list '''
-        if isinstance(string, list) or isinstance(string, tuple):
+        ''' Conver input to string but only if it is not string '''
+        if isinstance(string, (list, tuple)):
             return ' '.join(string)
         return string
 

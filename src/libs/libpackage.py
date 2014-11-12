@@ -226,7 +226,7 @@ class Database(object):
         return [target]
 
     def remote_groups(self, basename=True):
-        ''' Get a list of groups in the repositories '''
+        ''' Returns groups in the repositories '''
         groups = []
         for sdir in misc.list_dirs(os.path.join(self.CACHE_DIR, \
             'repositories')):
