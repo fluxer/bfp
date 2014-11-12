@@ -652,7 +652,7 @@ class Source(object):
         ''' Remove target link (sym/hard) '''
         sfull = ROOT_DIR + slink
         if os.path.islink(sfull) and \
-            not os.path.exists(ROOT_DIR + '/' + os.realink(sfull)):
+            not os.path.exists(ROOT_DIR + '/' + os.readlink(sfull)):
             message.sub_debug('Removing', sfull)
             os.unlink(sfull)
 
