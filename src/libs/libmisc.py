@@ -60,7 +60,7 @@ class Misc(object):
 
     def string_encode(self, string):
         ''' String wrapper to ensure Python3 compat '''
-        if sys.version_info[0] >= 3 and isinstance(string, bytes):
+        if int(sys.version_info[0]) >= 3 and isinstance(string, bytes):
             return string.decode('utf-8')
         else:
             return string
