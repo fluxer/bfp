@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os
 
-app_version = "1.2.2 (38c8b1b)"
+app_version = "1.2.3 (d818323)"
 
 tmpdir = None
 keep = False
@@ -208,8 +208,7 @@ try:
     message.sub_info('Copying module files')
     for sfile in os.listdir(modsdir):
         if sfile.startswith('modules.'):
-            sfile = modsdir + '/' + sfile
-            copy_item(sfile)
+            copy_item(modsdir + '/' + sfile)
 
     message.sub_info('Updating module dependencies')
     misc.system_command((misc.whereis('depmod'), ARGS.kernel, '-b', ARGS.tmp))
