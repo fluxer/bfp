@@ -567,6 +567,7 @@ class Merge(object):
 
 
 class Edit(object):
+    ''' Edit SRCBUILDs from repository via EDITOR (fallbacks to vim) '''
     def __init__(self, targets):
         self.targets = targets
 
@@ -579,6 +580,7 @@ class Edit(object):
 
 
 class Which(object):
+    ''' Print full path to SRCBUILD of target(s) '''
     def __init__(self, pattern, cat=False, plain=False):
         self.pattern = pattern
         self.cat = cat
@@ -596,6 +598,7 @@ class Which(object):
 
 
 class Pack(object):
+    ''' Pack local (installed) target files into tarball '''
     def __init__(self, targets, directory=misc.dir_current()):
         self.targets = targets
         self.directory = directory
@@ -616,6 +619,7 @@ class Pack(object):
 
 
 class Pkg(object):
+    ''' Fetch Arch Linux package files '''
     def __init__(self, targets, directory=misc.dir_current()):
         self.targets = targets
         self.directory = directory
@@ -667,6 +671,7 @@ class Pkg(object):
 
 
 class Serve(object):
+    ''' Serve cache directories with local network parties '''
     def __init__(self, port, address):
         self.port = port
         self.address = address
@@ -682,6 +687,27 @@ class Serve(object):
         finally:
             if httpd:
                 httpd.shutdown()
+
+
+class Disowned(object):
+    ''' Print all files on the system not owned by a target '''
+    def __init__(self, directory='/', cross=False, plain=False):
+        self.directory = directory
+        self.cross = cross
+        self.plain = plain
+
+    def main(self):
+        if not self.plain:
+            message.sub_info('Caching host files, this may take a while')
+        lhostfiles = misc.list_files(self.directory, self.cross)
+        if not self.plain:
+            message.sub_info('Searching for disowned files')
+        for sfile in lhostfiles:
+            if not database.local_belongs(sfile, True):
+                if self.plain:
+                    print(sfile)
+                else:
+                    message.sub_info('Disowned file', sfile)
 
 
 try:
@@ -812,6 +838,14 @@ try:
         type=int, default=8000, help='Use port for the server')
     serve_parser.add_argument('-a', '--address', action='store', \
         type=str, default='', help='Use address for the server')
+
+    disowned_parser = subparsers.add_parser('disowned')
+    disowned_parser.add_argument('-d', '--directory', type=str, \
+        default='/', help='Set lookup directory')
+    disowned_parser.add_argument('-c', '--cross', action='store_true', \
+        help='Scan cross-filesystem')
+    disowned_parser.add_argument('-p', '--plain', action='store_true', \
+        help='Print in plain format')
 
     parser.add_argument('--debug', nargs=0, action=OverrideDebug, \
         help='Enable debug messages')
@@ -967,6 +1001,14 @@ try:
         message.sub_info('PORT', ARGS.port)
         message.sub_info('ADDRESS', ARGS.address)
         m = Serve(ARGS.port, ARGS.address)
+        m.main()
+
+    elif ARGS.mode == 'disowned':
+        if not ARGS.plain:
+            message.info('Runtime information')
+            message.sub_info('DIRECTORY', ARGS.directory)
+            message.sub_info('CROSS', ARGS.cross)
+        m = Disowned(ARGS.directory, ARGS.cross, ARGS.plain)
         m.main()
 
 except configparser.Error as detail:

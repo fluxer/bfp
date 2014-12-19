@@ -206,26 +206,38 @@ class Misc(object):
             cwd = '/'
         return cwd
 
-    def list_files(self, directory):
+    def list_files(self, directory, cross=True):
         ''' Get list of files in directory recursively '''
         slist = []
         for root, subdirs, files in os.walk(directory):
+            if not cross:
+                subdirs[:] = [
+                    dir for dir in subdirs
+                    if not os.path.ismount(os.path.join(root, dir))]
             for sfile in files:
                 slist.append(os.path.join(root, sfile))
         return slist
 
-    def list_dirs(self, directory):
+    def list_dirs(self, directory, cross=True):
         ''' Get list of directories in directory recursively '''
         slist = []
         for root, subdirs, files in os.walk(directory):
+            if not cross:
+                subdirs[:] = [
+                    dir for dir in subdirs
+                    if not os.path.ismount(os.path.join(root, dir))]
             for sdir in subdirs:
                 slist.append(os.path.join(root, sdir))
         return slist
 
-    def list_all(self, directory):
+    def list_all(self, directory, cross=True):
         ''' Get list of files and directories in directory recursively '''
         slist = []
         for root, subdirs, files in os.walk(directory):
+            if not cross:
+                subdirs[:] = [
+                    dir for dir in subdirs
+                    if not os.path.ismount(os.path.join(root, dir))]
             for sdir in subdirs:
                 slist.append(os.path.join(root, sdir))
             for sfile in files:
