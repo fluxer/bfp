@@ -35,6 +35,8 @@ _spm_tools()
 
     serve_options='-h --help -p --port -a --address'
 
+    disowned_options='-h --help -d --directory -c --cross -p --plain'
+
     _get_comp_words_by_ref cur prev
     _get_first_arg
 
@@ -62,6 +64,8 @@ _spm_tools()
         COMPREPLY=($(compgen -W "${pkg_options}" -- "${cur}"))
     elif [[ ${arg} = serve ]];then
         COMPREPLY=($(compgen -W "${serve_options}" -- "${cur}"))
+    elif [[ ${arg} = disowned ]];then
+        COMPREPLY=($(compgen -W "${disowned_options}" -- "${cur}"))
     fi
 }
 
