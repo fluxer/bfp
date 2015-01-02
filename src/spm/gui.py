@@ -1,7 +1,7 @@
 #!/bin/python2
 
 from PyQt4 import QtCore, QtGui
-import sys
+import sys, pwd
 if sys.version < '3':
     import ConfigParser as configparser
 else:
@@ -167,6 +167,11 @@ def RefreshSettings():
     ui.BackupBox.setCheckState(libspm.BACKUP)
     ui.ScriptsBox.setCheckState(libspm.SCRIPTS)
     ui.TriggersBox.setCheckState(libspm.TRIGGERS)
+
+    for user in pwd.getpwall():
+        ui.DemoteBox.addItem(user.pw_name)
+    index = ui.DemoteBox.findText(libspm.DEMOTE)
+    ui.DemoteBox.setCurrentIndex(index)
 
 def SearchMetadata():
     current = str(ui.filtersBox.currentText())
@@ -357,6 +362,7 @@ def ChangeSettings():
         conf.set('spm', 'CACHE_DIR', str(ui.CacheDirEdit.text()))
         conf.set('spm', 'BUILD_DIR', str(ui.BuildDirEdit.text()))
         conf.set('spm', 'IGNORE', str(ui.IgnoreTargetsEdit.text()))
+        conf.set('spm', 'DEMOTE', str(ui.DemoteBox.currentText()))
         conf.set('prepare', 'MIRROR', str(ui.UseMirrorsBox.isChecked()))
         conf.set('prepare', 'TIMEOUT', str(ui.ConnectionTimeoutBox.value()))
         conf.set('prepare', 'EXTERNAL', str(ui.ExternalFetcherBox.isChecked()))
@@ -413,6 +419,7 @@ ui.CacheDirButton.clicked.connect(ChangeCacheDir)
 ui.BuildDirEdit.textChanged.connect(ChangeSettings)
 ui.BuildDirButton.clicked.connect(ChangeBuildDir)
 ui.IgnoreTargetsEdit.textChanged.connect(ChangeSettings)
+ui.DemoteBox.currentIndexChanged.connect(ChangeSettings)
 ui.ConnectionTimeoutBox.valueChanged.connect(ChangeSettings)
 ui.UseMirrorsBox.clicked.connect(ChangeSettings)
 ui.ExternalFetcherBox.clicked.connect(ChangeSettings)

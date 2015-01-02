@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>476</width>
-    <height>551</height>
+    <height>553</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -56,6 +56,13 @@
      <widget class="QProgressBar" name="progressBar">
       <property name="value">
        <number>24</number>
+      </property>
+     </widget>
+    </item>
+    <item row="1" column="0">
+     <widget class="QListWidget" name="targetsView">
+      <property name="selectionMode">
+       <enum>QAbstractItemView::ExtendedSelection</enum>
       </property>
      </widget>
     </item>
@@ -116,13 +123,6 @@
         </widget>
        </item>
       </layout>
-     </widget>
-    </item>
-    <item row="1" column="0">
-     <widget class="QListWidget" name="targetsView">
-      <property name="selectionMode">
-       <enum>QAbstractItemView::ExtendedSelection</enum>
-      </property>
      </widget>
     </item>
     <item row="2" column="0" colspan="2">
@@ -206,7 +206,24 @@
         <string>Settings</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_6">
-        <item row="2" column="0" colspan="2">
+        <item row="0" column="0">
+         <widget class="QLineEdit" name="CacheDirEdit">
+          <property name="toolTip">
+           <string>Caches directory</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="0" colspan="2">
+         <widget class="QCheckBox" name="CompressManBox">
+          <property name="toolTip">
+           <string>Set whether to compress manual pages</string>
+          </property>
+          <property name="text">
+           <string>Compress manual pages</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="0" colspan="2">
          <widget class="QCheckBox" name="UseMirrorsBox">
           <property name="toolTip">
            <string>Set whether to use mirrors for distfiles</string>
@@ -216,20 +233,40 @@
           </property>
          </widget>
         </item>
-        <item row="2" column="2" colspan="2">
-         <widget class="QCheckBox" name="ExternalFetcherBox">
-          <property name="toolTip">
-           <string>Set whether to use external utilities to fetch URLs</string>
-          </property>
-          <property name="text">
-           <string>Use external fetcher</string>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="0">
          <widget class="QLineEdit" name="IgnoreTargetsEdit">
           <property name="toolTip">
            <string>Ignored targets, usefull to prevent target upgrades</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="2">
+         <widget class="QLineEdit" name="BuildDirEdit">
+          <property name="toolTip">
+           <string>Build directory</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0" colspan="2">
+         <widget class="QCheckBox" name="StripRPATHBox">
+          <property name="toolTip">
+           <string>Set whether to strip RPATH (runtime path) from binaries
+and libraries, it is recommended to keep it enabled but
+some applications may require it</string>
+          </property>
+          <property name="text">
+           <string>Strip insecure RPATH</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="0" colspan="2">
+         <widget class="QCheckBox" name="PythonCompileBox">
+          <property name="toolTip">
+           <string>Set whether to byte-compile Python module files, do
+not disable it unless you know what you are doing!</string>
+          </property>
+          <property name="text">
+           <string>Byte-compile Python modules</string>
           </property>
          </widget>
         </item>
@@ -243,7 +280,7 @@
           </property>
          </widget>
         </item>
-        <item row="4" column="0" colspan="2">
+        <item row="5" column="0" colspan="2">
          <widget class="QCheckBox" name="StripSharedBox">
           <property name="toolTip">
            <string>Set whether to strip shared libraries symbols, disable
@@ -254,7 +291,7 @@ it if you need to debug applications via backtrace</string>
           </property>
          </widget>
         </item>
-        <item row="7" column="0" colspan="2">
+        <item row="8" column="0" colspan="2">
          <widget class="QCheckBox" name="ScriptsBox">
           <property name="toolTip">
            <string>Set whether to execute pre/post action scripts, do not
@@ -302,10 +339,23 @@ disable it unless you know what you are doing!</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="2">
-         <widget class="QLineEdit" name="BuildDirEdit">
+        <item row="2" column="0">
+         <widget class="QComboBox" name="DemoteBox">
+          <item>
+           <property name="text">
+            <string/>
+           </property>
+          </item>
+         </widget>
+        </item>
+        <item row="4" column="2" colspan="2">
+         <widget class="QCheckBox" name="StripStaticBox">
           <property name="toolTip">
-           <string>Build directory</string>
+           <string>Set whether to strip static libraries symbols, disable it
+if you need to debug applications via backtrace</string>
+          </property>
+          <property name="text">
+           <string>Strip static libraries</string>
           </property>
          </widget>
         </item>
@@ -320,49 +370,13 @@ need to debug applications via backtrace</string>
           </property>
          </widget>
         </item>
-        <item row="5" column="0" colspan="2">
-         <widget class="QCheckBox" name="StripRPATHBox">
+        <item row="2" column="2" colspan="2">
+         <widget class="QCheckBox" name="ExternalFetcherBox">
           <property name="toolTip">
-           <string>Set whether to strip RPATH (runtime path) from binaries
-and libraries, it is recommended to keep it enabled but
-some applications may require it</string>
+           <string>Set whether to use external utilities to fetch URLs</string>
           </property>
           <property name="text">
-           <string>Strip insecure RPATH</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="0" colspan="2">
-         <widget class="QCheckBox" name="PythonCompileBox">
-          <property name="toolTip">
-           <string>Set whether to byte-compile Python module files, do
-not disable it unless you know what you are doing!</string>
-          </property>
-          <property name="text">
-           <string>Byte-compile Python modules</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="2" colspan="2">
-         <widget class="QCheckBox" name="StripStaticBox">
-          <property name="toolTip">
-           <string>Set whether to strip static libraries symbols, disable it
-if you need to debug applications via backtrace</string>
-          </property>
-          <property name="text">
-           <string>Strip static libraries</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="2" colspan="2">
-         <widget class="QCheckBox" name="ConflictsBox">
-          <property name="toolTip">
-           <string>Set whether to check for conflicts in targets when
-merging them, do not disable unless it you know what
-you are doing!</string>
-          </property>
-          <property name="text">
-           <string>Check for conflicts</string>
+           <string>Use external fetcher</string>
           </property>
          </widget>
         </item>
@@ -378,6 +392,18 @@ the installation procedure</string>
           </property>
          </widget>
         </item>
+        <item row="6" column="2" colspan="2">
+         <widget class="QCheckBox" name="ConflictsBox">
+          <property name="toolTip">
+           <string>Set whether to check for conflicts in targets when
+merging them, do not disable unless it you know what
+you are doing!</string>
+          </property>
+          <property name="text">
+           <string>Check for conflicts</string>
+          </property>
+         </widget>
+        </item>
         <item row="7" column="2" colspan="2">
          <widget class="QCheckBox" name="TriggersBox">
           <property name="toolTip">
@@ -390,24 +416,7 @@ you know what you are doing!</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="0">
-         <widget class="QLineEdit" name="CacheDirEdit">
-          <property name="toolTip">
-           <string>Caches directory</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="0" colspan="2">
-         <widget class="QCheckBox" name="CompressManBox">
-          <property name="toolTip">
-           <string>Set whether to compress manual pages</string>
-          </property>
-          <property name="text">
-           <string>Compress manual pages</string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="0" colspan="2">
+        <item row="8" column="2" colspan="2">
          <widget class="QCheckBox" name="BackupBox">
           <property name="toolTip">
            <string>Set whether to backup files whne merging targets, it
@@ -416,6 +425,16 @@ changes as a backup of the original when needed</string>
           </property>
           <property name="text">
            <string>Backup essential files</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="1">
+         <widget class="QLabel" name="label_4">
+          <property name="text">
+           <string>Demote</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </item>
