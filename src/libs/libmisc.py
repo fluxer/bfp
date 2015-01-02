@@ -283,7 +283,7 @@ class Misc(object):
         output.close()
         rfile.close()
 
-    def fetch(self, url, destination):
+    def fetch(self, url, destination, demote=None):
         ''' Download file using external utilities, fallback to internal '''
         if self.OFFLINE:
             return
@@ -296,10 +296,11 @@ class Misc(object):
         if self.EXTERNAL and curl:
             self.system_command((curl, '--connect-timeout', str(self.TIMEOUT), \
                 '--fail', '--retry', '10', '--location', '--continue-at', '-', \
-                url, '--output', destination))
+                url, '--output', destination), demote=demote)
         elif self.EXTERNAL and wget:
             self.system_command((wget, '--timeout', str(self.TIMEOUT), \
-                '--continue', url, '--output-document', destination))
+                '--continue', url, '--output-document', destination), \
+                demote=demote)
         else:
             self.fetch_internal(url, destination)
 
