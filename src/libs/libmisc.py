@@ -393,12 +393,12 @@ class Misc(object):
 
     def system_demote(self, user):
         ''' Change priviledges to different user, returns function pointer! '''
-        if not user:
-            return
         group = user
-        if ':' in user:
+        if user and ':' in user:
             group = user.split(':')[1]
             user = user.split(':')[0]
+        if not user:
+            return
         # lambda
         def result():
             pw_uid = pwd.getpwnam(user).pw_uid
