@@ -17,7 +17,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.2.3 (8074c80)"
+app_version = "1.2.3 (4903d1f)"
 
 try:
     import libmessage
@@ -377,7 +377,7 @@ try:
         message.sub_info('PRUNE', ARGS.prune)
         message.sub_info('CACHE_DIR', libspm.CACHE_DIR)
         message.sub_info('REPOSITORIES', libspm.REPOSITORIES)
-        message.sub_info('DEMOTE', ARGS.demote)
+        message.sub_info('DEMOTE', libspm.DEMOTE)
         for repository in libspm.REPOSITORIES:
             message.sub_info('REPOSITORY', repository)
         message.info('Poking repositories...')
@@ -441,7 +441,7 @@ try:
         message.sub_info('CONFLICTS', libspm.CONFLICTS)
         message.sub_info('BACKUP', libspm.BACKUP)
         message.sub_info('SCRIPTS', libspm.SCRIPTS)
-        message.sub_info('DEMOTE', ARGS.demote)
+        message.sub_info('DEMOTE', libspm.DEMOTE)
         message.sub_info('TARGETS', ARGS.TARGETS)
         message.info('Poking sources...')
         if ARGS.automake:
@@ -479,10 +479,10 @@ try:
         message.sub_info('BACKUP', libspm.BACKUP)
         message.sub_info('SCRIPTS', libspm.SCRIPTS)
         message.sub_info('TARGETS', ARGS.TARGETS)
-        message.sub_info('DEMOTE', ARGS.demote)
+        message.sub_info('DEMOTE', libspm.DEMOTE)
         message.info('Poking binaries...')
         m = libspm.Binary(ARGS.TARGETS, ARGS.merge, ARGS.remove, \
-            ARGS.depends, ARGS.reverse, ARGS.update, ARGS.demote)
+            ARGS.depends, ARGS.reverse, ARGS.update)
         m.main()
 
     elif ARGS.mode == 'local':

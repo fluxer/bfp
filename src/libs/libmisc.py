@@ -349,14 +349,10 @@ class Misc(object):
         if sfile.endswith(('.xz', '.lzma')) \
             or tarfile.is_tarfile(sfile) or zipfile.is_zipfile(sfile):
             bsdtar = self.whereis('bsdtar', fallback=False)
-            # if bsdtar is present but tar is not do not fail and make tar
-            # requirement only if bsdtar is not available
-            if not bsdtar:
-                tar = self.whereis('tar')
             if bsdtar:
                 self.system_command((bsdtar, '-xpPf', sfile, '-C', sdir), demote=demote)
             else:
-                self.system_command((tar, '-xphf', sfile, '-C', sdir), demote=demote)
+                self.system_command((self.whereis('tar'), '-xphf', sfile, '-C', sdir), demote=demote)
         elif sfile.endswith('.gz'):
             # FIXME: implement gzip decompression
             raise(Exception('Gzip decompression not implemented yet'))
@@ -397,7 +393,7 @@ class Misc(object):
         if user and ':' in user:
             group = user.split(':')[1]
             user = user.split(':')[0]
-        if not user:
+        if not user or not group:
             return
         # lambda
         def result():
@@ -433,7 +429,7 @@ class Misc(object):
     def system_scanelf(self, sfile, sformat='#F%n', sflags='', demote=None):
         ''' Get information about ELF files '''
         return self.system_output((self.whereis('scanelf'), '-CBF', \
-            sformat, sflags, sfile))
+            sformat, sflags, sfile), demote=demote)
 
     def system_command(self, command, shell=False, cwd=None, catch=False, demote=None):
         ''' Execute system command safely '''
