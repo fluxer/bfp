@@ -1,12 +1,10 @@
 include ../../Makefile.inc
 
 all: clean
-	$(NUITKA) --recurse-not-to=libmisc --module libarchive.py
 	$(NUITKA) --module libmagic.py
 	$(NUITKA) --module libmessage.py
 	$(NUITKA) --module libmisc.py
 	$(NUITKA) --module libpackage.py
-	$(NUITKA) --module libsystem.py
 	$(STRIP) *.so
 
 check:
@@ -17,12 +15,10 @@ install:
 	$(INSTALL) -m644 *.so $(DESTDIR)$(SITEDIR)/
 
 uninstall:
-	$(RM) $(DESTDIR)$(SITEDIR)/libarchive.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libmagic.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libmessage.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libmisc.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libpackage.so
-	$(RM) $(DESTDIR)$(SITEDIR)/libsystem.so
 
 clean:
 	$(RM) -r *.build/ *.so __pycache__
