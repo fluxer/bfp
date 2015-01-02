@@ -9,6 +9,7 @@ import zipfile
 import shutil
 import os
 import re
+import pwd
 if sys.version < '3':
     import ConfigParser as configparser
     from urllib2 import HTTPError
@@ -53,6 +54,12 @@ try:
         ''' Override ignored targets '''
         def __call__(self, parser, namespace, values, option_string=None):
             libspm.IGNORE = values.split(' ')
+            setattr(namespace, self.dest, values)
+
+    class OverrideDemote(argparse.Action):
+        ''' Override execution of triggers '''
+        def __call__(self, parser, namespace, values, option_string=None):
+            libspm.DEMOTE = values
             setattr(namespace, self.dest, values)
 
     class OverrideOffline(argparse.Action):
@@ -193,18 +200,17 @@ try:
         epilog='NOTE: Some features are available only to the root user.')
     subparsers = parser.add_subparsers(dest='mode')
 
-    if EUID == 0:
-        repo_parser = subparsers.add_parser('repo')
-        repo_parser.add_argument('-c', '--clean', action='store_true', \
-            help='Purge repositories')
-        repo_parser.add_argument('-s', '--sync', action='store_true', \
-            help='Sync repositories')
-        repo_parser.add_argument('-p', '--prune', action='store_true', \
-            help='Prune old repositories')
-        repo_parser.add_argument('-u', '--update', action='store_true', \
-            help='Check repositories for updates')
-        repo_parser.add_argument('-a', '--all', action='store_true', \
-            help='short for clean, sync, prune and update')
+    repo_parser = subparsers.add_parser('repo')
+    repo_parser.add_argument('-c', '--clean', action='store_true', \
+        help='Purge repositories')
+    repo_parser.add_argument('-s', '--sync', action='store_true', \
+        help='Sync repositories')
+    repo_parser.add_argument('-p', '--prune', action='store_true', \
+        help='Prune old repositories')
+    repo_parser.add_argument('-u', '--update', action='store_true', \
+        help='Check repositories for updates')
+    repo_parser.add_argument('-a', '--all', action='store_true', \
+        help='short for clean, sync, prune and update')
 
     remote_parser = subparsers.add_parser('remote')
     remote_parser.add_argument('-n', '--name', action='store_true', \
@@ -230,47 +236,45 @@ try:
     remote_parser.add_argument('PATTERN', type=str, \
         help='Pattern to search for in remote targets')
 
-    if EUID == 0:
-        source_parser = subparsers.add_parser('source')
-        source_parser.add_argument('-C', '--clean', action='store_true', \
-            help='Purge sources and compiled files of target')
-        source_parser.add_argument('-p', '--prepare', action='store_true', \
-            help='Prepare sources of target')
-        source_parser.add_argument('-c', '--compile', action='store_true', \
-            help='Compile sources of target')
-        source_parser.add_argument('-k', '--check', action='store_true', \
-            help='Check sources of target')
-        source_parser.add_argument('-i', '--install', action='store_true', \
-            help='Install compiled files of target')
-        source_parser.add_argument('-m', '--merge', action='store_true', \
-            help='Merge compiled files of target to system')
-        source_parser.add_argument('-r', '--remove', action='store_true', \
-            help='Remove compiled files of target from system')
-        source_parser.add_argument('-D', '--depends', action='store_true', \
-            help='Consider dependency targets')
-        source_parser.add_argument('-R', '--reverse', action='store_true', \
-            help='Consider reverse dependency targets')
-        source_parser.add_argument('-u', '--update', action='store_true', \
-            help='Apply actions only if update is available')
-        source_parser.add_argument('-a', '--automake', action='store_true', \
-            help='Short for clean, prepare, compile, install and merge')
-        source_parser.add_argument('TARGETS', nargs='+', type=str, \
-            help='Targets to apply actions on')
+    source_parser = subparsers.add_parser('source')
+    source_parser.add_argument('-C', '--clean', action='store_true', \
+        help='Purge sources and compiled files of target')
+    source_parser.add_argument('-p', '--prepare', action='store_true', \
+        help='Prepare sources of target')
+    source_parser.add_argument('-c', '--compile', action='store_true', \
+        help='Compile sources of target')
+    source_parser.add_argument('-k', '--check', action='store_true', \
+        help='Check sources of target')
+    source_parser.add_argument('-i', '--install', action='store_true', \
+        help='Install compiled files of target')
+    source_parser.add_argument('-m', '--merge', action='store_true', \
+        help='Merge compiled files of target to system')
+    source_parser.add_argument('-r', '--remove', action='store_true', \
+        help='Remove compiled files of target from system')
+    source_parser.add_argument('-D', '--depends', action='store_true', \
+        help='Consider dependency targets')
+    source_parser.add_argument('-R', '--reverse', action='store_true', \
+        help='Consider reverse dependency targets')
+    source_parser.add_argument('-u', '--update', action='store_true', \
+        help='Apply actions only if update is available')
+    source_parser.add_argument('-a', '--automake', action='store_true', \
+        help='Short for clean, prepare, compile, install and merge')
+    source_parser.add_argument('TARGETS', nargs='+', type=str, \
+        help='Targets to apply actions on')
 
-    if EUID == 0:
-        binary_parser = subparsers.add_parser('binary')
-        binary_parser.add_argument('-m', '--merge', action='store_true', \
-            help='Merge compiled files of target to system')
-        binary_parser.add_argument('-r', '--remove', action='store_true', \
-            help='Remove compiled files of target from system')
-        binary_parser.add_argument('-D', '--depends', action='store_true', \
-            help='Consider dependency targets')
-        binary_parser.add_argument('-R', '--reverse', action='store_true', \
-            help='Consider reverse dependency targets')
-        binary_parser.add_argument('-u', '--update', action='store_true', \
-            help='Apply actions only if update is available')
-        binary_parser.add_argument('TARGETS', nargs='+', type=str, \
-            help='Targets to apply actions on')
+    binary_parser = subparsers.add_parser('binary')
+    binary_parser.add_argument('-m', '--merge', action='store_true', \
+        help='Merge compiled files of target to system')
+    binary_parser.add_argument('-r', '--remove', action='store_true', \
+        help='Remove compiled files of target from system')
+    binary_parser.add_argument('-D', '--depends', action='store_true', \
+        help='Consider dependency targets')
+    binary_parser.add_argument('-R', '--reverse', action='store_true', \
+        help='Consider reverse dependency targets')
+    binary_parser.add_argument('-u', '--update', action='store_true', \
+        help='Apply actions only if update is available')
+    binary_parser.add_argument('TARGETS', nargs='+', type=str, \
+        help='Targets to apply actions on')
 
     local_parser = subparsers.add_parser('local')
     local_parser.add_argument('-n', '--name', action='store_true', \
@@ -306,6 +310,8 @@ try:
         help='Change system root directory')
     parser.add_argument('--ignore', type=str, action=OverrideIgnore, \
         help='Change ignored targets')
+    parser.add_argument('--demote', type=str, \
+        action=OverrideDemote, help='Set user to demote to')
     parser.add_argument('--offline', type=ast.literal_eval, \
         action=OverrideOffline, help='Set whether to use offline mode')
     parser.add_argument('--mirror', type=ast.literal_eval, \
@@ -371,11 +377,12 @@ try:
         message.sub_info('PRUNE', ARGS.prune)
         message.sub_info('CACHE_DIR', libspm.CACHE_DIR)
         message.sub_info('REPOSITORIES', libspm.REPOSITORIES)
+        message.sub_info('DEMOTE', libspm.DEMOTE)
         for repository in libspm.REPOSITORIES:
             message.sub_info('REPOSITORY', repository)
         message.info('Poking repositories...')
         m = libspm.Repo(libspm.REPOSITORIES, ARGS.clean, \
-                ARGS.sync, ARGS.update, ARGS.prune)
+                ARGS.sync, ARGS.update, ARGS.prune, ARGS.demote)
         m.main()
 
     elif ARGS.mode == 'remote':
@@ -434,6 +441,7 @@ try:
         message.sub_info('CONFLICTS', libspm.CONFLICTS)
         message.sub_info('BACKUP', libspm.BACKUP)
         message.sub_info('SCRIPTS', libspm.SCRIPTS)
+        message.sub_info('DEMOTE', ARGS.demote)
         message.sub_info('TARGETS', ARGS.TARGETS)
         message.info('Poking sources...')
         if ARGS.automake:
@@ -471,9 +479,10 @@ try:
         message.sub_info('BACKUP', libspm.BACKUP)
         message.sub_info('SCRIPTS', libspm.SCRIPTS)
         message.sub_info('TARGETS', ARGS.TARGETS)
+        message.sub_info('DEMOTE', ARGS.demote)
         message.info('Poking binaries...')
-        m = libspm.Binary(ARGS.TARGETS, ARGS.merge, \
-                ARGS.remove, ARGS.depends, ARGS.reverse, ARGS.update)
+        m = libspm.Binary(ARGS.TARGETS, ARGS.merge, ARGS.remove, \
+            ARGS.depends, ARGS.reverse, ARGS.update, ARGS.demote)
         m.main()
 
     elif ARGS.mode == 'local':

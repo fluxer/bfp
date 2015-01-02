@@ -1,6 +1,6 @@
 #!/bin/python2
 
-import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, libmagic
+import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, pwd, libmagic
 if sys.version < '3':
     from urlparse import urlparse
     from urllib2 import urlopen
@@ -164,10 +164,14 @@ class Misc(object):
         ''' Substitue a string with another in file '''
         self.file_write(sfile, re.sub(string, string2, self.file_read(sfile)))
 
-    def dir_create(self, sdir):
+    def dir_create(self, sdir, demote=None):
         ''' Create directory if it does not exist, including leading paths '''
         if not os.path.isdir(sdir) and not os.path.islink(sdir):
-            os.makedirs(sdir)
+            # sadly, demoting works only for sub-processes
+            if demote:
+                self.system_command((self.whereis('mkdir'), '-p', sdir), demote=demote)
+            else:
+                os.makedirs(sdir)
 
     def dir_remove(self, sdir):
         ''' Remove directory recursively '''
@@ -330,7 +334,7 @@ class Misc(object):
             # FIXME: implement lzma/xz compression
             raise(Exception('LZMA/XZ compression not implemented yet'))
 
-    def archive_decompress(self, sfile, sdir):
+    def archive_decompress(self, sfile, sdir, demote=None):
         ''' Extract archive to directory '''
         self.dir_create(sdir)
 
@@ -341,23 +345,17 @@ class Misc(object):
         # filesystem stays locked which is bad. on top of that the tarfile
         # library can not replace files while they are being used thus the
         # external utilities are used for extracting tar archives.
-
-        # altought bsdtar can (or should) handle Zip files it is not used for them.
         if sfile.endswith(('.xz', '.lzma')) \
-            or tarfile.is_tarfile(sfile):
+            or tarfile.is_tarfile(sfile) or zipfile.is_zipfile(sfile):
             bsdtar = self.whereis('bsdtar', fallback=False)
             # if bsdtar is present but tar is not do not fail and make tar
             # requirement only if bsdtar is not available
             if not bsdtar:
                 tar = self.whereis('tar')
             if bsdtar:
-                self.system_command((bsdtar, '-xpPf', sfile, '-C', sdir))
+                self.system_command((bsdtar, '-xpPf', sfile, '-C', sdir), demote=demote)
             else:
-                self.system_command((tar, '-xphf', sfile, '-C', sdir))
-        elif zipfile.is_zipfile(sfile):
-            zfile = zipfile.ZipFile(sfile, 'r')
-            zfile.extractall(path=sdir)
-            zfile.close()
+                self.system_command((tar, '-xphf', sfile, '-C', sdir), demote=demote)
         elif sfile.endswith('.gz'):
             # FIXME: implement gzip decompression
             raise(Exception('Gzip decompression not implemented yet'))
@@ -392,28 +390,51 @@ class Misc(object):
         tar.close()
         return size
 
-    def system_output(self, command, shell=False):
+    def system_demote(self, user):
+        ''' Change priviledges to different user, returns function pointer! '''
+        if not user:
+            return
+        group = user
+        if ':' in user:
+            group = user.split(':')[1]
+            user = user.split(':')[0]
+        # lambda
+        def result():
+            pw_uid = pwd.getpwnam(user).pw_uid
+            pw_gid = pwd.getpwnam(group).pw_gid
+            pw_dir = pwd.getpwnam(user).pw_dir
+            # os.initgroups(user, pw_gid)
+            os.setgid(0)
+            os.setgid(pw_gid)
+            os.setuid(pw_uid)
+            os.putenv('USER', user)
+            os.putenv('LOGNAME', user)
+            os.putenv('HOME', pw_dir)
+            os.putenv('PWD', pw_dir)
+        return result
+
+    def system_output(self, command, shell=False, demote=None):
         ''' Get output of external utility '''
         pipe = subprocess.Popen(command, stdout=subprocess.PIPE, \
-            env={'LC_ALL': 'C'}, shell=shell)
+            env={'LC_ALL': 'C'}, shell=shell, preexec_fn=self.system_demote(demote))
         output = pipe.communicate()[0].strip()
         return self.string_encode(output)
 
-    def system_input(self, command, input, shell=False):
+    def system_input(self, command, input, shell=False, demote=None):
         ''' Send input to external utility '''
         pipe = subprocess.Popen(command, stdin=subprocess.PIPE, \
             stdout=subprocess.PIPE, stderr=subprocess.PIPE, \
-            env={'LC_ALL': 'C'}, shell=shell)
+            env={'LC_ALL': 'C'}, shell=shell, preexec_fn=self.system_demote(demote))
         out, err = pipe.communicate(input=input)
         if pipe.returncode != 0:
             raise(Exception('%s %s' % (out, err)))
 
-    def system_scanelf(self, sfile, sformat='#F%n', sflags=''):
+    def system_scanelf(self, sfile, sformat='#F%n', sflags='', demote=None):
         ''' Get information about ELF files '''
         return self.system_output((self.whereis('scanelf'), '-CBF', \
             sformat, sflags, sfile))
 
-    def system_command(self, command, shell=False, cwd=None, catch=False):
+    def system_command(self, command, shell=False, cwd=None, catch=False, demote=None):
         ''' Execute system command safely '''
         if not cwd:
             cwd = self.dir_current()
@@ -423,13 +444,14 @@ class Misc(object):
             command = shlex.split(command)
         if catch or self.CATCH:
             pipe = subprocess.Popen(command, stderr=subprocess.PIPE, \
-                shell=shell, cwd=cwd)
+                shell=shell, cwd=cwd, preexec_fn=self.system_demote(demote))
             pipe.wait()
             if pipe.returncode != 0:
                 raise(Exception(pipe.communicate()[1].strip()))
             return pipe.returncode
         else:
-            return subprocess.check_call(command, shell=shell, cwd=cwd)
+            return subprocess.check_call(command, shell=shell, cwd=cwd, \
+                preexec_fn=self.system_demote(demote))
 
     def system_chroot(self, command, shell=False):
         ''' Execute command in chroot environment '''

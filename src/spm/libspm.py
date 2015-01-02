@@ -32,11 +32,12 @@ if not os.path.isfile(MAIN_CONF):
     BUILD_DIR = '/var/tmp/spm'
     ROOT_DIR = '/'
     LOCAL_DIR = ROOT_DIR + 'var/local/spm'
+    IGNORE = []
+    DEMOTE = None
     OFFLINE = False
     MIRROR = False
     TIMEOUT = 30
     EXTERNAL = False
-    IGNORE = []
     CHOST = ''
     CFLAGS = ''
     CXXFLAGS = ''
@@ -63,6 +64,7 @@ else:
     ROOT_DIR = conf.get('spm', 'ROOT_DIR')
     LOCAL_DIR = ROOT_DIR + 'var/local/spm'
     IGNORE = conf.get('spm', 'IGNORE').split(' ')
+    DEMOTE = conf.get('spm', 'DEMOTE')
     OFFLINE = conf.getboolean('prepare', 'OFFLINE')
     MIRROR = conf.getboolean('prepare', 'MIRROR')
     TIMEOUT = conf.getint('prepare', 'TIMEOUT')
@@ -327,7 +329,7 @@ class Repo(object):
     def sync(self):
         ''' Sync repository '''
         rdir = os.path.join(CACHE_DIR, 'repositories')
-        misc.dir_create(rdir)
+        misc.dir_create(rdir, DEMOTE)
 
         if os.path.exists(self.repository_url):
             # repository is local path, create a copy of it
@@ -337,12 +339,12 @@ class Repo(object):
             # existing Git repository
             message.sub_info('Updating repository', self.repository_name)
             misc.system_command((misc.whereis('git'), 'pull', '--depth=1', \
-                self.repository_url), cwd=self.repository_dir)
+                self.repository_url), cwd=self.repository_dir, demote=DEMOTE)
         else:
             # non-existing Git repository, fetch
             message.sub_info('Cloning remote', self.repository_name)
             misc.system_command((misc.whereis('git'), 'clone', '--depth=1', \
-                self.repository_url, self.repository_dir))
+                self.repository_url, self.repository_dir), demote=DEMOTE)
 
     def prune(self):
         ''' Remove repositories that are no longer in the config '''
@@ -690,8 +692,8 @@ class Source(object):
         elif missing_dependencies:
             message.sub_warning('Dependencies missing', missing_dependencies)
 
-        misc.dir_create(self.source_dir)
-        misc.dir_create(self.sources_dir)
+        misc.dir_create(self.source_dir, DEMOTE)
+        misc.dir_create(self.sources_dir, DEMOTE)
 
         message.sub_info('Preparing sources')
         for src_url in self.target_sources:
@@ -707,11 +709,11 @@ class Source(object):
                 elif os.path.isdir(link_file):
                     message.sub_debug('Updating repository', src_url)
                     misc.system_command((misc.whereis('git'), 'pull', \
-                        '--depth=1', src_url), cwd=link_file)
+                        '--depth=1', src_url), cwd=link_file, demote=DEMOTE)
                 else:
                     message.sub_debug('Cloning initial copy', src_url)
                     misc.system_command((misc.whereis('git'), 'clone', \
-                        '--depth=1', src_url, link_file))
+                        '--depth=1', src_url, link_file), demote=DEMOTE)
                 continue
 
             elif src_url.startswith(('http://', 'https://', 'ftp://', \
@@ -751,7 +753,7 @@ class Source(object):
                 for sfile in misc.archive_list(link_file):
                     if not os.path.exists(os.path.join(self.source_dir, sfile)):
                         message.sub_debug('Extracting', link_file)
-                        misc.archive_decompress(link_file, self.source_dir)
+                        misc.archive_decompress(link_file, self.source_dir, DEMOTE)
                         decompressed = True
                         break
                 if not decompressed:
@@ -760,19 +762,22 @@ class Source(object):
     def compile(self):
         ''' Compile target sources '''
         misc.system_command((misc.whereis('bash'), '-e', '-c', 'source ' + \
-            self.srcbuild + ' && umask 0022 && src_compile'), cwd=self.source_dir)
+            self.srcbuild + ' && umask 0022 && src_compile'), \
+            cwd=self.source_dir, demote=DEMOTE)
 
     def check(self):
         ''' Check target sources '''
         misc.system_command((misc.whereis('bash'), '-e', '-c', 'source ' + \
-            self.srcbuild + ' && umask 0022 && src_check'), cwd=self.source_dir)
+            self.srcbuild + ' && umask 0022 && src_check'), \
+            cwd=self.source_dir, demote=DEMOTE)
 
     def install(self):
         ''' Install targets files '''
-        misc.dir_create(self.install_dir)
+        misc.dir_create(self.install_dir, DEMOTE)
 
         misc.system_command((misc.whereis('bash'), '-e', '-c', 'source ' + \
-            self.srcbuild + ' && umask 0022 && src_install'), cwd=self.source_dir)
+            self.srcbuild + ' && umask 0022 && src_install'), \
+            cwd=self.source_dir, demote=DEMOTE + ':root')
 
         if self.compress_man:
             message.sub_info('Compressing manual pages')
