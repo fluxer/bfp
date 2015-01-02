@@ -57,7 +57,7 @@ try:
             setattr(namespace, self.dest, values)
 
     class OverrideDemote(argparse.Action):
-        ''' Override execution of triggers '''
+        ''' Override which user to demote to '''
         def __call__(self, parser, namespace, values, option_string=None):
             libspm.DEMOTE = values
             setattr(namespace, self.dest, values)
@@ -377,12 +377,12 @@ try:
         message.sub_info('PRUNE', ARGS.prune)
         message.sub_info('CACHE_DIR', libspm.CACHE_DIR)
         message.sub_info('REPOSITORIES', libspm.REPOSITORIES)
-        message.sub_info('DEMOTE', libspm.DEMOTE)
+        message.sub_info('DEMOTE', ARGS.demote)
         for repository in libspm.REPOSITORIES:
             message.sub_info('REPOSITORY', repository)
         message.info('Poking repositories...')
         m = libspm.Repo(libspm.REPOSITORIES, ARGS.clean, \
-                ARGS.sync, ARGS.update, ARGS.prune, ARGS.demote)
+                ARGS.sync, ARGS.update, ARGS.prune)
         m.main()
 
     elif ARGS.mode == 'remote':
