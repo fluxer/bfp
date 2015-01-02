@@ -734,10 +734,10 @@ class Source(object):
                         message.sub_debug('Already fetched', src_url)
                     else:
                         message.sub_warning('Re-fetching', src_url)
-                        misc.fetch(src_url, local_file, libspm.DEMOTE)
+                        misc.fetch(src_url, local_file, DEMOTE)
                 elif internet:
                     message.sub_debug('Fetching', src_url)
-                    misc.fetch(src_url, local_file, libspm.DEMOTE)
+                    misc.fetch(src_url, local_file, DEMOTE)
 
             if os.path.islink(link_file):
                 message.sub_debug('Already linked', src_file)
@@ -1413,10 +1413,10 @@ class Binary(Source):
                 message.sub_debug('Already fetched', src_url)
             else:
                 message.sub_warning('Re-fetching', src_url)
-                misc.fetch(src_url, local_file, libspm.DEMOTE)
+                misc.fetch(src_url, local_file, DEMOTE)
         elif internet and src_url:
             message.sub_debug('Fetching', src_url)
-            misc.fetch(src_url, local_file, libspm.DEMOTE)
+            misc.fetch(src_url, local_file, DEMOTE)
 
     def main(self):
         ''' Execute action for every target '''
