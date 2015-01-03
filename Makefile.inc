@@ -13,7 +13,7 @@ APPLICATIONSDIR = $(PREFIX)/share/applications
 PIXMAPSDIR = $(PREFIX)/share/pixmaps
 BASHCOMPLETIONDIR = /etc/bash_completion.d/
 
-MACHINE = $(shell $(GCC) -dumpmachine)
+MACHINE = $(shell $(CC) -dumpmachine)
 ARCH = $(shell uname -m | $(SED) 's|_|-|')
 JOBS = $(shell echo $$((`getconf _NPROCESSORS_CONF || echo 1`+1)))
 
@@ -23,7 +23,7 @@ PYTHON_VERSION = $(shell $(PYTHON) -c "import sys; print(sys.version[:3])")
 GREP = grep
 FIND = find
 SED = sed
-GCC= gcc
+CC ?= gcc
 ifeq ($(GIT_VERSION),stable)
     STRIP = echo "Strip ignored on stable build, "
 else
