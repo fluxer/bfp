@@ -777,7 +777,7 @@ class Source(object):
 
         misc.system_command((misc.whereis('bash'), '-e', '-c', 'source ' + \
             self.srcbuild + ' && umask 0022 && src_install'), \
-            cwd=self.source_dir, demote=DEMOTE + ':root')
+            cwd=self.source_dir)
 
         if self.compress_man:
             message.sub_info('Compressing manual pages')
