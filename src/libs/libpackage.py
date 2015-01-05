@@ -16,8 +16,9 @@ class Database(object):
 
     def remote_all(self, basename=False):
         ''' Returns directories of all remote (repository) targets '''
-        remote_list = []
+        misc.typecheck(basename, bool)
 
+        remote_list = []
         for sdir in misc.list_dirs(os.path.join(self.CACHE_DIR, \
             'repositories')):
             if os.path.isfile(os.path.join(sdir, 'SRCBUILD')) and basename:
@@ -28,8 +29,9 @@ class Database(object):
 
     def local_all(self, basename=False):
         ''' Returns directories of all local (installed) targets '''
-        local_list = []
+        misc.typecheck(basename, bool)
 
+        local_list = []
         # it may not exists if bootstrapping
         if not os.path.isdir(self.LOCAL_DIR):
             return local_list
@@ -43,6 +45,8 @@ class Database(object):
 
     def remote_search(self, target):
         ''' Returns full path to directory matching target '''
+        misc.typecheck(target, str)
+
         if os.path.isfile(os.path.join(target, 'SRCBUILD')):
             return target
 
@@ -54,6 +58,8 @@ class Database(object):
 
     def local_installed(self, target):
         ''' Returns True or False wheather target is installed '''
+        misc.typecheck(target, str)
+
         if not os.path.isdir(self.LOCAL_DIR):
             return False
         elif os.path.basename(target) in self.local_all(basename=True):
@@ -64,8 +70,12 @@ class Database(object):
 
     def local_belongs(self, sfile, exact=False, escape=True, ignore=None):
         ''' Searches for match of file in all local targets '''
-        match = []
+        misc.typecheck(sfile, str)
+        misc.typecheck(exact, bool)
+        misc.typecheck(escape, bool)
+        # FIXME: misc.typecheck(ignore, str)
 
+        match = []
         # it may not exists if bootstrapping
         if not os.path.isdir(self.LOCAL_DIR):
             return match
@@ -79,8 +89,12 @@ class Database(object):
                 match.append(local)
         return match
 
-    def remote_mdepends(self, target, checked=None, cdepends=False):
+    def remote_mdepends(self, target, checked=[], cdepends=False):
         ''' Returns missing build dependencies of target '''
+        misc.typecheck(target, str)
+        # FIXME: misc.typecheck(checked, (None, list))
+        misc.typecheck(cdepends, bool)
+
         # depends, {make,check}depends are optional and
         # relying on them to be different than None
         # would break the code, they can not be
@@ -120,6 +134,10 @@ class Database(object):
 
     def local_rdepends(self, target, indirect=False, checked=None):
         ''' Returns reverse dependencies of target '''
+        misc.typecheck(target, str)
+        misc.typecheck(indirect, bool)
+        # FIXME: misc.typecheck(target, str)
+
         reverse = []
         if checked is None:
             checked = []
@@ -144,6 +162,8 @@ class Database(object):
 
     def local_footprint(self, target):
         ''' Returns files of target '''
+        misc.typecheck(target, str)
+
         relative_path = os.path.join(self.LOCAL_DIR, target, 'footprint')
         full_path = os.path.join(target, 'footprint')
         if os.path.isfile(relative_path):
@@ -153,6 +173,9 @@ class Database(object):
 
     def local_metadata(self, target, key):
         ''' Returns metadata of local target '''
+        misc.typecheck(target, str)
+        misc.typecheck(key, str)
+
         target_metadata = os.path.join(self.LOCAL_DIR, target, 'metadata')
         if os.path.isfile(target_metadata):
             # this is not optimal, but cleaner
@@ -180,6 +203,8 @@ class Database(object):
 
     def local_uptodate(self, target):
         ''' Returns True if target is up-to-date and False otherwise '''
+        misc.typecheck(target, str)
+
         # check if target is installed at all first
         if not self.local_installed(target):
             return False
@@ -196,6 +221,9 @@ class Database(object):
 
     def remote_metadata(self, target, key):
         ''' Returns metadata of remote target '''
+        misc.typecheck(target, str)
+        misc.typecheck(key, str)
+
         match = self.remote_search(target)
         if os.path.isfile(os.path.join(target, 'SRCBUILD')):
             src = os.path.join(target, 'SRCBUILD')
@@ -207,6 +235,8 @@ class Database(object):
 
     def remote_aliases(self, basename=True):
         ''' Returns basename of all aliases '''
+        misc.typecheck(basename, bool)
+
         aliases = []
         for sfile in misc.list_files(os.path.join(self.CACHE_DIR, \
             'repositories')):
@@ -219,6 +249,8 @@ class Database(object):
 
     def remote_alias(self, target):
         ''' Returns alias for target, if not returns original '''
+        misc.typecheck(target, str)
+
         for alias in self.remote_aliases(basename=False):
             if os.path.basename(target) == os.path.basename(alias):
                 return misc.file_readlines(alias + '.alias')
@@ -227,6 +259,8 @@ class Database(object):
 
     def remote_groups(self, basename=True):
         ''' Returns groups in the repositories '''
+        misc.typecheck(basename, bool)
+
         groups = []
         for sdir in misc.list_dirs(os.path.join(self.CACHE_DIR, \
             'repositories')):

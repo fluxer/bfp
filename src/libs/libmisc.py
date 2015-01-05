@@ -1,6 +1,7 @@
 #!/bin/python2
 
-import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, pwd, libmagic
+import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, pwd, inspect
+import libmagic
 if sys.version < '3':
     from urlparse import urlparse
     from urllib2 import urlopen
@@ -23,8 +24,19 @@ class Misc(object):
         self.ROOT_DIR = '/'
         self.CATCH = False
 
+    def typecheck(self, a, b):
+        ''' Poor man's variable type checking '''
+        # FIXME: implement file, directory, and url type check?
+        if not isinstance(a, b):
+            line = inspect.currentframe().f_back.f_lineno
+            raise(TypeError('Variable is not ' + str(b) + ' (' + str(line) + ')'))
+
     def whereis(self, program, fallback=True, chroot=False):
         ''' Find full path to executable '''
+        self.typecheck(program, str)
+        self.typecheck(fallback, bool)
+        self.typecheck(chroot, bool)
+
         program = os.path.basename(program)
         for path in os.environ.get('PATH', '/bin:/usr/bin').split(':'):
             if chroot:
@@ -41,9 +53,10 @@ class Misc(object):
 
     def ping(self, url='http://www.google.com'):
         ''' Ping URL '''
+        self.typecheck(url, str)
+
         if self.OFFLINE:
             return
-
         try:
             p = urlopen(url, timeout=self.TIMEOUT)
             p.close()
@@ -53,6 +66,8 @@ class Misc(object):
 
     def version(self, variant):
         ''' Convert input to tuple suitable for version comparison '''
+        self.typecheck(variant, str)
+
         # if None is passed, e.g. on invalid remote target, the split will fail
         if not variant:
             return ()
@@ -73,6 +88,11 @@ class Misc(object):
 
     def string_search(self, string, string2, exact=False, escape=True):
         ''' Search for string in other string or list '''
+        self.typecheck(string, str)
+        self.typecheck(string, str)
+        self.typecheck(exact, bool)
+        self.typecheck(escape, bool)
+
         if exact and escape:
             return re.findall('(\\s|^)' + re.escape(string) + '(\\s|$)', \
                 self.string_convert(string2))
@@ -87,6 +107,9 @@ class Misc(object):
     def url_normalize(self, surl, basename=False):
         ''' Normalize URL, optionally get basename '''
         # http://www.w3schools.com/tags/ref_urlencode.asp
+        self.typecheck(surl, str)
+        self.typecheck(basename, bool)
+
         dspecials = {'%20': ' '}
         sresult = urlparse(surl).path
         for schar in dspecials:
@@ -97,28 +120,40 @@ class Misc(object):
 
     def file_name(self, sfile, basename=True):
         ''' Get name of file without the extension '''
+        self.typecheck(sfile, str)
+        self.typecheck(basename, bool)
+
         if basename:
             return os.path.splitext(os.path.basename(sfile))[0]
         return os.path.splitext(sfile)[0]
 
     def file_extension(self, sfile):
         ''' Get the extension of file '''
+        self.typecheck(sfile, str)
+
         return os.path.splitext(sfile)[1].lstrip('.')
 
     def file_touch(self, sfile):
         ''' Touch a file, making sure it exists '''
+        self.typecheck(sfile, str)
+
         if not os.path.isfile(sfile):
             self.file_write(sfile, '')
 
     def file_read(self, sfile):
         ''' Get file content '''
+        self.typecheck(sfile, str)
+
         rfile = open(sfile, 'rb')
         content = rfile.read()
         rfile.close()
         return self.string_encode(content)
 
-    def file_read_nonblock(self, sfile, sbuffer=1024):
+    def file_read_nonblock(self, sfile, ibuffer=1024):
         ''' Get file content non-blocking '''
+        self.typecheck(sfile, str)
+        self.typecheck(ibuffer, int)
+
         fd = os.open(sfile, os.O_NONBLOCK)
         content = os.read(fd, sbuffer)
         os.close(fd)
@@ -126,6 +161,8 @@ class Misc(object):
 
     def file_readlines(self, sfile):
         ''' Get file content, split by new line, as list '''
+        self.typecheck(sfile, str)
+
         rfile = open(sfile, 'rb')
         content = rfile.read().splitlines()
         rfile.close()
@@ -133,27 +170,39 @@ class Misc(object):
 
     def file_write(self, sfile, content, mode='w'):
         ''' Write data to file '''
-        self.dir_create(os.path.dirname(sfile))
+        self.typecheck(sfile, str)
+        self.typecheck(content, str)
+        self.typecheck(mode, str)
 
+        self.dir_create(os.path.dirname(sfile))
         wfile = open(sfile, mode)
         wfile.write(content)
         wfile.close()
 
     def file_write_nonblock(self, sfile, content):
         ''' Write data to file non-blocking (overwrites) '''
-        self.dir_create(os.path.dirname(sfile))
+        self.typecheck(sfile, str)
+        self.typecheck(content, str)
 
+        self.dir_create(os.path.dirname(sfile))
         fd = os.open(sfile, os.O_NONBLOCK | os.O_WRONLY)
         os.write(fd, content)
         os.close(fd)
 
     def file_search(self, string, sfile, exact=False, escape=True):
         ''' Search for string in file '''
+        self.typecheck(string, str)
+        self.typecheck(sfile, str)
+        self.typecheck(exact, bool)
+        self.typecheck(escape, bool)
+
         return self.string_search(string, self.file_read(sfile), exact=exact, \
             escape=escape)
 
     def file_mime(self, sfile):
         ''' Get file type '''
+        self.typecheck(sfile, str)
+
         # symlinks are not handled properly by magic, on purpose
         # https://github.com/ahupp/python-magic/pull/31
         if os.path.islink(sfile):
@@ -162,10 +211,17 @@ class Misc(object):
 
     def file_substitute(self, string, string2, sfile):
         ''' Substitue a string with another in file '''
+        self.typecheck(string, str)
+        self.typecheck(string2, str)
+        self.typecheck(sfile, str)
+
         self.file_write(sfile, re.sub(string, string2, self.file_read(sfile)))
 
-    def dir_create(self, sdir, demote=None):
+    def dir_create(self, sdir, demote=''):
         ''' Create directory if it does not exist, including leading paths '''
+        self.typecheck(sdir, str)
+        self.typecheck(demote, str)
+
         if not os.path.isdir(sdir) and not os.path.islink(sdir):
             # sadly, demoting works only for sub-processes
             if demote:
@@ -175,6 +231,8 @@ class Misc(object):
 
     def dir_remove(self, sdir):
         ''' Remove directory recursively '''
+        self.typecheck(sdir, str)
+
         for root, dirs, files in os.walk(sdir):
             for f in files:
                 os.unlink(os.path.join(root, f))
@@ -195,6 +253,8 @@ class Misc(object):
 
     def dir_size(self, sdir):
         ''' Get size of directory '''
+        self.typecheck(sdir, str)
+
         size = 0
         for sfile in self.list_files(sdir):
             if os.path.islink(sfile):
@@ -210,10 +270,13 @@ class Misc(object):
             cwd = '/'
         return cwd
 
-    def list_files(self, directory, cross=True):
+    def list_files(self, sdir, cross=True):
         ''' Get list of files in directory recursively '''
+        self.typecheck(sdir, str)
+        self.typecheck(cross, bool)
+
         slist = []
-        for root, subdirs, files in os.walk(directory):
+        for root, subdirs, files in os.walk(sdir):
             if not cross:
                 subdirs[:] = [
                     dir for dir in subdirs
@@ -222,34 +285,43 @@ class Misc(object):
                 slist.append(os.path.join(root, sfile))
         return slist
 
-    def list_dirs(self, directory, cross=True):
+    def list_dirs(self, sdir, cross=True):
         ''' Get list of directories in directory recursively '''
+        self.typecheck(sdir, str)
+        self.typecheck(cross, bool)
+
         slist = []
-        for root, subdirs, files in os.walk(directory):
+        for root, subdirs, files in os.walk(sdir):
             if not cross:
                 subdirs[:] = [
                     dir for dir in subdirs
                     if not os.path.ismount(os.path.join(root, dir))]
-            for sdir in subdirs:
-                slist.append(os.path.join(root, sdir))
+            for d in subdirs:
+                slist.append(os.path.join(root, d))
         return slist
 
-    def list_all(self, directory, cross=True):
+    def list_all(self, sdir, cross=True):
         ''' Get list of files and directories in directory recursively '''
+        self.typecheck(sdir, str)
+        self.typecheck(cross, bool)
+
         slist = []
-        for root, subdirs, files in os.walk(directory):
+        for root, subdirs, files in os.walk(sdir):
             if not cross:
                 subdirs[:] = [
                     dir for dir in subdirs
                     if not os.path.ismount(os.path.join(root, dir))]
-            for sdir in subdirs:
-                slist.append(os.path.join(root, sdir))
+            for d in subdirs:
+                slist.append(os.path.join(root, d))
             for sfile in files:
                 slist.append(os.path.join(root, sfile))
         return slist
 
-    def fetch_check(self, url, destination):
+    def fetch_check(self, surl, destination):
         ''' Check if remote file and local file sizes are equal '''
+        self.typecheck(surl, str)
+        self.typecheck(destination, str)
+
         # not all requests can get content-lenght , this means that there is
         # no way to tell if the archive is corrupted (checking if size == 0 is
         # not enough) so the source is re-feteched
@@ -258,7 +330,7 @@ class Misc(object):
             return True
         elif os.path.isfile(destination):
             local_size = os.path.getsize(destination)
-            rfile = urlopen(url, timeout=self.TIMEOUT)
+            rfile = urlopen(surl, timeout=self.TIMEOUT)
             remote_size = rfile.headers.get('content-length')
             rfile.close()
 
@@ -269,12 +341,15 @@ class Misc(object):
         else:
             return False
 
-    def fetch_internal(self, url, destination):
+    def fetch_internal(self, surl, destination):
         ''' Download file using internal library '''
+        self.typecheck(surl, str)
+        self.typecheck(destination, str)
+
         if self.OFFLINE:
             return
 
-        rfile = urlopen(url, timeout=self.TIMEOUT)
+        rfile = urlopen(surl, timeout=self.TIMEOUT)
         dest_dir = os.path.dirname(destination)
         self.dir_create(dest_dir)
 
@@ -283,29 +358,33 @@ class Misc(object):
         output.close()
         rfile.close()
 
-    def fetch(self, url, destination, demote=None):
+    def fetch(self, surl, destination, demote=''):
         ''' Download file using external utilities, fallback to internal '''
+        self.typecheck(surl, str)
+        self.typecheck(destination, str)
+
         if self.OFFLINE:
             return
 
-        dest_dir = os.path.dirname(destination)
-        self.dir_create(dest_dir)
+        self.dir_create(os.path.dirname(destination))
 
         curl = self.whereis('curl', fallback=False)
         wget = self.whereis('wget', fallback=False)
         if self.EXTERNAL and curl:
             self.system_command((curl, '--connect-timeout', str(self.TIMEOUT), \
                 '--fail', '--retry', '10', '--location', '--continue-at', '-', \
-                url, '--output', destination), demote=demote)
+                surl, '--output', destination), demote=demote)
         elif self.EXTERNAL and wget:
             self.system_command((wget, '--timeout', str(self.TIMEOUT), \
-                '--continue', url, '--output-document', destination), \
+                '--continue', surl, '--output-document', destination), \
                 demote=demote)
         else:
-            self.fetch_internal(url, destination)
+            self.fetch_internals(url, destination)
 
     def archive_supported(self, sfile):
         ''' Test if file is archive that can be handled properly '''
+        self.typecheck(sfile, str)
+
         if os.path.isdir(sfile):
             return False
         if sfile.endswith(('.xz', '.lzma', '.gz')) \
@@ -316,8 +395,11 @@ class Misc(object):
 
     def archive_compress(self, variant, sfile, strip):
         ''' Create archive from directory '''
-        self.dir_create(os.path.dirname(sfile))
+        self.typecheck(variant, (str, list, tuple))
+        self.typecheck(sfile, str)
+        self.typecheck(strip, str)
 
+        self.dir_create(os.path.dirname(sfile))
         if isinstance(variant, str):
             variant = [variant]
 
@@ -335,8 +417,12 @@ class Misc(object):
             # FIXME: implement lzma/xz compression
             raise(Exception('LZMA/XZ compression not implemented yet'))
 
-    def archive_decompress(self, sfile, sdir, demote=None):
+    def archive_decompress(self, sfile, sdir, demote=''):
         ''' Extract archive to directory '''
+        self.typecheck(sfile, str)
+        self.typecheck(sdir, str)
+        self.typecheck(demote, str)
+
         self.dir_create(sdir)
 
         # WARNING!!! the -P option is not supported by the
@@ -359,6 +445,8 @@ class Misc(object):
 
     def archive_list(self, sfile):
         ''' Get list of files in archive '''
+        self.typecheck(sfile, str)
+
         content = []
         if tarfile.is_tarfile(sfile):
             tfile = tarfile.open(sfile)
@@ -378,6 +466,9 @@ class Misc(object):
 
     def archive_size(self, star, sfile):
         ''' Get size of file in archive '''
+        self.typecheck(star, str)
+        self.typecheck(sfile, str)
+
         size = 0
         tar = tarfile.open(star, 'r')
         for i in tar.getmembers():
@@ -387,38 +478,49 @@ class Misc(object):
         tar.close()
         return size
 
-    def system_demote(self, user):
+    def system_demote(self, suser):
         ''' Change priviledges to different user, returns function pointer! '''
-        group = user
-        if user and ':' in user:
-            group = user.split(':')[1]
-            user = user.split(':')[0]
-        if not user or not group:
+        self.typecheck(suser, str)
+
+        group = suser
+        if suser and ':' in suser:
+            group = suser.split(':')[1]
+            suser = suser.split(':')[0]
+        if not suser or not group:
             return
         # lambda
         def result():
-            pw_uid = pwd.getpwnam(user).pw_uid
+            pw_uid = pwd.getpwnam(suser).pw_uid
             pw_gid = pwd.getpwnam(group).pw_gid
-            pw_dir = pwd.getpwnam(user).pw_dir
-            # os.initgroups(user, pw_gid)
+            pw_dir = pwd.getpwnam(suser).pw_dir
+            # os.initgroups(suser, pw_gid)
             os.setgid(0)
             os.setgid(pw_gid)
             os.setuid(pw_uid)
-            os.putenv('USER', user)
-            os.putenv('LOGNAME', user)
+            os.putenv('USER', suser)
+            os.putenv('LOGNAME', suser)
             os.putenv('HOME', pw_dir)
             os.putenv('PWD', pw_dir)
         return result
 
-    def system_output(self, command, shell=False, demote=None):
+    def system_output(self, command, shell=False, demote=''):
         ''' Get output of external utility '''
+        self.typecheck(command, (str, list, tuple))
+        self.typecheck(shell, bool)
+        self.typecheck(demote, str)
+
         pipe = subprocess.Popen(command, stdout=subprocess.PIPE, \
             env={'LC_ALL': 'C'}, shell=shell, preexec_fn=self.system_demote(demote))
         output = pipe.communicate()[0].strip()
         return self.string_encode(output)
 
-    def system_input(self, command, input, shell=False, demote=None):
+    def system_input(self, command, input, shell=False, demote=''):
         ''' Send input to external utility '''
+        self.typecheck(command, (str, list, tuple))
+        self.typecheck(input, str)
+        self.typecheck(shell, bool)
+        self.typecheck(demote, str)
+
         pipe = subprocess.Popen(command, stdin=subprocess.PIPE, \
             stdout=subprocess.PIPE, stderr=subprocess.PIPE, \
             env={'LC_ALL': 'C'}, shell=shell, preexec_fn=self.system_demote(demote))
@@ -426,13 +528,24 @@ class Misc(object):
         if pipe.returncode != 0:
             raise(Exception('%s %s' % (out, err)))
 
-    def system_scanelf(self, sfile, sformat='#F%n', sflags='', demote=None):
+    def system_scanelf(self, sfile, sformat='#F%n', sflags='', demote=''):
         ''' Get information about ELF files '''
+        self.typecheck(sfile, str)
+        self.typecheck(sformat, str)
+        self.typecheck(sflags, str)
+        self.typecheck(demote, str)
+
         return self.system_output((self.whereis('scanelf'), '-CBF', \
             sformat, sflags, sfile), demote=demote)
 
-    def system_command(self, command, shell=False, cwd=None, catch=False, demote=None):
+    def system_command(self, command, shell=False, cwd='', catch=False, demote=''):
         ''' Execute system command safely '''
+        self.typecheck(command, (str, list, tuple))
+        self.typecheck(shell, bool)
+        self.typecheck(cwd, str)
+        self.typecheck(catch, bool)
+        self.typecheck(demote, str)
+
         if not cwd:
             cwd = self.dir_current()
         elif not os.path.isdir(cwd):
@@ -452,6 +565,9 @@ class Misc(object):
 
     def system_chroot(self, command, shell=False):
         ''' Execute command in chroot environment '''
+        self.typecheck(command, (str, list, tuple))
+        self.typecheck(shell, str)
+
         # prevent stupidity
         if self.ROOT_DIR == '/':
             return
@@ -479,6 +595,9 @@ class Misc(object):
 
     def system_script(self, srcbuild, function):
         ''' Execute pre/post actions '''
+        self.typecheck(srcbuild, str)
+        self.typecheck(function, str)
+
         if self.ROOT_DIR == '/':
             self.system_command((self.whereis('bash'), '-e', '-c', \
                 'source ' + srcbuild + ' && ' + function), cwd=self.ROOT_DIR)
@@ -490,6 +609,9 @@ class Misc(object):
 
     def system_trigger(self, command, shell=False):
         ''' Execute trigger '''
+        self.typecheck(command, str)
+        self.typecheck(shell, bool)
+
         if self.ROOT_DIR == '/':
             self.system_command(command, shell=shell, cwd=self.ROOT_DIR)
         else:

@@ -288,6 +288,45 @@ class TestSuite(unittest.TestCase):
     def test_file_mime_python(self):
         self.assertEqual(misc.file_mime('libmagic.py'), 'text/x-python')
 
+    def test_type_str_true(self):
+        misc.typecheck('foo', str)
+
+    def test_type_str_false(self):
+        with self.assertRaises(TypeError):
+            misc.typecheck(1, str)
+
+    def test_type_int_true(self):
+        misc.typecheck(1991, int)
+
+    def test_type_int_false(self):
+        with self.assertRaises(TypeError):
+            misc.typecheck('bar', int)
+
+    def test_type_float_true(self):
+        misc.typecheck(11.0, float)
+
+    def test_type_float_false(self):
+        with self.assertRaises(TypeError):
+            misc.typecheck(7, 11.0)
+
+    def test_type_list_true(self):
+        misc.typecheck(['a', 'b', 'c'], list)
+
+    def test_type_list_false(self):
+        with self.assertRaises(TypeError):
+            misc.typecheck('meh', list)
+
+    def test_type_list_false2(self):
+        with self.assertRaises(TypeError):
+            misc.typecheck(('f', 'o', '0'), list)
+
+    def test_type_tuple_true(self):
+        misc.typecheck(('a', 'b', 'c'), tuple)
+
+    def test_type_tuple_false(self):
+        with self.assertRaises(TypeError):
+            misc.typecheck(3.14, tuple)
+
 suite = unittest.TestLoader().loadTestsFromTestCase(TestSuite)
 result = unittest.TextTestRunner(verbosity=2).run(suite)
 if result.failures or result.errors:
