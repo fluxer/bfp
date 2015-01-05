@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os
 
-app_version = "1.2.3 (cd3be63)"
+app_version = "1.2.3 (af9a749)"
 
 tmpdir = None
 keep = False
@@ -30,10 +30,6 @@ try:
         version='LsInitfs v' + app_version, \
         help='Show LsInitfs version and exit')
     ARGS = parser.parse_args()
-
-    if not os.geteuid() == 0:
-        message.critical('You are not root')
-        sys.exit(2)
 
     # if cross-building and no custom image is set update ARGS.image
     if ARGS.kernel != kernel and ARGS.image == image:
