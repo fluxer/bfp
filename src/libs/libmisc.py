@@ -112,7 +112,7 @@ class Misc(object):
             return int(svar) / 1024
         else:
             if bprefix:
-                return '%d%s' % (svar, 'b')
+                return '%d%s' % (int(svar), 'b')
             return svar
 
     def string_search(self, string, string2, exact=False, escape=True):
@@ -388,7 +388,13 @@ class Misc(object):
             rfile = urlopen(surl, timeout=self.TIMEOUT)
         self.dir_create(os.path.dirname(destination))
 
-        rsize = rfile.headers.get('content-length')
+        # same exception as in fetch_check(), the beaty of the 'net:
+        # http://en.wikipedia.org/wiki/Chunked_transfer_encoding
+        # even a simple hack to waint until 'Transfer-Encoding' goes
+        # away and the server is ready to serve the file is not enough
+        # for GitHub, maybe others too. as such an ugly workaround is
+        # to set the final size to 0
+        rsize = rfile.headers.get('content-length', '0')
         mode = 'wb'
         if os.path.exists(destination) and rfile.headers.get('Accept-Ranges'):
             rfile.headers['Range'] = 'bytes=%s-%s' % (os.path.getsize(destination), rsize)
