@@ -360,7 +360,13 @@ class Misc(object):
         if self.OFFLINE:
             return
 
-        rfile = urlopen(surl, timeout=self.TIMEOUT)
+        # available only on Python >= 2.7.9 (officially)
+        if sys.version_info[2] >= 9:
+            import ssl
+            ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+            rfile = urlopen(surl, timeout=self.TIMEOUT, context=ctx)
+        else:
+            rfile = urlopen(surl, timeout=self.TIMEOUT)
         self.dir_create(os.path.dirname(destination))
 
         output = open(destination, 'wb')
