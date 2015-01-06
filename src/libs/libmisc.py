@@ -370,8 +370,8 @@ class Misc(object):
         else:
             return False
 
-    def fetch(self, surl, destination):
-        ''' Download file using internal library '''
+    def fetch(self, surl, destination, retry=3):
+        ''' Download file using internal library, retry is passed internally! '''
         self.typecheck(surl, (str, unicode))
         self.typecheck(destination, (str, unicode))
 
@@ -396,10 +396,10 @@ class Misc(object):
         output = open(destination, mode)
         cache = 10240
         try:
+            # since the local file size changes use persistent units based on
+            # remote file size
+            units = self.string_unit_guess(rsize)
             while True:
-                # since the local file size changes use persistent units based
-                # on remote file size
-                units = self.string_unit_guess(rsize)
                 msg = 'Downloading: %s, %s/%s' % (self.url_normalize(surl, True), \
                     self.string_unit(str(os.path.getsize(destination)), units),
                     self.string_unit(rsize, units, True))
@@ -411,6 +411,11 @@ class Misc(object):
                 # in Python 3000 that would be print(blah, end='')
                 sys.stdout.write('\r' * len(msg))
                 sys.stdout.flush()
+        except URLError:
+            if not retry == 0:
+                self.fetch(surl, destination, retry-1)
+            else:
+                raise
         finally:
             sys.stdout.write('\n')
             output.close()
