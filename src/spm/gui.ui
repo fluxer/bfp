@@ -348,18 +348,17 @@ disable it unless you know what you are doing!</string>
           </item>
          </widget>
         </item>
-        <item row="4" column="2" colspan="2">
-         <widget class="QCheckBox" name="StripStaticBox">
-          <property name="toolTip">
-           <string>Set whether to strip static libraries symbols, disable it
-if you need to debug applications via backtrace</string>
-          </property>
+        <item row="2" column="1">
+         <widget class="QLabel" name="label_4">
           <property name="text">
-           <string>Strip static libraries</string>
+           <string>Demote</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </item>
-        <item row="3" column="2" colspan="2">
+        <item row="2" column="2" colspan="2">
          <widget class="QCheckBox" name="StripBinariesBox">
           <property name="toolTip">
            <string>Set whether to strip binaries symbols, disable it if you
@@ -370,17 +369,18 @@ need to debug applications via backtrace</string>
           </property>
          </widget>
         </item>
-        <item row="2" column="2" colspan="2">
-         <widget class="QCheckBox" name="ExternalFetcherBox">
+        <item row="3" column="2" colspan="2">
+         <widget class="QCheckBox" name="StripStaticBox">
           <property name="toolTip">
-           <string>Set whether to use external utilities to fetch URLs</string>
+           <string>Set whether to strip static libraries symbols, disable it
+if you need to debug applications via backtrace</string>
           </property>
           <property name="text">
-           <string>Use external fetcher</string>
+           <string>Strip static libraries</string>
           </property>
          </widget>
         </item>
-        <item row="5" column="2" colspan="2">
+        <item row="4" column="2" colspan="2">
          <widget class="QCheckBox" name="IgnoreMissingBox">
           <property name="toolTip">
            <string>Set whether to ignore missing runtime dependencies,
@@ -392,7 +392,7 @@ the installation procedure</string>
           </property>
          </widget>
         </item>
-        <item row="6" column="2" colspan="2">
+        <item row="5" column="2" colspan="2">
          <widget class="QCheckBox" name="ConflictsBox">
           <property name="toolTip">
            <string>Set whether to check for conflicts in targets when
@@ -404,7 +404,7 @@ you are doing!</string>
           </property>
          </widget>
         </item>
-        <item row="7" column="2" colspan="2">
+        <item row="6" column="2" colspan="2">
          <widget class="QCheckBox" name="TriggersBox">
           <property name="toolTip">
            <string>Set whether to execute automatic triggers for common
@@ -416,7 +416,7 @@ you know what you are doing!</string>
           </property>
          </widget>
         </item>
-        <item row="8" column="2" colspan="2">
+        <item row="7" column="2" colspan="2">
          <widget class="QCheckBox" name="BackupBox">
           <property name="toolTip">
            <string>Set whether to backup files whne merging targets, it
@@ -425,16 +425,6 @@ changes as a backup of the original when needed</string>
           </property>
           <property name="text">
            <string>Backup essential files</string>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="1">
-         <widget class="QLabel" name="label_4">
-          <property name="text">
-           <string>Demote</string>
-          </property>
-          <property name="alignment">
-           <set>Qt::AlignCenter</set>
           </property>
          </widget>
         </item>

@@ -74,12 +74,6 @@ try:
             libspm.MIRROR = values
             setattr(namespace, self.dest, values)
 
-    class OverrideExternal(argparse.Action):
-        ''' Override usage of external fetchers '''
-        def __call__(self, parser, namespace, values, option_string=None):
-            libspm.EXTERNAL = values
-            setattr(namespace, self.dest, values)
-
     class OverrideTimeout(argparse.Action):
         ''' Override connection timeout '''
         def __call__(self, parser, namespace, values, option_string=None):
@@ -318,8 +312,6 @@ try:
         action=OverrideMirror, help='Set whether to use mirrors')
     parser.add_argument('--timeout', type=int, action=OverrideTimeout, \
         help='Set the connection timeout')
-    parser.add_argument('--external', type=ast.literal_eval, \
-        action=OverrideExternal, help='Set whether to use external fetcher')
     parser.add_argument('--chost', type=str, action=OverrideChost, \
         help='Change CHOST')
     parser.add_argument('--cflags', type=str, action=OverrideCflags, \
@@ -425,7 +417,6 @@ try:
         message.sub_info('OFFLINE', libspm.OFFLINE)
         message.sub_info('MIRROR', libspm.MIRROR)
         message.sub_info('TIMEOUT', libspm.TIMEOUT)
-        message.sub_info('EXTERNAL', libspm.EXTERNAL)
         message.sub_info('CHOST', libspm.CHOST)
         message.sub_info('CFLAGS', libspm.CFLAGS)
         message.sub_info('CXXFLAGS', libspm.CXXFLAGS)
@@ -474,7 +465,6 @@ try:
         message.sub_info('OFFLINE', libspm.OFFLINE)
         message.sub_info('MIRROR', libspm.MIRROR)
         message.sub_info('TIMEOUT', libspm.TIMEOUT)
-        message.sub_info('EXTERNAL', libspm.EXTERNAL)
         message.sub_info('CONFLICTS', libspm.CONFLICTS)
         message.sub_info('BACKUP', libspm.BACKUP)
         message.sub_info('SCRIPTS', libspm.SCRIPTS)

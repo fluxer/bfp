@@ -37,7 +37,6 @@ if not os.path.isfile(MAIN_CONF):
     OFFLINE = False
     MIRROR = False
     TIMEOUT = 30
-    EXTERNAL = False
     CHOST = ''
     CFLAGS = ''
     CXXFLAGS = ''
@@ -68,7 +67,6 @@ else:
     OFFLINE = conf.getboolean('prepare', 'OFFLINE')
     MIRROR = conf.getboolean('prepare', 'MIRROR')
     TIMEOUT = conf.getint('prepare', 'TIMEOUT')
-    EXTERNAL = conf.getboolean('prepare', 'EXTERNAL')
     CHOST = conf.get('compile', 'CHOST')
     CFLAGS = conf.get('compile', 'CFLAGS')
     CXXFLAGS = conf.get('compile', 'CXXFLAGS')
@@ -125,7 +123,6 @@ else:
 # override module variables from own configuration
 misc.OFFLINE = OFFLINE
 misc.TIMEOUT = TIMEOUT
-misc.EXTERNAL = EXTERNAL
 misc.ROOT_DIR = ROOT_DIR
 database.ROOT_DIR = ROOT_DIR
 database.CACHE_DIR = CACHE_DIR
@@ -148,7 +145,6 @@ class Local(object):
         self.plain = plain
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
-        misc.EXTERNAL = EXTERNAL
         misc.ROOT_DIR = ROOT_DIR
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
@@ -226,7 +222,6 @@ class Remote(object):
         self.plain = plain
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
-        misc.EXTERNAL = EXTERNAL
         misc.ROOT_DIR = ROOT_DIR
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
@@ -311,7 +306,6 @@ class Repo(object):
         self.do_update = do_update
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
-        misc.EXTERNAL = EXTERNAL
         misc.ROOT_DIR = ROOT_DIR
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
@@ -439,7 +433,6 @@ class Source(object):
         self.python_compile = PYTHON_COMPILE
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
-        misc.EXTERNAL = EXTERNAL
         misc.ROOT_DIR = ROOT_DIR
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
@@ -1477,7 +1470,6 @@ class Who(object):
         self.plain = plain
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
-        misc.EXTERNAL = EXTERNAL
         misc.ROOT_DIR = ROOT_DIR
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR

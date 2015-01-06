@@ -20,7 +20,6 @@ class Misc(object):
     def __init__(self):
         self.OFFLINE = False
         self.TIMEOUT = 30
-        self.EXTERNAL = False
         self.ROOT_DIR = '/'
         self.CATCH = False
 
