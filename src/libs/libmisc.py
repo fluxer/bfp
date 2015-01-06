@@ -351,16 +351,21 @@ class Misc(object):
         rfile.close()
         return bvalue
 
-    def fetch_internal(self, surl, destination):
+    def fetch(self, surl, destination):
         ''' Download file using internal library '''
-        # FIXME: support resume
         self.typecheck(surl, (str, unicode))
         self.typecheck(destination, (str, unicode))
 
         if self.OFFLINE:
             return
 
-        # available only on Python >= 2.7.9 (officially)
+        resume = os.path.exists(destination) and self.fetch_resume(surl)
+        mode = 'wb'
+        if resume:
+            lsize = os.path.getsize(destination)
+            mode = 'ab'
+
+        # SSL verification works OOTB only on Python >= 2.7.9 (officially)
         if sys.version_info[2] >= 9:
             import ssl
             ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
@@ -369,37 +374,28 @@ class Misc(object):
             rfile = urlopen(surl, timeout=self.TIMEOUT)
         self.dir_create(os.path.dirname(destination))
 
-        output = open(destination, 'wb')
-        output.write(rfile.read())
-        output.close()
-        rfile.close()
+        rsize = rfile.headers.get('content-length')
+        if resume:
+            rfile.headers['Range'] = 'bytes=%s-%s' % (lsize, rsize)
 
-    def fetch(self, surl, destination, demote=''):
-        ''' Download file using external utilities, fallback to internal '''
-        self.typecheck(surl, (str, unicode))
-        self.typecheck(destination, (str, unicode))
-
-        if self.OFFLINE:
-            return
-
-        self.dir_create(os.path.dirname(destination))
-
-        curl = self.whereis('curl', fallback=False)
-        wget = self.whereis('wget', fallback=False)
-        if self.EXTERNAL and curl:
-            command = [curl, '--connect-timeout', str(self.TIMEOUT), \
-                '--fail', '--retry', '10', '--location', surl, '--output', \
-                destination]
-            if self.fetch_resume(surl):
-                command.extend(('--continue-at', '-'))
-            self.system_command(command, demote=demote)
-        elif self.EXTERNAL and wget:
-            command = [wget, '--timeout', str(self.TIMEOUT), surl, '--output-document', destination]
-            if self.fetch_resume(surl):
-                command.append('--continue')
-            self.system_command(command, demote=demote)
-        else:
-            self.fetch_internal(surl, destination)
+        output = open(destination, mode)
+        cache = 10240
+        try:
+            while True:
+                msg = 'Downloading: %s, %d/%d' % (self.url_normalize(surl, True), \
+                    os.path.getsize(destination), int(rsize))
+                sys.stdout.write(msg)
+                chunk = rfile.read(cache)
+                if not chunk:
+                    break
+                output.write(chunk)
+                # in Python 3000 that would be print(blah, end='')
+                sys.stdout.write('\r' * len(msg))
+                sys.stdout.flush()
+        finally:
+            sys.stdout.write('\n')
+            output.close()
+            rfile.close()
 
     def archive_supported(self, sfile):
         ''' Test if file is archive that can be handled properly '''
