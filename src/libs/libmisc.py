@@ -80,10 +80,41 @@ class Misc(object):
             return string
 
     def string_convert(self, string):
-        ''' Conver input to string but only if it is not string '''
+        ''' Convert input to string but only if it is not string '''
         if isinstance(string, (list, tuple)):
             return ' '.join(string)
         return string
+
+    def string_unit_guess(self, svar):
+        ''' Guess the units to be used by string_unit() '''
+        self.typecheck(svar, str)
+
+        lenght = len(svar)
+        if lenght > 7:
+            return 'Mb'
+        elif lenght > 4:
+            return 'Kb'
+        else:
+            return 'b'
+
+    def string_unit(self, svar, sunit='Mb', bprefix=False):
+        ''' Convert bytes to humar friendly units '''
+        self.typecheck(svar, str)
+        self.typecheck(sunit, str)
+        self.typecheck(bprefix, bool)
+
+        if sunit == 'Mb':
+            if bprefix:
+                return '%d%s' % (int(svar) / (1024 * 1024), 'Mb')
+            return int(svar) / (1024 * 1024)
+        elif sunit == 'Kb':
+            if bprefix:
+                return '%d%s' % (int(svar) / 1024, 'Kb')
+            return int(svar) / 1024
+        else:
+            if bprefix:
+                return '%d%s' % (svar, 'b')
+            return svar
 
     def string_search(self, string, string2, exact=False, escape=True):
         ''' Search for string in other string or list '''
@@ -340,17 +371,6 @@ class Misc(object):
         else:
             return False
 
-    def fetch_resume(self, surl):
-        ''' Check if remote file support download resume request '''
-        self.typecheck(surl, (str, unicode))
-
-        bvalue = False
-        rfile = urlopen(surl, timeout=self.TIMEOUT)
-        if rfile.headers.get('Accept-Ranges'):
-            bvalue = True
-        rfile.close()
-        return bvalue
-
     def fetch(self, surl, destination):
         ''' Download file using internal library '''
         self.typecheck(surl, (str, unicode))
@@ -358,12 +378,6 @@ class Misc(object):
 
         if self.OFFLINE:
             return
-
-        resume = os.path.exists(destination) and self.fetch_resume(surl)
-        mode = 'wb'
-        if resume:
-            lsize = os.path.getsize(destination)
-            mode = 'ab'
 
         # SSL verification works OOTB only on Python >= 2.7.9 (officially)
         if sys.version_info[2] >= 9:
@@ -375,15 +389,21 @@ class Misc(object):
         self.dir_create(os.path.dirname(destination))
 
         rsize = rfile.headers.get('content-length')
-        if resume:
-            rfile.headers['Range'] = 'bytes=%s-%s' % (lsize, rsize)
+        mode = 'wb'
+        if os.path.exists(destination) and rfile.headers.get('Accept-Ranges'):
+            rfile.headers['Range'] = 'bytes=%s-%s' % (os.path.getsize(destination), rsize)
+            mode = 'ab'
 
         output = open(destination, mode)
         cache = 10240
         try:
             while True:
-                msg = 'Downloading: %s, %d/%d' % (self.url_normalize(surl, True), \
-                    os.path.getsize(destination), int(rsize))
+                # since the local file size changes use persistent units based
+                # on remote file size
+                units = self.string_unit_guess(rsize)
+                msg = 'Downloading: %s, %s/%s' % (self.url_normalize(surl, True), \
+                    self.string_unit(str(os.path.getsize(destination)), units),
+                    self.string_unit(rsize, units, True))
                 sys.stdout.write(msg)
                 chunk = rfile.read(cache)
                 if not chunk:
