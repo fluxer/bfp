@@ -66,11 +66,10 @@ class Misc(object):
 
     def version(self, variant):
         ''' Convert input to tuple suitable for version comparison '''
-        self.typecheck(variant, str)
-
         # if None is passed, e.g. on invalid remote target, the split will fail
         if not variant:
             return ()
+        self.typecheck(variant, str)
         return tuple([int(x) for x in variant.split('.') if x.isdigit()])
 
     def string_encode(self, string):
@@ -219,7 +218,7 @@ class Misc(object):
 
     def dir_create(self, sdir, demote=''):
         ''' Create directory if it does not exist, including leading paths '''
-        self.typecheck(sdir, str)
+        self.typecheck(sdir, (str, unicode))
         self.typecheck(demote, str)
 
         if not os.path.isdir(sdir) and not os.path.islink(sdir):
@@ -319,8 +318,8 @@ class Misc(object):
 
     def fetch_check(self, surl, destination):
         ''' Check if remote file and local file sizes are equal '''
-        self.typecheck(surl, str)
-        self.typecheck(destination, str)
+        self.typecheck(surl, (str, unicode))
+        self.typecheck(destination, (str, unicode))
 
         # not all requests can get content-lenght , this means that there is
         # no way to tell if the archive is corrupted (checking if size == 0 is
@@ -341,17 +340,28 @@ class Misc(object):
         else:
             return False
 
+    def fetch_resume(self, surl):
+        ''' Check if remote file support download resume request '''
+        self.typecheck(surl, (str, unicode))
+
+        bvalue = False
+        rfile = urlopen(surl, timeout=self.TIMEOUT)
+        if rfile.headers.get('Accept-Ranges'):
+            bvalue = True
+        rfile.close()
+        return bvalue
+
     def fetch_internal(self, surl, destination):
         ''' Download file using internal library '''
-        self.typecheck(surl, str)
-        self.typecheck(destination, str)
+        # FIXME: support resume
+        self.typecheck(surl, (str, unicode))
+        self.typecheck(destination, (str, unicode))
 
         if self.OFFLINE:
             return
 
         rfile = urlopen(surl, timeout=self.TIMEOUT)
-        dest_dir = os.path.dirname(destination)
-        self.dir_create(dest_dir)
+        self.dir_create(os.path.dirname(destination))
 
         output = open(destination, 'wb')
         output.write(rfile.read())
@@ -360,8 +370,8 @@ class Misc(object):
 
     def fetch(self, surl, destination, demote=''):
         ''' Download file using external utilities, fallback to internal '''
-        self.typecheck(surl, str)
-        self.typecheck(destination, str)
+        self.typecheck(surl, (str, unicode))
+        self.typecheck(destination, (str, unicode))
 
         if self.OFFLINE:
             return
@@ -371,15 +381,19 @@ class Misc(object):
         curl = self.whereis('curl', fallback=False)
         wget = self.whereis('wget', fallback=False)
         if self.EXTERNAL and curl:
-            self.system_command((curl, '--connect-timeout', str(self.TIMEOUT), \
-                '--fail', '--retry', '10', '--location', '--continue-at', '-', \
-                surl, '--output', destination), demote=demote)
+            command = [curl, '--connect-timeout', str(self.TIMEOUT), \
+                '--fail', '--retry', '10', '--location', surl, '--output', \
+                destination]
+            if self.fetch_resume(surl):
+                command.extend(('--continue-at', '-'))
+            self.system_command(command, demote=demote)
         elif self.EXTERNAL and wget:
-            self.system_command((wget, '--timeout', str(self.TIMEOUT), \
-                '--continue', surl, '--output-document', destination), \
-                demote=demote)
+            args = [wget, '--timeout', str(self.TIMEOUT), surl, '--output-document', destination]
+            if self.fetch_resume(surl):
+                command.append('--continue')
+            self.system_command(command, demote=demote)
         else:
-            self.fetch_internals(url, destination)
+            self.fetch_internal(surl, destination)
 
     def archive_supported(self, sfile):
         ''' Test if file is archive that can be handled properly '''
