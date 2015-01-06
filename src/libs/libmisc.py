@@ -370,10 +370,11 @@ class Misc(object):
         else:
             return False
 
-    def fetch(self, surl, destination, retry=3):
+    def fetch(self, surl, destination, iretry=3):
         ''' Download file using internal library, retry is passed internally! '''
         self.typecheck(surl, (str, unicode))
         self.typecheck(destination, (str, unicode))
+        self.typecheck(iretry, int)
 
         if self.OFFLINE:
             return
@@ -412,8 +413,8 @@ class Misc(object):
                 sys.stdout.write('\r' * len(msg))
                 sys.stdout.flush()
         except URLError:
-            if not retry == 0:
-                self.fetch(surl, destination, retry-1)
+            if not iretry == 0:
+                self.fetch(surl, destination, iretry-1)
             else:
                 raise
         finally:
