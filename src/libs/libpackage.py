@@ -89,7 +89,7 @@ class Database(object):
                 match.append(local)
         return match
 
-    def remote_mdepends(self, target, checked=[], cdepends=False):
+    def remote_mdepends(self, target, checked=None, cdepends=False):
         ''' Returns missing build dependencies of target '''
         misc.typecheck(target, str)
         # FIXME: misc.typecheck(checked, (None, list))

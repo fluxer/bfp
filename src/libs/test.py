@@ -189,7 +189,7 @@ class TestSuite(unittest.TestCase):
         self.assertEqual(database.remote_search('foobar'), None)
 
     def test_remote_target_version(self):
-        self.assertEqual(database.remote_metadata(self.remote_name, 'version'),
+        self.assertEqual(database.remote_metadata(self.remote_name, 'version'), \
             self.remote_version)
 
     def test_remote_target_description(self):
@@ -197,7 +197,7 @@ class TestSuite(unittest.TestCase):
             'description'), self.remote_description)
 
     def test_remote_target_depends(self):
-        self.assertEqual(database.remote_metadata(self.remote_name, 'depends'),
+        self.assertEqual(database.remote_metadata(self.remote_name, 'depends'), \
             self.remote_depends)
 
     def test_remote_target_makedepends(self):
@@ -209,28 +209,28 @@ class TestSuite(unittest.TestCase):
             'checkdepends'), [self.remote_name])
 
     def test_remote_target_source(self):
-        self.assertEqual(database.remote_metadata(self.remote_name, 'sources'),
+        self.assertEqual(database.remote_metadata(self.remote_name, 'sources'), \
             ['http://ftp.gnu.org/gnu/glibc/glibc-2.16.0.tar.xz'])
 
     def test_remote_target_options(self):
-        self.assertEqual(database.remote_metadata(self.remote_name, 'options'),
+        self.assertEqual(database.remote_metadata(self.remote_name, 'options'), \
             self.remote_options)
 
     def test_remote_target_backup(self):
-        self.assertEqual(database.remote_metadata(self.remote_name, 'backup'),
+        self.assertEqual(database.remote_metadata(self.remote_name, 'backup'), \
             self.remote_backup)
 
     def test_remote_target_footprint(self):
-        self.assertEqual(database.local_footprint(self.local_name),
+        self.assertEqual(database.local_footprint(self.local_name), \
             self.local_footprint)
 
     def test_remote_mdepends_true(self):
-        self.assertEqual(database.remote_mdepends(self.remote_name),
+        self.assertEqual(database.remote_mdepends(self.remote_name), \
             self.remote_depends + self.remote_makedepends)
 
     # local targets checks
     def test_local_target_version(self):
-        self.assertEqual(database.local_metadata(self.local_name, 'version'),
+        self.assertEqual(database.local_metadata(self.local_name, 'version'), \
             self.local_version)
 
     def test_local_target_description(self):
@@ -238,15 +238,15 @@ class TestSuite(unittest.TestCase):
             'description'), self.local_description)
 
     def test_local_target_depends(self):
-        self.assertEqual(database.local_metadata(self.local_name, 'depends'),
+        self.assertEqual(database.local_metadata(self.local_name, 'depends'), \
             [self.local_depends])
 
     def test_local_target_depends_empty(self):
-        self.assertEqual(database.local_metadata(self.local3_name, 'depends'),
+        self.assertEqual(database.local_metadata(self.local3_name, 'depends'), \
             [])
 
     def test_local_target_size(self):
-        self.assertEqual(database.local_metadata(self.local_name, 'size'),
+        self.assertEqual(database.local_metadata(self.local_name, 'size'), \
             self.local_size)
 
     def test_local_installed_true(self):
@@ -256,7 +256,7 @@ class TestSuite(unittest.TestCase):
         self.assertEqual(database.local_installed('foobar'), False)
 
     def test_local_belongs_true(self):
-        self.assertEqual(database.local_belongs('/etc/dummy.conf'),
+        self.assertEqual(database.local_belongs('/etc/dummy.conf'), \
             [self.local_name])
 
     def test_local_belongs_false(self):
@@ -269,21 +269,18 @@ class TestSuite(unittest.TestCase):
         self.assertEqual(database.local_uptodate('dummy2'), False)
 
     def test_local_rdepends_true(self):
-        self.assertEqual(database.local_rdepends(self.local_name),
+        self.assertEqual(database.local_rdepends(self.local_name), \
             self.local2_name.split())
 
     # misc checks
     def test_misc_version_true(self):
-        self.assertGreater(misc.version('0.1.1'),
-            misc.version('0.1.0'))
+        self.assertGreater(misc.version('0.1.1'), misc.version('0.1.0'))
 
     def test_misc_version_true2(self):
-        self.assertGreater(misc.version('20141010'),
-            misc.version('0.1.0'))
+        self.assertGreater(misc.version('20141010'), misc.version('0.1.0'))
 
     def test_misc_version_false(self):
-        self.assertLess(misc.version('0.1.0'),
-            misc.version('0.1.1'))
+        self.assertLess(misc.version('0.1.0'), misc.version('0.1.1'))
 
     def test_file_mime_python(self):
         self.assertEqual(misc.file_mime('libmagic.py'), 'text/x-python')

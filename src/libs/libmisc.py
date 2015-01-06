@@ -278,8 +278,8 @@ class Misc(object):
         for root, subdirs, files in os.walk(sdir):
             if not cross:
                 subdirs[:] = [
-                    dir for dir in subdirs
-                    if not os.path.ismount(os.path.join(root, dir))]
+                    d for d in subdirs
+                    if not os.path.ismount(os.path.join(root, d))]
             for sfile in files:
                 slist.append(os.path.join(root, sfile))
         return slist
@@ -293,8 +293,8 @@ class Misc(object):
         for root, subdirs, files in os.walk(sdir):
             if not cross:
                 subdirs[:] = [
-                    dir for dir in subdirs
-                    if not os.path.ismount(os.path.join(root, dir))]
+                    d for d in subdirs
+                    if not os.path.ismount(os.path.join(root, d))]
             for d in subdirs:
                 slist.append(os.path.join(root, d))
         return slist
@@ -308,8 +308,8 @@ class Misc(object):
         for root, subdirs, files in os.walk(sdir):
             if not cross:
                 subdirs[:] = [
-                    dir for dir in subdirs
-                    if not os.path.ismount(os.path.join(root, dir))]
+                    d for d in subdirs
+                    if not os.path.ismount(os.path.join(root, d))]
             for d in subdirs:
                 slist.append(os.path.join(root, d))
             for sfile in files:
@@ -388,7 +388,7 @@ class Misc(object):
                 command.extend(('--continue-at', '-'))
             self.system_command(command, demote=demote)
         elif self.EXTERNAL and wget:
-            args = [wget, '--timeout', str(self.TIMEOUT), surl, '--output-document', destination]
+            command = [wget, '--timeout', str(self.TIMEOUT), surl, '--output-document', destination]
             if self.fetch_resume(surl):
                 command.append('--continue')
             self.system_command(command, demote=demote)
