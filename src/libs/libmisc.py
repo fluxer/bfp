@@ -656,7 +656,7 @@ class Misc(object):
 
     def system_trigger(self, command, shell=False):
         ''' Execute trigger '''
-        self.typecheck(command, str)
+        self.typecheck(command, (str, list, tuple))
         self.typecheck(shell, bool)
 
         if self.ROOT_DIR == '/':
