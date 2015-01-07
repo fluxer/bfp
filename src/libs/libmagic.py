@@ -20,6 +20,7 @@ Usage:
 """
 
 import sys
+import glob
 import os.path
 import ctypes
 import ctypes.util
@@ -37,7 +38,7 @@ class Magic(object):
     """
 
     def __init__(self, mime=False, magic_file=None, mime_encoding=False,
-                 keep_going=False):
+                 keep_going=False, uncompress=False):
         """
         Create a new libmagic wrapper.
 
@@ -45,6 +46,7 @@ class Magic(object):
         mime_encoding - if True, codec is returned
         magic_file - use a mime database other than the system default
         keep_going - don't stop at the first match, keep going
+        uncompress - Try to look inside compressed files.
         """
         self.flags = MAGIC_NONE
         if mime:
@@ -53,6 +55,9 @@ class Magic(object):
             self.flags |= MAGIC_MIME_ENCODING
         if keep_going:
             self.flags |= MAGIC_CONTINUE
+
+        if uncompress:
+            self.flags |= MAGIC_COMPRESS
 
         self.cookie = magic_open(self.flags)
 
@@ -84,7 +89,7 @@ class Magic(object):
             return self._handle509Bug(e)
 
     def _handle509Bug(self, e):
-        # libmagic 5.09 has a bug where it might mail to identify the
+        # libmagic 5.09 has a bug where it might fail to identify the
         # mimetype of a file and returns null from magic_file (and
         # likely _buffer), but also does not return an error message.
         if e.message is None and (self.flags & MAGIC_MIME):
@@ -104,7 +109,7 @@ class Magic(object):
         # during shutdown magic_close may have been cleared already so
         # make sure it exists before using it.
 
-        # the self.cookie check should be unnessary and was an
+        # the self.cookie check should be unnecessary and was an
         # incorrect fix for a threading problem, however I'm leaving
         # it in because it's harmless and I'm slightly afraid to
         # remove it.
@@ -150,11 +155,26 @@ def from_buffer(buffer, mime=False):
 
 libmagic = None
 # Let's try to find magic or magic1
-dll = ctypes.util.find_library('magic') or ctypes.util.find_library('magic1')
+dll = ctypes.util.find_library('magic') or ctypes.util.find_library('magic1') or ctypes.util.find_library('cygmagic-1')
 
 # This is necessary because find_library returns None if it doesn't find the library
 if dll:
     libmagic = ctypes.CDLL(dll)
+
+if not libmagic or not libmagic._name:
+    windows_dlls = ['magic1.dll','cygmagic-1.dll']
+    platform_to_lib = {'darwin': ['/opt/local/lib/libmagic.dylib',
+                                  '/usr/local/lib/libmagic.dylib'] +
+                         # Assumes there will only be one version installed
+                         glob.glob('/usr/local/Cellar/libmagic/*/lib/libmagic.dylib'),
+                       'win32': windows_dlls,
+                       'cygwin': windows_dlls }
+    for dll in platform_to_lib.get(sys.platform, []):
+        try:
+            libmagic = ctypes.CDLL(dll)
+            break
+        except OSError:
+            pass
 
 if not libmagic or not libmagic._name:
     # It is better to raise an ImportError since we are importing magic module
