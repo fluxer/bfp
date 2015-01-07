@@ -371,7 +371,7 @@ class Misc(object):
             return False
 
     def fetch(self, surl, destination, iretry=3):
-        ''' Download file using internal library, retry is passed internally! '''
+        ''' Download file, retry is passed internally! '''
         self.typecheck(surl, (str, unicode))
         self.typecheck(destination, (str, unicode))
         self.typecheck(iretry, int)
@@ -388,7 +388,7 @@ class Misc(object):
             rfile = urlopen(surl, timeout=self.TIMEOUT)
         self.dir_create(os.path.dirname(destination))
 
-        # same exception as in fetch_check(), the beaty of the 'net:
+        # same exception as in fetch_check(), the beauty of the 'net:
         # http://en.wikipedia.org/wiki/Chunked_transfer_encoding
         # even a simple hack to waint until 'Transfer-Encoding' goes
         # away and the server is ready to serve the file is not enough
@@ -461,8 +461,10 @@ class Misc(object):
                 zipf.write(item, item.lstrip(strip))
             zipf.close()
         elif sfile.endswith(('.xz', '.lzma')):
-            # FIXME: implement lzma/xz compression
-            raise(Exception('LZMA/XZ compression not implemented yet'))
+            command = [self.whereis('tar'), '-caf', sfile, '-C', strip]
+            for f in variant:
+                command.append(f.replace(strip, '.'))
+            self.system_command(command)
 
     def archive_decompress(self, sfile, sdir, demote=''):
         ''' Extract archive to directory '''
