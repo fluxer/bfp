@@ -408,7 +408,7 @@ class Misc(object):
             units = self.string_unit_guess(rsize)
             while True:
                 msg = 'Downloading: %s, %s/%s' % (self.url_normalize(surl, True), \
-                    self.string_unit(str(os.path.getsize(destination)), units),
+                    self.string_unit(str(os.path.getsize(destination)), units), \
                     self.string_unit(rsize, units, True))
                 sys.stdout.write(msg)
                 chunk = rfile.read(cache)
