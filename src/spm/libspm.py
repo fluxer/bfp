@@ -2,7 +2,6 @@
 
 import sys
 import os
-import gzip
 import shutil
 import re
 import compileall, site
@@ -787,11 +786,7 @@ class Source(object):
                     if not sfile.endswith('.gz') and os.path.isfile(sfile):
                         message.sub_debug('Compressing', sfile)
                         # using gzip instead of tarfile as tarfiles sets wrong header
-                        f_in = open(sfile, 'rb')
-                        f_out = gzip.open(sfile + '.gz', 'wb')
-                        f_out.writelines(f_in)
-                        f_out.close()
-                        f_in.close()
+                        misc.archive_compress(sfile, sfile + '.gz', '')
                         os.unlink(sfile)
                     elif os.path.islink(sfile) and \
                         not os.path.isfile(os.path.realpath(sfile)):

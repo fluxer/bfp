@@ -1,7 +1,7 @@
 #!/bin/python2
 
 import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, pwd, inspect
-import libmagic
+import gzip, libmagic
 if sys.version < '3':
     from urlparse import urlparse
     from urllib2 import urlopen
@@ -450,7 +450,7 @@ class Misc(object):
         if isinstance(variant, str):
             variant = [variant]
 
-        if sfile.endswith(('.bz2', '.gz')):
+        if sfile.endswith(('.bz2', '.tar.gz')):
             tar = tarfile.open(sfile, 'w:' + self.file_extension(sfile))
             for item in variant:
                 tar.add(item, item.lstrip(strip))
@@ -461,10 +461,19 @@ class Misc(object):
                 zipf.write(item, item.lstrip(strip))
             zipf.close()
         elif sfile.endswith(('.xz', '.lzma')):
-            command = [self.whereis('tar'), '-caf', sfile, '-C', strip]
+            tar = self.whereis('bsdtar', fallback=False)
+            if not tar:
+                tar = self.whereis('tar')
+            command = [tar, '-caf', sfile, '-C', strip]
             for f in variant:
                 command.append(f.replace(strip, '.'))
             self.system_command(command)
+        elif sfile.endswith('.gz'):
+            # FIXME: strip
+            gzipf = gzip.GzipFile(sfile, 'wb')
+            for f in variant:
+                gzipf.writelines(self.file_read(f))
+            gzipf.close()
 
     def archive_decompress(self, sfile, sdir, demote=''):
         ''' Extract archive to directory '''
@@ -485,12 +494,15 @@ class Misc(object):
             or tarfile.is_tarfile(sfile) or zipfile.is_zipfile(sfile):
             bsdtar = self.whereis('bsdtar', fallback=False)
             if bsdtar:
-                self.system_command((bsdtar, '-xpPf', sfile, '-C', sdir), demote=demote)
+                self.system_command((bsdtar, '-xpPf', sfile, '-C', sdir), \
+                    demote=demote)
             else:
-                self.system_command((self.whereis('tar'), '-xphf', sfile, '-C', sdir), demote=demote)
+                self.system_command((self.whereis('tar'), '-xphf', sfile, \
+                    '-C', sdir), demote=demote)
         elif sfile.endswith('.gz'):
-            # FIXME: implement gzip decompression
-            raise(Exception('Gzip decompression not implemented yet'))
+            gfile = gzip.GzipFile(sfile, 'rb')
+            self.file_write(sfile.rstrip('.gz'), gfile.read())
+            gfile.close()
 
     def archive_list(self, sfile):
         ''' Get list of files in archive '''
