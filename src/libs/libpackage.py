@@ -142,11 +142,11 @@ class Database(object):
         if checked is None:
             checked = []
 
+        basename = os.path.basename(target)
         for installed in self.local_all(basename=True):
-            basename = os.path.basename(target)
             # respect ignored targets
             if installed in self.IGNORE:
-                return reverse
+                continue
 
             if checked and installed in checked:
                 continue
@@ -178,28 +178,12 @@ class Database(object):
 
         target_metadata = os.path.join(self.LOCAL_DIR, target, 'metadata')
         if os.path.isfile(target_metadata):
-            # this is not optimal, but cleaner
-            # for line in misc.file_readlines(target_metadata):
-            #     if line.startswith(key + '='):
-            #         return line.split('=')[1].strip()
-
-            metadata_content = misc.file_read(target_metadata)
-            if key == 'version':
-                value = metadata_content.split('\n')[0]
-                value = value.replace('version=', '').strip()
-                return value
-            elif key == 'description':
-                value = metadata_content.split('\n')[1]
-                value = value.replace('description=', '').strip()
-                return value
-            elif key == 'depends':
-                value = metadata_content.split('\n')[2]
-                value = value.replace('depends=', '').strip().split()
-                return value
-            elif key == 'size':
-                value = metadata_content.split('\n')[3]
-                value = value.replace('size=', '').strip()
-                return value
+            for line in misc.file_readlines(target_metadata):
+                if line.startswith(key + '='):
+                    if key == 'depends':
+                        # exception, return dependencies as list
+                        return line.split('=')[1].strip().split()
+                    return line.split('=')[1].strip()
 
     def local_uptodate(self, target):
         ''' Returns True if target is up-to-date and False otherwise '''
