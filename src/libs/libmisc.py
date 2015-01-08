@@ -89,9 +89,9 @@ class Misc(object):
         self.typecheck(svar, str)
 
         lenght = len(svar)
-        if lenght > 7:
+        if lenght > 6:
             return 'Mb'
-        elif lenght > 4:
+        elif lenght > 3:
             return 'Kb'
         else:
             return 'b'
