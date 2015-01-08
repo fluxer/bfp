@@ -136,7 +136,7 @@ class Misc(object):
     def url_normalize(self, surl, basename=False):
         ''' Normalize URL, optionally get basename '''
         # http://www.w3schools.com/tags/ref_urlencode.asp
-        self.typecheck(surl, str)
+        self.typecheck(surl, (str, unicode))
         self.typecheck(basename, bool)
 
         dspecials = {'%20': ' '}
