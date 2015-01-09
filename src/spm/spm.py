@@ -9,7 +9,6 @@ import zipfile
 import shutil
 import os
 import re
-import pwd
 if sys.version < '3':
     import ConfigParser as configparser
     from urllib2 import HTTPError
