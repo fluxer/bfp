@@ -185,7 +185,7 @@ class Misc(object):
         self.typecheck(ibuffer, int)
 
         fd = os.open(sfile, os.O_NONBLOCK)
-        content = os.read(fd, sbuffer)
+        content = os.read(fd, ibuffer)
         os.close(fd)
         return content
 
@@ -347,6 +347,24 @@ class Misc(object):
                 slist.append(os.path.join(root, sfile))
         return slist
 
+    def fetch_request(self, surl, data=None):
+        ''' Returns urlopen object, it is NOT closed! '''
+        self.typecheck(surl, (str, unicode))
+        if not data:
+            data = {}
+        self.typecheck(data, dict)
+
+        request = Request(surl)
+        for item in data:
+            request.add_header(item, data[item])
+        # SSL verification works OOTB only on Python >= 2.7.9 (officially)
+        if sys.version_info[2] >= 9:
+            import ssl
+            ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+            return urlopen(request, timeout=self.TIMEOUT, context=ctx)
+        else:
+            return urlopen(request, timeout=self.TIMEOUT)
+
     def fetch_check(self, surl, destination):
         ''' Check if remote file and local file sizes are equal '''
         self.typecheck(surl, (str, unicode))
@@ -356,10 +374,10 @@ class Misc(object):
             return True
         elif os.path.isfile(destination):
             lsize = os.path.getsize(destination)
-            rfile = urlopen(surl, timeout=self.TIMEOUT)
+            rfile = self.fetch_request(surl)
             # not all requests have content-lenght:
             # http://en.wikipedia.org/wiki/Chunked_transfer_encoding
-            rsize = rfile.headers.get('content-length', '0')
+            rsize = rfile.headers.get('Content-Length', '0')
             rfile.close()
             if int(lsize) == int(rsize):
                 return True
@@ -375,26 +393,12 @@ class Misc(object):
         if self.OFFLINE:
             return
 
-        request = Request(surl)
-        mode = 'wb'
-        lsize = '0'
-        if os.path.exists(destination):
-            lsize = str(os.path.getsize(destination))
-            request.headers['Range'] = 'bytes=%s-' % lsize
-            mode = 'ab'
-
-        # SSL verification works OOTB only on Python >= 2.7.9 (officially)
-        if sys.version_info[2] >= 9:
-            import ssl
-            ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-            rfile = urlopen(request, timeout=self.TIMEOUT, context=ctx)
-        else:
-            rfile = urlopen(request, timeout=self.TIMEOUT)
+        rfile = self.fetch_request(surl)
         self.dir_create(os.path.dirname(destination))
 
         # not all requests have content-lenght:
         # http://en.wikipedia.org/wiki/Chunked_transfer_encoding
-        rsize = rfile.headers.get('content-length', '0')
+        rsize = rfile.headers.get('Content-Length', '0')
         if rsize == '0':
             # block until the server is ready to serve the whole file
             try:
@@ -404,10 +408,14 @@ class Misc(object):
             return
 
         if os.path.exists(destination):
-            # since the server will respond with the chunked size a simple
-            # trick to get the progress right is to display the whole size
-            rsize = str(int(rsize) + int(lsize))
-        lfile = open(destination, mode)
+            if rfile.headers.get('Accept-Ranges') == 'bytes':
+                # setup new request with custom header
+                rfile.close()
+                lsize = str(os.path.getsize(destination))
+                rfile = self.fetch_request(surl, {'Range': 'bytes=%s-' % lsize})
+            else:
+                os.unlink(destination)
+        lfile = open(destination, 'ab')
         cache = 10240
         try:
             # since the local file size changes use persistent units based on
