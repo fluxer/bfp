@@ -2,16 +2,17 @@
 
 import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, pwd, inspect
 import gzip, libmagic
-if sys.version < '3':
+if int(sys.version_info[0]) >= 3:
     from urlparse import urlparse
     from urllib2 import urlopen
+    from urllib2 import Request
     from urllib2 import URLError
-    from urllib2 import urlopen
     from httplib import BadStatusLine
 else:
     import urllib.parse as urlparse
-    from urllib.error import URLError
     from urllib.request import urlopen
+    from urllib.request import Request
+    from urllib.error import URLError
     from http.client import BadStatusLine
 
 
@@ -351,21 +352,16 @@ class Misc(object):
         self.typecheck(surl, (str, unicode))
         self.typecheck(destination, (str, unicode))
 
-        # not all requests can get content-lenght , this means that there is
-        # no way to tell if the archive is corrupted (checking if size == 0 is
-        # not enough) so the source is re-feteched
-
         if self.OFFLINE:
             return True
         elif os.path.isfile(destination):
-            local_size = os.path.getsize(destination)
+            lsize = os.path.getsize(destination)
             rfile = urlopen(surl, timeout=self.TIMEOUT)
-            remote_size = rfile.headers.get('content-length')
+            # not all requests have content-lenght:
+            # http://en.wikipedia.org/wiki/Chunked_transfer_encoding
+            rsize = rfile.headers.get('content-length', '0')
             rfile.close()
-
-            if not remote_size:
-                return False
-            elif int(local_size) == int(remote_size):
+            if int(lsize) == int(rsize):
                 return True
         else:
             return False
@@ -379,28 +375,39 @@ class Misc(object):
         if self.OFFLINE:
             return
 
+        request = Request(surl)
+        mode = 'wb'
+        lsize = '0'
+        if os.path.exists(destination):
+            lsize = str(os.path.getsize(destination))
+            request.headers['Range'] = 'bytes=%s-' % lsize
+            mode = 'ab'
+
         # SSL verification works OOTB only on Python >= 2.7.9 (officially)
         if sys.version_info[2] >= 9:
             import ssl
             ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-            rfile = urlopen(surl, timeout=self.TIMEOUT, context=ctx)
+            rfile = urlopen(request, timeout=self.TIMEOUT, context=ctx)
         else:
-            rfile = urlopen(surl, timeout=self.TIMEOUT)
+            rfile = urlopen(request, timeout=self.TIMEOUT)
         self.dir_create(os.path.dirname(destination))
 
-        # same exception as in fetch_check(), the beauty of the 'net:
+        # not all requests have content-lenght:
         # http://en.wikipedia.org/wiki/Chunked_transfer_encoding
-        # even a simple hack to waint until 'Transfer-Encoding' goes
-        # away and the server is ready to serve the file is not enough
-        # for GitHub, maybe others too. as such an ugly workaround is
-        # to set the final size to 0
         rsize = rfile.headers.get('content-length', '0')
-        mode = 'wb'
-        if os.path.exists(destination) and rfile.headers.get('Accept-Ranges'):
-            rfile.headers['Range'] = 'bytes=%s-%s' % (os.path.getsize(destination), rsize)
-            mode = 'ab'
+        if rsize == '0':
+            # block until the server is ready to serve the whole file
+            try:
+                self.fetch(surl, destination, iretry)
+            finally:
+                rfile.close()
+            return
 
-        output = open(destination, mode)
+        if os.path.exists(destination):
+            # since the server will respond with the chunked size a simple
+            # trick to get the progress right is to display the whole size
+            rsize = str(int(rsize) + int(lsize))
+        lfile = open(destination, mode)
         cache = 10240
         try:
             # since the local file size changes use persistent units based on
@@ -414,7 +421,7 @@ class Misc(object):
                 chunk = rfile.read(cache)
                 if not chunk:
                     break
-                output.write(chunk)
+                lfile.write(chunk)
                 # in Python 3000 that would be print(blah, end='')
                 sys.stdout.write('\r' * len(msg))
                 sys.stdout.flush()
@@ -425,7 +432,7 @@ class Misc(object):
                 raise
         finally:
             sys.stdout.write('\n')
-            output.close()
+            lfile.close()
             rfile.close()
 
     def archive_supported(self, sfile):
