@@ -2,7 +2,7 @@
 
 import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, pwd, inspect
 import gzip, libmagic
-if int(sys.version_info[0]) >= 3:
+if int(sys.version_info[0]) < 3:
     from urlparse import urlparse
     from urllib2 import urlopen
     from urllib2 import Request
@@ -136,10 +136,10 @@ class Misc(object):
 
     def url_normalize(self, surl, basename=False):
         ''' Normalize URL, optionally get basename '''
-        # http://www.w3schools.com/tags/ref_urlencode.asp
         self.typecheck(surl, (str, unicode))
         self.typecheck(basename, bool)
 
+        # http://www.w3schools.com/tags/ref_urlencode.asp
         dspecials = {'%20': ' '}
         sresult = urlparse(surl).path
         for schar in dspecials:
