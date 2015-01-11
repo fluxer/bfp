@@ -48,7 +48,7 @@ if not os.path.isfile(MAIN_CONF):
     STRIP_STATIC = False
     STRIP_RPATH = False
     PYTHON_COMPILE = False
-    IGNORE_MISSING = True
+    IGNORE_MISSING = False
     CONFLICTS = False
     BACKUP = False
     SCRIPTS = False
