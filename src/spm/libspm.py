@@ -32,7 +32,7 @@ if not os.path.isfile(MAIN_CONF):
     ROOT_DIR = '/'
     LOCAL_DIR = ROOT_DIR + 'var/local/spm'
     IGNORE = []
-    DEMOTE = None
+    DEMOTE = ''
     OFFLINE = False
     MIRROR = False
     TIMEOUT = 30
@@ -465,6 +465,8 @@ class Source(object):
         message.sub_debug('update-mime-database', mime_database or '')
         icon_resources = misc.whereis('xdg-icon-resource', False, True)
         message.sub_debug('xdg-icon-resources', icon_resources or '')
+        xmime = misc.whereis('xdg-mime', False, True)
+        message.sub_debug('xdg-mime', xmime or '')
         gio_querymodules = misc.whereis('gio-querymodules', False, True)
         message.sub_debug('gio-querymodules', gio_querymodules or '')
         pango_querymodules = misc.whereis('pango-querymodules', False, True)
@@ -523,6 +525,15 @@ class Source(object):
                 misc.system_trigger((icon_resources, 'forceupdate', \
                     '--theme', 'hicolor'))
                 icon_resources = False
+            elif 'mime/' in spath and spath.endswith('.xml') and xmime:
+                if action == 'merge':
+                    message.sub_info('Installing XDG MIMEs')
+                    message.sub_debug(spath)
+                    misc.system_trigger((xmime, 'install', spath))
+                elif action == 'remove':
+                    message.sub_info('Uninstalling XDG MIMEs')
+                    message.sub_debug(spath)
+                    misc.system_trigger((xmime, 'uninstall', spath))
             elif '/gio/modules/' in spath and gio_querymodules:
                 message.sub_info('Updating GIO modules cache')
                 message.sub_debug(spath)
@@ -593,17 +604,17 @@ class Source(object):
                 message.sub_debug(spath)
                 misc.system_trigger((icon_cache, '-q', '-t', '-i', '-f', sdir))
                 icon_cache = False
-            elif 'share/info/' in spath and action == 'merge' and install_info:
+            elif 'share/info/' in spath and install_info:
                 # allowed to run multiple times
-                message.sub_info('Installing info page', spath)
-                message.sub_debug(spath)
-                misc.system_trigger((install_info, spath, \
-                    sys.prefix + '/share/info/dir'))
-            elif 'share/info/' in spath and action == 'remove' and install_info:
-                # allowed to run multiple times
-                message.sub_info('Deleting info page', spath)
-                message.sub_debug(spath)
-                misc.system_trigger((install_info, '--delete', spath, \
+                if action == 'merge':
+                    message.sub_info('Installing info page', spath)
+                    message.sub_debug(spath)
+                    misc.system_trigger((install_info, spath, \
+                        sys.prefix + '/share/info/dir'))
+                elif action == 'remove':
+                    message.sub_info('Deleting info page', spath)
+                    message.sub_debug(spath)
+                    misc.system_trigger((install_info, '--delete', spath, \
                     sys.prefix + '/share/info/dir'))
         # delayed triggers which need to run in specifiec order
         if depmod_run:
