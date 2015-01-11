@@ -572,7 +572,9 @@ class Edit(object):
         self.targets = targets
 
     def main(self):
-        editor = os.environ.get('EDITOR', misc.whereis('vim'))
+        editor = os.environ.get('EDITOR')
+        if not editor:
+            editor = misc.whereis('vim')
         for target in self.targets:
             match = database.remote_search(target)
             if match:
