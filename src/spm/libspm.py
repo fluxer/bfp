@@ -525,7 +525,8 @@ class Source(object):
                 misc.system_trigger((icon_resources, 'forceupdate', \
                     '--theme', 'hicolor'))
                 icon_resources = False
-            elif 'mime/' in spath and spath.endswith('.xml') and xmime:
+            elif 'mime/' in spath and '-' in os.path.basename(spath) \
+                and spath.endswith('.xml') and xmime:
                 if action == 'merge':
                     message.sub_info('Installing XDG MIMEs')
                     message.sub_debug(spath)
