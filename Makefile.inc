@@ -34,7 +34,7 @@ RM = rm -vf
 CP = cp -vf
 XZ = xz -v
 PYUIC = pyuic4
-NUITKA = $(PYTHON) $(TOPDIR)/nuitka/bin/nuitka --recurse-not-to=PyQt4,parted \
+NUITKA = $(PYTHON) $(TOPDIR)/nuitka/bin/nuitka --recurse-none \
 	--python-version=$(PYTHON_VERSION)
 PYLINT = pylint --rcfile=$(TOPDIR)/pylint.conf
 
