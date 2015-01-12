@@ -167,7 +167,7 @@ for src in "${@:-.}";do
     # FIXME: it breaks on spaces
     touch "$INSTALL_DIR/var/local/spm/$src_name/footprint"
     for f in $(find "$INSTALL_DIR" ! -type d);do
-        echo -n "$f\n" >> "$INSTALL_DIR/var/local/spm/$src_name/footprint"
+        echo "$f" >> "$INSTALL_DIR/var/local/spm/$src_name/footprint"
     done
     echo "version=$version" > "$INSTALL_DIR/var/local/spm/$src_name/metadata"
     echo "description=$description" >> "$INSTALL_DIR/var/local/spm/$src_name/metadata"
