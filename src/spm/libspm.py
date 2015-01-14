@@ -576,6 +576,7 @@ class Source(object):
                 depmod_path = misc.string_convert(misc.string_search('(?:usr/?)?lib/modules/(.*?)/', \
                     spath, escape=False))
                 depmod_run = True
+                mkinitfs_run = True
             elif '/udev/rules.d/' in spath and \
                 (os.path.exists(ROOT_DIR + 'run/udev/control') \
                 or os.path.exists(ROOT_DIR + 'var/run/udev/control')) and udevadm:
