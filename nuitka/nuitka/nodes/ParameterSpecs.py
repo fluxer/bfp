@@ -1,4 +1,4 @@
-#     Copyright 2014, Kay Hayen, mailto:kay.hayen@gmail.com
+#     Copyright 2015, Kay Hayen, mailto:kay.hayen@gmail.com
 #
 #     Part of "Nuitka", an optimizing Python compiler that is compatible and
 #     integrates with CPython, but also works on its own.
@@ -189,7 +189,7 @@ class ParameterSpec(ParameterSpecTuple):
             parts.append("**%s" % self.dict_star_variable)
 
         if parts:
-            return "<ParameterSpec '%s'>" % ",".join(parts)
+            return "<ParameterSpec '%s'>" % ','.join(parts)
         else:
             return "<NoParameters>"
 

@@ -15,31 +15,35 @@
 //     See the License for the specific language governing permissions and
 //     limitations under the License.
 //
-#ifndef __NUITKA_HELPER_INDEXES_H__
-#define __NUITKA_HELPER_INDEXES_H__
+#ifndef __NUITKA_RANGEOBJECTS_H__
+#define __NUITKA_RANGEOBJECTS_H__
 
-#include "nuitka/helper/raising.hpp"
+// Python3 range objects
+#if PYTHON_VERSION >= 300
 
-NUITKA_MAY_BE_UNUSED static Py_ssize_t CONVERT_TO_INDEX( PyObject *value )
+typedef struct {
+    PyObject_HEAD
+    PyObject *start;
+    PyObject *stop;
+    PyObject *step;
+    PyObject *length;
+} _rangeobject;
+
+NUITKA_MAY_BE_UNUSED static PyObject *PyRange_Start( PyObject *range )
 {
-    assertObject( value );
-
-#if PYTHON_VERSION < 300
-    if ( PyInt_Check( value ) )
-    {
-        return PyInt_AS_LONG( value );
-    }
-    else
-#endif
-    if ( PyIndex_Check( value ) )
-    {
-        return PyNumber_AsSsize_t( value, NULL );
-    }
-    else
-    {
-        PyErr_Format( PyExc_TypeError, "slice indices must be integers or None or have an __index__ method" );
-        return -1;
-    }
+    return ((_rangeobject *)range)->start;
 }
+
+NUITKA_MAY_BE_UNUSED static PyObject *PyRange_Stop( PyObject *range )
+{
+    return ((_rangeobject *)range)->stop;
+}
+
+NUITKA_MAY_BE_UNUSED static PyObject *PyRange_Step( PyObject *range )
+{
+    return ((_rangeobject *)range)->step;
+}
+
+#endif
 
 #endif
