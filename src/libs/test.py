@@ -273,6 +273,7 @@ class TestSuite(unittest.TestCase):
             self.local2_name.split())
 
     # misc checks
+    # TODO: drop the next three tests in next major release
     def test_misc_version_true(self):
         self.assertGreater(misc.version('0.1.1'), misc.version('0.1.0'))
 

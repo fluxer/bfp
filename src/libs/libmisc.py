@@ -64,8 +64,10 @@ class Misc(object):
         except (URLError, BadStatusLine):
             return False
 
+    # TODO: drop in next major release
     def version(self, variant):
-        ''' Convert input to tuple suitable for version comparison '''
+        ''' Convert input to tuple suitable for version comparison
+            WARNING: deprecated, use LooseVersion from distutils '''
         # if None is passed, e.g. on invalid remote target, the split will fail
         if not variant:
             return ()

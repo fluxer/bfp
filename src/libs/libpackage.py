@@ -1,6 +1,7 @@
 #!/bin/python2
 
 import os, re, shlex
+from distutils.version import LooseVersion
 
 import libmisc
 misc = libmisc.Misc()
@@ -199,7 +200,12 @@ class Database(object):
         local_version = self.local_metadata(os.path.basename(target), 'version')
         remote_version = self.remote_metadata(target, 'version')
 
-        if misc.version(local_version) < misc.version(remote_version):
+        # LooseVersion does not handle None which may be the case on invalid
+        # remote target so handle that
+        if not remote_version:
+            return False
+
+        if LooseVersion(local_version) < LooseVersion(remote_version):
             return False
         return True
 
