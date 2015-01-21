@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>476</width>
-    <height>553</height>
+    <height>567</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -209,7 +209,7 @@
         <item row="0" column="0">
          <widget class="QLineEdit" name="CacheDirEdit">
           <property name="toolTip">
-           <string>Caches directory</string>
+           <string>Repositories, sources and tarballs cache directory</string>
           </property>
          </widget>
         </item>
@@ -236,7 +236,7 @@
         <item row="1" column="0">
          <widget class="QLineEdit" name="IgnoreTargetsEdit">
           <property name="toolTip">
-           <string>Ignored targets, usefull to prevent target upgrades</string>
+           <string>Ignored targets, usefull to prevent software upgrades</string>
           </property>
          </widget>
         </item>
@@ -341,6 +341,9 @@ disable it unless you know what you are doing!</string>
         </item>
         <item row="2" column="0">
          <widget class="QComboBox" name="DemoteBox">
+          <property name="toolTip">
+           <string>Set as which user some of the actions will be executed as, changing the option does not change permissions on relevant paths so it may need additional manual intervention</string>
+          </property>
           <item>
            <property name="text">
             <string/>
