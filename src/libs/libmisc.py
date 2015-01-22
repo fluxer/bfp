@@ -64,16 +64,6 @@ class Misc(object):
         except (URLError, BadStatusLine):
             return False
 
-    # TODO: drop in next major release
-    def version(self, variant):
-        ''' Convert input to tuple suitable for version comparison
-            WARNING: deprecated, use LooseVersion from distutils '''
-        # if None is passed, e.g. on invalid remote target, the split will fail
-        if not variant:
-            return ()
-        self.typecheck(variant, str)
-        return tuple([int(x) for x in variant.split('.') if x.isdigit()])
-
     def string_encode(self, string):
         ''' String wrapper to ensure Python3 compat '''
         if int(sys.version_info[0]) >= 3 and isinstance(string, bytes):

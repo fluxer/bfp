@@ -273,16 +273,6 @@ class TestSuite(unittest.TestCase):
             self.local2_name.split())
 
     # misc checks
-    # TODO: drop the next three tests in next major release
-    def test_misc_version_true(self):
-        self.assertGreater(misc.version('0.1.1'), misc.version('0.1.0'))
-
-    def test_misc_version_true2(self):
-        self.assertGreater(misc.version('20141010'), misc.version('0.1.0'))
-
-    def test_misc_version_false(self):
-        self.assertLess(misc.version('0.1.0'), misc.version('0.1.1'))
-
     def test_file_mime_python(self):
         self.assertEqual(misc.file_mime('libmagic.py'), 'text/x-python')
 
