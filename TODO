@@ -1,5 +1,5 @@
 ## SPM ##
- * Fix all bugs noted with FIXME
+ * Complete all tasks noted with FIXME/TODO
  * Optionally remove build depends that are not required by local target after build
  * Optimize backing up of files
  * Check for absolute path symlinks in SRCBUILDs
@@ -13,4 +13,3 @@
  * Make use of sys.prefix and use less hardcode paths
  * Sanitize the code
  * Value checks to ensure proper behavior
- * Document methods the right way (https://github.com/numpy/numpy/blob/master/doc/HOWTO_DOCUMENT.rst.txt)
