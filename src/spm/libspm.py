@@ -1172,8 +1172,7 @@ class Source(object):
             message.sub_info('Executing post_remove()')
             misc.system_script(self.srcbuild, 'post_remove')
 
-        if os.path.isfile(footprint):
-            self.update_databases(target_content, 'remove')
+        self.update_databases(target_content, 'remove')
 
     def main(self):
         ''' Execute action for every target '''
