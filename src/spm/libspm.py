@@ -369,12 +369,9 @@ class Repo(object):
                 continue
 
             message.sub_debug('Checking', target)
-            local_version = database.local_metadata(target, 'version')
-            remote_version = database.remote_metadata(target, 'version')
-
-            if misc.version(local_version) < misc.version(remote_version):
+            if not database.local_uptodate(target):
                 message.sub_warning('New version of %s available' % target, \
-                    remote_version)
+                    database.remote_metadata(target, 'version'))
 
     def main(self):
         ''' Execute action for every repository '''
