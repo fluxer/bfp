@@ -12,4 +12,3 @@
  * Run PyLint and do some kung-foo on the code style
  * Make use of sys.prefix and use less hardcode paths
  * Sanitize the code
- * Value checks to ensure proper behavior

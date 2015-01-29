@@ -795,7 +795,6 @@ class Source(object):
                 for sfile in misc.list_files(self.install_dir + sdir):
                     if not sfile.endswith('.gz') and os.path.isfile(sfile):
                         message.sub_debug('Compressing', sfile)
-                        # using gzip instead of tarfile as tarfiles sets wrong header
                         misc.archive_compress(sfile, sfile + '.gz', '')
                         os.unlink(sfile)
                     elif os.path.islink(sfile) and \
@@ -808,6 +807,7 @@ class Source(object):
                         else:
                             os.unlink(sfile)
                             os.symlink(link, sfile)
+
         message.sub_info('Indexing content')
         target_content = {}
         for sfile in misc.list_files(self.install_dir):
@@ -845,7 +845,7 @@ class Source(object):
                 if (smime == 'application/x-executable' or \
                     smime == 'application/x-sharedlib' \
                     or smime == 'application/x-archive') and self.strip_rpath:
-                    # do not check if RPATH is present at all to reduce
+                    # do not check if RPATH is present at all to avoid
                     # spawning scanelf twice
                     message.sub_debug('Stripping RPATH', sfile)
                     misc.system_command((scanelf, '-CBXrq', sfile))
@@ -1021,7 +1021,7 @@ class Source(object):
             if conflict_detected:
                 sys.exit(2)
 
-        # store state installed or not, always true if done later on
+        # store state installed or not, it must be done before the decompression
         target_upgrade = database.local_installed(self.target_name)
 
         if target_upgrade and SCRIPTS \
