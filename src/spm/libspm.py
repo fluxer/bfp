@@ -811,7 +811,7 @@ class Source(object):
         message.sub_info('Indexing content')
         target_content = {}
         for sfile in misc.list_files(self.install_dir):
-            # skip footprint and metadata, they are listed when re-installing
+            # skip footprint and metadata, they are not wanted in the footprint
             if sfile == os.path.join(self.install_dir, self.target_footprint) \
                 or sfile == os.path.join(self.install_dir, self.target_metadata):
                 continue
@@ -924,7 +924,7 @@ class Source(object):
                                 message.sub_debug('Successfuly corrected (host)', fmatch)
                         # fallback to the content of the target (self provided)
                         else:
-                            # FIXME: this only extends to binarues in <blah>/(s)bin,
+                            # FIXME: this only extends to binaries in <blah>/(s)bin,
                             # if shebang uses some strange path (e.g. /opt/<exec>)
                             # then this will not work
                             for s in list(target_content.keys()):
