@@ -376,7 +376,7 @@ class Misc(object):
         else:
             return False
 
-    def fetch(self, surl, destination, iretry=3):
+    def fetch(self, surl, destination, iretry=3, iblock=60):
         ''' Download file, retry is passed internally! '''
         self.typecheck(surl, (str, unicode))
         self.typecheck(destination, (str, unicode))
@@ -393,11 +393,10 @@ class Misc(object):
         rsize = rfile.headers.get('Content-Length', '0')
         if rsize == '0':
             # block until the server is ready to serve the whole file
-            try:
-                self.fetch(surl, destination, iretry)
-            finally:
-                rfile.close()
-            return
+            rfile.close()
+            if not iretry == 0:
+                return self.fetch(surl, destination, iretry, iblock-1)
+            raise(Exception('Bogus response header from %s, good luck!' % surl))
 
         if os.path.exists(destination):
             if rfile.headers.get('Accept-Ranges') == 'bytes':
@@ -427,7 +426,7 @@ class Misc(object):
                 sys.stdout.flush()
         except URLError:
             if not iretry == 0:
-                self.fetch(surl, destination, iretry-1)
+                self.fetch(surl, destination, iretry-1, iblock)
             else:
                 raise
         finally:
