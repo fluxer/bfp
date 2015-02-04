@@ -1,7 +1,6 @@
 ## SPM ##
  * Complete all tasks noted with FIXME/TODO
  * Optionally remove build depends that are not required by local target after build
- * Optimize backing up of files
  * Check for absolute path symlinks in SRCBUILDs
  * Implement services trigger (rc.d restart foo)
  * Implement trigger invocation only on file content change

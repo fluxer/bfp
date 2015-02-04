@@ -531,19 +531,35 @@ class Misc(object):
             raise(Exception('Gzip listing not implemented yet'))
         return content
 
-    def archive_size(self, star, sfile):
-        ''' Get size of file in archive '''
+    def archive_size(self, star, lpaths):
+        ''' Get size of file(s) in Tar archive '''
         self.typecheck(star, str)
-        self.typecheck(sfile, str)
+        self.typecheck(lpaths, (tuple, list))
 
-        size = 0
+        sizes = []
         tar = tarfile.open(star, 'r')
         for i in tar.getmembers():
-            if i.name == sfile:
-                size = i.size
-                break
+            for sfile in lpaths:
+                if i.name == sfile:
+                    sizes.append(i.size)
         tar.close()
-        return size
+        return sizes
+
+    def archive_content(self, star, lpaths):
+        ''' Get content of file(s) in Tar archive '''
+        self.typecheck(star, str)
+        self.typecheck(lpaths, (tuple, list))
+
+        content = []
+        tar = tarfile.open(star, 'r')
+        for i in tar.getmembers():
+            for sfile in lpaths:
+                if i.name == sfile:
+                    t = tar.extractfile(i)
+                    content.append(t.read())
+                    t.close()
+        tar.close()
+        return content
 
     def system_demote(self, suser):
         ''' Change priviledges to different user, returns function pointer! '''
