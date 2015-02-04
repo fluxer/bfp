@@ -1042,18 +1042,15 @@ class Source(object):
                 if sfile.endswith('.conf') or sfile in self.target_backup:
                     check.append(sfile)
 
-            content = misc.archive_content(self.target_tarball, check)
-            counter = 0
-            for sfile in check:
-                full_file = os.path.join(ROOT_DIR, sfile)
-                message.sub_debug(full_file)
-                if misc.file_read(full_file) == content[counter]:
+            if check:
+                content = misc.archive_content(self.target_tarball, check)
+                counter = 0
+                for sfile in check:
+                    full_file = os.path.join(ROOT_DIR, sfile)
+                    if not misc.file_read(full_file) == content[counter]:
+                        message.sub_debug('Backing up', full_file)
+                        shutil.copy2(full_file, full_file + '.backup')
                     counter+=1
-                    continue
-
-                message.sub_debug('Backing up', full_file)
-                shutil.copy2(full_file, full_file + '.backup')
-                counter+=1
 
         message.sub_info('Decompressing tarball')
         misc.archive_decompress(self.target_tarball, ROOT_DIR)
