@@ -1,9 +1,6 @@
 #!/bin/python2
 
-import unittest
-import tempfile
-import os
-import sys
+import unittest, tempfile, os, sys, types
 
 import libmisc
 misc = libmisc.Misc()
@@ -277,43 +274,43 @@ class TestSuite(unittest.TestCase):
         self.assertEqual(misc.file_mime('libmagic.py'), 'text/x-python')
 
     def test_type_str_true(self):
-        misc.typecheck('foo', str)
+        misc.typecheck('foo', (types.StringType))
 
     def test_type_str_false(self):
         with self.assertRaises(TypeError):
-            misc.typecheck(1, str)
+            misc.typecheck(1, (types.StringType))
 
     def test_type_int_true(self):
-        misc.typecheck(1991, int)
+        misc.typecheck(1991, (types.IntType))
 
     def test_type_int_false(self):
         with self.assertRaises(TypeError):
-            misc.typecheck('bar', int)
+            misc.typecheck('bar', (types.IntType))
 
     def test_type_float_true(self):
-        misc.typecheck(11.0, float)
+        misc.typecheck(11.0, (types.FloatType))
 
     def test_type_float_false(self):
         with self.assertRaises(TypeError):
-            misc.typecheck(7, 11.0)
+            misc.typecheck(7, (types.UnicodeType))
 
     def test_type_list_true(self):
-        misc.typecheck(['a', 'b', 'c'], list)
+        misc.typecheck(['a', 'b', 'c'], (types.ListType))
 
     def test_type_list_false(self):
         with self.assertRaises(TypeError):
-            misc.typecheck('meh', list)
+            misc.typecheck('meh', (types.ListType))
 
     def test_type_list_false2(self):
         with self.assertRaises(TypeError):
-            misc.typecheck(('f', 'o', '0'), list)
+            misc.typecheck(('f', 'o', '0'), (types.ListType))
 
     def test_type_tuple_true(self):
-        misc.typecheck(('a', 'b', 'c'), tuple)
+        misc.typecheck(('a', 'b', 'c'), (types.TupleType))
 
     def test_type_tuple_false(self):
         with self.assertRaises(TypeError):
-            misc.typecheck(3.14, tuple)
+            misc.typecheck(3.14, (types.TupleType))
 
 suite = unittest.TestLoader().loadTestsFromTestCase(TestSuite)
 result = unittest.TextTestRunner(verbosity=2).run(suite)

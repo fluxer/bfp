@@ -795,7 +795,7 @@ class Source(object):
                 for sfile in misc.list_files(self.install_dir + sdir):
                     if not sfile.endswith('.gz') and os.path.isfile(sfile):
                         message.sub_debug('Compressing', sfile)
-                        misc.archive_compress(sfile, sfile + '.gz', '')
+                        misc.archive_compress((sfile), sfile + '.gz', '')
                         os.unlink(sfile)
                     elif os.path.islink(sfile) and \
                         not os.path.isfile(os.path.realpath(sfile)):
@@ -987,7 +987,7 @@ class Source(object):
 
         message.sub_info('Compressing tarball')
         misc.dir_create(os.path.join(CACHE_DIR, 'tarballs'))
-        misc.archive_compress(self.install_dir, self.target_tarball, \
+        misc.archive_compress((self.install_dir), self.target_tarball, \
             self.install_dir)
 
     def merge(self):

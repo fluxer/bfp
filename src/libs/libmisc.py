@@ -1,7 +1,7 @@
 #!/bin/python2
 
 import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, pwd, inspect
-import gzip, libmagic
+import types, gzip, libmagic
 if int(sys.version_info[0]) < 3:
     from urlparse import urlparse
     from urllib2 import urlopen
@@ -29,13 +29,13 @@ class Misc(object):
         # FIXME: implement file, directory, and url type check?
         if not isinstance(a, b):
             line = inspect.currentframe().f_back.f_lineno
-            raise(TypeError('Variable is not ' + str(b) + ' (' + str(line) + ')'))
+            raise(TypeError('Variable is not %s (%s)' % (str(b), str(line))))
 
     def whereis(self, program, fallback=True, chroot=False):
         ''' Find full path to executable '''
-        self.typecheck(program, str)
-        self.typecheck(fallback, bool)
-        self.typecheck(chroot, bool)
+        self.typecheck(program, (types.StringType, types.UnicodeType))
+        self.typecheck(fallback, (types.BooleanType))
+        self.typecheck(chroot, (types.BooleanType))
 
         program = os.path.basename(program)
         for path in os.environ.get('PATH', '/bin:/usr/bin').split(':'):
@@ -53,7 +53,7 @@ class Misc(object):
 
     def ping(self, url='http://www.google.com'):
         ''' Ping URL '''
-        self.typecheck(url, str)
+        self.typecheck(url, (types.StringType, types.UnicodeType))
 
         if self.OFFLINE:
             return
@@ -79,7 +79,7 @@ class Misc(object):
 
     def string_unit_guess(self, svar):
         ''' Guess the units to be used by string_unit() '''
-        self.typecheck(svar, str)
+        self.typecheck(svar, (types.StringType, types.UnicodeType))
 
         lenght = len(svar)
         if lenght > 6:
@@ -91,9 +91,9 @@ class Misc(object):
 
     def string_unit(self, svar, sunit='Mb', bprefix=False):
         ''' Convert bytes to humar friendly units '''
-        self.typecheck(svar, str)
-        self.typecheck(sunit, str)
-        self.typecheck(bprefix, bool)
+        self.typecheck(svar, (types.StringType, types.UnicodeType))
+        self.typecheck(sunit, (types.StringType, types.UnicodeType))
+        self.typecheck(bprefix, (types.BooleanType))
 
         if sunit == 'Mb':
             if bprefix:
@@ -110,10 +110,10 @@ class Misc(object):
 
     def string_search(self, string, string2, exact=False, escape=True):
         ''' Search for string in other string or list '''
-        self.typecheck(string, str)
-        self.typecheck(string, str)
-        self.typecheck(exact, bool)
-        self.typecheck(escape, bool)
+        self.typecheck(string, (types.StringType, types.UnicodeType))
+        self.typecheck(string, (types.StringType, types.UnicodeType))
+        self.typecheck(exact, (types.BooleanType))
+        self.typecheck(escape, (types.BooleanType))
 
         if exact and escape:
             return re.findall('(\\s|^)' + re.escape(string) + '(\\s|$)', \
@@ -128,8 +128,8 @@ class Misc(object):
 
     def url_normalize(self, surl, basename=False):
         ''' Normalize URL, optionally get basename '''
-        self.typecheck(surl, (str, unicode))
-        self.typecheck(basename, bool)
+        self.typecheck(surl, (types.StringType, types.UnicodeType))
+        self.typecheck(basename, (types.BooleanType))
 
         # http://www.w3schools.com/tags/ref_urlencode.asp
         dspecials = {'%20': ' '}
@@ -142,8 +142,8 @@ class Misc(object):
 
     def file_name(self, sfile, basename=True):
         ''' Get name of file without the extension '''
-        self.typecheck(sfile, str)
-        self.typecheck(basename, bool)
+        self.typecheck(sfile, (types.StringType, types.UnicodeType))
+        self.typecheck(basename, (types.BooleanType))
 
         if basename:
             return os.path.splitext(os.path.basename(sfile))[0]
@@ -151,20 +151,20 @@ class Misc(object):
 
     def file_extension(self, sfile):
         ''' Get the extension of file '''
-        self.typecheck(sfile, str)
+        self.typecheck(sfile, (types.StringType, types.UnicodeType))
 
         return os.path.splitext(sfile)[1].lstrip('.')
 
     def file_touch(self, sfile):
         ''' Touch a file, making sure it exists '''
-        self.typecheck(sfile, str)
+        self.typecheck(sfile, (types.StringType, types.UnicodeType))
 
         if not os.path.isfile(sfile):
             self.file_write(sfile, '')
 
     def file_read(self, sfile):
         ''' Get file content '''
-        self.typecheck(sfile, str)
+        self.typecheck(sfile, (types.StringType, types.UnicodeType))
 
         rfile = open(sfile, 'rb')
         content = rfile.read()
@@ -173,8 +173,8 @@ class Misc(object):
 
     def file_read_nonblock(self, sfile, ibuffer=1024):
         ''' Get file content non-blocking '''
-        self.typecheck(sfile, str)
-        self.typecheck(ibuffer, int)
+        self.typecheck(sfile, (types.StringType, types.UnicodeType))
+        self.typecheck(ibuffer, (types.IntType))
 
         fd = os.open(sfile, os.O_NONBLOCK)
         content = os.read(fd, ibuffer)
@@ -183,7 +183,7 @@ class Misc(object):
 
     def file_readlines(self, sfile):
         ''' Get file content, split by new line, as list '''
-        self.typecheck(sfile, str)
+        self.typecheck(sfile, (types.StringType, types.UnicodeType))
 
         rfile = open(sfile, 'rb')
         content = rfile.read().splitlines()
@@ -192,9 +192,9 @@ class Misc(object):
 
     def file_write(self, sfile, content, mode='w'):
         ''' Write data to file '''
-        self.typecheck(sfile, str)
-        self.typecheck(content, str)
-        self.typecheck(mode, str)
+        self.typecheck(sfile, (types.StringType, types.UnicodeType))
+        self.typecheck(content, (types.StringType, types.UnicodeType))
+        self.typecheck(mode, (types.StringType, types.UnicodeType))
 
         self.dir_create(os.path.dirname(sfile))
         wfile = open(sfile, mode)
@@ -203,8 +203,8 @@ class Misc(object):
 
     def file_write_nonblock(self, sfile, content):
         ''' Write data to file non-blocking (overwrites) '''
-        self.typecheck(sfile, str)
-        self.typecheck(content, str)
+        self.typecheck(sfile, (types.StringType, types.UnicodeType))
+        self.typecheck(content, (types.StringType, types.UnicodeType))
 
         self.dir_create(os.path.dirname(sfile))
         fd = os.open(sfile, os.O_NONBLOCK | os.O_WRONLY)
@@ -213,17 +213,17 @@ class Misc(object):
 
     def file_search(self, string, sfile, exact=False, escape=True):
         ''' Search for string in file '''
-        self.typecheck(string, str)
-        self.typecheck(sfile, str)
-        self.typecheck(exact, bool)
-        self.typecheck(escape, bool)
+        self.typecheck(string, (types.StringType, types.UnicodeType))
+        self.typecheck(sfile, (types.StringType, types.UnicodeType))
+        self.typecheck(exact, (types.BooleanType))
+        self.typecheck(escape, (types.BooleanType))
 
         return self.string_search(string, self.file_read(sfile), exact=exact, \
             escape=escape)
 
     def file_mime(self, sfile):
         ''' Get file type '''
-        self.typecheck(sfile, str)
+        self.typecheck(sfile, (types.StringType, types.UnicodeType))
 
         # symlinks are not handled properly by magic, on purpose
         # https://github.com/ahupp/python-magic/pull/31
@@ -233,16 +233,16 @@ class Misc(object):
 
     def file_substitute(self, string, string2, sfile):
         ''' Substitue a string with another in file '''
-        self.typecheck(string, str)
-        self.typecheck(string2, str)
-        self.typecheck(sfile, str)
+        self.typecheck(string, (types.StringType, types.UnicodeType))
+        self.typecheck(string2, (types.StringType, types.UnicodeType))
+        self.typecheck(sfile, (types.StringType, types.UnicodeType))
 
         self.file_write(sfile, re.sub(string, string2, self.file_read(sfile)))
 
     def dir_create(self, sdir, demote=''):
         ''' Create directory if it does not exist, including leading paths '''
-        self.typecheck(sdir, (str, unicode))
-        self.typecheck(demote, str)
+        self.typecheck(sdir, (types.StringType, types.UnicodeType))
+        self.typecheck(demote, (types.StringType, types.UnicodeType))
 
         if not os.path.isdir(sdir) and not os.path.islink(sdir):
             # sadly, demoting works only for sub-processes
@@ -253,7 +253,7 @@ class Misc(object):
 
     def dir_remove(self, sdir):
         ''' Remove directory recursively '''
-        self.typecheck(sdir, str)
+        self.typecheck(sdir, (types.StringType, types.UnicodeType))
 
         for root, dirs, files in os.walk(sdir):
             for f in files:
@@ -275,7 +275,7 @@ class Misc(object):
 
     def dir_size(self, sdir):
         ''' Get size of directory '''
-        self.typecheck(sdir, str)
+        self.typecheck(sdir, (types.StringType, types.UnicodeType))
 
         size = 0
         for sfile in self.list_files(sdir):
@@ -294,8 +294,8 @@ class Misc(object):
 
     def list_files(self, sdir, cross=True):
         ''' Get list of files in directory recursively '''
-        self.typecheck(sdir, str)
-        self.typecheck(cross, bool)
+        self.typecheck(sdir, (types.StringType, types.UnicodeType))
+        self.typecheck(cross, (types.BooleanType))
 
         slist = []
         for root, subdirs, files in os.walk(sdir):
@@ -309,8 +309,8 @@ class Misc(object):
 
     def list_dirs(self, sdir, cross=True):
         ''' Get list of directories in directory recursively '''
-        self.typecheck(sdir, str)
-        self.typecheck(cross, bool)
+        self.typecheck(sdir, (types.StringType, types.UnicodeType))
+        self.typecheck(cross, (types.BooleanType))
 
         slist = []
         for root, subdirs, files in os.walk(sdir):
@@ -324,8 +324,8 @@ class Misc(object):
 
     def list_all(self, sdir, cross=True):
         ''' Get list of files and directories in directory recursively '''
-        self.typecheck(sdir, str)
-        self.typecheck(cross, bool)
+        self.typecheck(sdir, (types.StringType, types.UnicodeType))
+        self.typecheck(cross, (types.BooleanType))
 
         slist = []
         for root, subdirs, files in os.walk(sdir):
@@ -341,10 +341,10 @@ class Misc(object):
 
     def fetch_request(self, surl, data=None):
         ''' Returns urlopen object, it is NOT closed! '''
-        self.typecheck(surl, (str, unicode))
+        self.typecheck(surl, (types.StringType, types.UnicodeType))
         if not data:
             data = {}
-        self.typecheck(data, dict)
+        self.typecheck(data, (types.DictType))
 
         request = Request(surl)
         for item in data:
@@ -359,8 +359,8 @@ class Misc(object):
 
     def fetch_check(self, surl, destination):
         ''' Check if remote file and local file sizes are equal '''
-        self.typecheck(surl, (str, unicode))
-        self.typecheck(destination, (str, unicode))
+        self.typecheck(surl, (types.StringType, types.UnicodeType))
+        self.typecheck(destination, (types.StringType, types.UnicodeType))
 
         if self.OFFLINE:
             return True
@@ -378,9 +378,9 @@ class Misc(object):
 
     def fetch(self, surl, destination, iretry=3, iblock=60):
         ''' Download file, retry is passed internally! '''
-        self.typecheck(surl, (str, unicode))
-        self.typecheck(destination, (str, unicode))
-        self.typecheck(iretry, int)
+        self.typecheck(surl, (types.StringType, types.UnicodeType))
+        self.typecheck(destination, (types.StringType, types.UnicodeType))
+        self.typecheck(iretry, (types.IntType))
 
         if self.OFFLINE:
             return
@@ -436,7 +436,7 @@ class Misc(object):
 
     def archive_supported(self, sfile):
         ''' Test if file is archive that can be handled properly '''
-        self.typecheck(sfile, str)
+        self.typecheck(sfile, (types.StringType, types.UnicodeType))
 
         if os.path.isdir(sfile):
             return False
@@ -446,24 +446,22 @@ class Misc(object):
             return True
         return False
 
-    def archive_compress(self, variant, sfile, strip):
+    def archive_compress(self, lpaths, sfile, strip):
         ''' Create archive from directory '''
-        self.typecheck(variant, (str, list, tuple))
-        self.typecheck(sfile, str)
-        self.typecheck(strip, str)
+        self.typecheck(lpaths, (types.TupleType, types.ListType))
+        self.typecheck(sfile, (types.StringType, types.UnicodeType))
+        self.typecheck(strip, (types.StringType, types.UnicodeType))
 
         self.dir_create(os.path.dirname(sfile))
-        if isinstance(variant, str):
-            variant = [variant]
 
         if sfile.endswith(('.bz2', '.tar.gz')):
             tar = tarfile.open(sfile, 'w:' + self.file_extension(sfile))
-            for item in variant:
+            for item in lpaths:
                 tar.add(item, item.lstrip(strip))
             tar.close()
         elif sfile.endswith('.zip'):
             zipf = zipfile.ZipFile(sfile, mode='w')
-            for item in variant:
+            for item in lpaths:
                 zipf.write(item, item.lstrip(strip))
             zipf.close()
         elif sfile.endswith(('.xz', '.lzma')):
@@ -471,21 +469,21 @@ class Misc(object):
             if not tar:
                 tar = self.whereis('tar')
             command = [tar, '-caf', sfile, '-C', strip]
-            for f in variant:
+            for f in lpaths:
                 command.append(f.replace(strip, '.'))
             self.system_command(command)
         elif sfile.endswith('.gz'):
             # FIXME: strip
             gzipf = gzip.GzipFile(sfile, 'wb')
-            for f in variant:
+            for f in lpaths:
                 gzipf.writelines(self.file_read(f))
             gzipf.close()
 
     def archive_decompress(self, sfile, sdir, demote=''):
         ''' Extract archive to directory '''
-        self.typecheck(sfile, str)
-        self.typecheck(sdir, str)
-        self.typecheck(demote, str)
+        self.typecheck(sfile, (types.StringType, types.UnicodeType))
+        self.typecheck(sdir, (types.StringType, types.UnicodeType))
+        self.typecheck(demote, (types.StringType, types.UnicodeType))
 
         self.dir_create(sdir)
 
@@ -512,7 +510,7 @@ class Misc(object):
 
     def archive_list(self, sfile):
         ''' Get list of files in archive '''
-        self.typecheck(sfile, str)
+        self.typecheck(sfile, (types.StringType, types.UnicodeType))
 
         content = []
         if tarfile.is_tarfile(sfile):
@@ -533,8 +531,8 @@ class Misc(object):
 
     def archive_size(self, star, lpaths):
         ''' Get size of file(s) in Tar archive '''
-        self.typecheck(star, str)
-        self.typecheck(lpaths, (tuple, list))
+        self.typecheck(star, (types.StringType, types.UnicodeType))
+        self.typecheck(lpaths, (types.TupleType, types.ListType))
 
         sizes = []
         tar = tarfile.open(star, 'r')
@@ -547,8 +545,8 @@ class Misc(object):
 
     def archive_content(self, star, lpaths):
         ''' Get content of file(s) in Tar archive '''
-        self.typecheck(star, str)
-        self.typecheck(lpaths, (tuple, list))
+        self.typecheck(star, (types.StringType, types.UnicodeType))
+        self.typecheck(lpaths, (types.TupleType, types.ListType))
 
         content = []
         tar = tarfile.open(star, 'r')
@@ -563,7 +561,7 @@ class Misc(object):
 
     def system_demote(self, suser):
         ''' Change priviledges to different user, returns function pointer! '''
-        self.typecheck(suser, str)
+        self.typecheck(suser, (types.StringType, types.UnicodeType))
 
         group = suser
         if suser and ':' in suser:
@@ -588,9 +586,9 @@ class Misc(object):
 
     def system_output(self, command, shell=False, demote=''):
         ''' Get output of external utility '''
-        self.typecheck(command, (str, list, tuple))
-        self.typecheck(shell, bool)
-        self.typecheck(demote, str)
+        self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
+        self.typecheck(shell, (types.BooleanType))
+        self.typecheck(demote, (types.StringType, types.UnicodeType))
 
         pipe = subprocess.Popen(command, stdout=subprocess.PIPE, \
             env={'LC_ALL': 'C'}, shell=shell, preexec_fn=self.system_demote(demote))
@@ -599,10 +597,10 @@ class Misc(object):
 
     def system_input(self, command, input, shell=False, demote=''):
         ''' Send input to external utility '''
-        self.typecheck(command, (str, list, tuple))
-        self.typecheck(input, str)
-        self.typecheck(shell, bool)
-        self.typecheck(demote, str)
+        self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
+        self.typecheck(input, (types.StringType, types.UnicodeType))
+        self.typecheck(shell, (types.BooleanType))
+        self.typecheck(demote, (types.StringType, types.UnicodeType))
 
         pipe = subprocess.Popen(command, stdin=subprocess.PIPE, \
             stdout=subprocess.PIPE, stderr=subprocess.PIPE, \
@@ -613,21 +611,21 @@ class Misc(object):
 
     def system_scanelf(self, sfile, sformat='#F%n', sflags='', demote=''):
         ''' Get information about ELF files '''
-        self.typecheck(sfile, str)
-        self.typecheck(sformat, str)
-        self.typecheck(sflags, str)
-        self.typecheck(demote, str)
+        self.typecheck(sfile, (types.StringType, types.UnicodeType))
+        self.typecheck(sformat, (types.StringType, types.UnicodeType))
+        self.typecheck(sflags, (types.StringType, types.UnicodeType))
+        self.typecheck(demote, (types.StringType, types.UnicodeType))
 
         return self.system_output((self.whereis('scanelf'), '-CBF', \
             sformat, sflags, sfile), demote=demote)
 
     def system_command(self, command, shell=False, cwd='', catch=False, demote=''):
         ''' Execute system command safely '''
-        self.typecheck(command, (str, list, tuple))
-        self.typecheck(shell, bool)
-        self.typecheck(cwd, str)
-        self.typecheck(catch, bool)
-        self.typecheck(demote, str)
+        self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
+        self.typecheck(shell, (types.BooleanType))
+        self.typecheck(cwd, (types.StringType, types.UnicodeType))
+        self.typecheck(catch, (types.BooleanType))
+        self.typecheck(demote, (types.StringType, types.UnicodeType))
 
         if not cwd:
             cwd = self.dir_current()
@@ -648,8 +646,8 @@ class Misc(object):
 
     def system_chroot(self, command, shell=False):
         ''' Execute command in chroot environment '''
-        self.typecheck(command, (str, list, tuple))
-        self.typecheck(shell, str)
+        self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
+        self.typecheck(shell, (types.BooleanType))
 
         # prevent stupidity
         if self.ROOT_DIR == '/':
@@ -678,8 +676,8 @@ class Misc(object):
 
     def system_script(self, srcbuild, function):
         ''' Execute pre/post actions '''
-        self.typecheck(srcbuild, str)
-        self.typecheck(function, str)
+        self.typecheck(srcbuild, (types.StringType, types.UnicodeType))
+        self.typecheck(function, (types.StringType, types.UnicodeType))
 
         if self.ROOT_DIR == '/':
             self.system_command((self.whereis('bash'), '-e', '-c', \
@@ -692,8 +690,8 @@ class Misc(object):
 
     def system_trigger(self, command, shell=False):
         ''' Execute trigger '''
-        self.typecheck(command, (str, list, tuple))
-        self.typecheck(shell, bool)
+        self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
+        self.typecheck(shell, (types.BooleanType))
 
         if self.ROOT_DIR == '/':
             self.system_command(command, shell=shell, cwd=self.ROOT_DIR)
