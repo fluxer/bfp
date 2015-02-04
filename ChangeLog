@@ -1,0 +1,242 @@
+Thu Jan 29 05:00:47 2015 +0000 Ivailo Monev <xakepa10@gmail.com> 
+199628a57ec80440b437a3157faa44d9e8ae3097 (tag: 1.4.1)
+    * bump version to 1.4.1
+    * triggers were not running on target remove - fix that
+    * fixup check for updates via repo mode
+
+Wed Jan 28 01:26:52 2015 +0000 Ivailo Monev <xakepa10@gmail.com> 
+42c214a2bdde0061eb1f1ae55729d74438cb6c28 (tag: 1.4.0)
+    * bump version to 1.4.0
+    * updated TODO
+    * drop now redudant misc.version()
+    * improve and add some tooltips to the GUI
+    * make use of distutils version check feature
+    * updated Nuitka to 0.5.8
+    * run mkinitfs too when kernel module is installed/removed
+    * fix the footprint generation method used in srcmake
+    * tell nuitka to not recurse at all
+
+Sun Jan 11 22:27:04 2015 +0000 Ivailo Monev <xakepa10@gmail.com> 
+04923f6eb7d8fc26b75f10147a0c3e77176c0baa (tag: 1.3.0)
+    * version bump to 1.3.0
+    * improve xdg-mime trigger, vendor prefix endining with slash is required in the basename
+    * make vim required only of EDITOR is not set
+    * set fallback IGNORE_MISSING to False as it is something important
+    * set fallback DEMOTE to '', implement xdg-mime trigger
+    * another take on the fetcher
+    * apply some clang fixes to Nuitka from factory
+    * re-indent srcmake script and make the message respect wheather bsdtar is available
+    * oops
+    * rework fetcher and friends
+    * remove useless import
+    * updated Nutika to 0.5.7.1
+    * allow unicode string to be passed to url_normalize()
+    * do not return from local_rdepends() when local is ignored target
+    * fixup string_units_guess()
+    * implemented plain gzip compression/decompression
+    * implement lzma/xz compression
+    * update bundled libmagic from upstream
+    * minor code-style correction
+    * allow list and tuple as command passed to system_trigger()
+    * workaround some issues with content-lenght
+    * typecheck retry variable used in the fetcher
+    * update bash completion for spm
+    * move the untis computation out of the loop and introduce retry feature to the fetcher
+    * remove now redudant external option
+    * prettify the fetcher with human friendly units printing
+    * rename README to README.md to make github happy
+    * improve internal fetcher, drop external fetchers support
+    * implement SSL verification for internal fetcher (requires >= 2.7.9)
+    * misc fixes and code-style corrections thanks to PyLint
+    * update copyright year
+    * fix various type-checking issues and a long standing download bug
+    * do not require root for lsinitfs
+    * implemented variable type checking, better safe than sorry
+    * do not demote on src_install()
+    * rename common GCC build-time variable to CC and optionally pick it up from the environment
+    * minor cleanup, fixup, corrections
+    * updated Nuitka to 0.5.7.0
+    * fix demotion error when group is passed but no user, e.g. ':root' (in some cases during installation)
+    * oops
+    * support demotion in fetching processes (does not affect the internal fetcher)
+    * allow change of demote settings via spm-gui
+    * minor correction and a fix after last commit
+    * removed libarchive and libsystem as they are not used
+    * implement demotation for building as user other than root
+    * use markdown format for the README
+    * added disowned completion for spm-tools
+    * updated Nuitka to 0.5.6.1
+    * support gambas 2/3 scripting language
+    * updated Nuitka to 0.5.6
+    * implement disowned files check mode into spm-tools
+    * do not change variable but use in-place adjustment
+
+Mon Nov 17 00:03:50 2014 +0000 Ivailo Monev <xakepa10@gmail.com> 
+d8183231a06ad8e3186dc6f7402ec4889e2011d8 (tag: 1.2.3)
+    * version bump to 1.2.3
+    * fix python version checking in libmisc.string_encode()
+    * fix a typo
+    * minor cleanup and method comment sanitization
+    * lstrip sfile for the lint conflicts checking
+    * implemented lint check for conflicts on already installed targets
+    * strip leading / when checking backups as the footprint does not hold absolute paths
+    * added lint check for target backups
+    * cleanup target links on remove/upgrade
+    * fixup local_rdepends() in libpackage to properly respect ignored targets
+
+Sat Nov 8 15:48:47 2014 +0200 Ivailo Monev <xakepa10@gmail.com> 
+38c8b1bcce8be7912d0e51ee306f512876cce7f7 (tag: 1.2.2)
+    * bump version to 1.2.2
+    * minor code-style correction on spm-tools
+    * strip binaries and libraries only when building from Git checkout
+    * use getconf (provided by glibc usually) to get number of CPUs
+    * another snap on mkinitfs and directory symlinks
+    * handle leading directory symlinks in an if block (mkinitfs)
+    * ignore leading directory symlinks of modules directory (e.g. /lib64 symlinked to /lib)
+    * create leading directories for output of some triggers
+    * ensure module dependencies are copied (mkinitfs)
+    * fix some issues with directory symlinks noticed on x86_64 (amd64) systems
+    * print debug message about builtin modules (mkinitfs)
+    * improve last resort kernel check (mkinitfs)
+    * if module is builtin do not report it as not found (mkinitfs)
+    * cleanup mkinitfs
+    * build system cleanup
+    * removed logrotate config as it the message library logs to the system log
+    * updated TODO
+    * a few code-style corrections
+    * added pylint custom config and using TOPDIR in build system
+    * make use of archive_supported() from libmisc in libspm
+    * respect the class variable for compressing man pages
+
+Wed Oct 29 15:49:40 2014 +0000 Ivailo Monev <xakepa10@gmail.com> 
+e22f5a103e3f31cf4819d17c5b06fb48b7a68a63 (tag: 1.2.1)
+    * version bump to 1.2.1
+    * check only for shebangs in the beginning (first line) of the files in spm-tools
+    * add trigger check for update-grub
+    * return consistent data from libpackage.remote_alias() (list)
+    * disable filters box to avoid worker thread being destroyed while working
+    * disable the proper search widget
+    * do not refresh targets twice on SPM GUI startup
+    * adjust _pkgver too from pkg2src script
+    * disable search while working (SPM GUI)
+    * improved dolphin action
+    * updated Nutika to 0.5.5.3
+    * minor code cleanup
+    * follow up improvement on the delayed triggers
+    * make sure the logger in libmessage does not bail out on non-string
+    * delay some triggers and run them in specifiec order, fixes issue with kernel upgrade
+    * thread targets and filters refresh actions
+    * change directory to SOURCE_DIR from srcmake before install as SPM does
+    * byte-compile python modules after runtime checks
+    * updated TODO
+
+Sun Oct 19 18:17:07 2014 +0000 Ivailo Monev <xakepa10@gmail.com> 
+e863bdd2e86055a8621ca69e68b61c4c4c139e02 (tag: 1.2.0)
+    * version bump to 1.2.0
+    * prevent infinite depth recursion in libpackage.local_rdepends() by appending the target to checked ahead
+    * handle keyboard interrupt for spm GUI
+    * fixup urllparse import for python < 3
+    * support correction of shebangs via match from self
+    * updated nuitka to 0.5.5.2
+    * allow extended targets selection from GUI
+    * ask for confirmation on update from GUI
+    * correct info trigger dir
+    * make sure that install-info triggers do not run on directory
+    * check if target is installed from libpackge.local_uptodate()
+    * fixup gdk-pixbuf trigger
+    * use architecture specifiec sub-directory for binary tarballs
+    * added entropy mirror
+    * fixup unmount from libmisc.system_chroot()
+    * prevent the dependencies resolver from choking on the same target by setting adding the original target to checked beforehead
+    * override libmisc.ROOT_DIR for proper root directory handling in the triggers
+    * pass on cdepends argument to make dependencies resolver
+    * save one check in libpackage.local_mdepends() as local_uptodate() is sufficient
+    * do not check reverse depends (for now) when merging from GUI
+    * updated TODO
+    * updated TODO
+    * updated spm-tools bash completion to include recent lint mode additions
+    * updated spm bash completion to support binary mode
+    * use the term 'merge' rather than 'install' to avoid confusion with the install argument from source and match the binary mode argument
+    * added doplhin service menu entry to build/install targets
+    * spm-gui desktop file comment correction
+    * minor cleanup and correction
+    * updated GUI to make use of the binary mode; updated tooltips of the GUI widgets; fixup src_url being undefined in certain cases in Binary mode
+    * implemented binary mode into spm
+    * do not support shebangs which are not the first line
+    * preserve first group when subtituting shebang
+    * cover more shebang cases
+    * use separate groups for repeate and optional in shebang regexp
+    * added epilog help messages to spm and spm-tools to note that some features are available only to root user
+    * support versioned binaries as shebang, e.g. python2.5
+    * optionally match /usr/local when probing for shebangs
+    * correct shebang runtime info print
+    * attempt to correct wrong shebangs via regex (black) magic
+    * tweak shebang regexp
+    * avoid for loop and searching same file multiple times for shebangs
+    * reviewed scripts dependencies detection and added check
+    * improve shebangs regex match
+    * move override of arguments for repo mode from -a/--all earlier so that runtime info is correct
+    * rework libraries test script to fix code-style, implement some new tests and add functions for creating test targets
+    * split the local dependencies metadata value properly
+    * updated TODO
+    * reduced noise created from check mode of spm-tools
+    * updated nuitka to 0.5.5.1
+    * add essential groups/users to group and passwd files used in initramfs and use /bin/sh as shell for root user
+
+Thu Oct 9 23:47:00 2014 +0000 Ivailo Monev <xakepa10@gmail.com> 
+fd867c4d4a12320cda642ffca4280778db0f1aa0 (tag: 1.1.0)
+    * version bump to 1.1.0
+    * respect rw or ro kernel arguments from initramfs
+    * minor gui layout correction
+    * updated TODO
+    * check for triggers requriements in ROOT_DIR
+    * respect ROOT_DIR in the udev trigger check
+    * execute udev trigger only when /run/udev/control or /var/run/udev/control is present asuming udevd is running (best effort made)
+    * updated unnecessary triggers invocation regex
+    * checker for overlapping binaries with same name in PATH implemented
+    * mostly code style corrections
+    * print debug info about triggers executables
+    * updated TODO
+    * remove useless print invocation that was for testing purpose
+    * fixup libpackage.remote_groups() breakage caused by b4f7e95
+    * mostly code style corrections
+    * minor libmisc corrections thanks to pylint
+    * updated FIXME in mkinitfs
+    * make use of system methods from libmisc in lsinitfs and mkinitfs
+    * removed blockd
+    * implemented last resort kernel detect into mkinitfs
+    * support -a/--all for repo mode
+    * eliminate automake class variable in libspm.Source() and just do the proper thing from autosource method
+    * force build the dependencies on automake
+    * make it possible to remove backup on configs merge
+    * updated grub configuration only if grub.cfg is present indicating that grub is actually installed and in use
+    * fixup pack mode in spm-tools and add the metadata files to the archive to make the tarball self-containing as the original
+    * minor lint corrections
+    * improved depmod trigger to work on compressed modules too
+    * properly generate initramfs for new kernels
+    * hardcode triggers again
+    * updated triggers to update grub config when files are merged into /boot
+    * further python3 compat
+    * libarchive print compat for Python3
+    * urlopen and spm-tools python2/3 compat
+    * make use of the PYTHON variable when building libudev part of blockd to make it possible to build it for Python 3.x
+    * ignore __pycache__
+    * more or less Python 3000 compatible
+    * strip dot in libmisc.file_extension()
+    * implemented libmisc.file_extension(); somewhat working archive compressor implemented into libarchive; drop and autodetect method for bz2 and gz creation of archives from libmisc.archive_create()
+    * remove unused ipc methods from libmisc
+    * do not fail if bsdtar is present but tar is not
+    * add option to display SRCBUILD content via which mode in spm-tools
+    * updated TODO
+    * now the the triggers can be executed on chroot remove ROOT support for them and adjust shared libraries trigger command
+    * corrected shared libraries triggere pattern
+    * implement and use misc.system_trigger(); make use of misc.system_command()
+    * do not override bool TRIGGERS with TRIGGERS from the config
+    * updated TODO
+    * added triggers.conf
+    * improvements all around
+    * move a FIXME note where it actually makes sense
+    * use the arguments override for modules in mkinitfs
+    * corrected parted exception catching
+    * use workaround for fresh disks without labels
+    * srcmake script Busybox compat
