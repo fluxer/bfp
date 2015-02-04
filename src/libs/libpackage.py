@@ -46,7 +46,7 @@ class Database(object):
 
     def remote_search(self, target):
         ''' Returns full path to directory matching target '''
-        misc.typecheck(target, (types.StringType, types.UnicodeType))
+        misc.typecheck(target, (types.StringTypes))
 
         if os.path.isfile(os.path.join(target, 'SRCBUILD')):
             return target
@@ -59,7 +59,7 @@ class Database(object):
 
     def local_installed(self, target):
         ''' Returns True or False wheather target is installed '''
-        misc.typecheck(target, (types.StringType, types.UnicodeType))
+        misc.typecheck(target, (types.StringTypes))
 
         if not os.path.isdir(self.LOCAL_DIR):
             return False
@@ -71,10 +71,10 @@ class Database(object):
 
     def local_belongs(self, sfile, exact=False, escape=True, ignore=None):
         ''' Searches for match of file in all local targets '''
-        misc.typecheck(sfile, (types.StringType, types.UnicodeType))
+        misc.typecheck(sfile, (types.StringTypes))
         misc.typecheck(exact, (types.BooleanType))
         misc.typecheck(escape, (types.BooleanType))
-        misc.typecheck(ignore, (types.NoneType, types.StringType, types.UnicodeType))
+        misc.typecheck(ignore, (types.NoneType, types.StringTypes))
 
         match = []
         # it may not exists if bootstrapping
@@ -92,7 +92,7 @@ class Database(object):
 
     def remote_mdepends(self, target, checked=None, cdepends=False):
         ''' Returns missing build dependencies of target '''
-        misc.typecheck(target, (types.StringType, types.UnicodeType))
+        misc.typecheck(target, (types.StringTypes))
         misc.typecheck(checked, (types.NoneType, types.ListType))
         misc.typecheck(cdepends, (types.BooleanType))
 
@@ -135,9 +135,9 @@ class Database(object):
 
     def local_rdepends(self, target, indirect=False, checked=None):
         ''' Returns reverse dependencies of target '''
-        misc.typecheck(target, (types.StringType, types.UnicodeType))
+        misc.typecheck(target, (types.StringTypes))
         misc.typecheck(indirect, (types.BooleanType))
-        misc.typecheck(target, (types.NoneType, types.StringType, types.UnicodeType))
+        misc.typecheck(target, (types.NoneType, types.StringTypes))
 
         reverse = []
         if checked is None:
@@ -163,7 +163,7 @@ class Database(object):
 
     def local_footprint(self, target):
         ''' Returns files of target '''
-        misc.typecheck(target, (types.StringType, types.UnicodeType))
+        misc.typecheck(target, (types.StringTypes))
 
         relative_path = os.path.join(self.LOCAL_DIR, target, 'footprint')
         full_path = os.path.join(target, 'footprint')
@@ -174,8 +174,8 @@ class Database(object):
 
     def local_metadata(self, target, key):
         ''' Returns metadata of local target '''
-        misc.typecheck(target, (types.StringType, types.UnicodeType))
-        misc.typecheck(key, (types.StringType, types.UnicodeType))
+        misc.typecheck(target, (types.StringTypes))
+        misc.typecheck(key, (types.StringTypes))
 
         target_metadata = os.path.join(self.LOCAL_DIR, target, 'metadata')
         if os.path.isfile(target_metadata):
@@ -188,7 +188,7 @@ class Database(object):
 
     def local_uptodate(self, target):
         ''' Returns True if target is up-to-date and False otherwise '''
-        misc.typecheck(target, (types.StringType, types.UnicodeType))
+        misc.typecheck(target, (types.StringTypes))
 
         # check if target is installed at all first
         if not self.local_installed(target):
@@ -211,8 +211,8 @@ class Database(object):
 
     def remote_metadata(self, target, key):
         ''' Returns metadata of remote target '''
-        misc.typecheck(target, (types.StringType, types.UnicodeType))
-        misc.typecheck(key, (types.StringType, types.UnicodeType))
+        misc.typecheck(target, (types.StringTypes))
+        misc.typecheck(key, (types.StringTypes))
 
         match = self.remote_search(target)
         if os.path.isfile(os.path.join(target, 'SRCBUILD')):
@@ -239,7 +239,7 @@ class Database(object):
 
     def remote_alias(self, target):
         ''' Returns alias for target, if not returns original '''
-        misc.typecheck(target, (types.StringType, types.UnicodeType))
+        misc.typecheck(target, (types.StringTypes))
 
         for alias in self.remote_aliases(basename=False):
             if os.path.basename(target) == os.path.basename(alias):
