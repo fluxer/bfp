@@ -1,3 +1,18 @@
+Thu Feb 5 03:04:36 2015 +0000 Ivailo Monev <xakepa10@gmail.com> 
+dabda44f298a7834b5e2c76ea5a1f38e871d32eb (tag: 1.5.0)
+    * lintian corrections
+    * fixup dist mode, follow up on last commit
+    * actually pass tuples to misc.archive_compress()
+    * make use of StringTypes type
+    * refactor type-checking
+    * tidy up the backup code
+    * generate changelog
+    * optimize backing up of files
+    * introduce iblock to the fetcher for some bad FTPs
+    * minor comments corrections
+    * general cleanup
+    * update nuitka to 0.5.9
+
 Thu Jan 29 05:00:47 2015 +0000 Ivailo Monev <xakepa10@gmail.com> 
 199628a57ec80440b437a3157faa44d9e8ae3097 (tag: 1.4.1)
     * bump version to 1.4.1
