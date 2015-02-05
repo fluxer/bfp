@@ -29,7 +29,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.4.1 (aeb3d20)"
+app_version = "1.4.1 (56b22db)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -244,7 +244,7 @@ class Dist(object):
                             misc.fetch(src_url, src_file)
 
             message.sub_info('Compressing', target_distfile)
-            misc.archive_compress((target_directory), target_distfile, target_directory)
+            misc.archive_compress((target_directory,), target_distfile, target_directory)
 
             if self.do_clean:
                 message.sub_info('Purging sources')
