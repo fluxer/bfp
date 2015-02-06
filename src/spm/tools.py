@@ -32,7 +32,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.5.0 (ed14a61)"
+app_version = "1.5.0 (82876b0)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -792,7 +792,7 @@ try:
     sane_parser.add_argument('-e', '--enable', action='store_true', \
         help=_('Check for explicit --enable argument(s)'))
     sane_parser.add_argument('-d', '--disable', action='store_true', \
-        help=_('Check for explicit --disable argument(s)')
+        help=_('Check for explicit --disable argument(s)'))
     sane_parser.add_argument('-n', '--null', action='store_true', \
         help=_('Check for /dev/null output redirection(s)'))
     sane_parser.add_argument('-m', '--maintainer', action='store_true', \
@@ -890,7 +890,7 @@ try:
         message.sub_info(_('REVERSE'), ARGS.reverse)
         message.sub_info(_('ADJUST'), ARGS.adjust)
         message.sub_info(_('TARGETS'), ARGS.TARGETS)
-        message.info(_('Poking locals...')
+        message.info(_('Poking locals...'))
         m = Check(ARGS.TARGETS, ARGS.fast, ARGS.depends, ARGS.reverse, \
             ARGS.adjust)
         m.main()
@@ -984,7 +984,7 @@ try:
     elif ARGS.mode == 'which':
         if not ARGS.plain:
             message.info(_('Runtime information'))
-            message.sub_info(_('PATTERN', ARGS.PATTERN)
+            message.sub_info(_('PATTERN'), ARGS.PATTERN)
         m = Which(ARGS.PATTERN, ARGS.cat, ARGS.plain)
         m.main()
 

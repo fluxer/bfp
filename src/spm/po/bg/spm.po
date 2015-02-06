@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-06 07:40+0000\n"
-"PO-Revision-Date: 2015-02-06 07:22+0000\n"
+"POT-Creation-Date: 2015-02-06 07:45+0000\n"
+"PO-Revision-Date: 2015-02-06 07:45+0000\n"
 "Last-Translator: Ivailo Monev <xakepa10@gmail.com>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -280,19 +280,19 @@ msgstr ""
 
 #: libspm.py:760
 msgid "Extracting"
-msgstr ""
+msgstr "Извлича се"
 
 #: libspm.py:765
 msgid "Already extracted"
-msgstr ""
+msgstr "Вече е извлечен"
 
 #: libspm.py:788
 msgid "Compressing manual pages"
-msgstr ""
+msgstr "Компресиране опътващите страници"
 
 #: libspm.py:800 tools.py:249 tools.py:624
 msgid "Compressing"
-msgstr ""
+msgstr "Компресира се"
 
 #: libspm.py:805
 msgid "Adjusting link"
@@ -824,10 +824,6 @@ msgstr ""
 
 #: spm.py:353 tools.py:858
 msgid "Enable debug messages"
-msgstr ""
-
-#: spm.py:352
-msgid "--debug"
 msgstr ""
 
 #: spm.py:356

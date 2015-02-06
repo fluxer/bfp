@@ -19,7 +19,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.5.0 (ed14a61)"
+app_version = "1.5.0 (82876b0)"
 
 try:
     import libmessage
@@ -349,7 +349,7 @@ try:
         action=OverrideScripts, help=_('Set whether to execute pre/post script'))
     parser.add_argument('--triggers', type=ast.literal_eval, \
         action=OverrideTriggers, help=_('Set whether to execute triggers'))
-    parser.add_argument(_('--debug', nargs=0, action=OverrideDebug, \
+    parser.add_argument('--debug', nargs=0, action=OverrideDebug, \
         help=_('Enable debug messages'))
     parser.add_argument('--version', action='version', \
         version='Source Package Manager v%s' % app_version, \
