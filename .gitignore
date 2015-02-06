@@ -16,6 +16,7 @@ pod2htmd.tmp
 
 *.bak
 *~
+*.mo
 
 *.xz
 *.bz2

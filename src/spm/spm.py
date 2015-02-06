@@ -1,5 +1,8 @@
 #!/bin/python2
 
+import gettext
+gettext.install('spm')
+
 import sys
 import argparse
 import ast
@@ -16,7 +19,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.4.1 (86588ee)"
+app_version = "1.5.0 (ed14a61)"
 
 try:
     import libmessage
@@ -190,167 +193,167 @@ try:
 
     parser = argparse.ArgumentParser(prog='spm', \
         description='Source Package Manager', \
-        epilog='NOTE: Some features are available only to the root user.')
+        epilog=_('NOTE: Some features are available only to the root user.'))
     subparsers = parser.add_subparsers(dest='mode')
 
     repo_parser = subparsers.add_parser('repo')
     repo_parser.add_argument('-c', '--clean', action='store_true', \
-        help='Purge repositories')
+        help=_('Purge repositories'))
     repo_parser.add_argument('-s', '--sync', action='store_true', \
-        help='Sync repositories')
+        help=_('Sync repositories'))
     repo_parser.add_argument('-p', '--prune', action='store_true', \
-        help='Prune old repositories')
+        help=_('Prune old repositories'))
     repo_parser.add_argument('-u', '--update', action='store_true', \
-        help='Check repositories for updates')
+        help=_('Check repositories for updates'))
     repo_parser.add_argument('-a', '--all', action='store_true', \
-        help='short for clean, sync, prune and update')
+        help=_('Short for clean, sync, prune and update'))
 
     remote_parser = subparsers.add_parser('remote')
     remote_parser.add_argument('-n', '--name', action='store_true', \
-        help='Show target name')
+        help=_('Show target name'))
     remote_parser.add_argument('-v', '--version', action='store_true', \
-        help='Show target version')
+        help=_('Show target version'))
     remote_parser.add_argument('-d', '--description', action='store_true', \
-        help='Show target description')
+        help=_('Show target description'))
     remote_parser.add_argument('-D', '--depends', action='store_true', \
-        help='Show target depends')
+        help=_('Show target depends'))
     remote_parser.add_argument('-m', '--makedepends', action='store_true', \
-        help='Show target makedepends')
+        help=_('Show target makedepends'))
     remote_parser.add_argument('-c', '--checkdepends', action='store_true', \
-        help='Show target checkdepends')
+        help=_('Show target checkdepends'))
     remote_parser.add_argument('-s', '--sources', action='store_true', \
-        help='Show target sources')
+        help=_('Show target sources'))
     remote_parser.add_argument('-o', '--options', action='store_true', \
-        help='Show target options')
+        help=_('Show target options'))
     remote_parser.add_argument('-b', '--backup', dest='remote_backup', \
-        action='store_true', help='Show target backups')
+        action='store_true', help=_('Show target backups'))
     remote_parser.add_argument('-p', '--plain', action='store_true', \
-        help='Print in plain format')
+        help=_('Print in plain format'))
     remote_parser.add_argument('PATTERN', type=str, \
-        help='Pattern to search for in remote targets')
+        help=_('Pattern to search for in remote targets'))
 
     source_parser = subparsers.add_parser('source')
     source_parser.add_argument('-C', '--clean', action='store_true', \
-        help='Purge sources and compiled files of target')
+        help=_('Purge sources and compiled files of target'))
     source_parser.add_argument('-p', '--prepare', action='store_true', \
-        help='Prepare sources of target')
+        help=_('Prepare sources of target'))
     source_parser.add_argument('-c', '--compile', action='store_true', \
-        help='Compile sources of target')
+        help=_('Compile sources of target'))
     source_parser.add_argument('-k', '--check', action='store_true', \
-        help='Check sources of target')
+        help=_('Check sources of target'))
     source_parser.add_argument('-i', '--install', action='store_true', \
-        help='Install compiled files of target')
+        help=_('Install compiled files of target'))
     source_parser.add_argument('-m', '--merge', action='store_true', \
-        help='Merge compiled files of target to system')
+        help=_('Merge compiled files of target to system'))
     source_parser.add_argument('-r', '--remove', action='store_true', \
-        help='Remove compiled files of target from system')
+        help=_('Remove compiled files of target from system'))
     source_parser.add_argument('-D', '--depends', action='store_true', \
-        help='Consider dependency targets')
+        help=_('Consider dependency targets'))
     source_parser.add_argument('-R', '--reverse', action='store_true', \
-        help='Consider reverse dependency targets')
+        help=_('Consider reverse dependency targets'))
     source_parser.add_argument('-u', '--update', action='store_true', \
-        help='Apply actions only if update is available')
+        help=_('Apply actions only if update is available'))
     source_parser.add_argument('-a', '--automake', action='store_true', \
-        help='Short for clean, prepare, compile, install and merge')
+        help=_('Short for clean, prepare, compile, install and merge'))
     source_parser.add_argument('TARGETS', nargs='+', type=str, \
-        help='Targets to apply actions on')
+        help=_('Targets to apply actions on'))
 
     binary_parser = subparsers.add_parser('binary')
     binary_parser.add_argument('-m', '--merge', action='store_true', \
-        help='Merge compiled files of target to system')
+        help=_('Merge compiled files of target to system'))
     binary_parser.add_argument('-r', '--remove', action='store_true', \
-        help='Remove compiled files of target from system')
+        help=_('Remove compiled files of target from system'))
     binary_parser.add_argument('-D', '--depends', action='store_true', \
-        help='Consider dependency targets')
+        help=_('Consider dependency targets'))
     binary_parser.add_argument('-R', '--reverse', action='store_true', \
-        help='Consider reverse dependency targets')
+        help=_('Consider reverse dependency targets'))
     binary_parser.add_argument('-u', '--update', action='store_true', \
-        help='Apply actions only if update is available')
+        help=_('Apply actions only if update is available'))
     binary_parser.add_argument('TARGETS', nargs='+', type=str, \
-        help='Targets to apply actions on')
+        help=_('Targets to apply actions on'))
 
     local_parser = subparsers.add_parser('local')
     local_parser.add_argument('-n', '--name', action='store_true', \
-        help='Show target name')
+        help=_('Show target name'))
     local_parser.add_argument('-v', '--version', action='store_true', \
-        help='Show target version')
+        help=_('Show target version'))
     local_parser.add_argument('-d', '--description', action='store_true', \
-        help='Show target description')
+        help=_('Show target description'))
     local_parser.add_argument('-D', '--depends', action='store_true', \
-        help='Show target depends')
+        help=_('Show target depends'))
     local_parser.add_argument('-r', '--reverse', action='store_true', \
-        help='Show target reverse depends')
+        help=_('Show target reverse depends'))
     local_parser.add_argument('-s', '--size', action='store_true', \
-        help='Show target size')
+        help=_('Show target size'))
     local_parser.add_argument('-f', '--footprint', action='store_true', \
-        help='Show target footprint')
+        help=_('Show target footprint'))
     local_parser.add_argument('-p', '--plain', action='store_true', \
-        help='Print in plain format')
+        help=_('Print in plain format'))
     local_parser.add_argument('PATTERN', type=str, \
-        help='Pattern to search for in local targets')
+        help=_('Pattern to search for in local targets'))
 
     who_parser = subparsers.add_parser('who')
     who_parser.add_argument('-p', '--plain', action='store_true', \
-        help='Print in plain format')
+        help=_('Print in plain format'))
     who_parser.add_argument('PATTERN', type=str, \
-        help='Pattern to search for in local targets')
+        help=_('Pattern to search for in local targets'))
 
     parser.add_argument('--cache', type=str, action=OverrideCacheDir, \
-        help='Change cache directory')
+        help=_('Change cache directory'))
     parser.add_argument('--build', type=str, action=OverrideBuildDir, \
-        help='Change build directory')
+        help=_('Change build directory'))
     parser.add_argument('--root', type=str, action=OverrideRootDir, \
-        help='Change system root directory')
+        help=_('Change system root directory'))
     parser.add_argument('--ignore', type=str, action=OverrideIgnore, \
-        help='Change ignored targets')
+        help=_('Change ignored targets'))
     parser.add_argument('--demote', type=str, \
-        action=OverrideDemote, help='Set user to demote to')
+        action=OverrideDemote, help=_('Set user to demote to'))
     parser.add_argument('--offline', type=ast.literal_eval, \
-        action=OverrideOffline, help='Set whether to use offline mode')
+        action=OverrideOffline, help=_('Set whether to use offline mode'))
     parser.add_argument('--mirror', type=ast.literal_eval, \
-        action=OverrideMirror, help='Set whether to use mirrors')
+        action=OverrideMirror, help=_('Set whether to use mirrors'))
     parser.add_argument('--timeout', type=int, action=OverrideTimeout, \
-        help='Set the connection timeout')
+        help=_('Set the connection timeout'))
     parser.add_argument('--chost', type=str, action=OverrideChost, \
-        help='Change CHOST')
+        help=_('Change CHOST'))
     parser.add_argument('--cflags', type=str, action=OverrideCflags, \
-        help='Change CFLAGS')
+        help=_('Change CFLAGS'))
     parser.add_argument('--cxxflags', type=str, action=OverrideCxxflags, \
-        help='Change CXXFLAGS')
+        help=_('Change CXXFLAGS'))
     parser.add_argument('--cppflags', type=str, action=OverrideCppflags, \
-        help='Change CPPFLAGS')
+        help=_('Change CPPFLAGS'))
     parser.add_argument('--ldflags', type=str, action=OverrideLdflags, \
-        help='Change LDFLAGS')
+        help=_('Change LDFLAGS'))
     parser.add_argument('--makeflags', type=str, action=OverrideMakeflags, \
-        help='Change MAKEFLAGS')
+        help=_('Change MAKEFLAGS'))
     parser.add_argument('--man', type=ast.literal_eval, action=OverrideMan, \
-        help='Set whether to compress man pages')
+        help=_('Set whether to compress man pages'))
     parser.add_argument('--binaries', type=ast.literal_eval, \
-        action=OverrideBinaries, help='Set whether to strip binaries')
+        action=OverrideBinaries, help=_('Set whether to strip binaries'))
     parser.add_argument('--shared', type=ast.literal_eval, \
-        action=OverrideShared, help='Set whether to strip shared libraries')
+        action=OverrideShared, help=_('Set whether to strip shared libraries'))
     parser.add_argument('--static', type=ast.literal_eval, \
-        action=OverrideStatic, help='Set whether to strip static libraries')
+        action=OverrideStatic, help=_('Set whether to strip static libraries'))
     parser.add_argument('--rpath', type=ast.literal_eval, \
-        action=OverrideRpath, help='Set whether to strip RPATH')
+        action=OverrideRpath, help=_('Set whether to strip RPATH'))
     parser.add_argument('--pycompile', type=ast.literal_eval, \
-        action=OverridePyCompile, help='Set whether to compile Python files')
+        action=OverridePyCompile, help=_('Set whether to compile Python files'))
     parser.add_argument('--missing', type=ast.literal_eval, \
         action=OverrideMissing, \
-        help='Set whether to ignore missing runtime dependencies')
+        help=_('Set whether to ignore missing runtime dependencies'))
     parser.add_argument('--conflicts', type=ast.literal_eval, \
-        action=OverrideConflicts, help='Set whether to check for conflicts')
+        action=OverrideConflicts, help=_('Set whether to check for conflicts'))
     parser.add_argument('--backup', type=ast.literal_eval, \
-        action=OverrideBackup, help='Set whether to backup files')
+        action=OverrideBackup, help=_('Set whether to backup files'))
     parser.add_argument('--scripts', type=ast.literal_eval, \
-        action=OverrideScripts, help='Set whether to execute pre/post script')
+        action=OverrideScripts, help=_('Set whether to execute pre/post script'))
     parser.add_argument('--triggers', type=ast.literal_eval, \
-        action=OverrideTriggers, help='Set whether to execute triggers')
-    parser.add_argument('--debug', nargs=0, action=OverrideDebug, \
-        help='Enable debug messages')
+        action=OverrideTriggers, help=_('Set whether to execute triggers'))
+    parser.add_argument(_('--debug', nargs=0, action=OverrideDebug, \
+        help=_('Enable debug messages'))
     parser.add_argument('--version', action='version', \
-        version='Source Package Manager v' + app_version, \
-        help='Show SPM version and exit')
+        version='Source Package Manager v%s' % app_version, \
+        help=_('Show SPM version and exit'))
 
     ARGS = parser.parse_args()
 
@@ -361,35 +364,35 @@ try:
             ARGS.update = True
             ARGS.prune = True
 
-        message.info('Runtime information')
-        message.sub_info('CLEAN', ARGS.clean)
-        message.sub_info('SYNC', ARGS.sync)
-        message.sub_info('UPDATE', ARGS.update)
-        message.sub_info('PRUNE', ARGS.prune)
-        message.sub_info('CACHE_DIR', libspm.CACHE_DIR)
-        message.sub_info('REPOSITORIES', libspm.REPOSITORIES)
-        message.sub_info('DEMOTE', libspm.DEMOTE)
+        message.info(_('Runtime information'))
+        message.sub_info(_('CLEAN'), ARGS.clean)
+        message.sub_info(_('SYNC'), ARGS.sync)
+        message.sub_info(_('UPDATE'), ARGS.update)
+        message.sub_info(_('PRUNE'), ARGS.prune)
+        message.sub_info(_('CACHE_DIR'), libspm.CACHE_DIR)
+        message.sub_info(_('REPOSITORIES'), libspm.REPOSITORIES)
+        message.sub_info(_('DEMOTE'), libspm.DEMOTE)
         for repository in libspm.REPOSITORIES:
-            message.sub_info('REPOSITORY', repository)
-        message.info('Poking repositories...')
+            message.sub_info(_('REPOSITORY'), repository)
+        message.info(_('Poking repositories...'))
         m = libspm.Repo(libspm.REPOSITORIES, ARGS.clean, \
                 ARGS.sync, ARGS.update, ARGS.prune)
         m.main()
 
     elif ARGS.mode == 'remote':
         if not ARGS.plain:
-            message.info('Runtime information')
-            message.sub_info('NAME', ARGS.name)
-            message.sub_info('VERSION', ARGS.version)
-            message.sub_info('DESCRIPTION', ARGS.description)
-            message.sub_info('DEPENDS', ARGS.depends)
-            message.sub_info('MAKEDEPENDS', ARGS.makedepends)
-            message.sub_info('CHECKDEPENDS', ARGS.checkdepends)
-            message.sub_info('SOURCES', ARGS.sources)
-            message.sub_info('OPTIONS', ARGS.options)
-            message.sub_info('BACKUP', ARGS.remote_backup)
-            message.sub_info('PATTERN', ARGS.PATTERN)
-            message.info('Poking remotes...')
+            message.info(_('Runtime information'))
+            message.sub_info(_('NAME'), ARGS.name)
+            message.sub_info(_('VERSION'), ARGS.version)
+            message.sub_info(_('DESCRIPTION'), ARGS.description)
+            message.sub_info(_('DEPENDS'), ARGS.depends)
+            message.sub_info(_('MAKEDEPENDS'), ARGS.makedepends)
+            message.sub_info(_('CHECKDEPENDS'), ARGS.checkdepends)
+            message.sub_info(_('SOURCES'), ARGS.sources)
+            message.sub_info(_('OPTIONS'), ARGS.options)
+            message.sub_info(_('BACKUP'), ARGS.remote_backup)
+            message.sub_info(_('PATTERN'), ARGS.PATTERN)
+            message.info(_('Poking remotes...'))
         m = libspm.Remote(ARGS.PATTERN, ARGS.name, ARGS.version, \
                 ARGS.description, ARGS.depends, ARGS.makedepends, \
                 ARGS.checkdepends, ARGS.sources, ARGS.options, \
@@ -408,32 +411,32 @@ try:
                 ARGS.TARGETS[position:position+1] = \
                     database.remote_alias(alias)
 
-        message.info('Runtime information')
-        message.sub_info('CACHE_DIR', libspm.CACHE_DIR)
-        message.sub_info('BUILD_DIR', libspm.BUILD_DIR)
-        message.sub_info('ROOT_DIR', libspm.ROOT_DIR)
-        message.sub_info('IGNORE', libspm.IGNORE)
-        message.sub_info('OFFLINE', libspm.OFFLINE)
-        message.sub_info('MIRROR', libspm.MIRROR)
-        message.sub_info('TIMEOUT', libspm.TIMEOUT)
-        message.sub_info('CHOST', libspm.CHOST)
-        message.sub_info('CFLAGS', libspm.CFLAGS)
-        message.sub_info('CXXFLAGS', libspm.CXXFLAGS)
-        message.sub_info('CPPFLAGS', libspm.CPPFLAGS)
-        message.sub_info('LDFLAGS', libspm.LDFLAGS)
-        message.sub_info('MAKEFLAGS', libspm.MAKEFLAGS)
-        message.sub_info('COMPRESS_MAN', libspm.COMPRESS_MAN)
-        message.sub_info('STRIP_BINARIES', libspm.STRIP_BINARIES)
-        message.sub_info('STRIP_SHARED', libspm.STRIP_SHARED)
-        message.sub_info('STRIP_STATIC', libspm.STRIP_STATIC)
-        message.sub_info('STRIP_RPATH', libspm.STRIP_RPATH)
-        message.sub_info('IGNORE_MISSING', libspm.IGNORE_MISSING)
-        message.sub_info('CONFLICTS', libspm.CONFLICTS)
-        message.sub_info('BACKUP', libspm.BACKUP)
-        message.sub_info('SCRIPTS', libspm.SCRIPTS)
-        message.sub_info('DEMOTE', libspm.DEMOTE)
-        message.sub_info('TARGETS', ARGS.TARGETS)
-        message.info('Poking sources...')
+        message.info(_('Runtime information'))
+        message.sub_info(_('CACHE_DIR'), libspm.CACHE_DIR)
+        message.sub_info(_('BUILD_DIR'), libspm.BUILD_DIR)
+        message.sub_info(_('ROOT_DIR'), libspm.ROOT_DIR)
+        message.sub_info(_('IGNORE'), libspm.IGNORE)
+        message.sub_info(_('OFFLINE'), libspm.OFFLINE)
+        message.sub_info(_('MIRROR'), libspm.MIRROR)
+        message.sub_info(_('TIMEOUT'), libspm.TIMEOUT)
+        message.sub_info(_('CHOST'), libspm.CHOST)
+        message.sub_info(_('CFLAGS'), libspm.CFLAGS)
+        message.sub_info(_('CXXFLAGS'), libspm.CXXFLAGS)
+        message.sub_info(_('CPPFLAGS'), libspm.CPPFLAGS)
+        message.sub_info(_('LDFLAGS'), libspm.LDFLAGS)
+        message.sub_info(_('MAKEFLAGS'), libspm.MAKEFLAGS)
+        message.sub_info(_('COMPRESS_MAN'), libspm.COMPRESS_MAN)
+        message.sub_info(_('STRIP_BINARIES'), libspm.STRIP_BINARIES)
+        message.sub_info(_('STRIP_SHARED'), libspm.STRIP_SHARED)
+        message.sub_info(_('STRIP_STATIC'), libspm.STRIP_STATIC)
+        message.sub_info(_('STRIP_RPATH'), libspm.STRIP_RPATH)
+        message.sub_info(_('IGNORE_MISSING'), libspm.IGNORE_MISSING)
+        message.sub_info(_('CONFLICTS'), libspm.CONFLICTS)
+        message.sub_info(_('BACKUP'), libspm.BACKUP)
+        message.sub_info(_('SCRIPTS'), libspm.SCRIPTS)
+        message.sub_info(_('DEMOTE'), libspm.DEMOTE)
+        message.sub_info(_('TARGETS'), ARGS.TARGETS)
+        message.info(_('Poking sources...'))
         if ARGS.automake:
             ARGS.clean = True
             ARGS.prepare = True
@@ -457,35 +460,35 @@ try:
                 ARGS.TARGETS[position:position+1] = \
                     database.remote_alias(alias)
 
-        message.info('Runtime information')
-        message.sub_info('CACHE_DIR', libspm.CACHE_DIR)
-        message.sub_info('ROOT_DIR', libspm.ROOT_DIR)
-        message.sub_info('IGNORE', libspm.IGNORE)
-        message.sub_info('OFFLINE', libspm.OFFLINE)
-        message.sub_info('MIRROR', libspm.MIRROR)
-        message.sub_info('TIMEOUT', libspm.TIMEOUT)
-        message.sub_info('CONFLICTS', libspm.CONFLICTS)
-        message.sub_info('BACKUP', libspm.BACKUP)
-        message.sub_info('SCRIPTS', libspm.SCRIPTS)
-        message.sub_info('TARGETS', ARGS.TARGETS)
-        message.sub_info('DEMOTE', libspm.DEMOTE)
-        message.info('Poking binaries...')
+        message.info(_('Runtime information'))
+        message.sub_info(_('CACHE_DIR'), libspm.CACHE_DIR)
+        message.sub_info(_('ROOT_DIR'), libspm.ROOT_DIR)
+        message.sub_info(_('IGNORE'), libspm.IGNORE)
+        message.sub_info(_('OFFLINE'), libspm.OFFLINE)
+        message.sub_info(_('MIRROR'), libspm.MIRROR)
+        message.sub_info(_('TIMEOUT'), libspm.TIMEOUT)
+        message.sub_info(_('CONFLICTS'), libspm.CONFLICTS)
+        message.sub_info(_('BACKUP'), libspm.BACKUP)
+        message.sub_info(_('SCRIPTS'), libspm.SCRIPTS)
+        message.sub_info(_('TARGETS'), ARGS.TARGETS)
+        message.sub_info(_('DEMOTE'), libspm.DEMOTE)
+        message.info(_('Poking binaries...'))
         m = libspm.Binary(ARGS.TARGETS, ARGS.merge, ARGS.remove, \
             ARGS.depends, ARGS.reverse, ARGS.update)
         m.main()
 
     elif ARGS.mode == 'local':
         if not ARGS.plain:
-            message.info('Runtime information')
-            message.sub_info('NAME', ARGS.name)
-            message.sub_info('VERSION', ARGS.version)
-            message.sub_info('DESCRIPTION', ARGS.description)
-            message.sub_info('DEPENDS', ARGS.depends)
-            message.sub_info('REVERSE', ARGS.reverse)
-            message.sub_info('SIZE', ARGS.size)
-            message.sub_info('FOOTPRINT', ARGS.footprint)
-            message.sub_info('PATTERN', ARGS.PATTERN)
-            message.info('Poking locals...')
+            message.info(_('Runtime information'))
+            message.sub_info(_('NAME'), ARGS.name)
+            message.sub_info(_('VERSION'), ARGS.version)
+            message.sub_info(_('DESCRIPTION'), ARGS.description)
+            message.sub_info(_('DEPENDS'), ARGS.depends)
+            message.sub_info(_('REVERSE'), ARGS.reverse)
+            message.sub_info(_('SIZE'), ARGS.size)
+            message.sub_info(_('FOOTPRINT'), ARGS.footprint)
+            message.sub_info(_('PATTERN'), ARGS.PATTERN)
+            message.info(_('Poking locals...'))
         m = libspm.Local(ARGS.PATTERN, ARGS.name, ARGS.version, \
                 ARGS.description, ARGS.depends, ARGS.reverse, \
                 ARGS.size, ARGS.footprint, ARGS.plain)
@@ -493,9 +496,9 @@ try:
 
     elif ARGS.mode == 'who':
         if not ARGS.plain:
-            message.info('Runtime information')
-            message.sub_info('PATTERN', ARGS.PATTERN)
-            message.info('Poking databases...')
+            message.info(_('Runtime information'))
+            message.sub_info(_('PATTERN'), ARGS.PATTERN)
+            message.info(_('Poking databases...'))
         m = libspm.Who(ARGS.PATTERN, ARGS.plain)
         m.main()
 

@@ -12,6 +12,7 @@ SITEDIR = $(shell $(PYTHON) -c "import site; print(site.getsitepackages()[0])")
 APPLICATIONSDIR = $(PREFIX)/share/applications
 PIXMAPSDIR = $(PREFIX)/share/pixmaps
 BASHCOMPLETIONDIR = /etc/bash_completion.d/
+LOCALEDIR = $(PREFIX)/share/locale
 
 MACHINE = $(shell $(CC) -dumpmachine)
 ARCH = $(shell uname -m | $(SED) 's|_|-|')
@@ -37,6 +38,10 @@ PYUIC = pyuic4
 NUITKA = $(PYTHON) $(TOPDIR)/nuitka/bin/nuitka --recurse-none \
 	--python-version=$(PYTHON_VERSION)
 PYLINT = pylint --rcfile=$(TOPDIR)/pylint.conf
+XGETTEXT = xgettext
+MSGMERGE = msgmerge
+MSGATTRIB = msgattrib
+MSGFMT = msgfmt
 
 all:
 

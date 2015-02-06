@@ -1,0 +1,1465 @@
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+#
+# Ivailo Monev <xakepa10@gmail.com>, 2015.
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-02-06 07:40+0000\n"
+"PO-Revision-Date: 2015-02-06 07:22+0000\n"
+"Last-Translator: Ivailo Monev <xakepa10@gmail.com>\n"
+"Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
+"Language: bg\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 1.5\n"
+
+#: libspm.py:31
+msgid "Configuration file does not exist"
+msgstr ""
+
+#: libspm.py:92
+msgid "Repositories file does not exist"
+msgstr ""
+
+#: libspm.py:105
+msgid "Repositories configuration file is empty"
+msgstr ""
+
+#: libspm.py:110
+msgid "Mirrors file does not exist"
+msgstr "Файлът за огледала несъществува"
+
+#: libspm.py:122
+msgid "Mirrors configuration file is empty"
+msgstr "Файлът за конфигуриране на огледалата е празен"
+
+#: libspm.py:163 libspm.py:240
+msgid "Name"
+msgstr "Име"
+
+#: libspm.py:170 libspm.py:248
+msgid "Version"
+msgstr "Версия"
+
+#: libspm.py:177 libspm.py:255
+msgid "Description"
+msgstr "Описание"
+
+#: libspm.py:184 libspm.py:262
+msgid "Depends"
+msgstr "Зависимости"
+
+#: libspm.py:191
+msgid "Reverse depends"
+msgstr "Обратни зависимисти"
+
+#: libspm.py:198
+msgid "Size"
+msgstr "Размер"
+
+#: libspm.py:205
+msgid "Footprint"
+msgstr "Отпечатък"
+
+#: libspm.py:269
+msgid "Make depends"
+msgstr "Мейк-зависимости"
+
+#: libspm.py:276
+msgid "Check depends"
+msgstr "Чек-зависимости"
+
+#: libspm.py:283
+msgid "Sources"
+msgstr "Източници"
+
+#: libspm.py:290
+msgid "Options"
+msgstr "Опции"
+
+#: libspm.py:297
+msgid "Backup"
+msgstr "Резервни копия"
+
+#: libspm.py:320 libspm.py:362 libspm.py:645 libspm.py:652 libspm.py:663
+#: libspm.py:669 libspm.py:672 libspm.py:678 libspm.py:681 tools.py:261
+#: tools.py:265
+msgid "Removing"
+msgstr "Премахва се"
+
+#: libspm.py:323 libspm.py:675 libspm.py:684
+msgid "Dirctory is OK"
+msgstr "Директорията е ОК"
+
+#: libspm.py:332
+msgid "Cloning local"
+msgstr ""
+
+#: libspm.py:336
+msgid "Updating repository"
+msgstr "Обновява се хранилище"
+
+#: libspm.py:341
+msgid "Cloning remote"
+msgstr ""
+
+#: libspm.py:367
+msgid "Checking for updates"
+msgstr "Проверяване за обновления"
+
+#: libspm.py:371
+msgid "Target not in any repository"
+msgstr ""
+
+#: libspm.py:374 libspm.py:737 libspm.py:1110 libspm.py:1417 tools.py:60
+#: tools.py:239 tools.py:294 tools.py:461 tools.py:559
+msgid "Checking"
+msgstr "Проверява се"
+
+#: libspm.py:376
+#, python-format
+msgid "New version of %s available"
+msgstr "Нова версия на %s е налична"
+
+#: libspm.py:391
+msgid "Starting cleanup at"
+msgstr "Стартира се почистване в"
+
+#: libspm.py:395
+msgid "Starting sync at"
+msgstr "Стартира се синхронизиране в"
+
+#: libspm.py:399
+msgid "Starting prune at"
+msgstr ""
+
+#: libspm.py:403
+msgid "Starting update at"
+msgstr "Стартира се обновление в"
+
+#: libspm.py:502
+msgid "Updating shared libraries cache"
+msgstr "Обновява се кеша на споделени библиотеки"
+
+#: libspm.py:507
+msgid "Updating manual pages database"
+msgstr "Обновява се датабазата на опътващите страници"
+
+#: libspm.py:512
+msgid "Updating desktop database"
+msgstr "Обновява се датабазата на работния плот"
+
+#: libspm.py:518
+msgid "Updating MIME database"
+msgstr "Обновява се MIME датабазата"
+
+#: libspm.py:523
+msgid "Updating icon resources"
+msgstr "Обновяват се ресурсите на иконите"
+
+#: libspm.py:531
+msgid "Installing XDG MIMEs"
+msgstr "Инсталират се XDG MIME-и"
+
+#: libspm.py:535
+msgid "Uninstalling XDG MIMEs"
+msgstr "Деинсталират се XDG MIME-и"
+
+#: libspm.py:539
+msgid "Updating GIO modules cache"
+msgstr "Обновяват се кеша на GIO модулите"
+
+#: libspm.py:544
+msgid "Updating pango modules cache"
+msgstr ""
+
+#: libspm.py:549
+msgid "Updating GTK-2.0 imodules cache"
+msgstr ""
+
+#: libspm.py:556
+msgid "Updating GTK-3.0 imodules cache"
+msgstr ""
+
+#: libspm.py:563
+msgid "Updating gdk pixbuffer loaders"
+msgstr ""
+
+#: libspm.py:570
+msgid "Updating GSettings schemas"
+msgstr ""
+
+#: libspm.py:583
+msgid "Reloading udev rules and hwdb"
+msgstr ""
+
+#: libspm.py:605
+msgid "Updating icons cache"
+msgstr ""
+
+#: libspm.py:612
+msgid "Installing info page"
+msgstr ""
+
+#: libspm.py:617
+msgid "Deleting info page"
+msgstr ""
+
+#: libspm.py:623
+msgid "Updating module dependencies"
+msgstr ""
+
+#: libspm.py:628
+msgid "Updating initramfs image"
+msgstr ""
+
+#: libspm.py:636
+msgid "Updating GRUB configuration"
+msgstr ""
+
+#: libspm.py:688 libspm.py:1138 libspm.py:1389
+msgid "Checking dependencies"
+msgstr ""
+
+#: libspm.py:693
+msgid "Building dependencies"
+msgstr ""
+
+#: libspm.py:695 libspm.py:1395
+#, python-format
+msgid "Resuming %s preparations at"
+msgstr ""
+
+#: libspm.py:698 libspm.py:1398
+msgid "Dependencies missing"
+msgstr ""
+
+#: libspm.py:703 tools.py:207
+msgid "Preparing sources"
+msgstr ""
+
+#: libspm.py:713 libspm.py:727 libspm.py:1406 tools.py:215 tools.py:229
+msgid "Internet connection is down"
+msgstr ""
+
+#: libspm.py:715 tools.py:217
+msgid "Updating Git repository"
+msgstr ""
+
+#: libspm.py:719 tools.py:221
+msgid "Cloning Git repository"
+msgstr ""
+
+#: libspm.py:731 libspm.py:1411 tools.py:233
+msgid "Checking mirror"
+msgstr ""
+
+#: libspm.py:739 libspm.py:1419 tools.py:241
+msgid "Already fetched"
+msgstr ""
+
+#: libspm.py:741 libspm.py:1421 tools.py:243
+msgid "Re-fetching"
+msgstr ""
+
+#: libspm.py:744 libspm.py:1424 tools.py:246
+msgid "Fetching"
+msgstr ""
+
+#: libspm.py:748
+msgid "Already linked"
+msgstr ""
+
+#: libspm.py:750 libspm.py:753
+msgid "Linking"
+msgstr ""
+
+#: libspm.py:760
+msgid "Extracting"
+msgstr ""
+
+#: libspm.py:765
+msgid "Already extracted"
+msgstr ""
+
+#: libspm.py:788
+msgid "Compressing manual pages"
+msgstr ""
+
+#: libspm.py:800 tools.py:249 tools.py:624
+msgid "Compressing"
+msgstr ""
+
+#: libspm.py:805
+msgid "Adjusting link"
+msgstr ""
+
+#: libspm.py:814 libspm.py:998 libspm.py:1160
+msgid "Indexing content"
+msgstr ""
+
+#: libspm.py:830
+msgid "Stripping binaries and libraries"
+msgstr ""
+
+#: libspm.py:839
+msgid "Stripping executable"
+msgstr ""
+
+#: libspm.py:842
+msgid "Stripping shared library"
+msgstr ""
+
+#: libspm.py:845
+msgid "Stripping static library"
+msgstr ""
+
+#: libspm.py:853
+msgid "Stripping RPATH"
+msgstr ""
+
+#: libspm.py:856
+msgid "Checking runtime dependencies"
+msgstr ""
+
+#: libspm.py:871 libspm.py:943 tools.py:89 tools.py:126
+#, python-format
+msgid "Multiple providers for %s"
+msgstr ""
+
+#: libspm.py:881 tools.py:99
+msgid "Library needed but in self"
+msgstr ""
+
+#: libspm.py:883 tools.py:101
+msgid "Library needed but in depends"
+msgstr ""
+
+#: libspm.py:885 tools.py:103
+msgid "Library needed but in local"
+msgstr ""
+
+#: libspm.py:888 libspm.py:890 tools.py:106 tools.py:108
+msgid "Library needed, not in any local"
+msgstr ""
+
+#: libspm.py:919
+msgid "Attempting shebang correction on"
+msgstr ""
+
+#: libspm.py:927
+msgid "Successfuly corrected (host)"
+msgstr ""
+
+#: libspm.py:940
+msgid "Successfuly corrected (self)"
+msgstr ""
+
+#: libspm.py:952 tools.py:137
+msgid "Dependency needed but in self"
+msgstr ""
+
+#: libspm.py:954 tools.py:139
+msgid "Dependency needed but in depends"
+msgstr ""
+
+#: libspm.py:956 tools.py:141
+msgid "Dependency needed but in local"
+msgstr ""
+
+#: libspm.py:959 libspm.py:961 tools.py:144 tools.py:146
+msgid "Dependency needed, not in any local"
+msgstr ""
+
+#: libspm.py:967
+msgid "Byte-compiling Python modules"
+msgstr ""
+
+#: libspm.py:972
+msgid "Compiling Python file"
+msgstr ""
+
+#: libspm.py:978
+msgid "Assembling metadata"
+msgstr ""
+
+#: libspm.py:987
+msgid "Assembling footprint"
+msgstr ""
+
+#: libspm.py:991
+msgid "Compressing tarball"
+msgstr ""
+
+#: libspm.py:1013
+msgid "Checking for conflicts"
+msgstr ""
+
+#: libspm.py:1021
+#, python-format
+msgid "File/link conflict with %s"
+msgstr ""
+
+#: libspm.py:1032
+msgid "Executing pre_upgrade()"
+msgstr ""
+
+#: libspm.py:1036
+msgid "Executing pre_install()"
+msgstr ""
+
+#: libspm.py:1040
+msgid "Backing up files"
+msgstr ""
+
+#: libspm.py:1054
+msgid "Backing up"
+msgstr ""
+
+#: libspm.py:1058
+msgid "Decompressing tarball"
+msgstr ""
+
+#: libspm.py:1062
+msgid "Removing obsolete files and directories"
+msgstr ""
+
+#: libspm.py:1091
+msgid "Executing post_upgrade()"
+msgstr ""
+
+#: libspm.py:1095
+msgid "Executing post_install()"
+msgstr ""
+
+#: libspm.py:1102
+msgid "Checking reverse dependencies"
+msgstr ""
+
+#: libspm.py:1130
+msgid "Targets may need rebuild"
+msgstr ""
+
+#: libspm.py:1135
+msgid "Already removed"
+msgstr ""
+
+#: libspm.py:1144
+msgid "Removing reverse dependencies"
+msgstr ""
+
+#: libspm.py:1146
+#, python-format
+msgid "Resuming %s removing at"
+msgstr ""
+
+#: libspm.py:1149
+#, python-format
+msgid "Other targets depend on %s"
+msgstr ""
+
+#: libspm.py:1155
+msgid "Executing pre_remove()"
+msgstr ""
+
+#: libspm.py:1163
+msgid "Removing files"
+msgstr ""
+
+#: libspm.py:1167
+msgid "Removing directories"
+msgstr ""
+
+#: libspm.py:1171
+msgid "Removing links"
+msgstr ""
+
+#: libspm.py:1176
+msgid "Removing footprint and metadata"
+msgstr ""
+
+#: libspm.py:1181
+msgid "Executing post_remove()"
+msgstr ""
+
+#: libspm.py:1195 libspm.py:1436
+msgid "Ignoring target"
+msgstr ""
+
+#: libspm.py:1199 libspm.py:1440 tools.py:195
+msgid "Invalid target"
+msgstr ""
+
+#: libspm.py:1223 libspm.py:1464
+msgid "Target is up-to-date"
+msgstr ""
+
+#: libspm.py:1228 libspm.py:1231
+msgid "Overriding MIRROR to"
+msgstr ""
+
+#: libspm.py:1235 libspm.py:1238
+msgid "Overriding STRIP_BINARIES to"
+msgstr ""
+
+#: libspm.py:1242 libspm.py:1245
+msgid "Overriding STRIP_SHARED to"
+msgstr ""
+
+#: libspm.py:1249 libspm.py:1252
+msgid "Overriding STRIP_STATIC to"
+msgstr ""
+
+#: libspm.py:1256 libspm.py:1259
+msgid "Overriding STRIP_RPATH to"
+msgstr ""
+
+#: libspm.py:1263 libspm.py:1266
+msgid "Overriding COMPRESS_MAN to"
+msgstr ""
+
+#: libspm.py:1270 libspm.py:1273
+msgid "Overriding IGNORE_MISSING to"
+msgstr ""
+
+#: libspm.py:1277 libspm.py:1280
+msgid "Overriding PYTHON_COMPILE to"
+msgstr ""
+
+#: libspm.py:1284
+#, python-format
+msgid "Starting %s cleanup at"
+msgstr ""
+
+#: libspm.py:1289 libspm.py:1468
+#, python-format
+msgid "Starting %s preparations at"
+msgstr ""
+
+#: libspm.py:1296
+msgid "src_compile() not defined"
+msgstr ""
+
+#: libspm.py:1298
+#, python-format
+msgid "Starting %s compile at"
+msgstr ""
+
+#: libspm.py:1313
+msgid "src_check() not defined"
+msgstr ""
+
+#: libspm.py:1315
+#, python-format
+msgid "Starting %s check at"
+msgstr ""
+
+#: libspm.py:1330
+msgid "src_install() not defined"
+msgstr ""
+
+#: libspm.py:1333
+#, python-format
+msgid "Starting %s install at"
+msgstr ""
+
+#: libspm.py:1346 libspm.py:1471
+#, python-format
+msgid "Starting %s merge at"
+msgstr ""
+
+#: libspm.py:1350 libspm.py:1475
+#, python-format
+msgid "Starting %s remove at"
+msgstr ""
+
+#: libspm.py:1393
+msgid "Fetching dependencies"
+msgstr ""
+
+#: libspm.py:1400
+msgid "Preparing tarballs"
+msgstr ""
+
+#: libspm.py:1498
+msgid "Match in"
+msgstr ""
+
+#: spm.py:196 tools.py:731
+msgid "NOTE: Some features are available only to the root user."
+msgstr ""
+
+#: spm.py:201
+msgid "Purge repositories"
+msgstr ""
+
+#: spm.py:203
+msgid "Sync repositories"
+msgstr ""
+
+#: spm.py:205
+msgid "Prune old repositories"
+msgstr ""
+
+#: spm.py:207
+msgid "Check repositories for updates"
+msgstr ""
+
+#: spm.py:209
+msgid "Short for clean, sync, prune and update"
+msgstr ""
+
+#: spm.py:213 spm.py:277
+msgid "Show target name"
+msgstr ""
+
+#: spm.py:215 spm.py:279
+msgid "Show target version"
+msgstr ""
+
+#: spm.py:217 spm.py:281
+msgid "Show target description"
+msgstr ""
+
+#: spm.py:219 spm.py:283
+msgid "Show target depends"
+msgstr ""
+
+#: spm.py:221
+msgid "Show target makedepends"
+msgstr ""
+
+#: spm.py:223
+msgid "Show target checkdepends"
+msgstr ""
+
+#: spm.py:225
+msgid "Show target sources"
+msgstr ""
+
+#: spm.py:227
+msgid "Show target options"
+msgstr ""
+
+#: spm.py:229
+msgid "Show target backups"
+msgstr ""
+
+#: spm.py:231 spm.py:291 spm.py:297 tools.py:827 tools.py:855
+msgid "Print in plain format"
+msgstr ""
+
+#: spm.py:233 tools.py:829
+msgid "Pattern to search for in remote targets"
+msgstr ""
+
+#: spm.py:237
+msgid "Purge sources and compiled files of target"
+msgstr ""
+
+#: spm.py:239
+msgid "Prepare sources of target"
+msgstr ""
+
+#: spm.py:241
+msgid "Compile sources of target"
+msgstr ""
+
+#: spm.py:243
+msgid "Check sources of target"
+msgstr ""
+
+#: spm.py:245
+msgid "Install compiled files of target"
+msgstr ""
+
+#: spm.py:247 spm.py:263
+msgid "Merge compiled files of target to system"
+msgstr ""
+
+#: spm.py:249 spm.py:265
+msgid "Remove compiled files of target from system"
+msgstr ""
+
+#: spm.py:251 spm.py:267
+msgid "Consider dependency targets"
+msgstr ""
+
+#: spm.py:253 spm.py:269
+msgid "Consider reverse dependency targets"
+msgstr ""
+
+#: spm.py:255 spm.py:271
+msgid "Apply actions only if update is available"
+msgstr ""
+
+#: spm.py:257
+msgid "Short for clean, prepare, compile, install and merge"
+msgstr ""
+
+#: spm.py:259 spm.py:273 tools.py:743 tools.py:755 tools.py:789 tools.py:813
+#: tools.py:821 tools.py:835 tools.py:841
+msgid "Targets to apply actions on"
+msgstr ""
+
+#: spm.py:285
+msgid "Show target reverse depends"
+msgstr ""
+
+#: spm.py:287
+msgid "Show target size"
+msgstr ""
+
+#: spm.py:289
+msgid "Show target footprint"
+msgstr ""
+
+#: spm.py:293 spm.py:299
+msgid "Pattern to search for in local targets"
+msgstr ""
+
+#: spm.py:302
+msgid "Change cache directory"
+msgstr ""
+
+#: spm.py:304
+msgid "Change build directory"
+msgstr ""
+
+#: spm.py:306
+msgid "Change system root directory"
+msgstr ""
+
+#: spm.py:308
+msgid "Change ignored targets"
+msgstr ""
+
+#: spm.py:310
+msgid "Set user to demote to"
+msgstr ""
+
+#: spm.py:312
+msgid "Set whether to use offline mode"
+msgstr ""
+
+#: spm.py:314
+msgid "Set whether to use mirrors"
+msgstr ""
+
+#: spm.py:316
+msgid "Set the connection timeout"
+msgstr ""
+
+#: spm.py:318
+msgid "Change CHOST"
+msgstr ""
+
+#: spm.py:320
+msgid "Change CFLAGS"
+msgstr ""
+
+#: spm.py:322
+msgid "Change CXXFLAGS"
+msgstr ""
+
+#: spm.py:324
+msgid "Change CPPFLAGS"
+msgstr ""
+
+#: spm.py:326
+msgid "Change LDFLAGS"
+msgstr ""
+
+#: spm.py:328
+msgid "Change MAKEFLAGS"
+msgstr ""
+
+#: spm.py:330
+msgid "Set whether to compress man pages"
+msgstr ""
+
+#: spm.py:332
+msgid "Set whether to strip binaries"
+msgstr ""
+
+#: spm.py:334
+msgid "Set whether to strip shared libraries"
+msgstr ""
+
+#: spm.py:336
+msgid "Set whether to strip static libraries"
+msgstr ""
+
+#: spm.py:338
+msgid "Set whether to strip RPATH"
+msgstr ""
+
+#: spm.py:340
+msgid "Set whether to compile Python files"
+msgstr ""
+
+#: spm.py:343
+msgid "Set whether to ignore missing runtime dependencies"
+msgstr ""
+
+#: spm.py:345
+msgid "Set whether to check for conflicts"
+msgstr ""
+
+#: spm.py:347
+msgid "Set whether to backup files"
+msgstr ""
+
+#: spm.py:349
+msgid "Set whether to execute pre/post script"
+msgstr ""
+
+#: spm.py:351
+msgid "Set whether to execute triggers"
+msgstr ""
+
+#: spm.py:353 tools.py:858
+msgid "Enable debug messages"
+msgstr ""
+
+#: spm.py:352
+msgid "--debug"
+msgstr ""
+
+#: spm.py:356
+msgid "Show SPM version and exit"
+msgstr ""
+
+#: spm.py:367 spm.py:384 spm.py:414 spm.py:463 spm.py:482 spm.py:499
+#: tools.py:877 tools.py:887 tools.py:919 tools.py:954 tools.py:978
+#: tools.py:986 tools.py:992 tools.py:999 tools.py:1006 tools.py:1015
+msgid "Runtime information"
+msgstr ""
+
+#: spm.py:368 tools.py:879
+msgid "CLEAN"
+msgstr "ИЗЧИСТИ"
+
+#: spm.py:369
+msgid "SYNC"
+msgstr "СИНХРОНИЗИРАЙ"
+
+#: spm.py:370
+msgid "UPDATE"
+msgstr "ОБНОВИ"
+
+#: spm.py:371
+msgid "PRUNE"
+msgstr "ПРЕМАХНИ"
+
+#: spm.py:372 spm.py:415 spm.py:464 tools.py:1007
+msgid "CACHE_DIR"
+msgstr "CACHE_DIR"
+
+#: spm.py:373
+msgid "REPOSITORIES"
+msgstr "ХРАНИЛИЩА"
+
+#: spm.py:374 spm.py:437 spm.py:474
+msgid "DEMOTE"
+msgstr "ПОНИЖИ"
+
+#: spm.py:376
+msgid "REPOSITORY"
+msgstr "ХРАНИЛИЩЕ"
+
+#: spm.py:377
+msgid "Poking repositories..."
+msgstr "Побутване на хранилищата..."
+
+#: spm.py:385 spm.py:483
+msgid "NAME"
+msgstr "ИМЕ"
+
+#: spm.py:386 spm.py:484
+msgid "VERSION"
+msgstr "ВЕРСИЯ"
+
+#: spm.py:387 spm.py:485
+msgid "DESCRIPTION"
+msgstr "ОПИСАНИЕ"
+
+#: spm.py:388 spm.py:486 tools.py:889
+msgid "DEPENDS"
+msgstr "ЗАВИСИМОСТИ"
+
+#: spm.py:389
+msgid "MAKEDEPENDS"
+msgstr "МЕЙК-ЗАВИСИМОСТИ"
+
+#: spm.py:390
+msgid "CHECKDEPENDS"
+msgstr "ЧЕК-ЗАВИСИМОСТИ"
+
+#: spm.py:391 tools.py:878
+msgid "SOURCES"
+msgstr "ИЗТОЧНИЦИ"
+
+#: spm.py:392
+msgid "OPTIONS"
+msgstr "ОПЦИИ"
+
+#: spm.py:393 spm.py:435 spm.py:471 tools.py:931
+msgid "BACKUP"
+msgstr "РЕЗЕРВНИ КОПИЯ"
+
+#: spm.py:394 spm.py:490 spm.py:500 tools.py:987
+msgid "PATTERN"
+msgstr ""
+
+#: spm.py:395 tools.py:882 tools.py:965 tools.py:980
+msgid "Poking remotes..."
+msgstr ""
+
+#: spm.py:416
+msgid "BUILD_DIR"
+msgstr "BUILD_DIR"
+
+#: spm.py:417 spm.py:465
+msgid "ROOT_DIR"
+msgstr "ROOT_DIR"
+
+#: spm.py:418 spm.py:466
+msgid "IGNORE"
+msgstr "ИГНОРИРАЙ"
+
+#: spm.py:419 spm.py:467
+msgid "OFFLINE"
+msgstr "ОФЛАЙН"
+
+#: spm.py:420 spm.py:468
+msgid "MIRROR"
+msgstr "ОГЛЕДАЛО"
+
+#: spm.py:421 spm.py:469
+msgid "TIMEOUT"
+msgstr "ТАЙМАУТ"
+
+#: spm.py:422
+msgid "CHOST"
+msgstr "CHOST"
+
+#: spm.py:423
+msgid "CFLAGS"
+msgstr "CFLAGS"
+
+#: spm.py:424
+msgid "CXXFLAGS"
+msgstr "CXXFLAGS"
+
+#: spm.py:425
+msgid "CPPFLAGS"
+msgstr "CPPFLAGS"
+
+#: spm.py:426
+msgid "LDFLAGS"
+msgstr "LDFLAGS"
+
+#: spm.py:427
+msgid "MAKEFLAGS"
+msgstr "MAKEFLAGS"
+
+#: spm.py:428
+msgid "COMPRESS_MAN"
+msgstr "COMPRESS_MAN"
+
+#: spm.py:429
+msgid "STRIP_BINARIES"
+msgstr "STRIP_BINARIES"
+
+#: spm.py:430
+msgid "STRIP_SHARED"
+msgstr "STRIP_SHARED"
+
+#: spm.py:431
+msgid "STRIP_STATIC"
+msgstr "STRIP_STATIC"
+
+#: spm.py:432
+msgid "STRIP_RPATH"
+msgstr "STRIP_RPATH"
+
+#: spm.py:433
+msgid "IGNORE_MISSING"
+msgstr "IGNORE_MISSING"
+
+#: spm.py:434 spm.py:470 tools.py:932
+msgid "CONFLICTS"
+msgstr "CONFLICTS"
+
+#: spm.py:436 spm.py:472
+msgid "SCRIPTS"
+msgstr "SCRIPTS"
+
+#: spm.py:438 spm.py:473 tools.py:881 tools.py:892 tools.py:933 tools.py:964
+#: tools.py:979 tools.py:994 tools.py:1001
+msgid "TARGETS"
+msgstr "МИШЕНИ"
+
+#: spm.py:439
+msgid "Poking sources..."
+msgstr ""
+
+#: spm.py:475
+msgid "Poking binaries..."
+msgstr ""
+
+#: spm.py:487 tools.py:890
+msgid "REVERSE"
+msgstr "ОБРАТНИ"
+
+#: spm.py:488
+msgid "SIZE"
+msgstr "РАЗМЕР"
+
+#: spm.py:489 tools.py:925
+msgid "FOOTPRINT"
+msgstr "ОТПЕЧАТЪК"
+
+#: spm.py:491 tools.py:893 tools.py:899 tools.py:934 tools.py:973
+msgid "Poking locals..."
+msgstr ""
+
+#: spm.py:501
+msgid "Poking databases..."
+msgstr ""
+
+#: tools.py:77
+msgid "Skipping"
+msgstr ""
+
+#: tools.py:80
+msgid "Path"
+msgstr ""
+
+#: tools.py:153
+msgid "Unnecessary explicit dependencies"
+msgstr ""
+
+#: tools.py:156
+msgid "Adjusting target depends"
+msgstr ""
+
+#: tools.py:178
+msgid "Unneded target"
+msgstr ""
+
+#: tools.py:253
+msgid "Purging sources"
+msgstr ""
+
+#: tools.py:299
+msgid "No manual page(s)"
+msgstr ""
+
+#: tools.py:306
+msgid "Cross-filesystem udev rule(s)"
+msgstr ""
+
+#: tools.py:313 tools.py:316 tools.py:319
+msgid "Cross-filesystem symlink"
+msgstr ""
+
+#: tools.py:323
+msgid "Documentation provided"
+msgstr ""
+
+#: tools.py:329
+msgid "Extra module(s) in non-standard directory"
+msgstr ""
+
+#: tools.py:333
+msgid "Empty footprint"
+msgstr ""
+
+#: tools.py:336 tools.py:343 tools.py:354 tools.py:374 tools.py:386
+#: tools.py:404
+msgid "File does not exist"
+msgstr ""
+
+#: tools.py:347
+msgid "Build directory trace(s)"
+msgstr ""
+
+#: tools.py:368
+msgid "Unknown owner of"
+msgstr ""
+
+#: tools.py:381
+msgid "File in PATH is not executable"
+msgstr ""
+
+#: tools.py:397
+msgid "File in PATH overlaps with"
+msgstr ""
+
+#: tools.py:421
+msgid "Invalid shebang"
+msgstr ""
+
+#: tools.py:427
+msgid "Possibly unnecessary backup of file"
+msgstr ""
+
+#: tools.py:429
+msgid "Possibly undefined backup of file"
+msgstr ""
+
+#: tools.py:437
+#, python-format
+msgid "Possibly conflicting file with %s"
+msgstr ""
+
+#: tools.py:466
+msgid "Explicit --enable argument(s)"
+msgstr ""
+
+#: tools.py:468
+msgid "Explicit --with argument(s)"
+msgstr ""
+
+#: tools.py:472
+msgid "Explicit --disable argument(s)"
+msgstr ""
+
+#: tools.py:474
+msgid "Explicit --without argument(s)"
+msgstr ""
+
+#: tools.py:478
+msgid "Possible /dev/null output redirection"
+msgstr ""
+
+#: tools.py:482
+msgid "No maintainer mentioned"
+msgstr ""
+
+#: tools.py:486
+msgid "FIXME/TODO note(s)"
+msgstr ""
+
+#: tools.py:491
+msgid "Essential variable(s) missing"
+msgstr ""
+
+#: tools.py:493
+msgid "String variable(s) defined as array"
+msgstr ""
+
+#: tools.py:505
+msgid "Possible unnecessary triggers invocation(s)"
+msgstr ""
+
+#: tools.py:510
+msgid "User(s) added but not deleted"
+msgstr ""
+
+#: tools.py:515
+msgid "Group(s) added but not deleted"
+msgstr ""
+
+#: tools.py:524
+msgid "Backup file detected"
+msgstr ""
+
+#: tools.py:528
+msgid ""
+"\n"
+"    What do you want to do:\n"
+"\n"
+"        1. View difference\n"
+"        2. Edit original\n"
+"        3. Edit backup\n"
+"        4. Replace original with backup\n"
+"        5. Remove backup\n"
+"        *. Continue\n"
+msgstr ""
+
+#: tools.py:602
+msgid "Match"
+msgstr ""
+
+#: tools.py:664
+msgid "Fetching package files"
+msgstr ""
+
+#: tools.py:665
+msgid "Webpage"
+msgstr ""
+
+#: tools.py:669
+msgid "Retrieving"
+msgstr ""
+
+#: tools.py:676
+msgid "Target not found"
+msgstr ""
+
+#: tools.py:689
+msgid "Serving caches directory"
+msgstr ""
+
+#: tools.py:708
+msgid "Caching host files, this may take a while"
+msgstr ""
+
+#: tools.py:711
+msgid "Searching for disowned files"
+msgstr ""
+
+#: tools.py:717
+msgid "Disowned file"
+msgstr ""
+
+#: tools.py:737
+msgid "Include all sources in the archive"
+msgstr ""
+
+#: tools.py:739
+msgid "Clean all sources after creating archive"
+msgstr ""
+
+#: tools.py:741 tools.py:833 tools.py:839
+msgid "Set output directory"
+msgstr ""
+
+#: tools.py:747
+msgid "Skip some files/links"
+msgstr ""
+
+#: tools.py:749
+msgid "Adjust target depends"
+msgstr ""
+
+#: tools.py:751
+msgid "Check dependencies of target"
+msgstr ""
+
+#: tools.py:753
+msgid "Check reverse dependencies of target"
+msgstr ""
+
+#: tools.py:761
+msgid "Check for missing manual page(s)"
+msgstr ""
+
+#: tools.py:763
+msgid "Check for cross-filesystem udev rule(s)"
+msgstr ""
+
+#: tools.py:765
+msgid "Check for cross-filesystem symlink(s)"
+msgstr ""
+
+#: tools.py:767
+msgid "Check for documentation"
+msgstr ""
+
+#: tools.py:769
+msgid "Check for module(s) in non-standard directory"
+msgstr ""
+
+#: tools.py:771
+msgid "Check for footprint consistency"
+msgstr ""
+
+#: tools.py:773
+msgid "Check for build directory trace(s)"
+msgstr ""
+
+#: tools.py:775
+msgid "Check ownership"
+msgstr ""
+
+#: tools.py:777
+msgid "Check for non-executable(s) in PATH"
+msgstr ""
+
+#: tools.py:779
+msgid "Check for overlapping executable(s) in PATH"
+msgstr ""
+
+#: tools.py:781
+msgid "Check for incorrect shebang of scripts"
+msgstr ""
+
+#: tools.py:783
+msgid "Check for incorrect or incomplete backup of files"
+msgstr ""
+
+#: tools.py:785
+msgid "Check for conflicts between targets"
+msgstr ""
+
+#: tools.py:787 tools.py:811
+msgid "Perform all checks"
+msgstr ""
+
+#: tools.py:793
+msgid "Check for explicit --enable argument(s)"
+msgstr ""
+
+#: tools.py:795
+msgid "Check for explicit --disable argument(s)"
+msgstr ""
+
+#: tools.py:797
+msgid "Check for /dev/null output redirection(s)"
+msgstr ""
+
+#: tools.py:799
+msgid "Check for missing maintainer"
+msgstr ""
+
+#: tools.py:801
+msgid "Check for FIXME/TODO note(s)"
+msgstr ""
+
+#: tools.py:803
+msgid "Check for essential variables"
+msgstr ""
+
+#: tools.py:805
+msgid "Check for unnecessary triggers invocation(s)"
+msgstr ""
+
+#: tools.py:807
+msgid "Check for user(s) being added but not deleted"
+msgstr ""
+
+#: tools.py:809
+msgid "Check for group(s) being added but not deleted"
+msgstr ""
+
+#: tools.py:825
+msgid "Display content of SRCBUILD"
+msgstr ""
+
+#: tools.py:845
+msgid "Use port for the server"
+msgstr ""
+
+#: tools.py:847
+msgid "Use address for the server"
+msgstr ""
+
+#: tools.py:851
+msgid "Set lookup directory"
+msgstr ""
+
+#: tools.py:853
+msgid "Scan cross-filesystem"
+msgstr ""
+
+#: tools.py:861
+msgid "Show SPM Tools version and exit"
+msgstr ""
+
+#: tools.py:880 tools.py:993 tools.py:1000 tools.py:1016
+msgid "DIRECTORY"
+msgstr ""
+
+#: tools.py:888
+msgid "FAST"
+msgstr ""
+
+#: tools.py:891
+msgid "ADJUST"
+msgstr ""
+
+#: tools.py:920
+msgid "MAN"
+msgstr ""
+
+#: tools.py:921
+msgid "UDEV"
+msgstr ""
+
+#: tools.py:922
+msgid "SYMLINK"
+msgstr ""
+
+#: tools.py:923
+msgid "DOC"
+msgstr ""
+
+#: tools.py:924
+msgid "MODULE"
+msgstr ""
+
+#: tools.py:926
+msgid "BUILDDIR"
+msgstr ""
+
+#: tools.py:927
+msgid "OWNERSHIP"
+msgstr ""
+
+#: tools.py:928
+msgid "EXECUTABLE"
+msgstr ""
+
+#: tools.py:929
+msgid "PATH"
+msgstr ""
+
+#: tools.py:930
+msgid "SHEBANG"
+msgstr ""
+
+#: tools.py:955
+msgid "ENABLE"
+msgstr ""
+
+#: tools.py:956
+msgid "DISABLE"
+msgstr ""
+
+#: tools.py:957
+msgid "NULL"
+msgstr ""
+
+#: tools.py:958
+msgid "MAINTAINER"
+msgstr ""
+
+#: tools.py:959
+msgid "NOTE"
+msgstr ""
+
+#: tools.py:960
+msgid "VARIABLES"
+msgstr ""
+
+#: tools.py:961
+msgid "TRIGGERS"
+msgstr ""
+
+#: tools.py:962
+msgid "USERS"
+msgstr ""
+
+#: tools.py:963
+msgid "GROUPS"
+msgstr ""
+
+#: tools.py:1008
+msgid "PORT"
+msgstr ""
+
+#: tools.py:1009
+msgid "ADDRESS"
+msgstr ""
+
+#: tools.py:1017
+msgid "CROSS"
+msgstr ""

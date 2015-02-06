@@ -1,5 +1,8 @@
 #!/bin/python2
 
+import gettext
+gettext.install('spm')
+
 import sys
 import argparse
 import subprocess
@@ -29,7 +32,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.4.1 (86588ee)"
+app_version = "1.5.0 (ed14a61)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -54,7 +57,7 @@ class Check(object):
     def main(self):
         ''' Check if runtime dependencies of target are satisfied '''
         for target in self.check_targets:
-            message.sub_info('Checking', target)
+            message.sub_info(_('Checking'), target)
             target_metadata = os.path.join(libspm.LOCAL_DIR, target, 'metadata')
             target_footprint = database.local_footprint(target)
             target_depends = database.local_metadata(target, 'depends')
@@ -71,10 +74,10 @@ class Check(object):
                     if '/include/' in sfile or '/share/man' in sfile \
                         or '/share/locale/' in sfile or '/share/i18n/' in sfile \
                         or '/share/info/' in sfile:
-                        message.sub_debug('Skipping', sfile)
+                        message.sub_debug(_('Skipping'), sfile)
                         continue
 
-                message.sub_debug('Path', sfile)
+                message.sub_debug(_('Path'), sfile)
                 smime = misc.file_mime(sfile)
                 if smime == 'application/x-executable' or smime == 'application/x-sharedlib':
                     libraries = misc.system_scanelf(sfile)
@@ -83,7 +86,7 @@ class Check(object):
                     for lib in libraries.split(','):
                         match = database.local_belongs(lib)
                         if match and len(match) > 1:
-                            message.sub_warning('Multiple providers for %s' % lib, match)
+                            message.sub_warning(_('Multiple providers for %s') % lib, match)
                             if target in match:
                                 match = target
                             else:
@@ -93,16 +96,16 @@ class Check(object):
                             target_adepends.append(match)
 
                         if match == target or misc.string_search(lib, target_footprint):
-                            message.sub_debug('Library needed but in self', lib)
+                            message.sub_debug(_('Library needed but in self'), lib)
                         elif match and match in target_depends:
-                            message.sub_debug('Library needed but in depends', match)
+                            message.sub_debug(_('Library needed but in depends'), match)
                         elif match and not match in target_depends:
-                            message.sub_debug('Library needed but in local', match)
+                            message.sub_debug(_('Library needed but in local'), match)
                             target_depends.append(match)
                         elif libspm.IGNORE_MISSING:
-                            message.sub_warning('Library needed, not in any local', lib)
+                            message.sub_warning(_('Library needed, not in any local'), lib)
                         else:
-                            message.sub_critical('Library needed, not in any local', lib)
+                            message.sub_critical(_('Library needed, not in any local'), lib)
                             missing_detected = True
 
                 elif smime == 'text/plain' or smime == 'text/x-shellscript' \
@@ -120,7 +123,7 @@ class Check(object):
                         fmatch = fmatch[0].replace('#!', '').strip().split()[0]
                         match = database.local_belongs(fmatch, exact=True, escape=False)
                         if match and len(match) > 1:
-                            message.sub_warning('Multiple providers for %s' % fmatch, match)
+                            message.sub_warning(_('Multiple providers for %s') % fmatch, match)
                             if target in match:
                                 match = target
                             else:
@@ -131,26 +134,26 @@ class Check(object):
 
                         if match == target or misc.string_search(fmatch, \
                             target_footprint, exact=True, escape=False):
-                            message.sub_debug('Dependency needed but in self', match)
+                            message.sub_debug(_('Dependency needed but in self'), match)
                         elif match and match in target_depends:
-                            message.sub_debug('Dependency needed but in depends', match)
+                            message.sub_debug(_('Dependency needed but in depends'), match)
                         elif match and not match in target_depends:
-                            message.sub_debug('Dependency needed but in local', match)
+                            message.sub_debug(_('Dependency needed but in local'), match)
                             target_depends.append(match)
                         elif libspm.IGNORE_MISSING:
-                            message.sub_warning('Dependency needed, not in any local', fmatch)
+                            message.sub_warning(_('Dependency needed, not in any local'), fmatch)
                         else:
-                            message.sub_critical('Dependency needed, not in any local', fmatch)
+                            message.sub_critical(_('Dependency needed, not in any local'), fmatch)
                             missing_detected = True
             if missing_detected:
                 sys.exit(2)
 
             for a in target_depends:
                 if not a in target_adepends:
-                    message.sub_warning('Unnecessary explicit dependencies', a)
+                    message.sub_warning(_('Unnecessary explicit dependencies'), a)
 
             if self.do_adjust:
-                message.sub_debug('Adjusting target depends')
+                message.sub_debug(_('Adjusting target depends'))
                 content = misc.file_read(target_metadata)
                 for line in misc.file_readlines(target_metadata):
                     if line.startswith('depends='):
@@ -172,7 +175,7 @@ class Clean(object):
                 continue
 
             if not database.local_rdepends(target):
-                message.sub_warning('Unneded target', target)
+                message.sub_warning(_('Unneded target'), target)
 
 
 class Dist(object):
@@ -189,7 +192,7 @@ class Dist(object):
         for target in self.targets:
             target_directory = database.remote_search(target)
             if not target_directory:
-                message.sub_critical('Invalid target', target)
+                message.sub_critical(_('Invalid target'), target)
                 sys.exit(2)
             # in case target is a directory ending with a slash basename gets
             # confused so normalize the path before first
@@ -201,7 +204,7 @@ class Dist(object):
             target_sources = database.remote_metadata(target, 'sources')
 
             if self.do_sources:
-                message.sub_info('Preparing sources')
+                message.sub_info(_('Preparing sources'))
                 for src_url in target_sources:
                     src_base = os.path.basename(src_url)
                     src_file = os.path.join(target_directory, src_base)
@@ -209,13 +212,13 @@ class Dist(object):
 
                     if src_url.startswith('git://') or src_url.endswith('.git'):
                         if not internet:
-                            message.sub_warning('Internet connection is down')
+                            message.sub_warning(_('Internet connection is down'))
                         elif os.path.isdir(src_file):
-                            message.sub_debug('Updating repository', src_url)
+                            message.sub_debug(_('Updating Git repository'), src_url)
                             misc.system_command((misc.whereis('git'), \
                                 'pull', '--depth=1', src_url), cwd=src_file)
                         else:
-                            message.sub_debug('Cloning initial copy', src_url)
+                            message.sub_debug(_('Cloning Git repository'), src_url)
                             misc.system_command((misc.whereis('git'), \
                                 'clone', '--depth=1', src_url, src_file))
                         continue
@@ -223,31 +226,31 @@ class Dist(object):
                     elif src_url.startswith(('http://', 'https://', 'ftp://', \
                         'ftps://')):
                         if not internet:
-                            message.sub_warning('Internet connection is down')
+                            message.sub_warning(_('Internet connection is down'))
                         elif libspm.MIRROR:
                             for mirror in libspm.MIRRORS:
                                 url = mirror + '/' + src_base
-                                message.sub_debug('Checking mirror', mirror)
+                                message.sub_debug(_('Checking mirror'), mirror)
                                 if misc.ping(url):
                                     src_url = url
                                     break
 
                         if os.path.isfile(src_file) and internet:
-                            message.sub_debug('Checking', src_file)
+                            message.sub_debug(_('Checking'), src_file)
                             if misc.fetch_check(src_url, src_file):
-                                message.sub_debug('Already fetched', src_url)
+                                message.sub_debug(_('Already fetched'), src_url)
                             else:
-                                message.sub_warning('Re-fetching', src_url)
+                                message.sub_warning(_('Re-fetching'), src_url)
                                 misc.fetch(src_url, src_file)
                         elif internet:
-                            message.sub_debug('Fetching', src_url)
+                            message.sub_debug(_('Fetching'), src_url)
                             misc.fetch(src_url, src_file)
 
-            message.sub_info('Compressing', target_distfile)
+            message.sub_info(_('Compressing'), target_distfile)
             misc.archive_compress((target_directory,), target_distfile, target_directory)
 
             if self.do_clean:
-                message.sub_info('Purging sources')
+                message.sub_info(_('Purging sources'))
                 for src_url in target_sources:
                     src_base = os.path.basename(src_url)
 
@@ -255,11 +258,11 @@ class Dist(object):
                     if src_url.startswith(('http://', 'https://', 'ftp://', \
                         'ftps://')):
                         if os.path.isfile(src_file):
-                            message.sub_debug('Removing', src_file)
+                            message.sub_debug(_('Removing'), src_file)
                             os.unlink(src_file)
                     elif src_url.startswith('git://') or src_url.endswith('.git'):
                         if os.path.isdir(src_file):
-                            message.sub_debug('Removing', src_file)
+                            message.sub_debug(_('Removing'), src_file)
                             misc.dir_remove(src_file)
 
 
@@ -288,67 +291,67 @@ class Lint(object):
         ''' Looks for target match and then execute action for every target '''
         for target in database.local_all(basename=True):
             if target in self.targets:
-                message.sub_info('Checking', target)
+                message.sub_info(_('Checking'), target)
                 target_footprint = database.local_footprint(target)
 
                 if self.man:
                     if not misc.string_search('/share/man/', target_footprint):
-                        message.sub_warning('No manual page(s)')
+                        message.sub_warning(_('No manual page(s)'))
 
                 if self.udev:
                     if misc.string_search('(\\s|^)/lib/udev/rules.d/', \
                         target_footprint, escape=False) \
                         and misc.string_search('(\\s|^)/usr/(s)?bin/', \
                         target_footprint, escape=False):
-                        message.sub_warning('Cross-filesystem udev rule(s)')
+                        message.sub_warning(_('Cross-filesystem udev rule(s)'))
 
                 if self.symlink:
                     for sfile in target_footprint.splitlines():
                         if os.path.exists(sfile) and os.path.islink(sfile):
                             if not sfile.startswith('/usr/') \
                                 and os.path.realpath(sfile).startswith('/usr/'):
-                                message.sub_warning('Cross-filesystem symlink', sfile)
+                                message.sub_warning(_('Cross-filesystem symlink'), sfile)
                             elif not sfile.startswith('/var/') \
                                 and os.path.realpath(sfile).startswith('/var/'):
-                                message.sub_warning('Cross-filesystem symlink', sfile)
+                                message.sub_warning(_('Cross-filesystem symlink'), sfile)
                             elif not sfile.startswith('/boot/') \
                                 and os.path.realpath(sfile).startswith('/boot/'):
-                                message.sub_warning('Cross-filesystem symlink', sfile)
+                                message.sub_warning(_('Cross-filesystem symlink'), sfile)
 
                 if self.doc:
                     if misc.string_search('/doc/|/gtk-doc', target_footprint, escape=False):
-                        message.sub_warning('Documentation provided')
+                        message.sub_warning(_('Documentation provided'))
 
                 if self.module:
                     for sfile in target_footprint.splitlines():
                         # FIXME: compressed modules
                         if sfile.endswith('.ko') and not os.path.dirname(sfile).endswith('/misc'):
-                            message.sub_warning('Extra module(s) in non-standard directory')
+                            message.sub_warning(_('Extra module(s) in non-standard directory'))
 
                 if self.footprint:
                     if not target_footprint:
-                        message.sub_warning('Empty footprint')
+                        message.sub_warning(_('Empty footprint'))
                     for sfile in target_footprint.splitlines():
                         if not os.path.exists(sfile):
-                            message.sub_warning('File does not exist', sfile)
+                            message.sub_warning(_('File does not exist'), sfile)
 
                 if self.builddir:
                     for sfile in target_footprint.splitlines():
                         if os.path.islink(sfile):
                             continue
                         elif not os.path.exists(sfile):
-                            message.sub_debug('File does not exist', sfile)
+                            message.sub_debug(_('File does not exist'), sfile)
                             continue
 
                         if misc.file_search(libspm.BUILD_DIR, sfile):
-                            message.sub_warning('Build directory trace(s)', sfile)
+                            message.sub_warning(_('Build directory trace(s)'), sfile)
 
                 if self.ownership:
                     for sfile in target_footprint.splitlines():
                         if os.path.islink(sfile):
                             continue
                         elif not os.path.exists(sfile):
-                            message.sub_debug('File does not exist', sfile)
+                            message.sub_debug(_('File does not exist'), sfile)
                             continue
 
                         stat = os.stat(sfile)
@@ -362,25 +365,25 @@ class Lint(object):
                         except KeyError:
                             unkown = True
                         if unkown:
-                            message.sub_warning('Unknown owner of', sfile)
+                            message.sub_warning(_('Unknown owner of'), sfile)
 
                 if self.executable:
                     # FIXME: false positives
                     for sfile in target_footprint.splitlines():
                         if not os.path.exists(sfile):
-                            message.sub_debug('File does not exist', sfile)
+                            message.sub_debug(_('File does not exist'), sfile)
                             continue
                         if os.path.islink(sfile):
                             continue
 
                         if sfile.startswith(('/bin', '/sbin', '/usr/bin', '/usr/sbin')) \
                             and not os.access(sfile, os.X_OK):
-                            message.sub_warning('File in PATH is not executable', sfile)
+                            message.sub_warning(_('File in PATH is not executable'), sfile)
 
                 if self.path:
                     for sfile in target_footprint.splitlines():
                         if not os.path.exists(sfile):
-                            message.sub_debug('File does not exist', sfile)
+                            message.sub_debug(_('File does not exist'), sfile)
                             continue
 
                         if sfile.startswith(('/bin', '/sbin', '/usr/bin', '/usr/sbin')):
@@ -391,14 +394,14 @@ class Lint(object):
                                 regex = '(/usr)?/(s)?bin/' + re.escape(os.path.basename(sfile)) + '(\\s|$)'
                                 match = database.local_belongs(regex, escape=False)
                                 if len(match) > 1:
-                                    message.sub_warning('File in PATH overlaps with', match)
+                                    message.sub_warning(_('File in PATH overlaps with'), match)
 
                 if self.shebang:
                     for sfile in target_footprint.splitlines():
                         if os.path.islink(sfile):
                             continue
                         elif not os.path.exists(sfile):
-                            message.sub_debug('File does not exist', sfile)
+                            message.sub_debug(_('File does not exist'), sfile)
                             continue
                         smime = misc.file_mime(sfile)
                         if smime == 'text/plain' or smime == 'text/x-shellscript' \
@@ -415,15 +418,15 @@ class Lint(object):
                             if match:
                                 match = match[0].replace('#!', '').strip().split()[0]
                                 if not database.local_belongs(match, exact=True, escape=False):
-                                    message.sub_warning('Invalid shebang', sfile)
+                                    message.sub_warning(_('Invalid shebang'), sfile)
 
                 if self.backup:
                     for sfile in target_footprint.splitlines():
                         backups = database.remote_metadata(target, 'backup')
                         if not os.path.exists(sfile) and sfile.lstrip('/') in backups:
-                            message.sub_warning('Possibly unnecessary backup of file', sfile)
+                            message.sub_warning(_('Possibly unnecessary backup of file'), sfile)
                         elif sfile.endswith('.conf') and not sfile.lstrip('/') in backups:
-                            message.sub_warning('Possibly undefined backup of file', sfile)
+                            message.sub_warning(_('Possibly undefined backup of file'), sfile)
 
                 if self.conflicts:
                     for sfile in target_footprint.splitlines():
@@ -431,7 +434,7 @@ class Lint(object):
                             if local == target:
                                 continue
                             if sfile.lstrip('/') in database.local_footprint(local).splitlines():
-                                message.sub_warning('Possible conflicting file with ' + local, sfile)
+                                message.sub_warning(_('Possibly conflicting file with %s') % local, sfile)
 
 
 class Sane(object):
@@ -455,39 +458,39 @@ class Sane(object):
         for target in self.targets:
             match = database.remote_search(target)
             if match:
-                message.sub_info('Checking', target)
+                message.sub_info(_('Checking'), target)
                 target_srcbuild = os.path.join(match, 'SRCBUILD')
 
                 if self.enable:
                     if misc.file_search('--enable-', target_srcbuild):
-                        message.sub_warning('Explicit --enable argument(s)')
+                        message.sub_warning(_('Explicit --enable argument(s)'))
                     if misc.file_search('--with-', target_srcbuild):
-                        message.sub_warning('Explicit --with argument(s)')
+                        message.sub_warning(_('Explicit --with argument(s)'))
 
                 if self.disable:
                     if misc.file_search('--disable-', target_srcbuild):
-                        message.sub_warning('Explicit --disable argument(s)')
+                        message.sub_warning(_('Explicit --disable argument(s)'))
                     if misc.file_search('--without-', target_srcbuild):
-                        message.sub_warning('Explicit --without argument(s)')
+                        message.sub_warning(_('Explicit --without argument(s)'))
 
                 if self.null:
                     if misc.file_search('/dev/null', target_srcbuild):
-                        message.sub_warning('Possible /dev/null output redirection')
+                        message.sub_warning(_('Possible /dev/null output redirection'))
 
                 if self.maintainer:
                     if not misc.file_search('(\\s|^)# [mM]aintainer:', target_srcbuild, escape=False):
-                        message.sub_warning('No maintainer mentioned')
+                        message.sub_warning(_('No maintainer mentioned'))
 
                 if self.note:
                     if misc.file_search('(FIXME|TODO)', target_srcbuild, escape=False):
-                        message.sub_warning('FIXME/TODO note(s)')
+                        message.sub_warning(_('FIXME/TODO note(s)'))
 
                 if self.variables:
                     content = misc.file_read(target_srcbuild)
                     if not 'version=' in content or not 'description=' in content:
-                        message.sub_warning('Essential variable(s) missing')
+                        message.sub_warning(_('Essential variable(s) missing'))
                     if 'version=(' in content or 'description=(' in content:
-                        message.sub_warning('String variable(s) defined as array')
+                        message.sub_warning(_('String variable(s) defined as array'))
                     # TODO: check for arrays defined as strings
 
                 if self.triggers:
@@ -499,17 +502,17 @@ class Sane(object):
                     regex += '|gtk-update-icon-cache|mkinitfs|grub-mkconfig'
                     regex += '|update-grub)(?:\\s|$)'
                     if misc.file_search(regex, target_srcbuild, escape=False):
-                        message.sub_warning('Possible unnecessary triggers invocation(s)')
+                        message.sub_warning(_('Possible unnecessary triggers invocation(s)'))
 
                 if self.users:
                     if misc.file_search('useradd|adduser', target_srcbuild, escape=False) \
                         and not misc.file_search('userdel|deluser', target_srcbuild, escape=False):
-                        message.sub_warning('User(s) added but not deleted')
+                        message.sub_warning(_('User(s) added but not deleted'))
 
                 if self.groups:
                     if misc.file_search('groupadd|addgroup', target_srcbuild, escape=False) \
                         and not misc.file_search('groupdel|delgroup', target_srcbuild, escape=False):
-                        message.sub_warning('Group(s) added but not deleted')
+                        message.sub_warning(_('Group(s) added but not deleted'))
 
 
 class Merge(object):
@@ -518,9 +521,11 @@ class Merge(object):
         self.targets = database.local_all(basename=True)
 
     def merge(self, sfile):
-        message.sub_warning('Backup file detected', sfile + '.backup')
-        editor = os.environ.get('EDITOR', misc.whereis('vim'))
-        action = raw_input('''
+        message.sub_warning(_('Backup file detected'), sfile + '.backup')
+        editor = os.environ.get('EDITOR')
+        if not editor:
+            editor = misc.whereis('vim')
+        action = raw_input(_('''
     What do you want to do:
 
         1. View difference
@@ -529,7 +534,7 @@ class Merge(object):
         4. Replace original with backup
         5. Remove backup
         *. Continue
-''')
+'''))
         if action == '1':
             print('\n' + '*' * 80)
             for line in list(difflib.Differ().compare( \
@@ -551,7 +556,7 @@ class Merge(object):
 
     def main(self):
         for target in self.targets:
-            message.sub_info('Checking', target)
+            message.sub_info(_('Checking'), target)
             backups = database.remote_metadata(target, 'backup')
             if not backups:
                 backups = []
@@ -594,7 +599,7 @@ class Which(object):
                 if self.plain:
                     print(target)
                 else:
-                    message.sub_info('Match', target)
+                    message.sub_info(_('Match'), target)
                 if self.cat:
                     print(misc.file_read(target + '/SRCBUILD'))
 
@@ -616,7 +621,7 @@ class Pack(object):
                 # add metadata directory, it is not listed in the footprint
                 content.append(os.path.join(libspm.LOCAL_DIR, target))
 
-                message.sub_info('Compressing', target_packfile)
+                message.sub_info(_('Compressing'), target_packfile)
                 misc.archive_compress(content, target_packfile, '/')
 
 
@@ -656,19 +661,19 @@ class Pkg(object):
         for target in self.targets:
             urls = list(self.get_git_links(target))
             if urls:
-                message.sub_info('Fetching package files', target)
-                message.sub_debug('Web webpage', os.path.dirname(urls[0][0]))
+                message.sub_info(_('Fetching package files'), target)
+                message.sub_debug(_('Webpage'), os.path.dirname(urls[0][0]))
                 pkgdir = os.path.join(self.directory, target)
                 misc.dir_create(pkgdir)
                 for href, name in urls:
-                    message.sub_debug('Retrieving', href)
+                    message.sub_debug(_('Retrieving'), href)
                     misc.fetch(href, os.path.join(pkgdir, name))
             else:
                 not_found.append(target)
 
         if not_found:
             for target in not_found:
-                message.sub_critical('Target not found', target)
+                message.sub_critical(_('Target not found'), target)
             sys.exit(2)
 
 
@@ -681,7 +686,7 @@ class Serve(object):
     def main(self):
         httpd = None
         try:
-            message.sub_info('Serving caches directory')
+            message.sub_info(_('Serving caches directory'))
             os.chdir(libspm.CACHE_DIR)
             handler = SimpleHTTPServer.SimpleHTTPRequestHandler
             httpd = SocketServer.TCPServer((self.address, self.port), handler)
@@ -700,16 +705,16 @@ class Disowned(object):
 
     def main(self):
         if not self.plain:
-            message.sub_info('Caching host files, this may take a while')
+            message.sub_info(_('Caching host files, this may take a while'))
         lhostfiles = misc.list_files(self.directory, self.cross)
         if not self.plain:
-            message.sub_info('Searching for disowned files')
+            message.sub_info(_('Searching for disowned files'))
         for sfile in lhostfiles:
             if not database.local_belongs(sfile, True):
                 if self.plain:
                     print(sfile)
                 else:
-                    message.sub_info('Disowned file', sfile)
+                    message.sub_info(_('Disowned file'), sfile)
 
 
 try:
@@ -723,89 +728,89 @@ try:
 
     parser = argparse.ArgumentParser(prog='spm-tools', \
         description='Source Package Manager Tools', \
-        epilog='NOTE: Some features are available only to the root user.')
+        epilog=_('NOTE: Some features are available only to the root user.'))
     subparsers = parser.add_subparsers(dest='mode')
 
     if EUID == 0:
         dist_parser = subparsers.add_parser('dist')
         dist_parser.add_argument('-s', '--sources', action='store_true', \
-            help='Include all sources in the archive')
+            help=_('Include all sources in the archive'))
         dist_parser.add_argument('-c', '--clean', action='store_true', \
-            help='Clean all sources after creating archive')
+            help=_('Clean all sources after creating archive'))
         dist_parser.add_argument('-d', '--directory', type=str, \
-            default=misc.dir_current(), help='Set output directory')
+            default=misc.dir_current(), help=_('Set output directory'))
         dist_parser.add_argument('TARGETS', nargs='+', type=str, \
-            help='Targets to apply actions on')
+            help=_('Targets to apply actions on'))
 
     check_parser = subparsers.add_parser('check')
     check_parser.add_argument('-f', '--fast', action='store_true', \
-        help='Skip some files/links')
+        help=_('Skip some files/links'))
     check_parser.add_argument('-a', '--adjust', action='store_true', \
-        help='Adjust target depends')
+        help=_('Adjust target depends'))
     check_parser.add_argument('-D', '--depends', action='store_true', \
-        help='Check dependencies of target')
+        help=_('Check dependencies of target'))
     check_parser.add_argument('-R', '--reverse', action='store_true', \
-        help='Check reverse dependencies of target')
+        help=_('Check reverse dependencies of target'))
     check_parser.add_argument('TARGETS', nargs='+', type=str, \
-        help='Targets to apply actions on')
+        help=_('Targets to apply actions on'))
 
     clean_parser = subparsers.add_parser('clean')
 
     lint_parser = subparsers.add_parser('lint')
     lint_parser.add_argument('-m', '--man', action='store_true', \
-        help='Check for missing manual page(s)')
+        help=_('Check for missing manual page(s)'))
     lint_parser.add_argument('-u', '--udev', action='store_true', \
-        help='Check for cross-filesystem udev rule(s)')
+        help=_('Check for cross-filesystem udev rule(s)'))
     lint_parser.add_argument('-s', '--symlink', action='store_true', \
-        help='Check for cross-filesystem symlink(s)')
+        help=_('Check for cross-filesystem symlink(s)'))
     lint_parser.add_argument('-d', '--doc', action='store_true', \
-        help='Check for documentation')
+        help=_('Check for documentation'))
     lint_parser.add_argument('-M', '--module', action='store_true', \
-        help='Check for module(s) in non-standard directory')
+        help=_('Check for module(s) in non-standard directory'))
     lint_parser.add_argument('-f', '--footprint', action='store_true', \
-        help='Check for footprint consistency')
+        help=_('Check for footprint consistency'))
     lint_parser.add_argument('-b', '--builddir', action='store_true', \
-        help='Check for build directory trace(s)')
+        help=_('Check for build directory trace(s)'))
     lint_parser.add_argument('-o', '--ownership', action='store_true', \
-        help='Check ownership')
+        help=_('Check ownership'))
     lint_parser.add_argument('-e', '--executable', action='store_true', \
-        help='Check for non-executable(s) in PATH')
+        help=_('Check for non-executable(s) in PATH'))
     lint_parser.add_argument('-p', '--path', action='store_true', \
-        help='Check for overlapping executable(s) in PATH')
+        help=_('Check for overlapping executable(s) in PATH'))
     lint_parser.add_argument('-n', '--shebang', action='store_true', \
-        help='Check for incorrect shebang of scripts')
+        help=_('Check for incorrect shebang of scripts'))
     lint_parser.add_argument('-k', '--backup', action='store_true', \
-        help='Check for incorrect or incomplete backup of files')
+        help=_('Check for incorrect or incomplete backup of files'))
     lint_parser.add_argument('-c', '--conflicts', action='store_true', \
-        help='Check for conflicts between targets')
+        help=_('Check for conflicts between targets'))
     lint_parser.add_argument('-a', '--all', action='store_true', \
-        help='Perform all checks')
+        help=_('Perform all checks'))
     lint_parser.add_argument('TARGETS', nargs='+', type=str, \
-        help='Targets to apply actions on')
+        help=_('Targets to apply actions on'))
 
     sane_parser = subparsers.add_parser('sane')
     sane_parser.add_argument('-e', '--enable', action='store_true', \
-        help='Check for explicit --enable argument(s)')
+        help=_('Check for explicit --enable argument(s)'))
     sane_parser.add_argument('-d', '--disable', action='store_true', \
-        help='Check for explicit --disable argument(s)')
+        help=_('Check for explicit --disable argument(s)')
     sane_parser.add_argument('-n', '--null', action='store_true', \
-        help='Check for /dev/null output redirection(s)')
+        help=_('Check for /dev/null output redirection(s)'))
     sane_parser.add_argument('-m', '--maintainer', action='store_true', \
-        help='Check for missing maintainer')
+        help=_('Check for missing maintainer'))
     sane_parser.add_argument('-N', '--note', action='store_true', \
-        help='Check for FIXME/TODO note(s)')
+        help=_('Check for FIXME/TODO note(s)'))
     sane_parser.add_argument('-v', '--variables', action='store_true', \
-        help='Check for essential variables')
+        help=_('Check for essential variables'))
     sane_parser.add_argument('-t', '--triggers', action='store_true', \
-        help='Check for unnecessary triggers invocation(s)')
+        help=_('Check for unnecessary triggers invocation(s)'))
     sane_parser.add_argument('-u', '--users', action='store_true', \
-        help='Check for user(s) being added but not deleted')
+        help=_('Check for user(s) being added but not deleted'))
     sane_parser.add_argument('-g', '--groups', action='store_true', \
-        help='Check for group(s) being added but not deleted')
+        help=_('Check for group(s) being added but not deleted'))
     sane_parser.add_argument('-a', '--all', action='store_true', \
-        help='Perform all checks')
+        help=_('Perform all checks'))
     sane_parser.add_argument('TARGETS', nargs='+', type=str, \
-        help='Targets to apply actions on')
+        help=_('Targets to apply actions on'))
 
     if EUID == 0:
         merge_parser = subparsers.add_parser('merge')
@@ -813,47 +818,47 @@ try:
     if EUID == 0:
         edit_parser = subparsers.add_parser('edit')
         edit_parser.add_argument('TARGETS', nargs='+', type=str, \
-            help='Targets to apply actions on')
+            help=_('Targets to apply actions on'))
 
     which_parser = subparsers.add_parser('which')
     which_parser.add_argument('-c', '--cat', action='store_true', \
-        help='Display content of SRCBUILD')
+        help=_('Display content of SRCBUILD'))
     which_parser.add_argument('-p', '--plain', action='store_true', \
-        help='Print in plain format')
+        help=_('Print in plain format'))
     which_parser.add_argument('PATTERN', type=str, \
-        help='Pattern to search for in remote targets')
+        help=_('Pattern to search for in remote targets'))
 
     pack_parser = subparsers.add_parser('pack')
     pack_parser.add_argument('-d', '--directory', type=str, \
-        default=misc.dir_current(), help='Set output directory')
+        default=misc.dir_current(), help=_('Set output directory'))
     pack_parser.add_argument('TARGETS', nargs='+', type=str, \
-        help='Targets to apply actions on')
+        help=_('Targets to apply actions on'))
 
     pkg_parser = subparsers.add_parser('pkg')
     pkg_parser.add_argument('-d', '--directory', type=str, \
-        default=misc.dir_current(), help='Set output directory')
+        default=misc.dir_current(), help=_('Set output directory'))
     pkg_parser.add_argument('TARGETS', nargs='+', type=str, \
-        help='Targets to apply actions on')
+        help=_('Targets to apply actions on'))
 
     serve_parser = subparsers.add_parser('serve')
     serve_parser.add_argument('-p', '--port', action='store', \
-        type=int, default=8000, help='Use port for the server')
+        type=int, default=8000, help=_('Use port for the server'))
     serve_parser.add_argument('-a', '--address', action='store', \
-        type=str, default='', help='Use address for the server')
+        type=str, default='', help=_('Use address for the server'))
 
     disowned_parser = subparsers.add_parser('disowned')
     disowned_parser.add_argument('-d', '--directory', type=str, \
-        default='/', help='Set lookup directory')
+        default='/', help=_('Set lookup directory'))
     disowned_parser.add_argument('-c', '--cross', action='store_true', \
-        help='Scan cross-filesystem')
+        help=_('Scan cross-filesystem'))
     disowned_parser.add_argument('-p', '--plain', action='store_true', \
-        help='Print in plain format')
+        help=_('Print in plain format'))
 
     parser.add_argument('--debug', nargs=0, action=OverrideDebug, \
-        help='Enable debug messages')
+        help=_('Enable debug messages'))
     parser.add_argument('--version', action='version', \
-        version='Source Package Manager v' + app_version, \
-        help='Show SPM Tools version and exit')
+        version='Source Package Manager Tools v%s' % app_version, \
+        help=_('Show SPM Tools version and exit'))
 
     ARGS = parser.parse_args()
 
@@ -869,29 +874,29 @@ try:
                 ARGS.TARGETS[position:position+1] = \
                     database.remote_alias(alias)
 
-        message.info('Runtime information')
-        message.sub_info('SOURCES', ARGS.sources)
-        message.sub_info('CLEAN', ARGS.clean)
-        message.sub_info('DIRECTORY', ARGS.directory)
-        message.sub_info('TARGETS', ARGS.TARGETS)
-        message.info('Poking remotes...')
+        message.info(_('Runtime information'))
+        message.sub_info(_('SOURCES'), ARGS.sources)
+        message.sub_info(_('CLEAN'), ARGS.clean)
+        message.sub_info(_('DIRECTORY'), ARGS.directory)
+        message.sub_info(_('TARGETS'), ARGS.TARGETS)
+        message.info(_('Poking remotes...'))
         m = Dist(ARGS.TARGETS, ARGS.sources, ARGS.clean, ARGS.directory)
         m.main()
 
     elif ARGS.mode == 'check':
-        message.info('Runtime information')
-        message.sub_info('FAST', ARGS.fast)
-        message.sub_info('DEPENDS', ARGS.depends)
-        message.sub_info('REVERSE', ARGS.reverse)
-        message.sub_info('ADJUST', ARGS.adjust)
-        message.sub_info('TARGETS', ARGS.TARGETS)
-        message.info('Poking locals...')
+        message.info(_('Runtime information'))
+        message.sub_info(_('FAST'), ARGS.fast)
+        message.sub_info(_('DEPENDS'), ARGS.depends)
+        message.sub_info(_('REVERSE'), ARGS.reverse)
+        message.sub_info(_('ADJUST'), ARGS.adjust)
+        message.sub_info(_('TARGETS'), ARGS.TARGETS)
+        message.info(_('Poking locals...')
         m = Check(ARGS.TARGETS, ARGS.fast, ARGS.depends, ARGS.reverse, \
             ARGS.adjust)
         m.main()
 
     elif ARGS.mode == 'clean':
-        message.info('Poking locals...')
+        message.info(_('Poking locals...'))
         m = Clean()
         m.main()
 
@@ -911,22 +916,22 @@ try:
             ARGS.backup = True
             ARGS.conflicts = True
 
-        message.info('Runtime information')
-        message.sub_info('MAN', ARGS.man)
-        message.sub_info('UDEV', ARGS.udev)
-        message.sub_info('SYMLINK', ARGS.symlink)
-        message.sub_info('DOC', ARGS.doc)
-        message.sub_info('MODULE', ARGS.module)
-        message.sub_info('FOOTPRINT', ARGS.footprint)
-        message.sub_info('BUILDDIR', ARGS.builddir)
-        message.sub_info('OWNERSHIP', ARGS.ownership)
-        message.sub_info('EXECUTABLE', ARGS.executable)
-        message.sub_info('PATH', ARGS.path)
-        message.sub_info('SHEBANG', ARGS.shebang)
-        message.sub_info('BACKUP', ARGS.backup)
-        message.sub_info('CONFLICTS', ARGS.conflicts)
-        message.sub_info('TARGETS', ARGS.TARGETS)
-        message.info('Poking locals...')
+        message.info(_('Runtime information'))
+        message.sub_info(_('MAN'), ARGS.man)
+        message.sub_info(_('UDEV'), ARGS.udev)
+        message.sub_info(_('SYMLINK'), ARGS.symlink)
+        message.sub_info(_('DOC'), ARGS.doc)
+        message.sub_info(_('MODULE'), ARGS.module)
+        message.sub_info(_('FOOTPRINT'), ARGS.footprint)
+        message.sub_info(_('BUILDDIR'), ARGS.builddir)
+        message.sub_info(_('OWNERSHIP'), ARGS.ownership)
+        message.sub_info(_('EXECUTABLE'), ARGS.executable)
+        message.sub_info(_('PATH'), ARGS.path)
+        message.sub_info(_('SHEBANG'), ARGS.shebang)
+        message.sub_info(_('BACKUP'), ARGS.backup)
+        message.sub_info(_('CONFLICTS'), ARGS.conflicts)
+        message.sub_info(_('TARGETS'), ARGS.TARGETS)
+        message.info(_('Poking locals...'))
 
         m = Lint(ARGS.TARGETS, ARGS.man, ARGS.udev, ARGS.symlink, ARGS.doc, \
             ARGS.module, ARGS.footprint, ARGS.builddir, ARGS.ownership, \
@@ -946,18 +951,18 @@ try:
             ARGS.users = True
             ARGS.groups = True
 
-        message.info('Runtime information')
-        message.sub_info('ENABLE', ARGS.enable)
-        message.sub_info('DISABLE', ARGS.disable)
-        message.sub_info('NULL', ARGS.null)
-        message.sub_info('MAINTAINER', ARGS.maintainer)
-        message.sub_info('NOTE', ARGS.note)
-        message.sub_info('VARIABLES', ARGS.variables)
-        message.sub_info('TRIGGERS', ARGS.triggers)
-        message.sub_info('USERS', ARGS.users)
-        message.sub_info('GROUPS', ARGS.groups)
-        message.sub_info('TARGETS', ARGS.TARGETS)
-        message.info('Poking remotes...')
+        message.info(_('Runtime information'))
+        message.sub_info(_('ENABLE'), ARGS.enable)
+        message.sub_info(_('DISABLE'), ARGS.disable)
+        message.sub_info(_('NULL'), ARGS.null)
+        message.sub_info(_('MAINTAINER'), ARGS.maintainer)
+        message.sub_info(_('NOTE'), ARGS.note)
+        message.sub_info(_('VARIABLES'), ARGS.variables)
+        message.sub_info(_('TRIGGERS'), ARGS.triggers)
+        message.sub_info(_('USERS'), ARGS.users)
+        message.sub_info(_('GROUPS'), ARGS.groups)
+        message.sub_info(_('TARGETS'), ARGS.TARGETS)
+        message.info(_('Poking remotes...'))
 
         m = Sane(ARGS.TARGETS, ARGS.enable, ARGS.disable, ARGS.null, \
             ARGS.maintainer, ARGS.note, ARGS.variables, ARGS.triggers, \
@@ -965,51 +970,51 @@ try:
         m.main()
 
     elif ARGS.mode == 'merge':
-        message.info('Poking locals...')
+        message.info(_('Poking locals...'))
         m = Merge()
         m.main()
 
     elif ARGS.mode == 'edit':
-        message.info('Runtime information')
-        message.sub_info('TARGETS', ARGS.TARGETS)
-        message.info('Poking remotes...')
+        message.info(_('Runtime information'))
+        message.sub_info(_('TARGETS'), ARGS.TARGETS)
+        message.info(_('Poking remotes...'))
         m = Edit(ARGS.TARGETS)
         m.main()
 
     elif ARGS.mode == 'which':
         if not ARGS.plain:
-            message.info('Runtime information')
-            message.sub_info('PATTERN', ARGS.PATTERN)
+            message.info(_('Runtime information'))
+            message.sub_info(_('PATTERN', ARGS.PATTERN)
         m = Which(ARGS.PATTERN, ARGS.cat, ARGS.plain)
         m.main()
 
     elif ARGS.mode == 'pack':
-        message.info('Runtime information')
-        message.sub_info('DIRECTORY', ARGS.directory)
-        message.sub_info('TARGETS', ARGS.TARGETS)
+        message.info(_('Runtime information'))
+        message.sub_info(_('DIRECTORY'), ARGS.directory)
+        message.sub_info(_('TARGETS'), ARGS.TARGETS)
         m = Pack(ARGS.TARGETS, ARGS.directory)
         m.main()
 
     elif ARGS.mode == 'pkg':
-        message.info('Runtime information')
-        message.sub_info('DIRECTORY', ARGS.directory)
-        message.sub_info('TARGETS', ARGS.TARGETS)
+        message.info(_('Runtime information'))
+        message.sub_info(_('DIRECTORY'), ARGS.directory)
+        message.sub_info(_('TARGETS'), ARGS.TARGETS)
         m = Pkg(ARGS.TARGETS, ARGS.directory)
         m.main()
 
     elif ARGS.mode == 'serve':
-        message.info('Runtime information')
-        message.sub_info('CACHE_DIR', libspm.CACHE_DIR)
-        message.sub_info('PORT', ARGS.port)
-        message.sub_info('ADDRESS', ARGS.address)
+        message.info(_('Runtime information'))
+        message.sub_info(_('CACHE_DIR'), libspm.CACHE_DIR)
+        message.sub_info(_('PORT'), ARGS.port)
+        message.sub_info(_('ADDRESS'), ARGS.address)
         m = Serve(ARGS.port, ARGS.address)
         m.main()
 
     elif ARGS.mode == 'disowned':
         if not ARGS.plain:
-            message.info('Runtime information')
-            message.sub_info('DIRECTORY', ARGS.directory)
-            message.sub_info('CROSS', ARGS.cross)
+            message.info(_('Runtime information'))
+            message.sub_info(_('DIRECTORY'), ARGS.directory)
+            message.sub_info(_('CROSS'), ARGS.cross)
         m = Disowned(ARGS.directory, ARGS.cross, ARGS.plain)
         m.main()
 
