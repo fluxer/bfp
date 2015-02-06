@@ -89,7 +89,7 @@ else:
 
 # parse repositories configuration file
 if not os.path.isfile(REPOSITORIES_CONF):
-    message.warning(_('Repositories file does not exist'), REPOSITORIES_CONF)
+    message.warning(_('Repositories configuration file does not exist'), REPOSITORIES_CONF)
     REPOSITORIES = ['https://bitbucket.org/smil3y/mini.git']
 else:
     REPOSITORIES = []
@@ -107,7 +107,7 @@ else:
 
 # parse mirrors configuration file
 if not os.path.isfile(MIRRORS_CONF):
-    message.warning(_('Mirrors file does not exist'), MIRRORS_CONF)
+    message.warning(_('Mirrors configuration file does not exist'), MIRRORS_CONF)
     MIRRORS = ['http://distfiles.gentoo.org/distfiles']
 else:
     MIRRORS = []
