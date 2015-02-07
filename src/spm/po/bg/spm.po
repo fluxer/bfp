@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-07 15:08+0000\n"
-"PO-Revision-Date: 2015-02-07 15:19+0000\n"
+"POT-Creation-Date: 2015-02-07 15:35+0000\n"
+"PO-Revision-Date: 2015-02-07 15:46+0000\n"
 "Last-Translator: \n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -101,7 +101,7 @@ msgstr "Клониране на локален"
 
 #: libspm.py:336
 msgid "Updating repository"
-msgstr "Обновява се хранилище"
+msgstr "Обновявяване на хранилище"
 
 #: libspm.py:341
 msgid "Cloning remote"
@@ -118,7 +118,7 @@ msgstr "Мишената не е в никое хранилище"
 #: libspm.py:374 libspm.py:737 libspm.py:1110 libspm.py:1417 tools.py:60
 #: tools.py:239 tools.py:294 tools.py:461 tools.py:559
 msgid "Checking"
-msgstr "Проверява се"
+msgstr "Проверявака на"
 
 #: libspm.py:376
 #, python-format
@@ -175,64 +175,64 @@ msgstr "Обновяват се кеша на GIO модулите"
 
 #: libspm.py:544
 msgid "Updating pango modules cache"
-msgstr "Обновява се кеша на pango модулите"
+msgstr "Обновяване кеша на pango модулите"
 
 #: libspm.py:549
 msgid "Updating GTK-2.0 imodules cache"
-msgstr "Обновява се кеша на GTK-2.0 imodules"
+msgstr "Обновяване кеша на GTK-2.0 imodules"
 
 #: libspm.py:556
 msgid "Updating GTK-3.0 imodules cache"
-msgstr "Обновява се кеша на GTK-3.0 imodules"
+msgstr "Обновяване кеша на GTK-3.0 imodules"
 
 #: libspm.py:563
 msgid "Updating gdk pixbuffer loaders"
-msgstr "Обновяват се gdk pixbuffer зареждачите"
+msgstr "Обновяване gdk pixbuffer зареждачите"
 
 #: libspm.py:570
 msgid "Updating GSettings schemas"
-msgstr "Обновяват се GSettings схемите"
+msgstr "Обновяване GSettings схемите"
 
 #: libspm.py:583
 msgid "Reloading udev rules and hwdb"
-msgstr "Презареждат се udev правилата и hwdb"
+msgstr "Презареждане udev правилата и hwdb"
 
 #: libspm.py:605
 msgid "Updating icons cache"
-msgstr "Обновява се кеша на иконите"
+msgstr "Обновяване кеша на иконите"
 
 #: libspm.py:612
 msgid "Installing info page"
-msgstr "Инсталират се инфо страница"
+msgstr "Инсталиране инфо страница"
 
 #: libspm.py:617
 msgid "Deleting info page"
-msgstr "Изтрива се инфо страница"
+msgstr "Изтриване инфо страница"
 
 #: libspm.py:623
 msgid "Updating module dependencies"
-msgstr "Обновяват се зависимостите на модули"
+msgstr "Обновяване зависимостите на модули"
 
 #: libspm.py:628
 msgid "Updating initramfs image"
-msgstr "Обновява се initramfs образ"
+msgstr "Обновяване initramfs образа"
 
 #: libspm.py:636
 msgid "Updating GRUB configuration"
-msgstr "Обновява се GRUB конфигурацията"
+msgstr "Обновяване GRUB конфигурацията"
 
 #: libspm.py:688 libspm.py:1138 libspm.py:1389
 msgid "Checking dependencies"
-msgstr "Проверяват се зависимостите"
+msgstr "Проверяване на зависимостите"
 
 #: libspm.py:693
 msgid "Building dependencies"
-msgstr "Изграждат се зависимости"
+msgstr "Изграждане на зависимости"
 
 #: libspm.py:695 libspm.py:1395
 #, python-format
 msgid "Resuming %s preparations at"
-msgstr "Преостановяване подготовката на %s на"
+msgstr "Преостановяване подготовката на %s в"
 
 #: libspm.py:698 libspm.py:1398
 msgid "Dependencies missing"
@@ -248,15 +248,15 @@ msgstr "Интернет връзката не е активна"
 
 #: libspm.py:715 tools.py:217
 msgid "Updating Git repository"
-msgstr "Обновява се Git хранилище"
+msgstr "Обновяване на Git хранилище"
 
 #: libspm.py:719 tools.py:221
 msgid "Cloning Git repository"
-msgstr "Клонира се Git хранилище"
+msgstr "Клониране на Git хранилище"
 
 #: libspm.py:731 libspm.py:1411 tools.py:233
 msgid "Checking mirror"
-msgstr "Проверява се огледало"
+msgstr "Проверяване на огледало"
 
 #: libspm.py:739 libspm.py:1419 tools.py:241
 msgid "Already fetched"
@@ -276,11 +276,11 @@ msgstr "Вече е свързан"
 
 #: libspm.py:750 libspm.py:753
 msgid "Linking"
-msgstr "Звързва се"
+msgstr "Звързване на"
 
 #: libspm.py:760
 msgid "Extracting"
-msgstr "Извлича се"
+msgstr "Извлича на"
 
 #: libspm.py:765
 msgid "Already extracted"
@@ -292,39 +292,39 @@ msgstr "Компресиране опътващите страници"
 
 #: libspm.py:800 tools.py:249 tools.py:624
 msgid "Compressing"
-msgstr "Компресира се"
+msgstr "Компресира на"
 
 #: libspm.py:805
 msgid "Adjusting link"
-msgstr "Коригира се връзка"
+msgstr "Коригира на връзка"
 
 #: libspm.py:814 libspm.py:998 libspm.py:1160
 msgid "Indexing content"
-msgstr "Индексира се съдържанието"
+msgstr "Индексиране на съдържанието"
 
 #: libspm.py:830
 msgid "Stripping binaries and libraries"
-msgstr "Смъкват се бинари и библиотеки"
+msgstr "Смъкване на бинари и библиотеки"
 
 #: libspm.py:839
 msgid "Stripping executable"
-msgstr "Смъкват се изпълним"
+msgstr "Смъкване изпълним"
 
 #: libspm.py:842
 msgid "Stripping shared library"
-msgstr "Смъква се споделена библиотека"
+msgstr "Смъкване на споделена библиотека"
 
 #: libspm.py:845
 msgid "Stripping static library"
-msgstr "Смъква се статична библиотека"
+msgstr "Смъкване на статична библиотека"
 
 #: libspm.py:853
 msgid "Stripping RPATH"
-msgstr "Смъква се RPATH"
+msgstr "Смъкване на RPATH"
 
 #: libspm.py:856
 msgid "Checking runtime dependencies"
-msgstr "Проверяват се работни зависимости"
+msgstr "Проверяване на работните зависимости"
 
 #: libspm.py:871 libspm.py:943 tools.py:89 tools.py:126
 #, python-format
@@ -363,9 +363,9 @@ msgstr "Успешно корикирана (мишена)"
 msgid "Dependency needed but in target"
 msgstr "Нужна е зависимост, но е в мишената"
 
-#: libspm.py:954
-msgid "Dependency needed <ends"
-msgstr "Нужна зависимост"
+#: libspm.py:954 tools.py:139
+msgid "Dependency needed but in dependencies"
+msgstr ""
 
 #: libspm.py:956 tools.py:141
 msgid "Dependency needed but in local"
@@ -455,7 +455,7 @@ msgstr "Премахване на обратни зависимости"
 #: libspm.py:1146
 #, python-format
 msgid "Resuming %s removing at"
-msgstr "Преостановяване прехването на %s в"
+msgstr "Преостановяване премахването на %s в"
 
 #: libspm.py:1149
 #, python-format
@@ -1037,10 +1037,6 @@ msgstr "Пропускане на"
 msgid "Path"
 msgstr ""
 
-#: tools.py:139
-msgid "Dependency needed but in dependencies"
-msgstr ""
-
 #: tools.py:153
 msgid "Unnecessary explicit dependencies"
 msgstr ""
@@ -1463,4 +1459,3 @@ msgstr "АДРЕСС"
 #: tools.py:1017
 msgid "CROSS"
 msgstr ""
-

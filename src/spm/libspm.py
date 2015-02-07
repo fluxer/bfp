@@ -951,7 +951,7 @@ class Source(object):
                         list(target_content.keys()), exact=True, escape=False):
                         message.sub_debug(_('Dependency needed but in target'), match)
                     elif match and match in self.target_depends:
-                        message.sub_debug(_('Dependency needed <ends'), match)
+                        message.sub_debug(_('Dependency needed but in dependencies'), match)
                     elif match and not match in self.target_depends:
                         message.sub_debug(_('Dependency needed but in local'), match)
                         self.target_depends.append(match)
