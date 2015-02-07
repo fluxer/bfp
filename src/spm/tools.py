@@ -32,7 +32,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.5.0 (0ab1003)"
+app_version = "1.5.0 (d0664f1)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -96,9 +96,9 @@ class Check(object):
                             target_adepends.append(match)
 
                         if match == target or misc.string_search(lib, target_footprint):
-                            message.sub_debug(_('Library needed but in self'), lib)
+                            message.sub_debug(_('Library needed but in target'), lib)
                         elif match and match in target_depends:
-                            message.sub_debug(_('Library needed but in depends'), match)
+                            message.sub_debug(_('Library needed but in dependencies'), match)
                         elif match and not match in target_depends:
                             message.sub_debug(_('Library needed but in local'), match)
                             target_depends.append(match)
@@ -134,9 +134,9 @@ class Check(object):
 
                         if match == target or misc.string_search(fmatch, \
                             target_footprint, exact=True, escape=False):
-                            message.sub_debug(_('Dependency needed but in self'), match)
+                            message.sub_debug(_('Dependency needed but in target'), match)
                         elif match and match in target_depends:
-                            message.sub_debug(_('Dependency needed but in depends'), match)
+                            message.sub_debug(_('Dependency needed but in dependencies'), match)
                         elif match and not match in target_depends:
                             message.sub_debug(_('Dependency needed but in local'), match)
                             target_depends.append(match)
@@ -153,7 +153,7 @@ class Check(object):
                     message.sub_warning(_('Unnecessary explicit dependencies'), a)
 
             if self.do_adjust:
-                message.sub_debug(_('Adjusting target depends'))
+                message.sub_debug(_('Adjusting target dependencies'))
                 content = misc.file_read(target_metadata)
                 for line in misc.file_readlines(target_metadata):
                     if line.startswith('depends='):

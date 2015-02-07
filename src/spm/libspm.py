@@ -878,9 +878,9 @@ class Source(object):
                     # list() - Python 3000 dictionary compat
                     if match == self.target_name or \
                         misc.string_search(lib, list(target_content.keys())):
-                        message.sub_debug(_('Library needed but in self'), lib)
+                        message.sub_debug(_('Library needed but in target'), lib)
                     elif match and match in self.target_depends:
-                        message.sub_debug(_('Library needed but in depends'), match)
+                        message.sub_debug(_('Library needed but in dependencies'), match)
                     elif match and not match in self.target_depends:
                         message.sub_debug(_('Library needed but in local'), match)
                         self.target_depends.append(match)
@@ -937,7 +937,7 @@ class Source(object):
                             if smatch:
                                 misc.file_substitute('^' + omatch[0].strip(), \
                                     '#!' + smatch, sfile)
-                                message.sub_debug(_('Successfuly corrected (self)'), fmatch)
+                                message.sub_debug(_('Successfuly corrected (target)'), fmatch)
                                 match = [self.target_name] # database.local_belongs() returns list
                     if match and len(match) > 1:
                         message.sub_warning(_('Multiple providers for %s') % fmatch, match)
@@ -949,9 +949,9 @@ class Source(object):
 
                     if match == self.target_name or misc.string_search(smatch, \
                         list(target_content.keys()), exact=True, escape=False):
-                        message.sub_debug(_('Dependency needed but in self'), match)
+                        message.sub_debug(_('Dependency needed but in target'), match)
                     elif match and match in self.target_depends:
-                        message.sub_debug(_('Dependency needed but in depends'), match)
+                        message.sub_debug(_('Dependency needed <ends'), match)
                     elif match and not match in self.target_depends:
                         message.sub_debug(_('Dependency needed but in local'), match)
                         self.target_depends.append(match)
@@ -1037,7 +1037,7 @@ class Source(object):
             misc.system_script(self.srcbuild, 'pre_install')
 
         if BACKUP:
-            message.sub_info(_('Backing up files'))
+            message.sub_info(_('Creating backing up files'))
             check = []
             for sfile in new_content:
                 if not os.path.isfile(os.path.join(ROOT_DIR, sfile)):

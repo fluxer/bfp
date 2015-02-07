@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-06 15:35+0000\n"
-"PO-Revision-Date: 2015-02-06 15:52+0000\n"
+"POT-Creation-Date: 2015-02-07 15:08+0000\n"
+"PO-Revision-Date: 2015-02-07 15:19+0000\n"
 "Last-Translator: \n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -332,64 +332,64 @@ msgid "Multiple providers for %s"
 msgstr "Няколко доставчика на %s"
 
 #: libspm.py:881 tools.py:99
-msgid "Library needed but in self"
-msgstr ""
+msgid "Library needed but in target"
+msgstr "Нужна е библиотека, но е в мишената"
 
 #: libspm.py:883 tools.py:101
-msgid "Library needed but in depends"
-msgstr ""
+msgid "Library needed but in dependencies"
+msgstr "Нужна е библиотека, но е в зависимостите"
 
 #: libspm.py:885 tools.py:103
 msgid "Library needed but in local"
-msgstr ""
+msgstr "Нужна е библиотека, но е в локална"
 
 #: libspm.py:888 libspm.py:890 tools.py:106 tools.py:108
 msgid "Library needed, not in any local"
-msgstr ""
+msgstr "Нужна е библиотека, непринадлежаща на локална"
 
 #: libspm.py:919
 msgid "Attempting shebang correction on"
-msgstr ""
+msgstr "Опит за корекция на shebang на"
 
 #: libspm.py:927
 msgid "Successfuly corrected (host)"
-msgstr ""
+msgstr "Успешно корикирана (хост)"
 
 #: libspm.py:940
-msgid "Successfuly corrected (self)"
-msgstr ""
+msgid "Successfuly corrected (target)"
+msgstr "Успешно корикирана (мишена)"
 
 #: libspm.py:952 tools.py:137
-msgid "Dependency needed but in self"
-msgstr ""
+msgid "Dependency needed but in target"
+msgstr "Нужна е зависимост, но е в мишената"
 
-#: libspm.py:954 tools.py:139
-msgid "Dependency needed but in depends"
-msgstr ""
+#: libspm.py:954
+msgid "Dependency needed <ends"
+msgstr "Нужна зависимост"
 
 #: libspm.py:956 tools.py:141
 msgid "Dependency needed but in local"
-msgstr ""
+msgstr "Нужна е зависимост, но е в локална"
 
 #: libspm.py:959 libspm.py:961 tools.py:144 tools.py:146
 msgid "Dependency needed, not in any local"
-msgstr ""
+msgstr "Нужна е зависимост, непринадлежаща на локална"
 
 #: libspm.py:967
 msgid "Byte-compiling Python modules"
-msgstr ""
+msgstr "Байт-компилиране на Python модули"
 
 #: libspm.py:972
 msgid "Compiling Python file"
-msgstr ""
+msgstr "Компилиране на Python файл"
 
 #: libspm.py:978
 msgid "Assembling metadata"
-msgstr ""
+msgstr "Зглабяне на метадата"
 
 #: libspm.py:987
 msgid "Assembling footprint"
-msgstr ""
+msgstr "Зглабяне на отпечатък"
 
 #: libspm.py:991
 msgid "Compressing tarball"
@@ -397,28 +397,28 @@ msgstr ""
 
 #: libspm.py:1013
 msgid "Checking for conflicts"
-msgstr ""
+msgstr "Проверка за конфликти"
 
 #: libspm.py:1021
 #, python-format
 msgid "File/link conflict with %s"
-msgstr ""
+msgstr "Файл/линк конфликт с %s"
 
 #: libspm.py:1032
 msgid "Executing pre_upgrade()"
-msgstr ""
+msgstr "Изпълняване на pre_upgrade()"
 
 #: libspm.py:1036
 msgid "Executing pre_install()"
-msgstr ""
+msgstr "Изпълняване на pre_install()"
 
 #: libspm.py:1040
-msgid "Backing up files"
-msgstr ""
+msgid "Creating backing up files"
+msgstr "Създаване резервни копип на файлове"
 
 #: libspm.py:1054
 msgid "Backing up"
-msgstr ""
+msgstr "Резервиране на"
 
 #: libspm.py:1058
 msgid "Decompressing tarball"
@@ -430,49 +430,49 @@ msgstr ""
 
 #: libspm.py:1091
 msgid "Executing post_upgrade()"
-msgstr ""
+msgstr "Изпълняване на post_upgrade()"
 
 #: libspm.py:1095
 msgid "Executing post_install()"
-msgstr ""
+msgstr "Изпълняване на post_install()"
 
 #: libspm.py:1102
 msgid "Checking reverse dependencies"
-msgstr ""
+msgstr "Проверяване обратните зависимости"
 
 #: libspm.py:1130
 msgid "Targets may need rebuild"
-msgstr ""
+msgstr "Мишените може да имат нужда от рестроеж"
 
 #: libspm.py:1135
 msgid "Already removed"
-msgstr ""
+msgstr "Вече е премахната"
 
 #: libspm.py:1144
 msgid "Removing reverse dependencies"
-msgstr ""
+msgstr "Премахване на обратни зависимости"
 
 #: libspm.py:1146
 #, python-format
 msgid "Resuming %s removing at"
-msgstr ""
+msgstr "Преостановяване прехването на %s в"
 
 #: libspm.py:1149
 #, python-format
 msgid "Other targets depend on %s"
-msgstr ""
+msgstr "Други мишени зависят на %s"
 
 #: libspm.py:1155
 msgid "Executing pre_remove()"
-msgstr ""
+msgstr "Изпълняване на pre_remove()"
 
 #: libspm.py:1163
 msgid "Removing files"
-msgstr ""
+msgstr "Премахване на файлове"
 
 #: libspm.py:1167
 msgid "Removing directories"
-msgstr ""
+msgstr "Премахване на директории"
 
 #: libspm.py:1171
 msgid "Removing links"
@@ -480,23 +480,23 @@ msgstr ""
 
 #: libspm.py:1176
 msgid "Removing footprint and metadata"
-msgstr ""
+msgstr "Премахване на отпечатъка и метадатата"
 
 #: libspm.py:1181
 msgid "Executing post_remove()"
-msgstr ""
+msgstr "Изпълняване на post_remove()"
 
 #: libspm.py:1195 libspm.py:1436
 msgid "Ignoring target"
-msgstr ""
+msgstr "Игориране на мишена"
 
 #: libspm.py:1199 libspm.py:1440 tools.py:195
 msgid "Invalid target"
-msgstr ""
+msgstr "Невалидна мишена"
 
 #: libspm.py:1223 libspm.py:1464
 msgid "Target is up-to-date"
-msgstr ""
+msgstr "Мишената е последната налична версия"
 
 #: libspm.py:1228 libspm.py:1231
 msgid "Overriding MIRROR to"
@@ -533,49 +533,49 @@ msgstr ""
 #: libspm.py:1284
 #, python-format
 msgid "Starting %s cleanup at"
-msgstr ""
+msgstr "Започване чистка на %s в"
 
 #: libspm.py:1289 libspm.py:1468
 #, python-format
 msgid "Starting %s preparations at"
-msgstr ""
+msgstr "Започване подготовка на %s в"
 
 #: libspm.py:1296
 msgid "src_compile() not defined"
-msgstr ""
+msgstr "src_compile() не е зададен"
 
 #: libspm.py:1298
 #, python-format
 msgid "Starting %s compile at"
-msgstr ""
+msgstr "Започване компилиране на %s в"
 
 #: libspm.py:1313
 msgid "src_check() not defined"
-msgstr ""
+msgstr "src_check() не е зададен"
 
 #: libspm.py:1315
 #, python-format
 msgid "Starting %s check at"
-msgstr ""
+msgstr "Започване проверка на %s в"
 
 #: libspm.py:1330
 msgid "src_install() not defined"
-msgstr ""
+msgstr "src_install() не е зададен"
 
 #: libspm.py:1333
 #, python-format
 msgid "Starting %s install at"
-msgstr ""
+msgstr "Започване инсталация на %s в"
 
 #: libspm.py:1346 libspm.py:1471
 #, python-format
 msgid "Starting %s merge at"
-msgstr ""
+msgstr "Започване сливане на %s в"
 
 #: libspm.py:1350 libspm.py:1475
 #, python-format
 msgid "Starting %s remove at"
-msgstr ""
+msgstr "Започване премахване на %s в"
 
 #: libspm.py:1393
 msgid "Fetching dependencies"
@@ -587,11 +587,11 @@ msgstr ""
 
 #: libspm.py:1498
 msgid "Match in"
-msgstr ""
+msgstr "Съвпадение в"
 
 #: spm.py:196 tools.py:731
 msgid "NOTE: Some features are available only to the root user."
-msgstr ""
+msgstr "ЗАБЕЛЕЖКА: Някои услуги са достъпни само за root потребителя."
 
 #: spm.py:201
 msgid "Purge repositories"
@@ -599,7 +599,7 @@ msgstr ""
 
 #: spm.py:203
 msgid "Sync repositories"
-msgstr ""
+msgstr "Синхронизирай хранилищата"
 
 #: spm.py:205
 msgid "Prune old repositories"
@@ -615,35 +615,35 @@ msgstr ""
 
 #: spm.py:213 spm.py:277
 msgid "Show target name"
-msgstr ""
+msgstr "Покажи името на мишената"
 
 #: spm.py:215 spm.py:279
 msgid "Show target version"
-msgstr ""
+msgstr "Покажи версията на мишената"
 
 #: spm.py:217 spm.py:281
 msgid "Show target description"
-msgstr ""
+msgstr "Покажи описанието на мишената"
 
 #: spm.py:219 spm.py:283
 msgid "Show target depends"
-msgstr ""
+msgstr "Покажи зависимостите на мишената"
 
 #: spm.py:221
 msgid "Show target makedepends"
-msgstr ""
+msgstr "Покажи мейк-зависимостите на мишената"
 
 #: spm.py:223
 msgid "Show target checkdepends"
-msgstr ""
+msgstr "Покажи чек-зависимостите на мишената"
 
 #: spm.py:225
 msgid "Show target sources"
-msgstr ""
+msgstr "Покажи източниците на мишената"
 
 #: spm.py:227
 msgid "Show target options"
-msgstr ""
+msgstr "Покажи опциите на мишената"
 
 #: spm.py:229
 msgid "Show target backups"
@@ -1031,10 +1031,14 @@ msgstr ""
 
 #: tools.py:77
 msgid "Skipping"
-msgstr ""
+msgstr "Пропускане на"
 
 #: tools.py:80
 msgid "Path"
+msgstr ""
+
+#: tools.py:139
+msgid "Dependency needed but in dependencies"
 msgstr ""
 
 #: tools.py:153
@@ -1042,12 +1046,12 @@ msgid "Unnecessary explicit dependencies"
 msgstr ""
 
 #: tools.py:156
-msgid "Adjusting target depends"
+msgid "Adjusting target dependencies"
 msgstr ""
 
 #: tools.py:178
 msgid "Unneded target"
-msgstr ""
+msgstr "Ненужна мишена"
 
 #: tools.py:253
 msgid "Purging sources"
@@ -1182,7 +1186,7 @@ msgstr ""
 
 #: tools.py:602
 msgid "Match"
-msgstr ""
+msgstr "Съвпадение"
 
 #: tools.py:664
 msgid "Fetching package files"
@@ -1459,3 +1463,4 @@ msgstr "АДРЕСС"
 #: tools.py:1017
 msgid "CROSS"
 msgstr ""
+

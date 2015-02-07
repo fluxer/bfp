@@ -289,7 +289,7 @@ def Install():
         item = str(s.text())
         targets.extend(database.remote_mdepends(item))
         targets.append(item)
-    answer = MessageQuestion('The following targets will be install:\n\n', \
+    answer = MessageQuestion('The following targets will be installed:\n\n', \
         misc.string_convert(targets), \
         '\n\nAre you sure you want to continue?')
     if not answer == QtGui.QMessageBox.Yes:
