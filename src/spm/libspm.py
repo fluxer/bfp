@@ -450,6 +450,18 @@ class Source(object):
                 autoremove=autoremove)
         obj.main()
 
+    def split_debug(self, sfile):
+        message.sub_debug('Creating debug file', sfile)
+        # ugly paths manipulation due to GDB standards:
+        # https://sourceware.org/gdb/onlinedocs/gdb/Separate-Debug-Files.html
+        srelative = sfile.replace(self.install_dir, '')
+        sdir = self.install_dir + sys.prefix + '/lib/debug/' + os.path.dirname(srelative)
+        misc.dir_create(sdir)
+        sdebug = sdir + '/' + os.path.basename(sfile) + '.debug'
+        objcopy = misc.whereis('objcopy')
+        misc.system_command((objcopy, '--only-keep-debug', sfile, sdebug))
+        misc.system_command((objcopy, '--add-gnu-debuglink', sdebug, sfile))
+
     def update_databases(self, content, action):
         ''' Update common databases '''
         if not TRIGGERS:
@@ -836,12 +848,15 @@ class Source(object):
                     continue
 
                 if smime == 'application/x-executable' and self.strip_binaries:
+                    self.split_debug(sfile)
                     message.sub_debug(_('Stripping executable'), sfile)
                     misc.system_command((strip, '--strip-all', sfile))
                 elif smime == 'application/x-sharedlib' and self.strip_shared:
+                    self.split_debug(sfile)
                     message.sub_debug(_('Stripping shared library'), sfile)
                     misc.system_command((strip, '--strip-unneeded', sfile))
                 elif smime == 'application/x-archive' and self.strip_static:
+                    self.split_debug(sfile)
                     message.sub_debug(_('Stripping static library'), sfile)
                     misc.system_command((strip, '--strip-debug', sfile))
 
@@ -985,8 +1000,9 @@ class Source(object):
         metadata.close()
 
         message.sub_info(_('Assembling footprint'))
+        # due to many file operations do not re-use target_content
         misc.file_write(os.path.join(self.install_dir, self.target_footprint), \
-            '\n'.join(sorted(list(target_content.keys()))).replace(self.install_dir, ''))
+            '\n'.join(sorted(misc.list_files(self.install_dir))).replace(self.install_dir, ''))
 
         message.sub_info(_('Compressing tarball'))
         misc.dir_create(os.path.join(CACHE_DIR, 'tarballs'))
