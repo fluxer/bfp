@@ -309,9 +309,11 @@ try:
     parser.add_argument('--demote', type=str, \
         action=OverrideDemote, help=_('Set user to demote to'))
     parser.add_argument('--offline', type=ast.literal_eval, \
-        action=OverrideOffline, help=_('Set whether to use offline mode'))
+        action=OverrideOffline, choices=[True, False], \
+        help=_('Set whether to use offline mode'))
     parser.add_argument('--mirror', type=ast.literal_eval, \
-        action=OverrideMirror, help=_('Set whether to use mirrors'))
+        action=OverrideMirror,  choices=[True, False], \
+        help=_('Set whether to use mirrors'))
     parser.add_argument('--timeout', type=int, action=OverrideTimeout, \
         help=_('Set the connection timeout'))
     parser.add_argument('--chost', type=str, action=OverrideChost, \
@@ -327,28 +329,37 @@ try:
     parser.add_argument('--makeflags', type=str, action=OverrideMakeflags, \
         help=_('Change MAKEFLAGS'))
     parser.add_argument('--man', type=ast.literal_eval, action=OverrideMan, \
-        help=_('Set whether to compress man pages'))
+        choices=[True, False], help=_('Set whether to compress man pages'))
     parser.add_argument('--binaries', type=ast.literal_eval, \
-        action=OverrideBinaries, help=_('Set whether to strip binaries'))
+        action=OverrideBinaries, choices=[True, False], \
+        help=_('Set whether to strip binaries'))
     parser.add_argument('--shared', type=ast.literal_eval, \
-        action=OverrideShared, help=_('Set whether to strip shared libraries'))
+        action=OverrideShared, choices=[True, False], \
+        help=_('Set whether to strip shared libraries'))
     parser.add_argument('--static', type=ast.literal_eval, \
-        action=OverrideStatic, help=_('Set whether to strip static libraries'))
+        action=OverrideStatic, choices=[True, False], \
+        help=_('Set whether to strip static libraries'))
     parser.add_argument('--rpath', type=ast.literal_eval, \
-        action=OverrideRpath, help=_('Set whether to strip RPATH'))
+        action=OverrideRpath, choices=[True, False], \
+        help=_('Set whether to strip RPATH'))
     parser.add_argument('--pycompile', type=ast.literal_eval, \
-        action=OverridePyCompile, help=_('Set whether to compile Python files'))
+        action=OverridePyCompile, choices=[True, False], \
+        help=_('Set whether to compile Python files'))
     parser.add_argument('--missing', type=ast.literal_eval, \
-        action=OverrideMissing, \
+        action=OverrideMissing,  choices=[True, False], \
         help=_('Set whether to ignore missing runtime dependencies'))
     parser.add_argument('--conflicts', type=ast.literal_eval, \
-        action=OverrideConflicts, help=_('Set whether to check for conflicts'))
+        action=OverrideConflicts, choices=[True, False], \
+        help=_('Set whether to check for conflicts'))
     parser.add_argument('--backup', type=ast.literal_eval, \
-        action=OverrideBackup, help=_('Set whether to backup files'))
+        action=OverrideBackup, choices=[True, False], \
+        help=_('Set whether to backup files'))
     parser.add_argument('--scripts', type=ast.literal_eval, \
-        action=OverrideScripts, help=_('Set whether to execute pre/post script'))
+        action=OverrideScripts, choices=[True, False], \
+        help=_('Set whether to execute pre/post script'))
     parser.add_argument('--triggers', type=ast.literal_eval, \
-        action=OverrideTriggers, help=_('Set whether to execute triggers'))
+        action=OverrideTriggers, choices=[True, False], \
+        help=_('Set whether to execute triggers'))
     parser.add_argument('--debug', nargs=0, action=OverrideDebug, \
         help=_('Enable debug messages'))
     parser.add_argument('--version', action='version', \
