@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-02-07 15:35+0000\n"
-"PO-Revision-Date: 2015-02-07 15:46+0000\n"
+"PO-Revision-Date: 2015-02-08 12:24+0000\n"
 "Last-Translator: \n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -365,7 +365,7 @@ msgstr "Нужна е зависимост, но е в мишената"
 
 #: libspm.py:954 tools.py:139
 msgid "Dependency needed but in dependencies"
-msgstr ""
+msgstr "Нужна е зависимост, но вече е в зависимостите"
 
 #: libspm.py:956 tools.py:141
 msgid "Dependency needed but in local"
@@ -426,7 +426,7 @@ msgstr ""
 
 #: libspm.py:1062
 msgid "Removing obsolete files and directories"
-msgstr ""
+msgstr "Премахване на старите файлове и директории"
 
 #: libspm.py:1091
 msgid "Executing post_upgrade()"
@@ -476,7 +476,7 @@ msgstr "Премахване на директории"
 
 #: libspm.py:1171
 msgid "Removing links"
-msgstr ""
+msgstr "Премахване на връзка"
 
 #: libspm.py:1176
 msgid "Removing footprint and metadata"
@@ -607,11 +607,11 @@ msgstr ""
 
 #: spm.py:207
 msgid "Check repositories for updates"
-msgstr ""
+msgstr "Провери хранилищата за обновления"
 
 #: spm.py:209
 msgid "Short for clean, sync, prune and update"
-msgstr ""
+msgstr "Кратко за чистка, синхронизиране и обновление"
 
 #: spm.py:213 spm.py:277
 msgid "Show target name"
@@ -647,11 +647,11 @@ msgstr "Покажи опциите на мишената"
 
 #: spm.py:229
 msgid "Show target backups"
-msgstr ""
+msgstr "Покажи резервните копия на мишената"
 
 #: spm.py:231 spm.py:291 spm.py:297 tools.py:827 tools.py:855
 msgid "Print in plain format"
-msgstr ""
+msgstr "Принтирай в чист формат"
 
 #: spm.py:233 tools.py:829
 msgid "Pattern to search for in remote targets"
@@ -663,60 +663,60 @@ msgstr ""
 
 #: spm.py:239
 msgid "Prepare sources of target"
-msgstr ""
+msgstr "Подготови източниците на мишената"
 
 #: spm.py:241
 msgid "Compile sources of target"
-msgstr ""
+msgstr "Компилирай източниците на мишената"
 
 #: spm.py:243
 msgid "Check sources of target"
-msgstr ""
+msgstr "Провери източниците на мишената"
 
 #: spm.py:245
 msgid "Install compiled files of target"
-msgstr ""
+msgstr "Инсталирай компилираните файлове на мишената"
 
 #: spm.py:247 spm.py:263
 msgid "Merge compiled files of target to system"
-msgstr ""
+msgstr "Слей компилираните фаилове на мишената в системата"
 
 #: spm.py:249 spm.py:265
 msgid "Remove compiled files of target from system"
-msgstr ""
+msgstr "Премахни компилираните файлове от системата"
 
 #: spm.py:251 spm.py:267
 msgid "Consider dependency targets"
-msgstr ""
+msgstr "Имай в предвид зависимостите на мишените"
 
 #: spm.py:253 spm.py:269
 msgid "Consider reverse dependency targets"
-msgstr ""
+msgstr "Имай в предвид обратните зависимости на мишената"
 
 #: spm.py:255 spm.py:271
 msgid "Apply actions only if update is available"
-msgstr ""
+msgstr "Приложи действията само ако е достъпно обновление"
 
 #: spm.py:257
 msgid "Short for clean, prepare, compile, install and merge"
-msgstr ""
+msgstr "Кратко за чистка, подготовка, компилиране, инсталация и сливане"
 
 #: spm.py:259 spm.py:273 tools.py:743 tools.py:755 tools.py:789 tools.py:813
 #: tools.py:821 tools.py:835 tools.py:841
 msgid "Targets to apply actions on"
-msgstr ""
+msgstr "Мишени, на който да се приложат действията"
 
 #: spm.py:285
 msgid "Show target reverse depends"
-msgstr ""
+msgstr "Покажи обратние зависимости на мишената"
 
 #: spm.py:287
 msgid "Show target size"
-msgstr ""
+msgstr "Покажи размера на мишената"
 
 #: spm.py:289
 msgid "Show target footprint"
-msgstr ""
+msgstr "Покажи отпечатъка на мишената"
 
 #: spm.py:293 spm.py:299
 msgid "Pattern to search for in local targets"
@@ -724,19 +724,19 @@ msgstr ""
 
 #: spm.py:302
 msgid "Change cache directory"
-msgstr ""
+msgstr "Смени кеш директорията"
 
 #: spm.py:304
 msgid "Change build directory"
-msgstr ""
+msgstr "Смени директорията за строеж"
 
 #: spm.py:306
 msgid "Change system root directory"
-msgstr ""
+msgstr "Смени основната системна директория"
 
 #: spm.py:308
 msgid "Change ignored targets"
-msgstr ""
+msgstr "Смени игнорираните мишени"
 
 #: spm.py:310
 msgid "Set user to demote to"
@@ -756,11 +756,11 @@ msgstr ""
 
 #: spm.py:318
 msgid "Change CHOST"
-msgstr ""
+msgstr "Смени CHOST"
 
 #: spm.py:320
 msgid "Change CFLAGS"
-msgstr ""
+msgstr "Смени CFLAGS"
 
 #: spm.py:322
 msgid "Change CXXFLAGS"
