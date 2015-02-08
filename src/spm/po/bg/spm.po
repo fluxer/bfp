@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-02-07 15:35+0000\n"
-"PO-Revision-Date: 2015-02-08 12:24+0000\n"
+"PO-Revision-Date: 2015-02-08 12:31+0000\n"
 "Last-Translator: \n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -828,7 +828,7 @@ msgstr ""
 
 #: spm.py:356
 msgid "Show SPM version and exit"
-msgstr ""
+msgstr "Покажи версията на SPM и излез"
 
 #: spm.py:367 spm.py:384 spm.py:414 spm.py:463 spm.py:482 spm.py:499
 #: tools.py:877 tools.py:887 tools.py:919 tools.py:954 tools.py:978
@@ -914,7 +914,7 @@ msgstr ""
 
 #: spm.py:395 tools.py:882 tools.py:965 tools.py:980
 msgid "Poking remotes..."
-msgstr ""
+msgstr "Побутване на отдалечени..."
 
 #: spm.py:416
 msgid "BUILD_DIR"
@@ -1003,11 +1003,11 @@ msgstr "МИШЕНИ"
 
 #: spm.py:439
 msgid "Poking sources..."
-msgstr ""
+msgstr "Побутване на източниците..."
 
 #: spm.py:475
 msgid "Poking binaries..."
-msgstr ""
+msgstr "Побутване на бинарите..."
 
 #: spm.py:487 tools.py:890
 msgid "REVERSE"
@@ -1027,7 +1027,7 @@ msgstr ""
 
 #: spm.py:501
 msgid "Poking databases..."
-msgstr ""
+msgstr "Побутване на датабазите..."
 
 #: tools.py:77
 msgid "Skipping"
@@ -1035,7 +1035,7 @@ msgstr "Пропускане на"
 
 #: tools.py:80
 msgid "Path"
-msgstr ""
+msgstr "Път"
 
 #: tools.py:153
 msgid "Unnecessary explicit dependencies"
@@ -1075,12 +1075,12 @@ msgstr ""
 
 #: tools.py:333
 msgid "Empty footprint"
-msgstr ""
+msgstr "Празен отпечатък"
 
 #: tools.py:336 tools.py:343 tools.py:354 tools.py:374 tools.py:386
 #: tools.py:404
 msgid "File does not exist"
-msgstr ""
+msgstr "Файлът несъществува"
 
 #: tools.py:347
 msgid "Build directory trace(s)"
@@ -1088,19 +1088,19 @@ msgstr ""
 
 #: tools.py:368
 msgid "Unknown owner of"
-msgstr ""
+msgstr "Непознат собственик на"
 
 #: tools.py:381
 msgid "File in PATH is not executable"
-msgstr ""
+msgstr "Файл в PATH не е изпълним"
 
 #: tools.py:397
 msgid "File in PATH overlaps with"
-msgstr ""
+msgstr "Файл в PATH се засича със"
 
 #: tools.py:421
 msgid "Invalid shebang"
-msgstr ""
+msgstr "Невалиден shebang"
 
 #: tools.py:427
 msgid "Possibly unnecessary backup of file"
@@ -1198,7 +1198,7 @@ msgstr ""
 
 #: tools.py:676
 msgid "Target not found"
-msgstr ""
+msgstr "Мишената не е намерена"
 
 #: tools.py:689
 msgid "Serving caches directory"
@@ -1242,7 +1242,7 @@ msgstr ""
 
 #: tools.py:753
 msgid "Check reverse dependencies of target"
-msgstr ""
+msgstr "Провери обратните зависимости на мишената"
 
 #: tools.py:761
 msgid "Check for missing manual page(s)"
@@ -1282,7 +1282,7 @@ msgstr ""
 
 #: tools.py:779
 msgid "Check for overlapping executable(s) in PATH"
-msgstr ""
+msgstr "Провери дали изпълними файлове се засичат в PATH"
 
 #: tools.py:781
 msgid "Check for incorrect shebang of scripts"
@@ -1342,11 +1342,11 @@ msgstr ""
 
 #: tools.py:845
 msgid "Use port for the server"
-msgstr ""
+msgstr "Използвай порт за сървъра"
 
 #: tools.py:847
 msgid "Use address for the server"
-msgstr ""
+msgstr "Използвай адрес за сървъра"
 
 #: tools.py:851
 msgid "Set lookup directory"
@@ -1358,7 +1358,7 @@ msgstr ""
 
 #: tools.py:861
 msgid "Show SPM Tools version and exit"
-msgstr ""
+msgstr "Покажи версията на SPM Tools и излез"
 
 #: tools.py:880 tools.py:993 tools.py:1000 tools.py:1016
 msgid "DIRECTORY"
