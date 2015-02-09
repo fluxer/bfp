@@ -383,8 +383,6 @@ try:
         message.sub_info(_('CACHE_DIR'), libspm.CACHE_DIR)
         message.sub_info(_('REPOSITORIES'), libspm.REPOSITORIES)
         message.sub_info(_('DEMOTE'), libspm.DEMOTE)
-        for repository in libspm.REPOSITORIES:
-            message.sub_info(_('REPOSITORY'), repository)
         message.info(_('Poking repositories...'))
         m = libspm.Repo(libspm.REPOSITORIES, ARGS.clean, \
                 ARGS.sync, ARGS.update, ARGS.prune)
