@@ -816,13 +816,11 @@ class Source(object):
                     elif os.path.islink(sfile) and \
                         not os.path.isfile(os.path.realpath(sfile)):
                         message.sub_debug(_('Adjusting link'), sfile)
-                        link = os.readlink(sfile)
+                        os.unlink(sfile)
                         if not sfile.endswith('.gz'):
-                            os.unlink(sfile)
-                            os.symlink(link + '.gz', sfile)
+                            os.symlink(os.readlink(sfile) + '.gz', sfile)
                         else:
-                            os.unlink(sfile)
-                            os.symlink(link, sfile)
+                            os.symlink(os.readlink(sfile), sfile)
 
         message.sub_info(_('Indexing content'))
         target_content = {}

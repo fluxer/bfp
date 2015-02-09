@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-02-08 19:06+0000\n"
-"PO-Revision-Date: 2015-02-08 19:06+0000\n"
+"PO-Revision-Date: 2015-02-09 07:52+0000\n"
 "Last-Translator: \n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -414,7 +414,7 @@ msgstr "Изпълняване на pre_install()"
 
 #: libspm.py:1057
 msgid "Creating backing up files"
-msgstr "Създаване резервни копип на файлове"
+msgstr "Създаване резервни копия на файлове"
 
 #: libspm.py:1071
 msgid "Backing up"
@@ -1459,3 +1459,4 @@ msgstr "АДРЕСС"
 #: tools.py:1017
 msgid "CROSS"
 msgstr ""
+
