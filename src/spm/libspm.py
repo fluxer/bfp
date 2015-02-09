@@ -925,10 +925,10 @@ class Source(object):
                     smatch = False
                     # now look for the interpreter in the target
                     for s in list(target_content.keys()):
-                                if s.endswith('bin/' + sbase):
-                                    smatch = s.replace(self.install_dir, '')
-                                    match = [self.target_name] # it is expected to be list
-                                    break
+                        if s.endswith('bin/' + sbase):
+                            smatch = s.replace(self.install_dir, '')
+                            match = [self.target_name] # it is expected to be list
+                            break
                     # if that fails look for the interpreter on the host
                     if not smatch:
                         smatch = misc.whereis(sbase, False)
