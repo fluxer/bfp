@@ -948,8 +948,7 @@ class Source(object):
                             match = match[0]
                     match = misc.string_convert(match)
 
-                    if match == self.target_name or misc.string_search(smatch, \
-                        list(target_content.keys()), exact=True, escape=False):
+                    if match == self.target_name:
                         message.sub_debug(_('Dependency needed but in target'), match)
                     elif match and match in self.target_depends:
                         message.sub_debug(_('Dependency needed but in dependencies'), match)
