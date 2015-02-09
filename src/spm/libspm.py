@@ -910,51 +910,39 @@ class Source(object):
                 or smime == 'text/x-lua' or smime == 'text/x-tcl' \
                 or smime == 'text/x-awk' or smime == 'text/x-gawk':
                 # https://en.wikipedia.org/wiki/Comparison_of_command_shells
-                bang_regexp = '^#!(?:(?: )+)?(?:/.*)+(?:(?: )+)?'
-                bang_regexp += '(?:sh|bash|dash|ksh|csh|tcsh|tclsh|scsh|fish'
-                bang_regexp += '|zsh|ash|python|perl|php|ruby|lua|wish|(?:g)?awk'
-                bang_regexp += '|gbr2|gbr3)'
-                bang_regexp += '(?:(?:\\d(?:.)?)+)?(?:\\s|$)'
-                omatch = misc.file_search(bang_regexp, sfile, exact=False, escape=False)
+                bang_regexp = 'sh|bash|dash|ksh|csh|tcsh|tclsh|scsh|fish|zsh'
+                bang_regexp += '|ash|python|perl|php|ruby|lua|wish|(?:g)?awk'
+                bang_regexp += '|gbr2|gbr3'
+                # parse the shebang and split it to 3 groups:
+                # 1. full match, used to replace it with something that will work
+                # 2. base of the interpreter (e.g. bash), used to find match in the target or host
+                # 3. interpreter arguments, used in the replacement as preserving them is essential
+                omatch = misc.file_search('(^#!.*(?:\\s|/)(' + bang_regexp + ')(.*)(?:\\s|$))', sfile, exact=False, escape=False)
                 if omatch:
-                    fmatch = omatch[0].replace('#!', '').strip()
-                    # in cases when the match has two entries (e,g, /usr/bin/env python)
-                    # substite /env with the basename of the follow up argument as it
-                    # may be full path (e.g. /usr/bin/env /usr/bin/python, as of the time
-                    # if writing this UFW is an example) preserving other arguments
-                    if '/env' in fmatch:
-                        fmatch = re.sub('/env(?:(?: )+)?' + fmatch.split()[1], \
-                            '/' + os.path.basename(fmatch.split()[1]), fmatch)
-                    smatch = self.install_dir + fmatch
-                    match = database.local_belongs(fmatch, exact=True, escape=False)
-                    # attempt shebang correction by probing PATH for basename matchers
-                    # first and altering the shebang next
-                    if not match:
-                        message.sub_debug(_('Attempting shebang correction on'), sfile)
-                        # search for match on the host
-                        hmatch = misc.whereis(os.path.basename(fmatch), False)
-                        if hmatch:
-                            match = database.local_belongs(hmatch, exact=True, escape=False)
-                            if match:
-                                misc.file_substitute('^' + omatch[0].strip(), \
-                                    '#!' + hmatch, sfile)
-                                message.sub_debug(_('Successfuly corrected (host)'), fmatch)
-                        # fallback to the content of the target (self provided)
-                        else:
-                            # FIXME: this only extends to binaries in <blah>/(s)bin,
-                            # if shebang uses some strange path (e.g. /opt/<exec>)
-                            # then this will not work
-                            for s in list(target_content.keys()):
-                                if s.endswith('bin/' + os.path.basename(fmatch)):
+                    sfull = omatch[0][0].strip()
+                    sbase = omatch[0][1].strip()
+                    sargs = omatch[0][2].strip()
+                    print(sfull, sbase, sargs)
+                    smatch = False
+                    # now look for the interpreter in the target
+                    for s in list(target_content.keys()):
+                                if s.endswith('bin/' + sbase):
                                     smatch = s.replace(self.install_dir, '')
+                                    match = [self.target_name] # it is expected to be list
                                     break
-                            if smatch:
-                                misc.file_substitute('^' + omatch[0].strip(), \
-                                    '#!' + smatch, sfile)
-                                message.sub_debug(_('Successfuly corrected (target)'), fmatch)
-                                match = [self.target_name] # database.local_belongs() returns list
+                    # if that fails look for the interpreter on the host
+                    if not smatch:
+                        smatch = misc.whereis(sbase, False)
+                        if smatch:
+                            match = database.local_belongs(smatch, exact=True, escape=False)
+
+                    # now update the shebang if possible
+                    if smatch:
+                        message.sub_debug(_('Attempting shebang correction on'), sfile)
+                        misc.file_substitute('^' + sfull, '#!' + smatch + ' ' + sargs, sfile)
+
                     if match and len(match) > 1:
-                        message.sub_warning(_('Multiple providers for %s') % fmatch, match)
+                        message.sub_warning(_('Multiple providers for %s') % smatch, match)
                         if self.target_name in match:
                             match = self.target_name
                         else:
@@ -970,9 +958,9 @@ class Source(object):
                         message.sub_debug(_('Dependency needed but in local'), match)
                         self.target_depends.append(match)
                     elif self.ignore_missing:
-                        message.sub_warning(_('Dependency needed, not in any local'), fmatch)
+                        message.sub_warning(_('Dependency needed, not in any local'), smatch)
                     else:
-                        message.sub_critical(_('Dependency needed, not in any local'), fmatch)
+                        message.sub_critical(_('Dependency needed, not in any local'), smatch)
                         missing_detected = True
         if missing_detected:
             sys.exit(2)
