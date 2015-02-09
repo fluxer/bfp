@@ -32,7 +32,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.5.0 (0949adf)"
+app_version = "1.5.0 (7458329)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -271,7 +271,7 @@ class Lint(object):
     def __init__(self, targets, man=False, udev=False, symlink=False, \
         doc=False, module=False, footprint=False, builddir=False, \
         ownership=False, executable=False, path=False, shebang=False, \
-        backup=False, conflicts=False):
+        backup=False, conflicts=False, debug=False):
         self.targets = targets
         self.man = man
         self.udev = udev
@@ -286,6 +286,7 @@ class Lint(object):
         self.shebang = shebang
         self.backup = backup
         self.conflicts = conflicts
+        self.debug = debug
 
     def main(self):
         ''' Looks for target match and then execute action for every target '''
@@ -435,6 +436,21 @@ class Lint(object):
                                 continue
                             if sfile.lstrip('/') in database.local_footprint(local).splitlines():
                                 message.sub_warning(_('Possibly conflicting file with %s') % local, sfile)
+
+                if self.debug:
+                    found_debug = 'lib/debug/' in target_footprint
+                    found_exe = False
+                    if not found_debug:
+                        for sfile in target_footprint.splitlines():
+                            if not os.path.exists(sfile):
+                                # FIXME: warn?
+                                continue
+                            smime = misc.file_mime(sfile)
+                            if smime == 'application/x-executable' or smime == 'application/x-sharedlib':
+                                found_exe = True
+                                break
+                    if not found_debug and found_exe:
+                        message.sub_warning(_('Debug symbols missing'))
 
 
 class Sane(object):
@@ -783,6 +799,8 @@ try:
         help=_('Check for incorrect or incomplete backup of files'))
     lint_parser.add_argument('-c', '--conflicts', action='store_true', \
         help=_('Check for conflicts between targets'))
+    lint_parser.add_argument('-D', '--debug', action='store_true', \
+        help=_('Check for missing debug symbols'))
     lint_parser.add_argument('-a', '--all', action='store_true', \
         help=_('Perform all checks'))
     lint_parser.add_argument('TARGETS', nargs='+', type=str, \
@@ -915,6 +933,7 @@ try:
             ARGS.shebang = True
             ARGS.backup = True
             ARGS.conflicts = True
+            ARGS.debug = True
 
         message.info(_('Runtime information'))
         message.sub_info(_('MAN'), ARGS.man)
@@ -930,13 +949,14 @@ try:
         message.sub_info(_('SHEBANG'), ARGS.shebang)
         message.sub_info(_('BACKUP'), ARGS.backup)
         message.sub_info(_('CONFLICTS'), ARGS.conflicts)
+        message.sub_info(_('DEBUG'), ARGS.debug)
         message.sub_info(_('TARGETS'), ARGS.TARGETS)
         message.info(_('Poking locals...'))
 
         m = Lint(ARGS.TARGETS, ARGS.man, ARGS.udev, ARGS.symlink, ARGS.doc, \
             ARGS.module, ARGS.footprint, ARGS.builddir, ARGS.ownership, \
             ARGS.executable, ARGS.path, ARGS.shebang, ARGS.backup, \
-            ARGS.conflicts)
+            ARGS.conflicts, ARGS.debug)
         m.main()
 
     elif ARGS.mode == 'sane':
