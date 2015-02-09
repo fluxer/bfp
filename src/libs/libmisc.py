@@ -395,7 +395,7 @@ class Misc(object):
         if rsize == '0':
             # block until the server is ready to serve the whole file
             rfile.close()
-            if not iretry == 0:
+            if not iblock == 0:
                 return self.fetch(surl, destination, iretry, iblock-1)
             raise(Exception('Bogus response header from %s, good luck!' % surl))
 
