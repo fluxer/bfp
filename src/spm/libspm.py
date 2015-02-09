@@ -922,7 +922,6 @@ class Source(object):
                     sfull = omatch[0][0].strip()
                     sbase = omatch[0][1].strip()
                     sargs = omatch[0][2].strip()
-                    print(sfull, sbase, sargs)
                     smatch = False
                     # now look for the interpreter in the target
                     for s in list(target_content.keys()):
