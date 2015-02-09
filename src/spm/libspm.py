@@ -925,7 +925,7 @@ class Source(object):
                     smatch = False
                     # now look for the interpreter in the target
                     for s in list(target_content.keys()):
-                        if s.endswith('bin/' + sbase):
+                        if s.endswith('bin/' + sbase) and os.access(s, os.X_OK):
                             smatch = s.replace(self.install_dir, '')
                             match = [self.target_name] # it is expected to be list
                             break
