@@ -40,7 +40,8 @@ class Misc(object):
         program = os.path.basename(program)
         for path in os.environ.get('PATH', '/bin:/usr/bin').split(':'):
             if chroot:
-                path = self.ROOT_DIR + path
+                # normalize because os.path.join sucks and can't be used in this case
+                path = os.path.realpath(self.ROOT_DIR + path)
             exe = os.path.join(path, program)
             if os.path.isfile(exe):
                 return exe
