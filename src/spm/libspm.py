@@ -925,42 +925,43 @@ class Source(object):
                     sbase = omatch[0][1].strip()
                     sargs = omatch[0][2].strip()
                     smatch = False
+                    dmatch = []
                     # now look for the interpreter in the target
                     for s in list(target_content.keys()):
                         if s.endswith('bin/' + sbase) and os.access(s, os.X_OK):
                             smatch = s.replace(self.install_dir, '')
-                            match = [self.target_name] # it is expected to be list
+                            dmatch = [self.target_name] # it is expected to be list
                             break
                     # if that fails look for the interpreter on the host
                     if not smatch:
                         smatch = misc.whereis(sbase, False)
                         if smatch:
-                            match = database.local_belongs(smatch, exact=True, escape=False)
+                            dmatch = database.local_belongs(smatch, exact=True, escape=False)
 
                     # now update the shebang if possible
                     if smatch:
                         message.sub_debug(_('Attempting shebang correction on'), sfile)
                         misc.file_substitute('^' + sfull, '#!' + smatch + ' ' + sargs, sfile)
 
-                    if match and len(match) > 1:
-                        message.sub_warning(_('Multiple providers for %s') % smatch, match)
-                        if self.target_name in match:
-                            match = self.target_name
+                    if dmatch and len(dmatch) > 1:
+                        message.sub_warning(_('Multiple providers for %s') % sbase, dmatch)
+                        if self.target_name in dmatch:
+                            dmatch = self.target_name
                         else:
-                            match = match[0]
-                    match = misc.string_convert(match)
+                            dmatch = dmatch[0]
+                    dmatch = misc.string_convert(dmatch)
 
-                    if match == self.target_name:
-                        message.sub_debug(_('Dependency needed but in target'), match)
-                    elif match and match in self.target_depends:
-                        message.sub_debug(_('Dependency needed but in dependencies'), match)
-                    elif match and not match in self.target_depends:
-                        message.sub_debug(_('Dependency needed but in local'), match)
-                        self.target_depends.append(match)
+                    if dmatch == self.target_name:
+                        message.sub_debug(_('Dependency needed but in target'), dmatch)
+                    elif dmatch and dmatch in self.target_depends:
+                        message.sub_debug(_('Dependency needed but in dependencies'), dmatch)
+                    elif dmatch and not dmatch in self.target_depends:
+                        message.sub_debug(_('Dependency needed but in local'), dmatch)
+                        self.target_depends.append(dmatch)
                     elif self.ignore_missing:
-                        message.sub_warning(_('Dependency needed, not in any local'), smatch)
+                        message.sub_warning(_('Dependency needed, not in any local'), sbase)
                     else:
-                        message.sub_critical(_('Dependency needed, not in any local'), smatch)
+                        message.sub_critical(_('Dependency needed, not in any local'), sbase)
                         missing_detected = True
         if missing_detected:
             sys.exit(2)

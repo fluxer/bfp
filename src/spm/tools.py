@@ -32,7 +32,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.5.0 (38e8ef8)"
+app_version = "1.5.0 (2b1fd6f)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -443,10 +443,12 @@ class Lint(object):
                     if not found_debug:
                         for sfile in target_footprint.splitlines():
                             if not os.path.exists(sfile):
-                                # FIXME: warn?
+                                message.sub_debug(_('File does not exist'), sfile)
                                 continue
                             smime = misc.file_mime(sfile)
-                            if smime == 'application/x-executable' or smime == 'application/x-sharedlib':
+                            if smime == 'application/x-executable' \
+                                or smime == 'application/x-sharedlib' \
+                                or smime == 'application/x-archive':
                                 found_exe = True
                                 break
                     if not found_debug and found_exe:
