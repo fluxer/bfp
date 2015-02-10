@@ -451,6 +451,9 @@ class Source(object):
         obj.main()
 
     def split_debug(self, sfile):
+        # avoid actions on debug files, do not rely on .debug suffix
+        if '/lib/debug/' in sfile:
+            return
         # FIXME: do not run on hardlinks, it will fail with binutils <=2.23.2
         message.sub_debug('Creating debug file', sfile)
         # ugly paths manipulation due to GDB standards:
