@@ -933,6 +933,8 @@ class Source(object):
                             dmatch = [self.target_name] # it is expected to be list
                             break
                     # if that fails look for the interpreter on the host
+                    # FIXME: if the interpreter found by misc.whereis() is not
+                    # ownded by a local target try to find interpreter that is
                     if not smatch:
                         smatch = misc.whereis(sbase, False)
                         if smatch:
@@ -1377,6 +1379,13 @@ class Binary(Source):
         self.do_reverse = do_reverse
         self.do_update = do_update
         self.autoremove = autoremove
+        misc.OFFLINE = OFFLINE
+        misc.TIMEOUT = TIMEOUT
+        misc.ROOT_DIR = ROOT_DIR
+        database.ROOT_DIR = ROOT_DIR
+        database.CACHE_DIR = CACHE_DIR
+        database.LOCAL_DIR = LOCAL_DIR
+        database.IGNORE = IGNORE
 
     def autobinary(self, targets, automake=False, autoremove=False):
         ''' Handle targets build/remove without affecting current object '''
