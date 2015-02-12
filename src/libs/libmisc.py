@@ -40,17 +40,15 @@ class Misc(object):
         program = os.path.basename(program)
         for path in os.environ.get('PATH', '/bin:/usr/bin').split(':'):
             exe = os.path.join(path, program)
-            if chroot:
-                # normalize because os.path.join sucks and can't be used in this case
-                if os.path.isfile(os.path.realpath(self.ROOT_DIR + exe)):
-                    return exe
-            else:
-                if os.path.isfile(exe):
-                    return exe
+            # normalize because os.path.join sucks and can't be used in this case
+            if chroot and os.path.isfile(os.path.realpath(self.ROOT_DIR + exe)):
+                return exe
+            elif os.path.isfile(exe):
+                return exe
+
         if fallback:
-            # if only the OSError exception was a bit more robust. in the
-            # future, fallback will return program and let OSError be raised
-            # at higher level
+            # in the future, fallback will return program and let OSError be
+            # raised at higher level, e.g. by subprocess
             raise OSError('Program not found in PATH', program)
         return None
 
