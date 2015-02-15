@@ -30,7 +30,7 @@ class Database(object):
                     'size': self._local_metadata(metadata, 'size'),
                     'footprint': misc.file_read(footprint)
                 }
-        snotifier = os.path.isfile(os.path.join(self.LOCAL_DIR, '.rebuild'))
+        snotifier = os.path.join(os.path.join(self.LOCAL_DIR, '.rebuild'))
         if os.path.isfile(snotifier):
             os.unlink(snotifier)
          # print(sys.getsizeof(self.LOCAL_CACHE))
@@ -51,7 +51,7 @@ class Database(object):
                     'options': parser.options,
                     'backup': parser.backup
                 }
-        snotifier = os.path.isfile(os.path.join(self.CACHE_DIR, '.rebuild'))
+        snotifier = os.path.join(os.path.join(self.CACHE_DIR, '.rebuild'))
         if os.path.isfile(snotifier):
             os.unlink(snotifier)
         # print(sys.getsizeof(self.REMOTE_CACHE))

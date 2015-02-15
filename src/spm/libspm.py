@@ -343,7 +343,7 @@ class Repo(object):
                 self.repository_url, self.repository_dir), demote=DEMOTE)
 
         # generate database caches (see libpackage)
-        misc.file_write(os.path.isfile(os.path.join(self.CACHE_DIR, '.rebuild')), 'DO NO DELETE')
+        misc.file_write(os.path.join(self.CACHE_DIR, '.rebuild'), 'DO NO DELETE')
 
     def prune(self):
         ''' Remove repositories that are no longer in the config '''
