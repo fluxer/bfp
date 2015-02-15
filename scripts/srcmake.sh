@@ -162,7 +162,7 @@ for src in "${@:-.}";do
     cd "$SOURCE_DIR"
     src_install
 
-    msg "Creating footprint and metadata.."
+    msg "Creating footprint, metadata and database notifier.."
     mkdir -p "$INSTALL_DIR/var/local/spm/$src_name"
     # FIXME: it breaks on spaces
     touch "$INSTALL_DIR/var/local/spm/$src_name/footprint"
@@ -173,7 +173,8 @@ for src in "${@:-.}";do
     echo "description=$description" >> "$INSTALL_DIR/var/local/spm/$src_name/metadata"
     echo "depends=${depends[*]}" >> "$INSTALL_DIR/var/local/spm/$src_name/metadata"
     echo "size=$(du -s $INSTALL_DIR | awk '{print $1}')" >> "$INSTALL_DIR/var/local/spm/$src_name/metadata"
-
+    echo "DO NOT DELETE" > "$INSTALL_DIR/var/local/.rebuild"
+    
     msg "Compressing tarball.."
     tarball="${src_name}_${version}.tar.bz2"
     cd "$INSTALL_DIR"

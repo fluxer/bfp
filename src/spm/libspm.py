@@ -342,6 +342,9 @@ class Repo(object):
             misc.system_command((misc.whereis('git'), 'clone', '--depth=1', \
                 self.repository_url, self.repository_dir), demote=DEMOTE)
 
+        # generate database caches (see libpackage)
+        misc.file_write(os.path.isfile(os.path.join(self.CACHE_DIR, '.rebuild')), 'DO NO DELETE')
+
     def prune(self):
         ''' Remove repositories that are no longer in the config '''
         rdir = os.path.join(CACHE_DIR, 'repositories')
@@ -997,6 +1000,9 @@ class Source(object):
         misc.file_write(os.path.join(self.install_dir, self.target_footprint), \
             '\n'.join(sorted(misc.list_files(self.install_dir))).replace(self.install_dir, ''))
 
+        message.sub_info(_('Creating database notifier'))
+        misc.file_write(os.path.join(self.install_dir, 'var/local/.rebuild'), 'DO NO DELETE')
+
         message.sub_info(_('Compressing tarball'))
         misc.dir_create(os.path.join(CACHE_DIR, 'tarballs'))
         misc.archive_compress((self.install_dir,), self.target_tarball, \
@@ -1034,7 +1040,7 @@ class Source(object):
                 sys.exit(2)
 
         # store state installed or not, it must be done before the decompression
-        target_upgrade = database.local_installed(self.target_name)
+        target_upgrade = database.local_search(self.target_name)
 
         if target_upgrade and SCRIPTS \
             and misc.file_search('\npre_upgrade()', self.srcbuild, escape=False):
@@ -1140,7 +1146,7 @@ class Source(object):
 
     def remove(self):
         ''' Remove target files from system '''
-        if not database.local_installed(self.target_name):
+        if not database.local_search(self.target_name):
             message.sub_critical(_('Already removed'), self.target_name)
             sys.exit(2)
 
@@ -1181,7 +1187,7 @@ class Source(object):
             for sfile in reversed(target_content):
                 self.remove_target_link(sfile)
 
-        if database.local_installed(self.target_name):
+        if database.local_search(self.target_name):
             message.sub_info(_('Removing footprint and metadata'))
             misc.dir_remove(os.path.join(LOCAL_DIR, self.target_name))
 

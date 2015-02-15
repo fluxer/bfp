@@ -14,39 +14,100 @@ class Database(object):
         self.CACHE_DIR = '/var/cache/spm'
         self.LOCAL_DIR = self.ROOT_DIR + 'var/local/spm'
         self.IGNORE = []
+        self._build_local_cache()
+        self._build_remote_cache()
+
+    def _build_local_cache(self):
+        self.LOCAL_CACHE = {}
+        for sdir in misc.list_dirs(self.LOCAL_DIR):
+            metadata = os.path.join(sdir, 'metadata')
+            footprint = os.path.join(sdir, 'footprint')
+            if os.path.isfile(metadata) and os.path.isfile(footprint):
+                self.LOCAL_CACHE[sdir] = {
+                    'version': self._local_metadata(metadata, 'version'),
+                    'description': self._local_metadata(metadata, 'description'),
+                    'depends': self._local_metadata(metadata, 'depends').split(),
+                    'size': self._local_metadata(metadata, 'size'),
+                    'footprint': misc.file_read(footprint)
+                }
+        snotifier = os.path.isfile(os.path.join(self.LOCAL_DIR, '.rebuild'))
+        if os.path.isfile(snotifier):
+            os.unlink(snotifier)
+         # print(sys.getsizeof(self.LOCAL_CACHE))
+
+    def _build_remote_cache(self):
+        self.REMOTE_CACHE = {}
+        for sdir in misc.list_dirs(os.path.join(self.CACHE_DIR, 'repositories')):
+            srcbuild = os.path.join(sdir, 'SRCBUILD')
+            if os.path.isfile(srcbuild):
+                parser = SRCBUILD(srcbuild)
+                self.REMOTE_CACHE[sdir] = {
+                    'version': parser.version,
+                    'description': parser.description,
+                    'depends': parser.depends,
+                    'makedepends': parser.makedepends,
+                    'checkdepends': parser.checkdepends,
+                    'sources': parser.sources,
+                    'options': parser.options,
+                    'backup': parser.backup
+                }
+        snotifier = os.path.isfile(os.path.join(self.CACHE_DIR, '.rebuild'))
+        if os.path.isfile(snotifier):
+            os.unlink(snotifier)
+        # print(sys.getsizeof(self.REMOTE_CACHE))
+
+    def _local_metadata(self, smetadata, skey):
+        ''' Returns metadata of local target '''
+        misc.typecheck(smetadata, (types.StringTypes))
+        misc.typecheck(skey, (types.StringTypes))
+
+        for line in misc.file_readlines(smetadata):
+            if line.startswith(skey + '='):
+                return line.split('=')[1].strip()
 
     def remote_all(self, basename=False):
         ''' Returns directories of all remote (repository) targets '''
         misc.typecheck(basename, (types.BooleanType))
 
-        remote_list = []
-        for sdir in misc.list_dirs(os.path.join(self.CACHE_DIR, \
-            'repositories')):
-            if os.path.isfile(os.path.join(sdir, 'SRCBUILD')) and basename:
-                remote_list.append(os.path.basename(sdir))
-            elif os.path.isfile(os.path.join(sdir, 'SRCBUILD')):
-                remote_list.append(sdir)
-        return sorted(remote_list)
+        if basename:
+            lremote = []
+            for target in self.REMOTE_CACHE.keys():
+                lremote.append(os.path.basename(target))
+            return sorted(lremote)
+        return self.REMOTE_CACHE.keys()
 
     def local_all(self, basename=False):
         ''' Returns directories of all local (installed) targets '''
         misc.typecheck(basename, (types.BooleanType))
 
-        local_list = []
-        # it may not exists if bootstrapping
-        if not os.path.isdir(self.LOCAL_DIR):
-            return local_list
+        if basename:
+            llocal = []
+            for target in self.LOCAL_CACHE.keys():
+                llocal.append(os.path.basename(target))
+            return sorted(llocal)
+        return self.LOCAL_CACHE.keys()
 
-        for sdir in misc.list_dirs(self.LOCAL_DIR):
-            if os.path.isfile(os.path.join(sdir, 'metadata')) and basename:
-                local_list.append(os.path.basename(sdir))
-            elif os.path.isfile(os.path.join(sdir, 'metadata')):
-                local_list.append(sdir)
-        return sorted(local_list)
+    def local_search(self, target):
+        ''' Returns full path to directory matching target '''
+        misc.typecheck(target, (types.StringTypes))
+
+        # rebuild cache on demand
+        if os.path.isfile(os.path.join(self.LOCAL_DIR, '.rebuild')):
+            self._build_local_cache()
+
+        for ltarget in self.local_all():
+            if ltarget == target \
+                or os.path.basename(ltarget) == os.path.basename(target):
+                return ltarget
+        return None
 
     def remote_search(self, target):
         ''' Returns full path to directory matching target '''
         misc.typecheck(target, (types.StringTypes))
+
+        # rebuild cache on demand
+        if os.path.isfile(os.path.join(self.CACHE_DIR, '.rebuild')):
+            self._build_remote_cache()
 
         if os.path.isfile(os.path.join(target, 'SRCBUILD')):
             return target
@@ -56,18 +117,6 @@ class Database(object):
                 or os.path.basename(rtarget) == os.path.basename(target):
                 return rtarget
         return None
-
-    def local_installed(self, target):
-        ''' Returns True or False wheather target is installed '''
-        misc.typecheck(target, (types.StringTypes))
-
-        if not os.path.isdir(self.LOCAL_DIR):
-            return False
-        elif os.path.basename(target) in self.local_all(basename=True):
-            return True
-        elif target in self.local_all():
-            return True
-        return False
 
     def local_belongs(self, sfile, exact=False, escape=True, ignore=None):
         ''' Searches for match of file in all local targets '''
@@ -165,33 +214,25 @@ class Database(object):
         ''' Returns files of target '''
         misc.typecheck(target, (types.StringTypes))
 
-        relative_path = os.path.join(self.LOCAL_DIR, target, 'footprint')
-        full_path = os.path.join(target, 'footprint')
-        if os.path.isfile(relative_path):
-            return misc.file_read(relative_path)
-        elif os.path.isfile(full_path):
-            return misc.file_read(full_path)
+        match = self.local_search(target)
+        if match:
+            return self.LOCAL_CACHE[match]['footprint']
 
     def local_metadata(self, target, key):
         ''' Returns metadata of local target '''
         misc.typecheck(target, (types.StringTypes))
         misc.typecheck(key, (types.StringTypes))
 
-        target_metadata = os.path.join(self.LOCAL_DIR, target, 'metadata')
-        if os.path.isfile(target_metadata):
-            for line in misc.file_readlines(target_metadata):
-                if line.startswith(key + '='):
-                    if key == 'depends':
-                        # exception, return dependencies as list
-                        return line.split('=')[1].strip().split()
-                    return line.split('=')[1].strip()
+        match = self.local_search(target)
+        if match:
+            return self.LOCAL_CACHE[match][key]
 
     def local_uptodate(self, target):
         ''' Returns True if target is up-to-date and False otherwise '''
         misc.typecheck(target, (types.StringTypes))
 
         # check if target is installed at all first
-        if not self.local_installed(target):
+        if not self.local_search(target):
             return False
 
         # if remote target is passed and it's a directory not a base name
@@ -216,12 +257,10 @@ class Database(object):
 
         match = self.remote_search(target)
         if os.path.isfile(os.path.join(target, 'SRCBUILD')):
-            src = os.path.join(target, 'SRCBUILD')
-        elif match:
-            src = os.path.join(match, 'SRCBUILD')
-        else:
-            return None
-        return getattr(SRCBUILD(src), key)
+            return getattr(SRCBUILD(os.path.join(target, 'SRCBUILD')), key)
+        match = self.remote_search(target)
+        if match:
+            return self.REMOTE_CACHE[match][key]
 
     def remote_aliases(self, basename=True):
         ''' Returns basename of all aliases '''

@@ -114,7 +114,7 @@ def RefreshTargetsReal():
                 targets.append(target)
     elif current == 'candidates':
         for target in database.remote_all(basename=True):
-            if not database.local_installed(target):
+            if not database.local_search(target):
                 targets.append(target)
     else:
         targets = database.remote_alias(current)
@@ -214,7 +214,7 @@ def RefreshWidgets():
 
     ui.metadataText.clear()
     ui.footprintText.clear()
-    if database.local_installed(target):
+    if database.local_search(target):
         ui.removeButton.setEnabled(True)
         ui.metadataText.append('Version: ' + database.local_metadata(target, 'version'))
         ui.metadataText.append('Description: ' + database.local_metadata(target, 'description'))
