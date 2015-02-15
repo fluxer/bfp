@@ -342,8 +342,8 @@ class Repo(object):
             misc.system_command((misc.whereis('git'), 'clone', '--depth=1', \
                 self.repository_url, self.repository_dir), demote=DEMOTE)
 
-        # generate database caches (see libpackage)
-        misc.file_write(os.path.join(self.CACHE_DIR, '.rebuild'), 'DO NO DELETE')
+        # regenerate database caches (see libpackage)
+        database.notify_cache()
 
     def prune(self):
         ''' Remove repositories that are no longer in the config '''

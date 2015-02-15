@@ -1,6 +1,6 @@
 #!/bin/python2
 
-import os, re, shlex, types
+import os, sys, re, shlex, types
 from distutils.version import LooseVersion
 
 import libmisc
@@ -12,7 +12,9 @@ class Database(object):
     def __init__(self):
         self.ROOT_DIR = '/'
         self.CACHE_DIR = '/var/cache/spm'
+        self.CACHE_NOTIFIER = self.CACHE_DIR + '/.rebuild'
         self.LOCAL_DIR = self.ROOT_DIR + 'var/local/spm'
+        self.LOCAL_NOTIFIER = self.LOCAL_DIR + '/.rebuild'
         self.IGNORE = []
         self._build_local_cache()
         self._build_remote_cache()
@@ -30,10 +32,9 @@ class Database(object):
                     'size': self._local_metadata(metadata, 'size'),
                     'footprint': misc.file_read(footprint)
                 }
-        snotifier = os.path.join(os.path.join(self.LOCAL_DIR, '.rebuild'))
-        if os.path.isfile(snotifier):
-            os.unlink(snotifier)
-         # print(sys.getsizeof(self.LOCAL_CACHE))
+        if os.path.isfile(self.LOCAL_NOTIFIER):
+            os.unlink(self.LOCAL_NOTIFIER)
+        # print(sys.getsizeof(self.LOCAL_CACHE))
 
     def _build_remote_cache(self):
         self.REMOTE_CACHE = {}
@@ -51,9 +52,8 @@ class Database(object):
                     'options': parser.options,
                     'backup': parser.backup
                 }
-        snotifier = os.path.join(os.path.join(self.CACHE_DIR, '.rebuild'))
-        if os.path.isfile(snotifier):
-            os.unlink(snotifier)
+        if os.path.isfile(self.CACHE_NOTIFIER):
+            os.unlink(self.CACHE_NOTIFIER)
         # print(sys.getsizeof(self.REMOTE_CACHE))
 
     def _local_metadata(self, smetadata, skey):
@@ -64,6 +64,14 @@ class Database(object):
         for line in misc.file_readlines(smetadata):
             if line.startswith(skey + '='):
                 return line.split('=')[1].strip()
+
+    def notify_cache(self):
+        ''' Let all database watchers know that cache database has changed '''
+        misc.file_write(self.CACHE_NOTIFIER, 'DO NO DELETE')
+
+    def notify_local(self):
+        ''' Let all database watchers know that local database has changed '''
+        misc.file_write(self.LOCAL_NOTIFIER, 'DO NO DELETE')
 
     def remote_all(self, basename=False):
         ''' Returns directories of all remote (repository) targets '''
@@ -92,7 +100,7 @@ class Database(object):
         misc.typecheck(target, (types.StringTypes))
 
         # rebuild cache on demand
-        if os.path.isfile(os.path.join(self.LOCAL_DIR, '.rebuild')):
+        if os.path.isfile(self.LOCAL_NOTIFIER):
             self._build_local_cache()
 
         for ltarget in self.local_all():
@@ -106,7 +114,7 @@ class Database(object):
         misc.typecheck(target, (types.StringTypes))
 
         # rebuild cache on demand
-        if os.path.isfile(os.path.join(self.CACHE_DIR, '.rebuild')):
+        if os.path.isfile(self.CACHE_NOTIFIER):
             self._build_remote_cache()
 
         if os.path.isfile(os.path.join(target, 'SRCBUILD')):
