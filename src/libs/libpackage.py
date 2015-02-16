@@ -13,8 +13,10 @@ class Database(object):
         self.ROOT_DIR = '/'
         self.CACHE_DIR = '/var/cache/spm'
         self.CACHE_NOTIFIER = self.CACHE_DIR + '/.rebuild'
+        self.REMOTE_CACHE = {}
         self.LOCAL_DIR = self.ROOT_DIR + 'var/local/spm'
         self.LOCAL_NOTIFIER = self.LOCAL_DIR + '/.rebuild'
+        self.LOCAL_CACHE = {}
         self.IGNORE = []
 
     def _build_local_cache(self):
@@ -65,41 +67,47 @@ class Database(object):
 
     def notify_cache(self):
         ''' Let all database watchers know that cache database has changed '''
+        self.REMOTE_CACHE = {}
         misc.file_write(self.CACHE_NOTIFIER, 'DO NO DELETE')
 
     def notify_local(self):
         ''' Let all database watchers know that local database has changed '''
+        self.LOCAL_CACHE = {}
         misc.file_write(self.LOCAL_NOTIFIER, 'DO NO DELETE')
 
     def remote_all(self, basename=False):
         ''' Returns directories of all remote (repository) targets '''
         misc.typecheck(basename, (types.BooleanType))
 
+        # rebuild cache on demand
+        if not self.REMOTE_CACHE or os.path.isfile(self.CACHE_NOTIFIER):
+            self._build_remote_cache()
+
         if basename:
             lremote = []
             for target in self.REMOTE_CACHE.keys():
                 lremote.append(os.path.basename(target))
             return sorted(lremote)
-        return self.REMOTE_CACHE.keys()
+        return sorted(self.REMOTE_CACHE.keys())
 
     def local_all(self, basename=False):
         ''' Returns directories of all local (installed) targets '''
         misc.typecheck(basename, (types.BooleanType))
+
+        # rebuild cache on demand
+        if not self.LOCAL_CACHE or os.path.isfile(self.LOCAL_NOTIFIER):
+            self._build_local_cache()
 
         if basename:
             llocal = []
             for target in self.LOCAL_CACHE.keys():
                 llocal.append(os.path.basename(target))
             return sorted(llocal)
-        return self.LOCAL_CACHE.keys()
+        return sorted(self.LOCAL_CACHE.keys())
 
     def local_search(self, target):
         ''' Returns full path to directory matching target '''
         misc.typecheck(target, (types.StringTypes))
-
-        # rebuild cache on demand
-        if not self.LOCAL_CACHE or os.path.isfile(self.LOCAL_NOTIFIER):
-            self._build_local_cache()
 
         for ltarget in self.local_all():
             if ltarget == target \
@@ -110,10 +118,6 @@ class Database(object):
     def remote_search(self, target):
         ''' Returns full path to directory matching target '''
         misc.typecheck(target, (types.StringTypes))
-
-        # rebuild cache on demand
-        if not self.REMOTE_CACHE or os.path.isfile(self.CACHE_NOTIFIER):
-            self._build_remote_cache()
 
         if os.path.isfile(os.path.join(target, 'SRCBUILD')):
             return target
@@ -261,7 +265,6 @@ class Database(object):
         misc.typecheck(target, (types.StringTypes))
         misc.typecheck(key, (types.StringTypes))
 
-        match = self.remote_search(target)
         if os.path.isfile(os.path.join(target, 'SRCBUILD')):
             return getattr(SRCBUILD(os.path.join(target, 'SRCBUILD')), key)
         match = self.remote_search(target)
