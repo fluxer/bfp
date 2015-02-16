@@ -16,8 +16,6 @@ class Database(object):
         self.LOCAL_DIR = self.ROOT_DIR + 'var/local/spm'
         self.LOCAL_NOTIFIER = self.LOCAL_DIR + '/.rebuild'
         self.IGNORE = []
-        self._build_local_cache()
-        self._build_remote_cache()
 
     def _build_local_cache(self):
         self.LOCAL_CACHE = {}
@@ -100,7 +98,7 @@ class Database(object):
         misc.typecheck(target, (types.StringTypes))
 
         # rebuild cache on demand
-        if os.path.isfile(self.LOCAL_NOTIFIER):
+        if not self.LOCAL_CACHE or os.path.isfile(self.LOCAL_NOTIFIER):
             self._build_local_cache()
 
         for ltarget in self.local_all():
@@ -114,7 +112,7 @@ class Database(object):
         misc.typecheck(target, (types.StringTypes))
 
         # rebuild cache on demand
-        if os.path.isfile(self.CACHE_NOTIFIER):
+        if not self.REMOTE_CACHE or os.path.isfile(self.CACHE_NOTIFIER):
             self._build_remote_cache()
 
         if os.path.isfile(os.path.join(target, 'SRCBUILD')):
