@@ -6,7 +6,6 @@
  * Implement trigger invocation only on file content change
  * Build target(s) from source when binary not available?
  * Make the python byte-compile work for versions other than what SPM has been run from
- * Implement a database lock limmiting the clients to two (2) to prevent issues due to caching
 
 ## ALL (on regular basis) ##
  * Run PyLint and do some kung-foo on the code style
