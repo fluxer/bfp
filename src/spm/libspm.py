@@ -1147,6 +1147,9 @@ class Source(object):
             elif needs_rebuild:
                 message.sub_warning(_('Targets may need rebuild'), needs_rebuild)
 
+        # do not wait for the cache notifier to kick in, update it now
+        database.LOCAL_CACHE = {}
+
     def remove(self):
         ''' Remove target files from system '''
         if not database.local_search(self.target_name):
@@ -1200,6 +1203,9 @@ class Source(object):
             misc.system_script(self.srcbuild, 'post_remove')
 
         self.update_databases(target_content, 'remove')
+
+        # do not wait for the cache notifier to kick in, update it now
+        database.LOCAL_CACHE = {}
 
     def main(self):
         ''' Execute action for every target '''
