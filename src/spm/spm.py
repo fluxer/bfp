@@ -19,7 +19,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.5.0 (323a94d)"
+app_version = "1.5.0 (9441203)"
 
 try:
     import libmessage
@@ -149,7 +149,7 @@ try:
             setattr(namespace, self.dest, values)
 
     class OverridePyCompile(argparse.Action):
-        ''' Override compiling of Python files '''
+        ''' Override compiling of Python modules '''
         def __call__(self, parser, namespace, values, option_string=None):
             libspm.PYTHON_COMPILE = values
             setattr(namespace, self.dest, values)
@@ -344,7 +344,7 @@ try:
         help=_('Set whether to strip RPATH'))
     parser.add_argument('--pycompile', type=ast.literal_eval, \
         action=OverridePyCompile, choices=[True, False], \
-        help=_('Set whether to compile Python files'))
+        help=_('Set whether to byte-compile Python modules'))
     parser.add_argument('--missing', type=ast.literal_eval, \
         action=OverrideMissing,  choices=[True, False], \
         help=_('Set whether to ignore missing runtime dependencies'))

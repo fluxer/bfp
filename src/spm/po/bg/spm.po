@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-17 15:23+0000\n"
-"PO-Revision-Date: 2015-02-12 22:25+0000\n"
+"POT-Creation-Date: 2015-02-17 15:35+0000\n"
+"PO-Revision-Date: 2015-02-17 15:39+0000\n"
 "Last-Translator: \n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -109,7 +109,7 @@ msgstr "Клониране на отдалечен"
 
 #: libspm.py:344
 msgid "Setting up user information for repository"
-msgstr ""
+msgstr "Настройване на потребителска информация за хранилището"
 
 #: libspm.py:371
 msgid "Checking for updates"
@@ -389,7 +389,7 @@ msgstr "Зглабяне на отпечатък"
 
 #: libspm.py:1009
 msgid "Compressing tarball"
-msgstr ""
+msgstr "Компресиране на архив"
 
 #: libspm.py:1031
 msgid "Checking for conflicts"
@@ -418,7 +418,7 @@ msgstr "Резервиране на"
 
 #: libspm.py:1076
 msgid "Decompressing tarball"
-msgstr ""
+msgstr "Декомпресиране на архив"
 
 #: libspm.py:1080
 msgid "Removing obsolete files and directories"
@@ -720,19 +720,19 @@ msgstr ""
 
 #: spm.py:302
 msgid "Change cache directory"
-msgstr "Смени кеш директорията"
+msgstr "Промени кеш директорията"
 
 #: spm.py:304
 msgid "Change build directory"
-msgstr "Смени директорията за строеж"
+msgstr "Промени директорията за строеж"
 
 #: spm.py:306
 msgid "Change system root directory"
-msgstr "Смени основната системна директория"
+msgstr "Промени основната системна директория"
 
 #: spm.py:308
 msgid "Change ignored targets"
-msgstr "Смени игнорираните мишени"
+msgstr "Промени игнорираните мишени"
 
 #: spm.py:310
 msgid "Set user to demote to"
@@ -740,11 +740,11 @@ msgstr ""
 
 #: spm.py:313
 msgid "Set whether to use offline mode"
-msgstr ""
+msgstr "Задай дали да се използва режим бет интернет"
 
 #: spm.py:316
 msgid "Set whether to use mirrors"
-msgstr ""
+msgstr "Задай дали да се използват огледала"
 
 #: spm.py:318
 msgid "Set the connection timeout"
@@ -752,71 +752,71 @@ msgstr ""
 
 #: spm.py:320
 msgid "Change CHOST"
-msgstr "Смени CHOST"
+msgstr "Промени CHOST"
 
 #: spm.py:322
 msgid "Change CFLAGS"
-msgstr "Смени CFLAGS"
+msgstr "Промени CFLAGS"
 
 #: spm.py:324
 msgid "Change CXXFLAGS"
-msgstr ""
+msgstr "Промени CXXFLAGS"
 
 #: spm.py:326
 msgid "Change CPPFLAGS"
-msgstr ""
+msgstr "Промени CPPFLAGS"
 
 #: spm.py:328
 msgid "Change LDFLAGS"
-msgstr ""
+msgstr "Промени LDFLAGS"
 
 #: spm.py:330
 msgid "Change MAKEFLAGS"
-msgstr ""
+msgstr "Промени MAKEFLAGS"
 
 #: spm.py:332
 msgid "Set whether to compress man pages"
-msgstr ""
+msgstr "Задай дали да се компресират страниците със опътванията"
 
 #: spm.py:335
 msgid "Set whether to strip binaries"
-msgstr ""
+msgstr "Задай дали да се смъкват бинарите"
 
 #: spm.py:338
 msgid "Set whether to strip shared libraries"
-msgstr ""
+msgstr "Задай дали да се смъкват споделените библиотеки"
 
 #: spm.py:341
 msgid "Set whether to strip static libraries"
-msgstr ""
+msgstr "Задай дали да се смъкват статичните библиотеки"
 
 #: spm.py:344
 msgid "Set whether to strip RPATH"
-msgstr ""
+msgstr "Задай дали да се смъква RPATH"
 
 #: spm.py:347
-msgid "Set whether to compile Python files"
-msgstr ""
+msgid "Set whether to byte-compile Python modules"
+msgstr "Задай дали да се байт-компилират Python модулите"
 
 #: spm.py:350
 msgid "Set whether to ignore missing runtime dependencies"
-msgstr ""
+msgstr "Задай дали да се игнорират липсващите работни зависимости"
 
 #: spm.py:353
 msgid "Set whether to check for conflicts"
-msgstr ""
+msgstr "Задай дали да се проверява за конфликти"
 
 #: spm.py:356
 msgid "Set whether to backup files"
-msgstr ""
+msgstr "Задай дали да се правят резервни копия"
 
 #: spm.py:359
 msgid "Set whether to execute pre/post script"
-msgstr ""
+msgstr "Задай дали да се изпълняват pre/post скриптове"
 
 #: spm.py:362
 msgid "Set whether to execute triggers"
-msgstr ""
+msgstr "Задай дали да се изпълняват спусъците"
 
 #: spm.py:364 tools.py:883
 msgid "Enable debug messages"
