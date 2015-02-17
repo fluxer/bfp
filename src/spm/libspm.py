@@ -342,9 +342,6 @@ class Repo(object):
             misc.system_command((misc.whereis('git'), 'clone', '--depth=1', \
                 self.repository_url, self.repository_dir), demote=DEMOTE)
 
-        # regenerate database caches (see libpackage)
-        database.notify_cache()
-
     def prune(self):
         ''' Remove repositories that are no longer in the config '''
         rdir = os.path.join(CACHE_DIR, 'repositories')
@@ -999,9 +996,6 @@ class Source(object):
         # due to many file operations do not re-use target_content
         misc.file_write(os.path.join(self.install_dir, self.target_footprint), \
             '\n'.join(sorted(misc.list_files(self.install_dir))).replace(self.install_dir, ''))
-
-        message.sub_info(_('Creating database notifier'))
-        misc.file_write(os.path.join(self.install_dir, 'var/local/.rebuild'), 'DO NO DELETE')
 
         message.sub_info(_('Compressing tarball'))
         misc.dir_create(os.path.join(CACHE_DIR, 'tarballs'))

@@ -3,7 +3,7 @@
 import os, sys, re, shlex, types
 from distutils.version import LooseVersion
 
-import libmisc
+import libmisc, libinotify
 misc = libmisc.Misc()
 
 
@@ -12,14 +12,27 @@ class Database(object):
     def __init__(self):
         self.ROOT_DIR = '/'
         self.CACHE_DIR = '/var/cache/spm'
-        self.CACHE_NOTIFIER = self.CACHE_DIR + '/.rebuild'
         self.REMOTE_CACHE = {}
         self.LOCAL_DIR = self.ROOT_DIR + 'var/local/spm'
-        self.LOCAL_NOTIFIER = self.LOCAL_DIR + '/.rebuild'
         self.LOCAL_CACHE = {}
         self.IGNORE = []
+        self._notifiers_setup()
 
-    def _build_local_cache(self):
+    def _notifiers_setup(self):
+        # FIXME: should class variables be asigned? non-globals tend to get destroyed
+        wm = libinotify.WatchManager()  # Watch Manager
+        mask = libinotify.IN_DELETE | libinotify.IN_CREATE | libinotify.IN_MODIFY # watched events
+        notifier = libinotify.AsyncNotifier(wm, self._build_remote_cache)
+        wdd = wm.add_watch(os.path.join(self.CACHE_DIR, 'repositories'), mask, rec=True)
+        notifier2 = libinotify.AsyncNotifier(wm, self._build_local_cache)
+        wdd2 = wm.add_watch(self.LOCAL_DIR, mask, rec=True)
+
+    def _notifiers_teardown(self):
+        # FIXME: should something be done on class delete?
+        pass
+
+    def _build_local_cache(self, event=None):
+        # event is only for compat with the notifier
         self.LOCAL_CACHE = {}
         for sdir in misc.list_dirs(self.LOCAL_DIR):
             metadata = os.path.join(sdir, 'metadata')
@@ -32,11 +45,10 @@ class Database(object):
                     'size': self._local_metadata(metadata, 'size'),
                     'footprint': misc.file_read(footprint)
                 }
-        if os.path.isfile(self.LOCAL_NOTIFIER):
-            os.unlink(self.LOCAL_NOTIFIER)
         # print(sys.getsizeof(self.LOCAL_CACHE))
 
-    def _build_remote_cache(self):
+    def _build_remote_cache(self, event=None):
+        # event is only for compat with the notifier
         self.REMOTE_CACHE = {}
         for sdir in misc.list_dirs(os.path.join(self.CACHE_DIR, 'repositories')):
             srcbuild = os.path.join(sdir, 'SRCBUILD')
@@ -52,8 +64,6 @@ class Database(object):
                     'options': parser.options,
                     'backup': parser.backup
                 }
-        if os.path.isfile(self.CACHE_NOTIFIER):
-            os.unlink(self.CACHE_NOTIFIER)
         # print(sys.getsizeof(self.REMOTE_CACHE))
 
     def _local_metadata(self, smetadata, skey):
@@ -65,22 +75,12 @@ class Database(object):
             if line.startswith(skey + '='):
                 return line.split('=')[1].strip()
 
-    def notify_cache(self):
-        ''' Let all database watchers know that cache database has changed '''
-        self.REMOTE_CACHE = {}
-        misc.file_write(self.CACHE_NOTIFIER, 'DO NO DELETE')
-
-    def notify_local(self):
-        ''' Let all database watchers know that local database has changed '''
-        self.LOCAL_CACHE = {}
-        misc.file_write(self.LOCAL_NOTIFIER, 'DO NO DELETE')
-
     def remote_all(self, basename=False):
         ''' Returns directories of all remote (repository) targets '''
         misc.typecheck(basename, (types.BooleanType))
 
         # rebuild cache on demand
-        if not self.REMOTE_CACHE or os.path.isfile(self.CACHE_NOTIFIER):
+        if not self.REMOTE_CACHE:
             self._build_remote_cache()
 
         if basename:
@@ -95,7 +95,7 @@ class Database(object):
         misc.typecheck(basename, (types.BooleanType))
 
         # rebuild cache on demand
-        if not self.LOCAL_CACHE or os.path.isfile(self.LOCAL_NOTIFIER):
+        if not self.LOCAL_CACHE:
             self._build_local_cache()
 
         if basename:
