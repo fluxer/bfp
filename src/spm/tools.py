@@ -32,7 +32,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.5.0 (9204426)"
+app_version = "1.5.0 (903c337)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -221,6 +221,11 @@ class Dist(object):
                             message.sub_debug(_('Cloning Git repository'), src_url)
                             misc.system_command((misc.whereis('git'), \
                                 'clone', '--depth=1', src_url, src_file))
+                            # allow gracefull pulls and merges
+                            misc.system_command((misc.whereis('git'), \
+                                'config', 'user.name', 'spm')
+                            misc.system_command((misc.whereis('git'), \
+                                'config', 'user.email', 'spm@unnatended.fake')
                         continue
 
                     elif src_url.startswith(('http://', 'https://', 'ftp://', \

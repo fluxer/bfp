@@ -341,6 +341,10 @@ class Repo(object):
             message.sub_info(_('Cloning remote'), self.repository_name)
             misc.system_command((misc.whereis('git'), 'clone', '--depth=1', \
                 self.repository_url, self.repository_dir), demote=DEMOTE)
+            message.sub_info(_('Setting up user information for repository'))
+            # allow gracefull pulls and merges
+            misc.system_command((misc.whereis('git'), 'config', 'user.name', 'spm')
+            misc.system_command((misc.whereis('git'), 'config', 'user.email', 'spm@unnatended.fake')
 
     def prune(self):
         ''' Remove repositories that are no longer in the config '''
@@ -735,6 +739,11 @@ class Source(object):
                     message.sub_debug(_('Cloning Git repository'), src_url)
                     misc.system_command((misc.whereis('git'), 'clone', \
                         '--depth=1', src_url, link_file), demote=DEMOTE)
+                    # allow gracefull pulls and merges
+                    misc.system_command((misc.whereis('git'), 'config', \
+                        'user.name', 'spm')
+                    misc.system_command((misc.whereis('git'), 'config', \
+                        'user.email', 'spm@unnatended.fake')
                 continue
 
             elif src_url.startswith(('http://', 'https://', 'ftp://', \
