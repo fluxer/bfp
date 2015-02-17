@@ -1,6 +1,7 @@
 include ../../Makefile.inc
 
 all: clean
+	$(NUITKA) --module libdialog.py
 	$(NUITKA) --module libmagic.py
 	$(NUITKA) --module libmessage.py
 	$(NUITKA) --module libmisc.py
@@ -15,6 +16,7 @@ install:
 	$(INSTALL) -m644 *.so $(DESTDIR)$(SITEDIR)/
 
 uninstall:
+	$(RM) $(DESTDIR)$(SITEDIR)/libdialog.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libmagic.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libmessage.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libmisc.so
