@@ -596,7 +596,7 @@ class Misc(object):
         output = pipe.communicate()[0].strip()
         return self.string_encode(output)
 
-    def system_input(self, command, shell=False, input, demote=''):
+    def system_input(self, command, input, shell=False, demote=''):
         ''' Send input to external utility '''
         self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
         self.typecheck(input, (types.StringTypes))
