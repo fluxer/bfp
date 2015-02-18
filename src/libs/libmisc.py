@@ -596,7 +596,7 @@ class Misc(object):
         output = pipe.communicate()[0].strip()
         return self.string_encode(output)
 
-    def system_input(self, command, input, shell=False, demote=''):
+    def system_input(self, command, shell=False, input, demote=''):
         ''' Send input to external utility '''
         self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
         self.typecheck(input, (types.StringTypes))
@@ -645,7 +645,7 @@ class Misc(object):
             return subprocess.check_call(command, shell=shell, cwd=cwd, \
                 preexec_fn=self.system_demote(demote))
 
-    def system_chroot(self, command, shell=False):
+    def system_chroot(self, command, shell=False, input=None):
         ''' Execute command in chroot environment '''
         self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
         self.typecheck(shell, (types.BooleanType))
@@ -665,7 +665,10 @@ class Misc(object):
                     self.system_command((mount, '--rbind', s, sdir))
             os.chroot(self.ROOT_DIR)
             os.chdir('/')
-            self.system_command(command, shell=shell)
+            if input:
+                self.system_input(command, shell=shell, input=input)
+            else:
+                self.system_command(command, shell=shell)
         finally:
             os.fchdir(real_root)
             os.chroot('.')
