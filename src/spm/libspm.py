@@ -741,6 +741,7 @@ class Source(object):
                     message.sub_debug(_('Cloning Git repository'), src_url)
                     misc.system_command((misc.whereis('git'), 'clone', \
                         '--depth=1', src_url, link_file), demote=DEMOTE)
+                    message.sub_debug(_('Setting up user information for repository'))
                     # allow gracefull pulls and merges
                     misc.system_command((misc.whereis('git'), 'config', \
                         'user.name', 'spm'), cwd=link_file)

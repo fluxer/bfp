@@ -221,6 +221,7 @@ class Dist(object):
                             message.sub_debug(_('Cloning Git repository'), src_url)
                             misc.system_command((misc.whereis('git'), \
                                 'clone', '--depth=1', src_url, src_file))
+                            message.sub_debug(_('Setting up user information for repository'))
                             # allow gracefull pulls and merges
                             misc.system_command((misc.whereis('git'), \
                                 'config', 'user.name', 'spm'), cwd=src_file)
