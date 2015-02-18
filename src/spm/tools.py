@@ -223,9 +223,9 @@ class Dist(object):
                                 'clone', '--depth=1', src_url, src_file))
                             # allow gracefull pulls and merges
                             misc.system_command((misc.whereis('git'), \
-                                'config', 'user.name', 'spm'))
+                                'config', 'user.name', 'spm'), cwd=src_file)
                             misc.system_command((misc.whereis('git'), \
-                                'config', 'user.email', 'spm@unnatended.fake'))
+                                'config', 'user.email', 'spm@unnatended.fake'), cwd=src_file)
                         continue
 
                     elif src_url.startswith(('http://', 'https://', 'ftp://', \

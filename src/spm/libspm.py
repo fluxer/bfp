@@ -343,8 +343,10 @@ class Repo(object):
                 self.repository_url, self.repository_dir), demote=DEMOTE)
             message.sub_info(_('Setting up user information for repository'))
             # allow gracefull pulls and merges
-            misc.system_command((misc.whereis('git'), 'config', 'user.name', 'spm'))
-            misc.system_command((misc.whereis('git'), 'config', 'user.email', 'spm@unnatended.fake'))
+            misc.system_command((misc.whereis('git'), 'config', 'user.name', \
+                'spm'), cwd=self.repository_dir)
+            misc.system_command((misc.whereis('git'), 'config', 'user.email', \
+                'spm@unnatended.fake'), cwd=self.repository_dir)
 
     def prune(self):
         ''' Remove repositories that are no longer in the config '''
@@ -741,9 +743,9 @@ class Source(object):
                         '--depth=1', src_url, link_file), demote=DEMOTE)
                     # allow gracefull pulls and merges
                     misc.system_command((misc.whereis('git'), 'config', \
-                        'user.name', 'spm'))
+                        'user.name', 'spm'), cwd=link_file)
                     misc.system_command((misc.whereis('git'), 'config', \
-                        'user.email', 'spm@unnatended.fake'))
+                        'user.email', 'spm@unnatended.fake'), cwd=link_file)
                 continue
 
             elif src_url.startswith(('http://', 'https://', 'ftp://', \
