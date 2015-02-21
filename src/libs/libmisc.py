@@ -17,7 +17,7 @@ else:
 
 
 class Misc(object):
-    ''' Various methos for every-day usage '''
+    ''' Various methods for every-day usage '''
     def __init__(self):
         self.OFFLINE = False
         self.TIMEOUT = 30
@@ -29,7 +29,7 @@ class Misc(object):
         # FIXME: implement file, directory, and url type check?
         if not isinstance(a, b):
             line = inspect.currentframe().f_back.f_lineno
-            raise(TypeError('Variable is not %s (%s)' % (str(b), str(line))))
+            raise(TypeError('Variable is not %s (%d)' % (str(b), line)))
 
     def whereis(self, program, fallback=True, chroot=False):
         ''' Find full path to executable '''
