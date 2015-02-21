@@ -678,19 +678,22 @@ class Misc(object):
                 if os.path.ismount(sdir):
                     self.system_command((umount, '-f', '-l', sdir))
 
-    def system_script(self, srcbuild, function):
+    def system_script(self, sfile, function):
         ''' Execute pre/post actions '''
-        self.typecheck(srcbuild, (types.StringTypes))
+        self.typecheck(sfile, (types.StringTypes))
         self.typecheck(function, (types.StringTypes))
 
         if self.ROOT_DIR == '/':
             self.system_command((self.whereis('bash'), '-e', '-c', \
-                'source ' + srcbuild + ' && ' + function), cwd=self.ROOT_DIR)
+                'source ' + sfile + ' && ' + function), cwd=self.ROOT_DIR)
         else:
-            shutil.copy(srcbuild, os.path.join(self.ROOT_DIR, 'SRCBUILD'))
-            self.system_chroot(('bash', '-e', '-c', \
-                'source /SRCBUILD && ' + function))
-            os.remove(os.path.join(self.ROOT_DIR, 'SRCBUILD'))
+            stmp = os.path.join(self.ROOT_DIR, 'tmpscript')
+            shutil.copy(sfile, stmp)
+            try:
+                self.system_chroot(('bash', '-e', '-c', \
+                    'source /tmpscript && ' + function))
+            finally:
+                os.remove(stmp)
 
     def system_trigger(self, command, shell=False):
         ''' Execute trigger '''
