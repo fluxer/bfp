@@ -76,6 +76,7 @@ case "$root" in
       LABEL=*) device="/dev/disk/by-label/${root#*=}" ;;
 esac
 
+# device is optional, a hook may take care of the root (e.g. on Live CD)
 if [ -e "$device" ];then
     msg "Checking the root device..."
     cmd fsck -M -T "$device"

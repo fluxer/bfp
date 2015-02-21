@@ -378,7 +378,11 @@ class Repo(object):
                 continue
 
             message.sub_debug(_('Checking'), target)
-            if not database.local_uptodate(target):
+            latest = database.local_uptodate(target)
+            if not latest and target in IGNORE:
+                message.sub_warning(_('New version of %s (ignored) available') % target, \
+                    database.remote_metadata(target, 'version'))
+            elif not latest:
                 message.sub_warning(_('New version of %s available') % target, \
                     database.remote_metadata(target, 'version'))
 
