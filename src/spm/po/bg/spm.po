@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-02-22 14:04+0000\n"
-"PO-Revision-Date: 2015-02-17 15:39+0000\n"
+"POT-Creation-Date: 2015-02-22 14:06+0000\n"
+"PO-Revision-Date: 2015-02-22 14:19+0000\n"
 "Last-Translator: \n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -85,13 +85,13 @@ msgstr "Опции"
 msgid "Backup"
 msgstr "Резервни копия"
 
-#: libspm.py:322 libspm.py:370 libspm.py:672 libspm.py:679 libspm.py:690
-#: libspm.py:696 libspm.py:699 libspm.py:705 libspm.py:708 tools.py:267
+#: libspm.py:322 libspm.py:370 libspm.py:676 libspm.py:683 libspm.py:694
+#: libspm.py:700 libspm.py:703 libspm.py:709 libspm.py:712 tools.py:267
 #: tools.py:271
 msgid "Removing"
 msgstr "Премахва се"
 
-#: libspm.py:325 libspm.py:702 libspm.py:711
+#: libspm.py:325 libspm.py:706 libspm.py:715
 msgid "Dirctory is OK"
 msgstr "Директорията е ОК"
 
@@ -107,7 +107,7 @@ msgstr "Обновявяване на хранилище"
 msgid "Cloning remote"
 msgstr "Клониране на отдалечен"
 
-#: libspm.py:346 libspm.py:749 tools.py:224
+#: libspm.py:346 libspm.py:753 tools.py:224
 msgid "Setting up user information for repository"
 msgstr "Настройване на потребителска информация за хранилището"
 
@@ -119,473 +119,478 @@ msgstr "Проверяване за обновления"
 msgid "Target not in any repository"
 msgstr "Мишената не е в никое хранилище"
 
-#: libspm.py:382 libspm.py:770 libspm.py:1136 libspm.py:1464 tools.py:60
+#: libspm.py:382 libspm.py:774 libspm.py:1140 libspm.py:1468 tools.py:60
 #: tools.py:245 tools.py:301 tools.py:485 tools.py:583
 msgid "Checking"
 msgstr "Проверявака на"
 
-#: libspm.py:384
+#: libspm.py:385
+#, python-format
+msgid "New version of %s (ignored) available"
+msgstr ""
+
+#: libspm.py:388
 #, python-format
 msgid "New version of %s available"
 msgstr "Нова версия на %s е налична"
 
-#: libspm.py:399
+#: libspm.py:403
 msgid "Starting cleanup at"
 msgstr "Стартира се почистване в"
 
-#: libspm.py:403
+#: libspm.py:407
 msgid "Starting sync at"
 msgstr "Стартира се синхронизиране в"
 
-#: libspm.py:407
+#: libspm.py:411
 msgid "Starting prune at"
 msgstr "Стартира се премахване на излишни в"
 
-#: libspm.py:411
+#: libspm.py:415
 msgid "Starting update at"
 msgstr "Стартира се обновление в"
 
-#: libspm.py:529
+#: libspm.py:533
 msgid "Updating shared libraries cache"
 msgstr "Обновяване кеша на споделени библиотеки"
 
-#: libspm.py:534
+#: libspm.py:538
 msgid "Updating manual pages database"
 msgstr "Обновяване датабазата на опътващите страници"
 
-#: libspm.py:539
+#: libspm.py:543
 msgid "Updating desktop database"
 msgstr "Обновяване датабазата на работния плот"
 
-#: libspm.py:545
+#: libspm.py:549
 msgid "Updating MIME database"
 msgstr "Обновяване на MIME датабазата"
 
-#: libspm.py:550
+#: libspm.py:554
 msgid "Updating icon resources"
 msgstr "Обновяване ресурсите на иконите"
 
-#: libspm.py:558
+#: libspm.py:562
 msgid "Installing XDG MIMEs"
 msgstr "Инсталират се XDG MIME-и"
 
-#: libspm.py:562
+#: libspm.py:566
 msgid "Uninstalling XDG MIMEs"
 msgstr "Деинсталират се XDG MIME-и"
 
-#: libspm.py:566
+#: libspm.py:570
 msgid "Updating GIO modules cache"
 msgstr "Обновяване кеша на GIO модулите"
 
-#: libspm.py:571
+#: libspm.py:575
 msgid "Updating pango modules cache"
 msgstr "Обновяване кеша на pango модулите"
 
-#: libspm.py:576
+#: libspm.py:580
 msgid "Updating GTK-2.0 imodules cache"
 msgstr "Обновяване кеша на GTK-2.0 imodules"
 
-#: libspm.py:583
+#: libspm.py:587
 msgid "Updating GTK-3.0 imodules cache"
 msgstr "Обновяване кеша на GTK-3.0 imodules"
 
-#: libspm.py:590
+#: libspm.py:594
 msgid "Updating gdk pixbuffer loaders"
 msgstr "Обновяване gdk pixbuffer зареждачите"
 
-#: libspm.py:597
+#: libspm.py:601
 msgid "Updating GSettings schemas"
 msgstr "Обновяване GSettings схемите"
 
-#: libspm.py:610
+#: libspm.py:614
 msgid "Reloading udev rules and hwdb"
 msgstr "Презареждане udev правилата и hwdb"
 
-#: libspm.py:632
+#: libspm.py:636
 msgid "Updating icons cache"
 msgstr "Обновяване кеша на иконите"
 
-#: libspm.py:639
+#: libspm.py:643
 msgid "Installing info page"
 msgstr "Инсталиране инфо страница"
 
-#: libspm.py:644
+#: libspm.py:648
 msgid "Deleting info page"
 msgstr "Изтриване инфо страница"
 
-#: libspm.py:650
+#: libspm.py:654
 msgid "Updating module dependencies"
 msgstr "Обновяване зависимостите на модули"
 
-#: libspm.py:655
+#: libspm.py:659
 msgid "Updating initramfs image"
 msgstr "Обновяване initramfs образа"
 
-#: libspm.py:663
+#: libspm.py:667
 msgid "Updating GRUB configuration"
 msgstr "Обновяване GRUB конфигурацията"
 
-#: libspm.py:715 libspm.py:1167 libspm.py:1436
+#: libspm.py:719 libspm.py:1171 libspm.py:1440
 msgid "Checking dependencies"
 msgstr "Проверяване на зависимостите"
 
-#: libspm.py:720
+#: libspm.py:724
 msgid "Building dependencies"
 msgstr "Изграждане на зависимости"
 
-#: libspm.py:722 libspm.py:1442
+#: libspm.py:726 libspm.py:1446
 #, python-format
 msgid "Resuming %s preparations at"
 msgstr "Преостановяване подготовката на %s в"
 
-#: libspm.py:725 libspm.py:1445
+#: libspm.py:729 libspm.py:1449
 msgid "Dependencies missing"
 msgstr "Липсващи зависимости"
 
-#: libspm.py:730 tools.py:207
+#: libspm.py:734 tools.py:207
 msgid "Preparing sources"
 msgstr "Подготовка на източниците"
 
-#: libspm.py:740 libspm.py:760 libspm.py:1453 tools.py:215 tools.py:235
+#: libspm.py:744 libspm.py:764 libspm.py:1457 tools.py:215 tools.py:235
 msgid "Internet connection is down"
 msgstr "Интернет връзката не е активна"
 
-#: libspm.py:742 tools.py:217
+#: libspm.py:746 tools.py:217
 msgid "Updating Git repository"
 msgstr "Обновяване на Git хранилище"
 
-#: libspm.py:746 tools.py:221
+#: libspm.py:750 tools.py:221
 msgid "Cloning Git repository"
 msgstr "Клониране на Git хранилище"
 
-#: libspm.py:764 libspm.py:1458 tools.py:239
+#: libspm.py:768 libspm.py:1462 tools.py:239
 msgid "Checking mirror"
 msgstr "Проверяване на огледало"
 
-#: libspm.py:772 libspm.py:1466 tools.py:247
+#: libspm.py:776 libspm.py:1470 tools.py:247
 msgid "Already fetched"
 msgstr ""
 
-#: libspm.py:774 libspm.py:1468 tools.py:249
+#: libspm.py:778 libspm.py:1472 tools.py:249
 msgid "Re-fetching"
 msgstr ""
 
-#: libspm.py:777 libspm.py:1471 tools.py:252
+#: libspm.py:781 libspm.py:1475 tools.py:252
 msgid "Fetching"
 msgstr ""
 
-#: libspm.py:781
+#: libspm.py:785
 msgid "Already linked"
 msgstr "Вече е свързан"
 
-#: libspm.py:783 libspm.py:786
+#: libspm.py:787 libspm.py:790
 msgid "Linking"
 msgstr "Звързване на"
 
-#: libspm.py:793
+#: libspm.py:797
 msgid "Extracting"
 msgstr "Извлича на"
 
-#: libspm.py:798
+#: libspm.py:802
 msgid "Already extracted"
 msgstr "Вече е извлечен"
 
-#: libspm.py:821
+#: libspm.py:825
 msgid "Compressing manual pages"
 msgstr "Компресиране опътващите страници"
 
-#: libspm.py:833 tools.py:255 tools.py:648
+#: libspm.py:837 tools.py:255 tools.py:648
 msgid "Compressing"
 msgstr "Компресира на"
 
-#: libspm.py:838
+#: libspm.py:842
 msgid "Adjusting link"
 msgstr "Коригира на връзка"
 
-#: libspm.py:847 libspm.py:1024 libspm.py:1189
+#: libspm.py:851 libspm.py:1028 libspm.py:1193
 msgid "Indexing content"
 msgstr "Индексиране на съдържанието"
 
-#: libspm.py:863
+#: libspm.py:867
 msgid "Stripping binaries and libraries"
 msgstr "Смъкване на бинари и библиотеки"
 
-#: libspm.py:873
+#: libspm.py:877
 msgid "Stripping executable"
 msgstr "Смъкване изпълним"
 
-#: libspm.py:877
+#: libspm.py:881
 msgid "Stripping shared library"
 msgstr "Смъкване на споделена библиотека"
 
-#: libspm.py:881
+#: libspm.py:885
 msgid "Stripping static library"
 msgstr "Смъкване на статична библиотека"
 
-#: libspm.py:889
+#: libspm.py:893
 msgid "Stripping RPATH"
 msgstr "Смъкване на RPATH"
 
-#: libspm.py:892
+#: libspm.py:896
 msgid "Checking runtime dependencies"
 msgstr "Проверяване на работните зависимости"
 
-#: libspm.py:907 libspm.py:969 tools.py:89 tools.py:126
+#: libspm.py:911 libspm.py:973 tools.py:89 tools.py:126
 #, python-format
 msgid "Multiple providers for %s"
 msgstr "Няколко доставчика на %s"
 
-#: libspm.py:917 tools.py:99
+#: libspm.py:921 tools.py:99
 msgid "Library needed but in target"
 msgstr "Нужна е библиотека, но е в мишената"
 
-#: libspm.py:919 tools.py:101
+#: libspm.py:923 tools.py:101
 msgid "Library needed but in dependencies"
 msgstr "Нужна е библиотека, но е в зависимостите"
 
-#: libspm.py:921 tools.py:103
+#: libspm.py:925 tools.py:103
 msgid "Library needed but in local"
 msgstr "Нужна е библиотека, но е в локална"
 
-#: libspm.py:924 libspm.py:926 tools.py:106 tools.py:108
+#: libspm.py:928 libspm.py:930 tools.py:106 tools.py:108
 msgid "Library needed, not in any local"
 msgstr "Нужна е библиотека, непринадлежаща на локална"
 
-#: libspm.py:965
+#: libspm.py:969
 msgid "Attempting shebang correction on"
 msgstr "Опит за корекция на shebang на"
 
-#: libspm.py:977 tools.py:137
+#: libspm.py:981 tools.py:137
 msgid "Dependency needed but in target"
 msgstr "Нужна е зависимост, но е в мишената"
 
-#: libspm.py:979 tools.py:139
+#: libspm.py:983 tools.py:139
 msgid "Dependency needed but in dependencies"
 msgstr "Нужна е зависимост, но вече е в зависимостите"
 
-#: libspm.py:981 tools.py:141
+#: libspm.py:985 tools.py:141
 msgid "Dependency needed but in local"
 msgstr "Нужна е зависимост, но е в локална"
 
-#: libspm.py:984 libspm.py:986 tools.py:144 tools.py:146
+#: libspm.py:988 libspm.py:990 tools.py:144 tools.py:146
 msgid "Dependency needed, not in any local"
 msgstr "Нужна е зависимост, непринадлежаща на локална"
 
-#: libspm.py:992
+#: libspm.py:996
 msgid "Byte-compiling Python modules"
 msgstr "Байт-компилиране на Python модули"
 
-#: libspm.py:997
+#: libspm.py:1001
 msgid "Compiling Python file"
 msgstr "Компилиране на Python файл"
 
-#: libspm.py:1003
+#: libspm.py:1007
 msgid "Assembling metadata"
 msgstr "Зглабяне на метадата"
 
-#: libspm.py:1012
+#: libspm.py:1016
 msgid "Assembling footprint"
 msgstr "Зглабяне на отпечатък"
 
-#: libspm.py:1017
+#: libspm.py:1021
 msgid "Compressing tarball"
 msgstr "Компресиране на архив"
 
-#: libspm.py:1039
+#: libspm.py:1043
 msgid "Checking for conflicts"
 msgstr "Проверяване за конфликти"
 
-#: libspm.py:1047
+#: libspm.py:1051
 #, python-format
 msgid "File/link conflict with %s"
 msgstr "Файл/линк конфликт с %s"
 
-#: libspm.py:1058
+#: libspm.py:1062
 msgid "Executing pre_upgrade()"
 msgstr "Изпълняване на pre_upgrade()"
 
-#: libspm.py:1062
+#: libspm.py:1066
 msgid "Executing pre_install()"
 msgstr "Изпълняване на pre_install()"
 
-#: libspm.py:1066
+#: libspm.py:1070
 msgid "Creating backing up files"
 msgstr "Създаване резервни копия на файлове"
 
-#: libspm.py:1080
+#: libspm.py:1084
 msgid "Backing up"
 msgstr "Резервиране на"
 
-#: libspm.py:1084
+#: libspm.py:1088
 msgid "Decompressing tarball"
 msgstr "Декомпресиране на архив"
 
-#: libspm.py:1088
+#: libspm.py:1092
 msgid "Removing obsolete files and directories"
 msgstr "Премахване на старите файлове и директории"
 
-#: libspm.py:1117
+#: libspm.py:1121
 msgid "Executing post_upgrade()"
 msgstr "Изпълняване на post_upgrade()"
 
-#: libspm.py:1121
+#: libspm.py:1125
 msgid "Executing post_install()"
 msgstr "Изпълняване на post_install()"
 
-#: libspm.py:1128
+#: libspm.py:1132
 msgid "Checking reverse dependencies"
 msgstr "Проверяване обратните зависимости"
 
-#: libspm.py:1156
+#: libspm.py:1160
 msgid "Targets may need rebuild"
 msgstr "Мишените може да имат нужда от рестроеж"
 
-#: libspm.py:1164
+#: libspm.py:1168
 msgid "Already removed"
 msgstr "Вече е премахната"
 
-#: libspm.py:1173
+#: libspm.py:1177
 msgid "Removing reverse dependencies"
 msgstr "Премахване на обратни зависимости"
 
-#: libspm.py:1175
+#: libspm.py:1179
 #, python-format
 msgid "Resuming %s removing at"
 msgstr "Преостановяване премахването на %s в"
 
-#: libspm.py:1178
+#: libspm.py:1182
 #, python-format
 msgid "Other targets depend on %s"
 msgstr "Други мишени зависят на %s"
 
-#: libspm.py:1184
+#: libspm.py:1188
 msgid "Executing pre_remove()"
 msgstr "Изпълняване на pre_remove()"
 
-#: libspm.py:1192
+#: libspm.py:1196
 msgid "Removing files"
 msgstr "Премахване на файлове"
 
-#: libspm.py:1196
+#: libspm.py:1200
 msgid "Removing directories"
 msgstr "Премахване на директории"
 
-#: libspm.py:1200
+#: libspm.py:1204
 msgid "Removing links"
 msgstr "Премахване на връзка"
 
-#: libspm.py:1205
+#: libspm.py:1209
 msgid "Removing footprint and metadata"
 msgstr "Премахване на отпечатъка и метадатата"
 
-#: libspm.py:1210
+#: libspm.py:1214
 msgid "Executing post_remove()"
 msgstr "Изпълняване на post_remove()"
 
-#: libspm.py:1227 libspm.py:1483
+#: libspm.py:1231 libspm.py:1487
 msgid "Ignoring target"
 msgstr "Игориране на мишена"
 
-#: libspm.py:1231 libspm.py:1487 tools.py:195
+#: libspm.py:1235 libspm.py:1491 tools.py:195
 msgid "Invalid target"
 msgstr "Невалидна мишена"
 
-#: libspm.py:1255 libspm.py:1511
+#: libspm.py:1259 libspm.py:1515
 msgid "Target is up-to-date"
 msgstr "Мишената е последната налична версия"
 
-#: libspm.py:1260 libspm.py:1263
+#: libspm.py:1264 libspm.py:1267
 msgid "Overriding MIRROR to"
 msgstr ""
 
-#: libspm.py:1267 libspm.py:1270
+#: libspm.py:1271 libspm.py:1274
 msgid "Overriding SPLIT_DEBUG to"
 msgstr ""
 
-#: libspm.py:1274 libspm.py:1277
+#: libspm.py:1278 libspm.py:1281
 msgid "Overriding STRIP_BINARIES to"
 msgstr ""
 
-#: libspm.py:1281 libspm.py:1284
+#: libspm.py:1285 libspm.py:1288
 msgid "Overriding STRIP_SHARED to"
 msgstr ""
 
-#: libspm.py:1288 libspm.py:1291
+#: libspm.py:1292 libspm.py:1295
 msgid "Overriding STRIP_STATIC to"
 msgstr ""
 
-#: libspm.py:1295 libspm.py:1298
+#: libspm.py:1299 libspm.py:1302
 msgid "Overriding STRIP_RPATH to"
 msgstr ""
 
-#: libspm.py:1302 libspm.py:1305
+#: libspm.py:1306 libspm.py:1309
 msgid "Overriding COMPRESS_MAN to"
 msgstr ""
 
-#: libspm.py:1309 libspm.py:1312
+#: libspm.py:1313 libspm.py:1316
 msgid "Overriding IGNORE_MISSING to"
 msgstr ""
 
-#: libspm.py:1316 libspm.py:1319
+#: libspm.py:1320 libspm.py:1323
 msgid "Overriding PYTHON_COMPILE to"
 msgstr ""
 
-#: libspm.py:1323
+#: libspm.py:1327
 #, python-format
 msgid "Starting %s cleanup at"
 msgstr "Започване чистка на %s в"
 
-#: libspm.py:1328 libspm.py:1515
+#: libspm.py:1332 libspm.py:1519
 #, python-format
 msgid "Starting %s preparations at"
 msgstr "Започване подготовка на %s в"
 
-#: libspm.py:1335
+#: libspm.py:1339
 msgid "src_compile() not defined"
 msgstr "src_compile() не е зададен"
 
-#: libspm.py:1337
+#: libspm.py:1341
 #, python-format
 msgid "Starting %s compile at"
 msgstr "Започване компилиране на %s в"
 
-#: libspm.py:1352
+#: libspm.py:1356
 msgid "src_check() not defined"
 msgstr "src_check() не е зададен"
 
-#: libspm.py:1354
+#: libspm.py:1358
 #, python-format
 msgid "Starting %s check at"
 msgstr "Започване проверка на %s в"
 
-#: libspm.py:1369
+#: libspm.py:1373
 msgid "src_install() not defined"
 msgstr "src_install() не е зададен"
 
-#: libspm.py:1372
+#: libspm.py:1376
 #, python-format
 msgid "Starting %s install at"
 msgstr "Започване инсталация на %s в"
 
-#: libspm.py:1385 libspm.py:1518
+#: libspm.py:1389 libspm.py:1522
 #, python-format
 msgid "Starting %s merge at"
 msgstr "Започване сливане на %s в"
 
-#: libspm.py:1389 libspm.py:1522
+#: libspm.py:1393 libspm.py:1526
 #, python-format
 msgid "Starting %s remove at"
 msgstr "Започване премахване на %s в"
 
-#: libspm.py:1440
+#: libspm.py:1444
 msgid "Fetching dependencies"
 msgstr ""
 
-#: libspm.py:1447
+#: libspm.py:1451
 msgid "Preparing tarballs"
 msgstr ""
 
-#: libspm.py:1545
+#: libspm.py:1549
 msgid "Match in"
 msgstr "Съвпадение в"
 
@@ -780,11 +785,11 @@ msgstr "Промени MAKEFLAGS"
 
 #: spm.py:338
 msgid "Set whether to compress man pages"
-msgstr "Задай дали да се компресират страниците със опътванията"
+msgstr "Задай дали да се компресират страниците с опътванията"
 
 #: spm.py:341
 msgid "Set whether to split debug symbols from binaries and libraries"
-msgstr ""
+msgstr "Задай дали да се разделят дебъг симболите от бинари и библиотеки"
 
 #: spm.py:344
 msgid "Set whether to strip binaries"
@@ -828,7 +833,7 @@ msgstr "Задай дали да се изпълняват спусъците"
 
 #: spm.py:373 tools.py:884
 msgid "Enable debug messages"
-msgstr ""
+msgstr "Включи дебъг съобщенията"
 
 #: spm.py:376
 msgid "Show SPM version and exit"
@@ -1121,7 +1126,7 @@ msgstr ""
 
 #: tools.py:461
 msgid "Debug symbols missing"
-msgstr ""
+msgstr "Липсващи дебъг симболи"
 
 #: tools.py:490
 msgid "Explicit --enable argument(s)"
@@ -1306,7 +1311,7 @@ msgstr ""
 
 #: tools.py:811
 msgid "Check for missing debug symbols"
-msgstr ""
+msgstr "Провери за липсващи дебъг симболи"
 
 #: tools.py:813 tools.py:837
 msgid "Perform all checks"
@@ -1426,7 +1431,7 @@ msgstr ""
 
 #: tools.py:960
 msgid "DEBUG"
-msgstr ""
+msgstr "ДЕБЪГ"
 
 #: tools.py:983
 msgid "ENABLE"
@@ -1475,3 +1480,4 @@ msgstr "АДРЕСС"
 #: tools.py:1045
 msgid "CROSS"
 msgstr ""
+
