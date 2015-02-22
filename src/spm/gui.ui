@@ -206,6 +206,13 @@
         <string>Settings</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_6">
+        <item row="1" column="0">
+         <widget class="QLineEdit" name="IgnoreTargetsEdit">
+          <property name="toolTip">
+           <string>Ignored targets, usefull to prevent software upgrades</string>
+          </property>
+         </widget>
+        </item>
         <item row="0" column="0">
          <widget class="QLineEdit" name="CacheDirEdit">
           <property name="toolTip">
@@ -233,40 +240,10 @@
           </property>
          </widget>
         </item>
-        <item row="1" column="0">
-         <widget class="QLineEdit" name="IgnoreTargetsEdit">
-          <property name="toolTip">
-           <string>Ignored targets, usefull to prevent software upgrades</string>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="2">
          <widget class="QLineEdit" name="BuildDirEdit">
           <property name="toolTip">
            <string>Build directory</string>
-          </property>
-         </widget>
-        </item>
-        <item row="6" column="0" colspan="2">
-         <widget class="QCheckBox" name="StripRPATHBox">
-          <property name="toolTip">
-           <string>Set whether to strip RPATH (runtime path) from binaries
-and libraries, it is recommended to keep it enabled but
-some applications may require it</string>
-          </property>
-          <property name="text">
-           <string>Strip insecure RPATH</string>
-          </property>
-         </widget>
-        </item>
-        <item row="7" column="0" colspan="2">
-         <widget class="QCheckBox" name="PythonCompileBox">
-          <property name="toolTip">
-           <string>Set whether to byte-compile Python module files, do
-not disable it unless you know what you are doing!</string>
-          </property>
-          <property name="text">
-           <string>Byte-compile Python modules</string>
           </property>
          </widget>
         </item>
@@ -280,28 +257,6 @@ not disable it unless you know what you are doing!</string>
           </property>
          </widget>
         </item>
-        <item row="5" column="0" colspan="2">
-         <widget class="QCheckBox" name="StripSharedBox">
-          <property name="toolTip">
-           <string>Set whether to strip shared libraries symbols, disable
-it if you need to debug applications via backtrace</string>
-          </property>
-          <property name="text">
-           <string>Strip shared libraries</string>
-          </property>
-         </widget>
-        </item>
-        <item row="8" column="0" colspan="2">
-         <widget class="QCheckBox" name="ScriptsBox">
-          <property name="toolTip">
-           <string>Set whether to execute pre/post action scripts, do not
-disable it unless you know what you are doing!</string>
-          </property>
-          <property name="text">
-           <string>Execute pre/post scripts</string>
-          </property>
-         </widget>
-        </item>
         <item row="1" column="3">
          <widget class="QLabel" name="label_3">
           <property name="text">
@@ -312,23 +267,6 @@ disable it unless you know what you are doing!</string>
           </property>
          </widget>
         </item>
-        <item row="1" column="2">
-         <widget class="QSpinBox" name="ConnectionTimeoutBox">
-          <property name="toolTip">
-           <string>Timeout in seconds used when fetching and pinging URLs</string>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="1">
-         <widget class="QPushButton" name="CacheDirButton">
-          <property name="toolTip">
-           <string>Change caches directory</string>
-          </property>
-          <property name="text">
-           <string>Change</string>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="3">
          <widget class="QPushButton" name="BuildDirButton">
           <property name="toolTip">
@@ -336,6 +274,13 @@ disable it unless you know what you are doing!</string>
           </property>
           <property name="text">
            <string>Change</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QSpinBox" name="ConnectionTimeoutBox">
+          <property name="toolTip">
+           <string>Timeout in seconds used when fetching and pinging URLs</string>
           </property>
          </widget>
         </item>
@@ -351,6 +296,16 @@ disable it unless you know what you are doing!</string>
           </item>
          </widget>
         </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="CacheDirButton">
+          <property name="toolTip">
+           <string>Change caches directory</string>
+          </property>
+          <property name="text">
+           <string>Change</string>
+          </property>
+         </widget>
+        </item>
         <item row="2" column="1">
          <widget class="QLabel" name="label_4">
           <property name="text">
@@ -358,40 +313,6 @@ disable it unless you know what you are doing!</string>
           </property>
           <property name="alignment">
            <set>Qt::AlignCenter</set>
-          </property>
-         </widget>
-        </item>
-        <item row="2" column="2" colspan="2">
-         <widget class="QCheckBox" name="StripBinariesBox">
-          <property name="toolTip">
-           <string>Set whether to strip binaries symbols, disable it if you
-need to debug applications via backtrace</string>
-          </property>
-          <property name="text">
-           <string>Strip binaries</string>
-          </property>
-         </widget>
-        </item>
-        <item row="3" column="2" colspan="2">
-         <widget class="QCheckBox" name="StripStaticBox">
-          <property name="toolTip">
-           <string>Set whether to strip static libraries symbols, disable it
-if you need to debug applications via backtrace</string>
-          </property>
-          <property name="text">
-           <string>Strip static libraries</string>
-          </property>
-         </widget>
-        </item>
-        <item row="4" column="2" colspan="2">
-         <widget class="QCheckBox" name="IgnoreMissingBox">
-          <property name="toolTip">
-           <string>Set whether to ignore missing runtime dependencies,
-usefull to disable if false positives are detected during
-the installation procedure</string>
-          </property>
-          <property name="text">
-           <string>Ignore missing dependencies</string>
           </property>
          </widget>
         </item>
@@ -428,6 +349,92 @@ changes as a backup of the original when needed</string>
           </property>
           <property name="text">
            <string>Backup essential files</string>
+          </property>
+         </widget>
+        </item>
+        <item row="4" column="2" colspan="2">
+         <widget class="QCheckBox" name="IgnoreMissingBox">
+          <property name="toolTip">
+           <string>Set whether to ignore missing runtime dependencies,
+usefull to disable if false positives are detected during
+the installation procedure</string>
+          </property>
+          <property name="text">
+           <string>Ignore missing dependencies</string>
+          </property>
+         </widget>
+        </item>
+        <item row="3" column="2" colspan="2">
+         <widget class="QCheckBox" name="StripStaticBox">
+          <property name="toolTip">
+           <string>Set whether to strip static libraries symbols, disable it
+if you need to debug applications via backtrace</string>
+          </property>
+          <property name="text">
+           <string>Strip static libraries</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="2" colspan="2">
+         <widget class="QCheckBox" name="StripBinariesBox">
+          <property name="toolTip">
+           <string>Set whether to strip binaries symbols, disable it if you
+need to debug applications via backtrace</string>
+          </property>
+          <property name="text">
+           <string>Strip binaries</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="2" colspan="2">
+         <widget class="QCheckBox" name="ScriptsBox">
+          <property name="toolTip">
+           <string>Set whether to execute pre/post action scripts, do not
+disable it unless you know what you are doing!</string>
+          </property>
+          <property name="text">
+           <string>Execute pre/post scripts</string>
+          </property>
+         </widget>
+        </item>
+        <item row="8" column="0" colspan="2">
+         <widget class="QCheckBox" name="PythonCompileBox">
+          <property name="toolTip">
+           <string>Set whether to byte-compile Python module files, do
+not disable it unless you know what you are doing!</string>
+          </property>
+          <property name="text">
+           <string>Byte-compile Python modules</string>
+          </property>
+         </widget>
+        </item>
+        <item row="6" column="0" colspan="2">
+         <widget class="QCheckBox" name="StripSharedBox">
+          <property name="toolTip">
+           <string>Set whether to strip shared libraries symbols, disable
+it if you need to debug applications via backtrace</string>
+          </property>
+          <property name="text">
+           <string>Strip shared libraries</string>
+          </property>
+         </widget>
+        </item>
+        <item row="7" column="0" colspan="2">
+         <widget class="QCheckBox" name="StripRPATHBox">
+          <property name="toolTip">
+           <string>Set whether to strip RPATH (runtime path) from binaries
+and libraries, it is recommended to keep it enabled but
+some applications may require it</string>
+          </property>
+          <property name="text">
+           <string>Strip insecure RPATH</string>
+          </property>
+         </widget>
+        </item>
+        <item row="5" column="0" colspan="2">
+         <widget class="QCheckBox" name="SplitDebugBox">
+          <property name="text">
+           <string>Split debug symbols</string>
           </property>
          </widget>
         </item>
