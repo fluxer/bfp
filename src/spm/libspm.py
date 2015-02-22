@@ -46,6 +46,7 @@ if not os.path.isfile(MAIN_CONF):
     LDFLAGS = ''
     MAKEFLAGS = ''
     COMPRESS_MAN = False
+    SPLIT_DEBUG = False
     STRIP_BINARIES = False
     STRIP_SHARED = False
     STRIP_STATIC = False
@@ -76,6 +77,7 @@ else:
     LDFLAGS = conf.get('compile', 'LDFLAGS')
     MAKEFLAGS = conf.get('compile', 'MAKEFLAGS')
     COMPRESS_MAN = conf.getboolean('install', 'COMPRESS_MAN')
+    SPLIT_DEBUG = conf.getboolean('install', 'SPLIT_DEBUG')
     STRIP_BINARIES = conf.getboolean('install', 'STRIP_BINARIES')
     STRIP_SHARED = conf.getboolean('install', 'STRIP_SHARED')
     STRIP_STATIC = conf.getboolean('install', 'STRIP_STATIC')
@@ -429,6 +431,7 @@ class Source(object):
         self.do_update = do_update
         self.autoremove = autoremove
         self.mirror = MIRROR
+        self.split_debug = SPLIT_DEBUG
         self.strip_binaries = STRIP_BINARIES
         self.strip_shared = STRIP_SHARED
         self.strip_static = STRIP_STATIC
@@ -456,7 +459,9 @@ class Source(object):
                 autoremove=autoremove)
         obj.main()
 
-    def split_debug(self, sfile):
+    def split_debug_symbols(self, sfile):
+        if not self.split_debug:
+            return
         # avoid actions on debug files, do not rely on .debug suffix
         if '/lib/debug/' in sfile:
             return
@@ -864,15 +869,15 @@ class Source(object):
                     continue
 
                 if smime == 'application/x-executable' and self.strip_binaries:
-                    self.split_debug(sfile)
+                    self.split_debug_symbols(sfile)
                     message.sub_debug(_('Stripping executable'), sfile)
                     misc.system_command((strip, '--strip-all', sfile))
                 elif smime == 'application/x-sharedlib' and self.strip_shared:
-                    self.split_debug(sfile)
+                    self.split_debug_symbols(sfile)
                     message.sub_debug(_('Stripping shared library'), sfile)
                     misc.system_command((strip, '--strip-unneeded', sfile))
                 elif smime == 'application/x-archive' and self.strip_static:
-                    self.split_debug(sfile)
+                    self.split_debug_symbols(sfile)
                     message.sub_debug(_('Stripping static library'), sfile)
                     misc.system_command((strip, '--strip-debug', sfile))
 
@@ -1258,6 +1263,13 @@ class Source(object):
                     message.sub_warning(_('Overriding MIRROR to'), 'False')
                     self.mirror = False
 
+                if option == 'debug' and not self.split_debug:
+                    message.sub_warning(_('Overriding SPLIT_DEBUG to'), 'True')
+                    self.split_debug = True
+                elif option == '!debug' and self.split_debug:
+                    message.sub_warning(_('Overriding SPLIT_DEBUG to'), 'False')
+                    self.split_debug = False
+
                 if option == 'binaries' and not self.strip_binaries:
                     message.sub_warning(_('Overriding STRIP_BINARIES to'), 'True')
                     self.strip_binaries = True
@@ -1379,6 +1391,7 @@ class Source(object):
 
             # reset values so that overrides apply only to single target
             self.mirror = MIRROR
+            self.split_debug = SPLIT_DEBUG
             self.strip_binaries = STRIP_BINARIES
             self.strip_shared = STRIP_SHARED
             self.strip_static = STRIP_STATIC

@@ -19,7 +19,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.5.0 (4211fc3)"
+app_version = "1.5.0 (bf7347e)"
 
 try:
     import libmessage
@@ -122,6 +122,12 @@ try:
         ''' Override compression of manual pages '''
         def __call__(self, parser, namespace, values, option_string=None):
             libspm.COMPRESS_MAN = values
+            setattr(namespace, self.dest, values)
+
+    class OverrideSplitDebug(argparse.Action):
+        ''' Override split of debug symbols '''
+        def __call__(self, parser, namespace, values, option_string=None):
+            libspm.SPLIT_DEBUG = values
             setattr(namespace, self.dest, values)
 
     class OverrideBinaries(argparse.Action):
@@ -330,6 +336,9 @@ try:
         help=_('Change MAKEFLAGS'))
     parser.add_argument('--man', type=ast.literal_eval, action=OverrideMan, \
         choices=[True, False], help=_('Set whether to compress man pages'))
+    parser.add_argument('--split', type=ast.literal_eval, \
+        action=OverrideSplitDebug, choices=[True, False], \
+        help=_('Set whether to split debug symbols from binaries and libraries'))
     parser.add_argument('--binaries', type=ast.literal_eval, \
         action=OverrideBinaries, choices=[True, False], \
         help=_('Set whether to strip binaries'))
@@ -435,6 +444,7 @@ try:
         message.sub_info(_('LDFLAGS'), libspm.LDFLAGS)
         message.sub_info(_('MAKEFLAGS'), libspm.MAKEFLAGS)
         message.sub_info(_('COMPRESS_MAN'), libspm.COMPRESS_MAN)
+        message.sub_info(_('SPLIT_DEBUG'), libspm.SPLIT_DEBUG)
         message.sub_info(_('STRIP_BINARIES'), libspm.STRIP_BINARIES)
         message.sub_info(_('STRIP_SHARED'), libspm.STRIP_SHARED)
         message.sub_info(_('STRIP_STATIC'), libspm.STRIP_STATIC)
