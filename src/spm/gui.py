@@ -174,6 +174,7 @@ def RefreshSettings():
     ui.DemoteBox.setCurrentIndex(index)
 
 def SearchMetadata():
+    DisableWidgets()
     current = str(ui.filtersBox.currentText())
     field = str(ui.searchBox.currentText())
     regexp = str(ui.searchEdit.text())
@@ -206,6 +207,8 @@ def SearchMetadata():
         ui.targetsView.setCurrentRow(0)
     except Exception as detail:
         MessageCritical(str(detail))
+    finally:
+        EnableWidgets()
 
 def RefreshWidgets():
     current = ui.targetsView.currentItem()
