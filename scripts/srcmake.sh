@@ -2,20 +2,7 @@
 
 # srcmake - alternative limited ports builder
 # Copyright (C) 2013-2015 Ivailo Monev (a.k.a SmiL3y)
-# 
-# This program is free software; you can redistribute it and/or
-# modify it under the terms of the GNU General Public License
-# as published by the Free Software Foundation; either version 2
-# of the License, or (at your option) any later version.
-# 
-# This program is distributed in the hope that it will be useful,
-# but WITHOUT ANY WARRANTY; without even the implied warranty of
-# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-# GNU General Public License for more details.
-# 
-# You should have received a copy of the GNU General Public License
-# along with this program; if not, write to the Free Software
-# Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
+
 
 export LANG=C LC_ALL=C
 unset ALL_OFF BOLD BLUE GREEN RED YELLOW
@@ -164,7 +151,7 @@ for src in "${@:-.}";do
 
     msg "Creating footprint and metadata..."
     mkdir -p "$INSTALL_DIR/var/local/spm/$src_name"
-    # FIXME: it breaks on spaces
+    # FIXME: it breaks on spaces, xargs would be an option
     touch "$INSTALL_DIR/var/local/spm/$src_name/footprint"
     for f in $(find "$INSTALL_DIR" ! -type d);do
         echo "$f" >> "$INSTALL_DIR/var/local/spm/$src_name/footprint"
@@ -173,7 +160,7 @@ for src in "${@:-.}";do
     echo "description=$description" >> "$INSTALL_DIR/var/local/spm/$src_name/metadata"
     echo "depends=${depends[*]}" >> "$INSTALL_DIR/var/local/spm/$src_name/metadata"
     echo "size=$(du -s $INSTALL_DIR | awk '{print $1}')" >> "$INSTALL_DIR/var/local/spm/$src_name/metadata"
-    
+
     msg "Compressing tarball.."
     tarball="${src_name}_${version}.tar.bz2"
     cd "$INSTALL_DIR"

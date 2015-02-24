@@ -156,6 +156,7 @@ def RefreshSettings():
     ui.ConnectionTimeoutBox.setValue(libspm.TIMEOUT)
     ui.UseMirrorsBox.setCheckState(libspm.MIRROR)
     ui.CompressManBox.setCheckState(libspm.COMPRESS_MAN)
+    ui.SplitDebugBox.setCheckState(libspm.SPLIT_DEBUG)
     ui.StripBinariesBox.setCheckState(libspm.STRIP_BINARIES)
     ui.StripSharedBox.setCheckState(libspm.STRIP_SHARED)
     ui.StripStaticBox.setCheckState(libspm.STRIP_STATIC)
@@ -173,6 +174,7 @@ def RefreshSettings():
     ui.DemoteBox.setCurrentIndex(index)
 
 def SearchMetadata():
+    DisableWidgets()
     current = str(ui.filtersBox.currentText())
     field = str(ui.searchBox.currentText())
     regexp = str(ui.searchEdit.text())
@@ -205,6 +207,8 @@ def SearchMetadata():
         ui.targetsView.setCurrentRow(0)
     except Exception as detail:
         MessageCritical(str(detail))
+    finally:
+        EnableWidgets()
 
 def RefreshWidgets():
     current = ui.targetsView.currentItem()
@@ -365,6 +369,7 @@ def ChangeSettings():
         conf.set('prepare', 'MIRROR', str(ui.UseMirrorsBox.isChecked()))
         conf.set('prepare', 'TIMEOUT', str(ui.ConnectionTimeoutBox.value()))
         conf.set('install', 'COMPRESS_MAN', str(ui.CompressManBox.isChecked()))
+        conf.set('install', 'SPLIT_DEBUG', str(ui.SplitDebugBox.isChecked()))
         conf.set('install', 'STRIP_BINARIES', str(ui.StripBinariesBox.isChecked()))
         conf.set('install', 'STRIP_SHARED', str(ui.StripSharedBox.isChecked()))
         conf.set('install', 'STRIP_STATIC', str(ui.StripStaticBox.isChecked()))
@@ -421,6 +426,7 @@ ui.DemoteBox.currentIndexChanged.connect(ChangeSettings)
 ui.ConnectionTimeoutBox.valueChanged.connect(ChangeSettings)
 ui.UseMirrorsBox.clicked.connect(ChangeSettings)
 ui.CompressManBox.clicked.connect(ChangeSettings)
+ui.SplitDebugBox.clicked.connect(ChangeSettings)
 ui.StripBinariesBox.clicked.connect(ChangeSettings)
 ui.StripSharedBox.clicked.connect(ChangeSettings)
 ui.StripStaticBox.clicked.connect(ChangeSettings)
