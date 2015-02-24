@@ -29,25 +29,12 @@ msg() {
     printf "${ALL_OFF}${GREEN}=>${ALL_OFF}${BOLD} ${@}${ALL_OFF}\n"
 }
 
-msg2() {
-    printf "${ALL_OFF}${BLUE}   =>${ALL_OFF}${BOLD} ${@}${ALL_OFF}\n"
-}
-
 warn() {
     printf "${ALL_OFF}${YELLOW}=>${ALL_OFF}${BOLD} ${@}${ALL_OFF}\n" >&2
 }
 
-warn2() {
-    printf "${ALL_OFF}${YELLOW}   =>${ALL_OFF}${BOLD} ${@}${ALL_OFF}\n" >&2
-}
-
 error() {
     printf "${ALL_OFF}${RED}=>${ALL_OFF}${BOLD} ${@}${ALL_OFF}\n" >&2
-    return 1
-}
-
-error2() {
-    printf "${ALL_OFF}${RED}   =>${ALL_OFF}${BOLD} ${@}${ALL_OFF}\n" >&2
     return 1
 }
 
@@ -77,9 +64,16 @@ for pkg in "${@:-.}";do
     fi
 
     msg "Preparing.."
-    # FIXME: catch error on source (.)
     pkgname="$(. $pkgbuild && echo $pkgname)"
+    if [ -z "$pkgname" ];then
+        warn "Sourcing $pkgbuild failed or empty pkgname"
+        continue
+    fi
     url="$(. $pkgbuild && echo $url)"
+    if [ -z "$url" ];then
+        warn "Sourcing $pkgbuild failed or empty url"
+        continue
+    fi
     script=$(find "$pkg" -name '*.install')
     mv "$pkg/PKGBUILD" "$pkg/SRCBUILD" || die
 
