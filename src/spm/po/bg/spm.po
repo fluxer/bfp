@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-02-22 14:06+0000\n"
-"PO-Revision-Date: 2015-02-22 14:19+0000\n"
+"PO-Revision-Date: 2015-02-22 14:23+0000\n"
 "Last-Translator: \n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -1251,7 +1251,7 @@ msgstr ""
 
 #: tools.py:775
 msgid "Check dependencies of target"
-msgstr ""
+msgstr "Провери зависимостиte на мишената"
 
 #: tools.py:777
 msgid "Check reverse dependencies of target"
@@ -1259,7 +1259,7 @@ msgstr "Провери обратните зависимости на мишен
 
 #: tools.py:785
 msgid "Check for missing manual page(s)"
-msgstr ""
+msgstr "Провери за липсващи страници с опътвания"
 
 #: tools.py:787
 msgid "Check for cross-filesystem udev rule(s)"
@@ -1271,11 +1271,11 @@ msgstr ""
 
 #: tools.py:791
 msgid "Check for documentation"
-msgstr ""
+msgstr "Провери за документация"
 
 #: tools.py:793
 msgid "Check for module(s) in non-standard directory"
-msgstr ""
+msgstr "Провери за модул(и) в нестандардни директории"
 
 #: tools.py:795
 msgid "Check for footprint consistency"
@@ -1291,7 +1291,7 @@ msgstr ""
 
 #: tools.py:801
 msgid "Check for non-executable(s) in PATH"
-msgstr ""
+msgstr "Провери за неизпълним(и) в PATH"
 
 #: tools.py:803
 msgid "Check for overlapping executable(s) in PATH"
@@ -1315,7 +1315,7 @@ msgstr "Провери за липсващи дебъг симболи"
 
 #: tools.py:813 tools.py:837
 msgid "Perform all checks"
-msgstr ""
+msgstr "Извърши всички проверки"
 
 #: tools.py:819
 msgid "Check for explicit --enable argument(s)"
@@ -1335,11 +1335,11 @@ msgstr ""
 
 #: tools.py:827
 msgid "Check for FIXME/TODO note(s)"
-msgstr ""
+msgstr "Провери за FIXME/TODO бележка(и)"
 
 #: tools.py:829
 msgid "Check for essential variables"
-msgstr ""
+msgstr "Провери за важни променливи"
 
 #: tools.py:831
 msgid "Check for unnecessary triggers invocation(s)"
@@ -1480,4 +1480,3 @@ msgstr "АДРЕСС"
 #: tools.py:1045
 msgid "CROSS"
 msgstr ""
-
