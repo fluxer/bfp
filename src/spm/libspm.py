@@ -1261,66 +1261,66 @@ class Source(object):
 
             for option in self.target_options:
                 if option == 'mirror' and not self.mirror:
-                    message.sub_warning(_('Overriding MIRROR to'), 'True')
+                    message.sub_warning(_('Overriding MIRROR to'), _('True'))
                     self.mirror = True
                 elif option == '!mirror' and self.mirror:
-                    message.sub_warning(_('Overriding MIRROR to'), 'False')
+                    message.sub_warning(_('Overriding MIRROR to'), _('False'))
                     self.mirror = False
 
                 if option == 'debug' and not self.split_debug:
-                    message.sub_warning(_('Overriding SPLIT_DEBUG to'), 'True')
+                    message.sub_warning(_('Overriding SPLIT_DEBUG to'), _('True'))
                     self.split_debug = True
                 elif option == '!debug' and self.split_debug:
-                    message.sub_warning(_('Overriding SPLIT_DEBUG to'), 'False')
+                    message.sub_warning(_('Overriding SPLIT_DEBUG to'), _('False'))
                     self.split_debug = False
 
                 if option == 'binaries' and not self.strip_binaries:
-                    message.sub_warning(_('Overriding STRIP_BINARIES to'), 'True')
+                    message.sub_warning(_('Overriding STRIP_BINARIES to'), _('True'))
                     self.strip_binaries = True
                 elif option == '!binaries' and self.strip_binaries:
-                    message.sub_warning(_('Overriding STRIP_BINARIES to'), 'False')
+                    message.sub_warning(_('Overriding STRIP_BINARIES to'), _('False'))
                     self.strip_binaries = False
 
                 if option == 'shared' and not self.strip_shared:
-                    message.sub_warning(_('Overriding STRIP_SHARED to'), 'True')
+                    message.sub_warning(_('Overriding STRIP_SHARED to'), _('True'))
                     self.strip_shared = True
                 elif option == '!shared' and self.strip_shared:
-                    message.sub_warning(_('Overriding STRIP_SHARED to'), 'False')
+                    message.sub_warning(_('Overriding STRIP_SHARED to'), _('False'))
                     self.strip_shared = False
 
                 if option == 'static' and not self.strip_static:
-                    message.sub_warning(_('Overriding STRIP_STATIC to'), 'True')
+                    message.sub_warning(_('Overriding STRIP_STATIC to'), _('True'))
                     self.strip_static = True
                 elif option == '!static' and self.strip_static:
-                    message.sub_warning(_('Overriding STRIP_STATIC to'), 'False')
+                    message.sub_warning(_('Overriding STRIP_STATIC to'), _('False'))
                     self.strip_static = False
 
                 if option == 'rpath' and not self.strip_rpath:
-                    message.sub_warning(_('Overriding STRIP_RPATH to'), 'True')
+                    message.sub_warning(_('Overriding STRIP_RPATH to'), _('True'))
                     self.strip_rpath = True
                 elif option == '!rpath' and self.strip_rpath:
-                    message.sub_warning(_('Overriding STRIP_RPATH to'), 'False')
+                    message.sub_warning(_('Overriding STRIP_RPATH to'), _('False'))
                     self.strip_rpath = False
 
                 if option == 'man' and not self.compress_man:
-                    message.sub_warning(_('Overriding COMPRESS_MAN to'), 'True')
+                    message.sub_warning(_('Overriding COMPRESS_MAN to'), _('True'))
                     self.compress_man = True
                 elif option == '!man' and self.compress_man:
-                    message.sub_warning(_('Overriding COMPRESS_MAN to'), 'False')
+                    message.sub_warning(_('Overriding COMPRESS_MAN to'), _('False'))
                     self.compress_man = False
 
                 if option == 'missing' and not self.ignore_missing:
-                    message.sub_warning(_('Overriding IGNORE_MISSING to'), 'True')
+                    message.sub_warning(_('Overriding IGNORE_MISSING to'), _('True'))
                     self.ignore_missing = True
                 elif option == '!missing' and self.ignore_missing:
-                    message.sub_warning(_('Overriding IGNORE_MISSING to'), 'False')
+                    message.sub_warning(_('Overriding IGNORE_MISSING to'), _('False'))
                     self.ignore_missing = False
 
                 if option == 'pycompile' and not self.python_compile:
-                    message.sub_warning(_('Overriding PYTHON_COMPILE to'), 'True')
+                    message.sub_warning(_('Overriding PYTHON_COMPILE to'), _('True'))
                     self.python_compile = True
                 elif option == '!pycompile' and self.python_compile:
-                    message.sub_warning(_('Overriding PYTHON_COMPILE to'), 'False')
+                    message.sub_warning(_('Overriding PYTHON_COMPILE to'), _('False'))
                     self.python_compile = False
 
             if self.do_clean:
