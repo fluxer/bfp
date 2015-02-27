@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-02-22 14:06+0000\n"
-"PO-Revision-Date: 2015-02-22 14:23+0000\n"
-"Last-Translator: \n"
+"PO-Revision-Date: 2015-02-27 12:15+0000\n"
+"Last-Translator: Ivailo Monev <xakepa10@gmail.com>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
@@ -1367,7 +1367,7 @@ msgstr "Използвай адрес за сървъра"
 
 #: tools.py:877
 msgid "Set lookup directory"
-msgstr ""
+msgstr "Задай директория за търсене"
 
 #: tools.py:879
 msgid "Scan cross-filesystem"
@@ -1379,7 +1379,7 @@ msgstr "Покажи версията на SPM Tools и излез"
 
 #: tools.py:906 tools.py:1021 tools.py:1028 tools.py:1044
 msgid "DIRECTORY"
-msgstr ""
+msgstr "ДИРЕКТОРИЯ"
 
 #: tools.py:914
 msgid "FAST"
@@ -1480,3 +1480,4 @@ msgstr "АДРЕСС"
 #: tools.py:1045
 msgid "CROSS"
 msgstr ""
+
