@@ -336,7 +336,7 @@ class Repo(object):
         elif os.path.isdir(self.repository_dir):
             # existing Git repository
             message.sub_info(_('Updating repository'), self.repository_name)
-            misc.system_command((misc.whereis('git'), 'pull', '--depth=1', \
+            misc.system_command((misc.whereis('git'), 'pull', \
                 self.repository_url), cwd=self.repository_dir, demote=DEMOTE)
         else:
             # non-existing Git repository, fetch
@@ -745,7 +745,7 @@ class Source(object):
                 elif os.path.isdir(link_file):
                     message.sub_debug(_('Updating Git repository'), src_url)
                     misc.system_command((misc.whereis('git'), 'pull', \
-                        '--depth=1', src_url), cwd=link_file, demote=DEMOTE)
+                        src_url), cwd=link_file, demote=DEMOTE)
                 else:
                     message.sub_debug(_('Cloning Git repository'), src_url)
                     misc.system_command((misc.whereis('git'), 'clone', \

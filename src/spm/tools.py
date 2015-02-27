@@ -32,7 +32,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.5.0 (d3de2d2)"
+app_version = "1.5.0 (8119240)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -216,7 +216,7 @@ class Dist(object):
                         elif os.path.isdir(src_file):
                             message.sub_debug(_('Updating Git repository'), src_url)
                             misc.system_command((misc.whereis('git'), \
-                                'pull', '--depth=1', src_url), cwd=src_file)
+                                'pull', src_url), cwd=src_file)
                         else:
                             message.sub_debug(_('Cloning Git repository'), src_url)
                             misc.system_command((misc.whereis('git'), \
