@@ -1100,7 +1100,7 @@ class Source(object):
             remove_content = list(set(old_content.split('\n')) - set(adjusted))
             for sfile in remove_content:
                 # the footprint and metadata files will be deleted otherwise,
-                # also make sure we respect ROOT_DIR different than /
+                # also making sure ROOT_DIR different than / is respected
                 if LOCAL_DIR in sfile:
                     continue
                 # never delete files in the pseudo filesystems
@@ -1163,7 +1163,7 @@ class Source(object):
             elif needs_rebuild:
                 message.sub_warning(_('Targets may need rebuild'), needs_rebuild)
 
-        # do not wait for the cache notifier to kick in, update it now
+        # do not wait for the cache notifier to kick in
         database.LOCAL_CACHE = {}
 
     def remove(self):
@@ -1220,7 +1220,7 @@ class Source(object):
 
         self.update_databases(target_content, 'remove')
 
-        # do not wait for the cache notifier to kick in, update it now
+        # do not wait for the cache notifier to kick in
         database.LOCAL_CACHE = {}
 
     def main(self):

@@ -378,10 +378,11 @@ class Misc(object):
             return False
 
     def fetch(self, surl, destination, iretry=3, iblock=60):
-        ''' Download file, retry is passed internally! '''
+        ''' Download file, iretry and iblock are passed internally! '''
         self.typecheck(surl, (types.StringTypes))
         self.typecheck(destination, (types.StringTypes))
         self.typecheck(iretry, (types.IntType))
+        self.typecheck(iblock, (types.IntType))
 
         if self.OFFLINE:
             return
