@@ -851,9 +851,7 @@ class Source(object):
         message.sub_info(_('Indexing content'))
         target_content = {}
         for sfile in misc.list_files(self.install_dir):
-            # skip footprint and metadata, they are not wanted in the footprint
-            if sfile == os.path.join(self.install_dir, self.target_footprint) \
-                or sfile == os.path.join(self.install_dir, self.target_metadata):
+            if sfile.endswith((self.target_footprint, self.target_metadata)):
                 continue
             # remove common conflict files/directories
             elif sfile.endswith('/.packlist') or sfile.endswith('/perllocal.pod') \
@@ -1015,8 +1013,13 @@ class Source(object):
 
         message.sub_info(_('Assembling footprint'))
         # due to many file operations do not re-use target_content
+        footprint = misc.list_files(self.install_dir)
+        for sfile in footprint:
+            # remove footprint and metadata, they are not wanted in the footprint
+            if sfile.endswith((self.target_footprint, self.target_metadata)):
+                footprint.remove(sfile)
         misc.file_write(os.path.join(self.install_dir, self.target_footprint), \
-            '\n'.join(sorted(misc.list_files(self.install_dir))).replace(self.install_dir, ''))
+            '\n'.join(sorted(footprint)).replace(self.install_dir, ''))
 
         message.sub_info(_('Compressing tarball'))
         misc.dir_create(os.path.join(CACHE_DIR, 'tarballs'))
