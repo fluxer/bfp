@@ -1012,7 +1012,8 @@ class Source(object):
         metadata.close()
 
         message.sub_info(_('Assembling footprint'))
-        # due to many file operations do not re-use target_content
+        # due to creations and deletions of files, when byte-compiling
+        # Python modules for an example, do not re-use target_content
         footprint = misc.list_files(self.install_dir)
         for sfile in footprint:
             # remove footprint and metadata, they are not wanted in the footprint
