@@ -293,14 +293,14 @@ class Misc(object):
             cwd = '/'
         return cwd
 
-    def list_files(self, sdir, cross=True):
+    def list_files(self, sdir, bcross=True):
         ''' Get list of files in directory recursively '''
         self.typecheck(sdir, (types.StringTypes))
-        self.typecheck(cross, (types.BooleanType))
+        self.typecheck(bcross, (types.BooleanType))
 
         slist = []
         for root, subdirs, files in os.walk(sdir):
-            if not cross:
+            if not bcross:
                 subdirs[:] = [
                     d for d in subdirs
                     if not os.path.ismount(os.path.join(root, d))]
@@ -308,14 +308,14 @@ class Misc(object):
                 slist.append(os.path.join(root, sfile))
         return slist
 
-    def list_dirs(self, sdir, cross=True):
+    def list_dirs(self, sdir, bcross=True):
         ''' Get list of directories in directory recursively '''
         self.typecheck(sdir, (types.StringTypes))
-        self.typecheck(cross, (types.BooleanType))
+        self.typecheck(bcross, (types.BooleanType))
 
         slist = []
         for root, subdirs, files in os.walk(sdir):
-            if not cross:
+            if not bcross:
                 subdirs[:] = [
                     d for d in subdirs
                     if not os.path.ismount(os.path.join(root, d))]
@@ -323,14 +323,14 @@ class Misc(object):
                 slist.append(os.path.join(root, d))
         return slist
 
-    def list_all(self, sdir, cross=True):
+    def list_all(self, sdir, bcross=True):
         ''' Get list of files and directories in directory recursively '''
         self.typecheck(sdir, (types.StringTypes))
-        self.typecheck(cross, (types.BooleanType))
+        self.typecheck(bcross, (types.BooleanType))
 
         slist = []
         for root, subdirs, files in os.walk(sdir):
-            if not cross:
+            if not bcross:
                 subdirs[:] = [
                     d for d in subdirs
                     if not os.path.ismount(os.path.join(root, d))]
