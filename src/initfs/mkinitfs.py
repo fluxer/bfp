@@ -224,9 +224,8 @@ try:
     find = misc.whereis('find')
     cpio = misc.whereis('cpio')
     gzip = misc.whereis('gzip')
-    misc.system_command( \
-        find + ' . | ' + cpio + ' -o -H newc | ' + gzip + ' > ' + ARGS.image, \
-        shell=True, cwd=ARGS.tmp)
+    misc.system_command('%s . | %s -o -H newc | %s > %s' % \
+        (find, cpio, gzip, ARGS.image), shell=True, cwd=ARGS.tmp)
 
 except subprocess.CalledProcessError as detail:
     message.critical('SUBPROCESS', detail)

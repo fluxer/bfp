@@ -5,7 +5,7 @@ import sys, curses, syslog
 
 # http://stackoverflow.com/questions/107705/python-output-buffering
 class Unbuffered(object):
-    ''' Override print behaviour '''
+    ''' Override output behaviour '''
     def __init__(self, stream):
         self.stream = stream
 
@@ -47,7 +47,7 @@ class Message(object):
             sys.stdout = Unbuffered(sys.stdout)
 
     def log_message(self, status, msg):
-        ''' Log message to file '''
+        ''' Log message to system log '''
         if self.LOG:
             if status == 'info':
                 status = syslog.LOG_INFO
@@ -62,7 +62,7 @@ class Message(object):
             syslog.syslog(status, str(msg))
 
     def info(self, msg, marker=None):
-        ''' Print message with INFO status '''
+        ''' Print message with information status '''
         if not marker is None:
             print('%s* %s%s: %s%s%s' % (self.cmarker, self.cnormal, msg, \
                 self.cinfo, marker, self.cnormal))
@@ -73,7 +73,7 @@ class Message(object):
 
 
     def warning(self, msg, marker=None):
-        ''' Print message with WARNING status '''
+        ''' Print message with warning status '''
         if not marker is None:
             sys.stderr.write('%s* %s%s: %s%s%s\n' % (self.cwarning, \
                 self.cnormal, msg, self.cwarning, marker, self.cnormal))
@@ -83,7 +83,7 @@ class Message(object):
             self.log_message('warning', msg)
 
     def critical(self, msg, marker=None):
-        ''' Print message with CRITICAL status '''
+        ''' Print message with critical status '''
         if not marker is None:
             sys.stderr.write('%s* %s%s: %s%s%s\n' % (self.ccritical, \
                 self.cnormal, msg, self.ccritical, marker, self.cnormal))
@@ -93,7 +93,7 @@ class Message(object):
             self.log_message('critical', msg)
 
     def debug(self, msg, marker=None):
-        ''' Print message with DEBUG status '''
+        ''' Print message with debug status '''
         if self.DEBUG:
             if not marker is None:
                 print('%s* %s%s: %s%s%s' % (self.cdebug, self.cnormal, msg, \
@@ -104,7 +104,7 @@ class Message(object):
                 self.log_message('debug', msg)
 
     def sub_info(self, msg, marker=None):
-        ''' Print sub-message with INFO status '''
+        ''' Print sub-message with information status '''
         if not marker is None:
             print('%s  => %s%s: %s%s%s' % (self.cmarker, self.cnormal, msg, \
                 self.cinfo, marker, self.cnormal))
@@ -114,7 +114,7 @@ class Message(object):
             self.log_message('info', msg)
 
     def sub_warning(self, msg, marker=None):
-        ''' Print sub-message with WARNING status '''
+        ''' Print sub-message with warning status '''
         if not marker is None:
             sys.stderr.write('%s  => %s%s: %s%s%s\n' % (self.cwarning, \
                 self.cnormal, msg, self.cwarning, marker, self.cnormal))
@@ -125,7 +125,7 @@ class Message(object):
             self.log_message('warning', msg)
 
     def sub_critical(self, msg, marker=None):
-        ''' Print sub-message with CRITICAL status '''
+        ''' Print sub-message with critical status '''
         if not marker is None:
             sys.stderr.write('%s  => %s%s: %s%s%s\n' % (self.ccritical, \
                 self.cnormal, msg, self.ccritical, marker, self.cnormal))
@@ -136,7 +136,7 @@ class Message(object):
             self.log_message('critical', msg)
 
     def sub_debug(self, msg, marker=None):
-        ''' Print sub-message with DEBUG status '''
+        ''' Print sub-message with debug status '''
         if self.DEBUG:
             if not marker is None:
                 print('%s  => %s%s: %s%s%s' % (self.cdebug, self.cnormal, \

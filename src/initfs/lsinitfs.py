@@ -58,8 +58,7 @@ try:
     shutil.copyfile(ARGS.image, new_image)
 
     message.sub_info('Decompressing image')
-    gunzip = misc.whereis('gunzip')
-    misc.system_command((gunzip, new_image))
+    misc.system_command((misc.whereis('gunzip'), new_image))
 
     message.sub_info('Listing image')
     cpio = misc.whereis('cpio')
