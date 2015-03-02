@@ -1225,6 +1225,18 @@ class Source(object):
 
     def main(self):
         ''' Execute action for every target '''
+        # resolve aliases and meta groups
+        if 'world' in self.targets:
+            position = self.targets.index('world')
+            self.targets[position:position+1] = \
+                database.local_all(basename=True)
+
+        for alias in database.remote_aliases():
+            if alias in self.targets:
+                position = self.targets.index(alias)
+                self.targets[position:position+1] = \
+                    database.remote_alias(alias)
+
         for target in self.targets:
             # make sure target is absolute path
             if os.path.isdir(target):
@@ -1481,6 +1493,18 @@ class Binary(Source):
 
     def main(self):
         ''' Execute action for every target '''
+        # resolve aliases and meta groups
+        if 'world' in self.targets:
+            position = self.targets.index('world')
+            self.targets[position:position+1] = \
+                database.local_all(basename=True)
+
+        for alias in database.remote_aliases():
+            if alias in self.targets:
+                position = self.targets.index(alias)
+                self.targets[position:position+1] = \
+                    database.remote_alias(alias)
+
         for target in self.targets:
             # make sure target is absolute path
             if os.path.isdir(target):

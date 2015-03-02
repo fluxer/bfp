@@ -19,15 +19,13 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.5.0 (5a162c9)"
+app_version = "1.5.0 (4f7d517)"
 
 try:
     import libmessage
     message = libmessage.Message()
     import libmisc
     misc = libmisc.Misc()
-    import libpackage
-    database = libpackage.Database()
     import libspm
 
     EUID = os.geteuid()
@@ -418,17 +416,6 @@ try:
         m.main()
 
     elif ARGS.mode == 'source':
-        if 'world' in ARGS.TARGETS:
-            position = ARGS.TARGETS.index('world')
-            ARGS.TARGETS[position:position+1] = \
-                database.local_all(basename=True)
-
-        for alias in database.remote_aliases():
-            if alias in ARGS.TARGETS:
-                position = ARGS.TARGETS.index(alias)
-                ARGS.TARGETS[position:position+1] = \
-                    database.remote_alias(alias)
-
         message.info(_('Runtime information'))
         message.sub_info(_('CACHE_DIR'), libspm.CACHE_DIR)
         message.sub_info(_('BUILD_DIR'), libspm.BUILD_DIR)
@@ -468,17 +455,6 @@ try:
         m.main()
 
     elif ARGS.mode == 'binary':
-        if 'world' in ARGS.TARGETS:
-            position = ARGS.TARGETS.index('world')
-            ARGS.TARGETS[position:position+1] = \
-                database.local_all(basename=True)
-
-        for alias in database.remote_aliases():
-            if alias in ARGS.TARGETS:
-                position = ARGS.TARGETS.index(alias)
-                ARGS.TARGETS[position:position+1] = \
-                    database.remote_alias(alias)
-
         message.info(_('Runtime information'))
         message.sub_info(_('CACHE_DIR'), libspm.CACHE_DIR)
         message.sub_info(_('ROOT_DIR'), libspm.ROOT_DIR)
