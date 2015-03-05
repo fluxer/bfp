@@ -1,5 +1,8 @@
 include ../../Makefile.inc
 
+.py:
+	$(NUITKA) $<
+
 all: bump clean
 	$(NUITKA) mkinitfs.py
 	$(NUITKA) lsinitfs.py
@@ -25,4 +28,5 @@ clean:
 bump:
 	$(SED) 's|^app_version.*|app_version = "$(VERSION) ($(GIT_VERSION))"|' -i lsinitfs.py mkinitfs.py
 
+.SUFFIXES: .py
 .PHONY: all install uninstall clean bump

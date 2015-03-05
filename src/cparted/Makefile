@@ -1,5 +1,8 @@
 include ../../Makefile.inc
 
+.py:
+	$(NUITKA) $<
+
 all: bump clean
 	$(NUITKA) main.py
 	$(STRIP) *.exe
@@ -18,4 +21,5 @@ clean:
 bump:
 	$(SED) 's|^app_version.*|app_version = "$(VERSION) ($(GIT_VERSION))"|' -i main.py
 
+.SUFFIXES: .py
 .PHONY: all install uninstall clean bump

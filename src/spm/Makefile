@@ -1,5 +1,11 @@
 include ../../Makefile.inc
 
+.py:
+	$(NUITKA) $<
+
+libspm:
+	$(NUITKA) --module libspm.py
+
 all: bump clean
 	$(XGETTEXT) --language=Python -o spm.pot libspm.py spm.py tools.py
 	for trans in bg; do \
@@ -40,4 +46,5 @@ clean:
 bump:
 	$(SED) 's|^app_version.*|app_version = "$(VERSION) ($(GIT_VERSION))"|' -i spm.py tools.py
 
+.SUFFIXES: .py
 .PHONY: all check install uninstall clean bump

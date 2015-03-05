@@ -1,5 +1,8 @@
 include ../../Makefile.inc
 
+.py:
+	$(NUITKA) --module $<
+
 all: clean
 	$(NUITKA) --module libdialog.py
 	$(NUITKA) --module libinotify.py
@@ -28,4 +31,5 @@ clean:
 	$(RM) -r *.build/ *.so __pycache__
 	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
+.SUFFIXES: .py
 .PHONY: all check install uninstall clean
