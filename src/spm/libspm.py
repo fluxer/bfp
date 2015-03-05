@@ -937,15 +937,14 @@ class Source(object):
                 bang_regexp = 'sh|bash|dash|ksh|csh|tcsh|tclsh|scsh|fish|zsh'
                 bang_regexp += '|ash|python|perl|php|ruby|lua|wish|(?:g)?awk'
                 bang_regexp += '|gbr2|gbr3'
-                # parse the shebang and split it to 3 groups:
+                # parse the shebang and split it to 2 groups:
                 # 1. full match, used to replace it with something that will work
                 # 2. base of the interpreter (e.g. bash), used to find match in the target or host
-                # 3. interpreter arguments, used in the replacement as preserving them is essential
-                omatch = misc.file_search('(^#!.*(?:\\s|/)(' + bang_regexp + ')(.*)(?:\\s|$))', sfile, exact=False, escape=False)
+                omatch = misc.file_search('(^#!.*((?:' + bang_regexp + ')(.*\\d)?))(?:.*\\s)', \
+                    sfile, exact=False, escape=False)
                 if omatch:
                     sfull = omatch[0][0].strip()
                     sbase = omatch[0][1].strip()
-                    sargs = omatch[0][2].strip()
                     smatch = False
                     dmatch = []
                     # now look for the interpreter in the target
@@ -965,7 +964,7 @@ class Source(object):
                     # now update the shebang if possible
                     if smatch:
                         message.sub_debug(_('Attempting shebang correction on'), sfile)
-                        misc.file_substitute('^' + sfull, '#!' + smatch + ' ' + sargs, sfile)
+                        misc.file_substitute('^' + sfull, '#!' + smatch, sfile)
 
                     if dmatch and len(dmatch) > 1:
                         message.sub_warning(_('Multiple providers for %s') % sbase, dmatch)
