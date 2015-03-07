@@ -30,64 +30,66 @@ TRIGGERS_CONF = '/etc/spm/triggers.conf'
 if not os.path.isfile(MAIN_CONF):
     message.warning(_('Configuration file does not exist'), MAIN_CONF)
 
-    CACHE_DIR = '/var/cache/spm'
-    BUILD_DIR = '/var/tmp/spm'
-    ROOT_DIR = '/'
-    LOCAL_DIR = ROOT_DIR + 'var/local/spm'
-    IGNORE = []
-    DEMOTE = ''
-    OFFLINE = False
-    MIRROR = False
-    TIMEOUT = 30
-    CHOST = ''
-    CFLAGS = ''
-    CXXFLAGS = ''
-    CPPFLAGS = ''
-    LDFLAGS = ''
-    MAKEFLAGS = ''
-    COMPRESS_MAN = False
-    SPLIT_DEBUG = False
-    STRIP_BINARIES = False
-    STRIP_SHARED = False
-    STRIP_STATIC = False
-    STRIP_RPATH = False
-    PYTHON_COMPILE = False
-    IGNORE_MISSING = False
-    CONFLICTS = False
-    BACKUP = False
-    SCRIPTS = False
-    TRIGGERS = False
-else:
-    conf = configparser.SafeConfigParser()
-    conf.read(MAIN_CONF)
+conf = configparser.SafeConfigParser(
+    {
+        'CACHE_DIR': '/var/cache/spm',
+        'BUILD_DIR': '/var/tmp/spm',
+        'ROOT_DIR': '/',
+        'LOCAL_DIR': '/var/local/spm',
+        'IGNORE': '',
+        'DEMOTE': '',
+        'OFFLINE': 'False',
+        'MIRROR': 'False',
+        'TIMEOUT': '30',
+        'CHOST': '',
+        'CFLAGS': '',
+        'CXXFLAGS': '',
+        'CPPFLAGS': '',
+        'LDFLAGS': '',
+        'MAKEFLAGS': '',
+        'COMPRESS_MAN': 'False',
+        'SPLIT_DEBUG': 'False',
+        'STRIP_BINARIES': 'False',
+        'STRIP_SHARED': 'False',
+        'STRIP_STATIC': 'False',
+        'STRIP_RPATH': 'False',
+        'PYTHON_COMPILE': 'False',
+        'IGNORE_MISSING': 'False',
+        'CONFLICTS': 'False',
+        'BACKUP': 'False',
+        'SCRIPTS': 'False',
+        'TRIGGERS': 'False',
+    }
+)
+conf.read(MAIN_CONF)
 
-    CACHE_DIR = conf.get('spm', 'CACHE_DIR')
-    BUILD_DIR = conf.get('spm', 'BUILD_DIR')
-    ROOT_DIR = conf.get('spm', 'ROOT_DIR')
-    LOCAL_DIR = ROOT_DIR + 'var/local/spm'
-    IGNORE = conf.get('spm', 'IGNORE').split(' ')
-    DEMOTE = conf.get('spm', 'DEMOTE')
-    OFFLINE = conf.getboolean('prepare', 'OFFLINE')
-    MIRROR = conf.getboolean('prepare', 'MIRROR')
-    TIMEOUT = conf.getint('prepare', 'TIMEOUT')
-    CHOST = conf.get('compile', 'CHOST')
-    CFLAGS = conf.get('compile', 'CFLAGS')
-    CXXFLAGS = conf.get('compile', 'CXXFLAGS')
-    CPPFLAGS = conf.get('compile', 'CPPFLAGS')
-    LDFLAGS = conf.get('compile', 'LDFLAGS')
-    MAKEFLAGS = conf.get('compile', 'MAKEFLAGS')
-    COMPRESS_MAN = conf.getboolean('install', 'COMPRESS_MAN')
-    SPLIT_DEBUG = conf.getboolean('install', 'SPLIT_DEBUG')
-    STRIP_BINARIES = conf.getboolean('install', 'STRIP_BINARIES')
-    STRIP_SHARED = conf.getboolean('install', 'STRIP_SHARED')
-    STRIP_STATIC = conf.getboolean('install', 'STRIP_STATIC')
-    STRIP_RPATH = conf.getboolean('install', 'STRIP_RPATH')
-    PYTHON_COMPILE = conf.getboolean('install', 'PYTHON_COMPILE')
-    IGNORE_MISSING = conf.getboolean('install', 'IGNORE_MISSING')
-    CONFLICTS = conf.getboolean('merge', 'CONFLICTS')
-    BACKUP = conf.getboolean('merge', 'BACKUP')
-    SCRIPTS = conf.getboolean('merge', 'SCRIPTS')
-    TRIGGERS = conf.getboolean('merge', 'TRIGGERS')
+CACHE_DIR = conf.get('spm', 'CACHE_DIR')
+BUILD_DIR = conf.get('spm', 'BUILD_DIR')
+ROOT_DIR = conf.get('spm', 'ROOT_DIR')
+LOCAL_DIR = ROOT_DIR + 'var/local/spm'
+IGNORE = conf.get('spm', 'IGNORE').split(' ')
+DEMOTE = conf.get('spm', 'DEMOTE')
+OFFLINE = conf.getboolean('prepare', 'OFFLINE')
+MIRROR = conf.getboolean('prepare', 'MIRROR')
+TIMEOUT = conf.getint('prepare', 'TIMEOUT')
+CHOST = conf.get('compile', 'CHOST')
+CFLAGS = conf.get('compile', 'CFLAGS')
+CXXFLAGS = conf.get('compile', 'CXXFLAGS')
+CPPFLAGS = conf.get('compile', 'CPPFLAGS')
+LDFLAGS = conf.get('compile', 'LDFLAGS')
+MAKEFLAGS = conf.get('compile', 'MAKEFLAGS')
+COMPRESS_MAN = conf.getboolean('install', 'COMPRESS_MAN')
+SPLIT_DEBUG = conf.getboolean('install', 'SPLIT_DEBUG')
+STRIP_BINARIES = conf.getboolean('install', 'STRIP_BINARIES')
+STRIP_SHARED = conf.getboolean('install', 'STRIP_SHARED')
+STRIP_STATIC = conf.getboolean('install', 'STRIP_STATIC')
+STRIP_RPATH = conf.getboolean('install', 'STRIP_RPATH')
+PYTHON_COMPILE = conf.getboolean('install', 'PYTHON_COMPILE')
+IGNORE_MISSING = conf.getboolean('install', 'IGNORE_MISSING')
+CONFLICTS = conf.getboolean('merge', 'CONFLICTS')
+BACKUP = conf.getboolean('merge', 'BACKUP')
+SCRIPTS = conf.getboolean('merge', 'SCRIPTS')
+TRIGGERS = conf.getboolean('merge', 'TRIGGERS')
 
 # parse repositories configuration file
 if not os.path.isfile(REPOSITORIES_CONF):
