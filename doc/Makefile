@@ -13,7 +13,7 @@ all: clean
 	$(POD2MAN) --release="SPM $(VERSION)" \
 		--center="Source Package Manager Manual" \
 		--section='8' --utf8 spm-tools.pod > spm-tools.8
-	$(SED) 's|#SHAREDIR#|$(SHAREDIR)|g' -i SRCBUILD.5
+	$(SED) 's|#DOCDIR#|$(DOCDIR)|g' -i SRCBUILD.5
 	$(SED) 's|#MACHINE#|$(MACHINE)|g' -i spm.conf.5
 	$(SED) 's|#ARCH#|$(ARCH)|g' -i spm.conf.5
 	$(SED) 's|#JOBS#|$(JOBS)|g' -i spm.conf.5
