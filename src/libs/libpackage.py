@@ -115,10 +115,6 @@ class Database(object):
                 return ltarget
         return None
 
-    def local_installed(self, target):
-        ''' DEPRECATED: use local_search() instead '''
-        return self.local_search(target)
-
     def remote_search(self, target):
         ''' Returns full path to directory matching target '''
         misc.typecheck(target, (types.StringTypes))

@@ -246,11 +246,11 @@ class TestSuite(unittest.TestCase):
         self.assertEqual(database.local_metadata(self.local_name, 'size'), \
             self.local_size)
 
-    def test_local_installed_true(self):
-        self.assertTrue(database.local_installed(self.local_name), True)
+    def test_local_search_true(self):
+        self.assertTrue(database.local_search(self.local_name), True)
 
-    def test_local_installed_false(self):
-        self.assertEqual(database.local_installed('foobar'), False)
+    def test_local_search_false(self):
+        self.assertEqual(database.local_search('foobar'), None)
 
     def test_local_belongs_true(self):
         self.assertEqual(database.local_belongs('/etc/dummy.conf'), \
