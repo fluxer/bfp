@@ -8,6 +8,7 @@ BINDIR = $(PREFIX)/bin
 SBINDIR = $(PREFIX)/sbin
 SHAREDIR = $(PREFIX)/share
 MANDIR = $(SHAREDIR)/man
+DOCDIR = $(SHAREDIR)/doc
 SITEDIR = $(shell $(PYTHON) -c "import site; print(site.getsitepackages()[0])")
 APPLICATIONSDIR = $(PREFIX)/share/applications
 PIXMAPSDIR = $(PREFIX)/share/pixmaps
@@ -42,6 +43,7 @@ XGETTEXT = xgettext
 MSGMERGE = msgmerge
 MSGATTRIB = msgattrib
 MSGFMT = msgfmt
+POD2MAN = pod2man
 
 all:
 
