@@ -480,7 +480,8 @@ class Source(object):
         misc.dir_create(sdir)
         sdebug = sdir + '/' + os.path.basename(sfile) + '.debug'
         objcopy = misc.whereis('objcopy')
-        misc.system_command((objcopy, '--only-keep-debug', sfile, sdebug))
+        misc.system_command((objcopy, '--only-keep-debug', \
+            '--compress-debug-sections', sfile, sdebug))
         misc.system_command((objcopy, '--add-gnu-debuglink', sdebug, sfile))
 
     def update_databases(self, content, action):
@@ -1043,6 +1044,7 @@ class Source(object):
 
                 message.sub_debug(_('Checking against'), target)
                 footprint = database.local_footprint(target).split('\n')
+                # first item is null ('') because root ('/') is stripped
                 for sfile in new_content[1:]:
                     sfull = '/' + sfile
                     if sfull in footprint:
