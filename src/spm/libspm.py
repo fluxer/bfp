@@ -1036,25 +1036,18 @@ class Source(object):
 
         if CONFLICTS:
             conflict_detected = False
-
-            regex = '(?:\\s|^)('
-            # first item is null ('') because root ('/') is stripped
-            for sfile in new_content[1:]:
-                if os.path.isdir(os.path.join(ROOT_DIR, sfile)):
-                    continue
-                regex += '/' + re.escape(sfile) + '|'
-            regex = regex.rstrip('|') + ')(?:\\s|$)'
-
             message.sub_info(_('Checking for conflicts'))
             for target in database.local_all(basename=True):
                 if target == self.target_name:
                     continue
 
-                match = misc.string_search(regex, database.local_footprint(target), escape=False)
-                if match:
-                    for m in match:
-                        message.sub_critical(_('File/link conflict with %s') % target, m)
-                    conflict_detected = True
+                message.sub_debug(_('Checking against'), target)
+                footprint = database.local_footprint(target).split('\n')
+                for sfile in new_content[1:]:
+                    sfull = '/' + sfile
+                    if sfull in footprint:
+                        message.sub_critical(_('File/link conflict with %s') % target, sfull)
+                        conflict_detected = True
 
             if conflict_detected:
                 sys.exit(2)
