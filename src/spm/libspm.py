@@ -26,42 +26,46 @@ MAIN_CONF = '/etc/spm.conf'
 REPOSITORIES_CONF = '/etc/spm/repositories.conf'
 MIRRORS_CONF = '/etc/spm/mirrors.conf'
 TRIGGERS_CONF = '/etc/spm/triggers.conf'
+DEFAULTS = {
+    'CACHE_DIR': '/var/cache/spm',
+    'BUILD_DIR': '/var/tmp/spm',
+    'ROOT_DIR': '/',
+    'LOCAL_DIR': '/var/local/spm',
+    'IGNORE': '',
+    'DEMOTE': '',
+    'OFFLINE': 'False',
+    'MIRROR': 'False',
+    'TIMEOUT': '30',
+    'CHOST': '',
+    'CFLAGS': '',
+    'CXXFLAGS': '',
+    'CPPFLAGS': '',
+    'LDFLAGS': '',
+    'MAKEFLAGS': '',
+    'COMPRESS_MAN': 'False',
+    'SPLIT_DEBUG': 'False',
+    'STRIP_BINARIES': 'False',
+    'STRIP_SHARED': 'False',
+    'STRIP_STATIC': 'False',
+    'STRIP_RPATH': 'False',
+    'PYTHON_COMPILE': 'False',
+    'IGNORE_MISSING': 'False',
+    'CONFLICTS': 'False',
+    'BACKUP': 'False',
+    'SCRIPTS': 'False',
+    'TRIGGERS': 'False',
+}
 
 if not os.path.isfile(MAIN_CONF):
     message.warning(_('Configuration file does not exist'), MAIN_CONF)
 
-conf = configparser.SafeConfigParser(
-    {
-        'CACHE_DIR': '/var/cache/spm',
-        'BUILD_DIR': '/var/tmp/spm',
-        'ROOT_DIR': '/',
-        'LOCAL_DIR': '/var/local/spm',
-        'IGNORE': '',
-        'DEMOTE': '',
-        'OFFLINE': 'False',
-        'MIRROR': 'False',
-        'TIMEOUT': '30',
-        'CHOST': '',
-        'CFLAGS': '',
-        'CXXFLAGS': '',
-        'CPPFLAGS': '',
-        'LDFLAGS': '',
-        'MAKEFLAGS': '',
-        'COMPRESS_MAN': 'False',
-        'SPLIT_DEBUG': 'False',
-        'STRIP_BINARIES': 'False',
-        'STRIP_SHARED': 'False',
-        'STRIP_STATIC': 'False',
-        'STRIP_RPATH': 'False',
-        'PYTHON_COMPILE': 'False',
-        'IGNORE_MISSING': 'False',
-        'CONFLICTS': 'False',
-        'BACKUP': 'False',
-        'SCRIPTS': 'False',
-        'TRIGGERS': 'False',
-    }
-)
+conf = configparser.SafeConfigParser(DEFAULTS)
 conf.read(MAIN_CONF)
+# section are hardcore-required, to avoid failures on get() add them to the
+# conf object but do notice that changes are not written to config on purpose
+for section in ('spm', 'prepare', 'compile', 'install', 'merge'):
+    if not conf.has_section(section):
+        conf.add_section(section)
 
 CACHE_DIR = conf.get('spm', 'CACHE_DIR')
 BUILD_DIR = conf.get('spm', 'BUILD_DIR')
