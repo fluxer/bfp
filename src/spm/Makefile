@@ -21,10 +21,9 @@ all: bump clean
 	$(STRIP) *.exe *.so
 
 install:
-	$(INSTALL) -dm755 $(DESTDIR)$(SITEDIR) $(DESTDIR)$(BINDIR) \
-		$(DESTDIR)$(LOCALEDIR)/
+	$(INSTALL) -dm755 $(DESTDIR)$(SITEDIR) $(DESTDIR)$(BINDIR)
 	for trans in bg; do \
-		$(INSTALL) -mD644 po/$$trans/spm.mo \
+		$(INSTALL) -Dm644 po/$$trans/spm.mo \
 			$(DESTDIR)$(LOCALEDIR)/$$trans/LC_MESSAGES/spm.mo; \
 	done
 	$(INSTALL) -m644 libspm.so $(DESTDIR)$(SITEDIR)/libspm.so
