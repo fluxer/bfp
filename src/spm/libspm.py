@@ -331,6 +331,7 @@ class Repo(object):
         rdir = os.path.join(CACHE_DIR, 'repositories')
         misc.dir_create(rdir, DEMOTE)
 
+        git = misc.whereis('git')
         if os.path.exists(self.repository_url):
             # repository is local path, create a copy of it
             message.sub_info(_('Cloning local'), self.repository_name)
@@ -338,18 +339,18 @@ class Repo(object):
         elif os.path.isdir(self.repository_dir):
             # existing Git repository
             message.sub_info(_('Updating repository'), self.repository_name)
-            misc.system_command((misc.whereis('git'), 'pull', \
+            misc.system_command((git, 'pull', \
                 self.repository_url), cwd=self.repository_dir, demote=DEMOTE)
         else:
             # non-existing Git repository, fetch
             message.sub_info(_('Cloning remote'), self.repository_name)
-            misc.system_command((misc.whereis('git'), 'clone', '--depth=1', \
+            misc.system_command((git, 'clone', '--depth=1', \
                 self.repository_url, self.repository_dir), demote=DEMOTE)
             message.sub_info(_('Setting up user information for repository'))
             # allow gracefull pulls and merges
-            misc.system_command((misc.whereis('git'), 'config', 'user.name', \
+            misc.system_command((git, 'config', 'user.name', \
                 'spm'), cwd=self.repository_dir)
-            misc.system_command((misc.whereis('git'), 'config', 'user.email', \
+            misc.system_command((git, 'config', 'user.email', \
                 'spm@unnatended.fake'), cwd=self.repository_dir)
 
     def prune(self):
@@ -750,15 +751,16 @@ class Source(object):
                     misc.system_command((misc.whereis('git'), 'pull', \
                         src_url), cwd=link_file, demote=DEMOTE)
                 else:
+                    git = misc.whereis('git')
                     message.sub_debug(_('Cloning Git repository'), src_url)
-                    misc.system_command((misc.whereis('git'), 'clone', \
-                        '--depth=1', src_url, link_file), demote=DEMOTE)
+                    misc.system_command((git, 'clone', '--depth=1', src_url, \
+                        link_file), demote=DEMOTE)
                     message.sub_debug(_('Setting up user information for repository'))
                     # allow gracefull pulls and merges
-                    misc.system_command((misc.whereis('git'), 'config', \
-                        'user.name', 'spm'), cwd=link_file)
-                    misc.system_command((misc.whereis('git'), 'config', \
-                        'user.email', 'spm@unnatended.fake'), cwd=link_file)
+                    misc.system_command((git, 'config', 'user.name', 'spm'), \
+                        cwd=link_file)
+                    misc.system_command((git, 'config', 'user.email', \
+                        'spm@unnatended.fake'), cwd=link_file)
                 continue
 
             elif src_url.startswith(('http://', 'https://', 'ftp://', \

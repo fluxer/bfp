@@ -218,15 +218,16 @@ class Dist(object):
                             misc.system_command((misc.whereis('git'), \
                                 'pull', src_url), cwd=src_file)
                         else:
+                            git = misc.whereis('git')
                             message.sub_debug(_('Cloning Git repository'), src_url)
-                            misc.system_command((misc.whereis('git'), \
-                                'clone', '--depth=1', src_url, src_file))
+                            misc.system_command((git, 'clone', '--depth=1', \
+                                src_url, src_file))
                             message.sub_debug(_('Setting up user information for repository'))
                             # allow gracefull pulls and merges
-                            misc.system_command((misc.whereis('git'), \
-                                'config', 'user.name', 'spm'), cwd=src_file)
-                            misc.system_command((misc.whereis('git'), \
-                                'config', 'user.email', 'spm@unnatended.fake'), cwd=src_file)
+                            misc.system_command((git, 'config', 'user.name', \
+                                'spm'), cwd=src_file)
+                            misc.system_command((git, 'config', 'user.email', \
+                                'spm@unnatended.fake'), cwd=src_file)
                         continue
 
                     elif src_url.startswith(('http://', 'https://', 'ftp://', \
