@@ -15,6 +15,7 @@ all: clean bump
 	$(STRIP) *.exe *.so
 
 cython: clean bump
+	# FIXME: GUI does not actually work because of gui_ui
 	$(PYUIC) gui.ui -o gui_ui.py
 	$(CYTHON) libspm.py
 	$(CYTHON) --embed spm.py
