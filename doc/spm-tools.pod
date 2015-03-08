@@ -12,9 +12,10 @@ spm-tools - Source Package Manager Tools
 Source Package Manager Tools (SPMT) packs additional utilities to assist in the
 system maintenance.
 
-With the tools you can distribute tarballs of port(s) and share them with friends
-so that other can benefit from your work. Along with the tarballs sources, such
-as patches and archives, can be optionally fetched and packed in the tarball.
+With the tools you can distribute tarballs of port(s) and share them with
+friends so that other can benefit from your work. Along with the tarballs
+sources, such as patches and archives, can be optionally fetched and packed in
+the tarball.
 
 Runtime dependencies of binaries, libraries and scripts can be checked to ensure
 the system consistency which is useful, for an example, when cross-compiling or
@@ -328,14 +329,15 @@ calling `tar` or `bsdtar` directly.
 
 =head2 SPM
 
-Single quote inside double quoted text (and vice-versa) in the SRCBUILD variables
-break the parser.
+Single quote inside double quoted text (and vice-versa) in the SRCBUILD
+variables break the parser.
 
 =head1 AUTHORS
 
 Ivailo Monev (a.k.a. SmiL3y) <xakepa10@gmail.com>
 
-Copyright (c) 2013-2015 Ivailo Monev licensed through the GNU General Public License
+Copyright (c) 2013-2015 Ivailo Monev licensed through custom license, see the
+COPYING file bundled with the source code.
 
 =head1 SEE ALSO
 

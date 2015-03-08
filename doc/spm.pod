@@ -100,15 +100,15 @@ for whatever the reason, SPM chokes you can decompress the tarball with:
 
 	tar -xapPhf /var/cache/spm/tarballs/<tarball>
  
-and it will be picked up by SPM as present on the system, no magic tricks needed.
-Keep in mind that you may have to execute the following to update the shared
-libraries cache:
+and it will be picked up by SPM as present on the system, no magic tricks
+needed. Keep in mind that you may have to execute the following to update the
+shared libraries cache:
 
 	ldconfig -r <system_root>
 
-Upon targets merge or removal triggers for updating manual pages, desktop files,
-mime and other database will be activated to take care of common actions avoiding
-code duplication in pre/post scripts.
+Upon targets merge or removal triggers for updating manual pages, desktop
+files, mime and other database will be activated to take care of common actions
+avoiding code duplication in pre/post scripts.
 
 Mirrors for sources can be used so that fetching sources is faster and more
 reliable, for an example when the upstream servers are down for maintenance.
@@ -376,14 +376,15 @@ calling `tar` or `bsdtar` directly.
 
 =head2 SPM
 
-Single quote inside double quoted text (and vice-versa) in the SRCBUILD variables
-break the parser.
+Single quote inside double quoted text (and vice-versa) in the SRCBUILD
+variables break the parser.
 
 =head1 AUTHORS
 
 Ivailo Monev (a.k.a. SmiL3y) <xakepa10@gmail.com>
 
-Copyright (c) 2013-2015 Ivailo Monev licensed through the GNU General Public License
+Copyright (c) 2013-2015 Ivailo Monev licensed through custom license, see the
+COPYING file bundled with the source code.
 
 =head1 SEE ALSO
 
