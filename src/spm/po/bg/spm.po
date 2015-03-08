@@ -7,8 +7,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-08 05:55+0000\n"
-"PO-Revision-Date: 2015-03-08 03:27+0000\n"
-"Last-Translator: Ivailo Monev <xakepa10@gmail.com>\n"
+"PO-Revision-Date: 2015-03-08 20:55+0000\n"
+"Last-Translator: \n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
@@ -1078,7 +1078,7 @@ msgstr ""
 
 #: tools.py:307
 msgid "No manual page(s)"
-msgstr ""
+msgstr "Няма опътваща страница(и)"
 
 #: tools.py:314
 msgid "Cross-filesystem udev rule(s)"
@@ -1107,7 +1107,7 @@ msgstr "Файлът несъществува"
 
 #: tools.py:355
 msgid "Build directory trace(s)"
-msgstr ""
+msgstr "Следа(и) от директорията на строежа"
 
 #: tools.py:376
 msgid "Unknown owner of"
@@ -1127,16 +1127,16 @@ msgstr "Невалиден shebang"
 
 #: tools.py:435
 msgid "Possibly unnecessary backup of file"
-msgstr ""
+msgstr "Вероятно ненужно резервно копие на файл"
 
 #: tools.py:437
 msgid "Possibly undefined backup of file"
-msgstr ""
+msgstr "Вероятно незададено резервно копие"
 
 #: tools.py:445
 #, python-format
 msgid "Possibly conflicting file with %s"
-msgstr ""
+msgstr "Въроятен конфликтен файл с %s"
 
 #: tools.py:462
 msgid "Debug symbols missing"
@@ -1160,11 +1160,11 @@ msgstr ""
 
 #: tools.py:503
 msgid "Possible /dev/null output redirection"
-msgstr ""
+msgstr "Вероятно пренасочване към /dev/null"
 
 #: tools.py:507
 msgid "No maintainer mentioned"
-msgstr ""
+msgstr "Не е споменат човек по поддръжка"
 
 #: tools.py:511
 msgid "FIXME/TODO note(s)"
@@ -1310,7 +1310,7 @@ msgstr ""
 
 #: tools.py:800
 msgid "Check ownership"
-msgstr ""
+msgstr "Провери правата"
 
 #: tools.py:802
 msgid "Check for non-executable(s) in PATH"
@@ -1378,7 +1378,7 @@ msgstr ""
 
 #: tools.py:852
 msgid "Display content of SRCBUILD"
-msgstr ""
+msgstr "Покажи съдържанието на SRCBUILD"
 
 #: tools.py:872
 msgid "Use port for the server"
@@ -1503,3 +1503,4 @@ msgstr "АДРЕСС"
 #: tools.py:1046
 msgid "CROSS"
 msgstr ""
+
