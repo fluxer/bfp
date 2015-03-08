@@ -5,7 +5,7 @@ spm-tools - Source Package Manager Tools
 =head1 SYNOPSIS
 
 	spm-tools [-h] [--debug] [--version]
-                 {dist,edit,lint,merge,sane,clean,check,which,pack} ...
+                 {dist,check,clean,lint,sane,merge,edit,which,pack,pkg,serve,disowned}
 
 =head1 DESCRIPTION
 
@@ -20,23 +20,48 @@ Runtime dependencies of binaries, libraries and scripts can be checked to ensure
 the system consistency which is useful, for an example, when cross-compiling or
 when targets where force removed from the system.
 
+Software that is not required by other software installed on the system can be
+checked via clean mode.
+
 Checking for various system issues such as cross-filesystem udev rules and
 symbolic links can be perfomed. Also ports sanity can be checked for missing
 maintainer, /dev/null output recirections (which is bad and hides problems when
 they occure) and more.
 
+Sanity checking SRCBUILDs for missing essential variables and general mistakes
+can be done via sane mode.
+
 Dealing with files backed up by SPM can be done in merge mode, interactively.
 
 Editing SRCBUILD files can easily be done without knowing the exact path in the
-repositories directory, the editor is picked for the EDITOR environmental
+repositories directory, the editor is picked from the EDITOR environmental
 variable with fallback to Vim.
+
+Getting full paths to targets is possible via which mode, all matches of the
+pattern specified will be printed which can also be useful to check for
+dublicate ports. In addition, the content of the SRCBUILD can be printed.
+
+Software with SPM can be re-packed via pack mode, it depends on the footprint
+and will bail out if file does not exist.
+
+Package files from Arch Linux can be obtained via pkg mode, later they can be
+converted (with some degree of success) to SRCBUILD via pkg2src.
+
+Serving local caches (that includes repositories, sources and taballs) to the
+local area netwrok can be done via serve mode. Do note that the functionality
+is very basic and you may want to use dedicated application for this purpose.
+
+System files not tracked by SPM can be checked for via disowned mode. By
+default the scanning process does not perform cross-filesystem operations
+which depending on your setup may not be desired, for an example if you
+have /usr on a separate partition. The operation is usually slow.
 
 =head1 OPTIONS
 
 =head2 MAIN
 
 positional arguments:
-  {dist,edit,lint,merge,sane,clean,check}
+  {dist,check,clean,lint,sane,merge,edit,which,pack,pkg,serve,disowned}
 
 optional arguments:
   -h, --help            Show this help message and exit
@@ -52,9 +77,9 @@ optional arguments:
   -h, --help            Show this help message and exit
   -s, --sources         Include all sources in the archive
   -c, --clean           Clean all sources after creating archive
-  -d DIRECTORY,
-  --directory DIRECTORY Set output directory
-  
+  -d DIRECTORY, --directory DIRECTORY
+                        Set output directory
+
 =head2 CHECK MODE
 
 positional arguments:
@@ -84,8 +109,15 @@ optional arguments:
   -s, --symlink         Check for cross-filesystem symlink(s)
   -d, --doc             Check for documentation
   -M, --module          Check for module(s) in non-standard directory
-  -f, --footprint       Check for empty footprint
+  -f, --footprint       Check for footprint consistency
   -b, --builddir        Check for build directory trace(s)
+  -o, --ownership       Check ownership
+  -e, --executable      Check for non-executable(s) in PATH
+  -p, --path            Check for overlapping executable(s) in PATH
+  -n, --shebang         Check for incorrect shebang of scripts
+  -k, --backup          Check for incorrect or incomplete backup of files
+  -c, --conflicts       Check for conflicts between targets
+  -D, --debug           Check for missing debug symbols
   -a, --all             Perform all checks
 
 =head2 SANE MODE
@@ -95,12 +127,15 @@ positional arguments:
 
 optional arguments:
   -h, --help            Show this help message and exit
-  -e, --enable          Check for explicit --enable and --with argument(s)
-  -d, --disable         Check for explicit --disable and --without argument(s)
+  -e, --enable          Check for explicit --enable argument(s)
+  -d, --disable         Check for explicit --disable argument(s)
   -n, --null            Check for /dev/null output redirection(s)
-  -m, --miantainer      Check for missing maintainer
+  -m, --maintainer      Check for missing maintainer
   -N, --note            Check for FIXME/TODO note(s)
   -v, --variables       Check for essential variables
+  -t, --triggers        Check for unnecessary triggers invocation(s)
+  -u, --users           Check for user(s) being added but not deleted
+  -g, --groups          Check for group(s) being added but not deleted
   -a, --all             Perform all checks
 
 =head2 MERGE MODE
@@ -123,6 +158,7 @@ positional arguments:
 
 optional arguments:
   -h, --help            Show this help message and exit
+  -c, --cat             Display content of SRCBUILD
   -p, --plain           Print in plain format
 
 =head2 PACK MODE
@@ -132,8 +168,35 @@ positional arguments:
 
 optional arguments:
   -h, --help            Show this help message and exit
-  -d DIRECTORY,
-  --directory DIRECTORY Set output directory
+  -d DIRECTORY, --directory DIRECTORY
+                        Set output directory
+
+=head2 PKG MODE
+
+positional arguments:
+  TARGETS               Targets to apply actions on
+
+optional arguments:
+  -h, --help            Show this help message and exit
+  -d DIRECTORY, --directory DIRECTORY
+                        Set output directory
+
+=head2 SERVE MODE
+
+optional arguments:
+  -h, --help            Show this help message and exit
+  -p PORT, --port PORT  Use port for the server
+  -a ADDRESS, --address ADDRESS
+                        Use address for the server
+
+=head2 DISOWNED MODE
+
+optional arguments:
+  -h, --help            Show this help message and exit
+  -d DIRECTORY, --directory DIRECTORY
+                        Set lookup directory
+  -c, --cross           Scan cross-filesystem
+  -p, --plain           Print in plain format
 
 =head1 EXAMPLES
 
