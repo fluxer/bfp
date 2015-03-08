@@ -6,18 +6,21 @@ include ../../Makefile.inc
 libspm:
 	$(NUITKA) --module libspm.py
 
-all: bump clean
-	$(XGETTEXT) --language=Python -o spm.pot libspm.py spm.py tools.py
-	for trans in bg; do \
-		$(MSGMERGE) --update --no-fuzzy-matching po/$$trans/spm.po spm.pot; \
-		$(MSGATTRIB) --no-obsolete po/$$trans/spm.po --output-file=po/$$trans/spm.po; \
-		$(MSGFMT) po/$$trans/spm.po --output-file=po/$$trans/spm.mo; \
-	done
+all: clean bump
 	$(PYUIC) gui.ui -o gui_ui.py
 	$(NUITKA) --module libspm.py
 	$(NUITKA) spm.py
 	$(NUITKA) tools.py
 	$(NUITKA) --recurse-to=gui_ui gui.py
+	$(STRIP) *.exe *.so
+
+cython: clean bump
+	cython libspm.py
+	cython --embed spm.py
+	cython --embed tools.py
+	$(CC) -shared libspm.c $(shell pkg-config --cflags $(PYTHON)) -o libspm.so
+	$(CC) spm.c $(shell pkg-config --cflags --libs $(PYTHON)) -o spm.exe
+	$(CC) tools.c $(shell pkg-config --cflags --libs $(PYTHON)) -o tools.exe
 	$(STRIP) *.exe *.so
 
 install:
@@ -44,6 +47,12 @@ clean:
 
 bump:
 	$(SED) 's|^app_version.*|app_version = "$(VERSION) ($(GIT_VERSION))"|' -i spm.py tools.py
+	$(XGETTEXT) --language=Python -o spm.pot libspm.py spm.py tools.py
+	for trans in bg; do \
+		$(MSGMERGE) --update --no-fuzzy-matching po/$$trans/spm.po spm.pot; \
+		$(MSGATTRIB) --no-obsolete po/$$trans/spm.po --output-file=po/$$trans/spm.po; \
+		$(MSGFMT) po/$$trans/spm.po --output-file=po/$$trans/spm.mo; \
+	done
 
 .SUFFIXES: .py
-.PHONY: all check install uninstall clean bump
+.PHONY: all cython check install uninstall clean bump

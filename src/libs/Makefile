@@ -12,6 +12,15 @@ all: clean
 	$(NUITKA) --module libpackage.py
 	$(STRIP) *.so
 
+cython: clean
+	# FIXME: not everything build with Cython
+	cython libmagic.py libmessage.py libmisc.py libpackage.py
+	$(CC) -shared libmagic.c $(shell pkg-config --cflags $(PYTHON)) -o libmagic.so
+	$(CC) -shared libmessage.c $(shell pkg-config --cflags $(PYTHON)) -o libmessage.so
+	$(CC) -shared libmisc.c $(shell pkg-config --cflags $(PYTHON)) -o libmisc.so
+	$(CC) -shared libpackage.c $(shell pkg-config --cflags $(PYTHON)) -o libpackage.so
+	$(STRIP) *.so
+
 check:
 	$(PYTHON) test.py
 
@@ -32,4 +41,4 @@ clean:
 	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
 .SUFFIXES: .py
-.PHONY: all check install uninstall clean
+.PHONY: all cython check install uninstall clean
