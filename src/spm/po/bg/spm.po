@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-07 23:46+0000\n"
-"PO-Revision-Date: 2015-02-27 12:15+0000\n"
+"PO-Revision-Date: 2015-03-08 03:27+0000\n"
 "Last-Translator: Ivailo Monev <xakepa10@gmail.com>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -402,7 +402,7 @@ msgstr "Проверяване за конфликти"
 
 #: libspm.py:1051
 msgid "Checking against"
-msgstr ""
+msgstr "Проверяване срещу"
 
 #: libspm.py:1057
 #, python-format
@@ -1168,11 +1168,11 @@ msgstr ""
 
 #: tools.py:511
 msgid "FIXME/TODO note(s)"
-msgstr ""
+msgstr "FIXME/TODO бележка(и)"
 
 #: tools.py:516
 msgid "Essential variable(s) missing"
-msgstr ""
+msgstr "Липсваща важна променлива(и)"
 
 #: tools.py:518
 msgid "String variable(s) defined as array"
@@ -1184,15 +1184,15 @@ msgstr ""
 
 #: tools.py:535
 msgid "User(s) added but not deleted"
-msgstr ""
+msgstr "Добавен потребител(и), но не премахната"
 
 #: tools.py:540
 msgid "Group(s) added but not deleted"
-msgstr ""
+msgstr "Добавена група(и), но не премахната"
 
 #: tools.py:549
 msgid "Backup file detected"
-msgstr ""
+msgstr "Засечено резервно копие"
 
 #: tools.py:553
 msgid ""
@@ -1206,6 +1206,15 @@ msgid ""
 "        5. Remove backup\n"
 "        *. Continue\n"
 msgstr ""
+"\n"
+"    Какво искате да направите:\n"
+"\n"
+"        1. Виж разликата\n"
+"        2. Промени оригинала\n"
+"        3. Промени резервното копие\n"
+"        4. Замени оригинала с резервното копие\n"
+"        5. Премахни резервното копие\n"
+"        *. Продължи\n"
 
 #: tools.py:627
 msgid "Match"
@@ -1494,3 +1503,4 @@ msgstr "АДРЕСС"
 #: tools.py:1046
 msgid "CROSS"
 msgstr ""
+
