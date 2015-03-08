@@ -1,7 +1,7 @@
 #!/bin/python2
 
 import gettext
-_ = gettext.translation('spm').gettext
+_ = gettext.translation('spm', fallback=True).gettext
 
 import sys
 import os

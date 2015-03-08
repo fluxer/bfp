@@ -1,7 +1,7 @@
 #!/bin/python2
 
 import gettext
-_ = gettext.translation('spm').gettext
+_ = gettext.translation('spm', fallback=True).gettext
 
 import sys
 import argparse
@@ -19,7 +19,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.6.0 (5ec8143)"
+app_version = "1.6.0 (b493150)"
 
 try:
     import libmessage

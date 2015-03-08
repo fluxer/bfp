@@ -38,7 +38,7 @@ XZ = xz -v
 PYUIC = pyuic4
 NUITKA = $(PYTHON) $(TOPDIR)/nuitka/bin/nuitka --recurse-none \
 	--python-version=$(PYTHON_VERSION)
-CYTHON = cython
+CYTHON = cython --verbose
 PYLINT = pylint --rcfile=$(TOPDIR)/pylint.conf
 XGETTEXT = xgettext
 MSGMERGE = msgmerge
