@@ -149,7 +149,8 @@ A prototype SRCBUILD should be installed in #DOCDIR#/spm.
 
 Ivailo Monev (a.k.a. SmiL3y) <xakepa10@gmail.com>
 
-Copyright (c) 2013-2015 Ivailo Monev licensed through the GNU General Public License
+Copyright (c) 2013-2015 Ivailo Monev licensed through custom license, see the
+COPYING file bundled with the source code.
 
 =head1 SEE ALSO
 
