@@ -903,10 +903,10 @@ class Source(object):
         message.sub_info(_('Checking runtime dependencies'))
         missing_detected = False
         for sfile in target_content:
-            smime = target_content[sfile]
             if os.path.islink(sfile):
                 continue
 
+            smime = target_content[sfile]
             if smime == 'application/x-executable' or \
                 smime == 'application/x-sharedlib':
                 libraries = misc.system_scanelf(sfile)
@@ -1000,14 +1000,14 @@ class Source(object):
 
         if self.python_compile:
             message.sub_info(_('Byte-compiling Python modules'))
-            for sfile in target_content.keys():
+            for sfile in list(target_content.keys()):
                 for spath in site.getsitepackages():
                     if not spath in sfile:
                         continue
                     message.sub_debug(_('Compiling Python file'), sfile)
                     # force build the caches to prevent access time issues with
                     # .pyc files being older that .py files because .py files
-                    # when modified after the usual installation procedure
+                    # where modified after the usual installation procedure
                     compileall.compile_file(sfile, force=True, quiet=True)
 
         message.sub_info(_('Assembling metadata'))
