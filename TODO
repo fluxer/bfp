@@ -2,10 +2,10 @@
  * Complete all tasks noted with FIXME/TODO
  * Optionally remove build depends that are not required by local target after build
  * Check for absolute path symlinks in SRCBUILDs
- * Implement services trigger (rc.d restart foo)
  * Implement trigger invocation only on file content change
  * Build target(s) from source when binary not available?
  * Make the python byte-compile work for versions other than what SPM has been run from
+ * Review spm-tools manual page
 
 ## ALL (on regular basis) ##
  * Run PyLint and do some kung-foo on the code style
