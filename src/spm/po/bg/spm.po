@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-08 05:55+0000\n"
+"POT-Creation-Date: 2015-03-08 21:05+0000\n"
 "PO-Revision-Date: 2015-03-08 20:55+0000\n"
 "Last-Translator: \n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -275,7 +275,7 @@ msgstr ""
 msgid "Re-fetching"
 msgstr ""
 
-#: libspm.py:790 libspm.py:1494 tools.py:253
+#: libspm.py:790 libspm.py:1494 tools.py:253 tools.py:694
 msgid "Fetching"
 msgstr ""
 
@@ -495,7 +495,7 @@ msgstr "Изпълняване на post_remove()"
 msgid "Ignoring target"
 msgstr "Игориране на мишена"
 
-#: libspm.py:1254 libspm.py:1522 tools.py:195
+#: libspm.py:1254 libspm.py:1522 tools.py:195 tools.py:701
 msgid "Invalid target"
 msgstr "Невалидна мишена"
 
@@ -1228,14 +1228,6 @@ msgstr ""
 msgid "Webpage"
 msgstr ""
 
-#: tools.py:694
-msgid "Retrieving"
-msgstr ""
-
-#: tools.py:701
-msgid "Target not found"
-msgstr "Мишената не е намерена"
-
 #: tools.py:714
 msgid "Serving caches directory"
 msgstr ""
@@ -1503,4 +1495,3 @@ msgstr "АДРЕСС"
 #: tools.py:1046
 msgid "CROSS"
 msgstr ""
-

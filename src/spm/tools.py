@@ -32,7 +32,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.6.0 (ca72e9f)"
+app_version = "1.6.0 (e2178f5)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -691,14 +691,14 @@ class Pkg(object):
                 pkgdir = os.path.join(self.directory, target)
                 misc.dir_create(pkgdir)
                 for href, name in urls:
-                    message.sub_debug(_('Retrieving'), href)
+                    message.sub_debug(_('Fetching'), href)
                     misc.fetch(href, os.path.join(pkgdir, name))
             else:
                 not_found.append(target)
 
         if not_found:
             for target in not_found:
-                message.sub_critical(_('Target not found'), target)
+                message.sub_critical(_('Invalid target'), target)
             sys.exit(2)
 
 
