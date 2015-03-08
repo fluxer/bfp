@@ -1,7 +1,7 @@
 #!/bin/python2
 
 import gettext
-gettext.install('spm')
+_ = gettext.translation('spm').gettext
 
 import sys
 import os
