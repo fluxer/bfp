@@ -6,6 +6,7 @@
  * Build target(s) from source when binary not available?
  * Make the python byte-compile work for versions other than what SPM has been run from
  * Review spm-tools manual page
+ * Improve Python 3 support
 
 ## ALL (on regular basis) ##
  * Run PyLint and do some kung-foo on the code style
