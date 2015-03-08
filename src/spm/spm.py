@@ -316,7 +316,7 @@ try:
         action=OverrideOffline, choices=[True, False], \
         help=_('Set whether to use offline mode'))
     parser.add_argument('--mirror', type=ast.literal_eval, \
-        action=OverrideMirror,  choices=[True, False], \
+        action=OverrideMirror, choices=[True, False], \
         help=_('Set whether to use mirrors'))
     parser.add_argument('--timeout', type=int, action=OverrideTimeout, \
         help=_('Set the connection timeout'))
@@ -353,7 +353,7 @@ try:
         action=OverridePyCompile, choices=[True, False], \
         help=_('Set whether to byte-compile Python modules'))
     parser.add_argument('--missing', type=ast.literal_eval, \
-        action=OverrideMissing,  choices=[True, False], \
+        action=OverrideMissing, choices=[True, False], \
         help=_('Set whether to ignore missing runtime dependencies'))
     parser.add_argument('--conflicts', type=ast.literal_eval, \
         action=OverrideConflicts, choices=[True, False], \

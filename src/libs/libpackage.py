@@ -19,6 +19,7 @@ class Database(object):
         self._notifiers_setup()
 
     def _notifiers_setup(self):
+        ''' Setup inotify watcher for database changes '''
         # FIXME: should class variables be asigned? non-globals tend to get destroyed
         wm = libinotify.WatchManager()  # Watch Manager
         mask = libinotify.IN_DELETE | libinotify.IN_CREATE | libinotify.IN_MODIFY # watched events
@@ -32,6 +33,7 @@ class Database(object):
         pass
 
     def _build_local_cache(self, event=None):
+        ''' Build internal local database cache '''
         # event is only for compat with the notifier
         self.LOCAL_CACHE = {}
         for sdir in misc.list_dirs(self.LOCAL_DIR):
@@ -48,6 +50,7 @@ class Database(object):
         # print(sys.getsizeof(self.LOCAL_CACHE))
 
     def _build_remote_cache(self, event=None):
+        ''' Build internal remote database cache '''
         # event is only for compat with the notifier
         self.REMOTE_CACHE = {}
         for sdir in misc.list_dirs(os.path.join(self.CACHE_DIR, 'repositories')):
