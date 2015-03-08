@@ -191,7 +191,6 @@ optional arguments:
   -u, --update          Check repositories for updates
   -a, --all             Short for clean, sync, prune and update
 
-
 =head2 REMOTE MODE
 
 positional arguments:
