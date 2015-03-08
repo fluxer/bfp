@@ -1,3 +1,69 @@
+Sun Mar 8 17:38:23 2015 +0000 Ivailo Monev <xakepa10@gmail.com> 
+eeca11112b29b068b8fecb612c2d32533ff6b1f6 (tag: 1.6.0)
+    * version bump to 1.6.0
+    * make building separate files possible (somewhat)
+    * update Nuitka to 0.5.10
+    * improve shebangs match and adjustment
+    * minor cleanup, code style corrections and such
+    * resolve aliases and metagroups internally in libspm to speed up initializations and improve usage of libspm without the provided CLI frontends
+    * update cross argument to have the boolean prefix
+    * update some comments; type-check iblock in misc.fetch()
+    * minor comment improvement
+    * fix a regression which caused footprint to be listed in the footprint
+    * make some original strings translatable
+    * updated Bulgarian translation
+    * do not use depth on pull
+    * cleanup and implement sanity check after sourcing the PKGBUILD into pkg2src
+    * Bulgarian translation update
+    * cleanup
+    * implement the option to change debug symbols splitting from GUI
+    * updated Bulgarian translation
+    * make the split of debug symbols optional
+    * indicate ignored updates when checking from repo mode
+    * make sure file is deleted if system_script() fails and generalize the script file argument
+    * minor optimization/cleanup
+    * add database.local_installed() method for compatibility with previous release
+    * oops
+    * support input passing from system_chroot()
+    * add debug messages when git config is done
+    * fix git config running on out of tree directory
+    * handle database cache manually in some situations (again)
+    * Bulgarian translation update and minor orignal string change
+    * fixup syntax
+    * setup repositories upon initial clone to be able to make pulls and merges gracefully
+    * build and install libinotify
+    * remove entry from TODO, it's no longer neccessary to do this
+    * use inotify to detect when to rebuild database caches
+    * add libdialog, basicly a copy of python2-dialog
+    * add a task to the TODO
+    * mostly databases caching improvements
+    * since most methods are wrapped around local_search() and remote_search() only build the caches when they are actually needed and not upon class initialization.
+    * introduce notify_cache() and notify_local() to database class
+    * create in memory database caches rebuilded on demand
+    * minor cleanup and translation update
+    * avoid splitting debug info twice when clean was not requested
+    * set module variables from Binary class as Source does
+    * return path without ROOT_DIR from misc.whereis() when looking in different root
+    * adjust messaging for script dependencies
+    * oops, fixup man page symlink handling which I broke during the minor cleanup
+    * implement debug symbols check to spm-tools lint mode
+    * remove redudant runtime information printing during repo mode intitialization
+    * make the bogus header detection actually work
+    * remove now redudant check in target for match related to debug message
+    * look for executable interperted match in target
+    * indent new code as it should be
+    * remove useless print used during code refactoring
+    * rework shebang handling
+    * normalize path when chroot is True from misc.whereis()
+    * minor cleanup
+    * updated Bulgarian translation
+    * split debug info if stripping is enabled
+    * make the possible values for special arguments more obvious
+    * updated translations
+    * updated Bulgarian translation and changed some original strings
+    * fixup syntax
+    * support localizations for spm (gettext is required now)
+
 Thu Feb 5 03:04:36 2015 +0000 Ivailo Monev <xakepa10@gmail.com> 
 dabda44f298a7834b5e2c76ea5a1f38e871d32eb (tag: 1.5.0)
     * lintian corrections
