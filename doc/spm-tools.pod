@@ -254,10 +254,9 @@ combination.
 
 =head2 PYTHON MODULES
 
-HTTPS requests do not do any verification of the server's certificate.
-For more info visit http://docs.python.org/2/library/urllib2.html. Note that
-this concerns only the internal fetcher, thus using external fetcher (curl or
-wget) is highly recommended.
+HTTPS requests do not do any verification of the server's certificate. For more
+info visit http://docs.python.org/2/library/urllib2.html. Note that this
+affects only Python versions older than 2.7.9.
 
 There are three tar formats that are supported by the tarfile module. For more
 info visit http://docs.python.org/2/library/tarfile.html#supported-tar-formats.
@@ -273,7 +272,7 @@ break the parser.
 
 Ivailo Monev (a.k.a. SmiL3y) <xakepa10@gmail.com>
 
-Copyright (c) 2013-2014 Ivailo Monev licensed through the GNU General Public License
+Copyright (c) 2013-2015 Ivailo Monev licensed through the GNU General Public License
 
 =head1 SEE ALSO
 

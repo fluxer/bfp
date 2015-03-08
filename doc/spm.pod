@@ -5,14 +5,17 @@ spm - Source Package Manager
 =head1 SYNOPSIS
 
 	spm [-h] [--cache CACHE] [--build BUILD] [--root ROOT]
-            [--ignore IGNORE] [--mirror MIRROR] [--timeout TIMEOUT]
-            [--external EXTERNAL] [--chost CHOST] [--cflags CFLAGS]
-            [--cxxflags CXXFLAGS] [--cppflags CPPFLAGS] [--ldflags LDFLAGS]
-            [--makeflags MAKEFLAGS] [--man MAN] [--binaries BINARIES]
-            [--shared SHARED] [--static STATIC] [--missing MISSING]
-            [--conflicts CONFLICTS] [--backup BACKUP] [--scripts SCRIPTS]
-            [--triggers TRIGGERS] [--debug] [--version]
-            {repo,remote,source,local,who} ...
+           [--ignore IGNORE] [--demote DEMOTE] [--offline {True,False}]
+           [--mirror {True,False}] [--timeout TIMEOUT] [--chost CHOST]
+           [--cflags CFLAGS] [--cxxflags CXXFLAGS] [--cppflags CPPFLAGS]
+           [--ldflags LDFLAGS] [--makeflags MAKEFLAGS] [--man {True,False}]
+           [--split {True,False}] [--binaries {True,False}]
+           [--shared {True,False}] [--static {True,False}]
+           [--rpath {True,False}] [--pycompile {True,False}]
+           [--missing {True,False}] [--conflicts {True,False}]
+           [--backup {True,False}] [--scripts {True,False}]
+           [--triggers {True,False}] [--debug] [--version]
+           {repo,remote,source,binary,local,who} ...
 
 =head1 DESCRIPTION
 
@@ -132,33 +135,49 @@ be implemented later on.
 =head2 MAIN
 
 positional arguments:
-  {repo,remote,source,local,who}
+  {repo,remote,source,binary,local,who}
 
 optional arguments:
-  -h, --help            Show this help message and exit
+  -h, --help            show this help message and exit
   --cache CACHE         Change cache directory
   --build BUILD         Change build directory
   --root ROOT           Change system root directory
   --ignore IGNORE       Change ignored targets
-  --mirror MIRROR       Set whether to use mirrors
+  --demote DEMOTE       Set user to demote to
+  --offline {True,False}
+                        Set whether to use offline mode
+  --mirror {True,False}
+                        Set whether to use mirrors
   --timeout TIMEOUT     Set the connection timeout
-  --external EXTERNAL   Set whether to use external fetcher
   --chost CHOST         Change CHOST
   --cflags CFLAGS       Change CFLAGS
   --cxxflags CXXFLAGS   Change CXXFLAGS
   --cppflags CPPFLAGS   Change CPPFLAGS
   --ldflags LDFLAGS     Change LDFLAGS
-  --makeflags MAKEFLAGS Change MAKEFLAGS
-  --man MAN             Set whether to compress man pages
-  --binaries BINARIES   Set whether to strip binaries
-  --shared SHARED       Set whether to strip shared libraries
-  --static STATIC       Set whether to strip static libraries
-  --rpath RPATH         Set whether to strip RPATH
-  --missing MISSING     Set whether to ignore missing runtime dependencies
-  --conflicts CONFLICTS Set whether to check for conflicts
-  --backup BACKUP       Set whether to backup files
-  --scripts SCRIPTS     Set whether to execute pre/post script
-  --triggers TRIGGERS   Set whether to execute triggers
+  --makeflags MAKEFLAGS
+                        Change MAKEFLAGS
+  --man {True,False}    Set whether to compress man pages
+  --split {True,False}  Set whether to split debug symbols from binaries and
+                        libraries
+  --binaries {True,False}
+                        Set whether to strip binaries
+  --shared {True,False}
+                        Set whether to strip shared libraries
+  --static {True,False}
+                        Set whether to strip static libraries
+  --rpath {True,False}  Set whether to strip RPATH
+  --pycompile {True,False}
+                        Set whether to byte-compile Python modules
+  --missing {True,False}
+                        Set whether to ignore missing runtime dependencies
+  --conflicts {True,False}
+                        Set whether to check for conflicts
+  --backup {True,False}
+                        Set whether to backup files
+  --scripts {True,False}
+                        Set whether to execute pre/post script
+  --triggers {True,False}
+                        Set whether to execute triggers
   --debug               Enable debug messages
   --version             Show SPM version and exit
 
@@ -168,8 +187,11 @@ optional arguments:
   -h, --help            Show this help message and exit
   -c, --clean           Purge repositories
   -s, --sync            Sync repositories
+  -p, --prune           Prune old repositories
   -u, --update          Check repositories for updates
-  
+  -a, --all             Short for clean, sync, prune and update
+
+
 =head2 REMOTE MODE
 
 positional arguments:
@@ -202,7 +224,7 @@ optional arguments:
   -i, --install         Install compiled files of target
   -m, --merge           Merge compiled files of target to system
   -r, --remove          Remove compiled files of target from system
-  -D, --depepnds        Consider dependency targets
+  -D, --depends         Consider dependency targets
   -R, --reverse         Consider reverse dependency targets
   -u, --update          Apply actions only if update is available
   -a, --automake        Short for clean, prepare, compile, install and merge
@@ -273,7 +295,7 @@ http://docs.python.org/2/library/re.html.
 =head1 EXIT STATUS
 
 SPM returns 0 on success and other on failure.
-	
+
 =head2 Unexpected error (1)
 
 This is a general error. Triggered, most likely, by something that SPM is
@@ -344,10 +366,9 @@ combination.
 
 =head2 PYTHON MODULES
 
-HTTPS requests do not do any verification of the server's certificate.
-For more info visit http://docs.python.org/2/library/urllib2.html. Note that
-this concerns only the internal fetcher, thus using external fetcher (curl or
-wget) is highly recommended.
+HTTPS requests do not do any verification of the server's certificate. For more
+info visit http://docs.python.org/2/library/urllib2.html. Note that this
+affects only Python versions older than 2.7.9.
 
 There are three tar formats that are supported by the tarfile module. For more
 info visit http://docs.python.org/2/library/tarfile.html#supported-tar-formats.
@@ -363,7 +384,7 @@ break the parser.
 
 Ivailo Monev (a.k.a. SmiL3y) <xakepa10@gmail.com>
 
-Copyright (c) 2013-2014 Ivailo Monev licensed through the GNU General Public License
+Copyright (c) 2013-2015 Ivailo Monev licensed through the GNU General Public License
 
 =head1 SEE ALSO
 

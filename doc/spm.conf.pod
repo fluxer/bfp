@@ -217,7 +217,7 @@ IGNORE = glibc zlib bash
 
 Ivailo Monev (a.k.a. SmiL3y) <xakepa10@gmail.com>
 
-Copyright (c) 2013-2014 Ivailo Monev licensed through the GNU General Public License
+Copyright (c) 2013-2015 Ivailo Monev licensed through the GNU General Public License
 
 =head1 SEE ALSO
 
