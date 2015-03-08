@@ -13,9 +13,10 @@ all: clean
 	$(STRIP) *.so
 
 cython: clean
-	# FIXME: not everything build with Cython: libinotify
+	$(CYTHON)  --lenient libinotify.py
 	$(CYTHON) libdialog.py libmagic.py libmessage.py libmisc.py libpackage.py
 	$(CC) -shared libdialog.c $(shell pkg-config --cflags $(PYTHON)) -o libdialog.so
+	$(CC) -shared libinotify.c $(shell pkg-config --cflags $(PYTHON)) -o libinotify.so
 	$(CC) -shared libmagic.c $(shell pkg-config --cflags $(PYTHON)) -o libmagic.so
 	$(CC) -shared libmessage.c $(shell pkg-config --cflags $(PYTHON)) -o libmessage.so
 	$(CC) -shared libmisc.c $(shell pkg-config --cflags $(PYTHON)) -o libmisc.so
