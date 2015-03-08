@@ -15,12 +15,16 @@ all: clean bump
 	$(STRIP) *.exe *.so
 
 cython: clean bump
+	$(PYUIC) gui.ui -o gui_ui.py
 	$(CYTHON) libspm.py
 	$(CYTHON) --embed spm.py
 	$(CYTHON) --embed tools.py
+	$(CYTHON) gui_ui.py
+	$(CYTHON) --embed gui.py
 	$(CC) -shared libspm.c $(shell pkg-config --cflags $(PYTHON)) -o libspm.so
 	$(CC) spm.c $(shell pkg-config --cflags --libs $(PYTHON)) -o spm.exe
 	$(CC) tools.c $(shell pkg-config --cflags --libs $(PYTHON)) -o tools.exe
+	$(CC) gui_ui.c gui.c $(shell pkg-config --cflags --libs $(PYTHON)) -o gui.exe
 	$(STRIP) *.exe *.so
 
 install:
