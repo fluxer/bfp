@@ -42,6 +42,23 @@ Set targets to be ignored when building and removing.
 
 Default: filesystem
 
+=head2 DEMOTE
+
+Set as which user some operations should be performed as when that is possible.
+It does not affect all of the actions and is experimental for now. Also, do
+note that it works only on sub-processes.
+
+Default:
+
+=head2 OFFLINE
+
+Set wheather to not even try to connect to the internet when not strictly
+required. This option is useful in cases when your internet connection is not
+very good (slow) and you know that there is no need to be ping remote servers
+for the operation SPM is told to do.
+
+Default: False
+
 =head2 MIRROR
 
 Set whether to use mirrors or not. If set to true mirrors will be pinged
@@ -56,14 +73,6 @@ Set the time in seconds to wait before bailing out when mirrors and
 internet connection are checked.
 
 Default: 30
-
-=head2 EXTERNAL
-
-Set whether to use external sources fetcher or not. If set to true `curl`
-or `wget` will be used. As fallback is used built-in urllib implementation
-which does not support resuming. 
-
-Default: True
 
 =head2 CHOST
 
@@ -100,7 +109,7 @@ Default: -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2
 Set the environmental variable LDFLAGS when building software. The LDFLAGS
 flag specifies desired linker options.
 
-Default: -Wl,--hash-style=gnu -Wl,--as-needed -Wl,-z,relro -Wl,-z,now
+Default: -Wl,--hash-style=gnu -Wl,--as-needed
 
 =head2 MAKEFLAGS
 
@@ -112,6 +121,15 @@ Default: -j#JOBS#
 =head2 COMPRESS_MAN
 
 Set whether to compress manual pages. Doing so will save you some space.
+
+Default: True
+
+=head2 SPLIT_DEBUG
+
+Set wheather to split debug information from DWARF files so that even when
+binaries and libraries are stripped software debugging is possible. Do note
+that debug symbols are usually quite space consuming thus on machines with
+limited storage you may want to set that to False.
 
 Default: True
 
@@ -203,4 +221,4 @@ Copyright (c) 2013-2014 Ivailo Monev licensed through the GNU General Public Lic
 
 =head1 SEE ALSO
 
-spm(8) SRCBUILD(5) curl(1) wget(1) gcc(1) ld(1) make(1) strip(1)
+spm(8) SRCBUILD(5) gcc(1) ld(1) make(1) objcopy(1) strip(1)
