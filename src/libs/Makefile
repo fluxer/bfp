@@ -13,8 +13,8 @@ all: clean
 	$(STRIP) *.so
 
 cython: clean
-	# FIXME: not everything build with Cython
-	cython libmagic.py libmessage.py libmisc.py libpackage.py
+	# FIXME: not everything build with Cython: libdialog, libinotify
+	$(CYTHON) libmagic.py libmessage.py libmisc.py libpackage.py
 	$(CC) -shared libmagic.c $(shell pkg-config --cflags $(PYTHON)) -o libmagic.so
 	$(CC) -shared libmessage.c $(shell pkg-config --cflags $(PYTHON)) -o libmessage.so
 	$(CC) -shared libmisc.c $(shell pkg-config --cflags $(PYTHON)) -o libmisc.so
@@ -37,7 +37,7 @@ uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libpackage.so
 
 clean:
-	$(RM) -r *.build/ *.so __pycache__
+	$(RM) -r *.build/ *.so __pycache__ *.c
 	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
 .SUFFIXES: .py

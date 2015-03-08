@@ -7,6 +7,13 @@ all:
 	$(MAKE) -C src/initfs
 	$(MAKE) -C src/spm
 
+cython:
+	$(MAKE) -C doc
+	$(MAKE) -C src/cparted cython
+	$(MAKE) -C src/libs cython
+	$(MAKE) -C src/initfs cython
+	$(MAKE) -C src/spm cython
+
 check:
 	$(MAKE) -C src/libs check
 
@@ -45,4 +52,4 @@ changelog:
 dist:
 	$(GIT) archive HEAD --prefix=bfp-$(VERSION)/ | $(XZ) > bfp-$(VERSION).tar.xz
 
-.PHONY: all check install uninstall clean changelog dist
+.PHONY: all cython check install uninstall clean changelog dist

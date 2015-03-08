@@ -15,9 +15,9 @@ all: clean bump
 	$(STRIP) *.exe *.so
 
 cython: clean bump
-	cython libspm.py
-	cython --embed spm.py
-	cython --embed tools.py
+	$(CYTHON) libspm.py
+	$(CYTHON) --embed spm.py
+	$(CYTHON) --embed tools.py
 	$(CC) -shared libspm.c $(shell pkg-config --cflags $(PYTHON)) -o libspm.so
 	$(CC) spm.c $(shell pkg-config --cflags --libs $(PYTHON)) -o spm.exe
 	$(CC) tools.c $(shell pkg-config --cflags --libs $(PYTHON)) -o tools.exe
@@ -42,7 +42,7 @@ uninstall:
 	$(RM) $(DESTDIR)$(BINDIR)/spm-gui
 
 clean:
-	$(RM) -r *.build/ *.so *.exe gui_ui.py __pycache__ spm.pot po/*/*.mo po/*/*.mo~
+	$(RM) -r *.build/ *.so *.exe gui_ui.py __pycache__ spm.pot po/*/*.mo po/*/*.mo~ *.c
 	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
 bump:
