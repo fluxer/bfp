@@ -2694,12 +2694,6 @@ class Dialog(object):
             self._gauge_process["stdin"].write(gauge_data)
             self._gauge_process["stdin"].flush()
 
-    # For "compatibility" with the old dialog.py...
-    def gauge_iterate(*args, **kwargs):
-        warnings.warn("Dialog.gauge_iterate() has been obsolete for "
-                      "many years", DeprecationWarning)
-        gauge_update(*args, **kwargs)
-
     @widget
     @retval_is_code
     def gauge_stop(self):
