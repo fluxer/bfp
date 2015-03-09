@@ -67,7 +67,6 @@ from collections import deque
 from datetime import datetime, timedelta
 import time
 import re
-import asyncore
 import subprocess
 
 try:
@@ -98,12 +97,6 @@ __author__ = "seb@dbzteam.org (Sebastien Martini)"
 __version__ = "0.9.5"
 
 __metaclass__ = type  # Use new-style classes by default
-
-
-# Compatibity mode: set to True to improve compatibility with
-# Pyinotify 0.7.1. Do not set this variable yourself, call the
-# function compatibility_mode() instead.
-COMPATIBILITY_MODE = False
 
 
 class InotifyBindingNotFoundError(PyinotifyError):
@@ -620,8 +613,6 @@ class Event(_Event):
         """
         _Event.__init__(self, raw)
         self.maskname = EventsCodes.maskname(self.mask)
-        if COMPATIBILITY_MODE:
-            self.event_name = self.maskname
         try:
             if self.name:
                 self.pathname = os.path.abspath(os.path.join(self.path,
@@ -890,8 +881,6 @@ class _SysProcessEvent(_ProcessEvent):
                  'path': watch_.path,
                  'name': raw_event.name,
                  'dir': dir_}
-        if COMPATIBILITY_MODE:
-            dict_['is_dir'] = dir_
         if to_append is not None:
             dict_.update(to_append)
         return Event(dict_)
@@ -1447,165 +1436,6 @@ class Notifier:
         self._sys_proc_fun = None
 
 
-class ThreadedNotifier(threading.Thread, Notifier):
-    """
-    This notifier inherits from threading.Thread for instanciating a separate
-    thread, and also inherits from Notifier, because it is a threaded notifier.
-
-    Note that every functionality provided by this class is also provided
-    through Notifier class. Moreover Notifier should be considered first because
-    it is not threaded and could be easily daemonized.
-    """
-    def __init__(self, watch_manager, default_proc_fun=None, read_freq=0,
-                 threshold=0, timeout=None):
-        """
-        Initialization, initialize base classes. read_freq, threshold and
-        timeout parameters are used when looping.
-
-        @param watch_manager: Watch Manager.
-        @type watch_manager: WatchManager instance
-        @param default_proc_fun: Default processing method. See base class.
-        @type default_proc_fun: instance of ProcessEvent
-        @param read_freq: if read_freq == 0, events are read asap,
-                          if read_freq is > 0, this thread sleeps
-                          max(0, read_freq - timeout) seconds.
-        @type read_freq: int
-        @param threshold: File descriptor will be read only if the accumulated
-                          size to read becomes >= threshold. If != 0, you likely
-                          want to use it in combination with an appropriate
-                          value set for read_freq because without that you would
-                          keep looping without really reading anything and that
-                          until the amount of events to read is >= threshold. At
-                          least with read_freq you might sleep.
-        @type threshold: int
-        @param timeout:
-            https://docs.python.org/3/library/select.html#polling-objects
-        @type timeout: int
-        """
-        # Init threading base class
-        threading.Thread.__init__(self)
-        # Stop condition
-        self._stop_event = threading.Event()
-        # Init Notifier base class
-        Notifier.__init__(self, watch_manager, default_proc_fun, read_freq,
-                          threshold, timeout)
-        # Create a new pipe used for thread termination
-        self._pipe = os.pipe()
-        self._pollobj.register(self._pipe[0], select.POLLIN)
-
-    def stop(self):
-        """
-        Stop notifier's loop. Stop notification. Join the thread.
-        """
-        self._stop_event.set()
-        os.write(self._pipe[1], 'stop')
-        threading.Thread.join(self)
-        Notifier.stop(self)
-        self._pollobj.unregister(self._pipe[0])
-        os.close(self._pipe[0])
-        os.close(self._pipe[1])
-
-    def loop(self):
-        """
-        Thread's main loop. Don't meant to be called by user directly.
-        Call inherited start() method instead.
-
-        Events are read only once time every min(read_freq, timeout)
-        seconds at best and only if the size of events to read is >= threshold.
-        """
-        # When the loop must be terminated .stop() is called, 'stop'
-        # is written to pipe fd so poll() returns and .check_events()
-        # returns False which make evaluate the While's stop condition
-        # ._stop_event.isSet() wich put an end to the thread's execution.
-        while not self._stop_event.isSet():
-            self.process_events()
-            ref_time = time.time()
-            if self.check_events():
-                self._sleep(ref_time)
-                self.read_events()
-
-    def run(self):
-        """
-        Start thread's loop: read and process events until the method
-        stop() is called.
-        Never call this method directly, instead call the start() method
-        inherited from threading.Thread, which then will call run() in
-        its turn.
-        """
-        self.loop()
-
-
-class AsyncNotifier(asyncore.file_dispatcher, Notifier):
-    """
-    This notifier inherits from asyncore.file_dispatcher in order to be able to
-    use pyinotify along with the asyncore framework.
-
-    """
-    def __init__(self, watch_manager, default_proc_fun=None, read_freq=0,
-                 threshold=0, timeout=None, channel_map=None):
-        """
-        Initializes the async notifier. The only additional parameter is
-        'channel_map' which is the optional asyncore private map. See
-        Notifier class for the meaning of the others parameters.
-
-        """
-        Notifier.__init__(self, watch_manager, default_proc_fun, read_freq,
-                          threshold, timeout)
-        asyncore.file_dispatcher.__init__(self, self._fd, channel_map)
-
-    def handle_read(self):
-        """
-        When asyncore tells us we can read from the fd, we proceed processing
-        events. This method can be overridden for handling a notification
-        differently.
-
-        """
-        self.read_events()
-        self.process_events()
-
-
-class TornadoAsyncNotifier(Notifier):
-    """
-    Tornado ioloop adapter.
-
-    """
-    def __init__(self, watch_manager, ioloop, callback=None,
-                 default_proc_fun=None, read_freq=0, threshold=0, timeout=None,
-                 channel_map=None):
-        """
-        Note that if later you must call ioloop.close() be sure to let the
-        default parameter to all_fds=False.
-
-        See example tornado_notifier.py for an example using this notifier.
-
-        @param ioloop: Tornado's IO loop.
-        @type ioloop: tornado.ioloop.IOLoop instance.
-        @param callback: Functor called at the end of each call to handle_read
-                         (IOLoop's read handler). Expects to receive the
-                         notifier object (self) as single parameter.
-        @type callback: callable object or function
-        """
-        self.io_loop = ioloop
-        self.handle_read_callback = callback
-        Notifier.__init__(self, watch_manager, default_proc_fun, read_freq,
-                          threshold, timeout)
-        ioloop.add_handler(self._fd, self.handle_read, ioloop.READ)
-
-    def stop(self):
-        self.io_loop.remove_handler(self._fd)
-        Notifier.stop(self)
-
-    def handle_read(self, *args, **kwargs):
-        """
-        See comment in AsyncNotifier.
-
-        """
-        self.read_events()
-        self.process_events()
-        if self.handle_read_callback is not None:
-            self.handle_read_callback(self)
-
-
 class AsyncioNotifier(Notifier):
     """
 
@@ -1782,8 +1612,7 @@ class WatchManager:
     """
     Provide operations for watching files and directories. Its internal
     dictionary is used to reference watched items. When used inside
-    threaded code, one must instanciate as many WatchManager instances as
-    there are ThreadedNotifier instances.
+    threaded code.
 
     """
     def __init__(self, exclude_filter=lambda path: False):
@@ -2292,24 +2121,6 @@ class ColoredOutputFormat(RawOutputFormat):
              'blink': '\033[5m',
              'invert': '\033[7m'}
         RawOutputFormat.__init__(self, f)
-
-
-def compatibility_mode():
-    """
-    Use this function to turn on the compatibility mode. The compatibility
-    mode is used to improve compatibility with Pyinotify 0.7.1 (or older)
-    programs. The compatibility mode provides additional variables 'is_dir',
-    'event_name', 'EventsCodes.IN_*' and 'EventsCodes.ALL_EVENTS' as
-    Pyinotify 0.7.1 provided. Do not call this function from new programs!!
-    Especially if there are developped for Pyinotify >= 0.8.x.
-    """
-    setattr(EventsCodes, 'ALL_EVENTS', ALL_EVENTS)
-    for evname in globals():
-        if evname.startswith('IN_'):
-            setattr(EventsCodes, evname, globals()[evname])
-    global COMPATIBILITY_MODE
-    COMPATIBILITY_MODE = True
-
 
 def command_line():
     """

@@ -23,14 +23,10 @@ class Database(object):
         # FIXME: should class variables be asigned? non-globals tend to get destroyed
         wm = libinotify.WatchManager()  # Watch Manager
         mask = libinotify.IN_DELETE | libinotify.IN_CREATE | libinotify.IN_MODIFY # watched events
-        notifier = libinotify.AsyncNotifier(wm, self._build_remote_cache)
+        notifier = libinotify.AsyncioNotifier(wm, self._build_remote_cache)
         wdd = wm.add_watch(os.path.join(self.CACHE_DIR, 'repositories'), mask, rec=True)
-        notifier2 = libinotify.AsyncNotifier(wm, self._build_local_cache)
+        notifier2 = libinotify.AsyncioNotifier(wm, self._build_local_cache)
         wdd2 = wm.add_watch(self.LOCAL_DIR, mask, rec=True)
-
-    def _notifiers_teardown(self):
-        # FIXME: should something be done on class delete?
-        pass
 
     def _build_local_cache(self, event=None):
         ''' Build internal local database cache '''
