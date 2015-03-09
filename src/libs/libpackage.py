@@ -43,7 +43,7 @@ class Database(object):
                     'size': self._local_metadata(metadata, 'size'),
                     'footprint': misc.file_read(footprint)
                 }
-        print(sys.getsizeof(self.LOCAL_CACHE))
+        # print(sys.getsizeof(self.LOCAL_CACHE))
 
     def _build_remote_cache(self, event=None):
         ''' Build internal remote database cache '''
@@ -63,7 +63,7 @@ class Database(object):
                     'options': parser.options,
                     'backup': parser.backup
                 }
-        print(sys.getsizeof(self.REMOTE_CACHE))
+        # print(sys.getsizeof(self.REMOTE_CACHE))
 
     def _local_metadata(self, smetadata, skey):
         ''' Returns metadata of local target '''
