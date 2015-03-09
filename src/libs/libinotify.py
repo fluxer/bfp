@@ -1460,7 +1460,6 @@ class AsyncioNotifier(Notifier):
         self.handle_read_callback = callback
         Notifier.__init__(self, watch_manager, default_proc_fun, read_freq,
                           threshold, timeout)
-        loop.add_reader(self._fd, self.handle_read)
 
     def stop(self):
         self.loop.remove_reader(self._fd)
