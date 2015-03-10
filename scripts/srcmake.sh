@@ -151,11 +151,11 @@ for src in "${@:-.}";do
 
     msg "Creating footprint and metadata..."
     mkdir -p "$INSTALL_DIR/var/local/spm/$src_name"
-    # FIXME: it breaks on spaces, xargs would be an option
-    touch "$INSTALL_DIR/var/local/spm/$src_name/footprint"
-    for f in $(find "$INSTALL_DIR" ! -type d);do
-        echo "$f" >> "$INSTALL_DIR/var/local/spm/$src_name/footprint"
-    done
+    echo > "$INSTALL_DIR/var/local/spm/$src_name/footprint"
+    while IFS= read -r -d '' file; do
+        echo "${file//$INSTALL_DIR}">> "$INSTALL_DIR/var/local/spm/$src_name/footprint"
+    done < <(find "$INSTALL_DIR" ! -type d -print0)
+
     echo "version=$version" > "$INSTALL_DIR/var/local/spm/$src_name/metadata"
     echo "description=$description" >> "$INSTALL_DIR/var/local/spm/$src_name/metadata"
     echo "depends=${depends[*]}" >> "$INSTALL_DIR/var/local/spm/$src_name/metadata"
