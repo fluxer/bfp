@@ -949,7 +949,7 @@ class Source(object):
                 # parse the shebang and split it to 2 groups:
                 # 1. full match, used to replace it with something that will work
                 # 2. base of the interpreter (e.g. bash), used to find match in the target or host
-                omatch = misc.file_search('(^#!.*((?:' + bang_regexp + ')(.*\\d)?))(?:.*\\s)', \
+                omatch = misc.file_search('(^#!.*(?:\\d|/)((?:' + bang_regexp + ')(.*\\d)?))(?:.*\\s)', \
                     sfile, exact=False, escape=False)
                 if omatch:
                     sfull = omatch[0][0].strip()

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# srcmake - alternative limited ports builder
+# srcmake - alternative, but with limited functionality, ports builder
 # Copyright (C) 2013-2015 Ivailo Monev (a.k.a SmiL3y)
 
 
