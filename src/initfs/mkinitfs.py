@@ -1,6 +1,6 @@
 #!/bin/python2
 
-import sys, argparse, tempfile, subprocess, shutil, os
+import sys, argparse, tempfile, subprocess, shutil, os, gzip
 
 app_version = "1.6.0 (482296a)"
 
@@ -223,9 +223,11 @@ try:
     message.sub_info('Creating image')
     find = misc.whereis('find')
     cpio = misc.whereis('cpio')
-    gzip = misc.whereis('gzip')
-    misc.system_command('%s . | %s -o -H newc | %s > %s' % \
-        (find, cpio, gzip, ARGS.image), shell=True, cwd=ARGS.tmp)
+    data = misc.system_output('%s . | %s -o -H newc' % \
+        (find, cpio), shell=True, cwd=ARGS.tmp)
+    gzipf = gzip.GzipFile(ARGS.image, 'wb')
+    gzipf.write(data)
+    gzipf.close()
 
 except subprocess.CalledProcessError as detail:
     message.critical('SUBPROCESS', detail)
