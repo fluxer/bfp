@@ -586,14 +586,20 @@ class Misc(object):
             os.putenv('PWD', pw_dir)
         return result
 
-    def system_output(self, command, shell=False, demote=''):
+    def system_output(self, command, shell=False, cwd='', demote=''):
         ''' Get output of external utility '''
         self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
         self.typecheck(shell, (types.BooleanType))
+        self.typecheck(cwd, (types.StringTypes))
         self.typecheck(demote, (types.StringTypes))
 
+        if not cwd:
+            cwd = self.dir_current()
+        elif not os.path.isdir(cwd):
+            cwd = '/'
+
         pipe = subprocess.Popen(command, stdout=subprocess.PIPE, \
-            env={'LC_ALL': 'C'}, shell=shell, preexec_fn=self.system_demote(demote))
+            env={'LC_ALL': 'C'}, shell=shell, cwd=cwd, preexec_fn=self.system_demote(demote))
         output = pipe.communicate()[0].strip()
         return self.string_encode(output)
 
