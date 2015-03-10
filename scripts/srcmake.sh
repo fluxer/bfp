@@ -27,28 +27,28 @@ fi
 readonly ALL_OFF BOLD BLUE GREEN RED YELLOW
 
 msg() {
-    printf "${ALL_OFF}${GREEN}=>${ALL_OFF}${BOLD} ${@}${ALL_OFF}\n"
+    printf "${ALL_OFF}${GREEN}=>${ALL_OFF}${BOLD} ${*}${ALL_OFF}\n"
 }
 
 msg2() {
-    printf "${ALL_OFF}${BLUE}   =>${ALL_OFF}${BOLD} ${@}${ALL_OFF}\n"
+    printf "${ALL_OFF}${BLUE}   =>${ALL_OFF}${BOLD} ${*}${ALL_OFF}\n"
 }
 
 warn() {
-    printf "${ALL_OFF}${YELLOW}=>${ALL_OFF}${BOLD} ${@}${ALL_OFF}\n" >&2
+    printf "${ALL_OFF}${YELLOW}=>${ALL_OFF}${BOLD} ${*}${ALL_OFF}\n" >&2
 }
 
 warn2() {
-    printf "${ALL_OFF}${YELLOW}   =>${ALL_OFF}${BOLD} ${@}${ALL_OFF}\n" >&2
+    printf "${ALL_OFF}${YELLOW}   =>${ALL_OFF}${BOLD} ${*}${ALL_OFF}\n" >&2
 }
 
 error() {
-    printf "${ALL_OFF}${RED}=>${ALL_OFF}${BOLD} ${@}${ALL_OFF}\n" >&2
+    printf "${ALL_OFF}${RED}=>${ALL_OFF}${BOLD} ${*}${ALL_OFF}\n" >&2
     return 1
 }
 
 error2() {
-    printf "${ALL_OFF}${RED}   =>${ALL_OFF}${BOLD} ${@}${ALL_OFF}\n" >&2
+    printf "${ALL_OFF}${RED}   =>${ALL_OFF}${BOLD} ${*}${ALL_OFF}\n" >&2
     return 1
 }
 
