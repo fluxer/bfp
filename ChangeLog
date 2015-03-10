@@ -1,3 +1,41 @@
+Tue Mar 10 08:17:39 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
+2c91d86150f1df0933913997149c8f4af7ec4a70 (tag: 1.6.1)
+    * update Nuitka to 0.5.10.2
+    * cut the fat from libinotify
+    * adjust libdialog to be Python 3 compatible (at least it builds with Nuitka)
+    * minor Python 3 compat change along with minor optimization
+    * use lenient mode of Cython for building libinotify
+    * add a FIXME for spm-gui
+    * reuse some translations by adjusting original strings
+    * minor bg translation update
+    * minor docs cleanup (word wrap and copyright clarification)
+    * minor docs cleanup (word wrap and copyright clarification)
+    * updated spm-tools manual page
+    * add changes between 1.5.0 and 1.6.0
+    * support build of spm-gui with cython
+    * update TODO
+    * fallback if not translations are installed/found
+    * fix build of libdialog with cython
+    * support build with cython of almost all modules/tools
+    * experimental support for building with Cython
+    * use gettext in a way that "_" gets defined in the module namespace
+    * do not attempt to backup links
+    * minor bg translation update
+    * minor code style corrections
+    * useless bumps
+    * quick review spm man page
+    * quick review of spm.conf man page
+    * quick review of SRCBUILD man page
+    * really do not fail on missing section in spm.conf
+    * add old documentation, to be revised
+    * cache the git executable path when appropariate
+    * add COPYING file for the bundled Python dialog module
+    * compress debug information
+    * optimize conflicts checking
+    * correct the command used to install the translations to properly create leading directories
+    * avoid failures on missing section/option in spm.conf by defining defaults
+    * remove deprecated database.local_installed() and adjust tests
+
 Sun Mar 8 17:38:23 2015 +0000 Ivailo Monev <xakepa10@gmail.com> 
 eeca11112b29b068b8fecb612c2d32533ff6b1f6 (tag: 1.6.0)
     * version bump to 1.6.0
