@@ -148,7 +148,7 @@ class Database(object):
                 match.append(local)
         return match
 
-    def remote_mdepends(self, target, checked=None, cdepends=False):
+    def remote_mdepends(self, target, checked=None, cdepends=False, mdepends=True):
         ''' Returns missing build dependencies of target '''
         misc.typecheck(target, (types.StringTypes))
         misc.typecheck(checked, (types.NoneType, types.ListType))
@@ -174,7 +174,7 @@ class Database(object):
 
         if depends:
             build_depends.extend(depends)
-        if makedepends:
+        if mdepends and makedepends:
             build_depends.extend(makedepends)
         if cdepends and checkdepends:
             build_depends.extend(checkdepends)

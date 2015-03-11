@@ -1453,7 +1453,7 @@ class Binary(Source):
     def prepare(self):
         ''' Prepare target tarballs '''
         message.sub_info(_('Checking dependencies'))
-        missing_dependencies = database.remote_mdepends(self.target)
+        missing_dependencies = database.remote_mdepends(self.target, mdepends=False)
 
         if missing_dependencies and self.do_depends:
             message.sub_info(_('Fetching dependencies'), missing_dependencies)
