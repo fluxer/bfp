@@ -373,8 +373,9 @@ class Misc(object):
             rtime = rfile.headers.get('Last-Modified', '0')
             if rtime == '0':
                 rtime = rfile.headers.get('Date', '0')
-            rtime = time.mktime(time.strptime(rtime,
-                '%a, %d %b %Y %H:%M:%S GMT'))
+            if not rtime == '0':
+                rtime = time.mktime(time.strptime(rtime,
+                    '%a, %d %b %Y %H:%M:%S GMT'))
             ltime = os.stat(destination).st_mtime
             if not rtime == ltime or not int(lsize) == int(rsize):
                 return False
