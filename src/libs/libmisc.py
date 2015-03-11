@@ -1,7 +1,7 @@
 #!/bin/python2
 
 import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, pwd, inspect
-import types, gzip, libmagic
+import types, gzip, time, libmagic
 if int(sys.version_info[0]) < 3:
     from urlparse import urlparse
     from urllib2 import urlopen
@@ -359,21 +359,28 @@ class Misc(object):
             return urlopen(request, timeout=self.TIMEOUT)
 
     def fetch_check(self, surl, destination):
-        ''' Check if remote file and local file sizes are equal '''
+        ''' Check if remote has to be downloaded '''
         self.typecheck(surl, (types.StringTypes))
         self.typecheck(destination, (types.StringTypes))
 
         if self.OFFLINE:
             return True
         elif os.path.isfile(destination):
-            lsize = os.path.getsize(destination)
             rfile = self.fetch_request(surl)
             # not all requests have content-lenght:
             # http://en.wikipedia.org/wiki/Chunked_transfer_encoding
             rsize = rfile.headers.get('Content-Length', '0')
             rfile.close()
-            if int(lsize) == int(rsize):
-                return True
+            lsize = os.path.getsize(destination)
+            rtime = rfile.headers.get('Last-Modified', '0')
+            if rtime == '0':
+                rtime = rfile.headers.get('Date', '0')
+            rtime = time.mktime(time.strptime(rtime,
+                '%a, %d %b %Y %H:%M:%S GMT'))
+            ltime = os.stat(destination).st_mtime
+            if not rtime == ltime or not int(lsize) == int(rsize):
+                return False
+            return True
         else:
             return False
 
@@ -393,21 +400,27 @@ class Misc(object):
         # not all requests have content-lenght:
         # http://en.wikipedia.org/wiki/Chunked_transfer_encoding
         rsize = rfile.headers.get('Content-Length', '0')
-        if rsize == '0':
+        rtime = rfile.headers.get('Last-Modified', '0')
+        if rtime == '0':
+            rtime = rfile.headers.get('Date', '0')
+        if rsize == '0' or rtime == '0':
             # block until the server is ready to serve the whole file
             rfile.close()
             if not iblock == 0:
                 return self.fetch(surl, destination, iretry, iblock-1)
             raise(Exception('Bogus response header from %s, good luck!' % surl))
 
+        rtime = time.mktime(time.strptime(rtime, '%a, %d %b %Y %H:%M:%S GMT'))
         if os.path.exists(destination):
+            lsize = str(os.path.getsize(destination))
+            ltime = os.stat(destination).st_mtime
+            if lsize > rsize or not ltime == rtime:
+                lsize = '0'
+                os.unlink(destination)
             if rfile.headers.get('Accept-Ranges') == 'bytes':
                 # setup new request with custom header
                 rfile.close()
-                lsize = str(os.path.getsize(destination))
                 rfile = self.fetch_request(surl, {'Range': 'bytes=%s-' % lsize})
-            else:
-                os.unlink(destination)
         lfile = open(destination, 'ab')
         cache = 10240
         try:
@@ -432,6 +445,8 @@ class Misc(object):
             else:
                 raise
         finally:
+            if os.path.exists(destination):
+                os.utime(destination, (rtime, rtime))
             sys.stdout.write('\n')
             lfile.close()
             rfile.close()
