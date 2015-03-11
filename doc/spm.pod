@@ -50,7 +50,9 @@ much more work, SPM makes your life easier and keeps your system safe.
 All metadata is stored in plain text not database files, while this
 increases the disk I/O it makes it possible to easily recover from
 disasters and fix issues in cases SPM is not being able to handle such as
-missing Python runtime library for whatever the reason.
+missing Python runtime library for whatever the reason. Do note that SPM
+caches internally the database files in memory xand rebuilds the caches when
+needed to reduce the lookup overheath.
 
 Remote sources (files, such as tarballs) are being checked after they are
 fetched by comparing the remote and local file size instead of using
@@ -81,9 +83,9 @@ are enabled by default but you can maintain your own repositories with Git.
 Major libraries version changes will be handled properly too. For an example,
 when curl changes the library version and when building curl the reverse
 dependencies will be scanned, if SPM is told to, with `scanelf` for 'not found'
-which indicates that a runtime library is missing and and the reverse
-dependencies of curl will be rebuild if needed automatically for you.
-This is done when merging a target/tarball.
+which indicates that a runtime library is missing and the reverse dependencies
+of curl will be rebuild if needed automatically for you. This is done when
+merging a target/tarball.
 
 On merge, all files with .conf extension will be backed up as
 <file>.conf.backup. You can explicitly tell SPM which files to be backed up as

@@ -23,7 +23,7 @@ The following table illustrates the software requirements:
 NOTE: it currently lacks optional and build time software dependencies
 
 How and where from you will obtain those is up to you, altought compatibility
-with Busybox, GNU and POSIX tools is prime goal but not guaranteed as for an
+with Busybox, GNU and POSIX tools is prime goal but not guaranteed so for an
 example some old versions or even build configuration of those may not support
 all required features.
 
