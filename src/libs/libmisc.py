@@ -347,9 +347,7 @@ class Misc(object):
             data = {}
         self.typecheck(data, (types.DictType))
 
-        request = Request(surl)
-        for item in data:
-            request.add_header(item, data[item])
+        request = Request(surl, headers=data)
         # SSL verification works OOTB only on Python >= 2.7.9 (officially)
         if sys.version_info[2] >= 9:
             import ssl
@@ -422,7 +420,6 @@ class Misc(object):
                 rfile.close()
                 rfile = self.fetch_request(surl, {'Range': 'bytes=%s-' % lsize})
         lfile = open(destination, 'ab')
-        cache = 10240
         try:
             # since the local file size changes use persistent units based on
             # remote file size
@@ -432,7 +429,7 @@ class Misc(object):
                     self.string_unit(str(os.path.getsize(destination)), units), \
                     self.string_unit(rsize, units, True))
                 sys.stdout.write(msg)
-                chunk = rfile.read(cache)
+                chunk = rfile.read(10240)
                 if not chunk:
                     break
                 lfile.write(chunk)
@@ -445,11 +442,11 @@ class Misc(object):
             else:
                 raise
         finally:
-            if os.path.exists(destination):
-                os.utime(destination, (rtime, rtime))
             sys.stdout.write('\n')
             lfile.close()
             rfile.close()
+            if os.path.exists(destination):
+                os.utime(destination, (rtime, rtime))
 
     def archive_supported(self, sfile):
         ''' Test if file is archive that can be handled properly '''
@@ -472,10 +469,10 @@ class Misc(object):
         self.dir_create(os.path.dirname(sfile))
 
         if sfile.endswith(('.bz2', '.tar.gz')):
-            tar = tarfile.open(sfile, 'w:' + self.file_extension(sfile))
+            tarf = tarfile.open(sfile, 'w:' + self.file_extension(sfile))
             for item in lpaths:
-                tar.add(item, item.lstrip(strip))
-            tar.close()
+                tarf.add(item, item.lstrip(strip))
+            tarf.close()
         elif sfile.endswith('.zip'):
             zipf = zipfile.ZipFile(sfile, mode='w')
             for item in lpaths:
