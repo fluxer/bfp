@@ -368,14 +368,14 @@ class Misc(object):
             # not all requests have content-lenght:
             # http://en.wikipedia.org/wiki/Chunked_transfer_encoding
             rsize = rfile.headers.get('Content-Length', '0')
-            rfile.close()
-            lsize = os.path.getsize(destination)
             rtime = rfile.headers.get('Last-Modified', '0')
             if rtime == '0':
                 rtime = rfile.headers.get('Date', '0')
             if not rtime == '0':
                 rtime = time.mktime(time.strptime(rtime,
                     '%a, %d %b %Y %H:%M:%S GMT'))
+            rfile.close()
+            lsize = os.path.getsize(destination)
             ltime = os.stat(destination).st_mtime
             if not rtime == ltime or not int(lsize) == int(rsize):
                 return False
