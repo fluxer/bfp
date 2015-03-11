@@ -370,7 +370,6 @@ class Misc(object):
             rsize = rfile.headers.get('Content-Length', '0')
             rfile.close()
             lsize = os.path.getsize(destination)
-            ltime = os.stat(destination).st_mtime
             if not int(lsize) == int(rsize):
                 return False
             return True
@@ -394,7 +393,6 @@ class Misc(object):
         rsize = rfile.headers.get('Content-Length', '0')
         if os.path.exists(destination):
             lsize = str(os.path.getsize(destination))
-            ltime = os.stat(destination).st_mtime
             if lsize > rsize:
                 lsize = '0'
                 os.unlink(destination)
