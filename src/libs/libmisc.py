@@ -508,7 +508,9 @@ class Misc(object):
         content = []
         if tarfile.is_tarfile(sfile):
             tfile = tarfile.open(sfile)
-            content = tfile.getnames()
+            for member in tfile.getmembers():
+                if not member.isdir():
+                    content.append(member.name)
             tfile.close()
         elif zipfile.is_zipfile(sfile):
             zfile = zipfile.ZipFile(sfile)
