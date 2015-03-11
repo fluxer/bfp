@@ -51,7 +51,7 @@ All metadata is stored in plain text not database files, while this
 increases the disk I/O it makes it possible to easily recover from
 disasters and fix issues in cases SPM is not being able to handle such as
 missing Python runtime library for whatever the reason. Do note that SPM
-caches internally the database files in memory xand rebuilds the caches when
+caches internally the database files in memory and rebuilds the caches when
 needed to reduce the lookup overheath.
 
 Remote sources (files, such as tarballs) are being checked after they are

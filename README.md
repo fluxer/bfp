@@ -2,7 +2,7 @@
 
 The following table illustrates the software requirements:
 
-| binary/library |     origin    |  alternative  |        required by       |            Required            |
+| binary/library |     origin    |  alternative  |        required by       |           required at          |
 |:--------------:|:-------------:|:-------------:|--------------------------|:------------------------------:|
 |     parted     |   GNU Parted  |               |          cparted         |             runtime            |
 |    pyparted    |    pyparted   |               |          cparted         |             runtime            |
@@ -17,6 +17,7 @@ The following table illustrates the software requirements:
 |     scanelf    | PaX Utilities |               |          libmisc         |             runtime            |
 |      mount     |   util-linux  |    Busybox    |          libmisc         |             runtime            |
 |     umount     |   util-linux  |    Busybox    |          libmisc         |             runtime            |
+|    libmagic    |      file     |               |         libmagic         |             runtime            |
 |      bash      |    GNU Bash   |               | libmisc, libspm, srcmake |             runtime            |
 |       git      |      Git      |               |     libspm, spm-tools    |             runtime            |
 
