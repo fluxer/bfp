@@ -1135,18 +1135,14 @@ class Source(object):
         self.update_databases(new_content, 'merge')
 
         if target_upgrade:
-            self.rebuild = []
             message.sub_info(_('Checking reverse dependencies'))
             needs_rebuild = database.local_rdepends(self.target_name)
 
             if needs_rebuild and self.do_reverse:
                 for target in needs_rebuild:
                     break_free = False
-                    if target in self.rebuild:
-                        continue
                     message.sub_debug(_('Checking'), target)
-                    footprint = database.local_footprint(target)
-                    for sfile in footprint.split():
+                    for sfile in database.local_footprint(target).split():
                         # looping trough files will continue otherwise
                         if break_free:
                             break
