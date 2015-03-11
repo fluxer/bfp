@@ -368,16 +368,10 @@ class Misc(object):
             # not all requests have content-lenght:
             # http://en.wikipedia.org/wiki/Chunked_transfer_encoding
             rsize = rfile.headers.get('Content-Length', '0')
-            rtime = rfile.headers.get('Last-Modified', '0')
-            if rtime == '0':
-                rtime = rfile.headers.get('Date', '0')
-            if not rtime == '0':
-                rtime = time.mktime(time.strptime(rtime,
-                    '%a, %d %b %Y %H:%M:%S GMT'))
             rfile.close()
             lsize = os.path.getsize(destination)
             ltime = os.stat(destination).st_mtime
-            if not rtime == ltime or not int(lsize) == int(rsize):
+            if not int(lsize) == int(rsize):
                 return False
             return True
         else:
@@ -398,15 +392,10 @@ class Misc(object):
         # not all requests have content-lenght:
         # http://en.wikipedia.org/wiki/Chunked_transfer_encoding
         rsize = rfile.headers.get('Content-Length', '0')
-        rtime = rfile.headers.get('Last-Modified', '0')
-        if rtime == '0':
-            rtime = rfile.headers.get('Date', '0')
-        if not rtime == '0':
-            rtime = time.mktime(time.strptime(rtime, '%a, %d %b %Y %H:%M:%S GMT'))
         if os.path.exists(destination):
             lsize = str(os.path.getsize(destination))
             ltime = os.stat(destination).st_mtime
-            if lsize > rsize or not ltime == rtime:
+            if lsize > rsize:
                 lsize = '0'
                 os.unlink(destination)
             if rfile.headers.get('Accept-Ranges') == 'bytes':
@@ -439,8 +428,6 @@ class Misc(object):
             sys.stdout.write('\n')
             lfile.close()
             rfile.close()
-            if os.path.exists(destination) and not rtime == '0':
-                os.utime(destination, (rtime, rtime))
 
     def archive_supported(self, sfile):
         ''' Test if file is archive that can be handled properly '''
