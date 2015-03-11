@@ -55,10 +55,10 @@ sudo make install
 ### Current contributors
 
 - Ivailo Monev (a.k.a. SmiL3y) <xakepa10@gmail.com>
-- David (a.k.a. Anon KS) <noobanonks@gmail.com>
 
 ### Past contributors
 
+- David (a.k.a. Anon KS) <noobanonks@gmail.com>
 - pablokal, handy, ArchVortex and other [ArchBang](http://www.archbang.org/)
 forums users
 - Jubei Mitsuyoshi
