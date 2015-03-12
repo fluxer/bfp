@@ -45,6 +45,7 @@ MSGMERGE = msgmerge
 MSGATTRIB = msgattrib
 MSGFMT = msgfmt
 POD2MAN = pod2man
+PYDOC = pydoc
 
 all:
 
