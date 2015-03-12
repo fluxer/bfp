@@ -240,19 +240,14 @@ class Database(object):
         ''' Returns True if target is up-to-date and False otherwise '''
         misc.typecheck(target, (types.StringTypes))
 
-        # check if target is installed at all first
-        if not self.local_search(target):
-            return False
-
         # if remote target is passed and it's a directory not a base name
         # then the local target will be invalid and local_version will equal
-        # None, thus we use the base name to find the local target version
+        # None, thus the base name is used to find the local target version
         local_version = self.local_metadata(os.path.basename(target), 'version')
         remote_version = self.remote_metadata(target, 'version')
 
-        # LooseVersion does not handle None which may be the case on invalid
-        # remote target so handle that
-        if not remote_version:
+        # LooseVersion does not handle None
+        if not remote_version or not local_version:
             return False
 
         if LooseVersion(local_version) < LooseVersion(remote_version):
