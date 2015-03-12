@@ -1495,4 +1495,3 @@ msgstr "АДРЕСС"
 #: tools.py:1046
 msgid "CROSS"
 msgstr ""
-

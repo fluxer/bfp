@@ -66,4 +66,4 @@ forums users
 - Adil Ünal (a.k.a. turkbits) <turkbits@turkbits.net>
 
 If you think you have the right to be mentioned here but you are not feel free
-contact us!
+to contact us!

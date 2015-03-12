@@ -4,7 +4,6 @@ include ../../Makefile.inc
 	$(NUITKA) --module $<
 
 all: clean
-	$(NUITKA) --module libdialog.py
 	$(NUITKA) --module libinotify.py
 	$(NUITKA) --module libmagic.py
 	$(NUITKA) --module libmessage.py
@@ -14,8 +13,7 @@ all: clean
 
 cython: clean
 	$(CYTHON)  --lenient libinotify.py
-	$(CYTHON) libdialog.py libmagic.py libmessage.py libmisc.py libpackage.py
-	$(CC) -shared libdialog.c $(shell pkg-config --cflags $(PYTHON)) -o libdialog.so
+	$(CYTHON) libmagic.py libmessage.py libmisc.py libpackage.py
 	$(CC) -shared libinotify.c $(shell pkg-config --cflags $(PYTHON)) -o libinotify.so
 	$(CC) -shared libmagic.c $(shell pkg-config --cflags $(PYTHON)) -o libmagic.so
 	$(CC) -shared libmessage.c $(shell pkg-config --cflags $(PYTHON)) -o libmessage.so

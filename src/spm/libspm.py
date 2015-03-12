@@ -1050,8 +1050,7 @@ class Source(object):
 
                 message.sub_debug(_('Checking against'), target)
                 footprint = database.local_footprint(target).split('\n')
-                # first item is null ('') because root ('/') is stripped
-                for sfile in new_content[1:]:
+                for sfile in new_content:
                     sfull = '/' + sfile
                     if sfull in footprint:
                         message.sub_critical(_('File/link conflict with %s') % target, sfull)
