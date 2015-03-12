@@ -46,6 +46,6 @@ uninstall:
 	$(RM) -r $(DESTDIR)$(DOCDIR)/spm/
 
 clean:
-	$(RM) *.5 *.8
+	$(RM) *.5 *.8 *.html
 
 .PHONY: all install uninstall clean
