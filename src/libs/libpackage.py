@@ -225,9 +225,7 @@ class Database(object):
         ''' DEPRECATED: Returns files of target, use local_metadata(target, 'footprint') '''
         misc.typecheck(target, (types.StringTypes))
 
-        match = self.local_search(target)
-        if match:
-            return self.LOCAL_CACHE[match]['footprint']
+        return self.local_metadata(target, 'footprint')
 
     def local_metadata(self, target, key):
         ''' Returns metadata of local target '''
