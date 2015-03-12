@@ -957,7 +957,7 @@ class Source(object):
             if lib in checked:
                 continue
             slib = os.path.realpath(lib)
-            match = database.local_belongs('(?:^|\\s)%s(?:$|\\s)' % slib, escape=False)
+            match = database.local_belongs('(?:^|\\s)%s(?:$|\\s)' % re.escape(slib), escape=False)
             if match and len(match) > 1:
                 message.sub_warning(_('Multiple providers for %s') % slib, match)
                 if self.target_name in match:

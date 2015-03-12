@@ -32,7 +32,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.6.1 (6f413fb)"
+app_version = "1.6.1 (a1de806)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -64,6 +64,7 @@ class Check(object):
             target_adepends = []
 
             missing_detected = False
+            required = []
             for sfile in target_footprint.splitlines():
                 sfile = os.path.join(libspm.ROOT_DIR, sfile)
                 if os.path.islink(sfile):
@@ -80,33 +81,10 @@ class Check(object):
                 message.sub_debug(_('Path'), sfile)
                 smime = misc.file_mime(sfile)
                 if smime == 'application/x-executable' or smime == 'application/x-sharedlib':
-                    libraries = misc.system_scanelf(sfile)
+                    libraries = misc.system_scanelf(sfile, sflags='-L')
                     if not libraries:
                         continue # static binary
-                    for lib in libraries.split(','):
-                        match = database.local_belongs(lib)
-                        if match and len(match) > 1:
-                            message.sub_warning(_('Multiple providers for %s') % lib, match)
-                            if target in match:
-                                match = target
-                            else:
-                                match = match[0]
-                        match = misc.string_convert(match)
-                        if not match in target_adepends and not match == target:
-                            target_adepends.append(match)
-
-                        if match == target or misc.string_search(lib, target_footprint):
-                            message.sub_debug(_('Library needed but in target'), lib)
-                        elif match and match in target_depends:
-                            message.sub_debug(_('Library needed but in dependencies'), match)
-                        elif match and not match in target_depends:
-                            message.sub_debug(_('Library needed but in local'), match)
-                            target_depends.append(match)
-                        elif libspm.IGNORE_MISSING:
-                            message.sub_warning(_('Library needed, not in any local'), lib)
-                        else:
-                            message.sub_critical(_('Library needed, not in any local'), lib)
-                            missing_detected = True
+                    required.extend(libraries.split(','))
 
                 elif smime == 'text/plain' or smime == 'text/x-shellscript' \
                     or smime == 'text/x-python' or smime == 'text/x-perl' \
@@ -121,30 +99,37 @@ class Check(object):
                     fmatch = misc.file_search(bang_regexp, sfile, exact=False, escape=False)
                     if fmatch:
                         fmatch = fmatch[0].replace('#!', '').strip().split()[0]
-                        match = database.local_belongs(fmatch, exact=True, escape=False)
-                        if match and len(match) > 1:
-                            message.sub_warning(_('Multiple providers for %s') % fmatch, match)
-                            if target in match:
-                                match = target
-                            else:
-                                match = match[0]
-                        match = misc.string_convert(match)
-                        if not match in target_adepends and not match == target:
-                            target_adepends.append(match)
+                        required.append(fmatch)
 
-                        if match == target or misc.string_search(fmatch, \
-                            target_footprint, exact=True, escape=False):
-                            message.sub_debug(_('Dependency needed but in target'), match)
-                        elif match and match in target_depends:
-                            message.sub_debug(_('Dependency needed but in dependencies'), match)
-                        elif match and not match in target_depends:
-                            message.sub_debug(_('Dependency needed but in local'), match)
-                            target_depends.append(match)
-                        elif libspm.IGNORE_MISSING:
-                            message.sub_warning(_('Dependency needed, not in any local'), fmatch)
-                        else:
-                            message.sub_critical(_('Dependency needed, not in any local'), fmatch)
-                            missing_detected = True
+            checked = []
+            for lib in required:
+                if lib in checked:
+                    continue
+                slib = os.path.realpath(lib)
+                match = database.local_belongs('(?:^|\\s)%s(?:$|\\s)' % re.escape(slib), escape=False)
+                if match and len(match) > 1:
+                    message.sub_warning(_('Multiple providers for %s') % slib, match)
+                    if target in match:
+                        match = target
+                    else:
+                        match = match[0]
+                match = misc.string_convert(match)
+                if not match in target_adepends and not match == target:
+                    target_adepends.append(match)
+
+                if match == target or slib in target_footprint.splitlines():
+                    message.sub_debug(_('Dependency needed but in target'), match)
+                elif match and match in target_depends:
+                    message.sub_debug(_('Dependency needed but in dependencies'), match)
+                elif match and not match in target_depends:
+                    message.sub_debug(_('Dependency needed but in local'), match)
+                    target_depends.append(match)
+                elif libspm.IGNORE_MISSING:
+                    message.sub_warning(_('Dependency needed, not in any local'), slib)
+                else:
+                    message.sub_critical(_('Dependency needed, not in any local'), slib)
+                    missing_detected = True
+                checked.append(lib)
             if missing_detected:
                 sys.exit(2)
 
