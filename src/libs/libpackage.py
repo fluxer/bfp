@@ -1,10 +1,11 @@
 #!/bin/python2
 
-import os, sys, re, shlex, types
+import os, sys, re, shlex, types, threading
 from distutils.version import LooseVersion
 
-import libmisc, libinotify
+import libmisc
 misc = libmisc.Misc()
+notify = libmisc.Inotify()
 
 
 class Database(object):
@@ -20,13 +21,14 @@ class Database(object):
 
     def _notifiers_setup(self):
         ''' Setup inotify watcher for database changes '''
-        # FIXME: should class variables be asigned? non-globals tend to get destroyed
-        wm = libinotify.WatchManager()  # Watch Manager
-        mask = libinotify.IN_DELETE | libinotify.IN_CREATE | libinotify.IN_MODIFY # watched events
-        notifier = libinotify.AsyncioNotifier(wm, self._build_remote_cache)
-        wdd = wm.add_watch(os.path.join(self.CACHE_DIR, 'repositories'), mask, rec=True)
-        notifier2 = libinotify.AsyncioNotifier(wm, self._build_local_cache)
-        wdd2 = wm.add_watch(self.LOCAL_DIR, mask, rec=True)
+        self._t1 = threading.Thread(target=notify.watch, \
+            args=(os.path.join(self.CACHE_DIR, 'repositories'), self._build_remote_cache,))
+        self._t2 = threading.Thread(target=notify.watch, \
+            args=(self.LOCAL_DIR, self._build_local_cache,))
+        self._t1.setDaemon(True)
+        self._t2.setDaemon(True)
+        self._t1.start()
+        self._t2.start()
 
     def _build_local_cache(self, event=None):
         ''' Build internal local database cache '''

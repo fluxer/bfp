@@ -1,7 +1,10 @@
 #!/bin/python2
 
 import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, pwd, inspect
-import types, gzip, time, libmagic
+import types, gzip, time, ctypes, libmagic
+from struct import unpack
+from fcntl import ioctl
+from termios import FIONREAD
 if int(sys.version_info[0]) < 3:
     from urlparse import urlparse
     from urllib2 import urlopen
@@ -704,3 +707,88 @@ class Misc(object):
             self.system_command(command, shell=shell, cwd=self.ROOT_DIR)
         else:
             self.system_chroot(command, shell=shell)
+
+
+class Inotify(object):
+    ''' Inotify wrapper '''
+    def __init__(self):
+        self.ACCESS = 0x00000001        # IN_ACCESS
+        self.MODIFY = 0x00000002        # IN_MODIFY
+        self.ATTRIB = 0x00000004        # IN_ATTRIB
+        self.WRITE = 0x00000008         # IN_CLOSE_WRITE
+        self.CLOSE = 0x00000010         # IN_CLOSE_NOWRITE
+        self.OPEN = 0x00000020          # IN_OPEN
+        self.MOVED_FROM = 0x00000040    # IN_MOVED_FROM
+        self.MOVED_TO = 0x00000080      # IN_MOVED_TO
+        self.CREATE = 0x00000100        # IN_CREATE
+        self.DELETE = 0x00000200        # IN_DELETE
+        self.DELETE_SELF = 0x00000400   # IN_DELETE_SELF
+        self.MOVE_SELF = 0x00000800     # IN_MOVE_SELF
+        self.UNMOUNT = 0x00002000       # IN_UNMOUNT
+        self.Q_OVERFLOW = 0x00004000    # IN_Q_OVERFLOW
+        self.IGNORED = 0x00008000       # IN_IGNORED
+        self.ONLYDIR = 0x01000000       # IN_ONLYDIR
+        self.DONT_FOLLOW = 0x02000000   # IN_DONT_FOLLOW
+        self.MASK_ADD = 0x20000000      # IN_MASK_ADD
+        self.ISDIR = 0x40000000         # IN_ISDIR
+        self.ONESHOT = 0x80000000       # IN_ONESHOT
+
+        self.libc = ctypes.CDLL('libc.so.6', use_errno=True)
+        self.fd = self.libc.inotify_init()
+        if self.fd == -1:
+            raise Exception('inotify init err', self.error())
+
+    def error(self):
+        ''' Get last error as string '''
+        return os.strerror(ctypes.get_errno())
+
+    def read(self):
+        ''' Read event from the inotify file descriptor '''
+        size_int = ctypes.c_int()
+        while ioctl(self.fd, FIONREAD, size_int) == -1:
+            time.sleep(1)
+        size = size_int.value
+        if not size:
+            return
+        data = os.read(self.fd, size)
+        deb = 0
+        while deb < size:
+            fin = deb+16
+            wd, mask, cookie, name_len = unpack('iIII', data[deb:fin])
+            deb, fin = fin, fin+name_len
+            name = unpack('%ds' % name_len, data[deb:fin])
+            name = name[0].rstrip('\0')
+            deb = fin
+            yield wd, mask, cookie, name
+
+    def add_watch(self, path, mask):
+        ''' Add path to watch '''
+        wd = self.libc.inotify_add_watch(self.fd, path, mask)
+        if wd == -1:
+            raise Exception('inotify add error', self.error())
+        return wd
+
+    def rm_watch(self, wd):
+        ''' Remove path from watch '''
+        ret = self.libc.inotify_rm_watch(self.fd, wd)
+        if ret == -1:
+            raise Exception('inotify rm error', self.error())
+
+
+    def _add_dir(self, mask, path, lfiles):
+        self.add_watch(path, mask)
+
+    def watch(self, path, callback, mask=None, recursive=True):
+        ''' Start watching for events '''
+        if not mask:
+            mask = self.MODIFY | self.DELETE | self.CREATE
+        if recursive and os.path.isdir(path):
+            os.path.walk(path, self._add_dir, mask)
+        self.add_watch(path, mask)
+        while True:
+            for wd, mask, cookie, name in self.read():
+                callback((wd, mask, cookie, name))
+            time.sleep(1)
+
+    def close(self):
+        os.close(self.fd)
