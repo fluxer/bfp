@@ -902,6 +902,7 @@ class Source(object):
 
         message.sub_info(_('Checking runtime dependencies'))
         missing_detected = False
+        required = []
         for sfile in target_content:
             if os.path.islink(sfile):
                 continue
@@ -909,33 +910,10 @@ class Source(object):
             smime = target_content[sfile]
             if smime == 'application/x-executable' or \
                 smime == 'application/x-sharedlib':
-                libraries = misc.system_scanelf(sfile)
+                libraries = misc.system_scanelf(sfile, sflags='-L')
                 if not libraries:
                     continue # static binary
-                for lib in libraries.split(','):
-                    match = database.local_belongs(lib)
-                    if match and len(match) > 1:
-                        message.sub_warning(_('Multiple providers for %s') % lib, match)
-                        if self.target_name in match:
-                            match = self.target_name
-                        else:
-                            match = match[0]
-                    match = misc.string_convert(match)
-
-                    # list() - Python 3000 dictionary compat
-                    if match == self.target_name or \
-                        misc.string_search(lib, list(target_content.keys())):
-                        message.sub_debug(_('Library needed but in target'), lib)
-                    elif match and match in self.target_depends:
-                        message.sub_debug(_('Library needed but in dependencies'), match)
-                    elif match and not match in self.target_depends:
-                        message.sub_debug(_('Library needed but in local'), match)
-                        self.target_depends.append(match)
-                    elif self.ignore_missing:
-                        message.sub_warning(_('Library needed, not in any local'), lib)
-                    else:
-                        message.sub_critical(_('Library needed, not in any local'), lib)
-                        missing_detected = True
+                required.extend(libraries.split(','))
 
             elif smime == 'text/plain' or smime == 'text/x-shellscript' \
                 or smime == 'text/x-python' or smime == 'text/x-perl' \
@@ -955,46 +933,55 @@ class Source(object):
                     sfull = omatch[0][0].strip()
                     sbase = omatch[0][1].strip()
                     smatch = False
-                    dmatch = []
                     # now look for the interpreter in the target
                     for s in list(target_content.keys()):
                         if s.endswith('/' + sbase) and os.access(s, os.X_OK):
                             smatch = s.replace(self.install_dir, '')
-                            dmatch = [self.target_name] # it is expected to be list
                             break
                     # if that fails look for the interpreter on the host
                     # FIXME: if the interpreter found by misc.whereis() is not
                     # ownded by a local target try to find interpreter that is
                     if not smatch:
                         smatch = misc.whereis(sbase, False)
-                        if smatch:
-                            dmatch = database.local_belongs(smatch, exact=True)
 
                     # now update the shebang if possible
                     if smatch:
                         message.sub_debug(_('Attempting shebang correction on'), sfile)
                         misc.file_substitute('^' + sfull, '#!' + smatch, sfile)
-
-                    if dmatch and len(dmatch) > 1:
-                        message.sub_warning(_('Multiple providers for %s') % sbase, dmatch)
-                        if self.target_name in dmatch:
-                            dmatch = self.target_name
-                        else:
-                            dmatch = dmatch[0]
-                    dmatch = misc.string_convert(dmatch)
-
-                    if dmatch == self.target_name:
-                        message.sub_debug(_('Dependency needed but in target'), dmatch)
-                    elif dmatch and dmatch in self.target_depends:
-                        message.sub_debug(_('Dependency needed but in dependencies'), dmatch)
-                    elif dmatch and not dmatch in self.target_depends:
-                        message.sub_debug(_('Dependency needed but in local'), dmatch)
-                        self.target_depends.append(dmatch)
-                    elif self.ignore_missing:
-                        message.sub_warning(_('Dependency needed, not in any local'), sbase)
+                        required.append(smatch)
                     else:
-                        message.sub_critical(_('Dependency needed, not in any local'), sbase)
-                        missing_detected = True
+                        required.append(sbase) # fake non-existing match
+
+        checked = []
+        for lib in required:
+            if lib in checked:
+                continue
+            slib = os.path.realpath(lib)
+            match = database.local_belongs('(?:^|\\s)%s(?:$|\\s)' % slib, escape=False)
+            if match and len(match) > 1:
+                message.sub_warning(_('Multiple providers for %s') % slib, match)
+                if self.target_name in match:
+                    match = self.target_name
+                else:
+                    match = match[0]
+            match = misc.string_convert(match)
+
+            # list() - Python 3000 dictionary compat
+            if match == self.target_name or \
+                misc.string_search(slib, list(target_content.keys())):
+                message.sub_debug(_('Dependency needed but in target'), slib)
+            elif match and match in self.target_depends:
+                message.sub_debug(_('Dependency needed but in dependencies'), match)
+            elif match and not match in self.target_depends:
+                message.sub_debug(_('Dependency needed but in local'), match)
+                self.target_depends.append(match)
+            elif self.ignore_missing:
+                message.sub_warning(_('Dependency needed, not in any local'), slib)
+            else:
+                message.sub_critical(_('Dependency needed, not in any local'), slib)
+                missing_detected = True
+            checked.append(lib)
+
         if missing_detected:
             sys.exit(2)
 
