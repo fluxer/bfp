@@ -225,9 +225,12 @@ class Misc(object):
         return self.string_search(string, self.file_read(sfile), exact=exact, \
             escape=escape)
 
-    def file_mime(self, sfile):
+    def file_mime(self, sfile, resolve=False):
         ''' Get file type '''
         self.typecheck(sfile, (types.StringTypes))
+
+        if resolve:
+            sfile = os.path.realpath(sfile)
 
         # symlinks are not handled properly by magic, on purpose
         # https://github.com/ahupp/python-magic/pull/31
@@ -436,7 +439,10 @@ class Misc(object):
 
         if os.path.isdir(sfile):
             return False
-        if sfile.endswith(('.xz', '.lzma', '.gz')) \
+        smime = self.file_mime(sfile, True)
+        if smime == 'application/x-xz' \
+            or smime == 'application/x-lzma' \
+            or smime == 'application/x-gzip' \
             or tarfile.is_tarfile(sfile) \
             or zipfile.is_zipfile(sfile):
             return True
@@ -490,7 +496,9 @@ class Misc(object):
         # filesystem stays locked which is bad. on top of that the tarfile
         # library can not replace files while they are being used thus the
         # external utilities are used for extracting tar archives.
-        if sfile.endswith(('.xz', '.lzma')) \
+        smime = self.file_mime(sfile, True)
+        if smime == 'application/x-xz' \
+            or smime == 'application/x-lzma' \
             or tarfile.is_tarfile(sfile) or zipfile.is_zipfile(sfile):
             bsdtar = self.whereis('bsdtar', fallback=False)
             if bsdtar:
@@ -499,7 +507,7 @@ class Misc(object):
             else:
                 self.system_command((self.whereis('tar'), '-xphf', sfile, \
                     '-C', sdir), demote=demote)
-        elif sfile.endswith('.gz'):
+        elif smime == 'application/x-gzip':
             gfile = gzip.GzipFile(sfile, 'rb')
             self.file_write(sfile.rstrip('.gz'), gfile.read())
             gfile.close()
