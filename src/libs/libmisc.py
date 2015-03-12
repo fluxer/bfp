@@ -791,4 +791,5 @@ class Inotify(object):
             time.sleep(1)
 
     def close(self):
+        ''' Close inotify descriptor '''
         os.close(self.fd)
