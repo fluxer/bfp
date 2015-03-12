@@ -32,7 +32,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.6.1 (3ba2d91)"
+app_version = "1.6.1 (6f413fb)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -59,7 +59,7 @@ class Check(object):
         for target in self.check_targets:
             message.sub_info(_('Checking'), target)
             target_metadata = os.path.join(libspm.LOCAL_DIR, target, 'metadata')
-            target_footprint = database.local_footprint(target)
+            target_footprint = database.local_metadata(target, 'footprint')
             target_depends = database.local_metadata(target, 'depends')
             target_adepends = []
 
@@ -300,7 +300,7 @@ class Lint(object):
         for target in database.local_all(basename=True):
             if target in self.targets:
                 message.sub_info(_('Checking'), target)
-                target_footprint = database.local_footprint(target)
+                target_footprint = database.local_metadata(target, 'footprint')
 
                 if self.man:
                     if not misc.string_search('/share/man/', target_footprint):
@@ -441,7 +441,7 @@ class Lint(object):
                         for local in database.local_all(basename=True):
                             if local == target:
                                 continue
-                            if sfile.lstrip('/') in database.local_footprint(local).splitlines():
+                            if sfile.lstrip('/') in database.local_metadata(local, 'footprint').splitlines():
                                 message.sub_warning(_('Possibly conflicting file with %s') % local, sfile)
 
                 if self.debug:
@@ -585,7 +585,7 @@ class Merge(object):
             backups = database.remote_metadata(target, 'backup')
             if not backups:
                 backups = []
-            for sfile in database.local_footprint(target).splitlines():
+            for sfile in database.local_metadata(target, 'footprint').splitlines():
                 if sfile.endswith('.conf'):
                     backups.append(os.path.join(libspm.ROOT_DIR, sfile))
 
@@ -642,7 +642,7 @@ class Pack(object):
                 target_packfile = os.path.join(self.directory, \
                     os.path.basename(target) + '_' + target_version + '.tar.bz2')
 
-                content = database.local_footprint(target).splitlines()
+                content = database.local_metadata(target, 'footprint').splitlines()
                 # add metadata directory, it is not listed in the footprint
                 content.append(os.path.join(libspm.LOCAL_DIR, target))
 

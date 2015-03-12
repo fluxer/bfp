@@ -206,7 +206,7 @@ class Local(object):
                         message.sub_info(_('Size'), data)
 
                 if self.do_footprint:
-                    data = database.local_footprint(target)
+                    data = database.local_metadata(target, 'footprint')
                     if self.plain:
                         print(data)
                     else:
@@ -958,7 +958,7 @@ class Source(object):
                     dmatch = []
                     # now look for the interpreter in the target
                     for s in list(target_content.keys()):
-                        if s.endswith('bin/' + sbase) and os.access(s, os.X_OK):
+                        if s.endswith('/' + sbase) and os.access(s, os.X_OK):
                             smatch = s.replace(self.install_dir, '')
                             dmatch = [self.target_name] # it is expected to be list
                             break
@@ -968,7 +968,7 @@ class Source(object):
                     if not smatch:
                         smatch = misc.whereis(sbase, False)
                         if smatch:
-                            dmatch = database.local_belongs(smatch, exact=True, escape=False)
+                            dmatch = database.local_belongs(smatch, exact=True)
 
                     # now update the shebang if possible
                     if smatch:
@@ -1039,7 +1039,7 @@ class Source(object):
         ''' Merget target to system '''
         message.sub_info(_('Indexing content'))
         new_content = misc.archive_list(self.target_tarball)
-        old_content = database.local_footprint(self.target_name)
+        old_content = database.local_metadata(self.target_name, 'footprint')
 
         if CONFLICTS:
             conflict_detected = False
@@ -1049,7 +1049,7 @@ class Source(object):
                     continue
 
                 message.sub_debug(_('Checking against'), target)
-                footprint = database.local_footprint(target).split('\n')
+                footprint = database.local_metadata(target, 'footprint').split('\n')
                 for sfile in new_content:
                     sfull = '/' + sfile
                     if sfull in footprint:
@@ -1141,7 +1141,7 @@ class Source(object):
                 for target in needs_rebuild:
                     break_free = False
                     message.sub_debug(_('Checking'), target)
-                    for sfile in database.local_footprint(target).split():
+                    for sfile in database.local_metadata(target, 'footprint').split():
                         # looping trough files will continue otherwise
                         if break_free:
                             break

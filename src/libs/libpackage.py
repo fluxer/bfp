@@ -145,7 +145,7 @@ class Database(object):
             if local == ignore:
                 continue
 
-            if misc.string_search(sfile, self.local_footprint(local), \
+            if misc.string_search(sfile, self.local_metadata(local, 'footprint'), \
                 exact=exact, escape=escape):
                 match.append(local)
         return match
@@ -222,7 +222,7 @@ class Database(object):
         return reverse
 
     def local_footprint(self, target):
-        ''' Returns files of target '''
+        ''' DEPRECATED: Returns files of target, use local_metadata(target, 'footprint') '''
         misc.typecheck(target, (types.StringTypes))
 
         match = self.local_search(target)
@@ -297,7 +297,7 @@ class Database(object):
         return [target]
 
     def remote_groups(self, basename=True):
-        ''' Returns groups in the repositories '''
+        ''' DEPRECATED: Returns groups in the repositories '''
         misc.typecheck(basename, (types.BooleanType))
 
         groups = []
