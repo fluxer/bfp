@@ -51,18 +51,18 @@ try:
         sys.exit(2)
 
     message.info('Listing initial RAM image...')
-    base = os.path.basename(ARGS.image)
-    new_image = os.path.join(ARGS.tmp, base.replace('.img', '.gz'))
+    new_image = os.path.join(ARGS.tmp, os.path.basename(ARGS.image))
     message.sub_info('Copying image')
     misc.dir_create(ARGS.tmp)
     shutil.copyfile(ARGS.image, new_image)
 
-    message.sub_info('Decompressing image')
-    misc.archive_decompress(new_image, ARGS.tmp)
+    if misc.archive_supported(new_image):
+        message.sub_info('Decompressing image')
+        misc.archive_decompress(new_image, ARGS.tmp)
 
     message.sub_info('Listing image')
     cpio = misc.whereis('cpio')
-    print(misc.system_output((cpio, '-tF', new_image.replace('.gz', ''))))
+    print(misc.system_output((cpio, '-tF', new_image)))
 
 except subprocess.CalledProcessError as detail:
     message.critical('SUBPROCESS', detail)

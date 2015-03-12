@@ -15,6 +15,7 @@ try:
     kernel = os.uname()[2]
     busybox = misc.whereis('busybox')
     image = '/boot/initramfs-' + kernel + '.img'
+    compression = 'gzip'
     modules = []
     for m in os.listdir('/sys/module'):
         if os.path.isdir('/sys/module/' + m + '/sections'):
@@ -31,6 +32,8 @@ try:
         default=modules, help='Change modules')
     parser.add_argument('-i', '--image', type=str, default=image, \
         help='Change output image')
+    parser.add_argument('-c', '--compression', type=str, default=compression, \
+        choices=('gzip', 'cat'), help='Change image compression method')
     parser.add_argument('--keep', action='store_true', \
         help='Keep temporary directory')
     parser.add_argument('--debug', action='store_true', \
@@ -139,6 +142,7 @@ try:
     message.sub_info('KERNEL', ARGS.kernel)
     message.sub_info('MODULES', ARGS.modules)
     message.sub_info('IMAGE', ARGS.image)
+    message.sub_info('COMPRESSION', ARGS.compression)
 
     message.sub_info('Installing Busybox')
     bin_dir = os.path.join(ARGS.tmp, 'bin')
@@ -225,9 +229,12 @@ try:
     cpio = misc.whereis('cpio')
     data = misc.system_output('%s . | %s -o -H newc' % \
         (find, cpio), shell=True, cwd=ARGS.tmp)
-    gzipf = gzip.GzipFile(ARGS.image, 'wb')
-    gzipf.write(data)
-    gzipf.close()
+    if ARGS.compression == 'gzip':
+        gzipf = gzip.GzipFile(ARGS.image, 'wb')
+        gzipf.write(data)
+        gzipf.close()
+    else:
+        misc.file_write(ARGS.image, data)
 
 except subprocess.CalledProcessError as detail:
     message.critical('SUBPROCESS', detail)
