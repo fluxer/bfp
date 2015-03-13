@@ -75,9 +75,10 @@ class Database(object):
         misc.typecheck(basename, (types.BooleanType))
 
         # rebuild cache on demand
-        if not self.REMOTE_CACHE:
-            self._build_remote_cache()
+        recache = False
         for wd, mask, cookie, name in notify.read():
+            recache = True
+        if not self.REMOTE_CACHE or recache:
             self._build_remote_cache()
 
         if basename:
@@ -92,9 +93,10 @@ class Database(object):
         misc.typecheck(basename, (types.BooleanType))
 
         # rebuild cache on demand
-        if not self.LOCAL_CACHE:
-            self._build_local_cache()
+        recache = False
         for wd, mask, cookie, name in notify.read():
+            recache = True
+        if not self.LOCAL_CACHE or recache:
             self._build_local_cache()
 
         if basename:
