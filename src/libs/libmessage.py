@@ -23,6 +23,7 @@ class Message(object):
     def __init__(self):
         self.LOG = True
         self.DEBUG = False
+        self.CATCH = False
 
         try:
             curses.setupterm()
@@ -85,10 +86,14 @@ class Message(object):
     def critical(self, msg, marker=None):
         ''' Print message with critical status '''
         if not marker is None:
+            if self.CATCH:
+                raise Exception(msg, marker)
             sys.stderr.write('%s* %s%s: %s%s%s\n' % (self.ccritical, \
                 self.cnormal, msg, self.ccritical, marker, self.cnormal))
             self.log_message('critical', '%s: %s' % (msg, marker))
         else:
+            if self.CATCH:
+                raise Exception(msg)
             sys.stderr.write('%s* %s%s\n' % (self.ccritical, self.cnormal, msg))
             self.log_message('critical', msg)
 
@@ -127,10 +132,14 @@ class Message(object):
     def sub_critical(self, msg, marker=None):
         ''' Print sub-message with critical status '''
         if not marker is None:
+            if self.CATCH:
+                raise Exception(msg, marker)
             sys.stderr.write('%s  => %s%s: %s%s%s\n' % (self.ccritical, \
                 self.cnormal, msg, self.ccritical, marker, self.cnormal))
             self.log_message('critical', '%s: %s' % (msg, marker))
         else:
+            if self.CATCH:
+                raise Exception(msg)
             sys.stderr.write('%s  => %s%s\n' % (self.ccritical, \
                 self.cnormal, msg))
             self.log_message('critical', msg)
