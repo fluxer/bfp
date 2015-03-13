@@ -1,6 +1,6 @@
 #!/bin/python2
 
-import os, sys, re, shlex, types, threading
+import os, sys, re, shlex, types
 from distutils.version import LooseVersion
 
 import libmisc
@@ -21,14 +21,8 @@ class Database(object):
 
     def _notifiers_setup(self):
         ''' Setup inotify watcher for database changes '''
-        self._t1 = threading.Thread(target=notify.watch, \
-            args=(os.path.join(self.CACHE_DIR, 'repositories'), self._build_remote_cache,))
-        self._t2 = threading.Thread(target=notify.watch, \
-            args=(self.LOCAL_DIR, self._build_local_cache,))
-        self._t1.setDaemon(True)
-        self._t2.setDaemon(True)
-        self._t1.start()
-        self._t2.start()
+        notify.add_watch(os.path.join(self.CACHE_DIR, 'repositories'))
+        notify.add_watch(self.LOCAL_DIR)
 
     def _build_local_cache(self, event=None):
         ''' Build internal local database cache '''
@@ -83,6 +77,8 @@ class Database(object):
         # rebuild cache on demand
         if not self.REMOTE_CACHE:
             self._build_remote_cache()
+        for wd, mask, cookie, name in notify.read():
+            self._build_remote_cache()
 
         if basename:
             lremote = []
@@ -97,6 +93,8 @@ class Database(object):
 
         # rebuild cache on demand
         if not self.LOCAL_CACHE:
+            self._build_local_cache()
+        for wd, mask, cookie, name in notify.read():
             self._build_local_cache()
 
         if basename:

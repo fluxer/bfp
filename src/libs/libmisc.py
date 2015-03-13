@@ -767,8 +767,10 @@ class Inotify(object):
             deb = fin
             yield wd, mask, cookie, name
 
-    def add_watch(self, path, mask):
+    def add_watch(self, path, mask=None):
         ''' Add path to watch '''
+        if not mask:
+            mask = self.MODIFY | self.DELETE | self.CREATE
         wd = self.libc.inotify_add_watch(self.fd, path, mask)
         if wd == -1:
             raise Exception('inotify add error', self.error())
@@ -786,8 +788,6 @@ class Inotify(object):
 
     def watch(self, path, callback, mask=None, recursive=True):
         ''' Start watching for events '''
-        if not mask:
-            mask = self.MODIFY | self.DELETE | self.CREATE
         if recursive and os.path.isdir(path):
             os.path.walk(path, self._add_dir, mask)
         self.add_watch(path, mask)
