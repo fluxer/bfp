@@ -26,6 +26,7 @@ class Misc(object):
         self.TIMEOUT = 30
         self.ROOT_DIR = '/'
         self.CATCH = False
+        self.magic = Magic()
 
     def typecheck(self, a, b):
         ''' Poor man's variable type checking '''
@@ -75,11 +76,13 @@ class Misc(object):
         else:
             return string
 
-    def string_convert(self, string):
+    def string_convert(self, variant):
         ''' Convert input to string but only if it is not string '''
-        if isinstance(string, (list, tuple)):
-            return ' '.join(string)
-        return string
+        if isinstance(variant, (list, tuple)):
+            return ' '.join(variant)
+        elif isinstance(variant, dict):
+            return ' '.join(list(variant.keys()))
+        return variant
 
     def string_unit_guess(self, svar):
         ''' Guess the units to be used by string_unit() '''
@@ -226,17 +229,12 @@ class Misc(object):
             escape=escape)
 
     def file_mime(self, sfile, resolve=False):
-        ''' Get file type '''
+        ''' Get file type, you should use Magic().get() instead '''
         self.typecheck(sfile, (types.StringTypes))
 
         if resolve:
             sfile = os.path.realpath(sfile)
-
-        # symlinks are not handled properly by magic, on purpose
-        # https://github.com/ahupp/python-magic/pull/31
-        if os.path.islink(sfile):
-            return 'inode/symlink'
-        return self.string_encode(libmagic.from_file(sfile, mime=True))
+        return self.string_encode(self.magic.get(sfile))
 
     def file_substitute(self, string, string2, sfile):
         ''' Substitue a string with another in file '''
@@ -801,3 +799,59 @@ class Inotify(object):
     def close(self):
         ''' Close inotify descriptor '''
         os.close(self.fd)
+
+class Magic(object):
+    ''' Magic wrapper '''
+    def __init__(self, flags=None):
+        self.NONE = 0x000000 # No flags
+        self.DEBUG = 0x000001 # Turn on debugging
+        self.SYMLINK = 0x000002 # Follow symlinks
+        self.COMPRESS = 0x000004 # Check inside compressed files
+        self.DEVICES = 0x000008 # Look at the contents of devices
+        self.MIME = 0x000010 # Return a mime string
+        self.MIME_ENCODING = 0x000400 # Return the MIME encoding
+        self.CONTINUE = 0x000020 # Return all matches
+        self.CHECK = 0x000040 # Print warnings to stderr
+        self.PRESERVE_ATIME = 0x000080 # Restore access time on exit
+        self.RAW = 0x000100 # Don't translate unprintable chars
+        self.ERROR = 0x000200 # Handle ENOENT etc as real errors
+        self.NO_CHECK_COMPRESS = 0x001000 # Don't check for compressed files
+        self.NO_CHECK_TAR = 0x002000 # Don't check for tar files
+        self.NO_CHECK_SOFT = 0x004000 # Don't check magic entries
+        self.NO_CHECK_APPTYPE = 0x008000 # Don't check application type
+        self.NO_CHECK_ELF = 0x010000 # Don't check for elf details
+        self.NO_CHECK_ASCII = 0x020000 # Don't check for ascii files
+        self.NO_CHECK_TROFF = 0x040000 # Don't check ascii/troff
+        self.NO_CHECK_FORTRAN = 0x080000 # Don't check ascii/fortran
+        self.NO_CHECK_TOKENS = 0x100000 # Don't check ascii/tokens
+
+        self.libmagic = ctypes.CDLL('libmagic.so', use_errno=True)
+        if not flags:
+            flags = self.NONE | self.MIME
+        self.flags = flags
+        self.cookie = self.libmagic.magic_open(self.flags)
+        self.libmagic.magic_load(self.cookie, None)
+
+        self._magic_file = self.libmagic.magic_file
+        self._magic_file.restype = ctypes.c_char_p
+        self._magic_file.argtypes = [ctypes.c_void_p, ctypes.c_char_p]
+
+    def __del__(self):
+        if self.cookie and self.libmagic.magic_close:
+            self.libmagic.magic_close(self.cookie)
+
+    def error(self):
+        ''' Get last error as string '''
+        return ctypes.get_errno()
+
+    def get(self, path):
+        ''' Get MIME type of path '''
+        result = self._magic_file(self.cookie, path)
+        if not result or result == -1:
+            # libmagic 5.09 has a bug where it might fail to identify the
+            # mimetype of a file and returns null from magic_file (and
+            # likely _buffer), but also does not return an error message.
+            if (self.flags & self.MAGIC_MIME):
+                return "application/octet-stream"
+            raise Exception(self.error())
+        return result

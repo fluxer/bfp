@@ -4,15 +4,13 @@ include ../../Makefile.inc
 	$(NUITKA) --module $<
 
 all: clean
-	$(NUITKA) --module libmagic.py
 	$(NUITKA) --module libmessage.py
 	$(NUITKA) --module libmisc.py
 	$(NUITKA) --module libpackage.py
 	$(STRIP) *.so
 
 cython: clean
-	$(CYTHON) libmagic.py libmessage.py libmisc.py libpackage.py
-	$(CC) -shared libmagic.c $(shell pkg-config --cflags $(PYTHON)) -o libmagic.so
+	$(CYTHON) libmessage.py libmisc.py libpackage.py
 	$(CC) -shared libmessage.c $(shell pkg-config --cflags $(PYTHON)) -o libmessage.so
 	$(CC) -shared libmisc.c $(shell pkg-config --cflags $(PYTHON)) -o libmisc.so
 	$(CC) -shared libpackage.c $(shell pkg-config --cflags $(PYTHON)) -o libpackage.so
@@ -26,7 +24,6 @@ install:
 	$(INSTALL) -m644 *.so $(DESTDIR)$(SITEDIR)/
 
 uninstall:
-	$(RM) $(DESTDIR)$(SITEDIR)/libmagic.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libmessage.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libmisc.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libpackage.so
