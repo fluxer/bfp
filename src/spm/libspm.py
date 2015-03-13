@@ -1462,6 +1462,9 @@ class Binary(Source):
                 if misc.ping(url):
                     src_url = url
                     break
+            if not src_url:
+                message.sub_critical(_('Binary tarball not available available for'), self.target_name)
+                sys.exit(2)
 
         if os.path.isfile(local_file) and internet and src_url:
             message.sub_debug(_('Checking'), local_file)
