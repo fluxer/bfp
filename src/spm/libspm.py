@@ -934,7 +934,7 @@ class Source(object):
                     sbase = omatch[0][1].strip()
                     smatch = False
                     # now look for the interpreter in the target
-                    for s in list(target_content.keys()):
+                    for s in target_content:
                         if s.endswith('/' + sbase) and os.access(s, os.X_OK):
                             smatch = s.replace(self.install_dir, '')
                             break
@@ -966,9 +966,8 @@ class Source(object):
                     match = match[0]
             match = misc.string_convert(match)
 
-            # list() - Python 3000 dictionary compat
             if match == self.target_name or \
-                misc.string_search(slib, list(target_content.keys())):
+                misc.string_search(slib, target_content):
                 message.sub_debug(_('Dependency needed but in target'), slib)
             elif match and match in self.target_depends:
                 message.sub_debug(_('Dependency needed but in dependencies'), match)
@@ -987,7 +986,7 @@ class Source(object):
 
         if self.python_compile:
             message.sub_info(_('Byte-compiling Python modules'))
-            for sfile in list(target_content.keys()):
+            for sfile in target_content:
                 for spath in site.getsitepackages():
                     if not spath in sfile:
                         continue
