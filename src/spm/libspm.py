@@ -782,24 +782,9 @@ class Source(object):
                 'ftps://')):
                 if not internet:
                     message.sub_warning(_('Internet connection is down'))
-                elif self.mirror:
-                    for mirror in MIRRORS:
-                        url = mirror + '/distfiles/' + src_base
-                        message.sub_debug(_('Checking mirror'), mirror)
-                        if misc.ping(url):
-                            src_url = url
-                            break
-
-                if os.path.isfile(local_file) and internet:
-                    message.sub_debug(_('Checking'), local_file)
-                    if misc.fetch_check(src_url, local_file):
-                        message.sub_debug(_('Already fetched'), src_url)
-                    else:
-                        message.sub_warning(_('Re-fetching'), src_url)
-                        misc.fetch(src_url, local_file)
-                elif internet:
+                else:
                     message.sub_debug(_('Fetching'), src_url)
-                    misc.fetch(src_url, local_file)
+                    misc.fetch(src_url, local_file, MIRRORS, 'distfiles/')
 
             if os.path.islink(link_file):
                 message.sub_debug(_('Already linked'), src_file)
@@ -965,7 +950,9 @@ class Source(object):
 
         checked = []
         for req in required:
-            if req in checked:
+            # checking req being '' is neccessary because a bug in scanelf that
+            # produces a list with empty entry, it happens when '-L' is used
+            if req in checked or not req:
                 continue
             rreq = os.path.realpath(req)
             match = database.local_belongs('(?:^|\\s)%s(?:$|\\s)' % re.escape(rreq), escape=False)
@@ -1262,7 +1249,7 @@ class Source(object):
             self.target_footprint = os.path.join('var/local/spm', self.target_name, 'footprint')
             self.target_metadata = os.path.join('var/local/spm', self.target_name, 'metadata')
             self.sources_dir = os.path.join(CACHE_DIR, 'sources', self.target_name)
-            self.target_tarball = os.path.join(CACHE_DIR, 'tarballs', \
+            self.target_tarball = os.path.join(CACHE_DIR, 'tarballs/' + os.uname()[4], \
             self.target_name + '_' + self.target_version + '.tar.bz2')
 
             if database.local_uptodate(self.target) and self.do_update:
@@ -1469,26 +1456,14 @@ class Binary(Source):
             message.sub_warning(_('Internet connection is down'))
         else:
             src_url = None
-            for mirror in MIRRORS:
-                url = mirror + '/tarballs/' + os.uname()[4] + '/' + src_base
-                message.sub_debug(_('Checking mirror'), mirror)
-                if misc.ping(url):
-                    src_url = url
-                    break
-            if not src_url:
+            message.sub_debug(_('Checking mirrors for'), src_base)
+            if not misc.ping(src_base, MIRRORS, 'tarballs/%s/' % os.uname()[4]):
                 message.sub_critical(_('Binary tarball not available available for'), self.target_name)
                 sys.exit(2)
 
-        if os.path.isfile(local_file) and internet and src_url:
-            message.sub_debug(_('Checking'), local_file)
-            if misc.fetch_check(src_url, local_file):
-                message.sub_debug(_('Already fetched'), src_url)
-            else:
-                message.sub_warning(_('Re-fetching'), src_url)
-                misc.fetch(src_url, local_file)
-        elif internet and src_url:
+        if internet and src_url:
             message.sub_debug(_('Fetching'), src_url)
-            misc.fetch(src_url, local_file)
+            misc.fetch(src_url, local_file, MIRRORS)
 
     def main(self):
         ''' Execute action for every target '''

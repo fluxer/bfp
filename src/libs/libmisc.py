@@ -56,18 +56,32 @@ class Misc(object):
             raise OSError('Program not found in PATH', program)
         return None
 
-    def ping(self, url='http://www.google.com'):
-        ''' Ping URL '''
-        self.typecheck(url, (types.StringTypes))
+    def ping(self, surl='http://www.google.com', lmirrors=None, ssuffix=''):
+        ''' Ping URL, optionally URL base on mirrors '''
+        self.typecheck(surl, (types.StringTypes))
+        self.typecheck(lmirrors, (types.NoneType, types.ListType))
+        self.typecheck(ssuffix, (types.StringTypes))
 
         if self.OFFLINE:
             return
-        try:
-            p = urlopen(url, timeout=self.TIMEOUT)
-            p.close()
-            return True
-        except (URLError, BadStatusLine):
-            return False
+
+        lurls = []
+        if lmirrors is None:
+            lurls = (surl)
+        else:
+            for mirror in lmirrors:
+                sbase = self.url_normalize(surl, True)
+                snewurl = '%s/%s%s' % (mirror, ssuffix, sbase)
+                lurls.append(snewurl)
+
+        for url in lurls:
+            try:
+                p = urlopen(surl, timeout=self.TIMEOUT)
+                p.close()
+                return True
+            except (URLError, BadStatusLine):
+                pass
+        return False
 
     def string_encode(self, string):
         ''' String wrapper to ensure Python3 compat '''
@@ -380,7 +394,7 @@ class Misc(object):
         else:
             return False
 
-    def fetch(self, surl, destination, iretry=3):
+    def fetch_plain(self, surl, destination, iretry=3):
         ''' Download file, iretry is passed internally! '''
         self.typecheck(surl, (types.StringTypes))
         self.typecheck(destination, (types.StringTypes))
@@ -430,6 +444,31 @@ class Misc(object):
             sys.stdout.write('\n')
             lfile.close()
             rfile.close()
+
+    def fetch(self, surl, destination, lmirrors=None, ssuffix='', iretry=3):
+        ''' Download file from mirror if possible, iretry is passed internally! '''
+        self.typecheck(surl, (types.StringTypes))
+        self.typecheck(destination, (types.StringTypes))
+        self.typecheck(lmirrors, (types.NoneType, types.ListType))
+        self.typecheck(ssuffix, (types.StringTypes))
+        self.typecheck(iretry, (types.IntType))
+
+        if self.fetch_check(surl, destination):
+            return
+
+        if lmirrors:
+            sbase = self.url_normalize(surl, True)
+            smirror = lmirrors[0]
+            lmirrors.pop(0)
+            snewurl = '%s/%s%s' % (smirror, ssuffix, sbase)
+        else:
+            snewurl = surl
+        try:
+            self.fetch_plain(snewurl, destination, 0)
+        except URLError as detail:
+            if not iretry == 0:
+                return self.fetch(surl, destination, lmirrors, ssuffix, iretry-1)
+            raise
 
     def archive_supported(self, sfile):
         ''' Test if file is archive that can be handled properly '''

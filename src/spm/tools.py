@@ -32,7 +32,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.6.1 (100692e)"
+app_version = "1.6.1 (a083bfc)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -219,24 +219,9 @@ class Dist(object):
                         'ftps://')):
                         if not internet:
                             message.sub_warning(_('Internet connection is down'))
-                        elif libspm.MIRROR:
-                            for mirror in libspm.MIRRORS:
-                                url = mirror + '/' + src_base
-                                message.sub_debug(_('Checking mirror'), mirror)
-                                if misc.ping(url):
-                                    src_url = url
-                                    break
-
-                        if os.path.isfile(src_file) and internet:
-                            message.sub_debug(_('Checking'), src_file)
-                            if misc.fetch_check(src_url, src_file):
-                                message.sub_debug(_('Already fetched'), src_url)
-                            else:
-                                message.sub_warning(_('Re-fetching'), src_url)
-                                misc.fetch(src_url, src_file)
-                        elif internet:
+                        else:
                             message.sub_debug(_('Fetching'), src_url)
-                            misc.fetch(src_url, src_file)
+                            misc.fetch(src_url, src_file, libspm.MIRRORS, 'distfiles/')
 
             message.sub_info(_('Compressing'), target_distfile)
             misc.archive_compress((target_directory,), target_distfile, target_directory)
