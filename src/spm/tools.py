@@ -32,7 +32,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.6.1 (a1de806)"
+app_version = "1.6.1 (100692e)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -102,13 +102,13 @@ class Check(object):
                         required.append(fmatch)
 
             checked = []
-            for lib in required:
-                if lib in checked:
+            for req in required:
+                if req in checked:
                     continue
-                slib = os.path.realpath(lib)
-                match = database.local_belongs('(?:^|\\s)%s(?:$|\\s)' % re.escape(slib), escape=False)
+                rreq = os.path.realpath(req)
+                match = database.local_belongs('(?:^|\\s)%s(?:$|\\s)' % re.escape(rreq), escape=False)
                 if match and len(match) > 1:
-                    message.sub_warning(_('Multiple providers for %s') % slib, match)
+                    message.sub_warning(_('Multiple providers for %s') % rreq, match)
                     if target in match:
                         match = target
                     else:
@@ -117,7 +117,7 @@ class Check(object):
                 if not match in target_adepends and not match == target:
                     target_adepends.append(match)
 
-                if match == target or slib in target_footprint.splitlines():
+                if match == target or rreq in target_footprint.splitlines():
                     message.sub_debug(_('Dependency needed but in target'), match)
                 elif match and match in target_depends:
                     message.sub_debug(_('Dependency needed but in dependencies'), match)
@@ -125,11 +125,11 @@ class Check(object):
                     message.sub_debug(_('Dependency needed but in local'), match)
                     target_depends.append(match)
                 elif libspm.IGNORE_MISSING:
-                    message.sub_warning(_('Dependency needed, not in any local'), slib)
+                    message.sub_warning(_('Dependency needed, not in any local'), rreq)
                 else:
-                    message.sub_critical(_('Dependency needed, not in any local'), slib)
+                    message.sub_critical(_('Dependency needed, not in any local'), rreq)
                     missing_detected = True
-                checked.append(lib)
+                checked.append(req)
             if missing_detected:
                 sys.exit(2)
 

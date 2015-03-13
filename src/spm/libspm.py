@@ -953,33 +953,32 @@ class Source(object):
                         required.append(sbase) # fake non-existing match
 
         checked = []
-        for lib in required:
-            if lib in checked:
+        for req in required:
+            if req in checked:
                 continue
-            slib = os.path.realpath(lib)
-            match = database.local_belongs('(?:^|\\s)%s(?:$|\\s)' % re.escape(slib), escape=False)
+            rreq = os.path.realpath(req)
+            match = database.local_belongs('(?:^|\\s)%s(?:$|\\s)' % re.escape(rreq), escape=False)
             if match and len(match) > 1:
-                message.sub_warning(_('Multiple providers for %s') % slib, match)
+                message.sub_warning(_('Multiple providers for %s') % rreq, match)
                 if self.target_name in match:
                     match = self.target_name
                 else:
                     match = match[0]
             match = misc.string_convert(match)
 
-            if match == self.target_name or \
-                misc.string_search(slib, target_content):
-                message.sub_debug(_('Dependency needed but in target'), slib)
+            if match == self.target_name or rreq in target_content:
+                message.sub_debug(_('Dependency needed but in target'), rreq)
             elif match and match in self.target_depends:
                 message.sub_debug(_('Dependency needed but in dependencies'), match)
             elif match and not match in self.target_depends:
                 message.sub_debug(_('Dependency needed but in local'), match)
                 self.target_depends.append(match)
             elif self.ignore_missing:
-                message.sub_warning(_('Dependency needed, not in any local'), slib)
+                message.sub_warning(_('Dependency needed, not in any local'), rreq)
             else:
-                message.sub_critical(_('Dependency needed, not in any local'), slib)
+                message.sub_critical(_('Dependency needed, not in any local'), rreq)
                 missing_detected = True
-            checked.append(lib)
+            checked.append(req)
 
         if missing_detected:
             sys.exit(2)
