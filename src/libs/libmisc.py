@@ -1,7 +1,7 @@
 #!/bin/python2
 
 import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, pwd, inspect
-import types, gzip, time, ctypes, libmagic
+import types, gzip, time, ctypes
 from struct import unpack
 from fcntl import ioctl
 from termios import FIONREAD
@@ -803,31 +803,31 @@ class Inotify(object):
 class Magic(object):
     ''' Magic wrapper '''
     def __init__(self, flags=None):
-        self.NONE = 0x000000 # No flags
-        self.DEBUG = 0x000001 # Turn on debugging
-        self.SYMLINK = 0x000002 # Follow symlinks
-        self.COMPRESS = 0x000004 # Check inside compressed files
-        self.DEVICES = 0x000008 # Look at the contents of devices
-        self.MIME = 0x000010 # Return a mime string
-        self.MIME_ENCODING = 0x000400 # Return the MIME encoding
-        self.CONTINUE = 0x000020 # Return all matches
-        self.CHECK = 0x000040 # Print warnings to stderr
-        self.PRESERVE_ATIME = 0x000080 # Restore access time on exit
-        self.RAW = 0x000100 # Don't translate unprintable chars
-        self.ERROR = 0x000200 # Handle ENOENT etc as real errors
+        self.NONE = 0x000000            # No flags
+        self.DEBUG = 0x000001           # Turn on debugging
+        self.SYMLINK = 0x000002         # Follow symlinks
+        self.COMPRESS = 0x000004        # Check inside compressed files
+        self.DEVICES = 0x000008         # Look at the contents of devices
+        self.MIME = 0x000010            # Return a mime string
+        self.MIME_ENCODING = 0x000400   # Return the MIME encoding
+        self.CONTINUE = 0x000020        # Return all matches
+        self.CHECK = 0x000040           # Print warnings to stderr
+        self.PRESERVE_ATIME = 0x000080  # Restore access time on exit
+        self.RAW = 0x000100             # Don't translate unprintable chars
+        self.ERROR = 0x000200           # Handle ENOENT etc as real errors
         self.NO_CHECK_COMPRESS = 0x001000 # Don't check for compressed files
-        self.NO_CHECK_TAR = 0x002000 # Don't check for tar files
-        self.NO_CHECK_SOFT = 0x004000 # Don't check magic entries
+        self.NO_CHECK_TAR = 0x002000    # Don't check for tar files
+        self.NO_CHECK_SOFT = 0x004000   # Don't check magic entries
         self.NO_CHECK_APPTYPE = 0x008000 # Don't check application type
-        self.NO_CHECK_ELF = 0x010000 # Don't check for elf details
-        self.NO_CHECK_ASCII = 0x020000 # Don't check for ascii files
-        self.NO_CHECK_TROFF = 0x040000 # Don't check ascii/troff
+        self.NO_CHECK_ELF = 0x010000    # Don't check for elf details
+        self.NO_CHECK_ASCII = 0x020000  # Don't check for ascii files
+        self.NO_CHECK_TROFF = 0x040000  # Don't check ascii/troff
         self.NO_CHECK_FORTRAN = 0x080000 # Don't check ascii/fortran
         self.NO_CHECK_TOKENS = 0x100000 # Don't check ascii/tokens
 
         self.libmagic = ctypes.CDLL('libmagic.so', use_errno=True)
         if not flags:
-            flags = self.NONE | self.MIME
+            flags = self.NONE | self.MIME # | self.NO_CHECK_COMPRESS | self.NO_CHECK_TAR
         self.flags = flags
         self.cookie = self.libmagic.magic_open(self.flags)
         self.libmagic.magic_load(self.cookie, None)
@@ -852,6 +852,6 @@ class Magic(object):
             # mimetype of a file and returns null from magic_file (and
             # likely _buffer), but also does not return an error message.
             if (self.flags & self.MAGIC_MIME):
-                return "application/octet-stream"
+                return 'application/octet-stream'
             raise Exception(self.error())
         return result
