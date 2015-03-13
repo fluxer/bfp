@@ -271,7 +271,10 @@ class TestSuite(unittest.TestCase):
 
     # misc checks
     def test_file_mime_python(self):
-        self.assertEqual(misc.file_mime('libmagic.py'), 'text/x-python')
+        self.assertEqual(misc.file_mime('libmisc.py'), 'text/x-python')
+
+    def test_file_mime_makefile(self):
+        self.assertEqual(misc.file_mime('Makefile'), 'text/x-makefile')
 
     def test_type_str_true(self):
         misc.typecheck('foo', (types.StringType))
