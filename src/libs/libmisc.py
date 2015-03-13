@@ -274,19 +274,13 @@ class Misc(object):
         ''' Remove directory recursively '''
         self.typecheck(sdir, (types.StringTypes))
 
-        for root, dirs, files in os.walk(sdir):
-            for f in files:
-                os.unlink(os.path.join(root, f))
-            for d in dirs:
-                if os.path.islink(os.path.join(root, d)):
-                    os.unlink(os.path.join(root, d))
-        for root, dirs, files in os.walk(sdir, topdown=False):
-            for d in dirs:
-                s = os.path.join(root, d)
-                if os.path.islink(s):
-                    os.unlink(s)
-                else:
-                    os.rmdir(s)
+        for f  in self.list_files(sdir):
+            os.unlink(f)
+        for d in self.list_dirs(sdir, btopdown=False):
+            if os.path.islink(d):
+                os.unlink(d)
+            else:
+                os.rmdir(d)
         if os.path.islink(sdir):
             os.unlink(sdir)
         else:
@@ -311,13 +305,14 @@ class Misc(object):
             cwd = '/'
         return cwd
 
-    def list_files(self, sdir, bcross=True):
+    def list_files(self, sdir, bcross=True, btopdown=True):
         ''' Get list of files in directory recursively '''
         self.typecheck(sdir, (types.StringTypes))
         self.typecheck(bcross, (types.BooleanType))
+        self.typecheck(btopdown, (types.BooleanType))
 
         slist = []
-        for root, subdirs, files in os.walk(sdir):
+        for root, subdirs, files in os.walk(sdir, btopdown):
             if not bcross:
                 subdirs[:] = [
                     d for d in subdirs
@@ -326,13 +321,14 @@ class Misc(object):
                 slist.append(os.path.join(root, sfile))
         return slist
 
-    def list_dirs(self, sdir, bcross=True):
+    def list_dirs(self, sdir, bcross=True, btopdown=True):
         ''' Get list of directories in directory recursively '''
         self.typecheck(sdir, (types.StringTypes))
         self.typecheck(bcross, (types.BooleanType))
+        self.typecheck(btopdown, (types.BooleanType))
 
         slist = []
-        for root, subdirs, files in os.walk(sdir):
+        for root, subdirs, files in os.walk(sdir, btopdown):
             if not bcross:
                 subdirs[:] = [
                     d for d in subdirs
@@ -341,13 +337,14 @@ class Misc(object):
                 slist.append(os.path.join(root, d))
         return slist
 
-    def list_all(self, sdir, bcross=True):
+    def list_all(self, sdir, bcross=True, btopdown=True):
         ''' Get list of files and directories in directory recursively '''
         self.typecheck(sdir, (types.StringTypes))
         self.typecheck(bcross, (types.BooleanType))
+        self.typecheck(btopdown, (types.BooleanType))
 
         slist = []
-        for root, subdirs, files in os.walk(sdir):
+        for root, subdirs, files in os.walk(sdir, btopdown):
             if not bcross:
                 subdirs[:] = [
                     d for d in subdirs
@@ -453,6 +450,8 @@ class Misc(object):
         self.typecheck(ssuffix, (types.StringTypes))
         self.typecheck(iretry, (types.IntType))
 
+        # FIXME: this should not be done here, sadly the file gets corrupted
+        # on attempt to download it again otherwise
         if self.fetch_check(surl, destination):
             return
 
