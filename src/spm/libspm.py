@@ -37,6 +37,7 @@ DEFAULTS = {
     'OFFLINE': 'False',
     'MIRROR': 'False',
     'TIMEOUT': '30',
+    'VERIFY': 'False',
     'CHOST': '',
     'CFLAGS': '',
     'CXXFLAGS': '',
@@ -77,6 +78,7 @@ DEMOTE = conf.get('spm', 'DEMOTE')
 OFFLINE = conf.getboolean('prepare', 'OFFLINE')
 MIRROR = conf.getboolean('prepare', 'MIRROR')
 TIMEOUT = conf.getint('prepare', 'TIMEOUT')
+VERIFY = conf.getboolean('prepare', 'VERIFY')
 CHOST = conf.get('compile', 'CHOST')
 CFLAGS = conf.get('compile', 'CFLAGS')
 CXXFLAGS = conf.get('compile', 'CXXFLAGS')
@@ -784,7 +786,7 @@ class Source(object):
                     message.sub_warning(_('Internet connection is down'))
                 else:
                     message.sub_debug(_('Fetching'), src_url)
-                    misc.fetch(src_url, local_file, MIRRORS, 'distfiles/')
+                    misc.fetch(src_url, local_file, MIRRORS, 'distfiles/', VERIFY)
 
             if os.path.islink(link_file):
                 message.sub_debug(_('Already linked'), src_file)
@@ -1463,7 +1465,7 @@ class Binary(Source):
 
         if internet and src_url:
             message.sub_debug(_('Fetching'), src_url)
-            misc.fetch(src_url, local_file, MIRRORS)
+            misc.fetch(src_url, local_file, MIRRORS, 'tarballs/%s/' % os.uname()[4], VERIFY)
 
     def main(self):
         ''' Execute action for every target '''

@@ -32,7 +32,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.6.1 (a083bfc)"
+app_version = "1.6.1 (ba895f9)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -221,7 +221,7 @@ class Dist(object):
                             message.sub_warning(_('Internet connection is down'))
                         else:
                             message.sub_debug(_('Fetching'), src_url)
-                            misc.fetch(src_url, src_file, libspm.MIRRORS, 'distfiles/')
+                            misc.fetch(src_url, src_file, libspm.MIRRORS, 'distfiles/', libspm.VERIFY)
 
             message.sub_info(_('Compressing'), target_distfile)
             misc.archive_compress((target_directory,), target_distfile, target_directory)

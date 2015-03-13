@@ -1,7 +1,7 @@
 #!/bin/python2
 
 import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, pwd, inspect
-import types, gzip, time, ctypes
+import types, gzip, time, ctypes, hashlib
 from struct import unpack
 from fcntl import ioctl
 from termios import FIONREAD
@@ -66,17 +66,16 @@ class Misc(object):
             return
 
         lurls = []
-        if lmirrors is None:
-            lurls = (surl)
-        else:
+        if lmirrors:
             for mirror in lmirrors:
                 sbase = self.url_normalize(surl, True)
                 snewurl = '%s/%s%s' % (mirror, ssuffix, sbase)
                 lurls.append(snewurl)
+        lurls.append(surl)
 
         for url in lurls:
             try:
-                p = urlopen(surl, timeout=self.TIMEOUT)
+                p = urlopen(url, timeout=self.TIMEOUT)
                 p.close()
                 return True
             except (URLError, BadStatusLine):
@@ -153,6 +152,7 @@ class Misc(object):
         self.typecheck(basename, (types.BooleanType))
 
         # http://www.w3schools.com/tags/ref_urlencode.asp
+        # FIXME: incomplete URL normalization table
         dspecials = {'%20': ' '}
         sresult = urlparse(surl).path
         for schar in dspecials:
@@ -371,6 +371,51 @@ class Misc(object):
         else:
             return urlopen(request, timeout=self.TIMEOUT)
 
+    def fetch_verify(self, surl, destination):
+        ''' Fetch checksum for URL if present '''
+        self.typecheck(surl, (types.StringTypes))
+        self.typecheck(destination, (types.StringTypes))
+
+        # FIXME: do in single connection
+        dirname = os.path.dirname(destination)
+        self.dir_create(dirname)
+        for h in reversed(hashlib.algorithms):
+            hashurl = '%s.%s' % (surl, h)
+            hashurl2 = '%s.%ssum' % (surl, h)
+            hashout = '%s/%s.%s' % (dirname, self.url_normalize(surl, True), h)
+            if self.ping(hashurl):
+                self.fetch_plain(hashurl, hashout)
+            elif self.ping(hashurl2):
+                self.fetch_plain(hashurl2, hashout)
+        sigurl = '%s.sig' % surl
+        sigurl2 = '%s.asc' % surl
+        sigout = '%s/%s.sig' % (dirname, self.url_normalize(surl, True))
+        if self.ping(sigurl):
+            self.fetch_plain(sigurl, sigout)
+        elif self.ping(sigurl2):
+            self.fetch_plain(sigurl2, sigout)
+
+        for h in reversed(hashlib.algorithms):
+            hashout = '%s/%s.%s' % (dirname, self.url_normalize(surl, True), h)
+            if os.path.isfile(hashout):
+                remote_hash = None
+                for line in self.file_readlines(hashout):
+                    if os.path.basename(destination) in line.split():
+                        remote_hash = line.split()[0]
+                if remote_hash:
+                    local_hash = getattr(hashlib, h)(self.file_read(destination)).hexdigest()
+                    if not local_hash == remote_hash:
+                        raise Exception('Hash mismatch', surl)
+                else:
+                    raise Exception('Bogus checksum', hashout)
+
+        if os.path.isfile(sigout):
+            gpg = self.whereis('gpg', True)
+            if not gpg:
+                gpg = self.whereis('gpg2')
+            # FIXME: I have no idea if this actually works as intended
+            self.system_command((gpg, '--verify', sigout, destination))
+
     def fetch_check(self, surl, destination):
         ''' Check if remote has to be downloaded '''
         self.typecheck(surl, (types.StringTypes))
@@ -442,16 +487,17 @@ class Misc(object):
             lfile.close()
             rfile.close()
 
-    def fetch(self, surl, destination, lmirrors=None, ssuffix='', iretry=3):
+    def fetch(self, surl, destination, lmirrors=None, ssuffix='', bverify=False, iretry=3):
         ''' Download file from mirror if possible, iretry is passed internally! '''
         self.typecheck(surl, (types.StringTypes))
         self.typecheck(destination, (types.StringTypes))
         self.typecheck(lmirrors, (types.NoneType, types.ListType))
         self.typecheck(ssuffix, (types.StringTypes))
+        self.typecheck(bverify, (types.BooleanType))
         self.typecheck(iretry, (types.IntType))
 
-        # FIXME: this should not be done here, sadly the file gets corrupted
-        # on attempt to download it again otherwise
+        # NOTE: if not checked, the file gets corrupted on attempt to download
+        # it again otherwise
         if self.fetch_check(surl, destination):
             return
 
@@ -464,6 +510,8 @@ class Misc(object):
             snewurl = surl
         try:
             self.fetch_plain(snewurl, destination, 0)
+            if bverify:
+                self.fetch_verify(snewurl, destination)
         except URLError as detail:
             if not iretry == 0:
                 return self.fetch(surl, destination, lmirrors, ssuffix, iretry-1)

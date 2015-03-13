@@ -19,7 +19,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.6.1 (6f413fb)"
+app_version = "1.6.1 (ba895f9)"
 
 try:
     import libmessage
@@ -78,6 +78,12 @@ try:
         ''' Override connection timeout '''
         def __call__(self, parser, namespace, values, option_string=None):
             libspm.TIMEOUT = values
+            setattr(namespace, self.dest, values)
+
+    class OverrideVerify(argparse.Action):
+        ''' Override verification of downloads '''
+        def __call__(self, parser, namespace, values, option_string=None):
+            libspm.VERIFY = values
             setattr(namespace, self.dest, values)
 
     class OverrideChost(argparse.Action):
@@ -320,6 +326,9 @@ try:
         help=_('Set whether to use mirrors'))
     parser.add_argument('--timeout', type=int, action=OverrideTimeout, \
         help=_('Set the connection timeout'))
+    parser.add_argument('--verify', type=ast.literal_eval, \
+        action=OverrideVerify, choices=[True, False], \
+        help=_('Set whether to verify downloaded files'))
     parser.add_argument('--chost', type=str, action=OverrideChost, \
         help=_('Change CHOST'))
     parser.add_argument('--cflags', type=str, action=OverrideCflags, \
@@ -424,6 +433,7 @@ try:
         message.sub_info(_('OFFLINE'), libspm.OFFLINE)
         message.sub_info(_('MIRROR'), libspm.MIRROR)
         message.sub_info(_('TIMEOUT'), libspm.TIMEOUT)
+        message.sub_info(_('VERIFY'), libspm.VERIFY)
         message.sub_info(_('CHOST'), libspm.CHOST)
         message.sub_info(_('CFLAGS'), libspm.CFLAGS)
         message.sub_info(_('CXXFLAGS'), libspm.CXXFLAGS)
@@ -462,6 +472,7 @@ try:
         message.sub_info(_('OFFLINE'), libspm.OFFLINE)
         message.sub_info(_('MIRROR'), libspm.MIRROR)
         message.sub_info(_('TIMEOUT'), libspm.TIMEOUT)
+        message.sub_info(_('VERIFY'), libspm.VERIFY)
         message.sub_info(_('CONFLICTS'), libspm.CONFLICTS)
         message.sub_info(_('BACKUP'), libspm.BACKUP)
         message.sub_info(_('SCRIPTS'), libspm.SCRIPTS)

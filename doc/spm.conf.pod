@@ -74,6 +74,13 @@ internet connection are checked.
 
 Default: 30
 
+=head2 VERIFY
+
+Set wheather to verify checksums and signatures of sources files, if present.
+The fetcher tries to automatically fetch those and after that compare results.
+
+Default: False
+
 =head2 CHOST
 
 Set the environmental variable CHOST when building software. The CHOST
