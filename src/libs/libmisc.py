@@ -183,6 +183,11 @@ class Misc(object):
         if not os.path.isfile(sfile):
             self.file_write(sfile, '')
 
+    def file_delete(self, sfile):
+        ''' Delete file but only if it exists, handles links too '''
+        if os.path.isfile(os.path.realpath(sfile)):
+            os.unlink(sfile)
+
     def file_read(self, sfile):
         ''' Get file content '''
         self.typecheck(sfile, (types.StringTypes))
@@ -384,15 +389,19 @@ class Misc(object):
             hashurl2 = '%s.%ssum' % (surl, h)
             hashout = '%s/%s.%s' % (dirname, self.url_normalize(surl, True), h)
             if self.ping(hashurl):
+                self.file_delete(hashout)
                 self.fetch_plain(hashurl, hashout)
             elif self.ping(hashurl2):
+                self.file_delete(hashout)
                 self.fetch_plain(hashurl2, hashout)
         sigurl = '%s.sig' % surl
         sigurl2 = '%s.asc' % surl
         sigout = '%s/%s.sig' % (dirname, self.url_normalize(surl, True))
         if self.ping(sigurl):
+            self.file_delete(sigout)
             self.fetch_plain(sigurl, sigout)
         elif self.ping(sigurl2):
+            self.file_delete(sigout)
             self.fetch_plain(sigurl2, sigout)
 
         for h in reversed(hashlib.algorithms):
@@ -410,11 +419,10 @@ class Misc(object):
                     raise Exception('Bogus checksum', hashout)
 
         if os.path.isfile(sigout):
-            gpg = self.whereis('gpg', True)
+            gpg = self.whereis('gpg', False)
             if not gpg:
                 gpg = self.whereis('gpg2')
-            # FIXME: I have no idea if this actually works as intended
-            self.system_command((gpg, '--verify', sigout, destination))
+            self.system_command((gpg, '--verify', '--batch', sigout, destination))
 
     def fetch_check(self, surl, destination):
         ''' Check if remote has to be downloaded '''
@@ -499,6 +507,8 @@ class Misc(object):
         # NOTE: if not checked, the file gets corrupted on attempt to download
         # it again otherwise
         if self.fetch_check(surl, destination):
+            if bverify:
+                self.fetch_verify(surl, destination)
             return
 
         if lmirrors:
@@ -514,7 +524,7 @@ class Misc(object):
                 self.fetch_verify(snewurl, destination)
         except URLError as detail:
             if not iretry == 0:
-                return self.fetch(surl, destination, lmirrors, ssuffix, iretry-1)
+                return self.fetch(surl, destination, lmirrors, ssuffix, bverify, iretry-1)
             raise
 
     def archive_supported(self, sfile):

@@ -786,7 +786,10 @@ class Source(object):
                     message.sub_warning(_('Internet connection is down'))
                 else:
                     message.sub_debug(_('Fetching'), src_url)
-                    misc.fetch(src_url, local_file, MIRRORS, 'distfiles/', VERIFY)
+                    if self.mirror:
+                        misc.fetch(src_url, local_file, MIRRORS, 'distfiles/', VERIFY)
+                    else:
+                        misc.fetch(src_url, local_file, bverify=VERIFY)
 
             if os.path.islink(link_file):
                 message.sub_debug(_('Already linked'), src_file)
@@ -1465,7 +1468,10 @@ class Binary(Source):
 
         if internet and src_url:
             message.sub_debug(_('Fetching'), src_url)
-            misc.fetch(src_url, local_file, MIRRORS, 'tarballs/%s/' % os.uname()[4], VERIFY)
+            if self.mirror:
+                misc.fetch(src_url, local_file, MIRRORS, 'tarballs/%s/' % os.uname()[4], VERIFY)
+            else:
+                misc.fetch(src_url, local_file, bverify=VERIFY)
 
     def main(self):
         ''' Execute action for every target '''
