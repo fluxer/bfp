@@ -1019,7 +1019,7 @@ class Source(object):
             '\n'.join(sorted(footprint)).replace(self.install_dir, ''))
 
         message.sub_info(_('Compressing tarball'))
-        misc.dir_create(os.path.join(CACHE_DIR, 'tarballs'))
+        misc.dir_create(os.path.dirname(self.target_tarball))
         misc.archive_compress((self.install_dir,), self.target_tarball, \
             self.install_dir)
 
@@ -1460,18 +1460,17 @@ class Binary(Source):
         if not internet:
             message.sub_warning(_('Internet connection is down'))
         else:
-            src_url = None
             message.sub_debug(_('Checking mirrors for'), src_base)
-            if not misc.ping(src_base, MIRRORS, 'tarballs/%s/' % os.uname()[4]):
-                message.sub_critical(_('Binary tarball not available available for'), self.target_name)
-                sys.exit(2)
+            found = False
+            for mirror in MIRRORS:
+                surl = '%s/tarballs/%s/%s' % (mirror, os.uname()[4], src_base)
+                if misc.ping(surl):
+                    message.sub_debug(_('Fetching'), surl)
+                    misc.fetch(surl, local_file, MIRRORS, 'tarballs/%s/' % os.uname()[4], VERIFY)
 
-        if internet and src_url:
-            message.sub_debug(_('Fetching'), src_url)
-            if self.mirror:
-                misc.fetch(src_url, local_file, MIRRORS, 'tarballs/%s/' % os.uname()[4], VERIFY)
-            else:
-                misc.fetch(src_url, local_file, bverify=VERIFY)
+        if not internet and not found:
+            message.sub_critical(_('Binary tarball not available available for'), self.target_name)
+            sys.exit(2)
 
     def main(self):
         ''' Execute action for every target '''
@@ -1518,7 +1517,7 @@ class Binary(Source):
             self.target_footprint = os.path.join('var/local/spm', self.target_name, 'footprint')
             self.target_metadata = os.path.join('var/local/spm', self.target_name, 'metadata')
             self.sources_dir = os.path.join(CACHE_DIR, 'sources', self.target_name)
-            self.target_tarball = os.path.join(CACHE_DIR, 'tarballs', \
+            self.target_tarball = os.path.join(CACHE_DIR, 'tarballs/' + os.uname()[4], \
             self.target_name + '_' + self.target_version + '.tar.bz2')
 
             if database.local_uptodate(self.target) and self.do_update:
