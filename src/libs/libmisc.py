@@ -462,7 +462,7 @@ class Misc(object):
                 # in Python 3000 that would be print(blah, end='')
                 sys.stdout.write('\r' * len(msg))
                 sys.stdout.flush()
-        except URLError:
+        except URLError as detail:
             if not iretry == 0:
                 self.fetch(surl, destination, iretry-1)
             else:

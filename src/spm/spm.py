@@ -19,7 +19,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.6.1 (9b07fc5)"
+app_version = "1.6.1 (1c47b0a)"
 
 try:
     import libmessage
@@ -556,5 +556,5 @@ except SystemExit:
 except Exception as detail:
     message.critical('Unexpected error', detail)
     sys.exit(1)
-finally:
-    raise
+#finally:
+#    raise

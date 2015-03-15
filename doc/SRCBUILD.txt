@@ -2,7 +2,7 @@
 #             this is just a prototype, use it only as reference              #
 ###############################################################################
 
-# NOTE: The file is not parsed via Bash which means that not everything works
+# NOTE: SRCBUILDs are not parsed via Bash which means that not everything works
 # as it does in Bash when it comes to the metadata variables handling. It is
 # sourced only on compile, check, install, merge and remove.
 
@@ -13,6 +13,7 @@ makedepends('foo' 'bar')
 # variable expansion, must be preseeded with underscore
 _base="file-$version"
 sources=("ftp://ftp.astron.com/pub/file/$_base.tar.gz"
+         "ftp://ftp.astron.com/pub/file/file-$version.tar.gz.sig"
          'dummy.patch')
 options=('!binaries' '!shared' '!static' 'man' 'mirror' 'missing' '!rpath'
          '!pycompile' 'debug')
