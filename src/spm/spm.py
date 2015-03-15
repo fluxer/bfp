@@ -19,7 +19,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.6.1 (1c47b0a)"
+app_version = "1.6.1 (87bfc22)"
 
 try:
     import libmessage
@@ -325,7 +325,7 @@ try:
     parser.add_argument('--demote', type=str, \
         action=OverrideDemote, help=_('Set user to demote to'))
     parser.add_argument('--sign', type=str, action=OverrideSign, \
-        help=_('Set whether to sign files when feasable'))
+        help=_('Set whether to sign files'))
     parser.add_argument('--offline', type=ast.literal_eval, \
         action=OverrideOffline, choices=[True, False], \
         help=_('Set whether to use offline mode'))

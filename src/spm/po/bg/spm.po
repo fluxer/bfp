@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-15 20:20+0000\n"
-"PO-Revision-Date: 2015-03-12 21:11+0000\n"
+"POT-Creation-Date: 2015-03-15 20:39+0000\n"
+"PO-Revision-Date: 2015-03-15 20:39+0000\n"
 "Last-Translator: \n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -374,7 +374,7 @@ msgstr "Компресиране на архив"
 
 #: libspm.py:1034
 msgid "Signing tarball"
-msgstr ""
+msgstr "Подписване на архив"
 
 #: libspm.py:1045
 msgid "Checking for conflicts"
@@ -754,8 +754,8 @@ msgid "Set user to demote to"
 msgstr ""
 
 #: spm.py:328
-msgid "Set whether to sign files when feasable"
-msgstr ""
+msgid "Set whether to sign files"
+msgstr "Зада дали да се подписват фаилове"
 
 #: spm.py:331
 msgid "Set whether to use offline mode"
@@ -949,7 +949,7 @@ msgstr "ИГНОРИРАЙ"
 
 #: spm.py:442
 msgid "SIGN"
-msgstr ""
+msgstr "ПОДПИС"
 
 #: spm.py:443 spm.py:482
 msgid "OFFLINE"
@@ -1086,7 +1086,7 @@ msgstr "Ненужна мишена"
 
 #: tools.py:229 tools.py:625
 msgid "Signing"
-msgstr ""
+msgstr "Подписване на"
 
 #: tools.py:233
 msgid "Purging sources"
@@ -1511,3 +1511,4 @@ msgstr "АДРЕСС"
 #: tools.py:1022
 msgid "CROSS"
 msgstr ""
+
