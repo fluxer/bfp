@@ -111,21 +111,21 @@ class Message(object):
     def sub_info(self, msg, marker=None):
         ''' Print sub-message with information status '''
         if not marker is None:
-            print('%s  => %s%s: %s%s%s' % (self.cmarker, self.cnormal, msg, \
+            print('%s  -> %s%s: %s%s%s' % (self.cmarker, self.cnormal, msg, \
                 self.cinfo, marker, self.cnormal))
             self.log_message('info', '%s: %s' % (msg, marker))
         else:
-            print('%s  => %s%s' % (self.cmarker, self.cnormal, msg))
+            print('%s  -> %s%s' % (self.cmarker, self.cnormal, msg))
             self.log_message('info', msg)
 
     def sub_warning(self, msg, marker=None):
         ''' Print sub-message with warning status '''
         if not marker is None:
-            sys.stderr.write('%s  => %s%s: %s%s%s\n' % (self.cwarning, \
+            sys.stderr.write('%s  -> %s%s: %s%s%s\n' % (self.cwarning, \
                 self.cnormal, msg, self.cwarning, marker, self.cnormal))
             self.log_message('warning', '%s: %s' % (msg, marker))
         else:
-            sys.stderr.write('%s  => %s%s\n' % (self.cwarning, \
+            sys.stderr.write('%s  -> %s%s\n' % (self.cwarning, \
                 self.cnormal, msg))
             self.log_message('warning', msg)
 
@@ -148,9 +148,9 @@ class Message(object):
         ''' Print sub-message with debug status '''
         if self.DEBUG:
             if not marker is None:
-                print('%s  => %s%s: %s%s%s' % (self.cdebug, self.cnormal, \
+                print('%s  -> %s%s: %s%s%s' % (self.cdebug, self.cnormal, \
                     msg, self.cdebug, marker, self.cnormal))
                 self.log_message('debug', '%s: %s' % (msg, marker))
             else:
-                print('%s  => %s%s' % (self.cdebug, self.cnormal, msg))
+                print('%s  -> %s%s' % (self.cdebug, self.cnormal, msg))
                 self.log_message('debug', msg)
