@@ -414,7 +414,10 @@ class Misc(object):
             rsize = rfile.headers.get('Content-Length', '0')
             rfile.close()
             lsize = os.path.getsize(destination)
+            last = '%s.last' % destination
             if not int(lsize) == int(rsize):
+                return False
+            elif os.path.isfile(last) and not self.file_read(last) == rsize:
                 return False
             return True
         else:
@@ -435,9 +438,10 @@ class Misc(object):
         rsize = rfile.headers.get('Content-Length', '0')
         if os.path.exists(destination):
             lsize = str(os.path.getsize(destination))
+            last = '%s.last' % destination
             if lsize == rsize:
                 return rfile.close()
-            elif lsize > rsize:
+            elif lsize > rsize or (os.path.isfile(last) and not self.file_read(last) == rsize):
                 lsize = '0'
                 os.unlink(destination)
             if rfile.headers.get('Accept-Ranges') == 'bytes':
@@ -490,6 +494,7 @@ class Misc(object):
             snewurl = surl
         try:
             self.fetch_plain(snewurl, destination, 0)
+            self.file_write('%s.last' % destination, str(os.path.getsize(destination)))
         except URLError as detail:
             if not iretry == 0:
                 return self.fetch(surl, destination, lmirrors, ssuffix, iretry-1)
