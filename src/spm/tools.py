@@ -32,7 +32,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.6.1 (ba895f9)"
+app_version = "1.6.1 (9b07fc5)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -221,10 +221,13 @@ class Dist(object):
                             message.sub_warning(_('Internet connection is down'))
                         else:
                             message.sub_debug(_('Fetching'), src_url)
-                            misc.fetch(src_url, src_file, libspm.MIRRORS, 'distfiles/', libspm.VERIFY)
+                            misc.fetch(src_url, src_file, libspm.MIRRORS, 'distfiles/')
 
             message.sub_info(_('Compressing'), target_distfile)
             misc.archive_compress((target_directory,), target_distfile, target_directory)
+            if libspm.SIGN:
+                message.sub_info(_('Signing'), target_distfile)
+                misc.file_sign(target_distfile, libspm.SIGN)
 
             if self.do_clean:
                 message.sub_info(_('Purging sources'))
@@ -618,6 +621,9 @@ class Pack(object):
 
                 message.sub_info(_('Compressing'), target_packfile)
                 misc.archive_compress(content, target_packfile, '/')
+                if libspm.SIGN:
+                    message.sub_info(_('Signing'), target_packfile)
+                    misc.file_sign(target_packfile, libspm.SIGN)
 
 
 class Pkg(object):
@@ -1024,7 +1030,11 @@ except subprocess.CalledProcessError as detail:
     message.critical('SUBPROCESS', detail)
     sys.exit(4)
 except HTTPError as detail:
-    message.critical('URLLIB', detail)
+    if hasattr(detail, 'url'):
+        # misc.fetch() provides additional information
+        message.critical('URLLIB', '%s %s (%s)' % (detail.url, detail.reason, detail.code))
+    else:
+        message.critical('URLLIB', detail)
     sys.exit(5)
 except tarfile.TarError as detail:
     message.critical('TARFILE', detail)

@@ -67,6 +67,14 @@ to override the install options specified in the SPM configuration file.
 Note that preceding an option with exclamation mark (!) has the opposite
 affect. Valid options are:
 
+=head3 verify
+
+Fetch and verify PGP signatures
+
+=head3 mirror
+
+Use mirrors.
+
 =head3 binaries
 
 Strip binary files.
@@ -82,10 +90,6 @@ Strip static library files.
 =head3 man
 
 Compress manual page files.
-
-=head3 mirror
-
-Use mirrors.
 
 =head3 missing
 

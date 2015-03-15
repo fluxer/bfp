@@ -34,6 +34,7 @@ DEFAULTS = {
     'LOCAL_DIR': '/var/local/spm',
     'IGNORE': '',
     'DEMOTE': '',
+    'SIGN': '',
     'OFFLINE': 'False',
     'MIRROR': 'False',
     'TIMEOUT': '30',
@@ -75,6 +76,7 @@ ROOT_DIR = conf.get('spm', 'ROOT_DIR')
 LOCAL_DIR = ROOT_DIR + 'var/local/spm'
 IGNORE = conf.get('spm', 'IGNORE').split(' ')
 DEMOTE = conf.get('spm', 'DEMOTE')
+SIGN = conf.get('spm', 'SIGN')
 OFFLINE = conf.getboolean('prepare', 'OFFLINE')
 MIRROR = conf.getboolean('prepare', 'MIRROR')
 TIMEOUT = conf.getint('prepare', 'TIMEOUT')
@@ -452,6 +454,7 @@ class Source(object):
         self.do_reverse = do_reverse
         self.do_update = do_update
         self.autoremove = autoremove
+        self.verify = VERIFY
         self.mirror = MIRROR
         self.split_debug = SPLIT_DEBUG
         self.strip_binaries = STRIP_BINARIES
@@ -787,9 +790,9 @@ class Source(object):
                 else:
                     message.sub_debug(_('Fetching'), src_url)
                     if self.mirror:
-                        misc.fetch(src_url, local_file, MIRRORS, 'distfiles/', VERIFY)
+                        misc.fetch(src_url, local_file, MIRRORS, 'distfiles/')
                     else:
-                        misc.fetch(src_url, local_file, bverify=VERIFY)
+                        misc.fetch(src_url, local_file)
 
             if os.path.islink(link_file):
                 message.sub_debug(_('Already linked'), src_file)
@@ -810,6 +813,11 @@ class Source(object):
                         break
                 if not decompressed:
                     message.sub_debug(_('Already extracted'), link_file)
+
+            if src_url.endswith(('.asc', '.sig')):
+                if self.verify:
+                    message.sub_debug(_('Verifying'), src_url)
+                    misc.file_verify(link_file)
 
     def compile(self):
         ''' Compile target sources '''
@@ -1022,6 +1030,9 @@ class Source(object):
         misc.dir_create(os.path.dirname(self.target_tarball))
         misc.archive_compress((self.install_dir,), self.target_tarball, \
             self.install_dir)
+        if SIGN:
+            message.sub_info(_('Signing tarball'))
+            misc.file_sign(self.target_tarball, SIGN)
 
     def merge(self):
         ''' Merget target to system '''
@@ -1262,6 +1273,13 @@ class Source(object):
                 continue
 
             for option in self.target_options:
+                if option == 'verify' and not self.verify:
+                    message.sub_warning(_('Overriding VERIFY to'), _('True'))
+                    self.verify = True
+                elif option == '!verify' and self.verify:
+                    message.sub_warning(_('Overriding VERIFY to'), _('False'))
+                    self.verify = False
+
                 if option == 'mirror' and not self.mirror:
                     message.sub_warning(_('Overriding MIRROR to'), _('True'))
                     self.mirror = True
@@ -1396,6 +1414,7 @@ class Source(object):
                 self.remove()
 
             # reset values so that overrides apply only to single target
+            self.verify = VERIFY
             self.mirror = MIRROR
             self.split_debug = SPLIT_DEBUG
             self.strip_binaries = STRIP_BINARIES
@@ -1466,7 +1485,7 @@ class Binary(Source):
                 surl = '%s/tarballs/%s/%s' % (mirror, os.uname()[4], src_base)
                 if misc.ping(surl):
                     message.sub_debug(_('Fetching'), surl)
-                    misc.fetch(surl, local_file, MIRRORS, 'tarballs/%s/' % os.uname()[4], VERIFY)
+                    misc.fetch(surl, local_file, MIRRORS, 'tarballs/%s/' % os.uname()[4])
 
         if not internet and not found:
             message.sub_critical(_('Binary tarball not available available for'), self.target_name)

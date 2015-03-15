@@ -46,9 +46,16 @@ Default: filesystem
 
 Set as which user some operations should be performed as when that is possible.
 It does not affect all of the actions and is experimental for now. Also, do
-note that it works only on sub-processes.
+note that it works only on sub-processes. Empty value meens do not drop
+priviledges at all.
 
 Default:
+
+=head2 SIGN
+
+Set a key ID to be used for signing files such as tarballs. If empty files are not signed.
+
+Default: 
 
 =head2 OFFLINE
 
@@ -76,10 +83,10 @@ Default: 30
 
 =head2 VERIFY
 
-Set wheather to verify checksums and signatures of sources files, if present.
-The fetcher tries to automatically fetch those and after that compare results.
+Set wheather to verify PGP signatures of downloads. Not every host provides
+signatures for their content but it's becoming manditory.
 
-Default: False
+Default: True
 
 =head2 CHOST
 

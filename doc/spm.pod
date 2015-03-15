@@ -5,8 +5,9 @@ spm - Source Package Manager
 =head1 SYNOPSIS
 
 	spm [-h] [--cache CACHE] [--build BUILD] [--root ROOT]
-           [--ignore IGNORE] [--demote DEMOTE] [--offline {True,False}]
-           [--mirror {True,False}] [--timeout TIMEOUT] [--chost CHOST]
+           [--ignore IGNORE] [--demote DEMOTE] [--sign {True,False}]
+           [--offline {True,False}] [--mirror {True,False}]
+           [--timeout TIMEOUT] [--verify {True,False}] [--chost CHOST]
            [--cflags CFLAGS] [--cxxflags CXXFLAGS] [--cppflags CPPFLAGS]
            [--ldflags LDFLAGS] [--makeflags MAKEFLAGS] [--man {True,False}]
            [--split {True,False}] [--binaries {True,False}]
@@ -146,11 +147,14 @@ optional arguments:
   --root ROOT           Change system root directory
   --ignore IGNORE       Change ignored targets
   --demote DEMOTE       Set user to demote to
+  --sign {True,False}   Set whether to sign files when feasable
   --offline {True,False}
                         Set whether to use offline mode
   --mirror {True,False}
                         Set whether to use mirrors
   --timeout TIMEOUT     Set the connection timeout
+  --verify {True,False}
+                        Set whether to verify downloads
   --chost CHOST         Change CHOST
   --cflags CFLAGS       Change CFLAGS
   --cxxflags CXXFLAGS   Change CXXFLAGS

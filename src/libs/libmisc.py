@@ -1,7 +1,7 @@
 #!/bin/python2
 
 import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, pwd, inspect
-import types, gzip, time, ctypes, hashlib
+import types, gzip, time, ctypes, getpass
 from struct import unpack
 from fcntl import ioctl
 from termios import FIONREAD
@@ -26,6 +26,7 @@ class Misc(object):
         self.TIMEOUT = 30
         self.ROOT_DIR = '/'
         self.CATCH = False
+        self.SIGNPASS = None
         self.magic = Magic()
 
     def typecheck(self, a, b):
@@ -263,6 +264,29 @@ class Misc(object):
 
         self.file_write(sfile, re.sub(string, string2, self.file_read(sfile)))
 
+    def file_sign(self, sfile, skey=None):
+        cmd = [self.whereis('gpg2')]
+        if skey:
+            cmd.extend(('--default-key', skey))
+        cmd.extend(('--yes', '--no-tty', '--passphrase-fd', '0'))
+        cmd.extend(('--detach-sig', '--sign', '--batch', sfile))
+        # FIXME: this will lock any GUI frontend but root has no access to X
+        # usually which makes pinentry usesless in this case
+        if not self.SIGNPASS:
+            self.SIGNPASS = getpass.getpass('Passphrase: ')
+        self.system_input(cmd, self.SIGNPASS)
+
+    def file_verify(self, sfile, ssignature=None):
+        gpg = self.whereis('gpg2')
+        # in case the signature is passed instead of the file to verify
+        if sfile.endswith('.sig'):
+            sfile = sfile.replace('.sig', '')
+        elif sfile.endswith('.asc'):
+            sfile = sfile.replace('.asc', '')
+        if not ssignature:
+            ssignature = '%s.sig' % sfile
+        self.system_command((gpg, '--verify', '--batch', ssignature, sfile))
+
     def dir_create(self, sdir, demote=''):
         ''' Create directory if it does not exist, including leading paths '''
         self.typecheck(sdir, (types.StringTypes))
@@ -376,54 +400,6 @@ class Misc(object):
         else:
             return urlopen(request, timeout=self.TIMEOUT)
 
-    def fetch_verify(self, surl, destination):
-        ''' Fetch checksum for URL if present '''
-        self.typecheck(surl, (types.StringTypes))
-        self.typecheck(destination, (types.StringTypes))
-
-        # FIXME: do in single connection
-        dirname = os.path.dirname(destination)
-        self.dir_create(dirname)
-        for h in reversed(hashlib.algorithms):
-            hashurl = '%s.%s' % (surl, h)
-            hashurl2 = '%s.%ssum' % (surl, h)
-            hashout = '%s/%s.%s' % (dirname, self.url_normalize(surl, True), h)
-            if self.ping(hashurl):
-                self.file_delete(hashout)
-                self.fetch_plain(hashurl, hashout)
-            elif self.ping(hashurl2):
-                self.file_delete(hashout)
-                self.fetch_plain(hashurl2, hashout)
-        sigurl = '%s.sig' % surl
-        sigurl2 = '%s.asc' % surl
-        sigout = '%s/%s.sig' % (dirname, self.url_normalize(surl, True))
-        if self.ping(sigurl):
-            self.file_delete(sigout)
-            self.fetch_plain(sigurl, sigout)
-        elif self.ping(sigurl2):
-            self.file_delete(sigout)
-            self.fetch_plain(sigurl2, sigout)
-
-        for h in reversed(hashlib.algorithms):
-            hashout = '%s/%s.%s' % (dirname, self.url_normalize(surl, True), h)
-            if os.path.isfile(hashout):
-                remote_hash = None
-                for line in self.file_readlines(hashout):
-                    if os.path.basename(destination) in line.split():
-                        remote_hash = line.split()[0]
-                if remote_hash:
-                    local_hash = getattr(hashlib, h)(self.file_read(destination)).hexdigest()
-                    if not local_hash == remote_hash:
-                        raise Exception('Hash mismatch', surl)
-                else:
-                    raise Exception('Bogus checksum', hashout)
-
-        if os.path.isfile(sigout):
-            gpg = self.whereis('gpg', False)
-            if not gpg:
-                gpg = self.whereis('gpg2')
-            self.system_command((gpg, '--verify', '--batch', sigout, destination))
-
     def fetch_check(self, surl, destination):
         ''' Check if remote has to be downloaded '''
         self.typecheck(surl, (types.StringTypes))
@@ -454,20 +430,21 @@ class Misc(object):
             return
 
         rfile = self.fetch_request(surl)
-        self.dir_create(os.path.dirname(destination))
-
         # not all requests have content-lenght:
         # http://en.wikipedia.org/wiki/Chunked_transfer_encoding
         rsize = rfile.headers.get('Content-Length', '0')
         if os.path.exists(destination):
             lsize = str(os.path.getsize(destination))
-            if lsize > rsize:
+            if lsize == rsize:
+                return rfile.close()
+            elif lsize > rsize:
                 lsize = '0'
                 os.unlink(destination)
             if rfile.headers.get('Accept-Ranges') == 'bytes':
                 # setup new request with custom header
                 rfile.close()
                 rfile = self.fetch_request(surl, {'Range': 'bytes=%s-' % lsize})
+        self.dir_create(os.path.dirname(destination))
         lfile = open(destination, 'ab')
         try:
             # since the local file size changes use persistent units based on
@@ -489,27 +466,20 @@ class Misc(object):
             if not iretry == 0:
                 self.fetch(surl, destination, iretry-1)
             else:
-                raise
+                detail.url = surl
+                raise detail
         finally:
             sys.stdout.write('\n')
             lfile.close()
             rfile.close()
 
-    def fetch(self, surl, destination, lmirrors=None, ssuffix='', bverify=False, iretry=3):
+    def fetch(self, surl, destination, lmirrors=None, ssuffix='', iretry=3):
         ''' Download file from mirror if possible, iretry is passed internally! '''
         self.typecheck(surl, (types.StringTypes))
         self.typecheck(destination, (types.StringTypes))
         self.typecheck(lmirrors, (types.NoneType, types.ListType))
         self.typecheck(ssuffix, (types.StringTypes))
-        self.typecheck(bverify, (types.BooleanType))
         self.typecheck(iretry, (types.IntType))
-
-        # NOTE: if not checked, the file gets corrupted on attempt to download
-        # it again otherwise
-        if self.fetch_check(surl, destination):
-            if bverify:
-                self.fetch_verify(surl, destination)
-            return
 
         if lmirrors:
             sbase = self.url_normalize(surl, True)
@@ -520,11 +490,9 @@ class Misc(object):
             snewurl = surl
         try:
             self.fetch_plain(snewurl, destination, 0)
-            if bverify:
-                self.fetch_verify(snewurl, destination)
         except URLError as detail:
             if not iretry == 0:
-                return self.fetch(surl, destination, lmirrors, ssuffix, bverify, iretry-1)
+                return self.fetch(surl, destination, lmirrors, ssuffix, iretry-1)
             raise
 
     def archive_supported(self, sfile):
@@ -548,7 +516,8 @@ class Misc(object):
         self.typecheck(sfile, (types.StringTypes))
         self.typecheck(strip, (types.StringTypes))
 
-        self.dir_create(os.path.dirname(sfile))
+        dirname = os.path.dirname(sfile)
+        self.dir_create(dirname)
 
         if sfile.endswith(('.bz2', '.tar.gz')):
             tarf = tarfile.open(sfile, 'w:' + self.file_extension(sfile))
@@ -701,17 +670,19 @@ class Misc(object):
         output = pipe.communicate()[0].strip()
         return self.string_encode(output)
 
-    def system_input(self, command, input, shell=False, demote=''):
+    def system_input(self, command, sinput, shell=False, demote=''):
         ''' Send input to external utility '''
         self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
-        self.typecheck(input, (types.StringTypes))
+        self.typecheck(sinput, (types.StringTypes))
         self.typecheck(shell, (types.BooleanType))
         self.typecheck(demote, (types.StringTypes))
 
+        if isinstance(command, str) and not shell:
+            command = shlex.split(command)
         pipe = subprocess.Popen(command, stdin=subprocess.PIPE, \
             stdout=subprocess.PIPE, stderr=subprocess.PIPE, \
             env={'LC_ALL': 'C'}, shell=shell, preexec_fn=self.system_demote(demote))
-        out, err = pipe.communicate(input=input)
+        out, err = pipe.communicate(input=sinput)
         if pipe.returncode != 0:
             raise(Exception('%s %s' % (out, err)))
 
@@ -750,7 +721,7 @@ class Misc(object):
             return subprocess.check_call(command, shell=shell, cwd=cwd, \
                 preexec_fn=self.system_demote(demote))
 
-    def system_chroot(self, command, shell=False, input=None):
+    def system_chroot(self, command, shell=False, sinput=None):
         ''' Execute command in chroot environment '''
         self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
         self.typecheck(shell, (types.BooleanType))
@@ -770,8 +741,8 @@ class Misc(object):
                     self.system_command((mount, '--rbind', s, sdir))
             os.chroot(self.ROOT_DIR)
             os.chdir('/')
-            if input:
-                self.system_input(command, shell=shell, input=input)
+            if sinput:
+                self.system_input(command, shell=shell, sinput=sinput)
             else:
                 self.system_command(command, shell=shell)
         finally:

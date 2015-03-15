@@ -19,7 +19,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.6.1 (ba895f9)"
+app_version = "1.6.1 (9b07fc5)"
 
 try:
     import libmessage
@@ -62,6 +62,12 @@ try:
             libspm.DEMOTE = values
             setattr(namespace, self.dest, values)
 
+    class OverrideSign(argparse.Action):
+        ''' Override verification of downloads and signing of tarballs '''
+        def __call__(self, parser, namespace, values, option_string=None):
+            libspm.SIGN = values
+            setattr(namespace, self.dest, values)
+
     class OverrideOffline(argparse.Action):
         ''' Override offline mode '''
         def __call__(self, parser, namespace, values, option_string=None):
@@ -81,7 +87,7 @@ try:
             setattr(namespace, self.dest, values)
 
     class OverrideVerify(argparse.Action):
-        ''' Override verification of downloads '''
+        ''' Override verification of downloads and signing of tarballs '''
         def __call__(self, parser, namespace, values, option_string=None):
             libspm.VERIFY = values
             setattr(namespace, self.dest, values)
@@ -318,6 +324,8 @@ try:
         help=_('Change ignored targets'))
     parser.add_argument('--demote', type=str, \
         action=OverrideDemote, help=_('Set user to demote to'))
+    parser.add_argument('--sign', type=str, action=OverrideSign, \
+        help=_('Set whether to sign files when feasable'))
     parser.add_argument('--offline', type=ast.literal_eval, \
         action=OverrideOffline, choices=[True, False], \
         help=_('Set whether to use offline mode'))
@@ -328,7 +336,7 @@ try:
         help=_('Set the connection timeout'))
     parser.add_argument('--verify', type=ast.literal_eval, \
         action=OverrideVerify, choices=[True, False], \
-        help=_('Set whether to verify downloaded files'))
+        help=_('Set whether to verify downloads'))
     parser.add_argument('--chost', type=str, action=OverrideChost, \
         help=_('Change CHOST'))
     parser.add_argument('--cflags', type=str, action=OverrideCflags, \
@@ -430,6 +438,8 @@ try:
         message.sub_info(_('BUILD_DIR'), libspm.BUILD_DIR)
         message.sub_info(_('ROOT_DIR'), libspm.ROOT_DIR)
         message.sub_info(_('IGNORE'), libspm.IGNORE)
+        message.sub_info(_('DEMOTE'), libspm.DEMOTE)
+        message.sub_info(_('SIGN'), libspm.SIGN)
         message.sub_info(_('OFFLINE'), libspm.OFFLINE)
         message.sub_info(_('MIRROR'), libspm.MIRROR)
         message.sub_info(_('TIMEOUT'), libspm.TIMEOUT)
@@ -450,7 +460,6 @@ try:
         message.sub_info(_('CONFLICTS'), libspm.CONFLICTS)
         message.sub_info(_('BACKUP'), libspm.BACKUP)
         message.sub_info(_('SCRIPTS'), libspm.SCRIPTS)
-        message.sub_info(_('DEMOTE'), libspm.DEMOTE)
         message.sub_info(_('TARGETS'), ARGS.TARGETS)
         message.info(_('Poking sources...'))
         if ARGS.automake:
@@ -469,10 +478,10 @@ try:
         message.sub_info(_('CACHE_DIR'), libspm.CACHE_DIR)
         message.sub_info(_('ROOT_DIR'), libspm.ROOT_DIR)
         message.sub_info(_('IGNORE'), libspm.IGNORE)
+        message.sub_info(_('SECURE'), libspm.SECURE)
         message.sub_info(_('OFFLINE'), libspm.OFFLINE)
         message.sub_info(_('MIRROR'), libspm.MIRROR)
         message.sub_info(_('TIMEOUT'), libspm.TIMEOUT)
-        message.sub_info(_('VERIFY'), libspm.VERIFY)
         message.sub_info(_('CONFLICTS'), libspm.CONFLICTS)
         message.sub_info(_('BACKUP'), libspm.BACKUP)
         message.sub_info(_('SCRIPTS'), libspm.SCRIPTS)
@@ -515,7 +524,11 @@ except subprocess.CalledProcessError as detail:
     message.critical('SUBPROCESS', detail)
     sys.exit(4)
 except HTTPError as detail:
-    message.critical('URLLIB', detail)
+    if hasattr(detail, 'url'):
+        # misc.fetch() provides additional information
+        message.critical('URLLIB', '%s %s (%s)' % (detail.url, detail.reason, detail.code))
+    else:
+        message.critical('URLLIB', detail)
     sys.exit(5)
 except tarfile.TarError as detail:
     message.critical('TARFILE', detail)
@@ -543,5 +556,5 @@ except SystemExit:
 except Exception as detail:
     message.critical('Unexpected error', detail)
     sys.exit(1)
-#finally:
-#    raise
+finally:
+    raise
