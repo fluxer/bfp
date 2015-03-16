@@ -1425,6 +1425,12 @@ class Source(object):
             self.compress_man = COMPRESS_MAN
             self.ignore_missing = IGNORE_MISSING
 
+wantscookie='''
+                 #   ___               _          |
+      -*~*-      #  <_*_>            _|_|_        |.===.       `  _ ,  '       ()_()
+      (o o)      #  (o o)            (o o)        {}o o{}     -  (o)o)  -      (o o)
+--ooO--(_)--Ooo--8---(_)--Ooo----ooO--(_)--Ooo-ooO--(_)--Ooo--ooO'(_)--Ooo-ooO--`o'--Ooo--
+'''
 
 class Binary(Source):
     ''' Class to handle binary tarballs '''

@@ -19,7 +19,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.6.1 (c983094)"
+app_version = "1.6.1 (da59787)"
 
 try:
     import libmessage
@@ -510,6 +510,9 @@ try:
         m.main()
 
     elif ARGS.mode == 'who':
+        if 'wantscookie' in sys.argv:
+            print(libspm.wantscookie)
+            sys.exit(2)
         if not ARGS.plain:
             message.info(_('Runtime information'))
             message.sub_info(_('PATTERN'), ARGS.PATTERN)
