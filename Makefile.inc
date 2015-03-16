@@ -53,6 +53,6 @@ stat:
 	cloc $(shell $(FIND) -name '*.py' -o -name '*.sh')
 
 lint:
-	$(PYLINT) $(shell $(FIND) -name '*.py') | $(GREP) -v -e 'Line too long'
+	$(PYLINT) $(shell $(FIND) -name '*.py')
 
 .PHONY: all stat lint

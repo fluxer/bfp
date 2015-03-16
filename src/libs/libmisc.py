@@ -1,5 +1,19 @@
 #!/bin/python2
 
+'''
+A module to handle various tasks fuzz free.
+
+The Misc() class module packs a lot - files, directories, urls, archives and
+even processes handling.
+
+Magic() is specifiec to file types (MIMEs) recognition via libmagic (part of
+file). It is a thin wrapper around it.
+
+Inotify() is another wrapper but around inotify system calls. It can be used
+to monitor for file/directory changes on filesystems.
+
+'''
+
 import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, pwd, inspect
 import types, gzip, time, ctypes, getpass
 from struct import unpack
@@ -228,6 +242,7 @@ class Misc(object):
         self.file_write(sfile, re.sub(string, string2, self.file_read(sfile)))
 
     def file_sign(self, sfile, skey=None):
+        ''' Sign a file with PGP signature via GnuPG '''
         cmd = [self.whereis('gpg2')]
         if skey:
             cmd.extend(('--default-key', skey))
@@ -240,6 +255,7 @@ class Misc(object):
         self.system_input(cmd, self.SIGNPASS)
 
     def file_verify(self, sfile, ssignature=None):
+        ''' Verify file PGP signature via GnuPG '''
         gpg = self.whereis('gpg2')
         # in case the signature is passed instead of the file to verify
         if sfile.endswith('.sig'):
@@ -503,7 +519,7 @@ class Misc(object):
         except URLError as detail:
             if not iretry == 0:
                 return self.fetch(surl, destination, lmirrors, ssuffix, iretry-1)
-            raise
+            raise detail
 
     def archive_supported(self, sfile):
         ''' Test if file is archive that can be handled properly '''
@@ -831,7 +847,7 @@ class Inotify(object):
         ''' Get last error as string '''
         return os.strerror(ctypes.get_errno())
 
-    def read(self):
+    def event_read(self):
         ''' Read event from the inotify file descriptor '''
         size_int = ctypes.c_int()
         while ioctl(self.fd, FIONREAD, size_int) == -1:
@@ -850,30 +866,30 @@ class Inotify(object):
             deb = fin
             yield wd, mask, cookie, name
 
-    def add_watch(self, path, mask=None, recursive=True):
-        ''' Add path to watch '''
+    def watch_add(self, path, mask=None, recursive=True):
+        ''' Add path to watcher '''
         if not mask:
             mask = self.MODIFY | self.DELETE | self.CREATE
         if recursive and os.path.isdir(path):
             for d in os.listdir(path):
-                self.add_watch(os.path.join(path, d), mask)
+                self.watch_add(os.path.join(path, d), mask)
         wd = self.libc.inotify_add_watch(self.fd, path, mask)
         if wd == -1:
             raise Exception('inotify add error', self.error())
 
         return wd
 
-    def rm_watch(self, wd):
-        ''' Remove path from watch '''
+    def watch_remove(self, wd):
+        ''' Remove path from watcher '''
         ret = self.libc.inotify_rm_watch(self.fd, wd)
         if ret == -1:
             raise Exception('inotify rm error', self.error())
 
-    def watch(self, path, callback, mask=None, recursive=True):
+    def watch_loop(self, path, callback, mask=None, recursive=True):
         ''' Start watching for events '''
-        self.add_watch(path, mask, recursive)
+        self.watch_add(path, mask, recursive)
         while True:
-            for wd, mask, cookie, name in self.read():
+            for wd, mask, cookie, name in self.event_read():
                 callback((wd, mask, cookie, name))
             time.sleep(1)
 

@@ -1,11 +1,20 @@
 #!/bin/python2
 
-import sys, curses, syslog
+'''
+A messaging module with fancy printing, logging and piped process handling.
 
+Unbuffered() is not something you should deal with, it will be used to override
+standard output forcing it to flush if stdout is not a TTY. Same goes for
+colors - if stdout is not TTY then they will be automatically disabled. And
+the cherry here is the logging, it logs everything passed to the messager
+unless told otherwise.
+'''
+
+import sys, curses, syslog
 
 # http://stackoverflow.com/questions/107705/python-output-buffering
 class Unbuffered(object):
-    ''' Override output behaviour '''
+    ''' Override output behaviour to suitable for piped process '''
     def __init__(self, stream):
         self.stream = stream
 

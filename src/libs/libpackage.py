@@ -1,5 +1,18 @@
 #!/bin/python2
 
+'''
+A module for package management with plain-text format database
+
+Database() is a class the core of Source Package Manager, it provides various
+methods to get information about packages installed and otherwise. The methods
+prefixed with "local" deal with metadata of software instaleld on the system,
+"remote" methods provide easy access to software available from repositories
+with build recipes in the SRCBUILD format.
+
+SRCBUILD() is Source Package Manager recipes (SRCBUILDs) parser.
+
+'''
+
 import os, sys, re, shlex, types
 from distutils.version import LooseVersion
 
@@ -42,8 +55,8 @@ class Database(object):
 
     def _notifiers_setup(self):
         ''' Setup inotify watcher for database changes '''
-        notify.add_watch(os.path.join(self.CACHE_DIR, 'repositories'))
-        notify.add_watch(self.LOCAL_DIR)
+        notify.watch_add(os.path.join(self.CACHE_DIR, 'repositories'))
+        notify.watch_add(self.LOCAL_DIR)
 
     def _build_local_cache(self, event=None):
         ''' Build internal local database cache '''
@@ -97,7 +110,7 @@ class Database(object):
 
         # rebuild cache on demand
         recache = False
-        for wd, mask, cookie, name in notify.read():
+        for wd, mask, cookie, name in notify.event_read():
             recache = True
         if not self.REMOTE_CACHE or recache:
             self._build_remote_cache()
@@ -115,7 +128,7 @@ class Database(object):
 
         # rebuild cache on demand
         recache = False
-        for wd, mask, cookie, name in notify.read():
+        for wd, mask, cookie, name in notify.event_read():
             recache = True
         if not self.LOCAL_CACHE or recache:
             self._build_local_cache()
