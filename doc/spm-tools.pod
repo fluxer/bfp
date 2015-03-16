@@ -5,7 +5,7 @@ spm-tools - Source Package Manager Tools
 =head1 SYNOPSIS
 
 	spm-tools [-h] [--debug] [--version]
-                 {dist,check,clean,lint,sane,merge,edit,which,pack,pkg,serve,disowned}
+                 {dist,check,clean,lint,sane,merge,edit,which,pack,pkg,serve,disowned,upload}
 
 =head1 DESCRIPTION
 
@@ -56,6 +56,9 @@ System files not tracked by SPM can be checked for via disowned mode. By
 default the scanning process does not perform cross-filesystem operations
 which depending on your setup may not be desired, for an example if you
 have /usr on a separate partition. The operation is usually slow.
+
+Binary tarballs can be uploaded via FTP to mirrors via upload mode. Note that
+it does not handle secure connections yet.
 
 =head1 OPTIONS
 

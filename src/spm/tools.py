@@ -735,10 +735,11 @@ class Upload(object):
             message.sub_critical(_('User is empty'))
             sys.exit(2)
 
-        arch = os.uname()[4]
         ftp = None
         try:
+            arch = os.uname()[4]
             p = getpass.getpass('Password for %s: ' % self.user)
+            # FIXME: optionally use secure channel via FTP_TLS
             ftp = ftplib.FTP(self.host, self.user, p, timeout=libspm.TIMEOUT)
             ftp.cwd('%s/tarballs/%s' % (self.directory, arch))
             for target in self.targets:
@@ -765,6 +766,7 @@ class Upload(object):
         finally:
             if ftp:
                 ftp.quit()
+
 
 try:
     EUID = os.geteuid()
