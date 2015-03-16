@@ -9,23 +9,23 @@ using Source Package Manager. Its syntax is Shell (Bash), similar to those
 used by Pacman's PKGBUILDs and Gentoo's ebuilds. Common things with the
 PKGBUILD format are the version, description, depends, makedepends,
 checkdepends, source, options and backup variables. Common things with the
-ebuild format is presence of pre/post actions in the SRCBUILD itself. This means
-that everything is in one file, unlike the PKGBUILD format.
+ebuild format is presence of pre/post actions in the SRCBUILD itself. This
+means that everything is in one file, unlike the PKGBUILD format.
 
 The metadata defined in the recipes should contain only one function
-(src_install) and two (2) variables (version and description). Optionally
-two (2) more functions can be specified (src_compile and src_check) and
-five (6) more variable (depends, makedepends, checkdepends, source, options and
-backup). Target name is defined by the directory name in which the target files
-are placed in the repository.
+(src_install) and two (2) variables (version and description). Optionally two
+(2) more functions can be specified (src_compile and src_check) and six (6)
+more variable (depends, makedepends, checkdepends, source, options and backup).
+Target name is defined by the directory name in which the target files are
+placed in the repository.
 
 In addition six (6) more functions (pre/post_install, pre/post_upgrade and
 pre/post_remove) can be defined as pre/post actions to be taken when software
 is installed, upgraded or removed. Pre-actions are taken before the actual
 install/upgrade/remove is done with post-actions following up.
 
-For easy of use SOURCE_DIR and INSTALL_DIR are exported and can be used
-inside the SRCBUILD.
+For easy of use SOURCE_DIR and INSTALL_DIR are exported and can be used inside
+the SRCBUILD.
 
 =head1 OPTIONS
 
@@ -62,10 +62,10 @@ Note that all files with .conf extension are automatically backed up.
 
 =head2 options
 
-Variable defining options to be used when building software. It is used
-to override the install options specified in the SPM configuration file.
-Note that preceding an option with exclamation mark (!) has the opposite
-affect. Valid options are:
+Variable defining options to be used when building software. It is used to
+override the install options specified in the SPM configuration file. Note that
+preceding an option with exclamation mark (!) has the opposite affect. Valid
+options are:
 
 =head3 verify
 

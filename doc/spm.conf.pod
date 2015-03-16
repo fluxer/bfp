@@ -174,7 +174,7 @@ Default: True
 =head2 STRIP_RPATH
 
 Set whether to strip insecure RPATH from binaries and libraries. This reduces
-reduces the chance for exploiting them but it may corrupt some of them.
+the chance for exploiting them but it may corrupt some of them.
 
 Default: True
 
@@ -238,4 +238,4 @@ COPYING file bundled with the source code.
 
 =head1 SEE ALSO
 
-spm(8) SRCBUILD(5) gcc(1) ld(1) make(1) objcopy(1) strip(1)
+spm(8) SRCBUILD(5) gpg(1) gcc(1) ld(1) make(1) objcopy(1) strip(1)
