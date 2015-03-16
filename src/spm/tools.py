@@ -33,7 +33,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.6.1 (559b8d1)"
+app_version = "1.6.1 (c983094)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -742,12 +742,20 @@ class Upload(object):
             ftp = ftplib.FTP(self.host, self.user, p, timeout=libspm.TIMEOUT)
             ftp.cwd('%s/tarballs/%s' % (self.directory, arch))
             for target in self.targets:
+                if not database.remote_search(target):
+                    message.sub_critical(_('Invalid target'), target)
+                    sys.exit(2)
                 version = database.remote_metadata(target, 'version')
                 tarball = '%s/tarballs/%s/%s_%s.tar.bz2' % (libspm.CACHE_DIR, arch, target, version)
+                if not os.path.isfile(tarball):
+                    message.sub_critical(_('Binary tarball not available available for'), target)
+                    sys.exit(2)
                 signature = '%s.sig' % tarball
                 files = [tarball]
                 if os.path.isfile(signature):
                     files.append(signature)
+                elif libspm.SIGN:
+                    message.sub_warning('Missing signature for', tarball)
                 for sfile in files:
                     message.sub_info(_('Uploading'), sfile)
                     fupload = open(sfile, 'r')
