@@ -6,7 +6,7 @@ _spm_tools()
     local main_options merge_options clean_options edit_options sane_options
     local lint_options check_options dist_options
 
-    actions='merge clean edit sane lint check dist which pack pkg serve'
+    actions='merge clean edit sane lint check dist which pack pkg serve upload'
 
     main_options='-h --help --debug --version'
 
@@ -37,6 +37,8 @@ _spm_tools()
 
     disowned_options='-h --help -d --directory -c --cross -p --plain'
 
+    upload_options='-h --help -H --host -u --user -d --directory'
+
     _get_comp_words_by_ref cur prev
     _get_first_arg
 
@@ -66,6 +68,8 @@ _spm_tools()
         COMPREPLY=($(compgen -W "${serve_options}" -- "${cur}"))
     elif [[ ${arg} = disowned ]];then
         COMPREPLY=($(compgen -W "${disowned_options}" -- "${cur}"))
+    elif [[ ${arg} = upload ]];then
+        COMPREPLY=($(compgen -W "${upload_options}" -- "${cur}"))
     fi
 }
 

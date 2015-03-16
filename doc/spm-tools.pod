@@ -199,6 +199,18 @@ optional arguments:
   -c, --cross           Scan cross-filesystem
   -p, --plain           Print in plain format
 
+=head2 UPLOAD MODE
+
+positional arguments:
+  TARGETS               Targets to apply actions on
+
+optional arguments:
+  -h, --help            Show this help message and exit
+  -H HOST, --host HOST  Set host
+  -u USER, --user USER  Set user
+  -d DIRECTORY, --directory DIRECTORY
+                        Set upload directory
+
 =head1 EXAMPLES
 
 Create a tarball of all sources, SRCBUILD, patches, etc. of grub and put the
@@ -309,7 +321,12 @@ This error raises when the module responsible for regular expressions
 matching fails badly. If in doubt you should check the Python Re module
 reference at http://docs.python.org/2/library/re.html.
 
-=head2 Interupt signal received (12)
+=head2 FTPLIB (12)
+
+This error raises when the FTP modules responsible for uploading files errors
+out.
+
+=head2 Interupt signal received (13)
 
 This error raises when the user triggers keyboard interrupt via Ctrl+C key
 combination.

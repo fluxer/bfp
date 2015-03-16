@@ -3,8 +3,8 @@
 '''
 A module to handle various tasks fuzz free.
 
-The Misc() class module packs a lot - files, directories, urls, archives and
-even processes handling.
+The Misc() class packs a lot - files, directories, urls, archives and even
+processes handling.
 
 Magic() is specifiec to file types (MIMEs) recognition via libmagic (part of
 file). It is a thin wrapper around it.

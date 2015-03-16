@@ -14,6 +14,7 @@ import re
 import difflib
 import pwd, grp
 import SimpleHTTPServer, SocketServer
+import ftplib, getpass
 if sys.version < '3':
     import ConfigParser as configparser
     from urllib2 import HTTPError
@@ -32,7 +33,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.6.1 (4ba5aa1)"
+app_version = "1.6.1 (559b8d1)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -718,6 +719,45 @@ class Disowned(object):
                     message.sub_info(_('Disowned file'), sfile)
 
 
+class Upload(object):
+    ''' Class to upload source/binary tarballs '''
+    def __init__(self, targets, host=None, user=None, directory='/'):
+        self.targets = targets
+        self.host = host
+        self.user = user
+        self.directory = directory
+
+    def main(self):
+        if not self.host:
+            message.sub_critical(_('Host is empty'))
+            sys.exit(2)
+        elif not self.user:
+            message.sub_critical(_('User is empty'))
+            sys.exit(2)
+
+        arch = os.uname()[4]
+        ftp = None
+        try:
+            p = getpass.getpass('Password for %s: ' % self.user)
+            ftp = ftplib.FTP(self.host, self.user, p, timeout=libspm.TIMEOUT)
+            ftp.cwd('%s/tarballs/%s' % (self.directory, arch))
+            for target in self.targets:
+                version = database.remote_metadata(target, 'version')
+                tarball = '%s/tarballs/%s/%s_%s.tar.bz2' % (libspm.CACHE_DIR, arch, target, version)
+                signature = '%s.sig' % tarball
+                files = [tarball]
+                if os.path.isfile(signature):
+                    files.append(signature)
+                for sfile in files:
+                    message.sub_info(_('Uploading'), sfile)
+                    fupload = open(sfile, 'r')
+                    supload = os.path.basename(sfile)
+                    ftp.storbinary('STOR %s' % supload, fupload)
+                    fupload.close()
+        finally:
+            if ftp:
+                ftp.quit()
+
 try:
     EUID = os.geteuid()
 
@@ -856,6 +896,16 @@ try:
         help=_('Scan cross-filesystem'))
     disowned_parser.add_argument('-p', '--plain', action='store_true', \
         help=_('Print in plain format'))
+
+    upload_parser = subparsers.add_parser('upload')
+    upload_parser.add_argument('-H', '--host', action='store', \
+        type=str, required=True, help=_('Use host'))
+    upload_parser.add_argument('-u', '--user', action='store', \
+        type=str, required=True, help=_('Use user'))
+    upload_parser.add_argument('-d', '--directory', type=str, \
+        default='/', help=_('Use upload directory'))
+    upload_parser.add_argument('TARGETS', nargs='+', type=str, \
+        help=_('Targets to apply actions on'))
 
     parser.add_argument('--debug', nargs=0, action=OverrideDebug, \
         help=_('Enable debug messages'))
@@ -1023,6 +1073,16 @@ try:
         m = Disowned(ARGS.directory, ARGS.cross, ARGS.plain)
         m.main()
 
+    elif ARGS.mode == 'upload':
+        message.info(_('Runtime information'))
+        message.sub_info(_('HOST'), ARGS.host)
+        message.sub_info(_('USER'), ARGS.user)
+        message.sub_info(_('DIRECTORY'), ARGS.directory)
+        message.sub_info(_('TARGETS'), ARGS.TARGETS)
+        message.info(_('Poking server...'))
+        m = Upload(ARGS.TARGETS, ARGS.host, ARGS.user, ARGS.directory)
+        m.main()
+
 except configparser.Error as detail:
     message.critical('CONFIGPARSER', detail)
     sys.exit(3)
@@ -1054,9 +1114,12 @@ except IOError as detail:
 except re.error as detail:
     message.critical('REGEXP', detail)
     sys.exit(11)
+except ftplib.all_errors as detail:
+    message.critical('FTPLIB', detail)
+    sys.exit(12)
 except KeyboardInterrupt:
     message.critical('Interrupt signal received')
-    sys.exit(12)
+    sys.exit(13)
 except SystemExit:
     sys.exit(2)
 except Exception as detail:
