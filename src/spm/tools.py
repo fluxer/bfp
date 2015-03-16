@@ -193,7 +193,7 @@ class Dist(object):
                 for src_url in target_sources:
                     src_base = os.path.basename(src_url)
                     src_file = os.path.join(target_directory, src_base)
-                    internet = misc.ping()
+                    internet = misc.url_ping()
 
                     if src_url.startswith('git://') or src_url.endswith('.git'):
                         if not internet:

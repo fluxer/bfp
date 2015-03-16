@@ -19,6 +19,27 @@ class Database(object):
         self.IGNORE = []
         self._notifiers_setup()
 
+    def local_footprint(self, target):
+        ''' DEPRECATED: Returns files of target, use local_metadata(target, 'footprint') '''
+        misc.typecheck(target, (types.StringTypes))
+
+        return self.local_metadata(target, 'footprint')
+
+    def remote_groups(self, basename=True):
+        ''' DEPRECATED: Returns groups in the repositories '''
+        misc.typecheck(basename, (types.BooleanType))
+
+        groups = []
+        for sdir in misc.list_dirs(os.path.join(self.CACHE_DIR, \
+            'repositories')):
+            if not os.path.isfile(os.path.join(sdir, 'SRCBUILD')) \
+                and not '/.git/' in sdir and not sdir.endswith('.git'):
+                if basename:
+                    groups.append(os.path.basename(sdir))
+                else:
+                    groups.append(sdir)
+        return sorted(groups)
+
     def _notifiers_setup(self):
         ''' Setup inotify watcher for database changes '''
         notify.add_watch(os.path.join(self.CACHE_DIR, 'repositories'))
@@ -221,12 +242,6 @@ class Database(object):
                 checked.append(installed)
         return reverse
 
-    def local_footprint(self, target):
-        ''' DEPRECATED: Returns files of target, use local_metadata(target, 'footprint') '''
-        misc.typecheck(target, (types.StringTypes))
-
-        return self.local_metadata(target, 'footprint')
-
     def local_metadata(self, target, key):
         ''' Returns metadata of local target '''
         misc.typecheck(target, (types.StringTypes))
@@ -288,21 +303,6 @@ class Database(object):
                 return misc.file_readlines(alias + '.alias')
         # return consistent data
         return [target]
-
-    def remote_groups(self, basename=True):
-        ''' DEPRECATED: Returns groups in the repositories '''
-        misc.typecheck(basename, (types.BooleanType))
-
-        groups = []
-        for sdir in misc.list_dirs(os.path.join(self.CACHE_DIR, \
-            'repositories')):
-            if not os.path.isfile(os.path.join(sdir, 'SRCBUILD')) \
-                and not '/.git/' in sdir and not sdir.endswith('.git'):
-                if basename:
-                    groups.append(os.path.basename(sdir))
-                else:
-                    groups.append(sdir)
-        return sorted(groups)
 
 
 class SRCBUILD(object):

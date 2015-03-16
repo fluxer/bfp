@@ -29,6 +29,10 @@ class Misc(object):
         self.SIGNPASS = None
         self.magic = Magic()
 
+    def ping(self, url='http://google.com'):
+        ''' DEPRECATED: Ping URL, use url_ping() instead '''
+        self.url_ping(url)
+
     def typecheck(self, a, b):
         ''' Poor man's variable type checking '''
         # FIXME: implement file, directory, and url type check?
@@ -56,32 +60,6 @@ class Misc(object):
             # raised at higher level, e.g. by subprocess
             raise OSError('Program not found in PATH', program)
         return None
-
-    def ping(self, surl='http://www.google.com', lmirrors=None, ssuffix=''):
-        ''' Ping URL, optionally URL base on mirrors '''
-        self.typecheck(surl, (types.StringTypes))
-        self.typecheck(lmirrors, (types.NoneType, types.ListType))
-        self.typecheck(ssuffix, (types.StringTypes))
-
-        if self.OFFLINE:
-            return
-
-        lurls = []
-        if lmirrors:
-            for mirror in lmirrors:
-                sbase = self.url_normalize(surl, True)
-                snewurl = '%s/%s%s' % (mirror, ssuffix, sbase)
-                lurls.append(snewurl)
-        lurls.append(surl)
-
-        for url in lurls:
-            try:
-                p = urlopen(url, timeout=self.TIMEOUT)
-                p.close()
-                return True
-            except (URLError, BadStatusLine):
-                pass
-        return False
 
     def string_encode(self, string):
         ''' String wrapper to ensure Python3 compat '''
@@ -146,21 +124,6 @@ class Misc(object):
             return re.findall(re.escape(string), self.string_convert(string2))
         else:
             return re.findall(string, self.string_convert(string2))
-
-    def url_normalize(self, surl, basename=False):
-        ''' Normalize URL, optionally get basename '''
-        self.typecheck(surl, (types.StringTypes))
-        self.typecheck(basename, (types.BooleanType))
-
-        # http://www.w3schools.com/tags/ref_urlencode.asp
-        # FIXME: incomplete URL normalization table
-        dspecials = {'%20': ' '}
-        sresult = urlparse(surl).path
-        for schar in dspecials:
-            sresult = sresult.replace(schar, dspecials[schar])
-        if basename:
-            return os.path.basename(sresult)
-        return sresult
 
     def file_name(self, sfile, basename=True):
         ''' Get name of file without the extension '''
@@ -384,6 +347,48 @@ class Misc(object):
                 slist.append(os.path.join(root, sfile))
         return slist
 
+    def url_normalize(self, surl, basename=False):
+        ''' Normalize URL, optionally get basename '''
+        self.typecheck(surl, (types.StringTypes))
+        self.typecheck(basename, (types.BooleanType))
+
+        # http://www.w3schools.com/tags/ref_urlencode.asp
+        # FIXME: incomplete URL normalization table
+        dspecials = {'%20': ' '}
+        sresult = urlparse(surl).path
+        for schar in dspecials:
+            sresult = sresult.replace(schar, dspecials[schar])
+        if basename:
+            return os.path.basename(sresult)
+        return sresult
+
+
+    def url_ping(self, surl='http://www.google.com', lmirrors=None, ssuffix=''):
+        ''' Ping URL, optionally URL base on mirrors '''
+        self.typecheck(surl, (types.StringTypes))
+        self.typecheck(lmirrors, (types.NoneType, types.ListType))
+        self.typecheck(ssuffix, (types.StringTypes))
+
+        if self.OFFLINE:
+            return
+
+        lurls = []
+        if lmirrors:
+            for mirror in lmirrors:
+                sbase = self.url_normalize(surl, True)
+                snewurl = '%s/%s%s' % (mirror, ssuffix, sbase)
+                lurls.append(snewurl)
+        lurls.append(surl)
+
+        for url in lurls:
+            try:
+                p = urlopen(url, timeout=self.TIMEOUT)
+                p.close()
+                return True
+            except (URLError, BadStatusLine):
+                pass
+        return False
+
     def fetch_request(self, surl, data=None):
         ''' Returns urlopen object, it is NOT closed! '''
         self.typecheck(surl, (types.StringTypes))
@@ -516,7 +521,7 @@ class Misc(object):
         return False
 
     def archive_compress(self, lpaths, sfile, strip):
-        ''' Create archive from directory '''
+        ''' Create archive from list of files and/or directories '''
         self.typecheck(lpaths, (types.TupleType, types.ListType))
         self.typecheck(sfile, (types.StringTypes))
         self.typecheck(strip, (types.StringTypes))
@@ -562,8 +567,8 @@ class Misc(object):
 
         # standard tarfile library locks the filesystem and upon interrupt the
         # filesystem stays locked which is bad. on top of that the tarfile
-        # library can not replace files while they are being used thus the
-        # external utilities are used for extracting tar archives.
+        # library can not replace files while they are being used thus external
+        # utilities are used for extracting archives.
         smime = self.file_mime(sfile, True)
         if smime == 'application/x-xz' \
             or smime == 'application/x-lzma' \
@@ -585,6 +590,7 @@ class Misc(object):
         self.typecheck(sfile, (types.StringTypes))
 
         content = []
+        smime = self.file_mime(sfile, True)
         if tarfile.is_tarfile(sfile):
             tfile = tarfile.open(sfile)
             for member in tfile.getmembers():
@@ -595,10 +601,15 @@ class Misc(object):
             zfile = zipfile.ZipFile(sfile)
             content = zfile.namelist()
             zfile.close()
-        elif sfile.endswith(('.xz', '.lzma')):
-            content = self.system_output((self.whereis('tar'), \
-                '-tf', sfile)).split('\n')
-        elif sfile.endswith('.gz'):
+        elif smime == 'application/x-xz' or smime == 'application/x-lzma':
+            bsdtar = self.whereis('bsdtar', fallback=False)
+            if bsdtar:
+                content = self.system_output((bsdtar, '-tf', \
+                    sfile)).split('\n')
+            else:
+                content = self.system_output((self.whereis('tar'), \
+                    '-tf', sfile)).split('\n')
+        elif smime == 'application/x-gzip':
             # FIXME: implement gzip listing
             raise(Exception('Gzip listing not implemented yet'))
         return content

@@ -761,7 +761,7 @@ class Source(object):
             local_file = os.path.join(self.sources_dir, src_base)
             src_file = os.path.join(self.target_dir, src_base)
             link_file = os.path.join(self.source_dir, src_base)
-            internet = misc.ping()
+            internet = misc.url_ping()
 
             if src_url.startswith('git://') or src_url.endswith('.git'):
                 if not internet:
@@ -1474,7 +1474,7 @@ class Binary(Source):
         message.sub_info(_('Preparing tarballs'))
         src_base = self.target_name + '_' + self.target_version + '.tar.bz2'
         local_file = self.target_tarball
-        internet = misc.ping()
+        internet = misc.url_ping()
 
         if not internet:
             message.sub_warning(_('Internet connection is down'))
@@ -1483,7 +1483,7 @@ class Binary(Source):
             found = False
             for mirror in MIRRORS:
                 surl = '%s/tarballs/%s/%s' % (mirror, os.uname()[4], src_base)
-                if misc.ping(surl):
+                if misc.url_ping(surl):
                     message.sub_debug(_('Fetching'), surl)
                     misc.fetch(surl, local_file, MIRRORS, 'tarballs/%s/' % os.uname()[4])
 
