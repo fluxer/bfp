@@ -203,7 +203,7 @@ class Database(object):
 
         if mdepends:
             build_depends.extend(self.remote_metadata(target, 'makedepends'))
-        if cdepends and checkdepends:
+        if cdepends:
             build_depends.extend(self.remote_metadata(target, 'checkdepends'))
 
         for dependency in build_depends:
