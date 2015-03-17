@@ -15,7 +15,7 @@ to monitor for file/directory changes on filesystems.
 '''
 
 import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, pwd, inspect
-import types, gzip, time, ctypes, getpass
+import types, gzip, bz2, time, ctypes, getpass
 from struct import unpack
 from fcntl import ioctl
 from termios import FIONREAD
@@ -536,6 +536,7 @@ class Misc(object):
         if smime == 'application/x-xz' \
             or smime == 'application/x-lzma' \
             or smime == 'application/x-gzip' \
+            or smime == 'application/x-bzip2' \
             or tarfile.is_tarfile(sfile) \
             or zipfile.is_zipfile(sfile):
             return True
@@ -550,7 +551,7 @@ class Misc(object):
         dirname = os.path.dirname(sfile)
         self.dir_create(dirname)
 
-        if sfile.endswith(('.bz2', '.tar.gz')):
+        if sfile.endswith(('tar.bz2', '.tar.gz')):
             tarf = tarfile.open(sfile, 'w:' + self.file_extension(sfile))
             for item in lpaths:
                 tarf.add(item, item.lstrip(strip))
@@ -574,6 +575,12 @@ class Misc(object):
             for f in lpaths:
                 gzipf.writelines(self.file_read(f))
             gzipf.close()
+        elif sfile.endswith('.bz2'):
+            # FIXME: strip
+            bzipf = bz2.BZ2File(sfile, 'wb')
+            for f in lpaths:
+                bzipf.writelines(self.file_read(f))
+            bzipf.close()
 
     def archive_decompress(self, sfile, sdir, demote=''):
         ''' Extract archive to directory '''
@@ -605,6 +612,10 @@ class Misc(object):
             gfile = gzip.GzipFile(sfile, 'rb')
             self.file_write(self.file_name(sfile, False), gfile.read())
             gfile.close()
+        elif smime == 'application/x-bzip2':
+            bfile = bz2.BZ2File(sfile, 'rb')
+            self.file_write(self.file_name(sfile, False), bfile.read())
+            bfile.close()
 
     def archive_list(self, sfile):
         ''' Get list of files in archive '''
@@ -633,6 +644,9 @@ class Misc(object):
         elif smime == 'application/x-gzip':
             # FIXME: implement gzip listing
             raise(Exception('Gzip listing not implemented yet'))
+        elif smime == 'application/x-bzip2':
+            # FIXME: implement bzip2 listing
+            raise(Exception('Bzip2 listing not implemented yet'))
         return content
 
     def archive_size(self, star, lpaths):
