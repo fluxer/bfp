@@ -45,7 +45,7 @@ class Misc(object):
 
     def ping(self, url='http://google.com'):
         ''' DEPRECATED: Ping URL, use url_ping() instead '''
-        self.url_ping(url)
+        return self.url_ping(url)
 
     def typecheck(self, a, b):
         ''' Poor man's variable type checking '''

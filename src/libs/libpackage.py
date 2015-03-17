@@ -3,11 +3,11 @@
 '''
 A module for package management with plain-text format database
 
-Database() is a class the core of Source Package Manager, it provides various
-methods to get information about packages installed and otherwise. The methods
-prefixed with "local" deal with metadata of software instaleld on the system,
-"remote" methods provide easy access to software available from repositories
-with build recipes in the SRCBUILD format.
+Database() is the core of Source Package Manager, it provides various methods
+to get information about packages installed and otherwise. The methods prefixed
+with "local" deal with metadata of software instaleld on the system, "remote"
+methods provide info for software available from repositories with build
+recipes in the SRCBUILD format.
 
 SRCBUILD() is Source Package Manager recipes (SRCBUILDs) parser.
 
@@ -189,17 +189,10 @@ class Database(object):
         misc.typecheck(target, (types.StringTypes))
         misc.typecheck(checked, (types.NoneType, types.ListType))
         misc.typecheck(cdepends, (types.BooleanType))
-
-        # depends, {make,check}depends are optional and
-        # relying on them to be different than None
-        # would break the code, they can not be
-        # concentrated nor looped trough
-        depends = self.remote_metadata(target, 'depends')
-        makedepends = self.remote_metadata(target, 'makedepends')
-        checkdepends = self.remote_metadata(target, 'checkdepends')
+        misc.typecheck(mdepends, (types.BooleanType))
 
         missing = []
-        build_depends = []
+        build_depends = self.remote_metadata(target, 'depends')
         if checked is None:
             checked = []
 
@@ -208,12 +201,10 @@ class Database(object):
         if target in self.IGNORE:
             return missing
 
-        if depends:
-            build_depends.extend(depends)
-        if mdepends and makedepends:
-            build_depends.extend(makedepends)
+        if mdepends:
+            build_depends.extend(self.remote_metadata(target, 'makedepends'))
         if cdepends and checkdepends:
-            build_depends.extend(checkdepends)
+            build_depends.extend(self.remote_metadata(target, 'checkdepends'))
 
         for dependency in build_depends:
             if checked and dependency in checked:
