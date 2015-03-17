@@ -47,8 +47,6 @@ MSGFMT = msgfmt
 POD2MAN = pod2man
 PYDOC = pydoc
 
-all:
-
 stat:
 	cloc $(shell $(FIND) -name '*.py' -o -name '*.sh')
 
