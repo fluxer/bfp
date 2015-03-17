@@ -62,7 +62,7 @@ try:
 
     message.sub_info('Listing image')
     cpio = misc.whereis('cpio')
-    print(misc.system_output((cpio, '-tF', new_image)))
+    print(misc.system_output((cpio, '-tF', misc.file_name(new_image, False))))
 
 except subprocess.CalledProcessError as detail:
     message.critical('SUBPROCESS', detail)

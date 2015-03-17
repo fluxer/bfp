@@ -75,6 +75,11 @@ class Misc(object):
             raise OSError('Program not found in PATH', program)
         return None
 
+    def getpass(self, sprompt='Password: '):
+        if not sys.stdin.isatty():
+            raise Exception('Standard input is not a TTY')
+        return getpass.getpass(sprompt)
+
     def string_encode(self, string):
         ''' String wrapper to ensure Python3 compat '''
         if int(sys.version_info[0]) >= 3 and isinstance(string, bytes):
@@ -251,7 +256,7 @@ class Misc(object):
         # FIXME: this will lock any GUI frontend but root has no access to X
         # usually which makes pinentry usesless in this case
         if not self.SIGNPASS:
-            self.SIGNPASS = getpass.getpass('Passphrase: ')
+            self.SIGNPASS = self.getpass('Passphrase: ')
         self.system_input(cmd, self.SIGNPASS)
 
     def file_verify(self, sfile, ssignature=None):
@@ -598,7 +603,7 @@ class Misc(object):
                     '-C', sdir), demote=demote)
         elif smime == 'application/x-gzip':
             gfile = gzip.GzipFile(sfile, 'rb')
-            self.file_write(sfile.rstrip('.gz'), gfile.read())
+            self.file_write(self.file_name(sfile, False), gfile.read())
             gfile.close()
 
     def archive_list(self, sfile):

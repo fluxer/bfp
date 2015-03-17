@@ -14,7 +14,7 @@ import re
 import difflib
 import pwd, grp
 import SimpleHTTPServer, SocketServer
-import ftplib, getpass
+import ftplib
 if sys.version < '3':
     import ConfigParser as configparser
     from urllib2 import HTTPError
@@ -738,7 +738,7 @@ class Upload(object):
         ftp = None
         try:
             arch = os.uname()[4]
-            p = getpass.getpass('Password for %s: ' % self.user)
+            p = misc.getpass('Password for %s: ' % self.user)
             # FIXME: optionally use secure channel via FTP_TLS
             ftp = ftplib.FTP(self.host, self.user, p, timeout=libspm.TIMEOUT)
             ftp.cwd('%s/tarballs/%s' % (self.directory, arch))
