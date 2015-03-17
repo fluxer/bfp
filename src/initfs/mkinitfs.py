@@ -1,6 +1,6 @@
 #!/bin/python2
 
-import sys, argparse, tempfile, subprocess, shutil, os, gzip
+import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2
 
 app_version = "1.6.0 (482296a)"
 
@@ -33,7 +33,7 @@ try:
     parser.add_argument('-i', '--image', type=str, default=image, \
         help='Change output image')
     parser.add_argument('-c', '--compression', type=str, default=compression, \
-        choices=('gzip', 'cat'), help='Change image compression method')
+        choices=('gzip', 'cat', 'bzip2'), help='Change image compression method')
     parser.add_argument('--keep', action='store_true', \
         help='Keep temporary directory')
     parser.add_argument('--debug', action='store_true', \
@@ -233,6 +233,10 @@ try:
         gzipf = gzip.GzipFile(ARGS.image, 'wb')
         gzipf.write(data)
         gzipf.close()
+    elif ARGS.compression == 'bzip2':
+        bzipf = bz2.BZ2File(ARGS.image, 'wb')
+        bzipf.write(data)
+        bzipf.close()
     else:
         misc.file_write(ARGS.image, data)
 
