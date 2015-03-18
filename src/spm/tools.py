@@ -33,7 +33,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.6.1 (stable)"
+app_version = "1.6.1 (a2adc06)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -196,7 +196,7 @@ class Dist(object):
                     src_file = os.path.join(target_directory, src_base)
 
                     if src_url.startswith('git://') or src_url.endswith('.git'):
-                        if OFFLINE:
+                        if libspm.OFFLINE:
                             message.sub_warning(_('Working offline, ignoring Git repository'), src_url)
                         elif os.path.isdir(src_file):
                             message.sub_debug(_('Updating Git repository'), src_url)
