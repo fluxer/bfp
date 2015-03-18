@@ -33,7 +33,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.6.1 (0926121)"
+app_version = "1.6.1 (stable)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -194,11 +194,10 @@ class Dist(object):
                 for src_url in target_sources:
                     src_base = os.path.basename(src_url)
                     src_file = os.path.join(target_directory, src_base)
-                    internet = misc.url_ping()
 
                     if src_url.startswith('git://') or src_url.endswith('.git'):
-                        if not internet:
-                            message.sub_warning(_('Internet connection is down'))
+                        if OFFLINE:
+                            message.sub_warning(_('Working offline, ignoring Git repository'), src_url)
                         elif os.path.isdir(src_file):
                             message.sub_debug(_('Updating Git repository'), src_url)
                             misc.system_command((misc.whereis('git'), \
@@ -218,11 +217,8 @@ class Dist(object):
 
                     elif src_url.startswith(('http://', 'https://', 'ftp://', \
                         'ftps://')):
-                        if not internet:
-                            message.sub_warning(_('Internet connection is down'))
-                        else:
-                            message.sub_debug(_('Fetching'), src_url)
-                            misc.fetch(src_url, src_file, libspm.MIRRORS, 'distfiles/')
+                        message.sub_debug(_('Fetching'), src_url)
+                        misc.fetch(src_url, src_file, libspm.MIRRORS, 'distfiles/')
 
             message.sub_info(_('Compressing'), target_distfile)
             misc.archive_compress((target_directory,), target_distfile, target_directory)

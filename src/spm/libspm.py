@@ -354,7 +354,7 @@ class Repo(object):
             message.sub_info(_('Cloning local'), self.repository_name)
             shutil.copytree(self.repository_url, self.repository_dir)
         elif os.path.isdir(self.repository_dir):
-            # existing Git repository
+            # existing Git repository, update
             message.sub_info(_('Updating repository'), self.repository_name)
             misc.system_command((git, 'pull', \
                 self.repository_url), cwd=self.repository_dir, demote=DEMOTE)
@@ -785,11 +785,10 @@ class Source(object):
             local_file = os.path.join(self.sources_dir, src_base)
             src_file = os.path.join(self.target_dir, src_base)
             link_file = os.path.join(self.source_dir, src_base)
-            internet = misc.url_ping()
 
             if src_url.startswith('git://') or src_url.endswith('.git'):
-                if not internet:
-                    message.sub_warning(_('Internet connection is down'))
+                if OFFLINE:
+                    message.sub_warning(_('Working offline, ignoring Git repository'), src_url)
                 elif os.path.isdir(link_file):
                     message.sub_debug(_('Updating Git repository'), src_url)
                     misc.system_command((misc.whereis('git'), 'pull', \
@@ -809,14 +808,11 @@ class Source(object):
 
             elif src_url.startswith(('http://', 'https://', 'ftp://', \
                 'ftps://')):
-                if not internet:
-                    message.sub_warning(_('Internet connection is down'))
+                message.sub_debug(_('Fetching'), src_url)
+                if self.mirror:
+                    misc.fetch(src_url, local_file, MIRRORS, 'distfiles/')
                 else:
-                    message.sub_debug(_('Fetching'), src_url)
-                    if self.mirror:
-                        misc.fetch(src_url, local_file, MIRRORS, 'distfiles/')
-                    else:
-                        misc.fetch(src_url, local_file)
+                    misc.fetch(src_url, local_file)
 
             if os.path.islink(link_file):
                 message.sub_debug(_('Already linked'), src_file)
@@ -1512,20 +1508,16 @@ class Binary(Source):
         message.sub_info(_('Preparing tarballs'))
         src_base = self.target_name + '_' + self.target_version + '.tar.bz2'
         local_file = self.target_tarball
-        internet = misc.url_ping()
 
-        if not internet:
-            message.sub_warning(_('Internet connection is down'))
-        else:
-            message.sub_debug(_('Checking mirrors for'), src_base)
-            found = False
-            for mirror in MIRRORS:
-                surl = '%s/tarballs/%s/%s' % (mirror, os.uname()[4], src_base)
-                if misc.url_ping(surl):
-                    message.sub_debug(_('Fetching'), surl)
-                    misc.fetch(surl, local_file, MIRRORS, 'tarballs/%s/' % os.uname()[4])
+        message.sub_debug(_('Checking mirrors for'), src_base)
+        found = False
+        for mirror in MIRRORS:
+            surl = '%s/tarballs/%s/%s' % (mirror, os.uname()[4], src_base)
+            if misc.url_ping(surl):
+                message.sub_debug(_('Fetching'), surl)
+                misc.fetch(surl, local_file, MIRRORS, 'tarballs/%s/' % os.uname()[4])
 
-        if not internet and not found:
+        if not found:
             message.sub_critical(_('Binary tarball not available available for'), self.target_name)
             sys.exit(2)
 
