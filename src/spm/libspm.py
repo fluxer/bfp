@@ -510,186 +510,210 @@ class Source(object):
         if not TRIGGERS:
             return
 
+        adjcontent = '\n'.join(content)
         ldconfig = misc.whereis('ldconfig', False, True)
+        ldconfig_regex = '(.*\\.so)(?:$|\\s)'
         message.sub_debug('ldconfig', ldconfig or '')
+        match = misc.string_search(ldconfig_regex, adjcontent, escape=False)
+        if match and ldconfig:
+            message.sub_info(_('Updating shared libraries cache'))
+            message.sub_debug(match)
+            misc.system_trigger((ldconfig))
+
         mandb = misc.whereis('mandb', False, True)
+        mandb_regex = '(.*share/man.*)(?:$|\\s)'
         message.sub_debug('mandb', mandb or '')
+        match = misc.string_search(mandb_regex, adjcontent, escape=False)
+        if match and mandb:
+            message.sub_info(_('Updating manual pages database'))
+            message.sub_debug(match)
+            misc.system_trigger((mandb, '--quiet'))
+
         desktop_database = misc.whereis('update-desktop-database', False, True)
+        desktop_database_regex = '(.*share/applications/.*)(?:$|\\s)'
         message.sub_debug('update-desktop-database', desktop_database or '')
+        match = misc.string_search(desktop_database_regex, adjcontent, escape=False)
+        if match and desktop_database:
+            message.sub_info(_('Updating desktop database'))
+            message.sub_debug(match)
+            misc.system_trigger((desktop_database, sys.prefix + '/share/applications'))
+
         mime_database = misc.whereis('update-mime-database', False, True)
+        mime_database_regex = '(.*share/mime.*)(?:$|\\s)'
         message.sub_debug('update-mime-database', mime_database or '')
+        match = misc.string_search(mime_database_regex, adjcontent, escape=False)
+        if match and mime_database:
+            message.sub_info(_('Updating MIME database'))
+            message.sub_debug(match)
+            misc.system_trigger((mime_database, sys.prefix + '/share/mime'))
+
         icon_resources = misc.whereis('xdg-icon-resource', False, True)
         message.sub_debug('xdg-icon-resources', icon_resources or '')
-        xmime = misc.whereis('xdg-mime', False, True)
-        message.sub_debug('xdg-mime', xmime or '')
-        gio_querymodules = misc.whereis('gio-querymodules', False, True)
-        message.sub_debug('gio-querymodules', gio_querymodules or '')
-        pango_querymodules = misc.whereis('pango-querymodules', False, True)
-        message.sub_debug('pango-querymodules', pango_querymodules or '')
-        gtk2_immodules = misc.whereis('gtk-query-immodules-2.0', False, True)
-        message.sub_debug('gtk-query-imodules-2.0', gtk2_immodules or '')
-        gtk3_immodules = misc.whereis('gtk-query-immodules-3.0', False, True)
-        message.sub_debug('gtk-query-imodules-3.0', gtk3_immodules or '')
-        gdk_pixbuf = misc.whereis('gdk-pixbuf-query-loaders', False, True)
-        message.sub_debug('gdk-pixbuf-query-loaders', gdk_pixbuf or '')
-        glib_schemas = misc.whereis('glib-compile-schemas', False, True)
-        message.sub_debug('glib-compile-schemas', glib_schemas or '')
-        udevadm = misc.whereis('udevadm', False, True)
-        message.sub_debug('udevadm', udevadm or '')
-        install_info = misc.whereis('install-info', False, True)
-        message.sub_debug('install-info', install_info or '')
         icon_cache = misc.whereis('gtk-update-icon-cache', False, True)
         message.sub_debug('gtk-update-icon-cache', icon_cache or '')
-        depmod = misc.whereis('depmod', False, True)
-        message.sub_debug('depmod', depmod or '')
-        depmod_run = False
-        depmod_path = None
-        mkinitfs = misc.whereis('mkinitfs', False, True)
-        message.sub_debug('mkinitfs', mkinitfs or '')
-        mkinitfs_run = False
-        mkinitfs_path = None
-        grub_mkconfig = misc.whereis('grub-mkconfig', False, True)
-        message.sub_debug('grub-mkconfig', grub_mkconfig or '')
-        grub_mkconfig_run = False
-        grub_mkconfig_path = None
-        for spath in content:
-            if spath.endswith('.so') and ldconfig:
-                message.sub_info(_('Updating shared libraries cache'))
-                message.sub_debug(spath)
-                misc.system_trigger((ldconfig))
-                ldconfig = False
-            elif 'share/man' in spath and mandb:
-                message.sub_info(_('Updating manual pages database'))
-                message.sub_debug(spath)
-                misc.system_trigger((mandb, '--quiet'))
-                mandb = False
-            elif 'share/applications/' in spath and desktop_database:
-                message.sub_info(_('Updating desktop database'))
-                message.sub_debug(spath)
-                misc.system_trigger((desktop_database, \
-                    sys.prefix + '/share/applications'))
-                desktop_database = False
-            elif 'share/mime/' in spath and mime_database:
-                message.sub_info(_('Updating MIME database'))
-                message.sub_debug(spath)
-                misc.system_trigger((mime_database, sys.prefix + '/share/mime'))
-                mime_database = False
-            elif 'share/icons/' in spath and icon_resources:
-                message.sub_info(_('Updating icon resources'))
-                message.sub_debug(spath)
-                misc.system_trigger((icon_resources, 'forceupdate', \
-                    '--theme', 'hicolor'))
-                icon_resources = False
-            elif 'mime/' in spath and '-' in os.path.basename(spath) \
-                and spath.endswith('.xml') and xmime:
-                if action == 'merge':
-                    message.sub_info(_('Installing XDG MIMEs'))
-                    message.sub_debug(spath)
-                    misc.system_trigger((xmime, 'install', spath))
-                elif action == 'remove':
-                    message.sub_info(_('Uninstalling XDG MIMEs'))
-                    message.sub_debug(spath)
-                    misc.system_trigger((xmime, 'uninstall', spath))
-            elif '/gio/modules/' in spath and gio_querymodules:
-                message.sub_info(_('Updating GIO modules cache'))
-                message.sub_debug(spath)
-                misc.system_trigger((gio_querymodules, os.path.dirname(spath)))
-                gio_querymodules = False
-            elif '/pango/' in spath and '/modules/' in spath and pango_querymodules:
-                message.sub_info(_('Updating pango modules cache'))
-                message.sub_debug(spath)
-                misc.system_trigger((pango_querymodules, '--update-cache'))
-                pango_querymodules = False
-            elif '/gtk-2.0/' in spath and '/immodules/' in spath and gtk2_immodules:
-                message.sub_info(_('Updating GTK-2.0 imodules cache'))
-                message.sub_debug(spath)
-                misc.dir_create(ROOT_DIR + '/etc/gtk-2.0')
-                misc.system_trigger(gtk2_immodules + \
-                    ' > /etc/gtk-2.0/gtk.immodules', shell=True)
-                gtk2_immodules = False
-            elif '/gtk-3.0/' in spath and '/immodules/' in spath and gtk3_immodules:
-                message.sub_info(_('Updating GTK-3.0 imodules cache'))
-                message.sub_debug(spath)
-                misc.dir_create(ROOT_DIR + '/etc/gtk-3.0')
-                misc.system_trigger(gtk3_immodules + \
-                    ' > /etc/gtk-3.0/gtk.immodules', shell=True)
-                gtk3_immodules = False
-            elif '/gdk-pixbuf' in spath and gdk_pixbuf:
-                message.sub_info(_('Updating gdk pixbuffer loaders'))
-                message.sub_debug(spath)
-                misc.dir_create(ROOT_DIR + '/etc/gtk-2.0')
-                misc.system_trigger(gdk_pixbuf + \
-                    ' > /etc/gtk-2.0/gdk-pixbuf.loaders', shell=True)
-                gdk_pixbuf = False
-            elif '/schemas/' in spath and glib_schemas:
-                message.sub_info(_('Updating GSettings schemas'))
-                message.sub_debug(spath)
-                misc.system_trigger((glib_schemas, os.path.dirname(spath)))
-                glib_schemas = False
-            elif spath.startswith('lib/modules/') and depmod:
-                # extract the kernel modules path, e.g. lib/modules/3.16.8
-                depmod_path = misc.string_convert(misc.string_search('(?:usr/?)?lib/modules/(.*?)/', \
-                    spath, escape=False))
-                depmod_run = True
-                mkinitfs_run = True
-            elif '/udev/rules.d/' in spath and \
-                (os.path.exists(ROOT_DIR + 'run/udev/control') \
-                or os.path.exists(ROOT_DIR + 'var/run/udev/control')) and udevadm:
-                message.sub_info(_('Reloading udev rules and hwdb'))
-                message.sub_debug(spath)
-                misc.system_trigger((udevadm, 'control', '--reload'))
-                udevadm = False
-            elif spath.startswith(('boot/vmlinuz', 'etc/mkinitfs/')) and mkinitfs:
-                mkinitfs_path = misc.string_convert(misc.string_search('boot/vmlinuz-(.*)', \
-                    spath, escape=False))
-                mkinitfs_run = True
-            elif spath.startswith(('boot/', 'etc/grub.d/')) \
-                and os.path.isfile(os.path.join(ROOT_DIR, 'boot/grub/grub.cfg')) \
-                and grub_mkconfig:
-                # the trigger executes only if grub.cfg is present asuming GRUB
-                # is installed, otherwise there is no point in updating it
-                grub_mkconfig_path = spath
-                grub_mkconfig_run = True
-            elif 'share/icons/' in spath and action == 'merge' and icon_cache:
-                # extract the proper directory from spath, e.g. /share/icons/hicolor
-                sdir = misc.string_search('((?:usr/?)?share/icons/(?:.*?))', \
-                    spath, escape=False)
-                sdir = misc.string_convert(sdir)
-                if not os.path.isfile(ROOT_DIR + sdir + '/index.theme'):
+        icons_regex = '(?:^|\\s)(.*share/icons/(?:[^/]+))/.*(?:$|\\s)'
+        match = misc.string_search(icons_regex, adjcontent, escape=False)
+        if match and (icon_resources or icon_cache):
+            done = []
+            for m in match:
+                if m in done:
                     continue
-                message.sub_info(_('Updating icons cache'))
-                message.sub_debug(spath)
-                misc.system_trigger((icon_cache, '-q', '-t', '-i', '-f', sdir))
-                icon_cache = False
-            elif 'share/info/' in spath and install_info:
-                # allowed to run multiple times
+                base = os.path.basename(m)
+                if icon_resources:
+                    message.sub_info(_('Updating icon resources'), base)
+                    misc.system_trigger((icon_resources, 'forceupdate', '--theme', base))
+                if (action == 'merge' or action == 'upgrade') \
+                    and os.path.isfile(ROOT_DIR + m + '/index.theme') and icon_cache:
+                    message.sub_info(_('Updating icons cache'), base)
+                    misc.system_trigger((icon_cache, '-q', '-t', '-i', '-f', m))
+                done.append(m)
+
+        xdg_mime = misc.whereis('xdg-mime', False, True)
+        xdg_mime_regex = '(?:^|\\s)(.*mime/.*-.*\\.xml)(?:$|\\s)'
+        message.sub_debug('xdg-mime', xdg_mime or '')
+        match = misc.string_search(xdg_mime_regex, adjcontent, escape=False)
+        if match and xdg_mime:
+            done = []
+            for m in match:
+                if m in done:
+                    continue
                 if action == 'merge':
-                    message.sub_info(_('Installing info page'), spath)
-                    message.sub_debug(spath)
-                    misc.system_trigger((install_info, spath, \
-                        sys.prefix + '/share/info/dir'))
+                    message.sub_info(_('Installing XDG MIMEs'), m)
+                    misc.system_trigger((xdg_mime, 'install', m))
                 elif action == 'remove':
-                    message.sub_info(_('Deleting info page'), spath)
-                    message.sub_debug(spath)
-                    misc.system_trigger((install_info, '--delete', spath, \
-                    sys.prefix + '/share/info/dir'))
-        # delayed triggers which need to run in specifiec order
-        if depmod_run:
+                    message.sub_info(_('Uninstalling XDG MIMEs'), m)
+                    misc.system_trigger((xdg_mime, 'uninstall', m))
+                elif action == 'upgrade':
+                    if os.path.exists(ROOT_DIR + m):
+                        message.sub_info(_('Updating XDG MIMEs'), m)
+                        misc.system_trigger((xdg_mime, 'install', m))
+                done.append(m)
+
+        gio_querymodules = misc.whereis('gio-querymodules', False, True)
+        gio_querymodules_regex = '(?:^|\\s)(.*/gio/modules/.*)(?:$|\\s)'
+        message.sub_debug('gio-querymodules', gio_querymodules or '')
+        match = misc.string_search(gio_querymodules_regex, adjcontent, escape=False)
+        if match and gio_querymodules:
+            message.sub_info(_('Updating GIO modules cache'))
+            message.sub_debug(match)
+            misc.system_trigger((gio_querymodules, os.path.dirname(match[0])))
+
+        pango_querymodules = misc.whereis('pango-querymodules', False, True)
+        pango_querymodules_regex = '(?:^|\\s)(.*/pango/.*/modules/.*)(?:$|\\s)'
+        message.sub_debug('pango-querymodules', pango_querymodules or '')
+        match = misc.string_search(pango_querymodules_regex, adjcontent, escape=False)
+        if match and pango_querymodules:
+            message.sub_info(_('Updating pango modules cache'))
+            message.sub_debug(match)
+            misc.system_trigger((pango_querymodules, '--update-cache'))
+
+        gtk2_immodules = misc.whereis('gtk-query-immodules-2.0', False, True)
+        gtk2_immodules_regex = '(?:^|\\s)(.*/gtk-2.0/.*/immodules/.*)(?:$|\\s)'
+        message.sub_debug('gtk-query-imodules-2.0', gtk2_immodules or '')
+        match = misc.string_search(gtk2_immodules_regex, adjcontent, escape=False)
+        if match and gtk2_immodules:
+            message.sub_info(_('Updating GTK-2.0 imodules cache'))
+            message.sub_debug(match)
+            misc.dir_create(ROOT_DIR + '/etc/gtk-2.0')
+            misc.system_trigger(gtk2_immodules + \
+                ' > /etc/gtk-2.0/gtk.immodules', shell=True)
+
+        gtk3_immodules = misc.whereis('gtk-query-immodules-3.0', False, True)
+        gtk3_immodules_regex = '(?:^|\\s)(.*/gtk-3.0/.*/immodules/.*)(?:$|\\s)'
+        message.sub_debug('gtk-query-imodules-3.0', gtk2_immodules or '')
+        match = misc.string_search(gtk3_immodules_regex, adjcontent, escape=False)
+        if match and gtk2_immodules:
+            message.sub_info(_('Updating GTK-3.0 imodules cache'))
+            message.sub_debug(match)
+            misc.dir_create(ROOT_DIR + '/etc/gtk-3.0')
+            misc.system_trigger(gtk2_immodules + \
+                ' > /etc/gtk-3.0/gtk.immodules', shell=True)
+
+        gdk_pixbuf = misc.whereis('gdk-pixbuf-query-loaders', False, True)
+        gdk_pixbuf_regex = '(?:^|\\s)(.*/gdk-pixbuf.*)(?:$|\\s)'
+        message.sub_debug('gdk-pixbuf-query-loaders', gdk_pixbuf or '')
+        match = misc.string_search(gdk_pixbuf_regex, adjcontent, escape=False)
+        if match and gdk_pixbuf:
+            message.sub_info(_('Updating gdk pixbuffer loaders'))
+            message.sub_debug(match)
+            misc.dir_create(ROOT_DIR + '/etc/gtk-2.0')
+            misc.system_trigger(gdk_pixbuf + \
+                ' > /etc/gtk-2.0/gdk-pixbuf.loaders', shell=True)
+
+        glib_schemas = misc.whereis('glib-compile-schemas', False, True)
+        glib_schemas_regex = '(?:^|\\s)(.*/schemas/.*)(?:$|\\s)'
+        message.sub_debug('glib-compile-schemas', glib_schemas or '')
+        match = misc.string_search(glib_schemas_regex, adjcontent, escape=False)
+        if match and glib_schemas:
+            message.sub_info(_('Updating GSettings schemas'))
+            message.sub_debug(match)
+            misc.system_trigger((glib_schemas, os.path.dirname(match)))
+
+        install_info = misc.whereis('install-info', False, True)
+        install_info_regex = '(?:^|\\s)(.*share/info/.*)(?:$|\\s)'
+        message.sub_debug('install-info', install_info or '')
+        match = misc.string_search(install_info_regex, adjcontent, escape=False)
+        if match and install_info:
+            message.sub_debug(match)
+            for m in match:
+                infodir = sys.prefix + '/share/info/dir'
+                if action == 'merge':
+                    message.sub_info(_('Installing info page'), m)
+                    misc.system_trigger((install_info, m, infodir))
+                elif action == 'remove':
+                    message.sub_info(_('Deleting info page'), m)
+                    misc.system_trigger((install_info, '--delete', m, infodir))
+                elif action == 'upgrade':
+                    if os.path.exists(ROOT_DIR + m):
+                        message.sub_info(_('Updating info page'), m)
+                        misc.system_trigger((install_info, m, infodir))
+                    else:
+                        message.sub_info(_('Deleting info page'), m)
+                        misc.system_trigger((install_info, '--delete', m, infodir))
+
+        udevadm = misc.whereis('udevadm', False, True)
+        udevadm_regex = '(?:^|\\s)(.*/udev/rules.d/.*)(?:$|\\s)'
+        message.sub_debug('udevadm', udevadm or '')
+        match = misc.string_search(udevadm_regex, adjcontent, escape=False)
+        if match and udevadm:
+            if os.path.exists(ROOT_DIR + 'run/udev/control') \
+            or os.path.exists(ROOT_DIR + 'var/run/udev/control'):
+                message.sub_info(_('Reloading udev rules and hwdb'))
+                message.sub_debug(match)
+                misc.system_trigger((udevadm, 'control', '--reload'))
+
+        mkinitfs_run = False
+        depmod = misc.whereis('depmod', False, True)
+        depmod_regex = '(?:^|\\s)(?:/)?(?:usr/?)?lib/modules/(.*?)/.*(?:$|\\s)'
+        message.sub_debug('depmod', depmod or '')
+        match = misc.string_search(depmod_regex, adjcontent, escape=False)
+        if match and depmod:
             message.sub_info(_('Updating module dependencies'))
-            message.sub_debug(depmod_path)
-            misc.system_trigger((depmod, depmod_path))
+            message.sub_debug(match)
+            misc.system_trigger((depmod, match))
+            mkinitfs_run = True
+
         # distribution specifiec
-        if mkinitfs_run:
+        mkinitfs = misc.whereis('mkinitfs', False, True)
+        mkinitfs_regex = '(?:^|\\s)(?:/)?(boot/vmlinuz-(.*)|etc/mkinitfs/.*)(?:$|\\s)'
+        message.sub_debug('mkinitfs', mkinitfs or '')
+        match = misc.string_search(mkinitfs_regex, adjcontent, escape=False)
+        if (match or mkinitfs_run) and mkinitfs:
             message.sub_info(_('Updating initramfs image'))
-            message.sub_debug(mkinitfs_path)
-            if mkinitfs_path:
+            message.sub_debug(match or mkinitfs_run)
+            if match[1]:
                 # new kernel being installed
-                misc.system_trigger((mkinitfs, '-k', mkinitfs_path))
+                misc.system_trigger((mkinitfs, '-k', match[1]))
             else:
                 misc.system_trigger((mkinitfs))
-        if grub_mkconfig_run:
+
+        grub_mkconfig = misc.whereis('grub-mkconfig', False, True)
+        grub_mkconfig_regex = '(?:^|\\s)(boot/.*|etc/grub.d/.*)(?:$|\\s)'
+        message.sub_debug('grub-mkconfig', grub_mkconfig or '')
+        match = misc.string_search(grub_mkconfig_regex, adjcontent, escape=False)
+        if match and grub_mkconfig:
             message.sub_info(_('Updating GRUB configuration'))
-            message.sub_debug(grub_mkconfig_path)
+            message.sub_debug(match)
             misc.dir_create(ROOT_DIR + '/boot/grub')
             misc.system_trigger((grub_mkconfig, '-o', '/boot/grub/grub.cfg'))
 
@@ -1130,7 +1154,15 @@ class Source(object):
             message.sub_info(_('Executing post_install()'))
             misc.system_script(self.srcbuild, 'post_install')
 
-        self.update_databases(new_content, 'merge')
+        if target_upgrade:
+            everything = old_content.split('\n')
+            # some triggers are run multiple times, filter dublicates for them
+            for sfile in new_content:
+                if not '/' + sfile in everything:
+                    everything.append('/' + sfile)
+            self.update_databases(everything, 'upgrade')
+        else:
+            self.update_databases(new_content, 'merge')
 
         if target_upgrade:
             message.sub_info(_('Checking reverse dependencies'))
