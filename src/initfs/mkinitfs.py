@@ -119,7 +119,8 @@ try:
     for sdir in moddirs:
         if os.path.islink(sdir):
             continue
-        if os.path.isdir(sdir + '/modules/' + ARGS.kernel):
+        if os.path.isfile(sdir + '/modules/' + ARGS.kernel + '/modules.dep') and \
+            os.path.isfile(sdir + '/modules/' + ARGS.kernel + '/modules.builtin'):
             modsdir = sdir + '/modules/' + ARGS.kernel
     # if the above fails, attempt to guess the kernel installed
     if not modsdir:
