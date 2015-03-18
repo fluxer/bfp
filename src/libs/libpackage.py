@@ -55,8 +55,11 @@ class Database(object):
 
     def _notifiers_setup(self):
         ''' Setup inotify watcher for database changes '''
-        notify.watch_add(os.path.join(self.CACHE_DIR, 'repositories'))
-        notify.watch_add(self.LOCAL_DIR)
+        reposdir = os.path.join(self.CACHE_DIR, 'repositories')
+        if os.path.isdir(reposdir):
+            notify.watch_add()
+        if os.path.isdir(self.LOCAL_DIR):
+            notify.watch_add(self.LOCAL_DIR)
 
     def _build_local_cache(self, event=None):
         ''' Build internal local database cache '''
