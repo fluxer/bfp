@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2
 
-app_version = "1.6.0 (482296a)"
+app_version = "1.6.1 (dbcd935)"
 
 tmpdir = None
 keep = False
@@ -91,7 +91,9 @@ try:
             shutil.copytree(src, sdest)
             lcopied.append(src)
         elif os.path.isfile(src):
-            for sfile in misc.system_scanelf(src, sflags='-L').split(','):
+            ltocopy = misc.system_scanelf(src, sflags='-L').split(',')
+            ltocopy.append(src)
+            for sfile in ltocopy:
                 if sfile in lcopied:
                     message.sub_debug('Already copied', sfile)
                     continue
