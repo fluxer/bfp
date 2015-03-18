@@ -620,13 +620,13 @@ class Source(object):
 
         gtk3_immodules = misc.whereis('gtk-query-immodules-3.0', False, True)
         gtk3_immodules_regex = '(?:^|\\s)(.*/gtk-3.0/.*/immodules/.*)(?:$|\\s)'
-        message.sub_debug('gtk-query-imodules-3.0', gtk2_immodules or '')
+        message.sub_debug('gtk-query-imodules-3.0', gtk3_immodules or '')
         match = misc.string_search(gtk3_immodules_regex, adjcontent, escape=False)
-        if match and gtk2_immodules:
+        if match and gtk3_immodules:
             message.sub_info(_('Updating GTK-3.0 imodules cache'))
             message.sub_debug(match)
             misc.dir_create(ROOT_DIR + '/etc/gtk-3.0')
-            misc.system_trigger(gtk2_immodules + \
+            misc.system_trigger(gtk3_immodules + \
                 ' > /etc/gtk-3.0/gtk.immodules', shell=True)
 
         gdk_pixbuf = misc.whereis('gdk-pixbuf-query-loaders', False, True)
@@ -641,13 +641,13 @@ class Source(object):
                 ' > /etc/gtk-2.0/gdk-pixbuf.loaders', shell=True)
 
         glib_schemas = misc.whereis('glib-compile-schemas', False, True)
-        glib_schemas_regex = '(?:^|\\s)(.*/schemas/.*)(?:$|\\s)'
+        glib_schemas_regex = '(?:^|\\s)(.*/schemas)/.*(?:$|\\s)'
         message.sub_debug('glib-compile-schemas', glib_schemas or '')
         match = misc.string_search(glib_schemas_regex, adjcontent, escape=False)
         if match and glib_schemas:
             message.sub_info(_('Updating GSettings schemas'))
             message.sub_debug(match)
-            misc.system_trigger((glib_schemas, os.path.dirname(match)))
+            misc.system_trigger((glib_schemas, match[0]))
 
         install_info = misc.whereis('install-info', False, True)
         install_info_regex = '(?:^|\\s)(.*share/info/.*)(?:$|\\s)'
@@ -690,7 +690,7 @@ class Source(object):
         if match and depmod:
             message.sub_info(_('Updating module dependencies'))
             message.sub_debug(match)
-            misc.system_trigger((depmod, match))
+            misc.system_trigger((depmod, match[0]))
             mkinitfs_run = True
 
         # distribution specifiec
