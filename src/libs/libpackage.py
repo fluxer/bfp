@@ -195,7 +195,7 @@ class Database(object):
         misc.typecheck(mdepends, (types.BooleanType))
 
         missing = []
-        build_depends = self.remote_metadata(target, 'depends')
+        build_depends = []
         if checked is None:
             checked = []
 
@@ -204,6 +204,7 @@ class Database(object):
         if target in self.IGNORE:
             return missing
 
+        build_depends.extend(self.remote_metadata(target, 'depends'))
         if mdepends:
             build_depends.extend(self.remote_metadata(target, 'makedepends'))
         if cdepends:
