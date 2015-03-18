@@ -19,7 +19,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.6.1 (bbc6a8e)"
+app_version = "1.6.1 (a6e0565)"
 
 try:
     import libmessage
@@ -478,10 +478,10 @@ try:
         message.sub_info(_('CACHE_DIR'), libspm.CACHE_DIR)
         message.sub_info(_('ROOT_DIR'), libspm.ROOT_DIR)
         message.sub_info(_('IGNORE'), libspm.IGNORE)
-        message.sub_info(_('SECURE'), libspm.SECURE)
         message.sub_info(_('OFFLINE'), libspm.OFFLINE)
         message.sub_info(_('MIRROR'), libspm.MIRROR)
         message.sub_info(_('TIMEOUT'), libspm.TIMEOUT)
+        message.sub_info(_('VERIFY'), libspm.VERIFY)
         message.sub_info(_('CONFLICTS'), libspm.CONFLICTS)
         message.sub_info(_('BACKUP'), libspm.BACKUP)
         message.sub_info(_('SCRIPTS'), libspm.SCRIPTS)
