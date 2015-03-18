@@ -274,9 +274,9 @@ targets:
 
 	spm source -CpDcim file gawk
 
-Clean, prepare, compile dependencies, compile target, install, merge,
-re-compile reverse dependencies if needed of all local targets but only
-if outdated and don't execute pre/post actions:
+Clean, prepare, compile dependencies, compile, install, merge and finally
+re-compile reverse dependencies if needed of all local targets but only if
+they are outdated and don't execute pre/post actions:
 
 	sudo spm --scripts=False source -aDRu world
 
@@ -293,9 +293,11 @@ Print the owner of 'bin/bash':
 
 	spm who 'bin/bash\b'
 
-Note that all modes, except source which accepts basename and paths, accept
-regexp similar to those found in Perl. For more information visit
-http://docs.python.org/2/library/re.html.
+Note that all modes, except source and repo, accept regexp similar to those
+in Perl. For more information visit http://docs.python.org/2/library/re.html.
+Source mode accepts base (e.g. foo), directory (e.g. /home/me/foo) with
+SRCBUILD in it, aliases (e.g. base) which you can find on the top-level of a
+repository as foo.alias or finally metagroups - currently only one - world.
 
 =head1 EXIT STATUS
 
