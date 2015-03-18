@@ -6,24 +6,25 @@
 
 The following table illustrates the software requirements:
 
-| binary/library |     origin    |  alternative  |        required by       |           required at          |
-|:--------------:|:-------------:|:-------------:|--------------------------|:------------------------------:|
-|     parted     |   GNU Parted  |               |          cparted         |             runtime            |
-|    pyparted    |    pyparted   |               |          cparted         |             runtime            |
-|      cpio      |   Coreutils   |    Busybox    |     lsinitfs/mkinitfs    |             runtime            |
-|     depmod     |      kmod     |    Busybox    |         mkinitfs         |             runtime            |
-|    ldconfig    | GNU C Library | uClibc, musl? |                          |             runtime            |
-|      find      |   Findutils   |    Busybox    |         mkinitfs         |             runtime            |
-|     lddtree    | PaX Utilities |               |         mkinitfs         |             runtime            |
-|     busybox    |    Busybox    |               |         mkinitfs         |             runtime            |
-|       tar      |    GNU Tar    |    Busybox    |          libmisc         | runtime, alternative ot bsdtar |
-|     bsdtar     |   LibArchive  |               |          libmisc         |   runtime, alternative ot tar  |
-|     scanelf    | PaX Utilities |               |          libmisc         |             runtime            |
-|      mount     |   util-linux  |    Busybox    |          libmisc         |             runtime            |
-|     umount     |   util-linux  |    Busybox    |          libmisc         |             runtime            |
-|    libmagic    |      file     |               |         libmagic         |             runtime            |
-|      bash      |    GNU Bash   |               | libmisc, libspm, srcmake |             runtime            |
-|       git      |      Git      |               |     libspm, spm-tools    |             runtime            |
+| binary/library |     origin    |  alternative  |        required by         |           required at          |
+|:--------------:|:-------------:|:-------------:|----------------------------|:------------------------------:|
+|     parted     |   GNU Parted  |               |           cparted          |             runtime            |
+|    pyparted    |    pyparted   |               |           cparted          |             runtime            |
+|      cpio      |   Coreutils   |    Busybox    |      lsinitfs/mkinitfs     |             runtime            |
+|     depmod     |      kmod     |    Busybox    |          mkinitfs          |             runtime            |
+|    ldconfig    | GNU C Library | uClibc, musl? |                            |             runtime            |
+|      find      |   Findutils   |    Busybox    |          mkinitfs          |             runtime            |
+|     lddtree    | PaX Utilities |               |          mkinitfs          |             runtime            |
+|     busybox    |    Busybox    |               |          mkinitfs          |             runtime            |
+|       tar      |    GNU Tar    |    Busybox    |           libmisc          | runtime, alternative ot bsdtar |
+|     bsdtar     |   LibArchive  |               |           libmisc          |   runtime, alternative ot tar  |
+|     scanelf    | PaX Utilities |               |           libmisc          |             runtime            |
+|      mount     |   util-linux  |    Busybox    |           libmisc          |             runtime            |
+|     umount     |   util-linux  |    Busybox    |           libmisc          |             runtime            |
+|    libmagic    |      file     |               |          libmagic          |             runtime            |
+|      bash      |    GNU Bash   |               |  libmisc, libspm, srcmake  |             runtime            |
+|       git      |      Git      |               |      libspm, spm-tools     |             runtime            |
+|      gpg2      |     GnuPG     |               | libmisc, libspm, spm-tools |             runtime            |
 
 NOTE: it currently lacks optional and build time software dependencies
 
