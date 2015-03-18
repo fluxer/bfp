@@ -14,7 +14,6 @@ The following table illustrates the software requirements:
 |     depmod     |      kmod     |    Busybox    |          mkinitfs          |             runtime            |
 |    ldconfig    | GNU C Library | uClibc, musl? |                            |             runtime            |
 |      find      |   Findutils   |    Busybox    |          mkinitfs          |             runtime            |
-|     lddtree    | PaX Utilities |               |          mkinitfs          |             runtime            |
 |     busybox    |    Busybox    |               |          mkinitfs          |             runtime            |
 |       tar      |    GNU Tar    |    Busybox    |           libmisc          | runtime, alternative ot bsdtar |
 |     bsdtar     |   LibArchive  |               |           libmisc          |   runtime, alternative ot tar  |

@@ -91,10 +91,11 @@ try:
             shutil.copytree(src, sdest)
             lcopied.append(src)
         elif os.path.isfile(src):
-            for sfile in misc.system_output((misc.whereis('lddtree'), \
-                '-l', src)).split('\n'):
+            for sfile in misc.system_scanelf(src, sflags='-L').split(','):
                 if sfile in lcopied:
                     message.sub_debug('Already copied', sfile)
+                    continue
+                elif not sfile:
                     continue
                 sfixed = sfile.replace('/etc/mkinitfs/root', '')
                 if os.path.islink(sfile):
