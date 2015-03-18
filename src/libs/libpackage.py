@@ -283,6 +283,11 @@ class Database(object):
         match = self.remote_search(target)
         if match:
             return self.REMOTE_CACHE[match][key]
+        # for consistency
+        for k in ('depends', 'makedepends', 'checkdepends', 'sources', \
+            'options', 'backup'):
+            if key == k:
+                return []
 
     def remote_aliases(self, basename=True):
         ''' Returns basename of all aliases '''
