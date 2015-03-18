@@ -15,8 +15,8 @@ The following table illustrates the software requirements:
 |    ldconfig    | GNU C Library | uClibc, musl? |                            |             runtime            |
 |      find      |   Findutils   |    Busybox    |          mkinitfs          |             runtime            |
 |     busybox    |    Busybox    |               |          mkinitfs          |             runtime            |
-|       tar      |    GNU Tar    |    Busybox    |           libmisc          | runtime, alternative ot bsdtar |
-|     bsdtar     |   LibArchive  |               |           libmisc          |   runtime, alternative ot tar  |
+|       tar      |    GNU Tar    |    Busybox    |           libmisc          | runtime, alternative to bsdtar |
+|     bsdtar     |   LibArchive  |               |           libmisc          |   runtime, alternative to tar  |
 |     scanelf    | PaX Utilities |               |           libmisc          |             runtime            |
 |      mount     |   util-linux  |    Busybox    |           libmisc          |             runtime            |
 |     umount     |   util-linux  |    Busybox    |           libmisc          |             runtime            |

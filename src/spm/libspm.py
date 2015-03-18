@@ -701,9 +701,9 @@ class Source(object):
         if (match or mkinitfs_run) and mkinitfs:
             message.sub_info(_('Updating initramfs image'))
             message.sub_debug(match or mkinitfs_run)
-            if match and match[1]:
+            if match and match[0][1]:
                 # new kernel being installed
-                misc.system_trigger((mkinitfs, '-k', match[1]))
+                misc.system_trigger((mkinitfs, '-k', match[0][1]))
             else:
                 misc.system_trigger((mkinitfs))
 
