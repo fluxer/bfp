@@ -57,7 +57,7 @@ class Database(object):
         ''' Setup inotify watcher for database changes '''
         reposdir = os.path.join(self.CACHE_DIR, 'repositories')
         if os.path.isdir(reposdir):
-            notify.watch_add()
+            notify.watch_add(reposdir)
         if os.path.isdir(self.LOCAL_DIR):
             notify.watch_add(self.LOCAL_DIR)
 
