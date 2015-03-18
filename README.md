@@ -1,3 +1,7 @@
+## Status
+
+[ ![Codeship Status for fluxer/bfp](https://codeship.com/projects/123e70d0-af99-0132-594f-5edd39caaea8/status?branch=master)](https://codeship.com/projects/69262)
+
 ## Requirements
 
 The following table illustrates the software requirements:
