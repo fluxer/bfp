@@ -424,7 +424,7 @@ class Sane(object):
     ''' Check sanity of SRCBUILDs '''
     def __init__(self, targets, enable=False, disable=False, null=False, \
         maintainer=False, note=False, variables=False, triggers=False, \
-        users=False, groups=False):
+        users=False, groups=False, signatures=False):
         self.targets = targets
         self.enable = enable
         self.disable = disable
@@ -435,6 +435,7 @@ class Sane(object):
         self.triggers = triggers
         self.users = users
         self.groups = groups
+        self.signatures = signatures
 
     def main(self):
         ''' Looks for target match and then execute action for every target '''
@@ -497,6 +498,16 @@ class Sane(object):
                         and not misc.file_search('groupdel|delgroup', target_srcbuild, escape=False):
                         message.sub_warning(_('Group(s) added but not deleted'))
 
+                if self.signatures:
+                    sources = database.remote_metadata(target, 'sources')
+                    for src in sources:
+                        if src.startswith(('http://', 'https://', 'ftp://', 'ftps://')):
+                            sig1 = '%s.sig' % src
+                            sig2 = '%s.asc' % src
+                            if misc.url_ping(sig1):
+                                message.sub_warning(_('Signature available but not in sources'), sig1)
+                            elif misc.url_ping(sig2):
+                                message.sub_warning(_('Signature available but not in sources'), sig2)
 
 class Merge(object):
     ''' Merge backup files '''
@@ -844,6 +855,8 @@ try:
         help=_('Check for user(s) being added but not deleted'))
     sane_parser.add_argument('-g', '--groups', action='store_true', \
         help=_('Check for group(s) being added but not deleted'))
+    sane_parser.add_argument('-s', '--signatures', action='store_true', \
+        help=_('Check for signature(s) available but on in the sources array'))
     sane_parser.add_argument('-a', '--all', action='store_true', \
         help=_('Perform all checks'))
     sane_parser.add_argument('TARGETS', nargs='+', type=str, \
@@ -999,6 +1012,7 @@ try:
             ARGS.triggers = True
             ARGS.users = True
             ARGS.groups = True
+            ARGS.signatures = True
 
         message.info(_('Runtime information'))
         message.sub_info(_('ENABLE'), ARGS.enable)
@@ -1010,12 +1024,13 @@ try:
         message.sub_info(_('TRIGGERS'), ARGS.triggers)
         message.sub_info(_('USERS'), ARGS.users)
         message.sub_info(_('GROUPS'), ARGS.groups)
+        message.sub_info(_('SIGNATURES'), ARGS.signatures)
         message.sub_info(_('TARGETS'), ARGS.TARGETS)
         message.info(_('Poking remotes...'))
 
         m = Sane(ARGS.TARGETS, ARGS.enable, ARGS.disable, ARGS.null, \
             ARGS.maintainer, ARGS.note, ARGS.variables, ARGS.triggers, \
-            ARGS.users, ARGS.groups)
+            ARGS.users, ARGS.groups, ARGS.signatures)
         m.main()
 
     elif ARGS.mode == 'merge':
