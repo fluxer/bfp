@@ -284,7 +284,11 @@ class Misc(object):
         elif sfile.endswith('.asc'):
             sfile = sfile.replace('.asc', '')
         if not ssignature:
-            ssignature = '%s.sig' % sfile
+            sig2 = '%s.asc' % sfile
+            if os.path.isfile(sig2):
+                ssignature = sig2
+            else:
+                ssignature = '%s.sig' % sfile
         self.system_command((gpg, '--verify', '--batch', ssignature, sfile))
 
     def dir_create(self, sdir, demote=''):
