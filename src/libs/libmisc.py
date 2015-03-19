@@ -252,9 +252,9 @@ class Misc(object):
 
         if self.OFFLINE:
             return
-        gpg = self.whereis('gpg2')
-        for key in lkeys:
-            self.system_command((gpg, '--recv-keys', key))
+        cmd = [self.whereis('gpg2'), '--recv-keys']
+        cmd.extend(lkeys)
+        self.system_command(cmd)
 
     def gpg_sign(self, sfile, skey=None):
         ''' Sign a file with PGP signature via GnuPG '''
