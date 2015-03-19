@@ -1509,8 +1509,9 @@ class Binary(Source):
                 misc.fetch(surl, local_file, MIRRORS, 'tarballs/%s/' % os.uname()[4])
                 if VERIFY:
                     sigurl = '%s.sig' % surl
+                    sigfile = '%s.sig' % local_file
                     message.sub_debug(_('Fetching'), sigurl)
-                    misc.fetch(sigurl, local_file, MIRRORS, 'tarballs/%s/' % os.uname()[4])
+                    misc.fetch(sigurl, sigfile, MIRRORS, 'tarballs/%s/' % os.uname()[4])
                     message.sub_debug(_('Verifying'), local_file)
                     misc.gpg_verify(local_file)
 
