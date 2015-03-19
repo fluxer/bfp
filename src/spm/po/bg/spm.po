@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-19 14:19+0000\n"
+"POT-Creation-Date: 2015-03-19 14:41+0000\n"
 "PO-Revision-Date: 2015-03-19 14:36+0000\n"
 "Last-Translator: Ivailo Monev <xakepa10@gmail.com>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -247,7 +247,7 @@ msgstr "Преостановяване подготовката на %s в"
 msgid "Dependencies missing"
 msgstr "Липсващи зависимости"
 
-#: libspm.py:769 tools.py:195
+#: libspm.py:768 tools.py:194
 msgid "Preparing PGP keys"
 msgstr ""
 

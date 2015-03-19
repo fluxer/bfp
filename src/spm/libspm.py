@@ -765,9 +765,9 @@ class Source(object):
         misc.dir_create(self.source_dir, DEMOTE)
         misc.dir_create(self.sources_dir, DEMOTE)
 
-        if self.target_gpgkeys:
-            message.sub_info(_('Preparing PGP keys'))
-            misc.gpg_receive(self.target_gpgkeys)
+        message.sub_info(_('Preparing PGP keys'))
+        if self.target_pgpkeys and self.verify:
+            misc.gpg_receive(self.target_pgpkeys)
 
         message.sub_info(_('Preparing sources'))
         for src_url in self.target_sources:
@@ -1259,7 +1259,7 @@ class Source(object):
             self.target_depends = database.remote_metadata(self.target_dir, 'depends')
             self.target_makedepends = database.remote_metadata(self.target_dir, 'makedepends')
             self.target_sources = database.remote_metadata(self.target_dir, 'sources')
-            self.target_gpgkeys = database.remote_metadata(self.target_dir, 'pgpkeys')
+            self.target_pgpkeys = database.remote_metadata(self.target_dir, 'pgpkeys')
             self.target_options = database.remote_metadata(self.target_dir, 'options')
             self.target_backup = database.remote_metadata(self.target_dir, 'backup')
             self.target_footprint = os.path.join('var/local/spm', self.target_name, 'footprint')
@@ -1533,7 +1533,7 @@ class Binary(Source):
             self.target_depends = database.remote_metadata(self.target_dir, 'depends')
             self.target_makedepends = database.remote_metadata(self.target_dir, 'makedepends')
             self.target_sources = database.remote_metadata(self.target_dir, 'sources')
-            self.target_gpgkeys = database.remote_metadata(self.target_dir, 'pgpkeys')
+            self.target_pgpkeys = database.remote_metadata(self.target_dir, 'pgpkeys')
             self.target_options = database.remote_metadata(self.target_dir, 'options')
             self.target_backup = database.remote_metadata(self.target_dir, 'backup')
             self.target_footprint = os.path.join('var/local/spm', self.target_name, 'footprint')
