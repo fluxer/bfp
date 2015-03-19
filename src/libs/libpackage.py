@@ -93,6 +93,7 @@ class Database(object):
                     'makedepends': parser.makedepends,
                     'checkdepends': parser.checkdepends,
                     'sources': parser.sources,
+                    'pgpkeys': parser.pgpkeys,
                     'options': parser.options,
                     'backup': parser.backup
                 }
@@ -289,7 +290,7 @@ class Database(object):
             return self.REMOTE_CACHE[match][key]
         # for consistency
         for k in ('depends', 'makedepends', 'checkdepends', 'sources', \
-            'options', 'backup'):
+            'options', 'backup', 'pgpkeys'):
             if key == k:
                 return []
 
@@ -329,6 +330,7 @@ class SRCBUILD(object):
         self.makedepends = []
         self.checkdepends = []
         self.sources = []
+        self.pgpkeys = []
         self.options = []
         self.backup = []
 
@@ -340,6 +342,7 @@ class SRCBUILD(object):
             'makedepends': 'makedepends',
             'checkdepends': 'checkdepends',
             'sources': 'sources',
+            'pgpkeys': 'pgpkeys',
             'options': 'options',
             'backup': 'backup',
         }

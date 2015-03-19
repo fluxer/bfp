@@ -246,8 +246,21 @@ class Misc(object):
 
         self.file_write(sfile, re.sub(string, string2, self.file_read(sfile)))
 
-    def file_sign(self, sfile, skey=None):
+    def gpg_receive(self, lkeys):
+        ''' Import PGP keys as (somewhat) trusted '''
+        self.typecheck(lkeys, (types.ListType, types.TupleType))
+
+        if self.OFFLINE:
+            return
+        gpg = self.whereis('gpg2')
+        for key in lkeys:
+            self.system_command((gpg, '--recv-keys', key))
+
+    def gpg_sign(self, sfile, skey=None):
         ''' Sign a file with PGP signature via GnuPG '''
+        self.typecheck(sfile, (types.StringTypes))
+        self.typecheck(skey, (types.NoneType, types.StringTypes))
+
         cmd = [self.whereis('gpg2')]
         if skey:
             cmd.extend(('--default-key', skey))
@@ -259,8 +272,11 @@ class Misc(object):
             self.SIGNPASS = self.getpass('Passphrase: ')
         self.system_input(cmd, self.SIGNPASS)
 
-    def file_verify(self, sfile, ssignature=None):
+    def gpg_verify(self, sfile, ssignature=None):
         ''' Verify file PGP signature via GnuPG '''
+        self.typecheck(sfile, (types.StringTypes))
+        self.typecheck(ssignature, (types.NoneType, types.StringTypes))
+
         gpg = self.whereis('gpg2')
         # in case the signature is passed instead of the file to verify
         if sfile.endswith('.sig'):

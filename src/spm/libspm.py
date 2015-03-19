@@ -765,6 +765,10 @@ class Source(object):
         misc.dir_create(self.source_dir, DEMOTE)
         misc.dir_create(self.sources_dir, DEMOTE)
 
+        if self.target_gpgkeys:
+            message.sub_info(_('Preparing PGP keys'))
+            misc.gpg_receive(self.target_gpgkeys)
+
         message.sub_info(_('Preparing sources'))
         for src_url in self.target_sources:
             src_base = os.path.basename(src_url)
@@ -791,6 +795,10 @@ class Source(object):
                 message.sub_debug(_('Linking'), local_file)
                 os.symlink(local_file, link_file)
 
+            if src_url.endswith(('.asc', '.sig')) and self.verify:
+                message.sub_debug(_('Verifying'), src_url)
+                misc.gpg_verify(link_file)
+
             if misc.archive_supported(link_file):
                 decompressed = False
                 for sfile in misc.archive_list(link_file):
@@ -801,11 +809,6 @@ class Source(object):
                         break
                 if not decompressed:
                     message.sub_debug(_('Already extracted'), link_file)
-
-            if src_url.endswith(('.asc', '.sig')):
-                if self.verify:
-                    message.sub_debug(_('Verifying'), src_url)
-                    misc.file_verify(link_file)
 
     def compile(self):
         ''' Compile target sources '''
@@ -1020,7 +1023,7 @@ class Source(object):
             self.install_dir)
         if SIGN:
             message.sub_info(_('Signing tarball'))
-            misc.file_sign(self.target_tarball, SIGN)
+            misc.gpg_sign(self.target_tarball, SIGN)
 
     def merge(self):
         ''' Merget target to system '''
@@ -1256,6 +1259,7 @@ class Source(object):
             self.target_depends = database.remote_metadata(self.target_dir, 'depends')
             self.target_makedepends = database.remote_metadata(self.target_dir, 'makedepends')
             self.target_sources = database.remote_metadata(self.target_dir, 'sources')
+            self.target_gpgkeys = database.remote_metadata(self.target_dir, 'pgpkeys')
             self.target_options = database.remote_metadata(self.target_dir, 'options')
             self.target_backup = database.remote_metadata(self.target_dir, 'backup')
             self.target_footprint = os.path.join('var/local/spm', self.target_name, 'footprint')
@@ -1529,6 +1533,7 @@ class Binary(Source):
             self.target_depends = database.remote_metadata(self.target_dir, 'depends')
             self.target_makedepends = database.remote_metadata(self.target_dir, 'makedepends')
             self.target_sources = database.remote_metadata(self.target_dir, 'sources')
+            self.target_gpgkeys = database.remote_metadata(self.target_dir, 'pgpkeys')
             self.target_options = database.remote_metadata(self.target_dir, 'options')
             self.target_backup = database.remote_metadata(self.target_dir, 'backup')
             self.target_footprint = os.path.join('var/local/spm', self.target_name, 'footprint')

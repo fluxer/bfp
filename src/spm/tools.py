@@ -188,8 +188,13 @@ class Dist(object):
             target_distfile = os.path.join(self.directory, \
                 target_basename + '_' + target_version + '.tar.bz2')
             target_sources = database.remote_metadata(target, 'sources')
+            target_pgpkeys = database.remote_metadata(target, 'pgpkeys')
 
             if self.do_sources:
+                if target_pgpkeys:
+                    message.sub_info(_('Preparing PGP keys'))
+                    misc.gpg_receive(target_pgpkeys)
+
                 message.sub_info(_('Preparing sources'))
                 for src_url in target_sources:
                     src_base = os.path.basename(src_url)
@@ -199,11 +204,15 @@ class Dist(object):
                         message.sub_debug(_('Fetching'), src_url)
                         misc.fetch(src_url, src_file, libspm.MIRRORS, 'distfiles/')
 
+                    if src_url.endswith(('.asc', '.sig')) and libspm.VERIFY:
+                        message.sub_debug(_('Verifying'), src_url)
+                        misc.gpg_verify(link_file)
+
             message.sub_info(_('Compressing'), target_distfile)
             misc.archive_compress((target_directory,), target_distfile, target_directory)
             if libspm.SIGN:
                 message.sub_info(_('Signing'), target_distfile)
-                misc.file_sign(target_distfile, libspm.SIGN)
+                misc.gpg_sign(target_distfile, libspm.SIGN)
 
             if self.do_clean:
                 message.sub_info(_('Purging sources'))
@@ -599,7 +608,7 @@ class Pack(object):
                 misc.archive_compress(content, target_packfile, '/')
                 if libspm.SIGN:
                     message.sub_info(_('Signing'), target_packfile)
-                    misc.file_sign(target_packfile, libspm.SIGN)
+                    misc.gpg_sign(target_packfile, libspm.SIGN)
 
 
 class Pkg(object):
