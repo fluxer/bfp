@@ -708,7 +708,7 @@ class Source(object):
                 misc.system_trigger((mkinitfs))
 
         grub_mkconfig = misc.whereis('grub-mkconfig', False, True)
-        grub_mkconfig_regex = '(?:^|\\s)(boot/.*|etc/grub.d/.*)(?:$|\\s)'
+        grub_mkconfig_regex = '(?:^|\\s)(?:/)?(boot/.*|etc/grub.d/.*)(?:$|\\s)'
         message.sub_debug('grub-mkconfig', grub_mkconfig or '')
         match = misc.string_search(grub_mkconfig_regex, adjcontent, escape=False)
         if match and grub_mkconfig:
