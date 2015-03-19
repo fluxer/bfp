@@ -33,7 +33,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.6.1 (6642a8f)"
+app_version = "1.6.1 (3b304d7)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -504,9 +504,9 @@ class Sane(object):
                         if src.startswith(('http://', 'https://', 'ftp://', 'ftps://')):
                             sig1 = '%s.sig' % src
                             sig2 = '%s.asc' % src
-                            if misc.url_ping(sig1):
+                            if misc.url_ping(sig1) and not sig1 in sources:
                                 message.sub_warning(_('Signature available but not in sources'), sig1)
-                            elif misc.url_ping(sig2):
+                            elif misc.url_ping(sig2) and not sig2 in sources:
                                 message.sub_warning(_('Signature available but not in sources'), sig2)
 
 class Merge(object):
