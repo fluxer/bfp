@@ -246,13 +246,20 @@ class Misc(object):
 
         self.file_write(sfile, re.sub(string, string2, self.file_read(sfile)))
 
-    def gpg_receive(self, lkeys):
+    def gpg_receive(self, lkeys, lservers=None):
         ''' Import PGP keys as (somewhat) trusted '''
         self.typecheck(lkeys, (types.ListType, types.TupleType))
+        self.typecheck(lservers, (types.NoneType, types.ListType, types.TupleType))
 
         if self.OFFLINE:
             return
-        cmd = [self.whereis('gpg2'), '--recv-keys']
+        if lservers is None:
+            lservers = []
+        # FIXME: do --refresh-keys if already imported
+        cmd = [self.whereis('gpg2')]
+        for server in lservers:
+            cmd.extend(('--keyserver', server))
+        cmd.append('--recv-keys')
         cmd.extend(lkeys)
         self.system_command(cmd)
 

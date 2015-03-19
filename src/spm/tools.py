@@ -33,7 +33,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.6.1 (3b304d7)"
+app_version = "1.6.1 (6e3e09e)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -193,7 +193,7 @@ class Dist(object):
             if self.do_sources:
                 message.sub_info(_('Preparing PGP keys'))
                 if target_pgpkeys and libspm.VERIFY:
-                    misc.gpg_receive(target_pgpkeys)
+                    misc.gpg_receive(target_pgpkeys, libspm.KEYSERVERS)
 
                 message.sub_info(_('Preparing sources'))
                 for src_url in target_sources:

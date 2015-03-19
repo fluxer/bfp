@@ -26,7 +26,7 @@ CATCH = False
 MAIN_CONF = '/etc/spm.conf'
 REPOSITORIES_CONF = '/etc/spm/repositories.conf'
 MIRRORS_CONF = '/etc/spm/mirrors.conf'
-TRIGGERS_CONF = '/etc/spm/triggers.conf'
+KEYSERVERS_CONF = '/etc/spm/keyservers.conf'
 DEFAULTS = {
     'CACHE_DIR': '/var/cache/spm',
     'BUILD_DIR': '/var/tmp/spm',
@@ -133,6 +133,23 @@ else:
 
     if not MIRRORS and MIRROR:
         message.critical(_('Mirrors configuration file is empty'))
+        sys.exit(2)
+
+# parse PGP keys servers configuration file
+if not os.path.isfile(KEYSERVERS_CONF):
+    message.warning(_('PGP keys servers configuration file does not exist'), KEYSERVERS_CONF)
+    KEYSERVERS = ['pool.sks-keyservers.net']
+else:
+    KEYSERVERS = []
+    mirrors_conf = open(KEYSERVERS_CONF, 'r')
+    for line in mirrors_conf.readlines():
+        line = line.strip()
+        if line:
+            KEYSERVERS.append(line)
+    mirrors_conf.close()
+
+    if not KEYSERVERS and VERIFY:
+        message.critical(_('PGP keys servers configuration file is empty'))
         sys.exit(2)
 
 # override module variables from own configuration
@@ -767,7 +784,7 @@ class Source(object):
 
         message.sub_info(_('Preparing PGP keys'))
         if self.target_pgpkeys and self.verify:
-            misc.gpg_receive(self.target_pgpkeys)
+            misc.gpg_receive(self.target_pgpkeys, KEYSERVERS)
 
         message.sub_info(_('Preparing sources'))
         for src_url in self.target_sources:
