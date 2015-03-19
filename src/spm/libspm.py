@@ -1507,6 +1507,12 @@ class Binary(Source):
                 found = True
                 message.sub_debug(_('Fetching'), surl)
                 misc.fetch(surl, local_file, MIRRORS, 'tarballs/%s/' % os.uname()[4])
+                if VERIFY:
+                    sigurl = '%s.sig' % surl
+                    message.sub_debug(_('Fetching'), sigurl)
+                    misc.fetch(sigurl, local_file, MIRRORS, 'tarballs/%s/' % os.uname()[4])
+                    message.sub_debug(_('Verifying'), local_file)
+                    misc.gpg_verify(local_file)
 
         if not found:
             message.sub_critical(_('Binary tarball not available available for'), self.target_name)
