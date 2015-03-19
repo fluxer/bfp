@@ -33,7 +33,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.6.1 (7aa5ee4)"
+app_version = "1.6.1 (d1dc06d)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -195,8 +195,9 @@ class Dist(object):
                     src_base = os.path.basename(src_url)
                     src_file = os.path.join(target_directory, src_base)
 
-                    message.sub_debug(_('Fetching'), src_url)
-                    misc.fetch(src_url, src_file, libspm.MIRRORS, 'distfiles/')
+                    if not os.path.isfile(src_file):
+                        message.sub_debug(_('Fetching'), src_url)
+                        misc.fetch(src_url, src_file, libspm.MIRRORS, 'distfiles/')
 
             message.sub_info(_('Compressing'), target_distfile)
             misc.archive_compress((target_directory,), target_distfile, target_directory)

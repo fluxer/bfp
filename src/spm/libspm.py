@@ -772,15 +772,16 @@ class Source(object):
             src_file = os.path.join(self.target_dir, src_base)
             link_file = os.path.join(self.source_dir, src_base)
 
-            message.sub_debug(_('Fetching'), src_url)
-            if self.mirror:
-                misc.fetch(src_url, local_file, MIRRORS, 'distfiles/')
-            else:
-                misc.fetch(src_url, local_file)
+            if not os.path.isfile(src_file):
+                message.sub_debug(_('Fetching'), src_url)
+                if self.mirror:
+                    misc.fetch(src_url, local_file, MIRRORS, 'distfiles/')
+                else:
+                    misc.fetch(src_url, local_file)
 
             if os.path.islink(link_file):
                 message.sub_debug(_('Already linked'), src_file)
-            elif os.path.isdir(local_file + '/.git'):
+            elif os.path.isdir('%s/.git' % local_file):
                 message.sub_debug(_('Copying'), src_file)
                 shutil.copytree(local_file, link_file)
             elif os.path.isfile(src_file):
