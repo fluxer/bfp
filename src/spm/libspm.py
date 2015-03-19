@@ -152,12 +152,13 @@ else:
         message.critical(_('PGP keys servers configuration file is empty'))
         sys.exit(2)
 
-# override module variables from own configuration
+# override module variables from configuration
 message.CATCH = CATCH
 misc.CATCH = CATCH
 misc.OFFLINE = OFFLINE
 misc.TIMEOUT = TIMEOUT
 misc.ROOT_DIR = ROOT_DIR
+misc.GPGHOME = '/etc/spm/gpg'
 database.ROOT_DIR = ROOT_DIR
 database.CACHE_DIR = CACHE_DIR
 database.LOCAL_DIR = LOCAL_DIR

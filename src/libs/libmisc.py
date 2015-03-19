@@ -41,6 +41,7 @@ class Misc(object):
         self.ROOT_DIR = '/'
         self.CATCH = False
         self.SIGNPASS = None
+        self.GPGHOME = os.path.expanduser('~/.gnupg')
         self.magic = Magic()
 
     def ping(self, url='http://google.com'):
@@ -255,10 +256,11 @@ class Misc(object):
             return
         if lservers is None:
             lservers = []
-        # FIXME: do --refresh-keys if already imported
-        cmd = [self.whereis('gpg2')]
+        self.dir_create(self.GPGHOME, ipermissions=0700)
+        cmd = [self.whereis('gpg2'), '--homedir', self.GPGHOME]
         for server in lservers:
             cmd.extend(('--keyserver', server))
+        # FIXME: do --refresh-keys if already imported
         cmd.append('--recv-keys')
         cmd.extend(lkeys)
         self.system_command(cmd)
@@ -268,13 +270,12 @@ class Misc(object):
         self.typecheck(sfile, (types.StringTypes))
         self.typecheck(skey, (types.NoneType, types.StringTypes))
 
-        cmd = [self.whereis('gpg2')]
+        self.dir_create(self.GPGHOME, ipermissions=0700)
+        cmd = [self.whereis('gpg2'), '--homedir', self.GPGHOME]
         if skey:
             cmd.extend(('--default-key', skey))
         cmd.extend(('--yes', '--no-tty', '--passphrase-fd', '0'))
         cmd.extend(('--detach-sig', '--sign', '--batch', sfile))
-        # FIXME: this will lock any GUI frontend but root has no access to X
-        # usually which makes pinentry usesless in this case
         if not self.SIGNPASS:
             self.SIGNPASS = self.getpass('Passphrase: ')
         self.system_input(cmd, self.SIGNPASS)
@@ -284,7 +285,8 @@ class Misc(object):
         self.typecheck(sfile, (types.StringTypes))
         self.typecheck(ssignature, (types.NoneType, types.StringTypes))
 
-        gpg = self.whereis('gpg2')
+        self.dir_create(self.GPGHOME, ipermissions=0700)
+        cmd = [self.whereis('gpg2'), '--homedir', self.GPGHOME]
         # in case the signature is passed instead of the file to verify
         if sfile.endswith('.sig'):
             sfile = sfile.replace('.sig', '')
@@ -296,9 +298,10 @@ class Misc(object):
                 ssignature = sig2
             else:
                 ssignature = '%s.sig' % sfile
-        self.system_command((gpg, '--verify', '--batch', ssignature, sfile))
+        cmd.extend(('--verify', '--batch', ssignature, sfile))
+        self.system_command(cmd)
 
-    def dir_create(self, sdir, demote=''):
+    def dir_create(self, sdir, demote='', ipermissions=0):
         ''' Create directory if it does not exist, including leading paths '''
         self.typecheck(sdir, (types.StringTypes))
         self.typecheck(demote, (types.StringTypes))
@@ -309,6 +312,8 @@ class Misc(object):
                 self.system_command((self.whereis('mkdir'), '-p', sdir), demote=demote)
             else:
                 os.makedirs(sdir)
+        if ipermissions:
+            os.chmod(sdir, ipermissions)
 
     def dir_remove(self, sdir):
         ''' Remove directory recursively '''
