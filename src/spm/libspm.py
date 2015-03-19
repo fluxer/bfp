@@ -1504,6 +1504,7 @@ class Binary(Source):
         for mirror in MIRRORS:
             surl = '%s/tarballs/%s/%s' % (mirror, os.uname()[4], src_base)
             if misc.url_ping(surl):
+                found = True
                 message.sub_debug(_('Fetching'), surl)
                 misc.fetch(surl, local_file, MIRRORS, 'tarballs/%s/' % os.uname()[4])
 

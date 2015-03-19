@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-19 19:52+0000\n"
+"POT-Creation-Date: 2015-03-19 20:47+0000\n"
 "PO-Revision-Date: 2015-03-19 14:36+0000\n"
 "Last-Translator: Ivailo Monev <xakepa10@gmail.com>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -263,7 +263,7 @@ msgstr ""
 msgid "Preparing sources"
 msgstr "Подготовка на източниците"
 
-#: libspm.py:798 libspm.py:1507 tools.py:207 tools.py:669
+#: libspm.py:798 libspm.py:1508 tools.py:207 tools.py:669
 msgid "Fetching"
 msgstr ""
 
@@ -475,15 +475,15 @@ msgstr "Премахване на отпечатъка и метадатата"
 msgid "Executing post_remove()"
 msgstr "Изпълняване на post_remove()"
 
-#: libspm.py:1261 libspm.py:1535
+#: libspm.py:1261 libspm.py:1536
 msgid "Ignoring target"
 msgstr "Игориране на мишена"
 
-#: libspm.py:1265 libspm.py:1539 tools.py:184 tools.py:676 tools.py:745
+#: libspm.py:1265 libspm.py:1540 tools.py:184 tools.py:676 tools.py:745
 msgid "Invalid target"
 msgstr "Невалидна мишена"
 
-#: libspm.py:1290 libspm.py:1564
+#: libspm.py:1290 libspm.py:1565
 msgid "Target is up-to-date"
 msgstr "Мишената е последната налична версия"
 
@@ -542,7 +542,7 @@ msgstr ""
 msgid "Starting %s cleanup at"
 msgstr "Започване чистка на %s в"
 
-#: libspm.py:1370 libspm.py:1568
+#: libspm.py:1370 libspm.py:1569
 #, python-format
 msgid "Starting %s preparations at"
 msgstr "Започване подготовка на %s в"
@@ -574,12 +574,12 @@ msgstr "src_install() не е зададен"
 msgid "Starting %s install at"
 msgstr "Започване инсталация на %s в"
 
-#: libspm.py:1427 libspm.py:1571
+#: libspm.py:1427 libspm.py:1572
 #, python-format
 msgid "Starting %s merge at"
 msgstr "Започване сливане на %s в"
 
-#: libspm.py:1431 libspm.py:1575
+#: libspm.py:1431 libspm.py:1576
 #, python-format
 msgid "Starting %s remove at"
 msgstr "Започване премахване на %s в"
@@ -596,11 +596,11 @@ msgstr ""
 msgid "Checking mirrors for"
 msgstr ""
 
-#: libspm.py:1511 tools.py:750
+#: libspm.py:1512 tools.py:750
 msgid "Binary tarball not available available for"
 msgstr ""
 
-#: libspm.py:1600
+#: libspm.py:1601
 msgid "Match in"
 msgstr "Съвпадение в"
 

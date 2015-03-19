@@ -36,7 +36,7 @@ import libspm
 misc.GPGHOME = '/etc/spm/gpg'
 libspm.misc.GPGHOME = '/etc/spm/gpg'
 
-app_version = "1.6.1 (0bead61)"
+app_version = "1.6.1 (18fe140)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
