@@ -305,6 +305,7 @@ class Misc(object):
         ''' Create directory if it does not exist, including leading paths '''
         self.typecheck(sdir, (types.StringTypes))
         self.typecheck(demote, (types.StringTypes))
+        self.typecheck(ipermissions, (types.IntType))
 
         if not os.path.isdir(sdir) and not os.path.islink(sdir):
             # sadly, demoting works only for sub-processes
