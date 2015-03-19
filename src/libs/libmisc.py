@@ -503,6 +503,26 @@ class Misc(object):
             lfile.close()
             rfile.close()
 
+    def fetch_git(self, surl, destination):
+        ''' Clone/pull Git repository '''
+        self.typecheck(surl, (types.StringTypes))
+        self.typecheck(destination, (types.StringTypes))
+
+        if self.OFFLINE:
+            return
+
+        git = self.whereis('git')
+        if os.path.isdir('%s/.git' % destination):
+            self.system_command((git, 'pull', surl), cwd=destination)
+        else:
+            self.system_command((git, 'clone', '--depth=1', surl, \
+                destination))
+            # allow gracefull pulls and merges
+            self.system_command((git, 'config', 'user.name', \
+                'spm'), cwd=destination)
+            self.system_command((git, 'config', 'user.email', \
+                'spm@unnatended.fake'), cwd=destination)
+
     def fetch(self, surl, destination, lmirrors=None, ssuffix='', iretry=3):
         ''' Download file from mirror if possible, iretry is passed internally! '''
         self.typecheck(surl, (types.StringTypes))
@@ -519,8 +539,15 @@ class Misc(object):
         else:
             snewurl = surl
         try:
-            self.fetch_plain(snewurl, destination, 0)
-            self.file_write('%s.last' % destination, str(os.path.getsize(destination)))
+            # mirrors are not supported for Git repos on purpose
+            if surl.startswith('git://') or surl.endswith('.git'):
+                self.fetch_git(surl, destination)
+            elif snewurl.startswith(('http://', 'https://', 'ftp://', \
+                'ftps://')):
+                self.fetch_plain(snewurl, destination, 0)
+                self.file_write('%s.last' % destination, str(os.path.getsize(destination)))
+            else:
+                raise Exception('Unsupported URL', surl)
         except URLError as detail:
             if not iretry == 0:
                 return self.fetch(surl, destination, lmirrors, ssuffix, iretry-1)

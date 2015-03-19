@@ -348,27 +348,13 @@ class Repo(object):
         rdir = os.path.join(CACHE_DIR, 'repositories')
         misc.dir_create(rdir, DEMOTE)
 
-        git = misc.whereis('git')
         if os.path.exists(self.repository_url):
             # repository is local path, create a copy of it
             message.sub_info(_('Cloning local'), self.repository_name)
             shutil.copytree(self.repository_url, self.repository_dir)
-        elif os.path.isdir(self.repository_dir):
-            # existing Git repository, update
-            message.sub_info(_('Updating repository'), self.repository_name)
-            misc.system_command((git, 'pull', \
-                self.repository_url), cwd=self.repository_dir, demote=DEMOTE)
         else:
-            # non-existing Git repository, fetch
-            message.sub_info(_('Cloning remote'), self.repository_name)
-            misc.system_command((git, 'clone', '--depth=1', \
-                self.repository_url, self.repository_dir), demote=DEMOTE)
-            message.sub_info(_('Setting up user information for repository'))
-            # allow gracefull pulls and merges
-            misc.system_command((git, 'config', 'user.name', \
-                'spm'), cwd=self.repository_dir)
-            misc.system_command((git, 'config', 'user.email', \
-                'spm@unnatended.fake'), cwd=self.repository_dir)
+            message.sub_info(_('Cloning/pulling remote'), self.repository_name)
+            misc.fetch(self.repository_url, self.repository_dir)
 
     def prune(self):
         ''' Remove repositories that are no longer in the config '''
@@ -786,36 +772,17 @@ class Source(object):
             src_file = os.path.join(self.target_dir, src_base)
             link_file = os.path.join(self.source_dir, src_base)
 
-            if src_url.startswith('git://') or src_url.endswith('.git'):
-                if OFFLINE:
-                    message.sub_warning(_('Working offline, ignoring Git repository'), src_url)
-                elif os.path.isdir(link_file):
-                    message.sub_debug(_('Updating Git repository'), src_url)
-                    misc.system_command((misc.whereis('git'), 'pull', \
-                        src_url), cwd=link_file, demote=DEMOTE)
-                else:
-                    git = misc.whereis('git')
-                    message.sub_debug(_('Cloning Git repository'), src_url)
-                    misc.system_command((git, 'clone', '--depth=1', src_url, \
-                        link_file), demote=DEMOTE)
-                    message.sub_debug(_('Setting up user information for repository'))
-                    # allow gracefull pulls and merges
-                    misc.system_command((git, 'config', 'user.name', 'spm'), \
-                        cwd=link_file)
-                    misc.system_command((git, 'config', 'user.email', \
-                        'spm@unnatended.fake'), cwd=link_file)
-                continue
-
-            elif src_url.startswith(('http://', 'https://', 'ftp://', \
-                'ftps://')):
-                message.sub_debug(_('Fetching'), src_url)
-                if self.mirror:
-                    misc.fetch(src_url, local_file, MIRRORS, 'distfiles/')
-                else:
-                    misc.fetch(src_url, local_file)
+            message.sub_debug(_('Fetching'), src_url)
+            if self.mirror:
+                misc.fetch(src_url, local_file, MIRRORS, 'distfiles/')
+            else:
+                misc.fetch(src_url, local_file)
 
             if os.path.islink(link_file):
                 message.sub_debug(_('Already linked'), src_file)
+            elif os.path.isdir(local_file + '/.git'):
+                message.sub_debug(_('Copying'), src_file)
+                shutil.copytree(local_file, link_file)
             elif os.path.isfile(src_file):
                 message.sub_debug(_('Linking'), src_file)
                 os.symlink(src_file, link_file)

@@ -33,7 +33,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.6.1 (a2adc06)"
+app_version = "1.6.1 (7aa5ee4)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -195,30 +195,8 @@ class Dist(object):
                     src_base = os.path.basename(src_url)
                     src_file = os.path.join(target_directory, src_base)
 
-                    if src_url.startswith('git://') or src_url.endswith('.git'):
-                        if libspm.OFFLINE:
-                            message.sub_warning(_('Working offline, ignoring Git repository'), src_url)
-                        elif os.path.isdir(src_file):
-                            message.sub_debug(_('Updating Git repository'), src_url)
-                            misc.system_command((misc.whereis('git'), \
-                                'pull', src_url), cwd=src_file)
-                        else:
-                            git = misc.whereis('git')
-                            message.sub_debug(_('Cloning Git repository'), src_url)
-                            misc.system_command((git, 'clone', '--depth=1', \
-                                src_url, src_file))
-                            message.sub_debug(_('Setting up user information for repository'))
-                            # allow gracefull pulls and merges
-                            misc.system_command((git, 'config', 'user.name', \
-                                'spm'), cwd=src_file)
-                            misc.system_command((git, 'config', 'user.email', \
-                                'spm@unnatended.fake'), cwd=src_file)
-                        continue
-
-                    elif src_url.startswith(('http://', 'https://', 'ftp://', \
-                        'ftps://')):
-                        message.sub_debug(_('Fetching'), src_url)
-                        misc.fetch(src_url, src_file, libspm.MIRRORS, 'distfiles/')
+                    message.sub_debug(_('Fetching'), src_url)
+                    misc.fetch(src_url, src_file, libspm.MIRRORS, 'distfiles/')
 
             message.sub_info(_('Compressing'), target_distfile)
             misc.archive_compress((target_directory,), target_distfile, target_directory)
