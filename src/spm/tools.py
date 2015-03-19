@@ -33,7 +33,7 @@ database = libpackage.Database()
 import libspm
 
 
-app_version = "1.6.1 (d1dc06d)"
+app_version = "1.6.1 (3cdfc34)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -206,7 +206,7 @@ class Dist(object):
 
                     if src_url.endswith(('.asc', '.sig')) and libspm.VERIFY:
                         message.sub_debug(_('Verifying'), src_url)
-                        misc.gpg_verify(link_file)
+                        misc.gpg_verify(src_file)
 
             message.sub_info(_('Compressing'), target_distfile)
             misc.archive_compress((target_directory,), target_distfile, target_directory)
