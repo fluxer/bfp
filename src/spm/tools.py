@@ -32,11 +32,7 @@ import libpackage
 database = libpackage.Database()
 import libspm
 
-# override module variables
-misc.GPGHOME = '/etc/spm/gpg'
-libspm.misc.GPGHOME = '/etc/spm/gpg'
-
-app_version = "1.6.1 (353028b)"
+app_version = "1.6.1 (3487d49)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''

@@ -19,7 +19,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.6.1 (353028b)"
+app_version = "1.6.1 (3487d49)"
 
 try:
     import libmessage
@@ -48,6 +48,12 @@ try:
             full_path = os.path.abspath(values) + '/'
             libspm.ROOT_DIR = full_path
             libspm.LOCAL_DIR = full_path + 'var/local/spm'
+            setattr(namespace, self.dest, values)
+
+    class OverrideGpgDir(argparse.Action):
+        ''' Override system root directory '''
+        def __call__(self, parser, namespace, values, option_string=None):
+            libspm.GPG_DIR = values
             setattr(namespace, self.dest, values)
 
     class OverrideIgnore(argparse.Action):
@@ -320,6 +326,8 @@ try:
         help=_('Change build directory'))
     parser.add_argument('--root', type=str, action=OverrideRootDir, \
         help=_('Change system root directory'))
+    parser.add_argument('--gpg', type=str, action=OverrideRootDir, \
+        help=_('Change GnuPG home directory'))
     parser.add_argument('--ignore', type=str, action=OverrideIgnore, \
         help=_('Change ignored targets'))
     parser.add_argument('--demote', type=str, \
@@ -437,6 +445,7 @@ try:
         message.sub_info(_('CACHE_DIR'), libspm.CACHE_DIR)
         message.sub_info(_('BUILD_DIR'), libspm.BUILD_DIR)
         message.sub_info(_('ROOT_DIR'), libspm.ROOT_DIR)
+        message.sub_info(_('GPG_DIR'), libspm.GPG_DIR)
         message.sub_info(_('IGNORE'), libspm.IGNORE)
         message.sub_info(_('DEMOTE'), libspm.DEMOTE)
         message.sub_info(_('SIGN'), libspm.SIGN)
@@ -477,6 +486,7 @@ try:
         message.info(_('Runtime information'))
         message.sub_info(_('CACHE_DIR'), libspm.CACHE_DIR)
         message.sub_info(_('ROOT_DIR'), libspm.ROOT_DIR)
+        message.sub_info(_('GPG_DIR'), libspm.GPG_DIR)
         message.sub_info(_('IGNORE'), libspm.IGNORE)
         message.sub_info(_('OFFLINE'), libspm.OFFLINE)
         message.sub_info(_('MIRROR'), libspm.MIRROR)

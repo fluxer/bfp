@@ -39,9 +39,9 @@ class Misc(object):
         self.OFFLINE = False
         self.TIMEOUT = 30
         self.ROOT_DIR = '/'
+        self.GPG_DIR = os.path.expanduser('~/.gnupg')
         self.CATCH = False
         self.SIGNPASS = None
-        self.GPGHOME = os.path.expanduser('~/.gnupg')
         self.magic = Magic()
 
     def ping(self, url='http://google.com'):
@@ -256,8 +256,8 @@ class Misc(object):
             return
         if lservers is None:
             lservers = []
-        self.dir_create(self.GPGHOME, ipermissions=0700)
-        cmd = [self.whereis('gpg2'), '--homedir', self.GPGHOME]
+        self.dir_create(self.GPG_DIR, ipermissions=0700)
+        cmd = [self.whereis('gpg2'), '--homedir', self.GPG_DIR]
         for server in lservers:
             cmd.extend(('--keyserver', server))
         # FIXME: do --refresh-keys if already imported
@@ -270,8 +270,8 @@ class Misc(object):
         self.typecheck(sfile, (types.StringTypes))
         self.typecheck(skey, (types.NoneType, types.StringTypes))
 
-        self.dir_create(self.GPGHOME, ipermissions=0700)
-        cmd = [self.whereis('gpg2'), '--homedir', self.GPGHOME]
+        self.dir_create(self.GPG_DIR, ipermissions=0700)
+        cmd = [self.whereis('gpg2'), '--homedir', self.GPG_DIR]
         if skey:
             cmd.extend(('--default-key', skey))
         cmd.extend(('--yes', '--no-tty', '--passphrase-fd', '0'))
@@ -285,8 +285,8 @@ class Misc(object):
         self.typecheck(sfile, (types.StringTypes))
         self.typecheck(ssignature, (types.NoneType, types.StringTypes))
 
-        self.dir_create(self.GPGHOME, ipermissions=0700)
-        cmd = [self.whereis('gpg2'), '--homedir', self.GPGHOME]
+        self.dir_create(self.GPG_DIR, ipermissions=0700)
+        cmd = [self.whereis('gpg2'), '--homedir', self.GPG_DIR]
         # in case the signature is passed instead of the file to verify
         if sfile.endswith('.sig'):
             sfile = sfile.replace('.sig', '')

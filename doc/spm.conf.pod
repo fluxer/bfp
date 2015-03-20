@@ -36,6 +36,13 @@ of the string, e.g. /home/joe/bootstrap/.
 
 Default: /
 
+=head2 GPG_DIR
+
+Set the GnuPG home directory. It would make sense to change it only to make the
+imported keys temporary by setting this option to /tmp/spm-gpg or /run/spm-gpg.
+
+Default: /etc/spm/gpg
+
 =head2 IGNORE
 
 Set targets to be ignored when building and removing.
@@ -219,6 +226,8 @@ BUILD_DIR = /var/tmp/spm
 
 ROOT_DIR = /
 
+GPG_DIR = /etc/spm/gpg
+
 IGNORE = glibc zlib bash
 
 =head1 FILES
@@ -228,6 +237,8 @@ IGNORE = glibc zlib bash
 /etc/spm/repositories.conf
 
 /etc/spm/mirrors.conf
+
+/etc/spm/keyservers.conf
 
 =head1 AUTHORS
 

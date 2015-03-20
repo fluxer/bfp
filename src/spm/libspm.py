@@ -32,6 +32,7 @@ DEFAULTS = {
     'BUILD_DIR': '/var/tmp/spm',
     'ROOT_DIR': '/',
     'LOCAL_DIR': '/var/local/spm',
+    'GPG_DIR': '/etc/spm/gpg',
     'IGNORE': '',
     'DEMOTE': '',
     'SIGN': '',
@@ -74,6 +75,7 @@ CACHE_DIR = conf.get('spm', 'CACHE_DIR')
 BUILD_DIR = conf.get('spm', 'BUILD_DIR')
 ROOT_DIR = conf.get('spm', 'ROOT_DIR')
 LOCAL_DIR = ROOT_DIR + 'var/local/spm'
+GPG_DIR = conf.get('spm', 'GPG_DIR')
 IGNORE = conf.get('spm', 'IGNORE').split(' ')
 DEMOTE = conf.get('spm', 'DEMOTE')
 SIGN = conf.get('spm', 'SIGN')
@@ -158,7 +160,7 @@ misc.CATCH = CATCH
 misc.OFFLINE = OFFLINE
 misc.TIMEOUT = TIMEOUT
 misc.ROOT_DIR = ROOT_DIR
-misc.GPGHOME = '/etc/spm/gpg'
+misc.GPG_DIR = GPG_DIR
 database.ROOT_DIR = ROOT_DIR
 database.CACHE_DIR = CACHE_DIR
 database.LOCAL_DIR = LOCAL_DIR
@@ -182,6 +184,7 @@ class Local(object):
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
         misc.ROOT_DIR = ROOT_DIR
+        misc.GPG_DIR = GPG_DIR
         misc.CATCH = CATCH
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
@@ -261,6 +264,7 @@ class Remote(object):
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
         misc.ROOT_DIR = ROOT_DIR
+        misc.GPG_DIR = GPG_DIR
         misc.CATCH = CATCH
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
@@ -347,6 +351,7 @@ class Repo(object):
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
         misc.ROOT_DIR = ROOT_DIR
+        misc.GPG_DIR = GPG_DIR
         misc.CATCH = CATCH
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
@@ -472,6 +477,7 @@ class Source(object):
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
         misc.ROOT_DIR = ROOT_DIR
+        misc.GPG_DIR = GPG_DIR
         misc.CATCH = CATCH
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
@@ -1466,6 +1472,7 @@ class Binary(Source):
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
         misc.ROOT_DIR = ROOT_DIR
+        misc.GPG_DIR = GPG_DIR
         misc.CATCH = CATCH
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
@@ -1593,6 +1600,7 @@ class Who(object):
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
         misc.ROOT_DIR = ROOT_DIR
+        misc.GPG_DIR = GPG_DIR
         misc.CATCH = CATCH
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
