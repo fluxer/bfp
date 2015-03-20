@@ -19,7 +19,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.6.1 (3487d49)"
+app_version = "1.6.1 (317cfa2)"
 
 try:
     import libmessage
@@ -326,7 +326,7 @@ try:
         help=_('Change build directory'))
     parser.add_argument('--root', type=str, action=OverrideRootDir, \
         help=_('Change system root directory'))
-    parser.add_argument('--gpg', type=str, action=OverrideRootDir, \
+    parser.add_argument('--gpg', type=str, action=OverrideGpgDir, \
         help=_('Change GnuPG home directory'))
     parser.add_argument('--ignore', type=str, action=OverrideIgnore, \
         help=_('Change ignored targets'))
