@@ -12,13 +12,11 @@ import signal
 signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 import gui_ui
-import libspm
-import libmisc, libmessage, libpackage
+import libspm, libmisc, libpackage
 database = libpackage.Database()
-message = libmessage.Message()
 misc = libmisc.Misc()
 misc.CATCH = True
-libspm.misc.CATCH = True
+libspm.CATCH = True
 
 app = QtGui.QApplication(sys.argv)
 MainWindow = QtGui.QMainWindow()
