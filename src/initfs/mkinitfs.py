@@ -111,6 +111,7 @@ try:
                 message.sub_debug('To', sdest)
                 shutil.copy2(sfile, sdest)
                 lcopied.append(sfile)
+                copy_item(sfile)
         else:
             message.warning('File or directory does not exist', src)
 
