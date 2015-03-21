@@ -77,6 +77,7 @@ class Misc(object):
         return None
 
     def getpass(self, sprompt='Password: '):
+        ''' Get password from user input '''
         if not sys.stdin.isatty():
             raise Exception('Standard input is not a TTY')
         return getpass.getpass(sprompt)
@@ -408,7 +409,39 @@ class Misc(object):
 
         # http://www.w3schools.com/tags/ref_urlencode.asp
         # FIXME: incomplete URL normalization table
-        dspecials = {'%20': ' '}
+        dspecials = {'%20': ' ',
+                     '%21': '!',
+                     '%22': '"',
+                     '%23': '#',
+                     '%24': '$',
+                     '%25': '%',
+                     '%26': '&',
+                     '%27': "'",
+                     '%28': '(',
+                     '%29': ')',
+                     '%2A': '*',
+                     '%2B': '+',
+                     '%2C': ',',
+                     '%2D': '-',
+                     '%2E': '.',
+                     '%2F': '/',
+                     '%30': '0',
+                     '%31': '1',
+                     '%32': '2',
+                     '%33': '3',
+                     '%34': '4',
+                     '%35': '5',
+                     '%36': '6',
+                     '%37': '7',
+                     '%38': '8',
+                     '%39': '9',
+                     '%3A': ':',
+                     '%3B': ';',
+                     '%3C': '<',
+                     '%3D': '=',
+                     '%3E': '>',
+                     '%3F': '?',
+                     '%40': '@'}
         sresult = urlparse(surl).path
         for schar in dspecials:
             sresult = sresult.replace(schar, dspecials[schar])
