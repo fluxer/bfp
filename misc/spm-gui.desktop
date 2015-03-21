@@ -1,9 +1,0 @@
-[Desktop Entry]
-TryExec=kdesu
-Exec=kdesu spm-gui
-Comment=Manage software via Graphical User Interfacee
-GenericName=Source Package Manager GUI
-Icon=spm-gui
-Name=SPM GUI
-Type=Application
-Categories=Qt;System;PackageManager;

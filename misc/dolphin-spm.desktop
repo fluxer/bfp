@@ -2,7 +2,7 @@
 
 [Desktop Entry]
 Version=1.0
-Icon=spm-gui
+Icon=package-x-generic
 Type=Service
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin
 MimeType=text/plain;

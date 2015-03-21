@@ -7,25 +7,18 @@ libspm:
 	$(NUITKA) --module libspm.py
 
 all: clean bump
-	$(PYUIC) gui.ui -o gui_ui.py
 	$(NUITKA) --module libspm.py
 	$(NUITKA) spm.py
 	$(NUITKA) tools.py
-	$(NUITKA) --recurse-to=gui_ui gui.py
 	$(STRIP) *.exe *.so
 
 cython: clean bump
-	# FIXME: GUI does not actually work because of gui_ui
-	$(PYUIC) gui.ui -o gui_ui.py
 	$(CYTHON) libspm.py
 	$(CYTHON) --embed spm.py
 	$(CYTHON) --embed tools.py
-	$(CYTHON) gui_ui.py
-	$(CYTHON) --embed gui.py
 	$(CC) -shared libspm.c $(shell pkg-config --cflags $(PYTHON)) -o libspm.so
 	$(CC) spm.c $(shell pkg-config --cflags --libs $(PYTHON)) -o spm.exe
 	$(CC) tools.c $(shell pkg-config --cflags --libs $(PYTHON)) -o tools.exe
-	$(CC) gui_ui.c gui.c $(shell pkg-config --cflags --libs $(PYTHON)) -o gui.exe
 	$(STRIP) *.exe *.so
 
 install:
@@ -37,17 +30,14 @@ install:
 	$(INSTALL) -m644 libspm.so $(DESTDIR)$(SITEDIR)/libspm.so
 	$(INSTALL) -m755 spm.exe $(DESTDIR)$(BINDIR)/spm
 	$(INSTALL) -m755 tools.exe $(DESTDIR)$(BINDIR)/spm-tools
-	$(INSTALL) -m755 gui.exe $(DESTDIR)$(BINDIR)/spm-gui
-
 
 uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libspm.so
 	$(RM) $(DESTDIR)$(BINDIR)/spm
 	$(RM) $(DESTDIR)$(BINDIR)/spm-tools
-	$(RM) $(DESTDIR)$(BINDIR)/spm-gui
 
 clean:
-	$(RM) -r *.build/ *.so *.exe gui_ui.py __pycache__ spm.pot po/*/*.mo po/*/*.mo~ *.c
+	$(RM) -r *.build/ *.so *.exe __pycache__ spm.pot po/*/*.mo po/*/*.mo~ *.c
 	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
 bump:
