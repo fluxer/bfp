@@ -150,6 +150,7 @@ for src in "${@:-.}";do
     src_install
 
     msg "Creating footprint and metadata..."
+    # FIXME: the footprint itself is listed
     mkdir -p "$INSTALL_DIR/var/local/spm/$src_name"
     echo > "$INSTALL_DIR/var/local/spm/$src_name/footprint"
     while IFS= read -r -d '' file; do

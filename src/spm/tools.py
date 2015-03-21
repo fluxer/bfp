@@ -103,7 +103,7 @@ class Check(object):
 
             checked = []
             for req in required:
-                if req in checked:
+                if req in checked or not req:
                     continue
                 rreq = os.path.realpath(req)
                 match = database.local_belongs('(?:^|\\s)%s(?:$|\\s)' % re.escape(rreq), escape=False)
