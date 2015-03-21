@@ -824,15 +824,8 @@ class Source(object):
                 misc.gpg_verify(link_file)
 
             if misc.archive_supported(link_file):
-                decompressed = False
-                for sfile in misc.archive_list(link_file):
-                    if not os.path.exists(os.path.join(self.source_dir, sfile)):
-                        message.sub_debug(_('Extracting'), link_file)
-                        misc.archive_decompress(link_file, self.source_dir, DEMOTE)
-                        decompressed = True
-                        break
-                if not decompressed:
-                    message.sub_debug(_('Already extracted'), link_file)
+                message.sub_debug(_('Extracting'), link_file)
+                misc.archive_decompress(link_file, self.source_dir, DEMOTE)
 
     def compile(self):
         ''' Compile target sources '''
