@@ -30,7 +30,6 @@ class Database(object):
         self.LOCAL_DIR = self.ROOT_DIR + 'var/local/spm'
         self.LOCAL_CACHE = {}
         self.IGNORE = []
-        self._notifiers_setup()
 
     def local_footprint(self, target):
         ''' DEPRECATED: Returns files of target, use local_metadata(target, 'footprint') '''
@@ -117,6 +116,7 @@ class Database(object):
         for wd, mask, cookie, name in notify.event_read():
             recache = True
         if not self.REMOTE_CACHE or recache:
+            self._notifiers_setup()
             self._build_remote_cache()
 
         if basename:
@@ -135,6 +135,7 @@ class Database(object):
         for wd, mask, cookie, name in notify.event_read():
             recache = True
         if not self.LOCAL_CACHE or recache:
+            self._notifiers_setup()
             self._build_local_cache()
 
         if basename:

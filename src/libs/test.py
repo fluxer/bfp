@@ -225,6 +225,15 @@ class TestSuite(unittest.TestCase):
         self.assertEqual(database.remote_mdepends(self.remote_name), \
             self.remote_depends + self.remote_makedepends)
 
+    def test_remote_database_update(self):
+        updated = False
+        pre = database.remote_all()
+        misc.dir_remove(self.remote3_dir)
+        post = database.remote_all()
+        if not pre == post:
+            updated = True
+        self.assertTrue(updated)
+
     # local targets checks
     def test_local_target_version(self):
         self.assertEqual(database.local_metadata(self.local_name, 'version'), \
@@ -268,6 +277,15 @@ class TestSuite(unittest.TestCase):
     def test_local_rdepends_true(self):
         self.assertEqual(database.local_rdepends(self.local_name), \
             self.local2_name.split())
+
+    def test_local_database_update(self):
+        updated = False
+        pre = database.local_all()
+        misc.dir_remove(self.local3_dir)
+        post = database.local_all()
+        if not pre == post:
+            updated = True
+        self.assertTrue(updated)
 
     # misc checks
     def test_file_mime_python(self):
