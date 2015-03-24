@@ -984,7 +984,10 @@ class Inotify(object):
             mask = self.MODIFY | self.DELETE | self.CREATE
         if recursive and os.path.isdir(path):
             for d in os.listdir(path):
-                self.watch_add(os.path.join(path, d), mask)
+                full = os.path.join(path, d)
+                if not os.path.isdir(full):
+                    continue
+                self.watch_add(full, mask)
         wd = self.libc.inotify_add_watch(self.fd, path, mask)
         if wd == -1:
             raise Exception('inotify add error', self.error())
