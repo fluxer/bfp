@@ -15,7 +15,7 @@ to monitor for file/directory changes on filesystems.
 '''
 
 import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, pwd, inspect
-import types, gzip, bz2, time, ctypes, getpass
+import types, gzip, bz2, time, ctypes, getpass, base64
 from struct import unpack
 from fcntl import ioctl
 from termios import FIONREAD
@@ -278,8 +278,8 @@ class Misc(object):
         cmd.extend(('--yes', '--no-tty', '--passphrase-fd', '0'))
         cmd.extend(('--detach-sig', '--sign', '--batch', sfile))
         if not self.SIGNPASS:
-            self.SIGNPASS = self.getpass('Passphrase: ')
-        self.system_input(cmd, self.SIGNPASS)
+            self.SIGNPASS = base64.encodestring(self.getpass('Passphrase: '))
+        self.system_input(cmd, base64.decodestring(self.SIGNPASS))
 
     def gpg_verify(self, sfile, ssignature=None):
         ''' Verify file PGP signature via GnuPG '''
