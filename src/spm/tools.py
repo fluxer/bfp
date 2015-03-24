@@ -32,7 +32,7 @@ import libpackage
 database = libpackage.Database()
 import libspm
 
-app_version = "1.6.1 (860a56a)"
+app_version = "1.6.1 (50bc774)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -750,7 +750,7 @@ class Upload(object):
                 if os.path.isfile(signature):
                     files.append(signature)
                 elif libspm.SIGN:
-                    message.sub_warning('Missing signature for', tarball)
+                    message.sub_warning(_('Missing signature for'), tarball)
                 for sfile in files:
                     message.sub_info(_('Uploading'), sfile)
                     fupload = open(sfile, 'r')

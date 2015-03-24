@@ -503,7 +503,7 @@ class Source(object):
         if '/lib/debug/' in sfile:
             return
         # FIXME: do not run on hardlinks, it will fail with binutils <=2.23.2
-        message.sub_debug('Creating debug file', sfile)
+        message.sub_debug(_('Creating debug file'), sfile)
         # ugly paths manipulation due to GDB standards:
         # https://sourceware.org/gdb/onlinedocs/gdb/Separate-Debug-Files.html
         srelative = sfile.replace(self.install_dir, '')

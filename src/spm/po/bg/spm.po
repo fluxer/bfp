@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-21 04:26+0000\n"
+"POT-Creation-Date: 2015-03-24 22:12+0000\n"
 "PO-Revision-Date: 2015-03-19 14:36+0000\n"
 "Last-Translator: Ivailo Monev <xakepa10@gmail.com>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -149,6 +149,10 @@ msgstr "Стартира се премахване на излишни в"
 #: libspm.py:444
 msgid "Starting update at"
 msgstr "Стартира се обновление в"
+
+#: libspm.py:506
+msgid "Creating debug file"
+msgstr ""
 
 #: libspm.py:529
 msgid "Updating shared libraries cache"
@@ -1275,6 +1279,10 @@ msgstr ""
 
 #: tools.py:729
 msgid "User is empty"
+msgstr ""
+
+#: tools.py:753
+msgid "Missing signature for"
 msgstr ""
 
 #: tools.py:755
