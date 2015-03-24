@@ -479,10 +479,10 @@ class Misc(object):
     def fetch_request(self, surl, data=None):
         ''' Returns urlopen object, it is NOT closed! '''
         self.typecheck(surl, (types.StringTypes))
-        if not data:
-            data = {}
-        self.typecheck(data, (types.DictType))
+        self.typecheck(data, (types.NoneType, types.DictType))
 
+        if data is None:
+            data = {}
         request = Request(surl, headers=data)
         # SSL verification works OOTB only on Python >= 2.7.9 (officially)
         if sys.version_info[2] >= 9:
