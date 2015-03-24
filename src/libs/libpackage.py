@@ -60,9 +60,8 @@ class Database(object):
         if os.path.isdir(self.LOCAL_DIR):
             notify.watch_add(self.LOCAL_DIR)
 
-    def _build_local_cache(self, event=None):
+    def _build_local_cache(self):
         ''' Build internal local database cache '''
-        # event is only for compat with the notifier
         self.LOCAL_CACHE = {}
         for sdir in misc.list_dirs(self.LOCAL_DIR):
             metadata = os.path.join(sdir, 'metadata')
@@ -77,9 +76,8 @@ class Database(object):
                 }
         # print(sys.getsizeof(self.LOCAL_CACHE))
 
-    def _build_remote_cache(self, event=None):
+    def _build_remote_cache(self):
         ''' Build internal remote database cache '''
-        # event is only for compat with the notifier
         self.REMOTE_CACHE = {}
         for sdir in misc.list_dirs(os.path.join(self.CACHE_DIR, 'repositories')):
             srcbuild = os.path.join(sdir, 'SRCBUILD')

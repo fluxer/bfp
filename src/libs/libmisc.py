@@ -954,7 +954,13 @@ class Inotify(object):
         self.libc = ctypes.CDLL(libc, use_errno=True)
         self.fd = self.libc.inotify_init()
         if self.fd == -1:
-            raise Exception('inotify init err', self.error())
+            raise Exception('Inotfiy', self.error())
+        self.watched = {}
+
+    def __del__(self):
+        for path in self.watch_list():
+            self.watch_remove(path)
+        self.close()
 
     def error(self):
         ''' Get last error as string '''
@@ -982,7 +988,7 @@ class Inotify(object):
     def watch_add(self, path, mask=None, recursive=True):
         ''' Add path to watcher '''
         if not mask:
-            mask = self.MODIFY | self.DELETE | self.CREATE
+            mask = self.MODIFY | self.CREATE | self.DELETE
         if recursive and os.path.isdir(path):
             for d in os.listdir(path):
                 full = os.path.join(path, d)
@@ -990,16 +996,24 @@ class Inotify(object):
                     continue
                 self.watch_add(full, mask)
         wd = self.libc.inotify_add_watch(self.fd, path, mask)
+        self.watched[path] = wd
         if wd == -1:
-            raise Exception('inotify add error', self.error())
-
+            raise Exception('Inotfiy', self.error())
         return wd
 
-    def watch_remove(self, wd):
+    def watch_remove(self, path):
         ''' Remove path from watcher '''
+        if not path in self.watched:
+            return
+        wd = self.watched[path]
         ret = self.libc.inotify_rm_watch(self.fd, wd)
         if ret == -1:
-            raise Exception('inotify rm error', self.error())
+            raise Exception('Inotfiy', self.error())
+
+    def watch_list(self):
+        ''' Get a list of paths watched '''
+        # list() is for Python 3000
+        return list(self.watched.keys())
 
     def watch_loop(self, path, callback, mask=None, recursive=True):
         ''' Start watching for events '''
