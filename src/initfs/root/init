@@ -46,14 +46,21 @@ if [ ! -e "/etc/mtab" ];then
 fi
 
 msg "Parsing cmdline options..."
-hooks="$(ls /hooks)"
+# find will complain otherwise
+mkdir -p /hooks
+hooks="$(find /hooks ! -type d ! -name 'late_*')"
+latehooks="$(find /hooks ! -type d -name 'late_*')"
 init="/sbin/init"
 root=""
 state="ro"
 for arg in $(cat /proc/cmdline);do
     case "$arg" in
         hooks=*) hooks="${arg#*=}"
+                 # spaces in kernel arguments are not allowed
                  hooks="${hooks//,/ }" ;;
+        latehooks=*) latehooks="${arg#*=}"
+                 # spaces in kernel arguments are not allowed
+                 latehooks="${latehooks//,/ }" ;;
         init=*) init="${arg#*=}" ;;
         root=*) root="${arg#*=}" ;;
         ro|rw) state="${arg}" ;;
@@ -62,11 +69,13 @@ for arg in $(cat /proc/cmdline);do
 done
 
 for hook in $hooks;do
-    if [ -f "/hooks/$hook" ];then
-        msg "Sourcing hook: $hook"
-        cmd . "/hooks/$hook"
+    # done only because of the latehooks
+    base="$(basename "$hook")"
+    if [ -f "/hooks/$base" ];then
+        msg "Sourcing hook: $base"
+        cmd . "/hooks/$base"
     else
-        error "Missing hook: $hook"
+        error "Missing hook: $base"
     fi
 done
 
@@ -74,6 +83,20 @@ case "$root" in
       /dev/*) device="$root" ;;
       UUID=*) device="/dev/disk/by-uuid/${root#*=}"  ;;
       LABEL=*) device="/dev/disk/by-label/${root#*=}" ;;
+esac
+
+case "$(cat /proc/sys/kernel/hotplug)" in
+    # could be /usr/bin, /bin, etc.
+    */mdev)
+        # oh, boy! mdev does not support device UUID/LABEL thus /dev/disk/by-*
+        # can not be used but Busybox's blkid applet does not support -U and
+        # -L either sp the code bellow requires blkid from util-linux, best
+        # effort made..
+        case "$root" in
+            UUID=*) device="$(blkid -U "${root#*=}")"  ;;
+            LABEL=*) device="$(blkid -L "${root#*=}")" ;;
+        esac
+    ;;
 esac
 
 # device is optional, a hook may take care of the root (e.g. on Live CD)
@@ -84,10 +107,21 @@ if [ -e "$device" ];then
     cmd mount -o "$state" "$device" /newroot
 fi
 
+for hook in $latehooks;do
+    # done only because of the latehooks
+    base="$(basename "$hook")"
+    if [ -f "/hooks/$base" ];then
+        msg "Sourcing late hook: $base"
+        cmd . "/hooks/$base"
+    else
+        error "Missing late hook: $base"
+    fi
+done
+
 # a hook could have mounted root
 if [ -e "/newroot/$init" ];then
     msg "Switching root..."
-    exec switch_root /newroot "$init" "$@"
+    cmd exec switch_root /newroot "$init" "$@"
 else
     msg "Root filesystem invalid..."
     exec /bin/sh
