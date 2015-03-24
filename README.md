@@ -4,28 +4,29 @@
 
 ## Requirements
 
-The following table illustrates the software requirements:
+The following software is required:
 
-| binary/library |     origin    |  alternative  |        required by         |           required at          |
-|:--------------:|:-------------:|:-------------:|----------------------------|:------------------------------:|
-|     parted     |   GNU Parted  |               |           cparted          |             runtime            |
-|    pyparted    |    pyparted   |               |           cparted          |             runtime            |
-|      cpio      |   Coreutils   |    Busybox    |      lsinitfs/mkinitfs     |             runtime            |
-|     depmod     |      kmod     |    Busybox    |          mkinitfs          |             runtime            |
-|    ldconfig    | GNU C Library | uClibc, musl? |                            |             runtime            |
-|      find      |   Findutils   |    Busybox    |          mkinitfs          |             runtime            |
-|     busybox    |    Busybox    |               |          mkinitfs          |             runtime            |
-|       tar      |    GNU Tar    |    Busybox    |           libmisc          | runtime, alternative to bsdtar |
-|     bsdtar     |   LibArchive  |               |           libmisc          |   runtime, alternative to tar  |
-|     scanelf    | PaX Utilities |               |           libmisc          |             runtime            |
-|      mount     |   util-linux  |    Busybox    |           libmisc          |             runtime            |
-|     umount     |   util-linux  |    Busybox    |           libmisc          |             runtime            |
-|    libmagic    |      file     |               |          libmagic          |             runtime            |
-|      bash      |    GNU Bash   |               |  libmisc, libspm, srcmake  |             runtime            |
-|       git      |      Git      |               |      libspm, spm-tools     |             runtime            |
-|      gpg2      |     GnuPG     |               | libmisc, libspm, spm-tools |             runtime            |
+### Runtime
 
-NOTE: it currently lacks optional and build time software dependencies
+GNU Parted,
+pyparted,
+Coreutils,
+kmod (or Busybox),
+Findutils (or Busybox),
+Busybox,
+GNU Tar (or Busybox/LibArchive),
+PaX Utilities,
+file,
+GNU Bash,
+Git,
+GnuPG,
+Python,
+GNU C Library (alternatively uClibc, musl, etc.)
+
+### Build time
+
+Perl
+Cython
 
 How and where from you will obtain those is up to you, altought compatibility
 with Busybox, GNU and POSIX tools is prime goal but not guaranteed so for an
@@ -67,7 +68,7 @@ sudo make install
 forums users
 - Jubei Mitsuyoshi
 - Marcus (a.k.a. artoo/udeved) <udeved@openrc4arch.site40.net>
-- Adil Ãœnal (a.k.a. turkbits) <turkbits@turkbits.net>
+- Adil Ünal (a.k.a. turkbits) <turkbits@turkbits.net>
 
 If you think you have the right to be mentioned here but you are not feel free
 to contact us!
