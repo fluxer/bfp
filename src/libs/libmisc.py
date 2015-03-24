@@ -15,7 +15,7 @@ to monitor for file/directory changes on filesystems.
 '''
 
 import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, pwd, inspect
-import types, gzip, bz2, time, ctypes, getpass, base64
+import types, gzip, bz2, time, ctypes, ctypes.util, getpass, base64
 from struct import unpack
 from fcntl import ioctl
 from termios import FIONREAD
@@ -950,7 +950,8 @@ class Inotify(object):
         self.ISDIR = 0x40000000         # IN_ISDIR
         self.ONESHOT = 0x80000000       # IN_ONESHOT
 
-        self.libc = ctypes.CDLL('libc.so.6', use_errno=True)
+        libc = ctypes.util.find_library('c')
+        self.libc = ctypes.CDLL(libc, use_errno=True)
         self.fd = self.libc.inotify_init()
         if self.fd == -1:
             raise Exception('inotify init err', self.error())
