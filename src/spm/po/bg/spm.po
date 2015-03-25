@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-03-25 02:15+0000\n"
-"PO-Revision-Date: 2015-03-19 14:36+0000\n"
+"PO-Revision-Date: 2015-03-25 02:21+0000\n"
 "Last-Translator: Ivailo Monev <xakepa10@gmail.com>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -289,7 +289,7 @@ msgstr "Проверяване на"
 
 #: libspm.py:827
 msgid "Extracting"
-msgstr "Извлича на"
+msgstr "Извличане на"
 
 #: libspm.py:851
 msgid "Compressing manual pages"
@@ -297,11 +297,11 @@ msgstr "Компресиране опътващите страници"
 
 #: libspm.py:863 tools.py:210 tools.py:617
 msgid "Compressing"
-msgstr "Компресира на"
+msgstr "Компресиране на"
 
 #: libspm.py:868
 msgid "Adjusting link"
-msgstr "Коригира на връзка"
+msgstr "Коригиране на връзка"
 
 #: libspm.py:877 libspm.py:1047 libspm.py:1210
 msgid "Indexing content"
@@ -1572,3 +1572,4 @@ msgstr "ПОТРЕБИТЕЛ"
 #: tools.py:1090
 msgid "Poking server..."
 msgstr "Побутване на сървър"
+
