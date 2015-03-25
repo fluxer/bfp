@@ -13,16 +13,19 @@ import os
 import re
 import difflib
 import pwd, grp
-import SimpleHTTPServer, SocketServer
 import ftplib
 if sys.version < '3':
     import ConfigParser as configparser
     from urllib2 import HTTPError
     from urllib2 import urlopen
+    import SimpleHTTPServer as HTTPServer
+    import SocketServer as socketserver
 else:
     import configparser
     from urllib.error import HTTPError
     from urllib.request import urlopen
+    import http.server as HTTPServer
+    import socketserver
 
 import libmessage
 message = libmessage.Message()
@@ -684,8 +687,8 @@ class Serve(object):
         try:
             message.sub_info(_('Serving caches directory'))
             os.chdir(libspm.CACHE_DIR)
-            handler = SimpleHTTPServer.SimpleHTTPRequestHandler
-            httpd = SocketServer.TCPServer((self.address, self.port), handler)
+            handler = HTTPServer.SimpleHTTPRequestHandler
+            httpd = socketserver.TCPServer((self.address, self.port), handler)
             httpd.serve_forever()
         finally:
             if httpd:
