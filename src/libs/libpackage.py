@@ -33,13 +33,15 @@ class Database(object):
 
     def local_footprint(self, target):
         ''' DEPRECATED: Returns files of target, use local_metadata(target, 'footprint') '''
-        misc.typecheck(target, (types.StringTypes))
+        if misc.python2:
+            misc.typecheck(target, (types.StringTypes))
 
         return self.local_metadata(target, 'footprint')
 
     def remote_groups(self, basename=True):
         ''' DEPRECATED: Returns groups in the repositories '''
-        misc.typecheck(basename, (types.BooleanType))
+        if misc.python2:
+            misc.typecheck(basename, (types.BooleanType))
 
         groups = []
         for sdir in misc.list_dirs(os.path.join(self.CACHE_DIR, \
@@ -98,16 +100,19 @@ class Database(object):
 
     def _local_metadata(self, smetadata, skey):
         ''' Returns metadata of local target '''
-        misc.typecheck(smetadata, (types.StringTypes))
-        misc.typecheck(skey, (types.StringTypes))
+        if misc.python2:
+            misc.typecheck(smetadata, (types.StringTypes))
+            misc.typecheck(skey, (types.StringTypes))
 
+        key = misc.string_encode('%s=' % skey)
         for line in misc.file_readlines(smetadata):
-            if line.startswith(skey + '='):
-                return line.split('=')[1].strip()
+            if line.startswith(key):
+                return misc.string_encode(line).split('=')[1].strip()
 
     def remote_all(self, basename=False):
         ''' Returns directories of all remote (repository) targets '''
-        misc.typecheck(basename, (types.BooleanType))
+        if misc.python2:
+            misc.typecheck(basename, (types.BooleanType))
 
         # rebuild cache on demand
         recache = False
@@ -126,7 +131,8 @@ class Database(object):
 
     def local_all(self, basename=False):
         ''' Returns directories of all local (installed) targets '''
-        misc.typecheck(basename, (types.BooleanType))
+        if misc.python2:
+            misc.typecheck(basename, (types.BooleanType))
 
         # rebuild cache on demand
         recache = False
@@ -145,7 +151,8 @@ class Database(object):
 
     def local_search(self, target):
         ''' Returns full path to directory matching target '''
-        misc.typecheck(target, (types.StringTypes))
+        if misc.python2:
+            misc.typecheck(target, (types.StringTypes))
 
         for ltarget in self.local_all():
             if ltarget == target or ltarget.endswith('/%s' % target):
@@ -154,7 +161,8 @@ class Database(object):
 
     def remote_search(self, target):
         ''' Returns full path to directory matching target '''
-        misc.typecheck(target, (types.StringTypes))
+        if misc.python2:
+            misc.typecheck(target, (types.StringTypes))
 
         if os.path.isfile(os.path.join(target, 'SRCBUILD')):
             return target
@@ -166,10 +174,11 @@ class Database(object):
 
     def local_belongs(self, sfile, exact=False, escape=True, ignore=None):
         ''' Searches for match of file in all local targets '''
-        misc.typecheck(sfile, (types.StringTypes))
-        misc.typecheck(exact, (types.BooleanType))
-        misc.typecheck(escape, (types.BooleanType))
-        misc.typecheck(ignore, (types.NoneType, types.StringTypes))
+        if misc.python2:
+            misc.typecheck(sfile, (types.StringTypes))
+            misc.typecheck(exact, (types.BooleanType))
+            misc.typecheck(escape, (types.BooleanType))
+            misc.typecheck(ignore, (types.NoneType, types.StringTypes))
 
         match = []
         # it may not exists if bootstrapping
@@ -187,10 +196,11 @@ class Database(object):
 
     def remote_mdepends(self, target, checked=None, cdepends=False, mdepends=True):
         ''' Returns missing build dependencies of target '''
-        misc.typecheck(target, (types.StringTypes))
-        misc.typecheck(checked, (types.NoneType, types.ListType))
-        misc.typecheck(cdepends, (types.BooleanType))
-        misc.typecheck(mdepends, (types.BooleanType))
+        if misc.python2:
+            misc.typecheck(target, (types.StringTypes))
+            misc.typecheck(checked, (types.NoneType, types.ListType))
+            misc.typecheck(cdepends, (types.BooleanType))
+            misc.typecheck(mdepends, (types.BooleanType))
 
         missing = []
         build_depends = []
@@ -222,9 +232,10 @@ class Database(object):
 
     def local_rdepends(self, target, indirect=False, checked=None):
         ''' Returns reverse dependencies of target '''
-        misc.typecheck(target, (types.StringTypes))
-        misc.typecheck(indirect, (types.BooleanType))
-        misc.typecheck(target, (types.NoneType, types.StringTypes))
+        if misc.python2:
+            misc.typecheck(target, (types.StringTypes))
+            misc.typecheck(indirect, (types.BooleanType))
+            misc.typecheck(target, (types.NoneType, types.StringTypes))
 
         reverse = []
         if checked is None:
@@ -250,8 +261,9 @@ class Database(object):
 
     def local_metadata(self, target, key):
         ''' Returns metadata of local target '''
-        misc.typecheck(target, (types.StringTypes))
-        misc.typecheck(key, (types.StringTypes))
+        if misc.python2:
+            misc.typecheck(target, (types.StringTypes))
+            misc.typecheck(key, (types.StringTypes))
 
         match = self.local_search(target)
         if match:
@@ -259,7 +271,8 @@ class Database(object):
 
     def local_uptodate(self, target):
         ''' Returns True if target is up-to-date and False otherwise '''
-        misc.typecheck(target, (types.StringTypes))
+        if misc.python2:
+            misc.typecheck(target, (types.StringTypes))
 
         # if remote target is passed and it's a directory not a base name
         # then the local target will be invalid and local_version will equal
@@ -277,8 +290,9 @@ class Database(object):
 
     def remote_metadata(self, target, key):
         ''' Returns metadata of remote target '''
-        misc.typecheck(target, (types.StringTypes))
-        misc.typecheck(key, (types.StringTypes))
+        if misc.python2:
+            misc.typecheck(target, (types.StringTypes))
+            misc.typecheck(key, (types.StringTypes))
 
         if os.path.isfile(os.path.join(target, 'SRCBUILD')):
             return getattr(SRCBUILD(os.path.join(target, 'SRCBUILD')), key)
@@ -293,7 +307,8 @@ class Database(object):
 
     def remote_aliases(self, basename=True):
         ''' Returns basename of all aliases '''
-        misc.typecheck(basename, (types.BooleanType))
+        if misc.python2:
+            misc.typecheck(basename, (types.BooleanType))
 
         aliases = []
         for sfile in misc.list_files(os.path.join(self.CACHE_DIR, \
@@ -307,7 +322,8 @@ class Database(object):
 
     def remote_alias(self, target):
         ''' Returns alias for target, if not returns original '''
-        misc.typecheck(target, (types.StringTypes))
+        if misc.python2:
+            misc.typecheck(target, (types.StringTypes))
 
         for alias in self.remote_aliases(basename=False):
             if os.path.basename(target) == os.path.basename(alias):
