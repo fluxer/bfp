@@ -663,16 +663,18 @@ class Misc(object):
                 command.append(f.replace(strip, '.'))
             self.system_command(command)
         elif sfile.endswith('.gz'):
-            # FIXME: strip
+            if len(lpaths) > 1:
+                raise Exception('GZip', 'format can hold only single file')
             gzipf = gzip.GzipFile(sfile, 'wb')
             for f in lpaths:
-                gzipf.writelines(self.file_read(f))
+                gzipf.write(self.file_read(f))
             gzipf.close()
         elif sfile.endswith('.bz2'):
-            # FIXME: strip
+            if len(lpaths) > 1:
+                raise Exception('BZip', 'format can hold only single file')
             bzipf = bz2.BZ2File(sfile, 'wb')
             for f in lpaths:
-                bzipf.writelines(self.file_read(f))
+                bzipf.write(self.file_read(f))
             bzipf.close()
 
     def archive_decompress(self, sfile, sdir, demote=''):
@@ -735,11 +737,9 @@ class Misc(object):
                 content = self.system_output((self.whereis('tar'), \
                     '-tf', sfile)).split('\n')
         elif smime == 'application/x-gzip':
-            # FIXME: implement gzip listing
-            raise(Exception('Gzip listing not implemented yet'))
+            content = self.file_name(sfile, True).split()
         elif smime == 'application/x-bzip2':
-            # FIXME: implement bzip2 listing
-            raise(Exception('Bzip2 listing not implemented yet'))
+            content = self.file_name(sfile, True).split()
         return content
 
     def archive_size(self, star, lpaths):
