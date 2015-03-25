@@ -127,7 +127,7 @@ class Database(object):
             for target in self.REMOTE_CACHE:
                 lremote.append(os.path.basename(target))
             return sorted(lremote)
-        return sorted(self.REMOTE_CACHE.keys())
+        return sorted(list(self.REMOTE_CACHE.keys()))
 
     def local_all(self, basename=False):
         ''' Returns directories of all local (installed) targets '''
@@ -147,7 +147,7 @@ class Database(object):
             for target in self.LOCAL_CACHE:
                 llocal.append(os.path.basename(target))
             return sorted(llocal)
-        return sorted(self.LOCAL_CACHE.keys())
+        return sorted(list(self.LOCAL_CACHE.keys()))
 
     def local_search(self, target):
         ''' Returns full path to directory matching target '''

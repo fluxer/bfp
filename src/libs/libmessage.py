@@ -68,7 +68,7 @@ class Message(object):
             elif status == 'debug':
                 status = syslog.LOG_DEBUG
             else:
-                raise(Exception('Invalid log status', status))
+                raise Exception('Invalid log status', status)
             syslog.syslog(status, str(msg))
 
     def info(self, msg, marker=None):

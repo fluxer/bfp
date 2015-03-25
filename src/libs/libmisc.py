@@ -59,7 +59,7 @@ class Misc(object):
         # FIXME: implement file, directory, and url type check?
         if not isinstance(a, b):
             line = inspect.currentframe().f_back.f_lineno
-            raise(TypeError('Variable is not %s (%d)' % (str(b), line)))
+            raise TypeError('Variable is not %s (%d)' % (str(b), line))
 
     def whereis(self, program, fallback=True, chroot=False):
         ''' Find full path to executable '''
@@ -1070,7 +1070,7 @@ class Inotify(object):
 
     def watch_list(self):
         ''' Get a list of paths watched '''
-        return self.watched.keys()
+        return list(self.watched.keys())
 
     def watch_loop(self, path, callback, mask=None, recursive=True):
         ''' Start watching for events '''
