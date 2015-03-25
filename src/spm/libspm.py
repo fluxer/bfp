@@ -388,6 +388,7 @@ class Repo(object):
         for sdir in os.listdir(rdir):
             valid = False
             for line in misc.file_readlines('/etc/spm/repositories.conf'):
+                line = misc.string_encode(line.strip())
                 if not line or line.startswith('#'):
                     continue
 
