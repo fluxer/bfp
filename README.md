@@ -8,25 +8,25 @@ The following software is required:
 
 ### Runtime
 
-GNU Parted,
-pyparted,
-Coreutils,
-kmod (or Busybox),
-Findutils (or Busybox),
-Busybox,
-GNU Tar (or Busybox/LibArchive),
-PaX Utilities,
-file,
-GNU Bash,
-Git,
-GnuPG,
-Python,
-GNU C Library (alternatively uClibc, musl, etc.)
+[GNU Parted](http://www.gnu.org/software/parted/),
+[pyparted](https://github.com/rhinstaller/pyparted),
+[Coreutils](https://www.gnu.org/software/coreutils/),
+[kmod](https://www.kernel.org/pub/linux/utils/kernel/kmod/) (or [Busybox](http://www.busybox.net/)),
+[Findutils](http://www.gnu.org/software/findutils/) (or [Busybox](http://www.busybox.net/)),
+[Busybox](http://www.busybox.net/),
+[GNU Tar](https://www.gnu.org/software/tar/) (or [Busybox](http://www.busybox.net/)/[libarchive](http://www.libarchive.org/)),
+[PaX Utilities](https://wiki.gentoo.org/wiki/Hardened/PaX_Utilities),
+[file](http://darwinsys.com/file/),
+[GNU Bash](https://www.gnu.org/software/bash/),
+[Git](http://git-scm.com/),
+[GnuPG](https://www.gnupg.org/),
+[Python](https://www.python.org/),
+[GNU C Library](http://www.gnu.org/software/libc/) (or [uClibc](http://www.uclibc.org/)/[musl libc](http://www.musl-libc.org/))
 
 ### Build time
 
-Perl
-Cython
+[Perl](https://www.perl.org/),
+[Cython](http://cython.org/)
 
 How and where from you will obtain those is up to you, altought compatibility
 with Busybox, GNU and POSIX tools is prime goal but not guaranteed so for an
