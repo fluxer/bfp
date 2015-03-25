@@ -257,7 +257,7 @@ class Misc(object):
             return
         if lservers is None:
             lservers = []
-        self.dir_create(self.GPG_DIR, ipermissions=0700)
+        self.dir_create(self.GPG_DIR, ipermissions=0o700)
         cmd = [self.whereis('gpg2'), '--homedir', self.GPG_DIR]
         for server in lservers:
             cmd.extend(('--keyserver', server))
@@ -271,7 +271,7 @@ class Misc(object):
         self.typecheck(sfile, (types.StringTypes))
         self.typecheck(skey, (types.NoneType, types.StringTypes))
 
-        self.dir_create(self.GPG_DIR, ipermissions=0700)
+        self.dir_create(self.GPG_DIR, ipermissions=0o700)
         cmd = [self.whereis('gpg2'), '--homedir', self.GPG_DIR]
         if skey:
             cmd.extend(('--default-key', skey))
@@ -286,7 +286,7 @@ class Misc(object):
         self.typecheck(sfile, (types.StringTypes))
         self.typecheck(ssignature, (types.NoneType, types.StringTypes))
 
-        self.dir_create(self.GPG_DIR, ipermissions=0700)
+        self.dir_create(self.GPG_DIR, ipermissions=0o700)
         cmd = [self.whereis('gpg2'), '--homedir', self.GPG_DIR]
         # in case the signature is passed instead of the file to verify
         if sfile.endswith('.sig'):
