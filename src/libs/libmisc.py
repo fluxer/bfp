@@ -1011,7 +1011,7 @@ class Inotify(object):
         self.libc = ctypes.CDLL(libc, use_errno=True)
         self.fd = self.libc.inotify_init()
         if self.fd == -1:
-            raise Exception('Inotfiy', self.error())
+            raise Exception('Inotify', self.error())
         self.watched = {}
 
     def __del__(self):
@@ -1065,7 +1065,7 @@ class Inotify(object):
         wd = self.watched[path]
         ret = self.libc.inotify_rm_watch(self.fd, wd)
         if ret == -1:
-            raise Exception('Inotfiy', self.error())
+            raise Exception('Inotify', self.error())
         self.watched.pop(path)
 
     def watch_list(self):
