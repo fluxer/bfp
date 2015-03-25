@@ -985,7 +985,8 @@ class Source(object):
                     match = match[0]
             match = misc.string_convert(match)
 
-            if match == self.target_name or rreq in target_content:
+            if match == self.target_name \
+                or '%s%s' % (self.install_dir, rreq) in target_content:
                 message.sub_debug(_('Dependency needed but in target'), rreq)
             elif match and match in self.target_depends:
                 message.sub_debug(_('Dependency needed but in dependencies'), match)
