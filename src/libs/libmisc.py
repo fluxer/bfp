@@ -1038,7 +1038,7 @@ class Inotify(object):
             wd, mask, cookie, name_len = unpack('iIII', data[deb:fin])
             deb, fin = fin, fin+name_len
             name = unpack('%ds' % name_len, data[deb:fin])
-            name = name[0].rstrip('\0')
+            name = misc.string_encode(name[0]).rstrip('\0')
             deb = fin
             yield wd, mask, cookie, name
 
@@ -1051,7 +1051,7 @@ class Inotify(object):
                 full = os.path.join(path, d)
                 if not os.path.isdir(full):
                     continue
-                self.watch_add(full, mask)
+                self.watch_add(misc.string_encode(full), mask)
         wd = self.libc.inotify_add_watch(self.fd, path, mask)
         if wd == -1:
             raise Exception('Inotfiy', self.error())
@@ -1132,7 +1132,7 @@ class Magic(object):
 
     def get(self, path):
         ''' Get MIME type of path '''
-        result = self._magic_file(self.cookie, path.encode('utf-8'))
+        result = self._magic_file(self.cookie, misc.string_encode(path))
         if not result or result == -1:
             # libmagic 5.09 has a bug where it might fail to identify the
             # mimetype of a file and returns null from magic_file (and
@@ -1141,3 +1141,5 @@ class Magic(object):
                 return 'application/octet-stream'
             raise Exception(self.error())
         return result
+
+misc = Misc()
