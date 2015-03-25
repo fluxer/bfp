@@ -88,4 +88,6 @@ finally:
     if tmpdir and os.path.isdir(tmpdir) and not keep:
         message.info('Cleaning up...')
         misc.dir_remove(tmpdir)
+    if not 'stable' in app_version:
+        raise
 
