@@ -247,8 +247,8 @@ class Remote(object):
     ''' Class for printing remote targets metadata '''
     def __init__(self, pattern, do_name=False, do_version=False, \
         do_description=False, do_depends=False, do_makedepends=False, \
-        do_checkdepends=False, do_sources=False, do_options=False, \
-        do_backup=False, plain=False):
+        do_checkdepends=False, do_sources=False, do_pgpkeys=False, \
+        do_options=False, do_backup=False, plain=False):
         self.pattern = pattern
         self.do_name = do_name
         self.do_version = do_version
@@ -257,6 +257,7 @@ class Remote(object):
         self.do_makedepends = do_makedepends
         self.do_checkdepends = do_checkdepends
         self.do_sources = do_sources
+        self.do_pgpkeys = do_pgpkeys
         self.do_options = do_options
         self.do_backup = do_backup
         self.plain = plain
@@ -322,6 +323,13 @@ class Remote(object):
                         print(misc.string_convert(data))
                     else:
                         message.sub_info(_('Sources'), data)
+
+                if self.do_pgpkeys:
+                    data = database.remote_metadata(target, 'pgpkeys')
+                    if self.plain:
+                        print(misc.string_convert(data))
+                    else:
+                        message.sub_info(_('PGP keys'), data)
 
                 if self.do_options:
                     data = database.remote_metadata(target, 'options')

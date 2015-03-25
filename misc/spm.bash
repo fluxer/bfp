@@ -17,8 +17,8 @@ _spm()
     repo_options='-h --help -c --clean -s --sync -u --update -a --all'
 
     remote_options='-h --help -n --name -v --version -d --description -D
-        --depends -m --makedepends -c --checkdepends -s --sources -o --options
-        -b --backup -p --plain'
+        --depends -m --makedepends -c --checkdepends -s --sources -k --pgpkeys
+        -o --options -b --backup -p --plain'
 
     source_options='-h --help -C --clean -p --prepare -c --compile -k --check
         -i --install -m --merge -r --remove -D --depends -R --reverse -u

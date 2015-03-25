@@ -211,6 +211,7 @@ optional arguments:
   -m, --makedepends     Show target makedepends
   -c, --checkdepends    Show target checkdepends
   -s, --sources         Show target sources
+  -k, --pgpkeys         Show target PGP keys
   -o, --options         Show target options
   -b, --backup          Show target backups
   -p, --plain           Print in plain format

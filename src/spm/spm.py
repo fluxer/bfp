@@ -245,6 +245,8 @@ try:
         help=_('Show target checkdepends'))
     remote_parser.add_argument('-s', '--sources', action='store_true', \
         help=_('Show target sources'))
+    remote_parser.add_argument('-k', '--pgpkeys', action='store_true', \
+        help=_('Show target PGP keys'))
     remote_parser.add_argument('-o', '--options', action='store_true', \
         help=_('Show target options'))
     remote_parser.add_argument('-b', '--backup', dest='remote_backup', \
@@ -430,14 +432,15 @@ try:
             message.sub_info(_('MAKEDEPENDS'), ARGS.makedepends)
             message.sub_info(_('CHECKDEPENDS'), ARGS.checkdepends)
             message.sub_info(_('SOURCES'), ARGS.sources)
+            message.sub_info(_('PGPKEYS'), ARGS.pgpkeys)
             message.sub_info(_('OPTIONS'), ARGS.options)
             message.sub_info(_('BACKUP'), ARGS.remote_backup)
             message.sub_info(_('PATTERN'), ARGS.PATTERN)
             message.info(_('Poking remotes...'))
         m = libspm.Remote(ARGS.PATTERN, ARGS.name, ARGS.version, \
                 ARGS.description, ARGS.depends, ARGS.makedepends, \
-                ARGS.checkdepends, ARGS.sources, ARGS.options, \
-                ARGS.remote_backup, ARGS.plain)
+                ARGS.checkdepends, ARGS.sources, ARGS.pgpkeys, \
+                ARGS.options, ARGS.remote_backup, ARGS.plain)
         m.main()
 
     elif ARGS.mode == 'source':
