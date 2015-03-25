@@ -32,7 +32,7 @@ import libpackage
 database = libpackage.Database()
 import libspm
 
-app_version = "1.6.1 (4b68b20)"
+app_version = "1.6.1 (5d4ff8e)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -855,7 +855,7 @@ try:
     sane_parser.add_argument('-g', '--groups', action='store_true', \
         help=_('Check for group(s) being added but not deleted'))
     sane_parser.add_argument('-s', '--signatures', action='store_true', \
-        help=_('Check for signature(s) available but on in the sources array'))
+        help=_('Check for signature(s) not in the sources array'))
     sane_parser.add_argument('-a', '--all', action='store_true', \
         help=_('Perform all checks'))
     sane_parser.add_argument('TARGETS', nargs='+', type=str, \

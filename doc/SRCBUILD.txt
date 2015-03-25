@@ -45,7 +45,7 @@ pre_install() {
     true
 }
 
-# you can re-use functions
+# functions can be re-used
 post_install() {
     pre_install
 }

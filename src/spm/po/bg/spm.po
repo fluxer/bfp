@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-24 22:12+0000\n"
+"POT-Creation-Date: 2015-03-25 02:15+0000\n"
 "PO-Revision-Date: 2015-03-19 14:36+0000\n"
 "Last-Translator: Ivailo Monev <xakepa10@gmail.com>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -1414,7 +1414,7 @@ msgid "Check for group(s) being added but not deleted"
 msgstr ""
 
 #: tools.py:858
-msgid "Check for signature(s) available but on in the sources array"
+msgid "Check for signature(s) not in the sources array"
 msgstr ""
 
 #: tools.py:874
