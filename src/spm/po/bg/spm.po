@@ -1572,4 +1572,3 @@ msgstr "ПОТРЕБИТЕЛ"
 #: tools.py:1090
 msgid "Poking server..."
 msgstr "Побутване на сървър"
-

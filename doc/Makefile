@@ -35,6 +35,7 @@ install:
 	$(INSTALL) -vm644 libmisc.html $(DESTDIR)$(DOCDIR)/spm/libmisc.html
 	$(INSTALL) -vm644 libpackage.html $(DESTDIR)$(DOCDIR)/spm/libpackage.html
 	$(INSTALL) -vm644 libspm.html $(DESTDIR)$(DOCDIR)/spm/libspm.html
+	$(INSTALL) -vm644 ../COPYING $(DESTDIR)$(DOCDIR)/spm/COPYING
 
 uninstall:
 	$(RM) $(DESTDIR)$(MANDIR)/man8/spm.8
