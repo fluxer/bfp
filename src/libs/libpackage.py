@@ -148,8 +148,7 @@ class Database(object):
         misc.typecheck(target, (types.StringTypes))
 
         for ltarget in self.local_all():
-            if ltarget == target \
-                or os.path.basename(ltarget) == os.path.basename(target):
+            if ltarget == target or ltarget.endswith('/%s' % target):
                 return ltarget
         return None
 
@@ -161,8 +160,7 @@ class Database(object):
             return target
 
         for rtarget in self.remote_all():
-            if rtarget == target \
-                or os.path.basename(rtarget) == os.path.basename(target):
+            if rtarget == target or rtarget.endswith('/%s' % target):
                 return rtarget
         return None
 
