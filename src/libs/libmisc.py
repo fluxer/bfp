@@ -996,9 +996,9 @@ class Inotify(object):
                     continue
                 self.watch_add(full, mask)
         wd = self.libc.inotify_add_watch(self.fd, path, mask)
-        self.watched[path] = wd
         if wd == -1:
             raise Exception('Inotfiy', self.error())
+        self.watched[path] = wd
         return wd
 
     def watch_remove(self, path):
@@ -1009,11 +1009,11 @@ class Inotify(object):
         ret = self.libc.inotify_rm_watch(self.fd, wd)
         if ret == -1:
             raise Exception('Inotfiy', self.error())
+        self.watched.pop(path)
 
     def watch_list(self):
         ''' Get a list of paths watched '''
-        # list() is for Python 3000
-        return list(self.watched.keys())
+        return self.watched.keys()
 
     def watch_loop(self, path, callback, mask=None, recursive=True):
         ''' Start watching for events '''
