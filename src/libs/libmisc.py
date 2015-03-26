@@ -1082,9 +1082,8 @@ class Inotify(object):
 
     def close(self):
         ''' Close inotify descriptor '''
-        if not self.fd:
-            return
-        os.close(self.fd)
+        if self.fd:
+            os.close(self.fd)
 
 class Magic(object):
     ''' Magic wrapper '''
