@@ -34,6 +34,7 @@ misc = libmisc.Misc()
 import libpackage
 database = libpackage.Database()
 import libspm
+misc.GPG_DIR = libspm.GPG_DIR
 
 app_version = "1.6.1 (4aaaf48)"
 
