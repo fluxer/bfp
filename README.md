@@ -55,6 +55,13 @@ make
 sudo make install
 ```
 
+Alternatively to build and install against Python 3:
+
+```
+make PYTHON=python3
+sudo make PYTHON=python3 install
+```
+
 ## Contributors
 
 ### Current contributors
