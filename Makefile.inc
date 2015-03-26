@@ -35,7 +35,6 @@ INSTALL = install -v
 RM = rm -vf
 CP = cp -vf
 XZ = xz -v
-PYUIC = pyuic4
 NUITKA = $(PYTHON) $(TOPDIR)/nuitka/bin/nuitka --recurse-none \
 	--python-version=$(PYTHON_VERSION)
 CYTHON = cython --verbose
