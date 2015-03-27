@@ -1511,19 +1511,23 @@ class Binary(Source):
 
         message.sub_debug(_('Checking mirrors for'), src_base)
         found = False
-        for mirror in MIRRORS:
-            surl = '%s/tarballs/%s/%s' % (mirror, os.uname()[4], src_base)
-            if misc.url_ping(surl):
-                found = True
-                message.sub_debug(_('Fetching'), surl)
-                misc.fetch(surl, local_file, MIRRORS, 'tarballs/%s/' % os.uname()[4])
-                if VERIFY:
-                    sigurl = '%s.sig' % surl
-                    sigfile = '%s.sig' % local_file
-                    message.sub_debug(_('Fetching'), sigurl)
-                    misc.fetch(sigurl, sigfile, MIRRORS, 'tarballs/%s/' % os.uname()[4])
-                    message.sub_debug(_('Verifying'), local_file)
-                    misc.gpg_verify(local_file)
+        # usually that would not happend (see the mirrors config parser) but
+        # since that's a module one can temper with MIRRORS
+        if len(MIRRORS) < 1:
+            message.sub_critical(_('At least one mirror is required'))
+            sys.exit(2)
+        surl = '%s/tarballs/%s/%s' % (MIRRORS[0], os.uname()[4], src_base)
+        if misc.url_ping(surl, MIRRORS, 'tarballs/%s/' % os.uname()[4]):
+            found = True
+            message.sub_debug(_('Fetching'), surl)
+            misc.fetch(surl, local_file, MIRRORS, 'tarballs/%s/' % os.uname()[4])
+            if VERIFY:
+                sigurl = '%s.sig' % surl
+                sigfile = '%s.sig' % local_file
+                message.sub_debug(_('Fetching'), sigurl)
+                misc.fetch(sigurl, sigfile, MIRRORS, 'tarballs/%s/' % os.uname()[4])
+                message.sub_debug(_('Verifying'), local_file)
+                misc.gpg_verify(local_file)
 
         if not found:
             message.sub_critical(_('Binary tarball not available available for'), self.target_name)
@@ -1586,11 +1590,13 @@ class Binary(Source):
                 message.sub_info(_('Starting %s preparations at') % \
                     self.target_name, datetime.today())
                 self.prepare()
-                message.sub_info(_('Starting %s merge at') % self.target_name, datetime.today())
+                message.sub_info(_('Starting %s merge at') % \
+                    self.target_name, datetime.today())
                 self.merge()
 
             if self.do_remove or self.autoremove:
-                message.sub_info(_('Starting %s remove at') % self.target_name, datetime.today())
+                message.sub_info(_('Starting %s remove at') % \
+                    self.target_name, datetime.today())
                 self.remove()
 
 
