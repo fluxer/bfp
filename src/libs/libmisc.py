@@ -294,7 +294,7 @@ class Misc(object):
         cmd.extend(lkeys)
         self.system_command(cmd)
 
-    def gpg_sign(self, sfile, skey=None):
+    def gpg_sign(self, sfile, skey=None, sprompt='Passphrase: '):
         ''' Sign a file with PGP signature via GnuPG '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
@@ -307,7 +307,7 @@ class Misc(object):
         cmd.extend(('--yes', '--no-tty', '--passphrase-fd', '0'))
         cmd.extend(('--detach-sig', '--sign', '--batch', sfile))
         if not self.SIGNPASS:
-            self.SIGNPASS = base64.encodestring(self.getpass('Passphrase: '))
+            self.SIGNPASS = base64.encodestring(self.getpass(sprompt))
         self.system_input(cmd, base64.decodestring(self.SIGNPASS))
 
     def gpg_verify(self, sfile, ssignature=None):
@@ -606,6 +606,7 @@ class Misc(object):
                 detail.url = surl
                 raise detail
         finally:
+            self.file_write('%s.last' % destination, rsize)
             sys.stdout.write('\n')
             lfile.close()
             rfile.close()
@@ -659,7 +660,6 @@ class Misc(object):
             elif snewurl.startswith(('http://', 'https://', 'ftp://', \
                 'ftps://')):
                 self.fetch_plain(snewurl, destination, 0)
-                self.file_write('%s.last' % destination, str(os.path.getsize(destination)))
             else:
                 raise Exception('Unsupported URL', surl)
         except URLError as detail:
