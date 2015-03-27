@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-26 13:56+0000\n"
-"PO-Revision-Date: 2015-03-25 02:21+0000\n"
+"POT-Creation-Date: 2015-03-27 16:00+0000\n"
+"PO-Revision-Date: 2015-03-27 16:26+0000\n"
 "Last-Translator: Ivailo Monev <xakepa10@gmail.com>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -87,7 +87,7 @@ msgstr "Източници"
 
 #: libspm.py:332
 msgid "PGP keys"
-msgstr ""
+msgstr "PGP ключове"
 
 #: libspm.py:339
 msgid "Options"
@@ -156,7 +156,7 @@ msgstr "Стартира се обновление в"
 
 #: libspm.py:515
 msgid "Creating debug file"
-msgstr ""
+msgstr "Създаване на дебъг файл"
 
 #: libspm.py:538
 msgid "Updating shared libraries cache"
@@ -192,7 +192,7 @@ msgstr "Деинсталират се XDG MIME-и"
 
 #: libspm.py:607
 msgid "Updating XDG MIMEs"
-msgstr ""
+msgstr "Обновяване на XDG MIME-ите"
 
 #: libspm.py:616
 msgid "Updating GIO modules cache"
@@ -265,13 +265,13 @@ msgstr "Липсващи зависимости"
 
 #: libspm.py:801 tools.py:197
 msgid "Preparing PGP keys"
-msgstr ""
+msgstr "Подготовка на PGP ключовете"
 
 #: libspm.py:805 tools.py:201
 msgid "Preparing sources"
 msgstr "Подготовка на източниците"
 
-#: libspm.py:813 libspm.py:1518 libspm.py:1523 tools.py:207 tools.py:669
+#: libspm.py:813 libspm.py:1522 libspm.py:1527 tools.py:207 tools.py:669
 msgid "Fetching"
 msgstr ""
 
@@ -287,7 +287,7 @@ msgstr "Копиране на"
 msgid "Linking"
 msgstr "Свързване на"
 
-#: libspm.py:832 libspm.py:1525 tools.py:211
+#: libspm.py:832 libspm.py:1529 tools.py:211
 msgid "Verifying"
 msgstr "Проверяване на"
 
@@ -479,15 +479,15 @@ msgstr "Премахване на отпечатъка и метадатата"
 msgid "Executing post_remove()"
 msgstr "Изпълняване на post_remove()"
 
-#: libspm.py:1270 libspm.py:1553
+#: libspm.py:1270 libspm.py:1557
 msgid "Ignoring target"
 msgstr "Игориране на мишена"
 
-#: libspm.py:1274 libspm.py:1557 tools.py:184 tools.py:676 tools.py:745
+#: libspm.py:1274 libspm.py:1561 tools.py:184 tools.py:676 tools.py:745
 msgid "Invalid target"
 msgstr "Невалидна мишена"
 
-#: libspm.py:1299 libspm.py:1582
+#: libspm.py:1299 libspm.py:1586
 msgid "Target is up-to-date"
 msgstr "Мишената е последната налична версия"
 
@@ -546,7 +546,7 @@ msgstr ""
 msgid "Starting %s cleanup at"
 msgstr "Започване чистка на %s в"
 
-#: libspm.py:1379 libspm.py:1586
+#: libspm.py:1379 libspm.py:1590
 #, python-format
 msgid "Starting %s preparations at"
 msgstr "Започване подготовка на %s в"
@@ -578,12 +578,12 @@ msgstr "src_install() не е зададен"
 msgid "Starting %s install at"
 msgstr "Започване инсталация на %s в"
 
-#: libspm.py:1436 libspm.py:1589
+#: libspm.py:1436 libspm.py:1593
 #, python-format
 msgid "Starting %s merge at"
 msgstr "Започване сливане на %s в"
 
-#: libspm.py:1440 libspm.py:1593
+#: libspm.py:1440 libspm.py:1598
 #, python-format
 msgid "Starting %s remove at"
 msgstr "Започване премахване на %s в"
@@ -598,13 +598,17 @@ msgstr ""
 
 #: libspm.py:1512
 msgid "Checking mirrors for"
-msgstr ""
+msgstr "Проверяване на огледалата за"
 
-#: libspm.py:1529 tools.py:750
+#: libspm.py:1517
+msgid "At least one mirror is required"
+msgstr "Поне едно огледало е нужно"
+
+#: libspm.py:1533 tools.py:750
 msgid "Binary tarball not available available for"
-msgstr ""
+msgstr "Бинарен архив не е наличен за"
 
-#: libspm.py:1619
+#: libspm.py:1625
 msgid "Match in"
 msgstr "Съвпадение в"
 
@@ -662,7 +666,7 @@ msgstr "Покажи източниците на мишената"
 
 #: spm.py:249
 msgid "Show target PGP keys"
-msgstr ""
+msgstr "Покажи PGP ключовете на мишената"
 
 #: spm.py:251
 msgid "Show target options"
@@ -771,7 +775,7 @@ msgstr ""
 
 #: spm.py:338
 msgid "Set whether to sign files"
-msgstr "Зада дали да се подписват фаилове"
+msgstr "Задай дали да се подписват фаилове"
 
 #: spm.py:341
 msgid "Set whether to use offline mode"
@@ -783,11 +787,11 @@ msgstr "Задай дали да се използват огледала"
 
 #: spm.py:346
 msgid "Set the connection timeout"
-msgstr ""
+msgstr "Задай таймаут на връзката"
 
 #: spm.py:349
 msgid "Set whether to verify downloads"
-msgstr ""
+msgstr "Задай дали да се проверяват свалянията"
 
 #: spm.py:351
 msgid "Change CHOST"
@@ -1299,7 +1303,7 @@ msgstr ""
 
 #: tools.py:759
 msgid "Uploading"
-msgstr ""
+msgstr "Качване на"
 
 #: tools.py:786
 msgid "Include all sources in the archive"
@@ -1311,7 +1315,7 @@ msgstr ""
 
 #: tools.py:790 tools.py:886 tools.py:892
 msgid "Set output directory"
-msgstr ""
+msgstr "Задай директория за продукция"
 
 #: tools.py:796
 msgid "Skip some files/links"

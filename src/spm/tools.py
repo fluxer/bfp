@@ -36,7 +36,7 @@ database = libpackage.Database()
 import libspm
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.6.1 (b814ea1)"
+app_version = "1.7.0 (328ac9f)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
