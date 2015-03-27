@@ -1,3 +1,14 @@
+Fri Mar 27 18:06:11 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
+3cc81dc725e38383a380d357975b3452aa981529 (tag: 1.7.1)
+    * make pkg2src rename validpgpkeys to pgpkeys
+    * add safety check to the fetcher before extending the own mirrors copy
+    * move the fetcher size recorder where it belongs
+    * minor bg translation update
+    * add changes between 1.6.1 and 1.7.0
+    * do not modify the mirrors reference from the fetcher
+    * pop an error from libspm if not mirrors are set but binary requested
+    * update Nuitka to 0.5.11.2
+
 Fri Mar 27 15:53:04 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
 d0604659d0d73d7bda9d9e66045d774788cdd03f (tag: 1.7.0)
     * update Nuitka to 05.11.1
