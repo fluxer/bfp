@@ -640,10 +640,15 @@ class Misc(object):
             self.typecheck(ssuffix, (types.StringTypes))
             self.typecheck(iretry, (types.IntType))
 
-        if lmirrors:
+        # create a local copy of lmirrors to avoid changing lmirrors as it's a
+        # reference and lmirrors.pop() modifies the value of external modules
+        # which is not desired. mymirrors = lmirrors is not a solution!
+        mymirrors = []
+        mymirrors.extend(lmirrors)
+        if mymirrors:
             sbase = self.url_normalize(surl, True)
-            smirror = lmirrors[0]
-            lmirrors.pop(0)
+            smirror = mymirrors[0]
+            mymirrors.pop(0)
             snewurl = '%s/%s%s' % (smirror, ssuffix, sbase)
         else:
             snewurl = surl
@@ -659,7 +664,7 @@ class Misc(object):
                 raise Exception('Unsupported URL', surl)
         except URLError as detail:
             if not iretry == 0:
-                return self.fetch(surl, destination, lmirrors, ssuffix, iretry-1)
+                return self.fetch(surl, destination, mymirrors, ssuffix, iretry-1)
             raise detail
 
     def archive_supported(self, sfile):
