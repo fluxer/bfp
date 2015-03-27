@@ -645,7 +645,8 @@ class Misc(object):
         # reference and lmirrors.pop() modifies the value of external modules
         # which is not desired. mymirrors = lmirrors is not a solution!
         mymirrors = []
-        mymirrors.extend(lmirrors)
+        if lmirrors:
+            mymirrors.extend(lmirrors)
         if mymirrors:
             sbase = self.url_normalize(surl, True)
             smirror = mymirrors[0]
