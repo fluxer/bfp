@@ -1,3 +1,151 @@
+Fri Mar 27 15:53:04 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
+d0604659d0d73d7bda9d9e66045d774788cdd03f (tag: 1.7.0)
+    * update Nuitka to 05.11.1
+    * minor cleanups
+    * fixup signing features of spm-tools
+    * remove now redudant PYUIC from the common Makefile
+    * update translations
+    * mention how to build and install against Python 3 in README
+    * add support for getting remote targets PGP keys to spm
+    * fix some typos
+    * fix some Python 3 issues with libmisc.Magic and libmisc.Inotify
+    * apply some Python 3000 oil
+    * adjust spm-tools imports for Python 3 compat
+    * apply fix to spm repo mode for Python 3
+    * improve Python 3000 support
+    * use a Python 3000 friendly mask for the GnuPG home directory
+    * fix match of interpreter in self when not in local
+    * remove paths from the class variable watched on libmisc.Inotify.watch_remove()
+    * minor libpackage targets lookup optimization
+    * implement bzip/gzip listing and proper writing
+    * install the license along with the docs
+    * minor bg translation corrections
+    * minor corrections
+    * link to the home pages of the requirements
+    * always reaise exceptions before exit from non-stable builds
+    * implement late hooks and mdev workaround for initramfs
+    * make some original strings translatable
+    * make libmisc.Inotify cleanup after itself
+    * setup the database caches watcher post-initialization
+    * use ctypes.util.find_library() to find libc needed by libmisc
+    * update dependencies and generalize them
+    * do not store password in plain format
+    * do not add files to watcher when recursing
+    * make sure srcmake does not add the footprint to the footprint
+    * minor code-style correction
+    * apply null entry from scanelf workaround to spm-tools
+    * uncoditionally extract archives during sources preperations in spm
+    * copy the dependencies of the libraries recursively for the initramfs image
+    * remove SPM GUI, it is far from usefull at this point
+    * add some url normalization characters to libmisc.Misc.url_normalize(), still incomplete
+    * minor GUI cleanup
+    * oops
+    * make the GnuPG home directory configurable
+    * do not overwrite binary tarball with the signature
+    * fetch and verify binary tarballs signatures
+    * fix a binary mode regression
+    * type-check the new ipermissions argument of libmisc.Misc.dir_create()
+    * use custom GnuPG home directory for SPM related features
+    * add config for PGP key servers
+    * receive all PGP keys with one gpg invocations
+    * make the signature check actually check if signature is not in sources
+    * improve detection of signature file when not specified
+    * implement signatures check into spm-tools sane mode
+    * do not attempt to receive PGP keys if VERIFY is not True
+    * minor bg translation update
+    * improve PGP signature verification and signing
+    * do not attempt to fetch local files from SRCBUILDs
+    * offload git repositories handling to misc.fetch()
+    * tweak grub trigger regex to optionally match fleading forward slash
+    * useless bumps
+    * reduce code dublication in terms of offline option handling
+    * mention all possible targets arguments options in spm man page
+    * make sure original file is copied too (regression)
+    * improve kernel detection of mkinitfs
+    * minor corrections
+    * use misc.system_scanelf() instead of getting lddtree output
+    * add gpg2 to runtime dependencies
+    * add status to README
+    * fix a weird bug caught by the tests
+    * add task to TODO
+    * fixup mkinitfs trigger
+    * do not attempt to setup watchers if directories do not exist
+    * fixup some triggers
+    * useless bumps
+    * Revert "remove dummy all target from common Makefile"
+    * rework the triggers to use regex match
+    * make database.remote_metadata() return consistent data
+    * fixup binary mode
+    * remove dummy all target from common Makefile
+    * libmisc housekeeping
+    * support plain bzip2 archive
+    * improve gzip archives unpack with extension different from .gz
+    * support bzip2 compression method for initramfs image
+    * useless bumps
+    * boost the snail
+    * update spm-tools man page to mention upload mode in synopsis and description
+    * add some safety checks to spm-tools upload mode
+    * implement basic upload mode into spm-tools
+    * various lintian corrections and API sanitizations
+    * correct handling of libmagic 5.09 bug
+    * minor documentation corrections and wrapup
+    * rename misc.ping() to misc.url_ping(), move deprecated API to the top of classes
+    * libmagic is no more, do not attempt to generate API docs for it
+    * record the file size after fetching it to verify it on the next request
+    * change messages to use light arrow, heavy only on critical messages
+    * minor bg translation update
+    * minor corrections
+    * replace the automagic verification with ondemand and implement signing of files
+    * binary mode cleanup and fixup
+    * minor fixes
+    * implement experimental automagick checksum and singature verification
+    * make use of list functionality from libmisc in directory deleter
+    * offload mirrors handling to the fetcher
+    * allow raise of exceptions from libspm by setting CATCH
+    * pop an error when binary tarball is not available
+    * recache only once no matter how many events get emited during database check
+    * handle recursive in inotify.add_watch()
+    * read database events without threading
+    * minor magic wrapper cleanup
+    * use custom libmagic wrapper
+    * minor runtime dependency check optiomization and housekeeping
+    * add one more MIME test, for just in case
+    * iterate over dictionary keys the right way
+    * optimize database.local_uptodate()
+    * ignore .c and .pot files in tree
+    * minor bg translation update
+    * allow non-compressed initramfs image creation
+    * reply on MIME types to guess archive types when possible
+    * escape dependency string in runtime check, rework tools dependency checker to match libspm
+    * optimize runtime dependencies checking
+    * clean API docs from clean target
+    * remove task from TODO - it's done
+    * generate and install libraries API docs via pydoc
+    * deprecate database.local_footprint() and database.remote_groups()
+    * replace bundled pyinotify with custom inotify wrapper
+    * remove bundled python-dialog
+    * speed up conflicts checking a little bit at the cost of a bit more indexing time (tradeoff is worth it)
+    * minor bg translation correction
+    * do not resolve and pull makedepends on binary install
+    * minor cleanup
+    * ditch the modification time check in misc.fetch_check()
+    * do not close rfile in misc.fetch_check() untill all info is taken
+    * fixup misc.fetch_check()
+    * do not block on bogus header
+    * minor cleanup
+    * make the fetcher check Last-Modified/Date header to further improve guessing when to start downloading afresh
+    * move David to past contributors
+    * minor docs update
+    * minor code cleanup
+    * minor documentation corrections
+    * make a table of dependencies (incomplete)
+    * make use of misc.archive_decompress() in lsinitfs
+    * support cwd argument for misc.system_output()
+    * make use of the gzip module in mkinitfs
+    * fix various issues with srcmake's footprint generator
+    * do not mix arrays with strings in srcmake messaging functions
+    * look for a interpreted either with delimiter or forward slash in the shebang
+
 Tue Mar 10 08:17:39 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
 2c91d86150f1df0933913997149c8f4af7ec4a70 (tag: 1.6.1)
     * update Nuitka to 0.5.10.2
