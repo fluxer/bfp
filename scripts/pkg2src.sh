@@ -83,6 +83,7 @@ for pkg in "${@:-.}";do
         -e 's|$_pkgver|$_version|g' -e 's|${_pkgver}|$_version|g' \
         -e 's|pkgdesc=|description=|g' \
         -e 's|source=(|sources=(|g' \
+        -e 's|validpgpkeys=(|pgpkeys=(|g' \
         -e 's|$srcdir|$SOURCE_DIR|g' -e 's|${srcdir}|$SOURCE_DIR|g' \
         -e 's|$pkgdir|$INSTALL_DIR|g' -e 's|${pkgdir}|$INSTALL_DIR|g' \
         -e 's|build()|src_compile()|g' -e 's|check()|src_check()|g' -e 's|package()|src_install()|g' \
