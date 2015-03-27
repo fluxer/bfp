@@ -51,5 +51,6 @@ changelog:
 
 dist:
 	$(GIT) archive HEAD --prefix=bfp-$(VERSION)/ | $(XZ) > bfp-$(VERSION).tar.xz
+	$(GPG) --sign --detach-sign bfp-$(VERSION).tar.xz
 
 .PHONY: all cython check install uninstall clean changelog dist
