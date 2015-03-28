@@ -608,6 +608,15 @@ class Misc(object):
             elif lsize > rsize or (os.path.isfile(last) and not self.file_read(last) == rsize):
                 lsize = '0'
                 os.unlink(destination)
+                # PGP signatures are small in size and it's easy for the
+                # fetcher to get confused if the file to be download is
+                # re-uploaded with minimal changes so force the signature fetch
+                sig1 = '%s.sig' % destination
+                sig2 = '%s.asc' % destination
+                if os.path.isfile(sig1):
+                    os.unlink(sig1)
+                if os.path.isfile(sig2):
+                    os.unlink(sig2)
             if rfile.headers.get('Accept-Ranges') == 'bytes':
                 # setup new request with custom header
                 rfile.close()
