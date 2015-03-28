@@ -668,7 +668,7 @@ class Misc(object):
         if self.python2:
             self.typecheck(surl, (types.StringTypes))
             self.typecheck(destination, (types.StringTypes))
-            self.typecheck(lmirrors, (types.NoneType, types.ListType))
+            self.typecheck(lmirrors, (types.NoneType, types.TupleType, types.ListType))
             self.typecheck(ssuffix, (types.StringTypes))
             self.typecheck(iretry, (types.IntType))
 
