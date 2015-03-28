@@ -214,6 +214,7 @@ optional arguments:
   -u USER, --user USER  Set user
   -d DIRECTORY, --directory DIRECTORY
                         Set upload directory
+  -i, --insecure        Use insecure connection
 
 =head1 EXAMPLES
 

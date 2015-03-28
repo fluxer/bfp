@@ -38,7 +38,7 @@ _spm_tools()
 
     disowned_options='-h --help -d --directory -c --cross -p --plain'
 
-    upload_options='-h --help -H --host -u --user -d --directory'
+    upload_options='-h --help -H --host -u --user -d --directory -i --insecure'
 
     _get_comp_words_by_ref cur prev
     _get_first_arg

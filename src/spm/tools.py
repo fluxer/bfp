@@ -36,7 +36,7 @@ database = libpackage.Database()
 import libspm
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.7.0 (328ac9f)"
+app_version = "1.7.1 (58a1e9e)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -719,11 +719,13 @@ class Disowned(object):
 
 class Upload(object):
     ''' Class to upload source/binary tarballs '''
-    def __init__(self, targets, host=None, user=None, directory='/'):
+    def __init__(self, targets, host=None, user=None, directory='/', \
+        insecure=False):
         self.targets = targets
         self.host = host
         self.user = user
         self.directory = directory
+        self.insecure = insecure
 
     def main(self):
         if not self.host:
@@ -737,8 +739,9 @@ class Upload(object):
         try:
             arch = os.uname()[4]
             p = misc.getpass('Password for %s: ' % self.user)
-            # FIXME: optionally use secure channel via FTP_TLS
-            ftp = ftplib.FTP(self.host, self.user, p, timeout=libspm.TIMEOUT)
+            ftp = ftplib.FTP_TLS(self.host, self.user, p, timeout=libspm.TIMEOUT)
+            if not self.insecure:
+                ftp.prot_p()
             ftp.cwd('%s/tarballs/%s' % (self.directory, arch))
             for target in self.targets:
                 if not database.remote_search(target):
@@ -914,6 +917,8 @@ try:
         type=str, required=True, help=_('Use user'))
     upload_parser.add_argument('-d', '--directory', type=str, \
         default='/', help=_('Use upload directory'))
+    upload_parser.add_argument('-i', '--insecure', action='store_true', \
+        help=_('Use insecure connection'))
     upload_parser.add_argument('TARGETS', nargs='+', type=str, \
         help=_('Targets to apply actions on'))
 
@@ -1090,9 +1095,11 @@ try:
         message.sub_info(_('HOST'), ARGS.host)
         message.sub_info(_('USER'), ARGS.user)
         message.sub_info(_('DIRECTORY'), ARGS.directory)
+        message.sub_info(_('INSECURE'), ARGS.insecure)
         message.sub_info(_('TARGETS'), ARGS.TARGETS)
         message.info(_('Poking server...'))
-        m = Upload(ARGS.TARGETS, ARGS.host, ARGS.user, ARGS.directory)
+        m = Upload(ARGS.TARGETS, ARGS.host, ARGS.user, ARGS.directory, \
+            ARGS.insecure)
         m.main()
 
 except configparser.Error as detail:
