@@ -820,7 +820,7 @@ class Source(object):
                 message.sub_debug(_('Already linked'), src_file)
             elif os.path.isdir('%s/.git' % local_file):
                 message.sub_debug(_('Copying'), src_file)
-                shutil.copytree(local_file, link_file)
+                shutil.copytree(local_file, link_file, True)
             elif os.path.isfile(src_file):
                 message.sub_debug(_('Linking'), src_file)
                 os.symlink(src_file, link_file)
