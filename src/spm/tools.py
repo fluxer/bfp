@@ -36,7 +36,7 @@ database = libpackage.Database()
 import libspm
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.7.1 (58a1e9e)"
+app_version = "1.7.1 (19a5bcc)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -507,9 +507,12 @@ class Sane(object):
                         if src.startswith(('http://', 'https://', 'ftp://', 'ftps://')):
                             sig1 = '%s.sig' % src
                             sig2 = '%s.asc' % src
-                            if misc.url_ping(sig1) and not sig1 in sources:
+                            if sig1 in sources or sig2 in sources:
+                                message.sub_debug(_('Signature already in sources for'), src)
+                                continue
+                            if misc.url_ping(sig1):
                                 message.sub_warning(_('Signature available but not in sources'), sig1)
-                            elif misc.url_ping(sig2) and not sig2 in sources:
+                            elif misc.url_ping(sig2):
                                 message.sub_warning(_('Signature available but not in sources'), sig2)
 
 class Merge(object):
