@@ -856,6 +856,22 @@ class Source(object):
             self.srcbuild + ' && umask 0022 && src_install'), \
             cwd=self.source_dir)
 
+        message.sub_info(_('Moving files according to filesystem'))
+        for libdir in ('/lib64', '/usr/lib64'):
+            if os.path.islink(libdir):
+                symdir = '%s%s' % (self.install_dir, libdir)
+                realdir = '%s%s' % (self.install_dir, os.path.realpath(libdir))
+                if os.path.exists(symdir) and not os.path.exists(realdir):
+                    message.sub_debug(symdir, realdir)
+                    os.rename(symdir, realdir)
+                elif os.path.exists(symdir) and os.path.exists(realdir):
+                    for i in os.listdir(symdir):
+                        origfull = '%s/%s' % (symdir, i)
+                        newfull = '%s/%s' % (realdir, i)
+                        message.sub_debug(origfull, newfull)
+                        os.rename(origfull, newfull)
+                    os.rmdir(symdir)
+
         if self.compress_man:
             message.sub_info(_('Compressing manual pages'))
             manpath = misc.whereis('manpath', fallback=False)
