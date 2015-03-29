@@ -1061,7 +1061,7 @@ class Source(object):
             '\n'.join(sorted(footprint)).replace(self.install_dir, ''))
 
         message.sub_info(_('Assembling depends'))
-        misc.file_write('%.depends' % self.target_tarball, \
+        misc.file_write('%s.depends' % self.target_tarball, \
             misc.string_convert(self.target_depends))
 
         message.sub_info(_('Compressing tarball'))
