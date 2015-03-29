@@ -936,7 +936,7 @@ class Misc(object):
             self.typecheck(sflags, (types.StringTypes))
             self.typecheck(demote, (types.StringTypes))
 
-        return self.system_output((self.whereis('scanelf'), '-CBF', \
+        return self.system_output((self.whereis('scanelf'), '-yCBF', \
             sformat, sflags, sfile), demote=demote)
 
     def system_command(self, command, shell=False, cwd='', catch=False, demote=''):
