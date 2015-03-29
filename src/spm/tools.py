@@ -752,11 +752,15 @@ class Upload(object):
                     sys.exit(2)
                 version = database.remote_metadata(target, 'version')
                 tarball = '%s/tarballs/%s/%s_%s.tar.bz2' % (libspm.CACHE_DIR, arch, target, version)
+                depends = '%s.depends' % tarball
+                signature = '%s.sig' % tarball
                 if not os.path.isfile(tarball):
                     message.sub_critical(_('Binary tarball not available available for'), target)
                     sys.exit(2)
-                signature = '%s.sig' % tarball
-                files = [tarball]
+                elif not os.path.isfile(depends):
+                    message.sub_critical(_('Binary tarball depends not available available for'), target)
+                    sys.exit(2)
+                files = [tarball, depends]
                 if os.path.isfile(signature):
                     files.append(signature)
                 elif libspm.SIGN:

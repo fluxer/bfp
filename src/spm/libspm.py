@@ -1060,6 +1060,10 @@ class Source(object):
         misc.file_write(os.path.join(self.install_dir, self.target_footprint), \
             '\n'.join(sorted(footprint)).replace(self.install_dir, ''))
 
+        message.sub_info(_('Assembling depends'))
+        misc.file_write('%.depends' % self.target_tarball, \
+            misc.string_convert(self.target_depends))
+
         message.sub_info(_('Compressing tarball'))
         misc.dir_create(os.path.dirname(self.target_tarball))
         misc.archive_compress((self.install_dir,), self.target_tarball, \
@@ -1502,17 +1506,6 @@ class Binary(Source):
 
     def prepare(self):
         ''' Prepare target tarballs '''
-        message.sub_info(_('Checking dependencies'))
-        missing_dependencies = database.remote_mdepends(self.target, mdepends=False)
-
-        if missing_dependencies and self.do_depends:
-            message.sub_info(_('Fetching dependencies'), missing_dependencies)
-            self.autobinary(missing_dependencies, automake=True)
-            message.sub_info(_('Resuming %s preparations at') % \
-                os.path.basename(self.target), datetime.today())
-        elif missing_dependencies:
-            message.sub_warning(_('Dependencies missing'), missing_dependencies)
-
         message.sub_info(_('Preparing tarballs'))
         src_base = self.target_name + '_' + self.target_version + '.tar.bz2'
         local_file = self.target_tarball
@@ -1524,22 +1517,35 @@ class Binary(Source):
         if len(MIRRORS) < 1:
             message.sub_critical(_('At least one mirror is required'))
             sys.exit(2)
-        surl = '%s/tarballs/%s/%s' % (MIRRORS[0], os.uname()[4], src_base)
-        if misc.url_ping(surl, MIRRORS, 'tarballs/%s/' % os.uname()[4]):
+        sprefix = 'tarballs/%s/' % os.uname()[4]
+        surl = '%s/%s/%s' % (MIRRORS[0], sprefix, src_base)
+        sdepends = '%s.depends' % local_file
+        if misc.url_ping(surl, MIRRORS, sprefix):
             found = True
             message.sub_debug(_('Fetching'), surl)
-            misc.fetch(surl, local_file, MIRRORS, 'tarballs/%s/' % os.uname()[4])
+            misc.fetch(surl, local_file, MIRRORS, sprefix)
+            misc.fetch('%s.depends' % surl, sdepends, MIRRORS, sprefix)
             if VERIFY:
                 sigurl = '%s.sig' % surl
                 sigfile = '%s.sig' % local_file
                 message.sub_debug(_('Fetching'), sigurl)
-                misc.fetch(sigurl, sigfile, MIRRORS, 'tarballs/%s/' % os.uname()[4])
+                misc.fetch(sigurl, sigfile, MIRRORS, sprefix)
                 message.sub_debug(_('Verifying'), local_file)
                 misc.gpg_verify(local_file)
 
         if not found:
             message.sub_critical(_('Binary tarball not available available for'), self.target_name)
             sys.exit(2)
+
+        message.sub_info(_('Checking dependencies'))
+        missing = misc.file_read(sdepends).split()
+        if missing and self.do_depends:
+            message.sub_info(_('Fetching dependencies'), missing)
+            self.autobinary(missing, automake=True)
+            message.sub_info(_('Resuming %s preparations at') % \
+                os.path.basename(self.target), datetime.today())
+        elif missing:
+            message.sub_warning(_('Dependencies missing'), missing)
 
     def main(self):
         ''' Execute action for every target '''
