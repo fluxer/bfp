@@ -858,8 +858,8 @@ class Source(object):
 
         message.sub_info(_('Moving files according to filesystem'))
         for libdir in ('/lib64', '/usr/lib64'):
-            if os.path.islink(libdir):
-                symdir = '%s%s' % (self.install_dir, libdir)
+            symdir = '%s%s' % (self.install_dir, libdir)
+            if os.path.islink(libdir) and not os.path.islink(symdir):
                 realdir = '%s%s' % (self.install_dir, os.path.realpath(libdir))
                 if os.path.exists(symdir) and not os.path.exists(realdir):
                     message.sub_debug(symdir, realdir)
