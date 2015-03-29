@@ -1129,26 +1129,24 @@ class Source(object):
 
         if target_upgrade:
             message.sub_info(_('Removing obsolete files and directories'))
-            adjusted = []
-            for sfile in new_content:
-                adjusted.append('/' + sfile)
-            remove_content = list(set(old_content.split('\n')) - set(adjusted))
-            for sfile in remove_content:
+            remove_content = []
+            for sfile in old_content.split('\n'):
+                sfull = ROOT_DIR + sfile
+                sresolved = os.path.realpath(sfull).replace(ROOT_DIR, '/')
+                if sresolved in new_content:
+                    continue
+                elif sfile.lstrip('/') in new_content:
+                    continue
                 # the footprint and metadata files will be deleted otherwise,
                 # also making sure ROOT_DIR different than / is respected
-                if LOCAL_DIR in sfile:
+                if LOCAL_DIR in sfull:
                     continue
                 # never delete files in the pseudo filesystems
                 elif sfile.startswith(('/dev/', '/sys/', '/proc/')):
                     continue
+                remove_content.append(sfile)
 
-                # files moved from symlink directory to the real directory
-                # will be deleted, e.g. from /lib64 to /lib where /lib64 is
-                # symlink to /lib. To prevent this skip these files
-                sdir = os.path.join(ROOT_DIR, os.path.dirname(sfile))
-                if os.path.islink(sdir) and os.path.isdir(os.path.realpath(sdir)):
-                    continue
-
+            for sfile in remove_content:
                 self.remove_target_file(sfile)
             for sfile in reversed(remove_content):
                 self.remove_target_dir(os.path.dirname(sfile))
