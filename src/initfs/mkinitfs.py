@@ -159,12 +159,8 @@ try:
 
     message.sub_info('Copying root overlay')
     if os.path.isdir('/etc/mkinitfs/root'):
-        for sdir in misc.list_dirs('/etc/mkinitfs/root'):
-            fixed_sdir = sdir.replace('/etc/mkinitfs/root', '')
-            message.sub_debug('Creating', fixed_sdir)
-            misc.dir_create(ARGS.tmp + fixed_sdir)
-        for sfile in misc.list_files('/etc/mkinitfs/root'):
-            copy_item(sfile)
+        for spath in misc.list_all('/etc/mkinitfs/root'):
+            copy_item(spath)
 
     message.sub_info('Copying files')
     if os.path.isdir('/etc/mkinitfs/files'):
