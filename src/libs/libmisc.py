@@ -56,7 +56,6 @@ class Misc(object):
 
     def typecheck(self, a, b):
         ''' Poor man's variable type checking, do not use with Python 3000 '''
-        # FIXME: implement file, directory, and url type check?
         if not isinstance(a, b):
             line = inspect.currentframe().f_back.f_lineno
             raise TypeError('Variable is not %s (%d)' % (str(b), line))
@@ -189,6 +188,7 @@ class Misc(object):
         ''' Delete file but only if it exists, handles links too '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
+
         if os.path.isfile(os.path.realpath(sfile)):
             os.unlink(sfile)
 
@@ -299,6 +299,7 @@ class Misc(object):
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
             self.typecheck(skey, (types.NoneType, types.StringTypes))
+            self.typecheck(sprompt, (types.StringTypes))
 
         self.dir_create(self.GPG_DIR, ipermissions=0o700)
         cmd = [self.whereis('gpg2'), '--homedir', self.GPG_DIR]
@@ -732,8 +733,7 @@ class Misc(object):
             self.typecheck(sfile, (types.StringTypes))
             self.typecheck(strip, (types.StringTypes))
 
-        dirname = os.path.dirname(sfile)
-        self.dir_create(dirname)
+        self.dir_create(os.path.dirname(sfile))
 
         if sfile.endswith(('tar.bz2', '.tar.gz')):
             tarf = tarfile.open(sfile, 'w:' + self.file_extension(sfile))
@@ -970,6 +970,7 @@ class Misc(object):
         if self.python2:
             self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
             self.typecheck(shell, (types.BooleanType))
+            self.typecheck(sinput, (types.StringTypes))
 
         # prevent stupidity
         if self.ROOT_DIR == '/':
@@ -1000,20 +1001,20 @@ class Misc(object):
                     self.system_command((umount, '-f', '-l', sdir))
 
     def system_script(self, sfile, function):
-        ''' Execute pre/post actions '''
+        ''' Execute a function from Bash script '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
             self.typecheck(function, (types.StringTypes))
 
         if self.ROOT_DIR == '/':
             self.system_command((self.whereis('bash'), '-e', '-c', \
-                'source ' + sfile + ' && ' + function), cwd=self.ROOT_DIR)
+                'source %s && %s' % (sfile, function)), cwd=self.ROOT_DIR)
         else:
             stmp = os.path.join(self.ROOT_DIR, 'tmpscript')
             shutil.copy(sfile, stmp)
             try:
                 self.system_chroot(('bash', '-e', '-c', \
-                    'source /tmpscript && ' + function))
+                    'source /tmpscript && %s' % function))
             finally:
                 os.remove(stmp)
 
