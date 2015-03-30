@@ -14,11 +14,11 @@ try:
     tmpdir = tempfile.mkdtemp()
     kernel = os.uname()[2]
     busybox = misc.whereis('busybox')
-    image = '/boot/initramfs-' + kernel + '.img'
+    image = '/boot/initramfs-%s.img' % kernel
     compression = 'gzip'
     modules = []
     for m in os.listdir('/sys/module'):
-        if os.path.isdir('/sys/module/' + m + '/sections'):
+        if os.path.isdir('/sys/module/%s/sections' % m):
             modules.append(m)
 
     parser = argparse.ArgumentParser(prog='mkinitfs', description='MkInitfs')
@@ -45,7 +45,7 @@ try:
 
     # if cross-building and no custom image is set update ARGS.image
     if ARGS.kernel != kernel and ARGS.image == image:
-        ARGS.image = '/boot/initramfs-' + ARGS.kernel + '.img'
+        ARGS.image = '/boot/initramfs-%s.img' % ARGS.kernel
 
     if ARGS.keep:
         keep = True
@@ -119,12 +119,13 @@ try:
     modsdir = None
     moddirs = ('/lib', '/lib32', '/lib64', '/usr/lib', '/usr/lib32', \
         '/usr/lib64')
-    for sdir in moddirs:
-        if os.path.islink(sdir):
+    for moddir in moddirs:
+        if os.path.islink(moddir):
             continue
-        if os.path.isfile(sdir + '/modules/' + ARGS.kernel + '/modules.dep') and \
-            os.path.isfile(sdir + '/modules/' + ARGS.kernel + '/modules.builtin'):
-            modsdir = sdir + '/modules/' + ARGS.kernel
+        kerndir = '%s/modules/%s' % (moddir, ARGS.kernel)
+        if os.path.isfile('%s/modules.dep' % kerndir) and \
+            os.path.isfile('%s/modules.builtin' % kerndir):
+            modsdir = kerndir
     # if the above fails, attempt to guess the kernel installed
     if not modsdir:
         for sdir in moddirs:
@@ -136,7 +137,7 @@ try:
                     message.sub_warning('Last resort kernel detected', k)
                     modsdir = sdir + '/modules/' + k
                     ARGS.kernel = k
-                    ARGS.image = '/boot/initramfs-' + k + '.img'
+                    ARGS.image = '/boot/initramfs-%s.img' % k
     if not modsdir:
         message.critical('Unable to find modules directory')
         sys.exit(2)
@@ -195,16 +196,16 @@ try:
         for line in misc.file_readlines(modsdir + '/modules.dep'):
             base = line.split(':')[0]
             depends = line.split(':')[1].split()
-            if '/' + module + '.ko' in base \
-                or '/' + module.replace('_', '-') + '.ko' in base:
+            if '/%s.ko' % module in base \
+                or '/%s.ko' % module.replace('_', '-') in base:
                 found = True
                 copy_item(modsdir + '/' + base.strip())
                 for dep in depends:
                     copy_item(modsdir + '/' + dep.strip())
         if not found:
             for line in misc.file_readlines(modsdir + '/modules.builtin'):
-                if '/' + module + '.ko' in line \
-                    or '/' + module.replace('_', '-') + '.ko' in line:
+                if '/%s.ko' % module in line \
+                    or '/%s.ko' % module.replace('_', '-') in line:
                     message.sub_debug('Module is builtin', module)
                     found = True
         if not found:

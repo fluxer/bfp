@@ -33,7 +33,7 @@ try:
 
     # if cross-building and no custom image is set update ARGS.image
     if ARGS.kernel != kernel and ARGS.image == image:
-        ARGS.image = '/boot/initramfs-' + ARGS.kernel + '.img'
+        ARGS.image = '/boot/initramfs-%s.img' % ARGS.kernel
 
     if ARGS.keep:
         keep = True
