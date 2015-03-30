@@ -1054,12 +1054,12 @@ class Inotify(object):
         self.ISDIR = 0x40000000         # IN_ISDIR
         self.ONESHOT = 0x80000000       # IN_ONESHOT
 
+        self.watched = {}
         libc = ctypes.util.find_library('c')
         self.libc = ctypes.CDLL(libc, use_errno=True)
         self.fd = self.libc.inotify_init()
         if self.fd == -1:
             raise Exception('Inotify', self.error())
-        self.watched = {}
 
     def __del__(self):
         for path in self.watch_list():
