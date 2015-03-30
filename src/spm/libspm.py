@@ -852,25 +852,25 @@ class Source(object):
         ''' Install targets files '''
         misc.dir_create(self.install_dir, DEMOTE)
 
+        for libdir in ('/lib64', '/usr/lib64'):
+            realdir = os.path.realpath(libdir)
+            instsym = '%s%s' % (self.install_dir, libdir)
+            instreal = '%s%s' % (self.install_dir, realdir)
+            if not realdir == libdir:
+                misc.dir_create(instreal)
+                os.symlink(os.path.basename(instreal), instsym)
+
         misc.system_command((misc.whereis('bash'), '-e', '-c', 'source ' + \
             self.srcbuild + ' && umask 0022 && src_install'), \
             cwd=self.source_dir)
 
-        message.sub_info(_('Moving files according to filesystem'))
         for libdir in ('/lib64', '/usr/lib64'):
-            symdir = '%s%s' % (self.install_dir, libdir)
-            if os.path.islink(libdir) and not os.path.islink(symdir):
-                realdir = '%s%s' % (self.install_dir, os.path.realpath(libdir))
-                if os.path.exists(symdir) and not os.path.exists(realdir):
-                    message.sub_debug(symdir, realdir)
-                    os.rename(symdir, realdir)
-                elif os.path.exists(symdir) and os.path.exists(realdir):
-                    for i in os.listdir(symdir):
-                        origfull = '%s/%s' % (symdir, i)
-                        newfull = '%s/%s' % (realdir, i)
-                        message.sub_debug(origfull, newfull)
-                        os.rename(origfull, newfull)
-                    os.rmdir(symdir)
+            realdir = os.path.realpath(libdir)
+            instsym = '%s%s' % (self.install_dir, libdir)
+            instreal = '%s%s' % (self.install_dir, realdir)
+            if os.path.exists(instreal) and not os.listdir(instreal):
+                os.unlink(instsym)
+                os.rmdir(instreal)
 
         if self.compress_man:
             message.sub_info(_('Compressing manual pages'))
@@ -1136,7 +1136,7 @@ class Source(object):
             remove_content = []
             for sfile in old_content.split('\n'):
                 sfull = ROOT_DIR + sfile
-                sresolved = os.path.realpath(sfull).replace(ROOT_DIR, '/')
+                sresolved = os.path.realpath(sfull).replace(ROOT_DIR, '')
                 if sresolved in new_content:
                     continue
                 elif sfile.lstrip('/') in new_content:
