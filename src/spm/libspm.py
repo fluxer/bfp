@@ -1544,7 +1544,12 @@ class Binary(Source):
             sys.exit(2)
 
         message.sub_info(_('Checking dependencies'))
-        missing = misc.file_read(sdepends).split()
+        missing = []
+        depends = misc.file_read(sdepends).split()
+        message.sub_debug(_('Dependencies'), depends)
+        for m in depends:
+            if not database.local_uptodate(m):
+                missing.append(m)
         if missing and self.do_depends:
             message.sub_info(_('Fetching dependencies'), missing)
             self.autobinary(missing, automake=True)
