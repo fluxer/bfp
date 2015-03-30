@@ -3,12 +3,12 @@ include ../../Makefile.inc
 .py:
 	$(NUITKA) $<
 
-all: bump clean
+all: clean bump
 	$(NUITKA) mkinitfs.py
 	$(NUITKA) lsinitfs.py
 	$(STRIP) *.exe
 
-cython: clean
+cython: clean bump
 	$(CYTHON) --embed mkinitfs.py
 	$(CYTHON) --embed lsinitfs.py
 	$(CC) mkinitfs.c $(shell pkg-config --cflags --libs $(PYTHON)) -o mkinitfs.exe
