@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2
 
-app_version = "1.6.1 (f31d80f)"
+app_version = "1.7.1 (ea74490)"
 
 tmpdir = None
 keep = False
@@ -126,6 +126,7 @@ try:
         if os.path.isfile('%s/modules.dep' % kerndir) and \
             os.path.isfile('%s/modules.builtin' % kerndir):
             modsdir = kerndir
+            break
     # if the above fails, attempt to guess the kernel installed
     if not modsdir:
         for sdir in moddirs:
@@ -138,6 +139,7 @@ try:
                     modsdir = sdir + '/modules/' + k
                     ARGS.kernel = k
                     ARGS.image = '/boot/initramfs-%s.img' % k
+                    break
     if not modsdir:
         message.critical('Unable to find modules directory')
         sys.exit(2)
