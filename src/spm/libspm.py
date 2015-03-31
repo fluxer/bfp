@@ -525,11 +525,33 @@ class Source(object):
         misc.system_command((objcopy, '--add-gnu-debuglink', sdebug, sfile))
 
     def update_databases(self, content, action):
-        ''' Update common databases '''
+        ''' DEPRECATED: use post_update_databases() instead '''
+        self.post_update_databases(content, action)
+
+    def pre_update_databases(self, content, action):
+        ''' Update common databases before merge '''
         if not TRIGGERS:
             return
 
         adjcontent = '\n'.join(content)
+        install_info = misc.whereis('install-info', False, True)
+        install_info_regex = '(?:^|\\s)(.*share/info/.*)(?:$|\\s)'
+        message.sub_debug('install-info', install_info or '')
+        match = misc.string_search(install_info_regex, adjcontent, escape=False)
+        if match and install_info:
+            message.sub_debug(match)
+            for m in match:
+                infodir = sys.prefix + '/share/info/dir'
+                message.sub_info(_('Deleting info page'), m)
+                misc.system_trigger((install_info, '--delete', m, infodir))
+
+
+    def post_update_databases(self, content, action):
+        ''' Update common databases after merge'''
+        if not TRIGGERS:
+            return
+
+        adjcontent = '\n/'.join(content)
         ldconfig = misc.whereis('ldconfig', False, True)
         ldconfig_regex = '(.*\\.so)(?:$|\\s)'
         message.sub_debug('ldconfig', ldconfig or '')
@@ -676,19 +698,8 @@ class Source(object):
             message.sub_debug(match)
             for m in match:
                 infodir = sys.prefix + '/share/info/dir'
-                if action == 'merge':
-                    message.sub_info(_('Installing info page'), m)
-                    misc.system_trigger((install_info, m, infodir))
-                elif action == 'remove':
-                    message.sub_info(_('Deleting info page'), m)
-                    misc.system_trigger((install_info, '--delete', m, infodir))
-                elif action == 'upgrade':
-                    if os.path.exists(ROOT_DIR + m):
-                        message.sub_info(_('Updating info page'), m)
-                        misc.system_trigger((install_info, m, infodir))
-                    else:
-                        message.sub_info(_('Deleting info page'), m)
-                        misc.system_trigger((install_info, '--delete', m, infodir))
+                message.sub_info(_('Installing info page'), m)
+                misc.system_trigger((install_info, m, infodir))
 
         udevadm = misc.whereis('udevadm', False, True)
         udevadm_regex = '(?:^|\\s)(.*/udev/rules.d/.*)(?:$|\\s)'
@@ -1108,6 +1119,13 @@ class Source(object):
             message.sub_info(_('Executing pre_install()'))
             misc.system_script(self.srcbuild, 'pre_install')
 
+        if target_upgrade:
+            if old_content:
+                self.pre_update_databases(old_content.split('\n'), 'upgrade')
+        else:
+            if old_content:
+                self.pre_update_databases(old_content.split('\n'), 'merge')
+
         if BACKUP:
             message.sub_info(_('Creating backing up files'))
             check = []
@@ -1167,14 +1185,9 @@ class Source(object):
             misc.system_script(self.srcbuild, 'post_install')
 
         if target_upgrade:
-            everything = old_content.split('\n')
-            # some triggers are run multiple times, filter dublicates for them
-            for sfile in new_content:
-                if not '/' + sfile in everything:
-                    everything.append('/' + sfile)
-            self.update_databases(everything, 'upgrade')
+            self.post_update_databases(new_content, 'upgrade')
         else:
-            self.update_databases(new_content, 'merge')
+            self.post_update_databases(new_content, 'merge')
 
         if target_upgrade:
             message.sub_info(_('Checking reverse dependencies'))
