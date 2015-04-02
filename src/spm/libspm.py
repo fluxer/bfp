@@ -980,7 +980,7 @@ class Source(object):
                 # parse the shebang and split it to 2 groups:
                 # 1. full match, used to replace it with something that will work
                 # 2. base of the interpreter (e.g. bash), used to find match in the target or host
-                omatch = misc.file_search('(^#!.*(?:\\d|/)((?:' + bang_regexp + ')(.*\\d)?))(?:.*\\s)', \
+                omatch = misc.file_search('(^#!.*(?: |\\t|/)((?:' + bang_regexp + ')(.* |.*\\t)?))(?:.*\\s)', \
                     sfile, exact=False, escape=False)
                 if omatch:
                     sfull = omatch[0][0].strip()
@@ -1011,7 +1011,9 @@ class Source(object):
             # produces a list with empty entry, it happens when '-L' is used
             if req in checked or not req:
                 continue
-            rreq = os.path.realpath(req)
+            rreq = req
+            if os.path.exists(req):
+                rreq = os.path.realpath(req)
             match = database.local_belongs('(?:^|\\s)%s(?:$|\\s)' % re.escape(rreq), escape=False)
             if match and len(match) > 1:
                 message.sub_warning(_('Multiple providers for %s') % rreq, match)
