@@ -1127,7 +1127,7 @@ class Source(object):
                 self.pre_update_databases(old_content.split('\n'), 'merge')
 
         if BACKUP:
-            message.sub_info(_('Creating backing up files'))
+            message.sub_info(_('Creating backup files'))
             check = []
             for sfile in new_content:
                 sfull = os.path.join(ROOT_DIR, sfile)

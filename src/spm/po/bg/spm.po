@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-03-30 21:08+0000\n"
+"POT-Creation-Date: 2015-04-02 00:06+0000\n"
 "PO-Revision-Date: 2015-03-27 16:26+0000\n"
 "Last-Translator: Ivailo Monev <xakepa10@gmail.com>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -406,8 +406,8 @@ msgid "Executing pre_install()"
 msgstr "Изпълняване на pre_install()"
 
 #: libspm.py:1130
-msgid "Creating backing up files"
-msgstr "Създаване резервни копия на файлове"
+msgid "Creating backup files"
+msgstr ""
 
 #: libspm.py:1145
 msgid "Backing up"
