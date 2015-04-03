@@ -3,22 +3,16 @@
 import gettext
 _ = gettext.translation('spm', fallback=True).gettext
 
-import sys
-import os
-import shutil
-import re
-import compileall, site
+import sys, os, shutil, re, compileall, site
 from datetime import datetime
 if sys.version < '3':
     import ConfigParser as configparser
 else:
     import configparser
 
-import libmessage
+import libmessage, libmisc, libpackage
 message = libmessage.Message()
-import libmisc
 misc = libmisc.Misc()
-import libpackage
 database = libpackage.Database()
 
 
@@ -104,7 +98,8 @@ TRIGGERS = conf.getboolean('merge', 'TRIGGERS')
 
 # parse repositories configuration file
 if not os.path.isfile(REPOSITORIES_CONF):
-    message.warning(_('Repositories configuration file does not exist'), REPOSITORIES_CONF)
+    message.warning(_('Repositories configuration file does not exist'), \
+        REPOSITORIES_CONF)
     REPOSITORIES = ['https://bitbucket.org/smil3y/mini.git']
 else:
     REPOSITORIES = []
@@ -122,7 +117,8 @@ else:
 
 # parse mirrors configuration file
 if not os.path.isfile(MIRRORS_CONF):
-    message.warning(_('Mirrors configuration file does not exist'), MIRRORS_CONF)
+    message.warning(_('Mirrors configuration file does not exist'), \
+        MIRRORS_CONF)
     MIRRORS = ['http://distfiles.gentoo.org/distfiles']
 else:
     MIRRORS = []
@@ -139,7 +135,8 @@ else:
 
 # parse PGP keys servers configuration file
 if not os.path.isfile(KEYSERVERS_CONF):
-    message.warning(_('PGP keys servers configuration file does not exist'), KEYSERVERS_CONF)
+    message.warning(_('PGP keys servers configuration file does not exist'), \
+        KEYSERVERS_CONF)
     KEYSERVERS = ['pool.sks-keyservers.net']
 else:
     KEYSERVERS = []
@@ -795,16 +792,16 @@ class Source(object):
     def prepare(self):
         ''' Prepare target sources '''
         message.sub_info(_('Checking dependencies'))
-        missing_dependencies = database.remote_mdepends(self.target, \
+        dependencies = database.remote_mdepends(self.target, \
             cdepends=self.do_check)
 
-        if missing_dependencies and self.do_depends:
-            message.sub_info(_('Building dependencies'), missing_dependencies)
-            self.autosource(missing_dependencies, automake=True)
+        if dependencies and self.do_depends:
+            message.sub_info(_('Building dependencies'), dependencies)
+            self.autosource(dependencies, automake=True)
             message.sub_info(_('Resuming %s preparations at') % \
                 os.path.basename(self.target), datetime.today())
-        elif missing_dependencies:
-            message.sub_warning(_('Dependencies missing'), missing_dependencies)
+        elif dependencies:
+            message.sub_warning(_('Dependencies missing'), dependencies)
 
         misc.dir_create(self.source_dir, DEMOTE)
         misc.dir_create(self.sources_dir, DEMOTE)
@@ -863,6 +860,9 @@ class Source(object):
         ''' Install targets files '''
         misc.dir_create(self.install_dir, DEMOTE)
 
+        # re-create host system symlinks to prevent mismatch of entries in the
+        # footprint and ld.so.cache for libraries leading to undetectable
+        # runtime dependencies
         for libdir in ('/lib64', '/usr/lib64'):
             realdir = os.path.realpath(libdir)
             instsym = '%s%s' % (self.install_dir, libdir)
@@ -886,7 +886,8 @@ class Source(object):
         if self.compress_man:
             message.sub_info(_('Compressing manual pages'))
             manpath = misc.whereis('manpath', fallback=False)
-            # if manpath (provided by man-db) is not present fallback to something sane
+            # if manpath (provided by man-db) is not present fallback to
+            # something sane
             if not manpath:
                 mpaths = ('/usr/local/share/man', '/local/share/man', \
                     '/usr/share/man', '/share/man', '/usr/man', '/man')
@@ -916,7 +917,8 @@ class Source(object):
             if sfile.endswith((self.target_footprint, self.target_metadata)):
                 continue
             # remove common conflict files/directories
-            elif sfile.endswith('/.packlist') or sfile.endswith('/perllocal.pod') \
+            elif sfile.endswith('/.packlist') \
+                or sfile.endswith('/perllocal.pod') \
                 or sfile.endswith('/share/info/dir'):
                 os.unlink(sfile)
                 continue
