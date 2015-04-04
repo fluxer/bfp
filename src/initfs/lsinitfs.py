@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os
 
-app_version = "1.7.1 (ea74490)"
+app_version = "1.7.1 (52e2749)"
 
 tmpdir = None
 keep = False
@@ -88,6 +88,6 @@ finally:
     if tmpdir and os.path.isdir(tmpdir) and not keep:
         message.info('Cleaning up...')
         misc.dir_remove(tmpdir)
-    if not 'stable' in app_version:
+    if not 'stable' in app_version and sys.exc_info()[0]:
         raise
 

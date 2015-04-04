@@ -36,7 +36,7 @@ database = libpackage.Database()
 import libspm
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.7.1 (0580e71)"
+app_version = "1.7.1 (0d9a7c7)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -1152,5 +1152,5 @@ except Exception as detail:
     message.critical('Unexpected error', detail)
     sys.exit(1)
 finally:
-    if not 'stable' in app_version:
+    if not 'stable' in app_version and sys.exc_info()[0]:
         raise
