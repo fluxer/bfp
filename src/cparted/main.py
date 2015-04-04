@@ -1,7 +1,7 @@
 #!/bin/python2
 """
 Copyright (C) 2011 David Campbell <davekong@archlinux.us>
-Copyright (C) 2014 Ivailo Monev <xakepa10@gmail.com>
+Copyright (C) 2014-2015 Ivailo Monev <xakepa10@gmail.com>
 This program is licensed under the GPL. See COPYING for the full license.
 
 This program is a curses front end to pyparted that mimics cfdisk.
