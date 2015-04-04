@@ -542,6 +542,18 @@ class Source(object):
                 message.sub_info(_('Deleting info page'), m)
                 misc.system_trigger((install_info, '--delete', m, infodir))
 
+        xdg_mime = misc.whereis('xdg-mime', False, True)
+        xdg_mime_regex = '(?:^|\\s)(.*/mime/packages/.*\\.xml)(?:$|\\s)'
+        message.sub_debug('xdg-mime', xdg_mime or '')
+        match = misc.string_search(xdg_mime_regex, adjcontent, escape=False)
+        if match and xdg_mime:
+            done = []
+            for m in match:
+                if m in done:
+                    continue
+                elif action == 'remove':
+                    message.sub_info(_('Uninstalling XDG MIMEs'), m)
+                    misc.system_trigger((xdg_mime, 'uninstall', m))
 
     def post_update_databases(self, content, action):
         ''' Update common databases after merge'''
@@ -607,7 +619,7 @@ class Source(object):
                 done.append(m)
 
         xdg_mime = misc.whereis('xdg-mime', False, True)
-        xdg_mime_regex = '(?:^|\\s)(.*mime/.*-.*\\.xml)(?:$|\\s)'
+        xdg_mime_regex = '(?:^|\\s)(.*/mime/packages/.*\\.xml)(?:$|\\s)'
         message.sub_debug('xdg-mime', xdg_mime or '')
         match = misc.string_search(xdg_mime_regex, adjcontent, escape=False)
         if match and xdg_mime:
@@ -617,14 +629,11 @@ class Source(object):
                     continue
                 if action == 'merge':
                     message.sub_info(_('Installing XDG MIMEs'), m)
-                    misc.system_trigger((xdg_mime, 'install', m))
-                elif action == 'remove':
-                    message.sub_info(_('Uninstalling XDG MIMEs'), m)
-                    misc.system_trigger((xdg_mime, 'uninstall', m))
+                    misc.system_trigger((xdg_mime, 'install', '--novendor', m))
                 elif action == 'upgrade':
                     if os.path.exists(ROOT_DIR + m):
                         message.sub_info(_('Updating XDG MIMEs'), m)
-                        misc.system_trigger((xdg_mime, 'install', m))
+                        misc.system_trigger((xdg_mime, 'install', '--novendor', m))
                 done.append(m)
 
         gio_querymodules = misc.whereis('gio-querymodules', False, True)
@@ -1248,10 +1257,14 @@ class Source(object):
             message.sub_info(_('Executing pre_remove()'))
             misc.system_script(self.srcbuild, 'pre_remove')
 
+        target_content = []
         footprint = os.path.join(ROOT_DIR, self.target_footprint)
         if os.path.isfile(footprint):
             message.sub_info(_('Indexing content'))
             target_content = misc.file_readlines(footprint)
+
+        if target_content:
+            self.pre_update_databases(target_content, 'remove')
 
             message.sub_info(_('Removing files'))
             for sfile in target_content:
@@ -1274,7 +1287,8 @@ class Source(object):
             message.sub_info(_('Executing post_remove()'))
             misc.system_script(self.srcbuild, 'post_remove')
 
-        self.update_databases(target_content, 'remove')
+        if target_content:
+            self.post_update_databases(target_content, 'remove')
 
         # do not wait for the cache notifier to kick in
         database.LOCAL_CACHE = {}
