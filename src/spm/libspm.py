@@ -674,9 +674,7 @@ class Source(object):
         if match and gdk_pixbuf:
             message.sub_info(_('Updating gdk pixbuffer loaders'))
             message.sub_debug(match)
-            misc.dir_create(ROOT_DIR + '/etc/gtk-2.0')
-            misc.system_trigger(gdk_pixbuf + \
-                ' > /etc/gtk-2.0/gdk-pixbuf.loaders', shell=True)
+            misc.system_trigger((gdk_pixbuf, '--update-cache'))
 
         glib_schemas = misc.whereis('glib-compile-schemas', False, True)
         glib_schemas_regex = '(?:^|\\s)(.*/schemas)/.*(?:$|\\s)'
