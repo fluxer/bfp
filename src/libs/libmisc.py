@@ -1062,8 +1062,6 @@ class Inotify(object):
             raise Exception('Inotify', self.error())
 
     def __del__(self):
-        for path in self.watch_list():
-            self.watch_remove(path)
         self.close()
 
     def error(self):
