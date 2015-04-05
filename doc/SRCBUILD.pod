@@ -4,28 +4,32 @@ SRCBUILD - Source Package Manager build recipe
 
 =head1 DESCRIPTION
 
-SRCBUILD is used as a script, a set of instructions, how to build software
-using Source Package Manager. Its syntax is Shell (Bash), similar to those
-used by Pacman's PKGBUILDs and Gentoo's ebuilds. Common things with the
-PKGBUILD format are the version, description, depends, makedepends,
-checkdepends, source, options and backup variables. Common things with the
-ebuild format is presence of pre/post actions in the SRCBUILD itself. This
-means that everything is in one file, unlike the PKGBUILD format.
+SRCBUILD is used as a script, a set of instructions, how to build software using
+Source Package Manager. Its syntax is Shell (Bash), similar to those used by
+Pacman's PKGBUILDs and Gentoo's ebuilds. Common things with the PKGBUILD format
+are the version, description, depends, makedepends, checkdepends, source,
+options and backup variables. Common things with the ebuild format is presence
+of pre/post actions in the SRCBUILD itself. This means that everything is in one
+file, unlike the PKGBUILD format.
 
 The metadata defined in the recipes should contain only one function
 (src_install) and two (2) variables (version and description). Optionally two
-(2) more functions can be specified (src_compile and src_check) and six (6)
-more variable (depends, makedepends, checkdepends, source, options and backup).
-Target name is defined by the directory name in which the target files are
-placed in the repository.
+(2) more functions can be specified (src_compile and src_check) and six (7) more
+variable (depends, makedepends, checkdepends, sources, pgpkeys, options and
+backup). Target name is defined by the directory name in which the target files
+are placed.
 
 In addition six (6) more functions (pre/post_install, pre/post_upgrade and
 pre/post_remove) can be defined as pre/post actions to be taken when software
 is installed, upgraded or removed. Pre-actions are taken before the actual
 install/upgrade/remove is done with post-actions following up.
 
-For easy of use SOURCE_DIR and INSTALL_DIR are exported and can be used inside
-the SRCBUILD.
+For easy of use SOURCE_DIR and INSTALL_DIR envirnonmental variables are exported
+and can be used inside the SRCBUILD aside from those defined in the SRCBUILD
+itself. SOURCE_DIR is the top-level directory pointing to the directory where
+all sources (tarballs, patches, etc.) are temporary placed. INSTALL_DIR is where
+the software should be installed so that SPM can do its job of detecting
+runtime dependencies and creating a compressed archive of the files.
 
 =head1 OPTIONS
 
@@ -54,6 +58,11 @@ Variable defining check dependencies of software.
 Variable defining sources of software. This includes remote files, such as
 tarballs or patches, that should be fetched. Note that local files can be
 shipped along the SRCBUILD when needed.
+
+=head2 pgpkeys
+
+Variable defining PGP keys to be imported. They usually required for checking
+issuer of a software source tarball.
 
 =head2 backup
 
@@ -158,4 +167,4 @@ COPYING file bundled with the source code.
 
 =head1 SEE ALSO
 
-spm(8) spm.conf(5) bash(1)
+spm(8) spm.conf(5) bash(1) gpg(1) objcopy(1) strip(1)
