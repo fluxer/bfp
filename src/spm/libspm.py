@@ -1106,7 +1106,7 @@ class Source(object):
                     continue
 
                 message.sub_debug(_('Checking against'), target)
-                footprint = database.local_metadata(target, 'footprint').split('\n')
+                footprint = database.local_metadata(target, 'footprint').splitlines()
                 for sfile in new_content:
                     sfull = '/' + sfile
                     if sfull in footprint:
@@ -1130,10 +1130,10 @@ class Source(object):
 
         if target_upgrade:
             if old_content:
-                self.pre_update_databases(old_content.split('\n'), 'upgrade')
+                self.pre_update_databases(old_content.splitlines(), 'upgrade')
         else:
             if old_content:
-                self.pre_update_databases(old_content.split('\n'), 'merge')
+                self.pre_update_databases(old_content.splitlines(), 'merge')
 
         if BACKUP:
             message.sub_info(_('Creating backup files'))
@@ -1161,7 +1161,7 @@ class Source(object):
         if target_upgrade:
             message.sub_info(_('Removing obsolete files and directories'))
             remove_content = []
-            for sfile in old_content.split('\n'):
+            for sfile in old_content.splitlines():
                 sfull = ROOT_DIR + sfile
                 sresolved = os.path.realpath(sfull).replace(ROOT_DIR, '')
                 if sresolved in new_content:

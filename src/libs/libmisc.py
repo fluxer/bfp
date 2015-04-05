@@ -825,10 +825,10 @@ class Misc(object):
             bsdtar = self.whereis('bsdtar', fallback=False)
             if bsdtar:
                 content = self.system_output((bsdtar, '-tf', \
-                    sfile)).split('\n')
+                    sfile)).splitlines()
             else:
                 content = self.system_output((self.whereis('tar'), \
-                    '-tf', sfile)).split('\n')
+                    '-tf', sfile)).splitlines()
         elif smime == 'application/x-gzip':
             content = self.file_name(sfile, True).split()
         elif smime == 'application/x-bzip2':
