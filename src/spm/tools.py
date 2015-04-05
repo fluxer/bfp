@@ -36,7 +36,7 @@ database = libpackage.Database()
 import libspm
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.7.1 (3986095)"
+app_version = "1.7.2 (d35e853)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -398,11 +398,12 @@ class Lint(object):
                             message.sub_warning(_('Possibly undefined backup of file'), sfile)
 
                 if self.conflicts:
-                    for sfile in target_footprint.splitlines():
-                        for local in database.local_all(basename=True):
-                            if local == target:
+                    for local in database.local_all(basename=True):
+                        if local == target:
                                 continue
-                            if sfile.lstrip('/') in database.local_metadata(local, 'footprint').splitlines():
+                        footprint = database.local_metadata(local, 'footprint').splitlines()
+                        for sfile in target_footprint.splitlines():
+                            if sfile.lstrip('/') in footprint:
                                 message.sub_warning(_('Possibly conflicting file with %s') % local, sfile)
 
                 if self.debug:
