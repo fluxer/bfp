@@ -1,3 +1,45 @@
+Sun Apr 5 18:11:27 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
+2e4c30120ff2c19d7459fc4b9e5572a934b1c89b (tag: 1.7.2)
+    * deprecate libmisc.Misc.fetch_check()
+    * review srcbuild manual page
+    * review spm manual page
+    * minor cleanup
+    * improve targets directory removal by attempting to remove parent of directory too
+    * simplify the debug file output path logic
+    * improve the xdg-mime trigger
+    * update cparted copyright
+    * raise exception for unstable builds only if there is an exception
+    * match literal dot in source from srcmake
+    * make the gdk-pixbuf use "--update-cache" argument
+    * mostly code-style corrections
+    * fixup the shebang detection with space in it
+    * minor original string correction
+    * fix some issues with the info triggers
+    * use the first kernel directory found
+    * bump initfs version from cython target
+    * check if dependencies of binary tarballs are outdated before taking actions on them
+    * initialize libmisc.Inotify.watched as early as possible
+    * minor cleanups, code-style corrections and such
+    * initfs code-style corrections (incomplete)
+    * Revert "remove redudant re-cache forcing code"
+    * make use of libmisc.Misc.list_all() in mkinitfs
+    * instead of moving content from lib64 to lib and such just create symlinks before installation
+    * regenerate translations
+    * oops
+    * generate and use .depends for binary tarballs
+    * do not attempt to adjust library directories if they are links
+    * remove redudant re-cache forcing code
+    * rework obsolete content checker to resolve some x86_64 issues
+    * make libmisc.Misc.system_scanelf() ignore symlinks
+    * workaround some lib64 issues on x86_64 hosts
+    * make the fetcher re-fetch the signature when URL size changes
+    * speed up signatures checking in spm-tools sane mode
+    * allow tuple of mirrors to be passed to the main fetcher method
+    * add some valies to the URL to characters map in libmisc.Misc.url_normalize()
+    * implement secure connection support for spm-tools upload mode
+    * fix copying of Git repos with symlinks in them
+    * sign the tarball after creating it
+
 Fri Mar 27 18:06:11 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
 3cc81dc725e38383a380d357975b3452aa981529 (tag: 1.7.1)
     * make pkg2src rename validpgpkeys to pgpkeys
