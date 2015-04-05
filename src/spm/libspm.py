@@ -509,14 +509,12 @@ class Source(object):
         if '/lib/debug/' in sfile:
             return
         # FIXME: do not run on hardlinks, it will fail with binutils <=2.23.2
-        message.sub_debug(_('Creating debug file'), sfile)
-        # ugly paths manipulation due to GDB standards:
         # https://sourceware.org/gdb/onlinedocs/gdb/Separate-Debug-Files.html
-        srelative = sfile.replace(self.install_dir, '')
-        sdir = self.install_dir + sys.prefix + '/lib/debug/' + os.path.dirname(srelative)
-        misc.dir_create(sdir)
-        sdebug = sdir + '/' + os.path.basename(sfile) + '.debug'
+        sdebug = sfile.replace(self.install_dir, self.install_dir + \
+            sys.prefix + '/lib/debug') + '.debug'
+        misc.dir_create(os.path.dirname(sdebug))
         objcopy = misc.whereis('objcopy')
+        message.sub_debug(_('Creating debug file'), sdebug)
         misc.system_command((objcopy, '--only-keep-debug', \
             '--compress-debug-sections', sfile, sdebug))
         misc.system_command((objcopy, '--add-gnu-debuglink', sdebug, sfile))

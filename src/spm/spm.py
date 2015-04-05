@@ -19,7 +19,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.7.1 (6b9475e)"
+app_version = "1.7.1 (47c1feb)"
 
 try:
     import libmessage
