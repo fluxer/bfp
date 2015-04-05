@@ -409,8 +409,7 @@ class Repo(object):
         ''' Check repositories for updates '''
         message.sub_info(_('Checking for updates'))
         for target in database.local_all(basename=True):
-            target_dir = database.remote_search(target)
-            if not target_dir:
+            if not database.remote_search(target):
                 message.sub_warning(_('Target not in any repository'), target)
                 continue
 
