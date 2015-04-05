@@ -5,7 +5,6 @@
  * Implement trigger invocation only on file content change
  * Build target(s) from source when binary not available?
  * Make the python byte-compile work for versions other than what SPM has been run from
- * Improve Python 3 support
  * Write a script/module that will record API changes between release
 
 ## ALL (on regular basis) ##
