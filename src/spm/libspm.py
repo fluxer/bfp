@@ -765,9 +765,10 @@ class Source(object):
                 os.unlink(sfull)
             else:
                 os.rmdir(sfull)
+            self.remove_target_dir(os.path.dirname(sdir))
 
     def remove_target_link(self, slink):
-        ''' Remove target link (sym/hard) '''
+        ''' Remove target symlink '''
         sfull = ROOT_DIR + slink
         if os.path.islink(sfull) and \
             not os.path.exists(ROOT_DIR + '/' + os.readlink(sfull)):
