@@ -54,6 +54,30 @@ class Misc(object):
         ''' DEPRECATED: Ping URL, use url_ping() instead '''
         return self.url_ping(url)
 
+    def fetch_check(self, surl, destination):
+        ''' DEPRECATED: Check if remote has to be downloaded '''
+        if self.python2:
+            self.typecheck(surl, (types.StringTypes))
+            self.typecheck(destination, (types.StringTypes))
+
+        if self.OFFLINE:
+            return True
+        elif os.path.isfile(destination):
+            rfile = self.fetch_request(surl)
+            # not all requests have content-lenght:
+            # http://en.wikipedia.org/wiki/Chunked_transfer_encoding
+            rsize = rfile.headers.get('Content-Length', '0')
+            rfile.close()
+            lsize = os.path.getsize(destination)
+            last = '%s.last' % destination
+            if not int(lsize) == int(rsize):
+                return False
+            elif os.path.isfile(last) and not self.file_read(last) == rsize:
+                return False
+            return True
+        else:
+            return False
+
     def typecheck(self, a, b):
         ''' Poor man's variable type checking, do not use with Python 3000 '''
         if not isinstance(a, b):
@@ -61,7 +85,7 @@ class Misc(object):
             raise TypeError('Variable is not %s (%d)' % (str(b), line))
 
     def whereis(self, program, fallback=True, chroot=False):
-        ''' Find full path to executable '''
+        ''' Find full path to executable from PATH '''
         if self.python2:
             self.typecheck(program, (types.StringTypes))
             self.typecheck(fallback, (types.BooleanType))
@@ -562,30 +586,6 @@ class Misc(object):
             return urlopen(request, timeout=self.TIMEOUT, context=ctx)
         else:
             return urlopen(request, timeout=self.TIMEOUT)
-
-    def fetch_check(self, surl, destination):
-        ''' Check if remote has to be downloaded '''
-        if self.python2:
-            self.typecheck(surl, (types.StringTypes))
-            self.typecheck(destination, (types.StringTypes))
-
-        if self.OFFLINE:
-            return True
-        elif os.path.isfile(destination):
-            rfile = self.fetch_request(surl)
-            # not all requests have content-lenght:
-            # http://en.wikipedia.org/wiki/Chunked_transfer_encoding
-            rsize = rfile.headers.get('Content-Length', '0')
-            rfile.close()
-            lsize = os.path.getsize(destination)
-            last = '%s.last' % destination
-            if not int(lsize) == int(rsize):
-                return False
-            elif os.path.isfile(last) and not self.file_read(last) == rsize:
-                return False
-            return True
-        else:
-            return False
 
     def fetch_plain(self, surl, destination, iretry=3):
         ''' Download file, iretry is passed internally! '''

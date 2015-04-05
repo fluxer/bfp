@@ -61,8 +61,8 @@ shipped along the SRCBUILD when needed.
 
 =head2 pgpkeys
 
-Variable defining PGP keys to be imported. They usually required for checking
-issuer of a software source tarball.
+Variable defining PGP keys to be imported. They are usually required for
+checking issuer of a software source tarball.
 
 =head2 backup
 
