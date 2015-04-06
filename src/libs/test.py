@@ -175,10 +175,7 @@ class TestSuite(unittest.TestCase):
             exact=True, escape=True))
 
     def test_url_ping_true(self):
-        try:
-            self.assertTrue(misc.url_ping())
-        except AssertionError:
-            unittest.SkipTest('It fails if not connected to the internet')
+        self.assertTrue(misc.url_ping())
 
     def test_url_ping_false(self):
         misc.OFFLINE = True
