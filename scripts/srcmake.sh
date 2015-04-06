@@ -164,7 +164,11 @@ for src in "${@:-.}";do
     msg "Compressing tarball.."
     tarball="${src_name}_${version}.tar.bz2"
     cd "$INSTALL_DIR"
-    tar -caf "$src_real/$tarball" ./*
+    if [ -n "$(which bsdtar)" ];then
+        bsdtar -caf "$src_real/$tarball" ./*
+    elif [ -n "$(which tar)" ];then
+        tar -caf "$src_real/$tarball" ./*
+    fi
 
     msg "Cleaning up.."
     rm -rf "$SOURCE_DIR" "$INSTALL_DIR"
