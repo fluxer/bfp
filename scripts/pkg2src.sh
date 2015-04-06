@@ -118,4 +118,7 @@ for pkg in "${@:-.}";do
         cat "$script" >> "$pkg/SRCBUILD" || die
         rm -f "$pkg/${script##*/}" || die
     fi
+
+    msg "Removing .last files.."
+    rm -f "$pkg/"*.last || die
 done
