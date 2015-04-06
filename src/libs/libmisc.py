@@ -551,7 +551,7 @@ class Misc(object):
             self.typecheck(ssuffix, (types.StringTypes))
 
         if self.OFFLINE:
-            return
+            return False
 
         lurls = []
         if lmirrors:

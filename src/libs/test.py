@@ -131,24 +131,22 @@ class TestSuite(unittest.TestCase):
 
     # string/regexp match checks
     def test_search_string_simple_true(self):
-        self.assertTrue(misc.string_search('bar', 'foo_bar_baz'), True)
+        self.assertTrue(misc.string_search('bar', 'foo_bar_baz'))
 
     def test_search_string_simple_false(self):
         self.assertEqual(misc.string_search('barz', 'foo_bar_baz'), [])
 
     def test_search_string_regexp(self):
-        self.assertTrue(misc.string_search('ab+', 'abcbdef', escape=False), \
-            True)
+        self.assertTrue(misc.string_search('ab+', 'abcbdef', escape=False))
 
     def test_search_string_exact_begining_true(self):
-        self.assertTrue(misc.string_search('foo', 'foo bar', exact=True), True)
+        self.assertTrue(misc.string_search('foo', 'foo bar', exact=True))
 
     def test_search_string_exact_begining_false(self):
         self.assertEqual(misc.string_search('foo', 'foobar', exact=True), [])
 
     def test_search_string_exact_middle_true(self):
-        self.assertTrue(misc.string_search('bar', 'foo\tbar\nbaz', \
-            exact=True), True)
+        self.assertTrue(misc.string_search('bar', 'foo\tbar\nbaz', exact=True))
 
     def test_search_string_exact_middle_false(self):
         self.assertEqual(misc.string_search('bar', 'foobarbaz', exact=True), \
@@ -159,15 +157,14 @@ class TestSuite(unittest.TestCase):
             exact=True), [])
 
     def test_search_string_exact_end_true(self):
-        self.assertTrue(misc.string_search('bar', 'foo\tbar', exact=True), \
-            True)
+        self.assertTrue(misc.string_search('bar', 'foo\tbar', exact=True))
 
     def test_search_string_exact_end_false(self):
         self.assertEqual(misc.string_search('bar', 'foobar', exact=True), [])
 
     def test_search_string_exact_in_list_true(self):
         self.assertTrue(misc.string_search('bar', ['foo', 'bar', 'baz'], \
-            exact=True), True)
+            exact=True))
 
     def test_search_string_exact_in_list_false(self):
         self.assertEqual(misc.string_search('barz', ['foo', 'bar', 'baz'], \
@@ -175,7 +172,18 @@ class TestSuite(unittest.TestCase):
 
     def test_search_string_exact_escape(self):
         self.assertTrue(misc.string_search('bar\nbaz', 'bar\nbaz', \
-            exact=True, escape=True), True)
+            exact=True, escape=True))
+
+    def test_url_ping_true(self):
+        try:
+            self.assertTrue(misc.url_ping())
+        except AssertionError:
+            unittest.SkipTest('It fails if not connected to the internet')
+
+    def test_url_ping_false(self):
+        misc.OFFLINE = True
+        self.assertFalse(misc.url_ping())
+        misc.OFFLINE = False
 
     # remote targets checks
     def test_remote_target_search_true(self):
@@ -256,7 +264,7 @@ class TestSuite(unittest.TestCase):
             self.local_size)
 
     def test_local_search_true(self):
-        self.assertTrue(database.local_search(self.local_name), True)
+        self.assertTrue(database.local_search(self.local_name))
 
     def test_local_search_false(self):
         self.assertEqual(database.local_search('foobar'), None)
