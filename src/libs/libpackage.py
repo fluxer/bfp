@@ -336,7 +336,7 @@ class SRCBUILD(object):
     ''' A SRCBUILD parser '''
     _symbol_regex = re.compile(r'\$(?P<name>{[\w\d_]+}|[\w\d]+)')
 
-    def __init__(self, name=None, fileobj=None):
+    def __init__(self, name):
         self.version = ''
         self.description = ''
         self.depends = []
@@ -362,15 +362,9 @@ class SRCBUILD(object):
         # Symbol table
         self._symbols = {}
 
-        if not name and not fileobj:
-            raise ValueError('nothing to open')
-        should_close = False
-        if not fileobj:
-            fileobj = open(name, 'r')
-            should_close = True
-        self._parse(fileobj)
-        if should_close:
-            fileobj.close()
+        self.fileobj = open(name, 'r')
+        self._parse(self.fileobj)
+        self.fileobj.close()
 
     def _handle_assign(self, token):
         ''' Expand non-standard variable as Bash does '''
@@ -425,7 +419,11 @@ class SRCBUILD(object):
 
     def _clean(self, value):
         ''' Pythonize a bash string '''
-        return ' '.join(shlex.split(value))
+        try:
+            return ' '.join(shlex.split(value))
+        except ValueError:
+            # provide a meaningfull message
+            raise ValueError('Syntax error in %s' % self.fileobj.name)
 
     def _clean_array(self, value):
         ''' Pythonize a bash array '''
