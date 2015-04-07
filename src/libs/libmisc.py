@@ -116,9 +116,9 @@ class Misc(object):
 
     def string_encode(self, string):
         ''' String wrapper to ensure Python3 compat '''
-        if int(sys.version_info[0]) >= 3 and isinstance(string, bytes):
+        if self.python3 and isinstance(string, bytes):
             return string.decode('utf-8')
-        elif int(sys.version_info[0]) >= 3 and isinstance(string, str):
+        elif self.python3 and isinstance(string, str):
             return string.encode('utf-8')
         else:
             return string
