@@ -11,12 +11,13 @@ database = libpackage.Database()
 class TestSuite(unittest.TestCase):
     database.ROOT_DIR = tempfile.mkdtemp()
 
-    def create_remote(self, name, sdir, version, description, depends='', \
-        makedepends='', sources='', options='', backup=''):
+    def create_remote(self, name, sdir, version, release, description, \
+        depends='', makedepends='', sources='', options='', backup=''):
         sdir = database.CACHE_DIR + '/repositories/test/' + name
         os.makedirs(sdir)
         srcbuild = open(sdir + '/SRCBUILD', 'w')
         srcbuild.write('version=' + version)
+        srcbuild.write('\nrelease=' + release)
         srcbuild.write('\ndescription="' + description + '"')
         srcbuild.write('\ndepends=(' + misc.string_convert(depends) + ')')
         srcbuild.write('\nmakedepends=(' + misc.string_convert(makedepends) + ')')
@@ -26,11 +27,12 @@ class TestSuite(unittest.TestCase):
         srcbuild.write('\nbackup=(' + misc.string_convert(backup) + ')')
         srcbuild.close()
 
-    def create_local(self, name, sdir, version, description, depends='', \
+    def create_local(self, name, sdir, version, release, description, depends='', \
             size='1', footprint='\n'):
         os.makedirs(sdir)
         metadata = open(sdir + '/metadata', 'w')
         metadata.write('version=' + version)
+        metadata.write('\nrelease=' + release)
         metadata.write('\ndescription=' + description)
         metadata.write('\ndepends=' + depends)
         metadata.write('\nsize=' + size)
@@ -57,6 +59,7 @@ class TestSuite(unittest.TestCase):
         self.remote_dir = database.CACHE_DIR + '/repositories/test/' + \
             self.remote_name
         self.remote_version = '2.16.1'
+        self.remote_release = '1'
         self.remote_description = 'SPM test target'
         self.remote_depends = ['filesystem', 'linux-api-headers', 'tzdata']
         self.remote_makedepends = ['circular']
@@ -64,7 +67,8 @@ class TestSuite(unittest.TestCase):
         self.remote_options = ['!binaries', 'shared', '!static', 'man']
         self.remote_backup = ['etc/ld.so.conf', 'etc/nsswitch.conf']
         self.create_remote(self.remote_name, self.remote_dir, \
-            self.remote_version, self.remote_description, self.remote_depends, \
+            self.remote_version, self.remote_release, \
+            self.remote_description, self.remote_depends, \
             self.remote_makedepends, self.remote_source, self.remote_options, \
             self.remote_backup)
 
@@ -73,58 +77,76 @@ class TestSuite(unittest.TestCase):
         self.remote2_dir = database.CACHE_DIR + '/repositories/test/' + \
             self.remote2_name
         self.remote2_version = '999'
+        self.remote2_release = '1'
         self.remote2_description = 'SPM circular test target'
         self.remote2_makedepends = [self.remote_name]
         self.create_remote(self.remote2_name, self.remote2_dir, \
-            self.remote2_version, self.remote2_description, \
-            makedepends=self.remote2_makedepends)
+            self.remote2_version, self.remote2_release, \
+            self.remote2_description, makedepends=self.remote2_makedepends)
 
         # third dummy remote target
         self.remote3_name = 'dummy2'
         self.remote3_dir = database.CACHE_DIR + '/repositories/test/' + \
             self.remote3_name
         self.remote3_version = '1.0.1'
+        self.remote3_release = '1'
         self.remote3_description = 'SPM up-to-date test target'
         self.remote3_makedepends = [self.remote_name]
         self.create_remote(self.remote3_name, self.remote3_dir, \
-            self.remote3_version, self.remote3_description, \
-            makedepends=self.remote3_makedepends)
+            self.remote3_version, self.remote3_release, \
+            self.remote3_description, makedepends=self.remote3_makedepends)
+
+        # third dummy remote target
+        self.remote4_name = 'dummy3'
+        self.remote4_dir = database.CACHE_DIR + '/repositories/test/' + \
+            self.remote4_name
+        self.remote4_version = '1.0.0'
+        self.remote4_release = '2'
+        self.remote4_description = 'SPM up-to-date release test target'
+        self.create_remote(self.remote4_name, self.remote4_dir, \
+            self.remote4_version, self.remote4_release, \
+            self.remote4_description)
 
         # dummy local target
         self.local_name = 'dummy'
         self.local_dir = database.LOCAL_DIR + '/' + self.local_name
         self.local_version = '9999'
+        self.local_release = '1'
         self.local_description = 'SPM dummy local test target'
         self.local_depends = self.remote_name
         self.local_size = '12345'
         self.local_footprint = '/etc/dummy.conf\n/lib/libdummy.so'
         self.create_local(self.local_name, self.local_dir, \
-            self.local_version, self.local_description, self.local_depends, \
-            self.local_size, self.local_footprint)
+            self.local_version, self.local_release, self.local_description, \
+            self.local_depends, self.local_size, self.local_footprint)
 
         # second dummy local target
         self.local2_name = 'dummy2'
         self.local2_dir = database.LOCAL_DIR + '/' + self.local2_name
         self.local2_version = '1.0.0'
+        self.local2_release = '1'
         self.local2_description = 'SPM dummy reverse test target'
         self.local2_depends = self.local_name
         self.local2_size = '12345'
         self.local2_footprint = '/etc/dummy2.conf\n/lib/libdummy2.so'
         self.create_local(self.local2_name, self.local2_dir, \
-            self.local2_version, self.local2_description, \
-            self.local2_depends, self.local2_size, self.local2_footprint)
+            self.local2_version, self.local2_release, \
+            self.local2_description, self.local2_depends, self.local2_size, \
+            self.local2_footprint)
 
-        # second dummy local target
+        # third dummy local target
         self.local3_name = 'dummy3'
         self.local3_dir = database.LOCAL_DIR + '/' + self.local3_name
         self.local3_version = '1.0.0'
-        self.local3_description = 'SPM dummy empty depends test target'
+        self.local3_release = '1'
+        self.local3_description = 'SPM dummy empty depends and release test target'
         self.local3_depends = ''
         self.local3_size = '12345'
         self.local3_footprint = ''
         self.create_local(self.local3_name, self.local3_dir, \
-            self.local3_version, self.local3_description, \
-            self.local3_depends, self.local3_size, self.local3_footprint)
+            self.local3_version, self.local3_release, \
+            self.local3_description, self.local3_depends, self.local3_size, \
+            self.local3_footprint)
 
     def tearDown(self):
         misc.dir_remove(database.ROOT_DIR)
@@ -273,11 +295,14 @@ class TestSuite(unittest.TestCase):
     def test_local_belongs_false(self):
         self.assertEqual(database.local_belongs('/lib/foobar.so'), [])
 
-    def test_local_uptodate_true(self):
-        self.assertEqual(database.local_uptodate('dummy'), True)
+    def test_local_uptodate_version_true(self):
+        self.assertTrue(database.local_uptodate('dummy'))
 
-    def test_local_uptodate_false(self):
-        self.assertEqual(database.local_uptodate('dummy2'), False)
+    def test_local_uptodate_version_false(self):
+        self.assertFalse(database.local_uptodate('dummy2'))
+
+    def test_local_uptodate_release_false(self):
+        self.assertFalse(database.local_uptodate('dummy3'))
 
     def test_local_rdepends_true(self):
         self.assertEqual(database.local_rdepends(self.local_name), \
