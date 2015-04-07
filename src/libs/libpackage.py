@@ -71,6 +71,7 @@ class Database(object):
             if os.path.isfile(metadata) and os.path.isfile(footprint):
                 self.LOCAL_CACHE[sdir] = {
                     'version': self._local_metadata(metadata, 'version'),
+                    'release': self._local_metadata(metadata, 'release'),
                     'description': self._local_metadata(metadata, 'description'),
                     'depends': self._local_metadata(metadata, 'depends').split(),
                     'size': self._local_metadata(metadata, 'size'),
@@ -87,6 +88,7 @@ class Database(object):
                 parser = SRCBUILD(srcbuild)
                 self.REMOTE_CACHE[sdir] = {
                     'version': parser.version,
+                    'release': parser.release,
                     'description': parser.description,
                     'depends': parser.depends,
                     'makedepends': parser.makedepends,
@@ -108,6 +110,9 @@ class Database(object):
         for line in misc.file_readlines(smetadata):
             if line.startswith(key):
                 return misc.string_encode(line).split('=')[1].strip()
+        # for backwards compatibility and making release optional
+        if skey == 'release':
+            return '1'
 
     def remote_all(self, basename=False):
         ''' Returns directories of all remote (repository) targets '''
@@ -277,14 +282,19 @@ class Database(object):
         # if remote target is passed and it's a directory not a base name
         # then the local target will be invalid and local_version will equal
         # None, thus the base name is used to find the local target version
-        local_version = self.local_metadata(os.path.basename(target), 'version')
+        base = os.path.basename(target)
+        local_version = self.local_metadata(base, 'version')
+        local_release = self.local_metadata(base, 'release')
         remote_version = self.remote_metadata(target, 'version')
+        remote_release = self.remote_metadata(target, 'release')
 
         # LooseVersion does not handle None
         if not remote_version or not local_version:
             return False
 
         if LooseVersion(local_version) < LooseVersion(remote_version):
+            return False
+        elif local_release < remote_release:
             return False
         return True
 
@@ -338,6 +348,7 @@ class SRCBUILD(object):
 
     def __init__(self, name):
         self.version = ''
+        self.release = '1'
         self.description = ''
         self.depends = []
         self.makedepends = []
@@ -350,6 +361,7 @@ class SRCBUILD(object):
         # Symbol lookup table
         self._var_map = {
             'version': 'version',
+            'release': 'release',
             'description': 'description',
             'depends': 'depends',
             'makedepends': 'makedepends',

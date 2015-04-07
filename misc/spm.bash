@@ -16,9 +16,9 @@ _spm()
 
     repo_options='-h --help -c --clean -s --sync -u --update -a --all'
 
-    remote_options='-h --help -n --name -v --version -d --description -D
-        --depends -m --makedepends -c --checkdepends -s --sources -k --pgpkeys
-        -o --options -b --backup -p --plain'
+    remote_options='-h --help -n --name -v --version -r --release
+        -d --description -D --depends -m --makedepends -c --checkdepends
+        -s --sources -k --pgpkeys -o --options -b --backup -p --plain'
 
     source_options='-h --help -C --clean -p --prepare -c --compile -k --check
         -i --install -m --merge -r --remove -D --depends -R --reverse -u
@@ -27,8 +27,9 @@ _spm()
     binary_options='-h --help -m --merge -r --remove -D --depends -R --reverse -u
         --update'
 
-    local_options='-h --help -n --name -v --version -d --description -D
-        --depends -r --reverse -s --size -f --footprint -p --plain'
+    local_options='-h --help -n --name -v --version -R --release
+        -d --description -D --depends -r --reverse -s --size -f --footprint
+        -p --plain'
 
     who_options='-h --help -p --plain'
 

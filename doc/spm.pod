@@ -137,8 +137,8 @@ Additional utilities are packed in Source Package Manager Tools to assist in the
 system maintenance. You can read more about them in spm-tools(8) manual page.
 
 SPM doesn't implement many features known from other Package Managers such as
-target release, home page URL and other common features but some of those may
-be implemented later on. 
+target home page URL and other common features but some of those may be
+implemented later on.
 
 =head1 OPTIONS
 
@@ -213,6 +213,7 @@ optional arguments:
   -h, --help            Show this help message and exit
   -n, --name            Show target name
   -v, --version         Show target version
+  -r, --release         Show target release
   -d, --description     Show target description
   -D, --depends         Show target depends
   -m, --makedepends     Show target makedepends
@@ -251,6 +252,7 @@ optional arguments:
   -h, --help            Show this help message and exit
   -n, --name            Show target name
   -v, --version         Show target version
+  -R, --release         Show target release
   -d, --description     Show target description
   -D, --depends         Show target depends
   -r, --reverse         Show target reverse depends

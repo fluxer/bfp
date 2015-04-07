@@ -166,11 +166,12 @@ database.IGNORE = IGNORE
 class Local(object):
     ''' Class for printing local targets metadata '''
     def __init__(self, pattern, do_name=False, do_version=False, \
-        do_description=False, do_depends=False, do_reverse=False, \
-        do_size=False, do_footprint=False, plain=False):
+        do_release=False, do_description=False, do_depends=False, \
+        do_reverse=False, do_size=False, do_footprint=False, plain=False):
         self.pattern = pattern
         self.do_name = do_name
         self.do_version = do_version
+        self.do_release = do_release
         self.do_description = do_description
         self.do_depends = do_depends
         self.do_reverse = do_reverse
@@ -203,6 +204,13 @@ class Local(object):
                         print(data)
                     else:
                         message.sub_info(_('Version'), data)
+
+                if self.do_release:
+                    data = database.local_metadata(target, 'release')
+                    if self.plain:
+                        print(data)
+                    else:
+                        message.sub_info(_('Release'), data)
 
                 if self.do_description:
                     data = database.local_metadata(target, 'description')
@@ -243,12 +251,13 @@ class Local(object):
 class Remote(object):
     ''' Class for printing remote targets metadata '''
     def __init__(self, pattern, do_name=False, do_version=False, \
-        do_description=False, do_depends=False, do_makedepends=False, \
-        do_checkdepends=False, do_sources=False, do_pgpkeys=False, \
-        do_options=False, do_backup=False, plain=False):
+        do_release=False, do_description=False, do_depends=False, \
+        do_makedepends=False, do_checkdepends=False, do_sources=False, \
+        do_pgpkeys=False, do_options=False, do_backup=False, plain=False):
         self.pattern = pattern
         self.do_name = do_name
         self.do_version = do_version
+        self.do_release = do_release
         self.do_description = do_description
         self.do_depends = do_depends
         self.do_makedepends = do_makedepends
@@ -285,6 +294,13 @@ class Remote(object):
                         print(data)
                     else:
                         message.sub_info(_('Version'), data)
+
+                if self.do_release:
+                    data = database.remote_metadata(target, 'release')
+                    if self.plain:
+                        print(data)
+                    else:
+                        message.sub_info(_('Release'), data)
 
                 if self.do_description:
                     data = database.remote_metadata(target, 'description')
@@ -535,6 +551,9 @@ class Source(object):
         if match and install_info:
             message.sub_debug(match)
             for m in match:
+                if not os.path.exists(ROOT_DIR + m):
+                    message.sub_warning('File does not exist', m)
+                    continue
                 infodir = sys.prefix + '/share/info/dir'
                 message.sub_info(_('Deleting info page'), m)
                 misc.system_trigger((install_info, '--delete', m, infodir))
@@ -628,9 +647,8 @@ class Source(object):
                     message.sub_info(_('Installing XDG MIMEs'), m)
                     misc.system_trigger((xdg_mime, 'install', '--novendor', m))
                 elif action == 'upgrade':
-                    if os.path.exists(ROOT_DIR + m):
-                        message.sub_info(_('Updating XDG MIMEs'), m)
-                        misc.system_trigger((xdg_mime, 'install', '--novendor', m))
+                    message.sub_info(_('Updating XDG MIMEs'), m)
+                    misc.system_trigger((xdg_mime, 'install', '--novendor', m))
                 done.append(m)
 
         gio_querymodules = misc.whereis('gio-querymodules', False, True)
@@ -1063,10 +1081,11 @@ class Source(object):
         message.sub_info(_('Assembling metadata'))
         misc.dir_create(os.path.join(self.install_dir, 'var/local/spm', self.target_name))
         metadata = open(os.path.join(self.install_dir, self.target_metadata), 'w')
-        metadata.write('version=' + self.target_version + '\n')
-        metadata.write('description=' + self.target_description + '\n')
-        metadata.write('depends=' + misc.string_convert(self.target_depends) + '\n')
-        metadata.write('size=' + str(misc.dir_size(self.install_dir)) + '\n')
+        metadata.write('version=%s\n' % self.target_version)
+        metadata.write('release=%s\n' % self.target_release)
+        metadata.write('description=%s\n' % self.target_description)
+        metadata.write('depends=%s\n' % misc.string_convert(self.target_depends))
+        metadata.write('size=%d\n' % misc.dir_size(self.install_dir))
         metadata.close()
 
         message.sub_info(_('Assembling footprint'))
@@ -1327,6 +1346,7 @@ class Source(object):
             self.source_dir = os.path.join(BUILD_DIR, self.target_name, 'source')
             self.install_dir = os.path.join(BUILD_DIR, self.target_name, 'install')
             self.target_version = database.remote_metadata(self.target_dir, 'version')
+            self.target_release = database.remote_metadata(self.target_dir, 'release')
             self.target_description = database.remote_metadata(self.target_dir, 'description')
             self.target_depends = database.remote_metadata(self.target_dir, 'depends')
             self.target_makedepends = database.remote_metadata(self.target_dir, 'makedepends')
@@ -1621,6 +1641,7 @@ class Binary(Source):
             self.source_dir = os.path.join(BUILD_DIR, self.target_name, 'source')
             self.install_dir = os.path.join(BUILD_DIR, self.target_name, 'install')
             self.target_version = database.remote_metadata(self.target_dir, 'version')
+            self.target_release = database.remote_metadata(self.target_dir, 'release')
             self.target_description = database.remote_metadata(self.target_dir, 'description')
             self.target_depends = database.remote_metadata(self.target_dir, 'depends')
             self.target_makedepends = database.remote_metadata(self.target_dir, 'makedepends')

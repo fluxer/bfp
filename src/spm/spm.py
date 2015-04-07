@@ -19,7 +19,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.7.2 (f3cf2bc)"
+app_version = "1.7.2 (8565d7e)"
 
 try:
     import libmessage
@@ -235,6 +235,8 @@ try:
         help=_('Show target name'))
     remote_parser.add_argument('-v', '--version', action='store_true', \
         help=_('Show target version'))
+    remote_parser.add_argument('-r', '--release', action='store_true', \
+        help=_('Show target release'))
     remote_parser.add_argument('-d', '--description', action='store_true', \
         help=_('Show target description'))
     remote_parser.add_argument('-D', '--depends', action='store_true', \
@@ -301,6 +303,8 @@ try:
         help=_('Show target name'))
     local_parser.add_argument('-v', '--version', action='store_true', \
         help=_('Show target version'))
+    local_parser.add_argument('-R', '--release', action='store_true', \
+        help=_('Show target release'))
     local_parser.add_argument('-d', '--description', action='store_true', \
         help=_('Show target description'))
     local_parser.add_argument('-D', '--depends', action='store_true', \
@@ -427,6 +431,7 @@ try:
             message.info(_('Runtime information'))
             message.sub_info(_('NAME'), ARGS.name)
             message.sub_info(_('VERSION'), ARGS.version)
+            message.sub_info(_('RELEASE'), ARGS.release)
             message.sub_info(_('DESCRIPTION'), ARGS.description)
             message.sub_info(_('DEPENDS'), ARGS.depends)
             message.sub_info(_('MAKEDEPENDS'), ARGS.makedepends)
@@ -438,9 +443,9 @@ try:
             message.sub_info(_('PATTERN'), ARGS.PATTERN)
             message.info(_('Poking remotes...'))
         m = libspm.Remote(ARGS.PATTERN, ARGS.name, ARGS.version, \
-                ARGS.description, ARGS.depends, ARGS.makedepends, \
-                ARGS.checkdepends, ARGS.sources, ARGS.pgpkeys, \
-                ARGS.options, ARGS.remote_backup, ARGS.plain)
+                ARGS.release, ARGS.description, ARGS.depends, \
+                ARGS.makedepends, ARGS.checkdepends, ARGS.sources, \
+                ARGS.pgpkeys, ARGS.options, ARGS.remote_backup, ARGS.plain)
         m.main()
 
     elif ARGS.mode == 'source':
@@ -510,6 +515,7 @@ try:
             message.info(_('Runtime information'))
             message.sub_info(_('NAME'), ARGS.name)
             message.sub_info(_('VERSION'), ARGS.version)
+            message.sub_info(_('RELEASE'), ARGS.release)
             message.sub_info(_('DESCRIPTION'), ARGS.description)
             message.sub_info(_('DEPENDS'), ARGS.depends)
             message.sub_info(_('REVERSE'), ARGS.reverse)
@@ -518,8 +524,8 @@ try:
             message.sub_info(_('PATTERN'), ARGS.PATTERN)
             message.info(_('Poking locals...'))
         m = libspm.Local(ARGS.PATTERN, ARGS.name, ARGS.version, \
-                ARGS.description, ARGS.depends, ARGS.reverse, \
-                ARGS.size, ARGS.footprint, ARGS.plain)
+                ARGS.release, ARGS.description, ARGS.depends, \
+                ARGS.reverse, ARGS.size, ARGS.footprint, ARGS.plain)
         m.main()
 
     elif ARGS.mode == 'who':

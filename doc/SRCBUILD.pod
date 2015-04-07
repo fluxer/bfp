@@ -14,10 +14,10 @@ file, unlike the PKGBUILD format.
 
 The metadata defined in the recipes should contain only one function
 (src_install) and two (2) variables (version and description). Optionally two
-(2) more functions can be specified (src_compile and src_check) and six (7) more
-variable (depends, makedepends, checkdepends, sources, pgpkeys, options and
-backup). Target name is defined by the directory name in which the target files
-are placed.
+(2) more functions can be specified (src_compile and src_check) and six (8) more
+variable (release, depends, makedepends, checkdepends, sources, pgpkeys,
+options and backup). Target name is defined by the directory name in which the
+target files are placed.
 
 In addition six (6) more functions (pre/post_install, pre/post_upgrade and
 pre/post_remove) can be defined as pre/post actions to be taken when software
@@ -36,6 +36,10 @@ runtime dependencies and creating a compressed archive of the files.
 =head2 version
 
 Variable defining version of software.
+
+=head2 release
+
+Variable defining release of build recipe.
 
 =head2 description
 
