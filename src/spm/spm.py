@@ -303,6 +303,7 @@ try:
         help=_('Show target name'))
     local_parser.add_argument('-v', '--version', action='store_true', \
         help=_('Show target version'))
+    # FIXME: on the next major release swap -R and -r
     local_parser.add_argument('-R', '--release', action='store_true', \
         help=_('Show target release'))
     local_parser.add_argument('-d', '--description', action='store_true', \
