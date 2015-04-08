@@ -849,7 +849,8 @@ class Source(object):
 
             if os.path.islink(link_file):
                 message.sub_debug(_('Already linked'), src_file)
-            elif os.path.isdir('%s/.git' % local_file):
+            elif os.path.isdir('%s/.git' % local_file) \
+                or os.path.isdir('%s/.svn' % local_file):
                 message.sub_debug(_('Copying'), src_file)
                 shutil.copytree(local_file, link_file, True)
             elif os.path.isfile(src_file):
@@ -1358,7 +1359,8 @@ class Source(object):
             self.target_metadata = os.path.join('var/local/spm', self.target_name, 'metadata')
             self.sources_dir = os.path.join(CACHE_DIR, 'sources', self.target_name)
             self.target_tarball = os.path.join(CACHE_DIR, 'tarballs/' + os.uname()[4], \
-            self.target_name + '_' + self.target_version + '.tar.bz2')
+                self.target_name + '_' + self.target_version + '_' + \
+                self.target_release + '.tar.bz2')
 
             if database.local_uptodate(self.target) and self.do_update:
                 message.sub_warning(_('Target is up-to-date'), self.target)
@@ -1653,7 +1655,8 @@ class Binary(Source):
             self.target_metadata = os.path.join('var/local/spm', self.target_name, 'metadata')
             self.sources_dir = os.path.join(CACHE_DIR, 'sources', self.target_name)
             self.target_tarball = os.path.join(CACHE_DIR, 'tarballs/' + os.uname()[4], \
-            self.target_name + '_' + self.target_version + '.tar.bz2')
+                self.target_name + '_' + self.target_version + '_' + \
+                self.target_release + '.tar.bz2')
 
             if database.local_uptodate(self.target) and self.do_update:
                 message.sub_warning(_('Target is up-to-date'), self.target)

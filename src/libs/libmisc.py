@@ -673,6 +673,22 @@ class Misc(object):
             self.system_command((git, 'config', 'user.email', \
                 'spm@unnatended.fake'), cwd=destination)
 
+    def fetch_svn(self, surl, destination):
+        ''' Clone/pull SVN repository '''
+        if self.python2:
+            self.typecheck(surl, (types.StringTypes))
+            self.typecheck(destination, (types.StringTypes))
+
+        if self.OFFLINE:
+            return
+
+        svn = self.whereis('svn')
+        if os.path.isdir('%s/.svn' % destination):
+            self.system_command((svn, 'up'), cwd=destination)
+        else:
+            self.system_command((svn, 'co', '--depth=infinity', surl, \
+                destination))
+
     def fetch(self, surl, destination, lmirrors=None, ssuffix='', iretry=3):
         ''' Download file from mirror if possible, iretry is passed internally! '''
         if self.python2:
@@ -696,9 +712,11 @@ class Misc(object):
         else:
             snewurl = surl
         try:
-            # mirrors are not supported for Git repos on purpose
+            # mirrors are not supported for VCS repos on purpose
             if surl.startswith('git://') or surl.endswith('.git'):
                 self.fetch_git(surl, destination)
+            elif surl.startswith('svn://'):
+                self.fetch_svn(surl, destination)
             elif snewurl.startswith(('http://', 'https://', 'ftp://', \
                 'ftps://')):
                 self.fetch_plain(snewurl, destination, 0)
