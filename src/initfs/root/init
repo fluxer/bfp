@@ -48,8 +48,8 @@ fi
 msg "Parsing cmdline options..."
 # find will complain otherwise
 mkdir -p /hooks
-hooks="$(find /hooks ! -type d ! -name 'late_*')"
-latehooks="$(find /hooks ! -type d -name 'late_*')"
+hooks="$(find /hooks ! -type d ! -name 'late_*' | sort)"
+latehooks="$(find /hooks ! -type d -name 'late_*' | sort)"
 init="/sbin/init"
 root=""
 state="ro"
