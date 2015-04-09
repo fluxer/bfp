@@ -174,9 +174,9 @@ for src in "${@:-.}";do
     rm -rf "$SOURCE_DIR" "$INSTALL_DIR"
 
     if [ -n "$(which bsdtar)" ];then
-        msg "To merge it: ${GREEN}bsdtar -vxaphf ${src}/${tarball} -C /${ALL_OFF}"
+        msg "To merge it: ${GREEN}bsdtar -vxpf ${src}/${tarball} -C /${ALL_OFF}"
     elif [ -n "$(which tar)" ];then
-        msg "To merge it: ${GREEN}tar -vxaphf ${src}/${tarball} -C /${ALL_OFF}"
+        msg "To merge it: ${GREEN}tar -vxphf ${src}/${tarball} -C /${ALL_OFF}"
     fi
     set +e
 done
