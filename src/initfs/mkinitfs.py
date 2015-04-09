@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2
 
-app_version = "1.7.2 (d35e853)"
+app_version = "1.7.2 (5a7ac08)"
 
 tmpdir = None
 keep = False
@@ -85,6 +85,8 @@ try:
             sdest = ARGS.tmp + '/' + sfixed
             if os.path.isdir(sdest):
                 message.sub_debug('Already exists', src)
+                for sfile in os.listdir(src):
+                    copy_item(os.path.join(src, sfile))
                 return
             message.sub_debug('Copying', src)
             message.sub_debug('To', sdest)
