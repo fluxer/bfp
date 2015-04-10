@@ -276,7 +276,10 @@ class Lint(object):
 
                 if self.symlink:
                     for sfile in target_footprint.splitlines():
-                        if os.path.exists(sfile) and os.path.islink(sfile):
+                        if not os.path.exists(sfile):
+                            message.sub_debug(_('File does not exist'), sfile)
+                            continue
+                        if os.path.islink(sfile):
                             if not sfile.startswith('/usr/') \
                                 and os.path.realpath(sfile).startswith('/usr/'):
                                 message.sub_warning(_('Cross-filesystem symlink'), sfile)
@@ -286,6 +289,8 @@ class Lint(object):
                             elif not sfile.startswith('/boot/') \
                                 and os.path.realpath(sfile).startswith('/boot/'):
                                 message.sub_warning(_('Cross-filesystem symlink'), sfile)
+                        elif os.stat(sfile).st_nlink == 2:
+                                message.sub_warning(_('Hardlink'), sfile)
 
                 if self.doc:
                     if misc.string_search('/doc/|/gtk-doc', target_footprint, escape=False):
