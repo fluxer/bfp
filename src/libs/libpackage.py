@@ -374,9 +374,14 @@ class SRCBUILD(object):
         # Symbol table
         self._symbols = {}
 
-        self.fileobj = open(name, 'r')
-        self._parse(self.fileobj)
-        self.fileobj.close()
+        fileobj = open(name, 'r')
+        try:
+            self._parse(fileobj)
+        except ValueError:
+            # provide a meaningfull message, that's what shlex spits on fail
+            raise ValueError('Syntax error in %s' % fileobj.name)
+        finally:
+            fileobj.close()
 
     def _handle_assign(self, token):
         ''' Expand non-standard variable as Bash does '''
@@ -431,11 +436,7 @@ class SRCBUILD(object):
 
     def _clean(self, value):
         ''' Pythonize a bash string '''
-        try:
-            return ' '.join(shlex.split(value))
-        except ValueError:
-            # provide a meaningfull message
-            raise ValueError('Syntax error in %s' % self.fileobj.name)
+        return ' '.join(shlex.split(value))
 
     def _clean_array(self, value):
         ''' Pythonize a bash array '''
