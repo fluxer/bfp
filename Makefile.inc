@@ -10,8 +10,6 @@ SHAREDIR = $(PREFIX)/share
 MANDIR = $(SHAREDIR)/man
 DOCDIR = $(SHAREDIR)/doc
 SITEDIR = $(shell $(PYTHON) -c "import site; print(site.getsitepackages()[0])")
-APPLICATIONSDIR = $(PREFIX)/share/applications
-PIXMAPSDIR = $(PREFIX)/share/pixmaps
 BASHCOMPLETIONDIR = /etc/bash_completion.d/
 LOCALEDIR = $(PREFIX)/share/locale
 
