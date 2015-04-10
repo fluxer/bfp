@@ -523,7 +523,9 @@ class Source(object):
         # avoid actions on debug files, do not rely on .debug suffix
         if '/lib/debug/' in sfile:
             return
-        # FIXME: do not run on hardlinks, it will fail with binutils <=2.23.2
+        elif os.stat(sfile).st_nlink == 2:
+            # do not run on hardlinks, it will fail with binutils <=2.23.2
+            return
         # https://sourceware.org/gdb/onlinedocs/gdb/Separate-Debug-Files.html
         sdebug = sfile.replace(self.install_dir, self.install_dir + \
             sys.prefix + '/lib/debug') + '.debug'
