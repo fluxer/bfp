@@ -1021,7 +1021,7 @@ class Source(object):
                             break
                     # if that fails look for the interpreter on the host
                     # FIXME: if the interpreter found by misc.whereis() is not
-                    # ownded by a local target try to find interpreter that is
+                    # ownded by a local target try to find one that is
                     if not smatch:
                         smatch = misc.whereis(sbase, False)
 

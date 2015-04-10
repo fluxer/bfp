@@ -36,7 +36,7 @@ database = libpackage.Database()
 import libspm
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.7.2 (0e05ce3)"
+app_version = "1.7.2 (a4a8071)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -400,7 +400,7 @@ class Lint(object):
                 if self.conflicts:
                     for local in database.local_all(basename=True):
                         if local == target:
-                                continue
+                            continue
                         footprint = database.local_metadata(local, 'footprint').splitlines()
                         for sfile in target_footprint.splitlines():
                             if sfile in footprint:
