@@ -90,7 +90,7 @@ case "$(cat /proc/sys/kernel/hotplug)" in
     */mdev)
         # oh, boy! mdev does not support device UUID/LABEL thus /dev/disk/by-*
         # can not be used but Busybox's blkid applet does not support -U and
-        # -L either sp the code bellow requires blkid from util-linux, best
+        # -L either so the code bellow requires blkid from util-linux, best
         # effort made..
         case "$root" in
             UUID=*) device="$(blkid -U "${root#*=}")"  ;;
