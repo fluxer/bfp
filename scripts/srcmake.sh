@@ -27,19 +27,19 @@ fi
 readonly ALL_OFF BOLD BLUE GREEN RED YELLOW
 
 msg() {
-    printf "${ALL_OFF}${GREEN}=>${ALL_OFF}${BOLD} ${*}${ALL_OFF}\n"
+    printf "${ALL_OFF}${GREEN}->${ALL_OFF}${BOLD} ${*}${ALL_OFF}\n"
 }
 
 msg2() {
-    printf "${ALL_OFF}${BLUE}   =>${ALL_OFF}${BOLD} ${*}${ALL_OFF}\n"
+    printf "${ALL_OFF}${BLUE}   ->${ALL_OFF}${BOLD} ${*}${ALL_OFF}\n"
 }
 
 warn() {
-    printf "${ALL_OFF}${YELLOW}=>${ALL_OFF}${BOLD} ${*}${ALL_OFF}\n" >&2
+    printf "${ALL_OFF}${YELLOW}->${ALL_OFF}${BOLD} ${*}${ALL_OFF}\n" >&2
 }
 
 warn2() {
-    printf "${ALL_OFF}${YELLOW}   =>${ALL_OFF}${BOLD} ${*}${ALL_OFF}\n" >&2
+    printf "${ALL_OFF}${YELLOW}   ->${ALL_OFF}${BOLD} ${*}${ALL_OFF}\n" >&2
 }
 
 error() {
@@ -66,6 +66,9 @@ for src in "${@:-.}";do
     elif [[ -z $(which bsdtar) && -z $(which tar) ]];then
         error "Neither bsdtar or tar is installed"
         exit 1
+    elif [[ -z $(which git) ]];then
+        # FIXME: error out if there is git URL in sources array
+        warn "Git is not installed"
     fi
 
     if [[ ! -f $srcbuild ]];then
@@ -150,16 +153,18 @@ for src in "${@:-.}";do
     src_install
 
     msg "Creating footprint and metadata..."
+    footprint="$INSTALL_DIR/var/local/spm/$src_name/footprint"
+    metadata="$INSTALL_DIR/var/local/spm/$src_name/metadata"
     mkdir -p "$INSTALL_DIR/var/local/spm/$src_name"
-    rm -f "$INSTALL_DIR/var/local/spm/$src_name/footprint"
+    rm -f "$footprint"
     while IFS= read -r -d '' file; do
-        echo "${file//$INSTALL_DIR}" >> "$INSTALL_DIR/var/local/spm/$src_name/footprint"
+        echo "${file//$INSTALL_DIR}" >> "$footprint"
     done < <(find "$INSTALL_DIR" ! -type d -print0)
 
-    echo "version=$version" > "$INSTALL_DIR/var/local/spm/$src_name/metadata"
-    echo "description=$description" >> "$INSTALL_DIR/var/local/spm/$src_name/metadata"
-    echo "depends=${depends[*]}" >> "$INSTALL_DIR/var/local/spm/$src_name/metadata"
-    echo "size=$(du -s $INSTALL_DIR | awk '{print $1}')" >> "$INSTALL_DIR/var/local/spm/$src_name/metadata"
+    echo "version=$version" > "$metadata"
+    echo "description=$description" >> "$metadata"
+    echo "depends=${depends[*]}" >> "$metadata"
+    echo "size=$(du -s "$INSTALL_DIR" | awk '{print $1}')" >> "$metadata"
 
     msg "Compressing tarball.."
     tarball="${src_name}_${version}.tar.bz2"
