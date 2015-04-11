@@ -11,7 +11,7 @@ MANDIR = $(SHAREDIR)/man
 DOCDIR = $(SHAREDIR)/doc
 SITEDIR = $(shell $(PYTHON) -c "import site; print(site.getsitepackages()[0])")
 BASHCOMPLETIONDIR = /etc/bash_completion.d/
-LOCALEDIR = $(PREFIX)/share/locale
+LOCALEDIR = $(SHAREDIR)/locale
 
 MACHINE = $(shell $(CC) -dumpmachine)
 ARCH = $(shell uname -m | $(SED) 's|_|-|')
