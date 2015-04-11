@@ -394,8 +394,6 @@ class SRCBUILD(object):
 
     def _parse(self, fileobj):
         ''' Parse SRCBUILD '''
-        if hasattr(fileobj, 'seek'):
-            fileobj.seek(0)
         parser = shlex.shlex(fileobj, posix=True)
         parser.whitespace_split = True
         in_function = False
