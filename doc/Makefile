@@ -31,10 +31,7 @@ install:
 	$(INSTALL) -vm644 spm.conf.5 $(DESTDIR)$(MANDIR)/man5/spm.conf.5
 	$(INSTALL) -vm644 SRCBUILD.5 $(DESTDIR)$(MANDIR)/man5/SRCBUILD.5
 	$(INSTALL) -vm644 SRCBUILD.txt $(DESTDIR)$(DOCDIR)/spm/SRCBUILD.txt
-	$(INSTALL) -vm644 libmessage.html $(DESTDIR)$(DOCDIR)/spm/libmessage.html
-	$(INSTALL) -vm644 libmisc.html $(DESTDIR)$(DOCDIR)/spm/libmisc.html
-	$(INSTALL) -vm644 libpackage.html $(DESTDIR)$(DOCDIR)/spm/libpackage.html
-	$(INSTALL) -vm644 libspm.html $(DESTDIR)$(DOCDIR)/spm/libspm.html
+	$(INSTALL) -vm644 *.html $(DESTDIR)$(DOCDIR)/spm/
 	$(INSTALL) -vm644 ../COPYING $(DESTDIR)$(DOCDIR)/spm/COPYING
 
 uninstall:
