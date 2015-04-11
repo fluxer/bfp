@@ -1,3 +1,34 @@
+Sat Apr 11 06:44:44 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
+320958381955e7e11ee69b66a8c76414d1d578ed (tag: 1.7.3)
+    * remove redudant seek position setup from the SRCBUILD parser
+    * make Makefile.inc reuse SHAREDIR for LOCALEDIR
+    * minor srcmake script improvements
+    * build system cleanup
+    * minor comment correction in initramfs init script
+    * improve check of symlinks and add hardlinks check to spm-tools lint mode
+    * lintian corrections
+    * handle syntax error in the SRCBUILD parser globally
+    * do not run on hardlinks, it will fail with binutils <=2.23.2
+    * correct decompression messages in srcmake
+    * minor correction of spm-tools manual page
+    * make mkinitfs recurse on directory that already exists instead of just returning
+    * sort the hooks to be processed in proper order
+    * for backwards compat do not add release to the tarball
+    * implement svn repository fetcher and add release to the tarballs
+    * add target release test
+    * add a FIXME for the next major release
+    * implement support for release definiton in SRCBUILD
+    * make use of the python3 class variable in libmisc.Misc.string_encode()
+    * make tar really option for srcmake
+    * make internet connection required for the tests
+    * add tests for libmisc.Misc.url_ping()
+    * make libpackage.SRCBUILD trow a more usefull error message on syntax error
+    * make pkg2src remove .last files that spm creates
+    * use splitlines() instead of split('\n')
+    * speed-up conflicts checking from spm-tools
+    * stop attempting to remove watchers on destruction of libmisc.Inotify()
+    * remove Python 3 support from TODO - it's done
+
 Sun Apr 5 18:11:27 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
 2e4c30120ff2c19d7459fc4b9e5572a934b1c89b (tag: 1.7.2)
     * deprecate libmisc.Misc.fetch_check()
