@@ -57,16 +57,28 @@ die() {
     exit 1
 }
 
+whereis() {
+    # check if the binary is not missing runtime dependencies, those usually
+    # return exit code of 127 when called
+    rv=1
+    if which "$1" 1> /dev/null;then
+        rv=0
+        "$1" &> /dev/null
+        [ "$?" = "127" ] && rv=1
+    fi
+    return $rv
+}
+
 for src in "${@:-.}";do
     srcbuild="$(realpath $src)/SRCBUILD"
 
-    if [[ -z $(which curl) && -z $(which wget) ]];then
+    if ! whereis curl && ! whereis wget ;then
         error "Neither curl or wget is installed"
         exit 1
-    elif [[ -z $(which bsdtar) && -z $(which tar) ]];then
+    elif ! whereis bsdtar && whereis tar ;then
         error "Neither bsdtar or tar is installed"
         exit 1
-    elif [[ -z $(which git) ]];then
+    elif ! whereis git ;then
         # FIXME: error out if there is git URL in sources array
         warn "Git is not installed"
     fi
@@ -122,9 +134,9 @@ for src in "${@:-.}";do
             ln -sf "/var/cache/spm/sources/$src_name/$src_base" "$SOURCE_DIR/$src_base"
         elif [ ! -f "$SOURCE_DIR/$src_base" ];then
             msg2 "Fetching: ${BLUE}${source}${ALL_OFF}"
-            if [ -n "$(which curl)" ];then
+            if whereis curl ;then
                 curl -f -L -C - "$source" -o "$SOURCE_DIR/$src_base"
-            elif [ -n "$(which wget)" ];then
+            elif whereis wget ;then
                 wget -c "$source" -O "$SOURCE_DIR/$src_base"
             fi
         fi
@@ -132,9 +144,9 @@ for src in "${@:-.}";do
         case "$src_base" in
             *.tar|*.tar.gz|*.tar.Z|*.tgz|*.tar.bz2|*.tbz2|*.tar.xz|*.txz|*.tar.lzma|*.zip|*.rpm)
                 msg2 "Extracting: ${BLUE}${src_base}${ALL_OFF}"
-                if [ -n "$(which bsdtar)" ];then
+                if whereis bsdtar ;then
                     bsdtar -xpf "$SOURCE_DIR/$src_base" -C "$SOURCE_DIR"
-                elif [ -n "$(which tar)" ];then
+                elif whereis tar ;then
                     tar -xpf "$SOURCE_DIR/$src_base" -C "$SOURCE_DIR"
                 fi ;;
         esac
@@ -169,18 +181,21 @@ for src in "${@:-.}";do
     msg "Compressing tarball.."
     tarball="${src_name}_${version}.tar.bz2"
     cd "$INSTALL_DIR"
-    if [ -n "$(which bsdtar)" ];then
+    if whereis bsdtar ;then
         bsdtar -caf "$src_real/$tarball" ./*
-    elif [ -n "$(which tar)" ];then
+    elif whereis tar ;then
         tar -caf "$src_real/$tarball" ./*
     fi
 
-    msg "Cleaning up.."
-    rm -rf "$SOURCE_DIR" "$INSTALL_DIR"
+    # do not remove the directories when the tarball can not be extracted
+    if whereis bsdtar || whereis tar ;then
+        msg "Cleaning up.."
+        rm -rf "$SOURCE_DIR" "$INSTALL_DIR"
+    fi
 
-    if [ -n "$(which bsdtar)" ];then
+    if whereis bsdtar ;then
         msg "To merge it: ${GREEN}bsdtar -vxpf ${src}/${tarball} -C /${ALL_OFF}"
-    elif [ -n "$(which tar)" ];then
+    elif whereis tar ;then
         msg "To merge it: ${GREEN}tar -vxphf ${src}/${tarball} -C /${ALL_OFF}"
     fi
     set +e
