@@ -1529,10 +1529,12 @@ wantscookie = '''
 
 class Binary(Source):
     ''' Class to handle binary tarballs '''
-    def __init__(self, targets, do_merge=False, do_remove=False, \
-        do_depends=False, do_reverse=False, do_update=False, autoremove=False):
+    def __init__(self, targets, do_prepare=False, do_merge=False, \
+        do_remove=False, do_depends=False, do_reverse=False, do_update=False, \
+        autoremove=False):
         super(Binary, self).__init__(Source)
         self.targets = targets
+        self.do_prepare = do_prepare
         self.do_merge = do_merge
         self.do_remove = do_remove
         self.do_depends = do_depends
@@ -1662,10 +1664,12 @@ class Binary(Source):
                 message.sub_warning(_('Target is up-to-date'), self.target)
                 continue
 
-            if self.do_merge:
+            if self.do_prepare:
                 message.sub_info(_('Starting %s preparations at') % \
                     self.target_name, datetime.today())
                 self.prepare()
+
+            if self.do_merge:
                 message.sub_info(_('Starting %s merge at') % \
                     self.target_name, datetime.today())
                 self.merge()

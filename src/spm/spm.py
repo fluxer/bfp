@@ -19,7 +19,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.7.2 (a4a8071)"
+app_version = "1.7.3 (1298817)"
 
 try:
     import libmessage
@@ -285,6 +285,8 @@ try:
         help=_('Targets to apply actions on'))
 
     binary_parser = subparsers.add_parser('binary')
+    binary_parser.add_argument('-p', '--prepare', action='store_true', \
+        help=_('Prepare binaries of target'))
     binary_parser.add_argument('-m', '--merge', action='store_true', \
         help=_('Merge compiled files of target to system'))
     binary_parser.add_argument('-r', '--remove', action='store_true', \
@@ -295,6 +297,8 @@ try:
         help=_('Consider reverse dependency targets'))
     binary_parser.add_argument('-u', '--update', action='store_true', \
         help=_('Apply actions only if update is available'))
+    binary_parser.add_argument('-a', '--automake', action='store_true', \
+        help=_('Short for prepare and merge'))
     binary_parser.add_argument('TARGETS', nargs='+', type=str, \
         help=_('Targets to apply actions on'))
 
@@ -507,8 +511,11 @@ try:
         message.sub_info(_('TARGETS'), ARGS.TARGETS)
         message.sub_info(_('DEMOTE'), libspm.DEMOTE)
         message.info(_('Poking binaries...'))
-        m = libspm.Binary(ARGS.TARGETS, ARGS.merge, ARGS.remove, \
-            ARGS.depends, ARGS.reverse, ARGS.update)
+        if ARGS.automake:
+            ARGS.prepare = True
+            ARGS.merge = True
+        m = libspm.Binary(ARGS.TARGETS, ARGS.prepare, ARGS.merge, \
+            ARGS.remove, ARGS.depends, ARGS.reverse, ARGS.update)
         m.main()
 
     elif ARGS.mode == 'local':
