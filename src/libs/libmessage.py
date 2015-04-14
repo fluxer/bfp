@@ -33,6 +33,8 @@ class Message(object):
         self.LOG = True
         self.DEBUG = False
         self.CATCH = False
+        self.QUEUE = []
+        self.SUB_QUEUE = []
 
         try:
             curses.setupterm()
@@ -117,6 +119,23 @@ class Message(object):
                 print('%s* %s%s' % (self.cdebug, self.cnormal, msg))
                 self.log_message('debug', msg)
 
+    def queue(self, status, msg, marker=None):
+        ''' Queue message to be printed later '''
+        if status == 'info':
+            self.QUEUE.append(lambda: self.info(msg, marker))
+        elif status == 'warning':
+            self.QUEUE.append(lambda: self.warning(msg, marker))
+        elif status == 'critical':
+            self.QUEUE.append(lambda: self.critical(msg, marker))
+        elif status == 'debug':
+            self.QUEUE.append(lambda: self.debug(msg, marker))
+
+    def pop(self):
+        ''' Print all messages queued '''
+        for msg in self.QUEUE:
+            msg()
+        self.QUEUE = []
+
     def sub_info(self, msg, marker=None):
         ''' Print sub-message with information status '''
         if not marker is None:
@@ -163,3 +182,20 @@ class Message(object):
             else:
                 print('%s  -> %s%s' % (self.cdebug, self.cnormal, msg))
                 self.log_message('debug', msg)
+
+    def sub_queue(self, status, msg, marker=None):
+        ''' Queue sub-message to be printed later '''
+        if status == 'info':
+            self.SUB_QUEUE.append(lambda: self.sub_info(msg, marker))
+        elif status == 'warning':
+            self.SUB_QUEUE.append(lambda: self.sub_warning(msg, marker))
+        elif status == 'critical':
+            self.SUB_QUEUE.append(lambda: self.sub_critical(msg, marker))
+        elif status == 'debug':
+            self.SUB_QUEUE.append(lambda: self.sub_debug(msg, marker))
+
+    def sub_pop(self):
+        ''' Print all sub-messages queued '''
+        for msg in self.SUB_QUEUE:
+            msg()
+        self.SUB_QUEUE = []
