@@ -940,7 +940,8 @@ class Source(object):
         message.sub_info(_('Indexing content'))
         target_content = {}
         for sfile in misc.list_files(self.install_dir):
-            if sfile.endswith((self.target_footprint, self.target_metadata)):
+            if sfile.endswith((self.target_footprint, self.target_metadata, \
+                self.target_srcbuild)):
                 continue
             # remove common conflict files/directories
             elif sfile.endswith('/.packlist') \
@@ -1101,6 +1102,10 @@ class Source(object):
                 footprint.remove(sfile)
         misc.file_write(os.path.join(self.install_dir, self.target_footprint), \
             '\n'.join(sorted(footprint)).replace(self.install_dir, ''))
+
+        message.sub_info(_('Assembling SRCBUILD'))
+        misc.file_write(os.path.join(self.install_dir, self.target_srcbuild), \
+            misc.file_read(self.srcbuild))
 
         message.sub_info(_('Assembling depends'))
         misc.file_write('%s.depends' % self.target_tarball, \
@@ -1300,12 +1305,18 @@ class Source(object):
 
         if database.local_search(self.target_name):
             message.sub_info(_('Removing footprint and metadata'))
-            misc.dir_remove(os.path.join(LOCAL_DIR, self.target_name))
+            os.unlink(os.path.join(LOCAL_DIR, self.target_name, 'footprint'))
+            os.unlink(os.path.join(LOCAL_DIR, self.target_name, 'metadata'))
 
         if misc.file_search('\npost_remove()', self.srcbuild, escape=False) \
             and SCRIPTS:
             message.sub_info(_('Executing post_remove()'))
             misc.system_script(self.srcbuild, 'post_remove')
+
+        srcbuild = os.path.join(LOCAL_DIR, self.target_name, 'SRCBUILD')
+        if os.path.isfile(srcbuild):
+            message.sub_info(_('Removing SRCBUILD'))
+            os.unlink(srcbuild)
 
         if target_content:
             self.post_update_databases(target_content, 'remove')
@@ -1337,14 +1348,18 @@ class Source(object):
                 message.sub_warning(_('Ignoring target'), target_name)
                 continue
 
-            if not database.remote_search(target):
+            target_dir = database.remote_search(target)
+            # fallback to the local SRCBUILD, only on target removal
+            if not target_dir and (self.do_remove or self.autoremove):
+                target_dir = database.local_search(target)
+            if not target_dir:
                 message.sub_critical(_('Invalid target'), target)
                 sys.exit(2)
 
             # set target properties
             self.target = target
             self.target_name = os.path.basename(target)
-            self.target_dir = database.remote_search(target)
+            self.target_dir = target_dir
             self.srcbuild = os.path.join(self.target_dir, 'SRCBUILD')
             self.source_dir = os.path.join(BUILD_DIR, self.target_name, 'source')
             self.install_dir = os.path.join(BUILD_DIR, self.target_name, 'install')
@@ -1359,6 +1374,7 @@ class Source(object):
             self.target_backup = database.remote_metadata(self.target_dir, 'backup')
             self.target_footprint = os.path.join('var/local/spm', self.target_name, 'footprint')
             self.target_metadata = os.path.join('var/local/spm', self.target_name, 'metadata')
+            self.target_srcbuild = os.path.join('var/local/spm', self.target_name, 'SRCBUILD')
             self.sources_dir = os.path.join(CACHE_DIR, 'sources', self.target_name)
             self.target_tarball = os.path.join(CACHE_DIR, 'tarballs/' + os.uname()[4], \
                 self.target_name + '_' + self.target_version + '.tar.bz2')
@@ -1553,7 +1569,7 @@ class Binary(Source):
         database.IGNORE = IGNORE
 
     def autobinary(self, targets, automake=False, autoremove=False):
-        ''' Handle targets build/remove without affecting current object '''
+        ''' Handle targets install/remove without affecting current object '''
         if automake:
             obj = Binary(targets, do_merge=True, do_depends=True, \
                 do_reverse=self.do_reverse, do_update=False)
@@ -1634,14 +1650,18 @@ class Binary(Source):
                 message.sub_warning(_('Ignoring target'), target_name)
                 continue
 
-            if not database.remote_search(target):
+            target_dir = database.remote_search(target)
+            # fallback to the local SRCBUILD, only on target removal
+            if not target_dir and (self.do_remove or self.autoremove):
+                target_dir = database.local_search(target)
+            if not target_dir:
                 message.sub_critical(_('Invalid target'), target)
                 sys.exit(2)
 
             # set target properties
             self.target = target
             self.target_name = os.path.basename(target)
-            self.target_dir = database.remote_search(target)
+            self.target_dir = target_dir
             self.srcbuild = os.path.join(self.target_dir, 'SRCBUILD')
             self.source_dir = os.path.join(BUILD_DIR, self.target_name, 'source')
             self.install_dir = os.path.join(BUILD_DIR, self.target_name, 'install')
@@ -1656,6 +1676,7 @@ class Binary(Source):
             self.target_backup = database.remote_metadata(self.target_dir, 'backup')
             self.target_footprint = os.path.join('var/local/spm', self.target_name, 'footprint')
             self.target_metadata = os.path.join('var/local/spm', self.target_name, 'metadata')
+            self.target_srcbuild = os.path.join('var/local/spm', self.target_name, 'SRCBUILD')
             self.sources_dir = os.path.join(CACHE_DIR, 'sources', self.target_name)
             self.target_tarball = os.path.join(CACHE_DIR, 'tarballs/' + os.uname()[4], \
                 self.target_name + '_' + self.target_version + '.tar.bz2')
