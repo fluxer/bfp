@@ -353,6 +353,18 @@ calling `tar` or `bsdtar` directly.
 Single quote inside double quoted text (and vice-versa) in the SRCBUILD
 variables break the parser.
 
+=head1 ENVIRONMENT
+
+The following environment variables affect the execution of SPMT:
+
+=head2 LANGUAGE, LC_ALL, LC_MESSAGES, and LANG
+
+Used to specify locales to be used in the messages output.
+
+=head2 EDITOR
+
+Used to specify text-editor to be used when mering configuration files.
+
 =head1 AUTHORS
 
 Ivailo Monev (a.k.a. SmiL3y) <xakepa10@gmail.com>
@@ -362,4 +374,4 @@ COPYING file bundled with the source code.
 
 =head1 SEE ALSO
 
-spm(8) SRCBUILD(5) scanelf(1) tar(1) bsdtar(1) xz(1) vim(1)
+spm(8) SRCBUILD(5) scanelf(1) tar(1) bsdtar(1) xz(1) vim(1) locale(7)
