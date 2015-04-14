@@ -1,4 +1,5 @@
 #!/bin/python2
+# -*- coding: utf-8 -*-
 
 '''
 A module to handle various tasks fuzz free.
@@ -55,7 +56,7 @@ class Misc(object):
         return self.url_ping(url)
 
     def fetch_check(self, surl, destination):
-        ''' DEPRECATED: Check if remote has to be downloaded '''
+        ''' DEPRECATED: Check if URL has to be downloaded '''
         if self.python2:
             self.typecheck(surl, (types.StringTypes))
             self.typecheck(destination, (types.StringTypes))
@@ -534,7 +535,49 @@ class Misc(object):
                      '%5C': '\\',
                      '%5D': ']',
                      '%5E': '^',
-                     '%5F': '_',}
+                     '%5F': '_',
+                     '%60': '`',
+                     '%61': 'a',
+                     '%62': 'b',
+                     '%63': 'c',
+                     '%64': 'd',
+                     '%65': 'e',
+                     '%66': 'f',
+                     '%67': 'g',
+                     '%68': 'h',
+                     '%69': 'i',
+                     '%6A': 'j',
+                     '%6B': 'k',
+                     '%6C': 'l',
+                     '%6D': 'm',
+                     '%6E': 'n',
+                     '%6F': 'o',
+                     '%70': 'p',
+                     '%71': 'q',
+                     '%72': 'r',
+                     '%73': 's',
+                     '%74': 't',
+                     '%75': 'u',
+                     '%76': 'v',
+                     '%78': 'w',
+                     '%79': 'x',
+                     '%7A': 'z',
+                     '%7B': '{',
+                     '%7C': '|',
+                     '%7D': '}',
+                     '%7E': '~',
+                     '%7F': ' ', # TODO: is that supposed to be tab?
+                     '%80': '`', '%E2%82%AC': '`',
+                     '%81': '',
+                     '%82': '‚', '%E2%80%9A': '‚',
+                     '%83': 'ƒ', '%C6%92': 'ƒ',
+                     '%84': '„', '%E2%80%9E': '„',
+                     '%85': '…', '%E2%80%A6': '…',
+                     '%86': '†', '%E2%80%A0': '†',
+                     '%87': '‡', '%E2%80%A1': '‡',
+                     '%88': 'ˆ', '%CB%86': 'ˆ',
+                     '%89': '‰', '%E2%80%B0': '‰',
+                     }
         sresult = urlparse(surl).path
         for schar in dspecials:
             sresult = sresult.replace(schar, dspecials[schar])

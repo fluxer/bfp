@@ -66,6 +66,7 @@ class Database(object):
         ''' Build internal local database cache '''
         self.LOCAL_CACHE = {}
         for sdir in misc.list_dirs(self.LOCAL_DIR):
+            # TODO: check for SRCBUILD too once >=1.7.4 gains enough usage
             metadata = os.path.join(sdir, 'metadata')
             footprint = os.path.join(sdir, 'footprint')
             if os.path.isfile(metadata) and os.path.isfile(footprint):
@@ -281,7 +282,7 @@ class Database(object):
 
         # if remote target is passed and it's a directory not a base name
         # then the local target will be invalid and local_version will equal
-        # None, thus the base name is used to find the local target version
+        # None, thus the base name is used to find the local target metadata
         base = os.path.basename(target)
         local_version = self.local_metadata(base, 'version')
         local_release = self.local_metadata(base, 'release')
