@@ -837,7 +837,7 @@ class Source(object):
 
         message.sub_info(_('Preparing sources'))
         for src_url in self.target_sources:
-            src_base = os.path.basename(src_url)
+            src_base = misc.url_normalize(src_url, True)
             local_file = os.path.join(self.sources_dir, src_base)
             src_file = os.path.join(self.target_dir, src_base)
             link_file = os.path.join(self.source_dir, src_base)

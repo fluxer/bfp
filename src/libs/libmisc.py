@@ -747,8 +747,8 @@ class Misc(object):
         mymirrors = []
         if lmirrors:
             mymirrors.extend(lmirrors)
+        sbase = self.url_normalize(surl, True)
         if mymirrors:
-            sbase = self.url_normalize(surl, True)
             smirror = mymirrors[0]
             mymirrors.pop(0)
             snewurl = '%s/%s%s' % (smirror, ssuffix, sbase)
@@ -756,7 +756,7 @@ class Misc(object):
             snewurl = surl
         try:
             # mirrors are not supported for VCS repos on purpose
-            if surl.startswith('git://') or surl.endswith('.git'):
+            if surl.startswith('git://') or sbase.endswith('.git'):
                 self.fetch_git(surl, destination)
             elif surl.startswith('svn://'):
                 self.fetch_svn(surl, destination)
