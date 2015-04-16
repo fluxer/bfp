@@ -398,7 +398,7 @@ class SPMD(dbus.service.Object):
                         self.Update(FROMSOURCE)
                     else:
                         self.Updates(self._GetUpdates())
-                elif (result >= 86400) and UPDATE == 'weekly':
+                elif (result >= 86400) and UPDATE == 'daily':
                     lasttime = currenttime
                     misc.file_write(timelock, str(currenttime))
                     if ACTION == 'silent':
@@ -406,7 +406,15 @@ class SPMD(dbus.service.Object):
                         self.Update(FROMSOURCE)
                     else:
                         self.Updates(self._GetUpdates())
-                elif (result >= 604800) and UPDATE == 'monthly':
+                elif (result >= 604800) and UPDATE == 'weekly':
+                    lasttime = currenttime
+                    misc.file_write(timelock, str(currenttime))
+                    if ACTION == 'silent':
+                        self.Sync()
+                        self.Update(FROMSOURCE)
+                    else:
+                        self.Updates(self._GetUpdates())
+                elif (result >= 18144000) and UPDATE == 'monthly':
                     lasttime = currenttime
                     misc.file_write(timelock, str(currenttime))
                     if ACTION == 'silent':

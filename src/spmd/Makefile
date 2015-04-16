@@ -8,7 +8,7 @@ all: bump clean
 	$(PYUIC) gui.ui -o gui_ui.py
 	$(NUITKA) daemon.py
 	$(NUITKA) client.py
-	$(NUITKA) gui.py
+	$(NUITKA) --recurse-to=gui_ui gui.py
 	$(STRIP) *.exe
 
 cython: clean bump

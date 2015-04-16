@@ -68,6 +68,7 @@ def MessageCritical(msg):
 def DisableWidgets():
     ui.SearchEdit.setEnabled(False)
     ui.UpdateButton.setEnabled(False)
+    ui.BuildButton.setEnabled(False)
     ui.InstallButton.setEnabled(False)
     ui.RemoveButton.setEnabled(False)
     ui.DetailsButton.setEnabled(False)
@@ -77,6 +78,7 @@ def DisableWidgets():
 def EnableWidgets():
     ui.SearchEdit.setEnabled(True)
     ui.UpdateButton.setEnabled(True)
+    ui.BuildButton.setEnabled(False)
     ui.InstallButton.setEnabled(True)
     ui.RemoveButton.setEnabled(False)
     ui.DetailsButton.setEnabled(True)
@@ -162,6 +164,9 @@ def RefreshSettings():
     ui.BackupBox.setCheckState(libspm.BACKUP)
     ui.ScriptsBox.setCheckState(libspm.SCRIPTS)
     ui.TriggersBox.setCheckState(libspm.TRIGGERS)
+    ui.UpdateActionBox.setEnabled(True)
+    if str(ui.UpdateTimeBox.currentText()) == 'Never':
+        ui.UpdateActionBox.setEnabled(False)
 
 def RefreshWidgets():
     ui.RemoveButton.setEnabled(True)
@@ -359,6 +364,10 @@ def ChangeSettings():
     except Exception as detail:
         MessageCritical(str(detail))
         # FIXME: RefreshSettings()
+    finally:
+        ui.UpdateActionBox.setEnabled(True)
+        if str(ui.UpdateTimeBox.currentText()) == 'Never':
+            ui.UpdateActionBox.setEnabled(False)
 
 # SyncRepos()
 RefreshRepos()
@@ -369,6 +378,7 @@ RefreshSettings()
 ui.SearchTable.horizontalHeader().setResizeMode(0, QtGui.QHeaderView.ResizeToContents)
 ui.SearchTable.horizontalHeader().setResizeMode(1, QtGui.QHeaderView.Stretch)
 ui.UpdateButton.clicked.connect(Update)
+ui.BuildButton.clicked.connect(Build)
 ui.InstallButton.clicked.connect(Install)
 ui.RemoveButton.clicked.connect(Remove)
 ui.DetailsButton.clicked.connect(Details)
@@ -381,6 +391,8 @@ ui.ConflictsBox.clicked.connect(ChangeSettings)
 ui.BackupBox.clicked.connect(ChangeSettings)
 ui.ScriptsBox.clicked.connect(ChangeSettings)
 ui.TriggersBox.clicked.connect(ChangeSettings)
+ui.UpdateTimeBox.currentIndexChanged.connect(ChangeSettings)
+ui.UpdateActionBox.currentIndexChanged.connect(ChangeSettings)
 ui.ProgressBar.setRange(0, 1)
 ui.ProgressBar.hide()
 

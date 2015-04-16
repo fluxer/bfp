@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>655</width>
+    <width>761</width>
     <height>452</height>
    </rect>
   </property>
@@ -35,20 +35,7 @@
         <string>Packages</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_2">
-        <item row="0" column="5">
-         <spacer name="horizontalSpacer">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="0" column="1">
+        <item row="0" column="2">
          <widget class="QPushButton" name="InstallButton">
           <property name="text">
            <string>Install</string>
@@ -58,10 +45,7 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="7">
-         <widget class="QLineEdit" name="SearchEdit"/>
-        </item>
-        <item row="0" column="3">
+        <item row="0" column="4">
          <widget class="QPushButton" name="RemoveButton">
           <property name="enabled">
            <bool>false</bool>
@@ -74,14 +58,27 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="6">
+        <item row="0" column="8">
+         <widget class="QLineEdit" name="SearchEdit"/>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="UpdateButton">
+          <property name="text">
+           <string>Update</string>
+          </property>
+          <property name="icon">
+           <iconset theme="system-software-update"/>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="7">
          <widget class="QLabel" name="label">
           <property name="text">
            <string>Search:</string>
           </property>
          </widget>
         </item>
-        <item row="0" column="4">
+        <item row="0" column="5">
          <widget class="QPushButton" name="DetailsButton">
           <property name="enabled">
            <bool>false</bool>
@@ -94,17 +91,20 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="0">
-         <widget class="QPushButton" name="UpdateButton">
-          <property name="text">
-           <string>Update</string>
+        <item row="0" column="6">
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
           </property>
-          <property name="icon">
-           <iconset theme="system-software-update"/>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
           </property>
-         </widget>
+         </spacer>
         </item>
-        <item row="1" column="0" colspan="8">
+        <item row="1" column="0" colspan="9">
          <widget class="QTableWidget" name="SearchTable">
           <property name="editTriggers">
            <set>QAbstractItemView::NoEditTriggers</set>
@@ -133,6 +133,16 @@
             <string>Status</string>
            </property>
           </column>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="BuildButton">
+          <property name="text">
+           <string>Build</string>
+          </property>
+          <property name="icon">
+           <iconset theme="applications-development"/>
+          </property>
          </widget>
         </item>
        </layout>
@@ -439,6 +449,16 @@ you are doing!</string>
              <item>
               <property name="text">
                <string>Never</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Once a minute</string>
+              </property>
+             </item>
+             <item>
+              <property name="text">
+               <string>Once a hour</string>
               </property>
              </item>
              <item>
