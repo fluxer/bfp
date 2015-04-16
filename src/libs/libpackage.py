@@ -31,13 +31,6 @@ class Database(object):
         self.LOCAL_CACHE = {}
         self.IGNORE = []
 
-    def local_footprint(self, target):
-        ''' DEPRECATED: Returns files of target, use local_metadata(target, 'footprint') '''
-        if misc.python2:
-            misc.typecheck(target, (types.StringTypes))
-
-        return self.local_metadata(target, 'footprint')
-
     def remote_groups(self, basename=True):
         ''' DEPRECATED: Returns groups in the repositories '''
         if misc.python2:
@@ -66,10 +59,11 @@ class Database(object):
         ''' Build internal local database cache '''
         self.LOCAL_CACHE = {}
         for sdir in misc.list_dirs(self.LOCAL_DIR):
-            # TODO: check for SRCBUILD too once >=1.7.4 gains enough usage
             metadata = os.path.join(sdir, 'metadata')
             footprint = os.path.join(sdir, 'footprint')
-            if os.path.isfile(metadata) and os.path.isfile(footprint):
+            srcbuild = os.path.join(sdir, 'SRCBUILD')
+            if os.path.isfile(metadata) and os.path.isfile(footprint) \
+                and os.path.isfile(srcbuild):
                 self.LOCAL_CACHE[sdir] = {
                     'version': self._local_metadata(metadata, 'version'),
                     'release': self._local_metadata(metadata, 'release'),

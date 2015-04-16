@@ -536,10 +536,6 @@ class Source(object):
             '--compress-debug-sections', sfile, sdebug))
         misc.system_command((objcopy, '--add-gnu-debuglink', sdebug, sfile))
 
-    def update_databases(self, content, action):
-        ''' DEPRECATED: use post_update_databases() instead '''
-        self.post_update_databases(content, action)
-
     def pre_update_databases(self, content, action):
         ''' Update common databases before merge '''
         if not TRIGGERS:
