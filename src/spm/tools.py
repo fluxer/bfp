@@ -36,7 +36,7 @@ database = libpackage.Database()
 import libspm
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.7.3 (1298817)"
+app_version = "1.7.4 (7c78cf0)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -761,10 +761,10 @@ class Upload(object):
                 depends = '%s.depends' % tarball
                 signature = '%s.sig' % tarball
                 if not os.path.isfile(tarball):
-                    message.sub_critical(_('Binary tarball not available available for'), target)
+                    message.sub_critical(_('Binary tarball not available for'), target)
                     sys.exit(2)
                 elif not os.path.isfile(depends):
-                    message.sub_critical(_('Binary tarball depends not available available for'), target)
+                    message.sub_critical(_('Binary tarball depends not available for'), target)
                     sys.exit(2)
                 files = [tarball, depends]
                 if os.path.isfile(signature):
