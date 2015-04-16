@@ -1,3 +1,15 @@
+Wed Apr 15 23:36:40 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
+90430bc96ce96881adfb84e8ce0b85d6338b34d6 (tag: 1.7.4)
+    * cleanup libmisc.Misc.url_normalize()
+    * use libmisc.Misc.url_normalize() consitently across fetching actions
+    * make it possible to queue messages and print them later
+    * mention environmental variables which affect spm and spm-tools
+    * add more entries to the URL normalization dictionary
+    * make it possible to remove local but not remote target
+    * make the preperatio action independant from merge in spm binary mode
+    * improve srcmake binaries detection
+    * simplify the rule for installing html docs
+
 Sat Apr 11 06:44:44 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
 320958381955e7e11ee69b66a8c76414d1d578ed (tag: 1.7.3)
     * remove redudant seek position setup from the SRCBUILD parser
