@@ -1,7 +1,7 @@
 #!/bin/python2
 
-from PyQt4 import QtCore, QtGui
-import os, sys
+from PyQt4 import QtCore, QtGui, QtDBus
+import os, sys, time
 if sys.version < '3':
     import ConfigParser as configparser
 else:
@@ -21,6 +21,7 @@ misc.CATCH = True
 libspm.CATCH = True
 
 app = QtGui.QApplication(sys.argv)
+bus = QtDBus.QDBusConnection.systemBus()
 MainWindow = QtGui.QMainWindow()
 ui = gui_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
@@ -39,9 +40,27 @@ class Worker(QtCore.QThread):
         except Exception as detail:
             self.emit(QtCore.SIGNAL('failed'), str(detail))
 
+class Interface(QtDBus.QDBusAbstractInterface):
+    def __init__(self, service, path, obj, connection, parent=None):
+        super(Interface, self).__init__(service, path, obj, connection, parent)
+        # fun, right?
+        self.setTimeout(999999999999)
+
+    @QtCore.pyqtSlot(QtDBus.QDBusArgument)
+    def callFinishedSlot(self, call):
+        reply = QtDBus.QDBusPendingReply(call)
+        if reply.isError():
+            MessageCritical(str(reply.error().message()))
+        else:
+            msg = str(reply.value().toString())
+            if not msg == 'Success':
+                MessageInfo(msg)
+
+iface = Interface('com.spm.Daemon', '/com/spm/Daemon', 'com.spm.Daemon', \
+    bus, app)
+
 def MessageInfo(*msg):
-    return QtGui.QMessageBox.information(MainWindow, 'Information', \
-        misc.string_convert(msg))
+    return QtGui.QMessageBox.information(MainWindow, 'Information', misc.string_convert(msg))
 
 def MessageQuestion(*msg):
     return QtGui.QMessageBox.question(MainWindow, 'Question', \
@@ -65,8 +84,13 @@ def MessageCritical(msg):
         layout.addItem(spacer, layout.rowCount(), 0, 1, layout.columnCount())
         return msgBox.exec_()
 
+if not bus.isConnected():
+    MessageCritical('Cannot connect to the D-Bus system bus')
+    sys.exit(1)
+
 def DisableWidgets():
     ui.SearchEdit.setEnabled(False)
+    ui.SyncButton.setEnabled(False)
     ui.UpdateButton.setEnabled(False)
     ui.BuildButton.setEnabled(False)
     ui.InstallButton.setEnabled(False)
@@ -77,8 +101,9 @@ def DisableWidgets():
 
 def EnableWidgets():
     ui.SearchEdit.setEnabled(True)
+    ui.SyncButton.setEnabled(True)
     ui.UpdateButton.setEnabled(True)
-    ui.BuildButton.setEnabled(False)
+    ui.BuildButton.setEnabled(True)
     ui.InstallButton.setEnabled(True)
     ui.RemoveButton.setEnabled(False)
     ui.DetailsButton.setEnabled(True)
@@ -178,8 +203,12 @@ def RefreshWidgets():
         if not database.local_search(target):
             ui.RemoveButton.setEnabled(False)
 
+def RefreshAll():
+    EnableWidgets()
+    RefreshTargets()
+    RefreshWidgets()
+
 def SearchMetadataReal():
-    DisableWidgets()
     regexp = str(ui.SearchEdit.text())
     targets = []
     if not regexp:
@@ -204,12 +233,14 @@ def SearchMetadataReal():
             ui.SearchTable.setRowCount(irow+1)
             description = database.local_metadata(target, 'description')
             status = 'Installed'
+            if not database.local_uptodate(target):
+                status = 'Update'
             if not description:
                 description = database.remote_metadata(target, 'description')
                 status = 'Uninstalled'
             ui.SearchTable.setItem(irow, 0, QtGui.QTableWidgetItem(target))
             ui.SearchTable.setItem(irow, 1, QtGui.QTableWidgetItem(description))
-            ui.SearchTable.setItem(irow, 2, QtGui.QTableWidgetItem('Update'))
+            ui.SearchTable.setItem(irow, 2, QtGui.QTableWidgetItem(status))
             irow += 1
     except Exception as detail:
         MessageCritical(str(detail))
@@ -222,6 +253,13 @@ def SearchMetadata():
     app.connect(worker, QtCore.SIGNAL('failed'), MessageCritical)
     DisableWidgets()
     worker.start()
+
+def Sync():
+    DisableWidgets()
+    async = iface.asyncCall('Sync');
+    watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
+    watcher.finished.connect(iface.callFinishedSlot)
+    watcher.finished.connect(RefreshAll)
 
 def Update():
     build = []
@@ -236,16 +274,11 @@ def Update():
         '\n\nAre you sure you want to continue?')
     if not answer == QtGui.QMessageBox.Yes:
         return
-
-    m = libspm.Source(build, do_clean=True, do_prepare=True, \
-        do_compile=True, do_check=False, do_install=True, do_merge=True, \
-        do_remove=False, do_depends=True, do_reverse=True, do_update=True)
-    worker = Worker(app, m.main)
-    worker.finished.connect(EnableWidgets)
-    app.connect(worker, QtCore.SIGNAL('success'), RefreshTargets)
-    app.connect(worker, QtCore.SIGNAL('failed'), MessageCritical)
     DisableWidgets()
-    worker.start()
+    async = iface.asyncCall('Update');
+    watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
+    watcher.finished.connect(iface.callFinishedSlot)
+    watcher.finished.connect(RefreshAll)
 
 def Build():
     targets = []
@@ -260,17 +293,11 @@ def Build():
         '\n\nAre you sure you want to continue?')
     if not answer == QtGui.QMessageBox.Yes:
         return
-
-    m = libspm.Source(targets, do_clean=True, do_prepare=True, \
-        do_compile=True, do_check=False, do_install=True, do_merge=True, \
-        do_remove=False, do_depends=True, do_reverse=True, do_update=False)
-    worker = Worker(app, m.main)
-    worker.finished.connect(EnableWidgets)
-    worker.finished.connect(RefreshWidgets)
-    app.connect(worker, QtCore.SIGNAL('success'), RefreshTargets)
-    app.connect(worker, QtCore.SIGNAL('failed'), MessageCritical)
     DisableWidgets()
-    worker.start()
+    async = iface.asyncCall('Build', targets);
+    watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
+    watcher.finished.connect(iface.callFinishedSlot)
+    watcher.finished.connect(RefreshAll)
 
 def Install():
     targets = []
@@ -285,16 +312,11 @@ def Install():
         '\n\nAre you sure you want to continue?')
     if not answer == QtGui.QMessageBox.Yes:
         return
-
-    m = libspm.Binary(targets, do_merge=True, do_depends=True, \
-        do_reverse=False, do_update=False)
-    worker = Worker(app, m.main)
-    worker.finished.connect(EnableWidgets)
-    worker.finished.connect(RefreshWidgets)
-    app.connect(worker, QtCore.SIGNAL('success'), RefreshTargets)
-    app.connect(worker, QtCore.SIGNAL('failed'), MessageCritical)
     DisableWidgets()
-    worker.start()
+    async = iface.asyncCall('Install', targets);
+    watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
+    watcher.finished.connect(iface.callFinishedSlot)
+    watcher.finished.connect(RefreshAll)
 
 def Remove():
     targets = []
@@ -309,17 +331,10 @@ def Remove():
         '\n\nAre you sure you want to continue?')
     if not answer == QtGui.QMessageBox.Yes:
         return
-
-    m = libspm.Source(targets, do_clean=False, do_prepare=False, \
-        do_compile=False, do_check=False, do_install=False, do_merge=False, \
-        do_remove=True, do_depends=False, do_reverse=True, do_update=False)
-    worker = Worker(app, m.main)
-    worker.finished.connect(EnableWidgets)
-    worker.finished.connect(RefreshWidgets)
-    app.connect(worker, QtCore.SIGNAL('success'), RefreshTargets)
-    app.connect(worker, QtCore.SIGNAL('failed'), MessageCritical)
-    DisableWidgets()
-    worker.start()
+    async = iface.asyncCallWithArgumentList('Remove', (targets, True));
+    watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
+    watcher.finished.connect(iface.callFinishedSlot)
+    watcher.finished.connect(RefreshAll)
 
 def Details():
     # FIXME: make it a dialog
@@ -329,35 +344,85 @@ def Details():
         if target in targets:
             continue
         description = str(ui.SearchTable.item(item.row(), 1).text())
-        version = database.local_metadata(target, 'version')
-        version = database.remote_metadata(target, 'version')
-        MessageInfo('Package: %s\nVersion: %s\nDescription: %s\n' % (target, version, description))
+        lversion = database.local_metadata(target, 'version')
+        lrelease = database.local_metadata(target, 'release')
+        rversion = database.remote_metadata(target, 'version')
+        rrelease = database.remote_metadata(target, 'release')
+        if database.local_search(target):
+            depends = database.local_metadata(target, 'depends')
+        else:
+            depends = database.remote_mdepends(target)
+        options = database.remote_metadata(target, 'options')
+        data = 'Package: %s\nInstalled version: %s (%s)\n' % (target, lversion, lrelease)
+        data += 'Available version: %s (%s)\nDescription: %s\n' % (rversion, rrelease, description)
+        data += 'Dependencies: %s\nOptions: %s\n' % (depends, options)
+        MessageInfo(data)
         targets.append(target)
 
-def SyncRepos():
-    m = libspm.Repo(libspm.REPOSITORIES, do_clean=True, do_sync=True, \
-        do_update=False)
-    worker = Worker(app, m.main)
-    worker.finished.connect(EnableWidgets)
-    worker.finished.connect(RefreshWidgets)
-    app.connect(worker, QtCore.SIGNAL('success'), RefreshTargets)
-    app.connect(worker, QtCore.SIGNAL('failed'), MessageCritical)
-    DisableWidgets()
-    worker.start()
+def AddRepo():
+    # FIXME: implement
+    MessageCritical('Not implement')
+
+def AddMirror():
+    # FIXME: implement
+    MessageCritical('Not implement')
+
+def RemoveRepo():
+    # FIXME: implement
+    MessageCritical('Not implement')
+
+def RemoveMirror():
+    # FIXME: implement
+    MessageCritical('Not implement')
+
+def ChangeRepos():
+    data = ''
+    for index in xrange(ui.ReposTable.rowCount()):
+        enable = ui.ReposTable.cellWidget(index, 0).isChecked()
+        url = str(ui.ReposTable.item(index, 1).text())
+        if enable:
+            data += '%s\n' % url
+        else:
+            data += '# %s\n' % url
+    async = iface.asyncCall('ReposSet', data);
+    watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
+    watcher.finished.connect(iface.callFinishedSlot)
+
+def ChangeMirrors():
+    data = ''
+    for index in xrange(ui.MirrorsTable.rowCount()):
+        enable = ui.MirrorsTable.cellWidget(index, 0).isChecked()
+        url = str(ui.MirrorsTable.item(index, 1).text())
+        if enable:
+            data += '%s\n' % url
+        else:
+            data += '# %s\n' % url
+    async = iface.asyncCall('MirrorsSet', data);
+    watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
+    watcher.finished.connect(iface.callFinishedSlot)
 
 def ChangeSettings():
     try:
-        conf = configparser.SafeConfigParser()
-        conf.read('/etc/spm.conf')
-        conf.set('prepare', 'MIRROR', str(ui.UseMirrorsBox.isChecked()))
-        conf.set('prepare', 'TIMEOUT', str(ui.ConnectionTimeoutBox.value()))
-        conf.set('merge', 'CONFLICTS', str(ui.ConflictsBox.isChecked()))
-        conf.set('merge', 'BACKUP', str(ui.BackupBox.isChecked()))
-        conf.set('merge', 'SCRIPTS', str(ui.ScriptsBox.isChecked()))
-        conf.set('merge', 'TRIGGERS', str(ui.TriggersBox.isChecked()))
-
-        with open('/etc/spm.conf', 'wb') as libspmfile:
-            conf.write(libspmfile)
+        DisableWidgets()
+        async = iface.asyncCallWithArgumentList('ConfSet', ('prepare', 'MIRROR', str(ui.UseMirrorsBox.isChecked())));
+        watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
+        watcher.finished.connect(iface.callFinishedSlot)
+        async = iface.asyncCallWithArgumentList('ConfSet', ('prepare', 'TIMEOUT', str(ui.ConnectionTimeoutBox.value())));
+        watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
+        watcher.finished.connect(iface.callFinishedSlot)
+        async = iface.asyncCallWithArgumentList('ConfSet', ('merge', 'CONFLICTS', str(ui.ConflictsBox.isChecked())));
+        watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
+        watcher.finished.connect(iface.callFinishedSlot)
+        async = iface.asyncCallWithArgumentList('ConfSet', ('merge', 'BACKUP', str(ui.BackupBox.isChecked())));
+        watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
+        watcher.finished.connect(iface.callFinishedSlot)
+        async = iface.asyncCallWithArgumentList('ConfSet', ('merge', 'SCRIPTS', str(ui.ScriptsBox.isChecked())));
+        watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
+        watcher.finished.connect(iface.callFinishedSlot)
+        async = iface.asyncCallWithArgumentList('ConfSet', ('merge', 'TRIGGERS', str(ui.TriggersBox.isChecked())));
+        watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
+        watcher.finished.connect(iface.callFinishedSlot)
+        RefreshAll()
         reload(libspm)
     except SystemExit:
         pass
@@ -377,6 +442,7 @@ RefreshSettings()
 
 ui.SearchTable.horizontalHeader().setResizeMode(0, QtGui.QHeaderView.ResizeToContents)
 ui.SearchTable.horizontalHeader().setResizeMode(1, QtGui.QHeaderView.Stretch)
+ui.SyncButton.clicked.connect(Sync)
 ui.UpdateButton.clicked.connect(Update)
 ui.BuildButton.clicked.connect(Build)
 ui.InstallButton.clicked.connect(Install)
@@ -384,15 +450,13 @@ ui.RemoveButton.clicked.connect(Remove)
 ui.DetailsButton.clicked.connect(Details)
 ui.SearchEdit.returnPressed.connect(SearchMetadata)
 ui.SearchTable.currentItemChanged.connect(RefreshWidgets)
-ui.IgnoreTargetsEdit.textChanged.connect(ChangeSettings)
-ui.ConnectionTimeoutBox.valueChanged.connect(ChangeSettings)
-ui.UseMirrorsBox.clicked.connect(ChangeSettings)
-ui.ConflictsBox.clicked.connect(ChangeSettings)
-ui.BackupBox.clicked.connect(ChangeSettings)
-ui.ScriptsBox.clicked.connect(ChangeSettings)
-ui.TriggersBox.clicked.connect(ChangeSettings)
-ui.UpdateTimeBox.currentIndexChanged.connect(ChangeSettings)
-ui.UpdateActionBox.currentIndexChanged.connect(ChangeSettings)
+ui.RepoAddButton.clicked.connect(AddRepo)
+ui.RepoRemoveButton.clicked.connect(RemoveRepo)
+ui.MirrorAddButton.clicked.connect(AddMirror)
+ui.MirrorRemoveButton.clicked.connect(RemoveMirror)
+ui.RepoSaveButton.clicked.connect(ChangeRepos)
+ui.MirrorSaveButton.clicked.connect(ChangeMirrors)
+ui.PrefSaveButton.clicked.connect(ChangeSettings)
 ui.ProgressBar.setRange(0, 1)
 ui.ProgressBar.hide()
 

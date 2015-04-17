@@ -27,7 +27,7 @@ class SPMD(dbus.service.Object):
     def _GetUpdates(self):
         targets = []
         for local in database.local_all():
-            if not database.local_uptodate():
+            if not database.local_uptodate(local):
                 targets.append(local)
         return targets
 
@@ -152,13 +152,13 @@ class SPMD(dbus.service.Object):
             version = database.remote_metadata(match, 'version')
             release = database.remote_metadata(match, 'release')
             description = database.remote_metadata(match, 'description')
-            depends = database.remote_metadata(match, 'depends')
-            makedepends = database.remote_metadata(match, 'makedepends')
-            checkdepends = database.remote_metadata(match, 'checkdepends')
-            sources = database.remote_metadata(match, 'sources')
-            pgpkeys = database.remote_metadata(match, 'pgpkeys')
-            options = database.remote_metadata(match, 'options')
-            backup = database.remote_metadata(match, 'backup')
+            depends = database.remote_metadata(match, 'depends') or ['']
+            makedepends = database.remote_metadata(match, 'makedepends') or ['']
+            checkdepends = database.remote_metadata(match, 'checkdepends') or ['']
+            sources = database.remote_metadata(match, 'sources') or ['']
+            pgpkeys = database.remote_metadata(match, 'pgpkeys') or ['']
+            options = database.remote_metadata(match, 'options') or ['']
+            backup = database.remote_metadata(match, 'backup') or ['']
         except Exception as detail:
             message.critical(str(detail))
             return str(detail)
@@ -190,7 +190,7 @@ class SPMD(dbus.service.Object):
             version = database.local_metadata(match, 'version')
             release = database.local_metadata(match, 'release')
             description = database.local_metadata(match, 'description')
-            depends = database.local_metadata(match, 'depends')
+            depends = database.local_metadata(match, 'depends') or ['']
             size = database.local_metadata(match, 'size')
             footprint = database.local_metadata(match, 'footprint')
         except Exception as detail:
@@ -234,17 +234,17 @@ class SPMD(dbus.service.Object):
             return str(detail)
         return 'Success'
 
-    @dbus.service.method('com.spm.Daemon', in_signature='s', \
+    @dbus.service.method('com.spm.Daemon', in_signature='as', \
         out_signature='s')
-    def Build(self, target):
+    def Build(self, targets):
         ''' Build a package '''
-        if not database.remote_search(target):
-            message.warning('%s is not valid' % target)
-            return('%s is not valid' % target)
-
-        message.info('Building', target)
+        message.info('Building', targets)
         try:
-            m = libspm.Source([target], do_clean=True, do_prepare=True, \
+            for target in targets:
+                if not database.remote_search(target):
+                    message.warning('%s is not valid' % target)
+                    return('%s is not valid' % target)
+            m = libspm.Source(targets, do_clean=True, do_prepare=True, \
                 do_compile=True, do_install=True, do_merge=True)
             m.main()
         except Exception as detail:
@@ -252,38 +252,38 @@ class SPMD(dbus.service.Object):
             return str(detail)
         return 'Success'
 
-    @dbus.service.method('com.spm.Daemon', in_signature='s', \
+    @dbus.service.method('com.spm.Daemon', in_signature='as', \
         out_signature='s')
-    def Install(self, target):
+    def Install(self, targets):
         ''' Install a package '''
-        if not database.remote_search(target):
-            message.warning('%s is not valid' % target)
-            return('%s is not valid' % target)
-
-        message.info('Installing', target)
+        message.info('Installing', targets)
         try:
-            m = libspm.Binary([target], do_prepare=True, do_merge=True, do_depends=True)
+            for target in targets:
+                if not database.remote_search(target):
+                    message.warning('%s is not valid' % target)
+                    return('%s is not valid' % target)
+            m = libspm.Binary(targets, do_prepare=True, do_merge=True, do_depends=True)
             m.main()
         except Exception as detail:
             message.critical(str(detail))
             return str(detail)
         return 'Success'
 
-    @dbus.service.method('com.spm.Daemon', in_signature='sb', \
+    @dbus.service.method('com.spm.Daemon', in_signature='asb', \
         out_signature='s')
-    def Remove(self, target, recursive=False):
+    def Remove(self, targets, recursive=False):
         ''' Install a package '''
-        if not database.local_search(target):
-            message.warning('%s is not installed' % target)
-            return('%s is not installd' % target)
-
-        message.info('Removing', target)
+        message.info('Removing', targets)
         try:
+            for target in targets:
+                if not database.local_search(target):
+                    message.warning('%s is not installed' % target)
+                    return('%s is not installd' % target)
             if recursive:
                 # oh, boy! do not pass glibc here!
-                m = libspm.Binary([target], autoremove=True)
+                m = libspm.Binary(targets, autoremove=True)
             else:
-                m = libspm.Binary([target], do_remove=True)
+                m = libspm.Binary(target, do_remove=True)
             m.main()
         except Exception as detail:
             message.critical(str(detail))
@@ -376,6 +376,7 @@ class SPMD(dbus.service.Object):
 
             while True:
                 for wd, mask, cookie, name in slave_notify.event_read():
+                    self.Configs()
                     reload(libspm)
                     reload(libpackage)
                     # TODO: does this even work? that's another thread this is running in...

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-04-16 12:30+0000\n"
-"PO-Revision-Date: 2015-03-27 16:26+0000\n"
+"PO-Revision-Date: 2015-04-16 12:33+0200\n"
 "Last-Translator: Ivailo Monev <xakepa10@gmail.com>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -614,7 +614,7 @@ msgstr "Поне едно огледало е нужно"
 
 #: libspm.py:1607 tools.py:764
 msgid "Binary tarball not available for"
-msgstr ""
+msgstr "Бинарен архив не е наличен за"
 
 #: libspm.py:1613
 msgid "Dependencies"
@@ -1339,7 +1339,7 @@ msgstr ""
 
 #: tools.py:767
 msgid "Binary tarball depends not available for"
-msgstr ""
+msgstr "Зависимостите на бинарният архив не са налични за"
 
 #: tools.py:773
 msgid "Missing signature for"

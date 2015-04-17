@@ -33,7 +33,7 @@ def dbus_call(method, args=None):
     else:
         message.sub_critical(str(bus.lastError().message()))
 
-app_version = "1.7.4 (ae2187b)"
+app_version = "1.7.4 (ddcb3f1)"
 
 try:
     parser = argparse.ArgumentParser(prog='spmctl', \
@@ -44,11 +44,11 @@ try:
         help='Get local target metadata')
     parser.add_argument('-s', '--sync', action='store_true', \
         help='Sync repositories')
-    parser.add_argument('-b', '--build', type=str, \
+    parser.add_argument('-b', '--build', nargs='+', type=str, \
         help='Build a package')
-    parser.add_argument('-i', '--install', type=str, \
+    parser.add_argument('-i', '--install', nargs='+', type=str, \
         help='Install a package')
-    parser.add_argument('-R', '--remove', type=str, \
+    parser.add_argument('-R', '--remove', nargs='+', type=str, \
         help='Remove a package')
     parser.add_argument('--debug', action='store_true', \
         help='Enable debug messages')
