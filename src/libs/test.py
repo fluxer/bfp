@@ -40,6 +40,9 @@ class TestSuite(unittest.TestCase):
         fprint = open(sdir + '/footprint', 'w')
         fprint.write(footprint)
         fprint.close()
+        fprint = open(sdir + '/SRCBUILD', 'w')
+        fprint.write('')
+        fprint.close()
 
     def setUp(self):
         database.CACHE_DIR = database.ROOT_DIR + '/var/cache/spm'
