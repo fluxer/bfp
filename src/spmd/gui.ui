@@ -194,6 +194,55 @@
         <string>Repositories</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_3">
+        <item row="1" column="1">
+         <widget class="QPushButton" name="RepoSaveButton">
+          <property name="text">
+           <string>Save</string>
+          </property>
+          <property name="icon">
+           <iconset theme="document-save"/>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" colspan="9">
+         <widget class="QTableWidget" name="ReposTable">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>Enable</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>URL</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QPushButton" name="RepoAddButton">
+          <property name="text">
+           <string>Add</string>
+          </property>
+          <property name="icon">
+           <iconset theme="list-add"/>
+          </property>
+         </widget>
+        </item>
         <item row="1" column="0">
          <spacer name="horizontalSpacer_6">
           <property name="orientation">
@@ -207,7 +256,20 @@
           </property>
          </spacer>
         </item>
-        <item row="1" column="4">
+        <item row="1" column="6">
+         <widget class="QPushButton" name="RepoDownButton">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Move down</string>
+          </property>
+          <property name="icon">
+           <iconset theme="arrow-down"/>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="8">
          <spacer name="horizontalSpacer_7">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -219,6 +281,19 @@
            </size>
           </property>
          </spacer>
+        </item>
+        <item row="1" column="4">
+         <widget class="QPushButton" name="RepoUpButton">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Move up</string>
+          </property>
+          <property name="icon">
+           <iconset theme="arrow-up"/>
+          </property>
+         </widget>
         </item>
         <item row="1" column="3">
          <widget class="QPushButton" name="RepoRemoveButton">
@@ -233,52 +308,6 @@
           </property>
          </widget>
         </item>
-        <item row="0" column="0" colspan="5">
-         <widget class="QTableWidget" name="ReposTable">
-          <property name="editTriggers">
-           <set>QAbstractItemView::NoEditTriggers</set>
-          </property>
-          <property name="selectionBehavior">
-           <enum>QAbstractItemView::SelectRows</enum>
-          </property>
-          <attribute name="horizontalHeaderStretchLastSection">
-           <bool>true</bool>
-          </attribute>
-          <attribute name="verticalHeaderVisible">
-           <bool>false</bool>
-          </attribute>
-          <column>
-           <property name="text">
-            <string>Enable</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>URL</string>
-           </property>
-          </column>
-         </widget>
-        </item>
-        <item row="1" column="1">
-         <widget class="QPushButton" name="RepoAddButton">
-          <property name="text">
-           <string>Add</string>
-          </property>
-          <property name="icon">
-           <iconset theme="list-add"/>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="2">
-         <widget class="QPushButton" name="RepoSaveButton">
-          <property name="text">
-           <string>Save</string>
-          </property>
-          <property name="icon">
-           <iconset theme="document-save"/>
-          </property>
-         </widget>
-        </item>
        </layout>
       </widget>
       <widget class="QWidget" name="mirrors">
@@ -289,32 +318,6 @@
         <string>Mirrors</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_5">
-        <item row="0" column="0" colspan="6">
-         <widget class="QTableWidget" name="MirrorsTable">
-          <property name="editTriggers">
-           <set>QAbstractItemView::NoEditTriggers</set>
-          </property>
-          <property name="selectionBehavior">
-           <enum>QAbstractItemView::SelectRows</enum>
-          </property>
-          <attribute name="horizontalHeaderStretchLastSection">
-           <bool>true</bool>
-          </attribute>
-          <attribute name="verticalHeaderVisible">
-           <bool>false</bool>
-          </attribute>
-          <column>
-           <property name="text">
-            <string>Enable</string>
-           </property>
-          </column>
-          <column>
-           <property name="text">
-            <string>URL</string>
-           </property>
-          </column>
-         </widget>
-        </item>
         <item row="1" column="2">
          <widget class="QPushButton" name="MirrorAddButton">
           <property name="text">
@@ -338,7 +341,7 @@
           </property>
          </spacer>
         </item>
-        <item row="1" column="5">
+        <item row="1" column="8">
          <spacer name="horizontalSpacer_5">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -352,6 +355,71 @@
          </spacer>
         </item>
         <item row="1" column="4">
+         <widget class="QPushButton" name="MirrorUpButton">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Move up</string>
+          </property>
+          <property name="icon">
+           <iconset theme="arrow-up"/>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="6">
+         <widget class="QPushButton" name="MirrorDownButton">
+          <property name="enabled">
+           <bool>false</bool>
+          </property>
+          <property name="text">
+           <string>Move down</string>
+          </property>
+          <property name="icon">
+           <iconset theme="arrow-down"/>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0" colspan="9">
+         <widget class="QTableWidget" name="MirrorsTable">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
+          <property name="selectionBehavior">
+           <enum>QAbstractItemView::SelectRows</enum>
+          </property>
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+          <attribute name="horizontalHeaderStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <attribute name="verticalHeaderVisible">
+           <bool>false</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>Enable</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>URL</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QPushButton" name="MirrorSaveButton">
+          <property name="text">
+           <string>Save</string>
+          </property>
+          <property name="icon">
+           <iconset theme="document-save"/>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="3">
          <widget class="QPushButton" name="MirrorRemoveButton">
           <property name="enabled">
            <bool>false</bool>
@@ -361,16 +429,6 @@
           </property>
           <property name="icon">
            <iconset theme="list-remove"/>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="3">
-         <widget class="QPushButton" name="MirrorSaveButton">
-          <property name="text">
-           <string>Save</string>
-          </property>
-          <property name="icon">
-           <iconset theme="document-save"/>
           </property>
          </widget>
         </item>

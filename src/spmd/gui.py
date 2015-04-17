@@ -43,8 +43,6 @@ class Worker(QtCore.QThread):
 class Interface(QtDBus.QDBusAbstractInterface):
     def __init__(self, service, path, obj, connection, parent=None):
         super(Interface, self).__init__(service, path, obj, connection, parent)
-        # fun, right?
-        self.setTimeout(999999999999)
 
     @QtCore.pyqtSlot(QtDBus.QDBusArgument)
     def callFinishedSlot(self, call):
@@ -96,6 +94,8 @@ def DisableWidgets():
     ui.InstallButton.setEnabled(False)
     ui.RemoveButton.setEnabled(False)
     ui.DetailsButton.setEnabled(False)
+    ui.RepoSaveButton.setEnabled(False)
+    ui.MirrorSaveButton.setEnabled(False)
     ui.ProgressBar.setRange(0, 0)
     ui.ProgressBar.show()
 
@@ -107,6 +107,8 @@ def EnableWidgets():
     ui.InstallButton.setEnabled(True)
     ui.RemoveButton.setEnabled(False)
     ui.DetailsButton.setEnabled(True)
+    ui.RepoSaveButton.setEnabled(True)
+    ui.MirrorSaveButton.setEnabled(True)
     ui.ProgressBar.setRange(0, 1)
     ui.ProgressBar.hide()
 
@@ -189,9 +191,6 @@ def RefreshSettings():
     ui.BackupBox.setCheckState(libspm.BACKUP)
     ui.ScriptsBox.setCheckState(libspm.SCRIPTS)
     ui.TriggersBox.setCheckState(libspm.TRIGGERS)
-    ui.UpdateActionBox.setEnabled(True)
-    if str(ui.UpdateTimeBox.currentText()) == 'Never':
-        ui.UpdateActionBox.setEnabled(False)
 
 def RefreshWidgets():
     ui.RemoveButton.setEnabled(True)
@@ -202,6 +201,23 @@ def RefreshWidgets():
         target = str(ui.SearchTable.item(item.row(), 0).text())
         if not database.local_search(target):
             ui.RemoveButton.setEnabled(False)
+    ui.RepoRemoveButton.setEnabled(False)
+    ui.RepoUpButton.setEnabled(False)
+    ui.RepoDownButton.setEnabled(False)
+    for item in ui.ReposTable.selectedIndexes():
+        ui.RepoRemoveButton.setEnabled(True)
+        ui.RepoUpButton.setEnabled(True)
+        ui.RepoDownButton.setEnabled(True)
+    ui.MirrorRemoveButton.setEnabled(False)
+    ui.MirrorUpButton.setEnabled(False)
+    ui.MirrorDownButton.setEnabled(False)
+    for item in ui.MirrorsTable.selectedIndexes():
+        ui.MirrorRemoveButton.setEnabled(True)
+        ui.MirrorUpButton.setEnabled(True)
+        ui.MirrorDownButton.setEnabled(True)
+    ui.UpdateActionBox.setEnabled(True)
+    if str(ui.UpdateTimeBox.currentText()) == 'Never':
+        ui.UpdateActionBox.setEnabled(False)
 
 def RefreshAll():
     EnableWidgets()
@@ -337,7 +353,7 @@ def Remove():
     watcher.finished.connect(RefreshAll)
 
 def Details():
-    # FIXME: make it a dialog
+    # TODO: make it a dialog?
     targets = []
     for item in ui.SearchTable.selectedIndexes():
         target = str(ui.SearchTable.item(item.row(), 0).text())
@@ -360,43 +376,93 @@ def Details():
         targets.append(target)
 
 def AddRepo():
-    # FIXME: implement
-    MessageCritical('Not implement')
+    # TODO: replace with dialog that has enable checkbox?
+    url, ok = QtGui.QInputDialog.getText(MainWindow, 'URL', '')
+    if ok and url:
+        url = str(url)
+        if not url.startswith(('http://', 'https://', 'ftp://', 'ftps://')):
+            MessageCritical('The specified URL is not valid')
+            return
+        libspm.REPOSITORIES.append(url)
+        irow = ui.ReposTable.rowCount()
+        ui.ReposTable.setRowCount(irow+1)
+        repoenablebox = QtGui.QCheckBox(ui.ReposTable)
+        repoenablebox.setChecked(False)
+        ui.ReposTable.setCellWidget(irow, 0, repoenablebox)
+        ui.ReposTable.setItem(irow, 1, QtGui.QTableWidgetItem(url))
 
 def AddMirror():
-    # FIXME: implement
-    MessageCritical('Not implement')
+    # TODO: replace with dialog that has enable checkbox?
+    url, ok = QtGui.QInputDialog.getText(MainWindow, 'URL', '')
+    if ok and url:
+        url = str(url)
+        if not url.startswith(('http://', 'https://', 'ftp://', 'ftps://')):
+            MessageCritical('The specified URL is not valid')
+            return
+        libspm.MIRRORS.append(url)
+        irow = ui.MirrorsTable.rowCount()
+        ui.MirrorsTable.setRowCount(irow+1)
+        repoenablebox = QtGui.QCheckBox(ui.MirrorsTable)
+        repoenablebox.setChecked(False)
+        ui.MirrorsTable.setCellWidget(irow, 0, repoenablebox)
+        ui.MirrorsTable.setItem(irow, 1, QtGui.QTableWidgetItem(url))
 
 def RemoveRepo():
+    for item in ui.ReposTable.selectedIndexes():
+        ui.ReposTable.removeRow(item.row())
+
+def RemoveMirror():
+    for item in ui.MirrorsTable.selectedIndexes():
+        ui.MirrorsTable.removeRow(item.row())
+
+def UpRepo():
     # FIXME: implement
     MessageCritical('Not implement')
 
-def RemoveMirror():
+def UpMirror():
+    # FIXME: implement
+    MessageCritical('Not implement')
+
+def DownRepo():
+    # FIXME: implement
+    MessageCritical('Not implement')
+
+def DownMirror():
     # FIXME: implement
     MessageCritical('Not implement')
 
 def ChangeRepos():
     data = ''
+    atleastone = False
     for index in xrange(ui.ReposTable.rowCount()):
         enable = ui.ReposTable.cellWidget(index, 0).isChecked()
         url = str(ui.ReposTable.item(index, 1).text())
         if enable:
+            atleastone = True
             data += '%s\n' % url
         else:
             data += '# %s\n' % url
+    if not atleastone:
+        MessageCritical('At least one repository must be enabled')
+        return
     async = iface.asyncCall('ReposSet', data);
     watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
     watcher.finished.connect(iface.callFinishedSlot)
 
 def ChangeMirrors():
     data = ''
+    atleastone = False
     for index in xrange(ui.MirrorsTable.rowCount()):
         enable = ui.MirrorsTable.cellWidget(index, 0).isChecked()
         url = str(ui.MirrorsTable.item(index, 1).text())
         if enable:
+            atleastone = True
             data += '%s\n' % url
         else:
             data += '# %s\n' % url
+    if not atleastone:
+        MessageCritical('At least one mirror must be enabled')
+        return
     async = iface.asyncCall('MirrorsSet', data);
     watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
     watcher.finished.connect(iface.callFinishedSlot)
@@ -429,16 +495,6 @@ def ChangeSettings():
     except Exception as detail:
         MessageCritical(str(detail))
         # FIXME: RefreshSettings()
-    finally:
-        ui.UpdateActionBox.setEnabled(True)
-        if str(ui.UpdateTimeBox.currentText()) == 'Never':
-            ui.UpdateActionBox.setEnabled(False)
-
-# SyncRepos()
-RefreshRepos()
-RefreshMirrors()
-RefreshTargets()
-RefreshSettings()
 
 ui.SearchTable.horizontalHeader().setResizeMode(0, QtGui.QHeaderView.ResizeToContents)
 ui.SearchTable.horizontalHeader().setResizeMode(1, QtGui.QHeaderView.Stretch)
@@ -449,16 +505,35 @@ ui.InstallButton.clicked.connect(Install)
 ui.RemoveButton.clicked.connect(Remove)
 ui.DetailsButton.clicked.connect(Details)
 ui.SearchEdit.returnPressed.connect(SearchMetadata)
-ui.SearchTable.currentItemChanged.connect(RefreshWidgets)
+ui.SearchTable.itemSelectionChanged.connect(RefreshWidgets)
+
 ui.RepoAddButton.clicked.connect(AddRepo)
-ui.RepoRemoveButton.clicked.connect(RemoveRepo)
-ui.MirrorAddButton.clicked.connect(AddMirror)
-ui.MirrorRemoveButton.clicked.connect(RemoveMirror)
+ui.RepoUpButton.clicked.connect(UpRepo)
 ui.RepoSaveButton.clicked.connect(ChangeRepos)
+ui.RepoDownButton.clicked.connect(DownRepo)
+ui.RepoRemoveButton.clicked.connect(RemoveRepo)
+ui.ReposTable.itemSelectionChanged.connect(RefreshWidgets)
+
+ui.MirrorAddButton.clicked.connect(AddMirror)
+ui.MirrorUpButton.clicked.connect(UpMirror)
 ui.MirrorSaveButton.clicked.connect(ChangeMirrors)
+ui.MirrorDownButton.clicked.connect(DownMirror)
+ui.MirrorRemoveButton.clicked.connect(RemoveMirror)
+ui.MirrorsTable.itemSelectionChanged.connect(RefreshWidgets)
+
 ui.PrefSaveButton.clicked.connect(ChangeSettings)
+ui.UpdateTimeBox.currentIndexChanged.connect(RefreshWidgets)
+
 ui.ProgressBar.setRange(0, 1)
 ui.ProgressBar.hide()
 
 MainWindow.show()
+
+# SyncRepos()
+RefreshRepos()
+RefreshMirrors()
+RefreshSettings()
+RefreshWidgets()
+QtCore.QTimer.singleShot(1000, RefreshTargets)
+
 sys.exit(app.exec_())

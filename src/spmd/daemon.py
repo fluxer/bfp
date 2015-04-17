@@ -352,7 +352,7 @@ class SPMD(dbus.service.Object):
         global database
         # FIXME: make them configurable via spmd.conf
         ACTION = 'silent'
-        UPDATE = 'minute'
+        UPDATE = 'never'
         FROMSOURCE = False
         try:
             message.info('Enetering slave loop')
