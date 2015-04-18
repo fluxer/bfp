@@ -1,8 +1,8 @@
 #!/bin/python2
 
-import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2
+import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob
 
-app_version = "1.7.2 (5a7ac08)"
+app_version = "1.7.4 (e995852)"
 
 tmpdir = None
 keep = False
@@ -177,7 +177,8 @@ try:
             for line in misc.file_readlines(sfile):
                 if not line or line.startswith('#'):
                     continue
-                copy_item(line)
+                for g in glob.glob(line):
+                    copy_item(g)
 
     message.sub_info('Copying modules')
     if os.path.isdir('/etc/mkinitfs/modules'):
