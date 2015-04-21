@@ -1,3 +1,9 @@
+Tue Apr 21 16:23:27 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
+7ccd899a6ad13a881ca07052dc5f839a91383957 (tag: 1.7.5)
+    * minor original string correction
+    * support globing entries in mkinitfs files configs
+    * actually allow sinput to be None in libmisc.Misc.system_chroot()
+
 Wed Apr 15 23:36:40 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
 90430bc96ce96881adfb84e8ce0b85d6338b34d6 (tag: 1.7.4)
     * cleanup libmisc.Misc.url_normalize()
