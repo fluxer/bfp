@@ -727,13 +727,12 @@ class Misc(object):
 
         self.dir_create(sdir)
 
-        # WARNING!!! the -P option is not supported by the
-        # Busybox version of `tar`.
+        # WARNING!!! the -P option is not supported by Busybox's `tar` applet.
 
         # standard tarfile library locks the filesystem and upon interrupt the
         # filesystem stays locked which is bad. on top of that the tarfile
         # library can not replace files while they are being used thus external
-        # utilities are used for extracting archives.
+        # utilities are used for extracting Tar archives.
         smime = self.file_mime(sfile, True)
         if smime == 'application/x-xz' \
             or smime == 'application/x-lzma' \
@@ -920,7 +919,7 @@ class Misc(object):
         if self.python2:
             self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
             self.typecheck(shell, (types.BooleanType))
-            self.typecheck(sinput, (types.StringTypes))
+            self.typecheck(sinput, (types.NoneType, types.StringTypes))
 
         # prevent stupidity
         if self.ROOT_DIR == '/':
