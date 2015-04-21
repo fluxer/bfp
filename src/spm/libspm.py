@@ -1608,7 +1608,7 @@ class Binary(Source):
                 misc.gpg_verify(local_file)
 
         if not found:
-            message.sub_critical(_('Binary tarball not available available for'), self.target_name)
+            message.sub_critical(_('Binary tarball not available for'), self.target_name)
             sys.exit(2)
 
         message.sub_info(_('Checking dependencies'))
