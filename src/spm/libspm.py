@@ -1176,6 +1176,8 @@ class Source(object):
                     if not misc.file_read(sfull) == content[counter]:
                         message.sub_debug(_('Backing up'), sfull)
                         shutil.copy2(sfull, sfull + '.backup')
+                    else:
+                        message.sub_debug('Backup skipped', sfull)
                     counter += 1
 
         message.sub_info(_('Decompressing tarball'))
