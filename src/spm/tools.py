@@ -36,7 +36,7 @@ database = libpackage.Database()
 import libspm
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.7.4 (5c36d72)"
+app_version = "1.7.5 (330acea)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -526,8 +526,8 @@ class Merge(object):
     def __init__(self):
         self.targets = database.local_all(basename=True)
 
-    def merge(self, sfile):
-        message.sub_warning(_('Backup file detected'), sfile + '.backup')
+    def merge(self, origfile, backfile):
+        message.sub_warning(_('Backup file detected'), backfile)
         editor = os.environ.get('EDITOR')
         if not editor:
             editor = misc.whereis('vim')
@@ -544,21 +544,21 @@ class Merge(object):
         if action == '1':
             print('\n' + '*' * 80)
             for line in list(difflib.Differ().compare( \
-                misc.file_readlines(sfile + '.backup'), \
-                misc.file_readlines(sfile))):
+                misc.file_readlines(backfile), \
+                misc.file_readlines(origfile))):
                 print(line)
             print('*' * 80 + '\n')
-            self.merge(sfile)
+            self.merge(origfile, backfile)
         elif action == '2':
-            misc.system_command((editor, sfile))
-            self.merge(sfile)
+            misc.system_command((editor, origfile))
+            self.merge(origfile, backfile)
         elif action == '3':
-            misc.system_command((editor, sfile + '.backup'))
-            self.merge(sfile)
+            misc.system_command((editor, backfile))
+            self.merge(origfile, backfile)
         elif action == '4':
-            shutil.copy2(sfile + '.backup', sfile)
+            shutil.copy2(backfile, origfile)
         elif action == '5':
-            os.unlink(sfile + '.backup')
+            os.unlink(backfile)
 
     def main(self):
         for target in self.targets:
@@ -568,13 +568,16 @@ class Merge(object):
                 backups = []
             for sfile in database.local_metadata(target, 'footprint').splitlines():
                 if sfile.endswith('.conf'):
-                    backups.append(os.path.join(libspm.ROOT_DIR, sfile))
+                    backups.append(sfile)
 
             for sfile in backups:
-                original_file = os.path.join(libspm.ROOT_DIR, sfile)
-
-                if os.path.isfile(original_file + '.backup'):
-                    self.merge(original_file)
+                origfile = os.path.join(libspm.ROOT_DIR, sfile)
+                backfile = '%s.backup' % origfile
+                if os.path.isfile(origfile) and os.path.isfile(backfile):
+                    if misc.file_read(origfile) == misc.file_read(backfile):
+                        message.sub_debug('Original and backup are not different', origfile)
+                        continue
+                    self.merge(origfile, backfile)
 
 
 class Edit(object):
