@@ -36,7 +36,7 @@ database = libpackage.Database()
 import libspm
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.7.5 (330acea)"
+app_version = "1.7.5 (4e6a9ae)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -557,6 +557,7 @@ class Merge(object):
             self.merge(origfile, backfile)
         elif action == '4':
             shutil.copy2(backfile, origfile)
+            os.unlink(backfile)
         elif action == '5':
             os.unlink(backfile)
 
