@@ -6,7 +6,7 @@ _spm_tools()
     local main_options merge_options clean_options edit_options sane_options
     local lint_options check_options dist_options
 
-    actions='merge clean edit sane lint check dist which pack pkg serve upload'
+    actions='merge clean edit sane lint check dist which pack pkg serve disowned upload'
 
     main_options='-h --help --debug --version'
 
@@ -18,17 +18,17 @@ _spm_tools()
 
     sane_options='-h --help -e --enable -d --disable -n --null -m --maintainer
         -N --note -v --variables -t --triggers -u --users -g --groups
-        -s --signatures-a --all'
+        -s --signatures -a --all'
 
     lint_options='-h --help -m --man -u --udev -s --symlink -d --doc -M --module
-        -f --footprint -b --builddir -o --ownership -e --executable -p, --path
-        -n --shebang -a --all'
+        -f --footprint -b --builddir -o --ownership -e --executable -p --path
+        -n --shebang -k --backup -c --conflicts -D --debug -a --all'
 
     check_options='-h --help -f --fast -a --adjust -D --depends -R --reverse'
 
     dist_options='-h --help -s --sources -c --clean -d --directory'
 
-    which_options='-h --help -p --plain'
+    which_options='-h --help -c --cat -p --plain'
 
     pack_options='-h --help -d --directory'
 
