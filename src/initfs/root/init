@@ -86,7 +86,7 @@ case "$root" in
 esac
 
 case "$(cat /proc/sys/kernel/hotplug)" in
-    # could be /usr/bin, /bin, etc.
+    # could be /usr/bin, /sbin, etc.
     */mdev)
         # oh, boy! mdev does not support device UUID/LABEL thus /dev/disk/by-*
         # can not be used but Busybox's blkid applet does not support -U and
@@ -120,6 +120,9 @@ done
 
 # a hook could have mounted root
 if [ -e "/newroot/$init" ];then
+    msg "Moving pseudo-filesystems..."
+    cmd mount --move /dev /newroot/dev
+
     msg "Switching root..."
     cmd exec switch_root /newroot "$init" "$@"
 else

@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob
 
-app_version = "1.7.2 (5a7ac08)"
+app_version = "1.7.5 (1b9d4f0)"
 
 tmpdir = None
 keep = False
@@ -33,7 +33,8 @@ try:
     parser.add_argument('-i', '--image', type=str, default=image, \
         help='Change output image')
     parser.add_argument('-c', '--compression', type=str, default=compression, \
-        choices=('gzip', 'cat', 'bzip2'), help='Change image compression method')
+        choices=('gzip', 'cat', 'bzip2'), \
+	help='Change image compression method')
     parser.add_argument('--keep', action='store_true', \
         help='Keep temporary directory')
     parser.add_argument('--debug', action='store_true', \
@@ -59,10 +60,10 @@ try:
         sdir = os.path.dirname(src)
         if os.path.islink(sdir):
             copy_item(sdir)
-            misc.dir_create(ARGS.tmp + '/' + \
-                os.path.dirname(os.path.realpath(src)))
+            misc.dir_create('%s/%s' % (ARGS.tmp, \
+                os.path.dirname(os.path.realpath(src))))
         else:
-            misc.dir_create(ARGS.tmp + '/' + sdir)
+            misc.dir_create('%s/%s' % (ARGS.tmp, sdir))
         if os.path.islink(src):
             if src in lcopied:
                 message.sub_debug('Already linked', src)
@@ -204,9 +205,9 @@ try:
             if '/%s.ko' % module in base \
                 or '/%s.ko' % module.replace('_', '-') in base:
                 found = True
-                copy_item(modsdir + '/' + base.strip())
+                copy_item('%s/%s' % (modsdir, base.strip()))
                 for dep in depends:
-                    copy_item(modsdir + '/' + dep.strip())
+                    copy_item('%s/%s' % (modsdir, dep.strip()))
         if not found:
             for line in misc.file_readlines(modsdir + '/modules.builtin'):
                 if '/%s.ko' % module in line \
@@ -223,6 +224,15 @@ try:
 
     message.sub_info('Updating module dependencies')
     misc.system_command((misc.whereis('depmod'), ARGS.kernel, '-b', ARGS.tmp))
+
+    message.sub_info('Creating essential nodes')
+    mknod = misc.whereis('mknod')
+    dev_dir = '%s/dev' % ARGS.tmp
+    misc.dir_create(dev_dir)
+    misc.system_command((mknod, '-m', '640', '%s/console' % dev_dir, \
+        'c', '5', '1'))
+    misc.system_command((mknod, '-m', '664', '%s/null' % dev_dir, \
+        'c', '1', '0'))
 
     message.sub_info('Creating shared libraries cache')
     etc_dir = os.path.join(ARGS.tmp, 'etc')
