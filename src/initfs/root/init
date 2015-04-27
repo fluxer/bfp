@@ -20,6 +20,10 @@ msg() {
     echo -e " ${C_BLUE}*${C_CLEAR} ${@}"
 }
 
+warn() {
+    echo -e " ${C_YELLOW}*${C_CLEAR} ${@}"
+}
+
 error() {
     echo -e " ${C_RED}*${C_CLEAR} ${@}"
 }
