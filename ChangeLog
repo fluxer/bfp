@@ -1,3 +1,10 @@
+Mon Apr 27 18:29:35 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
+567a60dd4df68e9f5d64c4616bf8bfe87937040a (tag: 1.7.6)
+    * add warning message function to initramfs init script
+    * update spm-tools Bash completion
+    * remove backup file after replacing original on config merge
+    * improve spm-tools merge mode
+
 Tue Apr 21 16:23:27 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
 7ccd899a6ad13a881ca07052dc5f839a91383957 (tag: 1.7.5)
     * minor original string correction
