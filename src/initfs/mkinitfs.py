@@ -34,7 +34,7 @@ try:
         help='Change output image')
     parser.add_argument('-c', '--compression', type=str, default=compression, \
         choices=('gzip', 'cat', 'bzip2'), \
-	help='Change image compression method')
+        help='Change image compression method')
     parser.add_argument('--keep', action='store_true', \
         help='Keep temporary directory')
     parser.add_argument('--debug', action='store_true', \
@@ -117,6 +117,22 @@ try:
                 copy_item(sfile)
         else:
             message.warning('File or directory does not exist', src)
+
+    def create_image(src, img, method):
+        find = misc.whereis('find')
+        cpio = misc.whereis('cpio')
+        data = misc.system_output('%s . | %s -o -H newc' % \
+            (find, cpio), shell=True, cwd=src)
+        if method == 'gzip':
+            gzipf = gzip.GzipFile(image, 'wb')
+            gzipf.write(data)
+            gzipf.close()
+        elif method == 'bzip2':
+            bzipf = bz2.BZ2File(image, 'wb')
+            bzipf.write(data)
+            bzipf.close()
+        else:
+            misc.file_write(image, data)
 
     # FIXME: support both /lib and /usr/lib at the same time???
     modsdir = None
@@ -242,20 +258,12 @@ try:
     misc.system_command((misc.whereis('ldconfig'), '-r', ARGS.tmp))
 
     message.sub_info('Creating image')
-    find = misc.whereis('find')
-    cpio = misc.whereis('cpio')
-    data = misc.system_output('%s . | %s -o -H newc' % \
-        (find, cpio), shell=True, cwd=ARGS.tmp)
-    if ARGS.compression == 'gzip':
-        gzipf = gzip.GzipFile(ARGS.image, 'wb')
-        gzipf.write(data)
-        gzipf.close()
-    elif ARGS.compression == 'bzip2':
-        bzipf = bz2.BZ2File(ARGS.image, 'wb')
-        bzipf.write(data)
-        bzipf.close()
-    else:
-        misc.file_write(ARGS.image, data)
+    create_image(ARGS.tmp, ARGS.image, ARGS.compression)
+
+    message.sub_info('Creating recovery image')
+    copy_item(modsdir)
+    recovery = ARGS.image.replace(ARGS.kernel, '%s-recovery' % ARGS.kernel)
+    create_image(ARGS.tmp, recovery, ARGS.compression)
 
 except subprocess.CalledProcessError as detail:
     message.critical('SUBPROCESS', detail)
