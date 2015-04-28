@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob
 
-app_version = "1.7.5 (1b9d4f0)"
+app_version = "1.7.6 (29b7332)"
 
 tmpdir = None
 keep = False
@@ -118,7 +118,7 @@ try:
         else:
             message.warning('File or directory does not exist', src)
 
-    def create_image(src, img, method):
+    def create_image(src, image, method):
         find = misc.whereis('find')
         cpio = misc.whereis('cpio')
         data = misc.system_output('%s . | %s -o -H newc' % \
