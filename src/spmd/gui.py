@@ -272,7 +272,7 @@ def SearchMetadata():
 
 def Sync():
     DisableWidgets()
-    async = iface.asyncCall('Sync');
+    async = iface.asyncCall('Sync')
     watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
     watcher.finished.connect(iface.callFinishedSlot)
     watcher.finished.connect(RefreshAll)
@@ -291,7 +291,7 @@ def Update():
     if not answer == QtGui.QMessageBox.Yes:
         return
     DisableWidgets()
-    async = iface.asyncCall('Update');
+    async = iface.asyncCall('Update')
     watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
     watcher.finished.connect(iface.callFinishedSlot)
     watcher.finished.connect(RefreshAll)
@@ -310,7 +310,7 @@ def Build():
     if not answer == QtGui.QMessageBox.Yes:
         return
     DisableWidgets()
-    async = iface.asyncCall('Build', targets);
+    async = iface.asyncCall('Build', targets)
     watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
     watcher.finished.connect(iface.callFinishedSlot)
     watcher.finished.connect(RefreshAll)
@@ -329,7 +329,7 @@ def Install():
     if not answer == QtGui.QMessageBox.Yes:
         return
     DisableWidgets()
-    async = iface.asyncCall('Install', targets);
+    async = iface.asyncCall('Install', targets)
     watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
     watcher.finished.connect(iface.callFinishedSlot)
     watcher.finished.connect(RefreshAll)
@@ -347,7 +347,7 @@ def Remove():
         '\n\nAre you sure you want to continue?')
     if not answer == QtGui.QMessageBox.Yes:
         return
-    async = iface.asyncCallWithArgumentList('Remove', (targets, True));
+    async = iface.asyncCallWithArgumentList('Remove', (targets, True))
     watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
     watcher.finished.connect(iface.callFinishedSlot)
     watcher.finished.connect(RefreshAll)
@@ -445,7 +445,7 @@ def ChangeRepos():
     if not atleastone:
         MessageCritical('At least one repository must be enabled')
         return
-    async = iface.asyncCall('ReposSet', data);
+    async = iface.asyncCall('ReposSet', data)
     watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
     watcher.finished.connect(iface.callFinishedSlot)
 
@@ -463,29 +463,29 @@ def ChangeMirrors():
     if not atleastone:
         MessageCritical('At least one mirror must be enabled')
         return
-    async = iface.asyncCall('MirrorsSet', data);
+    async = iface.asyncCall('MirrorsSet', data)
     watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
     watcher.finished.connect(iface.callFinishedSlot)
 
 def ChangeSettings():
     try:
         DisableWidgets()
-        async = iface.asyncCallWithArgumentList('ConfSet', ('prepare', 'MIRROR', str(ui.UseMirrorsBox.isChecked())));
+        async = iface.asyncCallWithArgumentList('ConfSet', ('prepare', 'MIRROR', str(ui.UseMirrorsBox.isChecked())))
         watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
         watcher.finished.connect(iface.callFinishedSlot)
-        async = iface.asyncCallWithArgumentList('ConfSet', ('prepare', 'TIMEOUT', str(ui.ConnectionTimeoutBox.value())));
+        async = iface.asyncCallWithArgumentList('ConfSet', ('prepare', 'TIMEOUT', str(ui.ConnectionTimeoutBox.value())))
         watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
         watcher.finished.connect(iface.callFinishedSlot)
-        async = iface.asyncCallWithArgumentList('ConfSet', ('merge', 'CONFLICTS', str(ui.ConflictsBox.isChecked())));
+        async = iface.asyncCallWithArgumentList('ConfSet', ('merge', 'CONFLICTS', str(ui.ConflictsBox.isChecked())))
         watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
         watcher.finished.connect(iface.callFinishedSlot)
-        async = iface.asyncCallWithArgumentList('ConfSet', ('merge', 'BACKUP', str(ui.BackupBox.isChecked())));
+        async = iface.asyncCallWithArgumentList('ConfSet', ('merge', 'BACKUP', str(ui.BackupBox.isChecked())))
         watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
         watcher.finished.connect(iface.callFinishedSlot)
-        async = iface.asyncCallWithArgumentList('ConfSet', ('merge', 'SCRIPTS', str(ui.ScriptsBox.isChecked())));
+        async = iface.asyncCallWithArgumentList('ConfSet', ('merge', 'SCRIPTS', str(ui.ScriptsBox.isChecked())))
         watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
         watcher.finished.connect(iface.callFinishedSlot)
-        async = iface.asyncCallWithArgumentList('ConfSet', ('merge', 'TRIGGERS', str(ui.TriggersBox.isChecked())));
+        async = iface.asyncCallWithArgumentList('ConfSet', ('merge', 'TRIGGERS', str(ui.TriggersBox.isChecked())))
         watcher = QtDBus.QDBusPendingCallWatcher(async, iface)
         watcher.finished.connect(iface.callFinishedSlot)
         RefreshAll()
