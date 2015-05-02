@@ -256,6 +256,20 @@ class Lint(object):
         self.conflicts = conflicts
         self.debug = debug
 
+    def _check_ownership(self, spath):
+        stat = os.stat(spath)
+        unkown = False
+        try:
+            pwd.getpwuid(stat.st_uid)
+        except KeyError:
+            unkown = True
+        try:
+            grp.getgrgid(stat.st_gid)
+        except KeyError:
+            unkown = True
+        if unkown:
+            message.sub_warning(_('Unknown owner of'), spath)
+
     def main(self):
         ''' Looks for target match and then execute action for every target '''
         for target in database.local_all(basename=True):
@@ -328,18 +342,8 @@ class Lint(object):
                             message.sub_debug(_('File does not exist'), sfile)
                             continue
 
-                        stat = os.stat(sfile)
-                        unkown = False
-                        try:
-                            pwd.getpwuid(stat.st_uid)
-                        except KeyError:
-                            unkown = True
-                        try:
-                            grp.getgrgid(stat.st_gid)
-                        except KeyError:
-                            unkown = True
-                        if unkown:
-                            message.sub_warning(_('Unknown owner of'), sfile)
+                        self._check_ownership(sfile)
+                        self._check_ownership(os.path.dirname(sfile))
 
                 if self.executable:
                     # FIXME: false positives
