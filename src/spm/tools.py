@@ -299,7 +299,8 @@ class Lint(object):
                 if self.module:
                     for sfile in target_footprint.splitlines():
                         # FIXME: compressed modules
-                        if sfile.endswith('.ko') and not os.path.dirname(sfile).endswith('/misc'):
+                        if sfile.endswith(('.ko', '.ko.gz', '.ko.bz2', 'ko.xz')) \
+                            and not os.path.dirname(sfile).endswith('/misc'):
                             message.sub_warning(_('Extra module(s) in non-standard directory'))
 
                 if self.footprint:
