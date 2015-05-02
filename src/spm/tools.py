@@ -276,6 +276,12 @@ class Lint(object):
             if target in self.targets:
                 message.sub_info(_('Checking'), target)
                 target_footprint = database.local_metadata(target, 'footprint')
+                target_footprint_lines = target_footprint.splitlines()
+
+                for sfile in target_footprint_lines:
+                    if not os.path.exists(sfile):
+                        message.sub_warning(_('File does not exist'), sfile)
+                        target_footprint_lines.remove(sfile)
 
                 if self.man:
                     if not misc.string_search('/share/man/', target_footprint):
@@ -289,10 +295,7 @@ class Lint(object):
                         message.sub_warning(_('Cross-filesystem udev rule(s)'))
 
                 if self.symlink:
-                    for sfile in target_footprint.splitlines():
-                        if not os.path.exists(sfile):
-                            message.sub_debug(_('File does not exist'), sfile)
-                            continue
+                    for sfile in target_footprint_lines:
                         if os.path.islink(sfile):
                             if not sfile.startswith('/usr/') \
                                 and os.path.realpath(sfile).startswith('/usr/'):
@@ -311,46 +314,34 @@ class Lint(object):
                         message.sub_warning(_('Documentation provided'))
 
                 if self.module:
-                    for sfile in target_footprint.splitlines():
-                        # FIXME: compressed modules
-                        if sfile.endswith('.ko') and not os.path.dirname(sfile).endswith('/misc'):
-                            message.sub_warning(_('Extra module(s) in non-standard directory'))
+                    for sfile in target_footprint_lines:
+                        if sfile.endswith(('.ko', '.ko.gz', '.ko.bz2', 'ko.xz')) \
+                            and not os.path.dirname(sfile).endswith('/misc'):
+                            message.sub_warning(_('Extra module(s) in non-standard directory'), sfile)
 
                 if self.footprint:
                     if not target_footprint:
                         message.sub_warning(_('Empty footprint'))
-                    for sfile in target_footprint.splitlines():
-                        if not os.path.exists(sfile):
-                            message.sub_warning(_('File does not exist'), sfile)
 
                 if self.builddir:
-                    for sfile in target_footprint.splitlines():
+                    for sfile in target_footprint_lines:
                         if os.path.islink(sfile):
-                            continue
-                        elif not os.path.exists(sfile):
-                            message.sub_debug(_('File does not exist'), sfile)
                             continue
 
                         if misc.file_search(libspm.BUILD_DIR, sfile):
                             message.sub_warning(_('Build directory trace(s)'), sfile)
 
                 if self.ownership:
-                    for sfile in target_footprint.splitlines():
+                    for sfile in target_footprint_lines:
                         if os.path.islink(sfile):
-                            continue
-                        elif not os.path.exists(sfile):
-                            message.sub_debug(_('File does not exist'), sfile)
                             continue
 
                         self._check_ownership(sfile)
                         self._check_ownership(os.path.dirname(sfile))
 
                 if self.executable:
-                    # FIXME: false positives
-                    for sfile in target_footprint.splitlines():
-                        if not os.path.exists(sfile):
-                            message.sub_debug(_('File does not exist'), sfile)
-                            continue
+                    # FIXME: false positives if run as non-root
+                    for sfile in target_footprint_lines:
                         if os.path.islink(sfile):
                             continue
 
@@ -359,11 +350,7 @@ class Lint(object):
                             message.sub_warning(_('File in PATH is not executable'), sfile)
 
                 if self.path:
-                    for sfile in target_footprint.splitlines():
-                        if not os.path.exists(sfile):
-                            message.sub_debug(_('File does not exist'), sfile)
-                            continue
-
+                    for sfile in target_footprint_lines:
                         if sfile.startswith(('/bin', '/sbin', '/usr/bin', '/usr/sbin')):
                             for spath in ('/bin', '/sbin', '/usr/bin', '/usr/sbin'):
                                 xfile = spath + '/' + os.path.basename(sfile)
@@ -375,12 +362,10 @@ class Lint(object):
                                     message.sub_warning(_('File in PATH overlaps with'), match)
 
                 if self.shebang:
-                    for sfile in target_footprint.splitlines():
+                    for sfile in target_footprint_lines:
                         if os.path.islink(sfile):
                             continue
-                        elif not os.path.exists(sfile):
-                            message.sub_debug(_('File does not exist'), sfile)
-                            continue
+
                         smime = misc.file_mime(sfile)
                         if smime == 'text/plain' or smime == 'text/x-shellscript' \
                             or smime == 'text/x-python' or smime == 'text/x-perl' \
@@ -399,7 +384,7 @@ class Lint(object):
                                     message.sub_warning(_('Invalid shebang'), sfile)
 
                 if self.backup:
-                    for sfile in target_footprint.splitlines():
+                    for sfile in target_footprint_lines:
                         backups = database.remote_metadata(target, 'backup')
                         if not os.path.exists(sfile) and sfile.lstrip('/') in backups:
                             message.sub_warning(_('Possibly unnecessary backup of file'), sfile)
@@ -411,7 +396,7 @@ class Lint(object):
                         if local == target:
                             continue
                         footprint = database.local_metadata(local, 'footprint').splitlines()
-                        for sfile in target_footprint.splitlines():
+                        for sfile in target_footprint_lines:
                             if sfile in footprint:
                                 message.sub_warning(_('Possibly conflicting file with %s') % local, sfile)
 
@@ -419,10 +404,7 @@ class Lint(object):
                     found_debug = 'lib/debug/' in target_footprint
                     found_exe = False
                     if not found_debug:
-                        for sfile in target_footprint.splitlines():
-                            if not os.path.exists(sfile):
-                                message.sub_debug(_('File does not exist'), sfile)
-                                continue
+                        for sfile in target_footprint_lines:
                             smime = misc.file_mime(sfile)
                             if smime == 'application/x-executable' \
                                 or smime == 'application/x-sharedlib' \
