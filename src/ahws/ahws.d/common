@@ -1,0 +1,7 @@
+#!/bin/sh
+
+install_nvidia() {
+    if [ ! -d "/var/local/spm/nvidia" ];then
+        spm binary -mu nvidia
+    fi
+}

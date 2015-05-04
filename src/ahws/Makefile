@@ -22,16 +22,16 @@ cython: clean bump
 	$(STRIP) *.exe *.so
 
 install:
-	$(INSTALL) -dm755 $(DESTDIR)$(SBINDIR)
+	$(INSTALL) -dm755 $(DESTDIR)$(SBINDIR) $(DESTDIR)/etc/
 	$(INSTALL) -m755 ahws.exe $(DESTDIR)$(SBINDIR)/ahws
 	$(INSTALL) -m644 *.so $(DESTDIR)$(SITEDIR)/
-	$(CP) -r ahws.d/ $(DESTDIR)$(ETCDIR)/
+	$(CP) -r ahws.d/ $(DESTDIR)/etc/
 
 uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libudev.so
 	$(RM) $(DESTDIR)$(SITEDIR)/_libudev.so
 	$(RM) $(DESTDIR)$(SBINDIR)/ahws
-	$(RM) $(DESTDIR)$(ETCDIR)/ahws.d
+	$(RM) $(DESTDIR)/etc/ahws.d
 
 clean:
 	$(RM) -r *.build/ *.so *.exe __pycache__
