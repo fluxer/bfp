@@ -22,6 +22,7 @@ The following software is required:
 [GnuPG](https://www.gnupg.org/),
 [Python](https://www.python.org/),
 [GNU C Library](http://www.gnu.org/software/libc/) (or [uClibc](http://www.uclibc.org/)/[musl libc](http://www.musl-libc.org/))
+[systemd](http://www.freedesktop.org/wiki/Software/systemd/) (or [eudev](https://github.com/gentoo/eudev))
 
 ### Build time
 
