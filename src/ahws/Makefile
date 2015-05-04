@@ -25,11 +25,13 @@ install:
 	$(INSTALL) -dm755 $(DESTDIR)$(SBINDIR)
 	$(INSTALL) -m755 ahws.exe $(DESTDIR)$(SBINDIR)/ahws
 	$(INSTALL) -m644 *.so $(DESTDIR)$(SITEDIR)/
+	$(CP) -r ahws.d/ $(DESTDIR)$(ETCDIR)/
 
 uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libudev.so
 	$(RM) $(DESTDIR)$(SITEDIR)/_libudev.so
 	$(RM) $(DESTDIR)$(SBINDIR)/ahws
+	$(RM) $(DESTDIR)$(ETCDIR)/ahws.d
 
 clean:
 	$(RM) -r *.build/ *.so *.exe __pycache__
