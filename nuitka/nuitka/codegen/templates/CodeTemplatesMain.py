@@ -64,8 +64,15 @@ extern PyObject *const_str_plain_ignore;
 #ifdef _NUITKA_WINMAIN_ENTRY_POINT
 int __stdcall WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, char* lpCmdLine, int nCmdShow )
 {
+#if defined(__MINGW32__) && !defined(_W64)
+    /* MINGW32 */
+    int argc = _argc;
+    char** argv = _argv;
+#else
+    /* MSVC, MINGW64 */
     int argc = __argc;
     char** argv = __argv;
+#endif
 #else
 int main( int argc, char *argv[] )
 {
@@ -341,11 +348,10 @@ static struct Nuitka_MetaPathBasedLoaderEntry meta_path_loader_entries[] =
 
 MOD_INIT_DECL( %(module_identifier)s )
 {
-
 #if defined(_NUITKA_EXE) || PYTHON_VERSION >= 300
     static bool _init_done = false;
 
-    // Packages can be imported recursively in deep executables.
+    // Modules might be imported repeatedly, which is to be ignored.
     if ( _init_done )
     {
         return MOD_RETURN_VALUE( module_%(module_identifier)s );
