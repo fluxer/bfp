@@ -18,11 +18,30 @@
 """ Python version specifics.
 
 This abstracts the Python version decisions. This makes decisions based on
-the numbers, and attempts to give them meaningful names.
+the numbers, and attempts to give them meaningful names. Where possible it
+should attempt to make run time detections.
 
 """
 
+import re
 import sys
+
+
+def getSupportedPythonVersions():
+    return ("2.6", "2.7", "3.2", "3.3", "3.4")
+
+
+def getSupportedPythonVersionStr():
+    supported_python_versions = getSupportedPythonVersions()
+
+    supported_python_versions_str = repr(supported_python_versions)[1:-1]
+    supported_python_versions_str = re.sub(
+        r"(.*),(.*)$",
+        r"\1, or\2",
+        supported_python_versions_str
+    )
+
+    return supported_python_versions_str
 
 
 def _getPythonVersion():
@@ -31,6 +50,9 @@ def _getPythonVersion():
     return big * 100 + major * 10 + minor
 
 python_version = _getPythonVersion()
+
+python_version_full_str = '.'.join(str(s) for s in sys.version_info[0:3])
+python_version_str = '.'.join(str(s) for s in sys.version_info[0:2])
 
 def isAtLeastSubVersion(version):
     if version // 10 != python_version // 10:
@@ -62,7 +84,7 @@ def getErrorMessageExecWithNestedFunction():
 
     assert python_version < 300
 
-    # Need to use exec to detect the syntax error, pylint: disable=W0122
+    # Need to use "exec" to detect the syntax error, pylint: disable=W0122
 
     try:
         exec("""

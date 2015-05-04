@@ -63,6 +63,10 @@ def abspath(path):
     return os.path.abspath(path)
 
 
+def isAbsolutePath(path):
+    return os.path.isabs(path)
+
+
 def joinpath(*parts):
     return os.path.join(*parts)
 
@@ -134,6 +138,12 @@ def listDir(path):
     )
 
 
+def getFileList(path):
+    for root, _dirnames, filenames in os.walk(path):
+        for filename in filenames:
+            yield joinpath(root, filename)
+
+
 def deleteFile(path, must_exist):
     if must_exist or isFile(path):
         os.unlink(path)
@@ -170,7 +180,7 @@ def callExec(args):
 
     # On Windows os.execl does not work properly
     if getOS() != "Windows":
-        # The star arguments is the API of execl, pylint: disable=W0142
+        # The star arguments is the API of execl
         os.execl(*args)
     else:
         args = list(args)

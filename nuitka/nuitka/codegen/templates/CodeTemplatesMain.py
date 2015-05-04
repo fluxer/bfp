@@ -64,17 +64,31 @@ extern PyObject *const_str_plain_ignore;
 #ifdef _NUITKA_WINMAIN_ENTRY_POINT
 int __stdcall WinMain( HINSTANCE hInstance, HINSTANCE hPrevInstance, char* lpCmdLine, int nCmdShow )
 {
+#if defined(__MINGW32__) && !defined(_W64)
+    /* MINGW32 */
+    int argc = _argc;
+    char** argv = _argv;
+#else
+    /* MSVC, MINGW64 */
     int argc = __argc;
     char** argv = __argv;
+#endif
 #else
 int main( int argc, char *argv[] )
 {
 #endif
+#ifdef _NUITKA_TRACE
+    puts("main(): Entered.");
+#endif
+
 #ifdef _NUITKA_STANDALONE
+#ifdef _NUITKA_TRACE
+    puts("main(): Prepare standalone environment.");
+#endif
     prepareStandaloneEnvironment();
 #endif
 
-    // Initialize Python environment.
+    // Initialize CPython library environment.
     Py_DebugFlag = %(python_sysflag_debug)d;
 #if %(python_sysflag_py3k_warning)d
     Py_Py3kWarningFlag = %(python_sysflag_py3k_warning)d;
@@ -111,26 +125,48 @@ int main( int argc, char *argv[] )
 
     // Initialize the embedded CPython interpreter.
     setCommandLineParameters( argc, argv, true );
+
+#ifdef _NUITKA_TRACE
+    puts("main(): Calling Py_Initialize.");
+#endif
     Py_Initialize();
+#ifdef _NUITKA_TRACE
+    puts("main(): Returned from Py_Initialize.");
+#endif
 
     // Lie about it, believe it or not, there are "site" files, that check
     // against later imports, see below.
     Py_NoSiteFlag = %(python_sysflag_no_site)d;
 
     // Set the command line parameters for run time usage.
+#ifdef _NUITKA_TRACE
+    puts("main(): Calling setCommandLineParameters.");
+#endif
     setCommandLineParameters( argc, argv, false );
 
 #ifdef _NUITKA_STANDALONE
+#ifdef _NUITKA_TRACE
+    puts("main(): Restore standalone environment.");
+#endif
     restoreStandaloneEnvironment();
 #endif
 
     // Initialize the constant values used.
+#ifdef _NUITKA_TRACE
+    puts("main(): Calling _initBuiltinModule().");
+#endif
     _initBuiltinModule();
+#ifdef _NUITKA_TRACE
+    puts("main(): Calling createGlobalConstants().");
+#endif
     createGlobalConstants();
+#ifdef _NUITKA_TRACE
+    puts("main(): Calling _initBuiltinOriginalValues().");
+#endif
     _initBuiltinOriginalValues();
 
-    // Revert the wrong sys.flags value, it's used by "site" on at least Debian
-    // for Python3.3, more uses may exist.
+    // Revert the wrong "sys.flags" value, it's used by "site" on at least
+    // Debian for Python 3.3, more uses may exist.
 #if %(python_sysflag_no_site)d == 0
 #if PYTHON_VERSION >= 330
     PyStructSequence_SetItem( PySys_GetObject( "flags" ), 6, const_int_0 );
@@ -225,10 +261,8 @@ int main( int argc, char *argv[] )
         Py_Exit( 0 );
     }
 
-    // Dead code, just for the compiler to be happy. The above branches both
-    // do Py_Exit() which is not supposed to return.
-    assert(false);
-    return 0;
+    // The above branches both do Py_Exit() which is not supposed to return.
+    NUITKA_CANNOT_GET_HERE( main );
 }
 """
 
@@ -314,11 +348,10 @@ static struct Nuitka_MetaPathBasedLoaderEntry meta_path_loader_entries[] =
 
 MOD_INIT_DECL( %(module_identifier)s )
 {
-
 #if defined(_NUITKA_EXE) || PYTHON_VERSION >= 300
     static bool _init_done = false;
 
-    // Packages can be imported recursively in deep executables.
+    // Modules might be imported repeatedly, which is to be ignored.
     if ( _init_done )
     {
         return MOD_RETURN_VALUE( module_%(module_identifier)s );

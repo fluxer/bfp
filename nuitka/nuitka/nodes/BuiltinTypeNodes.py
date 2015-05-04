@@ -23,7 +23,7 @@ that should allow some important optimizations.
 
 from nuitka.nodes.ConstantRefNodes import ExpressionConstantRef
 from nuitka.optimizations import BuiltinOptimization
-from nuitka.Utils import python_version
+from nuitka.utils.Utils import python_version
 
 from .NodeBases import (
     ChildrenHavingMixin,
@@ -201,6 +201,13 @@ class ExpressionBuiltinUnicodeBase(ChildrenHavingMixin, NodeBase,
 
         while args and args[-1] is None:
             del args[-1]
+
+        for arg in args:
+            # The value of that node escapes and could change its contents.
+            constraint_collection.removeKnowledge(arg)
+
+        # Any code could be run, note that.
+        constraint_collection.onControlFlowEscape(self)
 
         return self.computeBuiltinSpec(
             given_values = tuple(args)

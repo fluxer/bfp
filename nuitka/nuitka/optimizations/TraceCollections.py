@@ -26,17 +26,16 @@ This is about collecting these constraints and to manage them.
 # Python3 compatibility.
 from logging import debug
 
-from nuitka import Options, Tracing, Utils
+from nuitka import Tracing, VariableRegistry
 from nuitka.__past__ import iterItems
-from nuitka.nodes.AssignNodes import StatementDelVariable
-from nuitka.VariableRegistry import isSharedLogically
+from nuitka.utils import Utils
 
 from .VariableTraces import (
-    VariableAssignTrace,
-    VariableInitTrace,
-    VariableMergeTrace,
-    VariableUninitTrace,
-    VariableUnknownTrace
+    VariableTraceAssign,
+    VariableTraceInit,
+    VariableTraceMerge,
+    VariableTraceUninit,
+    VariableTraceUnknown
 )
 
 signalChange = None
@@ -70,42 +69,6 @@ class VariableUsageTrackingMixin:
             self._initVariableUninit(variable)
         else:
             assert False, variable
-
-
-    def _makeVariableTraceOptimization(self, owner, variable_trace):
-        variable = variable_trace.getVariable()
-
-        if variable.isTempVariable():
-            if variable.getOwner() is owner:
-
-                if variable_trace.isUninitTrace() and \
-                   variable_trace.getVersion() == 0:
-                    if self.getVariableCurrentTrace(variable) is variable_trace:
-                        # TODO: Removing them now breaks merging, could be
-                        # done not at all before code generation.
-                        # owner.removeTempVariable( variable )
-                        pass
-
-                # TODO: Something wrong here, disabled it for now.
-                if False and \
-                    variable_trace.isAssignTrace() and \
-                   not variable_trace.getAssignNode().getAssignSource().\
-                     mayHaveSideEffects() and \
-                   not variable_trace.getPotentialUsages():
-                    variable_trace.getAssignNode().replaceWith(None)
-
-
-    def makeVariableTraceOptimizations(self, owner):
-        # Reliable trace based optimization goes here:
-        for variable_trace in self.variable_traces.values():
-            try:
-                self._makeVariableTraceOptimization(
-                    owner          = owner,
-                    variable_trace = variable_trace
-                )
-            except:
-                print("Problem with", variable_trace, "in", owner)
-                raise
 
 
 class CollectionTracingMixin:
@@ -144,7 +107,7 @@ class CollectionTracingMixin:
             self.addVariableTrace(
                 variable = variable,
                 version  = version,
-                trace    = VariableUnknownTrace(
+                trace    = VariableTraceUnknown(
                     variable = variable,
                     version  = version,
                     previous = current
@@ -187,7 +150,7 @@ class CollectionStartpointMixin:
         return result
 
     def getVariableTracesAll(self):
-        return self.variable_traces.values()
+        return self.variable_traces
 
     def addVariableTrace(self, variable, version, trace):
         key = variable, version
@@ -197,7 +160,7 @@ class CollectionStartpointMixin:
 
     def addVariableMergeTrace(self, variable, trace_yes, trace_no):
         version = variable.allocateTargetNumber()
-        trace_merge = VariableMergeTrace(
+        trace_merge = VariableTraceMerge(
             variable  = variable,
             version   = version,
             trace_yes = trace_yes,
@@ -205,10 +168,6 @@ class CollectionStartpointMixin:
         )
 
         self.addVariableTrace(variable, version, trace_merge)
-
-        # Merging is using, might imply releasing.
-        trace_yes.addUsage(trace_merge)
-        trace_no.addUsage(trace_merge)
 
         return version
 
@@ -223,7 +182,7 @@ class CollectionStartpointMixin:
         self.addVariableTrace(
             variable = variable,
             version  = 0,
-            trace    = VariableUnknownTrace(
+            trace    = VariableTraceUnknown(
                 variable = variable,
                 version  = 0,
                 previous = None
@@ -236,7 +195,7 @@ class CollectionStartpointMixin:
         self.addVariableTrace(
             variable = variable,
             version  = 0,
-            trace    = VariableInitTrace(
+            trace    = VariableTraceInit(
                 variable = variable,
                 version  = 0,
             )
@@ -248,7 +207,7 @@ class CollectionStartpointMixin:
         self.addVariableTrace(
             variable = variable,
             version  = 0,
-            trace    = VariableUninitTrace(
+            trace    = VariableTraceUninit(
                 variable = variable,
                 version  = 0,
                 previous = None
@@ -262,6 +221,9 @@ class CollectionStartpointMixin:
 
     def hasUnclearLocals(self):
         return self.unclear_locals
+
+    def updateFromCollection(self, old_collection):
+        VariableRegistry.updateFromCollection(old_collection, self)
 
 
 class ConstraintCollectionBase(CollectionTracingMixin):
@@ -342,7 +304,7 @@ class ConstraintCollectionBase(CollectionTracingMixin):
         version = variable_ref.getVariableVersion()
         variable = variable_ref.getVariable()
 
-        variable_trace = VariableAssignTrace(
+        variable_trace = VariableTraceAssign(
             assign_node = assign_node,
             variable    = variable,
             version     = version,
@@ -373,7 +335,7 @@ class ConstraintCollectionBase(CollectionTracingMixin):
 
         old_trace = self.getVariableCurrentTrace(variable)
 
-        variable_trace = VariableUninitTrace(
+        variable_trace = VariableTraceUninit(
             variable = variable,
             version  = version,
             previous = old_trace
@@ -415,7 +377,7 @@ class ConstraintCollectionBase(CollectionTracingMixin):
         assert expression.parent, expression
 
         # Now compute this expression, allowing it to replace itself with
-        # something else as part of a local peephole optimization.
+        # something else as part of a local peep hole optimization.
         r = expression.computeExpressionRaw(
             constraint_collection = self
         )
@@ -517,13 +479,16 @@ class ConstraintCollectionBase(CollectionTracingMixin):
 
                     self.markCurrentVariableTrace(variable, version)
 
+    def replaceBranch(self, collection_replace):
+        self.variable_actives.update(collection_replace.variable_actives)
+        collection_replace.variable_actives = None
+
     def degradePartiallyFromCode(self, statement_sequence):
         from nuitka.tree.Extractions import getVariablesWritten
 
         variable_writes = getVariablesWritten(
             statement_sequence
         )
-
 
         # Mark all variables as unknown that are written in the statement
         # sequence, so it destroys the assumptions for final block. TODO: To
@@ -533,6 +498,12 @@ class ConstraintCollectionBase(CollectionTracingMixin):
             self.markActiveVariableAsUnknown(
                 variable = variable
             )
+
+    def onLoopBreak(self, collection):
+        self.parent.onLoopBreak(collection)
+
+    def onLoopContinue(self, state):
+        self.parent.onLoopContinue(state)
 
 
 class ConstraintCollectionBranch(ConstraintCollectionBase):
@@ -563,13 +534,32 @@ class ConstraintCollectionBranch(ConstraintCollectionBase):
         self.variable_actives[variable] = variable_trace.getVersion()
 
 
+class ConstraintCollectionLoop(ConstraintCollectionBranch):
+    def __init__(self, parent):
+        ConstraintCollectionBranch.__init__(
+            self,
+            parent = parent
+        )
+
+        self.loop_break_collections = []
+
+    def getLoopBreakCollections(self):
+        return self.loop_break_collections
+
+    def onLoopBreak(self, collection):
+        self.loop_break_collections.append(
+            ConstraintCollectionBranch(collection)
+        )
+
+    def onLoopContinue(self, collection):
+        # Not useful yet.
+        pass
+
+
 class ConstraintCollectionFunction(CollectionStartpointMixin,
                                    ConstraintCollectionBase,
                                    VariableUsageTrackingMixin):
     def __init__(self, parent, function_body):
-        # Too complex stuff here, but could be improved, just not now.
-        # pylint: disable=R0912
-
         assert function_body.isExpressionFunctionBody(), function_body
 
         CollectionStartpointMixin.__init__(self)
@@ -579,82 +569,11 @@ class ConstraintCollectionFunction(CollectionStartpointMixin,
             parent = parent
         )
 
+        # TODO: Useless cyclic dependency.
         self.function_body = function_body
-        function_body.constraint_collection = self
-
-        statements_sequence = function_body.getBody()
-
-        if statements_sequence is not None and \
-           not statements_sequence.getStatements():
-            function_body.setStatements(None)
-            statements_sequence = None
-
-        if statements_sequence is not None:
-            result = statements_sequence.computeStatementsSequence(
-                constraint_collection = self
-            )
-
-            if result is not statements_sequence:
-                function_body.setBody(result)
-
-        self.makeVariableTraceOptimizations(function_body)
-
-        if not Options.isExperimental() or self.removes_knowledge:
-            return
-
-        # self.dumpTrace()
-
-        # Cannot mess with locals yet.
-        if self.unclear_locals:
-            return
-
-        # TODO: Merge this into makeVariableTraceOptimizations instead, could
-        # check the above for these too.
-        # Trace based optimization goes here:
-        for variable_trace in self.variable_traces.values():
-            variable = variable_trace.getVariable()
-
-            # print variable
-
-            if variable.isLocalVariable() and not isSharedLogically(variable):
-                if variable_trace.isAssignTrace():
-                    assign_node = variable_trace.getAssignNode()
-
-                    if not assign_node.getAssignSource().mayHaveSideEffects():
-
-                        if not variable_trace.getPotentialUsages() and \
-                           not variable_trace.isEscaped():
-                            assign_node.parent.replaceWith(
-                                StatementDelVariable(
-                                    variable_ref = assign_node,
-                                    tolerant     = True,
-                                    source_ref   = assign_node.getSourceReference()
-                                )
-                            )
-
-                            for release in variable_trace.releases:
-                                if release.isStatementDelVariable():
-                                    release.replaceWith(
-                                        None
-                                    )
-
-                            self.signalChange(
-                                "new_statements",
-                                assign_node.parent.getSourceReference(),
-                                "Removed assignment without effect."
-                            )
-                elif variable_trace.isMergeTrace():
-                    # print variable_trace
-                    if not variable_trace.getDefiniteUsages() and \
-                       not variable_trace.isEscaped() and \
-                       not variable_trace.releases:
-                        pass
-                        # print "HIT", variable_trace
-
 
     def __repr__(self):
         return "<ConstraintCollectionFunction for %s>" % self.function_body
-
 
 
 class ConstraintCollectionModule(CollectionStartpointMixin,

@@ -28,15 +28,12 @@ import subprocess
 import sys
 from logging import info, warning
 
-from . import (
-    Importing,
-    ModuleRegistry,
-    Options,
-    SyntaxErrors,
-    Tracing,
-    TreeXML,
-    Utils
-)
+from nuitka.importing import Importing, Recursion
+from nuitka.plugins.PluginBase import Plugins
+from nuitka.tree import SyntaxErrors
+from nuitka.utils import InstanceCounters, Utils
+
+from . import ModuleRegistry, Options, Tracing, TreeXML
 from .build import SconsInterface
 from .codegen import CodeGeneration, ConstantCodes
 from .finalizations import Finalization
@@ -51,7 +48,7 @@ from .freezer.Standalone import (
     detectLateImports
 )
 from .optimizations import Optimization
-from .tree import Building, Recursion
+from .tree import Building
 
 
 def createNodeTree(filename):
@@ -243,7 +240,7 @@ def pickSourceFilenames(source_dir, modules):
     # Count up for colliding filenames.
     collision_counts = {}
 
-    # Second pass, this time sorted, so we get determistic results. We will
+    # Second pass, this time sorted, so we get deterministic results. We will
     # apply an @1/@2 to disambiguate the filenames.
     for module in sorted(modules, key = lambda x : x.getFullName()):
         if module.isPythonShlibModule():
@@ -356,7 +353,7 @@ def makeSourceDirectory(main_module):
             )
 
             if Options.isShowInclusion():
-                info("Included compiled module '%s'.", module.getFullName())
+                info("Included compiled module '%s'." % module.getFullName())
 
         elif module.isPythonShlibModule():
             target_filename = Utils.joinpath(
@@ -425,23 +422,24 @@ def runScons(main_module, quiet):
         return "true" if value else "false"
 
     options = {
-        "name"           : Utils.basename(
+        "name"            : Utils.basename(
             getTreeFilenameWithSuffix(main_module, "")
         ),
-        "result_name"    : getResultBasepath(main_module),
-        "source_dir"     : getSourceDirectoryPath(main_module),
-        "debug_mode"     : asBoolStr(Options.isDebug()),
-        "python_debug"   : asBoolStr(Options.isPythonDebug()),
+        "result_name"     : getResultBasepath(main_module),
+        "source_dir"      : getSourceDirectoryPath(main_module),
+        "debug_mode"      : asBoolStr(Options.isDebug()),
+        "python_debug"    : asBoolStr(Options.isPythonDebug()),
         "unstripped_mode" : asBoolStr(Options.isUnstripped()),
-        "module_mode"    : asBoolStr(Options.shallMakeModule()),
-        "optimize_mode"  : asBoolStr(Options.isOptimize()),
-        "full_compat"    : asBoolStr(Options.isFullCompat()),
-        "experimental"   : asBoolStr(Options.isExperimental()),
-        "python_version" : python_version,
-        "target_arch"    : Utils.getArchitecture(),
-        "python_prefix"  : sys.prefix,
-        "nuitka_src"     : SconsInterface.getSconsDataPath(),
-        "module_count"   : "%d" % (
+        "module_mode"     : asBoolStr(Options.shallMakeModule()),
+        "optimize_mode"   : asBoolStr(Options.isOptimize()),
+        "full_compat"     : asBoolStr(Options.isFullCompat()),
+        "experimental"    : asBoolStr(Options.isExperimental()),
+        "trace_mode"      : asBoolStr(Options.shallTraceExecution()),
+        "python_version"  : python_version,
+        "target_arch"     : Utils.getArchitecture(),
+        "python_prefix"   : sys.prefix,
+        "nuitka_src"      : SconsInterface.getSconsDataPath(),
+        "module_count"    : "%d" % (
             len(ModuleRegistry.getDoneUserModules()) + 1
         )
     }
@@ -559,9 +557,6 @@ def executeMain(binary_filename, tree, clean_path):
 def executeModule(tree, clean_path):
     python_command = "__import__('%s')" % tree.getName()
 
-    if Utils.getOS() == "Windows":
-        python_command = '"%s"' % python_command
-
     args = (
         sys.executable,
         "python",
@@ -610,12 +605,15 @@ def compileTree(main_module):
         if not Utils.isFile(Utils.joinpath(source_dir, "__helpers.hpp")):
             sys.exit("Error, no previous build directory exists.")
 
-    if Options.isShowProgress():
+    if Options.isShowProgress() or Options.isShowMemory():
         Tracing.printLine(
             "Total memory usage before running scons: {memory}:".format(
                 memory = Utils.getHumanReadableProcessMemoryUsage()
             )
         )
+
+    if Options.isShowMemory():
+        InstanceCounters.printStats()
 
     if Options.shallNotDoExecCppCall():
         return True, {}
@@ -715,13 +713,18 @@ def main():
                 (binary_filename, None)
             )
 
+            dist_dir = getStandaloneDirectoryPath(main_module)
+
+            for module in ModuleRegistry.getDoneUserModules():
+                standalone_entry_points.extend(
+                    Plugins.considerExtraDlls(dist_dir, module)
+                )
+
             if Utils.getOS() == "NetBSD":
                 warning("Standalone mode on NetBSD is not functional, due to $ORIGIN linkage not being supported.")
 
             copyUsedDLLs(
-                dist_dir                = getStandaloneDirectoryPath(
-                    main_module
-                ),
+                dist_dir                = dist_dir,
                 standalone_entry_points = standalone_entry_points
             )
 

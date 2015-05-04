@@ -18,18 +18,15 @@
 """ Read source code from files.
 
 This is tremendously more complex than one might think, due to encoding issues
-and version differences of Python.
+and version differences of Python versions.
 """
 
 import re
 
-from nuitka import (
-    Options,
-    PythonVersions,
-    SourceCodeReferences,
-    SyntaxErrors,
-    Utils
-)
+from nuitka import Options, PythonVersions, SourceCodeReferences
+from nuitka.plugins.PluginBase import Plugins
+from nuitka.tree import SyntaxErrors
+from nuitka.utils import Utils
 
 
 def _readSourceCodeFromFilename3(source_filename):
@@ -37,7 +34,7 @@ def _readSourceCodeFromFilename3(source_filename):
 
     try:
         with open(source_filename, "rb") as source_file:
-            encoding = tokenize.detect_encoding(source_file.readline)[0]
+            encoding = tokenize.detect_encoding(source_file.readline)[0]  # @UndefinedVariable
 
             # Rewind to get the whole file.
             source_file.seek(0)
@@ -126,16 +123,20 @@ see http://python.org/dev/peps/pep-0263/ for details""" % (
                         count+1,
                     ),
                     source_ref   = SourceCodeReferences.fromFilename(
-                        source_filename,
-                        None
+                        source_filename
                     ).atLineNumber(count+1),
                     display_line = False
                 )
 
     return source_code
 
-def readSourceCodeFromFilename(source_filename):
+def readSourceCodeFromFilename(module_name, source_filename):
     if Utils.python_version < 300:
-        return _readSourceCodeFromFilename2(source_filename)
+        source_code = _readSourceCodeFromFilename2(source_filename)
     else:
-        return _readSourceCodeFromFilename3(source_filename)
+        source_code = _readSourceCodeFromFilename3(source_filename)
+
+    # Allow plug-ins to mess with source code.
+    source_code = Plugins.onModuleSourceCode(module_name, source_code)
+
+    return source_code

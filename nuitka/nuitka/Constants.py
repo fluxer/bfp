@@ -22,9 +22,10 @@ This contains tools to compare, classify and test constants.
 
 import math
 
+from nuitka.utils.Utils import python_version
+
 from .__past__ import iterItems, long, unicode  # pylint: disable=W0622
 from .Builtins import builtin_anon_names
-from .Utils import python_version
 
 NoneType = type(None)
 
@@ -178,7 +179,7 @@ def isMutable(constant):
     elif constant in constant_builtin_types:
         return True
     else:
-        assert False, constant_type
+        assert False, repr(constant)
 
 
 def isHashable(constant):

@@ -108,7 +108,13 @@ class ExpressionVariableRef(NodeBase, ExpressionMixin):
             variable = variable
         )
 
+        replacement = self.variable_trace.getReplacementNode(self)
+
+        if replacement is not None:
+            return replacement, "new_expression", "Value propagated for '%s'." % self.variable.getName()
+
         global_trace = VariableRegistry.getGlobalVariableTrace(variable)
+
 
         # TODO: Maybe local variables are factored into this strangely.
         if global_trace is None and variable.isModuleVariable():
@@ -181,7 +187,9 @@ Replaced read-only module attribute '__package__' with constant value."""
         return not self.variable_trace.mustHaveValue()
 
     def mayRaiseException(self, exception_type):
-        return not self.variable_trace.mustHaveValue()
+        variable_trace = self.variable_trace
+
+        return variable_trace is None or not self.variable_trace.mustHaveValue()
 
 
 class ExpressionTempVariableRef(NodeBase, ExpressionMixin):
@@ -221,6 +229,11 @@ class ExpressionTempVariableRef(NodeBase, ExpressionMixin):
         self.variable_trace = constraint_collection.getVariableCurrentTrace(
             variable = self.variable
         )
+
+        replacement = self.variable_trace.getReplacementNode(self)
+
+        if replacement is not None:
+            return replacement, "new_expression", "Value propagated for temp '%s'." % self.variable.getName()
 
         # Nothing to do here.
         return self, None, None

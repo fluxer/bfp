@@ -24,8 +24,9 @@ These classes provide the generic base classes available for nodes.
 
 from nuitka import Options, Tracing, TreeXML, Variables
 from nuitka.__past__ import iterItems
-from nuitka.odict import OrderedDict
-from nuitka.oset import OrderedSet
+from nuitka.containers.odict import OrderedDict
+from nuitka.containers.oset import OrderedSet
+from nuitka.utils.InstanceCounters import counted_del, counted_init
 from nuitka.VariableRegistry import addVariableUsage
 
 
@@ -78,9 +79,11 @@ class NodeCheckMetaClass(type):
 # used and doesn't require making a choice.
 NodeMetaClassBase = NodeCheckMetaClass("NodeMetaClassBase", (object,), {})
 
+
 class NodeBase(NodeMetaClassBase):
     kind = None
 
+    @counted_init
     def __init__(self, source_ref):
         # The base class has no __init__ worth calling.
 
@@ -92,6 +95,8 @@ class NodeBase(NodeMetaClassBase):
         self.parent = None
 
         self.source_ref = source_ref
+
+    __del__ = counted_del()
 
     def __repr__(self):
         # This is to avoid crashes, because of bugs in detail.
@@ -317,9 +322,6 @@ class NodeBase(NodeMetaClassBase):
 
     def isExpressionBuiltin(self):
         return self.kind.startswith("EXPRESSION_BUILTIN_")
-
-    def isOperation(self):
-        return self.kind.startswith("EXPRESSION_OPERATION_")
 
     def isStatementReraiseException(self):
         # Virtual method, pylint: disable=R0201
@@ -700,7 +702,7 @@ class ChildrenHavingMixin:
 
         try:
             # Using star dictionary arguments here for generic use,
-            # pylint: disable=W0142,E1123
+            # pylint: disable=E1123
             return self.__class__(
                 source_ref = source_ref,
                 **values
@@ -1009,8 +1011,11 @@ class ExpressionMixin:
     def computeExpressionAttribute(self, lookup_node, attribute_name,
                                     constraint_collection):
         # By default, an attribute lookup may change everything about the lookup
-        # source. Virtual method, pylint: disable=R0201,W0613
+        # source. Virtual method, pylint: disable=W0613
         constraint_collection.removeKnowledge(lookup_node)
+
+        # Any code could be run, note that.
+        constraint_collection.onControlFlowEscape(self)
 
         return lookup_node, None, None
 
@@ -1084,6 +1089,10 @@ class CompileTimeConstantExpressionMixin(ExpressionMixin):
             be executed against it.
         """
         return True
+
+    def isMutable(self):
+        # Virtual method, pylint: disable=R0201
+        return False
 
     def mayHaveSideEffects(self):
         # Virtual method, pylint: disable=R0201

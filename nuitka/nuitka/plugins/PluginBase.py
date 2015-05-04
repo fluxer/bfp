@@ -29,12 +29,17 @@ it being used.
 """
 
 # This is heavily WIP.
+import shutil
+import subprocess
 import sys
+from logging import info
 
-from nuitka import Importing, Utils
 from nuitka.ModuleRegistry import addUsedModule
-from nuitka.tree import Recursion
+from nuitka.nodes.ModuleNodes import PythonModule
+from nuitka.SourceCodeReferences import fromFilename
+from nuitka.utils import Utils
 
+post_modules = {}
 
 class NuitkaPluginBase:
     """ Nuitka base class for all plug-ins.
@@ -58,9 +63,10 @@ class NuitkaPluginBase:
             about. Most prominently "getImplicitImports()".
         """
 
-        implicit_imports = self.getImplicitImports(module.getFullName())
+        for full_name in self.getImplicitImports(module.getFullName()):
+            module_name = full_name.split('.')[-1]
+            module_package = '.'.join(full_name.split('.')[:-1]) or None
 
-        for module_name, module_package in implicit_imports:
             module_filename = self.locateModule(
                 source_ref     = module.getSourceReference(),
                 module_name    = module_name,
@@ -102,10 +108,48 @@ class NuitkaPluginBase:
                     signal_change   = signal_change
                 )
 
+            full_name = module.getFullName()
+            if full_name in post_modules:
+                addUsedModule(post_modules[full_name])
+
+    def onModuleSourceCode(self, module_name, source_code):
+        # Virtual method, pylint: disable=R0201,W0613
+        return source_code
+
+    def onModuleDiscovered(self, module):
+        post_code, reason = self.createPostModuleLoadCode(module)
+
+        if post_code:
+            info(
+                "Injecting plug-in based post load code for module '%s':" % \
+                    module.getFullName()
+            )
+            for line in reason.split('\n'):
+                info("    " + line)
+
+
+            from nuitka.tree.Building import createModuleTree
+
+            post_module = PythonModule(
+                name         = module.getName() + "-onLoad",
+                package_name = module.getPackage(),
+                source_ref   = fromFilename(module.getCompileTimeFilename() + "-onLoad")
+            )
+
+            createModuleTree(
+                module      = post_module,
+                source_ref  = module.getSourceReference(),
+                source_code = post_code,
+                is_main     = False
+            )
+
+            post_modules[module.getFullName()] = post_module
 
     @staticmethod
     def locateModule(module_name, module_package, source_ref):
-        _module_package, _module_name, module_filename = Importing.findModule(
+        from nuitka.importing import Importing
+
+        _module_package, module_filename, _finding = Importing.findModule(
             source_ref     = source_ref,
             module_name    = module_name,
             parent_package = module_package,
@@ -118,6 +162,8 @@ class NuitkaPluginBase:
     @staticmethod
     def decideRecursion(module_filename, module_name, module_package,
                         module_kind):
+        from nuitka.importing import Recursion
+
         decision, reason = Recursion.decideRecursion(
             module_filename = module_filename,
             module_name     = module_name,
@@ -130,6 +176,8 @@ class NuitkaPluginBase:
     @staticmethod
     def recurseTo(module_package, module_filename, module_kind, reason,
                   signal_change):
+        from nuitka.importing import Recursion
+
         imported_module, added_flag = Recursion.recurseTo(
             module_package  = module_package,
             module_filename = module_filename,
@@ -153,31 +201,146 @@ class NuitkaPopularImplicitImports(NuitkaPluginBase):
 
     @staticmethod
     def getImplicitImports(full_name):
-        if full_name in ("PyQt4.QtCore", "PyQt5.QtCore"):
+        elements = full_name.split('.')
+
+        if elements[0] in ("PyQt4", "PyQt5"):
             if Utils.python_version < 300:
-                return (
-                    ("atexit", None),
-                    ("sip", None),
-                )
-            else:
-                return (
-                    ("sip", None),
-                )
+                yield "atexit"
+
+            yield "sip"
+
+            if elements[1] == "QtGui":
+                yield elements[0] + ".QtCore"
+
+            if elements[1] == "QtWidgets":
+                yield elements[0] + ".QtGui"
         elif full_name == "lxml.etree":
-            return (
-                ("gzip", None),
-                ("_elementpath", "lxml")
-            )
+            yield "gzip"
+            yield "lxml._elementpath"
         elif full_name == "gtk._gtk":
-            return (
-                ("pangocairo", None),
-                ("pango", None),
-                ("cairo", None),
-                ("gio", None),
-                ("atk", None),
+            yield "pangocairo"
+            yield "pango"
+            yield "cairo"
+            yield "gio"
+            yield "atk"
+
+    @staticmethod
+    def getPyQtPluginDirs(qt_version):
+        command = """\
+from __future__ import print_function
+
+import PyQt%(qt_version)d.QtCore
+for v in PyQt%(qt_version)d.QtCore.QCoreApplication.libraryPaths():
+    print(v)
+import os
+guess_path = os.path.join(os.path.dirname(PyQt%(qt_version)d.__file__), "plugins")
+if os.path.exists(guess_path):
+    print("GUESS:", guess_path)
+""" % {
+           "qt_version" : qt_version
+        }
+        output = subprocess.check_output([sys.executable, "-c", command])
+
+        # May not be good for everybody, but we cannot have bytes in paths, or
+        # else working with them breaks down.
+        if Utils.python_version >= 300:
+            output = output.decode("utf-8")
+
+        result = []
+
+        for line in output.replace('\r', "").split('\n'):
+            if not line:
+                continue
+
+            # Take the guessed path only if necessary.
+            if line.startswith("GUESS: "):
+                if result:
+                    continue
+
+                line = line[len("GUESS: "):]
+
+            result.append(Utils.normpath(line))
+
+        return result
+
+    def considerExtraDlls(self, dist_dir, module):
+        full_name = module.getFullName()
+
+        # TODO: Disabled for now.
+        if full_name in ("PyQt4", "PyQt5") and False:
+            qt_version = int(full_name[-1])
+
+            plugin_dir, = self.getPyQtPluginDirs(qt_version)
+
+            target_plugin_dir = Utils.joinpath(
+                dist_dir,
+                full_name,
+                "qt-plugins"
             )
-        else:
-            return ()
+
+            shutil.copytree(
+                plugin_dir,
+                target_plugin_dir
+            )
+
+            info("Copying all Qt plug-ins to '%s'." % target_plugin_dir)
+
+            return [
+                (filename, full_name)
+                for filename in
+                Utils.getFileList(target_plugin_dir)
+            ]
+
+        return ()
+
+    @staticmethod
+    def createPostModuleLoadCode(module):
+        """ Create code to load after a module was successfully imported.
+
+        """
+
+        full_name = module.getFullName()
+
+        if full_name in ("PyQt4.QtCore", "PyQt5.QtCore"):
+            qt_version = int(full_name.split('.')[0][-1])
+
+            code = """\
+from PyQt%(qt_version)d.QtCore import QCoreApplication
+import os
+
+QCoreApplication.setLibraryPaths(
+    [
+        os.path.join(
+           os.path.dirname(__file__),
+           "qt-plugins"
+        )
+    ]
+)
+""" % {
+                "qt_version" : qt_version
+            }
+
+            return code, """\
+Setting Qt library path to distribution folder. Need to avoid
+loading target system Qt plug-ins, which may be from another
+Qt version."""
+
+        return None, None
+
+    def onModuleSourceCode(self, module_name, source_code):
+        if module_name == "numexpr.cpuinfo":
+
+            # We cannot intercept "is" tests, but need it to be "isinstance",
+            # so we patch it on the file. TODO: This is only temporary, in
+            # the future, we may use optimization that understands the right
+            # hand size of the "is" argument well enough to allow for our
+            # type too.
+            return source_code.replace(
+                "type(attr) is types.MethodType",
+                "isinstance(attr, types.MethodType)"
+            )
+        # Do nothing by default.
+        return source_code
 
 class UserPluginBase(NuitkaPluginBase):
     pass
@@ -192,3 +355,27 @@ class Plugins:
     def considerImplicitImports(module, signal_change):
         for plugin in plugin_list:
             plugin.considerImplicitImports(module, signal_change)
+
+    @staticmethod
+    def considerExtraDlls(dist_dir, module):
+        result = []
+
+        for plugin in plugin_list:
+            for extra_dll in plugin.considerExtraDlls(dist_dir, module):
+                assert Utils.isFile(extra_dll[0])
+
+                result.append(extra_dll)
+
+        return result
+
+    @staticmethod
+    def onModuleDiscovered(module):
+        for plugin in plugin_list:
+            plugin.onModuleDiscovered(module)
+
+    @staticmethod
+    def onModuleSourceCode(module_name, source_code):
+        for plugin in plugin_list:
+            source_code = plugin.onModuleSourceCode(module_name, source_code)
+
+        return source_code

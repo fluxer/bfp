@@ -24,11 +24,13 @@ options.
 """
 
 
+import contextlib
 import os
 import subprocess
 import sys
 
-from nuitka import Options, Tracing, Utils
+from nuitka import Options, Tracing
+from nuitka.utils import Utils
 
 
 def getSconsDataPath():
@@ -42,7 +44,7 @@ def getSconsInlinePath():
 def getSconsBinaryCall():
     """ Return a way to execute Scons.
 
-        Using potentially inline copy if no system Scons is available
+        Using potentially in-line copy if no system Scons is available
         or if we are on Windows.
     """
     if Utils.isFile("/usr/bin/scons"):
@@ -84,7 +86,7 @@ def _getPython2ExePathWindows():
                     winreg.QueryValue(key, ""),
                     "python.exe"
                 )
-            except WindowsError:  # lint:ok
+            except WindowsError:  # @UndefinedVariable
                 pass
 
 
@@ -101,13 +103,17 @@ def getPython2ExePath():
             sys.exit("""\
 Error, need to find Python2 executable under C:\\Python26 or \
 C:\\Python27 to execute scons which is not Python3 compatible.""")
-    elif os.path.exists("/usr/bin/python2"):
-        return "python2"
+    elif Utils.isFile("/usr/bin/python2.7"):
+        return "/usr/bin/python2.7"
+    elif Utils.isFile("/usr/bin/python2.6"):
+        return "/usr/bin/python2.6"
+    elif Utils.isFile("/usr/bin/python2"):
+        return "/usr/bin/python2"
     else:
         return "python"
 
-
-def runScons(options, quiet):
+@contextlib.contextmanager
+def setupSconsEnvironment():
     # For the scons file to find the static C++ files and include path. The
     # scons file is unable to use __file__ for the task.
     os.environ["NUITKA_SCONS"] = getSconsDataPath()
@@ -120,6 +126,33 @@ def runScons(options, quiet):
             "scons-2.3.2"
         )
 
+    # Remove environment variables that can only harm if we have to switch
+    # major Python versions, these cannot help Python2 to execute scons, this
+    # is a bit of noise, but helpful.
+    if Utils.python_version >= 300:
+        if "PYTHONPATH" in os.environ:
+            old_pythonpath = os.environ["PYTHONPATH"]
+            del os.environ["PYTHONPATH"]
+        else:
+            old_pythonpath = None
+
+        if "PYTHONHOME" in os.environ:
+            old_pythonhome = os.environ["PYTHONHOME"]
+            del os.environ["PYTHONHOME"]
+        else:
+            old_pythonhome = None
+
+    yield
+
+    if Utils.python_version >= 300:
+        if old_pythonpath is not None:
+            os.environ["PYTHONPATH"] = old_pythonpath
+
+        if old_pythonhome is not None:
+            os.environ["PYTHONHOME"] = old_pythonhome
+
+
+def buildSconsCommand(quiet, options):
     scons_command = getSconsBinaryCall()
 
     if quiet:
@@ -148,7 +181,14 @@ def runScons(options, quiet):
     for key, value in options.items():
         scons_command += [key + '=' + value]
 
-    if Options.isShowScons():
-        Tracing.printLine("Scons command:", ' '.join(scons_command))
+    return scons_command
 
-    return 0 == subprocess.call(scons_command, shell = False)
+
+def runScons(options, quiet):
+    with setupSconsEnvironment():
+        scons_command = buildSconsCommand(quiet, options)
+
+        if Options.isShowScons():
+            Tracing.printLine("Scons command:", ' '.join(scons_command))
+
+        return subprocess.call(scons_command, shell = False) == 0

@@ -32,8 +32,11 @@ Variable version can start as:
 
 from logging import debug
 
+from nuitka.utils import InstanceCounters
+
 
 class VariableTraceBase:
+    @InstanceCounters.counted_init
     def __init__(self, variable, version, previous):
         self.variable = variable
         self.version = version
@@ -44,9 +47,6 @@ class VariableTraceBase:
         # List of releases of the node.
         self.releases = []
 
-        # List of merges.
-        self.merges = []
-
         # If not None, this indicates the last usage, where the value was not
         # yet escaped. If it is 0, it escaped immediately. Escaping is a one
         # time action.
@@ -54,6 +54,8 @@ class VariableTraceBase:
 
         # Previous trace this is replacing.
         self.previous = previous
+
+    __del__ = InstanceCounters.counted_del()
 
     def getVariable(self):
         return self.variable
@@ -64,9 +66,6 @@ class VariableTraceBase:
     def addUsage(self, ref_node):
         self.usages.append(ref_node)
 
-    def addMerge(self, trace):
-        self.merges.append(trace)
-
     def addRelease(self, release_node):
         self.releases.append(release_node)
 
@@ -75,17 +74,6 @@ class VariableTraceBase:
 
     def isEscaped(self):
         return self.escaped_at is not None
-
-    def getPotentialUsages(self):
-        return self.usages + \
-               sum(
-                   [
-                       merge.getPotentialUsages()
-                       for merge in
-                       self.merges
-                   ],
-                   []
-               )
 
     def getDefiniteUsages(self):
         return self.usages
@@ -134,9 +122,13 @@ class VariableTraceBase:
 
         return self.isUninitTrace()
 
+    def getReplacementNode(self, usage):
+        # Virtual method, pylint: disable=W0613,R0201
+
+        return None
 
 
-class VariableUninitTrace(VariableTraceBase):
+class VariableTraceUninit(VariableTraceBase):
     def __init__(self, variable, version, previous):
         VariableTraceBase.__init__(
             self,
@@ -146,7 +138,7 @@ class VariableUninitTrace(VariableTraceBase):
         )
 
     def __repr__(self):
-        return "<VariableUninitTrace {variable} {version}>".format(
+        return "<VariableTraceUninit {variable} {version}>".format(
             variable = self.variable,
             version  = self.version
         )
@@ -169,14 +161,11 @@ class VariableUninitTrace(VariableTraceBase):
 
             debug("  Used at %s", usage)
 
-        for merge in self.merges:
-            debug("   Merged to %s", merge)
-
         for release in self.releases:
             debug("   Release by %s", release)
 
 
-class VariableInitTrace(VariableTraceBase):
+class VariableTraceInit(VariableTraceBase):
     def __init__(self, variable, version):
         VariableTraceBase.__init__(
             self,
@@ -186,7 +175,7 @@ class VariableInitTrace(VariableTraceBase):
         )
 
     def __repr__(self):
-        return "<VariableInitTrace {variable} {version}>".format(
+        return "<VariableTraceInit {variable} {version}>".format(
             variable = self.variable,
             version  = self.version
         )
@@ -205,9 +194,6 @@ class VariableInitTrace(VariableTraceBase):
 
             debug("  Used at %s", usage)
 
-        for merge in self.merges:
-            debug("   Merged to %s", merge)
-
         for release in self.releases:
             debug("   Release by %s", release)
 
@@ -216,7 +202,7 @@ class VariableInitTrace(VariableTraceBase):
         return True
 
 
-class VariableUnknownTrace(VariableTraceBase):
+class VariableTraceUnknown(VariableTraceBase):
     def __init__(self, variable, version, previous):
         VariableTraceBase.__init__(
             self,
@@ -226,7 +212,7 @@ class VariableUnknownTrace(VariableTraceBase):
         )
 
     def __repr__(self):
-        return "<VariableUnknownTrace {variable} {version}>".format(
+        return "<VariableTraceUnknown {variable} {version}>".format(
             variable = self.variable,
             version  = self.version
         )
@@ -245,9 +231,6 @@ class VariableUnknownTrace(VariableTraceBase):
 
             debug("  Used at %s", usage)
 
-        for merge in self.merges:
-            debug("   Merged to %s", merge)
-
         for release in self.releases:
             debug("   Release by %s", release)
 
@@ -256,7 +239,7 @@ class VariableUnknownTrace(VariableTraceBase):
         return True
 
 
-class VariableAssignTrace(VariableTraceBase):
+class VariableTraceAssign(VariableTraceBase):
     def __init__(self, assign_node, variable, version, previous):
         VariableTraceBase.__init__(
             self,
@@ -266,10 +249,11 @@ class VariableAssignTrace(VariableTraceBase):
         )
 
         self.assign_node = assign_node
+        self.replace_it = None
 
     def __repr__(self):
         return """\
-<VariableAssignTrace {variable} {version} at {source_ref}>""".format(
+<VariableTraceAssign {variable} {version} at {source_ref}>""".format(
             variable   = self.variable,
             version    = self.version,
             source_ref = self.assign_node.getSourceReference().getAsString()
@@ -287,9 +271,6 @@ class VariableAssignTrace(VariableTraceBase):
 
             debug("  Used at %s", usage)
 
-        for merge in self.merges:
-            debug("   Merged to %s", merge)
-
         for release in self.releases:
             debug("   Release by %s", release)
 
@@ -300,8 +281,20 @@ class VariableAssignTrace(VariableTraceBase):
     def getAssignNode(self):
         return self.assign_node
 
+    def setReplacementNode(self, replacement):
+        self.replace_it = replacement
 
-class VariableMergeTrace(VariableTraceBase):
+    def getReplacementNode(self, usage):
+
+        if self.replace_it is not None:
+            return self.replace_it.makeCloneAt(
+                self.assign_node.getSourceReference()
+            )
+        else:
+            return None
+
+
+class VariableTraceMerge(VariableTraceBase):
     """ Merge of two traces.
 
         Happens at the end of two conditional blocks. This is "phi" in
@@ -316,9 +309,6 @@ class VariableMergeTrace(VariableTraceBase):
             version  = version,
             previous = (trace_yes, trace_no)
         )
-
-        trace_yes.addMerge(self)
-        trace_no.addMerge(self)
 
     @staticmethod
     def isMergeTrace():

@@ -49,6 +49,7 @@ class ExpressionConstantRef(CompileTimeConstantExpressionMixin, NodeBase):
 
         self.constant = constant
 
+        # Memory saving method, have the attribute only where necessary.
         if user_provided:
             self.user_provided = user_provided
 
@@ -81,7 +82,11 @@ class ExpressionConstantRef(CompileTimeConstantExpressionMixin, NodeBase):
         )
 
     def makeCloneAt(self, source_ref):
-        return self.__class__(self.constant, source_ref)
+        return ExpressionConstantRef(
+            constant      = self.constant,
+            source_ref    = source_ref,
+            user_provided = self.user_provided
+        )
 
     def getDetails(self):
         return {
