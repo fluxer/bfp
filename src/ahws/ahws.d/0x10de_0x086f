@@ -1,8 +1,16 @@
 #!/bin/sh
 
+set -e
+
+# Hardware: NVIDIA Corporation MCP79 [GeForce 8200M G] (rev b1)
+# Reason: suspend does not work, system locks up if KMS is on with nouveau
+
 . /etc/ahws.d/common
 
 case "$1" in
-    online) install_nvidia ;;
-    offline) remove_nvidia ;;
+    add) install_nvidia || kms_disable ;;
+    online) install_nvidia || kms_disable ;;
+    changed) true ;; # ignored
+    offline) remove_nvidia && kms_enable ;;
+    remove) remove_nvidia && kms_enable;;
 esac

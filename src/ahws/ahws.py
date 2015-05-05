@@ -5,7 +5,7 @@ message = libmessage.Message()
 message.DEBUG = True
 misc = libmisc.Misc()
 
-app_version = "1.7.6 (9977390)"
+app_version = "1.7.6 (7d5141d)"
 
 class Device(object):
     def __init__(self):

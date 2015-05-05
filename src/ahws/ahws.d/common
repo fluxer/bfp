@@ -1,16 +1,53 @@
 #!/bin/sh
 
+set -e
+
+# enable Kernel Mode Setting (KMS)
+kms_enable() {
+    # FIXME: implement
+    false
+}
+
+# disable Kernel Mode Setting (KMS)
+kms_disable() {
+    # FIXME: implement
+    false
+}
+
+# install nVidia binary blob driver
 install_nvidia() {
+    # saves some computation
     if [ ! -d "/var/local/spm/nvidia" ];then
         spm binary -aDu nvidia
     fi
 }
 
+# uninstall nVidia binary blob driver
 remove_nvidia() {
     if [ -d "/var/local/spm/nvidia" ];then
-        # since nvidia replace mesalib it gets detected as runtime dependency
-        # instead of mesalib, ignoring the reverse dependencies because the
-        # original libGL and friends will be restored post-remove
-        spm --ignore=$(spm local -pr nvidia) binary -r nvidia
+        # since nvidia partitially replaces mesalib it gets detected as runtime
+        # dependency instead of mesalib, ignoring the reverse dependencies
+        # because the original libGL and friends will be restored post-remove
+        spm --ignore="$(spm local -pr nvidia)" binary -r nvidia
     fi
+}
+
+# enable and start service automatically
+service_enable() {
+    # FIXME: implement
+    false
+}
+
+# disable and stop service automatically
+service_disable() {
+    # FIXME: implement
+    false
+}
+
+service_start() {
+    rc.d start --stopped "$1"
+}
+
+service_stop() {
+    rc.d stop --started "$1"
 }
