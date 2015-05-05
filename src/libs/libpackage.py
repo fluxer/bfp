@@ -31,22 +31,6 @@ class Database(object):
         self.LOCAL_CACHE = {}
         self.IGNORE = []
 
-    def remote_groups(self, basename=True):
-        ''' DEPRECATED: Returns groups in the repositories '''
-        if misc.python2:
-            misc.typecheck(basename, (types.BooleanType))
-
-        groups = []
-        for sdir in misc.list_dirs(os.path.join(self.CACHE_DIR, \
-            'repositories')):
-            if not os.path.isfile(os.path.join(sdir, 'SRCBUILD')) \
-                and not '/.git/' in sdir and not sdir.endswith('.git'):
-                if basename:
-                    groups.append(os.path.basename(sdir))
-                else:
-                    groups.append(sdir)
-        return sorted(groups)
-
     def _notifiers_setup(self):
         ''' Setup inotify watcher for database changes '''
         reposdir = os.path.join(self.CACHE_DIR, 'repositories')
