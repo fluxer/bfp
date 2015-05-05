@@ -117,7 +117,7 @@ class SPMD(dbus.service.Object):
         out_signature='s')
     def KeyServersSet(self, data):
         ''' Set key servers '''
-        message.info('Mirrors config change requested')
+        message.info('Key servers config change requested')
         try:
             misc.file_write(libspm.KEYSERVERS_CONF, data)
             reload(libspm)
@@ -363,7 +363,7 @@ class SPMD(dbus.service.Object):
                 else:
                     message.warning('Config non-existent', conf)
 
-            currenttime = time.strftime('%s')           
+            currenttime = time.strftime('%s')
             timelock = os.path.join(database.CACHE_DIR, 'spmd.time')
             if os.path.isfile(timelock):
                 lasttime = misc.file_read(timelock)
@@ -430,6 +430,10 @@ class SPMD(dbus.service.Object):
             pass
 
 try:
+    if not os.geteuid() == 0:
+        message.critical('Attempting to run as non-root will bring you no good')
+        sys.exit(1)
+
     object = SPMD(systembus)
     lthread = threading.Thread(target=object.LocalWatcher)
     rthread = threading.Thread(target=object.RemoteWatcher)
