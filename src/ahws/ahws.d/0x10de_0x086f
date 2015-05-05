@@ -1,3 +1,8 @@
 #!/bin/sh
 
 . /etc/ahws.d/common
+
+case "$1" in
+    online) install_nvidia ;;
+    offline) remove_nvidia ;;
+esac

@@ -5,3 +5,12 @@ install_nvidia() {
         spm binary -aDu nvidia
     fi
 }
+
+remove_nvidia() {
+    if [ -d "/var/local/spm/nvidia" ];then
+        # since nvidia replace mesalib it gets detected as runtime dependency
+        # instead of mesalib, ignoring the reverse dependencies because the
+        # original libGL and friends will be restored post-remove
+        spm --ignore=$(spm local -pr nvidia) binary -r nvidia
+    fi
+}
