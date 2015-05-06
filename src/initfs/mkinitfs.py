@@ -1,6 +1,6 @@
 #!/bin/python2
 
-import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob
+import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast
 
 app_version = "1.7.6 (29b7332)"
 
@@ -16,6 +16,7 @@ try:
     busybox = misc.whereis('busybox')
     image = '/boot/initramfs-%s.img' % kernel
     compression = 'gzip'
+    recovery = True
     modules = []
     for m in os.listdir('/sys/module'):
         if os.path.isdir('/sys/module/%s/sections' % m):
@@ -35,6 +36,9 @@ try:
     parser.add_argument('-c', '--compression', type=str, default=compression, \
         choices=('gzip', 'cat', 'bzip2'), \
         help='Change image compression method')
+    parser.add_argument('-r', '--recovery', type=ast.literal_eval, \
+        choices=[True, False], default=recovery, \
+        help='Change wheather to create recovery image')
     parser.add_argument('--keep', action='store_true', \
         help='Keep temporary directory')
     parser.add_argument('--debug', action='store_true', \
@@ -170,6 +174,7 @@ try:
     message.sub_info('MODULES', ARGS.modules)
     message.sub_info('IMAGE', ARGS.image)
     message.sub_info('COMPRESSION', ARGS.compression)
+    message.sub_info('RECOVERY', ARGS.recovery)
 
     message.sub_info('Installing Busybox')
     bin_dir = os.path.join(ARGS.tmp, 'bin')
@@ -260,10 +265,11 @@ try:
     message.sub_info('Creating image')
     create_image(ARGS.tmp, ARGS.image, ARGS.compression)
 
-    message.sub_info('Creating recovery image')
-    copy_item(modsdir)
-    recovery = ARGS.image.replace(ARGS.kernel, '%s-recovery' % ARGS.kernel)
-    create_image(ARGS.tmp, recovery, ARGS.compression)
+    if ARGS.recovery:
+        message.sub_info('Creating recovery image')
+        copy_item(modsdir)
+        recovery = ARGS.image.replace(ARGS.kernel, '%s-recovery' % ARGS.kernel)
+        create_image(ARGS.tmp, recovery, ARGS.compression)
 
 except subprocess.CalledProcessError as detail:
     message.critical('SUBPROCESS', detail)
