@@ -72,6 +72,34 @@ for arg in $(cat /proc/cmdline);do
     esac
 done
 
+case "$root" in
+      /dev/*) device="$root" ;;
+      UUID=*) device="/dev/disk/by-uuid/${root#*=}"  ;;
+      LABEL=*) device="/dev/disk/by-label/${root#*=}" ;;
+esac
+
+msg "Setting up hotplugger..."
+echo /bin/mdev > /proc/sys/kernel/hotplug
+touch /dev/mdev.log
+mdev -s
+
+msg "Loading modules..."
+find /sys -name modalias -type f -exec sort -u {} + | xargs modprobe -qba || true
+
+msg "Creating UUID/LABEL symlinks..."
+for line in $(blkid);do
+    case "$line" in
+        /dev/*) dev="${line//:/}" ;;
+        UUID=*) mkdir -p /dev/disk/by-uuid
+                eval "$line"
+                ln -s "$dev" "/dev/disk/by-uuid/$UUID" ;;
+        LABEL=*) mkdir -p /dev/disk/by-label
+                 eval "$line"
+                 ln -s "$dev" "/dev/disk/by-label/$LABEL" ;;
+    esac
+    unset UUID LABEL
+done
+
 for hook in $hooks;do
     # done only because of the latehooks
     base="$(basename "$hook")"
@@ -82,26 +110,6 @@ for hook in $hooks;do
         error "Missing hook: $base"
     fi
 done
-
-case "$root" in
-      /dev/*) device="$root" ;;
-      UUID=*) device="/dev/disk/by-uuid/${root#*=}"  ;;
-      LABEL=*) device="/dev/disk/by-label/${root#*=}" ;;
-esac
-
-case "$(cat /proc/sys/kernel/hotplug)" in
-    # could be /usr/bin, /sbin, etc.
-    */mdev)
-        # oh, boy! mdev does not support device UUID/LABEL thus /dev/disk/by-*
-        # can not be used but Busybox's blkid applet does not support -U and
-        # -L either so the code bellow requires blkid from util-linux, best
-        # effort made..
-        case "$root" in
-            UUID=*) device="$(blkid -U "${root#*=}")"  ;;
-            LABEL=*) device="$(blkid -L "${root#*=}")" ;;
-        esac
-    ;;
-esac
 
 # device is optional, a hook may take care of the root (e.g. on Live CD)
 if [ -e "$device" ];then
@@ -121,6 +129,9 @@ for hook in $latehooks;do
         error "Missing late hook: $base"
     fi
 done
+
+# to make udev in userspace happy
+echo > /proc/sys/kernel/hotplug
 
 # a hook could have mounted root
 if [ -e "/newroot/$init" ];then
