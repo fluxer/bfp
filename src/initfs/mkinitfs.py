@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast
 
-app_version = "1.7.6 (29b7332)"
+app_version = "1.7.6 (04e34dc)"
 
 tmpdir = None
 keep = False
@@ -237,11 +237,16 @@ try:
                     found = True
         if not found:
             message.sub_warning('Module not found', module)
+    # to minimize the computation in the initramfs unpack the modules now
+    for sfile in misc.list_files('%s/%s' % (ARGS.tmp, modsdir)):
+        if misc.archive_supported(sfile):
+            message.sub_debug('Decompressing', sfile)
+            misc.archive_decompress(sfile, os.path.dirname(sfile))
 
     message.sub_info('Copying module files')
     for sfile in os.listdir(modsdir):
         if sfile.startswith('modules.'):
-            copy_item(modsdir + '/' + sfile)
+            copy_item('%s/%s' % (modsdir, sfile))
 
     message.sub_info('Updating module dependencies')
     misc.system_command((misc.whereis('depmod'), ARGS.kernel, '-b', ARGS.tmp))
