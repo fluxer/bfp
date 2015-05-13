@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast
 
-app_version = "1.7.6 (e62c7e5)"
+app_version = "1.7.6 (a6a822d)"
 
 tmpdir = None
 keep = False
@@ -123,6 +123,8 @@ try:
             message.warning('File or directory does not exist', src)
 
     def create_image(src, image, method):
+        misc.system_command((ARGS.busybox, 'depmod', ARGS.kernel, '-b', ARGS.tmp))
+
         data = misc.system_output('%s find . | %s cpio -o -H newc' % \
             (ARGS.busybox, ARGS.busybox), shell=True, cwd=src)
         if method == 'gzip':
@@ -247,9 +249,6 @@ try:
         if sfile.startswith('modules.'):
             copy_item('%s/%s' % (modsdir, sfile))
 
-    message.sub_info('Updating module dependencies')
-    misc.system_command((ARGS.busybox, 'depmod', '--', ARGS.kernel, '-b', ARGS.tmp))
-
     message.sub_info('Creating essential nodes')
     dev_dir = '%s/dev' % ARGS.tmp
     misc.dir_create(dev_dir)
@@ -265,7 +264,7 @@ try:
     misc.file_touch(os.path.join(etc_dir, 'ld.so.conf'))
     misc.system_command((misc.whereis('ldconfig'), '-r', ARGS.tmp))
 
-    message.sub_info('Creating image')
+    message.sub_info('Creating optimized image')
     create_image(ARGS.tmp, ARGS.image, ARGS.compression)
 
     if ARGS.recovery:
