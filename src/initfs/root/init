@@ -30,7 +30,7 @@ error() {
 
 rescue_shell() {
     msg "Running rescue Shell..."
-    /bin/sh
+    exec /bin/sh
 }
 
 cmd() {
@@ -79,9 +79,11 @@ case "$root" in
 esac
 
 msg "Setting up hotplugger..."
-echo /bin/mdev > /proc/sys/kernel/hotplug
-touch /dev/mdev.log
-mdev -s
+if [ -e "/proc/sys/kernel/hotplug" ];then
+    cmd echo /bin/mdev > /proc/sys/kernel/hotplug
+fi
+cmd touch /dev/mdev.log
+cmd mdev -s
 
 msg "Loading modules..."
 find /sys -name modalias -type f -exec sort -u {} + | xargs modprobe -qba || true
@@ -90,12 +92,12 @@ msg "Creating UUID/LABEL symlinks..."
 for line in $(blkid);do
     case "$line" in
         /dev/*) dev="${line//:/}" ;;
-        UUID=*) mkdir -p /dev/disk/by-uuid
+        UUID=*) cmd mkdir -p /dev/disk/by-uuid
                 eval "$line"
-                ln -s "$dev" "/dev/disk/by-uuid/$UUID" ;;
-        LABEL=*) mkdir -p /dev/disk/by-label
+                cmd ln -s "$dev" "/dev/disk/by-uuid/$UUID" ;;
+        LABEL=*) cmd mkdir -p /dev/disk/by-label
                  eval "$line"
-                 ln -s "$dev" "/dev/disk/by-label/$LABEL" ;;
+                 cmd ln -s "$dev" "/dev/disk/by-label/$LABEL" ;;
     esac
     unset UUID LABEL
 done
@@ -131,7 +133,10 @@ for hook in $latehooks;do
 done
 
 # to make udev in userspace happy
-echo > /proc/sys/kernel/hotplug
+if [ -e "/proc/sys/kernel/hotplug" ];then
+    msg "Resetting hotplugger..."
+    cmd echo > /proc/sys/kernel/hotplug
+fi
 
 # a hook could have mounted root
 if [ -e "/newroot/$init" ];then
@@ -142,5 +147,5 @@ if [ -e "/newroot/$init" ];then
     cmd exec switch_root /newroot "$init" "$@"
 else
     msg "Root filesystem invalid..."
-    exec /bin/sh
+    rescue_shell
 fi
