@@ -95,7 +95,7 @@ try:
                 return
             message.sub_debug('Copying', src)
             message.sub_debug('To', sdest)
-            shutil.copytree(src, sdest)
+            shutil.copytree(src, sdest, symlinks=True)
             lcopied.append(src)
         elif os.path.isfile(src):
             ltocopy = misc.system_scanelf(src, sflags='-L').split(',')
@@ -123,10 +123,8 @@ try:
             message.warning('File or directory does not exist', src)
 
     def create_image(src, image, method):
-        find = misc.whereis('find')
-        cpio = misc.whereis('cpio')
-        data = misc.system_output('%s . | %s -o -H newc' % \
-            (find, cpio), shell=True, cwd=src)
+        data = misc.system_output('%s find . | %s cpio -o -H newc' % \
+            (ARGS.busybox, ARGS.busybox), shell=True, cwd=src)
         if method == 'gzip':
             gzipf = gzip.GzipFile(image, 'wb')
             gzipf.write(data)
@@ -176,18 +174,17 @@ try:
     message.sub_info('COMPRESSION', ARGS.compression)
     message.sub_info('RECOVERY', ARGS.recovery)
 
-    message.sub_info('Installing Busybox')
-    bin_dir = os.path.join(ARGS.tmp, 'bin')
-    misc.dir_create(bin_dir)
-    message.sub_debug('Installing binary')
-    copy_item(ARGS.busybox)
-    message.sub_debug('Creating symlinks')
-    misc.system_command((ARGS.busybox, '--install', '-s', bin_dir))
-
     message.sub_info('Copying root overlay')
     if os.path.isdir('/etc/mkinitfs/root'):
         for spath in misc.list_all('/etc/mkinitfs/root'):
             copy_item(spath)
+
+    message.sub_info('Installing Busybox')
+    bin_dir = os.path.join(ARGS.tmp, 'bin')
+    message.sub_debug('Installing binary')
+    copy_item(ARGS.busybox)
+    message.sub_debug('Creating symlinks')
+    misc.system_command((ARGS.busybox, '--install', '-s', bin_dir))
 
     message.sub_info('Copying files')
     if os.path.isdir('/etc/mkinitfs/files'):
@@ -249,16 +246,15 @@ try:
             copy_item('%s/%s' % (modsdir, sfile))
 
     message.sub_info('Updating module dependencies')
-    misc.system_command((misc.whereis('depmod'), ARGS.kernel, '-b', ARGS.tmp))
+    misc.system_command((ARGS.busybox, 'depmod', '--', ARGS.kernel, '-b', ARGS.tmp))
 
     message.sub_info('Creating essential nodes')
-    mknod = misc.whereis('mknod')
     dev_dir = '%s/dev' % ARGS.tmp
     misc.dir_create(dev_dir)
-    misc.system_command((mknod, '-m', '640', '%s/console' % dev_dir, \
-        'c', '5', '1'))
-    misc.system_command((mknod, '-m', '664', '%s/null' % dev_dir, \
-        'c', '1', '0'))
+    misc.system_command((ARGS.busybox, 'mknod', '-m', '640', \
+        '%s/console' % dev_dir, 'c', '5', '1'))
+    misc.system_command((ARGS.busybox, 'mknod', '-m', '664', \
+        '%s/null' % dev_dir, 'c', '1', '0'))
 
     message.sub_info('Creating shared libraries cache')
     etc_dir = os.path.join(ARGS.tmp, 'etc')
