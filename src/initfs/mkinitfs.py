@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast
 
-app_version = "1.7.6 (a6a822d)"
+app_version = "1.7.6 (30ec47a)"
 
 tmpdir = None
 keep = False
@@ -140,12 +140,12 @@ try:
 
     # FIXME: support both /lib and /usr/lib at the same time???
     modsdir = None
-    moddirs = ('/lib', '/lib32', '/lib64', '/usr/lib', '/usr/lib32', \
-        '/usr/lib64')
+    moddirs = ('/lib/modules', '/lib32/modules', '/lib64/modules', \
+        '/usr/lib/modules', '/usr/lib32/modules', '/usr/lib64/modules')
     for moddir in moddirs:
         if os.path.islink(moddir):
             continue
-        kerndir = '%s/modules/%s' % (moddir, ARGS.kernel)
+        kerndir = '%s/%s' % (moddir, ARGS.kernel)
         if os.path.isfile('%s/modules.dep' % kerndir) and \
             os.path.isfile('%s/modules.builtin' % kerndir):
             modsdir = kerndir
@@ -155,13 +155,14 @@ try:
         for sdir in moddirs:
             if not os.path.exists(sdir) or os.path.islink(sdir):
                 continue
-            for k in os.listdir(sdir + '/modules'):
-                if os.path.isfile(sdir + '/modules/' + k + '/modules.dep') and \
-                    os.path.isfile(sdir + '/modules/' + k + '/modules.builtin'):
-                    message.sub_warning('Last resort kernel detected', k)
-                    modsdir = sdir + '/modules/' + k
-                    ARGS.kernel = k
-                    ARGS.image = '/boot/initramfs-%s.img' % k
+            for skernel in os.listdir(sdir):
+                sfull = '%s/%s' % (sdir, skernel)
+                if os.path.isfile('%s/modules.dep' % sfull) and \
+                    os.path.isfile('%s/modules.builtin' % sfull):
+                    message.sub_warning('Last resort kernel detected', skernel)
+                    modsdir = sfull
+                    ARGS.kernel = skernel
+                    ARGS.image = '/boot/initramfs-%s.img' % skernel
                     break
     if not modsdir:
         message.critical('Unable to find modules directory')
