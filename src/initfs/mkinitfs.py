@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast
 
-app_version = "1.7.6 (04e34dc)"
+app_version = "1.7.6 (e62c7e5)"
 
 tmpdir = None
 keep = False
@@ -239,6 +239,8 @@ try:
         if misc.archive_supported(sfile):
             message.sub_debug('Decompressing', sfile)
             misc.archive_decompress(sfile, os.path.dirname(sfile))
+            message.sub_debug('Removing', sfile)
+            os.unlink(sfile)
 
     message.sub_info('Copying module files')
     for sfile in os.listdir(modsdir):
