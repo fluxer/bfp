@@ -21,5 +21,6 @@ network:x:19:
 power:x:20:
 input:x:21:
 uuidd:x:22:
+kvm:x23:
 nogroup:x:99:
 users:x:100:
