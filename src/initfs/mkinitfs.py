@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast
 
-app_version = "1.7.6 (bf5e12c)"
+app_version = "1.7.6 (40bf759)"
 
 tmpdir = None
 keep = False
@@ -199,8 +199,14 @@ try:
             for line in misc.file_readlines(sfile):
                 if not line or line.startswith('#'):
                     continue
-                for g in glob.glob(line):
-                    copy_item(g)
+                items = glob.glob(line)
+                # glob returns null and the warning in copy_item() may not be
+                # reached if iterating directly over the value fom glob.glob()
+                if not items:
+                    message.warning('File or directory does not exist', line)
+                    continue
+                for item in items:
+                    copy_item(item)
 
     message.sub_info('Copying modules')
     if os.path.isdir('/etc/mkinitfs/modules'):
