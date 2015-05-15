@@ -25,29 +25,51 @@ install_nvidia() {
 # uninstall nVidia binary blob driver
 remove_nvidia() {
     if [ -d "/var/local/spm/nvidia" ];then
-        # since nvidia partitially replaces mesalib it gets detected as runtime
-        # dependency instead of mesalib, ignoring the reverse dependencies
-        # because the original libGL and friends will be restored post-remove
+        # since the package partitially replaces mesalib it gets detected as
+        # runtime dependency instead of mesalib, ignoring the reverse
+        # dependencies because the original libGL and friends will be restored
+        # from the post-remove action
         spm --ignore="$(spm local -pr nvidia)" binary -r nvidia
     fi
 }
 
-# enable and start service automatically
+# install AMD binary blob driver
+install_amd() {
+    # saves some computation
+    if [ ! -d "/var/local/spm/amd-catalyst" ];then
+        spm binary -aDu amd-catalyst
+    fi
+}
+
+# uninstall AMD binary blob driver
+remove_amd() {
+    if [ -d "/var/local/spm/amd-catalyst" ];then
+        # since the package partitially replaces mesalib it gets detected as
+        # runtime dependency instead of mesalib, ignoring the reverse
+        # dependencies because the original libGL and friends will be restored
+        # from the post-remove action
+        spm --ignore="$(spm local -pr nvidia)" binary -r amd-catalyst
+    fi
+}
+
+# enable a service
 service_enable() {
     # FIXME: implement
     false
 }
 
-# disable and stop service automatically
+# disable a service
 service_disable() {
     # FIXME: implement
     false
 }
 
+# start a service
 service_start() {
     rc.d start --stopped "$1"
 }
 
+# stop a service
 service_stop() {
     rc.d stop --started "$1"
 }

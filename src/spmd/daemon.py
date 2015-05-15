@@ -8,6 +8,7 @@ else:
     import configparser
 import libmessage, libmisc, libpackage, libspm
 message = libmessage.Message()
+message.DEBUG = True
 misc = libmisc.Misc()
 remote_notify = libmisc.Inotify()
 local_notify = libmisc.Inotify()
@@ -23,6 +24,16 @@ systembus = dbus.SystemBus()
 class SPMD(dbus.service.Object):
     def __init__(self, conn, object_path='/com/spm/Daemon'):
         dbus.service.Object.__init__(self, conn, object_path)
+        self.working = False
+
+    def _AsyncCall(self, function, callback):
+        result = 'Success'
+        try:
+            function()
+        except Exception as detail:
+            result = str(detail)
+        finally:
+            self.Finished(result)
 
     def _GetUpdates(self):
         targets = []
@@ -66,6 +77,24 @@ class SPMD(dbus.service.Object):
         ''' Emit that configs have changed '''
         message.info('Configs')
         return
+
+    @dbus.service.signal('com.spm.Daemon')
+    def Working(self):
+        ''' Emit that the deamon is working '''
+        message.debug('Working')
+        self.working = True
+        return
+
+    @dbus.service.signal('com.spm.Daemon', signature='s')
+    def Finished(self, msg):
+        ''' Emit that the deamon has finished working '''
+        message.debug('Finished', msg)
+        self.working = False
+        return str(msg)
+
+    @dbus.service.method('com.spm.Daemon', out_signature='b')
+    def isWorking(self):
+        return self.working
 
     @dbus.service.method('com.spm.Daemon', in_signature='sss', \
         out_signature='s')
@@ -198,17 +227,18 @@ class SPMD(dbus.service.Object):
             return str(detail)
         return (version, release, description, depends, size, footprint)
 
-    @dbus.service.method('com.spm.Daemon', out_signature='s')
+    @dbus.service.method('com.spm.Daemon')
     def Sync(self):
         ''' Syncronize repositories '''
         message.info('Syncing')
         try:
+            self.Working()
             m = libspm.Repo(libspm.REPOSITORIES, do_sync=True, do_prune=True)
-            m.main()
+            mthread = threading.Thread(target=self._AsyncCall, args=(m.main, self.Finished,))
+            mthread.start()
         except Exception as detail:
             message.critical(str(detail))
-            return str(detail)
-        return 'Success'
+            self.Finished(str(detail))
 
     @dbus.service.method('com.spm.Daemon', in_signature='b', \
     out_signature='s')
@@ -234,26 +264,25 @@ class SPMD(dbus.service.Object):
             return str(detail)
         return 'Success'
 
-    @dbus.service.method('com.spm.Daemon', in_signature='as', \
-        out_signature='s')
+    @dbus.service.method('com.spm.Daemon', in_signature='as')
     def Build(self, targets):
         ''' Build a package '''
         message.info('Building', targets)
         try:
+            self.Working()
             for target in targets:
                 if not database.remote_search(target):
                     message.warning('%s is not valid' % target)
                     return('%s is not valid' % target)
             m = libspm.Source(targets, do_clean=True, do_prepare=True, \
                 do_compile=True, do_install=True, do_merge=True)
-            m.main()
+            mthread = threading.Thread(target=self._AsyncCall, args=(m.main, self.Finished,))
+            mthread.start()
         except Exception as detail:
             message.critical(str(detail))
-            return str(detail)
-        return 'Success'
+            self.Finished(str(detail))
 
-    @dbus.service.method('com.spm.Daemon', in_signature='as', \
-        out_signature='s')
+    @dbus.service.method('com.spm.Daemon', in_signature='as')
     def Install(self, targets):
         ''' Install a package '''
         message.info('Installing', targets)
@@ -263,14 +292,13 @@ class SPMD(dbus.service.Object):
                     message.warning('%s is not valid' % target)
                     return('%s is not valid' % target)
             m = libspm.Binary(targets, do_prepare=True, do_merge=True, do_depends=True)
-            m.main()
+            mthread = threading.Thread(target=self._AsyncCall, args=(m.main, self.Finished,))
+            mthread.start()
         except Exception as detail:
             message.critical(str(detail))
-            return str(detail)
-        return 'Success'
+            self.Finished(str(detail))
 
-    @dbus.service.method('com.spm.Daemon', in_signature='asb', \
-        out_signature='s')
+    @dbus.service.method('com.spm.Daemon', in_signature='asb')
     def Remove(self, targets, recursive=False):
         ''' Install a package '''
         message.info('Removing', targets)
@@ -284,11 +312,11 @@ class SPMD(dbus.service.Object):
                 m = libspm.Binary(targets, autoremove=True)
             else:
                 m = libspm.Binary(target, do_remove=True)
-            m.main()
+            mthread = threading.Thread(target=self._AsyncCall, args=(m.main, self.Finished,))
+            mthread.start()
         except Exception as detail:
             message.critical(str(detail))
-            return str(detail)
-        return 'Success'
+            self.Finished(str(detail))
 
     def LocalWatcher(self):
         ''' Installed software watcher '''

@@ -7,7 +7,7 @@
 export LANG=C LC_ALL=C
 unset ALL_OFF BOLD BLUE GREEN RED YELLOW
 if [[ -t 2 ]]; then
-    # prefer terminal safe colored and bold text when tput is supported
+    # prefer colored and bold text when tput is supported
     if tput setaf 0 &>/dev/null; then
         ALL_OFF="$(tput sgr0)"
         BOLD="$(tput bold)"

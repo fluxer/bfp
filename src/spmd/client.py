@@ -5,7 +5,7 @@ import sip
 sip.setapi('QString', 2)
 sip.setapi('QVariant', 2)
 
-import sys, argparse
+import sys, argparse, time
 from PyQt4 import QtCore, QtDBus
 import libmessage
 message = libmessage.Message()
@@ -25,15 +25,17 @@ def dbus_call(method, args=None):
             result = iface.asyncCall(method, args)
         else:
             result = iface.asyncCall(method)
-        reply = QtDBus.QDBusReply(result)
-        if reply.isValid():
-            message.sub_info(reply.value())
-        else:
-            message.sub_critical(str(reply.error().message()))
+        iface.connect(app, QtCore.SIGNAL('Finished(QString)'), message.sub_info)
+        while True:
+            result = iface.asyncCall('isWorking')
+            reply = QtDBus.QDBusReply(result)
+            if reply.value() == False:
+                break
+            time.sleep(1)
     else:
         message.sub_critical(str(bus.lastError().message()))
 
-app_version = "1.7.4 (ddcb3f1)"
+app_version = "1.7.6 (7d5141d)"
 
 try:
     parser = argparse.ArgumentParser(prog='spmctl', \
