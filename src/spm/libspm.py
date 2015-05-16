@@ -951,7 +951,10 @@ class Source(object):
             self.strip_static or self.strip_rpath:
             message.sub_info(_('Stripping binaries and libraries'))
             strip = misc.whereis('strip')
-            scanelf = misc.whereis('scanelf')
+            lbinaries = []
+            lshared = []
+            lstatic = []
+            lrpath = []
             for sfile in target_content:
                 smime = target_content[sfile]
                 if os.path.islink(sfile):
@@ -959,24 +962,37 @@ class Source(object):
 
                 if smime == 'application/x-executable' and self.strip_binaries:
                     self.split_debug_symbols(sfile)
-                    message.sub_debug(_('Stripping executable'), sfile)
-                    misc.system_command((strip, '--strip-all', sfile))
+                    lbinaries.append(sfile)
                 elif smime == 'application/x-sharedlib' and self.strip_shared:
                     self.split_debug_symbols(sfile)
-                    message.sub_debug(_('Stripping shared library'), sfile)
-                    misc.system_command((strip, '--strip-unneeded', sfile))
+                    lshared.append(sfile)
                 elif smime == 'application/x-archive' and self.strip_static:
                     self.split_debug_symbols(sfile)
-                    message.sub_debug(_('Stripping static library'), sfile)
-                    misc.system_command((strip, '--strip-debug', sfile))
-
+                    lstatic.append(sfile)
                 if (smime == 'application/x-executable' or \
                     smime == 'application/x-sharedlib' \
                     or smime == 'application/x-archive') and self.strip_rpath:
-                    # do not check if RPATH is present at all to avoid
-                    # spawning scanelf twice
-                    message.sub_debug(_('Stripping RPATH'), sfile)
-                    misc.system_command((scanelf, '-CBXrq', sfile))
+                    lrpath.append(sfile)
+            if lbinaries:
+                message.sub_debug(_('Stripping executables'), lbinaries)
+                cmd = [strip, '--strip-all']
+                cmd.extend(lbinaries)
+                misc.system_command(cmd)
+            if lshared:
+                message.sub_debug(_('Stripping shared libraries'), lshared)
+                cmd = [strip, '--strip-unneeded']
+                cmd.extend(lshared)
+                misc.system_command(cmd)
+            if lstatic:
+                message.sub_debug(_('Stripping static libraries'), lstatic)
+                cmd = [strip, '--strip-debug']
+                cmd.extend(lstatic)
+                misc.system_command(cmd)
+            if lrpath:
+                message.sub_debug(_('Stripping RPATH'), sfile)
+                cmd = [misc.whereis('scanelf'), '-CBXrq']
+                cmd.extend(lrpath)
+                misc.system_command(cmd)
 
         message.sub_info(_('Checking runtime dependencies'))
         missing_detected = False
