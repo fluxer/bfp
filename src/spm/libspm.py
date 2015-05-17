@@ -902,7 +902,7 @@ class Source(object):
                 os.unlink(instsym)
                 os.rmdir(instreal)
 
-        message.sub_info(_('Idexing content'))
+        message.sub_info(_('Indexing content'))
         target_content = misc.list_all(self.install_dir)
 
         if self.purge_paths:
@@ -954,7 +954,8 @@ class Source(object):
             if sfile.endswith((self.target_footprint, self.target_metadata, \
                 self.target_srcbuild)):
                 continue
-            target_content[sfile] = misc.file_mime(sfile)
+            message.sub_debug(_('Caching MIME of'), sfile)
+            target_content[sfile] = misc.file_mime(sfile, quick=True)
 
         if self.strip_binaries or self.strip_shared or \
             self.strip_static or self.strip_rpath:

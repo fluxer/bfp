@@ -10,7 +10,7 @@ The following software is required:
 
 [GNU Parted](http://www.gnu.org/software/parted/),
 [pyparted](https://github.com/rhinstaller/pyparted),
-[Coreutils](https://www.gnu.org/software/coreutils/),
+[Coreutils](https://www.gnu.org/software/coreutils/) (or [Busybox](http://www.busybox.net/)),
 [kmod](https://www.kernel.org/pub/linux/utils/kernel/kmod/) (or [Busybox](http://www.busybox.net/)),
 [Findutils](http://www.gnu.org/software/findutils/) (or [Busybox](http://www.busybox.net/)),
 [Busybox](http://www.busybox.net/),

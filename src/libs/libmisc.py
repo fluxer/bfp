@@ -263,14 +263,44 @@ class Misc(object):
         return self.string_search(string, self.file_read(sfile), exact=exact, \
             escape=escape)
 
-    def file_mime(self, sfile, resolve=False):
-        ''' Get file type, you should use Magic().get() instead '''
+    def file_mime(self, sfile, resolve=False, quick=False):
+        ''' Get file type, you should propably use Magic().get() instead '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
             self.typecheck(resolve, (types.BooleanType))
 
         if resolve:
             sfile = os.path.realpath(sfile)
+
+        if quick:
+            # pre-computed but unreliable MIME types, if you want to add more
+            # then please have in mind that the extension may be shared with
+            # multiple MIME types and missleading
+            if sfile.endswith(('.c', '.h', '.cpp', '.hpp', '.S')):
+                return 'text/x-c'
+            elif sfile.endswith(('.sh', '.bash')):
+                return 'text/x-shellscript'
+            elif sfile.endswith('.pl'):
+                return 'text/x-perl'
+            elif sfile.endswith('.py'):
+                return 'text/x-python'
+            elif sfile.endswith('.rb'):
+                return 'text/x-ruby'
+            elif sfile.endswith('.txt'):
+                return 'text/plain'
+            elif sfile.endswith('/Makefile'):
+                return 'text/x-makefile'
+            elif sfile.endswith('.bmp'):
+                return 'image/bmp'
+            elif sfile.endswith('.gif'):
+                return 'image/gif'
+            elif sfile.endswith(('.jpeg', '.jpg')):
+                return 'image/jpeg'
+            elif sfile.endswith('.png'):
+                return 'image/png'
+            elif sfile.endswith('.svg'):
+                return 'image/svg+xml'
+
         return self.string_encode(self.magic.get(sfile))
 
     def file_substitute(self, string, string2, sfile):
@@ -1106,7 +1136,8 @@ class Magic(object):
 
         self.libmagic = ctypes.CDLL('libmagic.so', use_errno=True)
         if not flags:
-            flags = self.NONE | self.MIME_TYPE # | self.NO_CHECK_COMPRESS | self.NO_CHECK_TAR
+            flags = self.NONE | self.MIME_TYPE | self.PRESERVE_ATIME | \
+            self.NO_CHECK_ENCODING # | self.NO_CHECK_COMPRESS | self.NO_CHECK_TAR
         self.flags = flags
         self.cookie = self.libmagic.magic_open(self.flags)
         self.libmagic.magic_load(self.cookie, None)
