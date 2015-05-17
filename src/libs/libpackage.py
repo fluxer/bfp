@@ -70,14 +70,19 @@ class Database(object):
             metadata = os.path.join(sdir, 'metadata')
             footprint = os.path.join(sdir, 'footprint')
             if os.path.isfile(metadata) and os.path.isfile(footprint):
-                self.LOCAL_CACHE[sdir] = {
-                    'version': self._local_metadata(metadata, 'version'),
-                    'release': self._local_metadata(metadata, 'release'),
-                    'description': self._local_metadata(metadata, 'description'),
-                    'depends': self._local_metadata(metadata, 'depends').split(),
-                    'size': self._local_metadata(metadata, 'size'),
-                    'footprint': misc.file_read(footprint)
-                }
+                self.LOCAL_CACHE[sdir] = {}
+                for line in misc.file_readlines(metadata):
+                    line = misc.string_encode(line)
+                    if line.startswith(('version=', 'release=', \
+                        'description=', 'depends=', 'size=')):
+                        key, value = line.split('=')
+                        if key == 'depends':
+                            value = value.split()
+                        self.LOCAL_CACHE[sdir][key] = value
+                # for backwards compatibility and making release optional
+                if not 'release' in self.LOCAL_CACHE[sdir]:
+                    self.LOCAL_CACHE[sdir]['release'] = '1'
+                self.LOCAL_CACHE[sdir]['footprint'] = misc.file_read(footprint)
         # print(sys.getsizeof(self.LOCAL_CACHE))
 
     def _build_remote_cache(self):
@@ -100,20 +105,6 @@ class Database(object):
                     'backup': parser.backup
                 }
         # print(sys.getsizeof(self.REMOTE_CACHE))
-
-    def _local_metadata(self, smetadata, skey):
-        ''' Returns metadata of local target '''
-        if misc.python2:
-            misc.typecheck(smetadata, (types.StringTypes))
-            misc.typecheck(skey, (types.StringTypes))
-
-        key = misc.string_encode('%s=' % skey)
-        for line in misc.file_readlines(smetadata):
-            if line.startswith(key):
-                return misc.string_encode(line).split('=')[1].strip()
-        # for backwards compatibility and making release optional
-        if skey == 'release':
-            return '1'
 
     def remote_all(self, basename=False):
         ''' Returns directories of all remote (repository) targets '''

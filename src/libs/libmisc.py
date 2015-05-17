@@ -173,10 +173,10 @@ class Misc(object):
             self.typecheck(escape, (types.BooleanType))
 
         if exact and escape:
-            return re.findall('(\\s|^)' + re.escape(string) + '(\\s|$)', \
+            return re.findall('(?:\\s|^)' + re.escape(string) + '(?:\\s|$)', \
                 self.string_convert(string2))
         elif exact:
-            return re.findall('(\\s|^)' + string + '(\\s|$)', \
+            return re.findall('(?:\\s|^)' + string + '(?:\\s|$)', \
                 self.string_convert(string2))
         elif escape:
             return re.findall(re.escape(string), self.string_convert(string2))
