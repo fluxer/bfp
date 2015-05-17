@@ -1081,22 +1081,28 @@ class Magic(object):
         self.SYMLINK = 0x000002         # Follow symlinks
         self.COMPRESS = 0x000004        # Check inside compressed files
         self.DEVICES = 0x000008         # Look at the contents of devices
-        self.MIME = 0x000010            # Return a mime string
-        self.MIME_ENCODING = 0x000400   # Return the MIME encoding
+        self.MIME_TYPE = 0x000010       # Return the MIME type
         self.CONTINUE = 0x000020        # Return all matches
         self.CHECK = 0x000040           # Print warnings to stderr
         self.PRESERVE_ATIME = 0x000080  # Restore access time on exit
         self.RAW = 0x000100             # Don't translate unprintable chars
         self.ERROR = 0x000200           # Handle ENOENT etc as real errors
+        self.MIME_ENCODING = 0x000400   # Return the MIME encoding
+        self.MIME = self.MIME_TYPE | self.MIME_ENCODING
+        self.APPLE = 0x000800           # Return the Apple creator and type
         self.NO_CHECK_COMPRESS = 0x001000 # Don't check for compressed files
         self.NO_CHECK_TAR = 0x002000    # Don't check for tar files
         self.NO_CHECK_SOFT = 0x004000   # Don't check magic entries
         self.NO_CHECK_APPTYPE = 0x008000 # Don't check application type
         self.NO_CHECK_ELF = 0x010000    # Don't check for elf details
-        self.NO_CHECK_ASCII = 0x020000  # Don't check for ascii files
-        self.NO_CHECK_TROFF = 0x040000  # Don't check ascii/troff
-        self.NO_CHECK_FORTRAN = 0x080000 # Don't check ascii/fortran
+        self.NO_CHECK_TEXT = 0x020000   # Don't check for text files
+        self.NO_CHECK_CDF = 0x040000    # Don't check for cdf files
         self.NO_CHECK_TOKENS = 0x100000 # Don't check ascii/tokens
+        self.NO_CHECK_ENCODING 0x200000 # Don't check text encodings
+        self.NO_CHECK_BUILTIN = self.NO_CHECK_COMPRESS | self.NO_CHECK_TAR | \
+            self.NO_CHECK_SOFT | self.NO_CHECK_APPTYPE | self.NO_CHECK_ELF | \
+            self.NO_CHECK_TEXT | self.NO_CHECK_CDF | self.NO_CHECK_TOKENS | \
+            self.NO_CHECK_ENCODING
 
         self.libmagic = ctypes.CDLL('libmagic.so', use_errno=True)
         if not flags:
