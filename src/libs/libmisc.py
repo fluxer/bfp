@@ -1098,7 +1098,7 @@ class Magic(object):
         self.NO_CHECK_TEXT = 0x020000   # Don't check for text files
         self.NO_CHECK_CDF = 0x040000    # Don't check for cdf files
         self.NO_CHECK_TOKENS = 0x100000 # Don't check ascii/tokens
-        self.NO_CHECK_ENCODING 0x200000 # Don't check text encodings
+        self.NO_CHECK_ENCODING = 0x200000 # Don't check text encodings
         self.NO_CHECK_BUILTIN = self.NO_CHECK_COMPRESS | self.NO_CHECK_TAR | \
             self.NO_CHECK_SOFT | self.NO_CHECK_APPTYPE | self.NO_CHECK_ELF | \
             self.NO_CHECK_TEXT | self.NO_CHECK_CDF | self.NO_CHECK_TOKENS | \
@@ -1106,7 +1106,7 @@ class Magic(object):
 
         self.libmagic = ctypes.CDLL('libmagic.so', use_errno=True)
         if not flags:
-            flags = self.NONE | self.MIME # | self.NO_CHECK_COMPRESS | self.NO_CHECK_TAR
+            flags = self.NONE | self.MIME_TYPE # | self.NO_CHECK_COMPRESS | self.NO_CHECK_TAR
         self.flags = flags
         self.cookie = self.libmagic.magic_open(self.flags)
         self.libmagic.magic_load(self.cookie, None)
