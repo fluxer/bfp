@@ -12,7 +12,8 @@ class TestSuite(unittest.TestCase):
     database.ROOT_DIR = tempfile.mkdtemp()
 
     def create_remote(self, name, sdir, version, release, description, \
-        depends='', makedepends='', sources='', options='', backup=''):
+        depends='', makedepends='', sources='', pgpkeys='',options='', \
+        backup=''):
         sdir = database.CACHE_DIR + '/repositories/test/' + name
         os.makedirs(sdir)
         srcbuild = open(sdir + '/SRCBUILD', 'w')
@@ -23,6 +24,7 @@ class TestSuite(unittest.TestCase):
         srcbuild.write('\nmakedepends=(' + misc.string_convert(makedepends) + ')')
         srcbuild.write('\ncheckdepends=(' + name + ')')
         srcbuild.write('\nsources=(' + misc.string_convert(sources) + ')')
+        srcbuild.write('\npgpkeys=(' + misc.string_convert(pgpkeys) + ')')
         srcbuild.write('\noptions=(' + misc.string_convert(options) + ')')
         srcbuild.write('\nbackup=(' + misc.string_convert(backup) + ')')
         srcbuild.close()
@@ -67,13 +69,14 @@ class TestSuite(unittest.TestCase):
         self.remote_depends = ['filesystem', 'linux-api-headers', 'tzdata']
         self.remote_makedepends = ['circular']
         self.remote_source = ['\n', '', 'http://ftp.gnu.org/gnu/glibc/glibc-2.16.0.tar.xz']
+        self.remote_pgpkeys = ['25EF0A436C2A4AFF']
         self.remote_options = ['!binaries', 'shared', '!static', 'man']
         self.remote_backup = ['etc/ld.so.conf', 'etc/nsswitch.conf']
         self.create_remote(self.remote_name, self.remote_dir, \
             self.remote_version, self.remote_release, \
             self.remote_description, self.remote_depends, \
-            self.remote_makedepends, self.remote_source, self.remote_options, \
-            self.remote_backup)
+            self.remote_makedepends, self.remote_source, self.remote_pgpkeys, \
+            self.remote_options, self.remote_backup)
 
         # second dummy remote target
         self.remote2_name = 'dummy'
@@ -238,6 +241,10 @@ class TestSuite(unittest.TestCase):
     def test_remote_target_source(self):
         self.assertEqual(database.remote_metadata(self.remote_name, 'sources'), \
             ['http://ftp.gnu.org/gnu/glibc/glibc-2.16.0.tar.xz'])
+
+    def test_remote_target_pgpkeys(self):
+        self.assertEqual(database.remote_metadata(self.remote_name, 'pgpkeys'), \
+            self.remote_pgpkeys)
 
     def test_remote_target_options(self):
         self.assertEqual(database.remote_metadata(self.remote_name, 'options'), \
