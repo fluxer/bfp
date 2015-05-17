@@ -104,6 +104,10 @@ Strip static library files.
 
 Compress manual page files.
 
+=head3 purge
+
+Purge unwanted files and directories.
+
 =head3 missing
 
 Ignore missing runtime dependencies.

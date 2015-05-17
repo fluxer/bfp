@@ -17,7 +17,7 @@ sources=("ftp://ftp.astron.com/pub/file/$_base.tar.gz"
          'dummy.patch')
 pgpkeys=('12345678')
 options=('!binaries' '!shared' '!static' 'man' 'mirror' 'missing' '!rpath'
-         '!pycompile' 'debug')
+         '!pycompile' 'debug' '!purge')
 backup=('etc/bar/baz.conf')
 
 src_compile() {
