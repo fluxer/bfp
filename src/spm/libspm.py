@@ -106,7 +106,7 @@ if not os.path.isfile(REPOSITORIES_CONF):
 else:
     REPOSITORIES = []
     for line in misc.file_readlines(REPOSITORIES_CONF):
-        line = line.strip()
+        line = misc.string_encode(line.strip())
         if line.startswith(('http://', 'https://', 'ftp://', 'ftps://', \
             'git://', 'ssh://', 'rsync://')) or os.path.exists(line):
             REPOSITORIES.append(line)
@@ -123,7 +123,7 @@ if not os.path.isfile(MIRRORS_CONF):
 else:
     MIRRORS = []
     for line in misc.file_readlines(MIRRORS_CONF):
-        line = line.strip()
+        line = misc.string_encode(line.strip())
         if line.startswith(('http://', 'https://', 'ftp://', 'ftps://')):
             MIRRORS.append(line)
 
@@ -139,7 +139,7 @@ if not os.path.isfile(KEYSERVERS_CONF):
 else:
     KEYSERVERS = []
     for line in misc.file_readlines(KEYSERVERS_CONF):
-        line = line.strip()
+        line = misc.string_encode(line.strip())
         if line:
             KEYSERVERS.append(line)
 
