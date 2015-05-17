@@ -87,4 +87,4 @@ COPYING file bundled with the source code.
 
 =head1 SEE ALSO
 
-mkinitfs(8) gunzip() cpio(5)
+mkinitfs(8) gzip(1) cpio(1)

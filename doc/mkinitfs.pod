@@ -107,4 +107,4 @@ COPYING file bundled with the source code.
 
 =head1 SEE ALSO
 
-lsinitfs(8) scanelf(1) gzip() cpio(5) modprobe()
+lsinitfs(8) scanelf(1) gzip(1) cpio(1) modprobe(8)
