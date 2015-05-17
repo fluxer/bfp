@@ -305,9 +305,10 @@ class Misc(object):
 
     def file_substitute(self, string, string2, sfile):
         ''' Substitue a string with another in file '''
-        self.typecheck(string, (types.StringTypes))
-        self.typecheck(string2, (types.StringTypes))
-        self.typecheck(sfile, (types.StringTypes))
+        if self.python2:
+            self.typecheck(string, (types.StringTypes))
+            self.typecheck(string2, (types.StringTypes))
+            self.typecheck(sfile, (types.StringTypes))
 
         self.file_write(sfile, re.sub(string, string2, self.file_read(sfile)))
 
@@ -724,14 +725,14 @@ class Misc(object):
                 raise Exception('GZip', 'format can hold only single file')
             gzipf = gzip.GzipFile(sfile, 'wb')
             for f in lpaths:
-                gzipf.write(self.file_read(f))
+                gzipf.write(self.string_encode(self.file_read(f)))
             gzipf.close()
         elif sfile.endswith('.bz2'):
             if len(lpaths) > 1:
                 raise Exception('BZip', 'format can hold only single file')
             bzipf = bz2.BZ2File(sfile, 'wb')
             for f in lpaths:
-                bzipf.write(self.file_read(f))
+                bzipf.write(self.string_encode(self.file_read(f)))
             bzipf.close()
 
     def archive_decompress(self, sfile, sdir, demote=''):

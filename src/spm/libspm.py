@@ -935,7 +935,7 @@ class Source(object):
                         continue
                     if not sfile.endswith('.gz') and os.path.isfile(sfile):
                         message.sub_debug(_('Compressing'), sfile)
-                        misc.archive_compress((sfile,), sfile + '.gz', '')
+                        misc.archive_compress((sfile,), '%s.gz' % sfile, '')
                         os.unlink(sfile)
                     elif os.path.islink(sfile) and \
                         not os.path.isfile(os.path.realpath(sfile)):
@@ -943,7 +943,7 @@ class Source(object):
                         link = os.readlink(sfile)
                         if not sfile.endswith('.gz'):
                             os.unlink(sfile)
-                            os.symlink(link + '.gz', sfile)
+                            os.symlink('%s.gz' % link, sfile)
                         else:
                             os.unlink(sfile)
                             os.symlink(link, sfile)
