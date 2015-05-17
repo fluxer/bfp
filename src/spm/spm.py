@@ -19,7 +19,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.7.6 (e7290fc)"
+app_version = "1.7.6 (83ba35c)"
 
 try:
     import libmessage
@@ -132,6 +132,12 @@ try:
         ''' Override MAKEFLAGS '''
         def __call__(self, parser, namespace, values, option_string=None):
             libspm.MAKEFLAGS = values
+            setattr(namespace, self.dest, values)
+
+    class OverridePurge(argparse.Action):
+        ''' Override paths to be purged '''
+        def __call__(self, parser, namespace, values, option_string=None):
+            libspm.PURGE_PATHS = values
             setattr(namespace, self.dest, values)
 
     class OverrideMan(argparse.Action):
@@ -368,6 +374,8 @@ try:
         help=_('Change LDFLAGS'))
     parser.add_argument('--makeflags', type=str, action=OverrideMakeflags, \
         help=_('Change MAKEFLAGS'))
+    parser.add_argument('--purge', type=str, action=OverridePurge, \
+        help=_('Change PURGE_PATHS'))
     parser.add_argument('--man', type=ast.literal_eval, action=OverrideMan, \
         choices=[True, False], help=_('Set whether to compress man pages'))
     parser.add_argument('--split', type=ast.literal_eval, \
@@ -472,6 +480,7 @@ try:
         message.sub_info(_('CPPFLAGS'), libspm.CPPFLAGS)
         message.sub_info(_('LDFLAGS'), libspm.LDFLAGS)
         message.sub_info(_('MAKEFLAGS'), libspm.MAKEFLAGS)
+        message.sub_info(_('PURGE_PATHS'), libspm.PURGE_PATHS)
         message.sub_info(_('COMPRESS_MAN'), libspm.COMPRESS_MAN)
         message.sub_info(_('SPLIT_DEBUG'), libspm.SPLIT_DEBUG)
         message.sub_info(_('STRIP_BINARIES'), libspm.STRIP_BINARIES)

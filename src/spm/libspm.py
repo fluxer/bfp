@@ -40,6 +40,7 @@ DEFAULTS = {
     'CPPFLAGS': '',
     'LDFLAGS': '',
     'MAKEFLAGS': '',
+    'PURGE_PATHS': '.*/.packlist|.*/perllocal.pod|.*/share/info/dir',
     'COMPRESS_MAN': 'False',
     'SPLIT_DEBUG': 'False',
     'STRIP_BINARIES': 'False',
@@ -83,6 +84,7 @@ CXXFLAGS = conf.get('compile', 'CXXFLAGS')
 CPPFLAGS = conf.get('compile', 'CPPFLAGS')
 LDFLAGS = conf.get('compile', 'LDFLAGS')
 MAKEFLAGS = conf.get('compile', 'MAKEFLAGS')
+PURGE_PATHS = conf.get('install', 'PURGE_PATHS')
 COMPRESS_MAN = conf.getboolean('install', 'COMPRESS_MAN')
 SPLIT_DEBUG = conf.getboolean('install', 'SPLIT_DEBUG')
 STRIP_BINARIES = conf.getboolean('install', 'STRIP_BINARIES')
@@ -480,12 +482,13 @@ class Source(object):
         self.autoremove = autoremove
         self.verify = VERIFY
         self.mirror = MIRROR
+        self.purge_paths = PURGE_PATHS
+        self.compress_man = COMPRESS_MAN
         self.split_debug = SPLIT_DEBUG
         self.strip_binaries = STRIP_BINARIES
         self.strip_shared = STRIP_SHARED
         self.strip_static = STRIP_STATIC
         self.strip_rpath = STRIP_RPATH
-        self.compress_man = COMPRESS_MAN
         self.ignore_missing = IGNORE_MISSING
         self.python_compile = PYTHON_COMPILE
         message.CATCH = CATCH
@@ -899,6 +902,20 @@ class Source(object):
                 os.unlink(instsym)
                 os.rmdir(instreal)
 
+        message.sub_info(_('Idexing content'))
+        target_content = misc.list_all(self.install_dir)
+
+        if self.purge_paths:
+            message.sub_info(_('Purging unwanted files and directories'))
+            for spath in misc.string_search(self.purge_paths, \
+                    '\n'.join(target_content), exact=True, escape=False):
+                spath = spath.strip()
+                message.sub_debug(_('Purging'), spath)
+                if os.path.isdir(spath):
+                    misc.dir_remove(spath)
+                else:
+                    os.unlink(spath)
+
         if self.compress_man:
             message.sub_info(_('Compressing manual pages'))
             manpath = misc.whereis('manpath', fallback=False)
@@ -910,8 +927,12 @@ class Source(object):
             else:
                 mpaths = misc.system_output((manpath, '--global')).split(':')
 
+            # NOTE: if target_content is reused later before re-indexing
+            # entries from it should be removed because files are removed
             for sdir in mpaths:
-                for sfile in misc.list_files(self.install_dir + sdir):
+                for sfile in target_content:
+                    if not sdir in sfile:
+                        continue
                     if not sfile.endswith('.gz') and os.path.isfile(sfile):
                         message.sub_debug(_('Compressing'), sfile)
                         misc.archive_compress((sfile,), sfile + '.gz', '')
@@ -927,17 +948,11 @@ class Source(object):
                             os.unlink(sfile)
                             os.symlink(link, sfile)
 
-        message.sub_info(_('Indexing content'))
+        message.sub_info(_('Re-indexing content'))
         target_content = {}
         for sfile in misc.list_files(self.install_dir):
             if sfile.endswith((self.target_footprint, self.target_metadata, \
                 self.target_srcbuild)):
-                continue
-            # remove common conflict files/directories
-            elif sfile.endswith('/.packlist') \
-                or sfile.endswith('/perllocal.pod') \
-                or sfile.endswith('/share/info/dir'):
-                os.unlink(sfile)
                 continue
             target_content[sfile] = misc.file_mime(sfile)
 
@@ -1461,6 +1476,11 @@ class Source(object):
                     message.sub_warning(_('Overriding PYTHON_COMPILE to'), _('False'))
                     self.python_compile = False
 
+                # that's a bit of exception
+                if option == '!purge' and self.purge_paths:
+                    message.sub_warning(_('Overriding PURGE_PATHS to'), _('False'))
+                    self.purge_paths = False
+
             if self.do_clean:
                 message.sub_info(_('Starting %s cleanup at') % \
                     self.target_name, datetime.today())
@@ -1534,13 +1554,14 @@ class Source(object):
             # reset values so that overrides apply only to single target
             self.verify = VERIFY
             self.mirror = MIRROR
+            self.purge_paths = PURGE_PATHS
+            self.compress_man = COMPRESS_MAN
             self.split_debug = SPLIT_DEBUG
             self.strip_binaries = STRIP_BINARIES
             self.strip_shared = STRIP_SHARED
             self.strip_static = STRIP_STATIC
             self.strip_rpath = STRIP_RPATH
             self.python_compile = PYTHON_COMPILE
-            self.compress_man = COMPRESS_MAN
             self.ignore_missing = IGNORE_MISSING
 
 wantscookie = '''
