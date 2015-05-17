@@ -36,7 +36,7 @@ database = libpackage.Database()
 import libspm
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.7.6 (ff92cff)"
+app_version = "1.7.6 (3d8d0ff)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -100,7 +100,7 @@ class Check(object):
                     bang_regexp += '(?:sh|bash|dash|ksh|csh|tcsh|tclsh|scsh|fish'
                     bang_regexp += '|zsh|ash|python|perl|php|ruby|lua|wish|(?:g)?awk)'
                     bang_regexp += '(?:(?:\\d(?:.)?)+)?(?:\\s|$)'
-                    fmatch = misc.file_search(bang_regexp, sfile, exact=False, escape=False)
+                    fmatch = misc.file_search(bang_regexp, sfile, escape=False)
                     if fmatch:
                         fmatch = fmatch[0].replace('#!', '').strip().split()[0]
                         required.append(fmatch)
@@ -377,7 +377,7 @@ class Lint(object):
                             bang_regexp += '(?:sh|bash|dash|ksh|csh|tcsh|tclsh|scsh|fish'
                             bang_regexp += '|zsh|ash|python|perl|php|ruby|lua|wish|(?:g)?awk)'
                             bang_regexp += '(?:(?:\\d(?:.)?)+)?(?:\\s|$)'
-                            match = misc.file_search(bang_regexp, sfile, exact=False, escape=False)
+                            match = misc.file_search(bang_regexp, sfile, escape=False)
                             if match:
                                 match = match[0].replace('#!', '').strip().split()[0]
                                 if not database.local_belongs(match, exact=True, escape=False):
