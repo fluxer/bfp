@@ -37,9 +37,11 @@ class SPMD(dbus.service.Object):
 
     def _GetUpdates(self):
         targets = []
-        for local in database.local_all():
-            if not database.local_uptodate(local):
-                targets.append(local)
+        for target in database.local_all():
+            if not database.local_uptodate(target) \
+                # local targets can not be verified against invalid remote
+                and database.remote_search(target):
+                targets.append(target)
         return targets
 
     @dbus.service.signal('com.spm.Daemon')
@@ -105,8 +107,11 @@ class SPMD(dbus.service.Object):
             conf = configparser.SafeConfigParser()
             conf.read(libspm.MAIN_CONF)
             conf.set(section, variable, value)
-            with open(libspm.MAIN_CONF, 'wb') as libspmconf:
+            libspmconf = open(libspm.MAIN_CONF, 'wb'):
+            try:
                 conf.write(libspmconf)
+            finally:
+                libspmconf.close()
             reload(libspm)
         except Exception as detail:
             message.critical(str(detail))
@@ -395,6 +400,7 @@ class SPMD(dbus.service.Object):
             timelock = os.path.join(database.CACHE_DIR, 'spmd.time')
             if os.path.isfile(timelock):
                 lasttime = misc.file_read(timelock)
+                # TODO: sanity check, fallback to currenttime
             else:
                 lasttime = currenttime
                 misc.file_write(timelock, currenttime)
@@ -403,6 +409,7 @@ class SPMD(dbus.service.Object):
             message.info('Update on', UPDATE)
 
             while True:
+                update = False
                 for wd, mask, cookie, name in slave_notify.event_read():
                     self.Configs()
                     reload(libspm)
@@ -414,43 +421,28 @@ class SPMD(dbus.service.Object):
                 if (result >= 60) and UPDATE == 'minute':
                     lasttime = currenttime
                     misc.file_write(timelock, str(currenttime))
-                    if ACTION == 'silent':
-                        self.Sync()
-                        self.Update(FROMSOURCE)
-                    else:
-                        self.Updates(self._GetUpdates())
+                    update = True
                 elif (result >= 3600) and UPDATE == 'hourly':
                     lasttime = currenttime
                     misc.file_write(timelock, str(currenttime))
-                    if ACTION == 'silent':
-                        self.Sync()
-                        self.Update(FROMSOURCE)
-                    else:
-                        self.Updates(self._GetUpdates())
+                    update = True
                 elif (result >= 86400) and UPDATE == 'daily':
                     lasttime = currenttime
                     misc.file_write(timelock, str(currenttime))
-                    if ACTION == 'silent':
-                        self.Sync()
-                        self.Update(FROMSOURCE)
-                    else:
-                        self.Updates(self._GetUpdates())
+                    update = True
                 elif (result >= 604800) and UPDATE == 'weekly':
                     lasttime = currenttime
                     misc.file_write(timelock, str(currenttime))
-                    if ACTION == 'silent':
-                        self.Sync()
-                        self.Update(FROMSOURCE)
-                    else:
-                        self.Updates(self._GetUpdates())
+                    update = True
                 elif (result >= 18144000) and UPDATE == 'monthly':
                     lasttime = currenttime
                     misc.file_write(timelock, str(currenttime))
-                    if ACTION == 'silent':
-                        self.Sync()
-                        self.Update(FROMSOURCE)
-                    else:
-                        self.Updates(self._GetUpdates())
+                    update = True
+                if update and ACTION == 'silent':
+                    self.Sync()
+                    self.Update(FROMSOURCE)
+                elif update:
+                    self.Updates(self._GetUpdates())
                 time.sleep(1)
         except Exception as detail:
             message.critical(str(detail))
