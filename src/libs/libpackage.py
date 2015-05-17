@@ -53,6 +53,8 @@ class Database(object):
                     if line.startswith(('version=', 'release=', \
                         'description=', 'depends=', 'size=')):
                         key, value = misc.string_encode(line).split('=')
+                        if key == 'depends':
+                            value = value.split()
                         self.LOCAL_CACHE[sdir][key] = value
                 # for backwards compatibility and making release optional
                 if not 'release' in self.LOCAL_CACHE[sdir]:
