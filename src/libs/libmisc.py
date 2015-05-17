@@ -1130,7 +1130,7 @@ class Magic(object):
             # libmagic 5.09 has a bug where it might fail to identify the
             # mimetype of a file and returns null from magic_file (and
             # likely _buffer), but also does not return an error message.
-            if (self.flags & self.MIME):
+            if (self.flags & self.MIME_TYPE):
                 return 'application/octet-stream'
             raise Exception(self.error())
         return result
