@@ -145,6 +145,7 @@ class Check(object):
                 message.sub_debug(_('Adjusting target dependencies'))
                 content = misc.file_read(target_metadata)
                 for line in misc.file_readlines(target_metadata):
+                    line = misc.string_encode(line)
                     if line.startswith('depends='):
                         content = content.replace(line, \
                             'depends=%s' % misc.string_convert(target_depends))
