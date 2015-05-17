@@ -194,8 +194,10 @@ class Misc(object):
             self.typecheck(sfile, (types.StringTypes))
 
         rfile = open(sfile, 'rb')
-        content = rfile.read()
-        rfile.close()
+        try:
+            content = rfile.read()
+        finally:
+            rfile.close()
         return self.string_encode(content)
 
     def file_read_nonblock(self, sfile, ibuffer=1024):
@@ -205,8 +207,10 @@ class Misc(object):
             self.typecheck(ibuffer, (types.IntType))
 
         fd = os.open(sfile, os.O_NONBLOCK)
-        content = os.read(fd, ibuffer)
-        os.close(fd)
+        try:
+            content = os.read(fd, ibuffer)
+        finally:
+            os.close(fd)
         return content
 
     def file_readlines(self, sfile):
@@ -215,8 +219,10 @@ class Misc(object):
             self.typecheck(sfile, (types.StringTypes))
 
         rfile = open(sfile, 'rb')
-        content = rfile.read().splitlines()
-        rfile.close()
+        try:
+            content = rfile.read().splitlines()
+        finally:
+            rfile.close()
         return self.string_encode(content)
 
     def file_write(self, sfile, content, mode='w'):
@@ -228,8 +234,10 @@ class Misc(object):
 
         self.dir_create(os.path.dirname(sfile))
         wfile = open(sfile, mode)
-        wfile.write(content)
-        wfile.close()
+        try:
+            wfile.write(content)
+        finally:
+            wfile.close()
 
     def file_write_nonblock(self, sfile, content):
         ''' Write data to file non-blocking (overwrites) '''
@@ -239,8 +247,10 @@ class Misc(object):
 
         self.dir_create(os.path.dirname(sfile))
         fd = os.open(sfile, os.O_NONBLOCK | os.O_WRONLY)
-        os.write(fd, content)
-        os.close(fd)
+        try:
+            os.write(fd, content)
+        finally:
+            os.close(fd)
 
     def file_search(self, string, sfile, exact=False, escape=True):
         ''' Search for string in file '''
@@ -659,14 +669,18 @@ class Misc(object):
 
         if sfile.endswith(('tar.bz2', '.tar.gz')):
             tarf = tarfile.open(sfile, 'w:' + self.file_extension(sfile))
-            for item in lpaths:
-                tarf.add(item, item.lstrip(strip))
-            tarf.close()
+            try:
+                for item in lpaths:
+                    tarf.add(item, item.lstrip(strip))
+            finally:
+                tarf.close()
         elif sfile.endswith('.zip'):
             zipf = zipfile.ZipFile(sfile, mode='w')
-            for item in lpaths:
-                zipf.write(item, item.lstrip(strip))
-            zipf.close()
+            try:
+                for item in lpaths:
+                    zipf.write(item, item.lstrip(strip))
+            finally:
+                zipf.close()
         elif sfile.endswith(('.xz', '.lzma')):
             tar = self.whereis('bsdtar', fallback=False)
             if not tar:
@@ -734,10 +748,12 @@ class Misc(object):
         smime = self.file_mime(sfile, True)
         if tarfile.is_tarfile(sfile):
             tfile = tarfile.open(sfile)
-            for member in tfile.getmembers():
-                if not member.isdir():
-                    content.append(member.name)
-            tfile.close()
+            try:
+                for member in tfile.getmembers():
+                    if not member.isdir():
+                        content.append(member.name)
+            finally:
+                tfile.close()
         elif zipfile.is_zipfile(sfile):
             zfile = zipfile.ZipFile(sfile)
             content = zfile.namelist()
@@ -764,11 +780,13 @@ class Misc(object):
 
         sizes = []
         tar = tarfile.open(star, 'r')
-        for i in tar.getmembers():
-            for sfile in lpaths:
-                if i.name == sfile:
-                    sizes.append(i.size)
-        tar.close()
+        try:
+            for i in tar.getmembers():
+                for sfile in lpaths:
+                    if i.name == sfile:
+                        sizes.append(i.size)
+        finally:
+            tar.close()
         return sizes
 
     def archive_content(self, star, lpaths):

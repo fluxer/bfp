@@ -103,13 +103,11 @@ if not os.path.isfile(REPOSITORIES_CONF):
     REPOSITORIES = ['https://bitbucket.org/smil3y/mini.git']
 else:
     REPOSITORIES = []
-    repositories_conf = open(REPOSITORIES_CONF, 'r')
-    for line in repositories_conf.readlines():
+    for line in misc.file_readlines(REPOSITORIES_CONF):
         line = line.strip()
         if line.startswith(('http://', 'https://', 'ftp://', 'ftps://', \
             'git://', 'ssh://', 'rsync://')) or os.path.exists(line):
             REPOSITORIES.append(line)
-    repositories_conf.close()
 
     if not REPOSITORIES:
         message.critical(_('Repositories configuration file is empty'))
@@ -122,12 +120,10 @@ if not os.path.isfile(MIRRORS_CONF):
     MIRRORS = ['http://distfiles.gentoo.org/distfiles']
 else:
     MIRRORS = []
-    mirrors_conf = open(MIRRORS_CONF, 'r')
-    for line in mirrors_conf.readlines():
+    for line in misc.file_readlines(MIRRORS_CONF):
         line = line.strip()
         if line.startswith(('http://', 'https://', 'ftp://', 'ftps://')):
             MIRRORS.append(line)
-    mirrors_conf.close()
 
     if not MIRRORS and MIRROR:
         message.critical(_('Mirrors configuration file is empty'))
@@ -140,12 +136,10 @@ if not os.path.isfile(KEYSERVERS_CONF):
     KEYSERVERS = ['pool.sks-keyservers.net']
 else:
     KEYSERVERS = []
-    mirrors_conf = open(KEYSERVERS_CONF, 'r')
-    for line in mirrors_conf.readlines():
+    for line in misc.file_readlines(KEYSERVERS_CONF):
         line = line.strip()
         if line:
             KEYSERVERS.append(line)
-    mirrors_conf.close()
 
     if not KEYSERVERS and VERIFY:
         message.critical(_('PGP keys servers configuration file is empty'))
@@ -1096,13 +1090,12 @@ class Source(object):
 
         message.sub_info(_('Assembling metadata'))
         misc.dir_create(os.path.join(self.install_dir, 'var/local/spm', self.target_name))
-        metadata = open(os.path.join(self.install_dir, self.target_metadata), 'w')
-        metadata.write('version=%s\n' % self.target_version)
-        metadata.write('release=%s\n' % self.target_release)
-        metadata.write('description=%s\n' % self.target_description)
-        metadata.write('depends=%s\n' % misc.string_convert(self.target_depends))
-        metadata.write('size=%d\n' % misc.dir_size(self.install_dir))
-        metadata.close()
+        data = 'version=%s\n' % self.target_version
+        data += 'release=%s\n' % self.target_release
+        data += 'description=%s\n' % self.target_description
+        data += 'depends=%s\n' % misc.string_convert(self.target_depends)
+        data += 'size=%d\n' % misc.dir_size(self.install_dir)
+        misc.file_write(os.path.join(self.install_dir, self.target_metadata), data)
 
         message.sub_info(_('Assembling footprint'))
         # due to creations and deletions of files, when byte-compiling

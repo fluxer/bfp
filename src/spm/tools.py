@@ -36,7 +36,7 @@ database = libpackage.Database()
 import libspm
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.7.6 (3d8d0ff)"
+app_version = "1.7.6 (e7290fc)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -640,6 +640,7 @@ class Pkg(object):
         """Search the Git interface on archlinux.org."""
         for d in self.GIT_DIRS:
             url = self.GIT_URL + d % pkgname
+            f = None
             try:
                 f = urlopen(url)
                 for line in f:
@@ -649,11 +650,14 @@ class Pkg(object):
                         name = m.group(2).decode()
                         if name[:2] != '..':
                             yield self.GIT_URL + href, name
-                f.close()
-                return
             except HTTPError as e:
                 if e.code != 404:
+                    if f:
+                        f.close()
                     raise
+            finally:
+                if f:
+                    f.close()
 
     def main(self):
         not_found = []
