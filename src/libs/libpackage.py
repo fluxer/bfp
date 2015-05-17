@@ -5,7 +5,7 @@ A module for package management with plain-text format database
 
 Database() is the core of Source Package Manager, it provides various methods
 to get information about packages installed and otherwise. The methods prefixed
-with "local" deal with metadata of software instaleld on the system, "remote"
+with "local" deal with metadata of software installed on the system, "remote"
 methods provide info for software available from repositories with build
 recipes in the SRCBUILD format.
 
@@ -50,9 +50,10 @@ class Database(object):
                 and os.path.isfile(srcbuild):
                 self.LOCAL_CACHE[sdir] = {}
                 for line in misc.file_readlines(metadata):
+                    line = misc.string_encode(line)
                     if line.startswith(('version=', 'release=', \
                         'description=', 'depends=', 'size=')):
-                        key, value = misc.string_encode(line).split('=')
+                        key, value = line.split('=')
                         if key == 'depends':
                             value = value.split()
                         self.LOCAL_CACHE[sdir][key] = value

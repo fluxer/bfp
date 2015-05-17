@@ -797,13 +797,17 @@ class Misc(object):
 
         content = []
         tar = tarfile.open(star, 'r')
-        for i in tar.getmembers():
-            for sfile in lpaths:
-                if i.name == sfile:
-                    t = tar.extractfile(i)
-                    content.append(t.read())
-                    t.close()
-        tar.close()
+        try:
+            for i in tar.getmembers():
+                for sfile in lpaths:
+                    if i.name == sfile:
+                        t = tar.extractfile(i)
+                        try:
+                            content.append(t.read())
+                        finally:
+                            t.close()
+        finally:
+            tar.close()
         return content
 
     def system_demote(self, suser):
