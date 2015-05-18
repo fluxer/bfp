@@ -36,7 +36,7 @@ database = libpackage.Database()
 import libspm
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.7.6 (e97fcbe)"
+app_version = "1.7.6 (7abe99b)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -308,7 +308,7 @@ class Lint(object):
                                 and os.path.realpath(sfile).startswith('/boot/'):
                                 message.sub_warning(_('Cross-filesystem symlink'), sfile)
                         elif os.stat(sfile).st_nlink == 2:
-                                message.sub_warning(_('Hardlink'), sfile)
+                            message.sub_warning(_('Hardlink'), sfile)
 
                 if self.doc:
                     if misc.string_search('/doc/|/gtk-doc', target_footprint, escape=False):
@@ -329,6 +329,7 @@ class Lint(object):
                         if os.path.islink(sfile):
                             continue
 
+                        # FIXME: Python 3000
                         if misc.file_search(libspm.BUILD_DIR, sfile):
                             message.sub_warning(_('Build directory trace(s)'), sfile)
 
