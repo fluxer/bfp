@@ -7,7 +7,8 @@
  * Make the python byte-compile work for versions other than what SPM has been run from
  * Write a script/module that will record API changes between release
 
-## ALL (on regular basis) ##
- * Run PyLint and do some kung-foo on the code style
- * Make use of sys.prefix and use less hardcode paths
- * Sanitize the code
+## SPMD/SPM-GUI ##
+ * Complete all tasks noted with FIXME/TODO
+
+## SPM-GUI ##
+ * Report dbus errors
