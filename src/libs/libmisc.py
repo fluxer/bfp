@@ -276,7 +276,9 @@ class Misc(object):
             # pre-computed but unreliable MIME types, if you want to add more
             # then please have in mind that the extension may be shared with
             # multiple MIME types and missleading
-            if sfile.endswith(('.c', '.h', '.cpp', '.hpp', '.S')):
+            if os.path.islink(sfile):
+                return 'inode/symlink'
+            elif sfile.endswith(('.c', '.h', '.cpp', '.hpp', '.S')):
                 return 'text/x-c'
             elif sfile.endswith(('.sh', '.bash')):
                 return 'text/x-shellscript'
@@ -286,7 +288,9 @@ class Misc(object):
                 return 'text/x-python'
             elif sfile.endswith('.rb'):
                 return 'text/x-ruby'
-            elif sfile.endswith('.txt'):
+            elif sfile.endswith('.awk'):
+                return 'text/x-awk'
+            elif sfile.endswith(('.txt', '.desktop')):
                 return 'text/plain'
             elif sfile.endswith('/Makefile'):
                 return 'text/x-makefile'
@@ -300,6 +304,11 @@ class Misc(object):
                 return 'image/png'
             elif sfile.endswith('.svg'):
                 return 'image/svg+xml'
+            elif sfile.endswith('.mo'):
+                # GNU message catalog
+                return 'application/octet-stream'
+            elif sfile.endswith('.xml'):
+                return 'application/xml'
 
         return self.string_encode(self.magic.get(sfile))
 
@@ -780,9 +789,9 @@ class Misc(object):
         if tarfile.is_tarfile(sfile):
             tfile = tarfile.open(sfile)
             try:
-                for member in tfile.getmembers():
-                    if not member.isdir():
-                        content.append(member.name)
+                for i in tfile:
+                    if not i.isdir():
+                        content.append(i.name)
             finally:
                 tfile.close()
         elif zipfile.is_zipfile(sfile):
@@ -812,7 +821,7 @@ class Misc(object):
         sizes = []
         tar = tarfile.open(star, 'r')
         try:
-            for i in tar.getmembers():
+            for i in tar:
                 for sfile in lpaths:
                     if i.name == sfile:
                         sizes.append(i.size)
@@ -829,14 +838,12 @@ class Misc(object):
         content = []
         tar = tarfile.open(star, 'r')
         try:
-            for i in tar.getmembers():
-                for sfile in lpaths:
-                    if i.name == sfile:
-                        t = tar.extractfile(i)
-                        try:
-                            content.append(t.read())
-                        finally:
-                            t.close()
+            for sfile in lpaths:
+                t = tar.extractfile(sfile)
+                try:
+                    content.append(t.read())
+                finally:
+                    t.close()
         finally:
             tar.close()
         return content
