@@ -1143,7 +1143,8 @@ class Source(object):
     def merge(self):
         ''' Merget target to system '''
         message.sub_info(_('Indexing content'))
-        old_content = database.local_metadata(self.target_name, 'footprint').splitlines()
+        old_content = database.local_metadata(self.target_name, 'footprint') or ''
+        old_content = old_content.splitlines()
         new_content = []
         backup_content = []
         tarf = tarfile.open(self.target_tarball)
@@ -1212,7 +1213,7 @@ class Source(object):
                 shutil.copy2(sfile, sfile + '.backup')
             for backup in self.target_backup:
                 if not backup in backup_content:
-                    message.sub_debug(_('Backup skipped'), sfile)
+                    message.sub_debug(_('Backup skipped'), backup)
 
         message.sub_info(_('Decompressing tarball'))
         misc.archive_decompress(self.target_tarball, ROOT_DIR)
