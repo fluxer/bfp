@@ -275,10 +275,6 @@ class SPMD(dbus.service.Object):
         message.info('Building', targets)
         try:
             self.Working()
-            for target in targets:
-                if not database.remote_search(target):
-                    message.warning('%s is not valid' % target)
-                    return('%s is not valid' % target)
             m = libspm.Source(targets, do_clean=True, do_prepare=True, \
                 do_compile=True, do_install=True, do_merge=True)
             mthread = threading.Thread(target=self._AsyncCall, args=(m.main, self.Finished,))
@@ -292,10 +288,7 @@ class SPMD(dbus.service.Object):
         ''' Install a package '''
         message.info('Installing', targets)
         try:
-            for target in targets:
-                if not database.remote_search(target):
-                    message.warning('%s is not valid' % target)
-                    return('%s is not valid' % target)
+            self.Working()
             m = libspm.Binary(targets, do_prepare=True, do_merge=True, do_depends=True)
             mthread = threading.Thread(target=self._AsyncCall, args=(m.main, self.Finished,))
             mthread.start()
@@ -308,10 +301,7 @@ class SPMD(dbus.service.Object):
         ''' Install a package '''
         message.info('Removing', targets)
         try:
-            for target in targets:
-                if not database.local_search(target):
-                    message.warning('%s is not installed' % target)
-                    return('%s is not installd' % target)
+            self.Working()
             if recursive:
                 # oh, boy! do not pass glibc here!
                 m = libspm.Binary(targets, autoremove=True)

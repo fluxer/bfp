@@ -40,8 +40,26 @@ class Worker(QtCore.QThread):
         except Exception as detail:
             self.emit(QtCore.SIGNAL('failed'), str(detail))
 
+class Interface(QtCore.QObject):
+    ''' Tab widget '''
+    def __init__(self, parent):
+        super(Interface, self).__init__()
+
+    @QtCore.pyqtSlot(QtCore.QString)
+    def MessageInfo(*msg):
+        MessageInfo(str(msg[1]))
+
+    @QtCore.pyqtSlot()
+    def RefreshAll(*msg):
+        RefreshAll()
+
+face = Interface(app)
 iface = QtDBus.QDBusInterface('com.spm.Daemon', '/com/spm/Daemon', \
     'com.spm.Daemon', bus)
+bus.connect('com.spm.Daemon', '/com/spm/Daemon', 'com.spm.Daemon', \
+    'Finished', face.MessageInfo)
+bus.connect('com.spm.Daemon', '/com/spm/Daemon', 'com.spm.Daemon', \
+    'Finished', face.RefreshAll)
 
 def MessageInfo(*msg):
     return QtGui.QMessageBox.information(MainWindow, 'Information', misc.string_convert(msg))
@@ -258,8 +276,6 @@ def SearchMetadata():
 
 def Sync():
     DisableWidgets()
-    iface.connect(app, QtCore.SIGNAL('Finished(QString)'), MessageInfo)
-    iface.connect(app, QtCore.SIGNAL('Finished(QString)'), RefreshAll)
     async = iface.asyncCall('Sync')
 
 def Update():
@@ -276,8 +292,6 @@ def Update():
     if not answer == QtGui.QMessageBox.Yes:
         return
     DisableWidgets()
-    iface.connect(app, QtCore.SIGNAL('Finished(QString)'), MessageInfo)
-    iface.connect(app, QtCore.SIGNAL('Finished(QString)'), RefreshAll)
     iface.asyncCall('Update')
 
 def Build():
@@ -294,8 +308,6 @@ def Build():
     if not answer == QtGui.QMessageBox.Yes:
         return
     DisableWidgets()
-    iface.connect(app, QtCore.SIGNAL('Finished(QString)'), MessageInfo)
-    iface.connect(app, QtCore.SIGNAL('Finished(QString)'), RefreshAll)
     iface.asyncCall('Build', targets)
 
 def Install():
@@ -312,8 +324,6 @@ def Install():
     if not answer == QtGui.QMessageBox.Yes:
         return
     DisableWidgets()
-    iface.connect(app, QtCore.SIGNAL('Finished(QString)'), MessageInfo)
-    iface.connect(app, QtCore.SIGNAL('Finished(QString)'), RefreshAll)
     iface.asyncCall('Install', targets)
 
 def Remove():
@@ -329,8 +339,6 @@ def Remove():
         '\n\nAre you sure you want to continue?')
     if not answer == QtGui.QMessageBox.Yes:
         return
-    iface.connect(app, QtCore.SIGNAL('Finished(QString)'), MessageInfo)
-    iface.connect(app, QtCore.SIGNAL('Finished(QString)'), RefreshAll)
     iface.asyncCallWithArgumentList('Remove', (targets, True))
 
 def Details():
