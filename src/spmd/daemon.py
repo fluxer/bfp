@@ -306,7 +306,7 @@ class SPMD(dbus.service.Object):
                 # oh, boy! do not pass glibc here!
                 m = libspm.Binary(targets, autoremove=True)
             else:
-                m = libspm.Binary(target, do_remove=True)
+                m = libspm.Binary(targets, do_remove=True)
             mthread = threading.Thread(target=self._AsyncCall, args=(m.main, self.Finished,))
             mthread.start()
         except Exception as detail:
