@@ -3,7 +3,7 @@
 import gettext
 _ = gettext.translation('spm', fallback=True).gettext
 
-import sys, os, shutil, re, compileall, site
+import sys, os, shutil, re, compileall, site, tarfile
 from datetime import datetime
 if sys.version < '3':
     import ConfigParser as configparser
@@ -1143,8 +1143,30 @@ class Source(object):
     def merge(self):
         ''' Merget target to system '''
         message.sub_info(_('Indexing content'))
-        new_content = misc.archive_list(self.target_tarball)
-        old_content = database.local_metadata(self.target_name, 'footprint')
+        old_content = database.local_metadata(self.target_name, 'footprint').splitlines()
+        new_content = []
+        backup_content = []
+        tarf = tarfile.open(self.target_tarball)
+        try:
+            for i in tarf:
+                if not i.isdir():
+                    new_content.append(i.name)
+                    sfull = os.path.join(ROOT_DIR, i.name)
+                    if not os.path.isfile(sfull) or os.path.islink(sfull):
+                        continue
+                    if i.name.endswith('.conf') or i.name in self.target_backup:
+                        t = tarf.extractfile(i.name)
+                        try:
+                            if not misc.file_read(sfull) == t.read():
+                                backup_content.append(sfull)
+                        finally:
+                            t.close()
+        finally:
+            tarf.close()
+        adjcontent = []
+        for i in new_content:
+            adjcontent.append('/%s' % i)
+        adjcontent.sort()
 
         if CONFLICTS:
             conflict_detected = False
@@ -1154,12 +1176,12 @@ class Source(object):
                     continue
 
                 message.sub_debug(_('Checking against'), target)
-                footprint = database.local_metadata(target, 'footprint').splitlines()
-                for sfile in new_content:
-                    sfull = '/' + sfile
-                    if sfull in footprint:
-                        message.sub_critical(_('File/link conflict with %s') % target, sfull)
-                        conflict_detected = True
+                footprint = set(database.local_metadata(target, 'footprint').splitlines())
+                diff = footprint.difference(adjcontent)
+                if footprint != diff:
+                    message.sub_critical(_('File/link conflicts with %s') % target, \
+                        list(footprint.difference(diff)))
+                    conflict_detected = True
 
             if conflict_detected:
                 sys.exit(2)
@@ -1178,32 +1200,19 @@ class Source(object):
 
         if target_upgrade:
             if old_content:
-                self.pre_update_databases(old_content.splitlines(), 'upgrade')
+                self.pre_update_databases(old_content, 'upgrade')
         else:
             if old_content:
-                self.pre_update_databases(old_content.splitlines(), 'merge')
+                self.pre_update_databases(old_content, 'merge')
 
         if BACKUP:
             message.sub_info(_('Creating backup files'))
-            check = []
-            for sfile in new_content:
-                sfull = os.path.join(ROOT_DIR, sfile)
-                if not os.path.isfile(sfull) or os.path.islink(sfull):
-                    continue
-                if sfile.endswith('.conf') or sfile in self.target_backup:
-                    check.append(sfile)
-
-            if check:
-                content = misc.archive_content(self.target_tarball, check)
-                counter = 0
-                for sfile in check:
-                    sfull = os.path.join(ROOT_DIR, sfile)
-                    if not misc.file_read(sfull) == content[counter]:
-                        message.sub_debug(_('Backing up'), sfull)
-                        shutil.copy2(sfull, sfull + '.backup')
-                    else:
-                        message.sub_debug('Backup skipped', sfull)
-                    counter += 1
+            for sfile in backup_content:
+                message.sub_debug(_('Backing up'), sfile)
+                shutil.copy2(sfile, sfile + '.backup')
+            for backup in self.target_backup:
+                if not backup in backup_content:
+                    message.sub_debug(_('Backup skipped'), sfile)
 
         message.sub_info(_('Decompressing tarball'))
         misc.archive_decompress(self.target_tarball, ROOT_DIR)
@@ -1211,13 +1220,9 @@ class Source(object):
         if target_upgrade:
             message.sub_info(_('Removing obsolete files and directories'))
             remove_content = []
-            for sfile in old_content.splitlines():
+            for sfile in set(old_content).difference(adjcontent):
                 sfull = ROOT_DIR + sfile
                 sresolved = os.path.realpath(sfull).replace(ROOT_DIR, '')
-                if sresolved in new_content:
-                    continue
-                elif sfile.lstrip('/') in new_content:
-                    continue
                 # the footprint and metadata files will be deleted otherwise,
                 # also making sure ROOT_DIR different than / is respected
                 if LOCAL_DIR in sfull:
