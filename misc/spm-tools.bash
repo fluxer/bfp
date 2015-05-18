@@ -46,7 +46,7 @@ _spm_tools()
 
     if [[ -z ${arg} ]];then
         COMPREPLY=($(compgen -W "${actions}" -- "${cur}"))
-        elif [[ ${arg} = merge ]]; then
+    elif [[ ${arg} = merge ]]; then
         COMPREPLY=($(compgen -f -W "${merge_options}" -- "${cur}"))
     elif [[ ${arg} = clean ]]; then
         COMPREPLY=($(compgen -W "${clean_options}" -- "${cur}"))

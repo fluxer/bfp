@@ -1,0 +1,11 @@
+[Desktop Entry]
+Name=Software Center
+Version=@VERSION@
+TryExec=@PREFIX@/bin/spm-gui
+Exec=@PREFIX@/bin/spm-gui
+Comment=Software management tool
+Icon=package-x-generic
+Type=Application
+Terminal=false
+StartupNotify=true
+Categories=System;

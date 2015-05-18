@@ -5,6 +5,8 @@ DBSYSTEMDIR = /etc/dbus-1/system.d/
 DBSERVICEDIR = /share/dbus-1/system-services/
 
 all: bump clean
+	$(SED) -e 's|@PREFIX@|$(PREFIX)|' -e 's|@VERSION@|$(VERSION)|' \
+		spm-gui.desktop.in > spm-gui.desktop
 	$(PYUIC) gui.ui -o gui_ui.py
 	$(NUITKA) daemon.py
 	$(NUITKA) client.py
@@ -12,6 +14,8 @@ all: bump clean
 	$(STRIP) *.exe
 
 cython: clean bump
+	$(SED) -e 's|@PREFIX@|$(PREFIX)|' -e 's|@VERSION@|$(VERSION)|' \
+		spm-gui.desktop.in > spm-gui.desktop
 	# THE GUI WILL NOT WORK!
 	$(CYTHON) --embed daemon.py
 	$(CYTHON) --embed client.py
@@ -30,6 +34,7 @@ install:
 	$(INSTALL) -m755 gui.exe $(DESTDIR)$(BINDIR)/spm-gui
 	$(INSTALL) -m644 *.conf $(DESTDIR)$(DBSYSTEMDIR)/
 	$(INSTALL) -m644 *.service $(DESTDIR)$(DBSERVICEDIR)/
+	$(INSTALL) -m644 *.desktop $(DESTDIR)$(PREFIX)/share/applications/
 
 uninstall:
 	$(RM) $(DESTDIR)$(SBINDIR)/spmd
