@@ -38,8 +38,8 @@ class SPMD(dbus.service.Object):
     def _GetUpdates(self):
         targets = []
         for target in database.local_all():
+            # local targets can not be verified against invalid remote
             if not database.local_uptodate(target) \
-                # local targets can not be verified against invalid remote
                 and database.remote_search(target):
                 targets.append(target)
         return targets
@@ -107,7 +107,7 @@ class SPMD(dbus.service.Object):
             conf = configparser.SafeConfigParser()
             conf.read(libspm.MAIN_CONF)
             conf.set(section, variable, value)
-            libspmconf = open(libspm.MAIN_CONF, 'wb'):
+            libspmconf = open(libspm.MAIN_CONF, 'wb')
             try:
                 conf.write(libspmconf)
             finally:
