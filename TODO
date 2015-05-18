@@ -1,3 +1,6 @@
+## AHWS ##
+ * Collect quircks and add scripts for them
+
 ## SPM ##
  * Complete all tasks noted with FIXME/TODO
  * Optionally remove build depends that are not required by local target after build
@@ -9,6 +12,9 @@
 
 ## SPMD/SPM-GUI ##
  * Complete all tasks noted with FIXME/TODO
+
+## SPMD ##
+ * Fix dbus activation (wtf is wrong?)
 
 ## SPM-GUI ##
  * Report dbus errors
