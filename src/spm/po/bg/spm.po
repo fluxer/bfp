@@ -438,7 +438,6 @@ msgid "Backing up"
 msgstr "Резервиране на"
 
 #: libspm.py:1213
-#, fuzzy
 msgid "Backup skipped"
 msgstr ""
 
@@ -1665,4 +1664,3 @@ msgstr ""
 #: tools.py:1109
 msgid "Poking server..."
 msgstr "Побутване на сървър"
-

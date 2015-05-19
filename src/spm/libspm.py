@@ -977,8 +977,8 @@ class Source(object):
                     self.split_debug_symbols(sfile)
                     lstatic.append(sfile)
                 if (smime == 'application/x-executable' or \
-                    smime == 'application/x-sharedlib' \
-                    or smime == 'application/x-archive') and self.strip_rpath:
+                    smime == 'application/x-sharedlib' or \
+                    smime == 'application/x-archive') and self.strip_rpath:
                     lrpath.append(sfile)
             if lbinaries:
                 message.sub_debug(_('Stripping executables'), lbinaries)
@@ -996,7 +996,7 @@ class Source(object):
                 cmd.extend(lstatic)
                 misc.system_command(cmd)
             if lrpath:
-                message.sub_debug(_('Stripping RPATH'), sfile)
+                message.sub_debug(_('Stripping RPATH'), lrpath)
                 cmd = [misc.whereis('scanelf'), '-CBXrq']
                 cmd.extend(lrpath)
                 misc.system_command(cmd)
