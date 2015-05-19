@@ -205,16 +205,23 @@ class Misc(object):
         return self.string_encode(content)
 
     def file_write(self, sfile, content, mode='w'):
-        ''' Write data to file '''
+        ''' Write data to file safely '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
             self.typecheck(content, (types.StringTypes))
             self.typecheck(mode, (types.StringTypes))
 
         self.dir_create(os.path.dirname(sfile))
+        original = None
+        if os.path.isfile(sfile):
+            original = self.file_read(sfile)
         wfile = open(sfile, mode)
         try:
             wfile.write(content)
+        except:
+            if original and not 'a' in mode:
+                wfile.write(original)
+            raise
         finally:
             wfile.close()
 
