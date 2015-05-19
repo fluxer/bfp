@@ -30,7 +30,7 @@ error() {
 
 rescue_shell() {
     msg "Running rescue Shell..."
-    exec /bin/sh
+    setsid cttyhack sh
 }
 
 cmd() {
