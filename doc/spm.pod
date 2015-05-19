@@ -5,12 +5,11 @@ spm - Source Package Manager
 =head1 SYNOPSIS
 
 	spm [-h] [--cache CACHE] [--build BUILD] [--root ROOT] [--gpg GPG]
-           [--ignore IGNORE] [--demote DEMOTE] [--sign SIGN]
-           [--offline {True,False}] [--mirror {True,False}]
-           [--timeout TIMEOUT] [--verify {True,False}] [--chost CHOST]
-           [--cflags CFLAGS] [--cxxflags CXXFLAGS] [--cppflags CPPFLAGS]
-           [--ldflags LDFLAGS] [--makeflags MAKEFLAGS] [--purge PURGE]
-           [--man {True,False}] [--split {True,False}]
+           [--ignore IGNORE] [--sign SIGN] [--offline {True,False}]
+           [--mirror {True,False}] [--timeout TIMEOUT] [--verify {True,False}]
+           [--chost CHOST] [--cflags CFLAGS] [--cxxflags CXXFLAGS]
+           [--cppflags CPPFLAGS] [--ldflags LDFLAGS] [--makeflags MAKEFLAGS]
+           [--purge PURGE] [--man {True,False}] [--split {True,False}]
            [--binaries {True,False}] [--shared {True,False}]
            [--static {True,False}] [--rpath {True,False}]
            [--pycompile {True,False}] [--missing {True,False}]
@@ -154,7 +153,6 @@ optional arguments:
   --build BUILD         Change build directory
   --root ROOT           Change system root directory
   --ignore IGNORE       Change ignored targets
-  --demote DEMOTE       Set user to demote to
   --sign {True,False}   Set whether to sign files when feasable
   --offline {True,False}
                         Set whether to use offline mode

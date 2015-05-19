@@ -49,15 +49,6 @@ Set targets to be ignored when building and removing.
 
 Default: filesystem
 
-=head2 DEMOTE
-
-Set as which user some operations should be performed as when that is possible.
-It does not affect all of the actions and is experimental for now. Also, do
-note that it works only on sub-processes. Empty value meens do not drop
-priviledges at all.
-
-Default:
-
 =head2 SIGN
 
 Set a key ID to be used for signing files such as tarballs. If empty files are not signed.

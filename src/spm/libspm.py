@@ -28,7 +28,6 @@ DEFAULTS = {
     'LOCAL_DIR': '/var/local/spm',
     'GPG_DIR': '/etc/spm/gpg',
     'IGNORE': '',
-    'DEMOTE': '',
     'SIGN': '',
     'OFFLINE': 'False',
     'MIRROR': 'False',
@@ -72,7 +71,6 @@ ROOT_DIR = conf.get('spm', 'ROOT_DIR')
 LOCAL_DIR = ROOT_DIR + 'var/local/spm'
 GPG_DIR = conf.get('spm', 'GPG_DIR')
 IGNORE = conf.get('spm', 'IGNORE').split(' ')
-DEMOTE = conf.get('spm', 'DEMOTE')
 SIGN = conf.get('spm', 'SIGN')
 OFFLINE = conf.getboolean('prepare', 'OFFLINE')
 MIRROR = conf.getboolean('prepare', 'MIRROR')
@@ -385,8 +383,7 @@ class Repo(object):
 
     def sync(self):
         ''' Sync repository '''
-        rdir = os.path.join(CACHE_DIR, 'repositories')
-        misc.dir_create(rdir, DEMOTE)
+        misc.dir_create(os.path.join(CACHE_DIR, 'repositories'))
 
         if os.path.exists(self.repository_url):
             # repository is local path, create a copy of it
@@ -821,8 +818,8 @@ class Source(object):
         elif dependencies:
             message.sub_warning(_('Dependencies missing'), dependencies)
 
-        misc.dir_create(self.source_dir, DEMOTE)
-        misc.dir_create(self.sources_dir, DEMOTE)
+        misc.dir_create(self.source_dir)
+        misc.dir_create(self.sources_dir)
 
         message.sub_info(_('Preparing PGP keys'))
         if self.target_pgpkeys and self.verify:
@@ -861,23 +858,23 @@ class Source(object):
 
             if misc.archive_supported(link_file):
                 message.sub_debug(_('Extracting'), link_file)
-                misc.archive_decompress(link_file, self.source_dir, DEMOTE)
+                misc.archive_decompress(link_file, self.source_dir)
 
     def compile(self):
         ''' Compile target sources '''
         misc.system_command((misc.whereis('bash'), '-e', '-c', 'source ' + \
             self.srcbuild + ' && umask 0022 && src_compile'), \
-            cwd=self.source_dir, demote=DEMOTE)
+            cwd=self.source_dir)
 
     def check(self):
         ''' Check target sources '''
         misc.system_command((misc.whereis('bash'), '-e', '-c', 'source ' + \
             self.srcbuild + ' && umask 0022 && src_check'), \
-            cwd=self.source_dir, demote=DEMOTE)
+            cwd=self.source_dir)
 
     def install(self):
         ''' Install targets files '''
-        misc.dir_create(self.install_dir, DEMOTE)
+        misc.dir_create(self.install_dir)
 
         # re-create host system symlinks to prevent mismatch of entries in the
         # footprint and ld.so.cache for libraries leading to undetectable

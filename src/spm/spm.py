@@ -62,12 +62,6 @@ try:
             libspm.IGNORE = values.split(' ')
             setattr(namespace, self.dest, values)
 
-    class OverrideDemote(argparse.Action):
-        ''' Override which user to demote to '''
-        def __call__(self, parser, namespace, values, option_string=None):
-            libspm.DEMOTE = values
-            setattr(namespace, self.dest, values)
-
     class OverrideSign(argparse.Action):
         ''' Override verification of downloads and signing of tarballs '''
         def __call__(self, parser, namespace, values, option_string=None):
@@ -347,8 +341,6 @@ try:
         help=_('Change GnuPG home directory'))
     parser.add_argument('--ignore', type=str, action=OverrideIgnore, \
         help=_('Change ignored targets'))
-    parser.add_argument('--demote', type=str, \
-        action=OverrideDemote, help=_('Set user to demote to'))
     parser.add_argument('--sign', type=str, action=OverrideSign, \
         help=_('Set whether to sign files'))
     parser.add_argument('--offline', type=ast.literal_eval, \
@@ -433,7 +425,6 @@ try:
         message.sub_info(_('PRUNE'), ARGS.prune)
         message.sub_info(_('CACHE_DIR'), libspm.CACHE_DIR)
         message.sub_info(_('REPOSITORIES'), libspm.REPOSITORIES)
-        message.sub_info(_('DEMOTE'), libspm.DEMOTE)
         message.info(_('Poking repositories...'))
         m = libspm.Repo(libspm.REPOSITORIES, ARGS.clean, \
                 ARGS.sync, ARGS.update, ARGS.prune)
@@ -468,7 +459,6 @@ try:
         message.sub_info(_('ROOT_DIR'), libspm.ROOT_DIR)
         message.sub_info(_('GPG_DIR'), libspm.GPG_DIR)
         message.sub_info(_('IGNORE'), libspm.IGNORE)
-        message.sub_info(_('DEMOTE'), libspm.DEMOTE)
         message.sub_info(_('SIGN'), libspm.SIGN)
         message.sub_info(_('OFFLINE'), libspm.OFFLINE)
         message.sub_info(_('MIRROR'), libspm.MIRROR)
@@ -518,7 +508,6 @@ try:
         message.sub_info(_('BACKUP'), libspm.BACKUP)
         message.sub_info(_('SCRIPTS'), libspm.SCRIPTS)
         message.sub_info(_('TARGETS'), ARGS.TARGETS)
-        message.sub_info(_('DEMOTE'), libspm.DEMOTE)
         message.info(_('Poking binaries...'))
         if ARGS.automake:
             ARGS.prepare = True

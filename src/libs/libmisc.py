@@ -14,7 +14,7 @@ to monitor for file/directory changes on filesystems.
 
 '''
 
-import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, pwd, inspect
+import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, inspect
 import types, gzip, bz2, time, ctypes, ctypes.util, getpass, base64
 from struct import unpack
 from fcntl import ioctl
@@ -180,14 +180,6 @@ class Misc(object):
         if not os.path.isfile(sfile):
             self.file_write(sfile, '')
 
-    def file_delete(self, sfile):
-        ''' Delete file but only if it exists, handles links too '''
-        if self.python2:
-            self.typecheck(sfile, (types.StringTypes))
-
-        if os.path.isfile(os.path.realpath(sfile)):
-            os.unlink(sfile)
-
     def file_read(self, sfile):
         ''' Get file content '''
         if self.python2:
@@ -199,19 +191,6 @@ class Misc(object):
         finally:
             rfile.close()
         return self.string_encode(content)
-
-    def file_read_nonblock(self, sfile, ibuffer=1024):
-        ''' Get file content non-blocking '''
-        if self.python2:
-            self.typecheck(sfile, (types.StringTypes))
-            self.typecheck(ibuffer, (types.IntType))
-
-        fd = os.open(sfile, os.O_NONBLOCK)
-        try:
-            content = os.read(fd, ibuffer)
-        finally:
-            os.close(fd)
-        return content
 
     def file_readlines(self, sfile):
         ''' Get file content, split by new line, as list '''
@@ -238,19 +217,6 @@ class Misc(object):
             wfile.write(content)
         finally:
             wfile.close()
-
-    def file_write_nonblock(self, sfile, content):
-        ''' Write data to file non-blocking (overwrites) '''
-        if self.python2:
-            self.typecheck(sfile, (types.StringTypes))
-            self.typecheck(content, (types.StringTypes))
-
-        self.dir_create(os.path.dirname(sfile))
-        fd = os.open(sfile, os.O_NONBLOCK | os.O_WRONLY)
-        try:
-            os.write(fd, content)
-        finally:
-            os.close(fd)
 
     def file_search(self, string, sfile, exact=False, escape=True):
         ''' Search for string in file '''
@@ -379,19 +345,14 @@ class Misc(object):
         cmd.extend(('--verify', '--batch', ssignature, sfile))
         self.system_command(cmd)
 
-    def dir_create(self, sdir, demote='', ipermissions=0):
+    def dir_create(self, sdir, ipermissions=0):
         ''' Create directory if it does not exist, including leading paths '''
         if self.python2:
             self.typecheck(sdir, (types.StringTypes))
-            self.typecheck(demote, (types.StringTypes))
             self.typecheck(ipermissions, (types.IntType))
 
         if not os.path.isdir(sdir) and not os.path.islink(sdir):
-            # sadly, demoting works only for sub-processes
-            if demote:
-                self.system_command((self.whereis('mkdir'), '-p', sdir), demote=demote)
-            else:
-                os.makedirs(sdir)
+            os.makedirs(sdir)
         if ipermissions:
             os.chmod(sdir, ipermissions)
 
@@ -744,12 +705,11 @@ class Misc(object):
                 bzipf.write(self.string_encode(self.file_read(f)))
             bzipf.close()
 
-    def archive_decompress(self, sfile, sdir, demote=''):
+    def archive_decompress(self, sfile, sdir):
         ''' Extract archive to directory '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
             self.typecheck(sdir, (types.StringTypes))
-            self.typecheck(demote, (types.StringTypes))
 
         self.dir_create(sdir)
 
@@ -765,11 +725,10 @@ class Misc(object):
             or tarfile.is_tarfile(sfile) or zipfile.is_zipfile(sfile):
             bsdtar = self.whereis('bsdtar', fallback=False)
             if bsdtar:
-                self.system_command((bsdtar, '-xpPf', sfile, '-C', sdir), \
-                    demote=demote)
+                self.system_command((bsdtar, '-xpPf', sfile, '-C', sdir))
             else:
                 self.system_command((self.whereis('tar'), '-xphf', sfile, \
-                    '-C', sdir), demote=demote)
+                    '-C', sdir))
         elif smime == 'application/x-gzip':
             gfile = gzip.GzipFile(sfile, 'rb')
             self.file_write(self.file_name(sfile, False), gfile.read())
@@ -812,75 +771,12 @@ class Misc(object):
             content = self.file_name(sfile, True).split()
         return content
 
-    def archive_size(self, star, lpaths):
-        ''' Get size of file(s) in Tar archive '''
-        if self.python2:
-            self.typecheck(star, (types.StringTypes))
-            self.typecheck(lpaths, (types.TupleType, types.ListType))
-
-        sizes = []
-        tar = tarfile.open(star, 'r')
-        try:
-            for i in tar:
-                for sfile in lpaths:
-                    if i.name == sfile:
-                        sizes.append(i.size)
-        finally:
-            tar.close()
-        return sizes
-
-    def archive_content(self, star, lpaths):
-        ''' Get content of file(s) in Tar archive '''
-        if self.python2:
-            self.typecheck(star, (types.StringTypes))
-            self.typecheck(lpaths, (types.TupleType, types.ListType))
-
-        content = []
-        tar = tarfile.open(star, 'r')
-        try:
-            for sfile in lpaths:
-                t = tar.extractfile(sfile)
-                try:
-                    content.append(t.read())
-                finally:
-                    t.close()
-        finally:
-            tar.close()
-        return content
-
-    def system_demote(self, suser):
-        ''' Change priviledges to different user, returns function pointer! '''
-        if self.python2:
-            self.typecheck(suser, (types.StringTypes))
-
-        group = suser
-        if suser and ':' in suser:
-            group = suser.split(':')[1]
-            suser = suser.split(':')[0]
-        if not suser or not group:
-            return
-        # lambda
-        def result():
-            pw_uid = pwd.getpwnam(suser).pw_uid
-            pw_gid = pwd.getpwnam(group).pw_gid
-            pw_dir = pwd.getpwnam(suser).pw_dir
-            # os.initgroups(suser, pw_gid)
-            os.setgid(0)
-            os.setgid(pw_gid)
-            os.setuid(pw_uid)
-            os.putenv('USER', suser)
-            os.putenv('LOGNAME', suser)
-            os.putenv('HOME', pw_dir)
-            os.putenv('PWD', pw_dir)
-        return result
-
-    def system_output(self, command, shell=False, cwd='', demote=''):
+    def system_output(self, command, shell=False, cwd=''):
         ''' Get output of external utility '''
         if self.python2:
             self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
             self.typecheck(shell, (types.BooleanType))
             self.typecheck(cwd, (types.StringTypes))
-            self.typecheck(demote, (types.StringTypes))
 
         if not cwd:
             cwd = self.dir_current()
@@ -888,46 +784,43 @@ class Misc(object):
             cwd = '/'
 
         pipe = subprocess.Popen(command, stdout=subprocess.PIPE, \
-            env={'LC_ALL': 'C'}, shell=shell, cwd=cwd, preexec_fn=self.system_demote(demote))
+            env={'LC_ALL': 'C'}, shell=shell, cwd=cwd)
         output = pipe.communicate()[0].strip()
         return self.string_encode(output)
 
-    def system_input(self, command, sinput, shell=False, demote=''):
+    def system_input(self, command, sinput, shell=False):
         ''' Send input to external utility '''
         if self.python2:
             self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
             self.typecheck(sinput, (types.StringTypes))
             self.typecheck(shell, (types.BooleanType))
-            self.typecheck(demote, (types.StringTypes))
 
         if isinstance(command, str) and not shell:
             command = shlex.split(command)
         pipe = subprocess.Popen(command, stdin=subprocess.PIPE, \
             stdout=subprocess.PIPE, stderr=subprocess.PIPE, \
-            env={'LC_ALL': 'C'}, shell=shell, preexec_fn=self.system_demote(demote))
+            env={'LC_ALL': 'C'}, shell=shell)
         out, err = pipe.communicate(input=sinput)
         if pipe.returncode != 0:
             raise(Exception('%s %s' % (out, err)))
 
-    def system_scanelf(self, sfile, sformat='#F%n', sflags='', demote=''):
+    def system_scanelf(self, sfile, sformat='#F%n', sflags=''):
         ''' Get information about ELF files '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
             self.typecheck(sformat, (types.StringTypes))
             self.typecheck(sflags, (types.StringTypes))
-            self.typecheck(demote, (types.StringTypes))
 
         return self.system_output((self.whereis('scanelf'), '-yCBF', \
-            sformat, sflags, sfile), demote=demote)
+            sformat, sflags, sfile))
 
-    def system_command(self, command, shell=False, cwd='', catch=False, demote=''):
+    def system_command(self, command, shell=False, cwd='', catch=False):
         ''' Execute system command safely '''
         if self.python2:
             self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
             self.typecheck(shell, (types.BooleanType))
             self.typecheck(cwd, (types.StringTypes))
             self.typecheck(catch, (types.BooleanType))
-            self.typecheck(demote, (types.StringTypes))
 
         if not cwd:
             cwd = self.dir_current()
@@ -937,14 +830,13 @@ class Misc(object):
             command = shlex.split(command)
         if catch or self.CATCH:
             pipe = subprocess.Popen(command, stderr=subprocess.PIPE, \
-                shell=shell, cwd=cwd, preexec_fn=self.system_demote(demote))
+                shell=shell, cwd=cwd)
             pipe.wait()
             if pipe.returncode != 0:
                 raise(Exception(pipe.communicate()[1].strip()))
             return pipe.returncode
         else:
-            return subprocess.check_call(command, shell=shell, cwd=cwd, \
-                preexec_fn=self.system_demote(demote))
+            return subprocess.check_call(command, shell=shell, cwd=cwd)
 
     def system_chroot(self, command, shell=False, sinput=None):
         ''' Execute command in chroot environment '''
