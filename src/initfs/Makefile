@@ -20,8 +20,8 @@ install:
 	$(INSTALL) -dm755 $(DESTDIR)/etc/mkinitfs
 	$(INSTALL) -m755 mkinitfs.exe $(DESTDIR)$(SBINDIR)/mkinitfs
 	$(INSTALL) -m755 lsinitfs.exe $(DESTDIR)$(BINDIR)/lsinitfs
-	$(CP) -a root $(DESTDIR)/etc/mkinitfs/
-	$(CP) -a files $(DESTDIR)/etc/mkinitfs/
+	$(CP) -r root $(DESTDIR)/etc/mkinitfs/
+	$(CP) -r files $(DESTDIR)/etc/mkinitfs/
 
 uninstall:
 	$(RM) $(DESTDIR)$(SBINDIR)/mkinitfs
