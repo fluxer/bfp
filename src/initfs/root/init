@@ -149,3 +149,6 @@ else
     msg "Root filesystem invalid..."
     rescue_shell
 fi
+
+warn "Rebooting system..."
+sync; reboot -f
