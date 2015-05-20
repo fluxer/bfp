@@ -12,12 +12,13 @@ set -e
 
 uid="$(id -u)"
 curdir="$(dirname $0)"
-rootdir="$curdir/root"
+rootdir="$curdir/root-$1"
 cachedir="$rootdir/cache"
 builddir="$rootdir/build"
 gpgdir="$rootdir/gpg"
 spmargs="--root $rootdir --cache $cachedir --build $builddir --gpg $gpgdir --missing=True"
 spmtargs=""
+statefile="$rootdir/testrun-$1"
 
 case "$1" in
     *python*) true ;;
@@ -26,7 +27,7 @@ case "$1" in
 esac
 
 mkdir -pv "$rootdir"
-touch "$rootdir/testrun"
+touch "$statefile"
 # to avoid requirement of installing the libs
 ln -svf "$curdir/../libs/libmessage.py" .
 ln -svf "$curdir/../libs/libmisc.py" .
@@ -37,127 +38,127 @@ make -C "$curdir" clean
 # skip some tests depending on the tools available :(
 if ! which scanelf ;then
     echo " WARNING: scanelf not available"
-    echo "SPM SOURCE" >> "$rootdir/testrun"
+    echo "SPM SOURCE" >> "$statefile"
 fi
 
-if ! grep -q "SPM REPO" "$rootdir/testrun" ;then
+if ! grep -q "SPM REPO" "$statefile" ;then
     echo "=== RUNNING SPM REPO TEST ==="
     "$1" "$curdir/spm.py" $spmargs repo -a
-    echo "SPM REPO" >> "$rootdir/testrun"
+    echo "SPM REPO" >> "$statefile"
 else
     echo "=== SKIPPING SPM REPO TEST ==="
 fi
 
-if ! grep -q "SPM REMOTE" "$rootdir/testrun" ;then
+if ! grep -q "SPM REMOTE" "$statefile" ;then
     echo "=== RUNNING SPM REMOTE TEST ==="
     "$1" "$curdir/spm.py" $spmargs remote -pnvrdDmcskob zlib
-    echo "SPM REMOTE" >> "$rootdir/testrun"
+    echo "SPM REMOTE" >> "$statefile"
 else
     echo "=== SKIPPING SPM REMOTE TEST ==="
 fi
 
-if ! grep -q "SPM SOURCE" "$rootdir/testrun" ;then
+if ! grep -q "SPM SOURCE" "$statefile" ;then
     echo "=== RUNNING SPM SOURCE TEST ==="
     # --depends, --reverse and --remove are not tested!
     "$1" "$curdir/spm.py" $spmargs source -Cpckima zlib
-    echo "SPM SOURCE" >> "$rootdir/testrun"
+    echo "SPM SOURCE" >> "$statefile"
 else
     echo "=== SKIPPING SPM SOURCE TEST ==="
 fi
 
 # binary mode ain't much due to single mirror
 
-if ! grep -q "SPM LOCAL" "$rootdir/testrun" ;then
+if ! grep -q "SPM LOCAL" "$statefile" ;then
     echo "=== RUNNING SPM LOCAL TEST ==="
     "$1" "$curdir/spm.py" $spmargs local -pnvRdDrsf zlib
-    echo "SPM LOCAL" >> "$rootdir/testrun"
+    echo "SPM LOCAL" >> "$statefile"
 else
     echo "=== SKIPPING SPM LOCAL TEST ==="
 fi
 
-if ! grep -q "SPM WHO" "$rootdir/testrun" ;then
+if ! grep -q "SPM WHO" "$statefile" ;then
     echo "=== RUNNING SPM WHO TEST ==="
     "$1" "$curdir/spm.py" $spmargs who -p zlib
-    echo "SPM WHO" >> "$rootdir/testrun"
+    echo "SPM WHO" >> "$statefile"
 else
     echo "=== SKIPPING SPM WHO TEST ==="
 fi
 
 if [ "$uid" != "0" ];then
     echo "=== SKIPPING SPMT DIST TEST (REQUIRES ROOT) ==="
-elif ! grep -q "SPMT DIST" "$rootdir/testrun" ;then
+elif ! grep -q "SPMT DIST" "$statefile" ;then
     echo "=== RUNNING SPMT DIST TEST (ROOT) ==="
     "$1" "$curdir/tools.py" dist -scd "$rootdir" zlib
-    echo "SPMT DIST" >> "$rootdir/testrun"
+    echo "SPMT DIST" >> "$statefile"
 else
     echo "=== SKIPPING SPMT DIST TEST (ROOT) ==="
 fi
 
-if ! grep -q "SPMT CHECK" "$rootdir/testrun" ;then
+if ! grep -q "SPMT CHECK" "$statefile" ;then
     echo "=== RUNNING SPMT CHECK TEST ==="
     # --adjust, --depends and --reverse are not tested!
     "$1" "$curdir/tools.py" check -f zlib
-    echo "SPMT CHECK" >> "$rootdir/testrun"
+    echo "SPMT CHECK" >> "$statefile"
 else
     echo "=== SKIPPING SPMT CHECK TEST ==="
 fi
 
-if ! grep -q "SPMT CLEAN" "$rootdir/testrun" ;then
+if ! grep -q "SPMT CLEAN" "$statefile" ;then
     echo "=== RUNNING SPMT CLEAN TEST ==="
     "$1" "$curdir/tools.py" clean
-    echo "SPMT CLEAN" >> "$rootdir/testrun"
+    echo "SPMT CLEAN" >> "$statefile"
 else
     echo "=== SKIPPING SPMT CLEAN TEST ==="
 fi
 
-if ! grep -q "SPMT LINT" "$rootdir/testrun" ;then
+if ! grep -q "SPMT LINT" "$statefile" ;then
     echo "=== RUNNING SPMT LINT TEST ==="
     "$1" "$curdir/tools.py" lint -musdMfboepnkcD zlib
-    echo "SPMT LINT" >> "$rootdir/testrun"
+    echo "SPMT LINT" >> "$statefile"
 else
     echo "=== SKIPPING SPMT LINT TEST ==="
 fi
 
-if ! grep -q "SPMT SANE" "$rootdir/testrun" ;then
+if ! grep -q "SPMT SANE" "$statefile" ;then
     echo "=== RUNNING SPMT SANE TEST ==="
     "$1" "$curdir/tools.py" sane -ednmNvtugs zlib
-    echo "SPMT SANE" >> "$rootdir/testrun"
+    echo "SPMT SANE" >> "$statefile"
 else
     echo "=== SKIPPING SPMT SANE TEST ==="
 fi
 
 # TODO: merge, edit
 
-if ! grep -q "SPMT WHICH" "$rootdir/testrun" ;then
+if ! grep -q "SPMT WHICH" "$statefile" ;then
     echo "=== RUNNING SPMT WHICH TEST ==="
     "$1" "$curdir/tools.py" which -cp zlib
-    echo "SPMT WHICH" >> "$rootdir/testrun"
+    echo "SPMT WHICH" >> "$statefile"
 else
     echo "=== SKIPPING SPMT WHICH TEST ==="
 fi
 
-if ! grep -q "SPMT PACK" "$rootdir/testrun" ;then
+if ! grep -q "SPMT PACK" "$statefile" ;then
     echo "=== RUNNING SPMT PACK TEST ==="
     "$1" "$curdir/tools.py" pack -d "$rootdir" zlib
-    echo "SPMT PACK" >> "$rootdir/testrun"
+    echo "SPMT PACK" >> "$statefile"
 else
     echo "=== SKIPPING SPMT PACK TEST ==="
 fi
 
-if ! grep -q "SPMT PKG" "$rootdir/testrun" ;then
+if ! grep -q "SPMT PKG" "$statefile" ;then
     echo "=== RUNNING SPMT PKG TEST ==="
     "$1" "$curdir/tools.py" pkg -d "$rootdir" zlib
-    echo "SPMT PKG" >> "$rootdir/testrun"
+    echo "SPMT PKG" >> "$statefile"
 else
     echo "=== SKIPPING SPMT PKG TEST ==="
 fi
 
 # serve is a blocking and dengerous to run
 
-if ! grep -q "SPMT DISOWNED" "$rootdir/testrun" ;then
+if ! grep -q "SPMT DISOWNED" "$statefile" ;then
     echo "=== RUNNING SPMT DISOWNED TEST ==="
     "$1" "$curdir/tools.py" disowned -cpd "$rootdir"
-    echo "SPMT DISOWNED" >> "$rootdir/testrun"
+    echo "SPMT DISOWNED" >> "$statefile"
 else
     echo "=== SKIPPING SPMT DISOWNED TEST ==="
 fi
