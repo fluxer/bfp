@@ -19,7 +19,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.7.6 (452d6cc)"
+app_version = "1.7.6 (7ce5dac)"
 
 try:
     import libmessage
@@ -411,8 +411,7 @@ try:
 
     ARGS = parser.parse_args()
     if not sys.stdin.isatty() and ARGS.TARGETS == ['-']:
-        # sys.stdin.readlines() includes newlines so
-        ARGS.TARGETS = sys.stdin.read().splitlines()
+        ARGS.TARGETS = sys.stdin.read().split()
 
     if ARGS.mode == 'repo':
         if ARGS.all:

@@ -36,7 +36,7 @@ database = libpackage.Database()
 import libspm
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.7.6 (452d6cc)"
+app_version = "1.7.6 (7ce5dac)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -939,8 +939,7 @@ try:
 
     ARGS = parser.parse_args()
     if not sys.stdin.isatty() and ARGS.TARGETS == ['-']:
-        # sys.stdin.readlines() includes newlines so
-        ARGS.TARGETS = sys.stdin.read().splitlines()
+        ARGS.TARGETS = sys.stdin.read().split()
 
     if ARGS.mode == 'dist':
         if 'world' in ARGS.TARGETS:
