@@ -28,6 +28,7 @@ esac
 mkdir -pv "$rootdir"
 touch "$rootdir/testrun"
 # to avoid requirement of installing the libs
+ln -svf "$curdir/../libs/libmessage.py" .
 ln -svf "$curdir/../libs/libmisc.py" .
 ln -svf "$curdir/../libs/libpackage.py" .
 # to ensure that no stray files from previous run are left
