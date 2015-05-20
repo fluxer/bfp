@@ -34,6 +34,12 @@ ln -svf "$curdir/../libs/libpackage.py" .
 # to ensure that no stray files from previous run are left
 make -C "$curdir" clean
 
+# skip some tests depending on the tools available :(
+if ! which scanelf ;then
+    echo " WARNING: scanelf not available"
+    echo "SPM SOURCE" >> "$rootdir/testrun"
+fi
+
 if ! grep -q "SPM REPO" "$rootdir/testrun" ;then
     echo "=== RUNNING SPM REPO TEST ==="
     "$1" "$curdir/spm.py" $spmargs repo -a
