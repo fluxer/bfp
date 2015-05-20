@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast
 
-app_version = "1.7.6 (63bbd61)"
+app_version = "1.7.6 (f51ffff)"
 
 tmpdir = None
 keep = False

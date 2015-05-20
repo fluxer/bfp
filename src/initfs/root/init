@@ -88,7 +88,7 @@ cmd touch /dev/mdev.log
 cmd mdev -s
 
 msg "Loading modules..."
-find /sys -name modalias -type f -exec sort -u {} + | xargs modprobe -qba || true
+find /sys -name modalias -type f -exec sort -u {} + | xargs modprobe -qba
 
 msg "Creating UUID/LABEL symlinks..."
 for line in $(blkid);do
@@ -96,10 +96,10 @@ for line in $(blkid);do
         /dev/*) dev="${line//:/}" ;;
         UUID=*) cmd mkdir -p /dev/disk/by-uuid
                 eval "$line"
-                cmd ln -s "$dev" "/dev/disk/by-uuid/$UUID" ;;
+                cmd ln -sf "$dev" "/dev/disk/by-uuid/$UUID" ;;
         LABEL=*) cmd mkdir -p /dev/disk/by-label
                  eval "$line"
-                 cmd ln -s "$dev" "/dev/disk/by-label/$LABEL" ;;
+                 cmd ln -sf "$dev" "/dev/disk/by-label/$LABEL" ;;
     esac
     unset UUID LABEL
 done
