@@ -938,6 +938,9 @@ try:
         help=_('Show SPM Tools version and exit'))
 
     ARGS = parser.parse_args()
+    if not sys.stdin.isatty() and ARGS.TARGETS == ['-']:
+        # sys.stdin.readlines() includes newlines so
+        ARGS.TARGETS = sys.stdin.read().splitlines()
 
     if ARGS.mode == 'dist':
         if 'world' in ARGS.TARGETS:
