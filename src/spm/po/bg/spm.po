@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-19 02:54+0000\n"
+"POT-Creation-Date: 2015-05-20 01:15+0000\n"
 "PO-Revision-Date: 2015-05-19 03:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -926,223 +926,223 @@ msgstr "Включи дебъг съобщенията"
 msgid "Show SPM version and exit"
 msgstr "Покажи версията на SPM и излез"
 
-#: spm.py:421 spm.py:435 spm.py:456 spm.py:498 spm.py:521 spm.py:542
-#: tools.py:954 tools.py:964 tools.py:997 tools.py:1034 tools.py:1059
-#: tools.py:1067 tools.py:1073 tools.py:1080 tools.py:1087 tools.py:1096
-#: tools.py:1103
+#: spm.py:424 spm.py:438 spm.py:459 spm.py:501 spm.py:524 spm.py:545
+#: tools.py:957 tools.py:967 tools.py:1000 tools.py:1037 tools.py:1062
+#: tools.py:1070 tools.py:1076 tools.py:1083 tools.py:1090 tools.py:1099
+#: tools.py:1106
 msgid "Runtime information"
 msgstr "Работна информация"
 
-#: spm.py:422 tools.py:956
+#: spm.py:425 tools.py:959
 msgid "CLEAN"
 msgstr "ИЗЧИСТИ"
 
-#: spm.py:423
+#: spm.py:426
 msgid "SYNC"
 msgstr "СИНХРОНИЗИРАЙ"
 
-#: spm.py:424
+#: spm.py:427
 msgid "UPDATE"
 msgstr "ОБНОВИ"
 
-#: spm.py:425
+#: spm.py:428
 msgid "PRUNE"
 msgstr "ПРЕМАХНИ"
 
-#: spm.py:426 spm.py:457 spm.py:499 tools.py:1088
+#: spm.py:429 spm.py:460 spm.py:502 tools.py:1091
 msgid "CACHE_DIR"
 msgstr "CACHE_DIR"
 
-#: spm.py:427
+#: spm.py:430
 msgid "REPOSITORIES"
 msgstr "ХРАНИЛИЩА"
 
-#: spm.py:428
+#: spm.py:431
 msgid "Poking repositories..."
 msgstr "Побутване на хранилищата..."
 
-#: spm.py:436 spm.py:522
+#: spm.py:439 spm.py:525
 msgid "NAME"
 msgstr "ИМЕ"
 
-#: spm.py:437 spm.py:523
+#: spm.py:440 spm.py:526
 msgid "VERSION"
 msgstr "ВЕРСИЯ"
 
-#: spm.py:438 spm.py:524
+#: spm.py:441 spm.py:527
 msgid "RELEASE"
 msgstr ""
 
-#: spm.py:439 spm.py:525
+#: spm.py:442 spm.py:528
 msgid "DESCRIPTION"
 msgstr "ОПИСАНИЕ"
 
-#: spm.py:440 spm.py:526 tools.py:966
+#: spm.py:443 spm.py:529 tools.py:969
 msgid "DEPENDS"
 msgstr "ЗАВИСИМОСТИ"
 
-#: spm.py:441
+#: spm.py:444
 msgid "MAKEDEPENDS"
 msgstr "МЕЙК-ЗАВИСИМОСТИ"
 
-#: spm.py:442
+#: spm.py:445
 msgid "CHECKDEPENDS"
 msgstr "ЧЕК-ЗАВИСИМОСТИ"
 
-#: spm.py:443 tools.py:955
+#: spm.py:446 tools.py:958
 msgid "SOURCES"
 msgstr "ИЗТОЧНИЦИ"
 
-#: spm.py:444
+#: spm.py:447
 msgid "PGPKEYS"
 msgstr ""
 
-#: spm.py:445
+#: spm.py:448
 msgid "OPTIONS"
 msgstr "ОПЦИИ"
 
-#: spm.py:446 spm.py:482 spm.py:508 tools.py:1009
+#: spm.py:449 spm.py:485 spm.py:511 tools.py:1012
 msgid "BACKUP"
 msgstr "РЕЗЕРВНИ КОПИЯ"
 
-#: spm.py:447 spm.py:530 spm.py:543 tools.py:1068
+#: spm.py:450 spm.py:533 spm.py:546 tools.py:1071
 msgid "PATTERN"
 msgstr ""
 
-#: spm.py:448 tools.py:959 tools.py:1046 tools.py:1061
+#: spm.py:451 tools.py:962 tools.py:1049 tools.py:1064
 msgid "Poking remotes..."
 msgstr "Побутване на отдалечени..."
 
-#: spm.py:458
+#: spm.py:461
 msgid "BUILD_DIR"
 msgstr "BUILD_DIR"
 
-#: spm.py:459 spm.py:500
+#: spm.py:462 spm.py:503
 msgid "ROOT_DIR"
 msgstr "ROOT_DIR"
 
-#: spm.py:460 spm.py:501
+#: spm.py:463 spm.py:504
 msgid "GPG_DIR"
 msgstr ""
 
-#: spm.py:461 spm.py:502
+#: spm.py:464 spm.py:505
 msgid "IGNORE"
 msgstr "ИГНОРИРАЙ"
 
-#: spm.py:462
+#: spm.py:465
 msgid "SIGN"
 msgstr "ПОДПИС"
 
-#: spm.py:463 spm.py:503
+#: spm.py:466 spm.py:506
 msgid "OFFLINE"
 msgstr "ОФЛАЙН"
 
-#: spm.py:464 spm.py:504
+#: spm.py:467 spm.py:507
 msgid "MIRROR"
 msgstr "ОГЛЕДАЛО"
 
-#: spm.py:465 spm.py:505
+#: spm.py:468 spm.py:508
 msgid "TIMEOUT"
 msgstr "ТАЙМАУТ"
 
-#: spm.py:466 spm.py:506
+#: spm.py:469 spm.py:509
 msgid "VERIFY"
 msgstr ""
 
-#: spm.py:467
+#: spm.py:470
 msgid "CHOST"
 msgstr "CHOST"
 
-#: spm.py:468
+#: spm.py:471
 msgid "CFLAGS"
 msgstr "CFLAGS"
 
-#: spm.py:469
+#: spm.py:472
 msgid "CXXFLAGS"
 msgstr "CXXFLAGS"
 
-#: spm.py:470
+#: spm.py:473
 msgid "CPPFLAGS"
 msgstr "CPPFLAGS"
 
-#: spm.py:471
+#: spm.py:474
 msgid "LDFLAGS"
 msgstr "LDFLAGS"
 
-#: spm.py:472
+#: spm.py:475
 msgid "MAKEFLAGS"
 msgstr "MAKEFLAGS"
 
-#: spm.py:473
+#: spm.py:476
 msgid "PURGE_PATHS"
 msgstr ""
 
-#: spm.py:474
+#: spm.py:477
 msgid "COMPRESS_MAN"
 msgstr "COMPRESS_MAN"
 
-#: spm.py:475
+#: spm.py:478
 msgid "SPLIT_DEBUG"
 msgstr ""
 
-#: spm.py:476
+#: spm.py:479
 msgid "STRIP_BINARIES"
 msgstr "STRIP_BINARIES"
 
-#: spm.py:477
+#: spm.py:480
 msgid "STRIP_SHARED"
 msgstr "STRIP_SHARED"
 
-#: spm.py:478
+#: spm.py:481
 msgid "STRIP_STATIC"
 msgstr "STRIP_STATIC"
 
-#: spm.py:479
+#: spm.py:482
 msgid "STRIP_RPATH"
 msgstr "STRIP_RPATH"
 
-#: spm.py:480
+#: spm.py:483
 msgid "IGNORE_MISSING"
 msgstr "IGNORE_MISSING"
 
-#: spm.py:481 spm.py:507 tools.py:1010
+#: spm.py:484 spm.py:510 tools.py:1013
 msgid "CONFLICTS"
 msgstr "CONFLICTS"
 
-#: spm.py:483 spm.py:509
+#: spm.py:486 spm.py:512
 msgid "SCRIPTS"
 msgstr "SCRIPTS"
 
-#: spm.py:484 spm.py:510 tools.py:958 tools.py:969 tools.py:1012 tools.py:1045
-#: tools.py:1060 tools.py:1075 tools.py:1082 tools.py:1108
+#: spm.py:487 spm.py:513 tools.py:961 tools.py:972 tools.py:1015 tools.py:1048
+#: tools.py:1063 tools.py:1078 tools.py:1085 tools.py:1111
 msgid "TARGETS"
 msgstr "МИШЕНИ"
 
-#: spm.py:485
+#: spm.py:488
 msgid "Poking sources..."
 msgstr "Побутване на източниците..."
 
-#: spm.py:511
+#: spm.py:514
 msgid "Poking binaries..."
 msgstr "Побутване на бинарите..."
 
-#: spm.py:527 tools.py:967
+#: spm.py:530 tools.py:970
 msgid "REVERSE"
 msgstr "ОБРАТНИ"
 
-#: spm.py:528
+#: spm.py:531
 msgid "SIZE"
 msgstr "РАЗМЕР"
 
-#: spm.py:529 tools.py:1003
+#: spm.py:532 tools.py:1006
 msgid "FOOTPRINT"
 msgstr "ОТПЕЧАТЪК"
 
-#: spm.py:531 tools.py:970 tools.py:976 tools.py:1013 tools.py:1054
+#: spm.py:534 tools.py:973 tools.py:979 tools.py:1016 tools.py:1057
 msgid "Poking locals..."
 msgstr ""
 
-#: spm.py:544
+#: spm.py:547
 msgid "Poking databases..."
 msgstr "Побутване на датабазите..."
 
@@ -1541,126 +1541,126 @@ msgstr ""
 msgid "Show SPM Tools version and exit"
 msgstr "Покажи версията на SPM Tools и излез"
 
-#: tools.py:957 tools.py:1074 tools.py:1081 tools.py:1097 tools.py:1106
+#: tools.py:960 tools.py:1077 tools.py:1084 tools.py:1100 tools.py:1109
 msgid "DIRECTORY"
 msgstr "ДИРЕКТОРИЯ"
 
-#: tools.py:965
+#: tools.py:968
 msgid "FAST"
 msgstr "БЪРЗО"
 
-#: tools.py:968
+#: tools.py:971
 msgid "ADJUST"
 msgstr ""
 
-#: tools.py:998
+#: tools.py:1001
 msgid "MAN"
 msgstr ""
 
-#: tools.py:999
+#: tools.py:1002
 msgid "UDEV"
 msgstr ""
 
-#: tools.py:1000
+#: tools.py:1003
 msgid "SYMLINK"
 msgstr ""
 
-#: tools.py:1001
+#: tools.py:1004
 msgid "DOC"
 msgstr ""
 
-#: tools.py:1002
+#: tools.py:1005
 msgid "MODULE"
 msgstr "МОДУЛ"
 
-#: tools.py:1004
+#: tools.py:1007
 msgid "BUILDDIR"
 msgstr ""
 
-#: tools.py:1005
+#: tools.py:1008
 msgid "OWNERSHIP"
 msgstr ""
 
-#: tools.py:1006
+#: tools.py:1009
 msgid "EXECUTABLE"
 msgstr ""
 
-#: tools.py:1007
+#: tools.py:1010
 msgid "PATH"
 msgstr "ПЪТ"
 
-#: tools.py:1008
+#: tools.py:1011
 msgid "SHEBANG"
 msgstr ""
 
-#: tools.py:1011
+#: tools.py:1014
 msgid "DEBUG"
 msgstr "ДЕБЪГ"
 
-#: tools.py:1035
+#: tools.py:1038
 msgid "ENABLE"
 msgstr ""
 
-#: tools.py:1036
+#: tools.py:1039
 msgid "DISABLE"
 msgstr ""
 
-#: tools.py:1037
+#: tools.py:1040
 msgid "NULL"
 msgstr "NULL"
 
-#: tools.py:1038
+#: tools.py:1041
 msgid "MAINTAINER"
 msgstr ""
 
-#: tools.py:1039
+#: tools.py:1042
 msgid "NOTE"
 msgstr "БЕЛЕЖКА"
 
-#: tools.py:1040
+#: tools.py:1043
 msgid "VARIABLES"
 msgstr "ПРОМЕНЛИВИ"
 
-#: tools.py:1041
+#: tools.py:1044
 msgid "TRIGGERS"
 msgstr ""
 
-#: tools.py:1042
+#: tools.py:1045
 msgid "USERS"
 msgstr "ПОТРЕБИТЕЛИ"
 
-#: tools.py:1043
+#: tools.py:1046
 msgid "GROUPS"
 msgstr "ГРУПИ"
 
-#: tools.py:1044
+#: tools.py:1047
 msgid "SIGNATURES"
 msgstr ""
 
-#: tools.py:1089
+#: tools.py:1092
 msgid "PORT"
 msgstr "ПОРТ"
 
-#: tools.py:1090
+#: tools.py:1093
 msgid "ADDRESS"
 msgstr "АДРЕСС"
 
-#: tools.py:1098
+#: tools.py:1101
 msgid "CROSS"
 msgstr ""
 
-#: tools.py:1104
+#: tools.py:1107
 msgid "HOST"
 msgstr "ХОСТ"
 
-#: tools.py:1105
+#: tools.py:1108
 msgid "USER"
 msgstr "ПОТРЕБИТЕЛ"
 
-#: tools.py:1107
+#: tools.py:1110
 msgid "INSECURE"
 msgstr ""
 
-#: tools.py:1109
+#: tools.py:1112
 msgid "Poking server..."
 msgstr "Побутване на сървър"
