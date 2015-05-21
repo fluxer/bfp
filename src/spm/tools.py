@@ -777,6 +777,14 @@ class Upload(object):
             if ftp:
                 ftp.quit()
 
+class Online(object):
+    def __init__(self):
+      # not much to initialize
+      pass
+
+    def main(self):
+      if not misc.url_ping():
+          sys.exit(1)
 
 try:
     EUID = os.geteuid()
@@ -930,6 +938,8 @@ try:
         help=_('Use insecure connection'))
     upload_parser.add_argument('TARGETS', nargs='+', type=str, \
         help=_('Targets to apply actions on'))
+
+    online_parser = subparsers.add_parser('online')
 
     parser.add_argument('--debug', nargs=0, action=OverrideDebug, \
         help=_('Enable debug messages'))
@@ -1111,6 +1121,10 @@ try:
         message.info(_('Poking server...'))
         m = Upload(ARGS.TARGETS, ARGS.host, ARGS.user, ARGS.directory, \
             ARGS.insecure)
+        m.main()
+
+    elif ARGS.mode == 'online':
+        m = Online()
         m.main()
 
 except configparser.Error as detail:

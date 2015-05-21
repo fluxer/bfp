@@ -290,6 +290,9 @@ they are outdated and don't execute pre/post actions:
 
 	sudo spm --scripts=False source -aDRu world
 
+Rebuild all revere dependencies of glibc:
+	spm local -rp glibc | sudo spm source -aD -
+
 Remove grub and the targets that depend on it (reverse dependencies):
 
 	sudo spm source -rR grub

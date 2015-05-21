@@ -5,7 +5,8 @@ spm-tools - Source Package Manager Tools
 =head1 SYNOPSIS
 
 	spm-tools [-h] [--debug] [--version]
-                 {dist,check,clean,lint,sane,merge,edit,which,pack,pkg,serve,disowned,upload}
+                 {dist,check,clean,lint,sane,merge,edit,which,pack,pkg,serve,
+                 disowned,upload,online}
 
 =head1 DESCRIPTION
 
@@ -58,6 +59,8 @@ which depending on your setup may not be desired, for an example if you
 have /usr on a separate partition. The operation is usually slow.
 
 Binary tarballs can be uploaded via FTP/FTPS to mirrors via upload mode.
+
+Checking if the system can access the internet can be done via online mode.
 
 =head1 OPTIONS
 
@@ -214,6 +217,11 @@ optional arguments:
   -d DIRECTORY, --directory DIRECTORY
                         Set upload directory
   -i, --insecure        Use insecure connection
+
+=head2 ONLINE MODE
+
+optional arguments:
+  -h, --help  Show this help message and exit
 
 =head1 EXAMPLES
 
