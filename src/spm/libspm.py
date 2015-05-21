@@ -508,8 +508,6 @@ class Source(object):
         obj.main()
 
     def split_debug_symbols(self, sfile):
-        if not self.split_debug:
-            return
         # avoid actions on debug files, do not rely on .debug suffix
         if '/lib/debug/' in sfile:
             return
@@ -521,7 +519,6 @@ class Source(object):
             sys.prefix + '/lib/debug') + '.debug'
         misc.dir_create(os.path.dirname(sdebug))
         objcopy = misc.whereis('objcopy')
-        message.sub_debug(_('Creating debug file'), sdebug)
         misc.system_command((objcopy, '--only-keep-debug', \
             '--compress-debug-sections', sfile, sdebug))
         misc.system_command((objcopy, '--add-gnu-debuglink', sdebug, sfile))
@@ -954,6 +951,7 @@ class Source(object):
             self.strip_static or self.strip_rpath:
             message.sub_info(_('Stripping binaries and libraries'))
             strip = misc.whereis('strip')
+            ldebug = []
             lbinaries = []
             lshared = []
             lstatic = []
@@ -963,19 +961,31 @@ class Source(object):
                 if os.path.islink(sfile):
                     continue
 
-                if smime == 'application/x-executable' and self.strip_binaries:
+                if smime == 'application/x-executable':
+                    if self.strip_binaries:
+                        lbinaries.append(sfile)
+                    if self.split_debug:
+                        ldebug.append(sfile)
+                    if self.strip_rpath:
+                        lrpath.append(sfile)
+                elif smime == 'application/x-sharedlib':
+                    if self.strip_shared:
+                        lshared.append(sfile)
+                    if self.split_debug:
+                        ldebug.append(sfile)
+                    if self.strip_rpath:
+                        lrpath.append(sfile)
+                elif smime == 'application/x-archive':
+                    if self.strip_static:
+                        lstatic.append(sfile)
+                    if self.split_debug:
+                        ldebug.append(sfile)
+                    if self.strip_rpath:
+                        lrpath.append(sfile)
+            if ldebug:
+                message.sub_debug(_('Splitting debug symbols'), ldebug)
+                for sfile in ldebug:
                     self.split_debug_symbols(sfile)
-                    lbinaries.append(sfile)
-                elif smime == 'application/x-sharedlib' and self.strip_shared:
-                    self.split_debug_symbols(sfile)
-                    lshared.append(sfile)
-                elif smime == 'application/x-archive' and self.strip_static:
-                    self.split_debug_symbols(sfile)
-                    lstatic.append(sfile)
-                if (smime == 'application/x-executable' or \
-                    smime == 'application/x-sharedlib' or \
-                    smime == 'application/x-archive') and self.strip_rpath:
-                    lrpath.append(sfile)
             if lbinaries:
                 message.sub_debug(_('Stripping executables'), lbinaries)
                 cmd = [strip, '--strip-all']
