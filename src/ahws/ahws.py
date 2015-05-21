@@ -55,8 +55,10 @@ class Device(object):
             while entry:
                 devname = libudev.udev_list_entry_get_name(entry)
                 dev = libudev.udev_device_new_from_syspath(self.udev, devname)
-                self.Online(self.Properties(dev))
-                libudev.udev_device_unref(dev)
+                try:
+                    self.Online(self.Properties(dev))
+                finally:
+                    libudev.udev_device_unref(dev)
                 entry = libudev.udev_list_entry_get_next(entry)
         finally:
             libudev.udev_enumerate_unref(enumerate);
