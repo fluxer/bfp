@@ -1226,7 +1226,12 @@ class Source(object):
             remove_content = []
             for sfile in set(old_content).difference(adjcontent):
                 sfull = ROOT_DIR + sfile
-                sresolved = os.path.realpath(sfull).replace(ROOT_DIR, '')
+                # skip files moved from real to symlink directory
+                sresolved = os.path.realpath(sfull)
+                if not ROOT_DIR == '/':
+                    sresolved.replace(ROOT_DIR, '/')
+                if sresolved in adjcontent or sfile in new_content:
+                    continue
                 # the footprint and metadata files will be deleted otherwise,
                 # also making sure ROOT_DIR different than / is respected
                 if LOCAL_DIR in sfull:
