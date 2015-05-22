@@ -36,7 +36,7 @@ database = libpackage.Database()
 import libspm
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.7.6 (463f7d1)"
+app_version = "1.7.6 (174471f)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -611,7 +611,7 @@ class Pack(object):
     def main(self):
         for target in self.targets:
             if database.local_search(target):
-                target_version = database.remote_metadata(target, 'version')
+                target_version = database.local_metadata(target, 'version')
                 target_packfile = os.path.join(self.directory, \
                     os.path.basename(target) + '_' + target_version + '.tar.bz2')
 
