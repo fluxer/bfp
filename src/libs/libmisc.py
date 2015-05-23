@@ -865,8 +865,14 @@ class Misc(object):
         chroot = self.whereis('chroot')
         if isinstance(command, str):
             command = '%s %s %s' % (chroot, self.ROOT_DIR, command)
-        elif isinstance(command, (tuple, list)):
-            command.insert(chroot, self.ROOT_DIR)
+        elif isinstance(command, list):
+            command.insert(0, chroot)
+            command.insert(1, self.ROOT_DIR)
+        elif isinstance(command, tuple):
+            mycommand = list(command)
+            mycommand.insert(0, chroot)
+            mycommand.insert(1, self.ROOT_DIR)
+            command = mycommand
         try:
             for s in ('/proc', '/dev', '/sys'):
                 sdir = self.ROOT_DIR + s
