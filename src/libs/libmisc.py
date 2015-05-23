@@ -69,7 +69,7 @@ class Misc(object):
             # normalize because os.path.join sucks and can't be used in this case
             if chroot and os.path.isfile(os.path.realpath(self.ROOT_DIR + exe)):
                 return exe
-            elif os.path.isfile(exe):
+            elif not chroot and os.path.isfile(exe):
                 return exe
 
         if fallback:
@@ -860,25 +860,24 @@ class Misc(object):
         if self.ROOT_DIR == '/':
             return
 
-        real_root = os.open('/', os.O_RDONLY)
         mount = self.whereis('mount')
         umount = self.whereis('umount')
+        chroot = self.whereis('chroot')
+        if isinstance(command, str):
+            command = '%s %s %s' % (chroot, self.ROOT_DIR, command)
+        elif isinstance(command, (tuple, list)):
+            command.insert(chroot, self.ROOT_DIR)
         try:
             for s in ('/proc', '/dev', '/sys'):
                 sdir = self.ROOT_DIR + s
                 if not os.path.ismount(sdir):
                     self.dir_create(sdir)
                     self.system_command((mount, '--rbind', s, sdir))
-            os.chroot(self.ROOT_DIR)
-            os.chdir('/')
             if sinput:
                 self.system_communicate(command, shell=shell, sinput=sinput)
             else:
                 self.system_command(command, shell=shell)
         finally:
-            os.fchdir(real_root)
-            os.chroot('.')
-            os.close(real_root)
             for s in ('/proc', '/dev', '/sys'):
                 sdir = self.ROOT_DIR + s
                 if os.path.ismount(sdir):
