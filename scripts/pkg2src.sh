@@ -66,7 +66,7 @@ for pkg in "${@:-.}";do
         -e 's|source=(|sources=(|g' \
         -e 's|$SRC|$SOURCE_DIR|g' -e 's|${SRC}|$SOURCE_DIR|g' \
         -e 's|$PKG|$INSTALL_DIR|g' -e 's|${PKG}|$INSTALL_DIR|g' \
-        -e 's|build()|src_install()|g' \
+        -e 's|build()|src_install()|g' -e 's|build ()|src_install()|g' \
         -e 's/ || return 1//g' \
         -i  "$srcbuild" || die
     description="$(grep '# Description: ' "$srcbuild" | sed 's|# Description: ||')"
