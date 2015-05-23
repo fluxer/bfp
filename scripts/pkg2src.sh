@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# pkg2src - PKGBUILD to SRCBUILD convertor
+# pkg2src - Pkgfile to SRCBUILD convertor
 # Copyright (C) 2013-2015 Ivailo Monev (a.k.a SmiL3y)
 
 export LANG=C LC_ALL=C
@@ -45,80 +45,38 @@ die() {
 
 
 for pkg in "${@:-.}";do
-    pkgbuild="$pkg/PKGBUILD"
+    pkgfile="$pkg/Pkgfile"
+    srcbuild="$pkg/SRCBUILD"
 
-    if [[ ! -f $pkgbuild ]];then
-        warn "Give me a directory with PKGBUILD"
-        continue
-    fi
-
-    msg "Checking $pkgbuild.."
-    if [[ -n $(grep -e 'pkgbase=' -e '^package_' "$pkgbuild") ]];then
-        warn "Multi-package, I can not handle that"
-        continue
-    fi
-
-    if [[ $(find "$pkg" -name '*.install' | wc -l) -gt 1 ]];then
-        warn "Multi-install files, I can not handle that"
+    if [ ! -f "$pkgfile" ];then
+        warn "Give me a directory with Pkgfile"
         continue
     fi
 
     msg "Preparing.."
-    pkgname="$(. $pkgbuild && echo $pkgname)"
-    if [ -z "$pkgname" ];then
-        warn "Sourcing $pkgbuild failed or empty pkgname"
+    name="$(. $pkgfile && echo $name)"
+    if [ -z "$name" ];then
+        warn "Sourcing $pkgfile failed or empty name"
         continue
     fi
-    url="$(. $pkgbuild && echo $url)"
-    if [ -z "$url" ];then
-        warn "Sourcing $pkgbuild failed or empty url"
-        continue
-    fi
-    script=$(find "$pkg" -name '*.install')
-    mv "$pkg/PKGBUILD" "$pkg/SRCBUILD" || die
+    cp "$pkgfile" "$srcbuild" || die
 
     msg "Adjusting.."
-    sed -e "s|\$pkgname|$pkgname|g" -e "s|\${pkgname}|$pkgname|g" \
-        -e 's|pkgver=|version=|g' -e 's|$pkgver|$version|g' -e 's|${pkgver}|$version|g' \
-        -e 's|$_pkgver|$_version|g' -e 's|${_pkgver}|$_version|g' \
-        -e 's|pkgdesc=|description=|g' \
+    sed -e "s|\$name|$name|g" -e "s|\${name}|$name|g" \
         -e 's|source=(|sources=(|g' \
-        -e 's|validpgpkeys=(|pgpkeys=(|g' \
-        -e 's|$srcdir|$SOURCE_DIR|g' -e 's|${srcdir}|$SOURCE_DIR|g' \
-        -e 's|$pkgdir|$INSTALL_DIR|g' -e 's|${pkgdir}|$INSTALL_DIR|g' \
-        -e 's|build()|src_compile()|g' -e 's|check()|src_check()|g' -e 's|package()|src_install()|g' \
-        -e 's|msg |echo |g' -e 's|msg2 |echo -e |g' \
-        -e 's|$CARCH|$(uname -m)|g' -e 's|${CARCH}|$(uname -m)|g' \
+        -e 's|$SRC|$SOURCE_DIR|g' -e 's|${SRC}|$SOURCE_DIR|g' \
+        -e 's|$PKG|$INSTALL_DIR|g' -e 's|${PKG}|$INSTALL_DIR|g' \
+        -e 's|build()|src_install()|g' \
         -e 's/ || return 1//g' \
-        -e 's|$startdir/src|$SOURCE_DIR|g' -e 's|${startdir}/src|$SOURCE_DIR|g' \
-        -e 's|$startdir/pkg|$INSTALL_DIR|g' -e 's|${startdir}/pkg|$INSTALL_DIR|g' \
-        -e "s|\$pkgbase|$pkgname|g" -e "s|\${pkgbase}|$pkgname|g" \
-        -e "s|\$url|$url|g" -e "s|\${url}|$url|g" \
-        -e "s|pre_install \$.*|pre_install|g" -e "s|post_install \$.*|post_install|g" \
-        -e "s|pre_upgrade \$.*|pre_upgrade|g" -e "s|post_upgrade \$.*|post_upgrade|g" \
-        -e "s|pre_remove \$.*|pre_remove|g" -e "s|post_remove \$.*|post_remove|g" \
-        -i  "$pkg/SRCBUILD" || die
-
-    msg "Stripping.."
-    sed -e "/pkgname=/d" \
-        -e "/pkgrel=/d" \
-        -e "/epoch=/d" \
-        -e "/arch=/d" \
-        -e "/license=/d" \
-        -e "/changelog=/d" \
-        -e "/url=/d" \
-        -e "/groups=/d" \
-        -e "/replaces=/d" -e "/conflicts=/d" -e "/provides=/d" \
-        -e "/install=/d" \
-        -i "$pkg/SRCBUILD" || die
-
-    if [[ -f $script ]];then
-        msg "Merging.."
-        echo -e "\n" >> "$pkg/SRCBUILD" || die
-        cat "$script" >> "$pkg/SRCBUILD" || die
-        rm -f "$pkg/${script##*/}" || die
+        -i  "$srcbuild" || die
+    description="$(grep '# Description: ' "$srcbuild" | sed 's|# Description: ||')"
+    depends="$(grep '# Depends on: ' "$srcbuild" | sed 's|# Depends on: ||')"
+    sed "/release=.*/a description=\"$description\"" -i "$srcbuild" || die
+    if [ -n "$depends" ];then
+        sed "/description=.*/a makedepends=\($depends\)" -i "$srcbuild" || die
     fi
+    sed '/name=/d;/# Description: /d;/Depends on: /d' -i "$srcbuild" || die
 
-    msg "Removing .last files.."
-    rm -f "$pkg/"*.last || die
+    msg "Cleaning up.."
+    rm -f "$pkgfile" "$pkg/"*.last || die
 done

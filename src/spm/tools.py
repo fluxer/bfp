@@ -627,35 +627,33 @@ class Pack(object):
 
 
 class Pkg(object):
-    ''' Fetch Arch Linux package files '''
+    ''' Fetch CRUX Linux package files '''
     def __init__(self, targets, directory=misc.dir_current()):
         self.targets = targets
         self.directory = directory
         self.GIT_DIRS = (
-            '/svntogit/packages.git/plain/%s/trunk',
-            '/svntogit/community.git/plain/%s/trunk'
+            'http://crux.nu/ports/crux-3.1/core/%s',
+            'http://crux.nu/ports/crux-3.1/contrib/%s',
         )
-        self.GIT_URL = 'http://projects.archlinux.org'
 
 
     def get_git_links(self, pkgname):
-        """Search the Git interface on archlinux.org."""
+        ''' Search the Git interface '''
         for d in self.GIT_DIRS:
-            url = self.GIT_URL + d % pkgname
+            url = d % pkgname
             f = None
             try:
                 f = urlopen(url)
                 for line in f:
-                    m = re.search(r"href='(.+?)'>(.+?)<".encode('utf-8'), line)
+                    m = re.search(r'href="(.+?)">(.+?)<'.encode('utf-8'), line)
                     if m:
                         href = m.group(1).decode()
                         name = m.group(2).decode()
-                        if name[:2] != '..':
-                            yield self.GIT_URL + href, name
+                        if name[:2] == '..' or name == 'Name':
+                            continue
+                        yield '%s/%s' % (url, href), name
             except HTTPError as e:
                 if e.code != 404:
-                    if f:
-                        f.close()
                     raise
             finally:
                 if f:
@@ -667,7 +665,6 @@ class Pkg(object):
             urls = list(self.get_git_links(target))
             if urls:
                 message.sub_info(_('Fetching package files'), target)
-                message.sub_debug(_('Webpage'), os.path.dirname(urls[0][0]))
                 pkgdir = os.path.join(self.directory, target)
                 misc.dir_create(pkgdir)
                 for href, name in urls:

@@ -46,7 +46,7 @@ dublicate ports. In addition, the content of the SRCBUILD can be printed.
 Software with SPM can be re-packed via pack mode, it depends on the footprint
 and will bail out if file does not exist.
 
-Package files from Arch Linux can be obtained via pkg mode, later they can be
+Package files from CRUX Linux can be obtained via pkg mode, later they can be
 converted (with some degree of success) to SRCBUILD via pkg2src.
 
 Serving local caches (that includes repositories, sources and taballs) to the
