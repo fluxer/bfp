@@ -70,7 +70,7 @@ for pkg in "${@:-.}";do
         -e 's/ || return 1//g' \
         -i  "$srcbuild" || die
     description="$(grep '# Description: ' "$srcbuild" | sed 's|# Description: ||')"
-    depends="$(grep '# Depends on: ' "$srcbuild" | sed 's|# Depends on: ||')"
+    depends="$(grep '# Depends on: ' "$srcbuild" | sed 's|# Depends on: ||;s|, | |g')"
     sed "/release=.*/a description=\"$description\"" -i "$srcbuild" || die
     if [ -n "$depends" ];then
         sed "/description=.*/a makedepends=\($depends\)" -i "$srcbuild" || die
@@ -78,5 +78,5 @@ for pkg in "${@:-.}";do
     sed '/name=/d;/# Description: /d;/Depends on: /d' -i "$srcbuild" || die
 
     msg "Cleaning up.."
-    rm -f "$pkgfile" "$pkg/"*.last || die
+    rm -f "$pkgfile" "$pkg/"*.last "$pkg/.footprint" "$pkg/.md5sum" || die
 done
