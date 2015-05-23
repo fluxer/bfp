@@ -822,7 +822,7 @@ class Source(object):
 
             if src_url.endswith(('.asc', '.sig')) and self.verify:
                 message.sub_debug(_('Verifying'), src_url)
-                misc.gpg_verify(src_file)
+                misc.gpg_verify(local_file)
 
     def prepare(self):
         ''' Prepare target sources '''
