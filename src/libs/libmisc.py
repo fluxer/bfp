@@ -611,6 +611,18 @@ class Misc(object):
             self.system_command((svn, 'co', '--depth=infinity', surl, \
                 destination))
 
+    def fetch_rsync(self, surl, destination):
+        ''' Sync rsync path '''
+        if self.python2:
+            self.typecheck(surl, (types.StringTypes))
+            self.typecheck(destination, (types.StringTypes))
+
+        if self.OFFLINE:
+            return
+
+        rsync = self.whereis('rsync')
+        self.system_command((rsync, destination))
+
     def fetch(self, surl, destination, lmirrors=None, ssuffix='', iretry=3):
         ''' Download file from mirror if possible, iretry is passed internally! '''
         if self.python2:
@@ -639,6 +651,8 @@ class Misc(object):
                 self.fetch_git(surl, destination)
             elif surl.startswith('svn://'):
                 self.fetch_svn(surl, destination)
+            elif surl.startswith('rsync://'):
+                self.fetch_rsync(surl, destination)
             elif snewurl.startswith(('http://', 'https://', 'ftp://', \
                 'ftps://')):
                 self.fetch_plain(snewurl, destination, 0)
