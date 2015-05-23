@@ -647,10 +647,10 @@ class Pkg(object):
         ''' Search the Git interface '''
         for d in self.PKG_DIRS:
             url = d % pkgname
-            f = None
+            request = None
             try:
-                f = urlopen(url)
-                for line in f:
+                request = misc.fetch_request(url)
+                for line in request:
                     m = re.search(r'href="(.+?)">(.+?)<'.encode('utf-8'), line)
                     if m:
                         href = m.group(1).decode()
@@ -662,8 +662,8 @@ class Pkg(object):
                 if e.code != 404:
                     raise
             finally:
-                if f:
-                    f.close()
+                if request:
+                    request.close()
 
     def main(self):
         not_found = []
