@@ -36,7 +36,7 @@ database = libpackage.Database()
 import libspm
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.7.6 (174471f)"
+app_version = "1.7.6 (4d27849)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -631,15 +631,21 @@ class Pkg(object):
     def __init__(self, targets, directory=misc.dir_current()):
         self.targets = targets
         self.directory = directory
-        self.GIT_DIRS = (
-            'http://crux.nu/ports/crux-3.1/core/%s',
+        self.PKG_DIRS = (
+            'http://crux.nu/ports/crux-3.1/compat-32/%s',
             'http://crux.nu/ports/crux-3.1/contrib/%s',
+            'http://crux.nu/ports/crux-3.1/core/%s',
+            'http://crux.nu/ports/crux-3.1/enlightenment/%s',
+            'http://crux.nu/ports/crux-3.1/kde4/%s',
+            'http://crux.nu/ports/crux-3.1/opt/%s',
+            'http://crux.nu/ports/crux-3.1/xfce/%s',
+            'http://crux.nu/ports/crux-3.1/xorg/%s',
         )
 
 
-    def get_git_links(self, pkgname):
+    def get_links(self, pkgname):
         ''' Search the Git interface '''
-        for d in self.GIT_DIRS:
+        for d in self.PKG_DIRS:
             url = d % pkgname
             f = None
             try:
@@ -662,7 +668,7 @@ class Pkg(object):
     def main(self):
         not_found = []
         for target in self.targets:
-            urls = list(self.get_git_links(target))
+            urls = list(self.get_links(target))
             if urls:
                 message.sub_info(_('Fetching package files'), target)
                 pkgdir = os.path.join(self.directory, target)
