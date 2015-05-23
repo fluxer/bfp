@@ -318,7 +318,7 @@ class TestSuite(unittest.TestCase):
         self.assertEqual(database.local_rdepends(self.local_name), \
             self.local2_name.split())
 
-    def test_local_database_update(self):
+    def test_local_database_update_true(self):
         updated = False
         pre = database.local_all()
         misc.dir_remove(self.local3_dir)
@@ -333,6 +333,9 @@ class TestSuite(unittest.TestCase):
 
     def test_file_mime_makefile(self):
         self.assertEqual(misc.file_mime('Makefile'), 'text/x-makefile')
+
+    def test_system_communicate_output_true(self):
+        self.assertEqual(misc.system_communicate(('echo', 'output')), 'output')
 
     @unittest.skipIf(misc.python3, 'Python 3000')
     def test_type_str_true(self):

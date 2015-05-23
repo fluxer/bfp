@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os
 
-app_version = "1.7.6 (f51ffff)"
+app_version = "1.7.6 (2182f1b)"
 
 tmpdir = None
 keep = False
@@ -62,7 +62,7 @@ try:
 
     message.sub_info('Listing image')
     cpio = misc.whereis('cpio')
-    print(misc.system_output((cpio, '-tF', misc.file_name(new_image, False))))
+    print(misc.system_communicate((cpio, '-tF', misc.file_name(new_image, False))))
 
 except subprocess.CalledProcessError as detail:
     message.critical('SUBPROCESS', detail)

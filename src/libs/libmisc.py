@@ -328,7 +328,7 @@ class Misc(object):
         cmd.extend(('--detach-sig', '--sign', '--batch', sfile))
         if not self.SIGNPASS:
             self.SIGNPASS = base64.encodestring(self.getpass(sprompt))
-        self.system_input(cmd, base64.decodestring(self.SIGNPASS))
+        self.system_communicate(cmd, sinput=base64.decodestring(self.SIGNPASS))
 
     def gpg_verify(self, sfile, ssignature=None):
         ''' Verify file PGP signature via GnuPG '''
@@ -767,10 +767,10 @@ class Misc(object):
         elif smime == 'application/x-xz' or smime == 'application/x-lzma':
             bsdtar = self.whereis('bsdtar', fallback=False)
             if bsdtar:
-                content = self.system_output((bsdtar, '-tf', \
+                content = self.system_communicate((bsdtar, '-tf', \
                     sfile)).splitlines()
             else:
-                content = self.system_output((self.whereis('tar'), \
+                content = self.system_communicate((self.whereis('tar'), \
                     '-tf', sfile)).splitlines()
         elif smime == 'application/x-gzip':
             content = self.file_name(sfile, True).split()
@@ -778,38 +778,28 @@ class Misc(object):
             content = self.file_name(sfile, True).split()
         return content
 
-    def system_output(self, command, shell=False, cwd=''):
-        ''' Get output of external utility '''
+    def system_communicate(self, command, shell=False, cwd=None, sinput=None):
+        ''' Send input to external utility '''
         if self.python2:
             self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
+            self.typecheck(sinput, (types.NoneType, types.StringTypes))
             self.typecheck(shell, (types.BooleanType))
-            self.typecheck(cwd, (types.StringTypes))
+            self.typecheck(cwd, (types.NoneType, types.StringTypes))
 
         if not cwd:
             cwd = self.dir_current()
         elif not os.path.isdir(cwd):
             cwd = '/'
 
-        pipe = subprocess.Popen(command, stdout=subprocess.PIPE, \
-            env={'LC_ALL': 'C'}, shell=shell, cwd=cwd)
-        output = pipe.communicate()[0].strip()
-        return self.string_encode(output)
-
-    def system_input(self, command, sinput, shell=False):
-        ''' Send input to external utility '''
-        if self.python2:
-            self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
-            self.typecheck(sinput, (types.StringTypes))
-            self.typecheck(shell, (types.BooleanType))
-
         if isinstance(command, str) and not shell:
             command = shlex.split(command)
         pipe = subprocess.Popen(command, stdin=subprocess.PIPE, \
             stdout=subprocess.PIPE, stderr=subprocess.PIPE, \
-            env={'LC_ALL': 'C'}, shell=shell)
+            env={'LC_ALL': 'C'}, shell=shell, cwd=cwd)
         out, err = pipe.communicate(input=sinput)
         if pipe.returncode != 0:
             raise(Exception('%s %s' % (out, err)))
+        return self.string_encode(out.strip())
 
     def system_scanelf(self, sfile, sformat='#F%n', sflags=''):
         ''' Get information about ELF files '''
@@ -818,7 +808,7 @@ class Misc(object):
             self.typecheck(sformat, (types.StringTypes))
             self.typecheck(sflags, (types.StringTypes))
 
-        return self.system_output((self.whereis('scanelf'), '-yCBF', \
+        return self.system_communicate((self.whereis('scanelf'), '-yCBF', \
             sformat, sflags, sfile))
 
     def system_command(self, command, shell=False, cwd='', catch=False):
@@ -868,7 +858,7 @@ class Misc(object):
             os.chroot(self.ROOT_DIR)
             os.chdir('/')
             if sinput:
-                self.system_input(command, shell=shell, sinput=sinput)
+                self.system_communicate(command, shell=shell, sinput=sinput)
             else:
                 self.system_command(command, shell=shell)
         finally:

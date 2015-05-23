@@ -927,7 +927,7 @@ class Source(object):
                 mpaths = ('/usr/local/share/man', '/local/share/man', \
                     '/usr/share/man', '/share/man', '/usr/man', '/man')
             else:
-                mpaths = misc.system_output((manpath, '--global')).split(':')
+                mpaths = misc.system_communicate((manpath, '--global')).split(':')
 
             # NOTE: if target_content is reused later before re-indexing
             # entries from it should be removed because files are removed

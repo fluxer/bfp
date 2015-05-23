@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast
 
-app_version = "1.7.6 (f51ffff)"
+app_version = "1.7.6 (2182f1b)"
 
 tmpdir = None
 keep = False
@@ -125,7 +125,7 @@ try:
     def create_image(src, image, method):
         misc.system_command((ARGS.busybox, 'depmod', ARGS.kernel, '-b', ARGS.tmp))
 
-        data = misc.system_output('%s find . | %s cpio -o -H newc' % \
+        data = misc.system_communicate('%s find . | %s cpio -o -H newc' % \
             (ARGS.busybox, ARGS.busybox), shell=True, cwd=src)
         if method == 'gzip':
             gzipf = gzip.GzipFile(image, 'wb')
