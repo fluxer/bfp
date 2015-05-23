@@ -76,7 +76,10 @@ for pkg in "${@:-.}";do
         sed "/description=.*/a makedepends=\($depends\)" -i "$srcbuild" || die
     fi
     sed '/name=/d;/# Description: /d;/Depends on: /d' -i "$srcbuild" || die
+    if [ -f "$pkg/.nostrip" ];then
+        sed "release=.*/a options=\(debug\)" -i "$srcbuild" || die
+    fi
 
     msg "Cleaning up.."
-    rm -f "$pkgfile" "$pkg/"*.last "$pkg/.footprint" "$pkg/.md5sum" || die
+    rm -f "$pkgfile" "$pkg/"{.footprint,.md5sum,.nostrip,*.last} || die
 done
