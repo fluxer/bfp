@@ -5,7 +5,7 @@ spm.conf - Source Package Manager configuration file
 =head1 DESCRIPTION
 
 spm.conf is the configuration file used by Source Package Manager. It is
-divided into sections - spm, prepare, compile, install and merge. These
+divided into sections - spm, fetch, compile, install and merge. These
 sections represent options used at different stage of the software
 building process.
 

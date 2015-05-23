@@ -80,7 +80,8 @@ class Message(object):
                 self.cinfo, marker, self.cnormal))
             self.log_message('info', '%s: %s' % (msg, marker))
         else:
-            print('%s* %s%s' % (self.cmarker, self.cnormal, msg))
+            for line in msg.splitlines():
+                print('%s* %s%s' % (self.cmarker, self.cnormal, line))
             self.log_message('info', msg)
 
 
@@ -91,7 +92,8 @@ class Message(object):
                 self.cnormal, msg, self.cwarning, marker, self.cnormal))
             self.log_message('warning', '%s: %s' % (msg, marker))
         else:
-            sys.stderr.write('%s* %s%s\n' % (self.cwarning, self.cnormal, msg))
+            for line in msg.splitlines():
+                sys.stderr.write('%s* %s%s\n' % (self.cwarning, self.cnormal, line))
             self.log_message('warning', msg)
 
     def critical(self, msg, marker=None):
@@ -105,7 +107,8 @@ class Message(object):
         else:
             if self.CATCH:
                 raise Exception(msg)
-            sys.stderr.write('%s* %s%s\n' % (self.ccritical, self.cnormal, msg))
+            for line in msg.splitlines():
+                sys.stderr.write('%s* %s%s\n' % (self.ccritical, self.cnormal, line))
             self.log_message('critical', msg)
 
     def debug(self, msg, marker=None):
@@ -116,7 +119,8 @@ class Message(object):
                     self.cdebug, marker, self.cnormal))
                 self.log_message('debug', '%s: %s' % (msg, marker))
             else:
-                print('%s* %s%s' % (self.cdebug, self.cnormal, msg))
+                for line in msg.splitlines():
+                    print('%s* %s%s' % (self.cdebug, self.cnormal, line))
                 self.log_message('debug', msg)
 
     def queue(self, status, msg, marker=None):
@@ -143,7 +147,8 @@ class Message(object):
                 self.cinfo, marker, self.cnormal))
             self.log_message('info', '%s: %s' % (msg, marker))
         else:
-            print('%s  -> %s%s' % (self.cmarker, self.cnormal, msg))
+            for line in msg.splitlines():
+                print('%s  -> %s%s' % (self.cmarker, self.cnormal, line))
             self.log_message('info', msg)
 
     def sub_warning(self, msg, marker=None):
@@ -153,8 +158,9 @@ class Message(object):
                 self.cnormal, msg, self.cwarning, marker, self.cnormal))
             self.log_message('warning', '%s: %s' % (msg, marker))
         else:
-            sys.stderr.write('%s  -> %s%s\n' % (self.cwarning, \
-                self.cnormal, msg))
+            for line in msg.splitlines():
+                sys.stderr.write('%s  -> %s%s\n' % (self.cwarning, \
+                    self.cnormal, line))
             self.log_message('warning', msg)
 
     def sub_critical(self, msg, marker=None):
@@ -162,8 +168,9 @@ class Message(object):
         if not marker is None:
             if self.CATCH:
                 raise Exception(msg, marker)
-            sys.stderr.write('%s  => %s%s: %s%s%s\n' % (self.ccritical, \
-                self.cnormal, msg, self.ccritical, marker, self.cnormal))
+            for line in msg.splitlines():
+                sys.stderr.write('%s  => %s%s: %s%s%s\n' % (self.ccritical, \
+                    self.cnormal, line, self.ccritical, marker, self.cnormal))
             self.log_message('critical', '%s: %s' % (msg, marker))
         else:
             if self.CATCH:
@@ -180,7 +187,8 @@ class Message(object):
                     msg, self.cdebug, marker, self.cnormal))
                 self.log_message('debug', '%s: %s' % (msg, marker))
             else:
-                print('%s  -> %s%s' % (self.cdebug, self.cnormal, msg))
+                for line in msg.splitlines():
+                    print('%s  -> %s%s' % (self.cdebug, self.cnormal, line))
                 self.log_message('debug', msg)
 
     def sub_queue(self, status, msg, marker=None):

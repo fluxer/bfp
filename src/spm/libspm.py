@@ -61,7 +61,7 @@ conf = configparser.SafeConfigParser(DEFAULTS)
 conf.read(MAIN_CONF)
 # section are hardcore-required, to avoid failures on get() add them to the
 # conf object but do notice that changes are not written to config on purpose
-for section in ('spm', 'prepare', 'compile', 'install', 'merge'):
+for section in ('spm', 'fetch', 'compile', 'install', 'merge'):
     if not conf.has_section(section):
         conf.add_section(section)
 
@@ -72,10 +72,10 @@ LOCAL_DIR = ROOT_DIR + 'var/local/spm'
 GPG_DIR = conf.get('spm', 'GPG_DIR')
 IGNORE = conf.get('spm', 'IGNORE').split(' ')
 SIGN = conf.get('spm', 'SIGN')
-OFFLINE = conf.getboolean('prepare', 'OFFLINE')
-MIRROR = conf.getboolean('prepare', 'MIRROR')
-TIMEOUT = conf.getint('prepare', 'TIMEOUT')
-VERIFY = conf.getboolean('prepare', 'VERIFY')
+OFFLINE = conf.getboolean('fetch', 'OFFLINE')
+MIRROR = conf.getboolean('fetch', 'MIRROR')
+TIMEOUT = conf.getint('fetch', 'TIMEOUT')
+VERIFY = conf.getboolean('fetch', 'VERIFY')
 CHOST = conf.get('compile', 'CHOST')
 CFLAGS = conf.get('compile', 'CFLAGS')
 CXXFLAGS = conf.get('compile', 'CXXFLAGS')
