@@ -499,10 +499,10 @@ class Source(object):
     def autosource(self, targets, automake=False, autoremove=False):
         ''' Handle targets build/remove without affecting current object '''
         if automake:
-            obj = Source(targets, do_clean=True, do_prepare=True, \
-                do_compile=True, do_check=False, do_install=True, \
-                do_merge=True, do_depends=True, do_reverse=self.do_reverse, \
-                do_update=False)
+            obj = Source(targets, do_clean=True, do_fetch=True, \
+                do_prepare=True, do_compile=True, do_check=False, \
+                do_install=True, do_merge=True, do_depends=True, \
+                do_reverse=self.do_reverse, do_update=False)
         else:
             obj = Source(targets, do_reverse=self.do_reverse, \
                 autoremove=autoremove)
@@ -1605,11 +1605,12 @@ wantscookie = '''
 
 class Binary(Source):
     ''' Class to handle binary tarballs '''
-    def __init__(self, targets, do_prepare=False, do_merge=False, \
-        do_remove=False, do_depends=False, do_reverse=False, do_update=False, \
-        autoremove=False):
+    def __init__(self, targets, do_fetch=False, do_prepare=False, \
+        do_merge=False, do_remove=False, do_depends=False, do_reverse=False, \
+        do_update=False, autoremove=False):
         super(Binary, self).__init__(Source)
         self.targets = targets
+        self.do_fetch = do_fetch
         self.do_prepare = do_prepare
         self.do_merge = do_merge
         self.do_remove = do_remove
@@ -1631,8 +1632,9 @@ class Binary(Source):
     def autobinary(self, targets, automake=False, autoremove=False):
         ''' Handle targets install/remove without affecting current object '''
         if automake:
-            obj = Binary(targets, do_merge=True, do_depends=True, \
-                do_reverse=self.do_reverse, do_update=False)
+            obj = Binary(targets, do_fetch=True, do_prepare=True, \
+                do_merge=True, do_depends=True, do_reverse=self.do_reverse, \
+                do_update=False)
         else:
             obj = Binary(targets, do_reverse=self.do_reverse, \
                 autoremove=autoremove)
