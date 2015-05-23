@@ -632,14 +632,14 @@ class Pkg(object):
         self.targets = targets
         self.directory = directory
         self.PKG_DIRS = (
-            'http://crux.nu/ports/crux-3.1/compat-32/%s',
-            'http://crux.nu/ports/crux-3.1/contrib/%s',
-            'http://crux.nu/ports/crux-3.1/core/%s',
-            'http://crux.nu/ports/crux-3.1/enlightenment/%s',
-            'http://crux.nu/ports/crux-3.1/kde4/%s',
-            'http://crux.nu/ports/crux-3.1/opt/%s',
-            'http://crux.nu/ports/crux-3.1/xfce/%s',
-            'http://crux.nu/ports/crux-3.1/xorg/%s',
+            'https://crux.nu/ports/crux-3.1/compat-32/%s',
+            'https://crux.nu/ports/crux-3.1/contrib/%s',
+            'https://crux.nu/ports/crux-3.1/core/%s',
+            'https://crux.nu/ports/crux-3.1/enlightenment/%s',
+            'https://crux.nu/ports/crux-3.1/kde4/%s',
+            'https://crux.nu/ports/crux-3.1/opt/%s',
+            'https://crux.nu/ports/crux-3.1/xfce/%s',
+            'https://crux.nu/ports/crux-3.1/xorg/%s',
         )
 
 
