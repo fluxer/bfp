@@ -163,4 +163,12 @@ else
     echo "=== SKIPPING SPMT DISOWNED TEST ==="
 fi
 
+if ! grep -q "SPMT ONLINE" "$statefile" ;then
+    echo "=== RUNNING SPMT ONLINE TEST ==="
+    "$1" "$curdir/tools.py" online
+    echo "SPMT ONLINE" >> "$statefile"
+else
+    echo "=== SKIPPING SPMT ONLINE TEST ==="
+fi
+
 # TODO: upload
