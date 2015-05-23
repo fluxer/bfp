@@ -822,7 +822,7 @@ class Source(object):
 
             if src_url.endswith(('.asc', '.sig')) and self.verify:
                 message.sub_debug(_('Verifying'), src_url)
-                misc.gpg_verify(link_file)
+                misc.gpg_verify(src_file)
 
     def prepare(self):
         ''' Prepare target sources '''
@@ -1675,6 +1675,7 @@ class Binary(Source):
         ''' Prepare target tarballs '''
         message.sub_info(_('Checking dependencies'))
         missing = []
+        sdepends = '%s.depends' % self.target_tarball
         depends = misc.file_read(sdepends).split()
         message.sub_debug(_('Dependencies'), depends)
         for m in depends:

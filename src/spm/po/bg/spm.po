@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-23 02:44+0000\n"
+"POT-Creation-Date: 2015-05-23 02:47+0000\n"
 "PO-Revision-Date: 2015-05-19 03:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -266,12 +266,12 @@ msgstr "Проверяване на зависимостите"
 msgid "Building dependencies"
 msgstr "Изграждане на зависимости"
 
-#: libspm.py:836 libspm.py:1686
+#: libspm.py:836 libspm.py:1687
 #, python-format
 msgid "Resuming %s preparations at"
 msgstr "Преостановяване подготовката на %s в"
 
-#: libspm.py:839 libspm.py:1689
+#: libspm.py:839 libspm.py:1690
 msgid "Dependencies missing"
 msgstr "Липсващи зависимости"
 
@@ -515,15 +515,15 @@ msgstr "Изпълняване на post_remove()"
 msgid "Removing SRCBUILD"
 msgstr "Премахване на SRCBUILD"
 
-#: libspm.py:1397 libspm.py:1712
+#: libspm.py:1397 libspm.py:1713
 msgid "Ignoring target"
 msgstr "Игориране на мишена"
 
-#: libspm.py:1405 libspm.py:1720 tools.py:185 tools.py:684 tools.py:756
+#: libspm.py:1405 libspm.py:1721 tools.py:185 tools.py:684 tools.py:756
 msgid "Invalid target"
 msgstr "Невалидна мишена"
 
-#: libspm.py:1432 libspm.py:1747
+#: libspm.py:1432 libspm.py:1748
 msgid "Target is up-to-date"
 msgstr "Мишената е последната налична версия"
 
@@ -587,12 +587,12 @@ msgstr ""
 msgid "Starting %s cleanup at"
 msgstr "Започване чистка на %s в"
 
-#: libspm.py:1517 libspm.py:1751
+#: libspm.py:1517 libspm.py:1752
 #, python-format
 msgid "Starting %s fetch at"
 msgstr ""
 
-#: libspm.py:1522 libspm.py:1756
+#: libspm.py:1522 libspm.py:1757
 #, python-format
 msgid "Starting %s preparations at"
 msgstr "Започване подготовка на %s в"
@@ -624,12 +624,12 @@ msgstr "src_install() не е зададен"
 msgid "Starting %s install at"
 msgstr "Започване инсталация на %s в"
 
-#: libspm.py:1579 libspm.py:1761
+#: libspm.py:1579 libspm.py:1762
 #, python-format
 msgid "Starting %s merge at"
 msgstr "Започване сливане на %s в"
 
-#: libspm.py:1583 libspm.py:1766
+#: libspm.py:1583 libspm.py:1767
 #, python-format
 msgid "Starting %s remove at"
 msgstr "Започване премахване на %s в"
@@ -650,15 +650,15 @@ msgstr "Поне едно огледало е нужно"
 msgid "Binary tarball not available for"
 msgstr ""
 
-#: libspm.py:1679
+#: libspm.py:1680
 msgid "Dependencies"
 msgstr "Зависимости"
 
-#: libspm.py:1684
+#: libspm.py:1685
 msgid "Fetching dependencies"
 msgstr ""
 
-#: libspm.py:1793
+#: libspm.py:1794
 msgid "Match in"
 msgstr "Съвпадение в"
 
