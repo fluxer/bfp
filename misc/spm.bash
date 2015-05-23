@@ -20,12 +20,12 @@ _spm()
         -d --description -D --depends -m --makedepends -c --checkdepends
         -s --sources -k --pgpkeys -o --options -b --backup -p --plain'
 
-    source_options='-h --help -C --clean -p --prepare -c --compile -k --check
-        -i --install -m --merge -r --remove -D --depends -R --reverse -u
-        --update -a --automake'
+    source_options='-h --help -C --clean -f --fetch -p --prepare -c --compile
+        -k --check -i --install -m --merge -r --remove -D --depends
+        -R --reverse -u --update -a --automake'
 
-    binary_options='-h --help -m --merge -r --remove -D --depends -R --reverse -u
-        --update'
+    binary_options='-h --help -f --fetch -p --prepare -m --merge -r --remove
+        -D --depends -R --reverse -u --update'
 
     local_options='-h --help -n --name -v --version -R --release
         -d --description -D --depends -r --reverse -s --size -f --footprint

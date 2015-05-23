@@ -232,6 +232,7 @@ positional arguments:
 optional arguments:
   -h, --help            Show this help message and exit
   -C, --clean           Purge sources and compiled files of target
+  -f, --fetch           Fetch sources of target
   -p, --prepare         Prepare sources of target
   -c, --compile         Compile sources of target
   -k, --check           Check sources of target
@@ -242,6 +243,21 @@ optional arguments:
   -R, --reverse         Consider reverse dependency targets
   -u, --update          Apply actions only if update is available
   -a, --automake        Short for clean, prepare, compile, install and merge
+
+=head2 BINARY MODE
+positional arguments:
+  TARGETS               Targets to apply actions on
+
+optional arguments:
+  -h, --help            Show this help message and exit
+  -f, --fetch           Fetch binaries of target
+  -p, --prepare         Prepare binaries of target
+  -m, --merge           Merge compiled files of target to system
+  -r, --remove          Remove compiled files of target from system
+  -D, --depends         Consider dependency targets
+  -R, --reverse         Consider reverse dependency targets
+  -u, --update          Apply actions only if update is available
+  -a, --automake        Short for fetch, prepare and merge  
 
 =head2 LOCAL MODE
 

@@ -19,7 +19,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.7.6 (4d27849)"
+app_version = "1.7.6 (5037b45)"
 
 try:
     import libmessage
@@ -261,6 +261,8 @@ try:
     source_parser = subparsers.add_parser('source')
     source_parser.add_argument('-C', '--clean', action='store_true', \
         help=_('Purge sources and compiled files of target'))
+    source_parser.add_argument('-f', '--fetch', action='store_true', \
+        help=_('Fetch sources of target'))
     source_parser.add_argument('-p', '--prepare', action='store_true', \
         help=_('Prepare sources of target'))
     source_parser.add_argument('-c', '--compile', action='store_true', \
@@ -280,11 +282,13 @@ try:
     source_parser.add_argument('-u', '--update', action='store_true', \
         help=_('Apply actions only if update is available'))
     source_parser.add_argument('-a', '--automake', action='store_true', \
-        help=_('Short for clean, prepare, compile, install and merge'))
+        help=_('Short for clean, fetch, prepare, compile, install and merge'))
     source_parser.add_argument('TARGETS', nargs='+', type=str, \
         help=_('Targets to apply actions on'))
 
     binary_parser = subparsers.add_parser('binary')
+    binary_parser.add_argument('-f', '--fetch', action='store_true', \
+        help=_('Fetch binaries of target'))
     binary_parser.add_argument('-p', '--prepare', action='store_true', \
         help=_('Prepare binaries of target'))
     binary_parser.add_argument('-m', '--merge', action='store_true', \
@@ -298,7 +302,7 @@ try:
     binary_parser.add_argument('-u', '--update', action='store_true', \
         help=_('Apply actions only if update is available'))
     binary_parser.add_argument('-a', '--automake', action='store_true', \
-        help=_('Short for prepare and merge'))
+        help=_('Short for fetch, prepare and merge'))
     binary_parser.add_argument('TARGETS', nargs='+', type=str, \
         help=_('Targets to apply actions on'))
 
@@ -487,13 +491,15 @@ try:
         message.info(_('Poking sources...'))
         if ARGS.automake:
             ARGS.clean = True
+            ARGS.fetch = True
             ARGS.prepare = True
             ARGS.compile = True
             ARGS.install = True
             ARGS.merge = True
-        m = libspm.Source(ARGS.TARGETS, ARGS.clean, ARGS.prepare, \
-                ARGS.compile, ARGS.check, ARGS.install, ARGS.merge, \
-                ARGS.remove, ARGS.depends, ARGS.reverse, ARGS.update)
+        m = libspm.Source(ARGS.TARGETS, ARGS.clean, ARGS.fetch, \
+                ARGS.prepare, ARGS.compile, ARGS.check, ARGS.install, \
+                ARGS.merge, ARGS.remove, ARGS.depends, ARGS.reverse, \
+                ARGS.update)
         m.main()
 
     elif ARGS.mode == 'binary':
@@ -512,10 +518,12 @@ try:
         message.sub_info(_('TARGETS'), ARGS.TARGETS)
         message.info(_('Poking binaries...'))
         if ARGS.automake:
+            ARGS.fetch = True
             ARGS.prepare = True
             ARGS.merge = True
-        m = libspm.Binary(ARGS.TARGETS, ARGS.prepare, ARGS.merge, \
-            ARGS.remove, ARGS.depends, ARGS.reverse, ARGS.update)
+        m = libspm.Binary(ARGS.TARGETS, ARGS.fetch, ARGS.prepare, \
+            ARGS.merge, ARGS.remove, ARGS.depends, ARGS.reverse, \
+            ARGS.update)
         m.main()
 
     elif ARGS.mode == 'local':

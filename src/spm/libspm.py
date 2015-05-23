@@ -457,12 +457,13 @@ class Repo(object):
 
 class Source(object):
     ''' Class for dealing with sources '''
-    def __init__(self, targets, do_clean=False, do_prepare=False, \
-        do_compile=False, do_check=False, do_install=False, do_merge=False, \
-        do_remove=False, do_depends=False, do_reverse=False, do_update=False, \
-        autoremove=False):
+    def __init__(self, targets, do_clean=False, do_fetch=False, \
+        do_prepare=False, do_compile=False, do_check=False, do_install=False, \
+        do_merge=False, do_remove=False, do_depends=False, do_reverse=False, \
+        do_update=False, autoremove=False):
         self.targets = targets
         self.do_clean = do_clean
+        self.do_fetch = do_fetch
         self.do_prepare = do_prepare
         self.do_compile = do_compile
         self.do_check = do_check
@@ -797,6 +798,32 @@ class Source(object):
         else:
             message.sub_debug(_('Dirctory is OK'), self.source_dir)
 
+    def fetch(self):
+        ''' Fetch target sources '''
+        misc.dir_create(self.source_dir)
+        misc.dir_create(self.sources_dir)
+
+        message.sub_info(_('Preparing PGP keys'))
+        if self.target_pgpkeys and self.verify:
+            misc.gpg_receive(self.target_pgpkeys, KEYSERVERS)
+
+        message.sub_info(_('Fetching sources'))
+        for src_url in self.target_sources:
+            src_base = misc.url_normalize(src_url, True)
+            local_file = os.path.join(self.sources_dir, src_base)
+            src_file = os.path.join(self.target_dir, src_base)
+
+            if not os.path.isfile(src_file):
+                message.sub_debug(_('Fetching'), src_url)
+                if self.mirror:
+                    misc.fetch(src_url, local_file, MIRRORS, 'distfiles/')
+                else:
+                    misc.fetch(src_url, local_file)
+
+            if src_url.endswith(('.asc', '.sig')) and self.verify:
+                message.sub_debug(_('Verifying'), src_url)
+                misc.gpg_verify(link_file)
+
     def prepare(self):
         ''' Prepare target sources '''
         message.sub_info(_('Checking dependencies'))
@@ -814,23 +841,12 @@ class Source(object):
         misc.dir_create(self.source_dir)
         misc.dir_create(self.sources_dir)
 
-        message.sub_info(_('Preparing PGP keys'))
-        if self.target_pgpkeys and self.verify:
-            misc.gpg_receive(self.target_pgpkeys, KEYSERVERS)
-
         message.sub_info(_('Preparing sources'))
         for src_url in self.target_sources:
             src_base = misc.url_normalize(src_url, True)
             local_file = os.path.join(self.sources_dir, src_base)
             src_file = os.path.join(self.target_dir, src_base)
             link_file = os.path.join(self.source_dir, src_base)
-
-            if not os.path.isfile(src_file):
-                message.sub_debug(_('Fetching'), src_url)
-                if self.mirror:
-                    misc.fetch(src_url, local_file, MIRRORS, 'distfiles/')
-                else:
-                    misc.fetch(src_url, local_file)
 
             if os.path.islink(link_file):
                 message.sub_debug(_('Already linked'), src_file)
@@ -844,10 +860,6 @@ class Source(object):
             elif os.path.isfile(local_file):
                 message.sub_debug(_('Linking'), local_file)
                 os.symlink(local_file, link_file)
-
-            if src_url.endswith(('.asc', '.sig')) and self.verify:
-                message.sub_debug(_('Verifying'), src_url)
-                misc.gpg_verify(link_file)
 
             if misc.archive_supported(link_file):
                 message.sub_debug(_('Extracting'), link_file)
@@ -1501,6 +1513,11 @@ class Source(object):
                     self.target_name, datetime.today())
                 self.clean()
 
+            if self.do_fetch:
+                message.sub_info(_('Starting %s fetch at') % \
+                    self.target_name, datetime.today())
+                self.fetch()
+
             if self.do_prepare:
                 message.sub_info(_('Starting %s preparations at') % \
                     self.target_name, datetime.today())
@@ -1621,9 +1638,8 @@ class Binary(Source):
                 autoremove=autoremove)
         obj.main()
 
-    def prepare(self):
-        ''' Prepare target tarballs '''
-        message.sub_info(_('Preparing tarballs'))
+    def fetch(self):
+        message.sub_info(_('Fetching binaries'))
         src_base = os.path.basename(self.target_tarball)
         local_file = self.target_tarball
 
@@ -1654,6 +1670,9 @@ class Binary(Source):
             message.sub_critical(_('Binary tarball not available for'), self.target_name)
             sys.exit(2)
 
+
+    def prepare(self):
+        ''' Prepare target tarballs '''
         message.sub_info(_('Checking dependencies'))
         missing = []
         depends = misc.file_read(sdepends).split()
@@ -1727,6 +1746,11 @@ class Binary(Source):
             if database.local_uptodate(self.target) and self.do_update:
                 message.sub_warning(_('Target is up-to-date'), self.target)
                 continue
+
+            if self.do_fetch:
+                message.sub_info(_('Starting %s fetch at') % \
+                    self.target_name, datetime.today())
+                self.fetch()
 
             if self.do_prepare:
                 message.sub_info(_('Starting %s preparations at') % \
