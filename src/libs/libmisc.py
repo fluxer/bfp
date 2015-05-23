@@ -869,9 +869,8 @@ class Misc(object):
             command.insert(0, chroot)
             command.insert(1, self.ROOT_DIR)
         elif isinstance(command, tuple):
-            mycommand = list(command)
-            mycommand.insert(0, chroot)
-            mycommand.insert(1, self.ROOT_DIR)
+            mycommand = [chroot, self.ROOT_DIR]
+            mycommand.extend(command)
             command = mycommand
         try:
             for s in ('/proc', '/dev', '/sys'):
