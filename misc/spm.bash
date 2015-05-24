@@ -14,7 +14,8 @@ _spm()
         --sign --pycompile --missing --conflicts --backup --scripts --debug
         --version'
 
-    repo_options='-h --help -c --clean -s --sync -u --update -a --all'
+    repo_options='-h --help -c --clean -s --sync -C --cache -u --update
+        -a --all'
 
     remote_options='-h --help -n --name -v --version -r --release
         -d --description -D --depends -m --makedepends -c --checkdepends

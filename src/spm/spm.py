@@ -19,7 +19,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.7.6 (b298084)"
+app_version = "1.7.6 (e7ee6ba)"
 
 try:
     import libmessage
@@ -223,6 +223,8 @@ try:
         help=_('Purge repositories'))
     repo_parser.add_argument('-s', '--sync', action='store_true', \
         help=_('Sync repositories'))
+    repo_parser.add_argument('-C', '--cache', action='store_true', \
+        help=_('Cache repositories metadata'))
     repo_parser.add_argument('-p', '--prune', action='store_true', \
         help=_('Prune old repositories'))
     repo_parser.add_argument('-u', '--update', action='store_true', \
@@ -427,13 +429,14 @@ try:
         message.info(_('Runtime information'))
         message.sub_info(_('CLEAN'), ARGS.clean)
         message.sub_info(_('SYNC'), ARGS.sync)
+        message.sub_info(_('CACHE'), ARGS.cache)
         message.sub_info(_('UPDATE'), ARGS.update)
         message.sub_info(_('PRUNE'), ARGS.prune)
         message.sub_info(_('CACHE_DIR'), libspm.CACHE_DIR)
         message.sub_info(_('REPOSITORIES'), libspm.REPOSITORIES)
         message.info(_('Poking repositories...'))
         m = libspm.Repo(libspm.REPOSITORIES, ARGS.clean, \
-                ARGS.sync, ARGS.update, ARGS.prune)
+                ARGS.sync, ARGS.cache, ARGS.update, ARGS.prune)
         m.main()
 
     elif ARGS.mode == 'remote':

@@ -13,7 +13,7 @@ SRCBUILD() is Source Package Manager recipes (SRCBUILDs) parser.
 
 '''
 
-import os, sys, re, shlex, types
+import os, sys, re, shlex, types, json
 from distutils.version import LooseVersion
 
 import libmisc
@@ -42,6 +42,19 @@ class Database(object):
     def _build_local_cache(self):
         ''' Build internal local database cache '''
         self.LOCAL_CACHE = {}
+
+        cachefile = '%s/cache.json' % self.LOCAL_DIR
+        if os.path.isfile(cachefile):
+            fallback = False
+            try:
+                cf = open(cachefile, 'r')
+                self.LOCAL_CACHE = json.load(cf)
+            except:
+                os.unlink(cachefile)
+                fallback = True
+            if not fallback:
+                return
+
         for sdir in misc.list_dirs(self.LOCAL_DIR):
             metadata = os.path.join(sdir, 'metadata')
             footprint = os.path.join(sdir, 'footprint')
@@ -61,12 +74,29 @@ class Database(object):
                 if not 'release' in self.LOCAL_CACHE[sdir]:
                     self.LOCAL_CACHE[sdir]['release'] = '1'
                 self.LOCAL_CACHE[sdir]['footprint'] = misc.file_read(footprint)
+
+        with open(cachefile, 'w') as f:
+            json.dump(self.LOCAL_CACHE, f)
         # print(sys.getsizeof(self.LOCAL_CACHE))
 
     def _build_remote_cache(self):
         ''' Build internal remote database cache '''
         self.REMOTE_CACHE = {}
-        for sdir in misc.list_dirs(os.path.join(self.CACHE_DIR, 'repositories')):
+
+        reposdir = os.path.join(self.CACHE_DIR, 'repositories')
+        cachefile = '%s/cache.json' % reposdir
+        if os.path.isfile(cachefile):
+            fallback = False
+            try:
+                cf = open(cachefile, 'r')
+                self.REMOTE_CACHE = json.load(cf)
+            except:
+                os.unlink(cachefile)
+                fallback = True
+            if not fallback:
+                return
+
+        for sdir in misc.list_dirs(reposdir):
             srcbuild = os.path.join(sdir, 'SRCBUILD')
             if os.path.isfile(srcbuild):
                 parser = SRCBUILD(srcbuild)
@@ -82,6 +112,9 @@ class Database(object):
                     'options': parser.options,
                     'backup': parser.backup
                 }
+
+        with open(cachefile, 'w') as f:
+            json.dump(self.REMOTE_CACHE, f)
         # print(sys.getsizeof(self.REMOTE_CACHE))
 
     def remote_all(self, basename=False):

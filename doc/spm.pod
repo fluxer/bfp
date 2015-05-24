@@ -200,6 +200,7 @@ optional arguments:
   -h, --help            Show this help message and exit
   -c, --clean           Purge repositories
   -s, --sync            Sync repositories
+  -C, --cache           Cache repositories metadata
   -p, --prune           Prune old repositories
   -u, --update          Check repositories for updates
   -a, --all             Short for clean, sync, prune and update

@@ -356,9 +356,10 @@ class Remote(object):
 class Repo(object):
     ''' Class for dealing with repositories '''
     def __init__(self, repositories_urls, do_clean=False, do_sync=False, \
-        do_update=False, do_prune=False):
+        do_cache=False, do_update=False, do_prune=False):
         self.repositories_urls = repositories_urls
         self.do_clean = do_clean
+        self.do_cache = do_cache
         self.do_sync = do_sync
         self.do_prune = do_prune
         self.do_update = do_update
@@ -392,6 +393,20 @@ class Repo(object):
         else:
             message.sub_info(_('Cloning/pulling remote'), self.repository_name)
             misc.fetch(self.repository_url, self.repository_dir)
+
+    def cache(self):
+        ''' Generate repository cache '''
+        rdir = os.path.join(CACHE_DIR, 'repositories')
+        if not os.path.exists(rdir):
+            return
+
+        message.sub_info(_('Caching remote metadata'))
+        cachefile = '%s/repositories/cache.json' % self.CACHE_DIR
+        if os.path.isfile(cachefile):
+            os.unlink(cachefile)
+        # all it takes to generate the cache is search for a remote target,
+        # doesn't have to be valid
+        database.remote_search('foo')
 
     def prune(self):
         ''' Remove repositories that are no longer in the config '''
@@ -445,6 +460,10 @@ class Repo(object):
             if self.do_sync:
                 message.sub_info(_('Starting sync at'), datetime.today())
                 self.sync()
+
+            if self.do_cache:
+                message.sub_info(_('Starting cache at'), datetime.today())
+                self.cache()
 
         if self.do_prune:
             message.sub_info(_('Starting prune at'), datetime.today())
