@@ -915,8 +915,8 @@ class Source(object):
             # if manpath (provided by man-db) is not present fallback to
             # something sane
             if not manpath:
-                mpaths = ('/usr/local/share/man', '/local/share/man', \
-                    '/usr/share/man', '/share/man', '/usr/man', '/man')
+                mpaths = ('/usr/local/share/man/', '/local/share/man/', \
+                    '/usr/share/man/', '/share/man/', '/usr/man/')
             else:
                 mpaths = misc.system_output((manpath, '--global')).split(':')
 
