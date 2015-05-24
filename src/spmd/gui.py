@@ -455,8 +455,8 @@ def ChangeMirrors():
 def ChangeSettings():
     try:
         DisableWidgets()
-        iface.asyncCallWithArgumentList('ConfSet', ('prepare', 'MIRROR', str(ui.UseMirrorsBox.isChecked())))
-        iface.asyncCallWithArgumentList('ConfSet', ('prepare', 'TIMEOUT', str(ui.ConnectionTimeoutBox.value())))
+        iface.asyncCallWithArgumentList('ConfSet', ('fetch', 'MIRROR', str(ui.UseMirrorsBox.isChecked())))
+        iface.asyncCallWithArgumentList('ConfSet', ('fetch', 'TIMEOUT', str(ui.ConnectionTimeoutBox.value())))
         iface.asyncCallWithArgumentList('ConfSet', ('merge', 'CONFLICTS', str(ui.ConflictsBox.isChecked())))
         iface.asyncCallWithArgumentList('ConfSet', ('merge', 'BACKUP', str(ui.BackupBox.isChecked())))
         iface.asyncCallWithArgumentList('ConfSet', ('merge', 'SCRIPTS', str(ui.ScriptsBox.isChecked())))

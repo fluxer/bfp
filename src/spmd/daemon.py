@@ -275,8 +275,9 @@ class SPMD(dbus.service.Object):
         message.info('Building', targets)
         try:
             self.Working()
-            m = libspm.Source(targets, do_clean=True, do_prepare=True, \
-                do_compile=True, do_install=True, do_merge=True)
+            m = libspm.Source(targets, do_clean=True, do_fetch=True, \
+                do_prepare=True, do_compile=True, do_install=True, \
+                do_merge=True)
             mthread = threading.Thread(target=self._AsyncCall, args=(m.main, self.Finished,))
             mthread.start()
         except Exception as detail:
@@ -289,7 +290,8 @@ class SPMD(dbus.service.Object):
         message.info('Installing', targets)
         try:
             self.Working()
-            m = libspm.Binary(targets, do_prepare=True, do_merge=True, do_depends=True)
+            m = libspm.Binary(targets, do_fetch=True, do_prepare=True, \
+                do_merge=True, do_depends=True)
             mthread = threading.Thread(target=self._AsyncCall, args=(m.main, self.Finished,))
             mthread.start()
         except Exception as detail:
@@ -347,7 +349,7 @@ class SPMD(dbus.service.Object):
             message.info('Enetering remote watch loop')
             reposdir = os.path.join(database.CACHE_DIR, 'repositories')
             if os.path.isdir(reposdir):
-                remote_notify.watch_add(reposdir)
+                remote_notify.watch_add(reposdir, ignore=('.git',))
             else:
                 message.warning('Remote directory non-existent', reposdir)
             while True:
