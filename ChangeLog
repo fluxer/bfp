@@ -1,3 +1,15 @@
+Sun May 24 22:11:44 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
+fce00a374500a7e06bf95625dac10753c3d98195 (tag: 1.7.7)
+    * another day - another weird shabang to handle (hint: docbook-xsl)
+    * remove too generic /man from fallback manual pages path
+    * optimize local targets caching
+    * call strip only once for every file type
+    * fix regression since 2763d737
+    * update Nuitka to v0.5.13.1
+    * update Nuitka to v0.5.13.1
+    * cleanup and translations regen
+    * support check for compressed kernel modules check in spm-tools lint mode
+
 Mon Apr 27 18:29:35 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
 567a60dd4df68e9f5d64c4616bf8bfe87937040a (tag: 1.7.6)
     * add warning message function to initramfs init script

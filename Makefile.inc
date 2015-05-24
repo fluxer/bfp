@@ -1,4 +1,4 @@
-VERSION = 1.7.6
+VERSION = 1.7.7
 GIT_VERSION = $(shell $(GIT) rev-parse --short HEAD || echo stable)
 
 TOPDIR = $(dir $(lastword $(MAKEFILE_LIST)))
