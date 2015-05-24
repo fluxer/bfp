@@ -19,7 +19,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.7.6 (8eef4f6)"
+app_version = "1.7.6 (5523377)"
 
 try:
     import libmessage
@@ -230,7 +230,7 @@ try:
     repo_parser.add_argument('-u', '--update', action='store_true', \
         help=_('Check repositories for updates'))
     repo_parser.add_argument('-a', '--all', action='store_true', \
-        help=_('Short for clean, sync, prune and update'))
+        help=_('Short for clean, sync, cache, prune and update'))
 
     remote_parser = subparsers.add_parser('remote')
     remote_parser.add_argument('-n', '--name', action='store_true', \
@@ -423,6 +423,7 @@ try:
         if ARGS.all:
             ARGS.clean = True
             ARGS.sync = True
+            ARGS.cache = True
             ARGS.update = True
             ARGS.prune = True
 
