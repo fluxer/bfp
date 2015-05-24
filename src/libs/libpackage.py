@@ -75,8 +75,9 @@ class Database(object):
                     self.LOCAL_CACHE[sdir]['release'] = '1'
                 self.LOCAL_CACHE[sdir]['footprint'] = misc.file_read(footprint)
 
-        with open(cachefile, 'w') as f:
-            json.dump(self.LOCAL_CACHE, f)
+        if os.access(self.LOCAL_DIR, os.W_OK)
+            with open(cachefile, 'w') as f:
+                json.dump(self.LOCAL_CACHE, f)
         # print(sys.getsizeof(self.LOCAL_CACHE))
 
     def _build_remote_cache(self, force=False):
@@ -113,8 +114,9 @@ class Database(object):
                     'backup': parser.backup
                 }
 
-        with open(cachefile, 'w') as f:
-            json.dump(self.REMOTE_CACHE, f)
+        if os.access(self.REMOTE_CACHE, os.W_OK)
+            with open(cachefile, 'w') as f:
+                json.dump(self.REMOTE_CACHE, f)
         # print(sys.getsizeof(self.REMOTE_CACHE))
 
     def remote_all(self, basename=False):
