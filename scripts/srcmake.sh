@@ -174,6 +174,7 @@ for src in "${@:-.}";do
     done < <(find "$INSTALL_DIR" ! -type d -print0)
 
     echo "version=$version" > "$metadata"
+    echo "release=${release:-1}" >> "$metadata"
     echo "description=$description" >> "$metadata"
     echo "depends=${depends[*]}" >> "$metadata"
     echo "size=$(du -s "$INSTALL_DIR" | awk '{print $1}')" >> "$metadata"
