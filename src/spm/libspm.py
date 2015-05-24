@@ -401,8 +401,6 @@ class Repo(object):
             return
 
         message.sub_info(_('Caching remote metadata'))
-        # all it takes to generate the cache is search for a remote target,
-        # doesn't have to be valid
         database._build_remote_cache(True)
 
     def prune(self):
@@ -417,10 +415,10 @@ class Repo(object):
                 if os.path.basename(repo) == spath:
                     valid = True
 
-            if not valid:
-                repo_dir = os.path.join(rdir, spath)
-                message.sub_warning(_('Removing'), repo_dir)
-                misc.dir_remove(repo_dir)
+            sfull = os.path.join(rdir, spath)
+            if not valid and not os.path.isfile(sfull):
+                message.sub_warning(_('Removing'), sfull)
+                misc.dir_remove(sfull)
 
     def update(self):
         ''' Check repositories for updates '''
