@@ -411,14 +411,16 @@ class Repo(object):
         if not os.path.exists(rdir):
             return
 
-        for sdir in os.listdir(rdir):
+        for spath in os.listdir(rdir):
+            if spath == 'cache.json':
+                continue
             valid = False
             for repo in REPOSITORIES:
-                if os.path.basename(repo) == sdir:
+                if os.path.basename(repo) == spath:
                     valid = True
 
             if not valid:
-                repo_dir = os.path.join(rdir, sdir)
+                repo_dir = os.path.join(rdir, spath)
                 message.sub_warning(_('Removing'), repo_dir)
                 misc.dir_remove(repo_dir)
 
