@@ -799,6 +799,7 @@ class Misc(object):
             self.typecheck(sinput, (types.NoneType, types.StringTypes))
             self.typecheck(shell, (types.BooleanType))
             self.typecheck(cwd, (types.NoneType, types.StringTypes))
+            self.typecheck(sinput, (types.NoneType, types.StringTypes))
 
         if not cwd:
             cwd = self.dir_current()
