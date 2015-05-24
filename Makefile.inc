@@ -3,7 +3,7 @@ GIT_VERSION = $(shell $(GIT) rev-parse --short HEAD || echo stable)
 
 TOPDIR = $(dir $(lastword $(MAKEFILE_LIST)))
 DESTDIR = 
-PREFIX = $(shell $(PYTHON) -c "import sys; print(sys.prefix)")
+PREFIX = $(shell $(PYTHON)-config --prefix)
 BINDIR = $(PREFIX)/bin
 SBINDIR = $(PREFIX)/sbin
 SHAREDIR = $(PREFIX)/share
