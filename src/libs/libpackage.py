@@ -43,7 +43,7 @@ class Database(object):
         ''' Build internal local database cache '''
         self.LOCAL_CACHE = {}
 
-        cachefile = '%s/cache.json' % self.LOCAL_DIR
+        cachefile = '%s/local.json' % self.CACHE_DIR
         if os.path.isfile(cachefile) and not force:
             fallback = False
             try:
@@ -84,8 +84,7 @@ class Database(object):
         ''' Build internal remote database cache '''
         self.REMOTE_CACHE = {}
 
-        reposdir = os.path.join(self.CACHE_DIR, 'repositories')
-        cachefile = '%s/cache.json' % reposdir
+        cachefile = '%s/remote.json' % self.CACHE_DIR
         if os.path.isfile(cachefile) and not force:
             fallback = False
             try:
@@ -97,6 +96,7 @@ class Database(object):
             if not fallback:
                 return
 
+        reposdir = os.path.join(self.CACHE_DIR, 'repositories')
         for sdir in misc.list_dirs(reposdir):
             srcbuild = os.path.join(sdir, 'SRCBUILD')
             if os.path.isfile(srcbuild):

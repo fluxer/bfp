@@ -412,8 +412,6 @@ class Repo(object):
             return
 
         for spath in os.listdir(rdir):
-            if spath == 'cache.json':
-                continue
             valid = False
             for repo in REPOSITORIES:
                 if os.path.basename(repo) == spath:
