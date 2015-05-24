@@ -12,4 +12,12 @@ for i in /var/local/spm/*;do
             echo " >> No remote alternative of $i"
         fi
     fi
+    if [ -f "$i/metadata" ];then
+        if ! grep -q 'release=' "$i/metadata" ;then
+            echo " > Adding release for $i"
+            echo 'release=1' >> "$i/metadata"
+        fi
+    else
+        echo " >> No metadata file for $i"
+    fi
 done

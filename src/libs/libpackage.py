@@ -70,9 +70,6 @@ class Database(object):
                         if key == 'depends':
                             value = value.split()
                         self.LOCAL_CACHE[sdir][key] = value
-                # for backwards compatibility and making release optional
-                if not 'release' in self.LOCAL_CACHE[sdir]:
-                    self.LOCAL_CACHE[sdir]['release'] = '1'
                 self.LOCAL_CACHE[sdir]['footprint'] = misc.file_read(footprint)
 
         if os.access(self.LOCAL_DIR, os.W_OK):
@@ -96,8 +93,8 @@ class Database(object):
             if not fallback:
                 return
 
-        reposdir = os.path.join(self.CACHE_DIR, 'repositories')
-        for sdir in misc.list_dirs(reposdir):
+        cachedir = os.path.join(self.CACHE_DIR, 'repositories')
+        for sdir in misc.list_dirs(cachedir):
             srcbuild = os.path.join(sdir, 'SRCBUILD')
             if os.path.isfile(srcbuild):
                 parser = SRCBUILD(srcbuild)
@@ -114,7 +111,7 @@ class Database(object):
                     'backup': parser.backup
                 }
 
-        if os.access(reposdir, os.W_OK):
+        if os.access(cachedir, os.W_OK):
             with open(cachefile, 'w') as f:
                 json.dump(self.REMOTE_CACHE, f)
         # print(sys.getsizeof(self.REMOTE_CACHE))
