@@ -114,7 +114,7 @@ class Database(object):
                     'backup': parser.backup
                 }
 
-        if os.access(self.REMOTE_CACHE, os.W_OK):
+        if os.access(reposdir, os.W_OK):
             with open(cachefile, 'w') as f:
                 json.dump(self.REMOTE_CACHE, f)
         # print(sys.getsizeof(self.REMOTE_CACHE))
