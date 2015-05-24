@@ -401,12 +401,9 @@ class Repo(object):
             return
 
         message.sub_info(_('Caching remote metadata'))
-        cachefile = '%s/repositories/cache.json' % self.CACHE_DIR
-        if os.path.isfile(cachefile):
-            os.unlink(cachefile)
         # all it takes to generate the cache is search for a remote target,
         # doesn't have to be valid
-        database.remote_search('foo')
+        database._build_remote_cache(True)
 
     def prune(self):
         ''' Remove repositories that are no longer in the config '''

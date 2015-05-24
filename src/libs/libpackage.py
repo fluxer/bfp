@@ -39,12 +39,12 @@ class Database(object):
         if os.path.isdir(self.LOCAL_DIR):
             notify.watch_add(self.LOCAL_DIR)
 
-    def _build_local_cache(self):
+    def _build_local_cache(self, force=False):
         ''' Build internal local database cache '''
         self.LOCAL_CACHE = {}
 
         cachefile = '%s/cache.json' % self.LOCAL_DIR
-        if os.path.isfile(cachefile):
+        if os.path.isfile(cachefile) and not force:
             fallback = False
             try:
                 cf = open(cachefile, 'r')
@@ -79,13 +79,13 @@ class Database(object):
             json.dump(self.LOCAL_CACHE, f)
         # print(sys.getsizeof(self.LOCAL_CACHE))
 
-    def _build_remote_cache(self):
+    def _build_remote_cache(self, force=False):
         ''' Build internal remote database cache '''
         self.REMOTE_CACHE = {}
 
         reposdir = os.path.join(self.CACHE_DIR, 'repositories')
         cachefile = '%s/cache.json' % reposdir
-        if os.path.isfile(cachefile):
+        if os.path.isfile(cachefile) and not force:
             fallback = False
             try:
                 cf = open(cachefile, 'r')
@@ -128,7 +128,7 @@ class Database(object):
             recache = True
         if not self.REMOTE_CACHE or recache:
             self._notifiers_setup()
-            self._build_remote_cache()
+            self._build_remote_cache(recache)
 
         if basename:
             lremote = []
@@ -148,7 +148,7 @@ class Database(object):
             recache = True
         if not self.LOCAL_CACHE or recache:
             self._notifiers_setup()
-            self._build_local_cache()
+            self._build_local_cache(recache)
 
         if basename:
             llocal = []
