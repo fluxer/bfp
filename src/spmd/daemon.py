@@ -35,9 +35,9 @@ class SPMD(dbus.service.Object):
         finally:
             self.Finished(result)
 
-    def _GetUpdates(self):
+    def _GetUpdates(self, basename=False):
         targets = []
-        for target in database.local_all():
+        for target in database.local_all(basename):
             # local targets can not be verified against invalid remote
             if not database.local_uptodate(target) \
                 and database.remote_search(target):
@@ -238,7 +238,7 @@ class SPMD(dbus.service.Object):
         message.info('Syncing')
         try:
             self.Working()
-            m = libspm.Repo(libspm.REPOSITORIES, do_sync=True, do_prune=True)
+            m = libspm.Repo(libspm.REPOSITORIES, do_sync=True, do_cache=True, do_prune=True)
             mthread = threading.Thread(target=self._AsyncCall, args=(m.main, self.Finished,))
             mthread.start()
         except Exception as detail:
@@ -376,8 +376,8 @@ class SPMD(dbus.service.Object):
         ''' Does update and whatnot '''
         global database
         # FIXME: make them configurable via spmd.conf
-        ACTION = 'silent'
-        UPDATE = 'never'
+        ACTION = None # 'silent'
+        UPDATE = 'minute' # 'never'
         FROMSOURCE = False
         try:
             message.info('Enetering slave loop')
@@ -434,7 +434,7 @@ class SPMD(dbus.service.Object):
                     self.Sync()
                     self.Update(FROMSOURCE)
                 elif update:
-                    self.Updates(self._GetUpdates())
+                    self.Updates(self._GetUpdates(True))
                 time.sleep(1)
         except Exception as detail:
             message.critical(str(detail))

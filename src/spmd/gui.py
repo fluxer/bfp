@@ -27,6 +27,7 @@ ui = gui_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 
 class Worker(QtCore.QThread):
+    ''' Threaded method caller '''
     def __init__(self, parent=None, func=None):
         super(Worker, self).__init__(parent)
         self.func = func
@@ -41,27 +42,33 @@ class Worker(QtCore.QThread):
             self.emit(QtCore.SIGNAL('failed'), str(detail))
 
 class Interface(QtCore.QObject):
-    ''' Tab widget '''
+    ''' D-Bus interface handler '''
     def __init__(self, parent):
         super(Interface, self).__init__()
 
     @QtCore.pyqtSlot(QtCore.QString)
-    def MessageConditional(*msg):
+    def MessageConditional(self, *msg):
         msg = str(msg[1])
         if msg == 'Success':
             MessageInfo(msg)
         else:
             MessageCritical(msg)
 
-    @QtCore.pyqtSlot()
-    def RefreshAll(*msg):
+    @QtCore.pyqtSlot(QtCore.QString)
+    def RefreshAll(self, *msg):
         RefreshAll()
 
-    @QtCore.pyqtSlot()
-    def Updates(*targets):
-        msg = 'Updates available: %s' % targets
+    @QtCore.pyqtSlot(QtCore.QStringList)
+    def Updates(self, targets):
+        # convert to something without PyQt4.QtCore.QString prefix
+        updates = []
+        for target in targets:
+            updates.append(str(target))
+        # TODO: ariya does not have software-update-available icon
+        trayIcon.setIcon(QtGui.QIcon.fromTheme('system-software-update'))
+        msg = 'Updates available: %s' % updates
         trayIcon.showMessage('Updates available', \
-                msg, QtGui.QIcon.fromTheme(''))
+                msg, QtGui.QSystemTrayIcon.Warning)
 
 face = Interface(app)
 iface = QtDBus.QDBusInterface('com.spm.Daemon', '/com/spm/Daemon', \
@@ -526,6 +533,11 @@ def restoreEvent(reason):
     else:
         MainWindow.showNormal()
 
+def updateEvent():
+    # FIXME: raising the main window should not be needed to show the message
+    MainWindow.showNormal()
+    Update()
+
 # TODO: what icon to use for this action?
 minimizeAction = QtGui.QAction(app.tr("Mi&nimize"), app)
 minimizeAction.triggered.connect(MainWindow.hide)
@@ -540,7 +552,7 @@ trayIconMenu.addSeparator()
 trayIconMenu.addAction(quitAction)
 trayIcon = QtGui.QSystemTrayIcon(QtGui.QIcon.fromTheme('package-x-generic'), app)
 trayIcon.setContextMenu(trayIconMenu)
-trayIcon.messageClicked.connect(Update)
+trayIcon.messageClicked.connect(updateEvent)
 trayIcon.activated.connect(restoreEvent)
 trayIcon.show()
 
