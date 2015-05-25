@@ -1,12 +1,12 @@
 #!/bin/bash
 
-# this script is ment to run all possible modes of SPM/SPMT with the interpreter
-# passed to this script to check if they (at least) they do not trow some
-# runtime exception, poor man test-suite. SPM/SPMT do not have to be installed
-# but their runtime dependencies must be. if it fails it does no cleanup! all
-# short arguments are used instead of shortcuts (such as -a/--automake) on
-# purpose as the tests are selective due to some restrictions and in addition
-# it ensures that on arguments change the tests fail.
+# this script is ment to run all possible modes of SPM/SPMT with the
+# interpreter passed to this script to check if they (at least) do not trow
+# some runtime exception, poor man test-suite. SPM/SPMT do not have to be
+# installed but their runtime dependencies must be. if it fails it does no
+# cleanup! all short arguments are used instead of shortcuts (such as
+# -a/--automake) on purpose as the tests are selective due to some restrictions
+# and in addition it ensures that on arguments change the tests fail.
 
 set -e
 
