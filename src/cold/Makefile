@@ -10,7 +10,7 @@ all: clean bump
 cython: clean bump
 	$(CYTHON) --embed cold.py
 	$(CC) cold.c $(shell pkg-config --cflags --libs $(PYTHON)) -o cold.exe
-	$(STRIP) *.exe *.so
+	$(STRIP) *.exe
 
 install:
 	$(INSTALL) -dm755 $(DESTDIR)$(BINDIR)

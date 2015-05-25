@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, shutil, os
 
-app_version = "1.7.6 (b96eaae)"
+app_version = "1.7.6 (8c49b89)"
 
 tmpdir = None
 keep = False
@@ -22,8 +22,8 @@ try:
         help='Change interpreter')
     parser.add_argument('-o', '--output', type=str, default=output, \
         help='Change output file')
-    parser.add_argument('FILES', nargs='+', type=str, \
-        help='Files to pack')
+    parser.add_argument('PATH', nargs='+', type=str, \
+        help='Files/directories to pack')
     parser.add_argument('--keep', action='store_true', \
         help='Keep temporary directory')
     parser.add_argument('--debug', action='store_true', \
@@ -43,17 +43,19 @@ try:
     message.sub_info('TMP', ARGS.tmp)
     message.sub_info('INTERPRETER', ARGS.interpreter)
     message.sub_info('OUTPUT', ARGS.output)
-    message.sub_info('FILES', ARGS.FILES)
+    message.sub_info('PATH', ARGS.PATH)
 
     message.info('Creating', ARGS.output)
-    for sfile in ARGS.FILES:
-        if not os.path.isfile(sfile):
-            message.sub_critical('Not a file', sfile)
-            sys.exit(2)
-        message.sub_info('Copying', sfile)
-        shutil.copy2(sfile, '%s/%s' % (ARGS.tmp, os.path.basename(sfile)))
+    for spath in ARGS.PATH:
+        spath = os.path.realpath(spath)
+        message.sub_info('Copying', spath)
+        scopy = '%s/%s' % (ARGS.tmp, os.path.basename(spath))
+        if not os.path.isdir(spath):
+            shutil.copy2(spath, scopy)
+        else:
+            shutil.copytree(spath, scopy)
     shebang = '#!%s' % ARGS.interpreter
-    maindata = '%s\nif __name__ == "__main__": import %s' % (shebang, misc.file_name(ARGS.FILES[0]))
+    maindata = '%s\nif __name__ == "__main__": import %s' % (shebang, misc.file_name(ARGS.PATH[0]))
     mainfile = '%s/__main__.py' % ARGS.tmp
     message.sub_info('Writing __main__')
     misc.file_write(mainfile, maindata)
