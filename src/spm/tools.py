@@ -36,7 +36,7 @@ database = libpackage.Database()
 import libspm
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.7.6 (d7387d3)"
+app_version = "1.7.6 (aaf6e09)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -648,9 +648,12 @@ class Pkg(object):
 
 
     def get_links(self, pkgname):
-        ''' Search the Git interface '''
+        ''' Probe main URLs '''
         for d in self.PKG_DIRS:
             url = d % pkgname
+            message.sub_debug(_('Probing'), url)
+            if not misc.url_ping('%s/Pkgfile' % url):
+                continue
             request = None
             try:
                 request = misc.fetch_request(url)
