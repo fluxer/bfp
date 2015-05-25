@@ -826,13 +826,12 @@ class Misc(object):
         return self.system_communicate((self.whereis('scanelf'), '-yCBF', \
             sformat, sflags, sfile))
 
-    def system_command(self, command, shell=False, cwd='', catch=False):
+    def system_command(self, command, shell=False, cwd=''):
         ''' Execute system command safely '''
         if self.python2:
             self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
             self.typecheck(shell, (types.BooleanType))
             self.typecheck(cwd, (types.StringTypes))
-            self.typecheck(catch, (types.BooleanType))
 
         if not cwd:
             cwd = self.dir_current()
@@ -840,7 +839,7 @@ class Misc(object):
             cwd = '/'
         if isinstance(command, str) and not shell:
             command = shlex.split(command)
-        if catch or self.CATCH:
+        if self.CATCH:
             pipe = subprocess.Popen(command, stderr=subprocess.PIPE, \
                 shell=shell, cwd=cwd)
             pipe.wait()
