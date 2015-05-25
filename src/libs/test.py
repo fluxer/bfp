@@ -1,6 +1,6 @@
 #!/bin/python2
 
-import unittest, tempfile, os, sys, types
+import unittest, tempfile, os, sys, types, json
 
 import libmisc
 misc = libmisc.Misc()
@@ -32,16 +32,18 @@ class TestSuite(unittest.TestCase):
     def create_local(self, name, sdir, version, release, description, depends='', \
             size='1', footprint='\n'):
         os.makedirs(sdir)
-        metadata = open(sdir + '/metadata', 'w')
-        metadata.write('version=' + version)
-        metadata.write('\nrelease=' + release)
-        metadata.write('\ndescription=' + description)
-        metadata.write('\ndepends=' + depends)
-        metadata.write('\nsize=' + size)
-        metadata.close()
-        fprint = open(sdir + '/footprint', 'w')
-        fprint.write(footprint)
-        fprint.close()
+        data = {}
+        data['version'] = version
+        data['release'] = release
+        data['description'] = description
+        data['depends'] = depends
+        data['size'] = size
+        data['footprint'] = footprint
+        metadata = open(sdir + '/metadata.json', 'w')
+        try:
+            json.dump(data, metadata)
+        finally:
+            metadata.close()
         fprint = open(sdir + '/SRCBUILD', 'w')
         fprint.write('')
         fprint.close()
@@ -119,7 +121,7 @@ class TestSuite(unittest.TestCase):
         self.local_version = '9999'
         self.local_release = '1'
         self.local_description = 'SPM dummy local test target'
-        self.local_depends = self.remote_name
+        self.local_depends = [self.remote_name]
         self.local_size = '12345'
         self.local_footprint = '/etc/dummy.conf\n/lib/libdummy.so'
         self.create_local(self.local_name, self.local_dir, \
@@ -132,9 +134,9 @@ class TestSuite(unittest.TestCase):
         self.local2_version = '1.0.0'
         self.local2_release = '1'
         self.local2_description = 'SPM dummy reverse test target'
-        self.local2_depends = self.local_name
+        self.local2_depends = [self.local_name]
         self.local2_size = '12345'
-        self.local2_footprint = '/etc/dummy2.conf\n/lib/libdummy2.so'
+        self.local2_footprint = ['/etc/dummy2.conf', '/lib/libdummy2.so']
         self.create_local(self.local2_name, self.local2_dir, \
             self.local2_version, self.local2_release, \
             self.local2_description, self.local2_depends, self.local2_size, \
@@ -146,9 +148,9 @@ class TestSuite(unittest.TestCase):
         self.local3_version = '1.0.0'
         self.local3_release = '1'
         self.local3_description = 'SPM dummy empty depends and release test target'
-        self.local3_depends = ''
+        self.local3_depends = []
         self.local3_size = '12345'
-        self.local3_footprint = ''
+        self.local3_footprint = []
         self.create_local(self.local3_name, self.local3_dir, \
             self.local3_version, self.local3_release, \
             self.local3_description, self.local3_depends, self.local3_size, \
@@ -256,7 +258,7 @@ class TestSuite(unittest.TestCase):
 
     def test_remote_target_footprint(self):
         self.assertEqual(database.local_metadata(self.local_name, 'footprint'), \
-            self.local_footprint.splitlines())
+            self.local_footprint)
 
     def test_remote_mdepends_true(self):
         self.assertEqual(database.remote_mdepends(self.remote_name), \
@@ -282,7 +284,7 @@ class TestSuite(unittest.TestCase):
 
     def test_local_target_depends(self):
         self.assertEqual(database.local_metadata(self.local_name, 'depends'), \
-            [self.local_depends])
+            self.local_depends)
 
     def test_local_target_depends_empty(self):
         self.assertEqual(database.local_metadata(self.local3_name, 'depends'), \
