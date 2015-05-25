@@ -1180,7 +1180,7 @@ class Source(object):
         try:
             for i in tarf:
                 if not i.isdir():
-                    new_content.append(i.name)
+                    new_content.append('/%s' % i.name)
                     sfull = os.path.join(ROOT_DIR, i.name)
                     if not os.path.isfile(sfull) or os.path.islink(sfull):
                         continue
@@ -1193,10 +1193,7 @@ class Source(object):
                             t.close()
         finally:
             tarf.close()
-        adjcontent = []
-        for i in new_content:
-            adjcontent.append('/%s' % i)
-        adjcontent.sort()
+        new_content.sort()
 
         if CONFLICTS:
             conflict_detected = False
@@ -1207,7 +1204,7 @@ class Source(object):
 
                 message.sub_debug(_('Checking against'), target)
                 footprint = set(database.local_metadata(target, 'footprint').splitlines())
-                diff = footprint.difference(adjcontent)
+                diff = footprint.difference(new_content)
                 if footprint != diff:
                     message.sub_critical(_('File/link conflicts with %s') % target, \
                         list(footprint.difference(diff)))
@@ -1250,13 +1247,13 @@ class Source(object):
         if target_upgrade:
             message.sub_info(_('Removing obsolete files and directories'))
             remove_content = []
-            for sfile in set(old_content).difference(adjcontent):
+            for sfile in set(old_content).difference(new_content):
                 sfull = ROOT_DIR + sfile
                 # skip files moved from real to symlink directory
                 sresolved = os.path.realpath(sfull)
                 if not ROOT_DIR == '/':
                     sresolved.replace(ROOT_DIR, '/')
-                if sresolved in adjcontent or sfile in new_content:
+                if sresolved in new_content or sfile in new_content:
                     continue
                 # the footprint and metadata files will be deleted otherwise,
                 # also making sure ROOT_DIR different than / is respected
