@@ -53,6 +53,12 @@ class Interface(QtCore.QObject):
     def RefreshAll(*msg):
         RefreshAll()
 
+    @QtCore.pyqtSlot()
+    def Updates(*targets):
+        msg = 'Updates available: %s' % targets
+        trayIcon.showMessage('Updates available', \
+                msg, QtGui.QIcon.fromTheme(''))
+
 face = Interface(app)
 iface = QtDBus.QDBusInterface('com.spm.Daemon', '/com/spm/Daemon', \
     'com.spm.Daemon', bus)
@@ -60,6 +66,8 @@ bus.connect('com.spm.Daemon', '/com/spm/Daemon', 'com.spm.Daemon', \
     'Finished', face.MessageInfo)
 bus.connect('com.spm.Daemon', '/com/spm/Daemon', 'com.spm.Daemon', \
     'Finished', face.RefreshAll)
+bus.connect('com.spm.Daemon', '/com/spm/Daemon', 'com.spm.Daemon', \
+    'Updates', face.Updates)
 
 def MessageInfo(*msg):
     return QtGui.QMessageBox.information(MainWindow, 'Information', misc.string_convert(msg))
@@ -117,6 +125,7 @@ def EnableWidgets():
     ui.ProgressBar.hide()
 
 def RefreshTargets():
+    DisableWidgets()
     ui.SearchTable.clearContents()
     irow = 0
     for target in database.local_all(basename=True):
@@ -137,6 +146,7 @@ def RefreshTargets():
             ui.SearchTable.setItem(irow, 1, QtGui.QTableWidgetItem(description))
             ui.SearchTable.setItem(irow, 2, QtGui.QTableWidgetItem('Uninstalled'))
             irow += 1
+    EnableWidgets()
 
 def RefreshRepos():
     ui.ReposTable.clearContents()
@@ -500,6 +510,36 @@ ui.UpdateTimeBox.currentIndexChanged.connect(RefreshWidgets)
 ui.ProgressBar.setRange(0, 1)
 ui.ProgressBar.hide()
 
+def restoreEvent(reason):
+    if MainWindow.isVisible():
+        MainWindow.hide()
+    else:
+        MainWindow.show()
+
+# TODO: icons for actions
+minimizeAction = QtGui.QAction(app.tr("Mi&nimize"), app)
+minimizeAction.triggered.connect(MainWindow.hide)
+restoreAction = QtGui.QAction(app.tr("&Restore"), app);
+restoreAction.triggered.connect(MainWindow.showNormal)
+quitAction = QtGui.QAction(app.tr("&Quit"), app)
+quitAction.triggered.connect(app.quit)
+trayIconMenu = QtGui.QMenu(MainWindow)
+trayIconMenu.addAction(minimizeAction)
+trayIconMenu.addAction(restoreAction)
+trayIconMenu.addSeparator()
+trayIconMenu.addAction(quitAction)
+trayIcon = QtGui.QSystemTrayIcon(QtGui.QIcon.fromTheme('package-x-generic'), app)
+trayIcon.setContextMenu(trayIconMenu)
+trayIcon.messageClicked.connect(Update)
+trayIcon.activated.connect(restoreEvent)
+trayIcon.show()
+
+def closeEvent(event):
+    if trayIcon.isVisible():
+         MainWindow.hide()
+         event.ignore()
+
+MainWindow.closeEvent = closeEvent
 MainWindow.show()
 
 # SyncRepos()
