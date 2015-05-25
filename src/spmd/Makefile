@@ -2,11 +2,15 @@ include ../../Makefile.inc
 
 PYUIC = pyuic4
 DBSYSTEMDIR = /etc/dbus-1/system.d/
-DBSERVICEDIR = /share/dbus-1/system-services/
+DBSERVICEDIR = $(SHAREDIR)/dbus-1/system-services/
+APPLICATIONSDIR = $(SHAREDIR)/applications
+AUTOSTARTDIR = /etc/xdg/autostart
 
 all: bump clean
-	$(SED) -e 's|@PREFIX@|$(PREFIX)|' -e 's|@VERSION@|$(VERSION)|' \
+	$(SED) -e 's|@BINDIR@|$(BINDIR)|' -e 's|@VERSION@|$(VERSION)|' \
 		spm-gui.desktop.in > spm-gui.desktop
+	$(SED) -e 's|@BINDIR@|$(BINDIR)|' -e 's|@VERSION@|$(VERSION)|' \
+		spm-autostart.desktop.in > spm-autostart.desktop
 	$(PYUIC) gui.ui -o gui_ui.py
 	$(NUITKA) daemon.py
 	$(NUITKA) client.py
@@ -14,8 +18,11 @@ all: bump clean
 	$(STRIP) *.exe
 
 cython: clean bump
-	$(SED) -e 's|@PREFIX@|$(PREFIX)|' -e 's|@VERSION@|$(VERSION)|' \
+	$(SED) -e 's|@BINDIR@|$(BINDIR)|' -e 's|@VERSION@|$(VERSION)|' \
 		spm-gui.desktop.in > spm-gui.desktop
+	$(SED) -e 's|@BINDIR@|$(BINDIR)|' -e 's|@VERSION@|$(VERSION)|' \
+		spm-autostart.desktop.in > spm-autostart.desktop
+	$(PYUIC) gui.ui -o gui_ui.py
 	# THE GUI WILL NOT WORK!
 	$(CYTHON) --embed daemon.py
 	$(CYTHON) --embed client.py
@@ -27,14 +34,15 @@ cython: clean bump
 
 install:
 	$(INSTALL) -dm755 $(DESTDIR)$(SBINDIR) $(DESTDIR)$(BINDIR) \
-		$(DESTDIR)$(SITEDIR) $(DESTDIR)$(DBSYSTEMDIR)/ \
-		$(DESTDIR)$(DBSERVICEDIR)/
+		$(DESTDIR)$(DBSYSTEMDIR)/ $(DESTDIR)$(DBSERVICEDIR)/ \
+		$(DESTDIR)$(APPLICATIONSDIR)/ $(DESTDIR)$(AUTOSTARTDIR)/
 	$(INSTALL) -m755 daemon.exe $(DESTDIR)$(SBINDIR)/spmd
 	$(INSTALL) -m755 client.exe $(DESTDIR)$(BINDIR)/spmctl
 	$(INSTALL) -m755 gui.exe $(DESTDIR)$(BINDIR)/spm-gui
 	$(INSTALL) -m644 *.conf $(DESTDIR)$(DBSYSTEMDIR)/
 	$(INSTALL) -m644 *.service $(DESTDIR)$(DBSERVICEDIR)/
-	$(INSTALL) -m644 *.desktop $(DESTDIR)$(PREFIX)/share/applications/
+	$(INSTALL) -m644 spm-gui.desktop $(DESTDIR)$(APPLICATIONSDIR)/
+	$(INSTALL) -m644 spm-autostart.desktop $(DESTDIR)$(AUTOSTARTDIR)/
 
 uninstall:
 	$(RM) $(DESTDIR)$(SBINDIR)/spmd
@@ -42,6 +50,8 @@ uninstall:
 	$(RM) $(DESTDIR)$(BINDIR)/spm-gui
 	$(RM) $(DESTDIR)$(DBSYSTEMDIR)/com.spm.Daemon.conf
 	$(RM) $(DESTDIR)$(DBSERVICEDIR)/com.spm.Daemon.service
+	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/spm-gui.desktop
+	$(RM) $(DESTDIR)$(AUTOSTARTDIR)/spm-autostart.desktop
 
 clean:
 	$(RM) -r *.build/ *.so *.exe __pycache__ *.c gui_ui.py

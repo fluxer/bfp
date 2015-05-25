@@ -562,7 +562,8 @@ def closeEvent(event):
          event.ignore()
 
 MainWindow.closeEvent = closeEvent
-MainWindow.show()
+if not '--tray' in sys.argv:
+    MainWindow.show()
 
 # SyncRepos()
 RefreshRepos()

@@ -1,11 +1,11 @@
 [Desktop Entry]
 Name=Software Center
 Version=@VERSION@
-TryExec=@BINDIR@/spm-gui
-Exec=@BINDIR@/spm-gui
+TryExec=@BINDIR@/spm-gui --tray
+Exec=@BINDIR@/spm-gui --tray
 Comment=Software management tool
 Icon=package-x-generic
 Type=Application
 Terminal=false
-StartupNotify=true
+StartupNotify=false
 Categories=System;
