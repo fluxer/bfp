@@ -256,7 +256,7 @@ class TestSuite(unittest.TestCase):
 
     def test_remote_target_footprint(self):
         self.assertEqual(database.local_metadata(self.local_name, 'footprint'), \
-            self.local_footprint)
+            self.local_footprint.splitlines())
 
     def test_remote_mdepends_true(self):
         self.assertEqual(database.remote_mdepends(self.remote_name), \

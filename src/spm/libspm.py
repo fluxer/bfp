@@ -3,7 +3,7 @@
 import gettext
 _ = gettext.translation('spm', fallback=True).gettext
 
-import sys, os, shutil, re, compileall, site, tarfile
+import sys, os, shutil, re, compileall, site, tarfile, json
 from datetime import datetime
 if sys.version < '3':
     import ConfigParser as configparser
@@ -967,8 +967,7 @@ class Source(object):
         message.sub_info(_('Re-indexing content'))
         target_content = {}
         for sfile in misc.list_files(self.install_dir):
-            if sfile.endswith((self.target_footprint, self.target_metadata, \
-                self.target_srcbuild)):
+            if sfile.endswith((self.target_metadata, self.target_srcbuild)):
                 continue
             message.sub_debug(_('Caching MIME of'), sfile)
             target_content[sfile] = misc.file_mime(sfile, quick=True)
@@ -1134,24 +1133,28 @@ class Source(object):
                     compileall.compile_file(sfile, force=True, quiet=True)
 
         message.sub_info(_('Assembling metadata'))
-        misc.dir_create(os.path.join(self.install_dir, 'var/local/spm', self.target_name))
-        data = 'version=%s\n' % self.target_version
-        data += 'release=%s\n' % self.target_release
-        data += 'description=%s\n' % self.target_description
-        data += 'depends=%s\n' % misc.string_convert(self.target_depends)
-        data += 'size=%d\n' % misc.dir_size(self.install_dir)
-        misc.file_write(os.path.join(self.install_dir, self.target_metadata), data)
-
-        message.sub_info(_('Assembling footprint'))
+        metadata = os.path.join(self.install_dir, self.target_metadata)
+        misc.dir_create(os.path.dirname(metadata))
+        data = {}
+        data['version'] = self.target_version
+        data['release'] = self.target_release
+        data['description'] = self.target_description
+        data['depends'] = self.target_depends
+        data['size'] = misc.dir_size(self.install_dir)
         # due to creations and deletions of files, when byte-compiling
         # Python modules for an example, do not re-use target_content
-        footprint = misc.list_files(self.install_dir)
-        for sfile in footprint:
-            # remove footprint and metadata, they are not wanted in the footprint
-            if sfile.endswith((self.target_footprint, self.target_metadata)):
-                footprint.remove(sfile)
-        misc.file_write(os.path.join(self.install_dir, self.target_footprint), \
-            '\n'.join(sorted(footprint)).replace(self.install_dir, ''))
+        footprint = []
+        for sfile in misc.list_files(self.install_dir):
+            # remove local target files, they are not wanted in the footprint
+            if sfile.endswith(self.target_metadata):
+                continue
+            footprint.append(sfile.replace(self.install_dir, ''))
+        data['footprint'] = footprint
+        f = open(metadata, 'w')
+        try:
+            json.dump(data, f)
+        finally:
+            f.close()
 
         message.sub_info(_('Assembling SRCBUILD'))
         misc.file_write(os.path.join(self.install_dir, self.target_srcbuild), \
@@ -1172,8 +1175,7 @@ class Source(object):
     def merge(self):
         ''' Merget target to system '''
         message.sub_info(_('Indexing content'))
-        old_content = database.local_metadata(self.target_name, 'footprint') or ''
-        old_content = old_content.splitlines()
+        old_content = database.local_metadata(self.target_name, 'footprint') or []
         new_content = []
         backup_content = []
         tarf = tarfile.open(self.target_tarball)
@@ -1203,7 +1205,7 @@ class Source(object):
                     continue
 
                 message.sub_debug(_('Checking against'), target)
-                footprint = set(database.local_metadata(target, 'footprint').splitlines())
+                footprint = set(database.local_metadata(target, 'footprint'))
                 diff = footprint.difference(new_content)
                 if footprint != diff:
                     message.sub_critical(_('File/link conflicts with %s') % target, \
@@ -1293,7 +1295,7 @@ class Source(object):
                 for target in needs_rebuild:
                     break_free = False
                     message.sub_debug(_('Checking'), target)
-                    for sfile in database.local_metadata(target, 'footprint').split():
+                    for sfile in database.local_metadata(target, 'footprint'):
                         # looping trough files will continue otherwise
                         if break_free:
                             break
@@ -1342,11 +1344,8 @@ class Source(object):
             message.sub_info(_('Executing pre_remove()'))
             misc.system_script(self.srcbuild, 'pre_remove')
 
-        target_content = []
-        footprint = os.path.join(ROOT_DIR, self.target_footprint)
-        if os.path.isfile(footprint):
-            message.sub_info(_('Indexing content'))
-            target_content = misc.file_readlines(footprint)
+        message.sub_info(_('Indexing content'))
+        target_content = database.local_metadata(self.target_name, 'footprint')
 
         if target_content:
             self.pre_update_databases(target_content, 'remove')
@@ -1432,8 +1431,7 @@ class Source(object):
             self.target_pgpkeys = database.remote_metadata(self.target_dir, 'pgpkeys')
             self.target_options = database.remote_metadata(self.target_dir, 'options')
             self.target_backup = database.remote_metadata(self.target_dir, 'backup')
-            self.target_footprint = os.path.join('var/local/spm', self.target_name, 'footprint')
-            self.target_metadata = os.path.join('var/local/spm', self.target_name, 'metadata')
+            self.target_metadata = os.path.join('var/local/spm', self.target_name, 'metadata.json')
             self.target_srcbuild = os.path.join('var/local/spm', self.target_name, 'SRCBUILD')
             self.sources_dir = os.path.join(CACHE_DIR, 'sources', self.target_name)
             self.target_tarball = os.path.join(CACHE_DIR, 'tarballs/' + os.uname()[4], \
@@ -1750,8 +1748,7 @@ class Binary(Source):
             self.target_pgpkeys = database.remote_metadata(self.target_dir, 'pgpkeys')
             self.target_options = database.remote_metadata(self.target_dir, 'options')
             self.target_backup = database.remote_metadata(self.target_dir, 'backup')
-            self.target_footprint = os.path.join('var/local/spm', self.target_name, 'footprint')
-            self.target_metadata = os.path.join('var/local/spm', self.target_name, 'metadata')
+            self.target_metadata = os.path.join('var/local/spm', self.target_name, 'metadata.json')
             self.target_srcbuild = os.path.join('var/local/spm', self.target_name, 'SRCBUILD')
             self.sources_dir = os.path.join(CACHE_DIR, 'sources', self.target_name)
             self.target_tarball = os.path.join(CACHE_DIR, 'tarballs/' + os.uname()[4], \

@@ -1,7 +1,7 @@
 ## AHWS ##
  * Collect quircks and add scripts for them
 
-## SPM ##
+## SPM/SPM-TOOLS ##
  * Complete all tasks noted with FIXME/TODO
  * Optionally remove build depends that are not required by local target after build
  * Check for absolute path symlinks in SRCBUILDs

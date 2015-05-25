@@ -39,42 +39,45 @@ class Database(object):
         if os.path.isdir(self.LOCAL_DIR):
             notify.watch_add(self.LOCAL_DIR)
 
+    def _build_local_plain(self, sdir):
+        ''' Build local target cache from legacy metadata and footprint '''
+        # TODO: drop with spm >=1.9.x
+        metadata = os.path.join(sdir, 'metadata')
+        footprint = os.path.join(sdir, 'footprint')
+        if not os.path.isfile(metadata) or not os.path.isfile(footprint):
+            return
+        data = {}
+        data['footprint'] = misc.file_readlines('%s/footprint' % sdir)
+        for line in misc.file_readlines('%s/metadata' % sdir):
+            line = misc.string_encode(line)
+            if line.startswith(('version=', 'release=', \
+                'description=', 'depends=', 'size=')):
+                key, value = line.split('=')
+                if key == 'depends':
+                    value = value.split()
+                data[key] = value
+        self.LOCAL_CACHE[sdir] = data
+        if os.access(sdir, os.W_OK):
+            f = open('%s/metadata.json' % sdir, 'w')
+            try:
+                json.dump(data, f)
+            finally:
+                f.close()
+
     def _build_local_cache(self, force=False):
         ''' Build internal local database cache '''
         self.LOCAL_CACHE = {}
-
-        cachefile = '%s/local.json' % self.CACHE_DIR
-        if os.path.isfile(cachefile) and not force:
-            fallback = False
-            try:
-                cf = open(cachefile, 'r')
-                self.LOCAL_CACHE = json.load(cf)
-            except:
-                os.unlink(cachefile)
-                fallback = True
-            if not fallback:
-                return
-
         for sdir in misc.list_dirs(self.LOCAL_DIR):
-            metadata = os.path.join(sdir, 'metadata')
-            footprint = os.path.join(sdir, 'footprint')
+            metadata = os.path.join(sdir, 'metadata.json')
             srcbuild = os.path.join(sdir, 'SRCBUILD')
-            if os.path.isfile(metadata) and os.path.isfile(footprint) \
-                and os.path.isfile(srcbuild):
-                self.LOCAL_CACHE[sdir] = {}
-                for line in misc.file_readlines(metadata):
-                    line = misc.string_encode(line)
-                    if line.startswith(('version=', 'release=', \
-                        'description=', 'depends=', 'size=')):
-                        key, value = line.split('=')
-                        if key == 'depends':
-                            value = value.split()
-                        self.LOCAL_CACHE[sdir][key] = value
-                self.LOCAL_CACHE[sdir]['footprint'] = misc.file_read(footprint)
-
-        if os.access(self.LOCAL_DIR, os.W_OK):
-            with open(cachefile, 'w') as f:
-                json.dump(self.LOCAL_CACHE, f)
+            if os.path.isfile(metadata) and os.path.isfile(srcbuild):
+                f = open(metadata, 'r')
+                try:
+                    self.LOCAL_CACHE[sdir] = json.load(f)
+                finally:
+                    f.close()
+            else:
+                self._build_local_plain(sdir)
         # print(sys.getsizeof(self.LOCAL_CACHE))
 
     def _build_remote_cache(self, force=False):

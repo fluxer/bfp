@@ -36,7 +36,7 @@ database = libpackage.Database()
 import libspm
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.7.6 (890744b)"
+app_version = "1.7.6 (d7387d3)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -69,7 +69,7 @@ class Check(object):
 
             missing_detected = False
             required = []
-            for sfile in target_footprint.splitlines():
+            for sfile in target_footprint:
                 sfile = os.path.join(libspm.ROOT_DIR, sfile)
                 if os.path.islink(sfile):
                     continue
@@ -121,7 +121,7 @@ class Check(object):
                 if not match in target_adepends and not match == target:
                     target_adepends.append(match)
 
-                if match == target or rreq in target_footprint.splitlines():
+                if match == target or rreq in target_footprint:
                     message.sub_debug(_('Dependency needed but in target'), match)
                 elif match and match in target_depends:
                     message.sub_debug(_('Dependency needed but in dependencies'), match)
@@ -276,8 +276,8 @@ class Lint(object):
         for target in database.local_all(basename=True):
             if target in self.targets:
                 message.sub_info(_('Checking'), target)
-                target_footprint = database.local_metadata(target, 'footprint')
-                target_footprint_lines = target_footprint.splitlines()
+                target_footprint_lines = database.local_metadata(target, 'footprint')
+                target_footprint = '\n'.join(target_footprint_lines)
 
                 for sfile in target_footprint_lines:
                     if not os.path.exists(sfile):
@@ -397,7 +397,7 @@ class Lint(object):
                     for local in database.local_all(basename=True):
                         if local == target:
                             continue
-                        footprint = database.local_metadata(local, 'footprint').splitlines()
+                        footprint = database.local_metadata(local, 'footprint')
                         for sfile in target_footprint_lines:
                             if sfile in footprint:
                                 message.sub_warning(_('Possibly conflicting file with %s') % local, sfile)
@@ -555,7 +555,7 @@ class Merge(object):
             backups = database.remote_metadata(target, 'backup')
             if not backups:
                 backups = []
-            for sfile in database.local_metadata(target, 'footprint').splitlines():
+            for sfile in database.local_metadata(target, 'footprint'):
                 if sfile.endswith('.conf'):
                     backups.append(sfile)
 
@@ -616,7 +616,7 @@ class Pack(object):
                     os.path.basename(target) + '_' + target_version + '.tar.bz2')
                 target_depends = '%s.depends' % target_packfile
 
-                content = database.local_metadata(target, 'footprint').splitlines()
+                content = database.local_metadata(target, 'footprint')
                 # add metadata directory, it is not listed in the footprint
                 content.append(os.path.join(libspm.LOCAL_DIR, target))
                 depends = database.local_metadata(target, 'depends')
