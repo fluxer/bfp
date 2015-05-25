@@ -614,13 +614,17 @@ class Pack(object):
                 target_version = database.local_metadata(target, 'version')
                 target_packfile = os.path.join(self.directory, \
                     os.path.basename(target) + '_' + target_version + '.tar.bz2')
+                target_depends = '%s.depends' % target_packfile
 
                 content = database.local_metadata(target, 'footprint').splitlines()
                 # add metadata directory, it is not listed in the footprint
                 content.append(os.path.join(libspm.LOCAL_DIR, target))
+                depends = database.local_metadata(target, 'depends')
 
                 message.sub_info(_('Compressing'), target_packfile)
                 misc.archive_compress(content, target_packfile, '/')
+                message.sub_info(_('Assemling depends'), target_depends)
+                misc.file_write(target_depends, ' '.join(depends))
                 if libspm.SIGN:
                     message.sub_info(_('Signing'), target_packfile)
                     misc.gpg_sign(target_packfile, libspm.SIGN)
