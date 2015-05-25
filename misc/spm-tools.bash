@@ -42,7 +42,7 @@ _spm_tools()
 
     upload_options='-h --help -H --host -u --user -d --directory -i --insecure'
 
-    online_options='-h --help'
+    online_options='-u --url -h --help'
 
     _get_comp_words_by_ref cur prev
     _get_first_arg

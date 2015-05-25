@@ -788,12 +788,11 @@ class Upload(object):
                 ftp.quit()
 
 class Online(object):
-    def __init__(self):
-      # not much to initialize
-      pass
+    def __init__(self, url):
+      self.url = url
 
     def main(self):
-      if not misc.url_ping():
+      if not misc.url_ping(self.url):
           sys.exit(1)
 
 try:
@@ -950,6 +949,8 @@ try:
         help=_('Targets to apply actions on'))
 
     online_parser = subparsers.add_parser('online')
+    online_parser.add_argument('-u', '--url', type=str, \
+        default='https://www.google.com', help=_('URL to ping'))
 
     parser.add_argument('--debug', nargs=0, action=OverrideDebug, \
         help=_('Enable debug messages'))
@@ -1134,7 +1135,9 @@ try:
         m.main()
 
     elif ARGS.mode == 'online':
-        m = Online()
+        message.info(_('Runtime information'))
+        message.sub_info(_('URL'), ARGS.url)
+        m = Online(ARGS.url)
         m.main()
 
 except configparser.Error as detail:

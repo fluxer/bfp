@@ -145,7 +145,9 @@ else
     echo "=== SKIPPING SPMT PACK TEST ==="
 fi
 
-if ! grep -q "SPMT PKG" "$statefile" ;then
+if ! "$1" "$curdir/tools.py" online -u 'https://crux.nu/ports/crux-3.1'; then
+    echo "=== SKIPPING SPMT PKG TEST (REQUIRES ACCESS TO CRUX SERVER) ==="
+elif ! grep -q "SPMT PKG" "$statefile" ;then
     echo "=== RUNNING SPMT PKG TEST ==="
     "$1" "$curdir/tools.py" pkg -d "$rootdir" zlib
     echo "SPMT PKG" >> "$statefile"
