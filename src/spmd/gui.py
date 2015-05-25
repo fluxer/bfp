@@ -46,8 +46,12 @@ class Interface(QtCore.QObject):
         super(Interface, self).__init__()
 
     @QtCore.pyqtSlot(QtCore.QString)
-    def MessageInfo(*msg):
-        MessageInfo(str(msg[1]))
+    def MessageConditional(*msg):
+        msg = str(msg[1])
+        if msg == 'Success':
+            MessageInfo(msg)
+        else:
+            MessageCritical(msg)
 
     @QtCore.pyqtSlot()
     def RefreshAll(*msg):
@@ -63,7 +67,7 @@ face = Interface(app)
 iface = QtDBus.QDBusInterface('com.spm.Daemon', '/com/spm/Daemon', \
     'com.spm.Daemon', bus)
 bus.connect('com.spm.Daemon', '/com/spm/Daemon', 'com.spm.Daemon', \
-    'Finished', face.MessageInfo)
+    'Finished', face.MessageConditional)
 bus.connect('com.spm.Daemon', '/com/spm/Daemon', 'com.spm.Daemon', \
     'Finished', face.RefreshAll)
 bus.connect('com.spm.Daemon', '/com/spm/Daemon', 'com.spm.Daemon', \
@@ -134,7 +138,10 @@ def RefreshTargets():
         ui.SearchTable.setItem(irow, 0, QtGui.QTableWidgetItem(target))
         ui.SearchTable.setItem(irow, 1, QtGui.QTableWidgetItem(description))
         if not database.local_uptodate(target):
-            ui.SearchTable.setItem(irow, 2, QtGui.QTableWidgetItem('Update'))
+            if database.remote_search(target):
+                ui.SearchTable.setItem(irow, 2, QtGui.QTableWidgetItem('Update'))
+            else:
+                ui.SearchTable.setItem(irow, 2, QtGui.QTableWidgetItem('Not available'))
         else:
             ui.SearchTable.setItem(irow, 2, QtGui.QTableWidgetItem('Installed'))
         irow += 1
@@ -291,7 +298,8 @@ def Sync():
 def Update():
     build = []
     for target in database.local_all(basename=True):
-        if not database.local_uptodate(target):
+        if not database.local_uptodate(target) \
+            and database.remote_search(target):
             build.append(target)
     if not build:
         MessageInfo('System is up-to-date')
@@ -511,17 +519,19 @@ ui.ProgressBar.setRange(0, 1)
 ui.ProgressBar.hide()
 
 def restoreEvent(reason):
-    if MainWindow.isVisible():
+    if not reason == QtGui.QSystemTrayIcon.Trigger:
+        return
+    elif MainWindow.isVisible():
         MainWindow.hide()
     else:
-        MainWindow.show()
+        MainWindow.showNormal()
 
-# TODO: icons for actions
+# TODO: what icon to use for this action?
 minimizeAction = QtGui.QAction(app.tr("Mi&nimize"), app)
 minimizeAction.triggered.connect(MainWindow.hide)
-restoreAction = QtGui.QAction(app.tr("&Restore"), app);
+restoreAction = QtGui.QAction(QtGui.QIcon.fromTheme('view-restore'), app.tr("&Restore"), app);
 restoreAction.triggered.connect(MainWindow.showNormal)
-quitAction = QtGui.QAction(app.tr("&Quit"), app)
+quitAction = QtGui.QAction(QtGui.QIcon.fromTheme('application-exit'), app.tr("&Quit"), app)
 quitAction.triggered.connect(app.quit)
 trayIconMenu = QtGui.QMenu(MainWindow)
 trayIconMenu.addAction(minimizeAction)
