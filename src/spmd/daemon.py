@@ -428,7 +428,10 @@ class SPMD(dbus.service.Object):
                     self.Sync()
                     self.Update(FROMSOURCE)
                 elif update:
-                    self.Updates(self._GetUpdates(True))
+                    # emmiting with empty list can not guess the signature
+                    updates = self._GetUpdates(True)
+                    if updates:
+                        self.Updates(updates)
                 time.sleep(1)
         except Exception as detail:
             message.critical(str(detail))

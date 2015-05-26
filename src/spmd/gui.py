@@ -41,10 +41,10 @@ class Worker(QtCore.QThread):
         except Exception as detail:
             self.emit(QtCore.SIGNAL('failed'), str(detail))
 
-class Interface(QtCore.QObject):
+class Interface(QtDBus.QDBusInterface):
     ''' D-Bus interface handler '''
-    def __init__(self, parent):
-        super(Interface, self).__init__()
+    def __init__(self, obj, path, interface, connection, parent):
+        super(Interface, self).__init__(obj, path, interface, connection, parent)
 
     @QtCore.pyqtSlot(QtCore.QString)
     def MessageConditional(self, *msg):
@@ -66,24 +66,26 @@ class Interface(QtCore.QObject):
         updates = []
         for target in targets:
             updates.append(str(target))
-        # TODO: ariya does not have software-update-available icon
-        trayIcon.setIcon(QtGui.QIcon.fromTheme('system-software-update'))
+        upicon = QtGui.QIcon.fromTheme('software-update-available')
+        if upicon.isNull():
+            QtGui.QIcon.fromTheme('system-software-update')
+        trayIcon.setIcon(upicon)
         msg = 'Updates available: %s' % updates
-        trayIcon.showMessage('Updates available', \
-                msg, QtGui.QSystemTrayIcon.Warning)
+        trayIcon.showMessage('Warning', \
+            msg, QtGui.QSystemTrayIcon.Warning)
 
-face = Interface(app)
-iface = QtDBus.QDBusInterface('com.spm.Daemon', '/com/spm/Daemon', \
-    'com.spm.Daemon', bus)
+iface = Interface('com.spm.Daemon', '/com/spm/Daemon', \
+    'com.spm.Daemon', bus, app)
 bus.connect('com.spm.Daemon', '/com/spm/Daemon', 'com.spm.Daemon', \
-    'Finished', face.MessageConditional)
+    'Finished', iface.MessageConditional)
 bus.connect('com.spm.Daemon', '/com/spm/Daemon', 'com.spm.Daemon', \
-    'Finished', face.RefreshAll)
+    'Finished', iface.RefreshAll)
 bus.connect('com.spm.Daemon', '/com/spm/Daemon', 'com.spm.Daemon', \
-    'Updates', face.Updates)
+    'Updates', iface.Updates)
 
 def MessageInfo(*msg):
-    return QtGui.QMessageBox.information(MainWindow, 'Information', misc.string_convert(msg))
+    return QtGui.QMessageBox.information(MainWindow, 'Information', \
+        misc.string_convert(msg))
 
 def MessageQuestion(*msg):
     return QtGui.QMessageBox.question(MainWindow, 'Question', \
@@ -91,20 +93,22 @@ def MessageQuestion(*msg):
 
 def MessageCritical(msg):
     if len(msg) < 400:
-        return QtGui.QMessageBox.critical(MainWindow, 'Critical', misc.string_convert(msg))
+        return QtGui.QMessageBox.critical(MainWindow, 'Critical', \
+            misc.string_convert(msg))
     else:
-        # FIXME: can not close with WM
-        msgBox = QtGui.QMessageBox(MainWindow)
+        msgBox = QtGui.QDialog(MainWindow)
         msgBox.setWindowTitle('Critical')
-        msgBox.setText('An error occured.')
-        msgBox.setDetailedText(msg)
-        # HACK!!! the size of the dialog is too small and setFixedHeight()
-        # does not seem to work as it should, add a dummy space to force
-        # the dialog to resize to a lenght of 400
-        spacer = QtGui.QSpacerItem(400, 0, QtGui.QSizePolicy.Minimum, \
-            QtGui.QSizePolicy.Expanding)
-        layout = msgBox.layout()
-        layout.addItem(spacer, layout.rowCount(), 0, 1, layout.columnCount())
+        msgBox.setWindowIcon(QtGui.QIcon.fromTheme('dialog-error'))
+        msgBox.resize(400, 0)
+        textedit = QtGui.QPlainTextEdit()
+        textedit.setReadOnly(True)
+        textedit.setPlainText(msg)
+        okbutton = QtGui.QPushButton(QtGui.QIcon.fromTheme('dialog-ok'), \
+            'OK', msgBox)
+        okbutton.clicked.connect(msgBox.close)
+        layout = QtGui.QGridLayout(msgBox)
+        layout.addWidget(textedit)
+        layout.addWidget(okbutton)
         return msgBox.exec_()
 
 if not bus.isConnected():
@@ -122,20 +126,24 @@ def DisableWidgets():
     ui.DetailsButton.setEnabled(False)
     ui.RepoSaveButton.setEnabled(False)
     ui.MirrorSaveButton.setEnabled(False)
+    ui.PrefSaveButton.setEnabled(False)
     ui.ProgressBar.setRange(0, 0)
     ui.ProgressBar.show()
 
 def EnableWidgets():
+    # TODO: many other widgets are useless without a running daemon
+    ifacevalid = iface.isValid()
     ui.SearchTable.setEnabled(True)
     ui.SearchEdit.setEnabled(True)
-    ui.SyncButton.setEnabled(True)
-    ui.UpdateButton.setEnabled(True)
-    ui.BuildButton.setEnabled(True)
-    ui.InstallButton.setEnabled(True)
+    ui.SyncButton.setEnabled(ifacevalid)
+    ui.UpdateButton.setEnabled(ifacevalid)
+    ui.BuildButton.setEnabled(ifacevalid)
+    ui.InstallButton.setEnabled(ifacevalid)
     ui.RemoveButton.setEnabled(False)
     ui.DetailsButton.setEnabled(False)
-    ui.RepoSaveButton.setEnabled(True)
-    ui.MirrorSaveButton.setEnabled(True)
+    ui.RepoSaveButton.setEnabled(ifacevalid)
+    ui.MirrorSaveButton.setEnabled(ifacevalid)
+    ui.PrefSaveButton.setEnabled(ifacevalid)
     ui.ProgressBar.setRange(0, 1)
     ui.ProgressBar.hide()
 
@@ -192,10 +200,9 @@ def RefreshRepos():
         repoenablebox = QtGui.QCheckBox(ui.ReposTable)
         repoenablebox.setChecked(enable)
         ui.ReposTable.setCellWidget(irow, 0, repoenablebox)
-        if enable:
-            ui.ReposTable.setItem(irow, 1, QtGui.QTableWidgetItem(line))
-        else:
-            ui.ReposTable.setItem(irow, 1, QtGui.QTableWidgetItem(line.lstrip('# ')))
+        if not enable:
+            line = line.lstrip('# ')
+        ui.ReposTable.setItem(irow, 1, QtGui.QTableWidgetItem(line))
         irow += 1
 
 def RefreshMirrors():
@@ -216,10 +223,9 @@ def RefreshMirrors():
         repoenablebox = QtGui.QCheckBox(ui.MirrorsTable)
         repoenablebox.setChecked(enable)
         ui.MirrorsTable.setCellWidget(irow, 0, repoenablebox)
-        if enable:
-            ui.MirrorsTable.setItem(irow, 1, QtGui.QTableWidgetItem(line))
-        else:
-            ui.MirrorsTable.setItem(irow, 1, QtGui.QTableWidgetItem(line.lstrip('# ')))
+        if not enable:
+            line = line.lstrip('# ')
+        ui.MirrorsTable.setItem(irow, 1, QtGui.QTableWidgetItem(line))
         irow += 1
 
 def RefreshSettings():
@@ -232,7 +238,7 @@ def RefreshSettings():
     ui.TriggersBox.setCheckState(libspm.TRIGGERS)
 
 def RefreshWidgets():
-    ui.RemoveButton.setEnabled(True)
+    ui.RemoveButton.setEnabled(iface.isValid())
     ui.DetailsButton.setEnabled(True)
     if not ui.SearchTable.selectedIndexes():
         ui.DetailsButton.setEnabled(False)
@@ -301,7 +307,7 @@ def SearchMetadata():
 
 def Sync():
     DisableWidgets()
-    async = iface.asyncCall('Sync')
+    iface.asyncCall('Sync')
 
 def Update():
     build = []
@@ -368,7 +374,8 @@ def Remove():
     iface.asyncCallWithArgumentList('Remove', (targets, True))
 
 def Details():
-    # TODO: make it a dialog?
+    # TODO: make it a dialog? when multiple targets are selected one may want
+    # to compare their metadata in visually pleasant way
     targets = []
     for item in ui.SearchTable.selectedIndexes():
         target = str(ui.SearchTable.item(item.row(), 0).text())
@@ -384,14 +391,18 @@ def Details():
         else:
             depends = database.remote_mdepends(target)
         options = database.remote_metadata(target, 'options')
-        data = 'Package: %s\nInstalled version: %s (%s)\n' % (target, lversion, lrelease)
-        data += 'Available version: %s (%s)\nDescription: %s\n' % (rversion, rrelease, description)
-        data += 'Dependencies: %s\nOptions: %s\n' % (depends, options)
+        backup = database.remote_metadata(target, 'backup')
+        data = 'Package: %s\n' % target
+        data += 'Installed version: %s (%s)\n' % (lversion, lrelease)
+        data += 'Available version: %s (%s)\n' % (rversion, rrelease)
+        data += 'Description: %s\n' % description
+        data += 'Dependencies: %s\n' % depends
+        data += 'Options: %s\n' % options
+        data += 'Backup: %s\n' % backup
         MessageInfo(data)
         targets.append(target)
 
 def AddRepo():
-    # TODO: replace with dialog that has enable checkbox?
     url, ok = QtGui.QInputDialog.getText(MainWindow, 'URL', '')
     if ok and url:
         url = str(url)
@@ -407,7 +418,6 @@ def AddRepo():
         ui.ReposTable.setItem(irow, 1, QtGui.QTableWidgetItem(url))
 
 def AddMirror():
-    # TODO: replace with dialog that has enable checkbox?
     url, ok = QtGui.QInputDialog.getText(MainWindow, 'URL', '')
     if ok and url:
         url = str(url)
@@ -481,12 +491,18 @@ def ChangeMirrors():
 def ChangeSettings():
     try:
         DisableWidgets()
-        iface.asyncCallWithArgumentList('ConfSet', ('fetch', 'MIRROR', str(ui.UseMirrorsBox.isChecked())))
-        iface.asyncCallWithArgumentList('ConfSet', ('fetch', 'TIMEOUT', str(ui.ConnectionTimeoutBox.value())))
-        iface.asyncCallWithArgumentList('ConfSet', ('merge', 'CONFLICTS', str(ui.ConflictsBox.isChecked())))
-        iface.asyncCallWithArgumentList('ConfSet', ('merge', 'BACKUP', str(ui.BackupBox.isChecked())))
-        iface.asyncCallWithArgumentList('ConfSet', ('merge', 'SCRIPTS', str(ui.ScriptsBox.isChecked())))
-        iface.asyncCallWithArgumentList('ConfSet', ('merge', 'TRIGGERS', str(ui.TriggersBox.isChecked())))
+        iface.asyncCallWithArgumentList('ConfSet', ('fetch', 'MIRROR', \
+            str(ui.UseMirrorsBox.isChecked())))
+        iface.asyncCallWithArgumentList('ConfSet', ('fetch', 'TIMEOUT', \
+            str(ui.ConnectionTimeoutBox.value())))
+        iface.asyncCallWithArgumentList('ConfSet', ('merge', 'CONFLICTS', \
+            str(ui.ConflictsBox.isChecked())))
+        iface.asyncCallWithArgumentList('ConfSet', ('merge', 'BACKUP', \
+            str(ui.BackupBox.isChecked())))
+        iface.asyncCallWithArgumentList('ConfSet', ('merge', 'SCRIPTS', \
+            str(ui.ScriptsBox.isChecked())))
+        iface.asyncCallWithArgumentList('ConfSet', ('merge', 'TRIGGERS', \
+            str(ui.TriggersBox.isChecked())))
         RefreshAll()
         reload(libspm)
     except SystemExit:
@@ -494,6 +510,9 @@ def ChangeSettings():
     except Exception as detail:
         MessageCritical(str(detail))
         # FIXME: RefreshSettings()
+    finally:
+        # TODO: should the daemon emit finished?
+        EnableWidgets()
 
 ui.SearchTable.horizontalHeader().setResizeMode(0, QtGui.QHeaderView.ResizeToContents)
 ui.SearchTable.horizontalHeader().setResizeMode(1, QtGui.QHeaderView.Stretch)
@@ -540,8 +559,7 @@ def updateEvent():
     MainWindow.showNormal()
     Update()
 
-# TODO: what icon to use for this action?
-minimizeAction = QtGui.QAction(app.tr("Mi&nimize"), app)
+minimizeAction = QtGui.QAction(QtGui.QIcon.fromTheme('view-close'), app.tr("Mi&nimize"), app)
 minimizeAction.triggered.connect(MainWindow.hide)
 restoreAction = QtGui.QAction(QtGui.QIcon.fromTheme('view-restore'), app.tr("&Restore"), app);
 restoreAction.triggered.connect(MainWindow.showNormal)
@@ -564,8 +582,14 @@ def closeEvent(event):
          event.ignore()
 
 MainWindow.closeEvent = closeEvent
+
 if not '--tray' in sys.argv:
+    if not iface.isValid():
+        MessageCritical('Daemon is not running')
     MainWindow.show()
+elif not iface.isValid():
+    trayIcon.showMessage('Critical', 'The daemon is not running', \
+        QtGui.QSystemTrayIcon.Critical)
 
 # SyncRepos()
 RefreshRepos()
