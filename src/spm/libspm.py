@@ -215,15 +215,17 @@ class Local(object):
 
                 if self.do_depends:
                     data = database.local_metadata(target, 'depends')
+                    data = misc.string_convert(data)
                     if self.plain:
-                        print(misc.string_convert(data))
+                        print(data)
                     else:
                         message.sub_info(_('Depends'), data)
 
                 if self.do_reverse:
                     data = database.local_rdepends(target)
+                    data = misc.string_convert(data)
                     if self.plain:
-                        print(misc.string_convert(data))
+                        print(data)
                     else:
                         message.sub_info(_('Reverse depends'), data)
 
@@ -235,7 +237,7 @@ class Local(object):
                         message.sub_info(_('Size'), data)
 
                 if self.do_footprint:
-                    data = database.local_metadata(target, 'footprint')
+                    data = '\n'.join(database.local_metadata(target, 'footprint'))
                     if self.plain:
                         print(data)
                     else:
@@ -305,50 +307,57 @@ class Remote(object):
 
                 if self.do_depends:
                     data = database.remote_metadata(target, 'depends')
+                    data = misc.string_convert(data)
                     if self.plain:
-                        print(misc.string_convert(data))
+                        print(data)
                     else:
                         message.sub_info(_('Depends'), data)
 
                 if self.do_makedepends:
                     data = database.remote_metadata(target, 'makedepends')
+                    data = misc.string_convert(data)
                     if self.plain:
-                        print(misc.string_convert(data))
+                        print(data)
                     else:
                         message.sub_info(_('Make depends'), data)
 
                 if self.do_checkdepends:
                     data = database.remote_metadata(target, 'checkdepends')
+                    data = misc.string_convert(data)
                     if self.plain:
-                        print(misc.string_convert(data))
+                        print(data)
                     else:
                         message.sub_info(_('Check depends'), data)
 
                 if self.do_sources:
                     data = database.remote_metadata(target, 'sources')
+                    data = misc.string_convert(data)
                     if self.plain:
-                        print(misc.string_convert(data))
+                        print(data)
                     else:
                         message.sub_info(_('Sources'), data)
 
                 if self.do_pgpkeys:
                     data = database.remote_metadata(target, 'pgpkeys')
+                    data = misc.string_convert(data)
                     if self.plain:
-                        print(misc.string_convert(data))
+                        print(data)
                     else:
                         message.sub_info(_('PGP keys'), data)
 
                 if self.do_options:
                     data = database.remote_metadata(target, 'options')
+                    data = misc.string_convert(data)
                     if self.plain:
-                        print(misc.string_convert(data))
+                        print(data)
                     else:
                         message.sub_info(_('Options'), data)
 
                 if self.do_backup:
                     data = database.remote_metadata(target, 'backup')
+                    data = misc.string_convert(data)
                     if self.plain:
-                        print(misc.string_convert(data))
+                        print(data)
                     else:
                         message.sub_info(_('Backup'), data)
 
@@ -576,7 +585,7 @@ class Source(object):
         if not TRIGGERS:
             return
 
-        adjcontent = '\n/'.join(content)
+        adjcontent = '\n'.join(content)
         ldconfig = misc.whereis('ldconfig', False, True)
         ldconfig_regex = '(.*\\.so)(?:$|\\s)'
         message.sub_debug('ldconfig', ldconfig or '')
