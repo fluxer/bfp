@@ -12,6 +12,7 @@ all: bump clean
 	$(SED) -e 's|@BINDIR@|$(BINDIR)|' -e 's|@VERSION@|$(VERSION)|' \
 		spm-autostart.desktop.in > spm-autostart.desktop
 	$(PYUIC) gui.ui -o gui_ui.py
+	# THE GUI WILL NOT WORK!
 	$(NUITKA) daemon.py
 	$(NUITKA) client.py
 	$(NUITKA) --recurse-to=gui_ui gui.py
@@ -31,6 +32,18 @@ cython: clean bump
 	$(CC) client.c $(shell pkg-config --cflags --libs $(PYTHON)) -o client.exe
 	$(CC) gui.c $(shell pkg-config --cflags --libs $(PYTHON)) -o gui.exe
 	$(STRIP) *.exe
+
+cold: clean bump
+	$(SED) -e 's|@BINDIR@|$(BINDIR)|' -e 's|@VERSION@|$(VERSION)|' \
+		spm-gui.desktop.in > spm-gui.desktop
+	$(SED) -e 's|@BINDIR@|$(BINDIR)|' -e 's|@VERSION@|$(VERSION)|' \
+		spm-autostart.desktop.in > spm-autostart.desktop
+	$(PYUIC) gui.ui -o gui_ui.py
+	$(NUITKA) daemon.py
+	$(NUITKA) client.py
+	$(STRIP) *.exe
+	# REQUIRES INSTALLED LIBS!
+	../cold/cold.py gui.py gui_ui.py -o ./spm-gui.exe
 
 install:
 	$(INSTALL) -dm755 $(DESTDIR)$(SBINDIR) $(DESTDIR)$(BINDIR) \

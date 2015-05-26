@@ -48,7 +48,9 @@ class Interface(QtCore.QObject):
 
     @QtCore.pyqtSlot(QtCore.QString)
     def MessageConditional(self, *msg):
-        msg = str(msg[1])
+        # gee... the msg is QVariant but a slot with QVariant does not work
+        # so here is a _ugly_ workaround
+        msg = str(QtCore.QString(msg[0]))
         if msg == 'Success':
             MessageInfo(msg)
         else:
@@ -110,6 +112,7 @@ if not bus.isConnected():
     sys.exit(1)
 
 def DisableWidgets():
+    ui.SearchTable.setEnabled(False)
     ui.SearchEdit.setEnabled(False)
     ui.SyncButton.setEnabled(False)
     ui.UpdateButton.setEnabled(False)
@@ -123,6 +126,7 @@ def DisableWidgets():
     ui.ProgressBar.show()
 
 def EnableWidgets():
+    ui.SearchTable.setEnabled(True)
     ui.SearchEdit.setEnabled(True)
     ui.SyncButton.setEnabled(True)
     ui.UpdateButton.setEnabled(True)
@@ -135,32 +139,39 @@ def EnableWidgets():
     ui.ProgressBar.setRange(0, 1)
     ui.ProgressBar.hide()
 
-def RefreshTargets():
-    DisableWidgets()
+def RefreshTargetsReal(targets=None):
     ui.SearchTable.clearContents()
     irow = 0
-    for target in database.local_all(basename=True):
+    if not targets:
+        targets = database.local_all(basename=True)
+        for target in database.remote_all(basename=True):
+            if not target in targets:
+                targets.append(target)
+
+    for target in targets:
         ui.SearchTable.setRowCount(irow+1)
-        description = database.local_metadata(target, 'description')
         ui.SearchTable.setItem(irow, 0, QtGui.QTableWidgetItem(target))
-        ui.SearchTable.setItem(irow, 1, QtGui.QTableWidgetItem(description))
-        if not database.local_uptodate(target):
-            if database.remote_search(target):
+        if database.local_search(target):
+            description = database.local_metadata(target, 'description')
+            ui.SearchTable.setItem(irow, 1, QtGui.QTableWidgetItem(description))
+            if not database.remote_search(target):
+                ui.SearchTable.setItem(irow, 2, QtGui.QTableWidgetItem('Not available'))
+            elif not database.local_uptodate(target):
                 ui.SearchTable.setItem(irow, 2, QtGui.QTableWidgetItem('Update'))
             else:
-                ui.SearchTable.setItem(irow, 2, QtGui.QTableWidgetItem('Not available'))
+                ui.SearchTable.setItem(irow, 2, QtGui.QTableWidgetItem('Installed'))
         else:
-            ui.SearchTable.setItem(irow, 2, QtGui.QTableWidgetItem('Installed'))
-        irow += 1
-    for target in database.remote_all(basename=True):
-        if not database.local_search(target):
-            ui.SearchTable.setRowCount(irow+1)
             description = database.remote_metadata(target, 'description')
-            ui.SearchTable.setItem(irow, 0, QtGui.QTableWidgetItem(target))
             ui.SearchTable.setItem(irow, 1, QtGui.QTableWidgetItem(description))
             ui.SearchTable.setItem(irow, 2, QtGui.QTableWidgetItem('Uninstalled'))
-            irow += 1
-    EnableWidgets()
+        irow += 1
+
+def RefreshTargets():
+    worker = Worker(app, RefreshTargetsReal)
+    worker.finished.connect(EnableWidgets)
+    app.connect(worker, QtCore.SIGNAL('failed'), MessageCritical)
+    DisableWidgets()
+    worker.start()
 
 def RefreshRepos():
     ui.ReposTable.clearContents()
@@ -254,42 +265,31 @@ def RefreshAll():
 
 def SearchMetadataReal():
     regexp = str(ui.SearchEdit.text())
-    targets = []
+    matches = []
     if not regexp:
         RefreshTargets()
         return
 
-    try:
-        for index in xrange(ui.SearchTable.rowCount()):
-            target = str(ui.SearchTable.item(index, 0).text())
-            data = database.local_metadata(target, 'description')
-            if not data:
-                data = database.remote_metadata(target, 'description')
-            if not data:
-                continue
-            if misc.string_search(regexp, data, escape=False, exact=False):
-                targets.append(target)
+    targets = database.local_all(basename=True)
+    for target in database.remote_all(basename=True):
+        if not target in targets:
+            targets.append(target)
 
+    for target in targets:
+        data = database.local_metadata(target, 'description')
+        if not data:
+            data = database.remote_metadata(target, 'description')
+        if not data:
+            continue
+        if misc.string_search(regexp, data, escape=False, exact=False):
+            matches.append(target)
+
+    if matches:
+        # calling it with null matches will add all
+        RefreshTargetsReal(matches)
+    else:
         ui.SearchTable.clearContents()
         ui.SearchTable.setRowCount(0)
-        irow = 0
-        for target in targets:
-            ui.SearchTable.setRowCount(irow+1)
-            description = database.local_metadata(target, 'description')
-            status = 'Installed'
-            if not database.local_uptodate(target):
-                status = 'Update'
-            if not description:
-                description = database.remote_metadata(target, 'description')
-                status = 'Uninstalled'
-            ui.SearchTable.setItem(irow, 0, QtGui.QTableWidgetItem(target))
-            ui.SearchTable.setItem(irow, 1, QtGui.QTableWidgetItem(description))
-            ui.SearchTable.setItem(irow, 2, QtGui.QTableWidgetItem(status))
-            irow += 1
-    except Exception as detail:
-        MessageCritical(str(detail))
-    finally:
-        EnableWidgets()
 
 def SearchMetadata():
     worker = Worker(app, SearchMetadataReal)
@@ -534,7 +534,8 @@ def restoreEvent(reason):
         MainWindow.showNormal()
 
 def updateEvent():
-    # FIXME: raising the main window should not be needed to show the message
+    # FIXME: raising the main window should not be needed to show the message,
+    # a dialog without parent will kill the main window upon "close"!?!
     MainWindow.showNormal()
     Update()
 
@@ -570,6 +571,6 @@ RefreshRepos()
 RefreshMirrors()
 RefreshSettings()
 RefreshWidgets()
-QtCore.QTimer.singleShot(1000, RefreshTargets)
+RefreshTargets()
 
 sys.exit(app.exec_())

@@ -33,7 +33,7 @@ class SPMD(dbus.service.Object):
         except Exception as detail:
             result = str(detail)
         finally:
-            self.Finished(result)
+            callback(result)
 
     def _GetUpdates(self, basename=False):
         targets = []
@@ -392,7 +392,8 @@ class SPMD(dbus.service.Object):
             timelock = os.path.join(database.CACHE_DIR, 'spmd.time')
             if os.path.isfile(timelock):
                 lasttime = misc.file_read(timelock)
-                # TODO: sanity check, fallback to currenttime
+                if not lasttime:
+                    lasttime = currenttime
             else:
                 lasttime = currenttime
                 misc.file_write(timelock, currenttime)
