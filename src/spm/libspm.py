@@ -1372,7 +1372,7 @@ class Source(object):
                 self.remove_target_link(sfile)
 
         if database.local_search(self.target_name):
-            message.sub_info(_('Removing footprint and SRCBUILD'))
+            message.sub_info(_('Removing SRCBUILD and metadata'))
             os.unlink(os.path.join(LOCAL_DIR, self.target_name, 'SRCBUILD'))
             os.unlink(os.path.join(LOCAL_DIR, self.target_name, 'metadata.json'))
 
