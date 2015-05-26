@@ -27,13 +27,12 @@ class SPMD(dbus.service.Object):
         self.working = False
 
     def _AsyncCall(self, function, callback):
-        result = 'Success'
         try:
             function()
         except Exception as detail:
-            result = str(detail)
-        finally:
-            callback(result)
+            callback(str(detail))
+        else:
+            callback('Success')
 
     def _GetUpdates(self, basename=False):
         targets = []
@@ -245,29 +244,23 @@ class SPMD(dbus.service.Object):
             message.critical(str(detail))
             self.Finished(str(detail))
 
-    @dbus.service.method('com.spm.Daemon', in_signature='b', \
-    out_signature='s')
+    @dbus.service.method('com.spm.Daemon', in_signature='b')
     def Update(self, fromsource=False):
-        ''' Build a package '''
+        ''' Update system packages either from source or pre-build tarballs '''
         message.info('Updating system', time.ctime())
         try:
-            # TODO: support offline updates? SPM allows such actions.
-            if not misc.url_ping():
-                message.sub_warning('System is offline')
-                return 'System is offline'
-
+            self.Working()
             updates = self._GetUpdates()
             if not updates:
                 message.sub_info('Nothing to do, system is up-to-date')
-                return 'Nothing to do, system is up-to-date'
+                self.Finished('Success')
             elif fromsource:
                 self.Build(updates)
             else:
                 self.Install(updates)
         except Exception as detail:
             message.critical(str(detail))
-            return str(detail)
-        return 'Success'
+            self.Finished(str(detail))
 
     @dbus.service.method('com.spm.Daemon', in_signature='as')
     def Build(self, targets):
@@ -444,7 +437,7 @@ class SPMD(dbus.service.Object):
 
 try:
     if not os.geteuid() == 0:
-        message.critical('Attempting to run as non-root will bring you no good')
+        message.critical('Attempting to run as non-root will bring you no good, the opposite is true too.')
         sys.exit(1)
 
     object = SPMD(systembus)

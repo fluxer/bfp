@@ -1,7 +1,7 @@
 #!/bin/python2
 
 from PyQt4 import QtCore, QtGui, QtDBus
-import os, sys, time
+import os, sys, time, re
 if sys.version < '3':
     import ConfigParser as configparser
 else:
@@ -133,7 +133,7 @@ def EnableWidgets():
     ui.BuildButton.setEnabled(True)
     ui.InstallButton.setEnabled(True)
     ui.RemoveButton.setEnabled(False)
-    ui.DetailsButton.setEnabled(True)
+    ui.DetailsButton.setEnabled(False)
     ui.RepoSaveButton.setEnabled(True)
     ui.MirrorSaveButton.setEnabled(True)
     ui.ProgressBar.setRange(0, 1)
@@ -267,8 +267,7 @@ def SearchMetadataReal():
     regexp = str(ui.SearchEdit.text())
     matches = []
     if not regexp:
-        RefreshTargets()
-        return
+        return RefreshTargetsReal()
 
     targets = database.local_all(basename=True)
     for target in database.remote_all(basename=True):
@@ -276,12 +275,14 @@ def SearchMetadataReal():
             targets.append(target)
 
     for target in targets:
-        data = database.local_metadata(target, 'description')
-        if not data:
-            data = database.remote_metadata(target, 'description')
-        if not data:
+        description = database.local_metadata(target, 'description')
+        if not description:
+            description = database.remote_metadata(target, 'description')
+        if not description:
             continue
-        if misc.string_search(regexp, data, escape=False, exact=False):
+        if re.findall(regexp, description, flags=re.IGNORECASE):
+            matches.append(target)
+        if re.findall(regexp, target, flags=re.IGNORECASE):
             matches.append(target)
 
     if matches:
