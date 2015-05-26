@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, shutil, os
 
-app_version = "1.7.6 (8c49b89)"
+app_version = "1.7.6 (0e6f761)"
 
 tmpdir = None
 keep = False
@@ -54,8 +54,8 @@ try:
             shutil.copy2(spath, scopy)
         else:
             shutil.copytree(spath, scopy)
-    shebang = '#!%s' % ARGS.interpreter
-    maindata = '%s\nif __name__ == "__main__": import %s' % (shebang, misc.file_name(ARGS.PATH[0]))
+    shebang = '#!%s\n' % ARGS.interpreter
+    maindata = '%sif __name__ == "__main__": import %s' % (shebang, misc.file_name(ARGS.PATH[0]))
     mainfile = '%s/__main__.py' % ARGS.tmp
     message.sub_info('Writing __main__')
     misc.file_write(mainfile, maindata)
@@ -63,9 +63,10 @@ try:
     tmpout = ARGS.tmp + 'app.zip'
     misc.archive_compress(misc.list_files(ARGS.tmp), tmpout, ARGS.tmp)
     message.sub_info('Creating finall app')
-    misc.file_write(ARGS.output, '%s\n%s' % (shebang, misc.file_read(tmpout)))
+    fullout = os.path.realpath(ARGS.output)
+    misc.file_write(fullout, '%s%s' % (shebang, misc.file_read(tmpout)))
     message.sub_info('Making the app executable')
-    os.chmod(ARGS.output, 0o755)
+    os.chmod(fullout, 0o755)
 
 except shutil.Error as detail:
     message.critical('SHUTIL', detail)
