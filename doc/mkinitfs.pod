@@ -92,11 +92,11 @@ None
 
 /etc/mkinitfs/files/*.conf
 
+/etc/mkinitfs/modules/*.conf
+
 /etc/mkinitfs/root/*
 
 /etc/mkinitfs/root/hooks/*
-
-/etc/mkinitfs/files/*.conf
 
 =head1 AUTHORS
 
