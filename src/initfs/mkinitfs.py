@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast
 
-app_version = "1.7.6 (2182f1b)"
+app_version = "1.7.6 (f6e2a66)"
 
 tmpdir = None
 keep = False
@@ -48,15 +48,38 @@ try:
         help='Show MkInitfs version and exit')
     ARGS = parser.parse_args()
 
-    # if cross-building and no custom image is set update ARGS.image
-    if ARGS.kernel != kernel and ARGS.image == image:
-        ARGS.image = '/boot/initramfs-%s.img' % ARGS.kernel
-
     if ARGS.keep:
         keep = True
 
     if ARGS.debug:
         message.DEBUG = True
+
+    modsdir = None
+    kernels = []
+    for moddir in  ('/lib/modules', '/lib32/modules', '/lib64/modules', \
+        '/usr/lib/modules', '/usr/lib32/modules', '/usr/lib64/modules'):
+        if not os.path.exists(moddir) or os.path.islink(moddir):
+            continue
+        for kernel in os.listdir(moddir):
+            kerndir = '%s/%s' % (moddir, kernel)
+            if os.path.isfile('%s/modules.dep' % kerndir) and \
+                os.path.isfile('%s/modules.builtin' % kerndir):
+                kernels.append(kerndir)
+    for kernel in kernels:
+        if os.path.basename(kernel) == ARGS.kernel:
+            modsdir = kernel
+    if not modsdir and len(kernels) >= 1:
+        modsdir = kernels[0]
+        ARGS.kernel = os.path.basename(kernels[0])
+        message.sub_warning('Last resort kernel detected', ARGS.kernel)
+
+    if not modsdir:
+        message.critical('Unable to find modules directory')
+        sys.exit(2)
+
+    # if cross-building and no custom image is set update ARGS.image
+    if ARGS.kernel != kernel and ARGS.image == image:
+        ARGS.image = '/boot/initramfs-%s.img' % ARGS.kernel
 
     lcopied = []
     def copy_item(src):
@@ -138,36 +161,6 @@ try:
         else:
             misc.file_write(image, data)
 
-    # FIXME: support both /lib and /usr/lib at the same time???
-    modsdir = None
-    moddirs = ('/lib/modules', '/lib32/modules', '/lib64/modules', \
-        '/usr/lib/modules', '/usr/lib32/modules', '/usr/lib64/modules')
-    for moddir in moddirs:
-        if os.path.islink(moddir):
-            continue
-        kerndir = '%s/%s' % (moddir, ARGS.kernel)
-        if os.path.isfile('%s/modules.dep' % kerndir) and \
-            os.path.isfile('%s/modules.builtin' % kerndir):
-            modsdir = kerndir
-            break
-    # if the above fails, attempt to guess the kernel installed
-    if not modsdir:
-        for sdir in moddirs:
-            if not os.path.exists(sdir) or os.path.islink(sdir):
-                continue
-            for skernel in os.listdir(sdir):
-                sfull = '%s/%s' % (sdir, skernel)
-                if os.path.isfile('%s/modules.dep' % sfull) and \
-                    os.path.isfile('%s/modules.builtin' % sfull):
-                    message.sub_warning('Last resort kernel detected', skernel)
-                    modsdir = sfull
-                    ARGS.kernel = skernel
-                    ARGS.image = '/boot/initramfs-%s.img' % skernel
-                    break
-    if not modsdir:
-        message.critical('Unable to find modules directory')
-        sys.exit(2)
-
     message.info('Runtime information')
     message.sub_info('TMP', ARGS.tmp)
     message.sub_info('BUSYBOX', ARGS.busybox)
@@ -183,11 +176,10 @@ try:
             copy_item(spath)
 
     message.sub_info('Installing Busybox')
-    bin_dir = os.path.join(ARGS.tmp, 'bin')
     message.sub_debug('Installing binary')
     copy_item(ARGS.busybox)
     message.sub_debug('Creating symlinks')
-    misc.system_command((ARGS.busybox, '--install', '-s', bin_dir))
+    misc.system_command((ARGS.busybox, '--install', '-s', '%s/bin' % ARGS.tmp))
 
     message.sub_info('Copying files')
     if os.path.isdir('/etc/mkinitfs/files'):
@@ -226,7 +218,7 @@ try:
         if not module:
             continue
         found = False
-        for line in misc.file_readlines(modsdir + '/modules.dep'):
+        for line in misc.file_readlines('%s/modules.dep' % modsdir):
             base = line.split(':')[0]
             depends = line.split(':')[1].split()
             if '/%s.ko' % module in base \
@@ -236,7 +228,7 @@ try:
                 for dep in depends:
                     copy_item('%s/%s' % (modsdir, dep.strip()))
         if not found:
-            for line in misc.file_readlines(modsdir + '/modules.builtin'):
+            for line in misc.file_readlines('%s/modules.builtin' % modsdir):
                 if '/%s.ko' % module in line \
                     or '/%s.ko' % module.replace('_', '-') in line:
                     message.sub_debug('Module is builtin', module)
@@ -277,7 +269,7 @@ try:
     if ARGS.recovery:
         message.sub_info('Creating recovery image')
         copy_item(modsdir)
-        recovery = ARGS.image.replace(ARGS.kernel, '%s-recovery' % ARGS.kernel)
+        recovery = ARGS.image.replace('.img', '-recovery.img')
         create_image(ARGS.tmp, recovery, ARGS.compression)
 
 except subprocess.CalledProcessError as detail:
