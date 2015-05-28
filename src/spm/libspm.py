@@ -185,6 +185,7 @@ class Local(object):
 
     def main(self):
         ''' Print local target metadata for every match '''
+        msglog = message.LOG
         message.LOG = False
         for target in database.local_all(basename=True):
             if re.search(self.pattern, target):
