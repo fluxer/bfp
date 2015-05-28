@@ -67,6 +67,19 @@ class Database(object):
     def _build_local_cache(self, force=False):
         ''' Build internal local database cache '''
         self.LOCAL_CACHE = {}
+
+        cachefile = '%s/local.json' % self.CACHE_DIR
+        if os.path.isfile(cachefile) and not force:
+            fallback = False
+            try:
+                cf = open(cachefile, 'r')
+                self.LOCAL_CACHE = json.load(cf)
+            except:
+                os.unlink(cachefile)
+                fallback = True
+            if not fallback:
+                return
+
         for sdir in misc.list_dirs(self.LOCAL_DIR):
             metadata = os.path.join(sdir, 'metadata.json')
             srcbuild = os.path.join(sdir, 'SRCBUILD')
@@ -78,6 +91,10 @@ class Database(object):
                     f.close()
             else:
                 self._build_local_plain(sdir)
+
+        if os.access(self.CACHE_DIR, os.W_OK):
+            with open(cachefile, 'w') as f:
+                json.dump(self.LOCAL_CACHE, f)
         # print(sys.getsizeof(self.LOCAL_CACHE))
 
     def _build_remote_cache(self, force=False):
