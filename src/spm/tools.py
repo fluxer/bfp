@@ -3,17 +3,8 @@
 import gettext
 _ = gettext.translation('spm', fallback=True).gettext
 
-import sys
-import argparse
-import subprocess
-import tarfile
-import zipfile
-import shutil
-import os
-import re
-import difflib
-import pwd, grp
-import ftplib
+import sys, argparse, subprocess, tarfile, zipfile, shutil, os, re, difflib
+import pwd, grp, ftplib
 if sys.version < '3':
     import ConfigParser as configparser
     from urllib2 import HTTPError
@@ -96,10 +87,10 @@ class Check(object):
                     or smime == 'text/x-lua' or smime == 'text/x-tcl' \
                     or smime == 'text/x-awk' or smime == 'text/x-gawk':
                     # https://en.wikipedia.org/wiki/Comparison_of_command_shells
-                    bang_regexp = '^#!(?:(?: )+)?(?:/.*)+(?:(?: )+)?'
+                    bang_regexp = '(^#!.*(?: |\\t|/)((?:'
                     bang_regexp += '(?:sh|bash|dash|ksh|csh|tcsh|tclsh|scsh|fish'
                     bang_regexp += '|zsh|ash|python|perl|php|ruby|lua|wish|(?:g)?awk)'
-                    bang_regexp += '(?:(?:\\d(?:.)?)+)?(?:\\s|$)'
+                    bang_regexp +=  ')(?:[^\\s]+)?)(?:.*\\s))'
                     fmatch = misc.file_search(bang_regexp, sfile, escape=False)
                     if fmatch:
                         fmatch = fmatch[0].replace('#!', '').strip().split()[0]
@@ -910,11 +901,12 @@ try:
     which_parser.add_argument('PATTERN', type=str, \
         help=_('Pattern to search for in remote targets'))
 
-    pack_parser = subparsers.add_parser('pack')
-    pack_parser.add_argument('-d', '--directory', type=str, \
-        default=misc.dir_current(), help=_('Set output directory'))
-    pack_parser.add_argument('TARGETS', nargs='+', type=str, \
-        help=_('Targets to apply actions on'))
+    if EUID == 0:
+        pack_parser = subparsers.add_parser('pack')
+        pack_parser.add_argument('-d', '--directory', type=str, \
+            default=misc.dir_current(), help=_('Set output directory'))
+        pack_parser.add_argument('TARGETS', nargs='+', type=str, \
+            help=_('Targets to apply actions on'))
 
     pkg_parser = subparsers.add_parser('pkg')
     pkg_parser.add_argument('-d', '--directory', type=str, \
