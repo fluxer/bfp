@@ -13,7 +13,7 @@ message = libmessage.Message()
 app = QtCore.QCoreApplication(sys.argv)
 bus = QtDBus.QDBusConnection.systemBus()
 if not bus.isConnected():
-    sys.stderr.write("Cannot connect to the D-Bus session bus.\n")
+    message.critical('Cannot connect to the D-Bus session bus')
     sys.exit(1)
 
 iface = QtDBus.QDBusInterface('com.spm.Daemon', '/com/spm/Daemon', \
@@ -35,7 +35,7 @@ def dbus_call(method, args=None):
     else:
         message.sub_critical(str(bus.lastError().message()))
 
-app_version = "1.7.6 (a7f6acd)"
+app_version = "1.7.6 (481b6a1)"
 
 try:
     parser = argparse.ArgumentParser(prog='spmctl', \

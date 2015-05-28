@@ -1,5 +1,9 @@
 #!/bin/bash
 
+# This scripts ensures that the local (installed) software metadata is something
+# SPM 1.8.x can handle. at some point compatibility has to be dropped and it's
+# better to deal with this once than add additional overheath to libpackage.
+
 set -e
 
 for i in /var/local/spm/*;do
@@ -18,6 +22,6 @@ for i in /var/local/spm/*;do
             echo 'release=1' >> "$i/metadata"
         fi
     else
-        echo " >> No metadata file for $i"
+        echo " >> No metadata file for $i, rebuild it and re-run this script"
     fi
 done

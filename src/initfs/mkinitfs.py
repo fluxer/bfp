@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast
 
-app_version = "1.7.6 (f6e2a66)"
+app_version = "1.7.6 (0fc7c98)"
 
 tmpdir = None
 keep = False
@@ -174,6 +174,8 @@ try:
     if os.path.isdir('/etc/mkinitfs/root'):
         for spath in misc.list_all('/etc/mkinitfs/root'):
             copy_item(spath)
+    else:
+        message.sub_warning('Root filesystem overlay missing')
 
     message.sub_info('Installing Busybox')
     message.sub_debug('Installing binary')

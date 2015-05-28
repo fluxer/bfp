@@ -132,7 +132,7 @@ for src in "${@:-.}";do
         elif [ -f "/var/cache/spm/sources/$src_name/$src_base" ];then
             msg2 "Linking: ${BLUE}${src_base}${ALL_OFF}"
             ln -sf "/var/cache/spm/sources/$src_name/$src_base" "$SOURCE_DIR/$src_base"
-        elif [ ! -f "$SOURCE_DIR/$src_base" ];then
+        else
             msg2 "Fetching: ${BLUE}${source}${ALL_OFF}"
             if whereis curl ;then
                 curl -f -L -C - "$source" -o "$SOURCE_DIR/$src_base"
