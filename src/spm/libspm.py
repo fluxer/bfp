@@ -185,6 +185,7 @@ class Local(object):
 
     def main(self):
         ''' Print local target metadata for every match '''
+        message.LOG = False
         for target in database.local_all(basename=True):
             if re.search(self.pattern, target):
                 if self.do_name and self.plain:
@@ -242,6 +243,7 @@ class Local(object):
                         print(data)
                     else:
                         message.sub_info(_('Footprint'), data)
+        message.LOG = msglog
 
 
 class Remote(object):
@@ -276,6 +278,8 @@ class Remote(object):
 
     def main(self):
         ''' Print remote target metadata for every match '''
+        msglog = message.LOG
+        message.LOG = False
         for target in database.remote_all(basename=True):
             if re.search(self.pattern, target):
                 if self.do_name and self.plain:
@@ -360,6 +364,7 @@ class Remote(object):
                         print(data)
                     else:
                         message.sub_info(_('Backup'), data)
+        message.LOG = msglog
 
 
 class Repo(object):
