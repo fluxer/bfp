@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os
 
-app_version = "1.7.6 (da5f471)"
+app_version = "1.7.6 (7fb30b9)"
 
 tmpdir = None
 keep = False
@@ -51,7 +51,7 @@ try:
         sys.exit(2)
 
     message.info('Listing initial RAM image...')
-    new_image = os.path.join(ARGS.tmp, os.path.basename(ARGS.image))
+    new_image = '%s/%s' % (ARGS.tmp, os.path.basename(ARGS.image))
     message.sub_info('Copying image')
     misc.dir_create(ARGS.tmp)
     shutil.copyfile(ARGS.image, new_image)

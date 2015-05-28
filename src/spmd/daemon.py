@@ -340,7 +340,7 @@ class SPMD(dbus.service.Object):
         ''' Repositories watcher '''
         try:
             message.info('Enetering remote watch loop')
-            reposdir = os.path.join(database.CACHE_DIR, 'repositories')
+            reposdir = '%s/repositories' % database.CACHE_DIR
             if os.path.isdir(reposdir):
                 remote_notify.watch_add(reposdir, ignore=('.git',))
             else:
@@ -382,7 +382,7 @@ class SPMD(dbus.service.Object):
                     message.warning('Config non-existent', conf)
 
             currenttime = time.strftime('%s')
-            timelock = os.path.join(database.CACHE_DIR, 'spmd.time')
+            timelock = '%s/spmd.time' % database.CACHE_DIR
             if os.path.isfile(timelock):
                 lasttime = misc.file_read(timelock)
                 if not lasttime:

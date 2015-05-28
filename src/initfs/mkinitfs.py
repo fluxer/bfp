@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast
 
-app_version = "1.7.6 (da5f471)"
+app_version = "1.7.6 (7fb30b9)"
 
 tmpdir = None
 keep = False
@@ -114,7 +114,7 @@ try:
             if os.path.isdir(sdest):
                 message.sub_debug('Already exists', src)
                 for sfile in os.listdir(src):
-                    copy_item(os.path.join(src, sfile))
+                    copy_item('%s/%s' % (src, sfile))
                 return
             message.sub_debug('Copying', src)
             message.sub_debug('To', sdest)
@@ -259,10 +259,10 @@ try:
         '%s/null' % dev_dir, 'c', '1', '0'))
 
     message.sub_info('Creating shared libraries cache')
-    etc_dir = os.path.join(ARGS.tmp, 'etc')
+    etc_dir = '%s/etc' % ARGS.tmp
     misc.dir_create(etc_dir)
     # to surpress a warning
-    misc.file_touch(os.path.join(etc_dir, 'ld.so.conf'))
+    misc.file_touch('%s/%s' % (etc_dir, 'ld.so.conf'))
     misc.system_command((misc.whereis('ldconfig'), '-r', ARGS.tmp))
 
     message.sub_info('Creating optimized image')

@@ -399,7 +399,7 @@ class Repo(object):
 
     def sync(self):
         ''' Sync repository '''
-        misc.dir_create(os.path.join(CACHE_DIR, 'repositories'))
+        misc.dir_create('%s/repositories' % CACHE_DIR)
 
         if os.path.exists(self.repository_url):
             # repository is local path, create a copy of it
@@ -411,8 +411,7 @@ class Repo(object):
 
     def cache(self):
         ''' Generate repository cache '''
-        rdir = os.path.join(CACHE_DIR, 'repositories')
-        if not os.path.exists(rdir):
+        if not os.path.exists('%s/repositories' % CACHE_DIR):
             return
 
         message.sub_info(_('Caching remote metadata'))
@@ -420,7 +419,7 @@ class Repo(object):
 
     def prune(self):
         ''' Remove repositories that are no longer in the config '''
-        rdir = os.path.join(CACHE_DIR, 'repositories')
+        rdir = '%s/repositories' % CACHE_DIR
         if not os.path.exists(rdir):
             return
 
@@ -430,7 +429,7 @@ class Repo(object):
                 if os.path.basename(repo) == spath:
                     valid = True
 
-            sfull = os.path.join(rdir, spath)
+            sfull = '%s/%s' % (rdir, spath)
             if not valid and not os.path.isfile(sfull):
                 message.sub_warning(_('Removing'), sfull)
                 misc.dir_remove(sfull)
@@ -460,7 +459,7 @@ class Repo(object):
             # http://pylint-messages.wikidot.com/messages:w0201
             self.repository_url = repository
             self.repository_name = os.path.basename(self.repository_url)
-            self.repository_dir = os.path.join(CACHE_DIR, 'repositories', \
+            self.repository_dir = '%s/repositories/%s' % (CACHE_DIR, \
                 self.repository_name)
 
             if self.do_clean:
@@ -566,7 +565,7 @@ class Source(object):
         if match and install_info:
             message.sub_debug(match)
             for m in match:
-                if not os.path.exists(ROOT_DIR + m):
+                if not os.path.exists('%s/%s' % (ROOT_DIR, m)):
                     message.sub_warning('File does not exist', m)
                     continue
                 infodir = sys.prefix + '/share/info/dir'
@@ -644,7 +643,7 @@ class Source(object):
                     message.sub_info(_('Updating icon resources'), base)
                     misc.system_trigger((icon_resources, 'forceupdate', '--theme', base))
                 if (action == 'merge' or action == 'upgrade') \
-                    and os.path.isfile(ROOT_DIR + m + '/index.theme') and icon_cache:
+                    and os.path.isfile('%s/%s/index.theme' % (ROOT_DIR, m)) and icon_cache:
                     message.sub_info(_('Updating icons cache'), base)
                     misc.system_trigger((icon_cache, '-q', '-t', '-i', '-f', m))
                 done.append(m)
@@ -740,8 +739,8 @@ class Source(object):
         message.sub_debug('udevadm', udevadm or '')
         match = misc.string_search(udevadm_regex, adjcontent, escape=False)
         if match and udevadm:
-            if os.path.exists(ROOT_DIR + 'run/udev/control') \
-            or os.path.exists(ROOT_DIR + 'var/run/udev/control'):
+            if os.path.exists('%s/run/udev/control' % ROOT_DIR) \
+            or os.path.exists('%s/var/run/udev/control' % ROOT_DIR):
                 message.sub_info(_('Reloading udev rules and hwdb'))
                 message.sub_debug(match)
                 misc.system_trigger((udevadm, 'control', '--reload'))
@@ -783,14 +782,14 @@ class Source(object):
 
     def remove_target_file(self, sfile):
         ''' Remove target file '''
-        sfull = ROOT_DIR + sfile
+        sfull = '%s/%s' % (ROOT_DIR, sfile)
         if os.path.isfile(sfull):
             message.sub_debug(_('Removing'), sfull)
             os.unlink(sfull)
 
     def remove_target_dir(self, sdir):
         ''' Remove target directory '''
-        sfull = ROOT_DIR + sdir
+        sfull = '%s/%s' % (ROOT_DIR, sdir)
         if os.path.isdir(sfull) and not os.listdir(sfull):
             message.sub_debug(_('Removing'), sfull)
             if os.path.islink(sfull):
@@ -801,9 +800,9 @@ class Source(object):
 
     def remove_target_link(self, slink):
         ''' Remove target symlink '''
-        sfull = ROOT_DIR + slink
+        sfull = '%s/%s' % (ROOT_DIR, slink)
         if os.path.islink(sfull) and \
-            not os.path.exists(ROOT_DIR + '/' + os.readlink(sfull)):
+            not os.path.exists('%s/%s' % (ROOT_DIR, os.readlink(sfull))):
             message.sub_debug(_('Removing'), sfull)
             os.unlink(sfull)
 
@@ -839,8 +838,8 @@ class Source(object):
         message.sub_info(_('Fetching sources'))
         for src_url in self.target_sources:
             src_base = misc.url_normalize(src_url, True)
-            local_file = os.path.join(self.sources_dir, src_base)
-            src_file = os.path.join(self.target_dir, src_base)
+            local_file = '%s/%s' % (self.sources_dir, src_base)
+            src_file = '%s/%s' % (self.target_dir, src_base)
 
             if not os.path.isfile(src_file):
                 message.sub_debug(_('Fetching'), src_url)
@@ -873,9 +872,9 @@ class Source(object):
         message.sub_info(_('Preparing sources'))
         for src_url in self.target_sources:
             src_base = misc.url_normalize(src_url, True)
-            local_file = os.path.join(self.sources_dir, src_base)
-            src_file = os.path.join(self.target_dir, src_base)
-            link_file = os.path.join(self.source_dir, src_base)
+            local_file = '%s/%s' % (self.sources_dir, src_base)
+            src_file = '%s/%s' % (self.target_dir, src_base)
+            link_file = '%s/%s' % (self.source_dir, src_base)
 
             if os.path.islink(link_file):
                 message.sub_debug(_('Already linked'), src_file)
@@ -1148,7 +1147,7 @@ class Source(object):
                     compileall.compile_file(sfile, force=True, quiet=True)
 
         message.sub_info(_('Assembling metadata'))
-        metadata = os.path.join(self.install_dir, self.target_metadata)
+        metadata = '%s/%s' % (self.install_dir, self.target_metadata)
         misc.dir_create(os.path.dirname(metadata))
         data = {}
         data['version'] = self.target_version
@@ -1172,7 +1171,7 @@ class Source(object):
             f.close()
 
         message.sub_info(_('Assembling SRCBUILD'))
-        misc.file_write(os.path.join(self.install_dir, self.target_srcbuild), \
+        misc.file_write('%s/%s' % (self.install_dir, self.target_srcbuild), \
             misc.file_read(self.srcbuild))
 
         message.sub_info(_('Assembling depends'))
@@ -1198,7 +1197,7 @@ class Source(object):
             for i in tarf:
                 if not i.isdir():
                     new_content.append('/%s' % i.name)
-                    sfull = os.path.join(ROOT_DIR, i.name)
+                    sfull = '%s/%s' % (ROOT_DIR, i.name)
                     if not os.path.isfile(sfull) or os.path.islink(sfull):
                         continue
                     if i.name.endswith('.conf') or i.name in self.target_backup:
@@ -1378,16 +1377,15 @@ class Source(object):
                 self.remove_target_link(sfile)
 
         if database.local_search(self.target_name):
-            message.sub_info(_('Removing SRCBUILD and metadata'))
-            os.unlink(os.path.join(LOCAL_DIR, self.target_name, 'SRCBUILD'))
-            os.unlink(os.path.join(LOCAL_DIR, self.target_name, 'metadata.json'))
+            message.sub_info(_('Removing metadata'))
+            os.unlink('%s/%s/metadata.json' % (LOCAL_DIR, self.target_name))
 
         if misc.file_search('\npost_remove()', self.srcbuild, escape=False) \
             and SCRIPTS:
             message.sub_info(_('Executing post_remove()'))
             misc.system_script(self.srcbuild, 'post_remove')
 
-        srcbuild = os.path.join(LOCAL_DIR, self.target_name, 'SRCBUILD')
+        srcbuild = '%s/%s/SRCBUILD' % (LOCAL_DIR, self.target_name)
         if os.path.isfile(srcbuild):
             message.sub_info(_('Removing SRCBUILD'))
             os.unlink(srcbuild)
@@ -1434,9 +1432,9 @@ class Source(object):
             self.target = target
             self.target_name = os.path.basename(target)
             self.target_dir = target_dir
-            self.srcbuild = os.path.join(self.target_dir, 'SRCBUILD')
-            self.source_dir = os.path.join(BUILD_DIR, self.target_name, 'source')
-            self.install_dir = os.path.join(BUILD_DIR, self.target_name, 'install')
+            self.srcbuild = '%s/SRCBUILD' % self.target_dir
+            self.source_dir = '%s/%s/source' % (BUILD_DIR, self.target_name)
+            self.install_dir = '%s/%s/install' % (BUILD_DIR, self.target_name)
             self.target_version = database.remote_metadata(self.target_dir, 'version')
             self.target_release = database.remote_metadata(self.target_dir, 'release')
             self.target_description = database.remote_metadata(self.target_dir, 'description')
@@ -1446,11 +1444,11 @@ class Source(object):
             self.target_pgpkeys = database.remote_metadata(self.target_dir, 'pgpkeys')
             self.target_options = database.remote_metadata(self.target_dir, 'options')
             self.target_backup = database.remote_metadata(self.target_dir, 'backup')
-            self.target_metadata = os.path.join('var/local/spm', self.target_name, 'metadata.json')
-            self.target_srcbuild = os.path.join('var/local/spm', self.target_name, 'SRCBUILD')
-            self.sources_dir = os.path.join(CACHE_DIR, 'sources', self.target_name)
-            self.target_tarball = os.path.join(CACHE_DIR, 'tarballs/' + os.uname()[4], \
-                self.target_name + '_' + self.target_version + '.tar.bz2')
+            self.target_metadata = 'var/local/spm/%s/metadata.json' % self.target_name
+            self.target_srcbuild = 'var/local/spm/%s/SRCBUILD' % self.target_name
+            self.sources_dir = '%s/sources/%s' % (CACHE_DIR, self.target_name)
+            self.target_tarball = '%s/tarballs/%s/%s_%s.tar.bz2' % (CACHE_DIR, \
+                os.uname()[4], self.target_name, self.target_version)
 
             if database.local_uptodate(self.target) and self.do_update:
                 message.sub_warning(_('Target is up-to-date'), self.target)
@@ -1751,9 +1749,9 @@ class Binary(Source):
             self.target = target
             self.target_name = os.path.basename(target)
             self.target_dir = target_dir
-            self.srcbuild = os.path.join(self.target_dir, 'SRCBUILD')
-            self.source_dir = os.path.join(BUILD_DIR, self.target_name, 'source')
-            self.install_dir = os.path.join(BUILD_DIR, self.target_name, 'install')
+            self.srcbuild = '%s/SRCBUILD' % self.target_dir
+            self.source_dir = '%s/%s/source' % (BUILD_DIR, self.target_name)
+            self.install_dir = '%s/%s/install' % (BUILD_DIR, self.target_name)
             self.target_version = database.remote_metadata(self.target_dir, 'version')
             self.target_release = database.remote_metadata(self.target_dir, 'release')
             self.target_description = database.remote_metadata(self.target_dir, 'description')
@@ -1763,11 +1761,11 @@ class Binary(Source):
             self.target_pgpkeys = database.remote_metadata(self.target_dir, 'pgpkeys')
             self.target_options = database.remote_metadata(self.target_dir, 'options')
             self.target_backup = database.remote_metadata(self.target_dir, 'backup')
-            self.target_metadata = os.path.join('var/local/spm', self.target_name, 'metadata.json')
-            self.target_srcbuild = os.path.join('var/local/spm', self.target_name, 'SRCBUILD')
-            self.sources_dir = os.path.join(CACHE_DIR, 'sources', self.target_name)
-            self.target_tarball = os.path.join(CACHE_DIR, 'tarballs/' + os.uname()[4], \
-                self.target_name + '_' + self.target_version + '.tar.bz2')
+            self.target_metadata = 'var/local/spm/%s/metadata.json' % self.target_name
+            self.target_srcbuild = 'var/local/spm/%s/SRCBUILD' % self.target_name
+            self.sources_dir = '%s/sources/%s' % (CACHE_DIR, self.target_name)
+            self.target_tarball = '%s/tarballs/%s/%s_%s.tar.bz2' % (CACHE_DIR, \
+                os.uname()[4], self.target_name, self.target_version)
 
             if database.local_uptodate(self.target) and self.do_update:
                 message.sub_warning(_('Target is up-to-date'), self.target)

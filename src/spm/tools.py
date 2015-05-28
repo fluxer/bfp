@@ -36,7 +36,7 @@ database = libpackage.Database()
 import libspm
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.7.6 (0fc7c98)"
+app_version = "1.7.6 (7fb30b9)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -62,7 +62,7 @@ class Check(object):
         ''' Check if runtime dependencies of target are satisfied '''
         for target in self.check_targets:
             message.sub_info(_('Checking'), target)
-            target_metadata = os.path.join(libspm.LOCAL_DIR, target, 'metadata')
+            target_metadata = '%s/%s/metadata' % (libspm.LOCAL_DIR, target)
             target_footprint = database.local_metadata(target, 'footprint')
             target_depends = database.local_metadata(target, 'depends')
             target_adepends = []
@@ -70,7 +70,7 @@ class Check(object):
             missing_detected = False
             required = []
             for sfile in target_footprint:
-                sfile = os.path.join(libspm.ROOT_DIR, sfile)
+                sfile = '%s/%s' % (libspm.ROOT_DIR, sfile)
                 if os.path.islink(sfile):
                     continue
                 elif not os.path.isfile(sfile):
@@ -189,8 +189,8 @@ class Dist(object):
             target_basename = os.path.basename(os.path.normpath(target))
 
             target_version = database.remote_metadata(target, 'version')
-            target_distfile = os.path.join(self.directory, \
-                target_basename + '_' + target_version + '.tar.bz2')
+            target_distfile = '%s/%s_%s.tar.bz2' % (self.directory, \
+                target_basename, target_version)
             target_sources = database.remote_metadata(target, 'sources')
             target_pgpkeys = database.remote_metadata(target, 'pgpkeys')
 
@@ -202,7 +202,7 @@ class Dist(object):
                 message.sub_info(_('Preparing sources'))
                 for src_url in target_sources:
                     src_base = os.path.basename(src_url)
-                    src_file = os.path.join(target_directory, src_base)
+                    src_file = '%s/%s' % (target_directory, src_base)
 
                     if not os.path.isfile(src_file):
                         message.sub_debug(_('Fetching'), src_url)
@@ -223,7 +223,7 @@ class Dist(object):
                 for src_url in target_sources:
                     src_base = os.path.basename(src_url)
 
-                    src_file = os.path.join(target_directory, src_base)
+                    src_file = '%s/%s' % (target_directory, src_base)
                     if src_url.startswith(('http://', 'https://', 'ftp://', \
                         'ftps://')):
                         if os.path.isfile(src_file):
@@ -440,7 +440,7 @@ class Sane(object):
             match = database.remote_search(target)
             if match:
                 message.sub_info(_('Checking'), target)
-                target_srcbuild = os.path.join(match, 'SRCBUILD')
+                target_srcbuild = '%s/SRCBUILD' % match
 
                 if self.enable:
                     if misc.file_search('--enable-', target_srcbuild):
@@ -560,7 +560,7 @@ class Merge(object):
                     backups.append(sfile)
 
             for sfile in backups:
-                origfile = os.path.join(libspm.ROOT_DIR, sfile)
+                origfile = '%s/%s' % (libspm.ROOT_DIR, sfile)
                 backfile = '%s.backup' % origfile
                 if os.path.isfile(origfile) and os.path.isfile(backfile):
                     if misc.file_read(origfile) == misc.file_read(backfile):
@@ -581,7 +581,7 @@ class Edit(object):
         for target in self.targets:
             match = database.remote_search(target)
             if match:
-                misc.system_command((editor, os.path.join(match, 'SRCBUILD')))
+                misc.system_command((editor, '%s/SRCBUILD' % match))
 
 
 class Which(object):
@@ -612,13 +612,13 @@ class Pack(object):
         for target in self.targets:
             if database.local_search(target):
                 target_version = database.local_metadata(target, 'version')
-                target_packfile = os.path.join(self.directory, \
-                    os.path.basename(target) + '_' + target_version + '.tar.bz2')
+                target_packfile = '%s/%s/%s_%s.tar.bz2' % (self.directory, \
+                    os.path.basename(target), target_version)
                 target_depends = '%s.depends' % target_packfile
 
                 content = database.local_metadata(target, 'footprint')
                 # add metadata directory, it is not listed in the footprint
-                content.append(os.path.join(libspm.LOCAL_DIR, target))
+                content.append('%s/%s' % (libspm.LOCAL_DIR, target))
                 depends = database.local_metadata(target, 'depends')
 
                 message.sub_info(_('Compressing'), target_packfile)
@@ -678,11 +678,11 @@ class Pkg(object):
             urls = list(self.get_links(target))
             if urls:
                 message.sub_info(_('Fetching package files'), target)
-                pkgdir = os.path.join(self.directory, target)
+                pkgdir = '%s/%s' % (self.directory, target)
                 misc.dir_create(pkgdir)
                 for href, name in urls:
                     message.sub_debug(_('Fetching'), href)
-                    misc.fetch(href, os.path.join(pkgdir, name))
+                    misc.fetch(href, '%s/%s' % (pkgdir, name))
             else:
                 not_found.append(target)
 

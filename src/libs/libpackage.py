@@ -33,7 +33,7 @@ class Database(object):
 
     def _notifiers_setup(self):
         ''' Setup inotify watcher for database changes '''
-        reposdir = os.path.join(self.CACHE_DIR, 'repositories')
+        reposdir = '%s/repositories' % self.CACHE_DIR
         if os.path.isdir(reposdir):
             notify.watch_add(reposdir, ignore=('.git',))
         if os.path.isdir(self.LOCAL_DIR):
@@ -42,13 +42,13 @@ class Database(object):
     def _build_local_plain(self, sdir):
         ''' Build local target cache from legacy metadata and footprint '''
         # TODO: drop with spm >=1.9.x
-        metadata = os.path.join(sdir, 'metadata')
-        footprint = os.path.join(sdir, 'footprint')
+        metadata = '%s/metadata' % sdir
+        footprint = '%s/footprint' % sdir
         if not os.path.isfile(metadata) or not os.path.isfile(footprint):
             return
         data = {}
-        data['footprint'] = misc.file_readlines('%s/footprint' % sdir)
-        for line in misc.file_readlines('%s/metadata' % sdir):
+        data['footprint'] = misc.file_readlines(footprint)
+        for line in misc.file_readlines(metadata):
             line = misc.string_encode(line)
             if line.startswith(('version=', 'release=', \
                 'description=', 'depends=', 'size=')):
@@ -81,8 +81,8 @@ class Database(object):
                 return
 
         for sdir in misc.list_dirs(self.LOCAL_DIR):
-            metadata = os.path.join(sdir, 'metadata.json')
-            srcbuild = os.path.join(sdir, 'SRCBUILD')
+            metadata = '%s/metadata.json' % sdir
+            srcbuild = '%s/SRCBUILD' % sdir
             if os.path.isfile(metadata) and os.path.isfile(srcbuild):
                 f = open(metadata, 'r')
                 try:
@@ -113,9 +113,8 @@ class Database(object):
             if not fallback:
                 return
 
-        cachedir = os.path.join(self.CACHE_DIR, 'repositories')
-        for sdir in misc.list_dirs(cachedir):
-            srcbuild = os.path.join(sdir, 'SRCBUILD')
+        for sdir in misc.list_dirs('%s/repositories' % self.CACHE_DIR):
+            srcbuild = '%s/SRCBUILD' % sdir
             if os.path.isfile(srcbuild):
                 parser = SRCBUILD(srcbuild)
                 self.REMOTE_CACHE[sdir] = {
@@ -131,7 +130,7 @@ class Database(object):
                     'backup': parser.backup
                 }
 
-        if os.access(cachedir, os.W_OK):
+        if os.access(self.CACHE_DIR, os.W_OK):
             with open(cachefile, 'w') as f:
                 json.dump(self.REMOTE_CACHE, f)
         # print(sys.getsizeof(self.REMOTE_CACHE))
@@ -191,7 +190,7 @@ class Database(object):
         if misc.python2:
             misc.typecheck(target, (types.StringTypes))
 
-        if os.path.isfile(os.path.join(target, 'SRCBUILD')):
+        if os.path.isfile('%s/SRCBUILD' % target):
             return target
 
         for rtarget in self.remote_all():
@@ -326,8 +325,9 @@ class Database(object):
             misc.typecheck(target, (types.StringTypes))
             misc.typecheck(key, (types.StringTypes))
 
-        if os.path.isfile(os.path.join(target, 'SRCBUILD')):
-            return getattr(SRCBUILD(os.path.join(target, 'SRCBUILD')), key)
+        srcbuild = '%s/SRCBUILD' % target
+        if os.path.isfile(srcbuild):
+            return getattr(SRCBUILD(srcbuild), key)
         match = self.remote_search(target)
         if match:
             return self.REMOTE_CACHE[match][key]
@@ -343,8 +343,7 @@ class Database(object):
             misc.typecheck(basename, (types.BooleanType))
 
         aliases = []
-        for sfile in misc.list_files(os.path.join(self.CACHE_DIR, \
-            'repositories')):
+        for sfile in misc.list_files('%s/repositories' % self.CACHE_DIR):
             if sfile.endswith('.alias'):
                 if basename:
                     aliases.append(misc.file_name(sfile))
@@ -359,7 +358,7 @@ class Database(object):
 
         for alias in self.remote_aliases(basename=False):
             if os.path.basename(target) == os.path.basename(alias):
-                return misc.file_readlines(alias + '.alias')
+                return misc.file_readlines('%s.alias' % alias)
         # return consistent data
         return [target]
 

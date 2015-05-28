@@ -65,9 +65,9 @@ class Misc(object):
 
         program = os.path.basename(program)
         for path in os.environ.get('PATH', '/bin:/usr/bin').split(':'):
-            exe = os.path.join(path, program)
+            exe = '%s/%s' % (path, program)
             # normalize because os.path.join sucks and can't be used in this case
-            if chroot and os.path.isfile(os.path.realpath(self.ROOT_DIR + exe)):
+            if chroot and os.path.isfile(os.path.realpath('%s/%s' % (self.ROOT_DIR, exe))):
                 return exe
             elif not chroot and os.path.isfile(exe):
                 return exe
@@ -412,9 +412,9 @@ class Misc(object):
             if not bcross:
                 subdirs[:] = [
                     d for d in subdirs
-                    if not os.path.ismount(os.path.join(root, d))]
+                    if not os.path.ismount('%s/%s' % (root, d))]
             for sfile in files:
-                slist.append(os.path.join(root, sfile))
+                slist.append('%s/%s' % (root, sfile))
         return slist
 
     def list_dirs(self, sdir, bcross=True, btopdown=True):
@@ -429,9 +429,9 @@ class Misc(object):
             if not bcross:
                 subdirs[:] = [
                     d for d in subdirs
-                    if not os.path.ismount(os.path.join(root, d))]
+                    if not os.path.ismount('%s/%s' % (root, d))]
             for d in subdirs:
-                slist.append(os.path.join(root, d))
+                slist.append('%s/%s' % (root, d))
         return slist
 
     def list_all(self, sdir, bcross=True, btopdown=True):
@@ -446,11 +446,11 @@ class Misc(object):
             if not bcross:
                 subdirs[:] = [
                     d for d in subdirs
-                    if not os.path.ismount(os.path.join(root, d))]
+                    if not os.path.ismount('%s/%s' % (root, d))]
             for d in subdirs:
-                slist.append(os.path.join(root, d))
+                slist.append('%s/%s' % (root, d))
             for sfile in files:
-                slist.append(os.path.join(root, sfile))
+                slist.append('%s/%s' % (root, sfile))
         return slist
 
     def url_normalize(self, surl, basename=False):
@@ -898,7 +898,7 @@ class Misc(object):
             self.system_command((self.whereis('bash'), '-e', '-c', \
                 'source %s && %s' % (sfile, function)), cwd=self.ROOT_DIR)
         else:
-            stmp = os.path.join(self.ROOT_DIR, 'tmpscript')
+            stmp = '%s/tmpscript' % self.ROOT_DIR
             shutil.copy(sfile, stmp)
             try:
                 self.system_chroot(('bash', '-e', '-c', \
@@ -985,7 +985,7 @@ class Inotify(object):
             return
         if recursive and os.path.isdir(path):
             for d in os.listdir(path):
-                full = os.path.join(path, d)
+                full = '%s/%s' % (path, d)
                 if not os.path.isdir(full):
                     continue
                 self.watch_add(misc.string_encode(full), mask, ignore=ignore)
