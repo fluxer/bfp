@@ -137,7 +137,9 @@ else
     echo "=== SKIPPING SPMT WHICH TEST ==="
 fi
 
-if ! grep -q "SPMT PACK" "$statefile" ;then
+if [ "$uid" != "0" ];then
+    echo "=== SKIPPING SPMT PACK TEST (REQUIRES ROOT) ==="
+elif ! grep -q "SPMT PACK" "$statefile" ;then
     echo "=== RUNNING SPMT PACK TEST ==="
     "$1" "$curdir/tools.py" pack -d "$rootdir" zlib
     echo "SPMT PACK" >> "$statefile"
