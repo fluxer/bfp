@@ -1,11 +1,5 @@
 include ../../Makefile.inc
 
-PYUIC = pyuic4
-DBSYSTEMDIR = /etc/dbus-1/system.d/
-DBSERVICEDIR = $(SHAREDIR)/dbus-1/system-services/
-APPLICATIONSDIR = $(SHAREDIR)/applications
-AUTOSTARTDIR = /etc/xdg/autostart
-
 all: bump clean
 	$(SED) -e 's|@BINDIR@|$(BINDIR)|' -e 's|@VERSION@|$(VERSION)|' \
 		spm-gui.desktop.in > spm-gui.desktop

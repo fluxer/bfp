@@ -12,6 +12,10 @@ DOCDIR = $(SHAREDIR)/doc
 SITEDIR = $(shell $(PYTHON) -c "import site; print(site.getsitepackages()[0])")
 BASHCOMPLETIONDIR = /etc/bash_completion.d/
 LOCALEDIR = $(SHAREDIR)/locale
+DBSYSTEMDIR = /etc/dbus-1/system.d/
+DBSERVICEDIR = $(SHAREDIR)/dbus-1/system-services/
+APPLICATIONSDIR = $(SHAREDIR)/applications
+AUTOSTARTDIR = /etc/xdg/autostart
 
 MACHINE = $(shell $(CC) -dumpmachine)
 ARCH = $(shell uname -m | $(SED) 's|_|-|')
@@ -44,6 +48,7 @@ MSGATTRIB = msgattrib
 MSGFMT = msgfmt
 POD2MAN = pod2man
 PYDOC = pydoc
+PYUIC = pyuic4
 
 all:
 

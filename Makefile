@@ -25,7 +25,6 @@ check:
 
 install:
 	$(MAKE) -C doc install
-	$(MAKE) -C etc install
 	$(MAKE) -C misc install
 	$(MAKE) -C scripts install
 	$(MAKE) -C src/ahws install
@@ -38,7 +37,6 @@ install:
 
 uninstall:
 	$(MAKE) -C doc uninstall
-	$(MAKE) -C etc uninstall
 	$(MAKE) -C misc uninstall
 	$(MAKE) -C scripts uninstall
 	$(MAKE) -C src/ahws uninstall

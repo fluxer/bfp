@@ -1,35 +1,20 @@
 include ../../Makefile.inc
 
 all: clean bump
-	$(CC) -shared _libudev.c \
-		$(shell pkg-config --cflags --libs $(PYTHON)) \
-		$(shell pkg-config --cflags --libs libudev) \
-		-o _libudev.so
-	$(NUITKA) --module libudev.py
 	$(NUITKA) ahws.py
-	$(STRIP) *.exe *.so
+	$(STRIP) *.exe
 
 cython: clean bump
-	# NOTE: _libudev will not work
-	$(CC) -shared _libudev.c \
-		$(shell pkg-config --cflags --libs $(PYTHON)) \
-		$(shell pkg-config --cflags --libs libudev) \
-		-o _libudev.so
-	$(CYTHON) libudev.py
 	$(CYTHON) --embed ahws.py
-	$(CC) -shared libudev.c $(shell pkg-config --cflags $(PYTHON)) -o libudev.so
 	$(CC) ahws.c $(shell pkg-config --cflags --libs $(PYTHON)) -o ahws.exe
-	$(STRIP) *.exe *.so
+	$(STRIP) *.exe
 
 install:
 	$(INSTALL) -dm755 $(DESTDIR)$(SBINDIR) $(DESTDIR)/etc/
 	$(INSTALL) -m755 ahws.exe $(DESTDIR)$(SBINDIR)/ahws
-	$(INSTALL) -m644 *.so $(DESTDIR)$(SITEDIR)/
 	$(CP) -r ahws.d/ $(DESTDIR)/etc/
 
 uninstall:
-	$(RM) $(DESTDIR)$(SITEDIR)/libudev.so
-	$(RM) $(DESTDIR)$(SITEDIR)/_libudev.so
 	$(RM) $(DESTDIR)$(SBINDIR)/ahws
 	$(RM) $(DESTDIR)/etc/ahws.d
 
