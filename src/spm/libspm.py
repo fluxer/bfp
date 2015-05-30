@@ -1252,9 +1252,9 @@ class Source(object):
                 sfull = '%s/%s' % (ROOT_DIR, sfile)
                 if backup_content[sfile] == misc.file_checksum(sfull):
                     message.sub_debug(_('Backing up'), sfile)
-                    shutil.copy2(sfile, sfile + '.backup')
+                    shutil.copy2(sfull, '%s.backup' % sfull)
                 else:
-                    message.sub_debug(_('Backup skipped'), backup)
+                    message.sub_debug(_('Backup skipped'), sfile)
 
         message.sub_info(_('Decompressing tarball'))
         misc.archive_decompress(self.target_tarball, ROOT_DIR)
