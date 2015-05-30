@@ -19,12 +19,11 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.7.6 (8b396f2)"
+app_version = "1.7.6 (308ba0c)"
 
 try:
-    import libmessage
-    message = libmessage.Message()
     import libspm
+    message = libspm.message
 
     EUID = os.geteuid()
 
@@ -207,7 +206,7 @@ try:
     class OverrideDebug(argparse.Action):
         ''' Override printing of debug messages '''
         def __call__(self, parser, namespace, values, option_string=None):
-            libmessage.DEBUG = True
+            message.DEBUG = True
             libspm.message.DEBUG = True
             setattr(namespace, self.dest, values)
 

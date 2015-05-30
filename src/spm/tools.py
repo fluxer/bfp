@@ -18,16 +18,13 @@ else:
     import http.server as HTTPServer
     import socketserver
 
-import libmessage
-message = libmessage.Message()
-import libmisc
-misc = libmisc.Misc()
-import libpackage
-database = libpackage.Database()
 import libspm
+message = libspm.message
+misc = libspm.misc
+database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.7.6 (8b396f2)"
+app_version = "1.7.6 (308ba0c)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
