@@ -767,7 +767,7 @@ class Misc(object):
             self.file_write(self.file_name(sfile, False), bfile.read())
             bfile.close()
 
-    def archive_list(self, sfile, sappend=''):
+    def archive_list(self, sfile):
         ''' Get list of files in archive '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
@@ -779,7 +779,7 @@ class Misc(object):
             try:
                 for i in tfile:
                     if not i.isdir():
-                        content.append('%s%s' % (i.name, sappend))
+                        content.append(i.name)
             finally:
                 tfile.close()
         elif zipfile.is_zipfile(sfile):

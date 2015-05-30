@@ -113,7 +113,7 @@ SPM to know that a target is installed (metadata.json and SRCBUILD). This way
 if, for whatever the reason, SPM chokes you can decompress the tarball with:
 
 	sudo tar -xapPhf /var/cache/spm/tarballs/$(uname -m)/<tarball> -C /
-	rm -f /var/cache/spm/local.json
+	sudo rm -f /var/cache/spm/local.json
  
 and it will be picked up by SPM as present on the system, no magic tricks
 needed. Keep in mind that you may have to execute the following to update the

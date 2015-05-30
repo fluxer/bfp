@@ -1205,9 +1205,11 @@ class Source(object):
         ''' Merget target to system '''
         message.sub_info(_('Indexing content'))
         old_content = database.local_metadata(self.target_name, 'footprint') or []
-        new_content = misc.archive_list(self.target_tarball, '/')
-        backup_content = database.local_metadata(self.target_name, 'backup') or {}
+        new_content = []
+        for sfile in misc.archive_list(self.target_tarball):
+            new_content.append('/%s' % sfile)
         new_content.sort()
+        backup_content = database.local_metadata(self.target_name, 'backup') or {}
 
         if CONFLICTS:
             conflict_detected = False
@@ -1249,12 +1251,15 @@ class Source(object):
         if BACKUP:
             message.sub_info(_('Creating backup files'))
             for sfile in backup_content:
-                sfull = '%s/%s' % (ROOT_DIR, sfile)
-                if backup_content[sfile] == misc.file_checksum(sfull):
-                    message.sub_debug(_('Backing up'), sfile)
+                sfull = '%s%s' % (ROOT_DIR, sfile)
+                if not os.path.isfile(sfull):
+                    message.sub_debug(_('File does not exist'), sfull)
+                    continue
+                if not backup_content[sfile] == misc.file_checksum(sfull):
+                    message.sub_debug(_('Backing up'), sfull)
                     shutil.copy2(sfull, '%s.backup' % sfull)
                 else:
-                    message.sub_debug(_('Backup skipped'), sfile)
+                    message.sub_debug(_('Backup skipped'), sfull)
 
         message.sub_info(_('Decompressing tarball'))
         misc.archive_decompress(self.target_tarball, ROOT_DIR)
