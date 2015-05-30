@@ -13,10 +13,9 @@ signal.signal(signal.SIGINT, signal.SIG_DFL)
 
 import gui_ui
 import libspm
-import libmisc, libmessage, libpackage
-database = libpackage.Database()
-message = libmessage.Message()
-misc = libmisc.Misc()
+database = libspm.database
+message = libspm.message
+misc = libspm.misc
 misc.CATCH = True
 libspm.CATCH = True
 

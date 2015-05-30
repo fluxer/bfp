@@ -6,16 +6,16 @@ if sys.version < '3':
     import ConfigParser as configparser
 else:
     import configparser
-import libmessage, libmisc, libpackage, libspm
-message = libmessage.Message()
+import libspm, libmisc
+libspm.CATCH = True
+message = libspm.message
 message.DEBUG = True
-misc = libmisc.Misc()
+misc = libspm.misc
+misc.CATCH = True
+database = libspm.database
 remote_notify = libmisc.Inotify()
 local_notify = libmisc.Inotify()
 slave_notify = libmisc.Inotify()
-database = libpackage.Database()
-misc.CATCH = True
-libspm.CATCH = True
 
 app = QtCore.QCoreApplication(sys.argv)
 dbus.mainloop.qt.DBusQtMainLoop(set_as_default=True)
