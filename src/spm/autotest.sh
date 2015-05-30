@@ -169,10 +169,18 @@ fi
 
 if ! grep -q "SPMT ONLINE" "$statefile" ;then
     echo "=== RUNNING SPMT ONLINE TEST ==="
-    "$1" "$curdir/tools.py" online
+    "$1" "$curdir/tools.py" online -u https://google.com
     echo "SPMT ONLINE" >> "$statefile"
 else
     echo "=== SKIPPING SPMT ONLINE TEST ==="
 fi
 
 # TODO: upload
+
+if ! grep -q "SPMT UPGRADE" "$statefile" ;then
+    echo "=== RUNNING SPMT UPGRADE TEST ==="
+    "$1" "$curdir/tools.py" upgrade
+    echo "SPMT UPGRADE" >> "$statefile"
+else
+    echo "=== SKIPPING SPMT UPGRADE TEST ==="
+fi

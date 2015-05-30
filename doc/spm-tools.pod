@@ -6,7 +6,7 @@ spm-tools - Source Package Manager Tools
 
 	spm-tools [-h] [--debug] [--version]
                  {dist,check,clean,lint,sane,merge,edit,which,pack,pkg,serve,
-                 disowned,upload,online}
+                 disowned,upload,online,upgrade}
 
 =head1 DESCRIPTION
 
