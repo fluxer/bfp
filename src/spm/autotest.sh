@@ -177,7 +177,9 @@ fi
 
 # TODO: upload
 
-if ! grep -q "SPMT UPGRADE" "$statefile" ;then
+if [ "$uid" != "0" ];then
+    echo "=== SKIPPING SPMT UPGRADE TEST (REQUIRES ROOT) ==="
+elif ! grep -q "SPMT UPGRADE" "$statefile" ;then
     echo "=== RUNNING SPMT UPGRADE TEST ==="
     "$1" "$curdir/tools.py" upgrade
     echo "SPMT UPGRADE" >> "$statefile"
