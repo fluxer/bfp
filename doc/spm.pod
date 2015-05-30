@@ -146,9 +146,16 @@ implemented later on.
 
 positional arguments:
   {repo,remote,source,binary,local,who}
+  repo                  Clean, sync, cache, prune and/or check repositories
+                        for updates
+  remote                Get remote targets metadata
+  source                Build software from source code
+  binary                Install software from pre-build tarballs
+  local                 Get local targets metadata
+  who                   Get owner of files via regular expression
 
 optional arguments:
-  -h, --help            show this help message and exit
+  -h, --help            Show this help message and exit
   --cache CACHE         Change cache directory
   --build BUILD         Change build directory
   --root ROOT           Change system root directory

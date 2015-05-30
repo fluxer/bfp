@@ -218,7 +218,8 @@ try:
         epilog=_('NOTE: Some features are available only to the root user.'))
     subparsers = parser.add_subparsers(dest='mode')
 
-    repo_parser = subparsers.add_parser('repo')
+    repo_parser = subparsers.add_parser('repo', \
+        help=_('Clean, sync, cache, prune and/or check repositories for updates'))
     repo_parser.add_argument('-c', '--clean', action='store_true', \
         help=_('Purge repositories'))
     repo_parser.add_argument('-s', '--sync', action='store_true', \
@@ -232,7 +233,8 @@ try:
     repo_parser.add_argument('-a', '--all', action='store_true', \
         help=_('Short for clean, sync, cache, prune and update'))
 
-    remote_parser = subparsers.add_parser('remote')
+    remote_parser = subparsers.add_parser('remote', \
+        help=_('Get remote targets metadata'))
     remote_parser.add_argument('-n', '--name', action='store_true', \
         help=_('Show target name'))
     remote_parser.add_argument('-v', '--version', action='store_true', \
@@ -260,7 +262,8 @@ try:
     remote_parser.add_argument('PATTERN', type=str, \
         help=_('Pattern to search for in remote targets'))
 
-    source_parser = subparsers.add_parser('source')
+    source_parser = subparsers.add_parser('source', \
+        help=_('Build software from source code'))
     source_parser.add_argument('-C', '--clean', action='store_true', \
         help=_('Purge sources and compiled files of target'))
     source_parser.add_argument('-f', '--fetch', action='store_true', \
@@ -288,7 +291,8 @@ try:
     source_parser.add_argument('TARGETS', nargs='+', type=str, \
         help=_('Targets to apply actions on'))
 
-    binary_parser = subparsers.add_parser('binary')
+    binary_parser = subparsers.add_parser('binary', \
+        help=_('Install software from pre-build tarballs'))
     binary_parser.add_argument('-f', '--fetch', action='store_true', \
         help=_('Fetch binaries of target'))
     binary_parser.add_argument('-p', '--prepare', action='store_true', \
@@ -308,7 +312,8 @@ try:
     binary_parser.add_argument('TARGETS', nargs='+', type=str, \
         help=_('Targets to apply actions on'))
 
-    local_parser = subparsers.add_parser('local')
+    local_parser = subparsers.add_parser('local', \
+        help=_('Get local targets metadata'))
     local_parser.add_argument('-n', '--name', action='store_true', \
         help=_('Show target name'))
     local_parser.add_argument('-v', '--version', action='store_true', \
@@ -333,7 +338,8 @@ try:
     local_parser.add_argument('PATTERN', type=str, \
         help=_('Pattern to search for in local targets'))
 
-    who_parser = subparsers.add_parser('who')
+    who_parser = subparsers.add_parser('who', \
+        help=_('Get owner of files via regular expression'))
     who_parser.add_argument('-p', '--plain', action='store_true', \
         help=_('Print in plain format'))
     who_parser.add_argument('PATTERN', type=str, \
