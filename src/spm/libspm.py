@@ -1146,15 +1146,15 @@ class Source(object):
 
         if self.python_compile:
             message.sub_info(_('Byte-compiling Python modules'))
-            for sfile in target_content:
-                for spath in site.getsitepackages():
-                    if not spath in sfile:
-                        continue
-                    message.sub_debug(_('Compiling Python file'), sfile)
-                    # force build the caches to prevent access time issues with
-                    # .pyc files being older that .py files because .py files
-                    # where modified after the usual installation procedure
-                    compileall.compile_file(sfile, force=True, quiet=True)
+            for spath in site.getsitepackages():
+                sfull = '%s/%s' % (self.install_dir, spath)
+                if not os.path.exists(sfull):
+                    continue
+                message.sub_debug(_('Compiling Python files'), sfull)
+                # force build the caches to prevent access time issues with
+                # .pyc files being older that .py files because .py files
+                # where modified after the usual installation procedure
+                compileall.compile_dir(sfull, force=True, quiet=True)
 
         message.sub_info(_('Assembling metadata'))
         metadata = '%s/%s' % (self.install_dir, self.target_metadata)
