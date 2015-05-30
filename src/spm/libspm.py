@@ -161,7 +161,8 @@ class Local(object):
     ''' Class for printing local targets metadata '''
     def __init__(self, pattern, do_name=False, do_version=False, \
         do_release=False, do_description=False, do_depends=False, \
-        do_reverse=False, do_size=False, do_footprint=False, plain=False):
+        do_reverse=False, do_size=False, do_footprint=False, do_backup=False, \
+        plain=False):
         self.pattern = pattern
         self.do_name = do_name
         self.do_version = do_version
@@ -171,6 +172,7 @@ class Local(object):
         self.do_reverse = do_reverse
         self.do_size = do_size
         self.do_footprint = do_footprint
+        self.do_backup = do_backup
         self.plain = plain
         message.CATCH = CATCH
         misc.OFFLINE = OFFLINE
@@ -244,6 +246,14 @@ class Local(object):
                         print(data)
                     else:
                         message.sub_info(_('Footprint'), data)
+
+                if self.do_backup:
+                    data = database.local_metadata(target, 'backup')
+                    data = misc.string_convert(data)
+                    if self.plain:
+                        print(data)
+                    else:
+                        message.sub_info(_('Backup'), data)
         message.LOG = msglog
 
 
@@ -1149,20 +1159,25 @@ class Source(object):
         message.sub_info(_('Assembling metadata'))
         metadata = '%s/%s' % (self.install_dir, self.target_metadata)
         misc.dir_create(os.path.dirname(metadata))
+        # due to creations and deletions of files, when byte-compiling
+        # Python modules for an example, do not re-use target_content
+        footprint = []
+        backup = {}
+        for sfile in misc.list_files(self.install_dir):
+            sstripped = sfile.replace(self.install_dir, '')
+            # remove local target files, they are not wanted in the footprint
+            if sfile.endswith(self.target_metadata):
+                continue
+            footprint.append(sstripped)
+            if sfile.endswith('.conf') or sstripped in self.target_backup:
+                backup[sstripped] = misc.file_checksum(sfile)
         data = {}
         data['version'] = self.target_version
         data['release'] = self.target_release
         data['description'] = self.target_description
         data['depends'] = self.target_depends
+        data['backup'] = backup
         data['size'] = misc.dir_size(self.install_dir)
-        # due to creations and deletions of files, when byte-compiling
-        # Python modules for an example, do not re-use target_content
-        footprint = []
-        for sfile in misc.list_files(self.install_dir):
-            # remove local target files, they are not wanted in the footprint
-            if sfile.endswith(self.target_metadata):
-                continue
-            footprint.append(sfile.replace(self.install_dir, ''))
         data['footprint'] = footprint
         f = open(metadata, 'w')
         try:
@@ -1190,25 +1205,8 @@ class Source(object):
         ''' Merget target to system '''
         message.sub_info(_('Indexing content'))
         old_content = database.local_metadata(self.target_name, 'footprint') or []
-        new_content = []
-        backup_content = []
-        tarf = tarfile.open(self.target_tarball)
-        try:
-            for i in tarf:
-                if not i.isdir():
-                    new_content.append('/%s' % i.name)
-                    sfull = '%s/%s' % (ROOT_DIR, i.name)
-                    if not os.path.isfile(sfull) or os.path.islink(sfull):
-                        continue
-                    if i.name.endswith('.conf') or i.name in self.target_backup:
-                        t = tarf.extractfile(i.name)
-                        try:
-                            if not misc.file_read(sfull) == t.read():
-                                backup_content.append(sfull)
-                        finally:
-                            t.close()
-        finally:
-            tarf.close()
+        new_content = misc.archive_list(self.target_tarball, '/')
+        backup_content = database.local_metadata(self.target_name, 'backup') or {}
         new_content.sort()
 
         if CONFLICTS:
@@ -1251,10 +1249,11 @@ class Source(object):
         if BACKUP:
             message.sub_info(_('Creating backup files'))
             for sfile in backup_content:
-                message.sub_debug(_('Backing up'), sfile)
-                shutil.copy2(sfile, sfile + '.backup')
-            for backup in self.target_backup:
-                if not backup in backup_content:
+                sfull = '%s/%s' % (ROOT_DIR, sfile)
+                if backup_content[sfile] == misc.file_checksum(sfull):
+                    message.sub_debug(_('Backing up'), sfile)
+                    shutil.copy2(sfile, sfile + '.backup')
+                else:
                     message.sub_debug(_('Backup skipped'), backup)
 
         message.sub_info(_('Decompressing tarball'))

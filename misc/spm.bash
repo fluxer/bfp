@@ -30,7 +30,7 @@ _spm()
 
     local_options='-h --help -n --name -v --version -R --release
         -d --description -D --depends -r --reverse -s --size -f --footprint
-        -p --plain'
+        -b --backup -p --plain'
 
     who_options='-h --help -p --plain'
 

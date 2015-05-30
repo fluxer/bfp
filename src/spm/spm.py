@@ -326,6 +326,8 @@ try:
         help=_('Show target size'))
     local_parser.add_argument('-f', '--footprint', action='store_true', \
         help=_('Show target footprint'))
+    local_parser.add_argument('-b', '--backup', action='store_true', \
+        help=_('Show target backup'))
     local_parser.add_argument('-p', '--plain', action='store_true', \
         help=_('Print in plain format'))
     local_parser.add_argument('PATTERN', type=str, \
@@ -541,11 +543,13 @@ try:
             message.sub_info(_('REVERSE'), ARGS.reverse)
             message.sub_info(_('SIZE'), ARGS.size)
             message.sub_info(_('FOOTPRINT'), ARGS.footprint)
+            message.sub_info(_('BACKUP'), ARGS.backup)
             message.sub_info(_('PATTERN'), ARGS.PATTERN)
             message.info(_('Poking locals...'))
         m = libspm.Local(ARGS.PATTERN, ARGS.name, ARGS.version, \
                 ARGS.release, ARGS.description, ARGS.depends, \
-                ARGS.reverse, ARGS.size, ARGS.footprint, ARGS.plain)
+                ARGS.reverse, ARGS.size, ARGS.footprint, \
+                ARGS.backup, ARGS.plain)
         m.main()
 
     elif ARGS.mode == 'who':

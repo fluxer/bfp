@@ -15,7 +15,7 @@ to monitor for file/directory changes on filesystems.
 '''
 
 import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, inspect
-import types, gzip, bz2, time, ctypes, ctypes.util, getpass, base64
+import types, gzip, bz2, time, ctypes, ctypes.util, getpass, base64, hashlib
 from struct import unpack
 from fcntl import ioctl
 from termios import FIONREAD
@@ -293,6 +293,14 @@ class Misc(object):
             self.typecheck(sfile, (types.StringTypes))
 
         self.file_write(sfile, re.sub(string, string2, self.file_read(sfile)))
+
+    def file_checksum(self, sfile, method='sha256'):
+        ''' Return a hex checksum of file '''
+        if self.python2:
+            self.typecheck(sfile, (types.StringTypes))
+            self.typecheck(method, (types.StringTypes))
+
+        return getattr(hashlib, method)(self.file_read(sfile)).hexdigest()
 
     def gpg_receive(self, lkeys, lservers=None):
         ''' Import PGP keys as (somewhat) trusted '''
@@ -759,7 +767,7 @@ class Misc(object):
             self.file_write(self.file_name(sfile, False), bfile.read())
             bfile.close()
 
-    def archive_list(self, sfile):
+    def archive_list(self, sfile, sappend=''):
         ''' Get list of files in archive '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
@@ -771,7 +779,7 @@ class Misc(object):
             try:
                 for i in tfile:
                     if not i.isdir():
-                        content.append(i.name)
+                        content.append('%s%s' % (i.name, sappend))
             finally:
                 tfile.close()
         elif zipfile.is_zipfile(sfile):

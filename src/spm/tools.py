@@ -543,17 +543,12 @@ class Merge(object):
     def main(self):
         for target in self.targets:
             message.sub_info(_('Checking'), target)
-            backups = database.remote_metadata(target, 'backup')
-            if not backups:
-                backups = []
-            for sfile in database.local_metadata(target, 'footprint'):
-                if sfile.endswith('.conf'):
-                    backups.append(sfile)
-
-            for sfile in backups:
+            backup = database.local_metadata(target, 'backup') or {}
+            for sfile in backup:
                 origfile = '%s/%s' % (libspm.ROOT_DIR, sfile)
                 backfile = '%s.backup' % origfile
                 if os.path.isfile(origfile) and os.path.isfile(backfile):
+                    # the checksums are not used since the backup file can be edited
                     if misc.file_read(origfile) == misc.file_read(backfile):
                         message.sub_debug('Original and backup are not different', origfile)
                         continue
