@@ -830,10 +830,18 @@ class Upgrade(object):
         data['backup'] = dbackup
         misc.json_write(metadata, data)
 
+    def upgrade_cache(self):
+        ''' Upgrade SPM caches '''
+        message.sub_info(_('Caching remote metadata'))
+        database._build_remote_cache(True)
+        message.sub_info(_('Caching local metadata'))
+        database._build_local_cache(True)
+
     def main(self):
         for target in database.local_all():
             self.upgrade_1_7_x(target)
             self.upgrade_backup(target)
+        self.upgrade_cache()
 
 
 try:
