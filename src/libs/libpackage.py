@@ -192,7 +192,6 @@ class Database(object):
 
         if os.path.isfile('%s/SRCBUILD' % target):
             return target
-
         for rtarget in self.remote_all():
             if rtarget == target or rtarget.endswith('/%s' % target):
                 return rtarget
@@ -326,16 +325,15 @@ class Database(object):
             misc.typecheck(key, (types.StringTypes))
 
         srcbuild = '%s/SRCBUILD' % target
-        if os.path.isfile(srcbuild):
-            return getattr(SRCBUILD(srcbuild), key)
         match = self.remote_search(target)
-        if match:
+        if match and self.REMOTE_CACHE.has_key(match):
             return self.REMOTE_CACHE[match][key]
+        elif os.path.isfile(srcbuild):
+            return getattr(SRCBUILD(srcbuild), key)
         # for consistency
-        for k in ('depends', 'makedepends', 'checkdepends', 'sources', \
+        if key in ('depends', 'makedepends', 'checkdepends', 'sources', \
             'options', 'backup', 'pgpkeys'):
-            if key == k:
-                return []
+            return []
 
     def remote_aliases(self, basename=True):
         ''' Returns basename of all aliases '''

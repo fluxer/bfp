@@ -793,7 +793,7 @@ class Misc(object):
         return content
 
     def system_communicate(self, command, shell=False, cwd=None, sinput=None):
-        ''' Send input to external utility '''
+        ''' Get output and optionally send input to external utility '''
         if self.python2:
             self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
             self.typecheck(sinput, (types.NoneType, types.StringTypes))
@@ -805,7 +805,6 @@ class Misc(object):
             cwd = self.dir_current()
         elif not os.path.isdir(cwd):
             cwd = '/'
-
         if isinstance(command, str) and not shell:
             command = shlex.split(command)
         pipe = subprocess.Popen(command, stdin=subprocess.PIPE, \
@@ -913,7 +912,7 @@ class Misc(object):
             self.typecheck(shell, (types.BooleanType))
 
         if self.ROOT_DIR == '/':
-            self.system_command(command, shell=shell, cwd=self.ROOT_DIR)
+            self.system_command(command, shell=shell, cwd='/')
         else:
             self.system_chroot(command, shell=shell)
 
