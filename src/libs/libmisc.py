@@ -815,11 +815,13 @@ class Misc(object):
         elif smime == 'application/x-xz' or smime == 'application/x-lzma':
             bsdtar = self.whereis('bsdtar', fallback=False)
             if bsdtar:
-                content = self.system_communicate((bsdtar, '-tf', \
-                    sfile)).splitlines()
+                for line in self.system_communicate((bsdtar, '-tpf', \
+                    sfile)).splitlines():
+                    content.append(line.lstrip('./'))
             else:
-                content = self.system_communicate((self.whereis('tar'), \
-                    '-tf', sfile)).splitlines()
+                for line in self.system_communicate((self.whereis('tar'), \
+                    '-tf', sfile)).splitlines():
+                    content.append(line.lstrip('./'))
         elif smime == 'application/x-gzip':
             content = self.file_name(sfile, True).split()
         elif smime == 'application/x-bzip2':
