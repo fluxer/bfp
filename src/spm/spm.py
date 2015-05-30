@@ -19,7 +19,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.7.6 (308ba0c)"
+app_version = "1.7.6 (008520a)"
 
 try:
     import libspm

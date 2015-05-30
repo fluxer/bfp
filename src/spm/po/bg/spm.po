@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-05-30 05:58+0100\n"
+"POT-Creation-Date: 2015-05-30 06:56+0100\n"
 "PO-Revision-Date: 2015-05-19 03:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -393,8 +393,8 @@ msgid "Byte-compiling Python modules"
 msgstr "Байт-компилиране на Python модули"
 
 #: libspm.py:1153
-msgid "Compiling Python file"
-msgstr "Компилиране на Python файл"
+msgid "Compiling Python directory"
+msgstr ""
 
 #: libspm.py:1159
 msgid "Assembling metadata"

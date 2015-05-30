@@ -324,7 +324,7 @@ class Misc(object):
 
         f = open(sfile, mode)
         try:
-            json.dump(content, f)
+            json.dump(content, f, indent=4)
         finally:
             f.close()
 

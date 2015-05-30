@@ -1150,7 +1150,7 @@ class Source(object):
                 sfull = '%s/%s' % (self.install_dir, spath)
                 if not os.path.exists(sfull):
                     continue
-                message.sub_debug(_('Compiling Python files'), sfull)
+                message.sub_debug(_('Compiling Python directory'), sfull)
                 # force build the caches to prevent access time issues with
                 # .pyc files being older that .py files because .py files
                 # where modified after the usual installation procedure
