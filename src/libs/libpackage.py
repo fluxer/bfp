@@ -326,7 +326,7 @@ class Database(object):
 
         srcbuild = '%s/SRCBUILD' % target
         match = self.remote_search(target)
-        if match and self.REMOTE_CACHE.has_key(match):
+        if match and match in self.REMOTE_CACHE:
             return self.REMOTE_CACHE[match][key]
         elif os.path.isfile(srcbuild):
             return getattr(SRCBUILD(srcbuild), key)
