@@ -22,21 +22,21 @@ spm - Source Package Manager
 
 Source Package Manager (SPM) manages targets, or packages, build from source
 code. It has a binary mode to install pre-build software due to popular demand
-too but it was designed to fetches, extracts, builds and installs the compiled
-files on the system. What it does using different approach is that SPM detects
-library dependencies at install time so that dependencies are resolved in
-matter of what is needed by the library and binary files of the target by
-running `scanelf` on them, checking if the library is in the target itself,
-in local (installed) target or not in managed target. This ensures that all
-runtime libraries will be present and the dependencies are not "static",
-usually added to metadata file, keeping the system off of broken applications
-because of missing runtime dependencies and reducing the work needed on
-packaging. Also, it probes for scripting languages such as Bash or Python by
-looking for shebangs in the compiled files. Note that extra (runtime time,
-as well as make) dependencies can still be specified and are checked for at
-the prepare stage but they are useful only when bootstrapping the software
-because software and more importantly its dependencies change and upon upgrade
-they are, in some cases, incomplete or non-valid. An example is gtk2 - according
+too but it was designed to fetch, extract, build and install compiled files on
+the system. What it does using different approach is that SPM detects library
+dependencies at install time so that dependencies are resolved in matter of
+what is needed by the library and binary files of the target by running
+`scanelf` on them, checking if the library is in the target itself, in local
+(installed) target or not in managed target. This ensures that all runtime
+libraries will be present and the dependencies are not "static", usually added
+to metadata file, keeping the system off of broken applications because of
+missing runtime dependencies and reducing the work needed on packaging. Also,
+it probes for scripting languages such as Bash or Python by looking for
+shebangs in the files. Note that extra (runtime time, as well as make)
+dependencies can still be specified and are checked for at the prepare stage
+but they are useful only when bootstrapping as software and more importantly
+its dependencies usually change upon upgrade from one release to another making
+them, in some cases, incomplete or non-valid. An example is gtk2 - according
 to Pacman it has the following dependencies:
 
 	atk pango xorg-libraries cairo gdk-pixbuf
@@ -51,22 +51,26 @@ This ensures that dependencies are utilized at their best for consistency.
 Of course this can be achieved with other package managers too but it's much
 more work, SPM makes your life easier and keeps your system safe.
 
-All metadata is stored in plain text not database files, while this increases
-the disk I/O it makes it possible to easily recover from disasters and fix
-issues in cases SPM is not being able to handle such as missing Python runtime
-library for whatever the reason. Do note that SPM caches internally the files
-content (footprints, metadatas and SRCBUILDs) in memory and rebuilds the caches
-when needed to reduce the lookup overheath. The cache itself is build only when
-needed too (on the first lookup) in a JIT (Just In Time) fashion.
+All metadata is stored in JSON files separate for each software, while this
+increases the disk I/O slightely it makes it possible to easily recover from
+disasters and fix issues in cases SPM is not being able to handle such as
+missing Python runtime library for whatever the reason. Do note that SPM caches
+internally the files content (metadatas and SRCBUILDs) in a single JSON file 
+which is loaded into the memory and rebuilds the caches when needed to reduce
+the lookup overheath. The cache itself is build only when needed too (on the
+first lookup) in a JIT (Just In Time) fashion.
 
 Remote sources (files, such as tarballs) are being checked after they are
 fetched by comparing the remote and local file size instead of using checksums
 as most Package Managers do to avoid the need of updating the checksums in the
 build recope (SRCBUILD) whenever a local source file, shipped with the target
 files, is updated (makepkg -g >> PKGBUILD anyone?). Note that security wise this
-is not a good approach as there is no way to know whether the remote file size
-has changed since the last time it was requested which means an attacker can
-exploit this and modify the file content.
+is not a good approach as there is no easy way for an administrator to know
+whether the remote file size has changed since the last time it was requested
+which means an attacker can exploit this and modify the file content and
+feeding it to SPM. As a protection SPM supports checking OpenPGP signatures
+when available but that is up to the host to provide and packager to support
+by adding the singature URL to the sources array in the SRCBUILD.
 
 Using Source Package Manager and following the LFS/BLFS book you can tailor a
 system exactly to your liking without keeping track of what links against what
@@ -105,10 +109,11 @@ preserve your changes right after merge.
 
 After compiling and installing the software (to temporary location), a tarball
 of the installed files is created. It also contains the information needed for
-SPM to know that a target is installed (metadata and footprint). This way if,
-for whatever the reason, SPM chokes you can decompress the tarball with:
+SPM to know that a target is installed (metadata.json and SRCBUILD). This way
+if, for whatever the reason, SPM chokes you can decompress the tarball with:
 
-	tar -xapPhf /var/cache/spm/tarballs/<tarball>
+	sudo tar -xapPhf /var/cache/spm/tarballs/$(uname -m)/<tarball> -C /
+	rm -f /var/cache/spm/local.json
  
 and it will be picked up by SPM as present on the system, no magic tricks
 needed. Keep in mind that you may have to execute the following to update the
