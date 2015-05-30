@@ -4,7 +4,7 @@ import gettext
 _ = gettext.translation('spm', fallback=True).gettext
 
 import sys, argparse, subprocess, tarfile, zipfile, shutil, os, re, difflib
-import pwd, grp, ftplib, json
+import pwd, grp, ftplib
 if sys.version < '3':
     import ConfigParser as configparser
     from urllib2 import HTTPError
@@ -27,7 +27,7 @@ database = libpackage.Database()
 import libspm
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.7.6 (43facf5)"
+app_version = "1.7.6 (8b396f2)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -809,11 +809,7 @@ class Upgrade(object):
                 if key == 'depends':
                     value = value.split()
                 data[key] = value
-        f = open('%s/metadata.json' % target, 'w')
-        try:
-            json.dump(data, f)
-        finally:
-            f.close()
+        misc.json_write('%s/metadata.json' % target, data)
 
     def upgrade_backup(self, target):
         ''' Ensure local targets have the backup data in place '''
@@ -821,27 +817,19 @@ class Upgrade(object):
         if not os.path.isfile(metadata):
             message.sub_warning(_('Invalid target'), target)
             return
-        backup = database.remote_metadata(target, 'backup') or []
-        dbackup = {}
-        f = open(metadata, 'r')
-        try:
-            data = json.load(f)
-        finally:
-            f.close()
+        data = misc.json_read(metadata)
         if 'backup' in data:
             message.sub_info(_('Target already migrated (backup)'), target)
             return
+        backup = database.remote_metadata(target, 'backup') or []
+        dbackup = {}
         message.sub_info(_('Migrating remote backup to local'), target)
         for sfile in database.local_metadata(target, 'footprint'):
             if sfile.endswith('.conf') or sfile.lstrip('/') in backup:
                 if os.path.isfile(sfile):
                     dbackup[sfile] = misc.file_checksum(sfile)
         data['backup'] = dbackup
-        f = open(metadata, 'w')
-        try:
-            json.dump(data, f)
-        finally:
-            f.close()
+        misc.json_write(metadata, data)
 
     def main(self):
         for target in database.local_all():

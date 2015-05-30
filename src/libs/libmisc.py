@@ -14,7 +14,7 @@ to monitor for file/directory changes on filesystems.
 
 '''
 
-import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, inspect
+import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, inspect, json
 import types, gzip, bz2, time, ctypes, ctypes.util, getpass, base64, hashlib
 from struct import unpack
 from fcntl import ioctl
@@ -301,6 +301,32 @@ class Misc(object):
             self.typecheck(method, (types.StringTypes))
 
         return getattr(hashlib, method)(self.file_read(sfile)).hexdigest()
+
+    def json_read(self, sfile):
+        ''' Get JSON file content '''
+        if self.python2:
+            self.typecheck(sfile, (types.StringTypes))
+
+        content = None
+        f = open(sfile, 'r')
+        try:
+            content = json.load(f)
+        finally:
+            f.close()
+        return content
+
+    def json_write(self, sfile, content, mode='w'):
+        ''' Write data to JSON file safely '''
+        if self.python2:
+            self.typecheck(sfile, (types.StringTypes))
+            self.typecheck(content, (types.StringTypes))
+            self.typecheck(mode, (types.StringTypes))
+
+        f = open(sfile, mode)
+        try:
+            json.dump(data, f)
+        finally:
+            f.close()
 
     def gpg_receive(self, lkeys, lservers=None):
         ''' Import PGP keys as (somewhat) trusted '''

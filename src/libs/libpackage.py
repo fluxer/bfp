@@ -13,7 +13,7 @@ SRCBUILD() is Source Package Manager recipes (SRCBUILDs) parser.
 
 '''
 
-import os, sys, re, shlex, types, json
+import os, sys, re, shlex, types
 from distutils.version import LooseVersion
 
 import libmisc
@@ -47,8 +47,7 @@ class Database(object):
         if os.path.isfile(cachefile) and not force:
             fallback = False
             try:
-                cf = open(cachefile, 'r')
-                self.LOCAL_CACHE = json.load(cf)
+                self.LOCAL_CACHE = misc.json_read(cachefile)
             except:
                 os.unlink(cachefile)
                 fallback = True
@@ -59,15 +58,10 @@ class Database(object):
             metadata = '%s/metadata.json' % sdir
             srcbuild = '%s/SRCBUILD' % sdir
             if os.path.isfile(metadata) and os.path.isfile(srcbuild):
-                f = open(metadata, 'r')
-                try:
-                    self.LOCAL_CACHE[sdir] = json.load(f)
-                finally:
-                    f.close()
+                self.LOCAL_CACHE[sdir] = misc.json_read(metadata)
 
         if os.access(self.CACHE_DIR, os.W_OK):
-            with open(cachefile, 'w') as f:
-                json.dump(self.LOCAL_CACHE, f)
+            misc.json_write(cachefile, self.LOCAL_CACHE)
         # print(sys.getsizeof(self.LOCAL_CACHE))
 
     def _build_remote_cache(self, force=False):
@@ -78,8 +72,7 @@ class Database(object):
         if os.path.isfile(cachefile) and not force:
             fallback = False
             try:
-                cf = open(cachefile, 'r')
-                self.REMOTE_CACHE = json.load(cf)
+                self.REMOTE_CACHE = misc.json_read(cachefile)
             except:
                 os.unlink(cachefile)
                 fallback = True
@@ -104,8 +97,7 @@ class Database(object):
                 }
 
         if os.access(self.CACHE_DIR, os.W_OK):
-            with open(cachefile, 'w') as f:
-                json.dump(self.REMOTE_CACHE, f)
+            misc.json_write(cachefile, self.REMOTE_CACHE)
         # print(sys.getsizeof(self.REMOTE_CACHE))
 
     def remote_all(self, basename=False):
