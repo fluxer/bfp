@@ -3,7 +3,7 @@
 import gettext
 _ = gettext.translation('spm', fallback=True).gettext
 
-import sys, os, shutil, re, compileall, site, tarfile
+import sys, os, shutil, re, compileall, site
 from datetime import datetime
 if sys.version < '3':
     import ConfigParser as configparser
@@ -922,7 +922,7 @@ class Source(object):
         # re-create host system symlinks to prevent mismatch of entries in the
         # footprint and ld.so.cache for libraries leading to undetectable
         # runtime dependencies
-        for libdir in ('/lib64', '/usr/lib64'):
+        for libdir in ('/lib64', '/usr/lib64', '/lib32', '/usr/lib32'):
             realdir = os.path.realpath(libdir)
             instsym = '%s%s' % (self.install_dir, libdir)
             instreal = '%s%s' % (self.install_dir, realdir)
@@ -934,7 +934,7 @@ class Source(object):
             self.srcbuild + ' && umask 0022 && src_install'), \
             cwd=self.source_dir)
 
-        for libdir in ('/lib64', '/usr/lib64'):
+        for libdir in ('/lib64', '/usr/lib64', '/lib32', '/usr/lib32'):
             realdir = os.path.realpath(libdir)
             instsym = '%s%s' % (self.install_dir, libdir)
             instreal = '%s%s' % (self.install_dir, realdir)

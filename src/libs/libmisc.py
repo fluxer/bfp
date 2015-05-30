@@ -519,8 +519,8 @@ class Misc(object):
 
         for url in lurls:
             try:
-                p = urlopen(url, timeout=self.TIMEOUT)
-                p.close()
+                r = self.fetch_request(url)
+                r.close()
                 return True
             except (URLError, BadStatusLine):
                 pass
