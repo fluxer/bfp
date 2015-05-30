@@ -3,16 +3,16 @@
 import gettext
 _ = gettext.translation('spm', fallback=True).gettext
 
-import sys, os, shutil, re, compileall, site, tarfile, json
+import sys, os, shutil, re, compileall, site, tarfile
 from datetime import datetime
 if sys.version < '3':
     import ConfigParser as configparser
 else:
     import configparser
 
-import libmessage, libmisc, libpackage
+import libmessage, libpackage
 message = libmessage.Message()
-misc = libmisc.Misc()
+misc = libpackage.misc
 database = libpackage.Database()
 
 
@@ -1179,11 +1179,7 @@ class Source(object):
         data['backup'] = backup
         data['size'] = misc.dir_size(self.install_dir)
         data['footprint'] = footprint
-        f = open(metadata, 'w')
-        try:
-            json.dump(data, f)
-        finally:
-            f.close()
+        misc.json_write(metadata, data)
 
         message.sub_info(_('Assembling SRCBUILD'))
         misc.file_write('%s/%s' % (self.install_dir, self.target_srcbuild), \
@@ -1253,7 +1249,7 @@ class Source(object):
             for sfile in backup_content:
                 sfull = '%s%s' % (ROOT_DIR, sfile)
                 if not os.path.isfile(sfull):
-                    message.sub_debug(_('File does not exist'), sfull)
+                    message.sub_warning(_('File does not exist'), sfull)
                     continue
                 if not backup_content[sfile] == misc.file_checksum(sfull):
                     message.sub_debug(_('Backing up'), sfull)

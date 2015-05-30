@@ -316,15 +316,15 @@ class Misc(object):
         return content
 
     def json_write(self, sfile, content, mode='w'):
-        ''' Write data to JSON file safely '''
+        ''' Write data to JSON file '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
-            self.typecheck(content, (types.StringTypes))
+            # self.typecheck(content, (types.StringTypes))
             self.typecheck(mode, (types.StringTypes))
 
         f = open(sfile, mode)
         try:
-            json.dump(data, f)
+            json.dump(content, f)
         finally:
             f.close()
 

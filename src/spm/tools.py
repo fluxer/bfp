@@ -828,6 +828,8 @@ class Upgrade(object):
             if sfile.endswith('.conf') or sfile.lstrip('/') in backup:
                 if os.path.isfile(sfile):
                     dbackup[sfile] = misc.file_checksum(sfile)
+                else:
+                    message.sub_warning(_('File does not exist'), sfile)
         data['backup'] = dbackup
         misc.json_write(metadata, data)
 

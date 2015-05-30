@@ -24,8 +24,6 @@ app_version = "1.7.6 (8b396f2)"
 try:
     import libmessage
     message = libmessage.Message()
-    import libmisc
-    misc = libmisc.Misc()
     import libspm
 
     EUID = os.geteuid()
