@@ -39,31 +39,6 @@ class Database(object):
         if os.path.isdir(self.LOCAL_DIR):
             notify.watch_add(self.LOCAL_DIR)
 
-    def _build_local_plain(self, sdir):
-        ''' Build local target cache from legacy metadata and footprint '''
-        # TODO: drop with spm >=1.9.x
-        metadata = '%s/metadata' % sdir
-        footprint = '%s/footprint' % sdir
-        if not os.path.isfile(metadata) or not os.path.isfile(footprint):
-            return
-        data = {}
-        data['footprint'] = misc.file_readlines(footprint)
-        for line in misc.file_readlines(metadata):
-            line = misc.string_encode(line)
-            if line.startswith(('version=', 'release=', \
-                'description=', 'depends=', 'size=')):
-                key, value = line.split('=')
-                if key == 'depends':
-                    value = value.split()
-                data[key] = value
-        self.LOCAL_CACHE[sdir] = data
-        if os.access(sdir, os.W_OK):
-            f = open('%s/metadata.json' % sdir, 'w')
-            try:
-                json.dump(data, f)
-            finally:
-                f.close()
-
     def _build_local_cache(self, force=False):
         ''' Build internal local database cache '''
         self.LOCAL_CACHE = {}
@@ -89,8 +64,6 @@ class Database(object):
                     self.LOCAL_CACHE[sdir] = json.load(f)
                 finally:
                     f.close()
-            else:
-                self._build_local_plain(sdir)
 
         if os.access(self.CACHE_DIR, os.W_OK):
             with open(cachefile, 'w') as f:

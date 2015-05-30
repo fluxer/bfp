@@ -44,6 +44,8 @@ _spm_tools()
 
     online_options='-u --url -h --help'
 
+    upgrade_options='-h --help'
+
     _get_comp_words_by_ref cur prev
     _get_first_arg
 
@@ -77,6 +79,8 @@ _spm_tools()
         COMPREPLY=($(compgen -W "${upload_options}" -- "${cur}"))
     elif [[ ${arg} = upload ]];then
         COMPREPLY=($(compgen -W "${online_options}" -- "${cur}"))
+    elif [[ ${arg} = upgrade ]];then
+        COMPREPLY=($(compgen -W "${upgrade_options}" -- "${cur}"))
     fi
 }
 

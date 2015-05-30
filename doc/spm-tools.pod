@@ -62,12 +62,18 @@ Binary tarballs can be uploaded via FTP/FTPS to mirrors via upload mode.
 
 Checking if the system can access the internet can be done via online mode.
 
+Migrating local targets metadata from old SPM version to newer can be done via
+upgrade mode. It is safe to run multiple times and is ment to valuable only on
+host upgrading from SPM v1.7.x. It is available on versions newer than SPM
+v1.7.x.
+
 =head1 OPTIONS
 
 =head2 MAIN
 
 positional arguments:
-  {dist,check,clean,lint,sane,merge,edit,which,pack,pkg,serve,disowned}
+  {dist,check,clean,lint,sane,merge,edit,which,pack,pkg,serve,disowned,uploade,
+  online,upgrade}
 
 optional arguments:
   -h, --help            Show this help message and exit
@@ -223,6 +229,11 @@ optional arguments:
 optional arguments:
   -h, --help  Show this help message and exit
 
+=head2 UPGRADE MODE
+
+optional arguments:
+  -h, --help  Show this help message and exit
+
 =head1 EXAMPLES
 
 Create a tarball of all sources, SRCBUILD, patches, etc. of grub and put the
@@ -250,11 +261,11 @@ Run check for possible "bad things" on all remote targets to ensure that the
 ports are in good condition, e.g. there are at least 2-variables defined
 (version and description):
 
-    spm-tools sane -a $(spm remote -pn ^)
+    spm remote -np ^ | spm-tools sane -a -
 
-Merge all files backed up by SPM with the original ones:
+Merge all files backed up by SPM with the originals, use nano as text-editor:
 
-    sudo spm-tools merge
+    sudo EDITOR=nano spm-tools merge
 
 Edit the glibc SRCBUILD, e.g. to apply some custom configure parameters:
 
@@ -264,9 +275,23 @@ Print full path to vim target:
 
     spm-tools which -p vim
 
-Backup gcc filese into tarball:
+Create tarball of localy installed gcc:
 
-    spm-tools pack gcc
+    sudo spm-tools pack gcc
+
+Get package files from CRUX for zlib and convert them for use with SPM:
+    spm-tools pkg zlib && pkg2src zlib
+
+Serve all repositories, sources and pre-build tarballs to the local network:
+    spm-tools serve
+
+TODO: disowned upload
+
+Check if http://crux.nu is accessible from the current host:
+    spm-tools online -u http://crux.nu
+
+Upgrade from old SPM version:
+    sudo spm-tools upgrade
 
 =head1 EXIT STATUS
 

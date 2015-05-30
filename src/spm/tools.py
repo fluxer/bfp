@@ -4,7 +4,7 @@ import gettext
 _ = gettext.translation('spm', fallback=True).gettext
 
 import sys, argparse, subprocess, tarfile, zipfile, shutil, os, re, difflib
-import pwd, grp, ftplib
+import pwd, grp, ftplib, json
 if sys.version < '3':
     import ConfigParser as configparser
     from urllib2 import HTTPError
@@ -781,6 +781,74 @@ class Online(object):
       if not misc.url_ping(self.url):
           sys.exit(1)
 
+
+class Upgrade(object):
+    def __init__(self):
+        # not much to do here
+        pass
+
+    def upgrade_1_7_x(self, target):
+        ''' Build local target cache from legacy metadata and footprint '''
+        metadata = '%s/metadata' % target
+        footprint = '%s/footprint' % target
+        if not os.path.isfile(metadata) or not os.path.isfile(footprint):
+            message.sub_warning(_('Invalid or migrated target (1_7_x)'), target)
+            return
+        message.sub_info(_('Migrating legacy local metadata'), target)
+        data = {'version': '1',
+                'release': '1',
+                'description': ' unknown',
+                'depends': [],
+                'size': 0}
+        data['footprint'] = misc.file_readlines(footprint)
+        for line in misc.file_readlines(metadata):
+            line = misc.string_encode(line)
+            if line.startswith(('version=', 'release=', \
+                'description=', 'depends=', 'size=')):
+                key, value = line.split('=')
+                if key == 'depends':
+                    value = value.split()
+                data[key] = value
+        f = open('%s/metadata.json' % target, 'w')
+        try:
+            json.dump(data, f)
+        finally:
+            f.close()
+
+    def upgrade_backup(self, target):
+        ''' Ensure local targets have the backup data in place '''
+        metadata = '%s/metadata.json' % target
+        if not os.path.isfile(metadata):
+            message.sub_warning(_('Invalid target'), target)
+            return
+        backup = database.remote_metadata(target, 'backup') or []
+        dbackup = {}
+        f = open(metadata, 'r')
+        try:
+            data = json.load(f)
+        finally:
+            f.close()
+        if 'backup' in data:
+            message.sub_info(_('Target already migrated (backup)'), target)
+            return
+        message.sub_info(_('Migrating remote backup to local'), target)
+        for sfile in database.local_metadata(target, 'footprint'):
+            if sfile.endswith('.conf') or sfile.lstrip('/') in backup:
+                if os.path.isfile(sfile):
+                    dbackup[sfile] = misc.file_checksum(sfile)
+        data['backup'] = dbackup
+        f = open(metadata, 'w')
+        try:
+            json.dump(data, f)
+        finally:
+            f.close()
+
+    def main(self):
+        for target in database.local_all():
+            self.upgrade_1_7_x(target)
+            self.upgrade_backup(target)
+
+
 try:
     EUID = os.geteuid()
 
@@ -938,6 +1006,9 @@ try:
     online_parser = subparsers.add_parser('online')
     online_parser.add_argument('-u', '--url', type=str, \
         default='https://www.google.com', help=_('URL to ping'))
+
+    if EUID == 0:
+        upgrade_parser = subparsers.add_parser('upgrade')
 
     parser.add_argument('--debug', nargs=0, action=OverrideDebug, \
         help=_('Enable debug messages'))
@@ -1125,6 +1196,10 @@ try:
         message.info(_('Runtime information'))
         message.sub_info(_('URL'), ARGS.url)
         m = Online(ARGS.url)
+        m.main()
+
+    elif ARGS.mode == 'upgrade':
+        m = Upgrade()
         m.main()
 
 except configparser.Error as detail:
