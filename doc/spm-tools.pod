@@ -56,23 +56,22 @@ is very basic and you may want to use dedicated application for this purpose.
 System files not tracked by SPM can be checked for via disowned mode. By
 default the scanning process does not perform cross-filesystem operations
 which depending on your setup may not be desired, for an example if you
-have /usr on a separate partition. The operation is usually slow.
+have /usr on a separate partition. The operation is usually very slow.
 
 Binary tarballs can be uploaded via FTP/FTPS to mirrors via upload mode.
 
 Checking if the system can access the internet can be done via online mode.
 
 Migrating local targets metadata from old SPM version to newer can be done via
-upgrade mode. It is safe to run multiple times and is ment to valuable only on
-host upgrading from SPM v1.7.x. It is available on versions newer than SPM
-v1.7.x.
+upgrade mode. It is safe to run multiple times and is valuable only on host
+upgrading from SPM v1.7.x. It is available on versions newer than SPM v1.7.x.
 
 =head1 OPTIONS
 
 =head2 MAIN
 
 positional arguments:
-  {dist,check,clean,lint,sane,merge,edit,which,pack,pkg,serve,disowned,uploade,
+  {dist,check,clean,lint,sane,merge,edit,which,pack,pkg,serve,disowned,upload,
   online,upgrade}
 
 optional arguments:
@@ -247,7 +246,7 @@ files such as headers, and correct them if necessary:
     sudo spm-tools check -faD python
 
 Check for unneeded local targets, in other words - targets that are not required
-by other local target:
+by other local target (orphan):
 
     spm-tools clean
 
@@ -271,7 +270,7 @@ Edit the glibc SRCBUILD, e.g. to apply some custom configure parameters:
 
     sudo spm-tools edit glibc
 
-Print full path to vim target:
+Print full path to vim target, without fancy messages, for use in wrapper:
 
     spm-tools which -p vim
 
