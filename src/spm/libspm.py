@@ -421,11 +421,8 @@ class Repo(object):
 
     def cache(self):
         ''' Generate repository cache '''
-        if not os.path.exists('%s/repositories' % CACHE_DIR):
-            return
-
         message.sub_info(_('Caching remote metadata'))
-        database._build_remote_cache(True)
+        database._build_remote_cache(True, True)
 
     def prune(self):
         ''' Remove repositories that are no longer in the config '''
@@ -1790,6 +1787,29 @@ class Binary(Source):
                 message.sub_info(_('Starting %s remove at') % \
                     self.target_name, datetime.today())
                 self.remove()
+
+
+class Cache(object):
+    ''' Class for printing file owner '''
+    def __init__(self, do_remote=False, do_local=False):
+        self.do_remote = do_remote
+        self.do_local = do_local
+        message.CATCH = CATCH
+        misc.ROOT_DIR = ROOT_DIR
+        misc.CATCH = CATCH
+        database.ROOT_DIR = ROOT_DIR
+        database.CACHE_DIR = CACHE_DIR
+        database.LOCAL_DIR = LOCAL_DIR
+        database.IGNORE = IGNORE
+
+    def main(self):
+        ''' Print owner of match '''
+        if self.do_remote:
+            message.sub_info(_('Caching remote metadata'))
+            database._build_remote_cache(True, True)
+        if self.do_local:
+            message.sub_info(_('Caching local metadata'))
+            database._build_local_cache(True, True)
 
 
 class Who(object):

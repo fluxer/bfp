@@ -39,9 +39,12 @@ class Database(object):
         if os.path.isdir(self.LOCAL_DIR):
             notify.watch_add(self.LOCAL_DIR)
 
-    def _build_local_cache(self, force=False):
+    def _build_local_cache(self, force=False, ensure=False):
         ''' Build internal local database cache '''
         self.LOCAL_CACHE = {}
+
+        if not os.path.isdir(self.LOCAL_DIR):
+            return
 
         cachefile = '%s/local.json' % self.CACHE_DIR
         if os.path.isfile(cachefile) and not force:
@@ -60,13 +63,17 @@ class Database(object):
             if os.path.isfile(metadata) and os.path.isfile(srcbuild):
                 self.LOCAL_CACHE[sdir] = misc.json_read(metadata)
 
-        if os.access(self.CACHE_DIR, os.W_OK):
+        if os.access(self.CACHE_DIR, os.W_OK) or ensure:
             misc.json_write(cachefile, self.LOCAL_CACHE)
         # print(sys.getsizeof(self.LOCAL_CACHE))
 
-    def _build_remote_cache(self, force=False):
+    def _build_remote_cache(self, force=False, ensure=False):
         ''' Build internal remote database cache '''
         self.REMOTE_CACHE = {}
+
+        metadir = '%s/repositories' % self.CACHE_DIR
+        if not os.path.isdir(metadir):
+            return
 
         cachefile = '%s/remote.json' % self.CACHE_DIR
         if os.path.isfile(cachefile) and not force:
@@ -79,7 +86,7 @@ class Database(object):
             if not fallback:
                 return
 
-        for sdir in misc.list_dirs('%s/repositories' % self.CACHE_DIR):
+        for sdir in misc.list_dirs(metadir):
             srcbuild = '%s/SRCBUILD' % sdir
             if os.path.isfile(srcbuild):
                 parser = SRCBUILD(srcbuild)
@@ -96,7 +103,7 @@ class Database(object):
                     'backup': parser.backup
                 }
 
-        if os.access(self.CACHE_DIR, os.W_OK):
+        if os.access(self.CACHE_DIR, os.W_OK) or ensure:
             misc.json_write(cachefile, self.REMOTE_CACHE)
         # print(sys.getsizeof(self.REMOTE_CACHE))
 

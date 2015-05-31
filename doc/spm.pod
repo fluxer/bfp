@@ -16,7 +16,7 @@ spm - Source Package Manager
            [--conflicts {True,False}] [--backup {True,False}]
            [--scripts {True,False}] [--triggers {True,False}] [--debug]
            [--version]
-           {repo,remote,source,binary,local,who} ...
+           {repo,remote,source,binary,local,cache,who} ...
 
 =head1 DESCRIPTION
 
@@ -150,13 +150,14 @@ implemented later on.
 =head2 MAIN
 
 positional arguments:
-  {repo,remote,source,binary,local,who}
+  {repo,remote,source,binary,local,cache,who}
   repo                  Clean, sync, cache, prune and/or check repositories
                         for updates
   remote                Get remote targets metadata
   source                Build software from source code
   binary                Install software from pre-build tarballs
   local                 Get local targets metadata
+  cache                 Regenerate local and/or remote metadata caches
   who                   Get owner of files via regular expression
 
 optional arguments:
@@ -289,6 +290,14 @@ optional arguments:
   -f, --footprint       Show target footprint
   -p, --plain           Print in plain format
 
+=head2 CACHE MODE
+
+optional arguments:
+  -h, --help            Show this help message and exit
+  -r, --remote          Regenerate remote metadata cache
+  -l, --local           Regenerate local metadata cache
+  -a, --all             Short for remote and local
+
 =head2 WHO MODE
 
 positional arguments:
@@ -330,16 +339,23 @@ Print bash, glibc and ncurses targets name and version in
 plain list format:
 
 	spm local -nvp 'bash$|glibc|ncurses'
-	
+
+Regenerate both remote and local targets global caches:
+	sudo spm cache -a
+
 Print the owner of 'bin/bash':
 
 	spm who 'bin/bash\b'
 
-Note that all modes, except source and repo, accept regexp similar to those
-in Perl. For more information visit http://docs.python.org/2/library/re.html.
+Note that all modes, except source, repo and cache, accept regexp similar to
+those in Perl. For more information visit http://docs.python.org/2/library/re.html.
 Source mode accepts base (e.g. foo), directory (e.g. /home/me/foo) with
 SRCBUILD in it, aliases (e.g. base) which you can find on the top-level of a
 repository as foo.alias or finally metagroups - currently only one - world.
+
+Modes that support targets passing (accept the TARGETS argument) support
+passing input from standard input by using "-" for TARGETS and piping the
+executable.
 
 =head1 EXIT STATUS
 

@@ -6,7 +6,7 @@ _spm_tools()
     local main_options merge_options clean_options edit_options sane_options
     local lint_options check_options dist_options which_options pack_options
     local pkg_options serve_options disowned_options upload_options
-    local online_options
+    local online_options upgrade_options
 
     actions='merge clean edit sane lint check dist which pack pkg serve disowned upload'
 

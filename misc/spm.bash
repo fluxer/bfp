@@ -4,7 +4,7 @@ _spm()
 {
     local action cur prev
     local main_options repo_options remote_options binary_options source_options
-    local local_options who_options
+    local local_options cache_options who_options
 
     actions='repo remote source binary local who'
 
@@ -32,6 +32,8 @@ _spm()
         -d --description -D --depends -r --reverse -s --size -f --footprint
         -b --backup -p --plain'
 
+    cache_options='-h --help -r --remote -l --local'
+
     who_options='-h --help -p --plain'
 
     _get_comp_words_by_ref cur prev
@@ -49,6 +51,8 @@ _spm()
         COMPREPLY=($(compgen -W "${binary_options}" -- "${cur}"))
     elif [[ ${arg} = local ]];then
         COMPREPLY=($(compgen -W "${local_options}" -- "${cur}"))
+    elif [[ ${arg} = cache ]];then
+        COMPREPLY=($(compgen -W "${cache_options}" -- "${cur}"))
     elif [[ ${arg} = who ]];then
         COMPREPLY=($(compgen -W "${who_options}" -- "${cur}"))
     fi

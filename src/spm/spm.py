@@ -19,7 +19,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.7.6 (008520a)"
+app_version = "1.7.6 (8c72acb)"
 
 try:
     import libspm
@@ -335,6 +335,15 @@ try:
     local_parser.add_argument('PATTERN', type=str, \
         help=_('Pattern to search for in local targets'))
 
+    cache_parser = subparsers.add_parser('cache', \
+        help=_('Regenerate local and/or remote metadata caches'))
+    cache_parser.add_argument('-r', '--remote', action='store_true', \
+        help=_('Regenerate remote metadata cache'))
+    cache_parser.add_argument('-l', '--local', action='store_true', \
+        help=_('Regenerate local metadata cache'))
+    cache_parser.add_argument('-a', '--all', action='store_true', \
+        help=_('Short for remote and local'))
+
     who_parser = subparsers.add_parser('who', \
         help=_('Get owner of files via regular expression'))
     who_parser.add_argument('-p', '--plain', action='store_true', \
@@ -555,6 +564,17 @@ try:
                 ARGS.backup, ARGS.plain)
         m.main()
 
+    elif ARGS.mode == 'cache':
+        if ARGS.all:
+            ARGS.remote = True
+            ARGS.local = True
+        message.info(_('Runtime information'))
+        message.sub_info(_('REMOTE'), ARGS.remote)
+        message.sub_info(_('LOCAL'), ARGS.local)
+        message.info(_('Poking databases...'))
+        m = libspm.Cache(ARGS.remote, ARGS.local)
+        m.main()
+
     elif ARGS.mode == 'who':
         if 'wantscookie' in sys.argv:
             print(libspm.wantscookie)
@@ -562,7 +582,7 @@ try:
         if not ARGS.plain:
             message.info(_('Runtime information'))
             message.sub_info(_('PATTERN'), ARGS.PATTERN)
-            message.info(_('Poking databases...'))
+            message.info(_('Poking local...'))
         m = libspm.Who(ARGS.PATTERN, ARGS.plain)
         m.main()
 
