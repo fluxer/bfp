@@ -226,10 +226,11 @@ class SPMD(dbus.service.Object):
             depends = database.local_metadata(match, 'depends') or ['']
             size = database.local_metadata(match, 'size')
             footprint = database.local_metadata(match, 'footprint')
+            backup = database.local_metadata(match, 'backup') or {}
         except Exception as detail:
             message.critical(str(detail))
             return str(detail)
-        return (version, release, description, depends, size, footprint)
+        return (version, release, description, depends, size, footprint, backup)
 
     @dbus.service.method('com.spm.Daemon')
     def Sync(self):
