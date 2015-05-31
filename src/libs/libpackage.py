@@ -358,7 +358,7 @@ class SRCBUILD(object):
         _arraymap = {}
         fileobj = open(sfile, 'rb')
         try:
-            content = fileobj.read()
+            content = misc.string_encode(fileobj.read())
             for var, value in re.findall(self.string_regex, content):
                 value = value.strip('"').strip("'")
                 _stringmap[var] = value
@@ -376,8 +376,6 @@ class SRCBUILD(object):
                 val = val.replace('$%s' % string, _stringmap[string])
                 val = val.replace('${%s}' % string, _stringmap[string])
                 _stringmap[string] = val
-        #except ValueError:
-        #    raise ValueError('Syntax error in %s' % fileobj.name)
         finally:
             fileobj.close()
 
