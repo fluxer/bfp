@@ -46,7 +46,7 @@ class Interface(QtDBus.QDBusInterface):
         super(Interface, self).__init__(obj, path, interface, connection, parent)
 
     @QtCore.pyqtSlot(QtCore.QString)
-    def MessageConditional(self, *msg):
+    def Finished(self, *msg):
         # gee... the msg is QVariant but a slot with QVariant does not work
         # so here is a _ugly_ workaround
         msg = str(QtCore.QString(msg[0]))
@@ -54,9 +54,6 @@ class Interface(QtDBus.QDBusInterface):
             MessageInfo(msg)
         else:
             MessageCritical(msg)
-
-    @QtCore.pyqtSlot(QtCore.QString)
-    def RefreshAll(self, *msg):
         RefreshAll()
 
     @QtCore.pyqtSlot(QtCore.QStringList)
@@ -76,9 +73,7 @@ class Interface(QtDBus.QDBusInterface):
 iface = Interface('com.spm.Daemon', '/com/spm/Daemon', \
     'com.spm.Daemon', bus, app)
 bus.connect('com.spm.Daemon', '/com/spm/Daemon', 'com.spm.Daemon', \
-    'Finished', iface.MessageConditional)
-bus.connect('com.spm.Daemon', '/com/spm/Daemon', 'com.spm.Daemon', \
-    'Finished', iface.RefreshAll)
+    'Finished', iface.Finished)
 bus.connect('com.spm.Daemon', '/com/spm/Daemon', 'com.spm.Daemon', \
     'Updates', iface.Updates)
 
