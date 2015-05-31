@@ -127,7 +127,8 @@ avoiding code duplication in pre/post scripts.
 
 Mirrors for sources can be used so that fetching sources is faster and more
 reliable, for an example when the upstream servers are down for maintenance.
-Several mirrors are enabled by default.
+Several mirrors are enabled by default. During a download if an URL error
+occurs the fetcher automatically switches to another mirror, if possible.
 
 Information about both local and remote targets can be queried with regular
 expressions that will match in the target name only, not in the metadata
@@ -463,5 +464,5 @@ COPYING file bundled with the source code.
 =head1 SEE ALSO
 
 spm.conf(5) SRCBUILD(5) spm-tools(8) scanelf(1) tar(1) bsdtar(1) xz(1)
-ldconfig(8) file(1) man-db(1) git(1) locale(7)
+ldconfig(8) file(1) man-db(1) git(1) locale(7) gpg(1)
 
