@@ -400,9 +400,6 @@ class SPMD(dbus.service.Object):
                 for wd, mask, cookie, name in slave_notify.event_read():
                     self.Configs()
                     reload(libspm)
-                    reload(libpackage)
-                    # TODO: does this even work? that's another thread this is running in...
-                    database = libpackage.Database()
                 currenttime = time.strftime('%s')
                 result = (int(currenttime) - int(lasttime))
                 if (result >= 60) and UPDATE == 'minute':

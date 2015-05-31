@@ -45,6 +45,15 @@ class Interface(QtDBus.QDBusInterface):
     def __init__(self, obj, path, interface, connection, parent):
         super(Interface, self).__init__(obj, path, interface, connection, parent)
 
+    @QtCore.pyqtSlot(QtDBus.QDBusPendingCall)
+    def CheckCall(self, call):
+        value = QtDBus.QDBusReply(call).value()
+        if not value:
+            return
+        msg = str(value.toString())
+        if not msg == 'Success':
+            MessageCritical(msg)
+
     @QtCore.pyqtSlot(QtCore.QString)
     def Finished(self, *msg):
         # gee... the msg is QVariant but a slot with QVariant does not work
@@ -104,10 +113,6 @@ def MessageCritical(msg):
         layout.addWidget(textedit)
         layout.addWidget(okbutton)
         return msgBox.exec_()
-
-if not bus.isConnected():
-    MessageCritical('Cannot connect to the D-Bus system bus')
-    sys.exit(1)
 
 def DisableWidgets():
     ui.SearchTable.setEnabled(False)
@@ -464,7 +469,8 @@ def ChangeRepos():
     if not atleastone:
         MessageCritical('At least one repository must be enabled')
         return
-    iface.asyncCall('ReposSet', data)
+    call = iface.asyncCall('ReposSet', data)
+    iface.CheckCall(call)
 
 def ChangeMirrors():
     data = ''
@@ -480,23 +486,30 @@ def ChangeMirrors():
     if not atleastone:
         MessageCritical('At least one mirror must be enabled')
         return
-    iface.asyncCall('MirrorsSet', data)
+    call = iface.asyncCall('MirrorsSet', data)
+    iface.CheckCall(call)
 
 def ChangeSettings():
     try:
         DisableWidgets()
-        iface.asyncCallWithArgumentList('ConfSet', ('fetch', 'MIRROR', \
+        call = iface.asyncCallWithArgumentList('ConfSet', ('fetch', 'MIRROR', \
             str(ui.UseMirrorsBox.isChecked())))
-        iface.asyncCallWithArgumentList('ConfSet', ('fetch', 'TIMEOUT', \
+        iface.CheckCall(call)
+        call = iface.asyncCallWithArgumentList('ConfSet', ('fetch', 'TIMEOUT', \
             str(ui.ConnectionTimeoutBox.value())))
-        iface.asyncCallWithArgumentList('ConfSet', ('merge', 'CONFLICTS', \
+        iface.CheckCall(call)
+        call = iface.asyncCallWithArgumentList('ConfSet', ('merge', 'CONFLICTS', \
             str(ui.ConflictsBox.isChecked())))
-        iface.asyncCallWithArgumentList('ConfSet', ('merge', 'BACKUP', \
+        iface.CheckCall(call)
+        call = iface.asyncCallWithArgumentList('ConfSet', ('merge', 'BACKUP', \
             str(ui.BackupBox.isChecked())))
-        iface.asyncCallWithArgumentList('ConfSet', ('merge', 'SCRIPTS', \
+        iface.CheckCall(call)
+        call = iface.asyncCallWithArgumentList('ConfSet', ('merge', 'SCRIPTS', \
             str(ui.ScriptsBox.isChecked())))
-        iface.asyncCallWithArgumentList('ConfSet', ('merge', 'TRIGGERS', \
+        iface.CheckCall(call)
+        call = iface.asyncCallWithArgumentList('ConfSet', ('merge', 'TRIGGERS', \
             str(ui.TriggersBox.isChecked())))
+        iface.CheckCall(call)
         RefreshAll()
         reload(libspm)
     except SystemExit:
@@ -578,9 +591,14 @@ def closeEvent(event):
 MainWindow.closeEvent = closeEvent
 
 if not '--tray' in sys.argv:
-    if not iface.isValid():
+    if not bus.isConnected():
+        MessageCritical('Cannot connect to the D-Bus system bus')
+    elif not iface.isValid():
         MessageCritical('Daemon is not running')
     MainWindow.show()
+elif not bus.isConnected():
+    trayIcon.showMessage('Critical', 'Cannot connect to the D-Bus system bus', \
+        QtGui.QSystemTrayIcon.Critical)
 elif not iface.isValid():
     trayIcon.showMessage('Critical', 'The daemon is not running', \
         QtGui.QSystemTrayIcon.Critical)
