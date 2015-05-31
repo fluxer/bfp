@@ -13,7 +13,7 @@ SRCBUILD() is Source Package Manager recipes (SRCBUILDs) parser.
 
 '''
 
-import os, sys, re, shlex, types
+import os, sys, re, types
 from distutils.version import LooseVersion
 
 import libmisc
