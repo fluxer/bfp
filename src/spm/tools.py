@@ -561,10 +561,15 @@ class Edit(object):
         editor = os.environ.get('EDITOR')
         if not editor:
             editor = misc.whereis('vim')
-        for target in self.targets:
-            match = database.remote_search(target)
-            if match:
-                misc.system_command((editor, '%s/SRCBUILD' % match))
+        try:
+            for target in self.targets:
+                match = database.remote_search(target)
+                if match:
+                    misc.system_command((editor, '%s/SRCBUILD' % match))
+        finally:
+            # TODO: this should be a bit more conditional
+            message.sub_info(_('Caching remote metadata'))
+            database._build_remote_cache(True, True)
 
 
 class Which(object):

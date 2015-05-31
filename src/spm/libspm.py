@@ -1790,7 +1790,7 @@ class Binary(Source):
 
 
 class Cache(object):
-    ''' Class for printing file owner '''
+    ''' Class for regenerating global remote/local metadata caches '''
     def __init__(self, do_remote=False, do_local=False):
         self.do_remote = do_remote
         self.do_local = do_local
@@ -1803,7 +1803,7 @@ class Cache(object):
         database.IGNORE = IGNORE
 
     def main(self):
-        ''' Print owner of match '''
+        ''' Regenerate caches '''
         if self.do_remote:
             message.sub_info(_('Caching remote metadata'))
             database._build_remote_cache(True, True)
