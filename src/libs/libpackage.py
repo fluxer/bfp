@@ -1,7 +1,7 @@
 #!/bin/python2
 
 '''
-A module for package management with plain-text format database
+A module for package management with database in JSON format
 
 Database() is the core of Source Package Manager, it provides various methods
 to get information about packages installed and otherwise. The methods prefixed
@@ -88,8 +88,9 @@ class Database(object):
 
         for sdir in misc.list_dirs(metadir):
             srcbuild = '%s/SRCBUILD' % sdir
+            parser = SRCBUILD()
             if os.path.isfile(srcbuild):
-                parser = SRCBUILD(srcbuild)
+                parser.parse(srcbuild)
                 self.REMOTE_CACHE[sdir] = {
                     'version': parser.version,
                     'release': parser.release,
@@ -204,8 +205,7 @@ class Database(object):
         if checked is None:
             checked = []
 
-        # respect ignored targets to avoid building
-        # dependencies when not needed
+        # respect ignored targets to avoid building dependencies when not needed
         if target in self.IGNORE:
             return missing
 
@@ -273,7 +273,7 @@ class Database(object):
 
         # if remote target is passed and it's a directory not a base name
         # then the local target will be invalid and local_version will equal
-        # None, thus the base name is used to find the local target metadata
+        # None, thus the base name is used to get the local target metadata
         base = os.path.basename(target)
         local_version = self.local_metadata(base, 'version')
         local_release = self.local_metadata(base, 'release')
@@ -332,12 +332,12 @@ class Database(object):
         # return consistent data
         return [target]
 
-
 class SRCBUILD(object):
-    ''' A SRCBUILD parser '''
-    _symbol_regex = re.compile(r'\$(?P<name>{[\w\d_]+}|[\w\d]+)')
+    ''' A (new) SRCBUILD parser '''
+    string_regex = re.compile('(?:^|\n)([\w\d_]+)=([^\(].*)')
+    array_regex = re.compile('(?:^|\n)([\w\d_]+)=\(([^\)]+){1}', re.MULTILINE)
 
-    def __init__(self, name):
+    def __init__(self, sfile=None):
         self.version = ''
         self.release = '1'
         self.description = ''
@@ -349,115 +349,42 @@ class SRCBUILD(object):
         self.options = []
         self.backup = []
 
-        # Symbol lookup table
-        self._var_map = {
-            'version': 'version',
-            'release': 'release',
-            'description': 'description',
-            'depends': 'depends',
-            'makedepends': 'makedepends',
-            'checkdepends': 'checkdepends',
-            'sources': 'sources',
-            'pgpkeys': 'pgpkeys',
-            'options': 'options',
-            'backup': 'backup',
-        }
-        # Symbol table
-        self._symbols = {}
+        if sfile:
+            self.parse(sfile)
 
-        fileobj = open(name, 'r')
+    def parse(self, sfile):
+        self.__init__()
+        _stringmap = {}
+        _arraymap = {}
+        fileobj = open(sfile, 'rb')
         try:
-            self._parse(fileobj)
-        except ValueError:
-            # provide a meaningfull message, that's what shlex spits on fail
-            raise ValueError('Syntax error in %s' % fileobj.name)
+            content = fileobj.read()
+            for var, value in re.findall(self.string_regex, content):
+                value = value.strip('"').strip("'")
+                _stringmap[var] = value
+            for var, value in re.findall(self.array_regex, content):
+                arrayval = []
+                for val in value.split():
+                    for string in _stringmap:
+                        val = val.replace('$%s' % string, _stringmap[string])
+                        val = val.replace('${%s}' % string, _stringmap[string])
+                        val = val.strip('"').strip("'")
+                    arrayval.append(val)
+                _arraymap[var] = arrayval
+            for string in _stringmap:
+                val = _stringmap[string]
+                val = val.replace('$%s' % string, _stringmap[string])
+                val = val.replace('${%s}' % string, _stringmap[string])
+                _stringmap[string] = val
+        #except ValueError:
+        #    raise ValueError('Syntax error in %s' % fileobj.name)
         finally:
             fileobj.close()
 
-    def _handle_assign(self, token):
-        ''' Expand non-standard variable as Bash does '''
-        var, equals, value = token.strip().partition('=')
-        # Is it an array?
-        if value[0] == '(' and value[-1] == ')':
-            self._symbols[var] = self._clean_array(value)
-        else:
-            self._symbols[var] = self._clean(value)
-
-    def _parse(self, fileobj):
-        ''' Parse SRCBUILD '''
-        parser = shlex.shlex(fileobj, posix=True)
-        parser.whitespace_split = True
-        in_function = False
-        while 1:
-            token = parser.get_token()
-            if token is None or token == '':
-                break
-            # Skip escaped newlines and functions
-            if token == '\n' or in_function:
-                continue
-            # Special case:
-            # Array elements are dispersed among tokens, we have to join
-            # them first
-            if token.find('=(') >= 0 and not token.rfind(')') >= 0:
-                in_array = True
-                elements = []
-                while in_array:
-                    _token = parser.get_token()
-                    if _token == '\n':
-                        continue
-                    if _token[-1] == ')':
-                        _token = '"%s")' % _token.strip(')')
-                        token = token.replace('=(', '=("', 1) + '"'
-                        token = ' '.join((token, ' '.join(elements), _token))
-                        in_array = False
-                    else:
-                        elements.append('"%s"' % _token.strip())
-            # Assignment
-            if re.match(r'^[\w\d_]+=', token):
-                self._handle_assign(token)
-            # Function definitions
-            elif token == '{':
-                in_function = True
-            elif token == '}' and in_function:
-                in_function = False
-        self._substitute()
-        self._assign_local()
-
-    def _clean(self, value):
-        ''' Pythonize a bash string '''
-        return ' '.join(shlex.split(value))
-
-    def _clean_array(self, value):
-        ''' Pythonize a bash array '''
-        return filter(None, shlex.split(value.strip('()')))
-
-    def _replace_symbol(self, matchobj):
-        ''' Replace a regex-matched variable with its value '''
-        symbol = matchobj.group('name').strip('{}')
-        # If the symbol isn't found fallback to an empty string, like bash
-        try:
-            value = self._symbols[symbol]
-        except KeyError:
-            value = ''
-        # BUG: Might result in an infinite loop, oops!
-        return self._symbol_regex.sub(self._replace_symbol, value)
-
-    def _substitute(self):
-        ''' Substitute all bash variables within values with their values '''
-        for symbol in self._symbols:
-            value = self._symbols[symbol]
-            # FIXME: This is icky
-            if isinstance(value, str):
-                result = self._symbol_regex.sub(self._replace_symbol, value)
-            else:
-                result = [self._symbol_regex.sub(self._replace_symbol, x) \
-                    for x in value]
-            self._symbols[symbol] = result
-
-    def _assign_local(self):
-        ''' Assign values from _symbols to SRCBUILD variables '''
-        for var in self._symbols:
-            value = self._symbols[var]
-            if var in self._var_map:
-                var = self._var_map[var]
-            setattr(self, var, value)
+        for string in ('version', 'release', 'description'):
+            if string in _stringmap:
+                setattr(self, string, _stringmap[string])
+        for array in ('depends', 'makedepends', 'checkdepends', 'sources', \
+            'pgpkeys', 'options', 'backup'):
+            if array in _arraymap:
+                setattr(self, array, _arraymap[array])

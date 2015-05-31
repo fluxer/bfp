@@ -380,11 +380,6 @@ info visit http://docs.python.org/2/library/tarfile.html#supported-tar-formats.
 Note that the Zip and XZ formats are supported by SPM, the later via subprocess
 calling `tar` or `bsdtar` directly.
 
-=head2 SPM
-
-Single quote inside double quoted text (and vice-versa) in the SRCBUILD
-variables break the parser.
-
 =head1 ENVIRONMENT
 
 The following environment variables affect the execution of SPMT:
