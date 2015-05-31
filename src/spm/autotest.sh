@@ -76,6 +76,14 @@ else
     echo "=== SKIPPING SPM LOCAL TEST ==="
 fi
 
+if ! grep -q "SPM CACHE" "$statefile" ;then
+    echo "=== RUNNING SPM CACHE TEST ==="
+    "$1" "$curdir/spm.py" $spmargs cache -rl
+    echo "SPM CACHE" >> "$statefile"
+else
+    echo "=== SKIPPING SPM CACHE TEST ==="
+fi
+
 if ! grep -q "SPM WHO" "$statefile" ;then
     echo "=== RUNNING SPM WHO TEST ==="
     "$1" "$curdir/spm.py" $spmargs who -p zlib
