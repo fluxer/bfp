@@ -15,6 +15,3 @@
 
 ## SPMD ##
  * Fix dbus activation (wtf is wrong?)
-
-## SPM-GUI ##
- * Report dbus errors
