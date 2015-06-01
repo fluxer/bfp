@@ -24,7 +24,7 @@ misc = libspm.misc
 database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.7.6 (3ea21f0)"
+app_version = "1.7.6 (cf66821)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -742,7 +742,13 @@ class Upload(object):
         try:
             arch = os.uname()[4]
             p = misc.getpass('Password for %s: ' % self.user)
-            ftp = ftplib.FTP_TLS(self.host, self.user, p, timeout=libspm.TIMEOUT)
+            # SSL verification works OOTB only on Python >= 2.7.10 (officially)
+            if sys.version_info[2] >= 10 and not self.insecure:
+                import ssl
+                ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
+                ftp = ftplib.FTP_TLS(self.host, self.user, p, timeout=libspm.TIMEOUT, context=ctx)
+            else:
+                ftp = ftplib.FTP_TLS(self.host, self.user, p, timeout=libspm.TIMEOUT)
             if not self.insecure:
                 ftp.prot_p()
             ftp.cwd('%s/tarballs/%s' % (self.directory, arch))
