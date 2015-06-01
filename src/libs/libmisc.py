@@ -42,6 +42,7 @@ class Misc(object):
         self.GPG_DIR = os.path.expanduser('~/.gnupg')
         self.CATCH = False
         self.SIGNPASS = None
+        self.BUFFER = 10240
         self.magic = Magic()
         self.python2 = False
         self.python3 = False
@@ -185,7 +186,7 @@ class Misc(object):
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
 
-        rfile = open(sfile, 'rb')
+        rfile = open(sfile, 'rb', self.BUFFER)
         try:
             content = rfile.read()
         finally:
@@ -197,7 +198,7 @@ class Misc(object):
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
 
-        rfile = open(sfile, 'rb')
+        rfile = open(sfile, 'rb', self.BUFFER)
         try:
             content = rfile.read().splitlines()
         finally:
@@ -215,7 +216,7 @@ class Misc(object):
         original = None
         if os.path.isfile(sfile):
             original = self.file_read(sfile)
-        wfile = open(sfile, mode)
+        wfile = open(sfile, mode, self.BUFFER)
         try:
             wfile.write(content)
         except:
@@ -263,6 +264,8 @@ class Misc(object):
                 return 'text/x-ruby'
             elif sfile.endswith('.awk'):
                 return 'text/x-awk'
+            elif sfile.endswith('.html'):
+                return 'text/html'
             elif sfile.endswith(('.txt', '.desktop')):
                 return 'text/plain'
             elif sfile.endswith('/Makefile'):
@@ -282,6 +285,8 @@ class Misc(object):
                 return 'application/octet-stream'
             elif sfile.endswith('.xml'):
                 return 'application/xml'
+            elif sfile.endswith('.xhtml'):
+                return 'application/xhtml+xml'
 
         return self.string_encode(self.magic.get(sfile))
 
@@ -308,7 +313,7 @@ class Misc(object):
             self.typecheck(sfile, (types.StringTypes))
 
         content = None
-        f = open(sfile, 'r')
+        f = open(sfile, 'r', self.BUFFER)
         try:
             content = json.load(f)
         finally:
@@ -322,7 +327,7 @@ class Misc(object):
             # self.typecheck(content, (types.StringTypes))
             self.typecheck(mode, (types.StringTypes))
 
-        f = open(sfile, mode)
+        f = open(sfile, mode, self.BUFFER)
         try:
             json.dump(content, f, indent=4)
         finally:
@@ -579,7 +584,7 @@ class Misc(object):
                 rfile.close()
                 rfile = self.fetch_request(surl, {'Range': 'bytes=%s-' % lsize})
         self.dir_create(os.path.dirname(destination))
-        lfile = open(destination, 'ab')
+        lfile = open(destination, 'ab', self.BUFFER)
         try:
             # since the local file size changes use persistent units based on
             # remote file size
@@ -589,7 +594,7 @@ class Misc(object):
                     self.string_unit(str(os.path.getsize(destination)), units), \
                     self.string_unit(rsize, units, True))
                 sys.stdout.write(msg)
-                chunk = rfile.read(10240)
+                chunk = rfile.read(self.BUFFER)
                 if not chunk:
                     break
                 lfile.write(chunk)
