@@ -216,19 +216,17 @@ try:
     subparsers = parser.add_subparsers(dest='mode')
 
     repo_parser = subparsers.add_parser('repo', \
-        help=_('Clean, sync, cache, prune and/or check repositories for updates'))
+        help=_('Clean, sync, prune and/or check repositories for updates'))
     repo_parser.add_argument('-c', '--clean', action='store_true', \
         help=_('Purge repositories'))
     repo_parser.add_argument('-s', '--sync', action='store_true', \
         help=_('Sync repositories'))
-    repo_parser.add_argument('-C', '--cache', action='store_true', \
-        help=_('Cache repositories metadata'))
     repo_parser.add_argument('-p', '--prune', action='store_true', \
         help=_('Prune old repositories'))
     repo_parser.add_argument('-u', '--update', action='store_true', \
         help=_('Check repositories for updates'))
     repo_parser.add_argument('-a', '--all', action='store_true', \
-        help=_('Short for clean, sync, cache, prune and update'))
+        help=_('Short for clean, sync, prune and update'))
 
     remote_parser = subparsers.add_parser('remote', \
         help=_('Get remote targets metadata'))
@@ -335,15 +333,6 @@ try:
     local_parser.add_argument('PATTERN', type=str, \
         help=_('Pattern to search for in local targets'))
 
-    cache_parser = subparsers.add_parser('cache', \
-        help=_('Regenerate local and/or remote metadata caches'))
-    cache_parser.add_argument('-r', '--remote', action='store_true', \
-        help=_('Regenerate remote metadata cache'))
-    cache_parser.add_argument('-l', '--local', action='store_true', \
-        help=_('Regenerate local metadata cache'))
-    cache_parser.add_argument('-a', '--all', action='store_true', \
-        help=_('Short for remote and local'))
-
     who_parser = subparsers.add_parser('who', \
         help=_('Get owner of files via regular expression'))
     who_parser.add_argument('-p', '--plain', action='store_true', \
@@ -437,21 +426,19 @@ try:
         if ARGS.all:
             ARGS.clean = True
             ARGS.sync = True
-            ARGS.cache = True
             ARGS.update = True
             ARGS.prune = True
 
         message.info(_('Runtime information'))
         message.sub_info(_('CLEAN'), ARGS.clean)
         message.sub_info(_('SYNC'), ARGS.sync)
-        message.sub_info(_('CACHE'), ARGS.cache)
         message.sub_info(_('UPDATE'), ARGS.update)
         message.sub_info(_('PRUNE'), ARGS.prune)
         message.sub_info(_('CACHE_DIR'), libspm.CACHE_DIR)
         message.sub_info(_('REPOSITORIES'), libspm.REPOSITORIES)
         message.info(_('Poking repositories...'))
         m = libspm.Repo(libspm.REPOSITORIES, ARGS.clean, \
-                ARGS.sync, ARGS.cache, ARGS.update, ARGS.prune)
+                ARGS.sync, ARGS.update, ARGS.prune)
         m.main()
 
     elif ARGS.mode == 'remote':
@@ -562,17 +549,6 @@ try:
                 ARGS.release, ARGS.description, ARGS.depends, \
                 ARGS.reverse, ARGS.size, ARGS.footprint, \
                 ARGS.backup, ARGS.plain)
-        m.main()
-
-    elif ARGS.mode == 'cache':
-        if ARGS.all:
-            ARGS.remote = True
-            ARGS.local = True
-        message.info(_('Runtime information'))
-        message.sub_info(_('REMOTE'), ARGS.remote)
-        message.sub_info(_('LOCAL'), ARGS.local)
-        message.info(_('Poking databases...'))
-        m = libspm.Cache(ARGS.remote, ARGS.local)
         m.main()
 
     elif ARGS.mode == 'who':

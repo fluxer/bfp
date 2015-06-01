@@ -4,7 +4,7 @@ _spm()
 {
     local action cur prev
     local main_options repo_options remote_options binary_options source_options
-    local local_options cache_options who_options
+    local local_options who_options
 
     actions='repo remote source binary local who'
 
@@ -14,7 +14,7 @@ _spm()
         --sign --pycompile --missing --conflicts --backup --scripts --debug
         --version'
 
-    repo_options='-h --help -c --clean -s --sync -C --cache -u --update
+    repo_options='-h --help -c --clean -s --sync -u --update
         -a --all'
 
     remote_options='-h --help -n --name -v --version -r --release
@@ -31,8 +31,6 @@ _spm()
     local_options='-h --help -n --name -v --version -R --release
         -d --description -D --depends -r --reverse -s --size -f --footprint
         -b --backup -p --plain'
-
-    cache_options='-h --help -r --remote -l --local'
 
     who_options='-h --help -p --plain'
 
@@ -51,8 +49,6 @@ _spm()
         COMPREPLY=($(compgen -W "${binary_options}" -- "${cur}"))
     elif [[ ${arg} = local ]];then
         COMPREPLY=($(compgen -W "${local_options}" -- "${cur}"))
-    elif [[ ${arg} = cache ]];then
-        COMPREPLY=($(compgen -W "${cache_options}" -- "${cur}"))
     elif [[ ${arg} = who ]];then
         COMPREPLY=($(compgen -W "${who_options}" -- "${cur}"))
     fi

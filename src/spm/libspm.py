@@ -381,10 +381,9 @@ class Remote(object):
 class Repo(object):
     ''' Class for dealing with repositories '''
     def __init__(self, repositories, do_clean=False, do_sync=False, \
-        do_cache=False, do_update=False, do_prune=False):
+        do_update=False, do_prune=False):
         self.repositories = repositories
         self.do_clean = do_clean
-        self.do_cache = do_cache
         self.do_sync = do_sync
         self.do_prune = do_prune
         self.do_update = do_update
@@ -418,11 +417,6 @@ class Repo(object):
         else:
             message.sub_info(_('Cloning/pulling remote'), self.repository_name)
             misc.fetch(self.repository_url, self.repository_dir)
-
-    def cache(self):
-        ''' Generate repository cache '''
-        message.sub_info(_('Caching remote metadata'))
-        database._build_remote_cache(True, True)
 
     def prune(self):
         ''' Remove repositories that are no longer in the config '''
@@ -476,10 +470,6 @@ class Repo(object):
             if self.do_sync:
                 message.sub_info(_('Starting sync at'), datetime.today())
                 self.sync()
-
-            if self.do_cache:
-                message.sub_info(_('Starting cache at'), datetime.today())
-                self.cache()
 
         if self.do_prune:
             message.sub_info(_('Starting prune at'), datetime.today())
@@ -1803,29 +1793,6 @@ class Binary(Source):
                 message.sub_info(_('Starting %s remove at') % \
                     self.target_name, datetime.today())
                 self.remove()
-
-
-class Cache(object):
-    ''' Class for regenerating global remote/local metadata caches '''
-    def __init__(self, do_remote=False, do_local=False):
-        self.do_remote = do_remote
-        self.do_local = do_local
-        message.CATCH = CATCH
-        misc.ROOT_DIR = ROOT_DIR
-        misc.CATCH = CATCH
-        database.ROOT_DIR = ROOT_DIR
-        database.CACHE_DIR = CACHE_DIR
-        database.LOCAL_DIR = LOCAL_DIR
-        database.IGNORE = IGNORE
-
-    def main(self):
-        ''' Regenerate caches '''
-        if self.do_remote:
-            message.sub_info(_('Caching remote metadata'))
-            database._build_remote_cache(True, True)
-        if self.do_local:
-            message.sub_info(_('Caching local metadata'))
-            database._build_local_cache(True, True)
 
 
 class Who(object):

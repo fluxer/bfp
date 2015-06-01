@@ -562,15 +562,11 @@ class Edit(object):
         editor = os.environ.get('EDITOR')
         if not editor:
             editor = misc.whereis('vim')
-        try:
-            for target in self.targets:
-                match = database.remote_search(target)
-                if match:
-                    misc.system_command((editor, '%s/SRCBUILD' % match))
-        finally:
-            # TODO: this should be a bit more conditional
-            message.sub_info(_('Caching remote metadata'))
-            database._build_remote_cache(True, True)
+
+        for target in self.targets:
+            match = database.remote_search(target)
+            if match:
+                misc.system_command((editor, '%s/SRCBUILD' % match))
 
 
 class Which(object):
@@ -859,13 +855,6 @@ class Upgrade(object):
         data['backup'] = dbackup
         misc.json_write(metadata, data)
 
-    def upgrade_recache(self):
-        ''' Upgrade SPM caches '''
-        message.sub_info(_('Caching remote metadata'))
-        database._build_remote_cache(True, True)
-        message.sub_info(_('Caching local metadata'))
-        database._build_local_cache(True, True)
-
     def main(self):
         if not os.path.isdir(database.LOCAL_DIR):
             message.sub_warning(_('No local targets directory'), database.LOCAL_DIR)
@@ -878,8 +867,6 @@ class Upgrade(object):
             self.upgrade_1_7_x_metadata(target)
             message.sub_info(_('Starting migration procedure 1_7_x_backup on'), target)
             self.upgrade_1_7_x_backup(target)
-        message.sub_info(_('Starting migration procedure'), 'recache')
-        self.upgrade_recache()
 
 
 try:

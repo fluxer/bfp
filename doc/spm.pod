@@ -16,7 +16,7 @@ spm - Source Package Manager
            [--conflicts {True,False}] [--backup {True,False}]
            [--scripts {True,False}] [--triggers {True,False}] [--debug]
            [--version]
-           {repo,remote,source,binary,local,cache,who} ...
+           {repo,remote,source,binary,local,who} ...
 
 =head1 DESCRIPTION
 
@@ -113,7 +113,6 @@ SPM to know that a target is installed (metadata.json and SRCBUILD). This way
 if, for whatever the reason, SPM chokes you can decompress the tarball with:
 
 	sudo tar -xapPhf /var/cache/spm/tarballs/$(uname -m)/<tarball> -C /
-	sudo rm -f /var/cache/spm/local.json
  
 and it will be picked up by SPM as present on the system, no magic tricks
 needed. Keep in mind that you may have to execute the following to update the
@@ -151,14 +150,13 @@ implemented later on.
 =head2 MAIN
 
 positional arguments:
-  {repo,remote,source,binary,local,cache,who}
-  repo                  Clean, sync, cache, prune and/or check repositories
+  {repo,remote,source,binary,local,who}
+  repo                  Clean, sync, prune and/or check repositories
                         for updates
   remote                Get remote targets metadata
   source                Build software from source code
   binary                Install software from pre-build tarballs
   local                 Get local targets metadata
-  cache                 Regenerate local and/or remote metadata caches
   who                   Get owner of files via regular expression
 
 optional arguments:
@@ -214,7 +212,6 @@ optional arguments:
   -h, --help            Show this help message and exit
   -c, --clean           Purge repositories
   -s, --sync            Sync repositories
-  -C, --cache           Cache repositories metadata
   -p, --prune           Prune old repositories
   -u, --update          Check repositories for updates
   -a, --all             Short for clean, sync, prune and update
@@ -291,14 +288,6 @@ optional arguments:
   -f, --footprint       Show target footprint
   -p, --plain           Print in plain format
 
-=head2 CACHE MODE
-
-optional arguments:
-  -h, --help            Show this help message and exit
-  -r, --remote          Regenerate remote metadata cache
-  -l, --local           Regenerate local metadata cache
-  -a, --all             Short for remote and local
-
 =head2 WHO MODE
 
 positional arguments:
@@ -341,15 +330,12 @@ plain list format:
 
 	spm local -nvp 'bash$|glibc|ncurses'
 
-Regenerate both remote and local targets global caches:
-	sudo spm cache -a
-
 Print the owner of 'bin/bash':
 
 	spm who 'bin/bash\b'
 
-Note that all modes, except source, repo and cache, accept regexp similar to
-those in Perl. For more information visit http://docs.python.org/2/library/re.html.
+Note that all modes, except source and repo, accept regexp similar to those in
+Perl. For more information visit http://docs.python.org/2/library/re.html.
 Source mode accepts base (e.g. foo), directory (e.g. /home/me/foo) with
 SRCBUILD in it, aliases (e.g. base) which you can find on the top-level of a
 repository as foo.alias or finally metagroups - currently only one - world.
