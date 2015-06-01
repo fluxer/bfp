@@ -61,7 +61,7 @@ uninstall:
 	$(RM) $(DESTDIR)$(AUTOSTARTDIR)/spm-autostart.desktop
 
 clean:
-	$(RM) -r *.build/ *.so *.exe __pycache__ *.c gui_ui.py
+	$(RM) -r *.build/ *.so *.exe __pycache__ *.c *_ui.py *.desktop
 	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
 bump:

@@ -589,7 +589,10 @@ class Misc(object):
         lfile = open(destination, 'ab', self.BUFFER)
         try:
             # since the local file size changes use persistent units based on
-            # remote file size
+            # remote file size (which is not much of persistent when the
+            # transfer is chunked, doh! proper content-lenght _may_ be sent
+            # on the next request but that's is too much to ask for from
+            # the server and internet provider)
             units = self.string_unit_guess(rsize)
             while True:
                 msg = 'Downloading: %s, %s/%s' % (self.url_normalize(surl, True), \

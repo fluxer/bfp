@@ -106,7 +106,7 @@ else:
     for line in misc.file_readlines(REPOSITORIES_CONF):
         line = misc.string_encode(line.strip())
         if line.startswith(('http://', 'https://', 'ftp://', 'ftps://', \
-            'git://', 'ssh://', 'rsync://')) or os.path.exists(line):
+            'git://', 'ssh://', 'rsync://', 'svn://')) or os.path.exists(line):
             REPOSITORIES.append(line)
 
     if not REPOSITORIES:

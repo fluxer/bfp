@@ -25,13 +25,15 @@ class Block(object):
             return variant
         if variant.startswith('/dev'):
             # /dev -> UUID
-            uuid = self.blkid(variant, 'UUID')
+            uuid = self.info(variant, 'UUID')
             if misc.file_search(uuid, '/proc/mounts'):
                 return uuid
         # UUID -> /dev
-        dev = misc.system_output((misc.whereis('blkid'), '-U', variant))
-        if misc.file_search(dev, '/proc/mounts'):
-            return dev
+        uuid = '/dev/disk/by-uuid/%s' % variant
+        if os.path.exists(uuid):
+            dev = self.info(uuid, 'DEVNAME')
+            if misc.file_search(dev, '/proc/mounts'):
+                return dev
 
     def unmount(self, variant):
         ''' unmount a block device '''
@@ -80,18 +82,11 @@ class Block(object):
 
     def info(self, device, tag):
         ''' Get information about a block device '''
-        udevadm = misc.whereis('udevadm', True)
-        value = None
-        if udevadm:
-            for line in misc.system_communicate((udevadm, 'info', \
+        for line in misc.system_communicate((misc.whereis('udevadm'), 'info', \
                 '--name', device, '--query=property')).splitlines():
                 line = misc.string_encode(line).strip()
-                if line.startswith('ID_FS_%s' % tag):
-                    value = line.split('=')[1]
-        if not value:
-            value = misc.system_communicate((misc.whereis('blkid'), \
-                '-s', tag, '-o', 'value', device))
-        return value
+                if line.startswith(('ID_FS_%s' % tag, tag)):
+                    return line.split('=')[1]
 
 class Power(object):
     ''' System power state management and information gathering helper '''

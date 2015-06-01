@@ -24,7 +24,7 @@ misc = libspm.misc
 database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.7.6 (cff8eb6)"
+app_version = "1.7.6 (3040da1)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -217,7 +217,8 @@ class Dist(object):
                         if os.path.isfile(src_file):
                             message.sub_debug(_('Removing'), src_file)
                             os.unlink(src_file)
-                    elif src_url.startswith('git://') or src_url.endswith('.git'):
+                    elif src_url.startswith(('git://', 'rsync://', 'svn://')) \
+                        or src_url.endswith('.git'):
                         if os.path.isdir(src_file):
                             message.sub_debug(_('Removing'), src_file)
                             misc.dir_remove(src_file)
