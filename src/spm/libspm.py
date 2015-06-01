@@ -1150,14 +1150,14 @@ class Source(object):
             # FIXME: that's not future proof!
             # anything earlier than Python 2.6 is beyond upstream support (AFAICT)
             for version in ('2.6', '2.7', '3.1', '3.3', '3.4', '3.5', '3.6'):
+                interpreter = misc.whereis('python%s' % version, False)
+                if not interpreter:
+                    message.sub_warning(_('Required Python interpreter missing'), interpreter)
+                    continue
                 for spath in ('lib/python%s' % version, \
                     'usr/lib/python%s' % version):
                     sfull = '%s/%s' % (self.install_dir, spath)
                     if not os.path.exists(sfull):
-                        continue
-                    interpreter = misc.whereis('python%s' % version, True)
-                    if not interpreter:
-                        message.sub_warning(_('Required Python interpreter missing'), interpreter)
                         continue
                     message.sub_debug(_('Python %s directory' % version), sfull)
                     misc.system_command((interpreter, '-m', 'compileall', '-f', '-q', sfull))
