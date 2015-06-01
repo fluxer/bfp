@@ -37,7 +37,7 @@ cold: clean bump
 	$(NUITKA) client.py
 	$(STRIP) *.exe
 	# REQUIRES INSTALLED LIBS!
-	../cold/cold.py gui.py gui_ui.py -o ./spm-gui.exe
+	$(PYTHON) ../cold/cold.py gui.py gui_ui.py -o ./gui.exe
 
 install:
 	$(INSTALL) -dm755 $(DESTDIR)$(SBINDIR) $(DESTDIR)$(BINDIR) \
