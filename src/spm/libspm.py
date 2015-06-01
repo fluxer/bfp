@@ -380,9 +380,9 @@ class Remote(object):
 
 class Repo(object):
     ''' Class for dealing with repositories '''
-    def __init__(self, repositories_urls, do_clean=False, do_sync=False, \
+    def __init__(self, repositories, do_clean=False, do_sync=False, \
         do_cache=False, do_update=False, do_prune=False):
-        self.repositories_urls = repositories_urls
+        self.repositories = repositories
         self.do_clean = do_clean
         self.do_cache = do_cache
         self.do_sync = do_sync
@@ -460,7 +460,7 @@ class Repo(object):
 
     def main(self):
         ''' Execute action for every repository '''
-        for repository in self.repositories_urls:
+        for repository in self.repositories:
             # compute only once by asigning class variables, in cases when
             # clean and sync is done this is more optimal but triggers
             # http://pylint-messages.wikidot.com/messages:w0201
@@ -544,6 +544,7 @@ class Source(object):
         obj.main()
 
     def split_debug_symbols(self, sfile):
+        ''' Separate debug symbols from ELF file '''
         # avoid actions on debug files, do not rely on .debug suffix
         if '/lib/debug/' in sfile:
             return
@@ -1829,7 +1830,7 @@ class Who(object):
         database.IGNORE = IGNORE
 
     def main(self):
-        ''' Print owner of match '''
+        ''' Print owner of files pattern '''
         for target in database.local_belongs(self.pattern, escape=False):
             if self.plain:
                 print(target)
