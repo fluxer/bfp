@@ -802,11 +802,12 @@ class Upgrade(object):
         if os.path.isfile(srcbuild):
             message.sub_debug(_('Target already migrated'), target)
             return
-        remote = database.remote_search(target)
+        # non-basename doesn't work, wtf?
+        remote = database.remote_search(os.path.basename(target))
         if not remote:
             message.sub_warning(_('No remote alternative for'), target)
             return
-        shutil.copy2(remote_srcbuild, srcbuild)
+        shutil.copy2('%s/SRCBUILD' % remote, srcbuild)
 
     def upgrade_1_7_x_metadata(self, target):
         ''' Build local target cache from legacy metadata and footprint '''
@@ -866,7 +867,10 @@ class Upgrade(object):
         database._build_local_cache(True, True)
 
     def main(self):
-        for target in database.local_all():
+        if not os.path.isdir(database.LOCAL_DIR):
+            message.sub_warning(_('No local targets directory'), database.LOCAL_DIR)
+            return
+        for target in os.listdir(database.LOCAL_DIR):
             message.sub_info(_('Starting migration procedure 1_7_x_srcbuild on'), target)
             self.upgrade_1_7_x_srcbuild(target)
             message.sub_info(_('Starting migration procedure 1_7_x_metadata on'), target)
