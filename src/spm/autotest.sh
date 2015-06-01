@@ -43,7 +43,7 @@ fi
 
 if ! grep -q "SPM REPO" "$statefile" ;then
     echo "=== RUNNING SPM REPO TEST ==="
-    "$1" "$curdir/spm.py" $spmargs repo -a
+    "$1" "$curdir/spm.py" $spmargs repo -cspu
     echo "SPM REPO" >> "$statefile"
 else
     echo "=== SKIPPING SPM REPO TEST ==="
@@ -74,14 +74,6 @@ if ! grep -q "SPM LOCAL" "$statefile" ;then
     echo "SPM LOCAL" >> "$statefile"
 else
     echo "=== SKIPPING SPM LOCAL TEST ==="
-fi
-
-if ! grep -q "SPM CACHE" "$statefile" ;then
-    echo "=== RUNNING SPM CACHE TEST ==="
-    "$1" "$curdir/spm.py" $spmargs cache -rl
-    echo "SPM CACHE" >> "$statefile"
-else
-    echo "=== SKIPPING SPM CACHE TEST ==="
 fi
 
 if ! grep -q "SPM WHO" "$statefile" ;then
