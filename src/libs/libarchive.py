@@ -249,7 +249,7 @@ class Libarchive(object):
         # http://linux.die.net/man/2/stat
         self.lib.archive_entry_set_pathname(entry, types.StringType(spath.lstrip(strip)))
         # self.lib.archive_entry_set_pathname(entry, spath)
-        self.lib.archive_entry_set_size(entry, stat.st_size)
+        self.lib.archive_entry_set_size(entry, ctypes.c_int64(stat.st_size))
         # self.lib.archive_entry_set_filetype(entry)
         self.lib.archive_entry_set_mode(entry, stat.st_mode)
         self.lib.archive_entry_set_perm(entry, stat.st_mode)
@@ -290,11 +290,21 @@ class Libarchive(object):
 
         for spath in paths:
             if os.path.isdir(spath):
+                breakfree = False
                 for root, dirs, files in os.walk(spath):
+                    if breakfree:
+                        break
                     for sfile in files:
-                        self._addEntry(os.path.join(root, sfile), archive, strip)
+                        if breakfree:
+                            break
+                        if not self._addEntry(os.path.join(root, sfile), archive, strip):
+                            retv = False
+                            breakfree = True
+                            break
             else:
-                self._addEntry(spath, archive, strip)
+                if not self._addEntry(spath, archive, strip):
+                    retv = False
+                    break
 
         self._writeClose(archive)
         self._writeFree(archive)
