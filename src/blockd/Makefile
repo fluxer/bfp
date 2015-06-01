@@ -5,6 +5,13 @@ all: bump clean
 	$(NUITKA) client.py
 	$(STRIP) *.exe
 
+cython: clean bump
+	$(CYTHON) --embed daemon.py
+	$(CYTHON) --embed client.py
+	$(CC) daemon.c $(shell $(PYTHON)-config --includes --libs) -o daemon.exe
+	$(CC) client.c $(shell $(PYTHON)-config --includes --libs) -o client.exe
+	$(STRIP) *.exe
+
 install:
 	$(INSTALL) -dm755 $(DESTDIR)$(SBINDIR) $(DESTDIR)$(BINDIR) \
 		$(DESTDIR)$(DBSYSTEMDIR)/ $(DESTDIR)$(DBSERVICEDIR)/
@@ -26,4 +33,5 @@ clean:
 bump:
 	$(SED) 's|^app_version.*|app_version = "$(VERSION) ($(GIT_VERSION))"|' -i client.py
 
-.PHONY: all check install uninstall clean bump
+.SUFFIXES: .py
+.PHONY: all cython install uninstall clean bump

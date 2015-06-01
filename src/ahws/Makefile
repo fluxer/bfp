@@ -6,7 +6,7 @@ all: clean bump
 
 cython: clean bump
 	$(CYTHON) --embed ahws.py
-	$(CC) ahws.c $(shell pkg-config --cflags --libs $(PYTHON)) -o ahws.exe
+	$(CC) ahws.c $(shell pkg-config --includes --libs $(PYTHON)) -o ahws.exe
 	$(STRIP) *.exe
 
 install:
@@ -24,4 +24,4 @@ clean:
 
 bump:
 	$(SED) 's|^app_version.*|app_version = "$(VERSION) ($(GIT_VERSION))"|' -i ahws.py
-.PHONY: all check install uninstall clean
+.PHONY: all cython install uninstall clean

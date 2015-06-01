@@ -16,9 +16,9 @@ cython: clean bump
 	$(CYTHON) libspm.py
 	$(CYTHON) --embed spm.py
 	$(CYTHON) --embed tools.py
-	$(CC) -shared libspm.c $(shell $(PYTHON)-config --cflags --libs) -o libspm.so
-	$(CC) spm.c $(shell $(PYTHON)-config --cflags --libs) -o spm.exe
-	$(CC) tools.c $(shell $(PYTHON)-config --cflags --libs) -o tools.exe
+	$(CC) -shared libspm.c $(shell $(PYTHON)-config --includes --libs) -o libspm.so
+	$(CC) spm.c $(shell $(PYTHON)-config --includes --libs) -o spm.exe
+	$(CC) tools.c $(shell $(PYTHON)-config --includes --libs) -o tools.exe
 	$(STRIP) *.exe *.so
 
 install:
