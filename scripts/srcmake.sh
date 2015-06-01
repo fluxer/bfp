@@ -69,6 +69,7 @@ whereis() {
     return $rv
 }
 
+startdir="$(dirname $0)"
 for src in "${@:-.}";do
     srcbuild="$(realpath $src)/SRCBUILD"
 
@@ -188,6 +189,7 @@ for src in "${@:-.}";do
         tar -caf "$src_real/$tarball" ./*
     fi
 
+    cd "$startdir"
     # do not remove the directories when the tarball can not be extracted
     if whereis bsdtar || whereis tar ;then
         msg "Cleaning up.."

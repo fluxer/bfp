@@ -6,7 +6,7 @@ all: clean bump
 
 cython: clean bump
 	$(CYTHON) --embed ahws.py
-	$(CC) ahws.c $(shell pkg-config --includes --libs $(PYTHON)) -o ahws.exe
+	$(CC) ahws.c $(shell $(PYTHON)-config --includes --libs $(PYTHON)) -o ahws.exe
 	$(STRIP) *.exe
 
 install:
