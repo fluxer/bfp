@@ -3,7 +3,7 @@
 import gettext
 _ = gettext.translation('spm', fallback=True).gettext
 
-import sys, os, shutil, re, compileall, site
+import sys, os, shutil, re, site
 from datetime import datetime
 if sys.version < '3':
     import ConfigParser as configparser
@@ -1143,16 +1143,24 @@ class Source(object):
             sys.exit(2)
 
         if self.python_compile:
+            # force build the caches to prevent access time issues with
+            # .pyc files being older that .py files because .py files
+            # where modified after the usual installation procedure
             message.sub_info(_('Byte-compiling Python modules'))
-            for spath in site.getsitepackages():
-                sfull = '%s/%s' % (self.install_dir, spath)
-                if not os.path.exists(sfull):
-                    continue
-                message.sub_debug(_('Compiling Python directory'), sfull)
-                # force build the caches to prevent access time issues with
-                # .pyc files being older that .py files because .py files
-                # where modified after the usual installation procedure
-                compileall.compile_dir(sfull, force=True, quiet=True)
+            # FIXME: that's not future proof!
+            # anything earlier than Python 2.6 is beyond upstream support (AFAICT)
+            for version in ('2.6', '2.7', '3.1', '3.3', '3.4', '3.5', '3.6'):
+                for spath in ('lib/python%s' % version, \
+                    'usr/lib/python%s' % version):
+                    sfull = '%s/%s' % (self.install_dir, spath)
+                    if not os.path.exists(sfull):
+                        continue
+                    interpreter = misc.whereis('python%s' % version, True)
+                    if not interpreter:
+                        message.sub_warning(_('Required Python interpreter missing'), interpreter)
+                        continue
+                    message.sub_debug(_('Python %s directory' % version), sfull)
+                    misc.system_command((interpreter, '-m', 'compileall', '-f', '-q', sfull))
 
         message.sub_info(_('Assembling metadata'))
         metadata = '%s/%s' % (self.install_dir, self.target_metadata)
