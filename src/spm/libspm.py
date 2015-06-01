@@ -1152,7 +1152,7 @@ class Source(object):
             for version in ('2.6', '2.7', '3.1', '3.3', '3.4', '3.5', '3.6'):
                 interpreter = misc.whereis('python%s' % version, False)
                 if not interpreter:
-                    message.sub_warning(_('Required Python interpreter missing'), interpreter)
+                    message.sub_warning(_('Required Python interpreter missing'), version)
                     continue
                 for spath in ('lib/python%s' % version, \
                     'usr/lib/python%s' % version):
