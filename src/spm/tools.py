@@ -871,6 +871,7 @@ class Upgrade(object):
             message.sub_warning(_('No local targets directory'), database.LOCAL_DIR)
             return
         for target in os.listdir(database.LOCAL_DIR):
+            target = '%s/%s' % (database.LOCAL_DIR, target)
             message.sub_info(_('Starting migration procedure 1_7_x_srcbuild on'), target)
             self.upgrade_1_7_x_srcbuild(target)
             message.sub_info(_('Starting migration procedure 1_7_x_metadata on'), target)
