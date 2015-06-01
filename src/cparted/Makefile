@@ -9,7 +9,7 @@ all: bump clean
 
 cython: clean
 	$(CYTHON) --embed main.py
-	$(CC) main.c $(shell pkg-config --cflags --libs $(PYTHON)) -o main.exe
+	$(CC) main.c $(shell $(PYTHON)-config --cflags --libs) -o main.exe
 	$(STRIP) *.exe
 
 install:

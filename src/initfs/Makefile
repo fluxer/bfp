@@ -11,8 +11,8 @@ all: clean bump
 cython: clean bump
 	$(CYTHON) --embed mkinitfs.py
 	$(CYTHON) --embed lsinitfs.py
-	$(CC) mkinitfs.c $(shell pkg-config --cflags --libs $(PYTHON)) -o mkinitfs.exe
-	$(CC) lsinitfs.c $(shell pkg-config --cflags --libs $(PYTHON)) -o lsinitfs.exe
+	$(CC) mkinitfs.c $(shell $(PYTHON)-config --cflags --libs) -o mkinitfs.exe
+	$(CC) lsinitfs.c $(shell $(PYTHON)-config --cflags --libs) -o lsinitfs.exe
 	$(STRIP) *.exe
 
 install:

@@ -22,9 +22,9 @@ cython: clean bump
 	$(CYTHON) --embed daemon.py
 	$(CYTHON) --embed client.py
 	$(CYTHON) --embed gui.py
-	$(CC) daemon.c $(shell pkg-config --cflags --libs $(PYTHON)) -o daemon.exe
-	$(CC) client.c $(shell pkg-config --cflags --libs $(PYTHON)) -o client.exe
-	$(CC) gui.c $(shell pkg-config --cflags --libs $(PYTHON)) -o gui.exe
+	$(CC) daemon.c $(shell $(PYTHON)-config --cflags --libs) -o daemon.exe
+	$(CC) client.c $(shell $(PYTHON)-config --cflags --libs) -o client.exe
+	$(CC) gui.c $(shell $(PYTHON)-config --cflags --libs) -o gui.exe
 	$(STRIP) *.exe
 
 cold: clean bump

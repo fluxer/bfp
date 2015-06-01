@@ -13,13 +13,13 @@ all: clean
 
 cython: clean
 	$(CYTHON) libarchive.py libmessage.py libmisc.py libpackage.py libudev.py
-	$(CC) -shared libarchive.c $(shell pkg-config --cflags $(PYTHON)) -o libarchive.so
-	$(CC) -shared libmessage.c $(shell pkg-config --cflags $(PYTHON)) -o libmessage.so
-	$(CC) -shared libmisc.c $(shell pkg-config --cflags $(PYTHON)) -o libmisc.so
-	$(CC) -shared libpackage.c $(shell pkg-config --cflags $(PYTHON)) -o libpackage.so
+	$(CC) -shared libarchive.c $(shell $(PYTHON)-config --cflags --libs) -o libarchive.so
+	$(CC) -shared libmessage.c $(shell $(PYTHON)-config --cflags --libs) -o libmessage.so
+	$(CC) -shared libmisc.c $(shell $(PYTHON)-config --cflags --libs) -o libmisc.so
+	$(CC) -shared libpackage.c $(shell $(PYTHON)-config --cflags --libs) -o libpackage.so
 	# NOTE: _libudev will not work
 	$(CC) -shared _libudev.c \
-		$(shell pkg-config --cflags --libs $(PYTHON)) \
+		$(shell $(PYTHON)-config --cflags --libs) \
 		$(shell pkg-config --cflags --libs libudev) \
 		-o _libudev.so
 	$(STRIP) *.so
