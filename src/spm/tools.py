@@ -796,14 +796,30 @@ class Upgrade(object):
         # not much to do here
         pass
 
-    def upgrade_1_7_x(self, target):
+    def upgrade_1_7_x_srcbuild(self, target):
+        ''' Ensure that SRCBUILD is present in the local target directory '''
+        srcbuild = '%s/SRCBUILD' % target
+        if os.path.isfile(srcbuild):
+            message.sub_debug(_('Target already migrated'), target)
+            return
+        remote = database.remote_search(target)
+        if not remote:
+            message.sub_warning(_('No remote alternative for'), target)
+            return
+        shutil.copy2(remote_srcbuild, srcbuild)
+
+    def upgrade_1_7_x_metadata(self, target):
         ''' Build local target cache from legacy metadata and footprint '''
         metadata = '%s/metadata' % target
+        newmeta = '%s.json' % metadata
         footprint = '%s/footprint' % target
-        if not os.path.isfile(metadata) or not os.path.isfile(footprint):
-            message.sub_warning(_('Invalid or migrated target (1_7_x)'), target)
+        if os.path.isfile(newmeta):
+            message.sub_debug(_('Target already migrated'), target)
             return
-        message.sub_info(_('Migrating legacy local metadata'), target)
+        elif not os.path.isfile(metadata) or not os.path.isfile(footprint):
+            message.sub_warning(_('Invalid target'), target)
+            return
+        message.sub_debug(_('Migrating legacy local metadata'), target)
         data = {'version': '1',
                 'release': '1',
                 'description': ' unknown',
@@ -820,7 +836,7 @@ class Upgrade(object):
                 data[key] = value
         misc.json_write('%s/metadata.json' % target, data)
 
-    def upgrade_backup(self, target):
+    def upgrade_1_7_x_backup(self, target):
         ''' Ensure local targets have the backup data in place '''
         metadata = '%s/metadata.json' % target
         if not os.path.isfile(metadata):
@@ -828,11 +844,11 @@ class Upgrade(object):
             return
         data = misc.json_read(metadata)
         if 'backup' in data:
-            message.sub_info(_('Target already migrated (backup)'), target)
+            message.sub_debug(_('Target already migrated'), target)
             return
         backup = database.remote_metadata(target, 'backup') or []
         dbackup = {}
-        message.sub_info(_('Migrating remote backup to local'), target)
+        message.sub_debug(_('Migrating remote backup to local'), target)
         for sfile in database.local_metadata(target, 'footprint'):
             if sfile.endswith('.conf') or sfile.lstrip('/') in backup:
                 if os.path.isfile(sfile):
@@ -842,18 +858,23 @@ class Upgrade(object):
         data['backup'] = dbackup
         misc.json_write(metadata, data)
 
-    def upgrade_cache(self):
+    def upgrade_recache(self):
         ''' Upgrade SPM caches '''
         message.sub_info(_('Caching remote metadata'))
-        database._build_remote_cache(True)
+        database._build_remote_cache(True, True)
         message.sub_info(_('Caching local metadata'))
-        database._build_local_cache(True)
+        database._build_local_cache(True, True)
 
     def main(self):
         for target in database.local_all():
-            self.upgrade_1_7_x(target)
-            self.upgrade_backup(target)
-        self.upgrade_cache()
+            message.sub_info(_('Starting migration procedure 1_7_x_srcbuild on'), target)
+            self.upgrade_1_7_x_srcbuild(target)
+            message.sub_info(_('Starting migration procedure 1_7_x_metadata on'), target)
+            self.upgrade_1_7_x_metadata(target)
+            message.sub_info(_('Starting migration procedure 1_7_x_backup on'), target)
+            self.upgrade_1_7_x_backup(target)
+        message.sub_info(_('Starting migration procedure'), 'recache')
+        self.upgrade_recache()
 
 
 try:
