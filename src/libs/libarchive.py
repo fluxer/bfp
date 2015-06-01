@@ -312,7 +312,7 @@ class Libarchive(object):
         # return value
         return retv
 
-    def supportedArchive(self, fname):
+    def supportedArchive(self, fname, silent=False):
         ''' Check if the archive is supported '''
         retv = False              # Return value
         archive = self._readNew() # Archive struct
@@ -322,14 +322,18 @@ class Libarchive(object):
         self._readSupportFormatAll(archive)
 
         # open, analyse, and close our archive
-        if self._readOpenFilename(archive, fname, 10240) == self.ARCH_OK:
+        if self._readOpenFilename(archive, fname, 10240) != self.ARCH_OK:
+            if not silent:
+                print(self._errorString(archive))
+        else:
             retv = True
 
-        if self._readFree(archive) != self.ARCH_OK:
-            print(self._errorString(archive))
-            sys.exit(1)
+        if self._readClose(archive) != self.ARCH_OK:
+            if not silent:
+                print(self._errorString(archive))
+                sys.exit(1)
 
-        # return value
+        # You did good soldier
         return retv
 
 ### Main argument handling / operations

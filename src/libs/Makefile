@@ -8,15 +8,17 @@ all: clean
 	$(NUITKA) --module libmessage.py
 	$(NUITKA) --module libmisc.py
 	$(NUITKA) --module libpackage.py
+	$(NUITKA) --module libsystem.py
 	$(NUITKA) --module libudev.py
 	$(STRIP) *.so
 
 cython: clean
-	$(CYTHON) libarchive.py libmessage.py libmisc.py libpackage.py libudev.py
+	$(CYTHON) libarchive.py libmessage.py libmisc.py libpackage.py libsystem.py libudev.py
 	$(CC) -shared libarchive.c $(shell $(PYTHON)-config --cflags --libs) -o libarchive.so
 	$(CC) -shared libmessage.c $(shell $(PYTHON)-config --cflags --libs) -o libmessage.so
 	$(CC) -shared libmisc.c $(shell $(PYTHON)-config --cflags --libs) -o libmisc.so
 	$(CC) -shared libpackage.c $(shell $(PYTHON)-config --cflags --libs) -o libpackage.so
+	$(CC) -shared libsystem.c $(shell $(PYTHON)-config --cflags --libs) -o libsystem.so
 	# NOTE: _libudev will not work
 	$(CC) -shared _libudev.c \
 		$(shell $(PYTHON)-config --cflags --libs) \
@@ -32,10 +34,11 @@ install:
 	$(INSTALL) -m644 *.so $(DESTDIR)$(SITEDIR)/
 
 uninstall:
+	$(RM) $(DESTDIR)$(SITEDIR)/libarchive.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libmessage.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libmisc.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libpackage.so
-	$(RM) $(DESTDIR)$(SITEDIR)/libarchive.so
+	$(RM) $(DESTDIR)$(SITEDIR)/libsystem.so
 	$(RM) $(DESTDIR)$(SITEDIR)/libudev.so
 	$(RM) $(DESTDIR)$(SITEDIR)/_libudev.so
 
