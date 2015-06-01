@@ -3,7 +3,7 @@
 import gettext
 _ = gettext.translation('spm', fallback=True).gettext
 
-import sys, os, shutil, re, site
+import sys, os, shutil, re
 from datetime import datetime
 if sys.version < '3':
     import ConfigParser as configparser
@@ -1150,17 +1150,24 @@ class Source(object):
             # FIXME: that's not future proof!
             # anything earlier than Python 2.6 is beyond upstream support (AFAICT)
             for version in ('2.6', '2.7', '3.1', '3.3', '3.4', '3.5', '3.6'):
-                interpreter = misc.whereis('python%s' % version, False)
-                if not interpreter:
-                    message.sub_warning(_('Required Python interpreter missing'), version)
-                    continue
-                for spath in ('lib/python%s' % version, \
-                    'usr/lib/python%s' % version):
+                compilepaths = []
+                for spath in ('lib/python%s/site-packages' % version, \
+                    'usr/lib/python%s/site-packages' % version):
                     sfull = '%s/%s' % (self.install_dir, spath)
                     if not os.path.exists(sfull):
                         continue
                     message.sub_debug(_('Python %s directory' % version), sfull)
-                    misc.system_command((interpreter, '-m', 'compileall', '-f', '-q', sfull))
+                    compilepaths.append(sfull)
+                interpreter = misc.whereis('python%s' % version, False)
+                if not interpreter and compilepaths:
+                    message.sub_warning(_('Python interpreter missing'), version)
+                    continue
+                elif not compilepaths:
+                    # nothing to do
+                    continue
+                command = [interpreter, '-m', 'compileall', '-f', '-q']
+                command.extend(compilepaths)
+                misc.system_command(command)
 
         message.sub_info(_('Assembling metadata'))
         metadata = '%s/%s' % (self.install_dir, self.target_metadata)

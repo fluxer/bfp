@@ -332,6 +332,7 @@ class Database(object):
         # return consistent data
         return [target]
 
+
 class SRCBUILD(object):
     ''' A (new) SRCBUILD parser '''
     string_regex = re.compile('(?:^|\n)([\w\d_]+)=([^\(].*)')
@@ -353,6 +354,9 @@ class SRCBUILD(object):
             self.parse(sfile)
 
     def parse(self, sfile):
+        if misc.python2:
+            misc.typecheck(sfile, (types.StringTypes))
+
         self.__init__()
         _stringmap = {}
         _arraymap = {}

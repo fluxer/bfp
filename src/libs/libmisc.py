@@ -83,6 +83,7 @@ class Misc(object):
         ''' Get password from user input '''
         if self.python2:
             self.typecheck(sprompt, (types.StringTypes))
+
         if not sys.stdin.isatty():
             raise Exception('Standard input is not a TTY')
         return getpass.getpass(sprompt)
@@ -104,12 +105,12 @@ class Misc(object):
             return ' '.join(list(variant.keys()))
         return variant
 
-    def string_unit_guess(self, svar):
+    def string_unit_guess(self, string):
         ''' Guess the units to be used by string_unit() '''
         if self.python2:
-            self.typecheck(svar, (types.StringTypes))
+            self.typecheck(string, (types.StringTypes))
 
-        lenght = len(svar)
+        lenght = len(string)
         if lenght > 6:
             return 'Mb'
         elif lenght > 3:
@@ -117,25 +118,25 @@ class Misc(object):
         else:
             return 'b'
 
-    def string_unit(self, svar, sunit='Mb', bprefix=False):
+    def string_unit(self, string, sunit='Mb', bprefix=False):
         ''' Convert bytes to humar friendly units '''
         if self.python2:
-            self.typecheck(svar, (types.StringTypes))
+            self.typecheck(string, (types.StringTypes))
             self.typecheck(sunit, (types.StringTypes))
             self.typecheck(bprefix, (types.BooleanType))
 
         if sunit == 'Mb':
             if bprefix:
-                return '%d%s' % (int(svar) / (1024 * 1024), 'Mb')
-            return int(svar) / (1024 * 1024)
+                return '%d%s' % (int(string) / (1024 * 1024), 'Mb')
+            return int(string) / (1024 * 1024)
         elif sunit == 'Kb':
             if bprefix:
-                return '%d%s' % (int(svar) / 1024, 'Kb')
-            return int(svar) / 1024
+                return '%d%s' % (int(string) / 1024, 'Kb')
+            return int(string) / 1024
         else:
             if bprefix:
-                return '%d%s' % (int(svar), 'b')
-            return svar
+                return '%d%s' % (int(string), 'b')
+            return string
 
     def string_search(self, string, string2, exact=False, escape=True):
         ''' Search for string in other string or list '''
@@ -242,6 +243,7 @@ class Misc(object):
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
             self.typecheck(resolve, (types.BooleanType))
+            self.typecheck(quick, (types.BooleanType))
 
         if resolve:
             sfile = os.path.realpath(sfile)
