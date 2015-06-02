@@ -5,7 +5,7 @@ message = libmessage.Message()
 message.DEBUG = True
 misc = libmisc.Misc()
 
-app_version = "1.7.6 (44441e6)"
+app_version = "1.7.6 (e55cc49)"
 
 class Device(object):
     def __init__(self):
@@ -99,12 +99,12 @@ class Device(object):
     def Online(self, properties):
         ''' Emit that device online action happend '''
         message.sub_info('Onlined', properties[0])
-        self.Handle(properties, 'onlined')
+        self.Handle(properties, 'online')
 
     def Offline(self, properties):
         ''' Emit that device offline action happend '''
         message.sub_info('Offlined', properties[0])
-        self.Handle(properties, 'offlined')
+        self.Handle(properties, 'offline')
 
     def Daemon(self):
         ''' Daemon that monitors events '''

@@ -12,5 +12,6 @@ case "$1" in
     online) install_nvidia || kms_disable ;;
     changed) true ;; # ignored
     offline) remove_nvidia && kms_enable ;;
-    remove) remove_nvidia && kms_enable;;
+    remove) remove_nvidia && kms_enable ;;
+    *) echo "Unknown event: $1" && exit 1 ;;
 esac
