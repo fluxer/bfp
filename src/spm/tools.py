@@ -597,7 +597,7 @@ class Pack(object):
         for target in self.targets:
             if database.local_search(target):
                 target_version = database.local_metadata(target, 'version')
-                target_packfile = '%s/%s/%s_%s.tar.bz2' % (self.directory, \
+                target_packfile = '%s/%s_%s.tar.bz2' % (self.directory, \
                     os.path.basename(target), target_version)
                 target_depends = '%s.depends' % target_packfile
 
