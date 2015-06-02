@@ -153,7 +153,7 @@ class Power(object):
         status = 'Unknown'
         flid = '/proc/acpi/button/lid/LID/state'
         if os.path.isfile(flid):
-            status = misc.file_readlines(flid)[1]
+            status = misc.file_read(flid).split()[1]
         return status
 
     def get_power_supply(self):
@@ -208,7 +208,7 @@ class Power(object):
         states = []
         sfile = '/sys/power/state'
         if os.path.isfile(sfile):
-            states = misc.file_readlines(sfile)
+            states = misc.file_read(sfile).split()
         return states
 
     def pre_actions(self, actions):
@@ -230,7 +230,8 @@ class Power(object):
         misc.system_command((misc.whereis('reboot')))
 
     def do_shutdown(self):
-        ''' Shutdown the system '''
+        ''' Shutdown the system, unlike your usual shutdown helper this one
+            works on system with SysVinit, Busybox and (hopefully) systemd '''
         misc.system_command((misc.whereis('poweroff')))
 
     def do_suspend(self):

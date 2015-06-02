@@ -207,7 +207,10 @@ class Misc(object):
         return self.string_encode(content)
 
     def file_write(self, sfile, content, mode='w'):
-        ''' Write data to file safely '''
+        ''' Write data to file safely
+
+            the cool thing about this helper is that it does not dump files if
+            it fails to write the file when the mode is "a" (append) '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
             self.typecheck(content, (types.StringTypes))
@@ -394,7 +397,13 @@ class Misc(object):
         self.system_command(cmd)
 
     def dir_create(self, sdir, ipermissions=0):
-        ''' Create directory if it does not exist, including leading paths '''
+        ''' Create directory if it does not exist, including leading paths
+
+        since Python 3.2 os.makedirs accepts exist_ok argument so you may use
+        it instead of this method, however it applies permissions on all
+        directories created - this one does not. it sets ipermissions on the
+        last directory of the path passed, for the leading paths the default
+        mask (0o777 is used) '''
         if self.python2:
             self.typecheck(sdir, (types.StringTypes))
             self.typecheck(ipermissions, (types.IntType))
@@ -405,7 +414,11 @@ class Misc(object):
             os.chmod(sdir, ipermissions)
 
     def dir_remove(self, sdir):
-        ''' Remove directory recursively '''
+        ''' Remove directory recursively
+
+            this methods exists only because in some older versions of Python
+            shutil.rmtree() does not handle symlinks properly. If you have
+            Python 2.7.9 >= use shutil.rmtree() instead '''
         if self.python2:
             self.typecheck(sdir, (types.StringTypes))
 
@@ -534,7 +547,9 @@ class Misc(object):
         return False
 
     def fetch_request(self, surl, data=None):
-        ''' Returns urlopen object, it is NOT closed! '''
+        ''' Returns urlopen object, it is NOT closed!
+
+            when supported, SSL context is set to secure the request '''
         if self.python2:
             self.typecheck(surl, (types.StringTypes))
             self.typecheck(data, (types.NoneType, types.DictType))
@@ -551,7 +566,10 @@ class Misc(object):
             return urlopen(request, timeout=self.TIMEOUT)
 
     def fetch_plain(self, surl, destination, iretry=3):
-        ''' Download file, iretry is passed internally! '''
+        ''' Download file, iretry is passed internally!
+
+            resume, https and (not so much) pretty printing during the download
+            process is all that it can do for you '''
         if self.python2:
             self.typecheck(surl, (types.StringTypes))
             self.typecheck(destination, (types.StringTypes))
@@ -619,7 +637,11 @@ class Misc(object):
             rfile.close()
 
     def fetch_git(self, surl, destination):
-        ''' Clone/pull Git repository '''
+        ''' Clone/pull Git repository
+
+            a few things to notice - only the last checkout of the repo is
+            requested and a fake user.name and user.email are set so that
+            `git pull' does not fail '''
         if self.python2:
             self.typecheck(surl, (types.StringTypes))
             self.typecheck(destination, (types.StringTypes))
@@ -668,7 +690,12 @@ class Misc(object):
         self.system_command((rsync, destination))
 
     def fetch(self, surl, destination, lmirrors=None, ssuffix='', iretry=3):
-        ''' Download file from mirror if possible, iretry is passed internally! '''
+        ''' Download something from mirror if possible, iretry is passed
+            internally!
+
+            it supports SVN, Git, rsync and plain http(s)/ftp(s) URLs. if it
+            is not able to recognize the protocol properly for you use
+            fetch_plain() or whatever you need directly. '''
         if self.python2:
             self.typecheck(surl, (types.StringTypes))
             self.typecheck(destination, (types.StringTypes))
@@ -708,7 +735,11 @@ class Misc(object):
             raise detail
 
     def archive_supported(self, sfile):
-        ''' Test if file is archive that can be handled properly '''
+        ''' Test if file is archive that can be handled properly
+
+            the following applies to all archive methods:
+            aside from the standard Bzip2, gzip, Tar and Zip formats they
+            support XZ/LZMA '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
 
@@ -839,7 +870,12 @@ class Misc(object):
         return content
 
     def system_communicate(self, command, shell=False, cwd=None, sinput=None):
-        ''' Get output and optionally send input to external utility '''
+        ''' Get output and optionally send input to external utility
+
+            it resets the environment and sets LC_ALL to "C" to ensure locales
+            are not respected, passing input is possible if sinput is different
+            than None. if something goes wrong you get standard output (stdout)
+            and standard error (stderr) as an Exception '''
         if self.python2:
             self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
             self.typecheck(sinput, (types.NoneType, types.StringTypes))
@@ -872,7 +908,13 @@ class Misc(object):
             sformat, sflags, sfile))
 
     def system_command(self, command, shell=False, cwd=''):
-        ''' Execute system command safely '''
+        ''' Execute system command safely
+
+            ensuring current directory is something that exists, handle string
+            commands properly for subprocess and if something goes wrong you
+            can get standard error (stderr) as an Exception. the last one exists
+            for wrappers and UIs that need more than:
+            "Command failed, exit status 1" '''
         if self.python2:
             self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
             self.typecheck(shell, (types.BooleanType))
@@ -952,7 +994,10 @@ class Misc(object):
                 os.remove(stmp)
 
     def system_trigger(self, command, shell=False):
-        ''' Execute trigger '''
+        ''' Execute trigger
+
+            that's a shortcur for a conditional chroot command depending
+            self.ROOT_DIR '''
         if self.python2:
             self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
             self.typecheck(shell, (types.BooleanType))
