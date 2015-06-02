@@ -300,7 +300,7 @@ class Database(object):
 
         for alias in self.remote_aliases(basename=False):
             if os.path.basename(target) == os.path.basename(alias):
-                return misc.file_readlines('%s.alias' % alias)
+                return misc.file_readsmart('%s.alias' % alias)
         # return consistent data
         return [target]
 

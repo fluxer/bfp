@@ -55,10 +55,9 @@ class Interface(QtDBus.QDBusInterface):
             MessageCritical(msg)
 
     @QtCore.pyqtSlot(QtCore.QString)
-    def Finished(self, *msg):
-        # gee... the msg is QVariant but a slot with QVariant does not work
-        # so here is a _ugly_ workaround
-        msg = str(QtCore.QString(msg[0]))
+    def Finished(self, msg):
+        # gee... the msg is QVariant so here is a _ugly_ workaround
+        msg = str(msg)
         if msg == 'Success':
             MessageInfo(msg)
         else:
@@ -242,7 +241,12 @@ def RefreshWidgets():
     if not ui.SearchTable.selectedIndexes():
         ui.DetailsButton.setEnabled(False)
     for item in ui.SearchTable.selectedIndexes():
-        target = str(ui.SearchTable.item(item.row(), 0).text())
+        tableitem = ui.SearchTable.item(item.row(), 0)
+        # things happen asyncronsly so it may be gone by the time this block
+        # is reached
+        if not tableitem:
+            continue
+        target = str(tableitem.text())
         if not database.local_search(target):
             ui.RemoveButton.setEnabled(False)
     ui.RepoRemoveButton.setEnabled(False)

@@ -103,8 +103,7 @@ if not os.path.isfile(REPOSITORIES_CONF):
     REPOSITORIES = ['https://bitbucket.org/smil3y/mini.git']
 else:
     REPOSITORIES = []
-    for line in misc.file_readlines(REPOSITORIES_CONF):
-        line = misc.string_encode(line.strip())
+    for line in misc.file_readsmart(REPOSITORIES_CONF):
         if line.startswith(('http://', 'https://', 'ftp://', 'ftps://', \
             'git://', 'ssh://', 'rsync://', 'svn://')) or os.path.exists(line):
             REPOSITORIES.append(line)
@@ -120,8 +119,7 @@ if not os.path.isfile(MIRRORS_CONF):
     MIRRORS = ['http://distfiles.gentoo.org/distfiles']
 else:
     MIRRORS = []
-    for line in misc.file_readlines(MIRRORS_CONF):
-        line = misc.string_encode(line.strip())
+    for line in misc.file_readsmart(MIRRORS_CONF):
         if line.startswith(('http://', 'https://', 'ftp://', 'ftps://')):
             MIRRORS.append(line)
 
@@ -136,10 +134,8 @@ if not os.path.isfile(KEYSERVERS_CONF):
     KEYSERVERS = ['pool.sks-keyservers.net']
 else:
     KEYSERVERS = []
-    for line in misc.file_readlines(KEYSERVERS_CONF):
-        line = misc.string_encode(line.strip())
-        if line:
-            KEYSERVERS.append(line)
+    for line in misc.file_readsmart(KEYSERVERS_CONF):
+        KEYSERVERS.append(line)
 
     if not KEYSERVERS and VERIFY:
         message.critical(_('PGP keys servers configuration file is empty'))

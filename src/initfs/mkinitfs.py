@@ -190,9 +190,7 @@ try:
                 message.sub_debug('Skipping', sfile)
                 continue
             message.sub_debug('Reading', sfile)
-            for line in misc.file_readlines(sfile):
-                if not line or line.startswith('#'):
-                    continue
+            for line in misc.file_readsmart(sfile):
                 items = glob.glob(line)
                 # glob returns null and the warning in copy_item() may not be
                 # reached if iterating directly over the value fom glob.glob()
@@ -209,9 +207,7 @@ try:
                 message.sub_debug('Skipping', sfile)
                 continue
             message.sub_debug('Reading', sfile)
-            for line in misc.file_readlines(sfile):
-                if not line or line.startswith('#'):
-                    continue
+            for line in misc.file_readsmart(sfile):
                 if not line in ARGS.modules:
                     ARGS.modules.append(line)
 

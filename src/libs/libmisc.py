@@ -206,6 +206,19 @@ class Misc(object):
             rfile.close()
         return self.string_encode(content)
 
+    def file_readsmart(self, sfile):
+        ''' Get file content, split by new line, as list ignoring blank and comments '''
+        if self.python2:
+            self.typecheck(sfile, (types.StringTypes))
+
+        content = []
+        for line in self.file_readlines(sfile):
+            line = self..string_encode(line.strip())
+            if not line or line.startswith('#'):
+                continue
+            content.append(line)
+        return content
+
     def file_write(self, sfile, content, mode='w'):
         ''' Write data to file safely
 
