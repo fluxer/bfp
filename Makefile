@@ -4,7 +4,6 @@ all:
 	$(MAKE) -C doc
 	$(MAKE) -C src/ahws
 	$(MAKE) -C src/cold
-	$(MAKE) -C src/cparted
 	$(MAKE) -C src/libs
 	$(MAKE) -C src/initfs
 	$(MAKE) -C src/spm
@@ -14,7 +13,6 @@ cython:
 	$(MAKE) -C doc
 	$(MAKE) -C src/ahws cython
 	$(MAKE) -C src/cold cython
-	$(MAKE) -C src/cparted cython
 	$(MAKE) -C src/libs cython
 	$(MAKE) -C src/initfs cython
 	$(MAKE) -C src/spm cython
@@ -29,7 +27,6 @@ install:
 	$(MAKE) -C scripts install
 	$(MAKE) -C src/ahws install
 	$(MAKE) -C src/cold install
-	$(MAKE) -C src/cparted install
 	$(MAKE) -C src/initfs install
 	$(MAKE) -C src/libs install
 	$(MAKE) -C src/spm install
@@ -41,7 +38,6 @@ uninstall:
 	$(MAKE) -C scripts uninstall
 	$(MAKE) -C src/ahws uninstall
 	$(MAKE) -C src/cold uninstall
-	$(MAKE) -C src/cparted uninstall
 	$(MAKE) -C src/initfs uninstall
 	$(MAKE) -C src/libs uninstall
 	$(MAKE) -C src/spm uninstall
@@ -51,7 +47,6 @@ clean:
 	$(MAKE) -C doc clean
 	$(MAKE) -C src/ahws clean
 	$(MAKE) -C src/cold clean
-	$(MAKE) -C src/cparted clean
 	$(MAKE) -C src/libs clean
 	$(MAKE) -C src/initfs clean
 	$(MAKE) -C src/spm clean
