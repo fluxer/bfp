@@ -23,11 +23,9 @@ all: clean
 	$(SED) 's|#MACHINE#|$(MACHINE)|g' -i spm.conf.5
 	$(SED) 's|#ARCH#|$(ARCH)|g' -i spm.conf.5
 	$(SED) 's|#JOBS#|$(JOBS)|g' -i spm.conf.5
-	$(PYDOC) -w ../src/libs/libmessage.py
-	$(PYDOC) -w ../src/libs/libmisc.py
-	$(PYDOC) -w ../src/libs/libpackage.py
-	$(PYDOC) -w ../src/spm/libspm.py
-
+	for lib in ../src/libs/lib*.py; do \
+		$(PYDOC) -w $$lib; \
+	done
 install:
 	$(INSTALL) -vdm755 $(DESTDIR)$(MANDIR)/man8/ \
 		$(DESTDIR)$(MANDIR)/man5/ \
