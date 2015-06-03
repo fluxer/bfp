@@ -35,8 +35,8 @@ install:
 	$(INSTALL) -m644 etc/repositories.conf $(DESTDIR)/etc/spm/
 	$(INSTALL) -m644 etc/mirrors.conf $(DESTDIR)/etc/spm/
 	$(INSTALL) -m644 etc/keyservers.conf $(DESTDIR)/etc/spm/
-	$(SED) -e 's|#MACHINE#|$(MACHINE)|g' -e 's|#ARCH#|$(ARCH)|g' \
-		-e 's|#JOBS#|$(JOBS)|g' -i $(DESTDIR)/etc/spm.conf
+	$(SED) -e 's|@MACHINE@|$(MACHINE)|g' -e 's|@ARCH@|$(ARCH)|g' \
+		-e 's|@JOBS@|$(JOBS)|g' -i $(DESTDIR)/etc/spm.conf
 
 uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libspm.so
