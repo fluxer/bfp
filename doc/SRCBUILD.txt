@@ -20,24 +20,27 @@ options=('!binaries' '!shared' '!static' 'man' 'mirror' 'missing' '!rpath'
          '!pycompile' 'debug' '!purge')
 backup=('etc/bar/baz.conf')
 
-src_compile() {
+src_prepare() {
     # working with full path and variable expansion
     cd "$SOURCE_DIR/$_base"
     patch -Np1 -i "$SOURCE_DIR/dummy.patch"
+}
 
+src_compile() {
+    # working with full path (recommended)
+    cd "$SOURCE_DIR/file-$version"
     ./configure --prefix=/usr
     make
 }
 
 src_check() {
-    # working with full path (recommended)
-    cd "$SOURCE_DIR/file-$version"
+    # working with relative paths is possible too
+    cd "file-$version"
     make check
 }
 
 src_install() {
-    # working with relative paths is possible too
-    cd "file-$version"
+    cd "$SOURCE_DIR/file-$version"
     make DESTDIR="$INSTALL_DIR" install 
 }
 

@@ -14,10 +14,10 @@ file, unlike the PKGBUILD format.
 
 The metadata defined in the recipes should contain only one function
 (src_install) and two (2) variables (version and description). Optionally two
-(2) more functions can be specified (src_compile and src_check) and eight (8)
-more variable (release, depends, makedepends, checkdepends, sources, pgpkeys,
-options and backup). Target name is defined by the directory name in which the
-target files are placed.
+(3) more functions can be specified (src_prepare, src_compile and src_check)
+and eight (8) more variable (release, depends, makedepends, checkdepends,
+sources, pgpkeys, options and backup). Target name is defined by the directory
+name in which the target files are placed.
 
 In addition six (6) more functions (pre/post_install, pre/post_upgrade and
 pre/post_remove) can be defined as pre/post actions to be taken when software
@@ -126,7 +126,13 @@ Split debug information from DWARF files.
 
 =head2 src_compile
 
-Function defining the instructions to compile the software.
+Function defining the instructions to prepare the software. Patching and other
+permenanet changes to the source code before compilation should be done via it.
+
+=head2 src_compile
+
+Function defining the instructions to compile the software. For projects using
+autotools that is usually ./configure && make.
 
 =head2 src_check
 
@@ -134,9 +140,10 @@ Function defining the instructions to check (test) the software.
 
 =head2 src_install
 
-Function defining the instructions to install the software. Note that the
-software should be installed in the temporary directory INSTALL_DIR using
-DESTDIR or other method depending on the software.
+Function defining the instructions to install the software. For projects using
+autotools that is usually make install. Note that the software should be
+installed in the temporary directory INSTALL_DIR using DESTDIR or other method
+depending on the software's build system.
 
 =head2 pre_install
 

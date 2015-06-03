@@ -846,7 +846,7 @@ class Source(object):
                 message.sub_debug(_('Verifying'), src_url)
                 misc.gpg_verify(local_file)
 
-    def prepare(self):
+    def prepare(self, optional=False):
         ''' Prepare target sources '''
         message.sub_info(_('Checking dependencies'))
         dependencies = database.remote_mdepends(self.target, \
@@ -887,20 +887,89 @@ class Source(object):
                 message.sub_debug(_('Extracting'), link_file)
                 misc.archive_decompress(link_file, self.source_dir)
 
-    def compile(self):
+        if not misc.file_search('\nsrc_prepare()', \
+            self.srcbuild, escape=False):
+            if optional:
+                message.sub_warning(_('src_prepare() not defined'))
+                return
+            else:
+                message.sub_critical(_('src_prepare() not defined'))
+                sys.exit(2)
+
+        os.putenv('SOURCE_DIR', self.source_dir)
+        os.putenv('INSTALL_DIR', self.install_dir)
+        os.putenv('CHOST', CHOST)
+        os.putenv('CFLAGS', CFLAGS)
+        os.putenv('CXXFLAGS', CXXFLAGS)
+        os.putenv('CPPFLAGS', CPPFLAGS)
+        os.putenv('LDFLAGS', LDFLAGS)
+        os.putenv('MAKEFLAGS', MAKEFLAGS)
+        misc.system_command((misc.whereis('bash'), '-e', '-c', 'source ' + \
+            self.srcbuild + ' && umask 0022 && src_prepare'), \
+            cwd=self.source_dir)
+
+    def compile(self, optional=False):
         ''' Compile target sources '''
+        if not misc.file_search('\nsrc_compile()', \
+            self.srcbuild, escape=False):
+            if optional:
+                message.sub_warning(_('src_compile() not defined'))
+                return
+            else:
+                message.sub_critical(_('src_compile() not defined'))
+                sys.exit(2)
+
+        os.putenv('SOURCE_DIR', self.source_dir)
+        os.putenv('INSTALL_DIR', self.install_dir)
+        os.putenv('CHOST', CHOST)
+        os.putenv('CFLAGS', CFLAGS)
+        os.putenv('CXXFLAGS', CXXFLAGS)
+        os.putenv('CPPFLAGS', CPPFLAGS)
+        os.putenv('LDFLAGS', LDFLAGS)
+        os.putenv('MAKEFLAGS', MAKEFLAGS)
         misc.system_command((misc.whereis('bash'), '-e', '-c', 'source ' + \
             self.srcbuild + ' && umask 0022 && src_compile'), \
             cwd=self.source_dir)
 
-    def check(self):
+    def check(self, optional=False):
         ''' Check target sources '''
+        if not misc.file_search('\nsrc_check()', \
+            self.srcbuild, escape=False):
+            if optional:
+                message.sub_warning(_('src_check() not defined'))
+                return
+            else:
+                message.sub_critical(_('src_check() not defined'))
+                sys.exit(2)
+
+        os.putenv('SOURCE_DIR', self.source_dir)
+        os.putenv('INSTALL_DIR', self.install_dir)
+        os.putenv('CHOST', CHOST)
+        os.putenv('CFLAGS', CFLAGS)
+        os.putenv('CXXFLAGS', CXXFLAGS)
+        os.putenv('CPPFLAGS', CPPFLAGS)
+        os.putenv('LDFLAGS', LDFLAGS)
+        os.putenv('MAKEFLAGS', MAKEFLAGS)
         misc.system_command((misc.whereis('bash'), '-e', '-c', 'source ' + \
             self.srcbuild + ' && umask 0022 && src_check'), \
             cwd=self.source_dir)
 
     def install(self):
         ''' Install targets files '''
+
+        if not misc.file_search('\nsrc_install()', \
+            self.srcbuild, escape=False):
+            message.sub_critical(_('src_install() not defined'))
+            sys.exit(2)
+
+        os.putenv('SOURCE_DIR', self.source_dir)
+        os.putenv('INSTALL_DIR', self.install_dir)
+        os.putenv('CHOST', CHOST)
+        os.putenv('CFLAGS', CFLAGS)
+        os.putenv('CXXFLAGS', CXXFLAGS)
+        os.putenv('CPPFLAGS', CPPFLAGS)
+        os.putenv('LDFLAGS', LDFLAGS)
+        os.putenv('MAKEFLAGS', MAKEFLAGS)
         misc.dir_create(self.install_dir)
 
         # re-create host system symlinks to prevent mismatch of entries in the
@@ -1542,58 +1611,21 @@ class Source(object):
             if self.do_prepare:
                 message.sub_info(_('Starting %s preparations at') % \
                     self.target_name, datetime.today())
-                self.prepare()
+                self.prepare(True)
 
             if self.do_compile:
-                if not misc.file_search('\nsrc_compile()', \
-                    self.srcbuild, escape=False):
-                    message.sub_warning(_('src_compile() not defined'))
-                else:
-                    message.sub_info(_('Starting %s compile at') % \
-                        self.target_name, datetime.today())
-                    os.putenv('SOURCE_DIR', self.source_dir)
-                    os.putenv('INSTALL_DIR', self.install_dir)
-                    os.putenv('CHOST', CHOST)
-                    os.putenv('CFLAGS', CFLAGS)
-                    os.putenv('CXXFLAGS', CXXFLAGS)
-                    os.putenv('CPPFLAGS', CPPFLAGS)
-                    os.putenv('LDFLAGS', LDFLAGS)
-                    os.putenv('MAKEFLAGS', MAKEFLAGS)
-                    self.compile()
+                message.sub_info(_('Starting %s compile at') % \
+                    self.target_name, datetime.today())
+                self.compile(True)
 
             if self.do_check:
-                if not misc.file_search('\nsrc_check()', \
-                    self.srcbuild, escape=False):
-                    message.sub_warning(_('src_check() not defined'))
-                else:
-                    message.sub_info(_('Starting %s check at') % \
-                        self.target_name, datetime.today())
-                    os.putenv('SOURCE_DIR', self.source_dir)
-                    os.putenv('INSTALL_DIR', self.install_dir)
-                    os.putenv('CHOST', CHOST)
-                    os.putenv('CFLAGS', CFLAGS)
-                    os.putenv('CXXFLAGS', CXXFLAGS)
-                    os.putenv('CPPFLAGS', CPPFLAGS)
-                    os.putenv('LDFLAGS', LDFLAGS)
-                    os.putenv('MAKEFLAGS', MAKEFLAGS)
-                    self.check()
+                message.sub_info(_('Starting %s check at') % \
+                    self.target_name, datetime.today())
+                self.check(True)
 
             if self.do_install:
-                if not misc.file_search('\nsrc_install()', \
-                    self.srcbuild, escape=False):
-                    message.sub_critical(_('src_install() not defined'))
-                    sys.exit(2)
-
                 message.sub_info(_('Starting %s install at') % \
                     self.target_name, datetime.today())
-                os.putenv('SOURCE_DIR', self.source_dir)
-                os.putenv('INSTALL_DIR', self.install_dir)
-                os.putenv('CHOST', CHOST)
-                os.putenv('CFLAGS', CFLAGS)
-                os.putenv('CXXFLAGS', CXXFLAGS)
-                os.putenv('CPPFLAGS', CPPFLAGS)
-                os.putenv('LDFLAGS', LDFLAGS)
-                os.putenv('MAKEFLAGS', MAKEFLAGS)
                 self.install()
 
             if self.do_merge:
