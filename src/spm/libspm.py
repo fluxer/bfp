@@ -1238,7 +1238,12 @@ class Source(object):
                 continue
             footprint.append(sstripped)
             if sfile.endswith('.conf') or sstripped in self.target_backup:
-                backup[sstripped] = misc.file_checksum(sfile)
+                if os.path.islink(sfile):
+                    # FIXME: what to do in such case? it is not rare that a
+                    # symlink leads to full path on the host and checksuming
+                    # that will mess things up
+                    continue
+                backup[sstripped] = misc.file_checksum(os.path.realpath(sfile))
         data = {}
         data['version'] = self.target_version
         data['release'] = self.target_release
