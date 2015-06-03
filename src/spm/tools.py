@@ -855,6 +855,19 @@ class Upgrade(object):
         data['backup'] = dbackup
         misc.json_write(metadata, data)
 
+    def upgrade_1_8_x_optdepends(self, target):
+        ''' Ensure local targets have the optdepends data in place '''
+        metadata = '%s/metadata.json' % target
+        if not os.path.isfile(metadata):
+            message.sub_warning(_('Invalid target'), target)
+            return
+        data = misc.json_read(metadata)
+        if 'optdepends' in data:
+            message.sub_debug(_('Target already migrated'), target)
+            return
+        data['optdepends'] = []
+        misc.json_write(metadata, data)
+
     def main(self):
         if not os.path.isdir(database.LOCAL_DIR):
             message.sub_warning(_('No local targets directory'), database.LOCAL_DIR)
@@ -867,6 +880,8 @@ class Upgrade(object):
             self.upgrade_1_7_x_metadata(target)
             message.sub_info(_('Starting migration procedure 1_7_x_backup on'), target)
             self.upgrade_1_7_x_backup(target)
+            message.sub_info(_('Starting migration procedure 1_8_x_optdepends on'), target)
+            self.upgrade_1_8_x_optdepends(target)
 
 
 try:

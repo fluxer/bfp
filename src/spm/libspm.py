@@ -157,14 +157,15 @@ class Local(object):
     ''' Class for printing local targets metadata '''
     def __init__(self, pattern, do_name=False, do_version=False, \
         do_release=False, do_description=False, do_depends=False, \
-        do_reverse=False, do_size=False, do_footprint=False, do_backup=False, \
-        plain=False):
+        do_optdepends=False, do_reverse=False, do_size=False, \
+        do_footprint=False, do_backup=False, plain=False):
         self.pattern = pattern
         self.do_name = do_name
         self.do_version = do_version
         self.do_release = do_release
         self.do_description = do_description
         self.do_depends = do_depends
+        self.do_optdepends = do_optdepends
         self.do_reverse = do_reverse
         self.do_size = do_size
         self.do_footprint = do_footprint
@@ -221,6 +222,14 @@ class Local(object):
                     else:
                         message.sub_info(_('Depends'), data)
 
+                if self.do_optdepends:
+                    data = database.local_metadata(target, 'optdepends')
+                    data = misc.string_convert(data)
+                    if self.plain:
+                        print(data)
+                    else:
+                        message.sub_info(_('Optional depends'), data)
+
                 if self.do_reverse:
                     data = database.local_rdepends(target)
                     data = misc.string_convert(data)
@@ -257,8 +266,9 @@ class Remote(object):
     ''' Class for printing remote targets metadata '''
     def __init__(self, pattern, do_name=False, do_version=False, \
         do_release=False, do_description=False, do_depends=False, \
-        do_makedepends=False, do_checkdepends=False, do_sources=False, \
-        do_pgpkeys=False, do_options=False, do_backup=False, plain=False):
+        do_makedepends=False, do_optdepends=False, do_checkdepends=False, \
+        do_sources=False, do_pgpkeys=False, do_options=False, \
+        do_backup=False, plain=False):
         self.pattern = pattern
         self.do_name = do_name
         self.do_version = do_version
@@ -266,6 +276,7 @@ class Remote(object):
         self.do_description = do_description
         self.do_depends = do_depends
         self.do_makedepends = do_makedepends
+        self.do_optdepends = do_optdepends
         self.do_checkdepends = do_checkdepends
         self.do_sources = do_sources
         self.do_pgpkeys = do_pgpkeys
@@ -331,6 +342,14 @@ class Remote(object):
                         print(data)
                     else:
                         message.sub_info(_('Make depends'), data)
+
+                if self.do_optdepends:
+                    data = database.remote_metadata(target, 'optdepends')
+                    data = misc.string_convert(data)
+                    if self.plain:
+                        print(data)
+                    else:
+                        message.sub_info(_('Optional depends'), data)
 
                 if self.do_checkdepends:
                     data = database.remote_metadata(target, 'checkdepends')
@@ -527,6 +546,25 @@ class Source(object):
             obj = Source(targets, do_reverse=self.do_reverse, \
                 autoremove=autoremove)
         obj.main()
+
+    def setup_environment(self):
+        ''' Setup environment and directories for build '''
+        os.putenv('SOURCE_DIR', self.source_dir)
+        os.putenv('INSTALL_DIR', self.install_dir)
+        os.putenv('CHOST', CHOST)
+        os.putenv('CFLAGS', CFLAGS)
+        os.putenv('CXXFLAGS', CXXFLAGS)
+        os.putenv('CPPFLAGS', CPPFLAGS)
+        os.putenv('LDFLAGS', LDFLAGS)
+        os.putenv('MAKEFLAGS', MAKEFLAGS)
+        for target in self.target_optdepends:
+            option = 'no'
+            if database.local_uptodate(target):
+                message.sub_debug(_('Enabling optional'), target)
+                option = 'yes'
+            else:
+                message.sub_debug(_('Disabling optional'), target)
+            os.putenv('OPTIONAL_%s' % target.upper(), 'yes')
 
     def split_debug_symbols(self, sfile):
         ''' Separate debug symbols from ELF file '''
@@ -821,7 +859,6 @@ class Source(object):
 
     def fetch(self):
         ''' Fetch target sources '''
-        misc.dir_create(self.source_dir)
         misc.dir_create(self.sources_dir)
 
         message.sub_info(_('Preparing PGP keys'))
@@ -859,7 +896,7 @@ class Source(object):
         elif dependencies and self.automake:
             # the dependencies have been pre-calculated on automake by
             # remote_mdepends() above breaking on circular, any dependencies
-            # detected now are because they are last in the graph but depent
+            # detected now are because they are last in the graph but depend
             # on one in higher level
             message.sub_warning(_('Circular dependencies in %s') % \
                 self.target_name, dependencies)
@@ -902,14 +939,7 @@ class Source(object):
                 message.sub_critical(_('src_prepare() not defined'))
                 sys.exit(2)
 
-        os.putenv('SOURCE_DIR', self.source_dir)
-        os.putenv('INSTALL_DIR', self.install_dir)
-        os.putenv('CHOST', CHOST)
-        os.putenv('CFLAGS', CFLAGS)
-        os.putenv('CXXFLAGS', CXXFLAGS)
-        os.putenv('CPPFLAGS', CPPFLAGS)
-        os.putenv('LDFLAGS', LDFLAGS)
-        os.putenv('MAKEFLAGS', MAKEFLAGS)
+        self.setup_environment()
         misc.system_command((misc.whereis('bash'), '-e', '-c', 'source ' + \
             self.srcbuild + ' && umask 0022 && src_prepare'), \
             cwd=self.source_dir)
@@ -925,14 +955,7 @@ class Source(object):
                 message.sub_critical(_('src_compile() not defined'))
                 sys.exit(2)
 
-        os.putenv('SOURCE_DIR', self.source_dir)
-        os.putenv('INSTALL_DIR', self.install_dir)
-        os.putenv('CHOST', CHOST)
-        os.putenv('CFLAGS', CFLAGS)
-        os.putenv('CXXFLAGS', CXXFLAGS)
-        os.putenv('CPPFLAGS', CPPFLAGS)
-        os.putenv('LDFLAGS', LDFLAGS)
-        os.putenv('MAKEFLAGS', MAKEFLAGS)
+        self.setup_environment()
         misc.system_command((misc.whereis('bash'), '-e', '-c', 'source ' + \
             self.srcbuild + ' && umask 0022 && src_compile'), \
             cwd=self.source_dir)
@@ -948,14 +971,7 @@ class Source(object):
                 message.sub_critical(_('src_check() not defined'))
                 sys.exit(2)
 
-        os.putenv('SOURCE_DIR', self.source_dir)
-        os.putenv('INSTALL_DIR', self.install_dir)
-        os.putenv('CHOST', CHOST)
-        os.putenv('CFLAGS', CFLAGS)
-        os.putenv('CXXFLAGS', CXXFLAGS)
-        os.putenv('CPPFLAGS', CPPFLAGS)
-        os.putenv('LDFLAGS', LDFLAGS)
-        os.putenv('MAKEFLAGS', MAKEFLAGS)
+        self.setup_environment()
         misc.system_command((misc.whereis('bash'), '-e', '-c', 'source ' + \
             self.srcbuild + ' && umask 0022 && src_check'), \
             cwd=self.source_dir)
@@ -968,14 +984,7 @@ class Source(object):
             message.sub_critical(_('src_install() not defined'))
             sys.exit(2)
 
-        os.putenv('SOURCE_DIR', self.source_dir)
-        os.putenv('INSTALL_DIR', self.install_dir)
-        os.putenv('CHOST', CHOST)
-        os.putenv('CFLAGS', CFLAGS)
-        os.putenv('CXXFLAGS', CXXFLAGS)
-        os.putenv('CPPFLAGS', CPPFLAGS)
-        os.putenv('LDFLAGS', LDFLAGS)
-        os.putenv('MAKEFLAGS', MAKEFLAGS)
+        self.setup_environment()
         misc.dir_create(self.install_dir)
 
         # re-create host system symlinks to prevent mismatch of entries in the
@@ -1519,6 +1528,7 @@ class Source(object):
             self.target_description = database.remote_metadata(self.target_dir, 'description')
             self.target_depends = database.remote_metadata(self.target_dir, 'depends')
             self.target_makedepends = database.remote_metadata(self.target_dir, 'makedepends')
+            self.target_optdepends = database.remote_metadata(self.target_dir, 'optdepends')
             self.target_sources = database.remote_metadata(self.target_dir, 'sources')
             self.target_pgpkeys = database.remote_metadata(self.target_dir, 'pgpkeys')
             self.target_options = database.remote_metadata(self.target_dir, 'options')
@@ -1799,6 +1809,7 @@ class Binary(Source):
             self.target_description = database.remote_metadata(self.target_dir, 'description')
             self.target_depends = database.remote_metadata(self.target_dir, 'depends')
             self.target_makedepends = database.remote_metadata(self.target_dir, 'makedepends')
+            self.target_optdepends = database.remote_metadata(self.target_dir, 'optdepends')
             self.target_sources = database.remote_metadata(self.target_dir, 'sources')
             self.target_pgpkeys = database.remote_metadata(self.target_dir, 'pgpkeys')
             self.target_options = database.remote_metadata(self.target_dir, 'options')

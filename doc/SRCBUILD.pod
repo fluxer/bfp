@@ -7,17 +7,17 @@ SRCBUILD - Source Package Manager build recipe
 SRCBUILD is used as a script, a set of instructions, how to build software using
 Source Package Manager. Its syntax is Shell (Bash), similar to those used by
 Pacman's PKGBUILDs and Gentoo's ebuilds. Common things with the PKGBUILD format
-are the version, description, depends, makedepends, checkdepends, source,
-options and backup variables. Common things with the ebuild format is presence
-of pre/post actions in the SRCBUILD itself. This means that everything is in one
-file, unlike the PKGBUILD format.
+are the version, release, description, depends, makedepends, optdepends,
+checkdepends, source, options and backup variables. Common things with the
+ebuild format is presence of pre/post actions in the SRCBUILD itself. This
+means that everything is in one file, unlike the PKGBUILD format.
 
 The metadata defined in the recipes should contain only one function
-(src_install) and two (2) variables (version and description). Optionally two
+(src_install) and two (2) variables (version and description). Optionally three
 (3) more functions can be specified (src_prepare, src_compile and src_check)
-and eight (8) more variable (release, depends, makedepends, checkdepends,
-sources, pgpkeys, options and backup). Target name is defined by the directory
-name in which the target files are placed.
+and nine (9) more variable (release, depends, makedepends, optdepends,
+checkdepends, sources, pgpkeys, options and backup). Target name is defined by
+the directory name in which the target files are placed.
 
 In addition six (6) more functions (pre/post_install, pre/post_upgrade and
 pre/post_remove) can be defined as pre/post actions to be taken when software
@@ -51,7 +51,15 @@ Variable defining runtime dependencies of software.
 
 =head2 makedepends
 
-Variable defining build dependencies of software.
+Variable defining build dependencies of software. They are not added to the
+metadata as runtime dependencies and only meaningfull when building.
+
+=head2 optdepends
+
+Variable defining optional build/runtime dependencies of software. If a
+dependency from the array is installed a special envirnonmental variable is set
+for src_prepare, src_compile, src_check and src_install which can be used to
+build optional features of the software.
 
 =head2 checkdepends
 

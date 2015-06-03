@@ -13,7 +13,7 @@ class TestSuite(unittest.TestCase):
 
     def create_remote(self, name, version, release, description, \
         depends='', makedepends='', sources='', pgpkeys='', options='', \
-        backup=''):
+        backup='', optdepends=''):
         sdir = '%s/repositories/test/%s' % (database.CACHE_DIR, name)
         os.makedirs(sdir)
         srcbuild = open('%s/SRCBUILD' % sdir, 'w')
@@ -22,6 +22,7 @@ class TestSuite(unittest.TestCase):
         srcbuild.write('\ndescription="%s"' % description)
         srcbuild.write('\ndepends=(%s)' % misc.string_convert(depends))
         srcbuild.write('\nmakedepends=(%s)' % misc.string_convert(makedepends))
+        srcbuild.write('\noptdepends=(%s)' % misc.string_convert(optdepends))
         srcbuild.write('\ncheckdepends=(%s)' % name)
         srcbuild.write('\nsources=(%s)' % misc.string_convert(sources))
         srcbuild.write('\npgpkeys=(%s)' % misc.string_convert(pgpkeys))
@@ -69,6 +70,7 @@ class TestSuite(unittest.TestCase):
         self.remote_description = 'SPM test target'
         self.remote_depends = ['filesystem', 'linux-api-headers', 'tzdata']
         self.remote_makedepends = ['circular']
+        self.remote_optdepends = ['dummy']
         self.remote_source = ['\n', '', 'http://ftp.gnu.org/gnu/glibc/glibc-2.16.0.tar.xz']
         self.remote_pgpkeys = ['25EF0A436C2A4AFF']
         self.remote_options = ['!binaries', 'shared', '!static', 'man']
@@ -76,7 +78,7 @@ class TestSuite(unittest.TestCase):
         self.create_remote(self.remote_name, self.remote_version, \
             self.remote_release, self.remote_description, self.remote_depends, \
             self.remote_makedepends, self.remote_source, self.remote_pgpkeys, \
-            self.remote_options, self.remote_backup)
+            self.remote_options, self.remote_backup, self.remote_optdepends)
 
         # second dummy remote target
         self.remote2_name = 'dummy'
@@ -221,6 +223,10 @@ class TestSuite(unittest.TestCase):
     def test_remote_target_makedepends(self):
         self.assertEqual(database.remote_metadata(self.remote_name, \
             'makedepends'), self.remote_makedepends)
+
+    def test_remote_target_optdepends(self):
+        self.assertEqual(database.remote_metadata(self.remote_name, \
+            'optdepends'), self.remote_optdepends)
 
     def test_remote_target_checkdepends(self):
         self.assertEqual(database.remote_metadata(self.remote_name, \

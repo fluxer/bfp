@@ -72,6 +72,7 @@ class Database(object):
                     'description': parser.description,
                     'depends': parser.depends,
                     'makedepends': parser.makedepends,
+                    'optdepends': parser.optdepends,
                     'checkdepends': parser.checkdepends,
                     'sources': parser.sources,
                     'pgpkeys': parser.pgpkeys,
@@ -249,6 +250,7 @@ class Database(object):
         base = os.path.basename(target)
         local_version = self.local_metadata(base, 'version')
         local_release = self.local_metadata(base, 'release')
+        local_optional = self.local_metadata(base, 'optdepends')
         remote_version = self.remote_metadata(target, 'version')
         remote_release = self.remote_metadata(target, 'release')
 
@@ -260,6 +262,12 @@ class Database(object):
             return False
         elif local_release < remote_release:
             return False
+        else:
+            for optional in self.remote_metadata(target, 'optdepends'):
+                # FIXME: recursion bug
+                if self.local_uptodate(optional) \
+                    and not optional in local_optional:
+                    return False
         return True
 
     def remote_metadata(self, target, key):
@@ -275,8 +283,8 @@ class Database(object):
         elif os.path.isfile(srcbuild):
             return getattr(SRCBUILD(srcbuild), key)
         # for consistency
-        if key in ('depends', 'makedepends', 'checkdepends', 'sources', \
-            'options', 'backup', 'pgpkeys'):
+        if key in ('depends', 'makedepends', 'optdepends', 'checkdepends', \
+            'sources', 'options', 'backup', 'pgpkeys'):
             return []
 
     def remote_aliases(self, basename=True):
@@ -316,6 +324,7 @@ class SRCBUILD(object):
         self.description = ''
         self.depends = []
         self.makedepends = []
+        self.optdepends = []
         self.checkdepends = []
         self.sources = []
         self.pgpkeys = []
@@ -358,7 +367,7 @@ class SRCBUILD(object):
         for string in ('version', 'release', 'description'):
             if string in _stringmap:
                 setattr(self, string, _stringmap[string])
-        for array in ('depends', 'makedepends', 'checkdepends', 'sources', \
-            'pgpkeys', 'options', 'backup'):
+        for array in ('depends', 'makedepends', 'optdepends', 'checkdepends', \
+            'sources', 'pgpkeys', 'options', 'backup'):
             if array in _arraymap:
                 setattr(self, array, _arraymap[array])

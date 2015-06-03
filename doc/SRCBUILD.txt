@@ -10,6 +10,7 @@ version=5.14
 description="File type identification utility"
 depends=('zlib' 'glibc')
 makedepends('foo' 'bar')
+optdepends=('zlib')
 # variable expansion, must be preseeded with underscore
 _base="file-$version"
 sources=("ftp://ftp.astron.com/pub/file/$_base.tar.gz"
@@ -29,7 +30,10 @@ src_prepare() {
 src_compile() {
     # working with full path (recommended)
     cd "$SOURCE_DIR/file-$version"
-    ./configure --prefix=/usr
+    _options=""
+    [ "$ZLIB_OPTIONAL" = "yes" ] && _options="--enable-zlib"
+    ./configure --prefix=/usr \
+        $_options
     make
 }
 

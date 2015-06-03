@@ -18,8 +18,9 @@ _spm()
         -a --all'
 
     remote_options='-h --help -n --name -v --version -r --release
-        -d --description -D --depends -m --makedepends -c --checkdepends
-        -s --sources -k --pgpkeys -o --options -b --backup -p --plain'
+        -d --description -D --depends -m --makedepends -O --optdepends
+        -c --checkdepends -s --sources -k --pgpkeys -o --options -b --backup
+        -p --plain'
 
     source_options='-h --help -C --clean -f --fetch -p --prepare -c --compile
         -k --check -i --install -m --merge -r --remove -D --depends
@@ -29,8 +30,8 @@ _spm()
         -D --depends -R --reverse -u --update'
 
     local_options='-h --help -n --name -v --version -R --release
-        -d --description -D --depends -r --reverse -s --size -f --footprint
-        -b --backup -p --plain'
+        -d --description -D --depends -O --optdepends -r --reverse -s --size
+        -f --footprint -b --backup -p --plain'
 
     who_options='-h --help -p --plain'
 

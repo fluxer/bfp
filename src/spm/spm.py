@@ -242,6 +242,8 @@ try:
         help=_('Show target depends'))
     remote_parser.add_argument('-m', '--makedepends', action='store_true', \
         help=_('Show target makedepends'))
+    remote_parser.add_argument('-O', '--optdepends', action='store_true', \
+        help=_('Show target optdepends'))
     remote_parser.add_argument('-c', '--checkdepends', action='store_true', \
         help=_('Show target checkdepends'))
     remote_parser.add_argument('-s', '--sources', action='store_true', \
@@ -320,6 +322,8 @@ try:
         help=_('Show target description'))
     local_parser.add_argument('-D', '--depends', action='store_true', \
         help=_('Show target depends'))
+    local_parser.add_argument('-O', '--optdepends', action='store_true', \
+        help=_('Show target optdepends'))
     local_parser.add_argument('-r', '--reverse', action='store_true', \
         help=_('Show target reverse depends'))
     local_parser.add_argument('-s', '--size', action='store_true', \
@@ -450,6 +454,7 @@ try:
             message.sub_info(_('DESCRIPTION'), ARGS.description)
             message.sub_info(_('DEPENDS'), ARGS.depends)
             message.sub_info(_('MAKEDEPENDS'), ARGS.makedepends)
+            message.sub_info(_('OPTDEPENDS'), ARGS.optdepends)
             message.sub_info(_('CHECKDEPENDS'), ARGS.checkdepends)
             message.sub_info(_('SOURCES'), ARGS.sources)
             message.sub_info(_('PGPKEYS'), ARGS.pgpkeys)
@@ -459,8 +464,9 @@ try:
             message.info(_('Poking remotes...'))
         m = libspm.Remote(ARGS.PATTERN, ARGS.name, ARGS.version, \
                 ARGS.release, ARGS.description, ARGS.depends, \
-                ARGS.makedepends, ARGS.checkdepends, ARGS.sources, \
-                ARGS.pgpkeys, ARGS.options, ARGS.remote_backup, ARGS.plain)
+                ARGS.makedepends, ARGS.optdepends, ARGS.checkdepends, \
+                ARGS.sources, ARGS.pgpkeys, ARGS.options, \
+                ARGS.remote_backup, ARGS.plain)
         m.main()
 
     elif ARGS.mode == 'source':
@@ -539,6 +545,7 @@ try:
             message.sub_info(_('RELEASE'), ARGS.release)
             message.sub_info(_('DESCRIPTION'), ARGS.description)
             message.sub_info(_('DEPENDS'), ARGS.depends)
+            message.sub_info(_('OPTDEPENDS'), ARGS.optdepends)
             message.sub_info(_('REVERSE'), ARGS.reverse)
             message.sub_info(_('SIZE'), ARGS.size)
             message.sub_info(_('FOOTPRINT'), ARGS.footprint)
@@ -547,8 +554,8 @@ try:
             message.info(_('Poking locals...'))
         m = libspm.Local(ARGS.PATTERN, ARGS.name, ARGS.version, \
                 ARGS.release, ARGS.description, ARGS.depends, \
-                ARGS.reverse, ARGS.size, ARGS.footprint, \
-                ARGS.backup, ARGS.plain)
+                ARGS.optdepends, ARGS.reverse, ARGS.size, \
+                ARGS.footprint, ARGS.backup, ARGS.plain)
         m.main()
 
     elif ARGS.mode == 'who':

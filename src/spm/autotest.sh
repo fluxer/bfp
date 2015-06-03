@@ -51,7 +51,7 @@ fi
 
 if ! grep -q "SPM REMOTE" "$statefile" ;then
     echo "=== RUNNING SPM REMOTE TEST ==="
-    "$1" "$curdir/spm.py" $spmargs remote -pnvrdDmcskob zlib
+    "$1" "$curdir/spm.py" $spmargs remote -pnvrdDOmcskob zlib
     echo "SPM REMOTE" >> "$statefile"
 else
     echo "=== SKIPPING SPM REMOTE TEST ==="
@@ -70,7 +70,7 @@ fi
 
 if ! grep -q "SPM LOCAL" "$statefile" ;then
     echo "=== RUNNING SPM LOCAL TEST ==="
-    "$1" "$curdir/spm.py" $spmargs local -pnvRdDrsf zlib
+    "$1" "$curdir/spm.py" $spmargs local -pnvRdDOrsf zlib
     echo "SPM LOCAL" >> "$statefile"
 else
     echo "=== SKIPPING SPM LOCAL TEST ==="
