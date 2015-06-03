@@ -98,8 +98,6 @@ class Power(object):
         self.SUSPEND_DISK = 'suspend'
         self.SUSPEND_STATE = 'mem'
         self.SUSPEND_POST = None
-
-        # changed depending on power state
         self.LID_VALUE = 'suspend'
         self.CPU_VALUE = 'performance'
         self.BACKLIGHT_VALUE = '15'
@@ -174,18 +172,18 @@ class Power(object):
         return status
 
     def get_cpu_governor(self):
-        ''' Get CPU governor '''
-        # FIXME: support multiple CPUs, wrappers will get complex tough
-        status = 'Unknown'
+        ''' Get current CPU governors '''
+        status = []
         for cpu in self.get_cpus():
             sfile = '%s/cpufreq/scaling_governor' % cpu
             if os.path.isfile(sfile):
-                status = misc.file_read(sfile).strip().split()
+                status.append(misc.file_read(sfile).strip())
+            else:
+                raise(Exception('CPU does not support governing', cpu))
         return status
 
     def get_cpu_governors(self):
         ''' Get supported CPU governors '''
-        # FIXME: support multiple CPUs, wrappers will get complex tough
         governors = []
         for cpu in self.get_cpus():
             sfile = '%s/cpufreq/scaling_available_governors' % cpu
@@ -227,11 +225,13 @@ class Power(object):
 
     def do_reboot(self):
         ''' Reboot the system '''
+        self.pre_actions(self.REBOOT_PRE)
         misc.system_command((misc.whereis('reboot')))
 
     def do_shutdown(self):
         ''' Shutdown the system, unlike your usual shutdown helper this one
             works on system with SysVinit, Busybox and (hopefully) systemd '''
+        self.pre_actions(self.SHUTDOWN_PRE)
         misc.system_command((misc.whereis('poweroff')))
 
     def do_suspend(self):
@@ -246,14 +246,19 @@ class Power(object):
         misc.file_write('/sys/power/state', self.SUSPEND_STATE)
         self.post_actions(self.SUSPEND_POST)
 
-    def do_cpu_governor(self):
+    def do_cpu_governor(self, docpu='0'):
         ''' Change CPU governor '''
         # /sys/devices/cpu/power/control
-        for cpu in self.get_cpus():
+        all_cpus = self.get_cpus()
+        counter = 0
+        for cpu in all_cpus:
             sfile = '%s/cpufreq/scaling_governor' % cpu
             if os.path.isfile(sfile):
+                if docpu and not counter == int(docpu):
+                    continue
                 if not misc.file_read(sfile).strip() == self.CPU_VALUE:
                     misc.file_write(sfile, self.CPU_VALUE)
+            counter += 1
 
     def do_backlight(self):
         ''' Change backlight '''
