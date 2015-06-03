@@ -92,30 +92,28 @@ Set the environmental variable CHOST when building software. The CHOST
 flag specifies the target hardware platform, (ppc, i386, i586 etc), so
 that the code is compiled with the right instruction set.
 
-Default: #MACHINE#
+Default: @MACHINE@
 
 =head2 CFLAGS
 
 Set the environmental variable CFLAGS when building software. The CFLAGS
 flag specifies desired optimization/CPU instruction for C code.
 
-Default: -march=#ARCH# -mtune=native -O2 -pipe -fstack-protector
-         --param=ssp-buffer-size=4
+Default: -march=@ARCH@ -mtune=native -O2 -pipe
 
 =head2 CXXFLAGS
 
 Set the environmental variable CXXFLAGS when building software. The CXXFLAGS
 flag specifies desired optimization/CPU instruction for C++ code.
 
-Default: -march=#ARCH# -mtune=native -O2 -pipe -fstack-protector
-         --param=ssp-buffer-size=4
+Default: -march=@ARCH@ -mtune=native -O2 -pipe
 
 =head2 CPPFLAGS
 
 Set the environmental variable CPPFLAGS when building software. The CPPFLAGS
 flag specifies desired C PreProcessor instruction for C code.
 
-Default: -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2
+Default: 
 
 
 =head2 LDFLAGS
@@ -130,7 +128,7 @@ Default: -Wl,--hash-style=gnu -Wl,--as-needed
 Set the environmental variable MAKEFLAGS when building software. The MAKEFLAGS
 flag specifies desired `make` options.
 
-Default: -j#JOBS#
+Default: -j@JOBS@
 
 =head2 PURGE_PATHS
 

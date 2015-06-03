@@ -19,10 +19,10 @@ all: clean
 	$(POD2MAN) --release="SPM $(VERSION)" \
 		--center="Source Package Manager Manual" \
 		--section='5' --utf8 SRCBUILD.pod SRCBUILD.5
-	$(SED) 's|#DOCDIR#|$(DOCDIR)|g' -i SRCBUILD.5
-	$(SED) 's|#MACHINE#|$(MACHINE)|g' -i spm.conf.5
-	$(SED) 's|#ARCH#|$(ARCH)|g' -i spm.conf.5
-	$(SED) 's|#JOBS#|$(JOBS)|g' -i spm.conf.5
+	$(SED) 's|@DOCDIR@|$(DOCDIR)|g' -i SRCBUILD.5
+	$(SED) 's|@MACHINE@|$(MACHINE)|g' -i spm.conf.5
+	$(SED) 's|@ARCH@|$(ARCH)|g' -i spm.conf.5
+	$(SED) 's|@JOBS@|$(JOBS)|g' -i spm.conf.5
 	for lib in ../src/libs/lib*.py; do \
 		$(PYDOC) -w $$lib; \
 	done
