@@ -1,6 +1,6 @@
 #!/bin/python2
 
-import os, libmisc
+import os, subprocess, libmisc
 misc = libmisc.Misc()
 
 '''
@@ -46,9 +46,16 @@ class Block(object):
         self.unmount(variant)
         self.unmount(mpoint)
         misc.dir_create(mpoint)
-        # TODO: modprobe the filesystem type module, and do not fail at that
-        # as the module name may not be correct (known with some filesystems)
-        # or even a built-in
+        try:
+            # modprobe the filesystem type module, and do not fail at that
+            # as the module name may not be correct (known with some
+            # filesystems) or even a built-in
+            fstype = self.info(variant, 'TYPE')
+            # TODO: ignore some filesystem types
+            if fstype:
+                misc.system_command((misc.whereis('modprobe'), '-b', fstype))
+        except subprocess.CalledProcessError:
+            pass
         misc.system_command((misc.whereis('mount'), variant, mpoint))
 
     def fsck(self, device, fstype):
