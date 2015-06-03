@@ -362,7 +362,10 @@ class Misc(object):
         if lservers is None:
             lservers = []
         self.dir_create(self.GPG_DIR, ipermissions=0o700)
-        cmd = [self.whereis('gpg2'), '--homedir', self.GPG_DIR]
+        gpg = self.whereis('gpg2', False)
+        if not gpg:
+            gpg = self.whereis('gpg')
+        cmd = [gpg, '--homedir', self.GPG_DIR]
         for server in lservers:
             cmd.extend(('--keyserver', server))
         # FIXME: do --refresh-keys if already imported
@@ -378,7 +381,10 @@ class Misc(object):
             self.typecheck(sprompt, (types.StringTypes))
 
         self.dir_create(self.GPG_DIR, ipermissions=0o700)
-        cmd = [self.whereis('gpg2'), '--homedir', self.GPG_DIR]
+        gpg = self.whereis('gpg2', False)
+        if not gpg:
+            gpg = self.whereis('gpg')
+        cmd = [gpg, '--homedir', self.GPG_DIR]
         if skey:
             cmd.extend(('--default-key', skey))
         cmd.extend(('--yes', '--no-tty', '--passphrase-fd', '0'))
@@ -394,7 +400,10 @@ class Misc(object):
             self.typecheck(ssignature, (types.NoneType, types.StringTypes))
 
         self.dir_create(self.GPG_DIR, ipermissions=0o700)
-        cmd = [self.whereis('gpg2'), '--homedir', self.GPG_DIR]
+        gpg = self.whereis('gpg2', False)
+        if not gpg:
+            gpg = self.whereis('gpg')
+        cmd = [gpg, '--homedir', self.GPG_DIR]
         # in case the signature is passed instead of the file to verify
         if sfile.endswith('.sig'):
             sfile = sfile.replace('.sig', '')
@@ -1027,8 +1036,8 @@ class Inotify(object):
         self.ACCESS = 0x00000001        # IN_ACCESS
         self.MODIFY = 0x00000002        # IN_MODIFY
         self.ATTRIB = 0x00000004        # IN_ATTRIB
-        self.WRITE = 0x00000008         # IN_CLOSE_WRITE
-        self.CLOSE = 0x00000010         # IN_CLOSE_NOWRITE
+        self.CLOSE_WRITE = 0x00000008   # IN_CLOSE_WRITE
+        self.CLOSE_NOWRITE = 0x00000010 # IN_CLOSE_NOWRITE
         self.OPEN = 0x00000020          # IN_OPEN
         self.MOVED_FROM = 0x00000040    # IN_MOVED_FROM
         self.MOVED_TO = 0x00000080      # IN_MOVED_TO
@@ -1041,6 +1050,7 @@ class Inotify(object):
         self.IGNORED = 0x00008000       # IN_IGNORED
         self.ONLYDIR = 0x01000000       # IN_ONLYDIR
         self.DONT_FOLLOW = 0x02000000   # IN_DONT_FOLLOW
+        self.EXCL_UNLINK = 0x04000000   # IN_EXCL_UNLINK
         self.MASK_ADD = 0x20000000      # IN_MASK_ADD
         self.ISDIR = 0x40000000         # IN_ISDIR
         self.ONESHOT = 0x80000000       # IN_ONESHOT
