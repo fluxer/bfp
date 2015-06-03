@@ -1,3 +1,220 @@
+Wed Jun 3 13:17:21 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
+7c706092d7cae22bb996f8b05ccb971ef43376d9 (tag: 1.8.0)
+    * disable building and installation of spmd/spm-gui for now
+    * replace blockd functionality with subsystem handling in ahws
+    * drop cparted
+    * use less agressive build flags, switch repository
+    * generalize the rule for generating library docs
+    * use consistent string replacement templating in spm configs
+    * support GnuPG versions older than 2
+    * typooo
+    * implement libmisc.Misc.file_readsmart()
+    * correct ahws online and offline actions
+    * fixup spm-tools pack mode
+    * extend documentation on some libmsc methods
+    * make srcmake check for grep, find, awk and du
+    * update autotest script
+    * drop global remote/local cache
+    * and the final touch.. (hopefully)
+    * yet more upgrade procedure improvements
+    * somewhat improve spm-tools upgrade mode
+    * various cleanups, corrections, etc
+    * minor fixes
+    * build system cleanup
+    * cleanups, corrections, etc.
+    * and pop the version rather than none in the warning for it
+    * prioritize the interpreter check in the byte-compiler
+    * Make the python byte-compile work for most versions
+    * add libsystem
+    * minor libspm cleanups (mostly)
+    * some libarchive fixes
+    * setup SSL context for spm-tools upload mode when supported
+    * use pre-defined buffer for read/write objects where possible
+    * fixup spmd cold target
+    * use python-config instead of pkg-config where possible
+    * and there goes a Python 3000 regression fix
+    * various cleanups, mostly to the libraries test suite
+    * re-write the SRCBUILD parser
+    * rebuild remote metadata cache efter edit via spm-tools
+    * remove task for spm-gui from TODO - it's done
+    * make a note that the fetcher switches mirrors on the fly
+    * add spm cache mode autotest
+    * add cache mode to spm
+    * spm-tools man page corrections
+    * various cleanups and minor improvements, mostly to spmd/spm-gui
+    * use single slot for the Finished signal in spm-gui
+    * return backup metadata for local targets from spmd
+    * re-generate global caches from spm-tools upgrade mode
+    * minor cleanups and improvements
+    * make the listing of xz/lzma archives return content without leading ./
+    * indent JSON files when writing
+    * call compileall on directories saving some loops
+    * more namespaces reuse
+    * reuse namespaces
+    * cleanup and sanitizations
+    * add JSON files methods to libmisc
+    * fix some recent regressions
+    * fixup spm backup behaviour
+    * review description in spm man page
+    * add short help for spm sub-parsers
+    * and make it run only when current user is root
+    * add autotest for spm-tools upgrade mode
+    * remove temporary migration script now that spm-tools can do it
+    * add upgrade mode to spm-tools for migrating from old releases
+    * create a dictionary of files to backup in the local target metadata
+    * oops, use Python 3000 compatible check inf libpackage.Database.remote_metadat()
+    * optimize remote targets lookup
+    * grrrrrrrrr
+    * remove now redudant Makefile
+    * add blockd and libarchive; cleanup
+    * adjust autotest script to spm-tools pack mode change
+    * restrict spm tools pack mode to root, it can cause serious permissions issues if not used as root
+    * stop using os.path.join()
+    * create a all-in-one local targets cache again
+    * oops
+    * prevent logging of metadata request
+    * minor improvements and housekeeping
+    * add missing directories to the initfs overlay
+    * correct modules configs reference in files section of mkinitfs man page
+    * cleanup mkinitfs
+    * and correct the message for it
+    * stop attempting to remove the footprint file on local target remove
+    * fix some regressions in libspm
+    * spmd/spm-gui improvements
+    * fix an issue with relative output in cold
+    * improvements to spmd/spm-gui
+    * improve spmd/spm-gui
+    * add support for directories to cold
+    * add app to create bundles
+    * review installation procedure for spmd/spm-gui and add XDG autostart file for spm-gui
+    * wrap autotest comment to 80 columns
+    * implement tray icon for updates notification from spm-gui
+    * allow specifiying the url to check in spm-tools online mode and make use of it in the autotest script
+    * probe for Pkgfile first before crawling in spm-tools pkg mode
+    * drop now redudant catch argument for libmisc.Misc.system_command()
+    * adjust tests to the metadata and footprint changes
+    * use JSON format for the metadata and footprint of local targets
+    * minor cleanup
+    * create .depends file when packing
+    * remove only directories on repo prune
+    * rever multi-line message support
+    * remove too generic /man from fallback manual pages path
+    * type-check sinput in libmisc.Misc.system_communicate()
+    * make srcmake add release to the metadata
+    * drop backwards compatibility for release in SRCBUILD
+    * place JSON caches outside of watched directory to avoid endless loop
+    * do repo caching when all repo actions are requested
+    * do not attempt to write JSON caches when the leading directory is not writable
+    * do not remove the JSON cache file on repo prune
+    * allow force-regen of JSON caches
+    * generate and load JSON caches for local/remote targets to avoid crunching same data multiple times
+    * use python-config to get the prefix
+    * adjust spmd/spm-gui
+    * implement rsync fetcher
+    * rename the prepare to fetch section in spm.conf and support multi-line messages (without markers)
+    * adjust libspm to the fetch action split
+    * fix a verification regression since the fetch functionality split
+    * add spm-tools online mode autotest
+    * merge libmisc.Misc.system_input() with libmisc.Misc.system_output()
+    * make use of libmisc.Misc.fetch_request() in spm-tools pkg mode
+    * use https urls for crux repos
+    * handle .nostrip files from pkg2src
+    * add feature to ignore some paths when setting notifiers and make use of it
+    * fixup
+    * split fetching actions from prepare in spm binary and source mode
+    * more pkg2src improvements
+    * improve pkgfile conversion
+    * add crux2entropy repo convert script
+    * make spm-tools pkg mode check all CRUX repos
+    * make spm-tools pkg mode fetch CRUX instead of Arch Linux package files
+    * fix a regression since the target merge optimization
+    * use the local metadata when packing target from spm-tools pack mode
+    * address device reference leak on failure in ahws
+    * make the debug messages about stripping more consistent
+    * add online mode to spm-tools
+    * use split() instead of splitlines() to get targets from stdin
+    * use different root dir and state file depending on the interpreter passed to autotest
+    * skip spm source autotest if scanelf is not available
+    * do not parse the repositories config on repo prune
+    * symlink libmessage too for the autotest
+    * move autotest out of tmp
+    * support targets passing to spm and spm-tools via pipe
+    * minor init script improvements
+    * support interactive shell start afte root filesystem is mounted
+    * avoid control tty warning and set session id for initfs rescue shell
+    * reboot system from initramfs as a last resort instead of panic
+    * do not preserve all permissions on initfs files when installing
+    * fix debug message about which files from RPATH is stripped
+    * prevent file dumps on write failure in libmisc.Misc.file_write()
+    * minor bg translation update
+    * another day - another weird shabang to handle (hint: docbook-xsl)
+    * remove support for demotion and redudant methods from libmisc
+    * add desktop file for spm-gui
+    * update TODO
+    * fix typo in spmd
+    * update bash completions
+    * make spmd behave as expected (in most cases)
+    * fixup spmd syntax
+    * now fixup the optimizations
+    * add some temporary scripts
+    * optimize libspm target merging
+    * libmisc optimizations
+    * spm-tools identation correcition
+    * fixup Python 3000 compat of spm-tools
+    * another strike on the Python 3000 support
+    * fix Python 3000 support regression since 784977e2
+    * document the purge override from SRCBUILD
+    * speed-up MIME types checking
+    * implement configurable paths purging
+    * minor lsinitfs/mkinitfs man pages reference corrections
+    * add remote target pgpkeys test
+    * this should fix a python 3 regression
+    * spmd cleanup
+    * close opened objects on failures too
+    * oops, fix regression due to previous commit
+    * optimize local targets caching
+    * bumps
+    * fix regression since 2763d737
+    * push some staging/incomplete changes
+    * add inintramfs overlay symlinks for better comaptibilty
+    * improve initramfs init script
+    * improve and sanitize modules directory detection
+    * add mkinitfs and lsinitfs man pages
+    * run depmod after decompressing modules
+    * remove the compressed module after decompressing it
+    * make mkinitfs utilize busybox and handle symlinks better
+    * decompress the kernel modules after copying them
+    * utilize mdev in initramfs
+    * allow overriding wheather to generate recovery initramfs image
+    * ahws stubs
+    * minor cleanup, correction and improvement of spmd
+    * take into account the action taken
+    * fixup nvidia action
+    * minor ahws improvements and fix
+    * ahws refactoring
+    * not udev requirement in README
+    * add ahws (automated hardware setup)
+    * update Nuitka to v0.5.13.1
+    * cleanup spm-tools lint mode
+    * check leading directory ownership too in spm-tools lint mode
+    * minor code-style corrections
+    * minor mkinitfs fix
+    * generate recovery initramfs images too
+    * add warning message function to initramfs init script
+    * update Nuitka to 0.5.12.2
+    * move-mount /dev to /newroot to save some boot overheath
+    * update Nuitka to 0.5.12.1
+    * adjust the tests to the current state of the API
+    * actually allow sinput to be None in libmisc.Misc.system_chroot()
+    * support globing entries in mkinitfs files configs
+    * adjust the tests to the current state of the API
+    * some new features to make spm-gui more fancy
+    * mostly GUI and daemon polishements
+    * minor original string correction
+    * minor corrections on the daemon the GUI
+    * initial D-Bus daemon and reworked GUI
+    * API cleanup
+
 Mon Apr 27 18:29:35 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
 567a60dd4df68e9f5d64c4616bf8bfe87937040a (tag: 1.7.6)
     * add warning message function to initramfs init script
