@@ -5,7 +5,7 @@ message = libmessage.Message()
 message.DEBUG = True
 misc = libmisc.Misc()
 
-app_version = "1.7.6 (e55cc49)"
+app_version = "1.7.6 (294e6d7)"
 
 class Device(object):
     def __init__(self):
@@ -42,7 +42,9 @@ class Device(object):
         if not SERIAL:
             libudev.udev_device_get_sysattr_value(dev, 'product')
 
-        return DEVNAME, PRODUCT, VENDOR, SERIAL
+        SUBSYSTEM = libudev.udev_device_get_subsystem(dev)
+
+        return DEVNAME, PRODUCT, VENDOR, SERIAL, SUBSYSTEM
 
     def Initialize(self):
         ''' Handle all current devices '''
@@ -64,32 +66,45 @@ class Device(object):
             libudev.udev_enumerate_unref(enumerate);
 
     def Handle(self, properties, action):
-        DEVNAME, MODEL, VENDOR, SERIAL = properties
-        handle = '%s/%s_%s' % (self.HANDLERS_DIR, VENDOR, MODEL)
+        DEVNAME, MODEL, VENDOR, SERIAL, SUBSYSTEM = properties
         if not MODEL or not VENDOR:
             message.sub_warning('Model or vendor ID missing for', \
                 '%s (%s, %s)' % (DEVNAME, VENDOR, MODEL))
             return
-        elif os.path.isfile(handle):
-            message.sub_info('Handling event for', \
-                '%s (%s, %s)' % (SERIAL, VENDOR, MODEL))
+
+        subhandle = '%s/%s' % (self.HANDLERS_DIR, SUBSYSTEM)
+        if os.path.isfile(subhandle):
+            message.sub_info('Handling subsystem event for', \
+                '%s (%s, %s)' % (SUBSYSTEM, VENDOR, MODEL))
             try:
-                misc.system_command((handle, action))
+                misc.system_command((subhandle, action, DEVNAME))
             except Exception as detail:
                 message.sub_critical(str(detail))
         else:
-            message.sub_debug('No handle for', \
+            message.sub_debug('Not subsystem handle for', \
+                '%s (%s)' % (SUBSYSTEM, DEVNAME))
+
+        devhandle = '%s/%s_%s' % (self.HANDLERS_DIR, VENDOR, MODEL)
+        if os.path.isfile(devhandle):
+            message.sub_info('Handling device event for', \
+                '%s (%s, %s)' % (SERIAL, VENDOR, MODEL))
+            try:
+                misc.system_command((devhandle, action))
+            except Exception as detail:
+                message.sub_critical(str(detail))
+        else:
+            message.sub_debug('No device handle for', \
                 '%s (%s, %s)' % (SERIAL, VENDOR, MODEL))
 
     def Add(self, properties):
         ''' Emit that device add action happend '''
         message.sub_info('Added', properties[0])
-        self.Handle(properties, 'added')
+        self.Handle(properties, 'add')
 
     def Remove(self, properties):
         ''' Emit that device remove action happend '''
         message.sub_info('Removed', properties[0])
-        self.Handle(properties, 'removed')
+        self.Handle(properties, 'remove')
 
     def Change(self, properties):
         ''' Emit that device change action happend '''

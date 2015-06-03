@@ -1,0 +1,14 @@
+#!/bin/sh
+
+# this is a basic hook to mount devices, they must have entry in /etc/fstab
+
+set -e
+
+. /etc/ahws.d/common
+
+case "$1" in
+    add|online) mount "$2" || true ;;
+    changed) true ;; # ignored
+    offline|remove) umount "$2" || true ;;
+    *) echo "Unknown event: $1" && exit 1 ;;
+esac
