@@ -63,7 +63,8 @@ build optional features of the software.
 
 =head2 checkdepends
 
-Variable defining check dependencies of software.
+Variable defining check dependencies of software. They are being pulled only if
+the software is going to be tested.
 
 =head2 sources
 
