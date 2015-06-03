@@ -3,11 +3,13 @@
 
 ## SPM/SPM-TOOLS ##
  * Complete all tasks noted with FIXME/TODO
- * Optionally remove build depends that are not required by local target after build
+ * Optionally remove build depends that are not required by anymore after build
  * Check for absolute path symlinks in SRCBUILDs
  * Implement trigger invocation only on file content change
  * Build target(s) from source when binary not available?
  * Write a script/module that will record API changes between release
+ * Implement triggers like feature into libspm for execution code upon every
+   method call
 
 ## SPMD/SPM-GUI ##
  * Complete all tasks noted with FIXME/TODO
