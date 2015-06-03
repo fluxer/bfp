@@ -31,7 +31,7 @@ class TestSuite(unittest.TestCase):
         srcbuild.close()
 
     def create_local(self, name, version, release, description, depends='', \
-            size='1', footprint='\n'):
+            size='1', footprint='\n', optdepends=''):
         sdir = '%s/%s' % (database.LOCAL_DIR, name)
         os.makedirs(sdir)
         data = {}
@@ -39,6 +39,7 @@ class TestSuite(unittest.TestCase):
         data['release'] = release
         data['description'] = description
         data['depends'] = depends
+        data['optdepends'] = optdepends
         data['size'] = size
         data['footprint'] = footprint
         metadata = open('%s/metadata.json' % sdir, 'w')
