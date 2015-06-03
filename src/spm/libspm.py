@@ -481,7 +481,7 @@ class Source(object):
     def __init__(self, targets, do_clean=False, do_fetch=False, \
         do_prepare=False, do_compile=False, do_check=False, do_install=False, \
         do_merge=False, do_remove=False, do_depends=False, do_reverse=False, \
-        do_update=False, autoremove=False):
+        do_update=False, automake=False, autoremove=False):
         self.targets = targets
         self.do_clean = do_clean
         self.do_fetch = do_fetch
@@ -494,6 +494,7 @@ class Source(object):
         self.do_depends = do_depends
         self.do_reverse = do_reverse
         self.do_update = do_update
+        self.automake = automake
         self.autoremove = autoremove
         self.verify = VERIFY
         self.mirror = MIRROR
@@ -520,10 +521,8 @@ class Source(object):
     def autosource(self, targets, automake=False, autoremove=False):
         ''' Handle targets build/remove without affecting current object '''
         if automake:
-            obj = Source(targets, do_clean=True, do_fetch=True, \
-                do_prepare=True, do_compile=True, do_check=False, \
-                do_install=True, do_merge=True, do_depends=True, \
-                do_reverse=self.do_reverse, do_update=False)
+            obj = Source(targets, do_check=self.do_check, \
+                do_reverse=self.do_reverse, do_update=False, automake=True)
         else:
             obj = Source(targets, do_reverse=self.do_reverse, \
                 autoremove=autoremove)
@@ -857,6 +856,13 @@ class Source(object):
             self.autosource(dependencies, automake=True)
             message.sub_info(_('Resuming %s preparations at') % \
                 os.path.basename(self.target), datetime.today())
+        elif dependencies and self.automake:
+            # the dependencies have been pre-calculated on automake by
+            # remote_mdepends() above breaking on circular, any dependencies
+            # detected now are because they are last in the graph but depent
+            # on one in higher level
+            message.sub_warning(_('Circular dependencies in %s') % \
+                self.target_name, dependencies)
         elif dependencies:
             message.sub_warning(_('Dependencies missing'), dependencies)
 
@@ -1603,22 +1609,22 @@ class Source(object):
                     message.sub_warning(_('Overriding PURGE_PATHS to'), _('False'))
                     self.purge_paths = False
 
-            if self.do_clean:
+            if self.do_clean or self.automake:
                 message.sub_info(_('Starting %s cleanup at') % \
                     self.target_name, datetime.today())
                 self.clean()
 
-            if self.do_fetch:
+            if self.do_fetch or self.automake:
                 message.sub_info(_('Starting %s fetch at') % \
                     self.target_name, datetime.today())
                 self.fetch()
 
-            if self.do_prepare:
+            if self.do_prepare or self.automake:
                 message.sub_info(_('Starting %s preparations at') % \
                     self.target_name, datetime.today())
                 self.prepare(True)
 
-            if self.do_compile:
+            if self.do_compile or self.automake:
                 message.sub_info(_('Starting %s compile at') % \
                     self.target_name, datetime.today())
                 self.compile(True)
@@ -1628,12 +1634,12 @@ class Source(object):
                     self.target_name, datetime.today())
                 self.check(True)
 
-            if self.do_install:
+            if self.do_install or self.automake:
                 message.sub_info(_('Starting %s install at') % \
                     self.target_name, datetime.today())
                 self.install()
 
-            if self.do_merge:
+            if self.do_merge or self.automake:
                 message.sub_info(_('Starting %s merge at') % self.target_name, datetime.today())
                 self.merge()
 
