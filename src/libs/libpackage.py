@@ -345,28 +345,25 @@ class SRCBUILD(object):
         self.__init__()
         _stringmap = {}
         _arraymap = {}
-        fileobj = open(sfile, 'rb')
-        try:
-            content = misc.string_encode(fileobj.read())
-            for var, value in re.findall(self.string_regex, content):
-                value = value.strip('"').strip("'")
-                _stringmap[var] = value
-            for var, value in re.findall(self.array_regex, content):
-                arrayval = []
-                for val in value.split():
-                    for string in _stringmap:
-                        val = val.replace('$%s' % string, _stringmap[string])
-                        val = val.replace('${%s}' % string, _stringmap[string])
-                        val = val.strip('"').strip("'")
-                    arrayval.append(val)
-                _arraymap[var] = arrayval
-            for string in _stringmap:
-                val = _stringmap[string]
-                val = val.replace('$%s' % string, _stringmap[string])
-                val = val.replace('${%s}' % string, _stringmap[string])
-                _stringmap[string] = val
-        finally:
-            fileobj.close()
+
+        content = misc.file_read(sfile)
+        for var, value in re.findall(self.string_regex, content):
+            value = value.strip('"').strip("'")
+            _stringmap[var] = value
+        for var, value in re.findall(self.array_regex, content):
+            arrayval = []
+            for val in value.split():
+                for string in _stringmap:
+                    val = val.replace('$%s' % string, _stringmap[string])
+                    val = val.replace('${%s}' % string, _stringmap[string])
+                    val = val.strip('"').strip("'")
+                arrayval.append(val)
+            _arraymap[var] = arrayval
+        for string in _stringmap:
+            val = _stringmap[string]
+            val = val.replace('$%s' % string, _stringmap[string])
+            val = val.replace('${%s}' % string, _stringmap[string])
+            _stringmap[string] = val
 
         for string in ('version', 'release', 'description'):
             if string in _stringmap:
