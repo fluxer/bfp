@@ -4,7 +4,6 @@ import gettext
 _ = gettext.translation('spm', fallback=True).gettext
 
 import sys, os, shutil, re
-from datetime import datetime
 if sys.version < '3':
     import ConfigParser as configparser
 else:
@@ -479,19 +478,19 @@ class Repo(object):
                 self.repository_name)
 
             if self.do_clean:
-                message.sub_info(_('Starting cleanup at'), datetime.today())
+                message.sub_info(_('Starting cleanup of'), self.repository_name)
                 self.clean()
 
             if self.do_sync:
-                message.sub_info(_('Starting sync at'), datetime.today())
+                message.sub_info(_('Starting sync of'), self.repository_name)
                 self.sync()
 
         if self.do_prune:
-            message.sub_info(_('Starting prune at'), datetime.today())
+            message.sub_info(_('Starting prune of'), self.repository_name)
             self.prune()
 
         if self.do_update:
-            message.sub_info(_('Starting update at'), datetime.today())
+            message.sub_info(_('Starting update of'), self.repository_name)
             self.update()
 
 
@@ -892,8 +891,7 @@ class Source(object):
         if dependencies and self.do_depends:
             message.sub_info(_('Building dependencies'), dependencies)
             self.autosource(dependencies, automake=True)
-            message.sub_info(_('Resuming %s preparations at') % \
-                os.path.basename(self.target), datetime.today())
+            message.sub_info(_('Resuming preparations of'), self.target_name)
         elif dependencies and self.automake:
             # the dependencies have been pre-calculated on automake by
             # remote_mdepends() above breaking on circular, any dependencies
@@ -1432,8 +1430,7 @@ class Source(object):
         if depends_detected and self.do_reverse and not self.autoremove:
             message.sub_info(_('Removing reverse dependencies'), depends_detected)
             self.autosource(depends_detected, autoremove=True)
-            message.sub_info(_('Resuming %s removing at') % \
-                os.path.basename(self.target), datetime.today())
+            message.sub_info(_('Resuming removal of'), self.target_name)
         elif depends_detected and not self.autoremove:
             message.sub_critical(_('Other targets depend on %s') % \
                 self.target_name, depends_detected)
@@ -1618,41 +1615,35 @@ class Source(object):
                     self.purge_paths = False
 
             if self.do_clean or self.automake:
-                message.sub_info(_('Starting %s cleanup at') % \
-                    self.target_name, datetime.today())
+                message.sub_info(_('Starting cleanup of'), self.target_name)
                 self.clean()
 
             if self.do_fetch or self.automake:
-                message.sub_info(_('Starting %s fetch at') % \
-                    self.target_name, datetime.today())
+                message.sub_info(_('Starting fetch of'), self.target_name)
                 self.fetch()
 
             if self.do_prepare or self.automake:
-                message.sub_info(_('Starting %s preparations at') % \
-                    self.target_name, datetime.today())
+                message.sub_info(_('Starting preparations of'), self.target_name)
                 self.prepare(True)
 
             if self.do_compile or self.automake:
-                message.sub_info(_('Starting %s compile at') % \
-                    self.target_name, datetime.today())
+                message.sub_info(_('Starting compile of'), self.target_name)
                 self.compile(True)
 
             if self.do_check:
-                message.sub_info(_('Starting %s check at') % \
-                    self.target_name, datetime.today())
+                message.sub_info(_('Starting check of'), self.target_name)
                 self.check(True)
 
             if self.do_install or self.automake:
-                message.sub_info(_('Starting %s install at') % \
-                    self.target_name, datetime.today())
+                message.sub_info(_('Starting install of'), self.target_name)
                 self.install()
 
             if self.do_merge or self.automake:
-                message.sub_info(_('Starting %s merge at') % self.target_name, datetime.today())
+                message.sub_info(_('Starting merge of'), self.target_name)
                 self.merge()
 
             if self.do_remove or self.autoremove:
-                message.sub_info(_('Starting %s remove at') % self.target_name, datetime.today())
+                message.sub_info(_('Starting remove of'), self.target_name)
                 self.remove()
 
             # reset values so that overrides apply only to single target
@@ -1758,8 +1749,7 @@ class Binary(Source):
         if missing and self.do_depends:
             message.sub_info(_('Fetching dependencies'), missing)
             self.autobinary(missing, automake=True)
-            message.sub_info(_('Resuming %s preparations at') % \
-                os.path.basename(self.target), datetime.today())
+            message.sub_info(_('Resuming preparations of'), self.target_name)
         elif missing:
             message.sub_warning(_('Dependencies missing'), missing)
 
@@ -1823,23 +1813,19 @@ class Binary(Source):
                 continue
 
             if self.do_fetch:
-                message.sub_info(_('Starting %s fetch at') % \
-                    self.target_name, datetime.today())
+                message.sub_info(_('Starting fetch of'), self.target_name)
                 self.fetch()
 
             if self.do_prepare:
-                message.sub_info(_('Starting %s preparations at') % \
-                    self.target_name, datetime.today())
+                message.sub_info(_('Starting preparations of'), self.target_name)
                 self.prepare()
 
             if self.do_merge:
-                message.sub_info(_('Starting %s merge at') % \
-                    self.target_name, datetime.today())
+                message.sub_info(_('Starting merge of'), self.target_name)
                 self.merge()
 
             if self.do_remove or self.autoremove:
-                message.sub_info(_('Starting %s remove at') % \
-                    self.target_name, datetime.today())
+                message.sub_info(_('Starting remove of'), self.target_name)
                 self.remove()
 
 
