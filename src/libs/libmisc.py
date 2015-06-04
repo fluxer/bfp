@@ -77,7 +77,6 @@ class Misc(object):
             # in the future, fallback will return program and let OSError be
             # raised at higher level, e.g. by subprocess
             raise OSError('Program not found in PATH', program)
-        return None
 
     def getpass(self, sprompt='Password: '):
         ''' Get password from user input '''

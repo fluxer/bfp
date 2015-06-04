@@ -129,7 +129,6 @@ class Database(object):
         for ltarget in self.local_all():
             if ltarget == target or ltarget.endswith('/%s' % target):
                 return ltarget
-        return None
 
     def remote_search(self, target):
         ''' Returns full path to directory matching target '''
@@ -141,7 +140,6 @@ class Database(object):
         for rtarget in self.remote_all():
             if rtarget == target or rtarget.endswith('/%s' % target):
                 return rtarget
-        return None
 
     def local_belongs(self, sfile, exact=False, escape=True, ignore=None):
         ''' Searches for match of file in all local targets '''
