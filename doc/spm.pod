@@ -57,9 +57,9 @@ disasters and fix issues in cases SPM is not being able to handle such as
 missing Python runtime library for whatever the reason. Do note that SPM caches
 internally the files content (metadatas and SRCBUILDs) in the system memory
 (RAM) and rebuilds the caches when needed to reduce the lookup overheath. The
-cache itself is build only when needed too (on the first lookup) in a JIT (Just
-In Time) fashion. It does not use locks and multiple instances can be run at
-the same time, that is something that few package manager support.
+cache itself is build only when needed (on the first lookup) in a JIT (Just In
+Time) fashion. It does not use locks and multiple instances can be run at the
+same time, that is something that few package manager support.
 
 Remote sources (files, such as tarballs) are being checked after they are
 fetched by comparing the remote and local file size instead of using checksums
@@ -68,10 +68,11 @@ build recope (SRCBUILD) whenever a local source file, shipped with the target
 files, is updated (makepkg -g >> PKGBUILD anyone?). Note that security wise this
 is not a good approach as there is no easy way for an administrator to know
 whether the remote file size has changed since the last time it was requested
-which means an attacker can exploit this and modify the file content and
-feeding it to SPM. As a protection SPM supports checking OpenPGP signatures
-when available but that is up to the host to provide and packager to support
-by adding the singature URL to the sources array in the SRCBUILD.
+which means an attacker can exploit this and modify the file content feeding it
+to SPM. As a protection SPM supports checking OpenPGP signatures when available
+but that is up to the host to provide and packager to support by adding the
+singature URL to the sources array in the SRCBUILD along with the key ID to the
+pgpkeys array.
 
 Using Source Package Manager and following the LFS/BLFS book you can tailor a
 system exactly to your liking without keeping track of what links against what
