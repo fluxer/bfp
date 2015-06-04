@@ -165,13 +165,15 @@ class Database(object):
                 match.append(local)
         return match
 
-    def remote_mdepends(self, target, checked=None, cdepends=False, mdepends=True):
+    def remote_mdepends(self, target, checked=None, cdepends=False, \
+        mdepends=True, odepends=False):
         ''' Returns missing build dependencies of target '''
         if misc.python2:
             misc.typecheck(target, (types.StringTypes))
             misc.typecheck(checked, (types.NoneType, types.ListType))
             misc.typecheck(cdepends, (types.BooleanType))
             misc.typecheck(mdepends, (types.BooleanType))
+            misc.typecheck(odepends, (types.BooleanType))
 
         missing = []
         build_depends = []
@@ -185,6 +187,8 @@ class Database(object):
         build_depends.extend(self.remote_metadata(target, 'depends'))
         if mdepends:
             build_depends.extend(self.remote_metadata(target, 'makedepends'))
+        if odepends:
+            build_depends.extend(self.remote_metadata(target, 'optdepends'))
         if cdepends:
             build_depends.extend(self.remote_metadata(target, 'checkdepends'))
 

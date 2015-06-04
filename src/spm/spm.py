@@ -19,7 +19,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.8.0 (b2beda8)"
+app_version = "1.8.0 (b3186c4)"
 
 try:
     import libspm
@@ -279,6 +279,8 @@ try:
         help=_('Remove compiled files of target from system'))
     source_parser.add_argument('-D', '--depends', action='store_true', \
         help=_('Consider dependency targets'))
+    source_parser.add_argument('-O', '--optdepends', action='store_true', \
+        help=_('Consider optional dependency targets'))
     source_parser.add_argument('-R', '--reverse', action='store_true', \
         help=_('Consider reverse dependency targets'))
     source_parser.add_argument('-u', '--update', action='store_true', \
@@ -509,8 +511,8 @@ try:
             ARGS.merge = True
         m = libspm.Source(ARGS.TARGETS, ARGS.clean, ARGS.fetch, \
                 ARGS.prepare, ARGS.compile, ARGS.check, ARGS.install, \
-                ARGS.merge, ARGS.remove, ARGS.depends, ARGS.reverse, \
-                ARGS.update)
+                ARGS.merge, ARGS.remove, ARGS.depends, ARGS.optdepends, \
+                ARGS.reverse, ARGS.update)
         m.main()
 
     elif ARGS.mode == 'binary':

@@ -498,8 +498,9 @@ class Source(object):
     ''' Class for dealing with sources '''
     def __init__(self, targets, do_clean=False, do_fetch=False, \
         do_prepare=False, do_compile=False, do_check=False, do_install=False, \
-        do_merge=False, do_remove=False, do_depends=False, do_reverse=False, \
-        do_update=False, automake=False, autoremove=False):
+        do_merge=False, do_remove=False, do_depends=False, \
+        do_optdepends=False, do_reverse=False, do_update=False, \
+        automake=False, autoremove=False):
         self.targets = targets
         self.do_clean = do_clean
         self.do_fetch = do_fetch
@@ -510,6 +511,7 @@ class Source(object):
         self.do_merge = do_merge
         self.do_remove = do_remove
         self.do_depends = do_depends
+        self.do_optdepends = do_optdepends
         self.do_reverse = do_reverse
         self.do_update = do_update
         self.automake = automake
@@ -886,7 +888,7 @@ class Source(object):
         ''' Prepare target sources '''
         message.sub_info(_('Checking dependencies'))
         dependencies = database.remote_mdepends(self.target, \
-            cdepends=self.do_check)
+            cdepends=self.do_check, odepends=self.do_optdepends)
 
         if dependencies and self.do_depends:
             message.sub_info(_('Building dependencies'), dependencies)
