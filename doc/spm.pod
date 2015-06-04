@@ -4,7 +4,7 @@ spm - Source Package Manager
 
 =head1 SYNOPSIS
 
-	spm [-h] [--cache CACHE] [--build BUILD] [--root ROOT] [--gpg GPG]
+    spm [-h] [--cache CACHE] [--build BUILD] [--root ROOT] [--gpg GPG]
            [--ignore IGNORE] [--sign SIGN] [--offline {True,False}]
            [--mirror {True,False}] [--timeout TIMEOUT] [--verify {True,False}]
            [--chost CHOST] [--cflags CFLAGS] [--cxxflags CXXFLAGS]
@@ -39,14 +39,14 @@ its dependencies usually change upon upgrade from one release to another making
 them, in some cases, incomplete or non-valid. An example is gtk2 - according
 to Pacman it has the following dependencies:
 
-	atk pango xorg-libraries cairo gdk-pixbuf
+    atk pango xorg-libraries cairo gdk-pixbuf
 
 and according to SPM:
 
-	atk pango xorg-libraries cairo gdk-pixbuf bash python2 glib glibc
-	fontconfig pixman libpng libxcb libxau libxdmcp harfbuzz libffi pcre
-	icu gcc freetype2 zlib bzip2 expat
-	
+    atk pango xorg-libraries cairo gdk-pixbuf bash python2 glib glibc
+    fontconfig pixman libpng libxcb libxau libxdmcp harfbuzz libffi pcre
+    icu gcc freetype2 zlib bzip2 expat
+
 This ensures that dependencies are utilized at their best for consistency.
 Of course this can be achieved with other package managers too but it's much
 more work, SPM makes your life easier and keeps your system safe.
@@ -114,13 +114,13 @@ of the installed files is created. It also contains the information needed for
 SPM to know that a target is installed (metadata.json and SRCBUILD). This way
 if, for whatever the reason, SPM chokes you can decompress the tarball with:
 
-	sudo tar -xapPhf /var/cache/spm/tarballs/$(uname -m)/<tarball> -C /
+    sudo tar -xapPhf /var/cache/spm/tarballs/$(uname -m)/<tarball> -C /
  
 and it will be picked up by SPM as present on the system, no magic tricks
 needed. Keep in mind that you may have to execute the following to update the
 shared libraries cache:
 
-	ldconfig -r <system_root>
+    ldconfig -r <system_root>
 
 Upon targets merge or removal triggers for updating manual pages, desktop files,
 mime and other database will be activated to take care of common actions
@@ -261,6 +261,7 @@ optional arguments:
   -a, --automake        Short for clean, prepare, compile, install and merge
 
 =head2 BINARY MODE
+
 positional arguments:
   TARGETS               Targets to apply actions on
 
@@ -306,41 +307,42 @@ optional arguments:
 
 Clean, sync repositories and check for updates:
 
-	sudo spm repo -csu
-	
+    sudo spm repo -csu
+
 Print all remote targets names:
 
-	spm remote -n ^
+    spm remote -n ^
 
 Clean, prepare, build dependencies, compile, install and merge remote
 targets:
 
-	spm source -CpDcim file gawk
+    spm source -CpDcim file gawk
 
 Clean, prepare, compile dependencies, compile, install, merge and finally
 re-compile reverse dependencies if needed of all local targets but only if
 they are outdated and don't execute pre/post actions:
 
-	sudo spm --scripts=False source -aDRu world
+    sudo spm --scripts=False source -aDRu world
 
 Rebuild all revere dependencies of glibc:
-	spm local -rp glibc | sudo spm source -aD -
+
+    spm local -rp glibc | sudo spm source -aD -
 
 Remove grub and the targets that depend on it (reverse dependencies):
 
-	sudo spm source -rR grub
+    sudo spm source -rR grub
 
 Print bash, glibc and ncurses targets name and version in
 plain list format:
 
-	spm local -nvp 'bash$|glibc|ncurses'
+    spm local -nvp 'bash$|glibc|ncurses'
 
 Print the owner of 'bin/bash':
 
-	spm who 'bin/bash\b'
+    spm who 'bin/bash\b'
 
-Note that all modes, except source and repo, accept regexp similar to those in
-Perl. For more information visit http://docs.python.org/2/library/re.html.
+Note that all modes, except source, binary and repo, accept regexp similar to
+those in Perl. For more information visit http://docs.python.org/2/library/re.html.
 Source mode accepts base (e.g. foo), directory (e.g. /home/me/foo) with
 SRCBUILD in it, aliases (e.g. base) which you can find on the top-level of a
 repository as foo.alias or finally metagroups - currently only one - world.

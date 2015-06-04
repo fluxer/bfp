@@ -4,7 +4,7 @@ spm-tools - Source Package Manager Tools
 
 =head1 SYNOPSIS
 
-	spm-tools [-h] [--debug] [--version]
+    spm-tools [-h] [--debug] [--version]
                  {dist,check,clean,lint,sane,merge,edit,which,pack,pkg,serve,
                  disowned,upload,online,upgrade}
 
@@ -294,8 +294,8 @@ Upgrade from old SPM version:
 
 =head1 EXIT STATUS
 
-SPM returns 0 on success and other on failure.
-	
+SPMT returns 0 on success and other on failure.
+
 =head2 Unexpected error (1)
 
 This is a general error. Triggered, most likely, by something that SPM is
@@ -390,7 +390,8 @@ Used to specify locales to be used in the messages output.
 
 =head2 EDITOR
 
-Used to specify text-editor to be used when mering configuration files.
+Used to specify text-editor to be used when mering configuration files, editing
+SRCBUILDs or any other task requiring such.
 
 =head1 AUTHORS
 
