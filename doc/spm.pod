@@ -55,10 +55,11 @@ All metadata is stored in JSON files separate for each software, while this
 increases the disk I/O slightely it makes it possible to easily recover from
 disasters and fix issues in cases SPM is not being able to handle such as
 missing Python runtime library for whatever the reason. Do note that SPM caches
-internally the files content (metadatas and SRCBUILDs) in a single JSON file 
-which is loaded into the memory and rebuilds the caches when needed to reduce
-the lookup overheath. The cache itself is build only when needed too (on the
-first lookup) in a JIT (Just In Time) fashion.
+internally the files content (metadatas and SRCBUILDs) in the system memory
+(RAM) and rebuilds the caches when needed to reduce the lookup overheath. The
+cache itself is build only when needed too (on the first lookup) in a JIT (Just
+In Time) fashion. It does not use locks and multiple instances can be run at
+the same time, that is something that few package manager support.
 
 Remote sources (files, such as tarballs) are being checked after they are
 fetched by comparing the remote and local file size instead of using checksums
