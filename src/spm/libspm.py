@@ -566,17 +566,18 @@ class Source(object):
                 message.sub_debug(_('Disabling optional'), target)
             os.putenv('OPTIONAL_%s' % target.upper(), 'yes')
 
+        misc.dir_create(self.source_dir)
+        misc.dir_create(self.install_dir)
+
     def split_debug_symbols(self, sfile):
         ''' Separate debug symbols from ELF file '''
         # avoid actions on debug files, do not rely on .debug suffix
-        if '/lib/debug/' in sfile:
-            return
-        elif os.stat(sfile).st_nlink == 2:
-            # do not run on hardlinks, it will fail with binutils <=2.23.2
+        # do not run on hardlinks, it will fail with binutils <=2.23.2
+        if '/lib/debug/' in sfile or os.stat(sfile).st_nlink == 2:
             return
         # https://sourceware.org/gdb/onlinedocs/gdb/Separate-Debug-Files.html
-        sdebug = sfile.replace(self.install_dir, self.install_dir + \
-            sys.prefix + '/lib/debug') + '.debug'
+        sdebug = '%s/%s/lib/debug/%s.debug' % \
+            (self.install_dir, sys.prefix, sfile.replace(self.install_dir, ''))
         misc.dir_create(os.path.dirname(sdebug))
         objcopy = misc.whereis('objcopy')
         misc.system_command((objcopy, '--only-keep-debug', \
@@ -903,9 +904,8 @@ class Source(object):
         elif dependencies:
             message.sub_warning(_('Dependencies missing'), dependencies)
 
-        misc.dir_create(self.source_dir)
+        self.setup_environment()
         misc.dir_create(self.sources_dir)
-
         message.sub_info(_('Preparing sources'))
         for src_url in self.target_sources:
             src_base = misc.url_normalize(src_url, True)
@@ -939,7 +939,6 @@ class Source(object):
                 message.sub_critical(_('src_prepare() not defined'))
                 sys.exit(2)
 
-        self.setup_environment()
         misc.system_command((misc.whereis('bash'), '-e', '-c', 'source ' + \
             self.srcbuild + ' && umask 0022 && src_prepare'), \
             cwd=self.source_dir)
@@ -985,7 +984,6 @@ class Source(object):
             sys.exit(2)
 
         self.setup_environment()
-        misc.dir_create(self.install_dir)
 
         # re-create host system symlinks to prevent mismatch of entries in the
         # footprint and ld.so.cache for libraries leading to undetectable
@@ -1049,17 +1047,16 @@ class Source(object):
                         not os.path.isfile(os.path.realpath(sfile)):
                         message.sub_debug(_('Adjusting link'), sfile)
                         link = os.readlink(sfile)
+                        os.unlink(sfile)
                         if not sfile.endswith('.gz'):
-                            os.unlink(sfile)
                             os.symlink('%s.gz' % link, sfile)
                         else:
-                            os.unlink(sfile)
                             os.symlink(link, sfile)
 
         message.sub_info(_('Re-indexing content'))
         target_content = {}
         for sfile in misc.list_files(self.install_dir):
-            if sfile.endswith((self.target_metadata, self.target_srcbuild)):
+            if LOCAL_DIR in sfile:
                 continue
             message.sub_debug(_('Caching MIME of'), sfile)
             target_content[sfile] = misc.file_mime(sfile, quick=True)
@@ -1135,9 +1132,8 @@ class Source(object):
             if smime == 'application/x-executable' or \
                 smime == 'application/x-sharedlib':
                 libraries = misc.system_scanelf(sfile, sflags='-L')
-                if not libraries:
-                    continue # static binary
-                required.extend(libraries.split(','))
+                if libraries:
+                    required.extend(libraries.split(','))
 
             elif smime == 'text/plain' or smime == 'text/x-shellscript' \
                 or smime == 'text/x-python' or smime == 'text/x-perl' \
@@ -1232,12 +1228,10 @@ class Source(object):
                 if not interpreter and compilepaths:
                     message.sub_warning(_('Python interpreter missing'), version)
                     continue
-                elif not compilepaths:
-                    # nothing to do
-                    continue
-                command = [interpreter, '-m', 'compileall', '-f', '-q']
-                command.extend(compilepaths)
-                misc.system_command(command)
+                elif compilepaths:
+                    command = [interpreter, '-m', 'compileall', '-f', '-q']
+                    command.extend(compilepaths)
+                    misc.system_command(command)
 
         message.sub_info(_('Assembling metadata'))
         metadata = '%s/%s' % (self.install_dir, self.target_metadata)
@@ -1249,8 +1243,8 @@ class Source(object):
         backup = {}
         for sfile in misc.list_files(self.install_dir):
             sstripped = sfile.replace(self.install_dir, '')
-            # remove local target files, they are not wanted in the footprint
-            if sfile.endswith(self.target_metadata):
+            # ignore local target files, they are not wanted in the footprint
+            if LOCAL_DIR in sfile:
                 continue
             footprint.append(sstripped)
             if sfile.endswith('.conf') or sstripped in self.target_backup:
@@ -1275,8 +1269,8 @@ class Source(object):
         misc.json_write(metadata, data)
 
         message.sub_info(_('Assembling SRCBUILD'))
-        misc.file_write('%s/%s' % (self.install_dir, self.target_srcbuild), \
-            misc.file_read(self.srcbuild))
+        shutil.copy('%s/%s' % (self.install_dir, self.target_srcbuild), \
+            self.srcbuild)
 
         message.sub_info(_('Assembling depends'))
         misc.file_write('%s.depends' % self.target_tarball, \
@@ -1343,8 +1337,7 @@ class Source(object):
                 sfull = '%s%s' % (ROOT_DIR, sfile)
                 if not os.path.isfile(sfull):
                     message.sub_warning(_('File does not exist'), sfull)
-                    continue
-                if not backup_content[sfile] == misc.file_checksum(sfull):
+                elif not backup_content[sfile] == misc.file_checksum(sfull):
                     message.sub_debug(_('Backing up'), sfull)
                     shutil.copy2(sfull, '%s.backup' % sfull)
                 else:
@@ -1364,7 +1357,7 @@ class Source(object):
                     sresolved.replace(ROOT_DIR, '/')
                 if sresolved in new_content or sfile in new_content:
                     continue
-                # the footprint and metadata files will be deleted otherwise,
+                # the metadata and SRCBUILD files will be deleted otherwise,
                 # also making sure ROOT_DIR different than / is respected
                 if LOCAL_DIR in sfull:
                     continue
@@ -1469,16 +1462,16 @@ class Source(object):
             for sfile in reversed(target_content):
                 self.remove_target_link(sfile)
 
-        if database.local_search(self.target_name):
-            message.sub_info(_('Removing metadata'))
-            os.unlink('%s/%s/metadata.json' % (LOCAL_DIR, self.target_name))
-
         if misc.file_search('\npost_remove()', self.srcbuild, escape=False) \
             and SCRIPTS:
             message.sub_info(_('Executing post_remove()'))
             misc.system_script(self.srcbuild, 'post_remove')
 
+        metadata = '%s/%s/metadata.json' % (LOCAL_DIR, self.target_name)
         srcbuild = '%s/%s/SRCBUILD' % (LOCAL_DIR, self.target_name)
+        if os.path.isfile(metadata):
+            message.sub_info(_('Removing metadata'))
+            os.unlink(metadata)
         if os.path.isfile(srcbuild):
             message.sub_info(_('Removing SRCBUILD'))
             os.unlink(srcbuild)
