@@ -1245,6 +1245,7 @@ class Source(object):
         # due to creations and deletions of files, when byte-compiling
         # Python modules for an example, do not re-use target_content
         footprint = []
+        optdepends = []
         backup = {}
         for sfile in misc.list_files(self.install_dir):
             sstripped = sfile.replace(self.install_dir, '')
@@ -1259,6 +1260,9 @@ class Source(object):
                     # that will mess things up
                     continue
                 backup[sstripped] = misc.file_checksum(os.path.realpath(sfile))
+        for target in self.target_optdepends:
+            if database.local_uptodate(target):
+                optdepends.append(target)
         data = {}
         data['version'] = self.target_version
         data['release'] = self.target_release
