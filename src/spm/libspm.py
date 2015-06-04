@@ -1268,6 +1268,7 @@ class Source(object):
         data['release'] = self.target_release
         data['description'] = self.target_description
         data['depends'] = self.target_depends
+        data['optdepends'] = optdepends
         data['backup'] = backup
         data['size'] = misc.dir_size(self.install_dir)
         data['footprint'] = footprint
