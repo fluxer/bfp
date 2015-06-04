@@ -19,7 +19,7 @@ uninstall:
 	$(RM) $(DESTDIR)/etc/ahws.d
 
 clean:
-	$(RM) -r *.build/ *.so *.exe __pycache__
+	$(RM) -r *.build/ *.so *.exe __pycache__ *.c
 	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
 bump:
