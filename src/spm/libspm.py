@@ -1269,8 +1269,8 @@ class Source(object):
         misc.json_write(metadata, data)
 
         message.sub_info(_('Assembling SRCBUILD'))
-        shutil.copy('%s/%s' % (self.install_dir, self.target_srcbuild), \
-            self.srcbuild)
+        shutil.copy(self.srcbuild, '%s/%s' % \
+            (self.install_dir, self.target_srcbuild))
 
         message.sub_info(_('Assembling depends'))
         misc.file_write('%s.depends' % self.target_tarball, \
