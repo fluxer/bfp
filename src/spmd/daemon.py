@@ -1,4 +1,4 @@
-#!/bin/python2
+#!/usr/bin/python2
 
 import sys, os, time, threading, dbus, dbus.service, dbus.mainloop.qt
 from PyQt4 import QtCore

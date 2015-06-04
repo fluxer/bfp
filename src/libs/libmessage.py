@@ -1,4 +1,4 @@
-#!/bin/python2
+#!/usr/bin/python2
 
 '''
 A messaging module with fancy printing, logging and piped process handling.

@@ -1,4 +1,4 @@
-#!/bin/python2
+#!/usr/bin/python2
 
 '''
 A module to handle various tasks fuzz free.

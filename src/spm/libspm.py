@@ -1,4 +1,4 @@
-#!/bin/python2
+#!/usr/bin/python2
 
 import gettext
 _ = gettext.translation('spm', fallback=True).gettext

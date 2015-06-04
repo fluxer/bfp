@@ -1,4 +1,4 @@
-#!/bin/python2
+#!/usr/bin/python2
 
 from PyQt4 import QtCore, QtGui, QtDBus
 import os, sys, time, re

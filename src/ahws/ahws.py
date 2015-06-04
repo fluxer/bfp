@@ -1,4 +1,4 @@
-#!/bin/python2
+#!/usr/bin/python2
 
 import time, os, sys, subprocess, libudev, libmessage, libmisc
 message = libmessage.Message()

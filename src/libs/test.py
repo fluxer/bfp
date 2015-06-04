@@ -1,4 +1,4 @@
-#!/bin/python2
+#!/usr/bin/python2
 
 import unittest, tempfile, os, sys, types, json
 
