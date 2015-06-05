@@ -5,7 +5,7 @@ message = libmessage.Message()
 message.DEBUG = True
 misc = libmisc.Misc()
 
-app_version = "1.7.6 (294e6d7)"
+app_version = "1.8.0 (b58ad9a)"
 
 class Device(object):
     def __init__(self):
@@ -58,7 +58,7 @@ class Device(object):
                 devname = libudev.udev_list_entry_get_name(entry)
                 dev = libudev.udev_device_new_from_syspath(self.udev, devname)
                 try:
-                    self.Online(self.Properties(dev))
+                    self.Handle(self.Properties(dev), 'online')
                 finally:
                     libudev.udev_device_unref(dev)
                 entry = libudev.udev_list_entry_get_next(entry)
