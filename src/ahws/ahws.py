@@ -74,7 +74,7 @@ class Device(object):
 
         subhandle = '%s/%s' % (self.HANDLERS_DIR, SUBSYSTEM)
         if os.path.isfile(subhandle):
-            message.sub_info('Handling subsystem event for', \
+            message.sub_info('Handling subsystem %s for' % action, \
                 '%s (%s, %s)' % (SUBSYSTEM, VENDOR, MODEL))
             try:
                 misc.system_command((subhandle, action, DEVNAME))
@@ -86,7 +86,7 @@ class Device(object):
 
         devhandle = '%s/%s_%s' % (self.HANDLERS_DIR, VENDOR, MODEL)
         if os.path.isfile(devhandle):
-            message.sub_info('Handling device event for', \
+            message.sub_info('Handling device %s for' % action, \
                 '%s (%s, %s)' % (SERIAL, VENDOR, MODEL))
             try:
                 misc.system_command((devhandle, action))
@@ -95,31 +95,6 @@ class Device(object):
         else:
             message.sub_debug('No device handle for', \
                 '%s (%s, %s)' % (SERIAL, VENDOR, MODEL))
-
-    def Add(self, properties):
-        ''' Emit that device add action happend '''
-        message.sub_info('Added', properties[0])
-        self.Handle(properties, 'add')
-
-    def Remove(self, properties):
-        ''' Emit that device remove action happend '''
-        message.sub_info('Removed', properties[0])
-        self.Handle(properties, 'remove')
-
-    def Change(self, properties):
-        ''' Emit that device change action happend '''
-        message.sub_info('Changed', properties[0])
-        self.Handle(properties, 'changed')
-
-    def Online(self, properties):
-        ''' Emit that device online action happend '''
-        message.sub_info('Onlined', properties[0])
-        self.Handle(properties, 'online')
-
-    def Offline(self, properties):
-        ''' Emit that device offline action happend '''
-        message.sub_info('Offlined', properties[0])
-        self.Handle(properties, 'offline')
 
     def Daemon(self):
         ''' Daemon that monitors events '''
@@ -135,16 +110,7 @@ class Device(object):
                     dev = libudev.udev_monitor_receive_device(monitor)
                     if dev:
                         action = libudev.udev_device_get_action(dev)
-                        if action == 'add':
-                            self.Add(self.Properties(dev))
-                        elif action == 'remove':
-                            self.Remove(self.Properties(dev))
-                        elif action == 'change':
-                            self.Change(self.Properties(dev))
-                        elif action == 'online':
-                            self.Online(self.Properties(dev))
-                        elif action == 'offline':
-                            self.Offline(self.Properties(dev))
+                        self.Handle(self.Properties(dev), action)
                         libudev.udev_device_unref(dev)
                     else:
                         time.sleep(1)
