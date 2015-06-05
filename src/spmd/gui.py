@@ -1,11 +1,7 @@
 #!/usr/bin/python2
 
 from PyQt4 import QtCore, QtGui, QtDBus
-import os, sys, time, re
-if sys.version < '3':
-    import ConfigParser as configparser
-else:
-    import configparser
+import os, sys, re
 
 # handle keyboard interrupt
 import signal
@@ -572,7 +568,7 @@ def updateEvent():
 
 minimizeAction = QtGui.QAction(QtGui.QIcon.fromTheme('view-close'), app.tr("Mi&nimize"), app)
 minimizeAction.triggered.connect(MainWindow.hide)
-restoreAction = QtGui.QAction(QtGui.QIcon.fromTheme('view-restore'), app.tr("&Restore"), app);
+restoreAction = QtGui.QAction(QtGui.QIcon.fromTheme('view-restore'), app.tr("&Restore"), app)
 restoreAction.triggered.connect(MainWindow.showNormal)
 quitAction = QtGui.QAction(QtGui.QIcon.fromTheme('application-exit'), app.tr("&Quit"), app)
 quitAction.triggered.connect(app.quit)
@@ -589,8 +585,8 @@ trayIcon.show()
 
 def closeEvent(event):
     if trayIcon.isVisible():
-         MainWindow.hide()
-         event.ignore()
+        MainWindow.hide()
+        event.ignore()
 
 MainWindow.closeEvent = closeEvent
 
