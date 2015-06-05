@@ -25,6 +25,7 @@ class SPMD(dbus.service.Object):
     def __init__(self, conn, object_path='/com/spm/Daemon'):
         dbus.service.Object.__init__(self, conn, object_path)
         self.working = False
+        self.callback = None
 
     def _AsyncCall(self, function, callback):
         try:

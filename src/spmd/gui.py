@@ -23,13 +23,49 @@ ui.setupUi(MainWindow)
 
 class Worker(QtCore.QThread):
     ''' Threaded method caller '''
-    def __init__(self, parent=None, func=None):
+    def __init__(self, parent, func):
         super(Worker, self).__init__(parent)
         self.func = func
 
     def run(self):
         try:
             self.func()
+            self.emit(QtCore.SIGNAL('success'))
+        except SystemExit:
+            pass
+        except Exception as detail:
+            self.emit(QtCore.SIGNAL('failed'), str(detail))
+
+class TargetsWorker(QtCore.QThread):
+    ''' Threaded method caller '''
+    def __init__(self, parent, targets, search=None):
+        super(TargetsWorker, self).__init__(parent)
+        self.targets = targets
+        self.search = search
+
+    def run(self):
+        try:
+            for target in self.targets:
+                if database.local_search(target):
+                    description = database.local_metadata(target, 'description')
+                    if not database.remote_search(target):
+                        status = 'Not available'
+                    elif not database.local_uptodate(target):
+                        status = 'Update'
+                    else:
+                        status = 'Installed'
+                else:
+                    description = database.remote_metadata(target, 'description')
+                    status = 'Uninstalled'
+
+                if self.search:
+                    if not description:
+                        continue
+                    if not re.findall(self.search, description, flags=re.IGNORECASE) \
+                        and not re.findall(self.search, target, flags=re.IGNORECASE):
+                        continue
+
+                self.emit(QtCore.SIGNAL('add'), (target, description, status))
             self.emit(QtCore.SIGNAL('success'))
         except SystemExit:
             pass
@@ -141,37 +177,27 @@ def EnableWidgets():
     ui.ProgressBar.setRange(0, 1)
     ui.ProgressBar.hide()
 
-def RefreshTargetsReal(targets=None):
-    ui.SearchTable.clearContents()
-    irow = 0
+def TargetAdd(info):
+    target, description, status = info
+    irow = ui.SearchTable.rowCount()
+    ui.SearchTable.setRowCount(irow+1)
+    ui.SearchTable.setItem(irow, 0, QtGui.QTableWidgetItem(target))
+    ui.SearchTable.setItem(irow, 1, QtGui.QTableWidgetItem(description))
+    ui.SearchTable.setItem(irow, 2, QtGui.QTableWidgetItem(status))
+
+def RefreshTargets(targets=None):
     if not targets:
         targets = database.local_all(basename=True)
         for target in database.remote_all(basename=True):
             if not target in targets:
                 targets.append(target)
 
-    for target in targets:
-        ui.SearchTable.setRowCount(irow+1)
-        ui.SearchTable.setItem(irow, 0, QtGui.QTableWidgetItem(target))
-        if database.local_search(target):
-            description = database.local_metadata(target, 'description')
-            ui.SearchTable.setItem(irow, 1, QtGui.QTableWidgetItem(description))
-            if not database.remote_search(target):
-                ui.SearchTable.setItem(irow, 2, QtGui.QTableWidgetItem('Not available'))
-            elif not database.local_uptodate(target):
-                ui.SearchTable.setItem(irow, 2, QtGui.QTableWidgetItem('Update'))
-            else:
-                ui.SearchTable.setItem(irow, 2, QtGui.QTableWidgetItem('Installed'))
-        else:
-            description = database.remote_metadata(target, 'description')
-            ui.SearchTable.setItem(irow, 1, QtGui.QTableWidgetItem(description))
-            ui.SearchTable.setItem(irow, 2, QtGui.QTableWidgetItem('Uninstalled'))
-        irow += 1
-
-def RefreshTargets():
-    worker = Worker(app, RefreshTargetsReal)
+    worker = TargetsWorker(app, targets)
     worker.finished.connect(EnableWidgets)
+    app.connect(worker, QtCore.SIGNAL('add'), TargetAdd)
     app.connect(worker, QtCore.SIGNAL('failed'), MessageCritical)
+    ui.SearchTable.setRowCount(0)
+    ui.SearchTable.clearContents()
     DisableWidgets()
     worker.start()
 
@@ -268,39 +294,23 @@ def RefreshAll():
     RefreshTargets()
     RefreshWidgets()
 
-def SearchMetadataReal():
+def SearchMetadata():
     regexp = str(ui.SearchEdit.text())
     matches = []
     if not regexp:
-        return RefreshTargetsReal()
+        return RefreshTarget()
 
     targets = database.local_all(basename=True)
     for target in database.remote_all(basename=True):
         if not target in targets:
             targets.append(target)
 
-    for target in targets:
-        description = database.local_metadata(target, 'description')
-        if not description:
-            description = database.remote_metadata(target, 'description')
-        if not description:
-            continue
-        if re.findall(regexp, description, flags=re.IGNORECASE):
-            matches.append(target)
-        if re.findall(regexp, target, flags=re.IGNORECASE):
-            matches.append(target)
-
-    if matches:
-        # calling it with null matches will add all
-        RefreshTargetsReal(matches)
-    else:
-        ui.SearchTable.clearContents()
-        ui.SearchTable.setRowCount(0)
-
-def SearchMetadata():
-    worker = Worker(app, SearchMetadataReal)
+    worker = TargetsWorker(app, targets, regexp)
     worker.finished.connect(EnableWidgets)
+    app.connect(worker, QtCore.SIGNAL('add'), TargetAdd)
     app.connect(worker, QtCore.SIGNAL('failed'), MessageCritical)
+    ui.SearchTable.setRowCount(0)
+    ui.SearchTable.clearContents()
     DisableWidgets()
     worker.start()
 
