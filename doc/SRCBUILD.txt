@@ -4,7 +4,7 @@
 
 # NOTE: SRCBUILDs are not parsed via Bash which means that not everything works
 # as it does in Bash when it comes to the metadata variables handling. It is
-# sourced only on compile, check, install, merge and remove.
+# sourced only on prepare, compile, check, install, merge and remove.
 
 version=5.14
 description="File type identification utility"
