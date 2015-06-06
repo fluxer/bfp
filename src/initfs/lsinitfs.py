@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os
 
-app_version = "1.7.6 (ad0515b)"
+app_version = "1.8.0 (b4e7e1d)"
 
 tmpdir = None
 keep = False
@@ -13,11 +13,14 @@ try:
 
     tmpdir = tempfile.mkdtemp()
     kernel = os.uname()[2]
+    busybox = misc.whereis('busybox')
     image = '/boot/initramfs-' + kernel + '.img'
 
     parser = argparse.ArgumentParser(prog='lsinitfs', description='LsInitfs')
     parser.add_argument('-t', '--tmp', type=str, default=tmpdir, \
         help='Change temporary directory')
+    parser.add_argument('-b', '--busybox', type=str, default=busybox, \
+        help='Change busybox binary')
     parser.add_argument('-k', '--kernel', type=str, default=kernel, \
         help='Change kernel version')
     parser.add_argument('-i', '--image', type=str, default=image, \
@@ -44,6 +47,7 @@ try:
     message.info('Runtime information')
     message.sub_info('TMP', ARGS.tmp)
     message.sub_info('KERNEL', ARGS.kernel)
+    message.sub_info('BUSYBOX', ARGS.busybox)
     message.sub_info('IMAGE', ARGS.image)
 
     if not os.path.isfile(ARGS.image):
@@ -61,8 +65,8 @@ try:
         misc.archive_decompress(new_image, ARGS.tmp)
 
     message.sub_info('Listing image')
-    cpio = misc.whereis('cpio')
-    print(misc.system_communicate((cpio, '-tF', misc.file_name(new_image, False))))
+    print(misc.system_communicate((ARGS.busybox, 'cpio', '-tF', \
+        misc.file_name(new_image, False))))
 
 except subprocess.CalledProcessError as detail:
     message.critical('SUBPROCESS', detail)
