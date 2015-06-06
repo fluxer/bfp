@@ -88,12 +88,12 @@ preparations you can still order the build process properly by specifying them
 in the SRCBUILD.
 
 Repositories with target (package) files for the most essential software are
-enabled by default but you can maintain your own repositories with Git. Using
-Git for the repositories has the advantage of doing incremental updates on them
-and in addition easy the maintainence because Git allows going back and forth in
-the history of the repository thus building older version of a target (package)
-would be as easy as checking out the right commit hash and then issuing the
-usual build command via SPM.
+enabled by default but you can maintain your own repositories with Git,
+Subversion (SVN) or event rsync. This has the advantage of doing incremental
+updates on them. Using Content Version System (Git or SVN) allows going back
+and forth in the history of the repository thus building older version of
+software would be as easy as checking out the right change set and then issuing
+the usual build command via SPM.
 
 Major libraries version changes will be handled properly too. For an example,
 when curl changes the library version and when building curl the reverse

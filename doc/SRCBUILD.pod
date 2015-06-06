@@ -52,7 +52,8 @@ Variable defining runtime dependencies of software.
 =head2 makedepends
 
 Variable defining build dependencies of software. They are not added to the
-metadata as runtime dependencies and only meaningfull when building.
+metadata as runtime dependencies, unless detected as needed, and only
+meaningfull when building.
 
 =head2 optdepends
 
@@ -180,7 +181,7 @@ Function defining instructions what to do after removing the target.
 
 =head1 EXAMPLES
 
-A prototype SRCBUILD should be installed in #DOCDIR#/spm.
+A prototype SRCBUILD should be installed in @DOCDIR@/spm.
 
 =head1 AUTHORS
 
