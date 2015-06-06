@@ -197,7 +197,8 @@ class Database(object):
             if not dependency in missing \
                 and not self.local_uptodate(dependency):
                 checked.append(target)
-                missing.extend(self.remote_mdepends(dependency, checked, cdepends))
+                missing.extend(self.remote_mdepends(dependency, checked, \
+                    cdepends, mdepends, odepends))
                 missing.append(dependency)
                 checked.append(dependency)
         return missing
