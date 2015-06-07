@@ -17,8 +17,11 @@ kms_disable() {
 # install nVidia binary blob driver
 install_nvidia() {
     # saves some computation
-    if [ ! -d "/var/local/spm/nvidia" ];then
+    if [ ! -d "/var/local/spm/nvidia" ] && spm-tools online;then
         spm binary -aDu nvidia
+    # if the system is offline attempt to install from already fetched tarball
+    elif [ ! -d "/var/local/spm/nvidia" ];then
+        spm --offline=True binary -aDu nvidia
     fi
 }
 
@@ -36,8 +39,11 @@ remove_nvidia() {
 # install AMD binary blob driver
 install_amd() {
     # saves some computation
-    if [ ! -d "/var/local/spm/amd-catalyst" ];then
+    if [ ! -d "/var/local/spm/amd-catalyst" ] && spm-tools online;then
         spm binary -aDu amd-catalyst
+    # if the system is offline attempt to install from already fetched tarball
+    elif [ ! -d "/var/local/spm/amd-catalyst" ];then
+        spm --offline=True binary -aDu amd-catalyst
     fi
 }
 
