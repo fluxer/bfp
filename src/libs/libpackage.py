@@ -135,11 +135,11 @@ class Database(object):
         if misc.python2:
             misc.typecheck(target, (types.StringTypes))
 
-        if os.path.isfile('%s/SRCBUILD' % target):
-            return target
         for rtarget in self.remote_all():
             if rtarget == target or rtarget.endswith('/%s' % target):
                 return rtarget
+        if os.path.isfile('%s/SRCBUILD' % target):
+            return target
 
     def local_belongs(self, sfile, exact=False, escape=True, ignore=None):
         ''' Searches for match of file in all local targets '''
