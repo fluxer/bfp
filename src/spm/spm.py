@@ -3,15 +3,7 @@
 import gettext
 _ = gettext.translation('spm', fallback=True).gettext
 
-import sys
-import argparse
-import ast
-import subprocess
-import tarfile
-import zipfile
-import shutil
-import os
-import re
+import sys, os, argparse, ast, subprocess, tarfile, zipfile, shutil, re
 if sys.version < '3':
     import ConfigParser as configparser
     from urllib2 import HTTPError
