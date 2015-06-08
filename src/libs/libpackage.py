@@ -313,8 +313,8 @@ class Database(object):
 
 class SRCBUILD(object):
     ''' A (new) SRCBUILD parser '''
-    string_regex = re.compile('(?:^|\n)([\w\d_]+)=([^\(].*)')
-    array_regex = re.compile('(?:^|\n)([\w\d_]+)=\(([^\)]+){1}', re.MULTILINE)
+    string_regex = re.compile('(?:^|\n)([\w]+)=([^\(].*)')
+    array_regex = re.compile('(?:^|\n)([\w]+)=\(([^\)]+)', re.MULTILINE)
 
     def __init__(self, sfile=None):
         self.version = ''
