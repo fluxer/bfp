@@ -33,7 +33,7 @@ ln -svf "$curdir/../libs/libmessage.py" .
 ln -svf "$curdir/../libs/libmisc.py" .
 ln -svf "$curdir/../libs/libpackage.py" .
 # to ensure that no stray files from previous run are left
-make -C "$curdir" clean
+make -j1 -C "$curdir" clean
 
 # skip some tests depending on the tools available :(
 if ! which scanelf ;then
