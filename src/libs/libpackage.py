@@ -62,11 +62,10 @@ class Database(object):
             return
 
         parser = SRCBUILD()
-        for sdir in misc.list_dirs(metadir):
-            srcbuild = '%s/SRCBUILD' % sdir
-            if os.path.isfile(srcbuild):
-                parser.parse(srcbuild)
-                self.REMOTE_CACHE[sdir] = {
+        for sfile in misc.list_files(metadir):
+            if sfile.endswith('/SRCBUILD'):
+                parser.parse(sfile)
+                self.REMOTE_CACHE[os.path.dirname(sfile)] = {
                     'version': parser.version,
                     'release': parser.release,
                     'description': parser.description,
