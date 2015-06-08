@@ -61,9 +61,9 @@ class Database(object):
         if not os.path.isdir(metadir):
             return
 
+        parser = SRCBUILD()
         for sdir in misc.list_dirs(metadir):
             srcbuild = '%s/SRCBUILD' % sdir
-            parser = SRCBUILD()
             if os.path.isfile(srcbuild):
                 parser.parse(srcbuild)
                 self.REMOTE_CACHE[sdir] = {
