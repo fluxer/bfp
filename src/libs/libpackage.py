@@ -150,10 +150,6 @@ class Database(object):
             misc.typecheck(ignore, (types.NoneType, types.StringTypes))
 
         match = []
-        # it may not exists if bootstrapping
-        if not os.path.isdir(self.LOCAL_DIR):
-            return match
-
         for local in self.local_all(basename=True):
             if local == ignore:
                 continue
