@@ -21,6 +21,9 @@ cython: clean bump
 	$(CC) tools.c $(shell $(PYTHON)-config --includes --libs) -o tools.exe
 	$(STRIP) *.exe *.so
 
+check:
+	$(BASH) ./autotest.sh $(PYTHON)
+
 install:
 	$(INSTALL) -dm755 $(DESTDIR)$(SITEDIR) $(DESTDIR)$(BINDIR) \
 		$(DESTDIR)/etc/spm
@@ -45,7 +48,7 @@ uninstall:
 	$(RM) -r $(DESTDIR)/etc/spm/ $(DESTDIR)/etc/spm.conf
 
 clean:
-	$(RM) -r *.build/ *.so *.exe __pycache__ spm.pot po/*/*.mo po/*/*.mo~ *.c
+	$(RM) -r *.build/ *.so *.exe __pycache__ spm.pot po/*/*.mo po/*/*.mo~ *.c root-*
 	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
 bump:

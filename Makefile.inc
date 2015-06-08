@@ -22,6 +22,7 @@ ARCH = $(shell uname -m | $(SED) 's|_|-|')
 JOBS = $(shell echo $$((`getconf _NPROCESSORS_CONF || echo 1`+1)))
 
 GIT = git
+BASH = bash
 PYTHON = python2
 PYTHON_VERSION = $(shell $(PYTHON) -c "import sys; print(sys.version[:3])")
 GREP = grep
