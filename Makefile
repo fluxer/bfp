@@ -20,6 +20,7 @@ cython:
 
 check:
 	$(MAKE) -C src/libs check
+	$(MAKE) -C src/spm check
 
 install:
 	$(MAKE) -C doc install
