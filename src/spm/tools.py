@@ -8,13 +8,11 @@ import pwd, grp, ftplib
 if sys.version < '3':
     import ConfigParser as configparser
     from urllib2 import HTTPError
-    from urllib2 import urlopen
     import SimpleHTTPServer as HTTPServer
     import SocketServer as socketserver
 else:
     import configparser
     from urllib.error import HTTPError
-    from urllib.request import urlopen
     import http.server as HTTPServer
     import socketserver
 

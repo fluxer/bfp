@@ -1,6 +1,6 @@
 #!/usr/bin/python2
 
-import time, os, sys, subprocess, libudev, libmessage, libmisc
+import time, os, sys, libudev, libmessage, libmisc
 message = libmessage.Message()
 message.DEBUG = True
 misc = libmisc.Misc()

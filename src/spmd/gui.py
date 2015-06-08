@@ -296,9 +296,8 @@ def RefreshAll():
 
 def SearchMetadata():
     regexp = str(ui.SearchEdit.text())
-    matches = []
     if not regexp:
-        return RefreshTarget()
+        return RefreshTargets()
 
     targets = database.local_all(basename=True)
     for target in database.remote_all(basename=True):

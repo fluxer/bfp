@@ -1,6 +1,6 @@
 #!/usr/bin/python2
 
-import libmisc, libpackage, timeit, tempfile, os, sys
+import libmisc, libpackage, timeit, tempfile, os
 misc = libmisc.Misc()
 database = libpackage.Database()
 

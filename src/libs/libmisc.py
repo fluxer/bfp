@@ -785,17 +785,20 @@ class Misc(object):
             return True
         return False
 
-    def archive_compress(self, lpaths, sfile, strip):
-        ''' Create archive from list of files and/or directories '''
+    def archive_compress(self, lpaths, sfile, strip, ilevel=9):
+        ''' Create archive from list of files and/or directories, ilevel
+            is compression level integer between 0 and 9 that applies only to
+            tar, gzip and bzip2 archives '''
         if self.python2:
             self.typecheck(lpaths, (types.TupleType, types.ListType))
             self.typecheck(sfile, (types.StringTypes))
             self.typecheck(strip, (types.StringTypes))
+            self.typecheck(ilevel, (types.IntType))
 
         self.dir_create(os.path.dirname(sfile))
 
         if sfile.endswith(('tar.bz2', '.tar.gz')):
-            tarf = tarfile.open(sfile, 'w:' + self.file_extension(sfile))
+            tarf = tarfile.open(sfile, 'w:' + self.file_extension(sfile), compresslevel=ilevel)
             try:
                 for item in lpaths:
                     tarf.add(item, item.lstrip(strip))
@@ -819,14 +822,14 @@ class Misc(object):
         elif sfile.endswith('.gz'):
             if len(lpaths) > 1:
                 raise Exception('GZip', 'format can hold only single file')
-            gzipf = gzip.GzipFile(sfile, 'wb')
+            gzipf = gzip.GzipFile(sfile, 'wb', compresslevel=ilevel)
             for f in lpaths:
                 gzipf.write(self.string_encode(self.file_read(f)))
             gzipf.close()
         elif sfile.endswith('.bz2'):
             if len(lpaths) > 1:
                 raise Exception('BZip', 'format can hold only single file')
-            bzipf = bz2.BZ2File(sfile, 'wb')
+            bzipf = bz2.BZ2File(sfile, 'wb', compresslevel=ilevel)
             for f in lpaths:
                 bzipf.write(self.string_encode(self.file_read(f)))
             bzipf.close()
