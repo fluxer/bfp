@@ -168,6 +168,8 @@ optional arguments:
   --root ROOT           Change system root directory
   --ignore IGNORE       Change ignored targets
   --sign {True,False}   Set whether to sign files when feasable
+  --notify {True,False}
+                        Set whether to use inotify to monitor databases
   --offline {True,False}
                         Set whether to use offline mode
   --mirror {True,False}

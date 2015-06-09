@@ -8,11 +8,11 @@ _spm()
 
     actions='repo remote source binary local who'
 
-    main_options='-h --help --cache --build --root --gpg --ignore --mirror
-        --timeout --verify --chost --cflags --cxxflags --cppflags --ldflags
-        --makeflags --purge --man --split --binaries --shared --static --rpath
-        --sign --pycompile --missing --conflicts --backup --scripts --debug
-        --version'
+    main_options='-h --help --cache --build --root --gpg --ignore --notify
+        --mirror --timeout --verify --chost --cflags --cxxflags --cppflags
+        --ldflags --makeflags --purge --man --split --binaries --shared --static
+        --rpath --sign --pycompile --missing --conflicts --backup --scripts
+        --debug --version'
 
     repo_options='-h --help -c --clean -s --sync -u --update
         -a --all'

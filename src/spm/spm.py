@@ -57,6 +57,12 @@ try:
             libspm.SIGN = values
             setattr(namespace, self.dest, values)
 
+    class OverrideNotify(argparse.Action):
+        ''' Override database watching '''
+        def __call__(self, parser, namespace, values, option_string=None):
+            libspm.NOTIFY = values
+            setattr(namespace, self.dest, values)
+
     class OverrideOffline(argparse.Action):
         ''' Override offline mode '''
         def __call__(self, parser, namespace, values, option_string=None):
@@ -350,6 +356,9 @@ try:
         help=_('Change ignored targets'))
     parser.add_argument('--sign', type=str, action=OverrideSign, \
         help=_('Set whether to sign files'))
+    parser.add_argument('--notify', type=str, action=OverrideNotify, \
+        choices=[True, False],
+        help=_('Set whether to use inotify to monitor databases'))
     parser.add_argument('--offline', type=ast.literal_eval, \
         action=OverrideOffline, choices=[True, False], \
         help=_('Set whether to use offline mode'))
@@ -471,6 +480,7 @@ try:
         message.sub_info(_('GPG_DIR'), libspm.GPG_DIR)
         message.sub_info(_('IGNORE'), libspm.IGNORE)
         message.sub_info(_('SIGN'), libspm.SIGN)
+        message.sub_info(_('NOTIFY'), libspm.NOTIFY)
         message.sub_info(_('OFFLINE'), libspm.OFFLINE)
         message.sub_info(_('MIRROR'), libspm.MIRROR)
         message.sub_info(_('TIMEOUT'), libspm.TIMEOUT)
@@ -513,6 +523,7 @@ try:
         message.sub_info(_('ROOT_DIR'), libspm.ROOT_DIR)
         message.sub_info(_('GPG_DIR'), libspm.GPG_DIR)
         message.sub_info(_('IGNORE'), libspm.IGNORE)
+        message.sub_info(_('NOTIFY'), libspm.NOTIFY)
         message.sub_info(_('OFFLINE'), libspm.OFFLINE)
         message.sub_info(_('MIRROR'), libspm.MIRROR)
         message.sub_info(_('TIMEOUT'), libspm.TIMEOUT)

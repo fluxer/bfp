@@ -28,6 +28,7 @@ DEFAULTS = {
     'GPG_DIR': '/etc/spm/gpg',
     'IGNORE': '',
     'SIGN': '',
+    'NOTIFY': 'False',
     'OFFLINE': 'False',
     'MIRROR': 'False',
     'TIMEOUT': '30',
@@ -71,6 +72,7 @@ LOCAL_DIR = ROOT_DIR + 'var/local/spm'
 GPG_DIR = conf.get('spm', 'GPG_DIR')
 IGNORE = conf.get('spm', 'IGNORE').split(' ')
 SIGN = conf.get('spm', 'SIGN')
+NOTIFY = conf.getboolean('spm', 'NOTIFY')
 OFFLINE = conf.getboolean('fetch', 'OFFLINE')
 MIRROR = conf.getboolean('fetch', 'MIRROR')
 TIMEOUT = conf.getint('fetch', 'TIMEOUT')
@@ -151,6 +153,7 @@ database.ROOT_DIR = ROOT_DIR
 database.CACHE_DIR = CACHE_DIR
 database.LOCAL_DIR = LOCAL_DIR
 database.IGNORE = IGNORE
+database.NOTIFY = NOTIFY
 
 class Local(object):
     ''' Class for printing local targets metadata '''
@@ -180,6 +183,7 @@ class Local(object):
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
         database.IGNORE = IGNORE
+        database.NOTIFY = NOTIFY
 
     def main(self):
         ''' Print local target metadata for every match '''
@@ -292,6 +296,7 @@ class Remote(object):
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
         database.IGNORE = IGNORE
+        database.NOTIFY = NOTIFY
 
     def main(self):
         ''' Print remote target metadata for every match '''
@@ -411,6 +416,7 @@ class Repo(object):
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
         database.IGNORE = IGNORE
+        database.NOTIFY = NOTIFY
 
     def clean(self):
         ''' Clean repository '''
@@ -537,6 +543,7 @@ class Source(object):
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
         database.IGNORE = IGNORE
+        database.NOTIFY = NOTIFY
 
     def autosource(self, targets, automake=False, autoremove=False):
         ''' Handle targets build/remove without affecting current object '''
@@ -1693,6 +1700,7 @@ class Binary(Source):
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
         database.IGNORE = IGNORE
+        database.NOTIFY = NOTIFY
 
     def autobinary(self, targets, automake=False, autoremove=False):
         ''' Handle targets install/remove without affecting current object '''
@@ -1846,6 +1854,7 @@ class Who(object):
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
         database.IGNORE = IGNORE
+        database.NOTIFY = NOTIFY
 
     def main(self):
         ''' Print owner of files pattern '''
