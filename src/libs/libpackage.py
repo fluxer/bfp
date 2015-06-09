@@ -39,45 +39,19 @@ class Database(object):
         if os.path.isdir(self.LOCAL_DIR):
             notify.watch_add(self.LOCAL_DIR)
 
-    def _map_local_cache(self, sdir):
-        metadata = '%s/metadata.json' % sdir
-        srcbuild = '%s/SRCBUILD' % sdir
-        if os.path.isfile(metadata) and os.path.isfile(srcbuild):
-            data = misc.json_read(metadata)
-            data['name'] = sdir
-            return data
-
     def _build_local_cache(self):
         ''' Build internal local database cache '''
         self.LOCAL_CACHE = {}
 
         if not os.path.isdir(self.LOCAL_DIR):
             return
-        for data in map(self._map_local_cache, misc.list_dirs(self.LOCAL_DIR)):
-            if not data:
-                continue
-            self.LOCAL_CACHE[data['name']] = data
 
+        for sfile in misc.list_files(self.LOCAL_DIR):
+            sdir = os.path.dirname(sfile)
+            metadata = '%s/metadata.json' % sdir
+            if sfile.endswith('/SRCBUILD') and os.path.isfile(metadata):
+                self.LOCAL_CACHE[sdir] = misc.json_read(metadata)
         # print(sys.getsizeof(self.LOCAL_CACHE))
-
-    def _map_remote_cache(self, sfile):
-        if sfile.endswith('/SRCBUILD'):
-            parser = SRCBUILD(sfile)
-            data = {
-                'version': parser.version,
-                'release': parser.release,
-                'description': parser.description,
-                'depends': parser.depends,
-                'makedepends': parser.makedepends,
-                'optdepends': parser.optdepends,
-                'checkdepends': parser.checkdepends,
-                'sources': parser.sources,
-                'pgpkeys': parser.pgpkeys,
-                'options': parser.options,
-                'backup': parser.backup
-            }
-            data['name'] = os.path.dirname(sfile)
-            return data
 
     def _build_remote_cache(self):
         ''' Build internal remote database cache '''
@@ -86,10 +60,24 @@ class Database(object):
         metadir = '%s/repositories' % self.CACHE_DIR
         if not os.path.isdir(metadir):
             return
-        for data in map(self._map_remote_cache, misc.list_files(metadir)):
-            if not data:
-                continue
-            self.REMOTE_CACHE[data['name']] = data
+
+        parser = SRCBUILD()
+        for sfile in misc.list_files(metadir):
+            if sfile.endswith('/SRCBUILD'):
+                parser.parse(sfile)
+                self.REMOTE_CACHE[os.path.dirname(sfile)] = {
+                    'version': parser.version,
+                    'release': parser.release,
+                    'description': parser.description,
+                    'depends': parser.depends,
+                    'makedepends': parser.makedepends,
+                    'optdepends': parser.optdepends,
+                    'checkdepends': parser.checkdepends,
+                    'sources': parser.sources,
+                    'pgpkeys': parser.pgpkeys,
+                    'options': parser.options,
+                    'backup': parser.backup
+                }
         # print(sys.getsizeof(self.REMOTE_CACHE))
 
     def remote_all(self, basename=False):
