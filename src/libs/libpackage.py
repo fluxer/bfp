@@ -15,7 +15,6 @@ SRCBUILD() is Source Package Manager recipes (SRCBUILDs) parser.
 
 import os, re, types
 from distutils.version import LooseVersion
-from collections import deque
 
 import libmisc
 misc = libmisc.Misc()
@@ -44,7 +43,9 @@ class Database(object):
         metadata = '%s/metadata.json' % sdir
         srcbuild = '%s/SRCBUILD' % sdir
         if os.path.isfile(metadata) and os.path.isfile(srcbuild):
-            self.LOCAL_CACHE[sdir] = misc.json_read(metadata)
+            data = misc.json_read(metadata)
+            data['name'] = sdir
+            return data
 
     def _build_local_cache(self):
         ''' Build internal local database cache '''
@@ -52,13 +53,15 @@ class Database(object):
 
         if not os.path.isdir(self.LOCAL_DIR):
             return
-        deque(map(self._map_local_cache, misc.list_dirs(self.LOCAL_DIR)))
+        for data in map(self._map_local_cache, misc.list_dirs(self.LOCAL_DIR)):
+            self.LOCAL_CACHE[data['name']] = data
+
         # print(sys.getsizeof(self.LOCAL_CACHE))
 
     def _map_remote_cache(self, sfile):
         if sfile.endswith('/SRCBUILD'):
             parser = SRCBUILD(sfile)
-            self.REMOTE_CACHE[os.path.dirname(sfile)] = {
+            data = {
                 'version': parser.version,
                 'release': parser.release,
                 'description': parser.description,
@@ -71,6 +74,8 @@ class Database(object):
                 'options': parser.options,
                 'backup': parser.backup
             }
+            data['name'] = os.path.dirname(sfile)
+            return data
 
     def _build_remote_cache(self):
         ''' Build internal remote database cache '''
@@ -79,7 +84,8 @@ class Database(object):
         metadir = '%s/repositories' % self.CACHE_DIR
         if not os.path.isdir(metadir):
             return
-        deque(map(self._map_remote_cache, misc.list_files(metadir)))
+        for data in map(self._map_remote_cache, misc.list_files(metadir)):
+            self.REMOTE_CACHE[data['name']] = data
         # print(sys.getsizeof(self.REMOTE_CACHE))
 
     def remote_all(self, basename=False):
