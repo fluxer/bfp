@@ -317,7 +317,11 @@ class Misc(object):
         self.file_write(sfile, re.sub(string, string2, self.file_read(sfile)))
 
     def file_checksum(self, sfile, method='sha256'):
-        ''' Return a hex checksum of file '''
+        ''' Return a hex checksum of file
+
+            the reason to use this method would be if you wan to ensure that
+            big files are read in chunks (according to self.BUFFER) preventing
+            OOM kill, safety first '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
             self.typecheck(method, (types.StringTypes))
@@ -433,7 +437,7 @@ class Misc(object):
         it instead of this method, however it applies permissions on all
         directories created - this one does not. it sets ipermissions on the
         last directory of the path passed, for the leading paths the default
-        mask (0o777 is used) '''
+        mask (0o777 usually) is used '''
         if self.python2:
             self.typecheck(sdir, (types.StringTypes))
             self.typecheck(ipermissions, (types.IntType))
@@ -823,15 +827,13 @@ class Misc(object):
             if len(lpaths) > 1:
                 raise Exception('GZip', 'format can hold only single file')
             gzipf = gzip.GzipFile(sfile, 'wb', compresslevel=ilevel)
-            for f in lpaths:
-                gzipf.write(self.string_encode(self.file_read(f)))
+            gzipf.write(self.string_encode(self.file_read(lpaths[0])))
             gzipf.close()
         elif sfile.endswith('.bz2'):
             if len(lpaths) > 1:
                 raise Exception('BZip', 'format can hold only single file')
             bzipf = bz2.BZ2File(sfile, 'wb', compresslevel=ilevel)
-            for f in lpaths:
-                bzipf.write(self.string_encode(self.file_read(f)))
+            bzipf.write(self.string_encode(self.file_read(lpaths[0])))
             bzipf.close()
 
     def archive_decompress(self, sfile, sdir):
@@ -1030,7 +1032,7 @@ class Misc(object):
         ''' Execute trigger
 
             that's a shortcur for a conditional chroot command depending
-            self.ROOT_DIR '''
+            on self.ROOT_DIR '''
         if self.python2:
             self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
             self.typecheck(shell, (types.BooleanType))
