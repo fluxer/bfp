@@ -15,6 +15,7 @@ SRCBUILD() is Source Package Manager recipes (SRCBUILDs) parser.
 
 import os, re, types
 from distutils.version import LooseVersion
+from collections import deque
 
 import libmisc
 misc = libmisc.Misc()
@@ -51,13 +52,12 @@ class Database(object):
 
         if not os.path.isdir(self.LOCAL_DIR):
             return
-        map(self._map_local_cache, misc.list_dirs(self.LOCAL_DIR))
+        deque(map(self._map_local_cache, misc.list_dirs(self.LOCAL_DIR)))
         # print(sys.getsizeof(self.LOCAL_CACHE))
 
     def _map_remote_cache(self, sfile):
         if sfile.endswith('/SRCBUILD'):
-            parser = SRCBUILD()
-            parser.parse(sfile)
+            parser = SRCBUILD(sfile)
             self.REMOTE_CACHE[os.path.dirname(sfile)] = {
                 'version': parser.version,
                 'release': parser.release,
@@ -79,7 +79,7 @@ class Database(object):
         metadir = '%s/repositories' % self.CACHE_DIR
         if not os.path.isdir(metadir):
             return
-        map(self._map_remote_cache, misc.list_files(metadir))
+        deque(map(self._map_remote_cache, misc.list_files(metadir)))
         # print(sys.getsizeof(self.REMOTE_CACHE))
 
     def remote_all(self, basename=False):
