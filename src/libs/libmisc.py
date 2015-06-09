@@ -253,17 +253,17 @@ class Misc(object):
         return self.string_search(string, self.file_read(sfile), exact=exact, \
             escape=escape)
 
-    def file_mime(self, sfile, resolve=False, quick=False):
+    def file_mime(self, sfile, rbesolve=False, bquick=False):
         ''' Get file type, you should propably use Magic().get() instead '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
-            self.typecheck(resolve, (types.BooleanType))
-            self.typecheck(quick, (types.BooleanType))
+            self.typecheck(bresolve, (types.BooleanType))
+            self.typecheck(bquick, (types.BooleanType))
 
         if resolve:
             sfile = os.path.realpath(sfile)
 
-        if quick:
+        if bquick:
             # pre-computed but unreliable MIME types, if you want to add more
             # then please have in mind that the extension may be shared with
             # multiple MIME types and missleading
@@ -721,7 +721,7 @@ class Misc(object):
             return
 
         rsync = self.whereis('rsync')
-        self.system_command((rsync, destination))
+        self.system_command((rsync, '-cHpE', destination))
 
     def fetch(self, surl, destination, lmirrors=None, ssuffix='', iretry=3):
         ''' Download something from mirror if possible, iretry is passed

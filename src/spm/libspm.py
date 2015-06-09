@@ -1059,7 +1059,7 @@ class Source(object):
             if LOCAL_DIR in sfile:
                 continue
             message.sub_debug(_('Caching MIME of'), sfile)
-            target_content[sfile] = misc.file_mime(sfile, quick=True)
+            target_content[sfile] = misc.file_mime(sfile, bquick=True)
 
         if self.strip_binaries or self.strip_shared or \
             self.strip_static or self.strip_rpath:
