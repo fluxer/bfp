@@ -64,7 +64,7 @@ same time, that is something that few package manager support.
 Remote sources (files, such as tarballs) are being checked after they are
 fetched by comparing the remote and local file size instead of using checksums
 as most Package Managers do to avoid the need of updating the checksums in the
-build recope (SRCBUILD) whenever a local source file, shipped with the target
+build recipe (SRCBUILD) whenever a local source file, shipped with the target
 files, is updated (makepkg -g >> PKGBUILD anyone?). Note that security wise this
 is not a good approach as there is no easy way for an administrator to know
 whether the remote file size has changed since the last time it was requested
@@ -89,7 +89,7 @@ in the SRCBUILD.
 
 Repositories with target (package) files for the most essential software are
 enabled by default but you can maintain your own repositories with Git,
-Subversion (SVN) or event rsync. This has the advantage of doing incremental
+Subversion (SVN) or even rsync. This has the advantage of doing incremental
 updates on them. Using Content Version System (Git or SVN) allows going back
 and forth in the history of the repository thus building older version of
 software would be as easy as checking out the right change set and then issuing

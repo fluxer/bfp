@@ -30,14 +30,7 @@ class Database(object):
         self.LOCAL_DIR = self.ROOT_DIR + 'var/local/spm'
         self.LOCAL_CACHE = {}
         self.IGNORE = []
-
-    def _notifiers_setup(self):
-        ''' Setup inotify watcher for database changes '''
-        reposdir = '%s/repositories' % self.CACHE_DIR
-        if os.path.isdir(reposdir):
-            notify.watch_add(reposdir, ignore=('.git',))
-        if os.path.isdir(self.LOCAL_DIR):
-            notify.watch_add(self.LOCAL_DIR)
+        self.NOTIFY = True
 
     def _build_local_cache(self):
         ''' Build internal local database cache '''
@@ -45,6 +38,8 @@ class Database(object):
 
         if not os.path.isdir(self.LOCAL_DIR):
             return
+        if self.NOTIFY:
+            notify.watch_add(self.LOCAL_DIR)
 
         for sfile in misc.list_files(self.LOCAL_DIR):
             sdir = os.path.dirname(sfile)
@@ -60,6 +55,8 @@ class Database(object):
         metadir = '%s/repositories' % self.CACHE_DIR
         if not os.path.isdir(metadir):
             return
+        if self.NOTIFY:
+            notify.watch_add(metadir, ignore=('.git',))
 
         parser = SRCBUILD()
         for sfile in misc.list_files(metadir):
@@ -90,7 +87,6 @@ class Database(object):
         for wd, mask, cookie, name in notify.event_read():
             recache = True
         if not self.REMOTE_CACHE or recache:
-            self._notifiers_setup()
             self._build_remote_cache()
 
         if basename:
@@ -110,7 +106,6 @@ class Database(object):
         for wd, mask, cookie, name in notify.event_read():
             recache = True
         if not self.LOCAL_CACHE or recache:
-            self._notifiers_setup()
             self._build_local_cache()
 
         if basename:

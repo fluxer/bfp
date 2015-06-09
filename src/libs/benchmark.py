@@ -23,14 +23,10 @@ def create_remote(name, version, release, description, \
     srcbuild.write('\nbackup=(%s)' % misc.string_convert(backup))
     srcbuild.close()
 
-def override():
-    ''' override database notifier to avoid hitting the system limit
-        which is usually ~8200
-    '''
-    pass
-
 def benchmark():
-    database._notifiers_setup = override
+    # do not setup database notifier to avoid hitting the system limit
+    # which is usually ~8200
+    database.NOTIFY = False
     database.ROOT_DIR = tempfile.mkdtemp()
     database.CACHE_DIR = '%s/var/cache/spm' % database.ROOT_DIR
     database.BUILD_DIR = '%s/var/tmp/spm' % database.ROOT_DIR
