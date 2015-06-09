@@ -54,6 +54,8 @@ class Database(object):
         if not os.path.isdir(self.LOCAL_DIR):
             return
         for data in map(self._map_local_cache, misc.list_dirs(self.LOCAL_DIR)):
+            if not data:
+                continue
             self.LOCAL_CACHE[data['name']] = data
 
         # print(sys.getsizeof(self.LOCAL_CACHE))
@@ -85,6 +87,8 @@ class Database(object):
         if not os.path.isdir(metadir):
             return
         for data in map(self._map_remote_cache, misc.list_files(metadir)):
+            if not data:
+                continue
             self.REMOTE_CACHE[data['name']] = data
         # print(sys.getsizeof(self.REMOTE_CACHE))
 
