@@ -3,7 +3,7 @@
 
 ## SPM/SPM-TOOLS ##
  * Complete all tasks noted with FIXME/TODO
- * Optionally remove build depends that are not required by anymore after build
+ * Optionally remove build depends that are not required anymore after build
  * Check for absolute path symlinks in SRCBUILDs
  * Implement trigger invocation only on file content change
  * Build target(s) from source when binary not available?
