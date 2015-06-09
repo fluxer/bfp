@@ -253,14 +253,14 @@ class Misc(object):
         return self.string_search(string, self.file_read(sfile), exact=exact, \
             escape=escape)
 
-    def file_mime(self, sfile, rbesolve=False, bquick=False):
+    def file_mime(self, sfile, bresolve=False, bquick=False):
         ''' Get file type, you should propably use Magic().get() instead '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
             self.typecheck(bresolve, (types.BooleanType))
             self.typecheck(bquick, (types.BooleanType))
 
-        if resolve:
+        if bresolve:
             sfile = os.path.realpath(sfile)
 
         if bquick:
