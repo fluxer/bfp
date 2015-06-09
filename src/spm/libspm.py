@@ -565,7 +565,7 @@ class Source(object):
                 option = 'yes'
             else:
                 message.sub_debug(_('Disabling optional'), target)
-            os.putenv('OPTIONAL_%s' % target.upper(), option)
+            os.putenv('OPTIONAL_%s' % target.replace('-', '_').upper(), option)
 
         misc.dir_create(self.source_dir)
         misc.dir_create(self.install_dir)
