@@ -42,14 +42,8 @@ class TestSuite(unittest.TestCase):
         data['optdepends'] = optdepends
         data['size'] = size
         data['footprint'] = footprint
-        metadata = open('%s/metadata.json' % sdir, 'w')
-        try:
-            json.dump(data, metadata)
-        finally:
-            metadata.close()
-        fprint = open('%s/SRCBUILD' % sdir, 'w')
-        fprint.write('')
-        fprint.close()
+        misc.json_write('%s/metadata.json' % sdir, data)
+        misc.file_touch('%s/SRCBUILD' % sdir)
 
     def setUp(self):
         database.CACHE_DIR = '%s/var/cache/spm' % database.ROOT_DIR
@@ -258,14 +252,11 @@ class TestSuite(unittest.TestCase):
             self.remote_depends + self.remote_makedepends)
 
     def test_remote_database_update(self):
-        updated = False
         pre = database.remote_all()
         misc.dir_remove('%s/repositories/test/%s' % \
             (database.CACHE_DIR, self.remote3_name))
         post = database.remote_all()
-        if not pre == post:
-            updated = True
-        self.assertTrue(updated)
+        self.assertFalse(pre == post)
 
     # local targets checks
     def test_local_target_version(self):
@@ -315,13 +306,10 @@ class TestSuite(unittest.TestCase):
             self.local2_name.split())
 
     def test_local_database_update_true(self):
-        updated = False
         pre = database.local_all()
         misc.dir_remove('%s/%s' % (database.LOCAL_DIR, self.local3_name))
         post = database.local_all()
-        if not pre == post:
-            updated = True
-        self.assertTrue(updated)
+        self.assertFalse(pre == post)
 
     # misc checks
     def test_file_mime_python(self):

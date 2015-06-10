@@ -11,7 +11,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.8.0 (d64b2ea)"
+app_version = "1.8.0 (591a3bc)"
 
 try:
     import libspm
@@ -163,6 +163,12 @@ try:
         ''' Override stripping of RPATH '''
         def __call__(self, parser, namespace, values, option_string=None):
             libspm.STRIP_RPATH = values
+            setattr(namespace, self.dest, values)
+
+    class OverrideUpx(argparse.Action):
+        ''' Override binaries compression '''
+        def __call__(self, parser, namespace, values, option_string=None):
+            libspm.COMPRESS_BIN = values
             setattr(namespace, self.dest, values)
 
     class OverridePyCompile(argparse.Action):
@@ -401,6 +407,9 @@ try:
     parser.add_argument('--rpath', type=ast.literal_eval, \
         action=OverrideRpath, choices=[True, False], \
         help=_('Set whether to strip RPATH'))
+    parser.add_argument('--upx', type=ast.literal_eval, \
+        action=OverrideRpath, choices=[True, False], \
+        help=_('Set whether to compress binaries'))
     parser.add_argument('--pycompile', type=ast.literal_eval, \
         action=OverridePyCompile, choices=[True, False], \
         help=_('Set whether to byte-compile Python modules'))
@@ -498,6 +507,7 @@ try:
         message.sub_info(_('STRIP_SHARED'), libspm.STRIP_SHARED)
         message.sub_info(_('STRIP_STATIC'), libspm.STRIP_STATIC)
         message.sub_info(_('STRIP_RPATH'), libspm.STRIP_RPATH)
+        message.sub_info(_('COMPRESS_BIN'), libspm.COMPRESS_BIN)
         message.sub_info(_('IGNORE_MISSING'), libspm.IGNORE_MISSING)
         message.sub_info(_('CONFLICTS'), libspm.CONFLICTS)
         message.sub_info(_('BACKUP'), libspm.BACKUP)

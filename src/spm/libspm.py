@@ -46,6 +46,7 @@ DEFAULTS = {
     'STRIP_SHARED': 'False',
     'STRIP_STATIC': 'False',
     'STRIP_RPATH': 'False',
+    'COMPRESS_BIN': 'False',
     'PYTHON_COMPILE': 'False',
     'IGNORE_MISSING': 'False',
     'CONFLICTS': 'False',
@@ -90,6 +91,7 @@ STRIP_BINARIES = conf.getboolean('install', 'STRIP_BINARIES')
 STRIP_SHARED = conf.getboolean('install', 'STRIP_SHARED')
 STRIP_STATIC = conf.getboolean('install', 'STRIP_STATIC')
 STRIP_RPATH = conf.getboolean('install', 'STRIP_RPATH')
+COMPRESS_BIN = conf.getboolean('install', 'COMPRESS_BIN')
 PYTHON_COMPILE = conf.getboolean('install', 'PYTHON_COMPILE')
 IGNORE_MISSING = conf.getboolean('install', 'IGNORE_MISSING')
 CONFLICTS = conf.getboolean('merge', 'CONFLICTS')
@@ -531,6 +533,7 @@ class Source(object):
         self.strip_shared = STRIP_SHARED
         self.strip_static = STRIP_STATIC
         self.strip_rpath = STRIP_RPATH
+        self.compress_bin = COMPRESS_BIN
         self.ignore_missing = IGNORE_MISSING
         self.python_compile = PYTHON_COMPILE
         message.CATCH = CATCH
@@ -608,9 +611,9 @@ class Source(object):
                 if not os.path.exists('%s/%s' % (ROOT_DIR, m)):
                     message.sub_warning('File does not exist', m)
                     continue
-                infodir = sys.prefix + '/share/info/dir'
                 message.sub_info(_('Deleting info page'), m)
-                misc.system_trigger((install_info, '--delete', m, infodir))
+                misc.system_trigger((install_info, '--delete', m, \
+                    '%s/share/info/dir' % sys.prefix))
 
         xdg_mime = misc.whereis('xdg-mime', False, True)
         xdg_mime_regex = '(?:^|\\s)(.*/mime/packages/.*\\.xml)(?:$|\\s)'
@@ -659,22 +662,23 @@ class Source(object):
                 misc.system_trigger(command)
 
         desktop_database = misc.whereis('update-desktop-database', False, True)
-        desktop_database_regex = '(.*share/applications/.*)(?:$|\\s)'
+        desktop_database_regex = '(.*share/applications/).*(?:$|\\s)'
         message.sub_debug('update-desktop-database', desktop_database or '')
         match = misc.string_search(desktop_database_regex, adjcontent, escape=False)
         if match and desktop_database:
             message.sub_info(_('Updating desktop database'))
             message.sub_debug(match)
-            misc.system_trigger((desktop_database, sys.prefix + '/share/applications'))
+            misc.system_trigger((desktop_database, \
+                '%s/share/applications' % sys.prefix))
 
         mime_database = misc.whereis('update-mime-database', False, True)
-        mime_database_regex = '(.*share/mime.*)(?:$|\\s)'
+        mime_database_regex = '(.*share/mime/).*(?:$|\\s)'
         message.sub_debug('update-mime-database', mime_database or '')
         match = misc.string_search(mime_database_regex, adjcontent, escape=False)
         if match and mime_database:
             message.sub_info(_('Updating MIME database'))
             message.sub_debug(match)
-            misc.system_trigger((mime_database, sys.prefix + '/share/mime'))
+            misc.system_trigger((mime_database, '%s/share/mime' % sys.prefix))
 
         icon_resources = misc.whereis('xdg-icon-resource', False, True)
         message.sub_debug('xdg-icon-resources', icon_resources or '')
@@ -779,9 +783,9 @@ class Source(object):
         if match and install_info:
             message.sub_debug(match)
             for m in match:
-                infodir = sys.prefix + '/share/info/dir'
                 message.sub_info(_('Installing info page'), m)
-                misc.system_trigger((install_info, m, infodir))
+                misc.system_trigger((install_info, m, \
+                    '%s/share/info/dir' % sys.prefix))
 
         udevadm = misc.whereis('udevadm', False, True)
         udevadm_regex = '(?:^|\\s)(.*/udev/rules.d/.*)(?:$|\\s)'
@@ -826,7 +830,7 @@ class Source(object):
         if match and grub_mkconfig:
             message.sub_info(_('Updating GRUB configuration'))
             message.sub_debug(match)
-            misc.dir_create(ROOT_DIR + '/boot/grub')
+            misc.dir_create('%s/boot/grub' % ROOT_DIR)
             misc.system_trigger((grub_mkconfig, '-o', '/boot/grub/grub.cfg'))
 
     def remove_target_file(self, sfile):
@@ -1077,65 +1081,75 @@ class Source(object):
             message.sub_debug(_('Caching MIME of'), sfile)
             target_content[sfile] = misc.file_mime(sfile, bquick=True)
 
-        if self.strip_binaries or self.strip_shared or \
-            self.strip_static or self.strip_rpath:
-            message.sub_info(_('Stripping binaries and libraries'))
-            strip = misc.whereis('strip')
-            ldebug = []
-            lbinaries = []
-            lshared = []
-            lstatic = []
-            lrpath = []
-            for sfile in target_content:
-                smime = target_content[sfile]
-                if os.path.islink(sfile):
-                    continue
+        strip = misc.whereis('strip')
+        ldebug = []
+        lbinaries = []
+        lshared = []
+        lstatic = []
+        lrpath = []
+        lcompress = []
+        for sfile in target_content:
+            smime = target_content[sfile]
+            if os.path.islink(sfile):
+                continue
 
-                if smime == 'application/x-executable':
-                    if self.strip_binaries:
-                        lbinaries.append(sfile)
-                    if self.split_debug:
-                        ldebug.append(sfile)
-                    if self.strip_rpath:
-                        lrpath.append(sfile)
-                elif smime == 'application/x-sharedlib':
-                    if self.strip_shared:
-                        lshared.append(sfile)
-                    if self.split_debug:
-                        ldebug.append(sfile)
-                    if self.strip_rpath:
-                        lrpath.append(sfile)
-                elif smime == 'application/x-archive':
-                    if self.strip_static:
-                        lstatic.append(sfile)
-                    if self.split_debug:
-                        ldebug.append(sfile)
-                    if self.strip_rpath:
-                        lrpath.append(sfile)
-            if ldebug:
-                message.sub_debug(_('Splitting debug symbols'), ldebug)
-                for sfile in ldebug:
-                    self.split_debug_symbols(sfile)
-            if lbinaries:
-                message.sub_debug(_('Stripping executables'), lbinaries)
-                cmd = [strip, '--strip-all']
-                cmd.extend(lbinaries)
-                misc.system_command(cmd)
-            if lshared:
-                message.sub_debug(_('Stripping shared libraries'), lshared)
-                cmd = [strip, '--strip-unneeded']
-                cmd.extend(lshared)
-                misc.system_command(cmd)
-            if lstatic:
-                message.sub_debug(_('Stripping static libraries'), lstatic)
-                cmd = [strip, '--strip-debug']
-                cmd.extend(lstatic)
-                misc.system_command(cmd)
-            if lrpath:
-                message.sub_debug(_('Stripping RPATH'), lrpath)
-                cmd = [misc.whereis('scanelf'), '-CBXrq']
-                cmd.extend(lrpath)
-                misc.system_command(cmd)
+            if smime == 'application/x-executable':
+                if self.strip_binaries:
+                    lbinaries.append(sfile)
+                if self.split_debug:
+                    ldebug.append(sfile)
+                if self.strip_rpath:
+                    lrpath.append(sfile)
+                if self.compress_bin:
+                    lcompress.append(sfile)
+            elif smime == 'application/x-sharedlib':
+                if self.strip_shared:
+                    lshared.append(sfile)
+                if self.split_debug:
+                    ldebug.append(sfile)
+                if self.strip_rpath:
+                    lrpath.append(sfile)
+            elif smime == 'application/x-archive':
+                if self.strip_static:
+                    lstatic.append(sfile)
+                if self.split_debug:
+                    ldebug.append(sfile)
+                if self.strip_rpath:
+                    lrpath.append(sfile)
+            elif smime == 'application/x-dosexec':
+                if self.compress_bin:
+                    lcompress.append(sfile)
+
+        message.sub_info(_('Stripping binaries and libraries'))
+        if ldebug:
+            message.sub_debug(_('Splitting debug symbols'), ldebug)
+            for sfile in ldebug:
+                self.split_debug_symbols(sfile)
+        if lbinaries:
+            message.sub_debug(_('Stripping executables'), lbinaries)
+            cmd = [strip, '--strip-all']
+            cmd.extend(lbinaries)
+            misc.system_command(cmd)
+        if lshared:
+            message.sub_debug(_('Stripping shared libraries'), lshared)
+            cmd = [strip, '--strip-unneeded']
+            cmd.extend(lshared)
+            misc.system_command(cmd)
+        if lstatic:
+            message.sub_debug(_('Stripping static libraries'), lstatic)
+            cmd = [strip, '--strip-debug']
+            cmd.extend(lstatic)
+            misc.system_command(cmd)
+        if lrpath:
+            message.sub_debug(_('Stripping RPATH'), lrpath)
+            cmd = [misc.whereis('scanelf'), '-CBXrq']
+            cmd.extend(lrpath)
+            misc.system_command(cmd)
+        if lcompress:
+            message.sub_debug(_('Compressing binaries'), lcompress)
+            cmd = [misc.whereis('upx'), '-q']
+            cmd.extend(lcompress)
+            misc.system_command(cmd)
 
         message.sub_info(_('Checking runtime dependencies'))
         missing_detected = False
@@ -1571,6 +1585,13 @@ class Source(object):
                     message.sub_warning(_('Overriding MIRROR to'), _('False'))
                     self.mirror = False
 
+                if option == 'man' and not self.compress_man:
+                    message.sub_warning(_('Overriding COMPRESS_MAN to'), _('True'))
+                    self.compress_man = True
+                elif option == '!man' and self.compress_man:
+                    message.sub_warning(_('Overriding COMPRESS_MAN to'), _('False'))
+                    self.compress_man = False
+
                 if option == 'debug' and not self.split_debug:
                     message.sub_warning(_('Overriding SPLIT_DEBUG to'), _('True'))
                     self.split_debug = True
@@ -1606,12 +1627,12 @@ class Source(object):
                     message.sub_warning(_('Overriding STRIP_RPATH to'), _('False'))
                     self.strip_rpath = False
 
-                if option == 'man' and not self.compress_man:
-                    message.sub_warning(_('Overriding COMPRESS_MAN to'), _('True'))
-                    self.compress_man = True
-                elif option == '!man' and self.compress_man:
-                    message.sub_warning(_('Overriding COMPRESS_MAN to'), _('False'))
-                    self.compress_man = False
+                if option == 'upx' and not self.compress_bin:
+                    message.sub_warning(_('Overriding COMPRESS_BIN to'), _('True'))
+                    self.compress_bin = True
+                elif option == '!upx' and self.compress_bin:
+                    message.sub_warning(_('Overriding COMPRESS_BIN to'), _('False'))
+                    self.compress_bin = False
 
                 if option == 'missing' and not self.ignore_missing:
                     message.sub_warning(_('Overriding IGNORE_MISSING to'), _('True'))
@@ -1669,6 +1690,7 @@ class Source(object):
             self.mirror = MIRROR
             self.purge_paths = PURGE_PATHS
             self.compress_man = COMPRESS_MAN
+            self.compress_bin = COMPRESS_BIN
             self.split_debug = SPLIT_DEBUG
             self.strip_binaries = STRIP_BINARIES
             self.strip_shared = STRIP_SHARED

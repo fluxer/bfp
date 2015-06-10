@@ -11,7 +11,7 @@ spm - Source Package Manager
            [--cppflags CPPFLAGS] [--ldflags LDFLAGS] [--makeflags MAKEFLAGS]
            [--purge PURGE] [--man {True,False}] [--split {True,False}]
            [--binaries {True,False}] [--shared {True,False}]
-           [--static {True,False}] [--rpath {True,False}]
+           [--static {True,False}] [--rpath {True,False}] [--upx {True,False}]
            [--pycompile {True,False}] [--missing {True,False}]
            [--conflicts {True,False}] [--backup {True,False}]
            [--scripts {True,False}] [--triggers {True,False}] [--debug]
@@ -195,6 +195,7 @@ optional arguments:
   --static {True,False}
                         Set whether to strip static libraries
   --rpath {True,False}  Set whether to strip RPATH
+  --upx {True,False}    Set whether to compress binaries
   --pycompile {True,False}
                         Set whether to byte-compile Python modules
   --missing {True,False}
