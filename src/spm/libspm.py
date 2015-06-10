@@ -647,7 +647,16 @@ class Source(object):
         if match and mandb:
             message.sub_info(_('Updating manual pages database'))
             message.sub_debug(match)
-            misc.system_trigger((mandb, '--quiet'))
+            command = [mandb, '--quiet']
+            mancache = '%s/var/cache/man' % ROOT_DIR
+            misc.dir_create(mancache)
+            if os.path.exists('%s/index.db' % mancache):
+                for m in match:
+                    command.extend(('-f', m))
+                misc.system_trigger(command)
+            else:
+                command.append('-c')
+                misc.system_trigger(command)
 
         desktop_database = misc.whereis('update-desktop-database', False, True)
         desktop_database_regex = '(.*share/applications/.*)(?:$|\\s)'

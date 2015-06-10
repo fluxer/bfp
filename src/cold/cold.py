@@ -60,7 +60,7 @@ try:
     message.sub_info('Writing __main__')
     misc.file_write(mainfile, maindata)
     message.sub_info('Compressing bundle')
-    tmpout = ARGS.tmp + 'app.zip'
+    tmpout = '%s/app.zip' % ARGS.tmp
     misc.archive_compress(misc.list_files(ARGS.tmp), tmpout, ARGS.tmp)
     message.sub_info('Creating finall app')
     fullout = os.path.realpath(ARGS.output)
