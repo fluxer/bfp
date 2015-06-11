@@ -6,7 +6,7 @@ _spm_tools()
     local main_options merge_options clean_options edit_options sane_options
     local lint_options check_options dist_options which_options pack_options
     local pkg_options serve_options disowned_options upload_options
-    local online_options upgrade_options
+    local online_options upgrade_options digest_options
 
     actions='merge clean edit sane lint check dist which pack pkg serve disowned upload'
 
@@ -46,6 +46,8 @@ _spm_tools()
 
     upgrade_options='-h --help'
 
+    digest_options='-d -c --create -v --verify -h --help'
+
     _get_comp_words_by_ref cur prev
     _get_first_arg
 
@@ -81,6 +83,8 @@ _spm_tools()
         COMPREPLY=($(compgen -W "${online_options}" -- "${cur}"))
     elif [[ ${arg} = upgrade ]];then
         COMPREPLY=($(compgen -W "${upgrade_options}" -- "${cur}"))
+    elif [[ ${arg} = digest ]];then
+        COMPREPLY=($(compgen -W "${digest_options}" -- "${cur}"))
     fi
 }
 

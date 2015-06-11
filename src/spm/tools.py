@@ -22,7 +22,7 @@ misc = libspm.misc
 database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.8.0 (591a3bc)"
+app_version = "1.8.0 (a364565)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -882,6 +882,49 @@ class Upgrade(object):
             self.upgrade_1_8_x_optdepends(target)
 
 
+class Digest(object):
+    def __init__(self, targets, directory='/', do_create=False, do_verify=False):
+        self.targets = targets
+        self.directory = directory
+        self.do_create = do_create
+        self.do_verify = do_verify
+
+    def main(self):
+        if self.do_create:
+            digest = {}
+            for target in self.targets:
+                if not database.local_search(target):
+                    message.sub_critical(_('Target is not valid'), target)
+                    sys.exit(2)
+                message.sub_debug(_('Checksumming'), target)
+                digest[target] = {}
+                for sfile in database.local_metadata(target, 'footprint'):
+                    if not os.path.exists(sfile):
+                        message.sub_warning(_('File does not exist'), sfile)
+                    else:
+                        digest[target][sfile] = misc.file_checksum(sfile)
+            misc.json_write('%s/digest.json' % self.directory, digest)
+
+        if self.do_verify:
+            digest = misc.json_read('%s/digest.json' % self.directory)
+            # FIXME: sanity check the digest
+            fail = False
+            for target in digest:
+                if not database.local_search(target):
+                    message.sub_critical(_('Target is not valid'), target)
+                    sys.exit(2)
+                message.sub_debug(_('Verifying'), target)
+                for sfile in digest[target]:
+                    if not os.path.exists(sfile):
+                        message.sub_warning(_('File does not exist'), sfile)
+                        fail = True
+                    elif not digest[target][sfile] == misc.file_checksum(sfile):
+                        message.sub_warning(_('Checksum mismatch'), sfile)
+                        fail = True
+            if fail:
+                sys.exit(2)
+
+
 try:
     EUID = os.geteuid()
 
@@ -1042,6 +1085,16 @@ try:
 
     if EUID == 0:
         upgrade_parser = subparsers.add_parser('upgrade')
+
+    digest_parser = subparsers.add_parser('digest')
+    digest_parser.add_argument('-d', '--directory', type=str, \
+        default=misc.dir_current(), help=_('Set output directory'))
+    digest_parser.add_argument('-c', '--create', action='store_true', \
+        help=_('Create digest'))
+    digest_parser.add_argument('-v', '--verify', action='store_true', \
+        help=_('Verify digest'))
+    digest_parser.add_argument('TARGETS', nargs='+', type=str, \
+        help=_('Targets to apply actions on'))
 
     parser.add_argument('--debug', nargs=0, action=OverrideDebug, \
         help=_('Enable debug messages'))
@@ -1233,6 +1286,15 @@ try:
 
     elif ARGS.mode == 'upgrade':
         m = Upgrade()
+        m.main()
+
+    elif ARGS.mode == 'digest':
+        message.info(_('Runtime information'))
+        message.sub_info(_('DIRECTORY'), ARGS.directory)
+        message.sub_info(_('CREATE'), ARGS.create)
+        message.sub_info(_('VERIFY'), ARGS.verify)
+        message.sub_info(_('TARGETS'), ARGS.TARGETS)
+        m = Digest(ARGS.TARGETS, ARGS.directory, ARGS.create, ARGS.verify)
         m.main()
 
 except configparser.Error as detail:

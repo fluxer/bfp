@@ -231,6 +231,9 @@ class Database(object):
         match = self.local_search(target)
         if match:
             return self.LOCAL_CACHE[match][key]
+        # for consistency
+        if key in ('depends', 'optdepends', 'backup', 'footprint'):
+            return []
 
     def local_uptodate(self, target):
         ''' Returns True if target is up-to-date and False otherwise '''

@@ -6,7 +6,7 @@ spm-tools - Source Package Manager Tools
 
     spm-tools [-h] [--debug] [--version]
                  {dist,check,clean,lint,sane,merge,edit,which,pack,pkg,serve,
-                 disowned,upload,online,upgrade}
+                 disowned,upload,online,upgrade,digest}
 
 =head1 DESCRIPTION
 
@@ -65,6 +65,10 @@ Checking if the system can access the internet can be done via online mode.
 Migrating local targets metadata from old SPM version to newer can be done via
 upgrade mode. It is safe to run multiple times and is valuable only on host
 upgrading from SPM v1.7.x. It is available on versions newer than SPM v1.7.x.
+
+Create targets footprint checkum and later verifying it can be done via digest
+mode. It uses sha256 digest and creates a digest.json in a designated
+directory.
 
 =head1 OPTIONS
 
@@ -233,6 +237,18 @@ optional arguments:
 optional arguments:
   -h, --help  Show this help message and exit
 
+=head2 DIGEST MODE
+
+positional arguments:
+  TARGETS               Targets to apply actions on
+
+optional arguments:
+  -h, --help            Show this help message and exit
+  -d DIRECTORY, --directory DIRECTORY
+                        Set output directory
+  -c, --create          Create digest
+  -v, --verify          Verify digest
+
 =head1 EXAMPLES
 
 Create a tarball of all sources, SRCBUILD, patches, etc. of grub and put the
@@ -291,6 +307,13 @@ Check if http://crux.nu is accessible from the current host:
 
 Upgrade from old SPM version:
     sudo spm-tools upgrade
+
+Create a digest.json file for bash and zlib with their files checksumed:
+    spm-tools digest -c bash zlib
+
+Verify bash and zlib checksums from digest.json on extenral device mounted at
+/mnt/usb:
+    spm-tools digest -v bash zlib -d=/mnt/usb
 
 =head1 EXIT STATUS
 
