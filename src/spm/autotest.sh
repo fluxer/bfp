@@ -139,6 +139,8 @@ fi
 
 if [ "$uid" != "0" ];then
     echo "=== SKIPPING SPMT PACK TEST (REQUIRES ROOT) ==="
+elif [ ! -d "/var/local/spm/zlib" ];then
+    echo "=== SKIPPING SPMT PACK TEST (ZLIB NOT INSTALLED) ==="
 elif ! grep -q "SPMT PACK" "$statefile" ;then
     echo "=== RUNNING SPMT PACK TEST ==="
     "$1" "$curdir/tools.py" pack -d "$rootdir" zlib
@@ -187,7 +189,9 @@ else
     echo "=== SKIPPING SPMT UPGRADE TEST ==="
 fi
 
-if ! grep -q "SPMT DIGEST" "$statefile" ;then
+if [ ! -d "/var/local/spm/zlib" ];then
+    echo "=== SKIPPING SPMT DIGEST TEST (ZLIB NOT INSTALLED) ==="
+elif ! grep -q "SPMT DIGEST" "$statefile" ;then
     echo "=== RUNNING SPMT DIGEST TEST ==="
     "$1" "$curdir/tools.py" digest -cv zlib -d "$rootdir"
     echo "SPMT DIGEST" >> "$statefile"

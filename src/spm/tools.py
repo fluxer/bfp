@@ -894,7 +894,7 @@ class Digest(object):
             digest = {}
             for target in self.targets:
                 if not database.local_search(target):
-                    message.sub_critical(_('Target is not valid'), target)
+                    message.sub_critical(_('Invalid target'), target)
                     sys.exit(2)
                 message.sub_debug(_('Checksumming'), target)
                 digest[target] = {}
@@ -911,7 +911,7 @@ class Digest(object):
             fail = False
             for target in digest:
                 if not database.local_search(target):
-                    message.sub_critical(_('Target is not valid'), target)
+                    message.sub_critical(_('Invalid target'), target)
                     sys.exit(2)
                 message.sub_debug(_('Verifying'), target)
                 for sfile in digest[target]:
