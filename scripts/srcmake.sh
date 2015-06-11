@@ -63,7 +63,7 @@ whereis() {
     rv=1
     if which "$1" 1> /dev/null;then
         rv=0
-        "$1" &> /dev/null
+        $@ &> /dev/null
         [ "$?" = "127" ] && rv=1
     fi
     return $rv
@@ -83,17 +83,15 @@ for src in "${@:-.}";do
         # FIXME: error out if there is git URL in sources array
         warn "Git is not installed"
     elif ! whereis grep || ! whereis find || ! whereis awk || ! whereis du ;then
-        error "grep, find, awk and/or du are missing"
+        error "grep, find, awk and/or du are not installed"
         exit 1
     fi
 
-    if [[ ! -f $srcbuild ]];then
+    msg "Checking.."
+    if [ ! -f "$srcbuild" ];then
         warn "Give me a directory with SRCBUILD"
         continue
-    fi
-
-    msg "Checking $srcbuild.."
-    if ! grep -q -e '^version=' "$srcbuild";then
+    elif ! grep -q -e '^version=' "$srcbuild";then
         warn "version not defined in $srcbuild"
         continue
     elif ! grep -q -e '^description=' "$srcbuild";then
@@ -122,8 +120,8 @@ for src in "${@:-.}";do
         warn2 "Missing dependencies: ${YELLOW}${missing_depends}${ALL_OFF}"
     fi
 
-    rm -rf "$SOURCE_DIR"
-    mkdir -p "$SOURCE_DIR"
+    rm -rf "$SOURCE_DIR" "$INSTALL_DIR"
+    mkdir -p "$SOURCE_DIR" "$INSTALL_DIR"
     for source in "${sources[@]}";do
         src_base="${source##*/}"
 
@@ -163,8 +161,6 @@ for src in "${@:-.}";do
     fi
 
     msg "Installing sources.."
-    rm -rf "$INSTALL_DIR"
-    mkdir -p "$INSTALL_DIR"
     cd "$SOURCE_DIR"
     src_install
 
@@ -188,9 +184,9 @@ for src in "${@:-.}";do
     tarball="${src_name}_${version}.tar.bz2"
     cd "$INSTALL_DIR"
     if whereis bsdtar ;then
-        bsdtar -caf "$src_real/$tarball" ./*
+        bsdtar -cpaf "$src_real/$tarball" ./*
     elif whereis tar ;then
-        tar -caf "$src_real/$tarball" ./*
+        tar -cpaf "$src_real/$tarball" ./*
     fi
 
     cd "$startdir"
