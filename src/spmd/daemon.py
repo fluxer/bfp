@@ -238,7 +238,7 @@ class SPMD(dbus.service.Object):
         message.info('Syncing')
         try:
             self.Working()
-            m = libspm.Repo(libspm.REPOSITORIES, do_sync=True, do_cache=True, do_prune=True)
+            m = libspm.Repo(libspm.REPOSITORIES, do_sync=True, do_prune=True)
             mthread = threading.Thread(target=self._AsyncCall, args=(m.main, self.Finished,))
             mthread.start()
         except Exception as detail:

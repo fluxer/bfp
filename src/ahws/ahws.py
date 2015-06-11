@@ -19,22 +19,22 @@ class Device(object):
     def Properties(self, dev):
         DEVNAME = libudev.udev_device_get_property_value(dev, 'DEVNAME')
         if not DEVNAME:
-            DEVNAME = libudev.udev_device_get_property_value(dev,'KERNEL')
+            DEVNAME = libudev.udev_device_get_property_value(dev, 'KERNEL')
         if not DEVNAME:
             DEVNAME = 'Unknown'
 
         # ieee1394_id ?
         PRODUCT = libudev.udev_device_get_property_value(dev, 'ID_MODEL_ID')
         if not PRODUCT:
-            PRODUCT = libudev.udev_device_get_sysattr_value(dev,'idProduct')
+            PRODUCT = libudev.udev_device_get_sysattr_value(dev, 'idProduct')
         if not PRODUCT:
-            PRODUCT = libudev.udev_device_get_sysattr_value(dev,'device')
+            PRODUCT = libudev.udev_device_get_sysattr_value(dev, 'device')
 
         VENDOR = libudev.udev_device_get_property_value(dev, 'ID_VENDOR_ID')
         if not VENDOR:
-            VENDOR = libudev.udev_device_get_sysattr_value(dev,'idVendor')
+            VENDOR = libudev.udev_device_get_sysattr_value(dev, 'idVendor')
         if not VENDOR:
-            VENDOR = libudev.udev_device_get_sysattr_value(dev,'vendor')
+            VENDOR = libudev.udev_device_get_sysattr_value(dev, 'vendor')
 
         SERIAL = libudev.udev_device_get_property_value(dev, 'ID_SERIAL')
         if not SERIAL:

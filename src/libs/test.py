@@ -1,6 +1,6 @@
 #!/usr/bin/python2
 
-import unittest, tempfile, os, sys, types, json
+import unittest, tempfile, os, sys, types
 
 import libmisc
 misc = libmisc.Misc()

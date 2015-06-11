@@ -90,10 +90,10 @@ class Block(object):
     def info(self, device, tag):
         ''' Get information about a block device '''
         for line in misc.system_communicate((misc.whereis('udevadm'), 'info', \
-                '--name', device, '--query=property')).splitlines():
-                line = misc.string_encode(line).strip()
-                if line.startswith(('ID_FS_%s' % tag, tag)):
-                    return line.split('=')[1]
+            '--name', device, '--query=property')).splitlines():
+            line = misc.string_encode(line).strip()
+            if line.startswith(('ID_FS_%s' % tag, tag)):
+                return line.split('=')[1]
 
 class Power(object):
     ''' System power state management and information gathering helper '''

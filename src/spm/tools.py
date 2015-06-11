@@ -85,7 +85,7 @@ class Check(object):
                     bang_regexp = '(^#!.*(?: |\\t|/)((?:'
                     bang_regexp += '(?:sh|bash|dash|ksh|csh|tcsh|tclsh|scsh|fish'
                     bang_regexp += '|zsh|ash|python|perl|php|ruby|lua|wish|(?:g)?awk)'
-                    bang_regexp +=  ')(?:[^\\s]+)?)(?:.*\\s))'
+                    bang_regexp += ')(?:[^\\s]+)?)(?:.*\\s))'
                     fmatch = misc.file_search(bang_regexp, sfile, escape=False)
                     if fmatch:
                         fmatch = fmatch[0].replace('#!', '').strip().split()[0]
@@ -778,11 +778,11 @@ class Upload(object):
 
 class Online(object):
     def __init__(self, url):
-      self.url = url
+        self.url = url
 
     def main(self):
-      if not misc.url_ping(self.url):
-          sys.exit(1)
+        if not misc.url_ping(self.url):
+            sys.exit(1)
 
 
 class Upgrade(object):

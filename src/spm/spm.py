@@ -363,7 +363,7 @@ try:
     parser.add_argument('--sign', type=str, action=OverrideSign, \
         help=_('Set whether to sign files'))
     parser.add_argument('--notify', type=str, action=OverrideNotify, \
-        choices=[True, False],
+        choices=[True, False], \
         help=_('Set whether to use inotify to monitor databases'))
     parser.add_argument('--offline', type=ast.literal_eval, \
         action=OverrideOffline, choices=[True, False], \
