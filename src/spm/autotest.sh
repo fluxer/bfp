@@ -186,3 +186,11 @@ elif ! grep -q "SPMT UPGRADE" "$statefile" ;then
 else
     echo "=== SKIPPING SPMT UPGRADE TEST ==="
 fi
+
+if ! grep -q "SPMT DIGEST" "$statefile" ;then
+    echo "=== RUNNING SPMT DIGEST TEST ==="
+    "$1" "$curdir/tools.py" digest -cv zlib -d "$rootdir"
+    echo "SPMT DIGEST" >> "$statefile"
+else
+    echo "=== SKIPPING SPMT DIGEST TEST ==="
+fi
