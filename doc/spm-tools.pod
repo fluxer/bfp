@@ -305,28 +305,35 @@ Create tarball of localy installed gcc:
     sudo spm-tools pack gcc
 
 Get package files from CRUX for zlib and convert them for use with SPM:
+
     spm-tools pkg zlib && pkg2src zlib
 
 Serve all repositories, sources and pre-build tarballs to the local network:
+
     spm-tools serve
 
 TODO: disowned upload
 
 Check if http://crux.nu is accessible from the current host:
+
     spm-tools online -u http://crux.nu
 
 Upgrade from old SPM version:
+
     sudo spm-tools upgrade
 
 Create a digest.json file for bash and zlib with their files checksumed:
+
     spm-tools digest -c bash zlib
 
 Verify bash and zlib checksums from digest.json on extenral device mounted at
 /mnt/usb:
+
     spm-tools digest -v bash zlib -d=/mnt/usb
 
 Create an archive of neverball and all of it'se dependencies to be run on
 different host:
+
     sudo spm-tools portable neverball 
 
 =head1 EXIT STATUS
