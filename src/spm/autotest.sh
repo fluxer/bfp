@@ -198,3 +198,13 @@ elif ! grep -q "SPMT DIGEST" "$statefile" ;then
 else
     echo "=== SKIPPING SPMT DIGEST TEST ==="
 fi
+
+if [ ! -d "/var/local/spm/zlib" ];then
+    echo "=== SKIPPING SPMT PORTABLE TEST (ZLIB NOT INSTALLED) ==="
+elif ! grep -q "SPMT PORTABLE" "$statefile" ;then
+    echo "=== RUNNING SPMT PORTABLE TEST ==="
+    "$1" "$curdir/tools.py" portable zlib -d "$rootdir"
+    echo "SPMT PORTABLE" >> "$statefile"
+else
+    echo "=== SKIPPING SPMT PORTABLE TEST ==="
+fi
