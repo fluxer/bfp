@@ -362,8 +362,8 @@ try:
         help=_('Change ignored targets'))
     parser.add_argument('--sign', type=str, action=OverrideSign, \
         help=_('Set whether to sign files'))
-    parser.add_argument('--notify', type=str, action=OverrideNotify, \
-        choices=[True, False], \
+    parser.add_argument('--notify', type=ast.literal_eval, \
+        action=OverrideNotify, choices=[True, False], \
         help=_('Set whether to use inotify to monitor databases'))
     parser.add_argument('--offline', type=ast.literal_eval, \
         action=OverrideOffline, choices=[True, False], \
