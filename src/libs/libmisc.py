@@ -1101,20 +1101,10 @@ class Inotify(object):
             deb = fin
             yield wd, mask, cookie, name
 
-    def watch_add(self, path, mask=None, recursive=True, ignore=None):
+    def watch_add(self, path, mask=None):
         ''' Add path to watcher '''
         if not mask:
             mask = self.MODIFY | self.CREATE | self.DELETE
-        if not ignore:
-            ignore = ()
-        if os.path.basename(path) in ignore:
-            return
-        if recursive and os.path.isdir(path):
-            for d in os.listdir(path):
-                full = '%s/%s' % (path, d)
-                if not os.path.isdir(full):
-                    continue
-                self.watch_add(misc.string_encode(full), mask, ignore=ignore)
         wd = self.libc.inotify_add_watch(self.fd, path, mask)
         if wd == -1:
             raise Exception('Inotfiy', self.error())
@@ -1135,9 +1125,10 @@ class Inotify(object):
         ''' Get a list of paths watched '''
         return list(self.watched.keys())
 
-    def watch_loop(self, path, callback, mask=None, recursive=True):
+    def watch_loop(self, paths, callback, mask=None):
         ''' Start watching for events '''
-        self.watch_add(path, mask, recursive)
+        for path in paths:
+            self.watch_add(path, mask)
         while True:
             for wd, mask, cookie, name in self.event_read():
                 callback((wd, mask, cookie, name))

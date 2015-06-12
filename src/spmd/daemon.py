@@ -314,7 +314,8 @@ class SPMD(dbus.service.Object):
         try:
             message.info('Enetering local watch loop')
             if os.path.isdir(database.LOCAL_DIR):
-                local_notify.watch_add(database.LOCAL_DIR)
+                # FIXME: be more selective
+                local_notify.watch_add(misc.list_dirs(database.LOCAL_DIR))
             else:
                 message.warning('Local directory non-existent', database.LOCAL_DIR)
             while True:
@@ -343,7 +344,8 @@ class SPMD(dbus.service.Object):
             message.info('Enetering remote watch loop')
             reposdir = '%s/repositories' % database.CACHE_DIR
             if os.path.isdir(reposdir):
-                remote_notify.watch_add(reposdir, ignore=('.git',))
+                # FIXME: be more selective, ignore .git
+                remote_notify.watch_add(misc.list_dirs(reposdir))
             else:
                 message.warning('Remote directory non-existent', reposdir)
             while True:

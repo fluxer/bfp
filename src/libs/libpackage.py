@@ -38,14 +38,13 @@ class Database(object):
 
         if not os.path.isdir(self.LOCAL_DIR):
             return
-        if self.NOTIFY:
-            notify.watch_add(self.LOCAL_DIR)
-
         for sfile in misc.list_files(self.LOCAL_DIR):
             sdir = os.path.dirname(sfile)
             metadata = '%s/metadata.json' % sdir
             if sfile.endswith('/SRCBUILD') and os.path.isfile(metadata):
                 self.LOCAL_CACHE[sdir] = misc.json_read(metadata)
+            if self.NOTIFY:
+                notify.watch_add(sdir)
         # print(sys.getsizeof(self.LOCAL_CACHE))
 
     def _build_remote_cache(self):
@@ -55,9 +54,6 @@ class Database(object):
         metadir = '%s/repositories' % self.CACHE_DIR
         if not os.path.isdir(metadir):
             return
-        if self.NOTIFY:
-            notify.watch_add(metadir, ignore=('.git',))
-
         parser = SRCBUILD()
         for sfile in misc.list_files(metadir):
             if sfile.endswith('/SRCBUILD'):
@@ -75,6 +71,8 @@ class Database(object):
                     'options': parser.options,
                     'backup': parser.backup
                 }
+                if self.NOTIFY:
+                    notify.watch_add(os.path.dirname(sfile))
         # print(sys.getsizeof(self.REMOTE_CACHE))
 
     def remote_all(self, basename=False):
