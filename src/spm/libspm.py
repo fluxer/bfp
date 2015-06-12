@@ -467,12 +467,21 @@ class Repo(object):
 
             message.sub_debug(_('Checking'), target)
             latest = database.local_uptodate(target)
+            optchange = []
+            optdepends = database.local_metadata(target, 'optdepends')
+            for opt in database.remote_metadata(target, 'optdepends'):
+                if database.local_uptodate(opt) and not opt in optdepends:
+                    optchange.append(opt)
+            version = database.remote_metadata(target, 'version')
             if not latest and target in IGNORE:
-                message.sub_warning(_('New version of %s (ignored) available') % target, \
-                    database.remote_metadata(target, 'version'))
+                message.sub_warning(_('New version of %s (ignored) available') % \
+                    target, version)
+            elif not latest and optchange:
+                message.sub_warning(_('New optional dependency in effect for %s') % \
+                    target, optchange)
             elif not latest:
-                message.sub_warning(_('New version of %s available') % target, \
-                    database.remote_metadata(target, 'version'))
+                message.sub_warning(_('New version of %s available') % \
+                    target, version)
 
     def main(self):
         ''' Execute action for every repository '''
