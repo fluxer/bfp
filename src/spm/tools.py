@@ -22,7 +22,7 @@ misc = libspm.misc
 database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.8.0 (c0332ef)"
+app_version = "1.8.0 (15c802d)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -970,8 +970,8 @@ class Portable(object):
                     elif sfile.endswith('.py'):
                         if not parent in python_override:
                             python_override.append(parent)
-                runner = '#!/bin/sh\nset -e\nexport LD_LIBRARY_PATH="%s"\nexport PYTHONPATH="%s"\n$@' % \
-                    (':'.join(library_override), ':'.join(python_override))
+                runner = '#!/bin/sh\nset -e\nexport LD_LIBRARY_PATH=".%s"\nexport PYTHONPATH=".%s"\n$@' % \
+                    (':.'.join(library_override), ':.'.join(python_override))
                 misc.file_write('./run.sh', runner)
                 content.append('./run.sh')
                 os.chmod('./run.sh', 0o755)
