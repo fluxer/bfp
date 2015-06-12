@@ -44,7 +44,10 @@ class Database(object):
             if sfile.endswith('/SRCBUILD') and os.path.isfile(metadata):
                 self.LOCAL_CACHE[sdir] = misc.json_read(metadata)
             if self.NOTIFY:
+                sparent = os.path.dirname(sdir)
                 notify.watch_add(sdir)
+                if not sparent in notify.watch_list():
+                    notify.watch_add(sparent)
         # print(sys.getsizeof(self.LOCAL_CACHE))
 
     def _build_remote_cache(self):
@@ -72,7 +75,11 @@ class Database(object):
                     'backup': parser.backup
                 }
                 if self.NOTIFY:
-                    notify.watch_add(os.path.dirname(sfile))
+                    sdir = os.path.dirname(sfile)
+                    sparent = os.path.dirname(sdir)
+                    notify.watch_add(sdir)
+                    if not sparent in notify.watch_list():
+                        notify.watch_add(sparent)
         # print(sys.getsizeof(self.REMOTE_CACHE))
 
     def remote_all(self, basename=False):
