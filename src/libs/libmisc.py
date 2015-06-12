@@ -326,7 +326,8 @@ class Misc(object):
             self.typecheck(sfile, (types.StringTypes))
             self.typecheck(method, (types.StringTypes))
 
-        return getattr(hashlib, method)(self.file_read(sfile)).hexdigest()
+        content = misc.string_encode(self.file_read(sfile))
+        return getattr(hashlib, method)(content).hexdigest()
 
     def json_read(self, sfile):
         ''' Get JSON file content '''
@@ -1105,8 +1106,8 @@ class Inotify(object):
         ''' Add path to watcher '''
         if not mask:
             mask = self.MODIFY | self.CREATE | self.DELETE
-        wd = self.libc.inotify_add_watch(self.fd, path, mask)
-        if wd == -1:
+        wd = self.libc.inotify_add_watch(self.fd, misc.string_encode(path), mask)
+        if wd < 0:
             raise Exception('Inotfiy', self.error())
         self.watched[path] = wd
         return wd
@@ -1117,7 +1118,7 @@ class Inotify(object):
             return
         wd = self.watched[path]
         ret = self.libc.inotify_rm_watch(self.fd, wd)
-        if ret == -1:
+        if ret < 0:
             raise Exception('Inotify', self.error())
         self.watched.pop(path)
 
