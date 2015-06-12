@@ -6,7 +6,7 @@ spm-tools - Source Package Manager Tools
 
     spm-tools [-h] [--debug] [--version]
                  {dist,check,clean,lint,sane,merge,edit,which,pack,pkg,serve,
-                 disowned,upload,online,upgrade,digest}
+                 disowned,upload,online,upgrade,digest,portable}
 
 =head1 DESCRIPTION
 
@@ -331,7 +331,7 @@ Verify bash and zlib checksums from digest.json on extenral device mounted at
 
     spm-tools digest -v bash zlib -d=/mnt/usb
 
-Create an archive of neverball and all of it'se dependencies to be run on
+Create an archive of neverball and all of its dependencies to be run on
 different host:
 
     sudo spm-tools portable neverball 

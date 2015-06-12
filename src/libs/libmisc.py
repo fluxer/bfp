@@ -1069,6 +1069,7 @@ class Inotify(object):
         self.ISDIR = 0x40000000         # IN_ISDIR
         self.ONESHOT = 0x80000000       # IN_ONESHOT
 
+        # sysctl -n fs.inotify.max_user_watches
         self.watched = {}
         libc = ctypes.util.find_library('c')
         self.libc = ctypes.CDLL(libc, use_errno=True)
