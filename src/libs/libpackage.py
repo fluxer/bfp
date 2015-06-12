@@ -38,16 +38,15 @@ class Database(object):
 
         if not os.path.isdir(self.LOCAL_DIR):
             return
-        for sfile in misc.list_files(self.LOCAL_DIR):
-            sdir = os.path.dirname(sfile)
+        for sdir in misc.list_dirs(self.LOCAL_DIR):
             metadata = '%s/metadata.json' % sdir
-            if sfile.endswith('/SRCBUILD') and os.path.isfile(metadata):
+            srcbuild = '%s/SRCBUILD' % sdir
+            if os.path.isfile(srcbuild) and os.path.isfile(metadata):
                 self.LOCAL_CACHE[sdir] = misc.json_read(metadata)
             if self.NOTIFY:
-                sparent = os.path.dirname(sdir)
                 notify.watch_add(sdir)
-                if not sparent in notify.watch_list():
-                    notify.watch_add(sparent)
+        if self.NOTIFY:
+            notify.watch_add(self.LOCAL_DIR)
         # print(sys.getsizeof(self.LOCAL_CACHE))
 
     def _build_remote_cache(self):
@@ -58,10 +57,11 @@ class Database(object):
         if not os.path.isdir(metadir):
             return
         parser = SRCBUILD()
-        for sfile in misc.list_files(metadir):
-            if sfile.endswith('/SRCBUILD'):
-                parser.parse(sfile)
-                self.REMOTE_CACHE[os.path.dirname(sfile)] = {
+        for sdir in misc.list_dirs(metadir):
+            srcbuild = '%s/SRCBUILD' % sdir
+            if os.path.isfile(srcbuild):
+                parser.parse(srcbuild)
+                self.REMOTE_CACHE[sdir] = {
                     'version': parser.version,
                     'release': parser.release,
                     'description': parser.description,
@@ -74,12 +74,10 @@ class Database(object):
                     'options': parser.options,
                     'backup': parser.backup
                 }
-                if self.NOTIFY:
-                    sdir = os.path.dirname(sfile)
-                    sparent = os.path.dirname(sdir)
-                    notify.watch_add(sdir)
-                    if not sparent in notify.watch_list():
-                        notify.watch_add(sparent)
+            if self.NOTIFY:
+                notify.watch_add(sdir)
+        if self.NOTIFY:
+            notify.watch_add(metadir)
         # print(sys.getsizeof(self.REMOTE_CACHE))
 
     def remote_all(self, basename=False):
