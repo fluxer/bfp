@@ -4,7 +4,7 @@ import gettext
 _ = gettext.translation('spm', fallback=True).gettext
 
 import sys, argparse, subprocess, tarfile, zipfile, shutil, os, re, difflib
-import pwd, grp, ftplib
+import pwd, grp, ftplib, site
 if sys.version < '3':
     import ConfigParser as configparser
     from urllib2 import HTTPError
@@ -22,7 +22,7 @@ misc = libspm.misc
 database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.8.0 (f08960f)"
+app_version = "1.8.0 (a1c7097)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -776,6 +776,7 @@ class Upload(object):
             if ftp:
                 ftp.quit()
 
+
 class Online(object):
     def __init__(self, url):
         self.url = url
@@ -923,6 +924,66 @@ class Digest(object):
                         fail = True
             if fail:
                 sys.exit(2)
+
+
+class Portable(object):
+    ''' Create a portable tarball of local (installed) target '''
+    def __init__(self, targets, directory=misc.dir_current()):
+        self.targets = targets
+        self.directory = directory
+
+    def main(self):
+        for target in self.targets:
+            if database.local_search(target):
+                target_version = database.local_metadata(target, 'version')
+                target_packfile = '%s/%s_%s.tar.bz2' % (self.directory, \
+                    os.path.basename(target), target_version)
+
+                content = database.local_metadata(target, 'footprint')
+                for dep in database.local_metadata(target, 'depends'):
+                    message.sub_debug(_('Augmenting'), dep)
+                    # TODO: allow exclude/include from files passed as argument
+                    for depfile in database.local_metadata(dep, 'footprint'):
+                        if depfile.startswith(('/include', '/usr/include')):
+                            continue
+                        elif depfile.startswith('%s/lib/debug' % sys.prefix):
+                            continue
+                        elif depfile.startswith('%s/share/man' % sys.prefix):
+                            continue
+                        elif not os.path.exists(depfile):
+                            message.sub_warning(_('File does not exist'), depfile)
+                            continue
+                        content.append(depfile)
+                    # add metadata directory, it is not listed in the footprint
+                    content.append('%s/%s' % (libspm.LOCAL_DIR, dep))
+                # add metadata directory, it is not listed in the footprint
+                content.append('%s/%s' % (libspm.LOCAL_DIR, target))
+
+                message.sub_info(_('Creating runner'))
+                library_override = ['/lib', '/usr/lib']
+                python_override = site.getsitepackages()
+                for sfile in content:
+                    parent = os.path.dirname(sfile)
+                    if sfile.endswith('.so'):
+                        if not parent in library_override:
+                            library_override.append(parent)
+                    elif sfile.endswith('.py'):
+                        if not parent in python_override:
+                            python_override.append(parent)
+                runner = '#!/bin/sh\nset -e\nexport LD_LIBRARY_PATH="%s"\nexport PYTHONPATH="%s"\n$@' % \
+                    (':'.join(library_override), ':'.join(python_override))
+                misc.file_write('./run.sh', runner)
+                content.append('./run.sh')
+                os.chmod('./run.sh', 0o755)
+
+                # TODO: write a README file?
+
+                message.sub_info(_('Compressing'), target_packfile)
+                misc.archive_compress(content, target_packfile, '/')
+                if libspm.SIGN:
+                    message.sub_info(_('Signing'), target_packfile)
+                    misc.gpg_sign(target_packfile, libspm.SIGN)
+                os.unlink('./run.sh')
 
 
 try:
@@ -1095,6 +1156,13 @@ try:
         help=_('Verify digest'))
     digest_parser.add_argument('TARGETS', nargs='+', type=str, \
         help=_('Targets to apply actions on'))
+
+    if EUID == 0:
+        portable_parser = subparsers.add_parser('portable')
+        portable_parser.add_argument('-d', '--directory', type=str, \
+            default=misc.dir_current(), help=_('Set output directory'))
+        portable_parser.add_argument('TARGETS', nargs='+', type=str, \
+            help=_('Targets to apply actions on'))
 
     parser.add_argument('--debug', nargs=0, action=OverrideDebug, \
         help=_('Enable debug messages'))
@@ -1295,6 +1363,13 @@ try:
         message.sub_info(_('VERIFY'), ARGS.verify)
         message.sub_info(_('TARGETS'), ARGS.TARGETS)
         m = Digest(ARGS.TARGETS, ARGS.directory, ARGS.create, ARGS.verify)
+        m.main()
+
+    elif ARGS.mode == 'portable':
+        message.info(_('Runtime information'))
+        message.sub_info(_('DIRECTORY'), ARGS.directory)
+        message.sub_info(_('TARGETS'), ARGS.TARGETS)
+        m = Portable(ARGS.TARGETS, ARGS.directory)
         m.main()
 
 except configparser.Error as detail:

@@ -74,7 +74,7 @@ class Database(object):
                     'options': parser.options,
                     'backup': parser.backup
                 }
-            if self.NOTIFY:
+            if self.NOTIFY and not sdir.endswith('/.git'):
                 notify.watch_add(sdir)
         if self.NOTIFY:
             notify.watch_add(metadir)

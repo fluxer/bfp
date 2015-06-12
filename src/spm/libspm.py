@@ -745,6 +745,7 @@ class Source(object):
             message.sub_debug(match)
             misc.system_trigger((pango_querymodules, '--update-cache'))
 
+        # TODO: use --update-cache, requires GTK+ version >= 2.24.20
         gtk2_immodules = misc.whereis('gtk-query-immodules-2.0', False, True)
         gtk2_immodules_regex = '(?:^|\\s)(.*/gtk-2.0/.*/immodules/.*)(?:$|\\s)'
         message.sub_debug('gtk-query-imodules-2.0', gtk2_immodules or '')
