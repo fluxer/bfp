@@ -1545,7 +1545,7 @@ class Source(object):
 
             # set target properties
             self.target = target
-            self.target_name = os.path.basename(target)
+            self.target_name = target_name
             self.target_dir = target_dir
             self.srcbuild = '%s/SRCBUILD' % self.target_dir
             self.source_dir = '%s/%s/source' % (BUILD_DIR, self.target_name)
@@ -1828,7 +1828,7 @@ class Binary(Source):
 
             # set target properties
             self.target = target
-            self.target_name = os.path.basename(target)
+            self.target_name = target_name
             self.target_dir = target_dir
             self.srcbuild = '%s/SRCBUILD' % self.target_dir
             self.source_dir = '%s/%s/source' % (BUILD_DIR, self.target_name)

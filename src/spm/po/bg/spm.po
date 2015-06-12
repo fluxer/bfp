@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-06-11 21:28+0000\n"
+"POT-Creation-Date: 2015-06-11 22:02+0000\n"
 "PO-Revision-Date: 2015-05-19 03:00+0200\n"
 "Last-Translator: \n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -560,7 +560,7 @@ msgid "Ignoring target"
 msgstr "Игориране на мишена"
 
 #: libspm.py:1543 libspm.py:1826 tools.py:171 tools.py:674 tools.py:752
-#: tools.py:815 tools.py:838 tools.py:860
+#: tools.py:815 tools.py:838 tools.py:860 tools.py:897 tools.py:914
 msgid "Invalid target"
 msgstr "Невалидна мишена"
 
@@ -1503,10 +1503,6 @@ msgstr ""
 
 #: tools.py:881
 msgid "Starting migration procedure 1_8_x_optdepends on"
-msgstr ""
-
-#: tools.py:897 tools.py:914
-msgid "Target is not valid"
 msgstr ""
 
 #: tools.py:899
