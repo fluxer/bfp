@@ -753,7 +753,7 @@ class Source(object):
         if match and gtk2_immodules:
             message.sub_info(_('Updating GTK-2.0 imodules cache'))
             message.sub_debug(match)
-            misc.dir_create(ROOT_DIR + '/etc/gtk-2.0')
+            misc.dir_create('%s/etc/gtk-2.0' % ROOT_DIR)
             misc.system_trigger(gtk2_immodules + \
                 ' > /etc/gtk-2.0/gtk.immodules', shell=True)
 

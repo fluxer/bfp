@@ -342,7 +342,7 @@ class Lint(object):
                     for sfile in target_footprint_lines:
                         if sfile.startswith(('/bin', '/sbin', '/usr/bin', '/usr/sbin')):
                             for spath in ('/bin', '/sbin', '/usr/bin', '/usr/sbin'):
-                                xfile = spath + '/' + os.path.basename(sfile)
+                                xfile = '%s/%s' % (spath, os.path.basename(sfile))
                                 if sfile == xfile or not os.path.exists(xfile):
                                     continue
                                 regex = '(/usr)?/(s)?bin/' + re.escape(os.path.basename(sfile)) + '(\\s|$)'
@@ -582,7 +582,7 @@ class Which(object):
                 else:
                     message.sub_info(_('Match'), target)
                 if self.cat:
-                    print(misc.file_read(target + '/SRCBUILD'))
+                    print(misc.file_read('%s/SRCBUILD' % target))
 
 
 class Pack(object):

@@ -318,6 +318,14 @@ class SRCBUILD(object):
     array_regex = re.compile('(?:^|\n)([\w]+)=\(([^\)]+)', re.MULTILINE)
 
     def __init__(self, sfile=None):
+        if misc.python2:
+            misc.typecheck(sfile, (types.NoneType, types.StringTypes))
+
+        self.prepare()
+        if sfile:
+            self.parse(sfile)
+
+    def prepare(self):
         self.version = ''
         self.release = '1'
         self.description = ''
@@ -330,14 +338,11 @@ class SRCBUILD(object):
         self.options = []
         self.backup = []
 
-        if sfile:
-            self.parse(sfile)
-
     def parse(self, sfile):
         if misc.python2:
             misc.typecheck(sfile, (types.StringTypes))
 
-        self.__init__()
+        self.prepare()
         _stringmap = {}
         _arraymap = {}
 
