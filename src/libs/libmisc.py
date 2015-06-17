@@ -961,10 +961,7 @@ class Misc(object):
             cwd = '/'
         if isinstance(command, str) and not shell:
             command = shlex.split(command)
-        stderr = None
-        if self.CATCH:
-            stderr = subprocess.PIPE
-        pipe = subprocess.Popen(command, stderr=stderr, shell=shell, cwd=cwd)
+        pipe = subprocess.Popen(command, stderr=subprocess.PIPE, shell=shell, cwd=cwd)
         pipe.wait()
         if pipe.returncode != 0:
             if self.CATCH:
