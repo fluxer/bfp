@@ -895,6 +895,7 @@ class Source(object):
 
         message.sub_info(_('Preparing PGP keys'))
         if self.target_pgpkeys and self.verify:
+            message.sub_debug(self.target_pgpkeys)
             misc.gpg_receive(self.target_pgpkeys, KEYSERVERS)
 
         message.sub_info(_('Fetching sources'))
