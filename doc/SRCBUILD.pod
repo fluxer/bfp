@@ -24,12 +24,12 @@ pre/post_remove) can be defined as pre/post actions to be taken when software
 is installed, upgraded or removed. Pre-actions are taken before the actual
 install/upgrade/remove is done with post-actions following up.
 
-For easy of use SOURCE_DIR and INSTALL_DIR envirnonmental variables are exported
-and can be used inside the SRCBUILD aside from those defined in the SRCBUILD
-itself. SOURCE_DIR is the top-level directory pointing to the directory where
-all sources (tarballs, patches, etc.) are temporary placed. INSTALL_DIR is where
-the software should be installed so that SPM can do its job of detecting
-runtime dependencies and creating a compressed archive of the files.
+For easy of use SOURCE_DIR and INSTALL_DIR envirnonmental variables are
+exported and can be used inside the SRCBUILD aside from those defined in the
+SRCBUILD itself. SOURCE_DIR is the top-level directory where all sources
+(tarballs, patches, etc.) are temporary placed. INSTALL_DIR is where the
+software should be installed so that SPM can do its job of detecting runtime
+dependencies and creating a compressed archive of the files.
 
 =head1 OPTIONS
 

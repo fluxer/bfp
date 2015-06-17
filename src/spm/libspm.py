@@ -969,9 +969,11 @@ class Source(object):
                 message.sub_critical(_('src_prepare() not defined'))
                 sys.exit(2)
 
-        misc.system_command((misc.whereis('bash'), '-e', '-c', 'source ' + \
-            self.srcbuild + ' && umask 0022 && src_prepare'), \
-            cwd=self.source_dir)
+        logfile = '%s/prepare.log' % self.source_dir
+        statsfile = '%s/prepare.json' % self.source_dir
+        misc.system_command((misc.whereis('bash'), '-e', '-c', \
+            'source %s && umask 0022 && src_prepare | tee %s' % \
+            (self.srcbuild, logfile)), cwd=self.source_dir, stats=statsfile)
 
     def compile(self, optional=False):
         ''' Compile target sources '''
@@ -985,9 +987,11 @@ class Source(object):
                 sys.exit(2)
 
         self.setup_environment()
-        misc.system_command((misc.whereis('bash'), '-e', '-c', 'source ' + \
-            self.srcbuild + ' && umask 0022 && src_compile'), \
-            cwd=self.source_dir)
+        logfile = '%s/compile.log' % self.source_dir
+        statsfile = '%s/compile.json' % self.source_dir
+        misc.system_command((misc.whereis('bash'), '-e', '-c', \
+            'source %s && umask 0022 && src_compile | tee %s' % \
+            (self.srcbuild, logfile)), cwd=self.source_dir, stats=statsfile)
 
     def check(self, optional=False):
         ''' Check target sources '''
@@ -1001,9 +1005,11 @@ class Source(object):
                 sys.exit(2)
 
         self.setup_environment()
-        misc.system_command((misc.whereis('bash'), '-e', '-c', 'source ' + \
-            self.srcbuild + ' && umask 0022 && src_check'), \
-            cwd=self.source_dir)
+        logfile = '%s/check.log' % self.source_dir
+        statsfile = '%s/check.json' % self.source_dir
+        misc.system_command((misc.whereis('bash'), '-e', '-c', \
+            'source %s && umask 0022 && src_check | tee %s' % \
+            (self.srcbuild, logfile)), cwd=self.source_dir, stats=statsfile)
 
     def install(self):
         ''' Install targets files '''
@@ -1026,9 +1032,11 @@ class Source(object):
                 misc.dir_create(instreal)
                 os.symlink(os.path.basename(instreal), instsym)
 
-        misc.system_command((misc.whereis('bash'), '-e', '-c', 'source ' + \
-            self.srcbuild + ' && umask 0022 && src_install'), \
-            cwd=self.source_dir)
+        logfile = '%s/install.log' % self.source_dir
+        statsfile = '%s/install.json' % self.source_dir
+        misc.system_command((misc.whereis('bash'), '-e', '-c', \
+            'source %s && umask 0022 && src_install | tee %s' % \
+            (self.srcbuild, logfile)), cwd=self.source_dir, stats=statsfile)
 
         for libdir in ('/lib64', '/usr/lib64', '/lib32', '/usr/lib32'):
             realdir = os.path.realpath(libdir)
