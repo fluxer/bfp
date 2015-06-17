@@ -16,7 +16,6 @@ to monitor for file/directory changes on filesystems.
 
 import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, inspect, json
 import types, gzip, bz2, time, ctypes, ctypes.util, getpass, base64, hashlib
-import threading
 from struct import unpack
 from fcntl import ioctl
 from termios import FIONREAD
@@ -906,31 +905,6 @@ class Misc(object):
             content = self.file_name(sfile, True).split()
         return content
 
-    def system_stats(self, pid, output, delay=1):
-        ''' Record statistics about process '''
-        if self.python2:
-            self.typecheck(pid, (types.StringTypes, types.IntType))
-            self.typecheck(output, (types.StringTypes))
-            self.typecheck(delay, (types.IntType))
-
-        pid = str(pid)
-        ppid = '/proc/%s' % pid
-        if not os.path.exists(ppid):
-            raise(Exception('Invalid process ID', pid))
-        pstatus = '/proc/%s/status' % pid
-        stats = {}
-        try:
-            while os.path.exists(pstatus):
-                collected = {}
-                for line in self.file_readlines(pstatus):
-                    variable, value = line.split(':')
-                    collected[variable] = value.strip()
-                ptime = time.strftime('%D %H:%M:%S')
-                stats[ptime] = collected
-                time.sleep(1)
-        finally:
-            self.json_write(output, stats)
-
     def system_communicate(self, command, shell=False, cwd=None, sinput=None):
         ''' Get output and optionally send input to external utility
 
@@ -969,20 +943,17 @@ class Misc(object):
         return self.system_communicate((self.whereis('scanelf'), '-yCBF', \
             sformat, sflags, sfile))
 
-    def system_command(self, command, shell=False, cwd='', stats=None):
+    def system_command(self, command, shell=False, cwd=''):
         ''' Execute system command safely
 
             ensuring current directory is something that exists, handle string
             commands properly for subprocess and if something goes wrong you
             can get standard error (stderr) as an Exception. the last one exists
-            for consumers that need more than: "Command failed, exit status 1".
-            the cherry is that it can record process statistics for your via
-            self.system_stats() '''
+            for consumers that need more than: "Command failed, exit status 1" '''
         if self.python2:
             self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
             self.typecheck(shell, (types.BooleanType))
             self.typecheck(cwd, (types.StringTypes))
-            self.typecheck(stats, (types.NoneType, types.StringTypes))
 
         if not cwd:
             cwd = self.dir_current()
@@ -994,9 +965,6 @@ class Misc(object):
         if self.CATCH:
             stderr = subprocess.PIPE
         pipe = subprocess.Popen(command, stderr=stderr, shell=shell, cwd=cwd)
-        if stats:
-            statthread = threading.Thread(target=self.system_stats, args=[pipe.pid, stats])
-            statthread.start()
         pipe.wait()
         if pipe.returncode != 0:
             if self.CATCH:
