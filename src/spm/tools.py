@@ -430,38 +430,36 @@ class Sane(object):
             match = database.remote_search(target)
             if match:
                 message.sub_info(_('Checking'), target)
-                target_srcbuild = '%s/SRCBUILD' % match
-                # TODO: cache target_srcbuild and search that
+                srcbuild = misc.file_read('%s/SRCBUILD' % match)
 
                 if self.enable:
-                    if misc.file_search('--enable-', target_srcbuild):
+                    if '--enable-' in srcbuild:
                         message.sub_warning(_('Explicit --enable argument(s)'))
-                    if misc.file_search('--with-', target_srcbuild):
+                    if '--with-' in srcbuild:
                         message.sub_warning(_('Explicit --with argument(s)'))
 
                 if self.disable:
-                    if misc.file_search('--disable-', target_srcbuild):
+                    if '--disable-' in srcbuild:
                         message.sub_warning(_('Explicit --disable argument(s)'))
-                    if misc.file_search('--without-', target_srcbuild):
+                    if '--without-' in srcbuild:
                         message.sub_warning(_('Explicit --without argument(s)'))
 
                 if self.null:
-                    if misc.file_search('/dev/null', target_srcbuild):
+                    if '/dev/null' in srcbuild:
                         message.sub_warning(_('Possible /dev/null output redirection'))
 
                 if self.maintainer:
-                    if not misc.file_search('(\\s|^)# [mM]aintainer:', target_srcbuild, escape=False):
+                    if not misc.string_search('(?:\\s|^)# [mM]aintainer:', srcbuild, escape=False):
                         message.sub_warning(_('No maintainer mentioned'))
 
                 if self.note:
-                    if misc.file_search('(FIXME|TODO)', target_srcbuild, escape=False):
+                    if misc.string_search('(FIXME|TODO)', srcbuild, escape=False):
                         message.sub_warning(_('FIXME/TODO note(s)'))
 
                 if self.variables:
-                    content = misc.file_read(target_srcbuild)
-                    if not 'version=' in content or not 'description=' in content:
+                    if not misc.string_search('(?:\\s|^)version=|description=', srcbuild, escape=False):
                         message.sub_warning(_('Essential variable(s) missing'))
-                    if 'version=(' in content or 'description=(' in content:
+                    if misc.string_search('(?:\\s|^)version=\(|description=\(', srcbuild, escape=False):
                         message.sub_warning(_('String variable(s) defined as array'))
                     # TODO: check for arrays defined as strings
 
@@ -473,17 +471,17 @@ class Sane(object):
                     regex += '|gdk-pixbuf-query-loaders|glib-compile-schemas'
                     regex += '|gtk-update-icon-cache|mkinitfs|grub-mkconfig'
                     regex += '|update-grub)(?:\\s|$)'
-                    if misc.file_search(regex, target_srcbuild, escape=False):
+                    if misc.string_search(regex, srcbuild, escape=False):
                         message.sub_warning(_('Possible unnecessary triggers invocation(s)'))
 
                 if self.users:
-                    if misc.file_search('useradd|adduser', target_srcbuild, escape=False) \
-                        and not misc.file_search('userdel|deluser', target_srcbuild, escape=False):
+                    if misc.string_search('useradd|adduser', srcbuild, escape=False) \
+                        and not misc.string_search('userdel|deluser', srcbuild, escape=False):
                         message.sub_warning(_('User(s) added but not deleted'))
 
                 if self.groups:
-                    if misc.file_search('groupadd|addgroup', target_srcbuild, escape=False) \
-                        and not misc.file_search('groupdel|delgroup', target_srcbuild, escape=False):
+                    if misc.string_search('groupadd|addgroup', srcbuild, escape=False) \
+                        and not misc.string_search('groupdel|delgroup', srcbuild, escape=False):
                         message.sub_warning(_('Group(s) added but not deleted'))
 
                 if self.signatures:
