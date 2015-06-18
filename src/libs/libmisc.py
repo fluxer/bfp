@@ -156,6 +156,14 @@ class Misc(object):
         else:
             return re.findall(string, self.string_convert(string2))
 
+    def string_checksum(self, data, method='sha256'):
+        ''' Return a hex checksum of string '''
+        if self.python2:
+            self.typecheck(data, (types.StringTypes))
+            self.typecheck(method, (types.StringTypes))
+
+        return getattr(hashlib, method)(data).hexdigest()
+
     def file_name(self, sfile, basename=True):
         ''' Get name of file without the extension '''
         if self.python2:
@@ -326,8 +334,7 @@ class Misc(object):
             self.typecheck(sfile, (types.StringTypes))
             self.typecheck(method, (types.StringTypes))
 
-        content = misc.string_encode(self.file_read(sfile))
-        return getattr(hashlib, method)(content).hexdigest()
+        return self.string_checksum(misc.string_encode(self.file_read(sfile)))
 
     def json_read(self, sfile):
         ''' Get JSON file content '''
@@ -555,6 +562,23 @@ class Misc(object):
             for sfile in files:
                 slist.append('%s/%s' % (root, sfile))
         return slist
+
+    def url_supported(self, surl, bvcs=True):
+        ''' Check if URL is supported by the fetcher '''
+        if self.python2:
+            self.typecheck(surl, (types.StringTypes))
+            self.typecheck(bvcs, (types.BooleanType))
+
+        startprotocols = ['http://', 'https://', 'ftp://', 'ftps://']
+        endprotocols = []
+        if bvcs:
+            startprotocols.extend(('git://', 'ssh://', 'rsync://', 'svn://'))
+            endprotocols.extend(('.git'))
+        if surl.startswith(tuple(startprotocols)):
+            return True
+        elif surl.endswith(tuple(endprotocols)):
+            return True
+        return False
 
     def url_normalize(self, surl, basename=False):
         ''' Normalize URL, optionally get basename '''
