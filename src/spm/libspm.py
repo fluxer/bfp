@@ -911,9 +911,13 @@ class Source(object):
                 else:
                     misc.fetch(src_url, local_file)
 
-            if src_url.endswith(('.asc', '.sig')) and self.verify:
-                message.sub_debug(_('Verifying'), src_url)
-                misc.gpg_verify(local_file)
+        if self.verify:
+            for src_url in self.target_sources:
+                src_base = misc.url_normalize(src_url, True)
+                local_file = '%s/%s' % (self.sources_dir, src_base)
+                if misc.gpg_findsig(local_file, False):
+                    message.sub_debug(_('Verifying'), src_url)
+                    misc.gpg_verify(local_file)
 
     def prepare(self, optional=False):
         ''' Prepare target sources '''

@@ -355,6 +355,20 @@ class Misc(object):
         finally:
             f.close()
 
+    def gpg_findsig(self, sfile, bensure=True):
+        ''' Attempts to guess the signature for local file '''
+        sig1 = '%s.sig' % sfile
+        sig2 = '%s.asc' % sfile
+        sig3 = '%s.sign' % self.file_name(sfile, False)
+        if os.path.isfile(sig1):
+            return sig1
+        elif os.path.isfile(sig2):
+            return sig2
+        elif os.path.isfile(sig3):
+            return sig3
+        elif bensure:
+           return sig1
+
     def gpg_receive(self, lkeys, lservers=None):
         ''' Import PGP keys as (somewhat) trusted '''
         if self.python2:
@@ -380,7 +394,7 @@ class Misc(object):
             self.system_command(checkcmd)
             # if it does not fail refresh the keys
             cmd.append('--refresh-keys')
-        except subprocess.CalledProcessError:
+        except:
             # otherwise (presumably) the key is not in the keyring
             cmd.append('--recv-keys')
         cmd.extend(lkeys)
@@ -423,11 +437,7 @@ class Misc(object):
         elif sfile.endswith('.asc'):
             sfile = sfile.replace('.asc', '')
         if not ssignature:
-            sig2 = '%s.asc' % sfile
-            if os.path.isfile(sig2):
-                ssignature = sig2
-            else:
-                ssignature = '%s.sig' % sfile
+            ssignature = self.gpg_findsig(sfile)
         cmd.extend(('--verify', '--batch', ssignature, sfile))
         self.system_command(cmd)
 

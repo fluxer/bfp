@@ -187,16 +187,20 @@ class Dist(object):
 
                 message.sub_info(_('Preparing sources'))
                 for src_url in target_sources:
-                    src_base = os.path.basename(src_url)
+                    src_base = misc.url_normalize(src_url, True)
                     src_file = '%s/%s' % (target_directory, src_base)
 
                     if not os.path.isfile(src_file):
                         message.sub_debug(_('Fetching'), src_url)
                         misc.fetch(src_url, src_file, libspm.MIRRORS, 'distfiles/')
 
-                    if src_url.endswith(('.asc', '.sig')) and libspm.VERIFY:
-                        message.sub_debug(_('Verifying'), src_url)
-                        misc.gpg_verify(src_file)
+                if libspm.VERIFY:
+                    for src_url in self.target_sources:
+                        src_base = misc.url_normalize(src_url, True)
+                        src_file = '%s/%s' % (self.sources_dir, src_base)
+                        if misc.gpg_findsig(src_file, False):
+                            message.sub_debug(_('Verifying'), src_url)
+                            misc.gpg_verify(src_file)
 
             message.sub_info(_('Compressing'), target_distfile)
             misc.archive_compress((target_directory,), target_distfile, target_directory)
@@ -207,8 +211,7 @@ class Dist(object):
             if self.do_clean:
                 message.sub_info(_('Purging sources'))
                 for src_url in target_sources:
-                    src_base = os.path.basename(src_url)
-
+                    src_base = misc.url_normalize(src_url, True)
                     src_file = '%s/%s' % (target_directory, src_base)
                     if src_url.startswith(('http://', 'https://', 'ftp://', \
                         'ftps://')):
@@ -488,13 +491,17 @@ class Sane(object):
                         if src.startswith(('http://', 'https://', 'ftp://', 'ftps://')):
                             sig1 = '%s.sig' % src
                             sig2 = '%s.asc' % src
-                            if sig1 in sources or sig2 in sources:
+                            sig3 = '%s.sign' % misc.file_name(src, False)
+                            if sig1 in sources or sig2 in sources or sig3 in sources:
                                 message.sub_debug(_('Signature already in sources for'), src)
                                 continue
                             if misc.url_ping(sig1):
                                 message.sub_warning(_('Signature available but not in sources'), sig1)
                             elif misc.url_ping(sig2):
                                 message.sub_warning(_('Signature available but not in sources'), sig2)
+                            elif misc.url_ping(sig3):
+                                message.sub_warning(_('Signature available but not in sources'), sig3)
+
 
 class Merge(object):
     ''' Merge backup files '''
