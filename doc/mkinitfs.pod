@@ -38,11 +38,11 @@ optional arguments:
 
 Create image for currently running kernel:
 
-    MkInitfs
+    mkinitfs
 
 Create image for kernel other than the one running:
 
-    MkInitfs -k=3.12.24
+    mkinitfs -k=3.12.24
 
 =head1 EXIT STATUS
 

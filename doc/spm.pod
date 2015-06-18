@@ -138,14 +138,11 @@ by using the plain printing argument which makes it easy to wrap around.
 
 Ignoring missing dependencies, libraries and misc sanity checks fails can
 be done by passing the appropriate argument. Check the OPTIONS section
-for all options available.
-
-Additional utilities are packed in Source Package Manager Tools to assist in the
-system maintenance. You can read more about them in spm-tools(8) manual page.
-
-SPM doesn't implement many features known from other Package Managers such as
-target home page URL and other common features but some of those may be
-implemented later on.
+for all options available. Additional utilities are packed in Source Package
+Manager Tools to assist in the system maintenance. You can read more about
+them in spm-tools(8) manual page. SPM doesn't implement many features known
+from other Package Managers such as target home page URL and other common
+features but some of those may be implemented later on.
 
 =head1 OPTIONS
 
@@ -348,11 +345,10 @@ Note that all modes, except source, binary and repo, accept regexp similar to
 those in Perl. For more information visit http://docs.python.org/2/library/re.html.
 Source mode accepts base (e.g. foo), directory (e.g. /home/me/foo) with
 SRCBUILD in it, aliases (e.g. base) which you can find on the top-level of a
-repository as foo.alias or finally metagroups - currently only one - world.
+repository as foo.alias or finally meta groups - currently only one - world.
 
 Modes that support targets passing (accept the TARGETS argument) support
-passing input from standard input by using "-" for TARGETS and piping the
-executable.
+standard input passing via "-" as TARGETS and piping the executable.
 
 =head1 EXIT STATUS
 
