@@ -357,6 +357,10 @@ class Misc(object):
 
     def gpg_findsig(self, sfile, bensure=True):
         ''' Attempts to guess the signature for local file '''
+        if self.python2:
+            self.typecheck(sfile, (types.StringTypes))
+            self.typecheck(bensure, (types.BooleanType))
+
         sig1 = '%s.sig' % sfile
         sig2 = '%s.asc' % sfile
         sig3 = '%s.sign' % self.file_name(sfile, False)
