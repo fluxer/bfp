@@ -483,15 +483,17 @@ class Sane(object):
 
                 if self.signatures:
                     sources = database.remote_metadata(target, 'sources')
+                    pgpkeys = database.remote_metadata(target, 'pgpkeys')
                     for src in sources:
-                        if src.startswith(('http://', 'https://', 'ftp://', 'ftps://')):
+                        if misc.url_supported(src, False):
                             sig1 = '%s.sig' % src
                             sig2 = '%s.asc' % src
                             sig3 = '%s.sign' % misc.file_name(src, False)
                             if sig1 in sources or sig2 in sources or sig3 in sources:
                                 message.sub_debug(_('Signature already in sources for'), src)
-                                continue
-                            if misc.url_ping(sig1):
+                                if not pgpkeys:
+                                    message.sub_warning(_('Signature in sources but no pgpkeys'), src)
+                            elif misc.url_ping(sig1):
                                 message.sub_warning(_('Signature available but not in sources'), sig1)
                             elif misc.url_ping(sig2):
                                 message.sub_warning(_('Signature available but not in sources'), sig2)
