@@ -974,10 +974,9 @@ class Source(object):
                 message.sub_critical(_('src_prepare() not defined'))
                 sys.exit(2)
 
-        logfile = '%s/prepare.log' % self.source_dir
         misc.system_command((misc.whereis('bash'), '-e', '-c', \
-            'source %s && umask 0022 && src_prepare | tee %s' % \
-            (self.srcbuild, logfile)), cwd=self.source_dir)
+            'source %s && umask 0022 && src_prepare' % \
+            self.srcbuild), cwd=self.source_dir)
 
     def compile(self, optional=False):
         ''' Compile target sources '''
@@ -991,10 +990,9 @@ class Source(object):
                 sys.exit(2)
 
         self.setup_environment()
-        logfile = '%s/compile.log' % self.source_dir
         misc.system_command((misc.whereis('bash'), '-e', '-c', \
-            'source %s && umask 0022 && src_compile | tee %s' % \
-            (self.srcbuild, logfile)), cwd=self.source_dir)
+            'source %s && umask 0022 && src_compile' % \
+            self.srcbuild), cwd=self.source_dir)
 
     def check(self, optional=False):
         ''' Check target sources '''
@@ -1008,10 +1006,9 @@ class Source(object):
                 sys.exit(2)
 
         self.setup_environment()
-        logfile = '%s/check.log' % self.source_dir
         misc.system_command((misc.whereis('bash'), '-e', '-c', \
-            'source %s && umask 0022 && src_check | tee %s' % \
-            (self.srcbuild, logfile)), cwd=self.source_dir)
+            'source %s && umask 0022 && src_check' % \
+            self.srcbuild), cwd=self.source_dir)
 
     def install(self):
         ''' Install targets files '''
@@ -1034,10 +1031,9 @@ class Source(object):
                 misc.dir_create(instreal)
                 os.symlink(os.path.basename(instreal), instsym)
 
-        logfile = '%s/install.log' % self.source_dir
         misc.system_command((misc.whereis('bash'), '-e', '-c', \
-            'source %s && umask 0022 && src_install | tee %s' % \
-            (self.srcbuild, logfile)), cwd=self.source_dir)
+            'source %s && umask 0022 && src_install' % \
+            self.srcbuild), cwd=self.source_dir)
 
         for libdir in ('/lib64', '/usr/lib64', '/lib32', '/usr/lib32'):
             realdir = os.path.realpath(libdir)

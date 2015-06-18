@@ -1021,7 +1021,7 @@ class Misc(object):
                     self.system_command((umount, '-f', '-l', sdir))
 
     def system_script(self, sfile, function):
-        ''' Execute a function from Bash script '''
+        ''' Execute a function from Bash script respecting self.ROOT_DIR '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
             self.typecheck(function, (types.StringTypes))
