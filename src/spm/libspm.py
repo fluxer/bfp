@@ -107,8 +107,7 @@ if not os.path.isfile(REPOSITORIES_CONF):
 else:
     REPOSITORIES = []
     for line in misc.file_readsmart(REPOSITORIES_CONF):
-        if line.startswith(('http://', 'https://', 'ftp://', 'ftps://', \
-            'git://', 'ssh://', 'rsync://', 'svn://')) or os.path.exists(line):
+        if misc.url_supported(line) or os.path.exists(line):
             REPOSITORIES.append(line)
 
     if not REPOSITORIES:
@@ -123,7 +122,7 @@ if not os.path.isfile(MIRRORS_CONF):
 else:
     MIRRORS = []
     for line in misc.file_readsmart(MIRRORS_CONF):
-        if line.startswith(('http://', 'https://', 'ftp://', 'ftps://')):
+        if misc.url_supported(line, False):
             MIRRORS.append(line)
 
     if not MIRRORS and MIRROR:

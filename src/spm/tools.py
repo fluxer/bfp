@@ -213,14 +213,11 @@ class Dist(object):
                 for src_url in target_sources:
                     src_base = misc.url_normalize(src_url, True)
                     src_file = '%s/%s' % (target_directory, src_base)
-                    if src_url.startswith(('http://', 'https://', 'ftp://', \
-                        'ftps://')):
+                    if misc.url_supported(src_url):
                         if os.path.isfile(src_file):
                             message.sub_debug(_('Removing'), src_file)
                             os.unlink(src_file)
-                    elif src_url.startswith(('git://', 'rsync://', 'svn://')) \
-                        or src_url.endswith('.git'):
-                        if os.path.isdir(src_file):
+                        elif os.path.isdir(src_file):
                             message.sub_debug(_('Removing'), src_file)
                             misc.dir_remove(src_file)
 
