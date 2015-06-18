@@ -394,7 +394,7 @@ class Misc(object):
             self.system_command(checkcmd)
             # if it does not fail refresh the keys
             cmd.append('--refresh-keys')
-        except:
+        except subprocess.CalledProcessError:
             # otherwise (presumably) the key is not in the keyring
             cmd.append('--recv-keys')
         cmd.extend(lkeys)
@@ -971,13 +971,15 @@ class Misc(object):
             cwd = '/'
         if isinstance(command, str) and not shell:
             command = shlex.split(command)
-        pipe = subprocess.Popen(command, stderr=subprocess.PIPE, shell=shell, cwd=cwd)
+        stderr = None
+        if self.CATCH:
+            stderr = subprocess.PIPE
+        pipe = subprocess.Popen(command, stderr=stderr, shell=shell, cwd=cwd)
         pipe.wait()
         if pipe.returncode != 0:
             if self.CATCH:
-                # FIXME: raise subprocess.CalledProcessError
-                raise(Exception('Command failed: %s' % command, pipe.returncode))
-            raise(Exception(pipe.communicate()[1].strip()))
+                raise(Exception(pipe.communicate()[1].strip()))
+            raise(subprocess.CalledProcessError(pipe.returncode, command))
 
     def system_chroot(self, command, shell=False, sinput=None):
         ''' Execute command in chroot environment '''

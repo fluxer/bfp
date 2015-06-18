@@ -22,7 +22,7 @@ misc = libspm.misc
 database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.8.0 (15c802d)"
+app_version = "1.8.0 (edd1ecd)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -431,6 +431,7 @@ class Sane(object):
             if match:
                 message.sub_info(_('Checking'), target)
                 target_srcbuild = '%s/SRCBUILD' % match
+                # TODO: cache target_srcbuild and search that
 
                 if self.enable:
                     if misc.file_search('--enable-', target_srcbuild):
