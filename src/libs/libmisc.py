@@ -367,7 +367,7 @@ class Misc(object):
         elif os.path.isfile(sig3):
             return sig3
         elif bensure:
-           return sig1
+            return sig1
 
     def gpg_receive(self, lkeys, lservers=None):
         ''' Import PGP keys as (somewhat) trusted '''
