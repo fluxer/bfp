@@ -783,6 +783,7 @@ class Upload(object):
 
 
 class Online(object):
+    ''' Check if system is online or URL reachable '''
     def __init__(self, url):
         self.url = url
 
@@ -792,6 +793,7 @@ class Online(object):
 
 
 class Upgrade(object):
+    ''' Upgrade old SPM metadata to meet new requirements'''
     def __init__(self):
         # not much to do here
         pass
@@ -889,12 +891,14 @@ class Upgrade(object):
 
 
 class Digest(object):
+    ''' Create/verify target(s) checksum digest '''
     def __init__(self, targets, directory='/', do_create=False, do_verify=False):
         self.targets = targets
         self.directory = directory
         self.do_create = do_create
         self.do_verify = do_verify
 
+    # TODO: split create and verify to separate methods
     def main(self):
         if self.do_create:
             digest = {}

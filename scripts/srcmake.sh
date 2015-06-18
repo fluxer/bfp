@@ -173,6 +173,7 @@ for src in "${@:-.}";do
         echo "${file//$INSTALL_DIR}" >> "$footprint"
     done < <(find "$INSTALL_DIR" ! -type d -print0)
 
+    # TODO: migrate to JSON format
     echo "version=$version" > "$metadata"
     echo "release=${release:-1}" >> "$metadata"
     echo "description=$description" >> "$metadata"
