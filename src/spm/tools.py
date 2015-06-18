@@ -470,7 +470,7 @@ class Sane(object):
                     regex += '|gtk-query-immodules-2.0|gtk-query-immodules-3.0'
                     regex += '|gdk-pixbuf-query-loaders|glib-compile-schemas'
                     regex += '|gtk-update-icon-cache|mkinitfs|grub-mkconfig'
-                    regex += '|update-grub)(?:\\s|$)'
+                    regex += '|xdg-mime|udevadm)(?:\\s|$)'
                     if misc.string_search(regex, srcbuild, escape=False):
                         message.sub_warning(_('Possible unnecessary triggers invocation(s)'))
 
