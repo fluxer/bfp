@@ -60,7 +60,8 @@ fi
 if ! grep -q "SPM SOURCE" "$statefile" ;then
     echo "=== RUNNING SPM SOURCE TEST ==="
     # --depends, --reverse and --remove are not tested!
-    "$1" "$curdir/spm.py" $spmargs source -Cpckima zlib
+    "$1" "$curdir/spm.py" $spmargs source -Cfpckim zlib
+    "$1" "$curdir/spm.py" $spmargs source -a ca-certificates
     echo "SPM SOURCE" >> "$statefile"
 else
     echo "=== SKIPPING SPM SOURCE TEST ==="
