@@ -454,7 +454,7 @@ class Misc(object):
             elif sfile.endswith('.gz'):
                 cmd = '%s -ck ' % misc.whereis('gunzip')
             else:
-                raise(Exception('In memory verification does not support',sfile))
+                raise(Exception('In memory verification does not support', sfile))
             cmd = '%s %s | %s --homedir %s --verify --batch %s -' % \
                 (cmd, sfile, gpg, self.GPG_DIR, ssignature)
         else:
@@ -583,7 +583,7 @@ class Misc(object):
         endprotocols = []
         if bvcs:
             startprotocols.extend(('git://', 'ssh://', 'rsync://', 'svn://'))
-            endprotocols.extend(('.git'))
+            endprotocols.extend(('.git', '.svn'))
         if surl.startswith(tuple(startprotocols)):
             return True
         elif surl.endswith(tuple(endprotocols)):
@@ -753,6 +753,9 @@ class Misc(object):
         if self.OFFLINE:
             return
 
+        # the .svn url extension is fake made up for the sake of the fetcher
+        # to be able to recognize the protocol, strip it
+        surl = surl.rstrip('.svn')
         svn = self.whereis('svn')
         if os.path.isdir('%s/.svn' % destination):
             self.system_command((svn, 'up'), cwd=destination)
@@ -803,7 +806,7 @@ class Misc(object):
             # mirrors are not supported for VCS repos on purpose
             if surl.startswith('git://') or sbase.endswith('.git'):
                 self.fetch_git(surl, destination)
-            elif surl.startswith('svn://'):
+            elif surl.startswith('svn://') or sbase.endswith('.svn'):
                 self.fetch_svn(surl, destination)
             elif surl.startswith('rsync://'):
                 self.fetch_rsync(surl, destination)
