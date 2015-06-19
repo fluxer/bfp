@@ -88,7 +88,7 @@ if [ "$uid" != "0" ];then
     echo "=== SKIPPING SPMT DIST TEST (REQUIRES ROOT) ==="
 elif ! grep -q "SPMT DIST" "$statefile" ;then
     echo "=== RUNNING SPMT DIST TEST (ROOT) ==="
-    "$1" "$curdir/tools.py" dist -scd "$rootdir" zlib
+    "$1" "$curdir/tools.py" $spmtargs dist -scd "$rootdir" zlib
     echo "SPMT DIST" >> "$statefile"
 else
     echo "=== SKIPPING SPMT DIST TEST (ROOT) ==="
@@ -97,7 +97,7 @@ fi
 if ! grep -q "SPMT CHECK" "$statefile" ;then
     echo "=== RUNNING SPMT CHECK TEST ==="
     # --adjust, --depends and --reverse are not tested!
-    "$1" "$curdir/tools.py" check -f zlib
+    "$1" "$curdir/tools.py" $spmtargs check -f zlib
     echo "SPMT CHECK" >> "$statefile"
 else
     echo "=== SKIPPING SPMT CHECK TEST ==="
@@ -105,7 +105,7 @@ fi
 
 if ! grep -q "SPMT CLEAN" "$statefile" ;then
     echo "=== RUNNING SPMT CLEAN TEST ==="
-    "$1" "$curdir/tools.py" clean
+    "$1" "$curdir/tools.py" $spmtargs clean
     echo "SPMT CLEAN" >> "$statefile"
 else
     echo "=== SKIPPING SPMT CLEAN TEST ==="
@@ -113,7 +113,7 @@ fi
 
 if ! grep -q "SPMT LINT" "$statefile" ;then
     echo "=== RUNNING SPMT LINT TEST ==="
-    "$1" "$curdir/tools.py" lint -musdMfboepnkcD zlib
+    "$1" "$curdir/tools.py" $spmtargs lint -musdMfboepnkcD zlib
     echo "SPMT LINT" >> "$statefile"
 else
     echo "=== SKIPPING SPMT LINT TEST ==="
@@ -121,7 +121,7 @@ fi
 
 if ! grep -q "SPMT SANE" "$statefile" ;then
     echo "=== RUNNING SPMT SANE TEST ==="
-    "$1" "$curdir/tools.py" sane -ednmNvtugs zlib
+    "$1" "$curdir/tools.py" $spmtargs sane -ednmNvtugs zlib
     echo "SPMT SANE" >> "$statefile"
 else
     echo "=== SKIPPING SPMT SANE TEST ==="
@@ -131,7 +131,7 @@ fi
 
 if ! grep -q "SPMT WHICH" "$statefile" ;then
     echo "=== RUNNING SPMT WHICH TEST ==="
-    "$1" "$curdir/tools.py" which -cp zlib
+    "$1" "$curdir/tools.py" $spmtargs which -cp zlib
     echo "SPMT WHICH" >> "$statefile"
 else
     echo "=== SKIPPING SPMT WHICH TEST ==="
@@ -143,7 +143,7 @@ elif [ ! -d "/var/local/spm/zlib" ];then
     echo "=== SKIPPING SPMT PACK TEST (ZLIB NOT INSTALLED) ==="
 elif ! grep -q "SPMT PACK" "$statefile" ;then
     echo "=== RUNNING SPMT PACK TEST ==="
-    "$1" "$curdir/tools.py" pack -d "$rootdir" zlib
+    "$1" "$curdir/tools.py" $spmtargs pack -d "$rootdir" zlib
     echo "SPMT PACK" >> "$statefile"
 else
     echo "=== SKIPPING SPMT PACK TEST ==="
@@ -153,7 +153,7 @@ if ! "$1" "$curdir/tools.py" online -u 'https://crux.nu/ports/crux-3.1'; then
     echo "=== SKIPPING SPMT PKG TEST (REQUIRES ACCESS TO CRUX SERVER) ==="
 elif ! grep -q "SPMT PKG" "$statefile" ;then
     echo "=== RUNNING SPMT PKG TEST ==="
-    "$1" "$curdir/tools.py" pkg -d "$rootdir" zlib
+    "$1" "$curdir/tools.py" $spmtargs pkg -d "$rootdir" zlib
     echo "SPMT PKG" >> "$statefile"
 else
     echo "=== SKIPPING SPMT PKG TEST ==="
@@ -163,7 +163,7 @@ fi
 
 if ! grep -q "SPMT DISOWNED" "$statefile" ;then
     echo "=== RUNNING SPMT DISOWNED TEST ==="
-    "$1" "$curdir/tools.py" disowned -cpd "$rootdir"
+    "$1" "$curdir/tools.py" $spmtargs disowned -cpd "$rootdir"
     echo "SPMT DISOWNED" >> "$statefile"
 else
     echo "=== SKIPPING SPMT DISOWNED TEST ==="
@@ -171,7 +171,7 @@ fi
 
 if ! grep -q "SPMT ONLINE" "$statefile" ;then
     echo "=== RUNNING SPMT ONLINE TEST ==="
-    "$1" "$curdir/tools.py" online -u https://google.com
+    "$1" "$curdir/tools.py" $spmtargs online -u https://google.com
     echo "SPMT ONLINE" >> "$statefile"
 else
     echo "=== SKIPPING SPMT ONLINE TEST ==="
@@ -183,7 +183,7 @@ if [ "$uid" != "0" ];then
     echo "=== SKIPPING SPMT UPGRADE TEST (REQUIRES ROOT) ==="
 elif ! grep -q "SPMT UPGRADE" "$statefile" ;then
     echo "=== RUNNING SPMT UPGRADE TEST ==="
-    "$1" "$curdir/tools.py" upgrade
+    "$1" "$curdir/tools.py" $spmtargs upgrade
     echo "SPMT UPGRADE" >> "$statefile"
 else
     echo "=== SKIPPING SPMT UPGRADE TEST ==="
@@ -193,7 +193,7 @@ if [ ! -d "/var/local/spm/zlib" ];then
     echo "=== SKIPPING SPMT DIGEST TEST (ZLIB NOT INSTALLED) ==="
 elif ! grep -q "SPMT DIGEST" "$statefile" ;then
     echo "=== RUNNING SPMT DIGEST TEST ==="
-    "$1" "$curdir/tools.py" digest -cv zlib -d "$rootdir"
+    "$1" "$curdir/tools.py" $spmtargs digest -cv zlib -d "$rootdir"
     echo "SPMT DIGEST" >> "$statefile"
 else
     echo "=== SKIPPING SPMT DIGEST TEST ==="
@@ -203,7 +203,7 @@ if [ ! -d "/var/local/spm/zlib" ];then
     echo "=== SKIPPING SPMT PORTABLE TEST (ZLIB NOT INSTALLED) ==="
 elif ! grep -q "SPMT PORTABLE" "$statefile" ;then
     echo "=== RUNNING SPMT PORTABLE TEST ==="
-    "$1" "$curdir/tools.py" portable zlib -d "$rootdir"
+    "$1" "$curdir/tools.py" $spmtargs portable zlib -d "$rootdir"
     echo "SPMT PORTABLE" >> "$statefile"
 else
     echo "=== SKIPPING SPMT PORTABLE TEST ==="
