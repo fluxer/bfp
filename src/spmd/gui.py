@@ -79,7 +79,11 @@ class Interface(QtDBus.QDBusInterface):
 
     @QtCore.pyqtSlot(QtDBus.QDBusPendingCall)
     def CheckCall(self, call):
-        value = QtDBus.QDBusReply(call).value()
+        reply = QtDBus.QDBusReply(call)
+        if not reply.isValid():
+            MessageCritical('No valid reply from D-Bus, possibly permissions issue.')
+            return
+        value = reply.value()
         if not value:
             return
         msg = str(value.toString())
