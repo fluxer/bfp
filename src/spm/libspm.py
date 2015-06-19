@@ -1225,7 +1225,7 @@ class Source(object):
             rreq = req
             if os.path.exists(req):
                 rreq = os.path.realpath(req)
-            match = database.local_belongs('(?:^|\\s)%s(?:$|\\s)' % re.escape(rreq), escape=False)
+            match = database.local_belongs(rreq, exact=True)
             if match and len(match) > 1:
                 message.sub_warning(_('Multiple providers for %s') % rreq, match)
                 if self.target_name in match:
