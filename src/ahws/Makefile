@@ -1,4 +1,4 @@
-include ../../Makefile.inc
+include ../../Makefile.mk
 
 all: clean bump
 	$(NUITKA) ahws.py

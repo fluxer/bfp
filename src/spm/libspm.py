@@ -604,7 +604,7 @@ class Source(object):
         misc.system_command((objcopy, '--add-gnu-debuglink', sdebug, sfile))
 
     def pre_update_databases(self, content, action):
-        ''' Update common databases before merge '''
+        ''' Update common databases before merge/remove '''
         if not TRIGGERS:
             return
 
@@ -637,7 +637,7 @@ class Source(object):
                     misc.system_trigger((xdg_mime, 'uninstall', m))
 
     def post_update_databases(self, content, action):
-        ''' Update common databases after merge'''
+        ''' Update common databases after merge/remove '''
         if not TRIGGERS:
             return
 

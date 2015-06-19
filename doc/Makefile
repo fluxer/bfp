@@ -1,4 +1,4 @@
-include ../Makefile.inc
+include ../Makefile.mk
 
 all: clean
 	$(POD2MAN) --release="MkInitfs $(VERSION)" \
@@ -26,7 +26,7 @@ all: clean
 	$(SED) 's|@MACHINE@|$(MACHINE)|g' -i spm.conf.5
 	$(SED) 's|@ARCH@|$(ARCH)|g' -i spm.conf.5
 	$(SED) 's|@JOBS@|$(JOBS)|g' -i spm.conf.5
-	for lib in ../src/libs/lib*.py; do \
+	for lib in ../src/libs/lib*.py ../src/spm/libspm.py; do \
 		$(PYDOC) -w $$lib; \
 	done
 install:

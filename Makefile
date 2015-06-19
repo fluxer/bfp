@@ -1,4 +1,4 @@
-include Makefile.inc
+include Makefile.mk
 
 all:
 	$(MAKE) -C doc

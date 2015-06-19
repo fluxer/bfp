@@ -1,4 +1,4 @@
-include ../Makefile.inc
+include ../Makefile.mk
 
 install:
 	$(INSTALL) -dm755 $(DESTDIR)$(BASHCOMPLETIONDIR)

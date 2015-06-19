@@ -1,4 +1,4 @@
-include ../../Makefile.inc
+include ../../Makefile.mk
 
 all: bump clean
 	$(SED) -e 's|@BINDIR@|$(BINDIR)|' -e 's|@VERSION@|$(VERSION)|' \
