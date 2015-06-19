@@ -77,14 +77,12 @@ class SPMD(dbus.service.Object):
     def Configs(self):
         ''' Emit that configs have changed '''
         message.info('Configs')
-        return
 
     @dbus.service.signal('com.spm.Daemon')
     def Working(self):
         ''' Emit that the deamon is working '''
         message.debug('Working')
         self.working = True
-        return
 
     @dbus.service.signal('com.spm.Daemon', signature='s')
     def Finished(self, msg):

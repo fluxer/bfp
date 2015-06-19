@@ -21,21 +21,6 @@ MainWindow = QtGui.QMainWindow()
 ui = gui_ui.Ui_MainWindow()
 ui.setupUi(MainWindow)
 
-class Worker(QtCore.QThread):
-    ''' Threaded method caller '''
-    def __init__(self, parent, func):
-        super(Worker, self).__init__(parent)
-        self.func = func
-
-    def run(self):
-        try:
-            self.func()
-            self.emit(QtCore.SIGNAL('success'))
-        except SystemExit:
-            pass
-        except Exception as detail:
-            self.emit(QtCore.SIGNAL('failed'), str(detail))
-
 class TargetsWorker(QtCore.QThread):
     ''' Threaded method caller '''
     def __init__(self, parent, targets, search=None):
