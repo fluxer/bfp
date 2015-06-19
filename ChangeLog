@@ -1,3 +1,109 @@
+Sat Jun 20 00:08:11 2015 +0300 Ivailo Monev <xakepa10@gmail.com>
+dcd330d1a21c0c134ffd84c7595e0c8768b79ec0 (tag: 1.8.1)
+    * fix some unicode files issue in libspm
+    * make use of exact search for dependencies lookup from libspm
+    * add local target optdepends test
+    * clean .service files in spmd sub-directory
+    * update .gitignore
+    * support .svn suffixed URLs for the sake of the fetcher
+    * cleanup
+    * improve spm-gui dbus reply check
+    * tweak the spmd dbus policy
+    * fixup spmd watchers
+    * fix spmd installation when build from cython target
+    * rename Makefile.inc to Makefile.mk for syntax sugar
+    * add cold man page
+    * actually pass method to string_checksum() from file_checksum() in libmisc
+    * do not reuse libmessage namespace
+    * oops
+    * properly verify .sign files
+    * imporve init script used in initramfs
+    * add class and tasks (TODO) comments
+    * check if targets with signatures have pgpkeys from spm-tools sane mode
+    * make use of libmisc.Misc.url_supported
+    * minor documentation corrections
+    * implement libmisc.Misc.string_checksum and libmisc.Misc.url_supported
+    * apply some type-checking to libmisc.Misc.gpg_findsig
+    * fix bad indentation in libmisc
+    * add two additional triggers check into spm-tools sane mode
+    * optimize spm-tools sane mode
+    * drop prepare/compile/check/install logging
+    * fixups
+    * support third style for PGP signatures
+    * print debug message about keys to be requested
+    * minor fixes
+    * drop process statistics code
+    * log and record statistics for prepare/compile/chech/install actions
+    * update Nuitka to 0.5.13.2
+    * minor code style corrections
+    * export proper overrides from portable runner
+    * minor docs improvements
+    * fix spm notify argument
+    * spm-tools man page corrections in EXAMPLES section
+    * and add autotest for it
+    * implement portable mode into spm-tools
+    * again on database notification
+    * restore Python 3 compat of libmisc
+    * still, monitor parents of notification candidates
+    * report optdepends change from spm repo mode
+    * add spm-tools task to TODO
+    * be more selective when adding directories to the notifiers
+    * minor variables reuse
+    * lintian corrections
+    * minor improvements to the autotest script
+    * add autotest for spm-tools digest mode
+    * implement digest mode into spm-tools
+    * minor srcmake improvements and cleanup
+    * support compressing binaries with UPX (defaults to off)
+    * improve and optimize manual pages trigger
+    * add support for database notification override
+    * move database notifiers setup to cache builders
+    * housekeeping
+    * replace dashes with underscore for the variable of optional dependencies
+    * make sure spmd dbus services file has proper Exec set
+    * prefix some variables in libmisc.Misc, improve rsync fetcher
+    * minor comments and cleanup of libmisc.Misc
+    * revert last two commits and try another optimization
+    * add paranoia checks in caching
+    * another try to optimize caching
+    * fixup Python 3000 support
+    * use map() to build caches
+    * lintian corrections, implement compression level argument for libmisc.Misc.archive_compress()
+    * cleanup libpackage.SRCBUILD regex
+    * add benchmark script
+    * attempt offline actions from ahws
+    * make the modules importing in spm follow global code-style
+    * check the cache prior to disk in libpackage.Database.remote_search()
+    * improve sounds rules for mdev
+    * correct kvm group entry
+    * pass mdepends and odepends on the recursion call to libpackage.Database.remote_mdepends()
+    * make lsinitfs call busybox's cpio applet instead of cpio directly
+    * update SRCBUILD and spm man pages
+    * refresh keys if they are in the keyring instead of requesting receive
+    * use signal/slot to add targets in the targets table
+    * spm-gui lintian corrections
+    * and fixup ahws
+    * cleanup ahws
+    * spm and spm-tools man pages cleanups and corrections
+    * remove redudant return statements
+    * make use of libmisc.Misc.file_read() in libpackage.SRCBUILD.parse()
+    * clean C files in ahws source directory from clean target
+    * oops, do not always export optionals as yes
+    * change shebangs
+    * make it possible to build all optional dependencies
+    * replace printing of date and time with target name in libspm
+    * fixup srcbuild assembling
+    * tidy up libspm
+    * add task to TODO
+    * minor docs corrections
+    * fixup libraries test suite
+    * implement optdepends support into the SRCBUILD format
+    * warn about circular dependencies
+    * ignore backup files which are symlinks (for now)
+    * implement support for src_prepare() in SRCBUILDs
+    * attempt to load module before mounting from libsystem.Block.mount
+    * improve libsystem.Power
+
 Wed Jun 3 13:17:21 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
 7c706092d7cae22bb996f8b05ccb971ef43376d9 (tag: 1.8.0)
     * disable building and installation of spmd/spm-gui for now

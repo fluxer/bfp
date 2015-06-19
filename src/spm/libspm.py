@@ -1211,7 +1211,7 @@ class Source(object):
                     # now update the shebang if possible
                     if smatch:
                         message.sub_debug(_('Attempting shebang correction on'), sfile)
-                        misc.file_substitute('^' + sfull, '#!' + smatch, sfile)
+                        misc.file_substitute('^%s' % sfull, '#!' + smatch, sfile)
                         required.append(smatch)
                     else:
                         required.append(sbase) # fake non-existing match
