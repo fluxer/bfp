@@ -1394,7 +1394,7 @@ class Source(object):
             message.sub_info(_('Removing obsolete files and directories'))
             remove_content = []
             for sfile in set(old_content).difference(new_content):
-                sfull = ROOT_DIR + sfile
+                sfull = '%s%s' % (ROOT_DIR, sfile.encode('utf-8'))
                 # skip files moved from real to symlink directory
                 sresolved = os.path.realpath(sfull)
                 if not ROOT_DIR == '/':
