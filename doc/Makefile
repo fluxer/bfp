@@ -19,6 +19,9 @@ all: clean
 	$(POD2MAN) --release="SPM $(VERSION)" \
 		--center="Source Package Manager Manual" \
 		--section='5' --utf8 SRCBUILD.pod SRCBUILD.5
+	$(POD2MAN) --release="Cold $(VERSION)" \
+		--center="Cold Manual" \
+		--section='1' --utf8 cold.pod cold.1
 	$(SED) 's|@DOCDIR@|$(DOCDIR)|g' -i SRCBUILD.5
 	$(SED) 's|@MACHINE@|$(MACHINE)|g' -i spm.conf.5
 	$(SED) 's|@ARCH@|$(ARCH)|g' -i spm.conf.5
@@ -29,21 +32,26 @@ all: clean
 install:
 	$(INSTALL) -vdm755 $(DESTDIR)$(MANDIR)/man8/ \
 		$(DESTDIR)$(MANDIR)/man5/ \
+		$(DESTDIR)$(MANDIR)/man1/ \
 		$(DESTDIR)$(DOCDIR)/spm
 	$(INSTALL) -vm644 *.8 $(DESTDIR)$(MANDIR)/man8/
 	$(INSTALL) -vm644 *.5 $(DESTDIR)$(MANDIR)/man5/
+	$(INSTALL) -vm644 *.1 $(DESTDIR)$(MANDIR)/man1/
 	$(INSTALL) -vm644 SRCBUILD.txt $(DESTDIR)$(DOCDIR)/spm/SRCBUILD.txt
 	$(INSTALL) -vm644 *.html $(DESTDIR)$(DOCDIR)/spm/
 	$(INSTALL) -vm644 ../COPYING $(DESTDIR)$(DOCDIR)/spm/COPYING
 
 uninstall:
+	$(RM) $(DESTDIR)$(MANDIR)/man8/mkinitfs.8
+	$(RM) $(DESTDIR)$(MANDIR)/man8/lsinitfs.8
 	$(RM) $(DESTDIR)$(MANDIR)/man8/spm.8
 	$(RM) $(DESTDIR)$(MANDIR)/man8/spm-tools.8
 	$(RM) $(DESTDIR)$(MANDIR)/man5/spm.conf.5
 	$(RM) $(DESTDIR)$(MANDIR)/man5/SRCBUILD.5
+	$(RM) $(DESTDIR)$(MANDIR)/man1/cold.1
 	$(RM) -r $(DESTDIR)$(DOCDIR)/spm/
 
 clean:
-	$(RM) *.5 *.8 *.html
+	$(RM) *.1 *.5 *.8 *.html
 
 .PHONY: all install uninstall clean
