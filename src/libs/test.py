@@ -111,9 +111,10 @@ class TestSuite(unittest.TestCase):
         self.local_depends = [self.remote_name]
         self.local_size = '12345'
         self.local_footprint = '/etc/dummy.conf\n/lib/libdummy.so'
+        self.local_optdepends = [self.remote2_name]
         self.create_local(self.local_name, self.local_version, \
             self.local_release, self.local_description, self.local_depends, \
-            self.local_size, self.local_footprint)
+            self.local_size, self.local_footprint, self.local_optdepends)
 
         # second dummy local target
         self.local2_name = 'dummy2'
@@ -274,6 +275,10 @@ class TestSuite(unittest.TestCase):
     def test_local_target_depends_empty(self):
         self.assertEqual(database.local_metadata(self.local3_name, 'depends'), \
             [])
+
+    def test_local_target_optdepends(self):
+        self.assertEqual(database.local_metadata(self.local_name, 'optdepends'), \
+            [self.remote2_name])
 
     def test_local_target_size(self):
         self.assertEqual(database.local_metadata(self.local_name, 'size'), \
