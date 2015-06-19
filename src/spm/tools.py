@@ -16,8 +16,9 @@ else:
     import http.server as HTTPServer
     import socketserver
 
+import libmessage
+message = libmessage.Message()
 import libspm
-message = libspm.message
 misc = libspm.misc
 database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR

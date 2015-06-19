@@ -33,7 +33,6 @@ optional arguments:
   --debug               Enable debug messages
   --version             Show MkInitfs version and exit
 
-
 =head1 EXAMPLES
 
 Create image for currently running kernel:

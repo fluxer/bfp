@@ -13,9 +13,10 @@ else:
 
 app_version = "1.8.0 (edd1ecd)"
 
+import libmessage
+message = libmessage.Message()
 try:
     import libspm
-    message = libspm.message
 
     EUID = os.geteuid()
 
