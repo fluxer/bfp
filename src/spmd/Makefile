@@ -19,6 +19,8 @@ cython: clean bump
 		spm-gui.desktop.in > spm-gui.desktop
 	$(SED) -e 's|@BINDIR@|$(BINDIR)|' -e 's|@VERSION@|$(VERSION)|' \
 		spm-autostart.desktop.in > spm-autostart.desktop
+	$(SED) -e 's|@SBINDIR@|$(SBINDIR)|' \
+		com.spm.Daemon.service.in > com.spm.Daemon.service
 	$(PYUIC) gui.ui -o gui_ui.py
 	# THE GUI WILL NOT WORK!
 	$(CYTHON) --embed daemon.py
@@ -34,6 +36,8 @@ cold: clean bump
 		spm-gui.desktop.in > spm-gui.desktop
 	$(SED) -e 's|@BINDIR@|$(BINDIR)|' -e 's|@VERSION@|$(VERSION)|' \
 		spm-autostart.desktop.in > spm-autostart.desktop
+	$(SED) -e 's|@SBINDIR@|$(SBINDIR)|' \
+		com.spm.Daemon.service.in > com.spm.Daemon.service
 	$(PYUIC) gui.ui -o gui_ui.py
 	$(NUITKA) daemon.py
 	$(NUITKA) client.py
