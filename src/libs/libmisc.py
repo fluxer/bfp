@@ -156,13 +156,13 @@ class Misc(object):
         else:
             return re.findall(string, self.string_convert(string2))
 
-    def string_checksum(self, data, method='sha256'):
+    def string_checksum(self, data, smethod='sha256'):
         ''' Return a hex checksum of string '''
         if self.python2:
             self.typecheck(data, (types.StringTypes))
-            self.typecheck(method, (types.StringTypes))
+            self.typecheck(smethod, (types.StringTypes))
 
-        return getattr(hashlib, method)(data).hexdigest()
+        return getattr(hashlib, smethod)(data).hexdigest()
 
     def file_name(self, sfile, basename=True):
         ''' Get name of file without the extension '''
@@ -324,7 +324,7 @@ class Misc(object):
 
         self.file_write(sfile, re.sub(string, string2, self.file_read(sfile)))
 
-    def file_checksum(self, sfile, method='sha256'):
+    def file_checksum(self, sfile, smethod='sha256'):
         ''' Return a hex checksum of file
 
             the reason to use this method would be if you wan to ensure that
@@ -332,9 +332,9 @@ class Misc(object):
             OOM kill, safety first '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
-            self.typecheck(method, (types.StringTypes))
+            self.typecheck(smethod, (types.StringTypes))
 
-        return self.string_checksum(misc.string_encode(self.file_read(sfile)))
+        return self.string_checksum(misc.string_encode(self.file_read(sfile)), smethod)
 
     def json_read(self, sfile):
         ''' Get JSON file content '''
