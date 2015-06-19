@@ -6,6 +6,7 @@ __pycache__
 
 *.8
 *.5
+*.1
 
 pod2htmd.tmp
 *.build
@@ -20,6 +21,7 @@ pod2htmd.tmp
 *~
 *.mo
 *.desktop
+*.service
 
 *.xz
 *.bz2
