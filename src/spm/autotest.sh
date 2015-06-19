@@ -38,8 +38,9 @@ ln -svf "$curdir/../libs/libpackage.py" .
 # let me build that for ya :)
 if ! which scanelf ;then
     "$1" "$curdir/spm.py" $spmargs repo -a
-    "$1" "$curdir/spm.py" $spmargs source -a pax-utils
-    export PATH="$PATH:$rootdir/usr/bin"
+    paxver=$("$1" "$curdir/spm.py" $spmargs remote -pv pax-utils)
+    "$1" "$curdir/spm.py" $spmargs source -Cfpc pax-utils
+    export PATH="$PATH:$builddir/pax-utils/source/pax-utils-$paxver"
 fi
 
 if ! grep -q "SPM REPO" "$statefile" ;then
