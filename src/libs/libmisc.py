@@ -375,7 +375,7 @@ class Misc(object):
             return sig1
         elif os.path.isfile(sig2):
             return sig2
-        elif os.path.isfile(sig3):
+        elif not sfile.endswith('.sign') and os.path.isfile(sig3):
             return sig3
         elif bensure:
             return sig1
@@ -441,16 +441,26 @@ class Misc(object):
         gpg = self.whereis('gpg2', False)
         if not gpg:
             gpg = self.whereis('gpg')
-        cmd = [gpg, '--homedir', self.GPG_DIR]
-        # in case the signature is passed instead of the file to verify
-        if sfile.endswith('.sig'):
-            sfile = sfile.replace('.sig', '')
-        elif sfile.endswith('.asc'):
-            sfile = sfile.replace('.asc', '')
         if not ssignature:
             ssignature = self.gpg_findsig(sfile)
-        cmd.extend(('--verify', '--batch', ssignature, sfile))
-        self.system_command(cmd)
+        shell = False
+        if ssignature.endswith('.sign'):
+            # exception for no gain, get piped!
+            shell = True
+            if sfile.endswith('.xz'):
+                cmd = '%s -cdk ' % misc.whereis('unxz')
+            elif sfile.endswith('.bz2'):
+                cmd = '%s -cdk ' % misc.whereis('bunzip')
+            elif sfile.endswith('.gz'):
+                cmd = '%s -ck' % smisc.whereis('gunzip')
+            else:
+                raise(Exception('In memory verification does not support',sfile))
+            cmd = '%s %s | %s --homedir %s --verify --batch %s -' % \
+                (cmd, sfile, gpg, self.GPG_DIR, ssignature)
+        else:
+            cmd = [gpg, '--homedir', self.GPG_DIR]
+            cmd.extend(('--verify', '--batch', ssignature, sfile))
+        self.system_command(cmd, shell=shell)
 
     def dir_create(self, sdir, ipermissions=0):
         ''' Create directory if it does not exist, including leading paths
@@ -472,7 +482,7 @@ class Misc(object):
     def dir_remove(self, sdir):
         ''' Remove directory recursively
 
-            this methods exists only because in some older versions of Python
+            this method exists only because in some older versions of Python
             shutil.rmtree() does not handle symlinks properly. If you have
             Python 2.7.9 >= use shutil.rmtree() instead '''
         if self.python2:
@@ -1033,18 +1043,18 @@ class Misc(object):
             mycommand.extend(command)
             command = mycommand
         try:
-            for s in ('/proc', '/dev', '/sys'):
-                sdir = self.ROOT_DIR + s
-                if not os.path.ismount(sdir):
+            for s in ('/proc', '/dev', '/dev/pts', '/dev/shm', '/sys'):
+                sdir = '%s%s' % (self.ROOT_DIR, s)
+                if os.path.isdir(s) and not os.path.ismount(sdir):
                     self.dir_create(sdir)
-                    self.system_command((mount, '--rbind', s, sdir))
+                    self.system_command((mount, '--bind', s, sdir))
             if sinput:
                 self.system_communicate(command, shell=shell, sinput=sinput)
             else:
                 self.system_command(command, shell=shell)
         finally:
-            for s in ('/proc', '/dev', '/sys'):
-                sdir = self.ROOT_DIR + s
+            for s in ('/proc', '/dev', '/dev/pts', '/dev/shm', '/sys'):
+                sdir = '%s%s' % (self.ROOT_DIR, s)
                 if os.path.ismount(sdir):
                     self.system_command((umount, '-f', '-l', sdir))
 
