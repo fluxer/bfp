@@ -16,8 +16,8 @@ rootdir="$curdir/root-$1"
 cachedir="$rootdir/cache"
 builddir="$rootdir/build"
 gpgdir="$rootdir/gpg"
-spmargs="--root $rootdir --cache $cachedir --build $builddir --gpg $gpgdir --missing=True --notify=True"
-spmtargs=""
+spmargs="--root $rootdir --cache $cachedir --build $builddir --gpg $gpgdir --missing=True --notify=True --debug"
+spmtargs="--debug"
 statefile="$rootdir/testrun-$1"
 
 case "$1" in
