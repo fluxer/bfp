@@ -452,7 +452,7 @@ class Misc(object):
             elif sfile.endswith('.bz2'):
                 cmd = '%s -cdk ' % misc.whereis('bunzip')
             elif sfile.endswith('.gz'):
-                cmd = '%s -ck' % smisc.whereis('gunzip')
+                cmd = '%s -ck ' % misc.whereis('gunzip')
             else:
                 raise(Exception('In memory verification does not support',sfile))
             cmd = '%s %s | %s --homedir %s --verify --batch %s -' % \
