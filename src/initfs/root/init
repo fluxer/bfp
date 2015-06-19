@@ -44,9 +44,12 @@ cmd mount -t proc proc /proc -o nosuid,noexec,nodev
 cmd mount -t sysfs sys /sys -o nosuid,noexec,nodev
 cmd mount -t devtmpfs dev /dev -o mode=0755,nosuid
 
+msg "Pre-loading keyboard module..."
+modprobe -q atkbd
+
 if [ ! -e "/etc/mtab" ];then
     msg "Creating mtab symlink..."
-    ln -s /proc/mounts /etc/mtab
+    cmd ln -s /proc/mounts /etc/mtab
 fi
 
 msg "Parsing cmdline options..."
@@ -147,7 +150,10 @@ fi
 # a hook could have mounted root
 if [ -e "/newroot/$init" ];then
     msg "Moving pseudo-filesystems..."
-    cmd mount --move /dev /newroot/dev
+    for p in /dev /proc /sys;do
+        cmd mkdir -p "/newroot/$p"
+        cmd mount --move "$p" "/newroot/$p"
+    done
 
     msg "Switching root..."
     cmd exec switch_root /newroot "$init" "$@"
