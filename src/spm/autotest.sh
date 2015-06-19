@@ -35,10 +35,10 @@ ln -svf "$curdir/../libs/libmessage.py" .
 ln -svf "$curdir/../libs/libmisc.py" .
 ln -svf "$curdir/../libs/libpackage.py" .
 
-# skip some tests depending on the tools available :(
+# let me build that for ya :)
 if ! which scanelf ;then
-    echo " WARNING: scanelf not available"
-    echo "SPM SOURCE" >> "$statefile"
+    "$1" "$curdir/spm.py" $spmargs source -a pax-utils
+    export PATH="$PATH:$rootdir/usr/bin"
 fi
 
 if ! grep -q "SPM REPO" "$statefile" ;then
