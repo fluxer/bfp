@@ -299,7 +299,7 @@ class Lint(object):
                             message.sub_warning(_('Hardlink'), sfile)
 
                 if self.doc:
-                    if misc.string_search('/doc/|/gtk-doc', target_footprint, escape=False):
+                    if misc.string_search('/doc/|/gtk-doc/', target_footprint, escape=False):
                         message.sub_warning(_('Documentation provided'))
 
                 if self.module:
@@ -316,7 +316,6 @@ class Lint(object):
                     for sfile in target_footprint_lines:
                         if os.path.islink(sfile):
                             continue
-
                         # FIXME: Python 3000
                         if misc.file_search(libspm.BUILD_DIR, sfile):
                             message.sub_warning(_('Build directory trace(s)'), sfile)
@@ -325,7 +324,6 @@ class Lint(object):
                     for sfile in target_footprint_lines:
                         if os.path.islink(sfile):
                             continue
-
                         self._check_ownership(sfile)
                         self._check_ownership(os.path.dirname(sfile))
 
@@ -334,7 +332,6 @@ class Lint(object):
                     for sfile in target_footprint_lines:
                         if os.path.islink(sfile):
                             continue
-
                         if sfile.startswith(('/bin', '/sbin', '/usr/bin', '/usr/sbin')) \
                             and not os.access(sfile, os.X_OK):
                             message.sub_warning(_('File in PATH is not executable'), sfile)
@@ -355,7 +352,6 @@ class Lint(object):
                     for sfile in target_footprint_lines:
                         if os.path.islink(sfile):
                             continue
-
                         smime = misc.file_mime(sfile)
                         if smime == 'text/plain' or smime == 'text/x-shellscript' \
                             or smime == 'text/x-python' or smime == 'text/x-perl' \
@@ -959,6 +955,8 @@ class Portable(object):
                         elif depfile.startswith('%s/lib/debug' % sys.prefix):
                             continue
                         elif depfile.startswith('%s/share/man' % sys.prefix):
+                            continue
+                        elif depfile.startswith('%s/share/doc' % sys.prefix):
                             continue
                         elif not os.path.exists(depfile):
                             message.sub_warning(_('File does not exist'), depfile)

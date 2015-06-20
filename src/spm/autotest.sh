@@ -23,7 +23,7 @@ statefile="$rootdir/testrun-$1"
 case "$1" in
     *python*) true ;;
     *) echo "Invalid interpreter: $1"
-       exit 1
+       exit 1 ;;
 esac
 
 # to ensure that no stray files from previous run are left
