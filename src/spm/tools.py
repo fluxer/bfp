@@ -273,7 +273,7 @@ class Lint(object):
                         target_footprint_lines.remove(sfile)
 
                 if self.man:
-                    if not misc.string_search('/share/man/', target_footprint):
+                    if not '/share/man/' in target_footprint:
                         message.sub_warning(_('No manual page(s)'))
 
                 if self.udev:
