@@ -348,16 +348,14 @@ class SRCBUILD(object):
 
         content = misc.file_read(sfile)
         for var, value in re.findall(self.string_regex, content):
-            value = value.strip('"').strip("'")
-            _stringmap[var] = value
+            _stringmap[var] = value.strip('"').strip("'")
         for var, value in re.findall(self.array_regex, content):
             arrayval = []
             for val in value.split():
                 for string in _stringmap:
                     val = val.replace('$%s' % string, _stringmap[string])
                     val = val.replace('${%s}' % string, _stringmap[string])
-                    val = val.strip('"').strip("'")
-                arrayval.append(val)
+                arrayval.append(val.strip('"').strip("'"))
             _arraymap[var] = arrayval
         for string in _stringmap:
             val = _stringmap[string]
