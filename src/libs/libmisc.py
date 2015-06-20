@@ -976,7 +976,10 @@ class Misc(object):
             cwd = '/'
         if isinstance(command, str) and not shell:
             command = shlex.split(command)
-        pipe = subprocess.Popen(command, stdin=subprocess.PIPE, \
+        stdin = None
+        if sinput:
+            stdin = subprocess.PIPE
+        pipe = subprocess.Popen(command, stdin=stdin, \
             stdout=subprocess.PIPE, stderr=subprocess.PIPE, \
             env={'LC_ALL': 'C'}, shell=shell, cwd=cwd)
         out, err = pipe.communicate(input=sinput)
