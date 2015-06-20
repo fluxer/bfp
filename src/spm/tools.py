@@ -451,11 +451,24 @@ class Sane(object):
                         message.sub_warning(_('FIXME/TODO note(s)'))
 
                 if self.variables:
-                    if not misc.string_search('(?:\\s|^)version=|description=', srcbuild, escape=False):
+                    string_missing = False
+                    string_as_array = False
+                    array_as_string = False
+                    for string in ('version', 'description'):
+                        if not misc.string_search('(?:\\s|^)%s=' % string, srcbuild, escape=False):
+                            string_missing = True
+                        if misc.string_search('(?:\\s|^)%s=\(' % string, srcbuild, escape=False):
+                            string_as_array = True
+                    for array in ('depends', 'makedepends', 'optdepends', 'checkdepends', \
+                        'sources', 'pgpkeys', 'options', 'backup'):
+                        if misc.string_search('(?:\\s|^)%s=[^\(]' % array, srcbuild, escape=False):
+                            array_as_string = True
+                    if string_missing:
                         message.sub_warning(_('Essential variable(s) missing'))
-                    if misc.string_search('(?:\\s|^)version=\(|description=\(', srcbuild, escape=False):
+                    if string_as_array:
                         message.sub_warning(_('String variable(s) defined as array'))
-                    # TODO: check for arrays defined as strings
+                    if array_as_string:
+                        message.sub_warning(_('Array variable(s) defined as string'))
 
                 if self.triggers:
                     regex = '(?:\\s|^)(ldconfig|mandb|update-desktop-database'
