@@ -451,22 +451,13 @@ class Sane(object):
                         message.sub_warning(_('FIXME/TODO note(s)'))
 
                 if self.variables:
-                    string_missing = False
-                    string_as_array = False
-                    array_as_string = False
                     string_regex = '(?:version|description)'
                     array_regex = '(?:(?:make|opt|check)?depends|sources|pgpkeys|options|backup)'
                     if not misc.string_search('(?:\\s|^)%s=' % string_regex, srcbuild, escape=False):
-                        string_missing = True
-                    if misc.string_search('(?:\\s|^)%s=\(' % string_regex, srcbuild, escape=False):
-                        string_as_array = True
-                    if misc.string_search('(?:\\s|^)%s=[^\(]' % array_regex, srcbuild, escape=False):
-                        array_as_string = True
-                    if string_missing:
                         message.sub_warning(_('Essential variable(s) missing'))
-                    if string_as_array:
+                    if misc.string_search('(?:\\s|^)%s=\(' % string_regex, srcbuild, escape=False):
                         message.sub_warning(_('String variable(s) defined as array'))
-                    if array_as_string:
+                    if misc.string_search('(?:\\s|^)%s=[^\(]' % array_regex, srcbuild, escape=False):
                         message.sub_warning(_('Array variable(s) defined as string'))
 
                 if self.triggers:
