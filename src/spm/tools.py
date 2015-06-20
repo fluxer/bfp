@@ -454,15 +454,14 @@ class Sane(object):
                     string_missing = False
                     string_as_array = False
                     array_as_string = False
-                    for string in ('version', 'description'):
-                        if not misc.string_search('(?:\\s|^)%s=' % string, srcbuild, escape=False):
-                            string_missing = True
-                        if misc.string_search('(?:\\s|^)%s=\(' % string, srcbuild, escape=False):
-                            string_as_array = True
-                    for array in ('depends', 'makedepends', 'optdepends', 'checkdepends', \
-                        'sources', 'pgpkeys', 'options', 'backup'):
-                        if misc.string_search('(?:\\s|^)%s=[^\(]' % array, srcbuild, escape=False):
-                            array_as_string = True
+                    string_regex = '(?:version|description)'
+                    array_regex = '(?:(?:make|opt|check)?depends|sources|pgpkeys|options|backup)'
+                    if not misc.string_search('(?:\\s|^)%s=' % string_regex, srcbuild, escape=False):
+                        string_missing = True
+                    if misc.string_search('(?:\\s|^)%s=\(' % string_regex, srcbuild, escape=False):
+                        string_as_array = True
+                    if misc.string_search('(?:\\s|^)%s=[^\(]' % array_regex, srcbuild, escape=False):
+                        array_as_string = True
                     if string_missing:
                         message.sub_warning(_('Essential variable(s) missing'))
                     if string_as_array:
