@@ -403,7 +403,7 @@ def AddRepo():
     url, ok = QtGui.QInputDialog.getText(MainWindow, 'URL', '')
     if ok and url:
         url = str(url)
-        if not url.startswith(('http://', 'https://', 'ftp://', 'ftps://')):
+        if not misc.url_supported(url):
             MessageCritical('The specified URL is not valid')
             return
         libspm.REPOSITORIES.append(url)
@@ -418,7 +418,7 @@ def AddMirror():
     url, ok = QtGui.QInputDialog.getText(MainWindow, 'URL', '')
     if ok and url:
         url = str(url)
-        if not url.startswith(('http://', 'https://', 'ftp://', 'ftps://')):
+        if not misc.url_supported(url, False):
             MessageCritical('The specified URL is not valid')
             return
         libspm.MIRRORS.append(url)
