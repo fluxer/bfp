@@ -23,7 +23,7 @@ misc = libspm.misc
 database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.8.0 (edd1ecd)"
+app_version = "1.8.1 (7825695)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -902,11 +902,13 @@ class Upgrade(object):
 
 class Digest(object):
     ''' Create/verify target(s) checksum digest '''
-    def __init__(self, targets, directory='/', do_create=False, do_verify=False):
+    def __init__(self, targets, directory='/', do_create=False, \
+        do_verify=False, do_backup=False):
         self.targets = targets
         self.directory = directory
         self.do_create = do_create
         self.do_verify = do_verify
+        self.do_backup = do_backup
 
     # TODO: split create and verify to separate methods
     def main(self):
@@ -918,8 +920,11 @@ class Digest(object):
                     sys.exit(2)
                 message.sub_debug(_('Checksumming'), target)
                 digest[target] = {}
+                target_backup = database.local_metadata(target, 'backup')
                 for sfile in database.local_metadata(target, 'footprint'):
-                    if not os.path.exists(sfile):
+                    if '/%s' % sfile in target_backup and not self.do_backup:
+                        message.sub_debug(_('Ignoring backup file'))
+                    elif not os.path.exists(sfile):
                         message.sub_warning(_('File does not exist'), sfile)
                     else:
                         digest[target][sfile] = misc.file_checksum(sfile)
@@ -1175,6 +1180,8 @@ try:
         help=_('Create digest'))
     digest_parser.add_argument('-v', '--verify', action='store_true', \
         help=_('Verify digest'))
+    digest_parser.add_argument('-k', '--backup', action='store_true', \
+        help=_('Do not ignore backup files'))
     digest_parser.add_argument('TARGETS', nargs='+', type=str, \
         help=_('Targets to apply actions on'))
 
@@ -1382,8 +1389,9 @@ try:
         message.sub_info(_('DIRECTORY'), ARGS.directory)
         message.sub_info(_('CREATE'), ARGS.create)
         message.sub_info(_('VERIFY'), ARGS.verify)
+        message.sub_info(_('BACKUP'), ARGS.backup)
         message.sub_info(_('TARGETS'), ARGS.TARGETS)
-        m = Digest(ARGS.TARGETS, ARGS.directory, ARGS.create, ARGS.verify)
+        m = Digest(ARGS.TARGETS, ARGS.directory, ARGS.create, ARGS.verify, ARGS.backup)
         m.main()
 
     elif ARGS.mode == 'portable':

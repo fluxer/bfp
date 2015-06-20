@@ -1790,7 +1790,6 @@ class Binary(Source):
             message.sub_critical(_('Binary tarball not available for'), self.target_name)
             sys.exit(2)
 
-
     def prepare(self):
         ''' Prepare target tarballs '''
         message.sub_info(_('Checking dependencies'))

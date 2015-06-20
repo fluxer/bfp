@@ -248,6 +248,7 @@ optional arguments:
                         Set output directory
   -c, --create          Create digest
   -v, --verify          Verify digest
+  -k, --backup          Do not ignore backup files
 
 =head2 PORTABLE MODE
 

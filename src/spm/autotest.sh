@@ -196,7 +196,7 @@ if [ ! -d "/var/local/spm/zlib" ];then
     echo "=== SKIPPING SPMT DIGEST TEST (ZLIB NOT INSTALLED) ==="
 elif ! grep -q "SPMT DIGEST" "$statefile" ;then
     echo "=== RUNNING SPMT DIGEST TEST ==="
-    "$1" "$curdir/tools.py" $spmtargs digest -cv zlib -d "$rootdir"
+    "$1" "$curdir/tools.py" $spmtargs digest -cvk zlib -d "$rootdir"
     echo "SPMT DIGEST" >> "$statefile"
 else
     echo "=== SKIPPING SPMT DIGEST TEST ==="

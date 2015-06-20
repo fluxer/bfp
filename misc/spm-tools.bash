@@ -47,7 +47,7 @@ _spm_tools()
 
     upgrade_options='-h --help'
 
-    digest_options='-d -c --create -v --verify -h --help'
+    digest_options='-d -c --create -v --verify -k --backup -h --help'
 
     portable_options='-h --help -d --directory'
 
