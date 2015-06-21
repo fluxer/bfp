@@ -63,9 +63,8 @@ class Check(object):
                 elif not os.path.isfile(sfile):
                     continue
                 elif self.do_fast:
-                    if '/include/' in sfile or '/share/man' in sfile \
-                        or '/share/locale/' in sfile or '/share/i18n/' in sfile \
-                        or '/share/info/' in sfile:
+                    if misc.string_search('/include/|/share/(?:man|locale|i18n|info)', \
+                        sfile, escape=False):
                         message.sub_debug(_('Skipping'), sfile)
                         continue
 
@@ -958,13 +957,9 @@ class Portable(object):
                     message.sub_debug(_('Augmenting'), dep)
                     # TODO: allow exclude/include from files passed as argument
                     for depfile in database.local_metadata(dep, 'footprint'):
-                        if depfile.startswith(('/include', '/usr/include')):
-                            continue
-                        elif depfile.startswith('%s/lib/debug' % sys.prefix):
-                            continue
-                        elif depfile.startswith('%s/share/man' % sys.prefix):
-                            continue
-                        elif depfile.startswith('%s/share/doc' % sys.prefix):
+                        if misc.string_search('%s/(?:lib/debug|include|share/(?:man|doc)/)' % \
+                            sys.prefix, depfile, escape=False):
+                            message.sub_debug(_('Skipping file'), depfile)
                             continue
                         elif not os.path.exists(depfile):
                             message.sub_warning(_('File does not exist'), depfile)
