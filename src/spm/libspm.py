@@ -1346,7 +1346,7 @@ class Source(object):
                     continue
 
                 message.sub_debug(_('Checking against'), target)
-                footprint = set(database.local_metadata(target, 'footprint'))
+                footprint = frozenset(database.local_metadata(target, 'footprint'))
                 diff = footprint.difference(new_content)
                 if footprint != diff:
                     message.sub_critical(_('File/link conflicts with %s') % target, \
@@ -1393,7 +1393,7 @@ class Source(object):
         if target_upgrade:
             message.sub_info(_('Removing obsolete files and directories'))
             remove_content = []
-            for sfile in set(old_content).difference(new_content):
+            for sfile in frozenset(old_content).difference(new_content):
                 sfull = '%s%s' % (ROOT_DIR, sfile.encode('utf-8'))
                 # skip files moved from real to symlink directory
                 sresolved = os.path.realpath(sfull)
