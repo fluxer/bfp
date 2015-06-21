@@ -2,6 +2,9 @@
 
 from PyQt4 import QtCore, QtGui, QtDBus
 import os, sys, re
+if sys.version > '2':
+    QtCore.QString = str
+    QtCore.QStringList = list
 
 # handle keyboard interrupt
 import signal
@@ -79,9 +82,7 @@ class Interface(QtDBus.QDBusInterface):
     def Finished(self, msg):
         # gee... the msg is QVariant so here is a _ugly_ workaround
         msg = str(msg)
-        if msg == 'Success':
-            MessageInfo(msg)
-        else:
+        if not msg == 'Success':
             MessageCritical(msg)
         RefreshAll()
 
@@ -194,6 +195,7 @@ def RefreshRepos():
     ui.ReposTable.clearContents()
     irow = 0
     for line in misc.file_readlines(libspm.REPOSITORIES_CONF):
+        line = str(line)
         enable = False
         if os.path.exists(line):
             enable = True
@@ -218,6 +220,7 @@ def RefreshMirrors():
     ui.MirrorsTable.clearContents()
     irow = 0
     for line in misc.file_readlines(libspm.MIRRORS_CONF):
+        line = str(line)
         enable = False
         if os.path.exists(line):
             enable = True
