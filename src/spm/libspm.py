@@ -617,7 +617,7 @@ class Source(object):
             message.sub_debug(match)
             for m in match:
                 if not os.path.exists('%s/%s' % (ROOT_DIR, m)):
-                    message.sub_warning('File does not exist', m)
+                    message.sub_warning(_('File does not exist'), m)
                     continue
                 message.sub_info(_('Deleting info page'), m)
                 misc.system_trigger((install_info, '--delete', m, \

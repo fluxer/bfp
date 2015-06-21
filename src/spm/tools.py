@@ -551,7 +551,7 @@ class Merge(object):
                 if os.path.isfile(origfile) and os.path.isfile(backfile):
                     # the checksums are not used since the backup file can be edited
                     if misc.file_read(origfile) == misc.file_read(backfile):
-                        message.sub_debug('Original and backup are not different', origfile)
+                        message.sub_debug(_('Original and backup are not different'), origfile)
                         continue
                     self.merge(origfile, backfile)
 
