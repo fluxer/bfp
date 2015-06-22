@@ -100,11 +100,11 @@ blkid | while read line;do
     eval "$values"
     if [ -n "$UUID" ];then
         cmd mkdir -p /dev/disk/by-uuid
-        cmd ln -svf "$dev" "/dev/disk/by-uuid/$UUID"
+        cmd ln -sf "$dev" "/dev/disk/by-uuid/$UUID"
     fi
     if [ -n "$LABEL" ];then
         cmd mkdir -p /dev/disk/by-label
-        cmd ln -svf "$dev" "/dev/disk/by-label/$LABEL"
+        cmd ln -sf "$dev" "/dev/disk/by-label/$LABEL"
     fi
     unset UUID LABEL TYPE
 done
