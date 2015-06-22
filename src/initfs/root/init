@@ -94,17 +94,19 @@ msg "Loading modules..."
 find /sys -name modalias -type f -exec sort -u {} + | xargs modprobe -qba
 
 msg "Creating UUID/LABEL symlinks..."
-for line in $(blkid);do
-    case "$line" in
-        /dev/*) dev="${line//:/}" ;;
-        UUID=*) cmd mkdir -p /dev/disk/by-uuid
-                eval "$line"
-                cmd ln -sf "$dev" "/dev/disk/by-uuid/$UUID" ;;
-        LABEL=*) cmd mkdir -p /dev/disk/by-label
-                 eval "$line"
-                 cmd ln -sf "$dev" "/dev/disk/by-label/$LABEL" ;;
-    esac
-    unset UUID LABEL
+blkid | while read line;do
+    dev="${line%:*}"
+    values="${line#*:}"
+    eval "$values"
+    if [ -n "$UUID" ];then
+        cmd mkdir -p /dev/disk/by-uuid
+        cmd ln -svf "$dev" "/dev/disk/by-uuid/$UUID"
+    fi
+    if [ -n "$LABEL" ];then
+        cmd mkdir -p /dev/disk/by-label
+        cmd ln -svf "$dev" "/dev/disk/by-label/$LABEL"
+    fi
+    unset UUID LABEL TYPE
 done
 
 for hook in $hooks;do
