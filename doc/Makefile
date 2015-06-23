@@ -27,7 +27,7 @@ all: clean
 	$(SED) 's|@ARCH@|$(ARCH)|g' -i spm.conf.5
 	$(SED) 's|@JOBS@|$(JOBS)|g' -i spm.conf.5
 	for lib in ../src/libs/lib*.py ../src/spm/libspm.py; do \
-		$(PYDOC) -w $$lib; \
+		PYTHONPATH="$(TOPDIR)/src/libs" $(PYDOC) -w $$lib; \
 	done
 install:
 	$(INSTALL) -vdm755 $(DESTDIR)$(MANDIR)/man8/ \

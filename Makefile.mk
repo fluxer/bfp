@@ -23,7 +23,6 @@ JOBS = $(shell echo $$((`getconf _NPROCESSORS_CONF || echo 1`+1)))
 
 GIT = git
 BASH = bash
-PYTHON = python2
 PYTHON_VERSION = $(shell $(PYTHON) -c "import sys; print(sys.version[:3])")
 GREP = grep
 FIND = find
@@ -38,18 +37,40 @@ INSTALL = install -v
 RM = rm -vf
 CP = cp -vf
 XZ = xz -v
-GPG = gpg2
 NUITKA = $(PYTHON) $(TOPDIR)/nuitka/bin/nuitka --recurse-none \
 	--python-version=$(PYTHON_VERSION)
-CYTHON = cython --verbose
-PYLINT = pylint --rcfile=$(TOPDIR)/pylint.conf
 XGETTEXT = xgettext
 MSGMERGE = msgmerge
 MSGATTRIB = msgattrib
 MSGFMT = msgfmt
 POD2MAN = pod2man
-PYDOC = pydoc
 PYUIC = pyuic4
+
+ifneq ($(shell which python2.7),)
+	PYTHON = python2.7
+else
+	PYTHON = python2
+endif
+ifneq ($(shell which pydoc2),)
+	PYDOC = pydoc2
+else
+	PYDOC = pydoc
+endif
+ifneq ($(shell which cython2),)
+	CYTHON = cython2 --verbose
+else
+	CYTHON = cython --verbose
+endif
+ifneq ($(shell which pylint2),)
+	PYLINT = pylint2 --rcfile=$(TOPDIR)/pylint.conf
+else
+	PYLINT = pylint --rcfile=$(TOPDIR)/pylint.conf
+endif
+ifneq ($(shell which gpg2),)
+	GPG = gpg2
+else
+	GPG = gpg
+endif
 
 all:
 
