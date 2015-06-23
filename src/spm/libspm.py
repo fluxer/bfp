@@ -1331,11 +1331,17 @@ class Source(object):
     def merge(self):
         ''' Merget target to system '''
         message.sub_info(_('Indexing content'))
-        old_content = database.local_metadata(self.target_name, 'footprint') or []
         new_content = []
+        valid = False
         for sfile in misc.archive_list(self.target_tarball):
+            if sfile == self.target_metadata:
+                valid = True
             new_content.append('/%s' % sfile)
+        if not valid:
+            message.sub_critical(_('Invalid tarball'), self.target_tarball)
+            sys.exit(2)
         new_content.sort()
+        old_content = database.local_metadata(self.target_name, 'footprint') or []
         backup_content = database.local_metadata(self.target_name, 'backup') or {}
 
         if CONFLICTS:
