@@ -1516,14 +1516,10 @@ class Source(object):
             message.sub_info(_('Executing post_remove()'))
             misc.system_script(self.srcbuild, 'post_remove')
 
-        metadata = '%s/%s/metadata.json' % (LOCAL_DIR, self.target_name)
-        srcbuild = '%s/%s/SRCBUILD' % (LOCAL_DIR, self.target_name)
-        if os.path.isfile(metadata):
-            message.sub_info(_('Removing metadata'))
-            os.unlink(metadata)
-        if os.path.isfile(srcbuild):
-            message.sub_info(_('Removing SRCBUILD'))
-            os.unlink(srcbuild)
+
+        message.sub_info(_('Removing metadata and SRCBUILD'))
+        self.remove_target_file(self.target_metadata)
+        self.remove_target_file(self.target_srcbuild)
 
         if target_content:
             self.post_update_databases(target_content, 'remove')
