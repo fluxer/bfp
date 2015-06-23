@@ -49,4 +49,11 @@ class JDB(object):
                 os.unlink(self.dblock)
             time.sleep(self.dbwindow)
 
- 
+if __name__ == '__main__':
+    import random
+    db = JDB('/tmp/cache.json')
+    db.init()
+    while True:
+        data = db.read()
+        data[random.random()] = random.random()
+        db.write(data)
