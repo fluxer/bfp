@@ -76,6 +76,8 @@ class Misc(object):
         if fallback:
             # in the future, fallback will return program and let OSError be
             # raised at higher level, e.g. by subprocess
+            if chroot:
+                raise OSError('Program not found in PATH (%s)' % self.ROOT_DIR, program)
             raise OSError('Program not found in PATH', program)
 
     def getpass(self, sprompt='Password: '):
@@ -230,7 +232,7 @@ class Misc(object):
         ''' Write data to file safely
 
             the cool thing about this helper is that it does not dump files if
-            it fails to write the file when the mode is "a" (append) '''
+            it fails to write to it unless the mode is "a" (append) '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
             self.typecheck(content, (types.StringTypes))
@@ -842,9 +844,10 @@ class Misc(object):
         return False
 
     def archive_compress(self, lpaths, sfile, strip, ilevel=9):
-        ''' Create archive from list of files and/or directories, ilevel
-            is compression level integer between 0 and 9 that applies only to
-            tar, gzip and bzip2 archives '''
+        ''' Create archive from list of files and/or directories
+
+            ilevel is compression level integer between 0 and 9 that applies
+            only to Tar, gzip and Bzip2 archives '''
         if self.python2:
             self.typecheck(lpaths, (types.TupleType, types.ListType))
             self.typecheck(sfile, (types.StringTypes))
@@ -854,7 +857,8 @@ class Misc(object):
         self.dir_create(os.path.dirname(sfile))
 
         if sfile.endswith(('tar.bz2', '.tar.gz')):
-            tarf = tarfile.open(sfile, 'w:' + self.file_extension(sfile), compresslevel=ilevel)
+            tarf = tarfile.open(sfile, 'w:' + self.file_extension(sfile), \
+                compresslevel=ilevel)
             try:
                 for item in lpaths:
                     tarf.add(item, item.lstrip(strip))
@@ -1077,8 +1081,8 @@ class Misc(object):
             stmp = '%s/tmpscript' % self.ROOT_DIR
             shutil.copy(sfile, stmp)
             try:
-                self.system_chroot(('bash', '-e', '-c', \
-                    'source /tmpscript && %s' % function))
+                self.system_chroot((self.whereis('bash', chroot=True), '-e', \
+                    '-c', 'source /tmpscript && %s' % function))
             finally:
                 os.remove(stmp)
 
