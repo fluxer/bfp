@@ -88,7 +88,7 @@ class Check(object):
                     bang_regexp += ')(?:[^\\s]+)?)(?:.*\\s))'
                     fmatch = misc.file_search(bang_regexp, sfile, escape=False)
                     if fmatch:
-                        fmatch = fmatch[0].replace('#!', '').strip().split()[0]
+                        fmatch = fmatch[0][0].replace('#!', '').strip().split()[0]
                         required.append(fmatch)
 
             checked = []
@@ -195,9 +195,9 @@ class Dist(object):
                         misc.fetch(src_url, src_file, libspm.MIRRORS, 'distfiles/')
 
                 if libspm.VERIFY:
-                    for src_url in self.target_sources:
+                    for src_url in target_sources:
                         src_base = misc.url_normalize(src_url, True)
-                        src_file = '%s/%s' % (self.sources_dir, src_base)
+                        src_file = '%s/%s' % (self.directory, src_base)
                         if misc.gpg_findsig(src_file, False):
                             message.sub_debug(_('Verifying'), src_url)
                             misc.gpg_verify(src_file)
