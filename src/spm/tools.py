@@ -712,12 +712,12 @@ class Disowned(object):
         ltargetsfiles = []
         for target in database.local_all():
             ltargetsfiles.extend(database.local_metadata(target, 'footprint'))
-         if not self.plain:
-             message.sub_info(_('Searching for disowned files'))
-         for sfile in lhostfiles:
+        if not self.plain:
+            message.sub_info(_('Searching for disowned files'))
+        for sfile in lhostfiles:
             if not sfile in ltargetsfiles:
                 if self.plain:
-                     print(sfile)
+                    print(sfile)
                 else:
                     message.sub_info(_('Disowned file'), sfile)
 
