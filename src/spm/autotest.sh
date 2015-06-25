@@ -53,7 +53,7 @@ fi
 
 if ! grep -q "SPM REMOTE" "$statefile" ;then
     echo "=== RUNNING SPM REMOTE TEST ==="
-    "$1" "$curdir/spm.py" $spmargs remote -pnvrdDOmcskob zlib
+    "$1" "$curdir/spm.py" $spmargs remote -pnvrdDOmcskob ca-certificates
     echo "SPM REMOTE" >> "$statefile"
 else
     echo "=== SKIPPING SPM REMOTE TEST ==="
@@ -62,8 +62,7 @@ fi
 if ! grep -q "SPM SOURCE" "$statefile" ;then
     echo "=== RUNNING SPM SOURCE TEST ==="
     # --depends, --reverse and --remove are not tested!
-    "$1" "$curdir/spm.py" $spmargs source -Cfpckim zlib
-    "$1" "$curdir/spm.py" $spmargs source -a ca-certificates
+    "$1" "$curdir/spm.py" $spmargs source -Cfpckim ca-certificates
     echo "SPM SOURCE" >> "$statefile"
 else
     echo "=== SKIPPING SPM SOURCE TEST ==="
@@ -73,7 +72,7 @@ fi
 
 if ! grep -q "SPM LOCAL" "$statefile" ;then
     echo "=== RUNNING SPM LOCAL TEST ==="
-    "$1" "$curdir/spm.py" $spmargs local -pnvRdDOrsf zlib
+    "$1" "$curdir/spm.py" $spmargs local -pnvRdDOrsf ca-certificates
     echo "SPM LOCAL" >> "$statefile"
 else
     echo "=== SKIPPING SPM LOCAL TEST ==="
@@ -81,7 +80,7 @@ fi
 
 if ! grep -q "SPM WHO" "$statefile" ;then
     echo "=== RUNNING SPM WHO TEST ==="
-    "$1" "$curdir/spm.py" $spmargs who -p zlib
+    "$1" "$curdir/spm.py" $spmargs who -p ca-certificates
     echo "SPM WHO" >> "$statefile"
 else
     echo "=== SKIPPING SPM WHO TEST ==="
@@ -91,7 +90,7 @@ if [ "$uid" != "0" ];then
     echo "=== SKIPPING SPMT DIST TEST (REQUIRES ROOT) ==="
 elif ! grep -q "SPMT DIST" "$statefile" ;then
     echo "=== RUNNING SPMT DIST TEST (ROOT) ==="
-    "$1" "$curdir/tools.py" $spmtargs dist -scd "$rootdir" zlib
+    "$1" "$curdir/tools.py" $spmtargs dist -scd "$rootdir" ca-certificates
     echo "SPMT DIST" >> "$statefile"
 else
     echo "=== SKIPPING SPMT DIST TEST (ROOT) ==="
@@ -100,7 +99,7 @@ fi
 if ! grep -q "SPMT CHECK" "$statefile" ;then
     echo "=== RUNNING SPMT CHECK TEST ==="
     # --adjust, --depends and --reverse are not tested!
-    "$1" "$curdir/tools.py" $spmtargs check -f zlib
+    "$1" "$curdir/tools.py" $spmtargs check -f ca-certificates
     echo "SPMT CHECK" >> "$statefile"
 else
     echo "=== SKIPPING SPMT CHECK TEST ==="
@@ -116,7 +115,7 @@ fi
 
 if ! grep -q "SPMT LINT" "$statefile" ;then
     echo "=== RUNNING SPMT LINT TEST ==="
-    "$1" "$curdir/tools.py" $spmtargs lint -musdMfboepnkcD zlib
+    "$1" "$curdir/tools.py" $spmtargs lint -musdMfboepnkcD ca-certificates
     echo "SPMT LINT" >> "$statefile"
 else
     echo "=== SKIPPING SPMT LINT TEST ==="
@@ -124,7 +123,7 @@ fi
 
 if ! grep -q "SPMT SANE" "$statefile" ;then
     echo "=== RUNNING SPMT SANE TEST ==="
-    "$1" "$curdir/tools.py" $spmtargs sane -ednmNvtugs zlib
+    "$1" "$curdir/tools.py" $spmtargs sane -ednmNvtugs ca-certificates
     echo "SPMT SANE" >> "$statefile"
 else
     echo "=== SKIPPING SPMT SANE TEST ==="
@@ -134,7 +133,7 @@ fi
 
 if ! grep -q "SPMT WHICH" "$statefile" ;then
     echo "=== RUNNING SPMT WHICH TEST ==="
-    "$1" "$curdir/tools.py" $spmtargs which -cp zlib
+    "$1" "$curdir/tools.py" $spmtargs which -cp ca-certificates
     echo "SPMT WHICH" >> "$statefile"
 else
     echo "=== SKIPPING SPMT WHICH TEST ==="
@@ -142,11 +141,11 @@ fi
 
 if [ "$uid" != "0" ];then
     echo "=== SKIPPING SPMT PACK TEST (REQUIRES ROOT) ==="
-elif [ ! -d "/var/local/spm/zlib" ];then
-    echo "=== SKIPPING SPMT PACK TEST (ZLIB NOT INSTALLED) ==="
+elif [ ! -d "/var/local/spm/ca-certificates" ];then
+    echo "=== SKIPPING SPMT PACK TEST (CA-CERTIFICATES NOT INSTALLED) ==="
 elif ! grep -q "SPMT PACK" "$statefile" ;then
     echo "=== RUNNING SPMT PACK TEST ==="
-    "$1" "$curdir/tools.py" $spmtargs pack -d "$rootdir" zlib
+    "$1" "$curdir/tools.py" $spmtargs pack -d "$rootdir" ca-certificates
     echo "SPMT PACK" >> "$statefile"
 else
     echo "=== SKIPPING SPMT PACK TEST ==="
@@ -156,7 +155,7 @@ if ! "$1" "$curdir/tools.py" online -u 'https://crux.nu/ports/crux-3.1'; then
     echo "=== SKIPPING SPMT PKG TEST (REQUIRES ACCESS TO CRUX SERVER) ==="
 elif ! grep -q "SPMT PKG" "$statefile" ;then
     echo "=== RUNNING SPMT PKG TEST ==="
-    "$1" "$curdir/tools.py" $spmtargs pkg -d "$rootdir" zlib
+    "$1" "$curdir/tools.py" $spmtargs pkg -d "$rootdir" ca-certificates
     echo "SPMT PKG" >> "$statefile"
 else
     echo "=== SKIPPING SPMT PKG TEST ==="
@@ -192,21 +191,21 @@ else
     echo "=== SKIPPING SPMT UPGRADE TEST ==="
 fi
 
-if [ ! -d "/var/local/spm/zlib" ];then
-    echo "=== SKIPPING SPMT DIGEST TEST (ZLIB NOT INSTALLED) ==="
+if [ ! -d "/var/local/spm/ca-certificates" ];then
+    echo "=== SKIPPING SPMT DIGEST TEST (CA-CERTIFICATES NOT INSTALLED) ==="
 elif ! grep -q "SPMT DIGEST" "$statefile" ;then
     echo "=== RUNNING SPMT DIGEST TEST ==="
-    "$1" "$curdir/tools.py" $spmtargs digest -cvk zlib -d "$rootdir"
+    "$1" "$curdir/tools.py" $spmtargs digest -cvk ca-certificates -d "$rootdir"
     echo "SPMT DIGEST" >> "$statefile"
 else
     echo "=== SKIPPING SPMT DIGEST TEST ==="
 fi
 
-if [ ! -d "/var/local/spm/zlib" ];then
-    echo "=== SKIPPING SPMT PORTABLE TEST (ZLIB NOT INSTALLED) ==="
+if [ ! -d "/var/local/spm/ca-certificates" ];then
+    echo "=== SKIPPING SPMT PORTABLE TEST (CA-CERTIFICATES NOT INSTALLED) ==="
 elif ! grep -q "SPMT PORTABLE" "$statefile" ;then
     echo "=== RUNNING SPMT PORTABLE TEST ==="
-    "$1" "$curdir/tools.py" $spmtargs portable zlib -d "$rootdir"
+    "$1" "$curdir/tools.py" $spmtargs portable ca-certificates -d "$rootdir"
     echo "SPMT PORTABLE" >> "$statefile"
 else
     echo "=== SKIPPING SPMT PORTABLE TEST ==="
