@@ -709,12 +709,15 @@ class Disowned(object):
         if not self.plain:
             message.sub_info(_('Caching host files, this may take a while'))
         lhostfiles = misc.list_files(self.directory, self.cross)
-        if not self.plain:
-            message.sub_info(_('Searching for disowned files'))
-        for sfile in lhostfiles:
-            if not database.local_belongs(sfile, True):
-                if self.plain:
-                    print(sfile)
+        ltargetsfiles = []
+        for target in database.local_all():
+            ltargetsfiles.extend(database.local_metadata(target, 'footprint'))
+         if not self.plain:
+             message.sub_info(_('Searching for disowned files'))
+         for sfile in lhostfiles:
+            if not sfile in ltargetsfiles:
+                 if self.plain:
+                     print(sfile)
                 else:
                     message.sub_info(_('Disowned file'), sfile)
 
