@@ -716,7 +716,7 @@ class Disowned(object):
              message.sub_info(_('Searching for disowned files'))
          for sfile in lhostfiles:
             if not sfile in ltargetsfiles:
-                 if self.plain:
+                if self.plain:
                      print(sfile)
                 else:
                     message.sub_info(_('Disowned file'), sfile)
