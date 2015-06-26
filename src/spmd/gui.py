@@ -387,12 +387,12 @@ def Rebuild():
     rebuild = []
     for target in data:
         # cause... PyQt...
-        target = str(target)
+        starget = str(target)
         for opt in data[target]:
-            if not opt in database.local_metadata(target, 'optdepends') \
-                and not target in rebuild and database.local_search(target):
-                rebuild.extend(database.remote_mdepends(target))
-                rebuild.append(target)
+            if not opt in database.local_metadata(starget, 'optdepends') \
+                and not starget in rebuild and database.local_search(starget):
+                rebuild.extend(database.remote_mdepends(starget))
+                rebuild.append(starget)
     if not rebuild:
         MessageInfo('Nothing to do')
         return
