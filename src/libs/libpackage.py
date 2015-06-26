@@ -242,10 +242,13 @@ class Database(object):
         if key in ('depends', 'optdepends', 'backup', 'footprint'):
             return []
 
-    def local_uptodate(self, target):
+    def local_uptodate(self, target, checked=None):
         ''' Returns True if target is up-to-date and False otherwise '''
         if misc.python2:
             misc.typecheck(target, (types.StringTypes))
+
+        if checked is None:
+            checked = []
 
         # if remote target is passed and it's a directory not a base name
         # then the local target will be invalid and local_version will equal
@@ -269,8 +272,10 @@ class Database(object):
             for optional in local_optional:
                 if optional in self.OPTIONS.get(target, [optional]) \
                     or optional in self.OPTIONS.get(os.path.basename(target), [optional]):
-                    # FIXME: recursion bug
-                    if self.local_uptodate(optional) \
+                    if optional in checked:
+                        continue
+                    checked.append(optional)
+                    if self.local_uptodate(optional, checked) \
                         and not optional in local_optional:
                         return False
         return True
