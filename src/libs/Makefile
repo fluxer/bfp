@@ -10,6 +10,10 @@ all: clean
 	$(NUITKA) --module libpackage.py
 	$(NUITKA) --module libsystem.py
 	$(NUITKA) --module libudev.py
+	$(CC) -shared _libudev.c \
+		$(shell $(PYTHON)-config --includes --libs) \
+		$(shell pkg-config --cflags --libs libudev) \
+		-o _libudev.so
 	$(STRIP) *.so
 
 cython: clean
@@ -19,7 +23,7 @@ cython: clean
 	$(CC) -shared libmisc.c $(shell $(PYTHON)-config --includes --libs) -o libmisc.so
 	$(CC) -shared libpackage.c $(shell $(PYTHON)-config --includes --libs) -o libpackage.so
 	$(CC) -shared libsystem.c $(shell $(PYTHON)-config --includes --libs) -o libsystem.so
-	# NOTE: _libudev will not work
+	# _libudev WILL NOT WORK!
 	$(CC) -shared _libudev.c \
 		$(shell $(PYTHON)-config --includes --libs) \
 		$(shell pkg-config --cflags --libs libudev) \

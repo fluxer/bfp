@@ -7,13 +7,13 @@ depend() {
 start() {
     ebegin "Starting Source Package Manager daemon"
     start-stop-daemon --start --quiet \
-        --exec /usr/sbin/spmd
+        --background --exec /usr/sbin/spmd
     eend $?
 }
 
 stop() {
     ebegin "Stopping Source Package Manager daemon"
     start-stop-daemon --stop --quiet \
-        --background --exec /usr/sbin/spmd
+        --exec /usr/sbin/spmd
     eend $?
 }
