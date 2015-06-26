@@ -20,6 +20,7 @@ MAIN_CONF = '/etc/spm.conf'
 REPOSITORIES_CONF = '/etc/spm/repositories.conf'
 MIRRORS_CONF = '/etc/spm/mirrors.conf'
 KEYSERVERS_CONF = '/etc/spm/keyservers.conf'
+OPTIONS_CONF = '/etc/spm/options.conf'
 DEFAULTS = {
     'CACHE_DIR': '/var/cache/spm',
     'BUILD_DIR': '/var/tmp/spm',
@@ -58,46 +59,47 @@ DEFAULTS = {
 if not os.path.isfile(MAIN_CONF):
     message.warning(_('Configuration file does not exist'), MAIN_CONF)
 
-conf = configparser.SafeConfigParser(DEFAULTS)
-conf.read(MAIN_CONF)
+mainconf = configparser.SafeConfigParser(DEFAULTS)
+mainconf.read(MAIN_CONF)
 # section are hardcore-required, to avoid failures on get() add them to the
-# conf object but do notice that changes are not written to config on purpose
+# mainconf object but do notice that changes are not written to config on
+# purpose
 for section in ('spm', 'fetch', 'compile', 'install', 'merge'):
-    if not conf.has_section(section):
-        conf.add_section(section)
+    if not mainconf.has_section(section):
+        mainconf.add_section(section)
 
-CACHE_DIR = conf.get('spm', 'CACHE_DIR')
-BUILD_DIR = conf.get('spm', 'BUILD_DIR')
-ROOT_DIR = conf.get('spm', 'ROOT_DIR')
+CACHE_DIR = mainconf.get('spm', 'CACHE_DIR')
+BUILD_DIR = mainconf.get('spm', 'BUILD_DIR')
+ROOT_DIR = mainconf.get('spm', 'ROOT_DIR')
 LOCAL_DIR = ROOT_DIR + 'var/local/spm'
-GPG_DIR = conf.get('spm', 'GPG_DIR')
-IGNORE = conf.get('spm', 'IGNORE').split(' ')
-SIGN = conf.get('spm', 'SIGN')
-NOTIFY = conf.getboolean('spm', 'NOTIFY')
-OFFLINE = conf.getboolean('fetch', 'OFFLINE')
-MIRROR = conf.getboolean('fetch', 'MIRROR')
-TIMEOUT = conf.getint('fetch', 'TIMEOUT')
-VERIFY = conf.getboolean('fetch', 'VERIFY')
-CHOST = conf.get('compile', 'CHOST')
-CFLAGS = conf.get('compile', 'CFLAGS')
-CXXFLAGS = conf.get('compile', 'CXXFLAGS')
-CPPFLAGS = conf.get('compile', 'CPPFLAGS')
-LDFLAGS = conf.get('compile', 'LDFLAGS')
-MAKEFLAGS = conf.get('compile', 'MAKEFLAGS')
-PURGE_PATHS = conf.get('install', 'PURGE_PATHS')
-COMPRESS_MAN = conf.getboolean('install', 'COMPRESS_MAN')
-SPLIT_DEBUG = conf.getboolean('install', 'SPLIT_DEBUG')
-STRIP_BINARIES = conf.getboolean('install', 'STRIP_BINARIES')
-STRIP_SHARED = conf.getboolean('install', 'STRIP_SHARED')
-STRIP_STATIC = conf.getboolean('install', 'STRIP_STATIC')
-STRIP_RPATH = conf.getboolean('install', 'STRIP_RPATH')
-COMPRESS_BIN = conf.getboolean('install', 'COMPRESS_BIN')
-PYTHON_COMPILE = conf.getboolean('install', 'PYTHON_COMPILE')
-IGNORE_MISSING = conf.getboolean('install', 'IGNORE_MISSING')
-CONFLICTS = conf.getboolean('merge', 'CONFLICTS')
-BACKUP = conf.getboolean('merge', 'BACKUP')
-SCRIPTS = conf.getboolean('merge', 'SCRIPTS')
-TRIGGERS = conf.getboolean('merge', 'TRIGGERS')
+GPG_DIR = mainconf.get('spm', 'GPG_DIR')
+IGNORE = mainconf.get('spm', 'IGNORE').split(' ')
+SIGN = mainconf.get('spm', 'SIGN')
+NOTIFY = mainconf.getboolean('spm', 'NOTIFY')
+OFFLINE = mainconf.getboolean('fetch', 'OFFLINE')
+MIRROR = mainconf.getboolean('fetch', 'MIRROR')
+TIMEOUT = mainconf.getint('fetch', 'TIMEOUT')
+VERIFY = mainconf.getboolean('fetch', 'VERIFY')
+CHOST = mainconf.get('compile', 'CHOST')
+CFLAGS = mainconf.get('compile', 'CFLAGS')
+CXXFLAGS = mainconf.get('compile', 'CXXFLAGS')
+CPPFLAGS = mainconf.get('compile', 'CPPFLAGS')
+LDFLAGS = mainconf.get('compile', 'LDFLAGS')
+MAKEFLAGS = mainconf.get('compile', 'MAKEFLAGS')
+PURGE_PATHS = mainconf.get('install', 'PURGE_PATHS')
+COMPRESS_MAN = mainconf.getboolean('install', 'COMPRESS_MAN')
+SPLIT_DEBUG = mainconf.getboolean('install', 'SPLIT_DEBUG')
+STRIP_BINARIES = mainconf.getboolean('install', 'STRIP_BINARIES')
+STRIP_SHARED = mainconf.getboolean('install', 'STRIP_SHARED')
+STRIP_STATIC = mainconf.getboolean('install', 'STRIP_STATIC')
+STRIP_RPATH = mainconf.getboolean('install', 'STRIP_RPATH')
+COMPRESS_BIN = mainconf.getboolean('install', 'COMPRESS_BIN')
+PYTHON_COMPILE = mainconf.getboolean('install', 'PYTHON_COMPILE')
+IGNORE_MISSING = mainconf.getboolean('install', 'IGNORE_MISSING')
+CONFLICTS = mainconf.getboolean('merge', 'CONFLICTS')
+BACKUP = mainconf.getboolean('merge', 'BACKUP')
+SCRIPTS = mainconf.getboolean('merge', 'SCRIPTS')
+TRIGGERS = mainconf.getboolean('merge', 'TRIGGERS')
 
 # parse repositories configuration file
 if not os.path.isfile(REPOSITORIES_CONF):
@@ -143,6 +145,17 @@ else:
         message.critical(_('PGP keys servers configuration file is empty'))
         sys.exit(2)
 
+# parse optdepends configuration file
+if not os.path.isfile(OPTIONS_CONF):
+    message.warning(_('Options configuration file does not exist'), \
+        OPTIONS_CONF)
+    OPTIONS = {}
+else:
+    OPTIONS = {}
+    data = misc.file_readsmart(OPTIONS_CONF, bverysmart=True)
+    for var in data:
+        OPTIONS[var] = data[var]
+
 # override module variables from configuration
 message.CATCH = CATCH
 misc.CATCH = CATCH
@@ -154,6 +167,7 @@ database.ROOT_DIR = ROOT_DIR
 database.CACHE_DIR = CACHE_DIR
 database.LOCAL_DIR = LOCAL_DIR
 database.IGNORE = IGNORE
+database.OPTIONS = OPTIONS
 database.NOTIFY = NOTIFY
 
 class Local(object):
@@ -184,6 +198,7 @@ class Local(object):
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
         database.IGNORE = IGNORE
+        database.OPTIONS = OPTIONS
         database.NOTIFY = NOTIFY
 
     def main(self):
@@ -297,6 +312,7 @@ class Remote(object):
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
         database.IGNORE = IGNORE
+        database.OPTIONS = OPTIONS
         database.NOTIFY = NOTIFY
 
     def main(self):
@@ -417,6 +433,7 @@ class Repo(object):
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
         database.IGNORE = IGNORE
+        database.OPTIONS = OPTIONS
         database.NOTIFY = NOTIFY
 
     def clean(self):
@@ -554,6 +571,7 @@ class Source(object):
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
         database.IGNORE = IGNORE
+        database.OPTIONS = OPTIONS
         database.NOTIFY = NOTIFY
 
     def autosource(self, targets, automake=False, autoremove=False):
@@ -1747,6 +1765,7 @@ class Binary(Source):
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
         database.IGNORE = IGNORE
+        database.OPTIONS = OPTIONS
         database.NOTIFY = NOTIFY
 
     def autobinary(self, targets, automake=False, autoremove=False):
@@ -1900,6 +1919,7 @@ class Who(object):
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
         database.IGNORE = IGNORE
+        database.OPTIONS = OPTIONS
         database.NOTIFY = NOTIFY
 
     def main(self):

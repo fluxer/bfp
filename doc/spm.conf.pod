@@ -255,6 +255,8 @@ IGNORE = glibc zlib bash
 
 /etc/spm/keyservers.conf
 
+/etc/spm/options.conf
+
 =head1 AUTHORS
 
 Ivailo Monev (a.k.a. SmiL3y) <xakepa10@gmail.com>

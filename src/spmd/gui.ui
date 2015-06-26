@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>706</width>
-    <height>463</height>
+    <height>505</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -25,11 +25,13 @@
     <item row="0" column="1">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>0</number>
+       <number>3</number>
       </property>
       <widget class="QWidget" name="software">
        <attribute name="icon">
-        <iconset theme="package-x-generic"/>
+        <iconset theme="package-x-generic">
+         <normaloff/>
+        </iconset>
        </attribute>
        <attribute name="title">
         <string>Software</string>
@@ -37,21 +39,31 @@
        <layout class="QGridLayout" name="gridLayout_2">
         <item row="2" column="2">
          <widget class="QPushButton" name="UpdateButton">
+          <property name="toolTip">
+           <string>Update the system, uses binary tarballs</string>
+          </property>
           <property name="text">
            <string>Update</string>
           </property>
           <property name="icon">
-           <iconset theme="system-software-update"/>
+           <iconset theme="system-software-update">
+            <normaloff/>
+           </iconset>
           </property>
          </widget>
         </item>
         <item row="2" column="1">
          <widget class="QPushButton" name="SyncButton">
+          <property name="toolTip">
+           <string>Sync the software repositories with the providers</string>
+          </property>
           <property name="text">
            <string>Sync</string>
           </property>
           <property name="icon">
-           <iconset theme="system-reboot"/>
+           <iconset theme="system-reboot">
+            <normaloff/>
+           </iconset>
           </property>
          </widget>
         </item>
@@ -64,27 +76,39 @@
            <string>Details</string>
           </property>
           <property name="icon">
-           <iconset theme="dialog-information"/>
+           <iconset theme="dialog-information">
+            <normaloff/>
+           </iconset>
           </property>
          </widget>
         </item>
         <item row="2" column="4">
          <widget class="QPushButton" name="InstallButton">
+          <property name="toolTip">
+           <string>Install the selected targets from pre-build tarballs</string>
+          </property>
           <property name="text">
            <string>Install</string>
           </property>
           <property name="icon">
-           <iconset theme="system-run"/>
+           <iconset theme="system-run">
+            <normaloff/>
+           </iconset>
           </property>
          </widget>
         </item>
         <item row="2" column="3">
          <widget class="QPushButton" name="BuildButton">
+          <property name="toolTip">
+           <string>Build the selected targets from source code</string>
+          </property>
           <property name="text">
            <string>Build</string>
           </property>
           <property name="icon">
-           <iconset theme="applications-development"/>
+           <iconset theme="applications-development">
+            <normaloff/>
+           </iconset>
           </property>
          </widget>
         </item>
@@ -93,11 +117,16 @@
           <property name="enabled">
            <bool>false</bool>
           </property>
+          <property name="toolTip">
+           <string>Remove the selected targets from the system along with everything that depends on it</string>
+          </property>
           <property name="text">
            <string>Remove</string>
           </property>
           <property name="icon">
-           <iconset theme="list-remove"/>
+           <iconset theme="list-remove">
+            <normaloff/>
+           </iconset>
           </property>
          </widget>
         </item>
@@ -188,7 +217,9 @@
       </widget>
       <widget class="QWidget" name="repositories">
        <attribute name="icon">
-        <iconset theme="repository"/>
+        <iconset theme="repository">
+         <normaloff/>
+        </iconset>
        </attribute>
        <attribute name="title">
         <string>Repositories</string>
@@ -196,11 +227,16 @@
        <layout class="QGridLayout" name="gridLayout_3">
         <item row="1" column="1">
          <widget class="QPushButton" name="RepoSaveButton">
+          <property name="toolTip">
+           <string>Make the changes permanent by saving them to the respective configuration file</string>
+          </property>
           <property name="text">
            <string>Save</string>
           </property>
           <property name="icon">
-           <iconset theme="document-save"/>
+           <iconset theme="document-save">
+            <normaloff/>
+           </iconset>
           </property>
          </widget>
         </item>
@@ -239,7 +275,9 @@
            <string>Add</string>
           </property>
           <property name="icon">
-           <iconset theme="list-add"/>
+           <iconset theme="list-add">
+            <normaloff/>
+           </iconset>
           </property>
          </widget>
         </item>
@@ -265,7 +303,9 @@
            <string>Move down</string>
           </property>
           <property name="icon">
-           <iconset theme="arrow-down"/>
+           <iconset theme="arrow-down">
+            <normaloff/>
+           </iconset>
           </property>
          </widget>
         </item>
@@ -291,7 +331,9 @@
            <string>Move up</string>
           </property>
           <property name="icon">
-           <iconset theme="arrow-up"/>
+           <iconset theme="arrow-up">
+            <normaloff/>
+           </iconset>
           </property>
          </widget>
         </item>
@@ -304,7 +346,9 @@
            <string>Remove</string>
           </property>
           <property name="icon">
-           <iconset theme="list-remove"/>
+           <iconset theme="list-remove">
+            <normaloff/>
+           </iconset>
           </property>
          </widget>
         </item>
@@ -312,7 +356,9 @@
       </widget>
       <widget class="QWidget" name="mirrors">
        <attribute name="icon">
-        <iconset theme="folder-remote"/>
+        <iconset theme="folder-remote">
+         <normaloff/>
+        </iconset>
        </attribute>
        <attribute name="title">
         <string>Mirrors</string>
@@ -324,7 +370,9 @@
            <string>Add</string>
           </property>
           <property name="icon">
-           <iconset theme="list-add"/>
+           <iconset theme="list-add">
+            <normaloff/>
+           </iconset>
           </property>
          </widget>
         </item>
@@ -363,7 +411,9 @@
            <string>Move up</string>
           </property>
           <property name="icon">
-           <iconset theme="arrow-up"/>
+           <iconset theme="arrow-up">
+            <normaloff/>
+           </iconset>
           </property>
          </widget>
         </item>
@@ -376,7 +426,9 @@
            <string>Move down</string>
           </property>
           <property name="icon">
-           <iconset theme="arrow-down"/>
+           <iconset theme="arrow-down">
+            <normaloff/>
+           </iconset>
           </property>
          </widget>
         </item>
@@ -411,11 +463,16 @@
         </item>
         <item row="1" column="1">
          <widget class="QPushButton" name="MirrorSaveButton">
+          <property name="toolTip">
+           <string>Make the changes permanent by saving them to the respective configuration file</string>
+          </property>
           <property name="text">
            <string>Save</string>
           </property>
           <property name="icon">
-           <iconset theme="document-save"/>
+           <iconset theme="document-save">
+            <normaloff/>
+           </iconset>
           </property>
          </widget>
         </item>
@@ -428,7 +485,89 @@
            <string>Remove</string>
           </property>
           <property name="icon">
-           <iconset theme="list-remove"/>
+           <iconset theme="list-remove">
+            <normaloff/>
+           </iconset>
+          </property>
+         </widget>
+        </item>
+       </layout>
+      </widget>
+      <widget class="QWidget" name="tab">
+       <attribute name="icon">
+        <iconset theme="configure">
+         <normaloff/>
+        </iconset>
+       </attribute>
+       <attribute name="title">
+        <string>Options</string>
+       </attribute>
+       <layout class="QGridLayout" name="gridLayout_8">
+        <item row="1" column="1">
+         <widget class="QPushButton" name="OptSaveButton">
+          <property name="text">
+           <string>Save</string>
+          </property>
+          <property name="icon">
+           <iconset theme="document-save">
+            <normaloff/>
+           </iconset>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="0">
+         <spacer name="horizontalSpacer_9">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="1" column="3">
+         <spacer name="horizontalSpacer_10">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+        <item row="0" column="0" colspan="4">
+         <widget class="QTreeWidget" name="OptionsTree">
+          <property name="sortingEnabled">
+           <bool>true</bool>
+          </property>
+          <attribute name="headerStretchLastSection">
+           <bool>true</bool>
+          </attribute>
+          <column>
+           <property name="text">
+            <string>Name</string>
+           </property>
+          </column>
+          <column>
+           <property name="text">
+            <string>Description</string>
+           </property>
+          </column>
+         </widget>
+        </item>
+        <item row="1" column="2">
+         <widget class="QPushButton" name="OptApplyButton">
+          <property name="text">
+           <string>Apply</string>
+          </property>
+          <property name="icon">
+           <iconset theme="applications-development"/>
           </property>
          </widget>
         </item>
@@ -436,7 +575,9 @@
       </widget>
       <widget class="QWidget" name="preferences">
        <attribute name="icon">
-        <iconset theme="preferences-system"/>
+        <iconset theme="preferences-system">
+         <normaloff/>
+        </iconset>
        </attribute>
        <attribute name="title">
         <string>Preferences</string>
@@ -444,11 +585,16 @@
        <layout class="QGridLayout" name="gridLayout_4">
         <item row="8" column="1">
          <widget class="QPushButton" name="PrefSaveButton">
+          <property name="toolTip">
+           <string>Make the changes permanent by saving them to the respective configuration file</string>
+          </property>
           <property name="text">
            <string>Save</string>
           </property>
           <property name="icon">
-           <iconset theme="document-save"/>
+           <iconset theme="document-save">
+            <normaloff/>
+           </iconset>
           </property>
          </widget>
         </item>
@@ -568,7 +714,7 @@ disable it unless you know what you are doing!</string>
            <item row="4" column="0">
             <widget class="QCheckBox" name="BackupBox">
              <property name="toolTip">
-              <string>Set whether to backup files whne merging targets, it
+              <string>Set whether to backup files when merging targets, it
 is recommended to keep it enabled to preserve user
 changes as a backup of the original when needed</string>
              </property>
@@ -600,7 +746,7 @@ you know what you are doing!</string>
             <widget class="QCheckBox" name="ConflictsBox">
              <property name="toolTip">
               <string>Set whether to check for conflicts in targets when
-merging them, do not disable unless it you know what
+merging them, do not disable unless you know what
 you are doing!</string>
              </property>
              <property name="text">

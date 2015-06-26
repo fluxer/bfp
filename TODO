@@ -11,7 +11,6 @@
  * Implement triggers like feature into libspm for execution code upon every
    method call
  * Implement support for --root in spm-tools
- * Implement support for overriding optdepends per target to control features
 
 ## SPMD/SPM-GUI ##
  * Complete all tasks noted with FIXME/TODO

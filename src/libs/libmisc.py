@@ -215,17 +215,26 @@ class Misc(object):
             rfile.close()
         return self.string_encode(content)
 
-    def file_readsmart(self, sfile):
+    def file_readsmart(self, sfile, bverysmart=False):
         ''' Get file content, split by new line, as list ignoring blank and comments '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
 
-        content = []
+        if bverysmart:
+            content = {}
+        else:
+            content = []
         for line in self.file_readlines(sfile):
             line = self.string_encode(line.strip())
             if not line or line.startswith('#'):
                 continue
-            content.append(line)
+            if bverysmart:
+                garbage = line.split('=')
+                if len(garbage) < 2:
+                    raise(Exception('Variable in %s has no value' % sfile, garbage[0]))
+                content[garbage[0]] = garbage[1]
+            else:
+                content.append(line)
         return content
 
     def file_write(self, sfile, content, mode='w'):
