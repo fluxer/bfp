@@ -28,10 +28,10 @@ install_nvidia() {
 # uninstall nVidia binary blob driver
 remove_nvidia() {
     if [ -d "/var/local/spm/nvidia" ];then
-        # since the package partitially replaces mesalib it gets detected as
-        # runtime dependency instead of mesalib, ignoring the reverse
-        # dependencies because the original libGL and friends will be restored
-        # from the post-remove action
+        # since the package partitially replaces xorg-server it gets detected
+        # as runtime dependency instead of it, ignoring the reverse
+        # dependencies because the original libglx.so and friends will be
+        # restored from the post-remove action
         spm --ignore="$(spm local -pr nvidia)" binary -r nvidia
     fi
 }
@@ -50,10 +50,10 @@ install_amd() {
 # uninstall AMD binary blob driver
 remove_amd() {
     if [ -d "/var/local/spm/amd-catalyst" ];then
-        # since the package partitially replaces mesalib it gets detected as
-        # runtime dependency instead of mesalib, ignoring the reverse
-        # dependencies because the original libGL and friends will be restored
-        # from the post-remove action
+        # since the package partitially replaces xorg-server it gets detected
+        # as runtime dependency instead of it, ignoring the reverse
+        # dependencies because the original libglx.so and friends will be
+        # restored from the post-remove action
         spm --ignore="$(spm local -pr amd-catalyst)" binary -r amd-catalyst
     fi
 }
