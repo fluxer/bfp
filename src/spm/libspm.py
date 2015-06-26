@@ -154,7 +154,7 @@ else:
     OPTIONS = {}
     data = misc.file_readsmart(OPTIONS_CONF, bverysmart=True)
     for var in data:
-        OPTIONS[var] = data[var]
+        OPTIONS[var.strip()] = data[var].split()
 
 # override module variables from configuration
 message.CATCH = CATCH
