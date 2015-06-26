@@ -386,6 +386,8 @@ def Rebuild():
     data = CollectOptions()
     rebuild = []
     for target in data:
+        # cause... PyQt...
+        target = str(target)
         for opt in data[target]:
             if not opt in database.local_metadata(target, 'optdepends') \
                 and not target in rebuild and database.local_search(target):

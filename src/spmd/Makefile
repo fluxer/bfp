@@ -1,6 +1,6 @@
 include ../../Makefile.mk
 
-all: bump clean
+nuitka: bump clean
 	$(SED) -e 's|@BINDIR@|$(BINDIR)|' -e 's|@VERSION@|$(VERSION)|' \
 		spm-gui.desktop.in > spm-gui.desktop
 	$(SED) -e 's|@BINDIR@|$(BINDIR)|' -e 's|@VERSION@|$(VERSION)|' \
@@ -31,7 +31,7 @@ cython: clean bump
 	$(CC) gui.c $(shell $(PYTHON)-config --includes --libs) -o gui.exe
 	$(STRIP) *.exe
 
-cold: clean bump
+all: clean bump
 	$(SED) -e 's|@BINDIR@|$(BINDIR)|' -e 's|@VERSION@|$(VERSION)|' \
 		spm-gui.desktop.in > spm-gui.desktop
 	$(SED) -e 's|@BINDIR@|$(BINDIR)|' -e 's|@VERSION@|$(VERSION)|' \
@@ -39,8 +39,6 @@ cold: clean bump
 	$(SED) -e 's|@SBINDIR@|$(SBINDIR)|' \
 		com.spm.Daemon.service.in > com.spm.Daemon.service
 	$(PYUIC) gui.ui -o gui_ui.py
-	$(NUITKA) daemon.py
-	$(NUITKA) client.py
 	$(STRIP) *.exe
 	# REQUIRES INSTALLED LIBS!
 	$(PYTHON) ../cold/cold.py ./gui.py ./gui_ui.py -o ./gui.exe
@@ -49,8 +47,8 @@ install:
 	$(INSTALL) -dm755 $(DESTDIR)$(SBINDIR) $(DESTDIR)$(BINDIR) \
 		$(DESTDIR)$(DBSYSTEMDIR)/ $(DESTDIR)$(DBSERVICEDIR)/ \
 		$(DESTDIR)$(APPLICATIONSDIR)/ $(DESTDIR)$(AUTOSTARTDIR)/
-	$(INSTALL) -m755 daemon.exe $(DESTDIR)$(SBINDIR)/spmd
-	$(INSTALL) -m755 client.exe $(DESTDIR)$(BINDIR)/spmctl
+	$(INSTALL) -m755 daemon.py $(DESTDIR)$(SBINDIR)/spmd
+	$(INSTALL) -m755 client.py $(DESTDIR)$(BINDIR)/spmctl
 	$(INSTALL) -m755 gui.exe $(DESTDIR)$(BINDIR)/spm-gui
 	$(INSTALL) -m644 *.conf $(DESTDIR)$(DBSYSTEMDIR)/
 	$(INSTALL) -m644 *.service $(DESTDIR)$(DBSERVICEDIR)/
