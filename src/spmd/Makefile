@@ -54,7 +54,7 @@ install:
 	$(INSTALL) -m644 *.service $(DESTDIR)$(DBSERVICEDIR)/
 	$(INSTALL) -m644 spm-gui.desktop $(DESTDIR)$(APPLICATIONSDIR)/
 	$(INSTALL) -m644 spm-autostart.desktop $(DESTDIR)$(AUTOSTARTDIR)/
-	$(INSTALL) -m644 spmd.init $(DESTDIR)$(INITDIR)/spmd
+	$(INSTALL) -m744 spmd.init $(DESTDIR)$(INITDIR)/spmd
 
 uninstall:
 	$(RM) $(DESTDIR)$(SBINDIR)/spmd
