@@ -303,7 +303,7 @@ def RefreshOptions():
         for opt in options[target]:
             item2 = QtGui.QTreeWidgetItem(1)
             item2.setText(0, opt)
-            item2.setText(1, database.remote_metadata(opt, 'description'))
+            item2.setText(1, database.remote_metadata(opt, 'description') or '')
             item2.setCheckState(0, options[target][opt])
             item1.addChild(item2)
         ui.OptionsTree.insertTopLevelItem(irow, item1)
@@ -577,8 +577,15 @@ def ChangeSettings():
         EnableWidgets()
 
 def ChangeOptions():
-    data = CollectOptions()
-    call = iface.asyncCallWithArgumentList('OptionsSet', data)
+    data = ''
+    optdata = CollectOptions()
+    for target in optdata:
+        options = '\n%s = ' % target
+        for opt in optdata[target]:
+            if bool(optdata[target][opt]) == True:
+                options += ' %s' % opt
+        data += '%s ' % options
+    call = iface.asyncCall('OptionsSet', data)
     iface.CheckCall(call)
     reload(libspm)
 

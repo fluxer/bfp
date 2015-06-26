@@ -78,7 +78,7 @@ class Interface(QtDBus.QDBusInterface):
         value = reply.value()
         if not value:
             return
-        msg = str(value.toString())
+        msg = str(value)
         if not msg == 'Success':
             MessageCritical(msg)
 
@@ -581,8 +581,15 @@ def ChangeSettings():
         EnableWidgets()
 
 def ChangeOptions():
-    data = CollectOptions()
-    call = iface.asyncCallWithArgumentList('OptionsSet', data)
+    data = ''
+    optdata = CollectOptions()
+    for target in optdata:
+        options = '\n%s = ' % target
+        for opt in optdata[target]:
+            if bool(optdata[target][opt]) == True:
+                options += ' %s' % opt
+        data += '%s ' % options
+    call = iface.asyncCall('OptionsSet', data)
     iface.CheckCall(call)
     reload(libspm)
 
