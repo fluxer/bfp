@@ -39,7 +39,6 @@ all: clean bump
 	$(SED) -e 's|@SBINDIR@|$(SBINDIR)|' \
 		com.spm.Daemon.service.in > com.spm.Daemon.service
 	$(PYUIC) gui.ui -o gui_ui.py
-	$(STRIP) *.exe
 	# REQUIRES INSTALLED LIBS!
 	$(PYTHON) ../cold/cold.py ./gui.py ./gui_ui.py -o ./gui.exe
 
