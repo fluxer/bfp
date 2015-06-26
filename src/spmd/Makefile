@@ -64,6 +64,7 @@ uninstall:
 	$(RM) $(DESTDIR)$(DBSERVICEDIR)/com.spm.Daemon.service
 	$(RM) $(DESTDIR)$(APPLICATIONSDIR)/spm-gui.desktop
 	$(RM) $(DESTDIR)$(AUTOSTARTDIR)/spm-autostart.desktop
+	$(RM) $(DESTDIR)$(INITDIR)/ahws
 
 clean:
 	$(RM) -r *.build/ *.so *.exe __pycache__ *.c *_ui.py *.desktop *.service

@@ -1,0 +1,19 @@
+#!/sbin/runscript
+
+depend() {
+    use dns net
+}
+
+start() {
+    ebegin "Starting Automatic Hardware Setup daemon"
+    start-stop-daemon --start --quiet \
+        --exec /usr/sbin/ahws
+    eend $?
+}
+
+stop() {
+    ebegin "Stopping Automatic Hardware Setup daemon"
+    start-stop-daemon --stop --quiet \
+        --background --exec /usr/sbin/ahws
+    eend $?
+}

@@ -10,12 +10,15 @@ cython: clean bump
 	$(STRIP) *.exe
 
 install:
-	$(INSTALL) -dm755 $(DESTDIR)$(SBINDIR) $(DESTDIR)/etc/
+	$(INSTALL) -dm755 $(DESTDIR)$(SBINDIR) $(DESTDIR)/etc/ \
+		$(DESTDIR)$(INITDIR)/
 	$(INSTALL) -m755 ahws.exe $(DESTDIR)$(SBINDIR)/ahws
 	$(CP) -r ahws.d/ $(DESTDIR)/etc/
+	$(INSTALL) -m744 ahws.init $(DESTDIR)$(INITDIR)/ahws
 
 uninstall:
 	$(RM) $(DESTDIR)$(SBINDIR)/ahws
+	$(RM) $(DESTDIR)$(INITDIR)/ahws
 	$(RM) $(DESTDIR)/etc/ahws.d
 
 clean:
