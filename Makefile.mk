@@ -10,12 +10,13 @@ SHAREDIR = $(PREFIX)/share
 MANDIR = $(SHAREDIR)/man
 DOCDIR = $(SHAREDIR)/doc
 SITEDIR = $(shell $(PYTHON) -c "import site; print(site.getsitepackages()[0])")
-BASHCOMPLETIONDIR = /etc/bash_completion.d/
+BASHCOMPLETIONDIR = /etc/bash_completion.d
 LOCALEDIR = $(SHAREDIR)/locale
 DBSYSTEMDIR = /etc/dbus-1/system.d/
-DBSERVICEDIR = $(SHAREDIR)/dbus-1/system-services/
+DBSERVICEDIR = $(SHAREDIR)/dbus-1/system-services
 APPLICATIONSDIR = $(SHAREDIR)/applications
 AUTOSTARTDIR = /etc/xdg/autostart
+INITDIR = /etc/init.d
 
 MACHINE = $(shell $(CC) -dumpmachine)
 ARCH = $(shell uname -m | $(SED) 's|_|-|')

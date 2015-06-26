@@ -45,7 +45,8 @@ all: clean bump
 install:
 	$(INSTALL) -dm755 $(DESTDIR)$(SBINDIR) $(DESTDIR)$(BINDIR) \
 		$(DESTDIR)$(DBSYSTEMDIR)/ $(DESTDIR)$(DBSERVICEDIR)/ \
-		$(DESTDIR)$(APPLICATIONSDIR)/ $(DESTDIR)$(AUTOSTARTDIR)/
+		$(DESTDIR)$(APPLICATIONSDIR)/ $(DESTDIR)$(AUTOSTARTDIR)/ \
+		$(DESTDIR)$(INITDIR)/
 	$(INSTALL) -m755 daemon.py $(DESTDIR)$(SBINDIR)/spmd
 	$(INSTALL) -m755 client.py $(DESTDIR)$(BINDIR)/spmctl
 	$(INSTALL) -m755 gui.exe $(DESTDIR)$(BINDIR)/spm-gui
@@ -53,6 +54,7 @@ install:
 	$(INSTALL) -m644 *.service $(DESTDIR)$(DBSERVICEDIR)/
 	$(INSTALL) -m644 spm-gui.desktop $(DESTDIR)$(APPLICATIONSDIR)/
 	$(INSTALL) -m644 spm-autostart.desktop $(DESTDIR)$(AUTOSTARTDIR)/
+	$(INSTALL) -m644 spmd.init $(DESTDIR)$(INITDIR)/spmd
 
 uninstall:
 	$(RM) $(DESTDIR)$(SBINDIR)/spmd
