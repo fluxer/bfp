@@ -266,6 +266,8 @@ class Database(object):
             return False
         else:
             for optional in local_optional:
+                if optional in checked:
+                    continue
                 checked.append(optional)
                 if self.local_uptodate(optional, checked) \
                     and not optional in local_optional:
