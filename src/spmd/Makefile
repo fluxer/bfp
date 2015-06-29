@@ -1,6 +1,6 @@
 include ../../Makefile.mk
 
-nuitka: bump clean
+all: clean bump
 	$(SED) -e 's|@BINDIR@|$(BINDIR)|' -e 's|@VERSION@|$(VERSION)|' \
 		spm-gui.desktop.in > spm-gui.desktop
 	$(SED) -e 's|@BINDIR@|$(BINDIR)|' -e 's|@VERSION@|$(VERSION)|' \
@@ -8,11 +8,8 @@ nuitka: bump clean
 	$(SED) -e 's|@SBINDIR@|$(SBINDIR)|' \
 		com.spm.Daemon.service.in > com.spm.Daemon.service
 	$(PYUIC) gui.ui -o gui_ui.py
-	# THE GUI WILL NOT WORK!
-	$(NUITKA) daemon.py
-	$(NUITKA) client.py
-	$(NUITKA) --recurse-to=gui_ui gui.py
-	$(STRIP) *.exe
+	# REQUIRES INSTALLED LIBS!
+	$(PYTHON) ../cold/cold.py ./gui.py ./gui_ui.py -o ./gui.exe
 
 cython: clean bump
 	$(SED) -e 's|@BINDIR@|$(BINDIR)|' -e 's|@VERSION@|$(VERSION)|' \
@@ -31,16 +28,9 @@ cython: clean bump
 	$(CC) gui.c $(shell $(PYTHON)-config --includes --libs) -o gui.exe
 	$(STRIP) *.exe
 
-all: clean bump
-	$(SED) -e 's|@BINDIR@|$(BINDIR)|' -e 's|@VERSION@|$(VERSION)|' \
-		spm-gui.desktop.in > spm-gui.desktop
-	$(SED) -e 's|@BINDIR@|$(BINDIR)|' -e 's|@VERSION@|$(VERSION)|' \
-		spm-autostart.desktop.in > spm-autostart.desktop
-	$(SED) -e 's|@SBINDIR@|$(SBINDIR)|' \
-		com.spm.Daemon.service.in > com.spm.Daemon.service
-	$(PYUIC) gui.ui -o gui_ui.py
-	# REQUIRES INSTALLED LIBS!
-	$(PYTHON) ../cold/cold.py ./gui.py ./gui_ui.py -o ./gui.exe
+clean:
+	$(RM) -r *.build/ *.so *.exe __pycache__ *.c *_ui.py *.desktop *.service
+	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
 install:
 	$(INSTALL) -dm755 $(DESTDIR)$(SBINDIR) $(DESTDIR)$(BINDIR) \
@@ -66,11 +56,7 @@ uninstall:
 	$(RM) $(DESTDIR)$(AUTOSTARTDIR)/spm-autostart.desktop
 	$(RM) $(DESTDIR)$(INITDIR)/ahws
 
-clean:
-	$(RM) -r *.build/ *.so *.exe __pycache__ *.c *_ui.py *.desktop *.service
-	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
-
 bump:
 	$(SED) 's|^app_version.*|app_version = "$(VERSION) ($(GIT_VERSION))"|' -i client.py
 
-.PHONY: all check install uninstall clean bump
+.PHONY: all cython check install uninstall clean bump

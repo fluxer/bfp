@@ -1,22 +1,6 @@
 include ../../Makefile.mk
 
-.py:
-	$(NUITKA) --module $<
-
 all: clean
-	$(NUITKA) --module libarchive.py
-	$(NUITKA) --module libmessage.py
-	$(NUITKA) --module libmisc.py
-	$(NUITKA) --module libpackage.py
-	$(NUITKA) --module libsystem.py
-	$(NUITKA) --module libudev.py
-	$(CC) -shared _libudev.c \
-		$(shell $(PYTHON)-config --includes --libs) \
-		$(shell pkg-config --cflags --libs libudev) \
-		-o _libudev.so
-	$(STRIP) *.so
-
-cython: clean
 	$(CYTHON) libarchive.py libmessage.py libmisc.py libpackage.py libsystem.py libudev.py
 	$(CC) -shared libarchive.c $(shell $(PYTHON)-config --includes --libs) -o libarchive.so
 	$(CC) -shared libmessage.c $(shell $(PYTHON)-config --includes --libs) -o libmessage.so
@@ -50,5 +34,4 @@ clean:
 	$(RM) -r *.build/ *.so __pycache__ lib*.c
 	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
-.SUFFIXES: .py
-.PHONY: all cython check install uninstall clean
+.PHONY: all check install uninstall clean

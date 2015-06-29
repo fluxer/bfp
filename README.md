@@ -34,20 +34,9 @@ all required features.
 
 ## Building and installing
 
-The build system supports two type of builds - with Cython and with Nuitka.
-By default Nuitka is used, it translates the Python files into C/C++ code and
-it builds that into modules/executables. It can be significantly slower,
-especially if LLVM's clang/clang++ is used. To avoid slow build times or
-requirement of C++ compiler Cython can be used.
-
-If you want to build with Cython instead of Nuitka then use the cython target:
-
-```
-make cython
-sudo make install
-```
-
-else:
+The build system requires Cython, it translates the Python files into C code
+and from which shared modules and binaries are build. To build and install all
+sub-projects all you have to do is issue the following command:
 
 ```
 make

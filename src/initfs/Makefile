@@ -1,14 +1,6 @@
 include ../../Makefile.mk
 
-.py:
-	$(NUITKA) $<
-
 all: clean bump
-	$(NUITKA) mkinitfs.py
-	$(NUITKA) lsinitfs.py
-	$(STRIP) *.exe
-
-cython: clean bump
 	$(CYTHON) --embed mkinitfs.py
 	$(CYTHON) --embed lsinitfs.py
 	$(CC) mkinitfs.c $(shell $(PYTHON)-config --includes --libs) -o mkinitfs.exe
@@ -35,5 +27,4 @@ clean:
 bump:
 	$(SED) 's|^app_version.*|app_version = "$(VERSION) ($(GIT_VERSION))"|' -i lsinitfs.py mkinitfs.py
 
-.SUFFIXES: .py
-.PHONY: all cython install uninstall clean bump
+.PHONY: all install uninstall clean bump

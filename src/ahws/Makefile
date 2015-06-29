@@ -1,10 +1,6 @@
 include ../../Makefile.mk
 
 all: clean bump
-	$(NUITKA) ahws.py
-	$(STRIP) *.exe
-
-cython: clean bump
 	$(CYTHON) --embed ahws.py
 	$(CC) ahws.c $(shell $(PYTHON)-config --includes --libs $(PYTHON)) -o ahws.exe
 	$(STRIP) *.exe
@@ -27,4 +23,5 @@ clean:
 
 bump:
 	$(SED) 's|^app_version.*|app_version = "$(VERSION) ($(GIT_VERSION))"|' -i ahws.py
-.PHONY: all cython install uninstall clean
+
+.PHONY: all install uninstall clean
