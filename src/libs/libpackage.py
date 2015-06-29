@@ -30,7 +30,6 @@ class Database(object):
         self.LOCAL_DIR = self.ROOT_DIR + 'var/local/spm'
         self.LOCAL_CACHE = {}
         self.IGNORE = []
-        self.OPTIONS = {}
         self.NOTIFY = True
 
     def _build_local_cache(self):
@@ -180,10 +179,7 @@ class Database(object):
         if mdepends:
             build_depends.extend(self.remote_metadata(target, 'makedepends'))
         if odepends:
-            for optional in self.remote_metadata(target, 'optdepends'):
-                if optional in self.OPTIONS.get(target, [optional]) \
-                    or optional in self.OPTIONS.get(os.path.basename(target), [optional]):
-                    build_depends.append(optional)
+            build_depends.append(self.remote_metadata(target, 'optdepends'))
         if cdepends:
             build_depends.extend(self.remote_metadata(target, 'checkdepends'))
 
@@ -270,14 +266,10 @@ class Database(object):
             return False
         else:
             for optional in local_optional:
-                if optional in self.OPTIONS.get(target, [optional]) \
-                    or optional in self.OPTIONS.get(os.path.basename(target), [optional]):
-                    if optional in checked:
-                        continue
-                    checked.append(optional)
-                    if self.local_uptodate(optional, checked) \
-                        and not optional in local_optional:
-                        return False
+                checked.append(optional)
+                if self.local_uptodate(optional, checked) \
+                    and not optional in local_optional:
+                    return False
         return True
 
     def remote_metadata(self, target, key):

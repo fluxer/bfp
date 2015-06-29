@@ -25,7 +25,7 @@
     <item row="0" column="1">
      <widget class="QTabWidget" name="tabWidget">
       <property name="currentIndex">
-       <number>3</number>
+       <number>0</number>
       </property>
       <widget class="QWidget" name="software">
        <attribute name="icon">
@@ -503,46 +503,11 @@
         <string>Options</string>
        </attribute>
        <layout class="QGridLayout" name="gridLayout_8">
-        <item row="1" column="1">
-         <widget class="QPushButton" name="OptSaveButton">
-          <property name="text">
-           <string>Save</string>
-          </property>
-          <property name="icon">
-           <iconset theme="document-save">
-            <normaloff/>
-           </iconset>
-          </property>
-         </widget>
-        </item>
-        <item row="1" column="0">
-         <spacer name="horizontalSpacer_9">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="1" column="3">
-         <spacer name="horizontalSpacer_10">
-          <property name="orientation">
-           <enum>Qt::Horizontal</enum>
-          </property>
-          <property name="sizeHint" stdset="0">
-           <size>
-            <width>40</width>
-            <height>20</height>
-           </size>
-          </property>
-         </spacer>
-        </item>
-        <item row="0" column="0" colspan="4">
+        <item row="0" column="0" colspan="2">
          <widget class="QTreeWidget" name="OptionsTree">
+          <property name="editTriggers">
+           <set>QAbstractItemView::NoEditTriggers</set>
+          </property>
           <property name="sortingEnabled">
            <bool>true</bool>
           </property>
@@ -559,16 +524,6 @@
             <string>Description</string>
            </property>
           </column>
-         </widget>
-        </item>
-        <item row="1" column="2">
-         <widget class="QPushButton" name="OptApplyButton">
-          <property name="text">
-           <string>Apply</string>
-          </property>
-          <property name="icon">
-           <iconset theme="applications-development"/>
-          </property>
          </widget>
         </item>
        </layout>

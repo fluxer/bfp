@@ -359,15 +359,14 @@ def Update():
     DisableWidgets()
     iface.asyncCall('Update')
 
-def Build(targets=None):
-    if not targets:
-        targets = []
-        for item in ui.SearchTable.selectedIndexes():
-            target = str(ui.SearchTable.item(item.row(), 0).text())
-            if target in targets:
-                continue
-            targets.extend(database.remote_mdepends(target))
-            targets.append(target)
+def Build():
+    targets = []
+    for item in ui.SearchTable.selectedIndexes():
+        target = str(ui.SearchTable.item(item.row(), 0).text())
+        if target in targets:
+            continue
+        targets.extend(database.remote_mdepends(target))
+        targets.append(target)
     answer = MessageQuestion('The following targets will be build:\n\n', \
         misc.string_convert(targets), \
         '\n\nAre you sure you want to continue?')
@@ -375,30 +374,6 @@ def Build(targets=None):
         return
     DisableWidgets()
     iface.asyncCall('Build', targets)
-
-def CollectOptions():
-    data = {}
-    for count in range(ui.OptionsTree.topLevelItemCount()):
-        item = ui.OptionsTree.topLevelItem(count)
-        data[item.text(0)] = {}
-        for subcount in range(item.childCount()):
-            subitem = item.child(subcount)
-            data[item.text(0)][subitem.text(0)] = subitem.checkState(0)
-    return data
-
-def Rebuild():
-    data = CollectOptions()
-    rebuild = []
-    for target in data:
-        for opt in data[target]:
-            if not opt in database.local_metadata(target, 'optdepends') \
-                and not target in rebuild and database.local_search(target):
-                rebuild.extend(database.remote_mdepends(target))
-                rebuild.append(target)
-    if not rebuild:
-        MessageInfo('Nothing to do')
-        return
-    Build(rebuild)
 
 def Install():
     targets = []
@@ -580,19 +555,6 @@ def ChangeSettings():
         # TODO: should the daemon emit finished?
         EnableWidgets()
 
-def ChangeOptions():
-    data = ''
-    optdata = CollectOptions()
-    for target in optdata:
-        options = '\n%s = ' % target
-        for opt in optdata[target]:
-            if bool(optdata[target][opt]) == True:
-                options += ' %s' % opt
-        data += '%s ' % options
-    call = iface.asyncCall('OptionsSet', data)
-    iface.CheckCall(call)
-    reload(libspm)
-
 ui.SearchTable.horizontalHeader().setSectionResizeMode(0, QtWidgets.QHeaderView.ResizeToContents)
 ui.SearchTable.horizontalHeader().setSectionResizeMode(1, QtWidgets.QHeaderView.Stretch)
 ui.SyncButton.clicked.connect(Sync)
@@ -620,9 +582,6 @@ ui.MirrorsTable.itemSelectionChanged.connect(RefreshWidgets)
 
 ui.PrefSaveButton.clicked.connect(ChangeSettings)
 ui.UpdateTimeBox.currentIndexChanged.connect(RefreshWidgets)
-
-ui.OptSaveButton.clicked.connect(ChangeOptions)
-ui.OptApplyButton.clicked.connect(Rebuild)
 
 ui.ProgressBar.setRange(0, 1)
 ui.ProgressBar.hide()

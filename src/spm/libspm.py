@@ -20,7 +20,6 @@ MAIN_CONF = '/etc/spm.conf'
 REPOSITORIES_CONF = '/etc/spm/repositories.conf'
 MIRRORS_CONF = '/etc/spm/mirrors.conf'
 KEYSERVERS_CONF = '/etc/spm/keyservers.conf'
-OPTIONS_CONF = '/etc/spm/options.conf'
 DEFAULTS = {
     'CACHE_DIR': '/var/cache/spm',
     'BUILD_DIR': '/var/tmp/spm',
@@ -145,17 +144,6 @@ else:
         message.critical(_('PGP keys servers configuration file is empty'))
         sys.exit(2)
 
-# parse optdepends configuration file
-if not os.path.isfile(OPTIONS_CONF):
-    message.warning(_('Options configuration file does not exist'), \
-        OPTIONS_CONF)
-    OPTIONS = {}
-else:
-    OPTIONS = {}
-    data = misc.file_readsmart(OPTIONS_CONF, bverysmart=True)
-    for var in data:
-        OPTIONS[var.strip()] = data[var].split()
-
 # override module variables from configuration
 message.CATCH = CATCH
 misc.CATCH = CATCH
@@ -167,7 +155,6 @@ database.ROOT_DIR = ROOT_DIR
 database.CACHE_DIR = CACHE_DIR
 database.LOCAL_DIR = LOCAL_DIR
 database.IGNORE = IGNORE
-database.OPTIONS = OPTIONS
 database.NOTIFY = NOTIFY
 
 class Local(object):
@@ -198,7 +185,6 @@ class Local(object):
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
         database.IGNORE = IGNORE
-        database.OPTIONS = OPTIONS
         database.NOTIFY = NOTIFY
 
     def main(self):
@@ -312,7 +298,6 @@ class Remote(object):
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
         database.IGNORE = IGNORE
-        database.OPTIONS = OPTIONS
         database.NOTIFY = NOTIFY
 
     def main(self):
@@ -433,7 +418,6 @@ class Repo(object):
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
         database.IGNORE = IGNORE
-        database.OPTIONS = OPTIONS
         database.NOTIFY = NOTIFY
 
     def clean(self):
@@ -571,7 +555,6 @@ class Source(object):
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
         database.IGNORE = IGNORE
-        database.OPTIONS = OPTIONS
         database.NOTIFY = NOTIFY
 
     def autosource(self, targets, automake=False, autoremove=False):
@@ -1765,7 +1748,6 @@ class Binary(Source):
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
         database.IGNORE = IGNORE
-        database.OPTIONS = OPTIONS
         database.NOTIFY = NOTIFY
 
     def autobinary(self, targets, automake=False, autoremove=False):
@@ -1919,7 +1901,6 @@ class Who(object):
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
         database.IGNORE = IGNORE
-        database.OPTIONS = OPTIONS
         database.NOTIFY = NOTIFY
 
     def main(self):

@@ -156,20 +156,6 @@ class SPMD(dbus.service.Object):
         self.Configs()
         return 'Success'
 
-    @dbus.service.method('com.spm.Daemon', in_signature='s', \
-        out_signature='s')
-    def OptionsSet(self, data):
-        ''' Set optdepends preferences '''
-        message.info('Options config change requested')
-        try:
-            misc.file_write(libspm.OPTIONS_CONF, data)
-            reload(libspm)
-        except Exception as detail:
-            message.critical(str(detail))
-            return str(detail)
-        self.Configs()
-        return 'Success'
-
     @dbus.service.method('com.spm.Daemon', in_signature='b', \
         out_signature='v')
     def RemoteAll(self, basename=False):
