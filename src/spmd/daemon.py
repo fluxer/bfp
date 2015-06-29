@@ -101,12 +101,10 @@ class SPMD(dbus.service.Object):
         ''' Set spm config variable to value '''
         message.info('Main config change requested')
         try:
-            conf = configparser.SafeConfigParser()
-            conf.read(libspm.MAIN_CONF)
-            conf.set(section, variable, value)
-            libspmconf = open(libspm.MAIN_CONF, 'wb')
+            libspm.mainconf.set(section, variable, value)
+            libspm.mainconf = open(libspm.MAIN_CONF, 'wb')
             try:
-                conf.write(libspmconf)
+                libspm.mainconf.write(libspmconf)
             finally:
                 libspmconf.close()
             reload(libspm)
