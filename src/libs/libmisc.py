@@ -1098,7 +1098,7 @@ class Misc(object):
     def system_trigger(self, command, shell=False):
         ''' Execute trigger
 
-            that's a shortcur for a conditional chroot command depending
+            that's a shortcut for a conditional chroot command depending
             on self.ROOT_DIR '''
         if self.python2:
             self.typecheck(command, (types.StringType, types.TupleType, types.ListType))

@@ -26,7 +26,7 @@ class Block(object):
         if variant.startswith('/dev'):
             # /dev -> UUID
             uuid = self.info(variant, 'UUID')
-            if misc.file_search(uuid, '/proc/mounts'):
+            if uuid and misc.file_search(uuid, '/proc/mounts'):
                 return uuid
         # UUID -> /dev
         uuid = '/dev/disk/by-uuid/%s' % variant
