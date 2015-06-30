@@ -13,8 +13,7 @@ message.DEBUG = True
 misc = libspm.misc
 misc.CATCH = True
 database = libspm.database
-remote_notify = libmisc.Inotify()
-local_notify = libmisc.Inotify()
+watcher_notify = libmisc.Inotify()
 slave_notify = libmisc.Inotify()
 
 app = QtCore.QCoreApplication(sys.argv)
@@ -305,37 +304,7 @@ class SPMD(dbus.service.Object):
             message.critical(str(detail))
             self.Finished(str(detail))
 
-    def LocalWatcher(self):
-        ''' Installed software watcher '''
-        try:
-            message.info('Enetering local watch loop')
-            if os.path.isdir(database.LOCAL_DIR):
-                # FIXME: be more selective
-                for sdir in misc.list_dirs(database.LOCAL_DIR):
-                    local_notify.watch_add(sdir)
-            else:
-                message.warning('Local directory non-existent', database.LOCAL_DIR)
-            while True:
-                for wd, mask, cookie, name in local_notify.event_read():
-                    for watch in local_notify.watched:
-                        desc = local_notify.watched[watch]
-                        if desc == wd:
-                            path = watch
-                            break
-                    if not path:
-                        message.critical('Watch descriptor not found! Error, error, err...')
-                        continue
-                    if mask == local_notify.DELETE:
-                        self.Uninstalled(path)
-                    elif mask == local_notify.CREATE:
-                        self.Installed(path)
-                time.sleep(1)
-        except Exception as detail:
-            message.critical(str(detail))
-        finally:
-            pass
-
-    def RemoteWatcher(self):
+    def Watcher(self):
         ''' Repositories watcher '''
         try:
             message.info('Enetering remote watch loop')
@@ -344,23 +313,37 @@ class SPMD(dbus.service.Object):
                 for sdir in misc.list_dirs(reposdir):
                     if '/.git' in sdir:
                         continue
-                    remote_notify.watch_add(sdir)
+                    watcher_notify.watch_add(sdir)
             else:
                 message.warning('Remote directory non-existent', reposdir)
+            if os.path.isdir(database.LOCAL_DIR):
+                # FIXME: be more selective
+                for sdir in misc.list_dirs(database.LOCAL_DIR):
+                    watcher_notify.watch_add(sdir)
+            else:
+                message.warning('Local directory non-existent', database.LOCAL_DIR)
             while True:
-                for wd, mask, cookie, name in remote_notify.event_read():
-                    for watch in remote_notify.watched:
-                        desc = remote_notify.watched[watch]
+                for wd, mask, cookie, name in watcher_notify.event_read():
+                    for watch in watcher_notify.watched:
+                        desc = watcher_notify.watched[watch]
                         if desc == wd:
                             path = watch
                             break
                     if not path:
                         message.critical('Watch descriptor not found! Error, error, err...')
                         continue
-                    if mask == remote_notify.DELETE:
-                        self.Removed(path)
-                    elif mask == remote_notify.CREATE:
-                        self.Added(path)
+                    if path.startswith(database.CACHE_DIR):
+                        if mask == watcher_notify.DELETE:
+                            self.Removed(path)
+                        elif mask == watcher_notify.CREATE:
+                            self.Added(path)
+                    elif path.startswith(database.LOCAL_DIR):
+                        if mask == watcher_notify.DELETE:
+                            self.Uninstalled(path)
+                        elif mask == watcher_notify.CREATE:
+                            self.Installed(path)
+                    else:
+                        message.sub_warning('Unexpected path', path)
                 time.sleep(1)
         except Exception as detail:
             message.critical(str(detail))
@@ -443,11 +426,9 @@ try:
         sys.exit(1)
 
     object = SPMD(systembus)
-    lthread = threading.Thread(target=object.LocalWatcher)
-    rthread = threading.Thread(target=object.RemoteWatcher)
+    wthread = threading.Thread(target=object.Watcher)
     sthread = threading.Thread(target=object.Slave)
-    lthread.start()
-    rthread.start()
+    wthread.start()
     sthread.start()
     name = dbus.service.BusName('com.spm.Daemon', systembus)
     message.info('Pumping up your system')
