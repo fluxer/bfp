@@ -1,7 +1,6 @@
 #!/usr/bin/python2
 
-import sys, os, time, threading, dbus, dbus.service, dbus.mainloop.qt
-from PyQt4 import QtCore
+import sys, os, time, threading, dbus, dbus.service
 if sys.version < '3':
     import ConfigParser as configparser
 else:
@@ -16,8 +15,18 @@ database = libspm.database
 watcher_notify = libmisc.Inotify()
 slave_notify = libmisc.Inotify()
 
-app = QtCore.QCoreApplication(sys.argv)
-dbus.mainloop.qt.DBusQtMainLoop(set_as_default=True)
+mainloop = None
+try:
+    import dbus.mainloop.glib, gobject
+    dbus.mainloop.glib.DBusGMainLoop(set_as_default=True)
+    mainloop = 'glib'
+except ImportError:
+    import dbus.mainloop.qt
+    from PyQt4 import QtCore
+    app = QtCore.QCoreApplication(sys.argv)
+    dbus.mainloop.qt.DBusQtMainLoop(set_as_default=True)
+    mainloop = 'qt'
+
 systembus = dbus.SystemBus()
 
 class SPMD(dbus.service.Object):
@@ -432,7 +441,11 @@ try:
     sthread.start()
     name = dbus.service.BusName('com.spm.Daemon', systembus)
     message.info('Pumping up your system')
-    sys.exit(app.exec_())
+    if mainloop == 'glib':
+        loop = gobject.MainLoop()
+        loop.run()
+    elif mainloop == 'qt':
+        sys.exit(app.exec_())
 except KeyboardInterrupt:
     message.critical('Keyboard interrupt')
 finally:
