@@ -1012,6 +1012,10 @@ try:
             full_path = os.path.abspath(values) + '/'
             libspm.ROOT_DIR = full_path
             libspm.LOCAL_DIR = full_path + 'var/local/spm'
+            misc.ROOT_DIR = libspm.ROOT_DIR
+            database.ROOT_DIR = libspm.ROOT_DIR
+            database.CACHE_DIR = libspm.CACHE_DIR
+            database.LOCAL_DIR = libspm.LOCAL_DIR
             setattr(namespace, self.dest, values)
 
     class OverrideDebug(argparse.Action):
