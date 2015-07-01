@@ -1230,6 +1230,7 @@ try:
 
     elif ARGS.mode == 'check':
         message.info(_('Runtime information'))
+        message.sub_info(_('ROOT_DIR'), libspm.ROOT_DIR)
         message.sub_info(_('FAST'), ARGS.fast)
         message.sub_info(_('DEPENDS'), ARGS.depends)
         message.sub_info(_('REVERSE'), ARGS.reverse)
@@ -1319,6 +1320,8 @@ try:
         m.main()
 
     elif ARGS.mode == 'merge':
+        message.info(_('Runtime information'))
+        message.sub_info(_('ROOT_DIR'), libspm.ROOT_DIR)
         message.info(_('Poking locals...'))
         m = Merge()
         m.main()

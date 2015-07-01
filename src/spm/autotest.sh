@@ -26,6 +26,12 @@ case "$1" in
        exit 1 ;;
 esac
 
+expectedfailure() {
+    if [ "$?" != "$1" ];then
+        exit $?
+    fi
+}
+
 # to ensure that no stray files from previous run are left
 make -C "$curdir" clean
 mkdir -pv "$rootdir"
@@ -99,7 +105,7 @@ fi
 if ! grep -q "SPMT CHECK" "$statefile" ;then
     echo "=== RUNNING SPMT CHECK TEST ==="
     # --adjust, --depends and --reverse are not tested!
-    "$1" "$curdir/tools.py" $spmtargs check -f ca-certificates
+    "$1" "$curdir/tools.py" $spmtargs check -f ca-certificates || expectedfailure 2
     echo "SPMT CHECK" >> "$statefile"
 else
     echo "=== SKIPPING SPMT CHECK TEST ==="
