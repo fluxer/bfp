@@ -1260,8 +1260,10 @@ class Magic(object):
 
     def get(self, path):
         ''' Get MIME type of path '''
-        if isinstance(path, unicode):
+        if not isinstance(path, str):
             path = path.encode('utf-8')
+        if misc.python3:
+            path = bytes(path, 'utf-8')
         result = self._magic_file(self.cookie, path)
         if not result or result == -1:
             # libmagic 5.09 has a bug where it might fail to identify the

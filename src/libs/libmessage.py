@@ -71,9 +71,9 @@ class Message(object):
                 status = syslog.LOG_DEBUG
             else:
                 raise Exception('Invalid log status', status)
-            if not isinstance(msg, (str, unicode)):
+            if isinstance(msg, (list, tuple)):
                 msg = str(msg)
-            if isinstance(msg, unicode):
+            if not isinstance(msg, str):
                 msg = msg.encode('utf-8')
             syslog.syslog(status, msg)
 
