@@ -71,7 +71,11 @@ class Message(object):
                 status = syslog.LOG_DEBUG
             else:
                 raise Exception('Invalid log status', status)
-            syslog.syslog(status, str(msg))
+            if not isinstance(msg, (str, unicode)):
+                msg = str(msg)
+            if isinstance(msg, unicode):
+                msg = msg.encode('utf-8')
+            syslog.syslog(status, msg)
 
     def info(self, msg, marker=None):
         ''' Print message with information status '''
