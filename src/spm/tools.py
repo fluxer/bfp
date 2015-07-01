@@ -263,6 +263,7 @@ class Lint(object):
         for target in database.local_all(basename=True):
             if target in self.targets:
                 message.sub_info(_('Checking'), target)
+                # FIXME: support different root directory
                 target_footprint_lines = database.local_metadata(target, 'footprint')
                 target_footprint = '\n'.join(target_footprint_lines)
 
@@ -603,6 +604,7 @@ class Pack(object):
                     os.path.basename(target), target_version)
                 target_depends = '%s.depends' % target_packfile
 
+                # FIXME: support different root directory
                 content = database.local_metadata(target, 'footprint')
                 # add metadata directory, it is not listed in the footprint
                 content.append('%s/%s' % (libspm.LOCAL_DIR, target))
@@ -955,6 +957,7 @@ class Portable(object):
                 target_packfile = '%s/%s_%s.tar.bz2' % (self.directory, \
                     os.path.basename(target), target_version)
 
+                # FIXME: support different root directory
                 content = database.local_metadata(target, 'footprint')
                 for dep in database.local_metadata(target, 'depends'):
                     message.sub_debug(_('Augmenting'), dep)
@@ -1002,6 +1005,14 @@ class Portable(object):
 
 try:
     EUID = os.geteuid()
+
+    class OverrideRootDir(argparse.Action):
+        ''' Override system root directory '''
+        def __call__(self, parser, namespace, values, option_string=None):
+            full_path = os.path.abspath(values) + '/'
+            libspm.ROOT_DIR = full_path
+            libspm.LOCAL_DIR = full_path + 'var/local/spm'
+            setattr(namespace, self.dest, values)
 
     class OverrideDebug(argparse.Action):
         ''' Override printing of debug messages '''
@@ -1180,6 +1191,8 @@ try:
         portable_parser.add_argument('TARGETS', nargs='+', type=str, \
             help=_('Targets to apply actions on'))
 
+    parser.add_argument('--root', type=str, action=OverrideRootDir, \
+        help=_('Change system root directory'))
     parser.add_argument('--debug', nargs=0, action=OverrideDebug, \
         help=_('Enable debug messages'))
     parser.add_argument('--version', action='version', \

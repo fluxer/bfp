@@ -17,7 +17,7 @@ cachedir="$rootdir/cache"
 builddir="$rootdir/build"
 gpgdir="$rootdir/gpg"
 spmargs="--root $rootdir --cache $cachedir --build $builddir --gpg $gpgdir --missing=True --notify=True --scripts=False --debug"
-spmtargs="--debug"
+spmtargs="--root $rootdir --debug"
 statefile="$rootdir/testrun-$1"
 
 case "$1" in
@@ -141,7 +141,7 @@ fi
 
 if [ "$uid" != "0" ];then
     echo "=== SKIPPING SPMT PACK TEST (REQUIRES ROOT) ==="
-elif [ ! -d "/var/local/spm/ca-certificates" ];then
+elif [ ! -d "$rootdir/var/local/spm/ca-certificates" ];then
     echo "=== SKIPPING SPMT PACK TEST (CA-CERTIFICATES NOT INSTALLED) ==="
 elif ! grep -q "SPMT PACK" "$statefile" ;then
     echo "=== RUNNING SPMT PACK TEST ==="
@@ -191,7 +191,7 @@ else
     echo "=== SKIPPING SPMT UPGRADE TEST ==="
 fi
 
-if [ ! -d "/var/local/spm/ca-certificates" ];then
+if [ ! -d "$rootdir/var/local/spm/ca-certificates" ];then
     echo "=== SKIPPING SPMT DIGEST TEST (CA-CERTIFICATES NOT INSTALLED) ==="
 elif ! grep -q "SPMT DIGEST" "$statefile" ;then
     echo "=== RUNNING SPMT DIGEST TEST ==="
@@ -201,7 +201,7 @@ else
     echo "=== SKIPPING SPMT DIGEST TEST ==="
 fi
 
-if [ ! -d "/var/local/spm/ca-certificates" ];then
+if [ ! -d "$rootdir/var/local/spm/ca-certificates" ];then
     echo "=== SKIPPING SPMT PORTABLE TEST (CA-CERTIFICATES NOT INSTALLED) ==="
 elif ! grep -q "SPMT PORTABLE" "$statefile" ;then
     echo "=== RUNNING SPMT PORTABLE TEST ==="
