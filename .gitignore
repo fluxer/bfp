@@ -1,7 +1,6 @@
 *.pyc
 *.pyo
 __pycache__
-*.c
 *.pot
 
 *.8

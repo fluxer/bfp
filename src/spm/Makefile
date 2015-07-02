@@ -1,13 +1,16 @@
 include ../../Makefile.mk
 
-all: clean bump
-	$(CYTHON) libspm.py
-	$(CYTHON) --embed spm.py
-	$(CYTHON) --embed tools.py
+all: clean
 	$(CC) -shared libspm.c $(shell $(PYTHON)-config --includes --libs) -o libspm.so
 	$(CC) spm.c $(shell $(PYTHON)-config --includes --libs) -o spm.exe
 	$(CC) tools.c $(shell $(PYTHON)-config --includes --libs) -o tools.exe
 	$(STRIP) *.exe *.so
+
+sources: bump
+	$(RM) *.c
+	$(CYTHON) libspm.py
+	$(CYTHON) --embed spm.py
+	$(CYTHON) --embed tools.py
 
 check:
 	$(BASH) ./autotest.sh $(PYTHON)
@@ -36,7 +39,7 @@ uninstall:
 	$(RM) -r $(DESTDIR)/etc/spm/ $(DESTDIR)/etc/spm.conf
 
 clean:
-	$(RM) -r *.build/ *.so *.exe __pycache__ spm.pot po/*/*.mo po/*/*.mo~ *.c root-*
+	$(RM) -r *.build/ *.so *.exe __pycache__ spm.pot po/*/*.mo po/*/*.mo~ root-*
 	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
 bump:
@@ -48,4 +51,4 @@ bump:
 		$(MSGFMT) po/$$trans/spm.po --output-file=po/$$trans/spm.mo; \
 	done
 
-.PHONY: all check install uninstall clean bump
+.PHONY: all sources check install uninstall clean bump

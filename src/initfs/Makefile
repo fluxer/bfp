@@ -1,11 +1,14 @@
 include ../../Makefile.mk
 
-all: clean bump
-	$(CYTHON) --embed mkinitfs.py
-	$(CYTHON) --embed lsinitfs.py
+all: clean
 	$(CC) mkinitfs.c $(shell $(PYTHON)-config --includes --libs) -o mkinitfs.exe
 	$(CC) lsinitfs.c $(shell $(PYTHON)-config --includes --libs) -o lsinitfs.exe
 	$(STRIP) *.exe
+
+sources: bump
+	$(RM) *.c
+	$(CYTHON) --embed mkinitfs.py
+	$(CYTHON) --embed lsinitfs.py
 
 install:
 	$(INSTALL) -dm755 $(DESTDIR)$(BINDIR) $(DESTDIR)$(SBINDIR)
@@ -21,10 +24,10 @@ uninstall:
 	$(RM) -r $(DESTDIR)/etc/mkinitfs
 
 clean:
-	$(RM) -r *.build/ *.exe __pycache__ *.c
+	$(RM) -r *.build/ *.exe __pycache__
 	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
 bump:
 	$(SED) 's|^app_version.*|app_version = "$(VERSION) ($(GIT_VERSION))"|' -i lsinitfs.py mkinitfs.py
 
-.PHONY: all install uninstall clean bump
+.PHONY: all sources install uninstall clean bump

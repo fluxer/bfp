@@ -1,18 +1,20 @@
 include ../../Makefile.mk
 
 all: clean
-	$(CYTHON) libarchive.py libmessage.py libmisc.py libpackage.py libsystem.py libudev.py
 	$(CC) -shared libarchive.c $(shell $(PYTHON)-config --includes --libs) -o libarchive.so
 	$(CC) -shared libmessage.c $(shell $(PYTHON)-config --includes --libs) -o libmessage.so
 	$(CC) -shared libmisc.c $(shell $(PYTHON)-config --includes --libs) -o libmisc.so
 	$(CC) -shared libpackage.c $(shell $(PYTHON)-config --includes --libs) -o libpackage.so
 	$(CC) -shared libsystem.c $(shell $(PYTHON)-config --includes --libs) -o libsystem.so
-	# _libudev WILL NOT WORK!
 	$(CC) -shared _libudev.c \
 		$(shell $(PYTHON)-config --includes --libs) \
 		$(shell pkg-config --cflags --libs libudev) \
 		-o _libudev.so
 	$(STRIP) *.so
+
+sources:
+	$(RM) lib*.c
+	$(CYTHON) libarchive.py libmessage.py libmisc.py libpackage.py libsystem.py libudev.py
 
 check:
 	$(PYTHON) test.py
@@ -31,7 +33,7 @@ uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/_libudev.so
 
 clean:
-	$(RM) -r *.build/ *.so __pycache__ lib*.c
+	$(RM) -r *.build/ *.so __pycache__
 	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
-.PHONY: all check install uninstall clean
+.PHONY: all sources check install uninstall clean

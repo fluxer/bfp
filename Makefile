@@ -9,6 +9,13 @@ all:
 	$(MAKE) -C src/spm
 	# $(MAKE) -C src/spmd
 
+sources:
+	$(MAKE) -C src/ahws sources
+	$(MAKE) -C src/cold sources
+	$(MAKE) -C src/libs sources
+	$(MAKE) -C src/initfs sources
+	$(MAKE) -C src/spm sources
+
 check:
 	$(MAKE) -C src/libs check
 	$(MAKE) -C src/spm check

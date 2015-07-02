@@ -11,25 +11,8 @@ all: clean bump
 	# REQUIRES INSTALLED LIBS!
 	$(PYTHON) ../cold/cold.py ./gui.py ./gui_ui.py -o ./gui.exe
 
-cython: clean bump
-	$(SED) -e 's|@BINDIR@|$(BINDIR)|' -e 's|@VERSION@|$(VERSION)|' \
-		spm-gui.desktop.in > spm-gui.desktop
-	$(SED) -e 's|@BINDIR@|$(BINDIR)|' -e 's|@VERSION@|$(VERSION)|' \
-		spm-autostart.desktop.in > spm-autostart.desktop
-	$(SED) -e 's|@SBINDIR@|$(SBINDIR)|' \
-		com.spm.Daemon.service.in > com.spm.Daemon.service
-	$(PYUIC) gui.ui -o gui_ui.py
-	# THE GUI WILL NOT WORK!
-	$(CYTHON) --embed daemon.py
-	$(CYTHON) --embed client.py
-	$(CYTHON) --embed gui.py
-	$(CC) daemon.c $(shell $(PYTHON)-config --includes --libs) -o daemon.exe
-	$(CC) client.c $(shell $(PYTHON)-config --includes --libs) -o client.exe
-	$(CC) gui.c $(shell $(PYTHON)-config --includes --libs) -o gui.exe
-	$(STRIP) *.exe
-
 clean:
-	$(RM) -r *.build/ *.so *.exe __pycache__ *.c *_ui.py *.desktop *.service
+	$(RM) -r *.build/ *.so *.exe __pycache__ *_ui.py *.desktop *.service
 	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
 install:

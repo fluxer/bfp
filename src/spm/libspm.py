@@ -1864,7 +1864,7 @@ class Binary(Source):
 
 
 class Aport(object):
-    ''' Automatic port creator, not a silver bullet '''
+    ''' Automatic SRCBUILD creator, not a silver bullet '''
     def __init__(self, urls, directory='/', automake=False):
         self.urls = urls
         self.directory = directory
