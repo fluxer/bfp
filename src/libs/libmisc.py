@@ -1146,7 +1146,7 @@ class Inotify(object):
         if self.fd == -1:
             raise Exception('Inotify', self.error())
 
-    def __del__(self):
+    def __exit__(self):
         self.close()
 
     def error(self):
@@ -1253,7 +1253,7 @@ class Magic(object):
         self._magic_file.restype = ctypes.c_char_p
         self._magic_file.argtypes = [ctypes.c_void_p, ctypes.c_char_p]
 
-    def __del__(self):
+    def __exit__(self):
         if self.cookie and self.libmagic.magic_close:
             self.libmagic.magic_close(self.cookie)
 
