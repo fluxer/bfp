@@ -1,3 +1,71 @@
+Thu Jul 2 02:43:21 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
+7f8d540a4df27de311ffdbc2f089e9bea0bc9c73 (tag: 1.8.2)
+    * use __exit__ instead of __del__ for cleanup
+    * support another PGP signature extension
+    * spm-tools portable mode requires root
+    * wrap spm-tools check failure (expected)
+    * restore Python 3000 compat
+    * fix some unicode issues with the libmagic wrapper
+    * fix some unicode issues with the logger
+    * override all objects ROOT_DIR from spm-tools
+    * partitially support root directory override in spm-tools
+    * support mainloop via glib in spmd
+    * use single watcher for remote/local targets event notification
+    * oops
+    * drop support for building with Nuitka
+    * drop per-target options preferences
+    * reuse config object from libspm in spmd
+    * ensure mount check does not fail if getting the UUID fails
+    * support init being a symlink
+    * avoid key error in spm-gui
+    * various corrections
+    * update comments in ahws common script
+    * add OpenRC service file for ahws
+    * and install it with executable permissions
+    * add OpenRC service file for spmd
+    * nothing to strip for spm-gui cold target
+    * workaround some issues with spm-gui
+    * add options.conf
+    * fix spm-gui cold target
+    * fix GUI and daemon optdepends handling
+    * improve parsing of options.conf
+    * fix the regursion bug in libpackage.Database.local_uptodate()
+    * implement optdepends control
+    * slightly optimize disowned mode
+    * minor spm-tools fixes
+    * do not attempt to run pre/post actions on autotest
+    * fix limisc.Misc.system_script() chroot behavior
+    * use ca-certificates in the autotest
+    * add spm-gui port to PyQt5
+    * add test procedure for libjdb
+    * make the build system a bit more alternatives aware
+    * add experimental libjdb
+    * use shortcuts for metadata and SRCBUILD removal
+    * check if tarball has metadata during indexing
+    * drop verbose flag from init script
+    * fix issue with spaces in LABEL input from blkid in initramfs
+    * make spm-gui Python 3000 compatible
+    * minor code shrink in spm-tools
+    * use frozenset() instead of set() for faster merge transaction
+    * make some messages translatable
+    * pop messages directly in variables lintian check
+    * save some loops in the variables lintian check
+    * ignore backup files by default from spm-tools digest mode
+    * use one less copies of the values during SRCBUILD parsing
+    * avoid piping stdin from libmisc.Misc.system_communicate() not required
+    * add task to TODO
+    * minor spm-tools lint mode optimization
+    * minor bg translation update
+    * rework variables checking from spm-tools sane mode
+    * whitespace cleanup, ignore docs for dependencies in spm-tools portable mode
+    * make use of libmisc.Misc.url_supported() in spm-gui
+    * doh
+    * but get the repos first
+    * build pax-utils if scanelf is not available
+    * build ca-certificates too from the autotest script
+    * pass --debug for the sake of the autotest
+    * actually passe spm-tools arguments from the autotest script
+
 Sat Jun 20 00:08:11 2015 +0300 Ivailo Monev <xakepa10@gmail.com>
 dcd330d1a21c0c134ffd84c7595e0c8768b79ec0 (tag: 1.8.1)
     * fix some unicode files issue in libspm
