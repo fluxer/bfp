@@ -7,16 +7,7 @@ all:
 	$(MAKE) -C src/libs
 	$(MAKE) -C src/initfs
 	$(MAKE) -C src/spm
-	$(MAKE) -C src/spmd
-
-cython:
-	$(MAKE) -C doc
-	$(MAKE) -C src/ahws cython
-	$(MAKE) -C src/cold cython
-	$(MAKE) -C src/libs cython
-	$(MAKE) -C src/initfs cython
-	$(MAKE) -C src/spm cython
-	# $(MAKE) -C src/spmd cython
+	# $(MAKE) -C src/spmd
 
 check:
 	$(MAKE) -C src/libs check
@@ -62,4 +53,4 @@ dist:
 	$(GIT) archive HEAD --prefix=bfp-$(VERSION)/ | $(XZ) > bfp-$(VERSION).tar.xz
 	$(GPG) --sign --detach-sign bfp-$(VERSION).tar.xz
 
-.PHONY: all cython check install uninstall clean changelog dist
+.PHONY: all check install uninstall clean changelog dist
