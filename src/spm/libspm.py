@@ -902,7 +902,7 @@ class Source(object):
         for src_url in self.target_sources:
             src_base = misc.url_normalize(src_url, True)
             local_file = '%s/%s' % (self.sources_dir, src_base)
-            src_file = '%s/%s' % (self.target_dir, src_base)
+            src_file = '%s/%s' % (self.target_dir, src_url)
 
             if not os.path.isfile(src_file):
                 message.sub_debug(_('Fetching'), src_url)

@@ -188,7 +188,7 @@ class Dist(object):
                 message.sub_info(_('Preparing sources'))
                 for src_url in target_sources:
                     src_base = misc.url_normalize(src_url, True)
-                    src_file = '%s/%s' % (target_directory, src_base)
+                    src_file = '%s/%s' % (target_directory, src_url)
 
                     if not os.path.isfile(src_file):
                         message.sub_debug(_('Fetching'), src_url)
