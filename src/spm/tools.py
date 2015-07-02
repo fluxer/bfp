@@ -23,7 +23,7 @@ misc = libspm.misc
 database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.8.1 (7131985)"
+app_version = "1.8.1 (543cd98)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -489,6 +489,7 @@ class Sane(object):
                             sig1 = '%s.sig' % src
                             sig2 = '%s.asc' % src
                             sig3 = '%s.sign' % misc.file_name(src, False)
+                            sig4 = '%s.sign' % src
                             if sig1 in sources or sig2 in sources or sig3 in sources:
                                 message.sub_debug(_('Signature already in sources for'), src)
                                 if not pgpkeys:
@@ -499,6 +500,8 @@ class Sane(object):
                                 message.sub_warning(_('Signature available but not in sources'), sig2)
                             elif misc.url_ping(sig3):
                                 message.sub_warning(_('Signature available but not in sources'), sig3)
+                            elif misc.url_ping(sig4):
+                                message.sub_warning(_('Signature available but not in sources'), sig4)
 
 
 class Merge(object):

@@ -382,12 +382,15 @@ class Misc(object):
         sig1 = '%s.sig' % sfile
         sig2 = '%s.asc' % sfile
         sig3 = '%s.sign' % self.file_name(sfile, False)
+        sig4 = '%s.sign' % sfile
         if os.path.isfile(sig1):
             return sig1
         elif os.path.isfile(sig2):
             return sig2
         elif not sfile.endswith('.sign') and os.path.isfile(sig3):
             return sig3
+        elif not sfile.endswith('.sign') and os.path.isfile(sig4):
+            return sig4
         elif bensure:
             return sig1
 
@@ -455,7 +458,7 @@ class Misc(object):
         if not ssignature:
             ssignature = self.gpg_findsig(sfile)
         shell = False
-        if ssignature.endswith('.sign'):
+        if ssignature.endswith('.tar.sign'):
             # exception for no gain, get piped!
             shell = True
             if sfile.endswith('.xz'):
