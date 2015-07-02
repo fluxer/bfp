@@ -11,7 +11,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.8.1 (543cd98)"
+app_version = "1.8.1 (5232756)"
 
 import libmessage
 message = libmessage.Message()
@@ -344,6 +344,14 @@ try:
     local_parser.add_argument('PATTERN', type=str, \
         help=_('Pattern to search for in local targets'))
 
+    aport_parser = subparsers.add_parser('aport')
+    aport_parser.add_argument('-d', '--directory', type=str, \
+        default=os.getcwd(), help=_('Set output directory'))
+    aport_parser.add_argument('-a', '--automake', action='store_true', \
+        help=_('Build the target after analizing and creating SRCBUILD for it'))
+    aport_parser.add_argument('URLS', nargs='+', type=str, \
+        help=_('URLs to apply actions on'))
+
     who_parser = subparsers.add_parser('who', \
         help=_('Get owner of files via regular expression'))
     who_parser.add_argument('-p', '--plain', action='store_true', \
@@ -572,6 +580,13 @@ try:
                 ARGS.release, ARGS.description, ARGS.depends, \
                 ARGS.optdepends, ARGS.reverse, ARGS.size, \
                 ARGS.footprint, ARGS.backup, ARGS.plain)
+        m.main()
+
+    elif ARGS.mode == 'aport':
+        message.info(_('Runtime information'))
+        message.sub_info(_('DIRECTORY'), ARGS.directory)
+        message.sub_info(_('URLS'), ARGS.URLS)
+        m = libspm.Aport(ARGS.URLS, ARGS.directory, ARGS.automake)
         m.main()
 
     elif ARGS.mode == 'who':

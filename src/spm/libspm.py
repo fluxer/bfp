@@ -3,7 +3,7 @@
 import gettext
 _ = gettext.translation('spm', fallback=True).gettext
 
-import sys, os, shutil, re
+import sys, os, shutil, re, time
 if sys.version < '3':
     import ConfigParser as configparser
 else:
@@ -1884,6 +1884,179 @@ class Binary(Source):
             if self.do_remove or self.autoremove:
                 message.sub_info(_('Starting remove of'), self.target_name)
                 self.remove()
+
+
+class Aport(object):
+    ''' Automatic port creator, not a silver bullet '''
+    def __init__(self, urls, directory='/', automake=False):
+        self.urls = urls
+        self.directory = directory
+        self.automake = automake
+
+    def main(self):
+        for src in self.urls:
+            if not misc.url_supported(src):
+                message.sub_warning(_('Not a supported URL'), src)
+                continue
+            message.sub_info(_('Analizing'), src)
+
+            src_base = misc.url_normalize(src, True)
+            src_name = misc.file_name(src_base)
+            src_dir = '%s/%s' % (self.directory, src_name)
+            src_file = '%s/%s' % (src_dir, src_base)
+            src_cd = src_base
+            message.sub_debug(_('Fetching'), src)
+            misc.dir_create(src_dir)
+            misc.fetch(src, src_file)
+            if misc.archive_supported(src_file):
+                message.sub_debug(_('Extracting'), src)
+                misc.archive_decompress(src_file, src_dir)
+                src_cd = os.path.dirname(misc.archive_list(src_file)[0])
+
+            message.sub_debug(_('Checking for build system and gethering metadata'))
+            guess = False
+            src_date = time.strftime('%Y%m%d')
+            src_version = src_name.split('-')[1:] or src_name.split('_')[1:] or src_date
+            src_version = misc.string_convert(src_version)
+            src_description = 'Unknown' # TODO: look for README or something
+            src_makedepends = "'make'"
+            src_sources = "'%s'" % src
+            for spath in os.listdir('%s/%s' % (src_dir, src_cd)):
+                sdir = '%s/%s' % (src_dir, src_cd)
+                sfile = '%s/%s' % (sdir, spath)
+                if spath == '.git' and not 'git' in src_makedepends:
+                    message.sub_debug(_('Git repository detected'))
+                    src_makedepends += " 'git'"
+                    src_version = src_date
+                elif spath == '.svn' and not 'subversion' in src_makedepends:
+                    message.sub_debug(_('Subversion repository detected'))
+                    src_makedepends += " 'subversion'"
+                    src_version = src_date
+                if sfile.endswith('/CMakeLists.txt') and not guess:
+                    guess = 'CMake'
+                    src_name = misc.string_convert(misc.file_search('(?:^|\\s)(?:PROJECT|project)(?:[ |\\t]+)?\((.*)\)', \
+                        sfile, escape=False))
+                    src_makedepends += " 'cmake'"
+                    src_compile = 'mkdir -p ../build && cd ../build\n    cmake -DCMAKE_INSTALL_PREFIX=/usr ../%s\n    make' % src_cd
+                    src_install = 'make -C ../build DESTDIR="$INSTALL_DIR" install'
+                elif sfile.endswith(('/autogen.sh', '/configure.ac', '/configure.in')) and not guess:
+                    guess = 'Autotools (devel)'
+                    src_makedepends += " 'autoconf' 'automake'"
+                    src_compile = './autogen.sh\n    ./configure --prefix=/usr --sysconfdir=/etc\n    make'
+                    src_install = 'make DESTDIR="$INSTALL_DIR" install'
+                elif sfile.endswith('.pro'):
+                    guess = 'QMake'
+                    # FIXME: could be qt5
+                    # TODO: follow include()
+                    src_makedepends += " 'qt4'"
+                    src_compile = 'qmake-qt4\n    make'
+                    src_install = 'make DESTDIR="$INSTALL_DIR" install'
+                elif sfile.endswith('/Makefile') and not guess:
+                    guess = 'Makefile'
+                    checkfiles = [sfile]
+                    # search included files
+                    for match in misc.file_search('(?:^|\\s)include(?:[ |\\t]+)(.*)', sfile, escape=False):
+                        checkfiles.append('%s/%s' % (sdir, match))
+                    destvar = None
+                    for mfile in checkfiles:
+                        if not os.path.isfile(mfile):
+                            # happens when it references variable, such as $(topdir)
+                            message.sub_debug(_('Unreadable include'), mfile)
+                            continue
+                        # PREFIX is a last resort, may mess things up
+                        message.sub_debug(_('Probing for destination'), mfile)
+                        match = misc.file_search('(?:^|\\s)(DESTDIR|ROOT_DIR|ROOT|FAKEROOT|PREFIX)(?:[ |\\t]+)?=', \
+                            mfile, escape=False)
+                        if match:
+                            destvar = match[0]
+                    if not destvar:
+                        message.sub_debug(_('Not destination variable detected'))
+                        guess = False
+                        continue
+                    message.sub_debug(_('Destination variable detected'), destvar)
+                    if destvar == 'PREFIX':
+                        src_compile = 'make PREFIX="$INSTALL_DIR/usr"'
+                        src_install = 'make PREFIX="$INSTALL_DIR/usr" install'
+                    else:
+                        src_compile = 'make'
+                        src_install = 'make %s="$INSTALL_DIR" install' % destvar
+                elif sfile.endswith('/setup.py') and not guess:
+                    # FIXME: could be 'python3'
+                    src_makedepends += " 'python'"
+                    src_compile = 'python setup.py build'
+                    src_install = 'python setup.py install --prefix="/usr" --root="$INSTALL_DIR"'
+                    guess = 'Python'
+            if not guess:
+                message.sub_critical(_('No known build system in use'))
+                sys.exit(2)
+            message.sub_debug(_('Guess is'), guess)
+
+            message.sub_debug(_('Checking if PGP signature is available'))
+            sig1 = '%s.sig' % src
+            sig2 = '%s.asc' % src
+            sig3 = '%s.sign' % misc.file_name(src, False)
+            sigtmp = '%s.signature' % src_file
+            src_pgpkeys = ''
+            if misc.url_ping(sig1):
+                src_sources += "\n    '%s'" % sig1
+                misc.fetch(sig1, sigtmp)
+            elif misc.url_ping(sig2):
+                src_sources += "\n    '%s'" % sig2
+                misc.fetch(sig2, sigtmp)
+            elif misc.url_ping(sig3):
+                src_sources += "\n    '%s'" % sig3
+                misc.fetch(sig3, sigtmp)
+            if os.path.isfile(sigtmp):
+                message.sub_debug(_('Trying to get the keyid from'), sigtmp)
+                gpg = misc.whereis('gpg2', False)
+                if not gpg:
+                    gpg = misc.whereis('gpg')
+                # assumes only one key
+                for line in misc.system_communicate('%s --list-packets %s' % (gpg, sigtmp)).splitlines():
+                    keyid =  misc.string_search('.* keyid ([\\S]+)', line, escape=False)
+                    if keyid:
+                        src_pgpkeys = "pgpkeys=('%s')" % misc.string_convert(keyid)
+
+            src_maintainer = 'Unknown'
+            git = misc.whereis('git', False)
+            if git:
+                message.sub_debug(_('Guessing maintainer via Git'))
+                #name = misc.system_communicate((git, 'config', 'user.name'))
+                #email = misc.system_communicate((git, 'config', 'user.email'))
+                #src_maintainer = '%s <%s>' % (name, email)
+            message.sub_debug(_('Target maintainer'), src_maintainer)
+            message.sub_debug(_('Target name'), src_name)
+            message.sub_debug(_('Target version'), src_version)
+            message.sub_debug(_('Target description'), src_description)
+            message.sub_debug(_('Target makedepends'), src_makedepends)
+            message.sub_debug(_('Target sources'), src_sources)
+            message.sub_debug(_('Target pgpkeys'), src_pgpkeys)
+
+            message.sub_info(_('Writing SRCBUILD'))
+            srcbuild = '''# Maintainer: %s
+
+version="%s"
+description="%s"
+makedepends=(%s)
+sources=(%s)
+%s
+
+src_compile() {
+    cd "$SOURCE_DIR/%s"
+    %s
+}
+
+src_install() {
+    cd "$SOURCE_DIR/%s"
+    %s
+}
+''' % (src_maintainer, src_version, src_description, src_makedepends, \
+            src_sources, src_pgpkeys, src_cd, src_compile, src_cd, src_install)
+            misc.file_write('%s/SRCBUILD' % src_dir, srcbuild)
+
+        if self.automake:
+            m = Source([src_dir], automake=True)
+            m.main()
 
 
 class Who(object):
