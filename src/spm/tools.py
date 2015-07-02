@@ -23,7 +23,7 @@ misc = libspm.misc
 database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.8.1 (5232756)"
+app_version = "1.8.2 (48dcefc)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -511,9 +511,7 @@ class Merge(object):
 
     def merge(self, origfile, backfile):
         message.sub_warning(_('Backup file detected'), backfile)
-        editor = os.environ.get('EDITOR')
-        if not editor:
-            editor = misc.whereis('vim')
+        editor = os.environ.get('EDITOR') or misc.whereis('vim')
         action = raw_input(_('''
     What do you want to do:
 
@@ -565,10 +563,7 @@ class Edit(object):
         self.targets = targets
 
     def main(self):
-        editor = os.environ.get('EDITOR')
-        if not editor:
-            editor = misc.whereis('vim')
-
+        editor = os.environ.get('EDITOR') or misc.whereis('vim')
         for target in self.targets:
             match = database.remote_search(target)
             if match:

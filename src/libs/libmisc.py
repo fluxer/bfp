@@ -67,8 +67,7 @@ class Misc(object):
         program = os.path.basename(program)
         for path in os.environ.get('PATH', '/bin:/usr/bin').split(':'):
             exe = '%s/%s' % (path, program)
-            # normalize because os.path.join sucks and can't be used in this case
-            if chroot and os.path.isfile(os.path.realpath('%s/%s' % (self.ROOT_DIR, exe))):
+            if chroot and os.path.isfile('%s/%s' % (self.ROOT_DIR, exe)):
                 return exe
             elif not chroot and os.path.isfile(exe):
                 return exe
@@ -196,45 +195,27 @@ class Misc(object):
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
 
-        rfile = open(sfile, 'rb', self.BUFFER)
-        try:
-            content = rfile.read()
-        finally:
-            rfile.close()
-        return self.string_encode(content)
+        with open(sfile, 'rb', self.BUFFER) as f:
+            return self.string_encode(f.read())
 
     def file_readlines(self, sfile):
         ''' Get file content, split by new line, as list '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
 
-        rfile = open(sfile, 'rb', self.BUFFER)
-        try:
-            content = rfile.read().splitlines()
-        finally:
-            rfile.close()
-        return self.string_encode(content)
+        return self.file_read(sfile).splitlines()
 
-    def file_readsmart(self, sfile, bverysmart=False):
+    def file_readsmart(self, sfile):
         ''' Get file content, split by new line, as list ignoring blank and comments '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
 
-        if bverysmart:
-            content = {}
-        else:
-            content = []
-        for line in self.file_readlines(sfile):
+        content = []
+        for line in self.file_read(sfile).splitlines():
             line = self.string_encode(line.strip())
             if not line or line.startswith('#'):
                 continue
-            if bverysmart:
-                garbage = line.split('=')
-                if len(garbage) < 2:
-                    raise(Exception('Variable in %s has no value' % sfile, garbage[0]))
-                content[garbage[0]] = garbage[1]
-            else:
-                content.append(line)
+            content.append(line)
         return content
 
     def file_write(self, sfile, content, mode='w'):
@@ -352,13 +333,8 @@ class Misc(object):
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
 
-        content = None
-        f = open(sfile, 'r', self.BUFFER)
-        try:
-            content = json.load(f)
-        finally:
-            f.close()
-        return content
+        with open(sfile, 'r', self.BUFFER) as f:
+            return json.load(f)
 
     def json_write(self, sfile, content, mode='w'):
         ''' Write data to JSON file '''
@@ -367,11 +343,8 @@ class Misc(object):
             # self.typecheck(content, (types.StringTypes))
             self.typecheck(mode, (types.StringTypes))
 
-        f = open(sfile, mode, self.BUFFER)
-        try:
+        with open(sfile, mode, self.BUFFER) as f:
             json.dump(content, f, indent=4)
-        finally:
-            f.close()
 
     def gpg_findsig(self, sfile, bensure=True):
         ''' Attempts to guess the signature for local file '''
@@ -405,9 +378,7 @@ class Misc(object):
         if lservers is None:
             lservers = []
         self.dir_create(self.GPG_DIR, ipermissions=0o700)
-        gpg = self.whereis('gpg2', False)
-        if not gpg:
-            gpg = self.whereis('gpg')
+        gpg = self.whereis('gpg2', False) or self.whereis('gpg')
         cmd = [gpg, '--homedir', self.GPG_DIR]
         for server in lservers:
             cmd.extend(('--keyserver', server))
@@ -433,9 +404,7 @@ class Misc(object):
             self.typecheck(sprompt, (types.StringTypes))
 
         self.dir_create(self.GPG_DIR, ipermissions=0o700)
-        gpg = self.whereis('gpg2', False)
-        if not gpg:
-            gpg = self.whereis('gpg')
+        gpg = self.whereis('gpg2', False) or self.whereis('gpg')
         cmd = [gpg, '--homedir', self.GPG_DIR]
         if skey:
             cmd.extend(('--default-key', skey))
@@ -452,9 +421,7 @@ class Misc(object):
             self.typecheck(ssignature, (types.NoneType, types.StringTypes))
 
         self.dir_create(self.GPG_DIR, ipermissions=0o700)
-        gpg = self.whereis('gpg2', False)
-        if not gpg:
-            gpg = self.whereis('gpg')
+        gpg = self.whereis('gpg2', False) or self.whereis('gpg')
         if not ssignature:
             ssignature = self.gpg_findsig(sfile)
         shell = False
@@ -498,7 +465,7 @@ class Misc(object):
 
             this method exists only because in some older versions of Python
             shutil.rmtree() does not handle symlinks properly. If you have
-            Python 2.7.9 >= use shutil.rmtree() instead '''
+            Python newer than 2.7.8 use shutil.rmtree() instead '''
         if self.python2:
             self.typecheck(sdir, (types.StringTypes))
 
@@ -884,9 +851,7 @@ class Misc(object):
             finally:
                 zipf.close()
         elif sfile.endswith(('.xz', '.lzma')):
-            tar = self.whereis('bsdtar', fallback=False)
-            if not tar:
-                tar = self.whereis('tar')
+            tar = self.whereis('bsdtar', False) or self.whereis('tar')
             command = [tar, '-caf', sfile, '-C', strip]
             for f in lpaths:
                 command.append(f.replace(strip, '.'))
@@ -912,8 +877,6 @@ class Misc(object):
 
         self.dir_create(sdir)
 
-        # WARNING!!! the -P option is not supported by Busybox's `tar` applet.
-
         # standard tarfile library locks the filesystem and upon interrupt the
         # filesystem stays locked which is bad. on top of that the tarfile
         # library can not replace files while they are being used thus external
@@ -922,12 +885,13 @@ class Misc(object):
         if smime == 'application/x-xz' \
             or smime == 'application/x-lzma' \
             or tarfile.is_tarfile(sfile) or zipfile.is_zipfile(sfile):
-            bsdtar = self.whereis('bsdtar', fallback=False)
-            if bsdtar:
-                self.system_command((bsdtar, '-xpPf', sfile, '-C', sdir))
-            else:
-                self.system_command((self.whereis('tar'), '-xphf', sfile, \
-                    '-C', sdir))
+            tar = self.whereis('bsdtar', False) or self.whereis('tar')
+            arguments = '-xpPhf'
+            if tar.endswith('/bsdtar'):
+                arguments = '-xpPf'
+            elif '/busybox' in os.path.realpath(tar):
+                arguments = '-xphf'
+            self.system_command((tar, arguments, sfile, '-C', sdir))
         elif smime == 'application/x-gzip':
             gfile = gzip.GzipFile(sfile, 'rb')
             self.file_write(self.file_name(sfile, False), gfile.read())
@@ -957,15 +921,12 @@ class Misc(object):
             content = zfile.namelist()
             zfile.close()
         elif smime == 'application/x-xz' or smime == 'application/x-lzma':
-            bsdtar = self.whereis('bsdtar', fallback=False)
-            if bsdtar:
-                for line in self.system_communicate((bsdtar, '-tpf', \
-                    sfile)).splitlines():
-                    content.append(line.lstrip('./'))
-            else:
-                for line in self.system_communicate((self.whereis('tar'), \
-                    '-tf', sfile)).splitlines():
-                    content.append(line.lstrip('./'))
+            tar = self.whereis('bsdtar', False) or self.whereis('tar')
+            arguments = '-tf'
+            if tar.endswith('/bsdtar'):
+                arguments = '-tpf'
+            for line in self.system_communicate((tar, arguments, sfile)).splitlines():
+                content.append(line.lstrip('./'))
         elif smime == 'application/x-gzip':
             content = self.file_name(sfile, True).split()
         elif smime == 'application/x-bzip2':
@@ -1241,7 +1202,8 @@ class Magic(object):
             self.NO_CHECK_TEXT | self.NO_CHECK_CDF | self.NO_CHECK_TOKENS | \
             self.NO_CHECK_ENCODING
 
-        self.libmagic = ctypes.CDLL('libmagic.so', use_errno=True)
+        libmagic = ctypes.util.find_library('magic')
+        self.libmagic = ctypes.CDLL(libmagic, use_errno=True)
         if not flags:
             flags = self.NONE | self.MIME_TYPE | self.PRESERVE_ATIME | \
             self.NO_CHECK_ENCODING # | self.NO_CHECK_COMPRESS | self.NO_CHECK_TAR

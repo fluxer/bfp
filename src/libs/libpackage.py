@@ -9,7 +9,7 @@ with "local" deal with metadata of software installed on the system, "remote"
 methods provide info for software available from repositories with build
 recipes in the SRCBUILD format.
 
-SRCBUILD() is Source Package Manager recipes (SRCBUILDs) parser.
+SRCBUILD() is Source Package Manager recipes parser.
 
 '''
 
@@ -27,7 +27,7 @@ class Database(object):
         self.ROOT_DIR = '/'
         self.CACHE_DIR = '/var/cache/spm'
         self.REMOTE_CACHE = {}
-        self.LOCAL_DIR = self.ROOT_DIR + 'var/local/spm'
+        self.LOCAL_DIR = '/var/local/spm'
         self.LOCAL_CACHE = {}
         self.IGNORE = []
         self.NOTIFY = True
@@ -92,12 +92,13 @@ class Database(object):
         if not self.REMOTE_CACHE or recache:
             self._build_remote_cache()
 
-        if basename:
-            lremote = []
-            for target in self.REMOTE_CACHE:
+        lremote = []
+        for target in self.REMOTE_CACHE:
+            if basename:
                 lremote.append(os.path.basename(target))
-            return sorted(lremote)
-        return sorted(list(self.REMOTE_CACHE.keys()))
+            else:
+                lremote.append(target)
+        return sorted(lremote)
 
     def local_all(self, basename=False):
         ''' Returns directories of all local (installed) targets '''
@@ -111,12 +112,13 @@ class Database(object):
         if not self.LOCAL_CACHE or recache:
             self._build_local_cache()
 
-        if basename:
-            llocal = []
-            for target in self.LOCAL_CACHE:
+        llocal = []
+        for target in self.LOCAL_CACHE:
+            if basename:
                 llocal.append(os.path.basename(target))
-            return sorted(llocal)
-        return sorted(list(self.LOCAL_CACHE.keys()))
+            else:
+                llocal.append(target)
+        return sorted(llocal)
 
     def local_search(self, target):
         ''' Returns full path to directory matching target '''
@@ -139,7 +141,7 @@ class Database(object):
             return target
 
     def local_belongs(self, sfile, exact=False, escape=True, ignore=None):
-        ''' Searches for match of file in all local targets '''
+        ''' Searches for file match in all local targets '''
         if misc.python2:
             misc.typecheck(sfile, (types.StringTypes))
             misc.typecheck(exact, (types.BooleanType))
@@ -150,21 +152,20 @@ class Database(object):
         for local in self.local_all(basename=True):
             if local == ignore:
                 continue
-
             if misc.string_search(sfile, self.local_metadata(local, 'footprint'), \
                 exact=exact, escape=escape):
                 match.append(local)
         return match
 
-    def remote_mdepends(self, target, checked=None, cdepends=False, \
-        mdepends=True, odepends=False):
+    def remote_mdepends(self, target, cdepends=False, mdepends=True, \
+        odepends=False, checked=None):
         ''' Returns missing build dependencies of target '''
         if misc.python2:
             misc.typecheck(target, (types.StringTypes))
-            misc.typecheck(checked, (types.NoneType, types.ListType))
             misc.typecheck(cdepends, (types.BooleanType))
             misc.typecheck(mdepends, (types.BooleanType))
             misc.typecheck(odepends, (types.BooleanType))
+            misc.typecheck(checked, (types.NoneType, types.ListType))
 
         missing = []
         build_depends = []
@@ -184,14 +185,13 @@ class Database(object):
             build_depends.extend(self.remote_metadata(target, 'checkdepends'))
 
         for dependency in build_depends:
-            if checked and dependency in checked:
+            if dependency in checked:
                 continue
-
             if not dependency in missing \
                 and not self.local_uptodate(dependency):
                 checked.append(target)
-                missing.extend(self.remote_mdepends(dependency, checked, \
-                    cdepends, mdepends, odepends))
+                missing.extend(self.remote_mdepends(dependency, cdepends, \
+                    mdepends, odepends, checked))
                 missing.append(dependency)
                 checked.append(dependency)
         return missing
@@ -209,13 +209,8 @@ class Database(object):
 
         basename = os.path.basename(target)
         for installed in self.local_all(basename=True):
-            # respect ignored targets
-            if installed in self.IGNORE:
+            if installed in self.IGNORE or installed in checked:
                 continue
-
-            if checked and installed in checked:
-                continue
-
             if basename in self.local_metadata(installed, 'depends'):
                 checked.append(basename)
                 if indirect:
@@ -292,17 +287,14 @@ class Database(object):
             return []
 
     def remote_aliases(self, basename=True):
-        ''' Returns basename of all aliases '''
+        ''' Returns list of targets representing a single one '''
         if misc.python2:
             misc.typecheck(basename, (types.BooleanType))
 
-        aliases = []
+        aliases = ['world']
         for sfile in misc.list_files('%s/repositories' % self.CACHE_DIR):
             if sfile.endswith('.alias'):
-                if basename:
-                    aliases.append(misc.file_name(sfile))
-                else:
-                    aliases.append(misc.file_name(sfile, False))
+                aliases.append(misc.file_name(sfile, basename))
         return sorted(aliases)
 
     def remote_alias(self, target):
@@ -310,6 +302,8 @@ class Database(object):
         if misc.python2:
             misc.typecheck(target, (types.StringTypes))
 
+        if target == 'world':
+            return self.local_all(basename=True)
         for alias in self.remote_aliases(basename=False):
             if os.path.basename(target) == os.path.basename(alias):
                 return misc.file_readsmart('%s.alias' % alias)

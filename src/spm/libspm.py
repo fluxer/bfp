@@ -764,7 +764,7 @@ class Source(object):
         if match and gtk3_immodules:
             message.sub_info(_('Updating GTK-3.0 imodules cache'))
             message.sub_debug(match)
-            misc.dir_create(ROOT_DIR + '/etc/gtk-3.0')
+            misc.dir_create('%s/etc/gtk-3.0' % ROOT_DIR)
             misc.system_trigger(gtk3_immodules + \
                 ' > /etc/gtk-3.0/gtk.immodules', shell=True)
 
@@ -1103,11 +1103,7 @@ class Source(object):
         lstatic = []
         lrpath = []
         lcompress = []
-        for sfile in target_content:
-            smime = target_content[sfile]
-            if os.path.islink(sfile):
-                continue
-
+        for sfile, smime in target_content.items():
             if smime == 'application/x-executable':
                 if self.strip_binaries:
                     lbinaries.append(sfile)
@@ -1169,11 +1165,7 @@ class Source(object):
         message.sub_info(_('Checking runtime dependencies'))
         missing_detected = False
         required = []
-        for sfile in target_content:
-            if os.path.islink(sfile):
-                continue
-
-            smime = target_content[sfile]
+        for sfile, smime in target_content.items():
             if smime == 'application/x-executable' or \
                 smime == 'application/x-sharedlib':
                 libraries = misc.system_scanelf(sfile, sflags='-L')
@@ -1200,7 +1192,7 @@ class Source(object):
                     smatch = False
                     # now look for the interpreter in the target
                     for s in target_content:
-                        if s.endswith('/' + sbase) and os.access(s, os.X_OK):
+                        if s.endswith('/%s' % sbase) and os.access(s, os.X_OK):
                             smatch = s.replace(self.install_dir, '')
                             break
                     # if that fails look for the interpreter on the host
@@ -1292,12 +1284,7 @@ class Source(object):
             if LOCAL_DIR in sfile:
                 continue
             footprint.append(sstripped)
-            if sfile.endswith('.conf') or sstripped in self.target_backup:
-                if os.path.islink(sfile):
-                    # FIXME: what to do in such case? it is not rare that a
-                    # symlink leads to full path on the host and checksuming
-                    # that will mess things up
-                    continue
+            if sfile.endswith('.conf') or sstripped.lstrip('/') in self.target_backup:
                 backup[sstripped] = misc.file_checksum(os.path.realpath(sfile))
         for target in self.target_optdepends:
             if database.local_uptodate(target):
@@ -1531,11 +1518,6 @@ class Source(object):
     def main(self):
         ''' Execute action for every target '''
         # resolve aliases and meta groups
-        if 'world' in self.targets:
-            position = self.targets.index('world')
-            self.targets[position:position+1] = \
-                database.local_all(basename=True)
-
         for alias in database.remote_aliases():
             if alias in self.targets:
                 position = self.targets.index(alias)
@@ -1813,11 +1795,6 @@ class Binary(Source):
     def main(self):
         ''' Execute action for every target '''
         # resolve aliases and meta groups
-        if 'world' in self.targets:
-            position = self.targets.index('world')
-            self.targets[position:position+1] = \
-                database.local_all(basename=True)
-
         for alias in database.remote_aliases():
             if alias in self.targets:
                 position = self.targets.index(alias)
@@ -1995,22 +1972,16 @@ class Aport(object):
             sig1 = '%s.sig' % src
             sig2 = '%s.asc' % src
             sig3 = '%s.sign' % misc.file_name(src, False)
+            sig4 = '%s.sign' % src
             sigtmp = '%s.signature' % src_file
             src_pgpkeys = ''
-            if misc.url_ping(sig1):
-                src_sources += "\n    '%s'" % sig1
-                misc.fetch(sig1, sigtmp)
-            elif misc.url_ping(sig2):
-                src_sources += "\n    '%s'" % sig2
-                misc.fetch(sig2, sigtmp)
-            elif misc.url_ping(sig3):
-                src_sources += "\n    '%s'" % sig3
-                misc.fetch(sig3, sigtmp)
+            for sig in (sig1, sig2, sig3, sig4):
+                if misc.url_ping(sig):
+                    src_sources += "\n    '%s'" % sig
+                    misc.fetch(sig, sigtmp)
             if os.path.isfile(sigtmp):
                 message.sub_debug(_('Trying to get the keyid from'), sigtmp)
-                gpg = misc.whereis('gpg2', False)
-                if not gpg:
-                    gpg = misc.whereis('gpg')
+                gpg = misc.whereis('gpg2', False) or misc.whereis('gpg')
                 # assumes only one key
                 for line in misc.system_communicate('%s --list-packets %s' % (gpg, sigtmp)).splitlines():
                     keyid =  misc.string_search('.* keyid ([\\S]+)', line, escape=False)
