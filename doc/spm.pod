@@ -343,9 +343,9 @@ Print the owner of 'bin/bash':
 
 Note that all modes, except source, binary and repo, accept regexp similar to
 those in Perl. For more information visit http://docs.python.org/2/library/re.html.
-Source mode accepts base (e.g. foo), directory (e.g. /home/me/foo) with
-SRCBUILD in it, aliases (e.g. base) which you can find on the top-level of a
-repository as foo.alias or finally meta groups - currently only one - world.
+Source and binary mode accepts base (e.g. foo), directory (e.g. /home/me/foo)
+with SRCBUILD in it, aliases (e.g. base) which you can find on the top-level of
+a repository as foo.alias or finally meta groups - currently only one - world.
 
 Modes that support targets passing (accept the TARGETS argument) support
 standard input passing via "-" as TARGETS and piping the executable.

@@ -80,6 +80,7 @@ positional arguments:
 
 optional arguments:
   -h, --help            Show this help message and exit
+  --root ROOT           Change system root directory
   --debug               Enable debug messages
   --version             Show SPM Tools version and exits
 

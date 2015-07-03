@@ -15,7 +15,7 @@ means that everything is in one file, unlike the PKGBUILD format.
 The metadata defined in the recipes should contain only one function
 (src_install) and two (2) variables (version and description). Optionally three
 (3) more functions can be specified (src_prepare, src_compile and src_check)
-and nine (9) more variable (release, depends, makedepends, optdepends,
+and nine (9) more variables (release, depends, makedepends, optdepends,
 checkdepends, sources, pgpkeys, options and backup). Target name is defined by
 the directory name in which the target files are placed.
 
@@ -60,7 +60,8 @@ meaningfull when building.
 Variable defining optional build/runtime dependencies of software. If a
 dependency from the array is installed a special envirnonmental variable is set
 for src_prepare, src_compile, src_check and src_install which can be used to
-build optional features of the software.
+build optional features of the software. If you are a Gentoo user - think of it
+as a USE flag.
 
 =head2 checkdepends
 
@@ -80,8 +81,8 @@ checking issuer of a software source tarball.
 
 =head2 backup
 
-Variable defining additional files to be backed up when merging software.
-Note that all files with .conf extension are automatically backed up.
+Variable defining additional files to be backed up when merging software. Note
+that all files with .conf extension are automatically backed up.
 
 =head2 options
 
@@ -138,7 +139,7 @@ Split debug information from DWARF files.
 
 Compress binaries files with UPX.
 
-=head2 src_compile
+=head2 src_prepare
 
 Function defining the instructions to prepare the software. Patching and other
 permenanet changes to the source code before compilation should be done via it.
@@ -146,7 +147,7 @@ permenanet changes to the source code before compilation should be done via it.
 =head2 src_compile
 
 Function defining the instructions to compile the software. For projects using
-autotools that is usually ./configure && make.
+autotools that is usually `./configure && make'.
 
 =head2 src_check
 
@@ -155,7 +156,7 @@ Function defining the instructions to check (test) the software.
 =head2 src_install
 
 Function defining the instructions to install the software. For projects using
-autotools that is usually make install. Note that the software should be
+autotools that is usually `make install'. Note that the software should be
 installed in the temporary directory INSTALL_DIR using DESTDIR or other method
 depending on the software's build system.
 
