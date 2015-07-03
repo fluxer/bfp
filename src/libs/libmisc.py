@@ -868,6 +868,8 @@ class Misc(object):
             bzipf = bz2.BZ2File(sfile, 'wb', compresslevel=ilevel)
             bzipf.write(self.string_encode(self.file_read(lpaths[0])))
             bzipf.close()
+        else:
+            raise Exception('Unsupported format', self.file_extension(sfile))
 
     def archive_decompress(self, sfile, sdir):
         ''' Extract archive to directory '''
