@@ -92,7 +92,7 @@ class Block(object):
         for line in misc.system_communicate((misc.whereis('udevadm'), 'info', \
             '--name', device, '--query=property')).splitlines():
             line = misc.string_encode(line).strip()
-            if line.startswith(('ID_FS_%s' % tag, tag)):
+            if line.startswith(('ID_FS_%s=' % tag, '%s='% tag)):
                 return line.split('=')[1]
 
 class Power(object):

@@ -734,6 +734,7 @@ static char __pyx_k_b[] = "-b";
 static char __pyx_k_f[] = "-f";
 static char __pyx_k_p[] = "-p";
 static char __pyx_k_q[] = "-q";
+static char __pyx_k_s[] = "%s=";
 static char __pyx_k_15[] = "15";
 static char __pyx_k_AC[] = "AC";
 static char __pyx_k_DC[] = "DC";
@@ -822,7 +823,7 @@ static char __pyx_k_udevadm[] = "udevadm";
 static char __pyx_k_unmount[] = "unmount";
 static char __pyx_k_variant[] = "variant";
 static char __pyx_k_whereis[] = "whereis";
-static char __pyx_k_ID_FS__s[] = "ID_FS_%s";
+static char __pyx_k_ID_FS__s[] = "ID_FS_%s=";
 static char __pyx_k_all_cpus[] = "all_cpus";
 static char __pyx_k_capacity[] = "capacity";
 static char __pyx_k_fsck_jfs[] = "fsck.jfs";
@@ -1100,6 +1101,7 @@ static PyObject *__pyx_kp_s_query_property;
 static PyObject *__pyx_n_s_reboot;
 static PyObject *__pyx_kp_s_repair;
 static PyObject *__pyx_n_s_replace;
+static PyObject *__pyx_kp_s_s;
 static PyObject *__pyx_kp_s_s_brightness;
 static PyObject *__pyx_kp_s_s_capacity;
 static PyObject *__pyx_kp_s_s_cpufreq_scaling_available_gov;
@@ -3358,7 +3360,7 @@ static PyObject *__pyx_pf_9libsystem_5Block_12info(CYTHON_UNUSED PyObject *__pyx
  *         for line in misc.system_communicate((misc.whereis('udevadm'), 'info', \
  *             '--name', device, '--query=property')).splitlines():             # <<<<<<<<<<<<<<
  *             line = misc.string_encode(line).strip()
- *             if line.startswith(('ID_FS_%s' % tag, tag)):
+ *             if line.startswith(('ID_FS_%s=' % tag, '%s='% tag)):
  */
   __pyx_t_5 = PyTuple_New(5); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
@@ -3477,7 +3479,7 @@ static PyObject *__pyx_pf_9libsystem_5Block_12info(CYTHON_UNUSED PyObject *__pyx
  *         for line in misc.system_communicate((misc.whereis('udevadm'), 'info', \
  *             '--name', device, '--query=property')).splitlines():
  *             line = misc.string_encode(line).strip()             # <<<<<<<<<<<<<<
- *             if line.startswith(('ID_FS_%s' % tag, tag)):
+ *             if line.startswith(('ID_FS_%s=' % tag, '%s='% tag)):
  *                 return line.split('=')[1]
  */
     __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -3537,7 +3539,7 @@ static PyObject *__pyx_pf_9libsystem_5Block_12info(CYTHON_UNUSED PyObject *__pyx
     /* "libsystem.py":95
  *             '--name', device, '--query=property')).splitlines():
  *             line = misc.string_encode(line).strip()
- *             if line.startswith(('ID_FS_%s' % tag, tag)):             # <<<<<<<<<<<<<<
+ *             if line.startswith(('ID_FS_%s=' % tag, '%s='% tag)):             # <<<<<<<<<<<<<<
  *                 return line.split('=')[1]
  * 
  */
@@ -3545,38 +3547,40 @@ static PyObject *__pyx_pf_9libsystem_5Block_12info(CYTHON_UNUSED PyObject *__pyx
     __Pyx_GOTREF(__pyx_t_5);
     __pyx_t_2 = __Pyx_PyString_Format(__pyx_kp_s_ID_FS__s, __pyx_v_tag); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = PyTuple_New(2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyString_Format(__pyx_kp_s_s, __pyx_v_tag); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
+    __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_6);
+    PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_2);
     __Pyx_GIVEREF(__pyx_t_2);
-    __Pyx_INCREF(__pyx_v_tag);
-    PyTuple_SET_ITEM(__pyx_t_3, 1, __pyx_v_tag);
-    __Pyx_GIVEREF(__pyx_v_tag);
+    PyTuple_SET_ITEM(__pyx_t_6, 1, __pyx_t_3);
+    __Pyx_GIVEREF(__pyx_t_3);
     __pyx_t_2 = 0;
-    __pyx_t_2 = NULL;
+    __pyx_t_3 = 0;
+    __pyx_t_3 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_5))) {
-      __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_5);
-      if (likely(__pyx_t_2)) {
+      __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_5);
+      if (likely(__pyx_t_3)) {
         PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_5);
-        __Pyx_INCREF(__pyx_t_2);
+        __Pyx_INCREF(__pyx_t_3);
         __Pyx_INCREF(function);
         __Pyx_DECREF_SET(__pyx_t_5, function);
       }
     }
-    if (!__pyx_t_2) {
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    if (!__pyx_t_3) {
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else {
-      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_6);
-      PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_2); __Pyx_GIVEREF(__pyx_t_2); __pyx_t_2 = NULL;
-      PyTuple_SET_ITEM(__pyx_t_6, 0+1, __pyx_t_3);
-      __Pyx_GIVEREF(__pyx_t_3);
-      __pyx_t_3 = 0;
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_2);
+      PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3); __Pyx_GIVEREF(__pyx_t_3); __pyx_t_3 = NULL;
+      PyTuple_SET_ITEM(__pyx_t_2, 0+1, __pyx_t_6);
+      __Pyx_GIVEREF(__pyx_t_6);
+      __pyx_t_6 = 0;
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
-      __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
+      __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     }
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_9 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 95; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -3585,7 +3589,7 @@ static PyObject *__pyx_pf_9libsystem_5Block_12info(CYTHON_UNUSED PyObject *__pyx
 
       /* "libsystem.py":96
  *             line = misc.string_encode(line).strip()
- *             if line.startswith(('ID_FS_%s' % tag, tag)):
+ *             if line.startswith(('ID_FS_%s=' % tag, '%s='% tag)):
  *                 return line.split('=')[1]             # <<<<<<<<<<<<<<
  * 
  * class Power(object):
@@ -8732,6 +8736,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_reboot, __pyx_k_reboot, sizeof(__pyx_k_reboot), 0, 0, 1, 1},
   {&__pyx_kp_s_repair, __pyx_k_repair, sizeof(__pyx_k_repair), 0, 0, 1, 0},
   {&__pyx_n_s_replace, __pyx_k_replace, sizeof(__pyx_k_replace), 0, 0, 1, 1},
+  {&__pyx_kp_s_s, __pyx_k_s, sizeof(__pyx_k_s), 0, 0, 1, 0},
   {&__pyx_kp_s_s_brightness, __pyx_k_s_brightness, sizeof(__pyx_k_s_brightness), 0, 0, 1, 0},
   {&__pyx_kp_s_s_capacity, __pyx_k_s_capacity, sizeof(__pyx_k_s_capacity), 0, 0, 1, 0},
   {&__pyx_kp_s_s_cpufreq_scaling_available_gov, __pyx_k_s_cpufreq_scaling_available_gov, sizeof(__pyx_k_s_cpufreq_scaling_available_gov), 0, 0, 1, 0},
@@ -8908,7 +8913,7 @@ static int __Pyx_InitCachedConstants(void) {
 
   /* "libsystem.py":96
  *             line = misc.string_encode(line).strip()
- *             if line.startswith(('ID_FS_%s' % tag, tag)):
+ *             if line.startswith(('ID_FS_%s=' % tag, '%s='% tag)):
  *                 return line.split('=')[1]             # <<<<<<<<<<<<<<
  * 
  * class Power(object):
