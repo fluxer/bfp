@@ -108,14 +108,14 @@ Default: @MACHINE@
 Set the environmental variable CFLAGS when building software. The CFLAGS
 flag specifies desired optimization/CPU instruction for C code.
 
-Default: -march=@ARCH@ -mtune=native -O2 -pipe
+Default: -march=@ARCH@ -mtune=generic -O2 -pipe
 
 =head2 CXXFLAGS
 
 Set the environmental variable CXXFLAGS when building software. The CXXFLAGS
 flag specifies desired optimization/CPU instruction for C++ code.
 
-Default: -march=@ARCH@ -mtune=native -O2 -pipe
+Default: -march=@ARCH@ -mtune=generic -O2 -pipe
 
 =head2 CPPFLAGS
 
@@ -254,8 +254,6 @@ IGNORE = glibc zlib bash
 /etc/spm/mirrors.conf
 
 /etc/spm/keyservers.conf
-
-/etc/spm/options.conf
 
 =head1 AUTHORS
 
