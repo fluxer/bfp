@@ -273,10 +273,12 @@ class Lint(object):
                         target_footprint_lines.remove(sfile)
 
                 if self.man:
+                    message.sub_debug(_('Checking for missing man pages in'), target)
                     if not '/share/man/' in target_footprint:
                         message.sub_warning(_('No manual page(s)'))
 
                 if self.udev:
+                    message.sub_debug(_('Checking udev rules in'), target)
                     if misc.string_search('(\\s|^)/lib/udev/rules.d/', \
                         target_footprint, escape=False) \
                         and misc.string_search('(\\s|^)/usr/(s)?bin/', \
@@ -284,6 +286,7 @@ class Lint(object):
                         message.sub_warning(_('Cross-filesystem udev rule(s)'))
 
                 if self.symlink:
+                    message.sub_debug(_('Checking symlinks in'), target)
                     for sfile in target_footprint_lines:
                         if os.path.islink(sfile):
                             if not sfile.startswith('/usr/') \
@@ -299,20 +302,24 @@ class Lint(object):
                             message.sub_warning(_('Hardlink'), sfile)
 
                 if self.doc:
+                    message.sub_debug(_('Checking for docs in'), target)
                     if misc.string_search('/doc/|/gtk-doc/', target_footprint, escape=False):
                         message.sub_warning(_('Documentation provided'))
 
                 if self.module:
+                    message.sub_debug(_('Checking for misplaced modules in'), target)
                     for sfile in target_footprint_lines:
                         if sfile.endswith(('.ko', '.ko.gz', '.ko.bz2', 'ko.xz')) \
                             and not os.path.dirname(sfile).endswith('/misc'):
                             message.sub_warning(_('Extra module(s) in non-standard directory'), sfile)
 
                 if self.footprint:
+                    message.sub_debug(_('Checking footprint of'), target)
                     if not target_footprint:
                         message.sub_warning(_('Empty footprint'))
 
                 if self.builddir:
+                    message.sub_debug(_('Checking build traces in'), target)
                     for sfile in target_footprint_lines:
                         if os.path.islink(sfile):
                             continue
@@ -321,6 +328,7 @@ class Lint(object):
                             message.sub_warning(_('Build directory trace(s)'), sfile)
 
                 if self.ownership:
+                    message.sub_debug(_('Checking ownership in'), target)
                     for sfile in target_footprint_lines:
                         if os.path.islink(sfile):
                             continue
@@ -328,6 +336,7 @@ class Lint(object):
                         self._check_ownership(os.path.dirname(sfile))
 
                 if self.executable:
+                    message.sub_debug(_('Checking for non-executables in'), target)
                     # FIXME: false positives if run as non-root
                     for sfile in target_footprint_lines:
                         if os.path.islink(sfile):
@@ -337,6 +346,7 @@ class Lint(object):
                             message.sub_warning(_('File in PATH is not executable'), sfile)
 
                 if self.path:
+                    message.sub_debug(_('Checking for PATH overlapping in'), target)
                     for sfile in target_footprint_lines:
                         if sfile.startswith(('/bin', '/sbin', '/usr/bin', '/usr/sbin')):
                             for spath in ('/bin', '/sbin', '/usr/bin', '/usr/sbin'):
@@ -349,9 +359,8 @@ class Lint(object):
                                     message.sub_warning(_('File in PATH overlaps with'), match)
 
                 if self.shebang:
+                    message.sub_debug(_('Checking shebangs in'), target)
                     for sfile in target_footprint_lines:
-                        if os.path.islink(sfile):
-                            continue
                         smime = misc.file_mime(sfile)
                         if smime == 'text/plain' or smime == 'text/x-shellscript' \
                             or smime == 'text/x-python' or smime == 'text/x-perl' \
@@ -370,6 +379,7 @@ class Lint(object):
                                     message.sub_warning(_('Invalid shebang'), sfile)
 
                 if self.backup:
+                    message.sub_debug(_('Checking possible backups in'), target)
                     for sfile in target_footprint_lines:
                         backups = database.remote_metadata(target, 'backup')
                         if not os.path.exists(sfile) and sfile.lstrip('/') in backups:
@@ -378,15 +388,18 @@ class Lint(object):
                             message.sub_warning(_('Possibly undefined backup of file'), sfile)
 
                 if self.conflicts:
+                    message.sub_debug(_('Checking for conflicts in'), target)
                     for local in database.local_all(basename=True):
                         if local == target:
                             continue
-                        footprint = database.local_metadata(local, 'footprint')
-                        for sfile in target_footprint_lines:
-                            if sfile in footprint:
-                                message.sub_warning(_('Possibly conflicting file with %s') % local, sfile)
+                        footprint = frozenset(database.local_metadata(local, 'footprint'))
+                        diff = footprint.difference(target_footprint_lines)
+                        if footprint != diff:
+                            message.sub_critical(_('File/link conflicts with %s') % local, \
+                                list(footprint.difference(diff)))
 
                 if self.debug:
+                    message.sub_debug(_('Checking for missing debug symbols in'), target)
                     found_debug = 'lib/debug/' in target_footprint
                     found_exe = False
                     if not found_debug:

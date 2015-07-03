@@ -1338,7 +1338,6 @@ class Source(object):
             for target in database.local_all(basename=True):
                 if target == self.target_name:
                     continue
-
                 message.sub_debug(_('Checking against'), target)
                 footprint = frozenset(database.local_metadata(target, 'footprint'))
                 diff = footprint.difference(new_content)
