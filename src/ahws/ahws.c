@@ -731,11 +731,11 @@ static char __pyx_k_idVendor[] = "idVendor";
 static char __pyx_k_qualname[] = "__qualname__";
 static char __pyx_k_sub_info[] = "sub_info";
 static char __pyx_k_udev_new[] = "udev_new";
+static char __pyx_k_udevenum[] = "udevenum";
 static char __pyx_k_Exception[] = "Exception";
 static char __pyx_k_ID_SERIAL[] = "ID_SERIAL";
 static char __pyx_k_SUBSYSTEM[] = "SUBSYSTEM";
 static char __pyx_k_devhandle[] = "devhandle";
-static char __pyx_k_enumerate[] = "enumerate";
 static char __pyx_k_idProduct[] = "idProduct";
 static char __pyx_k_metaclass[] = "__metaclass__";
 static char __pyx_k_sub_debug[] = "sub_debug";
@@ -755,7 +755,7 @@ static char __pyx_k_video4linux[] = "video4linux";
 static char __pyx_k_HANDLERS_DIR[] = "HANDLERS_DIR";
 static char __pyx_k_ID_VENDOR_ID[] = "ID_VENDOR_ID";
 static char __pyx_k_sub_critical[] = "sub_critical";
-static char __pyx_k_1_8_2_7c7961c[] = "1.8.2 (7c7961c)";
+static char __pyx_k_1_8_2_2dfea63[] = "1.8.2 (2dfea63)";
 static char __pyx_k_Device_Daemon[] = "Device.Daemon";
 static char __pyx_k_Device_Handle[] = "Device.Handle";
 static char __pyx_k_Device___init[] = "Device.__init__";
@@ -791,7 +791,7 @@ static char __pyx_k_udev_device_get_property_value[] = "udev_device_get_property
 static char __pyx_k_home_smil3y_bfp_src_ahws_ahws_p[] = "/home/smil3y/bfp/src/ahws/ahws.py";
 static char __pyx_k_udev_enumerate_add_match_subsyst[] = "udev_enumerate_add_match_subsystem";
 static char __pyx_k_udev_monitor_filter_add_match_su[] = "udev_monitor_filter_add_match_subsystem_devtype";
-static PyObject *__pyx_kp_s_1_8_2_7c7961c;
+static PyObject *__pyx_kp_s_1_8_2_2dfea63;
 static PyObject *__pyx_kp_s_Can_not_get_udev_context;
 static PyObject *__pyx_n_s_DEBUG;
 static PyObject *__pyx_n_s_DEVNAME;
@@ -840,7 +840,6 @@ static PyObject *__pyx_n_s_devname;
 static PyObject *__pyx_n_s_doc;
 static PyObject *__pyx_n_s_drm;
 static PyObject *__pyx_n_s_entry;
-static PyObject *__pyx_n_s_enumerate;
 static PyObject *__pyx_kp_s_etc_ahws_d;
 static PyObject *__pyx_n_s_exit;
 static PyObject *__pyx_n_s_fd;
@@ -910,6 +909,7 @@ static PyObject *__pyx_n_s_udev_monitor_new_from_netlink;
 static PyObject *__pyx_n_s_udev_monitor_receive_device;
 static PyObject *__pyx_n_s_udev_new;
 static PyObject *__pyx_n_s_udev_unref;
+static PyObject *__pyx_n_s_udevenum;
 static PyObject *__pyx_n_s_usb;
 static PyObject *__pyx_n_s_vendor;
 static PyObject *__pyx_n_s_video4linux;
@@ -1887,7 +1887,7 @@ static PyObject *__pyx_pf_4ahws_6Device_2Properties(CYTHON_UNUSED PyObject *__py
  * 
  *     def Initialize(self):             # <<<<<<<<<<<<<<
  *         ''' Handle all current devices '''
- *         enumerate = libudev.udev_enumerate_new(self.udev);
+ *         udevenum = libudev.udev_enumerate_new(self.udev)
  */
 
 /* Python wrapper */
@@ -1906,7 +1906,7 @@ static PyObject *__pyx_pw_4ahws_6Device_5Initialize(PyObject *__pyx_self, PyObje
 }
 
 static PyObject *__pyx_pf_4ahws_6Device_4Initialize(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self) {
-  PyObject *__pyx_v_enumerate = NULL;
+  PyObject *__pyx_v_udevenum = NULL;
   PyObject *__pyx_v_subsystem = NULL;
   PyObject *__pyx_v_entry = NULL;
   PyObject *__pyx_v_devname = NULL;
@@ -1941,7 +1941,7 @@ static PyObject *__pyx_pf_4ahws_6Device_4Initialize(CYTHON_UNUSED PyObject *__py
   /* "ahws.py":51
  *     def Initialize(self):
  *         ''' Handle all current devices '''
- *         enumerate = libudev.udev_enumerate_new(self.udev);             # <<<<<<<<<<<<<<
+ *         udevenum = libudev.udev_enumerate_new(self.udev)             # <<<<<<<<<<<<<<
  *         try:
  *             for subsystem in self.SUBSYSTEMS:
  */
@@ -1978,24 +1978,24 @@ static PyObject *__pyx_pf_4ahws_6Device_4Initialize(CYTHON_UNUSED PyObject *__py
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_v_enumerate = __pyx_t_1;
+  __pyx_v_udevenum = __pyx_t_1;
   __pyx_t_1 = 0;
 
   /* "ahws.py":52
  *         ''' Handle all current devices '''
- *         enumerate = libudev.udev_enumerate_new(self.udev);
+ *         udevenum = libudev.udev_enumerate_new(self.udev)
  *         try:             # <<<<<<<<<<<<<<
  *             for subsystem in self.SUBSYSTEMS:
- *                 libudev.udev_enumerate_add_match_subsystem(enumerate, subsystem)
+ *                 libudev.udev_enumerate_add_match_subsystem(udevenum, subsystem)
  */
   /*try:*/ {
 
     /* "ahws.py":53
- *         enumerate = libudev.udev_enumerate_new(self.udev);
+ *         udevenum = libudev.udev_enumerate_new(self.udev)
  *         try:
  *             for subsystem in self.SUBSYSTEMS:             # <<<<<<<<<<<<<<
- *                 libudev.udev_enumerate_add_match_subsystem(enumerate, subsystem)
- *             libudev.udev_enumerate_scan_devices(enumerate);
+ *                 libudev.udev_enumerate_add_match_subsystem(udevenum, subsystem)
+ *             libudev.udev_enumerate_scan_devices(udevenum)
  */
     __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_SUBSYSTEMS); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 53; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
     __Pyx_GOTREF(__pyx_t_1);
@@ -2043,9 +2043,9 @@ static PyObject *__pyx_pf_4ahws_6Device_4Initialize(CYTHON_UNUSED PyObject *__py
       /* "ahws.py":54
  *         try:
  *             for subsystem in self.SUBSYSTEMS:
- *                 libudev.udev_enumerate_add_match_subsystem(enumerate, subsystem)             # <<<<<<<<<<<<<<
- *             libudev.udev_enumerate_scan_devices(enumerate);
- *             entry = libudev.udev_enumerate_get_list_entry(enumerate)
+ *                 libudev.udev_enumerate_add_match_subsystem(udevenum, subsystem)             # <<<<<<<<<<<<<<
+ *             libudev.udev_enumerate_scan_devices(udevenum)
+ *             entry = libudev.udev_enumerate_get_list_entry(udevenum)
  */
       __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_libudev); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 54; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
       __Pyx_GOTREF(__pyx_t_5);
@@ -2069,9 +2069,9 @@ static PyObject *__pyx_pf_4ahws_6Device_4Initialize(CYTHON_UNUSED PyObject *__py
       if (__pyx_t_5) {
         PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_5); __Pyx_GIVEREF(__pyx_t_5); __pyx_t_5 = NULL;
       }
-      __Pyx_INCREF(__pyx_v_enumerate);
-      PyTuple_SET_ITEM(__pyx_t_4, 0+__pyx_t_8, __pyx_v_enumerate);
-      __Pyx_GIVEREF(__pyx_v_enumerate);
+      __Pyx_INCREF(__pyx_v_udevenum);
+      PyTuple_SET_ITEM(__pyx_t_4, 0+__pyx_t_8, __pyx_v_udevenum);
+      __Pyx_GIVEREF(__pyx_v_udevenum);
       __Pyx_INCREF(__pyx_v_subsystem);
       PyTuple_SET_ITEM(__pyx_t_4, 1+__pyx_t_8, __pyx_v_subsystem);
       __Pyx_GIVEREF(__pyx_v_subsystem);
@@ -2082,20 +2082,20 @@ static PyObject *__pyx_pf_4ahws_6Device_4Initialize(CYTHON_UNUSED PyObject *__py
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
       /* "ahws.py":53
- *         enumerate = libudev.udev_enumerate_new(self.udev);
+ *         udevenum = libudev.udev_enumerate_new(self.udev)
  *         try:
  *             for subsystem in self.SUBSYSTEMS:             # <<<<<<<<<<<<<<
- *                 libudev.udev_enumerate_add_match_subsystem(enumerate, subsystem)
- *             libudev.udev_enumerate_scan_devices(enumerate);
+ *                 libudev.udev_enumerate_add_match_subsystem(udevenum, subsystem)
+ *             libudev.udev_enumerate_scan_devices(udevenum)
  */
     }
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
     /* "ahws.py":55
  *             for subsystem in self.SUBSYSTEMS:
- *                 libudev.udev_enumerate_add_match_subsystem(enumerate, subsystem)
- *             libudev.udev_enumerate_scan_devices(enumerate);             # <<<<<<<<<<<<<<
- *             entry = libudev.udev_enumerate_get_list_entry(enumerate)
+ *                 libudev.udev_enumerate_add_match_subsystem(udevenum, subsystem)
+ *             libudev.udev_enumerate_scan_devices(udevenum)             # <<<<<<<<<<<<<<
+ *             entry = libudev.udev_enumerate_get_list_entry(udevenum)
  *             while entry:
  */
     __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_libudev); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
@@ -2114,15 +2114,15 @@ static PyObject *__pyx_pf_4ahws_6Device_4Initialize(CYTHON_UNUSED PyObject *__py
       }
     }
     if (!__pyx_t_1) {
-      __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_enumerate); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
+      __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_udevenum); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
       __Pyx_GOTREF(__pyx_t_3);
     } else {
       __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
       __Pyx_GOTREF(__pyx_t_4);
       PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_1); __Pyx_GIVEREF(__pyx_t_1); __pyx_t_1 = NULL;
-      __Pyx_INCREF(__pyx_v_enumerate);
-      PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_enumerate);
-      __Pyx_GIVEREF(__pyx_v_enumerate);
+      __Pyx_INCREF(__pyx_v_udevenum);
+      PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_udevenum);
+      __Pyx_GIVEREF(__pyx_v_udevenum);
       __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 55; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
@@ -2131,9 +2131,9 @@ static PyObject *__pyx_pf_4ahws_6Device_4Initialize(CYTHON_UNUSED PyObject *__py
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
     /* "ahws.py":56
- *                 libudev.udev_enumerate_add_match_subsystem(enumerate, subsystem)
- *             libudev.udev_enumerate_scan_devices(enumerate);
- *             entry = libudev.udev_enumerate_get_list_entry(enumerate)             # <<<<<<<<<<<<<<
+ *                 libudev.udev_enumerate_add_match_subsystem(udevenum, subsystem)
+ *             libudev.udev_enumerate_scan_devices(udevenum)
+ *             entry = libudev.udev_enumerate_get_list_entry(udevenum)             # <<<<<<<<<<<<<<
  *             while entry:
  *                 devname = libudev.udev_list_entry_get_name(entry)
  */
@@ -2153,15 +2153,15 @@ static PyObject *__pyx_pf_4ahws_6Device_4Initialize(CYTHON_UNUSED PyObject *__py
       }
     }
     if (!__pyx_t_2) {
-      __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_enumerate); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 56; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
+      __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_udevenum); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 56; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
       __Pyx_GOTREF(__pyx_t_3);
     } else {
       __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 56; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
       __Pyx_GOTREF(__pyx_t_1);
       PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2); __Pyx_GIVEREF(__pyx_t_2); __pyx_t_2 = NULL;
-      __Pyx_INCREF(__pyx_v_enumerate);
-      PyTuple_SET_ITEM(__pyx_t_1, 0+1, __pyx_v_enumerate);
-      __Pyx_GIVEREF(__pyx_v_enumerate);
+      __Pyx_INCREF(__pyx_v_udevenum);
+      PyTuple_SET_ITEM(__pyx_t_1, 0+1, __pyx_v_udevenum);
+      __Pyx_GIVEREF(__pyx_v_udevenum);
       __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 56; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -2171,8 +2171,8 @@ static PyObject *__pyx_pf_4ahws_6Device_4Initialize(CYTHON_UNUSED PyObject *__py
     __pyx_t_3 = 0;
 
     /* "ahws.py":57
- *             libudev.udev_enumerate_scan_devices(enumerate);
- *             entry = libudev.udev_enumerate_get_list_entry(enumerate)
+ *             libudev.udev_enumerate_scan_devices(udevenum)
+ *             entry = libudev.udev_enumerate_get_list_entry(udevenum)
  *             while entry:             # <<<<<<<<<<<<<<
  *                 devname = libudev.udev_list_entry_get_name(entry)
  *                 dev = libudev.udev_device_new_from_syspath(self.udev, devname)
@@ -2182,7 +2182,7 @@ static PyObject *__pyx_pf_4ahws_6Device_4Initialize(CYTHON_UNUSED PyObject *__py
       if (!__pyx_t_9) break;
 
       /* "ahws.py":58
- *             entry = libudev.udev_enumerate_get_list_entry(enumerate)
+ *             entry = libudev.udev_enumerate_get_list_entry(udevenum)
  *             while entry:
  *                 devname = libudev.udev_list_entry_get_name(entry)             # <<<<<<<<<<<<<<
  *                 dev = libudev.udev_device_new_from_syspath(self.udev, devname)
@@ -2467,7 +2467,7 @@ static PyObject *__pyx_pf_4ahws_6Device_4Initialize(CYTHON_UNUSED PyObject *__py
  *                     libudev.udev_device_unref(dev)
  *                 entry = libudev.udev_list_entry_get_next(entry)             # <<<<<<<<<<<<<<
  *         finally:
- *             libudev.udev_enumerate_unref(enumerate);
+ *             libudev.udev_enumerate_unref(udevenum);
  */
       __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_libudev); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 64; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
       __Pyx_GOTREF(__pyx_t_5);
@@ -2507,7 +2507,7 @@ static PyObject *__pyx_pf_4ahws_6Device_4Initialize(CYTHON_UNUSED PyObject *__py
   /* "ahws.py":66
  *                 entry = libudev.udev_list_entry_get_next(entry)
  *         finally:
- *             libudev.udev_enumerate_unref(enumerate);             # <<<<<<<<<<<<<<
+ *             libudev.udev_enumerate_unref(udevenum);             # <<<<<<<<<<<<<<
  * 
  *     def Handle(self, properties, action):
  */
@@ -2529,15 +2529,15 @@ static PyObject *__pyx_pf_4ahws_6Device_4Initialize(CYTHON_UNUSED PyObject *__py
         }
       }
       if (!__pyx_t_2) {
-        __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_v_enumerate); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 66; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_v_udevenum); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 66; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_3);
       } else {
         __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 66; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
         PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2); __Pyx_GIVEREF(__pyx_t_2); __pyx_t_2 = NULL;
-        __Pyx_INCREF(__pyx_v_enumerate);
-        PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_v_enumerate);
-        __Pyx_GIVEREF(__pyx_v_enumerate);
+        __Pyx_INCREF(__pyx_v_udevenum);
+        PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_v_udevenum);
+        __Pyx_GIVEREF(__pyx_v_udevenum);
         __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_5, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 66; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -2581,15 +2581,15 @@ static PyObject *__pyx_pf_4ahws_6Device_4Initialize(CYTHON_UNUSED PyObject *__py
           }
         }
         if (!__pyx_t_10) {
-          __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_v_enumerate); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 66; __pyx_clineno = __LINE__; goto __pyx_L20_error;}
+          __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_v_udevenum); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 66; __pyx_clineno = __LINE__; goto __pyx_L20_error;}
           __Pyx_GOTREF(__pyx_t_3);
         } else {
           __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 66; __pyx_clineno = __LINE__; goto __pyx_L20_error;}
           __Pyx_GOTREF(__pyx_t_2);
           PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_10); __Pyx_GIVEREF(__pyx_t_10); __pyx_t_10 = NULL;
-          __Pyx_INCREF(__pyx_v_enumerate);
-          PyTuple_SET_ITEM(__pyx_t_2, 0+1, __pyx_v_enumerate);
-          __Pyx_GIVEREF(__pyx_v_enumerate);
+          __Pyx_INCREF(__pyx_v_udevenum);
+          PyTuple_SET_ITEM(__pyx_t_2, 0+1, __pyx_v_udevenum);
+          __Pyx_GIVEREF(__pyx_v_udevenum);
           __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 66; __pyx_clineno = __LINE__; goto __pyx_L20_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -2631,7 +2631,7 @@ static PyObject *__pyx_pf_4ahws_6Device_4Initialize(CYTHON_UNUSED PyObject *__py
  * 
  *     def Initialize(self):             # <<<<<<<<<<<<<<
  *         ''' Handle all current devices '''
- *         enumerate = libudev.udev_enumerate_new(self.udev);
+ *         udevenum = libudev.udev_enumerate_new(self.udev)
  */
 
   /* function exit code */
@@ -2647,7 +2647,7 @@ static PyObject *__pyx_pf_4ahws_6Device_4Initialize(CYTHON_UNUSED PyObject *__py
   __Pyx_AddTraceback("ahws.Device.Initialize", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __pyx_r = NULL;
   __pyx_L0:;
-  __Pyx_XDECREF(__pyx_v_enumerate);
+  __Pyx_XDECREF(__pyx_v_udevenum);
   __Pyx_XDECREF(__pyx_v_subsystem);
   __Pyx_XDECREF(__pyx_v_entry);
   __Pyx_XDECREF(__pyx_v_devname);
@@ -2658,7 +2658,7 @@ static PyObject *__pyx_pf_4ahws_6Device_4Initialize(CYTHON_UNUSED PyObject *__py
 }
 
 /* "ahws.py":68
- *             libudev.udev_enumerate_unref(enumerate);
+ *             libudev.udev_enumerate_unref(udevenum);
  * 
  *     def Handle(self, properties, action):             # <<<<<<<<<<<<<<
  *         DEVNAME, MODEL, VENDOR, SERIAL, SUBSYSTEM = properties
@@ -3668,7 +3668,7 @@ static PyObject *__pyx_pf_4ahws_6Device_6Handle(CYTHON_UNUSED PyObject *__pyx_se
   __pyx_L19:;
 
   /* "ahws.py":68
- *             libudev.udev_enumerate_unref(enumerate);
+ *             libudev.udev_enumerate_unref(udevenum);
  * 
  *     def Handle(self, properties, action):             # <<<<<<<<<<<<<<
  *         DEVNAME, MODEL, VENDOR, SERIAL, SUBSYSTEM = properties
@@ -4549,7 +4549,7 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
-  {&__pyx_kp_s_1_8_2_7c7961c, __pyx_k_1_8_2_7c7961c, sizeof(__pyx_k_1_8_2_7c7961c), 0, 0, 1, 0},
+  {&__pyx_kp_s_1_8_2_2dfea63, __pyx_k_1_8_2_2dfea63, sizeof(__pyx_k_1_8_2_2dfea63), 0, 0, 1, 0},
   {&__pyx_kp_s_Can_not_get_udev_context, __pyx_k_Can_not_get_udev_context, sizeof(__pyx_k_Can_not_get_udev_context), 0, 0, 1, 0},
   {&__pyx_n_s_DEBUG, __pyx_k_DEBUG, sizeof(__pyx_k_DEBUG), 0, 0, 1, 1},
   {&__pyx_n_s_DEVNAME, __pyx_k_DEVNAME, sizeof(__pyx_k_DEVNAME), 0, 0, 1, 1},
@@ -4598,7 +4598,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_doc, __pyx_k_doc, sizeof(__pyx_k_doc), 0, 0, 1, 1},
   {&__pyx_n_s_drm, __pyx_k_drm, sizeof(__pyx_k_drm), 0, 0, 1, 1},
   {&__pyx_n_s_entry, __pyx_k_entry, sizeof(__pyx_k_entry), 0, 0, 1, 1},
-  {&__pyx_n_s_enumerate, __pyx_k_enumerate, sizeof(__pyx_k_enumerate), 0, 0, 1, 1},
   {&__pyx_kp_s_etc_ahws_d, __pyx_k_etc_ahws_d, sizeof(__pyx_k_etc_ahws_d), 0, 0, 1, 0},
   {&__pyx_n_s_exit, __pyx_k_exit, sizeof(__pyx_k_exit), 0, 0, 1, 1},
   {&__pyx_n_s_fd, __pyx_k_fd, sizeof(__pyx_k_fd), 0, 0, 1, 1},
@@ -4668,6 +4667,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_udev_monitor_receive_device, __pyx_k_udev_monitor_receive_device, sizeof(__pyx_k_udev_monitor_receive_device), 0, 0, 1, 1},
   {&__pyx_n_s_udev_new, __pyx_k_udev_new, sizeof(__pyx_k_udev_new), 0, 0, 1, 1},
   {&__pyx_n_s_udev_unref, __pyx_k_udev_unref, sizeof(__pyx_k_udev_unref), 0, 0, 1, 1},
+  {&__pyx_n_s_udevenum, __pyx_k_udevenum, sizeof(__pyx_k_udevenum), 0, 0, 1, 1},
   {&__pyx_n_s_usb, __pyx_k_usb, sizeof(__pyx_k_usb), 0, 0, 1, 1},
   {&__pyx_n_s_vendor, __pyx_k_vendor, sizeof(__pyx_k_vendor), 0, 0, 1, 1},
   {&__pyx_n_s_video4linux, __pyx_k_video4linux, sizeof(__pyx_k_video4linux), 0, 0, 1, 1},
@@ -4748,15 +4748,15 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *     def Initialize(self):             # <<<<<<<<<<<<<<
  *         ''' Handle all current devices '''
- *         enumerate = libudev.udev_enumerate_new(self.udev);
+ *         udevenum = libudev.udev_enumerate_new(self.udev)
  */
-  __pyx_tuple__8 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_enumerate, __pyx_n_s_subsystem, __pyx_n_s_entry, __pyx_n_s_devname, __pyx_n_s_dev); if (unlikely(!__pyx_tuple__8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 49; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__8 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_udevenum, __pyx_n_s_subsystem, __pyx_n_s_entry, __pyx_n_s_devname, __pyx_n_s_dev); if (unlikely(!__pyx_tuple__8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 49; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__8);
   __Pyx_GIVEREF(__pyx_tuple__8);
   __pyx_codeobj__9 = (PyObject*)__Pyx_PyCode_New(1, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__8, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_ahws_ahws_p, __pyx_n_s_Initialize, 49, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 49; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "ahws.py":68
- *             libudev.udev_enumerate_unref(enumerate);
+ *             libudev.udev_enumerate_unref(udevenum);
  * 
  *     def Handle(self, properties, action):             # <<<<<<<<<<<<<<
  *         DEVNAME, MODEL, VENDOR, SERIAL, SUBSYSTEM = properties
@@ -4995,7 +4995,7 @@ PyMODINIT_FUNC PyInit_ahws(void)
  * message.DEBUG = True
  * misc = libmisc.Misc()             # <<<<<<<<<<<<<<
  * 
- * app_version = "1.8.2 (7c7961c)"
+ * app_version = "1.8.2 (2dfea63)"
  */
   __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_libmisc); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 6; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -5026,14 +5026,14 @@ PyMODINIT_FUNC PyInit_ahws(void)
   /* "ahws.py":8
  * misc = libmisc.Misc()
  * 
- * app_version = "1.8.2 (7c7961c)"             # <<<<<<<<<<<<<<
+ * app_version = "1.8.2 (2dfea63)"             # <<<<<<<<<<<<<<
  * 
  * class Device(object):
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_8_2_7c7961c) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_8_2_2dfea63) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "ahws.py":10
- * app_version = "1.8.2 (7c7961c)"
+ * app_version = "1.8.2 (2dfea63)"
  * 
  * class Device(object):             # <<<<<<<<<<<<<<
  *     def __init__(self):
@@ -5078,7 +5078,7 @@ PyMODINIT_FUNC PyInit_ahws(void)
  * 
  *     def Initialize(self):             # <<<<<<<<<<<<<<
  *         ''' Handle all current devices '''
- *         enumerate = libudev.udev_enumerate_new(self.udev);
+ *         udevenum = libudev.udev_enumerate_new(self.udev)
  */
   __pyx_t_4 = __Pyx_CyFunction_NewEx(&__pyx_mdef_4ahws_6Device_5Initialize, 0, __pyx_n_s_Device_Initialize, NULL, __pyx_n_s_ahws, __pyx_d, ((PyObject *)__pyx_codeobj__9)); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 49; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
@@ -5086,7 +5086,7 @@ PyMODINIT_FUNC PyInit_ahws(void)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
   /* "ahws.py":68
- *             libudev.udev_enumerate_unref(enumerate);
+ *             libudev.udev_enumerate_unref(udevenum);
  * 
  *     def Handle(self, properties, action):             # <<<<<<<<<<<<<<
  *         DEVNAME, MODEL, VENDOR, SERIAL, SUBSYSTEM = properties
@@ -5110,7 +5110,7 @@ PyMODINIT_FUNC PyInit_ahws(void)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
   /* "ahws.py":10
- * app_version = "1.8.2 (7c7961c)"
+ * app_version = "1.8.2 (2dfea63)"
  * 
  * class Device(object):             # <<<<<<<<<<<<<<
  *     def __init__(self):

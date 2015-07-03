@@ -1000,7 +1000,6 @@ static char __pyx_k_s_svn[] = "%s/.svn";
 static char __pyx_k_sbase[] = "sbase";
 static char __pyx_k_sfile[] = "sfile";
 static char __pyx_k_sfull[] = "sfull";
-static char __pyx_k_shell[] = "shell";
 static char __pyx_k_slink[] = "slink";
 static char __pyx_k_smime[] = "smime";
 static char __pyx_k_spath[] = "spath";
@@ -1031,6 +1030,7 @@ static char __pyx_k_action[] = "action";
 static char __pyx_k_append[] = "append";
 static char __pyx_k_backup[] = "backup";
 static char __pyx_k_bquick[] = "bquick";
+static char __pyx_k_bshell[] = "bshell";
 static char __pyx_k_delete[] = "--delete";
 static char __pyx_k_depmod[] = "depmod";
 static char __pyx_k_encode[] = "encode";
@@ -1693,7 +1693,6 @@ static char __pyx_k_Source_remove_target_file[] = "Source.remove_target_file";
 static char __pyx_k_Source_remove_target_link[] = "Source.remove_target_link";
 static char __pyx_k_Updating_desktop_database[] = "Updating desktop database";
 static char __pyx_k_etc_gtk_2_0_gtk_immodules[] = " > /etc/gtk-2.0/gtk.immodules";
-static char __pyx_k_etc_gtk_3_0_gtk_immodules[] = " > /etc/gtk-3.0/gtk.immodules";
 static char __pyx_k_etc_spm_repositories_conf[] = "/etc/spm/repositories.conf";
 static char __pyx_k_s_tarballs_s_s__s_tar_bz2[] = "%s/tarballs/%s/%s_%s.tar.bz2";
 static char __pyx_k_Circular_dependencies_in_s[] = "Circular dependencies in %s";
@@ -1715,6 +1714,7 @@ static char __pyx_k_Guessing_maintainer_via_Git[] = "Guessing maintainer via Git
 static char __pyx_k_Source_pre_update_databases[] = "Source.pre_update_databases";
 static char __pyx_k_Updating_GRUB_configuration[] = "Updating GRUB configuration";
 static char __pyx_k_make_PREFIX_INSTALL_DIR_usr[] = "make PREFIX=\"$INSTALL_DIR/usr\"";
+static char __pyx_k_s_etc_gtk_3_0_gtk_immodules[] = "%s > /etc/gtk-3.0/gtk.immodules";
 static char __pyx_k_No_known_build_system_in_use[] = "No known build system in use";
 static char __pyx_k_Overriding_IGNORE_MISSING_to[] = "Overriding IGNORE_MISSING to";
 static char __pyx_k_Overriding_PYTHON_COMPILE_to[] = "Overriding PYTHON_COMPILE to";
@@ -2137,6 +2137,7 @@ static PyObject *__pyx_kp_s_binaries_2;
 static PyObject *__pyx_kp_s_boot_grub_grub_cfg;
 static PyObject *__pyx_n_s_bquick;
 static PyObject *__pyx_n_s_break_free;
+static PyObject *__pyx_n_s_bshell;
 static PyObject *__pyx_kp_s_c;
 static PyObject *__pyx_n_s_cdepends;
 static PyObject *__pyx_n_s_check;
@@ -2222,7 +2223,6 @@ static PyObject *__pyx_n_s_end;
 static PyObject *__pyx_n_s_endswith;
 static PyObject *__pyx_n_s_escape;
 static PyObject *__pyx_kp_s_etc_gtk_2_0_gtk_immodules;
-static PyObject *__pyx_kp_s_etc_gtk_3_0_gtk_immodules;
 static PyObject *__pyx_kp_s_etc_spm_conf;
 static PyObject *__pyx_kp_s_etc_spm_gpg;
 static PyObject *__pyx_kp_s_etc_spm_keyservers_conf;
@@ -2504,6 +2504,7 @@ static PyObject *__pyx_kp_s_s_boot_vmlinuz_etc_mkinitfs_s;
 static PyObject *__pyx_kp_s_s_depends;
 static PyObject *__pyx_kp_s_s_etc_gtk_2_0;
 static PyObject *__pyx_kp_s_s_etc_gtk_3_0;
+static PyObject *__pyx_kp_s_s_etc_gtk_3_0_gtk_immodules;
 static PyObject *__pyx_kp_s_s_gdk_pixbuf_s;
 static PyObject *__pyx_kp_s_s_gio_modules_s;
 static PyObject *__pyx_kp_s_s_git;
@@ -2562,7 +2563,6 @@ static PyObject *__pyx_kp_s_share_man_s;
 static PyObject *__pyx_kp_s_share_mime_s;
 static PyObject *__pyx_n_s_shared;
 static PyObject *__pyx_kp_s_shared_2;
-static PyObject *__pyx_n_s_shell;
 static PyObject *__pyx_n_s_shutil;
 static PyObject *__pyx_n_s_sig;
 static PyObject *__pyx_n_s_sig1;
@@ -17614,7 +17614,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *             message.sub_debug(match)
  *             misc.dir_create('%s/etc/gtk-2.0' % ROOT_DIR)             # <<<<<<<<<<<<<<
  *             misc.system_trigger(gtk2_immodules + \
- *                 ' > /etc/gtk-2.0/gtk.immodules', shell=True)
+ *                 ' > /etc/gtk-2.0/gtk.immodules', bshell=True)
  */
     __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 756; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
@@ -17658,7 +17658,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *             message.sub_debug(match)
  *             misc.dir_create('%s/etc/gtk-2.0' % ROOT_DIR)
  *             misc.system_trigger(gtk2_immodules + \             # <<<<<<<<<<<<<<
- *                 ' > /etc/gtk-2.0/gtk.immodules', shell=True)
+ *                 ' > /etc/gtk-2.0/gtk.immodules', bshell=True)
  * 
  */
     __pyx_t_13 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 757; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -17679,17 +17679,17 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
     /* "libspm.py":758
  *             misc.dir_create('%s/etc/gtk-2.0' % ROOT_DIR)
  *             misc.system_trigger(gtk2_immodules + \
- *                 ' > /etc/gtk-2.0/gtk.immodules', shell=True)             # <<<<<<<<<<<<<<
+ *                 ' > /etc/gtk-2.0/gtk.immodules', bshell=True)             # <<<<<<<<<<<<<<
  * 
  *         gtk3_immodules = misc.whereis('gtk-query-immodules-3.0', False, True)
  */
-    if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_shell, Py_True) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 757; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_bshell, Py_True) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 757; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
     /* "libspm.py":757
  *             message.sub_debug(match)
  *             misc.dir_create('%s/etc/gtk-2.0' % ROOT_DIR)
  *             misc.system_trigger(gtk2_immodules + \             # <<<<<<<<<<<<<<
- *                 ' > /etc/gtk-2.0/gtk.immodules', shell=True)
+ *                 ' > /etc/gtk-2.0/gtk.immodules', bshell=True)
  * 
  */
     __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_6, __pyx_t_13); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 757; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -17703,7 +17703,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
   __pyx_L65:;
 
   /* "libspm.py":760
- *                 ' > /etc/gtk-2.0/gtk.immodules', shell=True)
+ *                 ' > /etc/gtk-2.0/gtk.immodules', bshell=True)
  * 
  *         gtk3_immodules = misc.whereis('gtk-query-immodules-3.0', False, True)             # <<<<<<<<<<<<<<
  *         gtk3_immodules_regex = '(?:^|\\s)(.*[inserted by cython to avoid comment closer]/gtk-3.0/.*[inserted by cython to avoid comment closer]/immodules/.*)(?:$|\\s)'
@@ -17880,7 +17880,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *             message.sub_info(_('Updating GTK-3.0 imodules cache'))
  *             message.sub_debug(match)             # <<<<<<<<<<<<<<
  *             misc.dir_create('%s/etc/gtk-3.0' % ROOT_DIR)
- *             misc.system_trigger(gtk3_immodules + \
+ *             misc.system_trigger('%s > /etc/gtk-3.0/gtk.immodules' % gtk3_immodules, \
  */
     __pyx_t_12 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 766; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_12);
@@ -17918,8 +17918,8 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *             message.sub_info(_('Updating GTK-3.0 imodules cache'))
  *             message.sub_debug(match)
  *             misc.dir_create('%s/etc/gtk-3.0' % ROOT_DIR)             # <<<<<<<<<<<<<<
- *             misc.system_trigger(gtk3_immodules + \
- *                 ' > /etc/gtk-3.0/gtk.immodules', shell=True)
+ *             misc.system_trigger('%s > /etc/gtk-3.0/gtk.immodules' % gtk3_immodules, \
+ *                 bshell=True)
  */
     __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 767; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
@@ -17962,8 +17962,8 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
     /* "libspm.py":768
  *             message.sub_debug(match)
  *             misc.dir_create('%s/etc/gtk-3.0' % ROOT_DIR)
- *             misc.system_trigger(gtk3_immodules + \             # <<<<<<<<<<<<<<
- *                 ' > /etc/gtk-3.0/gtk.immodules', shell=True)
+ *             misc.system_trigger('%s > /etc/gtk-3.0/gtk.immodules' % gtk3_immodules, \             # <<<<<<<<<<<<<<
+ *                 bshell=True)
  * 
  */
     __pyx_t_13 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -17971,7 +17971,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
     __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_13, __pyx_n_s_system_trigger); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-    __pyx_t_13 = PyNumber_Add(__pyx_v_gtk3_immodules, __pyx_kp_s_etc_gtk_3_0_gtk_immodules); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_13 = __Pyx_PyString_Format(__pyx_kp_s_s_etc_gtk_3_0_gtk_immodules, __pyx_v_gtk3_immodules); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_13);
     __pyx_t_4 = PyTuple_New(1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
@@ -17983,18 +17983,18 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
 
     /* "libspm.py":769
  *             misc.dir_create('%s/etc/gtk-3.0' % ROOT_DIR)
- *             misc.system_trigger(gtk3_immodules + \
- *                 ' > /etc/gtk-3.0/gtk.immodules', shell=True)             # <<<<<<<<<<<<<<
+ *             misc.system_trigger('%s > /etc/gtk-3.0/gtk.immodules' % gtk3_immodules, \
+ *                 bshell=True)             # <<<<<<<<<<<<<<
  * 
  *         gdk_pixbuf = misc.whereis('gdk-pixbuf-query-loaders', False, True)
  */
-    if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_shell, Py_True) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (PyDict_SetItem(__pyx_t_13, __pyx_n_s_bshell, Py_True) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
     /* "libspm.py":768
  *             message.sub_debug(match)
  *             misc.dir_create('%s/etc/gtk-3.0' % ROOT_DIR)
- *             misc.system_trigger(gtk3_immodules + \             # <<<<<<<<<<<<<<
- *                 ' > /etc/gtk-3.0/gtk.immodules', shell=True)
+ *             misc.system_trigger('%s > /etc/gtk-3.0/gtk.immodules' % gtk3_immodules, \             # <<<<<<<<<<<<<<
+ *                 bshell=True)
  * 
  */
     __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_4, __pyx_t_13); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -18008,7 +18008,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
   __pyx_L70:;
 
   /* "libspm.py":771
- *                 ' > /etc/gtk-3.0/gtk.immodules', shell=True)
+ *                 bshell=True)
  * 
  *         gdk_pixbuf = misc.whereis('gdk-pixbuf-query-loaders', False, True)             # <<<<<<<<<<<<<<
  *         gdk_pixbuf_regex = '(?:^|\\s)(.*[inserted by cython to avoid comment closer]/gdk-pixbuf.*)(?:$|\\s)'
@@ -49951,7 +49951,7 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
  *                 gpg = misc.whereis('gpg2', False) or misc.whereis('gpg')
  *                 # assumes only one key
  *                 for line in misc.system_communicate('%s --list-packets %s' % (gpg, sigtmp)).splitlines():             # <<<<<<<<<<<<<<
- *                     keyid =  misc.string_search('.* keyid ([\\S]+)', line, escape=False)
+ *                     keyid = misc.string_search('.* keyid ([\\S]+)', line, escape=False)
  *                     if keyid:
  */
       __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1986; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -50061,7 +50061,7 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
         /* "libspm.py":1987
  *                 # assumes only one key
  *                 for line in misc.system_communicate('%s --list-packets %s' % (gpg, sigtmp)).splitlines():
- *                     keyid =  misc.string_search('.* keyid ([\\S]+)', line, escape=False)             # <<<<<<<<<<<<<<
+ *                     keyid = misc.string_search('.* keyid ([\\S]+)', line, escape=False)             # <<<<<<<<<<<<<<
  *                     if keyid:
  *                         src_pgpkeys = "pgpkeys=('%s')" % misc.string_convert(keyid)
  */
@@ -50091,7 +50091,7 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
 
         /* "libspm.py":1988
  *                 for line in misc.system_communicate('%s --list-packets %s' % (gpg, sigtmp)).splitlines():
- *                     keyid =  misc.string_search('.* keyid ([\\S]+)', line, escape=False)
+ *                     keyid = misc.string_search('.* keyid ([\\S]+)', line, escape=False)
  *                     if keyid:             # <<<<<<<<<<<<<<
  *                         src_pgpkeys = "pgpkeys=('%s')" % misc.string_convert(keyid)
  * 
@@ -50100,7 +50100,7 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
         if (__pyx_t_8) {
 
           /* "libspm.py":1989
- *                     keyid =  misc.string_search('.* keyid ([\\S]+)', line, escape=False)
+ *                     keyid = misc.string_search('.* keyid ([\\S]+)', line, escape=False)
  *                     if keyid:
  *                         src_pgpkeys = "pgpkeys=('%s')" % misc.string_convert(keyid)             # <<<<<<<<<<<<<<
  * 
@@ -50149,7 +50149,7 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
  *                 gpg = misc.whereis('gpg2', False) or misc.whereis('gpg')
  *                 # assumes only one key
  *                 for line in misc.system_communicate('%s --list-packets %s' % (gpg, sigtmp)).splitlines():             # <<<<<<<<<<<<<<
- *                     keyid =  misc.string_search('.* keyid ([\\S]+)', line, escape=False)
+ *                     keyid = misc.string_search('.* keyid ([\\S]+)', line, escape=False)
  *                     if keyid:
  */
       }
@@ -51747,6 +51747,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_boot_grub_grub_cfg, __pyx_k_boot_grub_grub_cfg, sizeof(__pyx_k_boot_grub_grub_cfg), 0, 0, 1, 0},
   {&__pyx_n_s_bquick, __pyx_k_bquick, sizeof(__pyx_k_bquick), 0, 0, 1, 1},
   {&__pyx_n_s_break_free, __pyx_k_break_free, sizeof(__pyx_k_break_free), 0, 0, 1, 1},
+  {&__pyx_n_s_bshell, __pyx_k_bshell, sizeof(__pyx_k_bshell), 0, 0, 1, 1},
   {&__pyx_kp_s_c, __pyx_k_c, sizeof(__pyx_k_c), 0, 0, 1, 0},
   {&__pyx_n_s_cdepends, __pyx_k_cdepends, sizeof(__pyx_k_cdepends), 0, 0, 1, 1},
   {&__pyx_n_s_check, __pyx_k_check, sizeof(__pyx_k_check), 0, 0, 1, 1},
@@ -51832,7 +51833,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_endswith, __pyx_k_endswith, sizeof(__pyx_k_endswith), 0, 0, 1, 1},
   {&__pyx_n_s_escape, __pyx_k_escape, sizeof(__pyx_k_escape), 0, 0, 1, 1},
   {&__pyx_kp_s_etc_gtk_2_0_gtk_immodules, __pyx_k_etc_gtk_2_0_gtk_immodules, sizeof(__pyx_k_etc_gtk_2_0_gtk_immodules), 0, 0, 1, 0},
-  {&__pyx_kp_s_etc_gtk_3_0_gtk_immodules, __pyx_k_etc_gtk_3_0_gtk_immodules, sizeof(__pyx_k_etc_gtk_3_0_gtk_immodules), 0, 0, 1, 0},
   {&__pyx_kp_s_etc_spm_conf, __pyx_k_etc_spm_conf, sizeof(__pyx_k_etc_spm_conf), 0, 0, 1, 0},
   {&__pyx_kp_s_etc_spm_gpg, __pyx_k_etc_spm_gpg, sizeof(__pyx_k_etc_spm_gpg), 0, 0, 1, 0},
   {&__pyx_kp_s_etc_spm_keyservers_conf, __pyx_k_etc_spm_keyservers_conf, sizeof(__pyx_k_etc_spm_keyservers_conf), 0, 0, 1, 0},
@@ -52114,6 +52114,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_s_depends, __pyx_k_s_depends, sizeof(__pyx_k_s_depends), 0, 0, 1, 0},
   {&__pyx_kp_s_s_etc_gtk_2_0, __pyx_k_s_etc_gtk_2_0, sizeof(__pyx_k_s_etc_gtk_2_0), 0, 0, 1, 0},
   {&__pyx_kp_s_s_etc_gtk_3_0, __pyx_k_s_etc_gtk_3_0, sizeof(__pyx_k_s_etc_gtk_3_0), 0, 0, 1, 0},
+  {&__pyx_kp_s_s_etc_gtk_3_0_gtk_immodules, __pyx_k_s_etc_gtk_3_0_gtk_immodules, sizeof(__pyx_k_s_etc_gtk_3_0_gtk_immodules), 0, 0, 1, 0},
   {&__pyx_kp_s_s_gdk_pixbuf_s, __pyx_k_s_gdk_pixbuf_s, sizeof(__pyx_k_s_gdk_pixbuf_s), 0, 0, 1, 0},
   {&__pyx_kp_s_s_gio_modules_s, __pyx_k_s_gio_modules_s, sizeof(__pyx_k_s_gio_modules_s), 0, 0, 1, 0},
   {&__pyx_kp_s_s_git, __pyx_k_s_git, sizeof(__pyx_k_s_git), 0, 0, 1, 0},
@@ -52172,7 +52173,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_share_mime_s, __pyx_k_share_mime_s, sizeof(__pyx_k_share_mime_s), 0, 0, 1, 0},
   {&__pyx_n_s_shared, __pyx_k_shared, sizeof(__pyx_k_shared), 0, 0, 1, 1},
   {&__pyx_kp_s_shared_2, __pyx_k_shared_2, sizeof(__pyx_k_shared_2), 0, 0, 1, 0},
-  {&__pyx_n_s_shell, __pyx_k_shell, sizeof(__pyx_k_shell), 0, 0, 1, 1},
   {&__pyx_n_s_shutil, __pyx_k_shutil, sizeof(__pyx_k_shutil), 0, 0, 1, 1},
   {&__pyx_n_s_sig, __pyx_k_sig, sizeof(__pyx_k_sig), 0, 0, 1, 1},
   {&__pyx_n_s_sig1, __pyx_k_sig1, sizeof(__pyx_k_sig1), 0, 0, 1, 1},
@@ -53094,7 +53094,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__71);
 
   /* "libspm.py":760
- *                 ' > /etc/gtk-2.0/gtk.immodules', shell=True)
+ *                 ' > /etc/gtk-2.0/gtk.immodules', bshell=True)
  * 
  *         gtk3_immodules = misc.whereis('gtk-query-immodules-3.0', False, True)             # <<<<<<<<<<<<<<
  *         gtk3_immodules_regex = '(?:^|\\s)(.*[inserted by cython to avoid comment closer]/gtk-3.0/.*[inserted by cython to avoid comment closer]/immodules/.*)(?:$|\\s)'
@@ -53116,7 +53116,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__73);
 
   /* "libspm.py":771
- *                 ' > /etc/gtk-3.0/gtk.immodules', shell=True)
+ *                 bshell=True)
  * 
  *         gdk_pixbuf = misc.whereis('gdk-pixbuf-query-loaders', False, True)             # <<<<<<<<<<<<<<
  *         gdk_pixbuf_regex = '(?:^|\\s)(.*[inserted by cython to avoid comment closer]/gdk-pixbuf.*)(?:$|\\s)'
