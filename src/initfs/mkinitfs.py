@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast
 
-app_version = "1.8.2 (2dfea63)"
+app_version = "1.8.2 (f36203e)"
 
 tmpdir = None
 keep = False
@@ -149,7 +149,7 @@ try:
         misc.system_command((ARGS.busybox, 'depmod', ARGS.kernel, '-b', ARGS.tmp))
 
         data = misc.system_communicate('%s find . | %s cpio -o -H newc' % \
-            (ARGS.busybox, ARGS.busybox), shell=True, cwd=src)
+            (ARGS.busybox, ARGS.busybox), bshell=True, cwd=src)
         if method == 'gzip':
             gzipf = gzip.GzipFile(image, 'wb')
             gzipf.write(data)

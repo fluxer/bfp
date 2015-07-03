@@ -817,7 +817,6 @@ static char __pyx_k_s_dev[] = "%s/dev";
 static char __pyx_k_s_etc[] = "%s/etc";
 static char __pyx_k_sdest[] = "sdest";
 static char __pyx_k_sfile[] = "sfile";
-static char __pyx_k_shell[] = "shell";
 static char __pyx_k_spath[] = "spath";
 static char __pyx_k_split[] = "split";
 static char __pyx_k_sreal[] = "sreal";
@@ -829,6 +828,7 @@ static char __pyx_k_KERNEL[] = "KERNEL";
 static char __pyx_k_SHUTIL[] = "SHUTIL";
 static char __pyx_k_action[] = "action";
 static char __pyx_k_append[] = "append";
+static char __pyx_k_bshell[] = "bshell";
 static char __pyx_k_depmod[] = "depmod";
 static char __pyx_k_detail[] = "detail";
 static char __pyx_k_exists[] = "exists";
@@ -938,7 +938,7 @@ static char __pyx_k_add_argument[] = "add_argument";
 static char __pyx_k_create_image[] = "create_image";
 static char __pyx_k_literal_eval[] = "literal_eval";
 static char __pyx_k_recovery_img[] = "-recovery.img";
-static char __pyx_k_1_8_2_2dfea63[] = "1.8.2 (2dfea63)";
+static char __pyx_k_1_8_2_f36203e[] = "1.8.2 (f36203e)";
 static char __pyx_k_Copying_files[] = "Copying files";
 static char __pyx_k_Decompressing[] = "Decompressing";
 static char __pyx_k_compression_2[] = "--compression";
@@ -1001,7 +1001,7 @@ static char __pyx_k_Unable_to_find_modules_directory[] = "Unable to find modules
 static PyObject *__pyx_kp_s_;
 static PyObject *__pyx_kp_s_0;
 static PyObject *__pyx_kp_s_1;
-static PyObject *__pyx_kp_s_1_8_2_2dfea63;
+static PyObject *__pyx_kp_s_1_8_2_f36203e;
 static PyObject *__pyx_kp_s_5;
 static PyObject *__pyx_kp_s_640;
 static PyObject *__pyx_kp_s_664;
@@ -1092,6 +1092,7 @@ static PyObject *__pyx_kp_s_b;
 static PyObject *__pyx_n_s_base;
 static PyObject *__pyx_n_s_basename;
 static PyObject *__pyx_kp_s_boot_initramfs_s_img;
+static PyObject *__pyx_n_s_bshell;
 static PyObject *__pyx_n_s_busybox;
 static PyObject *__pyx_kp_s_busybox_2;
 static PyObject *__pyx_n_s_bz2;
@@ -1219,7 +1220,6 @@ static PyObject *__pyx_n_s_sdir;
 static PyObject *__pyx_n_s_sfile;
 static PyObject *__pyx_n_s_sfixed;
 static PyObject *__pyx_n_s_sflags;
-static PyObject *__pyx_n_s_shell;
 static PyObject *__pyx_n_s_shutil;
 static PyObject *__pyx_n_s_spath;
 static PyObject *__pyx_n_s_split;
@@ -3582,7 +3582,7 @@ static PyObject *__pyx_pf_8mkinitfs_2create_image(CYTHON_UNUSED PyObject *__pyx_
  *         misc.system_command((ARGS.busybox, 'depmod', ARGS.kernel, '-b', ARGS.tmp))
  * 
  *         data = misc.system_communicate('%s find . | %s cpio -o -H newc' % \             # <<<<<<<<<<<<<<
- *             (ARGS.busybox, ARGS.busybox), shell=True, cwd=src)
+ *             (ARGS.busybox, ARGS.busybox), bshell=True, cwd=src)
  *         if method == 'gzip':
  */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -3594,7 +3594,7 @@ static PyObject *__pyx_pf_8mkinitfs_2create_image(CYTHON_UNUSED PyObject *__pyx_
   /* "mkinitfs.py":152
  * 
  *         data = misc.system_communicate('%s find . | %s cpio -o -H newc' % \
- *             (ARGS.busybox, ARGS.busybox), shell=True, cwd=src)             # <<<<<<<<<<<<<<
+ *             (ARGS.busybox, ARGS.busybox), bshell=True, cwd=src)             # <<<<<<<<<<<<<<
  *         if method == 'gzip':
  *             gzipf = gzip.GzipFile(image, 'wb')
  */
@@ -3621,7 +3621,7 @@ static PyObject *__pyx_pf_8mkinitfs_2create_image(CYTHON_UNUSED PyObject *__pyx_
  *         misc.system_command((ARGS.busybox, 'depmod', ARGS.kernel, '-b', ARGS.tmp))
  * 
  *         data = misc.system_communicate('%s find . | %s cpio -o -H newc' % \             # <<<<<<<<<<<<<<
- *             (ARGS.busybox, ARGS.busybox), shell=True, cwd=src)
+ *             (ARGS.busybox, ARGS.busybox), bshell=True, cwd=src)
  *         if method == 'gzip':
  */
   __pyx_t_2 = __Pyx_PyString_Format(__pyx_kp_s_s_find_s_cpio_o_H_newc, __pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -3638,18 +3638,18 @@ static PyObject *__pyx_pf_8mkinitfs_2create_image(CYTHON_UNUSED PyObject *__pyx_
   /* "mkinitfs.py":152
  * 
  *         data = misc.system_communicate('%s find . | %s cpio -o -H newc' % \
- *             (ARGS.busybox, ARGS.busybox), shell=True, cwd=src)             # <<<<<<<<<<<<<<
+ *             (ARGS.busybox, ARGS.busybox), bshell=True, cwd=src)             # <<<<<<<<<<<<<<
  *         if method == 'gzip':
  *             gzipf = gzip.GzipFile(image, 'wb')
  */
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_shell, Py_True) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_bshell, Py_True) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_cwd, __pyx_v_src) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "mkinitfs.py":151
  *         misc.system_command((ARGS.busybox, 'depmod', ARGS.kernel, '-b', ARGS.tmp))
  * 
  *         data = misc.system_communicate('%s find . | %s cpio -o -H newc' % \             # <<<<<<<<<<<<<<
- *             (ARGS.busybox, ARGS.busybox), shell=True, cwd=src)
+ *             (ARGS.busybox, ARGS.busybox), bshell=True, cwd=src)
  *         if method == 'gzip':
  */
   __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -3662,7 +3662,7 @@ static PyObject *__pyx_pf_8mkinitfs_2create_image(CYTHON_UNUSED PyObject *__pyx_
 
   /* "mkinitfs.py":153
  *         data = misc.system_communicate('%s find . | %s cpio -o -H newc' % \
- *             (ARGS.busybox, ARGS.busybox), shell=True, cwd=src)
+ *             (ARGS.busybox, ARGS.busybox), bshell=True, cwd=src)
  *         if method == 'gzip':             # <<<<<<<<<<<<<<
  *             gzipf = gzip.GzipFile(image, 'wb')
  *             gzipf.write(data)
@@ -3671,7 +3671,7 @@ static PyObject *__pyx_pf_8mkinitfs_2create_image(CYTHON_UNUSED PyObject *__pyx_
   if (__pyx_t_7) {
 
     /* "mkinitfs.py":154
- *             (ARGS.busybox, ARGS.busybox), shell=True, cwd=src)
+ *             (ARGS.busybox, ARGS.busybox), bshell=True, cwd=src)
  *         if method == 'gzip':
  *             gzipf = gzip.GzipFile(image, 'wb')             # <<<<<<<<<<<<<<
  *             gzipf.write(data)
@@ -3997,7 +3997,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_, __pyx_k_, sizeof(__pyx_k_), 0, 0, 1, 0},
   {&__pyx_kp_s_0, __pyx_k_0, sizeof(__pyx_k_0), 0, 0, 1, 0},
   {&__pyx_kp_s_1, __pyx_k_1, sizeof(__pyx_k_1), 0, 0, 1, 0},
-  {&__pyx_kp_s_1_8_2_2dfea63, __pyx_k_1_8_2_2dfea63, sizeof(__pyx_k_1_8_2_2dfea63), 0, 0, 1, 0},
+  {&__pyx_kp_s_1_8_2_f36203e, __pyx_k_1_8_2_f36203e, sizeof(__pyx_k_1_8_2_f36203e), 0, 0, 1, 0},
   {&__pyx_kp_s_5, __pyx_k_5, sizeof(__pyx_k_5), 0, 0, 1, 0},
   {&__pyx_kp_s_640, __pyx_k_640, sizeof(__pyx_k_640), 0, 0, 1, 0},
   {&__pyx_kp_s_664, __pyx_k_664, sizeof(__pyx_k_664), 0, 0, 1, 0},
@@ -4088,6 +4088,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_base, __pyx_k_base, sizeof(__pyx_k_base), 0, 0, 1, 1},
   {&__pyx_n_s_basename, __pyx_k_basename, sizeof(__pyx_k_basename), 0, 0, 1, 1},
   {&__pyx_kp_s_boot_initramfs_s_img, __pyx_k_boot_initramfs_s_img, sizeof(__pyx_k_boot_initramfs_s_img), 0, 0, 1, 0},
+  {&__pyx_n_s_bshell, __pyx_k_bshell, sizeof(__pyx_k_bshell), 0, 0, 1, 1},
   {&__pyx_n_s_busybox, __pyx_k_busybox, sizeof(__pyx_k_busybox), 0, 0, 1, 1},
   {&__pyx_kp_s_busybox_2, __pyx_k_busybox_2, sizeof(__pyx_k_busybox_2), 0, 0, 1, 0},
   {&__pyx_n_s_bz2, __pyx_k_bz2, sizeof(__pyx_k_bz2), 0, 0, 1, 1},
@@ -4215,7 +4216,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_sfile, __pyx_k_sfile, sizeof(__pyx_k_sfile), 0, 0, 1, 1},
   {&__pyx_n_s_sfixed, __pyx_k_sfixed, sizeof(__pyx_k_sfixed), 0, 0, 1, 1},
   {&__pyx_n_s_sflags, __pyx_k_sflags, sizeof(__pyx_k_sflags), 0, 0, 1, 1},
-  {&__pyx_n_s_shell, __pyx_k_shell, sizeof(__pyx_k_shell), 0, 0, 1, 1},
   {&__pyx_n_s_shutil, __pyx_k_shutil, sizeof(__pyx_k_shutil), 0, 0, 1, 1},
   {&__pyx_n_s_spath, __pyx_k_spath, sizeof(__pyx_k_spath), 0, 0, 1, 1},
   {&__pyx_n_s_split, __pyx_k_split, sizeof(__pyx_k_split), 0, 0, 1, 1},
@@ -5063,7 +5063,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  * 
  * import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast             # <<<<<<<<<<<<<<
  * 
- * app_version = "1.8.2 (2dfea63)"
+ * app_version = "1.8.2 (f36203e)"
  */
   __pyx_t_1 = __Pyx_Import(__pyx_n_s_sys, 0, -1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 3; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -5109,14 +5109,14 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
   /* "mkinitfs.py":5
  * import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast
  * 
- * app_version = "1.8.2 (2dfea63)"             # <<<<<<<<<<<<<<
+ * app_version = "1.8.2 (f36203e)"             # <<<<<<<<<<<<<<
  * 
  * tmpdir = None
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_8_2_2dfea63) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_8_2_f36203e) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "mkinitfs.py":7
- * app_version = "1.8.2 (2dfea63)"
+ * app_version = "1.8.2 (f36203e)"
  * 
  * tmpdir = None             # <<<<<<<<<<<<<<
  * keep = False
