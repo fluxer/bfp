@@ -77,6 +77,6 @@ stat:
 	cloc $(shell $(FIND) -name '*.py' -o -name '*.sh')
 
 lint:
-	$(PYLINT) $(shell $(FIND) -name '*.py' | $(GREP) -v libudev.py)
+	$(PYLINT) $(shell $(FIND) -name '*.py' | $(GREP) -v -e libudev.py -e gui_ui.py)
 
 .PHONY: all stat lint

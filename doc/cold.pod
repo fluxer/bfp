@@ -15,7 +15,7 @@ file is created that will import the first argumetns from the PATH list and
 that's basiscly it.
 
 It does not create a copy of the Python interpreter itself it creates a bundle
-of Python scripts.
+of Python scripts. It also sucks and works by pure luck.
 
 =head1 OPTIONS
 

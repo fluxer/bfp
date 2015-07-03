@@ -755,7 +755,7 @@ class Source(object):
             message.sub_debug(match)
             misc.dir_create('%s/etc/gtk-2.0' % ROOT_DIR)
             misc.system_trigger(gtk2_immodules + \
-                ' > /etc/gtk-2.0/gtk.immodules', shell=True)
+                ' > /etc/gtk-2.0/gtk.immodules', bshell=True)
 
         gtk3_immodules = misc.whereis('gtk-query-immodules-3.0', False, True)
         gtk3_immodules_regex = '(?:^|\\s)(.*/gtk-3.0/.*/immodules/.*)(?:$|\\s)'
@@ -765,8 +765,8 @@ class Source(object):
             message.sub_info(_('Updating GTK-3.0 imodules cache'))
             message.sub_debug(match)
             misc.dir_create('%s/etc/gtk-3.0' % ROOT_DIR)
-            misc.system_trigger(gtk3_immodules + \
-                ' > /etc/gtk-3.0/gtk.immodules', shell=True)
+            misc.system_trigger('%s > /etc/gtk-3.0/gtk.immodules' % gtk3_immodules, \
+                bshell=True)
 
         gdk_pixbuf = misc.whereis('gdk-pixbuf-query-loaders', False, True)
         gdk_pixbuf_regex = '(?:^|\\s)(.*/gdk-pixbuf.*)(?:$|\\s)'
@@ -1984,7 +1984,7 @@ class Aport(object):
                 gpg = misc.whereis('gpg2', False) or misc.whereis('gpg')
                 # assumes only one key
                 for line in misc.system_communicate('%s --list-packets %s' % (gpg, sigtmp)).splitlines():
-                    keyid =  misc.string_search('.* keyid ([\\S]+)', line, escape=False)
+                    keyid = misc.string_search('.* keyid ([\\S]+)', line, escape=False)
                     if keyid:
                         src_pgpkeys = "pgpkeys=('%s')" % misc.string_convert(keyid)
 

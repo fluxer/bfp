@@ -57,25 +57,25 @@ class Misc(object):
             line = inspect.currentframe().f_back.f_lineno
             raise TypeError('Variable is not %s (%d)' % (str(b), line))
 
-    def whereis(self, program, fallback=True, chroot=False):
+    def whereis(self, program, fallback=True, bchroot=False):
         ''' Find full path to executable from PATH '''
         if self.python2:
             self.typecheck(program, (types.StringTypes))
             self.typecheck(fallback, (types.BooleanType))
-            self.typecheck(chroot, (types.BooleanType))
+            self.typecheck(bchroot, (types.BooleanType))
 
         program = os.path.basename(program)
         for path in os.environ.get('PATH', '/bin:/usr/bin').split(':'):
             exe = '%s/%s' % (path, program)
-            if chroot and os.path.isfile('%s/%s' % (self.ROOT_DIR, exe)):
+            if bchroot and os.path.isfile('%s/%s' % (self.ROOT_DIR, exe)):
                 return exe
-            elif not chroot and os.path.isfile(exe):
+            elif not bchroot and os.path.isfile(exe):
                 return exe
 
         if fallback:
             # in the future, fallback will return program and let OSError be
             # raised at higher level, e.g. by subprocess
-            if chroot:
+            if bchroot:
                 raise OSError('Program not found in PATH (%s)' % self.ROOT_DIR, program)
             raise OSError('Program not found in PATH', program)
 
@@ -441,7 +441,7 @@ class Misc(object):
         else:
             cmd = [gpg, '--homedir', self.GPG_DIR]
             cmd.extend(('--verify', '--batch', ssignature, sfile))
-        self.system_command(cmd, shell=shell)
+        self.system_command(cmd, bshell=shell)
 
     def dir_create(self, sdir, ipermissions=0):
         ''' Create directory if it does not exist, including leading paths
@@ -629,14 +629,14 @@ class Misc(object):
         else:
             return urlopen(request, timeout=self.TIMEOUT)
 
-    def fetch_plain(self, surl, destination, iretry=3):
+    def fetch_plain(self, surl, sfile, iretry=3):
         ''' Download file, iretry is passed internally!
 
             resume, https and (not so much) pretty printing during the download
             process is all that it can do for you '''
         if self.python2:
             self.typecheck(surl, (types.StringTypes))
-            self.typecheck(destination, (types.StringTypes))
+            self.typecheck(sfile, (types.StringTypes))
             self.typecheck(iretry, (types.IntType))
 
         if self.OFFLINE:
@@ -646,29 +646,26 @@ class Misc(object):
         # not all requests have content-lenght:
         # http://en.wikipedia.org/wiki/Chunked_transfer_encoding
         rsize = rfile.headers.get('Content-Length', '0')
-        if os.path.exists(destination):
-            lsize = str(os.path.getsize(destination))
-            last = '%s.last' % destination
+        if os.path.exists(sfile):
+            lsize = str(os.path.getsize(sfile))
+            last = '%s.last' % sfile
             if lsize == rsize:
                 return rfile.close()
             elif lsize > rsize or (os.path.isfile(last) and not self.file_read(last) == rsize):
                 lsize = '0'
-                os.unlink(destination)
+                os.unlink(sfile)
                 # PGP signatures are small in size and it's easy for the
                 # fetcher to get confused if the file to be download is
                 # re-uploaded with minimal changes so force the signature fetch
-                sig1 = '%s.sig' % destination
-                sig2 = '%s.asc' % destination
-                if os.path.isfile(sig1):
-                    os.unlink(sig1)
-                if os.path.isfile(sig2):
-                    os.unlink(sig2)
+                sig = self.gpg_findsig(sfile)
+                if os.path.isfile(sig):
+                    os.unlink(sig)
             if rfile.headers.get('Accept-Ranges') == 'bytes':
                 # setup new request with custom header
                 rfile.close()
                 rfile = self.fetch_request(surl, {'Range': 'bytes=%s-' % lsize})
-        self.dir_create(os.path.dirname(destination))
-        lfile = open(destination, 'ab', self.BUFFER)
+        self.dir_create(os.path.dirname(sfile))
+        lfile = open(sfile, 'ab', self.BUFFER)
         try:
             # since the local file size changes use persistent units based on
             # remote file size (which is not much of persistent when the
@@ -678,7 +675,7 @@ class Misc(object):
             units = self.string_unit_guess(rsize)
             while True:
                 msg = 'Downloading: %s, %s/%s' % (self.url_normalize(surl, True), \
-                    self.string_unit(str(os.path.getsize(destination)), units), \
+                    self.string_unit(str(os.path.getsize(sfile)), units), \
                     self.string_unit(rsize, units, True))
                 sys.stdout.write(msg)
                 chunk = rfile.read(self.BUFFER)
@@ -690,17 +687,17 @@ class Misc(object):
                 sys.stdout.flush()
         except URLError as detail:
             if not iretry == 0:
-                self.fetch(surl, destination, iretry-1)
+                self.fetch(surl, sfile, iretry-1)
             else:
                 detail.url = surl
                 raise detail
         finally:
-            self.file_write('%s.last' % destination, rsize)
+            self.file_write('%s.last' % sfile, rsize)
             sys.stdout.write('\n')
             lfile.close()
             rfile.close()
 
-    def fetch_git(self, surl, destination):
+    def fetch_git(self, surl, sdir):
         ''' Clone/pull Git repository
 
             a few things to notice - only the last checkout of the repo is
@@ -708,28 +705,26 @@ class Misc(object):
             `git pull' does not fail '''
         if self.python2:
             self.typecheck(surl, (types.StringTypes))
-            self.typecheck(destination, (types.StringTypes))
+            self.typecheck(sdir, (types.StringTypes))
 
         if self.OFFLINE:
             return
 
         git = self.whereis('git')
-        if os.path.isdir('%s/.git' % destination):
-            self.system_command((git, 'pull', surl), cwd=destination)
+        if os.path.isdir('%s/.git' % sdir):
+            self.system_command((git, 'pull', surl), cwd=sdir)
         else:
-            self.system_command((git, 'clone', '--depth=1', surl, \
-                destination))
+            self.system_command((git, 'clone', '--depth=1', surl, sdir))
             # allow gracefull pulls and merges
-            self.system_command((git, 'config', 'user.name', \
-                'spm'), cwd=destination)
+            self.system_command((git, 'config', 'user.name', 'spm'), cwd=sdir)
             self.system_command((git, 'config', 'user.email', \
-                'spm@unnatended.fake'), cwd=destination)
+                'spm@unnatended.fake'), cwd=sdir)
 
-    def fetch_svn(self, surl, destination):
+    def fetch_svn(self, surl, sdir):
         ''' Clone/pull SVN repository '''
         if self.python2:
             self.typecheck(surl, (types.StringTypes))
-            self.typecheck(destination, (types.StringTypes))
+            self.typecheck(sdir, (types.StringTypes))
 
         if self.OFFLINE:
             return
@@ -738,23 +733,22 @@ class Misc(object):
         # to be able to recognize the protocol, strip it
         surl = surl.rstrip('.svn')
         svn = self.whereis('svn')
-        if os.path.isdir('%s/.svn' % destination):
-            self.system_command((svn, 'up'), cwd=destination)
+        if os.path.isdir('%s/.svn' % sdir):
+            self.system_command((svn, 'up'), cwd=sdir)
         else:
-            self.system_command((svn, 'co', '--depth=infinity', surl, \
-                destination))
+            self.system_command((svn, 'co', '--depth=infinity', surl, sdir))
 
-    def fetch_rsync(self, surl, destination):
+    def fetch_rsync(self, surl, sdir):
         ''' Sync rsync path '''
         if self.python2:
             self.typecheck(surl, (types.StringTypes))
-            self.typecheck(destination, (types.StringTypes))
+            self.typecheck(sdir, (types.StringTypes))
 
         if self.OFFLINE:
             return
 
         rsync = self.whereis('rsync')
-        self.system_command((rsync, '-cHpE', destination))
+        self.system_command((rsync, '-cHpE', sdir))
 
     def fetch(self, surl, destination, lmirrors=None, ssuffix='', iretry=3):
         ''' Download something from mirror if possible, iretry is passed
@@ -822,7 +816,7 @@ class Misc(object):
             return True
         return False
 
-    def archive_compress(self, lpaths, sfile, strip, ilevel=9):
+    def archive_compress(self, lpaths, sfile, sstrip, ilevel=9):
         ''' Create archive from list of files and/or directories
 
             ilevel is compression level integer between 0 and 9 that applies
@@ -830,7 +824,7 @@ class Misc(object):
         if self.python2:
             self.typecheck(lpaths, (types.TupleType, types.ListType))
             self.typecheck(sfile, (types.StringTypes))
-            self.typecheck(strip, (types.StringTypes))
+            self.typecheck(sstrip, (types.StringTypes))
             self.typecheck(ilevel, (types.IntType))
 
         self.dir_create(os.path.dirname(sfile))
@@ -840,21 +834,21 @@ class Misc(object):
                 compresslevel=ilevel)
             try:
                 for item in lpaths:
-                    tarf.add(item, item.lstrip(strip))
+                    tarf.add(item, item.lstrip(sstrip))
             finally:
                 tarf.close()
         elif sfile.endswith('.zip'):
             zipf = zipfile.ZipFile(sfile, mode='w')
             try:
                 for item in lpaths:
-                    zipf.write(item, item.lstrip(strip))
+                    zipf.write(item, item.lstrip(sstrip))
             finally:
                 zipf.close()
         elif sfile.endswith(('.xz', '.lzma')):
             tar = self.whereis('bsdtar', False) or self.whereis('tar')
-            command = [tar, '-caf', sfile, '-C', strip]
+            command = [tar, '-caf', sfile, '-C', sstrip]
             for f in lpaths:
-                command.append(f.replace(strip, '.'))
+                command.append(f.replace(sstrip, '.'))
             self.system_command(command)
         elif sfile.endswith('.gz'):
             if len(lpaths) > 1:
@@ -933,7 +927,7 @@ class Misc(object):
             content = self.file_name(sfile, True).split()
         return content
 
-    def system_communicate(self, command, shell=False, cwd=None, sinput=None):
+    def system_communicate(self, command, bshell=False, cwd=None, sinput=None):
         ''' Get output and optionally send input to external utility
 
             it resets the environment and sets LC_ALL to "C" to ensure locales
@@ -943,7 +937,7 @@ class Misc(object):
         if self.python2:
             self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
             self.typecheck(sinput, (types.NoneType, types.StringTypes))
-            self.typecheck(shell, (types.BooleanType))
+            self.typecheck(bshell, (types.BooleanType))
             self.typecheck(cwd, (types.NoneType, types.StringTypes))
             self.typecheck(sinput, (types.NoneType, types.StringTypes))
 
@@ -951,14 +945,14 @@ class Misc(object):
             cwd = self.dir_current()
         elif not os.path.isdir(cwd):
             cwd = '/'
-        if isinstance(command, str) and not shell:
+        if isinstance(command, str) and not bshell:
             command = shlex.split(command)
         stdin = None
         if sinput:
             stdin = subprocess.PIPE
         pipe = subprocess.Popen(command, stdin=stdin, \
             stdout=subprocess.PIPE, stderr=subprocess.PIPE, \
-            env={'LC_ALL': 'C'}, shell=shell, cwd=cwd)
+            env={'LC_ALL': 'C'}, shell=bshell, cwd=cwd)
         out, err = pipe.communicate(input=sinput)
         if pipe.returncode != 0:
             raise(Exception('%s %s' % (out, err)))
@@ -974,39 +968,39 @@ class Misc(object):
         return self.system_communicate((self.whereis('scanelf'), '-yCBF', \
             sformat, sflags, sfile))
 
-    def system_command(self, command, shell=False, cwd=''):
+    def system_command(self, command, bshell=False, cwd=''):
         ''' Execute system command safely
 
             ensuring current directory is something that exists, handle string
             commands properly for subprocess and if something goes wrong you
-            can get standard error (stderr) as an Exception. the last one exists
+            get standard error (stderr) as an Exception. the last one exists
             for consumers that need more than: "Command failed, exit status 1" '''
         if self.python2:
             self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
-            self.typecheck(shell, (types.BooleanType))
+            self.typecheck(bshell, (types.BooleanType))
             self.typecheck(cwd, (types.StringTypes))
 
         if not cwd:
             cwd = self.dir_current()
         elif not os.path.isdir(cwd):
             cwd = '/'
-        if isinstance(command, str) and not shell:
+        if isinstance(command, str) and not bshell:
             command = shlex.split(command)
         stderr = None
         if self.CATCH:
             stderr = subprocess.PIPE
-        pipe = subprocess.Popen(command, stderr=stderr, shell=shell, cwd=cwd)
+        pipe = subprocess.Popen(command, stderr=stderr, shell=bshell, cwd=cwd)
         pipe.wait()
         if pipe.returncode != 0:
             if self.CATCH:
                 raise(Exception(pipe.communicate()[1].strip()))
             raise(subprocess.CalledProcessError(pipe.returncode, command))
 
-    def system_chroot(self, command, shell=False, sinput=None):
+    def system_chroot(self, command, bshell=False, sinput=None):
         ''' Execute command in chroot environment '''
         if self.python2:
             self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
-            self.typecheck(shell, (types.BooleanType))
+            self.typecheck(bshell, (types.BooleanType))
             self.typecheck(sinput, (types.NoneType, types.StringTypes))
 
         # prevent stupidity
@@ -1032,9 +1026,9 @@ class Misc(object):
                     self.dir_create(sdir)
                     self.system_command((mount, '--bind', s, sdir))
             if sinput:
-                self.system_communicate(command, shell=shell, sinput=sinput)
+                self.system_communicate(command, bshell=bshell, sinput=sinput)
             else:
-                self.system_command(command, shell=shell)
+                self.system_command(command, bshell=bshell)
         finally:
             for s in ('/proc', '/dev', '/dev/pts', '/dev/shm', '/sys'):
                 sdir = '%s%s' % (self.ROOT_DIR, s)
@@ -1054,24 +1048,24 @@ class Misc(object):
             stmp = '%s/tmpscript' % self.ROOT_DIR
             shutil.copy(sfile, stmp)
             try:
-                self.system_chroot((self.whereis('bash', chroot=True), '-e', \
+                self.system_chroot((self.whereis('bash', bchroot=True), '-e', \
                     '-c', 'source /tmpscript && %s' % function))
             finally:
                 os.remove(stmp)
 
-    def system_trigger(self, command, shell=False):
+    def system_trigger(self, command, bshell=False):
         ''' Execute trigger
 
             that's a shortcut for a conditional chroot command depending
             on self.ROOT_DIR '''
         if self.python2:
             self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
-            self.typecheck(shell, (types.BooleanType))
+            self.typecheck(bshell, (types.BooleanType))
 
         if self.ROOT_DIR == '/':
-            self.system_command(command, shell=shell, cwd='/')
+            self.system_command(command, bshell=bshell, cwd='/')
         else:
-            self.system_chroot(command, shell=shell)
+            self.system_chroot(command, bshell=bshell)
 
 
 class Inotify(object):
@@ -1107,7 +1101,7 @@ class Inotify(object):
         if self.fd == -1:
             raise Exception('Inotify', self.error())
 
-    def __exit__(self):
+    def __exit__(self, type, value, traceback):
         self.close()
 
     def error(self):
@@ -1133,33 +1127,33 @@ class Inotify(object):
             deb = fin
             yield wd, mask, cookie, name
 
-    def watch_add(self, path, mask=None):
+    def watch_add(self, spath, mask=None):
         ''' Add path to watcher '''
         if not mask:
             mask = self.MODIFY | self.CREATE | self.DELETE
-        wd = self.libc.inotify_add_watch(self.fd, misc.string_encode(path), mask)
+        wd = self.libc.inotify_add_watch(self.fd, misc.string_encode(spath), mask)
         if wd < 0:
             raise Exception('Inotfiy', self.error())
-        self.watched[path] = wd
+        self.watched[spath] = wd
         return wd
 
-    def watch_remove(self, path):
+    def watch_remove(self, spath):
         ''' Remove path from watcher '''
-        if not path in self.watched:
+        if not spath in self.watched:
             return
-        wd = self.watched[path]
+        wd = self.watched[spath]
         ret = self.libc.inotify_rm_watch(self.fd, wd)
         if ret < 0:
             raise Exception('Inotify', self.error())
-        self.watched.pop(path)
+        self.watched.pop(spath)
 
     def watch_list(self):
         ''' Get a list of paths watched '''
         return list(self.watched.keys())
 
-    def watch_loop(self, paths, callback, mask=None):
+    def watch_loop(self, lpaths, callback, mask=None):
         ''' Start watching for events '''
-        for path in paths:
+        for path in lpaths:
             self.watch_add(path, mask)
         while True:
             for wd, mask, cookie, name in self.event_read():
@@ -1215,7 +1209,7 @@ class Magic(object):
         self._magic_file.restype = ctypes.c_char_p
         self._magic_file.argtypes = [ctypes.c_void_p, ctypes.c_char_p]
 
-    def __exit__(self):
+    def __exit__(self, type, value, traceback):
         if self.cookie and self.libmagic.magic_close:
             self.libmagic.magic_close(self.cookie)
 

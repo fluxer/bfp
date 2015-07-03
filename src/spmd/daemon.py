@@ -1,10 +1,6 @@
 #!/usr/bin/python2
 
 import sys, os, time, threading, dbus, dbus.service
-if sys.version < '3':
-    import ConfigParser as configparser
-else:
-    import configparser
 import libspm, libmisc
 libspm.CATCH = True
 message = libspm.message
@@ -110,7 +106,7 @@ class SPMD(dbus.service.Object):
         message.info('Main config change requested')
         try:
             libspm.mainconf.set(section, variable, value)
-            libspm.mainconf = open(libspm.MAIN_CONF, 'wb')
+            libspmconf = open(libspm.MAIN_CONF, 'wb')
             try:
                 libspm.mainconf.write(libspmconf)
             finally:

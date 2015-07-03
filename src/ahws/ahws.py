@@ -48,12 +48,12 @@ class Device(object):
 
     def Initialize(self):
         ''' Handle all current devices '''
-        enumerate = libudev.udev_enumerate_new(self.udev);
+        udevenum = libudev.udev_enumerate_new(self.udev)
         try:
             for subsystem in self.SUBSYSTEMS:
-                libudev.udev_enumerate_add_match_subsystem(enumerate, subsystem)
-            libudev.udev_enumerate_scan_devices(enumerate);
-            entry = libudev.udev_enumerate_get_list_entry(enumerate)
+                libudev.udev_enumerate_add_match_subsystem(udevenum, subsystem)
+            libudev.udev_enumerate_scan_devices(udevenum)
+            entry = libudev.udev_enumerate_get_list_entry(udevenum)
             while entry:
                 devname = libudev.udev_list_entry_get_name(entry)
                 dev = libudev.udev_device_new_from_syspath(self.udev, devname)
@@ -63,7 +63,7 @@ class Device(object):
                     libudev.udev_device_unref(dev)
                 entry = libudev.udev_list_entry_get_next(entry)
         finally:
-            libudev.udev_enumerate_unref(enumerate);
+            libudev.udev_enumerate_unref(udevenum);
 
     def Handle(self, properties, action):
         DEVNAME, MODEL, VENDOR, SERIAL, SUBSYSTEM = properties

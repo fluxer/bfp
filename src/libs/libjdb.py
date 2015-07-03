@@ -19,6 +19,7 @@ class JDB(object):
     def read(self, iretry=3):
         while glob.glob('%s.[0-9]*' % self.dbfile):
             time.sleep(self.dbwindow)
+        # race me, please!
         data = {}
         try:
             misc.file_touch(self.dblock)
@@ -39,6 +40,7 @@ class JDB(object):
             raise(Exception('Corrupted data', self.dbfile))
         while glob.glob('%s.[0-9]*' % self.dbfile):
             time.sleep(self.dbwindow)
+        # race me, please!
         try:
             misc.file_touch(self.dblock)
             if os.path.isfile(self.dbfile):
