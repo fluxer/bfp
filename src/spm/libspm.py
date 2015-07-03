@@ -621,7 +621,7 @@ class Source(object):
                     message.sub_warning(_('File does not exist'), m)
                     continue
                 message.sub_info(_('Deleting info page'), m)
-                misc.system_trigger((install_info, '--delete', m, \
+                misc.system_chroot((install_info, '--delete', m, \
                     '%s/share/info/dir' % sys.prefix))
 
         xdg_mime = misc.whereis('xdg-mime', False, True)
@@ -635,7 +635,7 @@ class Source(object):
                     continue
                 elif action == 'remove':
                     message.sub_info(_('Uninstalling XDG MIMEs'), m)
-                    misc.system_trigger((xdg_mime, 'uninstall', m))
+                    misc.system_chroot((xdg_mime, 'uninstall', m))
 
     def post_update_databases(self, content, action):
         ''' Update common databases after merge/remove '''
@@ -650,7 +650,7 @@ class Source(object):
         if match and ldconfig:
             message.sub_info(_('Updating shared libraries cache'))
             message.sub_debug(match)
-            misc.system_trigger((ldconfig))
+            misc.system_chroot((ldconfig))
 
         mandb = misc.whereis('mandb', False, True)
         mandb_regex = '(.*share/man.*)(?:$|\\s)'
@@ -665,10 +665,10 @@ class Source(object):
             if os.path.exists('%s/index.db' % mancache):
                 for m in match:
                     command.extend(('-f', m))
-                misc.system_trigger(command)
+                misc.system_chroot(command)
             else:
                 command.append('-c')
-                misc.system_trigger(command)
+                misc.system_chroot(command)
 
         desktop_database = misc.whereis('update-desktop-database', False, True)
         desktop_database_regex = '(.*share/applications/).*(?:$|\\s)'
@@ -677,7 +677,7 @@ class Source(object):
         if match and desktop_database:
             message.sub_info(_('Updating desktop database'))
             message.sub_debug(match)
-            misc.system_trigger((desktop_database, \
+            misc.system_chroot((desktop_database, \
                 '%s/share/applications' % sys.prefix))
 
         mime_database = misc.whereis('update-mime-database', False, True)
@@ -687,7 +687,7 @@ class Source(object):
         if match and mime_database:
             message.sub_info(_('Updating MIME database'))
             message.sub_debug(match)
-            misc.system_trigger((mime_database, '%s/share/mime' % sys.prefix))
+            misc.system_chroot((mime_database, '%s/share/mime' % sys.prefix))
 
         icon_resources = misc.whereis('xdg-icon-resource', False, True)
         message.sub_debug('xdg-icon-resources', icon_resources or '')
@@ -703,11 +703,11 @@ class Source(object):
                 base = os.path.basename(m)
                 if icon_resources:
                     message.sub_info(_('Updating icon resources'), base)
-                    misc.system_trigger((icon_resources, 'forceupdate', '--theme', base))
+                    misc.system_chroot((icon_resources, 'forceupdate', '--theme', base))
                 if (action == 'merge' or action == 'upgrade') \
                     and os.path.isfile('%s/%s/index.theme' % (ROOT_DIR, m)) and icon_cache:
                     message.sub_info(_('Updating icons cache'), base)
-                    misc.system_trigger((icon_cache, '-q', '-t', '-i', '-f', m))
+                    misc.system_chroot((icon_cache, '-q', '-t', '-i', '-f', m))
                 done.append(m)
 
         xdg_mime = misc.whereis('xdg-mime', False, True)
@@ -721,10 +721,10 @@ class Source(object):
                     continue
                 if action == 'merge':
                     message.sub_info(_('Installing XDG MIMEs'), m)
-                    misc.system_trigger((xdg_mime, 'install', '--novendor', m))
+                    misc.system_chroot((xdg_mime, 'install', '--novendor', m))
                 elif action == 'upgrade':
                     message.sub_info(_('Updating XDG MIMEs'), m)
-                    misc.system_trigger((xdg_mime, 'install', '--novendor', m))
+                    misc.system_chroot((xdg_mime, 'install', '--novendor', m))
                 done.append(m)
 
         gio_querymodules = misc.whereis('gio-querymodules', False, True)
@@ -734,7 +734,7 @@ class Source(object):
         if match and gio_querymodules:
             message.sub_info(_('Updating GIO modules cache'))
             message.sub_debug(match)
-            misc.system_trigger((gio_querymodules, os.path.dirname(match[0])))
+            misc.system_chroot((gio_querymodules, os.path.dirname(match[0])))
 
         pango_querymodules = misc.whereis('pango-querymodules', False, True)
         pango_querymodules_regex = '(?:^|\\s)(.*/pango/.*/modules/.*)(?:$|\\s)'
@@ -743,7 +743,7 @@ class Source(object):
         if match and pango_querymodules:
             message.sub_info(_('Updating pango modules cache'))
             message.sub_debug(match)
-            misc.system_trigger((pango_querymodules, '--update-cache'))
+            misc.system_chroot((pango_querymodules, '--update-cache'))
 
         # TODO: use --update-cache, requires GTK+ version >= 2.24.20
         gtk2_immodules = misc.whereis('gtk-query-immodules-2.0', False, True)
@@ -754,7 +754,7 @@ class Source(object):
             message.sub_info(_('Updating GTK-2.0 imodules cache'))
             message.sub_debug(match)
             misc.dir_create('%s/etc/gtk-2.0' % ROOT_DIR)
-            misc.system_trigger(gtk2_immodules + \
+            misc.system_chroot(gtk2_immodules + \
                 ' > /etc/gtk-2.0/gtk.immodules', bshell=True)
 
         gtk3_immodules = misc.whereis('gtk-query-immodules-3.0', False, True)
@@ -765,7 +765,7 @@ class Source(object):
             message.sub_info(_('Updating GTK-3.0 imodules cache'))
             message.sub_debug(match)
             misc.dir_create('%s/etc/gtk-3.0' % ROOT_DIR)
-            misc.system_trigger('%s > /etc/gtk-3.0/gtk.immodules' % gtk3_immodules, \
+            misc.system_chroot('%s > /etc/gtk-3.0/gtk.immodules' % gtk3_immodules, \
                 bshell=True)
 
         gdk_pixbuf = misc.whereis('gdk-pixbuf-query-loaders', False, True)
@@ -775,7 +775,7 @@ class Source(object):
         if match and gdk_pixbuf:
             message.sub_info(_('Updating gdk pixbuffer loaders'))
             message.sub_debug(match)
-            misc.system_trigger((gdk_pixbuf, '--update-cache'))
+            misc.system_chroot((gdk_pixbuf, '--update-cache'))
 
         glib_schemas = misc.whereis('glib-compile-schemas', False, True)
         glib_schemas_regex = '(?:^|\\s)(.*/schemas)/.*(?:$|\\s)'
@@ -784,7 +784,7 @@ class Source(object):
         if match and glib_schemas:
             message.sub_info(_('Updating GSettings schemas'))
             message.sub_debug(match)
-            misc.system_trigger((glib_schemas, match[0]))
+            misc.system_chroot((glib_schemas, match[0]))
 
         install_info = misc.whereis('install-info', False, True)
         install_info_regex = '(?:^|\\s)(.*share/info/.*)(?:$|\\s)'
@@ -794,7 +794,7 @@ class Source(object):
             message.sub_debug(match)
             for m in match:
                 message.sub_info(_('Installing info page'), m)
-                misc.system_trigger((install_info, m, \
+                misc.system_chroot((install_info, m, \
                     '%s/share/info/dir' % sys.prefix))
 
         udevadm = misc.whereis('udevadm', False, True)
@@ -806,7 +806,7 @@ class Source(object):
             or os.path.exists('%s/var/run/udev/control' % ROOT_DIR):
                 message.sub_info(_('Reloading udev rules and hwdb'))
                 message.sub_debug(match)
-                misc.system_trigger((udevadm, 'control', '--reload'))
+                misc.system_chroot((udevadm, 'control', '--reload'))
 
         mkinitfs_run = False
         depmod = misc.whereis('depmod', False, True)
@@ -816,7 +816,7 @@ class Source(object):
         if match and depmod:
             message.sub_info(_('Updating module dependencies'))
             message.sub_debug(match)
-            misc.system_trigger((depmod, match[0]))
+            misc.system_chroot((depmod, match[0]))
             mkinitfs_run = True
 
         # distribution specifiec
@@ -829,9 +829,9 @@ class Source(object):
             message.sub_debug(match or mkinitfs_run)
             if match and match[0][1]:
                 # new kernel being installed
-                misc.system_trigger((mkinitfs, '-k', match[0][1]))
+                misc.system_chroot((mkinitfs, '-k', match[0][1]))
             else:
-                misc.system_trigger((mkinitfs))
+                misc.system_chroot((mkinitfs))
 
         grub_mkconfig = misc.whereis('grub-mkconfig', False, True)
         grub_mkconfig_regex = '(?:^|\\s)(?:/)?(boot/.*|etc/grub.d/.*)(?:$|\\s)'
@@ -841,7 +841,7 @@ class Source(object):
             message.sub_info(_('Updating GRUB configuration'))
             message.sub_debug(match)
             misc.dir_create('%s/boot/grub' % ROOT_DIR)
-            misc.system_trigger((grub_mkconfig, '-o', '/boot/grub/grub.cfg'))
+            misc.system_chroot((grub_mkconfig, '-o', '/boot/grub/grub.cfg'))
 
     def remove_target_file(self, sfile):
         ''' Remove target file '''

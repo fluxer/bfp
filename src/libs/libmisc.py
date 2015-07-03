@@ -441,7 +441,7 @@ class Misc(object):
         else:
             cmd = [gpg, '--homedir', self.GPG_DIR]
             cmd.extend(('--verify', '--batch', ssignature, sfile))
-        self.system_command(cmd, bshell=shell)
+        self.system_command(cmd, shell)
 
     def dir_create(self, sdir, ipermissions=0):
         ''' Create directory if it does not exist, including leading paths
@@ -1003,9 +1003,10 @@ class Misc(object):
             self.typecheck(bshell, (types.BooleanType))
             self.typecheck(sinput, (types.NoneType, types.StringTypes))
 
-        # prevent stupidity
         if self.ROOT_DIR == '/':
-            return
+            if sinput:
+                return self.system_communicate(command, bshell, sinput=sinput)
+            return self.system_command(command, bshell)
 
         mount = self.whereis('mount')
         umount = self.whereis('umount')
@@ -1026,9 +1027,9 @@ class Misc(object):
                     self.dir_create(sdir)
                     self.system_command((mount, '--bind', s, sdir))
             if sinput:
-                self.system_communicate(command, bshell=bshell, sinput=sinput)
+                self.system_communicate(command, bshell, sinput=sinput)
             else:
-                self.system_command(command, bshell=bshell)
+                self.system_command(command, bshell)
         finally:
             for s in ('/proc', '/dev', '/dev/pts', '/dev/shm', '/sys'):
                 sdir = '%s%s' % (self.ROOT_DIR, s)
@@ -1052,20 +1053,6 @@ class Misc(object):
                     '-c', 'source /tmpscript && %s' % function))
             finally:
                 os.remove(stmp)
-
-    def system_trigger(self, command, bshell=False):
-        ''' Execute trigger
-
-            that's a shortcut for a conditional chroot command depending
-            on self.ROOT_DIR '''
-        if self.python2:
-            self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
-            self.typecheck(bshell, (types.BooleanType))
-
-        if self.ROOT_DIR == '/':
-            self.system_command(command, bshell=bshell, cwd='/')
-        else:
-            self.system_chroot(command, bshell=bshell)
 
 
 class Inotify(object):

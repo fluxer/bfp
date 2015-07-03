@@ -1433,6 +1433,7 @@ static char __pyx_k_s_etc_gtk_3_0[] = "%s/etc/gtk-3.0";
 static char __pyx_k_src_compile_2[] = "src_compile";
 static char __pyx_k_src_install_2[] = "src_install";
 static char __pyx_k_string_search[] = "string_search";
+static char __pyx_k_system_chroot[] = "system_chroot";
 static char __pyx_k_system_script[] = "system_script";
 static char __pyx_k_target_backup[] = "target_backup";
 static char __pyx_k_text_x_python[] = "text/x-python";
@@ -1491,7 +1492,6 @@ static char __pyx_k_strip_binaries[] = "strip_binaries";
 static char __pyx_k_strip_unneeded[] = "--strip-unneeded";
 static char __pyx_k_system_command[] = "system_command";
 static char __pyx_k_system_scanelf[] = "system_scanelf";
-static char __pyx_k_system_trigger[] = "system_trigger";
 static char __pyx_k_target_content[] = "target_content";
 static char __pyx_k_target_depends[] = "target_depends";
 static char __pyx_k_target_options[] = "target_options";
@@ -2647,11 +2647,11 @@ static PyObject *__pyx_n_s_symlink;
 static PyObject *__pyx_n_s_sync;
 static PyObject *__pyx_n_s_sys;
 static PyObject *__pyx_kp_s_sys_2;
+static PyObject *__pyx_n_s_system_chroot;
 static PyObject *__pyx_n_s_system_command;
 static PyObject *__pyx_n_s_system_communicate;
 static PyObject *__pyx_n_s_system_scanelf;
 static PyObject *__pyx_n_s_system_script;
-static PyObject *__pyx_n_s_system_trigger;
 static PyObject *__pyx_kp_s_t;
 static PyObject *__pyx_kp_s_t_2;
 static PyObject *__pyx_kp_s_tarballs_s;
@@ -13718,7 +13718,7 @@ static PyObject *__pyx_pf_6libspm_6Source_8pre_update_databases(CYTHON_UNUSED Py
  *                     message.sub_warning(_('File does not exist'), m)
  *                     continue             # <<<<<<<<<<<<<<
  *                 message.sub_info(_('Deleting info page'), m)
- *                 misc.system_trigger((install_info, '--delete', m, \
+ *                 misc.system_chroot((install_info, '--delete', m, \
  */
         goto __pyx_L9_continue;
       }
@@ -13727,7 +13727,7 @@ static PyObject *__pyx_pf_6libspm_6Source_8pre_update_databases(CYTHON_UNUSED Py
  *                     message.sub_warning(_('File does not exist'), m)
  *                     continue
  *                 message.sub_info(_('Deleting info page'), m)             # <<<<<<<<<<<<<<
- *                 misc.system_trigger((install_info, '--delete', m, \
+ *                 misc.system_chroot((install_info, '--delete', m, \
  *                     '%s/share/info/dir' % sys.prefix))
  */
       __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 623; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -13772,19 +13772,19 @@ static PyObject *__pyx_pf_6libspm_6Source_8pre_update_databases(CYTHON_UNUSED Py
       /* "libspm.py":624
  *                     continue
  *                 message.sub_info(_('Deleting info page'), m)
- *                 misc.system_trigger((install_info, '--delete', m, \             # <<<<<<<<<<<<<<
+ *                 misc.system_chroot((install_info, '--delete', m, \             # <<<<<<<<<<<<<<
  *                     '%s/share/info/dir' % sys.prefix))
  * 
  */
       __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 624; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_system_trigger); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 624; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_system_chroot); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 624; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
       /* "libspm.py":625
  *                 message.sub_info(_('Deleting info page'), m)
- *                 misc.system_trigger((install_info, '--delete', m, \
+ *                 misc.system_chroot((install_info, '--delete', m, \
  *                     '%s/share/info/dir' % sys.prefix))             # <<<<<<<<<<<<<<
  * 
  *         xdg_mime = misc.whereis('xdg-mime', False, True)
@@ -13801,7 +13801,7 @@ static PyObject *__pyx_pf_6libspm_6Source_8pre_update_databases(CYTHON_UNUSED Py
       /* "libspm.py":624
  *                     continue
  *                 message.sub_info(_('Deleting info page'), m)
- *                 misc.system_trigger((install_info, '--delete', m, \             # <<<<<<<<<<<<<<
+ *                 misc.system_chroot((install_info, '--delete', m, \             # <<<<<<<<<<<<<<
  *                     '%s/share/info/dir' % sys.prefix))
  * 
  */
@@ -14074,7 +14074,7 @@ static PyObject *__pyx_pf_6libspm_6Source_8pre_update_databases(CYTHON_UNUSED Py
  *                     continue
  *                 elif action == 'remove':             # <<<<<<<<<<<<<<
  *                     message.sub_info(_('Uninstalling XDG MIMEs'), m)
- *                     misc.system_trigger((xdg_mime, 'uninstall', m))
+ *                     misc.system_chroot((xdg_mime, 'uninstall', m))
  */
       __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_v_action, __pyx_n_s_remove, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 636; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       if (__pyx_t_3) {
@@ -14083,7 +14083,7 @@ static PyObject *__pyx_pf_6libspm_6Source_8pre_update_databases(CYTHON_UNUSED Py
  *                     continue
  *                 elif action == 'remove':
  *                     message.sub_info(_('Uninstalling XDG MIMEs'), m)             # <<<<<<<<<<<<<<
- *                     misc.system_trigger((xdg_mime, 'uninstall', m))
+ *                     misc.system_chroot((xdg_mime, 'uninstall', m))
  * 
  */
         __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 637; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -14128,13 +14128,13 @@ static PyObject *__pyx_pf_6libspm_6Source_8pre_update_databases(CYTHON_UNUSED Py
         /* "libspm.py":638
  *                 elif action == 'remove':
  *                     message.sub_info(_('Uninstalling XDG MIMEs'), m)
- *                     misc.system_trigger((xdg_mime, 'uninstall', m))             # <<<<<<<<<<<<<<
+ *                     misc.system_chroot((xdg_mime, 'uninstall', m))             # <<<<<<<<<<<<<<
  * 
  *     def post_update_databases(self, content, action):
  */
         __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 638; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_system_trigger); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 638; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_system_chroot); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 638; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __pyx_t_5 = PyTuple_New(3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 638; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -14228,7 +14228,7 @@ static PyObject *__pyx_pf_6libspm_6Source_8pre_update_databases(CYTHON_UNUSED Py
 }
 
 /* "libspm.py":640
- *                     misc.system_trigger((xdg_mime, 'uninstall', m))
+ *                     misc.system_chroot((xdg_mime, 'uninstall', m))
  * 
  *     def post_update_databases(self, content, action):             # <<<<<<<<<<<<<<
  *         ''' Update common databases after merge/remove '''
@@ -14542,7 +14542,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *         if match and ldconfig:
  *             message.sub_info(_('Updating shared libraries cache'))             # <<<<<<<<<<<<<<
  *             message.sub_debug(match)
- *             misc.system_trigger((ldconfig))
+ *             misc.system_chroot((ldconfig))
  */
     __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 651; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_8);
@@ -14586,7 +14586,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *         if match and ldconfig:
  *             message.sub_info(_('Updating shared libraries cache'))
  *             message.sub_debug(match)             # <<<<<<<<<<<<<<
- *             misc.system_trigger((ldconfig))
+ *             misc.system_chroot((ldconfig))
  * 
  */
     __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 652; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -14624,13 +14624,13 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
     /* "libspm.py":653
  *             message.sub_info(_('Updating shared libraries cache'))
  *             message.sub_debug(match)
- *             misc.system_trigger((ldconfig))             # <<<<<<<<<<<<<<
+ *             misc.system_chroot((ldconfig))             # <<<<<<<<<<<<<<
  * 
  *         mandb = misc.whereis('mandb', False, True)
  */
     __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 653; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_system_trigger); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 653; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_system_chroot); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 653; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __pyx_t_6 = NULL;
@@ -14664,7 +14664,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
   __pyx_L6:;
 
   /* "libspm.py":655
- *             misc.system_trigger((ldconfig))
+ *             misc.system_chroot((ldconfig))
  * 
  *         mandb = misc.whereis('mandb', False, True)             # <<<<<<<<<<<<<<
  *         mandb_regex = '(.*share/man.*)(?:$|\\s)'
@@ -14999,7 +14999,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *             if os.path.exists('%s/index.db' % mancache):
  *                 for m in match:             # <<<<<<<<<<<<<<
  *                     command.extend(('-f', m))
- *                 misc.system_trigger(command)
+ *                 misc.system_chroot(command)
  */
       if (likely(PyList_CheckExact(__pyx_v_match)) || PyTuple_CheckExact(__pyx_v_match)) {
         __pyx_t_6 = __pyx_v_match; __Pyx_INCREF(__pyx_t_6); __pyx_t_7 = 0;
@@ -15045,7 +15045,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *             if os.path.exists('%s/index.db' % mancache):
  *                 for m in match:
  *                     command.extend(('-f', m))             # <<<<<<<<<<<<<<
- *                 misc.system_trigger(command)
+ *                 misc.system_chroot(command)
  *             else:
  */
         __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 667; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -15064,7 +15064,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *             if os.path.exists('%s/index.db' % mancache):
  *                 for m in match:             # <<<<<<<<<<<<<<
  *                     command.extend(('-f', m))
- *                 misc.system_trigger(command)
+ *                 misc.system_chroot(command)
  */
       }
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -15072,13 +15072,13 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
       /* "libspm.py":668
  *                 for m in match:
  *                     command.extend(('-f', m))
- *                 misc.system_trigger(command)             # <<<<<<<<<<<<<<
+ *                 misc.system_chroot(command)             # <<<<<<<<<<<<<<
  *             else:
  *                 command.append('-c')
  */
       __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 668; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_system_trigger); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 668; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_system_chroot); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 668; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_t_1 = NULL;
@@ -15112,10 +15112,10 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
     /*else*/ {
 
       /* "libspm.py":670
- *                 misc.system_trigger(command)
+ *                 misc.system_chroot(command)
  *             else:
  *                 command.append('-c')             # <<<<<<<<<<<<<<
- *                 misc.system_trigger(command)
+ *                 misc.system_chroot(command)
  * 
  */
       __pyx_t_10 = __Pyx_PyList_Append(__pyx_v_command, __pyx_kp_s_c); if (unlikely(__pyx_t_10 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 670; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -15123,13 +15123,13 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
       /* "libspm.py":671
  *             else:
  *                 command.append('-c')
- *                 misc.system_trigger(command)             # <<<<<<<<<<<<<<
+ *                 misc.system_chroot(command)             # <<<<<<<<<<<<<<
  * 
  *         desktop_database = misc.whereis('update-desktop-database', False, True)
  */
       __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 671; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_system_trigger); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 671; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_system_chroot); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 671; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       __pyx_t_8 = NULL;
@@ -15165,7 +15165,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
   __pyx_L11:;
 
   /* "libspm.py":673
- *                 misc.system_trigger(command)
+ *                 misc.system_chroot(command)
  * 
  *         desktop_database = misc.whereis('update-desktop-database', False, True)             # <<<<<<<<<<<<<<
  *         desktop_database_regex = '(.*share/applications/).*(?:$|\\s)'
@@ -15297,7 +15297,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *         if match and desktop_database:
  *             message.sub_info(_('Updating desktop database'))             # <<<<<<<<<<<<<<
  *             message.sub_debug(match)
- *             misc.system_trigger((desktop_database, \
+ *             misc.system_chroot((desktop_database, \
  */
     __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 678; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
@@ -15341,7 +15341,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *         if match and desktop_database:
  *             message.sub_info(_('Updating desktop database'))
  *             message.sub_debug(match)             # <<<<<<<<<<<<<<
- *             misc.system_trigger((desktop_database, \
+ *             misc.system_chroot((desktop_database, \
  *                 '%s/share/applications' % sys.prefix))
  */
     __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 679; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -15379,19 +15379,19 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
     /* "libspm.py":680
  *             message.sub_info(_('Updating desktop database'))
  *             message.sub_debug(match)
- *             misc.system_trigger((desktop_database, \             # <<<<<<<<<<<<<<
+ *             misc.system_chroot((desktop_database, \             # <<<<<<<<<<<<<<
  *                 '%s/share/applications' % sys.prefix))
  * 
  */
     __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 680; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_8);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_system_trigger); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 680; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_system_chroot); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 680; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
     /* "libspm.py":681
  *             message.sub_debug(match)
- *             misc.system_trigger((desktop_database, \
+ *             misc.system_chroot((desktop_database, \
  *                 '%s/share/applications' % sys.prefix))             # <<<<<<<<<<<<<<
  * 
  *         mime_database = misc.whereis('update-mime-database', False, True)
@@ -15408,7 +15408,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
     /* "libspm.py":680
  *             message.sub_info(_('Updating desktop database'))
  *             message.sub_debug(match)
- *             misc.system_trigger((desktop_database, \             # <<<<<<<<<<<<<<
+ *             misc.system_chroot((desktop_database, \             # <<<<<<<<<<<<<<
  *                 '%s/share/applications' % sys.prefix))
  * 
  */
@@ -15584,7 +15584,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *         if match and mime_database:
  *             message.sub_info(_('Updating MIME database'))             # <<<<<<<<<<<<<<
  *             message.sub_debug(match)
- *             misc.system_trigger((mime_database, '%s/share/mime' % sys.prefix))
+ *             misc.system_chroot((mime_database, '%s/share/mime' % sys.prefix))
  */
     __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 688; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_8);
@@ -15628,7 +15628,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *         if match and mime_database:
  *             message.sub_info(_('Updating MIME database'))
  *             message.sub_debug(match)             # <<<<<<<<<<<<<<
- *             misc.system_trigger((mime_database, '%s/share/mime' % sys.prefix))
+ *             misc.system_chroot((mime_database, '%s/share/mime' % sys.prefix))
  * 
  */
     __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 689; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -15666,13 +15666,13 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
     /* "libspm.py":690
  *             message.sub_info(_('Updating MIME database'))
  *             message.sub_debug(match)
- *             misc.system_trigger((mime_database, '%s/share/mime' % sys.prefix))             # <<<<<<<<<<<<<<
+ *             misc.system_chroot((mime_database, '%s/share/mime' % sys.prefix))             # <<<<<<<<<<<<<<
  * 
  *         icon_resources = misc.whereis('xdg-icon-resource', False, True)
  */
     __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 690; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_system_trigger); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 690; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_system_chroot); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 690; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 690; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -15723,7 +15723,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
   __pyx_L24:;
 
   /* "libspm.py":692
- *             misc.system_trigger((mime_database, '%s/share/mime' % sys.prefix))
+ *             misc.system_chroot((mime_database, '%s/share/mime' % sys.prefix))
  * 
  *         icon_resources = misc.whereis('xdg-icon-resource', False, True)             # <<<<<<<<<<<<<<
  *         message.sub_debug('xdg-icon-resources', icon_resources or '')
@@ -16053,7 +16053,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *                 base = os.path.basename(m)
  *                 if icon_resources:             # <<<<<<<<<<<<<<
  *                     message.sub_info(_('Updating icon resources'), base)
- *                     misc.system_trigger((icon_resources, 'forceupdate', '--theme', base))
+ *                     misc.system_chroot((icon_resources, 'forceupdate', '--theme', base))
  */
       __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_v_icon_resources); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 704; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       if (__pyx_t_2) {
@@ -16062,7 +16062,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *                 base = os.path.basename(m)
  *                 if icon_resources:
  *                     message.sub_info(_('Updating icon resources'), base)             # <<<<<<<<<<<<<<
- *                     misc.system_trigger((icon_resources, 'forceupdate', '--theme', base))
+ *                     misc.system_chroot((icon_resources, 'forceupdate', '--theme', base))
  *                 if (action == 'merge' or action == 'upgrade') \
  */
         __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 705; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -16107,13 +16107,13 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
         /* "libspm.py":706
  *                 if icon_resources:
  *                     message.sub_info(_('Updating icon resources'), base)
- *                     misc.system_trigger((icon_resources, 'forceupdate', '--theme', base))             # <<<<<<<<<<<<<<
+ *                     misc.system_chroot((icon_resources, 'forceupdate', '--theme', base))             # <<<<<<<<<<<<<<
  *                 if (action == 'merge' or action == 'upgrade') \
  *                     and os.path.isfile('%s/%s/index.theme' % (ROOT_DIR, m)) and icon_cache:
  */
         __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 706; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_system_trigger); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 706; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_system_chroot); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 706; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_12);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __pyx_t_5 = PyTuple_New(4); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 706; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -16163,7 +16163,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
 
       /* "libspm.py":707
  *                     message.sub_info(_('Updating icon resources'), base)
- *                     misc.system_trigger((icon_resources, 'forceupdate', '--theme', base))
+ *                     misc.system_chroot((icon_resources, 'forceupdate', '--theme', base))
  *                 if (action == 'merge' or action == 'upgrade') \             # <<<<<<<<<<<<<<
  *                     and os.path.isfile('%s/%s/index.theme' % (ROOT_DIR, m)) and icon_cache:
  *                     message.sub_info(_('Updating icons cache'), base)
@@ -16182,11 +16182,11 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
       __pyx_L41_next_and:;
 
       /* "libspm.py":708
- *                     misc.system_trigger((icon_resources, 'forceupdate', '--theme', base))
+ *                     misc.system_chroot((icon_resources, 'forceupdate', '--theme', base))
  *                 if (action == 'merge' or action == 'upgrade') \
  *                     and os.path.isfile('%s/%s/index.theme' % (ROOT_DIR, m)) and icon_cache:             # <<<<<<<<<<<<<<
  *                     message.sub_info(_('Updating icons cache'), base)
- *                     misc.system_trigger((icon_cache, '-q', '-t', '-i', '-f', m))
+ *                     misc.system_chroot((icon_cache, '-q', '-t', '-i', '-f', m))
  */
       __pyx_t_12 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 708; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_12);
@@ -16251,7 +16251,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *                 if (action == 'merge' or action == 'upgrade') \
  *                     and os.path.isfile('%s/%s/index.theme' % (ROOT_DIR, m)) and icon_cache:
  *                     message.sub_info(_('Updating icons cache'), base)             # <<<<<<<<<<<<<<
- *                     misc.system_trigger((icon_cache, '-q', '-t', '-i', '-f', m))
+ *                     misc.system_chroot((icon_cache, '-q', '-t', '-i', '-f', m))
  *                 done.append(m)
  */
         __pyx_t_12 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 709; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -16296,13 +16296,13 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
         /* "libspm.py":710
  *                     and os.path.isfile('%s/%s/index.theme' % (ROOT_DIR, m)) and icon_cache:
  *                     message.sub_info(_('Updating icons cache'), base)
- *                     misc.system_trigger((icon_cache, '-q', '-t', '-i', '-f', m))             # <<<<<<<<<<<<<<
+ *                     misc.system_chroot((icon_cache, '-q', '-t', '-i', '-f', m))             # <<<<<<<<<<<<<<
  *                 done.append(m)
  * 
  */
         __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 710; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_system_trigger); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 710; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_system_chroot); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 710; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __pyx_t_6 = PyTuple_New(6); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 710; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -16358,7 +16358,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
 
       /* "libspm.py":711
  *                     message.sub_info(_('Updating icons cache'), base)
- *                     misc.system_trigger((icon_cache, '-q', '-t', '-i', '-f', m))
+ *                     misc.system_chroot((icon_cache, '-q', '-t', '-i', '-f', m))
  *                 done.append(m)             # <<<<<<<<<<<<<<
  * 
  *         xdg_mime = misc.whereis('xdg-mime', False, True)
@@ -16592,7 +16592,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *                     continue
  *                 if action == 'merge':             # <<<<<<<<<<<<<<
  *                     message.sub_info(_('Installing XDG MIMEs'), m)
- *                     misc.system_trigger((xdg_mime, 'install', '--novendor', m))
+ *                     misc.system_chroot((xdg_mime, 'install', '--novendor', m))
  */
       __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_v_action, __pyx_n_s_merge, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 722; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       if (__pyx_t_3) {
@@ -16601,7 +16601,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *                     continue
  *                 if action == 'merge':
  *                     message.sub_info(_('Installing XDG MIMEs'), m)             # <<<<<<<<<<<<<<
- *                     misc.system_trigger((xdg_mime, 'install', '--novendor', m))
+ *                     misc.system_chroot((xdg_mime, 'install', '--novendor', m))
  *                 elif action == 'upgrade':
  */
         __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 723; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -16646,13 +16646,13 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
         /* "libspm.py":724
  *                 if action == 'merge':
  *                     message.sub_info(_('Installing XDG MIMEs'), m)
- *                     misc.system_trigger((xdg_mime, 'install', '--novendor', m))             # <<<<<<<<<<<<<<
+ *                     misc.system_chroot((xdg_mime, 'install', '--novendor', m))             # <<<<<<<<<<<<<<
  *                 elif action == 'upgrade':
  *                     message.sub_info(_('Updating XDG MIMEs'), m)
  */
         __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 724; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_system_trigger); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 724; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_system_chroot); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 724; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __pyx_t_5 = PyTuple_New(4); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 724; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -16701,19 +16701,19 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
 
       /* "libspm.py":725
  *                     message.sub_info(_('Installing XDG MIMEs'), m)
- *                     misc.system_trigger((xdg_mime, 'install', '--novendor', m))
+ *                     misc.system_chroot((xdg_mime, 'install', '--novendor', m))
  *                 elif action == 'upgrade':             # <<<<<<<<<<<<<<
  *                     message.sub_info(_('Updating XDG MIMEs'), m)
- *                     misc.system_trigger((xdg_mime, 'install', '--novendor', m))
+ *                     misc.system_chroot((xdg_mime, 'install', '--novendor', m))
  */
       __pyx_t_3 = (__Pyx_PyString_Equals(__pyx_v_action, __pyx_n_s_upgrade, Py_EQ)); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 725; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       if (__pyx_t_3) {
 
         /* "libspm.py":726
- *                     misc.system_trigger((xdg_mime, 'install', '--novendor', m))
+ *                     misc.system_chroot((xdg_mime, 'install', '--novendor', m))
  *                 elif action == 'upgrade':
  *                     message.sub_info(_('Updating XDG MIMEs'), m)             # <<<<<<<<<<<<<<
- *                     misc.system_trigger((xdg_mime, 'install', '--novendor', m))
+ *                     misc.system_chroot((xdg_mime, 'install', '--novendor', m))
  *                 done.append(m)
  */
         __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 726; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -16758,13 +16758,13 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
         /* "libspm.py":727
  *                 elif action == 'upgrade':
  *                     message.sub_info(_('Updating XDG MIMEs'), m)
- *                     misc.system_trigger((xdg_mime, 'install', '--novendor', m))             # <<<<<<<<<<<<<<
+ *                     misc.system_chroot((xdg_mime, 'install', '--novendor', m))             # <<<<<<<<<<<<<<
  *                 done.append(m)
  * 
  */
         __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 727; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_8);
-        __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_system_trigger); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 727; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_system_chroot); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 727; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_12);
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
         __pyx_t_8 = PyTuple_New(4); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 727; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -16814,7 +16814,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
 
       /* "libspm.py":728
  *                     message.sub_info(_('Updating XDG MIMEs'), m)
- *                     misc.system_trigger((xdg_mime, 'install', '--novendor', m))
+ *                     misc.system_chroot((xdg_mime, 'install', '--novendor', m))
  *                 done.append(m)             # <<<<<<<<<<<<<<
  * 
  *         gio_querymodules = misc.whereis('gio-querymodules', False, True)
@@ -16968,7 +16968,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *         if match and gio_querymodules:
  *             message.sub_info(_('Updating GIO modules cache'))             # <<<<<<<<<<<<<<
  *             message.sub_debug(match)
- *             misc.system_trigger((gio_querymodules, os.path.dirname(match[0])))
+ *             misc.system_chroot((gio_querymodules, os.path.dirname(match[0])))
  */
     __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 735; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_8);
@@ -17012,7 +17012,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *         if match and gio_querymodules:
  *             message.sub_info(_('Updating GIO modules cache'))
  *             message.sub_debug(match)             # <<<<<<<<<<<<<<
- *             misc.system_trigger((gio_querymodules, os.path.dirname(match[0])))
+ *             misc.system_chroot((gio_querymodules, os.path.dirname(match[0])))
  * 
  */
     __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 736; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -17050,13 +17050,13 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
     /* "libspm.py":737
  *             message.sub_info(_('Updating GIO modules cache'))
  *             message.sub_debug(match)
- *             misc.system_trigger((gio_querymodules, os.path.dirname(match[0])))             # <<<<<<<<<<<<<<
+ *             misc.system_chroot((gio_querymodules, os.path.dirname(match[0])))             # <<<<<<<<<<<<<<
  * 
  *         pango_querymodules = misc.whereis('pango-querymodules', False, True)
  */
     __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 737; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_system_trigger); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 737; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_system_chroot); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 737; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_12);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 737; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -17135,7 +17135,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
   __pyx_L55:;
 
   /* "libspm.py":739
- *             misc.system_trigger((gio_querymodules, os.path.dirname(match[0])))
+ *             misc.system_chroot((gio_querymodules, os.path.dirname(match[0])))
  * 
  *         pango_querymodules = misc.whereis('pango-querymodules', False, True)             # <<<<<<<<<<<<<<
  *         pango_querymodules_regex = '(?:^|\\s)(.*[inserted by cython to avoid comment closer]/pango/.*[inserted by cython to avoid comment closer]/modules/.*)(?:$|\\s)'
@@ -17267,7 +17267,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *         if match and pango_querymodules:
  *             message.sub_info(_('Updating pango modules cache'))             # <<<<<<<<<<<<<<
  *             message.sub_debug(match)
- *             misc.system_trigger((pango_querymodules, '--update-cache'))
+ *             misc.system_chroot((pango_querymodules, '--update-cache'))
  */
     __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 744; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
@@ -17311,7 +17311,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *         if match and pango_querymodules:
  *             message.sub_info(_('Updating pango modules cache'))
  *             message.sub_debug(match)             # <<<<<<<<<<<<<<
- *             misc.system_trigger((pango_querymodules, '--update-cache'))
+ *             misc.system_chroot((pango_querymodules, '--update-cache'))
  * 
  */
     __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 745; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -17349,13 +17349,13 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
     /* "libspm.py":746
  *             message.sub_info(_('Updating pango modules cache'))
  *             message.sub_debug(match)
- *             misc.system_trigger((pango_querymodules, '--update-cache'))             # <<<<<<<<<<<<<<
+ *             misc.system_chroot((pango_querymodules, '--update-cache'))             # <<<<<<<<<<<<<<
  * 
  *         # TODO: use --update-cache, requires GTK+ version >= 2.24.20
  */
     __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 746; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_system_trigger); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 746; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_system_chroot); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 746; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_13);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 746; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -17575,7 +17575,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *             message.sub_info(_('Updating GTK-2.0 imodules cache'))
  *             message.sub_debug(match)             # <<<<<<<<<<<<<<
  *             misc.dir_create('%s/etc/gtk-2.0' % ROOT_DIR)
- *             misc.system_trigger(gtk2_immodules + \
+ *             misc.system_chroot(gtk2_immodules + \
  */
     __pyx_t_12 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 755; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_12);
@@ -17613,7 +17613,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *             message.sub_info(_('Updating GTK-2.0 imodules cache'))
  *             message.sub_debug(match)
  *             misc.dir_create('%s/etc/gtk-2.0' % ROOT_DIR)             # <<<<<<<<<<<<<<
- *             misc.system_trigger(gtk2_immodules + \
+ *             misc.system_chroot(gtk2_immodules + \
  *                 ' > /etc/gtk-2.0/gtk.immodules', bshell=True)
  */
     __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 756; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -17657,13 +17657,13 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
     /* "libspm.py":757
  *             message.sub_debug(match)
  *             misc.dir_create('%s/etc/gtk-2.0' % ROOT_DIR)
- *             misc.system_trigger(gtk2_immodules + \             # <<<<<<<<<<<<<<
+ *             misc.system_chroot(gtk2_immodules + \             # <<<<<<<<<<<<<<
  *                 ' > /etc/gtk-2.0/gtk.immodules', bshell=True)
  * 
  */
     __pyx_t_13 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 757; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_13);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_13, __pyx_n_s_system_trigger); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 757; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_13, __pyx_n_s_system_chroot); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 757; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
     __pyx_t_13 = PyNumber_Add(__pyx_v_gtk2_immodules, __pyx_kp_s_etc_gtk_2_0_gtk_immodules); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 757; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -17678,7 +17678,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
 
     /* "libspm.py":758
  *             misc.dir_create('%s/etc/gtk-2.0' % ROOT_DIR)
- *             misc.system_trigger(gtk2_immodules + \
+ *             misc.system_chroot(gtk2_immodules + \
  *                 ' > /etc/gtk-2.0/gtk.immodules', bshell=True)             # <<<<<<<<<<<<<<
  * 
  *         gtk3_immodules = misc.whereis('gtk-query-immodules-3.0', False, True)
@@ -17688,7 +17688,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
     /* "libspm.py":757
  *             message.sub_debug(match)
  *             misc.dir_create('%s/etc/gtk-2.0' % ROOT_DIR)
- *             misc.system_trigger(gtk2_immodules + \             # <<<<<<<<<<<<<<
+ *             misc.system_chroot(gtk2_immodules + \             # <<<<<<<<<<<<<<
  *                 ' > /etc/gtk-2.0/gtk.immodules', bshell=True)
  * 
  */
@@ -17880,7 +17880,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *             message.sub_info(_('Updating GTK-3.0 imodules cache'))
  *             message.sub_debug(match)             # <<<<<<<<<<<<<<
  *             misc.dir_create('%s/etc/gtk-3.0' % ROOT_DIR)
- *             misc.system_trigger('%s > /etc/gtk-3.0/gtk.immodules' % gtk3_immodules, \
+ *             misc.system_chroot('%s > /etc/gtk-3.0/gtk.immodules' % gtk3_immodules, \
  */
     __pyx_t_12 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 766; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_12);
@@ -17918,7 +17918,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *             message.sub_info(_('Updating GTK-3.0 imodules cache'))
  *             message.sub_debug(match)
  *             misc.dir_create('%s/etc/gtk-3.0' % ROOT_DIR)             # <<<<<<<<<<<<<<
- *             misc.system_trigger('%s > /etc/gtk-3.0/gtk.immodules' % gtk3_immodules, \
+ *             misc.system_chroot('%s > /etc/gtk-3.0/gtk.immodules' % gtk3_immodules, \
  *                 bshell=True)
  */
     __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 767; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -17962,13 +17962,13 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
     /* "libspm.py":768
  *             message.sub_debug(match)
  *             misc.dir_create('%s/etc/gtk-3.0' % ROOT_DIR)
- *             misc.system_trigger('%s > /etc/gtk-3.0/gtk.immodules' % gtk3_immodules, \             # <<<<<<<<<<<<<<
+ *             misc.system_chroot('%s > /etc/gtk-3.0/gtk.immodules' % gtk3_immodules, \             # <<<<<<<<<<<<<<
  *                 bshell=True)
  * 
  */
     __pyx_t_13 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_13);
-    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_13, __pyx_n_s_system_trigger); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_13, __pyx_n_s_system_chroot); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
     __pyx_t_13 = __Pyx_PyString_Format(__pyx_kp_s_s_etc_gtk_3_0_gtk_immodules, __pyx_v_gtk3_immodules); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -17983,7 +17983,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
 
     /* "libspm.py":769
  *             misc.dir_create('%s/etc/gtk-3.0' % ROOT_DIR)
- *             misc.system_trigger('%s > /etc/gtk-3.0/gtk.immodules' % gtk3_immodules, \
+ *             misc.system_chroot('%s > /etc/gtk-3.0/gtk.immodules' % gtk3_immodules, \
  *                 bshell=True)             # <<<<<<<<<<<<<<
  * 
  *         gdk_pixbuf = misc.whereis('gdk-pixbuf-query-loaders', False, True)
@@ -17993,7 +17993,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
     /* "libspm.py":768
  *             message.sub_debug(match)
  *             misc.dir_create('%s/etc/gtk-3.0' % ROOT_DIR)
- *             misc.system_trigger('%s > /etc/gtk-3.0/gtk.immodules' % gtk3_immodules, \             # <<<<<<<<<<<<<<
+ *             misc.system_chroot('%s > /etc/gtk-3.0/gtk.immodules' % gtk3_immodules, \             # <<<<<<<<<<<<<<
  *                 bshell=True)
  * 
  */
@@ -18140,7 +18140,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *         if match and gdk_pixbuf:
  *             message.sub_info(_('Updating gdk pixbuffer loaders'))             # <<<<<<<<<<<<<<
  *             message.sub_debug(match)
- *             misc.system_trigger((gdk_pixbuf, '--update-cache'))
+ *             misc.system_chroot((gdk_pixbuf, '--update-cache'))
  */
     __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 776; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
@@ -18184,7 +18184,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *         if match and gdk_pixbuf:
  *             message.sub_info(_('Updating gdk pixbuffer loaders'))
  *             message.sub_debug(match)             # <<<<<<<<<<<<<<
- *             misc.system_trigger((gdk_pixbuf, '--update-cache'))
+ *             misc.system_chroot((gdk_pixbuf, '--update-cache'))
  * 
  */
     __pyx_t_12 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 777; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -18222,13 +18222,13 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
     /* "libspm.py":778
  *             message.sub_info(_('Updating gdk pixbuffer loaders'))
  *             message.sub_debug(match)
- *             misc.system_trigger((gdk_pixbuf, '--update-cache'))             # <<<<<<<<<<<<<<
+ *             misc.system_chroot((gdk_pixbuf, '--update-cache'))             # <<<<<<<<<<<<<<
  * 
  *         glib_schemas = misc.whereis('glib-compile-schemas', False, True)
  */
     __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 778; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_system_trigger); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 778; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_system_chroot); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 778; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __pyx_t_6 = PyTuple_New(2); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 778; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -18271,7 +18271,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
   __pyx_L75:;
 
   /* "libspm.py":780
- *             misc.system_trigger((gdk_pixbuf, '--update-cache'))
+ *             misc.system_chroot((gdk_pixbuf, '--update-cache'))
  * 
  *         glib_schemas = misc.whereis('glib-compile-schemas', False, True)             # <<<<<<<<<<<<<<
  *         glib_schemas_regex = '(?:^|\\s)(.*[inserted by cython to avoid comment closer]/schemas)/.*(?:$|\\s)'
@@ -18403,7 +18403,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *         if match and glib_schemas:
  *             message.sub_info(_('Updating GSettings schemas'))             # <<<<<<<<<<<<<<
  *             message.sub_debug(match)
- *             misc.system_trigger((glib_schemas, match[0]))
+ *             misc.system_chroot((glib_schemas, match[0]))
  */
     __pyx_t_12 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 785; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_12);
@@ -18447,7 +18447,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *         if match and glib_schemas:
  *             message.sub_info(_('Updating GSettings schemas'))
  *             message.sub_debug(match)             # <<<<<<<<<<<<<<
- *             misc.system_trigger((glib_schemas, match[0]))
+ *             misc.system_chroot((glib_schemas, match[0]))
  * 
  */
     __pyx_t_13 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 786; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -18485,13 +18485,13 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
     /* "libspm.py":787
  *             message.sub_info(_('Updating GSettings schemas'))
  *             message.sub_debug(match)
- *             misc.system_trigger((glib_schemas, match[0]))             # <<<<<<<<<<<<<<
+ *             misc.system_chroot((glib_schemas, match[0]))             # <<<<<<<<<<<<<<
  * 
  *         install_info = misc.whereis('install-info', False, True)
  */
     __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 787; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_system_trigger); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 787; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_system_chroot); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 787; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     __pyx_t_6 = __Pyx_GetItemInt(__pyx_v_match, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_6 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 787; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
@@ -18536,7 +18536,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
   __pyx_L80:;
 
   /* "libspm.py":789
- *             misc.system_trigger((glib_schemas, match[0]))
+ *             misc.system_chroot((glib_schemas, match[0]))
  * 
  *         install_info = misc.whereis('install-info', False, True)             # <<<<<<<<<<<<<<
  *         install_info_regex = '(?:^|\\s)(.*share/info/.*)(?:$|\\s)'
@@ -18707,7 +18707,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *             message.sub_debug(match)
  *             for m in match:             # <<<<<<<<<<<<<<
  *                 message.sub_info(_('Installing info page'), m)
- *                 misc.system_trigger((install_info, m, \
+ *                 misc.system_chroot((install_info, m, \
  */
     if (likely(PyList_CheckExact(__pyx_v_match)) || PyTuple_CheckExact(__pyx_v_match)) {
       __pyx_t_1 = __pyx_v_match; __Pyx_INCREF(__pyx_t_1); __pyx_t_7 = 0;
@@ -18753,7 +18753,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *             message.sub_debug(match)
  *             for m in match:
  *                 message.sub_info(_('Installing info page'), m)             # <<<<<<<<<<<<<<
- *                 misc.system_trigger((install_info, m, \
+ *                 misc.system_chroot((install_info, m, \
  *                     '%s/share/info/dir' % sys.prefix))
  */
       __pyx_t_12 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 796; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -18798,19 +18798,19 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
       /* "libspm.py":797
  *             for m in match:
  *                 message.sub_info(_('Installing info page'), m)
- *                 misc.system_trigger((install_info, m, \             # <<<<<<<<<<<<<<
+ *                 misc.system_chroot((install_info, m, \             # <<<<<<<<<<<<<<
  *                     '%s/share/info/dir' % sys.prefix))
  * 
  */
       __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 797; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_system_trigger); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 797; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_system_chroot); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 797; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
       /* "libspm.py":798
  *                 message.sub_info(_('Installing info page'), m)
- *                 misc.system_trigger((install_info, m, \
+ *                 misc.system_chroot((install_info, m, \
  *                     '%s/share/info/dir' % sys.prefix))             # <<<<<<<<<<<<<<
  * 
  *         udevadm = misc.whereis('udevadm', False, True)
@@ -18827,7 +18827,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
       /* "libspm.py":797
  *             for m in match:
  *                 message.sub_info(_('Installing info page'), m)
- *                 misc.system_trigger((install_info, m, \             # <<<<<<<<<<<<<<
+ *                 misc.system_chroot((install_info, m, \             # <<<<<<<<<<<<<<
  *                     '%s/share/info/dir' % sys.prefix))
  * 
  */
@@ -18875,7 +18875,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *             message.sub_debug(match)
  *             for m in match:             # <<<<<<<<<<<<<<
  *                 message.sub_info(_('Installing info page'), m)
- *                 misc.system_trigger((install_info, m, \
+ *                 misc.system_chroot((install_info, m, \
  */
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -19122,7 +19122,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *             or os.path.exists('%s/var/run/udev/control' % ROOT_DIR):
  *                 message.sub_info(_('Reloading udev rules and hwdb'))             # <<<<<<<<<<<<<<
  *                 message.sub_debug(match)
- *                 misc.system_trigger((udevadm, 'control', '--reload'))
+ *                 misc.system_chroot((udevadm, 'control', '--reload'))
  */
       __pyx_t_13 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 807; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_13);
@@ -19166,7 +19166,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *             or os.path.exists('%s/var/run/udev/control' % ROOT_DIR):
  *                 message.sub_info(_('Reloading udev rules and hwdb'))
  *                 message.sub_debug(match)             # <<<<<<<<<<<<<<
- *                 misc.system_trigger((udevadm, 'control', '--reload'))
+ *                 misc.system_chroot((udevadm, 'control', '--reload'))
  * 
  */
       __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 808; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -19204,13 +19204,13 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
       /* "libspm.py":809
  *                 message.sub_info(_('Reloading udev rules and hwdb'))
  *                 message.sub_debug(match)
- *                 misc.system_trigger((udevadm, 'control', '--reload'))             # <<<<<<<<<<<<<<
+ *                 misc.system_chroot((udevadm, 'control', '--reload'))             # <<<<<<<<<<<<<<
  * 
  *         mkinitfs_run = False
  */
       __pyx_t_12 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 809; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_12);
-      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_n_s_system_trigger); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 809; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_n_s_system_chroot); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 809; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
       __pyx_t_12 = PyTuple_New(3); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 809; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -19259,7 +19259,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
   __pyx_L92:;
 
   /* "libspm.py":811
- *                 misc.system_trigger((udevadm, 'control', '--reload'))
+ *                 misc.system_chroot((udevadm, 'control', '--reload'))
  * 
  *         mkinitfs_run = False             # <<<<<<<<<<<<<<
  *         depmod = misc.whereis('depmod', False, True)
@@ -19400,7 +19400,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *         if match and depmod:
  *             message.sub_info(_('Updating module dependencies'))             # <<<<<<<<<<<<<<
  *             message.sub_debug(match)
- *             misc.system_trigger((depmod, match[0]))
+ *             misc.system_chroot((depmod, match[0]))
  */
     __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 817; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
@@ -19444,7 +19444,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *         if match and depmod:
  *             message.sub_info(_('Updating module dependencies'))
  *             message.sub_debug(match)             # <<<<<<<<<<<<<<
- *             misc.system_trigger((depmod, match[0]))
+ *             misc.system_chroot((depmod, match[0]))
  *             mkinitfs_run = True
  */
     __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 818; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -19482,13 +19482,13 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
     /* "libspm.py":819
  *             message.sub_info(_('Updating module dependencies'))
  *             message.sub_debug(match)
- *             misc.system_trigger((depmod, match[0]))             # <<<<<<<<<<<<<<
+ *             misc.system_chroot((depmod, match[0]))             # <<<<<<<<<<<<<<
  *             mkinitfs_run = True
  * 
  */
     __pyx_t_12 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 819; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_12);
-    __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_n_s_system_trigger); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 819; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_n_s_system_chroot); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 819; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_13);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     __pyx_t_12 = __Pyx_GetItemInt(__pyx_v_match, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_12 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 819; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
@@ -19531,7 +19531,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
 
     /* "libspm.py":820
  *             message.sub_debug(match)
- *             misc.system_trigger((depmod, match[0]))
+ *             misc.system_chroot((depmod, match[0]))
  *             mkinitfs_run = True             # <<<<<<<<<<<<<<
  * 
  *         # distribution specifiec
@@ -19777,7 +19777,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *             message.sub_debug(match or mkinitfs_run)
  *             if match and match[0][1]:             # <<<<<<<<<<<<<<
  *                 # new kernel being installed
- *                 misc.system_trigger((mkinitfs, '-k', match[0][1]))
+ *                 misc.system_chroot((mkinitfs, '-k', match[0][1]))
  */
     __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_v_match); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 830; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     if (__pyx_t_2) {
@@ -19799,13 +19799,13 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
       /* "libspm.py":832
  *             if match and match[0][1]:
  *                 # new kernel being installed
- *                 misc.system_trigger((mkinitfs, '-k', match[0][1]))             # <<<<<<<<<<<<<<
+ *                 misc.system_chroot((mkinitfs, '-k', match[0][1]))             # <<<<<<<<<<<<<<
  *             else:
- *                 misc.system_trigger((mkinitfs))
+ *                 misc.system_chroot((mkinitfs))
  */
       __pyx_t_13 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 832; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_13);
-      __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_13, __pyx_n_s_system_trigger); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 832; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_12 = __Pyx_PyObject_GetAttrStr(__pyx_t_13, __pyx_n_s_system_chroot); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 832; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_12);
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
       __pyx_t_13 = __Pyx_GetItemInt(__pyx_v_match, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(__pyx_t_13 == NULL)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 832; __pyx_clineno = __LINE__; goto __pyx_L1_error;};
@@ -19856,15 +19856,15 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
     /*else*/ {
 
       /* "libspm.py":834
- *                 misc.system_trigger((mkinitfs, '-k', match[0][1]))
+ *                 misc.system_chroot((mkinitfs, '-k', match[0][1]))
  *             else:
- *                 misc.system_trigger((mkinitfs))             # <<<<<<<<<<<<<<
+ *                 misc.system_chroot((mkinitfs))             # <<<<<<<<<<<<<<
  * 
  *         grub_mkconfig = misc.whereis('grub-mkconfig', False, True)
  */
       __pyx_t_12 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 834; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_12);
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_n_s_system_trigger); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 834; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_n_s_system_chroot); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 834; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
       __pyx_t_12 = NULL;
@@ -19900,7 +19900,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
   __pyx_L105:;
 
   /* "libspm.py":836
- *                 misc.system_trigger((mkinitfs))
+ *                 misc.system_chroot((mkinitfs))
  * 
  *         grub_mkconfig = misc.whereis('grub-mkconfig', False, True)             # <<<<<<<<<<<<<<
  *         grub_mkconfig_regex = '(?:^|\\s)(?:/)?(boot/.*|etc/grub.d/.*)(?:$|\\s)'
@@ -20077,7 +20077,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *             message.sub_info(_('Updating GRUB configuration'))
  *             message.sub_debug(match)             # <<<<<<<<<<<<<<
  *             misc.dir_create('%s/boot/grub' % ROOT_DIR)
- *             misc.system_trigger((grub_mkconfig, '-o', '/boot/grub/grub.cfg'))
+ *             misc.system_chroot((grub_mkconfig, '-o', '/boot/grub/grub.cfg'))
  */
     __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 842; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
@@ -20115,7 +20115,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
  *             message.sub_info(_('Updating GRUB configuration'))
  *             message.sub_debug(match)
  *             misc.dir_create('%s/boot/grub' % ROOT_DIR)             # <<<<<<<<<<<<<<
- *             misc.system_trigger((grub_mkconfig, '-o', '/boot/grub/grub.cfg'))
+ *             misc.system_chroot((grub_mkconfig, '-o', '/boot/grub/grub.cfg'))
  * 
  */
     __pyx_t_12 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 843; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -20159,13 +20159,13 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
     /* "libspm.py":844
  *             message.sub_debug(match)
  *             misc.dir_create('%s/boot/grub' % ROOT_DIR)
- *             misc.system_trigger((grub_mkconfig, '-o', '/boot/grub/grub.cfg'))             # <<<<<<<<<<<<<<
+ *             misc.system_chroot((grub_mkconfig, '-o', '/boot/grub/grub.cfg'))             # <<<<<<<<<<<<<<
  * 
  *     def remove_target_file(self, sfile):
  */
     __pyx_t_13 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 844; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_13);
-    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_13, __pyx_n_s_system_trigger); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 844; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_13, __pyx_n_s_system_chroot); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 844; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
     __pyx_t_13 = PyTuple_New(3); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 844; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -20211,7 +20211,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
   __pyx_L116:;
 
   /* "libspm.py":640
- *                     misc.system_trigger((xdg_mime, 'uninstall', m))
+ *                     misc.system_chroot((xdg_mime, 'uninstall', m))
  * 
  *     def post_update_databases(self, content, action):             # <<<<<<<<<<<<<<
  *         ''' Update common databases after merge/remove '''
@@ -20280,7 +20280,7 @@ static PyObject *__pyx_pf_6libspm_6Source_10post_update_databases(CYTHON_UNUSED 
 }
 
 /* "libspm.py":846
- *             misc.system_trigger((grub_mkconfig, '-o', '/boot/grub/grub.cfg'))
+ *             misc.system_chroot((grub_mkconfig, '-o', '/boot/grub/grub.cfg'))
  * 
  *     def remove_target_file(self, sfile):             # <<<<<<<<<<<<<<
  *         ''' Remove target file '''
@@ -20522,7 +20522,7 @@ static PyObject *__pyx_pf_6libspm_6Source_12remove_target_file(CYTHON_UNUSED PyO
   __pyx_L3:;
 
   /* "libspm.py":846
- *             misc.system_trigger((grub_mkconfig, '-o', '/boot/grub/grub.cfg'))
+ *             misc.system_chroot((grub_mkconfig, '-o', '/boot/grub/grub.cfg'))
  * 
  *     def remove_target_file(self, sfile):             # <<<<<<<<<<<<<<
  *         ''' Remove target file '''
@@ -52257,11 +52257,11 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_sync, __pyx_k_sync, sizeof(__pyx_k_sync), 0, 0, 1, 1},
   {&__pyx_n_s_sys, __pyx_k_sys, sizeof(__pyx_k_sys), 0, 0, 1, 1},
   {&__pyx_kp_s_sys_2, __pyx_k_sys_2, sizeof(__pyx_k_sys_2), 0, 0, 1, 0},
+  {&__pyx_n_s_system_chroot, __pyx_k_system_chroot, sizeof(__pyx_k_system_chroot), 0, 0, 1, 1},
   {&__pyx_n_s_system_command, __pyx_k_system_command, sizeof(__pyx_k_system_command), 0, 0, 1, 1},
   {&__pyx_n_s_system_communicate, __pyx_k_system_communicate, sizeof(__pyx_k_system_communicate), 0, 0, 1, 1},
   {&__pyx_n_s_system_scanelf, __pyx_k_system_scanelf, sizeof(__pyx_k_system_scanelf), 0, 0, 1, 1},
   {&__pyx_n_s_system_script, __pyx_k_system_script, sizeof(__pyx_k_system_script), 0, 0, 1, 1},
-  {&__pyx_n_s_system_trigger, __pyx_k_system_trigger, sizeof(__pyx_k_system_trigger), 0, 0, 1, 1},
   {&__pyx_kp_s_t, __pyx_k_t, sizeof(__pyx_k_t), 0, 0, 1, 0},
   {&__pyx_kp_s_t_2, __pyx_k_t_2, sizeof(__pyx_k_t_2), 0, 0, 1, 0},
   {&__pyx_kp_s_tarballs_s, __pyx_k_tarballs_s, sizeof(__pyx_k_tarballs_s), 0, 0, 1, 0},
@@ -52833,7 +52833,7 @@ static int __Pyx_InitCachedConstants(void) {
  *                     message.sub_warning(_('File does not exist'), m)
  *                     continue
  *                 message.sub_info(_('Deleting info page'), m)             # <<<<<<<<<<<<<<
- *                 misc.system_trigger((install_info, '--delete', m, \
+ *                 misc.system_chroot((install_info, '--delete', m, \
  *                     '%s/share/info/dir' % sys.prefix))
  */
   __pyx_tuple__48 = PyTuple_Pack(1, __pyx_kp_s_Deleting_info_page); if (unlikely(!__pyx_tuple__48)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 623; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -52855,7 +52855,7 @@ static int __Pyx_InitCachedConstants(void) {
  *                     continue
  *                 elif action == 'remove':
  *                     message.sub_info(_('Uninstalling XDG MIMEs'), m)             # <<<<<<<<<<<<<<
- *                     misc.system_trigger((xdg_mime, 'uninstall', m))
+ *                     misc.system_chroot((xdg_mime, 'uninstall', m))
  * 
  */
   __pyx_tuple__50 = PyTuple_Pack(1, __pyx_kp_s_Uninstalling_XDG_MIMEs); if (unlikely(!__pyx_tuple__50)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 637; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -52878,14 +52878,14 @@ static int __Pyx_InitCachedConstants(void) {
  *         if match and ldconfig:
  *             message.sub_info(_('Updating shared libraries cache'))             # <<<<<<<<<<<<<<
  *             message.sub_debug(match)
- *             misc.system_trigger((ldconfig))
+ *             misc.system_chroot((ldconfig))
  */
   __pyx_tuple__52 = PyTuple_Pack(1, __pyx_kp_s_Updating_shared_libraries_cache); if (unlikely(!__pyx_tuple__52)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 651; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__52);
   __Pyx_GIVEREF(__pyx_tuple__52);
 
   /* "libspm.py":655
- *             misc.system_trigger((ldconfig))
+ *             misc.system_chroot((ldconfig))
  * 
  *         mandb = misc.whereis('mandb', False, True)             # <<<<<<<<<<<<<<
  *         mandb_regex = '(.*share/man.*)(?:$|\\s)'
@@ -52907,7 +52907,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__54);
 
   /* "libspm.py":673
- *                 misc.system_trigger(command)
+ *                 misc.system_chroot(command)
  * 
  *         desktop_database = misc.whereis('update-desktop-database', False, True)             # <<<<<<<<<<<<<<
  *         desktop_database_regex = '(.*share/applications/).*(?:$|\\s)'
@@ -52922,7 +52922,7 @@ static int __Pyx_InitCachedConstants(void) {
  *         if match and desktop_database:
  *             message.sub_info(_('Updating desktop database'))             # <<<<<<<<<<<<<<
  *             message.sub_debug(match)
- *             misc.system_trigger((desktop_database, \
+ *             misc.system_chroot((desktop_database, \
  */
   __pyx_tuple__56 = PyTuple_Pack(1, __pyx_kp_s_Updating_desktop_database); if (unlikely(!__pyx_tuple__56)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 678; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__56);
@@ -52944,14 +52944,14 @@ static int __Pyx_InitCachedConstants(void) {
  *         if match and mime_database:
  *             message.sub_info(_('Updating MIME database'))             # <<<<<<<<<<<<<<
  *             message.sub_debug(match)
- *             misc.system_trigger((mime_database, '%s/share/mime' % sys.prefix))
+ *             misc.system_chroot((mime_database, '%s/share/mime' % sys.prefix))
  */
   __pyx_tuple__58 = PyTuple_Pack(1, __pyx_kp_s_Updating_MIME_database); if (unlikely(!__pyx_tuple__58)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 688; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__58);
   __Pyx_GIVEREF(__pyx_tuple__58);
 
   /* "libspm.py":692
- *             misc.system_trigger((mime_database, '%s/share/mime' % sys.prefix))
+ *             misc.system_chroot((mime_database, '%s/share/mime' % sys.prefix))
  * 
  *         icon_resources = misc.whereis('xdg-icon-resource', False, True)             # <<<<<<<<<<<<<<
  *         message.sub_debug('xdg-icon-resources', icon_resources or '')
@@ -52976,7 +52976,7 @@ static int __Pyx_InitCachedConstants(void) {
  *                 base = os.path.basename(m)
  *                 if icon_resources:
  *                     message.sub_info(_('Updating icon resources'), base)             # <<<<<<<<<<<<<<
- *                     misc.system_trigger((icon_resources, 'forceupdate', '--theme', base))
+ *                     misc.system_chroot((icon_resources, 'forceupdate', '--theme', base))
  *                 if (action == 'merge' or action == 'upgrade') \
  */
   __pyx_tuple__61 = PyTuple_Pack(1, __pyx_kp_s_Updating_icon_resources); if (unlikely(!__pyx_tuple__61)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 705; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -52987,7 +52987,7 @@ static int __Pyx_InitCachedConstants(void) {
  *                 if (action == 'merge' or action == 'upgrade') \
  *                     and os.path.isfile('%s/%s/index.theme' % (ROOT_DIR, m)) and icon_cache:
  *                     message.sub_info(_('Updating icons cache'), base)             # <<<<<<<<<<<<<<
- *                     misc.system_trigger((icon_cache, '-q', '-t', '-i', '-f', m))
+ *                     misc.system_chroot((icon_cache, '-q', '-t', '-i', '-f', m))
  *                 done.append(m)
  */
   __pyx_tuple__62 = PyTuple_Pack(1, __pyx_kp_s_Updating_icons_cache); if (unlikely(!__pyx_tuple__62)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 709; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -53009,7 +53009,7 @@ static int __Pyx_InitCachedConstants(void) {
  *                     continue
  *                 if action == 'merge':
  *                     message.sub_info(_('Installing XDG MIMEs'), m)             # <<<<<<<<<<<<<<
- *                     misc.system_trigger((xdg_mime, 'install', '--novendor', m))
+ *                     misc.system_chroot((xdg_mime, 'install', '--novendor', m))
  *                 elif action == 'upgrade':
  */
   __pyx_tuple__64 = PyTuple_Pack(1, __pyx_kp_s_Installing_XDG_MIMEs); if (unlikely(!__pyx_tuple__64)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 723; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -53017,10 +53017,10 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__64);
 
   /* "libspm.py":726
- *                     misc.system_trigger((xdg_mime, 'install', '--novendor', m))
+ *                     misc.system_chroot((xdg_mime, 'install', '--novendor', m))
  *                 elif action == 'upgrade':
  *                     message.sub_info(_('Updating XDG MIMEs'), m)             # <<<<<<<<<<<<<<
- *                     misc.system_trigger((xdg_mime, 'install', '--novendor', m))
+ *                     misc.system_chroot((xdg_mime, 'install', '--novendor', m))
  *                 done.append(m)
  */
   __pyx_tuple__65 = PyTuple_Pack(1, __pyx_kp_s_Updating_XDG_MIMEs); if (unlikely(!__pyx_tuple__65)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 726; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -53043,14 +53043,14 @@ static int __Pyx_InitCachedConstants(void) {
  *         if match and gio_querymodules:
  *             message.sub_info(_('Updating GIO modules cache'))             # <<<<<<<<<<<<<<
  *             message.sub_debug(match)
- *             misc.system_trigger((gio_querymodules, os.path.dirname(match[0])))
+ *             misc.system_chroot((gio_querymodules, os.path.dirname(match[0])))
  */
   __pyx_tuple__67 = PyTuple_Pack(1, __pyx_kp_s_Updating_GIO_modules_cache); if (unlikely(!__pyx_tuple__67)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 735; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__67);
   __Pyx_GIVEREF(__pyx_tuple__67);
 
   /* "libspm.py":739
- *             misc.system_trigger((gio_querymodules, os.path.dirname(match[0])))
+ *             misc.system_chroot((gio_querymodules, os.path.dirname(match[0])))
  * 
  *         pango_querymodules = misc.whereis('pango-querymodules', False, True)             # <<<<<<<<<<<<<<
  *         pango_querymodules_regex = '(?:^|\\s)(.*[inserted by cython to avoid comment closer]/pango/.*[inserted by cython to avoid comment closer]/modules/.*)(?:$|\\s)'
@@ -53065,7 +53065,7 @@ static int __Pyx_InitCachedConstants(void) {
  *         if match and pango_querymodules:
  *             message.sub_info(_('Updating pango modules cache'))             # <<<<<<<<<<<<<<
  *             message.sub_debug(match)
- *             misc.system_trigger((pango_querymodules, '--update-cache'))
+ *             misc.system_chroot((pango_querymodules, '--update-cache'))
  */
   __pyx_tuple__69 = PyTuple_Pack(1, __pyx_kp_s_Updating_pango_modules_cache); if (unlikely(!__pyx_tuple__69)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 744; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__69);
@@ -53131,14 +53131,14 @@ static int __Pyx_InitCachedConstants(void) {
  *         if match and gdk_pixbuf:
  *             message.sub_info(_('Updating gdk pixbuffer loaders'))             # <<<<<<<<<<<<<<
  *             message.sub_debug(match)
- *             misc.system_trigger((gdk_pixbuf, '--update-cache'))
+ *             misc.system_chroot((gdk_pixbuf, '--update-cache'))
  */
   __pyx_tuple__75 = PyTuple_Pack(1, __pyx_kp_s_Updating_gdk_pixbuffer_loaders); if (unlikely(!__pyx_tuple__75)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 776; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__75);
   __Pyx_GIVEREF(__pyx_tuple__75);
 
   /* "libspm.py":780
- *             misc.system_trigger((gdk_pixbuf, '--update-cache'))
+ *             misc.system_chroot((gdk_pixbuf, '--update-cache'))
  * 
  *         glib_schemas = misc.whereis('glib-compile-schemas', False, True)             # <<<<<<<<<<<<<<
  *         glib_schemas_regex = '(?:^|\\s)(.*[inserted by cython to avoid comment closer]/schemas)/.*(?:$|\\s)'
@@ -53153,14 +53153,14 @@ static int __Pyx_InitCachedConstants(void) {
  *         if match and glib_schemas:
  *             message.sub_info(_('Updating GSettings schemas'))             # <<<<<<<<<<<<<<
  *             message.sub_debug(match)
- *             misc.system_trigger((glib_schemas, match[0]))
+ *             misc.system_chroot((glib_schemas, match[0]))
  */
   __pyx_tuple__77 = PyTuple_Pack(1, __pyx_kp_s_Updating_GSettings_schemas); if (unlikely(!__pyx_tuple__77)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 785; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__77);
   __Pyx_GIVEREF(__pyx_tuple__77);
 
   /* "libspm.py":789
- *             misc.system_trigger((glib_schemas, match[0]))
+ *             misc.system_chroot((glib_schemas, match[0]))
  * 
  *         install_info = misc.whereis('install-info', False, True)             # <<<<<<<<<<<<<<
  *         install_info_regex = '(?:^|\\s)(.*share/info/.*)(?:$|\\s)'
@@ -53174,7 +53174,7 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_debug(match)
  *             for m in match:
  *                 message.sub_info(_('Installing info page'), m)             # <<<<<<<<<<<<<<
- *                 misc.system_trigger((install_info, m, \
+ *                 misc.system_chroot((install_info, m, \
  *                     '%s/share/info/dir' % sys.prefix))
  */
   __pyx_tuple__79 = PyTuple_Pack(1, __pyx_kp_s_Installing_info_page); if (unlikely(!__pyx_tuple__79)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 796; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -53197,7 +53197,7 @@ static int __Pyx_InitCachedConstants(void) {
  *             or os.path.exists('%s/var/run/udev/control' % ROOT_DIR):
  *                 message.sub_info(_('Reloading udev rules and hwdb'))             # <<<<<<<<<<<<<<
  *                 message.sub_debug(match)
- *                 misc.system_trigger((udevadm, 'control', '--reload'))
+ *                 misc.system_chroot((udevadm, 'control', '--reload'))
  */
   __pyx_tuple__81 = PyTuple_Pack(1, __pyx_kp_s_Reloading_udev_rules_and_hwdb); if (unlikely(!__pyx_tuple__81)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 807; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__81);
@@ -53219,7 +53219,7 @@ static int __Pyx_InitCachedConstants(void) {
  *         if match and depmod:
  *             message.sub_info(_('Updating module dependencies'))             # <<<<<<<<<<<<<<
  *             message.sub_debug(match)
- *             misc.system_trigger((depmod, match[0]))
+ *             misc.system_chroot((depmod, match[0]))
  */
   __pyx_tuple__83 = PyTuple_Pack(1, __pyx_kp_s_Updating_module_dependencies); if (unlikely(!__pyx_tuple__83)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 817; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__83);
@@ -53248,7 +53248,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__85);
 
   /* "libspm.py":836
- *                 misc.system_trigger((mkinitfs))
+ *                 misc.system_chroot((mkinitfs))
  * 
  *         grub_mkconfig = misc.whereis('grub-mkconfig', False, True)             # <<<<<<<<<<<<<<
  *         grub_mkconfig_regex = '(?:^|\\s)(?:/)?(boot/.*|etc/grub.d/.*)(?:$|\\s)'
@@ -56394,7 +56394,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_codeobj__416 = (PyObject*)__Pyx_PyCode_New(3, 0, 11, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__415, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_libspm, __pyx_n_s_pre_update_databases, 607, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__416)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 607; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "libspm.py":640
- *                     misc.system_trigger((xdg_mime, 'uninstall', m))
+ *                     misc.system_chroot((xdg_mime, 'uninstall', m))
  * 
  *     def post_update_databases(self, content, action):             # <<<<<<<<<<<<<<
  *         ''' Update common databases after merge/remove '''
@@ -56406,7 +56406,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_codeobj__418 = (PyObject*)__Pyx_PyCode_New(3, 0, 46, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__417, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_libspm, __pyx_n_s_post_update_databases, 640, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__418)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "libspm.py":846
- *             misc.system_trigger((grub_mkconfig, '-o', '/boot/grub/grub.cfg'))
+ *             misc.system_chroot((grub_mkconfig, '-o', '/boot/grub/grub.cfg'))
  * 
  *     def remove_target_file(self, sfile):             # <<<<<<<<<<<<<<
  *         ''' Remove target file '''
@@ -59558,7 +59558,7 @@ PyMODINIT_FUNC PyInit_libspm(void)
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
   /* "libspm.py":640
- *                     misc.system_trigger((xdg_mime, 'uninstall', m))
+ *                     misc.system_chroot((xdg_mime, 'uninstall', m))
  * 
  *     def post_update_databases(self, content, action):             # <<<<<<<<<<<<<<
  *         ''' Update common databases after merge/remove '''
@@ -59570,7 +59570,7 @@ PyMODINIT_FUNC PyInit_libspm(void)
   __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
   /* "libspm.py":846
- *             misc.system_trigger((grub_mkconfig, '-o', '/boot/grub/grub.cfg'))
+ *             misc.system_chroot((grub_mkconfig, '-o', '/boot/grub/grub.cfg'))
  * 
  *     def remove_target_file(self, sfile):             # <<<<<<<<<<<<<<
  *         ''' Remove target file '''
