@@ -111,7 +111,9 @@ class Misc(object):
             self.typecheck(string, (types.StringTypes))
 
         lenght = len(string)
-        if lenght > 6:
+        if lenght > 9:
+            return 'Gb'
+        elif lenght > 6:
             return 'Mb'
         elif lenght > 3:
             return 'Kb'
@@ -125,18 +127,17 @@ class Misc(object):
             self.typecheck(sunit, (types.StringTypes))
             self.typecheck(bprefix, (types.BooleanType))
 
-        if sunit == 'Mb':
-            if bprefix:
-                return '%d%s' % (int(string) / (1024 * 1024), 'Mb')
-            return int(string) / (1024 * 1024)
+        sprefix = ''
+        if bprefix:
+            sprefix = sunit
+        if sunit == 'Gb':
+            return '%d%s' % (int(string) / 1024**3, sprefix)
+        elif sunit == 'Mb':
+            return '%d%s' % (int(string) / 1024**2, sprefix)
         elif sunit == 'Kb':
-            if bprefix:
-                return '%d%s' % (int(string) / 1024, 'Kb')
-            return int(string) / 1024
+            return '%d%s' % (int(string) / 1024, sprefix)
         else:
-            if bprefix:
-                return '%d%s' % (int(string), 'b')
-            return string
+            return '%d%s' % (int(string), sprefix)
 
     def string_search(self, string, string2, exact=False, escape=True):
         ''' Search for string in other string or list '''
@@ -319,7 +320,7 @@ class Misc(object):
     def file_checksum(self, sfile, smethod='sha256'):
         ''' Return a hex checksum of file
 
-            the reason to use this method would be if you wan to ensure that
+            the reason to use this method would be if you want to ensure that
             big files are read in chunks (according to self.BUFFER) preventing
             OOM kill, safety first '''
         if self.python2:
@@ -347,7 +348,7 @@ class Misc(object):
             json.dump(content, f, indent=4)
 
     def gpg_findsig(self, sfile, bensure=True):
-        ''' Attempts to guess the signature for local file '''
+        ''' Attempt to guess the signature for local file '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
             self.typecheck(bensure, (types.BooleanType))
