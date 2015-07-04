@@ -11,7 +11,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.8.2 (235c35f)"
+app_version = "1.8.2 (3ab1df3)"
 
 import libmessage
 message = libmessage.Message()
@@ -609,7 +609,8 @@ except subprocess.CalledProcessError as detail:
 except HTTPError as detail:
     if hasattr(detail, 'url'):
         # misc.fetch() provides additional information
-        message.critical('URLLIB', '%s %s (%s)' % (detail.url, detail.reason, detail.code))
+        message.critical('URLLIB', '%s %s (%s)' % (detail.url, detail.reason, \
+            detail.code))
     else:
         message.critical('URLLIB', detail)
     sys.exit(5)

@@ -1385,8 +1385,8 @@ class Source(object):
 
         if target_upgrade:
             message.sub_info(_('Removing obsolete files and directories'))
-            remove_content = []
-            for sfile in frozenset(old_content).difference(new_content):
+            remove_content = frozenset(old_content).difference(new_content)
+            for sfile in remove_content:
                 sfull = '%s%s' % (ROOT_DIR, sfile.encode('utf-8'))
                 # skip files moved from real to symlink directory
                 sresolved = os.path.realpath(sfull)
@@ -1396,18 +1396,15 @@ class Source(object):
                     continue
                 # the metadata and SRCBUILD files will be deleted otherwise,
                 # also making sure ROOT_DIR different than / is respected
-                if LOCAL_DIR in sfull:
+                elif LOCAL_DIR in sfull:
                     continue
                 # never delete files in the pseudo filesystems
                 elif sfile.startswith(('/dev/', '/sys/', '/proc/')):
                     continue
-                remove_content.append(sfile)
-
-            for sfile in remove_content:
                 self.remove_target_file(sfile)
-            for sfile in reversed(remove_content):
+            for sfile in reversed(tuple(remove_content)):
                 self.remove_target_dir(os.path.dirname(sfile))
-            for sfile in reversed(remove_content):
+            for sfile in reversed(tuple(remove_content)):
                 self.remove_target_link(sfile)
 
             if misc.file_search('\npost_upgrade()', self.srcbuild, escape=False) \

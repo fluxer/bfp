@@ -23,7 +23,7 @@ misc = libspm.misc
 database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.8.2 (235c35f)"
+app_version = "1.8.2 (3ab1df3)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -58,9 +58,7 @@ class Check(object):
             required = []
             for sfile in target_footprint:
                 sfile = '%s/%s' % (libspm.ROOT_DIR, sfile)
-                if os.path.islink(sfile):
-                    continue
-                elif not os.path.isfile(sfile):
+                if os.path.islink(sfile) or not os.path.isfile(sfile):
                     continue
                 elif self.do_fast:
                     if misc.string_search('/include/|/share/(?:man|locale|i18n|info)', \
@@ -149,7 +147,6 @@ class Clean(object):
         for target in database.local_all(basename=True):
             if target in self.base_targets:
                 continue
-
             if not database.local_rdepends(target):
                 message.sub_warning(_('Unneded target'), target)
 
@@ -203,7 +200,8 @@ class Dist(object):
                             misc.gpg_verify(src_file)
 
             message.sub_info(_('Compressing'), target_distfile)
-            misc.archive_compress((target_directory,), target_distfile, target_directory)
+            misc.archive_compress((target_directory,), target_distfile, \
+                target_directory)
             if libspm.SIGN:
                 message.sub_info(_('Signing'), target_distfile)
                 misc.gpg_sign(target_distfile, libspm.SIGN)
@@ -1410,7 +1408,8 @@ try:
         message.sub_info(_('VERIFY'), ARGS.verify)
         message.sub_info(_('BACKUP'), ARGS.backup)
         message.sub_info(_('TARGETS'), ARGS.TARGETS)
-        m = Digest(ARGS.TARGETS, ARGS.directory, ARGS.create, ARGS.verify, ARGS.backup)
+        m = Digest(ARGS.TARGETS, ARGS.directory, ARGS.create, ARGS.verify, \
+            ARGS.backup)
         m.main()
 
     elif ARGS.mode == 'portable':
@@ -1429,7 +1428,8 @@ except subprocess.CalledProcessError as detail:
 except HTTPError as detail:
     if hasattr(detail, 'url'):
         # misc.fetch() provides additional information
-        message.critical('URLLIB', '%s %s (%s)' % (detail.url, detail.reason, detail.code))
+        message.critical('URLLIB', '%s %s (%s)' % (detail.url, detail.reason, \
+            detail.code))
     else:
         message.critical('URLLIB', detail)
     sys.exit(5)
