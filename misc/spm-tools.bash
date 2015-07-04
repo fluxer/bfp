@@ -11,7 +11,7 @@ _spm_tools()
     actions='merge clean edit sane lint check dist which pack pkg serve disowned
         upload online upgrade digest portable'
 
-    main_options='-h --help --debug --version'
+    main_options='--root -h --help --debug --version'
 
     merge_options='-h --help'
 
