@@ -424,11 +424,13 @@ class SPMD(dbus.service.Object):
         finally:
             pass
 
-try:
-    if not os.geteuid() == 0:
-        message.critical('Attempting to run as non-root will bring you no good, the opposite is true too.')
-        sys.exit(1)
+if not os.geteuid() == 0:
+    message.critical('Attempting to run as non-root will bring you no good, the opposite is true too.')
+    sys.exit(1)
 
+pidfile = '/var/run/spmd.pid'
+try:
+    misc.file_write(pidfile, str(os.getpid()))
     object = SPMD(systembus)
     wthread = threading.Thread(target=object.Watcher)
     sthread = threading.Thread(target=object.Slave)
@@ -442,7 +444,8 @@ try:
         loop.run()
     elif mainloop == 'qt':
         sys.exit(app.exec_())
-except KeyboardInterrupt:
-    message.critical('Keyboard interrupt')
+except Exception as detail:
+    message.sub_critical(detail)
 finally:
-    pass
+    if os.path.isfile(pidfile):
+        os.unlink(pidfile)

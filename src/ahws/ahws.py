@@ -1,11 +1,11 @@
 #!/usr/bin/python2
 
-import time, os, sys, libudev, libmessage, libmisc
+import time, os, sys, signal, libudev, libmessage, libmisc
 message = libmessage.Message()
 message.DEBUG = True
 misc = libmisc.Misc()
 
-app_version = "1.8.2 (235c35f)"
+app_version = "1.8.2 (5161744)"
 
 class Device(object):
     def __init__(self):
@@ -119,13 +119,17 @@ class Device(object):
         finally:
             libudev.udev_unref(self.udev)
 
+
+pidfile = '/var/run/ahws.pid'
 try:
+    misc.file_write(pidfile, str(os.getpid()))
     device = Device()
     message.info('Initializing AHWS v%s' % app_version)
     device.Initialize()
     message.info('Daemonizing AHWS')
     device.Daemon()
-except KeyboardInterrupt:
-    message.sub_critical('Keyboard interrupt')
+except Exception as detail:
+    message.sub_critical(detail)
 finally:
-    pass
+    if os.path.isfile(pidfile):
+        os.unlink(pidfile)
