@@ -357,7 +357,6 @@ class SPMD(dbus.service.Object):
 
     def Slave(self):
         ''' Does update and whatnot '''
-        global database
         # FIXME: make them configurable via spmd.conf
         ACTION = None # 'silent'
         UPDATE = 'minute' # 'never'
@@ -439,6 +438,7 @@ try:
     message.info('Pumping up your system')
     if mainloop == 'glib':
         loop = gobject.MainLoop()
+        gobject.threads_init()
         loop.run()
     elif mainloop == 'qt':
         sys.exit(app.exec_())
