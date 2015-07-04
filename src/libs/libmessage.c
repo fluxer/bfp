@@ -1835,7 +1835,7 @@ static PyObject *__pyx_pf_10libmessage_7Message_2log_message(CYTHON_UNUSED PyObj
  *     def log_message(self, status, msg):
  *         ''' Log message to system log '''
  *         if self.LOG:             # <<<<<<<<<<<<<<
- *             if isinstance(msg, (list, tuple)):
+ *             if isinstance(msg, (list, tuple, bool)):
  *                 msg = str(msg)
  */
   __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_LOG); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 61; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -1847,10 +1847,12 @@ static PyObject *__pyx_pf_10libmessage_7Message_2log_message(CYTHON_UNUSED PyObj
     /* "libmessage.py":62
  *         ''' Log message to system log '''
  *         if self.LOG:
- *             if isinstance(msg, (list, tuple)):             # <<<<<<<<<<<<<<
+ *             if isinstance(msg, (list, tuple, bool)):             # <<<<<<<<<<<<<<
  *                 msg = str(msg)
  *             if not isinstance(msg, str):
  */
+    __Pyx_INCREF(((PyObject*)&PyBool_Type));
+    __pyx_t_1 = ((PyObject*)&PyBool_Type);
     __pyx_t_3 = PyList_Check(__pyx_v_msg); 
     __pyx_t_4 = (__pyx_t_3 != 0);
     if (!__pyx_t_4) {
@@ -1860,14 +1862,22 @@ static PyObject *__pyx_pf_10libmessage_7Message_2log_message(CYTHON_UNUSED PyObj
     }
     __pyx_t_4 = PyTuple_Check(__pyx_v_msg); 
     __pyx_t_3 = (__pyx_t_4 != 0);
-    __pyx_t_2 = __pyx_t_3;
+    if (!__pyx_t_3) {
+    } else {
+      __pyx_t_2 = __pyx_t_3;
+      goto __pyx_L5_bool_binop_done;
+    }
+    __pyx_t_3 = PyObject_IsInstance(__pyx_v_msg, __pyx_t_1); 
+    __pyx_t_4 = (__pyx_t_3 != 0);
+    __pyx_t_2 = __pyx_t_4;
     __pyx_L5_bool_binop_done:;
-    __pyx_t_3 = (__pyx_t_2 != 0);
-    if (__pyx_t_3) {
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+    __pyx_t_4 = (__pyx_t_2 != 0);
+    if (__pyx_t_4) {
 
       /* "libmessage.py":63
  *         if self.LOG:
- *             if isinstance(msg, (list, tuple)):
+ *             if isinstance(msg, (list, tuple, bool)):
  *                 msg = str(msg)             # <<<<<<<<<<<<<<
  *             if not isinstance(msg, str):
  *                 msg = msg.encode('utf-8')
@@ -1887,14 +1897,14 @@ static PyObject *__pyx_pf_10libmessage_7Message_2log_message(CYTHON_UNUSED PyObj
     __pyx_L4:;
 
     /* "libmessage.py":64
- *             if isinstance(msg, (list, tuple)):
+ *             if isinstance(msg, (list, tuple, bool)):
  *                 msg = str(msg)
  *             if not isinstance(msg, str):             # <<<<<<<<<<<<<<
  *                 msg = msg.encode('utf-8')
  *             syslog.syslog(status, msg)
  */
-    __pyx_t_3 = PyString_Check(__pyx_v_msg); 
-    __pyx_t_2 = ((!(__pyx_t_3 != 0)) != 0);
+    __pyx_t_4 = PyString_Check(__pyx_v_msg); 
+    __pyx_t_2 = ((!(__pyx_t_4 != 0)) != 0);
     if (__pyx_t_2) {
 
       /* "libmessage.py":65
@@ -1911,9 +1921,9 @@ static PyObject *__pyx_pf_10libmessage_7Message_2log_message(CYTHON_UNUSED PyObj
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF_SET(__pyx_v_msg, __pyx_t_1);
       __pyx_t_1 = 0;
-      goto __pyx_L7;
+      goto __pyx_L8;
     }
-    __pyx_L7:;
+    __pyx_L8:;
 
     /* "libmessage.py":66
  *             if not isinstance(msg, str):

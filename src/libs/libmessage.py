@@ -59,7 +59,7 @@ class Message(object):
     def log_message(self, status, msg):
         ''' Log message to system log '''
         if self.LOG:
-            if isinstance(msg, (list, tuple)):
+            if isinstance(msg, (list, tuple, bool)):
                 msg = str(msg)
             if not isinstance(msg, str):
                 msg = msg.encode('utf-8')
