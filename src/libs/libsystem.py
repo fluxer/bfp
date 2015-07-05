@@ -32,7 +32,7 @@ class Block(object):
         uuid = '/dev/disk/by-uuid/%s' % variant
         if os.path.exists(uuid):
             dev = self.info(uuid, 'DEVNAME')
-            if misc.file_search(dev, '/proc/mounts'):
+            if dev and misc.file_search(dev, '/proc/mounts'):
                 return dev
 
     def unmount(self, variant):

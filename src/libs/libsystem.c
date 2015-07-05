@@ -1595,7 +1595,7 @@ static PyObject *__pyx_pf_9libsystem_5Block_2mounted(CYTHON_UNUSED PyObject *__p
  *         uuid = '/dev/disk/by-uuid/%s' % variant
  *         if os.path.exists(uuid):             # <<<<<<<<<<<<<<
  *             dev = self.info(uuid, 'DEVNAME')
- *             if misc.file_search(dev, '/proc/mounts'):
+ *             if dev and misc.file_search(dev, '/proc/mounts'):
  */
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 33; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -1638,7 +1638,7 @@ static PyObject *__pyx_pf_9libsystem_5Block_2mounted(CYTHON_UNUSED PyObject *__p
  *         uuid = '/dev/disk/by-uuid/%s' % variant
  *         if os.path.exists(uuid):
  *             dev = self.info(uuid, 'DEVNAME')             # <<<<<<<<<<<<<<
- *             if misc.file_search(dev, '/proc/mounts'):
+ *             if dev and misc.file_search(dev, '/proc/mounts'):
  *                 return dev
  */
     __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_info); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 34; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -1676,10 +1676,16 @@ static PyObject *__pyx_pf_9libsystem_5Block_2mounted(CYTHON_UNUSED PyObject *__p
     /* "libsystem.py":35
  *         if os.path.exists(uuid):
  *             dev = self.info(uuid, 'DEVNAME')
- *             if misc.file_search(dev, '/proc/mounts'):             # <<<<<<<<<<<<<<
+ *             if dev and misc.file_search(dev, '/proc/mounts'):             # <<<<<<<<<<<<<<
  *                 return dev
  * 
  */
+    __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_v_dev); if (unlikely(__pyx_t_7 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 35; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (__pyx_t_7) {
+    } else {
+      __pyx_t_5 = __pyx_t_7;
+      goto __pyx_L11_bool_binop_done;
+    }
     __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 35; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_file_search); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 35; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -1712,13 +1718,15 @@ static PyObject *__pyx_pf_9libsystem_5Block_2mounted(CYTHON_UNUSED PyObject *__p
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 35; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_7 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 35; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_t_5 = __pyx_t_7;
+    __pyx_L11_bool_binop_done:;
     if (__pyx_t_5) {
 
       /* "libsystem.py":36
  *             dev = self.info(uuid, 'DEVNAME')
- *             if misc.file_search(dev, '/proc/mounts'):
+ *             if dev and misc.file_search(dev, '/proc/mounts'):
  *                 return dev             # <<<<<<<<<<<<<<
  * 
  *     def unmount(self, variant):
