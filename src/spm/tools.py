@@ -23,13 +23,15 @@ misc = libspm.misc
 database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.8.2 (4007e7b)"
+app_version = "1.8.2 (b8c77c8)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
     def __init__(self, targets, do_fast=False, do_depends=False, \
         do_reverse=False, do_adjust=False):
-        self.targets = targets
+        self.targets = []
+        for target in targets:
+            self.targets.extend(database.remote_alias(target))
         self.do_fast = do_fast
         self.do_depends = do_depends
         self.do_reverse = do_reverse
@@ -155,7 +157,9 @@ class Dist(object):
     ''' Distribute ports '''
     def __init__(self, targets, do_sources=False, do_clean=False, \
         directory=misc.dir_current()):
-        self.targets = targets
+        self.targets = []
+        for target in targets:
+            self.targets.extend(database.remote_alias(target))
         self.do_sources = do_sources
         self.do_clean = do_clean
         self.directory = directory
@@ -226,7 +230,9 @@ class Lint(object):
         doc=False, module=False, footprint=False, builddir=False, \
         ownership=False, executable=False, path=False, shebang=False, \
         backup=False, conflicts=False, debug=False):
-        self.targets = targets
+        self.targets = []
+        for target in targets:
+            self.targets.extend(database.remote_alias(target))
         self.man = man
         self.udev = udev
         self.symlink = symlink
@@ -417,7 +423,9 @@ class Sane(object):
     def __init__(self, targets, enable=False, disable=False, null=False, \
         maintainer=False, note=False, variables=False, triggers=False, \
         users=False, groups=False, signatures=False):
-        self.targets = targets
+        self.targets = []
+        for target in targets:
+            self.targets.extend(database.remote_alias(target))
         self.enable = enable
         self.disable = disable
         self.null = null
@@ -571,7 +579,9 @@ class Merge(object):
 class Edit(object):
     ''' Edit SRCBUILDs from repository via EDITOR (fallbacks to vim) '''
     def __init__(self, targets):
-        self.targets = targets
+        self.targets = []
+        for target in targets:
+            self.targets.extend(database.remote_alias(target))
 
     def main(self):
         editor = os.environ.get('EDITOR') or misc.whereis('vim')
@@ -602,7 +612,9 @@ class Which(object):
 class Pack(object):
     ''' Pack local (installed) target files into tarball '''
     def __init__(self, targets, directory=misc.dir_current()):
-        self.targets = targets
+        self.targets = []
+        for target in targets:
+            self.targets.extend(database.remote_alias(target))
         self.directory = directory
 
     def main(self):
@@ -631,7 +643,9 @@ class Pack(object):
 class Pkg(object):
     ''' Fetch CRUX Linux package files '''
     def __init__(self, targets, directory=misc.dir_current()):
-        self.targets = targets
+        self.targets = []
+        for target in targets:
+            self.targets.extend(database.remote_alias(target))
         self.directory = directory
         self.PKG_DIRS = (
             'https://crux.nu/ports/crux-3.1/compat-32/%s',
@@ -736,7 +750,9 @@ class Upload(object):
     ''' Class to upload source/binary tarballs '''
     def __init__(self, targets, host=None, user=None, directory='/', \
         insecure=False):
-        self.targets = targets
+        self.targets = []
+        for target in targets:
+            self.targets.extend(database.remote_alias(target))
         self.host = host
         self.user = user
         self.directory = directory
@@ -906,7 +922,9 @@ class Digest(object):
     ''' Create/verify target(s) checksum digest '''
     def __init__(self, targets, directory='/', do_create=False, \
         do_verify=False, do_backup=False):
-        self.targets = targets
+        self.targets = []
+        for target in targets:
+            self.targets.extend(database.remote_alias(target))
         self.directory = directory
         self.do_create = do_create
         self.do_verify = do_verify
@@ -955,7 +973,9 @@ class Digest(object):
 class Portable(object):
     ''' Create a portable tarball of local (installed) target '''
     def __init__(self, targets, directory=misc.dir_current()):
-        self.targets = targets
+        self.targets = []
+        for target in targets:
+            self.targets.extend(database.remote_alias(target))
         self.directory = directory
 
     def main(self):

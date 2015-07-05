@@ -335,7 +335,7 @@ Clean, prepare, compile dependencies, compile, install, merge and finally
 re-compile reverse dependencies if needed of all local targets but only if
 they are outdated and don't execute pre/post actions:
 
-    sudo spm --scripts=False source -aDRu world
+    sudo spm --scripts=False source -aDRu system
 
 Rebuild all revere dependencies of glibc:
 
@@ -362,9 +362,9 @@ Note that remote, local and who modes accept regexp similar to those in Perl.
 For more information visit http://docs.python.org/2/library/re.html. Source and
 binary mode accepts base (e.g. foo), directory (e.g. /home/me/foo) with
 SRCBUILD in it, aliases (e.g. base) which you can find on the top-level of a
-repository as foo.alias or finally meta groups - currently only one - world.
-Aport mode accepts URL that is one of Git, SVN (Subversion), rsync, HTTP(S) or
-FTP(S).
+repository as foo.alias or finally meta groups - currently only two - world and
+system. Aport mode accepts URL that is one of Git, SVN (Subversion), rsync,
+HTTP(S) or FTP(S).
 
 Modes that support targets passing (accept the TARGETS argument) support
 standard input passing via "-" as TARGETS and piping the executable.

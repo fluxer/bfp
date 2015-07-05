@@ -291,7 +291,7 @@ class Database(object):
         if misc.python2:
             misc.typecheck(basename, (types.BooleanType))
 
-        aliases = ['world']
+        aliases = ['world', 'system']
         for sfile in misc.list_files('%s/repositories' % self.CACHE_DIR):
             if sfile.endswith('.alias'):
                 aliases.append(misc.file_name(sfile, basename))
@@ -303,6 +303,8 @@ class Database(object):
             misc.typecheck(target, (types.StringTypes))
 
         if target == 'world':
+            return self.remote_all(basename=True)
+        elif target == 'system':
             return self.local_all(basename=True)
         for alias in self.remote_aliases(basename=False):
             if os.path.basename(target) == os.path.basename(alias):
