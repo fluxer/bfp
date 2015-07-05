@@ -1938,7 +1938,7 @@ class Aport(object):
                             continue
                         # PREFIX is a last resort, may mess things up
                         message.sub_debug(_('Probing for destination'), mfile)
-                        match = misc.file_search('(?:^|\\s)(DESTDIR|ROOT_DIR|ROOT|FAKEROOT|PREFIX)(?:[ |\\t]+)?=', \
+                        match = misc.file_search('(?:^|\\s)(DESTDIR|ROOT_DIR|ROOT|FAKEROOT|PREFIX)(?:[ |\\t|\?]+)?=', \
                             mfile, escape=False)
                         if match:
                             destvar = match[0]

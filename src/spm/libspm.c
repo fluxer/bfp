@@ -1759,7 +1759,7 @@ static char __pyx_k_ash_python_perl_php_ruby_lua_wi[] = "|ash|python|perl|php|ru
 static char __pyx_k_autogen_sh_configure_prefix_usr[] = "./autogen.sh\n    ./configure --prefix=/usr --sysconfdir=/etc\n    make";
 static char __pyx_k_https_bitbucket_org_smil3y_core[] = "https://bitbucket.org/smil3y/core.git";
 static char __pyx_k_packlist_perllocal_pod_share_in[] = ".*/.packlist|.*/perllocal.pod|.*/share/info/dir";
-static char __pyx_k_s_DESTDIR_ROOT_DIR_ROOT_FAKEROO[] = "(?:^|\\s)(DESTDIR|ROOT_DIR|ROOT|FAKEROOT|PREFIX)(?:[ |\\t]+)?=";
+static char __pyx_k_s_DESTDIR_ROOT_DIR_ROOT_FAKEROO[] = "(?:^|\\s)(DESTDIR|ROOT_DIR|ROOT|FAKEROOT|PREFIX)(?:[ |\\t|\\?]+)?=";
 static char __pyx_k_sh_bash_dash_ksh_csh_tcsh_tclsh[] = "sh|bash|dash|ksh|csh|tcsh|tclsh|scsh|fish|zsh";
 static char __pyx_k_source_s_umask_0022_src_compile[] = "source %s && umask 0022 && src_compile";
 static char __pyx_k_source_s_umask_0022_src_install[] = "source %s && umask 0022 && src_install";
@@ -48980,7 +48980,7 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
  *                             continue
  *                         # PREFIX is a last resort, may mess things up
  *                         message.sub_debug(_('Probing for destination'), mfile)             # <<<<<<<<<<<<<<
- *                         match = misc.file_search('(?:^|\\s)(DESTDIR|ROOT_DIR|ROOT|FAKEROOT|PREFIX)(?:[ |\\t]+)?=', \
+ *                         match = misc.file_search('(?:^|\\s)(DESTDIR|ROOT_DIR|ROOT|FAKEROOT|PREFIX)(?:[ |\\t|\?]+)?=', \
  *                             mfile, escape=False)
  */
           __pyx_t_12 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1940; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -49025,7 +49025,7 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
           /* "libspm.py":1941
  *                         # PREFIX is a last resort, may mess things up
  *                         message.sub_debug(_('Probing for destination'), mfile)
- *                         match = misc.file_search('(?:^|\\s)(DESTDIR|ROOT_DIR|ROOT|FAKEROOT|PREFIX)(?:[ |\\t]+)?=', \             # <<<<<<<<<<<<<<
+ *                         match = misc.file_search('(?:^|\\s)(DESTDIR|ROOT_DIR|ROOT|FAKEROOT|PREFIX)(?:[ |\\t|\?]+)?=', \             # <<<<<<<<<<<<<<
  *                             mfile, escape=False)
  *                         if match:
  */
@@ -49037,7 +49037,7 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
 
           /* "libspm.py":1942
  *                         message.sub_debug(_('Probing for destination'), mfile)
- *                         match = misc.file_search('(?:^|\\s)(DESTDIR|ROOT_DIR|ROOT|FAKEROOT|PREFIX)(?:[ |\\t]+)?=', \
+ *                         match = misc.file_search('(?:^|\\s)(DESTDIR|ROOT_DIR|ROOT|FAKEROOT|PREFIX)(?:[ |\\t|\?]+)?=', \
  *                             mfile, escape=False)             # <<<<<<<<<<<<<<
  *                         if match:
  *                             destvar = match[0]
@@ -49054,7 +49054,7 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
           /* "libspm.py":1941
  *                         # PREFIX is a last resort, may mess things up
  *                         message.sub_debug(_('Probing for destination'), mfile)
- *                         match = misc.file_search('(?:^|\\s)(DESTDIR|ROOT_DIR|ROOT|FAKEROOT|PREFIX)(?:[ |\\t]+)?=', \             # <<<<<<<<<<<<<<
+ *                         match = misc.file_search('(?:^|\\s)(DESTDIR|ROOT_DIR|ROOT|FAKEROOT|PREFIX)(?:[ |\\t|\?]+)?=', \             # <<<<<<<<<<<<<<
  *                             mfile, escape=False)
  *                         if match:
  */
@@ -49063,7 +49063,7 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
 
           /* "libspm.py":1942
  *                         message.sub_debug(_('Probing for destination'), mfile)
- *                         match = misc.file_search('(?:^|\\s)(DESTDIR|ROOT_DIR|ROOT|FAKEROOT|PREFIX)(?:[ |\\t]+)?=', \
+ *                         match = misc.file_search('(?:^|\\s)(DESTDIR|ROOT_DIR|ROOT|FAKEROOT|PREFIX)(?:[ |\\t|\?]+)?=', \
  *                             mfile, escape=False)             # <<<<<<<<<<<<<<
  *                         if match:
  *                             destvar = match[0]
@@ -49073,7 +49073,7 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
           /* "libspm.py":1941
  *                         # PREFIX is a last resort, may mess things up
  *                         message.sub_debug(_('Probing for destination'), mfile)
- *                         match = misc.file_search('(?:^|\\s)(DESTDIR|ROOT_DIR|ROOT|FAKEROOT|PREFIX)(?:[ |\\t]+)?=', \             # <<<<<<<<<<<<<<
+ *                         match = misc.file_search('(?:^|\\s)(DESTDIR|ROOT_DIR|ROOT|FAKEROOT|PREFIX)(?:[ |\\t|\?]+)?=', \             # <<<<<<<<<<<<<<
  *                             mfile, escape=False)
  *                         if match:
  */
@@ -49086,7 +49086,7 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
           __pyx_t_7 = 0;
 
           /* "libspm.py":1943
- *                         match = misc.file_search('(?:^|\\s)(DESTDIR|ROOT_DIR|ROOT|FAKEROOT|PREFIX)(?:[ |\\t]+)?=', \
+ *                         match = misc.file_search('(?:^|\\s)(DESTDIR|ROOT_DIR|ROOT|FAKEROOT|PREFIX)(?:[ |\\t|\?]+)?=', \
  *                             mfile, escape=False)
  *                         if match:             # <<<<<<<<<<<<<<
  *                             destvar = match[0]
@@ -55472,7 +55472,7 @@ static int __Pyx_InitCachedConstants(void) {
  *                             continue
  *                         # PREFIX is a last resort, may mess things up
  *                         message.sub_debug(_('Probing for destination'), mfile)             # <<<<<<<<<<<<<<
- *                         match = misc.file_search('(?:^|\\s)(DESTDIR|ROOT_DIR|ROOT|FAKEROOT|PREFIX)(?:[ |\\t]+)?=', \
+ *                         match = misc.file_search('(?:^|\\s)(DESTDIR|ROOT_DIR|ROOT|FAKEROOT|PREFIX)(?:[ |\\t|\?]+)?=', \
  *                             mfile, escape=False)
  */
   __pyx_tuple__315 = PyTuple_Pack(1, __pyx_kp_s_Probing_for_destination); if (unlikely(!__pyx_tuple__315)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1940; __pyx_clineno = __LINE__; goto __pyx_L1_error;}

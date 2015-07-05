@@ -1052,7 +1052,7 @@ static char __pyx_k_literal_eval[] = "literal_eval";
 static char __pyx_k_local_parser[] = "local_parser";
 static char __pyx_k_optdepends_2[] = "optdepends";
 static char __pyx_k_urllib_error[] = "urllib.error";
-static char __pyx_k_1_8_2_161b6e9[] = "1.8.2 (161b6e9)";
+static char __pyx_k_1_8_2_9fb954d[] = "1.8.2 (9fb954d)";
 static char __pyx_k_Change_CFLAGS[] = "Change CFLAGS";
 static char __pyx_k_OverrideChost[] = "OverrideChost";
 static char __pyx_k_OverrideDebug[] = "OverrideDebug";
@@ -1256,7 +1256,7 @@ static char __pyx_k_Short_for_clean_fetch_prepare_co[] = "Short for clean, fetch
 static char __pyx_k_Short_for_clean_sync_prune_and_u[] = "Short for clean, sync, prune and update";
 static char __pyx_k_Short_for_fetch_prepare_and_merg[] = "Short for fetch, prepare and merge";
 static PyObject *__pyx_kp_s_;
-static PyObject *__pyx_kp_s_1_8_2_161b6e9;
+static PyObject *__pyx_kp_s_1_8_2_9fb954d;
 static PyObject *__pyx_kp_s_3;
 static PyObject *__pyx_n_s_ARGS;
 static PyObject *__pyx_n_s_Action;
@@ -7318,7 +7318,7 @@ static struct PyModuleDef __pyx_moduledef = {
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_, __pyx_k_, sizeof(__pyx_k_), 0, 0, 1, 0},
-  {&__pyx_kp_s_1_8_2_161b6e9, __pyx_k_1_8_2_161b6e9, sizeof(__pyx_k_1_8_2_161b6e9), 0, 0, 1, 0},
+  {&__pyx_kp_s_1_8_2_9fb954d, __pyx_k_1_8_2_9fb954d, sizeof(__pyx_k_1_8_2_9fb954d), 0, 0, 1, 0},
   {&__pyx_kp_s_3, __pyx_k_3, sizeof(__pyx_k_3), 0, 0, 1, 0},
   {&__pyx_n_s_ARGS, __pyx_k_ARGS, sizeof(__pyx_k_ARGS), 0, 0, 1, 1},
   {&__pyx_n_s_Action, __pyx_k_Action, sizeof(__pyx_k_Action), 0, 0, 1, 1},
@@ -11942,7 +11942,7 @@ PyMODINIT_FUNC PyInit_spm(void)
  *     import configparser
  *     from urllib.error import HTTPError             # <<<<<<<<<<<<<<
  * 
- * app_version = "1.8.2 (161b6e9)"
+ * app_version = "1.8.2 (9fb954d)"
  */
     __pyx_t_3 = PyList_New(1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 12; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
@@ -11963,14 +11963,14 @@ PyMODINIT_FUNC PyInit_spm(void)
   /* "spm.py":14
  *     from urllib.error import HTTPError
  * 
- * app_version = "1.8.2 (161b6e9)"             # <<<<<<<<<<<<<<
+ * app_version = "1.8.2 (9fb954d)"             # <<<<<<<<<<<<<<
  * 
  * import libmessage
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_8_2_161b6e9) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 14; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_8_2_9fb954d) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 14; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "spm.py":16
- * app_version = "1.8.2 (161b6e9)"
+ * app_version = "1.8.2 (9fb954d)"
  * 
  * import libmessage             # <<<<<<<<<<<<<<
  * message = libmessage.Message()
