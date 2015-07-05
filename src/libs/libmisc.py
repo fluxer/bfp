@@ -383,17 +383,7 @@ class Misc(object):
         cmd = [gpg, '--homedir', self.GPG_DIR]
         for server in lservers:
             cmd.extend(('--keyserver', server))
-        try:
-            checkcmd = []
-            checkcmd.extend(cmd)
-            checkcmd.append('--list-public-keys')
-            checkcmd.extend(lkeys)
-            self.system_command(checkcmd)
-            # if it does not fail refresh the keys
-            cmd.append('--refresh-keys')
-        except subprocess.CalledProcessError:
-            # otherwise (presumably) the key is not in the keyring
-            cmd.append('--recv-keys')
+        cmd.append('--recv-keys')
         cmd.extend(lkeys)
         self.system_command(cmd)
 
