@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast
 
-app_version = "1.8.2 (4007e7b)"
+app_version = "1.8.2 (b7e6c26)"
 
 tmpdir = None
 keep = False
@@ -34,7 +34,7 @@ try:
     parser.add_argument('-i', '--image', type=str, default=image, \
         help='Change output image')
     parser.add_argument('-c', '--compression', type=str, default=compression, \
-        choices=('gzip', 'cat', 'bzip2'), \
+        choices=('cat', 'gzip', 'bzip2'), \
         help='Change image compression method')
     parser.add_argument('-r', '--recovery', type=ast.literal_eval, \
         choices=[True, False], default=recovery, \
@@ -97,7 +97,7 @@ try:
                 return
             sreal = os.readlink(src)
             sfixed = src.replace('/etc/mkinitfs/root', '')
-            sdest = ARGS.tmp + sfixed
+            sdest = '%s%s' % (ARGS.tmp, sfixed)
             if os.path.islink(sdest):
                 message.sub_debug('Already exists', src)
                 return
@@ -110,7 +110,7 @@ try:
                 message.sub_debug('Already copied', src)
                 return
             sfixed = src.replace('/etc/mkinitfs/root', '')
-            sdest = ARGS.tmp + '/' + sfixed
+            sdest = '%s/%s' % (ARGS.tmp, sfixed)
             if os.path.isdir(sdest):
                 message.sub_debug('Already exists', src)
                 for sfile in os.listdir(src):
@@ -132,8 +132,8 @@ try:
                 sfixed = sfile.replace('/etc/mkinitfs/root', '')
                 if os.path.islink(sfile):
                     copy_item(sfile)
-                    sfile = os.path.dirname(sfile) + '/' + os.readlink(sfile)
-                sdest = ARGS.tmp + '/' + sfixed
+                    sfile = '%s/%s' % (os.path.dirname(sfile), os.readlink(sfile))
+                sdest = '%s/%s' % (ARGS.tmp, sfixed)
                 if os.path.isfile(sdest):
                     message.sub_debug('Already exists', src)
                     return
