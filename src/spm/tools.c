@@ -1605,7 +1605,7 @@ static char __pyx_k_sub_critical[] = "sub_critical";
 static char __pyx_k_urllib_error[] = "urllib.error";
 static char __pyx_k_version_info[] = "version_info";
 static char __pyx_k_which_parser[] = "which_parser";
-static char __pyx_k_1_8_2_b8c77c8[] = "1.8.2 (b8c77c8)";
+static char __pyx_k_1_8_2_f986f11[] = "1.8.2 (f986f11)";
 static char __pyx_k_Create_digest[] = "Create digest";
 static char __pyx_k_Digest___init[] = "Digest.__init__";
 static char __pyx_k_Disowned_file[] = "Disowned file";
@@ -1886,7 +1886,7 @@ static char __pyx_k_Starting_migration_procedure_1_7_2[] = "Starting migration p
 static char __pyx_k_Starting_migration_procedure_1_7_3[] = "Starting migration procedure 1_7_x_backup on";
 static PyObject *__pyx_n_s_;
 static PyObject *__pyx_kp_s_1;
-static PyObject *__pyx_kp_s_1_8_2_b8c77c8;
+static PyObject *__pyx_kp_s_1_8_2_f986f11;
 static PyObject *__pyx_kp_s_2;
 static PyObject *__pyx_kp_s_3;
 static PyObject *__pyx_kp_s_4;
@@ -16920,7 +16920,7 @@ static PyObject *__pyx_pf_5tools_4Sane_2main(CYTHON_UNUSED PyObject *__pyx_self,
  *                             sig2 = '%s.asc' % src
  *                             sig3 = '%s.sign' % misc.file_name(src, False)             # <<<<<<<<<<<<<<
  *                             sig4 = '%s.sign' % src
- *                             if sig1 in sources or sig2 in sources or sig3 in sources:
+ *                             if sig1 in sources or sig2 in sources or sig3 in sources or sig4 in sources:
  */
             __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 510; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_6);
@@ -16964,7 +16964,7 @@ static PyObject *__pyx_pf_5tools_4Sane_2main(CYTHON_UNUSED PyObject *__pyx_self,
  *                             sig2 = '%s.asc' % src
  *                             sig3 = '%s.sign' % misc.file_name(src, False)
  *                             sig4 = '%s.sign' % src             # <<<<<<<<<<<<<<
- *                             if sig1 in sources or sig2 in sources or sig3 in sources:
+ *                             if sig1 in sources or sig2 in sources or sig3 in sources or sig4 in sources:
  *                                 message.sub_debug(_('Signature already in sources for'), src)
  */
             __pyx_t_10 = __Pyx_PyString_Format(__pyx_kp_s_s_sign, __pyx_v_src); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 511; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -16975,7 +16975,7 @@ static PyObject *__pyx_pf_5tools_4Sane_2main(CYTHON_UNUSED PyObject *__pyx_self,
             /* "tools.py":512
  *                             sig3 = '%s.sign' % misc.file_name(src, False)
  *                             sig4 = '%s.sign' % src
- *                             if sig1 in sources or sig2 in sources or sig3 in sources:             # <<<<<<<<<<<<<<
+ *                             if sig1 in sources or sig2 in sources or sig3 in sources or sig4 in sources:             # <<<<<<<<<<<<<<
  *                                 message.sub_debug(_('Signature already in sources for'), src)
  *                                 if not pgpkeys:
  */
@@ -16995,13 +16995,20 @@ static PyObject *__pyx_pf_5tools_4Sane_2main(CYTHON_UNUSED PyObject *__pyx_self,
             }
             __pyx_t_8 = (__Pyx_PySequence_Contains(__pyx_v_sig3, __pyx_v_sources, Py_EQ)); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 512; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __pyx_t_12 = (__pyx_t_8 != 0);
-            __pyx_t_11 = __pyx_t_12;
+            if (!__pyx_t_12) {
+            } else {
+              __pyx_t_11 = __pyx_t_12;
+              goto __pyx_L37_bool_binop_done;
+            }
+            __pyx_t_12 = (__Pyx_PySequence_Contains(__pyx_v_sig4, __pyx_v_sources, Py_EQ)); if (unlikely(__pyx_t_12 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 512; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_8 = (__pyx_t_12 != 0);
+            __pyx_t_11 = __pyx_t_8;
             __pyx_L37_bool_binop_done:;
             if (__pyx_t_11) {
 
               /* "tools.py":513
  *                             sig4 = '%s.sign' % src
- *                             if sig1 in sources or sig2 in sources or sig3 in sources:
+ *                             if sig1 in sources or sig2 in sources or sig3 in sources or sig4 in sources:
  *                                 message.sub_debug(_('Signature already in sources for'), src)             # <<<<<<<<<<<<<<
  *                                 if not pgpkeys:
  *                                     message.sub_warning(_('Signature in sources but no pgpkeys'), src)
@@ -17046,15 +17053,15 @@ static PyObject *__pyx_pf_5tools_4Sane_2main(CYTHON_UNUSED PyObject *__pyx_self,
               __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
               /* "tools.py":514
- *                             if sig1 in sources or sig2 in sources or sig3 in sources:
+ *                             if sig1 in sources or sig2 in sources or sig3 in sources or sig4 in sources:
  *                                 message.sub_debug(_('Signature already in sources for'), src)
  *                                 if not pgpkeys:             # <<<<<<<<<<<<<<
  *                                     message.sub_warning(_('Signature in sources but no pgpkeys'), src)
  *                             elif misc.url_ping(sig1):
  */
               __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_v_pgpkeys); if (unlikely(__pyx_t_11 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 514; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-              __pyx_t_12 = ((!__pyx_t_11) != 0);
-              if (__pyx_t_12) {
+              __pyx_t_8 = ((!__pyx_t_11) != 0);
+              if (__pyx_t_8) {
 
                 /* "tools.py":515
  *                                 message.sub_debug(_('Signature already in sources for'), src)
@@ -17101,9 +17108,9 @@ static PyObject *__pyx_pf_5tools_4Sane_2main(CYTHON_UNUSED PyObject *__pyx_self,
                 __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
                 __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
                 __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-                goto __pyx_L40;
+                goto __pyx_L41;
               }
-              __pyx_L40:;
+              __pyx_L41:;
               goto __pyx_L36;
             }
 
@@ -17144,9 +17151,9 @@ static PyObject *__pyx_pf_5tools_4Sane_2main(CYTHON_UNUSED PyObject *__pyx_self,
               __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             }
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-            __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely(__pyx_t_12 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 516; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 516; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-            if (__pyx_t_12) {
+            if (__pyx_t_8) {
 
               /* "tools.py":517
  *                                     message.sub_warning(_('Signature in sources but no pgpkeys'), src)
@@ -17233,9 +17240,9 @@ static PyObject *__pyx_pf_5tools_4Sane_2main(CYTHON_UNUSED PyObject *__pyx_self,
               __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
             }
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-            __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely(__pyx_t_12 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 518; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 518; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-            if (__pyx_t_12) {
+            if (__pyx_t_8) {
 
               /* "tools.py":519
  *                                 message.sub_warning(_('Signature available but not in sources'), sig1)
@@ -17322,9 +17329,9 @@ static PyObject *__pyx_pf_5tools_4Sane_2main(CYTHON_UNUSED PyObject *__pyx_self,
               __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             }
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-            __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely(__pyx_t_12 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 520; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 520; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-            if (__pyx_t_12) {
+            if (__pyx_t_8) {
 
               /* "tools.py":521
  *                                 message.sub_warning(_('Signature available but not in sources'), sig2)
@@ -17411,9 +17418,9 @@ static PyObject *__pyx_pf_5tools_4Sane_2main(CYTHON_UNUSED PyObject *__pyx_self,
               __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
             }
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-            __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely(__pyx_t_12 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-            if (__pyx_t_12) {
+            if (__pyx_t_8) {
 
               /* "tools.py":523
  *                                 message.sub_warning(_('Signature available but not in sources'), sig3)
@@ -33599,7 +33606,7 @@ static struct PyModuleDef __pyx_moduledef = {
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_, __pyx_k_, sizeof(__pyx_k_), 0, 0, 1, 1},
   {&__pyx_kp_s_1, __pyx_k_1, sizeof(__pyx_k_1), 0, 0, 1, 0},
-  {&__pyx_kp_s_1_8_2_b8c77c8, __pyx_k_1_8_2_b8c77c8, sizeof(__pyx_k_1_8_2_b8c77c8), 0, 0, 1, 0},
+  {&__pyx_kp_s_1_8_2_f986f11, __pyx_k_1_8_2_f986f11, sizeof(__pyx_k_1_8_2_f986f11), 0, 0, 1, 0},
   {&__pyx_kp_s_2, __pyx_k_2, sizeof(__pyx_k_2), 0, 0, 1, 0},
   {&__pyx_kp_s_3, __pyx_k_3, sizeof(__pyx_k_3), 0, 0, 1, 0},
   {&__pyx_kp_s_4, __pyx_k_4, sizeof(__pyx_k_4), 0, 0, 1, 0},
@@ -35542,7 +35549,7 @@ static int __Pyx_InitCachedConstants(void) {
 
   /* "tools.py":513
  *                             sig4 = '%s.sign' % src
- *                             if sig1 in sources or sig2 in sources or sig3 in sources:
+ *                             if sig1 in sources or sig2 in sources or sig3 in sources or sig4 in sources:
  *                                 message.sub_debug(_('Signature already in sources for'), src)             # <<<<<<<<<<<<<<
  *                                 if not pgpkeys:
  *                                     message.sub_warning(_('Signature in sources but no pgpkeys'), src)
@@ -40249,7 +40256,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  * database = libspm.database
  * misc.GPG_DIR = libspm.GPG_DIR             # <<<<<<<<<<<<<<
  * 
- * app_version = "1.8.2 (b8c77c8)"
+ * app_version = "1.8.2 (f986f11)"
  */
   __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_libspm); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 24; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -40265,14 +40272,14 @@ PyMODINIT_FUNC PyInit_tools(void)
   /* "tools.py":26
  * misc.GPG_DIR = libspm.GPG_DIR
  * 
- * app_version = "1.8.2 (b8c77c8)"             # <<<<<<<<<<<<<<
+ * app_version = "1.8.2 (f986f11)"             # <<<<<<<<<<<<<<
  * 
  * class Check(object):
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_8_2_b8c77c8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_8_2_f986f11) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":28
- * app_version = "1.8.2 (b8c77c8)"
+ * app_version = "1.8.2 (f986f11)"
  * 
  * class Check(object):             # <<<<<<<<<<<<<<
  *     ''' Check runtime dependencies of local targets '''
@@ -40314,7 +40321,7 @@ PyMODINIT_FUNC PyInit_tools(void)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
   /* "tools.py":28
- * app_version = "1.8.2 (b8c77c8)"
+ * app_version = "1.8.2 (f986f11)"
  * 
  * class Check(object):             # <<<<<<<<<<<<<<
  *     ''' Check runtime dependencies of local targets '''

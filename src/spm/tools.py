@@ -23,7 +23,7 @@ misc = libspm.misc
 database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.8.2 (b8c77c8)"
+app_version = "1.8.2 (f986f11)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -509,7 +509,7 @@ class Sane(object):
                             sig2 = '%s.asc' % src
                             sig3 = '%s.sign' % misc.file_name(src, False)
                             sig4 = '%s.sign' % src
-                            if sig1 in sources or sig2 in sources or sig3 in sources:
+                            if sig1 in sources or sig2 in sources or sig3 in sources or sig4 in sources:
                                 message.sub_debug(_('Signature already in sources for'), src)
                                 if not pgpkeys:
                                     message.sub_warning(_('Signature in sources but no pgpkeys'), src)
