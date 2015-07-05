@@ -157,6 +157,7 @@ database.LOCAL_DIR = LOCAL_DIR
 database.IGNORE = IGNORE
 database.NOTIFY = NOTIFY
 
+
 class Local(object):
     ''' Class for printing local targets metadata '''
     def __init__(self, pattern, do_name=False, do_version=False, \
@@ -803,7 +804,7 @@ class Source(object):
         match = misc.string_search(udevadm_regex, adjcontent, escape=False)
         if match and udevadm:
             if os.path.exists('%s/run/udev/control' % ROOT_DIR) \
-            or os.path.exists('%s/var/run/udev/control' % ROOT_DIR):
+                or os.path.exists('%s/var/run/udev/control' % ROOT_DIR):
                 message.sub_info(_('Reloading udev rules and hwdb'))
                 message.sub_debug(match)
                 misc.system_chroot((udevadm, 'control', '--reload'))
@@ -1207,7 +1208,8 @@ class Source(object):
                         misc.file_substitute('^%s' % sfull, '#!' + smatch, sfile)
                         required.append(smatch)
                     else:
-                        required.append(sbase) # fake non-existing match
+                        # fake non-existing match
+                        required.append(sbase)
 
         checked = []
         for req in required:
@@ -1500,7 +1502,6 @@ class Source(object):
             message.sub_info(_('Executing post_remove()'))
             misc.system_script(self.srcbuild, 'post_remove')
 
-
         message.sub_info(_('Removing metadata and SRCBUILD'))
         self.remove_target_file(self.target_metadata)
         self.remove_target_file(self.target_srcbuild)
@@ -1700,6 +1701,7 @@ wantscookie = '''
       (o o)          (o o)         {}o o{}     -  (o)o)  -       (o o)
 --ooO--(_)--Ooo--ooO--(_)--Ooo--ooO--(_)--Ooo--ooO'(_)--Ooo--ooO--`o'--Ooo--
 '''
+
 
 class Binary(Source):
     ''' Class to handle binary tarballs '''

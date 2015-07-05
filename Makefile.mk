@@ -44,6 +44,7 @@ MSGATTRIB = msgattrib
 MSGFMT = msgfmt
 POD2MAN = pod2man
 PYUIC = pyuic4
+CLOC = cloc
 
 ifneq ($(shell which python2.7),)
 	PYTHON = python2.7
@@ -60,10 +61,12 @@ ifneq ($(shell which cython2),)
 else
 	CYTHON = cython --verbose
 endif
-ifneq ($(shell which pylint2),)
-	PYLINT = pylint2 --rcfile=$(TOPDIR)/pylint.conf
+ifneq ($(shell which pep8),)
+	PYLINT = pep8 --config="$(TOPDIR)/pep8.conf"
+else ifneq ($(shell which pylint2),)
+	PYLINT = pylint2 --rcfile="$(TOPDIR)/pylint.conf"
 else
-	PYLINT = pylint --rcfile=$(TOPDIR)/pylint.conf
+	PYLINT = pylint --rcfile="$(TOPDIR)/pylint.conf"
 endif
 ifneq ($(shell which gpg2),)
 	GPG = gpg2
@@ -74,7 +77,7 @@ endif
 all:
 
 stat:
-	cloc $(shell $(FIND) -name '*.py' -o -name '*.sh')
+	$(CLOC) $(shell $(FIND) -name '*.py' -o -name '*.sh')
 
 lint:
 	$(PYLINT) $(shell $(FIND) -name '*.py' | $(GREP) -v -e libudev.py -e gui_ui.py)

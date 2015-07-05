@@ -3,6 +3,7 @@
 import os, time, shutil, glob, libmisc
 misc = libmisc.Misc()
 
+
 class JDB(object):
     ''' A simple JSON format database for use with mulptile processes '''
     def __init__(self, dbfile):

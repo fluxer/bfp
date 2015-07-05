@@ -11,10 +11,12 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.8.2 (9fb954d)"
-
 import libmessage
 message = libmessage.Message()
+
+app_version = "1.8.2 (4007e7b)"
+
+
 try:
     import libspm
 

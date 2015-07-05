@@ -470,7 +470,7 @@ class Misc(object):
         if self.python2:
             self.typecheck(sdir, (types.StringTypes))
 
-        for f  in self.list_files(sdir):
+        for f in self.list_files(sdir):
             os.unlink(f)
         for d in self.list_dirs(sdir, btopdown=False):
             if os.path.islink(d):
@@ -582,7 +582,6 @@ class Misc(object):
         if basename:
             return os.path.basename(path)
         return path
-
 
     def url_ping(self, surl='http://www.google.com', lmirrors=None, ssuffix=''):
         ''' Ping URL, optionally URL base on mirrors '''
@@ -1153,6 +1152,7 @@ class Inotify(object):
         if self.fd:
             os.close(self.fd)
 
+
 class Magic(object):
     ''' Magic wrapper '''
     def __init__(self, flags=None):
@@ -1187,7 +1187,7 @@ class Magic(object):
         libmagic = ctypes.util.find_library('magic')
         self.libmagic = ctypes.CDLL(libmagic, use_errno=True)
         if not flags:
-            flags = self.NONE | self.MIME_TYPE | self.PRESERVE_ATIME | \
+            flags = self.MIME_TYPE | self.PRESERVE_ATIME | \
             self.NO_CHECK_ENCODING # | self.NO_CHECK_COMPRESS | self.NO_CHECK_TAR
         self.flags = flags
         self.cookie = self.libmagic.magic_open(self.flags)

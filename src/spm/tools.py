@@ -23,7 +23,7 @@ misc = libspm.misc
 database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.8.2 (9fb954d)"
+app_version = "1.8.2 (4007e7b)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -644,7 +644,6 @@ class Pkg(object):
             'https://crux.nu/ports/crux-3.1/xorg/%s',
         )
 
-
     def get_links(self, pkgname):
         ''' Probe main URLs '''
         for d in self.PKG_DIRS:
@@ -1221,9 +1220,9 @@ try:
             position = ARGS.TARGETS.index('world')
             ARGS.TARGETS[position:position+1] = \
                 database.local_all(basename=True)
-
         for alias in database.remote_aliases():
             if alias in ARGS.TARGETS:
+
                 position = ARGS.TARGETS.index(alias)
                 ARGS.TARGETS[position:position+1] = \
                     database.remote_alias(alias)

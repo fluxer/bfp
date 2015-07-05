@@ -75,7 +75,6 @@ class Message(object):
             print('%s* %s%s' % (self.cmarker, self.cnormal, msg))
             self.log_message(syslog.LOG_INFO, msg)
 
-
     def warning(self, msg, marker=None):
         ''' Print message with warning status '''
         if not marker is None:

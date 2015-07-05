@@ -95,6 +95,7 @@ class Block(object):
             if line.startswith(('ID_FS_%s=' % tag, '%s='% tag)):
                 return line.split('=')[1]
 
+
 class Power(object):
     ''' System power state management and information gathering helper '''
     def __init__(self):
