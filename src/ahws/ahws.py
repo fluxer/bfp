@@ -1,11 +1,11 @@
 #!/usr/bin/python2
 
-import time, os, sys, signal, libudev, libmessage, libmisc
+import time, os, sys, libudev, libmessage, libmisc
 message = libmessage.Message()
 message.DEBUG = True
 misc = libmisc.Misc()
 
-app_version = "1.8.2 (5161744)"
+app_version = "1.8.2 (7a2a68f)"
 
 class Device(object):
     def __init__(self):

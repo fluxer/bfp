@@ -11,7 +11,7 @@ else:
     import configparser
     from urllib.error import HTTPError
 
-app_version = "1.8.2 (3ab1df3)"
+app_version = "1.8.2 (161b6e9)"
 
 import libmessage
 message = libmessage.Message()
@@ -344,20 +344,21 @@ try:
     local_parser.add_argument('PATTERN', type=str, \
         help=_('Pattern to search for in local targets'))
 
-    aport_parser = subparsers.add_parser('aport')
-    aport_parser.add_argument('-d', '--directory', type=str, \
-        default=os.getcwd(), help=_('Set output directory'))
-    aport_parser.add_argument('-a', '--automake', action='store_true', \
-        help=_('Build the target after analizing and creating SRCBUILD for it'))
-    aport_parser.add_argument('URLS', nargs='+', type=str, \
-        help=_('URLs to apply actions on'))
-
     who_parser = subparsers.add_parser('who', \
         help=_('Get owner of files via regular expression'))
     who_parser.add_argument('-p', '--plain', action='store_true', \
         help=_('Print in plain format'))
     who_parser.add_argument('PATTERN', type=str, \
         help=_('Pattern to search for in local targets'))
+
+    aport_parser = subparsers.add_parser('aport', \
+        help=_('Automatically write SRCBUILD for sources given via URL'))
+    aport_parser.add_argument('-d', '--directory', type=str, \
+        default=os.getcwd(), help=_('Set output directory'))
+    aport_parser.add_argument('-a', '--automake', action='store_true', \
+        help=_('Build the target after analizing and creating SRCBUILD for it'))
+    aport_parser.add_argument('URLS', nargs='+', type=str, \
+        help=_('URLs to apply actions on'))
 
     parser.add_argument('--cache', type=str, action=OverrideCacheDir, \
         help=_('Change cache directory'))
