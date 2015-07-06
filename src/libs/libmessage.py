@@ -5,9 +5,10 @@ A messaging module with fancy printing, logging and piped process handling.
 
 Unbuffered() is not something you should deal with, it will be used to override
 standard output forcing it to flush if stdout is not a TTY. Same goes for
-colors - if stdout is not TTY then they will be automatically disabled. And
-the cherry here is the logging, it logs everything passed to the messager
-unless told otherwise.
+colors - if stdout is not TTY then they will be automatically disabled. It also
+logs everything passed to the messager via syslog unless told otherwise. And
+the cherry is that it can raise Exception if the CATCH attribute is set to
+value evaluated as True.
 '''
 
 import sys, curses, syslog
@@ -68,11 +69,11 @@ class Message(object):
     def info(self, msg, marker=None):
         ''' Print message with information status '''
         if not marker is None:
-            print('%s* %s%s: %s%s%s' % (self.cmarker, self.cnormal, msg, \
-                self.cinfo, marker, self.cnormal))
+            sys.stdout.write('%s* %s%s: %s%s%s\n' % (self.cmarker, \
+                self.cnormal, msg, self.cinfo, marker, self.cnormal))
             self.log_message(syslog.LOG_INFO, '%s: %s' % (msg, marker))
         else:
-            print('%s* %s%s' % (self.cmarker, self.cnormal, msg))
+            sys.stdout.write('%s* %s%s\n' % (self.cmarker, self.cnormal, msg))
             self.log_message(syslog.LOG_INFO, msg)
 
     def warning(self, msg, marker=None):
@@ -96,28 +97,31 @@ class Message(object):
         else:
             if self.CATCH:
                 raise Exception(msg)
-            sys.stderr.write('%s* %s%s\n' % (self.ccritical, self.cnormal, msg))
+            sys.stderr.write('%s* %s%s\n' % (self.ccritical, self.cnormal, \
+                msg))
             self.log_message(syslog.LOG_CRIT, msg)
 
     def debug(self, msg, marker=None):
         ''' Print message with debug status '''
         if self.DEBUG:
             if not marker is None:
-                print('%s* %s%s: %s%s%s' % (self.cdebug, self.cnormal, msg, \
-                    self.cdebug, marker, self.cnormal))
+                sys.stdout.write('%s* %s%s: %s%s%s\n' % (self.cdebug, \
+                    self.cnormal, msg, self.cdebug, marker, self.cnormal))
                 self.log_message(syslog.LOG_DEBUG, '%s: %s' % (msg, marker))
             else:
-                print('%s* %s%s' % (self.cdebug, self.cnormal, msg))
+                sys.stdout.write('%s* %s%s\n' % (self.cdebug, self.cnormal, \
+                    msg))
                 self.log_message(syslog.LOG_DEBUG, msg)
 
     def sub_info(self, msg, marker=None):
         ''' Print sub-message with information status '''
         if not marker is None:
-            print('%s  -> %s%s: %s%s%s' % (self.cmarker, self.cnormal, msg, \
-                self.cinfo, marker, self.cnormal))
+            sys.stdout.write('%s  -> %s%s: %s%s%s\n' % (self.cmarker, \
+                self.cnormal, msg, self.cinfo, marker, self.cnormal))
             self.log_message(syslog.LOG_INFO, '%s: %s' % (msg, marker))
         else:
-            print('%s  -> %s%s' % (self.cmarker, self.cnormal, msg))
+            sys.stdout.write('%s  -> %s%s\n' % (self.cmarker, self.cnormal, \
+                msg))
             self.log_message(syslog.LOG_INFO, msg)
 
     def sub_warning(self, msg, marker=None):
@@ -150,9 +154,10 @@ class Message(object):
         ''' Print sub-message with debug status '''
         if self.DEBUG:
             if not marker is None:
-                print('%s  -> %s%s: %s%s%s' % (self.cdebug, self.cnormal, \
-                    msg, self.cdebug, marker, self.cnormal))
+                sys.stdout.write('%s  -> %s%s: %s%s%s\n' % (self.cdebug, \
+                    self.cnormal, msg, self.cdebug, marker, self.cnormal))
                 self.log_message(syslog.LOG_DEBUG, '%s: %s' % (msg, marker))
             else:
-                print('%s  -> %s%s' % (self.cdebug, self.cnormal, msg))
+                sys.stdout.write('%s  -> %s%s\n' % (self.cdebug, \
+                    self.cnormal, msg))
                 self.log_message(syslog.LOG_DEBUG, msg)
