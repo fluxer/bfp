@@ -213,7 +213,7 @@ class Misc(object):
 
         content = []
         for line in self.file_read(sfile).splitlines():
-            line = self.string_encode(line.strip())
+            line = line.strip()
             if not line or line.startswith('#'):
                 continue
             content.append(line)
