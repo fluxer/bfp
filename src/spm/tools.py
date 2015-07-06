@@ -952,11 +952,13 @@ class Digest(object):
 
         if self.do_verify:
             digest = misc.json_read('%s/digest.json' % self.directory)
-            # FIXME: sanity check the digest
             fail = False
             for target in digest:
-                if not database.local_search(target):
-                    message.sub_critical(_('Invalid target'), target)
+                if not target in self.targets:
+                    message.sub_debug(_('Target from digest not in arguments'), target)
+                    continue
+                elif not database.local_search(target):
+                    message.sub_critical(_('Target from digest is not local'), target)
                     sys.exit(2)
                 message.sub_debug(_('Verifying'), target)
                 for sfile in digest[target]:
@@ -964,7 +966,7 @@ class Digest(object):
                         message.sub_warning(_('File does not exist'), sfile)
                         fail = True
                     elif not digest[target][sfile] == misc.file_checksum(sfile):
-                        message.sub_warning(_('Checksum mismatch'), sfile)
+                        message.sub_critical(_('Checksum mismatch'), sfile)
                         fail = True
             if fail:
                 sys.exit(2)
@@ -985,20 +987,22 @@ class Portable(object):
                 target_packfile = '%s/%s_%s.tar.bz2' % (self.directory, \
                     os.path.basename(target), target_version)
 
-                # FIXME: support different root directory
-                content = database.local_metadata(target, 'footprint')
+                content = []
+                for sfile in database.local_metadata(target, 'footprint'):
+                    content.append('%s/%s' % (libspm.ROOT_DIR, depfile))
                 for dep in database.local_metadata(target, 'depends'):
                     message.sub_debug(_('Augmenting'), dep)
                     # TODO: allow exclude/include from files passed as argument
                     for depfile in database.local_metadata(dep, 'footprint'):
+                        sfull = '%s/%s' % (libspm.ROOT_DIR, depfile)
                         if misc.string_search('%s/(?:lib/debug|include|share/(?:man|doc)/)' % \
                             sys.prefix, depfile, escape=False):
-                            message.sub_debug(_('Skipping file'), depfile)
+                            message.sub_debug(_('Skipping file'), sfull)
                             continue
-                        elif not os.path.exists(depfile):
-                            message.sub_warning(_('File does not exist'), depfile)
+                        elif not os.path.exists(sfull):
+                            message.sub_warning(_('File does not exist'), sfull)
                             continue
-                        content.append(depfile)
+                        content.append(sfull)
                     # add metadata directory, it is not listed in the footprint
                     content.append('%s/%s' % (libspm.LOCAL_DIR, dep))
                 # add metadata directory, it is not listed in the footprint
@@ -1008,7 +1012,7 @@ class Portable(object):
                 library_override = ['/lib', '/usr/lib']
                 python_override = site.getsitepackages()
                 for sfile in content:
-                    parent = os.path.dirname(sfile)
+                    parent = os.path.dirname(sfile).replace(libspm.ROOT_DIR, '')
                     if sfile.endswith('.so'):
                         if not parent in library_override:
                             library_override.append(parent)
@@ -1030,457 +1034,457 @@ class Portable(object):
                     misc.gpg_sign(target_packfile, libspm.SIGN)
                 os.unlink('./run.sh')
 
+if __name__ == '__main__':
+    try:
+        EUID = os.geteuid()
 
-try:
-    EUID = os.geteuid()
+        class OverrideRootDir(argparse.Action):
+            ''' Override system root directory '''
+            def __call__(self, parser, namespace, values, option_string=None):
+                full_path = os.path.abspath(values) + '/'
+                libspm.ROOT_DIR = full_path
+                libspm.LOCAL_DIR = full_path + 'var/local/spm'
+                misc.ROOT_DIR = libspm.ROOT_DIR
+                database.ROOT_DIR = libspm.ROOT_DIR
+                database.CACHE_DIR = libspm.CACHE_DIR
+                database.LOCAL_DIR = libspm.LOCAL_DIR
+                setattr(namespace, self.dest, values)
 
-    class OverrideRootDir(argparse.Action):
-        ''' Override system root directory '''
-        def __call__(self, parser, namespace, values, option_string=None):
-            full_path = os.path.abspath(values) + '/'
-            libspm.ROOT_DIR = full_path
-            libspm.LOCAL_DIR = full_path + 'var/local/spm'
-            misc.ROOT_DIR = libspm.ROOT_DIR
-            database.ROOT_DIR = libspm.ROOT_DIR
-            database.CACHE_DIR = libspm.CACHE_DIR
-            database.LOCAL_DIR = libspm.LOCAL_DIR
-            setattr(namespace, self.dest, values)
+        class OverrideDebug(argparse.Action):
+            ''' Override printing of debug messages '''
+            def __call__(self, parser, namespace, values, option_string=None):
+                message.DEBUG = True
+                setattr(namespace, self.dest, values)
 
-    class OverrideDebug(argparse.Action):
-        ''' Override printing of debug messages '''
-        def __call__(self, parser, namespace, values, option_string=None):
-            message.DEBUG = True
-            setattr(namespace, self.dest, values)
+        parser = argparse.ArgumentParser(prog='spm-tools', \
+            description='Source Package Manager Tools', \
+            epilog=_('NOTE: Some features are available only to the root user.'))
+        subparsers = parser.add_subparsers(dest='mode')
 
-    parser = argparse.ArgumentParser(prog='spm-tools', \
-        description='Source Package Manager Tools', \
-        epilog=_('NOTE: Some features are available only to the root user.'))
-    subparsers = parser.add_subparsers(dest='mode')
+        if EUID == 0:
+            dist_parser = subparsers.add_parser('dist')
+            dist_parser.add_argument('-s', '--sources', action='store_true', \
+                help=_('Include all sources in the archive'))
+            dist_parser.add_argument('-c', '--clean', action='store_true', \
+                help=_('Clean all sources after creating archive'))
+            dist_parser.add_argument('-d', '--directory', type=str, \
+                default=misc.dir_current(), help=_('Set output directory'))
+            dist_parser.add_argument('TARGETS', nargs='+', type=str, \
+                help=_('Targets to apply actions on'))
 
-    if EUID == 0:
-        dist_parser = subparsers.add_parser('dist')
-        dist_parser.add_argument('-s', '--sources', action='store_true', \
-            help=_('Include all sources in the archive'))
-        dist_parser.add_argument('-c', '--clean', action='store_true', \
-            help=_('Clean all sources after creating archive'))
-        dist_parser.add_argument('-d', '--directory', type=str, \
+        check_parser = subparsers.add_parser('check')
+        check_parser.add_argument('-f', '--fast', action='store_true', \
+            help=_('Skip some files/links'))
+        check_parser.add_argument('-a', '--adjust', action='store_true', \
+            help=_('Adjust target depends'))
+        check_parser.add_argument('-D', '--depends', action='store_true', \
+            help=_('Check dependencies of target'))
+        check_parser.add_argument('-R', '--reverse', action='store_true', \
+            help=_('Check reverse dependencies of target'))
+        check_parser.add_argument('TARGETS', nargs='+', type=str, \
+            help=_('Targets to apply actions on'))
+
+        clean_parser = subparsers.add_parser('clean')
+
+        lint_parser = subparsers.add_parser('lint')
+        lint_parser.add_argument('-m', '--man', action='store_true', \
+            help=_('Check for missing manual page(s)'))
+        lint_parser.add_argument('-u', '--udev', action='store_true', \
+            help=_('Check for cross-filesystem udev rule(s)'))
+        lint_parser.add_argument('-s', '--symlink', action='store_true', \
+            help=_('Check for cross-filesystem symlink(s)'))
+        lint_parser.add_argument('-d', '--doc', action='store_true', \
+            help=_('Check for documentation'))
+        lint_parser.add_argument('-M', '--module', action='store_true', \
+            help=_('Check for module(s) in non-standard directory'))
+        lint_parser.add_argument('-f', '--footprint', action='store_true', \
+            help=_('Check for footprint consistency'))
+        lint_parser.add_argument('-b', '--builddir', action='store_true', \
+            help=_('Check for build directory trace(s)'))
+        lint_parser.add_argument('-o', '--ownership', action='store_true', \
+            help=_('Check ownership'))
+        lint_parser.add_argument('-e', '--executable', action='store_true', \
+            help=_('Check for non-executable(s) in PATH'))
+        lint_parser.add_argument('-p', '--path', action='store_true', \
+            help=_('Check for overlapping executable(s) in PATH'))
+        lint_parser.add_argument('-n', '--shebang', action='store_true', \
+            help=_('Check for incorrect shebang of scripts'))
+        lint_parser.add_argument('-k', '--backup', action='store_true', \
+            help=_('Check for incorrect or incomplete backup of files'))
+        lint_parser.add_argument('-c', '--conflicts', action='store_true', \
+            help=_('Check for conflicts between targets'))
+        lint_parser.add_argument('-D', '--debug', action='store_true', \
+            help=_('Check for missing debug symbols'))
+        lint_parser.add_argument('-a', '--all', action='store_true', \
+            help=_('Perform all checks'))
+        lint_parser.add_argument('TARGETS', nargs='+', type=str, \
+            help=_('Targets to apply actions on'))
+
+        sane_parser = subparsers.add_parser('sane')
+        sane_parser.add_argument('-e', '--enable', action='store_true', \
+            help=_('Check for explicit --enable argument(s)'))
+        sane_parser.add_argument('-d', '--disable', action='store_true', \
+            help=_('Check for explicit --disable argument(s)'))
+        sane_parser.add_argument('-n', '--null', action='store_true', \
+            help=_('Check for /dev/null output redirection(s)'))
+        sane_parser.add_argument('-m', '--maintainer', action='store_true', \
+            help=_('Check for missing maintainer'))
+        sane_parser.add_argument('-N', '--note', action='store_true', \
+            help=_('Check for FIXME/TODO note(s)'))
+        sane_parser.add_argument('-v', '--variables', action='store_true', \
+            help=_('Check for essential variables'))
+        sane_parser.add_argument('-t', '--triggers', action='store_true', \
+            help=_('Check for unnecessary triggers invocation(s)'))
+        sane_parser.add_argument('-u', '--users', action='store_true', \
+            help=_('Check for user(s) being added but not deleted'))
+        sane_parser.add_argument('-g', '--groups', action='store_true', \
+            help=_('Check for group(s) being added but not deleted'))
+        sane_parser.add_argument('-s', '--signatures', action='store_true', \
+            help=_('Check for signature(s) not in the sources array'))
+        sane_parser.add_argument('-a', '--all', action='store_true', \
+            help=_('Perform all checks'))
+        sane_parser.add_argument('TARGETS', nargs='+', type=str, \
+            help=_('Targets to apply actions on'))
+
+        if EUID == 0:
+            merge_parser = subparsers.add_parser('merge')
+
+        if EUID == 0:
+            edit_parser = subparsers.add_parser('edit')
+            edit_parser.add_argument('TARGETS', nargs='+', type=str, \
+                help=_('Targets to apply actions on'))
+
+        which_parser = subparsers.add_parser('which')
+        which_parser.add_argument('-c', '--cat', action='store_true', \
+            help=_('Display content of SRCBUILD'))
+        which_parser.add_argument('-p', '--plain', action='store_true', \
+            help=_('Print in plain format'))
+        which_parser.add_argument('PATTERN', type=str, \
+            help=_('Pattern to search for in remote targets'))
+
+        if EUID == 0:
+            pack_parser = subparsers.add_parser('pack')
+            pack_parser.add_argument('-d', '--directory', type=str, \
+                default=misc.dir_current(), help=_('Set output directory'))
+            pack_parser.add_argument('TARGETS', nargs='+', type=str, \
+                help=_('Targets to apply actions on'))
+
+        pkg_parser = subparsers.add_parser('pkg')
+        pkg_parser.add_argument('-d', '--directory', type=str, \
             default=misc.dir_current(), help=_('Set output directory'))
-        dist_parser.add_argument('TARGETS', nargs='+', type=str, \
+        pkg_parser.add_argument('TARGETS', nargs='+', type=str, \
             help=_('Targets to apply actions on'))
 
-    check_parser = subparsers.add_parser('check')
-    check_parser.add_argument('-f', '--fast', action='store_true', \
-        help=_('Skip some files/links'))
-    check_parser.add_argument('-a', '--adjust', action='store_true', \
-        help=_('Adjust target depends'))
-    check_parser.add_argument('-D', '--depends', action='store_true', \
-        help=_('Check dependencies of target'))
-    check_parser.add_argument('-R', '--reverse', action='store_true', \
-        help=_('Check reverse dependencies of target'))
-    check_parser.add_argument('TARGETS', nargs='+', type=str, \
-        help=_('Targets to apply actions on'))
+        serve_parser = subparsers.add_parser('serve')
+        serve_parser.add_argument('-p', '--port', action='store', \
+            type=int, default=8000, help=_('Use port for the server'))
+        serve_parser.add_argument('-a', '--address', action='store', \
+            type=str, default='', help=_('Use address for the server'))
 
-    clean_parser = subparsers.add_parser('clean')
+        disowned_parser = subparsers.add_parser('disowned')
+        disowned_parser.add_argument('-d', '--directory', type=str, \
+            default='/', help=_('Set lookup directory'))
+        disowned_parser.add_argument('-c', '--cross', action='store_true', \
+            help=_('Scan cross-filesystem'))
+        disowned_parser.add_argument('-p', '--plain', action='store_true', \
+            help=_('Print in plain format'))
 
-    lint_parser = subparsers.add_parser('lint')
-    lint_parser.add_argument('-m', '--man', action='store_true', \
-        help=_('Check for missing manual page(s)'))
-    lint_parser.add_argument('-u', '--udev', action='store_true', \
-        help=_('Check for cross-filesystem udev rule(s)'))
-    lint_parser.add_argument('-s', '--symlink', action='store_true', \
-        help=_('Check for cross-filesystem symlink(s)'))
-    lint_parser.add_argument('-d', '--doc', action='store_true', \
-        help=_('Check for documentation'))
-    lint_parser.add_argument('-M', '--module', action='store_true', \
-        help=_('Check for module(s) in non-standard directory'))
-    lint_parser.add_argument('-f', '--footprint', action='store_true', \
-        help=_('Check for footprint consistency'))
-    lint_parser.add_argument('-b', '--builddir', action='store_true', \
-        help=_('Check for build directory trace(s)'))
-    lint_parser.add_argument('-o', '--ownership', action='store_true', \
-        help=_('Check ownership'))
-    lint_parser.add_argument('-e', '--executable', action='store_true', \
-        help=_('Check for non-executable(s) in PATH'))
-    lint_parser.add_argument('-p', '--path', action='store_true', \
-        help=_('Check for overlapping executable(s) in PATH'))
-    lint_parser.add_argument('-n', '--shebang', action='store_true', \
-        help=_('Check for incorrect shebang of scripts'))
-    lint_parser.add_argument('-k', '--backup', action='store_true', \
-        help=_('Check for incorrect or incomplete backup of files'))
-    lint_parser.add_argument('-c', '--conflicts', action='store_true', \
-        help=_('Check for conflicts between targets'))
-    lint_parser.add_argument('-D', '--debug', action='store_true', \
-        help=_('Check for missing debug symbols'))
-    lint_parser.add_argument('-a', '--all', action='store_true', \
-        help=_('Perform all checks'))
-    lint_parser.add_argument('TARGETS', nargs='+', type=str, \
-        help=_('Targets to apply actions on'))
-
-    sane_parser = subparsers.add_parser('sane')
-    sane_parser.add_argument('-e', '--enable', action='store_true', \
-        help=_('Check for explicit --enable argument(s)'))
-    sane_parser.add_argument('-d', '--disable', action='store_true', \
-        help=_('Check for explicit --disable argument(s)'))
-    sane_parser.add_argument('-n', '--null', action='store_true', \
-        help=_('Check for /dev/null output redirection(s)'))
-    sane_parser.add_argument('-m', '--maintainer', action='store_true', \
-        help=_('Check for missing maintainer'))
-    sane_parser.add_argument('-N', '--note', action='store_true', \
-        help=_('Check for FIXME/TODO note(s)'))
-    sane_parser.add_argument('-v', '--variables', action='store_true', \
-        help=_('Check for essential variables'))
-    sane_parser.add_argument('-t', '--triggers', action='store_true', \
-        help=_('Check for unnecessary triggers invocation(s)'))
-    sane_parser.add_argument('-u', '--users', action='store_true', \
-        help=_('Check for user(s) being added but not deleted'))
-    sane_parser.add_argument('-g', '--groups', action='store_true', \
-        help=_('Check for group(s) being added but not deleted'))
-    sane_parser.add_argument('-s', '--signatures', action='store_true', \
-        help=_('Check for signature(s) not in the sources array'))
-    sane_parser.add_argument('-a', '--all', action='store_true', \
-        help=_('Perform all checks'))
-    sane_parser.add_argument('TARGETS', nargs='+', type=str, \
-        help=_('Targets to apply actions on'))
-
-    if EUID == 0:
-        merge_parser = subparsers.add_parser('merge')
-
-    if EUID == 0:
-        edit_parser = subparsers.add_parser('edit')
-        edit_parser.add_argument('TARGETS', nargs='+', type=str, \
+        upload_parser = subparsers.add_parser('upload')
+        upload_parser.add_argument('-H', '--host', action='store', \
+            type=str, required=True, help=_('Use host'))
+        upload_parser.add_argument('-u', '--user', action='store', \
+            type=str, required=True, help=_('Use user'))
+        upload_parser.add_argument('-d', '--directory', type=str, \
+            default='/', help=_('Use upload directory'))
+        upload_parser.add_argument('-i', '--insecure', action='store_true', \
+            help=_('Use insecure connection'))
+        upload_parser.add_argument('TARGETS', nargs='+', type=str, \
             help=_('Targets to apply actions on'))
 
-    which_parser = subparsers.add_parser('which')
-    which_parser.add_argument('-c', '--cat', action='store_true', \
-        help=_('Display content of SRCBUILD'))
-    which_parser.add_argument('-p', '--plain', action='store_true', \
-        help=_('Print in plain format'))
-    which_parser.add_argument('PATTERN', type=str, \
-        help=_('Pattern to search for in remote targets'))
+        online_parser = subparsers.add_parser('online')
+        online_parser.add_argument('-u', '--url', type=str, \
+            default='https://www.google.com', help=_('URL to ping'))
 
-    if EUID == 0:
-        pack_parser = subparsers.add_parser('pack')
-        pack_parser.add_argument('-d', '--directory', type=str, \
+        if EUID == 0:
+            upgrade_parser = subparsers.add_parser('upgrade')
+
+        digest_parser = subparsers.add_parser('digest')
+        digest_parser.add_argument('-d', '--directory', type=str, \
             default=misc.dir_current(), help=_('Set output directory'))
-        pack_parser.add_argument('TARGETS', nargs='+', type=str, \
+        digest_parser.add_argument('-c', '--create', action='store_true', \
+            help=_('Create digest'))
+        digest_parser.add_argument('-v', '--verify', action='store_true', \
+            help=_('Verify digest'))
+        digest_parser.add_argument('-k', '--backup', action='store_true', \
+            help=_('Do not ignore backup files'))
+        digest_parser.add_argument('TARGETS', nargs='+', type=str, \
             help=_('Targets to apply actions on'))
 
-    pkg_parser = subparsers.add_parser('pkg')
-    pkg_parser.add_argument('-d', '--directory', type=str, \
-        default=misc.dir_current(), help=_('Set output directory'))
-    pkg_parser.add_argument('TARGETS', nargs='+', type=str, \
-        help=_('Targets to apply actions on'))
+        if EUID == 0:
+            portable_parser = subparsers.add_parser('portable')
+            portable_parser.add_argument('-d', '--directory', type=str, \
+                default=misc.dir_current(), help=_('Set output directory'))
+            portable_parser.add_argument('TARGETS', nargs='+', type=str, \
+                help=_('Targets to apply actions on'))
 
-    serve_parser = subparsers.add_parser('serve')
-    serve_parser.add_argument('-p', '--port', action='store', \
-        type=int, default=8000, help=_('Use port for the server'))
-    serve_parser.add_argument('-a', '--address', action='store', \
-        type=str, default='', help=_('Use address for the server'))
+        parser.add_argument('--root', type=str, action=OverrideRootDir, \
+            help=_('Change system root directory'))
+        parser.add_argument('--debug', nargs=0, action=OverrideDebug, \
+            help=_('Enable debug messages'))
+        parser.add_argument('--version', action='version', \
+            version='Source Package Manager Tools v%s' % app_version, \
+            help=_('Show SPM Tools version and exit'))
 
-    disowned_parser = subparsers.add_parser('disowned')
-    disowned_parser.add_argument('-d', '--directory', type=str, \
-        default='/', help=_('Set lookup directory'))
-    disowned_parser.add_argument('-c', '--cross', action='store_true', \
-        help=_('Scan cross-filesystem'))
-    disowned_parser.add_argument('-p', '--plain', action='store_true', \
-        help=_('Print in plain format'))
+        ARGS = parser.parse_args()
+        if not sys.stdin.isatty() and ARGS.TARGETS == ['-']:
+            ARGS.TARGETS = sys.stdin.read().split()
 
-    upload_parser = subparsers.add_parser('upload')
-    upload_parser.add_argument('-H', '--host', action='store', \
-        type=str, required=True, help=_('Use host'))
-    upload_parser.add_argument('-u', '--user', action='store', \
-        type=str, required=True, help=_('Use user'))
-    upload_parser.add_argument('-d', '--directory', type=str, \
-        default='/', help=_('Use upload directory'))
-    upload_parser.add_argument('-i', '--insecure', action='store_true', \
-        help=_('Use insecure connection'))
-    upload_parser.add_argument('TARGETS', nargs='+', type=str, \
-        help=_('Targets to apply actions on'))
-
-    online_parser = subparsers.add_parser('online')
-    online_parser.add_argument('-u', '--url', type=str, \
-        default='https://www.google.com', help=_('URL to ping'))
-
-    if EUID == 0:
-        upgrade_parser = subparsers.add_parser('upgrade')
-
-    digest_parser = subparsers.add_parser('digest')
-    digest_parser.add_argument('-d', '--directory', type=str, \
-        default=misc.dir_current(), help=_('Set output directory'))
-    digest_parser.add_argument('-c', '--create', action='store_true', \
-        help=_('Create digest'))
-    digest_parser.add_argument('-v', '--verify', action='store_true', \
-        help=_('Verify digest'))
-    digest_parser.add_argument('-k', '--backup', action='store_true', \
-        help=_('Do not ignore backup files'))
-    digest_parser.add_argument('TARGETS', nargs='+', type=str, \
-        help=_('Targets to apply actions on'))
-
-    if EUID == 0:
-        portable_parser = subparsers.add_parser('portable')
-        portable_parser.add_argument('-d', '--directory', type=str, \
-            default=misc.dir_current(), help=_('Set output directory'))
-        portable_parser.add_argument('TARGETS', nargs='+', type=str, \
-            help=_('Targets to apply actions on'))
-
-    parser.add_argument('--root', type=str, action=OverrideRootDir, \
-        help=_('Change system root directory'))
-    parser.add_argument('--debug', nargs=0, action=OverrideDebug, \
-        help=_('Enable debug messages'))
-    parser.add_argument('--version', action='version', \
-        version='Source Package Manager Tools v%s' % app_version, \
-        help=_('Show SPM Tools version and exit'))
-
-    ARGS = parser.parse_args()
-    if not sys.stdin.isatty() and ARGS.TARGETS == ['-']:
-        ARGS.TARGETS = sys.stdin.read().split()
-
-    if ARGS.mode == 'dist':
-        if 'world' in ARGS.TARGETS:
-            position = ARGS.TARGETS.index('world')
-            ARGS.TARGETS[position:position+1] = \
-                database.local_all(basename=True)
-        for alias in database.remote_aliases():
-            if alias in ARGS.TARGETS:
-
-                position = ARGS.TARGETS.index(alias)
+        if ARGS.mode == 'dist':
+            if 'world' in ARGS.TARGETS:
+                position = ARGS.TARGETS.index('world')
                 ARGS.TARGETS[position:position+1] = \
-                    database.remote_alias(alias)
+                    database.local_all(basename=True)
+            for alias in database.remote_aliases():
+                if alias in ARGS.TARGETS:
 
-        message.info(_('Runtime information'))
-        message.sub_info(_('SOURCES'), ARGS.sources)
-        message.sub_info(_('CLEAN'), ARGS.clean)
-        message.sub_info(_('DIRECTORY'), ARGS.directory)
-        message.sub_info(_('TARGETS'), ARGS.TARGETS)
-        message.info(_('Poking remotes...'))
-        m = Dist(ARGS.TARGETS, ARGS.sources, ARGS.clean, ARGS.directory)
-        m.main()
+                    position = ARGS.TARGETS.index(alias)
+                    ARGS.TARGETS[position:position+1] = \
+                        database.remote_alias(alias)
 
-    elif ARGS.mode == 'check':
-        message.info(_('Runtime information'))
-        message.sub_info(_('ROOT_DIR'), libspm.ROOT_DIR)
-        message.sub_info(_('FAST'), ARGS.fast)
-        message.sub_info(_('DEPENDS'), ARGS.depends)
-        message.sub_info(_('REVERSE'), ARGS.reverse)
-        message.sub_info(_('ADJUST'), ARGS.adjust)
-        message.sub_info(_('TARGETS'), ARGS.TARGETS)
-        message.info(_('Poking locals...'))
-        m = Check(ARGS.TARGETS, ARGS.fast, ARGS.depends, ARGS.reverse, \
-            ARGS.adjust)
-        m.main()
-
-    elif ARGS.mode == 'clean':
-        message.info(_('Poking locals...'))
-        m = Clean()
-        m.main()
-
-    elif ARGS.mode == 'lint':
-        if ARGS.all:
-            ARGS.man = True
-            ARGS.udev = True
-            ARGS.symlink = True
-            ARGS.doc = True
-            ARGS.module = True
-            ARGS.footprint = True
-            ARGS.builddir = True
-            ARGS.ownership = True
-            ARGS.executable = True
-            ARGS.path = True
-            ARGS.shebang = True
-            ARGS.backup = True
-            ARGS.conflicts = True
-            ARGS.debug = True
-
-        message.info(_('Runtime information'))
-        message.sub_info(_('MAN'), ARGS.man)
-        message.sub_info(_('UDEV'), ARGS.udev)
-        message.sub_info(_('SYMLINK'), ARGS.symlink)
-        message.sub_info(_('DOC'), ARGS.doc)
-        message.sub_info(_('MODULE'), ARGS.module)
-        message.sub_info(_('FOOTPRINT'), ARGS.footprint)
-        message.sub_info(_('BUILDDIR'), ARGS.builddir)
-        message.sub_info(_('OWNERSHIP'), ARGS.ownership)
-        message.sub_info(_('EXECUTABLE'), ARGS.executable)
-        message.sub_info(_('PATH'), ARGS.path)
-        message.sub_info(_('SHEBANG'), ARGS.shebang)
-        message.sub_info(_('BACKUP'), ARGS.backup)
-        message.sub_info(_('CONFLICTS'), ARGS.conflicts)
-        message.sub_info(_('DEBUG'), ARGS.debug)
-        message.sub_info(_('TARGETS'), ARGS.TARGETS)
-        message.info(_('Poking locals...'))
-
-        m = Lint(ARGS.TARGETS, ARGS.man, ARGS.udev, ARGS.symlink, ARGS.doc, \
-            ARGS.module, ARGS.footprint, ARGS.builddir, ARGS.ownership, \
-            ARGS.executable, ARGS.path, ARGS.shebang, ARGS.backup, \
-            ARGS.conflicts, ARGS.debug)
-        m.main()
-
-    elif ARGS.mode == 'sane':
-        if ARGS.all:
-            ARGS.enable = True
-            ARGS.disable = True
-            ARGS.null = True
-            ARGS.maintainer = True
-            ARGS.note = True
-            ARGS.variables = True
-            ARGS.triggers = True
-            ARGS.users = True
-            ARGS.groups = True
-            ARGS.signatures = True
-
-        message.info(_('Runtime information'))
-        message.sub_info(_('ENABLE'), ARGS.enable)
-        message.sub_info(_('DISABLE'), ARGS.disable)
-        message.sub_info(_('NULL'), ARGS.null)
-        message.sub_info(_('MAINTAINER'), ARGS.maintainer)
-        message.sub_info(_('NOTE'), ARGS.note)
-        message.sub_info(_('VARIABLES'), ARGS.variables)
-        message.sub_info(_('TRIGGERS'), ARGS.triggers)
-        message.sub_info(_('USERS'), ARGS.users)
-        message.sub_info(_('GROUPS'), ARGS.groups)
-        message.sub_info(_('SIGNATURES'), ARGS.signatures)
-        message.sub_info(_('TARGETS'), ARGS.TARGETS)
-        message.info(_('Poking remotes...'))
-
-        m = Sane(ARGS.TARGETS, ARGS.enable, ARGS.disable, ARGS.null, \
-            ARGS.maintainer, ARGS.note, ARGS.variables, ARGS.triggers, \
-            ARGS.users, ARGS.groups, ARGS.signatures)
-        m.main()
-
-    elif ARGS.mode == 'merge':
-        message.info(_('Runtime information'))
-        message.sub_info(_('ROOT_DIR'), libspm.ROOT_DIR)
-        message.info(_('Poking locals...'))
-        m = Merge()
-        m.main()
-
-    elif ARGS.mode == 'edit':
-        message.info(_('Runtime information'))
-        message.sub_info(_('TARGETS'), ARGS.TARGETS)
-        message.info(_('Poking remotes...'))
-        m = Edit(ARGS.TARGETS)
-        m.main()
-
-    elif ARGS.mode == 'which':
-        if not ARGS.plain:
             message.info(_('Runtime information'))
-            message.sub_info(_('PATTERN'), ARGS.PATTERN)
-        m = Which(ARGS.PATTERN, ARGS.cat, ARGS.plain)
-        m.main()
+            message.sub_info(_('SOURCES'), ARGS.sources)
+            message.sub_info(_('CLEAN'), ARGS.clean)
+            message.sub_info(_('DIRECTORY'), ARGS.directory)
+            message.sub_info(_('TARGETS'), ARGS.TARGETS)
+            message.info(_('Poking remotes...'))
+            m = Dist(ARGS.TARGETS, ARGS.sources, ARGS.clean, ARGS.directory)
+            m.main()
 
-    elif ARGS.mode == 'pack':
-        message.info(_('Runtime information'))
-        message.sub_info(_('DIRECTORY'), ARGS.directory)
-        message.sub_info(_('TARGETS'), ARGS.TARGETS)
-        m = Pack(ARGS.TARGETS, ARGS.directory)
-        m.main()
+        elif ARGS.mode == 'check':
+            message.info(_('Runtime information'))
+            message.sub_info(_('ROOT_DIR'), libspm.ROOT_DIR)
+            message.sub_info(_('FAST'), ARGS.fast)
+            message.sub_info(_('DEPENDS'), ARGS.depends)
+            message.sub_info(_('REVERSE'), ARGS.reverse)
+            message.sub_info(_('ADJUST'), ARGS.adjust)
+            message.sub_info(_('TARGETS'), ARGS.TARGETS)
+            message.info(_('Poking locals...'))
+            m = Check(ARGS.TARGETS, ARGS.fast, ARGS.depends, ARGS.reverse, \
+                ARGS.adjust)
+            m.main()
 
-    elif ARGS.mode == 'pkg':
-        message.info(_('Runtime information'))
-        message.sub_info(_('DIRECTORY'), ARGS.directory)
-        message.sub_info(_('TARGETS'), ARGS.TARGETS)
-        m = Pkg(ARGS.TARGETS, ARGS.directory)
-        m.main()
+        elif ARGS.mode == 'clean':
+            message.info(_('Poking locals...'))
+            m = Clean()
+            m.main()
 
-    elif ARGS.mode == 'serve':
-        message.info(_('Runtime information'))
-        message.sub_info(_('CACHE_DIR'), libspm.CACHE_DIR)
-        message.sub_info(_('PORT'), ARGS.port)
-        message.sub_info(_('ADDRESS'), ARGS.address)
-        m = Serve(ARGS.port, ARGS.address)
-        m.main()
+        elif ARGS.mode == 'lint':
+            if ARGS.all:
+                ARGS.man = True
+                ARGS.udev = True
+                ARGS.symlink = True
+                ARGS.doc = True
+                ARGS.module = True
+                ARGS.footprint = True
+                ARGS.builddir = True
+                ARGS.ownership = True
+                ARGS.executable = True
+                ARGS.path = True
+                ARGS.shebang = True
+                ARGS.backup = True
+                ARGS.conflicts = True
+                ARGS.debug = True
 
-    elif ARGS.mode == 'disowned':
-        if not ARGS.plain:
+            message.info(_('Runtime information'))
+            message.sub_info(_('MAN'), ARGS.man)
+            message.sub_info(_('UDEV'), ARGS.udev)
+            message.sub_info(_('SYMLINK'), ARGS.symlink)
+            message.sub_info(_('DOC'), ARGS.doc)
+            message.sub_info(_('MODULE'), ARGS.module)
+            message.sub_info(_('FOOTPRINT'), ARGS.footprint)
+            message.sub_info(_('BUILDDIR'), ARGS.builddir)
+            message.sub_info(_('OWNERSHIP'), ARGS.ownership)
+            message.sub_info(_('EXECUTABLE'), ARGS.executable)
+            message.sub_info(_('PATH'), ARGS.path)
+            message.sub_info(_('SHEBANG'), ARGS.shebang)
+            message.sub_info(_('BACKUP'), ARGS.backup)
+            message.sub_info(_('CONFLICTS'), ARGS.conflicts)
+            message.sub_info(_('DEBUG'), ARGS.debug)
+            message.sub_info(_('TARGETS'), ARGS.TARGETS)
+            message.info(_('Poking locals...'))
+
+            m = Lint(ARGS.TARGETS, ARGS.man, ARGS.udev, ARGS.symlink, \
+                ARGS.doc, ARGS.module, ARGS.footprint, ARGS.builddir, \
+                ARGS.ownership, ARGS.executable, ARGS.path, ARGS.shebang, \
+                ARGS.backup, ARGS.conflicts, ARGS.debug)
+            m.main()
+
+        elif ARGS.mode == 'sane':
+            if ARGS.all:
+                ARGS.enable = True
+                ARGS.disable = True
+                ARGS.null = True
+                ARGS.maintainer = True
+                ARGS.note = True
+                ARGS.variables = True
+                ARGS.triggers = True
+                ARGS.users = True
+                ARGS.groups = True
+                ARGS.signatures = True
+
+            message.info(_('Runtime information'))
+            message.sub_info(_('ENABLE'), ARGS.enable)
+            message.sub_info(_('DISABLE'), ARGS.disable)
+            message.sub_info(_('NULL'), ARGS.null)
+            message.sub_info(_('MAINTAINER'), ARGS.maintainer)
+            message.sub_info(_('NOTE'), ARGS.note)
+            message.sub_info(_('VARIABLES'), ARGS.variables)
+            message.sub_info(_('TRIGGERS'), ARGS.triggers)
+            message.sub_info(_('USERS'), ARGS.users)
+            message.sub_info(_('GROUPS'), ARGS.groups)
+            message.sub_info(_('SIGNATURES'), ARGS.signatures)
+            message.sub_info(_('TARGETS'), ARGS.TARGETS)
+            message.info(_('Poking remotes...'))
+
+            m = Sane(ARGS.TARGETS, ARGS.enable, ARGS.disable, ARGS.null, \
+                ARGS.maintainer, ARGS.note, ARGS.variables, ARGS.triggers, \
+                ARGS.users, ARGS.groups, ARGS.signatures)
+            m.main()
+
+        elif ARGS.mode == 'merge':
+            message.info(_('Runtime information'))
+            message.sub_info(_('ROOT_DIR'), libspm.ROOT_DIR)
+            message.info(_('Poking locals...'))
+            m = Merge()
+            m.main()
+
+        elif ARGS.mode == 'edit':
+            message.info(_('Runtime information'))
+            message.sub_info(_('TARGETS'), ARGS.TARGETS)
+            message.info(_('Poking remotes...'))
+            m = Edit(ARGS.TARGETS)
+            m.main()
+
+        elif ARGS.mode == 'which':
+            if not ARGS.plain:
+                message.info(_('Runtime information'))
+                message.sub_info(_('PATTERN'), ARGS.PATTERN)
+            m = Which(ARGS.PATTERN, ARGS.cat, ARGS.plain)
+            m.main()
+
+        elif ARGS.mode == 'pack':
             message.info(_('Runtime information'))
             message.sub_info(_('DIRECTORY'), ARGS.directory)
-            message.sub_info(_('CROSS'), ARGS.cross)
-        m = Disowned(ARGS.directory, ARGS.cross, ARGS.plain)
-        m.main()
+            message.sub_info(_('TARGETS'), ARGS.TARGETS)
+            m = Pack(ARGS.TARGETS, ARGS.directory)
+            m.main()
 
-    elif ARGS.mode == 'upload':
-        message.info(_('Runtime information'))
-        message.sub_info(_('HOST'), ARGS.host)
-        message.sub_info(_('USER'), ARGS.user)
-        message.sub_info(_('DIRECTORY'), ARGS.directory)
-        message.sub_info(_('INSECURE'), ARGS.insecure)
-        message.sub_info(_('TARGETS'), ARGS.TARGETS)
-        message.info(_('Poking server...'))
-        m = Upload(ARGS.TARGETS, ARGS.host, ARGS.user, ARGS.directory, \
-            ARGS.insecure)
-        m.main()
+        elif ARGS.mode == 'pkg':
+            message.info(_('Runtime information'))
+            message.sub_info(_('DIRECTORY'), ARGS.directory)
+            message.sub_info(_('TARGETS'), ARGS.TARGETS)
+            m = Pkg(ARGS.TARGETS, ARGS.directory)
+            m.main()
 
-    elif ARGS.mode == 'online':
-        message.info(_('Runtime information'))
-        message.sub_info(_('URL'), ARGS.url)
-        m = Online(ARGS.url)
-        m.main()
+        elif ARGS.mode == 'serve':
+            message.info(_('Runtime information'))
+            message.sub_info(_('CACHE_DIR'), libspm.CACHE_DIR)
+            message.sub_info(_('PORT'), ARGS.port)
+            message.sub_info(_('ADDRESS'), ARGS.address)
+            m = Serve(ARGS.port, ARGS.address)
+            m.main()
 
-    elif ARGS.mode == 'upgrade':
-        m = Upgrade()
-        m.main()
+        elif ARGS.mode == 'disowned':
+            if not ARGS.plain:
+                message.info(_('Runtime information'))
+                message.sub_info(_('DIRECTORY'), ARGS.directory)
+                message.sub_info(_('CROSS'), ARGS.cross)
+            m = Disowned(ARGS.directory, ARGS.cross, ARGS.plain)
+            m.main()
 
-    elif ARGS.mode == 'digest':
-        message.info(_('Runtime information'))
-        message.sub_info(_('DIRECTORY'), ARGS.directory)
-        message.sub_info(_('CREATE'), ARGS.create)
-        message.sub_info(_('VERIFY'), ARGS.verify)
-        message.sub_info(_('BACKUP'), ARGS.backup)
-        message.sub_info(_('TARGETS'), ARGS.TARGETS)
-        m = Digest(ARGS.TARGETS, ARGS.directory, ARGS.create, ARGS.verify, \
-            ARGS.backup)
-        m.main()
+        elif ARGS.mode == 'upload':
+            message.info(_('Runtime information'))
+            message.sub_info(_('HOST'), ARGS.host)
+            message.sub_info(_('USER'), ARGS.user)
+            message.sub_info(_('DIRECTORY'), ARGS.directory)
+            message.sub_info(_('INSECURE'), ARGS.insecure)
+            message.sub_info(_('TARGETS'), ARGS.TARGETS)
+            message.info(_('Poking server...'))
+            m = Upload(ARGS.TARGETS, ARGS.host, ARGS.user, ARGS.directory, \
+                ARGS.insecure)
+            m.main()
 
-    elif ARGS.mode == 'portable':
-        message.info(_('Runtime information'))
-        message.sub_info(_('DIRECTORY'), ARGS.directory)
-        message.sub_info(_('TARGETS'), ARGS.TARGETS)
-        m = Portable(ARGS.TARGETS, ARGS.directory)
-        m.main()
+        elif ARGS.mode == 'online':
+            message.info(_('Runtime information'))
+            message.sub_info(_('URL'), ARGS.url)
+            m = Online(ARGS.url)
+            m.main()
 
-except configparser.Error as detail:
-    message.critical('CONFIGPARSER', detail)
-    sys.exit(3)
-except subprocess.CalledProcessError as detail:
-    message.critical('SUBPROCESS', detail)
-    sys.exit(4)
-except HTTPError as detail:
-    if hasattr(detail, 'url'):
-        # misc.fetch() provides additional information
-        message.critical('URLLIB', '%s %s (%s)' % (detail.url, detail.reason, \
-            detail.code))
-    else:
-        message.critical('URLLIB', detail)
-    sys.exit(5)
-except tarfile.TarError as detail:
-    message.critical('TARFILE', detail)
-    sys.exit(6)
-except zipfile.BadZipfile as detail:
-    message.critical('ZIPFILE', detail)
-    sys.exit(7)
-except shutil.Error as detail:
-    message.critical('SHUTIL', detail)
-    sys.exit(8)
-except OSError as detail:
-    message.critical('OS', detail)
-    sys.exit(9)
-except IOError as detail:
-    message.critical('IO', detail)
-    sys.exit(10)
-except re.error as detail:
-    message.critical('REGEXP', detail)
-    sys.exit(11)
-except ftplib.all_errors as detail:
-    message.critical('FTPLIB', detail)
-    sys.exit(12)
-except KeyboardInterrupt:
-    message.critical('Interrupt signal received')
-    sys.exit(13)
-except SystemExit:
-    sys.exit(2)
-except Exception as detail:
-    message.critical('Unexpected error', detail)
-    sys.exit(1)
-finally:
-    if not 'stable' in app_version and sys.exc_info()[0]:
-        raise
+        elif ARGS.mode == 'upgrade':
+            m = Upgrade()
+            m.main()
+
+        elif ARGS.mode == 'digest':
+            message.info(_('Runtime information'))
+            message.sub_info(_('DIRECTORY'), ARGS.directory)
+            message.sub_info(_('CREATE'), ARGS.create)
+            message.sub_info(_('VERIFY'), ARGS.verify)
+            message.sub_info(_('BACKUP'), ARGS.backup)
+            message.sub_info(_('TARGETS'), ARGS.TARGETS)
+            m = Digest(ARGS.TARGETS, ARGS.directory, ARGS.create, \
+                ARGS.verify, ARGS.backup)
+            m.main()
+
+        elif ARGS.mode == 'portable':
+            message.info(_('Runtime information'))
+            message.sub_info(_('DIRECTORY'), ARGS.directory)
+            message.sub_info(_('TARGETS'), ARGS.TARGETS)
+            m = Portable(ARGS.TARGETS, ARGS.directory)
+            m.main()
+
+    except configparser.Error as detail:
+        message.critical('CONFIGPARSER', detail)
+        sys.exit(3)
+    except subprocess.CalledProcessError as detail:
+        message.critical('SUBPROCESS', detail)
+        sys.exit(4)
+    except HTTPError as detail:
+        if hasattr(detail, 'url'):
+            # misc.fetch() provides additional information
+            message.critical('URLLIB', '%s %s (%s)' % (detail.url, \
+                detail.reason, detail.code))
+        else:
+            message.critical('URLLIB', detail)
+        sys.exit(5)
+    except tarfile.TarError as detail:
+        message.critical('TARFILE', detail)
+        sys.exit(6)
+    except zipfile.BadZipfile as detail:
+        message.critical('ZIPFILE', detail)
+        sys.exit(7)
+    except shutil.Error as detail:
+        message.critical('SHUTIL', detail)
+        sys.exit(8)
+    except OSError as detail:
+        message.critical('OS', detail)
+        sys.exit(9)
+    except IOError as detail:
+        message.critical('IO', detail)
+        sys.exit(10)
+    except re.error as detail:
+        message.critical('REGEXP', detail)
+        sys.exit(11)
+    except ftplib.all_errors as detail:
+        message.critical('FTPLIB', detail)
+        sys.exit(12)
+    except KeyboardInterrupt:
+        message.critical('Interrupt signal received')
+        sys.exit(13)
+    except SystemExit:
+        sys.exit(2)
+    except Exception as detail:
+        message.critical('Unexpected error', detail)
+        sys.exit(1)
+    finally:
+        if not 'stable' in app_version and sys.exc_info()[0]:
+            raise
