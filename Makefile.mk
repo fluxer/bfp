@@ -77,9 +77,10 @@ endif
 all:
 
 stat:
-	$(CLOC) $(shell $(FIND) -name '*.py' -o -name '*.sh')
+	$(CLOC) $(shell $(FIND) -type f -name '*.py' -o -name '*.sh')
 
 lint:
-	$(PYLINT) $(shell $(FIND) -name '*.py' | $(GREP) -v -e libudev.py -e gui_ui.py)
+	$(PYLINT) $(shell $(FIND) -type f -name '*.py' | \
+		$(GREP) -v -e libudev.py -e gui_ui.py)
 
 .PHONY: all stat lint

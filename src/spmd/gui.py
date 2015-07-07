@@ -1,5 +1,9 @@
 #!/usr/bin/python2
 
+import sip
+sip.setapi('QString', 2)
+sip.setapi('QVariant', 2)
+
 from PyQt4 import QtCore, QtGui, QtDBus
 import os, sys, re
 if sys.version > '2':
