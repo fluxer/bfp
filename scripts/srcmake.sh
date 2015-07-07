@@ -155,6 +155,12 @@ for src in "${@:-.}";do
     done
 
     cd "$SOURCE_DIR"
+    if grep -q -e '^src_prepare()' "$srcbuild";then
+        msg "Preparing sources.."
+        src_prepare
+    fi
+
+    cd "$SOURCE_DIR"
     if grep -q -e '^src_compile()' "$srcbuild";then
         msg "Compiling sources.."
         src_compile
