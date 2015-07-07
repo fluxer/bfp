@@ -4430,7 +4430,7 @@ static PyObject *__pyx_pf_10libarchive_10Libarchive_8extractArchive(CYTHON_UNUSE
   /* "libarchive.py":187
  * 
  *         # preserve permissions
- *         if  preserve:             # <<<<<<<<<<<<<<
+ *         if preserve:             # <<<<<<<<<<<<<<
  *             self.ExtractFlags = self.ExtractFlags | 80 | 200 # XATTR, MAC_METADATA
  * 
  */
@@ -4439,7 +4439,7 @@ static PyObject *__pyx_pf_10libarchive_10Libarchive_8extractArchive(CYTHON_UNUSE
 
     /* "libarchive.py":188
  *         # preserve permissions
- *         if  preserve:
+ *         if preserve:
  *             self.ExtractFlags = self.ExtractFlags | 80 | 200 # XATTR, MAC_METADATA             # <<<<<<<<<<<<<<
  * 
  *         # setup our structs

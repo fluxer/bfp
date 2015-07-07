@@ -147,16 +147,11 @@ class Misc(object):
             self.typecheck(exact, (types.BooleanType))
             self.typecheck(escape, (types.BooleanType))
 
-        if exact and escape:
-            return re.findall('(?:\\s|^)' + re.escape(string) + '(?:\\s|$)', \
-                self.string_convert(string2))
-        elif exact:
-            return re.findall('(?:\\s|^)' + string + '(?:\\s|$)', \
-                self.string_convert(string2))
-        elif escape:
-            return re.findall(re.escape(string), self.string_convert(string2))
-        else:
-            return re.findall(string, self.string_convert(string2))
+        if escape:
+            string = re.escape(string)
+        if exact:
+            string = '(?:\\s|^)%s(?:\\s|$)' % string
+        return re.findall(string, self.string_convert(string2))
 
     def string_checksum(self, data, smethod='sha256'):
         ''' Return a hex checksum of string '''
@@ -1178,7 +1173,7 @@ class Magic(object):
         self.libmagic = ctypes.CDLL(libmagic, use_errno=True)
         if not flags:
             flags = self.MIME_TYPE | self.PRESERVE_ATIME | \
-            self.NO_CHECK_ENCODING # | self.NO_CHECK_COMPRESS | self.NO_CHECK_TAR
+                self.NO_CHECK_ENCODING # | self.NO_CHECK_COMPRESS | self.NO_CHECK_TAR
         self.flags = flags
         self.cookie = self.libmagic.magic_open(self.flags)
         self.libmagic.magic_load(self.cookie, None)

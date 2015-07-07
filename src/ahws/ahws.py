@@ -5,7 +5,7 @@ message = libmessage.Message()
 message.DEBUG = True
 misc = libmisc.Misc()
 
-app_version = "1.8.2 (4007e7b)"
+app_version = "1.8.2 (28be59a)"
 
 class Device(object):
     def __init__(self):
@@ -63,7 +63,7 @@ class Device(object):
                     libudev.udev_device_unref(dev)
                 entry = libudev.udev_list_entry_get_next(entry)
         finally:
-            libudev.udev_enumerate_unref(udevenum);
+            libudev.udev_enumerate_unref(udevenum)
 
     def Handle(self, properties, action):
         DEVNAME, MODEL, VENDOR, SERIAL, SUBSYSTEM = properties

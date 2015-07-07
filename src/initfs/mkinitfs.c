@@ -938,7 +938,7 @@ static char __pyx_k_add_argument[] = "add_argument";
 static char __pyx_k_create_image[] = "create_image";
 static char __pyx_k_literal_eval[] = "literal_eval";
 static char __pyx_k_recovery_img[] = "-recovery.img";
-static char __pyx_k_1_8_2_b7e6c26[] = "1.8.2 (b7e6c26)";
+static char __pyx_k_1_8_2_28be59a[] = "1.8.2 (28be59a)";
 static char __pyx_k_Copying_files[] = "Copying files";
 static char __pyx_k_Decompressing[] = "Decompressing";
 static char __pyx_k_compression_2[] = "--compression";
@@ -1001,7 +1001,7 @@ static char __pyx_k_Unable_to_find_modules_directory[] = "Unable to find modules
 static PyObject *__pyx_kp_s_;
 static PyObject *__pyx_kp_s_0;
 static PyObject *__pyx_kp_s_1;
-static PyObject *__pyx_kp_s_1_8_2_b7e6c26;
+static PyObject *__pyx_kp_s_1_8_2_28be59a;
 static PyObject *__pyx_kp_s_5;
 static PyObject *__pyx_kp_s_640;
 static PyObject *__pyx_kp_s_664;
@@ -4019,7 +4019,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_, __pyx_k_, sizeof(__pyx_k_), 0, 0, 1, 0},
   {&__pyx_kp_s_0, __pyx_k_0, sizeof(__pyx_k_0), 0, 0, 1, 0},
   {&__pyx_kp_s_1, __pyx_k_1, sizeof(__pyx_k_1), 0, 0, 1, 0},
-  {&__pyx_kp_s_1_8_2_b7e6c26, __pyx_k_1_8_2_b7e6c26, sizeof(__pyx_k_1_8_2_b7e6c26), 0, 0, 1, 0},
+  {&__pyx_kp_s_1_8_2_28be59a, __pyx_k_1_8_2_28be59a, sizeof(__pyx_k_1_8_2_28be59a), 0, 0, 1, 0},
   {&__pyx_kp_s_5, __pyx_k_5, sizeof(__pyx_k_5), 0, 0, 1, 0},
   {&__pyx_kp_s_640, __pyx_k_640, sizeof(__pyx_k_640), 0, 0, 1, 0},
   {&__pyx_kp_s_664, __pyx_k_664, sizeof(__pyx_k_664), 0, 0, 1, 0},
@@ -4484,7 +4484,7 @@ static int __Pyx_InitCachedConstants(void) {
   /* "mkinitfs.py":59
  *     modsdir = None
  *     kernels = []
- *     for moddir in  ('/lib/modules', '/lib32/modules', '/lib64/modules', \             # <<<<<<<<<<<<<<
+ *     for moddir in ('/lib/modules', '/lib32/modules', '/lib64/modules', \             # <<<<<<<<<<<<<<
  *         '/usr/lib/modules', '/usr/lib32/modules', '/usr/lib64/modules'):
  *         if not os.path.exists(moddir) or os.path.islink(moddir):
  */
@@ -5085,7 +5085,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  * 
  * import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast             # <<<<<<<<<<<<<<
  * 
- * app_version = "1.8.2 (b7e6c26)"
+ * app_version = "1.8.2 (28be59a)"
  */
   __pyx_t_1 = __Pyx_Import(__pyx_n_s_sys, 0, -1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 3; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -5131,14 +5131,14 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
   /* "mkinitfs.py":5
  * import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast
  * 
- * app_version = "1.8.2 (b7e6c26)"             # <<<<<<<<<<<<<<
+ * app_version = "1.8.2 (28be59a)"             # <<<<<<<<<<<<<<
  * 
  * tmpdir = None
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_8_2_b7e6c26) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_8_2_28be59a) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "mkinitfs.py":7
- * app_version = "1.8.2 (b7e6c26)"
+ * app_version = "1.8.2 (28be59a)"
  * 
  * tmpdir = None             # <<<<<<<<<<<<<<
  * keep = False
@@ -5975,7 +5975,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  * 
  *     modsdir = None             # <<<<<<<<<<<<<<
  *     kernels = []
- *     for moddir in  ('/lib/modules', '/lib32/modules', '/lib64/modules', \
+ *     for moddir in ('/lib/modules', '/lib32/modules', '/lib64/modules', \
  */
         if (PyDict_SetItem(__pyx_d, __pyx_n_s_modsdir, Py_None) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 57; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
 
@@ -5983,7 +5983,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  * 
  *     modsdir = None
  *     kernels = []             # <<<<<<<<<<<<<<
- *     for moddir in  ('/lib/modules', '/lib32/modules', '/lib64/modules', \
+ *     for moddir in ('/lib/modules', '/lib32/modules', '/lib64/modules', \
  *         '/usr/lib/modules', '/usr/lib32/modules', '/usr/lib64/modules'):
  */
         __pyx_t_6 = PyList_New(0); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 58; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
@@ -5994,7 +5994,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         /* "mkinitfs.py":59
  *     modsdir = None
  *     kernels = []
- *     for moddir in  ('/lib/modules', '/lib32/modules', '/lib64/modules', \             # <<<<<<<<<<<<<<
+ *     for moddir in ('/lib/modules', '/lib32/modules', '/lib64/modules', \             # <<<<<<<<<<<<<<
  *         '/usr/lib/modules', '/usr/lib32/modules', '/usr/lib64/modules'):
  *         if not os.path.exists(moddir) or os.path.islink(moddir):
  */
@@ -6010,7 +6010,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
           /* "mkinitfs.py":61
- *     for moddir in  ('/lib/modules', '/lib32/modules', '/lib64/modules', \
+ *     for moddir in ('/lib/modules', '/lib32/modules', '/lib64/modules', \
  *         '/usr/lib/modules', '/usr/lib32/modules', '/usr/lib64/modules'):
  *         if not os.path.exists(moddir) or os.path.islink(moddir):             # <<<<<<<<<<<<<<
  *             continue
@@ -6355,7 +6355,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           /* "mkinitfs.py":59
  *     modsdir = None
  *     kernels = []
- *     for moddir in  ('/lib/modules', '/lib32/modules', '/lib64/modules', \             # <<<<<<<<<<<<<<
+ *     for moddir in ('/lib/modules', '/lib32/modules', '/lib64/modules', \             # <<<<<<<<<<<<<<
  *         '/usr/lib/modules', '/usr/lib32/modules', '/usr/lib64/modules'):
  *         if not os.path.exists(moddir) or os.path.islink(moddir):
  */

@@ -758,7 +758,7 @@ static char __pyx_k_video4linux[] = "video4linux";
 static char __pyx_k_HANDLERS_DIR[] = "HANDLERS_DIR";
 static char __pyx_k_ID_VENDOR_ID[] = "ID_VENDOR_ID";
 static char __pyx_k_sub_critical[] = "sub_critical";
-static char __pyx_k_1_8_2_4007e7b[] = "1.8.2 (4007e7b)";
+static char __pyx_k_1_8_2_28be59a[] = "1.8.2 (28be59a)";
 static char __pyx_k_Device_Daemon[] = "Device.Daemon";
 static char __pyx_k_Device_Handle[] = "Device.Handle";
 static char __pyx_k_Device___init[] = "Device.__init__";
@@ -793,7 +793,7 @@ static char __pyx_k_udev_device_get_property_value[] = "udev_device_get_property
 static char __pyx_k_home_smil3y_bfp_src_ahws_ahws_p[] = "/home/smil3y/bfp/src/ahws/ahws.py";
 static char __pyx_k_udev_enumerate_add_match_subsyst[] = "udev_enumerate_add_match_subsystem";
 static char __pyx_k_udev_monitor_filter_add_match_su[] = "udev_monitor_filter_add_match_subsystem_devtype";
-static PyObject *__pyx_kp_s_1_8_2_4007e7b;
+static PyObject *__pyx_kp_s_1_8_2_28be59a;
 static PyObject *__pyx_kp_s_Can_not_get_udev_context;
 static PyObject *__pyx_n_s_DEBUG;
 static PyObject *__pyx_n_s_DEVNAME;
@@ -2471,7 +2471,7 @@ static PyObject *__pyx_pf_4ahws_6Device_4Initialize(CYTHON_UNUSED PyObject *__py
  *                     libudev.udev_device_unref(dev)
  *                 entry = libudev.udev_list_entry_get_next(entry)             # <<<<<<<<<<<<<<
  *         finally:
- *             libudev.udev_enumerate_unref(udevenum);
+ *             libudev.udev_enumerate_unref(udevenum)
  */
       __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_libudev); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 64; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
       __Pyx_GOTREF(__pyx_t_5);
@@ -2511,7 +2511,7 @@ static PyObject *__pyx_pf_4ahws_6Device_4Initialize(CYTHON_UNUSED PyObject *__py
   /* "ahws.py":66
  *                 entry = libudev.udev_list_entry_get_next(entry)
  *         finally:
- *             libudev.udev_enumerate_unref(udevenum);             # <<<<<<<<<<<<<<
+ *             libudev.udev_enumerate_unref(udevenum)             # <<<<<<<<<<<<<<
  * 
  *     def Handle(self, properties, action):
  */
@@ -2662,7 +2662,7 @@ static PyObject *__pyx_pf_4ahws_6Device_4Initialize(CYTHON_UNUSED PyObject *__py
 }
 
 /* "ahws.py":68
- *             libudev.udev_enumerate_unref(udevenum);
+ *             libudev.udev_enumerate_unref(udevenum)
  * 
  *     def Handle(self, properties, action):             # <<<<<<<<<<<<<<
  *         DEVNAME, MODEL, VENDOR, SERIAL, SUBSYSTEM = properties
@@ -3672,7 +3672,7 @@ static PyObject *__pyx_pf_4ahws_6Device_6Handle(CYTHON_UNUSED PyObject *__pyx_se
   __pyx_L19:;
 
   /* "ahws.py":68
- *             libudev.udev_enumerate_unref(udevenum);
+ *             libudev.udev_enumerate_unref(udevenum)
  * 
  *     def Handle(self, properties, action):             # <<<<<<<<<<<<<<
  *         DEVNAME, MODEL, VENDOR, SERIAL, SUBSYSTEM = properties
@@ -4553,7 +4553,7 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
-  {&__pyx_kp_s_1_8_2_4007e7b, __pyx_k_1_8_2_4007e7b, sizeof(__pyx_k_1_8_2_4007e7b), 0, 0, 1, 0},
+  {&__pyx_kp_s_1_8_2_28be59a, __pyx_k_1_8_2_28be59a, sizeof(__pyx_k_1_8_2_28be59a), 0, 0, 1, 0},
   {&__pyx_kp_s_Can_not_get_udev_context, __pyx_k_Can_not_get_udev_context, sizeof(__pyx_k_Can_not_get_udev_context), 0, 0, 1, 0},
   {&__pyx_n_s_DEBUG, __pyx_k_DEBUG, sizeof(__pyx_k_DEBUG), 0, 0, 1, 1},
   {&__pyx_n_s_DEVNAME, __pyx_k_DEVNAME, sizeof(__pyx_k_DEVNAME), 0, 0, 1, 1},
@@ -4762,7 +4762,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_codeobj__9 = (PyObject*)__Pyx_PyCode_New(1, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__8, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_ahws_ahws_p, __pyx_n_s_Initialize, 49, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 49; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "ahws.py":68
- *             libudev.udev_enumerate_unref(udevenum);
+ *             libudev.udev_enumerate_unref(udevenum)
  * 
  *     def Handle(self, properties, action):             # <<<<<<<<<<<<<<
  *         DEVNAME, MODEL, VENDOR, SERIAL, SUBSYSTEM = properties
@@ -4995,7 +4995,7 @@ PyMODINIT_FUNC PyInit_ahws(void)
  * message.DEBUG = True
  * misc = libmisc.Misc()             # <<<<<<<<<<<<<<
  * 
- * app_version = "1.8.2 (4007e7b)"
+ * app_version = "1.8.2 (28be59a)"
  */
   __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_libmisc); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 6; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -5026,14 +5026,14 @@ PyMODINIT_FUNC PyInit_ahws(void)
   /* "ahws.py":8
  * misc = libmisc.Misc()
  * 
- * app_version = "1.8.2 (4007e7b)"             # <<<<<<<<<<<<<<
+ * app_version = "1.8.2 (28be59a)"             # <<<<<<<<<<<<<<
  * 
  * class Device(object):
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_8_2_4007e7b) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_8_2_28be59a) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 8; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "ahws.py":10
- * app_version = "1.8.2 (4007e7b)"
+ * app_version = "1.8.2 (28be59a)"
  * 
  * class Device(object):             # <<<<<<<<<<<<<<
  *     def __init__(self):
@@ -5086,7 +5086,7 @@ PyMODINIT_FUNC PyInit_ahws(void)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
   /* "ahws.py":68
- *             libudev.udev_enumerate_unref(udevenum);
+ *             libudev.udev_enumerate_unref(udevenum)
  * 
  *     def Handle(self, properties, action):             # <<<<<<<<<<<<<<
  *         DEVNAME, MODEL, VENDOR, SERIAL, SUBSYSTEM = properties
@@ -5110,7 +5110,7 @@ PyMODINIT_FUNC PyInit_ahws(void)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
   /* "ahws.py":10
- * app_version = "1.8.2 (4007e7b)"
+ * app_version = "1.8.2 (28be59a)"
  * 
  * class Device(object):             # <<<<<<<<<<<<<<
  *     def __init__(self):

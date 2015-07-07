@@ -184,7 +184,7 @@ class Libarchive(object):
         ''' Extract the contents of archive '''
 
         # preserve permissions
-        if  preserve:
+        if preserve:
             self.ExtractFlags = self.ExtractFlags | 80 | 200 # XATTR, MAC_METADATA
 
         # setup our structs

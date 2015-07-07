@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast
 
-app_version = "1.8.2 (b7e6c26)"
+app_version = "1.8.2 (28be59a)"
 
 tmpdir = None
 keep = False
@@ -56,7 +56,7 @@ try:
 
     modsdir = None
     kernels = []
-    for moddir in  ('/lib/modules', '/lib32/modules', '/lib64/modules', \
+    for moddir in ('/lib/modules', '/lib32/modules', '/lib64/modules', \
         '/usr/lib/modules', '/usr/lib32/modules', '/usr/lib64/modules'):
         if not os.path.exists(moddir) or os.path.islink(moddir):
             continue

@@ -254,10 +254,14 @@ def RefreshSettings():
     ui.TriggersBox.setCheckState(libspm.TRIGGERS)
 
 def RefreshWidgets():
-    ui.RemoveButton.setEnabled(iface.isValid())
+    ifacevalid = iface.isValid()
+    ui.BuildButton.setEnabled(ifacevalid)
+    ui.InstallButton.setEnabled(ifacevalid)
+    ui.RemoveButton.setEnabled(ifacevalid)
     ui.DetailsButton.setEnabled(True)
     if not ui.SearchTable.selectedIndexes():
-        ui.DetailsButton.setEnabled(False)
+        ui.BuildButton.setEnabled(False)
+        ui.InstallButton.setEnabled(False)
     for item in ui.SearchTable.selectedIndexes():
         tableitem = ui.SearchTable.item(item.row(), 0)
         # things happen asyncronsly so it may be gone by the time this block
