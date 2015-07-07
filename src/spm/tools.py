@@ -4,7 +4,7 @@ import gettext
 _ = gettext.translation('spm', fallback=True).gettext
 
 import sys, argparse, subprocess, tarfile, zipfile, shutil, os, re, difflib
-import pwd, grp, ftplib, site
+import pwd, grp, ftplib, site, imp, glob
 if sys.version < '3':
     import ConfigParser as configparser
     from urllib2 import HTTPError
@@ -23,7 +23,7 @@ misc = libspm.misc
 database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.8.2 (14099eb)"
+app_version = "1.8.2 (90bd8b8)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -1035,6 +1035,9 @@ class Portable(object):
                 os.unlink('./run.sh')
 
 if __name__ == '__main__':
+    plugins = []
+    modules = []
+    retvalue = 0
     try:
         EUID = os.geteuid()
 
@@ -1234,6 +1237,13 @@ if __name__ == '__main__':
         parser.add_argument('--version', action='version', \
             version='Source Package Manager Tools v%s' % app_version, \
             help=_('Show SPM Tools version and exit'))
+
+        for plugin in glob.glob('/etc/spm/plugins/*.py'):
+            name = os.path.basename(plugin).replace('.py', '')
+            fp, pathname, description = imp.find_module(name, ['/etc/spm/plugins'])
+            plugins.append(fp)
+            module = imp.load_module(name, fp, pathname, description)
+            modules.append(module.Main(subparsers))
 
         ARGS = parser.parse_args()
         if not sys.stdin.isatty() and ARGS.TARGETS == ['-']:
@@ -1442,12 +1452,15 @@ if __name__ == '__main__':
             m = Portable(ARGS.TARGETS, ARGS.directory)
             m.main()
 
+        for module in modules:
+            module.run(ARGS)
+
     except configparser.Error as detail:
         message.critical('CONFIGPARSER', detail)
-        sys.exit(3)
+        retvalue = 3
     except subprocess.CalledProcessError as detail:
         message.critical('SUBPROCESS', detail)
-        sys.exit(4)
+        retvalue = 4
     except HTTPError as detail:
         if hasattr(detail, 'url'):
             # misc.fetch() provides additional information
@@ -1455,36 +1468,39 @@ if __name__ == '__main__':
                 detail.reason, detail.code))
         else:
             message.critical('URLLIB', detail)
-        sys.exit(5)
+        retvalue = 5
     except tarfile.TarError as detail:
         message.critical('TARFILE', detail)
-        sys.exit(6)
+        retvalue = 6
     except zipfile.BadZipfile as detail:
         message.critical('ZIPFILE', detail)
-        sys.exit(7)
+        retvalue = 7
     except shutil.Error as detail:
         message.critical('SHUTIL', detail)
-        sys.exit(8)
+        retvalue = 8
     except OSError as detail:
         message.critical('OS', detail)
-        sys.exit(9)
+        retvalue = 9
     except IOError as detail:
         message.critical('IO', detail)
-        sys.exit(10)
+        retvalue = 10
     except re.error as detail:
         message.critical('REGEXP', detail)
-        sys.exit(11)
+        retvalue = 11
     except ftplib.all_errors as detail:
         message.critical('FTPLIB', detail)
-        sys.exit(12)
+        retvalue = 12
     except KeyboardInterrupt:
         message.critical('Interrupt signal received')
-        sys.exit(13)
+        retvalue = 13
     except SystemExit:
-        sys.exit(2)
+        retvalue = 2
     except Exception as detail:
         message.critical('Unexpected error', detail)
-        sys.exit(1)
+        retvalue = 1
     finally:
+        for plugin in plugins:
+            plugin.close()
         if not 'stable' in app_version and sys.exc_info()[0]:
             raise
+        sys.exit(retvalue)

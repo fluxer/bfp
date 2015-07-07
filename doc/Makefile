@@ -22,6 +22,7 @@ all: clean
 	$(POD2MAN) --release="Cold $(VERSION)" \
 		--center="Cold Manual" \
 		--section='1' --utf8 cold.pod cold.1
+	$(SED) 's|@DOCDIR@|$(DOCDIR)|g' -i spm-tools.8
 	$(SED) 's|@DOCDIR@|$(DOCDIR)|g' -i SRCBUILD.5
 	$(SED) 's|@MACHINE@|$(MACHINE)|g' -i spm.conf.5
 	$(SED) 's|@ARCH@|$(ARCH)|g' -i spm.conf.5
