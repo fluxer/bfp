@@ -801,10 +801,8 @@ class Upload(object):
                     message.sub_warning(_('Missing signature for'), tarball)
                 for sfile in files:
                     message.sub_info(_('Uploading'), sfile)
-                    fupload = open(sfile, 'r')
-                    supload = os.path.basename(sfile)
-                    ftp.storbinary('STOR %s' % supload, fupload)
-                    fupload.close()
+                    with open(sfile, 'r') as f:
+                        ftp.storbinary('STOR %s' % os.path.basename(sfile), f)
         finally:
             if ftp:
                 ftp.quit()
@@ -1454,6 +1452,9 @@ if __name__ == '__main__':
 
         for module in modules:
             module.run(ARGS)
+
+        if not ARGS.mode and sys.version > '2':
+            parser.print_help()
 
     except configparser.Error as detail:
         message.critical('CONFIGPARSER', detail)

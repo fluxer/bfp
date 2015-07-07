@@ -604,6 +604,9 @@ try:
         m = libspm.Who(ARGS.PATTERN, ARGS.plain)
         m.main()
 
+    if not ARGS.mode and sys.version > '2':
+        parser.print_help()
+
 except configparser.Error as detail:
     message.critical('CONFIGPARSER', detail)
     retvalue = 3
