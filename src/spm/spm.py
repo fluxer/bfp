@@ -17,6 +17,7 @@ message = libmessage.Message()
 app_version = "1.8.2 (90bd8b8)"
 
 
+retvalue = 0
 try:
     import libspm
 
@@ -605,10 +606,10 @@ try:
 
 except configparser.Error as detail:
     message.critical('CONFIGPARSER', detail)
-    sys.exit(3)
+    retvalue = 3
 except subprocess.CalledProcessError as detail:
     message.critical('SUBPROCESS', detail)
-    sys.exit(4)
+    retvalue = 4
 except HTTPError as detail:
     if hasattr(detail, 'url'):
         # misc.fetch() provides additional information
@@ -616,33 +617,34 @@ except HTTPError as detail:
             detail.code))
     else:
         message.critical('URLLIB', detail)
-    sys.exit(5)
+    retvalue = 5
 except tarfile.TarError as detail:
     message.critical('TARFILE', detail)
-    sys.exit(6)
+    retvalue = 6
 except zipfile.BadZipfile as detail:
     message.critical('ZIPFILE', detail)
-    sys.exit(7)
+    retvalue = 7
 except shutil.Error as detail:
     message.critical('SHUTIL', detail)
-    sys.exit(8)
+    retvalue = 8
 except OSError as detail:
     message.critical('OS', detail)
-    sys.exit(9)
+    retvalue = 9
 except IOError as detail:
     message.critical('IO', detail)
-    sys.exit(10)
+    retvalue = 10
 except re.error as detail:
     message.critical('REGEXP', detail)
-    sys.exit(11)
+    retvalue = 11
 except KeyboardInterrupt:
     message.critical('Interrupt signal received')
-    sys.exit(12)
+    retvalue = 12
 except SystemExit:
-    sys.exit(2)
+    retvalue = 2
 except Exception as detail:
     message.critical('Unexpected error', detail)
-    sys.exit(1)
+    retvalue = 1
 finally:
     if not 'stable' in app_version and sys.exc_info()[0]:
         raise
+    sys.exit(retvalue)
