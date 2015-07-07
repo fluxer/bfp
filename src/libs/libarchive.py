@@ -153,6 +153,27 @@ class Libarchive(object):
             else:
                 return '%.02fGB' % (((float(size) / 1024.00) / 1024.00) / 1024.00)
 
+    def _addEntry(self, spath, archive, strip):
+        print('Adding %s...' % spath)
+        entry = self._entryNew()
+        stat = os.stat(spath)
+        # http://linux.die.net/man/2/stat
+        self.lib.archive_entry_set_pathname(entry, types.StringType(spath.lstrip(strip)))
+        # self.lib.archive_entry_set_pathname(entry, spath)
+        self.lib.archive_entry_set_size(entry, ctypes.c_int64(stat.st_size))
+        # self.lib.archive_entry_set_filetype(entry)
+        self.lib.archive_entry_set_mode(entry, stat.st_mode)
+        self.lib.archive_entry_set_perm(entry, stat.st_mode)
+        # self.lib.archive_entry_copy_stat(entry, stat)
+        if self._writeHeader(archive, entry) != self.ARCH_OK:
+            print(self._errorString(archive))
+            self.lib.archive_entry_free(entry)
+            return False
+        with open(spath, 'rb') as f:
+            self.lib.archive_write_data(archive, f.read(), stat.st_size)
+        self.lib.archive_entry_free(entry)
+        return True
+
     ### Public methods
     def listArchive(self, fname, append=''):
         ''' List the contents of archive (returns a list of path/filenames) '''
@@ -241,27 +262,6 @@ class Libarchive(object):
 
         # You did good soldier
         return self.ARCH_OK
-
-    def _addEntry(self, spath, archive, strip):
-        print('Adding %s...' % spath)
-        entry = self._entryNew()
-        stat = os.stat(spath)
-        # http://linux.die.net/man/2/stat
-        self.lib.archive_entry_set_pathname(entry, types.StringType(spath.lstrip(strip)))
-        # self.lib.archive_entry_set_pathname(entry, spath)
-        self.lib.archive_entry_set_size(entry, ctypes.c_int64(stat.st_size))
-        # self.lib.archive_entry_set_filetype(entry)
-        self.lib.archive_entry_set_mode(entry, stat.st_mode)
-        self.lib.archive_entry_set_perm(entry, stat.st_mode)
-        # self.lib.archive_entry_copy_stat(entry, stat)
-        if self._writeHeader(archive, entry) != self.ARCH_OK:
-            print(self._errorString(archive))
-            self.lib.archive_entry_free(entry)
-            return False
-        with open(spath, 'rb') as f:
-            self.lib.archive_write_data(archive, f.read(), stat.st_size)
-        self.lib.archive_entry_free(entry)
-        return True
 
     def createArchive(self, paths, output, strip='/'):
         ''' Create archive '''
