@@ -5,7 +5,7 @@ message = libmessage.Message()
 message.DEBUG = True
 misc = libmisc.Misc()
 
-app_version = "1.8.2 (fe465c4)"
+app_version = "1.8.2 (2d48c4b)"
 
 class AHWS(object):
     def __init__(self):
