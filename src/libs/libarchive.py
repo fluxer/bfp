@@ -291,9 +291,7 @@ class Libarchive(object):
         self._readSupportFormatAll(archive)
 
         # open, analyse, and close our archive
-        if self._readOpenFilename(archive, fname, 10240) != self.ARCH_OK:
-            raise self.ArchiveException(self._errorString(archive))
-        else:
+        if self._readOpenFilename(archive, fname, 10240) == self.ARCH_OK:
             retv = True
 
         if self._readClose(archive) != self.ARCH_OK:

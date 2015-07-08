@@ -322,7 +322,7 @@ class Misc(object):
             self.typecheck(sfile, (types.StringTypes))
             self.typecheck(smethod, (types.StringTypes))
 
-        return self.string_checksum(misc.string_encode(self.file_read(sfile)), smethod)
+        return self.string_checksum(self.string_encode(self.file_read(sfile)), smethod)
 
     def json_read(self, sfile):
         ''' Get JSON file content '''
@@ -415,11 +415,11 @@ class Misc(object):
             # exception for no gain, get piped!
             shell = True
             if sfile.endswith('.xz'):
-                cmd = '%s -cdk ' % misc.whereis('unxz')
+                cmd = '%s -cdk ' % self.whereis('unxz')
             elif sfile.endswith('.bz2'):
-                cmd = '%s -cdk ' % misc.whereis('bunzip')
+                cmd = '%s -cdk ' % self.whereis('bunzip')
             elif sfile.endswith('.gz'):
-                cmd = '%s -ck ' % misc.whereis('gunzip')
+                cmd = '%s -ck ' % self.whereis('gunzip')
             else:
                 raise(Exception('In memory verification does not support', sfile))
             cmd = '%s %s | %s --homedir %s --verify --batch %s -' % \
