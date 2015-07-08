@@ -5,13 +5,15 @@ import os, sys, types, ctypes
 try:
     lib = ctypes.cdll.LoadLibrary('libarchive.so')
 except OSError as msg:
-    print('Could not find libarchive.so')
-    sys.exit(1)
+    raise ImportError('Could not find libarchive.so')
 
 
 ### libarchive  interface
 class Libarchive(object):
     ''' Python CTypes interface to libarchive '''
+
+    class ArchiveException(Exception):
+        pass
 
     # These are our structs for libarchive (hopefully)
     class Archive(ctypes.Structure):
@@ -102,15 +104,11 @@ class Libarchive(object):
         self._errorString.restype = ctypes.c_char_p
 
     ### Private methods
-    def _copyData(self, archiveR, archiveW, chdir=None):
+    def _copyData(self, archiveR, archiveW):
         r = ctypes.c_int()
         buff = ctypes.c_void_p()
         size = ctypes.c_int()
         offs = ctypes.c_longlong()
-
-        if chdir:
-            curdir = os.curdir
-            os.chdir(chdir)
 
         while True:
             # read in a block
@@ -133,32 +131,15 @@ class Libarchive(object):
                 size,         # Size data
                 offs)         # Offset data
 
-            if chdir:
-                os.chdir(curdir)
-
             # And check ourselves again
             if r != self.ARCH_OK:
-                print(self._errorString(archiveW))
-                return r
-
-    def _fmtSize(self, size=None):
-        ''' Format a number of bytes into a human readable string '''
-        if size and isinstance(size, (types.IntType, types.LongType)):
-            if size < 1024:
-                return '%dB' % size
-            elif size > 1024 and size < (1024**2):
-                return '%4.02fKB' % (float(size) / 1024.00)
-            elif size > (1024**2) and size < (1024**3):
-                return '%4.02fMB' % ((float(size) / 1024.00) / 1024.00)
-            else:
-                return '%.02fGB' % (((float(size) / 1024.00) / 1024.00) / 1024.00)
+                raise self.ArchiveException(self._errorString(archiveW))
 
     def _addEntry(self, spath, archive, strip):
-        print('Adding %s...' % spath)
         entry = self._entryNew()
         stat = os.stat(spath)
         # http://linux.die.net/man/2/stat
-        self.lib.archive_entry_set_pathname(entry, types.StringType(spath.lstrip(strip)))
+        self.lib.archive_entry_set_pathname(entry, types.StringType(spath.replace(strip, '')))
         # self.lib.archive_entry_set_pathname(entry, spath)
         self.lib.archive_entry_set_size(entry, ctypes.c_int64(stat.st_size))
         # self.lib.archive_entry_set_filetype(entry)
@@ -166,9 +147,8 @@ class Libarchive(object):
         self.lib.archive_entry_set_perm(entry, stat.st_mode)
         # self.lib.archive_entry_copy_stat(entry, stat)
         if self._writeHeader(archive, entry) != self.ARCH_OK:
-            print(self._errorString(archive))
             self.lib.archive_entry_free(entry)
-            return False
+            raise self.ArchiveException(self._errorString(archive))
         with open(spath, 'rb') as f:
             self.lib.archive_write_data(archive, f.read(), stat.st_size)
         self.lib.archive_entry_free(entry)
@@ -187,21 +167,19 @@ class Libarchive(object):
 
         # open, analyse, and close our archive
         if self._readOpenFilename(archive, fname, 10240) != self.ARCH_OK:
-            print(self._errorString(archive))
-            sys.exit(1)
+            raise self.ArchiveException(self._errorString(archive))
 
         while self._readNextHeader(archive, ctypes.byref(entry)) == self.ARCH_OK:
             content.append('%s%s' % (append, self._entryPathname(entry)))
             self._readDataSkip(archive) # Not strictly necessary
 
         if self._readFree(archive) != self.ARCH_OK:
-            print(self._errorString(archive))
-            sys.exit(1)
+            raise self.ArchiveException(self._errorString(archive))
 
         # You did good soldier
         return content
 
-    def extractArchive(self, fname, chdir=None, preserve=False):
+    def extractArchive(self, fname, preserve=False):
         ''' Extract the contents of archive '''
 
         # preserve permissions
@@ -228,28 +206,20 @@ class Libarchive(object):
         ret = self._readNextHeader(arch, ctypes.byref(entry))
         while ret != self.ARCH_EOF:
             if ret != self.ARCH_OK or ret < self.ARCH_WARN:
-                print(self._errorString(arch))
-                sys.exit(1)
+                raise self.ArchiveException(self._errorString(arch))
 
             # write out our header
             ret = self._writeHeader(ext, entry)
             if ret != self.ARCH_OK:
-                print(self._errorString(ext))
+                raise self.ArchiveException(self._errorString(ext))
             elif self._entrySize(entry) > 0:
-
                 # copy the contents into their new home
-                self._copyData(arch, ext, chdir)
-                if ret != self.ARCH_OK:
-                    print(self._errorString(ext))
-                if ret < self.ARCH_WARN:
-                    sys.exit(1)
+                self._copyData(arch, ext)
 
             # close that entry up
             ret = self._writeFinishEntry(ext)
             if ret != self.ARCH_OK:
-                print(self._errorString(ext))
-            if ret < self.ARCH_WARN:
-                sys.exit(1)
+                raise self.ArchiveException(self._errorString(ext))
 
             # And get ready to head back to the top
             ret = self._readNextHeader(arch, ctypes.byref(entry))
@@ -280,13 +250,12 @@ class Libarchive(object):
         self._formatPaxRestricted(archive)
 
         if os.path.isfile(output):
-            print('Removing %s...' % output)
+            # XXX: raise error?
             os.remove(output)
 
         # open, analyse, and close our archive
         if self._writeOpenFilename(archive, output, 10240) != self.ARCH_OK:
-            print(self._errorString(archive))
-            sys.exit(1)
+            raise self.ArchiveException(self._errorString(archive))
 
         for spath in paths:
             if os.path.isdir(spath):
@@ -312,7 +281,7 @@ class Libarchive(object):
         # return value
         return retv
 
-    def supportedArchive(self, fname, silent=False):
+    def supportedArchive(self, fname):
         ''' Check if the archive is supported '''
         retv = False              # Return value
         archive = self._readNew() # Archive struct
@@ -323,15 +292,12 @@ class Libarchive(object):
 
         # open, analyse, and close our archive
         if self._readOpenFilename(archive, fname, 10240) != self.ARCH_OK:
-            if not silent:
-                print(self._errorString(archive))
+            raise self.ArchiveException(self._errorString(archive))
         else:
             retv = True
 
         if self._readClose(archive) != self.ARCH_OK:
-            if not silent:
-                print(self._errorString(archive))
-                sys.exit(1)
+            raise self.ArchiveException(self._errorString(archive))
 
         # You did good soldier
         return retv
