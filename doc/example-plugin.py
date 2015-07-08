@@ -34,7 +34,7 @@ class Main(object):
 
 
 # finally, standalone usage. without Hello() anything that wants to access the
-# pluging will have to write similar code
+# pluging will have to write similar code instead of just Hello('foo').main()
 if __name__ == '__main__':
     import argparse
     parser = argparse.ArgumentParser(prog='spm-tools', \

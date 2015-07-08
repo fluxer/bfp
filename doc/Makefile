@@ -22,11 +22,11 @@ all: clean
 	$(POD2MAN) --release="Cold $(VERSION)" \
 		--center="Cold Manual" \
 		--section='1' --utf8 cold.pod cold.1
-	$(SED) 's|@DOCDIR@|$(DOCDIR)|g' -i spm-tools.8
-	$(SED) 's|@DOCDIR@|$(DOCDIR)|g' -i SRCBUILD.5
-	$(SED) 's|@MACHINE@|$(MACHINE)|g' -i spm.conf.5
-	$(SED) 's|@ARCH@|$(ARCH)|g' -i spm.conf.5
-	$(SED) 's|@JOBS@|$(JOBS)|g' -i spm.conf.5
+	$(SED) -e 's|@DOCDIR\\fR@|$(DOCDIR)|g' -i spm-tools.8
+	$(SED) -e 's|@DOCDIR\\fR@|$(DOCDIR)|g' -i SRCBUILD.5
+	$(SED) 's|@MACHINE\\fR@|$(MACHINE)|g' -i spm.conf.5
+	$(SED) 's|@ARCH\\fR@|$(ARCH)|g' -i spm.conf.5
+	$(SED) 's|@JOBS\\fR@|$(JOBS)|g' -i spm.conf.5
 	for lib in ../src/libs/lib*.py ../src/spm/libspm.py; do \
 		PYTHONPATH="$(TOPDIR)/src/libs" $(PYDOC) -w $$lib; \
 	done
