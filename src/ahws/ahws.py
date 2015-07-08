@@ -5,9 +5,9 @@ message = libmessage.Message()
 message.DEBUG = True
 misc = libmisc.Misc()
 
-app_version = "1.8.2 (28be59a)"
+app_version = "1.8.2 (fe465c4)"
 
-class Device(object):
+class AHWS(object):
     def __init__(self):
         self.udev = libudev.udev_new()
         if not self.udev:
@@ -15,6 +15,10 @@ class Device(object):
             sys.exit(1)
         self.HANDLERS_DIR = '/etc/ahws.d'
         self.SUBSYSTEMS = ['pci', 'usb', 'video4linux', 'sound', 'snd', 'printer', 'drm']
+
+    def __exit__(self, type, value, traceback):
+        if self.udev:
+            libudev.udev_unref(self.udev)
 
     def Properties(self, dev):
         DEVNAME = libudev.udev_device_get_property_value(dev, 'DEVNAME')
@@ -46,6 +50,37 @@ class Device(object):
 
         return DEVNAME, PRODUCT, VENDOR, SERIAL, SUBSYSTEM
 
+    def Handle(self, properties, action):
+        DEVNAME, MODEL, VENDOR, SERIAL, SUBSYSTEM = properties
+        if not MODEL or not VENDOR:
+            message.sub_warning('Model or vendor ID missing for', \
+                '%s (%s, %s)' % (DEVNAME, VENDOR, MODEL))
+            return
+
+        subhandle = '%s/%s' % (self.HANDLERS_DIR, SUBSYSTEM)
+        if os.path.isfile(subhandle):
+            message.sub_info('Handling subsystem %s for' % action, \
+                '%s (%s, %s)' % (SUBSYSTEM, VENDOR, MODEL))
+            try:
+                misc.system_command((subhandle, action, DEVNAME))
+            except Exception as detail:
+                message.sub_critical(str(detail))
+        else:
+            message.sub_debug('No subsystem handle for', \
+                '%s (%s)' % (SUBSYSTEM, DEVNAME))
+
+        devhandle = '%s/%s_%s' % (self.HANDLERS_DIR, VENDOR, MODEL)
+        if os.path.isfile(devhandle):
+            message.sub_info('Handling device %s for' % action, \
+                '%s (%s, %s)' % (SERIAL, VENDOR, MODEL))
+            try:
+                misc.system_command((devhandle, action))
+            except Exception as detail:
+                message.sub_critical(str(detail))
+        else:
+            message.sub_debug('No device handle for', \
+                '%s (%s, %s)' % (SERIAL, VENDOR, MODEL))
+
     def Initialize(self):
         ''' Handle all current devices '''
         udevenum = libudev.udev_enumerate_new(self.udev)
@@ -65,38 +100,7 @@ class Device(object):
         finally:
             libudev.udev_enumerate_unref(udevenum)
 
-    def Handle(self, properties, action):
-        DEVNAME, MODEL, VENDOR, SERIAL, SUBSYSTEM = properties
-        if not MODEL or not VENDOR:
-            message.sub_warning('Model or vendor ID missing for', \
-                '%s (%s, %s)' % (DEVNAME, VENDOR, MODEL))
-            return
-
-        subhandle = '%s/%s' % (self.HANDLERS_DIR, SUBSYSTEM)
-        if os.path.isfile(subhandle):
-            message.sub_info('Handling subsystem %s for' % action, \
-                '%s (%s, %s)' % (SUBSYSTEM, VENDOR, MODEL))
-            try:
-                misc.system_command((subhandle, action, DEVNAME))
-            except Exception as detail:
-                message.sub_critical(str(detail))
-        else:
-            message.sub_debug('Not subsystem handle for', \
-                '%s (%s)' % (SUBSYSTEM, DEVNAME))
-
-        devhandle = '%s/%s_%s' % (self.HANDLERS_DIR, VENDOR, MODEL)
-        if os.path.isfile(devhandle):
-            message.sub_info('Handling device %s for' % action, \
-                '%s (%s, %s)' % (SERIAL, VENDOR, MODEL))
-            try:
-                misc.system_command((devhandle, action))
-            except Exception as detail:
-                message.sub_critical(str(detail))
-        else:
-            message.sub_debug('No device handle for', \
-                '%s (%s, %s)' % (SERIAL, VENDOR, MODEL))
-
-    def Daemon(self):
+    def Daemonize(self):
         ''' Daemon that monitors events '''
         try:
             monitor = libudev.udev_monitor_new_from_netlink(self.udev, 'udev')
@@ -116,18 +120,16 @@ class Device(object):
                         time.sleep(1)
         except Exception as detail:
             message.sub_critical(str(detail))
-        finally:
-            libudev.udev_unref(self.udev)
 
 
 pidfile = '/var/run/ahws.pid'
 try:
     misc.file_write(pidfile, str(os.getpid()))
-    device = Device()
+    ahws = AHWS()
     message.info('Initializing AHWS v%s' % app_version)
-    device.Initialize()
+    ahws.Initialize()
     message.info('Daemonizing AHWS')
-    device.Daemon()
+    ahws.Daemonize()
 except Exception as detail:
     message.sub_critical(detail)
 finally:
