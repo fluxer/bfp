@@ -9,8 +9,6 @@ with "local" deal with metadata of software installed on the system, "remote"
 methods provide info for software available from repositories with build
 recipes in the SRCBUILD format.
 
-SRCBUILD() is Source Package Manager recipes parser.
-
 '''
 
 import os, re, types
@@ -31,6 +29,8 @@ class Database(object):
         self.LOCAL_CACHE = {}
         self.IGNORE = []
         self.NOTIFY = True
+        self._stringx = re.compile('(?:^|\n)([\w]+)=([^\(].*)')
+        self._arrayx = re.compile('(?:^|\n)([\w]+)=\(([^\)]+)', re.MULTILINE)
 
     def _build_local_cache(self):
         ''' Build internal local database cache '''
@@ -56,24 +56,10 @@ class Database(object):
         metadir = '%s/repositories' % self.CACHE_DIR
         if not os.path.isdir(metadir):
             return
-        parser = SRCBUILD()
         for sdir in misc.list_dirs(metadir):
             srcbuild = '%s/SRCBUILD' % sdir
             if os.path.isfile(srcbuild):
-                parser.parse(srcbuild)
-                self.REMOTE_CACHE[sdir] = {
-                    'version': parser.version,
-                    'release': parser.release,
-                    'description': parser.description,
-                    'depends': parser.depends,
-                    'makedepends': parser.makedepends,
-                    'optdepends': parser.optdepends,
-                    'checkdepends': parser.checkdepends,
-                    'sources': parser.sources,
-                    'pgpkeys': parser.pgpkeys,
-                    'options': parser.options,
-                    'backup': parser.backup
-                }
+                self.REMOTE_CACHE[sdir] = self.srcbuild_parse(srcbuild)
             if self.NOTIFY and not sdir.endswith('/.git'):
                 notify.watch_add(sdir)
         if self.NOTIFY:
@@ -233,13 +219,10 @@ class Database(object):
         if key in ('depends', 'optdepends', 'backup', 'footprint'):
             return []
 
-    def local_uptodate(self, target, checked=None):
+    def local_uptodate(self, target):
         ''' Returns True if target is up-to-date and False otherwise '''
         if misc.python2:
             misc.typecheck(target, (types.StringTypes))
-
-        if checked is None:
-            checked = []
 
         # if remote target is passed and it's a directory not a base name
         # then the local target will be invalid and local_version will equal
@@ -261,10 +244,7 @@ class Database(object):
             return False
         else:
             for optional in local_optional:
-                if optional in checked:
-                    continue
-                checked.append(optional)
-                if self.local_uptodate(optional, checked) \
+                if self.local_search(optional) \
                     and not optional in local_optional:
                     return False
         return True
@@ -280,7 +260,7 @@ class Database(object):
         if match and match in self.REMOTE_CACHE:
             return self.REMOTE_CACHE[match][key]
         elif os.path.isfile(srcbuild):
-            return getattr(SRCBUILD(srcbuild), key)
+            return self.srcbuild_parse(srcbuild)[key]
         # for consistency
         if key in ('depends', 'makedepends', 'optdepends', 'checkdepends', \
             'sources', 'options', 'backup', 'pgpkeys'):
@@ -312,45 +292,31 @@ class Database(object):
         # return consistent data
         return [target]
 
-
-class SRCBUILD(object):
-    ''' A (new) SRCBUILD parser '''
-    def __init__(self, sfile=None):
-        if misc.python2:
-            misc.typecheck(sfile, (types.NoneType, types.StringTypes))
-
-        self.string_regex = re.compile('(?:^|\n)([\w]+)=([^\(].*)')
-        self.array_regex = re.compile('(?:^|\n)([\w]+)=\(([^\)]+)', re.MULTILINE)
-
-        self.prepare()
-        if sfile:
-            self.parse(sfile)
-
-    def prepare(self):
-        self.version = ''
-        self.release = '1'
-        self.description = ''
-        self.depends = []
-        self.makedepends = []
-        self.optdepends = []
-        self.checkdepends = []
-        self.sources = []
-        self.pgpkeys = []
-        self.options = []
-        self.backup = []
-
-    def parse(self, sfile):
+    def srcbuild_parse(self, sfile):
+        ''' Parse variables in SRCBUILD, returns dictionary '''
         if misc.python2:
             misc.typecheck(sfile, (types.StringTypes))
 
-        self.prepare()
         _stringmap = {}
         _arraymap = {}
+        _varmap = {
+            'version': '',
+            'release': '1',
+            'description': '',
+            'depends': [],
+            'makedepends': [],
+            'optdepends': [],
+            'checkdepends': [],
+            'sources': [],
+            'pgpkeys': [],
+            'options': [], 
+            'backup': []
+        }
 
         content = misc.file_read(sfile)
-        for var, value in re.findall(self.string_regex, content):
+        for var, value in re.findall(self._stringx, content):
             _stringmap[var] = value.strip('"').strip("'")
-        for var, value in re.findall(self.array_regex, content):
+        for var, value in re.findall(self._arrayx, content):
             arrayval = []
             for val in value.split():
                 for string in _stringmap:
@@ -366,8 +332,9 @@ class SRCBUILD(object):
 
         for string in ('version', 'release', 'description'):
             if string in _stringmap:
-                setattr(self, string, _stringmap[string])
+                _varmap[string] = _stringmap[string]
         for array in ('depends', 'makedepends', 'optdepends', 'checkdepends', \
             'sources', 'pgpkeys', 'options', 'backup'):
             if array in _arraymap:
-                setattr(self, array, _arraymap[array])
+                _varmap[array] = _arraymap[array]
+        return _varmap
