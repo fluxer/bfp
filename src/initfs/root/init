@@ -124,8 +124,11 @@ done
 if [ -e "$device" ];then
     msg "Checking the root device..."
     cmd fsck -M -T "$device"
+    # compensate for Busybox not support mount options via fstab properly
+    # TODO: send a bug report
+    rootoptions=$(grep "$root" /etc/fstab | cut -f4)
     msg "Mounting the root filesystem..."
-    cmd mount -o "$state" "$device" /newroot
+    cmd mount -o "$state,$rootoptions" "$device" /newroot
 fi
 
 if [ "$lateshell" = "yes" ];then
