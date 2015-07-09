@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast
 
-app_version = "1.8.2 (8552bb1)"
+app_version = "1.8.2 (e87ba3b)"
 
 tmpdir = None
 keep = False
@@ -259,7 +259,7 @@ try:
     misc.dir_create(etc_dir)
     # to surpress a warning
     ldconf = '%s/ld.so.conf' % etc_dir
-    if not os.path.isfile(ldconf
+    if not os.path.isfile(ldconf):
         misc.file_write(ldconf, '')
     misc.system_command((misc.whereis('ldconfig'), '-r', ARGS.tmp))
 
