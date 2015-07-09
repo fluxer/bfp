@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-07 00:51+0000\n"
+"POT-Creation-Date: 2015-07-09 13:02+0300\n"
 "PO-Revision-Date: 2015-07-02 08:06+0200\n"
 "Last-Translator: \n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -272,16 +272,16 @@ msgstr "Подготовка на PGP ключовете"
 msgid "Fetching sources"
 msgstr ""
 
-#: libspm.py:909 libspm.py:1761 libspm.py:1767 libspm.py:1883 tools.py:195
+#: libspm.py:909 libspm.py:1763 libspm.py:1769 libspm.py:1886 tools.py:195
 #: tools.py:695
 msgid "Fetching"
 msgstr ""
 
-#: libspm.py:920 libspm.py:1769 tools.py:203 tools.py:961
+#: libspm.py:920 libspm.py:1771 tools.py:203 tools.py:961
 msgid "Verifying"
 msgstr "Проверяване на"
 
-#: libspm.py:925 libspm.py:1463 libspm.py:1778
+#: libspm.py:925 libspm.py:1463 libspm.py:1781
 msgid "Checking dependencies"
 msgstr "Проверяване на зависимостите"
 
@@ -289,7 +289,7 @@ msgstr "Проверяване на зависимостите"
 msgid "Building dependencies"
 msgstr "Изграждане на зависимости"
 
-#: libspm.py:932 libspm.py:1789
+#: libspm.py:932 libspm.py:1792
 msgid "Resuming preparations of"
 msgstr ""
 
@@ -298,7 +298,7 @@ msgstr ""
 msgid "Circular dependencies in %s"
 msgstr ""
 
-#: libspm.py:941 libspm.py:1791
+#: libspm.py:941 libspm.py:1794
 msgid "Dependencies missing"
 msgstr "Липсващи зависимости"
 
@@ -318,7 +318,7 @@ msgstr "Копиране на"
 msgid "Linking"
 msgstr "Свързване на"
 
-#: libspm.py:966 libspm.py:1887
+#: libspm.py:966 libspm.py:1890
 msgid "Extracting"
 msgstr "Извличане на"
 
@@ -562,16 +562,16 @@ msgstr "Изпълняване на post_remove()"
 msgid "Removing metadata and SRCBUILD"
 msgstr ""
 
-#: libspm.py:1531 libspm.py:1809
+#: libspm.py:1531 libspm.py:1812
 msgid "Ignoring target"
 msgstr "Игориране на мишена"
 
-#: libspm.py:1539 libspm.py:1817 tools.py:172 tools.py:702 tools.py:785
+#: libspm.py:1539 libspm.py:1820 tools.py:172 tools.py:702 tools.py:785
 #: tools.py:849 tools.py:872 tools.py:894 tools.py:937
 msgid "Invalid target"
 msgstr "Невалидна мишена"
 
-#: libspm.py:1566 libspm.py:1844
+#: libspm.py:1566 libspm.py:1847
 msgid "Target is up-to-date"
 msgstr "Мишената е последната налична версия"
 
@@ -635,11 +635,11 @@ msgstr ""
 msgid "Overriding PURGE_PATHS to"
 msgstr ""
 
-#: libspm.py:1657 libspm.py:1848
+#: libspm.py:1657 libspm.py:1851
 msgid "Starting fetch of"
 msgstr ""
 
-#: libspm.py:1661 libspm.py:1852
+#: libspm.py:1661 libspm.py:1855
 msgid "Starting preparations of"
 msgstr ""
 
@@ -655,11 +655,11 @@ msgstr ""
 msgid "Starting install of"
 msgstr ""
 
-#: libspm.py:1677 libspm.py:1856
+#: libspm.py:1677 libspm.py:1859
 msgid "Starting merge of"
 msgstr ""
 
-#: libspm.py:1681 libspm.py:1860
+#: libspm.py:1681 libspm.py:1863
 msgid "Starting remove of"
 msgstr ""
 
@@ -667,115 +667,115 @@ msgstr ""
 msgid "Fetching binaries"
 msgstr ""
 
-#: libspm.py:1749
+#: libspm.py:1751
 msgid "Checking mirrors for"
 msgstr "Проверяване на огледалата за"
 
-#: libspm.py:1754
+#: libspm.py:1756
 msgid "At least one mirror is required"
 msgstr "Поне едно огледало е нужно"
 
-#: libspm.py:1773 tools.py:792
+#: libspm.py:1776 tools.py:792
 msgid "Binary tarball not available for"
 msgstr ""
 
-#: libspm.py:1782
+#: libspm.py:1785
 msgid "Dependencies"
 msgstr "Зависимости"
 
-#: libspm.py:1787
+#: libspm.py:1790
 msgid "Fetching dependencies"
 msgstr ""
 
-#: libspm.py:1874
+#: libspm.py:1877
 msgid "Not a supported URL"
 msgstr ""
 
-#: libspm.py:1876
+#: libspm.py:1879
 msgid "Analizing"
 msgstr ""
 
-#: libspm.py:1891
+#: libspm.py:1894
 msgid "Checking for build system and gethering metadata"
 msgstr ""
 
-#: libspm.py:1903
+#: libspm.py:1906
 msgid "Git repository detected"
 msgstr ""
 
-#: libspm.py:1907
+#: libspm.py:1910
 msgid "Subversion repository detected"
 msgstr ""
 
-#: libspm.py:1939
+#: libspm.py:1942
 msgid "Unreadable include"
 msgstr ""
 
-#: libspm.py:1942
+#: libspm.py:1945
 msgid "Probing for destination"
 msgstr ""
 
-#: libspm.py:1948
+#: libspm.py:1951
 msgid "Not destination variable detected"
 msgstr ""
 
-#: libspm.py:1951
+#: libspm.py:1954
 msgid "Destination variable detected"
 msgstr ""
 
-#: libspm.py:1965
+#: libspm.py:1968
 msgid "No known build system in use"
 msgstr ""
 
-#: libspm.py:1967
+#: libspm.py:1970
 msgid "Guess is"
 msgstr ""
 
-#: libspm.py:1969
+#: libspm.py:1972
 msgid "Checking if PGP signature is available"
 msgstr ""
 
-#: libspm.py:1981
+#: libspm.py:1984
 msgid "Trying to get the keyid from"
 msgstr ""
 
-#: libspm.py:1992
+#: libspm.py:1995
 msgid "Guessing maintainer via Git"
 msgstr ""
 
-#: libspm.py:1996
+#: libspm.py:1999
 msgid "Target maintainer"
 msgstr ""
 
-#: libspm.py:1997
+#: libspm.py:2000
 msgid "Target name"
 msgstr ""
 
-#: libspm.py:1998
+#: libspm.py:2001
 msgid "Target version"
 msgstr ""
 
-#: libspm.py:1999
+#: libspm.py:2002
 msgid "Target description"
 msgstr ""
 
-#: libspm.py:2000
+#: libspm.py:2003
 msgid "Target makedepends"
 msgstr ""
 
-#: libspm.py:2001
+#: libspm.py:2004
 msgid "Target sources"
 msgstr ""
 
-#: libspm.py:2002
+#: libspm.py:2005
 msgid "Target pgpkeys"
 msgstr ""
 
-#: libspm.py:2004
+#: libspm.py:2007
 msgid "Writing SRCBUILD"
 msgstr ""
 
-#: libspm.py:2054
+#: libspm.py:2057
 msgid "Match in"
 msgstr "Съвпадение в"
 

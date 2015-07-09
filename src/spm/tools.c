@@ -1650,7 +1650,7 @@ static char __pyx_k_sub_critical[] = "sub_critical";
 static char __pyx_k_urllib_error[] = "urllib.error";
 static char __pyx_k_version_info[] = "version_info";
 static char __pyx_k_which_parser[] = "which_parser";
-static char __pyx_k_1_8_2_e87ba3b[] = "1.8.2 (e87ba3b)";
+static char __pyx_k_1_8_2_58806b7[] = "1.8.2 (58806b7)";
 static char __pyx_k_Create_digest[] = "Create digest";
 static char __pyx_k_Digest___init[] = "Digest.__init__";
 static char __pyx_k_Disowned_file[] = "Disowned file";
@@ -1677,6 +1677,7 @@ static char __pyx_k_online_parser[] = "online_parser";
 static char __pyx_k_option_string[] = "option_string";
 static char __pyx_k_remote_search[] = "remote_search";
 static char __pyx_k_s_digest_json[] = "%s/digest.json";
+static char __pyx_k_s_s__s_tar_xz[] = "%s/%s_%s.tar.xz";
 static char __pyx_k_serve_forever[] = "serve_forever";
 static char __pyx_k_string_encode[] = "string_encode";
 static char __pyx_k_string_search[] = "string_search";
@@ -1698,7 +1699,6 @@ static char __pyx_k_local_metadata[] = "local_metadata";
 static char __pyx_k_local_rdepends[] = "local_rdepends";
 static char __pyx_k_remote_aliases[] = "remote_aliases";
 static char __pyx_k_s_mM_aintainer[] = "(?:\\s|^)# [mM]aintainer:";
-static char __pyx_k_s_s__s_tar_bz2[] = "%s/%s_%s.tar.bz2";
 static char __pyx_k_string_convert[] = "string_convert";
 static char __pyx_k_system_command[] = "system_command";
 static char __pyx_k_system_scanelf[] = "system_scanelf";
@@ -1802,12 +1802,12 @@ static char __pyx_k_Multiple_providers_for_s[] = "Multiple providers for %s";
 static char __pyx_k_Serving_caches_directory[] = "Serving caches directory";
 static char __pyx_k_SimpleHTTPRequestHandler[] = "SimpleHTTPRequestHandler";
 static char __pyx_k_application_x_executable[] = "application/x-executable";
+static char __pyx_k_s_tarballs_s_s__s_tar_xz[] = "%s/tarballs/%s/%s_%s.tar.xz";
 static char __pyx_k_upgrade_1_8_x_optdepends[] = "upgrade_1_8_x_optdepends";
 static char __pyx_k_Check_sanity_of_SRCBUILDs[] = " Check sanity of SRCBUILDs ";
 static char __pyx_k_Checking_for_conflicts_in[] = "Checking for conflicts in";
 static char __pyx_k_Interrupt_signal_received[] = "Interrupt signal received";
 static char __pyx_k_No_remote_alternative_for[] = "No remote alternative for";
-static char __pyx_k_s_tarballs_s_s__s_tar_bz2[] = "%s/tarballs/%s/%s_%s.tar.bz2";
 static char __pyx_k_Do_not_ignore_backup_files[] = "Do not ignore backup files";
 static char __pyx_k_Explicit_enable_argument_s[] = "Explicit --enable argument(s)";
 static char __pyx_k_File_in_PATH_overlaps_with[] = "File in PATH overlaps with";
@@ -1934,7 +1934,7 @@ static char __pyx_k_Starting_migration_procedure_1_7_2[] = "Starting migration p
 static char __pyx_k_Starting_migration_procedure_1_7_3[] = "Starting migration procedure 1_7_x_backup on";
 static PyObject *__pyx_n_s_;
 static PyObject *__pyx_kp_s_1;
-static PyObject *__pyx_kp_s_1_8_2_e87ba3b;
+static PyObject *__pyx_kp_s_1_8_2_58806b7;
 static PyObject *__pyx_kp_s_2;
 static PyObject *__pyx_kp_s_3;
 static PyObject *__pyx_kp_s_4;
@@ -2692,14 +2692,14 @@ static PyObject *__pyx_kp_s_s_s_2;
 static PyObject *__pyx_kp_s_s_s_3;
 static PyObject *__pyx_kp_s_s_s_4;
 static PyObject *__pyx_kp_s_s_s_5;
-static PyObject *__pyx_kp_s_s_s__s_tar_bz2;
+static PyObject *__pyx_kp_s_s_s__s_tar_xz;
 static PyObject *__pyx_kp_s_s_s_metadata;
 static PyObject *__pyx_kp_s_s_s_s;
 static PyObject *__pyx_kp_s_s_s_s_2;
 static PyObject *__pyx_kp_s_s_sig;
 static PyObject *__pyx_kp_s_s_sign;
 static PyObject *__pyx_kp_s_s_tarballs_s;
-static PyObject *__pyx_kp_s_s_tarballs_s_s__s_tar_bz2;
+static PyObject *__pyx_kp_s_s_tarballs_s_s__s_tar_xz;
 static PyObject *__pyx_kp_s_s_usr_s_bin;
 static PyObject *__pyx_n_s_sane;
 static PyObject *__pyx_n_s_sane_parser;
@@ -7388,7 +7388,7 @@ static PyObject *__pyx_pf_5tools_4Dist_2main(CYTHON_UNUSED PyObject *__pyx_self,
  *             target_basename = os.path.basename(os.path.normpath(target))
  * 
  *             target_version = database.remote_metadata(target, 'version')             # <<<<<<<<<<<<<<
- *             target_distfile = '%s/%s_%s.tar.bz2' % (self.directory, \
+ *             target_distfile = '%s/%s_%s.tar.xz' % (self.directory, \
  *                 target_basename, target_version)
  */
     __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_database); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 178; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -7429,7 +7429,7 @@ static PyObject *__pyx_pf_5tools_4Dist_2main(CYTHON_UNUSED PyObject *__pyx_self,
     /* "tools.py":179
  * 
  *             target_version = database.remote_metadata(target, 'version')
- *             target_distfile = '%s/%s_%s.tar.bz2' % (self.directory, \             # <<<<<<<<<<<<<<
+ *             target_distfile = '%s/%s_%s.tar.xz' % (self.directory, \             # <<<<<<<<<<<<<<
  *                 target_basename, target_version)
  *             target_sources = database.remote_metadata(target, 'sources')
  */
@@ -7438,7 +7438,7 @@ static PyObject *__pyx_pf_5tools_4Dist_2main(CYTHON_UNUSED PyObject *__pyx_self,
 
     /* "tools.py":180
  *             target_version = database.remote_metadata(target, 'version')
- *             target_distfile = '%s/%s_%s.tar.bz2' % (self.directory, \
+ *             target_distfile = '%s/%s_%s.tar.xz' % (self.directory, \
  *                 target_basename, target_version)             # <<<<<<<<<<<<<<
  *             target_sources = database.remote_metadata(target, 'sources')
  *             target_pgpkeys = database.remote_metadata(target, 'pgpkeys')
@@ -7458,18 +7458,18 @@ static PyObject *__pyx_pf_5tools_4Dist_2main(CYTHON_UNUSED PyObject *__pyx_self,
     /* "tools.py":179
  * 
  *             target_version = database.remote_metadata(target, 'version')
- *             target_distfile = '%s/%s_%s.tar.bz2' % (self.directory, \             # <<<<<<<<<<<<<<
+ *             target_distfile = '%s/%s_%s.tar.xz' % (self.directory, \             # <<<<<<<<<<<<<<
  *                 target_basename, target_version)
  *             target_sources = database.remote_metadata(target, 'sources')
  */
-    __pyx_t_1 = __Pyx_PyString_Format(__pyx_kp_s_s_s__s_tar_bz2, __pyx_t_12); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 179; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyString_Format(__pyx_kp_s_s_s__s_tar_xz, __pyx_t_12); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 179; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
     __Pyx_XDECREF_SET(__pyx_v_target_distfile, ((PyObject*)__pyx_t_1));
     __pyx_t_1 = 0;
 
     /* "tools.py":181
- *             target_distfile = '%s/%s_%s.tar.bz2' % (self.directory, \
+ *             target_distfile = '%s/%s_%s.tar.xz' % (self.directory, \
  *                 target_basename, target_version)
  *             target_sources = database.remote_metadata(target, 'sources')             # <<<<<<<<<<<<<<
  *             target_pgpkeys = database.remote_metadata(target, 'pgpkeys')
@@ -20597,7 +20597,7 @@ static PyObject *__pyx_pf_5tools_4Pack_2main(CYTHON_UNUSED PyObject *__pyx_self,
  *         for target in self.targets:
  *             if database.local_search(target):             # <<<<<<<<<<<<<<
  *                 target_version = database.local_metadata(target, 'version')
- *                 target_packfile = '%s/%s_%s.tar.bz2' % (self.directory, \
+ *                 target_packfile = '%s/%s_%s.tar.xz' % (self.directory, \
  */
     __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_database); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 622; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
@@ -20637,7 +20637,7 @@ static PyObject *__pyx_pf_5tools_4Pack_2main(CYTHON_UNUSED PyObject *__pyx_self,
  *         for target in self.targets:
  *             if database.local_search(target):
  *                 target_version = database.local_metadata(target, 'version')             # <<<<<<<<<<<<<<
- *                 target_packfile = '%s/%s_%s.tar.bz2' % (self.directory, \
+ *                 target_packfile = '%s/%s_%s.tar.xz' % (self.directory, \
  *                     os.path.basename(target), target_version)
  */
       __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_database); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 623; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -20678,7 +20678,7 @@ static PyObject *__pyx_pf_5tools_4Pack_2main(CYTHON_UNUSED PyObject *__pyx_self,
       /* "tools.py":624
  *             if database.local_search(target):
  *                 target_version = database.local_metadata(target, 'version')
- *                 target_packfile = '%s/%s_%s.tar.bz2' % (self.directory, \             # <<<<<<<<<<<<<<
+ *                 target_packfile = '%s/%s_%s.tar.xz' % (self.directory, \             # <<<<<<<<<<<<<<
  *                     os.path.basename(target), target_version)
  *                 target_depends = '%s.depends' % target_packfile
  */
@@ -20687,7 +20687,7 @@ static PyObject *__pyx_pf_5tools_4Pack_2main(CYTHON_UNUSED PyObject *__pyx_self,
 
       /* "tools.py":625
  *                 target_version = database.local_metadata(target, 'version')
- *                 target_packfile = '%s/%s_%s.tar.bz2' % (self.directory, \
+ *                 target_packfile = '%s/%s_%s.tar.xz' % (self.directory, \
  *                     os.path.basename(target), target_version)             # <<<<<<<<<<<<<<
  *                 target_depends = '%s.depends' % target_packfile
  * 
@@ -20729,7 +20729,7 @@ static PyObject *__pyx_pf_5tools_4Pack_2main(CYTHON_UNUSED PyObject *__pyx_self,
       /* "tools.py":624
  *             if database.local_search(target):
  *                 target_version = database.local_metadata(target, 'version')
- *                 target_packfile = '%s/%s_%s.tar.bz2' % (self.directory, \             # <<<<<<<<<<<<<<
+ *                 target_packfile = '%s/%s_%s.tar.xz' % (self.directory, \             # <<<<<<<<<<<<<<
  *                     os.path.basename(target), target_version)
  *                 target_depends = '%s.depends' % target_packfile
  */
@@ -20744,14 +20744,14 @@ static PyObject *__pyx_pf_5tools_4Pack_2main(CYTHON_UNUSED PyObject *__pyx_self,
       __Pyx_GIVEREF(__pyx_v_target_version);
       __pyx_t_1 = 0;
       __pyx_t_7 = 0;
-      __pyx_t_7 = __Pyx_PyString_Format(__pyx_kp_s_s_s__s_tar_bz2, __pyx_t_5); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 624; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_7 = __Pyx_PyString_Format(__pyx_kp_s_s_s__s_tar_xz, __pyx_t_5); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 624; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_XDECREF_SET(__pyx_v_target_packfile, ((PyObject*)__pyx_t_7));
       __pyx_t_7 = 0;
 
       /* "tools.py":626
- *                 target_packfile = '%s/%s_%s.tar.bz2' % (self.directory, \
+ *                 target_packfile = '%s/%s_%s.tar.xz' % (self.directory, \
  *                     os.path.basename(target), target_version)
  *                 target_depends = '%s.depends' % target_packfile             # <<<<<<<<<<<<<<
  * 
@@ -25402,7 +25402,7 @@ static PyObject *__pyx_pf_5tools_6Upload_2main(CYTHON_UNUSED PyObject *__pyx_sel
  *                     message.sub_critical(_('Invalid target'), target)
  *                     sys.exit(2)             # <<<<<<<<<<<<<<
  *                 version = database.remote_metadata(target, 'version')
- *                 tarball = '%s/tarballs/%s/%s_%s.tar.bz2' % (libspm.CACHE_DIR, arch, target, version)
+ *                 tarball = '%s/tarballs/%s/%s_%s.tar.xz' % (libspm.CACHE_DIR, arch, target, version)
  */
         __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 786; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
         __Pyx_GOTREF(__pyx_t_7);
@@ -25421,7 +25421,7 @@ static PyObject *__pyx_pf_5tools_6Upload_2main(CYTHON_UNUSED PyObject *__pyx_sel
  *                     message.sub_critical(_('Invalid target'), target)
  *                     sys.exit(2)
  *                 version = database.remote_metadata(target, 'version')             # <<<<<<<<<<<<<<
- *                 tarball = '%s/tarballs/%s/%s_%s.tar.bz2' % (libspm.CACHE_DIR, arch, target, version)
+ *                 tarball = '%s/tarballs/%s/%s_%s.tar.xz' % (libspm.CACHE_DIR, arch, target, version)
  *                 depends = '%s.depends' % tarball
  */
       __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_database); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 787; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
@@ -25462,7 +25462,7 @@ static PyObject *__pyx_pf_5tools_6Upload_2main(CYTHON_UNUSED PyObject *__pyx_sel
       /* "tools.py":788
  *                     sys.exit(2)
  *                 version = database.remote_metadata(target, 'version')
- *                 tarball = '%s/tarballs/%s/%s_%s.tar.bz2' % (libspm.CACHE_DIR, arch, target, version)             # <<<<<<<<<<<<<<
+ *                 tarball = '%s/tarballs/%s/%s_%s.tar.xz' % (libspm.CACHE_DIR, arch, target, version)             # <<<<<<<<<<<<<<
  *                 depends = '%s.depends' % tarball
  *                 signature = '%s.sig' % tarball
  */
@@ -25485,7 +25485,7 @@ static PyObject *__pyx_pf_5tools_6Upload_2main(CYTHON_UNUSED PyObject *__pyx_sel
       PyTuple_SET_ITEM(__pyx_t_7, 3, __pyx_v_version);
       __Pyx_GIVEREF(__pyx_v_version);
       __pyx_t_12 = 0;
-      __pyx_t_12 = __Pyx_PyString_Format(__pyx_kp_s_s_tarballs_s_s__s_tar_bz2, __pyx_t_7); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 788; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
+      __pyx_t_12 = __Pyx_PyString_Format(__pyx_kp_s_s_tarballs_s_s__s_tar_xz, __pyx_t_7); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 788; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
       __Pyx_GOTREF(__pyx_t_12);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_XDECREF_SET(__pyx_v_tarball, ((PyObject*)__pyx_t_12));
@@ -25493,7 +25493,7 @@ static PyObject *__pyx_pf_5tools_6Upload_2main(CYTHON_UNUSED PyObject *__pyx_sel
 
       /* "tools.py":789
  *                 version = database.remote_metadata(target, 'version')
- *                 tarball = '%s/tarballs/%s/%s_%s.tar.bz2' % (libspm.CACHE_DIR, arch, target, version)
+ *                 tarball = '%s/tarballs/%s/%s_%s.tar.xz' % (libspm.CACHE_DIR, arch, target, version)
  *                 depends = '%s.depends' % tarball             # <<<<<<<<<<<<<<
  *                 signature = '%s.sig' % tarball
  *                 if not os.path.isfile(tarball):
@@ -25504,7 +25504,7 @@ static PyObject *__pyx_pf_5tools_6Upload_2main(CYTHON_UNUSED PyObject *__pyx_sel
       __pyx_t_12 = 0;
 
       /* "tools.py":790
- *                 tarball = '%s/tarballs/%s/%s_%s.tar.bz2' % (libspm.CACHE_DIR, arch, target, version)
+ *                 tarball = '%s/tarballs/%s/%s_%s.tar.xz' % (libspm.CACHE_DIR, arch, target, version)
  *                 depends = '%s.depends' % tarball
  *                 signature = '%s.sig' % tarball             # <<<<<<<<<<<<<<
  *                 if not os.path.isfile(tarball):
@@ -31870,7 +31870,7 @@ static PyObject *__pyx_pf_5tools_8Portable_2main(CYTHON_UNUSED PyObject *__pyx_s
  *         for target in self.targets:
  *             if database.local_search(target):             # <<<<<<<<<<<<<<
  *                 target_version = database.local_metadata(target, 'version')
- *                 target_packfile = '%s/%s_%s.tar.bz2' % (self.directory, \
+ *                 target_packfile = '%s/%s_%s.tar.xz' % (self.directory, \
  */
     __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_database); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 983; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
@@ -31910,7 +31910,7 @@ static PyObject *__pyx_pf_5tools_8Portable_2main(CYTHON_UNUSED PyObject *__pyx_s
  *         for target in self.targets:
  *             if database.local_search(target):
  *                 target_version = database.local_metadata(target, 'version')             # <<<<<<<<<<<<<<
- *                 target_packfile = '%s/%s_%s.tar.bz2' % (self.directory, \
+ *                 target_packfile = '%s/%s_%s.tar.xz' % (self.directory, \
  *                     os.path.basename(target), target_version)
  */
       __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_database); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 984; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -31951,7 +31951,7 @@ static PyObject *__pyx_pf_5tools_8Portable_2main(CYTHON_UNUSED PyObject *__pyx_s
       /* "tools.py":985
  *             if database.local_search(target):
  *                 target_version = database.local_metadata(target, 'version')
- *                 target_packfile = '%s/%s_%s.tar.bz2' % (self.directory, \             # <<<<<<<<<<<<<<
+ *                 target_packfile = '%s/%s_%s.tar.xz' % (self.directory, \             # <<<<<<<<<<<<<<
  *                     os.path.basename(target), target_version)
  * 
  */
@@ -31960,7 +31960,7 @@ static PyObject *__pyx_pf_5tools_8Portable_2main(CYTHON_UNUSED PyObject *__pyx_s
 
       /* "tools.py":986
  *                 target_version = database.local_metadata(target, 'version')
- *                 target_packfile = '%s/%s_%s.tar.bz2' % (self.directory, \
+ *                 target_packfile = '%s/%s_%s.tar.xz' % (self.directory, \
  *                     os.path.basename(target), target_version)             # <<<<<<<<<<<<<<
  * 
  *                 content = []
@@ -32002,7 +32002,7 @@ static PyObject *__pyx_pf_5tools_8Portable_2main(CYTHON_UNUSED PyObject *__pyx_s
       /* "tools.py":985
  *             if database.local_search(target):
  *                 target_version = database.local_metadata(target, 'version')
- *                 target_packfile = '%s/%s_%s.tar.bz2' % (self.directory, \             # <<<<<<<<<<<<<<
+ *                 target_packfile = '%s/%s_%s.tar.xz' % (self.directory, \             # <<<<<<<<<<<<<<
  *                     os.path.basename(target), target_version)
  * 
  */
@@ -32017,7 +32017,7 @@ static PyObject *__pyx_pf_5tools_8Portable_2main(CYTHON_UNUSED PyObject *__pyx_s
       __Pyx_GIVEREF(__pyx_v_target_version);
       __pyx_t_1 = 0;
       __pyx_t_7 = 0;
-      __pyx_t_7 = __Pyx_PyString_Format(__pyx_kp_s_s_s__s_tar_bz2, __pyx_t_5); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 985; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_7 = __Pyx_PyString_Format(__pyx_kp_s_s_s__s_tar_xz, __pyx_t_5); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 985; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_XDECREF_SET(__pyx_v_target_packfile, ((PyObject*)__pyx_t_7));
@@ -34044,7 +34044,7 @@ static struct PyModuleDef __pyx_moduledef = {
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_, __pyx_k_, sizeof(__pyx_k_), 0, 0, 1, 1},
   {&__pyx_kp_s_1, __pyx_k_1, sizeof(__pyx_k_1), 0, 0, 1, 0},
-  {&__pyx_kp_s_1_8_2_e87ba3b, __pyx_k_1_8_2_e87ba3b, sizeof(__pyx_k_1_8_2_e87ba3b), 0, 0, 1, 0},
+  {&__pyx_kp_s_1_8_2_58806b7, __pyx_k_1_8_2_58806b7, sizeof(__pyx_k_1_8_2_58806b7), 0, 0, 1, 0},
   {&__pyx_kp_s_2, __pyx_k_2, sizeof(__pyx_k_2), 0, 0, 1, 0},
   {&__pyx_kp_s_3, __pyx_k_3, sizeof(__pyx_k_3), 0, 0, 1, 0},
   {&__pyx_kp_s_4, __pyx_k_4, sizeof(__pyx_k_4), 0, 0, 1, 0},
@@ -34802,14 +34802,14 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_s_s_3, __pyx_k_s_s_3, sizeof(__pyx_k_s_s_3), 0, 0, 1, 0},
   {&__pyx_kp_s_s_s_4, __pyx_k_s_s_4, sizeof(__pyx_k_s_s_4), 0, 0, 1, 0},
   {&__pyx_kp_s_s_s_5, __pyx_k_s_s_5, sizeof(__pyx_k_s_s_5), 0, 0, 1, 0},
-  {&__pyx_kp_s_s_s__s_tar_bz2, __pyx_k_s_s__s_tar_bz2, sizeof(__pyx_k_s_s__s_tar_bz2), 0, 0, 1, 0},
+  {&__pyx_kp_s_s_s__s_tar_xz, __pyx_k_s_s__s_tar_xz, sizeof(__pyx_k_s_s__s_tar_xz), 0, 0, 1, 0},
   {&__pyx_kp_s_s_s_metadata, __pyx_k_s_s_metadata, sizeof(__pyx_k_s_s_metadata), 0, 0, 1, 0},
   {&__pyx_kp_s_s_s_s, __pyx_k_s_s_s, sizeof(__pyx_k_s_s_s), 0, 0, 1, 0},
   {&__pyx_kp_s_s_s_s_2, __pyx_k_s_s_s_2, sizeof(__pyx_k_s_s_s_2), 0, 0, 1, 0},
   {&__pyx_kp_s_s_sig, __pyx_k_s_sig, sizeof(__pyx_k_s_sig), 0, 0, 1, 0},
   {&__pyx_kp_s_s_sign, __pyx_k_s_sign, sizeof(__pyx_k_s_sign), 0, 0, 1, 0},
   {&__pyx_kp_s_s_tarballs_s, __pyx_k_s_tarballs_s, sizeof(__pyx_k_s_tarballs_s), 0, 0, 1, 0},
-  {&__pyx_kp_s_s_tarballs_s_s__s_tar_bz2, __pyx_k_s_tarballs_s_s__s_tar_bz2, sizeof(__pyx_k_s_tarballs_s_s__s_tar_bz2), 0, 0, 1, 0},
+  {&__pyx_kp_s_s_tarballs_s_s__s_tar_xz, __pyx_k_s_tarballs_s_s__s_tar_xz, sizeof(__pyx_k_s_tarballs_s_s__s_tar_xz), 0, 0, 1, 0},
   {&__pyx_kp_s_s_usr_s_bin, __pyx_k_s_usr_s_bin, sizeof(__pyx_k_s_usr_s_bin), 0, 0, 1, 0},
   {&__pyx_n_s_sane, __pyx_k_sane, sizeof(__pyx_k_sane), 0, 0, 1, 1},
   {&__pyx_n_s_sane_parser, __pyx_k_sane_parser, sizeof(__pyx_k_sane_parser), 0, 0, 1, 1},
@@ -36402,7 +36402,7 @@ static int __Pyx_InitCachedConstants(void) {
  *                     message.sub_critical(_('Invalid target'), target)
  *                     sys.exit(2)             # <<<<<<<<<<<<<<
  *                 version = database.remote_metadata(target, 'version')
- *                 tarball = '%s/tarballs/%s/%s_%s.tar.bz2' % (libspm.CACHE_DIR, arch, target, version)
+ *                 tarball = '%s/tarballs/%s/%s_%s.tar.xz' % (libspm.CACHE_DIR, arch, target, version)
  */
   __pyx_tuple__142 = PyTuple_Pack(1, __pyx_int_2); if (unlikely(!__pyx_tuple__142)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 786; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__142);
@@ -40627,7 +40627,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  * database = libspm.database
  * misc.GPG_DIR = libspm.GPG_DIR             # <<<<<<<<<<<<<<
  * 
- * app_version = "1.8.2 (e87ba3b)"
+ * app_version = "1.8.2 (58806b7)"
  */
   __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_libspm); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 24; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -40643,14 +40643,14 @@ PyMODINIT_FUNC PyInit_tools(void)
   /* "tools.py":26
  * misc.GPG_DIR = libspm.GPG_DIR
  * 
- * app_version = "1.8.2 (e87ba3b)"             # <<<<<<<<<<<<<<
+ * app_version = "1.8.2 (58806b7)"             # <<<<<<<<<<<<<<
  * 
  * class Check(object):
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_8_2_e87ba3b) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_8_2_58806b7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":28
- * app_version = "1.8.2 (e87ba3b)"
+ * app_version = "1.8.2 (58806b7)"
  * 
  * class Check(object):             # <<<<<<<<<<<<<<
  *     ''' Check runtime dependencies of local targets '''
@@ -40692,7 +40692,7 @@ PyMODINIT_FUNC PyInit_tools(void)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
   /* "tools.py":28
- * app_version = "1.8.2 (e87ba3b)"
+ * app_version = "1.8.2 (58806b7)"
  * 
  * class Check(object):             # <<<<<<<<<<<<<<
  *     ''' Check runtime dependencies of local targets '''

@@ -23,7 +23,7 @@ misc = libspm.misc
 database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.8.2 (e87ba3b)"
+app_version = "1.8.2 (58806b7)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -176,7 +176,7 @@ class Dist(object):
             target_basename = os.path.basename(os.path.normpath(target))
 
             target_version = database.remote_metadata(target, 'version')
-            target_distfile = '%s/%s_%s.tar.bz2' % (self.directory, \
+            target_distfile = '%s/%s_%s.tar.xz' % (self.directory, \
                 target_basename, target_version)
             target_sources = database.remote_metadata(target, 'sources')
             target_pgpkeys = database.remote_metadata(target, 'pgpkeys')
@@ -621,7 +621,7 @@ class Pack(object):
         for target in self.targets:
             if database.local_search(target):
                 target_version = database.local_metadata(target, 'version')
-                target_packfile = '%s/%s_%s.tar.bz2' % (self.directory, \
+                target_packfile = '%s/%s_%s.tar.xz' % (self.directory, \
                     os.path.basename(target), target_version)
                 target_depends = '%s.depends' % target_packfile
 
@@ -785,7 +785,7 @@ class Upload(object):
                     message.sub_critical(_('Invalid target'), target)
                     sys.exit(2)
                 version = database.remote_metadata(target, 'version')
-                tarball = '%s/tarballs/%s/%s_%s.tar.bz2' % (libspm.CACHE_DIR, arch, target, version)
+                tarball = '%s/tarballs/%s/%s_%s.tar.xz' % (libspm.CACHE_DIR, arch, target, version)
                 depends = '%s.depends' % tarball
                 signature = '%s.sig' % tarball
                 if not os.path.isfile(tarball):
@@ -982,7 +982,7 @@ class Portable(object):
         for target in self.targets:
             if database.local_search(target):
                 target_version = database.local_metadata(target, 'version')
-                target_packfile = '%s/%s_%s.tar.bz2' % (self.directory, \
+                target_packfile = '%s/%s_%s.tar.xz' % (self.directory, \
                     os.path.basename(target), target_version)
 
                 content = []

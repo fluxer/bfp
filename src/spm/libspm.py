@@ -1559,7 +1559,7 @@ class Source(object):
             self.target_metadata = 'var/local/spm/%s/metadata.json' % self.target_name
             self.target_srcbuild = 'var/local/spm/%s/SRCBUILD' % self.target_name
             self.sources_dir = '%s/sources/%s' % (CACHE_DIR, self.target_name)
-            self.target_tarball = '%s/tarballs/%s/%s_%s.tar.bz2' % (CACHE_DIR, \
+            self.target_tarball = '%s/tarballs/%s/%s_%s.tar.xz' % (CACHE_DIR, \
                 os.uname()[4], self.target_name, self.target_version)
 
             if database.local_uptodate(self.target) and self.do_update:
@@ -1743,31 +1743,34 @@ class Binary(Source):
 
     def fetch(self):
         message.sub_info(_('Fetching binaries'))
-        src_base = os.path.basename(self.target_tarball)
-        local_file = self.target_tarball
+        # TODO: support only xz on with next minor release
+        for ext in ('xz', 'bz2'):
+            src_base = '%s.%s' % (misc.file_name(self.target_tarball), ext)
+            local_file = self.target_tarball
 
-        message.sub_debug(_('Checking mirrors for'), src_base)
-        found = False
-        # usually that would not happend (see the mirrors config parser) but
-        # since that's a module one can temper with MIRRORS
-        if len(MIRRORS) < 1:
-            message.sub_critical(_('At least one mirror is required'))
-            sys.exit(2)
-        sprefix = 'tarballs/%s/' % os.uname()[4]
-        surl = '%s/%s/%s' % (MIRRORS[0], sprefix, src_base)
-        sdepends = '%s.depends' % local_file
-        if misc.url_ping(surl, MIRRORS, sprefix):
-            found = True
-            message.sub_debug(_('Fetching'), surl)
-            misc.fetch(surl, local_file, MIRRORS, sprefix)
-            misc.fetch('%s.depends' % surl, sdepends, MIRRORS, sprefix)
-            if VERIFY:
-                sigurl = '%s.sig' % surl
-                sigfile = '%s.sig' % local_file
-                message.sub_debug(_('Fetching'), sigurl)
-                misc.fetch(sigurl, sigfile, MIRRORS, sprefix)
-                message.sub_debug(_('Verifying'), local_file)
-                misc.gpg_verify(local_file)
+            message.sub_debug(_('Checking mirrors for'), src_base)
+            found = False
+            # usually that would not happend (see the mirrors config parser) but
+            # since that's a module one can temper with MIRRORS
+            if len(MIRRORS) < 1:
+                message.sub_critical(_('At least one mirror is required'))
+                sys.exit(2)
+            sprefix = 'tarballs/%s/' % os.uname()[4]
+            surl = '%s/%s/%s' % (MIRRORS[0], sprefix, src_base)
+            sdepends = '%s.depends' % local_file
+            if misc.url_ping(surl, MIRRORS, sprefix):
+                found = True
+                message.sub_debug(_('Fetching'), surl)
+                misc.fetch(surl, local_file, MIRRORS, sprefix)
+                misc.fetch('%s.depends' % surl, sdepends, MIRRORS, sprefix)
+                if VERIFY:
+                    sigurl = '%s.sig' % surl
+                    sigfile = '%s.sig' % local_file
+                    message.sub_debug(_('Fetching'), sigurl)
+                    misc.fetch(sigurl, sigfile, MIRRORS, sprefix)
+                    message.sub_debug(_('Verifying'), local_file)
+                    misc.gpg_verify(local_file)
+                break
 
         if not found:
             message.sub_critical(_('Binary tarball not available for'), self.target_name)
@@ -1837,7 +1840,7 @@ class Binary(Source):
             self.target_metadata = 'var/local/spm/%s/metadata.json' % self.target_name
             self.target_srcbuild = 'var/local/spm/%s/SRCBUILD' % self.target_name
             self.sources_dir = '%s/sources/%s' % (CACHE_DIR, self.target_name)
-            self.target_tarball = '%s/tarballs/%s/%s_%s.tar.bz2' % (CACHE_DIR, \
+            self.target_tarball = '%s/tarballs/%s/%s_%s.tar.xz' % (CACHE_DIR, \
                 os.uname()[4], self.target_name, self.target_version)
 
             if database.local_uptodate(self.target) and self.do_update:
