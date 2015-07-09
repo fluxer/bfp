@@ -872,7 +872,14 @@ class Misc(object):
 
         content = []
         smime = self.file_mime(sfile, True)
-        if tarfile.is_tarfile(sfile):
+        if smime == 'application/x-xz' or smime == 'application/x-lzma':
+            tar = self.whereis('bsdtar', False) or self.whereis('tar')
+            arguments = '-tf'
+            if tar.endswith('/bsdtar'):
+                arguments = '-tpf'
+            for line in self.system_communicate((tar, arguments, sfile)).splitlines():
+                content.append(line.lstrip('./'))
+        elif tarfile.is_tarfile(sfile):
             tfile = tarfile.open(sfile)
             try:
                 for i in tfile:
@@ -884,13 +891,6 @@ class Misc(object):
             zfile = zipfile.ZipFile(sfile)
             content = zfile.namelist()
             zfile.close()
-        elif smime == 'application/x-xz' or smime == 'application/x-lzma':
-            tar = self.whereis('bsdtar', False) or self.whereis('tar')
-            arguments = '-tf'
-            if tar.endswith('/bsdtar'):
-                arguments = '-tpf'
-            for line in self.system_communicate((tar, arguments, sfile)).splitlines():
-                content.append(line.lstrip('./'))
         elif smime == 'application/x-gzip':
             content = self.file_name(sfile).split()
         elif smime == 'application/x-bzip2':
