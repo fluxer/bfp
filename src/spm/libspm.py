@@ -1743,18 +1743,18 @@ class Binary(Source):
 
     def fetch(self):
         message.sub_info(_('Fetching binaries'))
-        # TODO: support only xz on with next minor release
+        # usually that would not happend (see the mirrors config parser) but
+        # since that's a module one can temper with MIRRORS
+        if len(MIRRORS) < 1:
+            message.sub_critical(_('At least one mirror is required'))
+            sys.exit(2)
+        # TODO: support only xz with next minor release
         for ext in ('xz', 'bz2'):
             src_base = '%s.%s' % (misc.file_name(self.target_tarball), ext)
             local_file = self.target_tarball
 
             message.sub_debug(_('Checking mirrors for'), src_base)
             found = False
-            # usually that would not happend (see the mirrors config parser) but
-            # since that's a module one can temper with MIRRORS
-            if len(MIRRORS) < 1:
-                message.sub_critical(_('At least one mirror is required'))
-                sys.exit(2)
             sprefix = 'tarballs/%s/' % os.uname()[4]
             surl = '%s/%s/%s' % (MIRRORS[0], sprefix, src_base)
             sdepends = '%s.depends' % local_file

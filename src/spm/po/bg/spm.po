@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-09 13:02+0300\n"
+"POT-Creation-Date: 2015-07-09 13:04+0300\n"
 "PO-Revision-Date: 2015-07-02 08:06+0200\n"
 "Last-Translator: \n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -667,13 +667,13 @@ msgstr ""
 msgid "Fetching binaries"
 msgstr ""
 
-#: libspm.py:1751
-msgid "Checking mirrors for"
-msgstr "Проверяване на огледалата за"
-
-#: libspm.py:1756
+#: libspm.py:1749
 msgid "At least one mirror is required"
 msgstr "Поне едно огледало е нужно"
+
+#: libspm.py:1756
+msgid "Checking mirrors for"
+msgstr "Проверяване на огледалата за"
 
 #: libspm.py:1776 tools.py:792
 msgid "Binary tarball not available for"
