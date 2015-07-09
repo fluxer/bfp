@@ -23,7 +23,7 @@ def create_remote(name, version, release, description, \
     srcbuild.write('\nbackup=(%s)' % backup)
     srcbuild.close()
 
-def benchmark():
+def benchmark(t):
     # do not setup database notifier to avoid hitting the system limit
     # which is usually ~8200
     database.NOTIFY = False
@@ -35,14 +35,14 @@ def benchmark():
         # print('preparing for benchmark...')
         for r in range(5000):
             create_remote(r, r, r, r, r, r, r, r, r, r)
-        # print('running benchmark...')
+        # print('running benchmark %d...' % t)
         print(timeit.timeit(database.remote_all, number=1))
         database.REMOTE_CACHE = {}
     finally:
         # print('cleaning up ...')
         misc.dir_remove(database.ROOT_DIR)
 
-for r in range(3):
+for t in range(3):
     # best of three
-    benchmark()
+    benchmark(t)
 
