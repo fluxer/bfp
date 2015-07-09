@@ -258,7 +258,9 @@ try:
     etc_dir = '%s/etc' % ARGS.tmp
     misc.dir_create(etc_dir)
     # to surpress a warning
-    misc.file_touch('%s/%s' % (etc_dir, 'ld.so.conf'))
+    ldconf = '%s/ld.so.conf' % etc_dir
+    if not os.path.isfile(ldconf
+        misc.file_write(ldconf, '')
     misc.system_command((misc.whereis('ldconfig'), '-r', ARGS.tmp))
 
     message.sub_info('Creating optimized image')

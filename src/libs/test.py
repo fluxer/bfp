@@ -43,7 +43,7 @@ class TestSuite(unittest.TestCase):
         data['size'] = size
         data['footprint'] = footprint
         misc.json_write('%s/metadata.json' % sdir, data)
-        misc.file_touch('%s/SRCBUILD' % sdir)
+        misc.file_write('%s/SRCBUILD' % sdir, '')
 
     def setUp(self):
         database.CACHE_DIR = '%s/var/cache/spm' % database.ROOT_DIR

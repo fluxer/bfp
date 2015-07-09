@@ -178,14 +178,6 @@ class Misc(object):
 
         return os.path.splitext(sfile)[1].lstrip('.')
 
-    def file_touch(self, sfile):
-        ''' Touch a file, making sure it exists '''
-        if self.python2:
-            self.typecheck(sfile, (types.StringTypes))
-
-        if not os.path.isfile(sfile):
-            self.file_write(sfile, '')
-
     def file_read(self, sfile):
         ''' Get file content '''
         if self.python2:
