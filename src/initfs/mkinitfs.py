@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast
 
-app_version = "1.8.2 (2d48c4b)"
+app_version = "1.8.2 (8552bb1)"
 
 tmpdir = None
 keep = False
@@ -216,7 +216,7 @@ try:
         if not module:
             continue
         found = False
-        for line in misc.file_readlines('%s/modules.dep' % modsdir):
+        for line in misc.file_read('%s/modules.dep' % modsdir).splitlines():
             base = line.split(':')[0]
             depends = line.split(':')[1].split()
             if '/%s.ko' % module in base \
@@ -226,7 +226,7 @@ try:
                 for dep in depends:
                     copy_item('%s/%s' % (modsdir, dep.strip()))
         if not found:
-            for line in misc.file_readlines('%s/modules.builtin' % modsdir):
+            for line in misc.file_read('%s/modules.builtin' % modsdir).splitlines():
                 if '/%s.ko' % module in line \
                     or '/%s.ko' % module.replace('_', '-') in line:
                     message.sub_debug('Module is builtin', module)

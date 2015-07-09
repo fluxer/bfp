@@ -23,7 +23,7 @@ misc = libspm.misc
 database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.8.2 (2d48c4b)"
+app_version = "1.8.2 (8552bb1)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -130,7 +130,7 @@ class Check(object):
             if self.do_adjust:
                 message.sub_debug(_('Adjusting target dependencies'))
                 content = misc.file_read(target_metadata)
-                for line in misc.file_readlines(target_metadata):
+                for line in misc.file_read(target_metadata).splitlines():
                     line = misc.string_encode(line)
                     if line.startswith('depends='):
                         content = content.replace(line, \
@@ -544,8 +544,8 @@ class Merge(object):
         if action == '1':
             print('\n' + '*' * 80)
             for line in list(difflib.Differ().compare( \
-                misc.file_readlines(backfile), \
-                misc.file_readlines(origfile))):
+                misc.file_read(backfile).splitlines(), \
+                misc.file_readl(origfile).splitlines())):
                 print(line)
             print('*' * 80 + '\n')
             self.merge(origfile, backfile)
@@ -854,8 +854,8 @@ class Upgrade(object):
                 'description': ' unknown',
                 'depends': [],
                 'size': 0}
-        data['footprint'] = misc.file_readlines(footprint)
-        for line in misc.file_readlines(metadata):
+        data['footprint'] = misc.file_read(footprint).splitlines()
+        for line in misc.file_read(metadata).splitlines():
             line = misc.string_encode(line)
             if line.startswith(('version=', 'release=', \
                 'description=', 'depends=', 'size=')):

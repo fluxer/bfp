@@ -194,13 +194,6 @@ class Misc(object):
         with open(sfile, 'rb', self.BUFFER) as f:
             return self.string_encode(f.read())
 
-    def file_readlines(self, sfile):
-        ''' Get file content, split by new line, as list '''
-        if self.python2:
-            self.typecheck(sfile, (types.StringTypes))
-
-        return self.file_read(sfile).splitlines()
-
     def file_readsmart(self, sfile):
         ''' Get file content, split by new line, as list ignoring blank and comments '''
         if self.python2:
@@ -907,9 +900,9 @@ class Misc(object):
             for line in self.system_communicate((tar, arguments, sfile)).splitlines():
                 content.append(line.lstrip('./'))
         elif smime == 'application/x-gzip':
-            content = self.file_name(sfile, True).split()
+            content = self.file_name(sfile).split()
         elif smime == 'application/x-bzip2':
-            content = self.file_name(sfile, True).split()
+            content = self.file_name(sfile).split()
         return content
 
     def system_communicate(self, command, bshell=False, cwd=None, sinput=None):
