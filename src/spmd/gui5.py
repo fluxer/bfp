@@ -198,7 +198,7 @@ def RefreshTargets(targets=None):
 def RefreshRepos():
     ui.ReposTable.clearContents()
     irow = 0
-    for line in misc.file_readlines(libspm.REPOSITORIES_CONF):
+    for line in misc.file_read(libspm.REPOSITORIES_CONF).splitlines():
         line = str(line)
         enable = False
         if os.path.exists(line):
@@ -223,7 +223,7 @@ def RefreshRepos():
 def RefreshMirrors():
     ui.MirrorsTable.clearContents()
     irow = 0
-    for line in misc.file_readlines(libspm.MIRRORS_CONF):
+    for line in misc.file_read(libspm.MIRRORS_CONF).splitlines():
         line = str(line)
         enable = False
         if os.path.exists(line):

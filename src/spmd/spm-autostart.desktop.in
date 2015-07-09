@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Software Center
-Version=@VERSION@
+Version=1
 TryExec=@BINDIR@/spm-gui --tray
 Exec=@BINDIR@/spm-gui --tray
 Comment=Software management tool

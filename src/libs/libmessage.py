@@ -63,6 +63,7 @@ class Message(object):
         msgcolor = ''
         markcolor = ''
         markmsg = ''
+        marklog = ''
         if status == syslog.LOG_DEBUG:
             if not self.DEBUG:
                 return
@@ -86,13 +87,14 @@ class Message(object):
         basemsg = '%s%s%s %s' % (msgcolor, prefix, self.cnormal, msg)
         if marker is not None:
             markmsg = ': %s%s%s' % (markcolor, marker, self.cnormal)
+            marklog = ': %s' % marker
         printer.write('%s%s\n' % (basemsg, markmsg))
         if self.LOG:
             if isinstance(msg, (list, tuple, bool)):
                 msg = str(msg)
             if not isinstance(msg, str):
                 msg = msg.encode('utf-8')
-            syslog.syslog(status, msg)
+            syslog.syslog(status, '%s%s' % (msg, marklog))
 
     def info(self, msg, marker=None):
         ''' Print message with information status '''

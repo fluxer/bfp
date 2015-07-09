@@ -35,7 +35,7 @@ def dbus_call(method, args=None):
     else:
         message.sub_critical(str(bus.lastError().message()))
 
-app_version = "1.8.2 (9c4041a)"
+app_version = "1.8.2 (7f11438)"
 
 try:
     parser = argparse.ArgumentParser(prog='spmctl', \
