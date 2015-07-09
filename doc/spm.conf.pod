@@ -158,9 +158,9 @@ Default: True
 Set wheather to split debug information from DWARF files so that even when
 binaries and libraries are stripped software debugging is possible. Do note
 that debug symbols are usually quite space consuming thus on machines with
-limited storage you may want to set that to False.
+limited storage you may want to keep that set to False.
 
-Default: True
+Default: False
 
 =head2 STRIP_BINARIES
 
