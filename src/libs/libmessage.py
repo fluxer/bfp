@@ -56,9 +56,37 @@ class Message(object):
             self.cdebug = ''
             self.cnormal = ''
             sys.stdout = Unbuffered(sys.stdout)
+            sys.stderr = Unbuffered(sys.stderr)
 
-    def log_message(self, status, msg):
-        ''' Log message to system log '''
+    def base(self, prefix, msg, marker, status, printer=sys.stdout):
+        ''' Base printer '''
+        msgcolor = ''
+        markcolor = ''
+        markmsg = ''
+        if status == syslog.LOG_DEBUG:
+            if not self.DEBUG:
+                return
+            msgcolor = self.cdebug
+            markcolor = self.cdebug
+        elif status == syslog.LOG_CRIT:
+            if self.CATCH and marker:
+                raise Exception(msg, marker)
+            elif self.CATCH:
+                raise Exception(msg)
+            msgcolor = self.ccritical
+            markcolor = self.ccritical
+        elif status == syslog.LOG_ALERT:
+            msgcolor = self.cwarning
+            markcolor = self.cwarning
+        elif status == syslog.LOG_INFO:
+            msgcolor = self.cmarker
+            markcolor = self.cinfo
+        else:
+            raise Exception('Unknown status', status)
+        basemsg = '%s%s%s %s' % (msgcolor, prefix, self.cnormal, msg)
+        if marker is not None:
+            markmsg = ': %s%s%s' % (markcolor, marker, self.cnormal)
+        printer.write('%s%s\n' % (basemsg, markmsg))
         if self.LOG:
             if isinstance(msg, (list, tuple, bool)):
                 msg = str(msg)
@@ -68,96 +96,32 @@ class Message(object):
 
     def info(self, msg, marker=None):
         ''' Print message with information status '''
-        if not marker is None:
-            sys.stdout.write('%s* %s%s: %s%s%s\n' % (self.cmarker, \
-                self.cnormal, msg, self.cinfo, marker, self.cnormal))
-            self.log_message(syslog.LOG_INFO, '%s: %s' % (msg, marker))
-        else:
-            sys.stdout.write('%s* %s%s\n' % (self.cmarker, self.cnormal, msg))
-            self.log_message(syslog.LOG_INFO, msg)
+        self.base('*', msg, marker, syslog.LOG_INFO)
 
     def warning(self, msg, marker=None):
         ''' Print message with warning status '''
-        if not marker is None:
-            sys.stderr.write('%s* %s%s: %s%s%s\n' % (self.cwarning, \
-                self.cnormal, msg, self.cwarning, marker, self.cnormal))
-            self.log_message(syslog.LOG_ALERT, '%s: %s' % (msg, marker))
-        else:
-            sys.stderr.write('%s* %s%s\n' % (self.cwarning, self.cnormal, msg))
-            self.log_message(syslog.LOG_ALERT, msg)
+        self.base('*', msg, marker, syslog.LOG_ALERT, sys.stderr)
 
     def critical(self, msg, marker=None):
         ''' Print message with critical status '''
-        if not marker is None:
-            if self.CATCH:
-                raise Exception(msg, marker)
-            sys.stderr.write('%s* %s%s: %s%s%s\n' % (self.ccritical, \
-                self.cnormal, msg, self.ccritical, marker, self.cnormal))
-            self.log_message(syslog.LOG_CRIT, '%s: %s' % (msg, marker))
-        else:
-            if self.CATCH:
-                raise Exception(msg)
-            sys.stderr.write('%s* %s%s\n' % (self.ccritical, self.cnormal, \
-                msg))
-            self.log_message(syslog.LOG_CRIT, msg)
+        self.base('*', msg, marker, syslog.LOG_CRIT, sys.stderr)
 
     def debug(self, msg, marker=None):
         ''' Print message with debug status '''
-        if self.DEBUG:
-            if not marker is None:
-                sys.stdout.write('%s* %s%s: %s%s%s\n' % (self.cdebug, \
-                    self.cnormal, msg, self.cdebug, marker, self.cnormal))
-                self.log_message(syslog.LOG_DEBUG, '%s: %s' % (msg, marker))
-            else:
-                sys.stdout.write('%s* %s%s\n' % (self.cdebug, self.cnormal, \
-                    msg))
-                self.log_message(syslog.LOG_DEBUG, msg)
+        self.base('*', msg, marker, syslog.LOG_DEBUG)
 
     def sub_info(self, msg, marker=None):
-        ''' Print sub-message with information status '''
-        if not marker is None:
-            sys.stdout.write('%s  -> %s%s: %s%s%s\n' % (self.cmarker, \
-                self.cnormal, msg, self.cinfo, marker, self.cnormal))
-            self.log_message(syslog.LOG_INFO, '%s: %s' % (msg, marker))
-        else:
-            sys.stdout.write('%s  -> %s%s\n' % (self.cmarker, self.cnormal, \
-                msg))
-            self.log_message(syslog.LOG_INFO, msg)
+        ''' Print message with information status '''
+        self.base('  ->', msg, marker, syslog.LOG_INFO)
 
     def sub_warning(self, msg, marker=None):
-        ''' Print sub-message with warning status '''
-        if not marker is None:
-            sys.stderr.write('%s  -> %s%s: %s%s%s\n' % (self.cwarning, \
-                self.cnormal, msg, self.cwarning, marker, self.cnormal))
-            self.log_message(syslog.LOG_ALERT, '%s: %s' % (msg, marker))
-        else:
-            sys.stderr.write('%s  -> %s%s\n' % (self.cwarning, \
-                self.cnormal, msg))
-            self.log_message(syslog.LOG_ALERT, msg)
+        ''' Print message with warning status '''
+        self.base('  ->', msg, marker, syslog.LOG_ALERT, sys.stderr)
 
     def sub_critical(self, msg, marker=None):
-        ''' Print sub-message with critical status '''
-        if not marker is None:
-            if self.CATCH:
-                raise Exception(msg, marker)
-            sys.stderr.write('%s  => %s%s: %s%s%s\n' % (self.ccritical, \
-                self.cnormal, msg, self.ccritical, marker, self.cnormal))
-            self.log_message(syslog.LOG_CRIT, '%s: %s' % (msg, marker))
-        else:
-            if self.CATCH:
-                raise Exception(msg)
-            sys.stderr.write('%s  => %s%s\n' % (self.ccritical, \
-                self.cnormal, msg))
-            self.log_message(syslog.LOG_CRIT, msg)
+        ''' Print message with critical status '''
+        self.base('  =>', msg, marker, syslog.LOG_CRIT, sys.stderr)
 
     def sub_debug(self, msg, marker=None):
-        ''' Print sub-message with debug status '''
-        if self.DEBUG:
-            if not marker is None:
-                sys.stdout.write('%s  -> %s%s: %s%s%s\n' % (self.cdebug, \
-                    self.cnormal, msg, self.cdebug, marker, self.cnormal))
-                self.log_message(syslog.LOG_DEBUG, '%s: %s' % (msg, marker))
-            else:
-                sys.stdout.write('%s  -> %s%s\n' % (self.cdebug, \
-                    self.cnormal, msg))
-                self.log_message(syslog.LOG_DEBUG, msg)
+        ''' Print message with debug status '''
+        self.base('  ->', msg, marker, syslog.LOG_DEBUG)
