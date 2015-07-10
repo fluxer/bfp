@@ -1922,7 +1922,7 @@ class Aport(object):
                     src_makedepends += " 'autoconf' 'automake'"
                     src_compile = './autogen.sh\n    ./configure --prefix=/usr --sysconfdir=/etc\n    make'
                     src_install = 'make DESTDIR="$INSTALL_DIR" install'
-                elif sfile.endswith('.pro'):
+                elif sfile.endswith('.pro') and not guess:
                     guess = 'QMake'
                     # FIXME: could be qt5
                     # TODO: follow include()

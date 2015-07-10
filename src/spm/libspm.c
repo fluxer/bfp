@@ -48678,7 +48678,7 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
  *                     src_makedepends += " 'autoconf' 'automake'"
  *                     src_compile = './autogen.sh\n    ./configure --prefix=/usr --sysconfdir=/etc\n    make'             # <<<<<<<<<<<<<<
  *                     src_install = 'make DESTDIR="$INSTALL_DIR" install'
- *                 elif sfile.endswith('.pro'):
+ *                 elif sfile.endswith('.pro') and not guess:
  */
         __Pyx_INCREF(__pyx_kp_s_autogen_sh_configure_prefix_usr);
         __Pyx_XDECREF_SET(__pyx_v_src_compile, __pyx_kp_s_autogen_sh_configure_prefix_usr);
@@ -48687,7 +48687,7 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
  *                     src_makedepends += " 'autoconf' 'automake'"
  *                     src_compile = './autogen.sh\n    ./configure --prefix=/usr --sysconfdir=/etc\n    make'
  *                     src_install = 'make DESTDIR="$INSTALL_DIR" install'             # <<<<<<<<<<<<<<
- *                 elif sfile.endswith('.pro'):
+ *                 elif sfile.endswith('.pro') and not guess:
  *                     guess = 'QMake'
  */
         __Pyx_INCREF(__pyx_kp_s_make_DESTDIR_INSTALL_DIR_install);
@@ -48698,7 +48698,7 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
       /* "libspm.py":1925
  *                     src_compile = './autogen.sh\n    ./configure --prefix=/usr --sysconfdir=/etc\n    make'
  *                     src_install = 'make DESTDIR="$INSTALL_DIR" install'
- *                 elif sfile.endswith('.pro'):             # <<<<<<<<<<<<<<
+ *                 elif sfile.endswith('.pro') and not guess:             # <<<<<<<<<<<<<<
  *                     guess = 'QMake'
  *                     # FIXME: could be qt5
  */
@@ -48707,13 +48707,22 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
       __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__313, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1925; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_t_7); if (unlikely(__pyx_t_9 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1925; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_7); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1925; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
+      if (__pyx_t_8) {
+      } else {
+        __pyx_t_9 = __pyx_t_8;
+        goto __pyx_L22_bool_binop_done;
+      }
+      __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_v_guess); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1925; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_14 = ((!__pyx_t_8) != 0);
+      __pyx_t_9 = __pyx_t_14;
+      __pyx_L22_bool_binop_done:;
       if (__pyx_t_9) {
 
         /* "libspm.py":1926
  *                     src_install = 'make DESTDIR="$INSTALL_DIR" install'
- *                 elif sfile.endswith('.pro'):
+ *                 elif sfile.endswith('.pro') and not guess:
  *                     guess = 'QMake'             # <<<<<<<<<<<<<<
  *                     # FIXME: could be qt5
  *                     # TODO: follow include()
@@ -48767,17 +48776,17 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
       __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__314, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1932; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1932; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_14 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1932; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      if (__pyx_t_8) {
+      if (__pyx_t_14) {
       } else {
-        __pyx_t_9 = __pyx_t_8;
-        goto __pyx_L22_bool_binop_done;
+        __pyx_t_9 = __pyx_t_14;
+        goto __pyx_L24_bool_binop_done;
       }
-      __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_v_guess); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1932; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_14 = ((!__pyx_t_8) != 0);
-      __pyx_t_9 = __pyx_t_14;
-      __pyx_L22_bool_binop_done:;
+      __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_v_guess); if (unlikely(__pyx_t_14 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1932; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_8 = ((!__pyx_t_14) != 0);
+      __pyx_t_9 = __pyx_t_8;
+      __pyx_L24_bool_binop_done:;
       if (__pyx_t_9) {
 
         /* "libspm.py":1933
@@ -48975,8 +48984,8 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
           __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
           __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_9 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1940; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-          __pyx_t_14 = ((!__pyx_t_9) != 0);
-          if (__pyx_t_14) {
+          __pyx_t_8 = ((!__pyx_t_9) != 0);
+          if (__pyx_t_8) {
 
             /* "libspm.py":1942
  *                         if not os.path.isfile(mfile):
@@ -49031,7 +49040,7 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
  *                         # PREFIX is a last resort, may mess things up
  *                         message.sub_debug(_('Probing for destination'), mfile)
  */
-            goto __pyx_L26_continue;
+            goto __pyx_L28_continue;
           }
 
           /* "libspm.py":1945
@@ -49150,8 +49159,8 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
  *                             destvar = match[0]
  *                     if not destvar:
  */
-          __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_v_match); if (unlikely(__pyx_t_14 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1948; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          if (__pyx_t_14) {
+          __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_v_match); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1948; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          if (__pyx_t_8) {
 
             /* "libspm.py":1949
  *                             mfile, escape=False)
@@ -49164,9 +49173,9 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
             __Pyx_GOTREF(__pyx_t_7);
             __Pyx_DECREF_SET(__pyx_v_destvar, __pyx_t_7);
             __pyx_t_7 = 0;
-            goto __pyx_L29;
+            goto __pyx_L31;
           }
-          __pyx_L29:;
+          __pyx_L31:;
 
           /* "libspm.py":1939
  *                         checkfiles.append('%s/%s' % (sdir, match))
@@ -49175,7 +49184,7 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
  *                         if not os.path.isfile(mfile):
  *                             # happens when it references variable, such as $(topdir)
  */
-          __pyx_L26_continue:;
+          __pyx_L28_continue:;
         }
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
@@ -49186,8 +49195,8 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
  *                         message.sub_debug(_('Not destination variable detected'))
  *                         guess = False
  */
-        __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_v_destvar); if (unlikely(__pyx_t_14 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1950; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __pyx_t_9 = ((!__pyx_t_14) != 0);
+        __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_v_destvar); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1950; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_9 = ((!__pyx_t_8) != 0);
         if (__pyx_t_9) {
 
           /* "libspm.py":1951
@@ -49330,7 +49339,7 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
  */
           __Pyx_INCREF(__pyx_kp_s_make_PREFIX_INSTALL_DIR_usr_inst);
           __Pyx_XDECREF_SET(__pyx_v_src_install, __pyx_kp_s_make_PREFIX_INSTALL_DIR_usr_inst);
-          goto __pyx_L31;
+          goto __pyx_L33;
         }
         /*else*/ {
 
@@ -49356,7 +49365,7 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
           __Pyx_XDECREF_SET(__pyx_v_src_install, __pyx_t_5);
           __pyx_t_5 = 0;
         }
-        __pyx_L31:;
+        __pyx_L33:;
         goto __pyx_L17;
       }
 
@@ -49372,17 +49381,17 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
       __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__319, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1961; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_14 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1961; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1961; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      if (__pyx_t_14) {
+      if (__pyx_t_8) {
       } else {
-        __pyx_t_9 = __pyx_t_14;
-        goto __pyx_L32_bool_binop_done;
+        __pyx_t_9 = __pyx_t_8;
+        goto __pyx_L34_bool_binop_done;
       }
-      __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_v_guess); if (unlikely(__pyx_t_14 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1961; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __pyx_t_8 = ((!__pyx_t_14) != 0);
-      __pyx_t_9 = __pyx_t_8;
-      __pyx_L32_bool_binop_done:;
+      __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_v_guess); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1961; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_14 = ((!__pyx_t_8) != 0);
+      __pyx_t_9 = __pyx_t_14;
+      __pyx_L34_bool_binop_done:;
       if (__pyx_t_9) {
 
         /* "libspm.py":1963
@@ -49449,8 +49458,8 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
  *                 sys.exit(2)
  */
     __pyx_t_9 = __Pyx_PyObject_IsTrue(__pyx_v_guess); if (unlikely(__pyx_t_9 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1967; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __pyx_t_8 = ((!__pyx_t_9) != 0);
-    if (__pyx_t_8) {
+    __pyx_t_14 = ((!__pyx_t_9) != 0);
+    if (__pyx_t_14) {
 
       /* "libspm.py":1968
  *                     guess = 'Python'
@@ -49513,9 +49522,9 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
       __Pyx_GOTREF(__pyx_t_11);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-      goto __pyx_L34;
+      goto __pyx_L36;
     }
-    __pyx_L34:;
+    __pyx_L36:;
 
     /* "libspm.py":1970
  *                 message.sub_critical(_('No known build system in use'))
@@ -49781,9 +49790,9 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       }
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1980; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_14 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1980; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      if (__pyx_t_8) {
+      if (__pyx_t_14) {
 
         /* "libspm.py":1981
  *             for sig in (sig1, sig2, sig3, sig4):
@@ -49840,9 +49849,9 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        goto __pyx_L37;
+        goto __pyx_L39;
       }
-      __pyx_L37:;
+      __pyx_L39:;
 
       /* "libspm.py":1979
  *             sigtmp = '%s.signature' % src_file
@@ -49894,9 +49903,9 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     }
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-    __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_11); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1983; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_11); if (unlikely(__pyx_t_14 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1983; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-    if (__pyx_t_8) {
+    if (__pyx_t_14) {
 
       /* "libspm.py":1984
  *                     misc.fetch(sig, sigtmp)
@@ -49959,14 +49968,14 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
       __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__325, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1985; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_7); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1985; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      if (!__pyx_t_8) {
+      __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_7); if (unlikely(__pyx_t_14 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1985; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      if (!__pyx_t_14) {
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       } else {
         __Pyx_INCREF(__pyx_t_7);
         __pyx_t_11 = __pyx_t_7;
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-        goto __pyx_L39_bool_binop_done;
+        goto __pyx_L41_bool_binop_done;
       }
       __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1985; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_7);
@@ -49979,7 +49988,7 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
       __Pyx_INCREF(__pyx_t_7);
       __pyx_t_11 = __pyx_t_7;
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __pyx_L39_bool_binop_done:;
+      __pyx_L41_bool_binop_done:;
       __Pyx_XDECREF_SET(__pyx_v_gpg, __pyx_t_11);
       __pyx_t_11 = 0;
 
@@ -50132,8 +50141,8 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
  *                         src_pgpkeys = "pgpkeys=('%s')" % misc.string_convert(keyid)
  * 
  */
-        __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_v_keyid); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1989; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        if (__pyx_t_8) {
+        __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_v_keyid); if (unlikely(__pyx_t_14 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1989; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        if (__pyx_t_14) {
 
           /* "libspm.py":1990
  *                     keyid = misc.string_search('.* keyid ([\\S]+)', line, escape=False)
@@ -50177,9 +50186,9 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_DECREF_SET(__pyx_v_src_pgpkeys, __pyx_t_11);
           __pyx_t_11 = 0;
-          goto __pyx_L43;
+          goto __pyx_L45;
         }
-        __pyx_L43:;
+        __pyx_L45:;
 
         /* "libspm.py":1987
  *                 gpg = misc.whereis('gpg2', False) or misc.whereis('gpg')
@@ -50190,9 +50199,9 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
  */
       }
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      goto __pyx_L38;
+      goto __pyx_L40;
     }
-    __pyx_L38:;
+    __pyx_L40:;
 
     /* "libspm.py":1992
  *                         src_pgpkeys = "pgpkeys=('%s')" % misc.string_convert(keyid)
@@ -50229,8 +50238,8 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
  *                 message.sub_debug(_('Guessing maintainer via Git'))
  *                 #name = misc.system_communicate((git, 'config', 'user.name'))
  */
-    __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_v_git); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1994; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    if (__pyx_t_8) {
+    __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_v_git); if (unlikely(__pyx_t_14 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1994; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (__pyx_t_14) {
 
       /* "libspm.py":1995
  *             git = misc.whereis('git', False)
@@ -50276,9 +50285,9 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
       }
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      goto __pyx_L44;
+      goto __pyx_L46;
     }
-    __pyx_L44:;
+    __pyx_L46:;
 
     /* "libspm.py":1999
  *                 #email = misc.system_communicate((git, 'config', 'user.email'))
@@ -50765,9 +50774,9 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
  */
   __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_automake); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 2029; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 2029; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_14 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 2029; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  if (__pyx_t_8) {
+  if (__pyx_t_14) {
 
     /* "libspm.py":2030
  * 
@@ -50828,9 +50837,9 @@ static PyObject *__pyx_pf_6libspm_5Aport_2main(CYTHON_UNUSED PyObject *__pyx_sel
     __Pyx_GOTREF(__pyx_t_15);
     __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
     __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
-    goto __pyx_L45;
+    goto __pyx_L47;
   }
-  __pyx_L45:;
+  __pyx_L47:;
 
   /* "libspm.py":1874
  *         self.automake = automake
@@ -55511,7 +55520,7 @@ static int __Pyx_InitCachedConstants(void) {
   /* "libspm.py":1925
  *                     src_compile = './autogen.sh\n    ./configure --prefix=/usr --sysconfdir=/etc\n    make'
  *                     src_install = 'make DESTDIR="$INSTALL_DIR" install'
- *                 elif sfile.endswith('.pro'):             # <<<<<<<<<<<<<<
+ *                 elif sfile.endswith('.pro') and not guess:             # <<<<<<<<<<<<<<
  *                     guess = 'QMake'
  *                     # FIXME: could be qt5
  */
