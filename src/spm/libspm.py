@@ -1993,9 +1993,9 @@ class Aport(object):
             git = misc.whereis('git', False)
             if git:
                 message.sub_debug(_('Guessing maintainer via Git'))
-                #name = misc.system_communicate((git, 'config', 'user.name'))
-                #email = misc.system_communicate((git, 'config', 'user.email'))
-                #src_maintainer = '%s <%s>' % (name, email)
+                name = misc.system_communicate((git, 'config', '--global', 'user.name'))
+                email = misc.system_communicate((git, 'config', '--global', 'user.email'))
+                src_maintainer = '%s <%s>' % (name, email)
             message.sub_debug(_('Target maintainer'), src_maintainer)
             message.sub_debug(_('Target name'), src_name)
             message.sub_debug(_('Target version'), src_version)

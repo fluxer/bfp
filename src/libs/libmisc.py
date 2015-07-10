@@ -903,7 +903,7 @@ class Misc(object):
     def system_communicate(self, command, bshell=False, cwd=None, sinput=None):
         ''' Get output and optionally send input to external utility
 
-            it resets the environment and sets LC_ALL to "C" to ensure locales
+            it sets the environment variable LC_ALL to "C" to ensure locales
             are not respected, passing input is possible if sinput is different
             than None. if something goes wrong you get standard output (stdout)
             and standard error (stderr) as an Exception '''
@@ -923,9 +923,13 @@ class Misc(object):
         stdin = None
         if sinput:
             stdin = subprocess.PIPE
+        procenv = {}
+        for var, val in os.environ.items():
+            procenv[var] = val
+        procenv['LC_ALL'] = 'C'
         pipe = subprocess.Popen(command, stdin=stdin, \
             stdout=subprocess.PIPE, stderr=subprocess.PIPE, \
-            env={'LC_ALL': 'C'}, shell=bshell, cwd=cwd)
+            env=procenv, shell=bshell, cwd=cwd)
         out, err = pipe.communicate(input=sinput)
         if pipe.returncode != 0:
             raise(Exception('%s %s' % (out, err)))
