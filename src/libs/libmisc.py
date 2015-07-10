@@ -878,6 +878,9 @@ class Misc(object):
             if tar.endswith('/bsdtar'):
                 arguments = '-tpf'
             for line in self.system_communicate((tar, arguments, sfile)).splitlines():
+                # filter directories
+                if line.endswith('/'):
+                    continue
                 content.append(line.lstrip('./'))
         elif tarfile.is_tarfile(sfile):
             tfile = tarfile.open(sfile)
