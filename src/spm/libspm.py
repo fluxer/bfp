@@ -1992,10 +1992,15 @@ class Aport(object):
             src_maintainer = 'Unknown'
             git = misc.whereis('git', False)
             if git:
-                message.sub_debug(_('Guessing maintainer via Git'))
-                name = misc.system_communicate((git, 'config', '--global', 'user.name'))
-                email = misc.system_communicate((git, 'config', '--global', 'user.email'))
-                src_maintainer = '%s <%s>' % (name, email)
+                try:
+                    message.sub_debug(_('Guessing maintainer via Git'))
+                    name = misc.system_communicate((git, 'config', '--global', 'user.name'))
+                    email = misc.system_communicate((git, 'config', '--global', 'user.email'))
+                    src_maintainer = '%s <%s>' % (name, email)
+                except subprocess.CalledProcessError as detail:
+                    # this should probably not be catched at all but not
+                    # everyone may have setup a global Git config so..
+                    message.sub_critical(detail)
             message.sub_debug(_('Target maintainer'), src_maintainer)
             message.sub_debug(_('Target name'), src_name)
             message.sub_debug(_('Target version'), src_version)
