@@ -3,9 +3,10 @@
 import gettext
 _ = gettext.translation('spm', fallback=True).gettext
 
-import libmessage, libspm, libmisc, time
+import libmessage, libspm, libmisc, libpackage, time
 message = libmessage.Message()
 misc = libmisc.Misc()
+database = libpackage.Database()
 
 # in case someone wants to use the pluging without setting up a parser a simple
 # class that gets the job done is a nice to have
