@@ -2000,7 +2000,7 @@ class Aport(object):
                 except Exception as detail:
                     # this should probably not be catched at all but not
                     # everyone may have setup a global Git config so..
-                    message.sub_critical(detail)
+                    message.sub_warning(str(detail))
             message.sub_debug(_('Target maintainer'), src_maintainer)
             message.sub_debug(_('Target name'), src_name)
             message.sub_debug(_('Target version'), src_version)
