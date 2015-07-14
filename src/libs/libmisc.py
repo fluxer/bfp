@@ -1198,4 +1198,21 @@ class Magic(object):
             raise Exception(self.error())
         return result
 
+class UDev(object):
+    ''' UDev wrapper '''
+    def __init__(self):
+        libudev = ctypes.util.find_library('udev')
+        self.libudev = ctypes.CDLL(libudev, use_errno=True)
+        self.udev = self.libudev.udev_new()
+        if not self.udev:
+            raise Exception('Can not get udev context')
+
+    def __exit__(self, type, value, traceback):
+        if self.udev:
+            self.libudev.udev_unref(self.udev)
+
+    def error(self):
+        ''' Get last error as string '''
+        return ctypes.get_errno()
+
 misc = Misc()

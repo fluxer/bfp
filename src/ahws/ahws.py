@@ -1,52 +1,45 @@
 #!/usr/bin/python2
 
-import time, os, sys, libudev, libmessage, libmisc
+import time, os, sys, libmessage, libmisc
 message = libmessage.Message()
 message.DEBUG = True
 misc = libmisc.Misc()
+udev = libmisc.UDev()
 
-app_version = "1.8.2 (86bdbde)"
+app_version = "1.8.2 (d19e85c)"
 
 class AHWS(object):
     def __init__(self):
-        self.udev = libudev.udev_new()
-        if not self.udev:
-            message.sub_critical('Can not get udev context')
-            sys.exit(1)
         self.HANDLERS_DIR = '/etc/ahws.d'
         self.SUBSYSTEMS = ['pci', 'usb', 'video4linux', 'sound', 'snd', 'printer', 'drm']
 
-    def __exit__(self, type, value, traceback):
-        if self.udev:
-            libudev.udev_unref(self.udev)
-
     def Properties(self, dev):
-        DEVNAME = libudev.udev_device_get_property_value(dev, 'DEVNAME')
+        DEVNAME = udev.libudev.udev_device_get_property_value(dev, 'DEVNAME')
         if not DEVNAME:
-            DEVNAME = libudev.udev_device_get_property_value(dev, 'KERNEL')
+            DEVNAME = udev.libudev.udev_device_get_property_value(dev, 'KERNEL')
         if not DEVNAME:
             DEVNAME = 'Unknown'
 
         # ieee1394_id ?
-        PRODUCT = libudev.udev_device_get_property_value(dev, 'ID_MODEL_ID')
+        PRODUCT = udev.libudev.udev_device_get_property_value(dev, 'ID_MODEL_ID')
         if not PRODUCT:
-            PRODUCT = libudev.udev_device_get_sysattr_value(dev, 'idProduct')
+            PRODUCT = udev.libudev.udev_device_get_sysattr_value(dev, 'idProduct')
         if not PRODUCT:
-            PRODUCT = libudev.udev_device_get_sysattr_value(dev, 'device')
+            PRODUCT = udev.libudev.udev_device_get_sysattr_value(dev, 'device')
 
-        VENDOR = libudev.udev_device_get_property_value(dev, 'ID_VENDOR_ID')
+        VENDOR = udev.libudev.udev_device_get_property_value(dev, 'ID_VENDOR_ID')
         if not VENDOR:
-            VENDOR = libudev.udev_device_get_sysattr_value(dev, 'idVendor')
+            VENDOR = udev.libudev.udev_device_get_sysattr_value(dev, 'idVendor')
         if not VENDOR:
-            VENDOR = libudev.udev_device_get_sysattr_value(dev, 'vendor')
+            VENDOR = udev.libudev.udev_device_get_sysattr_value(dev, 'vendor')
 
-        SERIAL = libudev.udev_device_get_property_value(dev, 'ID_SERIAL')
+        SERIAL = udev.libudev.udev_device_get_property_value(dev, 'ID_SERIAL')
         if not SERIAL:
-            libudev.udev_device_get_sysattr_value(dev, 'serial')
+            udev.libudev.udev_device_get_sysattr_value(dev, 'serial')
         if not SERIAL:
-            libudev.udev_device_get_sysattr_value(dev, 'product')
+            udev.libudev.udev_device_get_sysattr_value(dev, 'product')
 
-        SUBSYSTEM = libudev.udev_device_get_subsystem(dev)
+        SUBSYSTEM = udev.libudev.udev_device_get_subsystem(dev)
 
         return DEVNAME, PRODUCT, VENDOR, SERIAL, SUBSYSTEM
 
@@ -83,39 +76,39 @@ class AHWS(object):
 
     def Initialize(self):
         ''' Handle all current devices '''
-        udevenum = libudev.udev_enumerate_new(self.udev)
+        udevenum = udev.libudev.udev_enumerate_new(udev.udev)
         try:
             for subsystem in self.SUBSYSTEMS:
-                libudev.udev_enumerate_add_match_subsystem(udevenum, subsystem)
-            libudev.udev_enumerate_scan_devices(udevenum)
-            entry = libudev.udev_enumerate_get_list_entry(udevenum)
+                udev.libudev.udev_enumerate_add_match_subsystem(udevenum, subsystem)
+            udev.libudev.udev_enumerate_scan_devices(udevenum)
+            entry = udev.libudev.udev_enumerate_get_list_entry(udevenum)
             while entry:
-                devname = libudev.udev_list_entry_get_name(entry)
-                dev = libudev.udev_device_new_from_syspath(self.udev, devname)
+                devname = udev.libudev.udev_list_entry_get_name(entry)
+                dev = udev.libudev.udev_device_new_from_syspath(udev.udev, devname)
                 try:
                     self.Handle(self.Properties(dev), 'online')
                 finally:
-                    libudev.udev_device_unref(dev)
-                entry = libudev.udev_list_entry_get_next(entry)
+                    udev.libudev.udev_device_unref(dev)
+                entry = udev.libudev.udev_list_entry_get_next(entry)
         finally:
-            libudev.udev_enumerate_unref(udevenum)
+            udev.libudev.udev_enumerate_unref(udevenum)
 
     def Daemonize(self):
         ''' Daemon that monitors events '''
         try:
-            monitor = libudev.udev_monitor_new_from_netlink(self.udev, 'udev')
+            monitor = udev.libudev.udev_monitor_new_from_netlink(udev.udev, 'udev')
             for subsystem in self.SUBSYSTEMS:
-                libudev.udev_monitor_filter_add_match_subsystem_devtype(monitor, subsystem, None)
-            libudev.udev_monitor_enable_receiving(monitor)
+                udev.libudev.udev_monitor_filter_add_match_subsystem_devtype(monitor, subsystem, None)
+            udev.libudev.udev_monitor_enable_receiving(monitor)
             while True:
                 if monitor:
-                    fd = libudev.udev_monitor_get_fd(monitor)
+                    fd = udev.libudev.udev_monitor_get_fd(monitor)
                 if monitor and fd:
-                    dev = libudev.udev_monitor_receive_device(monitor)
+                    dev = udev.libudev.udev_monitor_receive_device(monitor)
                     if dev:
-                        action = libudev.udev_device_get_action(dev)
+                        action = udev.libudev.udev_device_get_action(dev)
                         self.Handle(self.Properties(dev), action)
-                        libudev.udev_device_unref(dev)
+                        udev.libudev.udev_device_unref(dev)
                     else:
                         time.sleep(1)
         except Exception as detail:
@@ -131,7 +124,8 @@ try:
     message.info('Daemonizing AHWS')
     ahws.Daemonize()
 except Exception as detail:
-    message.sub_critical(detail)
+    message.sub_critical(str(detail))
+    sys.exit(1)
 finally:
     if os.path.isfile(pidfile):
         os.unlink(pidfile)
