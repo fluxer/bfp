@@ -3,7 +3,7 @@
 import gettext
 _ = gettext.translation('spm', fallback=True).gettext
 
-import sys, os, shutil, re, time
+import sys, os, shutil, re, time, subprocess
 if sys.version < '3':
     import ConfigParser as configparser
 else:
