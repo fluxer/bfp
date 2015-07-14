@@ -1254,7 +1254,6 @@ if __name__ == '__main__':
                     database.local_all(basename=True)
             for alias in database.remote_aliases():
                 if alias in ARGS.TARGETS:
-
                     position = ARGS.TARGETS.index(alias)
                     ARGS.TARGETS[position:position+1] = \
                         database.remote_alias(alias)

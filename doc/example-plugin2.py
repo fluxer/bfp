@@ -3,18 +3,40 @@
 import gettext
 _ = gettext.translation('spm', fallback=True).gettext
 
-import libmessage, libspm, libmisc
+import libmessage, libspm, libmisc, time
 message = libmessage.Message()
 misc = libmisc.Misc()
 
 # in case someone wants to use the pluging without setting up a parser a simple
 # class that gets the job done is a nice to have
 class Goodbye(libspm.Source):
+    def __init__(self, targets):
+        super(Goodbye, self).__init__(targets)
+        self.targets = targets
+        self.backupdir = '/backup'
+        misc.dir_create(self.backupdir)
+
     def main(self):
         reboot = False
-        # schedule systme reboot if the kernel is going to be installed
+        # schedule systme reboot if kernel is going to be installed
         if 'linux' in self.targets:
             reboot = True
+        # do you care about your decoder?
+        if 'ffmpeg' in self.targets:
+            target_version = database.local_metadata(target, 'version')
+            target_packfile = '%s/%s_%s.tar.xz' % (self.backupdir, \
+                os.path.basename(target), target_version)
+            content = database.local_metadata(target, 'footprint')
+            # add metadata directory, it is not listed in the footprint
+            content.append('%s/%s' % (libspm.LOCAL_DIR, target))
+
+            message.sub_info(_('Compressing'), target_packfile)
+            misc.archive_compress(content, target_packfile, '/')
+        # wanna rollback in case of driver messup?
+        if 'nvidia' in self.targets:
+            misc.system_command((misc.whereis('btrfs'), 'subvolume', \
+                'snapshot', '/', '%s/%s' % \
+                 (self.backupdir, time.strftime('%Y.%m.%d-%H.%M.%S'))))
         self.autosource(self.targets, automake=True)
         if reboot:
             misc.system_command(misc.whereis('reboot'))
