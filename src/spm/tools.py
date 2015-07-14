@@ -23,7 +23,7 @@ misc = libspm.misc
 database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.8.2 (86bdbde)"
+app_version = "1.8.2 (884e5a9)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -507,20 +507,18 @@ class Sane(object):
                         if misc.url_supported(src, False):
                             sig1 = '%s.sig' % src
                             sig2 = '%s.asc' % src
-                            sig3 = '%s.sign' % misc.file_name(src, False)
-                            sig4 = '%s.sign' % src
-                            if sig1 in sources or sig2 in sources or sig3 in sources or sig4 in sources:
-                                message.sub_debug(_('Signature already in sources for'), src)
-                                if not pgpkeys:
-                                    message.sub_warning(_('Signature in sources but no pgpkeys'), src)
-                            elif misc.url_ping(sig1):
-                                message.sub_warning(_('Signature available but not in sources'), sig1)
-                            elif misc.url_ping(sig2):
-                                message.sub_warning(_('Signature available but not in sources'), sig2)
-                            elif misc.url_ping(sig3):
-                                message.sub_warning(_('Signature available but not in sources'), sig3)
-                            elif misc.url_ping(sig4):
-                                message.sub_warning(_('Signature available but not in sources'), sig4)
+                            sig3 = '%s.asc' % misc.file_name(src, False)
+                            sig4 = '%s.sign' % misc.file_name(src, False)
+                            sig5 = '%s.sign' % src
+                            for sig in (sig1, sig2, sig3, sig4, sig5):
+                                if sig in sources:
+                                    message.sub_debug(_('Signature already in sources for'), src)
+                                    continue
+                                if misc.url_ping(sig):
+                                    message.sub_warning(_('Signature available but not in sources'), sig)
+                                    if not pgpkeys:
+                                        message.sub_warning(_('Signature in sources but no pgpkeys'), src)
+                                    break
 
 
 class Merge(object):

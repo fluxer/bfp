@@ -1972,11 +1972,12 @@ class Aport(object):
             message.sub_debug(_('Checking if PGP signature is available'))
             sig1 = '%s.sig' % src
             sig2 = '%s.asc' % src
-            sig3 = '%s.sign' % misc.file_name(src, False)
-            sig4 = '%s.sign' % src
+            sig3 = '%s.asc' % misc.file_name(src, False)
+            sig4 = '%s.sign' % misc.file_name(src, False)
+            sig5 = '%s.sign' % src
             sigtmp = '%s.signature' % src_file
             src_pgpkeys = ''
-            for sig in (sig1, sig2, sig3, sig4):
+            for sig in (sig1, sig2, sig3, sig4, sig5):
                 if misc.url_ping(sig):
                     src_sources += "\n    '%s'" % sig
                     misc.fetch(sig, sigtmp)
