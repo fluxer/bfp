@@ -3,7 +3,7 @@
 import gettext
 _ = gettext.translation('spm', fallback=True).gettext
 
-import sys, os, shutil, re, time, subprocess
+import sys, os, shutil, re, time
 if sys.version < '3':
     import ConfigParser as configparser
 else:
@@ -1997,7 +1997,7 @@ class Aport(object):
                     name = misc.system_communicate((git, 'config', '--global', 'user.name'))
                     email = misc.system_communicate((git, 'config', '--global', 'user.email'))
                     src_maintainer = '%s <%s>' % (name, email)
-                except subprocess.CalledProcessError as detail:
+                except Exception as detail:
                     # this should probably not be catched at all but not
                     # everyone may have setup a global Git config so..
                     message.sub_critical(detail)
