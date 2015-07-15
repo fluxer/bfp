@@ -6,7 +6,7 @@ message.DEBUG = True
 misc = libmisc.Misc()
 udev = libmisc.UDev()
 
-app_version = "1.8.2 (d19e85c)"
+app_version = "1.8.2 (d556331)"
 
 class AHWS(object):
     def __init__(self):
@@ -124,7 +124,7 @@ try:
     message.info('Daemonizing AHWS')
     ahws.Daemonize()
 except Exception as detail:
-    message.sub_critical(str(detail))
+    message.critical(detail)
     sys.exit(1)
 finally:
     if os.path.isfile(pidfile):

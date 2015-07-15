@@ -626,34 +626,6 @@ static PyObject *__Pyx_Py3MetaclassPrepare(PyObject *metaclass, PyObject *bases,
 static PyObject *__Pyx_Py3ClassCreate(PyObject *metaclass, PyObject *name, PyObject *bases, PyObject *dict,
                                       PyObject *mkw, int calculate_metaclass, int allow_py2_metaclass);
 
-static CYTHON_INLINE void __Pyx_ReraiseException(void) {
-    PyObject *type = NULL, *value = NULL, *tb = NULL;
-#if CYTHON_COMPILING_IN_CPYTHON
-    PyThreadState *tstate = PyThreadState_GET();
-    type = tstate->exc_type;
-    value = tstate->exc_value;
-    tb = tstate->exc_traceback;
-#else
-    PyErr_GetExcInfo(&type, &value, &tb);
-#endif
-    if (!type || type == Py_None) {
-#if !CYTHON_COMPILING_IN_CPYTHON
-        Py_XDECREF(type);
-        Py_XDECREF(value);
-        Py_XDECREF(tb);
-#endif
-        PyErr_SetString(PyExc_RuntimeError,
-            "No active exception to reraise");
-    } else {
-#if CYTHON_COMPILING_IN_CPYTHON
-        Py_INCREF(type);
-        Py_XINCREF(value);
-        Py_XINCREF(tb);
-#endif
-        PyErr_Restore(type, value, tb);
-    }
-}
-
 typedef struct {
     int code_line;
     PyCodeObject* code_object;
@@ -710,12 +682,14 @@ static char __pyx_k_AHWS[] = "AHWS";
 static char __pyx_k_Misc[] = "Misc";
 static char __pyx_k_UDev[] = "UDev";
 static char __pyx_k_ahws[] = "ahws";
+static char __pyx_k_exit[] = "exit";
 static char __pyx_k_info[] = "info";
 static char __pyx_k_init[] = "__init__";
 static char __pyx_k_main[] = "__main__";
 static char __pyx_k_misc[] = "misc";
 static char __pyx_k_path[] = "path";
 static char __pyx_k_self[] = "self";
+static char __pyx_k_test[] = "__test__";
 static char __pyx_k_time[] = "time";
 static char __pyx_k_udev[] = "udev";
 static char __pyx_k_DEBUG[] = "DEBUG";
@@ -755,6 +729,7 @@ static char __pyx_k_pidfile[] = "pidfile";
 static char __pyx_k_prepare[] = "__prepare__";
 static char __pyx_k_printer[] = "printer";
 static char __pyx_k_product[] = "product";
+static char __pyx_k_critical[] = "critical";
 static char __pyx_k_idVendor[] = "idVendor";
 static char __pyx_k_qualname[] = "__qualname__";
 static char __pyx_k_sub_info[] = "sub_info";
@@ -785,7 +760,7 @@ static char __pyx_k_video4linux[] = "video4linux";
 static char __pyx_k_HANDLERS_DIR[] = "HANDLERS_DIR";
 static char __pyx_k_ID_VENDOR_ID[] = "ID_VENDOR_ID";
 static char __pyx_k_sub_critical[] = "sub_critical";
-static char __pyx_k_1_8_2_d19e85c[] = "1.8.2 (d19e85c)";
+static char __pyx_k_1_8_2_d556331[] = "1.8.2 (d556331)";
 static char __pyx_k_AHWS_Daemonize[] = "AHWS.Daemonize";
 static char __pyx_k_system_command[] = "system_command";
 static char __pyx_k_AHWS_Initialize[] = "AHWS.Initialize";
@@ -817,7 +792,7 @@ static char __pyx_k_udev_device_get_property_value[] = "udev_device_get_property
 static char __pyx_k_home_smil3y_bfp_src_ahws_ahws_p[] = "/home/smil3y/bfp/src/ahws/ahws.py";
 static char __pyx_k_udev_enumerate_add_match_subsyst[] = "udev_enumerate_add_match_subsystem";
 static char __pyx_k_udev_monitor_filter_add_match_su[] = "udev_monitor_filter_add_match_subsystem_devtype";
-static PyObject *__pyx_kp_s_1_8_2_d19e85c;
+static PyObject *__pyx_kp_s_1_8_2_d556331;
 static PyObject *__pyx_n_s_AHWS;
 static PyObject *__pyx_n_s_AHWS_Daemonize;
 static PyObject *__pyx_n_s_AHWS_Handle;
@@ -856,6 +831,7 @@ static PyObject *__pyx_n_s_VENDOR;
 static PyObject *__pyx_n_s_action;
 static PyObject *__pyx_n_s_ahws;
 static PyObject *__pyx_n_s_app_version;
+static PyObject *__pyx_n_s_critical;
 static PyObject *__pyx_n_s_detail;
 static PyObject *__pyx_n_s_dev;
 static PyObject *__pyx_n_s_devhandle;
@@ -865,6 +841,7 @@ static PyObject *__pyx_n_s_doc;
 static PyObject *__pyx_n_s_drm;
 static PyObject *__pyx_n_s_entry;
 static PyObject *__pyx_kp_s_etc_ahws_d;
+static PyObject *__pyx_n_s_exit;
 static PyObject *__pyx_n_s_fd;
 static PyObject *__pyx_n_s_file_write;
 static PyObject *__pyx_n_s_getpid;
@@ -912,6 +889,7 @@ static PyObject *__pyx_n_s_subhandle;
 static PyObject *__pyx_n_s_subsystem;
 static PyObject *__pyx_n_s_sys;
 static PyObject *__pyx_n_s_system_command;
+static PyObject *__pyx_n_s_test;
 static PyObject *__pyx_n_s_time;
 static PyObject *__pyx_n_s_udev;
 static PyObject *__pyx_n_s_udev_device_get_action;
@@ -946,6 +924,7 @@ static PyObject *__pyx_tuple__6;
 static PyObject *__pyx_tuple__8;
 static PyObject *__pyx_tuple__10;
 static PyObject *__pyx_tuple__12;
+static PyObject *__pyx_tuple__13;
 static PyObject *__pyx_codeobj__3;
 static PyObject *__pyx_codeobj__5;
 static PyObject *__pyx_codeobj__7;
@@ -4443,7 +4422,7 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
-  {&__pyx_kp_s_1_8_2_d19e85c, __pyx_k_1_8_2_d19e85c, sizeof(__pyx_k_1_8_2_d19e85c), 0, 0, 1, 0},
+  {&__pyx_kp_s_1_8_2_d556331, __pyx_k_1_8_2_d556331, sizeof(__pyx_k_1_8_2_d556331), 0, 0, 1, 0},
   {&__pyx_n_s_AHWS, __pyx_k_AHWS, sizeof(__pyx_k_AHWS), 0, 0, 1, 1},
   {&__pyx_n_s_AHWS_Daemonize, __pyx_k_AHWS_Daemonize, sizeof(__pyx_k_AHWS_Daemonize), 0, 0, 1, 1},
   {&__pyx_n_s_AHWS_Handle, __pyx_k_AHWS_Handle, sizeof(__pyx_k_AHWS_Handle), 0, 0, 1, 1},
@@ -4482,6 +4461,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_action, __pyx_k_action, sizeof(__pyx_k_action), 0, 0, 1, 1},
   {&__pyx_n_s_ahws, __pyx_k_ahws, sizeof(__pyx_k_ahws), 0, 0, 1, 1},
   {&__pyx_n_s_app_version, __pyx_k_app_version, sizeof(__pyx_k_app_version), 0, 0, 1, 1},
+  {&__pyx_n_s_critical, __pyx_k_critical, sizeof(__pyx_k_critical), 0, 0, 1, 1},
   {&__pyx_n_s_detail, __pyx_k_detail, sizeof(__pyx_k_detail), 0, 0, 1, 1},
   {&__pyx_n_s_dev, __pyx_k_dev, sizeof(__pyx_k_dev), 0, 0, 1, 1},
   {&__pyx_n_s_devhandle, __pyx_k_devhandle, sizeof(__pyx_k_devhandle), 0, 0, 1, 1},
@@ -4491,6 +4471,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_drm, __pyx_k_drm, sizeof(__pyx_k_drm), 0, 0, 1, 1},
   {&__pyx_n_s_entry, __pyx_k_entry, sizeof(__pyx_k_entry), 0, 0, 1, 1},
   {&__pyx_kp_s_etc_ahws_d, __pyx_k_etc_ahws_d, sizeof(__pyx_k_etc_ahws_d), 0, 0, 1, 0},
+  {&__pyx_n_s_exit, __pyx_k_exit, sizeof(__pyx_k_exit), 0, 0, 1, 1},
   {&__pyx_n_s_fd, __pyx_k_fd, sizeof(__pyx_k_fd), 0, 0, 1, 1},
   {&__pyx_n_s_file_write, __pyx_k_file_write, sizeof(__pyx_k_file_write), 0, 0, 1, 1},
   {&__pyx_n_s_getpid, __pyx_k_getpid, sizeof(__pyx_k_getpid), 0, 0, 1, 1},
@@ -4538,6 +4519,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_subsystem, __pyx_k_subsystem, sizeof(__pyx_k_subsystem), 0, 0, 1, 1},
   {&__pyx_n_s_sys, __pyx_k_sys, sizeof(__pyx_k_sys), 0, 0, 1, 1},
   {&__pyx_n_s_system_command, __pyx_k_system_command, sizeof(__pyx_k_system_command), 0, 0, 1, 1},
+  {&__pyx_n_s_test, __pyx_k_test, sizeof(__pyx_k_test), 0, 0, 1, 1},
   {&__pyx_n_s_time, __pyx_k_time, sizeof(__pyx_k_time), 0, 0, 1, 1},
   {&__pyx_n_s_udev, __pyx_k_udev, sizeof(__pyx_k_udev), 0, 0, 1, 1},
   {&__pyx_n_s_udev_device_get_action, __pyx_k_udev_device_get_action, sizeof(__pyx_k_udev_device_get_action), 0, 0, 1, 1},
@@ -4659,6 +4641,17 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__12 = PyTuple_Pack(1, __pyx_kp_s_Daemonizing_AHWS); if (unlikely(!__pyx_tuple__12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 124; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__12);
   __Pyx_GIVEREF(__pyx_tuple__12);
+
+  /* "ahws.py":128
+ * except Exception as detail:
+ *     message.critical(detail)
+ *     sys.exit(1)             # <<<<<<<<<<<<<<
+ * finally:
+ *     if os.path.isfile(pidfile):
+ */
+  __pyx_tuple__13 = PyTuple_Pack(1, __pyx_int_1); if (unlikely(!__pyx_tuple__13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 128; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__13);
+  __Pyx_GIVEREF(__pyx_tuple__13);
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -4696,9 +4689,11 @@ PyMODINIT_FUNC PyInit_ahws(void)
   PyObject *__pyx_t_12 = NULL;
   PyObject *__pyx_t_13 = NULL;
   int __pyx_t_14;
-  PyObject *__pyx_t_15 = NULL;
-  PyObject *__pyx_t_16 = NULL;
+  int __pyx_t_15;
+  char const *__pyx_t_16;
   PyObject *__pyx_t_17 = NULL;
+  PyObject *__pyx_t_18 = NULL;
+  PyObject *__pyx_t_19 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
   int __pyx_clineno = 0;
@@ -4886,7 +4881,7 @@ PyMODINIT_FUNC PyInit_ahws(void)
  * misc = libmisc.Misc()
  * udev = libmisc.UDev()             # <<<<<<<<<<<<<<
  * 
- * app_version = "1.8.2 (d19e85c)"
+ * app_version = "1.8.2 (d556331)"
  */
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_libmisc); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 7; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -4917,14 +4912,14 @@ PyMODINIT_FUNC PyInit_ahws(void)
   /* "ahws.py":9
  * udev = libmisc.UDev()
  * 
- * app_version = "1.8.2 (d19e85c)"             # <<<<<<<<<<<<<<
+ * app_version = "1.8.2 (d556331)"             # <<<<<<<<<<<<<<
  * 
  * class AHWS(object):
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_8_2_d19e85c) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_8_2_d556331) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "ahws.py":11
- * app_version = "1.8.2 (d19e85c)"
+ * app_version = "1.8.2 (d556331)"
  * 
  * class AHWS(object):             # <<<<<<<<<<<<<<
  *     def __init__(self):
@@ -5001,7 +4996,7 @@ PyMODINIT_FUNC PyInit_ahws(void)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
   /* "ahws.py":11
- * app_version = "1.8.2 (d19e85c)"
+ * app_version = "1.8.2 (d556331)"
  * 
  * class AHWS(object):             # <<<<<<<<<<<<<<
  *     def __init__(self):
@@ -5242,7 +5237,7 @@ PyMODINIT_FUNC PyInit_ahws(void)
  *     message.info('Daemonizing AHWS')
  *     ahws.Daemonize()             # <<<<<<<<<<<<<<
  * except Exception as detail:
- *     message.sub_critical(str(detail))
+ *     message.critical(detail)
  */
         __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_ahws); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 125; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
         __Pyx_GOTREF(__pyx_t_3);
@@ -5285,8 +5280,8 @@ PyMODINIT_FUNC PyInit_ahws(void)
  *     message.info('Daemonizing AHWS')
  *     ahws.Daemonize()
  * except Exception as detail:             # <<<<<<<<<<<<<<
- *     message.sub_critical(str(detail))
- * finally:
+ *     message.critical(detail)
+ *     sys.exit(1)
  */
       __pyx_t_11 = PyErr_ExceptionMatches(__pyx_builtin_Exception);
       if (__pyx_t_11) {
@@ -5300,25 +5295,17 @@ PyMODINIT_FUNC PyInit_ahws(void)
         /* "ahws.py":127
  *     ahws.Daemonize()
  * except Exception as detail:
- *     message.sub_critical(str(detail))             # <<<<<<<<<<<<<<
+ *     message.critical(detail)             # <<<<<<<<<<<<<<
+ *     sys.exit(1)
  * finally:
- *     if os.path.isfile(pidfile):
  */
         __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L7_except_error;}
         __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_sub_critical); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L7_except_error;}
+        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_critical); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L7_except_error;}
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_detail); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L7_except_error;}
         __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_12 = PyTuple_New(1); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L7_except_error;}
-        __Pyx_GOTREF(__pyx_t_12);
-        PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_2);
-        __Pyx_GIVEREF(__pyx_t_2);
-        __pyx_t_2 = 0;
-        __pyx_t_2 = __Pyx_PyObject_Call(((PyObject *)((PyObject*)(&PyString_Type))), __pyx_t_12, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 127; __pyx_clineno = __LINE__; goto __pyx_L7_except_error;}
-        __Pyx_GOTREF(__pyx_t_2);
-        __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
         __pyx_t_12 = NULL;
         if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_9))) {
           __pyx_t_12 = PyMethod_GET_SELF(__pyx_t_9);
@@ -5346,6 +5333,23 @@ PyMODINIT_FUNC PyInit_ahws(void)
         }
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+        /* "ahws.py":128
+ * except Exception as detail:
+ *     message.critical(detail)
+ *     sys.exit(1)             # <<<<<<<<<<<<<<
+ * finally:
+ *     if os.path.isfile(pidfile):
+ */
+        __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 128; __pyx_clineno = __LINE__; goto __pyx_L7_except_error;}
+        __Pyx_GOTREF(__pyx_t_4);
+        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_exit); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 128; __pyx_clineno = __LINE__; goto __pyx_L7_except_error;}
+        __Pyx_GOTREF(__pyx_t_9);
+        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__13, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 128; __pyx_clineno = __LINE__; goto __pyx_L7_except_error;}
+        __Pyx_GOTREF(__pyx_t_4);
+        __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
+        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -5367,24 +5371,23 @@ PyMODINIT_FUNC PyInit_ahws(void)
     }
   }
 
-  /* "ahws.py":129
- *     message.sub_critical(str(detail))
+  /* "ahws.py":130
+ *     sys.exit(1)
  * finally:
  *     if os.path.isfile(pidfile):             # <<<<<<<<<<<<<<
  *         os.unlink(pidfile)
- *     raise
  */
   /*finally:*/ {
     /*normal exit:*/{
-      __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_path); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_path); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_isfile); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_isfile); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_8);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_pidfile); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_pidfile); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_t_4 = NULL;
       if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_8))) {
@@ -5397,37 +5400,36 @@ PyMODINIT_FUNC PyInit_ahws(void)
         }
       }
       if (!__pyx_t_4) {
-        __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_GOTREF(__pyx_t_3);
       } else {
-        __pyx_t_9 = PyTuple_New(1+1); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_9 = PyTuple_New(1+1); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_9);
         PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_4); __Pyx_GIVEREF(__pyx_t_4); __pyx_t_4 = NULL;
         PyTuple_SET_ITEM(__pyx_t_9, 0+1, __pyx_t_1);
         __Pyx_GIVEREF(__pyx_t_1);
         __pyx_t_1 = 0;
-        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_9, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_9, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
       }
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_14 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_14 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       if (__pyx_t_14) {
 
-        /* "ahws.py":130
+        /* "ahws.py":131
  * finally:
  *     if os.path.isfile(pidfile):
  *         os.unlink(pidfile)             # <<<<<<<<<<<<<<
- *     raise
  */
-        __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_8);
-        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_unlink); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_unlink); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-        __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_pidfile); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_pidfile); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_8);
         __pyx_t_1 = NULL;
         if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_9))) {
@@ -5440,17 +5442,17 @@ PyMODINIT_FUNC PyInit_ahws(void)
           }
         }
         if (!__pyx_t_1) {
-          __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_9, __pyx_t_8); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_9, __pyx_t_8); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
           __Pyx_GOTREF(__pyx_t_3);
         } else {
-          __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_4);
           PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_1); __Pyx_GIVEREF(__pyx_t_1); __pyx_t_1 = NULL;
           PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_t_8);
           __Pyx_GIVEREF(__pyx_t_8);
           __pyx_t_8 = 0;
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_4, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_4, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         }
@@ -5459,17 +5461,11 @@ PyMODINIT_FUNC PyInit_ahws(void)
         goto __pyx_L15;
       }
       __pyx_L15:;
-
-      /* "ahws.py":131
- *     if os.path.isfile(pidfile):
- *         os.unlink(pidfile)
- *     raise             # <<<<<<<<<<<<<<
- */
-      __Pyx_ReraiseException(); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      goto __pyx_L4;
     }
     /*exception exit:*/{
       __pyx_L3_error:;
-      __pyx_t_7 = 0; __pyx_t_6 = 0; __pyx_t_5 = 0; __pyx_t_15 = 0; __pyx_t_16 = 0; __pyx_t_17 = 0;
+      __pyx_t_7 = 0; __pyx_t_6 = 0; __pyx_t_5 = 0; __pyx_t_17 = 0; __pyx_t_18 = 0; __pyx_t_19 = 0;
       __Pyx_XDECREF(__pyx_t_12); __pyx_t_12 = 0;
       __Pyx_XDECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_XDECREF(__pyx_t_13); __pyx_t_13 = 0;
@@ -5478,32 +5474,32 @@ PyMODINIT_FUNC PyInit_ahws(void)
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_XDECREF(__pyx_t_8); __pyx_t_8 = 0;
       __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
-      if (PY_MAJOR_VERSION >= 3) __Pyx_ExceptionSwap(&__pyx_t_15, &__pyx_t_16, &__pyx_t_17);
+      if (PY_MAJOR_VERSION >= 3) __Pyx_ExceptionSwap(&__pyx_t_17, &__pyx_t_18, &__pyx_t_19);
       if ((PY_MAJOR_VERSION < 3) || unlikely(__Pyx_GetException(&__pyx_t_7, &__pyx_t_6, &__pyx_t_5) < 0)) __Pyx_ErrFetch(&__pyx_t_7, &__pyx_t_6, &__pyx_t_5);
       __Pyx_XGOTREF(__pyx_t_7);
       __Pyx_XGOTREF(__pyx_t_6);
       __Pyx_XGOTREF(__pyx_t_5);
-      __Pyx_XGOTREF(__pyx_t_15);
-      __Pyx_XGOTREF(__pyx_t_16);
       __Pyx_XGOTREF(__pyx_t_17);
+      __Pyx_XGOTREF(__pyx_t_18);
+      __Pyx_XGOTREF(__pyx_t_19);
+      __pyx_t_11 = __pyx_lineno; __pyx_t_15 = __pyx_clineno; __pyx_t_16 = __pyx_filename;
       {
 
-        /* "ahws.py":129
- *     message.sub_critical(str(detail))
+        /* "ahws.py":130
+ *     sys.exit(1)
  * finally:
  *     if os.path.isfile(pidfile):             # <<<<<<<<<<<<<<
  *         os.unlink(pidfile)
- *     raise
  */
-        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
+        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
         __Pyx_GOTREF(__pyx_t_9);
-        __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_path); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
+        __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_path); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_isfile); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
+        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_isfile); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-        __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_pidfile); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
+        __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_pidfile); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
         __Pyx_GOTREF(__pyx_t_4);
         __pyx_t_8 = NULL;
         if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_9))) {
@@ -5516,37 +5512,36 @@ PyMODINIT_FUNC PyInit_ahws(void)
           }
         }
         if (!__pyx_t_8) {
-          __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_9, __pyx_t_4); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
+          __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_9, __pyx_t_4); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
           __Pyx_GOTREF(__pyx_t_3);
         } else {
-          __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
+          __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
           __Pyx_GOTREF(__pyx_t_1);
           PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_8); __Pyx_GIVEREF(__pyx_t_8); __pyx_t_8 = NULL;
           PyTuple_SET_ITEM(__pyx_t_1, 0+1, __pyx_t_4);
           __Pyx_GIVEREF(__pyx_t_4);
           __pyx_t_4 = 0;
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_1, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         }
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_14 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 129; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
+        __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_14 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         if (__pyx_t_14) {
 
-          /* "ahws.py":130
+          /* "ahws.py":131
  * finally:
  *     if os.path.isfile(pidfile):
  *         os.unlink(pidfile)             # <<<<<<<<<<<<<<
- *     raise
  */
-          __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
+          __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
           __Pyx_GOTREF(__pyx_t_9);
-          __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_unlink); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
+          __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_unlink); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-          __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_pidfile); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
+          __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_pidfile); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
           __Pyx_GOTREF(__pyx_t_9);
           __pyx_t_4 = NULL;
           if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_1))) {
@@ -5559,17 +5554,17 @@ PyMODINIT_FUNC PyInit_ahws(void)
             }
           }
           if (!__pyx_t_4) {
-            __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_9); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
+            __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_9); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
             __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
             __Pyx_GOTREF(__pyx_t_3);
           } else {
-            __pyx_t_8 = PyTuple_New(1+1); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
+            __pyx_t_8 = PyTuple_New(1+1); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
             __Pyx_GOTREF(__pyx_t_8);
             PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_4); __Pyx_GIVEREF(__pyx_t_4); __pyx_t_4 = NULL;
             PyTuple_SET_ITEM(__pyx_t_8, 0+1, __pyx_t_9);
             __Pyx_GIVEREF(__pyx_t_9);
             __pyx_t_9 = 0;
-            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_8, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 130; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
+            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_8, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
             __Pyx_GOTREF(__pyx_t_3);
             __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
           }
@@ -5578,33 +5573,45 @@ PyMODINIT_FUNC PyInit_ahws(void)
           goto __pyx_L18;
         }
         __pyx_L18:;
-
-        /* "ahws.py":131
- *     if os.path.isfile(pidfile):
- *         os.unlink(pidfile)
- *     raise             # <<<<<<<<<<<<<<
- */
-        __Pyx_GIVEREF(__pyx_t_7);
-        __Pyx_GIVEREF(__pyx_t_6);
-        __Pyx_XGIVEREF(__pyx_t_5);
-        __Pyx_ErrRestore(__pyx_t_7, __pyx_t_6, __pyx_t_5);
-        __pyx_t_7 = 0; __pyx_t_6 = 0; __pyx_t_5 = 0; 
-        {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L17_error;}
       }
+      if (PY_MAJOR_VERSION >= 3) {
+        __Pyx_XGIVEREF(__pyx_t_17);
+        __Pyx_XGIVEREF(__pyx_t_18);
+        __Pyx_XGIVEREF(__pyx_t_19);
+        __Pyx_ExceptionReset(__pyx_t_17, __pyx_t_18, __pyx_t_19);
+      }
+      __Pyx_XGIVEREF(__pyx_t_7);
+      __Pyx_XGIVEREF(__pyx_t_6);
+      __Pyx_XGIVEREF(__pyx_t_5);
+      __Pyx_ErrRestore(__pyx_t_7, __pyx_t_6, __pyx_t_5);
+      __pyx_t_7 = 0; __pyx_t_6 = 0; __pyx_t_5 = 0; __pyx_t_17 = 0; __pyx_t_18 = 0; __pyx_t_19 = 0;
+      __pyx_lineno = __pyx_t_11; __pyx_clineno = __pyx_t_15; __pyx_filename = __pyx_t_16;
+      goto __pyx_L1_error;
       __pyx_L17_error:;
       if (PY_MAJOR_VERSION >= 3) {
-        __Pyx_XGIVEREF(__pyx_t_15);
-        __Pyx_XGIVEREF(__pyx_t_16);
         __Pyx_XGIVEREF(__pyx_t_17);
-        __Pyx_ExceptionReset(__pyx_t_15, __pyx_t_16, __pyx_t_17);
+        __Pyx_XGIVEREF(__pyx_t_18);
+        __Pyx_XGIVEREF(__pyx_t_19);
+        __Pyx_ExceptionReset(__pyx_t_17, __pyx_t_18, __pyx_t_19);
       }
       __Pyx_XDECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_XDECREF(__pyx_t_6); __pyx_t_6 = 0;
       __Pyx_XDECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_15 = 0; __pyx_t_16 = 0; __pyx_t_17 = 0;
+      __pyx_t_17 = 0; __pyx_t_18 = 0; __pyx_t_19 = 0;
       goto __pyx_L1_error;
     }
+    __pyx_L4:;
   }
+
+  /* "ahws.py":1
+ * #!/usr/bin/python2             # <<<<<<<<<<<<<<
+ * 
+ * import time, os, sys, libmessage, libmisc
+ */
+  __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_test, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
   /*--- Wrapped vars code ---*/
 

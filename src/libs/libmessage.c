@@ -2385,7 +2385,7 @@ static PyObject *__pyx_pf_10libmessage_7Message_2base(CYTHON_UNUSED PyObject *__
  *             marklog = ': %s' % marker
  *         printer.write('%s%s\n' % (basemsg, markmsg))             # <<<<<<<<<<<<<<
  *         if self.LOG:
- *             if isinstance(msg, (list, tuple, bool)):
+ *             if isinstance(msg, (list, tuple, bool, Exception)):
  */
   __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_printer, __pyx_n_s_write); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 91; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -2432,7 +2432,7 @@ static PyObject *__pyx_pf_10libmessage_7Message_2base(CYTHON_UNUSED PyObject *__
  *             marklog = ': %s' % marker
  *         printer.write('%s%s\n' % (basemsg, markmsg))
  *         if self.LOG:             # <<<<<<<<<<<<<<
- *             if isinstance(msg, (list, tuple, bool)):
+ *             if isinstance(msg, (list, tuple, bool, Exception)):
  *                 msg = str(msg)
  */
   __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_LOG); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 92; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -2444,12 +2444,14 @@ static PyObject *__pyx_pf_10libmessage_7Message_2base(CYTHON_UNUSED PyObject *__
     /* "libmessage.py":93
  *         printer.write('%s%s\n' % (basemsg, markmsg))
  *         if self.LOG:
- *             if isinstance(msg, (list, tuple, bool)):             # <<<<<<<<<<<<<<
+ *             if isinstance(msg, (list, tuple, bool, Exception)):             # <<<<<<<<<<<<<<
  *                 msg = str(msg)
  *             if not isinstance(msg, str):
  */
     __Pyx_INCREF(((PyObject*)&PyBool_Type));
     __pyx_t_2 = ((PyObject*)&PyBool_Type);
+    __Pyx_INCREF(__pyx_builtin_Exception);
+    __pyx_t_1 = __pyx_builtin_Exception;
     __pyx_t_4 = PyList_Check(__pyx_v_msg); 
     __pyx_t_8 = (__pyx_t_4 != 0);
     if (!__pyx_t_8) {
@@ -2466,15 +2468,23 @@ static PyObject *__pyx_pf_10libmessage_7Message_2base(CYTHON_UNUSED PyObject *__
     }
     __pyx_t_4 = PyObject_IsInstance(__pyx_v_msg, __pyx_t_2); 
     __pyx_t_8 = (__pyx_t_4 != 0);
-    __pyx_t_3 = __pyx_t_8;
+    if (!__pyx_t_8) {
+    } else {
+      __pyx_t_3 = __pyx_t_8;
+      goto __pyx_L11_bool_binop_done;
+    }
+    __pyx_t_8 = PyObject_IsInstance(__pyx_v_msg, __pyx_t_1); 
+    __pyx_t_4 = (__pyx_t_8 != 0);
+    __pyx_t_3 = __pyx_t_4;
     __pyx_L11_bool_binop_done:;
+    __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_8 = (__pyx_t_3 != 0);
-    if (__pyx_t_8) {
+    __pyx_t_4 = (__pyx_t_3 != 0);
+    if (__pyx_t_4) {
 
       /* "libmessage.py":94
  *         if self.LOG:
- *             if isinstance(msg, (list, tuple, bool)):
+ *             if isinstance(msg, (list, tuple, bool, Exception)):
  *                 msg = str(msg)             # <<<<<<<<<<<<<<
  *             if not isinstance(msg, str):
  *                 msg = msg.encode('utf-8')
@@ -2494,14 +2504,14 @@ static PyObject *__pyx_pf_10libmessage_7Message_2base(CYTHON_UNUSED PyObject *__
     __pyx_L10:;
 
     /* "libmessage.py":95
- *             if isinstance(msg, (list, tuple, bool)):
+ *             if isinstance(msg, (list, tuple, bool, Exception)):
  *                 msg = str(msg)
  *             if not isinstance(msg, str):             # <<<<<<<<<<<<<<
  *                 msg = msg.encode('utf-8')
  *             syslog.syslog(status, '%s%s' % (msg, marklog))
  */
-    __pyx_t_8 = PyString_Check(__pyx_v_msg); 
-    __pyx_t_3 = ((!(__pyx_t_8 != 0)) != 0);
+    __pyx_t_4 = PyString_Check(__pyx_v_msg); 
+    __pyx_t_3 = ((!(__pyx_t_4 != 0)) != 0);
     if (__pyx_t_3) {
 
       /* "libmessage.py":96
@@ -2518,9 +2528,9 @@ static PyObject *__pyx_pf_10libmessage_7Message_2base(CYTHON_UNUSED PyObject *__
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF_SET(__pyx_v_msg, __pyx_t_2);
       __pyx_t_2 = 0;
-      goto __pyx_L14;
+      goto __pyx_L15;
     }
-    __pyx_L14:;
+    __pyx_L15:;
 
     /* "libmessage.py":97
  *             if not isinstance(msg, str):

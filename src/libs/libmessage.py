@@ -90,7 +90,7 @@ class Message(object):
             marklog = ': %s' % marker
         printer.write('%s%s\n' % (basemsg, markmsg))
         if self.LOG:
-            if isinstance(msg, (list, tuple, bool)):
+            if isinstance(msg, (list, tuple, bool, Exception)):
                 msg = str(msg)
             if not isinstance(msg, str):
                 msg = msg.encode('utf-8')

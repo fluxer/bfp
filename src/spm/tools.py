@@ -1015,8 +1015,8 @@ class Portable(object):
                     elif sfile.endswith('.py'):
                         if not parent in python_override:
                             python_override.append(parent)
-                runner = '#!/bin/sh\nset -e\nexport LD_LIBRARY_PATH=".%s"\nexport PYTHONPATH=".%s"\n$@' % \
-                    (':.'.join(library_override), ':.'.join(python_override))
+                runner = '#!/bin/sh\nset -e\nexport LD_LIBRARY_PATH="$(pwd)%s"\nexport PYTHONPATH="$(pwd)%s"\n$@' % \
+                    (':$(pwd)'.join(library_override), ':$(pwd)'.join(python_override))
                 misc.file_write('./run.sh', runner)
                 content.append('./run.sh')
                 os.chmod('./run.sh', 0o755)
