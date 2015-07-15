@@ -7,7 +7,7 @@ depend() {
 start() {
     ebegin "Starting Automatic Hardware Setup daemon"
     start-stop-daemon --start --quiet \
-        --background --exec /usr/sbin/ahws --pidfile /var/run/ahws.pid
+        --exec /usr/sbin/ahws --pidfile /var/run/ahws.pid
     eend $?
 }
 

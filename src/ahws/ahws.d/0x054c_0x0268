@@ -8,9 +8,9 @@ set -e
 . /etc/ahws.d/common
 
 case "$1" in
-    add) modprobe -qba uinput; install_package xboxdrv
+    add) modprobe -qba joydev uinput; install_package xboxdrv
          service_enable xboxdrv && service_start xboxdrv ;;
-    online) modprobe -qba uinput; install_package xboxdrv
+    online) modprobe -qba joydev uinput; install_package xboxdrv
             service_enable xboxdrv && service_start xboxdrv ;;
     changed) true ;; # ignored
     offline) service_stop xboxdrv && service_disable xboxdrv ;;

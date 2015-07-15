@@ -6,7 +6,7 @@ message.DEBUG = True
 misc = libmisc.Misc()
 udev = libmisc.UDev()
 
-app_version = "1.8.2 (6109f03)"
+app_version = "1.8.2 (4c96fbd)"
 
 class AHWS(object):
     def __init__(self):
@@ -97,6 +97,13 @@ class AHWS(object):
 
     def Daemonize(self):
         ''' Daemon that monitors events '''
+        pidfile = '/var/run/ahws.pid'
+        if not '--nofork' in sys.argv:
+            if os.fork():
+                os._exit(0)
+            os.setsid()
+            os.chdir('/')
+        misc.file_write(pidfile, str(os.getpid()))
         try:
             monitor = udev.libudev.udev_monitor_new_from_netlink(udev.udev, 'udev')
             for subsystem in self.SUBSYSTEMS:
@@ -115,11 +122,11 @@ class AHWS(object):
                         time.sleep(1)
         except Exception as detail:
             message.sub_critical(str(detail))
+        finally:
+            if os.path.isfile(pidfile):
+                os.unlink(pidfile)
 
-
-pidfile = '/var/run/ahws.pid'
 try:
-    misc.file_write(pidfile, str(os.getpid()))
     ahws = AHWS()
     message.info('Initializing AHWS v%s' % app_version)
     ahws.Initialize()
@@ -128,6 +135,3 @@ try:
 except Exception as detail:
     message.critical(detail)
     sys.exit(1)
-finally:
-    if os.path.isfile(pidfile):
-        os.unlink(pidfile)
