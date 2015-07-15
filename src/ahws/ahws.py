@@ -14,32 +14,32 @@ class AHWS(object):
         self.SUBSYSTEMS = ['pci', 'usb', 'video4linux', 'sound', 'snd', 'printer', 'drm']
 
     def Properties(self, dev):
-        DEVNAME = udev.libudev.udev_device_get_property_value(dev, 'DEVNAME')
+        DEVNAME = udev.get_property(dev, 'DEVNAME')
         if not DEVNAME:
-            DEVNAME = udev.libudev.udev_device_get_property_value(dev, 'KERNEL')
+            DEVNAME = udev.get_property(dev, 'KERNEL')
         if not DEVNAME:
             DEVNAME = 'Unknown'
 
         # ieee1394_id ?
-        PRODUCT = udev.libudev.udev_device_get_property_value(dev, 'ID_MODEL_ID')
+        PRODUCT = udev.get_property(dev, 'ID_MODEL_ID')
         if not PRODUCT:
-            PRODUCT = udev.libudev.udev_device_get_sysattr_value(dev, 'idProduct')
+            PRODUCT = udev.get_sysattr(dev, 'idProduct')
         if not PRODUCT:
-            PRODUCT = udev.libudev.udev_device_get_sysattr_value(dev, 'device')
+            PRODUCT = udev.get_sysattr(dev, 'device')
 
-        VENDOR = udev.libudev.udev_device_get_property_value(dev, 'ID_VENDOR_ID')
+        VENDOR = udev.get_property(dev, 'ID_VENDOR_ID')
         if not VENDOR:
-            VENDOR = udev.libudev.udev_device_get_sysattr_value(dev, 'idVendor')
+            VENDOR = udev.get_sysattr(dev, 'idVendor')
         if not VENDOR:
-            VENDOR = udev.libudev.udev_device_get_sysattr_value(dev, 'vendor')
+            VENDOR = udev.get_sysattr(dev, 'vendor')
 
-        SERIAL = udev.libudev.udev_device_get_property_value(dev, 'ID_SERIAL')
+        SERIAL = udev.get_property(dev, 'ID_SERIAL')
         if not SERIAL:
-            udev.libudev.udev_device_get_sysattr_value(dev, 'serial')
+            udev.get_sysattr(dev, 'serial')
         if not SERIAL:
-            udev.libudev.udev_device_get_sysattr_value(dev, 'product')
+            udev.get_sysattr(dev, 'product')
 
-        SUBSYSTEM = udev.libudev.udev_device_get_subsystem(dev)
+        SUBSYSTEM = udev.get_subsystem(dev)
 
         return DEVNAME, PRODUCT, VENDOR, SERIAL, SUBSYSTEM
 

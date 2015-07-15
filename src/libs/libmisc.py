@@ -1000,19 +1000,20 @@ class Misc(object):
             mycommand = [chroot, self.ROOT_DIR]
             mycommand.extend(command)
             command = mycommand
+        pseudofs = ('/proc', '/dev', '/dev/pts', '/dev/shm', '/sys')
         try:
-            for s in ('/proc', '/dev', '/dev/pts', '/dev/shm', '/sys'):
-                sdir = '%s%s' % (self.ROOT_DIR, s)
-                if os.path.isdir(s) and not os.path.ismount(sdir):
+            for p in pseudofs:
+                sdir = '%s%s' % (self.ROOT_DIR, p)
+                if os.path.isdir(p) and not os.path.ismount(sdir):
                     self.dir_create(sdir)
-                    self.system_command((mount, '--bind', s, sdir))
+                    self.system_command((mount, '--bind', p, sdir))
             if sinput:
                 self.system_communicate(command, bshell, sinput=sinput)
             else:
                 self.system_command(command, bshell)
         finally:
-            for s in ('/proc', '/dev', '/dev/pts', '/dev/shm', '/sys'):
-                sdir = '%s%s' % (self.ROOT_DIR, s)
+            for p in pseudofs:
+                sdir = '%s%s' % (self.ROOT_DIR, p)
                 if os.path.ismount(sdir):
                     self.system_command((umount, '-f', '-l', sdir))
 
@@ -1209,6 +1210,30 @@ class UDev(object):
         self.udev = self.libudev.udev_new()
         if not self.udev:
             raise Exception('Can not get udev context')
+
+        self._udev_device_get_property_value = self.libudev.udev_device_get_property_value
+        self._udev_device_get_property_value.restype = ctypes.c_char_p
+        self._udev_device_get_property_value.argtypes = [ctypes.c_void_p, ctypes.c_char_p]
+
+        self._udev_device_get_sysattr_value = self.libudev.udev_device_get_sysattr_value
+        self._udev_device_get_sysattr_value.restype = ctypes.c_char_p
+        self._udev_device_get_sysattr_value.argtypes = [ctypes.c_void_p, ctypes.c_char_p]
+
+        self._udev_device_get_subsystem = self.libudev.udev_device_get_subsystem
+        self._udev_device_get_subsystem.restype = ctypes.c_char_p
+        self._udev_device_get_subsystem.argtypes = [ctypes.c_void_p]
+
+    def get_property(self, dev, tag):
+        ''' Get property of device '''
+        return self._udev_device_get_property_value(dev, tag)
+
+    def get_sysattr(self, dev, tag):
+        ''' Get sysfs attribute of device '''
+        return self._udev_device_get_sysattr_value(dev, tag)
+
+    def get_subsystem(self, dev):
+        ''' Get subsystem of device '''
+        return self._udev_device_get_subsystem(dev)
 
     def __exit__(self, type, value, traceback):
         if self.udev:

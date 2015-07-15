@@ -8,10 +8,10 @@ set -e
 . /etc/ahws.d/common
 
 case "$1" in
-    add) install_nvidia || kms_disable ;;
-    online) install_nvidia || kms_disable ;;
+    add) install_nvidia || { kms_disable && xvesa_enable } ;;
+    online) install_nvidia || { kms_disable && xvesa_enable } ;;
     changed) true ;; # ignored
-    offline) remove_nvidia && kms_enable ;;
-    remove) remove_nvidia && kms_enable ;;
+    offline) remove_nvidia && kms_enable && xvesa_disable ;;
+    remove) remove_nvidia && kms_enable && xvesa_disable ;;
     *) echo "Unknown event: $1" && exit 1 ;;
 esac

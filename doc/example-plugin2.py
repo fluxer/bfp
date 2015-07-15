@@ -19,7 +19,7 @@ class Goodbye(libspm.Source):
 
     def main(self):
         reboot = False
-        # schedule systme reboot if kernel is going to be installed
+        # schedule system reboot if kernel is going to be installed
         if 'linux' in self.targets:
             reboot = True
         # do you care about your decoder?
@@ -30,7 +30,6 @@ class Goodbye(libspm.Source):
             content = database.local_metadata(target, 'footprint')
             # add metadata directory, it is not listed in the footprint
             content.append('%s/%s' % (libspm.LOCAL_DIR, target))
-
             message.sub_info(_('Compressing'), target_packfile)
             misc.archive_compress(content, target_packfile, '/')
         # wanna rollback in case of driver messup?
