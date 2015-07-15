@@ -6,7 +6,7 @@ message.DEBUG = True
 misc = libmisc.Misc()
 udev = libmisc.UDev()
 
-app_version = "1.8.2 (d556331)"
+app_version = "1.8.2 (25753bb)"
 
 class AHWS(object):
     def __init__(self):
@@ -45,6 +45,8 @@ class AHWS(object):
 
     def Handle(self, properties, action):
         DEVNAME, MODEL, VENDOR, SERIAL, SUBSYSTEM = properties
+        MODEL = '0x%s' % MODEL
+        VENDOR = '0x%s' % VENDOR
         if not MODEL or not VENDOR:
             message.sub_warning('Model or vendor ID missing for', \
                 '%s (%s, %s)' % (DEVNAME, VENDOR, MODEL))

@@ -87,24 +87,34 @@ remove_amd() {
     fi
 }
 
+install_package() {
+    if [ ! -d "/var/local/spm/$1" ];then
+        spm binary -a $@
+    fi
+}
+
+remove_package() {
+    if [ -d "/var/local/spm/$1" ];then
+        spm binary -r $@
+    fi
+}
+
 # enable a service
 service_enable() {
-    # FIXME: implement
-    false
+    rc-update add "$1" default
 }
 
 # disable a service
 service_disable() {
-    # FIXME: implement
-    false
+    rc-update del "$1" default
 }
 
 # start a service
 service_start() {
-    rc.d start --stopped "$1"
+    rc-service "$1" start
 }
 
 # stop a service
 service_stop() {
-    rc.d stop --started "$1"
+    rc-service "$1" stop
 }
