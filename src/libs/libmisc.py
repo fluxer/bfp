@@ -1223,6 +1223,10 @@ class UDev(object):
         self._udev_device_get_subsystem.restype = ctypes.c_char_p
         self._udev_device_get_subsystem.argtypes = [ctypes.c_void_p]
 
+        self._udev_device_get_action = self.libudev.udev_device_get_action
+        self._udev_device_get_action.restype = ctypes.c_char_p
+        self._udev_device_get_action.argtypes = [ctypes.c_void_p]
+
     def get_property(self, dev, tag):
         ''' Get property of device '''
         return self._udev_device_get_property_value(dev, tag)
@@ -1234,6 +1238,10 @@ class UDev(object):
     def get_subsystem(self, dev):
         ''' Get subsystem of device '''
         return self._udev_device_get_subsystem(dev)
+
+    def get_action(self, dev):
+        ''' Get subsystem of device '''
+        return self._udev_device_get_action(dev)
 
     def __exit__(self, type, value, traceback):
         if self.udev:

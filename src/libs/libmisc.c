@@ -940,8 +940,9 @@ static PyObject *__pyx_pf_7libmisc_4UDev___init__(CYTHON_UNUSED PyObject *__pyx_
 static PyObject *__pyx_pf_7libmisc_4UDev_2get_property(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_dev, PyObject *__pyx_v_tag); /* proto */
 static PyObject *__pyx_pf_7libmisc_4UDev_4get_sysattr(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_dev, PyObject *__pyx_v_tag); /* proto */
 static PyObject *__pyx_pf_7libmisc_4UDev_6get_subsystem(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_dev); /* proto */
-static PyObject *__pyx_pf_7libmisc_4UDev_8__exit__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_type, CYTHON_UNUSED PyObject *__pyx_v_value, CYTHON_UNUSED PyObject *__pyx_v_traceback); /* proto */
-static PyObject *__pyx_pf_7libmisc_4UDev_10error(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self); /* proto */
+static PyObject *__pyx_pf_7libmisc_4UDev_8get_action(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_dev); /* proto */
+static PyObject *__pyx_pf_7libmisc_4UDev_10__exit__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_type, CYTHON_UNUSED PyObject *__pyx_v_value, CYTHON_UNUSED PyObject *__pyx_v_traceback); /* proto */
+static PyObject *__pyx_pf_7libmisc_4UDev_12error(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self); /* proto */
 static PyObject *__pyx_tp_new_7libmisc___pyx_scope_struct__event_read(PyTypeObject *t, PyObject *a, PyObject *k); /*proto*/
 static char __pyx_k_[] = "/";
 static char __pyx_k_0[] = "0";
@@ -1427,6 +1428,7 @@ static char __pyx_k_dir_remove[] = "dir_remove";
 static char __pyx_k_event_read[] = "event_read";
 static char __pyx_k_expanduser[] = "expanduser";
 static char __pyx_k_file_write[] = "file_write";
+static char __pyx_k_get_action[] = "get_action";
 static char __pyx_k_gpg_verify[] = "gpg_verify";
 static char __pyx_k_image_jpeg[] = "image/jpeg";
 static char __pyx_k_is_tarfile[] = "is_tarfile";
@@ -1554,6 +1556,7 @@ static char __pyx_k_Misc_gpg_verify[] = "Misc.gpg_verify";
 static char __pyx_k_Misc_json_write[] = "Misc.json_write";
 static char __pyx_k_Misc_list_files[] = "Misc.list_files";
 static char __pyx_k_NO_CHECK_TOKENS[] = "NO_CHECK_TOKENS";
+static char __pyx_k_UDev_get_action[] = "UDev.get_action";
 static char __pyx_k_Unsupported_URL[] = "Unsupported URL";
 static char __pyx_k_application_xml[] = "application/xml";
 static char __pyx_k_file_substitute[] = "file_substitute";
@@ -1618,10 +1621,12 @@ static char __pyx_k_application_xhtml_xml[] = "application/xhtml+xml";
 static char __pyx_k_Misc_archive_supported[] = "Misc.archive_supported";
 static char __pyx_k_Misc_string_unit_guess[] = "Misc.string_unit_guess";
 static char __pyx_k_create_default_context[] = "create_default_context";
+static char __pyx_k_udev_device_get_action[] = "udev_device_get_action";
 static char __pyx_k_Misc_archive_decompress[] = "Misc.archive_decompress";
 static char __pyx_k_Misc_system_communicate[] = "Misc.system_communicate";
 static char __pyx_k_Can_not_get_udev_context[] = "Can not get udev context";
 static char __pyx_k_application_octet_stream[] = "application/octet-stream";
+static char __pyx_k_udev_device_get_action_2[] = "_udev_device_get_action";
 static char __pyx_k_Program_not_found_in_PATH[] = "Program not found in PATH";
 static char __pyx_k_udev_device_get_subsystem[] = "udev_device_get_subsystem";
 static char __pyx_k_Program_not_found_in_PATH_s[] = "Program not found in PATH (%s)";
@@ -1808,6 +1813,7 @@ static PyObject *__pyx_n_s_UDev;
 static PyObject *__pyx_n_s_UDev___exit;
 static PyObject *__pyx_n_s_UDev___init;
 static PyObject *__pyx_n_s_UDev_error;
+static PyObject *__pyx_n_s_UDev_get_action;
 static PyObject *__pyx_n_s_UDev_get_property;
 static PyObject *__pyx_n_s_UDev_get_subsystem;
 static PyObject *__pyx_n_s_UDev_get_sysattr;
@@ -1982,6 +1988,7 @@ static PyObject *__pyx_kp_s_ftp;
 static PyObject *__pyx_kp_s_ftps;
 static PyObject *__pyx_n_s_function;
 static PyObject *__pyx_n_s_get;
+static PyObject *__pyx_n_s_get_action;
 static PyObject *__pyx_n_s_get_errno;
 static PyObject *__pyx_n_s_get_property;
 static PyObject *__pyx_n_s_get_subsystem;
@@ -2270,6 +2277,8 @@ static PyObject *__pyx_n_s_type;
 static PyObject *__pyx_n_s_typecheck;
 static PyObject *__pyx_n_s_types;
 static PyObject *__pyx_n_s_udev;
+static PyObject *__pyx_n_s_udev_device_get_action;
+static PyObject *__pyx_n_s_udev_device_get_action_2;
 static PyObject *__pyx_n_s_udev_device_get_property_value;
 static PyObject *__pyx_n_s_udev_device_get_property_value_2;
 static PyObject *__pyx_n_s_udev_device_get_subsystem;
@@ -2572,6 +2581,7 @@ static PyObject *__pyx_tuple__280;
 static PyObject *__pyx_tuple__282;
 static PyObject *__pyx_tuple__284;
 static PyObject *__pyx_tuple__286;
+static PyObject *__pyx_tuple__288;
 static PyObject *__pyx_codeobj__118;
 static PyObject *__pyx_codeobj__120;
 static PyObject *__pyx_codeobj__122;
@@ -2641,6 +2651,7 @@ static PyObject *__pyx_codeobj__281;
 static PyObject *__pyx_codeobj__283;
 static PyObject *__pyx_codeobj__285;
 static PyObject *__pyx_codeobj__287;
+static PyObject *__pyx_codeobj__289;
 
 /* "libmisc.py":38
  * class Misc(object):
@@ -35612,7 +35623,7 @@ static PyObject *__pyx_pf_7libmisc_4UDev___init__(CYTHON_UNUSED PyObject *__pyx_
  *         self._udev_device_get_subsystem.restype = ctypes.c_char_p
  *         self._udev_device_get_subsystem.argtypes = [ctypes.c_void_p]             # <<<<<<<<<<<<<<
  * 
- *     def get_property(self, dev, tag):
+ *         self._udev_device_get_action = self.libudev.udev_device_get_action
  */
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_ctypes); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1224; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -35627,6 +35638,62 @@ static PyObject *__pyx_pf_7libmisc_4UDev___init__(CYTHON_UNUSED PyObject *__pyx_
   __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_udev_device_get_subsystem_2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1224; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   if (__Pyx_PyObject_SetAttrStr(__pyx_t_4, __pyx_n_s_argtypes, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1224; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+
+  /* "libmisc.py":1226
+ *         self._udev_device_get_subsystem.argtypes = [ctypes.c_void_p]
+ * 
+ *         self._udev_device_get_action = self.libudev.udev_device_get_action             # <<<<<<<<<<<<<<
+ *         self._udev_device_get_action.restype = ctypes.c_char_p
+ *         self._udev_device_get_action.argtypes = [ctypes.c_void_p]
+ */
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_libudev); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1226; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_udev_device_get_action); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1226; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_udev_device_get_action_2, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1226; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "libmisc.py":1227
+ * 
+ *         self._udev_device_get_action = self.libudev.udev_device_get_action
+ *         self._udev_device_get_action.restype = ctypes.c_char_p             # <<<<<<<<<<<<<<
+ *         self._udev_device_get_action.argtypes = [ctypes.c_void_p]
+ * 
+ */
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_ctypes); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1227; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_c_char_p); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1227; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_udev_device_get_action_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1227; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  if (__Pyx_PyObject_SetAttrStr(__pyx_t_2, __pyx_n_s_restype, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1227; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+
+  /* "libmisc.py":1228
+ *         self._udev_device_get_action = self.libudev.udev_device_get_action
+ *         self._udev_device_get_action.restype = ctypes.c_char_p
+ *         self._udev_device_get_action.argtypes = [ctypes.c_void_p]             # <<<<<<<<<<<<<<
+ * 
+ *     def get_property(self, dev, tag):
+ */
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_ctypes); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_c_void_p); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_t_2 = PyList_New(1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  PyList_SET_ITEM(__pyx_t_2, 0, __pyx_t_4);
+  __Pyx_GIVEREF(__pyx_t_4);
+  __pyx_t_4 = 0;
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_udev_device_get_action_2); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_4);
+  if (__Pyx_PyObject_SetAttrStr(__pyx_t_4, __pyx_n_s_argtypes, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
@@ -35655,8 +35722,8 @@ static PyObject *__pyx_pf_7libmisc_4UDev___init__(CYTHON_UNUSED PyObject *__pyx_
   return __pyx_r;
 }
 
-/* "libmisc.py":1226
- *         self._udev_device_get_subsystem.argtypes = [ctypes.c_void_p]
+/* "libmisc.py":1230
+ *         self._udev_device_get_action.argtypes = [ctypes.c_void_p]
  * 
  *     def get_property(self, dev, tag):             # <<<<<<<<<<<<<<
  *         ''' Get property of device '''
@@ -35698,16 +35765,16 @@ static PyObject *__pyx_pw_7libmisc_4UDev_3get_property(PyObject *__pyx_self, PyO
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_dev_2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("get_property", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1226; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("get_property", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1230; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_tag)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("get_property", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1226; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("get_property", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1230; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_property") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1226; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_property") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1230; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -35722,7 +35789,7 @@ static PyObject *__pyx_pw_7libmisc_4UDev_3get_property(PyObject *__pyx_self, PyO
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("get_property", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1226; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("get_property", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1230; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("libmisc.UDev.get_property", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -35748,7 +35815,7 @@ static PyObject *__pyx_pf_7libmisc_4UDev_2get_property(CYTHON_UNUSED PyObject *_
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_property", 0);
 
-  /* "libmisc.py":1228
+  /* "libmisc.py":1232
  *     def get_property(self, dev, tag):
  *         ''' Get property of device '''
  *         return self._udev_device_get_property_value(dev, tag)             # <<<<<<<<<<<<<<
@@ -35756,7 +35823,7 @@ static PyObject *__pyx_pf_7libmisc_4UDev_2get_property(CYTHON_UNUSED PyObject *_
  *     def get_sysattr(self, dev, tag):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_udev_device_get_property_value_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_udev_device_get_property_value_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1232; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -35770,7 +35837,7 @@ static PyObject *__pyx_pf_7libmisc_4UDev_2get_property(CYTHON_UNUSED PyObject *_
       __pyx_t_4 = 1;
     }
   }
-  __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1232; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (__pyx_t_3) {
     PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3); __Pyx_GIVEREF(__pyx_t_3); __pyx_t_3 = NULL;
@@ -35781,7 +35848,7 @@ static PyObject *__pyx_pf_7libmisc_4UDev_2get_property(CYTHON_UNUSED PyObject *_
   __Pyx_INCREF(__pyx_v_tag);
   PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_4, __pyx_v_tag);
   __Pyx_GIVEREF(__pyx_v_tag);
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1232; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -35789,8 +35856,8 @@ static PyObject *__pyx_pf_7libmisc_4UDev_2get_property(CYTHON_UNUSED PyObject *_
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "libmisc.py":1226
- *         self._udev_device_get_subsystem.argtypes = [ctypes.c_void_p]
+  /* "libmisc.py":1230
+ *         self._udev_device_get_action.argtypes = [ctypes.c_void_p]
  * 
  *     def get_property(self, dev, tag):             # <<<<<<<<<<<<<<
  *         ''' Get property of device '''
@@ -35811,7 +35878,7 @@ static PyObject *__pyx_pf_7libmisc_4UDev_2get_property(CYTHON_UNUSED PyObject *_
   return __pyx_r;
 }
 
-/* "libmisc.py":1230
+/* "libmisc.py":1234
  *         return self._udev_device_get_property_value(dev, tag)
  * 
  *     def get_sysattr(self, dev, tag):             # <<<<<<<<<<<<<<
@@ -35854,16 +35921,16 @@ static PyObject *__pyx_pw_7libmisc_4UDev_5get_sysattr(PyObject *__pyx_self, PyOb
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_dev_2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("get_sysattr", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1230; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("get_sysattr", 1, 3, 3, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1234; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_tag)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("get_sysattr", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1230; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("get_sysattr", 1, 3, 3, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1234; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_sysattr") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1230; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_sysattr") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1234; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -35878,7 +35945,7 @@ static PyObject *__pyx_pw_7libmisc_4UDev_5get_sysattr(PyObject *__pyx_self, PyOb
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("get_sysattr", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1230; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("get_sysattr", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1234; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("libmisc.UDev.get_sysattr", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -35904,7 +35971,7 @@ static PyObject *__pyx_pf_7libmisc_4UDev_4get_sysattr(CYTHON_UNUSED PyObject *__
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_sysattr", 0);
 
-  /* "libmisc.py":1232
+  /* "libmisc.py":1236
  *     def get_sysattr(self, dev, tag):
  *         ''' Get sysfs attribute of device '''
  *         return self._udev_device_get_sysattr_value(dev, tag)             # <<<<<<<<<<<<<<
@@ -35912,7 +35979,7 @@ static PyObject *__pyx_pf_7libmisc_4UDev_4get_sysattr(CYTHON_UNUSED PyObject *__
  *     def get_subsystem(self, dev):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_udev_device_get_sysattr_value_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1232; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_udev_device_get_sysattr_value_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   __pyx_t_4 = 0;
@@ -35926,7 +35993,7 @@ static PyObject *__pyx_pf_7libmisc_4UDev_4get_sysattr(CYTHON_UNUSED PyObject *__
       __pyx_t_4 = 1;
     }
   }
-  __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1232; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (__pyx_t_3) {
     PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3); __Pyx_GIVEREF(__pyx_t_3); __pyx_t_3 = NULL;
@@ -35937,7 +36004,7 @@ static PyObject *__pyx_pf_7libmisc_4UDev_4get_sysattr(CYTHON_UNUSED PyObject *__
   __Pyx_INCREF(__pyx_v_tag);
   PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_4, __pyx_v_tag);
   __Pyx_GIVEREF(__pyx_v_tag);
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1232; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -35945,7 +36012,7 @@ static PyObject *__pyx_pf_7libmisc_4UDev_4get_sysattr(CYTHON_UNUSED PyObject *__
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "libmisc.py":1230
+  /* "libmisc.py":1234
  *         return self._udev_device_get_property_value(dev, tag)
  * 
  *     def get_sysattr(self, dev, tag):             # <<<<<<<<<<<<<<
@@ -35967,7 +36034,7 @@ static PyObject *__pyx_pf_7libmisc_4UDev_4get_sysattr(CYTHON_UNUSED PyObject *__
   return __pyx_r;
 }
 
-/* "libmisc.py":1234
+/* "libmisc.py":1238
  *         return self._udev_device_get_sysattr_value(dev, tag)
  * 
  *     def get_subsystem(self, dev):             # <<<<<<<<<<<<<<
@@ -36008,11 +36075,11 @@ static PyObject *__pyx_pw_7libmisc_4UDev_7get_subsystem(PyObject *__pyx_self, Py
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_dev_2)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("get_subsystem", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1234; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("get_subsystem", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1238; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_subsystem") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1234; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_subsystem") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1238; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
       goto __pyx_L5_argtuple_error;
@@ -36025,7 +36092,7 @@ static PyObject *__pyx_pw_7libmisc_4UDev_7get_subsystem(PyObject *__pyx_self, Py
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("get_subsystem", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1234; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("get_subsystem", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1238; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("libmisc.UDev.get_subsystem", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -36050,15 +36117,15 @@ static PyObject *__pyx_pf_7libmisc_4UDev_6get_subsystem(CYTHON_UNUSED PyObject *
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("get_subsystem", 0);
 
-  /* "libmisc.py":1236
+  /* "libmisc.py":1240
  *     def get_subsystem(self, dev):
  *         ''' Get subsystem of device '''
  *         return self._udev_device_get_subsystem(dev)             # <<<<<<<<<<<<<<
  * 
- *     def __exit__(self, type, value, traceback):
+ *     def get_action(self, dev):
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_udev_device_get_subsystem_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_udev_device_get_subsystem_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __pyx_t_3 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -36071,16 +36138,16 @@ static PyObject *__pyx_pf_7libmisc_4UDev_6get_subsystem(CYTHON_UNUSED PyObject *
     }
   }
   if (!__pyx_t_3) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_dev); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_dev); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __Pyx_GIVEREF(__pyx_t_3); __pyx_t_3 = NULL;
     __Pyx_INCREF(__pyx_v_dev);
     PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_dev);
     __Pyx_GIVEREF(__pyx_v_dev);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   }
@@ -36089,7 +36156,7 @@ static PyObject *__pyx_pf_7libmisc_4UDev_6get_subsystem(CYTHON_UNUSED PyObject *
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "libmisc.py":1234
+  /* "libmisc.py":1238
  *         return self._udev_device_get_sysattr_value(dev, tag)
  * 
  *     def get_subsystem(self, dev):             # <<<<<<<<<<<<<<
@@ -36111,8 +36178,152 @@ static PyObject *__pyx_pf_7libmisc_4UDev_6get_subsystem(CYTHON_UNUSED PyObject *
   return __pyx_r;
 }
 
-/* "libmisc.py":1238
+/* "libmisc.py":1242
  *         return self._udev_device_get_subsystem(dev)
+ * 
+ *     def get_action(self, dev):             # <<<<<<<<<<<<<<
+ *         ''' Get subsystem of device '''
+ *         return self._udev_device_get_action(dev)
+ */
+
+/* Python wrapper */
+static PyObject *__pyx_pw_7libmisc_4UDev_9get_action(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static char __pyx_doc_7libmisc_4UDev_8get_action[] = " Get subsystem of device ";
+static PyMethodDef __pyx_mdef_7libmisc_4UDev_9get_action = {"get_action", (PyCFunction)__pyx_pw_7libmisc_4UDev_9get_action, METH_VARARGS|METH_KEYWORDS, __pyx_doc_7libmisc_4UDev_8get_action};
+static PyObject *__pyx_pw_7libmisc_4UDev_9get_action(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+  PyObject *__pyx_v_self = 0;
+  PyObject *__pyx_v_dev = 0;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  PyObject *__pyx_r = 0;
+  __Pyx_RefNannyDeclarations
+  __Pyx_RefNannySetupContext("get_action (wrapper)", 0);
+  {
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_dev_2,0};
+    PyObject* values[2] = {0,0};
+    if (unlikely(__pyx_kwds)) {
+      Py_ssize_t kw_args;
+      const Py_ssize_t pos_args = PyTuple_GET_SIZE(__pyx_args);
+      switch (pos_args) {
+        case  2: values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+        case  1: values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+        case  0: break;
+        default: goto __pyx_L5_argtuple_error;
+      }
+      kw_args = PyDict_Size(__pyx_kwds);
+      switch (pos_args) {
+        case  0:
+        if (likely((values[0] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_self)) != 0)) kw_args--;
+        else goto __pyx_L5_argtuple_error;
+        case  1:
+        if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_dev_2)) != 0)) kw_args--;
+        else {
+          __Pyx_RaiseArgtupleInvalid("get_action", 1, 2, 2, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1242; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        }
+      }
+      if (unlikely(kw_args > 0)) {
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "get_action") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1242; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+      }
+    } else if (PyTuple_GET_SIZE(__pyx_args) != 2) {
+      goto __pyx_L5_argtuple_error;
+    } else {
+      values[0] = PyTuple_GET_ITEM(__pyx_args, 0);
+      values[1] = PyTuple_GET_ITEM(__pyx_args, 1);
+    }
+    __pyx_v_self = values[0];
+    __pyx_v_dev = values[1];
+  }
+  goto __pyx_L4_argument_unpacking_done;
+  __pyx_L5_argtuple_error:;
+  __Pyx_RaiseArgtupleInvalid("get_action", 1, 2, 2, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1242; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __pyx_L3_error:;
+  __Pyx_AddTraceback("libmisc.UDev.get_action", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __Pyx_RefNannyFinishContext();
+  return NULL;
+  __pyx_L4_argument_unpacking_done:;
+  __pyx_r = __pyx_pf_7libmisc_4UDev_8get_action(__pyx_self, __pyx_v_self, __pyx_v_dev);
+
+  /* function exit code */
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+static PyObject *__pyx_pf_7libmisc_4UDev_8get_action(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_dev) {
+  PyObject *__pyx_r = NULL;
+  __Pyx_RefNannyDeclarations
+  PyObject *__pyx_t_1 = NULL;
+  PyObject *__pyx_t_2 = NULL;
+  PyObject *__pyx_t_3 = NULL;
+  PyObject *__pyx_t_4 = NULL;
+  int __pyx_lineno = 0;
+  const char *__pyx_filename = NULL;
+  int __pyx_clineno = 0;
+  __Pyx_RefNannySetupContext("get_action", 0);
+
+  /* "libmisc.py":1244
+ *     def get_action(self, dev):
+ *         ''' Get subsystem of device '''
+ *         return self._udev_device_get_action(dev)             # <<<<<<<<<<<<<<
+ * 
+ *     def __exit__(self, type, value, traceback):
+ */
+  __Pyx_XDECREF(__pyx_r);
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_udev_device_get_action_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1244; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_2);
+  __pyx_t_3 = NULL;
+  if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
+    __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
+    if (likely(__pyx_t_3)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+      __Pyx_INCREF(__pyx_t_3);
+      __Pyx_INCREF(function);
+      __Pyx_DECREF_SET(__pyx_t_2, function);
+    }
+  }
+  if (!__pyx_t_3) {
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_dev); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1244; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_1);
+  } else {
+    __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1244; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_4);
+    PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __Pyx_GIVEREF(__pyx_t_3); __pyx_t_3 = NULL;
+    __Pyx_INCREF(__pyx_v_dev);
+    PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_dev);
+    __Pyx_GIVEREF(__pyx_v_dev);
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1244; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_1);
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  }
+  __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+  __pyx_r = __pyx_t_1;
+  __pyx_t_1 = 0;
+  goto __pyx_L0;
+
+  /* "libmisc.py":1242
+ *         return self._udev_device_get_subsystem(dev)
+ * 
+ *     def get_action(self, dev):             # <<<<<<<<<<<<<<
+ *         ''' Get subsystem of device '''
+ *         return self._udev_device_get_action(dev)
+ */
+
+  /* function exit code */
+  __pyx_L1_error:;
+  __Pyx_XDECREF(__pyx_t_1);
+  __Pyx_XDECREF(__pyx_t_2);
+  __Pyx_XDECREF(__pyx_t_3);
+  __Pyx_XDECREF(__pyx_t_4);
+  __Pyx_AddTraceback("libmisc.UDev.get_action", __pyx_clineno, __pyx_lineno, __pyx_filename);
+  __pyx_r = NULL;
+  __pyx_L0:;
+  __Pyx_XGIVEREF(__pyx_r);
+  __Pyx_RefNannyFinishContext();
+  return __pyx_r;
+}
+
+/* "libmisc.py":1246
+ *         return self._udev_device_get_action(dev)
  * 
  *     def __exit__(self, type, value, traceback):             # <<<<<<<<<<<<<<
  *         if self.udev:
@@ -36120,9 +36331,9 @@ static PyObject *__pyx_pf_7libmisc_4UDev_6get_subsystem(CYTHON_UNUSED PyObject *
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7libmisc_4UDev_9__exit__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static PyMethodDef __pyx_mdef_7libmisc_4UDev_9__exit__ = {"__exit__", (PyCFunction)__pyx_pw_7libmisc_4UDev_9__exit__, METH_VARARGS|METH_KEYWORDS, 0};
-static PyObject *__pyx_pw_7libmisc_4UDev_9__exit__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
+static PyObject *__pyx_pw_7libmisc_4UDev_11__exit__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
+static PyMethodDef __pyx_mdef_7libmisc_4UDev_11__exit__ = {"__exit__", (PyCFunction)__pyx_pw_7libmisc_4UDev_11__exit__, METH_VARARGS|METH_KEYWORDS, 0};
+static PyObject *__pyx_pw_7libmisc_4UDev_11__exit__(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_self = 0;
   CYTHON_UNUSED PyObject *__pyx_v_type = 0;
   CYTHON_UNUSED PyObject *__pyx_v_value = 0;
@@ -36155,21 +36366,21 @@ static PyObject *__pyx_pw_7libmisc_4UDev_9__exit__(PyObject *__pyx_self, PyObjec
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_type)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__exit__", 1, 4, 4, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1238; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("__exit__", 1, 4, 4, 1); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1246; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_value)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__exit__", 1, 4, 4, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1238; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("__exit__", 1, 4, 4, 2); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1246; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
         case  3:
         if (likely((values[3] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_traceback)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("__exit__", 1, 4, 4, 3); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1238; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+          __Pyx_RaiseArgtupleInvalid("__exit__", 1, 4, 4, 3); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1246; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__exit__") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1238; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "__exit__") < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1246; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 4) {
       goto __pyx_L5_argtuple_error;
@@ -36186,20 +36397,20 @@ static PyObject *__pyx_pw_7libmisc_4UDev_9__exit__(PyObject *__pyx_self, PyObjec
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("__exit__", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1238; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
+  __Pyx_RaiseArgtupleInvalid("__exit__", 1, 4, 4, PyTuple_GET_SIZE(__pyx_args)); {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1246; __pyx_clineno = __LINE__; goto __pyx_L3_error;}
   __pyx_L3_error:;
   __Pyx_AddTraceback("libmisc.UDev.__exit__", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_7libmisc_4UDev_8__exit__(__pyx_self, __pyx_v_self, __pyx_v_type, __pyx_v_value, __pyx_v_traceback);
+  __pyx_r = __pyx_pf_7libmisc_4UDev_10__exit__(__pyx_self, __pyx_v_self, __pyx_v_type, __pyx_v_value, __pyx_v_traceback);
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7libmisc_4UDev_8__exit__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_type, CYTHON_UNUSED PyObject *__pyx_v_value, CYTHON_UNUSED PyObject *__pyx_v_traceback) {
+static PyObject *__pyx_pf_7libmisc_4UDev_10__exit__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, CYTHON_UNUSED PyObject *__pyx_v_type, CYTHON_UNUSED PyObject *__pyx_v_value, CYTHON_UNUSED PyObject *__pyx_v_traceback) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -36213,32 +36424,32 @@ static PyObject *__pyx_pf_7libmisc_4UDev_8__exit__(CYTHON_UNUSED PyObject *__pyx
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("__exit__", 0);
 
-  /* "libmisc.py":1239
+  /* "libmisc.py":1247
  * 
  *     def __exit__(self, type, value, traceback):
  *         if self.udev:             # <<<<<<<<<<<<<<
  *             self.libudev.udev_unref(self.udev)
  * 
  */
-  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_udev); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1239; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_udev); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1239; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_2 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   if (__pyx_t_2) {
 
-    /* "libmisc.py":1240
+    /* "libmisc.py":1248
  *     def __exit__(self, type, value, traceback):
  *         if self.udev:
  *             self.libudev.udev_unref(self.udev)             # <<<<<<<<<<<<<<
  * 
  *     def error(self):
  */
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_libudev); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_libudev); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1248; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_udev_unref); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_udev_unref); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1248; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_udev); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_udev); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1248; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __pyx_t_5 = NULL;
     if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_4))) {
@@ -36251,17 +36462,17 @@ static PyObject *__pyx_pf_7libmisc_4UDev_8__exit__(CYTHON_UNUSED PyObject *__pyx
       }
     }
     if (!__pyx_t_5) {
-      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1248; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_GOTREF(__pyx_t_1);
     } else {
-      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1248; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
       PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_5); __Pyx_GIVEREF(__pyx_t_5); __pyx_t_5 = NULL;
       PyTuple_SET_ITEM(__pyx_t_6, 0+1, __pyx_t_3);
       __Pyx_GIVEREF(__pyx_t_3);
       __pyx_t_3 = 0;
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_6, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1248; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     }
@@ -36271,8 +36482,8 @@ static PyObject *__pyx_pf_7libmisc_4UDev_8__exit__(CYTHON_UNUSED PyObject *__pyx
   }
   __pyx_L3:;
 
-  /* "libmisc.py":1238
- *         return self._udev_device_get_subsystem(dev)
+  /* "libmisc.py":1246
+ *         return self._udev_device_get_action(dev)
  * 
  *     def __exit__(self, type, value, traceback):             # <<<<<<<<<<<<<<
  *         if self.udev:
@@ -36296,7 +36507,7 @@ static PyObject *__pyx_pf_7libmisc_4UDev_8__exit__(CYTHON_UNUSED PyObject *__pyx
   return __pyx_r;
 }
 
-/* "libmisc.py":1242
+/* "libmisc.py":1250
  *             self.libudev.udev_unref(self.udev)
  * 
  *     def error(self):             # <<<<<<<<<<<<<<
@@ -36305,21 +36516,21 @@ static PyObject *__pyx_pf_7libmisc_4UDev_8__exit__(CYTHON_UNUSED PyObject *__pyx
  */
 
 /* Python wrapper */
-static PyObject *__pyx_pw_7libmisc_4UDev_11error(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
-static char __pyx_doc_7libmisc_4UDev_10error[] = " Get last error as string ";
-static PyMethodDef __pyx_mdef_7libmisc_4UDev_11error = {"error", (PyCFunction)__pyx_pw_7libmisc_4UDev_11error, METH_O, __pyx_doc_7libmisc_4UDev_10error};
-static PyObject *__pyx_pw_7libmisc_4UDev_11error(PyObject *__pyx_self, PyObject *__pyx_v_self) {
+static PyObject *__pyx_pw_7libmisc_4UDev_13error(PyObject *__pyx_self, PyObject *__pyx_v_self); /*proto*/
+static char __pyx_doc_7libmisc_4UDev_12error[] = " Get last error as string ";
+static PyMethodDef __pyx_mdef_7libmisc_4UDev_13error = {"error", (PyCFunction)__pyx_pw_7libmisc_4UDev_13error, METH_O, __pyx_doc_7libmisc_4UDev_12error};
+static PyObject *__pyx_pw_7libmisc_4UDev_13error(PyObject *__pyx_self, PyObject *__pyx_v_self) {
   PyObject *__pyx_r = 0;
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("error (wrapper)", 0);
-  __pyx_r = __pyx_pf_7libmisc_4UDev_10error(__pyx_self, ((PyObject *)__pyx_v_self));
+  __pyx_r = __pyx_pf_7libmisc_4UDev_12error(__pyx_self, ((PyObject *)__pyx_v_self));
 
   /* function exit code */
   __Pyx_RefNannyFinishContext();
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_7libmisc_4UDev_10error(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self) {
+static PyObject *__pyx_pf_7libmisc_4UDev_12error(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self) {
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
   PyObject *__pyx_t_1 = NULL;
@@ -36330,7 +36541,7 @@ static PyObject *__pyx_pf_7libmisc_4UDev_10error(CYTHON_UNUSED PyObject *__pyx_s
   int __pyx_clineno = 0;
   __Pyx_RefNannySetupContext("error", 0);
 
-  /* "libmisc.py":1244
+  /* "libmisc.py":1252
  *     def error(self):
  *         ''' Get last error as string '''
  *         return ctypes.get_errno()             # <<<<<<<<<<<<<<
@@ -36338,9 +36549,9 @@ static PyObject *__pyx_pf_7libmisc_4UDev_10error(CYTHON_UNUSED PyObject *__pyx_s
  * misc = Misc()
  */
   __Pyx_XDECREF(__pyx_r);
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_ctypes); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1244; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_ctypes); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1252; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_get_errno); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1244; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_get_errno); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1252; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -36354,10 +36565,10 @@ static PyObject *__pyx_pf_7libmisc_4UDev_10error(CYTHON_UNUSED PyObject *__pyx_s
     }
   }
   if (__pyx_t_2) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1244; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1252; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   } else {
-    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1244; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1252; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -36365,7 +36576,7 @@ static PyObject *__pyx_pf_7libmisc_4UDev_10error(CYTHON_UNUSED PyObject *__pyx_s
   __pyx_t_1 = 0;
   goto __pyx_L0;
 
-  /* "libmisc.py":1242
+  /* "libmisc.py":1250
  *             self.libudev.udev_unref(self.udev)
  * 
  *     def error(self):             # <<<<<<<<<<<<<<
@@ -36753,6 +36964,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_UDev___exit, __pyx_k_UDev___exit, sizeof(__pyx_k_UDev___exit), 0, 0, 1, 1},
   {&__pyx_n_s_UDev___init, __pyx_k_UDev___init, sizeof(__pyx_k_UDev___init), 0, 0, 1, 1},
   {&__pyx_n_s_UDev_error, __pyx_k_UDev_error, sizeof(__pyx_k_UDev_error), 0, 0, 1, 1},
+  {&__pyx_n_s_UDev_get_action, __pyx_k_UDev_get_action, sizeof(__pyx_k_UDev_get_action), 0, 0, 1, 1},
   {&__pyx_n_s_UDev_get_property, __pyx_k_UDev_get_property, sizeof(__pyx_k_UDev_get_property), 0, 0, 1, 1},
   {&__pyx_n_s_UDev_get_subsystem, __pyx_k_UDev_get_subsystem, sizeof(__pyx_k_UDev_get_subsystem), 0, 0, 1, 1},
   {&__pyx_n_s_UDev_get_sysattr, __pyx_k_UDev_get_sysattr, sizeof(__pyx_k_UDev_get_sysattr), 0, 0, 1, 1},
@@ -36927,6 +37139,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_ftps, __pyx_k_ftps, sizeof(__pyx_k_ftps), 0, 0, 1, 0},
   {&__pyx_n_s_function, __pyx_k_function, sizeof(__pyx_k_function), 0, 0, 1, 1},
   {&__pyx_n_s_get, __pyx_k_get, sizeof(__pyx_k_get), 0, 0, 1, 1},
+  {&__pyx_n_s_get_action, __pyx_k_get_action, sizeof(__pyx_k_get_action), 0, 0, 1, 1},
   {&__pyx_n_s_get_errno, __pyx_k_get_errno, sizeof(__pyx_k_get_errno), 0, 0, 1, 1},
   {&__pyx_n_s_get_property, __pyx_k_get_property, sizeof(__pyx_k_get_property), 0, 0, 1, 1},
   {&__pyx_n_s_get_subsystem, __pyx_k_get_subsystem, sizeof(__pyx_k_get_subsystem), 0, 0, 1, 1},
@@ -37215,6 +37428,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_typecheck, __pyx_k_typecheck, sizeof(__pyx_k_typecheck), 0, 0, 1, 1},
   {&__pyx_n_s_types, __pyx_k_types, sizeof(__pyx_k_types), 0, 0, 1, 1},
   {&__pyx_n_s_udev, __pyx_k_udev, sizeof(__pyx_k_udev), 0, 0, 1, 1},
+  {&__pyx_n_s_udev_device_get_action, __pyx_k_udev_device_get_action, sizeof(__pyx_k_udev_device_get_action), 0, 0, 1, 1},
+  {&__pyx_n_s_udev_device_get_action_2, __pyx_k_udev_device_get_action_2, sizeof(__pyx_k_udev_device_get_action_2), 0, 0, 1, 1},
   {&__pyx_n_s_udev_device_get_property_value, __pyx_k_udev_device_get_property_value, sizeof(__pyx_k_udev_device_get_property_value), 0, 0, 1, 1},
   {&__pyx_n_s_udev_device_get_property_value_2, __pyx_k_udev_device_get_property_value_2, sizeof(__pyx_k_udev_device_get_property_value_2), 0, 0, 1, 1},
   {&__pyx_n_s_udev_device_get_subsystem, __pyx_k_udev_device_get_subsystem, sizeof(__pyx_k_udev_device_get_subsystem), 0, 0, 1, 1},
@@ -39165,65 +39380,77 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__276);
   __pyx_codeobj__277 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__276, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_libs_libmis, __pyx_n_s_init, 1207, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__277)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1207; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "libmisc.py":1226
- *         self._udev_device_get_subsystem.argtypes = [ctypes.c_void_p]
+  /* "libmisc.py":1230
+ *         self._udev_device_get_action.argtypes = [ctypes.c_void_p]
  * 
  *     def get_property(self, dev, tag):             # <<<<<<<<<<<<<<
  *         ''' Get property of device '''
  *         return self._udev_device_get_property_value(dev, tag)
  */
-  __pyx_tuple__278 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_dev_2, __pyx_n_s_tag); if (unlikely(!__pyx_tuple__278)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1226; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__278 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_dev_2, __pyx_n_s_tag); if (unlikely(!__pyx_tuple__278)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1230; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__278);
   __Pyx_GIVEREF(__pyx_tuple__278);
-  __pyx_codeobj__279 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__278, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_libs_libmis, __pyx_n_s_get_property, 1226, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__279)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1226; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__279 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__278, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_libs_libmis, __pyx_n_s_get_property, 1230, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__279)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1230; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "libmisc.py":1230
+  /* "libmisc.py":1234
  *         return self._udev_device_get_property_value(dev, tag)
  * 
  *     def get_sysattr(self, dev, tag):             # <<<<<<<<<<<<<<
  *         ''' Get sysfs attribute of device '''
  *         return self._udev_device_get_sysattr_value(dev, tag)
  */
-  __pyx_tuple__280 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_dev_2, __pyx_n_s_tag); if (unlikely(!__pyx_tuple__280)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1230; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__280 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_dev_2, __pyx_n_s_tag); if (unlikely(!__pyx_tuple__280)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__280);
   __Pyx_GIVEREF(__pyx_tuple__280);
-  __pyx_codeobj__281 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__280, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_libs_libmis, __pyx_n_s_get_sysattr, 1230, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__281)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1230; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__281 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__280, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_libs_libmis, __pyx_n_s_get_sysattr, 1234, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__281)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "libmisc.py":1234
+  /* "libmisc.py":1238
  *         return self._udev_device_get_sysattr_value(dev, tag)
  * 
  *     def get_subsystem(self, dev):             # <<<<<<<<<<<<<<
  *         ''' Get subsystem of device '''
  *         return self._udev_device_get_subsystem(dev)
  */
-  __pyx_tuple__282 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_dev_2); if (unlikely(!__pyx_tuple__282)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__282 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_dev_2); if (unlikely(!__pyx_tuple__282)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1238; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__282);
   __Pyx_GIVEREF(__pyx_tuple__282);
-  __pyx_codeobj__283 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__282, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_libs_libmis, __pyx_n_s_get_subsystem, 1234, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__283)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__283 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__282, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_libs_libmis, __pyx_n_s_get_subsystem, 1238, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__283)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1238; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "libmisc.py":1238
+  /* "libmisc.py":1242
  *         return self._udev_device_get_subsystem(dev)
+ * 
+ *     def get_action(self, dev):             # <<<<<<<<<<<<<<
+ *         ''' Get subsystem of device '''
+ *         return self._udev_device_get_action(dev)
+ */
+  __pyx_tuple__284 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_dev_2); if (unlikely(!__pyx_tuple__284)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__284);
+  __Pyx_GIVEREF(__pyx_tuple__284);
+  __pyx_codeobj__285 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__284, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_libs_libmis, __pyx_n_s_get_action, 1242, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__285)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+
+  /* "libmisc.py":1246
+ *         return self._udev_device_get_action(dev)
  * 
  *     def __exit__(self, type, value, traceback):             # <<<<<<<<<<<<<<
  *         if self.udev:
  *             self.libudev.udev_unref(self.udev)
  */
-  __pyx_tuple__284 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_type, __pyx_n_s_value, __pyx_n_s_traceback); if (unlikely(!__pyx_tuple__284)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1238; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__284);
-  __Pyx_GIVEREF(__pyx_tuple__284);
-  __pyx_codeobj__285 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__284, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_libs_libmis, __pyx_n_s_exit, 1238, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__285)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1238; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__286 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_type, __pyx_n_s_value, __pyx_n_s_traceback); if (unlikely(!__pyx_tuple__286)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__286);
+  __Pyx_GIVEREF(__pyx_tuple__286);
+  __pyx_codeobj__287 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__286, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_libs_libmis, __pyx_n_s_exit, 1246, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__287)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
-  /* "libmisc.py":1242
+  /* "libmisc.py":1250
  *             self.libudev.udev_unref(self.udev)
  * 
  *     def error(self):             # <<<<<<<<<<<<<<
  *         ''' Get last error as string '''
  *         return ctypes.get_errno()
  */
-  __pyx_tuple__286 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__286)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__286);
-  __Pyx_GIVEREF(__pyx_tuple__286);
-  __pyx_codeobj__287 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__286, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_libs_libmis, __pyx_n_s_error, 1242, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__287)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__288 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__288)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1250; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__288);
+  __Pyx_GIVEREF(__pyx_tuple__288);
+  __pyx_codeobj__289 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__288, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_libs_libmis, __pyx_n_s_error, 1250, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__289)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1250; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -40672,64 +40899,76 @@ PyMODINIT_FUNC PyInit_libmisc(void)
   if (PyObject_SetItem(__pyx_t_4, __pyx_n_s_init, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1207; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "libmisc.py":1226
- *         self._udev_device_get_subsystem.argtypes = [ctypes.c_void_p]
+  /* "libmisc.py":1230
+ *         self._udev_device_get_action.argtypes = [ctypes.c_void_p]
  * 
  *     def get_property(self, dev, tag):             # <<<<<<<<<<<<<<
  *         ''' Get property of device '''
  *         return self._udev_device_get_property_value(dev, tag)
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7libmisc_4UDev_3get_property, 0, __pyx_n_s_UDev_get_property, NULL, __pyx_n_s_libmisc, __pyx_d, ((PyObject *)__pyx_codeobj__279)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1226; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7libmisc_4UDev_3get_property, 0, __pyx_n_s_UDev_get_property, NULL, __pyx_n_s_libmisc, __pyx_d, ((PyObject *)__pyx_codeobj__279)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1230; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyObject_SetItem(__pyx_t_4, __pyx_n_s_get_property, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1226; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyObject_SetItem(__pyx_t_4, __pyx_n_s_get_property, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1230; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "libmisc.py":1230
+  /* "libmisc.py":1234
  *         return self._udev_device_get_property_value(dev, tag)
  * 
  *     def get_sysattr(self, dev, tag):             # <<<<<<<<<<<<<<
  *         ''' Get sysfs attribute of device '''
  *         return self._udev_device_get_sysattr_value(dev, tag)
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7libmisc_4UDev_5get_sysattr, 0, __pyx_n_s_UDev_get_sysattr, NULL, __pyx_n_s_libmisc, __pyx_d, ((PyObject *)__pyx_codeobj__281)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1230; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7libmisc_4UDev_5get_sysattr, 0, __pyx_n_s_UDev_get_sysattr, NULL, __pyx_n_s_libmisc, __pyx_d, ((PyObject *)__pyx_codeobj__281)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyObject_SetItem(__pyx_t_4, __pyx_n_s_get_sysattr, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1230; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyObject_SetItem(__pyx_t_4, __pyx_n_s_get_sysattr, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "libmisc.py":1234
+  /* "libmisc.py":1238
  *         return self._udev_device_get_sysattr_value(dev, tag)
  * 
  *     def get_subsystem(self, dev):             # <<<<<<<<<<<<<<
  *         ''' Get subsystem of device '''
  *         return self._udev_device_get_subsystem(dev)
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7libmisc_4UDev_7get_subsystem, 0, __pyx_n_s_UDev_get_subsystem, NULL, __pyx_n_s_libmisc, __pyx_d, ((PyObject *)__pyx_codeobj__283)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7libmisc_4UDev_7get_subsystem, 0, __pyx_n_s_UDev_get_subsystem, NULL, __pyx_n_s_libmisc, __pyx_d, ((PyObject *)__pyx_codeobj__283)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1238; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyObject_SetItem(__pyx_t_4, __pyx_n_s_get_subsystem, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyObject_SetItem(__pyx_t_4, __pyx_n_s_get_subsystem, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1238; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "libmisc.py":1238
+  /* "libmisc.py":1242
  *         return self._udev_device_get_subsystem(dev)
+ * 
+ *     def get_action(self, dev):             # <<<<<<<<<<<<<<
+ *         ''' Get subsystem of device '''
+ *         return self._udev_device_get_action(dev)
+ */
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7libmisc_4UDev_9get_action, 0, __pyx_n_s_UDev_get_action, NULL, __pyx_n_s_libmisc, __pyx_d, ((PyObject *)__pyx_codeobj__285)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_5);
+  if (PyObject_SetItem(__pyx_t_4, __pyx_n_s_get_action, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
+
+  /* "libmisc.py":1246
+ *         return self._udev_device_get_action(dev)
  * 
  *     def __exit__(self, type, value, traceback):             # <<<<<<<<<<<<<<
  *         if self.udev:
  *             self.libudev.udev_unref(self.udev)
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7libmisc_4UDev_9__exit__, 0, __pyx_n_s_UDev___exit, NULL, __pyx_n_s_libmisc, __pyx_d, ((PyObject *)__pyx_codeobj__285)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1238; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7libmisc_4UDev_11__exit__, 0, __pyx_n_s_UDev___exit, NULL, __pyx_n_s_libmisc, __pyx_d, ((PyObject *)__pyx_codeobj__287)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyObject_SetItem(__pyx_t_4, __pyx_n_s_exit, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1238; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyObject_SetItem(__pyx_t_4, __pyx_n_s_exit, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-  /* "libmisc.py":1242
+  /* "libmisc.py":1250
  *             self.libudev.udev_unref(self.udev)
  * 
  *     def error(self):             # <<<<<<<<<<<<<<
  *         ''' Get last error as string '''
  *         return ctypes.get_errno()
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7libmisc_4UDev_11error, 0, __pyx_n_s_UDev_error, NULL, __pyx_n_s_libmisc, __pyx_d, ((PyObject *)__pyx_codeobj__287)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_7libmisc_4UDev_13error, 0, __pyx_n_s_UDev_error, NULL, __pyx_n_s_libmisc, __pyx_d, ((PyObject *)__pyx_codeobj__289)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1250; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  if (PyObject_SetItem(__pyx_t_4, __pyx_n_s_error, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyObject_SetItem(__pyx_t_4, __pyx_n_s_error, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1250; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
   /* "libmisc.py":1205
@@ -40747,12 +40986,12 @@ PyMODINIT_FUNC PyInit_libmisc(void)
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
-  /* "libmisc.py":1246
+  /* "libmisc.py":1254
  *         return ctypes.get_errno()
  * 
  * misc = Misc()             # <<<<<<<<<<<<<<
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_Misc); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_Misc); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1254; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   __pyx_t_4 = NULL;
   if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_1))) {
@@ -40765,14 +41004,14 @@ PyMODINIT_FUNC PyInit_libmisc(void)
     }
   }
   if (__pyx_t_4) {
-    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_4); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1254; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   } else {
-    __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1254; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   }
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_misc, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_misc, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1254; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "libmisc.py":1

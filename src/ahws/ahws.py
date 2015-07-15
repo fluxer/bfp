@@ -6,7 +6,7 @@ message.DEBUG = True
 misc = libmisc.Misc()
 udev = libmisc.UDev()
 
-app_version = "1.8.2 (25753bb)"
+app_version = "1.8.2 (6109f03)"
 
 class AHWS(object):
     def __init__(self):
@@ -108,7 +108,7 @@ class AHWS(object):
                 if monitor and fd:
                     dev = udev.libudev.udev_monitor_receive_device(monitor)
                     if dev:
-                        action = udev.libudev.udev_device_get_action(dev)
+                        action = udev.get_action(dev)
                         self.Handle(self.Properties(dev), action)
                         udev.libudev.udev_device_unref(dev)
                     else:
