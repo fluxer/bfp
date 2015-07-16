@@ -912,7 +912,6 @@ class Misc(object):
             and standard error (stderr) as an Exception '''
         if self.python2:
             self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
-            self.typecheck(sinput, (types.NoneType, types.StringTypes))
             self.typecheck(bshell, (types.BooleanType))
             self.typecheck(cwd, (types.NoneType, types.StringTypes))
             self.typecheck(sinput, (types.NoneType, types.StringTypes))
