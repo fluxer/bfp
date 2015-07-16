@@ -1,7 +1,7 @@
 #!/sbin/runscript
 
 depend() {
-    use dns net logger
+    use dns net logger dbus
 }
 
 start() {
