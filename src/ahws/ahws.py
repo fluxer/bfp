@@ -6,7 +6,7 @@ message.DEBUG = True
 misc = libmisc.Misc()
 udev = libmisc.UDev()
 
-app_version = "1.8.2 (7c69f72)"
+app_version = "1.8.2 (baeb3b7)"
 
 class AHWS(object):
     def __init__(self):
@@ -49,7 +49,10 @@ class AHWS(object):
             message.sub_warning('Model or vendor ID missing for', \
                 '%s (%s, %s)' % (DEVNAME, VENDOR, MODEL))
             return
-
+        if not MODEL.startswith('0x'):
+            MODEL = '0x%s' % MODEL
+        if not VENDOR.startswith('0x'):
+            VENDOR = '0x%s' % VENDOR
         subhandle = '%s/%s' % (self.HANDLERS_DIR, SUBSYSTEM)
         if os.path.isfile(subhandle):
             message.sub_info('Handling subsystem %s for' % action, \
