@@ -324,17 +324,15 @@ class Database(object):
                     val = val.replace('${%s}' % string, _stringmap[string])
                 arrayval.append(val.strip('"').strip("'"))
             _arraymap[var] = arrayval
+            if var in ('depends', 'makedepends', 'optdepends', \
+                'checkdepends', 'sources', 'pgpkeys', 'options', 'backup'):
+                _varmap[var] = arrayval
         for string in _stringmap:
             val = _stringmap[string]
             val = val.replace('$%s' % string, _stringmap[string])
             val = val.replace('${%s}' % string, _stringmap[string])
             _stringmap[string] = val
+            if string in ('version', 'release', 'description'):
+                _varmap[string] = val
 
-        for string in ('version', 'release', 'description'):
-            if string in _stringmap:
-                _varmap[string] = _stringmap[string]
-        for array in ('depends', 'makedepends', 'optdepends', 'checkdepends', \
-            'sources', 'pgpkeys', 'options', 'backup'):
-            if array in _arraymap:
-                _varmap[array] = _arraymap[array]
         return _varmap
