@@ -193,10 +193,10 @@ class Database(object):
         if checked is None:
             checked = []
 
-        basename = os.path.basename(target)
         for installed in self.local_all(basename=True):
             if installed in self.IGNORE or installed in checked:
                 continue
+            basename = os.path.basename(target)
             if basename in self.local_metadata(installed, 'depends'):
                 checked.append(basename)
                 if indirect:
