@@ -23,7 +23,7 @@ misc = libspm.misc
 database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.8.2 (49f6ba7)"
+app_version = "1.8.2 (031c491)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -470,9 +470,10 @@ class Sane(object):
                         message.sub_warning(_('FIXME/TODO note(s)'))
 
                 if self.variables:
-                    string_regex = '(?:version|description)'
+                    essential_regex = '(?:version|description)'
+                    string_regex = '(?:version|release|description)'
                     array_regex = '(?:(?:make|opt|check)?depends|sources|pgpkeys|options|backup)'
-                    if not misc.string_search('(?:\\s|^)%s=' % string_regex, srcbuild, escape=False):
+                    if not misc.string_search('(?:\\s|^)%s=' % essential_regex, srcbuild, escape=False):
                         message.sub_warning(_('Essential variable(s) missing'))
                     if misc.string_search('(?:\\s|^)%s=\(' % string_regex, srcbuild, escape=False):
                         message.sub_warning(_('String variable(s) defined as array'))
@@ -1246,12 +1247,6 @@ if __name__ == '__main__':
             ARGS.TARGETS = sys.stdin.read().split()
 
         if ARGS.mode == 'dist':
-            for alias in database.remote_aliases():
-                if alias in ARGS.TARGETS:
-                    position = ARGS.TARGETS.index(alias)
-                    ARGS.TARGETS[position:position+1] = \
-                        database.remote_alias(alias)
-
             message.info(_('Runtime information'))
             message.sub_info(_('SOURCES'), ARGS.sources)
             message.sub_info(_('CLEAN'), ARGS.clean)
