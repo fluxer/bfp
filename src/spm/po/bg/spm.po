@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-07-14 23:38+0000\n"
+"POT-Creation-Date: 2015-07-20 16:47+0300\n"
 "PO-Revision-Date: 2015-07-02 08:06+0200\n"
 "Last-Translator: \n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -1123,13 +1123,13 @@ msgid "Show SPM version and exit"
 msgstr "Покажи версията на SPM и излез"
 
 #: spm.py:461 spm.py:475 spm.py:498 spm.py:544 spm.py:570 spm.py:590 spm.py:601
-#: tools.py:1259 tools.py:1269 tools.py:1303 tools.py:1340 tools.py:1360
-#: tools.py:1367 tools.py:1375 tools.py:1381 tools.py:1388 tools.py:1395
-#: tools.py:1404 tools.py:1411 tools.py:1423 tools.py:1433 tools.py:1444
+#: tools.py:1255 tools.py:1265 tools.py:1299 tools.py:1336 tools.py:1356
+#: tools.py:1363 tools.py:1371 tools.py:1377 tools.py:1384 tools.py:1391
+#: tools.py:1400 tools.py:1407 tools.py:1419 tools.py:1429 tools.py:1440
 msgid "Runtime information"
 msgstr "Работна информация"
 
-#: spm.py:462 tools.py:1261
+#: spm.py:462 tools.py:1257
 msgid "CLEAN"
 msgstr "ИЗЧИСТИ"
 
@@ -1145,7 +1145,7 @@ msgstr "ОБНОВИ"
 msgid "PRUNE"
 msgstr "ПРЕМАХНИ"
 
-#: spm.py:466 spm.py:499 spm.py:545 tools.py:1396
+#: spm.py:466 spm.py:499 spm.py:545 tools.py:1392
 msgid "CACHE_DIR"
 msgstr "CACHE_DIR"
 
@@ -1173,7 +1173,7 @@ msgstr "РЕЛИЙЗ"
 msgid "DESCRIPTION"
 msgstr "ОПИСАНИЕ"
 
-#: spm.py:480 spm.py:575 tools.py:1272
+#: spm.py:480 spm.py:575 tools.py:1268
 msgid "DEPENDS"
 msgstr "ЗАВИСИМОСТИ"
 
@@ -1189,7 +1189,7 @@ msgstr ""
 msgid "CHECKDEPENDS"
 msgstr "ЧЕК-ЗАВИСИМОСТИ"
 
-#: spm.py:484 tools.py:1260
+#: spm.py:484 tools.py:1256
 msgid "SOURCES"
 msgstr "ИЗТОЧНИЦИ"
 
@@ -1201,15 +1201,15 @@ msgstr ""
 msgid "OPTIONS"
 msgstr "ОПЦИИ"
 
-#: spm.py:487 spm.py:526 spm.py:555 spm.py:580 tools.py:1315 tools.py:1437
+#: spm.py:487 spm.py:526 spm.py:555 spm.py:580 tools.py:1311 tools.py:1433
 msgid "BACKUP"
 msgstr "РЕЗЕРВНИ КОПИЯ"
 
-#: spm.py:488 spm.py:581 spm.py:602 tools.py:1376
+#: spm.py:488 spm.py:581 spm.py:602 tools.py:1372
 msgid "PATTERN"
 msgstr ""
 
-#: spm.py:489 tools.py:1264 tools.py:1352 tools.py:1369
+#: spm.py:489 tools.py:1260 tools.py:1348 tools.py:1365
 msgid "Poking remotes..."
 msgstr "Побутване на отдалечени..."
 
@@ -1217,7 +1217,7 @@ msgstr "Побутване на отдалечени..."
 msgid "BUILD_DIR"
 msgstr "BUILD_DIR"
 
-#: spm.py:501 spm.py:546 tools.py:1270 tools.py:1361
+#: spm.py:501 spm.py:546 tools.py:1266 tools.py:1357
 msgid "ROOT_DIR"
 msgstr "ROOT_DIR"
 
@@ -1249,7 +1249,7 @@ msgstr "ОГЛЕДАЛО"
 msgid "TIMEOUT"
 msgstr "ТАЙМАУТ"
 
-#: spm.py:509 spm.py:553 tools.py:1436
+#: spm.py:509 spm.py:553 tools.py:1432
 msgid "VERIFY"
 msgstr ""
 
@@ -1313,7 +1313,7 @@ msgstr ""
 msgid "IGNORE_MISSING"
 msgstr "IGNORE_MISSING"
 
-#: spm.py:525 spm.py:554 tools.py:1316
+#: spm.py:525 spm.py:554 tools.py:1312
 msgid "CONFLICTS"
 msgstr "CONFLICTS"
 
@@ -1321,9 +1321,9 @@ msgstr "CONFLICTS"
 msgid "SCRIPTS"
 msgstr "SCRIPTS"
 
-#: spm.py:528 spm.py:557 tools.py:1263 tools.py:1275 tools.py:1318
-#: tools.py:1351 tools.py:1368 tools.py:1383 tools.py:1390 tools.py:1416
-#: tools.py:1438 tools.py:1446
+#: spm.py:528 spm.py:557 tools.py:1259 tools.py:1271 tools.py:1314
+#: tools.py:1347 tools.py:1364 tools.py:1379 tools.py:1386 tools.py:1412
+#: tools.py:1434 tools.py:1442
 msgid "TARGETS"
 msgstr "МИШЕНИ"
 
@@ -1335,7 +1335,7 @@ msgstr "Побутване на източниците..."
 msgid "Poking binaries..."
 msgstr "Побутване на бинарите..."
 
-#: spm.py:577 tools.py:1273
+#: spm.py:577 tools.py:1269
 msgid "REVERSE"
 msgstr "ОБРАТНИ"
 
@@ -1343,16 +1343,16 @@ msgstr "ОБРАТНИ"
 msgid "SIZE"
 msgstr "РАЗМЕР"
 
-#: spm.py:579 tools.py:1309
+#: spm.py:579 tools.py:1305
 msgid "FOOTPRINT"
 msgstr "ОТПЕЧАТЪК"
 
-#: spm.py:582 tools.py:1276 tools.py:1282 tools.py:1319 tools.py:1362
+#: spm.py:582 tools.py:1272 tools.py:1278 tools.py:1315 tools.py:1358
 msgid "Poking locals..."
 msgstr ""
 
-#: spm.py:591 tools.py:1262 tools.py:1382 tools.py:1389 tools.py:1405
-#: tools.py:1414 tools.py:1434 tools.py:1445
+#: spm.py:591 tools.py:1258 tools.py:1378 tools.py:1385 tools.py:1401
+#: tools.py:1410 tools.py:1430 tools.py:1441
 msgid "DIRECTORY"
 msgstr "ДИРЕКТОРИЯ"
 
@@ -1902,130 +1902,130 @@ msgstr ""
 msgid "Show SPM Tools version and exit"
 msgstr "Покажи версията на SPM Tools и излез"
 
-#: tools.py:1271
+#: tools.py:1267
 msgid "FAST"
 msgstr "БЪРЗО"
 
-#: tools.py:1274
+#: tools.py:1270
 msgid "ADJUST"
 msgstr ""
 
-#: tools.py:1304
+#: tools.py:1300
 msgid "MAN"
 msgstr ""
 
-#: tools.py:1305
+#: tools.py:1301
 msgid "UDEV"
 msgstr ""
 
-#: tools.py:1306
+#: tools.py:1302
 msgid "SYMLINK"
 msgstr ""
 
-#: tools.py:1307
+#: tools.py:1303
 msgid "DOC"
 msgstr ""
 
-#: tools.py:1308
+#: tools.py:1304
 msgid "MODULE"
 msgstr "МОДУЛ"
 
-#: tools.py:1310
+#: tools.py:1306
 msgid "BUILDDIR"
 msgstr ""
 
-#: tools.py:1311
+#: tools.py:1307
 msgid "OWNERSHIP"
 msgstr ""
 
-#: tools.py:1312
+#: tools.py:1308
 msgid "EXECUTABLE"
 msgstr ""
 
-#: tools.py:1313
+#: tools.py:1309
 msgid "PATH"
 msgstr "ПЪТ"
 
-#: tools.py:1314
+#: tools.py:1310
 msgid "SHEBANG"
 msgstr ""
 
-#: tools.py:1317
+#: tools.py:1313
 msgid "DEBUG"
 msgstr "ДЕБЪГ"
 
-#: tools.py:1341
+#: tools.py:1337
 msgid "ENABLE"
 msgstr ""
 
-#: tools.py:1342
+#: tools.py:1338
 msgid "DISABLE"
 msgstr ""
 
-#: tools.py:1343
+#: tools.py:1339
 msgid "NULL"
 msgstr "NULL"
 
-#: tools.py:1344
+#: tools.py:1340
 msgid "MAINTAINER"
 msgstr ""
 
-#: tools.py:1345
+#: tools.py:1341
 msgid "NOTE"
 msgstr "БЕЛЕЖКА"
 
-#: tools.py:1346
+#: tools.py:1342
 msgid "VARIABLES"
 msgstr "ПРОМЕНЛИВИ"
 
-#: tools.py:1347
+#: tools.py:1343
 msgid "TRIGGERS"
 msgstr ""
 
-#: tools.py:1348
+#: tools.py:1344
 msgid "USERS"
 msgstr "ПОТРЕБИТЕЛИ"
 
-#: tools.py:1349
+#: tools.py:1345
 msgid "GROUPS"
 msgstr "ГРУПИ"
 
-#: tools.py:1350
+#: tools.py:1346
 msgid "SIGNATURES"
 msgstr ""
 
-#: tools.py:1397
+#: tools.py:1393
 msgid "PORT"
 msgstr "ПОРТ"
 
-#: tools.py:1398
+#: tools.py:1394
 msgid "ADDRESS"
 msgstr "АДРЕСС"
 
-#: tools.py:1406
+#: tools.py:1402
 msgid "CROSS"
 msgstr ""
 
-#: tools.py:1412
+#: tools.py:1408
 msgid "HOST"
 msgstr "ХОСТ"
 
-#: tools.py:1413
+#: tools.py:1409
 msgid "USER"
 msgstr "ПОТРЕБИТЕЛ"
 
-#: tools.py:1415
+#: tools.py:1411
 msgid "INSECURE"
 msgstr ""
 
-#: tools.py:1417
+#: tools.py:1413
 msgid "Poking server..."
 msgstr "Побутване на сървър"
 
-#: tools.py:1424
+#: tools.py:1420
 msgid "URL"
 msgstr ""
 
-#: tools.py:1435
+#: tools.py:1431
 msgid "CREATE"
 msgstr ""

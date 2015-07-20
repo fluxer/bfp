@@ -45,13 +45,13 @@ Getting full paths to targets is possible via which mode, all matches of the
 pattern specified will be printed which can also be useful to check for
 dublicate ports. In addition, the content of the SRCBUILD can be printed.
 
-Software with SPM can be re-packed via pack mode, it depends on the footprint
-and will bail out if file does not exist.
+Software build with SPM can be re-packed via pack mode, it depends on the
+footprint and will bail out if file does not exist.
 
 Package files from CRUX Linux can be obtained via pkg mode, later they can be
 converted (with some degree of success) to SRCBUILD via pkg2src.
 
-Serving local caches (that includes repositories, sources and taballs) to the
+Serving local caches (that includes repositories, sources and tarballs) to the
 local area netwrok can be done via serve mode. Do note that the functionality
 is very basic and you may want to use dedicated application for this purpose.
 

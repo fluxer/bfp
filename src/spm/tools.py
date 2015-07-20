@@ -23,7 +23,7 @@ misc = libspm.misc
 database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.8.2 (884e5a9)"
+app_version = "1.8.2 (49f6ba7)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -1246,10 +1246,6 @@ if __name__ == '__main__':
             ARGS.TARGETS = sys.stdin.read().split()
 
         if ARGS.mode == 'dist':
-            if 'world' in ARGS.TARGETS:
-                position = ARGS.TARGETS.index('world')
-                ARGS.TARGETS[position:position+1] = \
-                    database.local_all(basename=True)
             for alias in database.remote_aliases():
                 if alias in ARGS.TARGETS:
                     position = ARGS.TARGETS.index(alias)
