@@ -1,4 +1,0 @@
-[D-Bus Service]
-Name=com.spm.Daemon
-Exec=@SBINDIR@/spmd
-User=root
