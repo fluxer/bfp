@@ -11,7 +11,7 @@ recipes in the SRCBUILD format.
 
 '''
 
-import os, re, types
+import os, re, types, glob
 from distutils.version import LooseVersion
 
 import libmisc
@@ -36,16 +36,13 @@ class Database(object):
         ''' Build internal local database cache '''
         self.LOCAL_CACHE = {}
 
-        if not os.path.isdir(self.LOCAL_DIR):
-            return
-        for sdir in misc.list_dirs(self.LOCAL_DIR):
-            metadata = '%s/metadata.json' % sdir
-            srcbuild = '%s/SRCBUILD' % sdir
-            if os.path.isfile(srcbuild) and os.path.isfile(metadata):
-                self.LOCAL_CACHE[sdir] = misc.json_read(metadata)
+        for sfile in glob.glob('%s/*/metadata.json' % self.LOCAL_DIR):
+            sdir = os.path.dirname(sfile)
+            if os.path.isfile('%s/SRCBUILD' % sdir):
+                self.LOCAL_CACHE[sdir] = misc.json_read(sfile)
             if self.NOTIFY:
                 notify.watch_add(sdir)
-        if self.NOTIFY:
+        if self.NOTIFY and os.path.isdir(self.LOCAL_DIR):
             notify.watch_add(self.LOCAL_DIR)
         # print(sys.getsizeof(self.LOCAL_CACHE))
 

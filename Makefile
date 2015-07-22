@@ -7,7 +7,6 @@ all:
 	$(MAKE) -C src/libs
 	$(MAKE) -C src/initfs
 	$(MAKE) -C src/spm
-	# $(MAKE) -C src/spmd
 
 sources:
 	$(MAKE) -C src/ahws sources
@@ -29,7 +28,6 @@ install:
 	$(MAKE) -C src/initfs install
 	$(MAKE) -C src/libs install
 	$(MAKE) -C src/spm install
-	# $(MAKE) -C src/spmd install
 
 uninstall:
 	$(MAKE) -C doc uninstall
@@ -40,7 +38,6 @@ uninstall:
 	$(MAKE) -C src/initfs uninstall
 	$(MAKE) -C src/libs uninstall
 	$(MAKE) -C src/spm uninstall
-	# $(MAKE) -C src/spmd uninstall
 
 clean:
 	$(MAKE) -C doc clean
@@ -49,7 +46,6 @@ clean:
 	$(MAKE) -C src/libs clean
 	$(MAKE) -C src/initfs clean
 	$(MAKE) -C src/spm clean
-	# $(MAKE) -C src/spmd clean
 	$(RM) $(shell $(FIND) nuitka -name '*.pyc' -o -name '*.pyo')
 
 changelog:
