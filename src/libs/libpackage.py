@@ -312,14 +312,14 @@ class Database(object):
 
         content = misc.file_read(sfile)
         for var, value in re.findall(self._stringx, content):
-            _stringmap[var] = value.strip('"').strip("'")
+            _stringmap[var] = value.strip('"\'')
         for var, value in re.findall(self._arrayx, content):
             arrayval = []
             for val in value.split():
                 for string in _stringmap:
                     val = val.replace('$%s' % string, _stringmap[string])
                     val = val.replace('${%s}' % string, _stringmap[string])
-                arrayval.append(val.strip('"').strip("'"))
+                arrayval.append(val.strip('"\''))
             _arraymap[var] = arrayval
             if var in ('depends', 'makedepends', 'optdepends', \
                 'checkdepends', 'sources', 'pgpkeys', 'options', 'backup'):
