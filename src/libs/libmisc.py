@@ -161,6 +161,11 @@ class Misc(object):
 
         return getattr(hashlib, smethod)(data).hexdigest()
 
+    def string_lstrip(self, string, schars, sreplacement):
+        ''' What string.lstrip() should've been '''
+        toreplace = string[:len(schars)]
+        return '%s%s' % (toreplace.replace(schars, sreplacement), string[len(schars):])
+
     def file_name(self, sfile, basename=True):
         ''' Get name of file without the extension '''
         if self.python2:
@@ -821,7 +826,7 @@ class Misc(object):
             tar = self.whereis('bsdtar', False) or self.whereis('tar')
             command = [tar, '-caf', sfile, '-C', sstrip]
             for f in lpaths:
-                command.append(f.replace(sstrip, '.'))
+                command.append(self.string_lstrip(f, sstrip, './'))
             self.system_command(command)
         elif sfile.endswith('.gz'):
             if len(lpaths) > 1:
