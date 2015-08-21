@@ -1290,7 +1290,7 @@ class Source(object):
                 sreal = os.path.realpath(sfile)
                 if not sreal.startswith(self.install_dir):
                     # symlink to full path
-                    backup[sstripped] = misc.file_checksum(sfile)
+                    backup[sstripped] = misc.file_checksum('%s/%s' % (self.install_dir, sreal))
                 else:
                     backup[sstripped] = misc.file_checksum(sreal)
         for target in self.target_optdepends:
