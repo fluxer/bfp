@@ -1287,7 +1287,12 @@ class Source(object):
                 continue
             footprint.append(sstripped)
             if sfile.endswith('.conf') or sstripped.lstrip('/') in self.target_backup:
-                backup[sstripped] = misc.file_checksum(os.path.realpath(sfile))
+                sreal = os.path.realpath(sfile)
+                if not sreal.startswith(self.install_dir):
+                    # symlink to full path
+                    backup[sstripped] = misc.file_checksum(sfile)
+                else:
+                    backup[sstripped] = misc.file_checksum(sreal)
         for target in self.target_optdepends:
             if database.local_uptodate(target):
                 optdepends.append(target)
