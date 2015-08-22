@@ -43668,7 +43668,7 @@ static PyObject *__pyx_pf_6libspm_6Binary_2autobinary(CYTHON_UNUSED PyObject *__
  *         if automake:
  *             obj = Binary(targets, do_fetch=True, do_prepare=True, \             # <<<<<<<<<<<<<<
  *                 do_merge=True, do_depends=True, do_reverse=self.do_reverse, \
- *                 do_update=False)
+ *                 do_update=False, buildmissing=self.buildmissing)
  */
     __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_Binary); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1742; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
@@ -43686,7 +43686,7 @@ static PyObject *__pyx_pf_6libspm_6Binary_2autobinary(CYTHON_UNUSED PyObject *__
  *         if automake:
  *             obj = Binary(targets, do_fetch=True, do_prepare=True, \
  *                 do_merge=True, do_depends=True, do_reverse=self.do_reverse, \             # <<<<<<<<<<<<<<
- *                 do_update=False)
+ *                 do_update=False, buildmissing=self.buildmissing)
  *         else:
  */
     if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_do_merge, Py_True) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1742; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -43699,18 +43699,22 @@ static PyObject *__pyx_pf_6libspm_6Binary_2autobinary(CYTHON_UNUSED PyObject *__
     /* "libspm.py":1744
  *             obj = Binary(targets, do_fetch=True, do_prepare=True, \
  *                 do_merge=True, do_depends=True, do_reverse=self.do_reverse, \
- *                 do_update=False)             # <<<<<<<<<<<<<<
+ *                 do_update=False, buildmissing=self.buildmissing)             # <<<<<<<<<<<<<<
  *         else:
  *             obj = Binary(targets, do_reverse=self.do_reverse, \
  */
     if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_do_update, Py_False) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1742; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_buildmissing); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1744; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_5);
+    if (PyDict_SetItem(__pyx_t_4, __pyx_n_s_buildmissing, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1742; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
     /* "libspm.py":1742
  *         ''' Handle targets install/remove without affecting current object '''
  *         if automake:
  *             obj = Binary(targets, do_fetch=True, do_prepare=True, \             # <<<<<<<<<<<<<<
  *                 do_merge=True, do_depends=True, do_reverse=self.do_reverse, \
- *                 do_update=False)
+ *                 do_update=False, buildmissing=self.buildmissing)
  */
     __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, __pyx_t_4); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1742; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
@@ -43724,7 +43728,7 @@ static PyObject *__pyx_pf_6libspm_6Binary_2autobinary(CYTHON_UNUSED PyObject *__
   /*else*/ {
 
     /* "libspm.py":1746
- *                 do_update=False)
+ *                 do_update=False, buildmissing=self.buildmissing)
  *         else:
  *             obj = Binary(targets, do_reverse=self.do_reverse, \             # <<<<<<<<<<<<<<
  *                 autoremove=autoremove)
@@ -43754,7 +43758,7 @@ static PyObject *__pyx_pf_6libspm_6Binary_2autobinary(CYTHON_UNUSED PyObject *__
     if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_autoremove, __pyx_v_autoremove) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1746; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
     /* "libspm.py":1746
- *                 do_update=False)
+ *                 do_update=False, buildmissing=self.buildmissing)
  *         else:
  *             obj = Binary(targets, do_reverse=self.do_reverse, \             # <<<<<<<<<<<<<<
  *                 autoremove=autoremove)

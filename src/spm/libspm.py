@@ -1741,7 +1741,7 @@ class Binary(Source):
         if automake:
             obj = Binary(targets, do_fetch=True, do_prepare=True, \
                 do_merge=True, do_depends=True, do_reverse=self.do_reverse, \
-                do_update=False)
+                do_update=False, buildmissing=self.buildmissing)
         else:
             obj = Binary(targets, do_reverse=self.do_reverse, \
                 autoremove=autoremove)
