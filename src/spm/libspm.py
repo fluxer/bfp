@@ -1779,6 +1779,7 @@ class Binary(Source):
                 break
 
         if not found and self.buildmissing:
+            message.sub_warning(_('Binary tarball not available for'), self.target_name)
             self.autosource([self.target_name], automake=True)
         elif not found:
             message.sub_critical(_('Binary tarball not available for'), self.target_name)

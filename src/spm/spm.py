@@ -14,7 +14,7 @@ else:
 import libmessage
 message = libmessage.Message()
 
-app_version = "1.8.2 (98781dd)"
+app_version = "1.8.2 (8eb9855)"
 
 
 retvalue = 0
@@ -564,7 +564,7 @@ try:
             ARGS.merge = True
         m = libspm.Binary(ARGS.TARGETS, ARGS.fetch, ARGS.prepare, \
             ARGS.merge, ARGS.remove, ARGS.depends, ARGS.reverse, \
-            ARGS.update, ARGS.buildmissing)
+            ARGS.update, buildmissing=ARGS.buildmissing)
         m.main()
 
     elif ARGS.mode == 'local':
