@@ -275,7 +275,8 @@ optional arguments:
   -D, --depends         Consider dependency targets
   -R, --reverse         Consider reverse dependency targets
   -u, --update          Apply actions only if update is available
-  -a, --automake        Short for fetch, prepare and merge  
+  -a, --automake        Short for fetch, prepare and merge
+  -B, --buildmissing    Build from source when binary not available
 
 =head2 LOCAL MODE
 

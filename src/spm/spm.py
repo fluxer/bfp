@@ -316,6 +316,8 @@ try:
         help=_('Apply actions only if update is available'))
     binary_parser.add_argument('-a', '--automake', action='store_true', \
         help=_('Short for fetch, prepare and merge'))
+    binary_parser.add_argument('-B', '--buildmissing', action='store_true', \
+        help=_('Build from source when binary not available'))
     binary_parser.add_argument('TARGETS', nargs='+', type=str, \
         help=_('Targets to apply actions on'))
 
@@ -562,7 +564,7 @@ try:
             ARGS.merge = True
         m = libspm.Binary(ARGS.TARGETS, ARGS.fetch, ARGS.prepare, \
             ARGS.merge, ARGS.remove, ARGS.depends, ARGS.reverse, \
-            ARGS.update)
+            ARGS.update, ARGS.buildmissing)
         m.main()
 
     elif ARGS.mode == 'local':

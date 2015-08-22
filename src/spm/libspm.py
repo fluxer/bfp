@@ -1712,7 +1712,7 @@ class Binary(Source):
     ''' Class to handle binary tarballs '''
     def __init__(self, targets, do_fetch=False, do_prepare=False, \
         do_merge=False, do_remove=False, do_depends=False, do_reverse=False, \
-        do_update=False, autoremove=False):
+        do_update=False, autoremove=False, buildmissing=False):
         super(Binary, self).__init__(Source)
         self.targets = targets
         self.do_fetch = do_fetch
@@ -1723,6 +1723,7 @@ class Binary(Source):
         self.do_reverse = do_reverse
         self.do_update = do_update
         self.autoremove = autoremove
+        self.buildmissing = buildmissing
         message.CATCH = CATCH
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
@@ -1777,7 +1778,9 @@ class Binary(Source):
                     misc.gpg_verify(local_file)
                 break
 
-        if not found:
+        if not found and self.buildmissing:
+            self.autosource([self.target_name], automake=True)
+        elif not found:
             message.sub_critical(_('Binary tarball not available for'), self.target_name)
             sys.exit(2)
 
