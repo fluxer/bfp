@@ -3,7 +3,7 @@
 import gettext
 _ = gettext.translation('spm', fallback=True).gettext
 
-import sys, os, shutil, re, time
+import sys, os, shutil, re, time, syslog
 if sys.version < '3':
     import ConfigParser as configparser
 else:
@@ -190,8 +190,8 @@ class Local(object):
 
     def main(self):
         ''' Print local target metadata for every match '''
-        msglog = message.LOG
-        message.LOG = False
+        msglogstatus = message.LOG_STATUS
+        message.LOG_STATUS = [syslog.LOG_DEBUG, syslog.LOG_CRIT, syslog.LOG_ALERT]
         for target in database.local_all(basename=True):
             if re.search(self.pattern, target):
                 if self.do_name and self.plain:
@@ -221,24 +221,21 @@ class Local(object):
                         message.sub_info(_('Description'), data)
 
                 if self.do_depends:
-                    data = database.local_metadata(target, 'depends')
-                    data = misc.string_convert(data)
+                    data = ' '.join(database.local_metadata(target, 'depends'))
                     if self.plain:
                         print(data)
                     else:
                         message.sub_info(_('Depends'), data)
 
                 if self.do_optdepends:
-                    data = database.local_metadata(target, 'optdepends')
-                    data = misc.string_convert(data)
+                    data = ' '.join(database.local_metadata(target, 'optdepends'))
                     if self.plain:
                         print(data)
                     else:
                         message.sub_info(_('Optional depends'), data)
 
                 if self.do_reverse:
-                    data = database.local_rdepends(target)
-                    data = misc.string_convert(data)
+                    data = ' '.join(database.local_rdepends(target))
                     if self.plain:
                         print(data)
                     else:
@@ -259,13 +256,12 @@ class Local(object):
                         message.sub_info(_('Footprint'), data)
 
                 if self.do_backup:
-                    data = database.local_metadata(target, 'backup')
-                    data = misc.string_convert(data)
+                    data = ' '.join(database.local_metadata(target, 'backup'))
                     if self.plain:
                         print(data)
                     else:
                         message.sub_info(_('Backup'), data)
-        message.LOG = msglog
+        message.LOG_STATUS = msglogstatus
 
 
 class Remote(object):
@@ -303,8 +299,8 @@ class Remote(object):
 
     def main(self):
         ''' Print remote target metadata for every match '''
-        msglog = message.LOG
-        message.LOG = False
+        msglogstatus = message.LOG_STATUS
+        message.LOG_STATUS = [syslog.LOG_DEBUG, syslog.LOG_CRIT, syslog.LOG_ALERT]
         for target in database.remote_all(basename=True):
             if re.search(self.pattern, target):
                 if self.do_name and self.plain:
@@ -335,69 +331,61 @@ class Remote(object):
                         message.sub_info(_('Description'), data)
 
                 if self.do_depends:
-                    data = database.remote_metadata(target, 'depends')
-                    data = misc.string_convert(data)
+                    data = ' '.join(database.remote_metadata(target, 'depends'))
                     if self.plain:
                         print(data)
                     else:
                         message.sub_info(_('Depends'), data)
 
                 if self.do_makedepends:
-                    data = database.remote_metadata(target, 'makedepends')
-                    data = misc.string_convert(data)
+                    data = ' '.join(database.remote_metadata(target, 'makedepends'))
                     if self.plain:
                         print(data)
                     else:
                         message.sub_info(_('Make depends'), data)
 
                 if self.do_optdepends:
-                    data = database.remote_metadata(target, 'optdepends')
-                    data = misc.string_convert(data)
+                    data = ' '.join(database.remote_metadata(target, 'optdepends'))
                     if self.plain:
                         print(data)
                     else:
                         message.sub_info(_('Optional depends'), data)
 
                 if self.do_checkdepends:
-                    data = database.remote_metadata(target, 'checkdepends')
-                    data = misc.string_convert(data)
+                    data = ' '.join(database.remote_metadata(target, 'checkdepends'))
                     if self.plain:
                         print(data)
                     else:
                         message.sub_info(_('Check depends'), data)
 
                 if self.do_sources:
-                    data = database.remote_metadata(target, 'sources')
-                    data = misc.string_convert(data)
+                    data = ' '.join(database.remote_metadata(target, 'sources'))
                     if self.plain:
                         print(data)
                     else:
                         message.sub_info(_('Sources'), data)
 
                 if self.do_pgpkeys:
-                    data = database.remote_metadata(target, 'pgpkeys')
-                    data = misc.string_convert(data)
+                    data = ' '.join(database.remote_metadata(target, 'pgpkeys'))
                     if self.plain:
                         print(data)
                     else:
                         message.sub_info(_('PGP keys'), data)
 
                 if self.do_options:
-                    data = database.remote_metadata(target, 'options')
-                    data = misc.string_convert(data)
+                    data = ' '.join(database.remote_metadata(target, 'options'))
                     if self.plain:
                         print(data)
                     else:
                         message.sub_info(_('Options'), data)
 
                 if self.do_backup:
-                    data = database.remote_metadata(target, 'backup')
-                    data = misc.string_convert(data)
+                    data = ' '.join(database.remote_metadata(target, 'backup'))
                     if self.plain:
                         print(data)
                     else:
                         message.sub_info(_('Backup'), data)
-        message.LOG = msglog
+        message.LOG_STATUS = msglogstatus
 
 
 class Repo(object):

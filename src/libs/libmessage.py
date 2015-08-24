@@ -32,6 +32,7 @@ class Message(object):
     ''' Print fancy messages with logging '''
     def __init__(self):
         self.LOG = True
+        self.LOG_STATUS = [syslog.LOG_DEBUG, syslog.LOG_CRIT, syslog.LOG_ALERT, syslog.LOG_INFO]
         self.DEBUG = False
         self.CATCH = False
 
@@ -90,6 +91,8 @@ class Message(object):
             marklog = ': %s' % marker
         printer.write('%s%s\n' % (basemsg, markmsg))
         if self.LOG:
+            if not status in self.LOG_STATUS:
+                return
             if isinstance(msg, (list, tuple, bool, Exception)):
                 msg = str(msg)
             if not isinstance(msg, str):
