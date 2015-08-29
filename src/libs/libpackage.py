@@ -54,10 +54,12 @@ class Database(object):
         if not os.path.isdir(metadir):
             return
         for sdir in misc.list_dirs(metadir):
+            if '/.git/' in sdir or '/.svn/' in sdir:
+                continue
             srcbuild = '%s/SRCBUILD' % sdir
             if os.path.isfile(srcbuild):
                 self.REMOTE_CACHE[sdir] = self.srcbuild_parse(srcbuild)
-            if self.NOTIFY and not sdir.endswith('/.git'):
+            if self.NOTIFY:
                 notify.watch_add(sdir)
         if self.NOTIFY:
             notify.watch_add(metadir)
