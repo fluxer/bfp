@@ -152,11 +152,8 @@ if [ -e "/proc/sys/kernel/hotplug" ];then
     cmd echo > /proc/sys/kernel/hotplug
 fi
 
-# now that systemd exists...
-[ -h "/newroot/$init" ] && init="$(readlink /newroot/$init)"
-
 # a hook could have mounted root
-if [ -e "/newroot/$init" ];then
+if [ -e "/newroot/$init" ] || [ -h "/newroot/$init" ];then
     msg "Moving pseudo-filesystems..."
     for p in /dev /proc /sys;do
         cmd mkdir -p "/newroot/$p"
