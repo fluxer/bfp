@@ -19,7 +19,7 @@ The following software is required:
 [Git](http://git-scm.com/),
 [GnuPG](https://www.gnupg.org/),
 [Python](https://www.python.org/),
-[GNU C Library](http://www.gnu.org/software/libc/) (or [uClibc](http://www.uclibc.org/)/[musl libc](http://www.musl-libc.org/))
+[GNU C Library](http://www.gnu.org/software/libc/) (or [uClibc](http://www.uclibc.org/)/[musl libc](http://www.musl-libc.org/)),
 [systemd](http://www.freedesktop.org/wiki/Software/systemd/) (or [eudev](https://github.com/gentoo/eudev))
 
 ### Build time
@@ -63,7 +63,7 @@ sudo make PYTHON=python3 install
 forums users
 - Jubei Mitsuyoshi
 - Marcus (a.k.a. artoo/udeved) <udeved@openrc4arch.site40.net>
-- Adil Ünal (a.k.a. turkbits) <turkbits@turkbits.net>
+- Adil Ãœnal (a.k.a. turkbits) <turkbits@turkbits.net>
 
 If you think you have the right to be mentioned here but you are not feel free
 to contact us!
