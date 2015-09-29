@@ -26,7 +26,7 @@ The following software is required:
 
 [Perl](https://www.perl.org/),
 [Cython](http://cython.org/),
-[gettext]https://www.gnu.org/software/gettext/)
+[gettext](https://www.gnu.org/software/gettext/)
 
 How and where from you will obtain those is up to you, altought compatibility
 with Busybox, GNU and POSIX tools is prime goal but not guaranteed so for an
