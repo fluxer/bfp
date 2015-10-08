@@ -12,6 +12,9 @@ file). It is a thin wrapper around it.
 Inotify() is another wrapper but around inotify system calls. It can be used
 to monitor for file/directory changes on filesystems.
 
+UDev is wrapper around libudev, use it as base only. It does not provide
+high-level methods so you will have to deal with its API a lot.
+
 '''
 
 import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, inspect, json
@@ -1244,7 +1247,7 @@ class UDev(object):
         return self._udev_device_get_subsystem(dev)
 
     def get_action(self, dev):
-        ''' Get subsystem of device '''
+        ''' Get action of device '''
         return self._udev_device_get_action(dev)
 
     def __exit__(self, type, value, traceback):
