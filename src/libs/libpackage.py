@@ -212,7 +212,9 @@ class Database(object):
             misc.typecheck(key, (types.StringTypes))
 
         match = self.local_search(target)
-        if match:
+        if match and key == 'all':
+            return self.LOCAL_CACHE[match]
+        elif match:
             return self.LOCAL_CACHE[match][key]
         # for consistency
         if key in ('depends', 'optdepends', 'backup', 'footprint'):
@@ -256,10 +258,15 @@ class Database(object):
 
         srcbuild = '%s/SRCBUILD' % target
         match = self.remote_search(target)
+        metadata = None
         if match and match in self.REMOTE_CACHE:
-            return self.REMOTE_CACHE[match][key]
+            metadata = self.REMOTE_CACHE[match]
         elif os.path.isfile(srcbuild):
-            return self.srcbuild_parse(srcbuild)[key]
+            metadata = self.srcbuild_parse(srcbuild)
+        if metadata and key == 'all':
+            return metadata
+        elif metadata:
+            return metadata[key]
         # for consistency
         if key in ('depends', 'makedepends', 'optdepends', 'checkdepends', \
             'sources', 'options', 'backup', 'pgpkeys'):
