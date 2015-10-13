@@ -916,6 +916,7 @@ class Upgrade(object):
             self.upgrade_1_8_x_optdepends(target)
 
 
+# FIXME: support different root directory
 class Digest(object):
     ''' Create/verify target(s) checksum digest '''
     def __init__(self, targets, directory='/', do_create=False, \

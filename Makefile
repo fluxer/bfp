@@ -53,7 +53,7 @@ changelog:
 	$(GIT) log $(shell $(GIT) tag | tail -n1)..HEAD --no-merges --pretty='    * %s' | uniq -u
 
 dist:
-	$(GIT) archive HEAD --prefix=bfp-$(VERSION)/ | $(XZ) > bfp-$(VERSION).tar.xz
+	$(GIT) archive HEAD --format=tar --prefix=bfp-$(VERSION)/ | $(XZ) > bfp-$(VERSION).tar.xz
 	$(GPG) --sign --detach-sign bfp-$(VERSION).tar.xz
 
 .PHONY: all check install uninstall clean changelog dist

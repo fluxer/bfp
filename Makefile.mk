@@ -18,13 +18,13 @@ APPLICATIONSDIR = $(SHAREDIR)/applications
 AUTOSTARTDIR = /etc/xdg/autostart
 INITDIR = /etc/init.d
 
+PYTHON_VERSION = $(shell $(PYTHON) -c "import sys; print(sys.version[:3])")
 MACHINE = $(shell $(CC) -dumpmachine)
 ARCH = $(shell uname -m | $(SED) 's|_|-|')
 JOBS = $(shell echo $$((`getconf _NPROCESSORS_CONF || echo 1`+1)))
 
 GIT = git
 BASH = bash
-PYTHON_VERSION = $(shell $(PYTHON) -c "import sys; print(sys.version[:3])")
 GREP = grep
 FIND = find
 SED = sed
