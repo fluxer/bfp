@@ -59,6 +59,14 @@ class Message(object):
             sys.stdout = Unbuffered(sys.stdout)
             sys.stderr = Unbuffered(sys.stderr)
 
+    def normalize(self, variant):
+        ''' Convert variable to string suitable for logging '''
+        if isinstance(variant, (list, tuple, bool, Exception)):
+            variant = str(variant)
+        if not isinstance(variant, str):
+            variant = variant.encode('utf-8')
+        return variant
+
     def base(self, prefix, msg, marker, status, printer=sys.stdout):
         ''' Base printer '''
         msgcolor = ''
@@ -93,10 +101,8 @@ class Message(object):
         if self.LOG:
             if not status in self.LOG_STATUS:
                 return
-            if isinstance(msg, (list, tuple, bool, Exception)):
-                msg = str(msg)
-            if not isinstance(msg, str):
-                msg = msg.encode('utf-8')
+            msg = self.normalize(msg)
+            marklog = self.normalize(msg)
             syslog.syslog(status, '%s%s' % (msg, marklog))
 
     def info(self, msg, marker=None):

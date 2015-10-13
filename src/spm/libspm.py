@@ -1237,7 +1237,7 @@ class Source(object):
 
         if self.python_compile:
             # force build the caches to prevent access time issues with
-            # .pyc files being older that .py files because .py files
+            # .py files being older that .pyc files because .pyc files
             # where modified after the usual installation procedure
             message.sub_info(_('Byte-compiling Python modules'))
             # FIXME: that's not future proof!
