@@ -267,14 +267,15 @@ class Lint(object):
         for target in database.local_all(basename=True):
             if target in self.targets:
                 message.sub_info(_('Checking'), target)
-                # FIXME: support different root directory
-                target_footprint_lines = database.local_metadata(target, 'footprint')
-                target_footprint = '\n'.join(target_footprint_lines)
-
-                for sfile in target_footprint_lines:
-                    if not os.path.exists(sfile):
-                        message.sub_warning(_('File does not exist'), sfile)
-                        target_footprint_lines.remove(sfile)
+                target_footprint_lines = []
+                target_footprint = ''
+                for sfile in database.local_metadata(target, 'footprint'):
+                    sfull = '%s/%s' % (libspm.ROOT_DIR, sfile)
+                    if not os.path.exists(os.path.realpath(sfull)):
+                        message.sub_warning(_('File does not exist'), sfull)
+                    else:
+                        target_footprint_lines.append(sfull)
+                        target_footprint += '%s\n' % sfull
 
                 if self.man:
                     message.sub_debug(_('Checking for missing man pages in'), target)
