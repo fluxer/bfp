@@ -917,7 +917,6 @@ class Upgrade(object):
             self.upgrade_1_8_x_optdepends(target)
 
 
-# FIXME: support different root directory
 class Digest(object):
     ''' Create/verify target(s) checksum digest '''
     def __init__(self, targets, directory='/', do_create=False, \
@@ -930,46 +929,59 @@ class Digest(object):
         self.do_verify = do_verify
         self.do_backup = do_backup
 
-    # TODO: split create and verify to separate methods
+    # TODO: make those more flexible, taking target argument and such
+    def create(self):
+        ''' Create a digest of target(s) files '''
+        digest = {}
+        for target in self.targets:
+            if not database.local_search(target):
+                message.sub_critical(_('Invalid target'), target)
+                sys.exit(2)
+            message.sub_debug(_('Checksumming'), target)
+            digest[target] = {}
+            target_backup = database.local_metadata(target, 'backup')
+            target_footprint = []
+            for sfile in database.local_metadata(target, 'footprint'):
+                target_footprint.append('%s/%s' % (libspm.ROOT_DIR, sfile))
+            for sfile in target_footprint:
+                srelative = misc.string_lstrip(sfile, libspm.ROOT_DIR + '/', '')
+                if srelative in target_backup and not self.do_backup:
+                    message.sub_debug(_('Ignoring backup file'))
+                elif not os.path.exists(sfile):
+                    message.sub_warning(_('File does not exist'), sfile)
+                else:
+                    digest[target][srelative] = misc.file_checksum(sfile)
+        misc.json_write('%s/digest.json' % self.directory, digest)
+
+    def verify(self):
+        ''' Verify target(s) files from digets '''
+        digest = misc.json_read('%s/digest.json' % self.directory)
+        fail = False
+        for target in digest:
+            if not target in self.targets:
+                message.sub_debug(_('Target from digest not in arguments'), target)
+                continue
+            elif not database.local_search(target):
+                message.sub_critical(_('Target from digest is not local'), target)
+                sys.exit(2)
+            message.sub_debug(_('Verifying'), target)
+            for sfile in digest[target]:
+                sfull = '%s/%s' % (libspm.ROOT_DIR, sfile)
+                if not os.path.exists(sfull):
+                    message.sub_warning(_('File does not exist'), sfull)
+                    fail = True
+                elif not digest[target][sfile] == misc.file_checksum(sfull):
+                    message.sub_critical(_('Checksum mismatch'), sfull)
+                    fail = True
+        if fail:
+            sys.exit(2)
+
     def main(self):
         if self.do_create:
-            digest = {}
-            for target in self.targets:
-                if not database.local_search(target):
-                    message.sub_critical(_('Invalid target'), target)
-                    sys.exit(2)
-                message.sub_debug(_('Checksumming'), target)
-                digest[target] = {}
-                target_backup = database.local_metadata(target, 'backup')
-                for sfile in database.local_metadata(target, 'footprint'):
-                    if '/%s' % sfile in target_backup and not self.do_backup:
-                        message.sub_debug(_('Ignoring backup file'))
-                    elif not os.path.exists(sfile):
-                        message.sub_warning(_('File does not exist'), sfile)
-                    else:
-                        digest[target][sfile] = misc.file_checksum(sfile)
-            misc.json_write('%s/digest.json' % self.directory, digest)
+            self.create()
 
         if self.do_verify:
-            digest = misc.json_read('%s/digest.json' % self.directory)
-            fail = False
-            for target in digest:
-                if not target in self.targets:
-                    message.sub_debug(_('Target from digest not in arguments'), target)
-                    continue
-                elif not database.local_search(target):
-                    message.sub_critical(_('Target from digest is not local'), target)
-                    sys.exit(2)
-                message.sub_debug(_('Verifying'), target)
-                for sfile in digest[target]:
-                    if not os.path.exists(sfile):
-                        message.sub_warning(_('File does not exist'), sfile)
-                        fail = True
-                    elif not digest[target][sfile] == misc.file_checksum(sfile):
-                        message.sub_critical(_('Checksum mismatch'), sfile)
-                        fail = True
-            if fail:
-                sys.exit(2)
+            self.verify()
 
 
 class Portable(object):
