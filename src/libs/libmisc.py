@@ -164,8 +164,12 @@ class Misc(object):
 
         return getattr(hashlib, smethod)(data).hexdigest()
 
-    def string_lstrip(self, string, schars, sreplacement):
+    def string_lstrip(self, string, schars, sreplacement=''):
         ''' What string.lstrip() should've been '''
+        if self.python2:
+            self.typecheck(string, (types.StringTypes))
+            self.typecheck(schars, (types.StringTypes))
+            self.typecheck(sreplacement, (types.StringTypes))
         toreplace = string[:len(schars)]
         return '%s%s' % (toreplace.replace(schars, sreplacement), string[len(schars):])
 
