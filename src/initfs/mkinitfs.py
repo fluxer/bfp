@@ -23,8 +23,7 @@ try:
             modules.append(m)
 
     parser = argparse.ArgumentParser(prog='mkinitfs', description='MkInitfs')
-    parser.add_argument('-T', '--busytest', type=ast.literal_eval, \
-        choices=[True, False], default=recovery, \
+    parser.add_argument('-T', '--busytest', action='store_true', \
         help='Test whether Busybox supports requried functionality')
     parser.add_argument('-t', '--tmp', type=str, default=tmpdir, \
         help='Change temporary directory')
