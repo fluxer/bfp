@@ -989,7 +989,7 @@ class Portable(object):
 
                 content = []
                 for sfile in database.local_metadata(target, 'footprint'):
-                    content.append('%s/%s' % (libspm.ROOT_DIR, depfile))
+                    content.append('%s/%s' % (libspm.ROOT_DIR, sfile))
                 for dep in database.local_metadata(target, 'depends'):
                     message.sub_debug(_('Augmenting'), dep)
                     # TODO: allow exclude/include from files passed as argument
