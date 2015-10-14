@@ -1,6 +1,6 @@
 #!/usr/bin/python2
 
-import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast
+import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast, re
 
 app_version = "1.8.2 (0c7faff)"
 
@@ -23,6 +23,9 @@ try:
             modules.append(m)
 
     parser = argparse.ArgumentParser(prog='mkinitfs', description='MkInitfs')
+    parser.add_argument('-T', '--busytest', type=ast.literal_eval, \
+        choices=[True, False], default=recovery, \
+        help='Test whether Busybox supports requried functionality')
     parser.add_argument('-t', '--tmp', type=str, default=tmpdir, \
         help='Change temporary directory')
     parser.add_argument('-b', '--busybox', type=str, default=busybox, \
@@ -162,6 +165,7 @@ try:
             misc.file_write(image, data)
 
     message.info('Runtime information')
+    message.sub_info('BUSYTEST', ARGS.busytest)
     message.sub_info('TMP', ARGS.tmp)
     message.sub_info('BUSYBOX', ARGS.busybox)
     message.sub_info('KERNEL', ARGS.kernel)
@@ -169,6 +173,44 @@ try:
     message.sub_info('IMAGE', ARGS.image)
     message.sub_info('COMPRESSION', ARGS.compression)
     message.sub_info('RECOVERY', ARGS.recovery)
+
+    if ARGS.busytest:
+        message.sub_info('Testing busybox compatibility')
+        busycommands = {
+            'modprobe': ['-b'],
+            'find': ['-type', '-name', '-exec'],
+            'cpio': ['-o', '-H'],
+            'mknod': ['-m'],
+            'echo': ['-e'],
+            'mkdir': ['-p'],
+            'mount': ['-t', '-o', 'move'],
+            'modprobe': ['-q', '-b', '-a'],
+            'ln': ['-s', '-f'],
+            'mdev': ['-s'],
+            'sort': ['-u'],
+            'reboot': ['-f'],
+            'main': ['--install', '[-s]', 'touch,', 'xargs,', 'switch_root,', 'sync,'],
+        }
+        compatible = True
+        for command in busycommands:
+            message.sub_debug('Checking for compat with', command)
+            if command == 'main':
+                commoutput = subprocess.check_output((ARGS.busybox, '--help'), stderr=subprocess.STDOUT)
+            else:
+                commoutput = subprocess.check_output((ARGS.busybox, command, '--help'), stderr=subprocess.STDOUT)
+            for arg in busycommands[command]:
+                message.sub_debug('Testing argument', arg)
+                if command == 'main':
+                    if not re.findall('\\s%s\\s' % re.escape(arg), commoutput):
+                        message.sub_critical('Argument/applet %s not supported' % arg)
+                        compatible = False
+                else:
+                    if not re.findall('\\s%s\\s' % arg, commoutput):
+                        message.sub_critical('Argument %s not supported by %s' % (arg, command))
+                        compatible = False
+        if not compatible:
+            sys.exit(1)
+        sys.exit(0)
 
     message.sub_info('Copying root overlay')
     if os.path.isdir('/etc/mkinitfs/root'):

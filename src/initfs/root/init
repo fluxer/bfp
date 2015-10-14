@@ -110,7 +110,6 @@ blkid | while read line;do
 done
 
 for hook in $hooks;do
-    # done only because of the latehooks
     base="$(basename "$hook")"
     if [ -f "/hooks/$base" ];then
         msg "Sourcing hook: $base"
@@ -136,7 +135,6 @@ if [ "$lateshell" = "yes" ];then
 fi
 
 for hook in $latehooks;do
-    # done only because of the latehooks
     base="$(basename "$hook")"
     if [ -f "/hooks/$base" ];then
         msg "Sourcing late hook: $base"
