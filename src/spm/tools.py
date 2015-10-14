@@ -633,7 +633,7 @@ class Pack(object):
                 depends = database.local_metadata(target, 'depends')
 
                 message.sub_info(_('Compressing'), target_packfile)
-                misc.archive_compress(content, target_packfile, '/')
+                misc.archive_compress(content, target_packfile, libspm.ROOT_DIR)
                 message.sub_info(_('Assemling depends'), target_depends)
                 misc.file_write(target_depends, ' '.join(depends))
                 if libspm.SIGN:
