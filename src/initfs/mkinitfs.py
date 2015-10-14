@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast, re
 
-app_version = "1.8.2 (e8ad9bc)"
+app_version = "1.8.2 (a64f56c)"
 
 tmpdir = None
 keep = False
@@ -199,14 +199,12 @@ try:
                 commoutput = subprocess.check_output((ARGS.busybox, command, '--help'), stderr=subprocess.STDOUT)
             for arg in busycommands[command]:
                 message.sub_debug('Testing argument', arg)
-                if command == 'main':
-                    if not re.findall('\\s%s\\s' % re.escape(arg), commoutput):
+                if not re.findall('\\s%s\\s' % re.escape(arg), commoutput):
+                    if command == 'main':
                         message.sub_critical('Argument/applet %s not supported' % arg)
-                        compatible = False
-                else:
-                    if not re.findall('\\s%s\\s' % arg, commoutput):
+                    else:
                         message.sub_critical('Argument %s not supported by %s' % (arg, command))
-                        compatible = False
+                    compatible = False
         if not compatible:
             sys.exit(1)
         sys.exit(0)
