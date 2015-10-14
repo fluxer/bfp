@@ -172,7 +172,7 @@ class Dist(object):
                 message.sub_critical(_('Invalid target'), target)
                 sys.exit(2)
             # in case target is a directory ending with a slash basename gets
-            # confused so normalize the path before first
+            # confused so normalize the path first
             target_basename = os.path.basename(os.path.normpath(target))
 
             target_version = database.remote_metadata(target, 'version')
@@ -625,8 +625,9 @@ class Pack(object):
                     os.path.basename(target), target_version)
                 target_depends = '%s.depends' % target_packfile
 
-                # FIXME: support different root directory
-                content = database.local_metadata(target, 'footprint')
+                content = []
+                for sfile in database.local_metadata(target, 'footprint'):
+                    content.append('%s/%s' % (libspm.ROOT_DIR, sfile))
                 # add metadata directory, it is not listed in the footprint
                 content.append('%s/%s' % (libspm.LOCAL_DIR, target))
                 depends = database.local_metadata(target, 'depends')

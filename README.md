@@ -35,9 +35,10 @@ all required features.
 
 ## Building and installing
 
-The build system requires Cython, it translates the Python files into C code
-and from which shared modules and binaries are build. To build and install all
-sub-projects all you have to do is issue the following command:
+The build system requires Cython if changes to the .py files are made. It
+translates the Python files into C code from which shared modules and binaries
+are build. To build and install all sub-projects all you have to do is issue
+the following command:
 
 ```
 make
@@ -49,6 +50,13 @@ Alternatively to build and install against Python 3:
 ```
 make PYTHON=python3
 sudo make PYTHON=python3 install
+```
+
+If you did change the .py files do the following prior to building and
+installing:
+
+```
+make sources
 ```
 
 ## Contributors
