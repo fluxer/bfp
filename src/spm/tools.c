@@ -1110,13 +1110,13 @@ static char __pyx_k_Sane[] = "Sane";
 static char __pyx_k_UDEV[] = "UDEV";
 static char __pyx_k_USER[] = "USER";
 static char __pyx_k_X_OK[] = "X_OK";
-static char __pyx_k__108[] = "\n";
-static char __pyx_k__109[] = "*";
-static char __pyx_k__117[] = " ";
-static char __pyx_k__125[] = "..";
-static char __pyx_k__155[] = "=";
-static char __pyx_k__301[] = "+";
-static char __pyx_k__445[] = "-";
+static char __pyx_k__106[] = "\n";
+static char __pyx_k__107[] = "*";
+static char __pyx_k__115[] = " ";
+static char __pyx_k__123[] = "..";
+static char __pyx_k__153[] = "=";
+static char __pyx_k__298[] = "+";
+static char __pyx_k__442[] = "-";
 static char __pyx_k_arch[] = "arch";
 static char __pyx_k_args[] = "args";
 static char __pyx_k_base[] = "base";
@@ -1290,7 +1290,6 @@ static char __pyx_k_isfile[] = "isfile";
 static char __pyx_k_islink[] = "islink";
 static char __pyx_k_ko_bz2[] = ".ko.bz2";
 static char __pyx_k_libspm[] = "libspm";
-static char __pyx_k_lstrip[] = "lstrip";
 static char __pyx_k_main_2[] = "main";
 static char __pyx_k_misc_2[] = "/misc";
 static char __pyx_k_module[] = "module";
@@ -1657,7 +1656,7 @@ static char __pyx_k_sub_critical[] = "sub_critical";
 static char __pyx_k_urllib_error[] = "urllib.error";
 static char __pyx_k_version_info[] = "version_info";
 static char __pyx_k_which_parser[] = "which_parser";
-static char __pyx_k_1_8_2_e485961[] = "1.8.2 (e485961)";
+static char __pyx_k_1_8_2_9c8a1fb[] = "1.8.2 (9c8a1fb)";
 static char __pyx_k_Create_digest[] = "Create digest";
 static char __pyx_k_Digest___init[] = "Digest.__init__";
 static char __pyx_k_Digest_create[] = "Digest.create";
@@ -1945,7 +1944,7 @@ static char __pyx_k_Starting_migration_procedure_1_7_2[] = "Starting migration p
 static char __pyx_k_Starting_migration_procedure_1_7_3[] = "Starting migration procedure 1_7_x_backup on";
 static PyObject *__pyx_n_s_;
 static PyObject *__pyx_kp_s_1;
-static PyObject *__pyx_kp_s_1_8_2_e485961;
+static PyObject *__pyx_kp_s_1_8_2_9c8a1fb;
 static PyObject *__pyx_kp_s_2;
 static PyObject *__pyx_kp_s_3;
 static PyObject *__pyx_kp_s_4;
@@ -2296,13 +2295,13 @@ static PyObject *__pyx_n_s_Which___init;
 static PyObject *__pyx_n_s_Which_main;
 static PyObject *__pyx_n_s_X_OK;
 static PyObject *__pyx_n_s_ZIPFILE;
-static PyObject *__pyx_kp_s__108;
-static PyObject *__pyx_kp_s__109;
-static PyObject *__pyx_kp_s__117;
-static PyObject *__pyx_kp_s__125;
-static PyObject *__pyx_kp_s__155;
-static PyObject *__pyx_kp_s__301;
-static PyObject *__pyx_kp_s__445;
+static PyObject *__pyx_kp_s__106;
+static PyObject *__pyx_kp_s__107;
+static PyObject *__pyx_kp_s__115;
+static PyObject *__pyx_kp_s__123;
+static PyObject *__pyx_kp_s__153;
+static PyObject *__pyx_kp_s__298;
+static PyObject *__pyx_kp_s__442;
 static PyObject *__pyx_kp_s__5;
 static PyObject *__pyx_kp_s__7;
 static PyObject *__pyx_kp_s__73;
@@ -2569,7 +2568,6 @@ static PyObject *__pyx_n_s_local_belongs;
 static PyObject *__pyx_n_s_local_metadata;
 static PyObject *__pyx_n_s_local_rdepends;
 static PyObject *__pyx_n_s_local_search;
-static PyObject *__pyx_n_s_lstrip;
 static PyObject *__pyx_n_s_ltargetsfiles;
 static PyObject *__pyx_n_s_m;
 static PyObject *__pyx_kp_s_m_2;
@@ -3043,28 +3041,28 @@ static PyObject *__pyx_tuple__96;
 static PyObject *__pyx_tuple__97;
 static PyObject *__pyx_tuple__98;
 static PyObject *__pyx_tuple__99;
-static PyObject *__pyx_slice__124;
+static PyObject *__pyx_slice__122;
 static PyObject *__pyx_tuple__100;
 static PyObject *__pyx_tuple__101;
 static PyObject *__pyx_tuple__102;
 static PyObject *__pyx_tuple__103;
 static PyObject *__pyx_tuple__104;
 static PyObject *__pyx_tuple__105;
-static PyObject *__pyx_tuple__106;
-static PyObject *__pyx_tuple__107;
+static PyObject *__pyx_tuple__108;
+static PyObject *__pyx_tuple__109;
 static PyObject *__pyx_tuple__110;
 static PyObject *__pyx_tuple__111;
 static PyObject *__pyx_tuple__112;
 static PyObject *__pyx_tuple__113;
 static PyObject *__pyx_tuple__114;
-static PyObject *__pyx_tuple__115;
 static PyObject *__pyx_tuple__116;
+static PyObject *__pyx_tuple__117;
 static PyObject *__pyx_tuple__118;
 static PyObject *__pyx_tuple__119;
 static PyObject *__pyx_tuple__120;
 static PyObject *__pyx_tuple__121;
-static PyObject *__pyx_tuple__122;
-static PyObject *__pyx_tuple__123;
+static PyObject *__pyx_tuple__124;
+static PyObject *__pyx_tuple__125;
 static PyObject *__pyx_tuple__126;
 static PyObject *__pyx_tuple__127;
 static PyObject *__pyx_tuple__128;
@@ -3092,8 +3090,8 @@ static PyObject *__pyx_tuple__149;
 static PyObject *__pyx_tuple__150;
 static PyObject *__pyx_tuple__151;
 static PyObject *__pyx_tuple__152;
-static PyObject *__pyx_tuple__153;
 static PyObject *__pyx_tuple__154;
+static PyObject *__pyx_tuple__155;
 static PyObject *__pyx_tuple__156;
 static PyObject *__pyx_tuple__157;
 static PyObject *__pyx_tuple__158;
@@ -3129,61 +3127,61 @@ static PyObject *__pyx_tuple__187;
 static PyObject *__pyx_tuple__188;
 static PyObject *__pyx_tuple__189;
 static PyObject *__pyx_tuple__190;
-static PyObject *__pyx_tuple__191;
 static PyObject *__pyx_tuple__192;
 static PyObject *__pyx_tuple__193;
 static PyObject *__pyx_tuple__195;
-static PyObject *__pyx_tuple__196;
-static PyObject *__pyx_tuple__198;
-static PyObject *__pyx_tuple__200;
-static PyObject *__pyx_tuple__202;
-static PyObject *__pyx_tuple__204;
+static PyObject *__pyx_tuple__197;
+static PyObject *__pyx_tuple__199;
+static PyObject *__pyx_tuple__201;
+static PyObject *__pyx_tuple__203;
+static PyObject *__pyx_tuple__205;
 static PyObject *__pyx_tuple__206;
 static PyObject *__pyx_tuple__208;
-static PyObject *__pyx_tuple__209;
-static PyObject *__pyx_tuple__211;
+static PyObject *__pyx_tuple__210;
+static PyObject *__pyx_tuple__212;
 static PyObject *__pyx_tuple__213;
 static PyObject *__pyx_tuple__215;
-static PyObject *__pyx_tuple__216;
-static PyObject *__pyx_tuple__218;
-static PyObject *__pyx_tuple__220;
-static PyObject *__pyx_tuple__222;
-static PyObject *__pyx_tuple__224;
-static PyObject *__pyx_tuple__226;
+static PyObject *__pyx_tuple__217;
+static PyObject *__pyx_tuple__219;
+static PyObject *__pyx_tuple__221;
+static PyObject *__pyx_tuple__223;
+static PyObject *__pyx_tuple__225;
+static PyObject *__pyx_tuple__227;
 static PyObject *__pyx_tuple__228;
 static PyObject *__pyx_tuple__230;
-static PyObject *__pyx_tuple__231;
-static PyObject *__pyx_tuple__233;
-static PyObject *__pyx_tuple__235;
-static PyObject *__pyx_tuple__237;
-static PyObject *__pyx_tuple__239;
-static PyObject *__pyx_tuple__241;
-static PyObject *__pyx_tuple__243;
-static PyObject *__pyx_tuple__245;
+static PyObject *__pyx_tuple__232;
+static PyObject *__pyx_tuple__234;
+static PyObject *__pyx_tuple__236;
+static PyObject *__pyx_tuple__238;
+static PyObject *__pyx_tuple__240;
+static PyObject *__pyx_tuple__242;
+static PyObject *__pyx_tuple__244;
+static PyObject *__pyx_tuple__246;
 static PyObject *__pyx_tuple__247;
 static PyObject *__pyx_tuple__249;
-static PyObject *__pyx_tuple__250;
+static PyObject *__pyx_tuple__251;
 static PyObject *__pyx_tuple__252;
 static PyObject *__pyx_tuple__254;
-static PyObject *__pyx_tuple__255;
-static PyObject *__pyx_tuple__257;
-static PyObject *__pyx_tuple__259;
-static PyObject *__pyx_tuple__261;
-static PyObject *__pyx_tuple__263;
-static PyObject *__pyx_tuple__265;
-static PyObject *__pyx_tuple__267;
-static PyObject *__pyx_tuple__269;
-static PyObject *__pyx_tuple__271;
+static PyObject *__pyx_tuple__256;
+static PyObject *__pyx_tuple__258;
+static PyObject *__pyx_tuple__260;
+static PyObject *__pyx_tuple__262;
+static PyObject *__pyx_tuple__264;
+static PyObject *__pyx_tuple__266;
+static PyObject *__pyx_tuple__268;
+static PyObject *__pyx_tuple__270;
+static PyObject *__pyx_tuple__272;
 static PyObject *__pyx_tuple__273;
 static PyObject *__pyx_tuple__275;
-static PyObject *__pyx_tuple__276;
-static PyObject *__pyx_tuple__278;
-static PyObject *__pyx_tuple__280;
-static PyObject *__pyx_tuple__282;
-static PyObject *__pyx_tuple__284;
+static PyObject *__pyx_tuple__277;
+static PyObject *__pyx_tuple__279;
+static PyObject *__pyx_tuple__281;
+static PyObject *__pyx_tuple__283;
+static PyObject *__pyx_tuple__285;
 static PyObject *__pyx_tuple__286;
 static PyObject *__pyx_tuple__288;
 static PyObject *__pyx_tuple__289;
+static PyObject *__pyx_tuple__290;
 static PyObject *__pyx_tuple__291;
 static PyObject *__pyx_tuple__292;
 static PyObject *__pyx_tuple__293;
@@ -3191,9 +3189,9 @@ static PyObject *__pyx_tuple__294;
 static PyObject *__pyx_tuple__295;
 static PyObject *__pyx_tuple__296;
 static PyObject *__pyx_tuple__297;
-static PyObject *__pyx_tuple__298;
 static PyObject *__pyx_tuple__299;
 static PyObject *__pyx_tuple__300;
+static PyObject *__pyx_tuple__301;
 static PyObject *__pyx_tuple__302;
 static PyObject *__pyx_tuple__303;
 static PyObject *__pyx_tuple__304;
@@ -3334,9 +3332,9 @@ static PyObject *__pyx_tuple__438;
 static PyObject *__pyx_tuple__439;
 static PyObject *__pyx_tuple__440;
 static PyObject *__pyx_tuple__441;
-static PyObject *__pyx_tuple__442;
 static PyObject *__pyx_tuple__443;
 static PyObject *__pyx_tuple__444;
+static PyObject *__pyx_tuple__445;
 static PyObject *__pyx_tuple__446;
 static PyObject *__pyx_tuple__447;
 static PyObject *__pyx_tuple__448;
@@ -3419,54 +3417,51 @@ static PyObject *__pyx_tuple__524;
 static PyObject *__pyx_tuple__525;
 static PyObject *__pyx_tuple__526;
 static PyObject *__pyx_tuple__527;
-static PyObject *__pyx_tuple__528;
-static PyObject *__pyx_tuple__529;
-static PyObject *__pyx_tuple__530;
+static PyObject *__pyx_codeobj__191;
 static PyObject *__pyx_codeobj__194;
-static PyObject *__pyx_codeobj__197;
-static PyObject *__pyx_codeobj__199;
-static PyObject *__pyx_codeobj__201;
-static PyObject *__pyx_codeobj__203;
-static PyObject *__pyx_codeobj__205;
+static PyObject *__pyx_codeobj__196;
+static PyObject *__pyx_codeobj__198;
+static PyObject *__pyx_codeobj__200;
+static PyObject *__pyx_codeobj__202;
+static PyObject *__pyx_codeobj__204;
 static PyObject *__pyx_codeobj__207;
-static PyObject *__pyx_codeobj__210;
-static PyObject *__pyx_codeobj__212;
+static PyObject *__pyx_codeobj__209;
+static PyObject *__pyx_codeobj__211;
 static PyObject *__pyx_codeobj__214;
-static PyObject *__pyx_codeobj__217;
-static PyObject *__pyx_codeobj__219;
-static PyObject *__pyx_codeobj__221;
-static PyObject *__pyx_codeobj__223;
-static PyObject *__pyx_codeobj__225;
-static PyObject *__pyx_codeobj__227;
+static PyObject *__pyx_codeobj__216;
+static PyObject *__pyx_codeobj__218;
+static PyObject *__pyx_codeobj__220;
+static PyObject *__pyx_codeobj__222;
+static PyObject *__pyx_codeobj__224;
+static PyObject *__pyx_codeobj__226;
 static PyObject *__pyx_codeobj__229;
-static PyObject *__pyx_codeobj__232;
-static PyObject *__pyx_codeobj__234;
-static PyObject *__pyx_codeobj__236;
-static PyObject *__pyx_codeobj__238;
-static PyObject *__pyx_codeobj__240;
-static PyObject *__pyx_codeobj__242;
-static PyObject *__pyx_codeobj__244;
-static PyObject *__pyx_codeobj__246;
+static PyObject *__pyx_codeobj__231;
+static PyObject *__pyx_codeobj__233;
+static PyObject *__pyx_codeobj__235;
+static PyObject *__pyx_codeobj__237;
+static PyObject *__pyx_codeobj__239;
+static PyObject *__pyx_codeobj__241;
+static PyObject *__pyx_codeobj__243;
+static PyObject *__pyx_codeobj__245;
 static PyObject *__pyx_codeobj__248;
-static PyObject *__pyx_codeobj__251;
+static PyObject *__pyx_codeobj__250;
 static PyObject *__pyx_codeobj__253;
-static PyObject *__pyx_codeobj__256;
-static PyObject *__pyx_codeobj__258;
-static PyObject *__pyx_codeobj__260;
-static PyObject *__pyx_codeobj__262;
-static PyObject *__pyx_codeobj__264;
-static PyObject *__pyx_codeobj__266;
-static PyObject *__pyx_codeobj__268;
-static PyObject *__pyx_codeobj__270;
-static PyObject *__pyx_codeobj__272;
+static PyObject *__pyx_codeobj__255;
+static PyObject *__pyx_codeobj__257;
+static PyObject *__pyx_codeobj__259;
+static PyObject *__pyx_codeobj__261;
+static PyObject *__pyx_codeobj__263;
+static PyObject *__pyx_codeobj__265;
+static PyObject *__pyx_codeobj__267;
+static PyObject *__pyx_codeobj__269;
+static PyObject *__pyx_codeobj__271;
 static PyObject *__pyx_codeobj__274;
-static PyObject *__pyx_codeobj__277;
-static PyObject *__pyx_codeobj__279;
-static PyObject *__pyx_codeobj__281;
-static PyObject *__pyx_codeobj__283;
-static PyObject *__pyx_codeobj__285;
+static PyObject *__pyx_codeobj__276;
+static PyObject *__pyx_codeobj__278;
+static PyObject *__pyx_codeobj__280;
+static PyObject *__pyx_codeobj__282;
+static PyObject *__pyx_codeobj__284;
 static PyObject *__pyx_codeobj__287;
-static PyObject *__pyx_codeobj__290;
 
 /* "tools.py":30
  * class Check(object):
@@ -14254,7 +14249,7 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
  *                     message.sub_debug(_('Checking possible backups in'), target)
  *                     for sfile in target_footprint_lines:             # <<<<<<<<<<<<<<
  *                         backups = database.remote_metadata(target, 'backup')
- *                         if not os.path.exists(sfile) and sfile.lstrip('/') in backups:
+ *                         if not os.path.exists(sfile) and misc.string_lstrip(sfile, '/') in backups:
  */
         __pyx_t_9 = __pyx_v_target_footprint_lines; __Pyx_INCREF(__pyx_t_9); __pyx_t_10 = 0;
         for (;;) {
@@ -14272,7 +14267,7 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
  *                     message.sub_debug(_('Checking possible backups in'), target)
  *                     for sfile in target_footprint_lines:
  *                         backups = database.remote_metadata(target, 'backup')             # <<<<<<<<<<<<<<
- *                         if not os.path.exists(sfile) and sfile.lstrip('/') in backups:
+ *                         if not os.path.exists(sfile) and misc.string_lstrip(sfile, '/') in backups:
  *                             message.sub_warning(_('Possibly unnecessary backup of file'), sfile)
  */
           __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_database); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 389; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -14313,9 +14308,9 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
           /* "tools.py":390
  *                     for sfile in target_footprint_lines:
  *                         backups = database.remote_metadata(target, 'backup')
- *                         if not os.path.exists(sfile) and sfile.lstrip('/') in backups:             # <<<<<<<<<<<<<<
+ *                         if not os.path.exists(sfile) and misc.string_lstrip(sfile, '/') in backups:             # <<<<<<<<<<<<<<
  *                             message.sub_warning(_('Possibly unnecessary backup of file'), sfile)
- *                         elif sfile.endswith('.conf') and not sfile.lstrip('/') in backups:
+ *                         elif sfile.endswith('.conf') and not misc.string_lstrip(sfile, '/') in backups:
  */
           __pyx_t_14 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_14);
@@ -14358,13 +14353,40 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
             __pyx_t_7 = __pyx_t_17;
             goto __pyx_L82_bool_binop_done;
           }
-          __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_sfile, __pyx_n_s_lstrip); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__78, NULL); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_14 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_14);
-          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-          __pyx_t_17 = (__Pyx_PySequence_ContainsTF(__pyx_t_14, __pyx_v_backups, Py_EQ)); if (unlikely(__pyx_t_17 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_14, __pyx_n_s_string_lstrip); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
+          __pyx_t_14 = NULL;
+          __pyx_t_15 = 0;
+          if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
+            __pyx_t_14 = PyMethod_GET_SELF(__pyx_t_2);
+            if (likely(__pyx_t_14)) {
+              PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+              __Pyx_INCREF(__pyx_t_14);
+              __Pyx_INCREF(function);
+              __Pyx_DECREF_SET(__pyx_t_2, function);
+              __pyx_t_15 = 1;
+            }
+          }
+          __pyx_t_11 = PyTuple_New(2+__pyx_t_15); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_GOTREF(__pyx_t_11);
+          if (__pyx_t_14) {
+            __Pyx_GIVEREF(__pyx_t_14); PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_14); __pyx_t_14 = NULL;
+          }
+          __Pyx_INCREF(__pyx_v_sfile);
+          __Pyx_GIVEREF(__pyx_v_sfile);
+          PyTuple_SET_ITEM(__pyx_t_11, 0+__pyx_t_15, __pyx_v_sfile);
+          __Pyx_INCREF(__pyx_kp_s__77);
+          __Pyx_GIVEREF(__pyx_kp_s__77);
+          PyTuple_SET_ITEM(__pyx_t_11, 1+__pyx_t_15, __pyx_kp_s__77);
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_11, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_GOTREF(__pyx_t_3);
+          __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+          __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+          __pyx_t_17 = (__Pyx_PySequence_ContainsTF(__pyx_t_3, __pyx_v_backups, Py_EQ)); if (unlikely(__pyx_t_17 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           __pyx_t_6 = (__pyx_t_17 != 0);
           __pyx_t_7 = __pyx_t_6;
           __pyx_L82_bool_binop_done:;
@@ -14372,86 +14394,113 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
 
             /* "tools.py":391
  *                         backups = database.remote_metadata(target, 'backup')
- *                         if not os.path.exists(sfile) and sfile.lstrip('/') in backups:
+ *                         if not os.path.exists(sfile) and misc.string_lstrip(sfile, '/') in backups:
  *                             message.sub_warning(_('Possibly unnecessary backup of file'), sfile)             # <<<<<<<<<<<<<<
- *                         elif sfile.endswith('.conf') and not sfile.lstrip('/') in backups:
+ *                         elif sfile.endswith('.conf') and not misc.string_lstrip(sfile, '/') in backups:
  *                             message.sub_warning(_('Possibly undefined backup of file'), sfile)
  */
-            __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_3);
-            __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_sub_warning); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_2);
-            __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-            __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_3);
-            __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__79, NULL); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_sub_warning); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_11);
-            __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-            __pyx_t_3 = NULL;
+            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+            __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_GOTREF(__pyx_t_2);
+            __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__78, NULL); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_GOTREF(__pyx_t_14);
+            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+            __pyx_t_2 = NULL;
             __pyx_t_15 = 0;
-            if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
-              __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_2);
-              if (likely(__pyx_t_3)) {
-                PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
-                __Pyx_INCREF(__pyx_t_3);
+            if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_11))) {
+              __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_11);
+              if (likely(__pyx_t_2)) {
+                PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_11);
+                __Pyx_INCREF(__pyx_t_2);
                 __Pyx_INCREF(function);
-                __Pyx_DECREF_SET(__pyx_t_2, function);
+                __Pyx_DECREF_SET(__pyx_t_11, function);
                 __pyx_t_15 = 1;
               }
             }
             __pyx_t_13 = PyTuple_New(2+__pyx_t_15); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_13);
-            if (__pyx_t_3) {
-              __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_3); __pyx_t_3 = NULL;
+            if (__pyx_t_2) {
+              __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_2); __pyx_t_2 = NULL;
             }
-            __Pyx_GIVEREF(__pyx_t_11);
-            PyTuple_SET_ITEM(__pyx_t_13, 0+__pyx_t_15, __pyx_t_11);
+            __Pyx_GIVEREF(__pyx_t_14);
+            PyTuple_SET_ITEM(__pyx_t_13, 0+__pyx_t_15, __pyx_t_14);
             __Pyx_INCREF(__pyx_v_sfile);
             __Pyx_GIVEREF(__pyx_v_sfile);
             PyTuple_SET_ITEM(__pyx_t_13, 1+__pyx_t_15, __pyx_v_sfile);
-            __pyx_t_11 = 0;
-            __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_13, NULL); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_14);
+            __pyx_t_14 = 0;
+            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_13, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_GOTREF(__pyx_t_3);
             __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-            __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
+            __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+            __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
             /* "tools.py":390
  *                     for sfile in target_footprint_lines:
  *                         backups = database.remote_metadata(target, 'backup')
- *                         if not os.path.exists(sfile) and sfile.lstrip('/') in backups:             # <<<<<<<<<<<<<<
+ *                         if not os.path.exists(sfile) and misc.string_lstrip(sfile, '/') in backups:             # <<<<<<<<<<<<<<
  *                             message.sub_warning(_('Possibly unnecessary backup of file'), sfile)
- *                         elif sfile.endswith('.conf') and not sfile.lstrip('/') in backups:
+ *                         elif sfile.endswith('.conf') and not misc.string_lstrip(sfile, '/') in backups:
  */
             goto __pyx_L81;
           }
 
           /* "tools.py":392
- *                         if not os.path.exists(sfile) and sfile.lstrip('/') in backups:
+ *                         if not os.path.exists(sfile) and misc.string_lstrip(sfile, '/') in backups:
  *                             message.sub_warning(_('Possibly unnecessary backup of file'), sfile)
- *                         elif sfile.endswith('.conf') and not sfile.lstrip('/') in backups:             # <<<<<<<<<<<<<<
+ *                         elif sfile.endswith('.conf') and not misc.string_lstrip(sfile, '/') in backups:             # <<<<<<<<<<<<<<
  *                             message.sub_warning(_('Possibly undefined backup of file'), sfile)
  * 
  */
-          __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_v_sfile, __pyx_n_s_endswith); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 392; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_14);
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_tuple__80, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 392; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_2);
-          __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-          __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_6 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 392; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+          __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_sfile, __pyx_n_s_endswith); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 392; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_GOTREF(__pyx_t_3);
+          __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__79, NULL); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 392; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_GOTREF(__pyx_t_11);
+          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+          __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_11); if (unlikely(__pyx_t_6 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 392; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
           if (__pyx_t_6) {
           } else {
             __pyx_t_7 = __pyx_t_6;
             goto __pyx_L84_bool_binop_done;
           }
-          __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_sfile, __pyx_n_s_lstrip); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 392; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__81, NULL); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 392; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 392; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_GOTREF(__pyx_t_3);
+          __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_string_lstrip); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 392; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_GOTREF(__pyx_t_13);
+          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+          __pyx_t_3 = NULL;
+          __pyx_t_15 = 0;
+          if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_13))) {
+            __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_13);
+            if (likely(__pyx_t_3)) {
+              PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_13);
+              __Pyx_INCREF(__pyx_t_3);
+              __Pyx_INCREF(function);
+              __Pyx_DECREF_SET(__pyx_t_13, function);
+              __pyx_t_15 = 1;
+            }
+          }
+          __pyx_t_14 = PyTuple_New(2+__pyx_t_15); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 392; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_14);
-          __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-          __pyx_t_6 = (__Pyx_PySequence_ContainsTF(__pyx_t_14, __pyx_v_backups, Py_NE)); if (unlikely(__pyx_t_6 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 392; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          if (__pyx_t_3) {
+            __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_3); __pyx_t_3 = NULL;
+          }
+          __Pyx_INCREF(__pyx_v_sfile);
+          __Pyx_GIVEREF(__pyx_v_sfile);
+          PyTuple_SET_ITEM(__pyx_t_14, 0+__pyx_t_15, __pyx_v_sfile);
+          __Pyx_INCREF(__pyx_kp_s__77);
+          __Pyx_GIVEREF(__pyx_kp_s__77);
+          PyTuple_SET_ITEM(__pyx_t_14, 1+__pyx_t_15, __pyx_kp_s__77);
+          __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_13, __pyx_t_14, NULL); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 392; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_GOTREF(__pyx_t_11);
           __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
+          __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
+          __pyx_t_6 = (__Pyx_PySequence_ContainsTF(__pyx_t_11, __pyx_v_backups, Py_NE)); if (unlikely(__pyx_t_6 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 392; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
           __pyx_t_17 = (__pyx_t_6 != 0);
           __pyx_t_7 = __pyx_t_17;
           __pyx_L84_bool_binop_done:;
@@ -14459,54 +14508,54 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
 
             /* "tools.py":393
  *                             message.sub_warning(_('Possibly unnecessary backup of file'), sfile)
- *                         elif sfile.endswith('.conf') and not sfile.lstrip('/') in backups:
+ *                         elif sfile.endswith('.conf') and not misc.string_lstrip(sfile, '/') in backups:
  *                             message.sub_warning(_('Possibly undefined backup of file'), sfile)             # <<<<<<<<<<<<<<
  * 
  *                 if self.conflicts:
  */
-            __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_sub_warning); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_13 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_13);
-            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-            __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__82, NULL); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_11);
-            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-            __pyx_t_2 = NULL;
+            __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_t_13, __pyx_n_s_sub_warning); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_GOTREF(__pyx_t_14);
+            __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
+            __pyx_t_13 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_GOTREF(__pyx_t_13);
+            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_13, __pyx_tuple__80, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_GOTREF(__pyx_t_3);
+            __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
+            __pyx_t_13 = NULL;
             __pyx_t_15 = 0;
-            if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_13))) {
-              __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_13);
-              if (likely(__pyx_t_2)) {
-                PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_13);
-                __Pyx_INCREF(__pyx_t_2);
+            if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_14))) {
+              __pyx_t_13 = PyMethod_GET_SELF(__pyx_t_14);
+              if (likely(__pyx_t_13)) {
+                PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_14);
+                __Pyx_INCREF(__pyx_t_13);
                 __Pyx_INCREF(function);
-                __Pyx_DECREF_SET(__pyx_t_13, function);
+                __Pyx_DECREF_SET(__pyx_t_14, function);
                 __pyx_t_15 = 1;
               }
             }
-            __pyx_t_3 = PyTuple_New(2+__pyx_t_15); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_3);
-            if (__pyx_t_2) {
-              __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2); __pyx_t_2 = NULL;
+            __pyx_t_2 = PyTuple_New(2+__pyx_t_15); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_GOTREF(__pyx_t_2);
+            if (__pyx_t_13) {
+              __Pyx_GIVEREF(__pyx_t_13); PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_13); __pyx_t_13 = NULL;
             }
-            __Pyx_GIVEREF(__pyx_t_11);
-            PyTuple_SET_ITEM(__pyx_t_3, 0+__pyx_t_15, __pyx_t_11);
+            __Pyx_GIVEREF(__pyx_t_3);
+            PyTuple_SET_ITEM(__pyx_t_2, 0+__pyx_t_15, __pyx_t_3);
             __Pyx_INCREF(__pyx_v_sfile);
             __Pyx_GIVEREF(__pyx_v_sfile);
-            PyTuple_SET_ITEM(__pyx_t_3, 1+__pyx_t_15, __pyx_v_sfile);
-            __pyx_t_11 = 0;
-            __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_13, __pyx_t_3, NULL); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_14);
-            __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-            __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
+            PyTuple_SET_ITEM(__pyx_t_2, 1+__pyx_t_15, __pyx_v_sfile);
+            __pyx_t_3 = 0;
+            __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_t_2, NULL); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_GOTREF(__pyx_t_11);
+            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
+            __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
             /* "tools.py":392
- *                         if not os.path.exists(sfile) and sfile.lstrip('/') in backups:
+ *                         if not os.path.exists(sfile) and misc.string_lstrip(sfile, '/') in backups:
  *                             message.sub_warning(_('Possibly unnecessary backup of file'), sfile)
- *                         elif sfile.endswith('.conf') and not sfile.lstrip('/') in backups:             # <<<<<<<<<<<<<<
+ *                         elif sfile.endswith('.conf') and not misc.string_lstrip(sfile, '/') in backups:             # <<<<<<<<<<<<<<
  *                             message.sub_warning(_('Possibly undefined backup of file'), sfile)
  * 
  */
@@ -14518,7 +14567,7 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
  *                     message.sub_debug(_('Checking possible backups in'), target)
  *                     for sfile in target_footprint_lines:             # <<<<<<<<<<<<<<
  *                         backups = database.remote_metadata(target, 'backup')
- *                         if not os.path.exists(sfile) and sfile.lstrip('/') in backups:
+ *                         if not os.path.exists(sfile) and misc.string_lstrip(sfile, '/') in backups:
  */
         }
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
@@ -14552,43 +14601,43 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
  *                     for local in database.local_all(basename=True):
  *                         if local == target:
  */
-        __pyx_t_14 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_11);
+        __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_14);
-        __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_t_14, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_13);
-        __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-        __pyx_t_14 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_14);
-        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_tuple__83, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_3);
-        __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-        __pyx_t_14 = NULL;
+        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_11);
+        __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__81, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_2);
+        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+        __pyx_t_11 = NULL;
         __pyx_t_10 = 0;
-        if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_13))) {
-          __pyx_t_14 = PyMethod_GET_SELF(__pyx_t_13);
-          if (likely(__pyx_t_14)) {
-            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_13);
-            __Pyx_INCREF(__pyx_t_14);
+        if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_14))) {
+          __pyx_t_11 = PyMethod_GET_SELF(__pyx_t_14);
+          if (likely(__pyx_t_11)) {
+            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_14);
+            __Pyx_INCREF(__pyx_t_11);
             __Pyx_INCREF(function);
-            __Pyx_DECREF_SET(__pyx_t_13, function);
+            __Pyx_DECREF_SET(__pyx_t_14, function);
             __pyx_t_10 = 1;
           }
         }
-        __pyx_t_11 = PyTuple_New(2+__pyx_t_10); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_11);
-        if (__pyx_t_14) {
-          __Pyx_GIVEREF(__pyx_t_14); PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_14); __pyx_t_14 = NULL;
+        __pyx_t_3 = PyTuple_New(2+__pyx_t_10); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_3);
+        if (__pyx_t_11) {
+          __Pyx_GIVEREF(__pyx_t_11); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_11); __pyx_t_11 = NULL;
         }
-        __Pyx_GIVEREF(__pyx_t_3);
-        PyTuple_SET_ITEM(__pyx_t_11, 0+__pyx_t_10, __pyx_t_3);
+        __Pyx_GIVEREF(__pyx_t_2);
+        PyTuple_SET_ITEM(__pyx_t_3, 0+__pyx_t_10, __pyx_t_2);
         __Pyx_INCREF(__pyx_v_target);
         __Pyx_GIVEREF(__pyx_v_target);
-        PyTuple_SET_ITEM(__pyx_t_11, 1+__pyx_t_10, __pyx_v_target);
-        __pyx_t_3 = 0;
-        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_13, __pyx_t_11, NULL); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        PyTuple_SET_ITEM(__pyx_t_3, 1+__pyx_t_10, __pyx_v_target);
+        __pyx_t_2 = 0;
+        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_t_3, NULL); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_9);
-        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
+        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+        __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
         /* "tools.py":397
@@ -14600,47 +14649,47 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
  */
         __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_database); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_9);
-        __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_local_all); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_13);
+        __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_local_all); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_14);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         __pyx_t_9 = PyDict_New(); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_9);
         if (PyDict_SetItem(__pyx_t_9, __pyx_n_s_basename, Py_True) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_13, __pyx_empty_tuple, __pyx_t_9); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_11);
-        __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
+        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_empty_tuple, __pyx_t_9); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_3);
+        __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        if (likely(PyList_CheckExact(__pyx_t_11)) || PyTuple_CheckExact(__pyx_t_11)) {
-          __pyx_t_9 = __pyx_t_11; __Pyx_INCREF(__pyx_t_9); __pyx_t_10 = 0;
+        if (likely(PyList_CheckExact(__pyx_t_3)) || PyTuple_CheckExact(__pyx_t_3)) {
+          __pyx_t_9 = __pyx_t_3; __Pyx_INCREF(__pyx_t_9); __pyx_t_10 = 0;
           __pyx_t_12 = NULL;
         } else {
-          __pyx_t_10 = -1; __pyx_t_9 = PyObject_GetIter(__pyx_t_11); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_10 = -1; __pyx_t_9 = PyObject_GetIter(__pyx_t_3); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_9);
           __pyx_t_12 = Py_TYPE(__pyx_t_9)->tp_iternext; if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         }
-        __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         for (;;) {
           if (likely(!__pyx_t_12)) {
             if (likely(PyList_CheckExact(__pyx_t_9))) {
               if (__pyx_t_10 >= PyList_GET_SIZE(__pyx_t_9)) break;
               #if CYTHON_COMPILING_IN_CPYTHON
-              __pyx_t_11 = PyList_GET_ITEM(__pyx_t_9, __pyx_t_10); __Pyx_INCREF(__pyx_t_11); __pyx_t_10++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+              __pyx_t_3 = PyList_GET_ITEM(__pyx_t_9, __pyx_t_10); __Pyx_INCREF(__pyx_t_3); __pyx_t_10++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
               #else
-              __pyx_t_11 = PySequence_ITEM(__pyx_t_9, __pyx_t_10); __pyx_t_10++; if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-              __Pyx_GOTREF(__pyx_t_11);
+              __pyx_t_3 = PySequence_ITEM(__pyx_t_9, __pyx_t_10); __pyx_t_10++; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+              __Pyx_GOTREF(__pyx_t_3);
               #endif
             } else {
               if (__pyx_t_10 >= PyTuple_GET_SIZE(__pyx_t_9)) break;
               #if CYTHON_COMPILING_IN_CPYTHON
-              __pyx_t_11 = PyTuple_GET_ITEM(__pyx_t_9, __pyx_t_10); __Pyx_INCREF(__pyx_t_11); __pyx_t_10++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+              __pyx_t_3 = PyTuple_GET_ITEM(__pyx_t_9, __pyx_t_10); __Pyx_INCREF(__pyx_t_3); __pyx_t_10++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
               #else
-              __pyx_t_11 = PySequence_ITEM(__pyx_t_9, __pyx_t_10); __pyx_t_10++; if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-              __Pyx_GOTREF(__pyx_t_11);
+              __pyx_t_3 = PySequence_ITEM(__pyx_t_9, __pyx_t_10); __pyx_t_10++; if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 397; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+              __Pyx_GOTREF(__pyx_t_3);
               #endif
             }
           } else {
-            __pyx_t_11 = __pyx_t_12(__pyx_t_9);
-            if (unlikely(!__pyx_t_11)) {
+            __pyx_t_3 = __pyx_t_12(__pyx_t_9);
+            if (unlikely(!__pyx_t_3)) {
               PyObject* exc_type = PyErr_Occurred();
               if (exc_type) {
                 if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
@@ -14648,10 +14697,10 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
               }
               break;
             }
-            __Pyx_GOTREF(__pyx_t_11);
+            __Pyx_GOTREF(__pyx_t_3);
           }
-          __Pyx_XDECREF_SET(__pyx_v_local, __pyx_t_11);
-          __pyx_t_11 = 0;
+          __Pyx_XDECREF_SET(__pyx_v_local, __pyx_t_3);
+          __pyx_t_3 = 0;
 
           /* "tools.py":398
  *                     message.sub_debug(_('Checking for conflicts in'), target)
@@ -14660,9 +14709,9 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
  *                             continue
  *                         footprint = frozenset(database.local_metadata(local, 'footprint'))
  */
-          __pyx_t_11 = PyObject_RichCompare(__pyx_v_local, __pyx_v_target, Py_EQ); __Pyx_XGOTREF(__pyx_t_11); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 398; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_11); if (unlikely(__pyx_t_7 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 398; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+          __pyx_t_3 = PyObject_RichCompare(__pyx_v_local, __pyx_v_target, Py_EQ); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 398; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_7 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 398; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           if (__pyx_t_7) {
 
             /* "tools.py":399
@@ -14690,43 +14739,43 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
  *                         diff = footprint.difference(target_footprint_lines)
  *                         if footprint != diff:
  */
-          __pyx_t_13 = __Pyx_GetModuleGlobalName(__pyx_n_s_database); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_13);
-          __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_13, __pyx_n_s_local_metadata); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_3);
-          __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-          __pyx_t_13 = NULL;
+          __pyx_t_14 = __Pyx_GetModuleGlobalName(__pyx_n_s_database); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_GOTREF(__pyx_t_14);
+          __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_14, __pyx_n_s_local_metadata); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_GOTREF(__pyx_t_2);
+          __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
+          __pyx_t_14 = NULL;
           __pyx_t_15 = 0;
-          if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_3))) {
-            __pyx_t_13 = PyMethod_GET_SELF(__pyx_t_3);
-            if (likely(__pyx_t_13)) {
-              PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-              __Pyx_INCREF(__pyx_t_13);
+          if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
+            __pyx_t_14 = PyMethod_GET_SELF(__pyx_t_2);
+            if (likely(__pyx_t_14)) {
+              PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+              __Pyx_INCREF(__pyx_t_14);
               __Pyx_INCREF(function);
-              __Pyx_DECREF_SET(__pyx_t_3, function);
+              __Pyx_DECREF_SET(__pyx_t_2, function);
               __pyx_t_15 = 1;
             }
           }
-          __pyx_t_14 = PyTuple_New(2+__pyx_t_15); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_14);
-          if (__pyx_t_13) {
-            __Pyx_GIVEREF(__pyx_t_13); PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_13); __pyx_t_13 = NULL;
+          __pyx_t_11 = PyTuple_New(2+__pyx_t_15); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_GOTREF(__pyx_t_11);
+          if (__pyx_t_14) {
+            __Pyx_GIVEREF(__pyx_t_14); PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_14); __pyx_t_14 = NULL;
           }
           __Pyx_INCREF(__pyx_v_local);
           __Pyx_GIVEREF(__pyx_v_local);
-          PyTuple_SET_ITEM(__pyx_t_14, 0+__pyx_t_15, __pyx_v_local);
+          PyTuple_SET_ITEM(__pyx_t_11, 0+__pyx_t_15, __pyx_v_local);
           __Pyx_INCREF(__pyx_n_s_footprint);
           __Pyx_GIVEREF(__pyx_n_s_footprint);
-          PyTuple_SET_ITEM(__pyx_t_14, 1+__pyx_t_15, __pyx_n_s_footprint);
-          __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_14, NULL); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_11);
-          __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-          __pyx_t_3 = __Pyx_PyFrozenSet_New(__pyx_t_11); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          PyTuple_SET_ITEM(__pyx_t_11, 1+__pyx_t_15, __pyx_n_s_footprint);
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_11, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-          __Pyx_XDECREF_SET(__pyx_v_footprint, ((PyObject*)__pyx_t_3));
-          __pyx_t_3 = 0;
+          __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+          __pyx_t_2 = __Pyx_PyFrozenSet_New(__pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 400; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_GOTREF(__pyx_t_2);
+          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+          __Pyx_XDECREF_SET(__pyx_v_footprint, ((PyObject*)__pyx_t_2));
+          __pyx_t_2 = 0;
 
           /* "tools.py":401
  *                             continue
@@ -14735,35 +14784,35 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
  *                         if footprint != diff:
  *                             message.sub_critical(_('File/link conflicts with %s') % local, \
  */
-          __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_v_footprint, __pyx_n_s_difference); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 401; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_11);
-          __pyx_t_14 = NULL;
-          if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_11))) {
-            __pyx_t_14 = PyMethod_GET_SELF(__pyx_t_11);
-            if (likely(__pyx_t_14)) {
-              PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_11);
-              __Pyx_INCREF(__pyx_t_14);
+          __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_footprint, __pyx_n_s_difference); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 401; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_GOTREF(__pyx_t_3);
+          __pyx_t_11 = NULL;
+          if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_3))) {
+            __pyx_t_11 = PyMethod_GET_SELF(__pyx_t_3);
+            if (likely(__pyx_t_11)) {
+              PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+              __Pyx_INCREF(__pyx_t_11);
               __Pyx_INCREF(function);
-              __Pyx_DECREF_SET(__pyx_t_11, function);
+              __Pyx_DECREF_SET(__pyx_t_3, function);
             }
           }
-          if (!__pyx_t_14) {
-            __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_v_target_footprint_lines); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 401; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_3);
+          if (!__pyx_t_11) {
+            __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_target_footprint_lines); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 401; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_GOTREF(__pyx_t_2);
           } else {
-            __pyx_t_13 = PyTuple_New(1+1); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 401; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_13);
-            __Pyx_GIVEREF(__pyx_t_14); PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14); __pyx_t_14 = NULL;
+            __pyx_t_14 = PyTuple_New(1+1); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 401; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_GOTREF(__pyx_t_14);
+            __Pyx_GIVEREF(__pyx_t_11); PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_11); __pyx_t_11 = NULL;
             __Pyx_INCREF(__pyx_v_target_footprint_lines);
             __Pyx_GIVEREF(__pyx_v_target_footprint_lines);
-            PyTuple_SET_ITEM(__pyx_t_13, 0+1, __pyx_v_target_footprint_lines);
-            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_13, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 401; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_3);
-            __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
+            PyTuple_SET_ITEM(__pyx_t_14, 0+1, __pyx_v_target_footprint_lines);
+            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_14, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 401; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_GOTREF(__pyx_t_2);
+            __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
           }
-          __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-          __Pyx_XDECREF_SET(__pyx_v_diff, __pyx_t_3);
-          __pyx_t_3 = 0;
+          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+          __Pyx_XDECREF_SET(__pyx_v_diff, __pyx_t_2);
+          __pyx_t_2 = 0;
 
           /* "tools.py":402
  *                         footprint = frozenset(database.local_metadata(local, 'footprint'))
@@ -14772,9 +14821,9 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
  *                             message.sub_critical(_('File/link conflicts with %s') % local, \
  *                                 list(footprint.difference(diff)))
  */
-          __pyx_t_3 = PyObject_RichCompare(__pyx_v_footprint, __pyx_v_diff, Py_NE); __Pyx_XGOTREF(__pyx_t_3); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 402; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_7 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 402; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+          __pyx_t_2 = PyObject_RichCompare(__pyx_v_footprint, __pyx_v_diff, Py_NE); __Pyx_XGOTREF(__pyx_t_2); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 402; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_2); if (unlikely(__pyx_t_7 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 402; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           if (__pyx_t_7) {
 
             /* "tools.py":403
@@ -14784,19 +14833,19 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
  *                                 list(footprint.difference(diff)))
  * 
  */
-            __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_11);
-            __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_sub_critical); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_13);
-            __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-            __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_11);
-            __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__84, NULL); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_GOTREF(__pyx_t_3);
+            __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_sub_critical); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_14);
-            __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-            __pyx_t_11 = PyNumber_Remainder(__pyx_t_14, __pyx_v_local); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+            __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_GOTREF(__pyx_t_3);
+            __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__82, NULL); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_11);
-            __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
+            __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+            __pyx_t_3 = PyNumber_Remainder(__pyx_t_11, __pyx_v_local); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_GOTREF(__pyx_t_3);
+            __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
             /* "tools.py":404
  *                         if footprint != diff:
@@ -14805,21 +14854,21 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
  * 
  *                 if self.debug:
  */
-            __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_footprint, __pyx_n_s_difference); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 404; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_2);
+            __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_v_footprint, __pyx_n_s_difference); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 404; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_GOTREF(__pyx_t_13);
             __pyx_t_18 = NULL;
-            if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
-              __pyx_t_18 = PyMethod_GET_SELF(__pyx_t_2);
+            if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_13))) {
+              __pyx_t_18 = PyMethod_GET_SELF(__pyx_t_13);
               if (likely(__pyx_t_18)) {
-                PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_2);
+                PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_13);
                 __Pyx_INCREF(__pyx_t_18);
                 __Pyx_INCREF(function);
-                __Pyx_DECREF_SET(__pyx_t_2, function);
+                __Pyx_DECREF_SET(__pyx_t_13, function);
               }
             }
             if (!__pyx_t_18) {
-              __pyx_t_14 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_diff); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 404; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-              __Pyx_GOTREF(__pyx_t_14);
+              __pyx_t_11 = __Pyx_PyObject_CallOneArg(__pyx_t_13, __pyx_v_diff); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 404; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+              __Pyx_GOTREF(__pyx_t_11);
             } else {
               __pyx_t_8 = PyTuple_New(1+1); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 404; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
               __Pyx_GOTREF(__pyx_t_8);
@@ -14827,42 +14876,42 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
               __Pyx_INCREF(__pyx_v_diff);
               __Pyx_GIVEREF(__pyx_v_diff);
               PyTuple_SET_ITEM(__pyx_t_8, 0+1, __pyx_v_diff);
-              __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_8, NULL); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 404; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-              __Pyx_GOTREF(__pyx_t_14);
+              __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_13, __pyx_t_8, NULL); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 404; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+              __Pyx_GOTREF(__pyx_t_11);
               __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
             }
-            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-            __pyx_t_2 = PySequence_List(__pyx_t_14); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 404; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_2);
-            __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
-            __pyx_t_14 = NULL;
+            __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
+            __pyx_t_13 = PySequence_List(__pyx_t_11); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 404; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_GOTREF(__pyx_t_13);
+            __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
+            __pyx_t_11 = NULL;
             __pyx_t_15 = 0;
-            if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_13))) {
-              __pyx_t_14 = PyMethod_GET_SELF(__pyx_t_13);
-              if (likely(__pyx_t_14)) {
-                PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_13);
-                __Pyx_INCREF(__pyx_t_14);
+            if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_14))) {
+              __pyx_t_11 = PyMethod_GET_SELF(__pyx_t_14);
+              if (likely(__pyx_t_11)) {
+                PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_14);
+                __Pyx_INCREF(__pyx_t_11);
                 __Pyx_INCREF(function);
-                __Pyx_DECREF_SET(__pyx_t_13, function);
+                __Pyx_DECREF_SET(__pyx_t_14, function);
                 __pyx_t_15 = 1;
               }
             }
             __pyx_t_8 = PyTuple_New(2+__pyx_t_15); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_8);
-            if (__pyx_t_14) {
-              __Pyx_GIVEREF(__pyx_t_14); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_14); __pyx_t_14 = NULL;
+            if (__pyx_t_11) {
+              __Pyx_GIVEREF(__pyx_t_11); PyTuple_SET_ITEM(__pyx_t_8, 0, __pyx_t_11); __pyx_t_11 = NULL;
             }
-            __Pyx_GIVEREF(__pyx_t_11);
-            PyTuple_SET_ITEM(__pyx_t_8, 0+__pyx_t_15, __pyx_t_11);
-            __Pyx_GIVEREF(__pyx_t_2);
-            PyTuple_SET_ITEM(__pyx_t_8, 1+__pyx_t_15, __pyx_t_2);
-            __pyx_t_11 = 0;
-            __pyx_t_2 = 0;
-            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_13, __pyx_t_8, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_3);
+            __Pyx_GIVEREF(__pyx_t_3);
+            PyTuple_SET_ITEM(__pyx_t_8, 0+__pyx_t_15, __pyx_t_3);
+            __Pyx_GIVEREF(__pyx_t_13);
+            PyTuple_SET_ITEM(__pyx_t_8, 1+__pyx_t_15, __pyx_t_13);
+            __pyx_t_3 = 0;
+            __pyx_t_13 = 0;
+            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_t_8, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_GOTREF(__pyx_t_2);
             __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-            __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-            __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+            __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
+            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
             /* "tools.py":402
  *                         footprint = frozenset(database.local_metadata(local, 'footprint'))
@@ -14913,43 +14962,43 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
  *                     found_debug = 'lib/debug/' in target_footprint
  *                     found_exe = False
  */
-        __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_13 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_13);
-        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__85, NULL); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_2);
+        __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_14);
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_2);
+        __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__83, NULL); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_8);
-        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __pyx_t_3 = NULL;
+        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+        __pyx_t_2 = NULL;
         __pyx_t_10 = 0;
-        if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_13))) {
-          __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_13);
-          if (likely(__pyx_t_3)) {
-            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_13);
-            __Pyx_INCREF(__pyx_t_3);
+        if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_14))) {
+          __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_14);
+          if (likely(__pyx_t_2)) {
+            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_14);
+            __Pyx_INCREF(__pyx_t_2);
             __Pyx_INCREF(function);
-            __Pyx_DECREF_SET(__pyx_t_13, function);
+            __Pyx_DECREF_SET(__pyx_t_14, function);
             __pyx_t_10 = 1;
           }
         }
-        __pyx_t_2 = PyTuple_New(2+__pyx_t_10); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_2);
-        if (__pyx_t_3) {
-          __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3); __pyx_t_3 = NULL;
+        __pyx_t_13 = PyTuple_New(2+__pyx_t_10); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_13);
+        if (__pyx_t_2) {
+          __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_2); __pyx_t_2 = NULL;
         }
         __Pyx_GIVEREF(__pyx_t_8);
-        PyTuple_SET_ITEM(__pyx_t_2, 0+__pyx_t_10, __pyx_t_8);
+        PyTuple_SET_ITEM(__pyx_t_13, 0+__pyx_t_10, __pyx_t_8);
         __Pyx_INCREF(__pyx_v_target);
         __Pyx_GIVEREF(__pyx_v_target);
-        PyTuple_SET_ITEM(__pyx_t_2, 1+__pyx_t_10, __pyx_v_target);
+        PyTuple_SET_ITEM(__pyx_t_13, 1+__pyx_t_10, __pyx_v_target);
         __pyx_t_8 = 0;
-        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_13, __pyx_t_2, NULL); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_t_13, NULL); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_9);
-        __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
+        __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
         /* "tools.py":408
@@ -14996,13 +15045,13 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
           for (;;) {
             if (__pyx_t_10 >= PyList_GET_SIZE(__pyx_t_9)) break;
             #if CYTHON_COMPILING_IN_CPYTHON
-            __pyx_t_13 = PyList_GET_ITEM(__pyx_t_9, __pyx_t_10); __Pyx_INCREF(__pyx_t_13); __pyx_t_10++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 411; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_14 = PyList_GET_ITEM(__pyx_t_9, __pyx_t_10); __Pyx_INCREF(__pyx_t_14); __pyx_t_10++; if (unlikely(0 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 411; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             #else
-            __pyx_t_13 = PySequence_ITEM(__pyx_t_9, __pyx_t_10); __pyx_t_10++; if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 411; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_13);
+            __pyx_t_14 = PySequence_ITEM(__pyx_t_9, __pyx_t_10); __pyx_t_10++; if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 411; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_GOTREF(__pyx_t_14);
             #endif
-            __Pyx_XDECREF_SET(__pyx_v_sfile, __pyx_t_13);
-            __pyx_t_13 = 0;
+            __Pyx_XDECREF_SET(__pyx_v_sfile, __pyx_t_14);
+            __pyx_t_14 = 0;
 
             /* "tools.py":412
  *                     if not found_debug:
@@ -15011,38 +15060,38 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
  *                             if smime == 'application/x-executable' \
  *                                 or smime == 'application/x-sharedlib' \
  */
-            __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 412; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_file_mime); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 412; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_13 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 412; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_GOTREF(__pyx_t_13);
+            __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_13, __pyx_n_s_file_mime); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 412; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_8);
-            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-            __pyx_t_2 = NULL;
+            __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
+            __pyx_t_13 = NULL;
             if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_8))) {
-              __pyx_t_2 = PyMethod_GET_SELF(__pyx_t_8);
-              if (likely(__pyx_t_2)) {
+              __pyx_t_13 = PyMethod_GET_SELF(__pyx_t_8);
+              if (likely(__pyx_t_13)) {
                 PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_8);
-                __Pyx_INCREF(__pyx_t_2);
+                __Pyx_INCREF(__pyx_t_13);
                 __Pyx_INCREF(function);
                 __Pyx_DECREF_SET(__pyx_t_8, function);
               }
             }
-            if (!__pyx_t_2) {
-              __pyx_t_13 = __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_v_sfile); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 412; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-              __Pyx_GOTREF(__pyx_t_13);
+            if (!__pyx_t_13) {
+              __pyx_t_14 = __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_v_sfile); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 412; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+              __Pyx_GOTREF(__pyx_t_14);
             } else {
-              __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 412; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-              __Pyx_GOTREF(__pyx_t_3);
-              __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2); __pyx_t_2 = NULL;
+              __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 412; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+              __Pyx_GOTREF(__pyx_t_2);
+              __Pyx_GIVEREF(__pyx_t_13); PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_13); __pyx_t_13 = NULL;
               __Pyx_INCREF(__pyx_v_sfile);
               __Pyx_GIVEREF(__pyx_v_sfile);
-              PyTuple_SET_ITEM(__pyx_t_3, 0+1, __pyx_v_sfile);
-              __pyx_t_13 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_3, NULL); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 412; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-              __Pyx_GOTREF(__pyx_t_13);
-              __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+              PyTuple_SET_ITEM(__pyx_t_2, 0+1, __pyx_v_sfile);
+              __pyx_t_14 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_2, NULL); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 412; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+              __Pyx_GOTREF(__pyx_t_14);
+              __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             }
             __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-            __Pyx_XDECREF_SET(__pyx_v_smime, __pyx_t_13);
-            __pyx_t_13 = 0;
+            __Pyx_XDECREF_SET(__pyx_v_smime, __pyx_t_14);
+            __pyx_t_14 = 0;
 
             /* "tools.py":413
  *                         for sfile in target_footprint_lines:
@@ -15165,40 +15214,40 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
  * 
  * 
  */
-          __pyx_t_13 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 419; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_13);
-          __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_13, __pyx_n_s_sub_warning); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 419; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_14 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 419; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_GOTREF(__pyx_t_14);
+          __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_14, __pyx_n_s_sub_warning); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 419; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_8);
-          __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-          __pyx_t_13 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 419; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_13);
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_13, __pyx_tuple__86, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 419; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_3);
-          __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-          __pyx_t_13 = NULL;
+          __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
+          __pyx_t_14 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 419; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_GOTREF(__pyx_t_14);
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_14, __pyx_tuple__84, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 419; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_GOTREF(__pyx_t_2);
+          __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
+          __pyx_t_14 = NULL;
           if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_8))) {
-            __pyx_t_13 = PyMethod_GET_SELF(__pyx_t_8);
-            if (likely(__pyx_t_13)) {
+            __pyx_t_14 = PyMethod_GET_SELF(__pyx_t_8);
+            if (likely(__pyx_t_14)) {
               PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_8);
-              __Pyx_INCREF(__pyx_t_13);
+              __Pyx_INCREF(__pyx_t_14);
               __Pyx_INCREF(function);
               __Pyx_DECREF_SET(__pyx_t_8, function);
             }
           }
-          if (!__pyx_t_13) {
-            __pyx_t_9 = __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_t_3); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 419; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+          if (!__pyx_t_14) {
+            __pyx_t_9 = __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_t_2); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 419; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             __Pyx_GOTREF(__pyx_t_9);
           } else {
-            __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 419; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-            __Pyx_GOTREF(__pyx_t_2);
-            __Pyx_GIVEREF(__pyx_t_13); PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_13); __pyx_t_13 = NULL;
-            __Pyx_GIVEREF(__pyx_t_3);
-            PyTuple_SET_ITEM(__pyx_t_2, 0+1, __pyx_t_3);
-            __pyx_t_3 = 0;
-            __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_2, NULL); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 419; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_13 = PyTuple_New(1+1); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 419; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __Pyx_GOTREF(__pyx_t_13);
+            __Pyx_GIVEREF(__pyx_t_14); PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_14); __pyx_t_14 = NULL;
+            __Pyx_GIVEREF(__pyx_t_2);
+            PyTuple_SET_ITEM(__pyx_t_13, 0+1, __pyx_t_2);
+            __pyx_t_2 = 0;
+            __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_13, NULL); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 419; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_9);
-            __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
+            __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
           }
           __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
@@ -15938,7 +15987,7 @@ static PyObject *__pyx_pf_5tools_4Sane_2main(CYTHON_UNUSED PyObject *__pyx_self,
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 446; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__87, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 446; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__85, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 446; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_t_6 = NULL;
@@ -16051,7 +16100,7 @@ static PyObject *__pyx_pf_5tools_4Sane_2main(CYTHON_UNUSED PyObject *__pyx_self,
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
           __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 451; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_10);
-          __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_tuple__88, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 451; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_tuple__86, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 451; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_7);
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
           __pyx_t_10 = NULL;
@@ -16116,7 +16165,7 @@ static PyObject *__pyx_pf_5tools_4Sane_2main(CYTHON_UNUSED PyObject *__pyx_self,
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 453; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_6);
-          __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__89, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 453; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__87, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 453; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_7);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __pyx_t_6 = NULL;
@@ -16203,7 +16252,7 @@ static PyObject *__pyx_pf_5tools_4Sane_2main(CYTHON_UNUSED PyObject *__pyx_self,
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 457; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__90, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 457; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__88, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 457; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_7);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __pyx_t_5 = NULL;
@@ -16268,7 +16317,7 @@ static PyObject *__pyx_pf_5tools_4Sane_2main(CYTHON_UNUSED PyObject *__pyx_self,
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
           __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 459; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_10);
-          __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_tuple__91, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 459; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_tuple__89, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 459; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_7);
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
           __pyx_t_10 = NULL;
@@ -16355,7 +16404,7 @@ static PyObject *__pyx_pf_5tools_4Sane_2main(CYTHON_UNUSED PyObject *__pyx_self,
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 463; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_6);
-          __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__92, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 463; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__90, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 463; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_7);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __pyx_t_6 = NULL;
@@ -16464,7 +16513,7 @@ static PyObject *__pyx_pf_5tools_4Sane_2main(CYTHON_UNUSED PyObject *__pyx_self,
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
           __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 467; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_10);
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_tuple__93, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 467; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_tuple__91, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 467; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
           __pyx_t_10 = NULL;
@@ -16572,7 +16621,7 @@ static PyObject *__pyx_pf_5tools_4Sane_2main(CYTHON_UNUSED PyObject *__pyx_self,
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 471; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_6);
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__94, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 471; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__92, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 471; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __pyx_t_6 = NULL;
@@ -16713,7 +16762,7 @@ static PyObject *__pyx_pf_5tools_4Sane_2main(CYTHON_UNUSED PyObject *__pyx_self,
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__95, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__93, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_7);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __pyx_t_5 = NULL;
@@ -16801,7 +16850,7 @@ static PyObject *__pyx_pf_5tools_4Sane_2main(CYTHON_UNUSED PyObject *__pyx_self,
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 480; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_1);
-          __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__96, NULL); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 480; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__94, NULL); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 480; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_10);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __pyx_t_1 = NULL;
@@ -16889,7 +16938,7 @@ static PyObject *__pyx_pf_5tools_4Sane_2main(CYTHON_UNUSED PyObject *__pyx_self,
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
           __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 482; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_7);
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__97, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 482; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__95, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 482; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
           __pyx_t_7 = NULL;
@@ -17079,7 +17128,7 @@ static PyObject *__pyx_pf_5tools_4Sane_2main(CYTHON_UNUSED PyObject *__pyx_self,
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 493; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_1);
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__98, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 493; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__96, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 493; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __pyx_t_1 = NULL;
@@ -17234,7 +17283,7 @@ static PyObject *__pyx_pf_5tools_4Sane_2main(CYTHON_UNUSED PyObject *__pyx_self,
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 498; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_6);
-          __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__99, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 498; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__97, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 498; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_7);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __pyx_t_6 = NULL;
@@ -17389,7 +17438,7 @@ static PyObject *__pyx_pf_5tools_4Sane_2main(CYTHON_UNUSED PyObject *__pyx_self,
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
           __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 503; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_10);
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_tuple__100, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 503; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_tuple__98, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 503; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
           __pyx_t_10 = NULL;
@@ -17815,7 +17864,7 @@ static PyObject *__pyx_pf_5tools_4Sane_2main(CYTHON_UNUSED PyObject *__pyx_self,
                 __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
                 __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 517; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
                 __Pyx_GOTREF(__pyx_t_6);
-                __pyx_t_15 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__101, NULL); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 517; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+                __pyx_t_15 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__99, NULL); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 517; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
                 __Pyx_GOTREF(__pyx_t_15);
                 __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
                 __pyx_t_6 = NULL;
@@ -17920,7 +17969,7 @@ static PyObject *__pyx_pf_5tools_4Sane_2main(CYTHON_UNUSED PyObject *__pyx_self,
                 __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
                 __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 520; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
                 __Pyx_GOTREF(__pyx_t_17);
-                __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_tuple__102, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 520; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+                __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_tuple__100, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 520; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
                 __Pyx_GOTREF(__pyx_t_1);
                 __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
                 __pyx_t_17 = NULL;
@@ -17977,7 +18026,7 @@ static PyObject *__pyx_pf_5tools_4Sane_2main(CYTHON_UNUSED PyObject *__pyx_self,
                   __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
                   __pyx_t_15 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
                   __Pyx_GOTREF(__pyx_t_15);
-                  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_15, __pyx_tuple__103, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+                  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_15, __pyx_tuple__101, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
                   __Pyx_GOTREF(__pyx_t_1);
                   __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
                   __pyx_t_15 = NULL;
@@ -18331,7 +18380,7 @@ static PyObject *__pyx_pf_5tools_5Merge_2merge(CYTHON_UNUSED PyObject *__pyx_sel
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 532; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__104, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 532; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__102, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 532; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -18378,7 +18427,7 @@ static PyObject *__pyx_pf_5tools_5Merge_2merge(CYTHON_UNUSED PyObject *__pyx_sel
   __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_get); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 533; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__105, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 533; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__103, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 533; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_7 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 533; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -18395,7 +18444,7 @@ static PyObject *__pyx_pf_5tools_5Merge_2merge(CYTHON_UNUSED PyObject *__pyx_sel
   __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_whereis); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 533; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__106, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 533; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__104, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 533; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_INCREF(__pyx_t_6);
@@ -18414,7 +18463,7 @@ static PyObject *__pyx_pf_5tools_5Merge_2merge(CYTHON_UNUSED PyObject *__pyx_sel
  */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 534; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__107, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 534; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__105, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 534; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
   __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 534; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -18445,9 +18494,9 @@ static PyObject *__pyx_pf_5tools_5Merge_2merge(CYTHON_UNUSED PyObject *__pyx_sel
  *             for line in list(difflib.Differ().compare( \
  *                 misc.file_read(backfile).splitlines(), \
  */
-    __pyx_t_6 = PyNumber_Multiply(__pyx_kp_s__109, __pyx_int_80); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 545; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = PyNumber_Multiply(__pyx_kp_s__107, __pyx_int_80); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 545; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
-    __pyx_t_1 = PyNumber_Add(__pyx_kp_s__108, __pyx_t_6); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 545; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyNumber_Add(__pyx_kp_s__106, __pyx_t_6); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 545; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
     if (__Pyx_PrintOne(0, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 545; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -18681,9 +18730,9 @@ static PyObject *__pyx_pf_5tools_5Merge_2merge(CYTHON_UNUSED PyObject *__pyx_sel
  *             self.merge(origfile, backfile)
  *         elif action == '2':
  */
-    __pyx_t_1 = PyNumber_Multiply(__pyx_kp_s__109, __pyx_int_80); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 550; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = PyNumber_Multiply(__pyx_kp_s__107, __pyx_int_80); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 550; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = PyNumber_Add(__pyx_t_1, __pyx_kp_s__108); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 550; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = PyNumber_Add(__pyx_t_1, __pyx_kp_s__106); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 550; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     if (__Pyx_PrintOne(0, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 550; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -19254,7 +19303,7 @@ static PyObject *__pyx_pf_5tools_5Merge_4main(CYTHON_UNUSED PyObject *__pyx_self
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 566; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__110, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 566; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__108, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 566; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_5 = NULL;
@@ -19604,7 +19653,7 @@ static PyObject *__pyx_pf_5tools_5Merge_4main(CYTHON_UNUSED PyObject *__pyx_self
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 574; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_13 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__111, NULL); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 574; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __pyx_t_13 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__109, NULL); if (unlikely(!__pyx_t_13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 574; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           __Pyx_GOTREF(__pyx_t_13);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __pyx_t_5 = NULL;
@@ -20068,7 +20117,7 @@ static PyObject *__pyx_pf_5tools_4Edit_2main(CYTHON_UNUSED PyObject *__pyx_self,
   __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_get); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__112, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__110, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_4 = __Pyx_PyObject_IsTrue(__pyx_t_3); if (unlikely(__pyx_t_4 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -20085,7 +20134,7 @@ static PyObject *__pyx_pf_5tools_4Edit_2main(CYTHON_UNUSED PyObject *__pyx_self,
   __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_whereis); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__113, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__111, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_INCREF(__pyx_t_3);
@@ -20637,7 +20686,7 @@ static PyObject *__pyx_pf_5tools_5Which_2main(CYTHON_UNUSED PyObject *__pyx_self
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 607; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__114, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 607; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__112, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 607; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __pyx_t_6 = NULL;
@@ -21583,7 +21632,7 @@ static PyObject *__pyx_pf_5tools_4Pack_2main(CYTHON_UNUSED PyObject *__pyx_self,
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 635; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_7);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__115, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 635; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__113, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 635; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __pyx_t_7 = NULL;
@@ -21678,7 +21727,7 @@ static PyObject *__pyx_pf_5tools_4Pack_2main(CYTHON_UNUSED PyObject *__pyx_self,
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 637; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__116, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 637; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__114, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 637; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_t_6 = NULL;
@@ -21722,7 +21771,7 @@ static PyObject *__pyx_pf_5tools_4Pack_2main(CYTHON_UNUSED PyObject *__pyx_self,
       __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_file_write); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 638; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-      __pyx_t_7 = __Pyx_PyString_Join(__pyx_kp_s__117, __pyx_v_depends); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 638; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_7 = __Pyx_PyString_Join(__pyx_kp_s__115, __pyx_v_depends); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 638; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_7);
       __pyx_t_1 = NULL;
       __pyx_t_9 = 0;
@@ -21783,7 +21832,7 @@ static PyObject *__pyx_pf_5tools_4Pack_2main(CYTHON_UNUSED PyObject *__pyx_self,
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
         __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_10);
-        __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_tuple__118, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_tuple__116, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_7);
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
         __pyx_t_10 = NULL;
@@ -22219,7 +22268,7 @@ static PyObject *__pyx_pf_5tools_3Pkg___init__(CYTHON_UNUSED PyObject *__pyx_sel
  *             'https://crux.nu/ports/crux-3.1/compat-32/%s',
  *             'https://crux.nu/ports/crux-3.1/contrib/%s',
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_PKG_DIRS, __pyx_tuple__119) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 651; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_PKG_DIRS, __pyx_tuple__117) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 651; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":646
  * class Pkg(object):
@@ -22482,7 +22531,7 @@ static PyObject *__pyx_gb_5tools_3Pkg_4generator(__pyx_CoroutineObject *__pyx_ge
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 666; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__120, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 666; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__118, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 666; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_5 = NULL;
@@ -22711,7 +22760,7 @@ static PyObject *__pyx_gb_5tools_3Pkg_4generator(__pyx_CoroutineObject *__pyx_ge
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_kp_s_href, __pyx_n_s_encode); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 673; __pyx_clineno = __LINE__; goto __pyx_L12_error;}
             __Pyx_GOTREF(__pyx_t_6);
-            __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__121, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 673; __pyx_clineno = __LINE__; goto __pyx_L12_error;}
+            __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__119, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 673; __pyx_clineno = __LINE__; goto __pyx_L12_error;}
             __Pyx_GOTREF(__pyx_t_7);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_t_6 = NULL;
@@ -22765,7 +22814,7 @@ static PyObject *__pyx_gb_5tools_3Pkg_4generator(__pyx_CoroutineObject *__pyx_ge
  */
               __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_m, __pyx_n_s_group); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 675; __pyx_clineno = __LINE__; goto __pyx_L12_error;}
               __Pyx_GOTREF(__pyx_t_9);
-              __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__122, NULL); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 675; __pyx_clineno = __LINE__; goto __pyx_L12_error;}
+              __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__120, NULL); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 675; __pyx_clineno = __LINE__; goto __pyx_L12_error;}
               __Pyx_GOTREF(__pyx_t_17);
               __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
               __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_decode); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 675; __pyx_clineno = __LINE__; goto __pyx_L12_error;}
@@ -22803,7 +22852,7 @@ static PyObject *__pyx_gb_5tools_3Pkg_4generator(__pyx_CoroutineObject *__pyx_ge
  */
               __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_cur_scope->__pyx_v_m, __pyx_n_s_group); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 676; __pyx_clineno = __LINE__; goto __pyx_L12_error;}
               __Pyx_GOTREF(__pyx_t_9);
-              __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__123, NULL); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 676; __pyx_clineno = __LINE__; goto __pyx_L12_error;}
+              __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__121, NULL); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 676; __pyx_clineno = __LINE__; goto __pyx_L12_error;}
               __Pyx_GOTREF(__pyx_t_17);
               __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
               __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_decode); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 676; __pyx_clineno = __LINE__; goto __pyx_L12_error;}
@@ -22839,9 +22888,9 @@ static PyObject *__pyx_gb_5tools_3Pkg_4generator(__pyx_CoroutineObject *__pyx_ge
  *                             continue
  *                         yield '%s/%s' % (url, href), name
  */
-              __pyx_t_5 = __Pyx_PyObject_GetSlice(__pyx_cur_scope->__pyx_v_name, 0, 2, NULL, NULL, &__pyx_slice__124, 0, 1, 1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 677; __pyx_clineno = __LINE__; goto __pyx_L12_error;}
+              __pyx_t_5 = __Pyx_PyObject_GetSlice(__pyx_cur_scope->__pyx_v_name, 0, 2, NULL, NULL, &__pyx_slice__122, 0, 1, 1); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 677; __pyx_clineno = __LINE__; goto __pyx_L12_error;}
               __Pyx_GOTREF(__pyx_t_5);
-              __pyx_t_10 = (__Pyx_PyString_Equals(__pyx_t_5, __pyx_kp_s__125, Py_EQ)); if (unlikely(__pyx_t_10 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 677; __pyx_clineno = __LINE__; goto __pyx_L12_error;}
+              __pyx_t_10 = (__Pyx_PyString_Equals(__pyx_t_5, __pyx_kp_s__123, Py_EQ)); if (unlikely(__pyx_t_10 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 677; __pyx_clineno = __LINE__; goto __pyx_L12_error;}
               __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
               if (!__pyx_t_10) {
               } else {
@@ -23425,7 +23474,7 @@ static PyObject *__pyx_pf_5tools_3Pkg_5main(CYTHON_UNUSED PyObject *__pyx_self, 
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 692; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__126, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 692; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__124, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 692; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_t_1 = NULL;
@@ -23604,7 +23653,7 @@ static PyObject *__pyx_pf_5tools_3Pkg_5main(CYTHON_UNUSED PyObject *__pyx_self, 
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
         __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 696; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_7);
-        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__127, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 696; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__125, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 696; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
         __pyx_t_7 = NULL;
@@ -23773,7 +23822,7 @@ static PyObject *__pyx_pf_5tools_3Pkg_5main(CYTHON_UNUSED PyObject *__pyx_self, 
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 703; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_10);
-      __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_tuple__128, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 703; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_tuple__126, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 703; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       __pyx_t_10 = NULL;
@@ -23827,7 +23876,7 @@ static PyObject *__pyx_pf_5tools_3Pkg_5main(CYTHON_UNUSED PyObject *__pyx_self, 
     __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_exit); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 704; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__129, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 704; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__127, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 704; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -24080,7 +24129,7 @@ static PyObject *__pyx_pf_5tools_5Serve_2main(CYTHON_UNUSED PyObject *__pyx_self
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 716; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__130, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 716; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__128, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 716; __pyx_clineno = __LINE__; goto __pyx_L4_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = NULL;
@@ -24643,7 +24692,7 @@ static PyObject *__pyx_pf_5tools_8Disowned_2main(CYTHON_UNUSED PyObject *__pyx_s
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 735; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__131, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 735; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__129, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 735; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_4 = NULL;
@@ -24894,7 +24943,7 @@ static PyObject *__pyx_pf_5tools_8Disowned_2main(CYTHON_UNUSED PyObject *__pyx_s
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 741; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__132, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 741; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__130, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 741; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_1 = NULL;
@@ -25041,7 +25090,7 @@ static PyObject *__pyx_pf_5tools_8Disowned_2main(CYTHON_UNUSED PyObject *__pyx_s
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
         __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 747; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_7);
-        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__133, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 747; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__131, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 747; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
         __pyx_t_7 = NULL;
@@ -25571,7 +25620,7 @@ static PyObject *__pyx_pf_5tools_6Upload_2main(CYTHON_UNUSED PyObject *__pyx_sel
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 764; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__134, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 764; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__132, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 764; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_4 = NULL;
@@ -25614,7 +25663,7 @@ static PyObject *__pyx_pf_5tools_6Upload_2main(CYTHON_UNUSED PyObject *__pyx_sel
     __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_exit); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 765; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__135, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 765; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__133, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 765; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -25657,7 +25706,7 @@ static PyObject *__pyx_pf_5tools_6Upload_2main(CYTHON_UNUSED PyObject *__pyx_sel
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 767; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__136, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 767; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__134, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 767; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_5 = NULL;
@@ -25700,7 +25749,7 @@ static PyObject *__pyx_pf_5tools_6Upload_2main(CYTHON_UNUSED PyObject *__pyx_sel
     __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_exit); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_7);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__137, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__135, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -26216,7 +26265,7 @@ static PyObject *__pyx_pf_5tools_6Upload_2main(CYTHON_UNUSED PyObject *__pyx_sel
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 786; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
         __Pyx_GOTREF(__pyx_t_4);
-        __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__138, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 786; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
+        __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__136, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 786; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __pyx_t_4 = NULL;
@@ -26260,7 +26309,7 @@ static PyObject *__pyx_pf_5tools_6Upload_2main(CYTHON_UNUSED PyObject *__pyx_sel
         __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_exit); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 787; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-        __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__139, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 787; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
+        __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__137, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 787; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
         __Pyx_GOTREF(__pyx_t_7);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -26431,7 +26480,7 @@ static PyObject *__pyx_pf_5tools_6Upload_2main(CYTHON_UNUSED PyObject *__pyx_sel
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
         __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 793; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
         __Pyx_GOTREF(__pyx_t_7);
-        __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__140, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 793; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
+        __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__138, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 793; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
         __pyx_t_7 = NULL;
@@ -26475,7 +26524,7 @@ static PyObject *__pyx_pf_5tools_6Upload_2main(CYTHON_UNUSED PyObject *__pyx_sel
         __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_n_s_exit); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 794; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-        __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__141, NULL); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 794; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
+        __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__139, NULL); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 794; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
         __Pyx_GOTREF(__pyx_t_12);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
@@ -26549,7 +26598,7 @@ static PyObject *__pyx_pf_5tools_6Upload_2main(CYTHON_UNUSED PyObject *__pyx_sel
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 796; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__142, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 796; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
+        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__140, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 796; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __pyx_t_1 = NULL;
@@ -26593,7 +26642,7 @@ static PyObject *__pyx_pf_5tools_6Upload_2main(CYTHON_UNUSED PyObject *__pyx_sel
         __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_12, __pyx_n_s_exit); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 797; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-        __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__143, NULL); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 797; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
+        __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__141, NULL); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 797; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
         __Pyx_GOTREF(__pyx_t_12);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
@@ -26719,7 +26768,7 @@ static PyObject *__pyx_pf_5tools_6Upload_2main(CYTHON_UNUSED PyObject *__pyx_sel
         __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
         __pyx_t_12 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 802; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
         __Pyx_GOTREF(__pyx_t_12);
-        __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_12, __pyx_tuple__144, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 802; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
+        __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_12, __pyx_tuple__142, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 802; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
         __Pyx_GOTREF(__pyx_t_7);
         __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
         __pyx_t_12 = NULL;
@@ -26794,7 +26843,7 @@ static PyObject *__pyx_pf_5tools_6Upload_2main(CYTHON_UNUSED PyObject *__pyx_sel
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 804; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__145, NULL); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 804; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
+        __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__143, NULL); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 804; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
         __Pyx_GOTREF(__pyx_t_12);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __pyx_t_1 = NULL;
@@ -27020,7 +27069,7 @@ static PyObject *__pyx_pf_5tools_6Upload_2main(CYTHON_UNUSED PyObject *__pyx_sel
           /*finally:*/ {
             /*normal exit:*/{
               if (__pyx_t_16) {
-                __pyx_t_19 = __Pyx_PyObject_Call(__pyx_t_16, __pyx_tuple__146, NULL);
+                __pyx_t_19 = __Pyx_PyObject_Call(__pyx_t_16, __pyx_tuple__144, NULL);
                 __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
                 if (unlikely(!__pyx_t_19)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 805; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
                 __Pyx_GOTREF(__pyx_t_19);
@@ -27442,7 +27491,7 @@ static PyObject *__pyx_pf_5tools_6Online_2main(CYTHON_UNUSED PyObject *__pyx_sel
     __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_exit); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 819; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__147, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 819; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__145, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 819; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -27675,7 +27724,7 @@ static PyObject *__pyx_pf_5tools_7Upgrade_2upgrade_1_7_x_srcbuild(CYTHON_UNUSED 
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 832; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__148, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 832; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__146, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 832; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = NULL;
@@ -27826,7 +27875,7 @@ static PyObject *__pyx_pf_5tools_7Upgrade_2upgrade_1_7_x_srcbuild(CYTHON_UNUSED 
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 837; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__149, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 837; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__147, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 837; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_t_7 = NULL;
@@ -28140,7 +28189,7 @@ static PyObject *__pyx_pf_5tools_7Upgrade_4upgrade_1_7_x_metadata(CYTHON_UNUSED 
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 847; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__150, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 847; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__148, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 847; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = NULL;
@@ -28294,7 +28343,7 @@ static PyObject *__pyx_pf_5tools_7Upgrade_4upgrade_1_7_x_metadata(CYTHON_UNUSED 
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 850; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__151, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 850; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__149, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 850; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_4 = NULL;
@@ -28360,7 +28409,7 @@ static PyObject *__pyx_pf_5tools_7Upgrade_4upgrade_1_7_x_metadata(CYTHON_UNUSED 
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 852; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_7);
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__152, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 852; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__150, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 852; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
   __pyx_t_7 = NULL;
@@ -28631,7 +28680,7 @@ static PyObject *__pyx_pf_5tools_7Upgrade_4upgrade_1_7_x_metadata(CYTHON_UNUSED 
  */
     __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_line, __pyx_n_s_startswith); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 861; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__154, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 861; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__152, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 861; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 861; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -28647,7 +28696,7 @@ static PyObject *__pyx_pf_5tools_7Upgrade_4upgrade_1_7_x_metadata(CYTHON_UNUSED 
  */
       __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_v_line, __pyx_n_s_split); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 863; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__156, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 863; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_tuple__154, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 863; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       if ((likely(PyTuple_CheckExact(__pyx_t_1))) || (PyList_CheckExact(__pyx_t_1))) {
@@ -28945,8 +28994,8 @@ static PyObject *__pyx_pf_5tools_7Upgrade_6upgrade_1_7_x_backup(CYTHON_UNUSED Py
   Py_ssize_t __pyx_t_7;
   PyObject *__pyx_t_8 = NULL;
   PyObject *(*__pyx_t_9)(PyObject *);
-  int __pyx_t_10;
-  Py_ssize_t __pyx_t_11;
+  Py_ssize_t __pyx_t_10;
+  int __pyx_t_11;
   PyObject *__pyx_t_12 = NULL;
   int __pyx_lineno = 0;
   const char *__pyx_filename = NULL;
@@ -29024,7 +29073,7 @@ static PyObject *__pyx_pf_5tools_7Upgrade_6upgrade_1_7_x_backup(CYTHON_UNUSED Py
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 873; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__157, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 873; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__155, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 873; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = NULL;
@@ -29141,7 +29190,7 @@ static PyObject *__pyx_pf_5tools_7Upgrade_6upgrade_1_7_x_backup(CYTHON_UNUSED Py
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 877; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_8);
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__158, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 877; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__156, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 877; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __pyx_t_8 = NULL;
@@ -29267,7 +29316,7 @@ static PyObject *__pyx_pf_5tools_7Upgrade_6upgrade_1_7_x_backup(CYTHON_UNUSED Py
  *         dbackup = {}
  *         message.sub_debug(_('Migrating remote backup to local'), target)             # <<<<<<<<<<<<<<
  *         for sfile in database.local_metadata(target, 'footprint'):
- *             if sfile.endswith('.conf') or sfile.lstrip('/') in backup:
+ *             if sfile.endswith('.conf') or misc.string_lstrip(sfile, '/') in backup:
  */
   __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 881; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -29276,7 +29325,7 @@ static PyObject *__pyx_pf_5tools_7Upgrade_6upgrade_1_7_x_backup(CYTHON_UNUSED Py
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 881; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
-  __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__159, NULL); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 881; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__157, NULL); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 881; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_8);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __pyx_t_3 = NULL;
@@ -29312,7 +29361,7 @@ static PyObject *__pyx_pf_5tools_7Upgrade_6upgrade_1_7_x_backup(CYTHON_UNUSED Py
  *         dbackup = {}
  *         message.sub_debug(_('Migrating remote backup to local'), target)
  *         for sfile in database.local_metadata(target, 'footprint'):             # <<<<<<<<<<<<<<
- *             if sfile.endswith('.conf') or sfile.lstrip('/') in backup:
+ *             if sfile.endswith('.conf') or misc.string_lstrip(sfile, '/') in backup:
  *                 if os.path.isfile(sfile):
  */
   __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_database); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 882; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -29393,13 +29442,13 @@ static PyObject *__pyx_pf_5tools_7Upgrade_6upgrade_1_7_x_backup(CYTHON_UNUSED Py
     /* "tools.py":883
  *         message.sub_debug(_('Migrating remote backup to local'), target)
  *         for sfile in database.local_metadata(target, 'footprint'):
- *             if sfile.endswith('.conf') or sfile.lstrip('/') in backup:             # <<<<<<<<<<<<<<
+ *             if sfile.endswith('.conf') or misc.string_lstrip(sfile, '/') in backup:             # <<<<<<<<<<<<<<
  *                 if os.path.isfile(sfile):
  *                     dbackup[sfile] = misc.file_checksum(sfile)
  */
     __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_sfile, __pyx_n_s_endswith); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 883; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__160, NULL); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 883; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__158, NULL); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 883; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_8);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_6 = __Pyx_PyObject_IsTrue(__pyx_t_8); if (unlikely(__pyx_t_6 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 883; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -29409,105 +29458,132 @@ static PyObject *__pyx_pf_5tools_7Upgrade_6upgrade_1_7_x_backup(CYTHON_UNUSED Py
       __pyx_t_5 = __pyx_t_6;
       goto __pyx_L10_bool_binop_done;
     }
-    __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_v_sfile, __pyx_n_s_lstrip); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 883; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-    __Pyx_GOTREF(__pyx_t_8);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__161, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 883; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 883; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-    __pyx_t_6 = (__Pyx_PySequence_ContainsTF(__pyx_t_1, __pyx_v_backup, Py_EQ)); if (unlikely(__pyx_t_6 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 883; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_string_lstrip); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 883; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_10 = (__pyx_t_6 != 0);
-    __pyx_t_5 = __pyx_t_10;
+    __pyx_t_1 = NULL;
+    __pyx_t_10 = 0;
+    if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_4))) {
+      __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_4);
+      if (likely(__pyx_t_1)) {
+        PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+        __Pyx_INCREF(__pyx_t_1);
+        __Pyx_INCREF(function);
+        __Pyx_DECREF_SET(__pyx_t_4, function);
+        __pyx_t_10 = 1;
+      }
+    }
+    __pyx_t_3 = PyTuple_New(2+__pyx_t_10); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 883; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_3);
+    if (__pyx_t_1) {
+      __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_1); __pyx_t_1 = NULL;
+    }
+    __Pyx_INCREF(__pyx_v_sfile);
+    __Pyx_GIVEREF(__pyx_v_sfile);
+    PyTuple_SET_ITEM(__pyx_t_3, 0+__pyx_t_10, __pyx_v_sfile);
+    __Pyx_INCREF(__pyx_kp_s__77);
+    __Pyx_GIVEREF(__pyx_kp_s__77);
+    PyTuple_SET_ITEM(__pyx_t_3, 1+__pyx_t_10, __pyx_kp_s__77);
+    __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_3, NULL); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 883; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_GOTREF(__pyx_t_8);
+    __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+    __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+    __pyx_t_6 = (__Pyx_PySequence_ContainsTF(__pyx_t_8, __pyx_v_backup, Py_EQ)); if (unlikely(__pyx_t_6 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 883; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+    __pyx_t_11 = (__pyx_t_6 != 0);
+    __pyx_t_5 = __pyx_t_11;
     __pyx_L10_bool_binop_done:;
     if (__pyx_t_5) {
 
       /* "tools.py":884
  *         for sfile in database.local_metadata(target, 'footprint'):
- *             if sfile.endswith('.conf') or sfile.lstrip('/') in backup:
+ *             if sfile.endswith('.conf') or misc.string_lstrip(sfile, '/') in backup:
  *                 if os.path.isfile(sfile):             # <<<<<<<<<<<<<<
  *                     dbackup[sfile] = misc.file_checksum(sfile)
  *                 else:
  */
-      __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 884; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_8);
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_path); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 884; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 884; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_4);
-      __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_isfile); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 884; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_GOTREF(__pyx_t_8);
+      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_path); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 884; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      __pyx_t_4 = NULL;
-      if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_8))) {
-        __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_8);
-        if (likely(__pyx_t_4)) {
-          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_8);
-          __Pyx_INCREF(__pyx_t_4);
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_isfile); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 884; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __Pyx_GOTREF(__pyx_t_4);
+      __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+      __pyx_t_3 = NULL;
+      if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_4))) {
+        __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_4);
+        if (likely(__pyx_t_3)) {
+          PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
+          __Pyx_INCREF(__pyx_t_3);
           __Pyx_INCREF(function);
-          __Pyx_DECREF_SET(__pyx_t_8, function);
+          __Pyx_DECREF_SET(__pyx_t_4, function);
         }
       }
-      if (!__pyx_t_4) {
-        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_8, __pyx_v_sfile); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 884; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_1);
+      if (!__pyx_t_3) {
+        __pyx_t_8 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_sfile); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 884; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_8);
       } else {
-        __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 884; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_3);
-        __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4); __pyx_t_4 = NULL;
+        __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 884; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_1);
+        __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_3); __pyx_t_3 = NULL;
         __Pyx_INCREF(__pyx_v_sfile);
         __Pyx_GIVEREF(__pyx_v_sfile);
-        PyTuple_SET_ITEM(__pyx_t_3, 0+1, __pyx_v_sfile);
-        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 884; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_1);
-        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+        PyTuple_SET_ITEM(__pyx_t_1, 0+1, __pyx_v_sfile);
+        __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_1, NULL); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 884; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_8);
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       }
+      __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+      __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_8); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 884; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-      __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 884; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-      __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       if (__pyx_t_5) {
 
         /* "tools.py":885
- *             if sfile.endswith('.conf') or sfile.lstrip('/') in backup:
+ *             if sfile.endswith('.conf') or misc.string_lstrip(sfile, '/') in backup:
  *                 if os.path.isfile(sfile):
  *                     dbackup[sfile] = misc.file_checksum(sfile)             # <<<<<<<<<<<<<<
  *                 else:
  *                     message.sub_warning(_('File does not exist'), sfile)
  */
-        __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 885; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_8);
-        __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_file_checksum); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 885; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_3);
-        __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
-        __pyx_t_8 = NULL;
-        if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_3))) {
-          __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_3);
-          if (likely(__pyx_t_8)) {
-            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
-            __Pyx_INCREF(__pyx_t_8);
+        __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 885; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_4);
+        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_file_checksum); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 885; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_1);
+        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+        __pyx_t_4 = NULL;
+        if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_1))) {
+          __pyx_t_4 = PyMethod_GET_SELF(__pyx_t_1);
+          if (likely(__pyx_t_4)) {
+            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_1);
+            __Pyx_INCREF(__pyx_t_4);
             __Pyx_INCREF(function);
-            __Pyx_DECREF_SET(__pyx_t_3, function);
+            __Pyx_DECREF_SET(__pyx_t_1, function);
           }
         }
-        if (!__pyx_t_8) {
-          __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_v_sfile); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 885; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_1);
+        if (!__pyx_t_4) {
+          __pyx_t_8 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_sfile); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 885; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_GOTREF(__pyx_t_8);
         } else {
-          __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 885; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_4);
-          __Pyx_GIVEREF(__pyx_t_8); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_8); __pyx_t_8 = NULL;
+          __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 885; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_GOTREF(__pyx_t_3);
+          __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4); __pyx_t_4 = NULL;
           __Pyx_INCREF(__pyx_v_sfile);
           __Pyx_GIVEREF(__pyx_v_sfile);
-          PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_sfile);
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 885; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-          __Pyx_GOTREF(__pyx_t_1);
-          __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+          PyTuple_SET_ITEM(__pyx_t_3, 0+1, __pyx_v_sfile);
+          __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, NULL); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 885; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+          __Pyx_GOTREF(__pyx_t_8);
+          __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         }
-        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        if (unlikely(PyDict_SetItem(__pyx_v_dbackup, __pyx_v_sfile, __pyx_t_1) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 885; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+        if (unlikely(PyDict_SetItem(__pyx_v_dbackup, __pyx_v_sfile, __pyx_t_8) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 885; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
 
         /* "tools.py":884
  *         for sfile in database.local_metadata(target, 'footprint'):
- *             if sfile.endswith('.conf') or sfile.lstrip('/') in backup:
+ *             if sfile.endswith('.conf') or misc.string_lstrip(sfile, '/') in backup:
  *                 if os.path.isfile(sfile):             # <<<<<<<<<<<<<<
  *                     dbackup[sfile] = misc.file_checksum(sfile)
  *                 else:
@@ -29523,51 +29599,51 @@ static PyObject *__pyx_pf_5tools_7Upgrade_6upgrade_1_7_x_backup(CYTHON_UNUSED Py
  *         misc.json_write(metadata, data)
  */
       /*else*/ {
-        __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 887; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 887; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_1);
+        __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_sub_warning); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 887; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_sub_warning); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 887; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 887; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_1);
+        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__159, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 887; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
-        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 887; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__162, NULL); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 887; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_8);
-        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-        __pyx_t_3 = NULL;
-        __pyx_t_11 = 0;
-        if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_4))) {
-          __pyx_t_3 = PyMethod_GET_SELF(__pyx_t_4);
-          if (likely(__pyx_t_3)) {
-            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
-            __Pyx_INCREF(__pyx_t_3);
+        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+        __pyx_t_1 = NULL;
+        __pyx_t_10 = 0;
+        if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_3))) {
+          __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_3);
+          if (likely(__pyx_t_1)) {
+            PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+            __Pyx_INCREF(__pyx_t_1);
             __Pyx_INCREF(function);
-            __Pyx_DECREF_SET(__pyx_t_4, function);
-            __pyx_t_11 = 1;
+            __Pyx_DECREF_SET(__pyx_t_3, function);
+            __pyx_t_10 = 1;
           }
         }
-        __pyx_t_12 = PyTuple_New(2+__pyx_t_11); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 887; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_12 = PyTuple_New(2+__pyx_t_10); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 887; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_12);
-        if (__pyx_t_3) {
-          __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_3); __pyx_t_3 = NULL;
+        if (__pyx_t_1) {
+          __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_1); __pyx_t_1 = NULL;
         }
-        __Pyx_GIVEREF(__pyx_t_8);
-        PyTuple_SET_ITEM(__pyx_t_12, 0+__pyx_t_11, __pyx_t_8);
+        __Pyx_GIVEREF(__pyx_t_4);
+        PyTuple_SET_ITEM(__pyx_t_12, 0+__pyx_t_10, __pyx_t_4);
         __Pyx_INCREF(__pyx_v_sfile);
         __Pyx_GIVEREF(__pyx_v_sfile);
-        PyTuple_SET_ITEM(__pyx_t_12, 1+__pyx_t_11, __pyx_v_sfile);
-        __pyx_t_8 = 0;
-        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_12, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 887; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-        __Pyx_GOTREF(__pyx_t_1);
+        PyTuple_SET_ITEM(__pyx_t_12, 1+__pyx_t_10, __pyx_v_sfile);
+        __pyx_t_4 = 0;
+        __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_12, NULL); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 887; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_8);
         __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-        __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-        __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
+        __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
+        __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
       }
       __pyx_L12:;
 
       /* "tools.py":883
  *         message.sub_debug(_('Migrating remote backup to local'), target)
  *         for sfile in database.local_metadata(target, 'footprint'):
- *             if sfile.endswith('.conf') or sfile.lstrip('/') in backup:             # <<<<<<<<<<<<<<
+ *             if sfile.endswith('.conf') or misc.string_lstrip(sfile, '/') in backup:             # <<<<<<<<<<<<<<
  *                 if os.path.isfile(sfile):
  *                     dbackup[sfile] = misc.file_checksum(sfile)
  */
@@ -29577,7 +29653,7 @@ static PyObject *__pyx_pf_5tools_7Upgrade_6upgrade_1_7_x_backup(CYTHON_UNUSED Py
  *         dbackup = {}
  *         message.sub_debug(_('Migrating remote backup to local'), target)
  *         for sfile in database.local_metadata(target, 'footprint'):             # <<<<<<<<<<<<<<
- *             if sfile.endswith('.conf') or sfile.lstrip('/') in backup:
+ *             if sfile.endswith('.conf') or misc.string_lstrip(sfile, '/') in backup:
  *                 if os.path.isfile(sfile):
  */
   }
@@ -29599,27 +29675,27 @@ static PyObject *__pyx_pf_5tools_7Upgrade_6upgrade_1_7_x_backup(CYTHON_UNUSED Py
  * 
  *     def upgrade_1_8_x_optdepends(self, target):
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 889; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_json_write); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 889; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_t_4);
-  __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = NULL;
+  __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 889; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_8);
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_8, __pyx_n_s_json_write); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 889; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_t_3);
+  __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
+  __pyx_t_8 = NULL;
   __pyx_t_7 = 0;
-  if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_4))) {
-    __pyx_t_1 = PyMethod_GET_SELF(__pyx_t_4);
-    if (likely(__pyx_t_1)) {
-      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_4);
-      __Pyx_INCREF(__pyx_t_1);
+  if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_3))) {
+    __pyx_t_8 = PyMethod_GET_SELF(__pyx_t_3);
+    if (likely(__pyx_t_8)) {
+      PyObject* function = PyMethod_GET_FUNCTION(__pyx_t_3);
+      __Pyx_INCREF(__pyx_t_8);
       __Pyx_INCREF(function);
-      __Pyx_DECREF_SET(__pyx_t_4, function);
+      __Pyx_DECREF_SET(__pyx_t_3, function);
       __pyx_t_7 = 1;
     }
   }
   __pyx_t_12 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 889; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_12);
-  if (__pyx_t_1) {
-    __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_1); __pyx_t_1 = NULL;
+  if (__pyx_t_8) {
+    __Pyx_GIVEREF(__pyx_t_8); PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_8); __pyx_t_8 = NULL;
   }
   __Pyx_INCREF(__pyx_v_metadata);
   __Pyx_GIVEREF(__pyx_v_metadata);
@@ -29627,10 +29703,10 @@ static PyObject *__pyx_pf_5tools_7Upgrade_6upgrade_1_7_x_backup(CYTHON_UNUSED Py
   __Pyx_INCREF(__pyx_v_data);
   __Pyx_GIVEREF(__pyx_v_data);
   PyTuple_SET_ITEM(__pyx_t_12, 1+__pyx_t_7, __pyx_v_data);
-  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_12, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 889; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_12, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 889; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
-  __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
   /* "tools.py":869
@@ -29824,7 +29900,7 @@ static PyObject *__pyx_pf_5tools_7Upgrade_8upgrade_1_8_x_optdepends(CYTHON_UNUSE
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 895; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__163, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 895; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__160, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 895; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = NULL;
@@ -29941,7 +30017,7 @@ static PyObject *__pyx_pf_5tools_7Upgrade_8upgrade_1_8_x_optdepends(CYTHON_UNUSE
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 899; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_8);
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__164, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 899; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__161, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 899; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     __pyx_t_8 = NULL;
@@ -30180,7 +30256,7 @@ static PyObject *__pyx_pf_5tools_7Upgrade_10main(CYTHON_UNUSED PyObject *__pyx_s
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 906; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__165, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 906; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__162, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 906; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_database); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 906; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -30363,7 +30439,7 @@ static PyObject *__pyx_pf_5tools_7Upgrade_10main(CYTHON_UNUSED PyObject *__pyx_s
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 910; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__166, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 910; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__163, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 910; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
     __pyx_t_1 = NULL;
@@ -30445,7 +30521,7 @@ static PyObject *__pyx_pf_5tools_7Upgrade_10main(CYTHON_UNUSED PyObject *__pyx_s
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 912; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
-    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__167, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 912; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__164, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 912; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_3 = NULL;
@@ -30527,7 +30603,7 @@ static PyObject *__pyx_pf_5tools_7Upgrade_10main(CYTHON_UNUSED PyObject *__pyx_s
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 914; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__168, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 914; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__165, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 914; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __pyx_t_5 = NULL;
@@ -30609,7 +30685,7 @@ static PyObject *__pyx_pf_5tools_7Upgrade_10main(CYTHON_UNUSED PyObject *__pyx_s
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 916; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__169, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 916; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__166, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 916; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = NULL;
@@ -31238,7 +31314,7 @@ static PyObject *__pyx_pf_5tools_6Digest_2create(CYTHON_UNUSED PyObject *__pyx_s
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 938; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__170, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 938; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__167, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 938; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_t_6 = NULL;
@@ -31282,7 +31358,7 @@ static PyObject *__pyx_pf_5tools_6Digest_2create(CYTHON_UNUSED PyObject *__pyx_s
       __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_exit); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 939; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__171, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 939; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__168, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 939; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -31310,7 +31386,7 @@ static PyObject *__pyx_pf_5tools_6Digest_2create(CYTHON_UNUSED PyObject *__pyx_s
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 940; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_7);
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__172, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 940; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__169, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 940; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
     __pyx_t_7 = NULL;
@@ -31635,7 +31711,7 @@ static PyObject *__pyx_pf_5tools_6Digest_2create(CYTHON_UNUSED PyObject *__pyx_s
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 949; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__173, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 949; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__170, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 949; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __pyx_t_6 = NULL;
@@ -31735,7 +31811,7 @@ static PyObject *__pyx_pf_5tools_6Digest_2create(CYTHON_UNUSED PyObject *__pyx_s
         __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
         __pyx_t_15 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 951; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_15);
-        __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_15, __pyx_tuple__174, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 951; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_15, __pyx_tuple__171, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 951; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_7);
         __Pyx_DECREF(__pyx_t_15); __pyx_t_15 = 0;
         __pyx_t_15 = NULL;
@@ -32104,7 +32180,7 @@ static PyObject *__pyx_pf_5tools_6Digest_4verify(CYTHON_UNUSED PyObject *__pyx_s
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 962; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__175, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 962; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__172, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 962; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_5 = NULL;
@@ -32210,7 +32286,7 @@ static PyObject *__pyx_pf_5tools_6Digest_4verify(CYTHON_UNUSED PyObject *__pyx_s
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 965; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_11);
-      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__176, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 965; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__173, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 965; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       __pyx_t_11 = NULL;
@@ -32254,7 +32330,7 @@ static PyObject *__pyx_pf_5tools_6Digest_4verify(CYTHON_UNUSED PyObject *__pyx_s
       __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_exit); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 966; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__177, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 966; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__174, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 966; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -32282,7 +32358,7 @@ static PyObject *__pyx_pf_5tools_6Digest_4verify(CYTHON_UNUSED PyObject *__pyx_s
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 967; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__178, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 967; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__175, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 967; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = NULL;
@@ -32451,7 +32527,7 @@ static PyObject *__pyx_pf_5tools_6Digest_4verify(CYTHON_UNUSED PyObject *__pyx_s
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 971; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__179, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 971; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__176, NULL); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 971; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __pyx_t_3 = NULL;
@@ -32566,7 +32642,7 @@ static PyObject *__pyx_pf_5tools_6Digest_4verify(CYTHON_UNUSED PyObject *__pyx_s
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 974; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_11);
-        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__180, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 974; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__177, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 974; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         __pyx_t_11 = NULL;
@@ -32660,7 +32736,7 @@ static PyObject *__pyx_pf_5tools_6Digest_4verify(CYTHON_UNUSED PyObject *__pyx_s
     __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_exit); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 977; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__181, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 977; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__178, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 977; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -33678,7 +33754,7 @@ static PyObject *__pyx_pf_5tools_8Portable_2main(CYTHON_UNUSED PyObject *__pyx_s
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1006; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__182, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1006; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__179, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1006; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __pyx_t_5 = NULL;
@@ -33904,7 +33980,7 @@ static PyObject *__pyx_pf_5tools_8Portable_2main(CYTHON_UNUSED PyObject *__pyx_s
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1012; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_6);
-            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__183, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1012; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__180, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1012; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_t_6 = NULL;
@@ -34013,7 +34089,7 @@ static PyObject *__pyx_pf_5tools_8Portable_2main(CYTHON_UNUSED PyObject *__pyx_s
             __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
             __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1015; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_10);
-            __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_tuple__184, NULL); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1015; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_tuple__181, NULL); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1015; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_17);
             __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
             __pyx_t_10 = NULL;
@@ -34159,7 +34235,7 @@ static PyObject *__pyx_pf_5tools_8Portable_2main(CYTHON_UNUSED PyObject *__pyx_s
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1023; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_7);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__185, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1023; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__182, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1023; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
       __pyx_t_7 = NULL;
@@ -34347,7 +34423,7 @@ static PyObject *__pyx_pf_5tools_8Portable_2main(CYTHON_UNUSED PyObject *__pyx_s
  */
         __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_v_sfile, __pyx_n_s_endswith); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1028; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__186, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1028; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__183, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1028; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __pyx_t_18 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_18 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1028; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -34402,7 +34478,7 @@ static PyObject *__pyx_pf_5tools_8Portable_2main(CYTHON_UNUSED PyObject *__pyx_s
  */
         __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_sfile, __pyx_n_s_endswith); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1031; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__187, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1031; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__184, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1031; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1031; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -34553,7 +34629,7 @@ static PyObject *__pyx_pf_5tools_8Portable_2main(CYTHON_UNUSED PyObject *__pyx_s
       __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_chmod); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1038; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__188, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1038; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__185, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1038; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_6);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -34572,7 +34648,7 @@ static PyObject *__pyx_pf_5tools_8Portable_2main(CYTHON_UNUSED PyObject *__pyx_s
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1042; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__189, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1042; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__186, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1042; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_5 = NULL;
@@ -34678,7 +34754,7 @@ static PyObject *__pyx_pf_5tools_8Portable_2main(CYTHON_UNUSED PyObject *__pyx_s
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1045; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__190, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1045; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_7 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__187, NULL); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1045; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_7);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __pyx_t_6 = NULL;
@@ -34777,7 +34853,7 @@ static PyObject *__pyx_pf_5tools_8Portable_2main(CYTHON_UNUSED PyObject *__pyx_s
       __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_unlink); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1047; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-      __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__191, NULL); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1047; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__188, NULL); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1047; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_17);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
@@ -35519,7 +35595,7 @@ static struct PyModuleDef __pyx_moduledef = {
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_, __pyx_k_, sizeof(__pyx_k_), 0, 0, 1, 1},
   {&__pyx_kp_s_1, __pyx_k_1, sizeof(__pyx_k_1), 0, 0, 1, 0},
-  {&__pyx_kp_s_1_8_2_e485961, __pyx_k_1_8_2_e485961, sizeof(__pyx_k_1_8_2_e485961), 0, 0, 1, 0},
+  {&__pyx_kp_s_1_8_2_9c8a1fb, __pyx_k_1_8_2_9c8a1fb, sizeof(__pyx_k_1_8_2_9c8a1fb), 0, 0, 1, 0},
   {&__pyx_kp_s_2, __pyx_k_2, sizeof(__pyx_k_2), 0, 0, 1, 0},
   {&__pyx_kp_s_3, __pyx_k_3, sizeof(__pyx_k_3), 0, 0, 1, 0},
   {&__pyx_kp_s_4, __pyx_k_4, sizeof(__pyx_k_4), 0, 0, 1, 0},
@@ -35870,13 +35946,13 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_Which_main, __pyx_k_Which_main, sizeof(__pyx_k_Which_main), 0, 0, 1, 1},
   {&__pyx_n_s_X_OK, __pyx_k_X_OK, sizeof(__pyx_k_X_OK), 0, 0, 1, 1},
   {&__pyx_n_s_ZIPFILE, __pyx_k_ZIPFILE, sizeof(__pyx_k_ZIPFILE), 0, 0, 1, 1},
-  {&__pyx_kp_s__108, __pyx_k__108, sizeof(__pyx_k__108), 0, 0, 1, 0},
-  {&__pyx_kp_s__109, __pyx_k__109, sizeof(__pyx_k__109), 0, 0, 1, 0},
-  {&__pyx_kp_s__117, __pyx_k__117, sizeof(__pyx_k__117), 0, 0, 1, 0},
-  {&__pyx_kp_s__125, __pyx_k__125, sizeof(__pyx_k__125), 0, 0, 1, 0},
-  {&__pyx_kp_s__155, __pyx_k__155, sizeof(__pyx_k__155), 0, 0, 1, 0},
-  {&__pyx_kp_s__301, __pyx_k__301, sizeof(__pyx_k__301), 0, 0, 1, 0},
-  {&__pyx_kp_s__445, __pyx_k__445, sizeof(__pyx_k__445), 0, 0, 1, 0},
+  {&__pyx_kp_s__106, __pyx_k__106, sizeof(__pyx_k__106), 0, 0, 1, 0},
+  {&__pyx_kp_s__107, __pyx_k__107, sizeof(__pyx_k__107), 0, 0, 1, 0},
+  {&__pyx_kp_s__115, __pyx_k__115, sizeof(__pyx_k__115), 0, 0, 1, 0},
+  {&__pyx_kp_s__123, __pyx_k__123, sizeof(__pyx_k__123), 0, 0, 1, 0},
+  {&__pyx_kp_s__153, __pyx_k__153, sizeof(__pyx_k__153), 0, 0, 1, 0},
+  {&__pyx_kp_s__298, __pyx_k__298, sizeof(__pyx_k__298), 0, 0, 1, 0},
+  {&__pyx_kp_s__442, __pyx_k__442, sizeof(__pyx_k__442), 0, 0, 1, 0},
   {&__pyx_kp_s__5, __pyx_k__5, sizeof(__pyx_k__5), 0, 0, 1, 0},
   {&__pyx_kp_s__7, __pyx_k__7, sizeof(__pyx_k__7), 0, 0, 1, 0},
   {&__pyx_kp_s__73, __pyx_k__73, sizeof(__pyx_k__73), 0, 0, 1, 0},
@@ -36143,7 +36219,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_local_metadata, __pyx_k_local_metadata, sizeof(__pyx_k_local_metadata), 0, 0, 1, 1},
   {&__pyx_n_s_local_rdepends, __pyx_k_local_rdepends, sizeof(__pyx_k_local_rdepends), 0, 0, 1, 1},
   {&__pyx_n_s_local_search, __pyx_k_local_search, sizeof(__pyx_k_local_search), 0, 0, 1, 1},
-  {&__pyx_n_s_lstrip, __pyx_k_lstrip, sizeof(__pyx_k_lstrip), 0, 0, 1, 1},
   {&__pyx_n_s_ltargetsfiles, __pyx_k_ltargetsfiles, sizeof(__pyx_k_ltargetsfiles), 0, 0, 1, 1},
   {&__pyx_n_s_m, __pyx_k_m, sizeof(__pyx_k_m), 0, 0, 1, 1},
   {&__pyx_kp_s_m_2, __pyx_k_m_2, sizeof(__pyx_k_m_2), 0, 0, 1, 0},
@@ -37238,52 +37313,38 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__76);
   __Pyx_GIVEREF(__pyx_tuple__76);
 
-  /* "tools.py":390
- *                     for sfile in target_footprint_lines:
+  /* "tools.py":391
  *                         backups = database.remote_metadata(target, 'backup')
- *                         if not os.path.exists(sfile) and sfile.lstrip('/') in backups:             # <<<<<<<<<<<<<<
- *                             message.sub_warning(_('Possibly unnecessary backup of file'), sfile)
- *                         elif sfile.endswith('.conf') and not sfile.lstrip('/') in backups:
+ *                         if not os.path.exists(sfile) and misc.string_lstrip(sfile, '/') in backups:
+ *                             message.sub_warning(_('Possibly unnecessary backup of file'), sfile)             # <<<<<<<<<<<<<<
+ *                         elif sfile.endswith('.conf') and not misc.string_lstrip(sfile, '/') in backups:
+ *                             message.sub_warning(_('Possibly undefined backup of file'), sfile)
  */
-  __pyx_tuple__78 = PyTuple_Pack(1, __pyx_kp_s__77); if (unlikely(!__pyx_tuple__78)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 390; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__78 = PyTuple_Pack(1, __pyx_kp_s_Possibly_unnecessary_backup_of_f); if (unlikely(!__pyx_tuple__78)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__78);
   __Pyx_GIVEREF(__pyx_tuple__78);
 
-  /* "tools.py":391
- *                         backups = database.remote_metadata(target, 'backup')
- *                         if not os.path.exists(sfile) and sfile.lstrip('/') in backups:
- *                             message.sub_warning(_('Possibly unnecessary backup of file'), sfile)             # <<<<<<<<<<<<<<
- *                         elif sfile.endswith('.conf') and not sfile.lstrip('/') in backups:
- *                             message.sub_warning(_('Possibly undefined backup of file'), sfile)
- */
-  __pyx_tuple__79 = PyTuple_Pack(1, __pyx_kp_s_Possibly_unnecessary_backup_of_f); if (unlikely(!__pyx_tuple__79)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 391; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__79);
-  __Pyx_GIVEREF(__pyx_tuple__79);
-
   /* "tools.py":392
- *                         if not os.path.exists(sfile) and sfile.lstrip('/') in backups:
+ *                         if not os.path.exists(sfile) and misc.string_lstrip(sfile, '/') in backups:
  *                             message.sub_warning(_('Possibly unnecessary backup of file'), sfile)
- *                         elif sfile.endswith('.conf') and not sfile.lstrip('/') in backups:             # <<<<<<<<<<<<<<
+ *                         elif sfile.endswith('.conf') and not misc.string_lstrip(sfile, '/') in backups:             # <<<<<<<<<<<<<<
  *                             message.sub_warning(_('Possibly undefined backup of file'), sfile)
  * 
  */
-  __pyx_tuple__80 = PyTuple_Pack(1, __pyx_kp_s_conf); if (unlikely(!__pyx_tuple__80)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 392; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__80);
-  __Pyx_GIVEREF(__pyx_tuple__80);
-  __pyx_tuple__81 = PyTuple_Pack(1, __pyx_kp_s__77); if (unlikely(!__pyx_tuple__81)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 392; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__81);
-  __Pyx_GIVEREF(__pyx_tuple__81);
+  __pyx_tuple__79 = PyTuple_Pack(1, __pyx_kp_s_conf); if (unlikely(!__pyx_tuple__79)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 392; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__79);
+  __Pyx_GIVEREF(__pyx_tuple__79);
 
   /* "tools.py":393
  *                             message.sub_warning(_('Possibly unnecessary backup of file'), sfile)
- *                         elif sfile.endswith('.conf') and not sfile.lstrip('/') in backups:
+ *                         elif sfile.endswith('.conf') and not misc.string_lstrip(sfile, '/') in backups:
  *                             message.sub_warning(_('Possibly undefined backup of file'), sfile)             # <<<<<<<<<<<<<<
  * 
  *                 if self.conflicts:
  */
-  __pyx_tuple__82 = PyTuple_Pack(1, __pyx_kp_s_Possibly_undefined_backup_of_fil); if (unlikely(!__pyx_tuple__82)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__82);
-  __Pyx_GIVEREF(__pyx_tuple__82);
+  __pyx_tuple__80 = PyTuple_Pack(1, __pyx_kp_s_Possibly_undefined_backup_of_fil); if (unlikely(!__pyx_tuple__80)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 393; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__80);
+  __Pyx_GIVEREF(__pyx_tuple__80);
 
   /* "tools.py":396
  * 
@@ -37292,9 +37353,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                     for local in database.local_all(basename=True):
  *                         if local == target:
  */
-  __pyx_tuple__83 = PyTuple_Pack(1, __pyx_kp_s_Checking_for_conflicts_in); if (unlikely(!__pyx_tuple__83)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__83);
-  __Pyx_GIVEREF(__pyx_tuple__83);
+  __pyx_tuple__81 = PyTuple_Pack(1, __pyx_kp_s_Checking_for_conflicts_in); if (unlikely(!__pyx_tuple__81)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__81);
+  __Pyx_GIVEREF(__pyx_tuple__81);
 
   /* "tools.py":403
  *                         diff = footprint.difference(target_footprint_lines)
@@ -37303,9 +37364,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                                 list(footprint.difference(diff)))
  * 
  */
-  __pyx_tuple__84 = PyTuple_Pack(1, __pyx_kp_s_File_link_conflicts_with_s); if (unlikely(!__pyx_tuple__84)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__84);
-  __Pyx_GIVEREF(__pyx_tuple__84);
+  __pyx_tuple__82 = PyTuple_Pack(1, __pyx_kp_s_File_link_conflicts_with_s); if (unlikely(!__pyx_tuple__82)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__82);
+  __Pyx_GIVEREF(__pyx_tuple__82);
 
   /* "tools.py":407
  * 
@@ -37314,9 +37375,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                     found_debug = 'lib/debug/' in target_footprint
  *                     found_exe = False
  */
-  __pyx_tuple__85 = PyTuple_Pack(1, __pyx_kp_s_Checking_for_missing_debug_symbo); if (unlikely(!__pyx_tuple__85)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__85);
-  __Pyx_GIVEREF(__pyx_tuple__85);
+  __pyx_tuple__83 = PyTuple_Pack(1, __pyx_kp_s_Checking_for_missing_debug_symbo); if (unlikely(!__pyx_tuple__83)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 407; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__83);
+  __Pyx_GIVEREF(__pyx_tuple__83);
 
   /* "tools.py":419
  *                                 break
@@ -37325,9 +37386,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  * 
  */
-  __pyx_tuple__86 = PyTuple_Pack(1, __pyx_kp_s_Debug_symbols_missing); if (unlikely(!__pyx_tuple__86)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 419; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__86);
-  __Pyx_GIVEREF(__pyx_tuple__86);
+  __pyx_tuple__84 = PyTuple_Pack(1, __pyx_kp_s_Debug_symbols_missing); if (unlikely(!__pyx_tuple__84)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 419; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__84);
+  __Pyx_GIVEREF(__pyx_tuple__84);
 
   /* "tools.py":446
  *             match = database.remote_search(target)
@@ -37336,9 +37397,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 srcbuild = misc.file_read('%s/SRCBUILD' % match)
  * 
  */
-  __pyx_tuple__87 = PyTuple_Pack(1, __pyx_n_s_Checking); if (unlikely(!__pyx_tuple__87)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 446; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__87);
-  __Pyx_GIVEREF(__pyx_tuple__87);
+  __pyx_tuple__85 = PyTuple_Pack(1, __pyx_n_s_Checking); if (unlikely(!__pyx_tuple__85)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 446; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__85);
+  __Pyx_GIVEREF(__pyx_tuple__85);
 
   /* "tools.py":451
  *                 if self.enable:
@@ -37347,9 +37408,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                     if '--with-' in srcbuild:
  *                         message.sub_warning(_('Explicit --with argument(s)'))
  */
-  __pyx_tuple__88 = PyTuple_Pack(1, __pyx_kp_s_Explicit_enable_argument_s); if (unlikely(!__pyx_tuple__88)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 451; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__88);
-  __Pyx_GIVEREF(__pyx_tuple__88);
+  __pyx_tuple__86 = PyTuple_Pack(1, __pyx_kp_s_Explicit_enable_argument_s); if (unlikely(!__pyx_tuple__86)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 451; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__86);
+  __Pyx_GIVEREF(__pyx_tuple__86);
 
   /* "tools.py":453
  *                         message.sub_warning(_('Explicit --enable argument(s)'))
@@ -37358,9 +37419,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *                 if self.disable:
  */
-  __pyx_tuple__89 = PyTuple_Pack(1, __pyx_kp_s_Explicit_with_argument_s); if (unlikely(!__pyx_tuple__89)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 453; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__89);
-  __Pyx_GIVEREF(__pyx_tuple__89);
+  __pyx_tuple__87 = PyTuple_Pack(1, __pyx_kp_s_Explicit_with_argument_s); if (unlikely(!__pyx_tuple__87)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 453; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__87);
+  __Pyx_GIVEREF(__pyx_tuple__87);
 
   /* "tools.py":457
  *                 if self.disable:
@@ -37369,9 +37430,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                     if '--without-' in srcbuild:
  *                         message.sub_warning(_('Explicit --without argument(s)'))
  */
-  __pyx_tuple__90 = PyTuple_Pack(1, __pyx_kp_s_Explicit_disable_argument_s); if (unlikely(!__pyx_tuple__90)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 457; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__90);
-  __Pyx_GIVEREF(__pyx_tuple__90);
+  __pyx_tuple__88 = PyTuple_Pack(1, __pyx_kp_s_Explicit_disable_argument_s); if (unlikely(!__pyx_tuple__88)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 457; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__88);
+  __Pyx_GIVEREF(__pyx_tuple__88);
 
   /* "tools.py":459
  *                         message.sub_warning(_('Explicit --disable argument(s)'))
@@ -37380,9 +37441,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *                 if self.null:
  */
-  __pyx_tuple__91 = PyTuple_Pack(1, __pyx_kp_s_Explicit_without_argument_s); if (unlikely(!__pyx_tuple__91)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 459; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__91);
-  __Pyx_GIVEREF(__pyx_tuple__91);
+  __pyx_tuple__89 = PyTuple_Pack(1, __pyx_kp_s_Explicit_without_argument_s); if (unlikely(!__pyx_tuple__89)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 459; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__89);
+  __Pyx_GIVEREF(__pyx_tuple__89);
 
   /* "tools.py":463
  *                 if self.null:
@@ -37391,9 +37452,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *                 if self.maintainer:
  */
-  __pyx_tuple__92 = PyTuple_Pack(1, __pyx_kp_s_Possible_dev_null_output_redirec); if (unlikely(!__pyx_tuple__92)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 463; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__92);
-  __Pyx_GIVEREF(__pyx_tuple__92);
+  __pyx_tuple__90 = PyTuple_Pack(1, __pyx_kp_s_Possible_dev_null_output_redirec); if (unlikely(!__pyx_tuple__90)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 463; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__90);
+  __Pyx_GIVEREF(__pyx_tuple__90);
 
   /* "tools.py":467
  *                 if self.maintainer:
@@ -37402,9 +37463,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *                 if self.note:
  */
-  __pyx_tuple__93 = PyTuple_Pack(1, __pyx_kp_s_No_maintainer_mentioned); if (unlikely(!__pyx_tuple__93)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 467; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__93);
-  __Pyx_GIVEREF(__pyx_tuple__93);
+  __pyx_tuple__91 = PyTuple_Pack(1, __pyx_kp_s_No_maintainer_mentioned); if (unlikely(!__pyx_tuple__91)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 467; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__91);
+  __Pyx_GIVEREF(__pyx_tuple__91);
 
   /* "tools.py":471
  *                 if self.note:
@@ -37413,9 +37474,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *                 if self.variables:
  */
-  __pyx_tuple__94 = PyTuple_Pack(1, __pyx_kp_s_FIXME_TODO_note_s); if (unlikely(!__pyx_tuple__94)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 471; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__94);
-  __Pyx_GIVEREF(__pyx_tuple__94);
+  __pyx_tuple__92 = PyTuple_Pack(1, __pyx_kp_s_FIXME_TODO_note_s); if (unlikely(!__pyx_tuple__92)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 471; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__92);
+  __Pyx_GIVEREF(__pyx_tuple__92);
 
   /* "tools.py":478
  *                     array_regex = '(?:(?:make|opt|check)?depends|sources|pgpkeys|options|backup)'
@@ -37424,9 +37485,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                     if misc.string_search('(?:\\s|^)%s=\(' % string_regex, srcbuild, escape=False):
  *                         message.sub_warning(_('String variable(s) defined as array'))
  */
-  __pyx_tuple__95 = PyTuple_Pack(1, __pyx_kp_s_Essential_variable_s_missing); if (unlikely(!__pyx_tuple__95)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__95);
-  __Pyx_GIVEREF(__pyx_tuple__95);
+  __pyx_tuple__93 = PyTuple_Pack(1, __pyx_kp_s_Essential_variable_s_missing); if (unlikely(!__pyx_tuple__93)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 478; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__93);
+  __Pyx_GIVEREF(__pyx_tuple__93);
 
   /* "tools.py":480
  *                         message.sub_warning(_('Essential variable(s) missing'))
@@ -37435,9 +37496,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                     if misc.string_search('(?:\\s|^)%s=[^\(]' % array_regex, srcbuild, escape=False):
  *                         message.sub_warning(_('Array variable(s) defined as string'))
  */
-  __pyx_tuple__96 = PyTuple_Pack(1, __pyx_kp_s_String_variable_s_defined_as_arr); if (unlikely(!__pyx_tuple__96)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 480; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__96);
-  __Pyx_GIVEREF(__pyx_tuple__96);
+  __pyx_tuple__94 = PyTuple_Pack(1, __pyx_kp_s_String_variable_s_defined_as_arr); if (unlikely(!__pyx_tuple__94)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 480; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__94);
+  __Pyx_GIVEREF(__pyx_tuple__94);
 
   /* "tools.py":482
  *                         message.sub_warning(_('String variable(s) defined as array'))
@@ -37446,9 +37507,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *                 if self.triggers:
  */
-  __pyx_tuple__97 = PyTuple_Pack(1, __pyx_kp_s_Array_variable_s_defined_as_stri); if (unlikely(!__pyx_tuple__97)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 482; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__97);
-  __Pyx_GIVEREF(__pyx_tuple__97);
+  __pyx_tuple__95 = PyTuple_Pack(1, __pyx_kp_s_Array_variable_s_defined_as_stri); if (unlikely(!__pyx_tuple__95)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 482; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__95);
+  __Pyx_GIVEREF(__pyx_tuple__95);
 
   /* "tools.py":493
  *                     regex += '|xdg-mime|udevadm)(?:\\s|$)'
@@ -37457,9 +37518,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *                 if self.users:
  */
-  __pyx_tuple__98 = PyTuple_Pack(1, __pyx_kp_s_Possible_unnecessary_triggers_in); if (unlikely(!__pyx_tuple__98)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 493; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__98);
-  __Pyx_GIVEREF(__pyx_tuple__98);
+  __pyx_tuple__96 = PyTuple_Pack(1, __pyx_kp_s_Possible_unnecessary_triggers_in); if (unlikely(!__pyx_tuple__96)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 493; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__96);
+  __Pyx_GIVEREF(__pyx_tuple__96);
 
   /* "tools.py":498
  *                     if misc.string_search('useradd|adduser', srcbuild, escape=False) \
@@ -37468,9 +37529,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *                 if self.groups:
  */
-  __pyx_tuple__99 = PyTuple_Pack(1, __pyx_kp_s_User_s_added_but_not_deleted); if (unlikely(!__pyx_tuple__99)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 498; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__99);
-  __Pyx_GIVEREF(__pyx_tuple__99);
+  __pyx_tuple__97 = PyTuple_Pack(1, __pyx_kp_s_User_s_added_but_not_deleted); if (unlikely(!__pyx_tuple__97)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 498; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__97);
+  __Pyx_GIVEREF(__pyx_tuple__97);
 
   /* "tools.py":503
  *                     if misc.string_search('groupadd|addgroup', srcbuild, escape=False) \
@@ -37479,9 +37540,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *                 if self.signatures:
  */
-  __pyx_tuple__100 = PyTuple_Pack(1, __pyx_kp_s_Group_s_added_but_not_deleted); if (unlikely(!__pyx_tuple__100)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 503; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__100);
-  __Pyx_GIVEREF(__pyx_tuple__100);
+  __pyx_tuple__98 = PyTuple_Pack(1, __pyx_kp_s_Group_s_added_but_not_deleted); if (unlikely(!__pyx_tuple__98)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 503; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__98);
+  __Pyx_GIVEREF(__pyx_tuple__98);
 
   /* "tools.py":517
  *                             for sig in (sig1, sig2, sig3, sig4, sig5):
@@ -37490,9 +37551,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                                     continue
  *                                 if misc.url_ping(sig):
  */
-  __pyx_tuple__101 = PyTuple_Pack(1, __pyx_kp_s_Signature_already_in_sources_for); if (unlikely(!__pyx_tuple__101)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 517; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__101);
-  __Pyx_GIVEREF(__pyx_tuple__101);
+  __pyx_tuple__99 = PyTuple_Pack(1, __pyx_kp_s_Signature_already_in_sources_for); if (unlikely(!__pyx_tuple__99)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 517; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__99);
+  __Pyx_GIVEREF(__pyx_tuple__99);
 
   /* "tools.py":520
  *                                     continue
@@ -37501,9 +37562,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                                     if not pgpkeys:
  *                                         message.sub_warning(_('Signature in sources but no pgpkeys'), src)
  */
-  __pyx_tuple__102 = PyTuple_Pack(1, __pyx_kp_s_Signature_available_but_not_in_s); if (unlikely(!__pyx_tuple__102)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 520; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__102);
-  __Pyx_GIVEREF(__pyx_tuple__102);
+  __pyx_tuple__100 = PyTuple_Pack(1, __pyx_kp_s_Signature_available_but_not_in_s); if (unlikely(!__pyx_tuple__100)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 520; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__100);
+  __Pyx_GIVEREF(__pyx_tuple__100);
 
   /* "tools.py":522
  *                                     message.sub_warning(_('Signature available but not in sources'), sig)
@@ -37512,9 +37573,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                                     break
  * 
  */
-  __pyx_tuple__103 = PyTuple_Pack(1, __pyx_kp_s_Signature_in_sources_but_no_pgpk); if (unlikely(!__pyx_tuple__103)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__103);
-  __Pyx_GIVEREF(__pyx_tuple__103);
+  __pyx_tuple__101 = PyTuple_Pack(1, __pyx_kp_s_Signature_in_sources_but_no_pgpk); if (unlikely(!__pyx_tuple__101)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 522; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__101);
+  __Pyx_GIVEREF(__pyx_tuple__101);
 
   /* "tools.py":532
  * 
@@ -37523,9 +37584,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         editor = os.environ.get('EDITOR') or misc.whereis('vim')
  *         action = raw_input(_('''
  */
-  __pyx_tuple__104 = PyTuple_Pack(1, __pyx_kp_s_Backup_file_detected); if (unlikely(!__pyx_tuple__104)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 532; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__104);
-  __Pyx_GIVEREF(__pyx_tuple__104);
+  __pyx_tuple__102 = PyTuple_Pack(1, __pyx_kp_s_Backup_file_detected); if (unlikely(!__pyx_tuple__102)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 532; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__102);
+  __Pyx_GIVEREF(__pyx_tuple__102);
 
   /* "tools.py":533
  *     def merge(self, origfile, backfile):
@@ -37534,12 +37595,12 @@ static int __Pyx_InitCachedConstants(void) {
  *         action = raw_input(_('''
  *     What do you want to do:
  */
-  __pyx_tuple__105 = PyTuple_Pack(1, __pyx_n_s_EDITOR); if (unlikely(!__pyx_tuple__105)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 533; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__105);
-  __Pyx_GIVEREF(__pyx_tuple__105);
-  __pyx_tuple__106 = PyTuple_Pack(1, __pyx_n_s_vim); if (unlikely(!__pyx_tuple__106)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 533; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__106);
-  __Pyx_GIVEREF(__pyx_tuple__106);
+  __pyx_tuple__103 = PyTuple_Pack(1, __pyx_n_s_EDITOR); if (unlikely(!__pyx_tuple__103)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 533; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__103);
+  __Pyx_GIVEREF(__pyx_tuple__103);
+  __pyx_tuple__104 = PyTuple_Pack(1, __pyx_n_s_vim); if (unlikely(!__pyx_tuple__104)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 533; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__104);
+  __Pyx_GIVEREF(__pyx_tuple__104);
 
   /* "tools.py":534
  *         message.sub_warning(_('Backup file detected'), backfile)
@@ -37548,9 +37609,9 @@ static int __Pyx_InitCachedConstants(void) {
  *     What do you want to do:
  * 
  */
-  __pyx_tuple__107 = PyTuple_Pack(1, __pyx_kp_s_What_do_you_want_to_do_1_View_d); if (unlikely(!__pyx_tuple__107)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 534; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__107);
-  __Pyx_GIVEREF(__pyx_tuple__107);
+  __pyx_tuple__105 = PyTuple_Pack(1, __pyx_kp_s_What_do_you_want_to_do_1_View_d); if (unlikely(!__pyx_tuple__105)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 534; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__105);
+  __Pyx_GIVEREF(__pyx_tuple__105);
 
   /* "tools.py":566
  *     def main(self):
@@ -37559,9 +37620,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             backup = database.local_metadata(target, 'backup') or {}
  *             for sfile in backup:
  */
-  __pyx_tuple__110 = PyTuple_Pack(1, __pyx_n_s_Checking); if (unlikely(!__pyx_tuple__110)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 566; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__110);
-  __Pyx_GIVEREF(__pyx_tuple__110);
+  __pyx_tuple__108 = PyTuple_Pack(1, __pyx_n_s_Checking); if (unlikely(!__pyx_tuple__108)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 566; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__108);
+  __Pyx_GIVEREF(__pyx_tuple__108);
 
   /* "tools.py":574
  *                     # the checksums are not used since the backup file can be edited
@@ -37570,9 +37631,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                         continue
  *                     self.merge(origfile, backfile)
  */
-  __pyx_tuple__111 = PyTuple_Pack(1, __pyx_kp_s_Original_and_backup_are_not_diff); if (unlikely(!__pyx_tuple__111)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 574; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__111);
-  __Pyx_GIVEREF(__pyx_tuple__111);
+  __pyx_tuple__109 = PyTuple_Pack(1, __pyx_kp_s_Original_and_backup_are_not_diff); if (unlikely(!__pyx_tuple__109)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 574; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__109);
+  __Pyx_GIVEREF(__pyx_tuple__109);
 
   /* "tools.py":587
  * 
@@ -37581,12 +37642,12 @@ static int __Pyx_InitCachedConstants(void) {
  *         for target in self.targets:
  *             match = database.remote_search(target)
  */
-  __pyx_tuple__112 = PyTuple_Pack(1, __pyx_n_s_EDITOR); if (unlikely(!__pyx_tuple__112)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__112);
-  __Pyx_GIVEREF(__pyx_tuple__112);
-  __pyx_tuple__113 = PyTuple_Pack(1, __pyx_n_s_vim); if (unlikely(!__pyx_tuple__113)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__113);
-  __Pyx_GIVEREF(__pyx_tuple__113);
+  __pyx_tuple__110 = PyTuple_Pack(1, __pyx_n_s_EDITOR); if (unlikely(!__pyx_tuple__110)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__110);
+  __Pyx_GIVEREF(__pyx_tuple__110);
+  __pyx_tuple__111 = PyTuple_Pack(1, __pyx_n_s_vim); if (unlikely(!__pyx_tuple__111)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 587; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__111);
+  __Pyx_GIVEREF(__pyx_tuple__111);
 
   /* "tools.py":607
  *                     print(target)
@@ -37595,9 +37656,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 if self.cat:
  *                     print(misc.file_read('%s/SRCBUILD' % target))
  */
-  __pyx_tuple__114 = PyTuple_Pack(1, __pyx_n_s_Match); if (unlikely(!__pyx_tuple__114)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 607; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__114);
-  __Pyx_GIVEREF(__pyx_tuple__114);
+  __pyx_tuple__112 = PyTuple_Pack(1, __pyx_n_s_Match); if (unlikely(!__pyx_tuple__112)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 607; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__112);
+  __Pyx_GIVEREF(__pyx_tuple__112);
 
   /* "tools.py":635
  *                 depends = database.local_metadata(target, 'depends')
@@ -37606,9 +37667,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 misc.archive_compress(content, target_packfile, libspm.ROOT_DIR)
  *                 message.sub_info(_('Assemling depends'), target_depends)
  */
-  __pyx_tuple__115 = PyTuple_Pack(1, __pyx_n_s_Compressing); if (unlikely(!__pyx_tuple__115)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 635; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__115);
-  __Pyx_GIVEREF(__pyx_tuple__115);
+  __pyx_tuple__113 = PyTuple_Pack(1, __pyx_n_s_Compressing); if (unlikely(!__pyx_tuple__113)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 635; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__113);
+  __Pyx_GIVEREF(__pyx_tuple__113);
 
   /* "tools.py":637
  *                 message.sub_info(_('Compressing'), target_packfile)
@@ -37617,9 +37678,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 misc.file_write(target_depends, ' '.join(depends))
  *                 if libspm.SIGN:
  */
-  __pyx_tuple__116 = PyTuple_Pack(1, __pyx_kp_s_Assemling_depends); if (unlikely(!__pyx_tuple__116)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 637; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__116);
-  __Pyx_GIVEREF(__pyx_tuple__116);
+  __pyx_tuple__114 = PyTuple_Pack(1, __pyx_kp_s_Assemling_depends); if (unlikely(!__pyx_tuple__114)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 637; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__114);
+  __Pyx_GIVEREF(__pyx_tuple__114);
 
   /* "tools.py":640
  *                 misc.file_write(target_depends, ' '.join(depends))
@@ -37628,9 +37689,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                     misc.gpg_sign(target_packfile, libspm.SIGN)
  * 
  */
-  __pyx_tuple__118 = PyTuple_Pack(1, __pyx_n_s_Signing); if (unlikely(!__pyx_tuple__118)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__118);
-  __Pyx_GIVEREF(__pyx_tuple__118);
+  __pyx_tuple__116 = PyTuple_Pack(1, __pyx_n_s_Signing); if (unlikely(!__pyx_tuple__116)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 640; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__116);
+  __Pyx_GIVEREF(__pyx_tuple__116);
 
   /* "tools.py":652
  *         self.directory = directory
@@ -37639,9 +37700,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             'https://crux.nu/ports/crux-3.1/contrib/%s',
  *             'https://crux.nu/ports/crux-3.1/core/%s',
  */
-  __pyx_tuple__119 = PyTuple_Pack(8, __pyx_kp_s_https_crux_nu_ports_crux_3_1_com, __pyx_kp_s_https_crux_nu_ports_crux_3_1_con, __pyx_kp_s_https_crux_nu_ports_crux_3_1_cor, __pyx_kp_s_https_crux_nu_ports_crux_3_1_enl, __pyx_kp_s_https_crux_nu_ports_crux_3_1_kde, __pyx_kp_s_https_crux_nu_ports_crux_3_1_opt, __pyx_kp_s_https_crux_nu_ports_crux_3_1_xfc, __pyx_kp_s_https_crux_nu_ports_crux_3_1_xor); if (unlikely(!__pyx_tuple__119)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 652; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__119);
-  __Pyx_GIVEREF(__pyx_tuple__119);
+  __pyx_tuple__117 = PyTuple_Pack(8, __pyx_kp_s_https_crux_nu_ports_crux_3_1_com, __pyx_kp_s_https_crux_nu_ports_crux_3_1_con, __pyx_kp_s_https_crux_nu_ports_crux_3_1_cor, __pyx_kp_s_https_crux_nu_ports_crux_3_1_enl, __pyx_kp_s_https_crux_nu_ports_crux_3_1_kde, __pyx_kp_s_https_crux_nu_ports_crux_3_1_opt, __pyx_kp_s_https_crux_nu_ports_crux_3_1_xfc, __pyx_kp_s_https_crux_nu_ports_crux_3_1_xor); if (unlikely(!__pyx_tuple__117)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 652; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__117);
+  __Pyx_GIVEREF(__pyx_tuple__117);
 
   /* "tools.py":666
  *         for d in self.PKG_DIRS:
@@ -37650,9 +37711,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             if not misc.url_ping('%s/Pkgfile' % url):
  *                 continue
  */
-  __pyx_tuple__120 = PyTuple_Pack(1, __pyx_n_s_Probing); if (unlikely(!__pyx_tuple__120)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 666; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__120);
-  __Pyx_GIVEREF(__pyx_tuple__120);
+  __pyx_tuple__118 = PyTuple_Pack(1, __pyx_n_s_Probing); if (unlikely(!__pyx_tuple__118)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 666; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__118);
+  __Pyx_GIVEREF(__pyx_tuple__118);
 
   /* "tools.py":673
  *                 request = misc.fetch_request(url)
@@ -37661,9 +37722,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                     if m:
  *                         href = m.group(1).decode()
  */
-  __pyx_tuple__121 = PyTuple_Pack(1, __pyx_kp_s_utf_8); if (unlikely(!__pyx_tuple__121)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 673; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__121);
-  __Pyx_GIVEREF(__pyx_tuple__121);
+  __pyx_tuple__119 = PyTuple_Pack(1, __pyx_kp_s_utf_8); if (unlikely(!__pyx_tuple__119)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 673; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__119);
+  __Pyx_GIVEREF(__pyx_tuple__119);
 
   /* "tools.py":675
  *                     m = re.search(r'href="(.+?)">(.+?)<'.encode('utf-8'), line)
@@ -37672,9 +37733,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                         name = m.group(2).decode()
  *                         if name[:2] == '..' or name == 'Name':
  */
-  __pyx_tuple__122 = PyTuple_Pack(1, __pyx_int_1); if (unlikely(!__pyx_tuple__122)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 675; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__122);
-  __Pyx_GIVEREF(__pyx_tuple__122);
+  __pyx_tuple__120 = PyTuple_Pack(1, __pyx_int_1); if (unlikely(!__pyx_tuple__120)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 675; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__120);
+  __Pyx_GIVEREF(__pyx_tuple__120);
 
   /* "tools.py":676
  *                     if m:
@@ -37683,9 +37744,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                         if name[:2] == '..' or name == 'Name':
  *                             continue
  */
-  __pyx_tuple__123 = PyTuple_Pack(1, __pyx_int_2); if (unlikely(!__pyx_tuple__123)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 676; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__123);
-  __Pyx_GIVEREF(__pyx_tuple__123);
+  __pyx_tuple__121 = PyTuple_Pack(1, __pyx_int_2); if (unlikely(!__pyx_tuple__121)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 676; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__121);
+  __Pyx_GIVEREF(__pyx_tuple__121);
 
   /* "tools.py":677
  *                         href = m.group(1).decode()
@@ -37694,9 +37755,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                             continue
  *                         yield '%s/%s' % (url, href), name
  */
-  __pyx_slice__124 = PySlice_New(Py_None, __pyx_int_2, Py_None); if (unlikely(!__pyx_slice__124)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 677; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_slice__124);
-  __Pyx_GIVEREF(__pyx_slice__124);
+  __pyx_slice__122 = PySlice_New(Py_None, __pyx_int_2, Py_None); if (unlikely(!__pyx_slice__122)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 677; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_slice__122);
+  __Pyx_GIVEREF(__pyx_slice__122);
 
   /* "tools.py":692
  *             urls = list(self.get_links(target))
@@ -37705,9 +37766,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 pkgdir = '%s/%s' % (self.directory, target)
  *                 misc.dir_create(pkgdir)
  */
-  __pyx_tuple__126 = PyTuple_Pack(1, __pyx_kp_s_Fetching_package_files); if (unlikely(!__pyx_tuple__126)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 692; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__126);
-  __Pyx_GIVEREF(__pyx_tuple__126);
+  __pyx_tuple__124 = PyTuple_Pack(1, __pyx_kp_s_Fetching_package_files); if (unlikely(!__pyx_tuple__124)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 692; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__124);
+  __Pyx_GIVEREF(__pyx_tuple__124);
 
   /* "tools.py":696
  *                 misc.dir_create(pkgdir)
@@ -37716,9 +37777,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                     misc.fetch(href, '%s/%s' % (pkgdir, name))
  *             else:
  */
-  __pyx_tuple__127 = PyTuple_Pack(1, __pyx_n_s_Fetching); if (unlikely(!__pyx_tuple__127)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 696; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__127);
-  __Pyx_GIVEREF(__pyx_tuple__127);
+  __pyx_tuple__125 = PyTuple_Pack(1, __pyx_n_s_Fetching); if (unlikely(!__pyx_tuple__125)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 696; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__125);
+  __Pyx_GIVEREF(__pyx_tuple__125);
 
   /* "tools.py":703
  *         if not_found:
@@ -37727,9 +37788,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             sys.exit(2)
  * 
  */
-  __pyx_tuple__128 = PyTuple_Pack(1, __pyx_kp_s_Invalid_target); if (unlikely(!__pyx_tuple__128)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 703; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__128);
-  __Pyx_GIVEREF(__pyx_tuple__128);
+  __pyx_tuple__126 = PyTuple_Pack(1, __pyx_kp_s_Invalid_target); if (unlikely(!__pyx_tuple__126)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 703; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__126);
+  __Pyx_GIVEREF(__pyx_tuple__126);
 
   /* "tools.py":704
  *             for target in not_found:
@@ -37738,9 +37799,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  * 
  */
-  __pyx_tuple__129 = PyTuple_Pack(1, __pyx_int_2); if (unlikely(!__pyx_tuple__129)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 704; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__129);
-  __Pyx_GIVEREF(__pyx_tuple__129);
+  __pyx_tuple__127 = PyTuple_Pack(1, __pyx_int_2); if (unlikely(!__pyx_tuple__127)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 704; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__127);
+  __Pyx_GIVEREF(__pyx_tuple__127);
 
   /* "tools.py":716
  *         httpd = None
@@ -37749,9 +37810,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             os.chdir(libspm.CACHE_DIR)
  *             handler = HTTPServer.SimpleHTTPRequestHandler
  */
-  __pyx_tuple__130 = PyTuple_Pack(1, __pyx_kp_s_Serving_caches_directory); if (unlikely(!__pyx_tuple__130)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 716; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__130);
-  __Pyx_GIVEREF(__pyx_tuple__130);
+  __pyx_tuple__128 = PyTuple_Pack(1, __pyx_kp_s_Serving_caches_directory); if (unlikely(!__pyx_tuple__128)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 716; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__128);
+  __Pyx_GIVEREF(__pyx_tuple__128);
 
   /* "tools.py":735
  *     def main(self):
@@ -37760,9 +37821,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         lhostfiles = misc.list_files(self.directory, self.cross)
  *         ltargetsfiles = []
  */
-  __pyx_tuple__131 = PyTuple_Pack(1, __pyx_kp_s_Caching_host_files_this_may_take); if (unlikely(!__pyx_tuple__131)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 735; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__131);
-  __Pyx_GIVEREF(__pyx_tuple__131);
+  __pyx_tuple__129 = PyTuple_Pack(1, __pyx_kp_s_Caching_host_files_this_may_take); if (unlikely(!__pyx_tuple__129)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 735; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__129);
+  __Pyx_GIVEREF(__pyx_tuple__129);
 
   /* "tools.py":741
  *             ltargetsfiles.extend(database.local_metadata(target, 'footprint'))
@@ -37771,9 +37832,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         for sfile in lhostfiles:
  *             if not sfile in ltargetsfiles:
  */
-  __pyx_tuple__132 = PyTuple_Pack(1, __pyx_kp_s_Searching_for_disowned_files); if (unlikely(!__pyx_tuple__132)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 741; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__132);
-  __Pyx_GIVEREF(__pyx_tuple__132);
+  __pyx_tuple__130 = PyTuple_Pack(1, __pyx_kp_s_Searching_for_disowned_files); if (unlikely(!__pyx_tuple__130)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 741; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__130);
+  __Pyx_GIVEREF(__pyx_tuple__130);
 
   /* "tools.py":747
  *                     print(sfile)
@@ -37782,9 +37843,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  * 
  */
-  __pyx_tuple__133 = PyTuple_Pack(1, __pyx_kp_s_Disowned_file); if (unlikely(!__pyx_tuple__133)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 747; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__133);
-  __Pyx_GIVEREF(__pyx_tuple__133);
+  __pyx_tuple__131 = PyTuple_Pack(1, __pyx_kp_s_Disowned_file); if (unlikely(!__pyx_tuple__131)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 747; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__131);
+  __Pyx_GIVEREF(__pyx_tuple__131);
 
   /* "tools.py":764
  *     def main(self):
@@ -37793,9 +37854,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             sys.exit(2)
  *         elif not self.user:
  */
-  __pyx_tuple__134 = PyTuple_Pack(1, __pyx_kp_s_Host_is_empty); if (unlikely(!__pyx_tuple__134)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 764; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__134);
-  __Pyx_GIVEREF(__pyx_tuple__134);
+  __pyx_tuple__132 = PyTuple_Pack(1, __pyx_kp_s_Host_is_empty); if (unlikely(!__pyx_tuple__132)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 764; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__132);
+  __Pyx_GIVEREF(__pyx_tuple__132);
 
   /* "tools.py":765
  *         if not self.host:
@@ -37804,9 +37865,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         elif not self.user:
  *             message.sub_critical(_('User is empty'))
  */
-  __pyx_tuple__135 = PyTuple_Pack(1, __pyx_int_2); if (unlikely(!__pyx_tuple__135)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 765; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__135);
-  __Pyx_GIVEREF(__pyx_tuple__135);
+  __pyx_tuple__133 = PyTuple_Pack(1, __pyx_int_2); if (unlikely(!__pyx_tuple__133)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 765; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__133);
+  __Pyx_GIVEREF(__pyx_tuple__133);
 
   /* "tools.py":767
  *             sys.exit(2)
@@ -37815,9 +37876,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             sys.exit(2)
  * 
  */
-  __pyx_tuple__136 = PyTuple_Pack(1, __pyx_kp_s_User_is_empty); if (unlikely(!__pyx_tuple__136)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 767; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__136);
-  __Pyx_GIVEREF(__pyx_tuple__136);
+  __pyx_tuple__134 = PyTuple_Pack(1, __pyx_kp_s_User_is_empty); if (unlikely(!__pyx_tuple__134)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 767; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__134);
+  __Pyx_GIVEREF(__pyx_tuple__134);
 
   /* "tools.py":768
  *         elif not self.user:
@@ -37826,9 +37887,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *         ftp = None
  */
-  __pyx_tuple__137 = PyTuple_Pack(1, __pyx_int_2); if (unlikely(!__pyx_tuple__137)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__137);
-  __Pyx_GIVEREF(__pyx_tuple__137);
+  __pyx_tuple__135 = PyTuple_Pack(1, __pyx_int_2); if (unlikely(!__pyx_tuple__135)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 768; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__135);
+  __Pyx_GIVEREF(__pyx_tuple__135);
 
   /* "tools.py":786
  *             for target in self.targets:
@@ -37837,9 +37898,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                     sys.exit(2)
  *                 version = database.remote_metadata(target, 'version')
  */
-  __pyx_tuple__138 = PyTuple_Pack(1, __pyx_kp_s_Invalid_target); if (unlikely(!__pyx_tuple__138)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 786; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__138);
-  __Pyx_GIVEREF(__pyx_tuple__138);
+  __pyx_tuple__136 = PyTuple_Pack(1, __pyx_kp_s_Invalid_target); if (unlikely(!__pyx_tuple__136)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 786; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__136);
+  __Pyx_GIVEREF(__pyx_tuple__136);
 
   /* "tools.py":787
  *                 if not database.remote_search(target):
@@ -37848,9 +37909,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 version = database.remote_metadata(target, 'version')
  *                 tarball = '%s/tarballs/%s/%s_%s.tar.xz' % (libspm.CACHE_DIR, arch, target, version)
  */
-  __pyx_tuple__139 = PyTuple_Pack(1, __pyx_int_2); if (unlikely(!__pyx_tuple__139)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 787; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__139);
-  __Pyx_GIVEREF(__pyx_tuple__139);
+  __pyx_tuple__137 = PyTuple_Pack(1, __pyx_int_2); if (unlikely(!__pyx_tuple__137)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 787; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__137);
+  __Pyx_GIVEREF(__pyx_tuple__137);
 
   /* "tools.py":793
  *                 signature = '%s.sig' % tarball
@@ -37859,9 +37920,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                     sys.exit(2)
  *                 elif not os.path.isfile(depends):
  */
-  __pyx_tuple__140 = PyTuple_Pack(1, __pyx_kp_s_Binary_tarball_not_available_for); if (unlikely(!__pyx_tuple__140)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 793; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__140);
-  __Pyx_GIVEREF(__pyx_tuple__140);
+  __pyx_tuple__138 = PyTuple_Pack(1, __pyx_kp_s_Binary_tarball_not_available_for); if (unlikely(!__pyx_tuple__138)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 793; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__138);
+  __Pyx_GIVEREF(__pyx_tuple__138);
 
   /* "tools.py":794
  *                 if not os.path.isfile(tarball):
@@ -37870,9 +37931,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 elif not os.path.isfile(depends):
  *                     message.sub_critical(_('Binary tarball depends not available for'), target)
  */
-  __pyx_tuple__141 = PyTuple_Pack(1, __pyx_int_2); if (unlikely(!__pyx_tuple__141)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 794; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__141);
-  __Pyx_GIVEREF(__pyx_tuple__141);
+  __pyx_tuple__139 = PyTuple_Pack(1, __pyx_int_2); if (unlikely(!__pyx_tuple__139)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 794; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__139);
+  __Pyx_GIVEREF(__pyx_tuple__139);
 
   /* "tools.py":796
  *                     sys.exit(2)
@@ -37881,9 +37942,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                     sys.exit(2)
  *                 files = [tarball, depends]
  */
-  __pyx_tuple__142 = PyTuple_Pack(1, __pyx_kp_s_Binary_tarball_depends_not_avail); if (unlikely(!__pyx_tuple__142)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 796; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__142);
-  __Pyx_GIVEREF(__pyx_tuple__142);
+  __pyx_tuple__140 = PyTuple_Pack(1, __pyx_kp_s_Binary_tarball_depends_not_avail); if (unlikely(!__pyx_tuple__140)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 796; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__140);
+  __Pyx_GIVEREF(__pyx_tuple__140);
 
   /* "tools.py":797
  *                 elif not os.path.isfile(depends):
@@ -37892,9 +37953,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 files = [tarball, depends]
  *                 if os.path.isfile(signature):
  */
-  __pyx_tuple__143 = PyTuple_Pack(1, __pyx_int_2); if (unlikely(!__pyx_tuple__143)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 797; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__143);
-  __Pyx_GIVEREF(__pyx_tuple__143);
+  __pyx_tuple__141 = PyTuple_Pack(1, __pyx_int_2); if (unlikely(!__pyx_tuple__141)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 797; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__141);
+  __Pyx_GIVEREF(__pyx_tuple__141);
 
   /* "tools.py":802
  *                     files.append(signature)
@@ -37903,9 +37964,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 for sfile in files:
  *                     message.sub_info(_('Uploading'), sfile)
  */
-  __pyx_tuple__144 = PyTuple_Pack(1, __pyx_kp_s_Missing_signature_for); if (unlikely(!__pyx_tuple__144)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 802; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__144);
-  __Pyx_GIVEREF(__pyx_tuple__144);
+  __pyx_tuple__142 = PyTuple_Pack(1, __pyx_kp_s_Missing_signature_for); if (unlikely(!__pyx_tuple__142)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 802; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__142);
+  __Pyx_GIVEREF(__pyx_tuple__142);
 
   /* "tools.py":804
  *                     message.sub_warning(_('Missing signature for'), tarball)
@@ -37914,9 +37975,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                     with open(sfile, 'r') as f:
  *                         ftp.storbinary('STOR %s' % os.path.basename(sfile), f)
  */
-  __pyx_tuple__145 = PyTuple_Pack(1, __pyx_n_s_Uploading); if (unlikely(!__pyx_tuple__145)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 804; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__145);
-  __Pyx_GIVEREF(__pyx_tuple__145);
+  __pyx_tuple__143 = PyTuple_Pack(1, __pyx_n_s_Uploading); if (unlikely(!__pyx_tuple__143)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 804; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__143);
+  __Pyx_GIVEREF(__pyx_tuple__143);
 
   /* "tools.py":805
  *                 for sfile in files:
@@ -37925,9 +37986,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                         ftp.storbinary('STOR %s' % os.path.basename(sfile), f)
  *         finally:
  */
-  __pyx_tuple__146 = PyTuple_Pack(3, Py_None, Py_None, Py_None); if (unlikely(!__pyx_tuple__146)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 805; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__146);
-  __Pyx_GIVEREF(__pyx_tuple__146);
+  __pyx_tuple__144 = PyTuple_Pack(3, Py_None, Py_None, Py_None); if (unlikely(!__pyx_tuple__144)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 805; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__144);
+  __Pyx_GIVEREF(__pyx_tuple__144);
 
   /* "tools.py":819
  *     def main(self):
@@ -37936,9 +37997,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  * 
  */
-  __pyx_tuple__147 = PyTuple_Pack(1, __pyx_int_1); if (unlikely(!__pyx_tuple__147)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 819; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__147);
-  __Pyx_GIVEREF(__pyx_tuple__147);
+  __pyx_tuple__145 = PyTuple_Pack(1, __pyx_int_1); if (unlikely(!__pyx_tuple__145)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 819; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__145);
+  __Pyx_GIVEREF(__pyx_tuple__145);
 
   /* "tools.py":832
  *         srcbuild = '%s/SRCBUILD' % target
@@ -37947,9 +38008,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             return
  *         # non-basename doesn't work, wtf?
  */
-  __pyx_tuple__148 = PyTuple_Pack(1, __pyx_kp_s_Target_already_migrated); if (unlikely(!__pyx_tuple__148)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 832; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__148);
-  __Pyx_GIVEREF(__pyx_tuple__148);
+  __pyx_tuple__146 = PyTuple_Pack(1, __pyx_kp_s_Target_already_migrated); if (unlikely(!__pyx_tuple__146)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 832; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__146);
+  __Pyx_GIVEREF(__pyx_tuple__146);
 
   /* "tools.py":837
  *         remote = database.remote_search(os.path.basename(target))
@@ -37958,9 +38019,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             return
  *         shutil.copy2('%s/SRCBUILD' % remote, srcbuild)
  */
-  __pyx_tuple__149 = PyTuple_Pack(1, __pyx_kp_s_No_remote_alternative_for); if (unlikely(!__pyx_tuple__149)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 837; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__149);
-  __Pyx_GIVEREF(__pyx_tuple__149);
+  __pyx_tuple__147 = PyTuple_Pack(1, __pyx_kp_s_No_remote_alternative_for); if (unlikely(!__pyx_tuple__147)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 837; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__147);
+  __Pyx_GIVEREF(__pyx_tuple__147);
 
   /* "tools.py":847
  *         footprint = '%s/footprint' % target
@@ -37969,9 +38030,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             return
  *         elif not os.path.isfile(metadata) or not os.path.isfile(footprint):
  */
-  __pyx_tuple__150 = PyTuple_Pack(1, __pyx_kp_s_Target_already_migrated); if (unlikely(!__pyx_tuple__150)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 847; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__150);
-  __Pyx_GIVEREF(__pyx_tuple__150);
+  __pyx_tuple__148 = PyTuple_Pack(1, __pyx_kp_s_Target_already_migrated); if (unlikely(!__pyx_tuple__148)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 847; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__148);
+  __Pyx_GIVEREF(__pyx_tuple__148);
 
   /* "tools.py":850
  *             return
@@ -37980,9 +38041,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             return
  *         message.sub_debug(_('Migrating legacy local metadata'), target)
  */
-  __pyx_tuple__151 = PyTuple_Pack(1, __pyx_kp_s_Invalid_target); if (unlikely(!__pyx_tuple__151)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 850; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__151);
-  __Pyx_GIVEREF(__pyx_tuple__151);
+  __pyx_tuple__149 = PyTuple_Pack(1, __pyx_kp_s_Invalid_target); if (unlikely(!__pyx_tuple__149)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 850; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__149);
+  __Pyx_GIVEREF(__pyx_tuple__149);
 
   /* "tools.py":852
  *             message.sub_warning(_('Invalid target'), target)
@@ -37991,9 +38052,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         data = {'version': '1',
  *                 'release': '1',
  */
-  __pyx_tuple__152 = PyTuple_Pack(1, __pyx_kp_s_Migrating_legacy_local_metadata); if (unlikely(!__pyx_tuple__152)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 852; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__152);
-  __Pyx_GIVEREF(__pyx_tuple__152);
+  __pyx_tuple__150 = PyTuple_Pack(1, __pyx_kp_s_Migrating_legacy_local_metadata); if (unlikely(!__pyx_tuple__150)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 852; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__150);
+  __Pyx_GIVEREF(__pyx_tuple__150);
 
   /* "tools.py":861
  *         for line in misc.file_read(metadata).splitlines():
@@ -38002,12 +38063,12 @@ static int __Pyx_InitCachedConstants(void) {
  *                 'description=', 'depends=', 'size=')):
  *                 key, value = line.split('=')
  */
-  __pyx_tuple__153 = PyTuple_Pack(5, __pyx_kp_s_version_2, __pyx_kp_s_release_2, __pyx_kp_s_description_2, __pyx_kp_s_depends_2, __pyx_kp_s_size_2); if (unlikely(!__pyx_tuple__153)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 861; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__153);
-  __Pyx_GIVEREF(__pyx_tuple__153);
-  __pyx_tuple__154 = PyTuple_Pack(1, __pyx_tuple__153); if (unlikely(!__pyx_tuple__154)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 861; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__154);
-  __Pyx_GIVEREF(__pyx_tuple__154);
+  __pyx_tuple__151 = PyTuple_Pack(5, __pyx_kp_s_version_2, __pyx_kp_s_release_2, __pyx_kp_s_description_2, __pyx_kp_s_depends_2, __pyx_kp_s_size_2); if (unlikely(!__pyx_tuple__151)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 861; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__151);
+  __Pyx_GIVEREF(__pyx_tuple__151);
+  __pyx_tuple__152 = PyTuple_Pack(1, __pyx_tuple__151); if (unlikely(!__pyx_tuple__152)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 861; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__152);
+  __Pyx_GIVEREF(__pyx_tuple__152);
 
   /* "tools.py":863
  *             if line.startswith(('version=', 'release=', \
@@ -38016,9 +38077,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 if key == 'depends':
  *                     value = value.split()
  */
-  __pyx_tuple__156 = PyTuple_Pack(1, __pyx_kp_s__155); if (unlikely(!__pyx_tuple__156)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 863; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__156);
-  __Pyx_GIVEREF(__pyx_tuple__156);
+  __pyx_tuple__154 = PyTuple_Pack(1, __pyx_kp_s__153); if (unlikely(!__pyx_tuple__154)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 863; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__154);
+  __Pyx_GIVEREF(__pyx_tuple__154);
 
   /* "tools.py":873
  *         metadata = '%s/metadata.json' % target
@@ -38027,9 +38088,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             return
  *         data = misc.json_read(metadata)
  */
-  __pyx_tuple__157 = PyTuple_Pack(1, __pyx_kp_s_Invalid_target); if (unlikely(!__pyx_tuple__157)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 873; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__157);
-  __Pyx_GIVEREF(__pyx_tuple__157);
+  __pyx_tuple__155 = PyTuple_Pack(1, __pyx_kp_s_Invalid_target); if (unlikely(!__pyx_tuple__155)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 873; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__155);
+  __Pyx_GIVEREF(__pyx_tuple__155);
 
   /* "tools.py":877
  *         data = misc.json_read(metadata)
@@ -38038,34 +38099,31 @@ static int __Pyx_InitCachedConstants(void) {
  *             return
  *         backup = database.remote_metadata(target, 'backup') or []
  */
-  __pyx_tuple__158 = PyTuple_Pack(1, __pyx_kp_s_Target_already_migrated); if (unlikely(!__pyx_tuple__158)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 877; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__158);
-  __Pyx_GIVEREF(__pyx_tuple__158);
+  __pyx_tuple__156 = PyTuple_Pack(1, __pyx_kp_s_Target_already_migrated); if (unlikely(!__pyx_tuple__156)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 877; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__156);
+  __Pyx_GIVEREF(__pyx_tuple__156);
 
   /* "tools.py":881
  *         backup = database.remote_metadata(target, 'backup') or []
  *         dbackup = {}
  *         message.sub_debug(_('Migrating remote backup to local'), target)             # <<<<<<<<<<<<<<
  *         for sfile in database.local_metadata(target, 'footprint'):
- *             if sfile.endswith('.conf') or sfile.lstrip('/') in backup:
+ *             if sfile.endswith('.conf') or misc.string_lstrip(sfile, '/') in backup:
  */
-  __pyx_tuple__159 = PyTuple_Pack(1, __pyx_kp_s_Migrating_remote_backup_to_local); if (unlikely(!__pyx_tuple__159)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 881; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__159);
-  __Pyx_GIVEREF(__pyx_tuple__159);
+  __pyx_tuple__157 = PyTuple_Pack(1, __pyx_kp_s_Migrating_remote_backup_to_local); if (unlikely(!__pyx_tuple__157)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 881; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__157);
+  __Pyx_GIVEREF(__pyx_tuple__157);
 
   /* "tools.py":883
  *         message.sub_debug(_('Migrating remote backup to local'), target)
  *         for sfile in database.local_metadata(target, 'footprint'):
- *             if sfile.endswith('.conf') or sfile.lstrip('/') in backup:             # <<<<<<<<<<<<<<
+ *             if sfile.endswith('.conf') or misc.string_lstrip(sfile, '/') in backup:             # <<<<<<<<<<<<<<
  *                 if os.path.isfile(sfile):
  *                     dbackup[sfile] = misc.file_checksum(sfile)
  */
-  __pyx_tuple__160 = PyTuple_Pack(1, __pyx_kp_s_conf); if (unlikely(!__pyx_tuple__160)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 883; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__160);
-  __Pyx_GIVEREF(__pyx_tuple__160);
-  __pyx_tuple__161 = PyTuple_Pack(1, __pyx_kp_s__77); if (unlikely(!__pyx_tuple__161)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 883; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__161);
-  __Pyx_GIVEREF(__pyx_tuple__161);
+  __pyx_tuple__158 = PyTuple_Pack(1, __pyx_kp_s_conf); if (unlikely(!__pyx_tuple__158)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 883; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__158);
+  __Pyx_GIVEREF(__pyx_tuple__158);
 
   /* "tools.py":887
  *                     dbackup[sfile] = misc.file_checksum(sfile)
@@ -38074,9 +38132,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         data['backup'] = dbackup
  *         misc.json_write(metadata, data)
  */
-  __pyx_tuple__162 = PyTuple_Pack(1, __pyx_kp_s_File_does_not_exist); if (unlikely(!__pyx_tuple__162)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 887; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__162);
-  __Pyx_GIVEREF(__pyx_tuple__162);
+  __pyx_tuple__159 = PyTuple_Pack(1, __pyx_kp_s_File_does_not_exist); if (unlikely(!__pyx_tuple__159)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 887; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__159);
+  __Pyx_GIVEREF(__pyx_tuple__159);
 
   /* "tools.py":895
  *         metadata = '%s/metadata.json' % target
@@ -38085,9 +38143,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             return
  *         data = misc.json_read(metadata)
  */
-  __pyx_tuple__163 = PyTuple_Pack(1, __pyx_kp_s_Invalid_target); if (unlikely(!__pyx_tuple__163)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 895; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__163);
-  __Pyx_GIVEREF(__pyx_tuple__163);
+  __pyx_tuple__160 = PyTuple_Pack(1, __pyx_kp_s_Invalid_target); if (unlikely(!__pyx_tuple__160)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 895; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__160);
+  __Pyx_GIVEREF(__pyx_tuple__160);
 
   /* "tools.py":899
  *         data = misc.json_read(metadata)
@@ -38096,9 +38154,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             return
  *         data['optdepends'] = []
  */
-  __pyx_tuple__164 = PyTuple_Pack(1, __pyx_kp_s_Target_already_migrated); if (unlikely(!__pyx_tuple__164)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 899; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__164);
-  __Pyx_GIVEREF(__pyx_tuple__164);
+  __pyx_tuple__161 = PyTuple_Pack(1, __pyx_kp_s_Target_already_migrated); if (unlikely(!__pyx_tuple__161)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 899; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__161);
+  __Pyx_GIVEREF(__pyx_tuple__161);
 
   /* "tools.py":906
  *     def main(self):
@@ -38107,9 +38165,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             return
  *         for target in os.listdir(database.LOCAL_DIR):
  */
-  __pyx_tuple__165 = PyTuple_Pack(1, __pyx_kp_s_No_local_targets_directory); if (unlikely(!__pyx_tuple__165)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 906; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__165);
-  __Pyx_GIVEREF(__pyx_tuple__165);
+  __pyx_tuple__162 = PyTuple_Pack(1, __pyx_kp_s_No_local_targets_directory); if (unlikely(!__pyx_tuple__162)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 906; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__162);
+  __Pyx_GIVEREF(__pyx_tuple__162);
 
   /* "tools.py":910
  *         for target in os.listdir(database.LOCAL_DIR):
@@ -38118,9 +38176,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             self.upgrade_1_7_x_srcbuild(target)
  *             message.sub_info(_('Starting migration procedure 1_7_x_metadata on'), target)
  */
-  __pyx_tuple__166 = PyTuple_Pack(1, __pyx_kp_s_Starting_migration_procedure_1_7); if (unlikely(!__pyx_tuple__166)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 910; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__166);
-  __Pyx_GIVEREF(__pyx_tuple__166);
+  __pyx_tuple__163 = PyTuple_Pack(1, __pyx_kp_s_Starting_migration_procedure_1_7); if (unlikely(!__pyx_tuple__163)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 910; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__163);
+  __Pyx_GIVEREF(__pyx_tuple__163);
 
   /* "tools.py":912
  *             message.sub_info(_('Starting migration procedure 1_7_x_srcbuild on'), target)
@@ -38129,9 +38187,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             self.upgrade_1_7_x_metadata(target)
  *             message.sub_info(_('Starting migration procedure 1_7_x_backup on'), target)
  */
-  __pyx_tuple__167 = PyTuple_Pack(1, __pyx_kp_s_Starting_migration_procedure_1_7_2); if (unlikely(!__pyx_tuple__167)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 912; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__167);
-  __Pyx_GIVEREF(__pyx_tuple__167);
+  __pyx_tuple__164 = PyTuple_Pack(1, __pyx_kp_s_Starting_migration_procedure_1_7_2); if (unlikely(!__pyx_tuple__164)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 912; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__164);
+  __Pyx_GIVEREF(__pyx_tuple__164);
 
   /* "tools.py":914
  *             message.sub_info(_('Starting migration procedure 1_7_x_metadata on'), target)
@@ -38140,9 +38198,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             self.upgrade_1_7_x_backup(target)
  *             message.sub_info(_('Starting migration procedure 1_8_x_optdepends on'), target)
  */
-  __pyx_tuple__168 = PyTuple_Pack(1, __pyx_kp_s_Starting_migration_procedure_1_7_3); if (unlikely(!__pyx_tuple__168)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 914; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__168);
-  __Pyx_GIVEREF(__pyx_tuple__168);
+  __pyx_tuple__165 = PyTuple_Pack(1, __pyx_kp_s_Starting_migration_procedure_1_7_3); if (unlikely(!__pyx_tuple__165)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 914; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__165);
+  __Pyx_GIVEREF(__pyx_tuple__165);
 
   /* "tools.py":916
  *             message.sub_info(_('Starting migration procedure 1_7_x_backup on'), target)
@@ -38151,9 +38209,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             self.upgrade_1_8_x_optdepends(target)
  * 
  */
-  __pyx_tuple__169 = PyTuple_Pack(1, __pyx_kp_s_Starting_migration_procedure_1_8); if (unlikely(!__pyx_tuple__169)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 916; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__169);
-  __Pyx_GIVEREF(__pyx_tuple__169);
+  __pyx_tuple__166 = PyTuple_Pack(1, __pyx_kp_s_Starting_migration_procedure_1_8); if (unlikely(!__pyx_tuple__166)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 916; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__166);
+  __Pyx_GIVEREF(__pyx_tuple__166);
 
   /* "tools.py":938
  *         for target in self.targets:
@@ -38162,9 +38220,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 sys.exit(2)
  *             message.sub_debug(_('Checksumming'), target)
  */
-  __pyx_tuple__170 = PyTuple_Pack(1, __pyx_kp_s_Invalid_target); if (unlikely(!__pyx_tuple__170)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 938; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__170);
-  __Pyx_GIVEREF(__pyx_tuple__170);
+  __pyx_tuple__167 = PyTuple_Pack(1, __pyx_kp_s_Invalid_target); if (unlikely(!__pyx_tuple__167)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 938; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__167);
+  __Pyx_GIVEREF(__pyx_tuple__167);
 
   /* "tools.py":939
  *             if not database.local_search(target):
@@ -38173,9 +38231,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_debug(_('Checksumming'), target)
  *             digest[target] = {}
  */
-  __pyx_tuple__171 = PyTuple_Pack(1, __pyx_int_2); if (unlikely(!__pyx_tuple__171)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 939; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__171);
-  __Pyx_GIVEREF(__pyx_tuple__171);
+  __pyx_tuple__168 = PyTuple_Pack(1, __pyx_int_2); if (unlikely(!__pyx_tuple__168)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 939; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__168);
+  __Pyx_GIVEREF(__pyx_tuple__168);
 
   /* "tools.py":940
  *                 message.sub_critical(_('Invalid target'), target)
@@ -38184,9 +38242,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             digest[target] = {}
  *             target_backup = database.local_metadata(target, 'backup')
  */
-  __pyx_tuple__172 = PyTuple_Pack(1, __pyx_n_s_Checksumming); if (unlikely(!__pyx_tuple__172)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 940; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__172);
-  __Pyx_GIVEREF(__pyx_tuple__172);
+  __pyx_tuple__169 = PyTuple_Pack(1, __pyx_n_s_Checksumming); if (unlikely(!__pyx_tuple__169)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 940; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__169);
+  __Pyx_GIVEREF(__pyx_tuple__169);
 
   /* "tools.py":949
  *                 srelative = misc.string_lstrip(sfile, libspm.ROOT_DIR + '/', '')
@@ -38195,9 +38253,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 elif not os.path.exists(sfile):
  *                     message.sub_warning(_('File does not exist'), sfile)
  */
-  __pyx_tuple__173 = PyTuple_Pack(1, __pyx_kp_s_Ignoring_backup_file); if (unlikely(!__pyx_tuple__173)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 949; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__173);
-  __Pyx_GIVEREF(__pyx_tuple__173);
+  __pyx_tuple__170 = PyTuple_Pack(1, __pyx_kp_s_Ignoring_backup_file); if (unlikely(!__pyx_tuple__170)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 949; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__170);
+  __Pyx_GIVEREF(__pyx_tuple__170);
 
   /* "tools.py":951
  *                     message.sub_debug(_('Ignoring backup file'))
@@ -38206,9 +38264,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 else:
  *                     digest[target][srelative] = misc.file_checksum(sfile)
  */
-  __pyx_tuple__174 = PyTuple_Pack(1, __pyx_kp_s_File_does_not_exist); if (unlikely(!__pyx_tuple__174)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 951; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__174);
-  __Pyx_GIVEREF(__pyx_tuple__174);
+  __pyx_tuple__171 = PyTuple_Pack(1, __pyx_kp_s_File_does_not_exist); if (unlikely(!__pyx_tuple__171)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 951; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__171);
+  __Pyx_GIVEREF(__pyx_tuple__171);
 
   /* "tools.py":962
  *         for target in digest:
@@ -38217,9 +38275,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 continue
  *             elif not database.local_search(target):
  */
-  __pyx_tuple__175 = PyTuple_Pack(1, __pyx_kp_s_Target_from_digest_not_in_argume); if (unlikely(!__pyx_tuple__175)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 962; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__175);
-  __Pyx_GIVEREF(__pyx_tuple__175);
+  __pyx_tuple__172 = PyTuple_Pack(1, __pyx_kp_s_Target_from_digest_not_in_argume); if (unlikely(!__pyx_tuple__172)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 962; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__172);
+  __Pyx_GIVEREF(__pyx_tuple__172);
 
   /* "tools.py":965
  *                 continue
@@ -38228,9 +38286,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 sys.exit(2)
  *             message.sub_debug(_('Verifying'), target)
  */
-  __pyx_tuple__176 = PyTuple_Pack(1, __pyx_kp_s_Target_from_digest_is_not_local); if (unlikely(!__pyx_tuple__176)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 965; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__176);
-  __Pyx_GIVEREF(__pyx_tuple__176);
+  __pyx_tuple__173 = PyTuple_Pack(1, __pyx_kp_s_Target_from_digest_is_not_local); if (unlikely(!__pyx_tuple__173)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 965; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__173);
+  __Pyx_GIVEREF(__pyx_tuple__173);
 
   /* "tools.py":966
  *             elif not database.local_search(target):
@@ -38239,9 +38297,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_debug(_('Verifying'), target)
  *             for sfile in digest[target]:
  */
-  __pyx_tuple__177 = PyTuple_Pack(1, __pyx_int_2); if (unlikely(!__pyx_tuple__177)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 966; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__177);
-  __Pyx_GIVEREF(__pyx_tuple__177);
+  __pyx_tuple__174 = PyTuple_Pack(1, __pyx_int_2); if (unlikely(!__pyx_tuple__174)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 966; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__174);
+  __Pyx_GIVEREF(__pyx_tuple__174);
 
   /* "tools.py":967
  *                 message.sub_critical(_('Target from digest is not local'), target)
@@ -38250,9 +38308,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             for sfile in digest[target]:
  *                 sfull = '%s/%s' % (libspm.ROOT_DIR, sfile)
  */
-  __pyx_tuple__178 = PyTuple_Pack(1, __pyx_n_s_Verifying); if (unlikely(!__pyx_tuple__178)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 967; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__178);
-  __Pyx_GIVEREF(__pyx_tuple__178);
+  __pyx_tuple__175 = PyTuple_Pack(1, __pyx_n_s_Verifying); if (unlikely(!__pyx_tuple__175)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 967; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__175);
+  __Pyx_GIVEREF(__pyx_tuple__175);
 
   /* "tools.py":971
  *                 sfull = '%s/%s' % (libspm.ROOT_DIR, sfile)
@@ -38261,9 +38319,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                     fail = True
  *                 elif not digest[target][sfile] == misc.file_checksum(sfull):
  */
-  __pyx_tuple__179 = PyTuple_Pack(1, __pyx_kp_s_File_does_not_exist); if (unlikely(!__pyx_tuple__179)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 971; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__179);
-  __Pyx_GIVEREF(__pyx_tuple__179);
+  __pyx_tuple__176 = PyTuple_Pack(1, __pyx_kp_s_File_does_not_exist); if (unlikely(!__pyx_tuple__176)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 971; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__176);
+  __Pyx_GIVEREF(__pyx_tuple__176);
 
   /* "tools.py":974
  *                     fail = True
@@ -38272,9 +38330,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                     fail = True
  *         if fail:
  */
-  __pyx_tuple__180 = PyTuple_Pack(1, __pyx_kp_s_Checksum_mismatch); if (unlikely(!__pyx_tuple__180)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 974; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__180);
-  __Pyx_GIVEREF(__pyx_tuple__180);
+  __pyx_tuple__177 = PyTuple_Pack(1, __pyx_kp_s_Checksum_mismatch); if (unlikely(!__pyx_tuple__177)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 974; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__177);
+  __Pyx_GIVEREF(__pyx_tuple__177);
 
   /* "tools.py":977
  *                     fail = True
@@ -38283,9 +38341,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *     def main(self):
  */
-  __pyx_tuple__181 = PyTuple_Pack(1, __pyx_int_2); if (unlikely(!__pyx_tuple__181)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 977; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__181);
-  __Pyx_GIVEREF(__pyx_tuple__181);
+  __pyx_tuple__178 = PyTuple_Pack(1, __pyx_int_2); if (unlikely(!__pyx_tuple__178)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 977; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__178);
+  __Pyx_GIVEREF(__pyx_tuple__178);
 
   /* "tools.py":1006
  *                     content.append('%s/%s' % (libspm.ROOT_DIR, sfile))
@@ -38294,9 +38352,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                     # TODO: allow exclude/include from files passed as argument
  *                     for depfile in database.local_metadata(dep, 'footprint'):
  */
-  __pyx_tuple__182 = PyTuple_Pack(1, __pyx_n_s_Augmenting); if (unlikely(!__pyx_tuple__182)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1006; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__182);
-  __Pyx_GIVEREF(__pyx_tuple__182);
+  __pyx_tuple__179 = PyTuple_Pack(1, __pyx_n_s_Augmenting); if (unlikely(!__pyx_tuple__179)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1006; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__179);
+  __Pyx_GIVEREF(__pyx_tuple__179);
 
   /* "tools.py":1012
  *                         if misc.string_search('%s/(?:lib/debug|include|share/(?:man|doc)/)' % \
@@ -38305,9 +38363,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                             continue
  *                         elif not os.path.exists(sfull):
  */
-  __pyx_tuple__183 = PyTuple_Pack(1, __pyx_kp_s_Skipping_file); if (unlikely(!__pyx_tuple__183)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1012; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__183);
-  __Pyx_GIVEREF(__pyx_tuple__183);
+  __pyx_tuple__180 = PyTuple_Pack(1, __pyx_kp_s_Skipping_file); if (unlikely(!__pyx_tuple__180)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1012; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__180);
+  __Pyx_GIVEREF(__pyx_tuple__180);
 
   /* "tools.py":1015
  *                             continue
@@ -38316,9 +38374,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                             continue
  *                         content.append(sfull)
  */
-  __pyx_tuple__184 = PyTuple_Pack(1, __pyx_kp_s_File_does_not_exist); if (unlikely(!__pyx_tuple__184)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1015; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__184);
-  __Pyx_GIVEREF(__pyx_tuple__184);
+  __pyx_tuple__181 = PyTuple_Pack(1, __pyx_kp_s_File_does_not_exist); if (unlikely(!__pyx_tuple__181)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1015; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__181);
+  __Pyx_GIVEREF(__pyx_tuple__181);
 
   /* "tools.py":1023
  *                 content.append('%s/%s' % (libspm.LOCAL_DIR, target))
@@ -38327,9 +38385,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 library_override = ['/lib', '/usr/lib']
  *                 python_override = site.getsitepackages()
  */
-  __pyx_tuple__185 = PyTuple_Pack(1, __pyx_kp_s_Creating_runner); if (unlikely(!__pyx_tuple__185)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1023; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__185);
-  __Pyx_GIVEREF(__pyx_tuple__185);
+  __pyx_tuple__182 = PyTuple_Pack(1, __pyx_kp_s_Creating_runner); if (unlikely(!__pyx_tuple__182)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1023; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__182);
+  __Pyx_GIVEREF(__pyx_tuple__182);
 
   /* "tools.py":1028
  *                 for sfile in content:
@@ -38338,9 +38396,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                         if not parent in library_override:
  *                             library_override.append(parent)
  */
-  __pyx_tuple__186 = PyTuple_Pack(1, __pyx_kp_s_so); if (unlikely(!__pyx_tuple__186)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1028; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__186);
-  __Pyx_GIVEREF(__pyx_tuple__186);
+  __pyx_tuple__183 = PyTuple_Pack(1, __pyx_kp_s_so); if (unlikely(!__pyx_tuple__183)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1028; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__183);
+  __Pyx_GIVEREF(__pyx_tuple__183);
 
   /* "tools.py":1031
  *                         if not parent in library_override:
@@ -38349,9 +38407,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                         if not parent in python_override:
  *                             python_override.append(parent)
  */
-  __pyx_tuple__187 = PyTuple_Pack(1, __pyx_kp_s_py); if (unlikely(!__pyx_tuple__187)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1031; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__187);
-  __Pyx_GIVEREF(__pyx_tuple__187);
+  __pyx_tuple__184 = PyTuple_Pack(1, __pyx_kp_s_py); if (unlikely(!__pyx_tuple__184)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1031; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__184);
+  __Pyx_GIVEREF(__pyx_tuple__184);
 
   /* "tools.py":1038
  *                 misc.file_write('./run.sh', runner)
@@ -38360,9 +38418,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *                 # TODO: write a README file?
  */
-  __pyx_tuple__188 = PyTuple_Pack(2, __pyx_kp_s_run_sh, __pyx_int_493); if (unlikely(!__pyx_tuple__188)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1038; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__188);
-  __Pyx_GIVEREF(__pyx_tuple__188);
+  __pyx_tuple__185 = PyTuple_Pack(2, __pyx_kp_s_run_sh, __pyx_int_493); if (unlikely(!__pyx_tuple__185)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1038; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__185);
+  __Pyx_GIVEREF(__pyx_tuple__185);
 
   /* "tools.py":1042
  *                 # TODO: write a README file?
@@ -38371,9 +38429,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 misc.archive_compress(content, target_packfile, '/')
  *                 if libspm.SIGN:
  */
-  __pyx_tuple__189 = PyTuple_Pack(1, __pyx_n_s_Compressing); if (unlikely(!__pyx_tuple__189)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1042; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__189);
-  __Pyx_GIVEREF(__pyx_tuple__189);
+  __pyx_tuple__186 = PyTuple_Pack(1, __pyx_n_s_Compressing); if (unlikely(!__pyx_tuple__186)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1042; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__186);
+  __Pyx_GIVEREF(__pyx_tuple__186);
 
   /* "tools.py":1045
  *                 misc.archive_compress(content, target_packfile, '/')
@@ -38382,9 +38440,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                     misc.gpg_sign(target_packfile, libspm.SIGN)
  *                 os.unlink('./run.sh')
  */
-  __pyx_tuple__190 = PyTuple_Pack(1, __pyx_n_s_Signing); if (unlikely(!__pyx_tuple__190)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1045; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__190);
-  __Pyx_GIVEREF(__pyx_tuple__190);
+  __pyx_tuple__187 = PyTuple_Pack(1, __pyx_n_s_Signing); if (unlikely(!__pyx_tuple__187)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1045; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__187);
+  __Pyx_GIVEREF(__pyx_tuple__187);
 
   /* "tools.py":1047
  *                     message.sub_info(_('Signing'), target_packfile)
@@ -38393,9 +38451,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  * if __name__ == '__main__':
  */
-  __pyx_tuple__191 = PyTuple_Pack(1, __pyx_kp_s_run_sh); if (unlikely(!__pyx_tuple__191)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1047; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__191);
-  __Pyx_GIVEREF(__pyx_tuple__191);
+  __pyx_tuple__188 = PyTuple_Pack(1, __pyx_kp_s_run_sh); if (unlikely(!__pyx_tuple__188)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1047; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__188);
+  __Pyx_GIVEREF(__pyx_tuple__188);
 
   /* "tools.py":4
  * 
@@ -38404,9 +38462,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  * import sys, argparse, subprocess, tarfile, zipfile, shutil, os, re, difflib
  */
-  __pyx_tuple__192 = PyTuple_Pack(1, __pyx_n_s_spm); if (unlikely(!__pyx_tuple__192)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 4; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__192);
-  __Pyx_GIVEREF(__pyx_tuple__192);
+  __pyx_tuple__189 = PyTuple_Pack(1, __pyx_n_s_spm); if (unlikely(!__pyx_tuple__189)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 4; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__189);
+  __Pyx_GIVEREF(__pyx_tuple__189);
 
   /* "tools.py":30
  * class Check(object):
@@ -38415,13 +38473,13 @@ static int __Pyx_InitCachedConstants(void) {
  *         do_reverse=False, do_adjust=False):
  *         self.targets = []
  */
-  __pyx_tuple__193 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_targets, __pyx_n_s_do_fast, __pyx_n_s_do_depends, __pyx_n_s_do_reverse, __pyx_n_s_do_adjust, __pyx_n_s_target); if (unlikely(!__pyx_tuple__193)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__193);
-  __Pyx_GIVEREF(__pyx_tuple__193);
-  __pyx_codeobj__194 = (PyObject*)__Pyx_PyCode_New(6, 0, 7, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__193, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 30, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__194)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_tuple__195 = PyTuple_Pack(4, ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__195)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__195);
-  __Pyx_GIVEREF(__pyx_tuple__195);
+  __pyx_tuple__190 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_targets, __pyx_n_s_do_fast, __pyx_n_s_do_depends, __pyx_n_s_do_reverse, __pyx_n_s_do_adjust, __pyx_n_s_target); if (unlikely(!__pyx_tuple__190)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__190);
+  __Pyx_GIVEREF(__pyx_tuple__190);
+  __pyx_codeobj__191 = (PyObject*)__Pyx_PyCode_New(6, 0, 7, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__190, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 30, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__191)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__192 = PyTuple_Pack(4, ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__192)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__192);
+  __Pyx_GIVEREF(__pyx_tuple__192);
 
   /* "tools.py":50
  *                     self.check_targets.append(target)
@@ -38430,10 +38488,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         ''' Check if runtime dependencies of target are satisfied '''
  *         for target in self.check_targets:
  */
-  __pyx_tuple__196 = PyTuple_Pack(20, __pyx_n_s_self, __pyx_n_s_target, __pyx_n_s_target_metadata, __pyx_n_s_target_footprint, __pyx_n_s_target_depends, __pyx_n_s_target_adepends, __pyx_n_s_missing_detected, __pyx_n_s_required, __pyx_n_s_sfile, __pyx_n_s_smime, __pyx_n_s_libraries, __pyx_n_s_bang_regexp, __pyx_n_s_fmatch, __pyx_n_s_checked, __pyx_n_s_req, __pyx_n_s_rreq, __pyx_n_s_match, __pyx_n_s_a, __pyx_n_s_content, __pyx_n_s_line); if (unlikely(!__pyx_tuple__196)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__196);
-  __Pyx_GIVEREF(__pyx_tuple__196);
-  __pyx_codeobj__197 = (PyObject*)__Pyx_PyCode_New(1, 0, 20, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__196, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 50, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__197)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__193 = PyTuple_Pack(20, __pyx_n_s_self, __pyx_n_s_target, __pyx_n_s_target_metadata, __pyx_n_s_target_footprint, __pyx_n_s_target_depends, __pyx_n_s_target_adepends, __pyx_n_s_missing_detected, __pyx_n_s_required, __pyx_n_s_sfile, __pyx_n_s_smime, __pyx_n_s_libraries, __pyx_n_s_bang_regexp, __pyx_n_s_fmatch, __pyx_n_s_checked, __pyx_n_s_req, __pyx_n_s_rreq, __pyx_n_s_match, __pyx_n_s_a, __pyx_n_s_content, __pyx_n_s_line); if (unlikely(!__pyx_tuple__193)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__193);
+  __Pyx_GIVEREF(__pyx_tuple__193);
+  __pyx_codeobj__194 = (PyObject*)__Pyx_PyCode_New(1, 0, 20, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__193, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 50, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__194)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":143
  * class Clean(object):
@@ -38442,10 +38500,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         # don't bother for targets in the base group
  *         self.base_targets = database.remote_alias('base')
  */
-  __pyx_tuple__198 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__198)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__198);
-  __Pyx_GIVEREF(__pyx_tuple__198);
-  __pyx_codeobj__199 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__198, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 143, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__199)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__195 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__195)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__195);
+  __Pyx_GIVEREF(__pyx_tuple__195);
+  __pyx_codeobj__196 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__195, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 143, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__196)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":147
  *         self.base_targets = database.remote_alias('base')
@@ -38454,10 +38512,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         ''' Looks for target match and then execute action for every target '''
  *         for target in database.local_all(basename=True):
  */
-  __pyx_tuple__200 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_target); if (unlikely(!__pyx_tuple__200)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__200);
-  __Pyx_GIVEREF(__pyx_tuple__200);
-  __pyx_codeobj__201 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__200, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 147, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__201)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__197 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_target); if (unlikely(!__pyx_tuple__197)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__197);
+  __Pyx_GIVEREF(__pyx_tuple__197);
+  __pyx_codeobj__198 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__197, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 147, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__198)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":158
  * class Dist(object):
@@ -38466,10 +38524,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         directory=misc.dir_current()):
  *         self.targets = []
  */
-  __pyx_tuple__202 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_targets, __pyx_n_s_do_sources, __pyx_n_s_do_clean, __pyx_n_s_directory, __pyx_n_s_target); if (unlikely(!__pyx_tuple__202)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__202);
-  __Pyx_GIVEREF(__pyx_tuple__202);
-  __pyx_codeobj__203 = (PyObject*)__Pyx_PyCode_New(5, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__202, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 158, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__203)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__199 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_targets, __pyx_n_s_do_sources, __pyx_n_s_do_clean, __pyx_n_s_directory, __pyx_n_s_target); if (unlikely(!__pyx_tuple__199)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__199);
+  __Pyx_GIVEREF(__pyx_tuple__199);
+  __pyx_codeobj__200 = (PyObject*)__Pyx_PyCode_New(5, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__199, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 158, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__200)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":167
  *         self.directory = directory
@@ -38478,10 +38536,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         ''' Looks for target match and then execute action for every target '''
  *         for target in self.targets:
  */
-  __pyx_tuple__204 = PyTuple_Pack(11, __pyx_n_s_self, __pyx_n_s_target, __pyx_n_s_target_directory, __pyx_n_s_target_basename, __pyx_n_s_target_version, __pyx_n_s_target_distfile, __pyx_n_s_target_sources, __pyx_n_s_target_pgpkeys, __pyx_n_s_src_url, __pyx_n_s_src_base, __pyx_n_s_src_file); if (unlikely(!__pyx_tuple__204)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__204);
-  __Pyx_GIVEREF(__pyx_tuple__204);
-  __pyx_codeobj__205 = (PyObject*)__Pyx_PyCode_New(1, 0, 11, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__204, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 167, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__205)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__201 = PyTuple_Pack(11, __pyx_n_s_self, __pyx_n_s_target, __pyx_n_s_target_directory, __pyx_n_s_target_basename, __pyx_n_s_target_version, __pyx_n_s_target_distfile, __pyx_n_s_target_sources, __pyx_n_s_target_pgpkeys, __pyx_n_s_src_url, __pyx_n_s_src_base, __pyx_n_s_src_file); if (unlikely(!__pyx_tuple__201)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__201);
+  __Pyx_GIVEREF(__pyx_tuple__201);
+  __pyx_codeobj__202 = (PyObject*)__Pyx_PyCode_New(1, 0, 11, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__201, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 167, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__202)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":229
  * class Lint(object):
@@ -38490,13 +38548,13 @@ static int __Pyx_InitCachedConstants(void) {
  *         doc=False, module=False, footprint=False, builddir=False, \
  *         ownership=False, executable=False, path=False, shebang=False, \
  */
-  __pyx_tuple__206 = PyTuple_Pack(17, __pyx_n_s_self, __pyx_n_s_targets, __pyx_n_s_man, __pyx_n_s_udev, __pyx_n_s_symlink, __pyx_n_s_doc, __pyx_n_s_module, __pyx_n_s_footprint, __pyx_n_s_builddir, __pyx_n_s_ownership, __pyx_n_s_executable, __pyx_n_s_path, __pyx_n_s_shebang, __pyx_n_s_backup, __pyx_n_s_conflicts, __pyx_n_s_debug, __pyx_n_s_target); if (unlikely(!__pyx_tuple__206)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 229; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__206);
-  __Pyx_GIVEREF(__pyx_tuple__206);
-  __pyx_codeobj__207 = (PyObject*)__Pyx_PyCode_New(16, 0, 17, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__206, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 229, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__207)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 229; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_tuple__208 = PyTuple_Pack(14, ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__208)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 229; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__208);
-  __Pyx_GIVEREF(__pyx_tuple__208);
+  __pyx_tuple__203 = PyTuple_Pack(17, __pyx_n_s_self, __pyx_n_s_targets, __pyx_n_s_man, __pyx_n_s_udev, __pyx_n_s_symlink, __pyx_n_s_doc, __pyx_n_s_module, __pyx_n_s_footprint, __pyx_n_s_builddir, __pyx_n_s_ownership, __pyx_n_s_executable, __pyx_n_s_path, __pyx_n_s_shebang, __pyx_n_s_backup, __pyx_n_s_conflicts, __pyx_n_s_debug, __pyx_n_s_target); if (unlikely(!__pyx_tuple__203)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 229; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__203);
+  __Pyx_GIVEREF(__pyx_tuple__203);
+  __pyx_codeobj__204 = (PyObject*)__Pyx_PyCode_New(16, 0, 17, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__203, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 229, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__204)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 229; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__205 = PyTuple_Pack(14, ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__205)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 229; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__205);
+  __Pyx_GIVEREF(__pyx_tuple__205);
 
   /* "tools.py":251
  *         self.debug = debug
@@ -38505,10 +38563,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         stat = os.stat(spath)
  *         unkown = False
  */
-  __pyx_tuple__209 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_spath, __pyx_n_s_stat, __pyx_n_s_unkown); if (unlikely(!__pyx_tuple__209)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__209);
-  __Pyx_GIVEREF(__pyx_tuple__209);
-  __pyx_codeobj__210 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__209, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_check_ownership, 251, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__210)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__206 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_spath, __pyx_n_s_stat, __pyx_n_s_unkown); if (unlikely(!__pyx_tuple__206)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__206);
+  __Pyx_GIVEREF(__pyx_tuple__206);
+  __pyx_codeobj__207 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__206, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_check_ownership, 251, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__207)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":265
  *             message.sub_warning(_('Unknown owner of'), spath)
@@ -38517,10 +38575,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         ''' Looks for target match and then execute action for every target '''
  *         for target in database.local_all(basename=True):
  */
-  __pyx_tuple__211 = PyTuple_Pack(18, __pyx_n_s_self, __pyx_n_s_target, __pyx_n_s_target_footprint_lines, __pyx_n_s_target_footprint, __pyx_n_s_sfile, __pyx_n_s_sfull, __pyx_n_s_spath, __pyx_n_s_xfile, __pyx_n_s_regex, __pyx_n_s_match, __pyx_n_s_smime, __pyx_n_s_bang_regexp, __pyx_n_s_backups, __pyx_n_s_local, __pyx_n_s_footprint, __pyx_n_s_diff, __pyx_n_s_found_debug, __pyx_n_s_found_exe); if (unlikely(!__pyx_tuple__211)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__211);
-  __Pyx_GIVEREF(__pyx_tuple__211);
-  __pyx_codeobj__212 = (PyObject*)__Pyx_PyCode_New(1, 0, 18, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__211, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 265, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__212)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__208 = PyTuple_Pack(18, __pyx_n_s_self, __pyx_n_s_target, __pyx_n_s_target_footprint_lines, __pyx_n_s_target_footprint, __pyx_n_s_sfile, __pyx_n_s_sfull, __pyx_n_s_spath, __pyx_n_s_xfile, __pyx_n_s_regex, __pyx_n_s_match, __pyx_n_s_smime, __pyx_n_s_bang_regexp, __pyx_n_s_backups, __pyx_n_s_local, __pyx_n_s_footprint, __pyx_n_s_diff, __pyx_n_s_found_debug, __pyx_n_s_found_exe); if (unlikely(!__pyx_tuple__208)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__208);
+  __Pyx_GIVEREF(__pyx_tuple__208);
+  __pyx_codeobj__209 = (PyObject*)__Pyx_PyCode_New(1, 0, 18, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__208, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 265, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__209)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":424
  * class Sane(object):
@@ -38529,13 +38587,13 @@ static int __Pyx_InitCachedConstants(void) {
  *         maintainer=False, note=False, variables=False, triggers=False, \
  *         users=False, groups=False, signatures=False):
  */
-  __pyx_tuple__213 = PyTuple_Pack(13, __pyx_n_s_self, __pyx_n_s_targets, __pyx_n_s_enable, __pyx_n_s_disable, __pyx_n_s_null, __pyx_n_s_maintainer, __pyx_n_s_note, __pyx_n_s_variables, __pyx_n_s_triggers, __pyx_n_s_users, __pyx_n_s_groups, __pyx_n_s_signatures, __pyx_n_s_target); if (unlikely(!__pyx_tuple__213)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 424; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__213);
-  __Pyx_GIVEREF(__pyx_tuple__213);
-  __pyx_codeobj__214 = (PyObject*)__Pyx_PyCode_New(12, 0, 13, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__213, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 424, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__214)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 424; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_tuple__215 = PyTuple_Pack(10, ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__215)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 424; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__215);
-  __Pyx_GIVEREF(__pyx_tuple__215);
+  __pyx_tuple__210 = PyTuple_Pack(13, __pyx_n_s_self, __pyx_n_s_targets, __pyx_n_s_enable, __pyx_n_s_disable, __pyx_n_s_null, __pyx_n_s_maintainer, __pyx_n_s_note, __pyx_n_s_variables, __pyx_n_s_triggers, __pyx_n_s_users, __pyx_n_s_groups, __pyx_n_s_signatures, __pyx_n_s_target); if (unlikely(!__pyx_tuple__210)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 424; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__210);
+  __Pyx_GIVEREF(__pyx_tuple__210);
+  __pyx_codeobj__211 = (PyObject*)__Pyx_PyCode_New(12, 0, 13, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__210, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 424, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__211)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 424; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__212 = PyTuple_Pack(10, ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__212)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 424; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__212);
+  __Pyx_GIVEREF(__pyx_tuple__212);
 
   /* "tools.py":441
  *         self.signatures = signatures
@@ -38544,10 +38602,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         ''' Looks for target match and then execute action for every target '''
  *         for target in self.targets:
  */
-  __pyx_tuple__216 = PyTuple_Pack(17, __pyx_n_s_self, __pyx_n_s_target, __pyx_n_s_match, __pyx_n_s_srcbuild, __pyx_n_s_essential_regex, __pyx_n_s_string_regex, __pyx_n_s_array_regex, __pyx_n_s_regex, __pyx_n_s_sources, __pyx_n_s_pgpkeys, __pyx_n_s_src, __pyx_n_s_sig1, __pyx_n_s_sig2, __pyx_n_s_sig3, __pyx_n_s_sig4, __pyx_n_s_sig5, __pyx_n_s_sig); if (unlikely(!__pyx_tuple__216)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 441; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__216);
-  __Pyx_GIVEREF(__pyx_tuple__216);
-  __pyx_codeobj__217 = (PyObject*)__Pyx_PyCode_New(1, 0, 17, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__216, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 441, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__217)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 441; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__213 = PyTuple_Pack(17, __pyx_n_s_self, __pyx_n_s_target, __pyx_n_s_match, __pyx_n_s_srcbuild, __pyx_n_s_essential_regex, __pyx_n_s_string_regex, __pyx_n_s_array_regex, __pyx_n_s_regex, __pyx_n_s_sources, __pyx_n_s_pgpkeys, __pyx_n_s_src, __pyx_n_s_sig1, __pyx_n_s_sig2, __pyx_n_s_sig3, __pyx_n_s_sig4, __pyx_n_s_sig5, __pyx_n_s_sig); if (unlikely(!__pyx_tuple__213)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 441; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__213);
+  __Pyx_GIVEREF(__pyx_tuple__213);
+  __pyx_codeobj__214 = (PyObject*)__Pyx_PyCode_New(1, 0, 17, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__213, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 441, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__214)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 441; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":528
  * class Merge(object):
@@ -38556,10 +38614,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         self.targets = database.local_all(basename=True)
  * 
  */
-  __pyx_tuple__218 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__218)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 528; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__218);
-  __Pyx_GIVEREF(__pyx_tuple__218);
-  __pyx_codeobj__219 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__218, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 528, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__219)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 528; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__215 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__215)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 528; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__215);
+  __Pyx_GIVEREF(__pyx_tuple__215);
+  __pyx_codeobj__216 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__215, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 528, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__216)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 528; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":531
  *         self.targets = database.local_all(basename=True)
@@ -38568,10 +38626,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         message.sub_warning(_('Backup file detected'), backfile)
  *         editor = os.environ.get('EDITOR') or misc.whereis('vim')
  */
-  __pyx_tuple__220 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_origfile, __pyx_n_s_backfile, __pyx_n_s_editor, __pyx_n_s_action, __pyx_n_s_line); if (unlikely(!__pyx_tuple__220)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 531; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__220);
-  __Pyx_GIVEREF(__pyx_tuple__220);
-  __pyx_codeobj__221 = (PyObject*)__Pyx_PyCode_New(3, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__220, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_merge, 531, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__221)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 531; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__217 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_origfile, __pyx_n_s_backfile, __pyx_n_s_editor, __pyx_n_s_action, __pyx_n_s_line); if (unlikely(!__pyx_tuple__217)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 531; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__217);
+  __Pyx_GIVEREF(__pyx_tuple__217);
+  __pyx_codeobj__218 = (PyObject*)__Pyx_PyCode_New(3, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__217, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_merge, 531, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__218)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 531; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":564
  *             os.unlink(backfile)
@@ -38580,10 +38638,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         for target in self.targets:
  *             message.sub_info(_('Checking'), target)
  */
-  __pyx_tuple__222 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_target, __pyx_n_s_backup, __pyx_n_s_sfile, __pyx_n_s_origfile, __pyx_n_s_backfile); if (unlikely(!__pyx_tuple__222)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 564; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__222);
-  __Pyx_GIVEREF(__pyx_tuple__222);
-  __pyx_codeobj__223 = (PyObject*)__Pyx_PyCode_New(1, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__222, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 564, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__223)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 564; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__219 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_target, __pyx_n_s_backup, __pyx_n_s_sfile, __pyx_n_s_origfile, __pyx_n_s_backfile); if (unlikely(!__pyx_tuple__219)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 564; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__219);
+  __Pyx_GIVEREF(__pyx_tuple__219);
+  __pyx_codeobj__220 = (PyObject*)__Pyx_PyCode_New(1, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__219, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 564, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__220)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 564; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":581
  * class Edit(object):
@@ -38592,10 +38650,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         self.targets = []
  *         for target in targets:
  */
-  __pyx_tuple__224 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_targets, __pyx_n_s_target); if (unlikely(!__pyx_tuple__224)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 581; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__224);
-  __Pyx_GIVEREF(__pyx_tuple__224);
-  __pyx_codeobj__225 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__224, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 581, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__225)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 581; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__221 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_targets, __pyx_n_s_target); if (unlikely(!__pyx_tuple__221)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 581; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__221);
+  __Pyx_GIVEREF(__pyx_tuple__221);
+  __pyx_codeobj__222 = (PyObject*)__Pyx_PyCode_New(2, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__221, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 581, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__222)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 581; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":586
  *             self.targets.extend(database.remote_alias(target))
@@ -38604,10 +38662,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         editor = os.environ.get('EDITOR') or misc.whereis('vim')
  *         for target in self.targets:
  */
-  __pyx_tuple__226 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_editor, __pyx_n_s_target, __pyx_n_s_match); if (unlikely(!__pyx_tuple__226)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 586; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__226);
-  __Pyx_GIVEREF(__pyx_tuple__226);
-  __pyx_codeobj__227 = (PyObject*)__Pyx_PyCode_New(1, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__226, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 586, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__227)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 586; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__223 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_editor, __pyx_n_s_target, __pyx_n_s_match); if (unlikely(!__pyx_tuple__223)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 586; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__223);
+  __Pyx_GIVEREF(__pyx_tuple__223);
+  __pyx_codeobj__224 = (PyObject*)__Pyx_PyCode_New(1, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__223, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 586, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__224)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 586; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":596
  * class Which(object):
@@ -38616,13 +38674,13 @@ static int __Pyx_InitCachedConstants(void) {
  *         self.pattern = pattern
  *         self.cat = cat
  */
-  __pyx_tuple__228 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_pattern, __pyx_n_s_cat, __pyx_n_s_plain); if (unlikely(!__pyx_tuple__228)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 596; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__228);
-  __Pyx_GIVEREF(__pyx_tuple__228);
-  __pyx_codeobj__229 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__228, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 596, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__229)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 596; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_tuple__230 = PyTuple_Pack(2, ((PyObject *)Py_False), ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__230)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 596; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__230);
-  __Pyx_GIVEREF(__pyx_tuple__230);
+  __pyx_tuple__225 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_pattern, __pyx_n_s_cat, __pyx_n_s_plain); if (unlikely(!__pyx_tuple__225)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 596; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__225);
+  __Pyx_GIVEREF(__pyx_tuple__225);
+  __pyx_codeobj__226 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__225, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 596, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__226)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 596; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__227 = PyTuple_Pack(2, ((PyObject *)Py_False), ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__227)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 596; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__227);
+  __Pyx_GIVEREF(__pyx_tuple__227);
 
   /* "tools.py":601
  *         self.plain = plain
@@ -38631,10 +38689,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         for target in database.remote_all(basename=False):
  *             if re.search(self.pattern, target):
  */
-  __pyx_tuple__231 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_target); if (unlikely(!__pyx_tuple__231)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 601; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__231);
-  __Pyx_GIVEREF(__pyx_tuple__231);
-  __pyx_codeobj__232 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__231, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 601, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__232)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 601; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__228 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_target); if (unlikely(!__pyx_tuple__228)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 601; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__228);
+  __Pyx_GIVEREF(__pyx_tuple__228);
+  __pyx_codeobj__229 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__228, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 601, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__229)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 601; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":614
  * class Pack(object):
@@ -38643,10 +38701,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         self.targets = []
  *         for target in targets:
  */
-  __pyx_tuple__233 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_targets, __pyx_n_s_directory, __pyx_n_s_target); if (unlikely(!__pyx_tuple__233)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 614; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__233);
-  __Pyx_GIVEREF(__pyx_tuple__233);
-  __pyx_codeobj__234 = (PyObject*)__Pyx_PyCode_New(3, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__233, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 614, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__234)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 614; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__230 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_targets, __pyx_n_s_directory, __pyx_n_s_target); if (unlikely(!__pyx_tuple__230)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 614; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__230);
+  __Pyx_GIVEREF(__pyx_tuple__230);
+  __pyx_codeobj__231 = (PyObject*)__Pyx_PyCode_New(3, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__230, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 614, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__231)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 614; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":620
  *         self.directory = directory
@@ -38655,10 +38713,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         for target in self.targets:
  *             if database.local_search(target):
  */
-  __pyx_tuple__235 = PyTuple_Pack(8, __pyx_n_s_self, __pyx_n_s_target, __pyx_n_s_target_version, __pyx_n_s_target_packfile, __pyx_n_s_target_depends, __pyx_n_s_content, __pyx_n_s_sfile, __pyx_n_s_depends); if (unlikely(!__pyx_tuple__235)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 620; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__235);
-  __Pyx_GIVEREF(__pyx_tuple__235);
-  __pyx_codeobj__236 = (PyObject*)__Pyx_PyCode_New(1, 0, 8, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__235, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 620, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__236)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 620; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__232 = PyTuple_Pack(8, __pyx_n_s_self, __pyx_n_s_target, __pyx_n_s_target_version, __pyx_n_s_target_packfile, __pyx_n_s_target_depends, __pyx_n_s_content, __pyx_n_s_sfile, __pyx_n_s_depends); if (unlikely(!__pyx_tuple__232)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 620; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__232);
+  __Pyx_GIVEREF(__pyx_tuple__232);
+  __pyx_codeobj__233 = (PyObject*)__Pyx_PyCode_New(1, 0, 8, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__232, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 620, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__233)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 620; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":646
  * class Pkg(object):
@@ -38667,10 +38725,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         self.targets = []
  *         for target in targets:
  */
-  __pyx_tuple__237 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_targets, __pyx_n_s_directory, __pyx_n_s_target); if (unlikely(!__pyx_tuple__237)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 646; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__237);
-  __Pyx_GIVEREF(__pyx_tuple__237);
-  __pyx_codeobj__238 = (PyObject*)__Pyx_PyCode_New(3, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__237, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 646, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__238)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 646; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__234 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_targets, __pyx_n_s_directory, __pyx_n_s_target); if (unlikely(!__pyx_tuple__234)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 646; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__234);
+  __Pyx_GIVEREF(__pyx_tuple__234);
+  __pyx_codeobj__235 = (PyObject*)__Pyx_PyCode_New(3, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__234, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 646, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__235)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 646; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":662
  *         )
@@ -38679,10 +38737,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         ''' Probe main URLs '''
  *         for d in self.PKG_DIRS:
  */
-  __pyx_tuple__239 = PyTuple_Pack(10, __pyx_n_s_self, __pyx_n_s_pkgname, __pyx_n_s_d, __pyx_n_s_url, __pyx_n_s_request, __pyx_n_s_line, __pyx_n_s_m, __pyx_n_s_href_2, __pyx_n_s_name, __pyx_n_s_e); if (unlikely(!__pyx_tuple__239)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 662; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__239);
-  __Pyx_GIVEREF(__pyx_tuple__239);
-  __pyx_codeobj__240 = (PyObject*)__Pyx_PyCode_New(2, 0, 10, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__239, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_get_links, 662, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__240)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 662; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__236 = PyTuple_Pack(10, __pyx_n_s_self, __pyx_n_s_pkgname, __pyx_n_s_d, __pyx_n_s_url, __pyx_n_s_request, __pyx_n_s_line, __pyx_n_s_m, __pyx_n_s_href_2, __pyx_n_s_name, __pyx_n_s_e); if (unlikely(!__pyx_tuple__236)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 662; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__236);
+  __Pyx_GIVEREF(__pyx_tuple__236);
+  __pyx_codeobj__237 = (PyObject*)__Pyx_PyCode_New(2, 0, 10, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__236, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_get_links, 662, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__237)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 662; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":687
  *                     request.close()
@@ -38691,10 +38749,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         not_found = []
  *         for target in self.targets:
  */
-  __pyx_tuple__241 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_not_found, __pyx_n_s_target, __pyx_n_s_urls, __pyx_n_s_pkgdir, __pyx_n_s_href_2, __pyx_n_s_name); if (unlikely(!__pyx_tuple__241)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 687; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__241);
-  __Pyx_GIVEREF(__pyx_tuple__241);
-  __pyx_codeobj__242 = (PyObject*)__Pyx_PyCode_New(1, 0, 7, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__241, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 687, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__242)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 687; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__238 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_not_found, __pyx_n_s_target, __pyx_n_s_urls, __pyx_n_s_pkgdir, __pyx_n_s_href_2, __pyx_n_s_name); if (unlikely(!__pyx_tuple__238)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 687; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__238);
+  __Pyx_GIVEREF(__pyx_tuple__238);
+  __pyx_codeobj__239 = (PyObject*)__Pyx_PyCode_New(1, 0, 7, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__238, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 687, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__239)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 687; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":709
  * class Serve(object):
@@ -38703,10 +38761,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         self.port = port
  *         self.address = address
  */
-  __pyx_tuple__243 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_port, __pyx_n_s_address); if (unlikely(!__pyx_tuple__243)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 709; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__243);
-  __Pyx_GIVEREF(__pyx_tuple__243);
-  __pyx_codeobj__244 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__243, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 709, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__244)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 709; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__240 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_port, __pyx_n_s_address); if (unlikely(!__pyx_tuple__240)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 709; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__240);
+  __Pyx_GIVEREF(__pyx_tuple__240);
+  __pyx_codeobj__241 = (PyObject*)__Pyx_PyCode_New(3, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__240, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 709, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__241)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 709; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":713
  *         self.address = address
@@ -38715,10 +38773,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         httpd = None
  *         try:
  */
-  __pyx_tuple__245 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_httpd, __pyx_n_s_handler); if (unlikely(!__pyx_tuple__245)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 713; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__245);
-  __Pyx_GIVEREF(__pyx_tuple__245);
-  __pyx_codeobj__246 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__245, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 713, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__246)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 713; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__242 = PyTuple_Pack(3, __pyx_n_s_self, __pyx_n_s_httpd, __pyx_n_s_handler); if (unlikely(!__pyx_tuple__242)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 713; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__242);
+  __Pyx_GIVEREF(__pyx_tuple__242);
+  __pyx_codeobj__243 = (PyObject*)__Pyx_PyCode_New(1, 0, 3, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__242, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 713, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__243)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 713; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":728
  * class Disowned(object):
@@ -38727,13 +38785,13 @@ static int __Pyx_InitCachedConstants(void) {
  *         self.directory = directory
  *         self.cross = cross
  */
-  __pyx_tuple__247 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_directory, __pyx_n_s_cross, __pyx_n_s_plain); if (unlikely(!__pyx_tuple__247)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 728; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__247);
-  __Pyx_GIVEREF(__pyx_tuple__247);
-  __pyx_codeobj__248 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__247, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 728, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__248)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 728; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_tuple__249 = PyTuple_Pack(3, ((PyObject*)__pyx_kp_s__77), ((PyObject *)Py_False), ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__249)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 728; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__249);
-  __Pyx_GIVEREF(__pyx_tuple__249);
+  __pyx_tuple__244 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_directory, __pyx_n_s_cross, __pyx_n_s_plain); if (unlikely(!__pyx_tuple__244)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 728; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__244);
+  __Pyx_GIVEREF(__pyx_tuple__244);
+  __pyx_codeobj__245 = (PyObject*)__Pyx_PyCode_New(4, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__244, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 728, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__245)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 728; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__246 = PyTuple_Pack(3, ((PyObject*)__pyx_kp_s__77), ((PyObject *)Py_False), ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__246)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 728; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__246);
+  __Pyx_GIVEREF(__pyx_tuple__246);
 
   /* "tools.py":733
  *         self.plain = plain
@@ -38742,10 +38800,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         if not self.plain:
  *             message.sub_info(_('Caching host files, this may take a while'))
  */
-  __pyx_tuple__250 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_lhostfiles, __pyx_n_s_ltargetsfiles, __pyx_n_s_target, __pyx_n_s_sfile); if (unlikely(!__pyx_tuple__250)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 733; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__250);
-  __Pyx_GIVEREF(__pyx_tuple__250);
-  __pyx_codeobj__251 = (PyObject*)__Pyx_PyCode_New(1, 0, 5, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__250, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 733, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__251)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 733; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__247 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_lhostfiles, __pyx_n_s_ltargetsfiles, __pyx_n_s_target, __pyx_n_s_sfile); if (unlikely(!__pyx_tuple__247)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 733; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__247);
+  __Pyx_GIVEREF(__pyx_tuple__247);
+  __pyx_codeobj__248 = (PyObject*)__Pyx_PyCode_New(1, 0, 5, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__247, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 733, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__248)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 733; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":752
  * class Upload(object):
@@ -38754,13 +38812,13 @@ static int __Pyx_InitCachedConstants(void) {
  *         insecure=False):
  *         self.targets = []
  */
-  __pyx_tuple__252 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_targets, __pyx_n_s_host, __pyx_n_s_user, __pyx_n_s_directory, __pyx_n_s_insecure, __pyx_n_s_target); if (unlikely(!__pyx_tuple__252)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 752; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__252);
-  __Pyx_GIVEREF(__pyx_tuple__252);
-  __pyx_codeobj__253 = (PyObject*)__Pyx_PyCode_New(6, 0, 7, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__252, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 752, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__253)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 752; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_tuple__254 = PyTuple_Pack(4, ((PyObject *)Py_None), ((PyObject *)Py_None), ((PyObject*)__pyx_kp_s__77), ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__254)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 752; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__254);
-  __Pyx_GIVEREF(__pyx_tuple__254);
+  __pyx_tuple__249 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_targets, __pyx_n_s_host, __pyx_n_s_user, __pyx_n_s_directory, __pyx_n_s_insecure, __pyx_n_s_target); if (unlikely(!__pyx_tuple__249)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 752; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__249);
+  __Pyx_GIVEREF(__pyx_tuple__249);
+  __pyx_codeobj__250 = (PyObject*)__Pyx_PyCode_New(6, 0, 7, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__249, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 752, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__250)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 752; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__251 = PyTuple_Pack(4, ((PyObject *)Py_None), ((PyObject *)Py_None), ((PyObject*)__pyx_kp_s__77), ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__251)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 752; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__251);
+  __Pyx_GIVEREF(__pyx_tuple__251);
 
   /* "tools.py":762
  *         self.insecure = insecure
@@ -38769,10 +38827,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         if not self.host:
  *             message.sub_critical(_('Host is empty'))
  */
-  __pyx_tuple__255 = PyTuple_Pack(14, __pyx_n_s_self, __pyx_n_s_ftp, __pyx_n_s_arch, __pyx_n_s_p, __pyx_n_s_ssl, __pyx_n_s_ctx, __pyx_n_s_target, __pyx_n_s_version, __pyx_n_s_tarball, __pyx_n_s_depends, __pyx_n_s_signature, __pyx_n_s_files, __pyx_n_s_sfile, __pyx_n_s_f); if (unlikely(!__pyx_tuple__255)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 762; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__255);
-  __Pyx_GIVEREF(__pyx_tuple__255);
-  __pyx_codeobj__256 = (PyObject*)__Pyx_PyCode_New(1, 0, 14, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__255, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 762, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__256)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 762; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__252 = PyTuple_Pack(14, __pyx_n_s_self, __pyx_n_s_ftp, __pyx_n_s_arch, __pyx_n_s_p, __pyx_n_s_ssl, __pyx_n_s_ctx, __pyx_n_s_target, __pyx_n_s_version, __pyx_n_s_tarball, __pyx_n_s_depends, __pyx_n_s_signature, __pyx_n_s_files, __pyx_n_s_sfile, __pyx_n_s_f); if (unlikely(!__pyx_tuple__252)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 762; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__252);
+  __Pyx_GIVEREF(__pyx_tuple__252);
+  __pyx_codeobj__253 = (PyObject*)__Pyx_PyCode_New(1, 0, 14, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__252, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 762, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__253)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 762; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":814
  * class Online(object):
@@ -38781,10 +38839,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         self.url = url
  * 
  */
-  __pyx_tuple__257 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_url); if (unlikely(!__pyx_tuple__257)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 814; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__257);
-  __Pyx_GIVEREF(__pyx_tuple__257);
-  __pyx_codeobj__258 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__257, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 814, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__258)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 814; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__254 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_url); if (unlikely(!__pyx_tuple__254)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 814; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__254);
+  __Pyx_GIVEREF(__pyx_tuple__254);
+  __pyx_codeobj__255 = (PyObject*)__Pyx_PyCode_New(2, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__254, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 814, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__255)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 814; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":817
  *         self.url = url
@@ -38793,10 +38851,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         if not misc.url_ping(self.url):
  *             sys.exit(1)
  */
-  __pyx_tuple__259 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__259)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 817; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__259);
-  __Pyx_GIVEREF(__pyx_tuple__259);
-  __pyx_codeobj__260 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__259, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 817, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__260)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 817; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__256 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__256)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 817; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__256);
+  __Pyx_GIVEREF(__pyx_tuple__256);
+  __pyx_codeobj__257 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__256, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 817, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__257)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 817; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":824
  * class Upgrade(object):
@@ -38805,10 +38863,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         # not much to do here
  *         pass
  */
-  __pyx_tuple__261 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__261)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 824; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__261);
-  __Pyx_GIVEREF(__pyx_tuple__261);
-  __pyx_codeobj__262 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__261, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 824, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__262)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 824; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__258 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__258)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 824; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__258);
+  __Pyx_GIVEREF(__pyx_tuple__258);
+  __pyx_codeobj__259 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__258, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 824, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__259)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 824; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":828
  *         pass
@@ -38817,10 +38875,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         ''' Ensure that SRCBUILD is present in the local target directory '''
  *         srcbuild = '%s/SRCBUILD' % target
  */
-  __pyx_tuple__263 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_target, __pyx_n_s_srcbuild, __pyx_n_s_remote); if (unlikely(!__pyx_tuple__263)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__263);
-  __Pyx_GIVEREF(__pyx_tuple__263);
-  __pyx_codeobj__264 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__263, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_upgrade_1_7_x_srcbuild, 828, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__264)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__260 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_target, __pyx_n_s_srcbuild, __pyx_n_s_remote); if (unlikely(!__pyx_tuple__260)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__260);
+  __Pyx_GIVEREF(__pyx_tuple__260);
+  __pyx_codeobj__261 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__260, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_upgrade_1_7_x_srcbuild, 828, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__261)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":841
  *         shutil.copy2('%s/SRCBUILD' % remote, srcbuild)
@@ -38829,10 +38887,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         ''' Build local target cache from legacy metadata and footprint '''
  *         metadata = '%s/metadata' % target
  */
-  __pyx_tuple__265 = PyTuple_Pack(9, __pyx_n_s_self, __pyx_n_s_target, __pyx_n_s_metadata, __pyx_n_s_newmeta, __pyx_n_s_footprint, __pyx_n_s_data, __pyx_n_s_line, __pyx_n_s_key, __pyx_n_s_value); if (unlikely(!__pyx_tuple__265)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 841; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__265);
-  __Pyx_GIVEREF(__pyx_tuple__265);
-  __pyx_codeobj__266 = (PyObject*)__Pyx_PyCode_New(2, 0, 9, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__265, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_upgrade_1_7_x_metadata, 841, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__266)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 841; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__262 = PyTuple_Pack(9, __pyx_n_s_self, __pyx_n_s_target, __pyx_n_s_metadata, __pyx_n_s_newmeta, __pyx_n_s_footprint, __pyx_n_s_data, __pyx_n_s_line, __pyx_n_s_key, __pyx_n_s_value); if (unlikely(!__pyx_tuple__262)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 841; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__262);
+  __Pyx_GIVEREF(__pyx_tuple__262);
+  __pyx_codeobj__263 = (PyObject*)__Pyx_PyCode_New(2, 0, 9, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__262, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_upgrade_1_7_x_metadata, 841, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__263)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 841; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":869
  *         misc.json_write('%s/metadata.json' % target, data)
@@ -38841,10 +38899,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         ''' Ensure local targets have the backup data in place '''
  *         metadata = '%s/metadata.json' % target
  */
-  __pyx_tuple__267 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_target, __pyx_n_s_metadata, __pyx_n_s_data, __pyx_n_s_backup, __pyx_n_s_dbackup, __pyx_n_s_sfile); if (unlikely(!__pyx_tuple__267)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 869; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__267);
-  __Pyx_GIVEREF(__pyx_tuple__267);
-  __pyx_codeobj__268 = (PyObject*)__Pyx_PyCode_New(2, 0, 7, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__267, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_upgrade_1_7_x_backup, 869, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__268)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 869; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__264 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_target, __pyx_n_s_metadata, __pyx_n_s_data, __pyx_n_s_backup, __pyx_n_s_dbackup, __pyx_n_s_sfile); if (unlikely(!__pyx_tuple__264)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 869; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__264);
+  __Pyx_GIVEREF(__pyx_tuple__264);
+  __pyx_codeobj__265 = (PyObject*)__Pyx_PyCode_New(2, 0, 7, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__264, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_upgrade_1_7_x_backup, 869, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__265)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 869; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":891
  *         misc.json_write(metadata, data)
@@ -38853,10 +38911,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         ''' Ensure local targets have the optdepends data in place '''
  *         metadata = '%s/metadata.json' % target
  */
-  __pyx_tuple__269 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_target, __pyx_n_s_metadata, __pyx_n_s_data); if (unlikely(!__pyx_tuple__269)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 891; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__269);
-  __Pyx_GIVEREF(__pyx_tuple__269);
-  __pyx_codeobj__270 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__269, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_upgrade_1_8_x_optdepends, 891, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__270)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 891; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__266 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_target, __pyx_n_s_metadata, __pyx_n_s_data); if (unlikely(!__pyx_tuple__266)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 891; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__266);
+  __Pyx_GIVEREF(__pyx_tuple__266);
+  __pyx_codeobj__267 = (PyObject*)__Pyx_PyCode_New(2, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__266, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_upgrade_1_8_x_optdepends, 891, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__267)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 891; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":904
  *         misc.json_write(metadata, data)
@@ -38865,10 +38923,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         if not os.path.isdir(database.LOCAL_DIR):
  *             message.sub_warning(_('No local targets directory'), database.LOCAL_DIR)
  */
-  __pyx_tuple__271 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_target); if (unlikely(!__pyx_tuple__271)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 904; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__271);
-  __Pyx_GIVEREF(__pyx_tuple__271);
-  __pyx_codeobj__272 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__271, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 904, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__272)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 904; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__268 = PyTuple_Pack(2, __pyx_n_s_self, __pyx_n_s_target); if (unlikely(!__pyx_tuple__268)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 904; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__268);
+  __Pyx_GIVEREF(__pyx_tuple__268);
+  __pyx_codeobj__269 = (PyObject*)__Pyx_PyCode_New(1, 0, 2, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__268, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 904, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__269)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 904; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":922
  * class Digest(object):
@@ -38877,13 +38935,13 @@ static int __Pyx_InitCachedConstants(void) {
  *         do_verify=False, do_backup=False):
  *         self.targets = []
  */
-  __pyx_tuple__273 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_targets, __pyx_n_s_directory, __pyx_n_s_do_create, __pyx_n_s_do_verify, __pyx_n_s_do_backup, __pyx_n_s_target); if (unlikely(!__pyx_tuple__273)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 922; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__273);
-  __Pyx_GIVEREF(__pyx_tuple__273);
-  __pyx_codeobj__274 = (PyObject*)__Pyx_PyCode_New(6, 0, 7, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__273, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 922, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__274)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 922; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_tuple__275 = PyTuple_Pack(4, ((PyObject*)__pyx_kp_s__77), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__275)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 922; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__275);
-  __Pyx_GIVEREF(__pyx_tuple__275);
+  __pyx_tuple__270 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_targets, __pyx_n_s_directory, __pyx_n_s_do_create, __pyx_n_s_do_verify, __pyx_n_s_do_backup, __pyx_n_s_target); if (unlikely(!__pyx_tuple__270)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 922; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__270);
+  __Pyx_GIVEREF(__pyx_tuple__270);
+  __pyx_codeobj__271 = (PyObject*)__Pyx_PyCode_New(6, 0, 7, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__270, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 922, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__271)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 922; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__272 = PyTuple_Pack(4, ((PyObject*)__pyx_kp_s__77), ((PyObject *)Py_False), ((PyObject *)Py_False), ((PyObject *)Py_False)); if (unlikely(!__pyx_tuple__272)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 922; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__272);
+  __Pyx_GIVEREF(__pyx_tuple__272);
 
   /* "tools.py":933
  * 
@@ -38892,10 +38950,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         ''' Create a digest of target(s) files '''
  *         digest = {}
  */
-  __pyx_tuple__276 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_digest, __pyx_n_s_target, __pyx_n_s_target_backup, __pyx_n_s_target_footprint, __pyx_n_s_sfile, __pyx_n_s_srelative); if (unlikely(!__pyx_tuple__276)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 933; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__276);
-  __Pyx_GIVEREF(__pyx_tuple__276);
-  __pyx_codeobj__277 = (PyObject*)__Pyx_PyCode_New(1, 0, 7, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__276, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_create, 933, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__277)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 933; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__273 = PyTuple_Pack(7, __pyx_n_s_self, __pyx_n_s_digest, __pyx_n_s_target, __pyx_n_s_target_backup, __pyx_n_s_target_footprint, __pyx_n_s_sfile, __pyx_n_s_srelative); if (unlikely(!__pyx_tuple__273)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 933; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__273);
+  __Pyx_GIVEREF(__pyx_tuple__273);
+  __pyx_codeobj__274 = (PyObject*)__Pyx_PyCode_New(1, 0, 7, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__273, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_create, 933, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__274)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 933; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":956
  *         misc.json_write('%s/digest.json' % self.directory, digest)
@@ -38904,10 +38962,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         ''' Verify target(s) files from digets '''
  *         digest = misc.json_read('%s/digest.json' % self.directory)
  */
-  __pyx_tuple__278 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_digest, __pyx_n_s_fail, __pyx_n_s_target, __pyx_n_s_sfile, __pyx_n_s_sfull); if (unlikely(!__pyx_tuple__278)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 956; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__278);
-  __Pyx_GIVEREF(__pyx_tuple__278);
-  __pyx_codeobj__279 = (PyObject*)__Pyx_PyCode_New(1, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__278, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_verify, 956, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__279)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 956; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__275 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_digest, __pyx_n_s_fail, __pyx_n_s_target, __pyx_n_s_sfile, __pyx_n_s_sfull); if (unlikely(!__pyx_tuple__275)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 956; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__275);
+  __Pyx_GIVEREF(__pyx_tuple__275);
+  __pyx_codeobj__276 = (PyObject*)__Pyx_PyCode_New(1, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__275, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_verify, 956, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__276)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 956; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":979
  *             sys.exit(2)
@@ -38916,10 +38974,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         if self.do_create:
  *             self.create()
  */
-  __pyx_tuple__280 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__280)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 979; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__280);
-  __Pyx_GIVEREF(__pyx_tuple__280);
-  __pyx_codeobj__281 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__280, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 979, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__281)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 979; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__277 = PyTuple_Pack(1, __pyx_n_s_self); if (unlikely(!__pyx_tuple__277)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 979; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__277);
+  __Pyx_GIVEREF(__pyx_tuple__277);
+  __pyx_codeobj__278 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__277, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 979, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__278)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 979; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":989
  * class Portable(object):
@@ -38928,10 +38986,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         self.targets = []
  *         for target in targets:
  */
-  __pyx_tuple__282 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_targets, __pyx_n_s_directory, __pyx_n_s_target); if (unlikely(!__pyx_tuple__282)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 989; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__282);
-  __Pyx_GIVEREF(__pyx_tuple__282);
-  __pyx_codeobj__283 = (PyObject*)__Pyx_PyCode_New(3, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__282, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 989, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__283)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 989; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__279 = PyTuple_Pack(4, __pyx_n_s_self, __pyx_n_s_targets, __pyx_n_s_directory, __pyx_n_s_target); if (unlikely(!__pyx_tuple__279)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 989; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__279);
+  __Pyx_GIVEREF(__pyx_tuple__279);
+  __pyx_codeobj__280 = (PyObject*)__Pyx_PyCode_New(3, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__279, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 989, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__280)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 989; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":995
  *         self.directory = directory
@@ -38940,10 +38998,10 @@ static int __Pyx_InitCachedConstants(void) {
  *         for target in self.targets:
  *             if database.local_search(target):
  */
-  __pyx_tuple__284 = PyTuple_Pack(13, __pyx_n_s_self, __pyx_n_s_target, __pyx_n_s_target_version, __pyx_n_s_target_packfile, __pyx_n_s_content, __pyx_n_s_sfile, __pyx_n_s_dep, __pyx_n_s_depfile, __pyx_n_s_sfull, __pyx_n_s_library_override, __pyx_n_s_python_override, __pyx_n_s_parent, __pyx_n_s_runner); if (unlikely(!__pyx_tuple__284)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 995; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__284);
-  __Pyx_GIVEREF(__pyx_tuple__284);
-  __pyx_codeobj__285 = (PyObject*)__Pyx_PyCode_New(1, 0, 13, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__284, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 995, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__285)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 995; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__281 = PyTuple_Pack(13, __pyx_n_s_self, __pyx_n_s_target, __pyx_n_s_target_version, __pyx_n_s_target_packfile, __pyx_n_s_content, __pyx_n_s_sfile, __pyx_n_s_dep, __pyx_n_s_depfile, __pyx_n_s_sfull, __pyx_n_s_library_override, __pyx_n_s_python_override, __pyx_n_s_parent, __pyx_n_s_runner); if (unlikely(!__pyx_tuple__281)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 995; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__281);
+  __Pyx_GIVEREF(__pyx_tuple__281);
+  __pyx_codeobj__282 = (PyObject*)__Pyx_PyCode_New(1, 0, 13, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__281, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_main_2, 995, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__282)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 995; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":1058
  *         class OverrideRootDir(argparse.Action):
@@ -38952,13 +39010,13 @@ static int __Pyx_InitCachedConstants(void) {
  *                 full_path = os.path.abspath(values) + '/'
  *                 libspm.ROOT_DIR = full_path
  */
-  __pyx_tuple__286 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_parser, __pyx_n_s_namespace, __pyx_n_s_values, __pyx_n_s_option_string, __pyx_n_s_full_path); if (unlikely(!__pyx_tuple__286)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1058; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__286);
-  __Pyx_GIVEREF(__pyx_tuple__286);
-  __pyx_codeobj__287 = (PyObject*)__Pyx_PyCode_New(5, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__286, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_call, 1058, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__287)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1058; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_tuple__288 = PyTuple_Pack(1, ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__288)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1058; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__288);
-  __Pyx_GIVEREF(__pyx_tuple__288);
+  __pyx_tuple__283 = PyTuple_Pack(6, __pyx_n_s_self, __pyx_n_s_parser, __pyx_n_s_namespace, __pyx_n_s_values, __pyx_n_s_option_string, __pyx_n_s_full_path); if (unlikely(!__pyx_tuple__283)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1058; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__283);
+  __Pyx_GIVEREF(__pyx_tuple__283);
+  __pyx_codeobj__284 = (PyObject*)__Pyx_PyCode_New(5, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__283, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_call, 1058, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__284)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1058; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__285 = PyTuple_Pack(1, ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__285)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1058; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__285);
+  __Pyx_GIVEREF(__pyx_tuple__285);
 
   /* "tools.py":1070
  *         class OverrideDebug(argparse.Action):
@@ -38967,13 +39025,13 @@ static int __Pyx_InitCachedConstants(void) {
  *                 message.DEBUG = True
  *                 setattr(namespace, self.dest, values)
  */
-  __pyx_tuple__289 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_parser, __pyx_n_s_namespace, __pyx_n_s_values, __pyx_n_s_option_string); if (unlikely(!__pyx_tuple__289)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1070; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__289);
-  __Pyx_GIVEREF(__pyx_tuple__289);
-  __pyx_codeobj__290 = (PyObject*)__Pyx_PyCode_New(5, 0, 5, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__289, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_call, 1070, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__290)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1070; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_tuple__291 = PyTuple_Pack(1, ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__291)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1070; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__291);
-  __Pyx_GIVEREF(__pyx_tuple__291);
+  __pyx_tuple__286 = PyTuple_Pack(5, __pyx_n_s_self, __pyx_n_s_parser, __pyx_n_s_namespace, __pyx_n_s_values, __pyx_n_s_option_string); if (unlikely(!__pyx_tuple__286)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1070; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__286);
+  __Pyx_GIVEREF(__pyx_tuple__286);
+  __pyx_codeobj__287 = (PyObject*)__Pyx_PyCode_New(5, 0, 5, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__286, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_call, 1070, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__287)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1070; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__288 = PyTuple_Pack(1, ((PyObject *)Py_None)); if (unlikely(!__pyx_tuple__288)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1070; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__288);
+  __Pyx_GIVEREF(__pyx_tuple__288);
 
   /* "tools.py":1076
  *         parser = argparse.ArgumentParser(prog='spm-tools', \
@@ -38982,9 +39040,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         subparsers = parser.add_subparsers(dest='mode')
  * 
  */
-  __pyx_tuple__292 = PyTuple_Pack(1, __pyx_kp_s_NOTE_Some_features_are_available); if (unlikely(!__pyx_tuple__292)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1076; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__292);
-  __Pyx_GIVEREF(__pyx_tuple__292);
+  __pyx_tuple__289 = PyTuple_Pack(1, __pyx_kp_s_NOTE_Some_features_are_available); if (unlikely(!__pyx_tuple__289)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1076; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__289);
+  __Pyx_GIVEREF(__pyx_tuple__289);
 
   /* "tools.py":1080
  * 
@@ -38993,9 +39051,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             dist_parser.add_argument('-s', '--sources', action='store_true', \
  *                 help=_('Include all sources in the archive'))
  */
-  __pyx_tuple__293 = PyTuple_Pack(1, __pyx_n_s_dist); if (unlikely(!__pyx_tuple__293)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1080; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__293);
-  __Pyx_GIVEREF(__pyx_tuple__293);
+  __pyx_tuple__290 = PyTuple_Pack(1, __pyx_n_s_dist); if (unlikely(!__pyx_tuple__290)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1080; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__290);
+  __Pyx_GIVEREF(__pyx_tuple__290);
 
   /* "tools.py":1081
  *         if EUID == 0:
@@ -39004,9 +39062,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 help=_('Include all sources in the archive'))
  *             dist_parser.add_argument('-c', '--clean', action='store_true', \
  */
-  __pyx_tuple__294 = PyTuple_Pack(2, __pyx_kp_s_s_3, __pyx_kp_s_sources_2); if (unlikely(!__pyx_tuple__294)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1081; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__294);
-  __Pyx_GIVEREF(__pyx_tuple__294);
+  __pyx_tuple__291 = PyTuple_Pack(2, __pyx_kp_s_s_3, __pyx_kp_s_sources_2); if (unlikely(!__pyx_tuple__291)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1081; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__291);
+  __Pyx_GIVEREF(__pyx_tuple__291);
 
   /* "tools.py":1082
  *             dist_parser = subparsers.add_parser('dist')
@@ -39015,9 +39073,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             dist_parser.add_argument('-c', '--clean', action='store_true', \
  *                 help=_('Clean all sources after creating archive'))
  */
-  __pyx_tuple__295 = PyTuple_Pack(1, __pyx_kp_s_Include_all_sources_in_the_archi); if (unlikely(!__pyx_tuple__295)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1082; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__295);
-  __Pyx_GIVEREF(__pyx_tuple__295);
+  __pyx_tuple__292 = PyTuple_Pack(1, __pyx_kp_s_Include_all_sources_in_the_archi); if (unlikely(!__pyx_tuple__292)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1082; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__292);
+  __Pyx_GIVEREF(__pyx_tuple__292);
 
   /* "tools.py":1083
  *             dist_parser.add_argument('-s', '--sources', action='store_true', \
@@ -39026,9 +39084,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 help=_('Clean all sources after creating archive'))
  *             dist_parser.add_argument('-d', '--directory', type=str, \
  */
-  __pyx_tuple__296 = PyTuple_Pack(2, __pyx_kp_s_c, __pyx_kp_s_clean); if (unlikely(!__pyx_tuple__296)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1083; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__296);
-  __Pyx_GIVEREF(__pyx_tuple__296);
+  __pyx_tuple__293 = PyTuple_Pack(2, __pyx_kp_s_c, __pyx_kp_s_clean); if (unlikely(!__pyx_tuple__293)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1083; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__293);
+  __Pyx_GIVEREF(__pyx_tuple__293);
 
   /* "tools.py":1084
  *                 help=_('Include all sources in the archive'))
@@ -39037,9 +39095,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             dist_parser.add_argument('-d', '--directory', type=str, \
  *                 default=misc.dir_current(), help=_('Set output directory'))
  */
-  __pyx_tuple__297 = PyTuple_Pack(1, __pyx_kp_s_Clean_all_sources_after_creating); if (unlikely(!__pyx_tuple__297)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1084; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__297);
-  __Pyx_GIVEREF(__pyx_tuple__297);
+  __pyx_tuple__294 = PyTuple_Pack(1, __pyx_kp_s_Clean_all_sources_after_creating); if (unlikely(!__pyx_tuple__294)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1084; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__294);
+  __Pyx_GIVEREF(__pyx_tuple__294);
 
   /* "tools.py":1085
  *             dist_parser.add_argument('-c', '--clean', action='store_true', \
@@ -39048,9 +39106,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 default=misc.dir_current(), help=_('Set output directory'))
  *             dist_parser.add_argument('TARGETS', nargs='+', type=str, \
  */
-  __pyx_tuple__298 = PyTuple_Pack(2, __pyx_kp_s_d_2, __pyx_kp_s_directory_2); if (unlikely(!__pyx_tuple__298)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1085; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__298);
-  __Pyx_GIVEREF(__pyx_tuple__298);
+  __pyx_tuple__295 = PyTuple_Pack(2, __pyx_kp_s_d_2, __pyx_kp_s_directory_2); if (unlikely(!__pyx_tuple__295)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1085; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__295);
+  __Pyx_GIVEREF(__pyx_tuple__295);
 
   /* "tools.py":1086
  *                 help=_('Clean all sources after creating archive'))
@@ -39059,9 +39117,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             dist_parser.add_argument('TARGETS', nargs='+', type=str, \
  *                 help=_('Targets to apply actions on'))
  */
-  __pyx_tuple__299 = PyTuple_Pack(1, __pyx_kp_s_Set_output_directory); if (unlikely(!__pyx_tuple__299)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1086; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__299);
-  __Pyx_GIVEREF(__pyx_tuple__299);
+  __pyx_tuple__296 = PyTuple_Pack(1, __pyx_kp_s_Set_output_directory); if (unlikely(!__pyx_tuple__296)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1086; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__296);
+  __Pyx_GIVEREF(__pyx_tuple__296);
 
   /* "tools.py":1087
  *             dist_parser.add_argument('-d', '--directory', type=str, \
@@ -39070,9 +39128,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 help=_('Targets to apply actions on'))
  * 
  */
-  __pyx_tuple__300 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__300)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1087; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__300);
-  __Pyx_GIVEREF(__pyx_tuple__300);
+  __pyx_tuple__297 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__297)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1087; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__297);
+  __Pyx_GIVEREF(__pyx_tuple__297);
 
   /* "tools.py":1088
  *                 default=misc.dir_current(), help=_('Set output directory'))
@@ -39081,9 +39139,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *         check_parser = subparsers.add_parser('check')
  */
-  __pyx_tuple__302 = PyTuple_Pack(1, __pyx_kp_s_Targets_to_apply_actions_on); if (unlikely(!__pyx_tuple__302)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1088; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__302);
-  __Pyx_GIVEREF(__pyx_tuple__302);
+  __pyx_tuple__299 = PyTuple_Pack(1, __pyx_kp_s_Targets_to_apply_actions_on); if (unlikely(!__pyx_tuple__299)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1088; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__299);
+  __Pyx_GIVEREF(__pyx_tuple__299);
 
   /* "tools.py":1090
  *                 help=_('Targets to apply actions on'))
@@ -39092,9 +39150,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         check_parser.add_argument('-f', '--fast', action='store_true', \
  *             help=_('Skip some files/links'))
  */
-  __pyx_tuple__303 = PyTuple_Pack(1, __pyx_n_s_check); if (unlikely(!__pyx_tuple__303)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1090; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__303);
-  __Pyx_GIVEREF(__pyx_tuple__303);
+  __pyx_tuple__300 = PyTuple_Pack(1, __pyx_n_s_check); if (unlikely(!__pyx_tuple__300)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1090; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__300);
+  __Pyx_GIVEREF(__pyx_tuple__300);
 
   /* "tools.py":1091
  * 
@@ -39103,9 +39161,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Skip some files/links'))
  *         check_parser.add_argument('-a', '--adjust', action='store_true', \
  */
-  __pyx_tuple__304 = PyTuple_Pack(2, __pyx_kp_s_f_2, __pyx_kp_s_fast); if (unlikely(!__pyx_tuple__304)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1091; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__304);
-  __Pyx_GIVEREF(__pyx_tuple__304);
+  __pyx_tuple__301 = PyTuple_Pack(2, __pyx_kp_s_f_2, __pyx_kp_s_fast); if (unlikely(!__pyx_tuple__301)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1091; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__301);
+  __Pyx_GIVEREF(__pyx_tuple__301);
 
   /* "tools.py":1092
  *         check_parser = subparsers.add_parser('check')
@@ -39114,9 +39172,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         check_parser.add_argument('-a', '--adjust', action='store_true', \
  *             help=_('Adjust target depends'))
  */
-  __pyx_tuple__305 = PyTuple_Pack(1, __pyx_kp_s_Skip_some_files_links); if (unlikely(!__pyx_tuple__305)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1092; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__305);
-  __Pyx_GIVEREF(__pyx_tuple__305);
+  __pyx_tuple__302 = PyTuple_Pack(1, __pyx_kp_s_Skip_some_files_links); if (unlikely(!__pyx_tuple__302)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1092; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__302);
+  __Pyx_GIVEREF(__pyx_tuple__302);
 
   /* "tools.py":1093
  *         check_parser.add_argument('-f', '--fast', action='store_true', \
@@ -39125,9 +39183,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Adjust target depends'))
  *         check_parser.add_argument('-D', '--depends', action='store_true', \
  */
-  __pyx_tuple__306 = PyTuple_Pack(2, __pyx_kp_s_a_2, __pyx_kp_s_adjust); if (unlikely(!__pyx_tuple__306)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1093; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__306);
-  __Pyx_GIVEREF(__pyx_tuple__306);
+  __pyx_tuple__303 = PyTuple_Pack(2, __pyx_kp_s_a_2, __pyx_kp_s_adjust); if (unlikely(!__pyx_tuple__303)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1093; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__303);
+  __Pyx_GIVEREF(__pyx_tuple__303);
 
   /* "tools.py":1094
  *             help=_('Skip some files/links'))
@@ -39136,9 +39194,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         check_parser.add_argument('-D', '--depends', action='store_true', \
  *             help=_('Check dependencies of target'))
  */
-  __pyx_tuple__307 = PyTuple_Pack(1, __pyx_kp_s_Adjust_target_depends); if (unlikely(!__pyx_tuple__307)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1094; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__307);
-  __Pyx_GIVEREF(__pyx_tuple__307);
+  __pyx_tuple__304 = PyTuple_Pack(1, __pyx_kp_s_Adjust_target_depends); if (unlikely(!__pyx_tuple__304)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1094; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__304);
+  __Pyx_GIVEREF(__pyx_tuple__304);
 
   /* "tools.py":1095
  *         check_parser.add_argument('-a', '--adjust', action='store_true', \
@@ -39147,9 +39205,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check dependencies of target'))
  *         check_parser.add_argument('-R', '--reverse', action='store_true', \
  */
-  __pyx_tuple__308 = PyTuple_Pack(2, __pyx_kp_s_D, __pyx_kp_s_depends_3); if (unlikely(!__pyx_tuple__308)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1095; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__308);
-  __Pyx_GIVEREF(__pyx_tuple__308);
+  __pyx_tuple__305 = PyTuple_Pack(2, __pyx_kp_s_D, __pyx_kp_s_depends_3); if (unlikely(!__pyx_tuple__305)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1095; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__305);
+  __Pyx_GIVEREF(__pyx_tuple__305);
 
   /* "tools.py":1096
  *             help=_('Adjust target depends'))
@@ -39158,9 +39216,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         check_parser.add_argument('-R', '--reverse', action='store_true', \
  *             help=_('Check reverse dependencies of target'))
  */
-  __pyx_tuple__309 = PyTuple_Pack(1, __pyx_kp_s_Check_dependencies_of_target); if (unlikely(!__pyx_tuple__309)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1096; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__309);
-  __Pyx_GIVEREF(__pyx_tuple__309);
+  __pyx_tuple__306 = PyTuple_Pack(1, __pyx_kp_s_Check_dependencies_of_target); if (unlikely(!__pyx_tuple__306)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1096; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__306);
+  __Pyx_GIVEREF(__pyx_tuple__306);
 
   /* "tools.py":1097
  *         check_parser.add_argument('-D', '--depends', action='store_true', \
@@ -39169,9 +39227,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check reverse dependencies of target'))
  *         check_parser.add_argument('TARGETS', nargs='+', type=str, \
  */
-  __pyx_tuple__310 = PyTuple_Pack(2, __pyx_kp_s_R, __pyx_kp_s_reverse); if (unlikely(!__pyx_tuple__310)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1097; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__310);
-  __Pyx_GIVEREF(__pyx_tuple__310);
+  __pyx_tuple__307 = PyTuple_Pack(2, __pyx_kp_s_R, __pyx_kp_s_reverse); if (unlikely(!__pyx_tuple__307)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1097; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__307);
+  __Pyx_GIVEREF(__pyx_tuple__307);
 
   /* "tools.py":1098
  *             help=_('Check dependencies of target'))
@@ -39180,9 +39238,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         check_parser.add_argument('TARGETS', nargs='+', type=str, \
  *             help=_('Targets to apply actions on'))
  */
-  __pyx_tuple__311 = PyTuple_Pack(1, __pyx_kp_s_Check_reverse_dependencies_of_ta); if (unlikely(!__pyx_tuple__311)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1098; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__311);
-  __Pyx_GIVEREF(__pyx_tuple__311);
+  __pyx_tuple__308 = PyTuple_Pack(1, __pyx_kp_s_Check_reverse_dependencies_of_ta); if (unlikely(!__pyx_tuple__308)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1098; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__308);
+  __Pyx_GIVEREF(__pyx_tuple__308);
 
   /* "tools.py":1099
  *         check_parser.add_argument('-R', '--reverse', action='store_true', \
@@ -39191,9 +39249,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Targets to apply actions on'))
  * 
  */
-  __pyx_tuple__312 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__312)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1099; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__312);
-  __Pyx_GIVEREF(__pyx_tuple__312);
+  __pyx_tuple__309 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__309)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1099; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__309);
+  __Pyx_GIVEREF(__pyx_tuple__309);
 
   /* "tools.py":1100
  *             help=_('Check reverse dependencies of target'))
@@ -39202,9 +39260,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *         clean_parser = subparsers.add_parser('clean')
  */
-  __pyx_tuple__313 = PyTuple_Pack(1, __pyx_kp_s_Targets_to_apply_actions_on); if (unlikely(!__pyx_tuple__313)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__313);
-  __Pyx_GIVEREF(__pyx_tuple__313);
+  __pyx_tuple__310 = PyTuple_Pack(1, __pyx_kp_s_Targets_to_apply_actions_on); if (unlikely(!__pyx_tuple__310)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1100; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__310);
+  __Pyx_GIVEREF(__pyx_tuple__310);
 
   /* "tools.py":1102
  *             help=_('Targets to apply actions on'))
@@ -39213,9 +39271,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *         lint_parser = subparsers.add_parser('lint')
  */
-  __pyx_tuple__314 = PyTuple_Pack(1, __pyx_n_s_clean_2); if (unlikely(!__pyx_tuple__314)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1102; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__314);
-  __Pyx_GIVEREF(__pyx_tuple__314);
+  __pyx_tuple__311 = PyTuple_Pack(1, __pyx_n_s_clean_2); if (unlikely(!__pyx_tuple__311)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1102; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__311);
+  __Pyx_GIVEREF(__pyx_tuple__311);
 
   /* "tools.py":1104
  *         clean_parser = subparsers.add_parser('clean')
@@ -39224,9 +39282,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         lint_parser.add_argument('-m', '--man', action='store_true', \
  *             help=_('Check for missing manual page(s)'))
  */
-  __pyx_tuple__315 = PyTuple_Pack(1, __pyx_n_s_lint); if (unlikely(!__pyx_tuple__315)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1104; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__315);
-  __Pyx_GIVEREF(__pyx_tuple__315);
+  __pyx_tuple__312 = PyTuple_Pack(1, __pyx_n_s_lint); if (unlikely(!__pyx_tuple__312)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1104; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__312);
+  __Pyx_GIVEREF(__pyx_tuple__312);
 
   /* "tools.py":1105
  * 
@@ -39235,9 +39293,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check for missing manual page(s)'))
  *         lint_parser.add_argument('-u', '--udev', action='store_true', \
  */
-  __pyx_tuple__316 = PyTuple_Pack(2, __pyx_kp_s_m_2, __pyx_kp_s_man_2); if (unlikely(!__pyx_tuple__316)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1105; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__316);
-  __Pyx_GIVEREF(__pyx_tuple__316);
+  __pyx_tuple__313 = PyTuple_Pack(2, __pyx_kp_s_m_2, __pyx_kp_s_man_2); if (unlikely(!__pyx_tuple__313)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1105; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__313);
+  __Pyx_GIVEREF(__pyx_tuple__313);
 
   /* "tools.py":1106
  *         lint_parser = subparsers.add_parser('lint')
@@ -39246,9 +39304,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         lint_parser.add_argument('-u', '--udev', action='store_true', \
  *             help=_('Check for cross-filesystem udev rule(s)'))
  */
-  __pyx_tuple__317 = PyTuple_Pack(1, __pyx_kp_s_Check_for_missing_manual_page_s); if (unlikely(!__pyx_tuple__317)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1106; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__317);
-  __Pyx_GIVEREF(__pyx_tuple__317);
+  __pyx_tuple__314 = PyTuple_Pack(1, __pyx_kp_s_Check_for_missing_manual_page_s); if (unlikely(!__pyx_tuple__314)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1106; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__314);
+  __Pyx_GIVEREF(__pyx_tuple__314);
 
   /* "tools.py":1107
  *         lint_parser.add_argument('-m', '--man', action='store_true', \
@@ -39257,9 +39315,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check for cross-filesystem udev rule(s)'))
  *         lint_parser.add_argument('-s', '--symlink', action='store_true', \
  */
-  __pyx_tuple__318 = PyTuple_Pack(2, __pyx_kp_s_u, __pyx_kp_s_udev_2); if (unlikely(!__pyx_tuple__318)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__318);
-  __Pyx_GIVEREF(__pyx_tuple__318);
+  __pyx_tuple__315 = PyTuple_Pack(2, __pyx_kp_s_u, __pyx_kp_s_udev_2); if (unlikely(!__pyx_tuple__315)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1107; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__315);
+  __Pyx_GIVEREF(__pyx_tuple__315);
 
   /* "tools.py":1108
  *             help=_('Check for missing manual page(s)'))
@@ -39268,9 +39326,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         lint_parser.add_argument('-s', '--symlink', action='store_true', \
  *             help=_('Check for cross-filesystem symlink(s)'))
  */
-  __pyx_tuple__319 = PyTuple_Pack(1, __pyx_kp_s_Check_for_cross_filesystem_udev); if (unlikely(!__pyx_tuple__319)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1108; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__319);
-  __Pyx_GIVEREF(__pyx_tuple__319);
+  __pyx_tuple__316 = PyTuple_Pack(1, __pyx_kp_s_Check_for_cross_filesystem_udev); if (unlikely(!__pyx_tuple__316)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1108; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__316);
+  __Pyx_GIVEREF(__pyx_tuple__316);
 
   /* "tools.py":1109
  *         lint_parser.add_argument('-u', '--udev', action='store_true', \
@@ -39279,9 +39337,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check for cross-filesystem symlink(s)'))
  *         lint_parser.add_argument('-d', '--doc', action='store_true', \
  */
-  __pyx_tuple__320 = PyTuple_Pack(2, __pyx_kp_s_s_3, __pyx_kp_s_symlink_2); if (unlikely(!__pyx_tuple__320)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1109; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__320);
-  __Pyx_GIVEREF(__pyx_tuple__320);
+  __pyx_tuple__317 = PyTuple_Pack(2, __pyx_kp_s_s_3, __pyx_kp_s_symlink_2); if (unlikely(!__pyx_tuple__317)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1109; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__317);
+  __Pyx_GIVEREF(__pyx_tuple__317);
 
   /* "tools.py":1110
  *             help=_('Check for cross-filesystem udev rule(s)'))
@@ -39290,9 +39348,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         lint_parser.add_argument('-d', '--doc', action='store_true', \
  *             help=_('Check for documentation'))
  */
-  __pyx_tuple__321 = PyTuple_Pack(1, __pyx_kp_s_Check_for_cross_filesystem_symli); if (unlikely(!__pyx_tuple__321)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__321);
-  __Pyx_GIVEREF(__pyx_tuple__321);
+  __pyx_tuple__318 = PyTuple_Pack(1, __pyx_kp_s_Check_for_cross_filesystem_symli); if (unlikely(!__pyx_tuple__318)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1110; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__318);
+  __Pyx_GIVEREF(__pyx_tuple__318);
 
   /* "tools.py":1111
  *         lint_parser.add_argument('-s', '--symlink', action='store_true', \
@@ -39301,9 +39359,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check for documentation'))
  *         lint_parser.add_argument('-M', '--module', action='store_true', \
  */
-  __pyx_tuple__322 = PyTuple_Pack(2, __pyx_kp_s_d_2, __pyx_kp_s_doc_3); if (unlikely(!__pyx_tuple__322)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__322);
-  __Pyx_GIVEREF(__pyx_tuple__322);
+  __pyx_tuple__319 = PyTuple_Pack(2, __pyx_kp_s_d_2, __pyx_kp_s_doc_3); if (unlikely(!__pyx_tuple__319)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1111; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__319);
+  __Pyx_GIVEREF(__pyx_tuple__319);
 
   /* "tools.py":1112
  *             help=_('Check for cross-filesystem symlink(s)'))
@@ -39312,9 +39370,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         lint_parser.add_argument('-M', '--module', action='store_true', \
  *             help=_('Check for module(s) in non-standard directory'))
  */
-  __pyx_tuple__323 = PyTuple_Pack(1, __pyx_kp_s_Check_for_documentation); if (unlikely(!__pyx_tuple__323)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__323);
-  __Pyx_GIVEREF(__pyx_tuple__323);
+  __pyx_tuple__320 = PyTuple_Pack(1, __pyx_kp_s_Check_for_documentation); if (unlikely(!__pyx_tuple__320)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1112; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__320);
+  __Pyx_GIVEREF(__pyx_tuple__320);
 
   /* "tools.py":1113
  *         lint_parser.add_argument('-d', '--doc', action='store_true', \
@@ -39323,9 +39381,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check for module(s) in non-standard directory'))
  *         lint_parser.add_argument('-f', '--footprint', action='store_true', \
  */
-  __pyx_tuple__324 = PyTuple_Pack(2, __pyx_kp_s_M, __pyx_kp_s_module_3); if (unlikely(!__pyx_tuple__324)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1113; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__324);
-  __Pyx_GIVEREF(__pyx_tuple__324);
+  __pyx_tuple__321 = PyTuple_Pack(2, __pyx_kp_s_M, __pyx_kp_s_module_3); if (unlikely(!__pyx_tuple__321)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1113; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__321);
+  __Pyx_GIVEREF(__pyx_tuple__321);
 
   /* "tools.py":1114
  *             help=_('Check for documentation'))
@@ -39334,9 +39392,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         lint_parser.add_argument('-f', '--footprint', action='store_true', \
  *             help=_('Check for footprint consistency'))
  */
-  __pyx_tuple__325 = PyTuple_Pack(1, __pyx_kp_s_Check_for_module_s_in_non_standa); if (unlikely(!__pyx_tuple__325)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__325);
-  __Pyx_GIVEREF(__pyx_tuple__325);
+  __pyx_tuple__322 = PyTuple_Pack(1, __pyx_kp_s_Check_for_module_s_in_non_standa); if (unlikely(!__pyx_tuple__322)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__322);
+  __Pyx_GIVEREF(__pyx_tuple__322);
 
   /* "tools.py":1115
  *         lint_parser.add_argument('-M', '--module', action='store_true', \
@@ -39345,9 +39403,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check for footprint consistency'))
  *         lint_parser.add_argument('-b', '--builddir', action='store_true', \
  */
-  __pyx_tuple__326 = PyTuple_Pack(2, __pyx_kp_s_f_2, __pyx_kp_s_footprint_2); if (unlikely(!__pyx_tuple__326)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1115; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__326);
-  __Pyx_GIVEREF(__pyx_tuple__326);
+  __pyx_tuple__323 = PyTuple_Pack(2, __pyx_kp_s_f_2, __pyx_kp_s_footprint_2); if (unlikely(!__pyx_tuple__323)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1115; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__323);
+  __Pyx_GIVEREF(__pyx_tuple__323);
 
   /* "tools.py":1116
  *             help=_('Check for module(s) in non-standard directory'))
@@ -39356,9 +39414,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         lint_parser.add_argument('-b', '--builddir', action='store_true', \
  *             help=_('Check for build directory trace(s)'))
  */
-  __pyx_tuple__327 = PyTuple_Pack(1, __pyx_kp_s_Check_for_footprint_consistency); if (unlikely(!__pyx_tuple__327)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__327);
-  __Pyx_GIVEREF(__pyx_tuple__327);
+  __pyx_tuple__324 = PyTuple_Pack(1, __pyx_kp_s_Check_for_footprint_consistency); if (unlikely(!__pyx_tuple__324)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1116; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__324);
+  __Pyx_GIVEREF(__pyx_tuple__324);
 
   /* "tools.py":1117
  *         lint_parser.add_argument('-f', '--footprint', action='store_true', \
@@ -39367,9 +39425,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check for build directory trace(s)'))
  *         lint_parser.add_argument('-o', '--ownership', action='store_true', \
  */
-  __pyx_tuple__328 = PyTuple_Pack(2, __pyx_kp_s_b, __pyx_kp_s_builddir_2); if (unlikely(!__pyx_tuple__328)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1117; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__328);
-  __Pyx_GIVEREF(__pyx_tuple__328);
+  __pyx_tuple__325 = PyTuple_Pack(2, __pyx_kp_s_b, __pyx_kp_s_builddir_2); if (unlikely(!__pyx_tuple__325)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1117; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__325);
+  __Pyx_GIVEREF(__pyx_tuple__325);
 
   /* "tools.py":1118
  *             help=_('Check for footprint consistency'))
@@ -39378,9 +39436,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         lint_parser.add_argument('-o', '--ownership', action='store_true', \
  *             help=_('Check ownership'))
  */
-  __pyx_tuple__329 = PyTuple_Pack(1, __pyx_kp_s_Check_for_build_directory_trace); if (unlikely(!__pyx_tuple__329)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1118; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__329);
-  __Pyx_GIVEREF(__pyx_tuple__329);
+  __pyx_tuple__326 = PyTuple_Pack(1, __pyx_kp_s_Check_for_build_directory_trace); if (unlikely(!__pyx_tuple__326)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1118; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__326);
+  __Pyx_GIVEREF(__pyx_tuple__326);
 
   /* "tools.py":1119
  *         lint_parser.add_argument('-b', '--builddir', action='store_true', \
@@ -39389,9 +39447,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check ownership'))
  *         lint_parser.add_argument('-e', '--executable', action='store_true', \
  */
-  __pyx_tuple__330 = PyTuple_Pack(2, __pyx_kp_s_o, __pyx_kp_s_ownership_2); if (unlikely(!__pyx_tuple__330)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1119; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__330);
-  __Pyx_GIVEREF(__pyx_tuple__330);
+  __pyx_tuple__327 = PyTuple_Pack(2, __pyx_kp_s_o, __pyx_kp_s_ownership_2); if (unlikely(!__pyx_tuple__327)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1119; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__327);
+  __Pyx_GIVEREF(__pyx_tuple__327);
 
   /* "tools.py":1120
  *             help=_('Check for build directory trace(s)'))
@@ -39400,9 +39458,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         lint_parser.add_argument('-e', '--executable', action='store_true', \
  *             help=_('Check for non-executable(s) in PATH'))
  */
-  __pyx_tuple__331 = PyTuple_Pack(1, __pyx_kp_s_Check_ownership); if (unlikely(!__pyx_tuple__331)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1120; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__331);
-  __Pyx_GIVEREF(__pyx_tuple__331);
+  __pyx_tuple__328 = PyTuple_Pack(1, __pyx_kp_s_Check_ownership); if (unlikely(!__pyx_tuple__328)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1120; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__328);
+  __Pyx_GIVEREF(__pyx_tuple__328);
 
   /* "tools.py":1121
  *         lint_parser.add_argument('-o', '--ownership', action='store_true', \
@@ -39411,9 +39469,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check for non-executable(s) in PATH'))
  *         lint_parser.add_argument('-p', '--path', action='store_true', \
  */
-  __pyx_tuple__332 = PyTuple_Pack(2, __pyx_kp_s_e_2, __pyx_kp_s_executable_2); if (unlikely(!__pyx_tuple__332)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1121; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__332);
-  __Pyx_GIVEREF(__pyx_tuple__332);
+  __pyx_tuple__329 = PyTuple_Pack(2, __pyx_kp_s_e_2, __pyx_kp_s_executable_2); if (unlikely(!__pyx_tuple__329)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1121; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__329);
+  __Pyx_GIVEREF(__pyx_tuple__329);
 
   /* "tools.py":1122
  *             help=_('Check ownership'))
@@ -39422,9 +39480,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         lint_parser.add_argument('-p', '--path', action='store_true', \
  *             help=_('Check for overlapping executable(s) in PATH'))
  */
-  __pyx_tuple__333 = PyTuple_Pack(1, __pyx_kp_s_Check_for_non_executable_s_in_PA); if (unlikely(!__pyx_tuple__333)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1122; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__333);
-  __Pyx_GIVEREF(__pyx_tuple__333);
+  __pyx_tuple__330 = PyTuple_Pack(1, __pyx_kp_s_Check_for_non_executable_s_in_PA); if (unlikely(!__pyx_tuple__330)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1122; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__330);
+  __Pyx_GIVEREF(__pyx_tuple__330);
 
   /* "tools.py":1123
  *         lint_parser.add_argument('-e', '--executable', action='store_true', \
@@ -39433,9 +39491,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check for overlapping executable(s) in PATH'))
  *         lint_parser.add_argument('-n', '--shebang', action='store_true', \
  */
-  __pyx_tuple__334 = PyTuple_Pack(2, __pyx_kp_s_p_2, __pyx_kp_s_path_2); if (unlikely(!__pyx_tuple__334)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1123; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__334);
-  __Pyx_GIVEREF(__pyx_tuple__334);
+  __pyx_tuple__331 = PyTuple_Pack(2, __pyx_kp_s_p_2, __pyx_kp_s_path_2); if (unlikely(!__pyx_tuple__331)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1123; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__331);
+  __Pyx_GIVEREF(__pyx_tuple__331);
 
   /* "tools.py":1124
  *             help=_('Check for non-executable(s) in PATH'))
@@ -39444,9 +39502,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         lint_parser.add_argument('-n', '--shebang', action='store_true', \
  *             help=_('Check for incorrect shebang of scripts'))
  */
-  __pyx_tuple__335 = PyTuple_Pack(1, __pyx_kp_s_Check_for_overlapping_executable); if (unlikely(!__pyx_tuple__335)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1124; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__335);
-  __Pyx_GIVEREF(__pyx_tuple__335);
+  __pyx_tuple__332 = PyTuple_Pack(1, __pyx_kp_s_Check_for_overlapping_executable); if (unlikely(!__pyx_tuple__332)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1124; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__332);
+  __Pyx_GIVEREF(__pyx_tuple__332);
 
   /* "tools.py":1125
  *         lint_parser.add_argument('-p', '--path', action='store_true', \
@@ -39455,9 +39513,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check for incorrect shebang of scripts'))
  *         lint_parser.add_argument('-k', '--backup', action='store_true', \
  */
-  __pyx_tuple__336 = PyTuple_Pack(2, __pyx_kp_s_n, __pyx_kp_s_shebang_2); if (unlikely(!__pyx_tuple__336)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1125; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__336);
-  __Pyx_GIVEREF(__pyx_tuple__336);
+  __pyx_tuple__333 = PyTuple_Pack(2, __pyx_kp_s_n, __pyx_kp_s_shebang_2); if (unlikely(!__pyx_tuple__333)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1125; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__333);
+  __Pyx_GIVEREF(__pyx_tuple__333);
 
   /* "tools.py":1126
  *             help=_('Check for overlapping executable(s) in PATH'))
@@ -39466,9 +39524,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         lint_parser.add_argument('-k', '--backup', action='store_true', \
  *             help=_('Check for incorrect or incomplete backup of files'))
  */
-  __pyx_tuple__337 = PyTuple_Pack(1, __pyx_kp_s_Check_for_incorrect_shebang_of_s); if (unlikely(!__pyx_tuple__337)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1126; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__337);
-  __Pyx_GIVEREF(__pyx_tuple__337);
+  __pyx_tuple__334 = PyTuple_Pack(1, __pyx_kp_s_Check_for_incorrect_shebang_of_s); if (unlikely(!__pyx_tuple__334)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1126; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__334);
+  __Pyx_GIVEREF(__pyx_tuple__334);
 
   /* "tools.py":1127
  *         lint_parser.add_argument('-n', '--shebang', action='store_true', \
@@ -39477,9 +39535,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check for incorrect or incomplete backup of files'))
  *         lint_parser.add_argument('-c', '--conflicts', action='store_true', \
  */
-  __pyx_tuple__338 = PyTuple_Pack(2, __pyx_kp_s_k, __pyx_kp_s_backup_2); if (unlikely(!__pyx_tuple__338)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__338);
-  __Pyx_GIVEREF(__pyx_tuple__338);
+  __pyx_tuple__335 = PyTuple_Pack(2, __pyx_kp_s_k, __pyx_kp_s_backup_2); if (unlikely(!__pyx_tuple__335)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1127; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__335);
+  __Pyx_GIVEREF(__pyx_tuple__335);
 
   /* "tools.py":1128
  *             help=_('Check for incorrect shebang of scripts'))
@@ -39488,9 +39546,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         lint_parser.add_argument('-c', '--conflicts', action='store_true', \
  *             help=_('Check for conflicts between targets'))
  */
-  __pyx_tuple__339 = PyTuple_Pack(1, __pyx_kp_s_Check_for_incorrect_or_incomplet); if (unlikely(!__pyx_tuple__339)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1128; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__339);
-  __Pyx_GIVEREF(__pyx_tuple__339);
+  __pyx_tuple__336 = PyTuple_Pack(1, __pyx_kp_s_Check_for_incorrect_or_incomplet); if (unlikely(!__pyx_tuple__336)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1128; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__336);
+  __Pyx_GIVEREF(__pyx_tuple__336);
 
   /* "tools.py":1129
  *         lint_parser.add_argument('-k', '--backup', action='store_true', \
@@ -39499,9 +39557,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check for conflicts between targets'))
  *         lint_parser.add_argument('-D', '--debug', action='store_true', \
  */
-  __pyx_tuple__340 = PyTuple_Pack(2, __pyx_kp_s_c, __pyx_kp_s_conflicts_2); if (unlikely(!__pyx_tuple__340)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1129; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__340);
-  __Pyx_GIVEREF(__pyx_tuple__340);
+  __pyx_tuple__337 = PyTuple_Pack(2, __pyx_kp_s_c, __pyx_kp_s_conflicts_2); if (unlikely(!__pyx_tuple__337)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1129; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__337);
+  __Pyx_GIVEREF(__pyx_tuple__337);
 
   /* "tools.py":1130
  *             help=_('Check for incorrect or incomplete backup of files'))
@@ -39510,9 +39568,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         lint_parser.add_argument('-D', '--debug', action='store_true', \
  *             help=_('Check for missing debug symbols'))
  */
-  __pyx_tuple__341 = PyTuple_Pack(1, __pyx_kp_s_Check_for_conflicts_between_targ); if (unlikely(!__pyx_tuple__341)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__341);
-  __Pyx_GIVEREF(__pyx_tuple__341);
+  __pyx_tuple__338 = PyTuple_Pack(1, __pyx_kp_s_Check_for_conflicts_between_targ); if (unlikely(!__pyx_tuple__338)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1130; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__338);
+  __Pyx_GIVEREF(__pyx_tuple__338);
 
   /* "tools.py":1131
  *         lint_parser.add_argument('-c', '--conflicts', action='store_true', \
@@ -39521,9 +39579,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check for missing debug symbols'))
  *         lint_parser.add_argument('-a', '--all', action='store_true', \
  */
-  __pyx_tuple__342 = PyTuple_Pack(2, __pyx_kp_s_D, __pyx_kp_s_debug_2); if (unlikely(!__pyx_tuple__342)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1131; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__342);
-  __Pyx_GIVEREF(__pyx_tuple__342);
+  __pyx_tuple__339 = PyTuple_Pack(2, __pyx_kp_s_D, __pyx_kp_s_debug_2); if (unlikely(!__pyx_tuple__339)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1131; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__339);
+  __Pyx_GIVEREF(__pyx_tuple__339);
 
   /* "tools.py":1132
  *             help=_('Check for conflicts between targets'))
@@ -39532,9 +39590,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         lint_parser.add_argument('-a', '--all', action='store_true', \
  *             help=_('Perform all checks'))
  */
-  __pyx_tuple__343 = PyTuple_Pack(1, __pyx_kp_s_Check_for_missing_debug_symbols); if (unlikely(!__pyx_tuple__343)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1132; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__343);
-  __Pyx_GIVEREF(__pyx_tuple__343);
+  __pyx_tuple__340 = PyTuple_Pack(1, __pyx_kp_s_Check_for_missing_debug_symbols); if (unlikely(!__pyx_tuple__340)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1132; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__340);
+  __Pyx_GIVEREF(__pyx_tuple__340);
 
   /* "tools.py":1133
  *         lint_parser.add_argument('-D', '--debug', action='store_true', \
@@ -39543,9 +39601,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Perform all checks'))
  *         lint_parser.add_argument('TARGETS', nargs='+', type=str, \
  */
-  __pyx_tuple__344 = PyTuple_Pack(2, __pyx_kp_s_a_2, __pyx_kp_s_all); if (unlikely(!__pyx_tuple__344)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1133; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__344);
-  __Pyx_GIVEREF(__pyx_tuple__344);
+  __pyx_tuple__341 = PyTuple_Pack(2, __pyx_kp_s_a_2, __pyx_kp_s_all); if (unlikely(!__pyx_tuple__341)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1133; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__341);
+  __Pyx_GIVEREF(__pyx_tuple__341);
 
   /* "tools.py":1134
  *             help=_('Check for missing debug symbols'))
@@ -39554,9 +39612,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         lint_parser.add_argument('TARGETS', nargs='+', type=str, \
  *             help=_('Targets to apply actions on'))
  */
-  __pyx_tuple__345 = PyTuple_Pack(1, __pyx_kp_s_Perform_all_checks); if (unlikely(!__pyx_tuple__345)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1134; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__345);
-  __Pyx_GIVEREF(__pyx_tuple__345);
+  __pyx_tuple__342 = PyTuple_Pack(1, __pyx_kp_s_Perform_all_checks); if (unlikely(!__pyx_tuple__342)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1134; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__342);
+  __Pyx_GIVEREF(__pyx_tuple__342);
 
   /* "tools.py":1135
  *         lint_parser.add_argument('-a', '--all', action='store_true', \
@@ -39565,9 +39623,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Targets to apply actions on'))
  * 
  */
-  __pyx_tuple__346 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__346)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1135; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__346);
-  __Pyx_GIVEREF(__pyx_tuple__346);
+  __pyx_tuple__343 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__343)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1135; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__343);
+  __Pyx_GIVEREF(__pyx_tuple__343);
 
   /* "tools.py":1136
  *             help=_('Perform all checks'))
@@ -39576,9 +39634,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *         sane_parser = subparsers.add_parser('sane')
  */
-  __pyx_tuple__347 = PyTuple_Pack(1, __pyx_kp_s_Targets_to_apply_actions_on); if (unlikely(!__pyx_tuple__347)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__347);
-  __Pyx_GIVEREF(__pyx_tuple__347);
+  __pyx_tuple__344 = PyTuple_Pack(1, __pyx_kp_s_Targets_to_apply_actions_on); if (unlikely(!__pyx_tuple__344)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1136; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__344);
+  __Pyx_GIVEREF(__pyx_tuple__344);
 
   /* "tools.py":1138
  *             help=_('Targets to apply actions on'))
@@ -39587,9 +39645,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         sane_parser.add_argument('-e', '--enable', action='store_true', \
  *             help=_('Check for explicit --enable argument(s)'))
  */
-  __pyx_tuple__348 = PyTuple_Pack(1, __pyx_n_s_sane); if (unlikely(!__pyx_tuple__348)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1138; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__348);
-  __Pyx_GIVEREF(__pyx_tuple__348);
+  __pyx_tuple__345 = PyTuple_Pack(1, __pyx_n_s_sane); if (unlikely(!__pyx_tuple__345)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1138; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__345);
+  __Pyx_GIVEREF(__pyx_tuple__345);
 
   /* "tools.py":1139
  * 
@@ -39598,9 +39656,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check for explicit --enable argument(s)'))
  *         sane_parser.add_argument('-d', '--disable', action='store_true', \
  */
-  __pyx_tuple__349 = PyTuple_Pack(2, __pyx_kp_s_e_2, __pyx_kp_s_enable_3); if (unlikely(!__pyx_tuple__349)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1139; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__349);
-  __Pyx_GIVEREF(__pyx_tuple__349);
+  __pyx_tuple__346 = PyTuple_Pack(2, __pyx_kp_s_e_2, __pyx_kp_s_enable_3); if (unlikely(!__pyx_tuple__346)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1139; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__346);
+  __Pyx_GIVEREF(__pyx_tuple__346);
 
   /* "tools.py":1140
  *         sane_parser = subparsers.add_parser('sane')
@@ -39609,9 +39667,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         sane_parser.add_argument('-d', '--disable', action='store_true', \
  *             help=_('Check for explicit --disable argument(s)'))
  */
-  __pyx_tuple__350 = PyTuple_Pack(1, __pyx_kp_s_Check_for_explicit_enable_argume); if (unlikely(!__pyx_tuple__350)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1140; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__350);
-  __Pyx_GIVEREF(__pyx_tuple__350);
+  __pyx_tuple__347 = PyTuple_Pack(1, __pyx_kp_s_Check_for_explicit_enable_argume); if (unlikely(!__pyx_tuple__347)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1140; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__347);
+  __Pyx_GIVEREF(__pyx_tuple__347);
 
   /* "tools.py":1141
  *         sane_parser.add_argument('-e', '--enable', action='store_true', \
@@ -39620,9 +39678,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check for explicit --disable argument(s)'))
  *         sane_parser.add_argument('-n', '--null', action='store_true', \
  */
-  __pyx_tuple__351 = PyTuple_Pack(2, __pyx_kp_s_d_2, __pyx_kp_s_disable_3); if (unlikely(!__pyx_tuple__351)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__351);
-  __Pyx_GIVEREF(__pyx_tuple__351);
+  __pyx_tuple__348 = PyTuple_Pack(2, __pyx_kp_s_d_2, __pyx_kp_s_disable_3); if (unlikely(!__pyx_tuple__348)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1141; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__348);
+  __Pyx_GIVEREF(__pyx_tuple__348);
 
   /* "tools.py":1142
  *             help=_('Check for explicit --enable argument(s)'))
@@ -39631,9 +39689,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         sane_parser.add_argument('-n', '--null', action='store_true', \
  *             help=_('Check for /dev/null output redirection(s)'))
  */
-  __pyx_tuple__352 = PyTuple_Pack(1, __pyx_kp_s_Check_for_explicit_disable_argum); if (unlikely(!__pyx_tuple__352)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__352);
-  __Pyx_GIVEREF(__pyx_tuple__352);
+  __pyx_tuple__349 = PyTuple_Pack(1, __pyx_kp_s_Check_for_explicit_disable_argum); if (unlikely(!__pyx_tuple__349)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1142; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__349);
+  __Pyx_GIVEREF(__pyx_tuple__349);
 
   /* "tools.py":1143
  *         sane_parser.add_argument('-d', '--disable', action='store_true', \
@@ -39642,9 +39700,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check for /dev/null output redirection(s)'))
  *         sane_parser.add_argument('-m', '--maintainer', action='store_true', \
  */
-  __pyx_tuple__353 = PyTuple_Pack(2, __pyx_kp_s_n, __pyx_kp_s_null_2); if (unlikely(!__pyx_tuple__353)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__353);
-  __Pyx_GIVEREF(__pyx_tuple__353);
+  __pyx_tuple__350 = PyTuple_Pack(2, __pyx_kp_s_n, __pyx_kp_s_null_2); if (unlikely(!__pyx_tuple__350)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__350);
+  __Pyx_GIVEREF(__pyx_tuple__350);
 
   /* "tools.py":1144
  *             help=_('Check for explicit --disable argument(s)'))
@@ -39653,9 +39711,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         sane_parser.add_argument('-m', '--maintainer', action='store_true', \
  *             help=_('Check for missing maintainer'))
  */
-  __pyx_tuple__354 = PyTuple_Pack(1, __pyx_kp_s_Check_for_dev_null_output_redire); if (unlikely(!__pyx_tuple__354)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1144; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__354);
-  __Pyx_GIVEREF(__pyx_tuple__354);
+  __pyx_tuple__351 = PyTuple_Pack(1, __pyx_kp_s_Check_for_dev_null_output_redire); if (unlikely(!__pyx_tuple__351)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1144; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__351);
+  __Pyx_GIVEREF(__pyx_tuple__351);
 
   /* "tools.py":1145
  *         sane_parser.add_argument('-n', '--null', action='store_true', \
@@ -39664,9 +39722,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check for missing maintainer'))
  *         sane_parser.add_argument('-N', '--note', action='store_true', \
  */
-  __pyx_tuple__355 = PyTuple_Pack(2, __pyx_kp_s_m_2, __pyx_kp_s_maintainer_2); if (unlikely(!__pyx_tuple__355)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__355);
-  __Pyx_GIVEREF(__pyx_tuple__355);
+  __pyx_tuple__352 = PyTuple_Pack(2, __pyx_kp_s_m_2, __pyx_kp_s_maintainer_2); if (unlikely(!__pyx_tuple__352)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1145; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__352);
+  __Pyx_GIVEREF(__pyx_tuple__352);
 
   /* "tools.py":1146
  *             help=_('Check for /dev/null output redirection(s)'))
@@ -39675,9 +39733,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         sane_parser.add_argument('-N', '--note', action='store_true', \
  *             help=_('Check for FIXME/TODO note(s)'))
  */
-  __pyx_tuple__356 = PyTuple_Pack(1, __pyx_kp_s_Check_for_missing_maintainer); if (unlikely(!__pyx_tuple__356)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__356);
-  __Pyx_GIVEREF(__pyx_tuple__356);
+  __pyx_tuple__353 = PyTuple_Pack(1, __pyx_kp_s_Check_for_missing_maintainer); if (unlikely(!__pyx_tuple__353)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1146; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__353);
+  __Pyx_GIVEREF(__pyx_tuple__353);
 
   /* "tools.py":1147
  *         sane_parser.add_argument('-m', '--maintainer', action='store_true', \
@@ -39686,9 +39744,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check for FIXME/TODO note(s)'))
  *         sane_parser.add_argument('-v', '--variables', action='store_true', \
  */
-  __pyx_tuple__357 = PyTuple_Pack(2, __pyx_kp_s_N, __pyx_kp_s_note_2); if (unlikely(!__pyx_tuple__357)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__357);
-  __Pyx_GIVEREF(__pyx_tuple__357);
+  __pyx_tuple__354 = PyTuple_Pack(2, __pyx_kp_s_N, __pyx_kp_s_note_2); if (unlikely(!__pyx_tuple__354)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__354);
+  __Pyx_GIVEREF(__pyx_tuple__354);
 
   /* "tools.py":1148
  *             help=_('Check for missing maintainer'))
@@ -39697,9 +39755,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         sane_parser.add_argument('-v', '--variables', action='store_true', \
  *             help=_('Check for essential variables'))
  */
-  __pyx_tuple__358 = PyTuple_Pack(1, __pyx_kp_s_Check_for_FIXME_TODO_note_s); if (unlikely(!__pyx_tuple__358)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1148; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__358);
-  __Pyx_GIVEREF(__pyx_tuple__358);
+  __pyx_tuple__355 = PyTuple_Pack(1, __pyx_kp_s_Check_for_FIXME_TODO_note_s); if (unlikely(!__pyx_tuple__355)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1148; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__355);
+  __Pyx_GIVEREF(__pyx_tuple__355);
 
   /* "tools.py":1149
  *         sane_parser.add_argument('-N', '--note', action='store_true', \
@@ -39708,9 +39766,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check for essential variables'))
  *         sane_parser.add_argument('-t', '--triggers', action='store_true', \
  */
-  __pyx_tuple__359 = PyTuple_Pack(2, __pyx_kp_s_v, __pyx_kp_s_variables_2); if (unlikely(!__pyx_tuple__359)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__359);
-  __Pyx_GIVEREF(__pyx_tuple__359);
+  __pyx_tuple__356 = PyTuple_Pack(2, __pyx_kp_s_v, __pyx_kp_s_variables_2); if (unlikely(!__pyx_tuple__356)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1149; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__356);
+  __Pyx_GIVEREF(__pyx_tuple__356);
 
   /* "tools.py":1150
  *             help=_('Check for FIXME/TODO note(s)'))
@@ -39719,9 +39777,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         sane_parser.add_argument('-t', '--triggers', action='store_true', \
  *             help=_('Check for unnecessary triggers invocation(s)'))
  */
-  __pyx_tuple__360 = PyTuple_Pack(1, __pyx_kp_s_Check_for_essential_variables); if (unlikely(!__pyx_tuple__360)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1150; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__360);
-  __Pyx_GIVEREF(__pyx_tuple__360);
+  __pyx_tuple__357 = PyTuple_Pack(1, __pyx_kp_s_Check_for_essential_variables); if (unlikely(!__pyx_tuple__357)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1150; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__357);
+  __Pyx_GIVEREF(__pyx_tuple__357);
 
   /* "tools.py":1151
  *         sane_parser.add_argument('-v', '--variables', action='store_true', \
@@ -39730,9 +39788,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check for unnecessary triggers invocation(s)'))
  *         sane_parser.add_argument('-u', '--users', action='store_true', \
  */
-  __pyx_tuple__361 = PyTuple_Pack(2, __pyx_kp_s_t_2, __pyx_kp_s_triggers_2); if (unlikely(!__pyx_tuple__361)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__361);
-  __Pyx_GIVEREF(__pyx_tuple__361);
+  __pyx_tuple__358 = PyTuple_Pack(2, __pyx_kp_s_t_2, __pyx_kp_s_triggers_2); if (unlikely(!__pyx_tuple__358)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1151; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__358);
+  __Pyx_GIVEREF(__pyx_tuple__358);
 
   /* "tools.py":1152
  *             help=_('Check for essential variables'))
@@ -39741,9 +39799,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         sane_parser.add_argument('-u', '--users', action='store_true', \
  *             help=_('Check for user(s) being added but not deleted'))
  */
-  __pyx_tuple__362 = PyTuple_Pack(1, __pyx_kp_s_Check_for_unnecessary_triggers_i); if (unlikely(!__pyx_tuple__362)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1152; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__362);
-  __Pyx_GIVEREF(__pyx_tuple__362);
+  __pyx_tuple__359 = PyTuple_Pack(1, __pyx_kp_s_Check_for_unnecessary_triggers_i); if (unlikely(!__pyx_tuple__359)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1152; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__359);
+  __Pyx_GIVEREF(__pyx_tuple__359);
 
   /* "tools.py":1153
  *         sane_parser.add_argument('-t', '--triggers', action='store_true', \
@@ -39752,9 +39810,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check for user(s) being added but not deleted'))
  *         sane_parser.add_argument('-g', '--groups', action='store_true', \
  */
-  __pyx_tuple__363 = PyTuple_Pack(2, __pyx_kp_s_u, __pyx_kp_s_users_2); if (unlikely(!__pyx_tuple__363)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__363);
-  __Pyx_GIVEREF(__pyx_tuple__363);
+  __pyx_tuple__360 = PyTuple_Pack(2, __pyx_kp_s_u, __pyx_kp_s_users_2); if (unlikely(!__pyx_tuple__360)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1153; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__360);
+  __Pyx_GIVEREF(__pyx_tuple__360);
 
   /* "tools.py":1154
  *             help=_('Check for unnecessary triggers invocation(s)'))
@@ -39763,9 +39821,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         sane_parser.add_argument('-g', '--groups', action='store_true', \
  *             help=_('Check for group(s) being added but not deleted'))
  */
-  __pyx_tuple__364 = PyTuple_Pack(1, __pyx_kp_s_Check_for_user_s_being_added_but); if (unlikely(!__pyx_tuple__364)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__364);
-  __Pyx_GIVEREF(__pyx_tuple__364);
+  __pyx_tuple__361 = PyTuple_Pack(1, __pyx_kp_s_Check_for_user_s_being_added_but); if (unlikely(!__pyx_tuple__361)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__361);
+  __Pyx_GIVEREF(__pyx_tuple__361);
 
   /* "tools.py":1155
  *         sane_parser.add_argument('-u', '--users', action='store_true', \
@@ -39774,9 +39832,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check for group(s) being added but not deleted'))
  *         sane_parser.add_argument('-s', '--signatures', action='store_true', \
  */
-  __pyx_tuple__365 = PyTuple_Pack(2, __pyx_kp_s_g, __pyx_kp_s_groups_2); if (unlikely(!__pyx_tuple__365)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1155; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__365);
-  __Pyx_GIVEREF(__pyx_tuple__365);
+  __pyx_tuple__362 = PyTuple_Pack(2, __pyx_kp_s_g, __pyx_kp_s_groups_2); if (unlikely(!__pyx_tuple__362)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1155; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__362);
+  __Pyx_GIVEREF(__pyx_tuple__362);
 
   /* "tools.py":1156
  *             help=_('Check for user(s) being added but not deleted'))
@@ -39785,9 +39843,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         sane_parser.add_argument('-s', '--signatures', action='store_true', \
  *             help=_('Check for signature(s) not in the sources array'))
  */
-  __pyx_tuple__366 = PyTuple_Pack(1, __pyx_kp_s_Check_for_group_s_being_added_bu); if (unlikely(!__pyx_tuple__366)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__366);
-  __Pyx_GIVEREF(__pyx_tuple__366);
+  __pyx_tuple__363 = PyTuple_Pack(1, __pyx_kp_s_Check_for_group_s_being_added_bu); if (unlikely(!__pyx_tuple__363)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1156; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__363);
+  __Pyx_GIVEREF(__pyx_tuple__363);
 
   /* "tools.py":1157
  *         sane_parser.add_argument('-g', '--groups', action='store_true', \
@@ -39796,9 +39854,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check for signature(s) not in the sources array'))
  *         sane_parser.add_argument('-a', '--all', action='store_true', \
  */
-  __pyx_tuple__367 = PyTuple_Pack(2, __pyx_kp_s_s_3, __pyx_kp_s_signatures_2); if (unlikely(!__pyx_tuple__367)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1157; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__367);
-  __Pyx_GIVEREF(__pyx_tuple__367);
+  __pyx_tuple__364 = PyTuple_Pack(2, __pyx_kp_s_s_3, __pyx_kp_s_signatures_2); if (unlikely(!__pyx_tuple__364)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1157; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__364);
+  __Pyx_GIVEREF(__pyx_tuple__364);
 
   /* "tools.py":1158
  *             help=_('Check for group(s) being added but not deleted'))
@@ -39807,9 +39865,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         sane_parser.add_argument('-a', '--all', action='store_true', \
  *             help=_('Perform all checks'))
  */
-  __pyx_tuple__368 = PyTuple_Pack(1, __pyx_kp_s_Check_for_signature_s_not_in_the); if (unlikely(!__pyx_tuple__368)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__368);
-  __Pyx_GIVEREF(__pyx_tuple__368);
+  __pyx_tuple__365 = PyTuple_Pack(1, __pyx_kp_s_Check_for_signature_s_not_in_the); if (unlikely(!__pyx_tuple__365)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__365);
+  __Pyx_GIVEREF(__pyx_tuple__365);
 
   /* "tools.py":1159
  *         sane_parser.add_argument('-s', '--signatures', action='store_true', \
@@ -39818,9 +39876,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Perform all checks'))
  *         sane_parser.add_argument('TARGETS', nargs='+', type=str, \
  */
-  __pyx_tuple__369 = PyTuple_Pack(2, __pyx_kp_s_a_2, __pyx_kp_s_all); if (unlikely(!__pyx_tuple__369)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1159; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__369);
-  __Pyx_GIVEREF(__pyx_tuple__369);
+  __pyx_tuple__366 = PyTuple_Pack(2, __pyx_kp_s_a_2, __pyx_kp_s_all); if (unlikely(!__pyx_tuple__366)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1159; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__366);
+  __Pyx_GIVEREF(__pyx_tuple__366);
 
   /* "tools.py":1160
  *             help=_('Check for signature(s) not in the sources array'))
@@ -39829,9 +39887,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         sane_parser.add_argument('TARGETS', nargs='+', type=str, \
  *             help=_('Targets to apply actions on'))
  */
-  __pyx_tuple__370 = PyTuple_Pack(1, __pyx_kp_s_Perform_all_checks); if (unlikely(!__pyx_tuple__370)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1160; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__370);
-  __Pyx_GIVEREF(__pyx_tuple__370);
+  __pyx_tuple__367 = PyTuple_Pack(1, __pyx_kp_s_Perform_all_checks); if (unlikely(!__pyx_tuple__367)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1160; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__367);
+  __Pyx_GIVEREF(__pyx_tuple__367);
 
   /* "tools.py":1161
  *         sane_parser.add_argument('-a', '--all', action='store_true', \
@@ -39840,9 +39898,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Targets to apply actions on'))
  * 
  */
-  __pyx_tuple__371 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__371)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__371);
-  __Pyx_GIVEREF(__pyx_tuple__371);
+  __pyx_tuple__368 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__368)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1161; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__368);
+  __Pyx_GIVEREF(__pyx_tuple__368);
 
   /* "tools.py":1162
  *             help=_('Perform all checks'))
@@ -39851,9 +39909,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *         if EUID == 0:
  */
-  __pyx_tuple__372 = PyTuple_Pack(1, __pyx_kp_s_Targets_to_apply_actions_on); if (unlikely(!__pyx_tuple__372)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__372);
-  __Pyx_GIVEREF(__pyx_tuple__372);
+  __pyx_tuple__369 = PyTuple_Pack(1, __pyx_kp_s_Targets_to_apply_actions_on); if (unlikely(!__pyx_tuple__369)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__369);
+  __Pyx_GIVEREF(__pyx_tuple__369);
 
   /* "tools.py":1165
  * 
@@ -39862,9 +39920,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *         if EUID == 0:
  */
-  __pyx_tuple__373 = PyTuple_Pack(1, __pyx_n_s_merge); if (unlikely(!__pyx_tuple__373)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1165; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__373);
-  __Pyx_GIVEREF(__pyx_tuple__373);
+  __pyx_tuple__370 = PyTuple_Pack(1, __pyx_n_s_merge); if (unlikely(!__pyx_tuple__370)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1165; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__370);
+  __Pyx_GIVEREF(__pyx_tuple__370);
 
   /* "tools.py":1168
  * 
@@ -39873,9 +39931,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             edit_parser.add_argument('TARGETS', nargs='+', type=str, \
  *                 help=_('Targets to apply actions on'))
  */
-  __pyx_tuple__374 = PyTuple_Pack(1, __pyx_n_s_edit); if (unlikely(!__pyx_tuple__374)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__374);
-  __Pyx_GIVEREF(__pyx_tuple__374);
+  __pyx_tuple__371 = PyTuple_Pack(1, __pyx_n_s_edit); if (unlikely(!__pyx_tuple__371)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__371);
+  __Pyx_GIVEREF(__pyx_tuple__371);
 
   /* "tools.py":1169
  *         if EUID == 0:
@@ -39884,9 +39942,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 help=_('Targets to apply actions on'))
  * 
  */
-  __pyx_tuple__375 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__375)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1169; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__375);
-  __Pyx_GIVEREF(__pyx_tuple__375);
+  __pyx_tuple__372 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__372)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1169; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__372);
+  __Pyx_GIVEREF(__pyx_tuple__372);
 
   /* "tools.py":1170
  *             edit_parser = subparsers.add_parser('edit')
@@ -39895,9 +39953,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *         which_parser = subparsers.add_parser('which')
  */
-  __pyx_tuple__376 = PyTuple_Pack(1, __pyx_kp_s_Targets_to_apply_actions_on); if (unlikely(!__pyx_tuple__376)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1170; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__376);
-  __Pyx_GIVEREF(__pyx_tuple__376);
+  __pyx_tuple__373 = PyTuple_Pack(1, __pyx_kp_s_Targets_to_apply_actions_on); if (unlikely(!__pyx_tuple__373)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1170; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__373);
+  __Pyx_GIVEREF(__pyx_tuple__373);
 
   /* "tools.py":1172
  *                 help=_('Targets to apply actions on'))
@@ -39906,9 +39964,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         which_parser.add_argument('-c', '--cat', action='store_true', \
  *             help=_('Display content of SRCBUILD'))
  */
-  __pyx_tuple__377 = PyTuple_Pack(1, __pyx_n_s_which); if (unlikely(!__pyx_tuple__377)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__377);
-  __Pyx_GIVEREF(__pyx_tuple__377);
+  __pyx_tuple__374 = PyTuple_Pack(1, __pyx_n_s_which); if (unlikely(!__pyx_tuple__374)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1172; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__374);
+  __Pyx_GIVEREF(__pyx_tuple__374);
 
   /* "tools.py":1173
  * 
@@ -39917,9 +39975,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Display content of SRCBUILD'))
  *         which_parser.add_argument('-p', '--plain', action='store_true', \
  */
-  __pyx_tuple__378 = PyTuple_Pack(2, __pyx_kp_s_c, __pyx_kp_s_cat_2); if (unlikely(!__pyx_tuple__378)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1173; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__378);
-  __Pyx_GIVEREF(__pyx_tuple__378);
+  __pyx_tuple__375 = PyTuple_Pack(2, __pyx_kp_s_c, __pyx_kp_s_cat_2); if (unlikely(!__pyx_tuple__375)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1173; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__375);
+  __Pyx_GIVEREF(__pyx_tuple__375);
 
   /* "tools.py":1174
  *         which_parser = subparsers.add_parser('which')
@@ -39928,9 +39986,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         which_parser.add_argument('-p', '--plain', action='store_true', \
  *             help=_('Print in plain format'))
  */
-  __pyx_tuple__379 = PyTuple_Pack(1, __pyx_kp_s_Display_content_of_SRCBUILD); if (unlikely(!__pyx_tuple__379)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1174; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__379);
-  __Pyx_GIVEREF(__pyx_tuple__379);
+  __pyx_tuple__376 = PyTuple_Pack(1, __pyx_kp_s_Display_content_of_SRCBUILD); if (unlikely(!__pyx_tuple__376)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1174; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__376);
+  __Pyx_GIVEREF(__pyx_tuple__376);
 
   /* "tools.py":1175
  *         which_parser.add_argument('-c', '--cat', action='store_true', \
@@ -39939,9 +39997,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Print in plain format'))
  *         which_parser.add_argument('PATTERN', type=str, \
  */
-  __pyx_tuple__380 = PyTuple_Pack(2, __pyx_kp_s_p_2, __pyx_kp_s_plain_2); if (unlikely(!__pyx_tuple__380)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1175; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__380);
-  __Pyx_GIVEREF(__pyx_tuple__380);
+  __pyx_tuple__377 = PyTuple_Pack(2, __pyx_kp_s_p_2, __pyx_kp_s_plain_2); if (unlikely(!__pyx_tuple__377)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1175; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__377);
+  __Pyx_GIVEREF(__pyx_tuple__377);
 
   /* "tools.py":1176
  *             help=_('Display content of SRCBUILD'))
@@ -39950,9 +40008,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         which_parser.add_argument('PATTERN', type=str, \
  *             help=_('Pattern to search for in remote targets'))
  */
-  __pyx_tuple__381 = PyTuple_Pack(1, __pyx_kp_s_Print_in_plain_format); if (unlikely(!__pyx_tuple__381)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__381);
-  __Pyx_GIVEREF(__pyx_tuple__381);
+  __pyx_tuple__378 = PyTuple_Pack(1, __pyx_kp_s_Print_in_plain_format); if (unlikely(!__pyx_tuple__378)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1176; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__378);
+  __Pyx_GIVEREF(__pyx_tuple__378);
 
   /* "tools.py":1177
  *         which_parser.add_argument('-p', '--plain', action='store_true', \
@@ -39961,9 +40019,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Pattern to search for in remote targets'))
  * 
  */
-  __pyx_tuple__382 = PyTuple_Pack(1, __pyx_n_s_PATTERN); if (unlikely(!__pyx_tuple__382)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1177; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__382);
-  __Pyx_GIVEREF(__pyx_tuple__382);
+  __pyx_tuple__379 = PyTuple_Pack(1, __pyx_n_s_PATTERN); if (unlikely(!__pyx_tuple__379)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1177; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__379);
+  __Pyx_GIVEREF(__pyx_tuple__379);
 
   /* "tools.py":1178
  *             help=_('Print in plain format'))
@@ -39972,9 +40030,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *         if EUID == 0:
  */
-  __pyx_tuple__383 = PyTuple_Pack(1, __pyx_kp_s_Pattern_to_search_for_in_remote); if (unlikely(!__pyx_tuple__383)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1178; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__383);
-  __Pyx_GIVEREF(__pyx_tuple__383);
+  __pyx_tuple__380 = PyTuple_Pack(1, __pyx_kp_s_Pattern_to_search_for_in_remote); if (unlikely(!__pyx_tuple__380)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1178; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__380);
+  __Pyx_GIVEREF(__pyx_tuple__380);
 
   /* "tools.py":1181
  * 
@@ -39983,9 +40041,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             pack_parser.add_argument('-d', '--directory', type=str, \
  *                 default=misc.dir_current(), help=_('Set output directory'))
  */
-  __pyx_tuple__384 = PyTuple_Pack(1, __pyx_n_s_pack); if (unlikely(!__pyx_tuple__384)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1181; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__384);
-  __Pyx_GIVEREF(__pyx_tuple__384);
+  __pyx_tuple__381 = PyTuple_Pack(1, __pyx_n_s_pack); if (unlikely(!__pyx_tuple__381)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1181; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__381);
+  __Pyx_GIVEREF(__pyx_tuple__381);
 
   /* "tools.py":1182
  *         if EUID == 0:
@@ -39994,9 +40052,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 default=misc.dir_current(), help=_('Set output directory'))
  *             pack_parser.add_argument('TARGETS', nargs='+', type=str, \
  */
-  __pyx_tuple__385 = PyTuple_Pack(2, __pyx_kp_s_d_2, __pyx_kp_s_directory_2); if (unlikely(!__pyx_tuple__385)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1182; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__385);
-  __Pyx_GIVEREF(__pyx_tuple__385);
+  __pyx_tuple__382 = PyTuple_Pack(2, __pyx_kp_s_d_2, __pyx_kp_s_directory_2); if (unlikely(!__pyx_tuple__382)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1182; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__382);
+  __Pyx_GIVEREF(__pyx_tuple__382);
 
   /* "tools.py":1183
  *             pack_parser = subparsers.add_parser('pack')
@@ -40005,9 +40063,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             pack_parser.add_argument('TARGETS', nargs='+', type=str, \
  *                 help=_('Targets to apply actions on'))
  */
-  __pyx_tuple__386 = PyTuple_Pack(1, __pyx_kp_s_Set_output_directory); if (unlikely(!__pyx_tuple__386)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1183; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__386);
-  __Pyx_GIVEREF(__pyx_tuple__386);
+  __pyx_tuple__383 = PyTuple_Pack(1, __pyx_kp_s_Set_output_directory); if (unlikely(!__pyx_tuple__383)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1183; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__383);
+  __Pyx_GIVEREF(__pyx_tuple__383);
 
   /* "tools.py":1184
  *             pack_parser.add_argument('-d', '--directory', type=str, \
@@ -40016,9 +40074,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 help=_('Targets to apply actions on'))
  * 
  */
-  __pyx_tuple__387 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__387)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1184; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__387);
-  __Pyx_GIVEREF(__pyx_tuple__387);
+  __pyx_tuple__384 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__384)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1184; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__384);
+  __Pyx_GIVEREF(__pyx_tuple__384);
 
   /* "tools.py":1185
  *                 default=misc.dir_current(), help=_('Set output directory'))
@@ -40027,9 +40085,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *         pkg_parser = subparsers.add_parser('pkg')
  */
-  __pyx_tuple__388 = PyTuple_Pack(1, __pyx_kp_s_Targets_to_apply_actions_on); if (unlikely(!__pyx_tuple__388)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__388);
-  __Pyx_GIVEREF(__pyx_tuple__388);
+  __pyx_tuple__385 = PyTuple_Pack(1, __pyx_kp_s_Targets_to_apply_actions_on); if (unlikely(!__pyx_tuple__385)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1185; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__385);
+  __Pyx_GIVEREF(__pyx_tuple__385);
 
   /* "tools.py":1187
  *                 help=_('Targets to apply actions on'))
@@ -40038,9 +40096,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         pkg_parser.add_argument('-d', '--directory', type=str, \
  *             default=misc.dir_current(), help=_('Set output directory'))
  */
-  __pyx_tuple__389 = PyTuple_Pack(1, __pyx_n_s_pkg); if (unlikely(!__pyx_tuple__389)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1187; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__389);
-  __Pyx_GIVEREF(__pyx_tuple__389);
+  __pyx_tuple__386 = PyTuple_Pack(1, __pyx_n_s_pkg); if (unlikely(!__pyx_tuple__386)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1187; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__386);
+  __Pyx_GIVEREF(__pyx_tuple__386);
 
   /* "tools.py":1188
  * 
@@ -40049,9 +40107,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             default=misc.dir_current(), help=_('Set output directory'))
  *         pkg_parser.add_argument('TARGETS', nargs='+', type=str, \
  */
-  __pyx_tuple__390 = PyTuple_Pack(2, __pyx_kp_s_d_2, __pyx_kp_s_directory_2); if (unlikely(!__pyx_tuple__390)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1188; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__390);
-  __Pyx_GIVEREF(__pyx_tuple__390);
+  __pyx_tuple__387 = PyTuple_Pack(2, __pyx_kp_s_d_2, __pyx_kp_s_directory_2); if (unlikely(!__pyx_tuple__387)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1188; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__387);
+  __Pyx_GIVEREF(__pyx_tuple__387);
 
   /* "tools.py":1189
  *         pkg_parser = subparsers.add_parser('pkg')
@@ -40060,9 +40118,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         pkg_parser.add_argument('TARGETS', nargs='+', type=str, \
  *             help=_('Targets to apply actions on'))
  */
-  __pyx_tuple__391 = PyTuple_Pack(1, __pyx_kp_s_Set_output_directory); if (unlikely(!__pyx_tuple__391)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__391);
-  __Pyx_GIVEREF(__pyx_tuple__391);
+  __pyx_tuple__388 = PyTuple_Pack(1, __pyx_kp_s_Set_output_directory); if (unlikely(!__pyx_tuple__388)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1189; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__388);
+  __Pyx_GIVEREF(__pyx_tuple__388);
 
   /* "tools.py":1190
  *         pkg_parser.add_argument('-d', '--directory', type=str, \
@@ -40071,9 +40129,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Targets to apply actions on'))
  * 
  */
-  __pyx_tuple__392 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__392)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1190; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__392);
-  __Pyx_GIVEREF(__pyx_tuple__392);
+  __pyx_tuple__389 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__389)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1190; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__389);
+  __Pyx_GIVEREF(__pyx_tuple__389);
 
   /* "tools.py":1191
  *             default=misc.dir_current(), help=_('Set output directory'))
@@ -40082,9 +40140,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *         serve_parser = subparsers.add_parser('serve')
  */
-  __pyx_tuple__393 = PyTuple_Pack(1, __pyx_kp_s_Targets_to_apply_actions_on); if (unlikely(!__pyx_tuple__393)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1191; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__393);
-  __Pyx_GIVEREF(__pyx_tuple__393);
+  __pyx_tuple__390 = PyTuple_Pack(1, __pyx_kp_s_Targets_to_apply_actions_on); if (unlikely(!__pyx_tuple__390)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1191; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__390);
+  __Pyx_GIVEREF(__pyx_tuple__390);
 
   /* "tools.py":1193
  *             help=_('Targets to apply actions on'))
@@ -40093,9 +40151,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         serve_parser.add_argument('-p', '--port', action='store', \
  *             type=int, default=8000, help=_('Use port for the server'))
  */
-  __pyx_tuple__394 = PyTuple_Pack(1, __pyx_n_s_serve); if (unlikely(!__pyx_tuple__394)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1193; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__394);
-  __Pyx_GIVEREF(__pyx_tuple__394);
+  __pyx_tuple__391 = PyTuple_Pack(1, __pyx_n_s_serve); if (unlikely(!__pyx_tuple__391)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1193; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__391);
+  __Pyx_GIVEREF(__pyx_tuple__391);
 
   /* "tools.py":1194
  * 
@@ -40104,9 +40162,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             type=int, default=8000, help=_('Use port for the server'))
  *         serve_parser.add_argument('-a', '--address', action='store', \
  */
-  __pyx_tuple__395 = PyTuple_Pack(2, __pyx_kp_s_p_2, __pyx_kp_s_port_2); if (unlikely(!__pyx_tuple__395)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1194; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__395);
-  __Pyx_GIVEREF(__pyx_tuple__395);
+  __pyx_tuple__392 = PyTuple_Pack(2, __pyx_kp_s_p_2, __pyx_kp_s_port_2); if (unlikely(!__pyx_tuple__392)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1194; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__392);
+  __Pyx_GIVEREF(__pyx_tuple__392);
 
   /* "tools.py":1195
  *         serve_parser = subparsers.add_parser('serve')
@@ -40115,9 +40173,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         serve_parser.add_argument('-a', '--address', action='store', \
  *             type=str, default='', help=_('Use address for the server'))
  */
-  __pyx_tuple__396 = PyTuple_Pack(1, __pyx_kp_s_Use_port_for_the_server); if (unlikely(!__pyx_tuple__396)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1195; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__396);
-  __Pyx_GIVEREF(__pyx_tuple__396);
+  __pyx_tuple__393 = PyTuple_Pack(1, __pyx_kp_s_Use_port_for_the_server); if (unlikely(!__pyx_tuple__393)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1195; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__393);
+  __Pyx_GIVEREF(__pyx_tuple__393);
 
   /* "tools.py":1196
  *         serve_parser.add_argument('-p', '--port', action='store', \
@@ -40126,9 +40184,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             type=str, default='', help=_('Use address for the server'))
  * 
  */
-  __pyx_tuple__397 = PyTuple_Pack(2, __pyx_kp_s_a_2, __pyx_kp_s_address_2); if (unlikely(!__pyx_tuple__397)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1196; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__397);
-  __Pyx_GIVEREF(__pyx_tuple__397);
+  __pyx_tuple__394 = PyTuple_Pack(2, __pyx_kp_s_a_2, __pyx_kp_s_address_2); if (unlikely(!__pyx_tuple__394)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1196; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__394);
+  __Pyx_GIVEREF(__pyx_tuple__394);
 
   /* "tools.py":1197
  *             type=int, default=8000, help=_('Use port for the server'))
@@ -40137,9 +40195,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *         disowned_parser = subparsers.add_parser('disowned')
  */
-  __pyx_tuple__398 = PyTuple_Pack(1, __pyx_kp_s_Use_address_for_the_server); if (unlikely(!__pyx_tuple__398)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1197; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__398);
-  __Pyx_GIVEREF(__pyx_tuple__398);
+  __pyx_tuple__395 = PyTuple_Pack(1, __pyx_kp_s_Use_address_for_the_server); if (unlikely(!__pyx_tuple__395)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1197; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__395);
+  __Pyx_GIVEREF(__pyx_tuple__395);
 
   /* "tools.py":1199
  *             type=str, default='', help=_('Use address for the server'))
@@ -40148,9 +40206,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         disowned_parser.add_argument('-d', '--directory', type=str, \
  *             default='/', help=_('Set lookup directory'))
  */
-  __pyx_tuple__399 = PyTuple_Pack(1, __pyx_n_s_disowned); if (unlikely(!__pyx_tuple__399)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1199; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__399);
-  __Pyx_GIVEREF(__pyx_tuple__399);
+  __pyx_tuple__396 = PyTuple_Pack(1, __pyx_n_s_disowned); if (unlikely(!__pyx_tuple__396)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1199; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__396);
+  __Pyx_GIVEREF(__pyx_tuple__396);
 
   /* "tools.py":1200
  * 
@@ -40159,9 +40217,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             default='/', help=_('Set lookup directory'))
  *         disowned_parser.add_argument('-c', '--cross', action='store_true', \
  */
-  __pyx_tuple__400 = PyTuple_Pack(2, __pyx_kp_s_d_2, __pyx_kp_s_directory_2); if (unlikely(!__pyx_tuple__400)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1200; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__400);
-  __Pyx_GIVEREF(__pyx_tuple__400);
+  __pyx_tuple__397 = PyTuple_Pack(2, __pyx_kp_s_d_2, __pyx_kp_s_directory_2); if (unlikely(!__pyx_tuple__397)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1200; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__397);
+  __Pyx_GIVEREF(__pyx_tuple__397);
 
   /* "tools.py":1201
  *         disowned_parser = subparsers.add_parser('disowned')
@@ -40170,9 +40228,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         disowned_parser.add_argument('-c', '--cross', action='store_true', \
  *             help=_('Scan cross-filesystem'))
  */
-  __pyx_tuple__401 = PyTuple_Pack(1, __pyx_kp_s_Set_lookup_directory); if (unlikely(!__pyx_tuple__401)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1201; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__401);
-  __Pyx_GIVEREF(__pyx_tuple__401);
+  __pyx_tuple__398 = PyTuple_Pack(1, __pyx_kp_s_Set_lookup_directory); if (unlikely(!__pyx_tuple__398)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1201; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__398);
+  __Pyx_GIVEREF(__pyx_tuple__398);
 
   /* "tools.py":1202
  *         disowned_parser.add_argument('-d', '--directory', type=str, \
@@ -40181,9 +40239,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Scan cross-filesystem'))
  *         disowned_parser.add_argument('-p', '--plain', action='store_true', \
  */
-  __pyx_tuple__402 = PyTuple_Pack(2, __pyx_kp_s_c, __pyx_kp_s_cross_2); if (unlikely(!__pyx_tuple__402)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1202; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__402);
-  __Pyx_GIVEREF(__pyx_tuple__402);
+  __pyx_tuple__399 = PyTuple_Pack(2, __pyx_kp_s_c, __pyx_kp_s_cross_2); if (unlikely(!__pyx_tuple__399)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1202; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__399);
+  __Pyx_GIVEREF(__pyx_tuple__399);
 
   /* "tools.py":1203
  *             default='/', help=_('Set lookup directory'))
@@ -40192,9 +40250,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         disowned_parser.add_argument('-p', '--plain', action='store_true', \
  *             help=_('Print in plain format'))
  */
-  __pyx_tuple__403 = PyTuple_Pack(1, __pyx_kp_s_Scan_cross_filesystem); if (unlikely(!__pyx_tuple__403)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1203; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__403);
-  __Pyx_GIVEREF(__pyx_tuple__403);
+  __pyx_tuple__400 = PyTuple_Pack(1, __pyx_kp_s_Scan_cross_filesystem); if (unlikely(!__pyx_tuple__400)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1203; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__400);
+  __Pyx_GIVEREF(__pyx_tuple__400);
 
   /* "tools.py":1204
  *         disowned_parser.add_argument('-c', '--cross', action='store_true', \
@@ -40203,9 +40261,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Print in plain format'))
  * 
  */
-  __pyx_tuple__404 = PyTuple_Pack(2, __pyx_kp_s_p_2, __pyx_kp_s_plain_2); if (unlikely(!__pyx_tuple__404)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1204; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__404);
-  __Pyx_GIVEREF(__pyx_tuple__404);
+  __pyx_tuple__401 = PyTuple_Pack(2, __pyx_kp_s_p_2, __pyx_kp_s_plain_2); if (unlikely(!__pyx_tuple__401)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1204; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__401);
+  __Pyx_GIVEREF(__pyx_tuple__401);
 
   /* "tools.py":1205
  *             help=_('Scan cross-filesystem'))
@@ -40214,9 +40272,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *         upload_parser = subparsers.add_parser('upload')
  */
-  __pyx_tuple__405 = PyTuple_Pack(1, __pyx_kp_s_Print_in_plain_format); if (unlikely(!__pyx_tuple__405)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1205; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__405);
-  __Pyx_GIVEREF(__pyx_tuple__405);
+  __pyx_tuple__402 = PyTuple_Pack(1, __pyx_kp_s_Print_in_plain_format); if (unlikely(!__pyx_tuple__402)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1205; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__402);
+  __Pyx_GIVEREF(__pyx_tuple__402);
 
   /* "tools.py":1207
  *             help=_('Print in plain format'))
@@ -40225,9 +40283,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         upload_parser.add_argument('-H', '--host', action='store', \
  *             type=str, required=True, help=_('Use host'))
  */
-  __pyx_tuple__406 = PyTuple_Pack(1, __pyx_n_s_upload); if (unlikely(!__pyx_tuple__406)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1207; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__406);
-  __Pyx_GIVEREF(__pyx_tuple__406);
+  __pyx_tuple__403 = PyTuple_Pack(1, __pyx_n_s_upload); if (unlikely(!__pyx_tuple__403)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1207; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__403);
+  __Pyx_GIVEREF(__pyx_tuple__403);
 
   /* "tools.py":1208
  * 
@@ -40236,9 +40294,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             type=str, required=True, help=_('Use host'))
  *         upload_parser.add_argument('-u', '--user', action='store', \
  */
-  __pyx_tuple__407 = PyTuple_Pack(2, __pyx_kp_s_H, __pyx_kp_s_host_2); if (unlikely(!__pyx_tuple__407)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__407);
-  __Pyx_GIVEREF(__pyx_tuple__407);
+  __pyx_tuple__404 = PyTuple_Pack(2, __pyx_kp_s_H, __pyx_kp_s_host_2); if (unlikely(!__pyx_tuple__404)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1208; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__404);
+  __Pyx_GIVEREF(__pyx_tuple__404);
 
   /* "tools.py":1209
  *         upload_parser = subparsers.add_parser('upload')
@@ -40247,9 +40305,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         upload_parser.add_argument('-u', '--user', action='store', \
  *             type=str, required=True, help=_('Use user'))
  */
-  __pyx_tuple__408 = PyTuple_Pack(1, __pyx_kp_s_Use_host); if (unlikely(!__pyx_tuple__408)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1209; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__408);
-  __Pyx_GIVEREF(__pyx_tuple__408);
+  __pyx_tuple__405 = PyTuple_Pack(1, __pyx_kp_s_Use_host); if (unlikely(!__pyx_tuple__405)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1209; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__405);
+  __Pyx_GIVEREF(__pyx_tuple__405);
 
   /* "tools.py":1210
  *         upload_parser.add_argument('-H', '--host', action='store', \
@@ -40258,9 +40316,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             type=str, required=True, help=_('Use user'))
  *         upload_parser.add_argument('-d', '--directory', type=str, \
  */
-  __pyx_tuple__409 = PyTuple_Pack(2, __pyx_kp_s_u, __pyx_kp_s_user_2); if (unlikely(!__pyx_tuple__409)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1210; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__409);
-  __Pyx_GIVEREF(__pyx_tuple__409);
+  __pyx_tuple__406 = PyTuple_Pack(2, __pyx_kp_s_u, __pyx_kp_s_user_2); if (unlikely(!__pyx_tuple__406)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1210; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__406);
+  __Pyx_GIVEREF(__pyx_tuple__406);
 
   /* "tools.py":1211
  *             type=str, required=True, help=_('Use host'))
@@ -40269,9 +40327,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         upload_parser.add_argument('-d', '--directory', type=str, \
  *             default='/', help=_('Use upload directory'))
  */
-  __pyx_tuple__410 = PyTuple_Pack(1, __pyx_kp_s_Use_user); if (unlikely(!__pyx_tuple__410)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1211; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__410);
-  __Pyx_GIVEREF(__pyx_tuple__410);
+  __pyx_tuple__407 = PyTuple_Pack(1, __pyx_kp_s_Use_user); if (unlikely(!__pyx_tuple__407)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1211; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__407);
+  __Pyx_GIVEREF(__pyx_tuple__407);
 
   /* "tools.py":1212
  *         upload_parser.add_argument('-u', '--user', action='store', \
@@ -40280,9 +40338,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             default='/', help=_('Use upload directory'))
  *         upload_parser.add_argument('-i', '--insecure', action='store_true', \
  */
-  __pyx_tuple__411 = PyTuple_Pack(2, __pyx_kp_s_d_2, __pyx_kp_s_directory_2); if (unlikely(!__pyx_tuple__411)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__411);
-  __Pyx_GIVEREF(__pyx_tuple__411);
+  __pyx_tuple__408 = PyTuple_Pack(2, __pyx_kp_s_d_2, __pyx_kp_s_directory_2); if (unlikely(!__pyx_tuple__408)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1212; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__408);
+  __Pyx_GIVEREF(__pyx_tuple__408);
 
   /* "tools.py":1213
  *             type=str, required=True, help=_('Use user'))
@@ -40291,9 +40349,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         upload_parser.add_argument('-i', '--insecure', action='store_true', \
  *             help=_('Use insecure connection'))
  */
-  __pyx_tuple__412 = PyTuple_Pack(1, __pyx_kp_s_Use_upload_directory); if (unlikely(!__pyx_tuple__412)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1213; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__412);
-  __Pyx_GIVEREF(__pyx_tuple__412);
+  __pyx_tuple__409 = PyTuple_Pack(1, __pyx_kp_s_Use_upload_directory); if (unlikely(!__pyx_tuple__409)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1213; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__409);
+  __Pyx_GIVEREF(__pyx_tuple__409);
 
   /* "tools.py":1214
  *         upload_parser.add_argument('-d', '--directory', type=str, \
@@ -40302,9 +40360,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Use insecure connection'))
  *         upload_parser.add_argument('TARGETS', nargs='+', type=str, \
  */
-  __pyx_tuple__413 = PyTuple_Pack(2, __pyx_kp_s_i, __pyx_kp_s_insecure_2); if (unlikely(!__pyx_tuple__413)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1214; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__413);
-  __Pyx_GIVEREF(__pyx_tuple__413);
+  __pyx_tuple__410 = PyTuple_Pack(2, __pyx_kp_s_i, __pyx_kp_s_insecure_2); if (unlikely(!__pyx_tuple__410)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1214; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__410);
+  __Pyx_GIVEREF(__pyx_tuple__410);
 
   /* "tools.py":1215
  *             default='/', help=_('Use upload directory'))
@@ -40313,9 +40371,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         upload_parser.add_argument('TARGETS', nargs='+', type=str, \
  *             help=_('Targets to apply actions on'))
  */
-  __pyx_tuple__414 = PyTuple_Pack(1, __pyx_kp_s_Use_insecure_connection); if (unlikely(!__pyx_tuple__414)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1215; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__414);
-  __Pyx_GIVEREF(__pyx_tuple__414);
+  __pyx_tuple__411 = PyTuple_Pack(1, __pyx_kp_s_Use_insecure_connection); if (unlikely(!__pyx_tuple__411)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1215; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__411);
+  __Pyx_GIVEREF(__pyx_tuple__411);
 
   /* "tools.py":1216
  *         upload_parser.add_argument('-i', '--insecure', action='store_true', \
@@ -40324,9 +40382,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Targets to apply actions on'))
  * 
  */
-  __pyx_tuple__415 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__415)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1216; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__415);
-  __Pyx_GIVEREF(__pyx_tuple__415);
+  __pyx_tuple__412 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__412)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1216; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__412);
+  __Pyx_GIVEREF(__pyx_tuple__412);
 
   /* "tools.py":1217
  *             help=_('Use insecure connection'))
@@ -40335,9 +40393,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *         online_parser = subparsers.add_parser('online')
  */
-  __pyx_tuple__416 = PyTuple_Pack(1, __pyx_kp_s_Targets_to_apply_actions_on); if (unlikely(!__pyx_tuple__416)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1217; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__416);
-  __Pyx_GIVEREF(__pyx_tuple__416);
+  __pyx_tuple__413 = PyTuple_Pack(1, __pyx_kp_s_Targets_to_apply_actions_on); if (unlikely(!__pyx_tuple__413)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1217; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__413);
+  __Pyx_GIVEREF(__pyx_tuple__413);
 
   /* "tools.py":1219
  *             help=_('Targets to apply actions on'))
@@ -40346,9 +40404,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         online_parser.add_argument('-u', '--url', type=str, \
  *             default='https://www.google.com', help=_('URL to ping'))
  */
-  __pyx_tuple__417 = PyTuple_Pack(1, __pyx_n_s_online); if (unlikely(!__pyx_tuple__417)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1219; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__417);
-  __Pyx_GIVEREF(__pyx_tuple__417);
+  __pyx_tuple__414 = PyTuple_Pack(1, __pyx_n_s_online); if (unlikely(!__pyx_tuple__414)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1219; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__414);
+  __Pyx_GIVEREF(__pyx_tuple__414);
 
   /* "tools.py":1220
  * 
@@ -40357,9 +40415,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             default='https://www.google.com', help=_('URL to ping'))
  * 
  */
-  __pyx_tuple__418 = PyTuple_Pack(2, __pyx_kp_s_u, __pyx_kp_s_url_2); if (unlikely(!__pyx_tuple__418)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1220; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__418);
-  __Pyx_GIVEREF(__pyx_tuple__418);
+  __pyx_tuple__415 = PyTuple_Pack(2, __pyx_kp_s_u, __pyx_kp_s_url_2); if (unlikely(!__pyx_tuple__415)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1220; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__415);
+  __Pyx_GIVEREF(__pyx_tuple__415);
 
   /* "tools.py":1221
  *         online_parser = subparsers.add_parser('online')
@@ -40368,9 +40426,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *         if EUID == 0:
  */
-  __pyx_tuple__419 = PyTuple_Pack(1, __pyx_kp_s_URL_to_ping); if (unlikely(!__pyx_tuple__419)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__419);
-  __Pyx_GIVEREF(__pyx_tuple__419);
+  __pyx_tuple__416 = PyTuple_Pack(1, __pyx_kp_s_URL_to_ping); if (unlikely(!__pyx_tuple__416)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1221; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__416);
+  __Pyx_GIVEREF(__pyx_tuple__416);
 
   /* "tools.py":1224
  * 
@@ -40379,9 +40437,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *         digest_parser = subparsers.add_parser('digest')
  */
-  __pyx_tuple__420 = PyTuple_Pack(1, __pyx_n_s_upgrade); if (unlikely(!__pyx_tuple__420)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1224; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__420);
-  __Pyx_GIVEREF(__pyx_tuple__420);
+  __pyx_tuple__417 = PyTuple_Pack(1, __pyx_n_s_upgrade); if (unlikely(!__pyx_tuple__417)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1224; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__417);
+  __Pyx_GIVEREF(__pyx_tuple__417);
 
   /* "tools.py":1226
  *             upgrade_parser = subparsers.add_parser('upgrade')
@@ -40390,9 +40448,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         digest_parser.add_argument('-d', '--directory', type=str, \
  *             default=misc.dir_current(), help=_('Set output directory'))
  */
-  __pyx_tuple__421 = PyTuple_Pack(1, __pyx_n_s_digest); if (unlikely(!__pyx_tuple__421)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1226; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__421);
-  __Pyx_GIVEREF(__pyx_tuple__421);
+  __pyx_tuple__418 = PyTuple_Pack(1, __pyx_n_s_digest); if (unlikely(!__pyx_tuple__418)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1226; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__418);
+  __Pyx_GIVEREF(__pyx_tuple__418);
 
   /* "tools.py":1227
  * 
@@ -40401,9 +40459,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             default=misc.dir_current(), help=_('Set output directory'))
  *         digest_parser.add_argument('-c', '--create', action='store_true', \
  */
-  __pyx_tuple__422 = PyTuple_Pack(2, __pyx_kp_s_d_2, __pyx_kp_s_directory_2); if (unlikely(!__pyx_tuple__422)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1227; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__422);
-  __Pyx_GIVEREF(__pyx_tuple__422);
+  __pyx_tuple__419 = PyTuple_Pack(2, __pyx_kp_s_d_2, __pyx_kp_s_directory_2); if (unlikely(!__pyx_tuple__419)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1227; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__419);
+  __Pyx_GIVEREF(__pyx_tuple__419);
 
   /* "tools.py":1228
  *         digest_parser = subparsers.add_parser('digest')
@@ -40412,9 +40470,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         digest_parser.add_argument('-c', '--create', action='store_true', \
  *             help=_('Create digest'))
  */
-  __pyx_tuple__423 = PyTuple_Pack(1, __pyx_kp_s_Set_output_directory); if (unlikely(!__pyx_tuple__423)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__423);
-  __Pyx_GIVEREF(__pyx_tuple__423);
+  __pyx_tuple__420 = PyTuple_Pack(1, __pyx_kp_s_Set_output_directory); if (unlikely(!__pyx_tuple__420)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1228; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__420);
+  __Pyx_GIVEREF(__pyx_tuple__420);
 
   /* "tools.py":1229
  *         digest_parser.add_argument('-d', '--directory', type=str, \
@@ -40423,9 +40481,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Create digest'))
  *         digest_parser.add_argument('-v', '--verify', action='store_true', \
  */
-  __pyx_tuple__424 = PyTuple_Pack(2, __pyx_kp_s_c, __pyx_kp_s_create_2); if (unlikely(!__pyx_tuple__424)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1229; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__424);
-  __Pyx_GIVEREF(__pyx_tuple__424);
+  __pyx_tuple__421 = PyTuple_Pack(2, __pyx_kp_s_c, __pyx_kp_s_create_2); if (unlikely(!__pyx_tuple__421)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1229; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__421);
+  __Pyx_GIVEREF(__pyx_tuple__421);
 
   /* "tools.py":1230
  *             default=misc.dir_current(), help=_('Set output directory'))
@@ -40434,9 +40492,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         digest_parser.add_argument('-v', '--verify', action='store_true', \
  *             help=_('Verify digest'))
  */
-  __pyx_tuple__425 = PyTuple_Pack(1, __pyx_kp_s_Create_digest); if (unlikely(!__pyx_tuple__425)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1230; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__425);
-  __Pyx_GIVEREF(__pyx_tuple__425);
+  __pyx_tuple__422 = PyTuple_Pack(1, __pyx_kp_s_Create_digest); if (unlikely(!__pyx_tuple__422)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1230; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__422);
+  __Pyx_GIVEREF(__pyx_tuple__422);
 
   /* "tools.py":1231
  *         digest_parser.add_argument('-c', '--create', action='store_true', \
@@ -40445,9 +40503,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Verify digest'))
  *         digest_parser.add_argument('-k', '--backup', action='store_true', \
  */
-  __pyx_tuple__426 = PyTuple_Pack(2, __pyx_kp_s_v, __pyx_kp_s_verify_2); if (unlikely(!__pyx_tuple__426)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1231; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__426);
-  __Pyx_GIVEREF(__pyx_tuple__426);
+  __pyx_tuple__423 = PyTuple_Pack(2, __pyx_kp_s_v, __pyx_kp_s_verify_2); if (unlikely(!__pyx_tuple__423)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1231; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__423);
+  __Pyx_GIVEREF(__pyx_tuple__423);
 
   /* "tools.py":1232
  *             help=_('Create digest'))
@@ -40456,9 +40514,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         digest_parser.add_argument('-k', '--backup', action='store_true', \
  *             help=_('Do not ignore backup files'))
  */
-  __pyx_tuple__427 = PyTuple_Pack(1, __pyx_kp_s_Verify_digest); if (unlikely(!__pyx_tuple__427)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1232; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__427);
-  __Pyx_GIVEREF(__pyx_tuple__427);
+  __pyx_tuple__424 = PyTuple_Pack(1, __pyx_kp_s_Verify_digest); if (unlikely(!__pyx_tuple__424)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1232; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__424);
+  __Pyx_GIVEREF(__pyx_tuple__424);
 
   /* "tools.py":1233
  *         digest_parser.add_argument('-v', '--verify', action='store_true', \
@@ -40467,9 +40525,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Do not ignore backup files'))
  *         digest_parser.add_argument('TARGETS', nargs='+', type=str, \
  */
-  __pyx_tuple__428 = PyTuple_Pack(2, __pyx_kp_s_k, __pyx_kp_s_backup_2); if (unlikely(!__pyx_tuple__428)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1233; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__428);
-  __Pyx_GIVEREF(__pyx_tuple__428);
+  __pyx_tuple__425 = PyTuple_Pack(2, __pyx_kp_s_k, __pyx_kp_s_backup_2); if (unlikely(!__pyx_tuple__425)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1233; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__425);
+  __Pyx_GIVEREF(__pyx_tuple__425);
 
   /* "tools.py":1234
  *             help=_('Verify digest'))
@@ -40478,9 +40536,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         digest_parser.add_argument('TARGETS', nargs='+', type=str, \
  *             help=_('Targets to apply actions on'))
  */
-  __pyx_tuple__429 = PyTuple_Pack(1, __pyx_kp_s_Do_not_ignore_backup_files); if (unlikely(!__pyx_tuple__429)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__429);
-  __Pyx_GIVEREF(__pyx_tuple__429);
+  __pyx_tuple__426 = PyTuple_Pack(1, __pyx_kp_s_Do_not_ignore_backup_files); if (unlikely(!__pyx_tuple__426)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__426);
+  __Pyx_GIVEREF(__pyx_tuple__426);
 
   /* "tools.py":1235
  *         digest_parser.add_argument('-k', '--backup', action='store_true', \
@@ -40489,9 +40547,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Targets to apply actions on'))
  * 
  */
-  __pyx_tuple__430 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__430)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__430);
-  __Pyx_GIVEREF(__pyx_tuple__430);
+  __pyx_tuple__427 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__427)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__427);
+  __Pyx_GIVEREF(__pyx_tuple__427);
 
   /* "tools.py":1236
  *             help=_('Do not ignore backup files'))
@@ -40500,9 +40558,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *         if EUID == 0:
  */
-  __pyx_tuple__431 = PyTuple_Pack(1, __pyx_kp_s_Targets_to_apply_actions_on); if (unlikely(!__pyx_tuple__431)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__431);
-  __Pyx_GIVEREF(__pyx_tuple__431);
+  __pyx_tuple__428 = PyTuple_Pack(1, __pyx_kp_s_Targets_to_apply_actions_on); if (unlikely(!__pyx_tuple__428)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__428);
+  __Pyx_GIVEREF(__pyx_tuple__428);
 
   /* "tools.py":1239
  * 
@@ -40511,9 +40569,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             portable_parser.add_argument('-d', '--directory', type=str, \
  *                 default=misc.dir_current(), help=_('Set output directory'))
  */
-  __pyx_tuple__432 = PyTuple_Pack(1, __pyx_n_s_portable); if (unlikely(!__pyx_tuple__432)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1239; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__432);
-  __Pyx_GIVEREF(__pyx_tuple__432);
+  __pyx_tuple__429 = PyTuple_Pack(1, __pyx_n_s_portable); if (unlikely(!__pyx_tuple__429)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1239; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__429);
+  __Pyx_GIVEREF(__pyx_tuple__429);
 
   /* "tools.py":1240
  *         if EUID == 0:
@@ -40522,9 +40580,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 default=misc.dir_current(), help=_('Set output directory'))
  *             portable_parser.add_argument('TARGETS', nargs='+', type=str, \
  */
-  __pyx_tuple__433 = PyTuple_Pack(2, __pyx_kp_s_d_2, __pyx_kp_s_directory_2); if (unlikely(!__pyx_tuple__433)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__433);
-  __Pyx_GIVEREF(__pyx_tuple__433);
+  __pyx_tuple__430 = PyTuple_Pack(2, __pyx_kp_s_d_2, __pyx_kp_s_directory_2); if (unlikely(!__pyx_tuple__430)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1240; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__430);
+  __Pyx_GIVEREF(__pyx_tuple__430);
 
   /* "tools.py":1241
  *             portable_parser = subparsers.add_parser('portable')
@@ -40533,9 +40591,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             portable_parser.add_argument('TARGETS', nargs='+', type=str, \
  *                 help=_('Targets to apply actions on'))
  */
-  __pyx_tuple__434 = PyTuple_Pack(1, __pyx_kp_s_Set_output_directory); if (unlikely(!__pyx_tuple__434)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1241; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__434);
-  __Pyx_GIVEREF(__pyx_tuple__434);
+  __pyx_tuple__431 = PyTuple_Pack(1, __pyx_kp_s_Set_output_directory); if (unlikely(!__pyx_tuple__431)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1241; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__431);
+  __Pyx_GIVEREF(__pyx_tuple__431);
 
   /* "tools.py":1242
  *             portable_parser.add_argument('-d', '--directory', type=str, \
@@ -40544,9 +40602,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 help=_('Targets to apply actions on'))
  * 
  */
-  __pyx_tuple__435 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__435)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__435);
-  __Pyx_GIVEREF(__pyx_tuple__435);
+  __pyx_tuple__432 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__432)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1242; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__432);
+  __Pyx_GIVEREF(__pyx_tuple__432);
 
   /* "tools.py":1243
  *                 default=misc.dir_current(), help=_('Set output directory'))
@@ -40555,9 +40613,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *         parser.add_argument('--root', type=str, action=OverrideRootDir, \
  */
-  __pyx_tuple__436 = PyTuple_Pack(1, __pyx_kp_s_Targets_to_apply_actions_on); if (unlikely(!__pyx_tuple__436)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1243; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__436);
-  __Pyx_GIVEREF(__pyx_tuple__436);
+  __pyx_tuple__433 = PyTuple_Pack(1, __pyx_kp_s_Targets_to_apply_actions_on); if (unlikely(!__pyx_tuple__433)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1243; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__433);
+  __Pyx_GIVEREF(__pyx_tuple__433);
 
   /* "tools.py":1245
  *                 help=_('Targets to apply actions on'))
@@ -40566,9 +40624,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Change system root directory'))
  *         parser.add_argument('--debug', nargs=0, action=OverrideDebug, \
  */
-  __pyx_tuple__437 = PyTuple_Pack(1, __pyx_kp_s_root); if (unlikely(!__pyx_tuple__437)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1245; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__437);
-  __Pyx_GIVEREF(__pyx_tuple__437);
+  __pyx_tuple__434 = PyTuple_Pack(1, __pyx_kp_s_root); if (unlikely(!__pyx_tuple__434)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1245; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__434);
+  __Pyx_GIVEREF(__pyx_tuple__434);
 
   /* "tools.py":1246
  * 
@@ -40577,9 +40635,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         parser.add_argument('--debug', nargs=0, action=OverrideDebug, \
  *             help=_('Enable debug messages'))
  */
-  __pyx_tuple__438 = PyTuple_Pack(1, __pyx_kp_s_Change_system_root_directory); if (unlikely(!__pyx_tuple__438)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__438);
-  __Pyx_GIVEREF(__pyx_tuple__438);
+  __pyx_tuple__435 = PyTuple_Pack(1, __pyx_kp_s_Change_system_root_directory); if (unlikely(!__pyx_tuple__435)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1246; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__435);
+  __Pyx_GIVEREF(__pyx_tuple__435);
 
   /* "tools.py":1247
  *         parser.add_argument('--root', type=str, action=OverrideRootDir, \
@@ -40588,9 +40646,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Enable debug messages'))
  *         parser.add_argument('--version', action='version', \
  */
-  __pyx_tuple__439 = PyTuple_Pack(1, __pyx_kp_s_debug_2); if (unlikely(!__pyx_tuple__439)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__439);
-  __Pyx_GIVEREF(__pyx_tuple__439);
+  __pyx_tuple__436 = PyTuple_Pack(1, __pyx_kp_s_debug_2); if (unlikely(!__pyx_tuple__436)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1247; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__436);
+  __Pyx_GIVEREF(__pyx_tuple__436);
 
   /* "tools.py":1248
  *             help=_('Change system root directory'))
@@ -40599,9 +40657,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         parser.add_argument('--version', action='version', \
  *             version='Source Package Manager Tools v%s' % app_version, \
  */
-  __pyx_tuple__440 = PyTuple_Pack(1, __pyx_kp_s_Enable_debug_messages); if (unlikely(!__pyx_tuple__440)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1248; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__440);
-  __Pyx_GIVEREF(__pyx_tuple__440);
+  __pyx_tuple__437 = PyTuple_Pack(1, __pyx_kp_s_Enable_debug_messages); if (unlikely(!__pyx_tuple__437)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1248; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__437);
+  __Pyx_GIVEREF(__pyx_tuple__437);
 
   /* "tools.py":1249
  *         parser.add_argument('--debug', nargs=0, action=OverrideDebug, \
@@ -40610,9 +40668,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             version='Source Package Manager Tools v%s' % app_version, \
  *             help=_('Show SPM Tools version and exit'))
  */
-  __pyx_tuple__441 = PyTuple_Pack(1, __pyx_kp_s_version_3); if (unlikely(!__pyx_tuple__441)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1249; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__441);
-  __Pyx_GIVEREF(__pyx_tuple__441);
+  __pyx_tuple__438 = PyTuple_Pack(1, __pyx_kp_s_version_3); if (unlikely(!__pyx_tuple__438)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1249; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__438);
+  __Pyx_GIVEREF(__pyx_tuple__438);
 
   /* "tools.py":1251
  *         parser.add_argument('--version', action='version', \
@@ -40621,9 +40679,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *         for plugin in glob.glob('/etc/spm/plugins/[inserted by cython to avoid comment start]*.py'):
  */
-  __pyx_tuple__442 = PyTuple_Pack(1, __pyx_kp_s_Show_SPM_Tools_version_and_exit); if (unlikely(!__pyx_tuple__442)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__442);
-  __Pyx_GIVEREF(__pyx_tuple__442);
+  __pyx_tuple__439 = PyTuple_Pack(1, __pyx_kp_s_Show_SPM_Tools_version_and_exit); if (unlikely(!__pyx_tuple__439)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__439);
+  __Pyx_GIVEREF(__pyx_tuple__439);
 
   /* "tools.py":1253
  *             help=_('Show SPM Tools version and exit'))
@@ -40632,9 +40690,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             name = os.path.basename(plugin).replace('.py', '')
  *             fp, pathname, description = imp.find_module(name, ['/etc/spm/plugins'])
  */
-  __pyx_tuple__443 = PyTuple_Pack(1, __pyx_kp_s_etc_spm_plugins_py); if (unlikely(!__pyx_tuple__443)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1253; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__443);
-  __Pyx_GIVEREF(__pyx_tuple__443);
+  __pyx_tuple__440 = PyTuple_Pack(1, __pyx_kp_s_etc_spm_plugins_py); if (unlikely(!__pyx_tuple__440)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1253; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__440);
+  __Pyx_GIVEREF(__pyx_tuple__440);
 
   /* "tools.py":1254
  * 
@@ -40643,9 +40701,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             fp, pathname, description = imp.find_module(name, ['/etc/spm/plugins'])
  *             plugins.append(fp)
  */
-  __pyx_tuple__444 = PyTuple_Pack(2, __pyx_kp_s_py, __pyx_kp_s__8); if (unlikely(!__pyx_tuple__444)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1254; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__444);
-  __Pyx_GIVEREF(__pyx_tuple__444);
+  __pyx_tuple__441 = PyTuple_Pack(2, __pyx_kp_s_py, __pyx_kp_s__8); if (unlikely(!__pyx_tuple__441)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1254; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__441);
+  __Pyx_GIVEREF(__pyx_tuple__441);
 
   /* "tools.py":1265
  * 
@@ -40654,9 +40712,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('SOURCES'), ARGS.sources)
  *             message.sub_info(_('CLEAN'), ARGS.clean)
  */
-  __pyx_tuple__446 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__446)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__446);
-  __Pyx_GIVEREF(__pyx_tuple__446);
+  __pyx_tuple__443 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__443)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__443);
+  __Pyx_GIVEREF(__pyx_tuple__443);
 
   /* "tools.py":1266
  *         if ARGS.mode == 'dist':
@@ -40665,9 +40723,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('CLEAN'), ARGS.clean)
  *             message.sub_info(_('DIRECTORY'), ARGS.directory)
  */
-  __pyx_tuple__447 = PyTuple_Pack(1, __pyx_n_s_SOURCES); if (unlikely(!__pyx_tuple__447)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1266; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__447);
-  __Pyx_GIVEREF(__pyx_tuple__447);
+  __pyx_tuple__444 = PyTuple_Pack(1, __pyx_n_s_SOURCES); if (unlikely(!__pyx_tuple__444)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1266; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__444);
+  __Pyx_GIVEREF(__pyx_tuple__444);
 
   /* "tools.py":1267
  *             message.info(_('Runtime information'))
@@ -40676,9 +40734,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('DIRECTORY'), ARGS.directory)
  *             message.sub_info(_('TARGETS'), ARGS.TARGETS)
  */
-  __pyx_tuple__448 = PyTuple_Pack(1, __pyx_n_s_CLEAN); if (unlikely(!__pyx_tuple__448)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1267; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__448);
-  __Pyx_GIVEREF(__pyx_tuple__448);
+  __pyx_tuple__445 = PyTuple_Pack(1, __pyx_n_s_CLEAN); if (unlikely(!__pyx_tuple__445)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1267; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__445);
+  __Pyx_GIVEREF(__pyx_tuple__445);
 
   /* "tools.py":1268
  *             message.sub_info(_('SOURCES'), ARGS.sources)
@@ -40687,9 +40745,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('TARGETS'), ARGS.TARGETS)
  *             message.info(_('Poking remotes...'))
  */
-  __pyx_tuple__449 = PyTuple_Pack(1, __pyx_n_s_DIRECTORY); if (unlikely(!__pyx_tuple__449)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1268; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__449);
-  __Pyx_GIVEREF(__pyx_tuple__449);
+  __pyx_tuple__446 = PyTuple_Pack(1, __pyx_n_s_DIRECTORY); if (unlikely(!__pyx_tuple__446)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1268; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__446);
+  __Pyx_GIVEREF(__pyx_tuple__446);
 
   /* "tools.py":1269
  *             message.sub_info(_('CLEAN'), ARGS.clean)
@@ -40698,9 +40756,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.info(_('Poking remotes...'))
  *             m = Dist(ARGS.TARGETS, ARGS.sources, ARGS.clean, ARGS.directory)
  */
-  __pyx_tuple__450 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__450)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1269; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__450);
-  __Pyx_GIVEREF(__pyx_tuple__450);
+  __pyx_tuple__447 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__447)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1269; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__447);
+  __Pyx_GIVEREF(__pyx_tuple__447);
 
   /* "tools.py":1270
  *             message.sub_info(_('DIRECTORY'), ARGS.directory)
@@ -40709,9 +40767,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             m = Dist(ARGS.TARGETS, ARGS.sources, ARGS.clean, ARGS.directory)
  *             m.main()
  */
-  __pyx_tuple__451 = PyTuple_Pack(1, __pyx_kp_s_Poking_remotes); if (unlikely(!__pyx_tuple__451)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__451);
-  __Pyx_GIVEREF(__pyx_tuple__451);
+  __pyx_tuple__448 = PyTuple_Pack(1, __pyx_kp_s_Poking_remotes); if (unlikely(!__pyx_tuple__448)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1270; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__448);
+  __Pyx_GIVEREF(__pyx_tuple__448);
 
   /* "tools.py":1275
  * 
@@ -40720,9 +40778,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('ROOT_DIR'), libspm.ROOT_DIR)
  *             message.sub_info(_('FAST'), ARGS.fast)
  */
-  __pyx_tuple__452 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__452)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1275; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__452);
-  __Pyx_GIVEREF(__pyx_tuple__452);
+  __pyx_tuple__449 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__449)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1275; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__449);
+  __Pyx_GIVEREF(__pyx_tuple__449);
 
   /* "tools.py":1276
  *         elif ARGS.mode == 'check':
@@ -40731,9 +40789,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('FAST'), ARGS.fast)
  *             message.sub_info(_('DEPENDS'), ARGS.depends)
  */
-  __pyx_tuple__453 = PyTuple_Pack(1, __pyx_n_s_ROOT_DIR); if (unlikely(!__pyx_tuple__453)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__453);
-  __Pyx_GIVEREF(__pyx_tuple__453);
+  __pyx_tuple__450 = PyTuple_Pack(1, __pyx_n_s_ROOT_DIR); if (unlikely(!__pyx_tuple__450)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1276; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__450);
+  __Pyx_GIVEREF(__pyx_tuple__450);
 
   /* "tools.py":1277
  *             message.info(_('Runtime information'))
@@ -40742,9 +40800,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('DEPENDS'), ARGS.depends)
  *             message.sub_info(_('REVERSE'), ARGS.reverse)
  */
-  __pyx_tuple__454 = PyTuple_Pack(1, __pyx_n_s_FAST); if (unlikely(!__pyx_tuple__454)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1277; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__454);
-  __Pyx_GIVEREF(__pyx_tuple__454);
+  __pyx_tuple__451 = PyTuple_Pack(1, __pyx_n_s_FAST); if (unlikely(!__pyx_tuple__451)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1277; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__451);
+  __Pyx_GIVEREF(__pyx_tuple__451);
 
   /* "tools.py":1278
  *             message.sub_info(_('ROOT_DIR'), libspm.ROOT_DIR)
@@ -40753,9 +40811,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('REVERSE'), ARGS.reverse)
  *             message.sub_info(_('ADJUST'), ARGS.adjust)
  */
-  __pyx_tuple__455 = PyTuple_Pack(1, __pyx_n_s_DEPENDS); if (unlikely(!__pyx_tuple__455)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__455);
-  __Pyx_GIVEREF(__pyx_tuple__455);
+  __pyx_tuple__452 = PyTuple_Pack(1, __pyx_n_s_DEPENDS); if (unlikely(!__pyx_tuple__452)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1278; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__452);
+  __Pyx_GIVEREF(__pyx_tuple__452);
 
   /* "tools.py":1279
  *             message.sub_info(_('FAST'), ARGS.fast)
@@ -40764,9 +40822,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('ADJUST'), ARGS.adjust)
  *             message.sub_info(_('TARGETS'), ARGS.TARGETS)
  */
-  __pyx_tuple__456 = PyTuple_Pack(1, __pyx_n_s_REVERSE); if (unlikely(!__pyx_tuple__456)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1279; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__456);
-  __Pyx_GIVEREF(__pyx_tuple__456);
+  __pyx_tuple__453 = PyTuple_Pack(1, __pyx_n_s_REVERSE); if (unlikely(!__pyx_tuple__453)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1279; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__453);
+  __Pyx_GIVEREF(__pyx_tuple__453);
 
   /* "tools.py":1280
  *             message.sub_info(_('DEPENDS'), ARGS.depends)
@@ -40775,9 +40833,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('TARGETS'), ARGS.TARGETS)
  *             message.info(_('Poking locals...'))
  */
-  __pyx_tuple__457 = PyTuple_Pack(1, __pyx_n_s_ADJUST); if (unlikely(!__pyx_tuple__457)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1280; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__457);
-  __Pyx_GIVEREF(__pyx_tuple__457);
+  __pyx_tuple__454 = PyTuple_Pack(1, __pyx_n_s_ADJUST); if (unlikely(!__pyx_tuple__454)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1280; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__454);
+  __Pyx_GIVEREF(__pyx_tuple__454);
 
   /* "tools.py":1281
  *             message.sub_info(_('REVERSE'), ARGS.reverse)
@@ -40786,9 +40844,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.info(_('Poking locals...'))
  *             m = Check(ARGS.TARGETS, ARGS.fast, ARGS.depends, ARGS.reverse, \
  */
-  __pyx_tuple__458 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__458)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1281; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__458);
-  __Pyx_GIVEREF(__pyx_tuple__458);
+  __pyx_tuple__455 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__455)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1281; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__455);
+  __Pyx_GIVEREF(__pyx_tuple__455);
 
   /* "tools.py":1282
  *             message.sub_info(_('ADJUST'), ARGS.adjust)
@@ -40797,9 +40855,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             m = Check(ARGS.TARGETS, ARGS.fast, ARGS.depends, ARGS.reverse, \
  *                 ARGS.adjust)
  */
-  __pyx_tuple__459 = PyTuple_Pack(1, __pyx_kp_s_Poking_locals); if (unlikely(!__pyx_tuple__459)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1282; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__459);
-  __Pyx_GIVEREF(__pyx_tuple__459);
+  __pyx_tuple__456 = PyTuple_Pack(1, __pyx_kp_s_Poking_locals); if (unlikely(!__pyx_tuple__456)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1282; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__456);
+  __Pyx_GIVEREF(__pyx_tuple__456);
 
   /* "tools.py":1288
  * 
@@ -40808,9 +40866,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             m = Clean()
  *             m.main()
  */
-  __pyx_tuple__460 = PyTuple_Pack(1, __pyx_kp_s_Poking_locals); if (unlikely(!__pyx_tuple__460)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1288; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__460);
-  __Pyx_GIVEREF(__pyx_tuple__460);
+  __pyx_tuple__457 = PyTuple_Pack(1, __pyx_kp_s_Poking_locals); if (unlikely(!__pyx_tuple__457)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1288; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__457);
+  __Pyx_GIVEREF(__pyx_tuple__457);
 
   /* "tools.py":1309
  *                 ARGS.debug = True
@@ -40819,9 +40877,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('MAN'), ARGS.man)
  *             message.sub_info(_('UDEV'), ARGS.udev)
  */
-  __pyx_tuple__461 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__461)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1309; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__461);
-  __Pyx_GIVEREF(__pyx_tuple__461);
+  __pyx_tuple__458 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__458)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1309; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__458);
+  __Pyx_GIVEREF(__pyx_tuple__458);
 
   /* "tools.py":1310
  * 
@@ -40830,9 +40888,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('UDEV'), ARGS.udev)
  *             message.sub_info(_('SYMLINK'), ARGS.symlink)
  */
-  __pyx_tuple__462 = PyTuple_Pack(1, __pyx_n_s_MAN); if (unlikely(!__pyx_tuple__462)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1310; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__462);
-  __Pyx_GIVEREF(__pyx_tuple__462);
+  __pyx_tuple__459 = PyTuple_Pack(1, __pyx_n_s_MAN); if (unlikely(!__pyx_tuple__459)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1310; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__459);
+  __Pyx_GIVEREF(__pyx_tuple__459);
 
   /* "tools.py":1311
  *             message.info(_('Runtime information'))
@@ -40841,9 +40899,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('SYMLINK'), ARGS.symlink)
  *             message.sub_info(_('DOC'), ARGS.doc)
  */
-  __pyx_tuple__463 = PyTuple_Pack(1, __pyx_n_s_UDEV); if (unlikely(!__pyx_tuple__463)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1311; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__463);
-  __Pyx_GIVEREF(__pyx_tuple__463);
+  __pyx_tuple__460 = PyTuple_Pack(1, __pyx_n_s_UDEV); if (unlikely(!__pyx_tuple__460)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1311; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__460);
+  __Pyx_GIVEREF(__pyx_tuple__460);
 
   /* "tools.py":1312
  *             message.sub_info(_('MAN'), ARGS.man)
@@ -40852,9 +40910,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('DOC'), ARGS.doc)
  *             message.sub_info(_('MODULE'), ARGS.module)
  */
-  __pyx_tuple__464 = PyTuple_Pack(1, __pyx_n_s_SYMLINK); if (unlikely(!__pyx_tuple__464)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1312; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__464);
-  __Pyx_GIVEREF(__pyx_tuple__464);
+  __pyx_tuple__461 = PyTuple_Pack(1, __pyx_n_s_SYMLINK); if (unlikely(!__pyx_tuple__461)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1312; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__461);
+  __Pyx_GIVEREF(__pyx_tuple__461);
 
   /* "tools.py":1313
  *             message.sub_info(_('UDEV'), ARGS.udev)
@@ -40863,9 +40921,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('MODULE'), ARGS.module)
  *             message.sub_info(_('FOOTPRINT'), ARGS.footprint)
  */
-  __pyx_tuple__465 = PyTuple_Pack(1, __pyx_n_s_DOC); if (unlikely(!__pyx_tuple__465)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__465);
-  __Pyx_GIVEREF(__pyx_tuple__465);
+  __pyx_tuple__462 = PyTuple_Pack(1, __pyx_n_s_DOC); if (unlikely(!__pyx_tuple__462)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1313; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__462);
+  __Pyx_GIVEREF(__pyx_tuple__462);
 
   /* "tools.py":1314
  *             message.sub_info(_('SYMLINK'), ARGS.symlink)
@@ -40874,9 +40932,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('FOOTPRINT'), ARGS.footprint)
  *             message.sub_info(_('BUILDDIR'), ARGS.builddir)
  */
-  __pyx_tuple__466 = PyTuple_Pack(1, __pyx_n_s_MODULE); if (unlikely(!__pyx_tuple__466)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1314; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__466);
-  __Pyx_GIVEREF(__pyx_tuple__466);
+  __pyx_tuple__463 = PyTuple_Pack(1, __pyx_n_s_MODULE); if (unlikely(!__pyx_tuple__463)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1314; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__463);
+  __Pyx_GIVEREF(__pyx_tuple__463);
 
   /* "tools.py":1315
  *             message.sub_info(_('DOC'), ARGS.doc)
@@ -40885,9 +40943,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('BUILDDIR'), ARGS.builddir)
  *             message.sub_info(_('OWNERSHIP'), ARGS.ownership)
  */
-  __pyx_tuple__467 = PyTuple_Pack(1, __pyx_n_s_FOOTPRINT); if (unlikely(!__pyx_tuple__467)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1315; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__467);
-  __Pyx_GIVEREF(__pyx_tuple__467);
+  __pyx_tuple__464 = PyTuple_Pack(1, __pyx_n_s_FOOTPRINT); if (unlikely(!__pyx_tuple__464)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1315; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__464);
+  __Pyx_GIVEREF(__pyx_tuple__464);
 
   /* "tools.py":1316
  *             message.sub_info(_('MODULE'), ARGS.module)
@@ -40896,9 +40954,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('OWNERSHIP'), ARGS.ownership)
  *             message.sub_info(_('EXECUTABLE'), ARGS.executable)
  */
-  __pyx_tuple__468 = PyTuple_Pack(1, __pyx_n_s_BUILDDIR); if (unlikely(!__pyx_tuple__468)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1316; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__468);
-  __Pyx_GIVEREF(__pyx_tuple__468);
+  __pyx_tuple__465 = PyTuple_Pack(1, __pyx_n_s_BUILDDIR); if (unlikely(!__pyx_tuple__465)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1316; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__465);
+  __Pyx_GIVEREF(__pyx_tuple__465);
 
   /* "tools.py":1317
  *             message.sub_info(_('FOOTPRINT'), ARGS.footprint)
@@ -40907,9 +40965,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('EXECUTABLE'), ARGS.executable)
  *             message.sub_info(_('PATH'), ARGS.path)
  */
-  __pyx_tuple__469 = PyTuple_Pack(1, __pyx_n_s_OWNERSHIP); if (unlikely(!__pyx_tuple__469)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1317; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__469);
-  __Pyx_GIVEREF(__pyx_tuple__469);
+  __pyx_tuple__466 = PyTuple_Pack(1, __pyx_n_s_OWNERSHIP); if (unlikely(!__pyx_tuple__466)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1317; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__466);
+  __Pyx_GIVEREF(__pyx_tuple__466);
 
   /* "tools.py":1318
  *             message.sub_info(_('BUILDDIR'), ARGS.builddir)
@@ -40918,9 +40976,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('PATH'), ARGS.path)
  *             message.sub_info(_('SHEBANG'), ARGS.shebang)
  */
-  __pyx_tuple__470 = PyTuple_Pack(1, __pyx_n_s_EXECUTABLE); if (unlikely(!__pyx_tuple__470)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1318; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__470);
-  __Pyx_GIVEREF(__pyx_tuple__470);
+  __pyx_tuple__467 = PyTuple_Pack(1, __pyx_n_s_EXECUTABLE); if (unlikely(!__pyx_tuple__467)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1318; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__467);
+  __Pyx_GIVEREF(__pyx_tuple__467);
 
   /* "tools.py":1319
  *             message.sub_info(_('OWNERSHIP'), ARGS.ownership)
@@ -40929,9 +40987,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('SHEBANG'), ARGS.shebang)
  *             message.sub_info(_('BACKUP'), ARGS.backup)
  */
-  __pyx_tuple__471 = PyTuple_Pack(1, __pyx_n_s_PATH); if (unlikely(!__pyx_tuple__471)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1319; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__471);
-  __Pyx_GIVEREF(__pyx_tuple__471);
+  __pyx_tuple__468 = PyTuple_Pack(1, __pyx_n_s_PATH); if (unlikely(!__pyx_tuple__468)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1319; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__468);
+  __Pyx_GIVEREF(__pyx_tuple__468);
 
   /* "tools.py":1320
  *             message.sub_info(_('EXECUTABLE'), ARGS.executable)
@@ -40940,9 +40998,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('BACKUP'), ARGS.backup)
  *             message.sub_info(_('CONFLICTS'), ARGS.conflicts)
  */
-  __pyx_tuple__472 = PyTuple_Pack(1, __pyx_n_s_SHEBANG); if (unlikely(!__pyx_tuple__472)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1320; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__472);
-  __Pyx_GIVEREF(__pyx_tuple__472);
+  __pyx_tuple__469 = PyTuple_Pack(1, __pyx_n_s_SHEBANG); if (unlikely(!__pyx_tuple__469)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1320; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__469);
+  __Pyx_GIVEREF(__pyx_tuple__469);
 
   /* "tools.py":1321
  *             message.sub_info(_('PATH'), ARGS.path)
@@ -40951,9 +41009,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('CONFLICTS'), ARGS.conflicts)
  *             message.sub_info(_('DEBUG'), ARGS.debug)
  */
-  __pyx_tuple__473 = PyTuple_Pack(1, __pyx_n_s_BACKUP); if (unlikely(!__pyx_tuple__473)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1321; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__473);
-  __Pyx_GIVEREF(__pyx_tuple__473);
+  __pyx_tuple__470 = PyTuple_Pack(1, __pyx_n_s_BACKUP); if (unlikely(!__pyx_tuple__470)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1321; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__470);
+  __Pyx_GIVEREF(__pyx_tuple__470);
 
   /* "tools.py":1322
  *             message.sub_info(_('SHEBANG'), ARGS.shebang)
@@ -40962,9 +41020,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('DEBUG'), ARGS.debug)
  *             message.sub_info(_('TARGETS'), ARGS.TARGETS)
  */
-  __pyx_tuple__474 = PyTuple_Pack(1, __pyx_n_s_CONFLICTS); if (unlikely(!__pyx_tuple__474)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1322; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__474);
-  __Pyx_GIVEREF(__pyx_tuple__474);
+  __pyx_tuple__471 = PyTuple_Pack(1, __pyx_n_s_CONFLICTS); if (unlikely(!__pyx_tuple__471)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1322; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__471);
+  __Pyx_GIVEREF(__pyx_tuple__471);
 
   /* "tools.py":1323
  *             message.sub_info(_('BACKUP'), ARGS.backup)
@@ -40973,9 +41031,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('TARGETS'), ARGS.TARGETS)
  *             message.info(_('Poking locals...'))
  */
-  __pyx_tuple__475 = PyTuple_Pack(1, __pyx_n_s_DEBUG); if (unlikely(!__pyx_tuple__475)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1323; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__475);
-  __Pyx_GIVEREF(__pyx_tuple__475);
+  __pyx_tuple__472 = PyTuple_Pack(1, __pyx_n_s_DEBUG); if (unlikely(!__pyx_tuple__472)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1323; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__472);
+  __Pyx_GIVEREF(__pyx_tuple__472);
 
   /* "tools.py":1324
  *             message.sub_info(_('CONFLICTS'), ARGS.conflicts)
@@ -40984,9 +41042,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.info(_('Poking locals...'))
  * 
  */
-  __pyx_tuple__476 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__476)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1324; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__476);
-  __Pyx_GIVEREF(__pyx_tuple__476);
+  __pyx_tuple__473 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__473)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1324; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__473);
+  __Pyx_GIVEREF(__pyx_tuple__473);
 
   /* "tools.py":1325
  *             message.sub_info(_('DEBUG'), ARGS.debug)
@@ -40995,9 +41053,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *             m = Lint(ARGS.TARGETS, ARGS.man, ARGS.udev, ARGS.symlink, \
  */
-  __pyx_tuple__477 = PyTuple_Pack(1, __pyx_kp_s_Poking_locals); if (unlikely(!__pyx_tuple__477)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1325; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__477);
-  __Pyx_GIVEREF(__pyx_tuple__477);
+  __pyx_tuple__474 = PyTuple_Pack(1, __pyx_kp_s_Poking_locals); if (unlikely(!__pyx_tuple__474)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1325; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__474);
+  __Pyx_GIVEREF(__pyx_tuple__474);
 
   /* "tools.py":1346
  *                 ARGS.signatures = True
@@ -41006,9 +41064,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('ENABLE'), ARGS.enable)
  *             message.sub_info(_('DISABLE'), ARGS.disable)
  */
-  __pyx_tuple__478 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__478)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1346; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__478);
-  __Pyx_GIVEREF(__pyx_tuple__478);
+  __pyx_tuple__475 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__475)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1346; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__475);
+  __Pyx_GIVEREF(__pyx_tuple__475);
 
   /* "tools.py":1347
  * 
@@ -41017,9 +41075,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('DISABLE'), ARGS.disable)
  *             message.sub_info(_('NULL'), ARGS.null)
  */
-  __pyx_tuple__479 = PyTuple_Pack(1, __pyx_n_s_ENABLE); if (unlikely(!__pyx_tuple__479)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1347; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__479);
-  __Pyx_GIVEREF(__pyx_tuple__479);
+  __pyx_tuple__476 = PyTuple_Pack(1, __pyx_n_s_ENABLE); if (unlikely(!__pyx_tuple__476)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1347; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__476);
+  __Pyx_GIVEREF(__pyx_tuple__476);
 
   /* "tools.py":1348
  *             message.info(_('Runtime information'))
@@ -41028,9 +41086,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('NULL'), ARGS.null)
  *             message.sub_info(_('MAINTAINER'), ARGS.maintainer)
  */
-  __pyx_tuple__480 = PyTuple_Pack(1, __pyx_n_s_DISABLE); if (unlikely(!__pyx_tuple__480)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1348; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__480);
-  __Pyx_GIVEREF(__pyx_tuple__480);
+  __pyx_tuple__477 = PyTuple_Pack(1, __pyx_n_s_DISABLE); if (unlikely(!__pyx_tuple__477)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1348; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__477);
+  __Pyx_GIVEREF(__pyx_tuple__477);
 
   /* "tools.py":1349
  *             message.sub_info(_('ENABLE'), ARGS.enable)
@@ -41039,9 +41097,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('MAINTAINER'), ARGS.maintainer)
  *             message.sub_info(_('NOTE'), ARGS.note)
  */
-  __pyx_tuple__481 = PyTuple_Pack(1, __pyx_n_s_NULL); if (unlikely(!__pyx_tuple__481)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1349; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__481);
-  __Pyx_GIVEREF(__pyx_tuple__481);
+  __pyx_tuple__478 = PyTuple_Pack(1, __pyx_n_s_NULL); if (unlikely(!__pyx_tuple__478)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1349; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__478);
+  __Pyx_GIVEREF(__pyx_tuple__478);
 
   /* "tools.py":1350
  *             message.sub_info(_('DISABLE'), ARGS.disable)
@@ -41050,9 +41108,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('NOTE'), ARGS.note)
  *             message.sub_info(_('VARIABLES'), ARGS.variables)
  */
-  __pyx_tuple__482 = PyTuple_Pack(1, __pyx_n_s_MAINTAINER); if (unlikely(!__pyx_tuple__482)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1350; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__482);
-  __Pyx_GIVEREF(__pyx_tuple__482);
+  __pyx_tuple__479 = PyTuple_Pack(1, __pyx_n_s_MAINTAINER); if (unlikely(!__pyx_tuple__479)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1350; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__479);
+  __Pyx_GIVEREF(__pyx_tuple__479);
 
   /* "tools.py":1351
  *             message.sub_info(_('NULL'), ARGS.null)
@@ -41061,9 +41119,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('VARIABLES'), ARGS.variables)
  *             message.sub_info(_('TRIGGERS'), ARGS.triggers)
  */
-  __pyx_tuple__483 = PyTuple_Pack(1, __pyx_n_s_NOTE); if (unlikely(!__pyx_tuple__483)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1351; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__483);
-  __Pyx_GIVEREF(__pyx_tuple__483);
+  __pyx_tuple__480 = PyTuple_Pack(1, __pyx_n_s_NOTE); if (unlikely(!__pyx_tuple__480)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1351; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__480);
+  __Pyx_GIVEREF(__pyx_tuple__480);
 
   /* "tools.py":1352
  *             message.sub_info(_('MAINTAINER'), ARGS.maintainer)
@@ -41072,9 +41130,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('TRIGGERS'), ARGS.triggers)
  *             message.sub_info(_('USERS'), ARGS.users)
  */
-  __pyx_tuple__484 = PyTuple_Pack(1, __pyx_n_s_VARIABLES); if (unlikely(!__pyx_tuple__484)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1352; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__484);
-  __Pyx_GIVEREF(__pyx_tuple__484);
+  __pyx_tuple__481 = PyTuple_Pack(1, __pyx_n_s_VARIABLES); if (unlikely(!__pyx_tuple__481)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1352; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__481);
+  __Pyx_GIVEREF(__pyx_tuple__481);
 
   /* "tools.py":1353
  *             message.sub_info(_('NOTE'), ARGS.note)
@@ -41083,9 +41141,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('USERS'), ARGS.users)
  *             message.sub_info(_('GROUPS'), ARGS.groups)
  */
-  __pyx_tuple__485 = PyTuple_Pack(1, __pyx_n_s_TRIGGERS); if (unlikely(!__pyx_tuple__485)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1353; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__485);
-  __Pyx_GIVEREF(__pyx_tuple__485);
+  __pyx_tuple__482 = PyTuple_Pack(1, __pyx_n_s_TRIGGERS); if (unlikely(!__pyx_tuple__482)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1353; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__482);
+  __Pyx_GIVEREF(__pyx_tuple__482);
 
   /* "tools.py":1354
  *             message.sub_info(_('VARIABLES'), ARGS.variables)
@@ -41094,9 +41152,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('GROUPS'), ARGS.groups)
  *             message.sub_info(_('SIGNATURES'), ARGS.signatures)
  */
-  __pyx_tuple__486 = PyTuple_Pack(1, __pyx_n_s_USERS); if (unlikely(!__pyx_tuple__486)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1354; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__486);
-  __Pyx_GIVEREF(__pyx_tuple__486);
+  __pyx_tuple__483 = PyTuple_Pack(1, __pyx_n_s_USERS); if (unlikely(!__pyx_tuple__483)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1354; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__483);
+  __Pyx_GIVEREF(__pyx_tuple__483);
 
   /* "tools.py":1355
  *             message.sub_info(_('TRIGGERS'), ARGS.triggers)
@@ -41105,9 +41163,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('SIGNATURES'), ARGS.signatures)
  *             message.sub_info(_('TARGETS'), ARGS.TARGETS)
  */
-  __pyx_tuple__487 = PyTuple_Pack(1, __pyx_n_s_GROUPS); if (unlikely(!__pyx_tuple__487)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1355; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__487);
-  __Pyx_GIVEREF(__pyx_tuple__487);
+  __pyx_tuple__484 = PyTuple_Pack(1, __pyx_n_s_GROUPS); if (unlikely(!__pyx_tuple__484)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1355; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__484);
+  __Pyx_GIVEREF(__pyx_tuple__484);
 
   /* "tools.py":1356
  *             message.sub_info(_('USERS'), ARGS.users)
@@ -41116,9 +41174,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('TARGETS'), ARGS.TARGETS)
  *             message.info(_('Poking remotes...'))
  */
-  __pyx_tuple__488 = PyTuple_Pack(1, __pyx_n_s_SIGNATURES); if (unlikely(!__pyx_tuple__488)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__488);
-  __Pyx_GIVEREF(__pyx_tuple__488);
+  __pyx_tuple__485 = PyTuple_Pack(1, __pyx_n_s_SIGNATURES); if (unlikely(!__pyx_tuple__485)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1356; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__485);
+  __Pyx_GIVEREF(__pyx_tuple__485);
 
   /* "tools.py":1357
  *             message.sub_info(_('GROUPS'), ARGS.groups)
@@ -41127,9 +41185,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.info(_('Poking remotes...'))
  * 
  */
-  __pyx_tuple__489 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__489)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1357; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__489);
-  __Pyx_GIVEREF(__pyx_tuple__489);
+  __pyx_tuple__486 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__486)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1357; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__486);
+  __Pyx_GIVEREF(__pyx_tuple__486);
 
   /* "tools.py":1358
  *             message.sub_info(_('SIGNATURES'), ARGS.signatures)
@@ -41138,9 +41196,9 @@ static int __Pyx_InitCachedConstants(void) {
  * 
  *             m = Sane(ARGS.TARGETS, ARGS.enable, ARGS.disable, ARGS.null, \
  */
-  __pyx_tuple__490 = PyTuple_Pack(1, __pyx_kp_s_Poking_remotes); if (unlikely(!__pyx_tuple__490)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1358; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__490);
-  __Pyx_GIVEREF(__pyx_tuple__490);
+  __pyx_tuple__487 = PyTuple_Pack(1, __pyx_kp_s_Poking_remotes); if (unlikely(!__pyx_tuple__487)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1358; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__487);
+  __Pyx_GIVEREF(__pyx_tuple__487);
 
   /* "tools.py":1366
  * 
@@ -41149,9 +41207,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('ROOT_DIR'), libspm.ROOT_DIR)
  *             message.info(_('Poking locals...'))
  */
-  __pyx_tuple__491 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__491)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1366; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__491);
-  __Pyx_GIVEREF(__pyx_tuple__491);
+  __pyx_tuple__488 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__488)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1366; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__488);
+  __Pyx_GIVEREF(__pyx_tuple__488);
 
   /* "tools.py":1367
  *         elif ARGS.mode == 'merge':
@@ -41160,9 +41218,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.info(_('Poking locals...'))
  *             m = Merge()
  */
-  __pyx_tuple__492 = PyTuple_Pack(1, __pyx_n_s_ROOT_DIR); if (unlikely(!__pyx_tuple__492)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__492);
-  __Pyx_GIVEREF(__pyx_tuple__492);
+  __pyx_tuple__489 = PyTuple_Pack(1, __pyx_n_s_ROOT_DIR); if (unlikely(!__pyx_tuple__489)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1367; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__489);
+  __Pyx_GIVEREF(__pyx_tuple__489);
 
   /* "tools.py":1368
  *             message.info(_('Runtime information'))
@@ -41171,9 +41229,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             m = Merge()
  *             m.main()
  */
-  __pyx_tuple__493 = PyTuple_Pack(1, __pyx_kp_s_Poking_locals); if (unlikely(!__pyx_tuple__493)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1368; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__493);
-  __Pyx_GIVEREF(__pyx_tuple__493);
+  __pyx_tuple__490 = PyTuple_Pack(1, __pyx_kp_s_Poking_locals); if (unlikely(!__pyx_tuple__490)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1368; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__490);
+  __Pyx_GIVEREF(__pyx_tuple__490);
 
   /* "tools.py":1373
  * 
@@ -41182,9 +41240,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('TARGETS'), ARGS.TARGETS)
  *             message.info(_('Poking remotes...'))
  */
-  __pyx_tuple__494 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__494)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1373; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__494);
-  __Pyx_GIVEREF(__pyx_tuple__494);
+  __pyx_tuple__491 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__491)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1373; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__491);
+  __Pyx_GIVEREF(__pyx_tuple__491);
 
   /* "tools.py":1374
  *         elif ARGS.mode == 'edit':
@@ -41193,9 +41251,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.info(_('Poking remotes...'))
  *             m = Edit(ARGS.TARGETS)
  */
-  __pyx_tuple__495 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__495)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1374; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__495);
-  __Pyx_GIVEREF(__pyx_tuple__495);
+  __pyx_tuple__492 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__492)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1374; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__492);
+  __Pyx_GIVEREF(__pyx_tuple__492);
 
   /* "tools.py":1375
  *             message.info(_('Runtime information'))
@@ -41204,9 +41262,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             m = Edit(ARGS.TARGETS)
  *             m.main()
  */
-  __pyx_tuple__496 = PyTuple_Pack(1, __pyx_kp_s_Poking_remotes); if (unlikely(!__pyx_tuple__496)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1375; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__496);
-  __Pyx_GIVEREF(__pyx_tuple__496);
+  __pyx_tuple__493 = PyTuple_Pack(1, __pyx_kp_s_Poking_remotes); if (unlikely(!__pyx_tuple__493)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1375; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__493);
+  __Pyx_GIVEREF(__pyx_tuple__493);
 
   /* "tools.py":1381
  *         elif ARGS.mode == 'which':
@@ -41215,9 +41273,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 message.sub_info(_('PATTERN'), ARGS.PATTERN)
  *             m = Which(ARGS.PATTERN, ARGS.cat, ARGS.plain)
  */
-  __pyx_tuple__497 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__497)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1381; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__497);
-  __Pyx_GIVEREF(__pyx_tuple__497);
+  __pyx_tuple__494 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__494)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1381; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__494);
+  __Pyx_GIVEREF(__pyx_tuple__494);
 
   /* "tools.py":1382
  *             if not ARGS.plain:
@@ -41226,9 +41284,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             m = Which(ARGS.PATTERN, ARGS.cat, ARGS.plain)
  *             m.main()
  */
-  __pyx_tuple__498 = PyTuple_Pack(1, __pyx_n_s_PATTERN); if (unlikely(!__pyx_tuple__498)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1382; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__498);
-  __Pyx_GIVEREF(__pyx_tuple__498);
+  __pyx_tuple__495 = PyTuple_Pack(1, __pyx_n_s_PATTERN); if (unlikely(!__pyx_tuple__495)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1382; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__495);
+  __Pyx_GIVEREF(__pyx_tuple__495);
 
   /* "tools.py":1387
  * 
@@ -41237,9 +41295,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('DIRECTORY'), ARGS.directory)
  *             message.sub_info(_('TARGETS'), ARGS.TARGETS)
  */
-  __pyx_tuple__499 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__499)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1387; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__499);
-  __Pyx_GIVEREF(__pyx_tuple__499);
+  __pyx_tuple__496 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__496)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1387; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__496);
+  __Pyx_GIVEREF(__pyx_tuple__496);
 
   /* "tools.py":1388
  *         elif ARGS.mode == 'pack':
@@ -41248,9 +41306,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('TARGETS'), ARGS.TARGETS)
  *             m = Pack(ARGS.TARGETS, ARGS.directory)
  */
-  __pyx_tuple__500 = PyTuple_Pack(1, __pyx_n_s_DIRECTORY); if (unlikely(!__pyx_tuple__500)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1388; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__500);
-  __Pyx_GIVEREF(__pyx_tuple__500);
+  __pyx_tuple__497 = PyTuple_Pack(1, __pyx_n_s_DIRECTORY); if (unlikely(!__pyx_tuple__497)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1388; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__497);
+  __Pyx_GIVEREF(__pyx_tuple__497);
 
   /* "tools.py":1389
  *             message.info(_('Runtime information'))
@@ -41259,9 +41317,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             m = Pack(ARGS.TARGETS, ARGS.directory)
  *             m.main()
  */
-  __pyx_tuple__501 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__501)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1389; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__501);
-  __Pyx_GIVEREF(__pyx_tuple__501);
+  __pyx_tuple__498 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__498)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1389; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__498);
+  __Pyx_GIVEREF(__pyx_tuple__498);
 
   /* "tools.py":1394
  * 
@@ -41270,9 +41328,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('DIRECTORY'), ARGS.directory)
  *             message.sub_info(_('TARGETS'), ARGS.TARGETS)
  */
-  __pyx_tuple__502 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__502)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1394; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__502);
-  __Pyx_GIVEREF(__pyx_tuple__502);
+  __pyx_tuple__499 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__499)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1394; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__499);
+  __Pyx_GIVEREF(__pyx_tuple__499);
 
   /* "tools.py":1395
  *         elif ARGS.mode == 'pkg':
@@ -41281,9 +41339,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('TARGETS'), ARGS.TARGETS)
  *             m = Pkg(ARGS.TARGETS, ARGS.directory)
  */
-  __pyx_tuple__503 = PyTuple_Pack(1, __pyx_n_s_DIRECTORY); if (unlikely(!__pyx_tuple__503)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1395; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__503);
-  __Pyx_GIVEREF(__pyx_tuple__503);
+  __pyx_tuple__500 = PyTuple_Pack(1, __pyx_n_s_DIRECTORY); if (unlikely(!__pyx_tuple__500)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1395; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__500);
+  __Pyx_GIVEREF(__pyx_tuple__500);
 
   /* "tools.py":1396
  *             message.info(_('Runtime information'))
@@ -41292,9 +41350,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             m = Pkg(ARGS.TARGETS, ARGS.directory)
  *             m.main()
  */
-  __pyx_tuple__504 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__504)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__504);
-  __Pyx_GIVEREF(__pyx_tuple__504);
+  __pyx_tuple__501 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__501)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1396; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__501);
+  __Pyx_GIVEREF(__pyx_tuple__501);
 
   /* "tools.py":1401
  * 
@@ -41303,9 +41361,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('CACHE_DIR'), libspm.CACHE_DIR)
  *             message.sub_info(_('PORT'), ARGS.port)
  */
-  __pyx_tuple__505 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__505)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1401; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__505);
-  __Pyx_GIVEREF(__pyx_tuple__505);
+  __pyx_tuple__502 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__502)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1401; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__502);
+  __Pyx_GIVEREF(__pyx_tuple__502);
 
   /* "tools.py":1402
  *         elif ARGS.mode == 'serve':
@@ -41314,9 +41372,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('PORT'), ARGS.port)
  *             message.sub_info(_('ADDRESS'), ARGS.address)
  */
-  __pyx_tuple__506 = PyTuple_Pack(1, __pyx_n_s_CACHE_DIR); if (unlikely(!__pyx_tuple__506)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1402; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__506);
-  __Pyx_GIVEREF(__pyx_tuple__506);
+  __pyx_tuple__503 = PyTuple_Pack(1, __pyx_n_s_CACHE_DIR); if (unlikely(!__pyx_tuple__503)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1402; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__503);
+  __Pyx_GIVEREF(__pyx_tuple__503);
 
   /* "tools.py":1403
  *             message.info(_('Runtime information'))
@@ -41325,9 +41383,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('ADDRESS'), ARGS.address)
  *             m = Serve(ARGS.port, ARGS.address)
  */
-  __pyx_tuple__507 = PyTuple_Pack(1, __pyx_n_s_PORT); if (unlikely(!__pyx_tuple__507)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__507);
-  __Pyx_GIVEREF(__pyx_tuple__507);
+  __pyx_tuple__504 = PyTuple_Pack(1, __pyx_n_s_PORT); if (unlikely(!__pyx_tuple__504)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1403; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__504);
+  __Pyx_GIVEREF(__pyx_tuple__504);
 
   /* "tools.py":1404
  *             message.sub_info(_('CACHE_DIR'), libspm.CACHE_DIR)
@@ -41336,9 +41394,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             m = Serve(ARGS.port, ARGS.address)
  *             m.main()
  */
-  __pyx_tuple__508 = PyTuple_Pack(1, __pyx_n_s_ADDRESS); if (unlikely(!__pyx_tuple__508)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1404; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__508);
-  __Pyx_GIVEREF(__pyx_tuple__508);
+  __pyx_tuple__505 = PyTuple_Pack(1, __pyx_n_s_ADDRESS); if (unlikely(!__pyx_tuple__505)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1404; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__505);
+  __Pyx_GIVEREF(__pyx_tuple__505);
 
   /* "tools.py":1410
  *         elif ARGS.mode == 'disowned':
@@ -41347,9 +41405,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 message.sub_info(_('DIRECTORY'), ARGS.directory)
  *                 message.sub_info(_('CROSS'), ARGS.cross)
  */
-  __pyx_tuple__509 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__509)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1410; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__509);
-  __Pyx_GIVEREF(__pyx_tuple__509);
+  __pyx_tuple__506 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__506)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1410; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__506);
+  __Pyx_GIVEREF(__pyx_tuple__506);
 
   /* "tools.py":1411
  *             if not ARGS.plain:
@@ -41358,9 +41416,9 @@ static int __Pyx_InitCachedConstants(void) {
  *                 message.sub_info(_('CROSS'), ARGS.cross)
  *             m = Disowned(ARGS.directory, ARGS.cross, ARGS.plain)
  */
-  __pyx_tuple__510 = PyTuple_Pack(1, __pyx_n_s_DIRECTORY); if (unlikely(!__pyx_tuple__510)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1411; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__510);
-  __Pyx_GIVEREF(__pyx_tuple__510);
+  __pyx_tuple__507 = PyTuple_Pack(1, __pyx_n_s_DIRECTORY); if (unlikely(!__pyx_tuple__507)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1411; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__507);
+  __Pyx_GIVEREF(__pyx_tuple__507);
 
   /* "tools.py":1412
  *                 message.info(_('Runtime information'))
@@ -41369,9 +41427,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             m = Disowned(ARGS.directory, ARGS.cross, ARGS.plain)
  *             m.main()
  */
-  __pyx_tuple__511 = PyTuple_Pack(1, __pyx_n_s_CROSS); if (unlikely(!__pyx_tuple__511)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1412; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__511);
-  __Pyx_GIVEREF(__pyx_tuple__511);
+  __pyx_tuple__508 = PyTuple_Pack(1, __pyx_n_s_CROSS); if (unlikely(!__pyx_tuple__508)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1412; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__508);
+  __Pyx_GIVEREF(__pyx_tuple__508);
 
   /* "tools.py":1417
  * 
@@ -41380,9 +41438,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('HOST'), ARGS.host)
  *             message.sub_info(_('USER'), ARGS.user)
  */
-  __pyx_tuple__512 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__512)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1417; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__512);
-  __Pyx_GIVEREF(__pyx_tuple__512);
+  __pyx_tuple__509 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__509)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1417; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__509);
+  __Pyx_GIVEREF(__pyx_tuple__509);
 
   /* "tools.py":1418
  *         elif ARGS.mode == 'upload':
@@ -41391,9 +41449,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('USER'), ARGS.user)
  *             message.sub_info(_('DIRECTORY'), ARGS.directory)
  */
-  __pyx_tuple__513 = PyTuple_Pack(1, __pyx_n_s_HOST); if (unlikely(!__pyx_tuple__513)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1418; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__513);
-  __Pyx_GIVEREF(__pyx_tuple__513);
+  __pyx_tuple__510 = PyTuple_Pack(1, __pyx_n_s_HOST); if (unlikely(!__pyx_tuple__510)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1418; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__510);
+  __Pyx_GIVEREF(__pyx_tuple__510);
 
   /* "tools.py":1419
  *             message.info(_('Runtime information'))
@@ -41402,9 +41460,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('DIRECTORY'), ARGS.directory)
  *             message.sub_info(_('INSECURE'), ARGS.insecure)
  */
-  __pyx_tuple__514 = PyTuple_Pack(1, __pyx_n_s_USER); if (unlikely(!__pyx_tuple__514)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1419; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__514);
-  __Pyx_GIVEREF(__pyx_tuple__514);
+  __pyx_tuple__511 = PyTuple_Pack(1, __pyx_n_s_USER); if (unlikely(!__pyx_tuple__511)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1419; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__511);
+  __Pyx_GIVEREF(__pyx_tuple__511);
 
   /* "tools.py":1420
  *             message.sub_info(_('HOST'), ARGS.host)
@@ -41413,9 +41471,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('INSECURE'), ARGS.insecure)
  *             message.sub_info(_('TARGETS'), ARGS.TARGETS)
  */
-  __pyx_tuple__515 = PyTuple_Pack(1, __pyx_n_s_DIRECTORY); if (unlikely(!__pyx_tuple__515)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1420; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__515);
-  __Pyx_GIVEREF(__pyx_tuple__515);
+  __pyx_tuple__512 = PyTuple_Pack(1, __pyx_n_s_DIRECTORY); if (unlikely(!__pyx_tuple__512)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1420; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__512);
+  __Pyx_GIVEREF(__pyx_tuple__512);
 
   /* "tools.py":1421
  *             message.sub_info(_('USER'), ARGS.user)
@@ -41424,9 +41482,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('TARGETS'), ARGS.TARGETS)
  *             message.info(_('Poking server...'))
  */
-  __pyx_tuple__516 = PyTuple_Pack(1, __pyx_n_s_INSECURE); if (unlikely(!__pyx_tuple__516)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1421; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__516);
-  __Pyx_GIVEREF(__pyx_tuple__516);
+  __pyx_tuple__513 = PyTuple_Pack(1, __pyx_n_s_INSECURE); if (unlikely(!__pyx_tuple__513)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1421; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__513);
+  __Pyx_GIVEREF(__pyx_tuple__513);
 
   /* "tools.py":1422
  *             message.sub_info(_('DIRECTORY'), ARGS.directory)
@@ -41435,9 +41493,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.info(_('Poking server...'))
  *             m = Upload(ARGS.TARGETS, ARGS.host, ARGS.user, ARGS.directory, \
  */
-  __pyx_tuple__517 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__517)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1422; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__517);
-  __Pyx_GIVEREF(__pyx_tuple__517);
+  __pyx_tuple__514 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__514)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1422; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__514);
+  __Pyx_GIVEREF(__pyx_tuple__514);
 
   /* "tools.py":1423
  *             message.sub_info(_('INSECURE'), ARGS.insecure)
@@ -41446,9 +41504,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             m = Upload(ARGS.TARGETS, ARGS.host, ARGS.user, ARGS.directory, \
  *                 ARGS.insecure)
  */
-  __pyx_tuple__518 = PyTuple_Pack(1, __pyx_kp_s_Poking_server); if (unlikely(!__pyx_tuple__518)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1423; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__518);
-  __Pyx_GIVEREF(__pyx_tuple__518);
+  __pyx_tuple__515 = PyTuple_Pack(1, __pyx_kp_s_Poking_server); if (unlikely(!__pyx_tuple__515)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1423; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__515);
+  __Pyx_GIVEREF(__pyx_tuple__515);
 
   /* "tools.py":1429
  * 
@@ -41457,9 +41515,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('URL'), ARGS.url)
  *             m = Online(ARGS.url)
  */
-  __pyx_tuple__519 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__519)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1429; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__519);
-  __Pyx_GIVEREF(__pyx_tuple__519);
+  __pyx_tuple__516 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__516)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1429; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__516);
+  __Pyx_GIVEREF(__pyx_tuple__516);
 
   /* "tools.py":1430
  *         elif ARGS.mode == 'online':
@@ -41468,9 +41526,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             m = Online(ARGS.url)
  *             m.main()
  */
-  __pyx_tuple__520 = PyTuple_Pack(1, __pyx_n_s_URL); if (unlikely(!__pyx_tuple__520)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1430; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__520);
-  __Pyx_GIVEREF(__pyx_tuple__520);
+  __pyx_tuple__517 = PyTuple_Pack(1, __pyx_n_s_URL); if (unlikely(!__pyx_tuple__517)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1430; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__517);
+  __Pyx_GIVEREF(__pyx_tuple__517);
 
   /* "tools.py":1439
  * 
@@ -41479,9 +41537,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('DIRECTORY'), ARGS.directory)
  *             message.sub_info(_('CREATE'), ARGS.create)
  */
-  __pyx_tuple__521 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__521)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1439; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__521);
-  __Pyx_GIVEREF(__pyx_tuple__521);
+  __pyx_tuple__518 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__518)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1439; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__518);
+  __Pyx_GIVEREF(__pyx_tuple__518);
 
   /* "tools.py":1440
  *         elif ARGS.mode == 'digest':
@@ -41490,9 +41548,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('CREATE'), ARGS.create)
  *             message.sub_info(_('VERIFY'), ARGS.verify)
  */
-  __pyx_tuple__522 = PyTuple_Pack(1, __pyx_n_s_DIRECTORY); if (unlikely(!__pyx_tuple__522)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1440; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__522);
-  __Pyx_GIVEREF(__pyx_tuple__522);
+  __pyx_tuple__519 = PyTuple_Pack(1, __pyx_n_s_DIRECTORY); if (unlikely(!__pyx_tuple__519)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1440; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__519);
+  __Pyx_GIVEREF(__pyx_tuple__519);
 
   /* "tools.py":1441
  *             message.info(_('Runtime information'))
@@ -41501,9 +41559,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('VERIFY'), ARGS.verify)
  *             message.sub_info(_('BACKUP'), ARGS.backup)
  */
-  __pyx_tuple__523 = PyTuple_Pack(1, __pyx_n_s_CREATE); if (unlikely(!__pyx_tuple__523)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1441; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__523);
-  __Pyx_GIVEREF(__pyx_tuple__523);
+  __pyx_tuple__520 = PyTuple_Pack(1, __pyx_n_s_CREATE); if (unlikely(!__pyx_tuple__520)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1441; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__520);
+  __Pyx_GIVEREF(__pyx_tuple__520);
 
   /* "tools.py":1442
  *             message.sub_info(_('DIRECTORY'), ARGS.directory)
@@ -41512,9 +41570,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('BACKUP'), ARGS.backup)
  *             message.sub_info(_('TARGETS'), ARGS.TARGETS)
  */
-  __pyx_tuple__524 = PyTuple_Pack(1, __pyx_n_s_VERIFY); if (unlikely(!__pyx_tuple__524)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1442; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__524);
-  __Pyx_GIVEREF(__pyx_tuple__524);
+  __pyx_tuple__521 = PyTuple_Pack(1, __pyx_n_s_VERIFY); if (unlikely(!__pyx_tuple__521)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1442; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__521);
+  __Pyx_GIVEREF(__pyx_tuple__521);
 
   /* "tools.py":1443
  *             message.sub_info(_('CREATE'), ARGS.create)
@@ -41523,9 +41581,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('TARGETS'), ARGS.TARGETS)
  *             m = Digest(ARGS.TARGETS, ARGS.directory, ARGS.create, \
  */
-  __pyx_tuple__525 = PyTuple_Pack(1, __pyx_n_s_BACKUP); if (unlikely(!__pyx_tuple__525)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1443; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__525);
-  __Pyx_GIVEREF(__pyx_tuple__525);
+  __pyx_tuple__522 = PyTuple_Pack(1, __pyx_n_s_BACKUP); if (unlikely(!__pyx_tuple__522)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1443; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__522);
+  __Pyx_GIVEREF(__pyx_tuple__522);
 
   /* "tools.py":1444
  *             message.sub_info(_('VERIFY'), ARGS.verify)
@@ -41534,9 +41592,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             m = Digest(ARGS.TARGETS, ARGS.directory, ARGS.create, \
  *                 ARGS.verify, ARGS.backup)
  */
-  __pyx_tuple__526 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__526)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1444; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__526);
-  __Pyx_GIVEREF(__pyx_tuple__526);
+  __pyx_tuple__523 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__523)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1444; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__523);
+  __Pyx_GIVEREF(__pyx_tuple__523);
 
   /* "tools.py":1450
  * 
@@ -41545,9 +41603,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('DIRECTORY'), ARGS.directory)
  *             message.sub_info(_('TARGETS'), ARGS.TARGETS)
  */
-  __pyx_tuple__527 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__527)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1450; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__527);
-  __Pyx_GIVEREF(__pyx_tuple__527);
+  __pyx_tuple__524 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__524)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1450; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__524);
+  __Pyx_GIVEREF(__pyx_tuple__524);
 
   /* "tools.py":1451
  *         elif ARGS.mode == 'portable':
@@ -41556,9 +41614,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('TARGETS'), ARGS.TARGETS)
  *             m = Portable(ARGS.TARGETS, ARGS.directory)
  */
-  __pyx_tuple__528 = PyTuple_Pack(1, __pyx_n_s_DIRECTORY); if (unlikely(!__pyx_tuple__528)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1451; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__528);
-  __Pyx_GIVEREF(__pyx_tuple__528);
+  __pyx_tuple__525 = PyTuple_Pack(1, __pyx_n_s_DIRECTORY); if (unlikely(!__pyx_tuple__525)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1451; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__525);
+  __Pyx_GIVEREF(__pyx_tuple__525);
 
   /* "tools.py":1452
  *             message.info(_('Runtime information'))
@@ -41567,9 +41625,9 @@ static int __Pyx_InitCachedConstants(void) {
  *             m = Portable(ARGS.TARGETS, ARGS.directory)
  *             m.main()
  */
-  __pyx_tuple__529 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__529)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1452; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__529);
-  __Pyx_GIVEREF(__pyx_tuple__529);
+  __pyx_tuple__526 = PyTuple_Pack(1, __pyx_n_s_TARGETS); if (unlikely(!__pyx_tuple__526)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1452; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__526);
+  __Pyx_GIVEREF(__pyx_tuple__526);
 
   /* "tools.py":1498
  *         retvalue = 12
@@ -41578,9 +41636,9 @@ static int __Pyx_InitCachedConstants(void) {
  *         retvalue = 13
  *     except SystemExit:
  */
-  __pyx_tuple__530 = PyTuple_Pack(1, __pyx_kp_s_Interrupt_signal_received); if (unlikely(!__pyx_tuple__530)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1498; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __Pyx_GOTREF(__pyx_tuple__530);
-  __Pyx_GIVEREF(__pyx_tuple__530);
+  __pyx_tuple__527 = PyTuple_Pack(1, __pyx_kp_s_Interrupt_signal_received); if (unlikely(!__pyx_tuple__527)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1498; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __Pyx_GOTREF(__pyx_tuple__527);
+  __Pyx_GIVEREF(__pyx_tuple__527);
   __Pyx_RefNannyFinishContext();
   return 0;
   __pyx_L1_error:;
@@ -41772,7 +41830,7 @@ PyMODINIT_FUNC PyInit_tools(void)
   __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 4; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
   if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_fallback, Py_True) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 4; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
-  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__192, __pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 4; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__189, __pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 4; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -41986,9 +42044,9 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
     __pyx_t_1 = PyList_New(1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 16; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_1);
-    __Pyx_INCREF(__pyx_kp_s__109);
-    __Pyx_GIVEREF(__pyx_kp_s__109);
-    PyList_SET_ITEM(__pyx_t_1, 0, __pyx_kp_s__109);
+    __Pyx_INCREF(__pyx_kp_s__107);
+    __Pyx_GIVEREF(__pyx_kp_s__107);
+    PyList_SET_ITEM(__pyx_t_1, 0, __pyx_kp_s__107);
     __pyx_t_3 = __Pyx_Import(__pyx_n_s_http_server, __pyx_t_1, -1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 16; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -42101,7 +42159,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  * database = libspm.database
  * misc.GPG_DIR = libspm.GPG_DIR             # <<<<<<<<<<<<<<
  * 
- * app_version = "1.8.2 (e485961)"
+ * app_version = "1.8.2 (9c8a1fb)"
  */
   __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_libspm); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 24; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -42117,14 +42175,14 @@ PyMODINIT_FUNC PyInit_tools(void)
   /* "tools.py":26
  * misc.GPG_DIR = libspm.GPG_DIR
  * 
- * app_version = "1.8.2 (e485961)"             # <<<<<<<<<<<<<<
+ * app_version = "1.8.2 (9c8a1fb)"             # <<<<<<<<<<<<<<
  * 
  * class Check(object):
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_8_2_e485961) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_8_2_9c8a1fb) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 26; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":28
- * app_version = "1.8.2 (e485961)"
+ * app_version = "1.8.2 (9c8a1fb)"
  * 
  * class Check(object):             # <<<<<<<<<<<<<<
  *     ''' Check runtime dependencies of local targets '''
@@ -42147,9 +42205,9 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         do_reverse=False, do_adjust=False):
  *         self.targets = []
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_5Check_1__init__, 0, __pyx_n_s_Check___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__194)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_5Check_1__init__, 0, __pyx_n_s_Check___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__191)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__195);
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__192);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_init, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
@@ -42160,13 +42218,13 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         ''' Check if runtime dependencies of target are satisfied '''
  *         for target in self.check_targets:
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_5Check_3main, 0, __pyx_n_s_Check_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__197)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_5Check_3main, 0, __pyx_n_s_Check_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__194)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_main_2, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 50; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
   /* "tools.py":28
- * app_version = "1.8.2 (e485961)"
+ * app_version = "1.8.2 (9c8a1fb)"
  * 
  * class Check(object):             # <<<<<<<<<<<<<<
  *     ''' Check runtime dependencies of local targets '''
@@ -42204,7 +42262,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         # don't bother for targets in the base group
  *         self.base_targets = database.remote_alias('base')
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_5Clean_1__init__, 0, __pyx_n_s_Clean___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__199)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_5Clean_1__init__, 0, __pyx_n_s_Clean___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__196)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_init, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 143; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -42216,7 +42274,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         ''' Looks for target match and then execute action for every target '''
  *         for target in database.local_all(basename=True):
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_5Clean_3main, 0, __pyx_n_s_Clean_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__201)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_5Clean_3main, 0, __pyx_n_s_Clean_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__198)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_main_2, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 147; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -42260,7 +42318,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         directory=misc.dir_current()):
  *         self.targets = []
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_4Dist_1__init__, 0, __pyx_n_s_Dist___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__203)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_4Dist_1__init__, 0, __pyx_n_s_Dist___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__200)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (!__Pyx_CyFunction_InitDefaults(__pyx_t_5, sizeof(__pyx_defaults), 1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
@@ -42308,7 +42366,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         ''' Looks for target match and then execute action for every target '''
  *         for target in self.targets:
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_4Dist_3main, 0, __pyx_n_s_Dist_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__205)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_4Dist_3main, 0, __pyx_n_s_Dist_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__202)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_main_2, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -42352,9 +42410,9 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         doc=False, module=False, footprint=False, builddir=False, \
  *         ownership=False, executable=False, path=False, shebang=False, \
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_4Lint_1__init__, 0, __pyx_n_s_Lint___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__207)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 229; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_4Lint_1__init__, 0, __pyx_n_s_Lint___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__204)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 229; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__208);
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__205);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_init, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 229; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
@@ -42365,7 +42423,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         stat = os.stat(spath)
  *         unkown = False
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_4Lint_3_check_ownership, 0, __pyx_n_s_Lint__check_ownership, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__210)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_4Lint_3_check_ownership, 0, __pyx_n_s_Lint__check_ownership, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__207)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_check_ownership, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 251; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -42377,7 +42435,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         ''' Looks for target match and then execute action for every target '''
  *         for target in database.local_all(basename=True):
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_4Lint_5main, 0, __pyx_n_s_Lint_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__212)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_4Lint_5main, 0, __pyx_n_s_Lint_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__209)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_main_2, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 265; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -42421,9 +42479,9 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         maintainer=False, note=False, variables=False, triggers=False, \
  *         users=False, groups=False, signatures=False):
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_4Sane_1__init__, 0, __pyx_n_s_Sane___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__214)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 424; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_4Sane_1__init__, 0, __pyx_n_s_Sane___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__211)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 424; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__215);
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__212);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_init, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 424; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
@@ -42434,7 +42492,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         ''' Looks for target match and then execute action for every target '''
  *         for target in self.targets:
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_4Sane_3main, 0, __pyx_n_s_Sane_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__217)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 441; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_4Sane_3main, 0, __pyx_n_s_Sane_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__214)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 441; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_main_2, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 441; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -42478,7 +42536,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         self.targets = database.local_all(basename=True)
  * 
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_5Merge_1__init__, 0, __pyx_n_s_Merge___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__219)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 528; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_5Merge_1__init__, 0, __pyx_n_s_Merge___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__216)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 528; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_init, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 528; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -42490,7 +42548,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         message.sub_warning(_('Backup file detected'), backfile)
  *         editor = os.environ.get('EDITOR') or misc.whereis('vim')
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_5Merge_3merge, 0, __pyx_n_s_Merge_merge, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__221)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 531; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_5Merge_3merge, 0, __pyx_n_s_Merge_merge, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__218)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 531; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_merge, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 531; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -42502,7 +42560,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         for target in self.targets:
  *             message.sub_info(_('Checking'), target)
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_5Merge_5main, 0, __pyx_n_s_Merge_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__223)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 564; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_5Merge_5main, 0, __pyx_n_s_Merge_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__220)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 564; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_main_2, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 564; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -42546,7 +42604,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         self.targets = []
  *         for target in targets:
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_4Edit_1__init__, 0, __pyx_n_s_Edit___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__225)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 581; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_4Edit_1__init__, 0, __pyx_n_s_Edit___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__222)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 581; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_init, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 581; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -42558,7 +42616,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         editor = os.environ.get('EDITOR') or misc.whereis('vim')
  *         for target in self.targets:
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_4Edit_3main, 0, __pyx_n_s_Edit_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__227)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 586; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_4Edit_3main, 0, __pyx_n_s_Edit_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__224)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 586; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_main_2, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 586; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -42602,9 +42660,9 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         self.pattern = pattern
  *         self.cat = cat
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_5Which_1__init__, 0, __pyx_n_s_Which___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__229)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 596; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_5Which_1__init__, 0, __pyx_n_s_Which___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__226)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 596; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__230);
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__227);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_init, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 596; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
@@ -42615,7 +42673,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         for target in database.remote_all(basename=False):
  *             if re.search(self.pattern, target):
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_5Which_3main, 0, __pyx_n_s_Which_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__232)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 601; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_5Which_3main, 0, __pyx_n_s_Which_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__229)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 601; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_main_2, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 601; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -42659,7 +42717,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         self.targets = []
  *         for target in targets:
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_4Pack_1__init__, 0, __pyx_n_s_Pack___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__234)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 614; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_4Pack_1__init__, 0, __pyx_n_s_Pack___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__231)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 614; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (!__Pyx_CyFunction_InitDefaults(__pyx_t_5, sizeof(__pyx_defaults1), 1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 614; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 614; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -42699,7 +42757,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         for target in self.targets:
  *             if database.local_search(target):
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_4Pack_3main, 0, __pyx_n_s_Pack_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__236)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 620; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_4Pack_3main, 0, __pyx_n_s_Pack_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__233)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 620; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_main_2, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 620; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -42743,7 +42801,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         self.targets = []
  *         for target in targets:
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_3Pkg_1__init__, 0, __pyx_n_s_Pkg___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__238)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 646; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_3Pkg_1__init__, 0, __pyx_n_s_Pkg___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__235)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 646; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (!__Pyx_CyFunction_InitDefaults(__pyx_t_5, sizeof(__pyx_defaults2), 1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 646; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 646; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -42783,7 +42841,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         ''' Probe main URLs '''
  *         for d in self.PKG_DIRS:
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_3Pkg_3get_links, 0, __pyx_n_s_Pkg_get_links, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__240)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 662; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_3Pkg_3get_links, 0, __pyx_n_s_Pkg_get_links, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__237)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 662; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_get_links, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 662; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -42795,7 +42853,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         not_found = []
  *         for target in self.targets:
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_3Pkg_6main, 0, __pyx_n_s_Pkg_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__242)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 687; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_3Pkg_6main, 0, __pyx_n_s_Pkg_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__239)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 687; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_main_2, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 687; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -42839,7 +42897,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         self.port = port
  *         self.address = address
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_5Serve_1__init__, 0, __pyx_n_s_Serve___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__244)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 709; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_5Serve_1__init__, 0, __pyx_n_s_Serve___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__241)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 709; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_init, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 709; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -42851,7 +42909,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         httpd = None
  *         try:
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_5Serve_3main, 0, __pyx_n_s_Serve_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__246)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 713; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_5Serve_3main, 0, __pyx_n_s_Serve_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__243)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 713; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_main_2, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 713; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -42895,9 +42953,9 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         self.directory = directory
  *         self.cross = cross
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_8Disowned_1__init__, 0, __pyx_n_s_Disowned___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__248)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 728; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_8Disowned_1__init__, 0, __pyx_n_s_Disowned___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__245)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 728; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__249);
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__246);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_init, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 728; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
@@ -42908,7 +42966,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         if not self.plain:
  *             message.sub_info(_('Caching host files, this may take a while'))
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_8Disowned_3main, 0, __pyx_n_s_Disowned_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__251)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 733; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_8Disowned_3main, 0, __pyx_n_s_Disowned_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__248)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 733; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_main_2, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 733; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -42952,9 +43010,9 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         insecure=False):
  *         self.targets = []
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_6Upload_1__init__, 0, __pyx_n_s_Upload___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__253)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 752; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_6Upload_1__init__, 0, __pyx_n_s_Upload___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__250)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 752; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__254);
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__251);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_init, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 752; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
@@ -42965,7 +43023,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         if not self.host:
  *             message.sub_critical(_('Host is empty'))
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_6Upload_3main, 0, __pyx_n_s_Upload_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__256)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 762; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_6Upload_3main, 0, __pyx_n_s_Upload_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__253)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 762; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_main_2, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 762; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -43009,7 +43067,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         self.url = url
  * 
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_6Online_1__init__, 0, __pyx_n_s_Online___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__258)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 814; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_6Online_1__init__, 0, __pyx_n_s_Online___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__255)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 814; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_init, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 814; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -43021,7 +43079,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         if not misc.url_ping(self.url):
  *             sys.exit(1)
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_6Online_3main, 0, __pyx_n_s_Online_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__260)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 817; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_6Online_3main, 0, __pyx_n_s_Online_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__257)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 817; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_main_2, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 817; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -43065,7 +43123,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         # not much to do here
  *         pass
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_7Upgrade_1__init__, 0, __pyx_n_s_Upgrade___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__262)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 824; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_7Upgrade_1__init__, 0, __pyx_n_s_Upgrade___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__259)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 824; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_init, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 824; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -43077,7 +43135,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         ''' Ensure that SRCBUILD is present in the local target directory '''
  *         srcbuild = '%s/SRCBUILD' % target
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_7Upgrade_3upgrade_1_7_x_srcbuild, 0, __pyx_n_s_Upgrade_upgrade_1_7_x_srcbuild, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__264)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_7Upgrade_3upgrade_1_7_x_srcbuild, 0, __pyx_n_s_Upgrade_upgrade_1_7_x_srcbuild, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__261)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_upgrade_1_7_x_srcbuild, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 828; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -43089,7 +43147,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         ''' Build local target cache from legacy metadata and footprint '''
  *         metadata = '%s/metadata' % target
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_7Upgrade_5upgrade_1_7_x_metadata, 0, __pyx_n_s_Upgrade_upgrade_1_7_x_metadata, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__266)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 841; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_7Upgrade_5upgrade_1_7_x_metadata, 0, __pyx_n_s_Upgrade_upgrade_1_7_x_metadata, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__263)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 841; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_upgrade_1_7_x_metadata, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 841; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -43101,7 +43159,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         ''' Ensure local targets have the backup data in place '''
  *         metadata = '%s/metadata.json' % target
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_7Upgrade_7upgrade_1_7_x_backup, 0, __pyx_n_s_Upgrade_upgrade_1_7_x_backup, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__268)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 869; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_7Upgrade_7upgrade_1_7_x_backup, 0, __pyx_n_s_Upgrade_upgrade_1_7_x_backup, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__265)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 869; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_upgrade_1_7_x_backup, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 869; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -43113,7 +43171,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         ''' Ensure local targets have the optdepends data in place '''
  *         metadata = '%s/metadata.json' % target
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_7Upgrade_9upgrade_1_8_x_optdepends, 0, __pyx_n_s_Upgrade_upgrade_1_8_x_optdepends, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__270)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 891; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_7Upgrade_9upgrade_1_8_x_optdepends, 0, __pyx_n_s_Upgrade_upgrade_1_8_x_optdepends, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__267)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 891; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_upgrade_1_8_x_optdepends, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 891; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -43125,7 +43183,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         if not os.path.isdir(database.LOCAL_DIR):
  *             message.sub_warning(_('No local targets directory'), database.LOCAL_DIR)
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_7Upgrade_11main, 0, __pyx_n_s_Upgrade_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__272)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 904; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_7Upgrade_11main, 0, __pyx_n_s_Upgrade_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__269)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 904; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_main_2, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 904; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -43169,9 +43227,9 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         do_verify=False, do_backup=False):
  *         self.targets = []
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_6Digest_1__init__, 0, __pyx_n_s_Digest___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__274)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 922; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_6Digest_1__init__, 0, __pyx_n_s_Digest___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__271)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 922; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
-  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__275);
+  __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__272);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_init, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 922; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
@@ -43182,7 +43240,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         ''' Create a digest of target(s) files '''
  *         digest = {}
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_6Digest_3create, 0, __pyx_n_s_Digest_create, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__277)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 933; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_6Digest_3create, 0, __pyx_n_s_Digest_create, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__274)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 933; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_create, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 933; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -43194,7 +43252,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         ''' Verify target(s) files from digets '''
  *         digest = misc.json_read('%s/digest.json' % self.directory)
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_6Digest_5verify, 0, __pyx_n_s_Digest_verify, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__279)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 956; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_6Digest_5verify, 0, __pyx_n_s_Digest_verify, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__276)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 956; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_verify, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 956; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -43206,7 +43264,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         if self.do_create:
  *             self.create()
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_6Digest_7main, 0, __pyx_n_s_Digest_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__281)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 979; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_6Digest_7main, 0, __pyx_n_s_Digest_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__278)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 979; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_main_2, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 979; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -43250,7 +43308,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         self.targets = []
  *         for target in targets:
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_8Portable_1__init__, 0, __pyx_n_s_Portable___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__283)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 989; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_8Portable_1__init__, 0, __pyx_n_s_Portable___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__280)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 989; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (!__Pyx_CyFunction_InitDefaults(__pyx_t_5, sizeof(__pyx_defaults3), 1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 989; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 989; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -43290,7 +43348,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *         for target in self.targets:
  *             if database.local_search(target):
  */
-  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_8Portable_3main, 0, __pyx_n_s_Portable_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__285)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 995; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_8Portable_3main, 0, __pyx_n_s_Portable_main, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__282)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 995; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_5);
   if (PyObject_SetItem(__pyx_t_1, __pyx_n_s_main_2, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 995; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -43433,9 +43491,9 @@ PyMODINIT_FUNC PyInit_tools(void)
  *                 full_path = os.path.abspath(values) + '/'
  *                 libspm.ROOT_DIR = full_path
  */
-          __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_15OverrideRootDir_1__call__, 0, __pyx_n_s_OverrideRootDir___call, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__287)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1058; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_15OverrideRootDir_1__call__, 0, __pyx_n_s_OverrideRootDir___call, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__284)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1058; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
-          __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__288);
+          __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__285);
           if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_call, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1058; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
@@ -43483,9 +43541,9 @@ PyMODINIT_FUNC PyInit_tools(void)
  *                 message.DEBUG = True
  *                 setattr(namespace, self.dest, values)
  */
-          __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_13OverrideDebug_1__call__, 0, __pyx_n_s_OverrideDebug___call, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__290)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1070; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_13OverrideDebug_1__call__, 0, __pyx_n_s_OverrideDebug___call, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__287)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1070; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
-          __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__291);
+          __Pyx_CyFunction_SetDefaultsTuple(__pyx_t_5, __pyx_tuple__288);
           if (PyObject_SetItem(__pyx_t_2, __pyx_n_s_call, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1070; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
@@ -43530,7 +43588,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1076; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__292, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1076; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__289, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1076; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_epilog, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1074; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -43600,7 +43658,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_add_parser); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1080; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__293, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1080; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__290, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1080; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
             if (PyDict_SetItem(__pyx_d, __pyx_n_s_dist_parser, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1080; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -43631,7 +43689,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1082; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
-            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__295, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1082; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__292, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1082; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_help, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1081; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -43644,7 +43702,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *                 help=_('Include all sources in the archive'))
  *             dist_parser.add_argument('-c', '--clean', action='store_true', \
  */
-            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__294, __pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1081; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__291, __pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1081; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -43675,7 +43733,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
             __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1084; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_1);
-            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__297, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1084; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__294, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1084; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
             if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_help, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1083; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -43688,7 +43746,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *                 help=_('Clean all sources after creating archive'))
  *             dist_parser.add_argument('-d', '--directory', type=str, \
  */
-            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__296, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1083; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__293, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1083; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -43744,7 +43802,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
             __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1086; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_5);
-            __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__299, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1086; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__296, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1086; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_6);
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
             if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_help, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1085; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -43757,7 +43815,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *                 default=misc.dir_current(), help=_('Set output directory'))
  *             dist_parser.add_argument('TARGETS', nargs='+', type=str, \
  */
-            __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__298, __pyx_t_3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1085; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__295, __pyx_t_3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1085; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_6);
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -43777,7 +43835,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_t_6 = PyDict_New(); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1087; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_6);
-            if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_nargs, __pyx_kp_s__301) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1087; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_nargs, __pyx_kp_s__298) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1087; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_type, ((PyObject *)(&PyString_Type))) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1087; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
 
             /* "tools.py":1088
@@ -43789,7 +43847,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
             __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1088; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__302, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1088; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__299, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1088; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_help, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1087; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -43802,7 +43860,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *                 help=_('Targets to apply actions on'))
  * 
  */
-            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__300, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1087; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__297, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1087; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -43829,7 +43887,7 @@ PyMODINIT_FUNC PyInit_tools(void)
           __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_add_parser); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1090; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__303, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1090; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__300, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1090; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           if (PyDict_SetItem(__pyx_d, __pyx_n_s_check_parser, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1090; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -43860,7 +43918,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1092; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__305, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1092; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__302, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1092; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_help, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1091; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -43873,7 +43931,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Skip some files/links'))
  *         check_parser.add_argument('-a', '--adjust', action='store_true', \
  */
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__304, __pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1091; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__301, __pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1091; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -43904,7 +43962,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1094; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__307, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1094; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__304, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1094; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_help, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1093; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -43917,7 +43975,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Adjust target depends'))
  *         check_parser.add_argument('-D', '--depends', action='store_true', \
  */
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__306, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1093; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__303, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1093; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -43948,7 +44006,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1096; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__309, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1096; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__306, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1096; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_help, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1095; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -43961,7 +44019,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check dependencies of target'))
  *         check_parser.add_argument('-R', '--reverse', action='store_true', \
  */
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__308, __pyx_t_3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1095; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__305, __pyx_t_3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1095; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -43992,7 +44050,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1098; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__311, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1098; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__308, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1098; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_help, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1097; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -44005,7 +44063,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check reverse dependencies of target'))
  *         check_parser.add_argument('TARGETS', nargs='+', type=str, \
  */
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__310, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1097; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__307, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1097; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -44025,7 +44083,7 @@ PyMODINIT_FUNC PyInit_tools(void)
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __pyx_t_5 = PyDict_New(); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1099; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
-          if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_nargs, __pyx_kp_s__301) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1099; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_nargs, __pyx_kp_s__298) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1099; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_type, ((PyObject *)(&PyString_Type))) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1099; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
 
           /* "tools.py":1100
@@ -44037,7 +44095,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1100; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__313, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1100; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__310, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1100; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_help, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1099; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -44050,7 +44108,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Targets to apply actions on'))
  * 
  */
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__312, __pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1099; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__309, __pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1099; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -44068,7 +44126,7 @@ PyMODINIT_FUNC PyInit_tools(void)
           __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_add_parser); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1102; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__314, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1102; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__311, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1102; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           if (PyDict_SetItem(__pyx_d, __pyx_n_s_clean_parser, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1102; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -44086,7 +44144,7 @@ PyMODINIT_FUNC PyInit_tools(void)
           __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_add_parser); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1104; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__315, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1104; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__312, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1104; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           if (PyDict_SetItem(__pyx_d, __pyx_n_s_lint_parser, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1104; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -44117,7 +44175,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1106; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__317, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1106; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__314, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1106; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_help, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1105; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -44130,7 +44188,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check for missing manual page(s)'))
  *         lint_parser.add_argument('-u', '--udev', action='store_true', \
  */
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__316, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1105; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__313, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1105; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -44161,7 +44219,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1108; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__319, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1108; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__316, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1108; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_help, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1107; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -44174,7 +44232,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check for cross-filesystem udev rule(s)'))
  *         lint_parser.add_argument('-s', '--symlink', action='store_true', \
  */
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__318, __pyx_t_3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1107; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__315, __pyx_t_3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1107; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -44205,7 +44263,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1110; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__321, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1110; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__318, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1110; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_help, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1109; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -44218,7 +44276,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check for cross-filesystem symlink(s)'))
  *         lint_parser.add_argument('-d', '--doc', action='store_true', \
  */
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__320, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1109; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__317, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1109; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -44249,7 +44307,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1112; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__323, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1112; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__320, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1112; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_help, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1111; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -44262,7 +44320,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check for documentation'))
  *         lint_parser.add_argument('-M', '--module', action='store_true', \
  */
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__322, __pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1111; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__319, __pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1111; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -44293,7 +44351,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1114; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__325, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1114; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__322, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1114; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_help, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1113; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -44306,7 +44364,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check for module(s) in non-standard directory'))
  *         lint_parser.add_argument('-f', '--footprint', action='store_true', \
  */
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__324, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1113; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__321, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1113; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -44337,7 +44395,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1116; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__327, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1116; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__324, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1116; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_help, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1115; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -44350,7 +44408,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check for footprint consistency'))
  *         lint_parser.add_argument('-b', '--builddir', action='store_true', \
  */
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__326, __pyx_t_3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1115; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__323, __pyx_t_3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1115; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -44381,7 +44439,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1118; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__329, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1118; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__326, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1118; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_help, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1117; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -44394,7 +44452,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check for build directory trace(s)'))
  *         lint_parser.add_argument('-o', '--ownership', action='store_true', \
  */
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__328, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1117; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__325, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1117; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -44425,7 +44483,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1120; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__331, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1120; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__328, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1120; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_help, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1119; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -44438,7 +44496,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check ownership'))
  *         lint_parser.add_argument('-e', '--executable', action='store_true', \
  */
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__330, __pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1119; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__327, __pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1119; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -44469,7 +44527,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1122; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__333, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1122; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__330, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1122; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_help, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1121; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -44482,7 +44540,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check for non-executable(s) in PATH'))
  *         lint_parser.add_argument('-p', '--path', action='store_true', \
  */
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__332, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1121; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__329, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1121; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -44513,7 +44571,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1124; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__335, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1124; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__332, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1124; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_help, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1123; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -44526,7 +44584,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check for overlapping executable(s) in PATH'))
  *         lint_parser.add_argument('-n', '--shebang', action='store_true', \
  */
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__334, __pyx_t_3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1123; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__331, __pyx_t_3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1123; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -44557,7 +44615,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1126; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__337, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1126; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__334, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1126; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_help, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1125; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -44570,7 +44628,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check for incorrect shebang of scripts'))
  *         lint_parser.add_argument('-k', '--backup', action='store_true', \
  */
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__336, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1125; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__333, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1125; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -44601,7 +44659,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1128; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__339, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1128; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__336, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1128; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_help, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1127; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -44614,7 +44672,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check for incorrect or incomplete backup of files'))
  *         lint_parser.add_argument('-c', '--conflicts', action='store_true', \
  */
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__338, __pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1127; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__335, __pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1127; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -44645,7 +44703,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1130; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__341, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1130; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__338, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1130; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_help, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1129; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -44658,7 +44716,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check for conflicts between targets'))
  *         lint_parser.add_argument('-D', '--debug', action='store_true', \
  */
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__340, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1129; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__337, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1129; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -44689,7 +44747,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1132; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__343, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1132; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__340, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1132; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_help, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1131; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -44702,7 +44760,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check for missing debug symbols'))
  *         lint_parser.add_argument('-a', '--all', action='store_true', \
  */
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__342, __pyx_t_3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1131; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__339, __pyx_t_3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1131; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -44733,7 +44791,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1134; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__345, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1134; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__342, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1134; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_help, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1133; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -44746,7 +44804,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Perform all checks'))
  *         lint_parser.add_argument('TARGETS', nargs='+', type=str, \
  */
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__344, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1133; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__341, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1133; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -44766,7 +44824,7 @@ PyMODINIT_FUNC PyInit_tools(void)
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __pyx_t_5 = PyDict_New(); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1135; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
-          if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_nargs, __pyx_kp_s__301) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1135; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_nargs, __pyx_kp_s__298) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1135; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_type, ((PyObject *)(&PyString_Type))) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1135; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
 
           /* "tools.py":1136
@@ -44778,7 +44836,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1136; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__347, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1136; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__344, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1136; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_help, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1135; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -44791,7 +44849,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Targets to apply actions on'))
  * 
  */
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__346, __pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1135; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__343, __pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1135; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -44809,7 +44867,7 @@ PyMODINIT_FUNC PyInit_tools(void)
           __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_add_parser); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1138; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__348, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1138; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__345, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1138; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           if (PyDict_SetItem(__pyx_d, __pyx_n_s_sane_parser, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1138; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -44840,7 +44898,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1140; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__350, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1140; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__347, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1140; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_help, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1139; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -44853,7 +44911,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check for explicit --enable argument(s)'))
  *         sane_parser.add_argument('-d', '--disable', action='store_true', \
  */
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__349, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1139; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__346, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1139; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -44884,7 +44942,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1142; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__352, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1142; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__349, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1142; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_help, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1141; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -44897,7 +44955,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check for explicit --disable argument(s)'))
  *         sane_parser.add_argument('-n', '--null', action='store_true', \
  */
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__351, __pyx_t_3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1141; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__348, __pyx_t_3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1141; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -44928,7 +44986,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1144; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__354, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1144; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__351, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1144; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_help, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1143; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -44941,7 +44999,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check for /dev/null output redirection(s)'))
  *         sane_parser.add_argument('-m', '--maintainer', action='store_true', \
  */
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__353, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1143; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__350, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1143; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -44972,7 +45030,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1146; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__356, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1146; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__353, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1146; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_help, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1145; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -44985,7 +45043,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check for missing maintainer'))
  *         sane_parser.add_argument('-N', '--note', action='store_true', \
  */
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__355, __pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1145; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__352, __pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1145; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -45016,7 +45074,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1148; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__358, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1148; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__355, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1148; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_help, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1147; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -45029,7 +45087,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check for FIXME/TODO note(s)'))
  *         sane_parser.add_argument('-v', '--variables', action='store_true', \
  */
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__357, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1147; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__354, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1147; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -45060,7 +45118,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1150; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__360, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1150; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__357, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1150; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_help, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1149; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -45073,7 +45131,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check for essential variables'))
  *         sane_parser.add_argument('-t', '--triggers', action='store_true', \
  */
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__359, __pyx_t_3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1149; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__356, __pyx_t_3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1149; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -45104,7 +45162,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1152; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__362, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1152; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__359, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1152; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_help, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1151; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -45117,7 +45175,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check for unnecessary triggers invocation(s)'))
  *         sane_parser.add_argument('-u', '--users', action='store_true', \
  */
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__361, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1151; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__358, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1151; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -45148,7 +45206,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1154; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__364, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1154; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__361, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1154; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_help, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1153; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -45161,7 +45219,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check for user(s) being added but not deleted'))
  *         sane_parser.add_argument('-g', '--groups', action='store_true', \
  */
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__363, __pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1153; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__360, __pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1153; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -45192,7 +45250,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1156; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__366, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1156; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__363, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1156; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_help, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1155; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -45205,7 +45263,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check for group(s) being added but not deleted'))
  *         sane_parser.add_argument('-s', '--signatures', action='store_true', \
  */
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__365, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1155; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__362, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1155; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -45236,7 +45294,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1158; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__368, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1158; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__365, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1158; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_help, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1157; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -45249,7 +45307,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check for signature(s) not in the sources array'))
  *         sane_parser.add_argument('-a', '--all', action='store_true', \
  */
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__367, __pyx_t_3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1157; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__364, __pyx_t_3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1157; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -45280,7 +45338,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1160; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__370, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1160; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__367, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1160; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_help, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1159; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -45293,7 +45351,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Perform all checks'))
  *         sane_parser.add_argument('TARGETS', nargs='+', type=str, \
  */
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__369, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1159; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__366, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1159; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -45313,7 +45371,7 @@ PyMODINIT_FUNC PyInit_tools(void)
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __pyx_t_5 = PyDict_New(); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1161; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
-          if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_nargs, __pyx_kp_s__301) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1161; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_nargs, __pyx_kp_s__298) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1161; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_type, ((PyObject *)(&PyString_Type))) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1161; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
 
           /* "tools.py":1162
@@ -45325,7 +45383,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1162; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__372, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1162; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__369, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1162; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_help, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1161; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -45338,7 +45396,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Targets to apply actions on'))
  * 
  */
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__371, __pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1161; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__368, __pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1161; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -45372,7 +45430,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_add_parser); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1165; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__373, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1165; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__370, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1165; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             if (PyDict_SetItem(__pyx_d, __pyx_n_s_merge_parser, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1165; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -45415,7 +45473,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_add_parser); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1168; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__374, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1168; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__371, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1168; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
             if (PyDict_SetItem(__pyx_d, __pyx_n_s_edit_parser, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1168; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -45435,7 +45493,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1169; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
-            if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_nargs, __pyx_kp_s__301) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1169; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_nargs, __pyx_kp_s__298) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1169; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_type, ((PyObject *)(&PyString_Type))) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1169; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
 
             /* "tools.py":1170
@@ -45447,7 +45505,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
             __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1170; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_6);
-            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__376, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1170; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__373, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1170; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_help, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1169; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -45460,7 +45518,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *                 help=_('Targets to apply actions on'))
  * 
  */
-            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__375, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1169; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__372, __pyx_t_2); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1169; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -45487,7 +45545,7 @@ PyMODINIT_FUNC PyInit_tools(void)
           __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_add_parser); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1172; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__377, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1172; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__374, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1172; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           if (PyDict_SetItem(__pyx_d, __pyx_n_s_which_parser, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1172; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -45518,7 +45576,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1174; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__379, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1174; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__376, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1174; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_help, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1173; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -45531,7 +45589,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Display content of SRCBUILD'))
  *         which_parser.add_argument('-p', '--plain', action='store_true', \
  */
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__378, __pyx_t_3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1173; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__375, __pyx_t_3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1173; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -45562,7 +45620,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1176; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__381, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1176; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__378, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1176; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_help, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1175; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -45575,7 +45633,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Print in plain format'))
  *         which_parser.add_argument('PATTERN', type=str, \
  */
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__380, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1175; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__377, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1175; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -45606,7 +45664,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1178; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__383, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1178; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__380, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1178; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_help, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1177; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -45619,7 +45677,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Pattern to search for in remote targets'))
  * 
  */
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__382, __pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1177; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__379, __pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1177; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -45653,7 +45711,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_add_parser); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1181; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__384, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1181; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__381, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1181; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             if (PyDict_SetItem(__pyx_d, __pyx_n_s_pack_parser, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1181; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -45709,7 +45767,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1183; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_6);
-            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__386, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1183; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__383, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1183; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_help, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1182; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -45722,7 +45780,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *                 default=misc.dir_current(), help=_('Set output directory'))
  *             pack_parser.add_argument('TARGETS', nargs='+', type=str, \
  */
-            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__385, __pyx_t_5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1182; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__382, __pyx_t_5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1182; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -45742,7 +45800,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
             __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1184; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_1);
-            if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_nargs, __pyx_kp_s__301) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1184; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_nargs, __pyx_kp_s__298) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1184; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_type, ((PyObject *)(&PyString_Type))) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1184; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
 
             /* "tools.py":1185
@@ -45754,7 +45812,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
             __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1185; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__388, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1185; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__385, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1185; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_6);
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_help, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1184; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -45767,7 +45825,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *                 help=_('Targets to apply actions on'))
  * 
  */
-            __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__387, __pyx_t_1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1184; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__384, __pyx_t_1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1184; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_6);
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -45794,7 +45852,7 @@ PyMODINIT_FUNC PyInit_tools(void)
           __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_add_parser); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1187; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__389, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1187; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__386, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1187; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           if (PyDict_SetItem(__pyx_d, __pyx_n_s_pkg_parser, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1187; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -45850,7 +45908,7 @@ PyMODINIT_FUNC PyInit_tools(void)
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1189; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__391, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1189; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__388, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1189; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_help, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1188; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -45863,7 +45921,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             default=misc.dir_current(), help=_('Set output directory'))
  *         pkg_parser.add_argument('TARGETS', nargs='+', type=str, \
  */
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__390, __pyx_t_6); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1188; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__387, __pyx_t_6); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1188; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -45883,7 +45941,7 @@ PyMODINIT_FUNC PyInit_tools(void)
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1190; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
-          if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_nargs, __pyx_kp_s__301) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1190; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_nargs, __pyx_kp_s__298) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1190; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_type, ((PyObject *)(&PyString_Type))) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1190; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
 
           /* "tools.py":1191
@@ -45895,7 +45953,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1191; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_1);
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__393, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1191; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__390, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1191; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_help, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1190; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -45908,7 +45966,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Targets to apply actions on'))
  * 
  */
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__392, __pyx_t_3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1190; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__389, __pyx_t_3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1190; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -45926,7 +45984,7 @@ PyMODINIT_FUNC PyInit_tools(void)
           __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_add_parser); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1193; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__394, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1193; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__391, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1193; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           if (PyDict_SetItem(__pyx_d, __pyx_n_s_serve_parser, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1193; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -45959,7 +46017,7 @@ PyMODINIT_FUNC PyInit_tools(void)
           if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_default, __pyx_int_8000) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1194; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1195; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__396, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1195; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__393, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1195; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_help, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1194; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -45972,7 +46030,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             type=int, default=8000, help=_('Use port for the server'))
  *         serve_parser.add_argument('-a', '--address', action='store', \
  */
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__395, __pyx_t_5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1194; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__392, __pyx_t_5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1194; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -46005,7 +46063,7 @@ PyMODINIT_FUNC PyInit_tools(void)
           if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_default, __pyx_kp_s__8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1196; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1197; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__398, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1197; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__395, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1197; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_help, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1196; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -46018,7 +46076,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             type=str, default='', help=_('Use address for the server'))
  * 
  */
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__397, __pyx_t_1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1196; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__394, __pyx_t_1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1196; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -46036,7 +46094,7 @@ PyMODINIT_FUNC PyInit_tools(void)
           __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_add_parser); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1199; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__399, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1199; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__396, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1199; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           if (PyDict_SetItem(__pyx_d, __pyx_n_s_disowned_parser, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1199; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -46068,7 +46126,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1201; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__401, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1201; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__398, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1201; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_help, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1200; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -46081,7 +46139,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             default='/', help=_('Set lookup directory'))
  *         disowned_parser.add_argument('-c', '--cross', action='store_true', \
  */
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__400, __pyx_t_6); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1200; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__397, __pyx_t_6); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1200; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -46112,7 +46170,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1203; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_1);
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__403, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1203; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__400, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1203; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_help, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1202; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -46125,7 +46183,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Scan cross-filesystem'))
  *         disowned_parser.add_argument('-p', '--plain', action='store_true', \
  */
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__402, __pyx_t_3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1202; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__399, __pyx_t_3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1202; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -46156,7 +46214,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1205; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__405, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1205; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__402, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1205; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_help, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1204; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -46169,7 +46227,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Print in plain format'))
  * 
  */
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__404, __pyx_t_5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1204; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__401, __pyx_t_5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1204; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -46187,7 +46245,7 @@ PyMODINIT_FUNC PyInit_tools(void)
           __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_add_parser); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1207; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__406, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1207; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__403, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1207; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           if (PyDict_SetItem(__pyx_d, __pyx_n_s_upload_parser, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1207; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -46220,7 +46278,7 @@ PyMODINIT_FUNC PyInit_tools(void)
           if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_required, Py_True) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1208; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1209; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__408, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1209; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__405, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1209; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_help, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1208; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -46233,7 +46291,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             type=str, required=True, help=_('Use host'))
  *         upload_parser.add_argument('-u', '--user', action='store', \
  */
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__407, __pyx_t_1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1208; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__404, __pyx_t_1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1208; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -46266,7 +46324,7 @@ PyMODINIT_FUNC PyInit_tools(void)
           if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_required, Py_True) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1210; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1211; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__410, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1211; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__407, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1211; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_help, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1210; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -46279,7 +46337,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             type=str, required=True, help=_('Use user'))
  *         upload_parser.add_argument('-d', '--directory', type=str, \
  */
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__409, __pyx_t_6); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1210; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__406, __pyx_t_6); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1210; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -46311,7 +46369,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1213; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_1);
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__412, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1213; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__409, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1213; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_help, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1212; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -46324,7 +46382,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             default='/', help=_('Use upload directory'))
  *         upload_parser.add_argument('-i', '--insecure', action='store_true', \
  */
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__411, __pyx_t_3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1212; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__408, __pyx_t_3); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1212; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -46355,7 +46413,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1215; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__414, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1215; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__411, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1215; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_help, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1214; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -46368,7 +46426,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Use insecure connection'))
  *         upload_parser.add_argument('TARGETS', nargs='+', type=str, \
  */
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__413, __pyx_t_5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1214; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__410, __pyx_t_5); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1214; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -46388,7 +46446,7 @@ PyMODINIT_FUNC PyInit_tools(void)
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1216; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_1);
-          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_nargs, __pyx_kp_s__301) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1216; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_nargs, __pyx_kp_s__298) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1216; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_type, ((PyObject *)(&PyString_Type))) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1216; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
 
           /* "tools.py":1217
@@ -46400,7 +46458,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1217; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__416, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1217; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__413, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1217; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_help, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1216; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -46413,7 +46471,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Targets to apply actions on'))
  * 
  */
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__415, __pyx_t_1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1216; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__412, __pyx_t_1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1216; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -46431,7 +46489,7 @@ PyMODINIT_FUNC PyInit_tools(void)
           __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_add_parser); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1219; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__417, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1219; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__414, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1219; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           if (PyDict_SetItem(__pyx_d, __pyx_n_s_online_parser, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1219; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -46463,7 +46521,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1221; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__419, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1221; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__416, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1221; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_help, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1220; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -46476,7 +46534,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             default='https://www.google.com', help=_('URL to ping'))
  * 
  */
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__418, __pyx_t_6); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1220; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__415, __pyx_t_6); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1220; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -46510,7 +46568,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_add_parser); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1224; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-            __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__420, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1224; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__417, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1224; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_6);
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             if (PyDict_SetItem(__pyx_d, __pyx_n_s_upgrade_parser, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1224; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -46537,7 +46595,7 @@ PyMODINIT_FUNC PyInit_tools(void)
           __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_add_parser); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1226; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__421, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1226; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__418, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1226; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           if (PyDict_SetItem(__pyx_d, __pyx_n_s_digest_parser, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1226; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -46593,7 +46651,7 @@ PyMODINIT_FUNC PyInit_tools(void)
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1228; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_1);
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__423, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1228; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__420, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1228; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_help, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1227; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -46606,7 +46664,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             default=misc.dir_current(), help=_('Set output directory'))
  *         digest_parser.add_argument('-c', '--create', action='store_true', \
  */
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__422, __pyx_t_6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1227; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__419, __pyx_t_6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1227; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -46637,7 +46695,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1230; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__425, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1230; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__422, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1230; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_help, __pyx_t_1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1229; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -46650,7 +46708,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Create digest'))
  *         digest_parser.add_argument('-v', '--verify', action='store_true', \
  */
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__424, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1229; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__421, __pyx_t_2); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1229; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -46681,7 +46739,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1232; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__427, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1232; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__424, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1232; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_help, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1231; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -46694,7 +46752,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Verify digest'))
  *         digest_parser.add_argument('-k', '--backup', action='store_true', \
  */
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__426, __pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1231; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__423, __pyx_t_1); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1231; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -46725,7 +46783,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1234; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__429, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1234; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__426, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1234; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_help, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1233; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -46738,7 +46796,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Do not ignore backup files'))
  *         digest_parser.add_argument('TARGETS', nargs='+', type=str, \
  */
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__428, __pyx_t_3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1233; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__425, __pyx_t_3); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1233; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -46758,7 +46816,7 @@ PyMODINIT_FUNC PyInit_tools(void)
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __pyx_t_6 = PyDict_New(); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1235; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
-          if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_nargs, __pyx_kp_s__301) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1235; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_nargs, __pyx_kp_s__298) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1235; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_type, ((PyObject *)(&PyString_Type))) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1235; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
 
           /* "tools.py":1236
@@ -46770,7 +46828,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1236; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_1);
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__431, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1236; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__428, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1236; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_help, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1235; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -46783,7 +46841,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Targets to apply actions on'))
  * 
  */
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__430, __pyx_t_6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1235; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__427, __pyx_t_6); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1235; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -46817,7 +46875,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_add_parser); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1239; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-            __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__432, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1239; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__429, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1239; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_6);
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             if (PyDict_SetItem(__pyx_d, __pyx_n_s_portable_parser, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1239; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -46873,7 +46931,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1241; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
-            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__434, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1241; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__431, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1241; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_help, __pyx_t_5) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1240; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -46886,7 +46944,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *                 default=misc.dir_current(), help=_('Set output directory'))
  *             portable_parser.add_argument('TARGETS', nargs='+', type=str, \
  */
-            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__433, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1240; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__430, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1240; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -46906,7 +46964,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
             __pyx_t_5 = PyDict_New(); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1242; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_5);
-            if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_nargs, __pyx_kp_s__301) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1242; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_nargs, __pyx_kp_s__298) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1242; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_type, ((PyObject *)(&PyString_Type))) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1242; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
 
             /* "tools.py":1243
@@ -46918,7 +46976,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
             __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1243; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__436, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1243; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__433, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1243; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             if (PyDict_SetItem(__pyx_t_5, __pyx_n_s_help, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1242; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -46931,7 +46989,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *                 help=_('Targets to apply actions on'))
  * 
  */
-            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__435, __pyx_t_5); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1242; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__432, __pyx_t_5); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1242; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -46975,7 +47033,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1246; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__438, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1246; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__435, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1246; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_help, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1245; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -46988,7 +47046,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Change system root directory'))
  *         parser.add_argument('--debug', nargs=0, action=OverrideDebug, \
  */
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__437, __pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1245; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__434, __pyx_t_3); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1245; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -47023,7 +47081,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1248; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__440, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1248; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__437, NULL); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1248; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_help, __pyx_t_6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1247; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -47036,7 +47094,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Enable debug messages'))
  *         parser.add_argument('--version', action='version', \
  */
-          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__439, __pyx_t_2); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1247; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__436, __pyx_t_2); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1247; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -47082,7 +47140,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  */
           __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1251; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__442, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1251; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__439, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1251; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           if (PyDict_SetItem(__pyx_t_6, __pyx_n_s_help, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1249; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -47095,7 +47153,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             version='Source Package Manager Tools v%s' % app_version, \
  *             help=_('Show SPM Tools version and exit'))
  */
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__441, __pyx_t_6); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1249; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__438, __pyx_t_6); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1249; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -47113,7 +47171,7 @@ PyMODINIT_FUNC PyInit_tools(void)
           __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_glob); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1253; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__443, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1253; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__440, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1253; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           if (likely(PyList_CheckExact(__pyx_t_3)) || PyTuple_CheckExact(__pyx_t_3)) {
@@ -47205,7 +47263,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_replace); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1254; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__444, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1254; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__441, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1254; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             if (PyDict_SetItem(__pyx_d, __pyx_n_s_name, __pyx_t_3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1254; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -47529,9 +47587,9 @@ PyMODINIT_FUNC PyInit_tools(void)
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __pyx_t_6 = PyList_New(1); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1261; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
-          __Pyx_INCREF(__pyx_kp_s__445);
-          __Pyx_GIVEREF(__pyx_kp_s__445);
-          PyList_SET_ITEM(__pyx_t_6, 0, __pyx_kp_s__445);
+          __Pyx_INCREF(__pyx_kp_s__442);
+          __Pyx_GIVEREF(__pyx_kp_s__442);
+          PyList_SET_ITEM(__pyx_t_6, 0, __pyx_kp_s__442);
           __pyx_t_8 = PyObject_RichCompare(__pyx_t_5, __pyx_t_6, Py_EQ); __Pyx_XGOTREF(__pyx_t_8); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1261; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
@@ -47640,7 +47698,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
             __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1265; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_5);
-            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__446, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1265; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__443, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1265; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
             __pyx_t_5 = NULL;
@@ -47685,7 +47743,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1266; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_6);
-            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__447, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1266; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__444, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1266; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1266; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -47736,7 +47794,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
             __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1267; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_7);
-            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__448, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1267; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__445, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1267; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
             __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1267; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -47787,7 +47845,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
             __pyx_t_18 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1268; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_18);
-            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_18, __pyx_tuple__449, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1268; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_18, __pyx_tuple__446, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1268; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
             __pyx_t_18 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1268; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -47838,7 +47896,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1269; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_6);
-            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__450, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1269; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__447, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1269; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1269; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -47889,7 +47947,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
             __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1270; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_7);
-            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__451, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1270; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__448, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1270; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
             __pyx_t_7 = NULL;
@@ -48057,7 +48115,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
             __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1275; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_8);
-            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__452, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1275; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__449, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1275; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
             __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
             __pyx_t_8 = NULL;
@@ -48102,7 +48160,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
             __pyx_t_18 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1276; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_18);
-            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_18, __pyx_tuple__453, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1276; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_18, __pyx_tuple__450, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1276; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
             __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
             __pyx_t_18 = __Pyx_GetModuleGlobalName(__pyx_n_s_libspm); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1276; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -48153,7 +48211,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1277; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_6);
-            __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__454, NULL); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1277; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__451, NULL); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1277; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_8);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1277; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -48204,7 +48262,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
             __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1278; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_7);
-            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__455, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1278; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__452, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1278; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
             __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1278; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -48255,7 +48313,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
             __pyx_t_18 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1279; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_18);
-            __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_18, __pyx_tuple__456, NULL); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1279; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_18, __pyx_tuple__453, NULL); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1279; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_8);
             __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
             __pyx_t_18 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1279; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -48306,7 +48364,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1280; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_6);
-            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__457, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1280; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__454, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1280; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1280; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -48357,7 +48415,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
             __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1281; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_7);
-            __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__458, NULL); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1281; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__455, NULL); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1281; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_8);
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
             __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1281; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -48408,7 +48466,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
             __pyx_t_18 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1282; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_18);
-            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_18, __pyx_tuple__459, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1282; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_18, __pyx_tuple__456, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1282; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
             __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
             __pyx_t_18 = NULL;
@@ -48592,7 +48650,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1288; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
-            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__460, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1288; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__457, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1288; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_t_3 = NULL;
@@ -48918,7 +48976,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
             __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1309; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_1);
-            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__461, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1309; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__458, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1309; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
             __pyx_t_1 = NULL;
@@ -48963,7 +49021,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1310; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_6);
-            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__462, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1310; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__459, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1310; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1310; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -49014,7 +49072,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1311; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
-            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__463, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1311; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__460, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1311; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1311; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -49065,7 +49123,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
             __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1312; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_7);
-            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__464, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1312; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__461, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1312; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
             __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1312; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -49116,7 +49174,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1313; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_6);
-            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__465, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1313; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__462, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1313; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1313; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -49167,7 +49225,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1314; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
-            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__466, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1314; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__463, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1314; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1314; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -49218,7 +49276,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
             __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1315; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_7);
-            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__467, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1315; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__464, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1315; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
             __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1315; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -49269,7 +49327,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1316; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_6);
-            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__468, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1316; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__465, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1316; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1316; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -49320,7 +49378,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1317; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
-            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__469, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1317; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__466, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1317; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1317; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -49371,7 +49429,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
             __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1318; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_7);
-            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__470, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1318; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__467, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1318; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
             __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1318; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -49422,7 +49480,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1319; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_6);
-            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__471, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1319; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__468, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1319; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1319; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -49473,7 +49531,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1320; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
-            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__472, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1320; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__469, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1320; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1320; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -49524,7 +49582,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
             __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1321; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_7);
-            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__473, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1321; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__470, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1321; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
             __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1321; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -49575,7 +49633,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1322; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_6);
-            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__474, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1322; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__471, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1322; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1322; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -49626,7 +49684,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1323; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
-            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__475, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1323; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__472, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1323; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1323; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -49677,7 +49735,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
             __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1324; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_7);
-            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__476, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1324; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_7, __pyx_tuple__473, NULL); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1324; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
             __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1324; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -49728,7 +49786,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1325; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_6);
-            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__477, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1325; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__474, NULL); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1325; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_t_6 = NULL;
@@ -50153,7 +50211,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_30); __pyx_t_30 = 0;
             __pyx_t_30 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_30)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1346; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_30);
-            __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_30, __pyx_tuple__478, NULL); if (unlikely(!__pyx_t_29)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1346; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_30, __pyx_tuple__475, NULL); if (unlikely(!__pyx_t_29)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1346; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_29);
             __Pyx_DECREF(__pyx_t_30); __pyx_t_30 = 0;
             __pyx_t_30 = NULL;
@@ -50198,7 +50256,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1347; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
-            __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__479, NULL); if (unlikely(!__pyx_t_29)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1347; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__476, NULL); if (unlikely(!__pyx_t_29)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1347; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_29);
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1347; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -50249,7 +50307,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_28); __pyx_t_28 = 0;
             __pyx_t_28 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_28)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1348; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_28);
-            __pyx_t_30 = __Pyx_PyObject_Call(__pyx_t_28, __pyx_tuple__480, NULL); if (unlikely(!__pyx_t_30)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1348; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_30 = __Pyx_PyObject_Call(__pyx_t_28, __pyx_tuple__477, NULL); if (unlikely(!__pyx_t_30)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1348; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_30);
             __Pyx_DECREF(__pyx_t_28); __pyx_t_28 = 0;
             __pyx_t_28 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_28)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1348; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -50300,7 +50358,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_27); __pyx_t_27 = 0;
             __pyx_t_27 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_27)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1349; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_27);
-            __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_27, __pyx_tuple__481, NULL); if (unlikely(!__pyx_t_29)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1349; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_27, __pyx_tuple__478, NULL); if (unlikely(!__pyx_t_29)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1349; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_29);
             __Pyx_DECREF(__pyx_t_27); __pyx_t_27 = 0;
             __pyx_t_27 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_27)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1349; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -50351,7 +50409,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1350; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
-            __pyx_t_30 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__482, NULL); if (unlikely(!__pyx_t_30)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1350; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_30 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__479, NULL); if (unlikely(!__pyx_t_30)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1350; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_30);
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1350; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -50402,7 +50460,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_28); __pyx_t_28 = 0;
             __pyx_t_28 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_28)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1351; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_28);
-            __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_28, __pyx_tuple__483, NULL); if (unlikely(!__pyx_t_29)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1351; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_28, __pyx_tuple__480, NULL); if (unlikely(!__pyx_t_29)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1351; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_29);
             __Pyx_DECREF(__pyx_t_28); __pyx_t_28 = 0;
             __pyx_t_28 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_28)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1351; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -50453,7 +50511,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_27); __pyx_t_27 = 0;
             __pyx_t_27 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_27)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1352; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_27);
-            __pyx_t_30 = __Pyx_PyObject_Call(__pyx_t_27, __pyx_tuple__484, NULL); if (unlikely(!__pyx_t_30)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1352; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_30 = __Pyx_PyObject_Call(__pyx_t_27, __pyx_tuple__481, NULL); if (unlikely(!__pyx_t_30)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1352; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_30);
             __Pyx_DECREF(__pyx_t_27); __pyx_t_27 = 0;
             __pyx_t_27 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_27)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1352; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -50504,7 +50562,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1353; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
-            __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__485, NULL); if (unlikely(!__pyx_t_29)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1353; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__482, NULL); if (unlikely(!__pyx_t_29)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1353; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_29);
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1353; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -50555,7 +50613,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_28); __pyx_t_28 = 0;
             __pyx_t_28 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_28)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1354; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_28);
-            __pyx_t_30 = __Pyx_PyObject_Call(__pyx_t_28, __pyx_tuple__486, NULL); if (unlikely(!__pyx_t_30)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1354; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_30 = __Pyx_PyObject_Call(__pyx_t_28, __pyx_tuple__483, NULL); if (unlikely(!__pyx_t_30)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1354; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_30);
             __Pyx_DECREF(__pyx_t_28); __pyx_t_28 = 0;
             __pyx_t_28 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_28)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1354; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -50606,7 +50664,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_27); __pyx_t_27 = 0;
             __pyx_t_27 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_27)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1355; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_27);
-            __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_27, __pyx_tuple__487, NULL); if (unlikely(!__pyx_t_29)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1355; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_27, __pyx_tuple__484, NULL); if (unlikely(!__pyx_t_29)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1355; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_29);
             __Pyx_DECREF(__pyx_t_27); __pyx_t_27 = 0;
             __pyx_t_27 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_27)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1355; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -50657,7 +50715,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1356; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
-            __pyx_t_30 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__488, NULL); if (unlikely(!__pyx_t_30)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1356; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_30 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__485, NULL); if (unlikely(!__pyx_t_30)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1356; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_30);
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1356; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -50708,7 +50766,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_28); __pyx_t_28 = 0;
             __pyx_t_28 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_28)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1357; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_28);
-            __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_28, __pyx_tuple__489, NULL); if (unlikely(!__pyx_t_29)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1357; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_29 = __Pyx_PyObject_Call(__pyx_t_28, __pyx_tuple__486, NULL); if (unlikely(!__pyx_t_29)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1357; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_29);
             __Pyx_DECREF(__pyx_t_28); __pyx_t_28 = 0;
             __pyx_t_28 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_28)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1357; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -50759,7 +50817,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_27); __pyx_t_27 = 0;
             __pyx_t_27 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_27)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1358; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_27);
-            __pyx_t_30 = __Pyx_PyObject_Call(__pyx_t_27, __pyx_tuple__490, NULL); if (unlikely(!__pyx_t_30)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1358; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_30 = __Pyx_PyObject_Call(__pyx_t_27, __pyx_tuple__487, NULL); if (unlikely(!__pyx_t_30)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1358; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_30);
             __Pyx_DECREF(__pyx_t_27); __pyx_t_27 = 0;
             __pyx_t_27 = NULL;
@@ -50999,7 +51057,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
             __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1366; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_17);
-            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_tuple__491, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1366; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_tuple__488, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1366; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
             __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
             __pyx_t_17 = NULL;
@@ -51044,7 +51102,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1367; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
-            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__492, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1367; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__489, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1367; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_libspm); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1367; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -51095,7 +51153,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
             __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1368; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_8);
-            __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__493, NULL); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1368; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__490, NULL); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1368; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_17);
             __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
             __pyx_t_8 = NULL;
@@ -51228,7 +51286,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
             __pyx_t_18 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1373; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_18);
-            __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_18, __pyx_tuple__494, NULL); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1373; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_18, __pyx_tuple__491, NULL); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1373; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_17);
             __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
             __pyx_t_18 = NULL;
@@ -51273,7 +51331,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
             __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_21)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1374; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_21);
-            __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_21, __pyx_tuple__495, NULL); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1374; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_21, __pyx_tuple__492, NULL); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1374; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_17);
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
             __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_21)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1374; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -51324,7 +51382,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
             __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1375; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_8);
-            __pyx_t_18 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__496, NULL); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1375; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_18 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__493, NULL); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1375; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_18);
             __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
             __pyx_t_8 = NULL;
@@ -51487,7 +51545,7 @@ PyMODINIT_FUNC PyInit_tools(void)
               __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
               __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1381; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
               __Pyx_GOTREF(__pyx_t_8);
-              __pyx_t_18 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__497, NULL); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1381; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+              __pyx_t_18 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__494, NULL); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1381; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
               __Pyx_GOTREF(__pyx_t_18);
               __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
               __pyx_t_8 = NULL;
@@ -51532,7 +51590,7 @@ PyMODINIT_FUNC PyInit_tools(void)
               __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
               __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1382; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
               __Pyx_GOTREF(__pyx_t_3);
-              __pyx_t_18 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__498, NULL); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1382; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+              __pyx_t_18 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__495, NULL); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1382; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
               __Pyx_GOTREF(__pyx_t_18);
               __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
               __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1382; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -51707,7 +51765,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1387; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__499, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1387; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__496, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1387; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             __pyx_t_2 = NULL;
@@ -51752,7 +51810,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
             __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1388; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_17);
-            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_tuple__500, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1388; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_tuple__497, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1388; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
             __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
             __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1388; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -51803,7 +51861,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
             __pyx_t_18 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1389; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_18);
-            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_18, __pyx_tuple__501, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1389; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_18, __pyx_tuple__498, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1389; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
             __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
             __pyx_t_18 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1389; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -51961,7 +52019,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
             __pyx_t_22 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1394; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_22);
-            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_22, __pyx_tuple__502, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1394; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_22, __pyx_tuple__499, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1394; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
             __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
             __pyx_t_22 = NULL;
@@ -52006,7 +52064,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
             __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1395; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_8);
-            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__503, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1395; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__500, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1395; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
             __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
             __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1395; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -52057,7 +52115,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1396; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
-            __pyx_t_22 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__504, NULL); if (unlikely(!__pyx_t_22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1396; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_22 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__501, NULL); if (unlikely(!__pyx_t_22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1396; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_22);
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1396; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -52215,7 +52273,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
             __pyx_t_18 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1401; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_18);
-            __pyx_t_22 = __Pyx_PyObject_Call(__pyx_t_18, __pyx_tuple__505, NULL); if (unlikely(!__pyx_t_22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1401; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_22 = __Pyx_PyObject_Call(__pyx_t_18, __pyx_tuple__502, NULL); if (unlikely(!__pyx_t_22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1401; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_22);
             __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
             __pyx_t_18 = NULL;
@@ -52260,7 +52318,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
             __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1402; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_17);
-            __pyx_t_22 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_tuple__506, NULL); if (unlikely(!__pyx_t_22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1402; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_22 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_tuple__503, NULL); if (unlikely(!__pyx_t_22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1402; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_22);
             __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
             __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_libspm); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1402; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -52311,7 +52369,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1403; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_18 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__507, NULL); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1403; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_18 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__504, NULL); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1403; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_18);
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1403; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -52362,7 +52420,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
             __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1404; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_8);
-            __pyx_t_22 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__508, NULL); if (unlikely(!__pyx_t_22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1404; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_22 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__505, NULL); if (unlikely(!__pyx_t_22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1404; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_22);
             __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
             __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1404; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -52537,7 +52595,7 @@ PyMODINIT_FUNC PyInit_tools(void)
               __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
               __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1410; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
               __Pyx_GOTREF(__pyx_t_8);
-              __pyx_t_22 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__509, NULL); if (unlikely(!__pyx_t_22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1410; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+              __pyx_t_22 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__506, NULL); if (unlikely(!__pyx_t_22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1410; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
               __Pyx_GOTREF(__pyx_t_22);
               __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
               __pyx_t_8 = NULL;
@@ -52582,7 +52640,7 @@ PyMODINIT_FUNC PyInit_tools(void)
               __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
               __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1411; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
               __Pyx_GOTREF(__pyx_t_17);
-              __pyx_t_22 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_tuple__510, NULL); if (unlikely(!__pyx_t_22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1411; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+              __pyx_t_22 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_tuple__507, NULL); if (unlikely(!__pyx_t_22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1411; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
               __Pyx_GOTREF(__pyx_t_22);
               __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
               __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1411; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -52633,7 +52691,7 @@ PyMODINIT_FUNC PyInit_tools(void)
               __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
               __pyx_t_18 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1412; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
               __Pyx_GOTREF(__pyx_t_18);
-              __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_18, __pyx_tuple__511, NULL); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1412; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+              __pyx_t_8 = __Pyx_PyObject_Call(__pyx_t_18, __pyx_tuple__508, NULL); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1412; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
               __Pyx_GOTREF(__pyx_t_8);
               __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
               __pyx_t_18 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1412; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -52808,7 +52866,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1417; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
-            __pyx_t_18 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__512, NULL); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1417; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_18 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__509, NULL); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1417; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_18);
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __pyx_t_3 = NULL;
@@ -52853,7 +52911,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1418; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_18 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__513, NULL); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1418; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_18 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__510, NULL); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1418; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_18);
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1418; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -52904,7 +52962,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
             __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1419; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_8);
-            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__514, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1419; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__511, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1419; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
             __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
             __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1419; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -52955,7 +53013,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
             __pyx_t_22 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1420; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_22);
-            __pyx_t_18 = __Pyx_PyObject_Call(__pyx_t_22, __pyx_tuple__515, NULL); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1420; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_18 = __Pyx_PyObject_Call(__pyx_t_22, __pyx_tuple__512, NULL); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1420; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_18);
             __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
             __pyx_t_22 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1420; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -53006,7 +53064,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1421; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__516, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1421; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__513, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1421; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1421; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -53057,7 +53115,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
             __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1422; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_8);
-            __pyx_t_18 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__517, NULL); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1422; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_18 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__514, NULL); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1422; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_18);
             __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
             __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1422; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -53108,7 +53166,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
             __pyx_t_22 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1423; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_22);
-            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_22, __pyx_tuple__518, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1423; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_22, __pyx_tuple__515, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1423; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
             __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
             __pyx_t_22 = NULL;
@@ -53292,7 +53350,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
             __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_21)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1429; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_21);
-            __pyx_t_23 = __Pyx_PyObject_Call(__pyx_t_21, __pyx_tuple__519, NULL); if (unlikely(!__pyx_t_23)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1429; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_23 = __Pyx_PyObject_Call(__pyx_t_21, __pyx_tuple__516, NULL); if (unlikely(!__pyx_t_23)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1429; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_23);
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
             __pyx_t_21 = NULL;
@@ -53337,7 +53395,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1430; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_23 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__520, NULL); if (unlikely(!__pyx_t_23)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1430; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_23 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__517, NULL); if (unlikely(!__pyx_t_23)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1430; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_23);
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1430; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -53577,7 +53635,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_23); __pyx_t_23 = 0;
             __pyx_t_23 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_23)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1439; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_23);
-            __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_23, __pyx_tuple__521, NULL); if (unlikely(!__pyx_t_21)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1439; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_23, __pyx_tuple__518, NULL); if (unlikely(!__pyx_t_21)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1439; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_21);
             __Pyx_DECREF(__pyx_t_23); __pyx_t_23 = 0;
             __pyx_t_23 = NULL;
@@ -53622,7 +53680,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
             __pyx_t_24 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_24)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1440; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_24);
-            __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_24, __pyx_tuple__522, NULL); if (unlikely(!__pyx_t_21)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1440; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_24, __pyx_tuple__519, NULL); if (unlikely(!__pyx_t_21)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1440; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_21);
             __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
             __pyx_t_24 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_24)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1440; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -53673,7 +53731,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
             __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1441; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_8);
-            __pyx_t_23 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__523, NULL); if (unlikely(!__pyx_t_23)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1441; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_23 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__520, NULL); if (unlikely(!__pyx_t_23)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1441; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_23);
             __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
             __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1441; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -53724,7 +53782,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1442; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__524, NULL); if (unlikely(!__pyx_t_21)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1442; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__521, NULL); if (unlikely(!__pyx_t_21)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1442; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_21);
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1442; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -53775,7 +53833,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
             __pyx_t_24 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_24)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1443; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_24);
-            __pyx_t_23 = __Pyx_PyObject_Call(__pyx_t_24, __pyx_tuple__525, NULL); if (unlikely(!__pyx_t_23)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1443; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_23 = __Pyx_PyObject_Call(__pyx_t_24, __pyx_tuple__522, NULL); if (unlikely(!__pyx_t_23)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1443; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_23);
             __Pyx_DECREF(__pyx_t_24); __pyx_t_24 = 0;
             __pyx_t_24 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_24)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1443; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -53826,7 +53884,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
             __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1444; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_8);
-            __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__526, NULL); if (unlikely(!__pyx_t_21)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1444; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_8, __pyx_tuple__523, NULL); if (unlikely(!__pyx_t_21)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1444; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_21);
             __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
             __pyx_t_8 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1444; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -54016,7 +54074,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
             __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1450; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_17);
-            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_tuple__527, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1450; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_tuple__524, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1450; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
             __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
             __pyx_t_17 = NULL;
@@ -54061,7 +54119,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1451; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__528, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1451; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_tuple__525, NULL); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1451; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1451; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -54112,7 +54170,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
             __pyx_t_22 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1452; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_22);
-            __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_22, __pyx_tuple__529, NULL); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1452; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_22, __pyx_tuple__526, NULL); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1452; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_17);
             __Pyx_DECREF(__pyx_t_22); __pyx_t_22 = 0;
             __pyx_t_22 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1452; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -55366,7 +55424,7 @@ PyMODINIT_FUNC PyInit_tools(void)
           __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_critical); if (unlikely(!__pyx_t_21)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1498; __pyx_clineno = __LINE__; goto __pyx_L9_except_error;}
           __Pyx_GOTREF(__pyx_t_21);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_21, __pyx_tuple__530, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1498; __pyx_clineno = __LINE__; goto __pyx_L9_except_error;}
+          __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_21, __pyx_tuple__527, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1498; __pyx_clineno = __LINE__; goto __pyx_L9_except_error;}
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;

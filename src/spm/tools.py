@@ -23,7 +23,7 @@ misc = libspm.misc
 database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.8.2 (e485961)"
+app_version = "1.8.2 (9c8a1fb)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -387,9 +387,9 @@ class Lint(object):
                     message.sub_debug(_('Checking possible backups in'), target)
                     for sfile in target_footprint_lines:
                         backups = database.remote_metadata(target, 'backup')
-                        if not os.path.exists(sfile) and sfile.lstrip('/') in backups:
+                        if not os.path.exists(sfile) and misc.string_lstrip(sfile, '/') in backups:
                             message.sub_warning(_('Possibly unnecessary backup of file'), sfile)
-                        elif sfile.endswith('.conf') and not sfile.lstrip('/') in backups:
+                        elif sfile.endswith('.conf') and not misc.string_lstrip(sfile, '/') in backups:
                             message.sub_warning(_('Possibly undefined backup of file'), sfile)
 
                 if self.conflicts:
@@ -880,7 +880,7 @@ class Upgrade(object):
         dbackup = {}
         message.sub_debug(_('Migrating remote backup to local'), target)
         for sfile in database.local_metadata(target, 'footprint'):
-            if sfile.endswith('.conf') or sfile.lstrip('/') in backup:
+            if sfile.endswith('.conf') or misc.string_lstrip(sfile, '/') in backup:
                 if os.path.isfile(sfile):
                     dbackup[sfile] = misc.file_checksum(sfile)
                 else:

@@ -1274,7 +1274,7 @@ class Source(object):
             if LOCAL_DIR in sfile:
                 continue
             footprint.append(sstripped)
-            if sfile.endswith('.conf') or sstripped.lstrip('/') in self.target_backup:
+            if sfile.endswith('.conf') or misc.string_lstrip(sstripped, '/') in self.target_backup:
                 sreal = os.path.realpath(sfile)
                 if not sreal.startswith(self.install_dir):
                     # symlink to full path

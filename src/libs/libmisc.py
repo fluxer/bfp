@@ -165,13 +165,26 @@ class Misc(object):
         return getattr(hashlib, smethod)(data).hexdigest()
 
     def string_lstrip(self, string, schars, sreplacement=''):
-        ''' What string.lstrip() should've been '''
+        ''' What str.lstrip() should've been '''
         if self.python2:
             self.typecheck(string, (types.StringTypes))
             self.typecheck(schars, (types.StringTypes))
             self.typecheck(sreplacement, (types.StringTypes))
+
         toreplace = string[:len(schars)]
         return '%s%s' % (toreplace.replace(schars, sreplacement), string[len(schars):])
+
+    def string_rstrip(self, string, schars, sreplacement=''):
+        ''' What str.rstrip() should've been '''
+        if self.python2:
+            self.typecheck(string, (types.StringTypes))
+            self.typecheck(schars, (types.StringTypes))
+            self.typecheck(sreplacement, (types.StringTypes))
+
+        if len(schars) == 0:
+            return string
+        toreplace = string[-len(schars):]
+        return '%s%s' % (string[:len(string)-len(schars)], toreplace.replace(schars, sreplacement))
 
     def file_name(self, sfile, basename=True):
         ''' Get name of file without the extension '''
@@ -188,7 +201,7 @@ class Misc(object):
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
 
-        return os.path.splitext(sfile)[1].lstrip('.')
+        return self.string_lstrip(os.path.splitext(sfile)[1], '.')
 
     def file_read(self, sfile):
         ''' Get file content '''
@@ -716,7 +729,7 @@ class Misc(object):
 
         # the .svn url extension is fake made up for the sake of the fetcher
         # to be able to recognize the protocol, strip it
-        surl = surl.rstrip('.svn')
+        surl = self.string_rstrip(surl, '.svn')
         svn = self.whereis('svn')
         if os.path.isdir('%s/.svn' % sdir):
             self.system_command((svn, 'up'), cwd=sdir)
@@ -819,14 +832,14 @@ class Misc(object):
                 compresslevel=ilevel)
             try:
                 for item in lpaths:
-                    tarf.add(item, item.lstrip(sstrip))
+                    tarf.add(item, self.string_lstrip(item, sstrip))
             finally:
                 tarf.close()
         elif sfile.endswith('.zip'):
             zipf = zipfile.ZipFile(sfile, mode='w')
             try:
                 for item in lpaths:
-                    zipf.write(item, item.lstrip(sstrip))
+                    zipf.write(item, self.string_lstrip(item, sstrip))
             finally:
                 zipf.close()
         elif sfile.endswith(('.xz', '.lzma')):
@@ -896,7 +909,7 @@ class Misc(object):
                 # filter directories
                 if line.endswith('/'):
                     continue
-                content.append(line.lstrip('./'))
+                content.append(self.string_lstrip(line, './'))
         elif tarfile.is_tarfile(sfile):
             tfile = tarfile.open(sfile)
             try:
