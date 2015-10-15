@@ -2859,7 +2859,7 @@ static PyObject *__pyx_pf_10libmessage_7Message_4base(CYTHON_UNUSED PyObject *__
  *             if not status in self.LOG_STATUS:
  *                 return             # <<<<<<<<<<<<<<
  *             msg = self.normalize(msg)
- *             marklog = self.normalize(msg)
+ *             marklog = self.normalize(marklog)
  */
       __Pyx_XDECREF(__pyx_r);
       __pyx_r = Py_None; __Pyx_INCREF(Py_None);
@@ -2878,7 +2878,7 @@ static PyObject *__pyx_pf_10libmessage_7Message_4base(CYTHON_UNUSED PyObject *__
  *             if not status in self.LOG_STATUS:
  *                 return
  *             msg = self.normalize(msg)             # <<<<<<<<<<<<<<
- *             marklog = self.normalize(msg)
+ *             marklog = self.normalize(marklog)
  *             syslog.syslog(status, '%s%s' % (msg, marklog))
  */
     __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_normalize); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 104; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -2914,7 +2914,7 @@ static PyObject *__pyx_pf_10libmessage_7Message_4base(CYTHON_UNUSED PyObject *__
     /* "libmessage.py":105
  *                 return
  *             msg = self.normalize(msg)
- *             marklog = self.normalize(msg)             # <<<<<<<<<<<<<<
+ *             marklog = self.normalize(marklog)             # <<<<<<<<<<<<<<
  *             syslog.syslog(status, '%s%s' % (msg, marklog))
  * 
  */
@@ -2931,15 +2931,15 @@ static PyObject *__pyx_pf_10libmessage_7Message_4base(CYTHON_UNUSED PyObject *__
       }
     }
     if (!__pyx_t_6) {
-      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_msg); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 105; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_marklog); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 105; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
     } else {
       __pyx_t_7 = PyTuple_New(1+1); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 105; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_7);
       __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_6); __pyx_t_6 = NULL;
-      __Pyx_INCREF(__pyx_v_msg);
-      __Pyx_GIVEREF(__pyx_v_msg);
-      PyTuple_SET_ITEM(__pyx_t_7, 0+1, __pyx_v_msg);
+      __Pyx_INCREF(__pyx_v_marklog);
+      __Pyx_GIVEREF(__pyx_v_marklog);
+      PyTuple_SET_ITEM(__pyx_t_7, 0+1, __pyx_v_marklog);
       __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_7, NULL); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 105; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -2950,7 +2950,7 @@ static PyObject *__pyx_pf_10libmessage_7Message_4base(CYTHON_UNUSED PyObject *__
 
     /* "libmessage.py":106
  *             msg = self.normalize(msg)
- *             marklog = self.normalize(msg)
+ *             marklog = self.normalize(marklog)
  *             syslog.syslog(status, '%s%s' % (msg, marklog))             # <<<<<<<<<<<<<<
  * 
  *     def info(self, msg, marker=None):
