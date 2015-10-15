@@ -4,8 +4,8 @@ mkinitfs - MkInitfs
 
 =head1 SYNOPSIS
 
-    mkinitfs [-h] [-t TMP] [-b BUSYBOX] [-k KERNEL]
-        [-m MODULES [MODULES ...]] [-i IMAGE] [-c {gzip,cat,bzip2}]
+    mkinitfs [-h] [-T] [-t TMP] [-b BUSYBOX] [-k KERNEL]
+        [-m MODULES [MODULES ...]] [-i IMAGE] [-c {cat,gzip,bzip2}]
         [-r {True,False}] [--keep] [--debug] [--version]
 
 =head1 DESCRIPTION
@@ -16,6 +16,7 @@ MkInitfs is a initial RAM filesystem image creator.
 
 optional arguments:
   -h, --help            Show this help message and exit
+  -T, --busytest        Test whether Busybox supports requried functionality
   -t TMP, --tmp TMP     Change temporary directory
   -b BUSYBOX, --busybox BUSYBOX
                         Change busybox binary
@@ -25,7 +26,7 @@ optional arguments:
                         Change modules
   -i IMAGE, --image IMAGE
                         Change output image
-  -c {gzip,cat,bzip2}, --compression {gzip,cat,bzip2}
+  -c {cat,gzip,bzip2}, --compression {cat,gzip,bzip2}
                         Change image compression method
   -r {True,False}, --recovery {True,False}
                         Change wheather to create recovery image
