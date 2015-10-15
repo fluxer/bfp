@@ -246,6 +246,7 @@ class Local(object):
                     if self.plain:
                         print(data)
                     else:
+                        data = misc.string_unit(data, 'auto', True)
                         message.sub_info(_('Size'), data)
 
                 if self.do_footprint:
