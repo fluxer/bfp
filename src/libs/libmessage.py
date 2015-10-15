@@ -102,7 +102,7 @@ class Message(object):
             if not status in self.LOG_STATUS:
                 return
             msg = self.normalize(msg)
-            marklog = self.normalize(msg)
+            marklog = self.normalize(marklog)
             syslog.syslog(status, '%s%s' % (msg, marklog))
 
     def info(self, msg, marker=None):
