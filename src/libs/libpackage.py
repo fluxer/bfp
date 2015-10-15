@@ -234,6 +234,7 @@ class Database(object):
         local_optional = self.local_metadata(base, 'optdepends')
         remote_version = self.remote_metadata(target, 'version')
         remote_release = self.remote_metadata(target, 'release')
+        remote_optional = self.remote_metadata(base, 'optdepends')
 
         # LooseVersion does not handle None
         if not remote_version or not local_version:
@@ -244,7 +245,7 @@ class Database(object):
         elif local_release < remote_release:
             return False
         else:
-            for optional in local_optional:
+            for optional in remote_optional:
                 if self.local_search(optional) \
                     and not optional in local_optional:
                     return False
