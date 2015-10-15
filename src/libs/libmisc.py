@@ -111,9 +111,9 @@ class Misc(object):
     def string_unit_guess(self, string):
         ''' Guess the units to be used by string_unit() '''
         if self.python2:
-            self.typecheck(string, (types.StringTypes))
+            self.typecheck(string, (types.StringTypes, types.IntType))
 
-        lenght = len(string)
+        lenght = len(str(string))
         if lenght > 9:
             return 'Gb'
         elif lenght > 6:
@@ -126,11 +126,13 @@ class Misc(object):
     def string_unit(self, string, sunit='Mb', bprefix=False):
         ''' Convert bytes to humar friendly units '''
         if self.python2:
-            self.typecheck(string, (types.StringTypes))
+            self.typecheck(string, (types.StringTypes, types.IntType))
             self.typecheck(sunit, (types.StringTypes))
             self.typecheck(bprefix, (types.BooleanType))
 
         sprefix = ''
+        if sunit == 'auto':
+            sunit = self.string_unit_guess(string)
         if bprefix:
             sprefix = sunit
         if sunit == 'Gb':
@@ -139,8 +141,10 @@ class Misc(object):
             return '%d%s' % (int(string) / 1024**2, sprefix)
         elif sunit == 'Kb':
             return '%d%s' % (int(string) / 1024, sprefix)
-        else:
+        elif sunit == 'b':
             return '%d%s' % (int(string), sprefix)
+        else:
+            return int(string)
 
     def string_search(self, string, string2, exact=False, escape=True):
         ''' Search for string in other string or list '''
