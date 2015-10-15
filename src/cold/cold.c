@@ -766,7 +766,7 @@ static char __pyx_k_description[] = "description";
 static char __pyx_k_dir_current[] = "dir_current";
 static char __pyx_k_interpreter[] = "interpreter";
 static char __pyx_k_add_argument[] = "add_argument";
-static char __pyx_k_1_8_2_9c8a1fb[] = "1.8.2 (9c8a1fb)";
+static char __pyx_k_1_8_2_d96425c[] = "1.8.2 (d96425c)";
 static char __pyx_k_interpreter_2[] = "--interpreter";
 static char __pyx_k_s___main___py[] = "%s/__main__.py";
 static char __pyx_k_ArgumentParser[] = "ArgumentParser";
@@ -788,7 +788,7 @@ static char __pyx_k_Making_the_app_executable[] = "Making the app executable";
 static char __pyx_k_Change_temporary_directory[] = "Change temporary directory";
 static char __pyx_k_Show_Cold_version_and_exit[] = "Show Cold version and exit";
 static char __pyx_k_sif___name_____main___import_s[] = "%sif __name__ == \"__main__\": import %s";
-static PyObject *__pyx_kp_s_1_8_2_9c8a1fb;
+static PyObject *__pyx_kp_s_1_8_2_d96425c;
 static PyObject *__pyx_n_s_ARGS;
 static PyObject *__pyx_n_s_ArgumentParser;
 static PyObject *__pyx_kp_s_Change_interpreter;
@@ -959,7 +959,7 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
-  {&__pyx_kp_s_1_8_2_9c8a1fb, __pyx_k_1_8_2_9c8a1fb, sizeof(__pyx_k_1_8_2_9c8a1fb), 0, 0, 1, 0},
+  {&__pyx_kp_s_1_8_2_d96425c, __pyx_k_1_8_2_d96425c, sizeof(__pyx_k_1_8_2_d96425c), 0, 0, 1, 0},
   {&__pyx_n_s_ARGS, __pyx_k_ARGS, sizeof(__pyx_k_ARGS), 0, 0, 1, 1},
   {&__pyx_n_s_ArgumentParser, __pyx_k_ArgumentParser, sizeof(__pyx_k_ArgumentParser), 0, 0, 1, 1},
   {&__pyx_kp_s_Change_interpreter, __pyx_k_Change_interpreter, sizeof(__pyx_k_Change_interpreter), 0, 0, 1, 0},
@@ -1470,7 +1470,7 @@ PyMODINIT_FUNC PyInit_cold(void)
  * 
  * import sys, argparse, tempfile, shutil, os             # <<<<<<<<<<<<<<
  * 
- * app_version = "1.8.2 (9c8a1fb)"
+ * app_version = "1.8.2 (d96425c)"
  */
   __pyx_t_1 = __Pyx_Import(__pyx_n_s_sys, 0, -1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 3; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -1496,14 +1496,14 @@ PyMODINIT_FUNC PyInit_cold(void)
   /* "cold.py":5
  * import sys, argparse, tempfile, shutil, os
  * 
- * app_version = "1.8.2 (9c8a1fb)"             # <<<<<<<<<<<<<<
+ * app_version = "1.8.2 (d96425c)"             # <<<<<<<<<<<<<<
  * 
  * tmpdir = None
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_8_2_9c8a1fb) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_8_2_d96425c) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "cold.py":7
- * app_version = "1.8.2 (9c8a1fb)"
+ * app_version = "1.8.2 (d96425c)"
  * 
  * tmpdir = None             # <<<<<<<<<<<<<<
  * keep = False

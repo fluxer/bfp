@@ -804,7 +804,7 @@ static char __pyx_k_HANDLERS_DIR[] = "HANDLERS_DIR";
 static char __pyx_k_ID_VENDOR_ID[] = "ID_VENDOR_ID";
 static char __pyx_k_get_property[] = "get_property";
 static char __pyx_k_sub_critical[] = "sub_critical";
-static char __pyx_k_1_8_2_9c8a1fb[] = "1.8.2 (9c8a1fb)";
+static char __pyx_k_1_8_2_d96425c[] = "1.8.2 (d96425c)";
 static char __pyx_k_get_subsystem[] = "get_subsystem";
 static char __pyx_k_AHWS_Daemonize[] = "AHWS.Daemonize";
 static char __pyx_k_system_command[] = "system_command";
@@ -835,7 +835,7 @@ static char __pyx_k_udev_enumerate_add_match_subsyst[] = "udev_enumerate_add_mat
 static char __pyx_k_udev_monitor_filter_add_match_su[] = "udev_monitor_filter_add_match_subsystem_devtype";
 static PyObject *__pyx_kp_s_0x;
 static PyObject *__pyx_kp_s_0x_s;
-static PyObject *__pyx_kp_s_1_8_2_9c8a1fb;
+static PyObject *__pyx_kp_s_1_8_2_d96425c;
 static PyObject *__pyx_n_s_AHWS;
 static PyObject *__pyx_n_s_AHWS_Daemonize;
 static PyObject *__pyx_n_s_AHWS_Handle;
@@ -5122,7 +5122,7 @@ static struct PyModuleDef __pyx_moduledef = {
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_0x, __pyx_k_0x, sizeof(__pyx_k_0x), 0, 0, 1, 0},
   {&__pyx_kp_s_0x_s, __pyx_k_0x_s, sizeof(__pyx_k_0x_s), 0, 0, 1, 0},
-  {&__pyx_kp_s_1_8_2_9c8a1fb, __pyx_k_1_8_2_9c8a1fb, sizeof(__pyx_k_1_8_2_9c8a1fb), 0, 0, 1, 0},
+  {&__pyx_kp_s_1_8_2_d96425c, __pyx_k_1_8_2_d96425c, sizeof(__pyx_k_1_8_2_d96425c), 0, 0, 1, 0},
   {&__pyx_n_s_AHWS, __pyx_k_AHWS, sizeof(__pyx_k_AHWS), 0, 0, 1, 1},
   {&__pyx_n_s_AHWS_Daemonize, __pyx_k_AHWS_Daemonize, sizeof(__pyx_k_AHWS_Daemonize), 0, 0, 1, 1},
   {&__pyx_n_s_AHWS_Handle, __pyx_k_AHWS_Handle, sizeof(__pyx_k_AHWS_Handle), 0, 0, 1, 1},
@@ -5634,7 +5634,7 @@ PyMODINIT_FUNC PyInit_ahws(void)
  * misc = libmisc.Misc()
  * udev = libmisc.UDev()             # <<<<<<<<<<<<<<
  * 
- * app_version = "1.8.2 (9c8a1fb)"
+ * app_version = "1.8.2 (d96425c)"
  */
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_libmisc); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 7; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -5665,14 +5665,14 @@ PyMODINIT_FUNC PyInit_ahws(void)
   /* "ahws.py":9
  * udev = libmisc.UDev()
  * 
- * app_version = "1.8.2 (9c8a1fb)"             # <<<<<<<<<<<<<<
+ * app_version = "1.8.2 (d96425c)"             # <<<<<<<<<<<<<<
  * 
  * class AHWS(object):
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_8_2_9c8a1fb) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_8_2_d96425c) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 9; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "ahws.py":11
- * app_version = "1.8.2 (9c8a1fb)"
+ * app_version = "1.8.2 (d96425c)"
  * 
  * class AHWS(object):             # <<<<<<<<<<<<<<
  *     def __init__(self):
@@ -5749,7 +5749,7 @@ PyMODINIT_FUNC PyInit_ahws(void)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
   /* "ahws.py":11
- * app_version = "1.8.2 (9c8a1fb)"
+ * app_version = "1.8.2 (d96425c)"
  * 
  * class AHWS(object):             # <<<<<<<<<<<<<<
  *     def __init__(self):
