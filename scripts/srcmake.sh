@@ -27,7 +27,7 @@ fi
 readonly ALL_OFF BOLD BLUE GREEN RED YELLOW
 
 msg() {
-    printf "${ALL_OFF}${GREEN}->${ALL_OFF}${BOLD} ${*}${ALL_OFF}\n"
+    printf "${ALL_OFF}${GREEN}*${ALL_OFF}${BOLD} ${*}${ALL_OFF}\n"
 }
 
 msg2() {
@@ -35,7 +35,7 @@ msg2() {
 }
 
 warn() {
-    printf "${ALL_OFF}${YELLOW}->${ALL_OFF}${BOLD} ${*}${ALL_OFF}\n" >&2
+    printf "${ALL_OFF}${YELLOW}*${ALL_OFF}${BOLD} ${*}${ALL_OFF}\n" >&2
 }
 
 warn2() {
@@ -170,6 +170,7 @@ for src in "${@:-.}";do
     cd "$SOURCE_DIR"
     src_install
 
+    # TODO: migrate to JSON format
     msg "Creating footprint and metadata..."
     footprint="$INSTALL_DIR/var/local/spm/$src_name/footprint"
     metadata="$INSTALL_DIR/var/local/spm/$src_name/metadata"
@@ -179,7 +180,6 @@ for src in "${@:-.}";do
         echo "${file//$INSTALL_DIR}" >> "$footprint"
     done < <(find "$INSTALL_DIR" ! -type d -print0)
 
-    # TODO: migrate to JSON format
     echo "version=$version" > "$metadata"
     echo "release=${release:-1}" >> "$metadata"
     echo "description=$description" >> "$metadata"
