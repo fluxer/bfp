@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast, re
 
-app_version = "1.8.2 (9c8a1fb)"
+app_version = "1.8.2 (a908ff2)"
 
 tmpdir = None
 keep = False
@@ -177,18 +177,18 @@ try:
         message.sub_info('Testing busybox compatibility')
         busycommands = {
             'modprobe': ['-b'],
-            'find': ['-type', '-name', '-exec'],
-            'cpio': ['-o', '-H'],
+            'find': ('-type', '-name', '-exec'),
+            'cpio': ('-o', '-H'),
             'mknod': ['-m'],
             'echo': ['-e'],
             'mkdir': ['-p'],
-            'mount': ['-t', '-o', 'move'],
-            'modprobe': ['-q', '-b', '-a'],
-            'ln': ['-s', '-f'],
+            'mount': ('-t', '-o', 'move'),
+            'modprobe': ('-q', '-b', '-a'),
+            'ln': ('-s', '-f'),
             'mdev': ['-s'],
             'sort': ['-u'],
             'reboot': ['-f'],
-            'main': ['--install', '[-s]', 'touch,', 'xargs,', 'switch_root,', 'sync,'],
+            'main': ('--install', '[-s]', 'touch,', 'xargs,', 'switch_root,', 'sync,'),
         }
         compatible = True
         for command in busycommands:
