@@ -1736,6 +1736,7 @@ class Binary(Source):
         obj.main()
 
     def fetch(self):
+        ''' Fetch target tarballs and signatures '''
         message.sub_info(_('Fetching binaries'))
         # usually that would not happend (see the mirrors config parser) but
         # since that's a module one can temper with MIRRORS
