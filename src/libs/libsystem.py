@@ -95,6 +95,9 @@ class Block(object):
             if line.startswith(('ID_FS_%s=' % tag, '%s='% tag)):
                 return line.split('=')[1]
 
+    def blkid(self, device, tag):
+        ''' Get information about a block device, more reliable in case of partitions shuffle '''
+        return misc.system_communicate((misc.whereis('blkid'), '-o', 'value', '-s', tag, device))
 
 class Power(object):
     ''' System power state management and information gathering helper '''
