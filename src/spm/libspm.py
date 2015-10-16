@@ -4,6 +4,7 @@ import gettext
 _ = gettext.translation('spm', fallback=True).gettext
 
 import sys, os, shutil, re, time, syslog
+from collections import OrderedDict
 if sys.version < '3':
     import ConfigParser as configparser
 else:
@@ -1285,16 +1286,23 @@ class Source(object):
         for target in self.target_optdepends:
             if database.local_uptodate(target):
                 optdepends.append(target)
-        data = {}
-        data['version'] = self.target_version
-        data['release'] = self.target_release
-        data['description'] = self.target_description
-        data['depends'] = self.target_depends
-        data['optdepends'] = optdepends
-        data['backup'] = backup
-        data['size'] = misc.dir_size(self.install_dir)
-        data['footprint'] = footprint
-        misc.json_write(metadata, data)
+        data = [
+            ('version', self.target_version),
+            ('release', self.target_release),
+            ('description', self.target_description),
+            ('depends', self.target_depends),
+            ('optdepends', optdepends),
+            ('backup', backup),
+            ('size', misc.dir_size(self.install_dir)),
+            ('footprint', footprint),
+            ('builddate', time.ctime()),
+            ('chost', CHOST),
+            ('cflags', CFLAGS),
+            ('cxxflags', CXXFLAGS),
+            ('cppflags', CPPFLAGS),
+            ('ldflags', LDFLAGS),
+        ]
+        misc.json_write(metadata, OrderedDict(data))
 
         message.sub_info(_('Assembling SRCBUILD'))
         shutil.copy(self.srcbuild, '%s/%s' % \
