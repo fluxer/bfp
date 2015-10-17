@@ -5498,7 +5498,7 @@ static PyObject *__pyx_pf_10libpackage_8Database_16remote_mdepends(CYTHON_UNUSED
  *         if mdepends:
  *             build_depends.extend(self.remote_metadata(target, 'makedepends'))             # <<<<<<<<<<<<<<
  *         if odepends:
- *             build_depends.append(self.remote_metadata(target, 'optdepends'))
+ *             build_depends.extend(self.remote_metadata(target, 'optdepends'))
  */
     __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_remote_metadata); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 166; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_7);
@@ -5545,7 +5545,7 @@ static PyObject *__pyx_pf_10libpackage_8Database_16remote_mdepends(CYTHON_UNUSED
  *         if mdepends:
  *             build_depends.extend(self.remote_metadata(target, 'makedepends'))
  *         if odepends:             # <<<<<<<<<<<<<<
- *             build_depends.append(self.remote_metadata(target, 'optdepends'))
+ *             build_depends.extend(self.remote_metadata(target, 'optdepends'))
  *         if cdepends:
  */
   __pyx_t_3 = __Pyx_PyObject_IsTrue(__pyx_v_odepends); if (unlikely(__pyx_t_3 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 167; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -5554,7 +5554,7 @@ static PyObject *__pyx_pf_10libpackage_8Database_16remote_mdepends(CYTHON_UNUSED
     /* "libpackage.py":168
  *             build_depends.extend(self.remote_metadata(target, 'makedepends'))
  *         if odepends:
- *             build_depends.append(self.remote_metadata(target, 'optdepends'))             # <<<<<<<<<<<<<<
+ *             build_depends.extend(self.remote_metadata(target, 'optdepends'))             # <<<<<<<<<<<<<<
  *         if cdepends:
  *             build_depends.extend(self.remote_metadata(target, 'checkdepends'))
  */
@@ -5587,21 +5587,21 @@ static PyObject *__pyx_pf_10libpackage_8Database_16remote_mdepends(CYTHON_UNUSED
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
-    __pyx_t_9 = __Pyx_PyList_Append(__pyx_v_build_depends, __pyx_t_2); if (unlikely(__pyx_t_9 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_9 = __Pyx_PyList_Extend(__pyx_v_build_depends, __pyx_t_2); if (unlikely(__pyx_t_9 == -1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 168; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
     /* "libpackage.py":167
  *         if mdepends:
  *             build_depends.extend(self.remote_metadata(target, 'makedepends'))
  *         if odepends:             # <<<<<<<<<<<<<<
- *             build_depends.append(self.remote_metadata(target, 'optdepends'))
+ *             build_depends.extend(self.remote_metadata(target, 'optdepends'))
  *         if cdepends:
  */
   }
 
   /* "libpackage.py":169
  *         if odepends:
- *             build_depends.append(self.remote_metadata(target, 'optdepends'))
+ *             build_depends.extend(self.remote_metadata(target, 'optdepends'))
  *         if cdepends:             # <<<<<<<<<<<<<<
  *             build_depends.extend(self.remote_metadata(target, 'checkdepends'))
  * 
@@ -5610,7 +5610,7 @@ static PyObject *__pyx_pf_10libpackage_8Database_16remote_mdepends(CYTHON_UNUSED
   if (__pyx_t_3) {
 
     /* "libpackage.py":170
- *             build_depends.append(self.remote_metadata(target, 'optdepends'))
+ *             build_depends.extend(self.remote_metadata(target, 'optdepends'))
  *         if cdepends:
  *             build_depends.extend(self.remote_metadata(target, 'checkdepends'))             # <<<<<<<<<<<<<<
  * 
@@ -5650,7 +5650,7 @@ static PyObject *__pyx_pf_10libpackage_8Database_16remote_mdepends(CYTHON_UNUSED
 
     /* "libpackage.py":169
  *         if odepends:
- *             build_depends.append(self.remote_metadata(target, 'optdepends'))
+ *             build_depends.extend(self.remote_metadata(target, 'optdepends'))
  *         if cdepends:             # <<<<<<<<<<<<<<
  *             build_depends.extend(self.remote_metadata(target, 'checkdepends'))
  * 

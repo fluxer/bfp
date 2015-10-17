@@ -768,7 +768,7 @@ static char __pyx_k_Cleaning_up[] = "Cleaning up...";
 static char __pyx_k_app_version[] = "app_version";
 static char __pyx_k_description[] = "description";
 static char __pyx_k_add_argument[] = "add_argument";
-static char __pyx_k_1_8_2_d96425c[] = "1.8.2 (d96425c)";
+static char __pyx_k_1_8_2_df5f8c9[] = "1.8.2 (df5f8c9)";
 static char __pyx_k_Copying_image[] = "Copying image";
 static char __pyx_k_Listing_image[] = "Listing image";
 static char __pyx_k_ArgumentParser[] = "ArgumentParser";
@@ -792,7 +792,7 @@ static char __pyx_k_Interrupt_signal_received[] = "Interrupt signal received";
 static char __pyx_k_Listing_initial_RAM_image[] = "Listing initial RAM image...";
 static char __pyx_k_Change_temporary_directory[] = "Change temporary directory";
 static char __pyx_k_Show_LsInitfs_version_and_exit[] = "Show LsInitfs version and exit";
-static PyObject *__pyx_kp_s_1_8_2_d96425c;
+static PyObject *__pyx_kp_s_1_8_2_df5f8c9;
 static PyObject *__pyx_n_s_ARGS;
 static PyObject *__pyx_n_s_ArgumentParser;
 static PyObject *__pyx_n_s_BUSYBOX;
@@ -961,7 +961,7 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
-  {&__pyx_kp_s_1_8_2_d96425c, __pyx_k_1_8_2_d96425c, sizeof(__pyx_k_1_8_2_d96425c), 0, 0, 1, 0},
+  {&__pyx_kp_s_1_8_2_df5f8c9, __pyx_k_1_8_2_df5f8c9, sizeof(__pyx_k_1_8_2_df5f8c9), 0, 0, 1, 0},
   {&__pyx_n_s_ARGS, __pyx_k_ARGS, sizeof(__pyx_k_ARGS), 0, 0, 1, 1},
   {&__pyx_n_s_ArgumentParser, __pyx_k_ArgumentParser, sizeof(__pyx_k_ArgumentParser), 0, 0, 1, 1},
   {&__pyx_n_s_BUSYBOX, __pyx_k_BUSYBOX, sizeof(__pyx_k_BUSYBOX), 0, 0, 1, 1},
@@ -1487,7 +1487,7 @@ PyMODINIT_FUNC PyInit_lsinitfs(void)
  * 
  * import sys, argparse, tempfile, subprocess, shutil, os             # <<<<<<<<<<<<<<
  * 
- * app_version = "1.8.2 (d96425c)"
+ * app_version = "1.8.2 (df5f8c9)"
  */
   __pyx_t_1 = __Pyx_Import(__pyx_n_s_sys, 0, -1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 3; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -1517,14 +1517,14 @@ PyMODINIT_FUNC PyInit_lsinitfs(void)
   /* "lsinitfs.py":5
  * import sys, argparse, tempfile, subprocess, shutil, os
  * 
- * app_version = "1.8.2 (d96425c)"             # <<<<<<<<<<<<<<
+ * app_version = "1.8.2 (df5f8c9)"             # <<<<<<<<<<<<<<
  * 
  * tmpdir = None
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_8_2_d96425c) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_8_2_df5f8c9) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "lsinitfs.py":7
- * app_version = "1.8.2 (d96425c)"
+ * app_version = "1.8.2 (df5f8c9)"
  * 
  * tmpdir = None             # <<<<<<<<<<<<<<
  * keep = False
