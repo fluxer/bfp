@@ -165,7 +165,7 @@ class Database(object):
         if mdepends:
             build_depends.extend(self.remote_metadata(target, 'makedepends'))
         if odepends:
-            build_depends.append(self.remote_metadata(target, 'optdepends'))
+            build_depends.extend(self.remote_metadata(target, 'optdepends'))
         if cdepends:
             build_depends.extend(self.remote_metadata(target, 'checkdepends'))
 
