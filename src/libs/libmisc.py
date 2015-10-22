@@ -648,9 +648,9 @@ class Misc(object):
         # not all requests have content-lenght:
         # http://en.wikipedia.org/wiki/Chunked_transfer_encoding
         rsize = rfile.headers.get('Content-Length', '0')
+        last = '%s.last' % sfile
         if os.path.exists(sfile):
             lsize = str(os.path.getsize(sfile))
-            last = '%s.last' % sfile
             if lsize == rsize:
                 return rfile.close()
             elif lsize > rsize or (os.path.isfile(last) and not self.file_read(last) == rsize):
@@ -694,7 +694,7 @@ class Misc(object):
                 detail.url = surl
                 raise detail
         finally:
-            self.file_write('%s.last' % sfile, rsize)
+            self.file_write(last, rsize)
             sys.stdout.write('\n')
             lfile.close()
             rfile.close()
