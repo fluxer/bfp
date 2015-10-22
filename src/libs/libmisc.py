@@ -774,9 +774,8 @@ class Misc(object):
             mymirrors.extend(lmirrors)
         sbase = self.url_normalize(surl, True)
         if mymirrors:
-            smirror = mymirrors[0]
+            snewurl = '%s/%s%s' % (mymirrors[0], ssuffix, sbase)
             mymirrors.pop(0)
-            snewurl = '%s/%s%s' % (smirror, ssuffix, sbase)
         else:
             snewurl = surl
         try:
