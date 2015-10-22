@@ -830,8 +830,9 @@ class Misc(object):
 
         self.dir_create(os.path.dirname(sfile))
 
+        sextension = self.file_extension(sfile)
         if sfile.endswith(('tar.bz2', '.tar.gz')):
-            tarf = tarfile.open(sfile, 'w:' + self.file_extension(sfile), \
+            tarf = tarfile.open(sfile, 'w:%s' % sextension, \
                 compresslevel=ilevel)
             try:
                 for item in lpaths:
@@ -864,7 +865,7 @@ class Misc(object):
             bzipf.write(self.string_encode(self.file_read(lpaths[0])))
             bzipf.close()
         else:
-            raise Exception('Unsupported format', self.file_extension(sfile))
+            raise Exception('Unsupported format', sextension)
 
     def archive_decompress(self, sfile, sdir):
         ''' Extract archive to directory '''
