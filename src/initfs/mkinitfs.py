@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast, re
 
-app_version = "1.8.2 (df5f8c9)"
+app_version = "1.8.2 (8ead93d)"
 
 tmpdir = None
 keep = False
@@ -49,6 +49,9 @@ try:
         version='MkInitfs v' + app_version, \
         help='Show MkInitfs version and exit')
     ARGS = parser.parse_args()
+
+    if ARGS.tmp != tmpdir:
+        tmpdir = ARGS.tmp
 
     if ARGS.keep:
         keep = True
