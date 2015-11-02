@@ -14,6 +14,7 @@ try:
     tmpdir = tempfile.mkdtemp()
     kernel = os.uname()[2]
     busybox = misc.whereis('busybox')
+    strip = True
     image = '/boot/initramfs-%s.img' % kernel
     compression = 'gzip'
     recovery = True
@@ -33,6 +34,9 @@ try:
         help='Change kernel version')
     parser.add_argument('-m', '--modules', type=str, nargs='+', \
         default=modules, help='Change modules')
+    parser.add_argument('-s', '--strip', type=ast.literal_eval, \
+        choices=[True, False], default=strip, \
+        help='Change whether to strip binraries and libraries')
     parser.add_argument('-i', '--image', type=str, default=image, \
         help='Change output image')
     parser.add_argument('-c', '--compression', type=str, default=compression, \
@@ -172,6 +176,7 @@ try:
     message.sub_info('BUSYBOX', ARGS.busybox)
     message.sub_info('KERNEL', ARGS.kernel)
     message.sub_info('MODULES', ARGS.modules)
+    message.sub_info('STRIP', ARGS.strip)
     message.sub_info('IMAGE', ARGS.image)
     message.sub_info('COMPRESSION', ARGS.compression)
     message.sub_info('RECOVERY', ARGS.recovery)
@@ -304,6 +309,16 @@ try:
     if not os.path.isfile(ldconf):
         misc.file_write(ldconf, '')
     misc.system_command((misc.whereis('ldconfig'), '-r', ARGS.tmp))
+
+    if ARGS.strip:
+        message.sub_info('Stripping binraries and libraries')
+        strip = misc.whereis('strip')
+        for sfile in misc.list_files(ARGS.tmp):
+            smime = misc.file_mime(sfile)
+            if smime in ('application/x-executable', \
+                'application/x-sharedlib', 'application/x-archive'):
+                message.sub_debug('Stripping', sfile)
+                misc.system_command((strip, '--strip-all', sfile))
 
     message.sub_info('Creating optimized image')
     create_image(ARGS.tmp, ARGS.image, ARGS.compression)
