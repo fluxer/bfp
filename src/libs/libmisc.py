@@ -902,7 +902,7 @@ class Misc(object):
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
 
-        content = []
+        lcontent = []
         smime = self.file_mime(sfile, True)
         if smime == 'application/x-xz' or smime == 'application/x-lzma':
             tar = self.whereis('bsdtar', False) or self.whereis('tar')
@@ -913,24 +913,24 @@ class Misc(object):
                 # filter directories
                 if line.endswith('/'):
                     continue
-                content.append(self.string_lstrip(line, './'))
+                lcontent.append(self.string_lstrip(line, './'))
         elif tarfile.is_tarfile(sfile):
             tfile = tarfile.open(sfile)
             try:
                 for i in tfile:
                     if not i.isdir():
-                        content.append(i.name)
+                        lcontent.append(i.name)
             finally:
                 tfile.close()
         elif zipfile.is_zipfile(sfile):
             zfile = zipfile.ZipFile(sfile)
-            content = zfile.namelist()
+            lcontent = zfile.namelist()
             zfile.close()
         elif smime == 'application/x-gzip':
-            content = self.file_name(sfile).split()
+            lcontent = self.file_name(sfile).split()
         elif smime == 'application/x-bzip2':
-            content = self.file_name(sfile).split()
-        return content
+            lcontent = self.file_name(sfile).split()
+        return lcontent
 
     def system_communicate(self, command, bshell=False, cwd=None, sinput=None):
         ''' Get output and optionally send input to external utility
@@ -1005,7 +1005,10 @@ class Misc(object):
             raise(subprocess.CalledProcessError(pipe.returncode, command))
 
     def system_chroot(self, command, bshell=False, sinput=None):
-        ''' Execute command in chroot environment '''
+        ''' Execute command in chroot environment, conditionally
+
+            The conditional is self.ROOT_DIR, if it equals / then the command
+            is execute in the real root directory! '''
         if self.python2:
             self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
             self.typecheck(bshell, (types.BooleanType))
@@ -1080,7 +1083,7 @@ class Inotify(object):
         self.DELETE_SELF = 0x00000400   # IN_DELETE_SELF
         self.MOVE_SELF = 0x00000800     # IN_MOVE_SELF
         self.UNMOUNT = 0x00002000       # IN_UNMOUNT
-        self.Q_OVERFLOW = 0x00004000    # IN_Q_OVERFLOW
+        self.OVERFLOW = 0x00004000      # IN_Q_OVERFLOW
         self.IGNORED = 0x00008000       # IN_IGNORED
         self.ONLYDIR = 0x01000000       # IN_ONLYDIR
         self.DONT_FOLLOW = 0x02000000   # IN_DONT_FOLLOW

@@ -355,10 +355,6 @@ Print the owner of 'bin/bash':
 
     spm who 'bin/bash\b'
 
-Print the owner of 'bin/bash':
-
-    spm who 'bin/bash\b'
-
 Note that remote, local and who modes accept regexp similar to those in Perl.
 For more information visit http://docs.python.org/2/library/re.html. Source and
 binary mode accepts base (e.g. foo), directory (e.g. /home/me/foo) with

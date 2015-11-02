@@ -98,9 +98,7 @@ class Message(object):
             markmsg = ': %s%s%s' % (markcolor, marker, self.cnormal)
             marklog = ': %s' % marker
         printer.write('%s%s\n' % (basemsg, markmsg))
-        if self.LOG:
-            if not status in self.LOG_STATUS:
-                return
+        if self.LOG and status in self.LOG_STATUS:
             msg = self.normalize(msg)
             marklog = self.normalize(marklog)
             syslog.syslog(status, '%s%s' % (msg, marklog))
