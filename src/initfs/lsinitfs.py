@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os
 
-app_version = "1.8.2 (8ead93d)"
+app_version = "1.8.2 (db24978)"
 
 tmpdir = None
 keep = False
