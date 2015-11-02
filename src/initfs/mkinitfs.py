@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast, re
 
-app_version = "1.8.2 (db24978)"
+app_version = "1.8.2 (af38114)"
 
 tmpdir = None
 keep = False
@@ -160,13 +160,11 @@ try:
         data = misc.system_communicate('%s find . | %s cpio -o -H newc' % \
             (ARGS.busybox, ARGS.busybox), bshell=True, cwd=src)
         if method == 'gzip':
-            gzipf = gzip.GzipFile(image, 'wb')
-            gzipf.write(data)
-            gzipf.close()
+            with gzip.GzipFile(image, 'wb') as gzipf:
+                gzipf.write(data)
         elif method == 'bzip2':
-            bzipf = bz2.BZ2File(image, 'wb')
-            bzipf.write(data)
-            bzipf.close()
+            with bz2.BZ2File(image, 'wb') as bzipf:
+                bzipf.write(data)
         else:
             misc.file_write(image, data)
 
