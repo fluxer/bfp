@@ -1201,40 +1201,29 @@ class Source(object):
                         # fake non-existing match
                         required.append(sbase)
 
-        checked = []
-        for req in required:
-            # checking req being '' is neccessary because a bug in scanelf that
-            # produces a list with empty entry, it happens when '-L' is used
-            if req in checked or not req:
-                continue
-            rreq = req
-            if os.path.exists(req):
-                rreq = os.path.realpath(req)
-            match = database.local_belongs(rreq, exact=True)
-            if match and len(match) > 1:
-                message.sub_warning(_('Multiple providers for %s') % rreq, match)
-                if self.target_name in match:
-                    match = self.target_name
-                else:
-                    match = match[0]
-            match = misc.string_convert(match)
+        found = []
+        for local in database.local_all(True):
+            lfootprint = database.local_metadata(local, 'footprint')
+            for req in required:
+                # checking req being '' is neccessary because a bug in scanelf that
+                # produces a list with empty entry, it happens when '-L' is used
+                if req in found:
+                    continue
+                elif not req:
+                    continue
+                if '%s%s' % (self.install_dir, req) in target_content:
+                    message.sub_debug(_('Dependency needed but in target'), req)
+                    found.append(req)
+                elif req in lfootprint:
+                    message.sub_debug(_('Dependency needed but in local'), local)
+                    if not local in self.target_depends:
+                        self.target_depends.append(local)
+                    found.append(req)
 
-            if match == self.target_name \
-                or '%s%s' % (self.install_dir, rreq) in target_content:
-                message.sub_debug(_('Dependency needed but in target'), rreq)
-            elif match and match in self.target_depends:
-                message.sub_debug(_('Dependency needed but in dependencies'), match)
-            elif match and not match in self.target_depends:
-                message.sub_debug(_('Dependency needed but in local'), match)
-                self.target_depends.append(match)
-            elif self.ignore_missing:
-                message.sub_warning(_('Dependency needed, not in any local'), rreq)
-            else:
-                message.sub_critical(_('Dependency needed, not in any local'), rreq)
-                missing_detected = True
-            checked.append(req)
-
-        if missing_detected:
+        if not required == found:
+            for req in required:
+                if not req in found:
+                    message.sub_critical(_('Dependency needed, not in any local'), req)
             sys.exit(2)
 
         if self.python_compile:
@@ -1324,12 +1313,9 @@ class Source(object):
         ''' Merget target to system '''
         message.sub_info(_('Indexing content'))
         new_content = []
-        valid = False
         for sfile in misc.archive_list(self.target_tarball):
-            if sfile == self.target_metadata:
-                valid = True
             new_content.append('/%s' % sfile)
-        if not valid:
+        if not '/%s' % self.target_metadata in new_content:
             message.sub_critical(_('Invalid tarball'), self.target_tarball)
             sys.exit(2)
         new_content.sort()
