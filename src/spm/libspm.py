@@ -1221,7 +1221,7 @@ class Source(object):
 
         missing_detected = False
         for req in required:
-            if not req in found and not self.ignore_missing:
+            if req and not req in found and not self.ignore_missing:
                 message.sub_critical(_('Dependency needed, not in any local'), req)
                 missing_detected = True
         if missing_detected:

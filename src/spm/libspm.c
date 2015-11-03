@@ -31887,7 +31887,7 @@ static PyObject *__pyx_pf_6libspm_6Source_28install(CYTHON_UNUSED PyObject *__py
  * 
  *         missing_detected = False             # <<<<<<<<<<<<<<
  *         for req in required:
- *             if not req in found and not self.ignore_missing:
+ *             if req and not req in found and not self.ignore_missing:
  */
   __pyx_v_missing_detected = 0;
 
@@ -31895,7 +31895,7 @@ static PyObject *__pyx_pf_6libspm_6Source_28install(CYTHON_UNUSED PyObject *__py
  * 
  *         missing_detected = False
  *         for req in required:             # <<<<<<<<<<<<<<
- *             if not req in found and not self.ignore_missing:
+ *             if req and not req in found and not self.ignore_missing:
  *                 message.sub_critical(_('Dependency needed, not in any local'), req)
  */
   __pyx_t_1 = __pyx_v_required; __Pyx_INCREF(__pyx_t_1); __pyx_t_8 = 0;
@@ -31913,10 +31913,16 @@ static PyObject *__pyx_pf_6libspm_6Source_28install(CYTHON_UNUSED PyObject *__py
     /* "libspm.py":1224
  *         missing_detected = False
  *         for req in required:
- *             if not req in found and not self.ignore_missing:             # <<<<<<<<<<<<<<
+ *             if req and not req in found and not self.ignore_missing:             # <<<<<<<<<<<<<<
  *                 message.sub_critical(_('Dependency needed, not in any local'), req)
  *                 missing_detected = True
  */
+    __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_v_req); if (unlikely(__pyx_t_12 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1224; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    if (__pyx_t_12) {
+    } else {
+      __pyx_t_5 = __pyx_t_12;
+      goto __pyx_L92_bool_binop_done;
+    }
     __pyx_t_12 = (__Pyx_PySequence_ContainsTF(__pyx_v_req, __pyx_v_found, Py_NE)); if (unlikely(__pyx_t_12 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1224; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __pyx_t_6 = (__pyx_t_12 != 0);
     if (__pyx_t_6) {
@@ -31935,7 +31941,7 @@ static PyObject *__pyx_pf_6libspm_6Source_28install(CYTHON_UNUSED PyObject *__py
 
       /* "libspm.py":1225
  *         for req in required:
- *             if not req in found and not self.ignore_missing:
+ *             if req and not req in found and not self.ignore_missing:
  *                 message.sub_critical(_('Dependency needed, not in any local'), req)             # <<<<<<<<<<<<<<
  *                 missing_detected = True
  *         if missing_detected:
@@ -31980,7 +31986,7 @@ static PyObject *__pyx_pf_6libspm_6Source_28install(CYTHON_UNUSED PyObject *__py
       __Pyx_DECREF(__pyx_t_16); __pyx_t_16 = 0;
 
       /* "libspm.py":1226
- *             if not req in found and not self.ignore_missing:
+ *             if req and not req in found and not self.ignore_missing:
  *                 message.sub_critical(_('Dependency needed, not in any local'), req)
  *                 missing_detected = True             # <<<<<<<<<<<<<<
  *         if missing_detected:
@@ -31991,7 +31997,7 @@ static PyObject *__pyx_pf_6libspm_6Source_28install(CYTHON_UNUSED PyObject *__py
       /* "libspm.py":1224
  *         missing_detected = False
  *         for req in required:
- *             if not req in found and not self.ignore_missing:             # <<<<<<<<<<<<<<
+ *             if req and not req in found and not self.ignore_missing:             # <<<<<<<<<<<<<<
  *                 message.sub_critical(_('Dependency needed, not in any local'), req)
  *                 missing_detected = True
  */
@@ -32001,7 +32007,7 @@ static PyObject *__pyx_pf_6libspm_6Source_28install(CYTHON_UNUSED PyObject *__py
  * 
  *         missing_detected = False
  *         for req in required:             # <<<<<<<<<<<<<<
- *             if not req in found and not self.ignore_missing:
+ *             if req and not req in found and not self.ignore_missing:
  *                 message.sub_critical(_('Dependency needed, not in any local'), req)
  */
   }
@@ -32255,7 +32261,7 @@ static PyObject *__pyx_pf_6libspm_6Source_28install(CYTHON_UNUSED PyObject *__py
  *                     message.sub_debug(_('Python %s directory' % version), sfull)
  *                     compilepaths.append(sfull)
  */
-          goto __pyx_L98_continue;
+          goto __pyx_L99_continue;
 
           /* "libspm.py":1242
  *                     'usr/lib/python%s/site-packages' % version):
@@ -32353,7 +32359,7 @@ static PyObject *__pyx_pf_6libspm_6Source_28install(CYTHON_UNUSED PyObject *__py
  *                     'usr/lib/python%s/site-packages' % version):
  *                     sfull = '%s/%s' % (self.install_dir, spath)
  */
-        __pyx_L98_continue:;
+        __pyx_L99_continue:;
       }
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
@@ -32413,11 +32419,11 @@ static PyObject *__pyx_pf_6libspm_6Source_28install(CYTHON_UNUSED PyObject *__py
       if (__pyx_t_6) {
       } else {
         __pyx_t_12 = __pyx_t_6;
-        goto __pyx_L102_bool_binop_done;
+        goto __pyx_L103_bool_binop_done;
       }
       __pyx_t_6 = (__pyx_v_compilepaths != Py_None) && (PyList_GET_SIZE(__pyx_v_compilepaths) != 0);
       __pyx_t_12 = __pyx_t_6;
-      __pyx_L102_bool_binop_done:;
+      __pyx_L103_bool_binop_done:;
       if (__pyx_t_12) {
 
         /* "libspm.py":1248
@@ -32473,7 +32479,7 @@ static PyObject *__pyx_pf_6libspm_6Source_28install(CYTHON_UNUSED PyObject *__py
  *                 elif compilepaths:
  *                     command = [interpreter, '-m', 'compileall', '-f', '-q']
  */
-        goto __pyx_L96_continue;
+        goto __pyx_L97_continue;
 
         /* "libspm.py":1247
  *                     compilepaths.append(sfull)
@@ -32585,7 +32591,7 @@ static PyObject *__pyx_pf_6libspm_6Source_28install(CYTHON_UNUSED PyObject *__py
  *                 compilepaths = []
  *                 for spath in ('lib/python%s/site-packages' % version, \
  */
-      __pyx_L96_continue:;
+      __pyx_L97_continue:;
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
@@ -32922,7 +32928,7 @@ static PyObject *__pyx_pf_6libspm_6Source_28install(CYTHON_UNUSED PyObject *__py
  *             footprint.append(sstripped)
  *             if sfile.endswith('.conf') or misc.string_lstrip(sstripped, '/') in self.target_backup:
  */
-      goto __pyx_L104_continue;
+      goto __pyx_L105_continue;
 
       /* "libspm.py":1266
  *             sstripped = sfile.replace(self.install_dir, '')
@@ -32959,7 +32965,7 @@ static PyObject *__pyx_pf_6libspm_6Source_28install(CYTHON_UNUSED PyObject *__py
     if (!__pyx_t_12) {
     } else {
       __pyx_t_6 = __pyx_t_12;
-      goto __pyx_L108_bool_binop_done;
+      goto __pyx_L109_bool_binop_done;
     }
     __pyx_t_22 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_22)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1269; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_22);
@@ -33000,7 +33006,7 @@ static PyObject *__pyx_pf_6libspm_6Source_28install(CYTHON_UNUSED PyObject *__py
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __pyx_t_5 = (__pyx_t_12 != 0);
     __pyx_t_6 = __pyx_t_5;
-    __pyx_L108_bool_binop_done:;
+    __pyx_L109_bool_binop_done:;
     if (__pyx_t_6) {
 
       /* "libspm.py":1270
@@ -33149,7 +33155,7 @@ static PyObject *__pyx_pf_6libspm_6Source_28install(CYTHON_UNUSED PyObject *__py
  *                     # symlink to full path
  *                     backup[sstripped] = misc.file_checksum('%s/%s' % (self.install_dir, sreal))
  */
-        goto __pyx_L110;
+        goto __pyx_L111;
       }
 
       /* "libspm.py":1275
@@ -33193,7 +33199,7 @@ static PyObject *__pyx_pf_6libspm_6Source_28install(CYTHON_UNUSED PyObject *__py
         if (unlikely(PyDict_SetItem(__pyx_v_backup, __pyx_v_sstripped, __pyx_t_3) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1275; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       }
-      __pyx_L110:;
+      __pyx_L111:;
 
       /* "libspm.py":1269
  *                 continue
@@ -33211,7 +33217,7 @@ static PyObject *__pyx_pf_6libspm_6Source_28install(CYTHON_UNUSED PyObject *__py
  *             sstripped = sfile.replace(self.install_dir, '')
  *             # ignore local target files, they are not wanted in the footprint
  */
-    __pyx_L104_continue:;
+    __pyx_L105_continue:;
   }
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
@@ -56591,7 +56597,7 @@ static int __Pyx_InitCachedConstants(void) {
 
   /* "libspm.py":1225
  *         for req in required:
- *             if not req in found and not self.ignore_missing:
+ *             if req and not req in found and not self.ignore_missing:
  *                 message.sub_critical(_('Dependency needed, not in any local'), req)             # <<<<<<<<<<<<<<
  *                 missing_detected = True
  *         if missing_detected:
