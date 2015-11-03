@@ -1154,7 +1154,6 @@ class Source(object):
             misc.system_command(cmd)
 
         message.sub_info(_('Checking runtime dependencies'))
-        missing_detected = False
         required = []
         for sfile, smime in target_content.items():
             if smime == 'application/x-executable' or \
@@ -1220,10 +1219,12 @@ class Source(object):
                         self.target_depends.append(local)
                     found.append(req)
 
-        if not required == found:
-            for req in required:
-                if not req in found:
-                    message.sub_critical(_('Dependency needed, not in any local'), req)
+        missing_detected = False
+        for req in required:
+            if not req in found and not self.ignore_missing:
+                message.sub_critical(_('Dependency needed, not in any local'), req)
+                missing_detected = True
+        if missing_detected:
             sys.exit(2)
 
         if self.python_compile:
