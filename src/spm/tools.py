@@ -23,7 +23,7 @@ misc = libspm.misc
 database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.8.2 (414bfa2)"
+app_version = "1.8.2 (369c52f)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -837,13 +837,18 @@ class Upgrade(object):
             message.sub_debug(_('Target already migrated'), target)
             return
         autodepends = []
-        for sfile in data['footprint']:
+        footprint = data['footprint']
+        for sfile in footprint:
             smime = misc.file_mime(sfile, bquick=True)
             if smime in ('application/x-executable', \
                 'application/x-sharedlib'):
                 for lib in misc.system_scanelf(sfile, sflags='-L').split(','):
                     if not lib:
                         # bug in scanelf
+                        continue
+                    elif lib in autodepends:
+                        continue
+                    elif lib in footprint:
                         continue
                     autodepends.append(lib)
         data['autodepends'] = autodepends
@@ -970,7 +975,7 @@ class Portable(object):
                 # add metadata directory, it is not listed in the footprint
                 content.append('%s/%s' % (libspm.LOCAL_DIR, target))
 
-                message.sub_info(_('Creating runner'))
+                message.sub_info(_('Creating runner'), '%s/run.sh' % os.getcwd())
                 library_override = ['/lib', '/usr/lib']
                 python_override = site.getsitepackages()
                 for sfile in content:
