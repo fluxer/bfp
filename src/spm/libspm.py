@@ -1201,6 +1201,7 @@ class Source(object):
                         required.append(sbase)
 
         found = []
+        autodepends = []
         for local in database.local_all(True):
             lfootprint = database.local_metadata(local, 'footprint')
             for req in required:
@@ -1218,6 +1219,7 @@ class Source(object):
                     if not local in self.target_depends:
                         self.target_depends.append(local)
                     found.append(req)
+                    autodepends.append(req)
 
         missing_detected = False
         for req in required:
@@ -1282,6 +1284,7 @@ class Source(object):
             ('description', self.target_description),
             ('depends', self.target_depends),
             ('optdepends', optdepends),
+            ('autodepends', autodepends),
             ('backup', backup),
             ('size', misc.dir_size(self.install_dir)),
             ('footprint', footprint),
@@ -1414,31 +1417,25 @@ class Source(object):
 
         if target_upgrade:
             message.sub_info(_('Checking reverse dependencies'))
-            needs_rebuild = database.local_rdepends(self.target_name)
+            rdepends = database.local_rdepends(self.target_name)
 
-            if needs_rebuild and self.do_reverse:
-                for target in needs_rebuild:
-                    break_free = False
+            if rdepends and self.do_reverse:
+                break_free = False
+                for target in rdepends:
+                    # looping trough files will continue otherwise
+                    if break_free:
+                        break
                     message.sub_debug(_('Checking'), target)
-                    for sfile in database.local_metadata(target, 'footprint'):
-                        # looping trough files will continue otherwise
-                        if break_free:
-                            break
-                        elif not os.path.exists(sfile) or os.path.isdir(sfile):
-                            continue
-                        smime = misc.file_mime(sfile)
-                        if smime == 'application/x-executable' or \
-                            smime == 'application/x-sharedlib':
-                            libraries = misc.system_scanelf(sfile)
-                            if not libraries:
-                                continue # static binary
-                            for lib in libraries.split(','):
-                                if not database.local_belongs(lib):
-                                    self.autosource([target], automake=True)
-                                    break_free = True
-                                    break
-            elif needs_rebuild:
-                message.sub_warning(_('Targets may need rebuild'), needs_rebuild)
+                    dependencies = ''
+                    for dep in database.local_metadata(target, 'autodepends'):
+                        dependencies += '%s|' % (re.escape(dep))
+                    dependencies = dependencies[:-1]
+                    if dependencies and not database.local_belongs(dependencies, escape=False, exact=True):
+                        self.autosource([target], automake=True)
+                        break_free = True
+                        break
+            elif rdepends:
+                message.sub_warning(_('Targets may need rebuild'), rdepends)
 
         # do not wait for the cache notifier to kick in
         database.LOCAL_CACHE = {}

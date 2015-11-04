@@ -27,15 +27,12 @@ app_version = "1.8.2 (4b64a26)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
-    def __init__(self, targets, do_fast=False, do_depends=False, \
-        do_reverse=False, do_adjust=False):
+    def __init__(self, targets, do_depends=False, do_reverse=False):
         self.targets = []
         for target in targets:
             self.targets.extend(database.remote_alias(target))
-        self.do_fast = do_fast
         self.do_depends = do_depends
         self.do_reverse = do_reverse
-        self.do_adjust = do_adjust
         self.check_targets = []
 
         for target in database.local_all(basename=True):
@@ -51,91 +48,18 @@ class Check(object):
         ''' Check if runtime dependencies of target are satisfied '''
         for target in self.check_targets:
             message.sub_info(_('Checking'), target)
-            target_metadata = '%s/%s/metadata' % (libspm.LOCAL_DIR, target)
-            target_footprint = database.local_metadata(target, 'footprint')
-            target_depends = database.local_metadata(target, 'depends')
-            target_adepends = []
+            target_autodepends = database.local_metadata(target, 'autodepends')
 
             missing_detected = False
-            required = []
-            for sfile in target_footprint:
-                sfile = '%s/%s' % (libspm.ROOT_DIR, sfile)
-                if os.path.islink(sfile) or not os.path.isfile(sfile):
-                    continue
-                elif self.do_fast:
-                    if misc.string_search('/include/|/share/(?:man|locale|i18n|info)', \
-                        sfile, escape=False):
-                        message.sub_debug(_('Skipping'), sfile)
-                        continue
-
+            for sfile in target_autodepends:
+                # TODO: tale different root dir into account
+                # sfile = '%s%s' % (libspm.ROOT_DIR, sfile)
                 message.sub_debug(_('Path'), sfile)
-                smime = misc.file_mime(sfile)
-                if smime == 'application/x-executable' or smime == 'application/x-sharedlib':
-                    libraries = misc.system_scanelf(sfile, sflags='-L')
-                    if not libraries:
-                        continue # static binary
-                    required.extend(libraries.split(','))
-
-                elif smime == 'text/plain' or smime == 'text/x-shellscript' \
-                    or smime == 'text/x-python' or smime == 'text/x-perl' \
-                    or smime == 'text/x-php' or smime == 'text/x-ruby' \
-                    or smime == 'text/x-lua' or smime == 'text/x-tcl' \
-                    or smime == 'text/x-awk' or smime == 'text/x-gawk':
-                    # https://en.wikipedia.org/wiki/Comparison_of_command_shells
-                    bang_regexp = '(^#!.*(?: |\\t|/)((?:'
-                    bang_regexp += '(?:sh|bash|dash|ksh|csh|tcsh|tclsh|scsh|fish'
-                    bang_regexp += '|zsh|ash|python|perl|php|ruby|lua|wish|(?:g)?awk)'
-                    bang_regexp += ')(?:[^\\s]+)?)(?:.*\\s))'
-                    fmatch = misc.file_search(bang_regexp, sfile, escape=False)
-                    if fmatch:
-                        fmatch = fmatch[0][0].replace('#!', '').strip().split()[0]
-                        required.append(fmatch)
-
-            checked = []
-            for req in required:
-                if req in checked or not req:
-                    continue
-                rreq = os.path.realpath(req)
-                match = database.local_belongs('(?:^|\\s)%s(?:$|\\s)' % re.escape(rreq), escape=False)
-                if match and len(match) > 1:
-                    message.sub_warning(_('Multiple providers for %s') % rreq, match)
-                    if target in match:
-                        match = target
-                    else:
-                        match = match[0]
-                match = misc.string_convert(match)
-                if not match in target_adepends and not match == target:
-                    target_adepends.append(match)
-
-                if match == target or rreq in target_footprint:
-                    message.sub_debug(_('Dependency needed but in target'), match)
-                elif match and match in target_depends:
-                    message.sub_debug(_('Dependency needed but in dependencies'), match)
-                elif match and not match in target_depends:
-                    message.sub_debug(_('Dependency needed but in local'), match)
-                    target_depends.append(match)
-                elif libspm.IGNORE_MISSING:
-                    message.sub_warning(_('Dependency needed, not in any local'), rreq)
-                else:
-                    message.sub_critical(_('Dependency needed, not in any local'), rreq)
+                if not database.local_belongs(sfile):
+                    message.sub_critical(_('Dependency needed, not in any local'), sfile)
                     missing_detected = True
-                checked.append(req)
             if missing_detected:
                 sys.exit(2)
-
-            for a in target_depends:
-                if not a in target_adepends:
-                    message.sub_warning(_('Unnecessary explicit dependencies'), a)
-
-            if self.do_adjust:
-                message.sub_debug(_('Adjusting target dependencies'))
-                content = misc.file_read(target_metadata)
-                for line in misc.file_read(target_metadata).splitlines():
-                    line = misc.string_encode(line)
-                    if line.startswith('depends='):
-                        content = content.replace(line, \
-                            'depends=%s' % misc.string_convert(target_depends))
-                misc.file_write(target_metadata, content)
 
 
 class Clean(object):
@@ -901,6 +825,30 @@ class Upgrade(object):
         data['optdepends'] = []
         misc.json_write(metadata, data)
 
+    def upgrade_1_8_x_autodepends(self, target):
+        ''' Ensure local targets have the autodepends data in place '''
+        # TODO: does not handle interpreters such as Python
+        metadata = '%s/metadata.json' % target
+        if not os.path.isfile(metadata):
+            message.sub_warning(_('Invalid target'), target)
+            return
+        data = misc.json_read(metadata)
+        if 'autodepends' in data:
+            message.sub_debug(_('Target already migrated'), target)
+            return
+        autodepends = []
+        for sfile in data['footprint']:
+            smime = misc.file_mime(sfile, bquick=True)
+            if smime in ('application/x-executable', \
+                'application/x-sharedlib'):
+                for lib in misc.system_scanelf(sfile, sflags='-L').split(','):
+                    if not lib:
+                        # bug in scanelf
+                        continue
+                    autodepends.append(lib)
+        data['autodepends'] = autodepends
+        misc.json_write(metadata, data)
+
     def main(self):
         if not os.path.isdir(database.LOCAL_DIR):
             message.sub_warning(_('No local targets directory'), database.LOCAL_DIR)
@@ -915,6 +863,8 @@ class Upgrade(object):
             self.upgrade_1_7_x_backup(target)
             message.sub_info(_('Starting migration procedure 1_8_x_optdepends on'), target)
             self.upgrade_1_8_x_optdepends(target)
+            message.sub_info(_('Starting migration procedure 1_8_x_autodepends on'), target)
+            self.upgrade_1_8_x_autodepends(target)
 
 
 class Digest(object):
@@ -1274,14 +1224,11 @@ if __name__ == '__main__':
         elif ARGS.mode == 'check':
             message.info(_('Runtime information'))
             message.sub_info(_('ROOT_DIR'), libspm.ROOT_DIR)
-            message.sub_info(_('FAST'), ARGS.fast)
             message.sub_info(_('DEPENDS'), ARGS.depends)
             message.sub_info(_('REVERSE'), ARGS.reverse)
-            message.sub_info(_('ADJUST'), ARGS.adjust)
             message.sub_info(_('TARGETS'), ARGS.TARGETS)
             message.info(_('Poking locals...'))
-            m = Check(ARGS.TARGETS, ARGS.fast, ARGS.depends, ARGS.reverse, \
-                ARGS.adjust)
+            m = Check(ARGS.TARGETS, ARGS.depends, ARGS.reverse)
             m.main()
 
         elif ARGS.mode == 'clean':

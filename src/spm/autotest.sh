@@ -112,8 +112,8 @@ fi
 
 if ! grep -q "SPMT CHECK" "$statefile" ;then
     echo "=== RUNNING SPMT CHECK TEST ==="
-    # --adjust, --depends and --reverse are not tested!
-    "$1" "$curdir/tools.py" $spmtargs check -f ca-certificates || expectedfailure 2
+    # --depends and --reverse are not tested!
+    "$1" "$curdir/tools.py" $spmtargs check ca-certificates || expectedfailure 2
     echo "SPMT CHECK" >> "$statefile"
 else
     echo "=== SKIPPING SPMT CHECK TEST ==="
