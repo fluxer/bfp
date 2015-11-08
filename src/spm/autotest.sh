@@ -78,7 +78,7 @@ fi
 
 if ! grep -q "SPM LOCAL" "$statefile" ;then
     echo "=== RUNNING SPM LOCAL TEST ==="
-    "$1" "$curdir/spm.py" $spmargs local -pnvRdDOrsf ca-certificates
+    "$1" "$curdir/spm.py" $spmargs local -pnvRdDOArsf ca-certificates
     echo "SPM LOCAL" >> "$statefile"
 else
     echo "=== SKIPPING SPM LOCAL TEST ==="

@@ -257,7 +257,7 @@ try:
                     ARGS.modules.append(line)
 
     for module in ARGS.modules:
-        # in case ARGS.modules equals ''
+        # in case ARGS.modules equals ['']
         if not module:
             continue
         found = False

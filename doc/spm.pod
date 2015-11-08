@@ -290,7 +290,8 @@ optional arguments:
   -R, --release         Show target release
   -d, --description     Show target description
   -D, --depends         Show target depends
-  -O, --optdepends   Show target optdepends
+  -O, --optdepends      Show target optdepends
+  -A, --autodepends     Show target optdepends
   -r, --reverse         Show target reverse depends
   -s, --size            Show target size
   -f, --footprint       Show target footprint

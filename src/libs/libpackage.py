@@ -217,7 +217,7 @@ class Database(object):
         elif match:
             return self.LOCAL_CACHE[match][key]
         # for consistency
-        if key in ('depends', 'optdepends', 'backup', 'footprint'):
+        if key in ('depends', 'optdepends', 'autodepends', 'backup', 'footprint'):
             return []
 
     def local_uptodate(self, target):

@@ -163,8 +163,8 @@ class Local(object):
     ''' Class for printing local targets metadata '''
     def __init__(self, pattern, do_name=False, do_version=False, \
         do_release=False, do_description=False, do_depends=False, \
-        do_optdepends=False, do_reverse=False, do_size=False, \
-        do_footprint=False, do_backup=False, plain=False):
+        do_optdepends=False, do_autodepends=False, do_reverse=False, \
+        do_size=False, do_footprint=False, do_backup=False, plain=False):
         self.pattern = pattern
         self.do_name = do_name
         self.do_version = do_version
@@ -172,6 +172,7 @@ class Local(object):
         self.do_description = do_description
         self.do_depends = do_depends
         self.do_optdepends = do_optdepends
+        self.do_autodepends = do_autodepends
         self.do_reverse = do_reverse
         self.do_size = do_size
         self.do_footprint = do_footprint
@@ -234,6 +235,13 @@ class Local(object):
                         print(data)
                     else:
                         message.sub_info(_('Optional depends'), data)
+
+                if self.do_autodepends:
+                    data = ' '.join(database.local_metadata(target, 'autodepends'))
+                    if self.plain:
+                        print(data)
+                    else:
+                        message.sub_info(_('Automatic depends'), data)
 
                 if self.do_reverse:
                     data = ' '.join(database.local_rdepends(target))

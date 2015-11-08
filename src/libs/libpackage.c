@@ -893,6 +893,7 @@ static char __pyx_k_s_SRCBUILD[] = "%s/SRCBUILD";
 static char __pyx_k_BooleanType[] = "BooleanType";
 static char __pyx_k_LOCAL_CACHE[] = "LOCAL_CACHE";
 static char __pyx_k_StringTypes[] = "StringTypes";
+static char __pyx_k_autodepends[] = "autodepends";
 static char __pyx_k_description[] = "description";
 static char __pyx_k_makedepends[] = "makedepends";
 static char __pyx_k_LooseVersion[] = "LooseVersion";
@@ -989,6 +990,7 @@ static PyObject *__pyx_n_s_append;
 static PyObject *__pyx_n_s_arraymap;
 static PyObject *__pyx_n_s_arrayval;
 static PyObject *__pyx_n_s_arrayx;
+static PyObject *__pyx_n_s_autodepends;
 static PyObject *__pyx_n_s_backup;
 static PyObject *__pyx_n_s_base;
 static PyObject *__pyx_n_s_basename;
@@ -6921,7 +6923,7 @@ static PyObject *__pyx_pf_10libpackage_8Database_20local_metadata(CYTHON_UNUSED 
  *         elif match:
  *             return self.LOCAL_CACHE[match][key]             # <<<<<<<<<<<<<<
  *         # for consistency
- *         if key in ('depends', 'optdepends', 'backup', 'footprint'):
+ *         if key in ('depends', 'optdepends', 'autodepends', 'backup', 'footprint'):
  */
     __Pyx_XDECREF(__pyx_r);
     __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_LOCAL_CACHE); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 218; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -6948,7 +6950,7 @@ static PyObject *__pyx_pf_10libpackage_8Database_20local_metadata(CYTHON_UNUSED 
   /* "libpackage.py":220
  *             return self.LOCAL_CACHE[match][key]
  *         # for consistency
- *         if key in ('depends', 'optdepends', 'backup', 'footprint'):             # <<<<<<<<<<<<<<
+ *         if key in ('depends', 'optdepends', 'autodepends', 'backup', 'footprint'):             # <<<<<<<<<<<<<<
  *             return []
  * 
  */
@@ -6961,6 +6963,12 @@ static PyObject *__pyx_pf_10libpackage_8Database_20local_metadata(CYTHON_UNUSED 
     goto __pyx_L8_bool_binop_done;
   }
   __pyx_t_8 = (__Pyx_PyString_Equals(__pyx_t_7, __pyx_n_s_optdepends, Py_EQ)); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 220; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (!__pyx_t_8) {
+  } else {
+    __pyx_t_3 = __pyx_t_8;
+    goto __pyx_L8_bool_binop_done;
+  }
+  __pyx_t_8 = (__Pyx_PyString_Equals(__pyx_t_7, __pyx_n_s_autodepends, Py_EQ)); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 220; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   if (!__pyx_t_8) {
   } else {
     __pyx_t_3 = __pyx_t_8;
@@ -6981,7 +6989,7 @@ static PyObject *__pyx_pf_10libpackage_8Database_20local_metadata(CYTHON_UNUSED 
 
     /* "libpackage.py":221
  *         # for consistency
- *         if key in ('depends', 'optdepends', 'backup', 'footprint'):
+ *         if key in ('depends', 'optdepends', 'autodepends', 'backup', 'footprint'):
  *             return []             # <<<<<<<<<<<<<<
  * 
  *     def local_uptodate(self, target):
@@ -6996,7 +7004,7 @@ static PyObject *__pyx_pf_10libpackage_8Database_20local_metadata(CYTHON_UNUSED 
     /* "libpackage.py":220
  *             return self.LOCAL_CACHE[match][key]
  *         # for consistency
- *         if key in ('depends', 'optdepends', 'backup', 'footprint'):             # <<<<<<<<<<<<<<
+ *         if key in ('depends', 'optdepends', 'autodepends', 'backup', 'footprint'):             # <<<<<<<<<<<<<<
  *             return []
  * 
  */
@@ -10548,6 +10556,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_arraymap, __pyx_k_arraymap, sizeof(__pyx_k_arraymap), 0, 0, 1, 1},
   {&__pyx_n_s_arrayval, __pyx_k_arrayval, sizeof(__pyx_k_arrayval), 0, 0, 1, 1},
   {&__pyx_n_s_arrayx, __pyx_k_arrayx, sizeof(__pyx_k_arrayx), 0, 0, 1, 1},
+  {&__pyx_n_s_autodepends, __pyx_k_autodepends, sizeof(__pyx_k_autodepends), 0, 0, 1, 1},
   {&__pyx_n_s_backup, __pyx_k_backup, sizeof(__pyx_k_backup), 0, 0, 1, 1},
   {&__pyx_n_s_base, __pyx_k_base, sizeof(__pyx_k_base), 0, 0, 1, 1},
   {&__pyx_n_s_basename, __pyx_k_basename, sizeof(__pyx_k_basename), 0, 0, 1, 1},

@@ -14,7 +14,7 @@ else:
 import libmessage
 message = libmessage.Message()
 
-app_version = "1.8.2 (369c52f)"
+app_version = "1.8.2 (5720cd7)"
 
 
 retvalue = 0
@@ -336,6 +336,8 @@ try:
         help=_('Show target depends'))
     local_parser.add_argument('-O', '--optdepends', action='store_true', \
         help=_('Show target optdepends'))
+    local_parser.add_argument('-A', '--autodepends', action='store_true', \
+        help=_('Show target autodepends'))
     local_parser.add_argument('-r', '--reverse', action='store_true', \
         help=_('Show target reverse depends'))
     local_parser.add_argument('-s', '--size', action='store_true', \
@@ -576,6 +578,7 @@ try:
             message.sub_info(_('DESCRIPTION'), ARGS.description)
             message.sub_info(_('DEPENDS'), ARGS.depends)
             message.sub_info(_('OPTDEPENDS'), ARGS.optdepends)
+            message.sub_info(_('AUTODEPENDS'), ARGS.autodepends)
             message.sub_info(_('REVERSE'), ARGS.reverse)
             message.sub_info(_('SIZE'), ARGS.size)
             message.sub_info(_('FOOTPRINT'), ARGS.footprint)
@@ -584,8 +587,8 @@ try:
             message.info(_('Poking locals...'))
         m = libspm.Local(ARGS.PATTERN, ARGS.name, ARGS.version, \
                 ARGS.release, ARGS.description, ARGS.depends, \
-                ARGS.optdepends, ARGS.reverse, ARGS.size, \
-                ARGS.footprint, ARGS.backup, ARGS.plain)
+                ARGS.optdepends, ARGS.autodepends, ARGS.reverse, \
+                ARGS.size, ARGS.footprint, ARGS.backup, ARGS.plain)
         m.main()
 
     elif ARGS.mode == 'aport':
