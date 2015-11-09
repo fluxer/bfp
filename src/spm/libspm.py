@@ -1499,6 +1499,7 @@ class Source(object):
         message.sub_info(_('Removing metadata and SRCBUILD'))
         self.remove_target_file(self.target_metadata)
         self.remove_target_file(self.target_srcbuild)
+        self.remove_target_dir('%s/%s' % (LOCAL_DIR, self.target_name))
 
         if target_content:
             self.post_update_databases(target_content, 'remove')
