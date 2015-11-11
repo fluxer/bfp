@@ -321,9 +321,9 @@ class Database(object):
         }
 
         content = misc.file_read(sfile)
-        for var, value in re.findall(self._stringx, content):
+        for var, value in self._stringx.findall(content):
             _stringmap[var] = value.strip('"\'')
-        for var, value in re.findall(self._arrayx, content):
+        for var, value in self._arrayx.findall(content):
             arrayval = []
             for val in value.split():
                 for string in _stringmap:
