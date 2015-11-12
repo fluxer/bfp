@@ -792,6 +792,8 @@ class Source(object):
         if match and install_info:
             message.sub_debug(match)
             for m in match:
+                if action == 'remove':
+                    continue
                 message.sub_info(_('Installing info page'), m)
                 misc.system_chroot((install_info, m, \
                     '%s/share/info/dir' % sys.prefix))
