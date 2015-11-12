@@ -23,7 +23,7 @@ misc = libspm.misc
 database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 
-app_version = "1.8.2 (bb1841b)"
+app_version = "1.8.2 (3dfeaca)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -563,6 +563,9 @@ class Pack(object):
                 if libspm.SIGN:
                     message.sub_info(_('Signing'), target_packfile)
                     misc.gpg_sign(target_packfile, libspm.SIGN)
+            else:
+                message.sub_critical(_('Invalid target'), target)
+                sys.exit(2)
 
 
 class Pkg(object):
