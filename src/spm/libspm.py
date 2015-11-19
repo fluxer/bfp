@@ -1396,7 +1396,7 @@ class Source(object):
                 sresolved = os.path.realpath(sfull)
                 if not ROOT_DIR == '/':
                     sresolved.replace(ROOT_DIR, '/')
-                if sresolved in new_content or sfile in new_content:
+                if sresolved in new_content:
                     continue
                 # the metadata and SRCBUILD files will be deleted otherwise,
                 # also making sure ROOT_DIR different than / is respected
@@ -1747,29 +1747,27 @@ class Binary(Source):
         if len(MIRRORS) < 1:
             message.sub_critical(_('At least one mirror is required'))
             sys.exit(2)
-        # TODO: support only xz with next minor release
-        for ext in ('xz', 'bz2'):
-            src_base = '%s.%s' % (misc.file_name(self.target_tarball), ext)
-            local_file = self.target_tarball
 
-            message.sub_debug(_('Checking mirrors for'), src_base)
-            found = False
-            sprefix = 'tarballs/%s/' % os.uname()[4]
-            surl = '%s/%s/%s' % (MIRRORS[0], sprefix, src_base)
-            sdepends = '%s.depends' % local_file
-            if misc.url_ping(surl, MIRRORS, sprefix):
-                found = True
-                message.sub_debug(_('Fetching'), surl)
-                misc.fetch(surl, local_file, MIRRORS, sprefix)
-                misc.fetch('%s.depends' % surl, sdepends, MIRRORS, sprefix)
-                if VERIFY:
-                    sigurl = '%s.sig' % surl
-                    sigfile = '%s.sig' % local_file
-                    message.sub_debug(_('Fetching'), sigurl)
-                    misc.fetch(sigurl, sigfile, MIRRORS, sprefix)
-                    message.sub_debug(_('Verifying'), local_file)
-                    misc.gpg_verify(local_file)
-                break
+        src_base = '%s.xz' % misc.file_name(self.target_tarball)
+        local_file = self.target_tarball
+
+        message.sub_debug(_('Checking mirrors for'), src_base)
+        found = False
+        sprefix = 'tarballs/%s/' % os.uname()[4]
+        surl = '%s/%s/%s' % (MIRRORS[0], sprefix, src_base)
+        sdepends = '%s.depends' % local_file
+        if misc.url_ping(surl, MIRRORS, sprefix):
+            found = True
+            message.sub_debug(_('Fetching'), surl)
+            misc.fetch(surl, local_file, MIRRORS, sprefix)
+            misc.fetch('%s.depends' % surl, sdepends, MIRRORS, sprefix)
+            if VERIFY:
+                sigurl = '%s.sig' % surl
+                sigfile = '%s.sig' % local_file
+                message.sub_debug(_('Fetching'), sigurl)
+                misc.fetch(sigurl, sigfile, MIRRORS, sprefix)
+                message.sub_debug(_('Verifying'), local_file)
+                misc.gpg_verify(local_file)
 
         if not found and self.buildmissing:
             message.sub_warning(_('Binary tarball not available for'), self.target_name)
