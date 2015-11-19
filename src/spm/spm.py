@@ -361,7 +361,7 @@ try:
     aport_parser = subparsers.add_parser('aport', \
         help=_('Automatically write SRCBUILD for sources given via URL'))
     aport_parser.add_argument('-d', '--directory', type=str, \
-        default=os.getcwd(), help=_('Set output directory'))
+        default=libspm.misc.dir_current(), help=_('Set output directory'))
     aport_parser.add_argument('-a', '--automake', action='store_true', \
         help=_('Build the target after analizing and creating SRCBUILD for it'))
     aport_parser.add_argument('URLS', nargs='+', type=str, \
