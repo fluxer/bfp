@@ -10,7 +10,7 @@ version=5.14
 description="File type identification utility"
 depends=('zlib' 'glibc')
 makedepends('foo' 'bar')
-optdepends=('zlib')
+optdepends=('zlib' 'bzip2')
 # variable expansion, must be preseeded with underscore
 _base="file-$version"
 sources=("ftp://ftp.astron.com/pub/file/$_base.tar.gz"
@@ -33,6 +33,7 @@ src_compile() {
     _options=""
     [ "$OPTIONAL_ZLIB" = "yes" ] && _options="--enable-zlib"
     ./configure --prefix=/usr \
+        --enable-icu=$OPTIONAL_BZIP2 \
         $_options
     make
 }

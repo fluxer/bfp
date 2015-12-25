@@ -48,7 +48,7 @@ Default: /etc/spm/gpg
 Set which Shell to use. It makes no difference if the value is full path or
 not. The executable will be found based on the environmental variable PATH.
 For some actions arrays support is required so make sure it supports them
-otherwise expect failures.
+otherwise expect failures. Your best bet is mksh (MirBSD Korn shell).
 
 Default: bash
 

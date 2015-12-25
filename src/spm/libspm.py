@@ -584,13 +584,20 @@ class Source(object):
         os.putenv('LDFLAGS', LDFLAGS)
         os.putenv('MAKEFLAGS', MAKEFLAGS)
         for target in self.target_optdepends:
-            option = 'no'
+            envtarget = target.replace('-', '_').upper()
+            # OPTIONAL_<target>_BOOL and OPTIONAL_<target>_SWITCH are for use
+            # with CMake, OPTIONAL_<target> is a generic one that can be used
+            # with Autotools
             if database.local_uptodate(target):
                 message.sub_debug(_('Enabling optional'), target)
-                option = 'yes'
+                os.putenv('OPTIONAL_%s_BOOL' % envtarget, 'TRUE')
+                os.putenv('OPTIONAL_%s_SWITCH' % envtarget, 'ON')
+                os.putenv('OPTIONAL_%s' % envtarget, 'yes')
             else:
                 message.sub_debug(_('Disabling optional'), target)
-            os.putenv('OPTIONAL_%s' % target.replace('-', '_').upper(), option)
+                os.putenv('OPTIONAL_%s_BOOL' % envtarget, 'FALSE')
+                os.putenv('OPTIONAL_%s_SWITCH' % envtarget, 'OFF')
+                os.putenv('OPTIONAL_%s' % envtarget, 'no')
 
         misc.dir_create(self.source_dir)
         misc.dir_create(self.install_dir)
