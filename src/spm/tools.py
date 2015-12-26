@@ -201,6 +201,7 @@ class Lint(object):
                     else:
                         target_footprint_lines.append(sfull)
                         target_footprint += '%s\n' % sfull
+                target_options = database.remote_metadata(target, 'options')
 
                 if self.man:
                     message.sub_debug(_('Checking for missing man pages in'), target)
@@ -333,6 +334,7 @@ class Lint(object):
                     message.sub_debug(_('Checking for missing debug symbols in'), target)
                     found_debug = 'lib/debug/' in target_footprint
                     found_exe = False
+                    should_debug = 'debug' in target_options or libspm.SPLIT_DEBUG
                     if not found_debug:
                         for sfile in target_footprint_lines:
                             smime = misc.file_mime(sfile)
@@ -341,7 +343,7 @@ class Lint(object):
                                 or smime == 'application/x-archive':
                                 found_exe = True
                                 break
-                    if not found_debug and found_exe:
+                    if not found_debug and found_exe and should_debug:
                         message.sub_warning(_('Debug symbols missing'))
 
 
