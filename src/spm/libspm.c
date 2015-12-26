@@ -1229,6 +1229,7 @@ static char __pyx_k_gpg_sign[] = "gpg_sign";
 static char __pyx_k_indirect[] = "indirect";
 static char __pyx_k_instreal[] = "instreal";
 static char __pyx_k_ldconfig[] = "ldconfig";
+static char __pyx_k_ldepends[] = "ldepends";
 static char __pyx_k_list_all[] = "list_all";
 static char __pyx_k_mainconf[] = "mainconf";
 static char __pyx_k_mancache[] = "mancache";
@@ -2421,6 +2422,7 @@ static PyObject *__pyx_n_s_lcompress;
 static PyObject *__pyx_n_s_ldconfig;
 static PyObject *__pyx_n_s_ldconfig_regex;
 static PyObject *__pyx_n_s_ldebug;
+static PyObject *__pyx_n_s_ldepends;
 static PyObject *__pyx_n_s_ldflags;
 static PyObject *__pyx_n_s_lfootprint;
 static PyObject *__pyx_kp_s_lib32;
@@ -24274,7 +24276,7 @@ static PyObject *__pyx_pf_6libspm_6Source_22prepare(CYTHON_UNUSED PyObject *__py
  *         ''' Prepare target sources '''
  *         message.sub_info(_('Checking dependencies'))             # <<<<<<<<<<<<<<
  *         dependencies = database.remote_mdepends(self.target, \
- *             cdepends=self.do_check, odepends=self.do_optdepends)
+ *             cdepends=self.do_check, odepends=self.do_optdepends, ldepends=True)
  */
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 939; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -24318,7 +24320,7 @@ static PyObject *__pyx_pf_6libspm_6Source_22prepare(CYTHON_UNUSED PyObject *__py
  *         ''' Prepare target sources '''
  *         message.sub_info(_('Checking dependencies'))
  *         dependencies = database.remote_mdepends(self.target, \             # <<<<<<<<<<<<<<
- *             cdepends=self.do_check, odepends=self.do_optdepends)
+ *             cdepends=self.do_check, odepends=self.do_optdepends, ldepends=True)
  * 
  */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_database); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 940; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -24337,7 +24339,7 @@ static PyObject *__pyx_pf_6libspm_6Source_22prepare(CYTHON_UNUSED PyObject *__py
   /* "libspm.py":941
  *         message.sub_info(_('Checking dependencies'))
  *         dependencies = database.remote_mdepends(self.target, \
- *             cdepends=self.do_check, odepends=self.do_optdepends)             # <<<<<<<<<<<<<<
+ *             cdepends=self.do_check, odepends=self.do_optdepends, ldepends=True)             # <<<<<<<<<<<<<<
  * 
  *         if dependencies and self.do_depends:
  */
@@ -24351,12 +24353,13 @@ static PyObject *__pyx_pf_6libspm_6Source_22prepare(CYTHON_UNUSED PyObject *__py
   __Pyx_GOTREF(__pyx_t_4);
   if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_odepends, __pyx_t_4) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 941; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
+  if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_ldepends, Py_True) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 941; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "libspm.py":940
  *         ''' Prepare target sources '''
  *         message.sub_info(_('Checking dependencies'))
  *         dependencies = database.remote_mdepends(self.target, \             # <<<<<<<<<<<<<<
- *             cdepends=self.do_check, odepends=self.do_optdepends)
+ *             cdepends=self.do_check, odepends=self.do_optdepends, ldepends=True)
  * 
  */
   __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, __pyx_t_1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 940; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -24368,7 +24371,7 @@ static PyObject *__pyx_pf_6libspm_6Source_22prepare(CYTHON_UNUSED PyObject *__py
   __pyx_t_4 = 0;
 
   /* "libspm.py":943
- *             cdepends=self.do_check, odepends=self.do_optdepends)
+ *             cdepends=self.do_check, odepends=self.do_optdepends, ldepends=True)
  * 
  *         if dependencies and self.do_depends:             # <<<<<<<<<<<<<<
  *             message.sub_info(_('Building dependencies'), dependencies)
@@ -24507,7 +24510,7 @@ static PyObject *__pyx_pf_6libspm_6Source_22prepare(CYTHON_UNUSED PyObject *__py
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
     /* "libspm.py":943
- *             cdepends=self.do_check, odepends=self.do_optdepends)
+ *             cdepends=self.do_check, odepends=self.do_optdepends, ldepends=True)
  * 
  *         if dependencies and self.do_depends:             # <<<<<<<<<<<<<<
  *             message.sub_info(_('Building dependencies'), dependencies)
@@ -54865,6 +54868,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_ldconfig, __pyx_k_ldconfig, sizeof(__pyx_k_ldconfig), 0, 0, 1, 1},
   {&__pyx_n_s_ldconfig_regex, __pyx_k_ldconfig_regex, sizeof(__pyx_k_ldconfig_regex), 0, 0, 1, 1},
   {&__pyx_n_s_ldebug, __pyx_k_ldebug, sizeof(__pyx_k_ldebug), 0, 0, 1, 1},
+  {&__pyx_n_s_ldepends, __pyx_k_ldepends, sizeof(__pyx_k_ldepends), 0, 0, 1, 1},
   {&__pyx_n_s_ldflags, __pyx_k_ldflags, sizeof(__pyx_k_ldflags), 0, 0, 1, 1},
   {&__pyx_n_s_lfootprint, __pyx_k_lfootprint, sizeof(__pyx_k_lfootprint), 0, 0, 1, 1},
   {&__pyx_kp_s_lib32, __pyx_k_lib32, sizeof(__pyx_k_lib32), 0, 0, 1, 0},
@@ -56375,7 +56379,7 @@ static int __Pyx_InitCachedConstants(void) {
  *         ''' Prepare target sources '''
  *         message.sub_info(_('Checking dependencies'))             # <<<<<<<<<<<<<<
  *         dependencies = database.remote_mdepends(self.target, \
- *             cdepends=self.do_check, odepends=self.do_optdepends)
+ *             cdepends=self.do_check, odepends=self.do_optdepends, ldepends=True)
  */
   __pyx_tuple__103 = PyTuple_Pack(1, __pyx_kp_s_Checking_dependencies); if (unlikely(!__pyx_tuple__103)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 939; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__103);
