@@ -8,10 +8,10 @@ _spm_tools()
     local pkg_options serve_options disowned_options upload_options
     local online_options upgrade_options digest_options portable_options
 
-    actions='merge clean edit sane lint check dist which pack pkg serve disowned
-        upload online upgrade digest portable'
+    actions='merge clean edit sane lint check dist which pack pkg serve
+        disowned upload online upgrade digest portable'
 
-    main_options='--root -h --help --debug --version'
+    main_options='-h --help --root --debug --version'
 
     merge_options='-h --help'
 
@@ -23,9 +23,9 @@ _spm_tools()
         -N --note -v --variables -t --triggers -u --users -g --groups
         -s --signatures -a --all'
 
-    lint_options='-h --help -m --man -u --udev -s --symlink -d --doc -M --module
-        -f --footprint -b --builddir -o --ownership -e --executable -p --path
-        -n --shebang -k --backup -c --conflicts -D --debug -a --all'
+    lint_options='-h --help -m --man -u --udev -s --symlink -P --purge
+        -M --module -f --footprint -b --builddir -o --ownership -e --executable
+        -p --path -n --shebang -k --backup -c --conflicts -D --debug -a --all'
 
     check_options='-h --help -f --fast -a --adjust -D --depends -R --reverse'
 
@@ -43,11 +43,11 @@ _spm_tools()
 
     upload_options='-h --help -H --host -u --user -d --directory -i --insecure'
 
-    online_options='-u --url -h --help'
+    online_options='-h --help -u --url'
 
     upgrade_options='-h --help'
 
-    digest_options='-d -c --create -v --verify -k --backup -h --help'
+    digest_options='-h --help -d -c --create -v --verify -k --backup'
 
     portable_options='-h --help -d --directory'
 

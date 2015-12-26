@@ -314,7 +314,8 @@ class Lint(object):
                         backups = database.remote_metadata(target, 'backup')
                         if not os.path.exists(sfile) and misc.string_lstrip(sfile, '/') in backups:
                             message.sub_warning(_('Possibly unnecessary backup of file'), sfile)
-                        elif sfile.endswith('.conf') and not misc.string_lstrip(sfile, '/') in backups:
+                        # TODO: this cries for improvement, should .ini be checked for?
+                        elif sfile.endswith('.cnf') and not misc.string_lstrip(sfile, '/') in backups:
                             message.sub_warning(_('Possibly undefined backup of file'), sfile)
 
                 if self.conflicts:
