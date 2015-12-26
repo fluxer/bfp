@@ -938,7 +938,7 @@ class Source(object):
         ''' Prepare target sources '''
         message.sub_info(_('Checking dependencies'))
         dependencies = database.remote_mdepends(self.target, \
-            cdepends=self.do_check, odepends=self.do_optdepends)
+            cdepends=self.do_check, odepends=self.do_optdepends, ldepends=True)
 
         if dependencies and self.do_depends:
             message.sub_info(_('Building dependencies'), dependencies)
