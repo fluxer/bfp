@@ -1015,6 +1015,7 @@ static char __pyx_k_H[] = "-H";
 static char __pyx_k_L[] = "-L";
 static char __pyx_k_M[] = "-M";
 static char __pyx_k_N[] = "-N";
+static char __pyx_k_P[] = "-P";
 static char __pyx_k_R[] = "-R";
 static char __pyx_k_a[] = "-a";
 static char __pyx_k_b[] = "-b";
@@ -1042,7 +1043,6 @@ static char __pyx_k_os[] = "os";
 static char __pyx_k_py[] = ".py";
 static char __pyx_k_re[] = "re";
 static char __pyx_k_so[] = ".so";
-static char __pyx_k_DOC[] = "DOC";
 static char __pyx_k_MAN[] = "MAN";
 static char __pyx_k_Pkg[] = "Pkg";
 static char __pyx_k_URL[] = "URL";
@@ -1060,7 +1060,7 @@ static char __pyx_k_cwd[] = "cwd";
 static char __pyx_k_d_2[] = "-d";
 static char __pyx_k_d_s[] = "(?:(?:\\d(?:.)?)+)?(?:\\s|$)";
 static char __pyx_k_dep[] = "dep";
-static char __pyx_k_doc[] = "doc";
+static char __pyx_k_doc[] = "__doc__";
 static char __pyx_k_e_2[] = "-e";
 static char __pyx_k_end[] = "end";
 static char __pyx_k_f_2[] = "-f";
@@ -1178,6 +1178,7 @@ static char __pyx_k_DEBUG[] = "DEBUG";
 static char __pyx_k_Error[] = "Error";
 static char __pyx_k_Match[] = "Match";
 static char __pyx_k_Merge[] = "Merge";
+static char __pyx_k_PURGE[] = "PURGE";
 static char __pyx_k_SHELL[] = "SHELL";
 static char __pyx_k_Serve[] = "Serve";
 static char __pyx_k_USERS[] = "USERS";
@@ -1192,8 +1193,6 @@ static char __pyx_k_close[] = "close";
 static char __pyx_k_copy2[] = "copy2";
 static char __pyx_k_cross[] = "cross";
 static char __pyx_k_debug[] = "debug";
-static char __pyx_k_doc_2[] = "__doc__";
-static char __pyx_k_doc_3[] = "--doc";
 static char __pyx_k_enter[] = "__enter__";
 static char __pyx_k_error[] = "error";
 static char __pyx_k_exact[] = "exact";
@@ -1213,6 +1212,7 @@ static char __pyx_k_merge[] = "merge";
 static char __pyx_k_nargs[] = "nargs";
 static char __pyx_k_plain[] = "plain";
 static char __pyx_k_print[] = "print";
+static char __pyx_k_purge[] = "purge";
 static char __pyx_k_pwd_2[] = ":$(pwd)";
 static char __pyx_k_regex[] = "regex";
 static char __pyx_k_s_asc[] = "%s.asc";
@@ -1375,6 +1375,7 @@ static char __pyx_k_pkgname[] = "pkgname";
 static char __pyx_k_plain_2[] = "--plain";
 static char __pyx_k_plugins[] = "plugins";
 static char __pyx_k_prepare[] = "__prepare__";
+static char __pyx_k_purge_2[] = "--purge";
 static char __pyx_k_release[] = "release";
 static char __pyx_k_replace[] = "replace";
 static char __pyx_k_request[] = "request";
@@ -1580,6 +1581,7 @@ static char __pyx_k_Edit___init[] = "Edit.__init__";
 static char __pyx_k_Lint___init[] = "Lint.__init__";
 static char __pyx_k_Merge_merge[] = "Merge.merge";
 static char __pyx_k_Online_main[] = "Online.main";
+static char __pyx_k_PURGE_PATHS[] = "PURGE_PATHS";
 static char __pyx_k_Pack___init[] = "Pack.__init__";
 static char __pyx_k_Sane___init[] = "Sane.__init__";
 static char __pyx_k_URL_to_ping[] = "URL to ping";
@@ -1593,7 +1595,6 @@ static char __pyx_k_description[] = "description";
 static char __pyx_k_dir_current[] = "dir_current";
 static char __pyx_k_directory_2[] = "--directory";
 static char __pyx_k_dist_parser[] = "dist_parser";
-static char __pyx_k_doc_gtk_doc[] = "/doc/|/gtk-doc/";
 static char __pyx_k_edit_parser[] = "edit_parser";
 static char __pyx_k_file_search[] = "file_search";
 static char __pyx_k_find_module[] = "find_module";
@@ -1644,7 +1645,7 @@ static char __pyx_k_sub_critical[] = "sub_critical";
 static char __pyx_k_urllib_error[] = "urllib.error";
 static char __pyx_k_version_info[] = "version_info";
 static char __pyx_k_which_parser[] = "which_parser";
-static char __pyx_k_1_8_2_ff173fe[] = "1.8.2 (ff173fe)";
+static char __pyx_k_1_8_2_e2a0b3c[] = "1.8.2 (e2a0b3c)";
 static char __pyx_k_Create_digest[] = "Create digest";
 static char __pyx_k_Digest___init[] = "Digest.__init__";
 static char __pyx_k_Digest_create[] = "Digest.create";
@@ -1753,7 +1754,6 @@ static char __pyx_k_File_does_not_exist[] = "File does not exist";
 static char __pyx_k_Runtime_information[] = "Runtime information";
 static char __pyx_k_version_description[] = "(?:version|description)";
 static char __pyx_k_Backup_file_detected[] = "Backup file detected";
-static char __pyx_k_Checking_for_docs_in[] = "Checking for docs in";
 static char __pyx_k_Checking_shebangs_in[] = "Checking shebangs in";
 static char __pyx_k_Checking_symlinks_in[] = "Checking symlinks in";
 static char __pyx_k_Ignoring_backup_file[] = "Ignoring backup file";
@@ -1764,6 +1764,7 @@ static char __pyx_k_Use_upload_directory[] = "Use upload directory";
 static char __pyx_k_https_www_google_com[] = "https://www.google.com";
 static char __pyx_k_upgrade_1_7_x_backup[] = "upgrade_1_7_x_backup";
 static char __pyx_k_Adjust_target_depends[] = "Adjust target depends";
+static char __pyx_k_Check_for_purge_paths[] = "Check for purge paths";
 static char __pyx_k_Checking_footprint_of[] = "Checking footprint of";
 static char __pyx_k_Checking_ownership_in[] = "Checking ownership in";
 static char __pyx_k_Debug_symbols_missing[] = "Debug symbols missing";
@@ -1775,7 +1776,6 @@ static char __pyx_k_Scan_cross_filesystem[] = "Scan cross-filesystem";
 static char __pyx_k_Skip_some_files_links[] = "Skip some files/links";
 static char __pyx_k_application_x_archive[] = "application/x-archive";
 static char __pyx_k_Checking_udev_rules_in[] = "Checking udev rules in";
-static char __pyx_k_Documentation_provided[] = "Documentation provided";
 static char __pyx_k_Fetching_package_files[] = "Fetching package files";
 static char __pyx_k_OverrideRootDir___call[] = "OverrideRootDir.__call__";
 static char __pyx_k_create_default_context[] = "create_default_context";
@@ -1783,7 +1783,6 @@ static char __pyx_k_target_footprint_lines[] = "target_footprint_lines";
 static char __pyx_k_upgrade_1_7_x_metadata[] = "upgrade_1_7_x_metadata";
 static char __pyx_k_upgrade_1_7_x_srcbuild[] = "upgrade_1_7_x_srcbuild";
 static char __pyx_k_Build_directory_trace_s[] = "Build directory trace(s)";
-static char __pyx_k_Check_for_documentation[] = "Check for documentation";
 static char __pyx_k_No_maintainer_mentioned[] = "No maintainer mentioned";
 static char __pyx_k_Target_already_migrated[] = "Target already migrated";
 static char __pyx_k_Use_insecure_connection[] = "Use insecure connection";
@@ -1827,6 +1826,7 @@ static char __pyx_k_User_s_added_but_not_deleted[] = "User(s) added but not dele
 static char __pyx_k_Check_for_essential_variables[] = "Check for essential variables";
 static char __pyx_k_Check_sanity_of_local_targets[] = " Check sanity of local targets ";
 static char __pyx_k_Group_s_added_but_not_deleted[] = "Group(s) added but not deleted";
+static char __pyx_k_Target_has_paths_to_be_purged[] = "Target has paths to be purged";
 static char __pyx_k_Check_for_targets_that_are_not[] = " Check for targets that are not required by other ";
 static char __pyx_k_Edit_SRCBUILDs_from_repository[] = " Edit SRCBUILDs from repository via EDITOR (fallbacks to vim) ";
 static char __pyx_k_Fetch_CRUX_Linux_package_files[] = " Fetch CRUX Linux package files ";
@@ -1846,6 +1846,7 @@ static char __pyx_k_Check_for_missing_manual_page_s[] = "Check for missing manua
 static char __pyx_k_Check_if_system_is_online_or_UR[] = " Check if system is online or URL reachable ";
 static char __pyx_k_Check_runtime_dependencies_of_l[] = " Check runtime dependencies of local targets ";
 static char __pyx_k_Checking_for_non_executables_in[] = "Checking for non-executables in";
+static char __pyx_k_Checking_for_paths_that_must_be[] = "Checking for paths that must be purged in";
 static char __pyx_k_Class_to_upload_source_binary_t[] = " Class to upload source/binary tarballs ";
 static char __pyx_k_Create_a_portable_tarball_of_lo[] = " Create a portable tarball of local (installed) target ";
 static char __pyx_k_Create_verify_target_s_checksum[] = " Create/verify target(s) checksum digest ";
@@ -1925,7 +1926,7 @@ static char __pyx_k_Starting_migration_procedure_1_7_3[] = "Starting migration p
 static char __pyx_k_Starting_migration_procedure_1_8_2[] = "Starting migration procedure 1_8_x_autodepends on";
 static PyObject *__pyx_n_s_;
 static PyObject *__pyx_kp_s_1;
-static PyObject *__pyx_kp_s_1_8_2_ff173fe;
+static PyObject *__pyx_kp_s_1_8_2_e2a0b3c;
 static PyObject *__pyx_kp_s_2;
 static PyObject *__pyx_kp_s_3;
 static PyObject *__pyx_kp_s_4;
@@ -1965,7 +1966,6 @@ static PyObject *__pyx_kp_s_Check_for_conflicts_between_targ;
 static PyObject *__pyx_kp_s_Check_for_cross_filesystem_symli;
 static PyObject *__pyx_kp_s_Check_for_cross_filesystem_udev;
 static PyObject *__pyx_kp_s_Check_for_dev_null_output_redire;
-static PyObject *__pyx_kp_s_Check_for_documentation;
 static PyObject *__pyx_kp_s_Check_for_essential_variables;
 static PyObject *__pyx_kp_s_Check_for_explicit_disable_argum;
 static PyObject *__pyx_kp_s_Check_for_explicit_enable_argume;
@@ -1979,6 +1979,7 @@ static PyObject *__pyx_kp_s_Check_for_missing_manual_page_s;
 static PyObject *__pyx_kp_s_Check_for_module_s_in_non_standa;
 static PyObject *__pyx_kp_s_Check_for_non_executable_s_in_PA;
 static PyObject *__pyx_kp_s_Check_for_overlapping_executable;
+static PyObject *__pyx_kp_s_Check_for_purge_paths;
 static PyObject *__pyx_kp_s_Check_for_signature_s_not_in_the;
 static PyObject *__pyx_kp_s_Check_for_targets_that_are_not;
 static PyObject *__pyx_kp_s_Check_for_unnecessary_triggers_i;
@@ -1995,11 +1996,11 @@ static PyObject *__pyx_kp_s_Checking_build_traces_in;
 static PyObject *__pyx_kp_s_Checking_footprint_of;
 static PyObject *__pyx_kp_s_Checking_for_PATH_overlapping_in;
 static PyObject *__pyx_kp_s_Checking_for_conflicts_in;
-static PyObject *__pyx_kp_s_Checking_for_docs_in;
 static PyObject *__pyx_kp_s_Checking_for_misplaced_modules_i;
 static PyObject *__pyx_kp_s_Checking_for_missing_debug_symbo;
 static PyObject *__pyx_kp_s_Checking_for_missing_man_pages_i;
 static PyObject *__pyx_kp_s_Checking_for_non_executables_in;
+static PyObject *__pyx_kp_s_Checking_for_paths_that_must_be;
 static PyObject *__pyx_kp_s_Checking_ownership_in;
 static PyObject *__pyx_kp_s_Checking_possible_backups_in;
 static PyObject *__pyx_kp_s_Checking_shebangs_in;
@@ -2025,7 +2026,6 @@ static PyObject *__pyx_n_s_DEBUG;
 static PyObject *__pyx_n_s_DEPENDS;
 static PyObject *__pyx_n_s_DIRECTORY;
 static PyObject *__pyx_n_s_DISABLE;
-static PyObject *__pyx_n_s_DOC;
 static PyObject *__pyx_kp_s_Debug_symbols_missing;
 static PyObject *__pyx_kp_s_Dependency_needed_not_in_any_loc;
 static PyObject *__pyx_n_s_Differ;
@@ -2044,7 +2044,6 @@ static PyObject *__pyx_n_s_Dist___init;
 static PyObject *__pyx_n_s_Dist_main;
 static PyObject *__pyx_kp_s_Distribute_ports;
 static PyObject *__pyx_kp_s_Do_not_ignore_backup_files;
-static PyObject *__pyx_kp_s_Documentation_provided;
 static PyObject *__pyx_n_s_EDITOR;
 static PyObject *__pyx_n_s_ENABLE;
 static PyObject *__pyx_n_s_EUID;
@@ -2139,10 +2138,13 @@ static PyObject *__pyx_n_s_OverrideRootDir;
 static PyObject *__pyx_n_s_OverrideRootDir___call;
 static PyObject *__pyx_kp_s_Override_printing_of_debug_mess;
 static PyObject *__pyx_kp_s_Override_system_root_directory;
+static PyObject *__pyx_kp_s_P;
 static PyObject *__pyx_n_s_PATH;
 static PyObject *__pyx_n_s_PATTERN;
 static PyObject *__pyx_n_s_PKG_DIRS;
 static PyObject *__pyx_n_s_PORT;
+static PyObject *__pyx_n_s_PURGE;
+static PyObject *__pyx_n_s_PURGE_PATHS;
 static PyObject *__pyx_n_s_Pack;
 static PyObject *__pyx_n_s_Pack___init;
 static PyObject *__pyx_kp_s_Pack_local_installed_target_fil;
@@ -2228,6 +2230,7 @@ static PyObject *__pyx_n_s_TarError;
 static PyObject *__pyx_kp_s_Target_already_migrated;
 static PyObject *__pyx_kp_s_Target_from_digest_is_not_local;
 static PyObject *__pyx_kp_s_Target_from_digest_not_in_argume;
+static PyObject *__pyx_kp_s_Target_has_paths_to_be_purged;
 static PyObject *__pyx_kp_s_Targets_to_apply_actions_on;
 static PyObject *__pyx_n_s_UDEV;
 static PyObject *__pyx_n_s_URL;
@@ -2398,9 +2401,6 @@ static PyObject *__pyx_n_s_do_reverse;
 static PyObject *__pyx_n_s_do_sources;
 static PyObject *__pyx_n_s_do_verify;
 static PyObject *__pyx_n_s_doc;
-static PyObject *__pyx_n_s_doc_2;
-static PyObject *__pyx_kp_s_doc_3;
-static PyObject *__pyx_kp_s_doc_gtk_doc;
 static PyObject *__pyx_n_s_e;
 static PyObject *__pyx_kp_s_e_2;
 static PyObject *__pyx_n_s_edit;
@@ -2613,6 +2613,8 @@ static PyObject *__pyx_n_s_print;
 static PyObject *__pyx_n_s_print_help;
 static PyObject *__pyx_n_s_prog;
 static PyObject *__pyx_n_s_prot_p;
+static PyObject *__pyx_n_s_purge;
+static PyObject *__pyx_kp_s_purge_2;
 static PyObject *__pyx_n_s_pwd;
 static PyObject *__pyx_kp_s_pwd_2;
 static PyObject *__pyx_kp_s_py;
@@ -2849,7 +2851,7 @@ static PyObject *__pyx_pf_5tools_5Clean_2main(CYTHON_UNUSED PyObject *__pyx_self
 static PyObject *__pyx_pf_5tools_4Dist_4__defaults__(CYTHON_UNUSED PyObject *__pyx_self); /* proto */
 static PyObject *__pyx_pf_5tools_4Dist___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_targets, PyObject *__pyx_v_do_sources, PyObject *__pyx_v_do_clean, PyObject *__pyx_v_directory); /* proto */
 static PyObject *__pyx_pf_5tools_4Dist_2main(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
-static PyObject *__pyx_pf_5tools_4Lint___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_targets, PyObject *__pyx_v_man, PyObject *__pyx_v_udev, PyObject *__pyx_v_symlink, PyObject *__pyx_v_doc, PyObject *__pyx_v_module, PyObject *__pyx_v_footprint, PyObject *__pyx_v_builddir, PyObject *__pyx_v_ownership, PyObject *__pyx_v_executable, PyObject *__pyx_v_path, PyObject *__pyx_v_shebang, PyObject *__pyx_v_backup, PyObject *__pyx_v_conflicts, PyObject *__pyx_v_debug); /* proto */
+static PyObject *__pyx_pf_5tools_4Lint___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_targets, PyObject *__pyx_v_man, PyObject *__pyx_v_udev, PyObject *__pyx_v_symlink, PyObject *__pyx_v_purge, PyObject *__pyx_v_module, PyObject *__pyx_v_footprint, PyObject *__pyx_v_builddir, PyObject *__pyx_v_ownership, PyObject *__pyx_v_executable, PyObject *__pyx_v_path, PyObject *__pyx_v_shebang, PyObject *__pyx_v_backup, PyObject *__pyx_v_conflicts, PyObject *__pyx_v_debug); /* proto */
 static PyObject *__pyx_pf_5tools_4Lint_2_check_ownership(CYTHON_UNUSED PyObject *__pyx_self, CYTHON_UNUSED PyObject *__pyx_v_self, PyObject *__pyx_v_spath); /* proto */
 static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
 static PyObject *__pyx_pf_5tools_4Sane___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_targets, PyObject *__pyx_v_enable, PyObject *__pyx_v_disable, PyObject *__pyx_v_null, PyObject *__pyx_v_maintainer, PyObject *__pyx_v_note, PyObject *__pyx_v_variables, PyObject *__pyx_v_triggers, PyObject *__pyx_v_users, PyObject *__pyx_v_groups, PyObject *__pyx_v_signatures); /* proto */
@@ -7237,7 +7239,7 @@ static PyObject *__pyx_pf_5tools_4Dist_2main(CYTHON_UNUSED PyObject *__pyx_self,
  * class Lint(object):
  *     ''' Check sanity of local targets '''
  *     def __init__(self, targets, man=False, udev=False, symlink=False, \             # <<<<<<<<<<<<<<
- *         doc=False, module=False, footprint=False, builddir=False, \
+ *         purge=False, module=False, footprint=False, builddir=False, \
  *         ownership=False, executable=False, path=False, shebang=False, \
  */
 
@@ -7250,7 +7252,7 @@ static PyObject *__pyx_pw_5tools_4Lint_1__init__(PyObject *__pyx_self, PyObject 
   PyObject *__pyx_v_man = 0;
   PyObject *__pyx_v_udev = 0;
   PyObject *__pyx_v_symlink = 0;
-  PyObject *__pyx_v_doc = 0;
+  PyObject *__pyx_v_purge = 0;
   PyObject *__pyx_v_module = 0;
   PyObject *__pyx_v_footprint = 0;
   PyObject *__pyx_v_builddir = 0;
@@ -7268,7 +7270,7 @@ static PyObject *__pyx_pw_5tools_4Lint_1__init__(PyObject *__pyx_self, PyObject 
   __Pyx_RefNannyDeclarations
   __Pyx_RefNannySetupContext("__init__ (wrapper)", 0);
   {
-    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_targets,&__pyx_n_s_man,&__pyx_n_s_udev,&__pyx_n_s_symlink,&__pyx_n_s_doc,&__pyx_n_s_module,&__pyx_n_s_footprint,&__pyx_n_s_builddir,&__pyx_n_s_ownership,&__pyx_n_s_executable,&__pyx_n_s_path,&__pyx_n_s_shebang,&__pyx_n_s_backup,&__pyx_n_s_conflicts,&__pyx_n_s_debug,0};
+    static PyObject **__pyx_pyargnames[] = {&__pyx_n_s_self,&__pyx_n_s_targets,&__pyx_n_s_man,&__pyx_n_s_udev,&__pyx_n_s_symlink,&__pyx_n_s_purge,&__pyx_n_s_module,&__pyx_n_s_footprint,&__pyx_n_s_builddir,&__pyx_n_s_ownership,&__pyx_n_s_executable,&__pyx_n_s_path,&__pyx_n_s_shebang,&__pyx_n_s_backup,&__pyx_n_s_conflicts,&__pyx_n_s_debug,0};
     PyObject* values[16] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
     values[2] = ((PyObject *)((PyObject *)Py_False));
     values[3] = ((PyObject *)((PyObject *)Py_False));
@@ -7277,7 +7279,7 @@ static PyObject *__pyx_pw_5tools_4Lint_1__init__(PyObject *__pyx_self, PyObject 
     /* "tools.py":155
  *     ''' Check sanity of local targets '''
  *     def __init__(self, targets, man=False, udev=False, symlink=False, \
- *         doc=False, module=False, footprint=False, builddir=False, \             # <<<<<<<<<<<<<<
+ *         purge=False, module=False, footprint=False, builddir=False, \             # <<<<<<<<<<<<<<
  *         ownership=False, executable=False, path=False, shebang=False, \
  *         backup=False, conflicts=False, debug=False):
  */
@@ -7288,7 +7290,7 @@ static PyObject *__pyx_pw_5tools_4Lint_1__init__(PyObject *__pyx_self, PyObject 
 
     /* "tools.py":156
  *     def __init__(self, targets, man=False, udev=False, symlink=False, \
- *         doc=False, module=False, footprint=False, builddir=False, \
+ *         purge=False, module=False, footprint=False, builddir=False, \
  *         ownership=False, executable=False, path=False, shebang=False, \             # <<<<<<<<<<<<<<
  *         backup=False, conflicts=False, debug=False):
  *         self.targets = []
@@ -7299,7 +7301,7 @@ static PyObject *__pyx_pw_5tools_4Lint_1__init__(PyObject *__pyx_self, PyObject 
     values[12] = ((PyObject *)((PyObject *)Py_False));
 
     /* "tools.py":157
- *         doc=False, module=False, footprint=False, builddir=False, \
+ *         purge=False, module=False, footprint=False, builddir=False, \
  *         ownership=False, executable=False, path=False, shebang=False, \
  *         backup=False, conflicts=False, debug=False):             # <<<<<<<<<<<<<<
  *         self.targets = []
@@ -7358,7 +7360,7 @@ static PyObject *__pyx_pw_5tools_4Lint_1__init__(PyObject *__pyx_self, PyObject 
         }
         case  5:
         if (kw_args > 0) {
-          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_doc);
+          PyObject* value = PyDict_GetItem(__pyx_kwds, __pyx_n_s_purge);
           if (value) { values[5] = value; kw_args--; }
         }
         case  6:
@@ -7442,7 +7444,7 @@ static PyObject *__pyx_pw_5tools_4Lint_1__init__(PyObject *__pyx_self, PyObject 
     __pyx_v_man = values[2];
     __pyx_v_udev = values[3];
     __pyx_v_symlink = values[4];
-    __pyx_v_doc = values[5];
+    __pyx_v_purge = values[5];
     __pyx_v_module = values[6];
     __pyx_v_footprint = values[7];
     __pyx_v_builddir = values[8];
@@ -7462,13 +7464,13 @@ static PyObject *__pyx_pw_5tools_4Lint_1__init__(PyObject *__pyx_self, PyObject 
   __Pyx_RefNannyFinishContext();
   return NULL;
   __pyx_L4_argument_unpacking_done:;
-  __pyx_r = __pyx_pf_5tools_4Lint___init__(__pyx_self, __pyx_v_self, __pyx_v_targets, __pyx_v_man, __pyx_v_udev, __pyx_v_symlink, __pyx_v_doc, __pyx_v_module, __pyx_v_footprint, __pyx_v_builddir, __pyx_v_ownership, __pyx_v_executable, __pyx_v_path, __pyx_v_shebang, __pyx_v_backup, __pyx_v_conflicts, __pyx_v_debug);
+  __pyx_r = __pyx_pf_5tools_4Lint___init__(__pyx_self, __pyx_v_self, __pyx_v_targets, __pyx_v_man, __pyx_v_udev, __pyx_v_symlink, __pyx_v_purge, __pyx_v_module, __pyx_v_footprint, __pyx_v_builddir, __pyx_v_ownership, __pyx_v_executable, __pyx_v_path, __pyx_v_shebang, __pyx_v_backup, __pyx_v_conflicts, __pyx_v_debug);
 
   /* "tools.py":154
  * class Lint(object):
  *     ''' Check sanity of local targets '''
  *     def __init__(self, targets, man=False, udev=False, symlink=False, \             # <<<<<<<<<<<<<<
- *         doc=False, module=False, footprint=False, builddir=False, \
+ *         purge=False, module=False, footprint=False, builddir=False, \
  *         ownership=False, executable=False, path=False, shebang=False, \
  */
 
@@ -7477,7 +7479,7 @@ static PyObject *__pyx_pw_5tools_4Lint_1__init__(PyObject *__pyx_self, PyObject 
   return __pyx_r;
 }
 
-static PyObject *__pyx_pf_5tools_4Lint___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_targets, PyObject *__pyx_v_man, PyObject *__pyx_v_udev, PyObject *__pyx_v_symlink, PyObject *__pyx_v_doc, PyObject *__pyx_v_module, PyObject *__pyx_v_footprint, PyObject *__pyx_v_builddir, PyObject *__pyx_v_ownership, PyObject *__pyx_v_executable, PyObject *__pyx_v_path, PyObject *__pyx_v_shebang, PyObject *__pyx_v_backup, PyObject *__pyx_v_conflicts, PyObject *__pyx_v_debug) {
+static PyObject *__pyx_pf_5tools_4Lint___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self, PyObject *__pyx_v_targets, PyObject *__pyx_v_man, PyObject *__pyx_v_udev, PyObject *__pyx_v_symlink, PyObject *__pyx_v_purge, PyObject *__pyx_v_module, PyObject *__pyx_v_footprint, PyObject *__pyx_v_builddir, PyObject *__pyx_v_ownership, PyObject *__pyx_v_executable, PyObject *__pyx_v_path, PyObject *__pyx_v_shebang, PyObject *__pyx_v_backup, PyObject *__pyx_v_conflicts, PyObject *__pyx_v_debug) {
   PyObject *__pyx_v_target = NULL;
   PyObject *__pyx_r = NULL;
   __Pyx_RefNannyDeclarations
@@ -7650,7 +7652,7 @@ static PyObject *__pyx_pf_5tools_4Lint___init__(CYTHON_UNUSED PyObject *__pyx_se
  *         self.man = man
  *         self.udev = udev             # <<<<<<<<<<<<<<
  *         self.symlink = symlink
- *         self.doc = doc
+ *         self.purge = purge
  */
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_udev, __pyx_v_udev) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 162; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
@@ -7658,7 +7660,7 @@ static PyObject *__pyx_pf_5tools_4Lint___init__(CYTHON_UNUSED PyObject *__pyx_se
  *         self.man = man
  *         self.udev = udev
  *         self.symlink = symlink             # <<<<<<<<<<<<<<
- *         self.doc = doc
+ *         self.purge = purge
  *         self.module = module
  */
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_symlink, __pyx_v_symlink) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 163; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -7666,15 +7668,15 @@ static PyObject *__pyx_pf_5tools_4Lint___init__(CYTHON_UNUSED PyObject *__pyx_se
   /* "tools.py":164
  *         self.udev = udev
  *         self.symlink = symlink
- *         self.doc = doc             # <<<<<<<<<<<<<<
+ *         self.purge = purge             # <<<<<<<<<<<<<<
  *         self.module = module
  *         self.footprint = footprint
  */
-  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_doc, __pyx_v_doc) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 164; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_purge, __pyx_v_purge) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 164; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":165
  *         self.symlink = symlink
- *         self.doc = doc
+ *         self.purge = purge
  *         self.module = module             # <<<<<<<<<<<<<<
  *         self.footprint = footprint
  *         self.builddir = builddir
@@ -7682,7 +7684,7 @@ static PyObject *__pyx_pf_5tools_4Lint___init__(CYTHON_UNUSED PyObject *__pyx_se
   if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_module, __pyx_v_module) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 165; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":166
- *         self.doc = doc
+ *         self.purge = purge
  *         self.module = module
  *         self.footprint = footprint             # <<<<<<<<<<<<<<
  *         self.builddir = builddir
@@ -7766,7 +7768,7 @@ static PyObject *__pyx_pf_5tools_4Lint___init__(CYTHON_UNUSED PyObject *__pyx_se
  * class Lint(object):
  *     ''' Check sanity of local targets '''
  *     def __init__(self, targets, man=False, udev=False, symlink=False, \             # <<<<<<<<<<<<<<
- *         doc=False, module=False, footprint=False, builddir=False, \
+ *         purge=False, module=False, footprint=False, builddir=False, \
  *         ownership=False, executable=False, path=False, shebang=False, \
  */
 
@@ -9724,7 +9726,7 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
  *                         elif os.stat(sfile).st_nlink == 2:
  *                             message.sub_warning(_('Hardlink'), sfile)             # <<<<<<<<<<<<<<
  * 
- *                 if self.doc:
+ *                 if self.purge:
  */
             __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_11)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 232; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_11);
@@ -9797,11 +9799,11 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
       /* "tools.py":234
  *                             message.sub_warning(_('Hardlink'), sfile)
  * 
- *                 if self.doc:             # <<<<<<<<<<<<<<
- *                     message.sub_debug(_('Checking for docs in'), target)
- *                     if misc.string_search('/doc/|/gtk-doc/', target_footprint, escape=False):
+ *                 if self.purge:             # <<<<<<<<<<<<<<
+ *                     message.sub_debug(_('Checking for paths that must be purged in'), target)
+ *                     if misc.string_search(libspm.PURGE_PATHS, target_footprint, escape=False):
  */
-      __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_doc); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+      __pyx_t_14 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_purge); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_14);
       __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_14); if (unlikely(__pyx_t_7 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 234; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
@@ -9809,10 +9811,10 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
 
         /* "tools.py":235
  * 
- *                 if self.doc:
- *                     message.sub_debug(_('Checking for docs in'), target)             # <<<<<<<<<<<<<<
- *                     if misc.string_search('/doc/|/gtk-doc/', target_footprint, escape=False):
- *                         message.sub_warning(_('Documentation provided'))
+ *                 if self.purge:
+ *                     message.sub_debug(_('Checking for paths that must be purged in'), target)             # <<<<<<<<<<<<<<
+ *                     if misc.string_search(libspm.PURGE_PATHS, target_footprint, escape=False):
+ *                         message.sub_warning(_('Target has paths to be purged'))
  */
         __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_2);
@@ -9854,10 +9856,10 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
         __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
 
         /* "tools.py":236
- *                 if self.doc:
- *                     message.sub_debug(_('Checking for docs in'), target)
- *                     if misc.string_search('/doc/|/gtk-doc/', target_footprint, escape=False):             # <<<<<<<<<<<<<<
- *                         message.sub_warning(_('Documentation provided'))
+ *                 if self.purge:
+ *                     message.sub_debug(_('Checking for paths that must be purged in'), target)
+ *                     if misc.string_search(libspm.PURGE_PATHS, target_footprint, escape=False):             # <<<<<<<<<<<<<<
+ *                         message.sub_warning(_('Target has paths to be purged'))
  * 
  */
         __pyx_t_14 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -9865,14 +9867,19 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
         __pyx_t_8 = __Pyx_PyObject_GetAttrStr(__pyx_t_14, __pyx_n_s_string_search); if (unlikely(!__pyx_t_8)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_8);
         __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
+        __pyx_t_14 = __Pyx_GetModuleGlobalName(__pyx_n_s_libspm); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_14);
+        __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_14, __pyx_n_s_PURGE_PATHS); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __Pyx_GOTREF(__pyx_t_3);
+        __Pyx_DECREF(__pyx_t_14); __pyx_t_14 = 0;
         __pyx_t_14 = PyTuple_New(2); if (unlikely(!__pyx_t_14)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_14);
-        __Pyx_INCREF(__pyx_kp_s_doc_gtk_doc);
-        __Pyx_GIVEREF(__pyx_kp_s_doc_gtk_doc);
-        PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_kp_s_doc_gtk_doc);
+        __Pyx_GIVEREF(__pyx_t_3);
+        PyTuple_SET_ITEM(__pyx_t_14, 0, __pyx_t_3);
         __Pyx_INCREF(__pyx_v_target_footprint);
         __Pyx_GIVEREF(__pyx_v_target_footprint);
         PyTuple_SET_ITEM(__pyx_t_14, 1, __pyx_v_target_footprint);
+        __pyx_t_3 = 0;
         __pyx_t_3 = PyDict_New(); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_3);
         if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_escape, Py_False) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 236; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -9886,9 +9893,9 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
         if (__pyx_t_7) {
 
           /* "tools.py":237
- *                     message.sub_debug(_('Checking for docs in'), target)
- *                     if misc.string_search('/doc/|/gtk-doc/', target_footprint, escape=False):
- *                         message.sub_warning(_('Documentation provided'))             # <<<<<<<<<<<<<<
+ *                     message.sub_debug(_('Checking for paths that must be purged in'), target)
+ *                     if misc.string_search(libspm.PURGE_PATHS, target_footprint, escape=False):
+ *                         message.sub_warning(_('Target has paths to be purged'))             # <<<<<<<<<<<<<<
  * 
  *                 if self.module:
  */
@@ -9931,10 +9938,10 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
           /* "tools.py":236
- *                 if self.doc:
- *                     message.sub_debug(_('Checking for docs in'), target)
- *                     if misc.string_search('/doc/|/gtk-doc/', target_footprint, escape=False):             # <<<<<<<<<<<<<<
- *                         message.sub_warning(_('Documentation provided'))
+ *                 if self.purge:
+ *                     message.sub_debug(_('Checking for paths that must be purged in'), target)
+ *                     if misc.string_search(libspm.PURGE_PATHS, target_footprint, escape=False):             # <<<<<<<<<<<<<<
+ *                         message.sub_warning(_('Target has paths to be purged'))
  * 
  */
         }
@@ -9942,14 +9949,14 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
         /* "tools.py":234
  *                             message.sub_warning(_('Hardlink'), sfile)
  * 
- *                 if self.doc:             # <<<<<<<<<<<<<<
- *                     message.sub_debug(_('Checking for docs in'), target)
- *                     if misc.string_search('/doc/|/gtk-doc/', target_footprint, escape=False):
+ *                 if self.purge:             # <<<<<<<<<<<<<<
+ *                     message.sub_debug(_('Checking for paths that must be purged in'), target)
+ *                     if misc.string_search(libspm.PURGE_PATHS, target_footprint, escape=False):
  */
       }
 
       /* "tools.py":239
- *                         message.sub_warning(_('Documentation provided'))
+ *                         message.sub_warning(_('Target has paths to be purged'))
  * 
  *                 if self.module:             # <<<<<<<<<<<<<<
  *                     message.sub_debug(_('Checking for misplaced modules in'), target)
@@ -10173,7 +10180,7 @@ static PyObject *__pyx_pf_5tools_4Lint_4main(CYTHON_UNUSED PyObject *__pyx_self,
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
         /* "tools.py":239
- *                         message.sub_warning(_('Documentation provided'))
+ *                         message.sub_warning(_('Target has paths to be purged'))
  * 
  *                 if self.module:             # <<<<<<<<<<<<<<
  *                     message.sub_debug(_('Checking for misplaced modules in'), target)
@@ -34414,7 +34421,7 @@ static struct PyModuleDef __pyx_moduledef = {
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_, __pyx_k_, sizeof(__pyx_k_), 0, 0, 1, 1},
   {&__pyx_kp_s_1, __pyx_k_1, sizeof(__pyx_k_1), 0, 0, 1, 0},
-  {&__pyx_kp_s_1_8_2_ff173fe, __pyx_k_1_8_2_ff173fe, sizeof(__pyx_k_1_8_2_ff173fe), 0, 0, 1, 0},
+  {&__pyx_kp_s_1_8_2_e2a0b3c, __pyx_k_1_8_2_e2a0b3c, sizeof(__pyx_k_1_8_2_e2a0b3c), 0, 0, 1, 0},
   {&__pyx_kp_s_2, __pyx_k_2, sizeof(__pyx_k_2), 0, 0, 1, 0},
   {&__pyx_kp_s_3, __pyx_k_3, sizeof(__pyx_k_3), 0, 0, 1, 0},
   {&__pyx_kp_s_4, __pyx_k_4, sizeof(__pyx_k_4), 0, 0, 1, 0},
@@ -34454,7 +34461,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Check_for_cross_filesystem_symli, __pyx_k_Check_for_cross_filesystem_symli, sizeof(__pyx_k_Check_for_cross_filesystem_symli), 0, 0, 1, 0},
   {&__pyx_kp_s_Check_for_cross_filesystem_udev, __pyx_k_Check_for_cross_filesystem_udev, sizeof(__pyx_k_Check_for_cross_filesystem_udev), 0, 0, 1, 0},
   {&__pyx_kp_s_Check_for_dev_null_output_redire, __pyx_k_Check_for_dev_null_output_redire, sizeof(__pyx_k_Check_for_dev_null_output_redire), 0, 0, 1, 0},
-  {&__pyx_kp_s_Check_for_documentation, __pyx_k_Check_for_documentation, sizeof(__pyx_k_Check_for_documentation), 0, 0, 1, 0},
   {&__pyx_kp_s_Check_for_essential_variables, __pyx_k_Check_for_essential_variables, sizeof(__pyx_k_Check_for_essential_variables), 0, 0, 1, 0},
   {&__pyx_kp_s_Check_for_explicit_disable_argum, __pyx_k_Check_for_explicit_disable_argum, sizeof(__pyx_k_Check_for_explicit_disable_argum), 0, 0, 1, 0},
   {&__pyx_kp_s_Check_for_explicit_enable_argume, __pyx_k_Check_for_explicit_enable_argume, sizeof(__pyx_k_Check_for_explicit_enable_argume), 0, 0, 1, 0},
@@ -34468,6 +34474,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Check_for_module_s_in_non_standa, __pyx_k_Check_for_module_s_in_non_standa, sizeof(__pyx_k_Check_for_module_s_in_non_standa), 0, 0, 1, 0},
   {&__pyx_kp_s_Check_for_non_executable_s_in_PA, __pyx_k_Check_for_non_executable_s_in_PA, sizeof(__pyx_k_Check_for_non_executable_s_in_PA), 0, 0, 1, 0},
   {&__pyx_kp_s_Check_for_overlapping_executable, __pyx_k_Check_for_overlapping_executable, sizeof(__pyx_k_Check_for_overlapping_executable), 0, 0, 1, 0},
+  {&__pyx_kp_s_Check_for_purge_paths, __pyx_k_Check_for_purge_paths, sizeof(__pyx_k_Check_for_purge_paths), 0, 0, 1, 0},
   {&__pyx_kp_s_Check_for_signature_s_not_in_the, __pyx_k_Check_for_signature_s_not_in_the, sizeof(__pyx_k_Check_for_signature_s_not_in_the), 0, 0, 1, 0},
   {&__pyx_kp_s_Check_for_targets_that_are_not, __pyx_k_Check_for_targets_that_are_not, sizeof(__pyx_k_Check_for_targets_that_are_not), 0, 0, 1, 0},
   {&__pyx_kp_s_Check_for_unnecessary_triggers_i, __pyx_k_Check_for_unnecessary_triggers_i, sizeof(__pyx_k_Check_for_unnecessary_triggers_i), 0, 0, 1, 0},
@@ -34484,11 +34491,11 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Checking_footprint_of, __pyx_k_Checking_footprint_of, sizeof(__pyx_k_Checking_footprint_of), 0, 0, 1, 0},
   {&__pyx_kp_s_Checking_for_PATH_overlapping_in, __pyx_k_Checking_for_PATH_overlapping_in, sizeof(__pyx_k_Checking_for_PATH_overlapping_in), 0, 0, 1, 0},
   {&__pyx_kp_s_Checking_for_conflicts_in, __pyx_k_Checking_for_conflicts_in, sizeof(__pyx_k_Checking_for_conflicts_in), 0, 0, 1, 0},
-  {&__pyx_kp_s_Checking_for_docs_in, __pyx_k_Checking_for_docs_in, sizeof(__pyx_k_Checking_for_docs_in), 0, 0, 1, 0},
   {&__pyx_kp_s_Checking_for_misplaced_modules_i, __pyx_k_Checking_for_misplaced_modules_i, sizeof(__pyx_k_Checking_for_misplaced_modules_i), 0, 0, 1, 0},
   {&__pyx_kp_s_Checking_for_missing_debug_symbo, __pyx_k_Checking_for_missing_debug_symbo, sizeof(__pyx_k_Checking_for_missing_debug_symbo), 0, 0, 1, 0},
   {&__pyx_kp_s_Checking_for_missing_man_pages_i, __pyx_k_Checking_for_missing_man_pages_i, sizeof(__pyx_k_Checking_for_missing_man_pages_i), 0, 0, 1, 0},
   {&__pyx_kp_s_Checking_for_non_executables_in, __pyx_k_Checking_for_non_executables_in, sizeof(__pyx_k_Checking_for_non_executables_in), 0, 0, 1, 0},
+  {&__pyx_kp_s_Checking_for_paths_that_must_be, __pyx_k_Checking_for_paths_that_must_be, sizeof(__pyx_k_Checking_for_paths_that_must_be), 0, 0, 1, 0},
   {&__pyx_kp_s_Checking_ownership_in, __pyx_k_Checking_ownership_in, sizeof(__pyx_k_Checking_ownership_in), 0, 0, 1, 0},
   {&__pyx_kp_s_Checking_possible_backups_in, __pyx_k_Checking_possible_backups_in, sizeof(__pyx_k_Checking_possible_backups_in), 0, 0, 1, 0},
   {&__pyx_kp_s_Checking_shebangs_in, __pyx_k_Checking_shebangs_in, sizeof(__pyx_k_Checking_shebangs_in), 0, 0, 1, 0},
@@ -34514,7 +34521,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_DEPENDS, __pyx_k_DEPENDS, sizeof(__pyx_k_DEPENDS), 0, 0, 1, 1},
   {&__pyx_n_s_DIRECTORY, __pyx_k_DIRECTORY, sizeof(__pyx_k_DIRECTORY), 0, 0, 1, 1},
   {&__pyx_n_s_DISABLE, __pyx_k_DISABLE, sizeof(__pyx_k_DISABLE), 0, 0, 1, 1},
-  {&__pyx_n_s_DOC, __pyx_k_DOC, sizeof(__pyx_k_DOC), 0, 0, 1, 1},
   {&__pyx_kp_s_Debug_symbols_missing, __pyx_k_Debug_symbols_missing, sizeof(__pyx_k_Debug_symbols_missing), 0, 0, 1, 0},
   {&__pyx_kp_s_Dependency_needed_not_in_any_loc, __pyx_k_Dependency_needed_not_in_any_loc, sizeof(__pyx_k_Dependency_needed_not_in_any_loc), 0, 0, 1, 0},
   {&__pyx_n_s_Differ, __pyx_k_Differ, sizeof(__pyx_k_Differ), 0, 0, 1, 1},
@@ -34533,7 +34539,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_Dist_main, __pyx_k_Dist_main, sizeof(__pyx_k_Dist_main), 0, 0, 1, 1},
   {&__pyx_kp_s_Distribute_ports, __pyx_k_Distribute_ports, sizeof(__pyx_k_Distribute_ports), 0, 0, 1, 0},
   {&__pyx_kp_s_Do_not_ignore_backup_files, __pyx_k_Do_not_ignore_backup_files, sizeof(__pyx_k_Do_not_ignore_backup_files), 0, 0, 1, 0},
-  {&__pyx_kp_s_Documentation_provided, __pyx_k_Documentation_provided, sizeof(__pyx_k_Documentation_provided), 0, 0, 1, 0},
   {&__pyx_n_s_EDITOR, __pyx_k_EDITOR, sizeof(__pyx_k_EDITOR), 0, 0, 1, 1},
   {&__pyx_n_s_ENABLE, __pyx_k_ENABLE, sizeof(__pyx_k_ENABLE), 0, 0, 1, 1},
   {&__pyx_n_s_EUID, __pyx_k_EUID, sizeof(__pyx_k_EUID), 0, 0, 1, 1},
@@ -34628,10 +34633,13 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_OverrideRootDir___call, __pyx_k_OverrideRootDir___call, sizeof(__pyx_k_OverrideRootDir___call), 0, 0, 1, 1},
   {&__pyx_kp_s_Override_printing_of_debug_mess, __pyx_k_Override_printing_of_debug_mess, sizeof(__pyx_k_Override_printing_of_debug_mess), 0, 0, 1, 0},
   {&__pyx_kp_s_Override_system_root_directory, __pyx_k_Override_system_root_directory, sizeof(__pyx_k_Override_system_root_directory), 0, 0, 1, 0},
+  {&__pyx_kp_s_P, __pyx_k_P, sizeof(__pyx_k_P), 0, 0, 1, 0},
   {&__pyx_n_s_PATH, __pyx_k_PATH, sizeof(__pyx_k_PATH), 0, 0, 1, 1},
   {&__pyx_n_s_PATTERN, __pyx_k_PATTERN, sizeof(__pyx_k_PATTERN), 0, 0, 1, 1},
   {&__pyx_n_s_PKG_DIRS, __pyx_k_PKG_DIRS, sizeof(__pyx_k_PKG_DIRS), 0, 0, 1, 1},
   {&__pyx_n_s_PORT, __pyx_k_PORT, sizeof(__pyx_k_PORT), 0, 0, 1, 1},
+  {&__pyx_n_s_PURGE, __pyx_k_PURGE, sizeof(__pyx_k_PURGE), 0, 0, 1, 1},
+  {&__pyx_n_s_PURGE_PATHS, __pyx_k_PURGE_PATHS, sizeof(__pyx_k_PURGE_PATHS), 0, 0, 1, 1},
   {&__pyx_n_s_Pack, __pyx_k_Pack, sizeof(__pyx_k_Pack), 0, 0, 1, 1},
   {&__pyx_n_s_Pack___init, __pyx_k_Pack___init, sizeof(__pyx_k_Pack___init), 0, 0, 1, 1},
   {&__pyx_kp_s_Pack_local_installed_target_fil, __pyx_k_Pack_local_installed_target_fil, sizeof(__pyx_k_Pack_local_installed_target_fil), 0, 0, 1, 0},
@@ -34717,6 +34725,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_Target_already_migrated, __pyx_k_Target_already_migrated, sizeof(__pyx_k_Target_already_migrated), 0, 0, 1, 0},
   {&__pyx_kp_s_Target_from_digest_is_not_local, __pyx_k_Target_from_digest_is_not_local, sizeof(__pyx_k_Target_from_digest_is_not_local), 0, 0, 1, 0},
   {&__pyx_kp_s_Target_from_digest_not_in_argume, __pyx_k_Target_from_digest_not_in_argume, sizeof(__pyx_k_Target_from_digest_not_in_argume), 0, 0, 1, 0},
+  {&__pyx_kp_s_Target_has_paths_to_be_purged, __pyx_k_Target_has_paths_to_be_purged, sizeof(__pyx_k_Target_has_paths_to_be_purged), 0, 0, 1, 0},
   {&__pyx_kp_s_Targets_to_apply_actions_on, __pyx_k_Targets_to_apply_actions_on, sizeof(__pyx_k_Targets_to_apply_actions_on), 0, 0, 1, 0},
   {&__pyx_n_s_UDEV, __pyx_k_UDEV, sizeof(__pyx_k_UDEV), 0, 0, 1, 1},
   {&__pyx_n_s_URL, __pyx_k_URL, sizeof(__pyx_k_URL), 0, 0, 1, 1},
@@ -34887,9 +34896,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_do_sources, __pyx_k_do_sources, sizeof(__pyx_k_do_sources), 0, 0, 1, 1},
   {&__pyx_n_s_do_verify, __pyx_k_do_verify, sizeof(__pyx_k_do_verify), 0, 0, 1, 1},
   {&__pyx_n_s_doc, __pyx_k_doc, sizeof(__pyx_k_doc), 0, 0, 1, 1},
-  {&__pyx_n_s_doc_2, __pyx_k_doc_2, sizeof(__pyx_k_doc_2), 0, 0, 1, 1},
-  {&__pyx_kp_s_doc_3, __pyx_k_doc_3, sizeof(__pyx_k_doc_3), 0, 0, 1, 0},
-  {&__pyx_kp_s_doc_gtk_doc, __pyx_k_doc_gtk_doc, sizeof(__pyx_k_doc_gtk_doc), 0, 0, 1, 0},
   {&__pyx_n_s_e, __pyx_k_e, sizeof(__pyx_k_e), 0, 0, 1, 1},
   {&__pyx_kp_s_e_2, __pyx_k_e_2, sizeof(__pyx_k_e_2), 0, 0, 1, 0},
   {&__pyx_n_s_edit, __pyx_k_edit, sizeof(__pyx_k_edit), 0, 0, 1, 1},
@@ -35102,6 +35108,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_print_help, __pyx_k_print_help, sizeof(__pyx_k_print_help), 0, 0, 1, 1},
   {&__pyx_n_s_prog, __pyx_k_prog, sizeof(__pyx_k_prog), 0, 0, 1, 1},
   {&__pyx_n_s_prot_p, __pyx_k_prot_p, sizeof(__pyx_k_prot_p), 0, 0, 1, 1},
+  {&__pyx_n_s_purge, __pyx_k_purge, sizeof(__pyx_k_purge), 0, 0, 1, 1},
+  {&__pyx_kp_s_purge_2, __pyx_k_purge_2, sizeof(__pyx_k_purge_2), 0, 0, 1, 0},
   {&__pyx_n_s_pwd, __pyx_k_pwd, sizeof(__pyx_k_pwd), 0, 0, 1, 1},
   {&__pyx_kp_s_pwd_2, __pyx_k_pwd_2, sizeof(__pyx_k_pwd_2), 0, 0, 1, 0},
   {&__pyx_kp_s_py, __pyx_k_py, sizeof(__pyx_k_py), 0, 0, 1, 0},
@@ -35735,7 +35743,7 @@ static int __Pyx_InitCachedConstants(void) {
  *                         elif os.stat(sfile).st_nlink == 2:
  *                             message.sub_warning(_('Hardlink'), sfile)             # <<<<<<<<<<<<<<
  * 
- *                 if self.doc:
+ *                 if self.purge:
  */
   __pyx_tuple__37 = PyTuple_Pack(1, __pyx_n_s_Hardlink); if (unlikely(!__pyx_tuple__37)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 232; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__37);
@@ -35743,23 +35751,23 @@ static int __Pyx_InitCachedConstants(void) {
 
   /* "tools.py":235
  * 
- *                 if self.doc:
- *                     message.sub_debug(_('Checking for docs in'), target)             # <<<<<<<<<<<<<<
- *                     if misc.string_search('/doc/|/gtk-doc/', target_footprint, escape=False):
- *                         message.sub_warning(_('Documentation provided'))
+ *                 if self.purge:
+ *                     message.sub_debug(_('Checking for paths that must be purged in'), target)             # <<<<<<<<<<<<<<
+ *                     if misc.string_search(libspm.PURGE_PATHS, target_footprint, escape=False):
+ *                         message.sub_warning(_('Target has paths to be purged'))
  */
-  __pyx_tuple__38 = PyTuple_Pack(1, __pyx_kp_s_Checking_for_docs_in); if (unlikely(!__pyx_tuple__38)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__38 = PyTuple_Pack(1, __pyx_kp_s_Checking_for_paths_that_must_be); if (unlikely(!__pyx_tuple__38)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 235; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__38);
   __Pyx_GIVEREF(__pyx_tuple__38);
 
   /* "tools.py":237
- *                     message.sub_debug(_('Checking for docs in'), target)
- *                     if misc.string_search('/doc/|/gtk-doc/', target_footprint, escape=False):
- *                         message.sub_warning(_('Documentation provided'))             # <<<<<<<<<<<<<<
+ *                     message.sub_debug(_('Checking for paths that must be purged in'), target)
+ *                     if misc.string_search(libspm.PURGE_PATHS, target_footprint, escape=False):
+ *                         message.sub_warning(_('Target has paths to be purged'))             # <<<<<<<<<<<<<<
  * 
  *                 if self.module:
  */
-  __pyx_tuple__39 = PyTuple_Pack(1, __pyx_kp_s_Documentation_provided); if (unlikely(!__pyx_tuple__39)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 237; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__39 = PyTuple_Pack(1, __pyx_kp_s_Target_has_paths_to_be_purged); if (unlikely(!__pyx_tuple__39)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 237; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__39);
   __Pyx_GIVEREF(__pyx_tuple__39);
 
@@ -37290,10 +37298,10 @@ static int __Pyx_InitCachedConstants(void) {
  * class Lint(object):
  *     ''' Check sanity of local targets '''
  *     def __init__(self, targets, man=False, udev=False, symlink=False, \             # <<<<<<<<<<<<<<
- *         doc=False, module=False, footprint=False, builddir=False, \
+ *         purge=False, module=False, footprint=False, builddir=False, \
  *         ownership=False, executable=False, path=False, shebang=False, \
  */
-  __pyx_tuple__198 = PyTuple_Pack(17, __pyx_n_s_self, __pyx_n_s_targets, __pyx_n_s_man, __pyx_n_s_udev, __pyx_n_s_symlink, __pyx_n_s_doc, __pyx_n_s_module, __pyx_n_s_footprint, __pyx_n_s_builddir, __pyx_n_s_ownership, __pyx_n_s_executable, __pyx_n_s_path, __pyx_n_s_shebang, __pyx_n_s_backup, __pyx_n_s_conflicts, __pyx_n_s_debug, __pyx_n_s_target); if (unlikely(!__pyx_tuple__198)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__198 = PyTuple_Pack(17, __pyx_n_s_self, __pyx_n_s_targets, __pyx_n_s_man, __pyx_n_s_udev, __pyx_n_s_symlink, __pyx_n_s_purge, __pyx_n_s_module, __pyx_n_s_footprint, __pyx_n_s_builddir, __pyx_n_s_ownership, __pyx_n_s_executable, __pyx_n_s_path, __pyx_n_s_shebang, __pyx_n_s_backup, __pyx_n_s_conflicts, __pyx_n_s_debug, __pyx_n_s_target); if (unlikely(!__pyx_tuple__198)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__198);
   __Pyx_GIVEREF(__pyx_tuple__198);
   __pyx_codeobj__199 = (PyObject*)__Pyx_PyCode_New(16, 0, 17, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__198, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_spm_tools_p, __pyx_n_s_init, 154, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__199)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -38092,7 +38100,7 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check for cross-filesystem udev rule(s)'))
  *         lint_parser.add_argument('-s', '--symlink', action='store_true', \             # <<<<<<<<<<<<<<
  *             help=_('Check for cross-filesystem symlink(s)'))
- *         lint_parser.add_argument('-d', '--doc', action='store_true', \
+ *         lint_parser.add_argument('-P', '--purge', action='store_true', \
  */
   __pyx_tuple__314 = PyTuple_Pack(2, __pyx_kp_s_s_3, __pyx_kp_s_symlink_2); if (unlikely(!__pyx_tuple__314)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1068; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__314);
@@ -38102,8 +38110,8 @@ static int __Pyx_InitCachedConstants(void) {
  *             help=_('Check for cross-filesystem udev rule(s)'))
  *         lint_parser.add_argument('-s', '--symlink', action='store_true', \
  *             help=_('Check for cross-filesystem symlink(s)'))             # <<<<<<<<<<<<<<
- *         lint_parser.add_argument('-d', '--doc', action='store_true', \
- *             help=_('Check for documentation'))
+ *         lint_parser.add_argument('-P', '--purge', action='store_true', \
+ *             help=_('Check for purge paths'))
  */
   __pyx_tuple__315 = PyTuple_Pack(1, __pyx_kp_s_Check_for_cross_filesystem_symli); if (unlikely(!__pyx_tuple__315)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1069; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__315);
@@ -38112,28 +38120,28 @@ static int __Pyx_InitCachedConstants(void) {
   /* "tools.py":1070
  *         lint_parser.add_argument('-s', '--symlink', action='store_true', \
  *             help=_('Check for cross-filesystem symlink(s)'))
- *         lint_parser.add_argument('-d', '--doc', action='store_true', \             # <<<<<<<<<<<<<<
- *             help=_('Check for documentation'))
+ *         lint_parser.add_argument('-P', '--purge', action='store_true', \             # <<<<<<<<<<<<<<
+ *             help=_('Check for purge paths'))
  *         lint_parser.add_argument('-M', '--module', action='store_true', \
  */
-  __pyx_tuple__316 = PyTuple_Pack(2, __pyx_kp_s_d_2, __pyx_kp_s_doc_3); if (unlikely(!__pyx_tuple__316)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1070; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__316 = PyTuple_Pack(2, __pyx_kp_s_P, __pyx_kp_s_purge_2); if (unlikely(!__pyx_tuple__316)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1070; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__316);
   __Pyx_GIVEREF(__pyx_tuple__316);
 
   /* "tools.py":1071
  *             help=_('Check for cross-filesystem symlink(s)'))
- *         lint_parser.add_argument('-d', '--doc', action='store_true', \
- *             help=_('Check for documentation'))             # <<<<<<<<<<<<<<
+ *         lint_parser.add_argument('-P', '--purge', action='store_true', \
+ *             help=_('Check for purge paths'))             # <<<<<<<<<<<<<<
  *         lint_parser.add_argument('-M', '--module', action='store_true', \
  *             help=_('Check for module(s) in non-standard directory'))
  */
-  __pyx_tuple__317 = PyTuple_Pack(1, __pyx_kp_s_Check_for_documentation); if (unlikely(!__pyx_tuple__317)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1071; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__317 = PyTuple_Pack(1, __pyx_kp_s_Check_for_purge_paths); if (unlikely(!__pyx_tuple__317)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1071; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__317);
   __Pyx_GIVEREF(__pyx_tuple__317);
 
   /* "tools.py":1072
- *         lint_parser.add_argument('-d', '--doc', action='store_true', \
- *             help=_('Check for documentation'))
+ *         lint_parser.add_argument('-P', '--purge', action='store_true', \
+ *             help=_('Check for purge paths'))
  *         lint_parser.add_argument('-M', '--module', action='store_true', \             # <<<<<<<<<<<<<<
  *             help=_('Check for module(s) in non-standard directory'))
  *         lint_parser.add_argument('-f', '--footprint', action='store_true', \
@@ -38143,7 +38151,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__318);
 
   /* "tools.py":1073
- *             help=_('Check for documentation'))
+ *             help=_('Check for purge paths'))
  *         lint_parser.add_argument('-M', '--module', action='store_true', \
  *             help=_('Check for module(s) in non-standard directory'))             # <<<<<<<<<<<<<<
  *         lint_parser.add_argument('-f', '--footprint', action='store_true', \
@@ -39632,7 +39640,7 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('MAN'), ARGS.man)
  *             message.sub_info(_('UDEV'), ARGS.udev)             # <<<<<<<<<<<<<<
  *             message.sub_info(_('SYMLINK'), ARGS.symlink)
- *             message.sub_info(_('DOC'), ARGS.doc)
+ *             message.sub_info(_('PURGE'), ARGS.purge)
  */
   __pyx_tuple__455 = PyTuple_Pack(1, __pyx_n_s_UDEV); if (unlikely(!__pyx_tuple__455)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1267; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__455);
@@ -39642,7 +39650,7 @@ static int __Pyx_InitCachedConstants(void) {
  *             message.sub_info(_('MAN'), ARGS.man)
  *             message.sub_info(_('UDEV'), ARGS.udev)
  *             message.sub_info(_('SYMLINK'), ARGS.symlink)             # <<<<<<<<<<<<<<
- *             message.sub_info(_('DOC'), ARGS.doc)
+ *             message.sub_info(_('PURGE'), ARGS.purge)
  *             message.sub_info(_('MODULE'), ARGS.module)
  */
   __pyx_tuple__456 = PyTuple_Pack(1, __pyx_n_s_SYMLINK); if (unlikely(!__pyx_tuple__456)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1268; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -39652,17 +39660,17 @@ static int __Pyx_InitCachedConstants(void) {
   /* "tools.py":1269
  *             message.sub_info(_('UDEV'), ARGS.udev)
  *             message.sub_info(_('SYMLINK'), ARGS.symlink)
- *             message.sub_info(_('DOC'), ARGS.doc)             # <<<<<<<<<<<<<<
+ *             message.sub_info(_('PURGE'), ARGS.purge)             # <<<<<<<<<<<<<<
  *             message.sub_info(_('MODULE'), ARGS.module)
  *             message.sub_info(_('FOOTPRINT'), ARGS.footprint)
  */
-  __pyx_tuple__457 = PyTuple_Pack(1, __pyx_n_s_DOC); if (unlikely(!__pyx_tuple__457)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1269; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__457 = PyTuple_Pack(1, __pyx_n_s_PURGE); if (unlikely(!__pyx_tuple__457)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1269; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__457);
   __Pyx_GIVEREF(__pyx_tuple__457);
 
   /* "tools.py":1270
  *             message.sub_info(_('SYMLINK'), ARGS.symlink)
- *             message.sub_info(_('DOC'), ARGS.doc)
+ *             message.sub_info(_('PURGE'), ARGS.purge)
  *             message.sub_info(_('MODULE'), ARGS.module)             # <<<<<<<<<<<<<<
  *             message.sub_info(_('FOOTPRINT'), ARGS.footprint)
  *             message.sub_info(_('BUILDDIR'), ARGS.builddir)
@@ -39672,7 +39680,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__458);
 
   /* "tools.py":1271
- *             message.sub_info(_('DOC'), ARGS.doc)
+ *             message.sub_info(_('PURGE'), ARGS.purge)
  *             message.sub_info(_('MODULE'), ARGS.module)
  *             message.sub_info(_('FOOTPRINT'), ARGS.footprint)             # <<<<<<<<<<<<<<
  *             message.sub_info(_('BUILDDIR'), ARGS.builddir)
@@ -40912,7 +40920,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  * misc.GPG_DIR = libspm.GPG_DIR
  * misc.SHELL = libspm.SHELL             # <<<<<<<<<<<<<<
  * 
- * app_version = "1.8.2 (ff173fe)"
+ * app_version = "1.8.2 (e2a0b3c)"
  */
   __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_libspm); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 25; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -40928,14 +40936,14 @@ PyMODINIT_FUNC PyInit_tools(void)
   /* "tools.py":27
  * misc.SHELL = libspm.SHELL
  * 
- * app_version = "1.8.2 (ff173fe)"             # <<<<<<<<<<<<<<
+ * app_version = "1.8.2 (e2a0b3c)"             # <<<<<<<<<<<<<<
  * 
  * class Check(object):
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_8_2_ff173fe) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 27; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_8_2_e2a0b3c) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 27; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":29
- * app_version = "1.8.2 (ff173fe)"
+ * app_version = "1.8.2 (e2a0b3c)"
  * 
  * class Check(object):             # <<<<<<<<<<<<<<
  *     ''' Check runtime dependencies of local targets '''
@@ -40977,7 +40985,7 @@ PyMODINIT_FUNC PyInit_tools(void)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
   /* "tools.py":29
- * app_version = "1.8.2 (ff173fe)"
+ * app_version = "1.8.2 (e2a0b3c)"
  * 
  * class Check(object):             # <<<<<<<<<<<<<<
  *     ''' Check runtime dependencies of local targets '''
@@ -41160,7 +41168,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  * class Lint(object):
  *     ''' Check sanity of local targets '''
  *     def __init__(self, targets, man=False, udev=False, symlink=False, \             # <<<<<<<<<<<<<<
- *         doc=False, module=False, footprint=False, builddir=False, \
+ *         purge=False, module=False, footprint=False, builddir=False, \
  *         ownership=False, executable=False, path=False, shebang=False, \
  */
   __pyx_t_5 = __Pyx_CyFunction_NewEx(&__pyx_mdef_5tools_4Lint_1__init__, 0, __pyx_n_s_Lint___init, NULL, __pyx_n_s_tools, __pyx_d, ((PyObject *)__pyx_codeobj__199)); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 154; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -43008,7 +43016,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check for cross-filesystem udev rule(s)'))
  *         lint_parser.add_argument('-s', '--symlink', action='store_true', \             # <<<<<<<<<<<<<<
  *             help=_('Check for cross-filesystem symlink(s)'))
- *         lint_parser.add_argument('-d', '--doc', action='store_true', \
+ *         lint_parser.add_argument('-P', '--purge', action='store_true', \
  */
           __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_lint_parser); if (unlikely(!__pyx_t_6)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1068; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_6);
@@ -43023,8 +43031,8 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check for cross-filesystem udev rule(s)'))
  *         lint_parser.add_argument('-s', '--symlink', action='store_true', \
  *             help=_('Check for cross-filesystem symlink(s)'))             # <<<<<<<<<<<<<<
- *         lint_parser.add_argument('-d', '--doc', action='store_true', \
- *             help=_('Check for documentation'))
+ *         lint_parser.add_argument('-P', '--purge', action='store_true', \
+ *             help=_('Check for purge paths'))
  */
           __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1069; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_2);
@@ -43039,7 +43047,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             help=_('Check for cross-filesystem udev rule(s)'))
  *         lint_parser.add_argument('-s', '--symlink', action='store_true', \             # <<<<<<<<<<<<<<
  *             help=_('Check for cross-filesystem symlink(s)'))
- *         lint_parser.add_argument('-d', '--doc', action='store_true', \
+ *         lint_parser.add_argument('-P', '--purge', action='store_true', \
  */
           __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__314, __pyx_t_6); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1068; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
           __Pyx_GOTREF(__pyx_t_5);
@@ -43050,8 +43058,8 @@ PyMODINIT_FUNC PyInit_tools(void)
           /* "tools.py":1070
  *         lint_parser.add_argument('-s', '--symlink', action='store_true', \
  *             help=_('Check for cross-filesystem symlink(s)'))
- *         lint_parser.add_argument('-d', '--doc', action='store_true', \             # <<<<<<<<<<<<<<
- *             help=_('Check for documentation'))
+ *         lint_parser.add_argument('-P', '--purge', action='store_true', \             # <<<<<<<<<<<<<<
+ *             help=_('Check for purge paths'))
  *         lint_parser.add_argument('-M', '--module', action='store_true', \
  */
           __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_lint_parser); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1070; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -43065,8 +43073,8 @@ PyMODINIT_FUNC PyInit_tools(void)
 
           /* "tools.py":1071
  *             help=_('Check for cross-filesystem symlink(s)'))
- *         lint_parser.add_argument('-d', '--doc', action='store_true', \
- *             help=_('Check for documentation'))             # <<<<<<<<<<<<<<
+ *         lint_parser.add_argument('-P', '--purge', action='store_true', \
+ *             help=_('Check for purge paths'))             # <<<<<<<<<<<<<<
  *         lint_parser.add_argument('-M', '--module', action='store_true', \
  *             help=_('Check for module(s) in non-standard directory'))
  */
@@ -43081,8 +43089,8 @@ PyMODINIT_FUNC PyInit_tools(void)
           /* "tools.py":1070
  *         lint_parser.add_argument('-s', '--symlink', action='store_true', \
  *             help=_('Check for cross-filesystem symlink(s)'))
- *         lint_parser.add_argument('-d', '--doc', action='store_true', \             # <<<<<<<<<<<<<<
- *             help=_('Check for documentation'))
+ *         lint_parser.add_argument('-P', '--purge', action='store_true', \             # <<<<<<<<<<<<<<
+ *             help=_('Check for purge paths'))
  *         lint_parser.add_argument('-M', '--module', action='store_true', \
  */
           __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__316, __pyx_t_5); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1070; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -43092,8 +43100,8 @@ PyMODINIT_FUNC PyInit_tools(void)
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
 
           /* "tools.py":1072
- *         lint_parser.add_argument('-d', '--doc', action='store_true', \
- *             help=_('Check for documentation'))
+ *         lint_parser.add_argument('-P', '--purge', action='store_true', \
+ *             help=_('Check for purge paths'))
  *         lint_parser.add_argument('-M', '--module', action='store_true', \             # <<<<<<<<<<<<<<
  *             help=_('Check for module(s) in non-standard directory'))
  *         lint_parser.add_argument('-f', '--footprint', action='store_true', \
@@ -43108,7 +43116,7 @@ PyMODINIT_FUNC PyInit_tools(void)
           if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_action, __pyx_n_s_store_true) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1072; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
 
           /* "tools.py":1073
- *             help=_('Check for documentation'))
+ *             help=_('Check for purge paths'))
  *         lint_parser.add_argument('-M', '--module', action='store_true', \
  *             help=_('Check for module(s) in non-standard directory'))             # <<<<<<<<<<<<<<
  *         lint_parser.add_argument('-f', '--footprint', action='store_true', \
@@ -43123,8 +43131,8 @@ PyMODINIT_FUNC PyInit_tools(void)
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
           /* "tools.py":1072
- *         lint_parser.add_argument('-d', '--doc', action='store_true', \
- *             help=_('Check for documentation'))
+ *         lint_parser.add_argument('-P', '--purge', action='store_true', \
+ *             help=_('Check for purge paths'))
  *         lint_parser.add_argument('-M', '--module', action='store_true', \             # <<<<<<<<<<<<<<
  *             help=_('Check for module(s) in non-standard directory'))
  *         lint_parser.add_argument('-f', '--footprint', action='store_true', \
@@ -47441,7 +47449,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *                 ARGS.man = True
  *                 ARGS.udev = True             # <<<<<<<<<<<<<<
  *                 ARGS.symlink = True
- *                 ARGS.doc = True
+ *                 ARGS.purge = True
  */
               __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1251; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
               __Pyx_GOTREF(__pyx_t_1);
@@ -47452,7 +47460,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *                 ARGS.man = True
  *                 ARGS.udev = True
  *                 ARGS.symlink = True             # <<<<<<<<<<<<<<
- *                 ARGS.doc = True
+ *                 ARGS.purge = True
  *                 ARGS.module = True
  */
               __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1252; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -47463,18 +47471,18 @@ PyMODINIT_FUNC PyInit_tools(void)
               /* "tools.py":1253
  *                 ARGS.udev = True
  *                 ARGS.symlink = True
- *                 ARGS.doc = True             # <<<<<<<<<<<<<<
+ *                 ARGS.purge = True             # <<<<<<<<<<<<<<
  *                 ARGS.module = True
  *                 ARGS.footprint = True
  */
               __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1253; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
               __Pyx_GOTREF(__pyx_t_1);
-              if (__Pyx_PyObject_SetAttrStr(__pyx_t_1, __pyx_n_s_doc, Py_True) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1253; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+              if (__Pyx_PyObject_SetAttrStr(__pyx_t_1, __pyx_n_s_purge, Py_True) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1253; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
               __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
               /* "tools.py":1254
  *                 ARGS.symlink = True
- *                 ARGS.doc = True
+ *                 ARGS.purge = True
  *                 ARGS.module = True             # <<<<<<<<<<<<<<
  *                 ARGS.footprint = True
  *                 ARGS.builddir = True
@@ -47485,7 +47493,7 @@ PyMODINIT_FUNC PyInit_tools(void)
               __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
               /* "tools.py":1255
- *                 ARGS.doc = True
+ *                 ARGS.purge = True
  *                 ARGS.module = True
  *                 ARGS.footprint = True             # <<<<<<<<<<<<<<
  *                 ARGS.builddir = True
@@ -47702,7 +47710,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             message.sub_info(_('MAN'), ARGS.man)
  *             message.sub_info(_('UDEV'), ARGS.udev)             # <<<<<<<<<<<<<<
  *             message.sub_info(_('SYMLINK'), ARGS.symlink)
- *             message.sub_info(_('DOC'), ARGS.doc)
+ *             message.sub_info(_('PURGE'), ARGS.purge)
  */
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1267; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_3);
@@ -47752,7 +47760,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             message.sub_info(_('MAN'), ARGS.man)
  *             message.sub_info(_('UDEV'), ARGS.udev)
  *             message.sub_info(_('SYMLINK'), ARGS.symlink)             # <<<<<<<<<<<<<<
- *             message.sub_info(_('DOC'), ARGS.doc)
+ *             message.sub_info(_('PURGE'), ARGS.purge)
  *             message.sub_info(_('MODULE'), ARGS.module)
  */
             __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1268; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -47802,7 +47810,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             /* "tools.py":1269
  *             message.sub_info(_('UDEV'), ARGS.udev)
  *             message.sub_info(_('SYMLINK'), ARGS.symlink)
- *             message.sub_info(_('DOC'), ARGS.doc)             # <<<<<<<<<<<<<<
+ *             message.sub_info(_('PURGE'), ARGS.purge)             # <<<<<<<<<<<<<<
  *             message.sub_info(_('MODULE'), ARGS.module)
  *             message.sub_info(_('FOOTPRINT'), ARGS.footprint)
  */
@@ -47818,7 +47826,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
             __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1269; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_7);
-            __pyx_t_18 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_doc); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1269; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_18 = __Pyx_PyObject_GetAttrStr(__pyx_t_7, __pyx_n_s_purge); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1269; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_18);
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
             __pyx_t_7 = NULL;
@@ -47852,7 +47860,7 @@ PyMODINIT_FUNC PyInit_tools(void)
 
             /* "tools.py":1270
  *             message.sub_info(_('SYMLINK'), ARGS.symlink)
- *             message.sub_info(_('DOC'), ARGS.doc)
+ *             message.sub_info(_('PURGE'), ARGS.purge)
  *             message.sub_info(_('MODULE'), ARGS.module)             # <<<<<<<<<<<<<<
  *             message.sub_info(_('FOOTPRINT'), ARGS.footprint)
  *             message.sub_info(_('BUILDDIR'), ARGS.builddir)
@@ -47902,7 +47910,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
             /* "tools.py":1271
- *             message.sub_info(_('DOC'), ARGS.doc)
+ *             message.sub_info(_('PURGE'), ARGS.purge)
  *             message.sub_info(_('MODULE'), ARGS.module)
  *             message.sub_info(_('FOOTPRINT'), ARGS.footprint)             # <<<<<<<<<<<<<<
  *             message.sub_info(_('BUILDDIR'), ARGS.builddir)
@@ -48460,7 +48468,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  *             message.info(_('Poking locals...'))
  * 
  *             m = Lint(ARGS.TARGETS, ARGS.man, ARGS.udev, ARGS.symlink, \             # <<<<<<<<<<<<<<
- *                 ARGS.doc, ARGS.module, ARGS.footprint, ARGS.builddir, \
+ *                 ARGS.purge, ARGS.module, ARGS.footprint, ARGS.builddir, \
  *                 ARGS.ownership, ARGS.executable, ARGS.path, ARGS.shebang, \
  */
             __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_Lint); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1283; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -48489,13 +48497,13 @@ PyMODINIT_FUNC PyInit_tools(void)
             /* "tools.py":1284
  * 
  *             m = Lint(ARGS.TARGETS, ARGS.man, ARGS.udev, ARGS.symlink, \
- *                 ARGS.doc, ARGS.module, ARGS.footprint, ARGS.builddir, \             # <<<<<<<<<<<<<<
+ *                 ARGS.purge, ARGS.module, ARGS.footprint, ARGS.builddir, \             # <<<<<<<<<<<<<<
  *                 ARGS.ownership, ARGS.executable, ARGS.path, ARGS.shebang, \
  *                 ARGS.backup, ARGS.conflicts, ARGS.debug)
  */
             __pyx_t_18 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1284; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_18);
-            __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_18, __pyx_n_s_doc); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1284; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
+            __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_18, __pyx_n_s_purge); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1284; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
             __pyx_t_18 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_18)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1284; __pyx_clineno = __LINE__; goto __pyx_L7_error;}
@@ -48516,7 +48524,7 @@ PyMODINIT_FUNC PyInit_tools(void)
 
             /* "tools.py":1285
  *             m = Lint(ARGS.TARGETS, ARGS.man, ARGS.udev, ARGS.symlink, \
- *                 ARGS.doc, ARGS.module, ARGS.footprint, ARGS.builddir, \
+ *                 ARGS.purge, ARGS.module, ARGS.footprint, ARGS.builddir, \
  *                 ARGS.ownership, ARGS.executable, ARGS.path, ARGS.shebang, \             # <<<<<<<<<<<<<<
  *                 ARGS.backup, ARGS.conflicts, ARGS.debug)
  *             m.main()
@@ -48543,7 +48551,7 @@ PyMODINIT_FUNC PyInit_tools(void)
             __Pyx_DECREF(__pyx_t_18); __pyx_t_18 = 0;
 
             /* "tools.py":1286
- *                 ARGS.doc, ARGS.module, ARGS.footprint, ARGS.builddir, \
+ *                 ARGS.purge, ARGS.module, ARGS.footprint, ARGS.builddir, \
  *                 ARGS.ownership, ARGS.executable, ARGS.path, ARGS.shebang, \
  *                 ARGS.backup, ARGS.conflicts, ARGS.debug)             # <<<<<<<<<<<<<<
  *             m.main()
@@ -56393,7 +56401,7 @@ static PyObject *__Pyx_Py3MetaclassPrepare(PyObject *metaclass, PyObject *bases,
         return NULL;
     if (unlikely(PyObject_SetItem(ns, __pyx_n_s_module_2, modname) < 0)) goto bad;
     if (unlikely(PyObject_SetItem(ns, __pyx_n_s_qualname, qualname) < 0)) goto bad;
-    if (unlikely(doc && PyObject_SetItem(ns, __pyx_n_s_doc_2, doc) < 0)) goto bad;
+    if (unlikely(doc && PyObject_SetItem(ns, __pyx_n_s_doc, doc) < 0)) goto bad;
     return ns;
 bad:
     Py_DECREF(ns);

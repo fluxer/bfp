@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-12-25 05:05+0200\n"
+"POT-Creation-Date: 2015-12-26 07:31+0200\n"
 "PO-Revision-Date: 2015-07-02 08:06+0200\n"
 "Last-Translator: \n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -1429,11 +1429,11 @@ msgid "Hardlink"
 msgstr "Хардлинк"
 
 #: tools.py:235
-msgid "Checking for docs in"
+msgid "Checking for paths that must be purged in"
 msgstr ""
 
 #: tools.py:237
-msgid "Documentation provided"
+msgid "Target has paths to be purged"
 msgstr ""
 
 #: tools.py:240
@@ -1767,8 +1767,8 @@ msgid "Check for cross-filesystem symlink(s)"
 msgstr ""
 
 #: tools.py:1071
-msgid "Check for documentation"
-msgstr "Провери за документация"
+msgid "Check for purge paths"
+msgstr ""
 
 #: tools.py:1073
 msgid "Check for module(s) in non-standard directory"
@@ -1923,7 +1923,7 @@ msgid "SYMLINK"
 msgstr ""
 
 #: tools.py:1269
-msgid "DOC"
+msgid "PURGE"
 msgstr ""
 
 #: tools.py:1270
