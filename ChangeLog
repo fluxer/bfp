@@ -1,3 +1,182 @@
+Sat Dec 26 10:44:52 2015 +0200 Ivailo Monev <xakepa10@gmail.com> 
+cfb1daef8adbd9d238142546b08cd6f049b1dc65 (tag: 1.9.0)
+    * regenerate spm sources
+    * replace doc with purge paths lint feature
+    * regenerate spm sources
+    * export convenience variables for optional dependencies
+    * regenerate libraries sources
+    * use the more reliable libmisc.Misc.string_lstrip() rather then str.replace()
+    * regenerate libmisc source
+    * make the fallback of libmisc.Misc.dir_current() overridable
+    * regenerate sources
+    * make the shell choice configurable
+    * Revert "regenerate libraries sources"
+    * Revert "simplify package caches rebuild check"
+    * regenerate libraries sources
+    * simplify package caches rebuild check
+    * regenerate libs and spm sources
+    * regenrate spm sources
+    * cleanup compat
+    * fix spm running with current directory deleted
+    * do not attempt to install info pages on remove action in post_update_database()
+    * bail out on invalid target from pack mode
+    * use the compiled re object directly in srcbuild parser
+    * remove local target dir if not empty
+    * implement local targets autodepends printing
+    * minor autodepends migration improvements
+    * regenerate spm sources
+    * introduce new local metadata field - autodepends
+    * workaround the scanelf bug again
+    * regenerate spm sources
+    * oops, fix ignore_missing option
+    * regenerate spm sources
+    * optimize tarballs indexing and runtime dependencies detection
+    * make sure archive objects get closed on exception in mkinitfs
+    * misc cleanups
+    * regenerate initfs sources
+    * implementd binaries and libraries stripping into mkinitfs
+    * regenerate initfs sources
+    * make sure ARGS.tmp and tmpdir are the same so cleanups removes the right directory
+    * save file extension as variable in Misc.archive_compress()
+    * drop useless variable assignment in Misc.fetch)
+    * reuse last variable in Misc.fetch_plain()
+    * regenerate sources
+    * handle optdepends properly in Database.remote_mdepends() (as list)
+    * write metadata in sorted order, add some useful info to it too
+    * regenerate sources
+    * make local mode print fancy units when plain was not set
+    * make Misc.string_unit_guess() and Misc.string_unit() accept integers too
+    * document fetch method override of binary mode
+    * fix optdepends check in Database.local_uptodate()
+    * change srcmake messaging to match that of spm
+    * update mkinitfs manual page
+    * declare busybox tests as tuples when possible
+    * regenerate libsystem source
+    * implement Block.blkid()
+    * regenerate libmessage source
+    * oops, fix regression since 35db0c50
+    * implement Misc.string_rstrip() and start using misc.string_lstrip()
+    * regenrate libraries sources
+    * regenrate spm sources
+    * support differemt root-directory in digest mode
+    * type-check arguments passed to Misc.string_lstrip(), make the replacement argument optional
+    * fix variable reference in portable mode
+    * strip the actualy root directory in pack mode
+    * support different root directory in pack mode
+    * mkinitfs code shrinks
+    * regenerate initfs sources
+    * make the -T/--busytest argument more simple
+    * regenerate initfs sources
+    * add option to test busybox compat to mkinitfs
+    * set dist format to tar, not that it does much but anyway...
+    * support different root directory for lint mode, fix some symlinks issues while at it
+    * regenerate libraries sources
+    * normalize marker too for the sake of the logger
+    * allow returning all metadata via the package API
+    * document UDev class
+    * regenerate sources
+    * oops
+    * add gettext to build dependencies in README
+    * Update README.md
+    * simplify init symlink support
+    * minor remote metadata caching optimization
+    * minor improvements
+    * preserve buildmissing from autobinary method
+    * properly pass buildmissing from the argument parser
+    * regen spm sources
+    * Build target(s) from source when binary not available
+    * regen spm sources
+    * attempt to handle symlinks properly in metadata assemling (2)
+    * attempt to handle symlinks properly in metadata assemling
+    * regen libs sources
+    * implement libmisc.Misc.string_lstrip()
+    * strip quotes from remote targets variables with one strip()
+    * speed up local targets caching by ~50%
+    * extend the benchmark to local targets
+    * drop spmd/spm-gui
+    * compute basename only when neccessary in libpackage.Database.local_rdepends()
+    * use less loops in the srcbuild parser
+    * spmd uses dbus, add to service
+    * do not type-check sinput twice in libmisc.Misc.system_communicate()
+    * handle new udev wrapper quirck
+    * fixup ahws
+    * fork ahws after initialization
+    * fixup action getting via udev
+    * make ahws and spmd service require logger
+    * add handle for PS3 controler
+    * enhance libmisc.UDev() and ahws
+    * minor corrections and improvements
+    * support yet another sign extension
+    * goodbye libudev glue - hello ctypes wrapper
+    * regen sources
+    * do not assume global Git config to be present
+    * another fix for the second plugin example
+    * improve and fix second plugin example
+    * reset only LC_ALL in libmisc.Misc.system_communicate()
+    * make the aport mode check for qmake build system less error prone
+    * filter directories in the xz/lzma archive lister
+    * libmessage and spm-gui fixups
+    * prioritize xz/lzma check in libmisc.Misc.archive_list()
+    * move mirrors check out of the loop
+    * switch compression method to xz for tarballs
+    * makse SPLIT_DEBUG default to False
+    * stop using libmisc.Misc.file_readlines() and drop it
+    * review libmessage
+    * add second example of plugin
+    * regen sources
+    * cleanup libpackage
+    * misc corrections
+    * review libarchive
+    * properly substitute dynamic variables in manual pages
+    * improve example plugin
+    * ahws review
+    * workaround busybox mount limitaiton/bug
+    * move libarchive private method where it belongs
+    * cleanup
+    * support src_prepare() in srcmake
+    * set sip QString and QVariant API to 2 to prevent spm-gui crashes
+    * regen sources
+    * make the parser behave consistently when mode is not set
+    * make the finally code of spm reachable when used with Python 3000
+    * support plugins to extend spm-tools functionality
+    * regen sources
+    * support spm-tools as module for debugging purposes
+    * use sys.stdour.write() instead of print() in libmessage
+    * do not convert line to Python 3000 string from libmisc.Misc.file_readsmart()
+    * just call recieve on libmisc.Misc.gpg_receive() and be done with it
+    * check if fourth signature type is not in sources before declaring it such
+    * make spm-tools resolve aliases for targets and improve meta ones
+    * add pep8 config
+    * prevent possible type-check error in libsystem
+    * use formatter for string concat in mkinitfs
+    * lintian corrections
+    * supoort DESTDIR?=blah pattern in aport mode detection
+    * document aport mode
+    * add --root to main options completion for spm-tools
+    * create pid files for ahws and spmd
+    * covert boolean messages to string too
+    * make the glib loop work with threads
+    * optimize target files removal on upgrade
+    * make the device info search more strict
+    * minor documentation update
+    * replace libmisc.Misc.system_trigger() with libmisc.Misc.system_chroot()
+    * change CFLAGS and CXXFLAGS to set general CPU optimizations
+    * fixup mkinitfs
+    * regen sources
+    * optimize conflicts checking via spm-tools lint mode
+    * regen sources
+    * cleanup
+    * raise an exception when attempt to guess archive type fails from libmisc.Misc.archive_compress()
+    * make an exception for spm and call bump from all
+    * ship C files avoiding Cython at build time
+    * cleanup top-level Makefile
+    * check for wheather the actual source file is in the target dir
+    * do not try to extract full paths
+    * cleanup
+    * add autotest for spm aport mode
+    * make spm-tools portable mode autotest expected failure
+    * implement experimental aport mode into spm
+
 Thu Jul 2 02:43:21 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
 7f8d540a4df27de311ffdbc2f089e9bea0bc9c73 (tag: 1.8.2)
     * use __exit__ instead of __del__ for cleanup
