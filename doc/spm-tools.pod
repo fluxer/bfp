@@ -125,7 +125,7 @@ optional arguments:
   -m, --man             Check for missing manual page(s)
   -u, --udev            Check for cross-filesystem udev rule(s)
   -s, --symlink         Check for cross-filesystem symlink(s)
-  -d, --doc             Check for documentation
+  -P, --purge           Check for purge paths
   -M, --module          Check for module(s) in non-standard directory
   -f, --footprint       Check for footprint consistency
   -b, --builddir        Check for build directory trace(s)

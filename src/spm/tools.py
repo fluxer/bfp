@@ -152,7 +152,7 @@ class Dist(object):
 class Lint(object):
     ''' Check sanity of local targets '''
     def __init__(self, targets, man=False, udev=False, symlink=False, \
-        doc=False, module=False, footprint=False, builddir=False, \
+        purge=False, module=False, footprint=False, builddir=False, \
         ownership=False, executable=False, path=False, shebang=False, \
         backup=False, conflicts=False, debug=False):
         self.targets = []
@@ -161,7 +161,7 @@ class Lint(object):
         self.man = man
         self.udev = udev
         self.symlink = symlink
-        self.doc = doc
+        self.purge = purge
         self.module = module
         self.footprint = footprint
         self.builddir = builddir
@@ -231,10 +231,10 @@ class Lint(object):
                         elif os.stat(sfile).st_nlink == 2:
                             message.sub_warning(_('Hardlink'), sfile)
 
-                if self.doc:
-                    message.sub_debug(_('Checking for docs in'), target)
-                    if misc.string_search('/doc/|/gtk-doc/', target_footprint, escape=False):
-                        message.sub_warning(_('Documentation provided'))
+                if self.purge:
+                    message.sub_debug(_('Checking for paths that must be purged in'), target)
+                    if misc.string_search(libspm.PURGE_PATHS, target_footprint, escape=False):
+                        message.sub_warning(_('Target has paths to be purged'))
 
                 if self.module:
                     message.sub_debug(_('Checking for misplaced modules in'), target)
@@ -1067,8 +1067,8 @@ if __name__ == '__main__':
             help=_('Check for cross-filesystem udev rule(s)'))
         lint_parser.add_argument('-s', '--symlink', action='store_true', \
             help=_('Check for cross-filesystem symlink(s)'))
-        lint_parser.add_argument('-d', '--doc', action='store_true', \
-            help=_('Check for documentation'))
+        lint_parser.add_argument('-P', '--purge', action='store_true', \
+            help=_('Check for purge paths'))
         lint_parser.add_argument('-M', '--module', action='store_true', \
             help=_('Check for module(s) in non-standard directory'))
         lint_parser.add_argument('-f', '--footprint', action='store_true', \
@@ -1250,7 +1250,7 @@ if __name__ == '__main__':
                 ARGS.man = True
                 ARGS.udev = True
                 ARGS.symlink = True
-                ARGS.doc = True
+                ARGS.purge = True
                 ARGS.module = True
                 ARGS.footprint = True
                 ARGS.builddir = True
@@ -1266,7 +1266,7 @@ if __name__ == '__main__':
             message.sub_info(_('MAN'), ARGS.man)
             message.sub_info(_('UDEV'), ARGS.udev)
             message.sub_info(_('SYMLINK'), ARGS.symlink)
-            message.sub_info(_('DOC'), ARGS.doc)
+            message.sub_info(_('PURGE'), ARGS.purge)
             message.sub_info(_('MODULE'), ARGS.module)
             message.sub_info(_('FOOTPRINT'), ARGS.footprint)
             message.sub_info(_('BUILDDIR'), ARGS.builddir)
@@ -1281,7 +1281,7 @@ if __name__ == '__main__':
             message.info(_('Poking locals...'))
 
             m = Lint(ARGS.TARGETS, ARGS.man, ARGS.udev, ARGS.symlink, \
-                ARGS.doc, ARGS.module, ARGS.footprint, ARGS.builddir, \
+                ARGS.purge, ARGS.module, ARGS.footprint, ARGS.builddir, \
                 ARGS.ownership, ARGS.executable, ARGS.path, ARGS.shebang, \
                 ARGS.backup, ARGS.conflicts, ARGS.debug)
             m.main()
