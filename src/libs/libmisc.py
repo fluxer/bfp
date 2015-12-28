@@ -939,10 +939,10 @@ class Misc(object):
     def system_communicate(self, command, bshell=False, cwd=None, sinput=None):
         ''' Get output and optionally send input to external utility
 
-            it sets the environment variable LC_ALL to "C" to ensure locales
-            are not respected, passing input is possible if sinput is different
-            than None. if something goes wrong you get standard output (stdout)
-            and standard error (stderr) as an Exception '''
+            it sets the environment variable LC_ALL to "en_US.UTF-8" to ensure
+            locales are not respected, passing input is possible if sinput is
+            different than None. if something goes wrong you get standard
+            output (stdout) and standard error (stderr) as an Exception '''
         if self.python2:
             self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
             self.typecheck(bshell, (types.BooleanType))
@@ -959,7 +959,7 @@ class Misc(object):
         procenv = {}
         for var, val in os.environ.items():
             procenv[var] = val
-        procenv['LC_ALL'] = 'C'
+        procenv['LC_ALL'] = 'en_US.UTF-8'
         pipe = subprocess.Popen(command, stdin=stdin, \
             stdout=subprocess.PIPE, stderr=subprocess.PIPE, \
             env=procenv, shell=bshell, cwd=cwd)
