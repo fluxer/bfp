@@ -986,7 +986,6 @@ static char __pyx_k_up[] = "up";
 static char __pyx_k_wb[] = "wb";
 static char __pyx_k_wd[] = "wd";
 static char __pyx_k_xz[] = ".xz";
-static char __pyx_k_C_2[] = "C";
 static char __pyx_k_F_n[] = "#F%n";
 static char __pyx_k_RAW[] = "RAW";
 static char __pyx_k__10[] = "";
@@ -1475,6 +1474,7 @@ static char __pyx_k_ctypes_util[] = "ctypes.util";
 static char __pyx_k_default_key[] = "--default-key";
 static char __pyx_k_destination[] = "destination";
 static char __pyx_k_dir_current[] = "dir_current";
+static char __pyx_k_en_US_UTF_8[] = "en_US.UTF-8";
 static char __pyx_k_fetch_plain[] = "fetch_plain";
 static char __pyx_k_fetch_rsync[] = "fetch_rsync";
 static char __pyx_k_file_search[] = "file_search";
@@ -1676,7 +1676,6 @@ static PyObject *__pyx_n_s_CLOSE_WRITE;
 static PyObject *__pyx_n_s_COMPRESS;
 static PyObject *__pyx_n_s_CONTINUE;
 static PyObject *__pyx_n_s_CREATE;
-static PyObject *__pyx_n_s_C_2;
 static PyObject *__pyx_n_s_CalledProcessError;
 static PyObject *__pyx_kp_s_Can_not_get_udev_context;
 static PyObject *__pyx_kp_s_Content_Length;
@@ -1955,6 +1954,7 @@ static PyObject *__pyx_n_s_doc;
 static PyObject *__pyx_kp_s_ds;
 static PyObject *__pyx_n_s_dump;
 static PyObject *__pyx_kp_s_e;
+static PyObject *__pyx_kp_s_en_US_UTF_8;
 static PyObject *__pyx_n_s_encode;
 static PyObject *__pyx_n_s_encodestring;
 static PyObject *__pyx_n_s_endprotocols;
@@ -29740,7 +29740,7 @@ static PyObject *__pyx_pf_7libmisc_4Misc_92archive_list(CYTHON_UNUSED PyObject *
 
 /* Python wrapper */
 static PyObject *__pyx_pw_7libmisc_4Misc_95system_communicate(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds); /*proto*/
-static char __pyx_doc_7libmisc_4Misc_94system_communicate[] = " Get output and optionally send input to external utility\n\n            it sets the environment variable LC_ALL to \"C\" to ensure locales\n            are not respected, passing input is possible if sinput is different\n            than None. if something goes wrong you get standard output (stdout)\n            and standard error (stderr) as an Exception ";
+static char __pyx_doc_7libmisc_4Misc_94system_communicate[] = " Get output and optionally send input to external utility\n\n            it sets the environment variable LC_ALL to \"en_US.UTF-8\" to ensure\n            locales are not respected, passing input is possible if sinput is\n            different than None. if something goes wrong you get standard\n            output (stdout) and standard error (stderr) as an Exception ";
 static PyMethodDef __pyx_mdef_7libmisc_4Misc_95system_communicate = {"system_communicate", (PyCFunction)__pyx_pw_7libmisc_4Misc_95system_communicate, METH_VARARGS|METH_KEYWORDS, __pyx_doc_7libmisc_4Misc_94system_communicate};
 static PyObject *__pyx_pw_7libmisc_4Misc_95system_communicate(PyObject *__pyx_self, PyObject *__pyx_args, PyObject *__pyx_kwds) {
   PyObject *__pyx_v_self = 0;
@@ -29863,8 +29863,8 @@ static PyObject *__pyx_pf_7libmisc_4Misc_94system_communicate(CYTHON_UNUSED PyOb
   __Pyx_INCREF(__pyx_v_cwd);
 
   /* "libmisc.py":946
- *             than None. if something goes wrong you get standard output (stdout)
- *             and standard error (stderr) as an Exception '''
+ *             different than None. if something goes wrong you get standard
+ *             output (stdout) and standard error (stderr) as an Exception '''
  *         if self.python2:             # <<<<<<<<<<<<<<
  *             self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
  *             self.typecheck(bshell, (types.BooleanType))
@@ -29876,7 +29876,7 @@ static PyObject *__pyx_pf_7libmisc_4Misc_94system_communicate(CYTHON_UNUSED PyOb
   if (__pyx_t_2) {
 
     /* "libmisc.py":947
- *             and standard error (stderr) as an Exception '''
+ *             output (stdout) and standard error (stderr) as an Exception '''
  *         if self.python2:
  *             self.typecheck(command, (types.StringType, types.TupleType, types.ListType))             # <<<<<<<<<<<<<<
  *             self.typecheck(bshell, (types.BooleanType))
@@ -30095,8 +30095,8 @@ static PyObject *__pyx_pf_7libmisc_4Misc_94system_communicate(CYTHON_UNUSED PyOb
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
     /* "libmisc.py":946
- *             than None. if something goes wrong you get standard output (stdout)
- *             and standard error (stderr) as an Exception '''
+ *             different than None. if something goes wrong you get standard
+ *             output (stdout) and standard error (stderr) as an Exception '''
  *         if self.python2:             # <<<<<<<<<<<<<<
  *             self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
  *             self.typecheck(bshell, (types.BooleanType))
@@ -30326,7 +30326,7 @@ static PyObject *__pyx_pf_7libmisc_4Misc_94system_communicate(CYTHON_UNUSED PyOb
  *         procenv = {}
  *         for var, val in os.environ.items():             # <<<<<<<<<<<<<<
  *             procenv[var] = val
- *         procenv['LC_ALL'] = 'C'
+ *         procenv['LC_ALL'] = 'en_US.UTF-8'
  */
   __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 960; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -30453,7 +30453,7 @@ static PyObject *__pyx_pf_7libmisc_4Misc_94system_communicate(CYTHON_UNUSED PyOb
  *         procenv = {}
  *         for var, val in os.environ.items():
  *             procenv[var] = val             # <<<<<<<<<<<<<<
- *         procenv['LC_ALL'] = 'C'
+ *         procenv['LC_ALL'] = 'en_US.UTF-8'
  *         pipe = subprocess.Popen(command, stdin=stdin, \
  */
     if (unlikely(PyDict_SetItem(__pyx_v_procenv, __pyx_v_var, __pyx_v_val) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 961; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -30463,7 +30463,7 @@ static PyObject *__pyx_pf_7libmisc_4Misc_94system_communicate(CYTHON_UNUSED PyOb
  *         procenv = {}
  *         for var, val in os.environ.items():             # <<<<<<<<<<<<<<
  *             procenv[var] = val
- *         procenv['LC_ALL'] = 'C'
+ *         procenv['LC_ALL'] = 'en_US.UTF-8'
  */
   }
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -30471,15 +30471,15 @@ static PyObject *__pyx_pf_7libmisc_4Misc_94system_communicate(CYTHON_UNUSED PyOb
   /* "libmisc.py":962
  *         for var, val in os.environ.items():
  *             procenv[var] = val
- *         procenv['LC_ALL'] = 'C'             # <<<<<<<<<<<<<<
+ *         procenv['LC_ALL'] = 'en_US.UTF-8'             # <<<<<<<<<<<<<<
  *         pipe = subprocess.Popen(command, stdin=stdin, \
  *             stdout=subprocess.PIPE, stderr=subprocess.PIPE, \
  */
-  if (unlikely(PyDict_SetItem(__pyx_v_procenv, __pyx_n_s_LC_ALL, __pyx_n_s_C_2) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 962; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (unlikely(PyDict_SetItem(__pyx_v_procenv, __pyx_n_s_LC_ALL, __pyx_kp_s_en_US_UTF_8) < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 962; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "libmisc.py":963
  *             procenv[var] = val
- *         procenv['LC_ALL'] = 'C'
+ *         procenv['LC_ALL'] = 'en_US.UTF-8'
  *         pipe = subprocess.Popen(command, stdin=stdin, \             # <<<<<<<<<<<<<<
  *             stdout=subprocess.PIPE, stderr=subprocess.PIPE, \
  *             env=procenv, shell=bshell, cwd=cwd)
@@ -30499,7 +30499,7 @@ static PyObject *__pyx_pf_7libmisc_4Misc_94system_communicate(CYTHON_UNUSED PyOb
   if (PyDict_SetItem(__pyx_t_3, __pyx_n_s_stdin, __pyx_v_stdin) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 963; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "libmisc.py":964
- *         procenv['LC_ALL'] = 'C'
+ *         procenv['LC_ALL'] = 'en_US.UTF-8'
  *         pipe = subprocess.Popen(command, stdin=stdin, \
  *             stdout=subprocess.PIPE, stderr=subprocess.PIPE, \             # <<<<<<<<<<<<<<
  *             env=procenv, shell=bshell, cwd=cwd)
@@ -30533,7 +30533,7 @@ static PyObject *__pyx_pf_7libmisc_4Misc_94system_communicate(CYTHON_UNUSED PyOb
 
   /* "libmisc.py":963
  *             procenv[var] = val
- *         procenv['LC_ALL'] = 'C'
+ *         procenv['LC_ALL'] = 'en_US.UTF-8'
  *         pipe = subprocess.Popen(command, stdin=stdin, \             # <<<<<<<<<<<<<<
  *             stdout=subprocess.PIPE, stderr=subprocess.PIPE, \
  *             env=procenv, shell=bshell, cwd=cwd)
@@ -39476,7 +39476,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_COMPRESS, __pyx_k_COMPRESS, sizeof(__pyx_k_COMPRESS), 0, 0, 1, 1},
   {&__pyx_n_s_CONTINUE, __pyx_k_CONTINUE, sizeof(__pyx_k_CONTINUE), 0, 0, 1, 1},
   {&__pyx_n_s_CREATE, __pyx_k_CREATE, sizeof(__pyx_k_CREATE), 0, 0, 1, 1},
-  {&__pyx_n_s_C_2, __pyx_k_C_2, sizeof(__pyx_k_C_2), 0, 0, 1, 1},
   {&__pyx_n_s_CalledProcessError, __pyx_k_CalledProcessError, sizeof(__pyx_k_CalledProcessError), 0, 0, 1, 1},
   {&__pyx_kp_s_Can_not_get_udev_context, __pyx_k_Can_not_get_udev_context, sizeof(__pyx_k_Can_not_get_udev_context), 0, 0, 1, 0},
   {&__pyx_kp_s_Content_Length, __pyx_k_Content_Length, sizeof(__pyx_k_Content_Length), 0, 0, 1, 0},
@@ -39755,6 +39754,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_ds, __pyx_k_ds, sizeof(__pyx_k_ds), 0, 0, 1, 0},
   {&__pyx_n_s_dump, __pyx_k_dump, sizeof(__pyx_k_dump), 0, 0, 1, 1},
   {&__pyx_kp_s_e, __pyx_k_e, sizeof(__pyx_k_e), 0, 0, 1, 0},
+  {&__pyx_kp_s_en_US_UTF_8, __pyx_k_en_US_UTF_8, sizeof(__pyx_k_en_US_UTF_8), 0, 0, 1, 0},
   {&__pyx_n_s_encode, __pyx_k_encode, sizeof(__pyx_k_encode), 0, 0, 1, 1},
   {&__pyx_n_s_encodestring, __pyx_k_encodestring, sizeof(__pyx_k_encodestring), 0, 0, 1, 1},
   {&__pyx_n_s_endprotocols, __pyx_k_endprotocols, sizeof(__pyx_k_endprotocols), 0, 0, 1, 1},
