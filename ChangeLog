@@ -1,4 +1,15 @@
-Sat Dec 26 10:44:52 2015 +0200 Ivailo Monev <xakepa10@gmail.com> 
+Mon Dec 28 11:24:50 2015 +0200 Ivailo Monev <xakepa10@gmail.com>
+fc17b88cc4c13042bd30c0bfaa8ca57603c0b373 (tag: 1.9.1)
+    * regenerate spm sources
+    * fix typo in spm-tools merge mode
+    * regenerate libs sources
+    * use en_US.UTF-8 instead of C locales when catching command output
+    * regenerate spm sources
+    * make the debug lint check smarter
+    * regenerate sources
+    * check local dependencies too from libpackage.Database.remote_mdepends()
+
+Sat Dec 26 10:44:52 2015 +0200 Ivailo Monev <xakepa10@gmail.com>
 cfb1daef8adbd9d238142546b08cd6f049b1dc65 (tag: 1.9.0)
     * regenerate spm sources
     * replace doc with purge paths lint feature
