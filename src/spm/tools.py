@@ -473,7 +473,7 @@ class Merge(object):
             print('\n' + '*' * 80)
             for line in list(difflib.Differ().compare( \
                 misc.file_read(backfile).splitlines(), \
-                misc.file_readl(origfile).splitlines())):
+                misc.file_read(origfile).splitlines())):
                 print(line)
             print('*' * 80 + '\n')
             self.merge(origfile, backfile)
