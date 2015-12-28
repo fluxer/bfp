@@ -1546,7 +1546,6 @@ static char __pyx_k_do_depends[] = "do_depends";
 static char __pyx_k_do_reverse[] = "do_reverse";
 static char __pyx_k_do_sources[] = "do_sources";
 static char __pyx_k_executable[] = "executable";
-static char __pyx_k_file_readl[] = "file_readl";
 static char __pyx_k_file_write[] = "file_write";
 static char __pyx_k_gpg_verify[] = "gpg_verify";
 static char __pyx_k_insecure_2[] = "--insecure";
@@ -1649,7 +1648,7 @@ static char __pyx_k_sub_critical[] = "sub_critical";
 static char __pyx_k_urllib_error[] = "urllib.error";
 static char __pyx_k_version_info[] = "version_info";
 static char __pyx_k_which_parser[] = "which_parser";
-static char __pyx_k_1_9_0_3dc5d3c[] = "1.9.0 (3dc5d3c)";
+static char __pyx_k_1_9_0_dc6c5fd[] = "1.9.0 (dc6c5fd)";
 static char __pyx_k_Create_digest[] = "Create digest";
 static char __pyx_k_Digest___init[] = "Digest.__init__";
 static char __pyx_k_Digest_create[] = "Digest.create";
@@ -1931,7 +1930,7 @@ static char __pyx_k_Starting_migration_procedure_1_7_3[] = "Starting migration p
 static char __pyx_k_Starting_migration_procedure_1_8_2[] = "Starting migration procedure 1_8_x_autodepends on";
 static PyObject *__pyx_n_s_;
 static PyObject *__pyx_kp_s_1;
-static PyObject *__pyx_kp_s_1_9_0_3dc5d3c;
+static PyObject *__pyx_kp_s_1_9_0_dc6c5fd;
 static PyObject *__pyx_kp_s_2;
 static PyObject *__pyx_kp_s_3;
 static PyObject *__pyx_kp_s_4;
@@ -2447,7 +2446,6 @@ static PyObject *__pyx_n_s_file_checksum;
 static PyObject *__pyx_n_s_file_mime;
 static PyObject *__pyx_n_s_file_name;
 static PyObject *__pyx_n_s_file_read;
-static PyObject *__pyx_n_s_file_readl;
 static PyObject *__pyx_n_s_file_search;
 static PyObject *__pyx_n_s_file_write;
 static PyObject *__pyx_n_s_files;
@@ -16504,7 +16502,7 @@ static PyObject *__pyx_pf_5tools_5Merge_2merge(CYTHON_UNUSED PyObject *__pyx_sel
  *             print('\n' + '*' * 80)
  *             for line in list(difflib.Differ().compare( \             # <<<<<<<<<<<<<<
  *                 misc.file_read(backfile).splitlines(), \
- *                 misc.file_readl(origfile).splitlines())):
+ *                 misc.file_read(origfile).splitlines())):
  */
     __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_difflib); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 474; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
@@ -16537,7 +16535,7 @@ static PyObject *__pyx_pf_5tools_5Merge_2merge(CYTHON_UNUSED PyObject *__pyx_sel
  *             print('\n' + '*' * 80)
  *             for line in list(difflib.Differ().compare( \
  *                 misc.file_read(backfile).splitlines(), \             # <<<<<<<<<<<<<<
- *                 misc.file_readl(origfile).splitlines())):
+ *                 misc.file_read(origfile).splitlines())):
  *                 print(line)
  */
     __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 475; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -16595,13 +16593,13 @@ static PyObject *__pyx_pf_5tools_5Merge_2merge(CYTHON_UNUSED PyObject *__pyx_sel
     /* "tools.py":476
  *             for line in list(difflib.Differ().compare( \
  *                 misc.file_read(backfile).splitlines(), \
- *                 misc.file_readl(origfile).splitlines())):             # <<<<<<<<<<<<<<
+ *                 misc.file_read(origfile).splitlines())):             # <<<<<<<<<<<<<<
  *                 print(line)
  *             print('*' * 80 + '\n')
  */
     __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 476; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_9);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_file_readl); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 476; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_file_read); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 476; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
     __pyx_t_9 = NULL;
@@ -16683,7 +16681,7 @@ static PyObject *__pyx_pf_5tools_5Merge_2merge(CYTHON_UNUSED PyObject *__pyx_sel
  *             print('\n' + '*' * 80)
  *             for line in list(difflib.Differ().compare( \             # <<<<<<<<<<<<<<
  *                 misc.file_read(backfile).splitlines(), \
- *                 misc.file_readl(origfile).splitlines())):
+ *                 misc.file_read(origfile).splitlines())):
  */
     __pyx_t_4 = PySequence_List(__pyx_t_1); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 474; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_4);
@@ -16703,7 +16701,7 @@ static PyObject *__pyx_pf_5tools_5Merge_2merge(CYTHON_UNUSED PyObject *__pyx_sel
 
       /* "tools.py":477
  *                 misc.file_read(backfile).splitlines(), \
- *                 misc.file_readl(origfile).splitlines())):
+ *                 misc.file_read(origfile).splitlines())):
  *                 print(line)             # <<<<<<<<<<<<<<
  *             print('*' * 80 + '\n')
  *             self.merge(origfile, backfile)
@@ -16715,13 +16713,13 @@ static PyObject *__pyx_pf_5tools_5Merge_2merge(CYTHON_UNUSED PyObject *__pyx_sel
  *             print('\n' + '*' * 80)
  *             for line in list(difflib.Differ().compare( \             # <<<<<<<<<<<<<<
  *                 misc.file_read(backfile).splitlines(), \
- *                 misc.file_readl(origfile).splitlines())):
+ *                 misc.file_read(origfile).splitlines())):
  */
     }
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
     /* "tools.py":478
- *                 misc.file_readl(origfile).splitlines())):
+ *                 misc.file_read(origfile).splitlines())):
  *                 print(line)
  *             print('*' * 80 + '\n')             # <<<<<<<<<<<<<<
  *             self.merge(origfile, backfile)
@@ -34511,7 +34509,7 @@ static struct PyModuleDef __pyx_moduledef = {
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_, __pyx_k_, sizeof(__pyx_k_), 0, 0, 1, 1},
   {&__pyx_kp_s_1, __pyx_k_1, sizeof(__pyx_k_1), 0, 0, 1, 0},
-  {&__pyx_kp_s_1_9_0_3dc5d3c, __pyx_k_1_9_0_3dc5d3c, sizeof(__pyx_k_1_9_0_3dc5d3c), 0, 0, 1, 0},
+  {&__pyx_kp_s_1_9_0_dc6c5fd, __pyx_k_1_9_0_dc6c5fd, sizeof(__pyx_k_1_9_0_dc6c5fd), 0, 0, 1, 0},
   {&__pyx_kp_s_2, __pyx_k_2, sizeof(__pyx_k_2), 0, 0, 1, 0},
   {&__pyx_kp_s_3, __pyx_k_3, sizeof(__pyx_k_3), 0, 0, 1, 0},
   {&__pyx_kp_s_4, __pyx_k_4, sizeof(__pyx_k_4), 0, 0, 1, 0},
@@ -35027,7 +35025,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_file_mime, __pyx_k_file_mime, sizeof(__pyx_k_file_mime), 0, 0, 1, 1},
   {&__pyx_n_s_file_name, __pyx_k_file_name, sizeof(__pyx_k_file_name), 0, 0, 1, 1},
   {&__pyx_n_s_file_read, __pyx_k_file_read, sizeof(__pyx_k_file_read), 0, 0, 1, 1},
-  {&__pyx_n_s_file_readl, __pyx_k_file_readl, sizeof(__pyx_k_file_readl), 0, 0, 1, 1},
   {&__pyx_n_s_file_search, __pyx_k_file_search, sizeof(__pyx_k_file_search), 0, 0, 1, 1},
   {&__pyx_n_s_file_write, __pyx_k_file_write, sizeof(__pyx_k_file_write), 0, 0, 1, 1},
   {&__pyx_n_s_files, __pyx_k_files, sizeof(__pyx_k_files), 0, 0, 1, 1},
@@ -41015,7 +41012,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  * misc.GPG_DIR = libspm.GPG_DIR
  * misc.SHELL = libspm.SHELL             # <<<<<<<<<<<<<<
  * 
- * app_version = "1.9.0 (3dc5d3c)"
+ * app_version = "1.9.0 (dc6c5fd)"
  */
   __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_libspm); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 25; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -41031,14 +41028,14 @@ PyMODINIT_FUNC PyInit_tools(void)
   /* "tools.py":27
  * misc.SHELL = libspm.SHELL
  * 
- * app_version = "1.9.0 (3dc5d3c)"             # <<<<<<<<<<<<<<
+ * app_version = "1.9.0 (dc6c5fd)"             # <<<<<<<<<<<<<<
  * 
  * class Check(object):
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_9_0_3dc5d3c) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 27; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_9_0_dc6c5fd) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 27; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":29
- * app_version = "1.9.0 (3dc5d3c)"
+ * app_version = "1.9.0 (dc6c5fd)"
  * 
  * class Check(object):             # <<<<<<<<<<<<<<
  *     ''' Check runtime dependencies of local targets '''
@@ -41080,7 +41077,7 @@ PyMODINIT_FUNC PyInit_tools(void)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
   /* "tools.py":29
- * app_version = "1.9.0 (3dc5d3c)"
+ * app_version = "1.9.0 (dc6c5fd)"
  * 
  * class Check(object):             # <<<<<<<<<<<<<<
  *     ''' Check runtime dependencies of local targets '''
