@@ -3,7 +3,7 @@
 import gettext
 _ = gettext.translation('spm', fallback=True).gettext
 
-import sys, os, shutil, re, time, syslog
+import sys, os, shutil, re, time, syslog, glob
 from collections import OrderedDict
 if sys.version < '3':
     import ConfigParser as configparser
@@ -1460,6 +1460,32 @@ class Source(object):
                         break
             elif rdepends:
                 message.sub_warning(_('Targets may need rebuild'), rdepends)
+
+            if rdepends:
+                message.sub_info(_('Checking processes'))
+                checkfiles = []
+                checkfiles.extend(new_content)
+                for target in rdepends:
+                    checkfiles.extend(database.local_metadata(target, 'footprint'))
+                mayberestart = []
+                for comm in glob.glob('/proc/*/comm'):
+                    try:
+                        command = misc.file_read(comm).strip()
+                        if not os.path.exists(comm.replace('/comm', '/exe')):
+                            # not a userspace command
+                            continue
+                        elif command in mayberestart:
+                            # multiple processes of same program
+                            continue
+                        for sfile in checkfiles:
+                            sfull = '%s/%s' % (ROOT_DIR, sfile)
+                            if sfile.endswith('/%s' % command) and os.access(sfull, os.X_OK):
+                                mayberestart.append(command)
+                    except:
+                        # processes come and go, it's racy!
+                        pass
+                if mayberestart:
+                    message.sub_warning(_('Programs may need restart'), mayberestart)
 
         # do not wait for the cache notifier to kick in
         database.LOCAL_CACHE = {}
