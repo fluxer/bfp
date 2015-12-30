@@ -53,7 +53,7 @@ class Check(object):
 
             missing_detected = False
             for sfile in target_autodepends:
-                # TODO: tale different root dir into account
+                # TODO: take different root dir into account
                 # sfile = '%s%s' % (libspm.ROOT_DIR, sfile)
                 message.sub_debug(_('Path'), sfile)
                 if not database.local_belongs(sfile):

@@ -584,7 +584,7 @@ class Source(object):
         os.putenv('LDFLAGS', LDFLAGS)
         os.putenv('MAKEFLAGS', MAKEFLAGS)
         for target in self.target_optdepends:
-            envtarget = target.replace('-', '_').upper()
+            envtarget = misc.string_illegal(target.upper())
             # OPTIONAL_<target>_BOOL and OPTIONAL_<target>_SWITCH are for use
             # with CMake, OPTIONAL_<target> is a generic one that can be used
             # with Autotools

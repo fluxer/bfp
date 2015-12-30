@@ -54,6 +54,8 @@ class Misc(object):
             self.python2 = True
         else:
             self.python3 = True
+        # legal are [a-zA-Z_][a-zA-Z0-9_]+
+        self._illegalx = re.compile('\\-|\\!|\\@|\\#|\\$|\\%|\\^|\\.|\\,|\\[|\\]|\\+|\\>|\\<\\"|\\||\\=|\\(|\\)')
 
     def typecheck(self, a, b):
         ''' Poor man's variable type checking, do not use with Python 3000 '''
@@ -108,6 +110,13 @@ class Misc(object):
         elif isinstance(variant, dict):
             return ' '.join(list(variant.keys()))
         return variant
+
+    def string_illegal(self, string):
+        ''' Replace illegal characters with underscore, for use in Shell environment '''
+        if self.python2:
+            self.typecheck(string, (types.StringTypes))
+
+        return self._illegalx.sub('_', string)
 
     def string_unit_guess(self, string):
         ''' Guess the units to be used by string_unit() '''
