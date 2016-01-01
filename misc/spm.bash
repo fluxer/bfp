@@ -24,7 +24,7 @@ _spm()
 
     source_options='-h --help -C --clean -f --fetch -p --prepare -c --compile
         -k --check -i --install -m --merge -r --remove -D --depends
-        -O --optdepends -R --reverse -u --update -a --automake'
+        -R --reverse -u --update -a --automake'
 
     binary_options='-h --help -f --fetch -p --prepare -m --merge -r --remove
         -D --depends -R --reverse -u --update'
@@ -35,7 +35,7 @@ _spm()
 
     who_options='-h --help -p --plain'
 
-	aport_options='-h --help -p --plain'
+    aport_options='-h --help -d --directory -a --automake'
 
     _get_comp_words_by_ref cur prev
     _get_first_arg
