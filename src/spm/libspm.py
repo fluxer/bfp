@@ -588,7 +588,7 @@ class Source(object):
             # OPTIONAL_<target>_BOOL and OPTIONAL_<target>_SWITCH are for use
             # with CMake, OPTIONAL_<target> is a generic one that can be used
             # with Autotools
-            if database.local_uptodate(target):
+            if database.local_search(target):
                 message.sub_debug(_('Enabling optional'), target)
                 os.putenv('OPTIONAL_%s_BOOL' % envtarget, 'TRUE')
                 os.putenv('OPTIONAL_%s_SWITCH' % envtarget, 'ON')
