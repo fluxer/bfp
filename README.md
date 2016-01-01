@@ -15,7 +15,7 @@ The following software is required:
 [GNU Tar](https://www.gnu.org/software/tar/) (or [Busybox](http://www.busybox.net/)/[libarchive](http://www.libarchive.org/)),
 [PaX Utilities](https://wiki.gentoo.org/wiki/Hardened/PaX_Utilities),
 [file](http://darwinsys.com/file/),
-[GNU Bash](https://www.gnu.org/software/bash/),
+[GNU Bash](https://www.gnu.org/software/bash/) (or [MirBSD Korn Shell](https://www.mirbsd.org/mksh.htm)),
 [Git](http://git-scm.com/),
 [GnuPG](https://www.gnupg.org/),
 [Python](https://www.python.org/),
