@@ -259,7 +259,6 @@ optional arguments:
   -m, --merge           Merge compiled files of target to system
   -r, --remove          Remove compiled files of target from system
   -D, --depends         Consider dependency targets
-  -O, --optdepends      Consider optional dependency targets
   -R, --reverse         Consider reverse dependency targets
   -u, --update          Apply actions only if update is available
   -a, --automake        Short for clean, prepare, compile, install and merge

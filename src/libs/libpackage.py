@@ -143,13 +143,12 @@ class Database(object):
         return match
 
     def remote_mdepends(self, target, cdepends=False, mdepends=True, \
-        odepends=False, ldepends=False, checked=None):
+        ldepends=False, checked=None):
         ''' Returns missing build dependencies of target '''
         if misc.python2:
             misc.typecheck(target, (types.StringTypes))
             misc.typecheck(cdepends, (types.BooleanType))
             misc.typecheck(mdepends, (types.BooleanType))
-            misc.typecheck(odepends, (types.BooleanType))
             misc.typecheck(checked, (types.NoneType, types.ListType))
 
         missing = []
@@ -164,8 +163,7 @@ class Database(object):
         build_depends.extend(self.remote_metadata(target, 'depends'))
         if mdepends:
             build_depends.extend(self.remote_metadata(target, 'makedepends'))
-        if odepends:
-            build_depends.extend(self.remote_metadata(target, 'optdepends'))
+
         if cdepends:
             build_depends.extend(self.remote_metadata(target, 'checkdepends'))
         if ldepends:
@@ -178,7 +176,16 @@ class Database(object):
                 and not self.local_uptodate(dependency):
                 checked.append(target)
                 missing.extend(self.remote_mdepends(dependency, cdepends, \
-                    mdepends, odepends, ldepends, checked))
+                    mdepends, ldepends, checked))
+                missing.append(dependency)
+                checked.append(dependency)
+        for dependency in self.remote_metadata(target, 'optdepends'):
+            if not dependency in missing \
+                and (self.local_search(dependency) \
+                and not self.local_uptodate(dependency)):
+                checked.append(target)
+                missing.extend(self.remote_mdepends(dependency, cdepends, \
+                    mdepends, ldepends, checked))
                 missing.append(dependency)
                 checked.append(dependency)
         return missing
