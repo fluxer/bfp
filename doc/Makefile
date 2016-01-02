@@ -19,9 +19,6 @@ all: clean
 	$(POD2MAN) --release="SPM $(VERSION)" \
 		--center="Source Package Manager Manual" \
 		--section='5' --utf8 SRCBUILD.pod SRCBUILD.5
-	$(POD2MAN) --release="Cold $(VERSION)" \
-		--center="Cold Manual" \
-		--section='1' --utf8 cold.pod cold.1
 	$(SED) -e 's|@DOCDIR\\fR@|$(DOCDIR)|g' -i spm-tools.8
 	$(SED) -e 's|@DOCDIR\\fR@|$(DOCDIR)|g' -i SRCBUILD.5
 	$(SED) 's|@MACHINE\\fR@|$(MACHINE)|g' -i spm.conf.5
@@ -49,7 +46,6 @@ uninstall:
 	$(RM) $(DESTDIR)$(MANDIR)/man8/spm-tools.8
 	$(RM) $(DESTDIR)$(MANDIR)/man5/spm.conf.5
 	$(RM) $(DESTDIR)$(MANDIR)/man5/SRCBUILD.5
-	$(RM) $(DESTDIR)$(MANDIR)/man1/cold.1
 	$(RM) -r $(DESTDIR)$(DOCDIR)/spm/
 
 clean:
