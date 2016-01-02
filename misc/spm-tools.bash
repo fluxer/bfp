@@ -27,7 +27,7 @@ _spm_tools()
         -M --module -f --footprint -b --builddir -o --ownership -e --executable
         -p --path -n --shebang -k --backup -c --conflicts -D --debug -a --all'
 
-    check_options='-h --help -f --fast -a --adjust -D --depends -R --reverse'
+    check_options='-h --help -D --depends -R --reverse'
 
     dist_options='-h --help -s --sources -c --clean -d --directory'
 

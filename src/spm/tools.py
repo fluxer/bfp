@@ -1050,10 +1050,6 @@ if __name__ == '__main__':
                 help=_('Targets to apply actions on'))
 
         check_parser = subparsers.add_parser('check')
-        check_parser.add_argument('-f', '--fast', action='store_true', \
-            help=_('Skip some files/links'))
-        check_parser.add_argument('-a', '--adjust', action='store_true', \
-            help=_('Adjust target depends'))
         check_parser.add_argument('-D', '--depends', action='store_true', \
             help=_('Check dependencies of target'))
         check_parser.add_argument('-R', '--reverse', action='store_true', \

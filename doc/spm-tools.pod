@@ -105,8 +105,6 @@ positional arguments:
 
 optional arguments:
   -h, --help            Show this help message and exit
-  -f, --fast            Skip some files/links
-  -a, --adjust          Adjust target depends
   -D, --depends         Check dependencies of target
   -R, --reverse         Check reverse dependencies of target
 
