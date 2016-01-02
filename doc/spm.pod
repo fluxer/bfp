@@ -4,19 +4,20 @@ spm - Source Package Manager
 
 =head1 SYNOPSIS
 
-    spm [-h] [--cache CACHE] [--build BUILD] [--root ROOT] [--gpg GPG]
-           [--ignore IGNORE] [--sign SIGN] [--offline {True,False}]
-           [--mirror {True,False}] [--timeout TIMEOUT] [--verify {True,False}]
-           [--chost CHOST] [--cflags CFLAGS] [--cxxflags CXXFLAGS]
-           [--cppflags CPPFLAGS] [--ldflags LDFLAGS] [--makeflags MAKEFLAGS]
-           [--purge PURGE] [--man {True,False}] [--split {True,False}]
-           [--binaries {True,False}] [--shared {True,False}]
-           [--static {True,False}] [--rpath {True,False}] [--upx {True,False}]
-           [--pycompile {True,False}] [--missing {True,False}]
-           [--conflicts {True,False}] [--backup {True,False}]
-           [--scripts {True,False}] [--triggers {True,False}] [--debug]
-           [--version]
-           {repo,remote,source,binary,local,who,aport} ...
+  spm [-h] [--cache CACHE] [--build BUILD] [--root ROOT] [--gpg GPG]
+    [--shell SHELL] [--ignore IGNORE] [--sign SIGN]
+    [--notify {True,False}] [--offline {True,False}]
+    [--mirror {True,False}] [--timeout TIMEOUT] [--verify {True,False}]
+    [--chost CHOST] [--cflags CFLAGS] [--cxxflags CXXFLAGS]
+    [--cppflags CPPFLAGS] [--ldflags LDFLAGS] [--makeflags MAKEFLAGS]
+    [--purge PURGE] [--man {True,False}] [--split {True,False}]
+    [--binaries {True,False}] [--shared {True,False}]
+    [--static {True,False}] [--rpath {True,False}] [--upx {True,False}]
+    [--pycompile {True,False}] [--missing {True,False}]
+    [--conflicts {True,False}] [--backup {True,False}]
+    [--scripts {True,False}] [--triggers {True,False}] [--debug]
+    [--version]
+    {repo,remote,source,binary,local,who,aport} ...
 
 =head1 DESCRIPTION
 
@@ -149,23 +150,24 @@ features but some of those may be implemented later on.
 =head2 MAIN
 
 positional arguments:
-  {repo,remote,source,binary,local,who}
-  repo                  Clean, sync, prune and/or check repositories
-                        for updates
-  remote                Get remote targets metadata
-  source                Build software from source code
-  binary                Install software from pre-build tarballs
-  local                 Get local targets metadata
-  who                   Get owner of files via regular expression
-  aport                 Automatically write SRCBUILD for sources given via URL
+  {repo,remote,source,binary,local,who,aport}
+  repo                Clean, sync, prune and/or check repositories for updates
+  remote              Get remote targets metadata
+  source              Build software from source code
+  binary              Install software from pre-build tarballs
+  local               Get local targets metadata
+  who                 Get owner of files via regular expression
+  aport               Automatically write SRCBUILD for sources given via URL
 
 optional arguments:
-  -h, --help            Show this help message and exit
+  -h, --help            show this help message and exit
   --cache CACHE         Change cache directory
   --build BUILD         Change build directory
   --root ROOT           Change system root directory
+  --gpg GPG             Change GnuPG home directory
+  --shell SHELL         Change which shell to use
   --ignore IGNORE       Change ignored targets
-  --sign {True,False}   Set whether to sign files when feasable
+  --sign SIGN           Set whether to sign files
   --notify {True,False}
                         Set whether to use inotify to monitor databases
   --offline {True,False}
@@ -184,8 +186,7 @@ optional arguments:
                         Change MAKEFLAGS
   --purge PURGE         Change PURGE_PATHS
   --man {True,False}    Set whether to compress man pages
-  --split {True,False}  Set whether to split debug symbols from binaries and
-                        libraries
+  --split {True,False}  Set whether to split debug symbols from binaries and libraries
   --binaries {True,False}
                         Set whether to strip binaries
   --shared {True,False}
@@ -208,6 +209,8 @@ optional arguments:
                         Set whether to execute triggers
   --debug               Enable debug messages
   --version             Show SPM version and exit
+
+NOTE: Some features are available only to the root user.
 
 =head2 REPO MODE
 

@@ -27,6 +27,7 @@ DEFAULTS = {
     'ROOT_DIR': '/',
     'LOCAL_DIR': '/var/local/spm',
     'GPG_DIR': '/etc/spm/gpg',
+    'SHELL': 'bash',
     'IGNORE': '',
     'SIGN': '',
     'NOTIFY': 'False',
@@ -76,6 +77,7 @@ GPG_DIR = mainconf.get('spm', 'GPG_DIR')
 IGNORE = mainconf.get('spm', 'IGNORE').split(' ')
 SIGN = mainconf.get('spm', 'SIGN')
 NOTIFY = mainconf.getboolean('spm', 'NOTIFY')
+SHELL = mainconf.get('spm', 'SHELL')
 OFFLINE = mainconf.getboolean('fetch', 'OFFLINE')
 MIRROR = mainconf.getboolean('fetch', 'MIRROR')
 TIMEOUT = mainconf.getint('fetch', 'TIMEOUT')
@@ -152,6 +154,7 @@ misc.OFFLINE = OFFLINE
 misc.TIMEOUT = TIMEOUT
 misc.ROOT_DIR = ROOT_DIR
 misc.GPG_DIR = GPG_DIR
+misc.SHELL = SHELL
 database.ROOT_DIR = ROOT_DIR
 database.CACHE_DIR = CACHE_DIR
 database.LOCAL_DIR = LOCAL_DIR
@@ -183,6 +186,7 @@ class Local(object):
         misc.TIMEOUT = TIMEOUT
         misc.ROOT_DIR = ROOT_DIR
         misc.GPG_DIR = GPG_DIR
+        misc.SHELL = SHELL
         misc.CATCH = CATCH
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
@@ -300,6 +304,7 @@ class Remote(object):
         misc.TIMEOUT = TIMEOUT
         misc.ROOT_DIR = ROOT_DIR
         misc.GPG_DIR = GPG_DIR
+        misc.SHELL = SHELL
         misc.CATCH = CATCH
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
@@ -412,6 +417,7 @@ class Repo(object):
         misc.TIMEOUT = TIMEOUT
         misc.ROOT_DIR = ROOT_DIR
         misc.GPG_DIR = GPG_DIR
+        misc.SHELL = SHELL
         misc.CATCH = CATCH
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
@@ -549,6 +555,7 @@ class Source(object):
         misc.TIMEOUT = TIMEOUT
         misc.ROOT_DIR = ROOT_DIR
         misc.GPG_DIR = GPG_DIR
+        misc.SHELL = SHELL
         misc.CATCH = CATCH
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
@@ -975,7 +982,7 @@ class Source(object):
                 message.sub_critical(_('src_prepare() not defined'))
                 sys.exit(2)
 
-        misc.system_command((misc.whereis('bash'), '-e', '-c', \
+        misc.system_command((misc.whereis(SHELL), '-e', '-c', \
             'source %s && umask 0022 && src_prepare' % \
             self.srcbuild), cwd=self.source_dir)
 
@@ -991,7 +998,7 @@ class Source(object):
                 sys.exit(2)
 
         self.setup_environment()
-        misc.system_command((misc.whereis('bash'), '-e', '-c', \
+        misc.system_command((misc.whereis(SHELL), '-e', '-c', \
             'source %s && umask 0022 && src_compile' % \
             self.srcbuild), cwd=self.source_dir)
 
@@ -1007,7 +1014,7 @@ class Source(object):
                 sys.exit(2)
 
         self.setup_environment()
-        misc.system_command((misc.whereis('bash'), '-e', '-c', \
+        misc.system_command((misc.whereis(SHELL), '-e', '-c', \
             'source %s && umask 0022 && src_check' % \
             self.srcbuild), cwd=self.source_dir)
 
@@ -1032,7 +1039,7 @@ class Source(object):
                 misc.dir_create(instreal)
                 os.symlink(os.path.basename(instreal), instsym)
 
-        misc.system_command((misc.whereis('bash'), '-e', '-c', \
+        misc.system_command((misc.whereis(SHELL), '-e', '-c', \
             'source %s && umask 0022 && src_install' % \
             self.srcbuild), cwd=self.source_dir)
 
@@ -1721,6 +1728,7 @@ class Binary(Source):
         misc.TIMEOUT = TIMEOUT
         misc.ROOT_DIR = ROOT_DIR
         misc.GPG_DIR = GPG_DIR
+        misc.SHELL = SHELL
         misc.CATCH = CATCH
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
@@ -2047,6 +2055,7 @@ class Who(object):
         misc.TIMEOUT = TIMEOUT
         misc.ROOT_DIR = ROOT_DIR
         misc.GPG_DIR = GPG_DIR
+        misc.SHELL = SHELL
         misc.CATCH = CATCH
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR

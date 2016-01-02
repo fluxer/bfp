@@ -46,6 +46,7 @@ class Misc(object):
         self.CATCH = False
         self.SIGNPASS = None
         self.BUFFER = 10240
+        self.SHELL = 'bash'
         self.magic = Magic()
         self.python2 = False
         self.python3 = False
@@ -1055,14 +1056,14 @@ class Misc(object):
             self.typecheck(function, (types.StringTypes))
 
         if self.ROOT_DIR == '/':
-            self.system_command((self.whereis('bash'), '-e', '-c', \
+            self.system_command((self.whereis(self.SHELL), '-e', '-c', \
                 'source %s && %s' % (sfile, function)), cwd=self.ROOT_DIR)
         else:
             stmp = '%s/tmpscript' % self.ROOT_DIR
             shutil.copy(sfile, stmp)
             try:
-                self.system_chroot((self.whereis('bash', bchroot=True), '-e', \
-                    '-c', 'source /tmpscript && %s' % function))
+                self.system_chroot((self.whereis(self.SHELL, bchroot=True), \
+                    '-e', '-c', 'source /tmpscript && %s' % function))
             finally:
                 os.remove(stmp)
 

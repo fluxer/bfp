@@ -22,6 +22,7 @@ import libspm
 misc = libspm.misc
 database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
+misc.SHELL = libspm.SHELL
 
 app_version = "1.8.2 (cc6b9c0)"
 

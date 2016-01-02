@@ -44,9 +44,15 @@ try:
             setattr(namespace, self.dest, values)
 
     class OverrideGpgDir(argparse.Action):
-        ''' Override system root directory '''
+        ''' Override gpg home directory '''
         def __call__(self, parser, namespace, values, option_string=None):
             libspm.GPG_DIR = values
+            setattr(namespace, self.dest, values)
+
+    class OverrideShell(argparse.Action):
+        ''' Override which shell to use '''
+        def __call__(self, parser, namespace, values, option_string=None):
+            libspm.SHELL = values
             setattr(namespace, self.dest, values)
 
     class OverrideIgnore(argparse.Action):
@@ -375,6 +381,8 @@ try:
         help=_('Change system root directory'))
     parser.add_argument('--gpg', type=str, action=OverrideGpgDir, \
         help=_('Change GnuPG home directory'))
+    parser.add_argument('--shell', type=str, action=OverrideShell, \
+        help=_('Change which shell to use'))
     parser.add_argument('--ignore', type=str, action=OverrideIgnore, \
         help=_('Change ignored targets'))
     parser.add_argument('--sign', type=str, action=OverrideSign, \
@@ -504,6 +512,7 @@ try:
         message.sub_info(_('BUILD_DIR'), libspm.BUILD_DIR)
         message.sub_info(_('ROOT_DIR'), libspm.ROOT_DIR)
         message.sub_info(_('GPG_DIR'), libspm.GPG_DIR)
+        message.sub_info(_('SHELL'), libspm.SHELL)
         message.sub_info(_('IGNORE'), libspm.IGNORE)
         message.sub_info(_('SIGN'), libspm.SIGN)
         message.sub_info(_('NOTIFY'), libspm.NOTIFY)
