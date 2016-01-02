@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # pkg2src - Pkgfile to SRCBUILD convertor
-# Copyright (C) 2013-2015 Ivailo Monev (a.k.a SmiL3y)
+# Copyright (C) 2013-2016 Ivailo Monev (a.k.a SmiL3y)
 
 export LANG=C LC_ALL=C
 unset ALL_OFF BOLD BLUE GREEN RED YELLOW

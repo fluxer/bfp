@@ -449,7 +449,7 @@ SRCBUILDs or any other task requiring such.
 
 Ivailo Monev (a.k.a. SmiL3y) <xakepa10@gmail.com>
 
-Copyright (c) 2013-2015 Ivailo Monev licensed through custom license, see the
+Copyright (c) 2013-2016 Ivailo Monev licensed through custom license, see the
 COPYING file bundled with the source code.
 
 =head1 SEE ALSO
