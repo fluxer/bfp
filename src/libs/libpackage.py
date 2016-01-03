@@ -25,6 +25,7 @@ class Database(object):
         self.ROOT_DIR = '/'
         self.CACHE_DIR = '/var/cache/spm'
         self.REMOTE_CACHE = {}
+        self.ALIAS_CACHE = {}
         self.LOCAL_DIR = '/var/local/spm'
         self.LOCAL_CACHE = {}
         self.IGNORE = []
@@ -61,6 +62,27 @@ class Database(object):
                 self.REMOTE_CACHE[sdir] = self.srcbuild_parse(srcbuild)
             if self.NOTIFY:
                 notify.watch_add(sdir)
+        if self.NOTIFY:
+            notify.watch_add(metadir)
+        # print(sys.getsizeof(self.REMOTE_CACHE))
+
+    def _build_alias_cache(self):
+        ''' Build internal alias database cache '''
+        self.ALIAS_CACHE = {
+            'world': self.remote_all(basename=True),
+            'system': self.local_all(basename=True)
+        }
+
+        metadir = '%s/repositories' % self.CACHE_DIR
+        if not os.path.isdir(metadir):
+            return
+        for sfile in misc.list_files(metadir):
+            if '/.git/' in sfile or '/.svn/' in sfile:
+                continue
+            if sfile.endswith('.alias'):
+                self.ALIAS_CACHE[misc.file_name(sfile)] = misc.file_readsmart(sfile)
+            if self.NOTIFY:
+                notify.watch_add(os.path.dirname(sfile))
         if self.NOTIFY:
             notify.watch_add(metadir)
         # print(sys.getsizeof(self.REMOTE_CACHE))
@@ -287,10 +309,16 @@ class Database(object):
         if misc.python2:
             misc.typecheck(basename, (types.BooleanType))
 
-        aliases = ['world', 'system']
-        for sfile in misc.list_files('%s/repositories' % self.CACHE_DIR):
-            if sfile.endswith('.alias'):
-                aliases.append(misc.file_name(sfile, basename))
+        # rebuild cache on demand
+        recache = False
+        for wd, mask, cookie, name in notify.event_read():
+            recache = True
+        if not self.ALIAS_CACHE or recache:
+            self._build_alias_cache()
+
+        aliases = []
+        for alias in self.ALIAS_CACHE:
+            aliases.append(misc.file_name(sfile, basename))
         return sorted(aliases)
 
     def remote_alias(self, target):
@@ -298,13 +326,9 @@ class Database(object):
         if misc.python2:
             misc.typecheck(target, (types.StringTypes))
 
-        if target == 'world':
-            return self.remote_all(basename=True)
-        elif target == 'system':
-            return self.local_all(basename=True)
-        for alias in self.remote_aliases(basename=False):
-            if os.path.basename(target) == os.path.basename(alias):
-                return misc.file_readsmart('%s.alias' % alias)
+        for alias in self.remote_aliases():
+            if os.path.basename(target) == alias:
+                return self.ALIAS_CACHE[alias]
         # return consistent data
         return [target]
 
