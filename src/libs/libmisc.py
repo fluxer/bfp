@@ -497,12 +497,15 @@ class Misc(object):
             size += os.path.getsize(sfile)
         return size
 
-    def dir_current(self):
+    def dir_current(self, sdir='/'):
         ''' Get current directory with fallback '''
+        if self.python2:
+            self.typecheck(sdir, (types.StringTypes))
+
         try:
             cwd = os.getcwd()
         except OSError:
-            cwd = '/'
+            cwd = sdir
         return cwd
 
     def list_files(self, sdir, bcross=True, btopdown=True):
@@ -946,10 +949,8 @@ class Misc(object):
             self.typecheck(cwd, (types.NoneType, types.StringTypes))
             self.typecheck(sinput, (types.NoneType, types.StringTypes))
 
-        if not cwd:
+        if not cwd or not os.path.isdir(cwd):
             cwd = self.dir_current()
-        elif not os.path.isdir(cwd):
-            cwd = '/'
         if isinstance(command, str) and not bshell:
             command = shlex.split(command)
         stdin = None
@@ -989,10 +990,8 @@ class Misc(object):
             self.typecheck(bshell, (types.BooleanType))
             self.typecheck(cwd, (types.StringTypes))
 
-        if not cwd:
+        if not cwd or not os.path.isdir(cwd):
             cwd = self.dir_current()
-        elif not os.path.isdir(cwd):
-            cwd = '/'
         if isinstance(command, str) and not bshell:
             command = shlex.split(command)
         stderr = None
