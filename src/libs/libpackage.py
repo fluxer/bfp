@@ -318,7 +318,10 @@ class Database(object):
 
         aliases = []
         for alias in self.ALIAS_CACHE:
-            aliases.append(misc.file_name(sfile, basename))
+            if basename:
+                aliases.append(os.path.basename(alias))
+            else:
+                aliases.append(alias)
         return sorted(aliases)
 
     def remote_alias(self, target):
