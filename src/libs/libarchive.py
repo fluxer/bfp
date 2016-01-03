@@ -1,6 +1,8 @@
 #!/usr/bin/python2
 
 import os, sys, types, ctypes
+import libmisc
+misc = libmisc.Misc()
 
 try:
     lib = ctypes.cdll.LoadLibrary('libarchive.so')
@@ -139,7 +141,7 @@ class Libarchive(object):
         entry = self._entryNew()
         stat = os.stat(spath)
         # http://linux.die.net/man/2/stat
-        self.lib.archive_entry_set_pathname(entry, types.StringType(spath.replace(strip, '')))
+        self.lib.archive_entry_set_pathname(entry, types.StringType(misc.string_lstrip(spath, strip)))
         # self.lib.archive_entry_set_pathname(entry, spath)
         self.lib.archive_entry_set_size(entry, ctypes.c_int64(stat.st_size))
         # self.lib.archive_entry_set_filetype(entry)
