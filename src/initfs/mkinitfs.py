@@ -194,7 +194,7 @@ try:
             'mdev': ['-s'],
             'sort': ['-u'],
             'reboot': ['-f'],
-            'main': ('--install', '[-s]', 'touch,', 'xargs,', 'switch_root,', 'sync,'),
+            'main': ('--install', '[-s]', 'touch,', 'xargs,', 'switch_root,', 'sync,', 'blkid,'),
         }
         compatible = True
         for command in busycommands:
