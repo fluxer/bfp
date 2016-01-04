@@ -200,81 +200,35 @@ class Local(object):
         message.LOG_STATUS = [syslog.LOG_DEBUG, syslog.LOG_CRIT, syslog.LOG_ALERT]
         for target in database.local_all(basename=True):
             if re.search(self.pattern, target):
-                if self.do_name and self.plain:
-                    print(target)
-                elif self.do_name:
-                    message.sub_info(_('Name'), target)
+                metadata = database.local_metadata(target, 'all')
+                metadatamap = {
+                    'name': (_('Name'), self.do_name, target),
+                    'version': (_('Version'), self.do_version, metadata['version']),
+                    'release': (_('Release'), self.do_release, metadata['release']),
+                    'description': (_('Description'), self.do_description, metadata['description']),
+                    'depends': (_('Depends'), self.do_depends, ' '.join(metadata['depends'])),
+                    'optdepends': (_('Optional depends'), self.do_optdepends, ' '.join(metadata['optdepends'])),
+                    'autodepends': (_('Automatic depends'), self.do_autodepends, ' '.join(metadata['autodepends'])),
+                    'reverse': (_('Reverse depends'), self.do_reverse, lambda: ' '.join(database.local_rdepends(target))),
+                    'size': (_('Size'), self.do_size, metadata['size']),
+                    'footprint': (_('Footprint'), self.do_footprint, '\n'.join(metadata['footprint'])),
+                    'backup': (_('Backup'), self.do_backup, ' '.join(metadata['backup'])),
+                }
 
-                if self.do_version:
-                    data = database.local_metadata(target, 'version')
-                    if self.plain:
-                        print(data)
-                    else:
-                        message.sub_info(_('Version'), data)
-
-                if self.do_release:
-                    data = database.local_metadata(target, 'release')
-                    if self.plain:
-                        print(data)
-                    else:
-                        message.sub_info(_('Release'), data)
-
-                if self.do_description:
-                    data = database.local_metadata(target, 'description')
-                    if self.plain:
-                        print(data)
-                    else:
-                        message.sub_info(_('Description'), data)
-
-                if self.do_depends:
-                    data = ' '.join(database.local_metadata(target, 'depends'))
-                    if self.plain:
-                        print(data)
-                    else:
-                        message.sub_info(_('Depends'), data)
-
-                if self.do_optdepends:
-                    data = ' '.join(database.local_metadata(target, 'optdepends'))
-                    if self.plain:
-                        print(data)
-                    else:
-                        message.sub_info(_('Optional depends'), data)
-
-                if self.do_autodepends:
-                    data = ' '.join(database.local_metadata(target, 'autodepends'))
-                    if self.plain:
-                        print(data)
-                    else:
-                        message.sub_info(_('Automatic depends'), data)
-
-                if self.do_reverse:
-                    data = ' '.join(database.local_rdepends(target))
-                    if self.plain:
-                        print(data)
-                    else:
-                        message.sub_info(_('Reverse depends'), data)
-
-                if self.do_size:
-                    data = database.local_metadata(target, 'size')
-                    if self.plain:
-                        print(data)
-                    else:
-                        data = misc.string_unit(data, 'auto', True)
-                        message.sub_info(_('Size'), data)
-
-                if self.do_footprint:
-                    data = '\n'.join(database.local_metadata(target, 'footprint'))
-                    if self.plain:
-                        print(data)
-                    else:
-                        message.sub_info(_('Footprint'), data)
-
-                if self.do_backup:
-                    data = ' '.join(database.local_metadata(target, 'backup'))
-                    if self.plain:
-                        print(data)
-                    else:
-                        message.sub_info(_('Backup'), data)
+                for metadata in metadatamap:
+                    if metadatamap[metadata][1]:
+                        data = metadatamap[metadata][2]
+                        if self.plain:
+                            print(data)
+                        else:
+                            if metadata == 'reverse':
+                                # since the reverse dependencies data is
+                                # calculated every time and not static do it
+                                # only if there is a reason for it
+                                data = data()
+                            elif metadata == 'size':
+                                data = misc.string_unit(data, 'auto', True)
+                            message.sub_info(metadatamap[metadata][0], data)
         message.LOG_STATUS = msglogstatus
 
 
@@ -318,88 +272,29 @@ class Remote(object):
         message.LOG_STATUS = [syslog.LOG_DEBUG, syslog.LOG_CRIT, syslog.LOG_ALERT]
         for target in database.remote_all(basename=True):
             if re.search(self.pattern, target):
-                if self.do_name and self.plain:
-                    print(target)
-                elif self.do_name:
-                    message.sub_info(_('Name'), target)
+                metadata = database.remote_metadata(target, 'all')
+                metadatamap = {
+                    'name': (_('Name'), self.do_name, target),
+                    'version': (_('Version'), self.do_version, metadata['version']),
+                    'release': (_('Release'), self.do_release, metadata['release']),
+                    'description': (_('Description'), self.do_description, metadata['description']),
+                    'depends': (_('Depends'), self.do_depends, ' '.join(metadata['depends'])),
+                    'makedepends': (_('Make depends'), self.do_makedepends, ' '.join(metadata['makedepends'])),
+                    'optdepends': (_('Optional depends'), self.do_optdepends, ' '.join(metadata['optdepends'])),
+                    'checkdepends': (_('Check depends'), self.do_checkdepends, ' '.join(metadata['checkdepends'])),
+                    'sources': (_('Sources'), self.do_sources, ' '.join(metadata['sources'])),
+                    'pgpkeys': (_('PGP keys'), self.do_pgpkeys, ' '.join(metadata['pgpkeys'])),
+                    'options': (_('Options'), self.do_pgpkeys, ' '.join(metadata['options'])),
+                    'backup': (_('Backup'), self.do_backup, ' '.join(metadata['backup'])),
+                }
 
-                # asigning data variable only for the sake of readability
-                if self.do_version:
-                    data = database.remote_metadata(target, 'version')
-                    if self.plain:
-                        print(data)
-                    else:
-                        message.sub_info(_('Version'), data)
-
-                if self.do_release:
-                    data = database.remote_metadata(target, 'release')
-                    if self.plain:
-                        print(data)
-                    else:
-                        message.sub_info(_('Release'), data)
-
-                if self.do_description:
-                    data = database.remote_metadata(target, 'description')
-                    if self.plain:
-                        print(data)
-                    else:
-                        message.sub_info(_('Description'), data)
-
-                if self.do_depends:
-                    data = ' '.join(database.remote_metadata(target, 'depends'))
-                    if self.plain:
-                        print(data)
-                    else:
-                        message.sub_info(_('Depends'), data)
-
-                if self.do_makedepends:
-                    data = ' '.join(database.remote_metadata(target, 'makedepends'))
-                    if self.plain:
-                        print(data)
-                    else:
-                        message.sub_info(_('Make depends'), data)
-
-                if self.do_optdepends:
-                    data = ' '.join(database.remote_metadata(target, 'optdepends'))
-                    if self.plain:
-                        print(data)
-                    else:
-                        message.sub_info(_('Optional depends'), data)
-
-                if self.do_checkdepends:
-                    data = ' '.join(database.remote_metadata(target, 'checkdepends'))
-                    if self.plain:
-                        print(data)
-                    else:
-                        message.sub_info(_('Check depends'), data)
-
-                if self.do_sources:
-                    data = ' '.join(database.remote_metadata(target, 'sources'))
-                    if self.plain:
-                        print(data)
-                    else:
-                        message.sub_info(_('Sources'), data)
-
-                if self.do_pgpkeys:
-                    data = ' '.join(database.remote_metadata(target, 'pgpkeys'))
-                    if self.plain:
-                        print(data)
-                    else:
-                        message.sub_info(_('PGP keys'), data)
-
-                if self.do_options:
-                    data = ' '.join(database.remote_metadata(target, 'options'))
-                    if self.plain:
-                        print(data)
-                    else:
-                        message.sub_info(_('Options'), data)
-
-                if self.do_backup:
-                    data = ' '.join(database.remote_metadata(target, 'backup'))
-                    if self.plain:
-                        print(data)
-                    else:
-                        message.sub_info(_('Backup'), data)
+                for metadata in metadatamap:
+                    if metadatamap[metadata][1]:
+                        data = metadatamap[metadata][2]
+                        if self.plain:
+                            print(data)
+                        else:
+                            message.sub_info(metadatamap[metadata][0], data)
         message.LOG_STATUS = msglogstatus
 
 
