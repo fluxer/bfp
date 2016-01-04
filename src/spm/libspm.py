@@ -1442,11 +1442,7 @@ class Source(object):
             rdepends = database.local_rdepends(self.target_name)
 
             if rdepends and self.do_reverse:
-                break_free = False
                 for target in rdepends:
-                    # looping trough files will continue otherwise
-                    if break_free:
-                        break
                     message.sub_debug(_('Checking'), target)
                     dependencies = ''
                     for dep in database.local_metadata(target, 'autodepends'):
@@ -1454,7 +1450,6 @@ class Source(object):
                     dependencies = dependencies[:-1]
                     if dependencies and not database.local_belongs(dependencies, escape=False, exact=True):
                         self.autosource([target], automake=True)
-                        break_free = True
                         break
             elif rdepends:
                 message.sub_warning(_('Targets may need rebuild'), rdepends)
