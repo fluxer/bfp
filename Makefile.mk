@@ -76,7 +76,6 @@ stat:
 	$(CLOC) $(shell $(FIND) -type f -name '*.py' -o -name '*.sh')
 
 lint:
-	$(PYLINT) $(shell $(FIND) -type f -name '*.py' | \
-		$(GREP) -v -e libudev.py -e gui_ui.py)
+	$(PYLINT) $(shell $(FIND) -type f -name '*.py')
 
 .PHONY: all stat lint
