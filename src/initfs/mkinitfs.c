@@ -876,6 +876,7 @@ static char __pyx_k_DEBUG[] = "DEBUG";
 static char __pyx_k_Error[] = "Error";
 static char __pyx_k_IMAGE[] = "IMAGE";
 static char __pyx_k_STRIP[] = "STRIP";
+static char __pyx_k_blkid[] = "blkid,";
 static char __pyx_k_bzip2[] = "bzip2";
 static char __pyx_k_bzipf[] = "bzipf";
 static char __pyx_k_copy2[] = "copy2";
@@ -1047,7 +1048,7 @@ static char __pyx_k_literal_eval[] = "literal_eval";
 static char __pyx_k_recovery_img[] = "-recovery.img";
 static char __pyx_k_s_ld_so_conf[] = "%s/ld.so.conf";
 static char __pyx_k_sub_critical[] = "sub_critical";
-static char __pyx_k_1_9_1_8f181a7[] = "1.9.1 (8f181a7)";
+static char __pyx_k_1_9_1_570d0b2[] = "1.9.1 (570d0b2)";
 static char __pyx_k_Copying_files[] = "Copying files";
 static char __pyx_k_Decompressing[] = "Decompressing";
 static char __pyx_k_compression_2[] = "--compression";
@@ -1120,7 +1121,7 @@ static char __pyx_k_Unable_to_find_modules_directory[] = "Unable to find modules
 static PyObject *__pyx_kp_s_;
 static PyObject *__pyx_kp_s_0;
 static PyObject *__pyx_kp_s_1;
-static PyObject *__pyx_kp_s_1_9_1_8f181a7;
+static PyObject *__pyx_kp_s_1_9_1_570d0b2;
 static PyObject *__pyx_kp_s_5;
 static PyObject *__pyx_kp_s_640;
 static PyObject *__pyx_kp_s_664;
@@ -1228,6 +1229,7 @@ static PyObject *__pyx_n_s_ast;
 static PyObject *__pyx_kp_s_b;
 static PyObject *__pyx_n_s_base;
 static PyObject *__pyx_n_s_basename;
+static PyObject *__pyx_kp_s_blkid;
 static PyObject *__pyx_kp_s_boot_initramfs_s_img;
 static PyObject *__pyx_n_s_bshell;
 static PyObject *__pyx_n_s_busybox;
@@ -4515,7 +4517,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_, __pyx_k_, sizeof(__pyx_k_), 0, 0, 1, 0},
   {&__pyx_kp_s_0, __pyx_k_0, sizeof(__pyx_k_0), 0, 0, 1, 0},
   {&__pyx_kp_s_1, __pyx_k_1, sizeof(__pyx_k_1), 0, 0, 1, 0},
-  {&__pyx_kp_s_1_9_1_8f181a7, __pyx_k_1_9_1_8f181a7, sizeof(__pyx_k_1_9_1_8f181a7), 0, 0, 1, 0},
+  {&__pyx_kp_s_1_9_1_570d0b2, __pyx_k_1_9_1_570d0b2, sizeof(__pyx_k_1_9_1_570d0b2), 0, 0, 1, 0},
   {&__pyx_kp_s_5, __pyx_k_5, sizeof(__pyx_k_5), 0, 0, 1, 0},
   {&__pyx_kp_s_640, __pyx_k_640, sizeof(__pyx_k_640), 0, 0, 1, 0},
   {&__pyx_kp_s_664, __pyx_k_664, sizeof(__pyx_k_664), 0, 0, 1, 0},
@@ -4623,6 +4625,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_b, __pyx_k_b, sizeof(__pyx_k_b), 0, 0, 1, 0},
   {&__pyx_n_s_base, __pyx_k_base, sizeof(__pyx_k_base), 0, 0, 1, 1},
   {&__pyx_n_s_basename, __pyx_k_basename, sizeof(__pyx_k_basename), 0, 0, 1, 1},
+  {&__pyx_kp_s_blkid, __pyx_k_blkid, sizeof(__pyx_k_blkid), 0, 0, 1, 0},
   {&__pyx_kp_s_boot_initramfs_s_img, __pyx_k_boot_initramfs_s_img, sizeof(__pyx_k_boot_initramfs_s_img), 0, 0, 1, 0},
   {&__pyx_n_s_bshell, __pyx_k_bshell, sizeof(__pyx_k_bshell), 0, 0, 1, 1},
   {&__pyx_n_s_busybox, __pyx_k_busybox, sizeof(__pyx_k_busybox), 0, 0, 1, 1},
@@ -5223,11 +5226,11 @@ static int __Pyx_InitCachedConstants(void) {
   /* "mkinitfs.py":197
  *             'sort': ['-u'],
  *             'reboot': ['-f'],
- *             'main': ('--install', '[-s]', 'touch,', 'xargs,', 'switch_root,', 'sync,'),             # <<<<<<<<<<<<<<
+ *             'main': ('--install', '[-s]', 'touch,', 'xargs,', 'switch_root,', 'sync,', 'blkid,'),             # <<<<<<<<<<<<<<
  *         }
  *         compatible = True
  */
-  __pyx_tuple__39 = PyTuple_Pack(6, __pyx_kp_s_install, __pyx_kp_s_s_2, __pyx_kp_s_touch, __pyx_kp_s_xargs, __pyx_kp_s_switch_root, __pyx_kp_s_sync); if (unlikely(!__pyx_tuple__39)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 197; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_tuple__39 = PyTuple_Pack(7, __pyx_kp_s_install, __pyx_kp_s_s_2, __pyx_kp_s_touch, __pyx_kp_s_xargs, __pyx_kp_s_switch_root, __pyx_kp_s_sync, __pyx_kp_s_blkid); if (unlikely(!__pyx_tuple__39)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 197; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__39);
   __Pyx_GIVEREF(__pyx_tuple__39);
 
@@ -5821,7 +5824,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  * 
  * import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast, re             # <<<<<<<<<<<<<<
  * 
- * app_version = "1.9.1 (8f181a7)"
+ * app_version = "1.9.1 (570d0b2)"
  */
   __pyx_t_1 = __Pyx_Import(__pyx_n_s_sys, 0, -1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 3; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -5871,14 +5874,14 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
   /* "mkinitfs.py":5
  * import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast, re
  * 
- * app_version = "1.9.1 (8f181a7)"             # <<<<<<<<<<<<<<
+ * app_version = "1.9.1 (570d0b2)"             # <<<<<<<<<<<<<<
  * 
  * tmpdir = None
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_9_1_8f181a7) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_9_1_570d0b2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "mkinitfs.py":7
- * app_version = "1.9.1 (8f181a7)"
+ * app_version = "1.9.1 (570d0b2)"
  * 
  * tmpdir = None             # <<<<<<<<<<<<<<
  * keep = False
@@ -8322,7 +8325,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  *             'mdev': ['-s'],
  *             'sort': ['-u'],             # <<<<<<<<<<<<<<
  *             'reboot': ['-f'],
- *             'main': ('--install', '[-s]', 'touch,', 'xargs,', 'switch_root,', 'sync,'),
+ *             'main': ('--install', '[-s]', 'touch,', 'xargs,', 'switch_root,', 'sync,', 'blkid,'),
  */
           __pyx_t_9 = PyList_New(1); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 195; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
           __Pyx_GOTREF(__pyx_t_9);
@@ -8336,7 +8339,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  *             'mdev': ['-s'],
  *             'sort': ['-u'],
  *             'reboot': ['-f'],             # <<<<<<<<<<<<<<
- *             'main': ('--install', '[-s]', 'touch,', 'xargs,', 'switch_root,', 'sync,'),
+ *             'main': ('--install', '[-s]', 'touch,', 'xargs,', 'switch_root,', 'sync,', 'blkid,'),
  *         }
  */
           __pyx_t_9 = PyList_New(1); if (unlikely(!__pyx_t_9)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 196; __pyx_clineno = __LINE__; goto __pyx_L5_error;}
@@ -8350,7 +8353,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           /* "mkinitfs.py":197
  *             'sort': ['-u'],
  *             'reboot': ['-f'],
- *             'main': ('--install', '[-s]', 'touch,', 'xargs,', 'switch_root,', 'sync,'),             # <<<<<<<<<<<<<<
+ *             'main': ('--install', '[-s]', 'touch,', 'xargs,', 'switch_root,', 'sync,', 'blkid,'),             # <<<<<<<<<<<<<<
  *         }
  *         compatible = True
  */
@@ -8359,7 +8362,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
           /* "mkinitfs.py":199
- *             'main': ('--install', '[-s]', 'touch,', 'xargs,', 'switch_root,', 'sync,'),
+ *             'main': ('--install', '[-s]', 'touch,', 'xargs,', 'switch_root,', 'sync,', 'blkid,'),
  *         }
  *         compatible = True             # <<<<<<<<<<<<<<
  *         for command in busycommands:
