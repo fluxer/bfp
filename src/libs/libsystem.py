@@ -1,6 +1,6 @@
 #!/usr/bin/python2
 
-import os, subprocess, libmisc
+import os, glob, subprocess, libmisc
 misc = libmisc.Misc()
 
 '''
@@ -123,19 +123,11 @@ class Power(object):
 
     def get_cpus(self):
         ''' Get CPU devices '''
-        cpus = []
-        for sdir in os.listdir('/sys/devices/system/cpu/'):
-            if misc.string_search('cpu\d', sdir, exact=True, escape=False):
-                cpus.append('/sys/devices/system/cpu/%s' % sdir)
-        return cpus
+        return glob.glob('/sys/devices/system/cpu/cpu[0-9]*')
 
     def get_backlights(self):
         ''' Get backlight devices '''
-        backlights = []
-        for sdir in os.listdir('/sys/class/backlight'):
-            if sdir.startswith('acpi_'):
-                backlights.append('/sys/class/backlight/%s' % sdir)
-        return backlights
+        return glob.glob('/sys/class/backlight/acpi_*')
 
     def get_battery_capacity(self):
         ''' Get battery capacity '''
