@@ -12,10 +12,6 @@ DOCDIR = $(SHAREDIR)/doc
 SITEDIR = $(shell $(PYTHON) -c "import site; print(site.getsitepackages()[0])")
 BASHCOMPLETIONDIR = /etc/bash_completion.d
 LOCALEDIR = $(SHAREDIR)/locale
-DBSYSTEMDIR = /etc/dbus-1/system.d/
-DBSERVICEDIR = $(SHAREDIR)/dbus-1/system-services
-APPLICATIONSDIR = $(SHAREDIR)/applications
-AUTOSTARTDIR = /etc/xdg/autostart
 INITDIR = /etc/init.d
 
 PYTHON_VERSION = $(shell $(PYTHON) -c "import sys; print(sys.version[:3])")
@@ -28,6 +24,7 @@ BASH = bash
 GREP = grep
 FIND = find
 SED = sed
+UNIQ = uniq
 CC ?= gcc
 ifeq ($(GIT_VERSION),stable)
     STRIP = echo "Strip ignored on stable build, "
@@ -43,7 +40,6 @@ MSGMERGE = msgmerge
 MSGATTRIB = msgattrib
 MSGFMT = msgfmt
 POD2MAN = pod2man
-PYUIC = pyuic4
 CLOC = cloc
 
 ifneq ($(shell which python2.7),)
