@@ -1267,6 +1267,10 @@ class UDev(object):
         self._udev_device_get_action.restype = ctypes.c_char_p
         self._udev_device_get_action.argtypes = [ctypes.c_void_p]
 
+    def __exit__(self, type, value, traceback):
+        if self.udev:
+            self.libudev.udev_unref(self.udev)
+
     def get_property(self, dev, tag):
         ''' Get property of device '''
         return self._udev_device_get_property_value(dev, tag)
@@ -1282,10 +1286,6 @@ class UDev(object):
     def get_action(self, dev):
         ''' Get action of device '''
         return self._udev_device_get_action(dev)
-
-    def __exit__(self, type, value, traceback):
-        if self.udev:
-            self.libudev.udev_unref(self.udev)
 
     def error(self):
         ''' Get last error as string '''
