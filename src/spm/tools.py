@@ -26,7 +26,7 @@ database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 misc.SHELL = libspm.SHELL
 
-app_version = "1.9.1 (99a95a8)"
+app_version = "1.9.1 (9390a60)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -1425,10 +1425,10 @@ if __name__ == '__main__':
     except (HTTPError, URLError) as detail:
         if hasattr(detail, 'url') and hasattr(detail, 'code'):
             # misc.fetch() provides the URL, HTTPError provides the code
-            message.critical('URLLIB', '%s, %s (%s)' % (detail.url, detail.reason, \
+            message.critical('URLLIB', "%s: '%s' (%s)" % (detail.url, detail.reason, \
                 detail.code))
         elif hasattr(detail, 'url'):
-            message.critical('URLLIB', '%s, %s' % (detail.url, detail.reason))
+            message.critical('URLLIB', "%s: '%s'" % (detail.url, detail.reason))
         else:
             message.critical('URLLIB', detail)
         retvalue = 5
