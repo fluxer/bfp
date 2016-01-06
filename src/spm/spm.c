@@ -801,7 +801,7 @@ static char __pyx_k_end[] = "end";
 static char __pyx_k_gpg[] = "--gpg";
 static char __pyx_k_m_2[] = "m";
 static char __pyx_k_man[] = "--man";
-static char __pyx_k_s_s[] = "%s, %s";
+static char __pyx_k_s_s[] = "%s: '%s'";
 static char __pyx_k_spm[] = "spm";
 static char __pyx_k_sys[] = "sys";
 static char __pyx_k_upx[] = "--upx";
@@ -866,7 +866,7 @@ static char __pyx_k_print[] = "print";
 static char __pyx_k_prune[] = "--prune";
 static char __pyx_k_purge[] = "--purge";
 static char __pyx_k_rpath[] = "--rpath";
-static char __pyx_k_s_s_s[] = "%s, %s (%s)";
+static char __pyx_k_s_s_s[] = "%s: '%s' (%s)";
 static char __pyx_k_shell[] = "--shell";
 static char __pyx_k_split[] = "split";
 static char __pyx_k_stdin[] = "stdin";
@@ -1064,7 +1064,7 @@ static char __pyx_k_literal_eval[] = "literal_eval";
 static char __pyx_k_local_parser[] = "local_parser";
 static char __pyx_k_optdepends_2[] = "optdepends";
 static char __pyx_k_urllib_error[] = "urllib.error";
-static char __pyx_k_1_9_1_99a95a8[] = "1.9.1 (99a95a8)";
+static char __pyx_k_1_9_1_8456647[] = "1.9.1 (8456647)";
 static char __pyx_k_Change_CFLAGS[] = "Change CFLAGS";
 static char __pyx_k_OverrideChost[] = "OverrideChost";
 static char __pyx_k_OverrideDebug[] = "OverrideDebug";
@@ -1276,7 +1276,7 @@ static char __pyx_k_Short_for_clean_fetch_prepare_co[] = "Short for clean, fetch
 static char __pyx_k_Short_for_clean_sync_prune_and_u[] = "Short for clean, sync, prune and update";
 static char __pyx_k_Short_for_fetch_prepare_and_merg[] = "Short for fetch, prepare and merge";
 static PyObject *__pyx_kp_s_;
-static PyObject *__pyx_kp_s_1_9_1_99a95a8;
+static PyObject *__pyx_kp_s_1_9_1_8456647;
 static PyObject *__pyx_kp_s_2;
 static PyObject *__pyx_kp_s_3;
 static PyObject *__pyx_kp_s_A;
@@ -7544,7 +7544,7 @@ static struct PyModuleDef __pyx_moduledef = {
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_, __pyx_k_, sizeof(__pyx_k_), 0, 0, 1, 0},
-  {&__pyx_kp_s_1_9_1_99a95a8, __pyx_k_1_9_1_99a95a8, sizeof(__pyx_k_1_9_1_99a95a8), 0, 0, 1, 0},
+  {&__pyx_kp_s_1_9_1_8456647, __pyx_k_1_9_1_8456647, sizeof(__pyx_k_1_9_1_8456647), 0, 0, 1, 0},
   {&__pyx_kp_s_2, __pyx_k_2, sizeof(__pyx_k_2), 0, 0, 1, 0},
   {&__pyx_kp_s_3, __pyx_k_3, sizeof(__pyx_k_3), 0, 0, 1, 0},
   {&__pyx_kp_s_A, __pyx_k_A, sizeof(__pyx_k_A), 0, 0, 1, 0},
@@ -12232,7 +12232,7 @@ PyMODINIT_FUNC PyInit_spm(void)
  * import libmessage
  * message = libmessage.Message()             # <<<<<<<<<<<<<<
  * 
- * app_version = "1.9.1 (99a95a8)"
+ * app_version = "1.9.1 (8456647)"
  */
   __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_libmessage); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 17; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_3);
@@ -12263,11 +12263,11 @@ PyMODINIT_FUNC PyInit_spm(void)
   /* "spm.py":19
  * message = libmessage.Message()
  * 
- * app_version = "1.9.1 (99a95a8)"             # <<<<<<<<<<<<<<
+ * app_version = "1.9.1 (8456647)"             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_9_1_99a95a8) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_9_1_8456647) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 19; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "spm.py":22
  * 
@@ -25699,7 +25699,7 @@ PyMODINIT_FUNC PyInit_spm(void)
  * except (HTTPError, URLError) as detail:
  *     if hasattr(detail, 'url') and hasattr(detail, 'code'):             # <<<<<<<<<<<<<<
  *         # misc.fetch() provides the URL, HTTPError provides the code
- *         message.critical('URLLIB', '%s, %s (%s)' % (detail.url, detail.reason, \
+ *         message.critical('URLLIB', "%s: '%s' (%s)" % (detail.reason, detail.url, \
  */
         __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_detail); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 631; __pyx_clineno = __LINE__; goto __pyx_L8_except_error;}
         __Pyx_GOTREF(__pyx_t_17);
@@ -25723,7 +25723,7 @@ PyMODINIT_FUNC PyInit_spm(void)
           /* "spm.py":633
  *     if hasattr(detail, 'url') and hasattr(detail, 'code'):
  *         # misc.fetch() provides the URL, HTTPError provides the code
- *         message.critical('URLLIB', '%s, %s (%s)' % (detail.url, detail.reason, \             # <<<<<<<<<<<<<<
+ *         message.critical('URLLIB', "%s: '%s' (%s)" % (detail.reason, detail.url, \             # <<<<<<<<<<<<<<
  *             detail.code))
  *     elif hasattr(detail, 'url'):
  */
@@ -25734,21 +25734,21 @@ PyMODINIT_FUNC PyInit_spm(void)
           __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
           __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_detail); if (unlikely(!__pyx_t_21)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 633; __pyx_clineno = __LINE__; goto __pyx_L8_except_error;}
           __Pyx_GOTREF(__pyx_t_21);
-          __pyx_t_25 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_url); if (unlikely(!__pyx_t_25)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 633; __pyx_clineno = __LINE__; goto __pyx_L8_except_error;}
+          __pyx_t_25 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_reason); if (unlikely(!__pyx_t_25)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 633; __pyx_clineno = __LINE__; goto __pyx_L8_except_error;}
           __Pyx_GOTREF(__pyx_t_25);
           __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
           __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_detail); if (unlikely(!__pyx_t_21)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 633; __pyx_clineno = __LINE__; goto __pyx_L8_except_error;}
           __Pyx_GOTREF(__pyx_t_21);
-          __pyx_t_15 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_reason); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 633; __pyx_clineno = __LINE__; goto __pyx_L8_except_error;}
+          __pyx_t_15 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_url); if (unlikely(!__pyx_t_15)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 633; __pyx_clineno = __LINE__; goto __pyx_L8_except_error;}
           __Pyx_GOTREF(__pyx_t_15);
           __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
 
           /* "spm.py":634
  *         # misc.fetch() provides the URL, HTTPError provides the code
- *         message.critical('URLLIB', '%s, %s (%s)' % (detail.url, detail.reason, \
+ *         message.critical('URLLIB', "%s: '%s' (%s)" % (detail.reason, detail.url, \
  *             detail.code))             # <<<<<<<<<<<<<<
  *     elif hasattr(detail, 'url'):
- *         message.critical('URLLIB', '%s, %s' % (detail.url, detail.reason))
+ *         message.critical('URLLIB', "%s: '%s'" % (detail.reason, detail.url))
  */
           __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_detail); if (unlikely(!__pyx_t_21)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 634; __pyx_clineno = __LINE__; goto __pyx_L8_except_error;}
           __Pyx_GOTREF(__pyx_t_21);
@@ -25759,7 +25759,7 @@ PyMODINIT_FUNC PyInit_spm(void)
           /* "spm.py":633
  *     if hasattr(detail, 'url') and hasattr(detail, 'code'):
  *         # misc.fetch() provides the URL, HTTPError provides the code
- *         message.critical('URLLIB', '%s, %s (%s)' % (detail.url, detail.reason, \             # <<<<<<<<<<<<<<
+ *         message.critical('URLLIB', "%s: '%s' (%s)" % (detail.reason, detail.url, \             # <<<<<<<<<<<<<<
  *             detail.code))
  *     elif hasattr(detail, 'url'):
  */
@@ -25811,16 +25811,16 @@ PyMODINIT_FUNC PyInit_spm(void)
  * except (HTTPError, URLError) as detail:
  *     if hasattr(detail, 'url') and hasattr(detail, 'code'):             # <<<<<<<<<<<<<<
  *         # misc.fetch() provides the URL, HTTPError provides the code
- *         message.critical('URLLIB', '%s, %s (%s)' % (detail.url, detail.reason, \
+ *         message.critical('URLLIB', "%s: '%s' (%s)" % (detail.reason, detail.url, \
  */
           goto __pyx_L34;
         }
 
         /* "spm.py":635
- *         message.critical('URLLIB', '%s, %s (%s)' % (detail.url, detail.reason, \
+ *         message.critical('URLLIB', "%s: '%s' (%s)" % (detail.reason, detail.url, \
  *             detail.code))
  *     elif hasattr(detail, 'url'):             # <<<<<<<<<<<<<<
- *         message.critical('URLLIB', '%s, %s' % (detail.url, detail.reason))
+ *         message.critical('URLLIB', "%s: '%s'" % (detail.reason, detail.url))
  *     else:
  */
         __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_detail); if (unlikely(!__pyx_t_17)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 635; __pyx_clineno = __LINE__; goto __pyx_L8_except_error;}
@@ -25833,7 +25833,7 @@ PyMODINIT_FUNC PyInit_spm(void)
           /* "spm.py":636
  *             detail.code))
  *     elif hasattr(detail, 'url'):
- *         message.critical('URLLIB', '%s, %s' % (detail.url, detail.reason))             # <<<<<<<<<<<<<<
+ *         message.critical('URLLIB', "%s: '%s'" % (detail.reason, detail.url))             # <<<<<<<<<<<<<<
  *     else:
  *         message.critical('URLLIB', detail)
  */
@@ -25844,12 +25844,12 @@ PyMODINIT_FUNC PyInit_spm(void)
           __Pyx_DECREF(__pyx_t_23); __pyx_t_23 = 0;
           __pyx_t_23 = __Pyx_GetModuleGlobalName(__pyx_n_s_detail); if (unlikely(!__pyx_t_23)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 636; __pyx_clineno = __LINE__; goto __pyx_L8_except_error;}
           __Pyx_GOTREF(__pyx_t_23);
-          __pyx_t_20 = __Pyx_PyObject_GetAttrStr(__pyx_t_23, __pyx_n_s_url); if (unlikely(!__pyx_t_20)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 636; __pyx_clineno = __LINE__; goto __pyx_L8_except_error;}
+          __pyx_t_20 = __Pyx_PyObject_GetAttrStr(__pyx_t_23, __pyx_n_s_reason); if (unlikely(!__pyx_t_20)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 636; __pyx_clineno = __LINE__; goto __pyx_L8_except_error;}
           __Pyx_GOTREF(__pyx_t_20);
           __Pyx_DECREF(__pyx_t_23); __pyx_t_23 = 0;
           __pyx_t_23 = __Pyx_GetModuleGlobalName(__pyx_n_s_detail); if (unlikely(!__pyx_t_23)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 636; __pyx_clineno = __LINE__; goto __pyx_L8_except_error;}
           __Pyx_GOTREF(__pyx_t_23);
-          __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_23, __pyx_n_s_reason); if (unlikely(!__pyx_t_21)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 636; __pyx_clineno = __LINE__; goto __pyx_L8_except_error;}
+          __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_23, __pyx_n_s_url); if (unlikely(!__pyx_t_21)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 636; __pyx_clineno = __LINE__; goto __pyx_L8_except_error;}
           __Pyx_GOTREF(__pyx_t_21);
           __Pyx_DECREF(__pyx_t_23); __pyx_t_23 = 0;
           __pyx_t_23 = PyTuple_New(2); if (unlikely(!__pyx_t_23)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 636; __pyx_clineno = __LINE__; goto __pyx_L8_except_error;}
@@ -25893,17 +25893,17 @@ PyMODINIT_FUNC PyInit_spm(void)
           __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
 
           /* "spm.py":635
- *         message.critical('URLLIB', '%s, %s (%s)' % (detail.url, detail.reason, \
+ *         message.critical('URLLIB', "%s: '%s' (%s)" % (detail.reason, detail.url, \
  *             detail.code))
  *     elif hasattr(detail, 'url'):             # <<<<<<<<<<<<<<
- *         message.critical('URLLIB', '%s, %s' % (detail.url, detail.reason))
+ *         message.critical('URLLIB', "%s: '%s'" % (detail.reason, detail.url))
  *     else:
  */
           goto __pyx_L34;
         }
 
         /* "spm.py":638
- *         message.critical('URLLIB', '%s, %s' % (detail.url, detail.reason))
+ *         message.critical('URLLIB', "%s: '%s'" % (detail.reason, detail.url))
  *     else:
  *         message.critical('URLLIB', detail)             # <<<<<<<<<<<<<<
  *     retvalue = 5
