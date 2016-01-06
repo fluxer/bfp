@@ -7,9 +7,11 @@ import sys, os, argparse, ast, subprocess, tarfile, zipfile, shutil, re
 if sys.version < '3':
     import ConfigParser as configparser
     from urllib2 import HTTPError
+    from urllib2 import URLError
 else:
     import configparser
     from urllib.error import HTTPError
+    from urllib.error import URLError
 
 import libmessage
 message = libmessage.Message()
@@ -625,11 +627,13 @@ except configparser.Error as detail:
 except subprocess.CalledProcessError as detail:
     message.critical('SUBPROCESS', detail)
     retvalue = 4
-except HTTPError as detail:
-    if hasattr(detail, 'url'):
-        # misc.fetch() provides additional information
-        message.critical('URLLIB', '%s %s (%s)' % (detail.url, detail.reason, \
+except (HTTPError, URLError) as detail:
+    if hasattr(detail, 'url') and hasattr(detail, 'code'):
+        # misc.fetch() provides the URL, HTTPError provides the code
+        message.critical('URLLIB', '%s, %s (%s)' % (detail.url, detail.reason, \
             detail.code))
+    elif hasattr(detail, 'url'):
+        message.critical('URLLIB', '%s, %s' % (detail.url, detail.reason))
     else:
         message.critical('URLLIB', detail)
     retvalue = 5

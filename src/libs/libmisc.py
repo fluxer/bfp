@@ -26,12 +26,14 @@ if int(sys.version_info[0]) < 3:
     from urlparse import urlparse
     from urllib2 import urlopen
     from urllib2 import Request
+    from urllib2 import HTTPError
     from urllib2 import URLError
     from httplib import BadStatusLine
 else:
     from urllib.parse import urlparse
     from urllib.request import urlopen
     from urllib.request import Request
+    from urllib.error import HTTPError
     from urllib.error import URLError
     from http.client import BadStatusLine
 
@@ -621,7 +623,7 @@ class Misc(object):
                 r = self.fetch_request(url)
                 r.close()
                 return True
-            except (URLError, BadStatusLine):
+            except (HTTPError, URLError, BadStatusLine):
                 pass
         return False
 
@@ -644,15 +646,14 @@ class Misc(object):
         else:
             return urlopen(request, timeout=self.TIMEOUT)
 
-    def fetch_plain(self, surl, sfile, iretry=3):
-        ''' Download file, iretry is passed internally!
+    def fetch_plain(self, surl, sfile):
+        ''' Download file
 
             resume, https and (not so much) pretty printing during the download
             process is all that it can do for you '''
         if self.python2:
             self.typecheck(surl, (types.StringTypes))
             self.typecheck(sfile, (types.StringTypes))
-            self.typecheck(iretry, (types.IntType))
 
         if self.OFFLINE:
             return
@@ -700,12 +701,6 @@ class Misc(object):
                 # in Python 3000 that would be print(blah, end='')
                 sys.stdout.write('\r' * len(msg))
                 sys.stdout.flush()
-        except URLError as detail:
-            if not iretry == 0:
-                self.fetch(surl, sfile, iretry-1)
-            else:
-                detail.url = surl
-                raise detail
         finally:
             self.file_write(last, rsize)
             sys.stdout.write('\n')
@@ -791,6 +786,7 @@ class Misc(object):
             mymirrors.pop(0)
         else:
             snewurl = surl
+
         try:
             # mirrors are not supported for VCS repos on purpose
             if surl.startswith('git://') or sbase.endswith('.git'):
@@ -801,12 +797,13 @@ class Misc(object):
                 self.fetch_rsync(surl, destination)
             elif snewurl.startswith(('http://', 'https://', 'ftp://', \
                 'ftps://')):
-                self.fetch_plain(snewurl, destination, 0)
+                self.fetch_plain(snewurl, destination)
             else:
                 raise Exception('Unsupported URL', surl)
-        except URLError as detail:
+        except (HTTPError, URLError) as detail:
             if not iretry == 0:
                 return self.fetch(surl, destination, mymirrors, ssuffix, iretry-1)
+            setattr(detail, 'url', surl)
             raise detail
 
     def archive_supported(self, sfile):
