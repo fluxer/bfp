@@ -6,7 +6,7 @@ message.DEBUG = True
 misc = libmisc.Misc()
 udev = libmisc.UDev()
 
-app_version = "1.9.1 (c5a124e)"
+app_version = "1.9.1 (99a95a8)"
 
 class AHWS(object):
     def __init__(self):
