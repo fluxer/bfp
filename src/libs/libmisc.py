@@ -1176,7 +1176,7 @@ class Inotify(object):
 
 class Magic(object):
     ''' Magic wrapper '''
-    def __init__(self, flags=None):
+    def __init__(self):
         self.NONE = 0x000000            # No flags
         self.DEBUG = 0x000001           # Turn on debugging
         self.SYMLINK = 0x000002         # Follow symlinks
@@ -1207,10 +1207,8 @@ class Magic(object):
 
         libmagic = ctypes.util.find_library('magic')
         self.libmagic = ctypes.CDLL(libmagic, use_errno=True)
-        if not flags:
-            flags = self.MIME_TYPE | self.PRESERVE_ATIME | \
-                self.NO_CHECK_ENCODING # | self.NO_CHECK_COMPRESS | self.NO_CHECK_TAR
-        self.flags = flags
+        self.flags = self.MIME_TYPE | self.PRESERVE_ATIME | \
+            self.NO_CHECK_ENCODING # | self.NO_CHECK_COMPRESS | self.NO_CHECK_TAR
         self.cookie = self.libmagic.magic_open(self.flags)
         self.libmagic.magic_load(self.cookie, None)
 
