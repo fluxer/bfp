@@ -26,6 +26,10 @@ FIND = find
 SED = sed
 UNIQ = uniq
 CC ?= gcc
+CFLAGS ?= $(shell $(PYTHON)-config --cflags)
+ifeq ($(shell uname -m),x86_64)
+	CFLAGS += -fPIC
+endif
 ifeq ($(GIT_VERSION),stable)
     STRIP = echo "Strip ignored on stable build, "
 else

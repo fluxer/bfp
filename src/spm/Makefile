@@ -1,9 +1,9 @@
 include ../../Makefile.mk
 
 all: clean bump
-	$(CC) -shared libspm.c $(shell $(PYTHON)-config --includes --libs) -o libspm.so
-	$(CC) spm.c $(shell $(PYTHON)-config --includes --libs) -o spm.exe
-	$(CC) tools.c $(shell $(PYTHON)-config --includes --libs) -o tools.exe
+	$(CC) -shared libspm.c $(shell $(PYTHON)-config --includes --libs) $(CFLAGS) -o libspm.so
+	$(CC) spm.c $(shell $(PYTHON)-config --includes --libs)  $(CFLAGS) -o spm.exe
+	$(CC) tools.c $(shell $(PYTHON)-config --includes --libs)  $(CFLAGS) -o tools.exe
 	$(STRIP) *.exe *.so
 
 sources: bump

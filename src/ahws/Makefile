@@ -1,7 +1,7 @@
 include ../../Makefile.mk
 
 all: clean
-	$(CC) ahws.c $(shell $(PYTHON)-config --includes --libs $(PYTHON)) -o ahws.exe
+	$(CC) ahws.c $(shell $(PYTHON)-config --includes --libs) $(CFLAGS) -o ahws.exe
 	$(STRIP) *.exe
 
 sources: bump

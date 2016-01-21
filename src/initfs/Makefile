@@ -1,8 +1,8 @@
 include ../../Makefile.mk
 
 all: clean
-	$(CC) mkinitfs.c $(shell $(PYTHON)-config --includes --libs) -o mkinitfs.exe
-	$(CC) lsinitfs.c $(shell $(PYTHON)-config --includes --libs) -o lsinitfs.exe
+	$(CC) mkinitfs.c $(shell $(PYTHON)-config --includes --libs) $(CFLAGS) -o mkinitfs.exe
+	$(CC) lsinitfs.c $(shell $(PYTHON)-config --includes --libs) $(CFLAGS) -o lsinitfs.exe
 	$(STRIP) *.exe
 
 sources: bump

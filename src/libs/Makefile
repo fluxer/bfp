@@ -1,11 +1,11 @@
 include ../../Makefile.mk
 
 all: clean
-	$(CC) -shared libarchive.c $(shell $(PYTHON)-config --includes --libs) -o libarchive.so
-	$(CC) -shared libmessage.c $(shell $(PYTHON)-config --includes --libs) -o libmessage.so
-	$(CC) -shared libmisc.c $(shell $(PYTHON)-config --includes --libs) -o libmisc.so
-	$(CC) -shared libpackage.c $(shell $(PYTHON)-config --includes --libs) -o libpackage.so
-	$(CC) -shared libsystem.c $(shell $(PYTHON)-config --includes --libs) -o libsystem.so
+	$(CC) -shared libarchive.c $(shell $(PYTHON)-config --includes --libs) $(CFLAGS) -o libarchive.so
+	$(CC) -shared libmessage.c $(shell $(PYTHON)-config --includes --libs) $(CFLAGS) -o libmessage.so
+	$(CC) -shared libmisc.c $(shell $(PYTHON)-config --includes --libs) $(CFLAGS) -o libmisc.so
+	$(CC) -shared libpackage.c $(shell $(PYTHON)-config --includes --libs) $(CFLAGS) -o libpackage.so
+	$(CC) -shared libsystem.c $(shell $(PYTHON)-config --includes --libs) $(CFLAGS) -o libsystem.so
 	$(STRIP) *.so
 
 sources:
