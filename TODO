@@ -9,7 +9,3 @@
  * Write a script/module that will record API changes between release
  * Implement triggers like feature into libspm for execution code upon every
    method call
-
-## SPMD/SPM-GUI ##
- * Complete all tasks noted with FIXME/TODO
-
