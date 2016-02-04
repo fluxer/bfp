@@ -455,6 +455,14 @@ class Source(object):
         database.LOCAL_DIR = LOCAL_DIR
         database.IGNORE = IGNORE
         database.NOTIFY = NOTIFY
+        # https://en.wikipedia.org/wiki/Comparison_of_command_shells
+        bang_regexp = 'sh|bash|dash|ksh|csh|tcsh|tclsh|scsh|fish|zsh'
+        bang_regexp += '|ash|python|perl|php|ruby|lua|wish|(?:g)?awk'
+        bang_regexp += '|gbr2|gbr3'
+        # parse the shebang and split it to 2 groups:
+        # 1. full match, used to replace it with something that will work
+        # 2. base of the interpreter (e.g. bash), used to find match in the target or host
+        self.shebang_regex = re.compile('(^#!.*(?: |\\t|/)((?:' + bang_regexp + ')(?:[^\\s]+)?)(?:.*\\s))')
 
     def autosource(self, targets, automake=False, autoremove=False):
         ''' Handle targets build/remove without affecting current object '''
@@ -1084,15 +1092,7 @@ class Source(object):
                 or smime == 'text/x-php' or smime == 'text/x-ruby' \
                 or smime == 'text/x-lua' or smime == 'text/x-tcl' \
                 or smime == 'text/x-awk' or smime == 'text/x-gawk':
-                # https://en.wikipedia.org/wiki/Comparison_of_command_shells
-                bang_regexp = 'sh|bash|dash|ksh|csh|tcsh|tclsh|scsh|fish|zsh'
-                bang_regexp += '|ash|python|perl|php|ruby|lua|wish|(?:g)?awk'
-                bang_regexp += '|gbr2|gbr3'
-                # parse the shebang and split it to 2 groups:
-                # 1. full match, used to replace it with something that will work
-                # 2. base of the interpreter (e.g. bash), used to find match in the target or host
-                omatch = misc.file_search('(^#!.*(?: |\\t|/)((?:' + bang_regexp + ')(?:[^\\s]+)?)(?:.*\\s))', \
-                    sfile, escape=False)
+                omatch = self.shebang_regex.findall(misc.file_read(sfile))
                 if omatch:
                     sfull = omatch[0][0].strip()
                     sbase = omatch[0][1].strip()
