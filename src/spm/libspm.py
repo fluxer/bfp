@@ -550,6 +550,7 @@ class Source(object):
                 elif action == 'remove':
                     message.sub_info(_('Uninstalling XDG MIMEs'), m)
                     misc.system_chroot((xdg_mime, 'uninstall', m))
+                done.append(m)
 
     def post_update_databases(self, content, action):
         ''' Update common databases after merge/remove '''
