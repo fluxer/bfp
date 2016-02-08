@@ -353,7 +353,7 @@ class Sane(object):
     ''' Check sanity of SRCBUILDs '''
     def __init__(self, targets, enable=False, disable=False, null=False, \
         maintainer=False, note=False, variables=False, triggers=False, \
-        users=False, groups=False, signatures=False):
+        users=False, groups=False, signatures=False, pulse=False):
         self.targets = []
         for target in targets:
             self.targets.extend(database.remote_alias(target))
@@ -367,6 +367,7 @@ class Sane(object):
         self.users = users
         self.groups = groups
         self.signatures = signatures
+        self.pulse = pulse
 
     def main(self):
         ''' Looks for target match and then execute action for every target '''
@@ -451,6 +452,14 @@ class Sane(object):
                                     if not pgpkeys:
                                         message.sub_warning(_('Signature in sources but no pgpkeys'), src)
                                     break
+
+                if self.pulse:
+                    sources = database.remote_metadata(target, 'sources')
+                    for src in sources:
+                        if misc.url_supported(src, False):
+                            if not misc.url_ping(src):
+                                message.sub_warning(_('Source not reachable'), src)
+                                # TODO: check mirrors too
 
 
 class Merge(object):
@@ -1116,6 +1125,8 @@ if __name__ == '__main__':
             help=_('Check for group(s) being added but not deleted'))
         sane_parser.add_argument('-s', '--signatures', action='store_true', \
             help=_('Check for signature(s) not in the sources array'))
+        sane_parser.add_argument('-p', '--pulse', action='store_true', \
+            help=_('Check for source(s) not being available'))
         sane_parser.add_argument('-a', '--all', action='store_true', \
             help=_('Perform all checks'))
         sane_parser.add_argument('TARGETS', nargs='+', type=str, \
@@ -1299,6 +1310,7 @@ if __name__ == '__main__':
                 ARGS.users = True
                 ARGS.groups = True
                 ARGS.signatures = True
+                ARGS.pulse = True
 
             message.info(_('Runtime information'))
             message.sub_info(_('ENABLE'), ARGS.enable)
@@ -1311,12 +1323,13 @@ if __name__ == '__main__':
             message.sub_info(_('USERS'), ARGS.users)
             message.sub_info(_('GROUPS'), ARGS.groups)
             message.sub_info(_('SIGNATURES'), ARGS.signatures)
+            message.sub_info(_('PULSE'), ARGS.pulse)
             message.sub_info(_('TARGETS'), ARGS.TARGETS)
             message.info(_('Poking remotes...'))
 
             m = Sane(ARGS.TARGETS, ARGS.enable, ARGS.disable, ARGS.null, \
                 ARGS.maintainer, ARGS.note, ARGS.variables, ARGS.triggers, \
-                ARGS.users, ARGS.groups, ARGS.signatures)
+                ARGS.users, ARGS.groups, ARGS.signatures, ARGS.pulse)
             m.main()
 
         elif ARGS.mode == 'merge':
