@@ -981,8 +981,22 @@ class Misc(object):
             self.typecheck(sformat, (types.StringTypes))
             self.typecheck(sflags, (types.StringTypes))
 
-        return self.system_communicate((self.whereis('scanelf'), '-yCBF', \
+        output = self.system_communicate((self.whereis('scanelf'), '-yCBF', \
             sformat, sflags, sfile))
+        # workaround some libc implementations not support ld cache and
+        # scanelf popping base names instead of full paths even with -L
+        if 'L' in sflags:
+            fixedoutput = []
+            for line in output.split(','):
+                if line and not line.startswith('/'):
+                    for libpath in ('/lib', '/usr/lib'):
+                        sfull = '%s/%s' % (libpath, os.path.basename(line))
+                        if os.path.exists(sfull):
+                            fixedoutput.append(os.path.realpath(sfull))
+            fixedoutput = ','.join(fixedoutput)
+            if fixedoutput and not output == fixedoutput:
+                return fixedoutput
+        return output
 
     def system_command(self, command, bshell=False, cwd=''):
         ''' Execute system command safely
