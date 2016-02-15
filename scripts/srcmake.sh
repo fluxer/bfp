@@ -155,10 +155,11 @@ for src in "${@:-.}";do
         else
             msg2 "Fetching: ${BLUE}${source}${ALL_OFF}"
             if whereis curl ;then
-                curl -f -L -C - "$source" -o "$SOURCE_DIR/$src_base"
+                curl -f -L -C - "$source" -o "$src_real/$src_base"
             elif whereis wget ;then
-                wget -c "$source" -O "$SOURCE_DIR/$src_base"
+                wget -c "$source" -O "$src_real/$src_base"
             fi
+            ln -sf "$src_real/$src_base" "$SOURCE_DIR/$src_base"
         fi
 
         case "$src_base" in
