@@ -120,6 +120,20 @@ for src in "${@:-.}";do
         warn2 "Missing dependencies: ${YELLOW}${missing_depends}${ALL_OFF}"
     fi
 
+    for depend in "${optdepends[@]}";do
+        fixed_name="$(echo ${depend} | sed 's/\\-|\\!|\\@|\\#|\\$|\\%|\\^|\\.|\\,|\\[|\\]|\\+|\\>|\\<\\"|\\||\\=|\\(|\\)//g')"
+        if [ -d "/var/local/spm/$depend" ];then
+            export OPTIONAL_${fixed_name}_BOOL="TRUE"
+            export OPTIONAL_${fixed_name}_SWITCH="ON"
+            export OPTIONAL_${fixed_name}="yes"
+        else
+            warn2 "Disabling optional: ${YELLOW}${depend}${ALL_OFF}"
+            export OPTIONAL_${fixed_name}_BOOL="FALSE"
+            export OPTIONAL_${fixed_name}_SWITCH="OFF"
+            export OPTIONAL_${fixed_name}="no"
+        fi
+    done
+
     rm -rf "$SOURCE_DIR" "$INSTALL_DIR"
     mkdir -p "$SOURCE_DIR" "$INSTALL_DIR"
     for source in "${sources[@]}";do
