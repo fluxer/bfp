@@ -968,7 +968,7 @@ static char __pyx_k_w[] = "w";
 static char __pyx_k_Gb[] = "Gb";
 static char __pyx_k_Kb[] = "Kb";
 static char __pyx_k_Mb[] = "Mb";
-static char __pyx_k__3[] = "\\-|\\!|\\@|\\#|\\$|\\%|\\^|\\.|\\,|\\[|\\]|\\+|\\>|\\<\\\"|\\||\\=|\\(|\\)";
+static char __pyx_k__3[] = "\\-|\\!|\\@|\\#|\\$|\\%|\\^|\\.|\\,|\\[|\\]|\\+|\\>|\\<|\\\"|\\||\\=|\\(|\\)";
 static char __pyx_k__6[] = ":";
 static char __pyx_k_ab[] = "ab";
 static char __pyx_k_co[] = "co";
@@ -2999,7 +2999,7 @@ static PyObject *__pyx_pf_7libmisc_4Misc___init__(CYTHON_UNUSED PyObject *__pyx_
  *         else:
  *             self.python3 = True             # <<<<<<<<<<<<<<
  *         # legal are [a-zA-Z_][a-zA-Z0-9_]+
- *         self._illegalx = re.compile('\\-|\\!|\\@|\\#|\\$|\\%|\\^|\\.|\\,|\\[|\\]|\\+|\\>|\\<\\"|\\||\\=|\\(|\\)')
+ *         self._illegalx = re.compile('\\-|\\!|\\@|\\#|\\$|\\%|\\^|\\.|\\,|\\[|\\]|\\+|\\>|\\<|\\"|\\||\\=|\\(|\\)')
  */
   /*else*/ {
     if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_python3, Py_True) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 58; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -3009,7 +3009,7 @@ static PyObject *__pyx_pf_7libmisc_4Misc___init__(CYTHON_UNUSED PyObject *__pyx_
   /* "libmisc.py":60
  *             self.python3 = True
  *         # legal are [a-zA-Z_][a-zA-Z0-9_]+
- *         self._illegalx = re.compile('\\-|\\!|\\@|\\#|\\$|\\%|\\^|\\.|\\,|\\[|\\]|\\+|\\>|\\<\\"|\\||\\=|\\(|\\)')             # <<<<<<<<<<<<<<
+ *         self._illegalx = re.compile('\\-|\\!|\\@|\\#|\\$|\\%|\\^|\\.|\\,|\\[|\\]|\\+|\\>|\\<|\\"|\\||\\=|\\(|\\)')             # <<<<<<<<<<<<<<
  * 
  *     def typecheck(self, a, b):
  */
@@ -3048,7 +3048,7 @@ static PyObject *__pyx_pf_7libmisc_4Misc___init__(CYTHON_UNUSED PyObject *__pyx_
 }
 
 /* "libmisc.py":62
- *         self._illegalx = re.compile('\\-|\\!|\\@|\\#|\\$|\\%|\\^|\\.|\\,|\\[|\\]|\\+|\\>|\\<\\"|\\||\\=|\\(|\\)')
+ *         self._illegalx = re.compile('\\-|\\!|\\@|\\#|\\$|\\%|\\^|\\.|\\,|\\[|\\]|\\+|\\>|\\<|\\"|\\||\\=|\\(|\\)')
  * 
  *     def typecheck(self, a, b):             # <<<<<<<<<<<<<<
  *         ''' Poor man's variable type checking, do not use with Python 3000 '''
@@ -3239,7 +3239,7 @@ static PyObject *__pyx_pf_7libmisc_4Misc_2typecheck(CYTHON_UNUSED PyObject *__py
   }
 
   /* "libmisc.py":62
- *         self._illegalx = re.compile('\\-|\\!|\\@|\\#|\\$|\\%|\\^|\\.|\\,|\\[|\\]|\\+|\\>|\\<\\"|\\||\\=|\\(|\\)')
+ *         self._illegalx = re.compile('\\-|\\!|\\@|\\#|\\$|\\%|\\^|\\.|\\,|\\[|\\]|\\+|\\>|\\<|\\"|\\||\\=|\\(|\\)')
  * 
  *     def typecheck(self, a, b):             # <<<<<<<<<<<<<<
  *         ''' Poor man's variable type checking, do not use with Python 3000 '''
@@ -40574,7 +40574,7 @@ static int __Pyx_InitCachedConstants(void) {
   /* "libmisc.py":60
  *             self.python3 = True
  *         # legal are [a-zA-Z_][a-zA-Z0-9_]+
- *         self._illegalx = re.compile('\\-|\\!|\\@|\\#|\\$|\\%|\\^|\\.|\\,|\\[|\\]|\\+|\\>|\\<\\"|\\||\\=|\\(|\\)')             # <<<<<<<<<<<<<<
+ *         self._illegalx = re.compile('\\-|\\!|\\@|\\#|\\$|\\%|\\^|\\.|\\,|\\[|\\]|\\+|\\>|\\<|\\"|\\||\\=|\\(|\\)')             # <<<<<<<<<<<<<<
  * 
  *     def typecheck(self, a, b):
  */
@@ -41568,7 +41568,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_codeobj__120 = (PyObject*)__Pyx_PyCode_New(1, 0, 1, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__119, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_libs_libmis, __pyx_n_s_init, 43, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__120)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 43; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "libmisc.py":62
- *         self._illegalx = re.compile('\\-|\\!|\\@|\\#|\\$|\\%|\\^|\\.|\\,|\\[|\\]|\\+|\\>|\\<\\"|\\||\\=|\\(|\\)')
+ *         self._illegalx = re.compile('\\-|\\!|\\@|\\#|\\$|\\%|\\^|\\.|\\,|\\[|\\]|\\+|\\>|\\<|\\"|\\||\\=|\\(|\\)')
  * 
  *     def typecheck(self, a, b):             # <<<<<<<<<<<<<<
  *         ''' Poor man's variable type checking, do not use with Python 3000 '''
@@ -43155,7 +43155,7 @@ PyMODINIT_FUNC PyInit_libmisc(void)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
   /* "libmisc.py":62
- *         self._illegalx = re.compile('\\-|\\!|\\@|\\#|\\$|\\%|\\^|\\.|\\,|\\[|\\]|\\+|\\>|\\<\\"|\\||\\=|\\(|\\)')
+ *         self._illegalx = re.compile('\\-|\\!|\\@|\\#|\\$|\\%|\\^|\\.|\\,|\\[|\\]|\\+|\\>|\\<|\\"|\\||\\=|\\(|\\)')
  * 
  *     def typecheck(self, a, b):             # <<<<<<<<<<<<<<
  *         ''' Poor man's variable type checking, do not use with Python 3000 '''
