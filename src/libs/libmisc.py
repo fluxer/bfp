@@ -57,7 +57,7 @@ class Misc(object):
         else:
             self.python3 = True
         # legal are [a-zA-Z_][a-zA-Z0-9_]+
-        self._illegalx = re.compile('\\-|\\!|\\@|\\#|\\$|\\%|\\^|\\.|\\,|\\[|\\]|\\+|\\>|\\<\\"|\\||\\=|\\(|\\)')
+        self._illegalx = re.compile('\\-|\\!|\\@|\\#|\\$|\\%|\\^|\\.|\\,|\\[|\\]|\\+|\\>|\\<|\\"|\\||\\=|\\(|\\)')
 
     def typecheck(self, a, b):
         ''' Poor man's variable type checking, do not use with Python 3000 '''
