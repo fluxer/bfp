@@ -122,7 +122,7 @@ for src in "${@:-.}";do
 
     missing_optdepends=""
     for depend in "${optdepends[@]}";do
-        fixed_name="$(echo ${depend} | sed 's/\\-|\\!|\\@|\\#|\\$|\\%|\\^|\\.|\\,|\\[|\\]|\\+|\\>|\\<\\"|\\||\\=|\\(|\\)//g')"
+        fixed_name="$(echo ${depend} | tr '\-\!@#$%^.,[]+><"=()' '_')"
         if [ -d "/var/local/spm/$depend" ];then
             export OPTIONAL_${fixed_name}_BOOL="TRUE"
             export OPTIONAL_${fixed_name}_SWITCH="ON"
