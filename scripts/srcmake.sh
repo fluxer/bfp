@@ -76,7 +76,7 @@ for src in "${@:-.}";do
     if ! whereis curl && ! whereis wget ;then
         error "Neither curl or wget is installed"
         exit 1
-    elif ! whereis bsdtar && whereis tar ;then
+    elif ! whereis bsdtar && ! whereis tar ;then
         error "Neither bsdtar or tar is installed"
         exit 1
     elif ! whereis git ;then
