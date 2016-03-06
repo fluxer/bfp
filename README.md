@@ -2,6 +2,41 @@
 
 [ ![Codeship Status for fluxer/bfp](https://codeship.com/projects/123e70d0-af99-0132-594f-5edd39caaea8/status?branch=master)](https://codeship.com/projects/69262)
 
+## About
+
+The BFP project started as a tool set for a custom distribution that was
+supposed to be as close to as possbile to
+[LFS](http://www.linuxfromscratch.org/lfs/)/
+[BLFS](http://www.linuxfromscratch.org/blfs/) making use of the instructions
+and providing building block for enthusiasts to make their own distribution.
+If you are a thinkerer who likes to play with Linux then you are most likely
+going to find use for what it can offer.
+
+It is split into libraries and frontends to allow people to use it the way they
+see fit. The project has evolved much over the years but simplicity and tasks
+automation is and always will ramain prime goals of the project.
+
+The Package Manager is (or was) one of kind - it does much more then it should
+do but there are good reasons for doing so. Simply put it is a mix of features
+and ideas from [Dpkg](https://en.wikipedia.org/wiki/Dpkg),
+[Pacman](https://www.archlinux.org/pacman/) and
+[Portage](https://wiki.gentoo.org/wiki/Portage) with its own twist.
+
+The [Initial RAM filesystem](https://en.wikipedia.org/wiki/Initramfs) tools are
+intended to make small and fast booting [Linux kernel](https://www.kernel.org/)
+images fuzz free given the current state of the system. For that it uses only
+Busybox and does as little as possible when the system is initialized from the
+generated kernel images.
+
+The manul pages for the related tools, formats, etc. go into deatils about what,
+how and why they do so if you have read so far you should probably read them
+too.
+
+During its course of history this project has included other tools such as
+Live CD/DVD build tool and other not so essential stuff that have been split
+off into separate projects or died off entirely. Some of the changes are not
+even public but what you see is what you get.
+
 ## Requirements
 
 The following software is required:
