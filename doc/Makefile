@@ -30,7 +30,7 @@ all: clean
 install:
 	$(INSTALL) -vdm755 $(DESTDIR)$(MANDIR)/man8/ \
 		$(DESTDIR)$(MANDIR)/man5/ \
-		$(DESTDIR)$(DOCDIR)/spm
+		$(DESTDIR)$(DOCDIR)/bfp
 	$(INSTALL) -vm644 *.8 $(DESTDIR)$(MANDIR)/man8/
 	$(INSTALL) -vm644 *.5 $(DESTDIR)$(MANDIR)/man5/
 	$(INSTALL) -vm644 SRCBUILD.txt $(DESTDIR)$(DOCDIR)/bfp/SRCBUILD.txt
