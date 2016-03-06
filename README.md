@@ -32,10 +32,13 @@ The manul pages for the related tools, formats, etc. go into deatils about what,
 how and why they do so. If you have read so far you should probably read them
 too.
 
-During its course of history this project has included other tools such as
-Live CD/DVD build tool and other not so essential stuff that have been split
-off into separate projects or died off entirely. Some of the changes are not
-even public but what you see is what you get.
+During its course of history this project has included other tools and ideas
+such as Live CD/DVD build tool, Qt/GTK+/curses interfaces for SPM, software
+build bot, hardware events handler, partitions manager, verbose errors
+reporting from libraries/frontends and other stuff that have been prototyped,
+implemented and dropped off intirely. Some ideas have been forged into
+sub-projects, some have not even been made public but what you see is what you
+get.
 
 ## Requirements
 
