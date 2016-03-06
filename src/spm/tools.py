@@ -26,7 +26,7 @@ database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 misc.SHELL = libspm.SHELL
 
-app_version = "1.9.1 (7844ca8)"
+app_version = "1.9.1 (9564153)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''

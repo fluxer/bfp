@@ -16,7 +16,7 @@ else:
 import libmessage
 message = libmessage.Message()
 
-app_version = "1.9.1 (7844ca8)"
+app_version = "1.9.1 (9564153)"
 
 
 retvalue = 0
@@ -175,12 +175,6 @@ try:
         ''' Override stripping of RPATH '''
         def __call__(self, parser, namespace, values, option_string=None):
             libspm.STRIP_RPATH = values
-            setattr(namespace, self.dest, values)
-
-    class OverrideUpx(argparse.Action):
-        ''' Override binaries compression '''
-        def __call__(self, parser, namespace, values, option_string=None):
-            libspm.COMPRESS_BIN = values
             setattr(namespace, self.dest, values)
 
     class OverridePyCompile(argparse.Action):
@@ -533,7 +527,6 @@ try:
         message.sub_info(_('STRIP_SHARED'), libspm.STRIP_SHARED)
         message.sub_info(_('STRIP_STATIC'), libspm.STRIP_STATIC)
         message.sub_info(_('STRIP_RPATH'), libspm.STRIP_RPATH)
-        message.sub_info(_('COMPRESS_BIN'), libspm.COMPRESS_BIN)
         message.sub_info(_('IGNORE_MISSING'), libspm.IGNORE_MISSING)
         message.sub_info(_('CONFLICTS'), libspm.CONFLICTS)
         message.sub_info(_('BACKUP'), libspm.BACKUP)
