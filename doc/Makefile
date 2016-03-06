@@ -33,9 +33,10 @@ install:
 		$(DESTDIR)$(DOCDIR)/spm
 	$(INSTALL) -vm644 *.8 $(DESTDIR)$(MANDIR)/man8/
 	$(INSTALL) -vm644 *.5 $(DESTDIR)$(MANDIR)/man5/
-	$(INSTALL) -vm644 SRCBUILD.txt $(DESTDIR)$(DOCDIR)/spm/SRCBUILD.txt
-	$(INSTALL) -vm644 *.html $(DESTDIR)$(DOCDIR)/spm/
-	$(INSTALL) -vm644 ../COPYING $(DESTDIR)$(DOCDIR)/spm/COPYING
+	$(INSTALL) -vm644 SRCBUILD.txt $(DESTDIR)$(DOCDIR)/bfp/SRCBUILD.txt
+	$(INSTALL) -vm644 *.html $(DESTDIR)$(DOCDIR)/bfp/
+	$(INSTALL) -vm644 busybox-config $(DESTDIR)$(DOCDIR)/bfp/
+	$(INSTALL) -vm644 ../COPYING $(DESTDIR)$(DOCDIR)/bfp/COPYING
 
 uninstall:
 	$(RM) $(DESTDIR)$(MANDIR)/man8/mkinitfs.8
@@ -44,7 +45,7 @@ uninstall:
 	$(RM) $(DESTDIR)$(MANDIR)/man8/spm-tools.8
 	$(RM) $(DESTDIR)$(MANDIR)/man5/spm.conf.5
 	$(RM) $(DESTDIR)$(MANDIR)/man5/SRCBUILD.5
-	$(RM) -r $(DESTDIR)$(DOCDIR)/spm/
+	$(RM) -r $(DESTDIR)$(DOCDIR)/bfp/
 
 clean:
 	$(RM) *.1 *.5 *.8 *.html

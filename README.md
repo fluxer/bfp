@@ -29,7 +29,7 @@ Busybox and does as little as possible when the system is initialized from the
 generated kernel images.
 
 The manul pages for the related tools, formats, etc. go into deatils about what,
-how and why they do so if you have read so far you should probably read them
+how and why they do so. If you have read so far you should probably read them
 too.
 
 During its course of history this project has included other tools such as

@@ -10,7 +10,11 @@ mkinitfs - MkInitfs
 
 =head1 DESCRIPTION
 
-MkInitfs is a initial RAM filesystem image creator.
+MkInitfs is a initial RAM filesystem image creator. It relies solely on Busybox
+so you will need a beefy build of it with as much features as possible. Most
+vendors do not ship Busybox that can meat the requirements so make sure you
+use the test option to confirm it can be used for the purpose of this tool. An
+example configuration file for it should be installed in @DOCDIR@/bfp.
 
 =head1 OPTIONS
 
