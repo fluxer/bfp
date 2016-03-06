@@ -48,7 +48,6 @@ DEFAULTS = {
     'STRIP_SHARED': 'False',
     'STRIP_STATIC': 'False',
     'STRIP_RPATH': 'False',
-    'COMPRESS_BIN': 'False',
     'PYTHON_COMPILE': 'False',
     'IGNORE_MISSING': 'False',
     'CONFLICTS': 'False',
@@ -95,7 +94,6 @@ STRIP_BINARIES = mainconf.getboolean('install', 'STRIP_BINARIES')
 STRIP_SHARED = mainconf.getboolean('install', 'STRIP_SHARED')
 STRIP_STATIC = mainconf.getboolean('install', 'STRIP_STATIC')
 STRIP_RPATH = mainconf.getboolean('install', 'STRIP_RPATH')
-COMPRESS_BIN = mainconf.getboolean('install', 'COMPRESS_BIN')
 PYTHON_COMPILE = mainconf.getboolean('install', 'PYTHON_COMPILE')
 IGNORE_MISSING = mainconf.getboolean('install', 'IGNORE_MISSING')
 CONFLICTS = mainconf.getboolean('merge', 'CONFLICTS')
@@ -440,7 +438,6 @@ class Source(object):
         self.strip_shared = STRIP_SHARED
         self.strip_static = STRIP_STATIC
         self.strip_rpath = STRIP_RPATH
-        self.compress_bin = COMPRESS_BIN
         self.ignore_missing = IGNORE_MISSING
         self.python_compile = PYTHON_COMPILE
         message.CATCH = CATCH
@@ -1019,7 +1016,6 @@ class Source(object):
         lshared = []
         lstatic = []
         lrpath = []
-        lcompress = []
         for sfile, smime in target_content.items():
             if smime == 'application/x-executable':
                 if self.strip_binaries:
@@ -1028,8 +1024,6 @@ class Source(object):
                     ldebug.append(sfile)
                 if self.strip_rpath:
                     lrpath.append(sfile)
-                if self.compress_bin:
-                    lcompress.append(sfile)
             elif smime == 'application/x-sharedlib':
                 if self.strip_shared:
                     lshared.append(sfile)
@@ -1044,9 +1038,6 @@ class Source(object):
                     ldebug.append(sfile)
                 if self.strip_rpath:
                     lrpath.append(sfile)
-            elif smime == 'application/x-dosexec':
-                if self.compress_bin:
-                    lcompress.append(sfile)
 
         message.sub_info(_('Stripping binaries and libraries'))
         if ldebug:
@@ -1072,11 +1063,6 @@ class Source(object):
             message.sub_debug(_('Stripping RPATH'), lrpath)
             cmd = [misc.whereis('scanelf'), '-CBXrq']
             cmd.extend(lrpath)
-            misc.system_command(cmd)
-        if lcompress:
-            message.sub_debug(_('Compressing binaries'), lcompress)
-            cmd = [misc.whereis('upx'), '-q']
-            cmd.extend(lcompress)
             misc.system_command(cmd)
 
         message.sub_info(_('Checking runtime dependencies'))
@@ -1548,13 +1534,6 @@ class Source(object):
                     message.sub_warning(_('Overriding STRIP_RPATH to'), _('False'))
                     self.strip_rpath = False
 
-                if option == 'upx' and not self.compress_bin:
-                    message.sub_warning(_('Overriding COMPRESS_BIN to'), _('True'))
-                    self.compress_bin = True
-                elif option == '!upx' and self.compress_bin:
-                    message.sub_warning(_('Overriding COMPRESS_BIN to'), _('False'))
-                    self.compress_bin = False
-
                 if option == 'missing' and not self.ignore_missing:
                     message.sub_warning(_('Overriding IGNORE_MISSING to'), _('True'))
                     self.ignore_missing = True
@@ -1611,7 +1590,6 @@ class Source(object):
             self.mirror = MIRROR
             self.purge_paths = PURGE_PATHS
             self.compress_man = COMPRESS_MAN
-            self.compress_bin = COMPRESS_BIN
             self.split_debug = SPLIT_DEBUG
             self.strip_binaries = STRIP_BINARIES
             self.strip_shared = STRIP_SHARED
@@ -1791,179 +1769,6 @@ class Binary(Source):
             if self.do_remove or self.autoremove:
                 message.sub_info(_('Starting remove of'), self.target_name)
                 self.remove()
-
-
-class Aport(object):
-    ''' Automatic SRCBUILD creator, not a silver bullet '''
-    def __init__(self, urls, directory='/', automake=False):
-        self.urls = urls
-        self.directory = directory
-        self.automake = automake
-
-    def main(self):
-        for src in self.urls:
-            if not misc.url_supported(src):
-                message.sub_warning(_('Not a supported URL'), src)
-                continue
-            message.sub_info(_('Analizing'), src)
-
-            src_base = misc.url_normalize(src, True)
-            src_name = misc.file_name(src_base)
-            src_dir = '%s/%s' % (self.directory, src_name)
-            src_file = '%s/%s' % (src_dir, src_base)
-            src_cd = src_base
-            message.sub_debug(_('Fetching'), src)
-            misc.dir_create(src_dir)
-            misc.fetch(src, src_file)
-            if misc.archive_supported(src_file):
-                message.sub_debug(_('Extracting'), src)
-                misc.archive_decompress(src_file, src_dir)
-                src_cd = os.path.dirname(misc.archive_list(src_file)[0])
-
-            message.sub_debug(_('Checking for build system and gethering metadata'))
-            guess = False
-            src_date = time.strftime('%Y%m%d')
-            src_version = src_name.split('-')[1:] or src_name.split('_')[1:] or src_date
-            src_version = misc.string_convert(src_version)
-            src_description = 'Unknown' # TODO: look for README or something
-            src_makedepends = "'make'"
-            src_sources = "'%s'" % src
-            for spath in os.listdir('%s/%s' % (src_dir, src_cd)):
-                sdir = '%s/%s' % (src_dir, src_cd)
-                sfile = '%s/%s' % (sdir, spath)
-                if spath == '.git' and not 'git' in src_makedepends:
-                    message.sub_debug(_('Git repository detected'))
-                    src_makedepends += " 'git'"
-                    src_version = src_date
-                elif spath == '.svn' and not 'subversion' in src_makedepends:
-                    message.sub_debug(_('Subversion repository detected'))
-                    src_makedepends += " 'subversion'"
-                    src_version = src_date
-                if sfile.endswith('/CMakeLists.txt') and not guess:
-                    guess = 'CMake'
-                    src_name = misc.string_convert(misc.file_search('(?:^|\\s)(?:PROJECT|project)(?:[ |\\t]+)?\((.*)\)', \
-                        sfile, escape=False))
-                    src_makedepends += " 'cmake'"
-                    src_compile = 'mkdir -p ../build && cd ../build\n    cmake -DCMAKE_INSTALL_PREFIX=/usr ../%s\n    make' % src_cd
-                    src_install = 'make -C ../build DESTDIR="$INSTALL_DIR" install'
-                elif sfile.endswith(('/autogen.sh', '/configure.ac', '/configure.in')) and not guess:
-                    guess = 'Autotools (devel)'
-                    src_makedepends += " 'autoconf' 'automake'"
-                    src_compile = './autogen.sh\n    ./configure --prefix=/usr --sysconfdir=/etc\n    make'
-                    src_install = 'make DESTDIR="$INSTALL_DIR" install'
-                elif sfile.endswith('.pro') and not guess:
-                    guess = 'QMake'
-                    # FIXME: could be qt5
-                    # TODO: follow include()
-                    src_makedepends += " 'qt4'"
-                    src_compile = 'qmake-qt4\n    make'
-                    src_install = 'make DESTDIR="$INSTALL_DIR" install'
-                elif sfile.endswith('/Makefile') and not guess:
-                    guess = 'Makefile'
-                    checkfiles = [sfile]
-                    # search included files
-                    for match in misc.file_search('(?:^|\\s)include(?:[ |\\t]+)(.*)', sfile, escape=False):
-                        checkfiles.append('%s/%s' % (sdir, match))
-                    destvar = None
-                    for mfile in checkfiles:
-                        if not os.path.isfile(mfile):
-                            # happens when it references variable, such as $(topdir)
-                            message.sub_debug(_('Unreadable include'), mfile)
-                            continue
-                        # PREFIX is a last resort, may mess things up
-                        message.sub_debug(_('Probing for destination'), mfile)
-                        match = misc.file_search('(?:^|\\s)(DESTDIR|ROOT_DIR|ROOT|FAKEROOT|PREFIX)(?:[ |\\t|\?]+)?=', \
-                            mfile, escape=False)
-                        if match:
-                            destvar = match[0]
-                    if not destvar:
-                        message.sub_debug(_('Not destination variable detected'))
-                        guess = False
-                        continue
-                    message.sub_debug(_('Destination variable detected'), destvar)
-                    if destvar == 'PREFIX':
-                        src_compile = 'make PREFIX="$INSTALL_DIR/usr"'
-                        src_install = 'make PREFIX="$INSTALL_DIR/usr" install'
-                    else:
-                        src_compile = 'make'
-                        src_install = 'make %s="$INSTALL_DIR" install' % destvar
-                elif sfile.endswith('/setup.py') and not guess:
-                    # FIXME: could be 'python3'
-                    src_makedepends += " 'python'"
-                    src_compile = 'python setup.py build'
-                    src_install = 'python setup.py install --prefix="/usr" --root="$INSTALL_DIR"'
-                    guess = 'Python'
-            if not guess:
-                message.sub_critical(_('No known build system in use'))
-                sys.exit(2)
-            message.sub_debug(_('Guess is'), guess)
-
-            message.sub_debug(_('Checking if PGP signature is available'))
-            sig1 = '%s.sig' % src
-            sig2 = '%s.asc' % src
-            sig3 = '%s.asc' % misc.file_name(src, False)
-            sig4 = '%s.sign' % misc.file_name(src, False)
-            sig5 = '%s.sign' % src
-            sigtmp = '%s.signature' % src_file
-            src_pgpkeys = ''
-            for sig in (sig1, sig2, sig3, sig4, sig5):
-                if misc.url_ping(sig):
-                    src_sources += "\n    '%s'" % sig
-                    misc.fetch(sig, sigtmp)
-            if os.path.isfile(sigtmp):
-                message.sub_debug(_('Trying to get the keyid from'), sigtmp)
-                gpg = misc.whereis('gpg2', False) or misc.whereis('gpg')
-                # assumes only one key
-                for line in misc.system_communicate('%s --list-packets %s' % (gpg, sigtmp)).splitlines():
-                    keyid = misc.string_search('.* keyid ([\\S]+)', line, escape=False)
-                    if keyid:
-                        src_pgpkeys = "pgpkeys=('%s')" % misc.string_convert(keyid)
-
-            src_maintainer = 'Unknown'
-            git = misc.whereis('git', False)
-            if git:
-                try:
-                    message.sub_debug(_('Guessing maintainer via Git'))
-                    name = misc.system_communicate((git, 'config', '--global', 'user.name'))
-                    email = misc.system_communicate((git, 'config', '--global', 'user.email'))
-                    src_maintainer = '%s <%s>' % (name, email)
-                except Exception as detail:
-                    # this should probably not be catched at all but not
-                    # everyone may have setup a global Git config so..
-                    message.sub_warning(str(detail))
-            message.sub_debug(_('Target maintainer'), src_maintainer)
-            message.sub_debug(_('Target name'), src_name)
-            message.sub_debug(_('Target version'), src_version)
-            message.sub_debug(_('Target description'), src_description)
-            message.sub_debug(_('Target makedepends'), src_makedepends)
-            message.sub_debug(_('Target sources'), src_sources)
-            message.sub_debug(_('Target pgpkeys'), src_pgpkeys)
-
-            message.sub_info(_('Writing SRCBUILD'))
-            srcbuild = '''# Maintainer: %s
-
-version="%s"
-description="%s"
-makedepends=(%s)
-sources=(%s)
-%s
-
-src_compile() {
-    cd "$SOURCE_DIR/%s"
-    %s
-}
-
-src_install() {
-    cd "$SOURCE_DIR/%s"
-    %s
-}
-''' % (src_maintainer, src_version, src_description, src_makedepends, \
-            src_sources, src_pgpkeys, src_cd, src_compile, src_cd, src_install)
-            misc.file_write('%s/SRCBUILD' % src_dir, srcbuild)
-
-        if self.automake:
-            m = Source([src_dir], automake=True)
-            m.main()
 
 
 class Who(object):

@@ -17,7 +17,7 @@ spm - Source Package Manager
     [--conflicts {True,False}] [--backup {True,False}]
     [--scripts {True,False}] [--triggers {True,False}] [--debug]
     [--version]
-    {repo,remote,source,binary,local,who,aport} ...
+    {repo,remote,source,binary,local,who} ...
 
 =head1 DESCRIPTION
 
@@ -150,14 +150,13 @@ features but some of those may be implemented later on.
 =head2 MAIN
 
 positional arguments:
-  {repo,remote,source,binary,local,who,aport}
+  {repo,remote,source,binary,local,who}
   repo                Clean, sync, prune and/or check repositories for updates
   remote              Get remote targets metadata
   source              Build software from source code
   binary              Install software from pre-build tarballs
   local               Get local targets metadata
   who                 Get owner of files via regular expression
-  aport               Automatically write SRCBUILD for sources given via URL
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -308,18 +307,6 @@ optional arguments:
   -h, --help            Show this help message and exit
   -p, --plain           Print in plain format
 
-=head2 APORT MODE
-
-positional arguments:
-  URLS                  URLs to apply actions on
-
-optional arguments:
-  -h, --help            Show this help message and exit
-  -d DIRECTORY, --directory DIRECTORY
-                        Set output directory
-  -a, --automake        Build the target after analizing and creating SRCBUILD
-                        for it
-
 =head1 EXAMPLES
 
 Clean, sync repositories and check for updates:
@@ -363,8 +350,7 @@ For more information visit http://docs.python.org/2/library/re.html. Source and
 binary mode accepts base (e.g. foo), directory (e.g. /home/me/foo) with
 SRCBUILD in it, aliases (e.g. base) which you can find on the top-level of a
 repository as foo.alias or finally meta groups - currently only two - world and
-system. Aport mode accepts URL that is one of Git, SVN (Subversion), rsync,
-HTTP(S) or FTP(S).
+system.
 
 Modes that support targets passing (accept the TARGETS argument) support
 standard input passing via "-" as TARGETS and piping the executable.

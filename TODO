@@ -1,6 +1,3 @@
-## AHWS ##
- * Collect quircks and add scripts for them
-
 ## SPM/SPM-TOOLS ##
  * Complete all tasks noted with FIXME/TODO
  * Optionally remove build depends that are not required anymore after build

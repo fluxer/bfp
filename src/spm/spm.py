@@ -16,7 +16,7 @@ else:
 import libmessage
 message = libmessage.Message()
 
-app_version = "1.9.1 (a90c13a)"
+app_version = "1.9.1 (7844ca8)"
 
 
 retvalue = 0
@@ -598,13 +598,6 @@ try:
                 ARGS.release, ARGS.description, ARGS.depends, \
                 ARGS.optdepends, ARGS.autodepends, ARGS.reverse, \
                 ARGS.size, ARGS.footprint, ARGS.backup, ARGS.plain)
-        m.main()
-
-    elif ARGS.mode == 'aport':
-        message.info(_('Runtime information'))
-        message.sub_info(_('DIRECTORY'), ARGS.directory)
-        message.sub_info(_('URLS'), ARGS.URLS)
-        m = libspm.Aport(ARGS.URLS, ARGS.directory, ARGS.automake)
         m.main()
 
     elif ARGS.mode == 'who':

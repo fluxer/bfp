@@ -200,14 +200,6 @@ the chance for exploiting them but it may corrupt some of them (very rare).
 
 Default: True
 
-=head2 COMPRESS_BIN
-
-Set whether to compress binaries via UPX. Doing so will save you some space
-at the cost of system memory. Expect failures during software installation
-phase as UPX is quite picky, read its documentation to learn more about it.
-
-Default: False
-
 =head2 IGNORE_MISSING
 
 Set whether to ignore missing runtime dependencies. This is used only as a

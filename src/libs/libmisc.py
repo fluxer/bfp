@@ -12,9 +12,6 @@ file). It is a thin wrapper around it.
 Inotify() is another wrapper but around inotify system calls. It can be used
 to monitor for file/directory changes on filesystems.
 
-UDev is wrapper around libudev, use it as base only. It does not provide
-high-level methods so you will have to deal with its API a lot.
-
 '''
 
 import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, inspect, json
@@ -1250,54 +1247,5 @@ class Magic(object):
                 return 'application/octet-stream'
             raise Exception(self.error())
         return result
-
-class UDev(object):
-    ''' UDev wrapper '''
-    def __init__(self):
-        libudev = ctypes.util.find_library('udev')
-        self.libudev = ctypes.CDLL(libudev, use_errno=True)
-        self.udev = self.libudev.udev_new()
-        if not self.udev:
-            raise Exception('Can not get udev context')
-
-        self._udev_device_get_property_value = self.libudev.udev_device_get_property_value
-        self._udev_device_get_property_value.restype = ctypes.c_char_p
-        self._udev_device_get_property_value.argtypes = [ctypes.c_void_p, ctypes.c_char_p]
-
-        self._udev_device_get_sysattr_value = self.libudev.udev_device_get_sysattr_value
-        self._udev_device_get_sysattr_value.restype = ctypes.c_char_p
-        self._udev_device_get_sysattr_value.argtypes = [ctypes.c_void_p, ctypes.c_char_p]
-
-        self._udev_device_get_subsystem = self.libudev.udev_device_get_subsystem
-        self._udev_device_get_subsystem.restype = ctypes.c_char_p
-        self._udev_device_get_subsystem.argtypes = [ctypes.c_void_p]
-
-        self._udev_device_get_action = self.libudev.udev_device_get_action
-        self._udev_device_get_action.restype = ctypes.c_char_p
-        self._udev_device_get_action.argtypes = [ctypes.c_void_p]
-
-    def __exit__(self, type, value, traceback):
-        if self.udev:
-            self.libudev.udev_unref(self.udev)
-
-    def get_property(self, dev, tag):
-        ''' Get property of device '''
-        return self._udev_device_get_property_value(dev, tag)
-
-    def get_sysattr(self, dev, tag):
-        ''' Get sysfs attribute of device '''
-        return self._udev_device_get_sysattr_value(dev, tag)
-
-    def get_subsystem(self, dev):
-        ''' Get subsystem of device '''
-        return self._udev_device_get_subsystem(dev)
-
-    def get_action(self, dev):
-        ''' Get action of device '''
-        return self._udev_device_get_action(dev)
-
-    def error(self):
-        ''' Get last error as string '''
-        return ctypes.get_errno()
 
 misc = Misc()

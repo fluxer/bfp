@@ -135,10 +135,6 @@ Byte-compile Python module files.
 
 Split debug information from DWARF files.
 
-=head3 upx
-
-Compress binaries files with UPX.
-
 =head2 src_prepare
 
 Function defining the instructions to prepare the software. Patching and other

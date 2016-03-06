@@ -84,14 +84,6 @@ else
     echo "=== SKIPPING SPM LOCAL TEST ==="
 fi
 
-if ! grep -q "SPM APORT" "$statefile" ;then
-    echo "=== RUNNING SPM APORT TEST ==="
-    "$1" "$curdir/spm.py" $spmargs aport -ad "$rootdir" https://github.com/pkgconf/pkgconf.git
-    echo "SPM APORT" >> "$statefile"
-else
-    echo "=== SKIPPING SPM APORT TEST ==="
-fi
-
 if ! grep -q "SPM WHO" "$statefile" ;then
     echo "=== RUNNING SPM WHO TEST ==="
     "$1" "$curdir/spm.py" $spmargs who -p ca-certificates
