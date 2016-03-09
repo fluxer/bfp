@@ -217,12 +217,14 @@ class Local(object):
                     if metadatamap[metadata][1]:
                         data = metadatamap[metadata][2]
                         if self.plain:
-                            print(data)
-                        else:
                             if metadata == 'reverse':
                                 # since the reverse dependencies data is
                                 # calculated every time and not static do it
                                 # only if there is a reason for it
+                                data = data()
+                            print(data)
+                        else:
+                            if metadata == 'reverse':
                                 data = data()
                             elif metadata == 'size':
                                 data = misc.string_unit(data, 'auto', True)
