@@ -1300,6 +1300,10 @@ class Source(object):
                 # never delete files in the pseudo filesystems
                 elif sfile.startswith(('/dev/', '/sys/', '/proc/')):
                     continue
+                # TODO: optimize and apply same logic for links
+                elif database.local_belongs(sfile):
+                    message.sub_warning(_('Target file owned by mutliple targets'), sfile)
+                    continue
                 self.remove_target_file(sfile)
             for sfile in reversed(tuple(remove_content)):
                 self.remove_target_dir(os.path.dirname(sfile))
