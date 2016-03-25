@@ -176,7 +176,10 @@ class Database(object):
         if cdepends:
             build_depends.extend(self.remote_metadata(target, 'checkdepends'))
         if ldepends:
-            build_depends.extend(self.local_metadata(target, 'depends'))
+            # ignore local targets without remote alternative is they may be removed from the repo
+            for ltarget in self.local_metadata(target, 'depends'):
+                if self.remote_search(ltarget):
+                    build_depends.append(ltarget)
 
         for dependency in build_depends:
             if dependency in checked:
