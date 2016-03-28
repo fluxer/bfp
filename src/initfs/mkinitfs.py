@@ -185,6 +185,7 @@ try:
             'modprobe': ['-b'],
             'find': ('-type', '-name', '-exec'),
             'cpio': ('-o', '-H'),
+            'depmod': ['-b'],
             'mknod': ['-m'],
             'echo': ['-e'],
             'mkdir': ['-p'],
