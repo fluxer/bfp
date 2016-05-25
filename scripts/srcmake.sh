@@ -63,6 +63,8 @@ whereis() {
     rv=1
     if which "$1" 1> /dev/null;then
         rv=0
+        # if it hangs here then the program takes input via stdin and this
+        # function does not handle such behaviour
         $@ &> /dev/null
         [ "$?" = "127" ] && rv=1
     fi
