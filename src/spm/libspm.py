@@ -210,38 +210,37 @@ class Local(object):
         msglogstatus = message.LOG_STATUS
         message.LOG_STATUS = [syslog.LOG_DEBUG, syslog.LOG_CRIT, syslog.LOG_ALERT]
         for target in matches:
-            if re.search(self.pattern, target):
-                metadata = database.local_metadata(target, 'all')
-                metadatamap = {
-                    'name': (_('Name'), self.do_name, target),
-                    'version': (_('Version'), self.do_version, metadata['version']),
-                    'release': (_('Release'), self.do_release, metadata['release']),
-                    'description': (_('Description'), self.do_description, metadata['description']),
-                    'depends': (_('Depends'), self.do_depends, ' '.join(metadata['depends'])),
-                    'optdepends': (_('Optional depends'), self.do_optdepends, ' '.join(metadata['optdepends'])),
-                    'autodepends': (_('Automatic depends'), self.do_autodepends, ' '.join(metadata['autodepends'])),
-                    'reverse': (_('Reverse depends'), self.do_reverse, lambda: ' '.join(database.local_rdepends(target))),
-                    'size': (_('Size'), self.do_size, metadata['size']),
-                    'footprint': (_('Footprint'), self.do_footprint, '\n'.join(metadata['footprint'])),
-                    'backup': (_('Backup'), self.do_backup, ' '.join(metadata['backup'])),
-                }
+            metadata = database.local_metadata(target, 'all')
+            metadatamap = {
+                'name': (_('Name'), self.do_name, target),
+                'version': (_('Version'), self.do_version, metadata['version']),
+                'release': (_('Release'), self.do_release, metadata['release']),
+                'description': (_('Description'), self.do_description, metadata['description']),
+                'depends': (_('Depends'), self.do_depends, ' '.join(metadata['depends'])),
+                'optdepends': (_('Optional depends'), self.do_optdepends, ' '.join(metadata['optdepends'])),
+                'autodepends': (_('Automatic depends'), self.do_autodepends, ' '.join(metadata['autodepends'])),
+                'reverse': (_('Reverse depends'), self.do_reverse, lambda: ' '.join(database.local_rdepends(target))),
+                'size': (_('Size'), self.do_size, metadata['size']),
+                'footprint': (_('Footprint'), self.do_footprint, '\n'.join(metadata['footprint'])),
+                'backup': (_('Backup'), self.do_backup, ' '.join(metadata['backup'])),
+            }
 
-                for metadata in metadatamap:
-                    if metadatamap[metadata][1]:
-                        data = metadatamap[metadata][2]
-                        if self.plain:
-                            if metadata == 'reverse':
-                                # since the reverse dependencies data is
-                                # calculated every time and not static do it
-                                # only if there is a reason for it
-                                data = data()
-                            print(data)
-                        else:
-                            if metadata == 'reverse':
-                                data = data()
-                            elif metadata == 'size':
-                                data = misc.string_unit(data, 'auto', True)
-                            message.sub_info(metadatamap[metadata][0], data)
+            for metadata in metadatamap:
+                if metadatamap[metadata][1]:
+                    data = metadatamap[metadata][2]
+                    if self.plain:
+                        if metadata == 'reverse':
+                            # since the reverse dependencies data is
+                            # calculated every time and not static do it
+                            # only if there is a reason for it
+                            data = data()
+                        print(data)
+                    else:
+                        if metadata == 'reverse':
+                            data = data()
+                        elif metadata == 'size':
+                            data = misc.string_unit(data, 'auto', True)
+                        message.sub_info(metadatamap[metadata][0], data)
         message.LOG_STATUS = msglogstatus
 
 
