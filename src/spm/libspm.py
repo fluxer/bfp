@@ -194,9 +194,22 @@ class Local(object):
 
     def main(self):
         ''' Print local target metadata for every match '''
+        aliases = database.remote_aliases()
+        targets = database.local_all(basename=True)
+        targets.extend(aliases)
+        matches = []
+        for target in targets:
+            if re.search(self.pattern, target):
+                if target in aliases:
+                    for alias in database.remote_alias(target):
+                        if database.local_search(alias):
+                            matches.append(alias)
+                else:
+                    matches.append(target)
+
         msglogstatus = message.LOG_STATUS
         message.LOG_STATUS = [syslog.LOG_DEBUG, syslog.LOG_CRIT, syslog.LOG_ALERT]
-        for target in database.local_all(basename=True):
+        for target in matches:
             if re.search(self.pattern, target):
                 metadata = database.local_metadata(target, 'all')
                 metadatamap = {
@@ -268,33 +281,43 @@ class Remote(object):
 
     def main(self):
         ''' Print remote target metadata for every match '''
+        aliases = database.remote_aliases()
+        targets = database.remote_all(basename=True)
+        targets.extend(aliases)
+        matches = []
+        for target in targets:
+            if re.search(self.pattern, target):
+                if target in aliases:
+                    matches.extend(database.remote_alias(target))
+                else:
+                    matches.append(target)
+
         msglogstatus = message.LOG_STATUS
         message.LOG_STATUS = [syslog.LOG_DEBUG, syslog.LOG_CRIT, syslog.LOG_ALERT]
-        for target in database.remote_all(basename=True):
-            if re.search(self.pattern, target):
-                metadata = database.remote_metadata(target, 'all')
-                metadatamap = {
-                    'name': (_('Name'), self.do_name, target),
-                    'version': (_('Version'), self.do_version, metadata['version']),
-                    'release': (_('Release'), self.do_release, metadata['release']),
-                    'description': (_('Description'), self.do_description, metadata['description']),
-                    'depends': (_('Depends'), self.do_depends, ' '.join(metadata['depends'])),
-                    'makedepends': (_('Make depends'), self.do_makedepends, ' '.join(metadata['makedepends'])),
-                    'optdepends': (_('Optional depends'), self.do_optdepends, ' '.join(metadata['optdepends'])),
-                    'checkdepends': (_('Check depends'), self.do_checkdepends, ' '.join(metadata['checkdepends'])),
-                    'sources': (_('Sources'), self.do_sources, ' '.join(metadata['sources'])),
-                    'pgpkeys': (_('PGP keys'), self.do_pgpkeys, ' '.join(metadata['pgpkeys'])),
-                    'options': (_('Options'), self.do_pgpkeys, ' '.join(metadata['options'])),
-                    'backup': (_('Backup'), self.do_backup, ' '.join(metadata['backup'])),
-                }
+        for target in matches:
+            metadata = database.remote_metadata(target, 'all')
+            metadatamap = {
+                'name': (_('Name'), self.do_name, target),
+                'version': (_('Version'), self.do_version, metadata['version']),
+                'release': (_('Release'), self.do_release, metadata['release']),
+                'description': (_('Description'), self.do_description, metadata['description']),
+                'depends': (_('Depends'), self.do_depends, ' '.join(metadata['depends'])),
+                'makedepends': (_('Make depends'), self.do_makedepends, ' '.join(metadata['makedepends'])),
+                'optdepends': (_('Optional depends'), self.do_optdepends, ' '.join(metadata['optdepends'])),
+                'checkdepends': (_('Check depends'), self.do_checkdepends, ' '.join(metadata['checkdepends'])),
+                'sources': (_('Sources'), self.do_sources, ' '.join(metadata['sources'])),
+                'pgpkeys': (_('PGP keys'), self.do_pgpkeys, ' '.join(metadata['pgpkeys'])),
+                'options': (_('Options'), self.do_pgpkeys, ' '.join(metadata['options'])),
+                'backup': (_('Backup'), self.do_backup, ' '.join(metadata['backup'])),
+            }
 
-                for metadata in metadatamap:
-                    if metadatamap[metadata][1]:
-                        data = metadatamap[metadata][2]
-                        if self.plain:
-                            print(data)
-                        else:
-                            message.sub_info(metadatamap[metadata][0], data)
+            for metadata in metadatamap:
+                if metadatamap[metadata][1]:
+                    data = metadatamap[metadata][2]
+                    if self.plain:
+                        print(data)
+                    else:
+                        message.sub_info(metadatamap[metadata][0], data)
         message.LOG_STATUS = msglogstatus
 
 
