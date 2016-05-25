@@ -539,7 +539,7 @@ class Which(object):
 
     def main(self):
         for target in database.remote_all(basename=False):
-            if re.search(self.pattern, target):
+            if re.search(self.pattern, os.path.basename(target)):
                 if self.plain:
                     print(target)
                 else:
