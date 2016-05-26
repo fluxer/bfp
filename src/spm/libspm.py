@@ -194,17 +194,15 @@ class Local(object):
 
     def main(self):
         ''' Print local target metadata for every match '''
-        aliases = database.remote_aliases()
-        targets = database.local_all(basename=True)
-        targets.extend(aliases)
         matches = []
-        for target in targets:
-            if re.search(self.pattern, target):
-                if target in aliases:
-                    for alias in database.remote_alias(target):
-                        if database.local_search(alias):
-                            matches.append(alias)
-                else:
+        aliases = database.remote_aliases()
+        if self.pattern in aliases:
+            for alias in database.remote_alias(self.pattern):
+                if database.local_search(alias):
+                    matches.append(alias)
+        else:
+            for target in database.local_all(basename=True):
+                if re.search(self.pattern, target):
                     matches.append(target)
 
         msglogstatus = message.LOG_STATUS
@@ -280,15 +278,13 @@ class Remote(object):
 
     def main(self):
         ''' Print remote target metadata for every match '''
-        aliases = database.remote_aliases()
-        targets = database.remote_all(basename=True)
-        targets.extend(aliases)
         matches = []
-        for target in targets:
-            if re.search(self.pattern, target):
-                if target in aliases:
-                    matches.extend(database.remote_alias(target))
-                else:
+        aliases = database.remote_aliases()
+        if self.pattern in aliases:
+            matches = database.remote_alias(self.pattern)
+        else:
+            for target in database.remote_all(basename=True):
+                if re.search(self.pattern, target):
                     matches.append(target)
 
         msglogstatus = message.LOG_STATUS
