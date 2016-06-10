@@ -172,6 +172,12 @@ for src in "${@:-.}";do
                 elif whereis tar ;then
                     tar -xpf "$SOURCE_DIR/$src_base" -C "$SOURCE_DIR"
                 fi ;;
+            *.gz)
+                msg2 "Extracting: ${BLUE}${src_base}${ALL_OFF}"
+                gunzip "$SOURCE_DIR/$src_base" -c > "$SOURCE_DIR/${src_base//.gz/}" ;;
+            *.bz2)
+                msg2 "Extracting: ${BLUE}${src_base}${ALL_OFF}"
+                bunzip "$SOURCE_DIR/$src_base" -c > "$SOURCE_DIR/${src_base//.bz2/}" ;;
         esac
     done
 
