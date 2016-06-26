@@ -635,8 +635,8 @@ class Misc(object):
         if data is None:
             data = {}
         request = Request(surl, headers=data)
-        # SSL verification works OOTB only on Python >= 2.7.9 (officially)
-        if sys.version_info[2] >= 9:
+        # SSL verification works OOTB only on Python >= 2.7.9 and >=3.4.0 (officially)
+        if (self.python3 and sys.version_info[2] >= 4) or (self.python2 and sys.version_info[2] >= 9):
             import ssl
             ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
             return urlopen(request, timeout=self.TIMEOUT, context=ctx)

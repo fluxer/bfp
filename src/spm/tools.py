@@ -713,8 +713,9 @@ class Upload(object):
         try:
             arch = os.uname()[4]
             p = misc.getpass('Password for %s: ' % self.user)
-            # SSL verification works OOTB only on Python >= 2.7.10 (officially)
-            if sys.version_info[2] >= 10 and not self.insecure:
+            # SSL verification works OOTB only on Python >= 2.7.10 and >=3.4.0 (officially)
+            if ((self.python3 and sys.version_info[2] >= 4)
+                or (self.python2 and sys.version_info[2] >= 9)) and not self.insecure:
                 import ssl
                 ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
                 ftp = ftplib.FTP_TLS(self.host, self.user, p, timeout=libspm.TIMEOUT, context=ctx)
