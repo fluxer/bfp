@@ -578,11 +578,16 @@ class Source(object):
         ldconfig = misc.whereis('ldconfig', False, True)
         ldconfig_regex = '(.*\\.so)(?:$|\\s)'
         message.sub_debug('ldconfig', ldconfig or '')
+        prelink = misc.whereis('prelink', False, True)
+        message.sub_debug('prelink', prelink or '')
         match = misc.string_search(ldconfig_regex, adjcontent, escape=False)
         if match and ldconfig:
             message.sub_info(_('Updating shared libraries cache'))
             message.sub_debug(match)
             misc.system_chroot((ldconfig))
+        if match and prelink:
+            message.sub_info(_('Prelinking shared libraries and binaries'))
+            misc.system_chroot((prelink, '--all'))
 
         mandb = misc.whereis('mandb', False, True)
         mandb_regex = '(.*share/man.*)(?:$|\\s)'
