@@ -1,4 +1,4 @@
-Mon Dec 28 11:24:50 2015 +0200 Ivailo Monev <xakepa10@gmail.com>
+Mon Dec 28 11:24:50 2015 +0200 Ivailo Monev <xakepa10@laimg.moc>
 fc17b88cc4c13042bd30c0bfaa8ca57603c0b373 (tag: 1.9.1)
     * regenerate spm sources
     * fix typo in spm-tools merge mode
@@ -9,7 +9,7 @@ fc17b88cc4c13042bd30c0bfaa8ca57603c0b373 (tag: 1.9.1)
     * regenerate sources
     * check local dependencies too from libpackage.Database.remote_mdepends()
 
-Sat Dec 26 10:44:52 2015 +0200 Ivailo Monev <xakepa10@gmail.com>
+Sat Dec 26 10:44:52 2015 +0200 Ivailo Monev <xakepa10@laimg.moc>
 cfb1daef8adbd9d238142546b08cd6f049b1dc65 (tag: 1.9.0)
     * regenerate spm sources
     * replace doc with purge paths lint feature
@@ -188,7 +188,7 @@ cfb1daef8adbd9d238142546b08cd6f049b1dc65 (tag: 1.9.0)
     * make spm-tools portable mode autotest expected failure
     * implement experimental aport mode into spm
 
-Thu Jul 2 02:43:21 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
+Thu Jul 2 02:43:21 2015 +0000 Ivailo Monev <xakepa10@laimg.moc>
 7f8d540a4df27de311ffdbc2f089e9bea0bc9c73 (tag: 1.8.2)
     * use __exit__ instead of __del__ for cleanup
     * support another PGP signature extension
@@ -256,7 +256,7 @@ Thu Jul 2 02:43:21 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
     * pass --debug for the sake of the autotest
     * actually passe spm-tools arguments from the autotest script
 
-Sat Jun 20 00:08:11 2015 +0300 Ivailo Monev <xakepa10@gmail.com>
+Sat Jun 20 00:08:11 2015 +0300 Ivailo Monev <xakepa10@laimg.moc>
 dcd330d1a21c0c134ffd84c7595e0c8768b79ec0 (tag: 1.8.1)
     * fix some unicode files issue in libspm
     * make use of exact search for dependencies lookup from libspm
@@ -362,7 +362,7 @@ dcd330d1a21c0c134ffd84c7595e0c8768b79ec0 (tag: 1.8.1)
     * attempt to load module before mounting from libsystem.Block.mount
     * improve libsystem.Power
 
-Wed Jun 3 13:17:21 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
+Wed Jun 3 13:17:21 2015 +0000 Ivailo Monev <xakepa10@laimg.moc>
 7c706092d7cae22bb996f8b05ccb971ef43376d9 (tag: 1.8.0)
     * disable building and installation of spmd/spm-gui for now
     * replace blockd functionality with subsystem handling in ahws
@@ -579,20 +579,20 @@ Wed Jun 3 13:17:21 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
     * initial D-Bus daemon and reworked GUI
     * API cleanup
 
-Mon Apr 27 18:29:35 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
+Mon Apr 27 18:29:35 2015 +0000 Ivailo Monev <xakepa10@laimg.moc>
 567a60dd4df68e9f5d64c4616bf8bfe87937040a (tag: 1.7.6)
     * add warning message function to initramfs init script
     * update spm-tools Bash completion
     * remove backup file after replacing original on config merge
     * improve spm-tools merge mode
 
-Tue Apr 21 16:23:27 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
+Tue Apr 21 16:23:27 2015 +0000 Ivailo Monev <xakepa10@laimg.moc>
 7ccd899a6ad13a881ca07052dc5f839a91383957 (tag: 1.7.5)
     * minor original string correction
     * support globing entries in mkinitfs files configs
     * actually allow sinput to be None in libmisc.Misc.system_chroot()
 
-Wed Apr 15 23:36:40 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
+Wed Apr 15 23:36:40 2015 +0000 Ivailo Monev <xakepa10@laimg.moc>
 90430bc96ce96881adfb84e8ce0b85d6338b34d6 (tag: 1.7.4)
     * cleanup libmisc.Misc.url_normalize()
     * use libmisc.Misc.url_normalize() consitently across fetching actions
@@ -604,7 +604,7 @@ Wed Apr 15 23:36:40 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
     * improve srcmake binaries detection
     * simplify the rule for installing html docs
 
-Sat Apr 11 06:44:44 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
+Sat Apr 11 06:44:44 2015 +0000 Ivailo Monev <xakepa10@laimg.moc>
 320958381955e7e11ee69b66a8c76414d1d578ed (tag: 1.7.3)
     * remove redudant seek position setup from the SRCBUILD parser
     * make Makefile.inc reuse SHAREDIR for LOCALEDIR
@@ -635,7 +635,7 @@ Sat Apr 11 06:44:44 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
     * stop attempting to remove watchers on destruction of libmisc.Inotify()
     * remove Python 3 support from TODO - it's done
 
-Sun Apr 5 18:11:27 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
+Sun Apr 5 18:11:27 2015 +0000 Ivailo Monev <xakepa10@laimg.moc>
 2e4c30120ff2c19d7459fc4b9e5572a934b1c89b (tag: 1.7.2)
     * deprecate libmisc.Misc.fetch_check()
     * review srcbuild manual page
@@ -677,7 +677,7 @@ Sun Apr 5 18:11:27 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
     * fix copying of Git repos with symlinks in them
     * sign the tarball after creating it
 
-Fri Mar 27 18:06:11 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
+Fri Mar 27 18:06:11 2015 +0000 Ivailo Monev <xakepa10@laimg.moc>
 3cc81dc725e38383a380d357975b3452aa981529 (tag: 1.7.1)
     * make pkg2src rename validpgpkeys to pgpkeys
     * add safety check to the fetcher before extending the own mirrors copy
@@ -688,7 +688,7 @@ Fri Mar 27 18:06:11 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
     * pop an error from libspm if not mirrors are set but binary requested
     * update Nuitka to 0.5.11.2
 
-Fri Mar 27 15:53:04 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
+Fri Mar 27 15:53:04 2015 +0000 Ivailo Monev <xakepa10@laimg.moc>
 d0604659d0d73d7bda9d9e66045d774788cdd03f (tag: 1.7.0)
     * update Nuitka to 05.11.1
     * minor cleanups
@@ -836,7 +836,7 @@ d0604659d0d73d7bda9d9e66045d774788cdd03f (tag: 1.7.0)
     * do not mix arrays with strings in srcmake messaging functions
     * look for a interpreted either with delimiter or forward slash in the shebang
 
-Tue Mar 10 08:17:39 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
+Tue Mar 10 08:17:39 2015 +0000 Ivailo Monev <xakepa10@laimg.moc>
 2c91d86150f1df0933913997149c8f4af7ec4a70 (tag: 1.6.1)
     * update Nuitka to 0.5.10.2
     * cut the fat from libinotify
@@ -874,7 +874,7 @@ Tue Mar 10 08:17:39 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
     * avoid failures on missing section/option in spm.conf by defining defaults
     * remove deprecated database.local_installed() and adjust tests
 
-Sun Mar 8 17:38:23 2015 +0000 Ivailo Monev <xakepa10@gmail.com> 
+Sun Mar 8 17:38:23 2015 +0000 Ivailo Monev <xakepa10@laimg.moc> 
 eeca11112b29b068b8fecb612c2d32533ff6b1f6 (tag: 1.6.0)
     * version bump to 1.6.0
     * make building separate files possible (somewhat)
@@ -940,7 +940,7 @@ eeca11112b29b068b8fecb612c2d32533ff6b1f6 (tag: 1.6.0)
     * fixup syntax
     * support localizations for spm (gettext is required now)
 
-Thu Feb 5 03:04:36 2015 +0000 Ivailo Monev <xakepa10@gmail.com> 
+Thu Feb 5 03:04:36 2015 +0000 Ivailo Monev <xakepa10@laimg.moc> 
 dabda44f298a7834b5e2c76ea5a1f38e871d32eb (tag: 1.5.0)
     * lintian corrections
     * fixup dist mode, follow up on last commit
@@ -955,13 +955,13 @@ dabda44f298a7834b5e2c76ea5a1f38e871d32eb (tag: 1.5.0)
     * general cleanup
     * update nuitka to 0.5.9
 
-Thu Jan 29 05:00:47 2015 +0000 Ivailo Monev <xakepa10@gmail.com> 
+Thu Jan 29 05:00:47 2015 +0000 Ivailo Monev <xakepa10@laimg.moc> 
 199628a57ec80440b437a3157faa44d9e8ae3097 (tag: 1.4.1)
     * bump version to 1.4.1
     * triggers were not running on target remove - fix that
     * fixup check for updates via repo mode
 
-Wed Jan 28 01:26:52 2015 +0000 Ivailo Monev <xakepa10@gmail.com> 
+Wed Jan 28 01:26:52 2015 +0000 Ivailo Monev <xakepa10@laimg.moc> 
 42c214a2bdde0061eb1f1ae55729d74438cb6c28 (tag: 1.4.0)
     * bump version to 1.4.0
     * updated TODO
@@ -973,7 +973,7 @@ Wed Jan 28 01:26:52 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
     * fix the footprint generation method used in srcmake
     * tell nuitka to not recurse at all
 
-Sun Jan 11 22:27:04 2015 +0000 Ivailo Monev <xakepa10@gmail.com> 
+Sun Jan 11 22:27:04 2015 +0000 Ivailo Monev <xakepa10@laimg.moc> 
 04923f6eb7d8fc26b75f10147a0c3e77176c0baa (tag: 1.3.0)
     * version bump to 1.3.0
     * improve xdg-mime trigger, vendor prefix endining with slash is required in the basename
@@ -1028,7 +1028,7 @@ Sun Jan 11 22:27:04 2015 +0000 Ivailo Monev <xakepa10@gmail.com>
     * implement disowned files check mode into spm-tools
     * do not change variable but use in-place adjustment
 
-Mon Nov 17 00:03:50 2014 +0000 Ivailo Monev <xakepa10@gmail.com> 
+Mon Nov 17 00:03:50 2014 +0000 Ivailo Monev <xakepa10@laimg.moc> 
 d8183231a06ad8e3186dc6f7402ec4889e2011d8 (tag: 1.2.3)
     * version bump to 1.2.3
     * fix python version checking in libmisc.string_encode()
@@ -1041,7 +1041,7 @@ d8183231a06ad8e3186dc6f7402ec4889e2011d8 (tag: 1.2.3)
     * cleanup target links on remove/upgrade
     * fixup local_rdepends() in libpackage to properly respect ignored targets
 
-Sat Nov 8 15:48:47 2014 +0200 Ivailo Monev <xakepa10@gmail.com> 
+Sat Nov 8 15:48:47 2014 +0200 Ivailo Monev <xakepa10@laimg.moc> 
 38c8b1bcce8be7912d0e51ee306f512876cce7f7 (tag: 1.2.2)
     * bump version to 1.2.2
     * minor code-style correction on spm-tools
@@ -1065,7 +1065,7 @@ Sat Nov 8 15:48:47 2014 +0200 Ivailo Monev <xakepa10@gmail.com>
     * make use of archive_supported() from libmisc in libspm
     * respect the class variable for compressing man pages
 
-Wed Oct 29 15:49:40 2014 +0000 Ivailo Monev <xakepa10@gmail.com> 
+Wed Oct 29 15:49:40 2014 +0000 Ivailo Monev <xakepa10@laimg.moc> 
 e22f5a103e3f31cf4819d17c5b06fb48b7a68a63 (tag: 1.2.1)
     * version bump to 1.2.1
     * check only for shebangs in the beginning (first line) of the files in spm-tools
@@ -1087,7 +1087,7 @@ e22f5a103e3f31cf4819d17c5b06fb48b7a68a63 (tag: 1.2.1)
     * byte-compile python modules after runtime checks
     * updated TODO
 
-Sun Oct 19 18:17:07 2014 +0000 Ivailo Monev <xakepa10@gmail.com> 
+Sun Oct 19 18:17:07 2014 +0000 Ivailo Monev <xakepa10@laimg.moc> 
 e863bdd2e86055a8621ca69e68b61c4c4c139e02 (tag: 1.2.0)
     * version bump to 1.2.0
     * prevent infinite depth recursion in libpackage.local_rdepends() by appending the target to checked ahead
@@ -1140,7 +1140,7 @@ e863bdd2e86055a8621ca69e68b61c4c4c139e02 (tag: 1.2.0)
     * updated nuitka to 0.5.5.1
     * add essential groups/users to group and passwd files used in initramfs and use /bin/sh as shell for root user
 
-Thu Oct 9 23:47:00 2014 +0000 Ivailo Monev <xakepa10@gmail.com> 
+Thu Oct 9 23:47:00 2014 +0000 Ivailo Monev <xakepa10@laimg.moc> 
 fd867c4d4a12320cda642ffca4280778db0f1aa0 (tag: 1.1.0)
     * version bump to 1.1.0
     * respect rw or ro kernel arguments from initramfs

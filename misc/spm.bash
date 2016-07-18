@@ -1,4 +1,4 @@
-# SPM Bash completion by Ivailo Monev <xakepa10@gmail.com>
+# SPM Bash completion by Ivailo Monev <xakepa10@laimg.moc>
 
 _spm()
 {

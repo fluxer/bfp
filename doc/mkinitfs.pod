@@ -104,7 +104,7 @@ None
 
 =head1 AUTHORS
 
-Ivailo Monev (a.k.a. SmiL3y) <xakepa10@gmail.com>
+Ivailo Monev (a.k.a. SmiL3y) <xakepa10@laimg.moc>
 
 Copyright (c) 2013-2016 Ivailo Monev licensed through custom license, see the
 COPYING file bundled with the source code.

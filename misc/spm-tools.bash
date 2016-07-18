@@ -1,4 +1,4 @@
-# SPMT Bash completion by Ivailo Monev <xakepa10@gmail.com>
+# SPMT Bash completion by Ivailo Monev <xakepa10@laimg.moc>
 
 _spm_tools()
 {

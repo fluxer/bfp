@@ -100,7 +100,7 @@ make sources
 
 ### Current contributors
 
-- Ivailo Monev (a.k.a. SmiL3y) <xakepa10@gmail.com>
+- Ivailo Monev (a.k.a. SmiL3y) <xakepa10@laimg.moc>
 
 ### Past contributors
 
