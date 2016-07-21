@@ -1321,6 +1321,7 @@ class Source(object):
                 # metadata/SRCBUILD
                 elif sfile.startswith(('/dev/', '/sys/', '/proc/', LOCAL_DIR)):
                     continue
+                self.remove_target_file(sfile)
             remove_content = reversed(tuple(remove_content))
             message.sub_debug(_('Removing directories'))
             for sfile in remove_content:
