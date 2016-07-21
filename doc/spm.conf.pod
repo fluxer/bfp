@@ -210,7 +210,10 @@ Default: False
 =head2 CONFLICTS
 
 Set whether to check for conflicting files/links when merging targets. It is
-not wise to set this to False.
+not wise to set this to False because files from one local target may get
+removed upon removing/upgrading other local target when footprints overlap.
+This may break the system in which case your fridge should have your favourite
+alcohol drink to ease the pain.
 
 Default: True
 

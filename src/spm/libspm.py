@@ -1009,25 +1009,23 @@ class Source(object):
             else:
                 mpaths = misc.system_communicate((manpath, '--global')).split(':')
 
-            # NOTE: if target_content is reused later before re-indexing
-            # entries from it should be removed because files are removed
-            for sdir in mpaths:
-                for sfile in target_content:
-                    if not sdir in sfile:
+            for spath in target_content:
+                for sdir in mpaths:
+                    if not sdir in spath:
                         continue
-                    if not sfile.endswith('.gz') and os.path.isfile(sfile):
-                        message.sub_debug(_('Compressing'), sfile)
-                        misc.archive_compress((sfile,), '%s.gz' % sfile, '')
-                        os.unlink(sfile)
-                    elif os.path.islink(sfile) and \
-                        not os.path.isfile(os.path.realpath(sfile)):
-                        message.sub_debug(_('Adjusting link'), sfile)
-                        link = os.readlink(sfile)
-                        os.unlink(sfile)
-                        if not sfile.endswith('.gz'):
-                            os.symlink('%s.gz' % link, sfile)
+                    if not spath.endswith('.gz') and os.path.isfile(spath):
+                        message.sub_debug(_('Compressing'), spath)
+                        misc.archive_compress((spath,), '%s.gz' % spath, '')
+                        os.unlink(spath)
+                    elif os.path.islink(spath) and \
+                        not os.path.isfile(os.path.realpath(spath)):
+                        message.sub_debug(_('Adjusting link'), spath)
+                        link = os.readlink(spath)
+                        os.unlink(spath)
+                        if not spath.endswith('.gz'):
+                            os.symlink('%s.gz' % link, spath)
                         else:
-                            os.symlink(link, sfile)
+                            os.symlink(link, spath)
 
         message.sub_info(_('Re-indexing content'))
         target_content = {}
@@ -1310,6 +1308,7 @@ class Source(object):
         if target_upgrade:
             message.sub_info(_('Removing obsolete files and directories'))
             remove_content = frozenset(old_content).difference(new_content)
+            message.sub_debug(_('Removing files'))
             for sfile in remove_content:
                 sfull = '%s%s' % (ROOT_DIR, sfile.encode('utf-8'))
                 # skip files moved from real to symlink directory
@@ -1318,21 +1317,16 @@ class Source(object):
                     sresolved.replace(ROOT_DIR, '/')
                 if sresolved in new_content:
                     continue
-                # the metadata and SRCBUILD files will be deleted otherwise,
-                # also making sure ROOT_DIR different than / is respected
-                elif LOCAL_DIR in sfull:
+                # never delete files in the pseudo filesystems and the target's
+                # metadata/SRCBUILD
+                elif sfile.startswith(('/dev/', '/sys/', '/proc/', LOCAL_DIR)):
                     continue
-                # never delete files in the pseudo filesystems
-                elif sfile.startswith(('/dev/', '/sys/', '/proc/')):
-                    continue
-                # TODO: optimize and apply same logic for links
-                elif database.local_belongs(sfile):
-                    message.sub_warning(_('Target file owned by mutliple targets'), sfile)
-                    continue
-                self.remove_target_file(sfile)
-            for sfile in reversed(tuple(remove_content)):
+            remove_content = reversed(tuple(remove_content))
+            message.sub_debug(_('Removing directories'))
+            for sfile in remove_content:
                 self.remove_target_dir(os.path.dirname(sfile))
-            for sfile in reversed(tuple(remove_content)):
+            message.sub_debug(_('Removing links'))
+            for sfile in remove_content:
                 self.remove_target_link(sfile)
 
             if misc.file_search('\npost_upgrade()', self.srcbuild, escape=False) \
