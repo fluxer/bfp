@@ -974,14 +974,6 @@ class Source(object):
             'source %s && umask 0022 && src_install' % \
             self.srcbuild), cwd=self.source_dir)
 
-        for libdir in ('/lib64', '/usr/lib64', '/lib32', '/usr/lib32'):
-            realdir = os.path.realpath(libdir)
-            instsym = '%s%s' % (self.install_dir, libdir)
-            instreal = '%s%s' % (self.install_dir, realdir)
-            if os.path.exists(instreal) and not os.listdir(instreal):
-                os.unlink(instsym)
-                os.rmdir(instreal)
-
         message.sub_info(_('Indexing content'))
         target_content = misc.list_all(self.install_dir)
 
@@ -995,6 +987,16 @@ class Source(object):
                     misc.dir_remove(spath)
                 else:
                     os.unlink(spath)
+
+        for libdir in ('/lib64', '/usr/lib64', '/lib32', '/usr/lib32'):
+            realdir = os.path.realpath(libdir)
+            instsym = '%s%s' % (self.install_dir, libdir)
+            instreal = '%s%s' % (self.install_dir, realdir)
+            if os.path.exists(instreal) and not os.listdir(instreal):
+                os.rmdir(instreal)
+            # separated logic on purpose, something may remove the directories
+            if os.path.islink(instsym) and not os.path.exists(instreal):
+                os.unlink(instsym)
 
         if self.compress_man:
             message.sub_info(_('Compressing manual pages'))
