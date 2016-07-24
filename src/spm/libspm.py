@@ -985,7 +985,7 @@ class Source(object):
                 message.sub_debug(_('Purging'), spath)
                 if os.path.isdir(spath):
                     misc.dir_remove(spath)
-                else:
+                elif os.path.isfile(spath) or os.path.islink(spath):
                     os.unlink(spath)
 
         for libdir in ('/lib64', '/usr/lib64', '/lib32', '/usr/lib32'):
