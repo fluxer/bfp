@@ -16,7 +16,7 @@ else:
 import libmessage
 message = libmessage.Message()
 
-app_version = "1.9.1 (d3d0cdb)"
+app_version = "1.9.1 (08bc6b8)"
 
 
 retvalue = 0
