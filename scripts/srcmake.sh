@@ -84,8 +84,8 @@ for src in "${@:-.}";do
     elif ! whereis git ;then
         # FIXME: error out if there is git URL in sources array
         warn "Git is not installed"
-    elif ! whereis grep || ! whereis find || ! whereis awk || ! whereis du ;then
-        error "grep, find, awk and/or du are not installed"
+    elif ! whereis grep || ! whereis find || ! whereis cut || ! whereis du ;then
+        error "grep, find, cut and/or du are not installed"
         exit 1
     fi
 
@@ -212,7 +212,7 @@ for src in "${@:-.}";do
     echo "description=$description" >> "$metadata"
     echo "depends=${depends[*]}" >> "$metadata"
     echo "backup=${backup[*]}" >> "$metadata"
-    echo "size=$(du -s "$INSTALL_DIR" | awk '{print $1}')" >> "$metadata"
+    echo "size=$(du -s "$INSTALL_DIR" | cut -f1)" >> "$metadata"
 
     msg "Compressing tarball.."
     tarball="${src_name}_${version}.tar.bz2"
