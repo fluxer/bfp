@@ -591,14 +591,14 @@ class Pkg(object):
             self.targets.extend(database.remote_alias(target))
         self.directory = directory
         self.PKG_DIRS = (
-            'https://crux.nu/ports/crux-3.1/compat-32/%s',
-            'https://crux.nu/ports/crux-3.1/contrib/%s',
-            'https://crux.nu/ports/crux-3.1/core/%s',
-            'https://crux.nu/ports/crux-3.1/enlightenment/%s',
-            'https://crux.nu/ports/crux-3.1/kde4/%s',
-            'https://crux.nu/ports/crux-3.1/opt/%s',
-            'https://crux.nu/ports/crux-3.1/xfce/%s',
-            'https://crux.nu/ports/crux-3.1/xorg/%s',
+            'https://crux.nu/ports/crux-3.2/compat-32/%s',
+            'https://crux.nu/ports/crux-3.2/contrib/%s',
+            'https://crux.nu/ports/crux-3.2/core/%s',
+            'https://crux.nu/ports/crux-3.2/enlightenment/%s',
+            'https://crux.nu/ports/crux-3.2/kde4/%s',
+            'https://crux.nu/ports/crux-3.2/opt/%s',
+            'https://crux.nu/ports/crux-3.2/xfce/%s',
+            'https://crux.nu/ports/crux-3.2/xorg/%s',
         )
 
     def get_links(self, pkgname):
