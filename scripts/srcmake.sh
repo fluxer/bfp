@@ -230,10 +230,17 @@ for src in "${@:-.}";do
         rm -rf "$SOURCE_DIR" "$INSTALL_DIR"
     fi
 
+    if [ "$(id -u)" != "0" ] && ! whereis sudo ;then
+        sus="${RED}sudo "
+        sue=""
+    elif [ "$(id -u)" != "0" ];then
+        sus="${RED}su -c '"
+        sue="${RED}'"
+    fi
     if whereis bsdtar ;then
-        msg "To merge it: ${GREEN}bsdtar -vxpf ${src}/${tarball} -C /${ALL_OFF}"
+        msg "To merge it: ${sus}${GREEN}bsdtar -vxpf ${src}/${tarball} -C /${sue}${ALL_OFF}"
     elif whereis tar ;then
-        msg "To merge it: ${GREEN}tar -vxphf ${src}/${tarball} -C /${ALL_OFF}"
+        msg "To merge it: ${sus}${GREEN}tar -vxphf ${src}/${tarball} -C /${sue}${ALL_OFF}"
     fi
     set +e
 done
