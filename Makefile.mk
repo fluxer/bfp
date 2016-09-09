@@ -11,7 +11,6 @@ MANDIR = $(SHAREDIR)/man
 DOCDIR = $(SHAREDIR)/doc
 SITEDIR = $(shell $(PYTHON) -c "import site; print(site.getsitepackages()[0])")
 BASHCOMPLETIONDIR = /etc/bash_completion.d
-LOCALEDIR = $(SHAREDIR)/locale
 INITDIR = /etc/init.d
 
 PYTHON_VERSION = $(shell $(PYTHON) -c "import sys; print(sys.version[:3])")
@@ -39,10 +38,6 @@ INSTALL = install -v
 RM = rm -vf
 CP = cp -vf
 XZ = xz -v
-XGETTEXT = xgettext
-MSGMERGE = msgmerge
-MSGATTRIB = msgattrib
-MSGFMT = msgfmt
 POD2MAN = pod2man
 CLOC = cloc
 

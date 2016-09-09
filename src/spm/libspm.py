@@ -1,7 +1,8 @@
 #!/usr/bin/python2
 
-import gettext
-_ = gettext.translation('spm', fallback=True).gettext
+# stub for gettext
+def _(arg):
+    return arg
 
 import sys, os, shutil, re, time, syslog, glob
 from collections import OrderedDict
@@ -48,7 +49,6 @@ DEFAULTS = {
     'STRIP_SHARED': 'False',
     'STRIP_STATIC': 'False',
     'STRIP_RPATH': 'False',
-    'PYTHON_COMPILE': 'False',
     'IGNORE_MISSING': 'False',
     'CONFLICTS': 'False',
     'BACKUP': 'False',
@@ -94,7 +94,6 @@ STRIP_BINARIES = mainconf.getboolean('install', 'STRIP_BINARIES')
 STRIP_SHARED = mainconf.getboolean('install', 'STRIP_SHARED')
 STRIP_STATIC = mainconf.getboolean('install', 'STRIP_STATIC')
 STRIP_RPATH = mainconf.getboolean('install', 'STRIP_RPATH')
-PYTHON_COMPILE = mainconf.getboolean('install', 'PYTHON_COMPILE')
 IGNORE_MISSING = mainconf.getboolean('install', 'IGNORE_MISSING')
 CONFLICTS = mainconf.getboolean('merge', 'CONFLICTS')
 BACKUP = mainconf.getboolean('merge', 'BACKUP')
@@ -459,7 +458,6 @@ class Source(object):
         self.strip_static = STRIP_STATIC
         self.strip_rpath = STRIP_RPATH
         self.ignore_missing = IGNORE_MISSING
-        self.python_compile = PYTHON_COMPILE
         message.CATCH = CATCH
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
@@ -578,16 +576,11 @@ class Source(object):
         ldconfig = misc.whereis('ldconfig', False, True)
         ldconfig_regex = '(.*\\.so)(?:$|\\s)'
         message.sub_debug('ldconfig', ldconfig or '')
-        prelink = misc.whereis('prelink', False, True)
-        message.sub_debug('prelink', prelink or '')
         match = misc.string_search(ldconfig_regex, adjcontent, escape=False)
         if match and ldconfig:
             message.sub_info(_('Updating shared libraries cache'))
             message.sub_debug(match)
             misc.system_chroot((ldconfig))
-        if match and prelink:
-            message.sub_info(_('Prelinking shared libraries and binaries'))
-            misc.system_chroot((prelink, '--all'))
 
         mandb = misc.whereis('mandb', False, True)
         mandb_regex = '(.*share/man.*)(?:$|\\s)'
@@ -758,7 +751,6 @@ class Source(object):
             misc.system_chroot((depmod, match[0]))
             mkinitfs_run = True
 
-        # distribution specifiec
         mkinitfs = misc.whereis('mkinitfs', False, True)
         mkinitfs_regex = '(?:^|\\s)(?:/)?(boot/vmlinuz-(.*)|etc/mkinitfs/.*)(?:$|\\s)'
         message.sub_debug('mkinitfs', mkinitfs or '')
@@ -1158,40 +1150,12 @@ class Source(object):
         if missing_detected:
             sys.exit(2)
 
-        if self.python_compile:
-            # force build the caches to prevent access time issues with
-            # .py files being older that .pyc files because .pyc files
-            # where modified after the usual installation procedure
-            message.sub_info(_('Byte-compiling Python modules'))
-            # FIXME: that's not future proof!
-            # anything earlier than Python 2.6 is beyond upstream support (AFAICT)
-            for version in ('2.6', '2.7', '3.1', '3.3', '3.4', '3.5', '3.6'):
-                compilepaths = []
-                for spath in ('lib/python%s/site-packages' % version, \
-                    'usr/lib/python%s/site-packages' % version):
-                    sfull = '%s/%s' % (self.install_dir, spath)
-                    if not os.path.exists(sfull):
-                        continue
-                    message.sub_debug(_('Python %s directory' % version), sfull)
-                    compilepaths.append(sfull)
-                interpreter = misc.whereis('python%s' % version, False)
-                if not interpreter and compilepaths:
-                    message.sub_warning(_('Python interpreter missing'), version)
-                    continue
-                elif compilepaths:
-                    command = [interpreter, '-m', 'compileall', '-f', '-q']
-                    command.extend(compilepaths)
-                    misc.system_command(command)
-
         message.sub_info(_('Assembling metadata'))
         metadata = '%s/%s' % (self.install_dir, self.target_metadata)
-        misc.dir_create(os.path.dirname(metadata))
-        # due to creations and deletions of files, when byte-compiling
-        # Python modules for an example, do not re-use target_content
         footprint = []
         optdepends = []
         backup = {}
-        for sfile in misc.list_files(self.install_dir):
+        for sfile in target_content:
             sstripped = sfile.replace(self.install_dir, '')
             # ignore local target files, they are not wanted in the footprint
             if LOCAL_DIR in sfile:
@@ -1217,12 +1181,8 @@ class Source(object):
             ('size', misc.dir_size(self.install_dir)),
             ('footprint', footprint),
             ('builddate', time.ctime()),
-            ('chost', CHOST),
-            ('cflags', CFLAGS),
-            ('cxxflags', CXXFLAGS),
-            ('cppflags', CPPFLAGS),
-            ('ldflags', LDFLAGS),
         ]
+        misc.dir_create(os.path.dirname(metadata))
         misc.json_write(metadata, OrderedDict(data))
 
         message.sub_info(_('Assembling SRCBUILD'))
@@ -1567,13 +1527,6 @@ class Source(object):
                     message.sub_warning(_('Overriding IGNORE_MISSING to'), _('False'))
                     self.ignore_missing = False
 
-                if option == 'pycompile' and not self.python_compile:
-                    message.sub_warning(_('Overriding PYTHON_COMPILE to'), _('True'))
-                    self.python_compile = True
-                elif option == '!pycompile' and self.python_compile:
-                    message.sub_warning(_('Overriding PYTHON_COMPILE to'), _('False'))
-                    self.python_compile = False
-
                 # that's a bit of exception
                 if option == '!purge' and self.purge_paths:
                     message.sub_warning(_('Overriding PURGE_PATHS to'), _('False'))
@@ -1621,7 +1574,6 @@ class Source(object):
             self.strip_shared = STRIP_SHARED
             self.strip_static = STRIP_STATIC
             self.strip_rpath = STRIP_RPATH
-            self.python_compile = PYTHON_COMPILE
             self.ignore_missing = IGNORE_MISSING
 
 wantscookie = '''
@@ -1630,172 +1582,6 @@ wantscookie = '''
       (o o)          (o o)         {}o o{}     -  (o)o)  -       (o o)
 --ooO--(_)--Ooo--ooO--(_)--Ooo--ooO--(_)--Ooo--ooO'(_)--Ooo--ooO--`o'--Ooo--
 '''
-
-
-class Binary(Source):
-    ''' Class to handle binary tarballs '''
-    def __init__(self, targets, do_fetch=False, do_prepare=False, \
-        do_merge=False, do_remove=False, do_depends=False, do_reverse=False, \
-        do_update=False, autoremove=False, buildmissing=False):
-        super(Binary, self).__init__(Source)
-        self.targets = targets
-        self.do_fetch = do_fetch
-        self.do_prepare = do_prepare
-        self.do_merge = do_merge
-        self.do_remove = do_remove
-        self.do_depends = do_depends
-        self.do_reverse = do_reverse
-        self.do_update = do_update
-        self.autoremove = autoremove
-        self.buildmissing = buildmissing
-        message.CATCH = CATCH
-        misc.OFFLINE = OFFLINE
-        misc.TIMEOUT = TIMEOUT
-        misc.ROOT_DIR = ROOT_DIR
-        misc.GPG_DIR = GPG_DIR
-        misc.SHELL = SHELL
-        misc.CATCH = CATCH
-        database.ROOT_DIR = ROOT_DIR
-        database.CACHE_DIR = CACHE_DIR
-        database.LOCAL_DIR = LOCAL_DIR
-        database.IGNORE = IGNORE
-        database.NOTIFY = NOTIFY
-
-    def autobinary(self, targets, automake=False, autoremove=False):
-        ''' Handle targets install/remove without affecting current object '''
-        if automake:
-            obj = Binary(targets, do_fetch=True, do_prepare=True, \
-                do_merge=True, do_depends=True, do_reverse=self.do_reverse, \
-                do_update=False, buildmissing=self.buildmissing)
-        else:
-            obj = Binary(targets, do_reverse=self.do_reverse, \
-                autoremove=autoremove)
-        obj.main()
-
-    def fetch(self):
-        ''' Fetch target tarballs and signatures '''
-        message.sub_info(_('Fetching binaries'))
-        # usually that would not happend (see the mirrors config parser) but
-        # since that's a module one can temper with MIRRORS
-        if len(MIRRORS) < 1:
-            message.sub_critical(_('At least one mirror is required'))
-            sys.exit(2)
-
-        src_base = '%s.xz' % misc.file_name(self.target_tarball)
-        local_file = self.target_tarball
-
-        message.sub_debug(_('Checking mirrors for'), src_base)
-        found = False
-        sprefix = 'tarballs/%s/' % os.uname()[4]
-        surl = '%s/%s/%s' % (MIRRORS[0], sprefix, src_base)
-        sdepends = '%s.depends' % local_file
-        if misc.url_ping(surl, MIRRORS, sprefix):
-            found = True
-            message.sub_debug(_('Fetching'), surl)
-            misc.fetch(surl, local_file, MIRRORS, sprefix)
-            misc.fetch('%s.depends' % surl, sdepends, MIRRORS, sprefix)
-            if VERIFY:
-                sigurl = '%s.sig' % surl
-                sigfile = '%s.sig' % local_file
-                message.sub_debug(_('Fetching'), sigurl)
-                misc.fetch(sigurl, sigfile, MIRRORS, sprefix)
-                message.sub_debug(_('Verifying'), local_file)
-                misc.gpg_verify(local_file)
-
-        if not found and self.buildmissing:
-            message.sub_warning(_('Binary tarball not available for'), self.target_name)
-            self.autosource([self.target_name], automake=True)
-        elif not found:
-            message.sub_critical(_('Binary tarball not available for'), self.target_name)
-            sys.exit(2)
-
-    def prepare(self):
-        ''' Prepare target tarballs '''
-        message.sub_info(_('Checking dependencies'))
-        missing = []
-        sdepends = '%s.depends' % self.target_tarball
-        depends = misc.file_read(sdepends).split()
-        message.sub_debug(_('Dependencies'), depends)
-        for m in depends:
-            if not database.local_uptodate(m):
-                missing.append(m)
-        if missing and self.do_depends:
-            message.sub_info(_('Fetching dependencies'), missing)
-            self.autobinary(missing, automake=True)
-            message.sub_info(_('Resuming preparations of'), self.target_name)
-        elif missing:
-            message.sub_warning(_('Dependencies missing'), missing)
-
-    def main(self):
-        ''' Execute action for every target '''
-        # resolve aliases and meta groups
-        for alias in database.remote_aliases():
-            if alias in self.targets:
-                position = self.targets.index(alias)
-                self.targets[position:position+1] = \
-                    database.remote_alias(alias)
-
-        for target in self.targets:
-            # make sure target is absolute path
-            if os.path.isdir(target):
-                target = os.path.abspath(target)
-
-            target_name = os.path.basename(target)
-            if target_name in IGNORE:
-                message.sub_warning(_('Ignoring target'), target_name)
-                continue
-
-            target_dir = database.remote_search(target)
-            # fallback to the local SRCBUILD, only on target removal
-            if not target_dir and (self.do_remove or self.autoremove):
-                target_dir = database.local_search(target)
-            if not target_dir:
-                message.sub_critical(_('Invalid target'), target)
-                sys.exit(2)
-
-            # set target properties
-            self.target = target
-            self.target_name = target_name
-            self.target_dir = target_dir
-            self.srcbuild = '%s/SRCBUILD' % self.target_dir
-            self.source_dir = '%s/%s/source' % (BUILD_DIR, self.target_name)
-            self.install_dir = '%s/%s/install' % (BUILD_DIR, self.target_name)
-            self.target_version = database.remote_metadata(self.target_dir, 'version')
-            self.target_release = database.remote_metadata(self.target_dir, 'release')
-            self.target_description = database.remote_metadata(self.target_dir, 'description')
-            self.target_depends = database.remote_metadata(self.target_dir, 'depends')
-            self.target_makedepends = database.remote_metadata(self.target_dir, 'makedepends')
-            self.target_optdepends = database.remote_metadata(self.target_dir, 'optdepends')
-            self.target_sources = database.remote_metadata(self.target_dir, 'sources')
-            self.target_pgpkeys = database.remote_metadata(self.target_dir, 'pgpkeys')
-            self.target_options = database.remote_metadata(self.target_dir, 'options')
-            self.target_backup = database.remote_metadata(self.target_dir, 'backup')
-            self.target_metadata = 'var/local/spm/%s/metadata.json' % self.target_name
-            self.target_srcbuild = 'var/local/spm/%s/SRCBUILD' % self.target_name
-            self.sources_dir = '%s/sources/%s' % (CACHE_DIR, self.target_name)
-            self.target_tarball = '%s/tarballs/%s/%s_%s.tar.xz' % (CACHE_DIR, \
-                os.uname()[4], self.target_name, self.target_version)
-
-            if database.local_uptodate(self.target) and self.do_update:
-                message.sub_warning(_('Target is up-to-date'), self.target)
-                continue
-
-            if self.do_fetch:
-                message.sub_info(_('Starting fetch of'), self.target_name)
-                self.fetch()
-
-            if self.do_prepare:
-                message.sub_info(_('Starting preparations of'), self.target_name)
-                self.prepare()
-
-            if self.do_merge:
-                message.sub_info(_('Starting merge of'), self.target_name)
-                self.merge()
-
-            if self.do_remove or self.autoremove:
-                message.sub_info(_('Starting remove of'), self.target_name)
-                self.remove()
-
 
 class Who(object):
     ''' Class for printing file owner '''

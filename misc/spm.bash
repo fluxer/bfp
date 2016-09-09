@@ -3,15 +3,15 @@
 _spm()
 {
     local action cur prev
-    local main_options repo_options remote_options binary_options source_options
+    local main_options repo_options remote_options source_options
     local local_options who_options who_options
 
-    actions='repo remote source binary local who'
+    actions='repo remote source local who'
 
     main_options='-h --help --cache --build --root --gpg --ignore --notify
         --mirror --timeout --verify --chost --cflags --cxxflags --cppflags
         --ldflags --makeflags --purge --man --split --binaries --shared --static
-        --rpath --upx --sign --pycompile --missing --conflicts --backup
+        --rpath --sign --missing --conflicts --backup
         --scripts --debug --version'
 
     repo_options='-h --help -c --clean -s --sync -u --update
@@ -25,9 +25,6 @@ _spm()
     source_options='-h --help -C --clean -f --fetch -p --prepare -c --compile
         -k --check -i --install -m --merge -r --remove -D --depends
         -R --reverse -u --update -a --automake'
-
-    binary_options='-h --help -f --fetch -p --prepare -m --merge -r --remove
-        -D --depends -R --reverse -u --update'
 
     local_options='-h --help -n --name -v --version -R --release
         -d --description -D --depends -O --optdepends -r --reverse -s --size
@@ -46,8 +43,6 @@ _spm()
         COMPREPLY=($(compgen -W "${remote_options}" -- "${cur}"))
     elif [[ ${arg} = source ]]; then
         COMPREPLY=($(compgen -W "${source_options}" -- "${cur}"))
-    elif [[ ${arg} = binary ]]; then
-        COMPREPLY=($(compgen -W "${binary_options}" -- "${cur}"))
     elif [[ ${arg} = local ]];then
         COMPREPLY=($(compgen -W "${local_options}" -- "${cur}"))
     elif [[ ${arg} = who ]];then

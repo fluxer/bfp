@@ -1,7 +1,8 @@
 #!/usr/bin/python2
 
-import gettext
-_ = gettext.translation('spm', fallback=True).gettext
+# stub for gettext
+def _(arg):
+    return arg
 
 import sys, os, argparse, ast, subprocess, tarfile, zipfile, shutil, re
 if sys.version < '3':
@@ -16,7 +17,7 @@ else:
 import libmessage
 message = libmessage.Message()
 
-app_version = "1.9.1 (08bc6b8)"
+app_version = "1.9.1 (bf0990c)"
 
 
 retvalue = 0
@@ -177,12 +178,6 @@ try:
             libspm.STRIP_RPATH = values
             setattr(namespace, self.dest, values)
 
-    class OverridePyCompile(argparse.Action):
-        ''' Override compiling of Python modules '''
-        def __call__(self, parser, namespace, values, option_string=None):
-            libspm.PYTHON_COMPILE = values
-            setattr(namespace, self.dest, values)
-
     class OverrideMissing(argparse.Action):
         ''' Override missing runtime dependencies failure '''
         def __call__(self, parser, namespace, values, option_string=None):
@@ -298,29 +293,6 @@ try:
     source_parser.add_argument('TARGETS', nargs='+', type=str, \
         help=_('Targets to apply actions on'))
 
-    binary_parser = subparsers.add_parser('binary', \
-        help=_('Install software from pre-build tarballs'))
-    binary_parser.add_argument('-f', '--fetch', action='store_true', \
-        help=_('Fetch binaries of target'))
-    binary_parser.add_argument('-p', '--prepare', action='store_true', \
-        help=_('Prepare binaries of target'))
-    binary_parser.add_argument('-m', '--merge', action='store_true', \
-        help=_('Merge compiled files of target to system'))
-    binary_parser.add_argument('-r', '--remove', action='store_true', \
-        help=_('Remove compiled files of target from system'))
-    binary_parser.add_argument('-D', '--depends', action='store_true', \
-        help=_('Consider dependency targets'))
-    binary_parser.add_argument('-R', '--reverse', action='store_true', \
-        help=_('Consider reverse dependency targets'))
-    binary_parser.add_argument('-u', '--update', action='store_true', \
-        help=_('Apply actions only if update is available'))
-    binary_parser.add_argument('-a', '--automake', action='store_true', \
-        help=_('Short for fetch, prepare and merge'))
-    binary_parser.add_argument('-B', '--buildmissing', action='store_true', \
-        help=_('Build from source when binary not available'))
-    binary_parser.add_argument('TARGETS', nargs='+', type=str, \
-        help=_('Targets to apply actions on'))
-
     local_parser = subparsers.add_parser('local', \
         help=_('Get local targets metadata'))
     local_parser.add_argument('-n', '--name', action='store_true', \
@@ -357,15 +329,6 @@ try:
         help=_('Print in plain format'))
     who_parser.add_argument('PATTERN', type=str, \
         help=_('Pattern to search for in local targets'))
-
-    aport_parser = subparsers.add_parser('aport', \
-        help=_('Automatically write SRCBUILD for sources given via URL'))
-    aport_parser.add_argument('-d', '--directory', type=str, \
-        default=libspm.misc.dir_current(), help=_('Set output directory'))
-    aport_parser.add_argument('-a', '--automake', action='store_true', \
-        help=_('Build the target after analizing and creating SRCBUILD for it'))
-    aport_parser.add_argument('URLS', nargs='+', type=str, \
-        help=_('URLs to apply actions on'))
 
     parser.add_argument('--cache', type=str, action=OverrideCacheDir, \
         help=_('Change cache directory'))
@@ -426,12 +389,6 @@ try:
     parser.add_argument('--rpath', type=ast.literal_eval, \
         action=OverrideRpath, choices=[True, False], \
         help=_('Set whether to strip RPATH'))
-    parser.add_argument('--upx', type=ast.literal_eval, \
-        action=OverrideRpath, choices=[True, False], \
-        help=_('Set whether to compress binaries'))
-    parser.add_argument('--pycompile', type=ast.literal_eval, \
-        action=OverridePyCompile, choices=[True, False], \
-        help=_('Set whether to byte-compile Python modules'))
     parser.add_argument('--missing', type=ast.literal_eval, \
         action=OverrideMissing, choices=[True, False], \
         help=_('Set whether to ignore missing runtime dependencies'))
@@ -544,31 +501,6 @@ try:
                 ARGS.prepare, ARGS.compile, ARGS.check, ARGS.install, \
                 ARGS.merge, ARGS.remove, ARGS.depends, ARGS.reverse, \
                 ARGS.update)
-        m.main()
-
-    elif ARGS.mode == 'binary':
-        message.info(_('Runtime information'))
-        message.sub_info(_('CACHE_DIR'), libspm.CACHE_DIR)
-        message.sub_info(_('ROOT_DIR'), libspm.ROOT_DIR)
-        message.sub_info(_('GPG_DIR'), libspm.GPG_DIR)
-        message.sub_info(_('IGNORE'), libspm.IGNORE)
-        message.sub_info(_('NOTIFY'), libspm.NOTIFY)
-        message.sub_info(_('OFFLINE'), libspm.OFFLINE)
-        message.sub_info(_('MIRROR'), libspm.MIRROR)
-        message.sub_info(_('TIMEOUT'), libspm.TIMEOUT)
-        message.sub_info(_('VERIFY'), libspm.VERIFY)
-        message.sub_info(_('CONFLICTS'), libspm.CONFLICTS)
-        message.sub_info(_('BACKUP'), libspm.BACKUP)
-        message.sub_info(_('SCRIPTS'), libspm.SCRIPTS)
-        message.sub_info(_('TARGETS'), ARGS.TARGETS)
-        message.info(_('Poking binaries...'))
-        if ARGS.automake:
-            ARGS.fetch = True
-            ARGS.prepare = True
-            ARGS.merge = True
-        m = libspm.Binary(ARGS.TARGETS, ARGS.fetch, ARGS.prepare, \
-            ARGS.merge, ARGS.remove, ARGS.depends, ARGS.reverse, \
-            ARGS.update, buildmissing=ARGS.buildmissing)
         m.main()
 
     elif ARGS.mode == 'local':

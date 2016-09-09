@@ -12,18 +12,16 @@ spm - Source Package Manager
     [--cppflags CPPFLAGS] [--ldflags LDFLAGS] [--makeflags MAKEFLAGS]
     [--purge PURGE] [--man {True,False}] [--split {True,False}]
     [--binaries {True,False}] [--shared {True,False}]
-    [--static {True,False}] [--rpath {True,False}] [--upx {True,False}]
-    [--pycompile {True,False}] [--missing {True,False}]
-    [--conflicts {True,False}] [--backup {True,False}]
-    [--scripts {True,False}] [--triggers {True,False}] [--debug]
-    [--version]
-    {repo,remote,source,binary,local,who} ...
+    [--static {True,False}] [--rpath {True,False}]
+    [--missing {True,False}] [--conflicts {True,False}]
+    [--backup {True,False}] [--scripts {True,False}]
+    [--triggers {True,False}] [--debug] [--version]
+    {repo,remote,source,local,who} ...
 
 =head1 DESCRIPTION
 
 Source Package Manager (SPM) manages targets, or packages, build from source
-code. It has a binary mode to install pre-build software due to popular demand
-too but it was designed to fetch, extract, build and install compiled files on
+code. It is designed to fetch, extract, build and install compiled files on
 the system. What it does using different approach is that SPM detects library
 dependencies at install time so that dependencies are resolved in matter of
 what is needed by the library and binary files of the target by running
@@ -150,11 +148,10 @@ features but some of those may be implemented later on.
 =head2 MAIN
 
 positional arguments:
-  {repo,remote,source,binary,local,who}
+  {repo,remote,source,local,who}
   repo                Clean, sync, prune and/or check repositories for updates
   remote              Get remote targets metadata
   source              Build software from source code
-  binary              Install software from pre-build tarballs
   local               Get local targets metadata
   who                 Get owner of files via regular expression
 
@@ -193,9 +190,6 @@ optional arguments:
   --static {True,False}
                         Set whether to strip static libraries
   --rpath {True,False}  Set whether to strip RPATH
-  --upx {True,False}    Set whether to compress binaries
-  --pycompile {True,False}
-                        Set whether to byte-compile Python modules
   --missing {True,False}
                         Set whether to ignore missing runtime dependencies
   --conflicts {True,False}
@@ -261,23 +255,6 @@ optional arguments:
   -R, --reverse         Consider reverse dependency targets
   -u, --update          Apply actions only if update is available
   -a, --automake        Short for clean, prepare, compile, install and merge
-
-=head2 BINARY MODE
-
-positional arguments:
-  TARGETS               Targets to apply actions on
-
-optional arguments:
-  -h, --help            Show this help message and exit
-  -f, --fetch           Fetch binaries of target
-  -p, --prepare         Prepare binaries of target
-  -m, --merge           Merge compiled files of target to system
-  -r, --remove          Remove compiled files of target from system
-  -D, --depends         Consider dependency targets
-  -R, --reverse         Consider reverse dependency targets
-  -u, --update          Apply actions only if update is available
-  -a, --automake        Short for fetch, prepare and merge
-  -B, --buildmissing    Build from source when binary not available
 
 =head2 LOCAL MODE
 
@@ -346,11 +323,10 @@ Print the owner of 'bin/bash':
     spm who 'bin/bash\b'
 
 Note that remote, local and who modes accept regexp similar to those in Perl.
-For more information visit http://docs.python.org/2/library/re.html. Source and
-binary mode accepts base (e.g. foo), directory (e.g. /home/me/foo) with
-SRCBUILD in it, aliases (e.g. base) which you can find on the top-level of a
-repository as foo.alias or finally meta groups - currently only two - world and
-system.
+For more information visit http://docs.python.org/2/library/re.html. Source
+mode accepts base (e.g. foo), directory (e.g. /home/me/foo) with SRCBUILD in
+it, aliases (e.g. base) which you can find on the top-level of a repository as
+foo.alias or finally meta groups - currently only two - world and system.
 
 Modes that support targets passing (accept the TARGETS argument) support
 standard input passing via "-" as TARGETS and piping the executable.

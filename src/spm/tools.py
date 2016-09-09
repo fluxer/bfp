@@ -1,7 +1,8 @@
 #!/usr/bin/python2
 
-import gettext
-_ = gettext.translation('spm', fallback=True).gettext
+# stub for gettext
+def _(arg):
+    return arg
 
 import sys, argparse, subprocess, tarfile, zipfile, shutil, os, re, difflib
 import pwd, grp, ftplib, site, imp, glob
@@ -26,7 +27,7 @@ database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 misc.SHELL = libspm.SHELL
 
-app_version = "1.9.1 (08bc6b8)"
+app_version = "1.9.1 (bf0990c)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''

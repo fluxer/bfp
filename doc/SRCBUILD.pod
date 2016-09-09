@@ -127,10 +127,6 @@ Ignore missing runtime dependencies.
 
 Fix RPATH in binaries and libraries
 
-=head3 pycompile
-
-Byte-compile Python module files.
-
 =head3 debug
 
 Split debug information from DWARF files.
