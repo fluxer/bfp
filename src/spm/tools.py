@@ -712,7 +712,6 @@ class Upload(object):
 
         ftp = None
         try:
-            arch = os.uname()[4]
             p = misc.getpass('Password for %s: ' % self.user)
             # SSL verification works OOTB only on Python >= 2.7.10 and >=3.4.0 (officially)
             if ((self.python3 and sys.version_info[2] >= 4)
@@ -724,13 +723,13 @@ class Upload(object):
                 ftp = ftplib.FTP_TLS(self.host, self.user, p, timeout=libspm.TIMEOUT)
             if not self.insecure:
                 ftp.prot_p()
-            ftp.cwd('%s/tarballs/%s' % (self.directory, arch))
+            ftp.cwd('%s/tarballs/%s' % self.directory)
             for target in self.targets:
                 if not database.remote_search(target):
                     message.sub_critical(_('Invalid target'), target)
                     sys.exit(2)
                 version = database.remote_metadata(target, 'version')
-                tarball = '%s/tarballs/%s/%s_%s.tar.xz' % (libspm.CACHE_DIR, arch, target, version)
+                tarball = '%s/tarballs/%s_%s.tar.xz' % (libspm.CACHE_DIR, target, version)
                 depends = '%s.depends' % tarball
                 signature = '%s.sig' % tarball
                 if not os.path.isfile(tarball):

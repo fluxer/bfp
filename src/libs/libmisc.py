@@ -659,6 +659,7 @@ class Misc(object):
         # not all requests have content-lenght:
         # http://en.wikipedia.org/wiki/Chunked_transfer_encoding
         rsize = rfile.headers.get('Content-Length', '0')
+        encoding = rfile.headers.get('Transfer-Encoding', 'unknown')
         last = '%s.last' % sfile
         if os.path.exists(sfile):
             lsize = str(os.path.getsize(sfile))
@@ -667,9 +668,7 @@ class Misc(object):
             elif lsize > rsize or (os.path.isfile(last) and not self.file_read(last) == rsize):
                 lsize = '0'
                 os.unlink(sfile)
-                # PGP signatures are small in size and it's easy for the
-                # fetcher to get confused if the file to be download is
-                # re-uploaded with minimal changes so force the signature fetch
+                # re-fetch the PGP signature as well
                 sig = self.gpg_findsig(sfile)
                 if os.path.isfile(sig):
                     os.unlink(sig)
@@ -680,13 +679,17 @@ class Misc(object):
         self.dir_create(os.path.dirname(sfile))
         lfile = open(sfile, 'ab', self.BUFFER)
         try:
-            # since the local file size changes use persistent units based on
-            # remote file size (which is not much of persistent when the
-            # transfer is chunked, doh! proper content-lenght _may_ be sent
-            # on the next request but that's is too much to ask for from
-            # the server and internet provider)
             units = self.string_unit_guess(rsize)
+            icount = 0
             while True:
+                # request size again, if needed
+                if encoding == 'chunked':
+                    if rsize == '0' and icount == 5:
+                        trfile = self.fetch_request(surl)
+                        rsize = trfile.headers.get('Content-Length', '0')
+                        units = self.string_unit_guess(rsize)
+                        icount = 0
+                    icount += 1
                 msg = 'Downloading: %s, %s/%s' % (self.url_normalize(surl, True), \
                     self.string_unit(str(os.path.getsize(sfile)), units), \
                     self.string_unit(rsize, units, True))
@@ -695,7 +698,6 @@ class Misc(object):
                 if not chunk:
                     break
                 lfile.write(chunk)
-                # in Python 3000 that would be print(blah, end='')
                 sys.stdout.write('\r' * len(msg))
                 sys.stdout.flush()
         finally:

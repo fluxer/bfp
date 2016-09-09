@@ -83,6 +83,7 @@ class Database(object):
         recache = False
         for wd, mask, cookie, name in notify.event_read():
             recache = True
+            break
         if not self.REMOTE_CACHE or recache:
             self._build_remote_cache()
 
@@ -103,6 +104,7 @@ class Database(object):
         recache = False
         for wd, mask, cookie, name in notify.event_read():
             recache = True
+            break
         if not self.LOCAL_CACHE or recache:
             self._build_local_cache()
 
@@ -303,6 +305,7 @@ class Database(object):
         recache = False
         for wd, mask, cookie, name in notify.event_read():
             recache = True
+            break
         if not self.ALIAS_CACHE or recache:
             self._build_remote_cache()
 

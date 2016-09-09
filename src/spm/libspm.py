@@ -1243,12 +1243,10 @@ class Source(object):
             message.sub_info(_('Executing pre_install()'))
             misc.system_script(self.srcbuild, 'pre_install')
 
-        if target_upgrade:
-            if old_content:
-                self.pre_update_databases(old_content, 'upgrade')
-        else:
-            if old_content:
-                self.pre_update_databases(old_content, 'merge')
+        if target_upgrade and old_content:
+            self.pre_update_databases(old_content, 'upgrade')
+        elif new_content:
+            self.pre_update_databases(new_content, 'merge')
 
         if BACKUP:
             message.sub_info(_('Creating backup files'))
@@ -1320,32 +1318,6 @@ class Source(object):
                         break
             elif rdepends:
                 message.sub_warning(_('Targets may need rebuild'), rdepends)
-
-            if rdepends:
-                message.sub_info(_('Checking processes'))
-                checkfiles = []
-                checkfiles.extend(new_content)
-                for target in rdepends:
-                    checkfiles.extend(database.local_metadata(target, 'footprint'))
-                mayberestart = []
-                for comm in glob.glob('/proc/*/comm'):
-                    try:
-                        command = misc.file_read(comm).strip()
-                        if not os.path.exists(comm.replace('/comm', '/exe')):
-                            # not a userspace command
-                            continue
-                        elif command in mayberestart:
-                            # multiple processes of same program
-                            continue
-                        for sfile in checkfiles:
-                            sfull = '%s/%s' % (ROOT_DIR, sfile)
-                            if sfile.endswith('/%s' % command) and os.access(sfull, os.X_OK):
-                                mayberestart.append(command)
-                    except:
-                        # processes come and go, it's racy!
-                        pass
-                if mayberestart:
-                    message.sub_warning(_('Programs may need restart'), mayberestart)
 
         # do not wait for the cache notifier to kick in
         database.LOCAL_CACHE = {}
@@ -1456,8 +1428,8 @@ class Source(object):
             self.target_metadata = 'var/local/spm/%s/metadata.json' % self.target_name
             self.target_srcbuild = 'var/local/spm/%s/SRCBUILD' % self.target_name
             self.sources_dir = '%s/sources/%s' % (CACHE_DIR, self.target_name)
-            self.target_tarball = '%s/tarballs/%s/%s_%s.tar.xz' % (CACHE_DIR, \
-                os.uname()[4], self.target_name, self.target_version)
+            self.target_tarball = '%s/tarballs/%s_%s.tar.xz' % (CACHE_DIR, \
+                self.target_name, self.target_version)
 
             if database.local_uptodate(self.target) and self.do_update:
                 message.sub_warning(_('Target is up-to-date'), self.target)
@@ -1527,7 +1499,7 @@ class Source(object):
                     message.sub_warning(_('Overriding IGNORE_MISSING to'), _('False'))
                     self.ignore_missing = False
 
-                # that's a bit of exception
+                # that's a bit of exception since it is a string
                 if option == '!purge' and self.purge_paths:
                     message.sub_warning(_('Overriding PURGE_PATHS to'), _('False'))
                     self.purge_paths = False
