@@ -563,19 +563,15 @@ class Pack(object):
                 target_version = database.local_metadata(target, 'version')
                 target_packfile = '%s/%s_%s.tar.xz' % (self.directory, \
                     os.path.basename(target), target_version)
-                target_depends = '%s.depends' % target_packfile
 
                 content = []
                 for sfile in database.local_metadata(target, 'footprint'):
                     content.append('%s/%s' % (libspm.ROOT_DIR, sfile))
                 # add metadata directory, it is not listed in the footprint
                 content.append('%s/%s' % (libspm.LOCAL_DIR, target))
-                depends = database.local_metadata(target, 'depends')
 
                 message.sub_info(_('Compressing'), target_packfile)
                 misc.archive_compress(content, target_packfile, libspm.ROOT_DIR)
-                message.sub_info(_('Assemling depends'), target_depends)
-                misc.file_write(target_depends, ' '.join(depends))
                 if libspm.SIGN:
                     message.sub_info(_('Signing'), target_packfile)
                     misc.gpg_sign(target_packfile, libspm.SIGN)
@@ -730,15 +726,11 @@ class Upload(object):
                     sys.exit(2)
                 version = database.remote_metadata(target, 'version')
                 tarball = '%s/tarballs/%s_%s.tar.xz' % (libspm.CACHE_DIR, target, version)
-                depends = '%s.depends' % tarball
                 signature = '%s.sig' % tarball
                 if not os.path.isfile(tarball):
                     message.sub_critical(_('Binary tarball not available for'), target)
                     sys.exit(2)
-                elif not os.path.isfile(depends):
-                    message.sub_critical(_('Binary tarball depends not available for'), target)
-                    sys.exit(2)
-                files = [tarball, depends]
+                files = [tarball]
                 if os.path.isfile(signature):
                     files.append(signature)
                 elif libspm.SIGN:

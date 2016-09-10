@@ -1122,6 +1122,7 @@ class Source(object):
                         required.append(sbase)
 
         found = []
+        depends = []
         autodepends = []
         for local in database.local_all(True):
             lfootprint = database.local_metadata(local, 'footprint')
@@ -1137,8 +1138,8 @@ class Source(object):
                     found.append(req)
                 elif req in lfootprint:
                     message.sub_debug(_('Dependency needed but in local'), local)
-                    if not local in self.target_depends:
-                        self.target_depends.append(local)
+                    if not local in depends:
+                        depends.append(local)
                     found.append(req)
                     autodepends.append(req)
 
@@ -1174,7 +1175,7 @@ class Source(object):
             ('version', self.target_version),
             ('release', self.target_release),
             ('description', self.target_description),
-            ('depends', self.target_depends),
+            ('depends', depends),
             ('optdepends', optdepends),
             ('autodepends', autodepends),
             ('backup', backup),
@@ -1188,10 +1189,6 @@ class Source(object):
         message.sub_info(_('Assembling SRCBUILD'))
         shutil.copy(self.srcbuild, '%s/%s' % \
             (self.install_dir, self.target_srcbuild))
-
-        message.sub_info(_('Assembling depends'))
-        misc.file_write('%s.depends' % self.target_tarball, \
-            misc.string_convert(self.target_depends))
 
         message.sub_info(_('Compressing tarball'))
         misc.dir_create(os.path.dirname(self.target_tarball))
@@ -1418,7 +1415,6 @@ class Source(object):
             self.target_version = database.remote_metadata(self.target_dir, 'version')
             self.target_release = database.remote_metadata(self.target_dir, 'release')
             self.target_description = database.remote_metadata(self.target_dir, 'description')
-            self.target_depends = database.remote_metadata(self.target_dir, 'depends')
             self.target_makedepends = database.remote_metadata(self.target_dir, 'makedepends')
             self.target_optdepends = database.remote_metadata(self.target_dir, 'optdepends')
             self.target_sources = database.remote_metadata(self.target_dir, 'sources')
