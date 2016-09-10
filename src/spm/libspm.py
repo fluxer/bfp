@@ -765,10 +765,14 @@ class Source(object):
                 misc.system_chroot((mkinitfs))
 
         grub_mkconfig = misc.whereis('grub-mkconfig', False, True)
+        os_prober = misc.whereis('os-prober', False, True)
         grub_mkconfig_regex = '(?:^|\\s)(?:/)?(boot/.*|etc/grub.d/.*)(?:$|\\s)'
         message.sub_debug('grub-mkconfig', grub_mkconfig or '')
         match = misc.string_search(grub_mkconfig_regex, adjcontent, escape=False)
         if match and grub_mkconfig:
+            if os_prober:
+                message.sub_info(_('Updating Operating System entries'))
+                misc.system_chroot((os_prober))
             message.sub_info(_('Updating GRUB configuration'))
             message.sub_debug(match)
             misc.dir_create('%s/boot/grub' % ROOT_DIR)
