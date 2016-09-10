@@ -8,7 +8,7 @@ all: clean
 
 sources:
 	$(RM) lib*.c
-	$(CYTHON) libarchive.py libmessage.py libmisc.py libpackage.py libsystem.py
+	$(CYTHON) libmessage.py libmisc.py libpackage.py
 
 check:
 	$(PYTHON) test.py
