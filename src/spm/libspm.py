@@ -1329,7 +1329,7 @@ class Source(object):
             sys.exit(2)
 
         message.sub_info(_('Checking dependencies'))
-        depends_detected = database.local_rdepends(self.target_name, indirect=True)
+        depends_detected = database.local_rdepends(self.target_name)
         # on autoremove ignore reverse dependencies asuming they have been
         # processed already and passed to the class initializer in proper order
         # by the initial checker with indirect reverse dependencies on

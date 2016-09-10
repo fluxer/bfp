@@ -204,11 +204,10 @@ class Database(object):
                 checked.append(dependency)
         return missing
 
-    def local_rdepends(self, target, indirect=False, checked=None):
+    def local_rdepends(self, target, checked=None):
         ''' Returns reverse dependencies of target '''
         if misc.python2:
             misc.typecheck(target, (types.StringTypes))
-            misc.typecheck(indirect, (types.BooleanType))
             misc.typecheck(target, (types.NoneType, types.StringTypes))
 
         reverse = []
@@ -221,9 +220,6 @@ class Database(object):
             basename = os.path.basename(target)
             if basename in self.local_metadata(installed, 'depends'):
                 checked.append(basename)
-                if indirect:
-                    reverse.extend(self.local_rdepends(installed, \
-                        True, checked))
                 reverse.append(installed)
                 checked.append(installed)
         return reverse
