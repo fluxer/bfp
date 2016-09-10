@@ -11,10 +11,19 @@ mkinitfs - MkInitfs
 =head1 DESCRIPTION
 
 MkInitfs is a initial RAM filesystem image creator. It relies solely on Busybox
-so you will need a beefy build of it with as much features as possible. Most
-vendors do not ship Busybox that can meat the requirements so make sure you
-use the test option to confirm it can be used for the purpose of this tool. An
-example configuration file for it should be installed in @DOCDIR@/bfp.
+(unless you use filesystem that is not supported by Busybox's fsck, in which
+case you will need e2fsprogs too) so you will need a beefy build of it with as
+much features as possible. Most vendors do not ship Busybox that can meat the
+requirements so make sure you use the test option to confirm it can be used for
+the purpose of this tool. An example configuration file for it should be
+installed in @DOCDIR@/bfp.
+
+The good thing about it is that you do not have to patch GRUB to get it to
+detect the RAM filesystem image created by this tool, unlike many other tools
+out there with the same goal. The other thing is that the implementation is
+dead simple (from users perspective) - a few files to control the modules and
+files that will be included in the image along with hooks support for special
+needs such as encrypted partitions.
 
 =head1 OPTIONS
 
