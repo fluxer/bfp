@@ -104,7 +104,7 @@ class Dist(object):
             target_basename = os.path.basename(os.path.normpath(target))
 
             target_version = database.remote_metadata(target, 'version')
-            target_distfile = '%s/%s_%s.tar.xz' % (self.directory, \
+            target_distfile = '%s/%s_%s.tar.gz' % (self.directory, \
                 target_basename, target_version)
             target_sources = database.remote_metadata(target, 'sources')
             target_pgpkeys = database.remote_metadata(target, 'pgpkeys')
@@ -561,7 +561,7 @@ class Pack(object):
         for target in self.targets:
             if database.local_search(target):
                 target_version = database.local_metadata(target, 'version')
-                target_packfile = '%s/%s_%s.tar.xz' % (self.directory, \
+                target_packfile = '%s/%s_%s.tar.gz' % (self.directory, \
                     os.path.basename(target), target_version)
 
                 content = []
@@ -725,7 +725,7 @@ class Upload(object):
                     message.sub_critical(_('Invalid target'), target)
                     sys.exit(2)
                 version = database.remote_metadata(target, 'version')
-                tarball = '%s/tarballs/%s_%s.tar.xz' % (libspm.CACHE_DIR, target, version)
+                tarball = '%s/tarballs/%s_%s.tar.gz' % (libspm.CACHE_DIR, target, version)
                 signature = '%s.sig' % tarball
                 if not os.path.isfile(tarball):
                     message.sub_critical(_('Binary tarball not available for'), target)
@@ -962,7 +962,7 @@ class Portable(object):
         for target in self.targets:
             if database.local_search(target):
                 target_version = database.local_metadata(target, 'version')
-                target_packfile = '%s/%s_%s.tar.xz' % (self.directory, \
+                target_packfile = '%s/%s_%s.tar.gz' % (self.directory, \
                     os.path.basename(target), target_version)
 
                 content = []

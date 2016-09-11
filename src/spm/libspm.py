@@ -1428,7 +1428,7 @@ class Source(object):
             self.target_metadata = 'var/local/spm/%s/metadata.json' % self.target_name
             self.target_srcbuild = 'var/local/spm/%s/SRCBUILD' % self.target_name
             self.sources_dir = '%s/sources/%s' % (CACHE_DIR, self.target_name)
-            self.target_tarball = '%s/tarballs/%s_%s.tar.xz' % (CACHE_DIR, \
+            self.target_tarball = '%s/tarballs/%s_%s.tar.gz' % (CACHE_DIR, \
                 self.target_name, self.target_version)
 
             if database.local_uptodate(self.target) and self.do_update:
