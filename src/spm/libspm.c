@@ -1619,7 +1619,7 @@ static char __pyx_k_desktop_database_regex[] = "desktop_database_regex";
 static char __pyx_k_gio_querymodules_regex[] = "gio_querymodules_regex";
 static char __pyx_k_gtk_query_imodules_2_0[] = "gtk-query-imodules-2.0";
 static char __pyx_k_gtk_query_imodules_3_0[] = "gtk-query-imodules-3.0";
-static char __pyx_k_s_tarballs_s__s_tar_xz[] = "%s/tarballs/%s_%s.tar.xz";
+static char __pyx_k_s_tarballs_s__s_tar_gz[] = "%s/tarballs/%s_%s.tar.gz";
 static char __pyx_k_s_var_run_udev_control[] = "%s/var/run/udev/control";
 static char __pyx_k_Splitting_debug_symbols[] = "Splitting debug symbols";
 static char __pyx_k_Updating_icon_resources[] = "Updating icon resources";
@@ -2369,7 +2369,7 @@ static PyObject *__pyx_kp_s_s_share_info_s;
 static PyObject *__pyx_kp_s_s_share_mime;
 static PyObject *__pyx_kp_s_s_sources_s;
 static PyObject *__pyx_kp_s_s_svn;
-static PyObject *__pyx_kp_s_s_tarballs_s__s_tar_xz;
+static PyObject *__pyx_kp_s_s_tarballs_s__s_tar_gz;
 static PyObject *__pyx_kp_s_s_udev_rules_d_s;
 static PyObject *__pyx_kp_s_s_usr_lib_modules_s;
 static PyObject *__pyx_kp_s_s_var_cache_man;
@@ -39134,7 +39134,7 @@ static PyObject *__pyx_pf_6libspm_6Source_34main(CYTHON_UNUSED PyObject *__pyx_s
  *             self.target_metadata = 'var/local/spm/%s/metadata.json' % self.target_name
  *             self.target_srcbuild = 'var/local/spm/%s/SRCBUILD' % self.target_name             # <<<<<<<<<<<<<<
  *             self.sources_dir = '%s/sources/%s' % (CACHE_DIR, self.target_name)
- *             self.target_tarball = '%s/tarballs/%s_%s.tar.xz' % (CACHE_DIR, \
+ *             self.target_tarball = '%s/tarballs/%s_%s.tar.gz' % (CACHE_DIR, \
  */
     __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_target_name); if (unlikely(!__pyx_t_3)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1429; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_3);
@@ -39148,7 +39148,7 @@ static PyObject *__pyx_pf_6libspm_6Source_34main(CYTHON_UNUSED PyObject *__pyx_s
  *             self.target_metadata = 'var/local/spm/%s/metadata.json' % self.target_name
  *             self.target_srcbuild = 'var/local/spm/%s/SRCBUILD' % self.target_name
  *             self.sources_dir = '%s/sources/%s' % (CACHE_DIR, self.target_name)             # <<<<<<<<<<<<<<
- *             self.target_tarball = '%s/tarballs/%s_%s.tar.xz' % (CACHE_DIR, \
+ *             self.target_tarball = '%s/tarballs/%s_%s.tar.gz' % (CACHE_DIR, \
  *                 self.target_name, self.target_version)
  */
     __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_CACHE_DIR); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1430; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -39172,7 +39172,7 @@ static PyObject *__pyx_pf_6libspm_6Source_34main(CYTHON_UNUSED PyObject *__pyx_s
     /* "libspm.py":1431
  *             self.target_srcbuild = 'var/local/spm/%s/SRCBUILD' % self.target_name
  *             self.sources_dir = '%s/sources/%s' % (CACHE_DIR, self.target_name)
- *             self.target_tarball = '%s/tarballs/%s_%s.tar.xz' % (CACHE_DIR, \             # <<<<<<<<<<<<<<
+ *             self.target_tarball = '%s/tarballs/%s_%s.tar.gz' % (CACHE_DIR, \             # <<<<<<<<<<<<<<
  *                 self.target_name, self.target_version)
  * 
  */
@@ -39181,7 +39181,7 @@ static PyObject *__pyx_pf_6libspm_6Source_34main(CYTHON_UNUSED PyObject *__pyx_s
 
     /* "libspm.py":1432
  *             self.sources_dir = '%s/sources/%s' % (CACHE_DIR, self.target_name)
- *             self.target_tarball = '%s/tarballs/%s_%s.tar.xz' % (CACHE_DIR, \
+ *             self.target_tarball = '%s/tarballs/%s_%s.tar.gz' % (CACHE_DIR, \
  *                 self.target_name, self.target_version)             # <<<<<<<<<<<<<<
  * 
  *             if database.local_uptodate(self.target) and self.do_update:
@@ -39194,7 +39194,7 @@ static PyObject *__pyx_pf_6libspm_6Source_34main(CYTHON_UNUSED PyObject *__pyx_s
     /* "libspm.py":1431
  *             self.target_srcbuild = 'var/local/spm/%s/SRCBUILD' % self.target_name
  *             self.sources_dir = '%s/sources/%s' % (CACHE_DIR, self.target_name)
- *             self.target_tarball = '%s/tarballs/%s_%s.tar.xz' % (CACHE_DIR, \             # <<<<<<<<<<<<<<
+ *             self.target_tarball = '%s/tarballs/%s_%s.tar.gz' % (CACHE_DIR, \             # <<<<<<<<<<<<<<
  *                 self.target_name, self.target_version)
  * 
  */
@@ -39209,7 +39209,7 @@ static PyObject *__pyx_pf_6libspm_6Source_34main(CYTHON_UNUSED PyObject *__pyx_s
     __pyx_t_3 = 0;
     __pyx_t_9 = 0;
     __pyx_t_2 = 0;
-    __pyx_t_2 = __Pyx_PyString_Format(__pyx_kp_s_s_tarballs_s__s_tar_xz, __pyx_t_8); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1431; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+    __pyx_t_2 = __Pyx_PyString_Format(__pyx_kp_s_s_tarballs_s__s_tar_gz, __pyx_t_8); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1431; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_8); __pyx_t_8 = 0;
     if (__Pyx_PyObject_SetAttrStr(__pyx_v_self, __pyx_n_s_target_tarball, __pyx_t_2) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 1431; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -43442,7 +43442,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_s_share_mime, __pyx_k_s_share_mime, sizeof(__pyx_k_s_share_mime), 0, 0, 1, 0},
   {&__pyx_kp_s_s_sources_s, __pyx_k_s_sources_s, sizeof(__pyx_k_s_sources_s), 0, 0, 1, 0},
   {&__pyx_kp_s_s_svn, __pyx_k_s_svn, sizeof(__pyx_k_s_svn), 0, 0, 1, 0},
-  {&__pyx_kp_s_s_tarballs_s__s_tar_xz, __pyx_k_s_tarballs_s__s_tar_xz, sizeof(__pyx_k_s_tarballs_s__s_tar_xz), 0, 0, 1, 0},
+  {&__pyx_kp_s_s_tarballs_s__s_tar_gz, __pyx_k_s_tarballs_s__s_tar_gz, sizeof(__pyx_k_s_tarballs_s__s_tar_gz), 0, 0, 1, 0},
   {&__pyx_kp_s_s_udev_rules_d_s, __pyx_k_s_udev_rules_d_s, sizeof(__pyx_k_s_udev_rules_d_s), 0, 0, 1, 0},
   {&__pyx_kp_s_s_usr_lib_modules_s, __pyx_k_s_usr_lib_modules_s, sizeof(__pyx_k_s_usr_lib_modules_s), 0, 0, 1, 0},
   {&__pyx_kp_s_s_var_cache_man, __pyx_k_s_var_cache_man, sizeof(__pyx_k_s_var_cache_man), 0, 0, 1, 0},
