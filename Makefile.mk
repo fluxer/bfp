@@ -11,7 +11,6 @@ MANDIR = $(SHAREDIR)/man
 DOCDIR = $(SHAREDIR)/doc
 SITEDIR = $(shell $(PYTHON) -c "import site; print(site.getsitepackages()[0])")
 BASHCOMPLETIONDIR = /etc/bash_completion.d
-INITDIR = /etc/init.d
 
 PYTHON_VERSION = $(shell $(PYTHON) -c "import sys; print(sys.version[:3])")
 MACHINE = $(shell $(CC) -dumpmachine)

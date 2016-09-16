@@ -10,12 +10,11 @@ _spm()
 
     main_options='-h --help --cache --build --root --gpg --ignore --notify
         --mirror --timeout --verify --chost --cflags --cxxflags --cppflags
-        --ldflags --makeflags --purge --man --split --binaries --shared --static
-        --rpath --sign --missing --conflicts --backup
-        --scripts --debug --version'
+        --ldflags --makeflags --purge --man --split --binaries --shared
+        --static --rpath --sign --missing --conflicts --backup --scripts
+        --debug --version'
 
-    repo_options='-h --help -c --clean -s --sync -u --update
-        -a --all'
+    repo_options='-h --help -c --clean -s --sync -u --update -a --all'
 
     remote_options='-h --help -n --name -v --version -r --release
         -d --description -D --depends -m --makedepends -O --optdepends

@@ -17,12 +17,12 @@ The metadata defined in the recipes should contain only one function
 (3) more functions can be specified (src_prepare, src_compile and src_check)
 and nine (9) more variables (release, depends, makedepends, optdepends,
 checkdepends, sources, pgpkeys, options and backup). Target name is defined by
-the directory name in which the target files are placed.
+the directory name in which the SRCBUILD is placed.
 
 In addition six (6) more functions (pre/post_install, pre/post_upgrade and
 pre/post_remove) can be defined as pre/post actions to be taken when software
 is installed, upgraded or removed. Pre-actions are taken before the actual
-install/upgrade/remove is done with post-actions following up.
+install/upgrade/remove is done with post-actions after.
 
 For easy of use SOURCE_DIR and INSTALL_DIR envirnonmental variables are
 exported and can be used inside the SRCBUILD aside from those defined in the

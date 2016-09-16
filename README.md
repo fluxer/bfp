@@ -16,9 +16,9 @@ It is split into libraries and frontends to allow people to use it the way they
 see fit. The project has evolved much over the years but simplicity and tasks
 automation is and always will ramain prime goals of the project.
 
-The Package Manager is (or was) one of kind - it does much more then it should
-do but there are good reasons for doing so. Simply put it is a mix of features
-and ideas from [Dpkg](https://en.wikipedia.org/wiki/Dpkg),
+The Package Manager is (or was) one of a kind - it does much more then it
+should do but there are good reasons for doing so. Simply put it is a mix of
+features and ideas from [Dpkg](https://en.wikipedia.org/wiki/Dpkg),
 [Pacman](https://www.archlinux.org/pacman/) and
 [Portage](https://wiki.gentoo.org/wiki/Portage) with its own twist.
 

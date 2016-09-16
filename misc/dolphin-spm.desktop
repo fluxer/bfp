@@ -6,7 +6,7 @@ Icon=package-x-generic
 Type=Service
 X-KDE-ServiceTypes=KonqPopupMenu/Plugin
 MimeType=text/plain;
-Actions=BuildSource;MergeBinary;RemoveContent;
+Actions=BuildSource;RemoveContent;
 X-KDE-AuthorizeAction=shell_access
 
 [Desktop Action BuildSource]
@@ -14,15 +14,7 @@ Name=Build from source
 Name[bg]=Изгради от източник
 MimeType=text/plain;
 TryExec=konsole
-Exec=kdesu konsole --hold -e spm source -a %d
-Icon=package-x-generic
-
-[Desktop Action MergeBinary]
-Name=Merge from pre-build tarball
-Name[bg]=Обедини от предварително изграден архив
-MimeType=text/plain;
-TryExec=konsole
-Exec=kdesu konsole --hold -e spm binary -mD %d
+Exec=kdesudo konsole --hold -e spm source -a %d
 Icon=package-x-generic
 
 [Desktop Action RemoveContent]
@@ -30,5 +22,5 @@ Name=Remove from the system
 Name[bg]=Премахни от системата
 MimeType=text/plain;
 TryExec=konsole
-Exec=kdesu konsole --hold -e spm binary -r %d
+Exec=kdesudo konsole --hold -e spm source -r %d
 Icon=package-x-generic

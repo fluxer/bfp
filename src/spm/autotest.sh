@@ -208,7 +208,7 @@ else
 fi
 
 if [ "$uid" != "0" ];then
-    echo "=== SKIPPING SPMT UPGRADE TEST (REQUIRES ROOT) ==="
+    echo "=== SKIPPING SPMT PORTABLE TEST (REQUIRES ROOT) ==="
 elif [ ! -d "$rootdir/var/local/spm/ca-certificates" ];then
     echo "=== SKIPPING SPMT PORTABLE TEST (CA-CERTIFICATES NOT INSTALLED) ==="
 elif ! grep -q "SPMT PORTABLE" "$statefile" ;then
