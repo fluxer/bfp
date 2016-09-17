@@ -969,6 +969,9 @@ class Portable(object):
                 for sfile in database.local_metadata(target, 'footprint'):
                     content.append('%s/%s' % (libspm.ROOT_DIR, sfile))
                 for dep in database.local_metadata(target, 'depends'):
+                    if not database.local_search(dep):
+                        # explicit dependency which was ignored during build
+                        continue
                     message.sub_debug(_('Augmenting'), dep)
                     # TODO: allow exclude/include from files passed as argument
                     for depfile in database.local_metadata(dep, 'footprint'):
