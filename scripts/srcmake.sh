@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # srcmake - alternative, but with limited functionality, ports builder
-# Copyright (C) 2013-2016 Ivailo Monev (a.k.a SmiL3y)
+# Copyright (C) 2012-2017 Ivailo Monev (a.k.a SmiL3y)
 
 
 export LANG=C LC_ALL=C
