@@ -431,10 +431,6 @@ calling `tar` or `bsdtar` directly.
 
 The following environment variables affect the execution of SPMT:
 
-=head2 LANGUAGE, LC_ALL, LC_MESSAGES, and LANG
-
-Used to specify locales to be used in the messages output.
-
 =head2 EDITOR
 
 Used to specify text-editor to be used when mering configuration files, editing

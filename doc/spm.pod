@@ -27,10 +27,10 @@ dependencies at install time so that dependencies are resolved in matter of
 what is needed by the library and binary files of the target by running
 `scanelf` on them, checking if the library is in the target itself, in local
 (installed) target or not in managed target. This ensures that all runtime
-libraries will be present and the dependencies are not "static", usually added
-to metadata file, keeping the system off of broken applications because of
-missing runtime dependencies and reducing the work needed on packaging. Also,
-it probes for scripting languages such as Bash or Python by looking for
+libraries will be present and the dependencies are not "static" and do not rely
+on tree of dependencies keeping the system off of broken applications because
+of missing runtime dependencies and reducing the work needed on packaging.
+Also, it probes for scripting languages such as Bash or Python by looking for
 shebangs in the files. Note that extra (runtime time, as well as make)
 dependencies can still be specified and are checked for at the prepare stage
 but they are useful only when bootstrapping as software and more importantly
@@ -42,13 +42,14 @@ to Pacman it has the following dependencies:
 
 and according to SPM:
 
-    atk pango xorg-libraries cairo gdk-pixbuf bash python2 glib glibc
-    fontconfig pixman libpng libxcb libxau libxdmcp harfbuzz libffi pcre
-    icu gcc freetype2 zlib bzip2 expat
+    atk pango xorg-libraries cairo gdk-pixbuf bash python2 glib glibc pixman
+    libpng harfbuzz libffi pcre icu gcc freetype2 zlib bzip2 expat fontconfig
 
-This ensures that dependencies are utilized at their best for consistency.
-Of course this can be achieved with other package managers too but it's much
-more work, SPM makes your life easier and keeps your system safe.
+With all dependencies listed stored by SPM it is nearly impossible to break
+the dependencies of applications when removing software from the system, unless
+you want it and instruct SPM to do it for you that is. Of course this can be
+achieved with other package managers too but it's much more work, SPM makes
+your life easier and keeps your system safe.
 
 All metadata is stored in JSON files separate for each software, while this
 increases the disk I/O slightely it makes it possible to easily recover from
@@ -56,9 +57,10 @@ disasters and fix issues in cases SPM is not being able to handle such as
 missing Python runtime library for whatever the reason. Do note that SPM caches
 internally the files content (metadatas and SRCBUILDs) in the system memory
 (RAM) and rebuilds the caches when needed to reduce the lookup overheath. The
-cache itself is build only when needed (on the first lookup) in a JIT (Just In
-Time) fashion. It does not use locks and multiple instances can be run at the
-same time, that is something that few package manager support.
+cache itself is build only when needed (on the first lookup). It does not use
+locks and multiple instances can be run at the same time with, minimal risk of
+race condition. That is something that few package manager support and has many
+advantages.
 
 Remote sources (files, such as tarballs) are being checked after they are
 fetched by comparing the remote and local file size instead of using checksums
@@ -75,31 +77,30 @@ pgpkeys array.
 
 Using Source Package Manager and following the LFS/BLFS book you can tailor a
 system exactly to your liking without keeping track of what links against what
-and still be able to build, manage and query targets. The only thing you should
-know is the order in which targets should be build when doing it from the ground
-up (as per the LFS book for an example). Once you have the most essential
-software on your system and you start building upon it (following the BLFS book
-for an example) you rarely will have to worry about the runtime dependencies as
-they will be detected for you. This can reduce the workload when compiling and
-installing a big stack of software (X.Org, KDE, GNOME, etc.). However, given the
-fact that SPM checks for dependencies specified in the build recipe when doing
-preparations you can still order the build process properly by specifying them
-in the SRCBUILD.
+and still be able to build, manage and query targets. Once you have the most
+essential software on your system and you start building upon it (following the
+BLFS book and writing your own SRCBUILDs for an example) you rarely will have
+to worry about the runtime dependencies as they will be detected for you. This
+can reduce the work needed to build a big stack of software (X.Org, KDE, GNOME,
+etc.). However, given the fact that SPM checks for dependencies specified in
+the build recipe when doing preparations you can still order the build process
+the way you see fit, adding explicit and optional dependencies by choice by
+specifying them in the SRCBUILD. Usually, you will only have to specify only
+those that are needed to build, not run, the software.
 
 Repositories with target (package) files for the most essential software are
 enabled by default but you can maintain your own repositories with Git,
 Subversion (SVN) or even rsync. This has the advantage of doing incremental
-updates on them. Using Content Version System (Git or SVN) allows going back
-and forth in the history of the repository thus building older version of
-software would be as easy as checking out the right change set and then issuing
-the usual build command via SPM.
+updates. Using Content Version System (Git or SVN) allows going back and forth
+in the history of the repository thus building older version of software would
+be as easy as checking out the right change set and then issuing the usual
+build command via SPM.
 
 Major libraries version changes will be handled properly too. For an example,
 when curl changes the library version and when building curl the reverse
-dependencies will be scanned, if SPM is told to, with `scanelf` for 'not found'
-which indicates that a runtime library is missing and the reverse dependencies
-of curl will be rebuild if needed automatically for you. This is done when
-merging a target/tarball.
+dependencies will be scanned, if SPM is told to, looking for a missing runtime
+library and when found the reverse dependencies of curl will be rebuild if
+needed automatically for you. This is done when merging a target/tarball.
 
 On merge all files with .conf extension will be backed up as <file>.conf.backup.
 You can explicitly tell SPM which files to backup as sometimes files do not have
@@ -113,16 +114,13 @@ of the installed files is created. It also contains the information needed for
 SPM to know that a target is installed (metadata.json and SRCBUILD). This way
 if, for whatever the reason, SPM chokes you can decompress the tarball with:
 
-    sudo tar -xapPhf /var/cache/spm/tarballs/$(uname -m)/<tarball> -C /
+    sudo tar -xapPhf /var/cache/spm/tarballs/<tarball> -C /
  
 and it will be picked up by SPM as present on the system, no magic tricks
-needed. Keep in mind that you may have to execute the following to update the
-shared libraries cache:
-
-    ldconfig -r <system_root>
+needed.
 
 Upon targets merge or removal triggers for updating manual pages, desktop files,
-mime and other database will be activated to take care of common actions
+MIME and other database will be activated to take care of common actions
 avoiding code duplication in pre/post scripts.
 
 Mirrors for sources can be used so that fetching sources is faster and more
@@ -141,7 +139,7 @@ for all options available. Additional utilities are packed in Source Package
 Manager Tools to assist in the system maintenance. You can read more about
 them in spm-tools(8) manual page. SPM doesn't implement many features known
 from other Package Managers such as target home page URL and other common
-features but some of those may be implemented later on.
+features but it has strived to provide small and easy to extend future set.
 
 =head1 OPTIONS
 
@@ -414,14 +412,6 @@ info visit http://docs.python.org/2/library/tarfile.html#supported-tar-formats.
 Note that the Zip and XZ formats are supported by SPM, the later via subprocess
 calling `tar` or `bsdtar` directly.
 
-=head1 ENVIRONMENT
-
-The following environment variables affect the execution of SPM:
-
-=head2 LANGUAGE, LC_ALL, LC_MESSAGES, and LANG
-
-Used to specify locales to be used in the messages output.
-
 =head1 AUTHORS
 
 Ivailo Monev (a.k.a. SmiL3y) <xakepa10@laimg.moc>
@@ -432,5 +422,5 @@ COPYING file bundled with the source code.
 =head1 SEE ALSO
 
 spm.conf(5) SRCBUILD(5) spm-tools(8) scanelf(1) tar(1) bsdtar(1) xz(1)
-ldconfig(8) file(1) man-db(1) git(1) locale(7) gpg(1)
+file(1) man-db(1) git(1) locale(7)
 
