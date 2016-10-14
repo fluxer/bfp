@@ -384,6 +384,7 @@ class Repo(object):
 
             message.sub_debug(_('Checking'), target)
             latest = database.local_uptodate(target)
+            downgrade = database.local_downgrade(target)
             optchange = []
             optdepends = database.local_metadata(target, 'optdepends')
             for opt in database.remote_metadata(target, 'optdepends'):
@@ -398,6 +399,9 @@ class Repo(object):
                     target, optchange)
             elif not latest:
                 message.sub_warning(_('New version of %s available') % \
+                    target, version)
+            elif not downgrade:
+                message.sub_warning(_('Older version of %s available') % \
                     target, version)
 
     def main(self):

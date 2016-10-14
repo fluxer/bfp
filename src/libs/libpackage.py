@@ -240,7 +240,7 @@ class Database(object):
             return []
 
     def local_uptodate(self, target):
-        ''' Returns True if target is up-to-date and False otherwise '''
+        ''' Returns True if local target is up-to-date and False otherwise '''
         if misc.python2:
             misc.typecheck(target, (types.StringTypes))
 
@@ -268,6 +268,26 @@ class Database(object):
                 if self.local_search(optional) \
                     and not optional in local_optional:
                     return False
+        return True
+
+    def local_downgrade(self, target):
+        ''' Returns True if local target is newer than remote and False otherwise '''
+        if misc.python2:
+            misc.typecheck(target, (types.StringTypes))
+
+        # if remote target is passed and it's a directory not a base name
+        # then the local target will be invalid and local_version will equal
+        # None, thus the base name is used to get the local target metadata
+        base = os.path.basename(target)
+        local_version = self.local_metadata(base, 'version')
+        remote_version = self.remote_metadata(target, 'version')
+
+        # LooseVersion does not handle None
+        if not remote_version or not local_version:
+            return False
+
+        if LooseVersion(local_version) > LooseVersion(remote_version):
+            return False
         return True
 
     def remote_metadata(self, target, key):
