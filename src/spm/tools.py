@@ -127,9 +127,10 @@ class Dist(object):
                     for src_url in target_sources:
                         src_base = misc.url_normalize(src_url, True)
                         src_file = '%s/%s' % (self.directory, src_base)
-                        if misc.gpg_findsig(src_file, False):
+                        src_signature = misc.gpg_findsig(src_file, False)
+                        if src_signature:
                             message.sub_debug(_('Verifying'), src_url)
-                            misc.gpg_verify(src_file)
+                            misc.gpg_verify(src_file, src_signature)
 
             message.sub_info(_('Compressing'), target_distfile)
             misc.archive_compress((target_directory,), target_distfile, \

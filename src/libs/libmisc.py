@@ -987,6 +987,8 @@ class Misc(object):
         if 'L' in sflags:
             fixedoutput = []
             for line in output.split(','):
+                # checking line being '' is neccessary because a bug in scanelf that
+                # produces a list with empty entry, it happens when '-L' is used
                 if line and not line.startswith('/'):
                     for libpath in ('/lib', '/usr/lib'):
                         sfull = '%s/%s' % (libpath, os.path.basename(line))

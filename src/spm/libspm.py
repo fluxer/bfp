@@ -48,7 +48,6 @@ DEFAULTS = {
     'STRIP_BINARIES': 'False',
     'STRIP_SHARED': 'False',
     'STRIP_STATIC': 'False',
-    'STRIP_RPATH': 'False',
     'IGNORE_MISSING': 'False',
     'CONFLICTS': 'False',
     'BACKUP': 'False',
@@ -93,7 +92,6 @@ SPLIT_DEBUG = mainconf.getboolean('install', 'SPLIT_DEBUG')
 STRIP_BINARIES = mainconf.getboolean('install', 'STRIP_BINARIES')
 STRIP_SHARED = mainconf.getboolean('install', 'STRIP_SHARED')
 STRIP_STATIC = mainconf.getboolean('install', 'STRIP_STATIC')
-STRIP_RPATH = mainconf.getboolean('install', 'STRIP_RPATH')
 IGNORE_MISSING = mainconf.getboolean('install', 'IGNORE_MISSING')
 CONFLICTS = mainconf.getboolean('merge', 'CONFLICTS')
 BACKUP = mainconf.getboolean('merge', 'BACKUP')
@@ -460,7 +458,6 @@ class Source(object):
         self.strip_binaries = STRIP_BINARIES
         self.strip_shared = STRIP_SHARED
         self.strip_static = STRIP_STATIC
-        self.strip_rpath = STRIP_RPATH
         self.ignore_missing = IGNORE_MISSING
         message.CATCH = CATCH
         misc.OFFLINE = OFFLINE
@@ -521,21 +518,6 @@ class Source(object):
 
         misc.dir_create(self.source_dir)
         misc.dir_create(self.install_dir)
-
-    def split_debug_symbols(self, sfile):
-        ''' Separate debug symbols from ELF file '''
-        # avoid actions on debug files, do not rely on .debug suffix
-        # do not run on hardlinks, it will fail with binutils <=2.23.2
-        if '/lib/debug/' in sfile or os.stat(sfile).st_nlink == 2:
-            return
-        # https://sourceware.org/gdb/onlinedocs/gdb/Separate-Debug-Files.html
-        sdebug = '%s/%s/lib/debug/%s.debug' % \
-            (self.install_dir, sys.prefix, sfile.replace(self.install_dir, ''))
-        misc.dir_create(os.path.dirname(sdebug))
-        objcopy = misc.whereis('objcopy')
-        misc.system_command((objcopy, '--only-keep-debug', \
-            '--compress-debug-sections', sfile, sdebug))
-        misc.system_command((objcopy, '--add-gnu-debuglink', sdebug, sfile))
 
     def pre_update_databases(self, content, action):
         ''' Update common databases before merge/remove '''
@@ -854,9 +836,10 @@ class Source(object):
             for src_url in self.target_sources:
                 src_base = misc.url_normalize(src_url, True)
                 local_file = '%s/%s' % (self.sources_dir, src_base)
-                if misc.gpg_findsig(local_file, False):
+                src_signature = misc.gpg_findsig(local_file, False)
+                if src_signature:
                     message.sub_debug(_('Verifying'), src_url)
-                    misc.gpg_verify(local_file)
+                    misc.gpg_verify(local_file, src_signature)
 
     def prepare(self, optional=False):
         ''' Prepare target sources '''
@@ -889,8 +872,7 @@ class Source(object):
 
             if os.path.islink(link_file):
                 message.sub_debug(_('Already linked'), src_file)
-            elif os.path.isdir('%s/.git' % local_file) \
-                or os.path.isdir('%s/.svn' % local_file):
+            elif os.path.isdir(local_file):
                 message.sub_debug(_('Copying'), src_file)
                 shutil.copytree(local_file, link_file, True)
             elif os.path.isfile(src_file):
@@ -1028,47 +1010,62 @@ class Source(object):
                             os.symlink(link, spath)
 
         message.sub_info(_('Re-indexing content'))
-        target_content = {}
-        for sfile in misc.list_files(self.install_dir):
-            if LOCAL_DIR in sfile:
-                continue
-            message.sub_debug(_('Caching MIME of'), sfile)
-            target_content[sfile] = misc.file_mime(sfile, bquick=True)
-
-        strip = misc.whereis('strip')
+        lapplications = []
+        lscripts = []
         ldebug = []
         lbinaries = []
         lshared = []
         lstatic = []
-        lrpath = []
-        for sfile, smime in target_content.items():
+        target_content = []
+        for sfile in misc.list_files(self.install_dir):
+            if LOCAL_DIR in sfile:
+                continue
+            message.sub_debug(_('Checking MIME of'), sfile)
+            smime = misc.file_mime(sfile, bquick=True)
+            target_content.append(sfile)
             if smime == 'application/x-executable':
                 if self.strip_binaries:
                     lbinaries.append(sfile)
                 if self.split_debug:
                     ldebug.append(sfile)
-                if self.strip_rpath:
-                    lrpath.append(sfile)
+                lapplications.append(sfile)
             elif smime == 'application/x-sharedlib':
                 if self.strip_shared:
                     lshared.append(sfile)
                 if self.split_debug:
                     ldebug.append(sfile)
-                if self.strip_rpath:
-                    lrpath.append(sfile)
+                lapplications.append(sfile)
             elif smime == 'application/x-archive':
                 if self.strip_static:
                     lstatic.append(sfile)
                 if self.split_debug:
                     ldebug.append(sfile)
-                if self.strip_rpath:
-                    lrpath.append(sfile)
+            elif smime == 'text/plain' or smime == 'text/x-shellscript' \
+                or smime == 'text/x-python' or smime == 'text/x-perl' \
+                or smime == 'text/x-php' or smime == 'text/x-ruby' \
+                or smime == 'text/x-lua' or smime == 'text/x-tcl' \
+                or smime == 'text/x-awk' or smime == 'text/x-gawk':
+                lscripts.append(sfile)
 
         message.sub_info(_('Stripping binaries and libraries'))
         if ldebug:
+            objcopy = misc.whereis('objcopy')
             message.sub_debug(_('Splitting debug symbols'), ldebug)
             for sfile in ldebug:
-                self.split_debug_symbols(sfile)
+                # avoid actions on debug files, do not rely on .debug suffix,
+                # do not run on hardlinks as it will fail with binutils <=2.23.2
+                if '/lib/debug/' in sfile or os.stat(sfile).st_nlink == 2:
+                    continue
+                # https://sourceware.org/gdb/onlinedocs/gdb/Separate-Debug-Files.html
+                sdebug = '%s/%s/lib/debug/%s.debug' % \
+                    (self.install_dir, sys.prefix, sfile.replace(self.install_dir, ''))
+                misc.dir_create(os.path.dirname(sdebug))
+                misc.system_command((objcopy, '--only-keep-debug', \
+                    '--compress-debug-sections', sfile, sdebug))
+                misc.system_command((objcopy, '--add-gnu-debuglink', sdebug, sfile))
+
+        if lbinaries or lshared or lstatic:
+            strip = misc.whereis('strip')
         if lbinaries:
             message.sub_debug(_('Stripping executables'), lbinaries)
             cmd = [strip, '--strip-all']
@@ -1084,77 +1081,62 @@ class Source(object):
             cmd = [strip, '--strip-debug']
             cmd.extend(lstatic)
             misc.system_command(cmd)
-        if lrpath:
-            message.sub_debug(_('Stripping RPATH'), lrpath)
-            cmd = [misc.whereis('scanelf'), '-CBXrq']
-            cmd.extend(lrpath)
-            misc.system_command(cmd)
 
         message.sub_info(_('Checking runtime dependencies'))
-        required = []
-        for sfile, smime in target_content.items():
-            if smime == 'application/x-executable' or \
-                smime == 'application/x-sharedlib':
-                libraries = misc.system_scanelf(sfile, sflags='-L')
-                if libraries:
-                    required.extend(libraries.split(','))
+        autodepends = []
+        for sfile in lapplications:
+            libraries = misc.system_scanelf(sfile, sflags='-L')
+            if libraries:
+                for lib in libraries.split(','):
+                    if lib and not lib in autodepends:
+                        autodepends.append(lib)
 
-            elif smime == 'text/plain' or smime == 'text/x-shellscript' \
-                or smime == 'text/x-python' or smime == 'text/x-perl' \
-                or smime == 'text/x-php' or smime == 'text/x-ruby' \
-                or smime == 'text/x-lua' or smime == 'text/x-tcl' \
-                or smime == 'text/x-awk' or smime == 'text/x-gawk':
-                omatch = self.shebang_regex.findall(misc.file_read(sfile))
-                if omatch:
-                    sfull = omatch[0][0].strip()
-                    sbase = omatch[0][1].strip()
-                    smatch = False
-                    # now look for the interpreter in the target
-                    for s in target_content:
-                        if s.endswith('/%s' % sbase) and os.access(s, os.X_OK):
-                            smatch = s.replace(self.install_dir, '')
-                            break
-                    # if that fails look for the interpreter on the host
-                    # FIXME: if the interpreter found by misc.whereis() is not
-                    # ownded by a local target try to find one that is
-                    if not smatch:
-                        smatch = misc.whereis(sbase, False)
+        for sfile in lscripts:
+            omatch = self.shebang_regex.findall(misc.file_read(sfile))
+            if omatch:
+                sfull = omatch[0][0].strip()
+                sbase = omatch[0][1].strip()
+                smatch = False
+                # now look for the interpreter in the target
+                for s in target_content:
+                    if s.endswith('/%s' % sbase) and os.access(s, os.X_OK):
+                        smatch = s.replace(self.install_dir, '')
+                        break
+                # if that fails look for the interpreter on the host
+                # FIXME: if the interpreter found by misc.whereis() is not
+                # ownded by a local target try to find one that is
+                if not smatch:
+                    smatch = misc.whereis(sbase, False)
 
-                    # now update the shebang if possible
-                    if smatch:
-                        message.sub_debug(_('Attempting shebang correction on'), sfile)
-                        misc.file_substitute('^%s' % sfull, '#!' + smatch, sfile)
-                        required.append(smatch)
-                    else:
-                        # fake non-existing match
-                        required.append(sbase)
+                # now update the shebang if possible
+                if smatch:
+                    message.sub_debug(_('Attempting shebang correction on'), sfile)
+                    misc.file_substitute('^%s' % sfull, '#!' + smatch, sfile)
+                    autodepends.append(smatch)
+                else:
+                    # fake non-existing match to trigger the error bellow
+                    autodepends.append(sbase)
 
         found = []
         depends = []
-        autodepends = []
         for local in database.local_all(True):
             lfootprint = database.local_metadata(local, 'footprint')
-            for req in required:
-                # checking req being '' is neccessary because a bug in scanelf that
-                # produces a list with empty entry, it happens when '-L' is used
-                if req in found:
+            for dep in autodepends:
+                if dep in found:
                     continue
-                elif not req:
-                    continue
-                if '%s%s' % (self.install_dir, req) in target_content:
-                    message.sub_debug(_('Dependency needed but in target'), req)
-                    found.append(req)
-                elif req in lfootprint:
-                    message.sub_debug(_('Dependency needed but in local'), local)
+                elif '%s%s' % (self.install_dir, dep) in target_content:
+                    message.sub_debug(_('Dependency %s is in target' % dep), dep)
+                    found.append(dep)
+                elif dep in lfootprint:
+                    message.sub_debug(_('Dependency %s is in local' % dep), local)
                     if not local in depends:
                         depends.append(local)
-                    found.append(req)
-                    autodepends.append(req)
+                    found.append(dep)
 
         missing_detected = False
-        for req in required:
-            if req and not req in found and not self.ignore_missing:
-                message.sub_critical(_('Dependency needed, not in any local'), req)
+        for dep in autodepends:
+            if not dep in found and not self.ignore_missing:
+                message.sub_critical(_('Dependency needed, not in any local'), dep)
                 missing_detected = True
         if missing_detected:
             sys.exit(2)
@@ -1489,13 +1471,6 @@ class Source(object):
                     message.sub_warning(_('Overriding STRIP_STATIC to'), _('False'))
                     self.strip_static = False
 
-                if option == 'rpath' and not self.strip_rpath:
-                    message.sub_warning(_('Overriding STRIP_RPATH to'), _('True'))
-                    self.strip_rpath = True
-                elif option == '!rpath' and self.strip_rpath:
-                    message.sub_warning(_('Overriding STRIP_RPATH to'), _('False'))
-                    self.strip_rpath = False
-
                 if option == 'missing' and not self.ignore_missing:
                     message.sub_warning(_('Overriding IGNORE_MISSING to'), _('True'))
                     self.ignore_missing = True
@@ -1549,7 +1524,6 @@ class Source(object):
             self.strip_binaries = STRIP_BINARIES
             self.strip_shared = STRIP_SHARED
             self.strip_static = STRIP_STATIC
-            self.strip_rpath = STRIP_RPATH
             self.ignore_missing = IGNORE_MISSING
 
 wantscookie = '''

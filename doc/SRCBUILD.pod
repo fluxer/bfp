@@ -123,10 +123,6 @@ Purge unwanted files and directories.
 
 Ignore missing runtime dependencies.
 
-=head3 rpath
-
-Fix RPATH in binaries and libraries
-
 =head3 debug
 
 Split debug information from DWARF files.

@@ -172,12 +172,6 @@ try:
             libspm.STRIP_STATIC = values
             setattr(namespace, self.dest, values)
 
-    class OverrideRpath(argparse.Action):
-        ''' Override stripping of RPATH '''
-        def __call__(self, parser, namespace, values, option_string=None):
-            libspm.STRIP_RPATH = values
-            setattr(namespace, self.dest, values)
-
     class OverrideMissing(argparse.Action):
         ''' Override missing runtime dependencies failure '''
         def __call__(self, parser, namespace, values, option_string=None):
@@ -386,9 +380,6 @@ try:
     parser.add_argument('--static', type=ast.literal_eval, \
         action=OverrideStatic, choices=[True, False], \
         help=_('Set whether to strip static libraries'))
-    parser.add_argument('--rpath', type=ast.literal_eval, \
-        action=OverrideRpath, choices=[True, False], \
-        help=_('Set whether to strip RPATH'))
     parser.add_argument('--missing', type=ast.literal_eval, \
         action=OverrideMissing, choices=[True, False], \
         help=_('Set whether to ignore missing runtime dependencies'))
@@ -483,7 +474,6 @@ try:
         message.sub_info(_('STRIP_BINARIES'), libspm.STRIP_BINARIES)
         message.sub_info(_('STRIP_SHARED'), libspm.STRIP_SHARED)
         message.sub_info(_('STRIP_STATIC'), libspm.STRIP_STATIC)
-        message.sub_info(_('STRIP_RPATH'), libspm.STRIP_RPATH)
         message.sub_info(_('IGNORE_MISSING'), libspm.IGNORE_MISSING)
         message.sub_info(_('CONFLICTS'), libspm.CONFLICTS)
         message.sub_info(_('BACKUP'), libspm.BACKUP)

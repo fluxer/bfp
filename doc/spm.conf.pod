@@ -193,13 +193,6 @@ the size of the static libraries but it may corrupt some of them.
 
 Default: True
 
-=head2 STRIP_RPATH
-
-Set whether to strip insecure RPATH from binaries and libraries. This reduces
-the chance for exploiting them but it may corrupt some of them (very rare).
-
-Default: True
-
 =head2 IGNORE_MISSING
 
 Set whether to ignore missing runtime dependencies. This is used only as a

@@ -12,10 +12,10 @@ spm - Source Package Manager
     [--cppflags CPPFLAGS] [--ldflags LDFLAGS] [--makeflags MAKEFLAGS]
     [--purge PURGE] [--man {True,False}] [--split {True,False}]
     [--binaries {True,False}] [--shared {True,False}]
-    [--static {True,False}] [--rpath {True,False}]
-    [--missing {True,False}] [--conflicts {True,False}]
-    [--backup {True,False}] [--scripts {True,False}]
-    [--triggers {True,False}] [--debug] [--version]
+    [--static {True,False}] [--missing {True,False}]
+    [--conflicts {True,False}] [--backup {True,False}]
+    [--scripts {True,False}] [--triggers {True,False}]
+    [--debug] [--version]
     {repo,remote,source,local,who} ...
 
 =head1 DESCRIPTION
@@ -187,7 +187,6 @@ optional arguments:
                         Set whether to strip shared libraries
   --static {True,False}
                         Set whether to strip static libraries
-  --rpath {True,False}  Set whether to strip RPATH
   --missing {True,False}
                         Set whether to ignore missing runtime dependencies
   --conflicts {True,False}
