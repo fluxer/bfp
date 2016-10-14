@@ -287,8 +287,8 @@ class Database(object):
             return False
 
         if LooseVersion(local_version) > LooseVersion(remote_version):
-            return False
-        return True
+            return True
+        return False
 
     def remote_metadata(self, target, key):
         ''' Returns metadata of remote target '''

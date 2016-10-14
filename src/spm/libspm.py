@@ -398,7 +398,7 @@ class Repo(object):
             elif not latest:
                 message.sub_warning(_('New version of %s available') % \
                     target, version)
-            elif not downgrade:
+            elif downgrade:
                 message.sub_warning(_('Older version of %s available') % \
                     target, version)
 
@@ -1417,7 +1417,8 @@ class Source(object):
             self.target_tarball = '%s/tarballs/%s_%s.tar.gz' % (CACHE_DIR, \
                 self.target_name, self.target_version)
 
-            if database.local_uptodate(self.target) and self.do_update:
+            if database.local_uptodate(self.target) \
+                and not database.local_downgrade(self.target) and self.do_update:
                 message.sub_warning(_('Target is up-to-date'), self.target)
                 continue
 
