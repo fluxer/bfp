@@ -1056,7 +1056,7 @@ static char __pyx_k_literal_eval[] = "literal_eval";
 static char __pyx_k_recovery_img[] = "-recovery.img";
 static char __pyx_k_s_ld_so_conf[] = "%s/ld.so.conf";
 static char __pyx_k_sub_critical[] = "sub_critical";
-static char __pyx_k_1_9_1_65cbfe1[] = "1.9.1 (65cbfe1)";
+static char __pyx_k_1_9_1_675232e[] = "1.9.1 (675232e)";
 static char __pyx_k_Copying_files[] = "Copying files";
 static char __pyx_k_Decompressing[] = "Decompressing";
 static char __pyx_k_compression_2[] = "--compression";
@@ -1120,7 +1120,7 @@ static char __pyx_k_Argument_applet_s_not_supported[] = "Argument/applet %s not 
 static char __pyx_k_Change_image_compression_method[] = "Change image compression method";
 static char __pyx_k_Creating_shared_libraries_cache[] = "Creating shared libraries cache";
 static char __pyx_k_Root_filesystem_overlay_missing[] = "Root filesystem overlay missing";
-static char __pyx_k_home_smil3y_bfp_src_initfs_mkin[] = "/home/smil3y/bfp/src/initfs/mkinitfs.py";
+static char __pyx_k_home_smil3y_Desktop_bfp_src_ini[] = "/home/smil3y/Desktop/bfp/src/initfs/mkinitfs.py";
 static char __pyx_k_Change_wheather_to_create_recove[] = "Change wheather to create recovery image";
 static char __pyx_k_Change_whether_to_strip_binrarie[] = "Change whether to strip binraries and libraries";
 static char __pyx_k_File_or_directory_does_not_exist[] = "File or directory does not exist";
@@ -1130,7 +1130,7 @@ static char __pyx_k_Unable_to_find_modules_directory[] = "Unable to find modules
 static PyObject *__pyx_kp_s_;
 static PyObject *__pyx_kp_s_0;
 static PyObject *__pyx_kp_s_1;
-static PyObject *__pyx_kp_s_1_9_1_65cbfe1;
+static PyObject *__pyx_kp_s_1_9_1_675232e;
 static PyObject *__pyx_kp_s_5;
 static PyObject *__pyx_kp_s_640;
 static PyObject *__pyx_kp_s_664;
@@ -1311,7 +1311,7 @@ static PyObject *__pyx_n_s_gzip;
 static PyObject *__pyx_n_s_gzipf;
 static PyObject *__pyx_n_s_help;
 static PyObject *__pyx_kp_s_help_2;
-static PyObject *__pyx_kp_s_home_smil3y_bfp_src_initfs_mkin;
+static PyObject *__pyx_kp_s_home_smil3y_Desktop_bfp_src_ini;
 static PyObject *__pyx_kp_s_i;
 static PyObject *__pyx_n_s_image;
 static PyObject *__pyx_kp_s_image_2;
@@ -5195,7 +5195,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_, __pyx_k_, sizeof(__pyx_k_), 0, 0, 1, 0},
   {&__pyx_kp_s_0, __pyx_k_0, sizeof(__pyx_k_0), 0, 0, 1, 0},
   {&__pyx_kp_s_1, __pyx_k_1, sizeof(__pyx_k_1), 0, 0, 1, 0},
-  {&__pyx_kp_s_1_9_1_65cbfe1, __pyx_k_1_9_1_65cbfe1, sizeof(__pyx_k_1_9_1_65cbfe1), 0, 0, 1, 0},
+  {&__pyx_kp_s_1_9_1_675232e, __pyx_k_1_9_1_675232e, sizeof(__pyx_k_1_9_1_675232e), 0, 0, 1, 0},
   {&__pyx_kp_s_5, __pyx_k_5, sizeof(__pyx_k_5), 0, 0, 1, 0},
   {&__pyx_kp_s_640, __pyx_k_640, sizeof(__pyx_k_640), 0, 0, 1, 0},
   {&__pyx_kp_s_664, __pyx_k_664, sizeof(__pyx_k_664), 0, 0, 1, 0},
@@ -5376,7 +5376,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_gzipf, __pyx_k_gzipf, sizeof(__pyx_k_gzipf), 0, 0, 1, 1},
   {&__pyx_n_s_help, __pyx_k_help, sizeof(__pyx_k_help), 0, 0, 1, 1},
   {&__pyx_kp_s_help_2, __pyx_k_help_2, sizeof(__pyx_k_help_2), 0, 0, 1, 0},
-  {&__pyx_kp_s_home_smil3y_bfp_src_initfs_mkin, __pyx_k_home_smil3y_bfp_src_initfs_mkin, sizeof(__pyx_k_home_smil3y_bfp_src_initfs_mkin), 0, 0, 1, 0},
+  {&__pyx_kp_s_home_smil3y_Desktop_bfp_src_ini, __pyx_k_home_smil3y_Desktop_bfp_src_ini, sizeof(__pyx_k_home_smil3y_Desktop_bfp_src_ini), 0, 0, 1, 0},
   {&__pyx_kp_s_i, __pyx_k_i, sizeof(__pyx_k_i), 0, 0, 1, 0},
   {&__pyx_n_s_image, __pyx_k_image, sizeof(__pyx_k_image), 0, 0, 1, 1},
   {&__pyx_kp_s_image_2, __pyx_k_image_2, sizeof(__pyx_k_image_2), 0, 0, 1, 0},
@@ -5830,7 +5830,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__29 = PyTuple_Pack(7, __pyx_n_s_src, __pyx_n_s_sdir, __pyx_n_s_sreal, __pyx_n_s_sfixed, __pyx_n_s_sdest, __pyx_n_s_sfile, __pyx_n_s_ltocopy); if (unlikely(!__pyx_tuple__29)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__29);
   __Pyx_GIVEREF(__pyx_tuple__29);
-  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(1, 0, 7, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_initfs_mkin, __pyx_n_s_copy_item, 94, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__30 = (PyObject*)__Pyx_PyCode_New(1, 0, 7, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__29, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_Desktop_bfp_src_ini, __pyx_n_s_copy_item, 94, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__30)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 94; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "mkinitfs.py":158
  * 
@@ -5842,7 +5842,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__31 = PyTuple_Pack(4, __pyx_n_s_name, __pyx_n_s_modpath, __pyx_n_s_moddepends, __pyx_n_s_moddepend); if (unlikely(!__pyx_tuple__31)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__31);
   __Pyx_GIVEREF(__pyx_tuple__31);
-  __pyx_codeobj__32 = (PyObject*)__Pyx_PyCode_New(1, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__31, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_initfs_mkin, __pyx_n_s_copy_module, 158, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__32)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__32 = (PyObject*)__Pyx_PyCode_New(1, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__31, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_Desktop_bfp_src_ini, __pyx_n_s_copy_module, 158, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__32)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 158; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "mkinitfs.py":171
  *             message.warning('Module not found', name)
@@ -5854,7 +5854,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_tuple__33 = PyTuple_Pack(6, __pyx_n_s_src, __pyx_n_s_image, __pyx_n_s_method, __pyx_n_s_data, __pyx_n_s_gzipf, __pyx_n_s_bzipf); if (unlikely(!__pyx_tuple__33)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 171; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__33);
   __Pyx_GIVEREF(__pyx_tuple__33);
-  __pyx_codeobj__34 = (PyObject*)__Pyx_PyCode_New(3, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__33, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_bfp_src_initfs_mkin, __pyx_n_s_create_image, 171, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__34)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 171; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  __pyx_codeobj__34 = (PyObject*)__Pyx_PyCode_New(3, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__33, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_Desktop_bfp_src_ini, __pyx_n_s_create_image, 171, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__34)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 171; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "mkinitfs.py":185
  *             misc.file_write(image, data)
@@ -6534,7 +6534,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  * 
  * import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast, re             # <<<<<<<<<<<<<<
  * 
- * app_version = "1.9.1 (65cbfe1)"
+ * app_version = "1.9.1 (675232e)"
  */
   __pyx_t_1 = __Pyx_Import(__pyx_n_s_sys, 0, -1); if (unlikely(!__pyx_t_1)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 3; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_1);
@@ -6584,14 +6584,14 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
   /* "mkinitfs.py":5
  * import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast, re
  * 
- * app_version = "1.9.1 (65cbfe1)"             # <<<<<<<<<<<<<<
+ * app_version = "1.9.1 (675232e)"             # <<<<<<<<<<<<<<
  * 
  * tmpdir = None
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_9_1_65cbfe1) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_9_1_675232e) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 5; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "mkinitfs.py":7
- * app_version = "1.9.1 (65cbfe1)"
+ * app_version = "1.9.1 (675232e)"
  * 
  * tmpdir = None             # <<<<<<<<<<<<<<
  * keep = False
