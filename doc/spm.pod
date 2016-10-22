@@ -141,6 +141,10 @@ them in spm-tools(8) manual page. SPM doesn't implement many features known
 from other Package Managers such as target home page URL and other common
 features but it has strived to provide small and easy to extend future set.
 
+In addition to the high-level tools provided are a few libraries with type-safe
+API and enough functionality to build many more around them. They are not very
+well documented but support for Python version 2 and 3 is in place.
+
 =head1 OPTIONS
 
 =head2 MAIN
