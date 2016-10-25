@@ -389,19 +389,21 @@ class Misc(object):
         elif bensure:
             return sig1
 
-    def gpg_receive(self, lkeys, lservers=None):
+    def gpg_receive(self, lkeys, lservers=None, stag=''):
         ''' Import PGP keys as (somewhat) trusted '''
         if self.python2:
             self.typecheck(lkeys, (types.ListType, types.TupleType))
             self.typecheck(lservers, (types.NoneType, types.ListType, types.TupleType))
+            self.typecheck(stag, (types.StringTypes))
 
         if self.OFFLINE:
             return
         if lservers is None:
             lservers = []
-        self.dir_create(self.GPG_DIR, ipermissions=0o700)
+        gpgtagdir = '%s/%s' % (self.GPG_DIR, stag)
+        self.dir_create(gpgtagdir, ipermissions=0o700)
         gpg = self.whereis('gpg2', False) or self.whereis('gpg')
-        cmd = [gpg, '--homedir', self.GPG_DIR]
+        cmd = [gpg, '--homedir', gpgtagdir]
         for server in lservers:
             cmd.extend(('--keyserver', server))
         cmd.append('--recv-keys')
@@ -426,13 +428,15 @@ class Misc(object):
             self.SIGNPASS = base64.encodestring(self.getpass(sprompt))
         self.system_communicate(cmd, sinput=base64.decodestring(self.SIGNPASS))
 
-    def gpg_verify(self, sfile, ssignature=None):
+    def gpg_verify(self, sfile, ssignature=None, stag=''):
         ''' Verify file PGP signature via GnuPG '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
             self.typecheck(ssignature, (types.NoneType, types.StringTypes))
+            self.typecheck(stag, (types.StringTypes))
 
-        self.dir_create(self.GPG_DIR, ipermissions=0o700)
+        gpgtagdir = '%s/%s' % (self.GPG_DIR, stag)
+        self.dir_create(gpgtagdir, ipermissions=0o700)
         gpg = self.whereis('gpg2', False) or self.whereis('gpg')
         if not ssignature:
             ssignature = self.gpg_findsig(sfile)
@@ -449,9 +453,9 @@ class Misc(object):
             else:
                 raise(Exception('In memory verification does not support', sfile))
             cmd = '%s %s | %s --homedir %s --verify --batch %s -' % \
-                (cmd, sfile, gpg, self.GPG_DIR, ssignature)
+                (cmd, sfile, gpg, gpgtagdir, ssignature)
         else:
-            cmd = [gpg, '--homedir', self.GPG_DIR]
+            cmd = [gpg, '--homedir', gpgtagdir]
             cmd.extend(('--verify', '--batch', ssignature, sfile))
         self.system_command(cmd, shell)
 
@@ -949,7 +953,7 @@ class Misc(object):
             different than None. if something goes wrong you get standard
             output (stdout) and standard error (stderr) as an Exception '''
         if self.python2:
-            self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
+            self.typecheck(command, (types.StringTypes, types.TupleType, types.ListType))
             self.typecheck(bshell, (types.BooleanType))
             self.typecheck(cwd, (types.NoneType, types.StringTypes))
             self.typecheck(sinput, (types.NoneType, types.StringTypes))

@@ -817,7 +817,7 @@ class Source(object):
         message.sub_info(_('Preparing PGP keys'))
         if self.target_pgpkeys and self.verify:
             message.sub_debug(self.target_pgpkeys)
-            misc.gpg_receive(self.target_pgpkeys, KEYSERVERS)
+            misc.gpg_receive(self.target_pgpkeys, KEYSERVERS, self.target_name)
 
         message.sub_info(_('Fetching sources'))
         for src_url in self.target_sources:
@@ -839,7 +839,7 @@ class Source(object):
                 src_signature = misc.gpg_findsig(local_file, False)
                 if src_signature:
                     message.sub_debug(_('Verifying'), src_url)
-                    misc.gpg_verify(local_file, src_signature)
+                    misc.gpg_verify(local_file, src_signature, self.target_name)
 
     def prepare(self, optional=False):
         ''' Prepare target sources '''

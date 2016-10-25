@@ -112,7 +112,7 @@ class Dist(object):
             if self.do_sources:
                 message.sub_info(_('Preparing PGP keys'))
                 if target_pgpkeys and libspm.VERIFY:
-                    misc.gpg_receive(target_pgpkeys, libspm.KEYSERVERS)
+                    misc.gpg_receive(target_pgpkeys, libspm.KEYSERVERS, target)
 
                 message.sub_info(_('Preparing sources'))
                 for src_url in target_sources:
@@ -130,7 +130,7 @@ class Dist(object):
                         src_signature = misc.gpg_findsig(src_file, False)
                         if src_signature:
                             message.sub_debug(_('Verifying'), src_url)
-                            misc.gpg_verify(src_file, src_signature)
+                            misc.gpg_verify(src_file, src_signature, target)
 
             message.sub_info(_('Compressing'), target_distfile)
             misc.archive_compress((target_directory,), target_distfile, \
