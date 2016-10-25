@@ -8657,8 +8657,8 @@ static PyObject *__pyx_pf_10libpackage_8Database_24local_downgrade(CYTHON_UNUSED
  *             return False
  * 
  *         if LooseVersion(local_version) > LooseVersion(remote_version):             # <<<<<<<<<<<<<<
- *             return False
- *         return True
+ *             return True
+ *         return False
  */
   __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_LooseVersion); if (unlikely(!__pyx_t_4)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 289; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_4);
@@ -8724,34 +8724,34 @@ static PyObject *__pyx_pf_10libpackage_8Database_24local_downgrade(CYTHON_UNUSED
     /* "libpackage.py":290
  * 
  *         if LooseVersion(local_version) > LooseVersion(remote_version):
- *             return False             # <<<<<<<<<<<<<<
- *         return True
+ *             return True             # <<<<<<<<<<<<<<
+ *         return False
  * 
  */
     __Pyx_XDECREF(__pyx_r);
-    __Pyx_INCREF(Py_False);
-    __pyx_r = Py_False;
+    __Pyx_INCREF(Py_True);
+    __pyx_r = Py_True;
     goto __pyx_L0;
 
     /* "libpackage.py":289
  *             return False
  * 
  *         if LooseVersion(local_version) > LooseVersion(remote_version):             # <<<<<<<<<<<<<<
- *             return False
- *         return True
+ *             return True
+ *         return False
  */
   }
 
   /* "libpackage.py":291
  *         if LooseVersion(local_version) > LooseVersion(remote_version):
- *             return False
- *         return True             # <<<<<<<<<<<<<<
+ *             return True
+ *         return False             # <<<<<<<<<<<<<<
  * 
  *     def remote_metadata(self, target, key):
  */
   __Pyx_XDECREF(__pyx_r);
-  __Pyx_INCREF(Py_True);
-  __pyx_r = Py_True;
+  __Pyx_INCREF(Py_False);
+  __pyx_r = Py_False;
   goto __pyx_L0;
 
   /* "libpackage.py":273
@@ -8781,7 +8781,7 @@ static PyObject *__pyx_pf_10libpackage_8Database_24local_downgrade(CYTHON_UNUSED
 }
 
 /* "libpackage.py":293
- *         return True
+ *         return False
  * 
  *     def remote_metadata(self, target, key):             # <<<<<<<<<<<<<<
  *         ''' Returns metadata of remote target '''
@@ -9348,7 +9348,7 @@ static PyObject *__pyx_pf_10libpackage_8Database_26remote_metadata(CYTHON_UNUSED
   }
 
   /* "libpackage.py":293
- *         return True
+ *         return False
  * 
  *     def remote_metadata(self, target, key):             # <<<<<<<<<<<<<<
  *         ''' Returns metadata of remote target '''
@@ -11959,7 +11959,7 @@ static int __Pyx_InitCachedConstants(void) {
   __pyx_codeobj__39 = (PyObject*)__Pyx_PyCode_New(2, 0, 5, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__38, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_Desktop_bfp_src_lib, __pyx_n_s_local_downgrade, 273, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__39)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 273; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "libpackage.py":293
- *         return True
+ *         return False
  * 
  *     def remote_metadata(self, target, key):             # <<<<<<<<<<<<<<
  *         ''' Returns metadata of remote target '''
@@ -12421,7 +12421,7 @@ PyMODINIT_FUNC PyInit_libpackage(void)
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
   /* "libpackage.py":293
- *         return True
+ *         return False
  * 
  *     def remote_metadata(self, target, key):             # <<<<<<<<<<<<<<
  *         ''' Returns metadata of remote target '''

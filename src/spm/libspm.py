@@ -1066,7 +1066,7 @@ class Source(object):
                 # add the debug file to the target content to avoid yet another
                 # re-index, also take into accout double forward slash during
                 # path joining for sdebug assignment
-                target_content.append(sdebug.replace('//', '/')
+                target_content.append(sdebug.replace('//', '/'))
 
         if lbinaries or lshared or lstatic:
             strip = misc.whereis('strip')
