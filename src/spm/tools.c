@@ -1646,7 +1646,7 @@ static char __pyx_k_sub_critical[] = "sub_critical";
 static char __pyx_k_urllib_error[] = "urllib.error";
 static char __pyx_k_version_info[] = "version_info";
 static char __pyx_k_which_parser[] = "which_parser";
-static char __pyx_k_1_9_1_937a4bb[] = "1.9.1 (937a4bb)";
+static char __pyx_k_1_9_1_fcd4cd3[] = "1.9.1 (fcd4cd3)";
 static char __pyx_k_Create_digest[] = "Create digest";
 static char __pyx_k_Digest___init[] = "Digest.__init__";
 static char __pyx_k_Digest_create[] = "Digest.create";
@@ -1926,7 +1926,7 @@ static char __pyx_k_Starting_migration_procedure_1_7_3[] = "Starting migration p
 static char __pyx_k_Starting_migration_procedure_1_8_2[] = "Starting migration procedure 1_8_x_autodepends on";
 static PyObject *__pyx_n_s_;
 static PyObject *__pyx_kp_s_1;
-static PyObject *__pyx_kp_s_1_9_1_937a4bb;
+static PyObject *__pyx_kp_s_1_9_1_fcd4cd3;
 static PyObject *__pyx_kp_s_2;
 static PyObject *__pyx_kp_s_3;
 static PyObject *__pyx_kp_s_4;
@@ -5772,7 +5772,7 @@ static PyObject *__pyx_pf_5tools_4Dist_2main(CYTHON_UNUSED PyObject *__pyx_self,
  *             if self.do_sources:
  *                 message.sub_info(_('Preparing PGP keys'))             # <<<<<<<<<<<<<<
  *                 if target_pgpkeys and libspm.VERIFY:
- *                     misc.gpg_receive(target_pgpkeys, libspm.KEYSERVERS)
+ *                     misc.gpg_receive(target_pgpkeys, libspm.KEYSERVERS, target)
  */
       __pyx_t_7 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 113; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
       __Pyx_GOTREF(__pyx_t_7);
@@ -5816,7 +5816,7 @@ static PyObject *__pyx_pf_5tools_4Dist_2main(CYTHON_UNUSED PyObject *__pyx_self,
  *             if self.do_sources:
  *                 message.sub_info(_('Preparing PGP keys'))
  *                 if target_pgpkeys and libspm.VERIFY:             # <<<<<<<<<<<<<<
- *                     misc.gpg_receive(target_pgpkeys, libspm.KEYSERVERS)
+ *                     misc.gpg_receive(target_pgpkeys, libspm.KEYSERVERS, target)
  * 
  */
       __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_v_target_pgpkeys); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 114; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -5839,7 +5839,7 @@ static PyObject *__pyx_pf_5tools_4Dist_2main(CYTHON_UNUSED PyObject *__pyx_self,
         /* "tools.py":115
  *                 message.sub_info(_('Preparing PGP keys'))
  *                 if target_pgpkeys and libspm.VERIFY:
- *                     misc.gpg_receive(target_pgpkeys, libspm.KEYSERVERS)             # <<<<<<<<<<<<<<
+ *                     misc.gpg_receive(target_pgpkeys, libspm.KEYSERVERS, target)             # <<<<<<<<<<<<<<
  * 
  *                 message.sub_info(_('Preparing sources'))
  */
@@ -5865,7 +5865,7 @@ static PyObject *__pyx_pf_5tools_4Dist_2main(CYTHON_UNUSED PyObject *__pyx_self,
             __pyx_t_10 = 1;
           }
         }
-        __pyx_t_7 = PyTuple_New(2+__pyx_t_10); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 115; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+        __pyx_t_7 = PyTuple_New(3+__pyx_t_10); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 115; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_7);
         if (__pyx_t_1) {
           __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_1); __pyx_t_1 = NULL;
@@ -5875,6 +5875,9 @@ static PyObject *__pyx_pf_5tools_4Dist_2main(CYTHON_UNUSED PyObject *__pyx_self,
         PyTuple_SET_ITEM(__pyx_t_7, 0+__pyx_t_10, __pyx_v_target_pgpkeys);
         __Pyx_GIVEREF(__pyx_t_11);
         PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_10, __pyx_t_11);
+        __Pyx_INCREF(__pyx_v_target);
+        __Pyx_GIVEREF(__pyx_v_target);
+        PyTuple_SET_ITEM(__pyx_t_7, 2+__pyx_t_10, __pyx_v_target);
         __pyx_t_11 = 0;
         __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_7, NULL); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 115; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
         __Pyx_GOTREF(__pyx_t_12);
@@ -5886,13 +5889,13 @@ static PyObject *__pyx_pf_5tools_4Dist_2main(CYTHON_UNUSED PyObject *__pyx_self,
  *             if self.do_sources:
  *                 message.sub_info(_('Preparing PGP keys'))
  *                 if target_pgpkeys and libspm.VERIFY:             # <<<<<<<<<<<<<<
- *                     misc.gpg_receive(target_pgpkeys, libspm.KEYSERVERS)
+ *                     misc.gpg_receive(target_pgpkeys, libspm.KEYSERVERS, target)
  * 
  */
       }
 
       /* "tools.py":117
- *                     misc.gpg_receive(target_pgpkeys, libspm.KEYSERVERS)
+ *                     misc.gpg_receive(target_pgpkeys, libspm.KEYSERVERS, target)
  * 
  *                 message.sub_info(_('Preparing sources'))             # <<<<<<<<<<<<<<
  *                 for src_url in target_sources:
@@ -6387,7 +6390,7 @@ static PyObject *__pyx_pf_5tools_4Dist_2main(CYTHON_UNUSED PyObject *__pyx_self,
  *                         src_signature = misc.gpg_findsig(src_file, False)
  *                         if src_signature:             # <<<<<<<<<<<<<<
  *                             message.sub_debug(_('Verifying'), src_url)
- *                             misc.gpg_verify(src_file, src_signature)
+ *                             misc.gpg_verify(src_file, src_signature, target)
  */
           __pyx_t_8 = __Pyx_PyObject_IsTrue(__pyx_v_src_signature); if (unlikely(__pyx_t_8 < 0)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 131; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
           if (__pyx_t_8) {
@@ -6396,7 +6399,7 @@ static PyObject *__pyx_pf_5tools_4Dist_2main(CYTHON_UNUSED PyObject *__pyx_self,
  *                         src_signature = misc.gpg_findsig(src_file, False)
  *                         if src_signature:
  *                             message.sub_debug(_('Verifying'), src_url)             # <<<<<<<<<<<<<<
- *                             misc.gpg_verify(src_file, src_signature)
+ *                             misc.gpg_verify(src_file, src_signature, target)
  * 
  */
             __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_5)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 132; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -6441,7 +6444,7 @@ static PyObject *__pyx_pf_5tools_4Dist_2main(CYTHON_UNUSED PyObject *__pyx_self,
             /* "tools.py":133
  *                         if src_signature:
  *                             message.sub_debug(_('Verifying'), src_url)
- *                             misc.gpg_verify(src_file, src_signature)             # <<<<<<<<<<<<<<
+ *                             misc.gpg_verify(src_file, src_signature, target)             # <<<<<<<<<<<<<<
  * 
  *             message.sub_info(_('Compressing'), target_distfile)
  */
@@ -6462,7 +6465,7 @@ static PyObject *__pyx_pf_5tools_4Dist_2main(CYTHON_UNUSED PyObject *__pyx_self,
                 __pyx_t_14 = 1;
               }
             }
-            __pyx_t_7 = PyTuple_New(2+__pyx_t_14); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 133; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+            __pyx_t_7 = PyTuple_New(3+__pyx_t_14); if (unlikely(!__pyx_t_7)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 133; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_7);
             if (__pyx_t_6) {
               __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_7, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -6473,6 +6476,9 @@ static PyObject *__pyx_pf_5tools_4Dist_2main(CYTHON_UNUSED PyObject *__pyx_self,
             __Pyx_INCREF(__pyx_v_src_signature);
             __Pyx_GIVEREF(__pyx_v_src_signature);
             PyTuple_SET_ITEM(__pyx_t_7, 1+__pyx_t_14, __pyx_v_src_signature);
+            __Pyx_INCREF(__pyx_v_target);
+            __Pyx_GIVEREF(__pyx_v_target);
+            PyTuple_SET_ITEM(__pyx_t_7, 2+__pyx_t_14, __pyx_v_target);
             __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_7, NULL); if (unlikely(!__pyx_t_12)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 133; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
             __Pyx_GOTREF(__pyx_t_12);
             __Pyx_DECREF(__pyx_t_7); __pyx_t_7 = 0;
@@ -6484,7 +6490,7 @@ static PyObject *__pyx_pf_5tools_4Dist_2main(CYTHON_UNUSED PyObject *__pyx_self,
  *                         src_signature = misc.gpg_findsig(src_file, False)
  *                         if src_signature:             # <<<<<<<<<<<<<<
  *                             message.sub_debug(_('Verifying'), src_url)
- *                             misc.gpg_verify(src_file, src_signature)
+ *                             misc.gpg_verify(src_file, src_signature, target)
  */
           }
 
@@ -6517,7 +6523,7 @@ static PyObject *__pyx_pf_5tools_4Dist_2main(CYTHON_UNUSED PyObject *__pyx_self,
     }
 
     /* "tools.py":135
- *                             misc.gpg_verify(src_file, src_signature)
+ *                             misc.gpg_verify(src_file, src_signature, target)
  * 
  *             message.sub_info(_('Compressing'), target_distfile)             # <<<<<<<<<<<<<<
  *             misc.archive_compress((target_directory,), target_distfile, \
@@ -34675,7 +34681,7 @@ static struct PyModuleDef __pyx_moduledef = {
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_, __pyx_k_, sizeof(__pyx_k_), 0, 0, 1, 1},
   {&__pyx_kp_s_1, __pyx_k_1, sizeof(__pyx_k_1), 0, 0, 1, 0},
-  {&__pyx_kp_s_1_9_1_937a4bb, __pyx_k_1_9_1_937a4bb, sizeof(__pyx_k_1_9_1_937a4bb), 0, 0, 1, 0},
+  {&__pyx_kp_s_1_9_1_fcd4cd3, __pyx_k_1_9_1_fcd4cd3, sizeof(__pyx_k_1_9_1_fcd4cd3), 0, 0, 1, 0},
   {&__pyx_kp_s_2, __pyx_k_2, sizeof(__pyx_k_2), 0, 0, 1, 0},
   {&__pyx_kp_s_3, __pyx_k_3, sizeof(__pyx_k_3), 0, 0, 1, 0},
   {&__pyx_kp_s_4, __pyx_k_4, sizeof(__pyx_k_4), 0, 0, 1, 0},
@@ -35711,14 +35717,14 @@ static int __Pyx_InitCachedConstants(void) {
  *             if self.do_sources:
  *                 message.sub_info(_('Preparing PGP keys'))             # <<<<<<<<<<<<<<
  *                 if target_pgpkeys and libspm.VERIFY:
- *                     misc.gpg_receive(target_pgpkeys, libspm.KEYSERVERS)
+ *                     misc.gpg_receive(target_pgpkeys, libspm.KEYSERVERS, target)
  */
   __pyx_tuple__10 = PyTuple_Pack(1, __pyx_kp_s_Preparing_PGP_keys); if (unlikely(!__pyx_tuple__10)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 113; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_tuple__10);
   __Pyx_GIVEREF(__pyx_tuple__10);
 
   /* "tools.py":117
- *                     misc.gpg_receive(target_pgpkeys, libspm.KEYSERVERS)
+ *                     misc.gpg_receive(target_pgpkeys, libspm.KEYSERVERS, target)
  * 
  *                 message.sub_info(_('Preparing sources'))             # <<<<<<<<<<<<<<
  *                 for src_url in target_sources:
@@ -35743,7 +35749,7 @@ static int __Pyx_InitCachedConstants(void) {
  *                         src_signature = misc.gpg_findsig(src_file, False)
  *                         if src_signature:
  *                             message.sub_debug(_('Verifying'), src_url)             # <<<<<<<<<<<<<<
- *                             misc.gpg_verify(src_file, src_signature)
+ *                             misc.gpg_verify(src_file, src_signature, target)
  * 
  */
   __pyx_tuple__13 = PyTuple_Pack(1, __pyx_n_s_Verifying); if (unlikely(!__pyx_tuple__13)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 132; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
@@ -35751,7 +35757,7 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__13);
 
   /* "tools.py":135
- *                             misc.gpg_verify(src_file, src_signature)
+ *                             misc.gpg_verify(src_file, src_signature, target)
  * 
  *             message.sub_info(_('Compressing'), target_distfile)             # <<<<<<<<<<<<<<
  *             misc.archive_compress((target_directory,), target_distfile, \
@@ -41159,7 +41165,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  * misc.GPG_DIR = libspm.GPG_DIR
  * misc.SHELL = libspm.SHELL             # <<<<<<<<<<<<<<
  * 
- * app_version = "1.9.1 (937a4bb)"
+ * app_version = "1.9.1 (fcd4cd3)"
  */
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_libspm); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 28; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -41175,14 +41181,14 @@ PyMODINIT_FUNC PyInit_tools(void)
   /* "tools.py":30
  * misc.SHELL = libspm.SHELL
  * 
- * app_version = "1.9.1 (937a4bb)"             # <<<<<<<<<<<<<<
+ * app_version = "1.9.1 (fcd4cd3)"             # <<<<<<<<<<<<<<
  * 
  * class Check(object):
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_9_1_937a4bb) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_9_1_fcd4cd3) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 30; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "tools.py":32
- * app_version = "1.9.1 (937a4bb)"
+ * app_version = "1.9.1 (fcd4cd3)"
  * 
  * class Check(object):             # <<<<<<<<<<<<<<
  *     ''' Check runtime dependencies of local targets '''
@@ -41224,7 +41230,7 @@ PyMODINIT_FUNC PyInit_tools(void)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
   /* "tools.py":32
- * app_version = "1.9.1 (937a4bb)"
+ * app_version = "1.9.1 (fcd4cd3)"
  * 
  * class Check(object):             # <<<<<<<<<<<<<<
  *     ''' Check runtime dependencies of local targets '''
