@@ -1,3 +1,132 @@
+Tue Oct 25 01:39:32 2016 +0000 Ivailo Monev <xakepa10@laimg.moc>
+68e631a3f67e276bf0ecf2480c80f1093f82ba49 (tag: 1.10.0)
+    * bump version
+    * update mkinitfs documentation
+    * make the OpenPGP keys apply per-target via sub-directory home
+    * regenerate sources
+    * .debug files where missing from the footprint - fix that
+    * add Kate project file
+    * document that there are libraries for low-level interaction
+    * the core repository is hosted on GitHub now
+    * regenerate sources
+    * check for downgrade before considering the target up-to-date from source mode
+    * regenerate sources
+    * various cleanups and optimizations
+    * add API for downgrade check and make use of it in repo mode
+    * prepare Copyright for the year to come
+    * SPM documentation update
+    * regenerate spm sources
+    * ignore missing explicit dependencies from portable mode
+    * various cleanups
+    * regenerate spm sources
+    * create tar.gz instead of tar.xz tarballs
+    * regenerate spm sources
+    * run os-prober before grub-mkconfig
+    * regenerate spm sources
+    * remove binary mode leftovers
+    * regenerate sources
+    * do not consider indirect dependencies from Database.local_rdepends()
+    * update mkinitfs docs
+    * remove TODO, the project is considered done
+    * fixup sources target for libs
+    * remove now redundant libs
+    * regenerate libs and spm sources
+    * various cleanups
+    * regenerate spm sources
+    * spm cleanup
+    * CRUX is at 3.2
+    * hint about sudo/su from srcmake
+    * do not use awk in srcmake
+    * the entropy site is no more
+    * regenerate spm sources
+    * fix purging of paths in some rare cases
+    * purge the darn info pages
+    * regenerate spm sources
+    * oops
+    * regenerate spm sources
+    * target upgrade optimization and minor cleanups of target installation
+    * fix an issue with the lib64 workaround
+    * Can you mail me now?
+    * regenerate spm sources
+    * add prelink trigger
+    * regenerate sources
+    * make ssl support checks work with python3
+    * support plain bzip2/gzip archives extraction via srcmake
+    * regenerate spm sources
+    * make alias match against basename only not pattern in local/remote mode
+    * regenerate spm sources
+    * do not try to match pattern twice in local mode
+    * regenerate spm sources
+    * make it possible to query aliases from local/remote modes
+    * regenerate spm sources
+    * implement copy_module() for future use in mkinitfs
+    * match only against basename in which mode
+    * add comment about possible hang in srcmake
+    * regenerate initfs sources
+    * make mkinitfs test for depmod and the required argument
+    * regenerate libs sources
+    * ignore local targets without remote alternative is they may be removed from the repo
+    * regenerate spm sources
+    * do not remove files owned by multiple targets
+    * regenerate spm sources
+    * fix plain printing of reverse dependencies
+    * update README
+    * oops, fix docs installation
+    * documentation improvements
+    * add About section to README file
+    * fixup spm after cleanup
+    * major cleanup
+    * merge aliases and remote targets caching
+    * fix check for tar/bsdtar in srcmake
+    * no need to have printer argument for the base printer
+    * simplify optdepends illegal characters handling in srcmake
+    * regnerate libs sources
+    * oops, missed OR operator in illegal characters regex
+    * to not trow away sources on each srcmake run
+    * echo the message about missing optional once with all targets
+    * implement optdepends handling into srcmake
+    * regenerate libs sources
+    * workaround musl and scanelf issue
+    * regenerate spm sources
+    * implement pulse check
+    * regenerate spm sources
+    * actually modify the array of removed XDG MIMEs
+    * regenerate spm sources
+    * pre-compile the regular expression used for scripts detection
+    * cleanup TODO
+    * add lib64 symlinks for the initramfs image layout
+    * pass python cflags and -fPIC on x86_64 host when building modules/executables
+    * regenerate sources
+    * format URLLIB exceptions as OS
+    * rework url exception handling
+    * drop flags argument from Magic wrapper
+    * move __exit__ after __init__ for UDev wrapper just like in the other wrappers
+    * minor libsystem cleanup
+    * regenerate initfs sources
+    * test for blkid from mkinitfs
+    * update lint rule
+    * make local and remote modes easier to maintain
+    * various cleanups
+    * regenerate spm sources
+    * minor libspm cleanup
+    * regenerate libs sources and fix remote_aliases() regression
+    * cache aliases the same way remote and local targets are cached
+    * regenerate spm sources
+    * update spm-tools check mode documentation
+    * fix documentation installation regression
+    * update copyright
+    * remove cold documentation
+    * remove cold
+    * update spm bash completion
+    * regenerate sources
+    * make the optdepends feature not controllable by user
+    * enable optional during build even if it is outdated
+    * list MirBSD Korn Shel as an alternative to GNU Bash
+    * regenerate spm sources
+    * implement processes restart check on target upgrade
+    * regenerate sources
+    * improve illegal characters replacement for optional dependencies env. variables
+
 Mon Dec 28 11:24:50 2015 +0200 Ivailo Monev <xakepa10@laimg.moc>
 fc17b88cc4c13042bd30c0bfaa8ca57603c0b373 (tag: 1.9.1)
     * regenerate spm sources
