@@ -17,7 +17,7 @@ else:
 import libmessage
 message = libmessage.Message()
 
-app_version = "1.10.0 (d2a6edf)"
+app_version = "1.10.0 (f8388db)"
 
 
 retvalue = 0
@@ -176,6 +176,12 @@ try:
         ''' Override missing runtime dependencies failure '''
         def __call__(self, parser, namespace, values, option_string=None):
             libspm.IGNORE_MISSING = values
+            setattr(namespace, self.dest, values)
+
+    class OverrideOwnership(argparse.Action):
+        ''' Override missing runtime dependencies failure '''
+        def __call__(self, parser, namespace, values, option_string=None):
+            libspm.IGNORE_OWNERSHIP = values
             setattr(namespace, self.dest, values)
 
     class OverrideConflicts(argparse.Action):
@@ -383,6 +389,9 @@ try:
     parser.add_argument('--missing', type=ast.literal_eval, \
         action=OverrideMissing, choices=[True, False], \
         help=_('Set whether to ignore missing runtime dependencies'))
+    parser.add_argument('--ownership', type=ast.literal_eval, \
+        action=OverrideOwnership, choices=[True, False], \
+        help=_('Set whether to ignore ownership of files'))
     parser.add_argument('--conflicts', type=ast.literal_eval, \
         action=OverrideConflicts, choices=[True, False], \
         help=_('Set whether to check for conflicts'))
@@ -475,6 +484,7 @@ try:
         message.sub_info(_('STRIP_SHARED'), libspm.STRIP_SHARED)
         message.sub_info(_('STRIP_STATIC'), libspm.STRIP_STATIC)
         message.sub_info(_('IGNORE_MISSING'), libspm.IGNORE_MISSING)
+        message.sub_info(_('IGNORE_OWNERSHIP'), libspm.IGNORE_OWNERSHIP)
         message.sub_info(_('CONFLICTS'), libspm.CONFLICTS)
         message.sub_info(_('BACKUP'), libspm.BACKUP)
         message.sub_info(_('SCRIPTS'), libspm.SCRIPTS)

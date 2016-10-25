@@ -200,6 +200,15 @@ workaround for false positives.
 
 Default: False
 
+=head2 IGNORE_OWNERSHIP
+
+Set whether to ignore ownership of files and directories. This increases the
+security by making sure that they are not owned by non-system user (usually
+with GID/UID that is greater or equal to 1000). By setting it to True you open
+up a chance for non-system users to temper with paths that they should not.
+
+Default: False
+
 =head2 CONFLICTS
 
 Set whether to check for conflicting files/links when merging targets. It is

@@ -123,6 +123,10 @@ Purge unwanted files and directories.
 
 Ignore missing runtime dependencies.
 
+=head3 ownership
+
+Ignore wrong ownership of files and directories.
+
 =head3 debug
 
 Split debug information from DWARF files.

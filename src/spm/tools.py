@@ -27,7 +27,7 @@ database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 misc.SHELL = libspm.SHELL
 
-app_version = "1.10.0 (d2a6edf)"
+app_version = "1.10.0 (f8388db)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -179,16 +179,10 @@ class Lint(object):
 
     def _check_ownership(self, spath):
         stat = os.stat(spath)
-        unkown = False
         try:
             pwd.getpwuid(stat.st_uid)
-        except KeyError:
-            unkown = True
-        try:
             grp.getgrgid(stat.st_gid)
         except KeyError:
-            unkown = True
-        if unkown:
             message.sub_warning(_('Unknown owner of'), spath)
 
     def main(self):

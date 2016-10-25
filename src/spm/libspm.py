@@ -4,7 +4,7 @@
 def _(arg):
     return arg
 
-import sys, os, shutil, re, time, syslog, glob
+import sys, os, shutil, re, time, syslog, glob, pwd, grp
 from collections import OrderedDict
 if sys.version < '3':
     import ConfigParser as configparser
@@ -49,6 +49,7 @@ DEFAULTS = {
     'STRIP_SHARED': 'False',
     'STRIP_STATIC': 'False',
     'IGNORE_MISSING': 'False',
+    'IGNORE_OWNERSHIP': 'False',
     'CONFLICTS': 'False',
     'BACKUP': 'False',
     'SCRIPTS': 'False',
@@ -93,6 +94,7 @@ STRIP_BINARIES = mainconf.getboolean('install', 'STRIP_BINARIES')
 STRIP_SHARED = mainconf.getboolean('install', 'STRIP_SHARED')
 STRIP_STATIC = mainconf.getboolean('install', 'STRIP_STATIC')
 IGNORE_MISSING = mainconf.getboolean('install', 'IGNORE_MISSING')
+IGNORE_OWNERSHIP = mainconf.getboolean('install', 'IGNORE_OWNERSHIP')
 CONFLICTS = mainconf.getboolean('merge', 'CONFLICTS')
 BACKUP = mainconf.getboolean('merge', 'BACKUP')
 SCRIPTS = mainconf.getboolean('merge', 'SCRIPTS')
@@ -459,6 +461,7 @@ class Source(object):
         self.strip_shared = STRIP_SHARED
         self.strip_static = STRIP_STATIC
         self.ignore_missing = IGNORE_MISSING
+        self.ignore_ownership = IGNORE_OWNERSHIP
         message.CATCH = CATCH
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
@@ -980,6 +983,28 @@ class Source(object):
             if os.path.islink(instsym) and not os.path.exists(instreal):
                 os.unlink(instsym)
 
+        if not self.ignore_ownership:
+            message.sub_info(_('Checking permissions'))
+            for sfile in target_content:
+                if not os.path.exists(sfile):
+                    continue
+                message.sub_debug(_('Checking permissions of'), sfile)
+                stat = os.stat(sfile)
+                owner_unknown = False
+                try:
+                    pwd.getpwuid(stat.st_uid)
+                    grp.getgrgid(stat.st_gid)
+                except KeyError:
+                    owner_unknown = True
+                if owner_unknown:
+                    message.sub_warning(_('Unknown owner of'), sfile)
+                    os.chown(sfile, 0, 0)
+                # TODO: is there utility to pull those from /etc/login.defs?
+                elif stat.st_gid >= 1000 or stat.st_uid >= 1000:
+                    message.sub_warning(_('Owner of %s is user' % sfile), \
+                        '%d, %d' % (stat.st_gid, stat.st_uid))
+                    os.chown(sfile, 0, 0)
+
         if self.compress_man:
             message.sub_info(_('Compressing manual pages'))
             manpath = misc.whereis('manpath', fallback=False)
@@ -1139,9 +1164,12 @@ class Source(object):
 
         missing_detected = False
         for dep in autodepends:
-            if not dep in found and not self.ignore_missing:
-                message.sub_critical(_('Dependency needed, not in any local'), dep)
-                missing_detected = True
+            if not dep in found:
+                if not self.ignore_missing:
+                    message.sub_critical(_('Dependency needed, not in any local'), dep)
+                    missing_detected = True
+                else:
+                    message.sub_warning(_('Dependency needed, not in any local'), dep)
         if missing_detected:
             sys.exit(2)
 
@@ -1483,6 +1511,13 @@ class Source(object):
                     message.sub_warning(_('Overriding IGNORE_MISSING to'), _('False'))
                     self.ignore_missing = False
 
+                if option == 'ownership' and not self.ignore_ownership:
+                    message.sub_warning(_('Overriding IGNORE_MISSING to'), _('True'))
+                    self.ignore_ownership = True
+                elif option == '!ownership' and self.ignore_ownership:
+                    message.sub_warning(_('Overriding IGNORE_OWNERSHIP to'), _('False'))
+                    self.ignore_ownership = False
+
                 # that's a bit of exception since it is a string
                 if option == '!purge' and self.purge_paths:
                     message.sub_warning(_('Overriding PURGE_PATHS to'), _('False'))
@@ -1530,6 +1565,7 @@ class Source(object):
             self.strip_shared = STRIP_SHARED
             self.strip_static = STRIP_STATIC
             self.ignore_missing = IGNORE_MISSING
+            self.ignore_ownership = IGNORE_OWNERSHIP
 
 wantscookie = '''
                        _           |
