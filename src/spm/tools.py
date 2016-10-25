@@ -1474,6 +1474,6 @@ if __name__ == '__main__':
     finally:
         for plugin in plugins:
             plugin.close()
-        if not 'stable' in app_version and sys.exc_info()[0]:
+        if not 'stable' in app_version:
             raise
         sys.exit(retvalue)
