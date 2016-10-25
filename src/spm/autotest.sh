@@ -74,8 +74,6 @@ else
     echo "=== SKIPPING SPM SOURCE TEST ==="
 fi
 
-# binary mode ain't much due to single mirror
-
 if ! grep -q "SPM LOCAL" "$statefile" ;then
     echo "=== RUNNING SPM LOCAL TEST ==="
     "$1" "$curdir/spm.py" $spmargs local -pnvRdDOArsf ca-certificates
@@ -157,7 +155,7 @@ else
     echo "=== SKIPPING SPMT PACK TEST ==="
 fi
 
-if ! "$1" "$curdir/tools.py" online -u 'https://crux.nu/ports/crux-3.1'; then
+if ! "$1" "$curdir/tools.py" online -u 'https://crux.nu/ports/crux-3.2'; then
     echo "=== SKIPPING SPMT PKG TEST (REQUIRES ACCESS TO CRUX SERVER) ==="
 elif ! grep -q "SPMT PKG" "$statefile" ;then
     echo "=== RUNNING SPMT PKG TEST ==="
@@ -184,8 +182,6 @@ if ! grep -q "SPMT ONLINE" "$statefile" ;then
 else
     echo "=== SKIPPING SPMT ONLINE TEST ==="
 fi
-
-# TODO: upload
 
 if [ "$uid" != "0" ];then
     echo "=== SKIPPING SPMT UPGRADE TEST (REQUIRES ROOT) ==="

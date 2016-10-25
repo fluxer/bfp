@@ -6,7 +6,7 @@ spm-tools - Source Package Manager Tools
 
     spm-tools [-h] [--debug] [--version]
                  {dist,check,clean,lint,sane,merge,edit,which,pack,pkg,serve,
-                 disowned,upload,online,upgrade,digest,portable}
+                 disowned,online,upgrade,digest,portable}
 
 =head1 DESCRIPTION
 
@@ -60,8 +60,6 @@ default the scanning process does not perform cross-filesystem operations
 which depending on your setup may not be desired, for an example if you
 have /usr on a separate partition. The operation is usually very slow.
 
-Binary tarballs can be uploaded via FTP/FTPS to mirrors via upload mode.
-
 Checking if the system can access the internet can be done via online mode.
 
 Migrating local targets metadata from old SPM version to newer can be done via
@@ -77,8 +75,8 @@ directory.
 =head2 MAIN
 
 positional arguments:
-  {dist,check,clean,lint,sane,merge,edit,which,pack,pkg,serve,disowned,upload,
-  online,upgrade,digest,portable}
+  {dist,check,clean,lint,sane,merge,edit,which,pack,pkg,serve,disowned,online
+  ,upgrade,digest,portable}
 
 optional arguments:
   -h, --help            Show this help message and exit
@@ -216,19 +214,6 @@ optional arguments:
   -c, --cross           Scan cross-filesystem
   -p, --plain           Print in plain format
 
-=head2 UPLOAD MODE
-
-positional arguments:
-  TARGETS               Targets to apply actions on
-
-optional arguments:
-  -h, --help            Show this help message and exit
-  -H HOST, --host HOST  Set host
-  -u USER, --user USER  Set user
-  -d DIRECTORY, --directory DIRECTORY
-                        Set upload directory
-  -i, --insecure        Use insecure connection
-
 =head2 ONLINE MODE
 
 optional arguments:
@@ -315,7 +300,7 @@ Serve all repositories, sources and pre-build tarballs to the local network:
 
     spm-tools serve
 
-TODO: disowned upload
+TODO: disowned
 
 Check if http://crux.nu is accessible from the current host:
 
@@ -404,12 +389,7 @@ This error raises when the module responsible for regular expressions
 matching fails badly. If in doubt you should check the Python Re module
 reference at http://docs.python.org/2/library/re.html.
 
-=head2 FTPLIB (12)
-
-This error raises when the FTP modules responsible for uploading files errors
-out.
-
-=head2 Interupt signal received (13)
+=head2 Interupt signal received (12)
 
 This error raises when the user triggers keyboard interrupt via Ctrl+C key
 combination.

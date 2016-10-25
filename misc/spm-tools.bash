@@ -5,8 +5,8 @@ _spm_tools()
     local action cur prev
     local main_options merge_options clean_options edit_options sane_options
     local lint_options check_options dist_options which_options pack_options
-    local pkg_options serve_options disowned_options upload_options
-    local online_options upgrade_options digest_options portable_options
+    local pkg_options serve_options disowned_options online_options
+    local upgrade_options digest_options portable_options
 
     actions='merge clean edit sane lint check dist which pack pkg serve
         disowned upload online upgrade digest portable'
@@ -40,8 +40,6 @@ _spm_tools()
     serve_options='-h --help -p --port -a --address'
 
     disowned_options='-h --help -d --directory -c --cross -p --plain'
-
-    upload_options='-h --help -H --host -u --user -d --directory -i --insecure'
 
     online_options='-h --help -u --url'
 
@@ -80,8 +78,6 @@ _spm_tools()
         COMPREPLY=($(compgen -W "${serve_options}" -- "${cur}"))
     elif [[ ${arg} = disowned ]];then
         COMPREPLY=($(compgen -W "${disowned_options}" -- "${cur}"))
-    elif [[ ${arg} = upload ]];then
-        COMPREPLY=($(compgen -W "${upload_options}" -- "${cur}"))
     elif [[ ${arg} = upload ]];then
         COMPREPLY=($(compgen -W "${online_options}" -- "${cur}"))
     elif [[ ${arg} = upgrade ]];then

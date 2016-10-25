@@ -5,7 +5,7 @@ def _(arg):
     return arg
 
 import sys, argparse, subprocess, tarfile, zipfile, shutil, os, re, difflib
-import pwd, grp, ftplib, site, imp, glob
+import pwd, grp, site, imp, glob
 if sys.version < '3':
     import ConfigParser as configparser
     from urllib2 import HTTPError
@@ -27,7 +27,7 @@ database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 misc.SHELL = libspm.SHELL
 
-app_version = "1.9.1 (fcd4cd3)"
+app_version = "1.10.0 (5c45063)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -645,7 +645,7 @@ class Pkg(object):
 
 
 class Serve(object):
-    ''' Serve cache directories with local network parties '''
+    ''' Share cache directories with local network parties '''
     def __init__(self, port, address):
         self.port = port
         self.address = address
@@ -685,65 +685,6 @@ class Disowned(object):
                     print(sfile)
                 else:
                     message.sub_info(_('Disowned file'), sfile)
-
-
-class Upload(object):
-    ''' Class to upload source/binary tarballs '''
-    def __init__(self, targets, host=None, user=None, directory='/', \
-        insecure=False):
-        self.targets = []
-        for target in targets:
-            self.targets.extend(database.remote_alias(target))
-        self.host = host
-        self.user = user
-        self.directory = directory
-        self.insecure = insecure
-
-    def main(self):
-        if not self.host:
-            message.sub_critical(_('Host is empty'))
-            sys.exit(2)
-        elif not self.user:
-            message.sub_critical(_('User is empty'))
-            sys.exit(2)
-
-        ftp = None
-        try:
-            p = misc.getpass('Password for %s: ' % self.user)
-            # SSL verification works OOTB only on Python >= 2.7.10 and >=3.4.0 (officially)
-            if ((self.python3 and sys.version_info[2] >= 4)
-                or (self.python2 and sys.version_info[2] >= 9)) and not self.insecure:
-                import ssl
-                ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
-                ftp = ftplib.FTP_TLS(self.host, self.user, p, timeout=libspm.TIMEOUT, context=ctx)
-            else:
-                ftp = ftplib.FTP_TLS(self.host, self.user, p, timeout=libspm.TIMEOUT)
-            if not self.insecure:
-                ftp.prot_p()
-            ftp.cwd('%s/tarballs/%s' % self.directory)
-            for target in self.targets:
-                if not database.remote_search(target):
-                    message.sub_critical(_('Invalid target'), target)
-                    sys.exit(2)
-                version = database.remote_metadata(target, 'version')
-                tarball = '%s/tarballs/%s_%s.tar.gz' % (libspm.CACHE_DIR, target, version)
-                signature = '%s.sig' % tarball
-                if not os.path.isfile(tarball):
-                    message.sub_critical(_('Binary tarball not available for'), target)
-                    sys.exit(2)
-                files = [tarball]
-                if os.path.isfile(signature):
-                    files.append(signature)
-                elif libspm.SIGN:
-                    message.sub_warning(_('Missing signature for'), tarball)
-                for sfile in files:
-                    message.sub_info(_('Uploading'), sfile)
-                    with open(sfile, 'r') as f:
-                        ftp.storbinary('STOR %s' % os.path.basename(sfile), f)
-        finally:
-            if ftp:
-                ftp.quit()
-
 
 class Online(object):
     ''' Check if system is online or URL reachable '''
@@ -1380,18 +1321,6 @@ if __name__ == '__main__':
             m = Disowned(ARGS.directory, ARGS.cross, ARGS.plain)
             m.main()
 
-        elif ARGS.mode == 'upload':
-            message.info(_('Runtime information'))
-            message.sub_info(_('HOST'), ARGS.host)
-            message.sub_info(_('USER'), ARGS.user)
-            message.sub_info(_('DIRECTORY'), ARGS.directory)
-            message.sub_info(_('INSECURE'), ARGS.insecure)
-            message.sub_info(_('TARGETS'), ARGS.TARGETS)
-            message.info(_('Poking server...'))
-            m = Upload(ARGS.TARGETS, ARGS.host, ARGS.user, ARGS.directory, \
-                ARGS.insecure)
-            m.main()
-
         elif ARGS.mode == 'online':
             message.info(_('Runtime information'))
             message.sub_info(_('URL'), ARGS.url)
@@ -1460,12 +1389,9 @@ if __name__ == '__main__':
     except re.error as detail:
         message.critical('REGEXP', detail)
         retvalue = 11
-    except ftplib.all_errors as detail:
-        message.critical('FTPLIB', detail)
-        retvalue = 12
     except KeyboardInterrupt:
         message.critical('Interrupt signal received')
-        retvalue = 13
+        retvalue = 12
     except SystemExit:
         retvalue = 2
     except Exception as detail:
