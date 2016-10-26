@@ -16,7 +16,7 @@ rootdir="$curdir/root-$1"
 cachedir="$rootdir/cache"
 builddir="$rootdir/build"
 gpgdir="$rootdir/gpg"
-spmargs="--root $rootdir --cache $cachedir --build $builddir --gpg $gpgdir --missing=True --notify=True --scripts=False --debug"
+spmargs="--root $rootdir --cache $cachedir --build $builddir --gpg $gpgdir --missing=True --notify=True --scripts=False --ownership=True --debug"
 spmtargs="--root $rootdir --debug"
 statefile="$rootdir/testrun-$1"
 
