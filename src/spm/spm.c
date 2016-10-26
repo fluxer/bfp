@@ -1006,7 +1006,7 @@ static char __pyx_k_remote_backup[] = "remote_backup";
 static char __pyx_k_remote_parser[] = "remote_parser";
 static char __pyx_k_source_parser[] = "source_parser";
 static char __pyx_k_var_local_spm[] = "var/local/spm";
-static char __pyx_k_1_10_0_da3e6c6[] = "1.10.0 (da3e6c6)";
+static char __pyx_k_1_10_0_f5b7d06[] = "1.10.0 (f5b7d06)";
 static char __pyx_k_ArgumentParser[] = "ArgumentParser";
 static char __pyx_k_Change_LDFLAGS[] = "Change LDFLAGS";
 static char __pyx_k_IGNORE_MISSING[] = "IGNORE_MISSING";
@@ -1184,7 +1184,7 @@ static char __pyx_k_Set_whether_to_use_inotify_to_mo[] = "Set whether to use ino
 static char __pyx_k_Short_for_clean_fetch_prepare_co[] = "Short for clean, fetch, prepare, compile, install and merge";
 static char __pyx_k_Short_for_clean_sync_prune_and_u[] = "Short for clean, sync, prune and update";
 static PyObject *__pyx_kp_s_;
-static PyObject *__pyx_kp_s_1_10_0_da3e6c6;
+static PyObject *__pyx_kp_s_1_10_0_f5b7d06;
 static PyObject *__pyx_kp_s_2;
 static PyObject *__pyx_kp_s_3;
 static PyObject *__pyx_kp_s_A;
@@ -7094,7 +7094,7 @@ static struct PyModuleDef __pyx_moduledef = {
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_, __pyx_k_, sizeof(__pyx_k_), 0, 0, 1, 0},
-  {&__pyx_kp_s_1_10_0_da3e6c6, __pyx_k_1_10_0_da3e6c6, sizeof(__pyx_k_1_10_0_da3e6c6), 0, 0, 1, 0},
+  {&__pyx_kp_s_1_10_0_f5b7d06, __pyx_k_1_10_0_f5b7d06, sizeof(__pyx_k_1_10_0_f5b7d06), 0, 0, 1, 0},
   {&__pyx_kp_s_2, __pyx_k_2, sizeof(__pyx_k_2), 0, 0, 1, 0},
   {&__pyx_kp_s_3, __pyx_k_3, sizeof(__pyx_k_3), 0, 0, 1, 0},
   {&__pyx_kp_s_A, __pyx_k_A, sizeof(__pyx_k_A), 0, 0, 1, 0},
@@ -11102,7 +11102,7 @@ PyMODINIT_FUNC PyInit_spm(void)
  * import libmessage
  * message = libmessage.Message()             # <<<<<<<<<<<<<<
  * 
- * app_version = "1.10.0 (da3e6c6)"
+ * app_version = "1.10.0 (f5b7d06)"
  */
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_libmessage); if (unlikely(!__pyx_t_2)) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 18; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
   __Pyx_GOTREF(__pyx_t_2);
@@ -11133,11 +11133,11 @@ PyMODINIT_FUNC PyInit_spm(void)
   /* "spm.py":20
  * message = libmessage.Message()
  * 
- * app_version = "1.10.0 (da3e6c6)"             # <<<<<<<<<<<<<<
+ * app_version = "1.10.0 (f5b7d06)"             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_10_0_da3e6c6) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 20; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_10_0_f5b7d06) < 0) {__pyx_filename = __pyx_f[0]; __pyx_lineno = 20; __pyx_clineno = __LINE__; goto __pyx_L1_error;}
 
   /* "spm.py":23
  * 
