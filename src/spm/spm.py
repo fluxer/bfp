@@ -582,6 +582,4 @@ except Exception as detail:
     message.critical('Unexpected error', detail)
     retvalue = 1
 finally:
-    if not 'stable' in app_version:
-        raise
     sys.exit(retvalue)

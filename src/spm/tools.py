@@ -1346,7 +1346,7 @@ if __name__ == '__main__':
         for module in modules:
             module.run(ARGS)
 
-        if not ARGS.mode and sys.version > '2':
+        if not ARGS.mode and misc.python3:
             parser.print_help()
 
     except configparser.Error as detail:
@@ -1394,6 +1394,4 @@ if __name__ == '__main__':
     finally:
         for plugin in plugins:
             plugin.close()
-        if not 'stable' in app_version:
-            raise
         sys.exit(retvalue)
