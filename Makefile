@@ -40,7 +40,7 @@ clean:
 
 changelog:
 	$(GIT) log HEAD -n 1 --pretty='%cd %an <%ae> %n%H%d'
-	$(GIT) log $(shell $(GIT) tag | tail -n1)..HEAD --no-merges --pretty='    * %s' | $(UNIQ) -u
+	$(GIT) log $(shell $(GIT) tag | head -n1)..HEAD --no-merges --pretty='    * %s' | $(UNIQ) -u
 
 dist:
 	$(GIT) archive HEAD --format=tar --prefix=bfp-$(VERSION)/ | $(XZ) > bfp-$(VERSION).tar.xz
