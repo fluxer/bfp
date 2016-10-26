@@ -1148,6 +1148,7 @@ class Source(object):
 
         found = []
         depends = []
+        depends.extend(self.target_depends)
         for local in database.local_all(True):
             lfootprint = database.local_metadata(local, 'footprint')
             for dep in autodepends:
@@ -1437,7 +1438,7 @@ class Source(object):
             self.target_version = database.remote_metadata(self.target_dir, 'version')
             self.target_release = database.remote_metadata(self.target_dir, 'release')
             self.target_description = database.remote_metadata(self.target_dir, 'description')
-            self.target_makedepends = database.remote_metadata(self.target_dir, 'makedepends')
+            self.target_depends = database.remote_metadata(self.target_dir, 'depends')
             self.target_optdepends = database.remote_metadata(self.target_dir, 'optdepends')
             self.target_sources = database.remote_metadata(self.target_dir, 'sources')
             self.target_pgpkeys = database.remote_metadata(self.target_dir, 'pgpkeys')
