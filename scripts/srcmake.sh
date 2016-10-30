@@ -122,6 +122,7 @@ for src in "${@:-.}";do
         warn2 "Missing dependencies: ${YELLOW}${missing_depends}${ALL_OFF}"
     fi
 
+    enabled_optdepends=""
     missing_optdepends=""
     for depend in "${optdepends[@]}";do
         fixed_name="$(echo ${depend} | tr '\-\!@#$%^.,[]+><"=()' '_')"
@@ -129,6 +130,7 @@ for src in "${@:-.}";do
             export OPTIONAL_${fixed_name}_BOOL="TRUE"
             export OPTIONAL_${fixed_name}_SWITCH="ON"
             export OPTIONAL_${fixed_name}="yes"
+            enabled_optdepends="$enabled_optdepends $depend"
         else
             missing_optdepends="$missing_optdepends $depend"
             export OPTIONAL_${fixed_name}_BOOL="FALSE"
@@ -197,22 +199,49 @@ for src in "${@:-.}";do
     cd "$SOURCE_DIR"
     src_install
 
-    # TODO: migrate to JSON format
-    msg "Creating footprint and metadata..."
-    footprint="$INSTALL_DIR/var/local/spm/$src_name/footprint"
-    metadata="$INSTALL_DIR/var/local/spm/$src_name/metadata"
+    msg "Creating metadata and SRCBUILD..."
+    localsrcbuild="$INSTALL_DIR/var/local/spm/$src_name/SRCBUILD"
+    localmetadata="$INSTALL_DIR/var/local/spm/$src_name/metadata.json"
     mkdir -p "$INSTALL_DIR/var/local/spm/$src_name"
-    rm -f "$footprint"
-    while IFS= read -r -d '' file; do
-        echo "${file//$INSTALL_DIR}" >> "$footprint"
+
+    size="$(du -sb "$INSTALL_DIR" | cut -f1)"
+    builddate="$(date)"
+    depends_json=""
+    for depend in "${depends[@]}";do
+        depends_json="$depends_json \"$depend\", "
+    done
+    optdepends_json=""
+    for depend in $enabled_optdepends;do
+        optdepends_json="$optdepends_json \"$depend\", "
+    done
+    # TODO: autodepends_json
+    backup_json=""
+    for backup in "${backup[@]}";do
+        backup_file="$INSTALL_DIR/$backup"
+        if [ -e "$backup_file" ];then
+            backup_checksum="$(sha256sum "$backup_file" | cut -f1 -d' ')"
+            backup_json="$backup_json \"/$backup\": \"$backup_checksum\", "
+        fi
+    done
+    footprint_json=""
+    while IFS= read -r -d '' file;do
+        footprint_json="$footprint_json \"${file//$INSTALL_DIR}\", "
     done < <(find "$INSTALL_DIR" ! -type d -print0)
 
-    echo "version=$version" > "$metadata"
-    echo "release=${release:-1}" >> "$metadata"
-    echo "description=$description" >> "$metadata"
-    echo "depends=${depends[*]}" >> "$metadata"
-    echo "backup=${backup[*]}" >> "$metadata"
-    echo "size=$(du -s "$INSTALL_DIR" | cut -f1)" >> "$metadata"
+    echo "
+{
+    \"version\": \"$version\",
+    \"release\": \"${release:-1}\",
+    \"description\": \"$description\",
+    \"depends\": [ $depends_json ],
+    \"optdepends\": [ $optdepends_json ],
+    \"autodepends\": [ $autodepends_json ],
+    \"backup\": { $backup_json },
+    \"size\": $size,
+    \"footprint\": [ $footprint_json ],
+    \"builddate\": \"$builddate\"
+}" > "$localmetadata"
+    cp -f "$srcbuild" "$localsrcbuild"
 
     msg "Compressing tarball.."
     tarball="${src_name}_${version}.tar.bz2"
