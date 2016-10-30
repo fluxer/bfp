@@ -13,7 +13,7 @@ spm-tools - Source Package Manager Tools
 Source Package Manager Tools (SPMT) packs additional utilities to assist in the
 system maintenance. It supports plugins the location of which is
 /etc/spm/plugins. They are automatically loaded and executed, if requested via
-argument. For example plugin see @DOCDIR@/spm.
+argument. For example plugin see @DOCDIR@/bfp.
 
 With the tools you can distribute tarballs of port(s) and share them with
 friends so that other can benefit from your work. Along with the tarballs
