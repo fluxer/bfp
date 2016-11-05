@@ -256,7 +256,8 @@ class Database(object):
 
         if LooseVersion(local_version) < LooseVersion(remote_version):
             return False
-        elif local_release < remote_release:
+        # unless the versions are equal it is a possible downgrade
+        elif local_version == remote_version and local_release < remote_release:
             return False
         else:
             for optional in remote_optional:
