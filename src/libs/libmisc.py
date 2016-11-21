@@ -984,6 +984,10 @@ class Misc(object):
             self.typecheck(sfile, (types.StringTypes))
 
         lpaths = []
+        smime = self.file_mime(sfile, bquick=True)
+        if not smime in ('application/x-executable', 'application/x-sharedlib'):
+            return lpaths
+
         lldpath = ['/lib', '/lib32', '/lib64', '/usr/lib', '/usr/lib32', '/usr/lib64']
         sldpath = os.environ.get('LD_LIBRARY_PATH', '')
         for spath in sldpath.split(':'):

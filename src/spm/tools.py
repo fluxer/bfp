@@ -786,13 +786,10 @@ class Upgrade(object):
         autodepends = []
         footprint = data['footprint']
         for sfile in footprint:
-            smime = misc.file_mime(sfile, bquick=True)
-            if smime in ('application/x-executable', \
-                'application/x-sharedlib'):
-                for lib in misc.system_readelf(sfile):
-                    if lib in footprint:
-                        continue
-                    autodepends.append(lib)
+            for lib in misc.system_readelf(sfile):
+                if lib in footprint:
+                    continue
+                autodepends.append(lib)
         data['autodepends'] = autodepends
         misc.json_write(metadata, data)
 
