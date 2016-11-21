@@ -789,13 +789,8 @@ class Upgrade(object):
             smime = misc.file_mime(sfile, bquick=True)
             if smime in ('application/x-executable', \
                 'application/x-sharedlib'):
-                for lib in misc.system_scanelf(sfile, sflags='-L').split(','):
-                    if not lib:
-                        # bug in scanelf
-                        continue
-                    elif lib in autodepends:
-                        continue
-                    elif lib in footprint:
+                for lib in misc.system_readelf(sfile):
+                    if lib in footprint:
                         continue
                     autodepends.append(lib)
         data['autodepends'] = autodepends

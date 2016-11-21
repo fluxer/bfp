@@ -51,7 +51,7 @@ The following software is required:
 [Findutils](http://www.gnu.org/software/findutils/) (or [Busybox](http://www.busybox.net/)),
 [Busybox](http://www.busybox.net/),
 [GNU Tar](https://www.gnu.org/software/tar/) (or [Busybox](http://www.busybox.net/)/[libarchive](http://www.libarchive.org/)),
-[PaX Utilities](https://wiki.gentoo.org/wiki/Hardened/PaX_Utilities),
+[GNU Binutils](https://www.gnu.org/software/binutils/) (or [elfutils](https://fedorahosted.org/elfutils/)),
 [file](http://darwinsys.com/file/),
 [GNU Bash](https://www.gnu.org/software/bash/) (or [MirBSD Korn Shell](https://www.mirbsd.org/mksh.htm)),
 [Git](http://git-scm.com/),

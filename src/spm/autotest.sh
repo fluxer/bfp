@@ -41,14 +41,6 @@ ln -svf "$curdir/../libs/libmessage.py" .
 ln -svf "$curdir/../libs/libmisc.py" .
 ln -svf "$curdir/../libs/libpackage.py" .
 
-# let me build that for ya :)
-if ! which scanelf ;then
-    "$1" "$curdir/spm.py" $spmargs repo -a
-    paxver=$("$1" "$curdir/spm.py" $spmargs remote -pv pax-utils)
-    "$1" "$curdir/spm.py" $spmargs source -Cfpc pax-utils
-    export PATH="$PATH:$builddir/pax-utils/source/pax-utils-$paxver"
-fi
-
 if ! grep -q "SPM REPO" "$statefile" ;then
     echo "=== RUNNING SPM REPO TEST ==="
     "$1" "$curdir/spm.py" $spmargs repo -cspu

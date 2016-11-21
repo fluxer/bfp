@@ -130,7 +130,7 @@ try:
             shutil.copytree(src, sdest, symlinks=True)
             lcopied.append(src)
         elif os.path.isfile(src):
-            ltocopy = misc.system_scanelf(src, sflags='-L').split(',')
+            ltocopy = misc.system_readelf(src)
             ltocopy.append(src)
             for sfile in ltocopy:
                 if sfile in lcopied:

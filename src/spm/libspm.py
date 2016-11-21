@@ -1114,11 +1114,7 @@ class Source(object):
         message.sub_info(_('Checking runtime dependencies'))
         autodepends = []
         for sfile in lapplications:
-            libraries = misc.system_scanelf(sfile, sflags='-L')
-            if libraries:
-                for lib in libraries.split(','):
-                    if lib and not lib in autodepends:
-                        autodepends.append(lib)
+            autodepends = misc.system_readelf(sfile)
 
         for sfile in lscripts:
             omatch = self.shebang_regex.findall(misc.file_read(sfile))

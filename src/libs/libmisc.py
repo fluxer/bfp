@@ -53,6 +53,7 @@ class Misc(object):
             self.python2 = True
         else:
             self.python3 = True
+        self._elfx = re.compile('\[(.*)\]')
         # legal are [a-zA-Z_][a-zA-Z0-9_]+
         self._illegalx = re.compile('\\-|\\!|\\@|\\#|\\$|\\%|\\^|\\.|\\,|\\[|\\]|\\+|\\>|\\<|\\"|\\||\\=|\\(|\\)')
 
@@ -977,31 +978,24 @@ class Misc(object):
             raise(Exception('%s %s' % (out, err)))
         return self.string_encode(out.strip())
 
-    def system_scanelf(self, sfile, sformat='#F%n', sflags=''):
-        ''' Get information about ELF files '''
+    def system_readelf(self, sfile):
+        ''' Get full paths to ELF file dependencies '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
-            self.typecheck(sformat, (types.StringTypes))
-            self.typecheck(sflags, (types.StringTypes))
 
-        output = self.system_communicate((self.whereis('scanelf'), '-yCBF', \
-            sformat, sflags, sfile))
-        # workaround some libc implementations not support ld cache and
-        # scanelf popping base names instead of full paths even with -L
-        if 'L' in sflags:
-            fixedoutput = []
-            for line in output.split(','):
-                # checking line being '' is neccessary because a bug in scanelf that
-                # produces a list with empty entry, it happens when '-L' is used
-                if line and not line.startswith('/'):
-                    for libpath in ('/lib', '/usr/lib'):
-                        sfull = '%s/%s' % (libpath, os.path.basename(line))
-                        if os.path.exists(sfull):
-                            fixedoutput.append(os.path.realpath(sfull))
-            fixedoutput = ','.join(fixedoutput)
-            if fixedoutput and not output == fixedoutput:
-                return fixedoutput
-        return output
+        lpaths = []
+        lldpath = ['/lib', '/lib32', '/lib64', '/usr/lib', '/usr/lib32', '/usr/lib64']
+        sldpath = os.environ.get('LD_LIBRARY_PATH', '')
+        for spath in sldpath.split(':'):
+            lldpath.append(spath)
+
+        output = self.system_communicate((self.whereis('readelf'), '-d', sfile))
+        for smatch in self._elfx.findall(output):
+            for spath in lldpath:
+                sfull = '%s/%s' % (spath, smatch)
+                if os.path.exists(sfull):
+                    lpaths.append(sfull)
+        return lpaths
 
     def system_command(self, command, bshell=False, cwd=''):
         ''' Execute system command safely
