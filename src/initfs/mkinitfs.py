@@ -136,8 +136,6 @@ try:
                 if sfile in lcopied:
                     message.sub_debug('Already copied', sfile)
                     continue
-                elif not sfile:
-                    continue
                 sfixed = sfile.replace('/etc/mkinitfs/root', '')
                 if os.path.islink(sfile):
                     copy_item(sfile)

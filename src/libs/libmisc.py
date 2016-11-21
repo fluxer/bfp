@@ -274,7 +274,7 @@ class Misc(object):
             escape=escape)
 
     def file_mime(self, sfile, bresolve=False, bquick=False):
-        ''' Get file type, you should propably use Magic().get() instead '''
+        ''' Get file type '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
             self.typecheck(bresolve, (types.BooleanType))
@@ -530,10 +530,6 @@ class Misc(object):
 
         slist = []
         for root, subdirs, files in os.walk(sdir, btopdown):
-            if not bcross:
-                subdirs[:] = [
-                    d for d in subdirs
-                    if not os.path.ismount('%s/%s' % (root, d))]
             for sfile in files:
                 slist.append('%s/%s' % (root, sfile))
         return slist
@@ -547,11 +543,10 @@ class Misc(object):
 
         slist = []
         for root, subdirs, files in os.walk(sdir, btopdown):
-            if not bcross:
-                subdirs[:] = [
-                    d for d in subdirs
-                    if not os.path.ismount('%s/%s' % (root, d))]
             for d in subdirs:
+                sfull = '%s/%s' % (root, d)
+                if not bcross and os.path.ismount(sfull):
+                    continue
                 slist.append('%s/%s' % (root, d))
         return slist
 
@@ -564,12 +559,11 @@ class Misc(object):
 
         slist = []
         for root, subdirs, files in os.walk(sdir, btopdown):
-            if not bcross:
-                subdirs[:] = [
-                    d for d in subdirs
-                    if not os.path.ismount('%s/%s' % (root, d))]
             for d in subdirs:
-                slist.append('%s/%s' % (root, d))
+                sfull = '%s/%s' % (root, d)
+                if not bcross and os.path.ismount(sfull):
+                    continue
+                slist.append(sfull)
             for sfile in files:
                 slist.append('%s/%s' % (root, sfile))
         return slist
@@ -950,7 +944,7 @@ class Misc(object):
         ''' Get output and optionally send input to external utility
 
             it sets the environment variable LC_ALL to "en_US.UTF-8" to ensure
-            locales are not respected, passing input is possible if sinput is
+            locales are UTF-8 aware, passing input is possible if sinput is
             different than None. if something goes wrong you get standard
             output (stdout) and standard error (stderr) as an Exception '''
         if self.python2:
@@ -997,7 +991,7 @@ class Misc(object):
         for smatch in self._elfx.findall(output):
             for spath in lldpath:
                 sfull = '%s/%s' % (spath, smatch)
-                if os.path.exists(sfull):
+                if os.path.isfile(sfull):
                     lpaths.append(sfull)
         return lpaths
 
