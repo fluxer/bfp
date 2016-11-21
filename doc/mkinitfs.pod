@@ -25,7 +25,7 @@ dead simple (from users perspective) - a few files to control the modules and
 files that will be included in the image along with hooks support for special
 needs such as encrypted partitions.
 
-The bad thing is that it requries Python to do its job which for such a tool
+The bad thing is that it requries Python to create images which for such a tool
 may be an overkill but it was written to go along Source Package Manager.
 
 It can strip binary/library (ELF) files for smaller images and create recovery
