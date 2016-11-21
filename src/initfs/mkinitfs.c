@@ -1181,7 +1181,7 @@ static const char __pyx_k_compression_2[] = "--compression";
 static const char __pyx_k_lib32_modules[] = "/lib32/modules";
 static const char __pyx_k_lib64_modules[] = "/lib64/modules";
 static const char __pyx_k_s_modules_dep[] = "%s/modules.dep";
-static const char __pyx_k_1_10_1_f1ff74b[] = "1.10.1 (f1ff74b)";
+static const char __pyx_k_1_10_1_ceba9eb[] = "1.10.1 (ceba9eb)";
 static const char __pyx_k_Already_copied[] = "Already copied";
 static const char __pyx_k_Already_exists[] = "Already exists";
 static const char __pyx_k_Already_linked[] = "Already linked";
@@ -1249,7 +1249,7 @@ static const char __pyx_k_Unable_to_find_modules_directory[] = "Unable to find m
 static PyObject *__pyx_kp_s_;
 static PyObject *__pyx_kp_s_0;
 static PyObject *__pyx_kp_s_1;
-static PyObject *__pyx_kp_s_1_10_1_f1ff74b;
+static PyObject *__pyx_kp_s_1_10_1_ceba9eb;
 static PyObject *__pyx_kp_s_5;
 static PyObject *__pyx_kp_s_640;
 static PyObject *__pyx_kp_s_664;
@@ -3199,7 +3199,7 @@ static PyObject *__pyx_pf_8mkinitfs_copy_item(CYTHON_UNUSED PyObject *__pyx_self
  *                 if sfile in lcopied:
  *                     message.sub_debug('Already copied', sfile)             # <<<<<<<<<<<<<<
  *                     continue
- *                 elif not sfile:
+ *                 sfixed = sfile.replace('/etc/mkinitfs/root', '')
  */
         __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 137, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
@@ -3239,8 +3239,8 @@ static PyObject *__pyx_pf_8mkinitfs_copy_item(CYTHON_UNUSED PyObject *__pyx_self
  *                 if sfile in lcopied:
  *                     message.sub_debug('Already copied', sfile)
  *                     continue             # <<<<<<<<<<<<<<
- *                 elif not sfile:
- *                     continue
+ *                 sfixed = sfile.replace('/etc/mkinitfs/root', '')
+ *                 if os.path.islink(sfile):
  */
         goto __pyx_L11_continue;
 
@@ -3256,60 +3256,31 @@ static PyObject *__pyx_pf_8mkinitfs_copy_item(CYTHON_UNUSED PyObject *__pyx_self
       /* "mkinitfs.py":139
  *                     message.sub_debug('Already copied', sfile)
  *                     continue
- *                 elif not sfile:             # <<<<<<<<<<<<<<
- *                     continue
- *                 sfixed = sfile.replace('/etc/mkinitfs/root', '')
- */
-      __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_v_sfile); if (unlikely(__pyx_t_11 < 0)) __PYX_ERR(0, 139, __pyx_L1_error)
-      __pyx_t_5 = ((!__pyx_t_11) != 0);
-      if (__pyx_t_5) {
-
-        /* "mkinitfs.py":140
- *                     continue
- *                 elif not sfile:
- *                     continue             # <<<<<<<<<<<<<<
- *                 sfixed = sfile.replace('/etc/mkinitfs/root', '')
- *                 if os.path.islink(sfile):
- */
-        goto __pyx_L11_continue;
-
-        /* "mkinitfs.py":139
- *                     message.sub_debug('Already copied', sfile)
- *                     continue
- *                 elif not sfile:             # <<<<<<<<<<<<<<
- *                     continue
- *                 sfixed = sfile.replace('/etc/mkinitfs/root', '')
- */
-      }
-
-      /* "mkinitfs.py":141
- *                 elif not sfile:
- *                     continue
  *                 sfixed = sfile.replace('/etc/mkinitfs/root', '')             # <<<<<<<<<<<<<<
  *                 if os.path.islink(sfile):
  *                     copy_item(sfile)
  */
-      __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_sfile, __pyx_n_s_replace); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 141, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_v_sfile, __pyx_n_s_replace); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 139, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
-      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 141, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_tuple__4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 139, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_XDECREF_SET(__pyx_v_sfixed, __pyx_t_1);
       __pyx_t_1 = 0;
 
-      /* "mkinitfs.py":142
+      /* "mkinitfs.py":140
  *                     continue
  *                 sfixed = sfile.replace('/etc/mkinitfs/root', '')
  *                 if os.path.islink(sfile):             # <<<<<<<<<<<<<<
  *                     copy_item(sfile)
  *                     sfile = '%s/%s' % (os.path.dirname(sfile), os.readlink(sfile))
  */
-      __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 142, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 140, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_path); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 142, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_path); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 140, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-      __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_islink); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 142, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_islink); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 140, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
       __pyx_t_4 = NULL;
@@ -3323,32 +3294,32 @@ static PyObject *__pyx_pf_8mkinitfs_copy_item(CYTHON_UNUSED PyObject *__pyx_self
         }
       }
       if (!__pyx_t_4) {
-        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_v_sfile); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 142, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_v_sfile); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 140, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
       } else {
-        __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 142, __pyx_L1_error)
+        __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 140, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4); __pyx_t_4 = NULL;
         __Pyx_INCREF(__pyx_v_sfile);
         __Pyx_GIVEREF(__pyx_v_sfile);
         PyTuple_SET_ITEM(__pyx_t_3, 0+1, __pyx_v_sfile);
-        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 142, __pyx_L1_error)
+        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 140, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       }
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-      __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 142, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_11 < 0)) __PYX_ERR(0, 140, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      if (__pyx_t_5) {
+      if (__pyx_t_11) {
 
-        /* "mkinitfs.py":143
+        /* "mkinitfs.py":141
  *                 sfixed = sfile.replace('/etc/mkinitfs/root', '')
  *                 if os.path.islink(sfile):
  *                     copy_item(sfile)             # <<<<<<<<<<<<<<
  *                     sfile = '%s/%s' % (os.path.dirname(sfile), os.readlink(sfile))
  *                 sdest = '%s/%s' % (ARGS.tmp, sfixed)
  */
-        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_copy_item); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 143, __pyx_L1_error)
+        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_copy_item); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 141, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_10);
         __pyx_t_3 = NULL;
         if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_10))) {
@@ -3361,35 +3332,35 @@ static PyObject *__pyx_pf_8mkinitfs_copy_item(CYTHON_UNUSED PyObject *__pyx_self
           }
         }
         if (!__pyx_t_3) {
-          __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_v_sfile); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 143, __pyx_L1_error)
+          __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_v_sfile); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 141, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_1);
         } else {
-          __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 143, __pyx_L1_error)
+          __pyx_t_4 = PyTuple_New(1+1); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 141, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_4);
           __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_3); __pyx_t_3 = NULL;
           __Pyx_INCREF(__pyx_v_sfile);
           __Pyx_GIVEREF(__pyx_v_sfile);
           PyTuple_SET_ITEM(__pyx_t_4, 0+1, __pyx_v_sfile);
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 143, __pyx_L1_error)
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_4, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 141, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         }
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-        /* "mkinitfs.py":144
+        /* "mkinitfs.py":142
  *                 if os.path.islink(sfile):
  *                     copy_item(sfile)
  *                     sfile = '%s/%s' % (os.path.dirname(sfile), os.readlink(sfile))             # <<<<<<<<<<<<<<
  *                 sdest = '%s/%s' % (ARGS.tmp, sfixed)
  *                 if os.path.isfile(sdest):
  */
-        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 144, __pyx_L1_error)
+        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 142, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_10);
-        __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_path); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 144, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_path); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 142, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-        __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_dirname); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 144, __pyx_L1_error)
+        __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_dirname); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 142, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __pyx_t_4 = NULL;
@@ -3403,23 +3374,23 @@ static PyObject *__pyx_pf_8mkinitfs_copy_item(CYTHON_UNUSED PyObject *__pyx_self
           }
         }
         if (!__pyx_t_4) {
-          __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_v_sfile); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 144, __pyx_L1_error)
+          __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_v_sfile); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 142, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_1);
         } else {
-          __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 144, __pyx_L1_error)
+          __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 142, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_4); __pyx_t_4 = NULL;
           __Pyx_INCREF(__pyx_v_sfile);
           __Pyx_GIVEREF(__pyx_v_sfile);
           PyTuple_SET_ITEM(__pyx_t_3, 0+1, __pyx_v_sfile);
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 144, __pyx_L1_error)
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 142, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         }
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-        __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 144, __pyx_L1_error)
+        __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 142, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_3);
-        __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_readlink); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 144, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_readlink); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 142, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __pyx_t_3 = NULL;
@@ -3433,21 +3404,21 @@ static PyObject *__pyx_pf_8mkinitfs_copy_item(CYTHON_UNUSED PyObject *__pyx_self
           }
         }
         if (!__pyx_t_3) {
-          __pyx_t_10 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_sfile); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 144, __pyx_L1_error)
+          __pyx_t_10 = __Pyx_PyObject_CallOneArg(__pyx_t_4, __pyx_v_sfile); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 142, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_10);
         } else {
-          __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 144, __pyx_L1_error)
+          __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 142, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_2);
           __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_3); __pyx_t_3 = NULL;
           __Pyx_INCREF(__pyx_v_sfile);
           __Pyx_GIVEREF(__pyx_v_sfile);
           PyTuple_SET_ITEM(__pyx_t_2, 0+1, __pyx_v_sfile);
-          __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_2, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 144, __pyx_L1_error)
+          __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_4, __pyx_t_2, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 142, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_10);
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         }
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-        __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 144, __pyx_L1_error)
+        __pyx_t_4 = PyTuple_New(2); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 142, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_GIVEREF(__pyx_t_1);
         PyTuple_SET_ITEM(__pyx_t_4, 0, __pyx_t_1);
@@ -3455,13 +3426,13 @@ static PyObject *__pyx_pf_8mkinitfs_copy_item(CYTHON_UNUSED PyObject *__pyx_self
         PyTuple_SET_ITEM(__pyx_t_4, 1, __pyx_t_10);
         __pyx_t_1 = 0;
         __pyx_t_10 = 0;
-        __pyx_t_10 = __Pyx_PyString_Format(__pyx_kp_s_s_s, __pyx_t_4); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 144, __pyx_L1_error)
+        __pyx_t_10 = __Pyx_PyString_Format(__pyx_kp_s_s_s, __pyx_t_4); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 142, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
         __Pyx_DECREF_SET(__pyx_v_sfile, __pyx_t_10);
         __pyx_t_10 = 0;
 
-        /* "mkinitfs.py":142
+        /* "mkinitfs.py":140
  *                     continue
  *                 sfixed = sfile.replace('/etc/mkinitfs/root', '')
  *                 if os.path.islink(sfile):             # <<<<<<<<<<<<<<
@@ -3470,19 +3441,19 @@ static PyObject *__pyx_pf_8mkinitfs_copy_item(CYTHON_UNUSED PyObject *__pyx_self
  */
       }
 
-      /* "mkinitfs.py":145
+      /* "mkinitfs.py":143
  *                     copy_item(sfile)
  *                     sfile = '%s/%s' % (os.path.dirname(sfile), os.readlink(sfile))
  *                 sdest = '%s/%s' % (ARGS.tmp, sfixed)             # <<<<<<<<<<<<<<
  *                 if os.path.isfile(sdest):
  *                     message.sub_debug('Already exists', src)
  */
-      __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 145, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 143, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
-      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_tmp); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 145, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_tmp); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 143, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-      __pyx_t_10 = PyTuple_New(2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 145, __pyx_L1_error)
+      __pyx_t_10 = PyTuple_New(2); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 143, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
       __Pyx_GIVEREF(__pyx_t_4);
       PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_4);
@@ -3490,25 +3461,25 @@ static PyObject *__pyx_pf_8mkinitfs_copy_item(CYTHON_UNUSED PyObject *__pyx_self
       __Pyx_GIVEREF(__pyx_v_sfixed);
       PyTuple_SET_ITEM(__pyx_t_10, 1, __pyx_v_sfixed);
       __pyx_t_4 = 0;
-      __pyx_t_4 = __Pyx_PyString_Format(__pyx_kp_s_s_s, __pyx_t_10); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 145, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyString_Format(__pyx_kp_s_s_s, __pyx_t_10); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 143, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_XDECREF_SET(__pyx_v_sdest, ((PyObject*)__pyx_t_4));
       __pyx_t_4 = 0;
 
-      /* "mkinitfs.py":146
+      /* "mkinitfs.py":144
  *                     sfile = '%s/%s' % (os.path.dirname(sfile), os.readlink(sfile))
  *                 sdest = '%s/%s' % (ARGS.tmp, sfixed)
  *                 if os.path.isfile(sdest):             # <<<<<<<<<<<<<<
  *                     message.sub_debug('Already exists', src)
  *                     return
  */
-      __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 146, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 144, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_path); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 146, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_path); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 144, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-      __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_isfile); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 146, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_isfile); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 144, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_t_1 = NULL;
@@ -3522,34 +3493,34 @@ static PyObject *__pyx_pf_8mkinitfs_copy_item(CYTHON_UNUSED PyObject *__pyx_self
         }
       }
       if (!__pyx_t_1) {
-        __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_v_sdest); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 146, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_v_sdest); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 144, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
       } else {
-        __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 146, __pyx_L1_error)
+        __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 144, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1); __pyx_t_1 = NULL;
         __Pyx_INCREF(__pyx_v_sdest);
         __Pyx_GIVEREF(__pyx_v_sdest);
         PyTuple_SET_ITEM(__pyx_t_2, 0+1, __pyx_v_sdest);
-        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_2, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 146, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_2, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 144, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       }
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-      __pyx_t_5 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_5 < 0)) __PYX_ERR(0, 146, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_PyObject_IsTrue(__pyx_t_4); if (unlikely(__pyx_t_11 < 0)) __PYX_ERR(0, 144, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
-      if (__pyx_t_5) {
+      if (__pyx_t_11) {
 
-        /* "mkinitfs.py":147
+        /* "mkinitfs.py":145
  *                 sdest = '%s/%s' % (ARGS.tmp, sfixed)
  *                 if os.path.isfile(sdest):
  *                     message.sub_debug('Already exists', src)             # <<<<<<<<<<<<<<
  *                     return
  *                 message.sub_debug('Copying', sfile)
  */
-        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 147, __pyx_L1_error)
+        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 145, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_10);
-        __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 147, __pyx_L1_error)
+        __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 145, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
         __pyx_t_10 = NULL;
@@ -3564,7 +3535,7 @@ static PyObject *__pyx_pf_8mkinitfs_copy_item(CYTHON_UNUSED PyObject *__pyx_self
             __pyx_t_15 = 1;
           }
         }
-        __pyx_t_1 = PyTuple_New(2+__pyx_t_15); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 147, __pyx_L1_error)
+        __pyx_t_1 = PyTuple_New(2+__pyx_t_15); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 145, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_1);
         if (__pyx_t_10) {
           __Pyx_GIVEREF(__pyx_t_10); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_10); __pyx_t_10 = NULL;
@@ -3575,13 +3546,13 @@ static PyObject *__pyx_pf_8mkinitfs_copy_item(CYTHON_UNUSED PyObject *__pyx_self
         __Pyx_INCREF(__pyx_v_src);
         __Pyx_GIVEREF(__pyx_v_src);
         PyTuple_SET_ITEM(__pyx_t_1, 1+__pyx_t_15, __pyx_v_src);
-        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 147, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 145, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
         __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-        /* "mkinitfs.py":148
+        /* "mkinitfs.py":146
  *                 if os.path.isfile(sdest):
  *                     message.sub_debug('Already exists', src)
  *                     return             # <<<<<<<<<<<<<<
@@ -3593,7 +3564,7 @@ static PyObject *__pyx_pf_8mkinitfs_copy_item(CYTHON_UNUSED PyObject *__pyx_self
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         goto __pyx_L0;
 
-        /* "mkinitfs.py":146
+        /* "mkinitfs.py":144
  *                     sfile = '%s/%s' % (os.path.dirname(sfile), os.readlink(sfile))
  *                 sdest = '%s/%s' % (ARGS.tmp, sfixed)
  *                 if os.path.isfile(sdest):             # <<<<<<<<<<<<<<
@@ -3602,16 +3573,16 @@ static PyObject *__pyx_pf_8mkinitfs_copy_item(CYTHON_UNUSED PyObject *__pyx_self
  */
       }
 
-      /* "mkinitfs.py":149
+      /* "mkinitfs.py":147
  *                     message.sub_debug('Already exists', src)
  *                     return
  *                 message.sub_debug('Copying', sfile)             # <<<<<<<<<<<<<<
  *                 message.sub_debug('To', sdest)
  *                 shutil.copy2(sfile, sdest)
  */
-      __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 149, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 147, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 149, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 147, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __pyx_t_2 = NULL;
@@ -3626,7 +3597,7 @@ static PyObject *__pyx_pf_8mkinitfs_copy_item(CYTHON_UNUSED PyObject *__pyx_self
           __pyx_t_15 = 1;
         }
       }
-      __pyx_t_10 = PyTuple_New(2+__pyx_t_15); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 149, __pyx_L1_error)
+      __pyx_t_10 = PyTuple_New(2+__pyx_t_15); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 147, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
       if (__pyx_t_2) {
         __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_2); __pyx_t_2 = NULL;
@@ -3637,22 +3608,22 @@ static PyObject *__pyx_pf_8mkinitfs_copy_item(CYTHON_UNUSED PyObject *__pyx_self
       __Pyx_INCREF(__pyx_v_sfile);
       __Pyx_GIVEREF(__pyx_v_sfile);
       PyTuple_SET_ITEM(__pyx_t_10, 1+__pyx_t_15, __pyx_v_sfile);
-      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_10, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 149, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_10, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 147, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-      /* "mkinitfs.py":150
+      /* "mkinitfs.py":148
  *                     return
  *                 message.sub_debug('Copying', sfile)
  *                 message.sub_debug('To', sdest)             # <<<<<<<<<<<<<<
  *                 shutil.copy2(sfile, sdest)
  *                 lcopied.append(sfile)
  */
-      __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 150, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 148, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
-      __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 150, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 148, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __pyx_t_1 = NULL;
@@ -3667,7 +3638,7 @@ static PyObject *__pyx_pf_8mkinitfs_copy_item(CYTHON_UNUSED PyObject *__pyx_self
           __pyx_t_15 = 1;
         }
       }
-      __pyx_t_2 = PyTuple_New(2+__pyx_t_15); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 150, __pyx_L1_error)
+      __pyx_t_2 = PyTuple_New(2+__pyx_t_15); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 148, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       if (__pyx_t_1) {
         __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1); __pyx_t_1 = NULL;
@@ -3678,22 +3649,22 @@ static PyObject *__pyx_pf_8mkinitfs_copy_item(CYTHON_UNUSED PyObject *__pyx_self
       __Pyx_INCREF(__pyx_v_sdest);
       __Pyx_GIVEREF(__pyx_v_sdest);
       PyTuple_SET_ITEM(__pyx_t_2, 1+__pyx_t_15, __pyx_v_sdest);
-      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_2, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 150, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_2, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 148, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-      /* "mkinitfs.py":151
+      /* "mkinitfs.py":149
  *                 message.sub_debug('Copying', sfile)
  *                 message.sub_debug('To', sdest)
  *                 shutil.copy2(sfile, sdest)             # <<<<<<<<<<<<<<
  *                 lcopied.append(sfile)
  *                 copy_item(sfile)
  */
-      __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_shutil); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 151, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_shutil); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 149, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
-      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_copy2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 151, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_copy2); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 149, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       __pyx_t_10 = NULL;
@@ -3708,7 +3679,7 @@ static PyObject *__pyx_pf_8mkinitfs_copy_item(CYTHON_UNUSED PyObject *__pyx_self
           __pyx_t_15 = 1;
         }
       }
-      __pyx_t_1 = PyTuple_New(2+__pyx_t_15); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 151, __pyx_L1_error)
+      __pyx_t_1 = PyTuple_New(2+__pyx_t_15); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 149, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (__pyx_t_10) {
         __Pyx_GIVEREF(__pyx_t_10); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_10); __pyx_t_10 = NULL;
@@ -3719,32 +3690,32 @@ static PyObject *__pyx_pf_8mkinitfs_copy_item(CYTHON_UNUSED PyObject *__pyx_self
       __Pyx_INCREF(__pyx_v_sdest);
       __Pyx_GIVEREF(__pyx_v_sdest);
       PyTuple_SET_ITEM(__pyx_t_1, 1+__pyx_t_15, __pyx_v_sdest);
-      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 151, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_1, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 149, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-      /* "mkinitfs.py":152
+      /* "mkinitfs.py":150
  *                 message.sub_debug('To', sdest)
  *                 shutil.copy2(sfile, sdest)
  *                 lcopied.append(sfile)             # <<<<<<<<<<<<<<
  *                 copy_item(sfile)
  *         else:
  */
-      __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_lcopied); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 152, __pyx_L1_error)
+      __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_lcopied); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 150, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_4);
-      __pyx_t_13 = __Pyx_PyObject_Append(__pyx_t_4, __pyx_v_sfile); if (unlikely(__pyx_t_13 == -1)) __PYX_ERR(0, 152, __pyx_L1_error)
+      __pyx_t_13 = __Pyx_PyObject_Append(__pyx_t_4, __pyx_v_sfile); if (unlikely(__pyx_t_13 == -1)) __PYX_ERR(0, 150, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
 
-      /* "mkinitfs.py":153
+      /* "mkinitfs.py":151
  *                 shutil.copy2(sfile, sdest)
  *                 lcopied.append(sfile)
  *                 copy_item(sfile)             # <<<<<<<<<<<<<<
  *         else:
  *             message.warning('File or directory does not exist', src)
  */
-      __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_copy_item); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 153, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_copy_item); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 151, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __pyx_t_1 = NULL;
       if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_2))) {
@@ -3757,16 +3728,16 @@ static PyObject *__pyx_pf_8mkinitfs_copy_item(CYTHON_UNUSED PyObject *__pyx_self
         }
       }
       if (!__pyx_t_1) {
-        __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_sfile); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 153, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_sfile); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 151, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
       } else {
-        __pyx_t_10 = PyTuple_New(1+1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 153, __pyx_L1_error)
+        __pyx_t_10 = PyTuple_New(1+1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 151, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_1); __pyx_t_1 = NULL;
         __Pyx_INCREF(__pyx_v_sfile);
         __Pyx_GIVEREF(__pyx_v_sfile);
         PyTuple_SET_ITEM(__pyx_t_10, 0+1, __pyx_v_sfile);
-        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_10, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 153, __pyx_L1_error)
+        __pyx_t_4 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_10, NULL); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 151, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_4);
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       }
@@ -3794,7 +3765,7 @@ static PyObject *__pyx_pf_8mkinitfs_copy_item(CYTHON_UNUSED PyObject *__pyx_self
     goto __pyx_L4;
   }
 
-  /* "mkinitfs.py":155
+  /* "mkinitfs.py":153
  *                 copy_item(sfile)
  *         else:
  *             message.warning('File or directory does not exist', src)             # <<<<<<<<<<<<<<
@@ -3802,9 +3773,9 @@ static PyObject *__pyx_pf_8mkinitfs_copy_item(CYTHON_UNUSED PyObject *__pyx_self
  *     # TODO: use the function once busybox has a more complete modinfo applet
  */
   /*else*/ {
-    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 155, __pyx_L1_error)
+    __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 153, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_4);
-    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_warning); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 155, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_warning); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 153, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
     __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
     __pyx_t_4 = NULL;
@@ -3819,7 +3790,7 @@ static PyObject *__pyx_pf_8mkinitfs_copy_item(CYTHON_UNUSED PyObject *__pyx_self
         __pyx_t_12 = 1;
       }
     }
-    __pyx_t_10 = PyTuple_New(2+__pyx_t_12); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 155, __pyx_L1_error)
+    __pyx_t_10 = PyTuple_New(2+__pyx_t_12); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 153, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_10);
     if (__pyx_t_4) {
       __Pyx_GIVEREF(__pyx_t_4); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_4); __pyx_t_4 = NULL;
@@ -3830,7 +3801,7 @@ static PyObject *__pyx_pf_8mkinitfs_copy_item(CYTHON_UNUSED PyObject *__pyx_self
     __Pyx_INCREF(__pyx_v_src);
     __Pyx_GIVEREF(__pyx_v_src);
     PyTuple_SET_ITEM(__pyx_t_10, 1+__pyx_t_12, __pyx_v_src);
-    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_10, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 155, __pyx_L1_error)
+    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_10, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 153, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_6);
     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -3873,7 +3844,7 @@ static PyObject *__pyx_pf_8mkinitfs_copy_item(CYTHON_UNUSED PyObject *__pyx_self
   return __pyx_r;
 }
 
-/* "mkinitfs.py":158
+/* "mkinitfs.py":156
  * 
  *     # TODO: use the function once busybox has a more complete modinfo applet
  *     def copy_module(name):             # <<<<<<<<<<<<<<
@@ -3916,16 +3887,16 @@ static PyObject *__pyx_pf_8mkinitfs_2copy_module(CYTHON_UNUSED PyObject *__pyx_s
   PyObject *__pyx_t_13 = NULL;
   __Pyx_RefNannySetupContext("copy_module", 0);
 
-  /* "mkinitfs.py":159
+  /* "mkinitfs.py":157
  *     # TODO: use the function once busybox has a more complete modinfo applet
  *     def copy_module(name):
  *         message.sub_debug('Searching for module', name)             # <<<<<<<<<<<<<<
  *         try:
  *             if misc.system_communicate((ARGS.busybox, 'modinfo', '-k', ARGS.kernel, name)):
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 157, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 157, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
   __pyx_t_2 = NULL;
@@ -3940,7 +3911,7 @@ static PyObject *__pyx_pf_8mkinitfs_2copy_module(CYTHON_UNUSED PyObject *__pyx_s
       __pyx_t_4 = 1;
     }
   }
-  __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __pyx_t_5 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 157, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   if (__pyx_t_2) {
     __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_2); __pyx_t_2 = NULL;
@@ -3951,13 +3922,13 @@ static PyObject *__pyx_pf_8mkinitfs_2copy_module(CYTHON_UNUSED PyObject *__pyx_s
   __Pyx_INCREF(__pyx_v_name);
   __Pyx_GIVEREF(__pyx_v_name);
   PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_4, __pyx_v_name);
-  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 159, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 157, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mkinitfs.py":160
+  /* "mkinitfs.py":158
  *     def copy_module(name):
  *         message.sub_debug('Searching for module', name)
  *         try:             # <<<<<<<<<<<<<<
@@ -3973,29 +3944,29 @@ static PyObject *__pyx_pf_8mkinitfs_2copy_module(CYTHON_UNUSED PyObject *__pyx_s
     __Pyx_XGOTREF(__pyx_t_8);
     /*try:*/ {
 
-      /* "mkinitfs.py":161
+      /* "mkinitfs.py":159
  *         message.sub_debug('Searching for module', name)
  *         try:
  *             if misc.system_communicate((ARGS.busybox, 'modinfo', '-k', ARGS.kernel, name)):             # <<<<<<<<<<<<<<
  *                 modpath = misc.system_communicate((ARGS.busybox, 'modinfo', '-k', ARGS.kernel, '-F', 'filename', name))
  *                 moddepends = misc.system_communicate((ARGS.busybox, 'modinfo', '-k', ARGS.kernel, '-F', 'depends', name))
  */
-      __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 161, __pyx_L3_error)
+      __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 159, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_system_communicate); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 161, __pyx_L3_error)
+      __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_system_communicate); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 159, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 161, __pyx_L3_error)
+      __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 159, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_busybox); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 161, __pyx_L3_error)
+      __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_busybox); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 159, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 161, __pyx_L3_error)
+      __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 159, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_3);
-      __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_kernel); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 161, __pyx_L3_error)
+      __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_3, __pyx_n_s_kernel); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 159, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_3 = PyTuple_New(5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 161, __pyx_L3_error)
+      __pyx_t_3 = PyTuple_New(5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 159, __pyx_L3_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_GIVEREF(__pyx_t_2);
       PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2);
@@ -4023,48 +3994,48 @@ static PyObject *__pyx_pf_8mkinitfs_2copy_module(CYTHON_UNUSED PyObject *__pyx_s
         }
       }
       if (!__pyx_t_9) {
-        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 161, __pyx_L3_error)
+        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 159, __pyx_L3_error)
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         __Pyx_GOTREF(__pyx_t_1);
       } else {
-        __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 161, __pyx_L3_error)
+        __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 159, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_GIVEREF(__pyx_t_9); PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_9); __pyx_t_9 = NULL;
         __Pyx_GIVEREF(__pyx_t_3);
         PyTuple_SET_ITEM(__pyx_t_2, 0+1, __pyx_t_3);
         __pyx_t_3 = 0;
-        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 161, __pyx_L3_error)
+        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_2, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 159, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       }
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-      __pyx_t_10 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_10 < 0)) __PYX_ERR(0, 161, __pyx_L3_error)
+      __pyx_t_10 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_10 < 0)) __PYX_ERR(0, 159, __pyx_L3_error)
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       if (__pyx_t_10) {
 
-        /* "mkinitfs.py":162
+        /* "mkinitfs.py":160
  *         try:
  *             if misc.system_communicate((ARGS.busybox, 'modinfo', '-k', ARGS.kernel, name)):
  *                 modpath = misc.system_communicate((ARGS.busybox, 'modinfo', '-k', ARGS.kernel, '-F', 'filename', name))             # <<<<<<<<<<<<<<
  *                 moddepends = misc.system_communicate((ARGS.busybox, 'modinfo', '-k', ARGS.kernel, '-F', 'depends', name))
  *                 if moddepends:
  */
-        __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 162, __pyx_L3_error)
+        __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 160, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_system_communicate); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 162, __pyx_L3_error)
+        __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_system_communicate); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 160, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-        __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 162, __pyx_L3_error)
+        __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 160, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_busybox); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 162, __pyx_L3_error)
+        __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_busybox); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 160, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-        __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 162, __pyx_L3_error)
+        __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 160, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_kernel); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 162, __pyx_L3_error)
+        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_kernel); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 160, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-        __pyx_t_5 = PyTuple_New(7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 162, __pyx_L3_error)
+        __pyx_t_5 = PyTuple_New(7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 160, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_GIVEREF(__pyx_t_3);
         PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3);
@@ -4098,17 +4069,17 @@ static PyObject *__pyx_pf_8mkinitfs_2copy_module(CYTHON_UNUSED PyObject *__pyx_s
           }
         }
         if (!__pyx_t_9) {
-          __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 162, __pyx_L3_error)
+          __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 160, __pyx_L3_error)
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           __Pyx_GOTREF(__pyx_t_1);
         } else {
-          __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 162, __pyx_L3_error)
+          __pyx_t_3 = PyTuple_New(1+1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 160, __pyx_L3_error)
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_GIVEREF(__pyx_t_9); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_9); __pyx_t_9 = NULL;
           __Pyx_GIVEREF(__pyx_t_5);
           PyTuple_SET_ITEM(__pyx_t_3, 0+1, __pyx_t_5);
           __pyx_t_5 = 0;
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 162, __pyx_L3_error)
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_3, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 160, __pyx_L3_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
         }
@@ -4116,29 +4087,29 @@ static PyObject *__pyx_pf_8mkinitfs_2copy_module(CYTHON_UNUSED PyObject *__pyx_s
         __pyx_v_modpath = __pyx_t_1;
         __pyx_t_1 = 0;
 
-        /* "mkinitfs.py":163
+        /* "mkinitfs.py":161
  *             if misc.system_communicate((ARGS.busybox, 'modinfo', '-k', ARGS.kernel, name)):
  *                 modpath = misc.system_communicate((ARGS.busybox, 'modinfo', '-k', ARGS.kernel, '-F', 'filename', name))
  *                 moddepends = misc.system_communicate((ARGS.busybox, 'modinfo', '-k', ARGS.kernel, '-F', 'depends', name))             # <<<<<<<<<<<<<<
  *                 if moddepends:
  *                     for moddepend in moddepends.strip().split(','):
  */
-        __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 163, __pyx_L3_error)
+        __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 161, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_system_communicate); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 163, __pyx_L3_error)
+        __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_system_communicate); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 161, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_3);
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-        __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 163, __pyx_L3_error)
+        __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 161, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_busybox); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 163, __pyx_L3_error)
+        __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_busybox); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 161, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-        __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 163, __pyx_L3_error)
+        __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 161, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_2);
-        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_kernel); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 163, __pyx_L3_error)
+        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_kernel); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 161, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-        __pyx_t_2 = PyTuple_New(7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 163, __pyx_L3_error)
+        __pyx_t_2 = PyTuple_New(7); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 161, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_2);
         __Pyx_GIVEREF(__pyx_t_5);
         PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_5);
@@ -4172,17 +4143,17 @@ static PyObject *__pyx_pf_8mkinitfs_2copy_module(CYTHON_UNUSED PyObject *__pyx_s
           }
         }
         if (!__pyx_t_9) {
-          __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L3_error)
+          __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 161, __pyx_L3_error)
           __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
           __Pyx_GOTREF(__pyx_t_1);
         } else {
-          __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 163, __pyx_L3_error)
+          __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 161, __pyx_L3_error)
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_GIVEREF(__pyx_t_9); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_9); __pyx_t_9 = NULL;
           __Pyx_GIVEREF(__pyx_t_2);
           PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_t_2);
           __pyx_t_2 = 0;
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L3_error)
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 161, __pyx_L3_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         }
@@ -4190,24 +4161,24 @@ static PyObject *__pyx_pf_8mkinitfs_2copy_module(CYTHON_UNUSED PyObject *__pyx_s
         __pyx_v_moddepends = __pyx_t_1;
         __pyx_t_1 = 0;
 
-        /* "mkinitfs.py":164
+        /* "mkinitfs.py":162
  *                 modpath = misc.system_communicate((ARGS.busybox, 'modinfo', '-k', ARGS.kernel, '-F', 'filename', name))
  *                 moddepends = misc.system_communicate((ARGS.busybox, 'modinfo', '-k', ARGS.kernel, '-F', 'depends', name))
  *                 if moddepends:             # <<<<<<<<<<<<<<
  *                     for moddepend in moddepends.strip().split(','):
  *                         copy_module(moddepend.strip())
  */
-        __pyx_t_10 = __Pyx_PyObject_IsTrue(__pyx_v_moddepends); if (unlikely(__pyx_t_10 < 0)) __PYX_ERR(0, 164, __pyx_L3_error)
+        __pyx_t_10 = __Pyx_PyObject_IsTrue(__pyx_v_moddepends); if (unlikely(__pyx_t_10 < 0)) __PYX_ERR(0, 162, __pyx_L3_error)
         if (__pyx_t_10) {
 
-          /* "mkinitfs.py":165
+          /* "mkinitfs.py":163
  *                 moddepends = misc.system_communicate((ARGS.busybox, 'modinfo', '-k', ARGS.kernel, '-F', 'depends', name))
  *                 if moddepends:
  *                     for moddepend in moddepends.strip().split(','):             # <<<<<<<<<<<<<<
  *                         copy_module(moddepend.strip())
  *                 copy_item(modpath)
  */
-          __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_moddepends, __pyx_n_s_strip); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 165, __pyx_L3_error)
+          __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_v_moddepends, __pyx_n_s_strip); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 163, __pyx_L3_error)
           __Pyx_GOTREF(__pyx_t_3);
           __pyx_t_5 = NULL;
           if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_3))) {
@@ -4220,26 +4191,26 @@ static PyObject *__pyx_pf_8mkinitfs_2copy_module(CYTHON_UNUSED PyObject *__pyx_s
             }
           }
           if (__pyx_t_5) {
-            __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 165, __pyx_L3_error)
+            __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_5); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L3_error)
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           } else {
-            __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 165, __pyx_L3_error)
+            __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L3_error)
           }
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-          __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_split); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 165, __pyx_L3_error)
+          __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_split); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 163, __pyx_L3_error)
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 165, __pyx_L3_error)
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_tuple__6, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L3_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
           if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
             __pyx_t_3 = __pyx_t_1; __Pyx_INCREF(__pyx_t_3); __pyx_t_4 = 0;
             __pyx_t_11 = NULL;
           } else {
-            __pyx_t_4 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 165, __pyx_L3_error)
+            __pyx_t_4 = -1; __pyx_t_3 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 163, __pyx_L3_error)
             __Pyx_GOTREF(__pyx_t_3);
-            __pyx_t_11 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 165, __pyx_L3_error)
+            __pyx_t_11 = Py_TYPE(__pyx_t_3)->tp_iternext; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 163, __pyx_L3_error)
           }
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           for (;;) {
@@ -4247,17 +4218,17 @@ static PyObject *__pyx_pf_8mkinitfs_2copy_module(CYTHON_UNUSED PyObject *__pyx_s
               if (likely(PyList_CheckExact(__pyx_t_3))) {
                 if (__pyx_t_4 >= PyList_GET_SIZE(__pyx_t_3)) break;
                 #if CYTHON_COMPILING_IN_CPYTHON
-                __pyx_t_1 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 165, __pyx_L3_error)
+                __pyx_t_1 = PyList_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 163, __pyx_L3_error)
                 #else
-                __pyx_t_1 = PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 165, __pyx_L3_error)
+                __pyx_t_1 = PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L3_error)
                 __Pyx_GOTREF(__pyx_t_1);
                 #endif
               } else {
                 if (__pyx_t_4 >= PyTuple_GET_SIZE(__pyx_t_3)) break;
                 #if CYTHON_COMPILING_IN_CPYTHON
-                __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 165, __pyx_L3_error)
+                __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_3, __pyx_t_4); __Pyx_INCREF(__pyx_t_1); __pyx_t_4++; if (unlikely(0 < 0)) __PYX_ERR(0, 163, __pyx_L3_error)
                 #else
-                __pyx_t_1 = PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 165, __pyx_L3_error)
+                __pyx_t_1 = PySequence_ITEM(__pyx_t_3, __pyx_t_4); __pyx_t_4++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 163, __pyx_L3_error)
                 __Pyx_GOTREF(__pyx_t_1);
                 #endif
               }
@@ -4267,7 +4238,7 @@ static PyObject *__pyx_pf_8mkinitfs_2copy_module(CYTHON_UNUSED PyObject *__pyx_s
                 PyObject* exc_type = PyErr_Occurred();
                 if (exc_type) {
                   if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-                  else __PYX_ERR(0, 165, __pyx_L3_error)
+                  else __PYX_ERR(0, 163, __pyx_L3_error)
                 }
                 break;
               }
@@ -4276,16 +4247,16 @@ static PyObject *__pyx_pf_8mkinitfs_2copy_module(CYTHON_UNUSED PyObject *__pyx_s
             __Pyx_XDECREF_SET(__pyx_v_moddepend, __pyx_t_1);
             __pyx_t_1 = 0;
 
-            /* "mkinitfs.py":166
+            /* "mkinitfs.py":164
  *                 if moddepends:
  *                     for moddepend in moddepends.strip().split(','):
  *                         copy_module(moddepend.strip())             # <<<<<<<<<<<<<<
  *                 copy_item(modpath)
  *         except:
  */
-            __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_copy_module); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 166, __pyx_L3_error)
+            __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_copy_module); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 164, __pyx_L3_error)
             __Pyx_GOTREF(__pyx_t_5);
-            __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_moddepend, __pyx_n_s_strip); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 166, __pyx_L3_error)
+            __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_v_moddepend, __pyx_n_s_strip); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 164, __pyx_L3_error)
             __Pyx_GOTREF(__pyx_t_9);
             __pyx_t_12 = NULL;
             if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_9))) {
@@ -4298,10 +4269,10 @@ static PyObject *__pyx_pf_8mkinitfs_2copy_module(CYTHON_UNUSED PyObject *__pyx_s
               }
             }
             if (__pyx_t_12) {
-              __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_9, __pyx_t_12); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 166, __pyx_L3_error)
+              __pyx_t_2 = __Pyx_PyObject_CallOneArg(__pyx_t_9, __pyx_t_12); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 164, __pyx_L3_error)
               __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
             } else {
-              __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 166, __pyx_L3_error)
+              __pyx_t_2 = __Pyx_PyObject_CallNoArg(__pyx_t_9); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 164, __pyx_L3_error)
             }
             __Pyx_GOTREF(__pyx_t_2);
             __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
@@ -4316,24 +4287,24 @@ static PyObject *__pyx_pf_8mkinitfs_2copy_module(CYTHON_UNUSED PyObject *__pyx_s
               }
             }
             if (!__pyx_t_9) {
-              __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 166, __pyx_L3_error)
+              __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 164, __pyx_L3_error)
               __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
               __Pyx_GOTREF(__pyx_t_1);
             } else {
-              __pyx_t_12 = PyTuple_New(1+1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 166, __pyx_L3_error)
+              __pyx_t_12 = PyTuple_New(1+1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 164, __pyx_L3_error)
               __Pyx_GOTREF(__pyx_t_12);
               __Pyx_GIVEREF(__pyx_t_9); PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_9); __pyx_t_9 = NULL;
               __Pyx_GIVEREF(__pyx_t_2);
               PyTuple_SET_ITEM(__pyx_t_12, 0+1, __pyx_t_2);
               __pyx_t_2 = 0;
-              __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_12, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 166, __pyx_L3_error)
+              __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_12, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 164, __pyx_L3_error)
               __Pyx_GOTREF(__pyx_t_1);
               __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
             }
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-            /* "mkinitfs.py":165
+            /* "mkinitfs.py":163
  *                 moddepends = misc.system_communicate((ARGS.busybox, 'modinfo', '-k', ARGS.kernel, '-F', 'depends', name))
  *                 if moddepends:
  *                     for moddepend in moddepends.strip().split(','):             # <<<<<<<<<<<<<<
@@ -4343,7 +4314,7 @@ static PyObject *__pyx_pf_8mkinitfs_2copy_module(CYTHON_UNUSED PyObject *__pyx_s
           }
           __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-          /* "mkinitfs.py":164
+          /* "mkinitfs.py":162
  *                 modpath = misc.system_communicate((ARGS.busybox, 'modinfo', '-k', ARGS.kernel, '-F', 'filename', name))
  *                 moddepends = misc.system_communicate((ARGS.busybox, 'modinfo', '-k', ARGS.kernel, '-F', 'depends', name))
  *                 if moddepends:             # <<<<<<<<<<<<<<
@@ -4352,14 +4323,14 @@ static PyObject *__pyx_pf_8mkinitfs_2copy_module(CYTHON_UNUSED PyObject *__pyx_s
  */
         }
 
-        /* "mkinitfs.py":167
+        /* "mkinitfs.py":165
  *                     for moddepend in moddepends.strip().split(','):
  *                         copy_module(moddepend.strip())
  *                 copy_item(modpath)             # <<<<<<<<<<<<<<
  *         except:
  *             message.warning('Module not found', name)
  */
-        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_copy_item); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 167, __pyx_L3_error)
+        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_copy_item); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 165, __pyx_L3_error)
         __Pyx_GOTREF(__pyx_t_1);
         __pyx_t_5 = NULL;
         if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_1))) {
@@ -4372,23 +4343,23 @@ static PyObject *__pyx_pf_8mkinitfs_2copy_module(CYTHON_UNUSED PyObject *__pyx_s
           }
         }
         if (!__pyx_t_5) {
-          __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_modpath); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 167, __pyx_L3_error)
+          __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_v_modpath); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 165, __pyx_L3_error)
           __Pyx_GOTREF(__pyx_t_3);
         } else {
-          __pyx_t_12 = PyTuple_New(1+1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 167, __pyx_L3_error)
+          __pyx_t_12 = PyTuple_New(1+1); if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 165, __pyx_L3_error)
           __Pyx_GOTREF(__pyx_t_12);
           __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_12, 0, __pyx_t_5); __pyx_t_5 = NULL;
           __Pyx_INCREF(__pyx_v_modpath);
           __Pyx_GIVEREF(__pyx_v_modpath);
           PyTuple_SET_ITEM(__pyx_t_12, 0+1, __pyx_v_modpath);
-          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_12, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 167, __pyx_L3_error)
+          __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_12, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 165, __pyx_L3_error)
           __Pyx_GOTREF(__pyx_t_3);
           __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
         }
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-        /* "mkinitfs.py":161
+        /* "mkinitfs.py":159
  *         message.sub_debug('Searching for module', name)
  *         try:
  *             if misc.system_communicate((ARGS.busybox, 'modinfo', '-k', ARGS.kernel, name)):             # <<<<<<<<<<<<<<
@@ -4397,7 +4368,7 @@ static PyObject *__pyx_pf_8mkinitfs_2copy_module(CYTHON_UNUSED PyObject *__pyx_s
  */
       }
 
-      /* "mkinitfs.py":160
+      /* "mkinitfs.py":158
  *     def copy_module(name):
  *         message.sub_debug('Searching for module', name)
  *         try:             # <<<<<<<<<<<<<<
@@ -4418,7 +4389,7 @@ static PyObject *__pyx_pf_8mkinitfs_2copy_module(CYTHON_UNUSED PyObject *__pyx_s
     __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
     __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-    /* "mkinitfs.py":168
+    /* "mkinitfs.py":166
  *                         copy_module(moddepend.strip())
  *                 copy_item(modpath)
  *         except:             # <<<<<<<<<<<<<<
@@ -4427,21 +4398,21 @@ static PyObject *__pyx_pf_8mkinitfs_2copy_module(CYTHON_UNUSED PyObject *__pyx_s
  */
     /*except:*/ {
       __Pyx_AddTraceback("mkinitfs.copy_module", __pyx_clineno, __pyx_lineno, __pyx_filename);
-      if (__Pyx_GetException(&__pyx_t_3, &__pyx_t_1, &__pyx_t_12) < 0) __PYX_ERR(0, 168, __pyx_L5_except_error)
+      if (__Pyx_GetException(&__pyx_t_3, &__pyx_t_1, &__pyx_t_12) < 0) __PYX_ERR(0, 166, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_GOTREF(__pyx_t_12);
 
-      /* "mkinitfs.py":169
+      /* "mkinitfs.py":167
  *                 copy_item(modpath)
  *         except:
  *             message.warning('Module not found', name)             # <<<<<<<<<<<<<<
  * 
  *     def create_image(src, image, method):
  */
-      __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 169, __pyx_L5_except_error)
+      __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 167, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_warning); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 169, __pyx_L5_except_error)
+      __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_warning); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 167, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_9);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __pyx_t_2 = NULL;
@@ -4456,7 +4427,7 @@ static PyObject *__pyx_pf_8mkinitfs_2copy_module(CYTHON_UNUSED PyObject *__pyx_s
           __pyx_t_4 = 1;
         }
       }
-      __pyx_t_13 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 169, __pyx_L5_except_error)
+      __pyx_t_13 = PyTuple_New(2+__pyx_t_4); if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 167, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_13);
       if (__pyx_t_2) {
         __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_13, 0, __pyx_t_2); __pyx_t_2 = NULL;
@@ -4467,7 +4438,7 @@ static PyObject *__pyx_pf_8mkinitfs_2copy_module(CYTHON_UNUSED PyObject *__pyx_s
       __Pyx_INCREF(__pyx_v_name);
       __Pyx_GIVEREF(__pyx_v_name);
       PyTuple_SET_ITEM(__pyx_t_13, 1+__pyx_t_4, __pyx_v_name);
-      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_13, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 169, __pyx_L5_except_error)
+      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_13, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 167, __pyx_L5_except_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
       __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
@@ -4479,7 +4450,7 @@ static PyObject *__pyx_pf_8mkinitfs_2copy_module(CYTHON_UNUSED PyObject *__pyx_s
     }
     __pyx_L5_except_error:;
 
-    /* "mkinitfs.py":160
+    /* "mkinitfs.py":158
  *     def copy_module(name):
  *         message.sub_debug('Searching for module', name)
  *         try:             # <<<<<<<<<<<<<<
@@ -4501,7 +4472,7 @@ static PyObject *__pyx_pf_8mkinitfs_2copy_module(CYTHON_UNUSED PyObject *__pyx_s
     __pyx_L10_try_end:;
   }
 
-  /* "mkinitfs.py":158
+  /* "mkinitfs.py":156
  * 
  *     # TODO: use the function once busybox has a more complete modinfo applet
  *     def copy_module(name):             # <<<<<<<<<<<<<<
@@ -4531,7 +4502,7 @@ static PyObject *__pyx_pf_8mkinitfs_2copy_module(CYTHON_UNUSED PyObject *__pyx_s
   return __pyx_r;
 }
 
-/* "mkinitfs.py":171
+/* "mkinitfs.py":169
  *             message.warning('Module not found', name)
  * 
  *     def create_image(src, image, method):             # <<<<<<<<<<<<<<
@@ -4570,16 +4541,16 @@ static PyObject *__pyx_pw_8mkinitfs_5create_image(PyObject *__pyx_self, PyObject
         case  1:
         if (likely((values[1] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_image)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("create_image", 1, 3, 3, 1); __PYX_ERR(0, 171, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("create_image", 1, 3, 3, 1); __PYX_ERR(0, 169, __pyx_L3_error)
         }
         case  2:
         if (likely((values[2] = PyDict_GetItem(__pyx_kwds, __pyx_n_s_method)) != 0)) kw_args--;
         else {
-          __Pyx_RaiseArgtupleInvalid("create_image", 1, 3, 3, 2); __PYX_ERR(0, 171, __pyx_L3_error)
+          __Pyx_RaiseArgtupleInvalid("create_image", 1, 3, 3, 2); __PYX_ERR(0, 169, __pyx_L3_error)
         }
       }
       if (unlikely(kw_args > 0)) {
-        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "create_image") < 0)) __PYX_ERR(0, 171, __pyx_L3_error)
+        if (unlikely(__Pyx_ParseOptionalKeywords(__pyx_kwds, __pyx_pyargnames, 0, values, pos_args, "create_image") < 0)) __PYX_ERR(0, 169, __pyx_L3_error)
       }
     } else if (PyTuple_GET_SIZE(__pyx_args) != 3) {
       goto __pyx_L5_argtuple_error;
@@ -4594,7 +4565,7 @@ static PyObject *__pyx_pw_8mkinitfs_5create_image(PyObject *__pyx_self, PyObject
   }
   goto __pyx_L4_argument_unpacking_done;
   __pyx_L5_argtuple_error:;
-  __Pyx_RaiseArgtupleInvalid("create_image", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 171, __pyx_L3_error)
+  __Pyx_RaiseArgtupleInvalid("create_image", 1, 3, 3, PyTuple_GET_SIZE(__pyx_args)); __PYX_ERR(0, 169, __pyx_L3_error)
   __pyx_L3_error:;
   __Pyx_AddTraceback("mkinitfs.create_image", __pyx_clineno, __pyx_lineno, __pyx_filename);
   __Pyx_RefNannyFinishContext();
@@ -4629,34 +4600,34 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
   int __pyx_t_14;
   __Pyx_RefNannySetupContext("create_image", 0);
 
-  /* "mkinitfs.py":172
+  /* "mkinitfs.py":170
  * 
  *     def create_image(src, image, method):
  *         misc.system_command((ARGS.busybox, 'depmod', ARGS.kernel, '-b', ARGS.tmp))             # <<<<<<<<<<<<<<
  * 
  *         data = misc.system_communicate('%s find . | %s cpio -o -H newc' % \
  */
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 170, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_system_command); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_system_command); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 170, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 170, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_busybox); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_4 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_busybox); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 170, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 170, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_kernel); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_kernel); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 170, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 170, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_tmp); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_tmp); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 170, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_6);
   __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
-  __pyx_t_2 = PyTuple_New(5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
+  __pyx_t_2 = PyTuple_New(5); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 170, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_GIVEREF(__pyx_t_4);
   PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_4);
@@ -4684,54 +4655,54 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
     }
   }
   if (!__pyx_t_6) {
-    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 172, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __Pyx_GOTREF(__pyx_t_1);
   } else {
-    __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 172, __pyx_L1_error)
+    __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_6); __pyx_t_6 = NULL;
     __Pyx_GIVEREF(__pyx_t_2);
     PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_t_2);
     __pyx_t_2 = 0;
-    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 172, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 170, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
   }
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mkinitfs.py":174
+  /* "mkinitfs.py":172
  *         misc.system_command((ARGS.busybox, 'depmod', ARGS.kernel, '-b', ARGS.tmp))
  * 
  *         data = misc.system_communicate('%s find . | %s cpio -o -H newc' % \             # <<<<<<<<<<<<<<
  *             (ARGS.busybox, ARGS.busybox), bshell=True, cwd=src)
  *         if method == 'gzip':
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 174, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 172, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_system_communicate); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 174, __pyx_L1_error)
+  __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_system_communicate); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 172, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-  /* "mkinitfs.py":175
+  /* "mkinitfs.py":173
  * 
  *         data = misc.system_communicate('%s find . | %s cpio -o -H newc' % \
  *             (ARGS.busybox, ARGS.busybox), bshell=True, cwd=src)             # <<<<<<<<<<<<<<
  *         if method == 'gzip':
  *             with gzip.GzipFile(image, 'wb') as gzipf:
  */
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 173, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_busybox); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_busybox); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 173, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 173, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
-  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_busybox); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_busybox); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 173, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 173, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_5);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_5);
@@ -4740,42 +4711,42 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
   __pyx_t_5 = 0;
   __pyx_t_2 = 0;
 
-  /* "mkinitfs.py":174
+  /* "mkinitfs.py":172
  *         misc.system_command((ARGS.busybox, 'depmod', ARGS.kernel, '-b', ARGS.tmp))
  * 
  *         data = misc.system_communicate('%s find . | %s cpio -o -H newc' % \             # <<<<<<<<<<<<<<
  *             (ARGS.busybox, ARGS.busybox), bshell=True, cwd=src)
  *         if method == 'gzip':
  */
-  __pyx_t_2 = __Pyx_PyString_Format(__pyx_kp_s_s_find_s_cpio_o_H_newc, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 174, __pyx_L1_error)
+  __pyx_t_2 = __Pyx_PyString_Format(__pyx_kp_s_s_find_s_cpio_o_H_newc, __pyx_t_1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 172, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 174, __pyx_L1_error)
+  __pyx_t_1 = PyTuple_New(1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 172, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
   __Pyx_GIVEREF(__pyx_t_2);
   PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_2);
   __pyx_t_2 = 0;
 
-  /* "mkinitfs.py":175
+  /* "mkinitfs.py":173
  * 
  *         data = misc.system_communicate('%s find . | %s cpio -o -H newc' % \
  *             (ARGS.busybox, ARGS.busybox), bshell=True, cwd=src)             # <<<<<<<<<<<<<<
  *         if method == 'gzip':
  *             with gzip.GzipFile(image, 'wb') as gzipf:
  */
-  __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 175, __pyx_L1_error)
+  __pyx_t_2 = PyDict_New(); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 173, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_bshell, Py_True) < 0) __PYX_ERR(0, 175, __pyx_L1_error)
-  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_cwd, __pyx_v_src) < 0) __PYX_ERR(0, 175, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_bshell, Py_True) < 0) __PYX_ERR(0, 173, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_t_2, __pyx_n_s_cwd, __pyx_v_src) < 0) __PYX_ERR(0, 173, __pyx_L1_error)
 
-  /* "mkinitfs.py":174
+  /* "mkinitfs.py":172
  *         misc.system_command((ARGS.busybox, 'depmod', ARGS.kernel, '-b', ARGS.tmp))
  * 
  *         data = misc.system_communicate('%s find . | %s cpio -o -H newc' % \             # <<<<<<<<<<<<<<
  *             (ARGS.busybox, ARGS.busybox), bshell=True, cwd=src)
  *         if method == 'gzip':
  */
-  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 174, __pyx_L1_error)
+  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, __pyx_t_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 172, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_5);
   __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -4783,17 +4754,17 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
   __pyx_v_data = __pyx_t_5;
   __pyx_t_5 = 0;
 
-  /* "mkinitfs.py":176
+  /* "mkinitfs.py":174
  *         data = misc.system_communicate('%s find . | %s cpio -o -H newc' % \
  *             (ARGS.busybox, ARGS.busybox), bshell=True, cwd=src)
  *         if method == 'gzip':             # <<<<<<<<<<<<<<
  *             with gzip.GzipFile(image, 'wb') as gzipf:
  *                 gzipf.write(data)
  */
-  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_v_method, __pyx_n_s_gzip, Py_EQ)); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 176, __pyx_L1_error)
+  __pyx_t_7 = (__Pyx_PyString_Equals(__pyx_v_method, __pyx_n_s_gzip, Py_EQ)); if (unlikely(__pyx_t_7 < 0)) __PYX_ERR(0, 174, __pyx_L1_error)
   if (__pyx_t_7) {
 
-    /* "mkinitfs.py":177
+    /* "mkinitfs.py":175
  *             (ARGS.busybox, ARGS.busybox), bshell=True, cwd=src)
  *         if method == 'gzip':
  *             with gzip.GzipFile(image, 'wb') as gzipf:             # <<<<<<<<<<<<<<
@@ -4801,9 +4772,9 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
  *         elif method == 'bzip2':
  */
     /*with:*/ {
-      __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_gzip); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 177, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_gzip); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 175, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_GzipFile); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 177, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_GzipFile); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 175, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       __pyx_t_2 = NULL;
@@ -4818,7 +4789,7 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
           __pyx_t_8 = 1;
         }
       }
-      __pyx_t_3 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 177, __pyx_L1_error)
+      __pyx_t_3 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 175, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       if (__pyx_t_2) {
         __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2); __pyx_t_2 = NULL;
@@ -4829,13 +4800,13 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
       __Pyx_INCREF(__pyx_n_s_wb);
       __Pyx_GIVEREF(__pyx_n_s_wb);
       PyTuple_SET_ITEM(__pyx_t_3, 1+__pyx_t_8, __pyx_n_s_wb);
-      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 177, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 175, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_9 = __Pyx_PyObject_LookupSpecial(__pyx_t_5, __pyx_n_s_exit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 177, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyObject_LookupSpecial(__pyx_t_5, __pyx_n_s_exit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 175, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_3 = __Pyx_PyObject_LookupSpecial(__pyx_t_5, __pyx_n_s_enter); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 177, __pyx_L4_error)
+      __pyx_t_3 = __Pyx_PyObject_LookupSpecial(__pyx_t_5, __pyx_n_s_enter); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 175, __pyx_L4_error)
       __Pyx_GOTREF(__pyx_t_3);
       __pyx_t_2 = NULL;
       if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_3))) {
@@ -4848,10 +4819,10 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
         }
       }
       if (__pyx_t_2) {
-        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 177, __pyx_L4_error)
+        __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_3, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 175, __pyx_L4_error)
         __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
       } else {
-        __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 177, __pyx_L4_error)
+        __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_3); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 175, __pyx_L4_error)
       }
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
@@ -4870,14 +4841,14 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
             __pyx_v_gzipf = __pyx_t_3;
             __pyx_t_3 = 0;
 
-            /* "mkinitfs.py":178
+            /* "mkinitfs.py":176
  *         if method == 'gzip':
  *             with gzip.GzipFile(image, 'wb') as gzipf:
  *                 gzipf.write(data)             # <<<<<<<<<<<<<<
  *         elif method == 'bzip2':
  *             with bz2.BZ2File(image, 'wb') as bzipf:
  */
-            __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_gzipf, __pyx_n_s_write); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 178, __pyx_L8_error)
+            __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_gzipf, __pyx_n_s_write); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 176, __pyx_L8_error)
             __Pyx_GOTREF(__pyx_t_5);
             __pyx_t_1 = NULL;
             if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_5))) {
@@ -4890,23 +4861,23 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
               }
             }
             if (!__pyx_t_1) {
-              __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_v_data); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 178, __pyx_L8_error)
+              __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_v_data); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 176, __pyx_L8_error)
               __Pyx_GOTREF(__pyx_t_3);
             } else {
-              __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 178, __pyx_L8_error)
+              __pyx_t_2 = PyTuple_New(1+1); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 176, __pyx_L8_error)
               __Pyx_GOTREF(__pyx_t_2);
               __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_2, 0, __pyx_t_1); __pyx_t_1 = NULL;
               __Pyx_INCREF(__pyx_v_data);
               __Pyx_GIVEREF(__pyx_v_data);
               PyTuple_SET_ITEM(__pyx_t_2, 0+1, __pyx_v_data);
-              __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 178, __pyx_L8_error)
+              __pyx_t_3 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_2, NULL); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 176, __pyx_L8_error)
               __Pyx_GOTREF(__pyx_t_3);
               __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             }
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
 
-            /* "mkinitfs.py":177
+            /* "mkinitfs.py":175
  *             (ARGS.busybox, ARGS.busybox), bshell=True, cwd=src)
  *         if method == 'gzip':
  *             with gzip.GzipFile(image, 'wb') as gzipf:             # <<<<<<<<<<<<<<
@@ -4928,20 +4899,20 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
           __Pyx_XDECREF(__pyx_t_3); __pyx_t_3 = 0;
           /*except:*/ {
             __Pyx_AddTraceback("mkinitfs.create_image", __pyx_clineno, __pyx_lineno, __pyx_filename);
-            if (__Pyx_GetException(&__pyx_t_3, &__pyx_t_5, &__pyx_t_2) < 0) __PYX_ERR(0, 177, __pyx_L10_except_error)
+            if (__Pyx_GetException(&__pyx_t_3, &__pyx_t_5, &__pyx_t_2) < 0) __PYX_ERR(0, 175, __pyx_L10_except_error)
             __Pyx_GOTREF(__pyx_t_3);
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_GOTREF(__pyx_t_2);
-            __pyx_t_1 = PyTuple_Pack(3, __pyx_t_3, __pyx_t_5, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 177, __pyx_L10_except_error)
+            __pyx_t_1 = PyTuple_Pack(3, __pyx_t_3, __pyx_t_5, __pyx_t_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 175, __pyx_L10_except_error)
             __Pyx_GOTREF(__pyx_t_1);
             __pyx_t_13 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_1, NULL);
             __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-            if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 177, __pyx_L10_except_error)
+            if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 175, __pyx_L10_except_error)
             __Pyx_GOTREF(__pyx_t_13);
             __pyx_t_7 = __Pyx_PyObject_IsTrue(__pyx_t_13);
             __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-            if (__pyx_t_7 < 0) __PYX_ERR(0, 177, __pyx_L10_except_error)
+            if (__pyx_t_7 < 0) __PYX_ERR(0, 175, __pyx_L10_except_error)
             __pyx_t_14 = ((!(__pyx_t_7 != 0)) != 0);
             if (__pyx_t_14) {
               __Pyx_GIVEREF(__pyx_t_3);
@@ -4949,7 +4920,7 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
               __Pyx_XGIVEREF(__pyx_t_2);
               __Pyx_ErrRestoreWithState(__pyx_t_3, __pyx_t_5, __pyx_t_2);
               __pyx_t_3 = 0; __pyx_t_5 = 0; __pyx_t_2 = 0; 
-              __PYX_ERR(0, 177, __pyx_L10_except_error)
+              __PYX_ERR(0, 175, __pyx_L10_except_error)
             }
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
@@ -4977,7 +4948,7 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
           if (__pyx_t_9) {
             __pyx_t_12 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__7, NULL);
             __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-            if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 177, __pyx_L1_error)
+            if (unlikely(!__pyx_t_12)) __PYX_ERR(0, 175, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_12);
             __Pyx_DECREF(__pyx_t_12); __pyx_t_12 = 0;
           }
@@ -4992,7 +4963,7 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
       __pyx_L19:;
     }
 
-    /* "mkinitfs.py":176
+    /* "mkinitfs.py":174
  *         data = misc.system_communicate('%s find . | %s cpio -o -H newc' % \
  *             (ARGS.busybox, ARGS.busybox), bshell=True, cwd=src)
  *         if method == 'gzip':             # <<<<<<<<<<<<<<
@@ -5002,17 +4973,17 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
     goto __pyx_L3;
   }
 
-  /* "mkinitfs.py":179
+  /* "mkinitfs.py":177
  *             with gzip.GzipFile(image, 'wb') as gzipf:
  *                 gzipf.write(data)
  *         elif method == 'bzip2':             # <<<<<<<<<<<<<<
  *             with bz2.BZ2File(image, 'wb') as bzipf:
  *                 bzipf.write(data)
  */
-  __pyx_t_14 = (__Pyx_PyString_Equals(__pyx_v_method, __pyx_n_s_bzip2, Py_EQ)); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 179, __pyx_L1_error)
+  __pyx_t_14 = (__Pyx_PyString_Equals(__pyx_v_method, __pyx_n_s_bzip2, Py_EQ)); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 177, __pyx_L1_error)
   if (__pyx_t_14) {
 
-    /* "mkinitfs.py":180
+    /* "mkinitfs.py":178
  *                 gzipf.write(data)
  *         elif method == 'bzip2':
  *             with bz2.BZ2File(image, 'wb') as bzipf:             # <<<<<<<<<<<<<<
@@ -5020,9 +4991,9 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
  *         else:
  */
     /*with:*/ {
-      __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_bz2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 180, __pyx_L1_error)
+      __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_bz2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 178, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_5);
-      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_BZ2File); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 180, __pyx_L1_error)
+      __pyx_t_3 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_BZ2File); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 178, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       __pyx_t_5 = NULL;
@@ -5037,7 +5008,7 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
           __pyx_t_8 = 1;
         }
       }
-      __pyx_t_1 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 180, __pyx_L1_error)
+      __pyx_t_1 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 178, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       if (__pyx_t_5) {
         __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -5048,13 +5019,13 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
       __Pyx_INCREF(__pyx_n_s_wb);
       __Pyx_GIVEREF(__pyx_n_s_wb);
       PyTuple_SET_ITEM(__pyx_t_1, 1+__pyx_t_8, __pyx_n_s_wb);
-      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 180, __pyx_L1_error)
+      __pyx_t_2 = __Pyx_PyObject_Call(__pyx_t_3, __pyx_t_1, NULL); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 178, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_2);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-      __pyx_t_9 = __Pyx_PyObject_LookupSpecial(__pyx_t_2, __pyx_n_s_exit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 180, __pyx_L1_error)
+      __pyx_t_9 = __Pyx_PyObject_LookupSpecial(__pyx_t_2, __pyx_n_s_exit); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 178, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_9);
-      __pyx_t_1 = __Pyx_PyObject_LookupSpecial(__pyx_t_2, __pyx_n_s_enter); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 180, __pyx_L20_error)
+      __pyx_t_1 = __Pyx_PyObject_LookupSpecial(__pyx_t_2, __pyx_n_s_enter); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 178, __pyx_L20_error)
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_t_5 = NULL;
       if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_1))) {
@@ -5067,10 +5038,10 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
         }
       }
       if (__pyx_t_5) {
-        __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 180, __pyx_L20_error)
+        __pyx_t_3 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 178, __pyx_L20_error)
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
       } else {
-        __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 180, __pyx_L20_error)
+        __pyx_t_3 = __Pyx_PyObject_CallNoArg(__pyx_t_1); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 178, __pyx_L20_error)
       }
       __Pyx_GOTREF(__pyx_t_3);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -5089,14 +5060,14 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
             __pyx_v_bzipf = __pyx_t_1;
             __pyx_t_1 = 0;
 
-            /* "mkinitfs.py":181
+            /* "mkinitfs.py":179
  *         elif method == 'bzip2':
  *             with bz2.BZ2File(image, 'wb') as bzipf:
  *                 bzipf.write(data)             # <<<<<<<<<<<<<<
  *         else:
  *             misc.file_write(image, data)
  */
-            __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_bzipf, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 181, __pyx_L24_error)
+            __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_bzipf, __pyx_n_s_write); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 179, __pyx_L24_error)
             __Pyx_GOTREF(__pyx_t_2);
             __pyx_t_3 = NULL;
             if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_2))) {
@@ -5109,23 +5080,23 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
               }
             }
             if (!__pyx_t_3) {
-              __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_data); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 181, __pyx_L24_error)
+              __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_2, __pyx_v_data); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 179, __pyx_L24_error)
               __Pyx_GOTREF(__pyx_t_1);
             } else {
-              __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 181, __pyx_L24_error)
+              __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 179, __pyx_L24_error)
               __Pyx_GOTREF(__pyx_t_5);
               __Pyx_GIVEREF(__pyx_t_3); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_3); __pyx_t_3 = NULL;
               __Pyx_INCREF(__pyx_v_data);
               __Pyx_GIVEREF(__pyx_v_data);
               PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_v_data);
-              __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 181, __pyx_L24_error)
+              __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_2, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 179, __pyx_L24_error)
               __Pyx_GOTREF(__pyx_t_1);
               __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
             }
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-            /* "mkinitfs.py":180
+            /* "mkinitfs.py":178
  *                 gzipf.write(data)
  *         elif method == 'bzip2':
  *             with bz2.BZ2File(image, 'wb') as bzipf:             # <<<<<<<<<<<<<<
@@ -5147,20 +5118,20 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
           __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
           /*except:*/ {
             __Pyx_AddTraceback("mkinitfs.create_image", __pyx_clineno, __pyx_lineno, __pyx_filename);
-            if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_2, &__pyx_t_5) < 0) __PYX_ERR(0, 180, __pyx_L26_except_error)
+            if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_2, &__pyx_t_5) < 0) __PYX_ERR(0, 178, __pyx_L26_except_error)
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_GOTREF(__pyx_t_2);
             __Pyx_GOTREF(__pyx_t_5);
-            __pyx_t_3 = PyTuple_Pack(3, __pyx_t_1, __pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 180, __pyx_L26_except_error)
+            __pyx_t_3 = PyTuple_Pack(3, __pyx_t_1, __pyx_t_2, __pyx_t_5); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 178, __pyx_L26_except_error)
             __Pyx_GOTREF(__pyx_t_3);
             __pyx_t_13 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_3, NULL);
             __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
             __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
-            if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 180, __pyx_L26_except_error)
+            if (unlikely(!__pyx_t_13)) __PYX_ERR(0, 178, __pyx_L26_except_error)
             __Pyx_GOTREF(__pyx_t_13);
             __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_13);
             __Pyx_DECREF(__pyx_t_13); __pyx_t_13 = 0;
-            if (__pyx_t_14 < 0) __PYX_ERR(0, 180, __pyx_L26_except_error)
+            if (__pyx_t_14 < 0) __PYX_ERR(0, 178, __pyx_L26_except_error)
             __pyx_t_7 = ((!(__pyx_t_14 != 0)) != 0);
             if (__pyx_t_7) {
               __Pyx_GIVEREF(__pyx_t_1);
@@ -5168,7 +5139,7 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
               __Pyx_XGIVEREF(__pyx_t_5);
               __Pyx_ErrRestoreWithState(__pyx_t_1, __pyx_t_2, __pyx_t_5);
               __pyx_t_1 = 0; __pyx_t_2 = 0; __pyx_t_5 = 0; 
-              __PYX_ERR(0, 180, __pyx_L26_except_error)
+              __PYX_ERR(0, 178, __pyx_L26_except_error)
             }
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
             __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
@@ -5196,7 +5167,7 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
           if (__pyx_t_9) {
             __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__8, NULL);
             __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-            if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 180, __pyx_L1_error)
+            if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 178, __pyx_L1_error)
             __Pyx_GOTREF(__pyx_t_10);
             __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
           }
@@ -5211,7 +5182,7 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
       __pyx_L35:;
     }
 
-    /* "mkinitfs.py":179
+    /* "mkinitfs.py":177
  *             with gzip.GzipFile(image, 'wb') as gzipf:
  *                 gzipf.write(data)
  *         elif method == 'bzip2':             # <<<<<<<<<<<<<<
@@ -5221,7 +5192,7 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
     goto __pyx_L3;
   }
 
-  /* "mkinitfs.py":183
+  /* "mkinitfs.py":181
  *                 bzipf.write(data)
  *         else:
  *             misc.file_write(image, data)             # <<<<<<<<<<<<<<
@@ -5229,9 +5200,9 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
  *     message.info('Runtime information')
  */
   /*else*/ {
-    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 183, __pyx_L1_error)
+    __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 181, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_2);
-    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_file_write); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 183, __pyx_L1_error)
+    __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_2, __pyx_n_s_file_write); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 181, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
     __Pyx_DECREF(__pyx_t_2); __pyx_t_2 = 0;
     __pyx_t_2 = NULL;
@@ -5246,7 +5217,7 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
         __pyx_t_8 = 1;
       }
     }
-    __pyx_t_3 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 183, __pyx_L1_error)
+    __pyx_t_3 = PyTuple_New(2+__pyx_t_8); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 181, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_3);
     if (__pyx_t_2) {
       __Pyx_GIVEREF(__pyx_t_2); PyTuple_SET_ITEM(__pyx_t_3, 0, __pyx_t_2); __pyx_t_2 = NULL;
@@ -5257,7 +5228,7 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
     __Pyx_INCREF(__pyx_v_data);
     __Pyx_GIVEREF(__pyx_v_data);
     PyTuple_SET_ITEM(__pyx_t_3, 1+__pyx_t_8, __pyx_v_data);
-    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 183, __pyx_L1_error)
+    __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_3, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 181, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_5);
     __Pyx_DECREF(__pyx_t_3); __pyx_t_3 = 0;
     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
@@ -5265,7 +5236,7 @@ static PyObject *__pyx_pf_8mkinitfs_4create_image(CYTHON_UNUSED PyObject *__pyx_
   }
   __pyx_L3:;
 
-  /* "mkinitfs.py":171
+  /* "mkinitfs.py":169
  *             message.warning('Module not found', name)
  * 
  *     def create_image(src, image, method):             # <<<<<<<<<<<<<<
@@ -5320,7 +5291,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_, __pyx_k_, sizeof(__pyx_k_), 0, 0, 1, 0},
   {&__pyx_kp_s_0, __pyx_k_0, sizeof(__pyx_k_0), 0, 0, 1, 0},
   {&__pyx_kp_s_1, __pyx_k_1, sizeof(__pyx_k_1), 0, 0, 1, 0},
-  {&__pyx_kp_s_1_10_1_f1ff74b, __pyx_k_1_10_1_f1ff74b, sizeof(__pyx_k_1_10_1_f1ff74b), 0, 0, 1, 0},
+  {&__pyx_kp_s_1_10_1_ceba9eb, __pyx_k_1_10_1_ceba9eb, sizeof(__pyx_k_1_10_1_ceba9eb), 0, 0, 1, 0},
   {&__pyx_kp_s_5, __pyx_k_5, sizeof(__pyx_k_5), 0, 0, 1, 0},
   {&__pyx_kp_s_640, __pyx_k_640, sizeof(__pyx_k_640), 0, 0, 1, 0},
   {&__pyx_kp_s_664, __pyx_k_664, sizeof(__pyx_k_664), 0, 0, 1, 0},
@@ -5654,11 +5625,11 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {0, 0, 0, 0, 0, 0, 0}
 };
 static int __Pyx_InitCachedBuiltins(void) {
-  __pyx_builtin_OSError = __Pyx_GetBuiltinName(__pyx_n_s_OSError); if (!__pyx_builtin_OSError) __PYX_ERR(0, 352, __pyx_L1_error)
-  __pyx_builtin_IOError = __Pyx_GetBuiltinName(__pyx_n_s_IOError); if (!__pyx_builtin_IOError) __PYX_ERR(0, 355, __pyx_L1_error)
-  __pyx_builtin_KeyboardInterrupt = __Pyx_GetBuiltinName(__pyx_n_s_KeyboardInterrupt); if (!__pyx_builtin_KeyboardInterrupt) __PYX_ERR(0, 358, __pyx_L1_error)
-  __pyx_builtin_SystemExit = __Pyx_GetBuiltinName(__pyx_n_s_SystemExit); if (!__pyx_builtin_SystemExit) __PYX_ERR(0, 361, __pyx_L1_error)
-  __pyx_builtin_Exception = __Pyx_GetBuiltinName(__pyx_n_s_Exception); if (!__pyx_builtin_Exception) __PYX_ERR(0, 363, __pyx_L1_error)
+  __pyx_builtin_OSError = __Pyx_GetBuiltinName(__pyx_n_s_OSError); if (!__pyx_builtin_OSError) __PYX_ERR(0, 350, __pyx_L1_error)
+  __pyx_builtin_IOError = __Pyx_GetBuiltinName(__pyx_n_s_IOError); if (!__pyx_builtin_IOError) __PYX_ERR(0, 353, __pyx_L1_error)
+  __pyx_builtin_KeyboardInterrupt = __Pyx_GetBuiltinName(__pyx_n_s_KeyboardInterrupt); if (!__pyx_builtin_KeyboardInterrupt) __PYX_ERR(0, 356, __pyx_L1_error)
+  __pyx_builtin_SystemExit = __Pyx_GetBuiltinName(__pyx_n_s_SystemExit); if (!__pyx_builtin_SystemExit) __PYX_ERR(0, 359, __pyx_L1_error)
+  __pyx_builtin_Exception = __Pyx_GetBuiltinName(__pyx_n_s_Exception); if (!__pyx_builtin_Exception) __PYX_ERR(0, 361, __pyx_L1_error)
   return 0;
   __pyx_L1_error:;
   return -1;
@@ -5690,47 +5661,47 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GOTREF(__pyx_tuple__3);
   __Pyx_GIVEREF(__pyx_tuple__3);
 
-  /* "mkinitfs.py":141
- *                 elif not sfile:
+  /* "mkinitfs.py":139
+ *                     message.sub_debug('Already copied', sfile)
  *                     continue
  *                 sfixed = sfile.replace('/etc/mkinitfs/root', '')             # <<<<<<<<<<<<<<
  *                 if os.path.islink(sfile):
  *                     copy_item(sfile)
  */
-  __pyx_tuple__4 = PyTuple_Pack(2, __pyx_kp_s_etc_mkinitfs_root, __pyx_kp_s_); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 141, __pyx_L1_error)
+  __pyx_tuple__4 = PyTuple_Pack(2, __pyx_kp_s_etc_mkinitfs_root, __pyx_kp_s_); if (unlikely(!__pyx_tuple__4)) __PYX_ERR(0, 139, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__4);
   __Pyx_GIVEREF(__pyx_tuple__4);
 
-  /* "mkinitfs.py":165
+  /* "mkinitfs.py":163
  *                 moddepends = misc.system_communicate((ARGS.busybox, 'modinfo', '-k', ARGS.kernel, '-F', 'depends', name))
  *                 if moddepends:
  *                     for moddepend in moddepends.strip().split(','):             # <<<<<<<<<<<<<<
  *                         copy_module(moddepend.strip())
  *                 copy_item(modpath)
  */
-  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_s__5); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 165, __pyx_L1_error)
+  __pyx_tuple__6 = PyTuple_Pack(1, __pyx_kp_s__5); if (unlikely(!__pyx_tuple__6)) __PYX_ERR(0, 163, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__6);
   __Pyx_GIVEREF(__pyx_tuple__6);
 
-  /* "mkinitfs.py":177
+  /* "mkinitfs.py":175
  *             (ARGS.busybox, ARGS.busybox), bshell=True, cwd=src)
  *         if method == 'gzip':
  *             with gzip.GzipFile(image, 'wb') as gzipf:             # <<<<<<<<<<<<<<
  *                 gzipf.write(data)
  *         elif method == 'bzip2':
  */
-  __pyx_tuple__7 = PyTuple_Pack(3, Py_None, Py_None, Py_None); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 177, __pyx_L1_error)
+  __pyx_tuple__7 = PyTuple_Pack(3, Py_None, Py_None, Py_None); if (unlikely(!__pyx_tuple__7)) __PYX_ERR(0, 175, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__7);
   __Pyx_GIVEREF(__pyx_tuple__7);
 
-  /* "mkinitfs.py":180
+  /* "mkinitfs.py":178
  *                 gzipf.write(data)
  *         elif method == 'bzip2':
  *             with bz2.BZ2File(image, 'wb') as bzipf:             # <<<<<<<<<<<<<<
  *                 bzipf.write(data)
  *         else:
  */
-  __pyx_tuple__8 = PyTuple_Pack(3, Py_None, Py_None, Py_None); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 180, __pyx_L1_error)
+  __pyx_tuple__8 = PyTuple_Pack(3, Py_None, Py_None, Py_None); if (unlikely(!__pyx_tuple__8)) __PYX_ERR(0, 178, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__8);
   __Pyx_GIVEREF(__pyx_tuple__8);
 
@@ -5944,558 +5915,558 @@ static int __Pyx_InitCachedConstants(void) {
   __Pyx_GIVEREF(__pyx_tuple__28);
   __pyx_codeobj__29 = (PyObject*)__Pyx_PyCode_New(1, 0, 7, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__28, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_Desktop_bfp_src_ini, __pyx_n_s_copy_item, 94, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__29)) __PYX_ERR(0, 94, __pyx_L1_error)
 
-  /* "mkinitfs.py":158
+  /* "mkinitfs.py":156
  * 
  *     # TODO: use the function once busybox has a more complete modinfo applet
  *     def copy_module(name):             # <<<<<<<<<<<<<<
  *         message.sub_debug('Searching for module', name)
  *         try:
  */
-  __pyx_tuple__30 = PyTuple_Pack(4, __pyx_n_s_name, __pyx_n_s_modpath, __pyx_n_s_moddepends, __pyx_n_s_moddepend); if (unlikely(!__pyx_tuple__30)) __PYX_ERR(0, 158, __pyx_L1_error)
+  __pyx_tuple__30 = PyTuple_Pack(4, __pyx_n_s_name, __pyx_n_s_modpath, __pyx_n_s_moddepends, __pyx_n_s_moddepend); if (unlikely(!__pyx_tuple__30)) __PYX_ERR(0, 156, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__30);
   __Pyx_GIVEREF(__pyx_tuple__30);
-  __pyx_codeobj__31 = (PyObject*)__Pyx_PyCode_New(1, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__30, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_Desktop_bfp_src_ini, __pyx_n_s_copy_module, 158, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__31)) __PYX_ERR(0, 158, __pyx_L1_error)
+  __pyx_codeobj__31 = (PyObject*)__Pyx_PyCode_New(1, 0, 4, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__30, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_Desktop_bfp_src_ini, __pyx_n_s_copy_module, 156, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__31)) __PYX_ERR(0, 156, __pyx_L1_error)
 
-  /* "mkinitfs.py":171
+  /* "mkinitfs.py":169
  *             message.warning('Module not found', name)
  * 
  *     def create_image(src, image, method):             # <<<<<<<<<<<<<<
  *         misc.system_command((ARGS.busybox, 'depmod', ARGS.kernel, '-b', ARGS.tmp))
  * 
  */
-  __pyx_tuple__32 = PyTuple_Pack(6, __pyx_n_s_src, __pyx_n_s_image, __pyx_n_s_method, __pyx_n_s_data, __pyx_n_s_gzipf, __pyx_n_s_bzipf); if (unlikely(!__pyx_tuple__32)) __PYX_ERR(0, 171, __pyx_L1_error)
+  __pyx_tuple__32 = PyTuple_Pack(6, __pyx_n_s_src, __pyx_n_s_image, __pyx_n_s_method, __pyx_n_s_data, __pyx_n_s_gzipf, __pyx_n_s_bzipf); if (unlikely(!__pyx_tuple__32)) __PYX_ERR(0, 169, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__32);
   __Pyx_GIVEREF(__pyx_tuple__32);
-  __pyx_codeobj__33 = (PyObject*)__Pyx_PyCode_New(3, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__32, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_Desktop_bfp_src_ini, __pyx_n_s_create_image, 171, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__33)) __PYX_ERR(0, 171, __pyx_L1_error)
+  __pyx_codeobj__33 = (PyObject*)__Pyx_PyCode_New(3, 0, 6, 0, 0, __pyx_empty_bytes, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_tuple__32, __pyx_empty_tuple, __pyx_empty_tuple, __pyx_kp_s_home_smil3y_Desktop_bfp_src_ini, __pyx_n_s_create_image, 169, __pyx_empty_bytes); if (unlikely(!__pyx_codeobj__33)) __PYX_ERR(0, 169, __pyx_L1_error)
 
-  /* "mkinitfs.py":185
+  /* "mkinitfs.py":183
  *             misc.file_write(image, data)
  * 
  *     message.info('Runtime information')             # <<<<<<<<<<<<<<
  *     message.sub_info('BUSYTEST', ARGS.busytest)
  *     message.sub_info('TMP', ARGS.tmp)
  */
-  __pyx_tuple__34 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__34)) __PYX_ERR(0, 185, __pyx_L1_error)
+  __pyx_tuple__34 = PyTuple_Pack(1, __pyx_kp_s_Runtime_information); if (unlikely(!__pyx_tuple__34)) __PYX_ERR(0, 183, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__34);
   __Pyx_GIVEREF(__pyx_tuple__34);
 
-  /* "mkinitfs.py":197
+  /* "mkinitfs.py":195
  * 
  *     if ARGS.busytest:
  *         message.sub_info('Testing busybox compatibility')             # <<<<<<<<<<<<<<
  *         busycommands = {
  *             'modprobe': ['-b'],
  */
-  __pyx_tuple__35 = PyTuple_Pack(1, __pyx_kp_s_Testing_busybox_compatibility); if (unlikely(!__pyx_tuple__35)) __PYX_ERR(0, 197, __pyx_L1_error)
+  __pyx_tuple__35 = PyTuple_Pack(1, __pyx_kp_s_Testing_busybox_compatibility); if (unlikely(!__pyx_tuple__35)) __PYX_ERR(0, 195, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__35);
   __Pyx_GIVEREF(__pyx_tuple__35);
 
-  /* "mkinitfs.py":200
+  /* "mkinitfs.py":198
  *         busycommands = {
  *             'modprobe': ['-b'],
  *             'find': ('-type', '-name', '-exec'),             # <<<<<<<<<<<<<<
  *             'cpio': ('-o', '-H'),
  *             # TODO: 'modinfo', ('-k', '-F')
  */
-  __pyx_tuple__36 = PyTuple_Pack(3, __pyx_kp_s_type_2, __pyx_kp_s_name_2, __pyx_kp_s_exec); if (unlikely(!__pyx_tuple__36)) __PYX_ERR(0, 200, __pyx_L1_error)
+  __pyx_tuple__36 = PyTuple_Pack(3, __pyx_kp_s_type_2, __pyx_kp_s_name_2, __pyx_kp_s_exec); if (unlikely(!__pyx_tuple__36)) __PYX_ERR(0, 198, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__36);
   __Pyx_GIVEREF(__pyx_tuple__36);
 
-  /* "mkinitfs.py":201
+  /* "mkinitfs.py":199
  *             'modprobe': ['-b'],
  *             'find': ('-type', '-name', '-exec'),
  *             'cpio': ('-o', '-H'),             # <<<<<<<<<<<<<<
  *             # TODO: 'modinfo', ('-k', '-F')
  *             'depmod': ['-b'],
  */
-  __pyx_tuple__37 = PyTuple_Pack(2, __pyx_kp_s_o, __pyx_kp_s_H); if (unlikely(!__pyx_tuple__37)) __PYX_ERR(0, 201, __pyx_L1_error)
+  __pyx_tuple__37 = PyTuple_Pack(2, __pyx_kp_s_o, __pyx_kp_s_H); if (unlikely(!__pyx_tuple__37)) __PYX_ERR(0, 199, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__37);
   __Pyx_GIVEREF(__pyx_tuple__37);
 
-  /* "mkinitfs.py":207
+  /* "mkinitfs.py":205
  *             'echo': ['-e'],
  *             'mkdir': ['-p'],
  *             'mount': ('-t', '-o', 'move'),             # <<<<<<<<<<<<<<
  *             'modprobe': ('-q', '-b', '-a'),
  *             'ln': ('-s', '-f'),
  */
-  __pyx_tuple__38 = PyTuple_Pack(3, __pyx_kp_s_t, __pyx_kp_s_o, __pyx_n_s_move); if (unlikely(!__pyx_tuple__38)) __PYX_ERR(0, 207, __pyx_L1_error)
+  __pyx_tuple__38 = PyTuple_Pack(3, __pyx_kp_s_t, __pyx_kp_s_o, __pyx_n_s_move); if (unlikely(!__pyx_tuple__38)) __PYX_ERR(0, 205, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__38);
   __Pyx_GIVEREF(__pyx_tuple__38);
 
-  /* "mkinitfs.py":208
+  /* "mkinitfs.py":206
  *             'mkdir': ['-p'],
  *             'mount': ('-t', '-o', 'move'),
  *             'modprobe': ('-q', '-b', '-a'),             # <<<<<<<<<<<<<<
  *             'ln': ('-s', '-f'),
  *             'mdev': ['-s'],
  */
-  __pyx_tuple__39 = PyTuple_Pack(3, __pyx_kp_s_q, __pyx_kp_s_b, __pyx_kp_s_a); if (unlikely(!__pyx_tuple__39)) __PYX_ERR(0, 208, __pyx_L1_error)
+  __pyx_tuple__39 = PyTuple_Pack(3, __pyx_kp_s_q, __pyx_kp_s_b, __pyx_kp_s_a); if (unlikely(!__pyx_tuple__39)) __PYX_ERR(0, 206, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__39);
   __Pyx_GIVEREF(__pyx_tuple__39);
 
-  /* "mkinitfs.py":209
+  /* "mkinitfs.py":207
  *             'mount': ('-t', '-o', 'move'),
  *             'modprobe': ('-q', '-b', '-a'),
  *             'ln': ('-s', '-f'),             # <<<<<<<<<<<<<<
  *             'mdev': ['-s'],
  *             'sort': ['-u'],
  */
-  __pyx_tuple__40 = PyTuple_Pack(2, __pyx_kp_s_s, __pyx_kp_s_f); if (unlikely(!__pyx_tuple__40)) __PYX_ERR(0, 209, __pyx_L1_error)
+  __pyx_tuple__40 = PyTuple_Pack(2, __pyx_kp_s_s, __pyx_kp_s_f); if (unlikely(!__pyx_tuple__40)) __PYX_ERR(0, 207, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__40);
   __Pyx_GIVEREF(__pyx_tuple__40);
 
-  /* "mkinitfs.py":213
+  /* "mkinitfs.py":211
  *             'sort': ['-u'],
  *             'reboot': ['-f'],
  *             'main': ('--install', '[-s]', 'touch,', 'xargs,', 'switch_root,', 'sync,', 'blkid,'),             # <<<<<<<<<<<<<<
  *         }
  *         compatible = True
  */
-  __pyx_tuple__41 = PyTuple_Pack(7, __pyx_kp_s_install, __pyx_kp_s_s_2, __pyx_kp_s_touch, __pyx_kp_s_xargs, __pyx_kp_s_switch_root, __pyx_kp_s_sync, __pyx_kp_s_blkid); if (unlikely(!__pyx_tuple__41)) __PYX_ERR(0, 213, __pyx_L1_error)
+  __pyx_tuple__41 = PyTuple_Pack(7, __pyx_kp_s_install, __pyx_kp_s_s_2, __pyx_kp_s_touch, __pyx_kp_s_xargs, __pyx_kp_s_switch_root, __pyx_kp_s_sync, __pyx_kp_s_blkid); if (unlikely(!__pyx_tuple__41)) __PYX_ERR(0, 211, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__41);
   __Pyx_GIVEREF(__pyx_tuple__41);
 
-  /* "mkinitfs.py":231
+  /* "mkinitfs.py":229
  *                     compatible = False
  *         if not compatible:
  *             sys.exit(1)             # <<<<<<<<<<<<<<
  *         sys.exit(0)
  * 
  */
-  __pyx_tuple__42 = PyTuple_Pack(1, __pyx_int_1); if (unlikely(!__pyx_tuple__42)) __PYX_ERR(0, 231, __pyx_L1_error)
+  __pyx_tuple__42 = PyTuple_Pack(1, __pyx_int_1); if (unlikely(!__pyx_tuple__42)) __PYX_ERR(0, 229, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__42);
   __Pyx_GIVEREF(__pyx_tuple__42);
 
-  /* "mkinitfs.py":232
+  /* "mkinitfs.py":230
  *         if not compatible:
  *             sys.exit(1)
  *         sys.exit(0)             # <<<<<<<<<<<<<<
  * 
  *     message.sub_info('Copying root overlay')
  */
-  __pyx_tuple__43 = PyTuple_Pack(1, __pyx_int_0); if (unlikely(!__pyx_tuple__43)) __PYX_ERR(0, 232, __pyx_L1_error)
+  __pyx_tuple__43 = PyTuple_Pack(1, __pyx_int_0); if (unlikely(!__pyx_tuple__43)) __PYX_ERR(0, 230, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__43);
   __Pyx_GIVEREF(__pyx_tuple__43);
 
-  /* "mkinitfs.py":234
+  /* "mkinitfs.py":232
  *         sys.exit(0)
  * 
  *     message.sub_info('Copying root overlay')             # <<<<<<<<<<<<<<
  *     if os.path.isdir('/etc/mkinitfs/root'):
  *         for spath in misc.list_all('/etc/mkinitfs/root'):
  */
-  __pyx_tuple__44 = PyTuple_Pack(1, __pyx_kp_s_Copying_root_overlay); if (unlikely(!__pyx_tuple__44)) __PYX_ERR(0, 234, __pyx_L1_error)
+  __pyx_tuple__44 = PyTuple_Pack(1, __pyx_kp_s_Copying_root_overlay); if (unlikely(!__pyx_tuple__44)) __PYX_ERR(0, 232, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__44);
   __Pyx_GIVEREF(__pyx_tuple__44);
 
-  /* "mkinitfs.py":235
+  /* "mkinitfs.py":233
  * 
  *     message.sub_info('Copying root overlay')
  *     if os.path.isdir('/etc/mkinitfs/root'):             # <<<<<<<<<<<<<<
  *         for spath in misc.list_all('/etc/mkinitfs/root'):
  *             copy_item(spath)
  */
-  __pyx_tuple__45 = PyTuple_Pack(1, __pyx_kp_s_etc_mkinitfs_root); if (unlikely(!__pyx_tuple__45)) __PYX_ERR(0, 235, __pyx_L1_error)
+  __pyx_tuple__45 = PyTuple_Pack(1, __pyx_kp_s_etc_mkinitfs_root); if (unlikely(!__pyx_tuple__45)) __PYX_ERR(0, 233, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__45);
   __Pyx_GIVEREF(__pyx_tuple__45);
 
-  /* "mkinitfs.py":236
+  /* "mkinitfs.py":234
  *     message.sub_info('Copying root overlay')
  *     if os.path.isdir('/etc/mkinitfs/root'):
  *         for spath in misc.list_all('/etc/mkinitfs/root'):             # <<<<<<<<<<<<<<
  *             copy_item(spath)
  *     else:
  */
-  __pyx_tuple__46 = PyTuple_Pack(1, __pyx_kp_s_etc_mkinitfs_root); if (unlikely(!__pyx_tuple__46)) __PYX_ERR(0, 236, __pyx_L1_error)
+  __pyx_tuple__46 = PyTuple_Pack(1, __pyx_kp_s_etc_mkinitfs_root); if (unlikely(!__pyx_tuple__46)) __PYX_ERR(0, 234, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__46);
   __Pyx_GIVEREF(__pyx_tuple__46);
 
-  /* "mkinitfs.py":239
+  /* "mkinitfs.py":237
  *             copy_item(spath)
  *     else:
  *         message.sub_warning('Root filesystem overlay missing')             # <<<<<<<<<<<<<<
  * 
  *     message.sub_info('Installing Busybox')
  */
-  __pyx_tuple__47 = PyTuple_Pack(1, __pyx_kp_s_Root_filesystem_overlay_missing); if (unlikely(!__pyx_tuple__47)) __PYX_ERR(0, 239, __pyx_L1_error)
+  __pyx_tuple__47 = PyTuple_Pack(1, __pyx_kp_s_Root_filesystem_overlay_missing); if (unlikely(!__pyx_tuple__47)) __PYX_ERR(0, 237, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__47);
   __Pyx_GIVEREF(__pyx_tuple__47);
 
-  /* "mkinitfs.py":241
+  /* "mkinitfs.py":239
  *         message.sub_warning('Root filesystem overlay missing')
  * 
  *     message.sub_info('Installing Busybox')             # <<<<<<<<<<<<<<
  *     message.sub_debug('Installing binary')
  *     copy_item(ARGS.busybox)
  */
-  __pyx_tuple__48 = PyTuple_Pack(1, __pyx_kp_s_Installing_Busybox); if (unlikely(!__pyx_tuple__48)) __PYX_ERR(0, 241, __pyx_L1_error)
+  __pyx_tuple__48 = PyTuple_Pack(1, __pyx_kp_s_Installing_Busybox); if (unlikely(!__pyx_tuple__48)) __PYX_ERR(0, 239, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__48);
   __Pyx_GIVEREF(__pyx_tuple__48);
 
-  /* "mkinitfs.py":242
+  /* "mkinitfs.py":240
  * 
  *     message.sub_info('Installing Busybox')
  *     message.sub_debug('Installing binary')             # <<<<<<<<<<<<<<
  *     copy_item(ARGS.busybox)
  *     message.sub_debug('Creating symlinks')
  */
-  __pyx_tuple__49 = PyTuple_Pack(1, __pyx_kp_s_Installing_binary); if (unlikely(!__pyx_tuple__49)) __PYX_ERR(0, 242, __pyx_L1_error)
+  __pyx_tuple__49 = PyTuple_Pack(1, __pyx_kp_s_Installing_binary); if (unlikely(!__pyx_tuple__49)) __PYX_ERR(0, 240, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__49);
   __Pyx_GIVEREF(__pyx_tuple__49);
 
-  /* "mkinitfs.py":244
+  /* "mkinitfs.py":242
  *     message.sub_debug('Installing binary')
  *     copy_item(ARGS.busybox)
  *     message.sub_debug('Creating symlinks')             # <<<<<<<<<<<<<<
  *     misc.system_command((ARGS.busybox, '--install', '-s', '%s/bin' % ARGS.tmp))
  * 
  */
-  __pyx_tuple__50 = PyTuple_Pack(1, __pyx_kp_s_Creating_symlinks); if (unlikely(!__pyx_tuple__50)) __PYX_ERR(0, 244, __pyx_L1_error)
+  __pyx_tuple__50 = PyTuple_Pack(1, __pyx_kp_s_Creating_symlinks); if (unlikely(!__pyx_tuple__50)) __PYX_ERR(0, 242, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__50);
   __Pyx_GIVEREF(__pyx_tuple__50);
 
-  /* "mkinitfs.py":247
+  /* "mkinitfs.py":245
  *     misc.system_command((ARGS.busybox, '--install', '-s', '%s/bin' % ARGS.tmp))
  * 
  *     message.sub_info('Copying files')             # <<<<<<<<<<<<<<
  *     if os.path.isdir('/etc/mkinitfs/files'):
  *         for sfile in misc.list_files('/etc/mkinitfs/files'):
  */
-  __pyx_tuple__51 = PyTuple_Pack(1, __pyx_kp_s_Copying_files); if (unlikely(!__pyx_tuple__51)) __PYX_ERR(0, 247, __pyx_L1_error)
+  __pyx_tuple__51 = PyTuple_Pack(1, __pyx_kp_s_Copying_files); if (unlikely(!__pyx_tuple__51)) __PYX_ERR(0, 245, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__51);
   __Pyx_GIVEREF(__pyx_tuple__51);
 
-  /* "mkinitfs.py":248
+  /* "mkinitfs.py":246
  * 
  *     message.sub_info('Copying files')
  *     if os.path.isdir('/etc/mkinitfs/files'):             # <<<<<<<<<<<<<<
  *         for sfile in misc.list_files('/etc/mkinitfs/files'):
  *             if not sfile.endswith('.conf'):
  */
-  __pyx_tuple__52 = PyTuple_Pack(1, __pyx_kp_s_etc_mkinitfs_files); if (unlikely(!__pyx_tuple__52)) __PYX_ERR(0, 248, __pyx_L1_error)
+  __pyx_tuple__52 = PyTuple_Pack(1, __pyx_kp_s_etc_mkinitfs_files); if (unlikely(!__pyx_tuple__52)) __PYX_ERR(0, 246, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__52);
   __Pyx_GIVEREF(__pyx_tuple__52);
 
-  /* "mkinitfs.py":249
+  /* "mkinitfs.py":247
  *     message.sub_info('Copying files')
  *     if os.path.isdir('/etc/mkinitfs/files'):
  *         for sfile in misc.list_files('/etc/mkinitfs/files'):             # <<<<<<<<<<<<<<
  *             if not sfile.endswith('.conf'):
  *                 message.sub_debug('Skipping', sfile)
  */
-  __pyx_tuple__53 = PyTuple_Pack(1, __pyx_kp_s_etc_mkinitfs_files); if (unlikely(!__pyx_tuple__53)) __PYX_ERR(0, 249, __pyx_L1_error)
+  __pyx_tuple__53 = PyTuple_Pack(1, __pyx_kp_s_etc_mkinitfs_files); if (unlikely(!__pyx_tuple__53)) __PYX_ERR(0, 247, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__53);
   __Pyx_GIVEREF(__pyx_tuple__53);
 
-  /* "mkinitfs.py":250
+  /* "mkinitfs.py":248
  *     if os.path.isdir('/etc/mkinitfs/files'):
  *         for sfile in misc.list_files('/etc/mkinitfs/files'):
  *             if not sfile.endswith('.conf'):             # <<<<<<<<<<<<<<
  *                 message.sub_debug('Skipping', sfile)
  *                 continue
  */
-  __pyx_tuple__54 = PyTuple_Pack(1, __pyx_kp_s_conf); if (unlikely(!__pyx_tuple__54)) __PYX_ERR(0, 250, __pyx_L1_error)
+  __pyx_tuple__54 = PyTuple_Pack(1, __pyx_kp_s_conf); if (unlikely(!__pyx_tuple__54)) __PYX_ERR(0, 248, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__54);
   __Pyx_GIVEREF(__pyx_tuple__54);
 
-  /* "mkinitfs.py":264
+  /* "mkinitfs.py":262
  *                     copy_item(item)
  * 
  *     message.sub_info('Copying modules')             # <<<<<<<<<<<<<<
  *     if os.path.isdir('/etc/mkinitfs/modules'):
  *         for sfile in misc.list_files('/etc/mkinitfs/modules'):
  */
-  __pyx_tuple__55 = PyTuple_Pack(1, __pyx_kp_s_Copying_modules); if (unlikely(!__pyx_tuple__55)) __PYX_ERR(0, 264, __pyx_L1_error)
+  __pyx_tuple__55 = PyTuple_Pack(1, __pyx_kp_s_Copying_modules); if (unlikely(!__pyx_tuple__55)) __PYX_ERR(0, 262, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__55);
   __Pyx_GIVEREF(__pyx_tuple__55);
 
-  /* "mkinitfs.py":265
+  /* "mkinitfs.py":263
  * 
  *     message.sub_info('Copying modules')
  *     if os.path.isdir('/etc/mkinitfs/modules'):             # <<<<<<<<<<<<<<
  *         for sfile in misc.list_files('/etc/mkinitfs/modules'):
  *             if not sfile.endswith('.conf'):
  */
-  __pyx_tuple__56 = PyTuple_Pack(1, __pyx_kp_s_etc_mkinitfs_modules); if (unlikely(!__pyx_tuple__56)) __PYX_ERR(0, 265, __pyx_L1_error)
+  __pyx_tuple__56 = PyTuple_Pack(1, __pyx_kp_s_etc_mkinitfs_modules); if (unlikely(!__pyx_tuple__56)) __PYX_ERR(0, 263, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__56);
   __Pyx_GIVEREF(__pyx_tuple__56);
 
-  /* "mkinitfs.py":266
+  /* "mkinitfs.py":264
  *     message.sub_info('Copying modules')
  *     if os.path.isdir('/etc/mkinitfs/modules'):
  *         for sfile in misc.list_files('/etc/mkinitfs/modules'):             # <<<<<<<<<<<<<<
  *             if not sfile.endswith('.conf'):
  *                 message.sub_debug('Skipping', sfile)
  */
-  __pyx_tuple__57 = PyTuple_Pack(1, __pyx_kp_s_etc_mkinitfs_modules); if (unlikely(!__pyx_tuple__57)) __PYX_ERR(0, 266, __pyx_L1_error)
+  __pyx_tuple__57 = PyTuple_Pack(1, __pyx_kp_s_etc_mkinitfs_modules); if (unlikely(!__pyx_tuple__57)) __PYX_ERR(0, 264, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__57);
   __Pyx_GIVEREF(__pyx_tuple__57);
 
-  /* "mkinitfs.py":267
+  /* "mkinitfs.py":265
  *     if os.path.isdir('/etc/mkinitfs/modules'):
  *         for sfile in misc.list_files('/etc/mkinitfs/modules'):
  *             if not sfile.endswith('.conf'):             # <<<<<<<<<<<<<<
  *                 message.sub_debug('Skipping', sfile)
  *                 continue
  */
-  __pyx_tuple__58 = PyTuple_Pack(1, __pyx_kp_s_conf); if (unlikely(!__pyx_tuple__58)) __PYX_ERR(0, 267, __pyx_L1_error)
+  __pyx_tuple__58 = PyTuple_Pack(1, __pyx_kp_s_conf); if (unlikely(!__pyx_tuple__58)) __PYX_ERR(0, 265, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__58);
   __Pyx_GIVEREF(__pyx_tuple__58);
 
-  /* "mkinitfs.py":281
+  /* "mkinitfs.py":279
  *         found = False
  *         for line in misc.file_read('%s/modules.dep' % modsdir).splitlines():
  *             base = line.split(':')[0]             # <<<<<<<<<<<<<<
  *             depends = line.split(':')[1].split()
  *             if '/%s.ko' % module in base \
  */
-  __pyx_tuple__60 = PyTuple_Pack(1, __pyx_kp_s__59); if (unlikely(!__pyx_tuple__60)) __PYX_ERR(0, 281, __pyx_L1_error)
+  __pyx_tuple__60 = PyTuple_Pack(1, __pyx_kp_s__59); if (unlikely(!__pyx_tuple__60)) __PYX_ERR(0, 279, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__60);
   __Pyx_GIVEREF(__pyx_tuple__60);
 
-  /* "mkinitfs.py":282
+  /* "mkinitfs.py":280
  *         for line in misc.file_read('%s/modules.dep' % modsdir).splitlines():
  *             base = line.split(':')[0]
  *             depends = line.split(':')[1].split()             # <<<<<<<<<<<<<<
  *             if '/%s.ko' % module in base \
  *                 or '/%s.ko' % module.replace('_', '-') in base:
  */
-  __pyx_tuple__61 = PyTuple_Pack(1, __pyx_kp_s__59); if (unlikely(!__pyx_tuple__61)) __PYX_ERR(0, 282, __pyx_L1_error)
+  __pyx_tuple__61 = PyTuple_Pack(1, __pyx_kp_s__59); if (unlikely(!__pyx_tuple__61)) __PYX_ERR(0, 280, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__61);
   __Pyx_GIVEREF(__pyx_tuple__61);
 
-  /* "mkinitfs.py":284
+  /* "mkinitfs.py":282
  *             depends = line.split(':')[1].split()
  *             if '/%s.ko' % module in base \
  *                 or '/%s.ko' % module.replace('_', '-') in base:             # <<<<<<<<<<<<<<
  *                 found = True
  *                 copy_item('%s/%s' % (modsdir, base.strip()))
  */
-  __pyx_tuple__64 = PyTuple_Pack(2, __pyx_n_s__62, __pyx_kp_s__63); if (unlikely(!__pyx_tuple__64)) __PYX_ERR(0, 284, __pyx_L1_error)
+  __pyx_tuple__64 = PyTuple_Pack(2, __pyx_n_s__62, __pyx_kp_s__63); if (unlikely(!__pyx_tuple__64)) __PYX_ERR(0, 282, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__64);
   __Pyx_GIVEREF(__pyx_tuple__64);
 
-  /* "mkinitfs.py":292
+  /* "mkinitfs.py":290
  *             for line in misc.file_read('%s/modules.builtin' % modsdir).splitlines():
  *                 if '/%s.ko' % module in line \
  *                     or '/%s.ko' % module.replace('_', '-') in line:             # <<<<<<<<<<<<<<
  *                     message.sub_debug('Module is builtin', module)
  *                     found = True
  */
-  __pyx_tuple__65 = PyTuple_Pack(2, __pyx_n_s__62, __pyx_kp_s__63); if (unlikely(!__pyx_tuple__65)) __PYX_ERR(0, 292, __pyx_L1_error)
+  __pyx_tuple__65 = PyTuple_Pack(2, __pyx_n_s__62, __pyx_kp_s__63); if (unlikely(!__pyx_tuple__65)) __PYX_ERR(0, 290, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__65);
   __Pyx_GIVEREF(__pyx_tuple__65);
 
-  /* "mkinitfs.py":305
+  /* "mkinitfs.py":303
  *             os.unlink(sfile)
  * 
  *     message.sub_info('Copying module files')             # <<<<<<<<<<<<<<
  *     for sfile in os.listdir(modsdir):
  *         if sfile.startswith('modules.'):
  */
-  __pyx_tuple__66 = PyTuple_Pack(1, __pyx_kp_s_Copying_module_files); if (unlikely(!__pyx_tuple__66)) __PYX_ERR(0, 305, __pyx_L1_error)
+  __pyx_tuple__66 = PyTuple_Pack(1, __pyx_kp_s_Copying_module_files); if (unlikely(!__pyx_tuple__66)) __PYX_ERR(0, 303, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__66);
   __Pyx_GIVEREF(__pyx_tuple__66);
 
-  /* "mkinitfs.py":307
+  /* "mkinitfs.py":305
  *     message.sub_info('Copying module files')
  *     for sfile in os.listdir(modsdir):
  *         if sfile.startswith('modules.'):             # <<<<<<<<<<<<<<
  *             copy_item('%s/%s' % (modsdir, sfile))
  * 
  */
-  __pyx_tuple__67 = PyTuple_Pack(1, __pyx_kp_s_modules_3); if (unlikely(!__pyx_tuple__67)) __PYX_ERR(0, 307, __pyx_L1_error)
+  __pyx_tuple__67 = PyTuple_Pack(1, __pyx_kp_s_modules_3); if (unlikely(!__pyx_tuple__67)) __PYX_ERR(0, 305, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__67);
   __Pyx_GIVEREF(__pyx_tuple__67);
 
-  /* "mkinitfs.py":310
+  /* "mkinitfs.py":308
  *             copy_item('%s/%s' % (modsdir, sfile))
  * 
  *     message.sub_info('Creating essential nodes')             # <<<<<<<<<<<<<<
  *     dev_dir = '%s/dev' % ARGS.tmp
  *     misc.dir_create(dev_dir)
  */
-  __pyx_tuple__68 = PyTuple_Pack(1, __pyx_kp_s_Creating_essential_nodes); if (unlikely(!__pyx_tuple__68)) __PYX_ERR(0, 310, __pyx_L1_error)
+  __pyx_tuple__68 = PyTuple_Pack(1, __pyx_kp_s_Creating_essential_nodes); if (unlikely(!__pyx_tuple__68)) __PYX_ERR(0, 308, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__68);
   __Pyx_GIVEREF(__pyx_tuple__68);
 
-  /* "mkinitfs.py":318
+  /* "mkinitfs.py":316
  *         '%s/null' % dev_dir, 'c', '1', '0'))
  * 
  *     message.sub_info('Creating shared libraries cache')             # <<<<<<<<<<<<<<
  *     etc_dir = '%s/etc' % ARGS.tmp
  *     misc.dir_create(etc_dir)
  */
-  __pyx_tuple__69 = PyTuple_Pack(1, __pyx_kp_s_Creating_shared_libraries_cache); if (unlikely(!__pyx_tuple__69)) __PYX_ERR(0, 318, __pyx_L1_error)
+  __pyx_tuple__69 = PyTuple_Pack(1, __pyx_kp_s_Creating_shared_libraries_cache); if (unlikely(!__pyx_tuple__69)) __PYX_ERR(0, 316, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__69);
   __Pyx_GIVEREF(__pyx_tuple__69);
 
-  /* "mkinitfs.py":325
+  /* "mkinitfs.py":323
  *     if not os.path.isfile(ldconf):
  *         misc.file_write(ldconf, '')
  *     misc.system_command((misc.whereis('ldconfig'), '-r', ARGS.tmp))             # <<<<<<<<<<<<<<
  * 
  *     if ARGS.strip:
  */
-  __pyx_tuple__70 = PyTuple_Pack(1, __pyx_n_s_ldconfig); if (unlikely(!__pyx_tuple__70)) __PYX_ERR(0, 325, __pyx_L1_error)
+  __pyx_tuple__70 = PyTuple_Pack(1, __pyx_n_s_ldconfig); if (unlikely(!__pyx_tuple__70)) __PYX_ERR(0, 323, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__70);
   __Pyx_GIVEREF(__pyx_tuple__70);
 
-  /* "mkinitfs.py":328
+  /* "mkinitfs.py":326
  * 
  *     if ARGS.strip:
  *         message.sub_info('Stripping binraries and libraries')             # <<<<<<<<<<<<<<
  *         strip = misc.whereis('strip')
  *         for sfile in misc.list_files(ARGS.tmp):
  */
-  __pyx_tuple__71 = PyTuple_Pack(1, __pyx_kp_s_Stripping_binraries_and_librarie); if (unlikely(!__pyx_tuple__71)) __PYX_ERR(0, 328, __pyx_L1_error)
+  __pyx_tuple__71 = PyTuple_Pack(1, __pyx_kp_s_Stripping_binraries_and_librarie); if (unlikely(!__pyx_tuple__71)) __PYX_ERR(0, 326, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__71);
   __Pyx_GIVEREF(__pyx_tuple__71);
 
-  /* "mkinitfs.py":329
+  /* "mkinitfs.py":327
  *     if ARGS.strip:
  *         message.sub_info('Stripping binraries and libraries')
  *         strip = misc.whereis('strip')             # <<<<<<<<<<<<<<
  *         for sfile in misc.list_files(ARGS.tmp):
  *             smime = misc.file_mime(sfile)
  */
-  __pyx_tuple__72 = PyTuple_Pack(1, __pyx_n_s_strip); if (unlikely(!__pyx_tuple__72)) __PYX_ERR(0, 329, __pyx_L1_error)
+  __pyx_tuple__72 = PyTuple_Pack(1, __pyx_n_s_strip); if (unlikely(!__pyx_tuple__72)) __PYX_ERR(0, 327, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__72);
   __Pyx_GIVEREF(__pyx_tuple__72);
 
-  /* "mkinitfs.py":337
+  /* "mkinitfs.py":335
  *                 misc.system_command((strip, '--strip-all', sfile))
  * 
  *     message.sub_info('Creating optimized image')             # <<<<<<<<<<<<<<
  *     create_image(ARGS.tmp, ARGS.image, ARGS.compression)
  * 
  */
-  __pyx_tuple__73 = PyTuple_Pack(1, __pyx_kp_s_Creating_optimized_image); if (unlikely(!__pyx_tuple__73)) __PYX_ERR(0, 337, __pyx_L1_error)
+  __pyx_tuple__73 = PyTuple_Pack(1, __pyx_kp_s_Creating_optimized_image); if (unlikely(!__pyx_tuple__73)) __PYX_ERR(0, 335, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__73);
   __Pyx_GIVEREF(__pyx_tuple__73);
 
-  /* "mkinitfs.py":341
+  /* "mkinitfs.py":339
  * 
  *     if ARGS.recovery:
  *         message.sub_info('Creating recovery image')             # <<<<<<<<<<<<<<
  *         copy_item(modsdir)
  *         recovery = ARGS.image.replace('.img', '-recovery.img')
  */
-  __pyx_tuple__74 = PyTuple_Pack(1, __pyx_kp_s_Creating_recovery_image); if (unlikely(!__pyx_tuple__74)) __PYX_ERR(0, 341, __pyx_L1_error)
+  __pyx_tuple__74 = PyTuple_Pack(1, __pyx_kp_s_Creating_recovery_image); if (unlikely(!__pyx_tuple__74)) __PYX_ERR(0, 339, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__74);
   __Pyx_GIVEREF(__pyx_tuple__74);
 
-  /* "mkinitfs.py":343
+  /* "mkinitfs.py":341
  *         message.sub_info('Creating recovery image')
  *         copy_item(modsdir)
  *         recovery = ARGS.image.replace('.img', '-recovery.img')             # <<<<<<<<<<<<<<
  *         create_image(ARGS.tmp, recovery, ARGS.compression)
  * 
  */
-  __pyx_tuple__75 = PyTuple_Pack(2, __pyx_kp_s_img, __pyx_kp_s_recovery_img); if (unlikely(!__pyx_tuple__75)) __PYX_ERR(0, 343, __pyx_L1_error)
+  __pyx_tuple__75 = PyTuple_Pack(2, __pyx_kp_s_img, __pyx_kp_s_recovery_img); if (unlikely(!__pyx_tuple__75)) __PYX_ERR(0, 341, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__75);
   __Pyx_GIVEREF(__pyx_tuple__75);
 
-  /* "mkinitfs.py":348
+  /* "mkinitfs.py":346
  * except subprocess.CalledProcessError as detail:
  *     message.critical('SUBPROCESS', detail)
  *     sys.exit(3)             # <<<<<<<<<<<<<<
  * except shutil.Error as detail:
  *     message.critical('SHUTIL', detail)
  */
-  __pyx_tuple__76 = PyTuple_Pack(1, __pyx_int_3); if (unlikely(!__pyx_tuple__76)) __PYX_ERR(0, 348, __pyx_L1_error)
+  __pyx_tuple__76 = PyTuple_Pack(1, __pyx_int_3); if (unlikely(!__pyx_tuple__76)) __PYX_ERR(0, 346, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__76);
   __Pyx_GIVEREF(__pyx_tuple__76);
 
-  /* "mkinitfs.py":351
+  /* "mkinitfs.py":349
  * except shutil.Error as detail:
  *     message.critical('SHUTIL', detail)
  *     sys.exit(4)             # <<<<<<<<<<<<<<
  * except OSError as detail:
  *     message.critical('OS', detail)
  */
-  __pyx_tuple__77 = PyTuple_Pack(1, __pyx_int_4); if (unlikely(!__pyx_tuple__77)) __PYX_ERR(0, 351, __pyx_L1_error)
+  __pyx_tuple__77 = PyTuple_Pack(1, __pyx_int_4); if (unlikely(!__pyx_tuple__77)) __PYX_ERR(0, 349, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__77);
   __Pyx_GIVEREF(__pyx_tuple__77);
 
-  /* "mkinitfs.py":354
+  /* "mkinitfs.py":352
  * except OSError as detail:
  *     message.critical('OS', detail)
  *     sys.exit(5)             # <<<<<<<<<<<<<<
  * except IOError as detail:
  *     message.critical('IO', detail)
  */
-  __pyx_tuple__78 = PyTuple_Pack(1, __pyx_int_5); if (unlikely(!__pyx_tuple__78)) __PYX_ERR(0, 354, __pyx_L1_error)
+  __pyx_tuple__78 = PyTuple_Pack(1, __pyx_int_5); if (unlikely(!__pyx_tuple__78)) __PYX_ERR(0, 352, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__78);
   __Pyx_GIVEREF(__pyx_tuple__78);
 
-  /* "mkinitfs.py":357
+  /* "mkinitfs.py":355
  * except IOError as detail:
  *     message.critical('IO', detail)
  *     sys.exit(6)             # <<<<<<<<<<<<<<
  * except KeyboardInterrupt:
  *     message.critical('Interrupt signal received')
  */
-  __pyx_tuple__79 = PyTuple_Pack(1, __pyx_int_6); if (unlikely(!__pyx_tuple__79)) __PYX_ERR(0, 357, __pyx_L1_error)
+  __pyx_tuple__79 = PyTuple_Pack(1, __pyx_int_6); if (unlikely(!__pyx_tuple__79)) __PYX_ERR(0, 355, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__79);
   __Pyx_GIVEREF(__pyx_tuple__79);
 
-  /* "mkinitfs.py":359
+  /* "mkinitfs.py":357
  *     sys.exit(6)
  * except KeyboardInterrupt:
  *     message.critical('Interrupt signal received')             # <<<<<<<<<<<<<<
  *     sys.exit(7)
  * except SystemExit:
  */
-  __pyx_tuple__80 = PyTuple_Pack(1, __pyx_kp_s_Interrupt_signal_received); if (unlikely(!__pyx_tuple__80)) __PYX_ERR(0, 359, __pyx_L1_error)
+  __pyx_tuple__80 = PyTuple_Pack(1, __pyx_kp_s_Interrupt_signal_received); if (unlikely(!__pyx_tuple__80)) __PYX_ERR(0, 357, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__80);
   __Pyx_GIVEREF(__pyx_tuple__80);
 
-  /* "mkinitfs.py":360
+  /* "mkinitfs.py":358
  * except KeyboardInterrupt:
  *     message.critical('Interrupt signal received')
  *     sys.exit(7)             # <<<<<<<<<<<<<<
  * except SystemExit:
  *     sys.exit(2)
  */
-  __pyx_tuple__81 = PyTuple_Pack(1, __pyx_int_7); if (unlikely(!__pyx_tuple__81)) __PYX_ERR(0, 360, __pyx_L1_error)
+  __pyx_tuple__81 = PyTuple_Pack(1, __pyx_int_7); if (unlikely(!__pyx_tuple__81)) __PYX_ERR(0, 358, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__81);
   __Pyx_GIVEREF(__pyx_tuple__81);
 
-  /* "mkinitfs.py":362
+  /* "mkinitfs.py":360
  *     sys.exit(7)
  * except SystemExit:
  *     sys.exit(2)             # <<<<<<<<<<<<<<
  * except Exception as detail:
  *     message.critical('Unexpected error', detail)
  */
-  __pyx_tuple__82 = PyTuple_Pack(1, __pyx_int_2); if (unlikely(!__pyx_tuple__82)) __PYX_ERR(0, 362, __pyx_L1_error)
+  __pyx_tuple__82 = PyTuple_Pack(1, __pyx_int_2); if (unlikely(!__pyx_tuple__82)) __PYX_ERR(0, 360, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__82);
   __Pyx_GIVEREF(__pyx_tuple__82);
 
-  /* "mkinitfs.py":365
+  /* "mkinitfs.py":363
  * except Exception as detail:
  *     message.critical('Unexpected error', detail)
  *     sys.exit(1)             # <<<<<<<<<<<<<<
  * finally:
  *     if tmpdir and os.path.isdir(tmpdir) and not keep:
  */
-  __pyx_tuple__83 = PyTuple_Pack(1, __pyx_int_1); if (unlikely(!__pyx_tuple__83)) __PYX_ERR(0, 365, __pyx_L1_error)
+  __pyx_tuple__83 = PyTuple_Pack(1, __pyx_int_1); if (unlikely(!__pyx_tuple__83)) __PYX_ERR(0, 363, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__83);
   __Pyx_GIVEREF(__pyx_tuple__83);
 
-  /* "mkinitfs.py":368
+  /* "mkinitfs.py":366
  * finally:
  *     if tmpdir and os.path.isdir(tmpdir) and not keep:
  *         message.info('Cleaning up...')             # <<<<<<<<<<<<<<
  *         misc.dir_remove(tmpdir)
  *     if not 'stable' in app_version and sys.exc_info()[0]:
  */
-  __pyx_tuple__84 = PyTuple_Pack(1, __pyx_kp_s_Cleaning_up); if (unlikely(!__pyx_tuple__84)) __PYX_ERR(0, 368, __pyx_L1_error)
+  __pyx_tuple__84 = PyTuple_Pack(1, __pyx_kp_s_Cleaning_up); if (unlikely(!__pyx_tuple__84)) __PYX_ERR(0, 366, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__84);
   __Pyx_GIVEREF(__pyx_tuple__84);
-  __pyx_tuple__85 = PyTuple_Pack(1, __pyx_kp_s_Cleaning_up); if (unlikely(!__pyx_tuple__85)) __PYX_ERR(0, 368, __pyx_L1_error)
+  __pyx_tuple__85 = PyTuple_Pack(1, __pyx_kp_s_Cleaning_up); if (unlikely(!__pyx_tuple__85)) __PYX_ERR(0, 366, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_tuple__85);
   __Pyx_GIVEREF(__pyx_tuple__85);
   __Pyx_RefNannyFinishContext();
@@ -6644,7 +6615,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  * 
  * import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast, re             # <<<<<<<<<<<<<<
  * 
- * app_version = "1.10.1 (f1ff74b)"
+ * app_version = "1.10.1 (ceba9eb)"
  */
   __pyx_t_1 = __Pyx_Import(__pyx_n_s_sys, 0, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -6694,14 +6665,14 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
   /* "mkinitfs.py":5
  * import sys, argparse, tempfile, subprocess, shutil, os, gzip, bz2, glob, ast, re
  * 
- * app_version = "1.10.1 (f1ff74b)"             # <<<<<<<<<<<<<<
+ * app_version = "1.10.1 (ceba9eb)"             # <<<<<<<<<<<<<<
  * 
  * tmpdir = None
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_10_1_f1ff74b) < 0) __PYX_ERR(0, 5, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_10_1_ceba9eb) < 0) __PYX_ERR(0, 5, __pyx_L1_error)
 
   /* "mkinitfs.py":7
- * app_version = "1.10.1 (f1ff74b)"
+ * app_version = "1.10.1 (ceba9eb)"
  * 
  * tmpdir = None             # <<<<<<<<<<<<<<
  * keep = False
@@ -8544,62 +8515,62 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         if (PyDict_SetItem(__pyx_d, __pyx_n_s_copy_item, __pyx_t_9) < 0) __PYX_ERR(0, 94, __pyx_L5_error)
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-        /* "mkinitfs.py":158
+        /* "mkinitfs.py":156
  * 
  *     # TODO: use the function once busybox has a more complete modinfo applet
  *     def copy_module(name):             # <<<<<<<<<<<<<<
  *         message.sub_debug('Searching for module', name)
  *         try:
  */
-        __pyx_t_9 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8mkinitfs_3copy_module, 0, __pyx_n_s_copy_module, NULL, __pyx_n_s_mkinitfs, __pyx_d, ((PyObject *)__pyx_codeobj__31)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 158, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8mkinitfs_3copy_module, 0, __pyx_n_s_copy_module, NULL, __pyx_n_s_mkinitfs, __pyx_d, ((PyObject *)__pyx_codeobj__31)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 156, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
-        if (PyDict_SetItem(__pyx_d, __pyx_n_s_copy_module, __pyx_t_9) < 0) __PYX_ERR(0, 158, __pyx_L5_error)
+        if (PyDict_SetItem(__pyx_d, __pyx_n_s_copy_module, __pyx_t_9) < 0) __PYX_ERR(0, 156, __pyx_L5_error)
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-        /* "mkinitfs.py":171
+        /* "mkinitfs.py":169
  *             message.warning('Module not found', name)
  * 
  *     def create_image(src, image, method):             # <<<<<<<<<<<<<<
  *         misc.system_command((ARGS.busybox, 'depmod', ARGS.kernel, '-b', ARGS.tmp))
  * 
  */
-        __pyx_t_9 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8mkinitfs_5create_image, 0, __pyx_n_s_create_image, NULL, __pyx_n_s_mkinitfs, __pyx_d, ((PyObject *)__pyx_codeobj__33)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 171, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_CyFunction_NewEx(&__pyx_mdef_8mkinitfs_5create_image, 0, __pyx_n_s_create_image, NULL, __pyx_n_s_mkinitfs, __pyx_d, ((PyObject *)__pyx_codeobj__33)); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 169, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
-        if (PyDict_SetItem(__pyx_d, __pyx_n_s_create_image, __pyx_t_9) < 0) __PYX_ERR(0, 171, __pyx_L5_error)
+        if (PyDict_SetItem(__pyx_d, __pyx_n_s_create_image, __pyx_t_9) < 0) __PYX_ERR(0, 169, __pyx_L5_error)
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-        /* "mkinitfs.py":185
+        /* "mkinitfs.py":183
  *             misc.file_write(image, data)
  * 
  *     message.info('Runtime information')             # <<<<<<<<<<<<<<
  *     message.sub_info('BUSYTEST', ARGS.busytest)
  *     message.sub_info('TMP', ARGS.tmp)
  */
-        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 185, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 183, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
-        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_info); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 185, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_info); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 183, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__34, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 185, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__34, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 183, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-        /* "mkinitfs.py":186
+        /* "mkinitfs.py":184
  * 
  *     message.info('Runtime information')
  *     message.sub_info('BUSYTEST', ARGS.busytest)             # <<<<<<<<<<<<<<
  *     message.sub_info('TMP', ARGS.tmp)
  *     message.sub_info('BUSYBOX', ARGS.busybox)
  */
-        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 186, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 184, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 186, __pyx_L5_error)
+        __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 184, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 186, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 184, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_busytest_2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 186, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_busytest_2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 184, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __pyx_t_1 = NULL;
@@ -8614,7 +8585,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             __pyx_t_7 = 1;
           }
         }
-        __pyx_t_6 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 186, __pyx_L5_error)
+        __pyx_t_6 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 184, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_6);
         if (__pyx_t_1) {
           __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_1); __pyx_t_1 = NULL;
@@ -8625,27 +8596,27 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         __Pyx_GIVEREF(__pyx_t_11);
         PyTuple_SET_ITEM(__pyx_t_6, 1+__pyx_t_7, __pyx_t_11);
         __pyx_t_11 = 0;
-        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_6, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 186, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_6, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 184, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-        /* "mkinitfs.py":187
+        /* "mkinitfs.py":185
  *     message.info('Runtime information')
  *     message.sub_info('BUSYTEST', ARGS.busytest)
  *     message.sub_info('TMP', ARGS.tmp)             # <<<<<<<<<<<<<<
  *     message.sub_info('BUSYBOX', ARGS.busybox)
  *     message.sub_info('KERNEL', ARGS.kernel)
  */
-        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 187, __pyx_L5_error)
+        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 185, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
-        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 187, __pyx_L5_error)
+        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 185, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 187, __pyx_L5_error)
+        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 185, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
-        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_tmp); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 187, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_tmp); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 185, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
         __pyx_t_10 = NULL;
@@ -8660,7 +8631,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             __pyx_t_7 = 1;
           }
         }
-        __pyx_t_1 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 187, __pyx_L5_error)
+        __pyx_t_1 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 185, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
         if (__pyx_t_10) {
           __Pyx_GIVEREF(__pyx_t_10); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_10); __pyx_t_10 = NULL;
@@ -8671,27 +8642,27 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         __Pyx_GIVEREF(__pyx_t_11);
         PyTuple_SET_ITEM(__pyx_t_1, 1+__pyx_t_7, __pyx_t_11);
         __pyx_t_11 = 0;
-        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_1, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 187, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_1, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 185, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-        /* "mkinitfs.py":188
+        /* "mkinitfs.py":186
  *     message.sub_info('BUSYTEST', ARGS.busytest)
  *     message.sub_info('TMP', ARGS.tmp)
  *     message.sub_info('BUSYBOX', ARGS.busybox)             # <<<<<<<<<<<<<<
  *     message.sub_info('KERNEL', ARGS.kernel)
  *     message.sub_info('MODULES', ARGS.modules)
  */
-        __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 188, __pyx_L5_error)
+        __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 186, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 188, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 186, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 188, __pyx_L5_error)
+        __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 186, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_busybox); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 188, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_busybox); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 186, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __pyx_t_6 = NULL;
@@ -8706,7 +8677,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             __pyx_t_7 = 1;
           }
         }
-        __pyx_t_10 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 188, __pyx_L5_error)
+        __pyx_t_10 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 186, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
         if (__pyx_t_6) {
           __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -8717,27 +8688,27 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         __Pyx_GIVEREF(__pyx_t_11);
         PyTuple_SET_ITEM(__pyx_t_10, 1+__pyx_t_7, __pyx_t_11);
         __pyx_t_11 = 0;
-        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_10, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 188, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_10, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 186, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-        /* "mkinitfs.py":189
+        /* "mkinitfs.py":187
  *     message.sub_info('TMP', ARGS.tmp)
  *     message.sub_info('BUSYBOX', ARGS.busybox)
  *     message.sub_info('KERNEL', ARGS.kernel)             # <<<<<<<<<<<<<<
  *     message.sub_info('MODULES', ARGS.modules)
  *     message.sub_info('STRIP', ARGS.strip)
  */
-        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 189, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 187, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 189, __pyx_L5_error)
+        __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 187, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 189, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 187, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_kernel); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 189, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_kernel); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 187, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __pyx_t_1 = NULL;
@@ -8752,7 +8723,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             __pyx_t_7 = 1;
           }
         }
-        __pyx_t_6 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 189, __pyx_L5_error)
+        __pyx_t_6 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 187, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_6);
         if (__pyx_t_1) {
           __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_1); __pyx_t_1 = NULL;
@@ -8763,27 +8734,27 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         __Pyx_GIVEREF(__pyx_t_11);
         PyTuple_SET_ITEM(__pyx_t_6, 1+__pyx_t_7, __pyx_t_11);
         __pyx_t_11 = 0;
-        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_6, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 189, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_6, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 187, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-        /* "mkinitfs.py":190
+        /* "mkinitfs.py":188
  *     message.sub_info('BUSYBOX', ARGS.busybox)
  *     message.sub_info('KERNEL', ARGS.kernel)
  *     message.sub_info('MODULES', ARGS.modules)             # <<<<<<<<<<<<<<
  *     message.sub_info('STRIP', ARGS.strip)
  *     message.sub_info('IMAGE', ARGS.image)
  */
-        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 190, __pyx_L5_error)
+        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 188, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
-        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 190, __pyx_L5_error)
+        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 188, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 190, __pyx_L5_error)
+        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 188, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
-        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_modules); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 190, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_modules); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 188, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
         __pyx_t_10 = NULL;
@@ -8798,7 +8769,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             __pyx_t_7 = 1;
           }
         }
-        __pyx_t_1 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 190, __pyx_L5_error)
+        __pyx_t_1 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 188, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
         if (__pyx_t_10) {
           __Pyx_GIVEREF(__pyx_t_10); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_10); __pyx_t_10 = NULL;
@@ -8809,27 +8780,27 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         __Pyx_GIVEREF(__pyx_t_11);
         PyTuple_SET_ITEM(__pyx_t_1, 1+__pyx_t_7, __pyx_t_11);
         __pyx_t_11 = 0;
-        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_1, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 190, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_1, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 188, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-        /* "mkinitfs.py":191
+        /* "mkinitfs.py":189
  *     message.sub_info('KERNEL', ARGS.kernel)
  *     message.sub_info('MODULES', ARGS.modules)
  *     message.sub_info('STRIP', ARGS.strip)             # <<<<<<<<<<<<<<
  *     message.sub_info('IMAGE', ARGS.image)
  *     message.sub_info('COMPRESSION', ARGS.compression)
  */
-        __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 191, __pyx_L5_error)
+        __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 189, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 191, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 189, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 191, __pyx_L5_error)
+        __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 189, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_strip); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 191, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_strip); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 189, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __pyx_t_6 = NULL;
@@ -8844,7 +8815,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             __pyx_t_7 = 1;
           }
         }
-        __pyx_t_10 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 191, __pyx_L5_error)
+        __pyx_t_10 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 189, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
         if (__pyx_t_6) {
           __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -8855,27 +8826,27 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         __Pyx_GIVEREF(__pyx_t_11);
         PyTuple_SET_ITEM(__pyx_t_10, 1+__pyx_t_7, __pyx_t_11);
         __pyx_t_11 = 0;
-        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_10, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 191, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_10, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 189, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-        /* "mkinitfs.py":192
+        /* "mkinitfs.py":190
  *     message.sub_info('MODULES', ARGS.modules)
  *     message.sub_info('STRIP', ARGS.strip)
  *     message.sub_info('IMAGE', ARGS.image)             # <<<<<<<<<<<<<<
  *     message.sub_info('COMPRESSION', ARGS.compression)
  *     message.sub_info('RECOVERY', ARGS.recovery)
  */
-        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 192, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 190, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 192, __pyx_L5_error)
+        __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 190, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 192, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 190, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_image); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 192, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_image); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 190, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __pyx_t_1 = NULL;
@@ -8890,7 +8861,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             __pyx_t_7 = 1;
           }
         }
-        __pyx_t_6 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 192, __pyx_L5_error)
+        __pyx_t_6 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 190, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_6);
         if (__pyx_t_1) {
           __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_1); __pyx_t_1 = NULL;
@@ -8901,27 +8872,27 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         __Pyx_GIVEREF(__pyx_t_11);
         PyTuple_SET_ITEM(__pyx_t_6, 1+__pyx_t_7, __pyx_t_11);
         __pyx_t_11 = 0;
-        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_6, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 192, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_6, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 190, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-        /* "mkinitfs.py":193
+        /* "mkinitfs.py":191
  *     message.sub_info('STRIP', ARGS.strip)
  *     message.sub_info('IMAGE', ARGS.image)
  *     message.sub_info('COMPRESSION', ARGS.compression)             # <<<<<<<<<<<<<<
  *     message.sub_info('RECOVERY', ARGS.recovery)
  * 
  */
-        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 193, __pyx_L5_error)
+        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 191, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
-        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 193, __pyx_L5_error)
+        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 191, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 193, __pyx_L5_error)
+        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 191, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
-        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_compression); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 193, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_compression); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 191, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
         __pyx_t_10 = NULL;
@@ -8936,7 +8907,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             __pyx_t_7 = 1;
           }
         }
-        __pyx_t_1 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 193, __pyx_L5_error)
+        __pyx_t_1 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 191, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
         if (__pyx_t_10) {
           __Pyx_GIVEREF(__pyx_t_10); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_10); __pyx_t_10 = NULL;
@@ -8947,27 +8918,27 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         __Pyx_GIVEREF(__pyx_t_11);
         PyTuple_SET_ITEM(__pyx_t_1, 1+__pyx_t_7, __pyx_t_11);
         __pyx_t_11 = 0;
-        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_1, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 193, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_1, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 191, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-        /* "mkinitfs.py":194
+        /* "mkinitfs.py":192
  *     message.sub_info('IMAGE', ARGS.image)
  *     message.sub_info('COMPRESSION', ARGS.compression)
  *     message.sub_info('RECOVERY', ARGS.recovery)             # <<<<<<<<<<<<<<
  * 
  *     if ARGS.busytest:
  */
-        __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 194, __pyx_L5_error)
+        __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 192, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 194, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 192, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 194, __pyx_L5_error)
+        __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 192, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_recovery); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 194, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_recovery); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 192, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __pyx_t_6 = NULL;
@@ -8982,7 +8953,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             __pyx_t_7 = 1;
           }
         }
-        __pyx_t_10 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 194, __pyx_L5_error)
+        __pyx_t_10 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 192, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
         if (__pyx_t_6) {
           __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -8993,248 +8964,248 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         __Pyx_GIVEREF(__pyx_t_11);
         PyTuple_SET_ITEM(__pyx_t_10, 1+__pyx_t_7, __pyx_t_11);
         __pyx_t_11 = 0;
-        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_10, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 194, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_10, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 192, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-        /* "mkinitfs.py":196
+        /* "mkinitfs.py":194
  *     message.sub_info('RECOVERY', ARGS.recovery)
  * 
  *     if ARGS.busytest:             # <<<<<<<<<<<<<<
  *         message.sub_info('Testing busybox compatibility')
  *         busycommands = {
  */
-        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 196, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 194, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
-        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_busytest_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 196, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_busytest_2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 194, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 196, __pyx_L5_error)
+        __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 194, __pyx_L5_error)
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         if (__pyx_t_14) {
 
-          /* "mkinitfs.py":197
+          /* "mkinitfs.py":195
  * 
  *     if ARGS.busytest:
  *         message.sub_info('Testing busybox compatibility')             # <<<<<<<<<<<<<<
  *         busycommands = {
  *             'modprobe': ['-b'],
  */
-          __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 197, __pyx_L5_error)
+          __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 195, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
-          __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 197, __pyx_L5_error)
+          __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 195, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__35, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 197, __pyx_L5_error)
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__35, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 195, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-          /* "mkinitfs.py":199
+          /* "mkinitfs.py":197
  *         message.sub_info('Testing busybox compatibility')
  *         busycommands = {
  *             'modprobe': ['-b'],             # <<<<<<<<<<<<<<
  *             'find': ('-type', '-name', '-exec'),
  *             'cpio': ('-o', '-H'),
  */
-          __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 199, __pyx_L5_error)
+          __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 197, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
-          __pyx_t_9 = PyList_New(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 199, __pyx_L5_error)
+          __pyx_t_9 = PyList_New(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 197, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_INCREF(__pyx_kp_s_b);
           __Pyx_GIVEREF(__pyx_kp_s_b);
           PyList_SET_ITEM(__pyx_t_9, 0, __pyx_kp_s_b);
-          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_modprobe, __pyx_t_9) < 0) __PYX_ERR(0, 199, __pyx_L5_error)
+          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_modprobe, __pyx_t_9) < 0) __PYX_ERR(0, 197, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-          /* "mkinitfs.py":200
+          /* "mkinitfs.py":198
  *         busycommands = {
  *             'modprobe': ['-b'],
  *             'find': ('-type', '-name', '-exec'),             # <<<<<<<<<<<<<<
  *             'cpio': ('-o', '-H'),
  *             # TODO: 'modinfo', ('-k', '-F')
  */
-          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_find, __pyx_tuple__36) < 0) __PYX_ERR(0, 199, __pyx_L5_error)
+          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_find, __pyx_tuple__36) < 0) __PYX_ERR(0, 197, __pyx_L5_error)
 
-          /* "mkinitfs.py":201
+          /* "mkinitfs.py":199
  *             'modprobe': ['-b'],
  *             'find': ('-type', '-name', '-exec'),
  *             'cpio': ('-o', '-H'),             # <<<<<<<<<<<<<<
  *             # TODO: 'modinfo', ('-k', '-F')
  *             'depmod': ['-b'],
  */
-          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_cpio, __pyx_tuple__37) < 0) __PYX_ERR(0, 199, __pyx_L5_error)
+          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_cpio, __pyx_tuple__37) < 0) __PYX_ERR(0, 197, __pyx_L5_error)
 
-          /* "mkinitfs.py":203
+          /* "mkinitfs.py":201
  *             'cpio': ('-o', '-H'),
  *             # TODO: 'modinfo', ('-k', '-F')
  *             'depmod': ['-b'],             # <<<<<<<<<<<<<<
  *             'mknod': ['-m'],
  *             'echo': ['-e'],
  */
-          __pyx_t_9 = PyList_New(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 203, __pyx_L5_error)
+          __pyx_t_9 = PyList_New(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 201, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_INCREF(__pyx_kp_s_b);
           __Pyx_GIVEREF(__pyx_kp_s_b);
           PyList_SET_ITEM(__pyx_t_9, 0, __pyx_kp_s_b);
-          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_depmod, __pyx_t_9) < 0) __PYX_ERR(0, 199, __pyx_L5_error)
+          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_depmod, __pyx_t_9) < 0) __PYX_ERR(0, 197, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-          /* "mkinitfs.py":204
+          /* "mkinitfs.py":202
  *             # TODO: 'modinfo', ('-k', '-F')
  *             'depmod': ['-b'],
  *             'mknod': ['-m'],             # <<<<<<<<<<<<<<
  *             'echo': ['-e'],
  *             'mkdir': ['-p'],
  */
-          __pyx_t_9 = PyList_New(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 204, __pyx_L5_error)
+          __pyx_t_9 = PyList_New(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 202, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_INCREF(__pyx_kp_s_m_2);
           __Pyx_GIVEREF(__pyx_kp_s_m_2);
           PyList_SET_ITEM(__pyx_t_9, 0, __pyx_kp_s_m_2);
-          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_mknod, __pyx_t_9) < 0) __PYX_ERR(0, 199, __pyx_L5_error)
+          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_mknod, __pyx_t_9) < 0) __PYX_ERR(0, 197, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-          /* "mkinitfs.py":205
+          /* "mkinitfs.py":203
  *             'depmod': ['-b'],
  *             'mknod': ['-m'],
  *             'echo': ['-e'],             # <<<<<<<<<<<<<<
  *             'mkdir': ['-p'],
  *             'mount': ('-t', '-o', 'move'),
  */
-          __pyx_t_9 = PyList_New(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 205, __pyx_L5_error)
+          __pyx_t_9 = PyList_New(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 203, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_INCREF(__pyx_kp_s_e);
           __Pyx_GIVEREF(__pyx_kp_s_e);
           PyList_SET_ITEM(__pyx_t_9, 0, __pyx_kp_s_e);
-          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_echo, __pyx_t_9) < 0) __PYX_ERR(0, 199, __pyx_L5_error)
+          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_echo, __pyx_t_9) < 0) __PYX_ERR(0, 197, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-          /* "mkinitfs.py":206
+          /* "mkinitfs.py":204
  *             'mknod': ['-m'],
  *             'echo': ['-e'],
  *             'mkdir': ['-p'],             # <<<<<<<<<<<<<<
  *             'mount': ('-t', '-o', 'move'),
  *             'modprobe': ('-q', '-b', '-a'),
  */
-          __pyx_t_9 = PyList_New(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 206, __pyx_L5_error)
+          __pyx_t_9 = PyList_New(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 204, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_INCREF(__pyx_kp_s_p);
           __Pyx_GIVEREF(__pyx_kp_s_p);
           PyList_SET_ITEM(__pyx_t_9, 0, __pyx_kp_s_p);
-          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_mkdir, __pyx_t_9) < 0) __PYX_ERR(0, 199, __pyx_L5_error)
+          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_mkdir, __pyx_t_9) < 0) __PYX_ERR(0, 197, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-          /* "mkinitfs.py":207
+          /* "mkinitfs.py":205
  *             'echo': ['-e'],
  *             'mkdir': ['-p'],
  *             'mount': ('-t', '-o', 'move'),             # <<<<<<<<<<<<<<
  *             'modprobe': ('-q', '-b', '-a'),
  *             'ln': ('-s', '-f'),
  */
-          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_mount, __pyx_tuple__38) < 0) __PYX_ERR(0, 199, __pyx_L5_error)
+          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_mount, __pyx_tuple__38) < 0) __PYX_ERR(0, 197, __pyx_L5_error)
 
-          /* "mkinitfs.py":208
+          /* "mkinitfs.py":206
  *             'mkdir': ['-p'],
  *             'mount': ('-t', '-o', 'move'),
  *             'modprobe': ('-q', '-b', '-a'),             # <<<<<<<<<<<<<<
  *             'ln': ('-s', '-f'),
  *             'mdev': ['-s'],
  */
-          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_modprobe, __pyx_tuple__39) < 0) __PYX_ERR(0, 199, __pyx_L5_error)
+          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_modprobe, __pyx_tuple__39) < 0) __PYX_ERR(0, 197, __pyx_L5_error)
 
-          /* "mkinitfs.py":209
+          /* "mkinitfs.py":207
  *             'mount': ('-t', '-o', 'move'),
  *             'modprobe': ('-q', '-b', '-a'),
  *             'ln': ('-s', '-f'),             # <<<<<<<<<<<<<<
  *             'mdev': ['-s'],
  *             'sort': ['-u'],
  */
-          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_ln, __pyx_tuple__40) < 0) __PYX_ERR(0, 199, __pyx_L5_error)
+          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_ln, __pyx_tuple__40) < 0) __PYX_ERR(0, 197, __pyx_L5_error)
 
-          /* "mkinitfs.py":210
+          /* "mkinitfs.py":208
  *             'modprobe': ('-q', '-b', '-a'),
  *             'ln': ('-s', '-f'),
  *             'mdev': ['-s'],             # <<<<<<<<<<<<<<
  *             'sort': ['-u'],
  *             'reboot': ['-f'],
  */
-          __pyx_t_9 = PyList_New(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 210, __pyx_L5_error)
+          __pyx_t_9 = PyList_New(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 208, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_INCREF(__pyx_kp_s_s);
           __Pyx_GIVEREF(__pyx_kp_s_s);
           PyList_SET_ITEM(__pyx_t_9, 0, __pyx_kp_s_s);
-          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_mdev, __pyx_t_9) < 0) __PYX_ERR(0, 199, __pyx_L5_error)
+          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_mdev, __pyx_t_9) < 0) __PYX_ERR(0, 197, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-          /* "mkinitfs.py":211
+          /* "mkinitfs.py":209
  *             'ln': ('-s', '-f'),
  *             'mdev': ['-s'],
  *             'sort': ['-u'],             # <<<<<<<<<<<<<<
  *             'reboot': ['-f'],
  *             'main': ('--install', '[-s]', 'touch,', 'xargs,', 'switch_root,', 'sync,', 'blkid,'),
  */
-          __pyx_t_9 = PyList_New(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 211, __pyx_L5_error)
+          __pyx_t_9 = PyList_New(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 209, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_INCREF(__pyx_kp_s_u);
           __Pyx_GIVEREF(__pyx_kp_s_u);
           PyList_SET_ITEM(__pyx_t_9, 0, __pyx_kp_s_u);
-          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_sort, __pyx_t_9) < 0) __PYX_ERR(0, 199, __pyx_L5_error)
+          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_sort, __pyx_t_9) < 0) __PYX_ERR(0, 197, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-          /* "mkinitfs.py":212
+          /* "mkinitfs.py":210
  *             'mdev': ['-s'],
  *             'sort': ['-u'],
  *             'reboot': ['-f'],             # <<<<<<<<<<<<<<
  *             'main': ('--install', '[-s]', 'touch,', 'xargs,', 'switch_root,', 'sync,', 'blkid,'),
  *         }
  */
-          __pyx_t_9 = PyList_New(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 212, __pyx_L5_error)
+          __pyx_t_9 = PyList_New(1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 210, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_INCREF(__pyx_kp_s_f);
           __Pyx_GIVEREF(__pyx_kp_s_f);
           PyList_SET_ITEM(__pyx_t_9, 0, __pyx_kp_s_f);
-          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_reboot, __pyx_t_9) < 0) __PYX_ERR(0, 199, __pyx_L5_error)
+          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_reboot, __pyx_t_9) < 0) __PYX_ERR(0, 197, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-          /* "mkinitfs.py":213
+          /* "mkinitfs.py":211
  *             'sort': ['-u'],
  *             'reboot': ['-f'],
  *             'main': ('--install', '[-s]', 'touch,', 'xargs,', 'switch_root,', 'sync,', 'blkid,'),             # <<<<<<<<<<<<<<
  *         }
  *         compatible = True
  */
-          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_main_2, __pyx_tuple__41) < 0) __PYX_ERR(0, 199, __pyx_L5_error)
-          if (PyDict_SetItem(__pyx_d, __pyx_n_s_busycommands, __pyx_t_1) < 0) __PYX_ERR(0, 198, __pyx_L5_error)
+          if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_main_2, __pyx_tuple__41) < 0) __PYX_ERR(0, 197, __pyx_L5_error)
+          if (PyDict_SetItem(__pyx_d, __pyx_n_s_busycommands, __pyx_t_1) < 0) __PYX_ERR(0, 196, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-          /* "mkinitfs.py":215
+          /* "mkinitfs.py":213
  *             'main': ('--install', '[-s]', 'touch,', 'xargs,', 'switch_root,', 'sync,', 'blkid,'),
  *         }
  *         compatible = True             # <<<<<<<<<<<<<<
  *         for command in busycommands:
  *             message.sub_debug('Checking for compat with', command)
  */
-          if (PyDict_SetItem(__pyx_d, __pyx_n_s_compatible, Py_True) < 0) __PYX_ERR(0, 215, __pyx_L5_error)
+          if (PyDict_SetItem(__pyx_d, __pyx_n_s_compatible, Py_True) < 0) __PYX_ERR(0, 213, __pyx_L5_error)
 
-          /* "mkinitfs.py":216
+          /* "mkinitfs.py":214
  *         }
  *         compatible = True
  *         for command in busycommands:             # <<<<<<<<<<<<<<
  *             message.sub_debug('Checking for compat with', command)
  *             if command == 'main':
  */
-          __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_busycommands); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 216, __pyx_L5_error)
+          __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_busycommands); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 214, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
           if (likely(PyList_CheckExact(__pyx_t_1)) || PyTuple_CheckExact(__pyx_t_1)) {
             __pyx_t_9 = __pyx_t_1; __Pyx_INCREF(__pyx_t_9); __pyx_t_7 = 0;
             __pyx_t_8 = NULL;
           } else {
-            __pyx_t_7 = -1; __pyx_t_9 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 216, __pyx_L5_error)
+            __pyx_t_7 = -1; __pyx_t_9 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 214, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_9);
-            __pyx_t_8 = Py_TYPE(__pyx_t_9)->tp_iternext; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 216, __pyx_L5_error)
+            __pyx_t_8 = Py_TYPE(__pyx_t_9)->tp_iternext; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 214, __pyx_L5_error)
           }
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           for (;;) {
@@ -9242,17 +9213,17 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               if (likely(PyList_CheckExact(__pyx_t_9))) {
                 if (__pyx_t_7 >= PyList_GET_SIZE(__pyx_t_9)) break;
                 #if CYTHON_COMPILING_IN_CPYTHON
-                __pyx_t_1 = PyList_GET_ITEM(__pyx_t_9, __pyx_t_7); __Pyx_INCREF(__pyx_t_1); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 216, __pyx_L5_error)
+                __pyx_t_1 = PyList_GET_ITEM(__pyx_t_9, __pyx_t_7); __Pyx_INCREF(__pyx_t_1); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 214, __pyx_L5_error)
                 #else
-                __pyx_t_1 = PySequence_ITEM(__pyx_t_9, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 216, __pyx_L5_error)
+                __pyx_t_1 = PySequence_ITEM(__pyx_t_9, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 214, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_1);
                 #endif
               } else {
                 if (__pyx_t_7 >= PyTuple_GET_SIZE(__pyx_t_9)) break;
                 #if CYTHON_COMPILING_IN_CPYTHON
-                __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_9, __pyx_t_7); __Pyx_INCREF(__pyx_t_1); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 216, __pyx_L5_error)
+                __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_9, __pyx_t_7); __Pyx_INCREF(__pyx_t_1); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 214, __pyx_L5_error)
                 #else
-                __pyx_t_1 = PySequence_ITEM(__pyx_t_9, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 216, __pyx_L5_error)
+                __pyx_t_1 = PySequence_ITEM(__pyx_t_9, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 214, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_1);
                 #endif
               }
@@ -9262,28 +9233,28 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                 PyObject* exc_type = PyErr_Occurred();
                 if (exc_type) {
                   if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-                  else __PYX_ERR(0, 216, __pyx_L5_error)
+                  else __PYX_ERR(0, 214, __pyx_L5_error)
                 }
                 break;
               }
               __Pyx_GOTREF(__pyx_t_1);
             }
-            if (PyDict_SetItem(__pyx_d, __pyx_n_s_command, __pyx_t_1) < 0) __PYX_ERR(0, 216, __pyx_L5_error)
+            if (PyDict_SetItem(__pyx_d, __pyx_n_s_command, __pyx_t_1) < 0) __PYX_ERR(0, 214, __pyx_L5_error)
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-            /* "mkinitfs.py":217
+            /* "mkinitfs.py":215
  *         compatible = True
  *         for command in busycommands:
  *             message.sub_debug('Checking for compat with', command)             # <<<<<<<<<<<<<<
  *             if command == 'main':
  *                 commoutput = subprocess.check_output((ARGS.busybox, '--help'), stderr=subprocess.STDOUT)
  */
-            __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 217, __pyx_L5_error)
+            __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 215, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_10);
-            __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 217, __pyx_L5_error)
+            __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 215, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_11);
             __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-            __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_command); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 217, __pyx_L5_error)
+            __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_command); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 215, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_10);
             __pyx_t_6 = NULL;
             __pyx_t_16 = 0;
@@ -9297,7 +9268,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                 __pyx_t_16 = 1;
               }
             }
-            __pyx_t_5 = PyTuple_New(2+__pyx_t_16); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 217, __pyx_L5_error)
+            __pyx_t_5 = PyTuple_New(2+__pyx_t_16); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 215, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_5);
             if (__pyx_t_6) {
               __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -9308,43 +9279,43 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             __Pyx_GIVEREF(__pyx_t_10);
             PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_16, __pyx_t_10);
             __pyx_t_10 = 0;
-            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 217, __pyx_L5_error)
+            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_5, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 215, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-            /* "mkinitfs.py":218
+            /* "mkinitfs.py":216
  *         for command in busycommands:
  *             message.sub_debug('Checking for compat with', command)
  *             if command == 'main':             # <<<<<<<<<<<<<<
  *                 commoutput = subprocess.check_output((ARGS.busybox, '--help'), stderr=subprocess.STDOUT)
  *             else:
  */
-            __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_command); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 218, __pyx_L5_error)
+            __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_command); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 216, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_1);
-            __pyx_t_14 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_main_2, Py_EQ)); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 218, __pyx_L5_error)
+            __pyx_t_14 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_n_s_main_2, Py_EQ)); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 216, __pyx_L5_error)
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
             if (__pyx_t_14) {
 
-              /* "mkinitfs.py":219
+              /* "mkinitfs.py":217
  *             message.sub_debug('Checking for compat with', command)
  *             if command == 'main':
  *                 commoutput = subprocess.check_output((ARGS.busybox, '--help'), stderr=subprocess.STDOUT)             # <<<<<<<<<<<<<<
  *             else:
  *                 commoutput = subprocess.check_output((ARGS.busybox, command, '--help'), stderr=subprocess.STDOUT)
  */
-              __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_subprocess); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 219, __pyx_L5_error)
+              __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_subprocess); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 217, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_1);
-              __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_check_output); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 219, __pyx_L5_error)
+              __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_check_output); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 217, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_11);
               __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-              __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 219, __pyx_L5_error)
+              __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 217, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_1);
-              __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_busybox); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 219, __pyx_L5_error)
+              __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_busybox); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 217, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_5);
               __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-              __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 219, __pyx_L5_error)
+              __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 217, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_1);
               __Pyx_GIVEREF(__pyx_t_5);
               PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_5);
@@ -9352,29 +9323,29 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               __Pyx_GIVEREF(__pyx_kp_s_help_2);
               PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_kp_s_help_2);
               __pyx_t_5 = 0;
-              __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 219, __pyx_L5_error)
+              __pyx_t_5 = PyTuple_New(1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 217, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_5);
               __Pyx_GIVEREF(__pyx_t_1);
               PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_1);
               __pyx_t_1 = 0;
-              __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 219, __pyx_L5_error)
+              __pyx_t_1 = PyDict_New(); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 217, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_1);
-              __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_subprocess); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 219, __pyx_L5_error)
+              __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_subprocess); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 217, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_10);
-              __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_STDOUT); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 219, __pyx_L5_error)
+              __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_STDOUT); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 217, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_6);
               __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-              if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_stderr, __pyx_t_6) < 0) __PYX_ERR(0, 219, __pyx_L5_error)
+              if (PyDict_SetItem(__pyx_t_1, __pyx_n_s_stderr, __pyx_t_6) < 0) __PYX_ERR(0, 217, __pyx_L5_error)
               __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-              __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_5, __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 219, __pyx_L5_error)
+              __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_5, __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 217, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_6);
               __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
               __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
               __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-              if (PyDict_SetItem(__pyx_d, __pyx_n_s_commoutput, __pyx_t_6) < 0) __PYX_ERR(0, 219, __pyx_L5_error)
+              if (PyDict_SetItem(__pyx_d, __pyx_n_s_commoutput, __pyx_t_6) < 0) __PYX_ERR(0, 217, __pyx_L5_error)
               __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-              /* "mkinitfs.py":218
+              /* "mkinitfs.py":216
  *         for command in busycommands:
  *             message.sub_debug('Checking for compat with', command)
  *             if command == 'main':             # <<<<<<<<<<<<<<
@@ -9384,7 +9355,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               goto __pyx_L42;
             }
 
-            /* "mkinitfs.py":221
+            /* "mkinitfs.py":219
  *                 commoutput = subprocess.check_output((ARGS.busybox, '--help'), stderr=subprocess.STDOUT)
  *             else:
  *                 commoutput = subprocess.check_output((ARGS.busybox, command, '--help'), stderr=subprocess.STDOUT)             # <<<<<<<<<<<<<<
@@ -9392,19 +9363,19 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  *                 message.sub_debug('Testing argument', arg)
  */
             /*else*/ {
-              __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_subprocess); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 221, __pyx_L5_error)
+              __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_subprocess); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 219, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_6);
-              __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_check_output); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 221, __pyx_L5_error)
+              __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_check_output); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 219, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_1);
               __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-              __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 221, __pyx_L5_error)
+              __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 219, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_6);
-              __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_busybox); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 221, __pyx_L5_error)
+              __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_busybox); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 219, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_5);
               __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-              __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_command); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 221, __pyx_L5_error)
+              __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_command); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 219, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_6);
-              __pyx_t_11 = PyTuple_New(3); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 221, __pyx_L5_error)
+              __pyx_t_11 = PyTuple_New(3); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 219, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_11);
               __Pyx_GIVEREF(__pyx_t_5);
               PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_5);
@@ -9415,42 +9386,42 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               PyTuple_SET_ITEM(__pyx_t_11, 2, __pyx_kp_s_help_2);
               __pyx_t_5 = 0;
               __pyx_t_6 = 0;
-              __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 221, __pyx_L5_error)
+              __pyx_t_6 = PyTuple_New(1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 219, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_6);
               __Pyx_GIVEREF(__pyx_t_11);
               PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_11);
               __pyx_t_11 = 0;
-              __pyx_t_11 = PyDict_New(); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 221, __pyx_L5_error)
+              __pyx_t_11 = PyDict_New(); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 219, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_11);
-              __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_subprocess); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 221, __pyx_L5_error)
+              __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_subprocess); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 219, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_5);
-              __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_STDOUT); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 221, __pyx_L5_error)
+              __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_STDOUT); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 219, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_10);
               __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-              if (PyDict_SetItem(__pyx_t_11, __pyx_n_s_stderr, __pyx_t_10) < 0) __PYX_ERR(0, 221, __pyx_L5_error)
+              if (PyDict_SetItem(__pyx_t_11, __pyx_n_s_stderr, __pyx_t_10) < 0) __PYX_ERR(0, 219, __pyx_L5_error)
               __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-              __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_6, __pyx_t_11); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 221, __pyx_L5_error)
+              __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_6, __pyx_t_11); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 219, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_10);
               __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
               __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
               __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-              if (PyDict_SetItem(__pyx_d, __pyx_n_s_commoutput, __pyx_t_10) < 0) __PYX_ERR(0, 221, __pyx_L5_error)
+              if (PyDict_SetItem(__pyx_d, __pyx_n_s_commoutput, __pyx_t_10) < 0) __PYX_ERR(0, 219, __pyx_L5_error)
               __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
             }
             __pyx_L42:;
 
-            /* "mkinitfs.py":222
+            /* "mkinitfs.py":220
  *             else:
  *                 commoutput = subprocess.check_output((ARGS.busybox, command, '--help'), stderr=subprocess.STDOUT)
  *             for arg in busycommands[command]:             # <<<<<<<<<<<<<<
  *                 message.sub_debug('Testing argument', arg)
  *                 if not re.findall('\\s%s\\s' % re.escape(arg), commoutput):
  */
-            __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_busycommands); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 222, __pyx_L5_error)
+            __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_busycommands); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 220, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_10);
-            __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_command); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 222, __pyx_L5_error)
+            __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_command); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 220, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_11);
-            __pyx_t_6 = PyObject_GetItem(__pyx_t_10, __pyx_t_11); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 222, __pyx_L5_error)
+            __pyx_t_6 = PyObject_GetItem(__pyx_t_10, __pyx_t_11); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 220, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_6);
             __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
@@ -9458,9 +9429,9 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               __pyx_t_11 = __pyx_t_6; __Pyx_INCREF(__pyx_t_11); __pyx_t_16 = 0;
               __pyx_t_18 = NULL;
             } else {
-              __pyx_t_16 = -1; __pyx_t_11 = PyObject_GetIter(__pyx_t_6); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 222, __pyx_L5_error)
+              __pyx_t_16 = -1; __pyx_t_11 = PyObject_GetIter(__pyx_t_6); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 220, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_11);
-              __pyx_t_18 = Py_TYPE(__pyx_t_11)->tp_iternext; if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 222, __pyx_L5_error)
+              __pyx_t_18 = Py_TYPE(__pyx_t_11)->tp_iternext; if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 220, __pyx_L5_error)
             }
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             for (;;) {
@@ -9468,17 +9439,17 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                 if (likely(PyList_CheckExact(__pyx_t_11))) {
                   if (__pyx_t_16 >= PyList_GET_SIZE(__pyx_t_11)) break;
                   #if CYTHON_COMPILING_IN_CPYTHON
-                  __pyx_t_6 = PyList_GET_ITEM(__pyx_t_11, __pyx_t_16); __Pyx_INCREF(__pyx_t_6); __pyx_t_16++; if (unlikely(0 < 0)) __PYX_ERR(0, 222, __pyx_L5_error)
+                  __pyx_t_6 = PyList_GET_ITEM(__pyx_t_11, __pyx_t_16); __Pyx_INCREF(__pyx_t_6); __pyx_t_16++; if (unlikely(0 < 0)) __PYX_ERR(0, 220, __pyx_L5_error)
                   #else
-                  __pyx_t_6 = PySequence_ITEM(__pyx_t_11, __pyx_t_16); __pyx_t_16++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 222, __pyx_L5_error)
+                  __pyx_t_6 = PySequence_ITEM(__pyx_t_11, __pyx_t_16); __pyx_t_16++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 220, __pyx_L5_error)
                   __Pyx_GOTREF(__pyx_t_6);
                   #endif
                 } else {
                   if (__pyx_t_16 >= PyTuple_GET_SIZE(__pyx_t_11)) break;
                   #if CYTHON_COMPILING_IN_CPYTHON
-                  __pyx_t_6 = PyTuple_GET_ITEM(__pyx_t_11, __pyx_t_16); __Pyx_INCREF(__pyx_t_6); __pyx_t_16++; if (unlikely(0 < 0)) __PYX_ERR(0, 222, __pyx_L5_error)
+                  __pyx_t_6 = PyTuple_GET_ITEM(__pyx_t_11, __pyx_t_16); __Pyx_INCREF(__pyx_t_6); __pyx_t_16++; if (unlikely(0 < 0)) __PYX_ERR(0, 220, __pyx_L5_error)
                   #else
-                  __pyx_t_6 = PySequence_ITEM(__pyx_t_11, __pyx_t_16); __pyx_t_16++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 222, __pyx_L5_error)
+                  __pyx_t_6 = PySequence_ITEM(__pyx_t_11, __pyx_t_16); __pyx_t_16++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 220, __pyx_L5_error)
                   __Pyx_GOTREF(__pyx_t_6);
                   #endif
                 }
@@ -9488,28 +9459,28 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                   PyObject* exc_type = PyErr_Occurred();
                   if (exc_type) {
                     if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-                    else __PYX_ERR(0, 222, __pyx_L5_error)
+                    else __PYX_ERR(0, 220, __pyx_L5_error)
                   }
                   break;
                 }
                 __Pyx_GOTREF(__pyx_t_6);
               }
-              if (PyDict_SetItem(__pyx_d, __pyx_n_s_arg, __pyx_t_6) < 0) __PYX_ERR(0, 222, __pyx_L5_error)
+              if (PyDict_SetItem(__pyx_d, __pyx_n_s_arg, __pyx_t_6) < 0) __PYX_ERR(0, 220, __pyx_L5_error)
               __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-              /* "mkinitfs.py":223
+              /* "mkinitfs.py":221
  *                 commoutput = subprocess.check_output((ARGS.busybox, command, '--help'), stderr=subprocess.STDOUT)
  *             for arg in busycommands[command]:
  *                 message.sub_debug('Testing argument', arg)             # <<<<<<<<<<<<<<
  *                 if not re.findall('\\s%s\\s' % re.escape(arg), commoutput):
  *                     if command == 'main':
  */
-              __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 223, __pyx_L5_error)
+              __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 221, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_10);
-              __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 223, __pyx_L5_error)
+              __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 221, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_1);
               __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-              __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_arg); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 223, __pyx_L5_error)
+              __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_arg); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 221, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_10);
               __pyx_t_5 = NULL;
               __pyx_t_19 = 0;
@@ -9523,7 +9494,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                   __pyx_t_19 = 1;
                 }
               }
-              __pyx_t_17 = PyTuple_New(2+__pyx_t_19); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 223, __pyx_L5_error)
+              __pyx_t_17 = PyTuple_New(2+__pyx_t_19); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 221, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_17);
               if (__pyx_t_5) {
                 __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_17, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -9534,30 +9505,30 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               __Pyx_GIVEREF(__pyx_t_10);
               PyTuple_SET_ITEM(__pyx_t_17, 1+__pyx_t_19, __pyx_t_10);
               __pyx_t_10 = 0;
-              __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_17, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 223, __pyx_L5_error)
+              __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_17, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 221, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_6);
               __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
               __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
               __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-              /* "mkinitfs.py":224
+              /* "mkinitfs.py":222
  *             for arg in busycommands[command]:
  *                 message.sub_debug('Testing argument', arg)
  *                 if not re.findall('\\s%s\\s' % re.escape(arg), commoutput):             # <<<<<<<<<<<<<<
  *                     if command == 'main':
  *                         message.sub_critical('Argument/applet %s not supported' % arg)
  */
-              __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_re); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 224, __pyx_L5_error)
+              __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_re); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 222, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_1);
-              __pyx_t_17 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_findall); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 224, __pyx_L5_error)
+              __pyx_t_17 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_findall); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 222, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_17);
               __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-              __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_re); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 224, __pyx_L5_error)
+              __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_re); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 222, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_10);
-              __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_escape); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 224, __pyx_L5_error)
+              __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_escape); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 222, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_5);
               __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-              __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_arg); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 224, __pyx_L5_error)
+              __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_arg); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 222, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_10);
               __pyx_t_20 = NULL;
               if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_5))) {
@@ -9570,25 +9541,25 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                 }
               }
               if (!__pyx_t_20) {
-                __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_10); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 224, __pyx_L5_error)
+                __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_10); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 222, __pyx_L5_error)
                 __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
                 __Pyx_GOTREF(__pyx_t_1);
               } else {
-                __pyx_t_21 = PyTuple_New(1+1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 224, __pyx_L5_error)
+                __pyx_t_21 = PyTuple_New(1+1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 222, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_21);
                 __Pyx_GIVEREF(__pyx_t_20); PyTuple_SET_ITEM(__pyx_t_21, 0, __pyx_t_20); __pyx_t_20 = NULL;
                 __Pyx_GIVEREF(__pyx_t_10);
                 PyTuple_SET_ITEM(__pyx_t_21, 0+1, __pyx_t_10);
                 __pyx_t_10 = 0;
-                __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_21, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 224, __pyx_L5_error)
+                __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_21, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 222, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_1);
                 __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
               }
               __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-              __pyx_t_5 = __Pyx_PyString_Format(__pyx_kp_s_s_s_s, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 224, __pyx_L5_error)
+              __pyx_t_5 = __Pyx_PyString_Format(__pyx_kp_s_s_s_s, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 222, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_5);
               __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-              __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_commoutput); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 224, __pyx_L5_error)
+              __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_commoutput); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 222, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_1);
               __pyx_t_21 = NULL;
               __pyx_t_19 = 0;
@@ -9602,7 +9573,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                   __pyx_t_19 = 1;
                 }
               }
-              __pyx_t_10 = PyTuple_New(2+__pyx_t_19); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 224, __pyx_L5_error)
+              __pyx_t_10 = PyTuple_New(2+__pyx_t_19); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 222, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_10);
               if (__pyx_t_21) {
                 __Pyx_GIVEREF(__pyx_t_21); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_21); __pyx_t_21 = NULL;
@@ -9613,43 +9584,43 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               PyTuple_SET_ITEM(__pyx_t_10, 1+__pyx_t_19, __pyx_t_1);
               __pyx_t_5 = 0;
               __pyx_t_1 = 0;
-              __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_t_10, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 224, __pyx_L5_error)
+              __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_t_10, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 222, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_6);
               __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
               __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-              __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 224, __pyx_L5_error)
+              __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 222, __pyx_L5_error)
               __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
               __pyx_t_12 = ((!__pyx_t_14) != 0);
               if (__pyx_t_12) {
 
-                /* "mkinitfs.py":225
+                /* "mkinitfs.py":223
  *                 message.sub_debug('Testing argument', arg)
  *                 if not re.findall('\\s%s\\s' % re.escape(arg), commoutput):
  *                     if command == 'main':             # <<<<<<<<<<<<<<
  *                         message.sub_critical('Argument/applet %s not supported' % arg)
  *                     else:
  */
-                __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_command); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 225, __pyx_L5_error)
+                __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_command); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 223, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_6);
-                __pyx_t_12 = (__Pyx_PyString_Equals(__pyx_t_6, __pyx_n_s_main_2, Py_EQ)); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 225, __pyx_L5_error)
+                __pyx_t_12 = (__Pyx_PyString_Equals(__pyx_t_6, __pyx_n_s_main_2, Py_EQ)); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 223, __pyx_L5_error)
                 __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
                 if (__pyx_t_12) {
 
-                  /* "mkinitfs.py":226
+                  /* "mkinitfs.py":224
  *                 if not re.findall('\\s%s\\s' % re.escape(arg), commoutput):
  *                     if command == 'main':
  *                         message.sub_critical('Argument/applet %s not supported' % arg)             # <<<<<<<<<<<<<<
  *                     else:
  *                         message.sub_critical('Argument %s not supported by %s' % (arg, command))
  */
-                  __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 226, __pyx_L5_error)
+                  __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 224, __pyx_L5_error)
                   __Pyx_GOTREF(__pyx_t_17);
-                  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_sub_critical); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 226, __pyx_L5_error)
+                  __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_sub_critical); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 224, __pyx_L5_error)
                   __Pyx_GOTREF(__pyx_t_10);
                   __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-                  __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_arg); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 226, __pyx_L5_error)
+                  __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_arg); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 224, __pyx_L5_error)
                   __Pyx_GOTREF(__pyx_t_17);
-                  __pyx_t_1 = __Pyx_PyString_Format(__pyx_kp_s_Argument_applet_s_not_supported, __pyx_t_17); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 226, __pyx_L5_error)
+                  __pyx_t_1 = __Pyx_PyString_Format(__pyx_kp_s_Argument_applet_s_not_supported, __pyx_t_17); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 224, __pyx_L5_error)
                   __Pyx_GOTREF(__pyx_t_1);
                   __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
                   __pyx_t_17 = NULL;
@@ -9663,24 +9634,24 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                     }
                   }
                   if (!__pyx_t_17) {
-                    __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 226, __pyx_L5_error)
+                    __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 224, __pyx_L5_error)
                     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
                     __Pyx_GOTREF(__pyx_t_6);
                   } else {
-                    __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 226, __pyx_L5_error)
+                    __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 224, __pyx_L5_error)
                     __Pyx_GOTREF(__pyx_t_5);
                     __Pyx_GIVEREF(__pyx_t_17); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_17); __pyx_t_17 = NULL;
                     __Pyx_GIVEREF(__pyx_t_1);
                     PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_t_1);
                     __pyx_t_1 = 0;
-                    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_5, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 226, __pyx_L5_error)
+                    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_5, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 224, __pyx_L5_error)
                     __Pyx_GOTREF(__pyx_t_6);
                     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
                   }
                   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
                   __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-                  /* "mkinitfs.py":225
+                  /* "mkinitfs.py":223
  *                 message.sub_debug('Testing argument', arg)
  *                 if not re.findall('\\s%s\\s' % re.escape(arg), commoutput):
  *                     if command == 'main':             # <<<<<<<<<<<<<<
@@ -9690,7 +9661,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                   goto __pyx_L46;
                 }
 
-                /* "mkinitfs.py":228
+                /* "mkinitfs.py":226
  *                         message.sub_critical('Argument/applet %s not supported' % arg)
  *                     else:
  *                         message.sub_critical('Argument %s not supported by %s' % (arg, command))             # <<<<<<<<<<<<<<
@@ -9698,16 +9669,16 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  *         if not compatible:
  */
                 /*else*/ {
-                  __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 228, __pyx_L5_error)
+                  __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 226, __pyx_L5_error)
                   __Pyx_GOTREF(__pyx_t_10);
-                  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_sub_critical); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 228, __pyx_L5_error)
+                  __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_sub_critical); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 226, __pyx_L5_error)
                   __Pyx_GOTREF(__pyx_t_5);
                   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-                  __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_arg); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 228, __pyx_L5_error)
+                  __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_arg); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 226, __pyx_L5_error)
                   __Pyx_GOTREF(__pyx_t_10);
-                  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_command); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 228, __pyx_L5_error)
+                  __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_command); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 226, __pyx_L5_error)
                   __Pyx_GOTREF(__pyx_t_1);
-                  __pyx_t_17 = PyTuple_New(2); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 228, __pyx_L5_error)
+                  __pyx_t_17 = PyTuple_New(2); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 226, __pyx_L5_error)
                   __Pyx_GOTREF(__pyx_t_17);
                   __Pyx_GIVEREF(__pyx_t_10);
                   PyTuple_SET_ITEM(__pyx_t_17, 0, __pyx_t_10);
@@ -9715,7 +9686,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                   PyTuple_SET_ITEM(__pyx_t_17, 1, __pyx_t_1);
                   __pyx_t_10 = 0;
                   __pyx_t_1 = 0;
-                  __pyx_t_1 = __Pyx_PyString_Format(__pyx_kp_s_Argument_s_not_supported_by_s, __pyx_t_17); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 228, __pyx_L5_error)
+                  __pyx_t_1 = __Pyx_PyString_Format(__pyx_kp_s_Argument_s_not_supported_by_s, __pyx_t_17); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 226, __pyx_L5_error)
                   __Pyx_GOTREF(__pyx_t_1);
                   __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
                   __pyx_t_17 = NULL;
@@ -9729,17 +9700,17 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                     }
                   }
                   if (!__pyx_t_17) {
-                    __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 228, __pyx_L5_error)
+                    __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 226, __pyx_L5_error)
                     __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
                     __Pyx_GOTREF(__pyx_t_6);
                   } else {
-                    __pyx_t_10 = PyTuple_New(1+1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 228, __pyx_L5_error)
+                    __pyx_t_10 = PyTuple_New(1+1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 226, __pyx_L5_error)
                     __Pyx_GOTREF(__pyx_t_10);
                     __Pyx_GIVEREF(__pyx_t_17); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_17); __pyx_t_17 = NULL;
                     __Pyx_GIVEREF(__pyx_t_1);
                     PyTuple_SET_ITEM(__pyx_t_10, 0+1, __pyx_t_1);
                     __pyx_t_1 = 0;
-                    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_10, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 228, __pyx_L5_error)
+                    __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_10, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 226, __pyx_L5_error)
                     __Pyx_GOTREF(__pyx_t_6);
                     __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
                   }
@@ -9748,16 +9719,16 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                 }
                 __pyx_L46:;
 
-                /* "mkinitfs.py":229
+                /* "mkinitfs.py":227
  *                     else:
  *                         message.sub_critical('Argument %s not supported by %s' % (arg, command))
  *                     compatible = False             # <<<<<<<<<<<<<<
  *         if not compatible:
  *             sys.exit(1)
  */
-                if (PyDict_SetItem(__pyx_d, __pyx_n_s_compatible, Py_False) < 0) __PYX_ERR(0, 229, __pyx_L5_error)
+                if (PyDict_SetItem(__pyx_d, __pyx_n_s_compatible, Py_False) < 0) __PYX_ERR(0, 227, __pyx_L5_error)
 
-                /* "mkinitfs.py":224
+                /* "mkinitfs.py":222
  *             for arg in busycommands[command]:
  *                 message.sub_debug('Testing argument', arg)
  *                 if not re.findall('\\s%s\\s' % re.escape(arg), commoutput):             # <<<<<<<<<<<<<<
@@ -9766,7 +9737,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
               }
 
-              /* "mkinitfs.py":222
+              /* "mkinitfs.py":220
  *             else:
  *                 commoutput = subprocess.check_output((ARGS.busybox, command, '--help'), stderr=subprocess.STDOUT)
  *             for arg in busycommands[command]:             # <<<<<<<<<<<<<<
@@ -9776,7 +9747,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             }
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-            /* "mkinitfs.py":216
+            /* "mkinitfs.py":214
  *         }
  *         compatible = True
  *         for command in busycommands:             # <<<<<<<<<<<<<<
@@ -9786,38 +9757,38 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           }
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-          /* "mkinitfs.py":230
+          /* "mkinitfs.py":228
  *                         message.sub_critical('Argument %s not supported by %s' % (arg, command))
  *                     compatible = False
  *         if not compatible:             # <<<<<<<<<<<<<<
  *             sys.exit(1)
  *         sys.exit(0)
  */
-          __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_compatible); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 230, __pyx_L5_error)
+          __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_compatible); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 228, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_9);
-          __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_9); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 230, __pyx_L5_error)
+          __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_9); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 228, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
           __pyx_t_14 = ((!__pyx_t_12) != 0);
           if (__pyx_t_14) {
 
-            /* "mkinitfs.py":231
+            /* "mkinitfs.py":229
  *                     compatible = False
  *         if not compatible:
  *             sys.exit(1)             # <<<<<<<<<<<<<<
  *         sys.exit(0)
  * 
  */
-            __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 231, __pyx_L5_error)
+            __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 229, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_9);
-            __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_exit_2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 231, __pyx_L5_error)
+            __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_exit_2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 229, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_11);
             __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-            __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__42, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 231, __pyx_L5_error)
+            __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__42, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 229, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_9);
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
             __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-            /* "mkinitfs.py":230
+            /* "mkinitfs.py":228
  *                         message.sub_critical('Argument %s not supported by %s' % (arg, command))
  *                     compatible = False
  *         if not compatible:             # <<<<<<<<<<<<<<
@@ -9826,24 +9797,24 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
           }
 
-          /* "mkinitfs.py":232
+          /* "mkinitfs.py":230
  *         if not compatible:
  *             sys.exit(1)
  *         sys.exit(0)             # <<<<<<<<<<<<<<
  * 
  *     message.sub_info('Copying root overlay')
  */
-          __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 232, __pyx_L5_error)
+          __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 230, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_9);
-          __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_exit_2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 232, __pyx_L5_error)
+          __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_exit_2); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 230, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_11);
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-          __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__43, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 232, __pyx_L5_error)
+          __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__43, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 230, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-          /* "mkinitfs.py":196
+          /* "mkinitfs.py":194
  *     message.sub_info('RECOVERY', ARGS.recovery)
  * 
  *     if ARGS.busytest:             # <<<<<<<<<<<<<<
@@ -9852,67 +9823,67 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
         }
 
-        /* "mkinitfs.py":234
+        /* "mkinitfs.py":232
  *         sys.exit(0)
  * 
  *     message.sub_info('Copying root overlay')             # <<<<<<<<<<<<<<
  *     if os.path.isdir('/etc/mkinitfs/root'):
  *         for spath in misc.list_all('/etc/mkinitfs/root'):
  */
-        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 234, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 232, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
-        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 234, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 232, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__44, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 234, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__44, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 232, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-        /* "mkinitfs.py":235
+        /* "mkinitfs.py":233
  * 
  *     message.sub_info('Copying root overlay')
  *     if os.path.isdir('/etc/mkinitfs/root'):             # <<<<<<<<<<<<<<
  *         for spath in misc.list_all('/etc/mkinitfs/root'):
  *             copy_item(spath)
  */
-        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 235, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 233, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
-        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_path); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 235, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_path); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 233, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_isdir); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 235, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_isdir); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 233, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__45, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 235, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__45, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 233, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_11); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 235, __pyx_L5_error)
+        __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_11); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 233, __pyx_L5_error)
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         if (__pyx_t_14) {
 
-          /* "mkinitfs.py":236
+          /* "mkinitfs.py":234
  *     message.sub_info('Copying root overlay')
  *     if os.path.isdir('/etc/mkinitfs/root'):
  *         for spath in misc.list_all('/etc/mkinitfs/root'):             # <<<<<<<<<<<<<<
  *             copy_item(spath)
  *     else:
  */
-          __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 236, __pyx_L5_error)
+          __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 234, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_11);
-          __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_list_all); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 236, __pyx_L5_error)
+          __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_list_all); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 234, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-          __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__46, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 236, __pyx_L5_error)
+          __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__46, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 234, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_11);
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
           if (likely(PyList_CheckExact(__pyx_t_11)) || PyTuple_CheckExact(__pyx_t_11)) {
             __pyx_t_9 = __pyx_t_11; __Pyx_INCREF(__pyx_t_9); __pyx_t_7 = 0;
             __pyx_t_8 = NULL;
           } else {
-            __pyx_t_7 = -1; __pyx_t_9 = PyObject_GetIter(__pyx_t_11); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 236, __pyx_L5_error)
+            __pyx_t_7 = -1; __pyx_t_9 = PyObject_GetIter(__pyx_t_11); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 234, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_9);
-            __pyx_t_8 = Py_TYPE(__pyx_t_9)->tp_iternext; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 236, __pyx_L5_error)
+            __pyx_t_8 = Py_TYPE(__pyx_t_9)->tp_iternext; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 234, __pyx_L5_error)
           }
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
           for (;;) {
@@ -9920,17 +9891,17 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               if (likely(PyList_CheckExact(__pyx_t_9))) {
                 if (__pyx_t_7 >= PyList_GET_SIZE(__pyx_t_9)) break;
                 #if CYTHON_COMPILING_IN_CPYTHON
-                __pyx_t_11 = PyList_GET_ITEM(__pyx_t_9, __pyx_t_7); __Pyx_INCREF(__pyx_t_11); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 236, __pyx_L5_error)
+                __pyx_t_11 = PyList_GET_ITEM(__pyx_t_9, __pyx_t_7); __Pyx_INCREF(__pyx_t_11); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 234, __pyx_L5_error)
                 #else
-                __pyx_t_11 = PySequence_ITEM(__pyx_t_9, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 236, __pyx_L5_error)
+                __pyx_t_11 = PySequence_ITEM(__pyx_t_9, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 234, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_11);
                 #endif
               } else {
                 if (__pyx_t_7 >= PyTuple_GET_SIZE(__pyx_t_9)) break;
                 #if CYTHON_COMPILING_IN_CPYTHON
-                __pyx_t_11 = PyTuple_GET_ITEM(__pyx_t_9, __pyx_t_7); __Pyx_INCREF(__pyx_t_11); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 236, __pyx_L5_error)
+                __pyx_t_11 = PyTuple_GET_ITEM(__pyx_t_9, __pyx_t_7); __Pyx_INCREF(__pyx_t_11); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 234, __pyx_L5_error)
                 #else
-                __pyx_t_11 = PySequence_ITEM(__pyx_t_9, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 236, __pyx_L5_error)
+                __pyx_t_11 = PySequence_ITEM(__pyx_t_9, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 234, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_11);
                 #endif
               }
@@ -9940,25 +9911,25 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                 PyObject* exc_type = PyErr_Occurred();
                 if (exc_type) {
                   if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-                  else __PYX_ERR(0, 236, __pyx_L5_error)
+                  else __PYX_ERR(0, 234, __pyx_L5_error)
                 }
                 break;
               }
               __Pyx_GOTREF(__pyx_t_11);
             }
-            if (PyDict_SetItem(__pyx_d, __pyx_n_s_spath, __pyx_t_11) < 0) __PYX_ERR(0, 236, __pyx_L5_error)
+            if (PyDict_SetItem(__pyx_d, __pyx_n_s_spath, __pyx_t_11) < 0) __PYX_ERR(0, 234, __pyx_L5_error)
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-            /* "mkinitfs.py":237
+            /* "mkinitfs.py":235
  *     if os.path.isdir('/etc/mkinitfs/root'):
  *         for spath in misc.list_all('/etc/mkinitfs/root'):
  *             copy_item(spath)             # <<<<<<<<<<<<<<
  *     else:
  *         message.sub_warning('Root filesystem overlay missing')
  */
-            __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_copy_item); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 237, __pyx_L5_error)
+            __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_copy_item); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 235, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_6);
-            __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_spath); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 237, __pyx_L5_error)
+            __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_spath); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 235, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_5);
             __pyx_t_10 = NULL;
             if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_6))) {
@@ -9971,24 +9942,24 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               }
             }
             if (!__pyx_t_10) {
-              __pyx_t_11 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_5); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 237, __pyx_L5_error)
+              __pyx_t_11 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_5); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 235, __pyx_L5_error)
               __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
               __Pyx_GOTREF(__pyx_t_11);
             } else {
-              __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 237, __pyx_L5_error)
+              __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 235, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_1);
               __Pyx_GIVEREF(__pyx_t_10); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_10); __pyx_t_10 = NULL;
               __Pyx_GIVEREF(__pyx_t_5);
               PyTuple_SET_ITEM(__pyx_t_1, 0+1, __pyx_t_5);
               __pyx_t_5 = 0;
-              __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_1, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 237, __pyx_L5_error)
+              __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_1, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 235, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_11);
               __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
             }
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-            /* "mkinitfs.py":236
+            /* "mkinitfs.py":234
  *     message.sub_info('Copying root overlay')
  *     if os.path.isdir('/etc/mkinitfs/root'):
  *         for spath in misc.list_all('/etc/mkinitfs/root'):             # <<<<<<<<<<<<<<
@@ -9998,7 +9969,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           }
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-          /* "mkinitfs.py":235
+          /* "mkinitfs.py":233
  * 
  *     message.sub_info('Copying root overlay')
  *     if os.path.isdir('/etc/mkinitfs/root'):             # <<<<<<<<<<<<<<
@@ -10008,7 +9979,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           goto __pyx_L48;
         }
 
-        /* "mkinitfs.py":239
+        /* "mkinitfs.py":237
  *             copy_item(spath)
  *     else:
  *         message.sub_warning('Root filesystem overlay missing')             # <<<<<<<<<<<<<<
@@ -10016,64 +9987,64 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  *     message.sub_info('Installing Busybox')
  */
         /*else*/ {
-          __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 239, __pyx_L5_error)
+          __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 237, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_9);
-          __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_sub_warning); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 239, __pyx_L5_error)
+          __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_sub_warning); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 237, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_11);
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-          __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__47, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 239, __pyx_L5_error)
+          __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__47, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 237, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         }
         __pyx_L48:;
 
-        /* "mkinitfs.py":241
+        /* "mkinitfs.py":239
  *         message.sub_warning('Root filesystem overlay missing')
  * 
  *     message.sub_info('Installing Busybox')             # <<<<<<<<<<<<<<
  *     message.sub_debug('Installing binary')
  *     copy_item(ARGS.busybox)
  */
-        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 241, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 239, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
-        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 241, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 239, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__48, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 241, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__48, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 239, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-        /* "mkinitfs.py":242
+        /* "mkinitfs.py":240
  * 
  *     message.sub_info('Installing Busybox')
  *     message.sub_debug('Installing binary')             # <<<<<<<<<<<<<<
  *     copy_item(ARGS.busybox)
  *     message.sub_debug('Creating symlinks')
  */
-        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 242, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 240, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
-        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 242, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 240, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__49, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 242, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__49, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 240, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-        /* "mkinitfs.py":243
+        /* "mkinitfs.py":241
  *     message.sub_info('Installing Busybox')
  *     message.sub_debug('Installing binary')
  *     copy_item(ARGS.busybox)             # <<<<<<<<<<<<<<
  *     message.sub_debug('Creating symlinks')
  *     misc.system_command((ARGS.busybox, '--install', '-s', '%s/bin' % ARGS.tmp))
  */
-        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_copy_item); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 243, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_copy_item); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 241, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
-        __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 243, __pyx_L5_error)
+        __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 241, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_busybox); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 243, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_busybox); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 241, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __pyx_t_6 = NULL;
@@ -10087,66 +10058,66 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           }
         }
         if (!__pyx_t_6) {
-          __pyx_t_9 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 243, __pyx_L5_error)
+          __pyx_t_9 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 241, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __Pyx_GOTREF(__pyx_t_9);
         } else {
-          __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 243, __pyx_L5_error)
+          __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 241, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_6); __pyx_t_6 = NULL;
           __Pyx_GIVEREF(__pyx_t_1);
           PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_t_1);
           __pyx_t_1 = 0;
-          __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_5, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 243, __pyx_L5_error)
+          __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_5, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 241, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         }
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-        /* "mkinitfs.py":244
+        /* "mkinitfs.py":242
  *     message.sub_debug('Installing binary')
  *     copy_item(ARGS.busybox)
  *     message.sub_debug('Creating symlinks')             # <<<<<<<<<<<<<<
  *     misc.system_command((ARGS.busybox, '--install', '-s', '%s/bin' % ARGS.tmp))
  * 
  */
-        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 244, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 242, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
-        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 244, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 242, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__50, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 244, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__50, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 242, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-        /* "mkinitfs.py":245
+        /* "mkinitfs.py":243
  *     copy_item(ARGS.busybox)
  *     message.sub_debug('Creating symlinks')
  *     misc.system_command((ARGS.busybox, '--install', '-s', '%s/bin' % ARGS.tmp))             # <<<<<<<<<<<<<<
  * 
  *     message.sub_info('Copying files')
  */
-        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 245, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 243, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
-        __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_system_command); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 245, __pyx_L5_error)
+        __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_system_command); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 243, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 245, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 243, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
-        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_busybox); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 245, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_busybox); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 243, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 245, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 243, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
-        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_tmp); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 245, __pyx_L5_error)
+        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_tmp); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 243, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        __pyx_t_11 = __Pyx_PyString_Format(__pyx_kp_s_s_bin, __pyx_t_6); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 245, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_PyString_Format(__pyx_kp_s_s_bin, __pyx_t_6); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 243, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        __pyx_t_6 = PyTuple_New(4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 245, __pyx_L5_error)
+        __pyx_t_6 = PyTuple_New(4); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 243, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_GIVEREF(__pyx_t_1);
         PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_1);
@@ -10171,84 +10142,84 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           }
         }
         if (!__pyx_t_11) {
-          __pyx_t_9 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 245, __pyx_L5_error)
+          __pyx_t_9 = __Pyx_PyObject_CallOneArg(__pyx_t_5, __pyx_t_6); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 243, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_GOTREF(__pyx_t_9);
         } else {
-          __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 245, __pyx_L5_error)
+          __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 243, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_GIVEREF(__pyx_t_11); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_11); __pyx_t_11 = NULL;
           __Pyx_GIVEREF(__pyx_t_6);
           PyTuple_SET_ITEM(__pyx_t_1, 0+1, __pyx_t_6);
           __pyx_t_6 = 0;
-          __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_1, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 245, __pyx_L5_error)
+          __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_1, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 243, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         }
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-        /* "mkinitfs.py":247
+        /* "mkinitfs.py":245
  *     misc.system_command((ARGS.busybox, '--install', '-s', '%s/bin' % ARGS.tmp))
  * 
  *     message.sub_info('Copying files')             # <<<<<<<<<<<<<<
  *     if os.path.isdir('/etc/mkinitfs/files'):
  *         for sfile in misc.list_files('/etc/mkinitfs/files'):
  */
-        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 247, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 245, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
-        __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 247, __pyx_L5_error)
+        __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 245, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__51, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 247, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__51, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 245, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-        /* "mkinitfs.py":248
+        /* "mkinitfs.py":246
  * 
  *     message.sub_info('Copying files')
  *     if os.path.isdir('/etc/mkinitfs/files'):             # <<<<<<<<<<<<<<
  *         for sfile in misc.list_files('/etc/mkinitfs/files'):
  *             if not sfile.endswith('.conf'):
  */
-        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 248, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 246, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
-        __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_path); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 248, __pyx_L5_error)
+        __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_path); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 246, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_isdir); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 248, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_isdir); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 246, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-        __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__52, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 248, __pyx_L5_error)
+        __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__52, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 246, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 248, __pyx_L5_error)
+        __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 246, __pyx_L5_error)
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         if (__pyx_t_14) {
 
-          /* "mkinitfs.py":249
+          /* "mkinitfs.py":247
  *     message.sub_info('Copying files')
  *     if os.path.isdir('/etc/mkinitfs/files'):
  *         for sfile in misc.list_files('/etc/mkinitfs/files'):             # <<<<<<<<<<<<<<
  *             if not sfile.endswith('.conf'):
  *                 message.sub_debug('Skipping', sfile)
  */
-          __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 249, __pyx_L5_error)
+          __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 247, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_5);
-          __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_list_files); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 249, __pyx_L5_error)
+          __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_list_files); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 247, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__53, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 249, __pyx_L5_error)
+          __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__53, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 247, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
           if (likely(PyList_CheckExact(__pyx_t_5)) || PyTuple_CheckExact(__pyx_t_5)) {
             __pyx_t_9 = __pyx_t_5; __Pyx_INCREF(__pyx_t_9); __pyx_t_7 = 0;
             __pyx_t_8 = NULL;
           } else {
-            __pyx_t_7 = -1; __pyx_t_9 = PyObject_GetIter(__pyx_t_5); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 249, __pyx_L5_error)
+            __pyx_t_7 = -1; __pyx_t_9 = PyObject_GetIter(__pyx_t_5); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 247, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_9);
-            __pyx_t_8 = Py_TYPE(__pyx_t_9)->tp_iternext; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 249, __pyx_L5_error)
+            __pyx_t_8 = Py_TYPE(__pyx_t_9)->tp_iternext; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 247, __pyx_L5_error)
           }
           __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
           for (;;) {
@@ -10256,17 +10227,17 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               if (likely(PyList_CheckExact(__pyx_t_9))) {
                 if (__pyx_t_7 >= PyList_GET_SIZE(__pyx_t_9)) break;
                 #if CYTHON_COMPILING_IN_CPYTHON
-                __pyx_t_5 = PyList_GET_ITEM(__pyx_t_9, __pyx_t_7); __Pyx_INCREF(__pyx_t_5); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 249, __pyx_L5_error)
+                __pyx_t_5 = PyList_GET_ITEM(__pyx_t_9, __pyx_t_7); __Pyx_INCREF(__pyx_t_5); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 247, __pyx_L5_error)
                 #else
-                __pyx_t_5 = PySequence_ITEM(__pyx_t_9, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 249, __pyx_L5_error)
+                __pyx_t_5 = PySequence_ITEM(__pyx_t_9, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 247, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_5);
                 #endif
               } else {
                 if (__pyx_t_7 >= PyTuple_GET_SIZE(__pyx_t_9)) break;
                 #if CYTHON_COMPILING_IN_CPYTHON
-                __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_9, __pyx_t_7); __Pyx_INCREF(__pyx_t_5); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 249, __pyx_L5_error)
+                __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_9, __pyx_t_7); __Pyx_INCREF(__pyx_t_5); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 247, __pyx_L5_error)
                 #else
-                __pyx_t_5 = PySequence_ITEM(__pyx_t_9, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 249, __pyx_L5_error)
+                __pyx_t_5 = PySequence_ITEM(__pyx_t_9, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 247, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_5);
                 #endif
               }
@@ -10276,48 +10247,48 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                 PyObject* exc_type = PyErr_Occurred();
                 if (exc_type) {
                   if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-                  else __PYX_ERR(0, 249, __pyx_L5_error)
+                  else __PYX_ERR(0, 247, __pyx_L5_error)
                 }
                 break;
               }
               __Pyx_GOTREF(__pyx_t_5);
             }
-            if (PyDict_SetItem(__pyx_d, __pyx_n_s_sfile, __pyx_t_5) < 0) __PYX_ERR(0, 249, __pyx_L5_error)
+            if (PyDict_SetItem(__pyx_d, __pyx_n_s_sfile, __pyx_t_5) < 0) __PYX_ERR(0, 247, __pyx_L5_error)
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-            /* "mkinitfs.py":250
+            /* "mkinitfs.py":248
  *     if os.path.isdir('/etc/mkinitfs/files'):
  *         for sfile in misc.list_files('/etc/mkinitfs/files'):
  *             if not sfile.endswith('.conf'):             # <<<<<<<<<<<<<<
  *                 message.sub_debug('Skipping', sfile)
  *                 continue
  */
-            __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 250, __pyx_L5_error)
+            __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 248, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_5);
-            __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_endswith); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 250, __pyx_L5_error)
+            __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_endswith); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 248, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__54, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 250, __pyx_L5_error)
+            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__54, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 248, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-            __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 250, __pyx_L5_error)
+            __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 248, __pyx_L5_error)
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
             __pyx_t_12 = ((!__pyx_t_14) != 0);
             if (__pyx_t_12) {
 
-              /* "mkinitfs.py":251
+              /* "mkinitfs.py":249
  *         for sfile in misc.list_files('/etc/mkinitfs/files'):
  *             if not sfile.endswith('.conf'):
  *                 message.sub_debug('Skipping', sfile)             # <<<<<<<<<<<<<<
  *                 continue
  *             message.sub_debug('Reading', sfile)
  */
-              __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 251, __pyx_L5_error)
+              __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 249, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_1);
-              __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 251, __pyx_L5_error)
+              __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 249, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_6);
               __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-              __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 251, __pyx_L5_error)
+              __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 249, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_1);
               __pyx_t_11 = NULL;
               __pyx_t_16 = 0;
@@ -10331,7 +10302,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                   __pyx_t_16 = 1;
                 }
               }
-              __pyx_t_10 = PyTuple_New(2+__pyx_t_16); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 251, __pyx_L5_error)
+              __pyx_t_10 = PyTuple_New(2+__pyx_t_16); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 249, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_10);
               if (__pyx_t_11) {
                 __Pyx_GIVEREF(__pyx_t_11); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_11); __pyx_t_11 = NULL;
@@ -10342,13 +10313,13 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               __Pyx_GIVEREF(__pyx_t_1);
               PyTuple_SET_ITEM(__pyx_t_10, 1+__pyx_t_16, __pyx_t_1);
               __pyx_t_1 = 0;
-              __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_10, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 251, __pyx_L5_error)
+              __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_10, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 249, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_5);
               __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
               __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
               __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-              /* "mkinitfs.py":252
+              /* "mkinitfs.py":250
  *             if not sfile.endswith('.conf'):
  *                 message.sub_debug('Skipping', sfile)
  *                 continue             # <<<<<<<<<<<<<<
@@ -10357,7 +10328,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
               goto __pyx_L52_continue;
 
-              /* "mkinitfs.py":250
+              /* "mkinitfs.py":248
  *     if os.path.isdir('/etc/mkinitfs/files'):
  *         for sfile in misc.list_files('/etc/mkinitfs/files'):
  *             if not sfile.endswith('.conf'):             # <<<<<<<<<<<<<<
@@ -10366,19 +10337,19 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
             }
 
-            /* "mkinitfs.py":253
+            /* "mkinitfs.py":251
  *                 message.sub_debug('Skipping', sfile)
  *                 continue
  *             message.sub_debug('Reading', sfile)             # <<<<<<<<<<<<<<
  *             for line in misc.file_readsmart(sfile):
  *                 items = glob.glob(line)
  */
-            __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 253, __pyx_L5_error)
+            __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 251, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_6);
-            __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 253, __pyx_L5_error)
+            __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 251, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_10);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-            __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 253, __pyx_L5_error)
+            __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 251, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_6);
             __pyx_t_1 = NULL;
             __pyx_t_16 = 0;
@@ -10392,7 +10363,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                 __pyx_t_16 = 1;
               }
             }
-            __pyx_t_11 = PyTuple_New(2+__pyx_t_16); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 253, __pyx_L5_error)
+            __pyx_t_11 = PyTuple_New(2+__pyx_t_16); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 251, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_11);
             if (__pyx_t_1) {
               __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_1); __pyx_t_1 = NULL;
@@ -10403,25 +10374,25 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             __Pyx_GIVEREF(__pyx_t_6);
             PyTuple_SET_ITEM(__pyx_t_11, 1+__pyx_t_16, __pyx_t_6);
             __pyx_t_6 = 0;
-            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_11, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 253, __pyx_L5_error)
+            __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_11, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 251, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
             __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-            /* "mkinitfs.py":254
+            /* "mkinitfs.py":252
  *                 continue
  *             message.sub_debug('Reading', sfile)
  *             for line in misc.file_readsmart(sfile):             # <<<<<<<<<<<<<<
  *                 items = glob.glob(line)
  *                 # glob returns null and the warning in copy_item() may not be
  */
-            __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 254, __pyx_L5_error)
+            __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 252, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_10);
-            __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_file_readsmart); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 254, __pyx_L5_error)
+            __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_file_readsmart); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 252, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_11);
             __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-            __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 254, __pyx_L5_error)
+            __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 252, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_10);
             __pyx_t_6 = NULL;
             if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_11))) {
@@ -10434,17 +10405,17 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               }
             }
             if (!__pyx_t_6) {
-              __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_10); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 254, __pyx_L5_error)
+              __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_10); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 252, __pyx_L5_error)
               __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
               __Pyx_GOTREF(__pyx_t_5);
             } else {
-              __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 254, __pyx_L5_error)
+              __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 252, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_1);
               __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_6); __pyx_t_6 = NULL;
               __Pyx_GIVEREF(__pyx_t_10);
               PyTuple_SET_ITEM(__pyx_t_1, 0+1, __pyx_t_10);
               __pyx_t_10 = 0;
-              __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_1, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 254, __pyx_L5_error)
+              __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_1, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 252, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_5);
               __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
             }
@@ -10453,9 +10424,9 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               __pyx_t_11 = __pyx_t_5; __Pyx_INCREF(__pyx_t_11); __pyx_t_16 = 0;
               __pyx_t_18 = NULL;
             } else {
-              __pyx_t_16 = -1; __pyx_t_11 = PyObject_GetIter(__pyx_t_5); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 254, __pyx_L5_error)
+              __pyx_t_16 = -1; __pyx_t_11 = PyObject_GetIter(__pyx_t_5); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 252, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_11);
-              __pyx_t_18 = Py_TYPE(__pyx_t_11)->tp_iternext; if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 254, __pyx_L5_error)
+              __pyx_t_18 = Py_TYPE(__pyx_t_11)->tp_iternext; if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 252, __pyx_L5_error)
             }
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
             for (;;) {
@@ -10463,17 +10434,17 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                 if (likely(PyList_CheckExact(__pyx_t_11))) {
                   if (__pyx_t_16 >= PyList_GET_SIZE(__pyx_t_11)) break;
                   #if CYTHON_COMPILING_IN_CPYTHON
-                  __pyx_t_5 = PyList_GET_ITEM(__pyx_t_11, __pyx_t_16); __Pyx_INCREF(__pyx_t_5); __pyx_t_16++; if (unlikely(0 < 0)) __PYX_ERR(0, 254, __pyx_L5_error)
+                  __pyx_t_5 = PyList_GET_ITEM(__pyx_t_11, __pyx_t_16); __Pyx_INCREF(__pyx_t_5); __pyx_t_16++; if (unlikely(0 < 0)) __PYX_ERR(0, 252, __pyx_L5_error)
                   #else
-                  __pyx_t_5 = PySequence_ITEM(__pyx_t_11, __pyx_t_16); __pyx_t_16++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 254, __pyx_L5_error)
+                  __pyx_t_5 = PySequence_ITEM(__pyx_t_11, __pyx_t_16); __pyx_t_16++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 252, __pyx_L5_error)
                   __Pyx_GOTREF(__pyx_t_5);
                   #endif
                 } else {
                   if (__pyx_t_16 >= PyTuple_GET_SIZE(__pyx_t_11)) break;
                   #if CYTHON_COMPILING_IN_CPYTHON
-                  __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_11, __pyx_t_16); __Pyx_INCREF(__pyx_t_5); __pyx_t_16++; if (unlikely(0 < 0)) __PYX_ERR(0, 254, __pyx_L5_error)
+                  __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_11, __pyx_t_16); __Pyx_INCREF(__pyx_t_5); __pyx_t_16++; if (unlikely(0 < 0)) __PYX_ERR(0, 252, __pyx_L5_error)
                   #else
-                  __pyx_t_5 = PySequence_ITEM(__pyx_t_11, __pyx_t_16); __pyx_t_16++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 254, __pyx_L5_error)
+                  __pyx_t_5 = PySequence_ITEM(__pyx_t_11, __pyx_t_16); __pyx_t_16++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 252, __pyx_L5_error)
                   __Pyx_GOTREF(__pyx_t_5);
                   #endif
                 }
@@ -10483,28 +10454,28 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                   PyObject* exc_type = PyErr_Occurred();
                   if (exc_type) {
                     if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-                    else __PYX_ERR(0, 254, __pyx_L5_error)
+                    else __PYX_ERR(0, 252, __pyx_L5_error)
                   }
                   break;
                 }
                 __Pyx_GOTREF(__pyx_t_5);
               }
-              if (PyDict_SetItem(__pyx_d, __pyx_n_s_line, __pyx_t_5) < 0) __PYX_ERR(0, 254, __pyx_L5_error)
+              if (PyDict_SetItem(__pyx_d, __pyx_n_s_line, __pyx_t_5) < 0) __PYX_ERR(0, 252, __pyx_L5_error)
               __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-              /* "mkinitfs.py":255
+              /* "mkinitfs.py":253
  *             message.sub_debug('Reading', sfile)
  *             for line in misc.file_readsmart(sfile):
  *                 items = glob.glob(line)             # <<<<<<<<<<<<<<
  *                 # glob returns null and the warning in copy_item() may not be
  *                 # reached if iterating directly over the value fom glob.glob()
  */
-              __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_glob); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 255, __pyx_L5_error)
+              __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_glob); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 253, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_1);
-              __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_glob); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 255, __pyx_L5_error)
+              __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_glob); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 253, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_10);
               __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-              __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_line); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 255, __pyx_L5_error)
+              __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_line); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 253, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_1);
               __pyx_t_6 = NULL;
               if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_10))) {
@@ -10517,51 +10488,51 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                 }
               }
               if (!__pyx_t_6) {
-                __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 255, __pyx_L5_error)
+                __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 253, __pyx_L5_error)
                 __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
                 __Pyx_GOTREF(__pyx_t_5);
               } else {
-                __pyx_t_17 = PyTuple_New(1+1); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 255, __pyx_L5_error)
+                __pyx_t_17 = PyTuple_New(1+1); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 253, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_17);
                 __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_17, 0, __pyx_t_6); __pyx_t_6 = NULL;
                 __Pyx_GIVEREF(__pyx_t_1);
                 PyTuple_SET_ITEM(__pyx_t_17, 0+1, __pyx_t_1);
                 __pyx_t_1 = 0;
-                __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_17, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 255, __pyx_L5_error)
+                __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_17, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 253, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_5);
                 __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
               }
               __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-              if (PyDict_SetItem(__pyx_d, __pyx_n_s_items, __pyx_t_5) < 0) __PYX_ERR(0, 255, __pyx_L5_error)
+              if (PyDict_SetItem(__pyx_d, __pyx_n_s_items, __pyx_t_5) < 0) __PYX_ERR(0, 253, __pyx_L5_error)
               __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-              /* "mkinitfs.py":258
+              /* "mkinitfs.py":256
  *                 # glob returns null and the warning in copy_item() may not be
  *                 # reached if iterating directly over the value fom glob.glob()
  *                 if not items:             # <<<<<<<<<<<<<<
  *                     message.warning('File or directory does not exist', line)
  *                     continue
  */
-              __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_items); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 258, __pyx_L5_error)
+              __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_items); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 256, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_5);
-              __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 258, __pyx_L5_error)
+              __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_5); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 256, __pyx_L5_error)
               __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
               __pyx_t_14 = ((!__pyx_t_12) != 0);
               if (__pyx_t_14) {
 
-                /* "mkinitfs.py":259
+                /* "mkinitfs.py":257
  *                 # reached if iterating directly over the value fom glob.glob()
  *                 if not items:
  *                     message.warning('File or directory does not exist', line)             # <<<<<<<<<<<<<<
  *                     continue
  *                 for item in items:
  */
-                __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 259, __pyx_L5_error)
+                __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 257, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_10);
-                __pyx_t_17 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_warning); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 259, __pyx_L5_error)
+                __pyx_t_17 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_warning); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 257, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_17);
                 __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-                __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_line); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 259, __pyx_L5_error)
+                __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_line); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 257, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_10);
                 __pyx_t_1 = NULL;
                 __pyx_t_19 = 0;
@@ -10575,7 +10546,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                     __pyx_t_19 = 1;
                   }
                 }
-                __pyx_t_6 = PyTuple_New(2+__pyx_t_19); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 259, __pyx_L5_error)
+                __pyx_t_6 = PyTuple_New(2+__pyx_t_19); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 257, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_6);
                 if (__pyx_t_1) {
                   __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_1); __pyx_t_1 = NULL;
@@ -10586,13 +10557,13 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                 __Pyx_GIVEREF(__pyx_t_10);
                 PyTuple_SET_ITEM(__pyx_t_6, 1+__pyx_t_19, __pyx_t_10);
                 __pyx_t_10 = 0;
-                __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_t_6, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 259, __pyx_L5_error)
+                __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_t_6, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 257, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_5);
                 __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
                 __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
                 __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-                /* "mkinitfs.py":260
+                /* "mkinitfs.py":258
  *                 if not items:
  *                     message.warning('File or directory does not exist', line)
  *                     continue             # <<<<<<<<<<<<<<
@@ -10601,7 +10572,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
                 goto __pyx_L55_continue;
 
-                /* "mkinitfs.py":258
+                /* "mkinitfs.py":256
  *                 # glob returns null and the warning in copy_item() may not be
  *                 # reached if iterating directly over the value fom glob.glob()
  *                 if not items:             # <<<<<<<<<<<<<<
@@ -10610,22 +10581,22 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
               }
 
-              /* "mkinitfs.py":261
+              /* "mkinitfs.py":259
  *                     message.warning('File or directory does not exist', line)
  *                     continue
  *                 for item in items:             # <<<<<<<<<<<<<<
  *                     copy_item(item)
  * 
  */
-              __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_items); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 261, __pyx_L5_error)
+              __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_items); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 259, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_5);
               if (likely(PyList_CheckExact(__pyx_t_5)) || PyTuple_CheckExact(__pyx_t_5)) {
                 __pyx_t_17 = __pyx_t_5; __Pyx_INCREF(__pyx_t_17); __pyx_t_19 = 0;
                 __pyx_t_22 = NULL;
               } else {
-                __pyx_t_19 = -1; __pyx_t_17 = PyObject_GetIter(__pyx_t_5); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 261, __pyx_L5_error)
+                __pyx_t_19 = -1; __pyx_t_17 = PyObject_GetIter(__pyx_t_5); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 259, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_17);
-                __pyx_t_22 = Py_TYPE(__pyx_t_17)->tp_iternext; if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 261, __pyx_L5_error)
+                __pyx_t_22 = Py_TYPE(__pyx_t_17)->tp_iternext; if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 259, __pyx_L5_error)
               }
               __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
               for (;;) {
@@ -10633,17 +10604,17 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                   if (likely(PyList_CheckExact(__pyx_t_17))) {
                     if (__pyx_t_19 >= PyList_GET_SIZE(__pyx_t_17)) break;
                     #if CYTHON_COMPILING_IN_CPYTHON
-                    __pyx_t_5 = PyList_GET_ITEM(__pyx_t_17, __pyx_t_19); __Pyx_INCREF(__pyx_t_5); __pyx_t_19++; if (unlikely(0 < 0)) __PYX_ERR(0, 261, __pyx_L5_error)
+                    __pyx_t_5 = PyList_GET_ITEM(__pyx_t_17, __pyx_t_19); __Pyx_INCREF(__pyx_t_5); __pyx_t_19++; if (unlikely(0 < 0)) __PYX_ERR(0, 259, __pyx_L5_error)
                     #else
-                    __pyx_t_5 = PySequence_ITEM(__pyx_t_17, __pyx_t_19); __pyx_t_19++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 261, __pyx_L5_error)
+                    __pyx_t_5 = PySequence_ITEM(__pyx_t_17, __pyx_t_19); __pyx_t_19++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 259, __pyx_L5_error)
                     __Pyx_GOTREF(__pyx_t_5);
                     #endif
                   } else {
                     if (__pyx_t_19 >= PyTuple_GET_SIZE(__pyx_t_17)) break;
                     #if CYTHON_COMPILING_IN_CPYTHON
-                    __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_17, __pyx_t_19); __Pyx_INCREF(__pyx_t_5); __pyx_t_19++; if (unlikely(0 < 0)) __PYX_ERR(0, 261, __pyx_L5_error)
+                    __pyx_t_5 = PyTuple_GET_ITEM(__pyx_t_17, __pyx_t_19); __Pyx_INCREF(__pyx_t_5); __pyx_t_19++; if (unlikely(0 < 0)) __PYX_ERR(0, 259, __pyx_L5_error)
                     #else
-                    __pyx_t_5 = PySequence_ITEM(__pyx_t_17, __pyx_t_19); __pyx_t_19++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 261, __pyx_L5_error)
+                    __pyx_t_5 = PySequence_ITEM(__pyx_t_17, __pyx_t_19); __pyx_t_19++; if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 259, __pyx_L5_error)
                     __Pyx_GOTREF(__pyx_t_5);
                     #endif
                   }
@@ -10653,25 +10624,25 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                     PyObject* exc_type = PyErr_Occurred();
                     if (exc_type) {
                       if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-                      else __PYX_ERR(0, 261, __pyx_L5_error)
+                      else __PYX_ERR(0, 259, __pyx_L5_error)
                     }
                     break;
                   }
                   __Pyx_GOTREF(__pyx_t_5);
                 }
-                if (PyDict_SetItem(__pyx_d, __pyx_n_s_item, __pyx_t_5) < 0) __PYX_ERR(0, 261, __pyx_L5_error)
+                if (PyDict_SetItem(__pyx_d, __pyx_n_s_item, __pyx_t_5) < 0) __PYX_ERR(0, 259, __pyx_L5_error)
                 __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-                /* "mkinitfs.py":262
+                /* "mkinitfs.py":260
  *                     continue
  *                 for item in items:
  *                     copy_item(item)             # <<<<<<<<<<<<<<
  * 
  *     message.sub_info('Copying modules')
  */
-                __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_copy_item); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 262, __pyx_L5_error)
+                __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_copy_item); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 260, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_6);
-                __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_item); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 262, __pyx_L5_error)
+                __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_item); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 260, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_10);
                 __pyx_t_1 = NULL;
                 if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_6))) {
@@ -10684,24 +10655,24 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                   }
                 }
                 if (!__pyx_t_1) {
-                  __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_10); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 262, __pyx_L5_error)
+                  __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_10); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 260, __pyx_L5_error)
                   __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
                   __Pyx_GOTREF(__pyx_t_5);
                 } else {
-                  __pyx_t_21 = PyTuple_New(1+1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 262, __pyx_L5_error)
+                  __pyx_t_21 = PyTuple_New(1+1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 260, __pyx_L5_error)
                   __Pyx_GOTREF(__pyx_t_21);
                   __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_21, 0, __pyx_t_1); __pyx_t_1 = NULL;
                   __Pyx_GIVEREF(__pyx_t_10);
                   PyTuple_SET_ITEM(__pyx_t_21, 0+1, __pyx_t_10);
                   __pyx_t_10 = 0;
-                  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_21, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 262, __pyx_L5_error)
+                  __pyx_t_5 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_21, NULL); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 260, __pyx_L5_error)
                   __Pyx_GOTREF(__pyx_t_5);
                   __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
                 }
                 __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
                 __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
-                /* "mkinitfs.py":261
+                /* "mkinitfs.py":259
  *                     message.warning('File or directory does not exist', line)
  *                     continue
  *                 for item in items:             # <<<<<<<<<<<<<<
@@ -10711,7 +10682,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               }
               __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
 
-              /* "mkinitfs.py":254
+              /* "mkinitfs.py":252
  *                 continue
  *             message.sub_debug('Reading', sfile)
  *             for line in misc.file_readsmart(sfile):             # <<<<<<<<<<<<<<
@@ -10722,7 +10693,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             }
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-            /* "mkinitfs.py":249
+            /* "mkinitfs.py":247
  *     message.sub_info('Copying files')
  *     if os.path.isdir('/etc/mkinitfs/files'):
  *         for sfile in misc.list_files('/etc/mkinitfs/files'):             # <<<<<<<<<<<<<<
@@ -10733,7 +10704,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           }
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-          /* "mkinitfs.py":248
+          /* "mkinitfs.py":246
  * 
  *     message.sub_info('Copying files')
  *     if os.path.isdir('/etc/mkinitfs/files'):             # <<<<<<<<<<<<<<
@@ -10742,67 +10713,67 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
         }
 
-        /* "mkinitfs.py":264
+        /* "mkinitfs.py":262
  *                     copy_item(item)
  * 
  *     message.sub_info('Copying modules')             # <<<<<<<<<<<<<<
  *     if os.path.isdir('/etc/mkinitfs/modules'):
  *         for sfile in misc.list_files('/etc/mkinitfs/modules'):
  */
-        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 264, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 262, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
-        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 264, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 262, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__55, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 264, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__55, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 262, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-        /* "mkinitfs.py":265
+        /* "mkinitfs.py":263
  * 
  *     message.sub_info('Copying modules')
  *     if os.path.isdir('/etc/mkinitfs/modules'):             # <<<<<<<<<<<<<<
  *         for sfile in misc.list_files('/etc/mkinitfs/modules'):
  *             if not sfile.endswith('.conf'):
  */
-        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 265, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 263, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
-        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_path); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 265, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_path); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 263, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_isdir); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 265, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_isdir); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 263, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__56, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 265, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__56, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 263, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_11); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 265, __pyx_L5_error)
+        __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_11); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 263, __pyx_L5_error)
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         if (__pyx_t_14) {
 
-          /* "mkinitfs.py":266
+          /* "mkinitfs.py":264
  *     message.sub_info('Copying modules')
  *     if os.path.isdir('/etc/mkinitfs/modules'):
  *         for sfile in misc.list_files('/etc/mkinitfs/modules'):             # <<<<<<<<<<<<<<
  *             if not sfile.endswith('.conf'):
  *                 message.sub_debug('Skipping', sfile)
  */
-          __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 266, __pyx_L5_error)
+          __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 264, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_11);
-          __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_list_files); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 266, __pyx_L5_error)
+          __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_list_files); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 264, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-          __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__57, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 266, __pyx_L5_error)
+          __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__57, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 264, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_11);
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
           if (likely(PyList_CheckExact(__pyx_t_11)) || PyTuple_CheckExact(__pyx_t_11)) {
             __pyx_t_9 = __pyx_t_11; __Pyx_INCREF(__pyx_t_9); __pyx_t_7 = 0;
             __pyx_t_8 = NULL;
           } else {
-            __pyx_t_7 = -1; __pyx_t_9 = PyObject_GetIter(__pyx_t_11); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 266, __pyx_L5_error)
+            __pyx_t_7 = -1; __pyx_t_9 = PyObject_GetIter(__pyx_t_11); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 264, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_9);
-            __pyx_t_8 = Py_TYPE(__pyx_t_9)->tp_iternext; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 266, __pyx_L5_error)
+            __pyx_t_8 = Py_TYPE(__pyx_t_9)->tp_iternext; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 264, __pyx_L5_error)
           }
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
           for (;;) {
@@ -10810,17 +10781,17 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               if (likely(PyList_CheckExact(__pyx_t_9))) {
                 if (__pyx_t_7 >= PyList_GET_SIZE(__pyx_t_9)) break;
                 #if CYTHON_COMPILING_IN_CPYTHON
-                __pyx_t_11 = PyList_GET_ITEM(__pyx_t_9, __pyx_t_7); __Pyx_INCREF(__pyx_t_11); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 266, __pyx_L5_error)
+                __pyx_t_11 = PyList_GET_ITEM(__pyx_t_9, __pyx_t_7); __Pyx_INCREF(__pyx_t_11); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 264, __pyx_L5_error)
                 #else
-                __pyx_t_11 = PySequence_ITEM(__pyx_t_9, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 266, __pyx_L5_error)
+                __pyx_t_11 = PySequence_ITEM(__pyx_t_9, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 264, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_11);
                 #endif
               } else {
                 if (__pyx_t_7 >= PyTuple_GET_SIZE(__pyx_t_9)) break;
                 #if CYTHON_COMPILING_IN_CPYTHON
-                __pyx_t_11 = PyTuple_GET_ITEM(__pyx_t_9, __pyx_t_7); __Pyx_INCREF(__pyx_t_11); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 266, __pyx_L5_error)
+                __pyx_t_11 = PyTuple_GET_ITEM(__pyx_t_9, __pyx_t_7); __Pyx_INCREF(__pyx_t_11); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 264, __pyx_L5_error)
                 #else
-                __pyx_t_11 = PySequence_ITEM(__pyx_t_9, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 266, __pyx_L5_error)
+                __pyx_t_11 = PySequence_ITEM(__pyx_t_9, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 264, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_11);
                 #endif
               }
@@ -10830,48 +10801,48 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                 PyObject* exc_type = PyErr_Occurred();
                 if (exc_type) {
                   if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-                  else __PYX_ERR(0, 266, __pyx_L5_error)
+                  else __PYX_ERR(0, 264, __pyx_L5_error)
                 }
                 break;
               }
               __Pyx_GOTREF(__pyx_t_11);
             }
-            if (PyDict_SetItem(__pyx_d, __pyx_n_s_sfile, __pyx_t_11) < 0) __PYX_ERR(0, 266, __pyx_L5_error)
+            if (PyDict_SetItem(__pyx_d, __pyx_n_s_sfile, __pyx_t_11) < 0) __PYX_ERR(0, 264, __pyx_L5_error)
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-            /* "mkinitfs.py":267
+            /* "mkinitfs.py":265
  *     if os.path.isdir('/etc/mkinitfs/modules'):
  *         for sfile in misc.list_files('/etc/mkinitfs/modules'):
  *             if not sfile.endswith('.conf'):             # <<<<<<<<<<<<<<
  *                 message.sub_debug('Skipping', sfile)
  *                 continue
  */
-            __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 267, __pyx_L5_error)
+            __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 265, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_11);
-            __pyx_t_17 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_endswith); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 267, __pyx_L5_error)
+            __pyx_t_17 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_endswith); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 265, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_17);
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-            __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_tuple__58, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 267, __pyx_L5_error)
+            __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_tuple__58, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 265, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_11);
             __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-            __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_11); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 267, __pyx_L5_error)
+            __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_11); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 265, __pyx_L5_error)
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
             __pyx_t_12 = ((!__pyx_t_14) != 0);
             if (__pyx_t_12) {
 
-              /* "mkinitfs.py":268
+              /* "mkinitfs.py":266
  *         for sfile in misc.list_files('/etc/mkinitfs/modules'):
  *             if not sfile.endswith('.conf'):
  *                 message.sub_debug('Skipping', sfile)             # <<<<<<<<<<<<<<
  *                 continue
  *             message.sub_debug('Reading', sfile)
  */
-              __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 268, __pyx_L5_error)
+              __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 266, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_17);
-              __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 268, __pyx_L5_error)
+              __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 266, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_5);
               __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-              __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 268, __pyx_L5_error)
+              __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 266, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_17);
               __pyx_t_6 = NULL;
               __pyx_t_16 = 0;
@@ -10885,7 +10856,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                   __pyx_t_16 = 1;
                 }
               }
-              __pyx_t_21 = PyTuple_New(2+__pyx_t_16); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 268, __pyx_L5_error)
+              __pyx_t_21 = PyTuple_New(2+__pyx_t_16); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 266, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_21);
               if (__pyx_t_6) {
                 __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_21, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -10896,13 +10867,13 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               __Pyx_GIVEREF(__pyx_t_17);
               PyTuple_SET_ITEM(__pyx_t_21, 1+__pyx_t_16, __pyx_t_17);
               __pyx_t_17 = 0;
-              __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_21, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 268, __pyx_L5_error)
+              __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_21, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 266, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_11);
               __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
               __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
               __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-              /* "mkinitfs.py":269
+              /* "mkinitfs.py":267
  *             if not sfile.endswith('.conf'):
  *                 message.sub_debug('Skipping', sfile)
  *                 continue             # <<<<<<<<<<<<<<
@@ -10911,7 +10882,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
               goto __pyx_L61_continue;
 
-              /* "mkinitfs.py":267
+              /* "mkinitfs.py":265
  *     if os.path.isdir('/etc/mkinitfs/modules'):
  *         for sfile in misc.list_files('/etc/mkinitfs/modules'):
  *             if not sfile.endswith('.conf'):             # <<<<<<<<<<<<<<
@@ -10920,19 +10891,19 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
             }
 
-            /* "mkinitfs.py":270
+            /* "mkinitfs.py":268
  *                 message.sub_debug('Skipping', sfile)
  *                 continue
  *             message.sub_debug('Reading', sfile)             # <<<<<<<<<<<<<<
  *             for line in misc.file_readsmart(sfile):
  *                 if not line in ARGS.modules:
  */
-            __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 270, __pyx_L5_error)
+            __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 268, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_5);
-            __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 270, __pyx_L5_error)
+            __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 268, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_21);
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-            __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 270, __pyx_L5_error)
+            __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 268, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_5);
             __pyx_t_17 = NULL;
             __pyx_t_16 = 0;
@@ -10946,7 +10917,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                 __pyx_t_16 = 1;
               }
             }
-            __pyx_t_6 = PyTuple_New(2+__pyx_t_16); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 270, __pyx_L5_error)
+            __pyx_t_6 = PyTuple_New(2+__pyx_t_16); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 268, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_6);
             if (__pyx_t_17) {
               __Pyx_GIVEREF(__pyx_t_17); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_17); __pyx_t_17 = NULL;
@@ -10957,25 +10928,25 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             __Pyx_GIVEREF(__pyx_t_5);
             PyTuple_SET_ITEM(__pyx_t_6, 1+__pyx_t_16, __pyx_t_5);
             __pyx_t_5 = 0;
-            __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_21, __pyx_t_6, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 270, __pyx_L5_error)
+            __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_21, __pyx_t_6, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 268, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_11);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-            /* "mkinitfs.py":271
+            /* "mkinitfs.py":269
  *                 continue
  *             message.sub_debug('Reading', sfile)
  *             for line in misc.file_readsmart(sfile):             # <<<<<<<<<<<<<<
  *                 if not line in ARGS.modules:
  *                     ARGS.modules.append(line)
  */
-            __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 271, __pyx_L5_error)
+            __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 269, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_21);
-            __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_file_readsmart); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 271, __pyx_L5_error)
+            __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_file_readsmart); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 269, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_6);
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-            __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 271, __pyx_L5_error)
+            __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 269, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_21);
             __pyx_t_5 = NULL;
             if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_6))) {
@@ -10988,17 +10959,17 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               }
             }
             if (!__pyx_t_5) {
-              __pyx_t_11 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_21); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 271, __pyx_L5_error)
+              __pyx_t_11 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_21); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 269, __pyx_L5_error)
               __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
               __Pyx_GOTREF(__pyx_t_11);
             } else {
-              __pyx_t_17 = PyTuple_New(1+1); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 271, __pyx_L5_error)
+              __pyx_t_17 = PyTuple_New(1+1); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 269, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_17);
               __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_17, 0, __pyx_t_5); __pyx_t_5 = NULL;
               __Pyx_GIVEREF(__pyx_t_21);
               PyTuple_SET_ITEM(__pyx_t_17, 0+1, __pyx_t_21);
               __pyx_t_21 = 0;
-              __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_17, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 271, __pyx_L5_error)
+              __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_17, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 269, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_11);
               __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
             }
@@ -11007,9 +10978,9 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               __pyx_t_6 = __pyx_t_11; __Pyx_INCREF(__pyx_t_6); __pyx_t_16 = 0;
               __pyx_t_18 = NULL;
             } else {
-              __pyx_t_16 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_t_11); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 271, __pyx_L5_error)
+              __pyx_t_16 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_t_11); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 269, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_6);
-              __pyx_t_18 = Py_TYPE(__pyx_t_6)->tp_iternext; if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 271, __pyx_L5_error)
+              __pyx_t_18 = Py_TYPE(__pyx_t_6)->tp_iternext; if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 269, __pyx_L5_error)
             }
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
             for (;;) {
@@ -11017,17 +10988,17 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                 if (likely(PyList_CheckExact(__pyx_t_6))) {
                   if (__pyx_t_16 >= PyList_GET_SIZE(__pyx_t_6)) break;
                   #if CYTHON_COMPILING_IN_CPYTHON
-                  __pyx_t_11 = PyList_GET_ITEM(__pyx_t_6, __pyx_t_16); __Pyx_INCREF(__pyx_t_11); __pyx_t_16++; if (unlikely(0 < 0)) __PYX_ERR(0, 271, __pyx_L5_error)
+                  __pyx_t_11 = PyList_GET_ITEM(__pyx_t_6, __pyx_t_16); __Pyx_INCREF(__pyx_t_11); __pyx_t_16++; if (unlikely(0 < 0)) __PYX_ERR(0, 269, __pyx_L5_error)
                   #else
-                  __pyx_t_11 = PySequence_ITEM(__pyx_t_6, __pyx_t_16); __pyx_t_16++; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 271, __pyx_L5_error)
+                  __pyx_t_11 = PySequence_ITEM(__pyx_t_6, __pyx_t_16); __pyx_t_16++; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 269, __pyx_L5_error)
                   __Pyx_GOTREF(__pyx_t_11);
                   #endif
                 } else {
                   if (__pyx_t_16 >= PyTuple_GET_SIZE(__pyx_t_6)) break;
                   #if CYTHON_COMPILING_IN_CPYTHON
-                  __pyx_t_11 = PyTuple_GET_ITEM(__pyx_t_6, __pyx_t_16); __Pyx_INCREF(__pyx_t_11); __pyx_t_16++; if (unlikely(0 < 0)) __PYX_ERR(0, 271, __pyx_L5_error)
+                  __pyx_t_11 = PyTuple_GET_ITEM(__pyx_t_6, __pyx_t_16); __Pyx_INCREF(__pyx_t_11); __pyx_t_16++; if (unlikely(0 < 0)) __PYX_ERR(0, 269, __pyx_L5_error)
                   #else
-                  __pyx_t_11 = PySequence_ITEM(__pyx_t_6, __pyx_t_16); __pyx_t_16++; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 271, __pyx_L5_error)
+                  __pyx_t_11 = PySequence_ITEM(__pyx_t_6, __pyx_t_16); __pyx_t_16++; if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 269, __pyx_L5_error)
                   __Pyx_GOTREF(__pyx_t_11);
                   #endif
                 }
@@ -11037,54 +11008,54 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                   PyObject* exc_type = PyErr_Occurred();
                   if (exc_type) {
                     if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-                    else __PYX_ERR(0, 271, __pyx_L5_error)
+                    else __PYX_ERR(0, 269, __pyx_L5_error)
                   }
                   break;
                 }
                 __Pyx_GOTREF(__pyx_t_11);
               }
-              if (PyDict_SetItem(__pyx_d, __pyx_n_s_line, __pyx_t_11) < 0) __PYX_ERR(0, 271, __pyx_L5_error)
+              if (PyDict_SetItem(__pyx_d, __pyx_n_s_line, __pyx_t_11) < 0) __PYX_ERR(0, 269, __pyx_L5_error)
               __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-              /* "mkinitfs.py":272
+              /* "mkinitfs.py":270
  *             message.sub_debug('Reading', sfile)
  *             for line in misc.file_readsmart(sfile):
  *                 if not line in ARGS.modules:             # <<<<<<<<<<<<<<
  *                     ARGS.modules.append(line)
  * 
  */
-              __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_line); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 272, __pyx_L5_error)
+              __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_line); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 270, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_11);
-              __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 272, __pyx_L5_error)
+              __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 270, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_17);
-              __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_modules); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 272, __pyx_L5_error)
+              __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_modules); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 270, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_21);
               __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-              __pyx_t_12 = (__Pyx_PySequence_ContainsTF(__pyx_t_11, __pyx_t_21, Py_NE)); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 272, __pyx_L5_error)
+              __pyx_t_12 = (__Pyx_PySequence_ContainsTF(__pyx_t_11, __pyx_t_21, Py_NE)); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 270, __pyx_L5_error)
               __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
               __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
               __pyx_t_14 = (__pyx_t_12 != 0);
               if (__pyx_t_14) {
 
-                /* "mkinitfs.py":273
+                /* "mkinitfs.py":271
  *             for line in misc.file_readsmart(sfile):
  *                 if not line in ARGS.modules:
  *                     ARGS.modules.append(line)             # <<<<<<<<<<<<<<
  * 
  *     for module in ARGS.modules:
  */
-                __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 273, __pyx_L5_error)
+                __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 271, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_21);
-                __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_modules); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 273, __pyx_L5_error)
+                __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_modules); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 271, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_11);
                 __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-                __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_line); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 273, __pyx_L5_error)
+                __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_line); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 271, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_21);
-                __pyx_t_13 = __Pyx_PyObject_Append(__pyx_t_11, __pyx_t_21); if (unlikely(__pyx_t_13 == -1)) __PYX_ERR(0, 273, __pyx_L5_error)
+                __pyx_t_13 = __Pyx_PyObject_Append(__pyx_t_11, __pyx_t_21); if (unlikely(__pyx_t_13 == -1)) __PYX_ERR(0, 271, __pyx_L5_error)
                 __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
                 __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
 
-                /* "mkinitfs.py":272
+                /* "mkinitfs.py":270
  *             message.sub_debug('Reading', sfile)
  *             for line in misc.file_readsmart(sfile):
  *                 if not line in ARGS.modules:             # <<<<<<<<<<<<<<
@@ -11093,7 +11064,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
               }
 
-              /* "mkinitfs.py":271
+              /* "mkinitfs.py":269
  *                 continue
  *             message.sub_debug('Reading', sfile)
  *             for line in misc.file_readsmart(sfile):             # <<<<<<<<<<<<<<
@@ -11103,7 +11074,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             }
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-            /* "mkinitfs.py":266
+            /* "mkinitfs.py":264
  *     message.sub_info('Copying modules')
  *     if os.path.isdir('/etc/mkinitfs/modules'):
  *         for sfile in misc.list_files('/etc/mkinitfs/modules'):             # <<<<<<<<<<<<<<
@@ -11114,7 +11085,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           }
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-          /* "mkinitfs.py":265
+          /* "mkinitfs.py":263
  * 
  *     message.sub_info('Copying modules')
  *     if os.path.isdir('/etc/mkinitfs/modules'):             # <<<<<<<<<<<<<<
@@ -11123,25 +11094,25 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
         }
 
-        /* "mkinitfs.py":275
+        /* "mkinitfs.py":273
  *                     ARGS.modules.append(line)
  * 
  *     for module in ARGS.modules:             # <<<<<<<<<<<<<<
  *         # in case ARGS.modules equals ['']
  *         if not module:
  */
-        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 275, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 273, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
-        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_modules); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 275, __pyx_L5_error)
+        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_modules); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 273, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         if (likely(PyList_CheckExact(__pyx_t_6)) || PyTuple_CheckExact(__pyx_t_6)) {
           __pyx_t_9 = __pyx_t_6; __Pyx_INCREF(__pyx_t_9); __pyx_t_7 = 0;
           __pyx_t_8 = NULL;
         } else {
-          __pyx_t_7 = -1; __pyx_t_9 = PyObject_GetIter(__pyx_t_6); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 275, __pyx_L5_error)
+          __pyx_t_7 = -1; __pyx_t_9 = PyObject_GetIter(__pyx_t_6); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 273, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_9);
-          __pyx_t_8 = Py_TYPE(__pyx_t_9)->tp_iternext; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 275, __pyx_L5_error)
+          __pyx_t_8 = Py_TYPE(__pyx_t_9)->tp_iternext; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 273, __pyx_L5_error)
         }
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         for (;;) {
@@ -11149,17 +11120,17 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             if (likely(PyList_CheckExact(__pyx_t_9))) {
               if (__pyx_t_7 >= PyList_GET_SIZE(__pyx_t_9)) break;
               #if CYTHON_COMPILING_IN_CPYTHON
-              __pyx_t_6 = PyList_GET_ITEM(__pyx_t_9, __pyx_t_7); __Pyx_INCREF(__pyx_t_6); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 275, __pyx_L5_error)
+              __pyx_t_6 = PyList_GET_ITEM(__pyx_t_9, __pyx_t_7); __Pyx_INCREF(__pyx_t_6); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 273, __pyx_L5_error)
               #else
-              __pyx_t_6 = PySequence_ITEM(__pyx_t_9, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 275, __pyx_L5_error)
+              __pyx_t_6 = PySequence_ITEM(__pyx_t_9, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 273, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_6);
               #endif
             } else {
               if (__pyx_t_7 >= PyTuple_GET_SIZE(__pyx_t_9)) break;
               #if CYTHON_COMPILING_IN_CPYTHON
-              __pyx_t_6 = PyTuple_GET_ITEM(__pyx_t_9, __pyx_t_7); __Pyx_INCREF(__pyx_t_6); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 275, __pyx_L5_error)
+              __pyx_t_6 = PyTuple_GET_ITEM(__pyx_t_9, __pyx_t_7); __Pyx_INCREF(__pyx_t_6); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 273, __pyx_L5_error)
               #else
-              __pyx_t_6 = PySequence_ITEM(__pyx_t_9, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 275, __pyx_L5_error)
+              __pyx_t_6 = PySequence_ITEM(__pyx_t_9, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 273, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_6);
               #endif
             }
@@ -11169,30 +11140,30 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               PyObject* exc_type = PyErr_Occurred();
               if (exc_type) {
                 if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-                else __PYX_ERR(0, 275, __pyx_L5_error)
+                else __PYX_ERR(0, 273, __pyx_L5_error)
               }
               break;
             }
             __Pyx_GOTREF(__pyx_t_6);
           }
-          if (PyDict_SetItem(__pyx_d, __pyx_n_s_module, __pyx_t_6) < 0) __PYX_ERR(0, 275, __pyx_L5_error)
+          if (PyDict_SetItem(__pyx_d, __pyx_n_s_module, __pyx_t_6) < 0) __PYX_ERR(0, 273, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-          /* "mkinitfs.py":277
+          /* "mkinitfs.py":275
  *     for module in ARGS.modules:
  *         # in case ARGS.modules equals ['']
  *         if not module:             # <<<<<<<<<<<<<<
  *             continue
  *         found = False
  */
-          __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_module); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 277, __pyx_L5_error)
+          __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_module); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 275, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_6);
-          __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 277, __pyx_L5_error)
+          __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_6); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 275, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __pyx_t_12 = ((!__pyx_t_14) != 0);
           if (__pyx_t_12) {
 
-            /* "mkinitfs.py":278
+            /* "mkinitfs.py":276
  *         # in case ARGS.modules equals ['']
  *         if not module:
  *             continue             # <<<<<<<<<<<<<<
@@ -11201,7 +11172,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
             goto __pyx_L67_continue;
 
-            /* "mkinitfs.py":277
+            /* "mkinitfs.py":275
  *     for module in ARGS.modules:
  *         # in case ARGS.modules equals ['']
  *         if not module:             # <<<<<<<<<<<<<<
@@ -11210,30 +11181,30 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
           }
 
-          /* "mkinitfs.py":279
+          /* "mkinitfs.py":277
  *         if not module:
  *             continue
  *         found = False             # <<<<<<<<<<<<<<
  *         for line in misc.file_read('%s/modules.dep' % modsdir).splitlines():
  *             base = line.split(':')[0]
  */
-          if (PyDict_SetItem(__pyx_d, __pyx_n_s_found, Py_False) < 0) __PYX_ERR(0, 279, __pyx_L5_error)
+          if (PyDict_SetItem(__pyx_d, __pyx_n_s_found, Py_False) < 0) __PYX_ERR(0, 277, __pyx_L5_error)
 
-          /* "mkinitfs.py":280
+          /* "mkinitfs.py":278
  *             continue
  *         found = False
  *         for line in misc.file_read('%s/modules.dep' % modsdir).splitlines():             # <<<<<<<<<<<<<<
  *             base = line.split(':')[0]
  *             depends = line.split(':')[1].split()
  */
-          __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 280, __pyx_L5_error)
+          __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 278, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_11);
-          __pyx_t_17 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_file_read); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 280, __pyx_L5_error)
+          __pyx_t_17 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_file_read); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 278, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_17);
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-          __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_modsdir); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 280, __pyx_L5_error)
+          __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_modsdir); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 278, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_11);
-          __pyx_t_5 = __Pyx_PyString_Format(__pyx_kp_s_s_modules_dep, __pyx_t_11); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 280, __pyx_L5_error)
+          __pyx_t_5 = __Pyx_PyString_Format(__pyx_kp_s_s_modules_dep, __pyx_t_11); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 278, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_5);
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
           __pyx_t_11 = NULL;
@@ -11247,22 +11218,22 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             }
           }
           if (!__pyx_t_11) {
-            __pyx_t_21 = __Pyx_PyObject_CallOneArg(__pyx_t_17, __pyx_t_5); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 280, __pyx_L5_error)
+            __pyx_t_21 = __Pyx_PyObject_CallOneArg(__pyx_t_17, __pyx_t_5); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 278, __pyx_L5_error)
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
             __Pyx_GOTREF(__pyx_t_21);
           } else {
-            __pyx_t_10 = PyTuple_New(1+1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 280, __pyx_L5_error)
+            __pyx_t_10 = PyTuple_New(1+1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 278, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_10);
             __Pyx_GIVEREF(__pyx_t_11); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_11); __pyx_t_11 = NULL;
             __Pyx_GIVEREF(__pyx_t_5);
             PyTuple_SET_ITEM(__pyx_t_10, 0+1, __pyx_t_5);
             __pyx_t_5 = 0;
-            __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_t_10, NULL); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 280, __pyx_L5_error)
+            __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_t_10, NULL); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 278, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_21);
             __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
           }
           __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-          __pyx_t_17 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_splitlines); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 280, __pyx_L5_error)
+          __pyx_t_17 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_splitlines); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 278, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_17);
           __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
           __pyx_t_21 = NULL;
@@ -11276,10 +11247,10 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             }
           }
           if (__pyx_t_21) {
-            __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_17, __pyx_t_21); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 280, __pyx_L5_error)
+            __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_17, __pyx_t_21); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 278, __pyx_L5_error)
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
           } else {
-            __pyx_t_6 = __Pyx_PyObject_CallNoArg(__pyx_t_17); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 280, __pyx_L5_error)
+            __pyx_t_6 = __Pyx_PyObject_CallNoArg(__pyx_t_17); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 278, __pyx_L5_error)
           }
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
@@ -11287,9 +11258,9 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             __pyx_t_17 = __pyx_t_6; __Pyx_INCREF(__pyx_t_17); __pyx_t_16 = 0;
             __pyx_t_18 = NULL;
           } else {
-            __pyx_t_16 = -1; __pyx_t_17 = PyObject_GetIter(__pyx_t_6); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 280, __pyx_L5_error)
+            __pyx_t_16 = -1; __pyx_t_17 = PyObject_GetIter(__pyx_t_6); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 278, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_17);
-            __pyx_t_18 = Py_TYPE(__pyx_t_17)->tp_iternext; if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 280, __pyx_L5_error)
+            __pyx_t_18 = Py_TYPE(__pyx_t_17)->tp_iternext; if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 278, __pyx_L5_error)
           }
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           for (;;) {
@@ -11297,17 +11268,17 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               if (likely(PyList_CheckExact(__pyx_t_17))) {
                 if (__pyx_t_16 >= PyList_GET_SIZE(__pyx_t_17)) break;
                 #if CYTHON_COMPILING_IN_CPYTHON
-                __pyx_t_6 = PyList_GET_ITEM(__pyx_t_17, __pyx_t_16); __Pyx_INCREF(__pyx_t_6); __pyx_t_16++; if (unlikely(0 < 0)) __PYX_ERR(0, 280, __pyx_L5_error)
+                __pyx_t_6 = PyList_GET_ITEM(__pyx_t_17, __pyx_t_16); __Pyx_INCREF(__pyx_t_6); __pyx_t_16++; if (unlikely(0 < 0)) __PYX_ERR(0, 278, __pyx_L5_error)
                 #else
-                __pyx_t_6 = PySequence_ITEM(__pyx_t_17, __pyx_t_16); __pyx_t_16++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 280, __pyx_L5_error)
+                __pyx_t_6 = PySequence_ITEM(__pyx_t_17, __pyx_t_16); __pyx_t_16++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 278, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_6);
                 #endif
               } else {
                 if (__pyx_t_16 >= PyTuple_GET_SIZE(__pyx_t_17)) break;
                 #if CYTHON_COMPILING_IN_CPYTHON
-                __pyx_t_6 = PyTuple_GET_ITEM(__pyx_t_17, __pyx_t_16); __Pyx_INCREF(__pyx_t_6); __pyx_t_16++; if (unlikely(0 < 0)) __PYX_ERR(0, 280, __pyx_L5_error)
+                __pyx_t_6 = PyTuple_GET_ITEM(__pyx_t_17, __pyx_t_16); __Pyx_INCREF(__pyx_t_6); __pyx_t_16++; if (unlikely(0 < 0)) __PYX_ERR(0, 278, __pyx_L5_error)
                 #else
-                __pyx_t_6 = PySequence_ITEM(__pyx_t_17, __pyx_t_16); __pyx_t_16++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 280, __pyx_L5_error)
+                __pyx_t_6 = PySequence_ITEM(__pyx_t_17, __pyx_t_16); __pyx_t_16++; if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 278, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_6);
                 #endif
               }
@@ -11317,55 +11288,55 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                 PyObject* exc_type = PyErr_Occurred();
                 if (exc_type) {
                   if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-                  else __PYX_ERR(0, 280, __pyx_L5_error)
+                  else __PYX_ERR(0, 278, __pyx_L5_error)
                 }
                 break;
               }
               __Pyx_GOTREF(__pyx_t_6);
             }
-            if (PyDict_SetItem(__pyx_d, __pyx_n_s_line, __pyx_t_6) < 0) __PYX_ERR(0, 280, __pyx_L5_error)
+            if (PyDict_SetItem(__pyx_d, __pyx_n_s_line, __pyx_t_6) < 0) __PYX_ERR(0, 278, __pyx_L5_error)
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-            /* "mkinitfs.py":281
+            /* "mkinitfs.py":279
  *         found = False
  *         for line in misc.file_read('%s/modules.dep' % modsdir).splitlines():
  *             base = line.split(':')[0]             # <<<<<<<<<<<<<<
  *             depends = line.split(':')[1].split()
  *             if '/%s.ko' % module in base \
  */
-            __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_line); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 281, __pyx_L5_error)
+            __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_line); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 279, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_6);
-            __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_split); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 281, __pyx_L5_error)
+            __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_split); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 279, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_21);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-            __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_21, __pyx_tuple__60, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 281, __pyx_L5_error)
+            __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_21, __pyx_tuple__60, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 279, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_6);
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-            __pyx_t_21 = __Pyx_GetItemInt(__pyx_t_6, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 281, __pyx_L5_error)
+            __pyx_t_21 = __Pyx_GetItemInt(__pyx_t_6, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 279, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_21);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-            if (PyDict_SetItem(__pyx_d, __pyx_n_s_base, __pyx_t_21) < 0) __PYX_ERR(0, 281, __pyx_L5_error)
+            if (PyDict_SetItem(__pyx_d, __pyx_n_s_base, __pyx_t_21) < 0) __PYX_ERR(0, 279, __pyx_L5_error)
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
 
-            /* "mkinitfs.py":282
+            /* "mkinitfs.py":280
  *         for line in misc.file_read('%s/modules.dep' % modsdir).splitlines():
  *             base = line.split(':')[0]
  *             depends = line.split(':')[1].split()             # <<<<<<<<<<<<<<
  *             if '/%s.ko' % module in base \
  *                 or '/%s.ko' % module.replace('_', '-') in base:
  */
-            __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_line); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 282, __pyx_L5_error)
+            __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_line); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 280, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_6);
-            __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_split); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 282, __pyx_L5_error)
+            __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_split); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 280, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_10);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-            __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_tuple__61, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 282, __pyx_L5_error)
+            __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_tuple__61, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 280, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_6);
             __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-            __pyx_t_10 = __Pyx_GetItemInt(__pyx_t_6, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 282, __pyx_L5_error)
+            __pyx_t_10 = __Pyx_GetItemInt(__pyx_t_6, 1, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 280, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_10);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-            __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_split); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 282, __pyx_L5_error)
+            __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_split); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 280, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_6);
             __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
             __pyx_t_10 = NULL;
@@ -11379,43 +11350,43 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               }
             }
             if (__pyx_t_10) {
-              __pyx_t_21 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_10); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 282, __pyx_L5_error)
+              __pyx_t_21 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_10); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 280, __pyx_L5_error)
               __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
             } else {
-              __pyx_t_21 = __Pyx_PyObject_CallNoArg(__pyx_t_6); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 282, __pyx_L5_error)
+              __pyx_t_21 = __Pyx_PyObject_CallNoArg(__pyx_t_6); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 280, __pyx_L5_error)
             }
             __Pyx_GOTREF(__pyx_t_21);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-            if (PyDict_SetItem(__pyx_d, __pyx_n_s_depends, __pyx_t_21) < 0) __PYX_ERR(0, 282, __pyx_L5_error)
+            if (PyDict_SetItem(__pyx_d, __pyx_n_s_depends, __pyx_t_21) < 0) __PYX_ERR(0, 280, __pyx_L5_error)
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
 
-            /* "mkinitfs.py":283
+            /* "mkinitfs.py":281
  *             base = line.split(':')[0]
  *             depends = line.split(':')[1].split()
  *             if '/%s.ko' % module in base \             # <<<<<<<<<<<<<<
  *                 or '/%s.ko' % module.replace('_', '-') in base:
  *                 found = True
  */
-            __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_module); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 283, __pyx_L5_error)
+            __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_module); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 281, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_21);
-            __pyx_t_6 = __Pyx_PyString_Format(__pyx_kp_s_s_ko, __pyx_t_21); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 283, __pyx_L5_error)
+            __pyx_t_6 = __Pyx_PyString_Format(__pyx_kp_s_s_ko, __pyx_t_21); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 281, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_6);
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
 
-            /* "mkinitfs.py":284
+            /* "mkinitfs.py":282
  *             depends = line.split(':')[1].split()
  *             if '/%s.ko' % module in base \
  *                 or '/%s.ko' % module.replace('_', '-') in base:             # <<<<<<<<<<<<<<
  *                 found = True
  *                 copy_item('%s/%s' % (modsdir, base.strip()))
  */
-            __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_base); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 284, __pyx_L5_error)
+            __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_base); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 282, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_21);
-            __pyx_t_14 = (__Pyx_PySequence_ContainsTF(__pyx_t_6, __pyx_t_21, Py_EQ)); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 283, __pyx_L5_error)
+            __pyx_t_14 = (__Pyx_PySequence_ContainsTF(__pyx_t_6, __pyx_t_21, Py_EQ)); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 281, __pyx_L5_error)
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
 
-            /* "mkinitfs.py":283
+            /* "mkinitfs.py":281
  *             base = line.split(':')[0]
  *             depends = line.split(':')[1].split()
  *             if '/%s.ko' % module in base \             # <<<<<<<<<<<<<<
@@ -11429,34 +11400,34 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               goto __pyx_L73_bool_binop_done;
             }
 
-            /* "mkinitfs.py":284
+            /* "mkinitfs.py":282
  *             depends = line.split(':')[1].split()
  *             if '/%s.ko' % module in base \
  *                 or '/%s.ko' % module.replace('_', '-') in base:             # <<<<<<<<<<<<<<
  *                 found = True
  *                 copy_item('%s/%s' % (modsdir, base.strip()))
  */
-            __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_module); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 284, __pyx_L5_error)
+            __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_module); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 282, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_21);
-            __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_replace); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 284, __pyx_L5_error)
+            __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_replace); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 282, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_6);
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-            __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__64, NULL); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 284, __pyx_L5_error)
+            __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__64, NULL); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 282, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_21);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-            __pyx_t_6 = __Pyx_PyString_Format(__pyx_kp_s_s_ko, __pyx_t_21); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 284, __pyx_L5_error)
+            __pyx_t_6 = __Pyx_PyString_Format(__pyx_kp_s_s_ko, __pyx_t_21); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 282, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_6);
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-            __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_base); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 284, __pyx_L5_error)
+            __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_base); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 282, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_21);
-            __pyx_t_15 = (__Pyx_PySequence_ContainsTF(__pyx_t_6, __pyx_t_21, Py_EQ)); if (unlikely(__pyx_t_15 < 0)) __PYX_ERR(0, 284, __pyx_L5_error)
+            __pyx_t_15 = (__Pyx_PySequence_ContainsTF(__pyx_t_6, __pyx_t_21, Py_EQ)); if (unlikely(__pyx_t_15 < 0)) __PYX_ERR(0, 282, __pyx_L5_error)
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
             __pyx_t_14 = (__pyx_t_15 != 0);
             __pyx_t_12 = __pyx_t_14;
             __pyx_L73_bool_binop_done:;
 
-            /* "mkinitfs.py":283
+            /* "mkinitfs.py":281
  *             base = line.split(':')[0]
  *             depends = line.split(':')[1].split()
  *             if '/%s.ko' % module in base \             # <<<<<<<<<<<<<<
@@ -11465,29 +11436,29 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
             if (__pyx_t_12) {
 
-              /* "mkinitfs.py":285
+              /* "mkinitfs.py":283
  *             if '/%s.ko' % module in base \
  *                 or '/%s.ko' % module.replace('_', '-') in base:
  *                 found = True             # <<<<<<<<<<<<<<
  *                 copy_item('%s/%s' % (modsdir, base.strip()))
  *                 for dep in depends:
  */
-              if (PyDict_SetItem(__pyx_d, __pyx_n_s_found, Py_True) < 0) __PYX_ERR(0, 285, __pyx_L5_error)
+              if (PyDict_SetItem(__pyx_d, __pyx_n_s_found, Py_True) < 0) __PYX_ERR(0, 283, __pyx_L5_error)
 
-              /* "mkinitfs.py":286
+              /* "mkinitfs.py":284
  *                 or '/%s.ko' % module.replace('_', '-') in base:
  *                 found = True
  *                 copy_item('%s/%s' % (modsdir, base.strip()))             # <<<<<<<<<<<<<<
  *                 for dep in depends:
  *                     copy_item('%s/%s' % (modsdir, dep.strip()))
  */
-              __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_copy_item); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 286, __pyx_L5_error)
+              __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_copy_item); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 284, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_6);
-              __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_modsdir); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 286, __pyx_L5_error)
+              __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_modsdir); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 284, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_10);
-              __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_base); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 286, __pyx_L5_error)
+              __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_base); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 284, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_11);
-              __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_strip); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 286, __pyx_L5_error)
+              __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_strip); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 284, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_1);
               __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
               __pyx_t_11 = NULL;
@@ -11501,14 +11472,14 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                 }
               }
               if (__pyx_t_11) {
-                __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_11); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 286, __pyx_L5_error)
+                __pyx_t_5 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_11); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 284, __pyx_L5_error)
                 __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
               } else {
-                __pyx_t_5 = __Pyx_PyObject_CallNoArg(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 286, __pyx_L5_error)
+                __pyx_t_5 = __Pyx_PyObject_CallNoArg(__pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 284, __pyx_L5_error)
               }
               __Pyx_GOTREF(__pyx_t_5);
               __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-              __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 286, __pyx_L5_error)
+              __pyx_t_1 = PyTuple_New(2); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 284, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_1);
               __Pyx_GIVEREF(__pyx_t_10);
               PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_10);
@@ -11516,7 +11487,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               PyTuple_SET_ITEM(__pyx_t_1, 1, __pyx_t_5);
               __pyx_t_10 = 0;
               __pyx_t_5 = 0;
-              __pyx_t_5 = __Pyx_PyString_Format(__pyx_kp_s_s_s, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 286, __pyx_L5_error)
+              __pyx_t_5 = __Pyx_PyString_Format(__pyx_kp_s_s_s, __pyx_t_1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 284, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_5);
               __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
               __pyx_t_1 = NULL;
@@ -11530,39 +11501,39 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                 }
               }
               if (!__pyx_t_1) {
-                __pyx_t_21 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_5); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 286, __pyx_L5_error)
+                __pyx_t_21 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_5); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 284, __pyx_L5_error)
                 __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
                 __Pyx_GOTREF(__pyx_t_21);
               } else {
-                __pyx_t_10 = PyTuple_New(1+1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 286, __pyx_L5_error)
+                __pyx_t_10 = PyTuple_New(1+1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 284, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_10);
                 __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_1); __pyx_t_1 = NULL;
                 __Pyx_GIVEREF(__pyx_t_5);
                 PyTuple_SET_ITEM(__pyx_t_10, 0+1, __pyx_t_5);
                 __pyx_t_5 = 0;
-                __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_10, NULL); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 286, __pyx_L5_error)
+                __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_10, NULL); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 284, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_21);
                 __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
               }
               __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
               __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
 
-              /* "mkinitfs.py":287
+              /* "mkinitfs.py":285
  *                 found = True
  *                 copy_item('%s/%s' % (modsdir, base.strip()))
  *                 for dep in depends:             # <<<<<<<<<<<<<<
  *                     copy_item('%s/%s' % (modsdir, dep.strip()))
  *         if not found:
  */
-              __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_depends); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 287, __pyx_L5_error)
+              __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_depends); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 285, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_21);
               if (likely(PyList_CheckExact(__pyx_t_21)) || PyTuple_CheckExact(__pyx_t_21)) {
                 __pyx_t_6 = __pyx_t_21; __Pyx_INCREF(__pyx_t_6); __pyx_t_19 = 0;
                 __pyx_t_22 = NULL;
               } else {
-                __pyx_t_19 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_t_21); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 287, __pyx_L5_error)
+                __pyx_t_19 = -1; __pyx_t_6 = PyObject_GetIter(__pyx_t_21); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 285, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_6);
-                __pyx_t_22 = Py_TYPE(__pyx_t_6)->tp_iternext; if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 287, __pyx_L5_error)
+                __pyx_t_22 = Py_TYPE(__pyx_t_6)->tp_iternext; if (unlikely(!__pyx_t_22)) __PYX_ERR(0, 285, __pyx_L5_error)
               }
               __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
               for (;;) {
@@ -11570,17 +11541,17 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                   if (likely(PyList_CheckExact(__pyx_t_6))) {
                     if (__pyx_t_19 >= PyList_GET_SIZE(__pyx_t_6)) break;
                     #if CYTHON_COMPILING_IN_CPYTHON
-                    __pyx_t_21 = PyList_GET_ITEM(__pyx_t_6, __pyx_t_19); __Pyx_INCREF(__pyx_t_21); __pyx_t_19++; if (unlikely(0 < 0)) __PYX_ERR(0, 287, __pyx_L5_error)
+                    __pyx_t_21 = PyList_GET_ITEM(__pyx_t_6, __pyx_t_19); __Pyx_INCREF(__pyx_t_21); __pyx_t_19++; if (unlikely(0 < 0)) __PYX_ERR(0, 285, __pyx_L5_error)
                     #else
-                    __pyx_t_21 = PySequence_ITEM(__pyx_t_6, __pyx_t_19); __pyx_t_19++; if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 287, __pyx_L5_error)
+                    __pyx_t_21 = PySequence_ITEM(__pyx_t_6, __pyx_t_19); __pyx_t_19++; if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 285, __pyx_L5_error)
                     __Pyx_GOTREF(__pyx_t_21);
                     #endif
                   } else {
                     if (__pyx_t_19 >= PyTuple_GET_SIZE(__pyx_t_6)) break;
                     #if CYTHON_COMPILING_IN_CPYTHON
-                    __pyx_t_21 = PyTuple_GET_ITEM(__pyx_t_6, __pyx_t_19); __Pyx_INCREF(__pyx_t_21); __pyx_t_19++; if (unlikely(0 < 0)) __PYX_ERR(0, 287, __pyx_L5_error)
+                    __pyx_t_21 = PyTuple_GET_ITEM(__pyx_t_6, __pyx_t_19); __Pyx_INCREF(__pyx_t_21); __pyx_t_19++; if (unlikely(0 < 0)) __PYX_ERR(0, 285, __pyx_L5_error)
                     #else
-                    __pyx_t_21 = PySequence_ITEM(__pyx_t_6, __pyx_t_19); __pyx_t_19++; if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 287, __pyx_L5_error)
+                    __pyx_t_21 = PySequence_ITEM(__pyx_t_6, __pyx_t_19); __pyx_t_19++; if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 285, __pyx_L5_error)
                     __Pyx_GOTREF(__pyx_t_21);
                     #endif
                   }
@@ -11590,29 +11561,29 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                     PyObject* exc_type = PyErr_Occurred();
                     if (exc_type) {
                       if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-                      else __PYX_ERR(0, 287, __pyx_L5_error)
+                      else __PYX_ERR(0, 285, __pyx_L5_error)
                     }
                     break;
                   }
                   __Pyx_GOTREF(__pyx_t_21);
                 }
-                if (PyDict_SetItem(__pyx_d, __pyx_n_s_dep, __pyx_t_21) < 0) __PYX_ERR(0, 287, __pyx_L5_error)
+                if (PyDict_SetItem(__pyx_d, __pyx_n_s_dep, __pyx_t_21) < 0) __PYX_ERR(0, 285, __pyx_L5_error)
                 __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
 
-                /* "mkinitfs.py":288
+                /* "mkinitfs.py":286
  *                 copy_item('%s/%s' % (modsdir, base.strip()))
  *                 for dep in depends:
  *                     copy_item('%s/%s' % (modsdir, dep.strip()))             # <<<<<<<<<<<<<<
  *         if not found:
  *             for line in misc.file_read('%s/modules.builtin' % modsdir).splitlines():
  */
-                __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_copy_item); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 288, __pyx_L5_error)
+                __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_copy_item); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 286, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_10);
-                __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_modsdir); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 288, __pyx_L5_error)
+                __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_modsdir); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 286, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_5);
-                __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_dep); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 288, __pyx_L5_error)
+                __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_dep); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 286, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_11);
-                __pyx_t_20 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_strip); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 288, __pyx_L5_error)
+                __pyx_t_20 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_strip); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 286, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_20);
                 __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
                 __pyx_t_11 = NULL;
@@ -11626,14 +11597,14 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                   }
                 }
                 if (__pyx_t_11) {
-                  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_20, __pyx_t_11); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 288, __pyx_L5_error)
+                  __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_20, __pyx_t_11); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 286, __pyx_L5_error)
                   __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
                 } else {
-                  __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_20); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 288, __pyx_L5_error)
+                  __pyx_t_1 = __Pyx_PyObject_CallNoArg(__pyx_t_20); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 286, __pyx_L5_error)
                 }
                 __Pyx_GOTREF(__pyx_t_1);
                 __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
-                __pyx_t_20 = PyTuple_New(2); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 288, __pyx_L5_error)
+                __pyx_t_20 = PyTuple_New(2); if (unlikely(!__pyx_t_20)) __PYX_ERR(0, 286, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_20);
                 __Pyx_GIVEREF(__pyx_t_5);
                 PyTuple_SET_ITEM(__pyx_t_20, 0, __pyx_t_5);
@@ -11641,7 +11612,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                 PyTuple_SET_ITEM(__pyx_t_20, 1, __pyx_t_1);
                 __pyx_t_5 = 0;
                 __pyx_t_1 = 0;
-                __pyx_t_1 = __Pyx_PyString_Format(__pyx_kp_s_s_s, __pyx_t_20); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 288, __pyx_L5_error)
+                __pyx_t_1 = __Pyx_PyString_Format(__pyx_kp_s_s_s, __pyx_t_20); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 286, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_1);
                 __Pyx_DECREF(__pyx_t_20); __pyx_t_20 = 0;
                 __pyx_t_20 = NULL;
@@ -11655,24 +11626,24 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                   }
                 }
                 if (!__pyx_t_20) {
-                  __pyx_t_21 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_t_1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 288, __pyx_L5_error)
+                  __pyx_t_21 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_t_1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 286, __pyx_L5_error)
                   __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
                   __Pyx_GOTREF(__pyx_t_21);
                 } else {
-                  __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 288, __pyx_L5_error)
+                  __pyx_t_5 = PyTuple_New(1+1); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 286, __pyx_L5_error)
                   __Pyx_GOTREF(__pyx_t_5);
                   __Pyx_GIVEREF(__pyx_t_20); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_20); __pyx_t_20 = NULL;
                   __Pyx_GIVEREF(__pyx_t_1);
                   PyTuple_SET_ITEM(__pyx_t_5, 0+1, __pyx_t_1);
                   __pyx_t_1 = 0;
-                  __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_5, NULL); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 288, __pyx_L5_error)
+                  __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_5, NULL); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 286, __pyx_L5_error)
                   __Pyx_GOTREF(__pyx_t_21);
                   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
                 }
                 __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
                 __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
 
-                /* "mkinitfs.py":287
+                /* "mkinitfs.py":285
  *                 found = True
  *                 copy_item('%s/%s' % (modsdir, base.strip()))
  *                 for dep in depends:             # <<<<<<<<<<<<<<
@@ -11682,7 +11653,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               }
               __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
 
-              /* "mkinitfs.py":283
+              /* "mkinitfs.py":281
  *             base = line.split(':')[0]
  *             depends = line.split(':')[1].split()
  *             if '/%s.ko' % module in base \             # <<<<<<<<<<<<<<
@@ -11691,7 +11662,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
             }
 
-            /* "mkinitfs.py":280
+            /* "mkinitfs.py":278
  *             continue
  *         found = False
  *         for line in misc.file_read('%s/modules.dep' % modsdir).splitlines():             # <<<<<<<<<<<<<<
@@ -11701,35 +11672,35 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           }
           __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
 
-          /* "mkinitfs.py":289
+          /* "mkinitfs.py":287
  *                 for dep in depends:
  *                     copy_item('%s/%s' % (modsdir, dep.strip()))
  *         if not found:             # <<<<<<<<<<<<<<
  *             for line in misc.file_read('%s/modules.builtin' % modsdir).splitlines():
  *                 if '/%s.ko' % module in line \
  */
-          __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_found); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 289, __pyx_L5_error)
+          __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_found); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 287, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_17);
-          __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_17); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 289, __pyx_L5_error)
+          __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_17); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 287, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
           __pyx_t_14 = ((!__pyx_t_12) != 0);
           if (__pyx_t_14) {
 
-            /* "mkinitfs.py":290
+            /* "mkinitfs.py":288
  *                     copy_item('%s/%s' % (modsdir, dep.strip()))
  *         if not found:
  *             for line in misc.file_read('%s/modules.builtin' % modsdir).splitlines():             # <<<<<<<<<<<<<<
  *                 if '/%s.ko' % module in line \
  *                     or '/%s.ko' % module.replace('_', '-') in line:
  */
-            __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 290, __pyx_L5_error)
+            __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 288, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_21);
-            __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_file_read); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 290, __pyx_L5_error)
+            __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_file_read); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 288, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_10);
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-            __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_modsdir); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 290, __pyx_L5_error)
+            __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_modsdir); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 288, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_21);
-            __pyx_t_5 = __Pyx_PyString_Format(__pyx_kp_s_s_modules_builtin, __pyx_t_21); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 290, __pyx_L5_error)
+            __pyx_t_5 = __Pyx_PyString_Format(__pyx_kp_s_s_modules_builtin, __pyx_t_21); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 288, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
             __pyx_t_21 = NULL;
@@ -11743,22 +11714,22 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               }
             }
             if (!__pyx_t_21) {
-              __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 290, __pyx_L5_error)
+              __pyx_t_6 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_t_5); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 288, __pyx_L5_error)
               __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
               __Pyx_GOTREF(__pyx_t_6);
             } else {
-              __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 290, __pyx_L5_error)
+              __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 288, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_1);
               __Pyx_GIVEREF(__pyx_t_21); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_21); __pyx_t_21 = NULL;
               __Pyx_GIVEREF(__pyx_t_5);
               PyTuple_SET_ITEM(__pyx_t_1, 0+1, __pyx_t_5);
               __pyx_t_5 = 0;
-              __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_1, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 290, __pyx_L5_error)
+              __pyx_t_6 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_1, NULL); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 288, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_6);
               __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
             }
             __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-            __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_splitlines); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 290, __pyx_L5_error)
+            __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_splitlines); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 288, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_10);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __pyx_t_6 = NULL;
@@ -11772,10 +11743,10 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               }
             }
             if (__pyx_t_6) {
-              __pyx_t_17 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_t_6); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 290, __pyx_L5_error)
+              __pyx_t_17 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_t_6); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 288, __pyx_L5_error)
               __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             } else {
-              __pyx_t_17 = __Pyx_PyObject_CallNoArg(__pyx_t_10); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 290, __pyx_L5_error)
+              __pyx_t_17 = __Pyx_PyObject_CallNoArg(__pyx_t_10); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 288, __pyx_L5_error)
             }
             __Pyx_GOTREF(__pyx_t_17);
             __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
@@ -11783,9 +11754,9 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               __pyx_t_10 = __pyx_t_17; __Pyx_INCREF(__pyx_t_10); __pyx_t_16 = 0;
               __pyx_t_18 = NULL;
             } else {
-              __pyx_t_16 = -1; __pyx_t_10 = PyObject_GetIter(__pyx_t_17); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 290, __pyx_L5_error)
+              __pyx_t_16 = -1; __pyx_t_10 = PyObject_GetIter(__pyx_t_17); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 288, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_10);
-              __pyx_t_18 = Py_TYPE(__pyx_t_10)->tp_iternext; if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 290, __pyx_L5_error)
+              __pyx_t_18 = Py_TYPE(__pyx_t_10)->tp_iternext; if (unlikely(!__pyx_t_18)) __PYX_ERR(0, 288, __pyx_L5_error)
             }
             __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
             for (;;) {
@@ -11793,17 +11764,17 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                 if (likely(PyList_CheckExact(__pyx_t_10))) {
                   if (__pyx_t_16 >= PyList_GET_SIZE(__pyx_t_10)) break;
                   #if CYTHON_COMPILING_IN_CPYTHON
-                  __pyx_t_17 = PyList_GET_ITEM(__pyx_t_10, __pyx_t_16); __Pyx_INCREF(__pyx_t_17); __pyx_t_16++; if (unlikely(0 < 0)) __PYX_ERR(0, 290, __pyx_L5_error)
+                  __pyx_t_17 = PyList_GET_ITEM(__pyx_t_10, __pyx_t_16); __Pyx_INCREF(__pyx_t_17); __pyx_t_16++; if (unlikely(0 < 0)) __PYX_ERR(0, 288, __pyx_L5_error)
                   #else
-                  __pyx_t_17 = PySequence_ITEM(__pyx_t_10, __pyx_t_16); __pyx_t_16++; if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 290, __pyx_L5_error)
+                  __pyx_t_17 = PySequence_ITEM(__pyx_t_10, __pyx_t_16); __pyx_t_16++; if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 288, __pyx_L5_error)
                   __Pyx_GOTREF(__pyx_t_17);
                   #endif
                 } else {
                   if (__pyx_t_16 >= PyTuple_GET_SIZE(__pyx_t_10)) break;
                   #if CYTHON_COMPILING_IN_CPYTHON
-                  __pyx_t_17 = PyTuple_GET_ITEM(__pyx_t_10, __pyx_t_16); __Pyx_INCREF(__pyx_t_17); __pyx_t_16++; if (unlikely(0 < 0)) __PYX_ERR(0, 290, __pyx_L5_error)
+                  __pyx_t_17 = PyTuple_GET_ITEM(__pyx_t_10, __pyx_t_16); __Pyx_INCREF(__pyx_t_17); __pyx_t_16++; if (unlikely(0 < 0)) __PYX_ERR(0, 288, __pyx_L5_error)
                   #else
-                  __pyx_t_17 = PySequence_ITEM(__pyx_t_10, __pyx_t_16); __pyx_t_16++; if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 290, __pyx_L5_error)
+                  __pyx_t_17 = PySequence_ITEM(__pyx_t_10, __pyx_t_16); __pyx_t_16++; if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 288, __pyx_L5_error)
                   __Pyx_GOTREF(__pyx_t_17);
                   #endif
                 }
@@ -11813,42 +11784,42 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                   PyObject* exc_type = PyErr_Occurred();
                   if (exc_type) {
                     if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-                    else __PYX_ERR(0, 290, __pyx_L5_error)
+                    else __PYX_ERR(0, 288, __pyx_L5_error)
                   }
                   break;
                 }
                 __Pyx_GOTREF(__pyx_t_17);
               }
-              if (PyDict_SetItem(__pyx_d, __pyx_n_s_line, __pyx_t_17) < 0) __PYX_ERR(0, 290, __pyx_L5_error)
+              if (PyDict_SetItem(__pyx_d, __pyx_n_s_line, __pyx_t_17) < 0) __PYX_ERR(0, 288, __pyx_L5_error)
               __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
 
-              /* "mkinitfs.py":291
+              /* "mkinitfs.py":289
  *         if not found:
  *             for line in misc.file_read('%s/modules.builtin' % modsdir).splitlines():
  *                 if '/%s.ko' % module in line \             # <<<<<<<<<<<<<<
  *                     or '/%s.ko' % module.replace('_', '-') in line:
  *                     message.sub_debug('Module is builtin', module)
  */
-              __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_module); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 291, __pyx_L5_error)
+              __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_module); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 289, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_17);
-              __pyx_t_6 = __Pyx_PyString_Format(__pyx_kp_s_s_ko, __pyx_t_17); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 291, __pyx_L5_error)
+              __pyx_t_6 = __Pyx_PyString_Format(__pyx_kp_s_s_ko, __pyx_t_17); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 289, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_6);
               __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
 
-              /* "mkinitfs.py":292
+              /* "mkinitfs.py":290
  *             for line in misc.file_read('%s/modules.builtin' % modsdir).splitlines():
  *                 if '/%s.ko' % module in line \
  *                     or '/%s.ko' % module.replace('_', '-') in line:             # <<<<<<<<<<<<<<
  *                     message.sub_debug('Module is builtin', module)
  *                     found = True
  */
-              __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_line); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 292, __pyx_L5_error)
+              __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_line); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 290, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_17);
-              __pyx_t_12 = (__Pyx_PySequence_ContainsTF(__pyx_t_6, __pyx_t_17, Py_EQ)); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 291, __pyx_L5_error)
+              __pyx_t_12 = (__Pyx_PySequence_ContainsTF(__pyx_t_6, __pyx_t_17, Py_EQ)); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 289, __pyx_L5_error)
               __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
               __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
 
-              /* "mkinitfs.py":291
+              /* "mkinitfs.py":289
  *         if not found:
  *             for line in misc.file_read('%s/modules.builtin' % modsdir).splitlines():
  *                 if '/%s.ko' % module in line \             # <<<<<<<<<<<<<<
@@ -11862,34 +11833,34 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                 goto __pyx_L81_bool_binop_done;
               }
 
-              /* "mkinitfs.py":292
+              /* "mkinitfs.py":290
  *             for line in misc.file_read('%s/modules.builtin' % modsdir).splitlines():
  *                 if '/%s.ko' % module in line \
  *                     or '/%s.ko' % module.replace('_', '-') in line:             # <<<<<<<<<<<<<<
  *                     message.sub_debug('Module is builtin', module)
  *                     found = True
  */
-              __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_module); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 292, __pyx_L5_error)
+              __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_module); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 290, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_17);
-              __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_replace); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 292, __pyx_L5_error)
+              __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_replace); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 290, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_6);
               __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-              __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__65, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 292, __pyx_L5_error)
+              __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__65, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 290, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_17);
               __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-              __pyx_t_6 = __Pyx_PyString_Format(__pyx_kp_s_s_ko, __pyx_t_17); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 292, __pyx_L5_error)
+              __pyx_t_6 = __Pyx_PyString_Format(__pyx_kp_s_s_ko, __pyx_t_17); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 290, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_6);
               __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-              __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_line); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 292, __pyx_L5_error)
+              __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_line); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 290, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_17);
-              __pyx_t_15 = (__Pyx_PySequence_ContainsTF(__pyx_t_6, __pyx_t_17, Py_EQ)); if (unlikely(__pyx_t_15 < 0)) __PYX_ERR(0, 292, __pyx_L5_error)
+              __pyx_t_15 = (__Pyx_PySequence_ContainsTF(__pyx_t_6, __pyx_t_17, Py_EQ)); if (unlikely(__pyx_t_15 < 0)) __PYX_ERR(0, 290, __pyx_L5_error)
               __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
               __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
               __pyx_t_12 = (__pyx_t_15 != 0);
               __pyx_t_14 = __pyx_t_12;
               __pyx_L81_bool_binop_done:;
 
-              /* "mkinitfs.py":291
+              /* "mkinitfs.py":289
  *         if not found:
  *             for line in misc.file_read('%s/modules.builtin' % modsdir).splitlines():
  *                 if '/%s.ko' % module in line \             # <<<<<<<<<<<<<<
@@ -11898,19 +11869,19 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
               if (__pyx_t_14) {
 
-                /* "mkinitfs.py":293
+                /* "mkinitfs.py":291
  *                 if '/%s.ko' % module in line \
  *                     or '/%s.ko' % module.replace('_', '-') in line:
  *                     message.sub_debug('Module is builtin', module)             # <<<<<<<<<<<<<<
  *                     found = True
  *         if not found:
  */
-                __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 293, __pyx_L5_error)
+                __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 291, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_6);
-                __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 293, __pyx_L5_error)
+                __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 291, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_1);
                 __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-                __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_module); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 293, __pyx_L5_error)
+                __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_module); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 291, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_6);
                 __pyx_t_5 = NULL;
                 __pyx_t_19 = 0;
@@ -11924,7 +11895,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                     __pyx_t_19 = 1;
                   }
                 }
-                __pyx_t_21 = PyTuple_New(2+__pyx_t_19); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 293, __pyx_L5_error)
+                __pyx_t_21 = PyTuple_New(2+__pyx_t_19); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 291, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_21);
                 if (__pyx_t_5) {
                   __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_21, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -11935,22 +11906,22 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                 __Pyx_GIVEREF(__pyx_t_6);
                 PyTuple_SET_ITEM(__pyx_t_21, 1+__pyx_t_19, __pyx_t_6);
                 __pyx_t_6 = 0;
-                __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_21, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 293, __pyx_L5_error)
+                __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_21, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 291, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_17);
                 __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
                 __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
                 __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
 
-                /* "mkinitfs.py":294
+                /* "mkinitfs.py":292
  *                     or '/%s.ko' % module.replace('_', '-') in line:
  *                     message.sub_debug('Module is builtin', module)
  *                     found = True             # <<<<<<<<<<<<<<
  *         if not found:
  *             message.sub_warning('Module not found', module)
  */
-                if (PyDict_SetItem(__pyx_d, __pyx_n_s_found, Py_True) < 0) __PYX_ERR(0, 294, __pyx_L5_error)
+                if (PyDict_SetItem(__pyx_d, __pyx_n_s_found, Py_True) < 0) __PYX_ERR(0, 292, __pyx_L5_error)
 
-                /* "mkinitfs.py":291
+                /* "mkinitfs.py":289
  *         if not found:
  *             for line in misc.file_read('%s/modules.builtin' % modsdir).splitlines():
  *                 if '/%s.ko' % module in line \             # <<<<<<<<<<<<<<
@@ -11959,7 +11930,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
               }
 
-              /* "mkinitfs.py":290
+              /* "mkinitfs.py":288
  *                     copy_item('%s/%s' % (modsdir, dep.strip()))
  *         if not found:
  *             for line in misc.file_read('%s/modules.builtin' % modsdir).splitlines():             # <<<<<<<<<<<<<<
@@ -11969,7 +11940,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             }
             __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-            /* "mkinitfs.py":289
+            /* "mkinitfs.py":287
  *                 for dep in depends:
  *                     copy_item('%s/%s' % (modsdir, dep.strip()))
  *         if not found:             # <<<<<<<<<<<<<<
@@ -11978,33 +11949,33 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
           }
 
-          /* "mkinitfs.py":295
+          /* "mkinitfs.py":293
  *                     message.sub_debug('Module is builtin', module)
  *                     found = True
  *         if not found:             # <<<<<<<<<<<<<<
  *             message.sub_warning('Module not found', module)
  *     # to minimize the computation in the initramfs unpack the modules now
  */
-          __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_found); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 295, __pyx_L5_error)
+          __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_found); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 293, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_10);
-          __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 295, __pyx_L5_error)
+          __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 293, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
           __pyx_t_12 = ((!__pyx_t_14) != 0);
           if (__pyx_t_12) {
 
-            /* "mkinitfs.py":296
+            /* "mkinitfs.py":294
  *                     found = True
  *         if not found:
  *             message.sub_warning('Module not found', module)             # <<<<<<<<<<<<<<
  *     # to minimize the computation in the initramfs unpack the modules now
  *     for sfile in misc.list_files('%s/%s' % (ARGS.tmp, modsdir)):
  */
-            __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 296, __pyx_L5_error)
+            __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 294, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_17);
-            __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_sub_warning); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 296, __pyx_L5_error)
+            __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_sub_warning); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 294, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-            __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_module); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 296, __pyx_L5_error)
+            __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_module); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 294, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_17);
             __pyx_t_21 = NULL;
             __pyx_t_16 = 0;
@@ -12018,7 +11989,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                 __pyx_t_16 = 1;
               }
             }
-            __pyx_t_6 = PyTuple_New(2+__pyx_t_16); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 296, __pyx_L5_error)
+            __pyx_t_6 = PyTuple_New(2+__pyx_t_16); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 294, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_6);
             if (__pyx_t_21) {
               __Pyx_GIVEREF(__pyx_t_21); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_21); __pyx_t_21 = NULL;
@@ -12029,13 +12000,13 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             __Pyx_GIVEREF(__pyx_t_17);
             PyTuple_SET_ITEM(__pyx_t_6, 1+__pyx_t_16, __pyx_t_17);
             __pyx_t_17 = 0;
-            __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_6, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 296, __pyx_L5_error)
+            __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_6, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 294, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_10);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
             __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-            /* "mkinitfs.py":295
+            /* "mkinitfs.py":293
  *                     message.sub_debug('Module is builtin', module)
  *                     found = True
  *         if not found:             # <<<<<<<<<<<<<<
@@ -12044,7 +12015,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
           }
 
-          /* "mkinitfs.py":275
+          /* "mkinitfs.py":273
  *                     ARGS.modules.append(line)
  * 
  *     for module in ARGS.modules:             # <<<<<<<<<<<<<<
@@ -12055,26 +12026,26 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         }
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-        /* "mkinitfs.py":298
+        /* "mkinitfs.py":296
  *             message.sub_warning('Module not found', module)
  *     # to minimize the computation in the initramfs unpack the modules now
  *     for sfile in misc.list_files('%s/%s' % (ARGS.tmp, modsdir)):             # <<<<<<<<<<<<<<
  *         if misc.archive_supported(sfile):
  *             message.sub_debug('Decompressing', sfile)
  */
-        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 298, __pyx_L5_error)
+        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 296, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
-        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_list_files); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 298, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_list_files); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 296, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 298, __pyx_L5_error)
+        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 296, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
-        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_tmp); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 298, __pyx_L5_error)
+        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_tmp); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 296, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_modsdir); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 298, __pyx_L5_error)
+        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_modsdir); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 296, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
-        __pyx_t_17 = PyTuple_New(2); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 298, __pyx_L5_error)
+        __pyx_t_17 = PyTuple_New(2); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 296, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_17);
         __Pyx_GIVEREF(__pyx_t_6);
         PyTuple_SET_ITEM(__pyx_t_17, 0, __pyx_t_6);
@@ -12082,7 +12053,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         PyTuple_SET_ITEM(__pyx_t_17, 1, __pyx_t_10);
         __pyx_t_6 = 0;
         __pyx_t_10 = 0;
-        __pyx_t_10 = __Pyx_PyString_Format(__pyx_kp_s_s_s, __pyx_t_17); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 298, __pyx_L5_error)
+        __pyx_t_10 = __Pyx_PyString_Format(__pyx_kp_s_s_s, __pyx_t_17); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 296, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
         __pyx_t_17 = NULL;
@@ -12096,17 +12067,17 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           }
         }
         if (!__pyx_t_17) {
-          __pyx_t_9 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_10); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 298, __pyx_L5_error)
+          __pyx_t_9 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_10); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 296, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
           __Pyx_GOTREF(__pyx_t_9);
         } else {
-          __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 298, __pyx_L5_error)
+          __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 296, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_GIVEREF(__pyx_t_17); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_17); __pyx_t_17 = NULL;
           __Pyx_GIVEREF(__pyx_t_10);
           PyTuple_SET_ITEM(__pyx_t_6, 0+1, __pyx_t_10);
           __pyx_t_10 = 0;
-          __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_6, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 298, __pyx_L5_error)
+          __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_6, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 296, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         }
@@ -12115,9 +12086,9 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           __pyx_t_1 = __pyx_t_9; __Pyx_INCREF(__pyx_t_1); __pyx_t_7 = 0;
           __pyx_t_8 = NULL;
         } else {
-          __pyx_t_7 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 298, __pyx_L5_error)
+          __pyx_t_7 = -1; __pyx_t_1 = PyObject_GetIter(__pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 296, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
-          __pyx_t_8 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 298, __pyx_L5_error)
+          __pyx_t_8 = Py_TYPE(__pyx_t_1)->tp_iternext; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 296, __pyx_L5_error)
         }
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         for (;;) {
@@ -12125,17 +12096,17 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             if (likely(PyList_CheckExact(__pyx_t_1))) {
               if (__pyx_t_7 >= PyList_GET_SIZE(__pyx_t_1)) break;
               #if CYTHON_COMPILING_IN_CPYTHON
-              __pyx_t_9 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_7); __Pyx_INCREF(__pyx_t_9); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 298, __pyx_L5_error)
+              __pyx_t_9 = PyList_GET_ITEM(__pyx_t_1, __pyx_t_7); __Pyx_INCREF(__pyx_t_9); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 296, __pyx_L5_error)
               #else
-              __pyx_t_9 = PySequence_ITEM(__pyx_t_1, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 298, __pyx_L5_error)
+              __pyx_t_9 = PySequence_ITEM(__pyx_t_1, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 296, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_9);
               #endif
             } else {
               if (__pyx_t_7 >= PyTuple_GET_SIZE(__pyx_t_1)) break;
               #if CYTHON_COMPILING_IN_CPYTHON
-              __pyx_t_9 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_7); __Pyx_INCREF(__pyx_t_9); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 298, __pyx_L5_error)
+              __pyx_t_9 = PyTuple_GET_ITEM(__pyx_t_1, __pyx_t_7); __Pyx_INCREF(__pyx_t_9); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 296, __pyx_L5_error)
               #else
-              __pyx_t_9 = PySequence_ITEM(__pyx_t_1, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 298, __pyx_L5_error)
+              __pyx_t_9 = PySequence_ITEM(__pyx_t_1, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 296, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_9);
               #endif
             }
@@ -12145,28 +12116,28 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               PyObject* exc_type = PyErr_Occurred();
               if (exc_type) {
                 if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-                else __PYX_ERR(0, 298, __pyx_L5_error)
+                else __PYX_ERR(0, 296, __pyx_L5_error)
               }
               break;
             }
             __Pyx_GOTREF(__pyx_t_9);
           }
-          if (PyDict_SetItem(__pyx_d, __pyx_n_s_sfile, __pyx_t_9) < 0) __PYX_ERR(0, 298, __pyx_L5_error)
+          if (PyDict_SetItem(__pyx_d, __pyx_n_s_sfile, __pyx_t_9) < 0) __PYX_ERR(0, 296, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-          /* "mkinitfs.py":299
+          /* "mkinitfs.py":297
  *     # to minimize the computation in the initramfs unpack the modules now
  *     for sfile in misc.list_files('%s/%s' % (ARGS.tmp, modsdir)):
  *         if misc.archive_supported(sfile):             # <<<<<<<<<<<<<<
  *             message.sub_debug('Decompressing', sfile)
  *             misc.archive_decompress(sfile, os.path.dirname(sfile))
  */
-          __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 299, __pyx_L5_error)
+          __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 297, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_6);
-          __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_archive_supported); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 299, __pyx_L5_error)
+          __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_archive_supported); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 297, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_10);
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-          __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 299, __pyx_L5_error)
+          __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 297, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_6);
           __pyx_t_17 = NULL;
           if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_10))) {
@@ -12179,38 +12150,38 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             }
           }
           if (!__pyx_t_17) {
-            __pyx_t_9 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_t_6); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 299, __pyx_L5_error)
+            __pyx_t_9 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_t_6); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 297, __pyx_L5_error)
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __Pyx_GOTREF(__pyx_t_9);
           } else {
-            __pyx_t_21 = PyTuple_New(1+1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 299, __pyx_L5_error)
+            __pyx_t_21 = PyTuple_New(1+1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 297, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_21);
             __Pyx_GIVEREF(__pyx_t_17); PyTuple_SET_ITEM(__pyx_t_21, 0, __pyx_t_17); __pyx_t_17 = NULL;
             __Pyx_GIVEREF(__pyx_t_6);
             PyTuple_SET_ITEM(__pyx_t_21, 0+1, __pyx_t_6);
             __pyx_t_6 = 0;
-            __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_21, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 299, __pyx_L5_error)
+            __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_21, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 297, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_9);
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
           }
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-          __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_9); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 299, __pyx_L5_error)
+          __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_9); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 297, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
           if (__pyx_t_12) {
 
-            /* "mkinitfs.py":300
+            /* "mkinitfs.py":298
  *     for sfile in misc.list_files('%s/%s' % (ARGS.tmp, modsdir)):
  *         if misc.archive_supported(sfile):
  *             message.sub_debug('Decompressing', sfile)             # <<<<<<<<<<<<<<
  *             misc.archive_decompress(sfile, os.path.dirname(sfile))
  *             message.sub_debug('Removing', sfile)
  */
-            __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 300, __pyx_L5_error)
+            __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 298, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_10);
-            __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 300, __pyx_L5_error)
+            __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 298, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_21);
             __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-            __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 300, __pyx_L5_error)
+            __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 298, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_10);
             __pyx_t_6 = NULL;
             __pyx_t_16 = 0;
@@ -12224,7 +12195,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                 __pyx_t_16 = 1;
               }
             }
-            __pyx_t_17 = PyTuple_New(2+__pyx_t_16); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 300, __pyx_L5_error)
+            __pyx_t_17 = PyTuple_New(2+__pyx_t_16); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 298, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_17);
             if (__pyx_t_6) {
               __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_17, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -12235,35 +12206,35 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             __Pyx_GIVEREF(__pyx_t_10);
             PyTuple_SET_ITEM(__pyx_t_17, 1+__pyx_t_16, __pyx_t_10);
             __pyx_t_10 = 0;
-            __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_21, __pyx_t_17, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 300, __pyx_L5_error)
+            __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_21, __pyx_t_17, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 298, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_9);
             __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
             __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-            /* "mkinitfs.py":301
+            /* "mkinitfs.py":299
  *         if misc.archive_supported(sfile):
  *             message.sub_debug('Decompressing', sfile)
  *             misc.archive_decompress(sfile, os.path.dirname(sfile))             # <<<<<<<<<<<<<<
  *             message.sub_debug('Removing', sfile)
  *             os.unlink(sfile)
  */
-            __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 301, __pyx_L5_error)
+            __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 299, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_21);
-            __pyx_t_17 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_archive_decompress); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 301, __pyx_L5_error)
+            __pyx_t_17 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_archive_decompress); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 299, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_17);
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-            __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 301, __pyx_L5_error)
+            __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 299, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_21);
-            __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 301, __pyx_L5_error)
+            __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 299, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_6);
-            __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_path); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 301, __pyx_L5_error)
+            __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_path); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 299, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_5);
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-            __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_dirname); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 301, __pyx_L5_error)
+            __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_dirname); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 299, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_6);
             __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-            __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 301, __pyx_L5_error)
+            __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 299, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_5);
             __pyx_t_20 = NULL;
             if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_6))) {
@@ -12276,17 +12247,17 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               }
             }
             if (!__pyx_t_20) {
-              __pyx_t_10 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_5); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 301, __pyx_L5_error)
+              __pyx_t_10 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_5); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 299, __pyx_L5_error)
               __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
               __Pyx_GOTREF(__pyx_t_10);
             } else {
-              __pyx_t_11 = PyTuple_New(1+1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 301, __pyx_L5_error)
+              __pyx_t_11 = PyTuple_New(1+1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 299, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_11);
               __Pyx_GIVEREF(__pyx_t_20); PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_20); __pyx_t_20 = NULL;
               __Pyx_GIVEREF(__pyx_t_5);
               PyTuple_SET_ITEM(__pyx_t_11, 0+1, __pyx_t_5);
               __pyx_t_5 = 0;
-              __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_11, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 301, __pyx_L5_error)
+              __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_11, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 299, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_10);
               __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
             }
@@ -12303,7 +12274,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                 __pyx_t_16 = 1;
               }
             }
-            __pyx_t_11 = PyTuple_New(2+__pyx_t_16); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 301, __pyx_L5_error)
+            __pyx_t_11 = PyTuple_New(2+__pyx_t_16); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 299, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_11);
             if (__pyx_t_6) {
               __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -12314,25 +12285,25 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             PyTuple_SET_ITEM(__pyx_t_11, 1+__pyx_t_16, __pyx_t_10);
             __pyx_t_21 = 0;
             __pyx_t_10 = 0;
-            __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_t_11, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 301, __pyx_L5_error)
+            __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_t_11, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 299, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_9);
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
             __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
             __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-            /* "mkinitfs.py":302
+            /* "mkinitfs.py":300
  *             message.sub_debug('Decompressing', sfile)
  *             misc.archive_decompress(sfile, os.path.dirname(sfile))
  *             message.sub_debug('Removing', sfile)             # <<<<<<<<<<<<<<
  *             os.unlink(sfile)
  * 
  */
-            __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 302, __pyx_L5_error)
+            __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 300, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_17);
-            __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 302, __pyx_L5_error)
+            __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 300, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_11);
             __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-            __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 302, __pyx_L5_error)
+            __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 300, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_17);
             __pyx_t_10 = NULL;
             __pyx_t_16 = 0;
@@ -12346,7 +12317,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                 __pyx_t_16 = 1;
               }
             }
-            __pyx_t_21 = PyTuple_New(2+__pyx_t_16); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 302, __pyx_L5_error)
+            __pyx_t_21 = PyTuple_New(2+__pyx_t_16); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 300, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_21);
             if (__pyx_t_10) {
               __Pyx_GIVEREF(__pyx_t_10); PyTuple_SET_ITEM(__pyx_t_21, 0, __pyx_t_10); __pyx_t_10 = NULL;
@@ -12357,25 +12328,25 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             __Pyx_GIVEREF(__pyx_t_17);
             PyTuple_SET_ITEM(__pyx_t_21, 1+__pyx_t_16, __pyx_t_17);
             __pyx_t_17 = 0;
-            __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_21, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 302, __pyx_L5_error)
+            __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_21, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 300, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_9);
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
             __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-            /* "mkinitfs.py":303
+            /* "mkinitfs.py":301
  *             misc.archive_decompress(sfile, os.path.dirname(sfile))
  *             message.sub_debug('Removing', sfile)
  *             os.unlink(sfile)             # <<<<<<<<<<<<<<
  * 
  *     message.sub_info('Copying module files')
  */
-            __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 303, __pyx_L5_error)
+            __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 301, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_11);
-            __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_unlink); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 303, __pyx_L5_error)
+            __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_unlink); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 301, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_21);
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-            __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 303, __pyx_L5_error)
+            __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 301, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_11);
             __pyx_t_17 = NULL;
             if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_21))) {
@@ -12388,24 +12359,24 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               }
             }
             if (!__pyx_t_17) {
-              __pyx_t_9 = __Pyx_PyObject_CallOneArg(__pyx_t_21, __pyx_t_11); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 303, __pyx_L5_error)
+              __pyx_t_9 = __Pyx_PyObject_CallOneArg(__pyx_t_21, __pyx_t_11); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 301, __pyx_L5_error)
               __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
               __Pyx_GOTREF(__pyx_t_9);
             } else {
-              __pyx_t_10 = PyTuple_New(1+1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 303, __pyx_L5_error)
+              __pyx_t_10 = PyTuple_New(1+1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 301, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_10);
               __Pyx_GIVEREF(__pyx_t_17); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_17); __pyx_t_17 = NULL;
               __Pyx_GIVEREF(__pyx_t_11);
               PyTuple_SET_ITEM(__pyx_t_10, 0+1, __pyx_t_11);
               __pyx_t_11 = 0;
-              __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_21, __pyx_t_10, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 303, __pyx_L5_error)
+              __pyx_t_9 = __Pyx_PyObject_Call(__pyx_t_21, __pyx_t_10, NULL); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 301, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_9);
               __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
             }
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
             __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
 
-            /* "mkinitfs.py":299
+            /* "mkinitfs.py":297
  *     # to minimize the computation in the initramfs unpack the modules now
  *     for sfile in misc.list_files('%s/%s' % (ARGS.tmp, modsdir)):
  *         if misc.archive_supported(sfile):             # <<<<<<<<<<<<<<
@@ -12414,7 +12385,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
           }
 
-          /* "mkinitfs.py":298
+          /* "mkinitfs.py":296
  *             message.sub_warning('Module not found', module)
  *     # to minimize the computation in the initramfs unpack the modules now
  *     for sfile in misc.list_files('%s/%s' % (ARGS.tmp, modsdir)):             # <<<<<<<<<<<<<<
@@ -12424,36 +12395,36 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         }
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-        /* "mkinitfs.py":305
+        /* "mkinitfs.py":303
  *             os.unlink(sfile)
  * 
  *     message.sub_info('Copying module files')             # <<<<<<<<<<<<<<
  *     for sfile in os.listdir(modsdir):
  *         if sfile.startswith('modules.'):
  */
-        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 305, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 303, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 305, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 303, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__66, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 305, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__66, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 303, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-        /* "mkinitfs.py":306
+        /* "mkinitfs.py":304
  * 
  *     message.sub_info('Copying module files')
  *     for sfile in os.listdir(modsdir):             # <<<<<<<<<<<<<<
  *         if sfile.startswith('modules.'):
  *             copy_item('%s/%s' % (modsdir, sfile))
  */
-        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 306, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 304, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
-        __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_listdir); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 306, __pyx_L5_error)
+        __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_listdir); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 304, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_21);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_modsdir); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 306, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_modsdir); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 304, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __pyx_t_10 = NULL;
         if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_21))) {
@@ -12466,17 +12437,17 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           }
         }
         if (!__pyx_t_10) {
-          __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_21, __pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 306, __pyx_L5_error)
+          __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_21, __pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 304, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
           __Pyx_GOTREF(__pyx_t_1);
         } else {
-          __pyx_t_11 = PyTuple_New(1+1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 306, __pyx_L5_error)
+          __pyx_t_11 = PyTuple_New(1+1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 304, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_11);
           __Pyx_GIVEREF(__pyx_t_10); PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_10); __pyx_t_10 = NULL;
           __Pyx_GIVEREF(__pyx_t_9);
           PyTuple_SET_ITEM(__pyx_t_11, 0+1, __pyx_t_9);
           __pyx_t_9 = 0;
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_21, __pyx_t_11, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 306, __pyx_L5_error)
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_21, __pyx_t_11, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 304, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         }
@@ -12485,9 +12456,9 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           __pyx_t_21 = __pyx_t_1; __Pyx_INCREF(__pyx_t_21); __pyx_t_7 = 0;
           __pyx_t_8 = NULL;
         } else {
-          __pyx_t_7 = -1; __pyx_t_21 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 306, __pyx_L5_error)
+          __pyx_t_7 = -1; __pyx_t_21 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 304, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_21);
-          __pyx_t_8 = Py_TYPE(__pyx_t_21)->tp_iternext; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 306, __pyx_L5_error)
+          __pyx_t_8 = Py_TYPE(__pyx_t_21)->tp_iternext; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 304, __pyx_L5_error)
         }
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         for (;;) {
@@ -12495,17 +12466,17 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             if (likely(PyList_CheckExact(__pyx_t_21))) {
               if (__pyx_t_7 >= PyList_GET_SIZE(__pyx_t_21)) break;
               #if CYTHON_COMPILING_IN_CPYTHON
-              __pyx_t_1 = PyList_GET_ITEM(__pyx_t_21, __pyx_t_7); __Pyx_INCREF(__pyx_t_1); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 306, __pyx_L5_error)
+              __pyx_t_1 = PyList_GET_ITEM(__pyx_t_21, __pyx_t_7); __Pyx_INCREF(__pyx_t_1); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 304, __pyx_L5_error)
               #else
-              __pyx_t_1 = PySequence_ITEM(__pyx_t_21, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 306, __pyx_L5_error)
+              __pyx_t_1 = PySequence_ITEM(__pyx_t_21, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 304, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_1);
               #endif
             } else {
               if (__pyx_t_7 >= PyTuple_GET_SIZE(__pyx_t_21)) break;
               #if CYTHON_COMPILING_IN_CPYTHON
-              __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_21, __pyx_t_7); __Pyx_INCREF(__pyx_t_1); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 306, __pyx_L5_error)
+              __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_21, __pyx_t_7); __Pyx_INCREF(__pyx_t_1); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 304, __pyx_L5_error)
               #else
-              __pyx_t_1 = PySequence_ITEM(__pyx_t_21, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 306, __pyx_L5_error)
+              __pyx_t_1 = PySequence_ITEM(__pyx_t_21, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 304, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_1);
               #endif
             }
@@ -12515,48 +12486,48 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               PyObject* exc_type = PyErr_Occurred();
               if (exc_type) {
                 if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-                else __PYX_ERR(0, 306, __pyx_L5_error)
+                else __PYX_ERR(0, 304, __pyx_L5_error)
               }
               break;
             }
             __Pyx_GOTREF(__pyx_t_1);
           }
-          if (PyDict_SetItem(__pyx_d, __pyx_n_s_sfile, __pyx_t_1) < 0) __PYX_ERR(0, 306, __pyx_L5_error)
+          if (PyDict_SetItem(__pyx_d, __pyx_n_s_sfile, __pyx_t_1) < 0) __PYX_ERR(0, 304, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-          /* "mkinitfs.py":307
+          /* "mkinitfs.py":305
  *     message.sub_info('Copying module files')
  *     for sfile in os.listdir(modsdir):
  *         if sfile.startswith('modules.'):             # <<<<<<<<<<<<<<
  *             copy_item('%s/%s' % (modsdir, sfile))
  * 
  */
-          __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 307, __pyx_L5_error)
+          __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 305, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
-          __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_startswith); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 307, __pyx_L5_error)
+          __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_startswith); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 305, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_11);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__67, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 307, __pyx_L5_error)
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__67, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 305, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-          __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 307, __pyx_L5_error)
+          __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 305, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           if (__pyx_t_12) {
 
-            /* "mkinitfs.py":308
+            /* "mkinitfs.py":306
  *     for sfile in os.listdir(modsdir):
  *         if sfile.startswith('modules.'):
  *             copy_item('%s/%s' % (modsdir, sfile))             # <<<<<<<<<<<<<<
  * 
  *     message.sub_info('Creating essential nodes')
  */
-            __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_copy_item); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 308, __pyx_L5_error)
+            __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_copy_item); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 306, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_11);
-            __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_modsdir); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 308, __pyx_L5_error)
+            __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_modsdir); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 306, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_9);
-            __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 308, __pyx_L5_error)
+            __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 306, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_10);
-            __pyx_t_17 = PyTuple_New(2); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 308, __pyx_L5_error)
+            __pyx_t_17 = PyTuple_New(2); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 306, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_17);
             __Pyx_GIVEREF(__pyx_t_9);
             PyTuple_SET_ITEM(__pyx_t_17, 0, __pyx_t_9);
@@ -12564,7 +12535,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             PyTuple_SET_ITEM(__pyx_t_17, 1, __pyx_t_10);
             __pyx_t_9 = 0;
             __pyx_t_10 = 0;
-            __pyx_t_10 = __Pyx_PyString_Format(__pyx_kp_s_s_s, __pyx_t_17); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 308, __pyx_L5_error)
+            __pyx_t_10 = __Pyx_PyString_Format(__pyx_kp_s_s_s, __pyx_t_17); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 306, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_10);
             __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
             __pyx_t_17 = NULL;
@@ -12578,24 +12549,24 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               }
             }
             if (!__pyx_t_17) {
-              __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_10); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 308, __pyx_L5_error)
+              __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_10); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 306, __pyx_L5_error)
               __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
               __Pyx_GOTREF(__pyx_t_1);
             } else {
-              __pyx_t_9 = PyTuple_New(1+1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 308, __pyx_L5_error)
+              __pyx_t_9 = PyTuple_New(1+1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 306, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_9);
               __Pyx_GIVEREF(__pyx_t_17); PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_17); __pyx_t_17 = NULL;
               __Pyx_GIVEREF(__pyx_t_10);
               PyTuple_SET_ITEM(__pyx_t_9, 0+1, __pyx_t_10);
               __pyx_t_10 = 0;
-              __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_9, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 308, __pyx_L5_error)
+              __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_9, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 306, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_1);
               __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
             }
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-            /* "mkinitfs.py":307
+            /* "mkinitfs.py":305
  *     message.sub_info('Copying module files')
  *     for sfile in os.listdir(modsdir):
  *         if sfile.startswith('modules.'):             # <<<<<<<<<<<<<<
@@ -12604,7 +12575,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
           }
 
-          /* "mkinitfs.py":306
+          /* "mkinitfs.py":304
  * 
  *     message.sub_info('Copying module files')
  *     for sfile in os.listdir(modsdir):             # <<<<<<<<<<<<<<
@@ -12614,54 +12585,54 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         }
         __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
 
-        /* "mkinitfs.py":310
+        /* "mkinitfs.py":308
  *             copy_item('%s/%s' % (modsdir, sfile))
  * 
  *     message.sub_info('Creating essential nodes')             # <<<<<<<<<<<<<<
  *     dev_dir = '%s/dev' % ARGS.tmp
  *     misc.dir_create(dev_dir)
  */
-        __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 310, __pyx_L5_error)
+        __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 308, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_21);
-        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 310, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 308, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-        __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__68, NULL); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 310, __pyx_L5_error)
+        __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__68, NULL); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 308, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_21);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
 
-        /* "mkinitfs.py":311
+        /* "mkinitfs.py":309
  * 
  *     message.sub_info('Creating essential nodes')
  *     dev_dir = '%s/dev' % ARGS.tmp             # <<<<<<<<<<<<<<
  *     misc.dir_create(dev_dir)
  *     misc.system_command((ARGS.busybox, 'mknod', '-m', '640', \
  */
-        __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 311, __pyx_L5_error)
+        __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 309, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_21);
-        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_tmp); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 311, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_tmp); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 309, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-        __pyx_t_21 = __Pyx_PyString_Format(__pyx_kp_s_s_dev, __pyx_t_1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 311, __pyx_L5_error)
+        __pyx_t_21 = __Pyx_PyString_Format(__pyx_kp_s_s_dev, __pyx_t_1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 309, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_21);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        if (PyDict_SetItem(__pyx_d, __pyx_n_s_dev_dir, __pyx_t_21) < 0) __PYX_ERR(0, 311, __pyx_L5_error)
+        if (PyDict_SetItem(__pyx_d, __pyx_n_s_dev_dir, __pyx_t_21) < 0) __PYX_ERR(0, 309, __pyx_L5_error)
         __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
 
-        /* "mkinitfs.py":312
+        /* "mkinitfs.py":310
  *     message.sub_info('Creating essential nodes')
  *     dev_dir = '%s/dev' % ARGS.tmp
  *     misc.dir_create(dev_dir)             # <<<<<<<<<<<<<<
  *     misc.system_command((ARGS.busybox, 'mknod', '-m', '640', \
  *         '%s/console' % dev_dir, 'c', '5', '1'))
  */
-        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 312, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 310, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_dir_create); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 312, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_dir_create); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 310, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_dev_dir); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 312, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_dev_dir); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 310, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
         __pyx_t_9 = NULL;
         if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_11))) {
@@ -12674,62 +12645,62 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           }
         }
         if (!__pyx_t_9) {
-          __pyx_t_21 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 312, __pyx_L5_error)
+          __pyx_t_21 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 310, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __Pyx_GOTREF(__pyx_t_21);
         } else {
-          __pyx_t_10 = PyTuple_New(1+1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 312, __pyx_L5_error)
+          __pyx_t_10 = PyTuple_New(1+1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 310, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_10);
           __Pyx_GIVEREF(__pyx_t_9); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_9); __pyx_t_9 = NULL;
           __Pyx_GIVEREF(__pyx_t_1);
           PyTuple_SET_ITEM(__pyx_t_10, 0+1, __pyx_t_1);
           __pyx_t_1 = 0;
-          __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_10, NULL); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 312, __pyx_L5_error)
+          __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_10, NULL); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 310, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_21);
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
         }
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
 
-        /* "mkinitfs.py":313
+        /* "mkinitfs.py":311
  *     dev_dir = '%s/dev' % ARGS.tmp
  *     misc.dir_create(dev_dir)
  *     misc.system_command((ARGS.busybox, 'mknod', '-m', '640', \             # <<<<<<<<<<<<<<
  *         '%s/console' % dev_dir, 'c', '5', '1'))
  *     misc.system_command((ARGS.busybox, 'mknod', '-m', '664', \
  */
-        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 313, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 311, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
-        __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_system_command); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 313, __pyx_L5_error)
+        __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_system_command); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 311, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 313, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 311, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
-        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_busybox); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 313, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_busybox); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 311, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-        /* "mkinitfs.py":314
+        /* "mkinitfs.py":312
  *     misc.dir_create(dev_dir)
  *     misc.system_command((ARGS.busybox, 'mknod', '-m', '640', \
  *         '%s/console' % dev_dir, 'c', '5', '1'))             # <<<<<<<<<<<<<<
  *     misc.system_command((ARGS.busybox, 'mknod', '-m', '664', \
  *         '%s/null' % dev_dir, 'c', '1', '0'))
  */
-        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_dev_dir); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 314, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_dev_dir); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 312, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
-        __pyx_t_9 = __Pyx_PyString_Format(__pyx_kp_s_s_console, __pyx_t_11); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 314, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_PyString_Format(__pyx_kp_s_s_console, __pyx_t_11); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 312, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-        /* "mkinitfs.py":313
+        /* "mkinitfs.py":311
  *     dev_dir = '%s/dev' % ARGS.tmp
  *     misc.dir_create(dev_dir)
  *     misc.system_command((ARGS.busybox, 'mknod', '-m', '640', \             # <<<<<<<<<<<<<<
  *         '%s/console' % dev_dir, 'c', '5', '1'))
  *     misc.system_command((ARGS.busybox, 'mknod', '-m', '664', \
  */
-        __pyx_t_11 = PyTuple_New(8); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 313, __pyx_L5_error)
+        __pyx_t_11 = PyTuple_New(8); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 311, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_GIVEREF(__pyx_t_1);
         PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_1);
@@ -12766,62 +12737,62 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           }
         }
         if (!__pyx_t_9) {
-          __pyx_t_21 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_t_11); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 313, __pyx_L5_error)
+          __pyx_t_21 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_t_11); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 311, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
           __Pyx_GOTREF(__pyx_t_21);
         } else {
-          __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 313, __pyx_L5_error)
+          __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 311, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_GIVEREF(__pyx_t_9); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_9); __pyx_t_9 = NULL;
           __Pyx_GIVEREF(__pyx_t_11);
           PyTuple_SET_ITEM(__pyx_t_1, 0+1, __pyx_t_11);
           __pyx_t_11 = 0;
-          __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_1, NULL); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 313, __pyx_L5_error)
+          __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_1, NULL); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 311, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_21);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         }
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
         __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
 
-        /* "mkinitfs.py":315
+        /* "mkinitfs.py":313
  *     misc.system_command((ARGS.busybox, 'mknod', '-m', '640', \
  *         '%s/console' % dev_dir, 'c', '5', '1'))
  *     misc.system_command((ARGS.busybox, 'mknod', '-m', '664', \             # <<<<<<<<<<<<<<
  *         '%s/null' % dev_dir, 'c', '1', '0'))
  * 
  */
-        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 315, __pyx_L5_error)
+        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 313, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
-        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_system_command); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 315, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_system_command); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 313, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 315, __pyx_L5_error)
+        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 313, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
-        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_busybox); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 315, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_busybox); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 313, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-        /* "mkinitfs.py":316
+        /* "mkinitfs.py":314
  *         '%s/console' % dev_dir, 'c', '5', '1'))
  *     misc.system_command((ARGS.busybox, 'mknod', '-m', '664', \
  *         '%s/null' % dev_dir, 'c', '1', '0'))             # <<<<<<<<<<<<<<
  * 
  *     message.sub_info('Creating shared libraries cache')
  */
-        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_dev_dir); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 316, __pyx_L5_error)
+        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_dev_dir); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 314, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
-        __pyx_t_9 = __Pyx_PyString_Format(__pyx_kp_s_s_null, __pyx_t_10); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 316, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_PyString_Format(__pyx_kp_s_s_null, __pyx_t_10); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 314, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-        /* "mkinitfs.py":315
+        /* "mkinitfs.py":313
  *     misc.system_command((ARGS.busybox, 'mknod', '-m', '640', \
  *         '%s/console' % dev_dir, 'c', '5', '1'))
  *     misc.system_command((ARGS.busybox, 'mknod', '-m', '664', \             # <<<<<<<<<<<<<<
  *         '%s/null' % dev_dir, 'c', '1', '0'))
  * 
  */
-        __pyx_t_10 = PyTuple_New(8); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 315, __pyx_L5_error)
+        __pyx_t_10 = PyTuple_New(8); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 313, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_GIVEREF(__pyx_t_11);
         PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_11);
@@ -12858,71 +12829,71 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           }
         }
         if (!__pyx_t_9) {
-          __pyx_t_21 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_10); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 315, __pyx_L5_error)
+          __pyx_t_21 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_10); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 313, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
           __Pyx_GOTREF(__pyx_t_21);
         } else {
-          __pyx_t_11 = PyTuple_New(1+1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 315, __pyx_L5_error)
+          __pyx_t_11 = PyTuple_New(1+1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 313, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_11);
           __Pyx_GIVEREF(__pyx_t_9); PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_9); __pyx_t_9 = NULL;
           __Pyx_GIVEREF(__pyx_t_10);
           PyTuple_SET_ITEM(__pyx_t_11, 0+1, __pyx_t_10);
           __pyx_t_10 = 0;
-          __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_11, NULL); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 315, __pyx_L5_error)
+          __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_11, NULL); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 313, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_21);
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         }
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
 
-        /* "mkinitfs.py":318
+        /* "mkinitfs.py":316
  *         '%s/null' % dev_dir, 'c', '1', '0'))
  * 
  *     message.sub_info('Creating shared libraries cache')             # <<<<<<<<<<<<<<
  *     etc_dir = '%s/etc' % ARGS.tmp
  *     misc.dir_create(etc_dir)
  */
-        __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 318, __pyx_L5_error)
+        __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 316, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_21);
-        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 318, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 316, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-        __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__69, NULL); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 318, __pyx_L5_error)
+        __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__69, NULL); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 316, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_21);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
 
-        /* "mkinitfs.py":319
+        /* "mkinitfs.py":317
  * 
  *     message.sub_info('Creating shared libraries cache')
  *     etc_dir = '%s/etc' % ARGS.tmp             # <<<<<<<<<<<<<<
  *     misc.dir_create(etc_dir)
  *     # to surpress a warning
  */
-        __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 319, __pyx_L5_error)
+        __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 317, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_21);
-        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_tmp); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 319, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_tmp); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 317, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-        __pyx_t_21 = __Pyx_PyString_Format(__pyx_kp_s_s_etc, __pyx_t_1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 319, __pyx_L5_error)
+        __pyx_t_21 = __Pyx_PyString_Format(__pyx_kp_s_s_etc, __pyx_t_1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 317, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_21);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        if (PyDict_SetItem(__pyx_d, __pyx_n_s_etc_dir, __pyx_t_21) < 0) __PYX_ERR(0, 319, __pyx_L5_error)
+        if (PyDict_SetItem(__pyx_d, __pyx_n_s_etc_dir, __pyx_t_21) < 0) __PYX_ERR(0, 317, __pyx_L5_error)
         __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
 
-        /* "mkinitfs.py":320
+        /* "mkinitfs.py":318
  *     message.sub_info('Creating shared libraries cache')
  *     etc_dir = '%s/etc' % ARGS.tmp
  *     misc.dir_create(etc_dir)             # <<<<<<<<<<<<<<
  *     # to surpress a warning
  *     ldconf = '%s/ld.so.conf' % etc_dir
  */
-        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 320, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 318, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_dir_create); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 320, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_dir_create); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 318, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_etc_dir); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 320, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_etc_dir); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 318, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
         __pyx_t_10 = NULL;
         if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_11))) {
@@ -12935,54 +12906,54 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           }
         }
         if (!__pyx_t_10) {
-          __pyx_t_21 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 320, __pyx_L5_error)
+          __pyx_t_21 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_1); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 318, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __Pyx_GOTREF(__pyx_t_21);
         } else {
-          __pyx_t_9 = PyTuple_New(1+1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 320, __pyx_L5_error)
+          __pyx_t_9 = PyTuple_New(1+1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 318, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_9);
           __Pyx_GIVEREF(__pyx_t_10); PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_10); __pyx_t_10 = NULL;
           __Pyx_GIVEREF(__pyx_t_1);
           PyTuple_SET_ITEM(__pyx_t_9, 0+1, __pyx_t_1);
           __pyx_t_1 = 0;
-          __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_9, NULL); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 320, __pyx_L5_error)
+          __pyx_t_21 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_9, NULL); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 318, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_21);
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         }
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
 
-        /* "mkinitfs.py":322
+        /* "mkinitfs.py":320
  *     misc.dir_create(etc_dir)
  *     # to surpress a warning
  *     ldconf = '%s/ld.so.conf' % etc_dir             # <<<<<<<<<<<<<<
  *     if not os.path.isfile(ldconf):
  *         misc.file_write(ldconf, '')
  */
-        __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_etc_dir); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 322, __pyx_L5_error)
+        __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_etc_dir); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 320, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_21);
-        __pyx_t_11 = __Pyx_PyString_Format(__pyx_kp_s_s_ld_so_conf, __pyx_t_21); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 322, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_PyString_Format(__pyx_kp_s_s_ld_so_conf, __pyx_t_21); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 320, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-        if (PyDict_SetItem(__pyx_d, __pyx_n_s_ldconf, __pyx_t_11) < 0) __PYX_ERR(0, 322, __pyx_L5_error)
+        if (PyDict_SetItem(__pyx_d, __pyx_n_s_ldconf, __pyx_t_11) < 0) __PYX_ERR(0, 320, __pyx_L5_error)
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-        /* "mkinitfs.py":323
+        /* "mkinitfs.py":321
  *     # to surpress a warning
  *     ldconf = '%s/ld.so.conf' % etc_dir
  *     if not os.path.isfile(ldconf):             # <<<<<<<<<<<<<<
  *         misc.file_write(ldconf, '')
  *     misc.system_command((misc.whereis('ldconfig'), '-r', ARGS.tmp))
  */
-        __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 323, __pyx_L5_error)
+        __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 321, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_21);
-        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_path); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 323, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_path); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 321, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-        __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_isfile); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 323, __pyx_L5_error)
+        __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_isfile); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 321, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_21);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_ldconf); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 323, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_ldconf); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 321, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __pyx_t_1 = NULL;
         if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_21))) {
@@ -12995,39 +12966,39 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           }
         }
         if (!__pyx_t_1) {
-          __pyx_t_11 = __Pyx_PyObject_CallOneArg(__pyx_t_21, __pyx_t_9); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 323, __pyx_L5_error)
+          __pyx_t_11 = __Pyx_PyObject_CallOneArg(__pyx_t_21, __pyx_t_9); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 321, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
           __Pyx_GOTREF(__pyx_t_11);
         } else {
-          __pyx_t_10 = PyTuple_New(1+1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 323, __pyx_L5_error)
+          __pyx_t_10 = PyTuple_New(1+1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 321, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_10);
           __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_1); __pyx_t_1 = NULL;
           __Pyx_GIVEREF(__pyx_t_9);
           PyTuple_SET_ITEM(__pyx_t_10, 0+1, __pyx_t_9);
           __pyx_t_9 = 0;
-          __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_21, __pyx_t_10, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 323, __pyx_L5_error)
+          __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_21, __pyx_t_10, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 321, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_11);
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
         }
         __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-        __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_11); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 323, __pyx_L5_error)
+        __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_11); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 321, __pyx_L5_error)
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         __pyx_t_14 = ((!__pyx_t_12) != 0);
         if (__pyx_t_14) {
 
-          /* "mkinitfs.py":324
+          /* "mkinitfs.py":322
  *     ldconf = '%s/ld.so.conf' % etc_dir
  *     if not os.path.isfile(ldconf):
  *         misc.file_write(ldconf, '')             # <<<<<<<<<<<<<<
  *     misc.system_command((misc.whereis('ldconfig'), '-r', ARGS.tmp))
  * 
  */
-          __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 324, __pyx_L5_error)
+          __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 322, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_21);
-          __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_file_write); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 324, __pyx_L5_error)
+          __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_file_write); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 322, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_10);
           __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-          __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_ldconf); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 324, __pyx_L5_error)
+          __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_ldconf); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 322, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_21);
           __pyx_t_9 = NULL;
           __pyx_t_7 = 0;
@@ -13041,7 +13012,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               __pyx_t_7 = 1;
             }
           }
-          __pyx_t_1 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 324, __pyx_L5_error)
+          __pyx_t_1 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 322, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
           if (__pyx_t_9) {
             __Pyx_GIVEREF(__pyx_t_9); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_9); __pyx_t_9 = NULL;
@@ -13052,13 +13023,13 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           __Pyx_GIVEREF(__pyx_kp_s_);
           PyTuple_SET_ITEM(__pyx_t_1, 1+__pyx_t_7, __pyx_kp_s_);
           __pyx_t_21 = 0;
-          __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_1, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 324, __pyx_L5_error)
+          __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_1, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 322, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_11);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-          /* "mkinitfs.py":323
+          /* "mkinitfs.py":321
  *     # to surpress a warning
  *     ldconf = '%s/ld.so.conf' % etc_dir
  *     if not os.path.isfile(ldconf):             # <<<<<<<<<<<<<<
@@ -13067,32 +13038,32 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
         }
 
-        /* "mkinitfs.py":325
+        /* "mkinitfs.py":323
  *     if not os.path.isfile(ldconf):
  *         misc.file_write(ldconf, '')
  *     misc.system_command((misc.whereis('ldconfig'), '-r', ARGS.tmp))             # <<<<<<<<<<<<<<
  * 
  *     if ARGS.strip:
  */
-        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 325, __pyx_L5_error)
+        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 323, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
-        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_system_command); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 325, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_system_command); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 323, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 325, __pyx_L5_error)
+        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 323, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
-        __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_whereis); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 325, __pyx_L5_error)
+        __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_whereis); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 323, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_21);
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-        __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_21, __pyx_tuple__70, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 325, __pyx_L5_error)
+        __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_21, __pyx_tuple__70, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 323, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-        __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 325, __pyx_L5_error)
+        __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 323, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_21);
-        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_tmp); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 325, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_tmp); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 323, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-        __pyx_t_21 = PyTuple_New(3); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 325, __pyx_L5_error)
+        __pyx_t_21 = PyTuple_New(3); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 323, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_21);
         __Pyx_GIVEREF(__pyx_t_10);
         PyTuple_SET_ITEM(__pyx_t_21, 0, __pyx_t_10);
@@ -13114,89 +13085,89 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           }
         }
         if (!__pyx_t_9) {
-          __pyx_t_11 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_21); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 325, __pyx_L5_error)
+          __pyx_t_11 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_21); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 323, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
           __Pyx_GOTREF(__pyx_t_11);
         } else {
-          __pyx_t_10 = PyTuple_New(1+1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 325, __pyx_L5_error)
+          __pyx_t_10 = PyTuple_New(1+1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 323, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_10);
           __Pyx_GIVEREF(__pyx_t_9); PyTuple_SET_ITEM(__pyx_t_10, 0, __pyx_t_9); __pyx_t_9 = NULL;
           __Pyx_GIVEREF(__pyx_t_21);
           PyTuple_SET_ITEM(__pyx_t_10, 0+1, __pyx_t_21);
           __pyx_t_21 = 0;
-          __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_10, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 325, __pyx_L5_error)
+          __pyx_t_11 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_10, NULL); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 323, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_11);
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
         }
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
 
-        /* "mkinitfs.py":327
+        /* "mkinitfs.py":325
  *     misc.system_command((misc.whereis('ldconfig'), '-r', ARGS.tmp))
  * 
  *     if ARGS.strip:             # <<<<<<<<<<<<<<
  *         message.sub_info('Stripping binraries and libraries')
  *         strip = misc.whereis('strip')
  */
-        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 327, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 325, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
-        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_strip); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 327, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_strip); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 325, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 327, __pyx_L5_error)
+        __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 325, __pyx_L5_error)
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         if (__pyx_t_14) {
 
-          /* "mkinitfs.py":328
+          /* "mkinitfs.py":326
  * 
  *     if ARGS.strip:
  *         message.sub_info('Stripping binraries and libraries')             # <<<<<<<<<<<<<<
  *         strip = misc.whereis('strip')
  *         for sfile in misc.list_files(ARGS.tmp):
  */
-          __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 328, __pyx_L5_error)
+          __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 326, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
-          __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 328, __pyx_L5_error)
+          __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 326, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_11);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__71, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 328, __pyx_L5_error)
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__71, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 326, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-          /* "mkinitfs.py":329
+          /* "mkinitfs.py":327
  *     if ARGS.strip:
  *         message.sub_info('Stripping binraries and libraries')
  *         strip = misc.whereis('strip')             # <<<<<<<<<<<<<<
  *         for sfile in misc.list_files(ARGS.tmp):
  *             smime = misc.file_mime(sfile)
  */
-          __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 329, __pyx_L5_error)
+          __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 327, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
-          __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_whereis); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 329, __pyx_L5_error)
+          __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_whereis); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 327, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_11);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__72, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 329, __pyx_L5_error)
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__72, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 327, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-          if (PyDict_SetItem(__pyx_d, __pyx_n_s_strip, __pyx_t_1) < 0) __PYX_ERR(0, 329, __pyx_L5_error)
+          if (PyDict_SetItem(__pyx_d, __pyx_n_s_strip, __pyx_t_1) < 0) __PYX_ERR(0, 327, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-          /* "mkinitfs.py":330
+          /* "mkinitfs.py":328
  *         message.sub_info('Stripping binraries and libraries')
  *         strip = misc.whereis('strip')
  *         for sfile in misc.list_files(ARGS.tmp):             # <<<<<<<<<<<<<<
  *             smime = misc.file_mime(sfile)
  *             if smime in ('application/x-executable', \
  */
-          __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 330, __pyx_L5_error)
+          __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 328, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_11);
-          __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_list_files); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 330, __pyx_L5_error)
+          __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_list_files); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 328, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_10);
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-          __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 330, __pyx_L5_error)
+          __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 328, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_11);
-          __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_tmp); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 330, __pyx_L5_error)
+          __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_tmp); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 328, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_21);
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
           __pyx_t_11 = NULL;
@@ -13210,17 +13181,17 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             }
           }
           if (!__pyx_t_11) {
-            __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_t_21); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 330, __pyx_L5_error)
+            __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_t_21); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 328, __pyx_L5_error)
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
             __Pyx_GOTREF(__pyx_t_1);
           } else {
-            __pyx_t_9 = PyTuple_New(1+1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 330, __pyx_L5_error)
+            __pyx_t_9 = PyTuple_New(1+1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 328, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_9);
             __Pyx_GIVEREF(__pyx_t_11); PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_11); __pyx_t_11 = NULL;
             __Pyx_GIVEREF(__pyx_t_21);
             PyTuple_SET_ITEM(__pyx_t_9, 0+1, __pyx_t_21);
             __pyx_t_21 = 0;
-            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_9, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 330, __pyx_L5_error)
+            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_9, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 328, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
           }
@@ -13229,9 +13200,9 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             __pyx_t_10 = __pyx_t_1; __Pyx_INCREF(__pyx_t_10); __pyx_t_7 = 0;
             __pyx_t_8 = NULL;
           } else {
-            __pyx_t_7 = -1; __pyx_t_10 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 330, __pyx_L5_error)
+            __pyx_t_7 = -1; __pyx_t_10 = PyObject_GetIter(__pyx_t_1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 328, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_10);
-            __pyx_t_8 = Py_TYPE(__pyx_t_10)->tp_iternext; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 330, __pyx_L5_error)
+            __pyx_t_8 = Py_TYPE(__pyx_t_10)->tp_iternext; if (unlikely(!__pyx_t_8)) __PYX_ERR(0, 328, __pyx_L5_error)
           }
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           for (;;) {
@@ -13239,17 +13210,17 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               if (likely(PyList_CheckExact(__pyx_t_10))) {
                 if (__pyx_t_7 >= PyList_GET_SIZE(__pyx_t_10)) break;
                 #if CYTHON_COMPILING_IN_CPYTHON
-                __pyx_t_1 = PyList_GET_ITEM(__pyx_t_10, __pyx_t_7); __Pyx_INCREF(__pyx_t_1); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 330, __pyx_L5_error)
+                __pyx_t_1 = PyList_GET_ITEM(__pyx_t_10, __pyx_t_7); __Pyx_INCREF(__pyx_t_1); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 328, __pyx_L5_error)
                 #else
-                __pyx_t_1 = PySequence_ITEM(__pyx_t_10, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 330, __pyx_L5_error)
+                __pyx_t_1 = PySequence_ITEM(__pyx_t_10, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 328, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_1);
                 #endif
               } else {
                 if (__pyx_t_7 >= PyTuple_GET_SIZE(__pyx_t_10)) break;
                 #if CYTHON_COMPILING_IN_CPYTHON
-                __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_10, __pyx_t_7); __Pyx_INCREF(__pyx_t_1); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 330, __pyx_L5_error)
+                __pyx_t_1 = PyTuple_GET_ITEM(__pyx_t_10, __pyx_t_7); __Pyx_INCREF(__pyx_t_1); __pyx_t_7++; if (unlikely(0 < 0)) __PYX_ERR(0, 328, __pyx_L5_error)
                 #else
-                __pyx_t_1 = PySequence_ITEM(__pyx_t_10, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 330, __pyx_L5_error)
+                __pyx_t_1 = PySequence_ITEM(__pyx_t_10, __pyx_t_7); __pyx_t_7++; if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 328, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_1);
                 #endif
               }
@@ -13259,28 +13230,28 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                 PyObject* exc_type = PyErr_Occurred();
                 if (exc_type) {
                   if (likely(exc_type == PyExc_StopIteration || PyErr_GivenExceptionMatches(exc_type, PyExc_StopIteration))) PyErr_Clear();
-                  else __PYX_ERR(0, 330, __pyx_L5_error)
+                  else __PYX_ERR(0, 328, __pyx_L5_error)
                 }
                 break;
               }
               __Pyx_GOTREF(__pyx_t_1);
             }
-            if (PyDict_SetItem(__pyx_d, __pyx_n_s_sfile, __pyx_t_1) < 0) __PYX_ERR(0, 330, __pyx_L5_error)
+            if (PyDict_SetItem(__pyx_d, __pyx_n_s_sfile, __pyx_t_1) < 0) __PYX_ERR(0, 328, __pyx_L5_error)
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-            /* "mkinitfs.py":331
+            /* "mkinitfs.py":329
  *         strip = misc.whereis('strip')
  *         for sfile in misc.list_files(ARGS.tmp):
  *             smime = misc.file_mime(sfile)             # <<<<<<<<<<<<<<
  *             if smime in ('application/x-executable', \
  *                 'application/x-sharedlib', 'application/x-archive'):
  */
-            __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 331, __pyx_L5_error)
+            __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 329, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_9);
-            __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_file_mime); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 331, __pyx_L5_error)
+            __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_file_mime); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 329, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_21);
             __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-            __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 331, __pyx_L5_error)
+            __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 329, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_9);
             __pyx_t_11 = NULL;
             if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_21))) {
@@ -13293,65 +13264,65 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               }
             }
             if (!__pyx_t_11) {
-              __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_21, __pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 331, __pyx_L5_error)
+              __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_21, __pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 329, __pyx_L5_error)
               __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
               __Pyx_GOTREF(__pyx_t_1);
             } else {
-              __pyx_t_17 = PyTuple_New(1+1); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 331, __pyx_L5_error)
+              __pyx_t_17 = PyTuple_New(1+1); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 329, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_17);
               __Pyx_GIVEREF(__pyx_t_11); PyTuple_SET_ITEM(__pyx_t_17, 0, __pyx_t_11); __pyx_t_11 = NULL;
               __Pyx_GIVEREF(__pyx_t_9);
               PyTuple_SET_ITEM(__pyx_t_17, 0+1, __pyx_t_9);
               __pyx_t_9 = 0;
-              __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_21, __pyx_t_17, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 331, __pyx_L5_error)
+              __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_21, __pyx_t_17, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 329, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_1);
               __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
             }
             __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-            if (PyDict_SetItem(__pyx_d, __pyx_n_s_smime, __pyx_t_1) < 0) __PYX_ERR(0, 331, __pyx_L5_error)
+            if (PyDict_SetItem(__pyx_d, __pyx_n_s_smime, __pyx_t_1) < 0) __PYX_ERR(0, 329, __pyx_L5_error)
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-            /* "mkinitfs.py":332
+            /* "mkinitfs.py":330
  *         for sfile in misc.list_files(ARGS.tmp):
  *             smime = misc.file_mime(sfile)
  *             if smime in ('application/x-executable', \             # <<<<<<<<<<<<<<
  *                 'application/x-sharedlib', 'application/x-archive'):
  *                 message.sub_debug('Stripping', sfile)
  */
-            __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_smime); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 332, __pyx_L5_error)
+            __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_smime); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 330, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_1);
-            __pyx_t_12 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_kp_s_application_x_executable, Py_EQ)); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 332, __pyx_L5_error)
+            __pyx_t_12 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_kp_s_application_x_executable, Py_EQ)); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 330, __pyx_L5_error)
             if (!__pyx_t_12) {
             } else {
               __pyx_t_14 = __pyx_t_12;
               goto __pyx_L95_bool_binop_done;
             }
-            __pyx_t_12 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_kp_s_application_x_sharedlib, Py_EQ)); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 332, __pyx_L5_error)
+            __pyx_t_12 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_kp_s_application_x_sharedlib, Py_EQ)); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 330, __pyx_L5_error)
             if (!__pyx_t_12) {
             } else {
               __pyx_t_14 = __pyx_t_12;
               goto __pyx_L95_bool_binop_done;
             }
-            __pyx_t_12 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_kp_s_application_x_archive, Py_EQ)); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 332, __pyx_L5_error)
+            __pyx_t_12 = (__Pyx_PyString_Equals(__pyx_t_1, __pyx_kp_s_application_x_archive, Py_EQ)); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 330, __pyx_L5_error)
             __pyx_t_14 = __pyx_t_12;
             __pyx_L95_bool_binop_done:;
             __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
             __pyx_t_12 = (__pyx_t_14 != 0);
             if (__pyx_t_12) {
 
-              /* "mkinitfs.py":334
+              /* "mkinitfs.py":332
  *             if smime in ('application/x-executable', \
  *                 'application/x-sharedlib', 'application/x-archive'):
  *                 message.sub_debug('Stripping', sfile)             # <<<<<<<<<<<<<<
  *                 misc.system_command((strip, '--strip-all', sfile))
  * 
  */
-              __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 334, __pyx_L5_error)
+              __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 332, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_21);
-              __pyx_t_17 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 334, __pyx_L5_error)
+              __pyx_t_17 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_sub_debug); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 332, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_17);
               __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-              __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 334, __pyx_L5_error)
+              __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 332, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_21);
               __pyx_t_9 = NULL;
               __pyx_t_16 = 0;
@@ -13365,7 +13336,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                   __pyx_t_16 = 1;
                 }
               }
-              __pyx_t_11 = PyTuple_New(2+__pyx_t_16); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 334, __pyx_L5_error)
+              __pyx_t_11 = PyTuple_New(2+__pyx_t_16); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 332, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_11);
               if (__pyx_t_9) {
                 __Pyx_GIVEREF(__pyx_t_9); PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_9); __pyx_t_9 = NULL;
@@ -13376,29 +13347,29 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               __Pyx_GIVEREF(__pyx_t_21);
               PyTuple_SET_ITEM(__pyx_t_11, 1+__pyx_t_16, __pyx_t_21);
               __pyx_t_21 = 0;
-              __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_t_11, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 334, __pyx_L5_error)
+              __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_17, __pyx_t_11, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 332, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_1);
               __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
               __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
               __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-              /* "mkinitfs.py":335
+              /* "mkinitfs.py":333
  *                 'application/x-sharedlib', 'application/x-archive'):
  *                 message.sub_debug('Stripping', sfile)
  *                 misc.system_command((strip, '--strip-all', sfile))             # <<<<<<<<<<<<<<
  * 
  *     message.sub_info('Creating optimized image')
  */
-              __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 335, __pyx_L5_error)
+              __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 333, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_17);
-              __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_system_command); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 335, __pyx_L5_error)
+              __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_system_command); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 333, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_11);
               __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-              __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_strip); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 335, __pyx_L5_error)
+              __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_strip); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 333, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_17);
-              __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 335, __pyx_L5_error)
+              __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_sfile); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 333, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_21);
-              __pyx_t_9 = PyTuple_New(3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 335, __pyx_L5_error)
+              __pyx_t_9 = PyTuple_New(3); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 333, __pyx_L5_error)
               __Pyx_GOTREF(__pyx_t_9);
               __Pyx_GIVEREF(__pyx_t_17);
               PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_17);
@@ -13420,24 +13391,24 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
                 }
               }
               if (!__pyx_t_21) {
-                __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 335, __pyx_L5_error)
+                __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_9); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 333, __pyx_L5_error)
                 __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
                 __Pyx_GOTREF(__pyx_t_1);
               } else {
-                __pyx_t_17 = PyTuple_New(1+1); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 335, __pyx_L5_error)
+                __pyx_t_17 = PyTuple_New(1+1); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 333, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_17);
                 __Pyx_GIVEREF(__pyx_t_21); PyTuple_SET_ITEM(__pyx_t_17, 0, __pyx_t_21); __pyx_t_21 = NULL;
                 __Pyx_GIVEREF(__pyx_t_9);
                 PyTuple_SET_ITEM(__pyx_t_17, 0+1, __pyx_t_9);
                 __pyx_t_9 = 0;
-                __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_17, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 335, __pyx_L5_error)
+                __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_17, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 333, __pyx_L5_error)
                 __Pyx_GOTREF(__pyx_t_1);
                 __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
               }
               __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
               __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-              /* "mkinitfs.py":332
+              /* "mkinitfs.py":330
  *         for sfile in misc.list_files(ARGS.tmp):
  *             smime = misc.file_mime(sfile)
  *             if smime in ('application/x-executable', \             # <<<<<<<<<<<<<<
@@ -13446,7 +13417,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
             }
 
-            /* "mkinitfs.py":330
+            /* "mkinitfs.py":328
  *         message.sub_info('Stripping binraries and libraries')
  *         strip = misc.whereis('strip')
  *         for sfile in misc.list_files(ARGS.tmp):             # <<<<<<<<<<<<<<
@@ -13456,7 +13427,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           }
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-          /* "mkinitfs.py":327
+          /* "mkinitfs.py":325
  *     misc.system_command((misc.whereis('ldconfig'), '-r', ARGS.tmp))
  * 
  *     if ARGS.strip:             # <<<<<<<<<<<<<<
@@ -13465,45 +13436,45 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
         }
 
-        /* "mkinitfs.py":337
+        /* "mkinitfs.py":335
  *                 misc.system_command((strip, '--strip-all', sfile))
  * 
  *     message.sub_info('Creating optimized image')             # <<<<<<<<<<<<<<
  *     create_image(ARGS.tmp, ARGS.image, ARGS.compression)
  * 
  */
-        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 337, __pyx_L5_error)
+        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 335, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
-        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 337, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 335, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-        __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__73, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 337, __pyx_L5_error)
+        __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__73, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 335, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-        /* "mkinitfs.py":338
+        /* "mkinitfs.py":336
  * 
  *     message.sub_info('Creating optimized image')
  *     create_image(ARGS.tmp, ARGS.image, ARGS.compression)             # <<<<<<<<<<<<<<
  * 
  *     if ARGS.recovery:
  */
-        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_create_image); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 338, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_create_image); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 336, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 338, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 336, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
-        __pyx_t_17 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_tmp); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 338, __pyx_L5_error)
+        __pyx_t_17 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_tmp); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 336, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_17);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 338, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 336, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
-        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_image); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 338, __pyx_L5_error)
+        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_image); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 336, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 338, __pyx_L5_error)
+        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 336, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_11);
-        __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_compression); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 338, __pyx_L5_error)
+        __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_compression); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 336, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_21);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         __pyx_t_11 = NULL;
@@ -13518,7 +13489,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             __pyx_t_7 = 1;
           }
         }
-        __pyx_t_6 = PyTuple_New(3+__pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 338, __pyx_L5_error)
+        __pyx_t_6 = PyTuple_New(3+__pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 336, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_6);
         if (__pyx_t_11) {
           __Pyx_GIVEREF(__pyx_t_11); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_11); __pyx_t_11 = NULL;
@@ -13532,55 +13503,55 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         __pyx_t_17 = 0;
         __pyx_t_9 = 0;
         __pyx_t_21 = 0;
-        __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_6, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 338, __pyx_L5_error)
+        __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_6, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 336, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-        /* "mkinitfs.py":340
+        /* "mkinitfs.py":338
  *     create_image(ARGS.tmp, ARGS.image, ARGS.compression)
  * 
  *     if ARGS.recovery:             # <<<<<<<<<<<<<<
  *         message.sub_info('Creating recovery image')
  *         copy_item(modsdir)
  */
-        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 340, __pyx_L5_error)
+        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 338, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_10);
-        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_recovery); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 340, __pyx_L5_error)
+        __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_recovery); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 338, __pyx_L5_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-        __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 340, __pyx_L5_error)
+        __pyx_t_12 = __Pyx_PyObject_IsTrue(__pyx_t_1); if (unlikely(__pyx_t_12 < 0)) __PYX_ERR(0, 338, __pyx_L5_error)
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         if (__pyx_t_12) {
 
-          /* "mkinitfs.py":341
+          /* "mkinitfs.py":339
  * 
  *     if ARGS.recovery:
  *         message.sub_info('Creating recovery image')             # <<<<<<<<<<<<<<
  *         copy_item(modsdir)
  *         recovery = ARGS.image.replace('.img', '-recovery.img')
  */
-          __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 341, __pyx_L5_error)
+          __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 339, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
-          __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 341, __pyx_L5_error)
+          __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_sub_info); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 339, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_10);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_tuple__74, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 341, __pyx_L5_error)
+          __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_tuple__74, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 339, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-          /* "mkinitfs.py":342
+          /* "mkinitfs.py":340
  *     if ARGS.recovery:
  *         message.sub_info('Creating recovery image')
  *         copy_item(modsdir)             # <<<<<<<<<<<<<<
  *         recovery = ARGS.image.replace('.img', '-recovery.img')
  *         create_image(ARGS.tmp, recovery, ARGS.compression)
  */
-          __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_copy_item); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 342, __pyx_L5_error)
+          __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_copy_item); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 340, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_10);
-          __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_modsdir); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 342, __pyx_L5_error)
+          __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_modsdir); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 340, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_6);
           __pyx_t_21 = NULL;
           if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_10))) {
@@ -13593,63 +13564,63 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             }
           }
           if (!__pyx_t_21) {
-            __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 342, __pyx_L5_error)
+            __pyx_t_1 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_t_6); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 340, __pyx_L5_error)
             __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
             __Pyx_GOTREF(__pyx_t_1);
           } else {
-            __pyx_t_9 = PyTuple_New(1+1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 342, __pyx_L5_error)
+            __pyx_t_9 = PyTuple_New(1+1); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 340, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_9);
             __Pyx_GIVEREF(__pyx_t_21); PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_21); __pyx_t_21 = NULL;
             __Pyx_GIVEREF(__pyx_t_6);
             PyTuple_SET_ITEM(__pyx_t_9, 0+1, __pyx_t_6);
             __pyx_t_6 = 0;
-            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_9, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 342, __pyx_L5_error)
+            __pyx_t_1 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_9, NULL); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 340, __pyx_L5_error)
             __Pyx_GOTREF(__pyx_t_1);
             __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
           }
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
 
-          /* "mkinitfs.py":343
+          /* "mkinitfs.py":341
  *         message.sub_info('Creating recovery image')
  *         copy_item(modsdir)
  *         recovery = ARGS.image.replace('.img', '-recovery.img')             # <<<<<<<<<<<<<<
  *         create_image(ARGS.tmp, recovery, ARGS.compression)
  * 
  */
-          __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 343, __pyx_L5_error)
+          __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 341, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
-          __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_image); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 343, __pyx_L5_error)
+          __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_image); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 341, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_10);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-          __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_replace); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 343, __pyx_L5_error)
+          __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_replace); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 341, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-          __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__75, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 343, __pyx_L5_error)
+          __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_tuple__75, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 341, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_10);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-          if (PyDict_SetItem(__pyx_d, __pyx_n_s_recovery, __pyx_t_10) < 0) __PYX_ERR(0, 343, __pyx_L5_error)
+          if (PyDict_SetItem(__pyx_d, __pyx_n_s_recovery, __pyx_t_10) < 0) __PYX_ERR(0, 341, __pyx_L5_error)
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-          /* "mkinitfs.py":344
+          /* "mkinitfs.py":342
  *         copy_item(modsdir)
  *         recovery = ARGS.image.replace('.img', '-recovery.img')
  *         create_image(ARGS.tmp, recovery, ARGS.compression)             # <<<<<<<<<<<<<<
  * 
  * except subprocess.CalledProcessError as detail:
  */
-          __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_create_image); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 344, __pyx_L5_error)
+          __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_create_image); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 342, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_1);
-          __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 344, __pyx_L5_error)
+          __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 342, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_9);
-          __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_tmp); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 344, __pyx_L5_error)
+          __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_tmp); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 342, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_6);
           __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-          __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_recovery); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 344, __pyx_L5_error)
+          __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_recovery); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 342, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_9);
-          __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 344, __pyx_L5_error)
+          __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_ARGS); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 342, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_21);
-          __pyx_t_17 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_compression); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 344, __pyx_L5_error)
+          __pyx_t_17 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_compression); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 342, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_17);
           __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
           __pyx_t_21 = NULL;
@@ -13664,7 +13635,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
               __pyx_t_7 = 1;
             }
           }
-          __pyx_t_11 = PyTuple_New(3+__pyx_t_7); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 344, __pyx_L5_error)
+          __pyx_t_11 = PyTuple_New(3+__pyx_t_7); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 342, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_11);
           if (__pyx_t_21) {
             __Pyx_GIVEREF(__pyx_t_21); PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_21); __pyx_t_21 = NULL;
@@ -13678,13 +13649,13 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           __pyx_t_6 = 0;
           __pyx_t_9 = 0;
           __pyx_t_17 = 0;
-          __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_11, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 344, __pyx_L5_error)
+          __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_11, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 342, __pyx_L5_error)
           __Pyx_GOTREF(__pyx_t_10);
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-          /* "mkinitfs.py":340
+          /* "mkinitfs.py":338
  *     create_image(ARGS.tmp, ARGS.image, ARGS.compression)
  * 
  *     if ARGS.recovery:             # <<<<<<<<<<<<<<
@@ -13717,41 +13688,41 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
       __Pyx_XDECREF(__pyx_t_1); __pyx_t_1 = 0;
       __Pyx_XDECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-      /* "mkinitfs.py":346
+      /* "mkinitfs.py":344
  *         create_image(ARGS.tmp, recovery, ARGS.compression)
  * 
  * except subprocess.CalledProcessError as detail:             # <<<<<<<<<<<<<<
  *     message.critical('SUBPROCESS', detail)
  *     sys.exit(3)
  */
-      __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_subprocess); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 346, __pyx_L7_except_error)
+      __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_subprocess); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 344, __pyx_L7_except_error)
       __Pyx_GOTREF(__pyx_t_10);
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_CalledProcessError); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 346, __pyx_L7_except_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_CalledProcessError); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 344, __pyx_L7_except_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       __pyx_t_23 = __Pyx_PyErr_ExceptionMatches(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
       if (__pyx_t_23) {
         __Pyx_AddTraceback("mkinitfs", __pyx_clineno, __pyx_lineno, __pyx_filename);
-        if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_10, &__pyx_t_11) < 0) __PYX_ERR(0, 346, __pyx_L7_except_error)
+        if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_10, &__pyx_t_11) < 0) __PYX_ERR(0, 344, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_GOTREF(__pyx_t_11);
-        if (PyDict_SetItem(__pyx_d, __pyx_n_s_detail, __pyx_t_10) < 0) __PYX_ERR(0, 346, __pyx_L7_except_error)
+        if (PyDict_SetItem(__pyx_d, __pyx_n_s_detail, __pyx_t_10) < 0) __PYX_ERR(0, 344, __pyx_L7_except_error)
 
-        /* "mkinitfs.py":347
+        /* "mkinitfs.py":345
  * 
  * except subprocess.CalledProcessError as detail:
  *     message.critical('SUBPROCESS', detail)             # <<<<<<<<<<<<<<
  *     sys.exit(3)
  * except shutil.Error as detail:
  */
-        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 347, __pyx_L7_except_error)
+        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 345, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_9);
-        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_critical); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 347, __pyx_L7_except_error)
+        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_critical); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 345, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_detail); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 347, __pyx_L7_except_error)
+        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_detail); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 345, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_9);
         __pyx_t_21 = NULL;
         __pyx_t_7 = 0;
@@ -13765,7 +13736,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             __pyx_t_7 = 1;
           }
         }
-        __pyx_t_5 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 347, __pyx_L7_except_error)
+        __pyx_t_5 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 345, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_5);
         if (__pyx_t_21) {
           __Pyx_GIVEREF(__pyx_t_21); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_21); __pyx_t_21 = NULL;
@@ -13776,25 +13747,25 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         __Pyx_GIVEREF(__pyx_t_9);
         PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_7, __pyx_t_9);
         __pyx_t_9 = 0;
-        __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_5, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 347, __pyx_L7_except_error)
+        __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_5, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 345, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_17);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
 
-        /* "mkinitfs.py":348
+        /* "mkinitfs.py":346
  * except subprocess.CalledProcessError as detail:
  *     message.critical('SUBPROCESS', detail)
  *     sys.exit(3)             # <<<<<<<<<<<<<<
  * except shutil.Error as detail:
  *     message.critical('SHUTIL', detail)
  */
-        __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 348, __pyx_L7_except_error)
+        __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 346, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_17);
-        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_exit_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 348, __pyx_L7_except_error)
+        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_exit_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 346, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-        __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__76, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 348, __pyx_L7_except_error)
+        __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__76, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 346, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_17);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
@@ -13804,41 +13775,41 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         goto __pyx_L6_exception_handled;
       }
 
-      /* "mkinitfs.py":349
+      /* "mkinitfs.py":347
  *     message.critical('SUBPROCESS', detail)
  *     sys.exit(3)
  * except shutil.Error as detail:             # <<<<<<<<<<<<<<
  *     message.critical('SHUTIL', detail)
  *     sys.exit(4)
  */
-      __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_shutil); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 349, __pyx_L7_except_error)
+      __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_shutil); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 347, __pyx_L7_except_error)
       __Pyx_GOTREF(__pyx_t_11);
-      __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_Error); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 349, __pyx_L7_except_error)
+      __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_Error); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 347, __pyx_L7_except_error)
       __Pyx_GOTREF(__pyx_t_10);
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
       __pyx_t_23 = __Pyx_PyErr_ExceptionMatches(__pyx_t_10);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       if (__pyx_t_23) {
         __Pyx_AddTraceback("mkinitfs", __pyx_clineno, __pyx_lineno, __pyx_filename);
-        if (__Pyx_GetException(&__pyx_t_10, &__pyx_t_11, &__pyx_t_1) < 0) __PYX_ERR(0, 349, __pyx_L7_except_error)
+        if (__Pyx_GetException(&__pyx_t_10, &__pyx_t_11, &__pyx_t_1) < 0) __PYX_ERR(0, 347, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_GOTREF(__pyx_t_1);
-        if (PyDict_SetItem(__pyx_d, __pyx_n_s_detail, __pyx_t_11) < 0) __PYX_ERR(0, 349, __pyx_L7_except_error)
+        if (PyDict_SetItem(__pyx_d, __pyx_n_s_detail, __pyx_t_11) < 0) __PYX_ERR(0, 347, __pyx_L7_except_error)
 
-        /* "mkinitfs.py":350
+        /* "mkinitfs.py":348
  *     sys.exit(3)
  * except shutil.Error as detail:
  *     message.critical('SHUTIL', detail)             # <<<<<<<<<<<<<<
  *     sys.exit(4)
  * except OSError as detail:
  */
-        __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 350, __pyx_L7_except_error)
+        __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 348, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_6);
-        __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_critical); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 350, __pyx_L7_except_error)
+        __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_critical); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 348, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_detail); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 350, __pyx_L7_except_error)
+        __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_detail); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 348, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_6);
         __pyx_t_9 = NULL;
         __pyx_t_7 = 0;
@@ -13852,7 +13823,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             __pyx_t_7 = 1;
           }
         }
-        __pyx_t_21 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 350, __pyx_L7_except_error)
+        __pyx_t_21 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 348, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_21);
         if (__pyx_t_9) {
           __Pyx_GIVEREF(__pyx_t_9); PyTuple_SET_ITEM(__pyx_t_21, 0, __pyx_t_9); __pyx_t_9 = NULL;
@@ -13863,25 +13834,25 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         __Pyx_GIVEREF(__pyx_t_6);
         PyTuple_SET_ITEM(__pyx_t_21, 1+__pyx_t_7, __pyx_t_6);
         __pyx_t_6 = 0;
-        __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_21, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 350, __pyx_L7_except_error)
+        __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_t_21, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 348, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_17);
         __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
 
-        /* "mkinitfs.py":351
+        /* "mkinitfs.py":349
  * except shutil.Error as detail:
  *     message.critical('SHUTIL', detail)
  *     sys.exit(4)             # <<<<<<<<<<<<<<
  * except OSError as detail:
  *     message.critical('OS', detail)
  */
-        __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 351, __pyx_L7_except_error)
+        __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 349, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_17);
-        __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_exit_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 351, __pyx_L7_except_error)
+        __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_exit_2); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 349, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_5);
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-        __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__77, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 351, __pyx_L7_except_error)
+        __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_5, __pyx_tuple__77, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 349, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_17);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
@@ -13891,7 +13862,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         goto __pyx_L6_exception_handled;
       }
 
-      /* "mkinitfs.py":352
+      /* "mkinitfs.py":350
  *     message.critical('SHUTIL', detail)
  *     sys.exit(4)
  * except OSError as detail:             # <<<<<<<<<<<<<<
@@ -13901,25 +13872,25 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
       __pyx_t_23 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_OSError);
       if (__pyx_t_23) {
         __Pyx_AddTraceback("mkinitfs", __pyx_clineno, __pyx_lineno, __pyx_filename);
-        if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_11, &__pyx_t_10) < 0) __PYX_ERR(0, 352, __pyx_L7_except_error)
+        if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_11, &__pyx_t_10) < 0) __PYX_ERR(0, 350, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_GOTREF(__pyx_t_10);
-        if (PyDict_SetItem(__pyx_d, __pyx_n_s_detail, __pyx_t_11) < 0) __PYX_ERR(0, 352, __pyx_L7_except_error)
+        if (PyDict_SetItem(__pyx_d, __pyx_n_s_detail, __pyx_t_11) < 0) __PYX_ERR(0, 350, __pyx_L7_except_error)
 
-        /* "mkinitfs.py":353
+        /* "mkinitfs.py":351
  *     sys.exit(4)
  * except OSError as detail:
  *     message.critical('OS', detail)             # <<<<<<<<<<<<<<
  *     sys.exit(5)
  * except IOError as detail:
  */
-        __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 353, __pyx_L7_except_error)
+        __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 351, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_5);
-        __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_critical); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 353, __pyx_L7_except_error)
+        __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_5, __pyx_n_s_critical); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 351, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_21);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
-        __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_detail); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 353, __pyx_L7_except_error)
+        __pyx_t_5 = __Pyx_GetModuleGlobalName(__pyx_n_s_detail); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 351, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_5);
         __pyx_t_6 = NULL;
         __pyx_t_7 = 0;
@@ -13933,7 +13904,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             __pyx_t_7 = 1;
           }
         }
-        __pyx_t_9 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 353, __pyx_L7_except_error)
+        __pyx_t_9 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 351, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_9);
         if (__pyx_t_6) {
           __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_9, 0, __pyx_t_6); __pyx_t_6 = NULL;
@@ -13944,25 +13915,25 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         __Pyx_GIVEREF(__pyx_t_5);
         PyTuple_SET_ITEM(__pyx_t_9, 1+__pyx_t_7, __pyx_t_5);
         __pyx_t_5 = 0;
-        __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_21, __pyx_t_9, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 353, __pyx_L7_except_error)
+        __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_21, __pyx_t_9, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 351, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_17);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
 
-        /* "mkinitfs.py":354
+        /* "mkinitfs.py":352
  * except OSError as detail:
  *     message.critical('OS', detail)
  *     sys.exit(5)             # <<<<<<<<<<<<<<
  * except IOError as detail:
  *     message.critical('IO', detail)
  */
-        __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 354, __pyx_L7_except_error)
+        __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 352, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_17);
-        __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_exit_2); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 354, __pyx_L7_except_error)
+        __pyx_t_21 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_exit_2); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 352, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_21);
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-        __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_21, __pyx_tuple__78, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 354, __pyx_L7_except_error)
+        __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_21, __pyx_tuple__78, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 352, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_17);
         __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
@@ -13972,7 +13943,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         goto __pyx_L6_exception_handled;
       }
 
-      /* "mkinitfs.py":355
+      /* "mkinitfs.py":353
  *     message.critical('OS', detail)
  *     sys.exit(5)
  * except IOError as detail:             # <<<<<<<<<<<<<<
@@ -13982,25 +13953,25 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
       __pyx_t_23 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_IOError);
       if (__pyx_t_23) {
         __Pyx_AddTraceback("mkinitfs", __pyx_clineno, __pyx_lineno, __pyx_filename);
-        if (__Pyx_GetException(&__pyx_t_10, &__pyx_t_11, &__pyx_t_1) < 0) __PYX_ERR(0, 355, __pyx_L7_except_error)
+        if (__Pyx_GetException(&__pyx_t_10, &__pyx_t_11, &__pyx_t_1) < 0) __PYX_ERR(0, 353, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_GOTREF(__pyx_t_1);
-        if (PyDict_SetItem(__pyx_d, __pyx_n_s_detail, __pyx_t_11) < 0) __PYX_ERR(0, 355, __pyx_L7_except_error)
+        if (PyDict_SetItem(__pyx_d, __pyx_n_s_detail, __pyx_t_11) < 0) __PYX_ERR(0, 353, __pyx_L7_except_error)
 
-        /* "mkinitfs.py":356
+        /* "mkinitfs.py":354
  *     sys.exit(5)
  * except IOError as detail:
  *     message.critical('IO', detail)             # <<<<<<<<<<<<<<
  *     sys.exit(6)
  * except KeyboardInterrupt:
  */
-        __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 356, __pyx_L7_except_error)
+        __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 354, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_21);
-        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_critical); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 356, __pyx_L7_except_error)
+        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_21, __pyx_n_s_critical); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 354, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_21); __pyx_t_21 = 0;
-        __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_detail); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 356, __pyx_L7_except_error)
+        __pyx_t_21 = __Pyx_GetModuleGlobalName(__pyx_n_s_detail); if (unlikely(!__pyx_t_21)) __PYX_ERR(0, 354, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_21);
         __pyx_t_5 = NULL;
         __pyx_t_7 = 0;
@@ -14014,7 +13985,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             __pyx_t_7 = 1;
           }
         }
-        __pyx_t_6 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 356, __pyx_L7_except_error)
+        __pyx_t_6 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 354, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_6);
         if (__pyx_t_5) {
           __Pyx_GIVEREF(__pyx_t_5); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_5); __pyx_t_5 = NULL;
@@ -14025,25 +13996,25 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         __Pyx_GIVEREF(__pyx_t_21);
         PyTuple_SET_ITEM(__pyx_t_6, 1+__pyx_t_7, __pyx_t_21);
         __pyx_t_21 = 0;
-        __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_6, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 356, __pyx_L7_except_error)
+        __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_t_6, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 354, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_17);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
 
-        /* "mkinitfs.py":357
+        /* "mkinitfs.py":355
  * except IOError as detail:
  *     message.critical('IO', detail)
  *     sys.exit(6)             # <<<<<<<<<<<<<<
  * except KeyboardInterrupt:
  *     message.critical('Interrupt signal received')
  */
-        __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 357, __pyx_L7_except_error)
+        __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 355, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_17);
-        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_exit_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 357, __pyx_L7_except_error)
+        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_exit_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 355, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-        __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__79, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 357, __pyx_L7_except_error)
+        __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__79, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 355, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_17);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
@@ -14053,7 +14024,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         goto __pyx_L6_exception_handled;
       }
 
-      /* "mkinitfs.py":358
+      /* "mkinitfs.py":356
  *     message.critical('IO', detail)
  *     sys.exit(6)
  * except KeyboardInterrupt:             # <<<<<<<<<<<<<<
@@ -14063,41 +14034,41 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
       __pyx_t_23 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_KeyboardInterrupt);
       if (__pyx_t_23) {
         __Pyx_AddTraceback("mkinitfs", __pyx_clineno, __pyx_lineno, __pyx_filename);
-        if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_11, &__pyx_t_10) < 0) __PYX_ERR(0, 358, __pyx_L7_except_error)
+        if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_11, &__pyx_t_10) < 0) __PYX_ERR(0, 356, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_GOTREF(__pyx_t_10);
 
-        /* "mkinitfs.py":359
+        /* "mkinitfs.py":357
  *     sys.exit(6)
  * except KeyboardInterrupt:
  *     message.critical('Interrupt signal received')             # <<<<<<<<<<<<<<
  *     sys.exit(7)
  * except SystemExit:
  */
-        __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 359, __pyx_L7_except_error)
+        __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 357, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_17);
-        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_critical); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 359, __pyx_L7_except_error)
+        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_critical); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 357, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-        __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__80, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 359, __pyx_L7_except_error)
+        __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__80, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 357, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_17);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
 
-        /* "mkinitfs.py":360
+        /* "mkinitfs.py":358
  * except KeyboardInterrupt:
  *     message.critical('Interrupt signal received')
  *     sys.exit(7)             # <<<<<<<<<<<<<<
  * except SystemExit:
  *     sys.exit(2)
  */
-        __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 360, __pyx_L7_except_error)
+        __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 358, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_17);
-        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_exit_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 360, __pyx_L7_except_error)
+        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_exit_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 358, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-        __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__81, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 360, __pyx_L7_except_error)
+        __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__81, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 358, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_17);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
@@ -14107,7 +14078,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         goto __pyx_L6_exception_handled;
       }
 
-      /* "mkinitfs.py":361
+      /* "mkinitfs.py":359
  *     message.critical('Interrupt signal received')
  *     sys.exit(7)
  * except SystemExit:             # <<<<<<<<<<<<<<
@@ -14117,24 +14088,24 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
       __pyx_t_23 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_SystemExit);
       if (__pyx_t_23) {
         __Pyx_AddTraceback("mkinitfs", __pyx_clineno, __pyx_lineno, __pyx_filename);
-        if (__Pyx_GetException(&__pyx_t_10, &__pyx_t_11, &__pyx_t_1) < 0) __PYX_ERR(0, 361, __pyx_L7_except_error)
+        if (__Pyx_GetException(&__pyx_t_10, &__pyx_t_11, &__pyx_t_1) < 0) __PYX_ERR(0, 359, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_GOTREF(__pyx_t_1);
 
-        /* "mkinitfs.py":362
+        /* "mkinitfs.py":360
  *     sys.exit(7)
  * except SystemExit:
  *     sys.exit(2)             # <<<<<<<<<<<<<<
  * except Exception as detail:
  *     message.critical('Unexpected error', detail)
  */
-        __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 362, __pyx_L7_except_error)
+        __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 360, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_17);
-        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_exit_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 362, __pyx_L7_except_error)
+        __pyx_t_9 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_exit_2); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 360, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_9);
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-        __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__82, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 362, __pyx_L7_except_error)
+        __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_9, __pyx_tuple__82, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 360, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_17);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
@@ -14144,7 +14115,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         goto __pyx_L6_exception_handled;
       }
 
-      /* "mkinitfs.py":363
+      /* "mkinitfs.py":361
  * except SystemExit:
  *     sys.exit(2)
  * except Exception as detail:             # <<<<<<<<<<<<<<
@@ -14154,25 +14125,25 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
       __pyx_t_23 = __Pyx_PyErr_ExceptionMatches(__pyx_builtin_Exception);
       if (__pyx_t_23) {
         __Pyx_AddTraceback("mkinitfs", __pyx_clineno, __pyx_lineno, __pyx_filename);
-        if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_11, &__pyx_t_10) < 0) __PYX_ERR(0, 363, __pyx_L7_except_error)
+        if (__Pyx_GetException(&__pyx_t_1, &__pyx_t_11, &__pyx_t_10) < 0) __PYX_ERR(0, 361, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_1);
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_GOTREF(__pyx_t_10);
-        if (PyDict_SetItem(__pyx_d, __pyx_n_s_detail, __pyx_t_11) < 0) __PYX_ERR(0, 363, __pyx_L7_except_error)
+        if (PyDict_SetItem(__pyx_d, __pyx_n_s_detail, __pyx_t_11) < 0) __PYX_ERR(0, 361, __pyx_L7_except_error)
 
-        /* "mkinitfs.py":364
+        /* "mkinitfs.py":362
  *     sys.exit(2)
  * except Exception as detail:
  *     message.critical('Unexpected error', detail)             # <<<<<<<<<<<<<<
  *     sys.exit(1)
  * finally:
  */
-        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 364, __pyx_L7_except_error)
+        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 362, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_9);
-        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_critical); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 364, __pyx_L7_except_error)
+        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_9, __pyx_n_s_critical); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 362, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_9); __pyx_t_9 = 0;
-        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_detail); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 364, __pyx_L7_except_error)
+        __pyx_t_9 = __Pyx_GetModuleGlobalName(__pyx_n_s_detail); if (unlikely(!__pyx_t_9)) __PYX_ERR(0, 362, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_9);
         __pyx_t_21 = NULL;
         __pyx_t_7 = 0;
@@ -14186,7 +14157,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             __pyx_t_7 = 1;
           }
         }
-        __pyx_t_5 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 364, __pyx_L7_except_error)
+        __pyx_t_5 = PyTuple_New(2+__pyx_t_7); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 362, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_5);
         if (__pyx_t_21) {
           __Pyx_GIVEREF(__pyx_t_21); PyTuple_SET_ITEM(__pyx_t_5, 0, __pyx_t_21); __pyx_t_21 = NULL;
@@ -14197,25 +14168,25 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         __Pyx_GIVEREF(__pyx_t_9);
         PyTuple_SET_ITEM(__pyx_t_5, 1+__pyx_t_7, __pyx_t_9);
         __pyx_t_9 = 0;
-        __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_5, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 364, __pyx_L7_except_error)
+        __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_5, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 362, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_17);
         __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
 
-        /* "mkinitfs.py":365
+        /* "mkinitfs.py":363
  * except Exception as detail:
  *     message.critical('Unexpected error', detail)
  *     sys.exit(1)             # <<<<<<<<<<<<<<
  * finally:
  *     if tmpdir and os.path.isdir(tmpdir) and not keep:
  */
-        __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 365, __pyx_L7_except_error)
+        __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 363, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_17);
-        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_exit_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 365, __pyx_L7_except_error)
+        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_exit_2); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 363, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-        __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__83, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 365, __pyx_L7_except_error)
+        __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_tuple__83, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 363, __pyx_L7_except_error)
         __Pyx_GOTREF(__pyx_t_17);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
@@ -14250,7 +14221,7 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
     }
   }
 
-  /* "mkinitfs.py":367
+  /* "mkinitfs.py":365
  *     sys.exit(1)
  * finally:
  *     if tmpdir and os.path.isdir(tmpdir) and not keep:             # <<<<<<<<<<<<<<
@@ -14259,24 +14230,24 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
   /*finally:*/ {
     /*normal exit:*/{
-      __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_tmpdir); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 367, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_tmpdir); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 365, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
-      __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 367, __pyx_L1_error)
+      __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 365, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       if (__pyx_t_14) {
       } else {
         __pyx_t_12 = __pyx_t_14;
         goto __pyx_L114_bool_binop_done;
       }
-      __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 367, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 365, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_11);
-      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_path); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 367, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_path); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 365, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-      __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_isdir); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 367, __pyx_L1_error)
+      __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_isdir); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 365, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_11);
       __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
-      __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_tmpdir); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 367, __pyx_L1_error)
+      __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_tmpdir); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 365, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_1);
       __pyx_t_17 = NULL;
       if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_11))) {
@@ -14289,67 +14260,67 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         }
       }
       if (!__pyx_t_17) {
-        __pyx_t_10 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 367, __pyx_L1_error)
+        __pyx_t_10 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_1); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 365, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __Pyx_GOTREF(__pyx_t_10);
       } else {
-        __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 367, __pyx_L1_error)
+        __pyx_t_6 = PyTuple_New(1+1); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 365, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_GIVEREF(__pyx_t_17); PyTuple_SET_ITEM(__pyx_t_6, 0, __pyx_t_17); __pyx_t_17 = NULL;
         __Pyx_GIVEREF(__pyx_t_1);
         PyTuple_SET_ITEM(__pyx_t_6, 0+1, __pyx_t_1);
         __pyx_t_1 = 0;
-        __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_6, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 367, __pyx_L1_error)
+        __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_t_6, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 365, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       }
       __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-      __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 367, __pyx_L1_error)
+      __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 365, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       if (__pyx_t_14) {
       } else {
         __pyx_t_12 = __pyx_t_14;
         goto __pyx_L114_bool_binop_done;
       }
-      __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_keep); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 367, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_keep); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 365, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
-      __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 367, __pyx_L1_error)
+      __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_10); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 365, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       __pyx_t_15 = ((!__pyx_t_14) != 0);
       __pyx_t_12 = __pyx_t_15;
       __pyx_L114_bool_binop_done:;
       if (__pyx_t_12) {
 
-        /* "mkinitfs.py":368
+        /* "mkinitfs.py":366
  * finally:
  *     if tmpdir and os.path.isdir(tmpdir) and not keep:
  *         message.info('Cleaning up...')             # <<<<<<<<<<<<<<
  *         misc.dir_remove(tmpdir)
  *     if not 'stable' in app_version and sys.exc_info()[0]:
  */
-        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 368, __pyx_L1_error)
+        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 366, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_10);
-        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_info); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 368, __pyx_L1_error)
+        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_info); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 366, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-        __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__84, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 368, __pyx_L1_error)
+        __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_11, __pyx_tuple__84, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 366, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-        /* "mkinitfs.py":369
+        /* "mkinitfs.py":367
  *     if tmpdir and os.path.isdir(tmpdir) and not keep:
  *         message.info('Cleaning up...')
  *         misc.dir_remove(tmpdir)             # <<<<<<<<<<<<<<
  *     if not 'stable' in app_version and sys.exc_info()[0]:
  *         raise
  */
-        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 369, __pyx_L1_error)
+        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 367, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_11);
-        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_dir_remove); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 369, __pyx_L1_error)
+        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_11, __pyx_n_s_dir_remove); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 367, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_tmpdir); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 369, __pyx_L1_error)
+        __pyx_t_11 = __Pyx_GetModuleGlobalName(__pyx_n_s_tmpdir); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 367, __pyx_L1_error)
         __Pyx_GOTREF(__pyx_t_11);
         __pyx_t_1 = NULL;
         if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_6))) {
@@ -14362,24 +14333,24 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           }
         }
         if (!__pyx_t_1) {
-          __pyx_t_10 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_11); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 369, __pyx_L1_error)
+          __pyx_t_10 = __Pyx_PyObject_CallOneArg(__pyx_t_6, __pyx_t_11); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 367, __pyx_L1_error)
           __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
           __Pyx_GOTREF(__pyx_t_10);
         } else {
-          __pyx_t_17 = PyTuple_New(1+1); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 369, __pyx_L1_error)
+          __pyx_t_17 = PyTuple_New(1+1); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 367, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_17);
           __Pyx_GIVEREF(__pyx_t_1); PyTuple_SET_ITEM(__pyx_t_17, 0, __pyx_t_1); __pyx_t_1 = NULL;
           __Pyx_GIVEREF(__pyx_t_11);
           PyTuple_SET_ITEM(__pyx_t_17, 0+1, __pyx_t_11);
           __pyx_t_11 = 0;
-          __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_17, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 369, __pyx_L1_error)
+          __pyx_t_10 = __Pyx_PyObject_Call(__pyx_t_6, __pyx_t_17, NULL); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 367, __pyx_L1_error)
           __Pyx_GOTREF(__pyx_t_10);
           __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
         }
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
 
-        /* "mkinitfs.py":367
+        /* "mkinitfs.py":365
  *     sys.exit(1)
  * finally:
  *     if tmpdir and os.path.isdir(tmpdir) and not keep:             # <<<<<<<<<<<<<<
@@ -14388,15 +14359,15 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
       }
 
-      /* "mkinitfs.py":370
+      /* "mkinitfs.py":368
  *         message.info('Cleaning up...')
  *         misc.dir_remove(tmpdir)
  *     if not 'stable' in app_version and sys.exc_info()[0]:             # <<<<<<<<<<<<<<
  *         raise
  */
-      __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_app_version); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 370, __pyx_L1_error)
+      __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_app_version); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 368, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_10);
-      __pyx_t_15 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_stable, __pyx_t_10, Py_NE)); if (unlikely(__pyx_t_15 < 0)) __PYX_ERR(0, 370, __pyx_L1_error)
+      __pyx_t_15 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_stable, __pyx_t_10, Py_NE)); if (unlikely(__pyx_t_15 < 0)) __PYX_ERR(0, 368, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
       __pyx_t_14 = (__pyx_t_15 != 0);
       if (__pyx_t_14) {
@@ -14404,9 +14375,9 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         __pyx_t_12 = __pyx_t_14;
         goto __pyx_L118_bool_binop_done;
       }
-      __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 370, __pyx_L1_error)
+      __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 368, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_6);
-      __pyx_t_17 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_exc_info); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 370, __pyx_L1_error)
+      __pyx_t_17 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_exc_info); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 368, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_17);
       __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       __pyx_t_6 = NULL;
@@ -14420,30 +14391,30 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
         }
       }
       if (__pyx_t_6) {
-        __pyx_t_10 = __Pyx_PyObject_CallOneArg(__pyx_t_17, __pyx_t_6); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 370, __pyx_L1_error)
+        __pyx_t_10 = __Pyx_PyObject_CallOneArg(__pyx_t_17, __pyx_t_6); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 368, __pyx_L1_error)
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
       } else {
-        __pyx_t_10 = __Pyx_PyObject_CallNoArg(__pyx_t_17); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 370, __pyx_L1_error)
+        __pyx_t_10 = __Pyx_PyObject_CallNoArg(__pyx_t_17); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 368, __pyx_L1_error)
       }
       __Pyx_GOTREF(__pyx_t_10);
       __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-      __pyx_t_17 = __Pyx_GetItemInt(__pyx_t_10, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 370, __pyx_L1_error)
+      __pyx_t_17 = __Pyx_GetItemInt(__pyx_t_10, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 368, __pyx_L1_error)
       __Pyx_GOTREF(__pyx_t_17);
       __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-      __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_17); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 370, __pyx_L1_error)
+      __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_17); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 368, __pyx_L1_error)
       __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
       __pyx_t_12 = __pyx_t_14;
       __pyx_L118_bool_binop_done:;
       if (__pyx_t_12) {
 
-        /* "mkinitfs.py":371
+        /* "mkinitfs.py":369
  *         misc.dir_remove(tmpdir)
  *     if not 'stable' in app_version and sys.exc_info()[0]:
  *         raise             # <<<<<<<<<<<<<<
  */
-        __Pyx_ReraiseException(); __PYX_ERR(0, 371, __pyx_L1_error)
+        __Pyx_ReraiseException(); __PYX_ERR(0, 369, __pyx_L1_error)
 
-        /* "mkinitfs.py":370
+        /* "mkinitfs.py":368
  *         message.info('Cleaning up...')
  *         misc.dir_remove(tmpdir)
  *     if not 'stable' in app_version and sys.exc_info()[0]:             # <<<<<<<<<<<<<<
@@ -14477,31 +14448,31 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
       __pyx_t_23 = __pyx_lineno; __pyx_t_24 = __pyx_clineno; __pyx_t_25 = __pyx_filename;
       {
 
-        /* "mkinitfs.py":367
+        /* "mkinitfs.py":365
  *     sys.exit(1)
  * finally:
  *     if tmpdir and os.path.isdir(tmpdir) and not keep:             # <<<<<<<<<<<<<<
  *         message.info('Cleaning up...')
  *         misc.dir_remove(tmpdir)
  */
-        __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_tmpdir); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 367, __pyx_L121_error)
+        __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_tmpdir); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 365, __pyx_L121_error)
         __Pyx_GOTREF(__pyx_t_17);
-        __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_17); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 367, __pyx_L121_error)
+        __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_17); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 365, __pyx_L121_error)
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
         if (__pyx_t_14) {
         } else {
           __pyx_t_12 = __pyx_t_14;
           goto __pyx_L123_bool_binop_done;
         }
-        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 367, __pyx_L121_error)
+        __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_os); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 365, __pyx_L121_error)
         __Pyx_GOTREF(__pyx_t_10);
-        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_path); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 367, __pyx_L121_error)
+        __pyx_t_6 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_path); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 365, __pyx_L121_error)
         __Pyx_GOTREF(__pyx_t_6);
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-        __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_isdir); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 367, __pyx_L121_error)
+        __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_6, __pyx_n_s_isdir); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 365, __pyx_L121_error)
         __Pyx_GOTREF(__pyx_t_10);
         __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
-        __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_tmpdir); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 367, __pyx_L121_error)
+        __pyx_t_6 = __Pyx_GetModuleGlobalName(__pyx_n_s_tmpdir); if (unlikely(!__pyx_t_6)) __PYX_ERR(0, 365, __pyx_L121_error)
         __Pyx_GOTREF(__pyx_t_6);
         __pyx_t_11 = NULL;
         if (CYTHON_COMPILING_IN_CPYTHON && likely(PyMethod_Check(__pyx_t_10))) {
@@ -14514,67 +14485,67 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           }
         }
         if (!__pyx_t_11) {
-          __pyx_t_17 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_t_6); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 367, __pyx_L121_error)
+          __pyx_t_17 = __Pyx_PyObject_CallOneArg(__pyx_t_10, __pyx_t_6); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 365, __pyx_L121_error)
           __Pyx_DECREF(__pyx_t_6); __pyx_t_6 = 0;
           __Pyx_GOTREF(__pyx_t_17);
         } else {
-          __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 367, __pyx_L121_error)
+          __pyx_t_1 = PyTuple_New(1+1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 365, __pyx_L121_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_GIVEREF(__pyx_t_11); PyTuple_SET_ITEM(__pyx_t_1, 0, __pyx_t_11); __pyx_t_11 = NULL;
           __Pyx_GIVEREF(__pyx_t_6);
           PyTuple_SET_ITEM(__pyx_t_1, 0+1, __pyx_t_6);
           __pyx_t_6 = 0;
-          __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_1, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 367, __pyx_L121_error)
+          __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_t_1, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 365, __pyx_L121_error)
           __Pyx_GOTREF(__pyx_t_17);
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         }
         __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-        __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_17); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 367, __pyx_L121_error)
+        __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_17); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 365, __pyx_L121_error)
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
         if (__pyx_t_14) {
         } else {
           __pyx_t_12 = __pyx_t_14;
           goto __pyx_L123_bool_binop_done;
         }
-        __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_keep); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 367, __pyx_L121_error)
+        __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_keep); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 365, __pyx_L121_error)
         __Pyx_GOTREF(__pyx_t_17);
-        __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_17); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 367, __pyx_L121_error)
+        __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_17); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 365, __pyx_L121_error)
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
         __pyx_t_15 = ((!__pyx_t_14) != 0);
         __pyx_t_12 = __pyx_t_15;
         __pyx_L123_bool_binop_done:;
         if (__pyx_t_12) {
 
-          /* "mkinitfs.py":368
+          /* "mkinitfs.py":366
  * finally:
  *     if tmpdir and os.path.isdir(tmpdir) and not keep:
  *         message.info('Cleaning up...')             # <<<<<<<<<<<<<<
  *         misc.dir_remove(tmpdir)
  *     if not 'stable' in app_version and sys.exc_info()[0]:
  */
-          __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 368, __pyx_L121_error)
+          __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_message); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 366, __pyx_L121_error)
           __Pyx_GOTREF(__pyx_t_17);
-          __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_info); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 368, __pyx_L121_error)
+          __pyx_t_10 = __Pyx_PyObject_GetAttrStr(__pyx_t_17, __pyx_n_s_info); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 366, __pyx_L121_error)
           __Pyx_GOTREF(__pyx_t_10);
           __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-          __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_tuple__85, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 368, __pyx_L121_error)
+          __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_10, __pyx_tuple__85, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 366, __pyx_L121_error)
           __Pyx_GOTREF(__pyx_t_17);
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
           __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
 
-          /* "mkinitfs.py":369
+          /* "mkinitfs.py":367
  *     if tmpdir and os.path.isdir(tmpdir) and not keep:
  *         message.info('Cleaning up...')
  *         misc.dir_remove(tmpdir)             # <<<<<<<<<<<<<<
  *     if not 'stable' in app_version and sys.exc_info()[0]:
  *         raise
  */
-          __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 369, __pyx_L121_error)
+          __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_misc); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 367, __pyx_L121_error)
           __Pyx_GOTREF(__pyx_t_10);
-          __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_dir_remove); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 369, __pyx_L121_error)
+          __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_t_10, __pyx_n_s_dir_remove); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 367, __pyx_L121_error)
           __Pyx_GOTREF(__pyx_t_1);
           __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
-          __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_tmpdir); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 369, __pyx_L121_error)
+          __pyx_t_10 = __Pyx_GetModuleGlobalName(__pyx_n_s_tmpdir); if (unlikely(!__pyx_t_10)) __PYX_ERR(0, 367, __pyx_L121_error)
           __Pyx_GOTREF(__pyx_t_10);
           __pyx_t_6 = NULL;
           if (CYTHON_COMPILING_IN_CPYTHON && unlikely(PyMethod_Check(__pyx_t_1))) {
@@ -14587,24 +14558,24 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
             }
           }
           if (!__pyx_t_6) {
-            __pyx_t_17 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_10); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 369, __pyx_L121_error)
+            __pyx_t_17 = __Pyx_PyObject_CallOneArg(__pyx_t_1, __pyx_t_10); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 367, __pyx_L121_error)
             __Pyx_DECREF(__pyx_t_10); __pyx_t_10 = 0;
             __Pyx_GOTREF(__pyx_t_17);
           } else {
-            __pyx_t_11 = PyTuple_New(1+1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 369, __pyx_L121_error)
+            __pyx_t_11 = PyTuple_New(1+1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 367, __pyx_L121_error)
             __Pyx_GOTREF(__pyx_t_11);
             __Pyx_GIVEREF(__pyx_t_6); PyTuple_SET_ITEM(__pyx_t_11, 0, __pyx_t_6); __pyx_t_6 = NULL;
             __Pyx_GIVEREF(__pyx_t_10);
             PyTuple_SET_ITEM(__pyx_t_11, 0+1, __pyx_t_10);
             __pyx_t_10 = 0;
-            __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_11, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 369, __pyx_L121_error)
+            __pyx_t_17 = __Pyx_PyObject_Call(__pyx_t_1, __pyx_t_11, NULL); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 367, __pyx_L121_error)
             __Pyx_GOTREF(__pyx_t_17);
             __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
           }
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
           __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
 
-          /* "mkinitfs.py":367
+          /* "mkinitfs.py":365
  *     sys.exit(1)
  * finally:
  *     if tmpdir and os.path.isdir(tmpdir) and not keep:             # <<<<<<<<<<<<<<
@@ -14613,15 +14584,15 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
  */
         }
 
-        /* "mkinitfs.py":370
+        /* "mkinitfs.py":368
  *         message.info('Cleaning up...')
  *         misc.dir_remove(tmpdir)
  *     if not 'stable' in app_version and sys.exc_info()[0]:             # <<<<<<<<<<<<<<
  *         raise
  */
-        __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_app_version); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 370, __pyx_L121_error)
+        __pyx_t_17 = __Pyx_GetModuleGlobalName(__pyx_n_s_app_version); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 368, __pyx_L121_error)
         __Pyx_GOTREF(__pyx_t_17);
-        __pyx_t_15 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_stable, __pyx_t_17, Py_NE)); if (unlikely(__pyx_t_15 < 0)) __PYX_ERR(0, 370, __pyx_L121_error)
+        __pyx_t_15 = (__Pyx_PySequence_ContainsTF(__pyx_n_s_stable, __pyx_t_17, Py_NE)); if (unlikely(__pyx_t_15 < 0)) __PYX_ERR(0, 368, __pyx_L121_error)
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
         __pyx_t_14 = (__pyx_t_15 != 0);
         if (__pyx_t_14) {
@@ -14629,9 +14600,9 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           __pyx_t_12 = __pyx_t_14;
           goto __pyx_L127_bool_binop_done;
         }
-        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 370, __pyx_L121_error)
+        __pyx_t_1 = __Pyx_GetModuleGlobalName(__pyx_n_s_sys); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 368, __pyx_L121_error)
         __Pyx_GOTREF(__pyx_t_1);
-        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_exc_info); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 370, __pyx_L121_error)
+        __pyx_t_11 = __Pyx_PyObject_GetAttrStr(__pyx_t_1, __pyx_n_s_exc_info); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 368, __pyx_L121_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         __pyx_t_1 = NULL;
@@ -14645,23 +14616,23 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           }
         }
         if (__pyx_t_1) {
-          __pyx_t_17 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_1); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 370, __pyx_L121_error)
+          __pyx_t_17 = __Pyx_PyObject_CallOneArg(__pyx_t_11, __pyx_t_1); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 368, __pyx_L121_error)
           __Pyx_DECREF(__pyx_t_1); __pyx_t_1 = 0;
         } else {
-          __pyx_t_17 = __Pyx_PyObject_CallNoArg(__pyx_t_11); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 370, __pyx_L121_error)
+          __pyx_t_17 = __Pyx_PyObject_CallNoArg(__pyx_t_11); if (unlikely(!__pyx_t_17)) __PYX_ERR(0, 368, __pyx_L121_error)
         }
         __Pyx_GOTREF(__pyx_t_17);
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
-        __pyx_t_11 = __Pyx_GetItemInt(__pyx_t_17, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 370, __pyx_L121_error)
+        __pyx_t_11 = __Pyx_GetItemInt(__pyx_t_17, 0, long, 1, __Pyx_PyInt_From_long, 0, 0, 1); if (unlikely(!__pyx_t_11)) __PYX_ERR(0, 368, __pyx_L121_error)
         __Pyx_GOTREF(__pyx_t_11);
         __Pyx_DECREF(__pyx_t_17); __pyx_t_17 = 0;
-        __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_11); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 370, __pyx_L121_error)
+        __pyx_t_14 = __Pyx_PyObject_IsTrue(__pyx_t_11); if (unlikely(__pyx_t_14 < 0)) __PYX_ERR(0, 368, __pyx_L121_error)
         __Pyx_DECREF(__pyx_t_11); __pyx_t_11 = 0;
         __pyx_t_12 = __pyx_t_14;
         __pyx_L127_bool_binop_done:;
         if (__pyx_t_12) {
 
-          /* "mkinitfs.py":371
+          /* "mkinitfs.py":369
  *         misc.dir_remove(tmpdir)
  *     if not 'stable' in app_version and sys.exc_info()[0]:
  *         raise             # <<<<<<<<<<<<<<
@@ -14671,9 +14642,9 @@ PyMODINIT_FUNC PyInit_mkinitfs(void)
           __Pyx_XGIVEREF(__pyx_t_2);
           __Pyx_ErrRestoreWithState(__pyx_t_4, __pyx_t_3, __pyx_t_2);
           __pyx_t_4 = 0; __pyx_t_3 = 0; __pyx_t_2 = 0; 
-          __PYX_ERR(0, 371, __pyx_L121_error)
+          __PYX_ERR(0, 369, __pyx_L121_error)
 
-          /* "mkinitfs.py":370
+          /* "mkinitfs.py":368
  *         message.info('Cleaning up...')
  *         misc.dir_remove(tmpdir)
  *     if not 'stable' in app_version and sys.exc_info()[0]:             # <<<<<<<<<<<<<<
