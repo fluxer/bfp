@@ -104,7 +104,7 @@ TRIGGERS = mainconf.getboolean('merge', 'TRIGGERS')
 if not os.path.isfile(REPOSITORIES_CONF):
     message.warning(_('Repositories configuration file does not exist'), \
         REPOSITORIES_CONF)
-    REPOSITORIES = ['https://bitbucket.org/smil3y/core.git']
+    REPOSITORIES = ['git://github.com/fluxer/core.git']
 else:
     REPOSITORIES = []
     for line in misc.file_readsmart(REPOSITORIES_CONF):
