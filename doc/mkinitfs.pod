@@ -19,11 +19,12 @@ the purpose of this tool. An example configuration file for it should be
 installed in @DOCDIR@/bfp.
 
 The good thing about it is that you do not have to patch GRUB to get it to
-detect the RAM filesystem image created by this tool, unlike many other tools
-out there with the same goal. The other thing is that the implementation is
-dead simple (from users perspective) - a few files to control the modules and
-files that will be included in the image along with hooks support for special
-needs such as encrypted partitions.
+detect the RAM filesystem image created by this tool, including recovery images.
+Nor is it tide to specific initialization system, unlike many other tools out
+there with the same goal. Also the implementation is dead simple (from users
+perspective) - a few files to control the modules and files that will be
+included in the image along with hooks support for special needs such as
+encrypted partitions.
 
 The bad thing is that it requries Python to create images which for such a tool
 may be an overkill but it was written to go along Source Package Manager.
