@@ -1723,7 +1723,7 @@ static const char __pyx_k_upload_parser[] = "upload_parser";
 static const char __pyx_k_url_normalize[] = "url_normalize";
 static const char __pyx_k_url_supported[] = "url_supported";
 static const char __pyx_k_var_local_spm[] = "var/local/spm";
-static const char __pyx_k_1_10_1_ceba9eb[] = "1.10.1 (ceba9eb)";
+static const char __pyx_k_1_10_1_16df238[] = "1.10.1 (16df238)";
 static const char __pyx_k_ArgumentParser[] = "ArgumentParser";
 static const char __pyx_k_Invalid_target[] = "Invalid target";
 static const char __pyx_k_Poking_remotes[] = "Poking remotes...";
@@ -1957,7 +1957,7 @@ static const char __pyx_k_Starting_migration_procedure_1_7_3[] = "Starting migra
 static const char __pyx_k_Starting_migration_procedure_1_8_2[] = "Starting migration procedure 1_8_x_autodepends on";
 static PyObject *__pyx_n_s_;
 static PyObject *__pyx_kp_s_1;
-static PyObject *__pyx_kp_s_1_10_1_ceba9eb;
+static PyObject *__pyx_kp_s_1_10_1_16df238;
 static PyObject *__pyx_kp_s_2;
 static PyObject *__pyx_kp_s_3;
 static PyObject *__pyx_kp_s_4;
@@ -32221,7 +32221,7 @@ static struct PyModuleDef __pyx_moduledef = {
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_, __pyx_k_, sizeof(__pyx_k_), 0, 0, 1, 1},
   {&__pyx_kp_s_1, __pyx_k_1, sizeof(__pyx_k_1), 0, 0, 1, 0},
-  {&__pyx_kp_s_1_10_1_ceba9eb, __pyx_k_1_10_1_ceba9eb, sizeof(__pyx_k_1_10_1_ceba9eb), 0, 0, 1, 0},
+  {&__pyx_kp_s_1_10_1_16df238, __pyx_k_1_10_1_16df238, sizeof(__pyx_k_1_10_1_16df238), 0, 0, 1, 0},
   {&__pyx_kp_s_2, __pyx_k_2, sizeof(__pyx_k_2), 0, 0, 1, 0},
   {&__pyx_kp_s_3, __pyx_k_3, sizeof(__pyx_k_3), 0, 0, 1, 0},
   {&__pyx_kp_s_4, __pyx_k_4, sizeof(__pyx_k_4), 0, 0, 1, 0},
@@ -38405,7 +38405,7 @@ PyMODINIT_FUNC PyInit_tools(void)
  * misc.GPG_DIR = libspm.GPG_DIR
  * misc.SHELL = libspm.SHELL             # <<<<<<<<<<<<<<
  * 
- * app_version = "1.10.1 (ceba9eb)"
+ * app_version = "1.10.1 (16df238)"
  */
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_libspm); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 28, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -38421,14 +38421,14 @@ PyMODINIT_FUNC PyInit_tools(void)
   /* "tools.py":30
  * misc.SHELL = libspm.SHELL
  * 
- * app_version = "1.10.1 (ceba9eb)"             # <<<<<<<<<<<<<<
+ * app_version = "1.10.1 (16df238)"             # <<<<<<<<<<<<<<
  * 
  * class Check(object):
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_10_1_ceba9eb) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_10_1_16df238) < 0) __PYX_ERR(0, 30, __pyx_L1_error)
 
   /* "tools.py":32
- * app_version = "1.10.1 (ceba9eb)"
+ * app_version = "1.10.1 (16df238)"
  * 
  * class Check(object):             # <<<<<<<<<<<<<<
  *     ''' Check runtime dependencies of local targets '''
@@ -38470,7 +38470,7 @@ PyMODINIT_FUNC PyInit_tools(void)
   __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
   /* "tools.py":32
- * app_version = "1.10.1 (ceba9eb)"
+ * app_version = "1.10.1 (16df238)"
  * 
  * class Check(object):             # <<<<<<<<<<<<<<
  *     ''' Check runtime dependencies of local targets '''
