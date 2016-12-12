@@ -1429,8 +1429,6 @@ class Source(object):
             self.target_name = target_name
             self.target_dir = target_dir
             self.srcbuild = '%s/SRCBUILD' % self.target_dir
-            self.source_dir = '%s/%s/source' % (BUILD_DIR, self.target_name)
-            self.install_dir = '%s/%s/install' % (BUILD_DIR, self.target_name)
             self.target_version = database.remote_metadata(self.target_dir, 'version')
             self.target_release = database.remote_metadata(self.target_dir, 'release')
             self.target_description = database.remote_metadata(self.target_dir, 'description')
@@ -1440,6 +1438,8 @@ class Source(object):
             self.target_pgpkeys = database.remote_metadata(self.target_dir, 'pgpkeys')
             self.target_options = database.remote_metadata(self.target_dir, 'options')
             self.target_backup = database.remote_metadata(self.target_dir, 'backup')
+            self.source_dir = '%s/%s-%s/source' % (BUILD_DIR, self.target_name, self.target_version)
+            self.install_dir = '%s/%s-%s/install' % (BUILD_DIR, self.target_name, self.target_version)
             self.target_metadata = 'var/local/spm/%s/metadata.json' % self.target_name
             self.target_srcbuild = 'var/local/spm/%s/SRCBUILD' % self.target_name
             self.sources_dir = '%s/sources/%s' % (CACHE_DIR, self.target_name)
