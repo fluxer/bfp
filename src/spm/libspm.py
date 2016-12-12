@@ -1438,8 +1438,8 @@ class Source(object):
             self.target_pgpkeys = database.remote_metadata(self.target_dir, 'pgpkeys')
             self.target_options = database.remote_metadata(self.target_dir, 'options')
             self.target_backup = database.remote_metadata(self.target_dir, 'backup')
-            self.source_dir = '%s/%s-%s/source' % (BUILD_DIR, self.target_name, self.target_version)
-            self.install_dir = '%s/%s-%s/install' % (BUILD_DIR, self.target_name, self.target_version)
+            self.source_dir = '%s/%s/%s/source' % (BUILD_DIR, self.target_name, self.target_version)
+            self.install_dir = '%s/%s/%s/install' % (BUILD_DIR, self.target_name, self.target_version)
             self.target_metadata = 'var/local/spm/%s/metadata.json' % self.target_name
             self.target_srcbuild = 'var/local/spm/%s/SRCBUILD' % self.target_name
             self.sources_dir = '%s/sources/%s' % (CACHE_DIR, self.target_name)
