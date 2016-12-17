@@ -1124,7 +1124,6 @@ static const char __pyx_k_stringmap[] = "_stringmap";
 static const char __pyx_k_typecheck[] = "typecheck";
 static const char __pyx_k_watch_add[] = "watch_add";
 static const char __pyx_k_dependency[] = "dependency";
-static const char __pyx_k_event_read[] = "event_read";
 static const char __pyx_k_libpackage[] = "libpackage";
 static const char __pyx_k_list_files[] = "list_files";
 static const char __pyx_k_optdepends[] = "optdepends";
@@ -1137,6 +1136,7 @@ static const char __pyx_k_StringTypes[] = "StringTypes";
 static const char __pyx_k_autodepends[] = "autodepends";
 static const char __pyx_k_description[] = "description";
 static const char __pyx_k_makedepends[] = "makedepends";
+static const char __pyx_k_watch_event[] = "watch_event";
 static const char __pyx_k_LooseVersion[] = "LooseVersion";
 static const char __pyx_k_REMOTE_CACHE[] = "REMOTE_CACHE";
 static const char __pyx_k_checkdepends[] = "checkdepends";
@@ -1257,7 +1257,6 @@ static PyObject *__pyx_n_s_distutils_version;
 static PyObject *__pyx_n_s_doc;
 static PyObject *__pyx_n_s_endswith;
 static PyObject *__pyx_n_s_escape;
-static PyObject *__pyx_n_s_event_read;
 static PyObject *__pyx_n_s_exact;
 static PyObject *__pyx_n_s_file_name;
 static PyObject *__pyx_n_s_file_read;
@@ -1365,6 +1364,7 @@ static PyObject *__pyx_n_s_version;
 static PyObject *__pyx_kp_s_w;
 static PyObject *__pyx_kp_s_w_2;
 static PyObject *__pyx_n_s_watch_add;
+static PyObject *__pyx_n_s_watch_event;
 static PyObject *__pyx_n_s_wd;
 static PyObject *__pyx_n_s_world;
 static PyObject *__pyx_pf_10libpackage_8Database___init__(CYTHON_UNUSED PyObject *__pyx_self, PyObject *__pyx_v_self); /* proto */
@@ -3375,7 +3375,7 @@ static PyObject *__pyx_pf_10libpackage_8Database_6remote_all(CYTHON_UNUSED PyObj
  * 
  *         # rebuild cache on demand
  *         recache = False             # <<<<<<<<<<<<<<
- *         for wd, mask, cookie, name in notify.event_read():
+ *         for wd, mask, cookie, name in notify.watch_event():
  *             recache = True
  */
   __pyx_v_recache = 0;
@@ -3383,13 +3383,13 @@ static PyObject *__pyx_pf_10libpackage_8Database_6remote_all(CYTHON_UNUSED PyObj
   /* "libpackage.py":84
  *         # rebuild cache on demand
  *         recache = False
- *         for wd, mask, cookie, name in notify.event_read():             # <<<<<<<<<<<<<<
+ *         for wd, mask, cookie, name in notify.watch_event():             # <<<<<<<<<<<<<<
  *             recache = True
  *             break
  */
   __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_notify); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 84, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_event_read); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 84, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_watch_event); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 84, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_4 = NULL;
@@ -3524,7 +3524,7 @@ static PyObject *__pyx_pf_10libpackage_8Database_6remote_all(CYTHON_UNUSED PyObj
 
     /* "libpackage.py":85
  *         recache = False
- *         for wd, mask, cookie, name in notify.event_read():
+ *         for wd, mask, cookie, name in notify.watch_event():
  *             recache = True             # <<<<<<<<<<<<<<
  *             break
  *         if not self.REMOTE_CACHE or recache:
@@ -3532,7 +3532,7 @@ static PyObject *__pyx_pf_10libpackage_8Database_6remote_all(CYTHON_UNUSED PyObj
     __pyx_v_recache = 1;
 
     /* "libpackage.py":86
- *         for wd, mask, cookie, name in notify.event_read():
+ *         for wd, mask, cookie, name in notify.watch_event():
  *             recache = True
  *             break             # <<<<<<<<<<<<<<
  *         if not self.REMOTE_CACHE or recache:
@@ -3543,7 +3543,7 @@ static PyObject *__pyx_pf_10libpackage_8Database_6remote_all(CYTHON_UNUSED PyObj
     /* "libpackage.py":84
  *         # rebuild cache on demand
  *         recache = False
- *         for wd, mask, cookie, name in notify.event_read():             # <<<<<<<<<<<<<<
+ *         for wd, mask, cookie, name in notify.watch_event():             # <<<<<<<<<<<<<<
  *             recache = True
  *             break
  */
@@ -4019,7 +4019,7 @@ static PyObject *__pyx_pf_10libpackage_8Database_8local_all(CYTHON_UNUSED PyObje
  * 
  *         # rebuild cache on demand
  *         recache = False             # <<<<<<<<<<<<<<
- *         for wd, mask, cookie, name in notify.event_read():
+ *         for wd, mask, cookie, name in notify.watch_event():
  *             recache = True
  */
   __pyx_v_recache = 0;
@@ -4027,13 +4027,13 @@ static PyObject *__pyx_pf_10libpackage_8Database_8local_all(CYTHON_UNUSED PyObje
   /* "libpackage.py":105
  *         # rebuild cache on demand
  *         recache = False
- *         for wd, mask, cookie, name in notify.event_read():             # <<<<<<<<<<<<<<
+ *         for wd, mask, cookie, name in notify.watch_event():             # <<<<<<<<<<<<<<
  *             recache = True
  *             break
  */
   __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_notify); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_event_read); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 105, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_watch_event); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 105, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_4 = NULL;
@@ -4168,7 +4168,7 @@ static PyObject *__pyx_pf_10libpackage_8Database_8local_all(CYTHON_UNUSED PyObje
 
     /* "libpackage.py":106
  *         recache = False
- *         for wd, mask, cookie, name in notify.event_read():
+ *         for wd, mask, cookie, name in notify.watch_event():
  *             recache = True             # <<<<<<<<<<<<<<
  *             break
  *         if not self.LOCAL_CACHE or recache:
@@ -4176,7 +4176,7 @@ static PyObject *__pyx_pf_10libpackage_8Database_8local_all(CYTHON_UNUSED PyObje
     __pyx_v_recache = 1;
 
     /* "libpackage.py":107
- *         for wd, mask, cookie, name in notify.event_read():
+ *         for wd, mask, cookie, name in notify.watch_event():
  *             recache = True
  *             break             # <<<<<<<<<<<<<<
  *         if not self.LOCAL_CACHE or recache:
@@ -4187,7 +4187,7 @@ static PyObject *__pyx_pf_10libpackage_8Database_8local_all(CYTHON_UNUSED PyObje
     /* "libpackage.py":105
  *         # rebuild cache on demand
  *         recache = False
- *         for wd, mask, cookie, name in notify.event_read():             # <<<<<<<<<<<<<<
+ *         for wd, mask, cookie, name in notify.watch_event():             # <<<<<<<<<<<<<<
  *             recache = True
  *             break
  */
@@ -11072,7 +11072,7 @@ static PyObject *__pyx_pf_10libpackage_8Database_28remote_aliases(CYTHON_UNUSED 
  * 
  *         # rebuild cache on demand
  *         recache = False             # <<<<<<<<<<<<<<
- *         for wd, mask, cookie, name in notify.event_read():
+ *         for wd, mask, cookie, name in notify.watch_event():
  *             recache = True
  */
   __pyx_v_recache = 0;
@@ -11080,13 +11080,13 @@ static PyObject *__pyx_pf_10libpackage_8Database_28remote_aliases(CYTHON_UNUSED 
   /* "libpackage.py":318
  *         # rebuild cache on demand
  *         recache = False
- *         for wd, mask, cookie, name in notify.event_read():             # <<<<<<<<<<<<<<
+ *         for wd, mask, cookie, name in notify.watch_event():             # <<<<<<<<<<<<<<
  *             recache = True
  *             break
  */
   __pyx_t_4 = __Pyx_GetModuleGlobalName(__pyx_n_s_notify); if (unlikely(!__pyx_t_4)) __PYX_ERR(0, 318, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_4);
-  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_event_read); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 318, __pyx_L1_error)
+  __pyx_t_7 = __Pyx_PyObject_GetAttrStr(__pyx_t_4, __pyx_n_s_watch_event); if (unlikely(!__pyx_t_7)) __PYX_ERR(0, 318, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_7);
   __Pyx_DECREF(__pyx_t_4); __pyx_t_4 = 0;
   __pyx_t_4 = NULL;
@@ -11221,7 +11221,7 @@ static PyObject *__pyx_pf_10libpackage_8Database_28remote_aliases(CYTHON_UNUSED 
 
     /* "libpackage.py":319
  *         recache = False
- *         for wd, mask, cookie, name in notify.event_read():
+ *         for wd, mask, cookie, name in notify.watch_event():
  *             recache = True             # <<<<<<<<<<<<<<
  *             break
  *         if not self.ALIAS_CACHE or recache:
@@ -11229,7 +11229,7 @@ static PyObject *__pyx_pf_10libpackage_8Database_28remote_aliases(CYTHON_UNUSED 
     __pyx_v_recache = 1;
 
     /* "libpackage.py":320
- *         for wd, mask, cookie, name in notify.event_read():
+ *         for wd, mask, cookie, name in notify.watch_event():
  *             recache = True
  *             break             # <<<<<<<<<<<<<<
  *         if not self.ALIAS_CACHE or recache:
@@ -11240,7 +11240,7 @@ static PyObject *__pyx_pf_10libpackage_8Database_28remote_aliases(CYTHON_UNUSED 
     /* "libpackage.py":318
  *         # rebuild cache on demand
  *         recache = False
- *         for wd, mask, cookie, name in notify.event_read():             # <<<<<<<<<<<<<<
+ *         for wd, mask, cookie, name in notify.watch_event():             # <<<<<<<<<<<<<<
  *             recache = True
  *             break
  */
@@ -13334,7 +13334,6 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_doc, __pyx_k_doc, sizeof(__pyx_k_doc), 0, 0, 1, 1},
   {&__pyx_n_s_endswith, __pyx_k_endswith, sizeof(__pyx_k_endswith), 0, 0, 1, 1},
   {&__pyx_n_s_escape, __pyx_k_escape, sizeof(__pyx_k_escape), 0, 0, 1, 1},
-  {&__pyx_n_s_event_read, __pyx_k_event_read, sizeof(__pyx_k_event_read), 0, 0, 1, 1},
   {&__pyx_n_s_exact, __pyx_k_exact, sizeof(__pyx_k_exact), 0, 0, 1, 1},
   {&__pyx_n_s_file_name, __pyx_k_file_name, sizeof(__pyx_k_file_name), 0, 0, 1, 1},
   {&__pyx_n_s_file_read, __pyx_k_file_read, sizeof(__pyx_k_file_read), 0, 0, 1, 1},
@@ -13442,6 +13441,7 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_w, __pyx_k_w, sizeof(__pyx_k_w), 0, 0, 1, 0},
   {&__pyx_kp_s_w_2, __pyx_k_w_2, sizeof(__pyx_k_w_2), 0, 0, 1, 0},
   {&__pyx_n_s_watch_add, __pyx_k_watch_add, sizeof(__pyx_k_watch_add), 0, 0, 1, 1},
+  {&__pyx_n_s_watch_event, __pyx_k_watch_event, sizeof(__pyx_k_watch_event), 0, 0, 1, 1},
   {&__pyx_n_s_wd, __pyx_k_wd, sizeof(__pyx_k_wd), 0, 0, 1, 1},
   {&__pyx_n_s_world, __pyx_k_world, sizeof(__pyx_k_world), 0, 0, 1, 1},
   {0, 0, 0, 0, 0, 0, 0}
