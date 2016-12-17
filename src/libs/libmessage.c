@@ -2553,7 +2553,7 @@ static PyObject *__pyx_pf_10libmessage_7Message_4base(CYTHON_UNUSED PyObject *__
  *         markcolor = ''
  *         markmsg = ''             # <<<<<<<<<<<<<<
  *         marklog = ''
- *         printer=sys.stdout
+ *         printer = sys.stdout
  */
   __Pyx_INCREF(__pyx_kp_s__2);
   __pyx_v_markmsg = __pyx_kp_s__2;
@@ -2562,7 +2562,7 @@ static PyObject *__pyx_pf_10libmessage_7Message_4base(CYTHON_UNUSED PyObject *__
  *         markcolor = ''
  *         markmsg = ''
  *         marklog = ''             # <<<<<<<<<<<<<<
- *         printer=sys.stdout
+ *         printer = sys.stdout
  *         if status == syslog.LOG_DEBUG:
  */
   __Pyx_INCREF(__pyx_kp_s__2);
@@ -2571,7 +2571,7 @@ static PyObject *__pyx_pf_10libmessage_7Message_4base(CYTHON_UNUSED PyObject *__
   /* "libmessage.py":76
  *         markmsg = ''
  *         marklog = ''
- *         printer=sys.stdout             # <<<<<<<<<<<<<<
+ *         printer = sys.stdout             # <<<<<<<<<<<<<<
  *         if status == syslog.LOG_DEBUG:
  *             if not self.DEBUG:
  */
@@ -2585,7 +2585,7 @@ static PyObject *__pyx_pf_10libmessage_7Message_4base(CYTHON_UNUSED PyObject *__
 
   /* "libmessage.py":77
  *         marklog = ''
- *         printer=sys.stdout
+ *         printer = sys.stdout
  *         if status == syslog.LOG_DEBUG:             # <<<<<<<<<<<<<<
  *             if not self.DEBUG:
  *                 return
@@ -2602,7 +2602,7 @@ static PyObject *__pyx_pf_10libmessage_7Message_4base(CYTHON_UNUSED PyObject *__
   if (__pyx_t_3) {
 
     /* "libmessage.py":78
- *         printer=sys.stdout
+ *         printer = sys.stdout
  *         if status == syslog.LOG_DEBUG:
  *             if not self.DEBUG:             # <<<<<<<<<<<<<<
  *                 return
@@ -2627,7 +2627,7 @@ static PyObject *__pyx_pf_10libmessage_7Message_4base(CYTHON_UNUSED PyObject *__
       goto __pyx_L0;
 
       /* "libmessage.py":78
- *         printer=sys.stdout
+ *         printer = sys.stdout
  *         if status == syslog.LOG_DEBUG:
  *             if not self.DEBUG:             # <<<<<<<<<<<<<<
  *                 return
@@ -2661,7 +2661,7 @@ static PyObject *__pyx_pf_10libmessage_7Message_4base(CYTHON_UNUSED PyObject *__
 
     /* "libmessage.py":77
  *         marklog = ''
- *         printer=sys.stdout
+ *         printer = sys.stdout
  *         if status == syslog.LOG_DEBUG:             # <<<<<<<<<<<<<<
  *             if not self.DEBUG:
  *                 return

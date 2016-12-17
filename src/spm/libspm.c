@@ -46522,7 +46522,7 @@ static PyObject *__pyx_pf_6libspm_6Source_32main(CYTHON_UNUSED PyObject *__pyx_s
  *         for alias in database.remote_aliases():
  *             if alias in self.targets:             # <<<<<<<<<<<<<<
  *                 position = self.targets.index(alias)
- *                 self.targets[position:position+1] = \
+ *                 self.targets[position:position + 1] = \
  */
     __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_targets); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 1399, __pyx_L1_error)
     __Pyx_GOTREF(__pyx_t_1);
@@ -46535,7 +46535,7 @@ static PyObject *__pyx_pf_6libspm_6Source_32main(CYTHON_UNUSED PyObject *__pyx_s
  *         for alias in database.remote_aliases():
  *             if alias in self.targets:
  *                 position = self.targets.index(alias)             # <<<<<<<<<<<<<<
- *                 self.targets[position:position+1] = \
+ *                 self.targets[position:position + 1] = \
  *                     database.remote_alias(alias)
  */
       __pyx_t_2 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_targets); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 1400, __pyx_L1_error)
@@ -46591,7 +46591,7 @@ static PyObject *__pyx_pf_6libspm_6Source_32main(CYTHON_UNUSED PyObject *__pyx_s
 
       /* "libspm.py":1402
  *                 position = self.targets.index(alias)
- *                 self.targets[position:position+1] = \
+ *                 self.targets[position:position + 1] = \
  *                     database.remote_alias(alias)             # <<<<<<<<<<<<<<
  * 
  *         for target in self.targets:
@@ -46648,7 +46648,7 @@ static PyObject *__pyx_pf_6libspm_6Source_32main(CYTHON_UNUSED PyObject *__pyx_s
       /* "libspm.py":1401
  *             if alias in self.targets:
  *                 position = self.targets.index(alias)
- *                 self.targets[position:position+1] = \             # <<<<<<<<<<<<<<
+ *                 self.targets[position:position + 1] = \             # <<<<<<<<<<<<<<
  *                     database.remote_alias(alias)
  * 
  */
@@ -46666,7 +46666,7 @@ static PyObject *__pyx_pf_6libspm_6Source_32main(CYTHON_UNUSED PyObject *__pyx_s
  *         for alias in database.remote_aliases():
  *             if alias in self.targets:             # <<<<<<<<<<<<<<
  *                 position = self.targets.index(alias)
- *                 self.targets[position:position+1] = \
+ *                 self.targets[position:position + 1] = \
  */
     }
 
