@@ -58,13 +58,6 @@ Set targets to be ignored when building and removing.
 
 Default: filesystem
 
-=head2 SIGN
-
-Set a key ID to be used for signing files such as tarballs. If empty files are
-not signed.
-
-Default: 
-
 =head2 NOTIFY
 
 Set wheather to use inotify to monitor for database chanages. If you do not plan

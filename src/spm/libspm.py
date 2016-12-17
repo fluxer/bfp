@@ -30,7 +30,6 @@ DEFAULTS = {
     'GPG_DIR': '/etc/spm/gpg',
     'SHELL': 'bash',
     'IGNORE': '',
-    'SIGN': '',
     'NOTIFY': 'False',
     'OFFLINE': 'False',
     'MIRROR': 'False',
@@ -74,7 +73,6 @@ ROOT_DIR = mainconf.get('spm', 'ROOT_DIR')
 LOCAL_DIR = ROOT_DIR + 'var/local/spm'
 GPG_DIR = mainconf.get('spm', 'GPG_DIR')
 IGNORE = mainconf.get('spm', 'IGNORE').split(' ')
-SIGN = mainconf.get('spm', 'SIGN')
 NOTIFY = mainconf.getboolean('spm', 'NOTIFY')
 SHELL = mainconf.get('spm', 'SHELL')
 OFFLINE = mainconf.getboolean('fetch', 'OFFLINE')
@@ -1213,9 +1211,6 @@ class Source(object):
         misc.dir_create(os.path.dirname(self.target_tarball))
         misc.archive_compress((self.install_dir,), self.target_tarball, \
             self.install_dir)
-        if SIGN:
-            message.sub_info(_('Signing tarball'))
-            misc.gpg_sign(self.target_tarball, SIGN)
 
     def merge(self):
         ''' Merget target to system '''

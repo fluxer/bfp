@@ -64,12 +64,6 @@ try:
             libspm.IGNORE = values.split(' ')
             setattr(namespace, self.dest, values)
 
-    class OverrideSign(argparse.Action):
-        ''' Override verification of downloads and signing of tarballs '''
-        def __call__(self, parser, namespace, values, option_string=None):
-            libspm.SIGN = values
-            setattr(namespace, self.dest, values)
-
     class OverrideNotify(argparse.Action):
         ''' Override database watching '''
         def __call__(self, parser, namespace, values, option_string=None):
@@ -95,7 +89,7 @@ try:
             setattr(namespace, self.dest, values)
 
     class OverrideVerify(argparse.Action):
-        ''' Override verification of downloads and signing of tarballs '''
+        ''' Override signature verification of downloads '''
         def __call__(self, parser, namespace, values, option_string=None):
             libspm.VERIFY = values
             setattr(namespace, self.dest, values)
@@ -342,8 +336,6 @@ try:
         help=_('Change which shell to use'))
     parser.add_argument('--ignore', type=str, action=OverrideIgnore, \
         help=_('Change ignored targets'))
-    parser.add_argument('--sign', type=str, action=OverrideSign, \
-        help=_('Set whether to sign files'))
     parser.add_argument('--notify', type=ast.literal_eval, \
         action=OverrideNotify, choices=[True, False], \
         help=_('Set whether to use inotify to monitor databases'))
@@ -465,7 +457,6 @@ try:
         message.sub_info(_('GPG_DIR'), libspm.GPG_DIR)
         message.sub_info(_('SHELL'), libspm.SHELL)
         message.sub_info(_('IGNORE'), libspm.IGNORE)
-        message.sub_info(_('SIGN'), libspm.SIGN)
         message.sub_info(_('NOTIFY'), libspm.NOTIFY)
         message.sub_info(_('OFFLINE'), libspm.OFFLINE)
         message.sub_info(_('MIRROR'), libspm.MIRROR)

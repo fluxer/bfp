@@ -135,9 +135,6 @@ class Dist(object):
             message.sub_info(_('Compressing'), target_distfile)
             misc.archive_compress((target_directory,), target_distfile, \
                 target_directory)
-            if libspm.SIGN:
-                message.sub_info(_('Signing'), target_distfile)
-                misc.gpg_sign(target_distfile, libspm.SIGN)
 
             if self.do_clean:
                 message.sub_info(_('Purging sources'))
@@ -567,9 +564,6 @@ class Pack(object):
 
                 message.sub_info(_('Compressing'), target_packfile)
                 misc.archive_compress(content, target_packfile, libspm.ROOT_DIR)
-                if libspm.SIGN:
-                    message.sub_info(_('Signing'), target_packfile)
-                    misc.gpg_sign(target_packfile, libspm.SIGN)
             else:
                 message.sub_critical(_('Invalid target'), target)
                 sys.exit(2)
@@ -938,9 +932,6 @@ class Portable(object):
 
                 message.sub_info(_('Compressing'), target_packfile)
                 misc.archive_compress(content, target_packfile, '/')
-                if libspm.SIGN:
-                    message.sub_info(_('Signing'), target_packfile)
-                    misc.gpg_sign(target_packfile, libspm.SIGN)
                 os.unlink('./run.sh')
 
 if __name__ == '__main__':

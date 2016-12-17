@@ -5,7 +5,7 @@ spm - Source Package Manager
 =head1 SYNOPSIS
 
   spm [-h] [--cache CACHE] [--build BUILD] [--root ROOT] [--gpg GPG]
-    [--shell SHELL] [--ignore IGNORE] [--sign SIGN]
+    [--shell SHELL] [--ignore IGNORE]
     [--notify {True,False}] [--offline {True,False}]
     [--mirror {True,False}] [--timeout TIMEOUT] [--verify {True,False}]
     [--chost CHOST] [--cflags CFLAGS] [--cxxflags CXXFLAGS]
@@ -165,7 +165,6 @@ optional arguments:
   --gpg GPG             Change GnuPG home directory
   --shell SHELL         Change which shell to use
   --ignore IGNORE       Change ignored targets
-  --sign SIGN           Set whether to sign files
   --notify {True,False}
                         Set whether to use inotify to monitor databases
   --offline {True,False}

@@ -214,7 +214,7 @@ for src in "${@:-.}";do
     for depend in $enabled_optdepends;do
         optdepends_json="$optdepends_json \"$depend\", "
     done
-    # TODO: autodepends_json
+    # TODO: autodepends_json via readlef
     backup_json=""
     for backup in "${backup[@]}";do
         backup_file="$INSTALL_DIR/$backup"

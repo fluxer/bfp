@@ -15,7 +15,7 @@ to monitor for file/directory changes on filesystems.
 '''
 
 import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, inspect, json
-import types, gzip, bz2, time, ctypes, ctypes.util, getpass, base64, hashlib
+import types, gzip, bz2, time, ctypes, ctypes.util, hashlib
 from struct import unpack
 from fcntl import ioctl
 from termios import FIONREAD
@@ -84,15 +84,6 @@ class Misc(object):
             if bchroot:
                 raise OSError('Program not found in PATH (%s)' % self.ROOT_DIR, program)
             raise OSError('Program not found in PATH', program)
-
-    def getpass(self, sprompt='Password: '):
-        ''' Get password from user input '''
-        if self.python2:
-            self.typecheck(sprompt, (types.StringTypes))
-
-        if not sys.stdin.isatty():
-            raise Exception('Standard input is not a TTY')
-        return getpass.getpass(sprompt)
 
     def string_encode(self, string):
         ''' String wrapper to ensure Python3 compat '''
@@ -410,24 +401,6 @@ class Misc(object):
         cmd.append('--recv-keys')
         cmd.extend(lkeys)
         self.system_command(cmd)
-
-    def gpg_sign(self, sfile, skey=None, sprompt='Passphrase: '):
-        ''' Sign a file with PGP signature via GnuPG '''
-        if self.python2:
-            self.typecheck(sfile, (types.StringTypes))
-            self.typecheck(skey, (types.NoneType, types.StringTypes))
-            self.typecheck(sprompt, (types.StringTypes))
-
-        self.dir_create(self.GPG_DIR, ipermissions=0o700)
-        gpg = self.whereis('gpg2', False) or self.whereis('gpg')
-        cmd = [gpg, '--homedir', self.GPG_DIR]
-        if skey:
-            cmd.extend(('--default-key', skey))
-        cmd.extend(('--yes', '--no-tty', '--passphrase-fd', '0'))
-        cmd.extend(('--detach-sig', '--sign', '--batch', sfile))
-        if not self.SIGNPASS:
-            self.SIGNPASS = base64.encodestring(self.getpass(sprompt))
-        self.system_communicate(cmd, sinput=base64.decodestring(self.SIGNPASS))
 
     def gpg_verify(self, sfile, ssignature=None, stag=''):
         ''' Verify file PGP signature via GnuPG '''
@@ -1102,7 +1075,7 @@ class Inotify(object):
         ''' Get last error as string '''
         return os.strerror(ctypes.get_errno())
 
-    def event_read(self):
+    def watch_event(self):
         ''' Read event from the inotify file descriptor '''
         size_int = ctypes.c_int()
         while ioctl(self.fd, FIONREAD, size_int) == -1:
@@ -1140,24 +1113,6 @@ class Inotify(object):
         if ret < 0:
             raise Exception('Inotify', self.error())
         self.watched.pop(spath)
-
-    def watch_list(self):
-        ''' Get a list of paths watched '''
-        return list(self.watched.keys())
-
-    def watch_loop(self, lpaths, callback, mask=None):
-        ''' Start watching for events '''
-        for path in lpaths:
-            self.watch_add(path, mask)
-        while True:
-            for wd, mask, cookie, name in self.event_read():
-                callback((wd, mask, cookie, name))
-            time.sleep(1)
-
-    def close(self):
-        ''' Close inotify descriptor '''
-        if self.fd:
-            os.close(self.fd)
 
 
 class Magic(object):

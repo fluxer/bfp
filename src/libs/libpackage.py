@@ -81,7 +81,7 @@ class Database(object):
 
         # rebuild cache on demand
         recache = False
-        for wd, mask, cookie, name in notify.event_read():
+        for wd, mask, cookie, name in notify.watch_event():
             recache = True
             break
         if not self.REMOTE_CACHE or recache:
@@ -102,7 +102,7 @@ class Database(object):
 
         # rebuild cache on demand
         recache = False
-        for wd, mask, cookie, name in notify.event_read():
+        for wd, mask, cookie, name in notify.watch_event():
             recache = True
             break
         if not self.LOCAL_CACHE or recache:
@@ -315,7 +315,7 @@ class Database(object):
 
         # rebuild cache on demand
         recache = False
-        for wd, mask, cookie, name in notify.event_read():
+        for wd, mask, cookie, name in notify.watch_event():
             recache = True
             break
         if not self.ALIAS_CACHE or recache:
