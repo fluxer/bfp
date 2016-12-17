@@ -357,7 +357,7 @@ class Database(object):
             'checkdepends': [],
             'sources': [],
             'pgpkeys': [],
-            'options': [], 
+            'options': [],
             'backup': []
         }
 

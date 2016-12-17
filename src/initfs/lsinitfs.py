@@ -94,4 +94,3 @@ finally:
         misc.dir_remove(tmpdir)
     if not 'stable' in app_version and sys.exc_info()[0]:
         raise
-

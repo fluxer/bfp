@@ -1398,7 +1398,7 @@ class Source(object):
         for alias in database.remote_aliases():
             if alias in self.targets:
                 position = self.targets.index(alias)
-                self.targets[position:position+1] = \
+                self.targets[position:position + 1] = \
                     database.remote_alias(alias)
 
         for target in self.targets:

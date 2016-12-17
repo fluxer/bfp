@@ -189,7 +189,7 @@ class Misc(object):
         if len(schars) == 0:
             return string
         toreplace = string[-len(schars):]
-        return '%s%s' % (string[:len(string)-len(schars)], toreplace.replace(schars, sreplacement))
+        return '%s%s' % (string[:len(string) - len(schars)], toreplace.replace(schars, sreplacement))
 
     def file_name(self, sfile, basename=True):
         ''' Get name of file without the extension '''
@@ -773,7 +773,7 @@ class Misc(object):
                 raise Exception('Unsupported URL', surl)
         except (HTTPError, URLError) as detail:
             if not iretry == 0:
-                return self.fetch(surl, destination, mymirrors, ssuffix, iretry-1)
+                return self.fetch(surl, destination, mymirrors, ssuffix, iretry - 1)
             setattr(detail, 'url', surl)
             raise detail
 
@@ -1055,9 +1055,9 @@ class Misc(object):
 class Inotify(object):
     ''' Inotify wrapper '''
     def __init__(self):
-        self.MODIFY = 0x00000002        # Notify about modifications
-        self.CREATE = 0x00000100        # Notify about new files/directories
-        self.DELETE = 0x00000200        # Notify about deleted files/directories
+        self.MODIFY = 0x00000002  # Notify about modifications
+        self.CREATE = 0x00000100  # Notify about new files/directories
+        self.DELETE = 0x00000200  # Notify about deleted files/directories
         self.DEFAULT = self.MODIFY | self.CREATE | self.DELETE
 
         # sysctl -n fs.inotify.max_user_watches
@@ -1086,9 +1086,9 @@ class Inotify(object):
         data = os.read(self.fd, size)
         deb = 0
         while deb < size:
-            fin = deb+16
+            fin = deb + 16
             wd, mask, cookie, name_len = unpack('iIII', data[deb:fin])
-            deb, fin = fin, fin+name_len
+            deb, fin = fin, fin + name_len
             name = unpack('%ds' % name_len, data[deb:fin])
             name = misc.string_encode(name[0]).rstrip('\0')
             deb = fin
@@ -1118,13 +1118,10 @@ class Inotify(object):
 class Magic(object):
     ''' Magic wrapper '''
     def __init__(self):
-        self.MIME_TYPE = 0x000010       # Return the MIME type
-        self.PRESERVE_ATIME = 0x000080  # Restore access time on exit
-        self.NO_CHECK_COMPRESS = 0x001000 # Don't check for compressed files
-        self.NO_CHECK_TAR = 0x002000    # Don't check for tar files
-        self.NO_CHECK_ENCODING = 0x200000 # Don't check text encodings
-        self.DEFAULT = self.MIME_TYPE | self.PRESERVE_ATIME | \
-            self.NO_CHECK_ENCODING # | self.NO_CHECK_COMPRESS | self.NO_CHECK_TAR
+        self.MIME_TYPE = 0x000010          # Return the MIME type
+        self.PRESERVE_ATIME = 0x000080     # Restore access time on exit
+        self.NO_CHECK_ENCODING = 0x200000  # Don't check text encodings
+        self.DEFAULT = self.MIME_TYPE | self.PRESERVE_ATIME | self.NO_CHECK_ENCODING
 
         libmagic = ctypes.util.find_library('magic')
         self.libmagic = ctypes.CDLL(libmagic, use_errno=True)
