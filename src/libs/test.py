@@ -1,5 +1,13 @@
 #!/usr/bin/python2
 
+'''
+The purpose of this test script is to ensure that there are no regressions in
+the libraries provided. Most of the tests were relevant only in the days the
+project was still shaping up and mixed resulsts were experienced with different
+Python versions for an example. As it is now only the local/remote target tests
+remain valuable but there are gaps to be filled.
+'''
+
 import unittest, tempfile, os, sys, types
 
 import libmisc

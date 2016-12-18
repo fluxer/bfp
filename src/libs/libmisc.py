@@ -357,29 +357,18 @@ class Misc(object):
         with open(sfile, mode, self.BUFFER) as f:
             json.dump(content, f, indent=4)
 
-    def gpg_findsig(self, sfile, bensure=True):
+    def gpg_findsig(self, sfile):
         ''' Attempt to guess the signature for local file '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
-            self.typecheck(bensure, (types.BooleanType))
 
-        sig1 = '%s.sig' % sfile
-        sig2 = '%s.asc' % sfile
-        sig3 = '%s.asc' % self.file_name(sfile, False)
-        sig4 = '%s.sign' % self.file_name(sfile, False)
-        sig5 = '%s.sign' % sfile
-        if os.path.isfile(sig1):
-            return sig1
-        elif os.path.isfile(sig2):
-            return sig2
-        elif not sfile.endswith('.asc') and os.path.isfile(sig3):
-            return sig3
-        elif not sfile.endswith('.sign') and os.path.isfile(sig4):
-            return sig4
-        elif not sfile.endswith('.sign') and os.path.isfile(sig5):
-            return sig5
-        elif bensure:
-            return sig1
+        for sext in ('sig', 'asc', 'sign'):
+            sig1 = '%s.%s' % (sfile, sext)
+            sig2 = '%s.%s' % (self.file_name(sfile, False), sext)
+            if not sfile.endswith(sext) and os.path.isfile(sig1):
+                return sig1
+            elif not sfile.endswith(sext) and os.path.isfile(sig2):
+                return sig2
 
     def gpg_receive(self, lkeys, lservers=None, stag=''):
         ''' Import PGP keys as (somewhat) trusted '''
@@ -432,6 +421,31 @@ class Misc(object):
             cmd = [gpg, '--homedir', gpgtagdir]
             cmd.extend(('--verify', '--batch', ssignature, sfile))
         self.system_command(cmd, shell)
+
+    def checksum_findsum(self, sfile):
+        ''' Attempt to guess the checksum for local file '''
+        if self.python2:
+            self.typecheck(sfile, (types.StringTypes))
+
+        for sext in ('md5', 'sha1', 'sha256', 'sha512'):
+            sum1 = '%s.%s' % (sfile, sext)
+            sum2 = '%s.%s' % (self.file_name(sfile, False), sext)
+            if not sfile.endswith(sext) and os.path.isfile(sum1):
+                return sum1
+            elif not sfile.endswith(sext) and os.path.isfile(sum2):
+                return sum2
+
+    def checksum_verify(self, sfile, schecksum=None, stag=''):
+        ''' Verify file checksum '''
+        if self.python2:
+            self.typecheck(sfile, (types.StringTypes))
+            self.typecheck(schecksum, (types.NoneType, types.StringTypes))
+
+        if not schecksum:
+            schecksum = self.checksum_findsum(sfile)
+        sdirname = os.path.dirname(sfile)
+        checksum = self.whereis('%ssum' % self.file_extension(schecksum))
+        self.system_command((checksum, '--check', schecksum), cwd=sdirname)
 
     def dir_create(self, sdir, ipermissions=0):
         ''' Create directory if it does not exist, including leading paths
@@ -494,11 +508,10 @@ class Misc(object):
             cwd = sdir
         return cwd
 
-    def list_files(self, sdir, bcross=True, btopdown=True):
+    def list_files(self, sdir, btopdown=True):
         ''' Get list of files in directory recursively '''
         if self.python2:
             self.typecheck(sdir, (types.StringTypes))
-            self.typecheck(bcross, (types.BooleanType))
             self.typecheck(btopdown, (types.BooleanType))
 
         slist = []

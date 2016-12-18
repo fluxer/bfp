@@ -21,7 +21,7 @@ _spm_tools()
 
     sane_options='-h --help -e --enable -d --disable -n --null -m --maintainer
         -N --note -v --variables -t --triggers -u --users -g --groups
-        -s --signatures -p --pulse -a --all'
+        -s --signatures -c --checksums -p --pulse -a --all'
 
     lint_options='-h --help -m --man -u --udev -s --symlink -P --purge
         -M --module -f --footprint -b --builddir -o --ownership -e --executable
