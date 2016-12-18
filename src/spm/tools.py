@@ -27,7 +27,7 @@ database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 misc.SHELL = libspm.SHELL
 
-app_version = "1.10.1 (49001ff)"
+app_version = "1.10.1 (c3b0462)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -346,8 +346,7 @@ class Sane(object):
     ''' Check sanity of SRCBUILDs '''
     def __init__(self, targets, enable=False, disable=False, null=False, \
         maintainer=False, note=False, variables=False, triggers=False, \
-        users=False, groups=False, signatures=False, checksums=False, \
-        pulse=False):
+        users=False, groups=False, signatures=False, pulse=False):
         self.targets = []
         for target in targets:
             self.targets.extend(database.remote_alias(target))
@@ -361,7 +360,6 @@ class Sane(object):
         self.users = users
         self.groups = groups
         self.signatures = signatures
-        self.checksums = checksums
         self.pulse = pulse
 
     def main(self):
@@ -451,26 +449,6 @@ class Sane(object):
                                     message.sub_warning(_('Signature available but not in sources'), sig2)
                                     if not pgpkeys:
                                         message.sub_warning(_('Signature in sources but no pgpkeys'), src)
-                                    break
-
-                if self.checksums:
-                    sources = database.remote_metadata(target, 'sources')
-                    for src in sources:
-                        if misc.url_supported(src, False):
-                            for ext in ('md5', 'sha1', 'sha256', 'sha512'):
-                                sum1 = '%s.%s' % (src, ext)
-                                sum2 = '%s.%s' % (misc.file_name(src, False), ext)
-                                if sum1 in sources or sum2 in sources:
-                                    message.sub_debug(_('Checksum already in sources for'), src)
-                                    continue
-
-                                message.sub_debug(_('Probing for'), sum1)
-                                message.sub_debug(_('Probing for'), sum2)
-                                if misc.url_ping(sum1):
-                                    message.sub_warning(_('Checksum available but not in sources'), sum1)
-                                    break
-                                elif misc.url_ping(sum2):
-                                    message.sub_warning(_('Checksum available but not in sources'), sum2)
                                     break
 
                 if self.pulse:
@@ -1067,8 +1045,6 @@ if __name__ == '__main__':
             help=_('Check for group(s) being added but not deleted'))
         sane_parser.add_argument('-s', '--signatures', action='store_true', \
             help=_('Check for signature(s) not in the sources array'))
-        sane_parser.add_argument('-c', '--checksums', action='store_true', \
-            help=_('Check for checkum(s) not in the sources array'))
         sane_parser.add_argument('-p', '--pulse', action='store_true', \
             help=_('Check for source(s) not being available'))
         sane_parser.add_argument('-a', '--all', action='store_true', \
@@ -1254,7 +1230,6 @@ if __name__ == '__main__':
                 ARGS.users = True
                 ARGS.groups = True
                 ARGS.signatures = True
-                ARGS.checksums = True
                 ARGS.pulse = True
 
             message.info(_('Runtime information'))
@@ -1268,15 +1243,13 @@ if __name__ == '__main__':
             message.sub_info(_('USERS'), ARGS.users)
             message.sub_info(_('GROUPS'), ARGS.groups)
             message.sub_info(_('SIGNATURES'), ARGS.signatures)
-            message.sub_info(_('CHECKSUMS'), ARGS.checksums)
             message.sub_info(_('PULSE'), ARGS.pulse)
             message.sub_info(_('TARGETS'), ARGS.TARGETS)
             message.info(_('Poking remotes...'))
 
             m = Sane(ARGS.TARGETS, ARGS.enable, ARGS.disable, ARGS.null, \
                 ARGS.maintainer, ARGS.note, ARGS.variables, ARGS.triggers, \
-                ARGS.users, ARGS.groups, ARGS.signatures, ARGS.checksums, \
-                ARGS.pulse)
+                ARGS.users, ARGS.groups, ARGS.signatures, ARGS.pulse)
             m.main()
 
         elif ARGS.mode == 'merge':

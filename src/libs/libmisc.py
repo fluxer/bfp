@@ -391,18 +391,16 @@ class Misc(object):
         cmd.extend(lkeys)
         self.system_command(cmd)
 
-    def gpg_verify(self, sfile, ssignature=None, stag=''):
+    def gpg_verify(self, sfile, ssignature, stag=''):
         ''' Verify file PGP signature via GnuPG '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
-            self.typecheck(ssignature, (types.NoneType, types.StringTypes))
+            self.typecheck(ssignature, (types.StringTypes))
             self.typecheck(stag, (types.StringTypes))
 
         gpgtagdir = '%s/%s' % (self.GPG_DIR, stag)
         self.dir_create(gpgtagdir, ipermissions=0o700)
         gpg = self.whereis('gpg2', False) or self.whereis('gpg')
-        if not ssignature:
-            ssignature = self.gpg_findsig(sfile)
         shell = False
         if ssignature.endswith(('.tar.sign', '.tar.asc')):
             # exception for no gain, get piped!
@@ -421,31 +419,6 @@ class Misc(object):
             cmd = [gpg, '--homedir', gpgtagdir]
             cmd.extend(('--verify', '--batch', ssignature, sfile))
         self.system_command(cmd, shell)
-
-    def checksum_findsum(self, sfile):
-        ''' Attempt to guess the checksum for local file '''
-        if self.python2:
-            self.typecheck(sfile, (types.StringTypes))
-
-        for sext in ('md5', 'sha1', 'sha256', 'sha512'):
-            sum1 = '%s.%s' % (sfile, sext)
-            sum2 = '%s.%s' % (self.file_name(sfile, False), sext)
-            if not sfile.endswith(sext) and os.path.isfile(sum1):
-                return sum1
-            elif not sfile.endswith(sext) and os.path.isfile(sum2):
-                return sum2
-
-    def checksum_verify(self, sfile, schecksum=None, stag=''):
-        ''' Verify file checksum '''
-        if self.python2:
-            self.typecheck(sfile, (types.StringTypes))
-            self.typecheck(schecksum, (types.NoneType, types.StringTypes))
-
-        if not schecksum:
-            schecksum = self.checksum_findsum(sfile)
-        sdirname = os.path.dirname(sfile)
-        checksum = self.whereis('%ssum' % self.file_extension(schecksum))
-        self.system_command((checksum, '--check', schecksum), cwd=sdirname)
 
     def dir_create(self, sdir, ipermissions=0):
         ''' Create directory if it does not exist, including leading paths

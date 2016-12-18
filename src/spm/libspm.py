@@ -843,11 +843,6 @@ class Source(object):
                     message.sub_debug(_('Verifying signature'), src_url)
                     misc.gpg_verify(local_file, src_signature, self.target_name)
 
-                src_checksum = misc.checksum_findsum(local_file)
-                if src_checksum:
-                    message.sub_debug(_('Verifying checksum'), src_url)
-                    misc.checksum_verify(local_file, src_signature)
-
     def prepare(self, optional=False):
         ''' Prepare target sources '''
         message.sub_info(_('Checking dependencies'))

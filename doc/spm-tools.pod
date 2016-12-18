@@ -151,7 +151,6 @@ optional arguments:
   -u, --users           Check for user(s) being added but not deleted
   -g, --groups          Check for group(s) being added but not deleted
   -s, --signatures      Check for signature(s) not in the sources array
-  -c, --checksums       Check for checksum(s) not in the sources array
   -p, --pulse           Check for source(s) not being available
   -a, --all             Perform all checks
 
