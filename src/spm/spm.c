@@ -1280,7 +1280,7 @@ static const char __pyx_k_remote_backup[] = "remote_backup";
 static const char __pyx_k_remote_parser[] = "remote_parser";
 static const char __pyx_k_source_parser[] = "source_parser";
 static const char __pyx_k_var_local_spm[] = "var/local/spm";
-static const char __pyx_k_1_10_1_49001ff[] = "1.10.1 (49001ff)";
+static const char __pyx_k_1_10_1_7bebaf5[] = "1.10.1 (7bebaf5)";
 static const char __pyx_k_ArgumentParser[] = "ArgumentParser";
 static const char __pyx_k_Change_LDFLAGS[] = "Change LDFLAGS";
 static const char __pyx_k_IGNORE_MISSING[] = "IGNORE_MISSING";
@@ -1456,7 +1456,7 @@ static const char __pyx_k_Set_whether_to_use_inotify_to_mo[] = "Set whether to u
 static const char __pyx_k_Short_for_clean_fetch_prepare_co[] = "Short for clean, fetch, prepare, compile, install and merge";
 static const char __pyx_k_Short_for_clean_sync_prune_and_u[] = "Short for clean, sync, prune and update";
 static PyObject *__pyx_kp_s_;
-static PyObject *__pyx_kp_s_1_10_1_49001ff;
+static PyObject *__pyx_kp_s_1_10_1_7bebaf5;
 static PyObject *__pyx_kp_s_2;
 static PyObject *__pyx_kp_s_3;
 static PyObject *__pyx_kp_s_A;
@@ -7072,7 +7072,7 @@ static struct PyModuleDef __pyx_moduledef = {
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_kp_s_, __pyx_k_, sizeof(__pyx_k_), 0, 0, 1, 0},
-  {&__pyx_kp_s_1_10_1_49001ff, __pyx_k_1_10_1_49001ff, sizeof(__pyx_k_1_10_1_49001ff), 0, 0, 1, 0},
+  {&__pyx_kp_s_1_10_1_7bebaf5, __pyx_k_1_10_1_7bebaf5, sizeof(__pyx_k_1_10_1_7bebaf5), 0, 0, 1, 0},
   {&__pyx_kp_s_2, __pyx_k_2, sizeof(__pyx_k_2), 0, 0, 1, 0},
   {&__pyx_kp_s_3, __pyx_k_3, sizeof(__pyx_k_3), 0, 0, 1, 0},
   {&__pyx_kp_s_A, __pyx_k_A, sizeof(__pyx_k_A), 0, 0, 1, 0},
@@ -11022,7 +11022,7 @@ PyMODINIT_FUNC PyInit_spm(void)
  * import libmessage
  * message = libmessage.Message()             # <<<<<<<<<<<<<<
  * 
- * app_version = "1.10.1 (49001ff)"
+ * app_version = "1.10.1 (7bebaf5)"
  */
   __pyx_t_2 = __Pyx_GetModuleGlobalName(__pyx_n_s_libmessage); if (unlikely(!__pyx_t_2)) __PYX_ERR(0, 18, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_2);
@@ -11053,11 +11053,11 @@ PyMODINIT_FUNC PyInit_spm(void)
   /* "spm.py":20
  * message = libmessage.Message()
  * 
- * app_version = "1.10.1 (49001ff)"             # <<<<<<<<<<<<<<
+ * app_version = "1.10.1 (7bebaf5)"             # <<<<<<<<<<<<<<
  * 
  * 
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_10_1_49001ff) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_10_1_7bebaf5) < 0) __PYX_ERR(0, 20, __pyx_L1_error)
 
   /* "spm.py":23
  * 

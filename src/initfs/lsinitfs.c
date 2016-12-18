@@ -1037,7 +1037,7 @@ static const char __pyx_k_description[] = "description";
 static const char __pyx_k_add_argument[] = "add_argument";
 static const char __pyx_k_Copying_image[] = "Copying image";
 static const char __pyx_k_Listing_image[] = "Listing image";
-static const char __pyx_k_1_10_1_49001ff[] = "1.10.1 (49001ff)";
+static const char __pyx_k_1_10_1_7bebaf5[] = "1.10.1 (7bebaf5)";
 static const char __pyx_k_ArgumentParser[] = "ArgumentParser";
 static const char __pyx_k_boot_initramfs[] = "/boot/initramfs-";
 static const char __pyx_k_Unexpected_error[] = "Unexpected error";
@@ -1059,7 +1059,7 @@ static const char __pyx_k_Interrupt_signal_received[] = "Interrupt signal receiv
 static const char __pyx_k_Listing_initial_RAM_image[] = "Listing initial RAM image...";
 static const char __pyx_k_Change_temporary_directory[] = "Change temporary directory";
 static const char __pyx_k_Show_LsInitfs_version_and_exit[] = "Show LsInitfs version and exit";
-static PyObject *__pyx_kp_s_1_10_1_49001ff;
+static PyObject *__pyx_kp_s_1_10_1_7bebaf5;
 static PyObject *__pyx_n_s_ARGS;
 static PyObject *__pyx_n_s_ArgumentParser;
 static PyObject *__pyx_n_s_BUSYBOX;
@@ -1227,7 +1227,7 @@ static struct PyModuleDef __pyx_moduledef = {
 #endif
 
 static __Pyx_StringTabEntry __pyx_string_tab[] = {
-  {&__pyx_kp_s_1_10_1_49001ff, __pyx_k_1_10_1_49001ff, sizeof(__pyx_k_1_10_1_49001ff), 0, 0, 1, 0},
+  {&__pyx_kp_s_1_10_1_7bebaf5, __pyx_k_1_10_1_7bebaf5, sizeof(__pyx_k_1_10_1_7bebaf5), 0, 0, 1, 0},
   {&__pyx_n_s_ARGS, __pyx_k_ARGS, sizeof(__pyx_k_ARGS), 0, 0, 1, 1},
   {&__pyx_n_s_ArgumentParser, __pyx_k_ArgumentParser, sizeof(__pyx_k_ArgumentParser), 0, 0, 1, 1},
   {&__pyx_n_s_BUSYBOX, __pyx_k_BUSYBOX, sizeof(__pyx_k_BUSYBOX), 0, 0, 1, 1},
@@ -1748,7 +1748,7 @@ PyMODINIT_FUNC PyInit_lsinitfs(void)
  * 
  * import sys, argparse, tempfile, subprocess, shutil, os             # <<<<<<<<<<<<<<
  * 
- * app_version = "1.10.1 (49001ff)"
+ * app_version = "1.10.1 (7bebaf5)"
  */
   __pyx_t_1 = __Pyx_Import(__pyx_n_s_sys, 0, -1); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 3, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_1);
@@ -1778,14 +1778,14 @@ PyMODINIT_FUNC PyInit_lsinitfs(void)
   /* "lsinitfs.py":5
  * import sys, argparse, tempfile, subprocess, shutil, os
  * 
- * app_version = "1.10.1 (49001ff)"             # <<<<<<<<<<<<<<
+ * app_version = "1.10.1 (7bebaf5)"             # <<<<<<<<<<<<<<
  * 
  * tmpdir = None
  */
-  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_10_1_49001ff) < 0) __PYX_ERR(0, 5, __pyx_L1_error)
+  if (PyDict_SetItem(__pyx_d, __pyx_n_s_app_version, __pyx_kp_s_1_10_1_7bebaf5) < 0) __PYX_ERR(0, 5, __pyx_L1_error)
 
   /* "lsinitfs.py":7
- * app_version = "1.10.1 (49001ff)"
+ * app_version = "1.10.1 (7bebaf5)"
  * 
  * tmpdir = None             # <<<<<<<<<<<<<<
  * keep = False
