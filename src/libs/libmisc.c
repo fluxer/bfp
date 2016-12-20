@@ -1394,8 +1394,6 @@ static const char __pyx_k_unxz[] = "unxz";
 static const char __pyx_k_util[] = "util";
 static const char __pyx_k_wait[] = "wait";
 static const char __pyx_k_walk[] = "walk";
-static const char __pyx_k_xpPf[] = "-xpPf";
-static const char __pyx_k_xphf[] = "-xphf";
 static const char __pyx_k_zipf[] = "zipf";
 static const char __pyx_k_CATCH[] = "CATCH";
 static const char __pyx_k_Magic[] = "Magic";
@@ -1474,6 +1472,8 @@ static const char __pyx_k_value[] = "value";
 static const char __pyx_k_wfile[] = "wfile";
 static const char __pyx_k_write[] = "write";
 static const char __pyx_k_xhtml[] = ".xhtml";
+static const char __pyx_k_xpPmf[] = "-xpPmf";
+static const char __pyx_k_xphmf[] = "-xphmf";
 static const char __pyx_k_zfile[] = "zfile";
 static const char __pyx_k_BUFFER[] = "BUFFER";
 static const char __pyx_k_CREATE[] = "CREATE";
@@ -2490,8 +2490,8 @@ static PyObject *__pyx_n_s_whereis;
 static PyObject *__pyx_n_s_write;
 static PyObject *__pyx_kp_s_xhtml;
 static PyObject *__pyx_kp_s_xml;
-static PyObject *__pyx_kp_s_xpPf;
-static PyObject *__pyx_kp_s_xphf;
+static PyObject *__pyx_kp_s_xpPmf;
+static PyObject *__pyx_kp_s_xphmf;
 static PyObject *__pyx_kp_s_xz;
 static PyObject *__pyx_n_s_zfile;
 static PyObject *__pyx_kp_s_zip;
@@ -30792,7 +30792,7 @@ static PyObject *__pyx_pf_7libmisc_4Misc_88archive_decompress(CYTHON_UNUSED PyOb
  *             or smime == 'application/x-lzma' \
  *             or tarfile.is_tarfile(sfile) or zipfile.is_zipfile(sfile):             # <<<<<<<<<<<<<<
  *             tar = self.whereis('bsdtar', False) or self.whereis('tar')
- *             arguments = '-xphf'
+ *             arguments = '-xphmf'
  */
   __pyx_t_3 = __Pyx_GetModuleGlobalName(__pyx_n_s_tarfile); if (unlikely(!__pyx_t_3)) __PYX_ERR(0, 847, __pyx_L1_error)
   __Pyx_GOTREF(__pyx_t_3);
@@ -30915,7 +30915,7 @@ static PyObject *__pyx_pf_7libmisc_4Misc_88archive_decompress(CYTHON_UNUSED PyOb
  *             or smime == 'application/x-lzma' \
  *             or tarfile.is_tarfile(sfile) or zipfile.is_zipfile(sfile):
  *             tar = self.whereis('bsdtar', False) or self.whereis('tar')             # <<<<<<<<<<<<<<
- *             arguments = '-xphf'
+ *             arguments = '-xphmf'
  *             if tar.endswith('/bsdtar'):
  */
     __pyx_t_5 = __Pyx_PyObject_GetAttrStr(__pyx_v_self, __pyx_n_s_whereis); if (unlikely(!__pyx_t_5)) __PYX_ERR(0, 848, __pyx_L1_error)
@@ -30947,18 +30947,18 @@ static PyObject *__pyx_pf_7libmisc_4Misc_88archive_decompress(CYTHON_UNUSED PyOb
     /* "libmisc.py":849
  *             or tarfile.is_tarfile(sfile) or zipfile.is_zipfile(sfile):
  *             tar = self.whereis('bsdtar', False) or self.whereis('tar')
- *             arguments = '-xphf'             # <<<<<<<<<<<<<<
+ *             arguments = '-xphmf'             # <<<<<<<<<<<<<<
  *             if tar.endswith('/bsdtar'):
- *                 arguments = '-xpPf'
+ *                 arguments = '-xpPmf'
  */
-    __Pyx_INCREF(__pyx_kp_s_xphf);
-    __pyx_v_arguments = __pyx_kp_s_xphf;
+    __Pyx_INCREF(__pyx_kp_s_xphmf);
+    __pyx_v_arguments = __pyx_kp_s_xphmf;
 
     /* "libmisc.py":850
  *             tar = self.whereis('bsdtar', False) or self.whereis('tar')
- *             arguments = '-xphf'
+ *             arguments = '-xphmf'
  *             if tar.endswith('/bsdtar'):             # <<<<<<<<<<<<<<
- *                 arguments = '-xpPf'
+ *                 arguments = '-xpPmf'
  *             self.system_command((tar, arguments, sfile, '-C', sdir))
  */
     __pyx_t_1 = __Pyx_PyObject_GetAttrStr(__pyx_v_tar, __pyx_n_s_endswith); if (unlikely(!__pyx_t_1)) __PYX_ERR(0, 850, __pyx_L1_error)
@@ -30971,27 +30971,27 @@ static PyObject *__pyx_pf_7libmisc_4Misc_88archive_decompress(CYTHON_UNUSED PyOb
     if (__pyx_t_2) {
 
       /* "libmisc.py":851
- *             arguments = '-xphf'
+ *             arguments = '-xphmf'
  *             if tar.endswith('/bsdtar'):
- *                 arguments = '-xpPf'             # <<<<<<<<<<<<<<
+ *                 arguments = '-xpPmf'             # <<<<<<<<<<<<<<
  *             self.system_command((tar, arguments, sfile, '-C', sdir))
  *         elif smime == 'application/x-gzip':
  */
-      __Pyx_INCREF(__pyx_kp_s_xpPf);
-      __Pyx_DECREF_SET(__pyx_v_arguments, __pyx_kp_s_xpPf);
+      __Pyx_INCREF(__pyx_kp_s_xpPmf);
+      __Pyx_DECREF_SET(__pyx_v_arguments, __pyx_kp_s_xpPmf);
 
       /* "libmisc.py":850
  *             tar = self.whereis('bsdtar', False) or self.whereis('tar')
- *             arguments = '-xphf'
+ *             arguments = '-xphmf'
  *             if tar.endswith('/bsdtar'):             # <<<<<<<<<<<<<<
- *                 arguments = '-xpPf'
+ *                 arguments = '-xpPmf'
  *             self.system_command((tar, arguments, sfile, '-C', sdir))
  */
     }
 
     /* "libmisc.py":852
  *             if tar.endswith('/bsdtar'):
- *                 arguments = '-xpPf'
+ *                 arguments = '-xpPmf'
  *             self.system_command((tar, arguments, sfile, '-C', sdir))             # <<<<<<<<<<<<<<
  *         elif smime == 'application/x-gzip':
  *             gfile = gzip.GzipFile(sfile, 'rb')
@@ -31074,7 +31074,7 @@ static PyObject *__pyx_pf_7libmisc_4Misc_88archive_decompress(CYTHON_UNUSED PyOb
   }
 
   /* "libmisc.py":853
- *                 arguments = '-xpPf'
+ *                 arguments = '-xpPmf'
  *             self.system_command((tar, arguments, sfile, '-C', sdir))
  *         elif smime == 'application/x-gzip':             # <<<<<<<<<<<<<<
  *             gfile = gzip.GzipFile(sfile, 'rb')
@@ -31300,7 +31300,7 @@ static PyObject *__pyx_pf_7libmisc_4Misc_88archive_decompress(CYTHON_UNUSED PyOb
     __Pyx_DECREF(__pyx_t_5); __pyx_t_5 = 0;
 
     /* "libmisc.py":853
- *                 arguments = '-xpPf'
+ *                 arguments = '-xpPmf'
  *             self.system_command((tar, arguments, sfile, '-C', sdir))
  *         elif smime == 'application/x-gzip':             # <<<<<<<<<<<<<<
  *             gfile = gzip.GzipFile(sfile, 'rb')
@@ -42083,8 +42083,8 @@ static __Pyx_StringTabEntry __pyx_string_tab[] = {
   {&__pyx_n_s_write, __pyx_k_write, sizeof(__pyx_k_write), 0, 0, 1, 1},
   {&__pyx_kp_s_xhtml, __pyx_k_xhtml, sizeof(__pyx_k_xhtml), 0, 0, 1, 0},
   {&__pyx_kp_s_xml, __pyx_k_xml, sizeof(__pyx_k_xml), 0, 0, 1, 0},
-  {&__pyx_kp_s_xpPf, __pyx_k_xpPf, sizeof(__pyx_k_xpPf), 0, 0, 1, 0},
-  {&__pyx_kp_s_xphf, __pyx_k_xphf, sizeof(__pyx_k_xphf), 0, 0, 1, 0},
+  {&__pyx_kp_s_xpPmf, __pyx_k_xpPmf, sizeof(__pyx_k_xpPmf), 0, 0, 1, 0},
+  {&__pyx_kp_s_xphmf, __pyx_k_xphmf, sizeof(__pyx_k_xphmf), 0, 0, 1, 0},
   {&__pyx_kp_s_xz, __pyx_k_xz, sizeof(__pyx_k_xz), 0, 0, 1, 0},
   {&__pyx_n_s_zfile, __pyx_k_zfile, sizeof(__pyx_k_zfile), 0, 0, 1, 1},
   {&__pyx_kp_s_zip, __pyx_k_zip, sizeof(__pyx_k_zip), 0, 0, 1, 0},
@@ -42810,7 +42810,7 @@ static int __Pyx_InitCachedConstants(void) {
  *             or smime == 'application/x-lzma' \
  *             or tarfile.is_tarfile(sfile) or zipfile.is_zipfile(sfile):
  *             tar = self.whereis('bsdtar', False) or self.whereis('tar')             # <<<<<<<<<<<<<<
- *             arguments = '-xphf'
+ *             arguments = '-xphmf'
  *             if tar.endswith('/bsdtar'):
  */
   __pyx_tuple__89 = PyTuple_Pack(2, __pyx_n_s_bsdtar, Py_False); if (unlikely(!__pyx_tuple__89)) __PYX_ERR(0, 848, __pyx_L1_error)
@@ -42822,9 +42822,9 @@ static int __Pyx_InitCachedConstants(void) {
 
   /* "libmisc.py":850
  *             tar = self.whereis('bsdtar', False) or self.whereis('tar')
- *             arguments = '-xphf'
+ *             arguments = '-xphmf'
  *             if tar.endswith('/bsdtar'):             # <<<<<<<<<<<<<<
- *                 arguments = '-xpPf'
+ *                 arguments = '-xpPmf'
  *             self.system_command((tar, arguments, sfile, '-C', sdir))
  */
   __pyx_tuple__91 = PyTuple_Pack(1, __pyx_kp_s_bsdtar_2); if (unlikely(!__pyx_tuple__91)) __PYX_ERR(0, 850, __pyx_L1_error)
