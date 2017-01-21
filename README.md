@@ -61,8 +61,7 @@ The following software is required:
 
 ### Build time
 
-[Perl](https://www.perl.org/),
-[Cython](http://cython.org/)
+[Perl](https://www.perl.org/)
 
 How and where from you will obtain those is up to you, altought compatibility
 with Busybox, GNU and POSIX tools is prime goal but not guaranteed so for an
@@ -71,10 +70,8 @@ all required features.
 
 ## Building and installing
 
-The build system requires Cython if changes to the .py files are made. It
-translates the Python files into C code from which shared modules and binaries
-are build. To build and install all sub-projects all you have to do is issue
-the following command:
+To build and install all sub-projects all you have to do is issue the following
+command:
 
 ```
 make

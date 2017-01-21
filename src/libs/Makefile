@@ -1,29 +1,19 @@
 include ../../Makefile.mk
 
-all: clean
-	$(CC) -shared libmessage.c $(shell $(PYTHON)-config --includes --libs) $(CFLAGS) -o libmessage.so
-	$(CC) -shared libmisc.c $(shell $(PYTHON)-config --includes --libs) $(CFLAGS) -o libmisc.so
-	$(CC) -shared libpackage.c $(shell $(PYTHON)-config --includes --libs) $(CFLAGS) -o libpackage.so
-	$(STRIP) *.so
-
-sources:
-	$(RM) lib*.c
-	$(CYTHON) libmessage.py libmisc.py libpackage.py
-
 check:
 	$(PYTHON) test.py
 
 install:
 	$(INSTALL) -dm755 $(DESTDIR)$(SITEDIR)
-	$(INSTALL) -m644 *.so $(DESTDIR)$(SITEDIR)/
+	$(INSTALL) -m644 lib*.py $(DESTDIR)$(SITEDIR)/
 
 uninstall:
-	$(RM) $(DESTDIR)$(SITEDIR)/libmessage.so
-	$(RM) $(DESTDIR)$(SITEDIR)/libmisc.so
-	$(RM) $(DESTDIR)$(SITEDIR)/libpackage.so
+	$(RM) $(DESTDIR)$(SITEDIR)/libmessage.py*
+	$(RM) $(DESTDIR)$(SITEDIR)/libmisc.py*
+	$(RM) $(DESTDIR)$(SITEDIR)/libpackage.py*
 
 clean:
-	$(RM) -r *.build/ *.so __pycache__
+	$(RM) -r __pycache__
 	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
-.PHONY: all sources check install uninstall clean
+.PHONY: all check install uninstall clean
