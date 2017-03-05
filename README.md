@@ -7,10 +7,12 @@
 The BFP project started as a tool set for a custom distribution that was
 supposed to be as close to as possbile to
 [LFS](http://www.linuxfromscratch.org/lfs/)/
-[BLFS](http://www.linuxfromscratch.org/blfs/) making use of the instructions
-and providing building block for enthusiasts to make their own distribution.
-If you are a thinkerer who likes to play with Linux then you are most likely
-going to find use for what it can offer.
+[BLFS](http://www.linuxfromscratch.org/blfs/) the only difference being
+automation on per-software bases and filling some gaps like updating caches
+and databases based on the installed software content without any interaction
+from the user nor knowledge about such from the so called packagers. If you are
+a thinkerer who likes to play with Linux then you are most likely going to find
+use for what it can offer.
 
 It is split into libraries and frontends to allow people to use it the way they
 see fit. The project has evolved much over the years but simplicity and tasks
