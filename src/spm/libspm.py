@@ -210,6 +210,10 @@ class Local(object):
                 if re.search(self.pattern, target):
                     matches.append(target)
 
+        # a stupid way of preventing lots of data being written to system logs
+        # for an example when printing the footprint of lots of targets, maybe
+        # is should be done only when self.plain is evaluated as True since
+        # the output will have no value outside of the wrapper's scope
         msglogstatus = message.LOG_STATUS
         message.LOG_STATUS = [syslog.LOG_DEBUG, syslog.LOG_CRIT, syslog.LOG_ALERT]
         for target in matches:
@@ -292,6 +296,7 @@ class Remote(object):
                 if re.search(self.pattern, target):
                     matches.append(target)
 
+        # same as in Local()
         msglogstatus = message.LOG_STATUS
         message.LOG_STATUS = [syslog.LOG_DEBUG, syslog.LOG_CRIT, syslog.LOG_ALERT]
         for target in matches:
