@@ -956,17 +956,6 @@ class Source(object):
 
         self.setup_environment()
 
-        # re-create host system symlinks to prevent mismatch of entries in the
-        # footprint and ld.so.cache for libraries leading to undetectable
-        # runtime dependencies
-        for libdir in ('/lib64', '/usr/lib64', '/lib32', '/usr/lib32'):
-            realdir = os.path.realpath(libdir)
-            instsym = '%s%s' % (self.install_dir, libdir)
-            instreal = '%s%s' % (self.install_dir, realdir)
-            if not realdir == libdir:
-                misc.dir_create(instreal)
-                os.symlink(os.path.basename(instreal), instsym)
-
         misc.system_command((misc.whereis(SHELL), '-e', '-c', \
             'source %s && umask 0022 && src_install' % \
             self.srcbuild), cwd=self.source_dir)
@@ -984,16 +973,6 @@ class Source(object):
                     misc.dir_remove(spath)
                 elif os.path.isfile(spath) or os.path.islink(spath):
                     os.unlink(spath)
-
-        for libdir in ('/lib64', '/usr/lib64', '/lib32', '/usr/lib32'):
-            realdir = os.path.realpath(libdir)
-            instsym = '%s%s' % (self.install_dir, libdir)
-            instreal = '%s%s' % (self.install_dir, realdir)
-            if os.path.exists(instreal) and not os.listdir(instreal):
-                os.rmdir(instreal)
-            # separated logic on purpose, something may remove the directories
-            if os.path.islink(instsym) and not os.path.exists(instreal):
-                os.unlink(instsym)
 
         if not self.ignore_ownership:
             message.sub_info(_('Checking permissions'))
