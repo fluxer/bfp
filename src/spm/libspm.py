@@ -142,7 +142,15 @@ else:
         message.critical(_('PGP keys servers configuration file is empty'))
         sys.exit(2)
 
-# override module variables from configuration
+# override module variables from configuration, each class will override
+# them again because a user of the library may want to change them
+# (overriding the config). the software build bot was such an example
+# (which is no longer available in this source tree) doing all sort of
+# things including building as specifiec user and root at the same time
+# which involved creating new objects and such. the complexity comming
+# out of these is for a reason - only the capital letter globals are
+# ment to be changed by the user (at any time) and the rest is to be
+# done by the library
 message.CATCH = CATCH
 misc.CATCH = CATCH
 misc.OFFLINE = OFFLINE
