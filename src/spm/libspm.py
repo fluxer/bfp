@@ -60,9 +60,9 @@ if not os.path.isfile(MAIN_CONF):
 
 mainconf = configparser.SafeConfigParser(DEFAULTS)
 mainconf.read(MAIN_CONF)
-# section are hardcore-required, to avoid failures on get() add them to the
-# mainconf object but do notice that changes are not written to config on
-# purpose
+# at least the sections are required by the config parser, otherwise get()
+# fails. notice that changes are not written to config on purpose since it
+# may be read-only or even non-existent
 for section in ('spm', 'fetch', 'compile', 'install', 'merge'):
     if not mainconf.has_section(section):
         mainconf.add_section(section)
