@@ -233,7 +233,10 @@ class Misc(object):
         ''' Write data to file safely
 
             the cool thing about this helper is that it does not dump files if
-            it fails to write to it unless the mode is "a" (append) '''
+            it fails to write to it unless the mode is "a" (append) or
+            combination of "a" and other modes in which case the the file may
+            be written to from multiple processes or even threads with lock
+            handler outside the scope of this method (e.g. logging to file) '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
             self.typecheck(content, (types.StringTypes))
