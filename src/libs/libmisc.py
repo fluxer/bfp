@@ -410,6 +410,8 @@ class Misc(object):
         shell = False
         if ssignature.endswith(('.tar.sign', '.tar.asc')):
             # exception for no gain, get piped!
+            # NOTE: wrapping processes for piping is risky, spawining a shell just as much
+            # https://docs.python.org/2/library/subprocess.html#frequently-used-arguments
             shell = True
             if sfile.endswith('.xz'):
                 cmd = '%s -cdk ' % self.whereis('unxz')
@@ -499,7 +501,7 @@ class Misc(object):
                 slist.append('%s/%s' % (root, sfile))
         return slist
 
-    ''' TODO: make bcross last argument '''
+    # TODO: make bcross last argument
     def list_dirs(self, sdir, bcross=True, btopdown=True):
         ''' Get list of directories in directory recursively '''
         if self.python2:
@@ -516,7 +518,7 @@ class Misc(object):
                 slist.append(sfull)
         return slist
 
-    ''' TODO: make bcross last argument '''
+    # TODO: make bcross last argument '''
     def list_all(self, sdir, bcross=True, btopdown=True):
         ''' Get list of files and directories in directory recursively '''
         if self.python2:
