@@ -95,7 +95,10 @@ class Misc(object):
             return string
 
     def string_convert(self, variant):
-        ''' Convert input to string but only if it is not string '''
+        ''' Convert input to string but only if it is not string
+        
+            this method exists mostly because it can convert both Python2 and Python3
+            dictionaries '''
         if isinstance(variant, (list, tuple)):
             return ' '.join(variant)
         elif isinstance(variant, dict):
