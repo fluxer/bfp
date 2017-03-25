@@ -234,8 +234,8 @@ class Misc(object):
 
             the cool thing about this helper is that it does not dump files if
             it fails to write to it unless the mode is "a" (append) or
-            combination of "a" and other modes in which case the the file may
-            be written to from multiple processes or even threads with lock
+            combination of "a" and other modes in which case the file may be
+            written to from multiple processes or even threads with lock
             handler outside the scope of this method (e.g. logging to file) '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
@@ -496,6 +496,7 @@ class Misc(object):
                 slist.append('%s/%s' % (root, sfile))
         return slist
 
+    ''' TODO: make bcross last argument '''
     def list_dirs(self, sdir, bcross=True, btopdown=True):
         ''' Get list of directories in directory recursively '''
         if self.python2:
@@ -512,6 +513,7 @@ class Misc(object):
                 slist.append(sfull)
         return slist
 
+    ''' TODO: make bcross last argument '''
     def list_all(self, sdir, bcross=True, btopdown=True):
         ''' Get list of files and directories in directory recursively '''
         if self.python2:
