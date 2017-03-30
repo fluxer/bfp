@@ -433,7 +433,7 @@ class Sane(object):
                         if misc.url_supported(src, False):
                             for ext in ('sig', 'asc', 'sign'):
                                 sig1 = '%s.%s' % (src, ext)
-                                sig2 = '%s.%s' % (self.file_name(src, False), ext)
+                                sig2 = '%s.%s' % (misc.file_name(src, False), ext)
                                 if sig1 in sources or sig2 in sources:
                                     message.sub_debug(_('Signature already in sources for'), src)
                                     continue
