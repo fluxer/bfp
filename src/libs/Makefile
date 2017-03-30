@@ -16,4 +16,4 @@ clean:
 	$(RM) -r __pycache__
 	$(RM) $(shell $(FIND) . -name '*.pyc' -o -name '*.pyo')
 
-.PHONY: all check install uninstall clean
+.PHONY: check install uninstall clean

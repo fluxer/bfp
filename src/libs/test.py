@@ -329,7 +329,7 @@ class TestSuite(unittest.TestCase):
         self.assertEqual(misc.file_mime('libmisc.py'), 'text/x-python')
 
     def test_file_mime_makefile(self):
-        self.assertEqual(misc.file_mime('Makefile'), 'text/x-makefile')
+        self.assertEqual(misc.file_mime('../../Makefile'), 'text/x-makefile')
 
     def test_system_communicate_output_true(self):
         self.assertEqual(misc.system_communicate(('echo', 'output')), 'output')
