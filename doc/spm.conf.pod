@@ -147,7 +147,7 @@ Set a regular expression of paths to be purged after the software is installed
 but before creating tarball for it. Common conflicting files as well as some
 useless files are already set to be removed.
 
-Default: .*/.packlist|.*/perllocal.pod|.*/share/info|.*/share/gtk-doc|.*.la
+Default: .*\.la|.*/\.packlist|.*/perllocal.pod|.*/share/info|.*/share/gtk-doc
 
 =head2 COMPRESS_MAN
 
