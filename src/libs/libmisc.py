@@ -957,6 +957,7 @@ class Misc(object):
                 sfull = '%s/%s' % (spath, smatch)
                 if os.path.isfile(sfull):
                     lpaths.append(sfull)
+                    break
         return lpaths
 
     def system_command(self, command, bshell=False, cwd=''):
