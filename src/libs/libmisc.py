@@ -856,9 +856,9 @@ class Misc(object):
             or smime == 'application/x-lzma' \
             or tarfile.is_tarfile(sfile) or zipfile.is_zipfile(sfile):
             tar = self.whereis('bsdtar', False) or self.whereis('tar')
-            arguments = '-xphmf'
+            arguments = '-xphf'
             if tar.endswith('/bsdtar'):
-                arguments = '-xpPmf'
+                arguments = '-xpPf'
             self.system_command((tar, arguments, sfile, '-C', sdir))
         elif smime == 'application/x-gzip':
             gfile = gzip.GzipFile(sfile, 'rb')
