@@ -10,6 +10,9 @@ install:
 	$(INSTALL) -m755 lsinitfs.py $(DESTDIR)$(BINDIR)/lsinitfs
 	$(CP) -r root $(DESTDIR)/etc/mkinitfs/
 	$(CP) -r files $(DESTDIR)/etc/mkinitfs/
+	$(SED) -e 's|/bin/python2|/bin/$(PYTHON)|g' \
+		-i $(DESTDIR)$(SBINDIR)/mkinitfs \
+		-i $(DESTDIR)$(BINDIR)/lsinitfs
 
 uninstall:
 	$(RM) $(DESTDIR)$(SBINDIR)/mkinitfs

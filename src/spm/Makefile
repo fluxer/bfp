@@ -18,6 +18,9 @@ install:
 	$(INSTALL) -m644 etc/keyservers.conf $(DESTDIR)/etc/spm/
 	$(SED) -e 's|@MACHINE@|$(MACHINE)|g' -e 's|@ARCH@|$(ARCH)|g' \
 		-e 's|@JOBS@|$(JOBS)|g' -i $(DESTDIR)/etc/spm.conf
+	$(SED) -e 's|/bin/python2|/bin/$(PYTHON)|g' \
+		-i $(DESTDIR)$(BINDIR)/spm \
+		-i $(DESTDIR)$(BINDIR)/spm-tools
 
 uninstall:
 	$(RM) $(DESTDIR)$(SITEDIR)/libspm.py
