@@ -433,9 +433,9 @@ class Misc(object):
 
         since Python 3.2 os.makedirs accepts exist_ok argument so you may use
         it instead of this method, however it applies permissions on all
-        directories created - this one does not. it sets ipermissions on the
-        last directory of the path passed, for the leading paths the default
-        mask (0o777 usually) is used '''
+        directories created - this one does not. this one sets ipermissions on
+        the last directory of the path passed, for the leading paths the
+        default mask (0o777 usually) is used '''
         if self.python2:
             self.typecheck(sdir, (types.StringTypes))
             self.typecheck(ipermissions, (types.IntType))
@@ -650,7 +650,7 @@ class Misc(object):
             units = self.string_unit_guess(rsize)
             icount = 0
             while True:
-                # request size again, if needed
+                # request size again, if needed and with some slack
                 if encoding == 'chunked':
                     if rsize == '0' and icount == 5:
                         trfile = self.fetch_request(surl)
@@ -706,8 +706,8 @@ class Misc(object):
         if self.OFFLINE:
             return
 
-        # the .svn url extension is fake made up for the sake of the fetcher
-        # to be able to recognize the protocol, strip it
+        # the .svn url ending is made up for the sake of the fetcher to be able
+        # to recognize the protocol, strip it
         surl = self.string_rstrip(surl, '.svn')
         svn = self.whereis('svn')
         if os.path.isdir('%s/.svn' % sdir):
