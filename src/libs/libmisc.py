@@ -1125,15 +1125,15 @@ class Magic(object):
 
         self._magic_open = self.libmagic.magic_open
         self._magic_open.restype = ctypes.c_void_p
-        self._magic_open.argtypes = [c_int]
+        self._magic_open.argtypes = [ctypes.c_int]
 
         self._magic_close = self.libmagic.magic_close
         self._magic_close.restype = None
         self._magic_close.argtypes = [ctypes.c_void_p]
 
         self._magic_load = self.libmagic.magic_load
-        self._magic_load.restype = c_int
-        self._magic_load.argtypes = [ctypes.c_void_p, c_char_p]
+        self._magic_load.restype = ctypes.c_int
+        self._magic_load.argtypes = [ctypes.c_void_p, ctypes.c_char_p]
 
         self._magic_file = self.libmagic.magic_file
         self._magic_file.restype = ctypes.c_char_p
