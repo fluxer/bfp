@@ -1122,17 +1122,29 @@ class Magic(object):
 
         libmagic = ctypes.util.find_library('magic')
         self.libmagic = ctypes.CDLL(libmagic, use_errno=True)
-        self.flags = self.DEFAULT
-        self.cookie = self.libmagic.magic_open(self.flags)
-        self.libmagic.magic_load(self.cookie, None)
+
+        self._magic_open = self.libmagic.magic_open
+        self._magic_open.restype = ctypes.c_void_p
+        self._magic_open.argtypes = [c_int]
+
+        self._magic_close = self.libmagic.magic_close
+        self._magic_close.restype = None
+        self._magic_close.argtypes = [ctypes.c_void_p]
+
+        self._magic_load = self.libmagic.magic_load
+        self._magic_load.restype = c_int
+        self._magic_load.argtypes = [ctypes.c_void_p, c_char_p]
 
         self._magic_file = self.libmagic.magic_file
         self._magic_file.restype = ctypes.c_char_p
         self._magic_file.argtypes = [ctypes.c_void_p, ctypes.c_char_p]
 
+        self.cookie = self._magic_open(self.DEFAULT)
+        self._magic_load(self.cookie, None)
+
     def __exit__(self, type, value, traceback):
-        if self.cookie and self.libmagic.magic_close:
-            self.libmagic.magic_close(self.cookie)
+        if self.cookie and self._magic_close:
+            self._magic_close(self.cookie)
 
     def error(self):
         ''' Get last error as string '''
@@ -1146,11 +1158,6 @@ class Magic(object):
             path = bytes(path, 'utf-8')
         result = self._magic_file(self.cookie, path)
         if not result or result == -1:
-            # libmagic 5.09 has a bug where it might fail to identify the
-            # mimetype of a file and returns null from magic_file, but also
-            # does not return an error message.
-            if (self.flags & self.MIME_TYPE):
-                return 'application/octet-stream'
             raise Exception(self.error())
         return result
 
