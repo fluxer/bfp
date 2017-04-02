@@ -1066,7 +1066,7 @@ class Inotify(object):
             raise Exception('Inotify', self.error())
 
     def __exit__(self, type, value, traceback):
-        self.close()
+        os.close(self.fd)
 
     def error(self):
         ''' Get last error as string '''
