@@ -175,16 +175,6 @@ else
     echo "=== SKIPPING SPMT ONLINE TEST ==="
 fi
 
-if [ "$uid" != "0" ];then
-    echo "=== SKIPPING SPMT UPGRADE TEST (REQUIRES ROOT) ==="
-elif ! grep -q "SPMT UPGRADE" "$statefile" ;then
-    echo "=== RUNNING SPMT UPGRADE TEST ==="
-    "$1" "$curdir/tools.py" $spmtargs upgrade
-    echo "SPMT UPGRADE" >> "$statefile"
-else
-    echo "=== SKIPPING SPMT UPGRADE TEST ==="
-fi
-
 if [ ! -d "$rootdir/var/local/spm/ca-certificates" ];then
     echo "=== SKIPPING SPMT DIGEST TEST (CA-CERTIFICATES NOT INSTALLED) ==="
 elif ! grep -q "SPMT DIGEST" "$statefile" ;then
