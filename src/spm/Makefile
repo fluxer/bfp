@@ -19,6 +19,7 @@ install:
 	$(SED) -e 's|@MACHINE@|$(MACHINE)|g' -e 's|@ARCH@|$(ARCH)|g' \
 		-e 's|@JOBS@|$(JOBS)|g' -i $(DESTDIR)/etc/spm.conf
 	$(SED) -e 's|/bin/python2|/bin/$(PYTHON)|g' \
+		-i $(DESTDIR)$(SITEDIR)/libspm.py \
 		-i $(DESTDIR)$(BINDIR)/spm \
 		-i $(DESTDIR)$(BINDIR)/spm-tools
 
