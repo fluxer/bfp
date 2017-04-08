@@ -903,34 +903,28 @@ class Misc(object):
             lcontent = self.file_name(sfile).split()
         return lcontent
 
-    def system_communicate(self, command, bshell=False, cwd=None, sinput=None):
+    def system_communicate(self, command, bshell=False, cwd=None):
         ''' Get output and optionally send input to external utility
 
             it sets the environment variable LC_ALL to "en_US.UTF-8" to ensure
-            locales are UTF-8 aware, passing input is possible if sinput is
-            different than None. if something goes wrong you get standard
+            locales are UTF-8 aware. if something goes wrong you get standard
             output (stdout) and standard error (stderr) as an Exception '''
         if self.python2:
             self.typecheck(command, (types.StringTypes, types.TupleType, types.ListType))
             self.typecheck(bshell, (types.BooleanType))
             self.typecheck(cwd, (types.NoneType, types.StringTypes))
-            self.typecheck(sinput, (types.NoneType, types.StringTypes))
 
         if not cwd or not os.path.isdir(cwd):
             cwd = self.dir_current()
         if isinstance(command, str) and not bshell:
             command = shlex.split(command)
-        stdin = None
-        if sinput:
-            stdin = subprocess.PIPE
         procenv = {}
         for var, val in os.environ.items():
             procenv[var] = val
         procenv['LC_ALL'] = 'en_US.UTF-8'
-        pipe = subprocess.Popen(command, stdin=stdin, \
-            stdout=subprocess.PIPE, stderr=subprocess.PIPE, \
-            env=procenv, shell=bshell, cwd=cwd)
-        out, err = pipe.communicate(input=sinput)
+        pipe = subprocess.Popen(command, stdout=subprocess.PIPE, \
+            stderr=subprocess.PIPE, env=procenv, shell=bshell, cwd=cwd)
+        out, err = pipe.communicate()
         if pipe.returncode != 0:
             raise(Exception('%s %s' % (out, err)))
         return self.string_encode(out.strip())
@@ -977,7 +971,7 @@ class Misc(object):
             command = shlex.split(command)
         subprocess.check_call(command, shell=bshell, cwd=cwd)
 
-    def system_chroot(self, command, bshell=False, sinput=None):
+    def system_chroot(self, command, bshell=False):
         ''' Execute command in chroot environment, conditionally
 
             The conditional is self.ROOT_DIR, if it equals / then the command
@@ -985,11 +979,8 @@ class Misc(object):
         if self.python2:
             self.typecheck(command, (types.StringType, types.TupleType, types.ListType))
             self.typecheck(bshell, (types.BooleanType))
-            self.typecheck(sinput, (types.NoneType, types.StringTypes))
 
         if self.ROOT_DIR == '/':
-            if sinput:
-                return self.system_communicate(command, bshell, sinput=sinput)
             return self.system_command(command, bshell)
 
         mount = self.whereis('mount')
@@ -1011,10 +1002,7 @@ class Misc(object):
                 if os.path.isdir(p) and not os.path.ismount(sdir):
                     self.dir_create(sdir)
                     self.system_command((mount, '--bind', p, sdir))
-            if sinput:
-                self.system_communicate(command, bshell, sinput=sinput)
-            else:
-                self.system_command(command, bshell)
+            self.system_command(command, bshell)
         finally:
             for p in pseudofs:
                 sdir = '%s%s' % (self.ROOT_DIR, p)
