@@ -929,23 +929,29 @@ class Misc(object):
             raise(Exception('%s %s' % (out, err)))
         return self.string_encode(out.strip())
 
-    def system_readelf(self, sfile):
+    def system_readelf(self, sfile, bsearch=True):
         ''' Get full paths to ELF file dependencies '''
         if self.python2:
             self.typecheck(sfile, (types.StringTypes))
+            self.typecheck(bsearch, (types.BooleanType))
 
         lpaths = []
         smime = self.file_mime(sfile, bquick=True)
         if not smime in ('application/x-executable', 'application/x-sharedlib'):
             return lpaths
 
+        output = self.system_communicate((self.whereis('readelf'), '-d', sfile))
+        ldepends = self._elfx.findall(output)
+
+        if not bsearch:
+            return ldepends
+
         lldpath = ['/lib', '/lib32', '/lib64', '/usr/lib', '/usr/lib32', '/usr/lib64']
         sldpath = os.environ.get('LD_LIBRARY_PATH', '')
         for spath in sldpath.split(':'):
             lldpath.append(spath)
 
-        output = self.system_communicate((self.whereis('readelf'), '-d', sfile))
-        for smatch in self._elfx.findall(output):
+        for smatch in ldepends:
             for spath in lldpath:
                 sfull = '%s/%s' % (spath, smatch)
                 if os.path.isfile(sfull):

@@ -1090,7 +1090,7 @@ class Source(object):
         message.sub_info('Checking runtime dependencies')
         autodepends = []
         for sfile in lapplications:
-            autodepends = misc.system_readelf(sfile)
+            autodepends = misc.system_readelf(sfile, bsearch=False)
 
         for sfile in lscripts:
             omatch = self.shebang_regex.findall(misc.file_read(sfile))
@@ -1113,7 +1113,8 @@ class Source(object):
                 if smatch:
                     message.sub_debug('Attempting shebang correction on', sfile)
                     misc.file_substitute('^%s' % sfull, '#!' + smatch, sfile)
-                    autodepends.append(smatch)
+                    if not smatch in autodepends:
+                        autodepends.append(smatch)
                 else:
                     # fake non-existing match to trigger the error bellow
                     autodepends.append(sbase)
@@ -1121,19 +1122,32 @@ class Source(object):
         found = []
         depends = []
         depends.extend(self.target_depends)
-        for local in database.local_all(True):
-            lfootprint = database.local_metadata(local, 'footprint')
-            for dep in autodepends:
-                if dep in found:
-                    continue
-                elif '%s%s' % (self.install_dir, dep) in target_content:
+
+        for dep in autodepends:
+            if dep in found:
+                continue
+            for sfile in target_content:
+                if sfile.endswith('/%s' % dep):
                     message.sub_debug('Dependency %s is in target' % dep, dep)
                     found.append(dep)
-                elif dep in lfootprint:
-                    message.sub_debug('Dependency %s is in local' % dep, local)
-                    if not local in depends:
-                        depends.append(local)
-                    found.append(dep)
+                    break
+
+        for dep in autodepends:
+            if dep in found:
+                continue
+            lmatches = database.local_belongs('/%s' % dep)
+            if len(lmatches) > 1:
+                sfirst = lmatches[0]
+                message.sub_warning('Multiple matches for %s' % dep, lmatches)
+                if not sfirst in depends:
+                    depends.append(sfirst)
+                found.append(dep)
+            elif lmatches:
+                sfirst = lmatches[0]
+                message.sub_debug('Dependency %s is in local' % dep, sfirst)
+                if not sfirst in depends:
+                    depends.append(sfirst)
+                found.append(dep)
 
         missing_detected = False
         for dep in autodepends:
