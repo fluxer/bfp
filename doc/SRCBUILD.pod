@@ -127,10 +127,6 @@ Ignore missing runtime dependencies.
 
 Ignore wrong ownership of files and directories.
 
-=head3 debug
-
-Split debug information from DWARF files.
-
 =head2 src_prepare
 
 Function defining the instructions to prepare the software. Patching and other
@@ -189,4 +185,4 @@ COPYING file bundled with the source code.
 
 =head1 SEE ALSO
 
-spm(8) spm.conf(5) bash(1) gpg(1) objcopy(1) strip(1)
+spm(8) spm.conf(5) bash(1) gpg(1) strip(1)

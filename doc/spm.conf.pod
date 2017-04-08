@@ -155,15 +155,6 @@ Set whether to compress manual pages. Doing so will save you some space.
 
 Default: True
 
-=head2 SPLIT_DEBUG
-
-Set wheather to split debug information from DWARF files so that even when
-binaries and libraries are stripped software debugging is possible. Do note
-that debug symbols are usually quite space consuming thus on machines with
-limited storage you may want to keep that set to False.
-
-Default: False
-
 =head2 STRIP_BINARIES
 
 Set whether to strip all symbols from binaries. This reduces the size of
@@ -263,4 +254,4 @@ COPYING file bundled with the source code.
 
 =head1 SEE ALSO
 
-spm(8) SRCBUILD(5) gpg(1) bash(1) gcc(1) ld(1) make(1) objcopy(1) strip(1)
+spm(8) SRCBUILD(5) gpg(1) bash(1) gcc(1) ld(1) make(1) strip(1)

@@ -13,7 +13,7 @@ else:
 import libmessage
 message = libmessage.Message()
 
-app_version = "1.10.1 (d3f2c4b)"
+app_version = "1.10.1 (c1283e1)"
 
 
 retvalue = 0
@@ -136,12 +136,6 @@ try:
         ''' Override compression of manual pages '''
         def __call__(self, parser, namespace, values, option_string=None):
             libspm.COMPRESS_MAN = values
-            setattr(namespace, self.dest, values)
-
-    class OverrideSplitDebug(argparse.Action):
-        ''' Override split of debug symbols '''
-        def __call__(self, parser, namespace, values, option_string=None):
-            libspm.SPLIT_DEBUG = values
             setattr(namespace, self.dest, values)
 
     class OverrideBinaries(argparse.Action):
@@ -362,9 +356,6 @@ try:
         help='Change PURGE_PATHS')
     parser.add_argument('--man', type=ast.literal_eval, action=OverrideMan, \
         choices=[True, False], help='Set whether to compress man pages')
-    parser.add_argument('--split', type=ast.literal_eval, \
-        action=OverrideSplitDebug, choices=[True, False], \
-        help='Set whether to split debug symbols from binaries and libraries')
     parser.add_argument('--binaries', type=ast.literal_eval, \
         action=OverrideBinaries, choices=[True, False], \
         help='Set whether to strip binaries')
@@ -466,7 +457,6 @@ try:
         message.sub_info('MAKEFLAGS', libspm.MAKEFLAGS)
         message.sub_info('PURGE_PATHS', libspm.PURGE_PATHS)
         message.sub_info('COMPRESS_MAN', libspm.COMPRESS_MAN)
-        message.sub_info('SPLIT_DEBUG', libspm.SPLIT_DEBUG)
         message.sub_info('STRIP_BINARIES', libspm.STRIP_BINARIES)
         message.sub_info('STRIP_SHARED', libspm.STRIP_SHARED)
         message.sub_info('STRIP_STATIC', libspm.STRIP_STATIC)

@@ -38,7 +38,6 @@ DEFAULTS = {
     'MAKEFLAGS': '',
     'PURGE_PATHS': '.*/.packlist|.*/perllocal.pod|.*/share/info/dir',
     'COMPRESS_MAN': 'False',
-    'SPLIT_DEBUG': 'False',
     'STRIP_BINARIES': 'False',
     'STRIP_SHARED': 'False',
     'STRIP_STATIC': 'False',
@@ -82,7 +81,6 @@ LDFLAGS = mainconf.get('compile', 'LDFLAGS')
 MAKEFLAGS = mainconf.get('compile', 'MAKEFLAGS')
 PURGE_PATHS = mainconf.get('install', 'PURGE_PATHS')
 COMPRESS_MAN = mainconf.getboolean('install', 'COMPRESS_MAN')
-SPLIT_DEBUG = mainconf.getboolean('install', 'SPLIT_DEBUG')
 STRIP_BINARIES = mainconf.getboolean('install', 'STRIP_BINARIES')
 STRIP_SHARED = mainconf.getboolean('install', 'STRIP_SHARED')
 STRIP_STATIC = mainconf.getboolean('install', 'STRIP_STATIC')
@@ -454,7 +452,6 @@ class Source(object):
         self.mirror = MIRROR
         self.purge_paths = PURGE_PATHS
         self.compress_man = COMPRESS_MAN
-        self.split_debug = SPLIT_DEBUG
         self.strip_binaries = STRIP_BINARIES
         self.strip_shared = STRIP_SHARED
         self.strip_static = STRIP_STATIC
@@ -1011,9 +1008,7 @@ class Source(object):
                             os.symlink(link, spath)
 
         message.sub_info('Re-indexing content')
-        lapplications = []
         lscripts = []
-        ldebug = []
         lbinaries = []
         lshared = []
         lstatic = []
@@ -1025,22 +1020,11 @@ class Source(object):
             smime = misc.file_mime(sfile, bquick=True)
             target_content.append(sfile)
             if smime == 'application/x-executable':
-                if self.strip_binaries:
-                    lbinaries.append(sfile)
-                if self.split_debug:
-                    ldebug.append(sfile)
-                lapplications.append(sfile)
+                lbinaries.append(sfile)
             elif smime == 'application/x-sharedlib':
-                if self.strip_shared:
-                    lshared.append(sfile)
-                if self.split_debug:
-                    ldebug.append(sfile)
-                lapplications.append(sfile)
+                lshared.append(sfile)
             elif smime == 'application/x-archive':
-                if self.strip_static:
-                    lstatic.append(sfile)
-                if self.split_debug:
-                    ldebug.append(sfile)
+                lstatic.append(sfile)
             elif smime == 'text/plain' or smime == 'text/x-shellscript' \
                 or smime == 'text/x-python' or smime == 'text/x-perl' \
                 or smime == 'text/x-php' or smime == 'text/x-ruby' \
@@ -1049,39 +1033,19 @@ class Source(object):
                 lscripts.append(sfile)
 
         message.sub_info('Stripping binaries and libraries')
-        if ldebug:
-            objcopy = misc.whereis('objcopy')
-            message.sub_debug('Splitting debug symbols', ldebug)
-            for sfile in ldebug:
-                # avoid actions on debug files, do not rely on .debug suffix,
-                # do not run on hardlinks as it will fail with binutils <=2.23.2
-                if '/lib/debug/' in sfile or os.stat(sfile).st_nlink == 2:
-                    continue
-                # https://sourceware.org/gdb/onlinedocs/gdb/Separate-Debug-Files.html
-                sdebug = '%s/%s/lib/debug/%s.debug' % \
-                    (self.install_dir, sys.prefix, sfile.replace(self.install_dir, ''))
-                misc.dir_create(os.path.dirname(sdebug))
-                misc.system_command((objcopy, '--only-keep-debug', \
-                    '--compress-debug-sections', sfile, sdebug))
-                misc.system_command((objcopy, '--add-gnu-debuglink', sdebug, sfile))
-                # add the debug file to the target content to avoid yet another
-                # re-index, also take into accout double forward slash during
-                # path joining for sdebug assignment
-                target_content.append(sdebug.replace('//', '/'))
-
-        if lbinaries or lshared or lstatic:
+        if self.strip_binaries or self.strip_shared or self.strip_static:
             strip = misc.whereis('strip')
-        if lbinaries:
+        if self.strip_binaries and lbinaries:
             message.sub_debug('Stripping executables', lbinaries)
             cmd = [strip, '--strip-all']
             cmd.extend(lbinaries)
             misc.system_command(cmd)
-        if lshared:
+        if self.strip_shared and lshared:
             message.sub_debug('Stripping shared libraries', lshared)
             cmd = [strip, '--strip-unneeded']
             cmd.extend(lshared)
             misc.system_command(cmd)
-        if lstatic:
+        if self.strip_static and lstatic:
             message.sub_debug('Stripping static libraries', lstatic)
             cmd = [strip, '--strip-debug']
             cmd.extend(lstatic)
@@ -1089,8 +1053,10 @@ class Source(object):
 
         message.sub_info('Checking runtime dependencies')
         autodepends = []
-        for sfile in lapplications:
+        for sfile in lbinaries:
             autodepends = misc.system_readelf(sfile, bsearch=False)
+        for sfile in lshared:
+            autodepends.extend(misc.system_readelf(sfile, bsearch=False))
 
         for sfile in lscripts:
             omatch = self.shebang_regex.findall(misc.file_read(sfile))
@@ -1128,7 +1094,7 @@ class Source(object):
                 continue
             for sfile in target_content:
                 if sfile.endswith('/%s' % dep):
-                    message.sub_debug('Dependency %s is in target' % dep, dep)
+                    message.sub_debug('Dependency is in target', dep)
                     found.append(dep)
                     break
 
@@ -1460,13 +1426,6 @@ class Source(object):
                     message.sub_warning('Overriding COMPRESS_MAN to', 'False')
                     self.compress_man = False
 
-                if option == 'debug' and not self.split_debug:
-                    message.sub_warning('Overriding SPLIT_DEBUG to', 'True')
-                    self.split_debug = True
-                elif option == '!debug' and self.split_debug:
-                    message.sub_warning('Overriding SPLIT_DEBUG to', 'False')
-                    self.split_debug = False
-
                 if option == 'binaries' and not self.strip_binaries:
                     message.sub_warning('Overriding STRIP_BINARIES to', 'True')
                     self.strip_binaries = True
@@ -1544,7 +1503,6 @@ class Source(object):
             self.mirror = MIRROR
             self.purge_paths = PURGE_PATHS
             self.compress_man = COMPRESS_MAN
-            self.split_debug = SPLIT_DEBUG
             self.strip_binaries = STRIP_BINARIES
             self.strip_shared = STRIP_SHARED
             self.strip_static = STRIP_STATIC

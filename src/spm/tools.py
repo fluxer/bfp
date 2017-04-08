@@ -27,7 +27,7 @@ database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 misc.SHELL = libspm.SHELL
 
-app_version = "1.10.1 (d3f2c4b)"
+app_version = "1.10.1 (c1283e1)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -155,7 +155,7 @@ class Lint(object):
     def __init__(self, targets, man=False, udev=False, symlink=False, \
         purge=False, module=False, footprint=False, builddir=False, \
         ownership=False, executable=False, path=False, shebang=False, \
-        backup=False, conflicts=False, debug=False):
+        backup=False, conflicts=False):
         self.targets = []
         for target in targets:
             self.targets.extend(database.remote_alias(target))
@@ -172,7 +172,6 @@ class Lint(object):
         self.shebang = shebang
         self.backup = backup
         self.conflicts = conflicts
-        self.debug = debug
 
     def _check_ownership(self, spath):
         stat = os.stat(spath)
@@ -324,22 +323,6 @@ class Lint(object):
                         if footprint != diff:
                             message.sub_critical(_('File/link conflicts with %s') % local, \
                                 list(footprint.difference(diff)))
-
-                if self.debug:
-                    message.sub_debug(_('Checking for missing debug symbols in'), target)
-                    found_debug = 'lib/debug/' in target_footprint
-                    found_exe = False
-                    should_debug = 'debug' in target_options or libspm.SPLIT_DEBUG
-                    if not found_debug:
-                        for sfile in target_footprint_lines:
-                            smime = misc.file_mime(sfile)
-                            if smime == 'application/x-executable' \
-                                or smime == 'application/x-sharedlib' \
-                                or smime == 'application/x-archive':
-                                found_exe = True
-                                break
-                    if not found_debug and found_exe and should_debug:
-                        message.sub_warning(_('Debug symbols missing'))
 
 
 class Sane(object):
@@ -1067,7 +1050,6 @@ if __name__ == '__main__':
                 ARGS.shebang = True
                 ARGS.backup = True
                 ARGS.conflicts = True
-                ARGS.debug = True
 
             message.info(_('Runtime information'))
             message.sub_info(_('MAN'), ARGS.man)
@@ -1083,14 +1065,13 @@ if __name__ == '__main__':
             message.sub_info(_('SHEBANG'), ARGS.shebang)
             message.sub_info(_('BACKUP'), ARGS.backup)
             message.sub_info(_('CONFLICTS'), ARGS.conflicts)
-            message.sub_info(_('DEBUG'), ARGS.debug)
             message.sub_info(_('TARGETS'), ARGS.TARGETS)
             message.info(_('Poking locals...'))
 
             m = Lint(ARGS.TARGETS, ARGS.man, ARGS.udev, ARGS.symlink, \
                 ARGS.purge, ARGS.module, ARGS.footprint, ARGS.builddir, \
                 ARGS.ownership, ARGS.executable, ARGS.path, ARGS.shebang, \
-                ARGS.backup, ARGS.conflicts, ARGS.debug)
+                ARGS.backup, ARGS.conflicts)
             m.main()
 
         elif ARGS.mode == 'sane':

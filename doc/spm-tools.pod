@@ -127,7 +127,6 @@ optional arguments:
   -n, --shebang         Check for incorrect shebang of scripts
   -k, --backup          Check for incorrect or incomplete backup of files
   -c, --conflicts       Check for conflicts between targets
-  -D, --debug           Check for missing debug symbols
   -a, --all             Perform all checks
 
 =head2 SANE MODE

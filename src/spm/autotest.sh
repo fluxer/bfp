@@ -111,7 +111,7 @@ fi
 
 if ! grep -q "SPMT LINT" "$statefile" ;then
     echo "=== RUNNING SPMT LINT TEST ==="
-    "$1" "$curdir/tools.py" $spmtargs lint -musPMfboepnkcD ca-certificates
+    "$1" "$curdir/tools.py" $spmtargs lint -musPMfboepnkc ca-certificates
     echo "SPMT LINT" >> "$statefile"
 else
     echo "=== SKIPPING SPMT LINT TEST ==="

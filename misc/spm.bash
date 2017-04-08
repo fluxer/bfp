@@ -10,9 +10,8 @@ _spm()
 
     main_options='-h --help --cache --build --root --gpg --ignore --notify
         --mirror --timeout --verify --chost --cflags --cxxflags --cppflags
-        --ldflags --makeflags --purge --man --split --binaries --shared
-        --static --missing --ownership --conflicts --backup --scripts --debug
-        --version'
+        --ldflags --makeflags --purge --man --binaries --shared --static
+        --missing --ownership --conflicts --backup --scripts --debug --version'
 
     repo_options='-h --help -c --clean -s --sync -u --update -a --all'
 
