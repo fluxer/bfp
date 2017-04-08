@@ -42,7 +42,6 @@ class Misc(object):
         self.TIMEOUT = 30
         self.ROOT_DIR = '/'
         self.GPG_DIR = os.path.expanduser('~/.gnupg')
-        self.CATCH = False
         self.SIGNPASS = None
         self.BUFFER = 10240
         self.SHELL = 'bash'
@@ -976,15 +975,7 @@ class Misc(object):
             cwd = self.dir_current()
         if isinstance(command, str) and not bshell:
             command = shlex.split(command)
-        stderr = None
-        if self.CATCH:
-            stderr = subprocess.PIPE
-        pipe = subprocess.Popen(command, stderr=stderr, shell=bshell, cwd=cwd)
-        pipe.wait()
-        if pipe.returncode != 0:
-            if self.CATCH:
-                raise(Exception(pipe.communicate()[1].strip()))
-            raise(subprocess.CalledProcessError(pipe.returncode, command))
+        subprocess.check_call(command, shell=bshell, cwd=cwd)
 
     def system_chroot(self, command, bshell=False, sinput=None):
         ''' Execute command in chroot environment, conditionally

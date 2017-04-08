@@ -17,7 +17,6 @@ misc = libpackage.misc
 database = libpackage.Database()
 
 
-CATCH = False
 MAIN_CONF = '/etc/spm.conf'
 REPOSITORIES_CONF = '/etc/spm/repositories.conf'
 MIRRORS_CONF = '/etc/spm/mirrors.conf'
@@ -151,8 +150,6 @@ else:
 # out of these is for a reason - only the capital letter globals are
 # ment to be changed by the user (at any time) and the rest is to be
 # done by the library
-message.CATCH = CATCH
-misc.CATCH = CATCH
 misc.OFFLINE = OFFLINE
 misc.TIMEOUT = TIMEOUT
 misc.ROOT_DIR = ROOT_DIR
@@ -184,13 +181,11 @@ class Local(object):
         self.do_footprint = do_footprint
         self.do_backup = do_backup
         self.plain = plain
-        message.CATCH = CATCH
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
         misc.ROOT_DIR = ROOT_DIR
         misc.GPG_DIR = GPG_DIR
         misc.SHELL = SHELL
-        misc.CATCH = CATCH
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
@@ -272,13 +267,11 @@ class Remote(object):
         self.do_options = do_options
         self.do_backup = do_backup
         self.plain = plain
-        message.CATCH = CATCH
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
         misc.ROOT_DIR = ROOT_DIR
         misc.GPG_DIR = GPG_DIR
         misc.SHELL = SHELL
-        misc.CATCH = CATCH
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
@@ -335,13 +328,11 @@ class Repo(object):
         self.do_sync = do_sync
         self.do_prune = do_prune
         self.do_update = do_update
-        message.CATCH = CATCH
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
         misc.ROOT_DIR = ROOT_DIR
         misc.GPG_DIR = GPG_DIR
         misc.SHELL = SHELL
-        misc.CATCH = CATCH
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
@@ -473,13 +464,11 @@ class Source(object):
         self.strip_static = STRIP_STATIC
         self.ignore_missing = IGNORE_MISSING
         self.ignore_ownership = IGNORE_OWNERSHIP
-        message.CATCH = CATCH
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
         misc.ROOT_DIR = ROOT_DIR
         misc.GPG_DIR = GPG_DIR
         misc.SHELL = SHELL
-        misc.CATCH = CATCH
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
@@ -1564,13 +1553,11 @@ class Who(object):
     def __init__(self, pattern, plain=False):
         self.pattern = pattern
         self.plain = plain
-        message.CATCH = CATCH
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
         misc.ROOT_DIR = ROOT_DIR
         misc.GPG_DIR = GPG_DIR
         misc.SHELL = SHELL
-        misc.CATCH = CATCH
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
         database.LOCAL_DIR = LOCAL_DIR
