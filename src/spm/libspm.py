@@ -1,9 +1,5 @@
 #!/usr/bin/python2
 
-# stub for gettext
-def _(arg):
-    return arg
-
 import sys, os, shutil, re, time, syslog, glob, pwd, grp
 from collections import OrderedDict
 if sys.version < '3':
@@ -55,7 +51,7 @@ DEFAULTS = {
 }
 
 if not os.path.isfile(MAIN_CONF):
-    message.warning(_('Configuration file does not exist'), MAIN_CONF)
+    message.warning('Configuration file does not exist', MAIN_CONF)
 
 mainconf = configparser.SafeConfigParser(DEFAULTS)
 mainconf.read(MAIN_CONF)
@@ -99,7 +95,7 @@ TRIGGERS = mainconf.getboolean('merge', 'TRIGGERS')
 
 # parse repositories configuration file
 if not os.path.isfile(REPOSITORIES_CONF):
-    message.warning(_('Repositories configuration file does not exist'), \
+    message.warning('Repositories configuration file does not exist', \
         REPOSITORIES_CONF)
     REPOSITORIES = ['git://github.com/fluxer/core.git']
 else:
@@ -109,12 +105,12 @@ else:
             REPOSITORIES.append(line)
 
     if not REPOSITORIES:
-        message.critical(_('Repositories configuration file is empty'))
+        message.critical('Repositories configuration file is empty')
         sys.exit(2)
 
 # parse mirrors configuration file
 if not os.path.isfile(MIRRORS_CONF):
-    message.warning(_('Mirrors configuration file does not exist'), \
+    message.warning('Mirrors configuration file does not exist', \
         MIRRORS_CONF)
     MIRRORS = ['http://distfiles.gentoo.org/distfiles']
 else:
@@ -124,12 +120,12 @@ else:
             MIRRORS.append(line)
 
     if not MIRRORS and MIRROR:
-        message.critical(_('Mirrors configuration file is empty'))
+        message.critical('Mirrors configuration file is empty')
         sys.exit(2)
 
 # parse PGP keys servers configuration file
 if not os.path.isfile(KEYSERVERS_CONF):
-    message.warning(_('PGP keys servers configuration file does not exist'), \
+    message.warning('PGP keys servers configuration file does not exist', \
         KEYSERVERS_CONF)
     KEYSERVERS = ['pool.sks-keyservers.net']
 else:
@@ -138,7 +134,7 @@ else:
         KEYSERVERS.append(line)
 
     if not KEYSERVERS and VERIFY:
-        message.critical(_('PGP keys servers configuration file is empty'))
+        message.critical('PGP keys servers configuration file is empty')
         sys.exit(2)
 
 # override module variables from configuration, each class will override
@@ -214,17 +210,17 @@ class Local(object):
         for target in matches:
             metadata = database.local_metadata(target, 'all')
             metadatamap = {
-                'name': (_('Name'), self.do_name, target),
-                'version': (_('Version'), self.do_version, metadata['version']),
-                'release': (_('Release'), self.do_release, metadata['release']),
-                'description': (_('Description'), self.do_description, metadata['description']),
-                'depends': (_('Depends'), self.do_depends, ' '.join(metadata['depends'])),
-                'optdepends': (_('Optional depends'), self.do_optdepends, ' '.join(metadata['optdepends'])),
-                'autodepends': (_('Automatic depends'), self.do_autodepends, ' '.join(metadata['autodepends'])),
-                'reverse': (_('Reverse depends'), self.do_reverse, lambda: ' '.join(database.local_rdepends(target))),
-                'size': (_('Size'), self.do_size, metadata['size']),
-                'footprint': (_('Footprint'), self.do_footprint, '\n'.join(metadata['footprint'])),
-                'backup': (_('Backup'), self.do_backup, ' '.join(metadata['backup'])),
+                'name': ('Name', self.do_name, target),
+                'version': ('Version', self.do_version, metadata['version']),
+                'release': ('Release', self.do_release, metadata['release']),
+                'description': ('Description', self.do_description, metadata['description']),
+                'depends': ('Depends', self.do_depends, ' '.join(metadata['depends'])),
+                'optdepends': ('Optional depends', self.do_optdepends, ' '.join(metadata['optdepends'])),
+                'autodepends': ('Automatic depends', self.do_autodepends, ' '.join(metadata['autodepends'])),
+                'reverse': ('Reverse depends', self.do_reverse, lambda: ' '.join(database.local_rdepends(target))),
+                'size': ('Size', self.do_size, metadata['size']),
+                'footprint': ('Footprint', self.do_footprint, '\n'.join(metadata['footprint'])),
+                'backup': ('Backup', self.do_backup, ' '.join(metadata['backup'])),
             }
 
             for metadata in metadatamap:
@@ -295,18 +291,18 @@ class Remote(object):
         for target in matches:
             metadata = database.remote_metadata(target, 'all')
             metadatamap = {
-                'name': (_('Name'), self.do_name, target),
-                'version': (_('Version'), self.do_version, metadata['version']),
-                'release': (_('Release'), self.do_release, metadata['release']),
-                'description': (_('Description'), self.do_description, metadata['description']),
-                'depends': (_('Depends'), self.do_depends, ' '.join(metadata['depends'])),
-                'makedepends': (_('Make depends'), self.do_makedepends, ' '.join(metadata['makedepends'])),
-                'optdepends': (_('Optional depends'), self.do_optdepends, ' '.join(metadata['optdepends'])),
-                'checkdepends': (_('Check depends'), self.do_checkdepends, ' '.join(metadata['checkdepends'])),
-                'sources': (_('Sources'), self.do_sources, ' '.join(metadata['sources'])),
-                'pgpkeys': (_('PGP keys'), self.do_pgpkeys, ' '.join(metadata['pgpkeys'])),
-                'options': (_('Options'), self.do_pgpkeys, ' '.join(metadata['options'])),
-                'backup': (_('Backup'), self.do_backup, ' '.join(metadata['backup'])),
+                'name': ('Name', self.do_name, target),
+                'version': ('Version', self.do_version, metadata['version']),
+                'release': ('Release', self.do_release, metadata['release']),
+                'description': ('Description', self.do_description, metadata['description']),
+                'depends': ('Depends', self.do_depends, ' '.join(metadata['depends'])),
+                'makedepends': ('Make depends', self.do_makedepends, ' '.join(metadata['makedepends'])),
+                'optdepends': ('Optional depends', self.do_optdepends, ' '.join(metadata['optdepends'])),
+                'checkdepends': ('Check depends', self.do_checkdepends, ' '.join(metadata['checkdepends'])),
+                'sources': ('Sources', self.do_sources, ' '.join(metadata['sources'])),
+                'pgpkeys': ('PGP keys', self.do_pgpkeys, ' '.join(metadata['pgpkeys'])),
+                'options': ('Options', self.do_pgpkeys, ' '.join(metadata['options'])),
+                'backup': ('Backup', self.do_backup, ' '.join(metadata['backup'])),
             }
 
             for metadata in metadatamap:
@@ -342,10 +338,10 @@ class Repo(object):
     def clean(self):
         ''' Clean repository '''
         if os.path.isdir(self.repository_dir):
-            message.sub_info(_('Removing'), self.repository_dir)
+            message.sub_info('Removing', self.repository_dir)
             misc.dir_remove(self.repository_dir)
         else:
-            message.sub_debug(_('Dirctory is OK'), self.repository_dir)
+            message.sub_debug('Dirctory does not exist', self.repository_dir)
 
     def sync(self):
         ''' Sync repository '''
@@ -353,10 +349,10 @@ class Repo(object):
 
         if os.path.exists(self.repository_url):
             # repository is local path, create a copy of it
-            message.sub_info(_('Cloning local'), self.repository_name)
+            message.sub_info('Cloning local', self.repository_name)
             shutil.copytree(self.repository_url, self.repository_dir)
         else:
-            message.sub_info(_('Cloning/pulling remote'), self.repository_name)
+            message.sub_info('Cloning/pulling remote', self.repository_name)
             misc.fetch(self.repository_url, self.repository_dir)
 
     def prune(self):
@@ -373,18 +369,18 @@ class Repo(object):
 
             sfull = '%s/%s' % (rdir, spath)
             if not valid and not os.path.isfile(sfull):
-                message.sub_warning(_('Removing'), sfull)
+                message.sub_warning('Removing', sfull)
                 misc.dir_remove(sfull)
 
     def update(self):
         ''' Check repositories for updates '''
-        message.sub_info(_('Checking for updates'))
+        message.sub_info('Checking for updates')
         for target in database.local_all(basename=True):
             if not database.remote_search(target):
-                message.sub_warning(_('Target not in any repository'), target)
+                message.sub_warning('Target not in any repository', target)
                 continue
 
-            message.sub_debug(_('Checking'), target)
+            message.sub_debug('Checking', target)
             latest = database.local_uptodate(target)
             downgrade = database.local_downgrade(target)
             optchange = []
@@ -394,16 +390,16 @@ class Repo(object):
                     optchange.append(opt)
             version = database.remote_metadata(target, 'version')
             if not latest and target in IGNORE:
-                message.sub_warning(_('New version of %s (ignored) available') % \
+                message.sub_warning('New version of %s (ignored) available' % \
                     target, version)
             elif not latest and optchange:
-                message.sub_warning(_('New optional dependency in effect for %s') % \
+                message.sub_warning('New optional dependency in effect for %s' % \
                     target, optchange)
             elif not latest:
-                message.sub_warning(_('New version of %s available') % \
+                message.sub_warning('New version of %s available' % \
                     target, version)
             elif downgrade:
-                message.sub_warning(_('Older version of %s available') % \
+                message.sub_warning('Older version of %s available' % \
                     target, version)
 
     def main(self):
@@ -418,19 +414,19 @@ class Repo(object):
                 self.repository_name)
 
             if self.do_clean:
-                message.sub_info(_('Starting cleanup of'), self.repository_name)
+                message.sub_info('Starting cleanup of', self.repository_name)
                 self.clean()
 
             if self.do_sync:
-                message.sub_info(_('Starting sync of'), self.repository_name)
+                message.sub_info('Starting sync of', self.repository_name)
                 self.sync()
 
         if self.do_prune:
-            message.sub_info(_('Starting prune of'), self.repository_name)
+            message.sub_info('Starting prune of', self.repository_name)
             self.prune()
 
         if self.do_update:
-            message.sub_info(_('Starting update of'), self.repository_name)
+            message.sub_info('Starting update of', self.repository_name)
             self.update()
 
 
@@ -509,12 +505,12 @@ class Source(object):
             # with CMake, OPTIONAL_<target> is a generic one that can be used
             # with Autotools
             if database.local_search(target):
-                message.sub_debug(_('Enabling optional'), target)
+                message.sub_debug('Enabling optional', target)
                 os.putenv('OPTIONAL_%s_BOOL' % envtarget, 'TRUE')
                 os.putenv('OPTIONAL_%s_SWITCH' % envtarget, 'ON')
                 os.putenv('OPTIONAL_%s' % envtarget, 'yes')
             else:
-                message.sub_debug(_('Disabling optional'), target)
+                message.sub_debug('Disabling optional', target)
                 os.putenv('OPTIONAL_%s_BOOL' % envtarget, 'FALSE')
                 os.putenv('OPTIONAL_%s_SWITCH' % envtarget, 'OFF')
                 os.putenv('OPTIONAL_%s' % envtarget, 'no')
@@ -536,9 +532,9 @@ class Source(object):
             message.sub_debug(match)
             for m in match:
                 if not os.path.exists('%s/%s' % (ROOT_DIR, m)):
-                    message.sub_warning(_('File does not exist'), m)
+                    message.sub_warning('File does not exist', m)
                     continue
-                message.sub_info(_('Deleting info page'), m)
+                message.sub_info('Deleting info page', m)
                 misc.system_chroot((install_info, '--delete', m, \
                     '%s/share/info/dir' % sys.prefix))
 
@@ -552,7 +548,7 @@ class Source(object):
                 if m in done:
                     continue
                 elif action == 'remove':
-                    message.sub_info(_('Uninstalling XDG MIMEs'), m)
+                    message.sub_info('Uninstalling XDG MIMEs', m)
                     misc.system_chroot((xdg_mime, 'uninstall', m))
                 done.append(m)
 
@@ -567,7 +563,7 @@ class Source(object):
         message.sub_debug('ldconfig', ldconfig or '')
         match = misc.string_search(ldconfig_regex, adjcontent, escape=False)
         if match and ldconfig:
-            message.sub_info(_('Updating shared libraries cache'))
+            message.sub_info('Updating shared libraries cache')
             message.sub_debug(match)
             misc.system_chroot((ldconfig))
 
@@ -576,7 +572,7 @@ class Source(object):
         message.sub_debug('mandb', mandb or '')
         match = misc.string_search(mandb_regex, adjcontent, escape=False)
         if match and mandb:
-            message.sub_info(_('Updating manual pages database'))
+            message.sub_info('Updating manual pages database')
             message.sub_debug(match)
             command = [mandb, '--quiet']
             mancache = '%s/var/cache/man' % ROOT_DIR
@@ -594,7 +590,7 @@ class Source(object):
         message.sub_debug('update-desktop-database', desktop_database or '')
         match = misc.string_search(desktop_database_regex, adjcontent, escape=False)
         if match and desktop_database:
-            message.sub_info(_('Updating desktop database'))
+            message.sub_info('Updating desktop database')
             message.sub_debug(match)
             misc.system_chroot((desktop_database, \
                 '%s/share/applications' % sys.prefix))
@@ -604,7 +600,7 @@ class Source(object):
         message.sub_debug('update-mime-database', mime_database or '')
         match = misc.string_search(mime_database_regex, adjcontent, escape=False)
         if match and mime_database:
-            message.sub_info(_('Updating MIME database'))
+            message.sub_info('Updating MIME database')
             message.sub_debug(match)
             misc.system_chroot((mime_database, '%s/share/mime' % sys.prefix))
 
@@ -621,11 +617,11 @@ class Source(object):
                     continue
                 base = os.path.basename(m)
                 if icon_resources:
-                    message.sub_info(_('Updating icon resources'), base)
+                    message.sub_info('Updating icon resources', base)
                     misc.system_chroot((icon_resources, 'forceupdate', '--theme', base))
                 if (action == 'merge' or action == 'upgrade') \
                     and os.path.isfile('%s/%s/index.theme' % (ROOT_DIR, m)) and icon_cache:
-                    message.sub_info(_('Updating icons cache'), base)
+                    message.sub_info('Updating icons cache', base)
                     misc.system_chroot((icon_cache, '-q', '-t', '-i', '-f', m))
                 done.append(m)
 
@@ -639,10 +635,10 @@ class Source(object):
                 if m in done:
                     continue
                 if action == 'merge':
-                    message.sub_info(_('Installing XDG MIMEs'), m)
+                    message.sub_info('Installing XDG MIMEs', m)
                     misc.system_chroot((xdg_mime, 'install', '--novendor', m))
                 elif action == 'upgrade':
-                    message.sub_info(_('Updating XDG MIMEs'), m)
+                    message.sub_info('Updating XDG MIMEs', m)
                     misc.system_chroot((xdg_mime, 'install', '--novendor', m))
                 done.append(m)
 
@@ -651,7 +647,7 @@ class Source(object):
         message.sub_debug('gio-querymodules', gio_querymodules or '')
         match = misc.string_search(gio_querymodules_regex, adjcontent, escape=False)
         if match and gio_querymodules:
-            message.sub_info(_('Updating GIO modules cache'))
+            message.sub_info('Updating GIO modules cache')
             message.sub_debug(match)
             misc.system_chroot((gio_querymodules, os.path.dirname(match[0])))
 
@@ -660,7 +656,7 @@ class Source(object):
         message.sub_debug('pango-querymodules', pango_querymodules or '')
         match = misc.string_search(pango_querymodules_regex, adjcontent, escape=False)
         if match and pango_querymodules:
-            message.sub_info(_('Updating pango modules cache'))
+            message.sub_info('Updating pango modules cache')
             message.sub_debug(match)
             misc.system_chroot((pango_querymodules, '--update-cache'))
 
@@ -670,7 +666,7 @@ class Source(object):
         message.sub_debug('gtk-query-imodules-2.0', gtk2_immodules or '')
         match = misc.string_search(gtk2_immodules_regex, adjcontent, escape=False)
         if match and gtk2_immodules:
-            message.sub_info(_('Updating GTK-2.0 imodules cache'))
+            message.sub_info('Updating GTK-2.0 imodules cache')
             message.sub_debug(match)
             misc.dir_create('%s/etc/gtk-2.0' % ROOT_DIR)
             misc.system_chroot(gtk2_immodules + \
@@ -681,7 +677,7 @@ class Source(object):
         message.sub_debug('gtk-query-imodules-3.0', gtk3_immodules or '')
         match = misc.string_search(gtk3_immodules_regex, adjcontent, escape=False)
         if match and gtk3_immodules:
-            message.sub_info(_('Updating GTK-3.0 imodules cache'))
+            message.sub_info('Updating GTK-3.0 imodules cache')
             message.sub_debug(match)
             misc.dir_create('%s/etc/gtk-3.0' % ROOT_DIR)
             misc.system_chroot('%s > /etc/gtk-3.0/gtk.immodules' % gtk3_immodules, \
@@ -692,7 +688,7 @@ class Source(object):
         message.sub_debug('gdk-pixbuf-query-loaders', gdk_pixbuf or '')
         match = misc.string_search(gdk_pixbuf_regex, adjcontent, escape=False)
         if match and gdk_pixbuf:
-            message.sub_info(_('Updating gdk pixbuffer loaders'))
+            message.sub_info('Updating gdk pixbuffer loaders')
             message.sub_debug(match)
             misc.system_chroot((gdk_pixbuf, '--update-cache'))
 
@@ -701,7 +697,7 @@ class Source(object):
         message.sub_debug('glib-compile-schemas', glib_schemas or '')
         match = misc.string_search(glib_schemas_regex, adjcontent, escape=False)
         if match and glib_schemas:
-            message.sub_info(_('Updating GSettings schemas'))
+            message.sub_info('Updating GSettings schemas')
             message.sub_debug(match)
             misc.system_chroot((glib_schemas, match[0]))
 
@@ -714,7 +710,7 @@ class Source(object):
             for m in match:
                 if action == 'remove':
                     continue
-                message.sub_info(_('Installing info page'), m)
+                message.sub_info('Installing info page', m)
                 misc.system_chroot((install_info, m, \
                     '%s/share/info/dir' % sys.prefix))
 
@@ -725,7 +721,7 @@ class Source(object):
         if match and udevadm:
             if os.path.exists('%s/run/udev/control' % ROOT_DIR) \
                 or os.path.exists('%s/var/run/udev/control' % ROOT_DIR):
-                message.sub_info(_('Reloading udev rules and hwdb'))
+                message.sub_info('Reloading udev rules and hwdb')
                 message.sub_debug(match)
                 misc.system_chroot((udevadm, 'control', '--reload'))
 
@@ -735,7 +731,7 @@ class Source(object):
         message.sub_debug('depmod', depmod or '')
         match = misc.string_search(depmod_regex, adjcontent, escape=False)
         if match and depmod:
-            message.sub_info(_('Updating module dependencies'))
+            message.sub_info('Updating module dependencies')
             message.sub_debug(match)
             misc.system_chroot((depmod, match[0]))
             mkinitfs_run = True
@@ -745,7 +741,7 @@ class Source(object):
         message.sub_debug('mkinitfs', mkinitfs or '')
         match = misc.string_search(mkinitfs_regex, adjcontent, escape=False)
         if (match or mkinitfs_run) and mkinitfs:
-            message.sub_info(_('Updating initramfs image'))
+            message.sub_info('Updating initramfs image')
             message.sub_debug(match or mkinitfs_run)
             if match and match[0][1]:
                 # new kernel being installed
@@ -760,9 +756,9 @@ class Source(object):
         match = misc.string_search(grub_mkconfig_regex, adjcontent, escape=False)
         if match and grub_mkconfig:
             if os_prober:
-                message.sub_info(_('Updating Operating System entries'))
+                message.sub_info('Updating Operating System entries')
                 misc.system_chroot((os_prober))
-            message.sub_info(_('Updating GRUB configuration'))
+            message.sub_info('Updating GRUB configuration')
             message.sub_debug(match)
             misc.dir_create('%s/boot/grub' % ROOT_DIR)
             misc.system_chroot((grub_mkconfig, '-o', '/boot/grub/grub.cfg'))
@@ -771,14 +767,14 @@ class Source(object):
         ''' Remove target file '''
         sfull = '%s/%s' % (ROOT_DIR, sfile)
         if os.path.isfile(sfull):
-            message.sub_debug(_('Removing'), sfull)
+            message.sub_debug('Removing', sfull)
             os.unlink(sfull)
 
     def remove_target_dir(self, sdir):
         ''' Remove target directory '''
         sfull = '%s/%s' % (ROOT_DIR, sdir)
         if os.path.isdir(sfull) and not os.listdir(sfull):
-            message.sub_debug(_('Removing'), sfull)
+            message.sub_debug('Removing', sfull)
             if os.path.islink(sfull):
                 os.unlink(sfull)
             else:
@@ -790,46 +786,46 @@ class Source(object):
         sfull = '%s/%s' % (ROOT_DIR, slink)
         if os.path.islink(sfull) and \
             not os.path.exists('%s/%s' % (ROOT_DIR, os.readlink(sfull))):
-            message.sub_debug(_('Removing'), sfull)
+            message.sub_debug('Removing', sfull)
             os.unlink(sfull)
 
     def clean(self):
         ''' Clean target files '''
         if os.path.isdir(self.install_dir) and self.do_install:
-            message.sub_info(_('Removing'), self.install_dir)
+            message.sub_info('Removing', self.install_dir)
             misc.dir_remove(self.install_dir)
         elif os.path.isdir(self.install_dir) and not self.do_prepare:
-            message.sub_info(_('Removing'), self.install_dir)
+            message.sub_info('Removing', self.install_dir)
             misc.dir_remove(self.install_dir)
         else:
-            message.sub_debug(_('Dirctory is OK'), self.install_dir)
+            message.sub_debug('Dirctory does not exist', self.install_dir)
 
         if os.path.isdir(self.source_dir) and self.do_prepare:
-            message.sub_info(_('Removing'), self.source_dir)
+            message.sub_info('Removing', self.source_dir)
             misc.dir_remove(self.source_dir)
         elif os.path.isdir(self.source_dir) and not self.do_install:
-            message.sub_info(_('Removing'), self.source_dir)
+            message.sub_info('Removing', self.source_dir)
             misc.dir_remove(self.source_dir)
         else:
-            message.sub_debug(_('Dirctory is OK'), self.source_dir)
+            message.sub_debug('Dirctory does not exist', self.source_dir)
 
     def fetch(self):
         ''' Fetch target sources '''
         misc.dir_create(self.sources_dir)
 
-        message.sub_info(_('Preparing PGP keys'))
+        message.sub_info('Preparing PGP keys')
         if self.target_pgpkeys and self.verify:
             message.sub_debug(self.target_pgpkeys)
             misc.gpg_receive(self.target_pgpkeys, KEYSERVERS, self.target_name)
 
-        message.sub_info(_('Fetching sources'))
+        message.sub_info('Fetching sources')
         for src_url in self.target_sources:
             src_base = misc.url_normalize(src_url, True)
             local_file = '%s/%s' % (self.sources_dir, src_base)
             src_file = '%s/%s' % (self.target_dir, src_url)
 
             if not os.path.isfile(src_file):
-                message.sub_debug(_('Fetching'), src_url)
+                message.sub_debug('Fetching', src_url)
                 if self.mirror:
                     misc.fetch(src_url, local_file, MIRRORS, 'distfiles/')
                 else:
@@ -842,32 +838,32 @@ class Source(object):
 
                 src_signature = misc.gpg_findsig(local_file)
                 if src_signature:
-                    message.sub_debug(_('Verifying signature'), src_url)
+                    message.sub_debug('Verifying signature', src_url)
                     misc.gpg_verify(local_file, src_signature, self.target_name)
 
     def prepare(self, optional=False):
         ''' Prepare target sources '''
-        message.sub_info(_('Checking dependencies'))
+        message.sub_info('Checking dependencies')
         dependencies = database.remote_mdepends(self.target, \
             cdepends=self.do_check, ldepends=True)
 
         if dependencies and self.do_depends:
-            message.sub_info(_('Building dependencies'), dependencies)
+            message.sub_info('Building dependencies', dependencies)
             self.autosource(dependencies, automake=True)
-            message.sub_info(_('Resuming preparations of'), self.target_name)
+            message.sub_info('Resuming preparations of', self.target_name)
         elif dependencies and self.automake:
             # the dependencies have been pre-calculated on automake by
             # remote_mdepends() above breaking on circular, any dependencies
             # detected now are because they are last in the graph but depend
             # on one in higher level
-            message.sub_warning(_('Circular dependencies in %s') % \
+            message.sub_warning('Circular dependencies in %s' % \
                 self.target_name, dependencies)
         elif dependencies:
-            message.sub_warning(_('Dependencies missing'), dependencies)
+            message.sub_warning('Dependencies missing', dependencies)
 
         self.setup_environment()
         misc.dir_create(self.sources_dir)
-        message.sub_info(_('Preparing sources'))
+        message.sub_info('Preparing sources')
         for src_url in self.target_sources:
             src_base = misc.url_normalize(src_url, True)
             local_file = '%s/%s' % (self.sources_dir, src_base)
@@ -875,28 +871,28 @@ class Source(object):
             link_file = '%s/%s' % (self.source_dir, src_base)
 
             if os.path.islink(link_file):
-                message.sub_debug(_('Already linked'), src_file)
+                message.sub_debug('Already linked', src_file)
             elif os.path.isdir(local_file):
-                message.sub_debug(_('Copying'), src_file)
+                message.sub_debug('Copying', src_file)
                 shutil.copytree(local_file, link_file, True)
             elif os.path.isfile(src_file):
-                message.sub_debug(_('Linking'), src_file)
+                message.sub_debug('Linking', src_file)
                 os.symlink(src_file, link_file)
             elif os.path.isfile(local_file):
-                message.sub_debug(_('Linking'), local_file)
+                message.sub_debug('Linking', local_file)
                 os.symlink(local_file, link_file)
 
             if misc.archive_supported(link_file):
-                message.sub_debug(_('Extracting'), link_file)
+                message.sub_debug('Extracting', link_file)
                 misc.archive_decompress(link_file, self.source_dir)
 
         if not misc.file_search('\nsrc_prepare()', \
             self.srcbuild, escape=False):
             if optional:
-                message.sub_warning(_('src_prepare() not defined'))
+                message.sub_warning('src_prepare() not defined')
                 return
             else:
-                message.sub_critical(_('src_prepare() not defined'))
+                message.sub_critical('src_prepare() not defined')
                 sys.exit(2)
 
         misc.system_command((misc.whereis(SHELL), '-e', '-c', \
@@ -908,10 +904,10 @@ class Source(object):
         if not misc.file_search('\nsrc_compile()', \
             self.srcbuild, escape=False):
             if optional:
-                message.sub_warning(_('src_compile() not defined'))
+                message.sub_warning('src_compile() not defined')
                 return
             else:
-                message.sub_critical(_('src_compile() not defined'))
+                message.sub_critical('src_compile() not defined')
                 sys.exit(2)
 
         self.setup_environment()
@@ -924,10 +920,10 @@ class Source(object):
         if not misc.file_search('\nsrc_check()', \
             self.srcbuild, escape=False):
             if optional:
-                message.sub_warning(_('src_check() not defined'))
+                message.sub_warning('src_check() not defined')
                 return
             else:
-                message.sub_critical(_('src_check() not defined'))
+                message.sub_critical('src_check() not defined')
                 sys.exit(2)
 
         self.setup_environment()
@@ -940,7 +936,7 @@ class Source(object):
 
         if not misc.file_search('\nsrc_install()', \
             self.srcbuild, escape=False):
-            message.sub_critical(_('src_install() not defined'))
+            message.sub_critical('src_install() not defined')
             sys.exit(2)
 
         self.setup_environment()
@@ -949,26 +945,26 @@ class Source(object):
             'source %s && umask 0022 && src_install' % \
             self.srcbuild), cwd=self.source_dir)
 
-        message.sub_info(_('Indexing content'))
+        message.sub_info('Indexing content')
         target_content = misc.list_all(self.install_dir)
 
         if self.purge_paths:
-            message.sub_info(_('Purging unwanted files and directories'))
+            message.sub_info('Purging unwanted files and directories')
             for spath in misc.string_search(self.purge_paths, \
                     '\n'.join(target_content), exact=True, escape=False):
                 spath = spath.strip()
-                message.sub_debug(_('Purging'), spath)
+                message.sub_debug('Purging', spath)
                 if os.path.isdir(spath):
                     misc.dir_remove(spath)
                 elif os.path.isfile(spath) or os.path.islink(spath):
                     os.unlink(spath)
 
         if not self.ignore_ownership:
-            message.sub_info(_('Checking permissions'))
+            message.sub_info('Checking permissions')
             for sfile in target_content:
                 if not os.path.exists(sfile):
                     continue
-                message.sub_debug(_('Checking permissions of'), sfile)
+                message.sub_debug('Checking permissions of', sfile)
                 stat = os.stat(sfile)
                 owner_unknown = False
                 try:
@@ -977,16 +973,16 @@ class Source(object):
                 except KeyError:
                     owner_unknown = True
                 if owner_unknown:
-                    message.sub_warning(_('Unknown owner of'), sfile)
+                    message.sub_warning('Unknown owner of', sfile)
                     os.chown(sfile, 0, 0)
                 # TODO: is there utility to pull those from /etc/login.defs?
                 elif stat.st_gid >= 1000 or stat.st_uid >= 1000:
-                    message.sub_warning(_('Owner of %s is user' % sfile), \
+                    message.sub_warning('Owner of %s is user' % sfile, \
                         '%d, %d' % (stat.st_gid, stat.st_uid))
                     os.chown(sfile, 0, 0)
 
         if self.compress_man:
-            message.sub_info(_('Compressing manual pages'))
+            message.sub_info('Compressing manual pages')
             manpath = misc.whereis('manpath', fallback=False)
             # if manpath (provided by man-db) is not present fallback to
             # something sane
@@ -1001,12 +997,12 @@ class Source(object):
                     if not sdir in spath:
                         continue
                     if not spath.endswith('.gz') and os.path.isfile(spath):
-                        message.sub_debug(_('Compressing'), spath)
+                        message.sub_debug('Compressing', spath)
                         misc.archive_compress((spath,), '%s.gz' % spath, '')
                         os.unlink(spath)
                     elif os.path.islink(spath) and \
                         not os.path.isfile(os.path.realpath(spath)):
-                        message.sub_debug(_('Adjusting link'), spath)
+                        message.sub_debug('Adjusting link', spath)
                         link = os.readlink(spath)
                         os.unlink(spath)
                         if not spath.endswith('.gz'):
@@ -1014,7 +1010,7 @@ class Source(object):
                         else:
                             os.symlink(link, spath)
 
-        message.sub_info(_('Re-indexing content'))
+        message.sub_info('Re-indexing content')
         lapplications = []
         lscripts = []
         ldebug = []
@@ -1025,7 +1021,7 @@ class Source(object):
         for sfile in misc.list_files(self.install_dir):
             if LOCAL_DIR in sfile:
                 continue
-            message.sub_debug(_('Checking MIME of'), sfile)
+            message.sub_debug('Checking MIME of', sfile)
             smime = misc.file_mime(sfile, bquick=True)
             target_content.append(sfile)
             if smime == 'application/x-executable':
@@ -1052,10 +1048,10 @@ class Source(object):
                 or smime == 'text/x-awk' or smime == 'text/x-gawk':
                 lscripts.append(sfile)
 
-        message.sub_info(_('Stripping binaries and libraries'))
+        message.sub_info('Stripping binaries and libraries')
         if ldebug:
             objcopy = misc.whereis('objcopy')
-            message.sub_debug(_('Splitting debug symbols'), ldebug)
+            message.sub_debug('Splitting debug symbols', ldebug)
             for sfile in ldebug:
                 # avoid actions on debug files, do not rely on .debug suffix,
                 # do not run on hardlinks as it will fail with binutils <=2.23.2
@@ -1076,22 +1072,22 @@ class Source(object):
         if lbinaries or lshared or lstatic:
             strip = misc.whereis('strip')
         if lbinaries:
-            message.sub_debug(_('Stripping executables'), lbinaries)
+            message.sub_debug('Stripping executables', lbinaries)
             cmd = [strip, '--strip-all']
             cmd.extend(lbinaries)
             misc.system_command(cmd)
         if lshared:
-            message.sub_debug(_('Stripping shared libraries'), lshared)
+            message.sub_debug('Stripping shared libraries', lshared)
             cmd = [strip, '--strip-unneeded']
             cmd.extend(lshared)
             misc.system_command(cmd)
         if lstatic:
-            message.sub_debug(_('Stripping static libraries'), lstatic)
+            message.sub_debug('Stripping static libraries', lstatic)
             cmd = [strip, '--strip-debug']
             cmd.extend(lstatic)
             misc.system_command(cmd)
 
-        message.sub_info(_('Checking runtime dependencies'))
+        message.sub_info('Checking runtime dependencies')
         autodepends = []
         for sfile in lapplications:
             autodepends = misc.system_readelf(sfile)
@@ -1115,7 +1111,7 @@ class Source(object):
 
                 # now update the shebang if possible
                 if smatch:
-                    message.sub_debug(_('Attempting shebang correction on'), sfile)
+                    message.sub_debug('Attempting shebang correction on', sfile)
                     misc.file_substitute('^%s' % sfull, '#!' + smatch, sfile)
                     autodepends.append(smatch)
                 else:
@@ -1131,10 +1127,10 @@ class Source(object):
                 if dep in found:
                     continue
                 elif '%s%s' % (self.install_dir, dep) in target_content:
-                    message.sub_debug(_('Dependency %s is in target' % dep), dep)
+                    message.sub_debug('Dependency %s is in target' % dep, dep)
                     found.append(dep)
                 elif dep in lfootprint:
-                    message.sub_debug(_('Dependency %s is in local' % dep), local)
+                    message.sub_debug('Dependency %s is in local' % dep, local)
                     if not local in depends:
                         depends.append(local)
                     found.append(dep)
@@ -1143,14 +1139,14 @@ class Source(object):
         for dep in autodepends:
             if not dep in found:
                 if not self.ignore_missing:
-                    message.sub_critical(_('Dependency needed, not in any local'), dep)
+                    message.sub_critical('Dependency needed, not in any local', dep)
                     missing_detected = True
                 else:
-                    message.sub_warning(_('Dependency needed, not in any local'), dep)
+                    message.sub_warning('Dependency needed, not in any local', dep)
         if missing_detected:
             sys.exit(2)
 
-        message.sub_info(_('Assembling metadata'))
+        message.sub_info('Assembling metadata')
         metadata = '%s/%s' % (self.install_dir, self.target_metadata)
         footprint = []
         optdepends = []
@@ -1185,23 +1181,23 @@ class Source(object):
         misc.dir_create(os.path.dirname(metadata))
         misc.json_write(metadata, OrderedDict(data))
 
-        message.sub_info(_('Assembling SRCBUILD'))
+        message.sub_info('Assembling SRCBUILD')
         shutil.copy(self.srcbuild, '%s/%s' % \
             (self.install_dir, self.target_srcbuild))
 
-        message.sub_info(_('Compressing tarball'))
+        message.sub_info('Compressing tarball')
         misc.dir_create(os.path.dirname(self.target_tarball))
         misc.archive_compress((self.install_dir,), self.target_tarball, \
             self.install_dir)
 
     def merge(self):
         ''' Merget target to system '''
-        message.sub_info(_('Indexing content'))
+        message.sub_info('Indexing content')
         new_content = []
         for sfile in misc.archive_list(self.target_tarball):
             new_content.append('/%s' % sfile)
         if not '/%s' % self.target_metadata in new_content:
-            message.sub_critical(_('Invalid tarball'), self.target_tarball)
+            message.sub_critical('Invalid tarball', self.target_tarball)
             sys.exit(2)
         new_content.sort()
         old_content = database.local_metadata(self.target_name, 'footprint') or []
@@ -1209,15 +1205,15 @@ class Source(object):
 
         if CONFLICTS:
             conflict_detected = False
-            message.sub_info(_('Checking for conflicts'))
+            message.sub_info('Checking for conflicts')
             for target in database.local_all(basename=True):
                 if target == self.target_name:
                     continue
-                message.sub_debug(_('Checking against'), target)
+                message.sub_debug('Checking against', target)
                 footprint = frozenset(database.local_metadata(target, 'footprint'))
                 diff = footprint.difference(new_content)
                 if footprint != diff:
-                    message.sub_critical(_('File/link conflicts with %s') % target, \
+                    message.sub_critical('File/link conflicts with %s' % target, \
                         list(footprint.difference(diff)))
                     conflict_detected = True
 
@@ -1229,11 +1225,11 @@ class Source(object):
 
         if target_upgrade and SCRIPTS \
             and misc.file_search('\npre_upgrade()', self.srcbuild, escape=False):
-            message.sub_info(_('Executing pre_upgrade()'))
+            message.sub_info('Executing pre_upgrade()')
             misc.system_script(self.srcbuild, 'pre_upgrade')
         elif misc.file_search('\npre_install()', self.srcbuild, escape=False) \
             and SCRIPTS:
-            message.sub_info(_('Executing pre_install()'))
+            message.sub_info('Executing pre_install()')
             misc.system_script(self.srcbuild, 'pre_install')
 
         if target_upgrade and old_content:
@@ -1242,24 +1238,24 @@ class Source(object):
             self.pre_update_databases(new_content, 'merge')
 
         if BACKUP:
-            message.sub_info(_('Creating backup files'))
+            message.sub_info('Creating backup files')
             for sfile in backup_content:
                 sfull = '%s%s' % (ROOT_DIR, sfile)
                 if not os.path.isfile(sfull):
-                    message.sub_warning(_('File does not exist'), sfull)
+                    message.sub_warning('File does not exist', sfull)
                 elif not backup_content[sfile] == misc.file_checksum(sfull):
-                    message.sub_debug(_('Backing up'), sfull)
+                    message.sub_debug('Backing up', sfull)
                     shutil.copy2(sfull, '%s.backup' % sfull)
                 else:
-                    message.sub_debug(_('Backup skipped'), sfull)
+                    message.sub_debug('Backup skipped', sfull)
 
-        message.sub_info(_('Decompressing tarball'))
+        message.sub_info('Decompressing tarball')
         misc.archive_decompress(self.target_tarball, ROOT_DIR)
 
         if target_upgrade:
-            message.sub_info(_('Removing obsolete files and directories'))
+            message.sub_info('Removing obsolete files and directories')
             remove_content = frozenset(old_content).difference(new_content)
-            message.sub_debug(_('Removing files'))
+            message.sub_debug('Removing files')
             for sfile in remove_content:
                 sfull = '%s%s' % (ROOT_DIR, sfile.encode('utf-8'))
                 # skip files moved from real to symlink directory
@@ -1274,20 +1270,20 @@ class Source(object):
                     continue
                 self.remove_target_file(sfile)
             remove_content = reversed(tuple(remove_content))
-            message.sub_debug(_('Removing directories'))
+            message.sub_debug('Removing directories')
             for sfile in remove_content:
                 self.remove_target_dir(os.path.dirname(sfile))
-            message.sub_debug(_('Removing links'))
+            message.sub_debug('Removing links')
             for sfile in remove_content:
                 self.remove_target_link(sfile)
 
             if misc.file_search('\npost_upgrade()', self.srcbuild, escape=False) \
                 and SCRIPTS:
-                message.sub_info(_('Executing post_upgrade()'))
+                message.sub_info('Executing post_upgrade()')
                 misc.system_script(self.srcbuild, 'post_upgrade')
         elif misc.file_search('\npost_install()', self.srcbuild, escape=False) \
             and SCRIPTS:
-            message.sub_info(_('Executing post_install()'))
+            message.sub_info('Executing post_install()')
             misc.system_script(self.srcbuild, 'post_install')
 
         if target_upgrade:
@@ -1296,12 +1292,12 @@ class Source(object):
             self.post_update_databases(new_content, 'merge')
 
         if target_upgrade:
-            message.sub_info(_('Checking reverse dependencies'))
+            message.sub_info('Checking reverse dependencies')
             rdepends = database.local_rdepends(self.target_name)
 
             if rdepends and self.do_reverse:
                 for target in rdepends:
-                    message.sub_debug(_('Checking'), target)
+                    message.sub_debug('Checking', target)
                     dependencies = ''
                     for dep in database.local_metadata(target, 'autodepends'):
                         dependencies += '%s|' % (re.escape(dep))
@@ -1310,7 +1306,7 @@ class Source(object):
                         self.autosource([target], automake=True)
                         break
             elif rdepends:
-                message.sub_warning(_('Targets may need rebuild'), rdepends)
+                message.sub_warning('Targets may need rebuild', rdepends)
 
         # do not wait for the cache notifier to kick in
         database.LOCAL_CACHE = {}
@@ -1318,52 +1314,52 @@ class Source(object):
     def remove(self):
         ''' Remove target files from system '''
         if not database.local_search(self.target_name):
-            message.sub_critical(_('Already removed'), self.target_name)
+            message.sub_critical('Already removed', self.target_name)
             sys.exit(2)
 
-        message.sub_info(_('Checking dependencies'))
+        message.sub_info('Checking dependencies')
         depends_detected = database.local_rdepends(self.target_name)
         # on autoremove ignore reverse dependencies asuming they have been
         # processed already and passed to the class initializer in proper order
         # by the initial checker with indirect reverse dependencies on
         if depends_detected and self.do_reverse and not self.autoremove:
-            message.sub_info(_('Removing reverse dependencies'), depends_detected)
+            message.sub_info('Removing reverse dependencies', depends_detected)
             self.autosource(depends_detected, autoremove=True)
-            message.sub_info(_('Resuming removal of'), self.target_name)
+            message.sub_info('Resuming removal of', self.target_name)
         elif depends_detected and not self.autoremove:
-            message.sub_critical(_('Other targets depend on %s') % \
+            message.sub_critical('Other targets depend on %s' % \
                 self.target_name, depends_detected)
             sys.exit(2)
 
         if misc.file_search('\npre_remove()', self.srcbuild, escape=False) \
             and SCRIPTS:
-            message.sub_info(_('Executing pre_remove()'))
+            message.sub_info('Executing pre_remove()')
             misc.system_script(self.srcbuild, 'pre_remove')
 
-        message.sub_info(_('Indexing content'))
+        message.sub_info('Indexing content')
         target_content = database.local_metadata(self.target_name, 'footprint')
 
         if target_content:
             self.pre_update_databases(target_content, 'remove')
 
-            message.sub_info(_('Removing files'))
+            message.sub_info('Removing files')
             for sfile in target_content:
                 self.remove_target_file(sfile)
 
-            message.sub_info(_('Removing directories'))
+            message.sub_info('Removing directories')
             for sfile in reversed(target_content):
                 self.remove_target_dir(os.path.dirname(sfile))
 
-            message.sub_info(_('Removing links'))
+            message.sub_info('Removing links')
             for sfile in reversed(target_content):
                 self.remove_target_link(sfile)
 
         if misc.file_search('\npost_remove()', self.srcbuild, escape=False) \
             and SCRIPTS:
-            message.sub_info(_('Executing post_remove()'))
+            message.sub_info('Executing post_remove()')
             misc.system_script(self.srcbuild, 'post_remove')
 
-        message.sub_info(_('Removing metadata and SRCBUILD'))
+        message.sub_info('Removing metadata and SRCBUILD')
         self.remove_target_file(self.target_metadata)
         self.remove_target_file(self.target_srcbuild)
         self.remove_target_dir('%s/%s' % (LOCAL_DIR, self.target_name))
@@ -1390,7 +1386,7 @@ class Source(object):
 
             target_name = os.path.basename(target)
             if target_name in IGNORE:
-                message.sub_warning(_('Ignoring target'), target_name)
+                message.sub_warning('Ignoring target', target_name)
                 continue
 
             target_dir = database.remote_search(target)
@@ -1398,7 +1394,7 @@ class Source(object):
             if not target_dir and (self.do_remove or self.autoremove):
                 target_dir = database.local_search(target)
             if not target_dir:
-                message.sub_critical(_('Invalid target'), target)
+                message.sub_critical('Invalid target', target)
                 sys.exit(2)
 
             # set target properties
@@ -1425,108 +1421,108 @@ class Source(object):
 
             if database.local_uptodate(self.target) \
                 and not database.local_downgrade(self.target) and self.do_update:
-                message.sub_warning(_('Target is up-to-date'), self.target)
+                message.sub_warning('Target is up-to-date', self.target)
                 continue
 
             for option in self.target_options:
                 if option == 'verify' and not self.verify:
-                    message.sub_warning(_('Overriding VERIFY to'), _('True'))
+                    message.sub_warning('Overriding VERIFY to', 'True')
                     self.verify = True
                 elif option == '!verify' and self.verify:
-                    message.sub_warning(_('Overriding VERIFY to'), _('False'))
+                    message.sub_warning('Overriding VERIFY to', 'False')
                     self.verify = False
 
                 if option == 'mirror' and not self.mirror:
-                    message.sub_warning(_('Overriding MIRROR to'), _('True'))
+                    message.sub_warning('Overriding MIRROR to', 'True')
                     self.mirror = True
                 elif option == '!mirror' and self.mirror:
-                    message.sub_warning(_('Overriding MIRROR to'), _('False'))
+                    message.sub_warning('Overriding MIRROR to', 'False')
                     self.mirror = False
 
                 if option == 'man' and not self.compress_man:
-                    message.sub_warning(_('Overriding COMPRESS_MAN to'), _('True'))
+                    message.sub_warning('Overriding COMPRESS_MAN to', 'True')
                     self.compress_man = True
                 elif option == '!man' and self.compress_man:
-                    message.sub_warning(_('Overriding COMPRESS_MAN to'), _('False'))
+                    message.sub_warning('Overriding COMPRESS_MAN to', 'False')
                     self.compress_man = False
 
                 if option == 'debug' and not self.split_debug:
-                    message.sub_warning(_('Overriding SPLIT_DEBUG to'), _('True'))
+                    message.sub_warning('Overriding SPLIT_DEBUG to', 'True')
                     self.split_debug = True
                 elif option == '!debug' and self.split_debug:
-                    message.sub_warning(_('Overriding SPLIT_DEBUG to'), _('False'))
+                    message.sub_warning('Overriding SPLIT_DEBUG to', 'False')
                     self.split_debug = False
 
                 if option == 'binaries' and not self.strip_binaries:
-                    message.sub_warning(_('Overriding STRIP_BINARIES to'), _('True'))
+                    message.sub_warning('Overriding STRIP_BINARIES to', 'True')
                     self.strip_binaries = True
                 elif option == '!binaries' and self.strip_binaries:
-                    message.sub_warning(_('Overriding STRIP_BINARIES to'), _('False'))
+                    message.sub_warning('Overriding STRIP_BINARIES to', 'False')
                     self.strip_binaries = False
 
                 if option == 'shared' and not self.strip_shared:
-                    message.sub_warning(_('Overriding STRIP_SHARED to'), _('True'))
+                    message.sub_warning('Overriding STRIP_SHARED to', 'True')
                     self.strip_shared = True
                 elif option == '!shared' and self.strip_shared:
-                    message.sub_warning(_('Overriding STRIP_SHARED to'), _('False'))
+                    message.sub_warning('Overriding STRIP_SHARED to', 'False')
                     self.strip_shared = False
 
                 if option == 'static' and not self.strip_static:
-                    message.sub_warning(_('Overriding STRIP_STATIC to'), _('True'))
+                    message.sub_warning('Overriding STRIP_STATIC to', 'True')
                     self.strip_static = True
                 elif option == '!static' and self.strip_static:
-                    message.sub_warning(_('Overriding STRIP_STATIC to'), _('False'))
+                    message.sub_warning('Overriding STRIP_STATIC to', 'False')
                     self.strip_static = False
 
                 if option == 'missing' and not self.ignore_missing:
-                    message.sub_warning(_('Overriding IGNORE_MISSING to'), _('True'))
+                    message.sub_warning('Overriding IGNORE_MISSING to', 'True')
                     self.ignore_missing = True
                 elif option == '!missing' and self.ignore_missing:
-                    message.sub_warning(_('Overriding IGNORE_MISSING to'), _('False'))
+                    message.sub_warning('Overriding IGNORE_MISSING to', 'False')
                     self.ignore_missing = False
 
                 if option == 'ownership' and not self.ignore_ownership:
-                    message.sub_warning(_('Overriding IGNORE_MISSING to'), _('True'))
+                    message.sub_warning('Overriding IGNORE_MISSING to', 'True')
                     self.ignore_ownership = True
                 elif option == '!ownership' and self.ignore_ownership:
-                    message.sub_warning(_('Overriding IGNORE_OWNERSHIP to'), _('False'))
+                    message.sub_warning('Overriding IGNORE_OWNERSHIP to', 'False')
                     self.ignore_ownership = False
 
                 # that's a bit of exception since it is a string
                 if option == '!purge' and self.purge_paths:
-                    message.sub_warning(_('Overriding PURGE_PATHS to'), _('False'))
+                    message.sub_warning('Overriding PURGE_PATHS to', 'False')
                     self.purge_paths = False
 
             if self.do_clean or self.automake:
-                message.sub_info(_('Starting cleanup of'), self.target_name)
+                message.sub_info('Starting cleanup of', self.target_name)
                 self.clean()
 
             if self.do_fetch or self.automake:
-                message.sub_info(_('Starting fetch of'), self.target_name)
+                message.sub_info('Starting fetch of', self.target_name)
                 self.fetch()
 
             if self.do_prepare or self.automake:
-                message.sub_info(_('Starting preparations of'), self.target_name)
+                message.sub_info('Starting preparations of', self.target_name)
                 self.prepare(True)
 
             if self.do_compile or self.automake:
-                message.sub_info(_('Starting compile of'), self.target_name)
+                message.sub_info('Starting compile of', self.target_name)
                 self.compile(True)
 
             if self.do_check:
-                message.sub_info(_('Starting check of'), self.target_name)
+                message.sub_info('Starting check of', self.target_name)
                 self.check(True)
 
             if self.do_install or self.automake:
-                message.sub_info(_('Starting install of'), self.target_name)
+                message.sub_info('Starting install of', self.target_name)
                 self.install()
 
             if self.do_merge or self.automake:
-                message.sub_info(_('Starting merge of'), self.target_name)
+                message.sub_info('Starting merge of', self.target_name)
                 self.merge()
 
             if self.do_remove or self.autoremove:
-                message.sub_info(_('Starting remove of'), self.target_name)
+                message.sub_info('Starting remove of', self.target_name)
                 self.remove()
 
             # reset values so that overrides apply only to single target
@@ -1570,4 +1566,4 @@ class Who(object):
             if self.plain:
                 print(target)
             else:
-                message.sub_info(_('Match in'), target)
+                message.sub_info('Match in', target)
