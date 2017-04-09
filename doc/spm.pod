@@ -12,7 +12,7 @@ spm - Source Package Manager
     [--cppflags CPPFLAGS] [--ldflags LDFLAGS] [--makeflags MAKEFLAGS]
     [--purge PURGE] [--man {True,False}] [--binaries {True,False}]
     [--shared {True,False}] [--static {True,False}] [--missing {True,False}]
-    [--ownership {True,False}] [--conflicts {True,False}]
+    [--permissions {True,False}] [--conflicts {True,False}]
     [--backup {True,False}] [--scripts {True,False}] [--triggers {True,False}]
     [--debug] [--version]
     {repo,remote,source,local,who} ...

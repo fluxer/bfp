@@ -24,7 +24,7 @@ _spm_tools()
         -s --signatures -p --pulse -a --all'
 
     lint_options='-h --help -m --man -u --udev -s --symlink -P --purge
-        -M --module -f --footprint -b --builddir -o --ownership -e --executable
+        -M --module -f --footprint -b --builddir -o --permissions -e --executable
         -p --path -n --shebang -k --backup -c --conflicts -D --debug -a --all'
 
     check_options='-h --help -D --depends -R --reverse'

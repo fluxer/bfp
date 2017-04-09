@@ -121,7 +121,7 @@ optional arguments:
   -M, --module          Check for module(s) in non-standard directory
   -f, --footprint       Check for footprint consistency
   -b, --builddir        Check for build directory trace(s)
-  -o, --ownership       Check ownership
+  -o, --permissions     Check permissions
   -e, --executable      Check for non-executable(s) in PATH
   -p, --path            Check for overlapping executable(s) in PATH
   -n, --shebang         Check for incorrect shebang of scripts

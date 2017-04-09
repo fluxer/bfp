@@ -42,7 +42,7 @@ DEFAULTS = {
     'STRIP_SHARED': 'False',
     'STRIP_STATIC': 'False',
     'IGNORE_MISSING': 'False',
-    'IGNORE_OWNERSHIP': 'False',
+    'IGNORE_PERMISSIONS': 'False',
     'CONFLICTS': 'False',
     'BACKUP': 'False',
     'SCRIPTS': 'False',
@@ -85,7 +85,7 @@ STRIP_BINARIES = mainconf.getboolean('install', 'STRIP_BINARIES')
 STRIP_SHARED = mainconf.getboolean('install', 'STRIP_SHARED')
 STRIP_STATIC = mainconf.getboolean('install', 'STRIP_STATIC')
 IGNORE_MISSING = mainconf.getboolean('install', 'IGNORE_MISSING')
-IGNORE_OWNERSHIP = mainconf.getboolean('install', 'IGNORE_OWNERSHIP')
+IGNORE_PERMISSIONS = mainconf.getboolean('install', 'IGNORE_PERMISSIONS')
 CONFLICTS = mainconf.getboolean('merge', 'CONFLICTS')
 BACKUP = mainconf.getboolean('merge', 'BACKUP')
 SCRIPTS = mainconf.getboolean('merge', 'SCRIPTS')
@@ -456,7 +456,7 @@ class Source(object):
         self.strip_shared = STRIP_SHARED
         self.strip_static = STRIP_STATIC
         self.ignore_missing = IGNORE_MISSING
-        self.ignore_ownership = IGNORE_OWNERSHIP
+        self.ignore_permissions = IGNORE_PERMISSIONS
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
         misc.ROOT_DIR = ROOT_DIR
@@ -836,7 +836,7 @@ class Source(object):
                     message.sub_debug('Verifying signature', src_url)
                     misc.gpg_verify(local_file, src_signature, self.target_name)
 
-    def prepare(self, optional=False):
+    def prepare(self):
         ''' Prepare target sources '''
         message.sub_info('Checking dependencies')
         dependencies = database.remote_mdepends(self.target, \
@@ -883,43 +883,31 @@ class Source(object):
 
         if not misc.file_search('\nsrc_prepare()', \
             self.srcbuild, escape=False):
-            if optional:
-                message.sub_warning('src_prepare() not defined')
-                return
-            else:
-                message.sub_critical('src_prepare() not defined')
-                sys.exit(2)
+            message.sub_warning('src_prepare() not defined')
+            return
 
         misc.system_command((misc.whereis(SHELL), '-e', '-c', \
             'source %s && umask 0022 && src_prepare' % \
             self.srcbuild), cwd=self.source_dir)
 
-    def compile(self, optional=False):
+    def compile(self):
         ''' Compile target sources '''
         if not misc.file_search('\nsrc_compile()', \
             self.srcbuild, escape=False):
-            if optional:
-                message.sub_warning('src_compile() not defined')
-                return
-            else:
-                message.sub_critical('src_compile() not defined')
-                sys.exit(2)
+            message.sub_warning('src_compile() not defined')
+            return
 
         self.setup_environment()
         misc.system_command((misc.whereis(SHELL), '-e', '-c', \
             'source %s && umask 0022 && src_compile' % \
             self.srcbuild), cwd=self.source_dir)
 
-    def check(self, optional=False):
+    def check(self):
         ''' Check target sources '''
         if not misc.file_search('\nsrc_check()', \
             self.srcbuild, escape=False):
-            if optional:
-                message.sub_warning('src_check() not defined')
-                return
-            else:
-                message.sub_critical('src_check() not defined')
-                sys.exit(2)
+            message.sub_warning('src_check() not defined')
+            return
 
         self.setup_environment()
         misc.system_command((misc.whereis(SHELL), '-e', '-c', \
@@ -953,28 +941,6 @@ class Source(object):
                     misc.dir_remove(spath)
                 elif os.path.isfile(spath) or os.path.islink(spath):
                     os.unlink(spath)
-
-        if not self.ignore_ownership:
-            message.sub_info('Checking permissions')
-            for sfile in target_content:
-                if not os.path.exists(sfile):
-                    continue
-                message.sub_debug('Checking permissions of', sfile)
-                stat = os.stat(sfile)
-                owner_unknown = False
-                try:
-                    pwd.getpwuid(stat.st_uid)
-                    grp.getgrgid(stat.st_gid)
-                except KeyError:
-                    owner_unknown = True
-                if owner_unknown:
-                    message.sub_warning('Unknown owner of', sfile)
-                    os.chown(sfile, 0, 0)
-                # TODO: is there utility to pull those from /etc/login.defs?
-                elif stat.st_gid >= 1000 or stat.st_uid >= 1000:
-                    message.sub_warning('Owner of %s is user' % sfile, \
-                        '%d, %d' % (stat.st_gid, stat.st_uid))
-                    os.chown(sfile, 0, 0)
 
         if self.compress_man:
             message.sub_info('Compressing manual pages')
@@ -1029,6 +995,33 @@ class Source(object):
                 or smime == 'text/x-lua' or smime == 'text/x-tcl' \
                 or smime == 'text/x-awk' or smime == 'text/x-gawk':
                 lscripts.append(sfile)
+
+        if not self.ignore_permissions:
+            message.sub_info('Checking permissions')
+            for sfile in target_content:
+                message.sub_debug('Checking permissions of', sfile)
+                stat = os.stat(sfile)
+                try:
+                    pwd.getpwuid(stat.st_uid)
+                    grp.getgrgid(stat.st_gid)
+                except KeyError:
+                    message.sub_warning('Unknown owner of', sfile)
+                    os.chown(sfile, 0, 0)
+                # TODO: is there utility to pull those from /etc/login.defs?
+                elif stat.st_gid >= 1000 or stat.st_uid >= 1000:
+                    message.sub_warning('Owner of %s is user' % sfile, \
+                        '%d, %d' % (stat.st_gid, stat.st_uid))
+                    os.chown(sfile, 0, 0)
+
+                # NOTE: lscripts are ignored because text/plain can be anything
+                # and many scripts are just helpers that do not have to be
+                # executable at all
+                # TODO: maybe limit the binaries to those which are in $PATH
+                # since they may be helpers too (e.g. dbus-daemon-launch-helper)
+                if (sfile in lbinaries or sfile in lshared) \
+                    and not os.access(sfile, os.X_OK):
+                    message.sub_warning('Binary/library is not executable', sfile)
+                    os.chmod(sfile, 755)
 
         message.sub_info('Stripping binaries and libraries')
         if self.strip_binaries or self.strip_shared or self.strip_static:
@@ -1426,12 +1419,12 @@ class Source(object):
                     message.sub_warning('Overriding IGNORE_MISSING to', 'False')
                     self.ignore_missing = False
 
-                if option == 'ownership' and not self.ignore_ownership:
+                if option == 'permissions' and not self.ignore_permissions:
                     message.sub_warning('Overriding IGNORE_MISSING to', 'True')
-                    self.ignore_ownership = True
-                elif option == '!ownership' and self.ignore_ownership:
-                    message.sub_warning('Overriding IGNORE_OWNERSHIP to', 'False')
-                    self.ignore_ownership = False
+                    self.ignore_permissions = True
+                elif option == '!permissions' and self.ignore_permissions:
+                    message.sub_warning('Overriding IGNORE_PERMISSIONS to', 'False')
+                    self.ignore_permissions = False
 
                 # that's a bit of exception since it is a string
                 if option == '!purge' and self.purge_paths:
@@ -1448,15 +1441,15 @@ class Source(object):
 
             if self.do_prepare or self.automake:
                 message.sub_info('Starting preparations of', self.target_name)
-                self.prepare(True)
+                self.prepare()
 
             if self.do_compile or self.automake:
                 message.sub_info('Starting compile of', self.target_name)
-                self.compile(True)
+                self.compile()
 
             if self.do_check:
                 message.sub_info('Starting check of', self.target_name)
-                self.check(True)
+                self.check()
 
             if self.do_install or self.automake:
                 message.sub_info('Starting install of', self.target_name)
@@ -1479,7 +1472,7 @@ class Source(object):
             self.strip_shared = STRIP_SHARED
             self.strip_static = STRIP_STATIC
             self.ignore_missing = IGNORE_MISSING
-            self.ignore_ownership = IGNORE_OWNERSHIP
+            self.ignore_permissions = IGNORE_PERMISSIONS
 
 wantscookie = '''
                        _           |

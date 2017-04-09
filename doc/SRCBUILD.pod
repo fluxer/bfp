@@ -123,9 +123,9 @@ Purge unwanted files and directories.
 
 Ignore missing runtime dependencies.
 
-=head3 ownership
+=head3 permissions
 
-Ignore wrong ownership of files and directories.
+Ignore wrong permissions of files and directories.
 
 =head2 src_prepare
 

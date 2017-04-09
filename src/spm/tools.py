@@ -154,7 +154,7 @@ class Lint(object):
     ''' Check sanity of local targets '''
     def __init__(self, targets, man=False, udev=False, symlink=False, \
         purge=False, module=False, footprint=False, builddir=False, \
-        ownership=False, executable=False, path=False, shebang=False, \
+        permissions=False, executable=False, path=False, shebang=False, \
         backup=False, conflicts=False):
         self.targets = []
         for target in targets:
@@ -166,7 +166,7 @@ class Lint(object):
         self.module = module
         self.footprint = footprint
         self.builddir = builddir
-        self.ownership = ownership
+        self.permissions = permissions
         self.executable = executable
         self.path = path
         self.shebang = shebang
@@ -252,13 +252,14 @@ class Lint(object):
                         if misc.file_search(libspm.BUILD_DIR, sfile):
                             message.sub_warning(_('Build directory trace(s)'), sfile)
 
-                if self.ownership:
-                    message.sub_debug(_('Checking ownership in'), target)
+                if self.permissions:
+                    message.sub_debug(_('Checking permissions in'), target)
                     for sfile in target_footprint_lines:
                         if os.path.islink(sfile):
                             continue
                         self._check_ownership(sfile)
                         self._check_ownership(os.path.dirname(sfile))
+                    # TODO: check for non-executable binaries and libraries
 
                 if self.executable:
                     message.sub_debug(_('Checking for non-executables in'), target)
@@ -863,8 +864,8 @@ if __name__ == '__main__':
             help=_('Check for footprint consistency'))
         lint_parser.add_argument('-b', '--builddir', action='store_true', \
             help=_('Check for build directory trace(s)'))
-        lint_parser.add_argument('-o', '--ownership', action='store_true', \
-            help=_('Check ownership'))
+        lint_parser.add_argument('-o', '--permissions', action='store_true', \
+            help=_('Check permissions'))
         lint_parser.add_argument('-e', '--executable', action='store_true', \
             help=_('Check for non-executable(s) in PATH'))
         lint_parser.add_argument('-p', '--path', action='store_true', \
@@ -1044,7 +1045,7 @@ if __name__ == '__main__':
                 ARGS.module = True
                 ARGS.footprint = True
                 ARGS.builddir = True
-                ARGS.ownership = True
+                ARGS.permissions = True
                 ARGS.executable = True
                 ARGS.path = True
                 ARGS.shebang = True
@@ -1059,7 +1060,7 @@ if __name__ == '__main__':
             message.sub_info(_('MODULE'), ARGS.module)
             message.sub_info(_('FOOTPRINT'), ARGS.footprint)
             message.sub_info(_('BUILDDIR'), ARGS.builddir)
-            message.sub_info(_('OWNERSHIP'), ARGS.ownership)
+            message.sub_info(_('PERMISSIONS'), ARGS.permissions)
             message.sub_info(_('EXECUTABLE'), ARGS.executable)
             message.sub_info(_('PATH'), ARGS.path)
             message.sub_info(_('SHEBANG'), ARGS.shebang)
@@ -1070,7 +1071,7 @@ if __name__ == '__main__':
 
             m = Lint(ARGS.TARGETS, ARGS.man, ARGS.udev, ARGS.symlink, \
                 ARGS.purge, ARGS.module, ARGS.footprint, ARGS.builddir, \
-                ARGS.ownership, ARGS.executable, ARGS.path, ARGS.shebang, \
+                ARGS.permissions, ARGS.executable, ARGS.path, ARGS.shebang, \
                 ARGS.backup, ARGS.conflicts)
             m.main()
 

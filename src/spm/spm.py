@@ -162,10 +162,10 @@ try:
             libspm.IGNORE_MISSING = values
             setattr(namespace, self.dest, values)
 
-    class OverrideOwnership(argparse.Action):
-        ''' Override missing runtime dependencies failure '''
+    class OverridePermissions(argparse.Action):
+        ''' Override permissions check '''
         def __call__(self, parser, namespace, values, option_string=None):
-            libspm.IGNORE_OWNERSHIP = values
+            libspm.IGNORE_PERMISSIONS = values
             setattr(namespace, self.dest, values)
 
     class OverrideConflicts(argparse.Action):
@@ -368,9 +368,9 @@ try:
     parser.add_argument('--missing', type=ast.literal_eval, \
         action=OverrideMissing, choices=[True, False], \
         help='Set whether to ignore missing runtime dependencies')
-    parser.add_argument('--ownership', type=ast.literal_eval, \
-        action=OverrideOwnership, choices=[True, False], \
-        help='Set whether to ignore ownership of files')
+    parser.add_argument('--permissions', type=ast.literal_eval, \
+        action=OverridePermissions, choices=[True, False], \
+        help='Set whether to ignore permissions of files')
     parser.add_argument('--conflicts', type=ast.literal_eval, \
         action=OverrideConflicts, choices=[True, False], \
         help='Set whether to check for conflicts')
@@ -461,7 +461,7 @@ try:
         message.sub_info('STRIP_SHARED', libspm.STRIP_SHARED)
         message.sub_info('STRIP_STATIC', libspm.STRIP_STATIC)
         message.sub_info('IGNORE_MISSING', libspm.IGNORE_MISSING)
-        message.sub_info('IGNORE_OWNERSHIP', libspm.IGNORE_OWNERSHIP)
+        message.sub_info('IGNORE_PERMISSIONS', libspm.IGNORE_PERMISSIONS)
         message.sub_info('CONFLICTS', libspm.CONFLICTS)
         message.sub_info('BACKUP', libspm.BACKUP)
         message.sub_info('SCRIPTS', libspm.SCRIPTS)

@@ -184,12 +184,17 @@ workaround for false positives.
 
 Default: False
 
-=head2 IGNORE_OWNERSHIP
+=head2 IGNORE_PERMISSIONS
 
-Set whether to ignore ownership of files and directories. This increases the
-security by making sure that they are not owned by non-system user (usually
-with GID/UID that is greater or equal to 1000). By setting it to True you open
-up a chance for non-system users to temper with paths that they should not.
+Set whether to ignore ownership of files and directories as well as
+non-executable binaries and libraries. When this option is off it increases the
+security by making sure that files are not owned by non-system user (usually
+with GID/UID that is greater or equal to 1000) and in addition it makes sure
+that binaries and libraries are executable which may have the opposite effect.
+By setting it to True you open up a chance for non-system users to temper with
+paths that they should not but may close another in case the package manager
+automatically sets the executable bit for binaries and libraries for which
+that is not desired.
 
 Default: False
 
