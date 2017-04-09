@@ -5,10 +5,9 @@ _spm_tools()
     local action cur prev
     local main_options merge_options clean_options edit_options sane_options
     local lint_options check_options dist_options which_options pack_options
-    local serve_options disowned_options digest_options
+    local serve_options disowned_options
 
-    actions='merge clean edit sane lint check dist which pack serve disowned
-        digest'
+    actions='merge clean edit sane lint check dist which pack serve disowned'
 
     main_options='-h --help --root --debug --version'
 
@@ -38,8 +37,6 @@ _spm_tools()
 
     disowned_options='-h --help -d --directory -c --cross -p --plain'
 
-    digest_options='-h --help -d -c --create -v --verify -k --backup'
-
     _get_comp_words_by_ref cur prev
     _get_first_arg
 
@@ -67,8 +64,6 @@ _spm_tools()
         COMPREPLY=($(compgen -W "${serve_options}" -- "${cur}"))
     elif [[ ${arg} = disowned ]];then
         COMPREPLY=($(compgen -W "${disowned_options}" -- "${cur}"))
-    elif [[ ${arg} = digest ]];then
-        COMPREPLY=($(compgen -W "${digest_options}" -- "${cur}"))
     fi
 }
 

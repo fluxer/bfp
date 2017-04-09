@@ -600,73 +600,6 @@ class Disowned(object):
                     message.sub_info(_('Disowned file'), sfile)
 
 
-class Digest(object):
-    ''' Create/verify target(s) checksum digest '''
-    def __init__(self, targets, directory='/', do_create=False, \
-        do_verify=False, do_backup=False):
-        self.targets = []
-        for target in targets:
-            self.targets.extend(database.remote_alias(target))
-        self.directory = directory
-        self.do_create = do_create
-        self.do_verify = do_verify
-        self.do_backup = do_backup
-
-    # TODO: make those more flexible, taking target argument and such
-    def create(self):
-        ''' Create a digest of target(s) files '''
-        digest = {}
-        for target in self.targets:
-            if not database.local_search(target):
-                message.sub_critical(_('Invalid target'), target)
-                sys.exit(2)
-            message.sub_debug(_('Checksumming'), target)
-            digest[target] = {}
-            target_backup = database.local_metadata(target, 'backup')
-            target_footprint = []
-            for sfile in database.local_metadata(target, 'footprint'):
-                target_footprint.append('%s/%s' % (libspm.ROOT_DIR, sfile))
-            for sfile in target_footprint:
-                srelative = misc.string_lstrip(sfile, libspm.ROOT_DIR + '/', '')
-                if srelative in target_backup and not self.do_backup:
-                    message.sub_debug(_('Ignoring backup file'))
-                elif not os.path.exists(sfile):
-                    message.sub_warning(_('File does not exist'), sfile)
-                else:
-                    digest[target][srelative] = misc.file_checksum(sfile)
-        misc.json_write('%s/digest.json' % self.directory, digest)
-
-    def verify(self):
-        ''' Verify target(s) files from digets '''
-        digest = misc.json_read('%s/digest.json' % self.directory)
-        fail = False
-        for target in digest:
-            if not target in self.targets:
-                message.sub_debug(_('Target from digest not in arguments'), target)
-                continue
-            elif not database.local_search(target):
-                message.sub_critical(_('Target from digest is not local'), target)
-                sys.exit(2)
-            message.sub_debug(_('Verifying'), target)
-            for sfile in digest[target]:
-                sfull = '%s/%s' % (libspm.ROOT_DIR, sfile)
-                if not os.path.exists(sfull):
-                    message.sub_warning(_('File does not exist'), sfull)
-                    fail = True
-                elif not digest[target][sfile] == misc.file_checksum(sfull):
-                    message.sub_critical(_('Checksum mismatch'), sfull)
-                    fail = True
-        if fail:
-            sys.exit(2)
-
-    def main(self):
-        if self.do_create:
-            self.create()
-
-        if self.do_verify:
-            self.verify()
-
-
 if __name__ == '__main__':
     plugins = []
     modules = []
@@ -832,18 +765,6 @@ if __name__ == '__main__':
         if EUID == 0:
             upgrade_parser = subparsers.add_parser('upgrade')
 
-        digest_parser = subparsers.add_parser('digest')
-        digest_parser.add_argument('-d', '--directory', type=str, \
-            default=misc.dir_current(), help=_('Set output directory'))
-        digest_parser.add_argument('-c', '--create', action='store_true', \
-            help=_('Create digest'))
-        digest_parser.add_argument('-v', '--verify', action='store_true', \
-            help=_('Verify digest'))
-        digest_parser.add_argument('-k', '--backup', action='store_true', \
-            help=_('Do not ignore backup files'))
-        digest_parser.add_argument('TARGETS', nargs='+', type=str, \
-            help=_('Targets to apply actions on'))
-
         parser.add_argument('--root', type=str, action=OverrideRootDir, \
             help=_('Change system root directory'))
         parser.add_argument('--debug', nargs=0, action=OverrideDebug, \
@@ -1003,17 +924,6 @@ if __name__ == '__main__':
                 message.sub_info(_('DIRECTORY'), ARGS.directory)
                 message.sub_info(_('CROSS'), ARGS.cross)
             m = Disowned(ARGS.directory, ARGS.cross, ARGS.plain)
-            m.main()
-
-        elif ARGS.mode == 'digest':
-            message.info(_('Runtime information'))
-            message.sub_info(_('DIRECTORY'), ARGS.directory)
-            message.sub_info(_('CREATE'), ARGS.create)
-            message.sub_info(_('VERIFY'), ARGS.verify)
-            message.sub_info(_('BACKUP'), ARGS.backup)
-            message.sub_info(_('TARGETS'), ARGS.TARGETS)
-            m = Digest(ARGS.TARGETS, ARGS.directory, ARGS.create, \
-                ARGS.verify, ARGS.backup)
             m.main()
 
         for module in modules:

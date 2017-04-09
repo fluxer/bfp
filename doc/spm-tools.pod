@@ -6,7 +6,7 @@ spm-tools - Source Package Manager Tools
 
     spm-tools [-h] [--debug] [--version]
                  {dist,check,clean,lint,sane,merge,edit,which,pack,serve,
-                 disowned,digest}
+                 disowned}
 
 =head1 DESCRIPTION
 
@@ -57,16 +57,12 @@ default the scanning process does not perform cross-filesystem operations
 which depending on your setup may not be desired, for an example if you
 have /usr on a separate partition. The operation is usually very slow.
 
-Create targets footprint checkum and later verifying it can be done via digest
-mode. It uses sha256 digest and creates a digest.json in a designated
-directory.
-
 =head1 OPTIONS
 
 =head2 MAIN
 
 positional arguments:
-  {dist,check,clean,lint,sane,merge,edit,which,pack,serve,disowned,digest}
+  {dist,check,clean,lint,sane,merge,edit,which,pack,serve,disowned}
 
 optional arguments:
   -h, --help            Show this help message and exit
@@ -193,19 +189,6 @@ optional arguments:
   -c, --cross           Scan cross-filesystem
   -p, --plain           Print in plain format
 
-=head2 DIGEST MODE
-
-positional arguments:
-  TARGETS               Targets to apply actions on
-
-optional arguments:
-  -h, --help            Show this help message and exit
-  -d DIRECTORY, --directory DIRECTORY
-                        Set output directory
-  -c, --create          Create digest
-  -v, --verify          Verify digest
-  -k, --backup          Do not ignore backup files
-
 =head1 EXAMPLES
 
 Create a tarball of all sources, SRCBUILD, patches, etc. of grub and put the
@@ -256,15 +239,6 @@ Serve all repositories, sources and pre-build tarballs to the local network:
     spm-tools serve
 
 TODO: disowned
-
-Create a digest.json file for bash and zlib with their files checksumed:
-
-    spm-tools digest -c bash zlib
-
-Verify bash and zlib checksums from digest.json on extenral device mounted at
-/mnt/usb:
-
-    spm-tools digest -v bash zlib -d=/mnt/usb
 
 =head1 EXIT STATUS
 

@@ -156,13 +156,3 @@ if ! grep -q "SPMT DISOWNED" "$statefile" ;then
 else
     echo "=== SKIPPING SPMT DISOWNED TEST ==="
 fi
-
-if [ ! -d "$rootdir/var/local/spm/ca-certificates" ];then
-    echo "=== SKIPPING SPMT DIGEST TEST (CA-CERTIFICATES NOT INSTALLED) ==="
-elif ! grep -q "SPMT DIGEST" "$statefile" ;then
-    echo "=== RUNNING SPMT DIGEST TEST ==="
-    "$1" "$curdir/tools.py" $spmtargs digest -cvk ca-certificates -d "$rootdir"
-    echo "SPMT DIGEST" >> "$statefile"
-else
-    echo "=== SKIPPING SPMT DIGEST TEST ==="
-fi
