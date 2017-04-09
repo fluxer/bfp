@@ -147,16 +147,6 @@ else
     echo "=== SKIPPING SPMT PACK TEST ==="
 fi
 
-if ! "$1" "$curdir/tools.py" online -u 'https://crux.nu/ports/crux-3.3'; then
-    echo "=== SKIPPING SPMT PKG TEST (REQUIRES ACCESS TO CRUX SERVER) ==="
-elif ! grep -q "SPMT PKG" "$statefile" ;then
-    echo "=== RUNNING SPMT PKG TEST ==="
-    "$1" "$curdir/tools.py" $spmtargs pkg -d "$rootdir" ca-certificates
-    echo "SPMT PKG" >> "$statefile"
-else
-    echo "=== SKIPPING SPMT PKG TEST ==="
-fi
-
 # serve is a blocking and dengerous to run
 
 if ! grep -q "SPMT DISOWNED" "$statefile" ;then
@@ -167,14 +157,6 @@ else
     echo "=== SKIPPING SPMT DISOWNED TEST ==="
 fi
 
-if ! grep -q "SPMT ONLINE" "$statefile" ;then
-    echo "=== RUNNING SPMT ONLINE TEST ==="
-    "$1" "$curdir/tools.py" $spmtargs online -u https://google.com
-    echo "SPMT ONLINE" >> "$statefile"
-else
-    echo "=== SKIPPING SPMT ONLINE TEST ==="
-fi
-
 if [ ! -d "$rootdir/var/local/spm/ca-certificates" ];then
     echo "=== SKIPPING SPMT DIGEST TEST (CA-CERTIFICATES NOT INSTALLED) ==="
 elif ! grep -q "SPMT DIGEST" "$statefile" ;then
@@ -183,16 +165,4 @@ elif ! grep -q "SPMT DIGEST" "$statefile" ;then
     echo "SPMT DIGEST" >> "$statefile"
 else
     echo "=== SKIPPING SPMT DIGEST TEST ==="
-fi
-
-if [ "$uid" != "0" ];then
-    echo "=== SKIPPING SPMT PORTABLE TEST (REQUIRES ROOT) ==="
-elif [ ! -d "$rootdir/var/local/spm/ca-certificates" ];then
-    echo "=== SKIPPING SPMT PORTABLE TEST (CA-CERTIFICATES NOT INSTALLED) ==="
-elif ! grep -q "SPMT PORTABLE" "$statefile" ;then
-    echo "=== RUNNING SPMT PORTABLE TEST ==="
-    "$1" "$curdir/tools.py" $spmtargs portable ca-certificates -d "$rootdir" || expectedfailure 1
-    echo "SPMT PORTABLE" >> "$statefile"
-else
-    echo "=== SKIPPING SPMT PORTABLE TEST ==="
 fi

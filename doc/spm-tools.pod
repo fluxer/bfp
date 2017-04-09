@@ -5,8 +5,8 @@ spm-tools - Source Package Manager Tools
 =head1 SYNOPSIS
 
     spm-tools [-h] [--debug] [--version]
-                 {dist,check,clean,lint,sane,merge,edit,which,pack,pkg,serve,
-                 disowned,online,digest,portable}
+                 {dist,check,clean,lint,sane,merge,edit,which,pack,serve,
+                 disowned,digest}
 
 =head1 DESCRIPTION
 
@@ -48,9 +48,6 @@ dublicate ports. In addition, the content of the SRCBUILD can be printed.
 Software build with SPM can be re-packed via pack mode, it depends on the
 footprint and will bail out if file does not exist.
 
-Package files from CRUX Linux can be obtained via pkg mode, later they can be
-converted (with some degree of success) to SRCBUILD via pkg2src.
-
 Serving local caches (that includes repositories, sources and tarballs) to the
 local area netwrok can be done via serve mode. Do note that the functionality
 is very basic and you may want to use dedicated application for this purpose.
@@ -59,8 +56,6 @@ System files not tracked by SPM can be checked for via disowned mode. By
 default the scanning process does not perform cross-filesystem operations
 which depending on your setup may not be desired, for an example if you
 have /usr on a separate partition. The operation is usually very slow.
-
-Checking if the system can access the internet can be done via online mode.
 
 Create targets footprint checkum and later verifying it can be done via digest
 mode. It uses sha256 digest and creates a digest.json in a designated
@@ -71,8 +66,7 @@ directory.
 =head2 MAIN
 
 positional arguments:
-  {dist,check,clean,lint,sane,merge,edit,which,pack,pkg,serve,disowned,online
-  ,digest,portable}
+  {dist,check,clean,lint,sane,merge,edit,which,pack,serve,disowned,digest}
 
 optional arguments:
   -h, --help            Show this help message and exit
@@ -182,16 +176,6 @@ optional arguments:
   -d DIRECTORY, --directory DIRECTORY
                         Set output directory
 
-=head2 PKG MODE
-
-positional arguments:
-  TARGETS               Targets to apply actions on
-
-optional arguments:
-  -h, --help            Show this help message and exit
-  -d DIRECTORY, --directory DIRECTORY
-                        Set output directory
-
 =head2 SERVE MODE
 
 optional arguments:
@@ -209,11 +193,6 @@ optional arguments:
   -c, --cross           Scan cross-filesystem
   -p, --plain           Print in plain format
 
-=head2 ONLINE MODE
-
-optional arguments:
-  -h, --help  Show this help message and exit
-
 =head2 DIGEST MODE
 
 positional arguments:
@@ -226,16 +205,6 @@ optional arguments:
   -c, --create          Create digest
   -v, --verify          Verify digest
   -k, --backup          Do not ignore backup files
-
-=head2 PORTABLE MODE
-
-positional arguments:
-  TARGETS               Targets to apply actions on
-
-optional arguments:
-  -h, --help            Show this help message and exit
-  -d DIRECTORY, --directory DIRECTORY
-                        Set output directory
 
 =head1 EXAMPLES
 
@@ -282,19 +251,11 @@ Create tarball of localy installed gcc:
 
     sudo spm-tools pack gcc
 
-Get package files from CRUX for zlib and convert them for use with SPM:
-
-    spm-tools pkg zlib && pkg2src zlib
-
 Serve all repositories, sources and pre-build tarballs to the local network:
 
     spm-tools serve
 
 TODO: disowned
-
-Check if http://crux.nu is accessible from the current host:
-
-    spm-tools online -u http://crux.nu
 
 Create a digest.json file for bash and zlib with their files checksumed:
 
@@ -304,11 +265,6 @@ Verify bash and zlib checksums from digest.json on extenral device mounted at
 /mnt/usb:
 
     spm-tools digest -v bash zlib -d=/mnt/usb
-
-Create an archive of neverball and all of its dependencies to be run on
-different host:
-
-    sudo spm-tools portable neverball 
 
 =head1 EXIT STATUS
 

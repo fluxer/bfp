@@ -5,7 +5,7 @@ def _(arg):
     return arg
 
 import sys, argparse, subprocess, tarfile, zipfile, shutil, os, re, difflib
-import pwd, grp, site, imp, glob
+import pwd, grp, imp, glob
 if sys.version < '3':
     import ConfigParser as configparser
     from urllib2 import HTTPError
@@ -195,7 +195,6 @@ class Lint(object):
                     else:
                         target_footprint_lines.append(sfull)
                         target_footprint += '%s\n' % sfull
-                target_options = database.remote_metadata(target, 'options')
 
                 if self.man:
                     message.sub_debug(_('Checking for missing man pages in'), target)
@@ -558,66 +557,6 @@ class Pack(object):
                 sys.exit(2)
 
 
-class Pkg(object):
-    ''' Fetch CRUX Linux package files '''
-    def __init__(self, targets, directory=misc.dir_current()):
-        self.targets = []
-        for target in targets:
-            self.targets.extend(database.remote_alias(target))
-        self.directory = directory
-        self.PKG_DIRS = (
-            'https://crux.nu/ports/crux-3.3/compat-32/%s',
-            'https://crux.nu/ports/crux-3.3/contrib/%s',
-            'https://crux.nu/ports/crux-3.3/core/%s',
-            'https://crux.nu/ports/crux-3.3/opt/%s',
-            'https://crux.nu/ports/crux-3.3/xorg/%s',
-        )
-
-    def get_links(self, pkgname):
-        ''' Probe main URLs '''
-        for d in self.PKG_DIRS:
-            url = d % pkgname
-            message.sub_debug(_('Probing'), url)
-            if not misc.url_ping('%s/Pkgfile' % url):
-                continue
-            request = None
-            try:
-                request = misc.fetch_request(url)
-                for line in request:
-                    m = re.search(r'href="(.+?)">(.+?)<'.encode('utf-8'), line)
-                    if m:
-                        href = m.group(1).decode()
-                        name = m.group(2).decode()
-                        if name[:2] == '..' or name == 'Name':
-                            continue
-                        yield '%s/%s' % (url, href), name
-            except HTTPError as e:
-                if e.code != 404:
-                    raise
-            finally:
-                if request:
-                    request.close()
-
-    def main(self):
-        not_found = []
-        for target in self.targets:
-            urls = list(self.get_links(target))
-            if urls:
-                message.sub_info(_('Fetching package files'), target)
-                pkgdir = '%s/%s' % (self.directory, target)
-                misc.dir_create(pkgdir)
-                for href, name in urls:
-                    message.sub_debug(_('Fetching'), href)
-                    misc.fetch(href, '%s/%s' % (pkgdir, name))
-            else:
-                not_found.append(target)
-
-        if not_found:
-            for target in not_found:
-                message.sub_critical(_('Invalid target'), target)
-            sys.exit(2)
-
-
 class Serve(object):
     ''' Share cache directories with local network parties '''
     def __init__(self, port, address):
@@ -660,14 +599,6 @@ class Disowned(object):
                 else:
                     message.sub_info(_('Disowned file'), sfile)
 
-class Online(object):
-    ''' Check if system is online or URL reachable '''
-    def __init__(self, url):
-        self.url = url
-
-    def main(self):
-        if not misc.url_ping(self.url):
-            sys.exit(1)
 
 class Digest(object):
     ''' Create/verify target(s) checksum digest '''
@@ -735,68 +666,6 @@ class Digest(object):
         if self.do_verify:
             self.verify()
 
-
-class Portable(object):
-    ''' Create a portable tarball of local (installed) target '''
-    def __init__(self, targets, directory=misc.dir_current()):
-        self.targets = []
-        for target in targets:
-            self.targets.extend(database.remote_alias(target))
-        self.directory = directory
-
-    def main(self):
-        for target in self.targets:
-            if database.local_search(target):
-                target_version = database.local_metadata(target, 'version')
-                target_packfile = '%s/%s_%s.tar.gz' % (self.directory, \
-                    os.path.basename(target), target_version)
-
-                content = []
-                for sfile in database.local_metadata(target, 'footprint'):
-                    content.append('%s/%s' % (libspm.ROOT_DIR, sfile))
-                for dep in database.local_metadata(target, 'depends'):
-                    if not database.local_search(dep):
-                        # explicit dependency which was ignored during build
-                        continue
-                    message.sub_debug(_('Augmenting'), dep)
-                    # TODO: allow exclude/include from files passed as argument
-                    for depfile in database.local_metadata(dep, 'footprint'):
-                        sfull = '%s/%s' % (libspm.ROOT_DIR, depfile)
-                        if misc.string_search('%s/(?:lib/debug|include|share/(?:man|doc)/)' % \
-                            sys.prefix, depfile, escape=False):
-                            message.sub_debug(_('Skipping file'), sfull)
-                            continue
-                        elif not os.path.exists(sfull):
-                            message.sub_warning(_('File does not exist'), sfull)
-                            continue
-                        content.append(sfull)
-                    # add metadata directory, it is not listed in the footprint
-                    content.append('%s/%s' % (libspm.LOCAL_DIR, dep))
-                # add metadata directory, it is not listed in the footprint
-                content.append('%s/%s' % (libspm.LOCAL_DIR, target))
-
-                message.sub_info(_('Creating runner'), '%s/run.sh' % os.getcwd())
-                library_override = ['/lib', '/usr/lib']
-                python_override = site.getsitepackages()
-                for sfile in content:
-                    parent = os.path.dirname(sfile).replace(libspm.ROOT_DIR, '')
-                    if sfile.endswith('.so'):
-                        if not parent in library_override:
-                            library_override.append(parent)
-                    elif sfile.endswith('.py'):
-                        if not parent in python_override:
-                            python_override.append(parent)
-                runner = '#!/bin/sh\nset -e\nexport LD_LIBRARY_PATH="$(pwd)%s"\nexport PYTHONPATH="$(pwd)%s"\n$@' % \
-                    (':$(pwd)'.join(library_override), ':$(pwd)'.join(python_override))
-                misc.file_write('./run.sh', runner)
-                content.append('./run.sh')
-                os.chmod('./run.sh', 0o755)
-
-                # TODO: write a README file?
-
-                message.sub_info(_('Compressing'), target_packfile)
-                misc.archive_compress(content, target_packfile, '/')
-                os.unlink('./run.sh')
 
 if __name__ == '__main__':
     plugins = []
@@ -934,12 +803,6 @@ if __name__ == '__main__':
             pack_parser.add_argument('TARGETS', nargs='+', type=str, \
                 help=_('Targets to apply actions on'))
 
-        pkg_parser = subparsers.add_parser('pkg')
-        pkg_parser.add_argument('-d', '--directory', type=str, \
-            default=misc.dir_current(), help=_('Set output directory'))
-        pkg_parser.add_argument('TARGETS', nargs='+', type=str, \
-            help=_('Targets to apply actions on'))
-
         serve_parser = subparsers.add_parser('serve')
         serve_parser.add_argument('-p', '--port', action='store', \
             type=int, default=8000, help=_('Use port for the server'))
@@ -966,10 +829,6 @@ if __name__ == '__main__':
         upload_parser.add_argument('TARGETS', nargs='+', type=str, \
             help=_('Targets to apply actions on'))
 
-        online_parser = subparsers.add_parser('online')
-        online_parser.add_argument('-u', '--url', type=str, \
-            default='https://www.google.com', help=_('URL to ping'))
-
         if EUID == 0:
             upgrade_parser = subparsers.add_parser('upgrade')
 
@@ -984,13 +843,6 @@ if __name__ == '__main__':
             help=_('Do not ignore backup files'))
         digest_parser.add_argument('TARGETS', nargs='+', type=str, \
             help=_('Targets to apply actions on'))
-
-        if EUID == 0:
-            portable_parser = subparsers.add_parser('portable')
-            portable_parser.add_argument('-d', '--directory', type=str, \
-                default=misc.dir_current(), help=_('Set output directory'))
-            portable_parser.add_argument('TARGETS', nargs='+', type=str, \
-                help=_('Targets to apply actions on'))
 
         parser.add_argument('--root', type=str, action=OverrideRootDir, \
             help=_('Change system root directory'))
@@ -1137,13 +989,6 @@ if __name__ == '__main__':
             m = Pack(ARGS.TARGETS, ARGS.directory)
             m.main()
 
-        elif ARGS.mode == 'pkg':
-            message.info(_('Runtime information'))
-            message.sub_info(_('DIRECTORY'), ARGS.directory)
-            message.sub_info(_('TARGETS'), ARGS.TARGETS)
-            m = Pkg(ARGS.TARGETS, ARGS.directory)
-            m.main()
-
         elif ARGS.mode == 'serve':
             message.info(_('Runtime information'))
             message.sub_info(_('CACHE_DIR'), libspm.CACHE_DIR)
@@ -1160,12 +1005,6 @@ if __name__ == '__main__':
             m = Disowned(ARGS.directory, ARGS.cross, ARGS.plain)
             m.main()
 
-        elif ARGS.mode == 'online':
-            message.info(_('Runtime information'))
-            message.sub_info(_('URL'), ARGS.url)
-            m = Online(ARGS.url)
-            m.main()
-
         elif ARGS.mode == 'digest':
             message.info(_('Runtime information'))
             message.sub_info(_('DIRECTORY'), ARGS.directory)
@@ -1175,13 +1014,6 @@ if __name__ == '__main__':
             message.sub_info(_('TARGETS'), ARGS.TARGETS)
             m = Digest(ARGS.TARGETS, ARGS.directory, ARGS.create, \
                 ARGS.verify, ARGS.backup)
-            m.main()
-
-        elif ARGS.mode == 'portable':
-            message.info(_('Runtime information'))
-            message.sub_info(_('DIRECTORY'), ARGS.directory)
-            message.sub_info(_('TARGETS'), ARGS.TARGETS)
-            m = Portable(ARGS.TARGETS, ARGS.directory)
             m.main()
 
         for module in modules:
