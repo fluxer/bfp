@@ -655,7 +655,7 @@ class Source(object):
             message.sub_debug(match)
             misc.system_chroot((pango_querymodules, '--update-cache'))
 
-        # TODO: use --update-cache, requires GTK+ version >= 2.24.20
+        # NOTE: requires GTK+ version >= 2.24.20
         gtk2_immodules = misc.whereis('gtk-query-immodules-2.0', False, True)
         gtk2_immodules_regex = '(?:^|\\s)(.*/gtk-2.0/.*/immodules/.*)(?:$|\\s)'
         message.sub_debug('gtk-query-imodules-2.0', gtk2_immodules or '')
@@ -663,9 +663,7 @@ class Source(object):
         if match and gtk2_immodules:
             message.sub_info('Updating GTK-2.0 imodules cache')
             message.sub_debug(match)
-            misc.dir_create('%s/etc/gtk-2.0' % ROOT_DIR)
-            misc.system_chroot(gtk2_immodules + \
-                ' > /etc/gtk-2.0/gtk.immodules', bshell=True)
+            misc.system_chroot((gtk2_immodules, '--update-cache'))
 
         gtk3_immodules = misc.whereis('gtk-query-immodules-3.0', False, True)
         gtk3_immodules_regex = '(?:^|\\s)(.*/gtk-3.0/.*/immodules/.*)(?:$|\\s)'
@@ -674,9 +672,7 @@ class Source(object):
         if match and gtk3_immodules:
             message.sub_info('Updating GTK-3.0 imodules cache')
             message.sub_debug(match)
-            misc.dir_create('%s/etc/gtk-3.0' % ROOT_DIR)
-            misc.system_chroot('%s > /etc/gtk-3.0/gtk.immodules' % gtk3_immodules, \
-                bshell=True)
+            misc.system_chroot((gtk3_immodules, '--update-cache'))
 
         gdk_pixbuf = misc.whereis('gdk-pixbuf-query-loaders', False, True)
         gdk_pixbuf_regex = '(?:^|\\s)(.*/gdk-pixbuf.*)(?:$|\\s)'
