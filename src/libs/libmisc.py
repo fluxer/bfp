@@ -42,7 +42,6 @@ class Misc(object):
         self.TIMEOUT = 30
         self.ROOT_DIR = '/'
         self.GPG_DIR = os.path.expanduser('~/.gnupg')
-        self.SIGNPASS = None
         self.BUFFER = 10240
         self.SHELL = 'bash'
         self.magic = Magic()
@@ -95,7 +94,7 @@ class Misc(object):
 
     def string_convert(self, variant):
         ''' Convert input to string but only if it is not string
-        
+
             this method exists mostly because it can convert both Python2 and Python3
             dictionaries '''
         if isinstance(variant, (list, tuple)):
