@@ -471,10 +471,8 @@ class Source(object):
         bang_regexp = 'sh|bash|dash|ksh|csh|tcsh|tclsh|scsh|fish|zsh'
         bang_regexp += '|ash|python|perl|php|ruby|lua|wish|(?:g)?awk'
         bang_regexp += '|gbr2|gbr3'
-        # parse the shebang and split it to 2 groups:
-        # 1. full match, used to replace it with something that will work
-        # 2. base of the interpreter (e.g. bash), used to find match in the target or host
-        self.shebang_regex = re.compile('(^#!.*(?: |\\t|/)((?:' + bang_regexp + ')(?:[^\\s]+)?)(?:.*\\s))')
+        # find the base of the interpreter (e.g. bash), used to find match in the target or local target
+        self.shebang_regex = re.compile('^#!.*(?: |\\t|/)((?:' + bang_regexp + ')(?:[^\\s]+)?)(?:.*\\s)')
 
     def autosource(self, targets, automake=False, autoremove=False):
         ''' Handle targets build/remove without affecting current object '''
@@ -1059,31 +1057,9 @@ class Source(object):
             autodepends.extend(misc.system_readelf(sfile, bsearch=False))
 
         for sfile in lscripts:
-            omatch = self.shebang_regex.findall(misc.file_read(sfile))
-            if omatch:
-                sfull = omatch[0][0].strip()
-                sbase = omatch[0][1].strip()
-                smatch = False
-                # now look for the interpreter in the target
-                for s in target_content:
-                    if s.endswith('/%s' % sbase) and os.access(s, os.X_OK):
-                        smatch = s.replace(self.install_dir, '')
-                        break
-                # if that fails look for the interpreter on the host
-                # FIXME: if the interpreter found by misc.whereis() is not
-                # ownded by a local target try to find one that is
-                if not smatch:
-                    smatch = misc.whereis(sbase, False)
-
-                # now update the shebang if possible
-                if smatch:
-                    message.sub_debug('Attempting shebang correction on', sfile)
-                    misc.file_substitute('^%s' % sfull, '#!' + smatch, sfile)
-                    if not smatch in autodepends:
-                        autodepends.append(smatch)
-                else:
-                    # fake non-existing match to trigger the error bellow
-                    autodepends.append(sbase)
+            smatch = self.shebang_regex.findall(misc.file_read(sfile))
+            if smatch:
+                autodepends.append(smatch[0].strip())
 
         found = []
         depends = []
@@ -1093,27 +1069,23 @@ class Source(object):
             if dep in found:
                 continue
             for sfile in target_content:
-                if sfile.endswith('/%s' % dep):
+                if sfile.endswith('/%s' % dep) and os.access(sfile, os.X_OK):
                     message.sub_debug('Dependency is in target', dep)
                     found.append(dep)
                     break
 
-        for dep in autodepends:
-            if dep in found:
-                continue
-            lmatches = database.local_belongs('/%s' % dep)
-            if len(lmatches) > 1:
-                sfirst = lmatches[0]
-                message.sub_warning('Multiple matches for %s' % dep, lmatches)
-                if not sfirst in depends:
-                    depends.append(sfirst)
-                found.append(dep)
-            elif lmatches:
-                sfirst = lmatches[0]
-                message.sub_debug('Dependency %s is in local' % dep, sfirst)
-                if not sfirst in depends:
-                    depends.append(sfirst)
-                found.append(dep)
+        for local in database.local_all(basename=True):
+            lfootprint = database.local_metadata(local, 'footprint')
+            for dep in autodepends:
+                if dep in found:
+                    continue
+                for sfile in lfootprint:
+                    if sfile.endswith('/%s' % dep) and os.access(sfile, os.X_OK):
+                        message.sub_debug('Dependency %s is in local' % dep, local)
+                        if not local in depends:
+                            depends.append(local)
+                        found.append(dep)
+                        break
 
         missing_detected = False
         for dep in autodepends:
