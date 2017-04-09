@@ -1166,10 +1166,6 @@ if __name__ == '__main__':
             m = Online(ARGS.url)
             m.main()
 
-        elif ARGS.mode == 'upgrade':
-            m = Upgrade()
-            m.main()
-
         elif ARGS.mode == 'digest':
             message.info(_('Runtime information'))
             message.sub_info(_('DIRECTORY'), ARGS.directory)
