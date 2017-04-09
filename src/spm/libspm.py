@@ -1007,8 +1007,9 @@ class Source(object):
                 except KeyError:
                     message.sub_warning('Unknown owner of', sfile)
                     os.chown(sfile, 0, 0)
+
                 # TODO: is there utility to pull those from /etc/login.defs?
-                elif stat.st_gid >= 1000 or stat.st_uid >= 1000:
+                if stat.st_gid >= 1000 or stat.st_uid >= 1000:
                     message.sub_warning('Owner of %s is user' % sfile, \
                         '%d, %d' % (stat.st_gid, stat.st_uid))
                     os.chown(sfile, 0, 0)
