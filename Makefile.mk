@@ -29,10 +29,10 @@ XZ = xz -v
 POD2MAN = pod2man
 CLOC = cloc
 
-ifneq ($(shell which python2.7),)
-	PYTHON = python2.7
-else
+ifneq ($(shell which python2),)
 	PYTHON = python2
+else
+	PYTHON = python
 endif
 ifneq ($(shell which pydoc2),)
 	PYDOC = pydoc2
