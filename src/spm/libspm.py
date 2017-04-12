@@ -1042,22 +1042,27 @@ class Source(object):
         message.sub_info('Checking runtime dependencies')
         autodepends = []
         for sfile in lbinaries:
-            autodepends = misc.system_readelf(sfile, bsearch=False)
+            for dep in misc.system_readelf(sfile, bsearch=False):
+                if not dep in autodepends:
+                    autodepends.append(dep)
         for sfile in lshared:
-            autodepends.extend(misc.system_readelf(sfile, bsearch=False))
+            for dep in misc.system_readelf(sfile, bsearch=False):
+                if not dep in autodepends:
+                    autodepends.append(dep)
 
         for sfile in lscripts:
             smatch = self.shebang_regex.findall(misc.file_read(sfile))
             if smatch:
-                autodepends.append(smatch[0].strip())
+                smatch = smatch[0].strip()
+                if not smatch in autodepends:
+                    autodepends.append(smatch)
 
         found = []
         depends = []
         depends.extend(self.target_depends)
 
+        message.sub_debug('Automatic dependencies', autodepends)
         for dep in autodepends:
-            if dep in found:
-                continue
             for sfile in target_content:
                 if sfile.endswith('/%s' % dep) and os.access(sfile, os.X_OK):
                     message.sub_debug('Dependency is in target', dep)
@@ -1067,8 +1072,6 @@ class Source(object):
         for local in database.local_all(basename=True):
             lfootprint = database.local_metadata(local, 'footprint')
             for dep in autodepends:
-                if dep in found:
-                    continue
                 for sfile in lfootprint:
                     if sfile.endswith('/%s' % dep) and os.access(sfile, os.X_OK):
                         message.sub_debug('Dependency %s is in local' % dep, local)

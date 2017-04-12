@@ -51,7 +51,7 @@ class Misc(object):
             self.python2 = True
         else:
             self.python3 = True
-        self._elfx = re.compile('\[(.*)\]')
+        self._elfx = re.compile('Shared library: \[(.*)\]')
         # legal are [a-zA-Z_][a-zA-Z0-9_]+
         self._illegalx = re.compile('\\-|\\!|\\@|\\#|\\$|\\%|\\^|\\.|\\,|\\[|\\]|\\+|\\>|\\<|\\"|\\||\\=|\\(|\\)')
 
