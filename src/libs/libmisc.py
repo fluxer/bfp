@@ -86,9 +86,9 @@ class Misc(object):
     def string_encode(self, string):
         ''' String wrapper to ensure Python3 compat '''
         if self.python3 and isinstance(string, bytes):
-            return string.decode('utf-8')
+            return string.decode('utf-8', 'ignore')
         elif self.python3 and isinstance(string, str):
-            return string.encode('utf-8')
+            return string.encode('utf-8', 'ignore')
         else:
             return string
 
@@ -860,11 +860,11 @@ class Misc(object):
             self.system_command((tar, arguments, sfile, '-C', sdir))
         elif smime == 'application/x-gzip':
             gfile = gzip.GzipFile(sfile, 'rb')
-            self.file_write(self.file_name(sfile, False), gfile.read())
+            self.file_write(self.file_name(sfile, False), self.string_encode(gfile.read()))
             gfile.close()
         elif smime == 'application/x-bzip2':
             bfile = bz2.BZ2File(sfile, 'rb')
-            self.file_write(self.file_name(sfile, False), bfile.read())
+            self.file_write(self.file_name(sfile, False), self.string_encode(bfile.read()))
             bfile.close()
 
     def archive_list(self, sfile):

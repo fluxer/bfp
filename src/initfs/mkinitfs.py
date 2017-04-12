@@ -173,10 +173,10 @@ try:
             (ARGS.busybox, ARGS.busybox), bshell=True, cwd=src)
         if method == 'gzip':
             with gzip.GzipFile(image, 'wb') as gzipf:
-                gzipf.write(data)
+                gzipf.write(misc.string_encode(data))
         elif method == 'bzip2':
             with bz2.BZ2File(image, 'wb') as bzipf:
-                bzipf.write(data)
+                bzipf.write(misc.string_encode(data))
         else:
             misc.file_write(image, data)
 
