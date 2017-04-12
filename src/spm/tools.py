@@ -181,6 +181,16 @@ class Lint(object):
         except KeyError:
             message.sub_warning(_('Unknown owner of'), spath)
 
+        # TODO: is there utility to pull those from /etc/login.defs?
+        if stat.st_gid >= 1000 or stat.st_uid >= 1000:
+            message.sub_warning('Owner of %s is user' % spath, \
+                '%d, %d' % (stat.st_gid, stat.st_uid))
+
+        smime = misc.file_mime(spath, bquick=True)
+        if (smime == 'application/x-executable' \
+            or smime == 'application/x-sharedlib') and not os.access(spath, os.X_OK):
+            message.sub_warning('Binary/library is not executable', spath)
+
     def main(self):
         ''' Looks for target match and then execute action for every target '''
         for target in database.local_all(basename=True):
@@ -258,7 +268,6 @@ class Lint(object):
                             continue
                         self._check_ownership(sfile)
                         self._check_ownership(os.path.dirname(sfile))
-                    # TODO: check for non-executable binaries and libraries
 
                 if self.executable:
                     message.sub_debug(_('Checking for non-executables in'), target)
