@@ -1018,7 +1018,7 @@ class Source(object):
                 if (sfile in lbinaries or sfile in lshared) \
                     and not os.access(sfile, os.X_OK):
                     message.sub_warning('Binary/library is not executable', sfile)
-                    os.chmod(sfile, 755)
+                    os.chmod(sfile, 0o755)
 
         message.sub_info('Stripping binaries and libraries')
         if self.strip_binaries or self.strip_shared or self.strip_static:
