@@ -451,7 +451,10 @@ class Merge(object):
     def merge(self, origfile, backfile):
         message.sub_warning(_('Backup file detected'), backfile)
         editor = os.environ.get('EDITOR') or misc.whereis('vim')
-        action = raw_input(_('''
+        finput = input
+        if misc.python2:
+            finput = raw_input
+        action = finput(_('''
     What do you want to do:
 
         1. View difference
