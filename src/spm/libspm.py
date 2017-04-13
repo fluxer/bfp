@@ -1060,6 +1060,8 @@ class Source(object):
 
         message.sub_debug('Automatic dependencies', autodepends)
         for dep in autodepends:
+            if dep in found:
+                continue
             for sfile in target_content:
                 if sfile.endswith('/%s' % dep) and os.access(sfile, os.X_OK):
                     message.sub_debug('Dependency is in target', dep)
@@ -1069,6 +1071,8 @@ class Source(object):
         for local in database.local_all(basename=True):
             lfootprint = database.local_metadata(local, 'footprint')
             for dep in autodepends:
+                if dep in found:
+                    continue
                 for sfile in lfootprint:
                     if sfile.endswith('/%s' % dep) and os.access(sfile, os.X_OK):
                         message.sub_debug('Dependency %s is in local' % dep, local)
