@@ -15,7 +15,7 @@ to monitor for file/directory changes on filesystems.
 '''
 
 import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, inspect, json
-import types, gzip, bz2, time, ctypes, ctypes.util, hashlib
+import types, time, ctypes, ctypes.util, hashlib
 from struct import unpack
 from fcntl import ioctl
 from termios import FIONREAD
@@ -797,7 +797,8 @@ class Misc(object):
             self.typecheck(sfile, (types.StringTypes))
             self.typecheck(sstrip, (types.StringTypes))
 
-        self.dir_create(os.path.dirname(sfile))
+        sdir = os.path.dirname(sfile)
+        self.dir_create(sdir)
 
         sextension = self.file_extension(sfile)
         if sfile.endswith(('tar.bz2', '.tar.gz')):
@@ -823,15 +824,13 @@ class Misc(object):
         elif sfile.endswith('.gz'):
             if len(lpaths) > 1:
                 raise Exception('GZip', 'format can hold only single file')
-            gzipf = gzip.GzipFile(sfile, 'wb')
-            gzipf.write(self.string_encode(self.file_read(lpaths[0])))
-            gzipf.close()
+            gzip = self.whereis('gzip')
+            self.system_command((gzip, '-k', lpaths[0]), cwd=sdir)
         elif sfile.endswith('.bz2'):
             if len(lpaths) > 1:
                 raise Exception('BZip', 'format can hold only single file')
-            bzipf = bz2.BZ2File(sfile, 'wb')
-            bzipf.write(self.string_encode(self.file_read(lpaths[0])))
-            bzipf.close()
+            bzip2 = self.whereis('bzip2')
+            self.system_command((bzip2, '-k', lpaths[0]), cwd=sdir)
         else:
             raise Exception('Unsupported format', sextension)
 
@@ -857,13 +856,11 @@ class Misc(object):
                 arguments = '-xpPf'
             self.system_command((tar, arguments, sfile, '-C', sdir))
         elif smime == 'application/x-gzip':
-            gfile = gzip.GzipFile(sfile, 'rb')
-            self.file_write(self.file_name(sfile, False), self.string_encode(gfile.read()))
-            gfile.close()
+            gunzip = self.whereis('gunzip')
+            self.system_command((gunzip, '-k', sfile), cwd=sdir)
         elif smime == 'application/x-bzip2':
-            bfile = bz2.BZ2File(sfile, 'rb')
-            self.file_write(self.file_name(sfile, False), self.string_encode(bfile.read()))
-            bfile.close()
+            bunzip2 = self.whereis('bunzip2')
+            self.system_command((bunzip2, '-k', sfile), cwd=sdir)
 
     def archive_list(self, sfile):
         ''' Get list of files in archive '''

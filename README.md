@@ -61,6 +61,10 @@ The following software is required:
 [Python](https://www.python.org/),
 [GNU C Library](http://www.gnu.org/software/libc/) (or [uClibc](http://www.uclibc.org/)/[musl libc](http://www.musl-libc.org/)),
 
+WARNING: gzip/bzip2 archives compression and decompression with Busybox is not
+supported because `-k` and `--keep` are ommited in the respective applets
+implementations.
+
 ### Build time
 
 [Perl](https://www.perl.org/)
