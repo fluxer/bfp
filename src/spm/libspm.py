@@ -992,6 +992,9 @@ class Source(object):
         if not self.ignore_permissions:
             message.sub_info('Checking permissions')
             for sfile in target_content:
+                # if it is a link, the real file may not exist yet
+                if os.path.islink(sfile):
+                    continue
                 message.sub_debug('Checking permissions of', sfile)
                 stat = os.stat(sfile)
                 try:
