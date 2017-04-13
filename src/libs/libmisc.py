@@ -499,8 +499,7 @@ class Misc(object):
                 slist.append('%s/%s' % (root, sfile))
         return slist
 
-    # TODO: make bcross last argument
-    def list_dirs(self, sdir, bcross=True, btopdown=True):
+    def list_dirs(self, sdir, btopdown=True, bcross=True):
         ''' Get list of directories in directory recursively '''
         if self.python2:
             self.typecheck(sdir, (types.StringTypes))
@@ -516,8 +515,7 @@ class Misc(object):
                 slist.append(sfull)
         return slist
 
-    # TODO: make bcross last argument '''
-    def list_all(self, sdir, bcross=True, btopdown=True):
+    def list_all(self, sdir, btopdown=True, bcross=True):
         ''' Get list of files and directories in directory recursively '''
         if self.python2:
             self.typecheck(sdir, (types.StringTypes))
