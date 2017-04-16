@@ -52,7 +52,8 @@ CopyDep() {
     mime="$(file -bi "$1" | cut -d';' -f1)"
     if [ "$mime" == "application/x-executable" ] || [ "$mime" == "application/x-sharedlib" ];then
         for dep in $(ldd "$1" | cut -d' ' -f3);do
-            if [ -z "$dep" ];then
+            if [ -z "$dep" ] || [ "$dep" == "dynamic" ];then
+                # empty line or static binary
                 continue
             elif [ "$dep" == "not" ];then
                 # not found
