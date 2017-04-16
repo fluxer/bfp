@@ -84,7 +84,7 @@ trap Cleanup EXIT
 
 Usage () {
 echo "
- mkinitfs v1.0.0 - initial RAM filesystem image creator
+ mkinitfs v1.0.1 - initial RAM filesystem image creator
 
   Usage: '# ${0##*/} <option> [<option>]..'
 
@@ -107,7 +107,7 @@ for arg in "${args_array[@]}";do
     case "${arg}" in
         -k=*|--kernel=*) KERNEL="${arg#*=}";;
         -b=*|--busybox=*) BUSYBOX="${arg#*=}";;
-        -n|--clean) NOCLEAN="yes" ;;
+        -n|--noclean) NOCLEAN="yes" ;;
         -h|--help) Usage ;;
         -*) Warn "Unrecognized argument: ${arg}" ;;
     esac
