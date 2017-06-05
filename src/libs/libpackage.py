@@ -39,8 +39,7 @@ class Database(object):
 
         for sfile in glob.glob('%s/*/metadata.json' % self.LOCAL_DIR):
             sdir = os.path.dirname(sfile)
-            if os.path.isfile('%s/SRCBUILD' % sdir):
-                self.LOCAL_CACHE[sdir] = misc.json_read(sfile)
+            self.LOCAL_CACHE[sdir] = misc.json_read(sfile)
             if self.NOTIFY:
                 notify.watch_add(sdir)
         if self.NOTIFY and os.path.isdir(self.LOCAL_DIR):
