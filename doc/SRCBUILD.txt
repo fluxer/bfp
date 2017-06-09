@@ -1,5 +1,5 @@
 ################################## WARNING ####################################
-#             this is just a prototype, use it only as reference              #
+#              this is just an example, use it only as reference              #
 ###############################################################################
 
 # NOTE: SRCBUILDs are not parsed via Bash which means that not everything works
@@ -17,8 +17,8 @@ sources=("ftp://ftp.astron.com/pub/file/$_base.tar.gz"
          "ftp://ftp.astron.com/pub/file/file-$version.tar.gz.sig"
          'dummy.patch')
 pgpkeys=('12345678')
-options=('!binaries' '!shared' '!static' 'man' 'mirror' 'missing' 'debug'
-         '!purge' 'ownership')
+options=('!binaries' '!shared' '!static' 'man' 'mirror' 'missing' '!purge'
+         'ownership')
 backup=('etc/bar/baz.conf')
 
 src_prepare() {
