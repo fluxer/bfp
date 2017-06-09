@@ -24,7 +24,7 @@ code. It is designed to fetch, extract, build and install compiled files on
 the system. What it does using different approach is that SPM detects library
 dependencies at install time so that dependencies are resolved in matter of
 what is needed by the library and binary files of the target by running
-`scanelf` on them, checking if the library is in the target itself, in local
+`readelf` on them, checking if the library is in the target itself, in local
 (installed) target or not in managed target. This ensures that all runtime
 libraries will be present and the dependencies are not "static" and do not rely
 on tree of dependencies keeping the system off of broken applications because
@@ -423,6 +423,6 @@ COPYING file bundled with the source code.
 
 =head1 SEE ALSO
 
-spm.conf(5) SRCBUILD(5) spm-tools(8) scanelf(1) tar(1) bsdtar(1) xz(1)
+spm.conf(5) SRCBUILD(5) spm-tools(8) readelf(1) tar(1) bsdtar(1) xz(1)
 file(1) man-db(1) git(1) locale(7)
 
