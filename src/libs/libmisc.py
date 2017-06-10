@@ -15,7 +15,7 @@ to monitor for file/directory changes on filesystems.
 '''
 
 import sys, os, re, tarfile, zipfile, subprocess, shutil, shlex, inspect, json
-import types, time, ctypes, ctypes.util, hashlib
+import types, time, ctypes, ctypes.util, hashlib, ssl
 from struct import unpack
 from fcntl import ioctl
 from termios import FIONREAD
@@ -600,8 +600,7 @@ class Misc(object):
             data = {}
         request = Request(surl, headers=data)
         # SSL verification works OOTB only on Python >= 2.7.9 and >=3.4.0 (officially)
-        if (self.python3 and sys.version_info[2] >= 4) or (self.python2 and sys.version_info[2] >= 9):
-            import ssl
+        if hasattr(ssl, 'create_default_context'):
             ctx = ssl.create_default_context(ssl.Purpose.CLIENT_AUTH)
             return urlopen(request, timeout=self.TIMEOUT, context=ctx)
         else:
