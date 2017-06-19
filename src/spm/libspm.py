@@ -1020,8 +1020,8 @@ class Source(object):
                     message.sub_warning('Binary/library is not executable', sfile)
                     os.chmod(sfile, 0o755)
 
-        message.sub_info('Stripping binaries and libraries')
         if self.strip_binaries or self.strip_shared or self.strip_static:
+            message.sub_info('Stripping binaries and libraries')
             strip = misc.whereis('strip')
         if self.strip_binaries and lbinaries:
             message.sub_debug('Stripping executables', lbinaries)
