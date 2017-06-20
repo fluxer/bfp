@@ -1,26 +1,16 @@
 *.pyc
 *.pyo
 __pycache__
-*.pot
 
 *.8
 *.5
 *.1
 
 pod2htmd.tmp
-*.build
-*.so
-*.exe
-*_ui.py
-*_rc.py
-*.qm
 *.html
 
 *.bak
 *~
-*.mo
-*.desktop
-*.service
 
 *.xz
 *.bz2
