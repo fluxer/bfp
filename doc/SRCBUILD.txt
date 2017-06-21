@@ -9,7 +9,7 @@
 version=5.14
 description="File type identification utility"
 depends=('zlib' 'glibc')
-makedepends('foo' 'bar')
+makedepends=('foo' 'bar')
 optdepends=('zlib' 'bzip2')
 # variable expansion, must be preseeded with underscore
 _base="file-$version"
