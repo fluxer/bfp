@@ -18,7 +18,7 @@ sources=("ftp://ftp.astron.com/pub/file/$_base.tar.gz"
          'dummy.patch')
 pgpkeys=('12345678')
 options=('!binaries' '!shared' '!static' 'man' 'mirror' 'missing' '!purge'
-         'ownership')
+         'permissions')
 backup=('etc/bar/baz.conf')
 
 src_prepare() {
