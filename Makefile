@@ -6,11 +6,6 @@ all:
 	$(MAKE) -C src/initfs
 	$(MAKE) -C src/spm
 
-sources:
-	$(MAKE) -C src/libs sources
-	$(MAKE) -C src/initfs sources
-	$(MAKE) -C src/spm sources
-
 check:
 	$(MAKE) -C src/libs check
 	$(MAKE) -C src/spm check
@@ -36,7 +31,6 @@ clean:
 	$(MAKE) -C src/libs clean
 	$(MAKE) -C src/initfs clean
 	$(MAKE) -C src/spm clean
-	$(RM) $(shell $(FIND) nuitka -name '*.pyc' -o -name '*.pyo')
 
 changelog:
 	$(GIT) log HEAD -n 1 --pretty='%cd %an <%ae> %n%H%d'
