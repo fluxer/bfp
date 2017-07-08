@@ -63,7 +63,7 @@ The following software is required:
 
 WARNING: gzip/bzip2 archives compression and decompression with Busybox is not
 supported because `-k` and `--keep` are ommited in the respective applets
-implementations.
+implementations in versions prior to 1.27.0.
 
 ### Build time
 
@@ -89,13 +89,6 @@ Alternatively to build and install against Python 3:
 ```
 make PYTHON=python3
 sudo make PYTHON=python3 install
-```
-
-If you did change the .py files do the following prior to building and
-installing:
-
-```
-make sources
 ```
 
 ## Contributors
