@@ -950,7 +950,8 @@ class Source(object):
                 for sdir in mpaths:
                     if not sdir in spath:
                         continue
-                    if not spath.endswith('.gz') and os.path.isfile(spath):
+                    if not spath.endswith('.gz') and os.path.isfile(spath) \
+                        and not os.path.islink(spath):
                         message.sub_debug('Compressing', spath)
                         misc.archive_compress((spath,), '%s.gz' % spath, '')
                         os.unlink(spath)
