@@ -37,10 +37,10 @@ too.
 During its course of history this project has included other tools and ideas
 such as Live CD/DVD build tool, Qt/GTK+/curses interfaces for SPM, software
 build bot, hardware events handler, partitions manager, verbose errors
-reporting from libraries/frontends and other stuff that have been prototyped,
-implemented and dropped off intirely. Some ideas have been forged into
-sub-projects, some have not even been made public but what you see is what you
-get.
+reporting from libraries/frontends and other stuff that has been prototyped,
+implemented and dropped off entirely in some cases. Some ideas have been forged
+into sub-projects, some have not even been made public via this repository but
+what you see is what you get.
 
 ## Requirements
 
@@ -107,4 +107,4 @@ forums users
 - Adil Ünal (a.k.a. turkbits) <turkbits@turkbits.net>
 
 If you think you have the right to be mentioned here but you are not feel free
-to contact us!
+to contact the current contributors!
