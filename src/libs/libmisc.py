@@ -824,7 +824,7 @@ class Misc(object):
             if len(lpaths) > 1:
                 raise Exception('GZip', 'format can hold only single file')
             gzip = self.whereis('gzip')
-            self.system_command((gzip, '-k', lpaths[0]), cwd=sdir)
+            self.system_command((gzip, '-kf', lpaths[0]), cwd=sdir)
         elif sfile.endswith('.bz2'):
             if len(lpaths) > 1:
                 raise Exception('BZip', 'format can hold only single file')
