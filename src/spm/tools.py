@@ -598,8 +598,24 @@ class Disowned(object):
     def main(self):
         if not self.plain:
             message.sub_info(_('Caching host files, this may take a while'))
-        lhostfiles = misc.list_files(self.directory, self.cross)
+        lhostfiles = []
         ltargetsfiles = []
+        if self.cross:
+            lhostfiles = misc.list_files(self.directory)
+        else:
+            lmounts = []
+            for spath in misc.list_all(self.directory):
+                if os.path.ismount(spath):
+                    lmounts.append(spath)
+                    continue
+                shouldappend = True
+                for smount in lmounts:
+                    if spath.startswith(smount):
+                        shouldappend = False
+                        break
+                if not os.path.isdir(spath) and shouldappend:
+                    lhostfiles.append(spath)
+
         for target in database.local_all():
             ltargetsfiles.extend(database.local_metadata(target, 'footprint'))
         if not self.plain:

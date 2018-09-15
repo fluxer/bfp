@@ -496,41 +496,33 @@ class Misc(object):
         slist = []
         for root, subdirs, files in os.walk(sdir, btopdown):
             for sfile in files:
-                slist.append('%s/%s' % (root, sfile))
+                slist.append(os.path.join(root, sfile))
         return slist
 
-    def list_dirs(self, sdir, btopdown=True, bcross=True):
+    def list_dirs(self, sdir, btopdown=True):
         ''' Get list of directories in directory recursively '''
         if self.python2:
             self.typecheck(sdir, (types.StringTypes))
-            self.typecheck(bcross, (types.BooleanType))
             self.typecheck(btopdown, (types.BooleanType))
 
         slist = []
         for root, subdirs, files in os.walk(sdir, btopdown):
             for d in subdirs:
-                sfull = '%s/%s' % (root, d)
-                if not bcross and os.path.ismount(sfull):
-                    continue
-                slist.append(sfull)
+                slist.append(os.path.join(root, d))
         return slist
 
-    def list_all(self, sdir, btopdown=True, bcross=True):
+    def list_all(self, sdir, btopdown=True):
         ''' Get list of files and directories in directory recursively '''
         if self.python2:
             self.typecheck(sdir, (types.StringTypes))
-            self.typecheck(bcross, (types.BooleanType))
             self.typecheck(btopdown, (types.BooleanType))
 
         slist = []
         for root, subdirs, files in os.walk(sdir, btopdown):
             for d in subdirs:
-                sfull = '%s/%s' % (root, d)
-                if not bcross and os.path.ismount(sfull):
-                    continue
-                slist.append(sfull)
+                slist.append(os.path.join(root, d))
             for sfile in files:
-                slist.append('%s/%s' % (root, sfile))
+                slist.append(os.path.join(root, sfile))
         return slist
 
     def url_supported(self, surl, bvcs=True):
