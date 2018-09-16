@@ -848,10 +848,10 @@ class Misc(object):
             self.system_command((tar, arguments, sfile, '-C', sdir))
         elif smime == 'application/x-gzip':
             gunzip = self.whereis('gunzip')
-            self.system_command((gunzip, '-k', sfile), cwd=sdir)
+            self.system_command((gunzip, '-kf', sfile), cwd=sdir)
         elif smime == 'application/x-bzip2':
             bunzip2 = self.whereis('bunzip2')
-            self.system_command((bunzip2, '-k', sfile), cwd=sdir)
+            self.system_command((bunzip2, '-kf', sfile), cwd=sdir)
 
     def archive_list(self, sfile):
         ''' Get list of files in archive '''
