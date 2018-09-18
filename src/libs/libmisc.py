@@ -821,7 +821,12 @@ class Misc(object):
             if len(lpaths) > 1:
                 raise Exception('BZip', 'format can hold only single file')
             bzip2 = self.whereis('bzip2')
-            self.system_command((bzip2, '-k', lpaths[0]), cwd=sdir)
+            self.system_command((bzip2, '-kf', lpaths[0]), cwd=sdir)
+        elif sfile.endswith('.xz'):
+            if len(lpaths) > 1:
+                raise Exception('XZ', 'format can hold only single file')
+            xz = self.whereis('xz')
+            self.system_command((xz, '-kf', lpaths[0]), cwd=sdir)
         else:
             raise Exception('Unsupported format', sextension)
 
@@ -837,21 +842,22 @@ class Misc(object):
         # filesystem stays locked which is bad. on top of that the tarfile
         # library can not replace files while they are being used thus external
         # utilities are used for extracting Tar archives.
-        smime = self.file_mime(sfile, True)
-        if smime == 'application/x-xz' \
-            or smime == 'application/x-lzma' \
+        if sfile.endswith(('.tar.xz', '.tar.lzma')) \
             or tarfile.is_tarfile(sfile) or zipfile.is_zipfile(sfile):
             tar = self.whereis('bsdtar', False) or self.whereis('tar')
             arguments = '-xphf'
             if tar.endswith('/bsdtar'):
                 arguments = '-xpPf'
             self.system_command((tar, arguments, sfile, '-C', sdir))
-        elif smime == 'application/x-gzip':
+        elif sfile.endswith('.gz'):
             gunzip = self.whereis('gunzip')
             self.system_command((gunzip, '-kf', sfile), cwd=sdir)
-        elif smime == 'application/x-bzip2':
+        elif sfile.endswith('.bz2'):
             bunzip2 = self.whereis('bunzip2')
             self.system_command((bunzip2, '-kf', sfile), cwd=sdir)
+        elif sfile.endswith('.xz'):
+            unxz = self.whereis('unxz')
+            self.system_command((unxz, '-kf', sfile), cwd=sdir)
 
     def archive_list(self, sfile):
         ''' Get list of files in archive '''
