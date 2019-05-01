@@ -895,7 +895,7 @@ class Misc(object):
         return lcontent
 
     def system_communicate(self, command, bshell=False, cwd=None):
-        ''' Get output and optionally send input to external utility
+        ''' Get output from external utility
 
             it sets the environment variable LC_ALL to "en_US.UTF-8" to ensure
             locales are UTF-8 aware. if something goes wrong you get standard
