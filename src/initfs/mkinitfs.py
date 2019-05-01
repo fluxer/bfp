@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os, glob, ast, re
 
-app_version = "1.10.1 (8303906)"
+app_version = "1.10.1 (11ac68a)"
 
 tmpdir = None
 keep = False
@@ -19,9 +19,8 @@ try:
     compression = 'gzip'
     recovery = True
     modules = []
-    for m in os.listdir('/sys/module'):
-        if os.path.isdir('/sys/module/%s/sections' % m):
-            modules.append(m)
+    for line in misc.file_readsmart('/proc/modules'):
+        modules.append(line.split()[0])
 
     parser = argparse.ArgumentParser(prog='mkinitfs', description='MkInitfs')
     parser.add_argument('-T', '--busytest', action='store_true', \
