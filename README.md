@@ -18,7 +18,7 @@ It is split into libraries and frontends to allow people to use it the way they
 see fit. The project has evolved much over the years but simplicity and tasks
 automation is and always will ramain prime goals of the project.
 
-The Package Manager is (or was) one of a kind - it does much more then it
+The Package Manager is (or was) one of a kind - it does much more than it
 should do but there are good reasons for doing so. Simply put it is a mix of
 features and ideas from [Dpkg](https://en.wikipedia.org/wiki/Dpkg),
 [Pacman](https://www.archlinux.org/pacman/) and
@@ -70,9 +70,9 @@ implementations in versions prior to 1.27.0.
 [Perl](https://www.perl.org/)
 
 How and where from you will obtain those is up to you, altought compatibility
-with Busybox, GNU and POSIX tools is prime goal but not guaranteed so for an
-example some old versions or even build configuration of those may not support
-all required features.
+with Busybox, GNU and POSIX tools is prime goal but not guaranteed because
+some old versions or even build configuration of those may not support all
+required features. If that is the case it will be noted in the documentation.
 
 ## Building and installing
 
