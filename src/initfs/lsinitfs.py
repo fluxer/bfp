@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os
 
-app_version = "1.11.0 (e16ca706)"
+app_version = "1.11.0 (53e1a235)"
 
 tmpdir = None
 keep = False
@@ -55,7 +55,13 @@ try:
         sys.exit(2)
 
     message.info('Listing initial RAM image...')
-    new_image = '%s/%s' % (ARGS.tmp, os.path.basename(ARGS.image))
+    smime = misc.file_mime(ARGS.image)
+    if smime == 'application/x-gzip':
+        new_image = '%s/%s.gz' % (ARGS.tmp, os.path.basename(ARGS.image))
+    elif smime == 'application/x-bzip2':
+        new_image = '%s/%s.bz2' % (ARGS.tmp, os.path.basename(ARGS.image))
+    else:
+        new_image = '%s/%s' % (ARGS.tmp, os.path.basename(ARGS.image))
     message.sub_info('Copying image')
     misc.dir_create(ARGS.tmp)
     shutil.copyfile(ARGS.image, new_image)
