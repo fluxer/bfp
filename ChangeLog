@@ -1,3 +1,105 @@
+Wed May 1 17:07:54 2019 +0000 Ivailo Monev <xakepa10@laimg.moc>
+61191101dd15d82f7682979256e8112e33c896da (tag: 1.11.0)
+    * docs and copyright update
+    * suffix the initfs image when copying it for listing so that decompressors recognize the format
+    * bump version in preperation for release
+    * improve modules detection of mkinitfs
+    * plain xz archives support
+    * fix gzip and bzip2 decompression of symlinks
+    * fix cross option of disowned mode
+    * fix gzip and bzip2 compression of hardlinks
+    * Update README.md
+    * add explicity link check to manual pages handler
+    * Update Makefile
+    * Update README.md
+    * Update SRCBUILD.txt
+    * unset variables before sourcing SRCBUILD
+    * Update SRCBUILD.txt
+    * Update .gitignore
+    * the shell alternative of mkinitfs resides in its own repository now
+    * print the message about stripping only if it is going to be done
+    * an attempt to improve the SSL support check
+    * adjust example SRCBUILD to recent changes
+    * adjust documentation to recent changes
+    * assume that SRCBUILD is present in the local target directory
+    * use the host passwd and group files for initramfs
+    * fix long option in mkinitfs alternative
+    * support static binaries in mkinitfs alternative
+    * add simpler alternative to mkinitfs (not installed)
+    * wrap gzip/bzip instead of relying on the Python modules
+    * skip links in permissions check
+    * avoid targets depending on themself
+    * deal with two TODOs in Misc()
+    * make the libspm globals comment refer to something that can be seen in the codebase
+    * use gzip/bzip2 from Busybox in mkinitfs to avoid some data encode/decode issues
+    * improve the dependencies scanner
+    * implement executable binary/library check in lint mode
+    * merge mode fix for Python 3000
+    * adjust the permissions mask to work with both major Pyhton versions
+    * fix some Python 3000 issues
+    * prefer python2 but fallback to python
+    * remove digest mode
+    * remove portable, pkg and online modes
+    * remove upgrade mode leftover
+    * assume that GTK+ >= 2.24.20 is used on the system
+    * oops
+    * implement executable bit checks for binaries and libraries to help the dependency scanner
+    * remove irrelevant attribute from Misc()
+    * dependency scanner revamp
+    * remove split debug symbols support
+    * rework dependencies search to match against footprints
+    * remove gettext stubs from libspm and spm
+    * remove the input passing support of Misc.system_chroot() and Misc.system_communicate()
+    * remove the catch attribute from libraries
+    * fix syntax of Kate project file
+    * adjust shebangs based on PYTHON upon installation
+    * oops
+    * minor comments improvements
+    * reworking Magic() with the hope it will no longer core dump on x86_64 (not tested yet)
+    * purge the upgrade tools mode
+    * plug a file descriptor leak in Inotify()
+    * Revert "do not resotre modification time when decompressing archives"
+    * stop looking for a library once match is found
+    * make sure libtool files are matched correctly
+    * tools sane mode fix
+    * update the URL in autotest.sh
+    * test case fix
+    * remove the trick for /lib64 and such
+    * Update README.md
+    * Update tools.py
+    * get rid of the Cython requirement
+    * regenerate libs sources
+    * do not resotre modification time when decompressing archives
+    * regenerate sources
+    * rollback checkums support
+    * oops, fix tools signature check
+    * simplify PGP handling and implement checksums verification
+    * regenerate sources
+    * PEP-fied
+    * regenerate sources
+    * signing of tarballs is no longer supported
+    * regenerate sources
+    * make the temp source/install be under version a sub-directory
+    * regenerate spm sources
+    * make it possible to build different versions at the same time
+    * purge libtool files
+    * Update mkinitfs.pod
+    * regenerate sources
+    * libmisc cleanups
+    * adjust fallback repository URL in libspm
+    * regenerate sources
+    * various cleanups
+    * regenerate sources
+    * move MIME-type check to Misc.system_readelf()
+    * regenerate sources
+    * minor documentation improvements
+    * dropping the pax-utils dependencies in favour of binutils
+    * regenerate sources
+    * fix a corner case in Database.local_uptodate()
+    * cleanup Database.local_rdepends()
+    * correct path to example plugins in man page
+    * make srcmake script create JSON metadata file
+
 Wed Oct 26 05:52:44 2016 +0000 Ivailo Monev <xakepa10@laimg.moc> 
 36d3bf3efde7bd4509d6a83346a06a9708d12d15 (tag: 1.10.1)
     * ignore ownership issues when running auto tests
