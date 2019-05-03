@@ -51,6 +51,8 @@ class Misc(object):
             self.python2 = True
         else:
             self.python3 = True
+        self.binarymimes = ['application/x-executable', 'application/x-pie-executable']
+        self.librarymimes = ['application/x-sharedlib', 'application/x-archive']
         self._elfx = re.compile('Shared library: \[(.*)\]')
         # legal are [a-zA-Z_][a-zA-Z0-9_]+
         self._illegalx = re.compile('\\-|\\!|\\@|\\#|\\$|\\%|\\^|\\.|\\,|\\[|\\]|\\+|\\>|\\<|\\"|\\||\\=|\\(|\\)')
@@ -928,7 +930,7 @@ class Misc(object):
 
         lpaths = []
         smime = self.file_mime(sfile, bquick=True)
-        if not smime in ('application/x-executable', 'application/x-sharedlib'):
+        if not smime in self.binarymimes and not smime in self.librarymimes:
             return lpaths
 
         output = self.system_communicate((self.whereis('readelf'), '-d', sfile))

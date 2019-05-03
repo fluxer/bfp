@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os, glob, ast, re
 
-app_version = "1.11.0 (53e1a235)"
+app_version = "1.11.0 (43df84fc)"
 
 tmpdir = None
 keep = False
@@ -326,8 +326,7 @@ try:
         strip = misc.whereis('strip')
         for sfile in misc.list_files(ARGS.tmp):
             smime = misc.file_mime(sfile)
-            if smime in ('application/x-executable', \
-                'application/x-sharedlib', 'application/x-archive'):
+            if smime in misc.binarymimes or smime in misc.librarymimes:
                 message.sub_debug('Stripping', sfile)
                 misc.system_command((strip, '--strip-all', sfile))
 

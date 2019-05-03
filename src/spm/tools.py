@@ -27,7 +27,7 @@ database = libspm.database
 misc.GPG_DIR = libspm.GPG_DIR
 misc.SHELL = libspm.SHELL
 
-app_version = "1.11.0 (e16ca706)"
+app_version = "1.11.0 (43df84fc)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -187,8 +187,8 @@ class Lint(object):
                 '%d, %d' % (stat.st_gid, stat.st_uid))
 
         smime = misc.file_mime(spath, bquick=True)
-        if (smime == 'application/x-executable' \
-            or smime == 'application/x-sharedlib') and not os.access(spath, os.X_OK):
+        if (smime in misc.binarymimes or smime == 'application/x-sharedlib') \
+            and not os.access(spath, os.X_OK):
             message.sub_warning('Binary/library is not executable', spath)
 
     def main(self):

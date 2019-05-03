@@ -977,7 +977,7 @@ class Source(object):
             message.sub_debug('Checking MIME of', sfile)
             smime = misc.file_mime(sfile, bquick=True)
             target_content.append(sfile)
-            if smime == 'application/x-executable':
+            if smime in misc.binarymimes:
                 lbinaries.append(sfile)
             elif smime == 'application/x-sharedlib':
                 lshared.append(sfile)
