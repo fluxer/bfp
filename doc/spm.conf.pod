@@ -132,7 +132,7 @@ Default:
 Set the environmental variable LDFLAGS when building software. The LDFLAGS
 flag specifies desired linker options.
 
-Default: -Wl,--hash-style=gnu -Wl,--as-needed
+Default: -Wl,-O1,--sort-common,--hash-style=gnu,--as-needed,--no-keep-memory
 
 =head2 MAKEFLAGS
 
