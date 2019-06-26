@@ -1113,6 +1113,11 @@ class Source(object):
                     # symlink to full path
                     sreal = '%s/%s' % (self.install_dir, sreal)
                 backup[sstripped] = misc.file_checksum(sreal)
+
+        if not footprint:
+            message.sub_critical('Empty footprint, nothing installed in', self.install_dir)
+            sys.exit(2)
+
         for target in self.target_optdepends:
             if database.local_search(target):
                 optdepends.append(target)
