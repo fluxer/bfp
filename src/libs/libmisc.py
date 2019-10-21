@@ -53,6 +53,10 @@ class Misc(object):
             self.python3 = True
         self.binarymimes = ['application/x-executable', 'application/x-pie-executable']
         self.librarymimes = ['application/x-sharedlib', 'application/x-archive']
+        self.xzmimes = ['application/xz', 'application/x-xz']
+        self.lzmamimes = ['application/lzma', 'application/x-lzma']
+        self.gzipmimes = ['application/gzip', 'application/x-gzip']
+        self.bzip2mimes = ['application/bzip2', 'application/x-bzip2']
         self._elfx = re.compile('Shared library: \[(.*)\]')
         # legal are [a-zA-Z_][a-zA-Z0-9_]+
         self._illegalx = re.compile('\\-|\\!|\\@|\\#|\\$|\\%|\\^|\\.|\\,|\\[|\\]|\\+|\\>|\\<|\\"|\\||\\=|\\(|\\)')
@@ -774,10 +778,10 @@ class Misc(object):
         if os.path.isdir(sfile):
             return False
         smime = self.file_mime(sfile, True)
-        if smime == 'application/x-xz' \
-            or smime == 'application/x-lzma' \
-            or smime == 'application/x-gzip' \
-            or smime == 'application/x-bzip2' \
+        if smime in self.xzmimes \
+            or smime in self.lzmamimes \
+            or smime in self.gzipmimes \
+            or smime in self.bzip2mimes \
             or tarfile.is_tarfile(sfile) \
             or zipfile.is_zipfile(sfile):
             return True
@@ -868,7 +872,7 @@ class Misc(object):
 
         lcontent = []
         smime = self.file_mime(sfile, True)
-        if smime == 'application/x-xz' or smime == 'application/x-lzma':
+        if smime in self.xzmimes or smime in self.lzmamimes:
             tar = self.whereis('bsdtar', False) or self.whereis('tar')
             arguments = '-tf'
             if tar.endswith('/bsdtar'):
@@ -890,9 +894,9 @@ class Misc(object):
             zfile = zipfile.ZipFile(sfile)
             lcontent = zfile.namelist()
             zfile.close()
-        elif smime == 'application/x-gzip':
+        elif smime in self.gzipmimes:
             lcontent = self.file_name(sfile).split()
-        elif smime == 'application/x-bzip2':
+        elif smime in self.bzip2mimes:
             lcontent = self.file_name(sfile).split()
         return lcontent
 

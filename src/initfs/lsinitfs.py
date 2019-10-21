@@ -2,7 +2,7 @@
 
 import sys, argparse, tempfile, subprocess, shutil, os
 
-app_version = "1.11.0 (43df84fc)"
+app_version = "1.11.0 (21bf1817)"
 
 tmpdir = None
 keep = False
@@ -56,9 +56,9 @@ try:
 
     message.info('Listing initial RAM image...')
     smime = misc.file_mime(ARGS.image)
-    if smime == 'application/x-gzip':
+    if smime in misc.gzipmimes:
         new_image = '%s/%s.gz' % (ARGS.tmp, os.path.basename(ARGS.image))
-    elif smime == 'application/x-bzip2':
+    elif smime in misc.bzip2mimes:
         new_image = '%s/%s.bz2' % (ARGS.tmp, os.path.basename(ARGS.image))
     else:
         new_image = '%s/%s' % (ARGS.tmp, os.path.basename(ARGS.image))
