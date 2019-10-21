@@ -312,14 +312,16 @@ try:
     misc.system_command((ARGS.busybox, 'mknod', '-m', '664', \
         '%s/null' % dev_dir, 'c', '1', '0'))
 
-    message.sub_info('Creating shared libraries cache')
-    etc_dir = '%s/etc' % ARGS.tmp
-    misc.dir_create(etc_dir)
-    # to surpress a warning
-    ldconf = '%s/ld.so.conf' % etc_dir
-    if not os.path.isfile(ldconf):
-        misc.file_write(ldconf, '')
-    misc.system_command((misc.whereis('ldconfig'), '-r', ARGS.tmp))
+    ldconfig = misc.whereis('ldconfig', False)
+    if ldconfig:
+        message.sub_info('Creating shared libraries cache')
+        etc_dir = '%s/etc' % ARGS.tmp
+        misc.dir_create(etc_dir)
+        # to surpress a warning
+        ldconf = '%s/ld.so.conf' % etc_dir
+        if not os.path.isfile(ldconf):
+            misc.file_write(ldconf, '')
+        misc.system_command((ldconfig, '-r', ARGS.tmp))
 
     if ARGS.strip:
         message.sub_info('Stripping binraries and libraries')
