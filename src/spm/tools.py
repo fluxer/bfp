@@ -778,21 +778,6 @@ if __name__ == '__main__':
         disowned_parser.add_argument('-p', '--plain', action='store_true', \
             help=_('Print in plain format'))
 
-        upload_parser = subparsers.add_parser('upload')
-        upload_parser.add_argument('-H', '--host', action='store', \
-            type=str, required=True, help=_('Use host'))
-        upload_parser.add_argument('-u', '--user', action='store', \
-            type=str, required=True, help=_('Use user'))
-        upload_parser.add_argument('-d', '--directory', type=str, \
-            default='/', help=_('Use upload directory'))
-        upload_parser.add_argument('-i', '--insecure', action='store_true', \
-            help=_('Use insecure connection'))
-        upload_parser.add_argument('TARGETS', nargs='+', type=str, \
-            help=_('Targets to apply actions on'))
-
-        if EUID == 0:
-            upgrade_parser = subparsers.add_parser('upgrade')
-
         parser.add_argument('--root', type=str, action=OverrideRootDir, \
             help=_('Change system root directory'))
         parser.add_argument('--debug', nargs=0, action=OverrideDebug, \
