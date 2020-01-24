@@ -1,12 +1,6 @@
 include ../Makefile.mk
 
 all: clean
-	$(POD2MAN) --release="MkInitfs $(VERSION)" \
-		--center="MkInitfs Manual" \
-		--section='8' --utf8 mkinitfs.pod mkinitfs.8
-	$(POD2MAN) --release="LsInitfs $(VERSION)" \
-		--center="LsInitfs Manual" \
-		--section='8' --utf8 lsinitfs.pod lsinitfs.8
 	$(POD2MAN) --release="SPM $(VERSION)" \
 		--center="Source Package Manager Manual" \
 		--section='8' --utf8 spm.pod spm.8
@@ -39,8 +33,6 @@ install:
 	$(INSTALL) -vm644 ../COPYING $(DESTDIR)$(DOCDIR)/bfp/COPYING
 
 uninstall:
-	$(RM) $(DESTDIR)$(MANDIR)/man8/mkinitfs.8
-	$(RM) $(DESTDIR)$(MANDIR)/man8/lsinitfs.8
 	$(RM) $(DESTDIR)$(MANDIR)/man8/spm.8
 	$(RM) $(DESTDIR)$(MANDIR)/man8/spm-tools.8
 	$(RM) $(DESTDIR)$(MANDIR)/man5/spm.conf.5

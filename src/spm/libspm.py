@@ -733,7 +733,7 @@ class Source(object):
             message.sub_debug(match or mkinitfs_run)
             if match and match[0][1]:
                 # new kernel being installed
-                misc.system_chroot((mkinitfs, '-k', match[0][1]))
+                misc.system_chroot((mkinitfs, '-k=', match[0][1]))
             else:
                 misc.system_chroot((mkinitfs))
 

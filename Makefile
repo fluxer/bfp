@@ -3,7 +3,6 @@ include Makefile.mk
 all:
 	$(MAKE) -C doc
 	$(MAKE) -C src/libs
-	$(MAKE) -C src/initfs
 	$(MAKE) -C src/spm
 
 check:
@@ -14,7 +13,6 @@ install:
 	$(MAKE) -C doc install
 	$(MAKE) -C misc install
 	$(MAKE) -C scripts install
-	$(MAKE) -C src/initfs install
 	$(MAKE) -C src/libs install
 	$(MAKE) -C src/spm install
 
@@ -22,14 +20,12 @@ uninstall:
 	$(MAKE) -C doc uninstall
 	$(MAKE) -C misc uninstall
 	$(MAKE) -C scripts uninstall
-	$(MAKE) -C src/initfs uninstall
 	$(MAKE) -C src/libs uninstall
 	$(MAKE) -C src/spm uninstall
 
 clean:
 	$(MAKE) -C doc clean
 	$(MAKE) -C src/libs clean
-	$(MAKE) -C src/initfs clean
 	$(MAKE) -C src/spm clean
 
 changelog:
