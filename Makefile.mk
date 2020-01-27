@@ -46,11 +46,6 @@ else ifneq ($(shell which pylint2),)
 else
 	PYLINT = pylint --rcfile="$(TOPDIR)/pylint.conf"
 endif
-ifneq ($(shell which gpg2),)
-	GPG = gpg2
-else
-	GPG = gpg
-endif
 
 all:
 
