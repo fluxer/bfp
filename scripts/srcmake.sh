@@ -209,11 +209,19 @@ for src in "${@:-.}";do
     builddate="$(date)"
     depends_json=""
     for depend in "${depends[@]}";do
-        depends_json="$depends_json \"$depend\", "
+        if [ -z "$depends_json" ];then
+            depends_json="$depends_json \"$depend\""
+        else
+            depends_json="$depends_json, \"$depend\""
+        fi
     done
     optdepends_json=""
     for depend in $enabled_optdepends;do
-        optdepends_json="$optdepends_json \"$depend\", "
+        if [ -z "$optdepends_json" ];then
+            optdepends_json="$optdepends_json \"$depend\""
+        else
+            optdepends_json="$optdepends_json, \"$depend\""
+        fi
     done
     # TODO: autodepends_json via readlef
     backup_json=""
@@ -221,12 +229,20 @@ for src in "${@:-.}";do
         backup_file="$INSTALL_DIR/$backup"
         if [ -e "$backup_file" ];then
             backup_checksum="$(sha256sum "$backup_file" | cut -f1 -d' ')"
-            backup_json="$backup_json \"/$backup\": \"$backup_checksum\", "
+            if [ -z "$backup_json" ];then
+                backup_json="$backup_json \"/$backup\": \"$backup_checksum\""
+            else
+                backup_json="$backup_json, \"/$backup\": \"$backup_checksum\""
+            fi
         fi
     done
     footprint_json=""
     while IFS= read -r -d '' file;do
-        footprint_json="$footprint_json \"${file//$INSTALL_DIR}\", "
+        if [ -z "$footprint_json" ];then
+            footprint_json="$footprint_json \"${file//$INSTALL_DIR}\""
+        else
+            footprint_json="$footprint_json, \"${file//$INSTALL_DIR}\""
+        fi
     done < <(find "$INSTALL_DIR" ! -type d -print0)
 
     echo "
