@@ -245,7 +245,7 @@ for src in "${@:-.}";do
     cp -f "$srcbuild" "$localsrcbuild"
 
     msg "Compressing tarball.."
-    tarball="${src_name}_${version}.tar.bz2"
+    tarball="${src_name}_${version}.tar.gz"
     cd "$INSTALL_DIR"
     if whereis bsdtar ;then
         bsdtar -cpaf "$src_real/$tarball" ./*
