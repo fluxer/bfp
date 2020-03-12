@@ -35,6 +35,5 @@ changelog:
 
 dist:
 	$(GIT) archive HEAD --format=tar --prefix=bfp-$(VERSION)/ | $(XZ) > bfp-$(VERSION).tar.xz
-	$(GPG) --sign --detach-sign bfp-$(VERSION).tar.xz
 
 .PHONY: all check install uninstall clean changelog dist
