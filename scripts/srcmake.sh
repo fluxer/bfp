@@ -76,10 +76,10 @@ for src in "${@:-.}";do
     srcbuild="$(realpath $src)/SRCBUILD"
 
     if ! whereis curl && ! whereis wget ;then
-        error "Neither curl or wget is installed"
+        error "Neither curl nor wget is installed"
         exit 1
     elif ! whereis bsdtar && ! whereis tar ;then
-        error "Neither bsdtar or tar is installed"
+        error "Neither bsdtar nor tar is installed"
         exit 1
     elif ! whereis git ;then
         # FIXME: error out if there is git URL in sources array
