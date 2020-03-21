@@ -13,11 +13,10 @@ all: clean
 	$(POD2MAN) --release="SPM $(VERSION)" \
 		--center="Source Package Manager Manual" \
 		--section='5' --utf8 SRCBUILD.pod SRCBUILD.5
-	$(SED) -e 's|@DOCDIR\\fR@|$(DOCDIR)|g' -i spm-tools.8
-	$(SED) -e 's|@DOCDIR\\fR@|$(DOCDIR)|g' -i SRCBUILD.5
-	$(SED) 's|@MACHINE\\fR@|$(MACHINE)|g' -i spm.conf.5
-	$(SED) 's|@ARCH\\fR@|$(ARCH)|g' -i spm.conf.5
-	$(SED) 's|@JOBS\\fR@|$(JOBS)|g' -i spm.conf.5
+	$(SED) -e 's|@DOCDIR\\fR@|$(DOCDIR)|g' -e 's|@DOCDIR@|$(DOCDIR)|g' -i *.8 *.5
+	$(SED) -e 's|@MACHINE\\fR@|$(MACHINE)|g' -e 's|@MACHINE@|$(MACHINE)|g' -i *.8 *.5
+	$(SED) -e 's|@ARCH\\fR@|$(ARCH)|g' -e 's|@ARCH@|$(ARCH)|g' -i *.8 *.5
+	$(SED) -e 's|@JOBS\\fR@|$(JOBS)|g' -e 's|@JOBS@|$(JOBS)|g' -i *.8 *.5
 	for lib in ../src/libs/lib*.py ../src/spm/libspm.py; do \
 		PYTHONPATH="$(TOPDIR)/src/libs" $(PYDOC) -w $$lib; \
 	done
