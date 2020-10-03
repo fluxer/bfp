@@ -876,7 +876,7 @@ class Source(object):
 
         if not misc.file_search('\nsrc_prepare()', \
             self.srcbuild, escape=False):
-            message.sub_warning('src_prepare() not defined')
+            message.sub_debug('src_prepare() not defined')
             return
 
         misc.system_command((misc.whereis(SHELL), '-e', '-c', \
