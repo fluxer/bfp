@@ -1,6 +1,6 @@
 #!/usr/bin/python2
 
-import sys, os, shutil, re, time, syslog, glob, pwd, grp
+import sys, os, shutil, re, time, syslog, pwd, grp
 from collections import OrderedDict
 if sys.version < '3':
     import ConfigParser as configparser
