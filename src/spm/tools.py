@@ -5,7 +5,7 @@ def _(arg):
     return arg
 
 import sys, argparse, subprocess, tarfile, zipfile, shutil, os, re, difflib
-import pwd, grp, imp, glob
+import pwd, grp
 if sys.version < '3':
     import ConfigParser as configparser
     from urllib2 import HTTPError
@@ -629,9 +629,6 @@ class Disowned(object):
 
 
 if __name__ == '__main__':
-    plugins = []
-    modules = []
-    retvalue = 0
     try:
         EUID = os.geteuid()
 
@@ -786,13 +783,6 @@ if __name__ == '__main__':
             version='Source Package Manager Tools v%s' % app_version, \
             help=_('Show SPM Tools version and exit'))
 
-        for plugin in glob.glob('/etc/spm/plugins/*.py'):
-            name = os.path.basename(plugin).replace('.py', '')
-            fp, pathname, description = imp.find_module(name, ['/etc/spm/plugins'])
-            plugins.append(fp)
-            module = imp.load_module(name, fp, pathname, description)
-            modules.append(module.Main(subparsers))
-
         ARGS = parser.parse_args()
         if not sys.stdin.isatty() and ARGS.TARGETS == ['-']:
             ARGS.TARGETS = sys.stdin.read().split()
@@ -939,18 +929,15 @@ if __name__ == '__main__':
             m = Disowned(ARGS.directory, ARGS.cross, ARGS.plain)
             m.main()
 
-        for module in modules:
-            module.run(ARGS)
-
         if not ARGS.mode and misc.python3:
             parser.print_help()
 
     except configparser.Error as detail:
         message.critical('CONFIGPARSER', detail)
-        retvalue = 3
+        sys.exit(3)
     except subprocess.CalledProcessError as detail:
         message.critical('SUBPROCESS', detail)
-        retvalue = 4
+        sys.exit(4)
     except (HTTPError, URLError) as detail:
         if hasattr(detail, 'url') and hasattr(detail, 'code'):
             # misc.fetch() provides the URL, HTTPError provides the code
@@ -960,34 +947,30 @@ if __name__ == '__main__':
             message.critical('URLLIB', "%s: '%s'" % (detail.url, detail.reason))
         else:
             message.critical('URLLIB', detail)
-        retvalue = 5
+        sys.exit(5)
     except tarfile.TarError as detail:
         message.critical('TARFILE', detail)
-        retvalue = 6
+        sys.exit(6)
     except zipfile.BadZipfile as detail:
         message.critical('ZIPFILE', detail)
-        retvalue = 7
+        sys.exit(7)
     except shutil.Error as detail:
         message.critical('SHUTIL', detail)
-        retvalue = 8
+        sys.exit(8)
     except OSError as detail:
         message.critical('OS', detail)
-        retvalue = 9
+        sys.exit(9)
     except IOError as detail:
         message.critical('IO', detail)
-        retvalue = 10
+        sys.exit(10)
     except re.error as detail:
         message.critical('REGEXP', detail)
-        retvalue = 11
+        sys.exit(11)
     except KeyboardInterrupt:
         message.critical('Interrupt signal received')
-        retvalue = 12
+        sys.exit(12)
     except SystemExit:
-        retvalue = 2
+        sys.exit(2)
     except Exception as detail:
         message.critical('Unexpected error', detail)
-        retvalue = 1
-    finally:
-        for plugin in plugins:
-            plugin.close()
-        sys.exit(retvalue)
+        sys.exit(1)
