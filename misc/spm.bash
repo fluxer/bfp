@@ -8,7 +8,7 @@ _spm()
 
     actions='repo remote source local who'
 
-    main_options='-h --help --cache --build --root --gpg --ignore --notify
+    main_options='-h --help --cache --build --root --ignore --notify
         --mirror --timeout --verify --chost --cflags --cxxflags --cppflags
         --ldflags --makeflags --purge --man --binaries --shared --static
         --missing --permissions --conflicts --backup --scripts --debug
@@ -18,8 +18,7 @@ _spm()
 
     remote_options='-h --help -n --name -v --version -r --release
         -d --description -D --depends -m --makedepends -O --optdepends
-        -c --checkdepends -s --sources -k --pgpkeys -o --options -b --backup
-        -p --plain'
+        -c --checkdepends -s --sources -o --options -b --backup -p --plain'
 
     source_options='-h --help -C --clean -f --fetch -p --prepare -c --compile
         -k --check -i --install -m --merge -r --remove -D --depends

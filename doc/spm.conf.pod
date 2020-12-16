@@ -36,13 +36,6 @@ of the string, e.g. /home/joe/bootstrap/.
 
 Default: /
 
-=head2 GPG_DIR
-
-Set the GnuPG home directory. It would make sense to change it only to make the
-imported keys temporary by setting this option to /tmp/spm-gpg or /run/spm-gpg.
-
-Default: /etc/spm/gpg
-
 =head2 SHELL
 
 Set which Shell to use. It makes no difference if the value is full path or
@@ -89,13 +82,6 @@ Set the time in seconds to wait before bailing out when mirrors and
 internet connection are checked.
 
 Default: 30
-
-=head2 VERIFY
-
-Set wheather to verify PGP signatures of downloads. Not every host provides
-signatures for their content but it's becoming manditory.
-
-Default: True
 
 =head2 CHOST
 
@@ -236,8 +222,6 @@ BUILD_DIR = /var/tmp/spm
 
 ROOT_DIR = /
 
-GPG_DIR = /etc/spm/gpg
-
 IGNORE = glibc zlib bash
 
 =head1 FILES
@@ -259,4 +243,4 @@ COPYING file bundled with the source code.
 
 =head1 SEE ALSO
 
-spm(8) SRCBUILD(5) gpg(1) bash(1) gcc(1) ld(1) make(1) strip(1)
+spm(8) SRCBUILD(5) bash(1) gcc(1) ld(1) make(1) strip(1)

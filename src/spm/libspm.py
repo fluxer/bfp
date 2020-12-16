@@ -16,20 +16,17 @@ database = libpackage.Database()
 MAIN_CONF = '/etc/spm.conf'
 REPOSITORIES_CONF = '/etc/spm/repositories.conf'
 MIRRORS_CONF = '/etc/spm/mirrors.conf'
-KEYSERVERS_CONF = '/etc/spm/keyservers.conf'
 DEFAULTS = {
     'CACHE_DIR': '/var/cache/spm',
     'BUILD_DIR': '/var/tmp/spm',
     'ROOT_DIR': '/',
     'LOCAL_DIR': '/var/local/spm',
-    'GPG_DIR': '/etc/spm/gpg',
     'SHELL': 'bash',
     'IGNORE': '',
     'NOTIFY': 'False',
     'OFFLINE': 'False',
     'MIRROR': 'False',
     'TIMEOUT': '30',
-    'VERIFY': 'False',
     'CHOST': '',
     'CFLAGS': '',
     'CXXFLAGS': '',
@@ -65,14 +62,12 @@ CACHE_DIR = mainconf.get('spm', 'CACHE_DIR')
 BUILD_DIR = mainconf.get('spm', 'BUILD_DIR')
 ROOT_DIR = mainconf.get('spm', 'ROOT_DIR')
 LOCAL_DIR = ROOT_DIR + 'var/local/spm'
-GPG_DIR = mainconf.get('spm', 'GPG_DIR')
 IGNORE = mainconf.get('spm', 'IGNORE').split(' ')
 NOTIFY = mainconf.getboolean('spm', 'NOTIFY')
 SHELL = mainconf.get('spm', 'SHELL')
 OFFLINE = mainconf.getboolean('fetch', 'OFFLINE')
 MIRROR = mainconf.getboolean('fetch', 'MIRROR')
 TIMEOUT = mainconf.getint('fetch', 'TIMEOUT')
-VERIFY = mainconf.getboolean('fetch', 'VERIFY')
 CHOST = mainconf.get('compile', 'CHOST')
 CFLAGS = mainconf.get('compile', 'CFLAGS')
 CXXFLAGS = mainconf.get('compile', 'CXXFLAGS')
@@ -121,20 +116,6 @@ else:
         message.critical('Mirrors configuration file is empty')
         sys.exit(2)
 
-# parse PGP keys servers configuration file
-if not os.path.isfile(KEYSERVERS_CONF):
-    message.warning('PGP keys servers configuration file does not exist', \
-        KEYSERVERS_CONF)
-    KEYSERVERS = ['pool.sks-keyservers.net']
-else:
-    KEYSERVERS = []
-    for line in misc.file_readsmart(KEYSERVERS_CONF):
-        KEYSERVERS.append(line)
-
-    if not KEYSERVERS and VERIFY:
-        message.critical('PGP keys servers configuration file is empty')
-        sys.exit(2)
-
 # override module variables from configuration, each class will override
 # them again because a user of the library may want to change them
 # (overriding the config) via command line argument from a frontend for
@@ -144,7 +125,6 @@ else:
 misc.OFFLINE = OFFLINE
 misc.TIMEOUT = TIMEOUT
 misc.ROOT_DIR = ROOT_DIR
-misc.GPG_DIR = GPG_DIR
 misc.SHELL = SHELL
 database.ROOT_DIR = ROOT_DIR
 database.CACHE_DIR = CACHE_DIR
@@ -175,7 +155,6 @@ class Local(object):
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
         misc.ROOT_DIR = ROOT_DIR
-        misc.GPG_DIR = GPG_DIR
         misc.SHELL = SHELL
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
@@ -242,8 +221,7 @@ class Remote(object):
     def __init__(self, pattern, do_name=False, do_version=False, \
         do_release=False, do_description=False, do_depends=False, \
         do_makedepends=False, do_optdepends=False, do_checkdepends=False, \
-        do_sources=False, do_pgpkeys=False, do_options=False, \
-        do_backup=False, plain=False):
+        do_sources=False, do_options=False, do_backup=False, plain=False):
         self.pattern = pattern
         self.do_name = do_name
         self.do_version = do_version
@@ -254,14 +232,12 @@ class Remote(object):
         self.do_optdepends = do_optdepends
         self.do_checkdepends = do_checkdepends
         self.do_sources = do_sources
-        self.do_pgpkeys = do_pgpkeys
         self.do_options = do_options
         self.do_backup = do_backup
         self.plain = plain
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
         misc.ROOT_DIR = ROOT_DIR
-        misc.GPG_DIR = GPG_DIR
         misc.SHELL = SHELL
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
@@ -295,8 +271,7 @@ class Remote(object):
                 'optdepends': ('Optional depends', self.do_optdepends, ' '.join(metadata['optdepends'])),
                 'checkdepends': ('Check depends', self.do_checkdepends, ' '.join(metadata['checkdepends'])),
                 'sources': ('Sources', self.do_sources, ' '.join(metadata['sources'])),
-                'pgpkeys': ('PGP keys', self.do_pgpkeys, ' '.join(metadata['pgpkeys'])),
-                'options': ('Options', self.do_pgpkeys, ' '.join(metadata['options'])),
+                'options': ('Options', self.do_options, ' '.join(metadata['options'])),
                 'backup': ('Backup', self.do_backup, ' '.join(metadata['backup'])),
             }
 
@@ -322,7 +297,6 @@ class Repo(object):
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
         misc.ROOT_DIR = ROOT_DIR
-        misc.GPG_DIR = GPG_DIR
         misc.SHELL = SHELL
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
@@ -445,7 +419,6 @@ class Source(object):
         self.do_update = do_update
         self.automake = automake
         self.autoremove = autoremove
-        self.verify = VERIFY
         self.mirror = MIRROR
         self.purge_paths = PURGE_PATHS
         self.compress_man = COMPRESS_MAN
@@ -457,7 +430,6 @@ class Source(object):
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
         misc.ROOT_DIR = ROOT_DIR
-        misc.GPG_DIR = GPG_DIR
         misc.SHELL = SHELL
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR
@@ -801,11 +773,6 @@ class Source(object):
         ''' Fetch target sources '''
         misc.dir_create(self.sources_dir)
 
-        message.sub_info('Preparing PGP keys')
-        if self.target_pgpkeys and self.verify:
-            message.sub_debug(self.target_pgpkeys)
-            misc.gpg_receive(self.target_pgpkeys, KEYSERVERS, self.target_name)
-
         message.sub_info('Fetching sources')
         for src_url in self.target_sources:
             src_base = misc.url_normalize(src_url, True)
@@ -818,16 +785,6 @@ class Source(object):
                     misc.fetch(src_url, local_file, MIRRORS, 'distfiles/')
                 else:
                     misc.fetch(src_url, local_file)
-
-        if self.verify:
-            for src_url in self.target_sources:
-                src_base = misc.url_normalize(src_url, True)
-                local_file = '%s/%s' % (self.sources_dir, src_base)
-
-                src_signature = misc.gpg_findsig(local_file)
-                if src_signature:
-                    message.sub_debug('Verifying signature', src_url)
-                    misc.gpg_verify(local_file, src_signature, self.target_name)
 
     def prepare(self):
         ''' Prepare target sources '''
@@ -1363,7 +1320,6 @@ class Source(object):
             self.target_depends = database.remote_metadata(self.target_dir, 'depends')
             self.target_optdepends = database.remote_metadata(self.target_dir, 'optdepends')
             self.target_sources = database.remote_metadata(self.target_dir, 'sources')
-            self.target_pgpkeys = database.remote_metadata(self.target_dir, 'pgpkeys')
             self.target_options = database.remote_metadata(self.target_dir, 'options')
             self.target_backup = database.remote_metadata(self.target_dir, 'backup')
             self.source_dir = '%s/%s/%s/source' % (BUILD_DIR, self.target_name, self.target_version)
@@ -1380,13 +1336,6 @@ class Source(object):
                 continue
 
             for option in self.target_options:
-                if option == 'verify' and not self.verify:
-                    message.sub_warning('Overriding VERIFY to', 'True')
-                    self.verify = True
-                elif option == '!verify' and self.verify:
-                    message.sub_warning('Overriding VERIFY to', 'False')
-                    self.verify = False
-
                 if option == 'mirror' and not self.mirror:
                     message.sub_warning('Overriding MIRROR to', 'True')
                     self.mirror = True
@@ -1474,7 +1423,6 @@ class Source(object):
                 self.remove()
 
             # reset values so that overrides apply only to single target
-            self.verify = VERIFY
             self.mirror = MIRROR
             self.purge_paths = PURGE_PATHS
             self.compress_man = COMPRESS_MAN
@@ -1499,7 +1447,6 @@ class Who(object):
         misc.OFFLINE = OFFLINE
         misc.TIMEOUT = TIMEOUT
         misc.ROOT_DIR = ROOT_DIR
-        misc.GPG_DIR = GPG_DIR
         misc.SHELL = SHELL
         database.ROOT_DIR = ROOT_DIR
         database.CACHE_DIR = CACHE_DIR

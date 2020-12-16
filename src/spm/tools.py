@@ -24,10 +24,9 @@ message = libmessage.Message()
 import libspm
 misc = libspm.misc
 database = libspm.database
-misc.GPG_DIR = libspm.GPG_DIR
 misc.SHELL = libspm.SHELL
 
-app_version = "1.12.0 (284a667)"
+app_version = "1.12.0 (a195a7a)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
@@ -107,13 +106,8 @@ class Dist(object):
             target_distfile = '%s/%s_%s.tar.gz' % (self.directory, \
                 target_basename, target_version)
             target_sources = database.remote_metadata(target, 'sources')
-            target_pgpkeys = database.remote_metadata(target, 'pgpkeys')
 
             if self.do_sources:
-                message.sub_info(_('Preparing PGP keys'))
-                if target_pgpkeys and libspm.VERIFY:
-                    misc.gpg_receive(target_pgpkeys, libspm.KEYSERVERS, target)
-
                 message.sub_info(_('Preparing sources'))
                 for src_url in target_sources:
                     src_base = misc.url_normalize(src_url, True)
@@ -122,15 +116,6 @@ class Dist(object):
                     if not os.path.isfile(src_file):
                         message.sub_debug(_('Fetching'), src_url)
                         misc.fetch(src_url, src_file, libspm.MIRRORS, 'distfiles/')
-
-                if libspm.VERIFY:
-                    for src_url in target_sources:
-                        src_base = misc.url_normalize(src_url, True)
-                        src_file = '%s/%s' % (self.directory, src_base)
-                        src_signature = misc.gpg_findsig(src_file)
-                        if src_signature:
-                            message.sub_debug(_('Verifying'), src_url)
-                            misc.gpg_verify(src_file, src_signature, target)
 
             message.sub_info(_('Compressing'), target_distfile)
             misc.archive_compress((target_directory,), target_distfile, \
@@ -338,7 +323,7 @@ class Sane(object):
     ''' Check sanity of SRCBUILDs '''
     def __init__(self, targets, enable=False, disable=False, null=False, \
         maintainer=False, note=False, variables=False, triggers=False, \
-        users=False, groups=False, signatures=False, pulse=False):
+        users=False, groups=False, pulse=False):
         self.targets = []
         for target in targets:
             self.targets.extend(database.remote_alias(target))
@@ -351,7 +336,6 @@ class Sane(object):
         self.triggers = triggers
         self.users = users
         self.groups = groups
-        self.signatures = signatures
         self.pulse = pulse
 
     def main(self):
@@ -389,7 +373,7 @@ class Sane(object):
                 if self.variables:
                     essential_regex = '(?:version|description)'
                     string_regex = '(?:version|release|description)'
-                    array_regex = '(?:(?:make|opt|check)?depends|sources|pgpkeys|options|backup)'
+                    array_regex = '(?:(?:make|opt|check)?depends|sources|options|backup)'
                     if not misc.string_search('(?:\\s|^)%s=' % essential_regex, srcbuild, escape=False):
                         message.sub_warning(_('Essential variable(s) missing'))
                     if misc.string_search('(?:\\s|^)%s=\(' % string_regex, srcbuild, escape=False):
@@ -417,31 +401,6 @@ class Sane(object):
                     if misc.string_search('groupadd|addgroup', srcbuild, escape=False) \
                         and not misc.string_search('groupdel|delgroup', srcbuild, escape=False):
                         message.sub_warning(_('Group(s) added but not deleted'))
-
-                if self.signatures:
-                    sources = database.remote_metadata(target, 'sources')
-                    pgpkeys = database.remote_metadata(target, 'pgpkeys')
-                    for src in sources:
-                        if misc.url_supported(src, False):
-                            for ext in ('sig', 'asc', 'sign'):
-                                sig1 = '%s.%s' % (src, ext)
-                                sig2 = '%s.%s' % (misc.file_name(src, False), ext)
-                                if sig1 in sources or sig2 in sources:
-                                    message.sub_debug(_('Signature already in sources for'), src)
-                                    continue
-
-                                message.sub_debug(_('Probing for'), sig1)
-                                message.sub_debug(_('Probing for'), sig2)
-                                if misc.url_ping(sig1):
-                                    message.sub_warning(_('Signature available but not in sources'), sig1)
-                                    if not pgpkeys:
-                                        message.sub_warning(_('Signature in sources but no pgpkeys'), src)
-                                    break
-                                elif misc.url_ping(sig2):
-                                    message.sub_warning(_('Signature available but not in sources'), sig2)
-                                    if not pgpkeys:
-                                        message.sub_warning(_('Signature in sources but no pgpkeys'), src)
-                                    break
 
                 if self.pulse:
                     sources = database.remote_metadata(target, 'sources')
@@ -729,8 +688,6 @@ if __name__ == '__main__':
             help=_('Check for user(s) being added but not deleted'))
         sane_parser.add_argument('-g', '--groups', action='store_true', \
             help=_('Check for group(s) being added but not deleted'))
-        sane_parser.add_argument('-s', '--signatures', action='store_true', \
-            help=_('Check for signature(s) not in the sources array'))
         sane_parser.add_argument('-p', '--pulse', action='store_true', \
             help=_('Check for source(s) not being available'))
         sane_parser.add_argument('-a', '--all', action='store_true', \
@@ -862,7 +819,6 @@ if __name__ == '__main__':
                 ARGS.triggers = True
                 ARGS.users = True
                 ARGS.groups = True
-                ARGS.signatures = True
                 ARGS.pulse = True
 
             message.info(_('Runtime information'))
@@ -875,14 +831,13 @@ if __name__ == '__main__':
             message.sub_info(_('TRIGGERS'), ARGS.triggers)
             message.sub_info(_('USERS'), ARGS.users)
             message.sub_info(_('GROUPS'), ARGS.groups)
-            message.sub_info(_('SIGNATURES'), ARGS.signatures)
             message.sub_info(_('PULSE'), ARGS.pulse)
             message.sub_info(_('TARGETS'), ARGS.TARGETS)
             message.info(_('Poking remotes...'))
 
             m = Sane(ARGS.TARGETS, ARGS.enable, ARGS.disable, ARGS.null, \
                 ARGS.maintainer, ARGS.note, ARGS.variables, ARGS.triggers, \
-                ARGS.users, ARGS.groups, ARGS.signatures, ARGS.pulse)
+                ARGS.users, ARGS.groups, ARGS.pulse)
             m.main()
 
         elif ARGS.mode == 'merge':

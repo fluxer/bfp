@@ -304,7 +304,7 @@ class Database(object):
             return metadata[key]
         # for consistency
         if key in ('depends', 'makedepends', 'optdepends', 'checkdepends', \
-            'sources', 'options', 'backup', 'pgpkeys'):
+            'sources', 'options', 'backup'):
             return []
 
     def remote_aliases(self, basename=True):
@@ -355,7 +355,6 @@ class Database(object):
             'optdepends': [],
             'checkdepends': [],
             'sources': [],
-            'pgpkeys': [],
             'options': [],
             'backup': []
         }
@@ -372,7 +371,7 @@ class Database(object):
                 arrayval.append(val.strip('"\''))
             _arraymap[var] = arrayval
             if var in ('depends', 'makedepends', 'optdepends', \
-                'checkdepends', 'sources', 'pgpkeys', 'options', 'backup'):
+                'checkdepends', 'sources', 'options', 'backup'):
                 _varmap[var] = arrayval
         for string in _stringmap:
             val = _stringmap[string]

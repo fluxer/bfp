@@ -4,9 +4,8 @@ import libmisc, libpackage, timeit, tempfile, os
 misc = libmisc.Misc()
 database = libpackage.Database()
 
-def create_remote(name, version, release, description, \
-        depends='', makedepends='', sources='', pgpkeys='', options='', \
-        backup='', optdepends=''):
+def create_remote(name, version, release, description, depends='', \
+        makedepends='', sources='', options='', backup='', optdepends=''):
     sdir = '%s/repositories/test/%s' % (database.CACHE_DIR, name)
     os.makedirs(sdir)
     srcbuild = open('%s/SRCBUILD' % sdir, 'w')
@@ -18,7 +17,6 @@ def create_remote(name, version, release, description, \
     srcbuild.write('\noptdepends=(%s)' % optdepends)
     srcbuild.write('\ncheckdepends=(%s)' % name)
     srcbuild.write('\nsources=(%s)' % sources)
-    srcbuild.write('\npgpkeys=(%s)' % pgpkeys)
     srcbuild.write('\noptions=(%s)' % options)
     srcbuild.write('\nbackup=(%s)' % backup)
     srcbuild.close()
@@ -48,7 +46,7 @@ def benchmark_remote(t):
     try:
         # print('preparing for benchmark...')
         for r in range(5000):
-            create_remote(r, r, r, r, r, r, r, r, r, r)
+            create_remote(r, r, r, r, r, r, r, r, r)
         # print('running benchmark %d...' % t)
         print(timeit.timeit(database.remote_all, number=1))
         database.REMOTE_CACHE = {}

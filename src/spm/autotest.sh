@@ -15,8 +15,7 @@ curdir="$(dirname $0)"
 rootdir="$curdir/root-$1"
 cachedir="$rootdir/cache"
 builddir="$rootdir/build"
-gpgdir="$rootdir/gpg"
-spmargs="--root $rootdir --cache $cachedir --build $builddir --gpg $gpgdir --missing=True --notify=True --scripts=False --permissions=True --debug"
+spmargs="--root $rootdir --cache $cachedir --build $builddir --missing=True --notify=True --scripts=False --permissions=True --debug"
 spmtargs="--root $rootdir --debug"
 statefile="$rootdir/testrun-$1"
 
@@ -51,7 +50,7 @@ fi
 
 if ! grep -q "SPM REMOTE" "$statefile" ;then
     echo "=== RUNNING SPM REMOTE TEST ==="
-    "$1" "$curdir/spm.py" $spmargs remote -pnvrdDOmcskob ca-certificates
+    "$1" "$curdir/spm.py" $spmargs remote -pnvrdDOmcsob ca-certificates
     echo "SPM REMOTE" >> "$statefile"
 else
     echo "=== SKIPPING SPM REMOTE TEST ==="
@@ -119,7 +118,7 @@ fi
 
 if ! grep -q "SPMT SANE" "$statefile" ;then
     echo "=== RUNNING SPMT SANE TEST ==="
-    "$1" "$curdir/tools.py" $spmtargs sane -ednmNvtugs ca-certificates
+    "$1" "$curdir/tools.py" $spmtargs sane -ednmNvtug ca-certificates
     echo "SPMT SANE" >> "$statefile"
 else
     echo "=== SKIPPING SPMT SANE TEST ==="

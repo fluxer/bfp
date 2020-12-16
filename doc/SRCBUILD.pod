@@ -16,8 +16,8 @@ The metadata defined in the recipes should contain only one function
 (src_install) and two (2) variables (version and description). Optionally three
 (3) more functions can be specified (src_prepare, src_compile and src_check)
 and nine (9) more variables (release, depends, makedepends, optdepends,
-checkdepends, sources, pgpkeys, options and backup). Target name is defined by
-the directory name in which the SRCBUILD is placed.
+checkdepends, sources, options and backup). Target name is defined by the
+directory name in which the SRCBUILD is placed.
 
 In addition six (6) more functions (pre/post_install, pre/post_upgrade and
 pre/post_remove) can be defined as pre/post actions to be taken when software
@@ -74,11 +74,6 @@ Variable defining sources of software. This includes remote files, such as
 tarballs or patches, that should be fetched. Note that local files can be
 shipped along the SRCBUILD when needed.
 
-=head2 pgpkeys
-
-Variable defining PGP keys to be imported. They are usually required for
-checking issuer of a software source tarball.
-
 =head2 backup
 
 Variable defining additional files to be backed up when merging software. Note
@@ -90,10 +85,6 @@ Variable defining options to be used when building software. It is used to
 override the install options specified in the SPM configuration file. Note that
 preceding an option with exclamation mark (!) has the opposite affect. Valid
 options are:
-
-=head3 verify
-
-Fetch and verify PGP signatures
 
 =head3 mirror
 
@@ -185,4 +176,4 @@ COPYING file bundled with the source code.
 
 =head1 SEE ALSO
 
-spm(8) spm.conf(5) bash(1) gpg(1) strip(1)
+spm(8) spm.conf(5) bash(1) strip(1)

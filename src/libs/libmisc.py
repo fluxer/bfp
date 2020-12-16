@@ -41,7 +41,6 @@ class Misc(object):
         self.OFFLINE = False
         self.TIMEOUT = 30
         self.ROOT_DIR = '/'
-        self.GPG_DIR = os.path.expanduser('~/.gnupg')
         self.BUFFER = 10240
         self.SHELL = 'bash'
         self.magic = Magic()
@@ -367,71 +366,6 @@ class Misc(object):
         with open(sfile, mode, self.BUFFER) as f:
             json.dump(content, f, indent=4)
 
-    def gpg_findsig(self, sfile):
-        ''' Attempt to guess the signature for local file '''
-        if self.python2:
-            self.typecheck(sfile, (types.StringTypes))
-
-        for sext in ('sig', 'asc', 'sign'):
-            sig1 = '%s.%s' % (sfile, sext)
-            sig2 = '%s.%s' % (self.file_name(sfile, False), sext)
-            if not sfile.endswith(sext) and os.path.isfile(sig1):
-                return sig1
-            elif not sfile.endswith(sext) and os.path.isfile(sig2):
-                return sig2
-
-    def gpg_receive(self, lkeys, lservers=None, stag=''):
-        ''' Import PGP keys as (somewhat) trusted '''
-        if self.python2:
-            self.typecheck(lkeys, (types.ListType, types.TupleType))
-            self.typecheck(lservers, (types.NoneType, types.ListType, types.TupleType))
-            self.typecheck(stag, (types.StringTypes))
-
-        if self.OFFLINE:
-            return
-        if lservers is None:
-            lservers = []
-        gpgtagdir = '%s/%s' % (self.GPG_DIR, stag)
-        self.dir_create(gpgtagdir, ipermissions=0o700)
-        gpg = self.whereis('gpg2', False) or self.whereis('gpg')
-        cmd = [gpg, '--homedir', gpgtagdir]
-        for server in lservers:
-            cmd.extend(('--keyserver', server))
-        cmd.append('--recv-keys')
-        cmd.extend(lkeys)
-        self.system_command(cmd)
-
-    def gpg_verify(self, sfile, ssignature, stag=''):
-        ''' Verify file PGP signature via GnuPG '''
-        if self.python2:
-            self.typecheck(sfile, (types.StringTypes))
-            self.typecheck(ssignature, (types.StringTypes))
-            self.typecheck(stag, (types.StringTypes))
-
-        gpgtagdir = '%s/%s' % (self.GPG_DIR, stag)
-        self.dir_create(gpgtagdir, ipermissions=0o700)
-        gpg = self.whereis('gpg2', False) or self.whereis('gpg')
-        shell = False
-        if ssignature.endswith(('.tar.sign', '.tar.asc')):
-            # exception for no gain, get piped!
-            # NOTE: wrapping processes for piping is risky, spawining a shell just as much
-            # https://docs.python.org/2/library/subprocess.html#frequently-used-arguments
-            shell = True
-            if sfile.endswith('.xz'):
-                cmd = '%s -cdk ' % self.whereis('unxz')
-            elif sfile.endswith('.bz2'):
-                cmd = '%s -cdk ' % self.whereis('bunzip')
-            elif sfile.endswith('.gz'):
-                cmd = '%s -ck ' % self.whereis('gunzip')
-            else:
-                raise(Exception('In memory verification does not support', sfile))
-            cmd = '%s %s | %s --homedir %s --verify --batch %s -' % \
-                (cmd, sfile, gpg, gpgtagdir, ssignature)
-        else:
-            cmd = [gpg, '--homedir', gpgtagdir]
-            cmd.extend(('--verify', '--batch', ssignature, sfile))
-        self.system_command(cmd, shell)
-
     def dir_create(self, sdir, ipermissions=0):
         ''' Create directory if it does not exist, including leading paths
 
@@ -629,10 +563,6 @@ class Misc(object):
             elif lsize > rsize or (os.path.isfile(last) and not self.file_read(last) == rsize):
                 lsize = '0'
                 os.unlink(sfile)
-                # re-fetch the PGP signature as well
-                sig = self.gpg_findsig(sfile)
-                if os.path.isfile(sig):
-                    os.unlink(sig)
             if rfile.headers.get('Accept-Ranges') == 'bytes':
                 # setup new request with custom header
                 rfile.close()

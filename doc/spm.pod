@@ -4,10 +4,10 @@ spm - Source Package Manager
 
 =head1 SYNOPSIS
 
-  spm [-h] [--cache CACHE] [--build BUILD] [--root ROOT] [--gpg GPG]
+  spm [-h] [--cache CACHE] [--build BUILD] [--root ROOT]
     [--shell SHELL] [--ignore IGNORE]
     [--notify {True,False}] [--offline {True,False}]
-    [--mirror {True,False}] [--timeout TIMEOUT] [--verify {True,False}]
+    [--mirror {True,False}] [--timeout TIMEOUT]
     [--chost CHOST] [--cflags CFLAGS] [--cxxflags CXXFLAGS]
     [--cppflags CPPFLAGS] [--ldflags LDFLAGS] [--makeflags MAKEFLAGS]
     [--purge PURGE] [--man {True,False}] [--binaries {True,False}]
@@ -69,10 +69,7 @@ files, is updated (makepkg -g >> PKGBUILD anyone?). Note that security wise this
 is not a good approach as there is no easy way for an administrator to know
 whether the remote file size has changed since the last time it was requested
 which means an attacker can exploit this and modify the file content feeding it
-to SPM. As a protection SPM supports checking OpenPGP signatures when available
-but that is up to the host to provide and packager to support by adding the
-singature URL to the sources array in the SRCBUILD along with the key ID to the
-pgpkeys array.
+to SPM.
 
 Using Source Package Manager and following the LFS/BLFS book you can tailor a
 system exactly to your liking without keeping track of what links against what
@@ -161,7 +158,6 @@ optional arguments:
   --cache CACHE         Change cache directory
   --build BUILD         Change build directory
   --root ROOT           Change system root directory
-  --gpg GPG             Change GnuPG home directory
   --shell SHELL         Change which shell to use
   --ignore IGNORE       Change ignored targets
   --notify {True,False}
@@ -171,8 +167,6 @@ optional arguments:
   --mirror {True,False}
                         Set whether to use mirrors
   --timeout TIMEOUT     Set the connection timeout
-  --verify {True,False}
-                        Set whether to verify downloads
   --chost CHOST         Change CHOST
   --cflags CFLAGS       Change CFLAGS
   --cxxflags CXXFLAGS   Change CXXFLAGS
@@ -231,7 +225,6 @@ optional arguments:
   -m, --makedepends     Show target makedepends
   -c, --checkdepends    Show target checkdepends
   -s, --sources         Show target sources
-  -k, --pgpkeys         Show target PGP keys
   -o, --options         Show target options
   -b, --backup          Show target backups
   -p, --plain           Print in plain format

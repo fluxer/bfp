@@ -13,7 +13,7 @@ else:
 import libmessage
 message = libmessage.Message()
 
-app_version = "1.12.0 (284a667)"
+app_version = "1.12.0 (a195a7a)"
 
 
 retvalue = 0
@@ -40,12 +40,6 @@ try:
             full_path = os.path.abspath(values) + '/'
             libspm.ROOT_DIR = full_path
             libspm.LOCAL_DIR = full_path + 'var/local/spm'
-            setattr(namespace, self.dest, values)
-
-    class OverrideGpgDir(argparse.Action):
-        ''' Override gpg home directory '''
-        def __call__(self, parser, namespace, values, option_string=None):
-            libspm.GPG_DIR = values
             setattr(namespace, self.dest, values)
 
     class OverrideShell(argparse.Action):
@@ -82,12 +76,6 @@ try:
         ''' Override connection timeout '''
         def __call__(self, parser, namespace, values, option_string=None):
             libspm.TIMEOUT = values
-            setattr(namespace, self.dest, values)
-
-    class OverrideVerify(argparse.Action):
-        ''' Override signature verification of downloads '''
-        def __call__(self, parser, namespace, values, option_string=None):
-            libspm.VERIFY = values
             setattr(namespace, self.dest, values)
 
     class OverrideChost(argparse.Action):
@@ -237,8 +225,6 @@ try:
         help='Show target checkdepends')
     remote_parser.add_argument('-s', '--sources', action='store_true', \
         help='Show target sources')
-    remote_parser.add_argument('-k', '--pgpkeys', action='store_true', \
-        help='Show target PGP keys')
     remote_parser.add_argument('-o', '--options', action='store_true', \
         help='Show target options')
     remote_parser.add_argument('-b', '--backup', dest='remote_backup', \
@@ -320,8 +306,6 @@ try:
         help='Change build directory')
     parser.add_argument('--root', type=str, action=OverrideRootDir, \
         help='Change system root directory')
-    parser.add_argument('--gpg', type=str, action=OverrideGpgDir, \
-        help='Change GnuPG home directory')
     parser.add_argument('--shell', type=str, action=OverrideShell, \
         help='Change which shell to use')
     parser.add_argument('--ignore', type=str, action=OverrideIgnore, \
@@ -337,9 +321,6 @@ try:
         help='Set whether to use mirrors')
     parser.add_argument('--timeout', type=int, action=OverrideTimeout, \
         help='Set the connection timeout')
-    parser.add_argument('--verify', type=ast.literal_eval, \
-        action=OverrideVerify, choices=[True, False], \
-        help='Set whether to verify downloads')
     parser.add_argument('--chost', type=str, action=OverrideChost, \
         help='Change CHOST')
     parser.add_argument('--cflags', type=str, action=OverrideCflags, \
@@ -424,7 +405,6 @@ try:
             message.sub_info('OPTDEPENDS', ARGS.optdepends)
             message.sub_info('CHECKDEPENDS', ARGS.checkdepends)
             message.sub_info('SOURCES', ARGS.sources)
-            message.sub_info('PGPKEYS', ARGS.pgpkeys)
             message.sub_info('OPTIONS', ARGS.options)
             message.sub_info('BACKUP', ARGS.remote_backup)
             message.sub_info('PATTERN', ARGS.PATTERN)
@@ -432,8 +412,7 @@ try:
         m = libspm.Remote(ARGS.PATTERN, ARGS.name, ARGS.version, \
                 ARGS.release, ARGS.description, ARGS.depends, \
                 ARGS.makedepends, ARGS.optdepends, ARGS.checkdepends, \
-                ARGS.sources, ARGS.pgpkeys, ARGS.options, \
-                ARGS.remote_backup, ARGS.plain)
+                ARGS.sources, ARGS.options, ARGS.remote_backup, ARGS.plain)
         m.main()
 
     elif ARGS.mode == 'source':
@@ -441,14 +420,12 @@ try:
         message.sub_info('CACHE_DIR', libspm.CACHE_DIR)
         message.sub_info('BUILD_DIR', libspm.BUILD_DIR)
         message.sub_info('ROOT_DIR', libspm.ROOT_DIR)
-        message.sub_info('GPG_DIR', libspm.GPG_DIR)
         message.sub_info('SHELL', libspm.SHELL)
         message.sub_info('IGNORE', libspm.IGNORE)
         message.sub_info('NOTIFY', libspm.NOTIFY)
         message.sub_info('OFFLINE', libspm.OFFLINE)
         message.sub_info('MIRROR', libspm.MIRROR)
         message.sub_info('TIMEOUT', libspm.TIMEOUT)
-        message.sub_info('VERIFY', libspm.VERIFY)
         message.sub_info('CHOST', libspm.CHOST)
         message.sub_info('CFLAGS', libspm.CFLAGS)
         message.sub_info('CXXFLAGS', libspm.CXXFLAGS)

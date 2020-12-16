@@ -106,7 +106,7 @@ for src in "${@:-.}";do
 
     set -e
     msg "Preparing sources.."
-    unset version description depends makedepends optdepends sources pgpkeys options backup
+    unset version description depends makedepends optdepends sources options backup
     . "$srcbuild"
     src_real="$(realpath $src)"
     src_name="${src_real##*/}"

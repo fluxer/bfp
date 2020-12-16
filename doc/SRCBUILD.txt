@@ -14,9 +14,7 @@ optdepends=('zlib' 'bzip2')
 # variable expansion, must be preseeded with underscore
 _base="file-$version"
 sources=("ftp://ftp.astron.com/pub/file/$_base.tar.gz"
-         "ftp://ftp.astron.com/pub/file/file-$version.tar.gz.sig"
          'dummy.patch')
-pgpkeys=('12345678')
 options=('!binaries' '!shared' '!static' 'man' 'mirror' 'missing' '!purge'
          'permissions')
 backup=('etc/bar/baz.conf')
