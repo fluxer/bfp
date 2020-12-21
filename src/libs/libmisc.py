@@ -612,7 +612,7 @@ class Misc(object):
 
         git = self.whereis('git')
         if os.path.isdir('%s/.git' % sdir):
-            self.system_command((git, 'pull', surl), cwd=sdir)
+            self.system_command((git, 'pull', '--no-edit', surl), cwd=sdir)
         else:
             self.system_command((git, 'clone', '--depth=1', surl, sdir))
             # allow gracefull pulls and merges
