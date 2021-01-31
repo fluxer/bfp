@@ -151,7 +151,7 @@ for src in "${@:-.}";do
         if [ -f "$src_real/$src_base" ];then
             msg2 "Linking: ${BLUE}${src_base}${ALL_OFF}"
             ln -sf "$src_real/$src_base" "$SOURCE_DIR/$src_base"
-        elif [[ $source =~ git:// || $source =~ \.git ]];then
+        elif [ "${source:0:6}" = "git://" ] || [ "${source:${#source}-4:4}" = ".git" ];then
             msg2 "Cloning: ${BLUE}${source}${ALL_OFF}"
             git clone --depth=1 "$source" "$SOURCE_DIR/$src_base"
         elif [ -f "/var/cache/spm/sources/$src_name/$src_base" ];then

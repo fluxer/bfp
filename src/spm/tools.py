@@ -26,7 +26,7 @@ misc = libspm.misc
 database = libspm.database
 misc.SHELL = libspm.SHELL
 
-app_version = "1.12.0 (a195a7a)"
+app_version = "1.12.0 (1d71074)"
 
 class Check(object):
     ''' Check runtime dependencies of local targets '''
